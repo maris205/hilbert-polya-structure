@@ -1,0 +1,134 @@
+\section{A common six-symbol reduction}
+\label{sec:six_symbols}
+
+For large negative normalized parameters, the residual bound in
+Lemma~\ref{lem:real_bounds} leaves only three possible absolute
+coordinate values. The two lattices require different rounding
+arguments, which we keep explicit.
+
+\begin{lemma}[Integer centers]
+\label{lem:integer_center}
+Suppose \(c\in\Z\), \(c\ge13\), and a cyclic solution of
+\eqref{eq:centered_recurrence} has all coordinates in \(\Z\).
+There is a unique integer \(r\ge4\) such that
+\begin{equation}
+ r^2-r+1\le c\le r^2+r.
+ \label{eq:integer_interval}
+\end{equation}
+Put \(s=c-r^2\), so \(1-r\le s\le r\). Every coordinate has a unique
+representation
+\begin{equation}
+ u_i=\varepsilon_i r+\delta_i,
+ \qquad \varepsilon_i\in\{-1,1\},\quad
+ \delta_i\in\{-1,0,1\}.
+ \label{eq:six_symbols}
+\end{equation}
+\end{lemma}
+\begin{proof}
+The intervals in~\eqref{eq:integer_interval} begin at 13 when \(r=4\),
+and the next lower endpoint is
+\((r+1)^2-(r+1)+1=r^2+r+1\). They therefore partition every integer
+\(c\ge13\).
+
+If \(s\le-2\), then \(c+1<r^2\). The first bound
+in~\eqref{eq:real_bounds}, together with \(R\in\Z\), gives \(R\le r\).
+If \(s\ge-1\), then
+\(c+1\le r^2+r+1<(r+1)^2\), and the same argument gives
+\(R\le r+1\).
+
+Suppose now that \(|u_i|\le r-2\) at some index. In the first case,
+\[
+ u_i^2-c\le-4r+4-s\le-3r+3<-2r\le-2R,
+\]
+where the strict inequality uses \(r\ge4\). In the second case,
+\[
+ u_i^2-c\le-4r+5<-2r-2\le-2R.
+\]
+Both contradict the pointwise bound in~\eqref{eq:real_bounds}.
+Consequently \(r-1\le|u_i|\le r+1\). These are precisely the six
+distinct integers described by~\eqref{eq:six_symbols}.
+\end{proof}
+
+\begin{lemma}[Half-integer centers]
+\label{lem:half_center}
+Suppose \(A\in\Z\), \(A\le-17\), and take the odd branch of
+\eqref{eq:centered_data}. Put \(N=-A-1\). There is a unique integer
+\(k\ge4\) with
+\[
+ k^2\le N\le k^2+2k.
+\]
+Set
+\begin{equation}
+ r=k+\tfrac12,\qquad s=c-r^2=N-k(k+1).
+ \label{eq:half_parameters}
+\end{equation}
+Then \(s\in\Z\),
+\begin{equation}
+ -r+\tfrac12\le s\le r-\tfrac12,
+ \label{eq:half_interval}
+\end{equation}
+and every coordinate again has the unique representation
+\eqref{eq:six_symbols}.
+\end{lemma}
+\begin{proof}
+Here \(c=N+1/4\). The integer intervals \([k^2,k^2+2k]\) are
+adjacent and disjoint because the next lower endpoint is
+\((k+1)^2=k^2+2k+1\). Since \(N\ge16\), we have \(k\ge4\) and
+\(r\ge9/2\). Formula~\eqref{eq:half_interval} is just
+\(-k\le s\le k\).
+
+The maximum \(R\) and center \(r\) both belong to \(\Z+1/2\).
+If \(s\le-2\), then \(c+1<r^2\), so
+Lemma~\ref{lem:real_bounds} gives \(R<r+1\), hence \(R\le r\).
+If \(s\ge-1\), the upper bound in~\eqref{eq:half_interval} yields
+\(c+1<(r+1)^2\). Thus \(R<r+2\), and \(R\le r+1\).
+
+Were \(|u_i|\le r-2\), the first case would imply
+\[
+ u_i^2-c\le-4r+4-s\le-3r+\tfrac72<-2r\le-2R.
+\]
+The second case would imply
+\[
+ u_i^2-c\le-4r+5<-2r-2\le-2R.
+\]
+Both strict inequalities hold for \(r\ge9/2\), and both conclusions
+contradict~\eqref{eq:real_bounds}. The absolute coordinates have the
+same half-integral parity as \(r\). Therefore
+\(|u_i|\in\{r-1,r,r+1\}\), giving~\eqref{eq:six_symbols} uniquely.
+\end{proof}
+
+The next step is an exact arithmetic separation, not a comparison of
+leading terms as \(r\) tends to infinity.
+
+\begin{proposition}[The two local equations]
+\label{prop:local_reduction}
+In either Lemma~\ref{lem:integer_center} or
+Lemma~\ref{lem:half_center}, the symbols satisfy
+\begin{align}
+ \varepsilon_{i-1}+\varepsilon_{i+1}
+    &=2\varepsilon_i\delta_i, \label{eq:signs}\\
+ \delta_{i-1}+\delta_{i+1}
+    &=\delta_i^2-s. \label{eq:offsets}
+\end{align}
+In particular, \(s\in\{-2,-1,0,1,2,3\}\).
+\end{proposition}
+\begin{proof}
+Substitute~\eqref{eq:six_symbols} and \(c=r^2+s\) into the centered
+recurrence. After cancelling \(r^2\), the identity is
+\begin{equation}
+ r\bigl(\varepsilon_{i-1}+\varepsilon_{i+1}
+          -2\varepsilon_i\delta_i\bigr)
+ =\delta_i^2-\delta_{i-1}-\delta_{i+1}-s.
+ \label{eq:separation}
+\end{equation}
+The coefficient multiplying \(r\) is an even integer. The expression
+\(\delta_i^2-\delta_{i-1}-\delta_{i+1}\) lies between \(-2\) and 3.
+In the integer-center case, the right-hand side of~\eqref{eq:separation}
+therefore lies in \([-r-2,r+2]\), with absolute value strictly less than
+\(2r\). In the half-integer case it lies in
+\([-r-3/2,r+5/2]\), again strictly between \(-2r\) and \(2r\).
+If the even coefficient on the left were nonzero, its absolute value
+would be at least two, contradicting these bounds. Both sides vanish,
+giving~\eqref{eq:signs}--\eqref{eq:offsets}. The range of \(s\) follows
+by solving~\eqref{eq:offsets} for \(s\).
+\end{proof}

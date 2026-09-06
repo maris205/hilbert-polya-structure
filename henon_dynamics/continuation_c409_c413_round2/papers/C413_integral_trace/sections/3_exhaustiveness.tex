@@ -1,0 +1,156 @@
+\section{Exhaustiveness by a maximal coordinate}\label{sec:exhaustiveness}
+
+Let $(x_i)$ be a periodic integral solution of
+\eqref{eq:recurrence}, and set $M=\max_i|x_i|$. If $M=0$,
+the point is the origin. We first handle every $M\geq2$ uniformly,
+and then resolve $M=1$ by a complete count within the unit cube.
+
+Choose the index so that $x_0=u$ with $|u|=M$, and write
+\begin{equation}\label{eq:neighbours}
+ a=x_{-1},\qquad b=x_1.
+\end{equation}
+Two instances of the recurrence give
+\begin{equation}\label{eq:maximum-equations}
+ au=x_{-2}+b,\qquad ub=a+x_2.
+\end{equation}
+No assumption has been made on the sign of $u$.
+
+\begin{lemma}[Neighbour bound and equality case]\label{lem:maximum}
+For $M\geq2$, the neighbours satisfy $|a|,|b|\leq2$.
+If either has modulus two, the orbit belongs to $E\sqcup D$.
+Every other periodic orbit of height at least two therefore has
+$a,b\in\{-1,0,1\}$ at a coordinate of maximal modulus.
+\end{lemma}
+\begin{proof}
+The triangle inequality in \eqref{eq:maximum-equations} gives
+$M|a|\leq2M$ and $M|b|\leq2M$, proving the bound.
+Suppose first that $b=2\eta$ with $\eta\in\{-1,1\}$.
+The equality $2\eta u=a+x_2$, together with
+$|a|,|x_2|\leq M=|u|$, forces equality in the triangle
+inequality. Both terms have the sign of $\eta u$ and modulus $M$:
+\begin{equation}\label{eq:equal-neighbour}
+ a=x_2=\eta u.
+\end{equation}
+The first equation in \eqref{eq:maximum-equations} now implies
+\begin{equation}\label{eq:Mtwo}
+ M^2=|au|\leq |x_{-2}|+|b|\leq M+2.
+\end{equation}
+Since $M$ is an integer at least two, this forces $M=2$.
+Writing $u=2\varepsilon$, the consecutive triple at the maximum is
+\begin{equation}\label{eq:special-signed}
+ (a,u,b)=(2\eta\varepsilon,2\varepsilon,2\eta),
+ \qquad\varepsilon,\eta\in\{-1,1\}.
+\end{equation}
+Its entries have modulus two and positive product. The four choices
+are exactly $E\sqcup D$, already verified in
+Proposition~\ref{prop:itineraries}. Three consecutive entries
+determine the entire two-sided orbit, so there is no further
+continuation in this case.
+
+If $|a|=2$, apply the preceding argument to the reversed scalar
+sequence of Lemma~\ref{lem:reversal}. Its right neighbour is $a$.
+The resulting triple is a permutation of a point of $E\sqcup D$,
+and hence again lies in that same four-point set. In all other cases,
+integrality and the neighbour bound give the final assertion.
+\end{proof}
+
+\begin{lemma}[Zero-neighbour alternatives]\label{lem:zeros}
+Suppose $M\geq2$ and $a,b\in\{-1,0,1\}$. If both
+neighbours vanish, the orbit is $A_M$. Exactly one vanishing
+neighbour is impossible.
+\end{lemma}
+\begin{proof}
+If $a=b=0$, the triple is $(0,u,0)$, with $u=\pm M$.
+Both signs occur in the already verified axis word
+\eqref{eq:wordA}, so uniqueness of the scalar sequence gives $A_M$.
+
+Suppose that $a=0$ and $b=t\in\{-1,1\}$. Starting from
+$(x_{-1},x_0,x_1)=(0,u,t)$, the recurrence gives
+\begin{align}
+ x_2&=ut,& x_3&=0,& x_4&=-t,\nonumber\\
+ x_5&=-ut,& x_6&=u,& x_7&=t(1-u^2).
+ \label{eq:zero-contradiction}
+\end{align}
+In the final step we used $t^2=1$. It follows that
+$|x_7|=M^2-1>M$ for every integer $M\geq2$, contradicting
+the definition of $M$. This includes the endpoint $M=2$.
+The case $b=0$, $a\in\{-1,1\}$ reduces to the one just
+treated by Lemma~\ref{lem:reversal}.
+\end{proof}
+
+\begin{lemma}[Nonzero-neighbour alternatives]\label{lem:signs}
+Suppose $M\geq2$ and $a,b\in\{-1,1\}$. Then the orbit
+is $B_M$ or $C_M$.
+\end{lemma}
+\begin{proof}
+The second equation of \eqref{eq:maximum-equations} reads
+$x_2=bu-a$. If $abu<0$, the terms $bu$ and $a$ have
+opposite signs, so $|x_2|=M+1$, a contradiction. Thus $abu>0$,
+and therefore $u=abM$. This leaves precisely the four triples
+in Table~\ref{tab:signs}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+$(a,b)$ & $(a,u,b)$ & Identified point\\
+\midrule
+$(-1,-1)$ & $(-1,M,-1)$ & The representative of $B_M$\\
+$(1,1)$ & $(1,M,1)$ & The representative of $C_M$\\
+$(-1,1)$ & $(-1,-M,1)$ & $T^4(1,M,1)$ in $C_M$\\
+$(1,-1)$ & $(1,-M,-1)$ & $T^8(1,M,1)$ in $C_M$\\
+\bottomrule
+\end{tabular}
+\caption{All signed nonzero-neighbour possibilities at the maximum.
+The two nontrivial time labels are read directly from
+Table~\ref{tab:twelve}.}
+\label{tab:signs}
+\end{table}
+
+Every row is an already verified point of the stated orbit. Uniqueness
+of the recurrence completes the proof. In particular the argument has
+not merged the four-cycle and twelve-cycle by passing to a sign quotient.
+\end{proof}
+
+\begin{proposition}[The unit-cube remainder]\label{prop:unit-cube}
+Every periodic orbit of height at most one belongs to
+$O\sqcup A_1\sqcup B_1\sqcup C_1$.
+\end{proposition}
+\begin{proof}
+Consider triples in $\{-1,0,1\}^3$. If a triple has no zero
+entry and negative coordinate product, then $yz=-x$ and the next
+coordinate is $yz-x=-2x$, of modulus two. The four triples of
+this type cannot occur in an orbit of height at most one.
+
+The remaining $23$ triples consist of the origin, the six triples
+with exactly one nonzero entry, the twelve with exactly two nonzero
+entries, and the four with three nonzero entries and positive product.
+The first two groups are $O$ and $A_1$. Equations
+\eqref{eq:B1} and \eqref{eq:wordC}, or
+Table~\ref{tab:twelve}, show that $B_1$ and $C_1$ lie in
+the union of the last two groups. They are disjoint and have total
+size $4+12=16$, by Proposition~\ref{prop:itineraries}. That
+union has exactly sixteen elements, so they exhaust it. This proves
+the claim without a search or an assumed numerical period bound.
+\end{proof}
+
+\begin{proof}[Proof of the periodic classification in Theorem~\ref{thm:main}]
+If $M\geq2$, Lemma~\ref{lem:maximum} either identifies the
+orbit as $E$ or $D$, or reduces its neighbours to
+$\{-1,0,1\}$. Lemmas~\ref{lem:zeros} and~\ref{lem:signs}
+then identify it as $A_M$, $B_M$, or $C_M$.
+Proposition~\ref{prop:unit-cube} handles $M\leq1$.
+This proves inclusion in the right-hand side of
+\eqref{eq:classification}; the reverse inclusion, disjointness, and
+least periods were proved in Proposition~\ref{prop:itineraries}.
+\end{proof}
+
+As a finite consequence, the cube $[-2,2]^3$ contains exactly
+49 points whose entire orbit remains in that cube: the five special
+points and the $22$ points contributed by each of $m=1,2$.
+For every other one of its 76 initial states, each time direction
+must leave the cube in at most 125 iterates. Indeed, 126 successive
+states inside a set of size 125 would repeat; invertibility would
+then make the initial point periodic. The classification just proved
+would force it into the listed 49 points. This finite certificate is
+a consequence of the uniform proof, not an input to it.

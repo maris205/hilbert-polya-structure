@@ -1,0 +1,152 @@
+\section{The local periodic words}
+\label{sec:local}
+
+We now classify cyclic solutions of~\eqref{eq:signs}--\eqref{eq:offsets}
+without reference to the size or parity of the center \(r\).
+
+\begin{lemma}[Complete symbol classification]
+\label{lem:symbol_classification}
+Let \((\varepsilon_i,\delta_i)\) be a nonempty cyclic sequence with
+\(\varepsilon_i\in\{-1,1\}\) and \(\delta_i\in\{-1,0,1\}\)
+satisfying~\eqref{eq:signs}--\eqref{eq:offsets} for an integer \(s\).
+For the coordinates \(u_i=\varepsilon_i r+\delta_i\), all possibilities
+are repetitions and cyclic rotations of the following words:
+\begin{equation}
+ \begin{array}{c|l}
+ s & \text{centered coordinate words}\\ \hline
+ -1 &(1-r),\ (1+r)\\
+ 0 &(-r,-r,r,r)\\
+ 1 &(-r-1,r,r),\ (r-1,-r,-r)\\
+ 3 &(-r-1,r-1).
+ \end{array}
+ \label{eq:centered_words}
+\end{equation}
+There are no solutions for any other \(s\).
+\end{lemma}
+\begin{proof}
+Equation~\eqref{eq:signs} has three consequences. At an offset
+\(\delta_i=1\), both neighboring signs equal \(\varepsilon_i\).
+At an offset \(\delta_i=-1\), both neighboring signs equal
+\(-\varepsilon_i\). At an offset \(\delta_i=0\), the neighboring
+signs are opposite. In particular, adjacent offsets 1 and \(-1\) are
+impossible: the first would make the adjacent signs equal, while the
+second would make them opposite. This argument also applies across
+the cyclic boundary and when the period is one or two.
+
+The range assertion in Proposition~\ref{prop:local_reduction}, which
+also follows directly from~\eqref{eq:offsets}, leaves only six cases.
+
+\paragraph{Case \(s=-2\).}
+Equation~\eqref{eq:offsets} requires \(\delta_i^2+2\le2\) at every
+index, so all offsets vanish. Substitution then gives \(0=2\), which
+is impossible.
+
+\paragraph{Case \(s=-1\).}
+An offset \(-1\) would require both neighbors to have offset 1,
+contradicting the forbidden adjacency. If a zero offset occurred, its
+neighbors would sum to 1, so one of them would be 1. At that neighboring
+offset, equation~\eqref{eq:offsets} would require both adjacent offsets
+to be 1, contrary to the original zero. Thus all offsets are 1.
+Equation~\eqref{eq:signs} makes all signs equal, giving the two
+constant words \((1-r)\) and \((1+r)\).
+
+\paragraph{Case \(s=0\).}
+An offset \(-1\) would require neighboring offsets 0 and 1, forbidden
+by adjacency. Among the remaining values 0 and 1, a zero offset has two
+zero neighbors, whereas an offset 1 requires neighbors 0 and 1. An
+offset 1 would therefore be adjacent to a zero that cannot neighbor it.
+All offsets are zero, and the sign equation becomes
+\(\varepsilon_{i+1}=-\varepsilon_{i-1}\). Its words repeat
+\((u,v,-u,-v)\), where \(u,v\in\{-1,1\}\). The four choices of
+\((u,v)\) are cyclic rotations of \((-1,-1,1,1)\), giving the single
+centered word in~\eqref{eq:centered_words}.
+
+\paragraph{Case \(s=1\).}
+If an offset 1 occurred, its neighbors would sum to zero. Neither
+could be \(-1\), so both would be zero. But a zero adjacent to 1 would
+require its other neighbor to be \(-2\), impossible. The offsets lie
+in \(\{-1,0\}\). Each \(-1\) has two zero neighbors, and each zero
+has one neighbor \(-1\) and one zero. The offsets must therefore repeat
+\((-1,0,0)\). Starting with sign \(u\) at the offset \(-1\), the sign
+equation forces the following signs to be \(-u,-u,u\). The signs have
+the same period three. The choices \(u=-1\) and \(u=1\) give,
+respectively, \((-r-1,r,r)\) and \((r-1,-r,-r)\).
+
+\paragraph{Case \(s=2\).}
+An offset 1 would require neighbors \(-1\) and 0, again forbidden.
+A zero offset would have two neighbors with offset \(-1\). The sign
+rule at each neighbor forces its sign to be the negative of the center
+sign, so the two neighboring signs agree. The sign rule at the center
+zero requires them to be opposite. Thus neither 1 nor 0 can occur.
+If all offsets were \(-1\), equation~\eqref{eq:offsets} would read
+\(-2=-1\), also impossible.
+
+\paragraph{Case \(s=3\).}
+A zero offset would require its neighbors to sum to \(-3\), impossible.
+Each remaining offset has two neighbors \(-1\), so offset 1 is
+forbidden. All offsets equal \(-1\), and the signs alternate. This
+gives \((-r-1,r-1)\).
+
+These cases exhaust every cyclic solution, with no restriction on its
+initially specified period.
+\end{proof}
+
+For integer centers, \(c=r^2+s=-A\), and the four allowed values of
+\(s\) give Table~\ref{tab:even} for every \(A\le-13\). For the odd
+branch, \(r=k+1/2\), \(x_i=u_i-1/2\), and
+\begin{equation}
+ A=-k(k+1)-1-s.
+ \label{eq:odd_table_parameter}
+\end{equation}
+The same words give Table~\ref{tab:odd} for every \(A\le-17\).
+To include small parameters in the existence assertion, one must verify
+the words without using either large-parameter threshold.
+
+\begin{lemma}[Existence and exact periods]
+\label{lem:existence}
+Every entry in Tables~\ref{tab:even} and~\ref{tab:odd} is an orbit for
+its stated parameter and has the stated exact period. The within-row
+coincidences are precisely those stated in the tables.
+\end{lemma}
+\begin{proof}
+The centered recurrence can be checked for arbitrary real \(r\).
+For \(c=r^2-1\), the constant coordinates satisfy
+\[
+ (1\pm r)^2-c=2(1\pm r).
+\]
+For \(c=r^2+3\), the two-cycle identities are
+\[
+ (-r-1)^2-c=2(r-1),\qquad (r-1)^2-c=2(-r-1).
+\]
+For \(c=r^2+1\), the first three-cycle satisfies
+\[
+ (-r-1)^2-c=2r,\qquad r^2-c=-1=(-r-1)+r,
+\]
+and the second satisfies
+\[
+ (r-1)^2-c=-2r,\qquad (-r)^2-c=-1=(r-1)+(-r).
+\]
+For \(c=r^2\), every squared coordinate in \((-r,-r,r,r)\) minus
+\(c\) is zero, as is the sum of its two neighbors. These identities
+prove existence for all listed integer values \(r=k\), or
+half-integer values \(r=k+1/2\) followed by the shift \(-1/2\).
+
+In the even branch the two-cycle entries differ by \(2k\), so they
+are distinct for \(k\ge1\). Neither three-cycle word is constant at
+any integer \(k\ge0\); their two orbits coincide when \(k=0\).
+For \(k\ge1\), the first three-cycle has a repeated positive
+coordinate \(k\), whereas the second has a repeated negative
+coordinate \(-k\), so they are not cyclic rotations. The four-cycle
+has neither period one nor period two for \(k\ge1\). The two fixed
+words coincide only at \(k=0\).
+
+In the odd branch the two-cycle entries differ by \(2k+1\), which is
+nonzero for \(k\ge0\). The first three-cycle is always nonconstant.
+The second is constant exactly at \(k=0\); its constant value is
+\(-1\), which is the fixed point already listed at \(A=-2\).
+For \(k\ge1\), the repeated coordinates in the two three-cycles are
+\(k\) and \(-k-1\), so the orbits are distinct. The four-cycle has
+neither period one nor two because \(-k-1\ne k\). Finally, \(-k\)
+and \(k+1\) are always distinct fixed coordinates. A nonconstant
+three-letter word has least period three, completing the checks.
+\end{proof}

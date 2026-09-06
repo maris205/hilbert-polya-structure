@@ -1,0 +1,150 @@
+\section{The finite complement and completeness}
+\label{sec:finite}
+
+The preceding argument covers every even normalized parameter
+\(A\le-13\) and every odd normalized parameter \(A\le-17\).
+The remaining cases are finite for a proved reason. We give their
+complete certificates, including an exact procedure for checking the
+point sets rather than only the number of points.
+
+\begin{lemma}[Finite partial permutations]
+\label{lem:pruning}
+Let \(F:X\to X\) be injective, and suppose every periodic point of
+\(F\) belongs to a specified finite set \(V_0\subset X\).
+Define
+\begin{equation}
+ V_{j+1}=\{p\in V_j:F(p)\in V_j\}.
+ \label{eq:pruning}
+\end{equation}
+This decreasing sequence stabilizes at a set \(V_*\), which is exactly
+the periodic set of \(F\) in \(X\).
+\end{lemma}
+\begin{proof}
+Every periodic orbit contained in \(V_0\) is contained in each \(V_j\)
+by induction. A decreasing sequence of finite sets stabilizes, and the
+restriction \(F:V_*\to V_*\) is injective. It is therefore a
+permutation of \(V_*\), so every point of \(V_*\) is periodic.
+\end{proof}
+
+\subsection{The thirteen even parameters}
+
+For \(c=0,\ldots,12\), so that \(A=-c\), use the integer quantities
+\begin{equation}
+ B_c=1+\lfloor\sqrt{1+c}\rfloor,\qquad
+ S_c=\{u\in\Z:|u|\le B_c,\ |u^2-c|\le2B_c\}.
+ \label{eq:even_finite_alphabet}
+\end{equation}
+Lemma~\ref{lem:real_bounds} shows that every periodic coordinate belongs
+to \(S_c\). Start with \(V_0=S_c\times S_c\), and apply
+Lemma~\ref{lem:pruning} to
+\begin{equation}
+ F_c(x,y)=(y,y^2-c-x).
+ \label{eq:even_finite_map}
+\end{equation}
+The bound and alphabet use only an integer square root and integer
+comparisons. Table~\ref{tab:even_certificate} gives every successive
+cardinality up to stabilization and every stable coordinate word.
+
+\subsection{The seventeen odd parameters}
+
+For \(A=0,-1,\ldots,-16\), use doubled centered coordinates
+\(z_i=2x_i+1\), which are odd integers. The bound
+in~\eqref{eq:real_bounds} gives
+\[
+ |z_i|\le2+\sqrt{1-4A}.
+\]
+Define
+\begin{equation}
+ \begin{split}
+ B_A&=2+\lfloor\sqrt{1-4A}\rfloor,\\
+ S_A&=\{z\in\Z:z\text{ odd},\ |z|\le B_A,
+                         \ |z^2+4A+3|\le4B_A\}.
+ \end{split}
+ \label{eq:odd_finite_alphabet}
+\end{equation}
+Indeed, the doubled recurrence is
+\begin{equation}
+ 2(z_{i-1}+z_{i+1})=z_i^2+4A+3,
+ \label{eq:doubled_recurrence}
+\end{equation}
+which proves the second alphabet constraint. On pairs of odd integers
+the map is
+\begin{equation}
+ G_A(z,w)=\left(w,\frac{w^2+4A+3}{2}-z\right).
+ \label{eq:odd_finite_map}
+\end{equation}
+For odd \(w\), the integer \(w^2+4A+3\) is divisible by four.
+The quotient by two is even, so the second coordinate of \(G_A\) is
+odd. Solving for \(z\) gives an inverse on the odd lattice, in
+particular injectivity. Take \(V_0=S_A\times S_A\) and use
+\eqref{eq:pruning}. Table~\ref{tab:odd_certificate} records the entire
+calculation; its words are expressed in the original normalized
+integer coordinates \(x=(z-1)/2\).
+
+\subsection{What the certificates assert}
+
+For each row of the appendix tables, let \(W\) be the displayed set of
+coordinate words. Define the corresponding pair set by
+\begin{equation}
+ E(W)=\bigcup_{(v_0,\ldots,v_{d-1})\in W}
+       \{(v_i,v_{i+1}):0\le i<d\},
+ \label{eq:word_expansion}
+\end{equation}
+where \(v_d=v_0\). Each even row asserts \(V_*=E(W)\). Each odd row
+asserts
+\[
+ V_*=\{(2x+1,2y+1):(x,y)\in E(W)\}.
+\]
+Thus the claimed final set is specified explicitly, not inferred from
+its cardinality.
+
+For completeness, the pruning calculation in every row is the
+following exact finite procedure. Here \(S\) and \(F\) mean the
+appropriate alphabet and map just defined.
+\begin{quote}
+\begin{verbatim}
+V = {(x, y) : x in S and y in S}
+sizes = [cardinality(V)]
+repeat:
+    U = {p in V : F(p) in V}
+    if U = V:
+        return V, sizes
+    V = U
+    append cardinality(V) to sizes
+\end{verbatim}
+\end{quote}
+All sets consist of integer pairs. The division in \(G_A\) is exact,
+as proved above. The last cardinality listed in a table row is unchanged
+by one further step; a final zero denotes the empty stable set.
+Expanding the words by~\eqref{eq:word_expansion} gives the full-set
+comparison for each returned \(V\). The starting sets have at most
+81 elements, so the certificate is finite without an orbit-period
+cutoff.
+
+The complete point sets were also verified by a separate construction:
+in the original integer coordinates, form the entire bounding square
+or rectangle, retain exactly those one-step edges that stay within it,
+and compute Boolean transitive closure. A vertex is on a nonempty
+return path precisely when it is periodic. This second construction
+does not use the filtered alphabet or the pruning operation, and the
+comparison includes all vertices and cycle words, not just totals.
+The computational part is limited to the stated thirteen and seventeen
+parameters; the all-parameter argument is
+Section~\ref{sec:six_symbols} and Lemma~\ref{lem:symbol_classification}.
+
+\begin{proof}[Completion of the classification in
+Theorem~\ref{thm:classification}]
+Lemma~\ref{lem:integrality} first reduces rational periodic points to
+integer points, and Lemma~\ref{lem:translation} reduces the coefficients
+to the two normal forms. Equations~\eqref{eq:sum_even} and
+\eqref{eq:sum_odd} settle the upper parameter ranges. The two
+six-symbol lemmas and Lemma~\ref{lem:symbol_classification} settle
+every \(A\le-13\) in the even branch and every \(A\le-17\) in the
+odd branch. The exact certificates in
+Tables~\ref{tab:even_certificate} and~\ref{tab:odd_certificate}
+settle the complementary parameters. Every word there occurs in
+Tables~\ref{tab:even} or~\ref{tab:odd}, and
+Lemma~\ref{lem:existence} proves existence and exact periods for all
+entries of those tables. This proves the complete orbit lists and the
+period restriction. The count and equality locus are proved next.
+\end{proof}

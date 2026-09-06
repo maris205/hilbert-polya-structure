@@ -1,0 +1,98 @@
+\section{Radial data and the finite criterion}\label{sec:criterion}
+
+Write \(\T=\{\xi\in\C:|\xi|=1\}\), and normalize \(v_p(p)=1\).
+For \(s,t\geq0\), define a continuous radial function on \(\Z_p\) by
+\begin{equation}\label{eq:kernel}
+H_{p;s,t}(x)=
+\begin{cases}
+p^{-s v_p(x)-t p^{v_p(x)}},&x\ne0,\\
+0,&x=0,\ (s,t)\ne(0,0),\\
+1,&x=0,\ (s,t)=(0,0).
+\end{cases}
+\end{equation}
+We call the pair \((s,t)\) \emph{active} when it is not \((0,0)\).
+For an active pair the values tend to zero as \(v_p(x)\) tends to
+infinity, which explains the value assigned at zero.
+
+Fix the data of \eqref{eq:intro-coeff}, with distinct phases
+\(\eta_j\in\T\) and nonzero \(c_j\in\C\). Empty phase sums or prime
+sets are allowed. All periodic sequences are extended to integer
+indices. Set \(u_n=\sum_jc_j\eta_j^n\) and
+\[
+a_n=u_nr_n\prod_{p\in S}H_{p;s_{p,n},t_{p,n}}(n),
+\qquad F(z)=\sum_{n\geq1}a_nz^n.
+\]
+The coefficients are bounded, so the series defines a holomorphic
+function in \(|z|<1\).
+
+Partition the phases into equivalence classes by
+\[
+\eta_i\sim\eta_j
+\quad\Longleftrightarrow\quad
+\eta_i/\eta_j\ \hbox{is a root of unity}.
+\]
+For each class \(C\), choose a representative \(\rho_C\), and write
+\(\eta_j=\rho_C\omega_j\), where \(\omega_j\) is a root of unity.
+Choose a positive integer \(W\) divisible by all periods of the data
+and all orders of the \(\omega_j\). For \(a\in\Z/W\Z\), put
+\begin{equation}\label{eq:grouped}
+b_C(a)=r_a\sum_{j\in C}c_j\omega_j^a,
+\qquad \nu_p=v_p(W).
+\end{equation}
+
+\begin{definition}\label{def:af}
+The active-fibre condition \(\AF\) holds if there exist a phase class
+\(C\), a prime \(p\in S\), and a residue \(a\in\Z/W\Z\) such that
+\begin{equation}\label{eq:af}
+b_C(a)\ne0,\qquad
+(s_{p,a},t_{p,a})\ne(0,0),\qquad
+a\equiv0\pmod{p^{\nu_p}}.
+\end{equation}
+When \(p\nmid W\), the last condition is vacuous.
+\end{definition}
+
+\begin{theorem}[Active-fibre dichotomy]\label{thm:main}
+If \(\AF\) fails, then \(F\) is rational. If \(\AF\) holds, then the
+unit circle is a natural boundary for \(F\), and \(F\) has no
+meromorphic continuation through any point of that circle.
+
+In either case there is a finite complex atomic measure \(\mu\) on
+\(\T\) with
+\begin{equation}\label{eq:moments}
+a_n=\int_{\T}\xi^n\,d\mu(\xi)\quad(n\geq1).
+\end{equation}
+If \(\AF\) holds, the nonzero atoms of this measure are dense, and for
+every \(\xi_0\in\T\),
+\begin{equation}\label{eq:radial}
+\lim_{\varrho\uparrow1}(1-\varrho)
+F(\varrho\xi_0^{-1})=\mu(\{\xi_0\}).
+\end{equation}
+\end{theorem}
+
+Here a meromorphic continuation through a boundary point means a
+meromorphic function on a neighborhood of that point agreeing with
+\(F\) on the interior overlap. This local formulation is stronger
+than excluding one prescribed global continuation.
+
+The criterion does not depend on the representative \(\rho_C\):
+changing it multiplies \(b_C(a)\) by a nonzero root of unity.
+It is also unchanged when \(W\) is replaced by a multiple \(W'\).
+An active residue modulo \(W'\) reduces to one modulo \(W\).
+Conversely, an active residue modulo \(W\) can be lifted to one that
+is zero modulo \(p^{v_p(W')}\), because it is already zero modulo
+\(p^{v_p(W)}\); the remaining prime-power conditions are compatible
+by the Chinese remainder theorem. The periodic weights and exponents
+are unchanged on this lift.
+
+\begin{example}[A completely masked active kernel]\label{ex:mask}
+Let \(S=\{2\}\), \(r_n=1\), \(s_{2,n}=1\), \(t_{2,n}=0\), and
+\(u_n=1-(-1)^n\). The phase sum vanishes on the even integers,
+whereas the radial factor is one on the odd integers. Hence
+\[
+F(z)=\sum_{n\geq1}(1-(-1)^n)2^{-v_2(n)}z^n
+=\frac{2z}{1-z^2}.
+\]
+There is one phase class and \(W=2\); its grouped weight vanishes on
+the only residue with unbounded \(2\)-adic valuation. Thus \(\AF\)
+fails. Treating the two phases separately would miss this cancellation.
+\end{example}

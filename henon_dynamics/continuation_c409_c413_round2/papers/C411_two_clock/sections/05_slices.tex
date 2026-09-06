@@ -1,0 +1,89 @@
+\section{Dense atomic boundaries on positive real slices}
+\label{sec:slices}
+
+The following argument works for every pair of bases, regardless of
+multiplicative dependence.
+
+\begin{proposition}\label{prop:slice}
+For every real \(t\) with \(0<t<1/b\), the function
+\(x\mapsto R_{a,b}(x,t)\) is holomorphic in \(\D\) and has the
+whole unit circle as a natural boundary, even for meromorphic
+continuation.
+\end{proposition}
+
+\begin{proof}
+The elementary estimate \(C_{a,b}(n,m)\leq b^m-1\) shows that
+\[
+R_{a,b}(x,t)=\sum_{n\geq1}A_n(t)x^n,\qquad
+A_n(t)=\sum_{m\geq1}C_{a,b}(n,m)t^m
+\]
+has coefficients bounded uniformly in \(n\).
+For \(d\) coprime to \(a\), put \(k_a(d)=\ord_d(a)\), with
+\(k_a(1)=1\). Let \(\nu_k\) be uniform probability on the \(k\)-th
+roots of unity. The totient identity
+\(N=\sum_{d\mid N}\varphi(d)\) gives
+\begin{equation}\label{eq:totient}
+C_{a,b}(n,m)=
+\sum_{\substack{d\mid b^m-1\\(d,a)=1}}
+\varphi(d)\one_{k_a(d)\mid n}.
+\end{equation}
+Indeed, the divisors common to \(a^n-1\) and \(b^m-1\) are precisely
+those in this sum for which \(k_a(d)\mid n\).
+
+Define a positive atomic measure on \(\T\) by
+\begin{equation}\label{eq:positive-measure}
+\mu_t=\sum_{m\geq1}t^m
+\sum_{\substack{d\mid b^m-1\\(d,a)=1}}
+\varphi(d)\nu_{k_a(d)}.
+\end{equation}
+Its mass is finite:
+\[
+\mu_t(\T)\leq\sum_{m\geq1}(b^m-1)t^m<\infty.
+\]
+Character orthogonality on a finite cyclic group gives
+\(\int\xi^n\,d\nu_k(\xi)=\one_{k\mid n}\).
+Consequently \eqref{eq:totient} implies
+\[
+A_n(t)=\int_{\T}\xi^n\,d\mu_t(\xi).
+\]
+
+Choose a prime \(\ell\nmid ab\). For every \(j\geq1\),
+\(\ell^j\mid b^{m_j}-1\) when \(m_j=\ord_{\ell^j}(b)\).
+Thus \(\mu_t\) contains a positive multiple of
+\(\nu_{k_j}\), where \(k_j=\ord_{\ell^j}(a)\).
+The integers \(k_j\) are unbounded. Otherwise, if they were bounded
+by \(K\), their orders would all divide
+\(N=\operatorname{lcm}(1,\ldots,K)\); hence
+\(\ell^j\mid a^N-1\) for every \(j\), impossible for \(a\geq2\).
+The union of the complete \(k_j\)-th root grids is therefore dense
+in \(\T\). Positivity in \eqref{eq:positive-measure} makes every
+displayed atom a nonzero mass of the actual measure.
+
+For \(|x|<1\), finite total mass permits the geometric series to be
+integrated:
+\[
+R_{a,b}(x,t)
+=\int_{\T}\frac{\xi x}{1-\xi x}\,d\mu_t(\xi).
+\]
+For \(\xi,\xi_0\in\T\) and \(0<\varrho<1\),
+\[
+\left|(1-\varrho)
+\frac{\varrho\xi\xi_0^{-1}}{1-\varrho\xi\xi_0^{-1}}\right|\leq1.
+\]
+The integrand tends to the indicator of \(\xi=\xi_0\).
+Dominated convergence gives
+\begin{equation}\label{eq:slice-radial}
+\lim_{\varrho\uparrow1}(1-\varrho)
+R_{a,b}(\varrho\xi_0^{-1},t)=\mu_t(\{\xi_0\}).
+\end{equation}
+At every nonzero atom this limit precludes a holomorphic extension
+at \(\xi_0^{-1}\). Those points are dense in the unit circle.
+A meromorphic continuation across an arc would require a pole at
+each of them, contradicting discreteness of poles. This proves the
+proposition.
+\end{proof}
+
+No quantitative gcd estimate is used in this slice argument.
+The positive real parameter is what ensures noncancellation in the
+measure; no analogous positivity assertion is made for arbitrary
+complex parameter values.

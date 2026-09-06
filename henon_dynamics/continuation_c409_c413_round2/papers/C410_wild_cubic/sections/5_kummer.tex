@@ -1,0 +1,133 @@
+\section{Zero-place valuations and the square-class rank}\label{sec:kummer}
+
+In this section and until the descent in Section~\ref{sec:descent},
+we work over $\kk$. We retain the bars in $\Lbar_n$ and $\Mbar_n$
+to make that convention visible. The zero-place analysis does not
+assume maximality of the next Galois group.
+
+\begin{lemma}[Branch support and the tame place]\label{lem:zero}
+The extension $\Lbar_n/\kk(t)$ is unramified away from zero and
+infinity. Its ramification index at every place above zero is $2^n$.
+If $P$ is such a place, with normalized valuation $v_P$, then
+every $\alpha\in\mathcal A_n$ is integral, and
+\begin{equation}\label{eq:zero-valuations}
+ v_P(\alpha)=
+ \begin{cases}
+ 1,&\alpha\text{ specializes to }0,\\
+ 0,&\alpha\text{ specializes to a nonzero element of }\kk.
+ \end{cases}
+\end{equation}
+Exactly $2^n$ roots specialize to zero. In every bottom sibling
+triple their valuation-parity vector is either $000$ or one of
+$110,101,011$.
+\end{lemma}
+
+\begin{proof}
+Equation~\eqref{eq:iterate-derivative} shows that every finite
+critical value of the root cover $t=f^{\circ n}(X)$ is zero:
+a vanishing intermediate iterate remains zero thereafter. Thus
+that cover is unramified outside zero and infinity. The same is
+true of its Galois closure, since conjugates and composita of
+unramified local extensions remain unramified.
+
+Above zero, $f$ has local degree two at $0$ and local degree one
+at its other preimage $-a$. The ramification index of a point in
+the $n$th root cover is the product of these local degrees along
+its orbit, hence a power of two dividing $2^n$. At $X=0$ it is
+exactly $2^n$. These local extensions are tame. By
+Lemma~\ref{lem:local}, their local Galois closure has index the
+least common multiple of the root-cover indices, which is $2^n$.
+Consequently $v_P(t)=2^n$.
+
+Every root is integral at $P$, by monicity. The reduction of
+$f^{\circ n}(X)-t$ is $f^{\circ n}(X)$; its zero root has
+multiplicity $2^n$. Since the polynomial splits into linear
+factors upstairs, precisely that many roots specialize to zero.
+Near zero, $f^{\circ n}(X)$ has a nonzero leading term of degree
+$2^n$. Thus if $\alpha$ specializes to zero,
+\[
+ 2^n v_P(\alpha)=v_P(f^{\circ n}(\alpha))=v_P(t)=2^n,
+\]
+which gives $v_P(\alpha)=1$. All other roots are units.
+
+At a vertex specializing to zero, the reduced child equation is
+$X^2(X+a)=0$, so two children specialize to zero and one to
+$-a$. A vertex specializing to a nonzero value has no zero child.
+The zero-specializing vertices therefore form a binary subtree,
+and the asserted parity alternatives follow.
+\end{proof}
+
+\begin{proposition}[Exact square-class relations]\label{prop:kummer}
+Assume $\Gal(\Lbar_n/\kk(t))=E_n$ in the compatible labelling.
+Then the square-class assertion of Theorem~\ref{thm:ranks} holds
+at height $n$, and
+\[
+ [\Mbar_n:\Lbar_n]=2^{2\cdot3^{n-1}}.
+\]
+Every class $[\alpha/a^3]$ is nonzero, and the classes belonging
+to distinct roots are distinct.
+\end{proposition}
+
+\begin{proof}
+Let $r_n=3^{n-1}$ be the number of bottom sibling triples.
+Inside $\F_2^{\mathcal A_n}$ define
+\[
+ V_n=\bigoplus_{\text{sibling triples}}
+       \{(u_1,u_2,u_3)\in\F_2^3:u_1+u_2+u_3=0\}.
+\]
+It has dimension $2r_n$. By Lemma~\ref{lem:zero}, the parity
+vectors of root valuations at places over zero all lie in $V_n$.
+We claim that their span is all of $V_n$.
+
+Choose a place and a bottom triple on which its parity vector is
+nonzero. Such a triple exists because $2^n$ roots specialize to
+zero. The induction hypothesis and Lemma~\ref{lem:order} give a
+Galois element acting as a three-cycle on that triple and fixing
+all other triples. Conjugating the place permutes its valuation
+vector accordingly. Adding the original and conjugated vectors
+over $\F_2$ cancels every other triple and leaves a nonzero even
+vector on the chosen triple. Its three cyclic translates span
+the two-dimensional even subspace on that triple. The Galois
+group acts transitively on bottom parents, since
+$f^{\circ(n-1)}(X)-t$ is irreducible; for $n=1$ there is just
+the parent $t$. Conjugation therefore gives the even subspace on
+every triple. This proves the claim.
+
+If
+\[
+ \prod_{\alpha\in\mathcal A_n}(\alpha/a^3)^{e_\alpha}
+ \in\Lbar_n^{*2},\qquad e_\alpha\in\F_2,
+\]
+its valuation is even at every place over zero. The exponent
+vector $e$ is consequently orthogonal to $V_n$ under the
+coordinate pairing. The orthogonal complement $V_n^\perp$ is
+the span of the all-one vectors on the disjoint sibling triples.
+It remains to verify that these necessary relations actually hold.
+
+For a sibling triple with parent $\eta$, formula
+\eqref{eq:discproduct} gives
+\begin{equation}\label{eq:sibling-square}
+ \prod_{f(\alpha)=\eta}\frac{\alpha}{a^3}
+    =\frac{\eta}{a^9}
+    =\left(\frac{\beta_\eta}{a^3}\right)^2.
+\end{equation}
+Here one may choose $\beta_\eta=\Delta_\eta/a^3\in\Lbar_n$ by
+\eqref{eq:betavandermonde}, because $f(X)-\eta$ has split at
+height $n$; it satisfies $\beta_\eta^2=\eta/a^3$. This includes
+$n=1$, when $\eta=t$. Thus every
+sibling vector is a genuine relation. There are no others.
+
+The square classes have rank $3^n-r_n=2r_n$, so
+Lemma~\ref{lem:radicaldegree} gives the degree assertion. A
+nonzero vector in the span of disjoint sibling indicators has
+weight at least three, and its weight is a multiple of three.
+Neither a weight-one vector nor a weight-two vector can be a
+relation. The individual classes are therefore nonzero and
+pairwise distinct.
+\end{proof}
+
+This proposition uses only the group at height $n$. The parity
+vectors come from the tame zero-place geometry, and the relations
+are verified by a product identity in the already known splitting
+field. No degree or independence statement at height $n+1$ has
+entered its proof.

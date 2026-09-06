@@ -3,6 +3,36 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C409--HCS-C413 complete source-manuscript register (2026-09-06)
+
+Five substantial independent contracts now have complete manuscripts and
+59 final PDF pages (11/13/11/14/10), non-author internal full-manuscript/source
+reviews, confirmed precision revisions, two fresh byte-identical builds each,
+and all-page visual QA. See [the five PDFs](../continuation_c409_c413_round2/README.md)
+and [review adjudication](../continuation_c409_c413_round2/REVIEW_ADJUDICATION.md).
+Payload sealing and actual Git synchronization are recorded separately there.
+Research baseline `f29d79392498ac8cf6b9b72f8df07b95448c20d6`; evaluator v0.2.0,
+SHA256 `6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| Candidate | Complete admitted source increment | Strict tuple | Evidence |
+|---|---|---|---|
+| HCS-C409 | Exact finite active-fibre criterion for rationality versus meromorphic natural boundary after finite unit-phase aggregation, with nonnegative periodic radial exponents and a realized nonhyperbolic wild FAD application. The already implied no-wild branch remains credited. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c409_c413_round2/papers/C409_wild_fad/main.pdf) · [evaluation](../continuation_c409_c413_round2/evaluations/route_a/HCS-C409/2026-09-06.yaml) |
+| HCS-C410 | Over every characteristic-three field and every nonzero a, the generic inverse tower of X^3+aX^2 has the classical compatible group E at every height; exact global radical ranks, local rank one and geometric different/genus data are established together. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c409_c413_round2/papers/C410_wild_cubic/main.pdf) · [evaluation](../continuation_c409_c413_round2/evaluations/route_a/HCS-C410/2026-09-06.yaml) |
+| HCS-C411 | For all integer bases a,b>=2, the native two-clock common-return series has its full open convergence domain, exact dependent polar divisor and complete joint meromorphic bidisc boundary, including axis/threshold/corner cases. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c409_c413_round2/papers/C411_two_clock/main.pdf) · [evaluation](../continuation_c409_c413_round2/evaluations/route_a/HCS-C411/2026-09-06.yaml) |
+| HCS-C412 | All rational periodic points of every monic integral conservative quadratic Hénon map (y,y^2+by+a-x) are classified. Both parity normal forms and all parameter overlaps give periods 1,2,3,4 and the sharp eight-point bound with its exact equality locus. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c409_c413_round2/papers/C412_integer_henon/main.pdf) · [evaluation](../continuation_c409_c413_round2/evaluations/route_a/HCS-C412/2026-09-06.yaml) |
+| HCS-C413 | The classical axis/four-/twelve-cycle families and special points exhaust the integral periodic locus of the single Fibonacci trace map, at every integer level. All other integral points properly escape both ways; every level's ordinary returns and rational zeta are exact. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c409_c413_round2/papers/C413_integral_trace/main.pdf) · [evaluation](../continuation_c409_c413_round2/evaluations/route_a/HCS-C413/2026-09-06.yaml) |
+
+All five are source-limited `ROUTE_A_EXPLORATORY`; no target A1/A2 breakthrough
+is asserted. A0 controls remain INCOMPLETE, all 45 A2 metrics are NOT_TESTABLE,
+all target/Route-B flags are false, and `NO_BAD_EULER_OR_ROOT_NUMBER` holds.
+See [the exact evaluation scope](../continuation_c409_c413_round2/EVALUATION_SCOPE.md).
+Primary-source comparisons are bounded and retain inaccessible final-version
+limits, not worldwide priority certificates. The finite-lattice inverse,
+cocycle and finite-filter notes are unnumbered, not a sixth paper. The original
+48-file research snapshot and prior 179/93-file sealed batches are unchanged.
+This batch stops at C413. The sections below preserve historical checkpoints;
+their then-vacant slots and then-next-number restrictions are not current gaps.
+
 ## HCS-C407--HCS-C408 completing-contract register (2026-09-06)
 
 The two remaining contracts in the authorized C404--C408 batch have passed

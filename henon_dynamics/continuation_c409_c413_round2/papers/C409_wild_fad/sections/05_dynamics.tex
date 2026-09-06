@@ -1,0 +1,164 @@
+\section{Finite-adelically distorted dynamical systems}
+\label{sec:dynamics}
+
+A self-map \(f:X\to X\) is \emph{confined} if
+\(f_n=\#\Fix(f^n)\) is finite for every \(n\geq1\).
+Its fixed-count series and dynamical zeta function are
+\[
+Z_f(z)=\sum_{n\geq1}f_nz^n,\qquad
+\zeta_f(z)=\exp\left(\sum_{n\geq1}\frac{f_n}{n}z^n\right).
+\]
+A sequence of period \(m\) is a \emph{gcd sequence} if its value at \(n\)
+depends only on \(\gcd(n,m)\). We use the following finite-adelically
+distorted, or FAD, presentation from
+\citep[Definitions 7.1.1--7.1.2]{bch2024}:
+\begin{equation}\label{eq:fad}
+f_n=|\det(A^n-I)|c^nr_n
+\prod_{p\in S}|n|_p^{s_{p,n}}
+p^{-t_{p,n}|n|_p^{-1}}.
+\end{equation}
+Here \(A\) is an integral square matrix, \(c>0\), \(S\) is finite,
+\(r_n\) is a positive real gcd sequence, and \(s_{p,n},t_{p,n}\)
+are nonnegative real gcd sequences having periods coprime to their
+own prime \(p\). A prime is \emph{genuinely distorted} if its exponent
+pair is active at some residue. An exponent \(t_{p,n}\ne0\) is the
+wild part of the distortion.
+
+We use counting entropy, namely
+\(\limsup_{n\to\infty}n^{-1}\log f_n=\log\Lambda\) for a nonzero
+count sequence. The standard FAD entropy formula identifies
+\(\Lambda=c\prod_{|\lambda|>1}|\lambda|\), with the eigenvalues of
+\(A\) counted with multiplicity
+\citep[Section 10.3]{bch2024}.
+Our argument below also identifies the radius \(\Lambda^{-1}\)
+directly whenever distortion is present.
+
+\begin{corollary}\label{cor:fad}
+Let a nonzero confined FAD system have positive counting entropy
+\(\log\Lambda>0\). If at least one prime in \eqref{eq:fad} is genuinely
+distorted, then both \(Z_f\) and \(\zeta_f\) have
+\(|z|=\Lambda^{-1}\) as a natural boundary, with no meromorphic
+continuation through any point of that circle.
+No unique-dominant-root hypothesis or integrality assumption on
+the wild exponents is required.
+\end{corollary}
+
+\begin{proof}
+First, \(A\) has no root-of-unity eigenvalue. If such an eigenvalue
+had order \(h\), then \(f_n=0\) at every multiple of \(h\).
+A positive \(f_m\) would supply a point fixed also by \(f^{hm}\),
+a contradiction. The assumed nonzero count sequence therefore
+excludes this possibility.
+
+The determinant factor has an expansion
+\begin{equation}\label{eq:leading}
+|\det(A^n-I)|c^n=\Lambda^n u_n+O((\Lambda\tau)^n),
+\qquad 0\leq\tau<1,
+\end{equation}
+where \(u_n\) is a finite sum of unit phases and is strictly positive
+for every positive integer. This is the classical dominant expansion
+in \citep[Section 10.3, especially Lemma 10.3.10]{bch2024}.
+Its relevant features can also be seen directly. After the moduli of
+the eigenvalues outside the unit circle have been extracted, the
+off-circle factors tend to one exponentially. Unit-circle eigenvalues
+occur in nonreal conjugate pairs, since the real possibilities \(1\)
+and \(-1\) have been excluded. Their product contributes
+\[
+u_n=\prod_{\{\eta,\bar\eta\}}
+(2-\eta^n-\eta^{-n})>0.
+\]
+Expanding this finite product gives the required finite phase sum;
+the empty product is one.
+
+Let \(p\) be a genuinely distorted prime, and choose an active
+exponent residue \(n_0\bmod m_p\), where \(m_p\) is a common period of
+its two exponent sequences and \(p\nmid m_p\). Choose \(W\) for the
+dominant coefficient series as in Section~\ref{sec:criterion}.
+Since \(m_p\mid W\), the Chinese remainder theorem supplies
+\(a\bmod W\) satisfying
+\[
+a\equiv0\pmod{p^{v_p(W)}},
+\qquad a\equiv n_0\pmod{m_p}.
+\]
+The exponent pair is active at \(a\). If \(b_C(a)=0\) for every phase
+class, positivity of \(r_a\) would make every grouped periodic phase
+sum vanish there. Consequently \(u_n\) would vanish for all positive
+\(n\equiv a\pmod W\), contradicting \(u_n>0\).
+Thus \(\AF\) holds.
+
+Apply Theorem~\ref{thm:main} to the normalized leading part of
+\eqref{eq:leading}, multiplied by the periodic and local factors.
+It has dense nonzero radial masses on the unit circle.
+Those factors are bounded: the local kernels are at most one and
+\(r_n\) has a finite period. Hence the normalized error in
+\eqref{eq:leading} generates a function holomorphic in a disc of
+radius greater than one. Adding it does not change any nonzero
+radial mass or remove the resulting dense singularities. Rescaling
+proves the assertion for \(Z_f\).
+
+Within \(|z|<\Lambda^{-1}\), the defining exponential for \(\zeta_f\)
+converges and is nonvanishing, and
+\begin{equation}\label{eq:log-derivative}
+z\frac{\zeta_f'(z)}{\zeta_f(z)}=Z_f(z).
+\end{equation}
+If \(\zeta_f\) had a meromorphic continuation through a boundary point,
+it would not be identically zero in the continued neighborhood, because
+it agrees with the nonvanishing exponential on the interior overlap.
+Its zeros and poles would be discrete. A smaller nonempty boundary
+arc would therefore avoid them, and \eqref{eq:log-derivative} would
+continue \(Z_f\) holomorphically through that arc. This contradicts
+the dense singularities already obtained.
+\end{proof}
+
+The own-prime coprimality of the exponent periods has one precise
+function in this argument: it permits an active exponent value and an
+unbounded valuation fibre to occur together. Positivity of the leading
+factor then prevents all phase classes from being masked.
+Neither hypothesis is needed in the abstract criterion, which retains
+the rational masked cases.
+
+\subsection{The already-known no-wild deduction}
+
+We record why removing unique dominance only in the no-wild FAD case
+is not an additional contribution. Suppose every \(t_{p,n}=0\), and
+write \(f_n=A_ng(n)\), where
+\[
+A_n=|\det(A^n-I)|c^n,\qquad
+g(n)=r_n\prod_{p\in S}p^{-s_{p,n}v_p(n)}.
+\]
+For an actual FAD system, \citep[Proposition 10.2.1]{bch2024} gives
+\(c\in\Z_{>0}\). Since the wild exponents are zero and hence integral,
+\citep[Proposition 10.2.2]{bch2024} gives rationality of \(r_n\) and
+\(p^{s_{p,n}}\). Therefore \(g(n)\in\Q\), and its logarithmic Weil height
+satisfies \(h(g(n))=O(\log n)\).
+
+If \(S\) is empty, \(g\) is periodic and already an almost
+quasi-polynomial. Otherwise, let \(W\) be a common period and put
+\(d_k=W\prod_{p\in S}p^k\).
+On each residue class modulo \(d_k\) which avoids zero modulo
+\(p^k\) for every \(p\in S\), all relevant valuations and periodic
+data are fixed. Thus \(g\) is constant there. The proportion of
+excluded classes is at most \(\sum_{p\in S}p^{-k}\), tending to zero.
+These rationality, height, and density-one local polynomial conditions
+make \(g\) an almost quasi-polynomial in the sense of
+\citep[Definition 2.11]{bhn2025}, with constant constituent polynomials.
+
+The generating function of \(A_n\) is rational: expansion of the
+determinant gives finitely many exponential terms, and its real
+sign is periodic. Its dominant part is strictly positive by
+\eqref{eq:leading}, so it vanishes identically on no arithmetic
+progression. It is therefore stable in the sense required by
+\citep[Theorem 2.14]{bhn2025}. That theorem yields the rational or
+natural-boundary alternative for \(\sum f_nz^n\).
+If a valuation exponent is active, the FAD rationality criterion
+\citep[Proposition 11.3.3]{bch2024} excludes rationality.
+The logarithmic derivative then transfers the boundary to
+\(\zeta_f\). In particular, the abelian-variety and finite-place
+solenoid applications already settled in \citep{bhn2025} are not
+being asserted anew here.
+
+The classical root-rational classification for FAD zeta functions
+\citep[Theorem 11.3.4]{bch2024} is a separate input and is not reproved
+as part of Theorem~\ref{thm:main}. Our additional analytic argument
+is needed for wild data beyond the preceding height hypothesis,
+as the next example makes explicit.

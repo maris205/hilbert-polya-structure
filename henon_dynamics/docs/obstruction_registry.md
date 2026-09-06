@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C409--HCS-C413 source-boundary register (2026-09-06)
+
+| ID | Candidate / fixed scope | Exact boundary | Surviving result and limitation |
+|---|---|---|---|
+| HEN-O393 | HCS-C409 summandwise natural-boundary reasoning before phase aggregation | With S={2}, r_n=1, s=1, t=0 and phase sum 1-(-1)^n, the active kernel is completely masked and the series is 2z/(1-z^2). Nonzero summands alone cannot establish the boundary of their sum. | The complete finite AF dichotomy and genuine wild FAD consequence survive. Negative radial exponents, arbitrary local functions and infinitely many primes are not covered. [Manuscript](../continuation_c409_c413_round2/papers/C409_wild_fad/main.pdf) |
+| HEN-O394 | HCS-C410 generic tower rank and height interpretation | The same 3^n global AS classes have full global rank but rank exactly one at each geometric infinity completion. Neither global maximality implies local maximality nor inverse-image height supplies forward-period completeness. | Full generic regular groups and geometric branch/different/genus data survive. Uniform specialized-fibre groups and forward counts are not proved; residue degree one is only asserted with algebraically closed geometric constants. [Manuscript](../continuation_c409_c413_round2/papers/C410_wild_cubic/main.pdf) |
+| HEN-O395 | HCS-C411 convergence boundary and individual slices versus joint meromorphic boundary | For a=b=2 the initial domain is 2 abs(xy)<1 inside the bidisc, but (i/sqrt(2),i/sqrt(2)) is holomorphic after continuation although on that curved boundary. Zero slices are entire, while no joint boundary cap exists even on the zero-axis faces. | The full two-clock polar/joint-boundary theorem survives. A diagonal, volume clock or an assertion that every fixed complex slice has a natural boundary is a different and generally false inference. [Manuscript](../continuation_c409_c413_round2/papers/C411_two_clock/main.pdf) |
+| HEN-O396 | HCS-C412 parameter/domain/sign extension of the eight-point theorem | The integrality step uses integral coefficients and monicity; the integer/half-integer lattice proof fixes the Jacobian sign +1. It supplies no classification after dropping those hypotheses. | All integral a,b and their exact equality locus are classified. This is an explicit applicability boundary, not a proved universal no-go or a claim about all rational-coefficient Hénon maps. [Manuscript](../continuation_c409_c413_round2/papers/C412_integer_henon/main.pdf) |
+| HEN-O397 | HCS-C413 replacing integral levelwise counts by rational or unrestricted-global counts | The rational pair (3,3/2,3) and (3/2,3,3/2) has least period two, absent over Z. On unrestricted Z^3, Fix(T^6) is infinite, so its ordinary finite-count zeta is undefined. Leaving a test cube does not imply global nonperiodicity. | The complete integral classification, nonperiodic two-sided proper escape and every fixed level's rational zeta survive. Whole-group finite orbit is not the same quantifier as periodicity for one map. [Manuscript](../continuation_c409_c413_round2/papers/C413_integral_trace/main.pdf) |
+
+These named-source boundaries are preserved by actual identifications that
+transport the parameter family, domain, observable and clock. They do not
+exclude all recodings, future arithmetic bridges or new operators. All five
+target A2/A3 verdicts fail with missing metrics explicit; no target Euler or
+root-number assertion is licensed. The five papers are complete at 59 pages;
+see [the scoped delivery](../continuation_c409_c413_round2/README.md). Unselected
+research notes remain unnumbered, and this batch does not enter C414.
+
 ## HCS-C407--HCS-C408 source-boundary register (2026-09-06)
 
 | ID | Candidate / scope | Exact boundary | Surviving result and limitation |

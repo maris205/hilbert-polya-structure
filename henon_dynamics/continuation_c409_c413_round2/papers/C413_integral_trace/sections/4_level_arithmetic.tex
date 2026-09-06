@@ -1,0 +1,169 @@
+\section{Proper escape and arithmetic return laws}\label{sec:levels}
+
+\subsection{Bounded half-orbits and two-sided escape}
+
+The passage from periodic classification to integral escape uses
+discreteness rather than a real dynamical estimate.
+
+\begin{lemma}[A discrete-bijection principle]\label{lem:discrete}
+Let $F$ be a bijection of a discrete subset $X$ of a finite-dimensional
+real vector space such that every bounded subset of $X$ is finite.
+A point of $X$ has a bounded forward or backward orbit if and only
+if it is periodic. Every nonperiodic two-sided orbit visits each bounded
+subset only finitely many times.
+\end{lemma}
+\begin{proof}
+A bounded forward orbit lies in a finite set, so $F^iP=F^jP$
+for some $0\leq i<j$. Applying $F^{-i}$ gives
+$P=F^{j-i}P$. The same argument with $F^{-1}$ treats backward
+orbits. Conversely, a periodic orbit is finite and bounded.
+
+For a nonperiodic point, the points $F^nP$, $n\in\Z$, are
+pairwise distinct: any equality would give a period by applying an
+inverse iterate. A finite subset can contain only finitely many of
+these distinct points. This proves the last assertion.
+\end{proof}
+
+Apply the lemma to $X=\Z^3$ and $F=T$. For any finite radius
+$R$, only finitely many integers $n$ have
+$T^nP\in[-R,R]^3$ when $P$ is nonperiodic. Thus, beyond the
+last visit in either time direction, $\|T^nP\|_\infty>R$.
+Since $R$ is arbitrary, this proves \eqref{eq:escape} and completes
+the boundedness part of Theorem~\ref{thm:main}.
+
+\subsection{Every level and every ordinary time}
+
+For $k\in\Z$, define
+\begin{equation}\label{eq:indicators}
+ s_k=\ind_{\{k=m^2\text{ for some }m\geq1\}},\qquad
+ q_k=\ind_{\{k=m^2-m+2\text{ for some }m\geq1\}}.
+\end{equation}
+Both parametrizations are injective on positive integers. The second
+condition is equivalently that $4k-7$ be a positive odd square,
+because $4(m^2-m+2)-7=(2m-1)^2$.
+Let $c_d(k)$ denote the number of orbits of least period $d$ on
+$S_k(\Z)$. The classification immediately gives
+\begin{align}
+ c_1(k)&=\ind_{k=0}+\ind_{k=4},&
+ c_3(k)&=\ind_{k=4},\nonumber\\
+ c_4(k)&=q_k,& c_6(k)&=s_k,& c_{12}(k)&=q_k,
+ \label{eq:orbit-counts}
+\end{align}
+and $c_d(k)=0$ for every other $d$. In particular these counts
+are finite on each fixed level, whether or not that level contains
+infinitely many nonperiodic integral points.
+
+\begin{corollary}[All-time fixed-point counts]\label{cor:fixed}
+For every $k\in\Z$ and $n\geq1$,
+\begin{align}
+ F_k(n):=\#\Fix(T^n;S_k(\Z))
+ &=\ind_{k=0}+\ind_{k=4}\bigl(1+3\ind_{3\mid n}\bigr)
+ \nonumber\\
+ &\quad+6s_k\ind_{6\mid n}
+ +q_k\bigl(4\ind_{4\mid n}+12\ind_{12\mid n}\bigr).
+ \label{eq:fixed-counts}
+\end{align}
+\end{corollary}
+\begin{proof}
+An orbit of least period $d$ contributes all $d$ of its points
+to $\Fix(T^n)$ if $d\mid n$, and none otherwise. Therefore
+$F_k(n)=\sum_{d\mid n}dc_d(k)$, and
+\eqref{eq:orbit-counts} gives the result.
+\end{proof}
+
+\begin{definition}[Fixed-level dynamical zeta function]
+The ordinary dynamical zeta function of the integral points on a
+fixed level is the formal power series
+\begin{equation}\label{eq:zeta-definition}
+ \zeta_k(t)=\exp\left(\sum_{n\geq1}\frac{F_k(n)}{n}t^n\right)
+ \in 1+t\Q[[t]].
+\end{equation}
+\end{definition}
+
+\begin{corollary}[Exact fixed-level zeta function]\label{cor:zeta}
+For every integer $k$,
+\begin{equation}\label{eq:zeta}
+ \zeta_k(t)=
+ \frac{1}{
+ (1-t)^{\ind_{k=0}+\ind_{k=4}}
+ (1-t^3)^{\ind_{k=4}}
+ (1-t^6)^{s_k}
+ (1-t^4)^{q_k}
+ (1-t^{12})^{q_k}}.
+\end{equation}
+This is also an analytic identity for $|t|<1$ and gives a rational
+continuation to the complex plane.
+\end{corollary}
+\begin{proof}
+For a single orbit of length $d$, its contribution to the exponent
+of \eqref{eq:zeta-definition} is
+\[
+ \sum_{r\geq1}\frac{d}{dr}t^{dr}
+ =-\log(1-t^d).
+\]
+Only finitely many orbits occur at any fixed $k$, so summing these
+contributions gives
+$\zeta_k(t)=\prod_d(1-t^d)^{-c_d(k)}$, which is
+\eqref{eq:zeta}. Formula \eqref{eq:fixed-counts} bounds $F_k(n)$
+uniformly in $n$, so the defining logarithmic series is absolutely
+convergent for $|t|<1$ as well.
+\end{proof}
+
+This product is over source periodic orbits. Its index is a period,
+not a rational prime or a residue-field degree. The rationality in
+\eqref{eq:zeta} follows from the finite periodic locus on the
+fixed level, not from an additional arithmetic correspondence.
+
+\subsection{The intersection of the two supports}
+
+\begin{lemma}\label{lem:intersection}
+The sets $\{r^2:r\geq1\}$ and
+$\{m^2-m+2:m\geq1\}$ intersect only at $4$.
+\end{lemma}
+\begin{proof}
+Suppose $r^2=m^2-m+2$ with $r,m\geq1$. Completing the square
+and factoring give
+\begin{equation}\label{eq:factor-seven}
+ (2r-2m+1)(2r+2m-1)=7.
+\end{equation}
+Since $r^2=(m-\tfrac12)^2+\tfrac74$, we have
+$r>m-\tfrac12$. Both factors in \eqref{eq:factor-seven} are
+therefore positive integers. The second is larger than the first
+because their difference is $4m-2>0$. As $7$ is prime, they
+must be $1$ and $7$. Adding the two equations gives $r=2$,
+and subtracting gives $m=2$. Conversely those values give level $4$.
+\end{proof}
+
+The total periodic-point count is
+\begin{equation}\label{eq:total}
+ \sum_{d\geq1}dc_d(k)=
+ \ind_{k=0}+4\ind_{k=4}+6s_k+16q_k.
+\end{equation}
+Lemma~\ref{lem:intersection} makes its alternatives disjoint, as
+recorded in Table~\ref{tab:levels}; this proves
+Corollary~\ref{cor:support}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Level condition & Periodic orbits & Number of points\\
+\midrule
+$k=0$ & $O$ & $1$\\
+$k=4$ & $E,D,A_2,B_2,C_2$ & $26$\\
+$k=m^2\ne4$, $m\geq1$ & $A_m$ & $6$\\
+$k=m^2-m+2\ne4$, $m\geq1$ & $B_m,C_m$ & $16$\\
+All remaining $k\in\Z$ & None & $0$\\
+\bottomrule
+\end{tabular}
+\caption{The complete periodic-point count on every integer level.
+The alternatives are mutually exclusive by Lemma~\ref{lem:intersection}.}
+\label{tab:levels}
+\end{table}
+
+There is no ordinary finite-count zeta function on the unrestricted
+lattice obtained by removing $k$ from the notation. For example,
+every point of $A_m$ is fixed by $T^6$, and the disjoint axis
+orbits exist for all $m\geq1$. Hence
+$\#\Fix(T^6;\Z^3)=\infty$. The fixed-level quantifier in
+\eqref{eq:zeta-definition} is indispensable.
