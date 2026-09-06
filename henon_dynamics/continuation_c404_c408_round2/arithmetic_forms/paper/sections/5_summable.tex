@@ -1,0 +1,144 @@
+\section{The square-summable alternative on the maximal domain}
+\label{sec:summable}
+
+When $F_\infty<\infty$, the sequence $a$ is in $\ell^2(\N)$.
+The formal row formula in \eqref{eq:maximal-C} still makes sense for
+every $x\in\HH$, because each integer has only finitely many divisors.
+The condition defining $D(C)$ asks whether these row values form an
+$\ell^2$ sequence; it is not a condition on limits of coordinate
+truncations in a graph norm.
+
+\begin{lemma}[Closed maximal convolution]
+\label{lem:closed}
+If $a\in\ell^2(\N)$, the operator $C$ in \eqref{eq:maximal-C} is
+closed and densely defined. Its nonnegative closed form
+\begin{equation}
+ q_\infty[x]=F_\infty^{-1}\norm{Cx}^2,\qquad x\in D(C),
+ \label{eq:closed-form}
+\end{equation}
+is associated with $A_\infty=F_\infty^{-1}C^*C$.
+\end{lemma}
+\begin{proof}
+Suppose $x_j\to x$ and $Cx_j\to y$ in $\HH$.
+For each fixed row $r$, the map
+$x\mapsto\sum_{m\mid r}a(r/m)x(m)$ is a continuous linear functional,
+being a finite sum of coordinates. Passing to the limit gives
+$(Cx)(r)=y(r)$ for every $r$. Thus the formal sequence $Cx$ equals
+$y\in\HH$, which proves $x\in D(C)$ and closedness.
+
+For each $m$, the column $Ce_m$ has values $a(k)$ at the indices $mk$
+and zero elsewhere, so $\norm{Ce_m}^2=\norm{a}^2=F_\infty$.
+Finite linear combinations show $\cc\subset D(C)$, hence density.
+Since $C$ is closed, its graph norm is complete; this proves that
+\eqref{eq:closed-form} is a densely defined closed form.
+The standard representation for the norm-square form of a closed
+operator identifies its associated nonnegative self-adjoint operator
+as $F_\infty^{-1}C^*C$.
+\end{proof}
+
+For every $x\in\HH$, set $q_N[x]=\ip{x}{A_Nx}$.
+The finite matrices give the exact identity
+\begin{equation}
+ q_N[x]=F(N)^{-1}
+ \sum_{r\le N}
+ \abs{\sum_{m\mid r}a(r/m)x(m)}^2.
+ \label{eq:row-energy}
+\end{equation}
+Indeed, a coordinate with index greater than $N$ cannot divide a row
+at most $N$. For a fixed $x\in D(C)$,
+\begin{equation}
+ q_N[x]\longrightarrow q_\infty[x].
+ \label{eq:pointwise-form}
+\end{equation}
+No monotonicity of the \emph{normalized} forms $q_N$ is needed.
+
+\begin{lemma}[Finite-row weak lower bound]
+\label{lem:weak-lower}
+If $x_j\rightharpoonup x$ in $\HH$ and $N_j\to\infty$, then
+\begin{equation}
+ q_\infty[x]\le\liminf_{j\to\infty}q_{N_j}[x_j],
+ \label{eq:weak-lower}
+\end{equation}
+where $q_\infty[x]=+\infty$ for $x\notin D(C)$.
+\end{lemma}
+\begin{proof}
+Fix an integer $R$. For all sufficiently large $j$, $N_j\ge R$.
+Each of the first $R$ row functionals is weakly continuous, and
+$F(N_j)\to F_\infty>0$. Dropping the nonnegative remaining rows in
+\eqref{eq:row-energy} gives
+\[
+ F_\infty^{-1}\sum_{r\le R}
+ \abs{\sum_{m\mid r}a(r/m)x(m)}^2
+ \le\liminf_j q_{N_j}[x_j].
+\]
+Letting $R\to\infty$ proves \eqref{eq:weak-lower}, including its
+infinite value outside the maximal domain.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}, summable branch]
+Fix $f\in\HH$ and $\lambda>0$. Write
+\[
+ x_N=(A_N+\lambda I)^{-1}f,\qquad
+ x_*=(A_\infty+\lambda I)^{-1}f.
+\]
+The resolvent bound gives $\norm{x_N}\le\lambda^{-1}\norm{f}$.
+Consider the functionals
+\[
+ E_N(x)=q_N[x]+\lambda\norm{x}^2-2\Rea\ip{f}{x},
+ \qquad
+ E_\infty(x)=q_\infty[x]+\lambda\norm{x}^2-2\Rea\ip{f}{x},
+\]
+with $E_\infty=+\infty$ off $D(C)$.
+Their unique minimizers are $x_N$ and $x_*$, respectively.
+The latter assertion follows from the closed-form representation in
+Lemma~\ref{lem:closed}; in particular $x_*\in D(C)$.
+Equation~\eqref{eq:pointwise-form} gives
+$E_N(x_*)\to E_\infty(x_*)$.
+
+Take any weakly convergent subsequence $x_{N_j}\rightharpoonup x$.
+The weak lower bound of Lemma~\ref{lem:weak-lower}, weak lower
+semicontinuity of the norm, and weak continuity of the last linear
+term yield
+\begin{equation}
+ \begin{split}
+ E_\infty(x)
+ &\le\liminf_j E_{N_j}(x_{N_j})\\
+ &\le\limsup_j E_{N_j}(x_{N_j})
+ \le E_\infty(x_*).
+ \end{split}
+ \label{eq:minimizer-chain}
+\end{equation}
+The last inequality uses minimality against the fixed competitor $x_*$.
+It follows that $x\in D(C)$ and $x=x_*$ by uniqueness.
+Every subsequence has a weakly convergent further subsequence, since
+the sequence is bounded in the separable Hilbert space $\HH$.
+Thus $x_N\rightharpoonup x_*$ for the full sequence.
+Applying the lower bound to this sequence and retaining the same
+upper comparison proves
+\[
+ E_N(x_N)\longrightarrow E_\infty(x_*).
+\]
+
+Finally the resolvent equation and expansion of $E_N$ give
+\begin{equation}
+ \begin{split}
+ E_N(x_*)-E_N(x_N)
+ &=q_N[x_*-x_N]+\lambda\norm{x_*-x_N}^2\\
+ &\ge\lambda\norm{x_*-x_N}^2.
+ \end{split}
+ \label{eq:strong-convexity}
+\end{equation}
+Both functional values on the left tend to $E_\infty(x_*)$, so
+$x_N\to x_*$ in norm, proving \eqref{eq:summable-limit}.
+
+The limiting form is nonzero, because
+$q_\infty[e_1]=F_\infty^{-1}\norm{a}^2=1$.
+The uniqueness of its associated operator implies $A_\infty\ne0$.
+This argument uses $e_1\in D(C)$; it does not assume
+$e_1\in D(C^*C)$.
+\end{proof}
+
+The proof recovers at the actual limiting minimizer $x_*$.
+It therefore does not require $\cc$ to be a graph core for $C$,
+does not identify the maximal operator with the closure of an
+unstated initial operator, and does not assert essential self-adjointness.

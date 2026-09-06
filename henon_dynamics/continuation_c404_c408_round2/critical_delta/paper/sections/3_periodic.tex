@@ -1,0 +1,202 @@
+\section{The periodic cell and a uniform finite-chain estimate}
+\label{sec:periodic}
+
+The cell forms \eqref{eq:fiber-form} are closed on their stated
+domains, have compact resolvent, and depend continuously on their
+parameters. We first record bounds with the normalization needed
+for the infinite-chain calculation.
+
+\begin{lemma}[Cell bounds and band bottom]
+\label{lem:cell-bounds}
+For every $\kappa>0$, $\theta\in[0,2\pi)$, and $z\ge0$,
+\begin{equation}
+ \lfloor z\rfloor\le\nu_\kappa(z,\theta)
+                         \le\lfloor z\rfloor+1,
+ \qquad
+ \lfloor z\rfloor\le J_\kappa(z)\le z.
+ \label{eq:cell-bounds}
+\end{equation}
+There is a unique $r(\kappa)\in(0,1)$ satisfying
+\begin{equation}
+ r(\kappa)\tan\frac{\pi r(\kappa)}2=\frac\kappa2.
+ \label{eq:band-bottom}
+\end{equation}
+It is continuous and strictly increasing in $\kappa$, and
+\begin{equation}
+ J_\kappa(z)=0\quad(0\le z<r(\kappa)),
+ \qquad J_\kappa(z)>0\quad(z>r(\kappa)).
+ \label{eq:ids-gap}
+\end{equation}
+The function $J_\kappa$ is nondecreasing in $z$ and nonincreasing
+in $\kappa$.
+\end{lemma}
+
+\begin{proof}
+The Dirichlet domain $H^1_0(0,\pi)$ is the kernel of the single
+trace $u\mapsto u(0)$ on $\D_\theta$. It is therefore a
+codimension-one restriction, with eigenvalues $j^2$, $j\ge1$.
+The same variational argument as in Lemma~\ref{lem:cuts} proves
+the first two-sided bound in \eqref{eq:cell-bounds}.
+Increasing $\kappa$ increases the form on its fixed domain, so
+all fiber eigenvalues are nondecreasing in $\kappa$.
+At $\kappa=0$, the eigenfrequencies are
+$\abs{2j+\theta/\pi}$, $j\in\Z$. Tonelli's theorem gives
+\begin{align*}
+ \frac1{2\pi}\int_0^{2\pi}
+    \sum_{j\in\Z}\ind_{\{\abs{2j+\theta/\pi}\le z\}}\dd\theta
+ &=\frac12\sum_{j\in\Z}\int_0^2
+                     \ind_{\{\abs{2j+s}\le z\}}\dd s\\
+ &=\frac12\int_\R\ind_{[-z,z]}(s)\dd s=z.
+\end{align*}
+Comparison with these free forms and integration of the Dirichlet
+lower bound prove the remaining inequalities in
+\eqref{eq:cell-bounds}. Monotonicity in energy is immediate from
+the definition of the count.
+
+The endpoint estimate on a cell gives, uniformly in $\theta$,
+\begin{equation}
+ \norm{u}_2^2\le2\pi\abs{u(0)}^2+2\pi^2\norm{u'}_2^2
+       \le\left(\frac{2\pi}{\kappa}+2\pi^2\right)
+                         q_{\kappa,\theta}[u].
+ \label{eq:fiber-gap-estimate}
+\end{equation}
+There is consequently a positive lower bound for all fiber
+eigenvalues. A quasiperiodic function $u$ has periodic modulus
+$\abs{u}$, with the same $L^2$ norm and endpoint penalty and with
+no larger derivative energy. Thus the bottom over all fibers is
+the periodic ground eigenvalue.
+
+In the periodic fiber, the positive symmetric solution of the
+interior eigenvalue equation is a multiple of
+$\cos(z(x-\pi/2))$. Its endpoint derivative condition is
+\[
+ u'(0)-u'(\pi)=\kappa u(0),
+\]
+which gives $2z\sin(\pi z/2)=\kappa\cos(\pi z/2)$.
+The function $z\mapsto z\tan(\pi z/2)$ increases continuously
+from zero to infinity on $(0,1)$, so it has the unique solution
+\eqref{eq:band-bottom}. The corresponding eigenfunction is
+strictly positive, and hence is the ground state by the
+one-dimensional variational/Sturm characterization. This proves
+the vanishing in \eqref{eq:ids-gap} and the asserted dependence
+of $r$ on $\kappa$.
+
+For completeness, continuity of the fiber eigenvalues in $\theta$
+follows on writing $u(x)=e^{\ii\theta x/\pi}v(x)$ with $v$
+periodic. The form becomes
+\[
+ \int_0^\pi\abs{v'(x)+\ii\theta v(x)/\pi}^2\dd x
+       +\kappa\abs{v(0)}^2
+\]
+on a fixed domain. If $z>r(\kappa)$, the periodic ground
+eigenvalue is strictly below $z^2$, so the same is true on an
+open set of nearby phases. The phase integral is therefore
+positive, proving the second statement in \eqref{eq:ids-gap}.
+\end{proof}
+
+\begin{lemma}[Phase equation and continuity of the cell count]
+\label{lem:phase}
+At a fixed positive frequency $z$, the phases for which $z^2$
+is a fiber eigenvalue satisfy
+\begin{equation}
+ D_\kappa(z):=\cos(\pi z)+\frac{\kappa}{2z}\sin(\pi z)
+                   =\cos\theta.
+ \label{eq:discriminant}
+\end{equation}
+There are at most two such phases modulo $2\pi$.
+The integrated count $J_\kappa(z)$ is continuous in $z\ge0$.
+\end{lemma}
+
+\begin{proof}
+For the state vector $(u,u')^{\mathsf T}$, propagation across
+one interval and passage through its terminal delta interaction
+are represented by
+\begin{equation}
+ P_z=\begin{pmatrix}
+       \cos(\pi z)&z^{-1}\sin(\pi z)\\
+       -z\sin(\pi z)&\cos(\pi z)
+     \end{pmatrix},
+ \qquad
+ K_\kappa=\begin{pmatrix}1&0\\\kappa&1\end{pmatrix}.
+ \label{eq:transfer-matrices}
+\end{equation}
+Both matrices have determinant one. The quasiperiodic value
+and derivative conditions obtained from \eqref{eq:fiber-form}
+state that $e^{\ii\theta}$ is an eigenvalue of $K_\kappa P_z$.
+Taking the trace proves \eqref{eq:discriminant}.
+
+At an integer $z=m\ge1$, $P_z=(-1)^m I$, but
+$K_\kappa\ne I$. Thus the transfer matrix is a nontrivial
+shear with the sole eigenphase $0$ or $\pi$, and its eigenspace
+has dimension one. No additional phase or double free eigenspace
+is lost at those frequencies. At zero, the continuous matrix
+limit has half-trace $1+\kappa\pi/2>1$, consistently with
+\eqref{eq:fiber-gap-estimate}.
+
+Fix $z_0>0$. Except for the at most two phases in
+\eqref{eq:discriminant} at $z_0$, the fiber count is constant
+for $z$ sufficiently close to $z_0$. On a bounded interval of
+frequencies the first bound in \eqref{eq:cell-bounds} provides
+a common integrable bound on the phase counts. Dominated
+convergence proves continuity of $J_\kappa$ at $z_0$; the
+uniform gap gives continuity at zero.
+\end{proof}
+
+\begin{proposition}[Uniform finite-chain counting error]
+\label{prop:finite-chain}
+Let $N^D_{M,\kappa}(z^2)$ be the inclusive count on a chain
+of $M$ cells of length $\pi$, with coupling $\kappa$ at every
+internal junction and Dirichlet conditions at both ends.
+For all integers $M\ge1$, all $\kappa>0$, and all $z\ge0$,
+\begin{equation}
+ \abs{N^D_{M,\kappa}(z^2)-M J_\kappa(z)}\le5.
+ \label{eq:finite-chain-error}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+At fixed $z>0$, the fiber count is locally constant in $\theta$
+away from the phases in \eqref{eq:discriminant}. This follows
+from continuity of the eigenvalues after the fixed-domain gauge
+used above. By \eqref{eq:cell-bounds}, the difference
+\[
+ h(\theta)=\nu_\kappa(z,\theta)-\lfloor z\rfloor
+\]
+takes only the values zero and one. With at most two exceptional
+phases, it is the indicator of a circle arc or its complement,
+or a constant function, up to values at the exceptional points.
+The number of points of a uniform $M$-point phase mesh in a
+circle arc differs from $M$ times its normalized length by at
+most two. Altering values at at most two endpoints changes the
+sum by at most two more. Hence
+\begin{equation}
+ \abs{\sum_{j=0}^{M-1}\nu_\kappa(z,2\pi j/M)
+                              -M J_\kappa(z)}\le4.
+ \label{eq:phase-mesh}
+\end{equation}
+The loose constant covers inclusive endpoint counts as well.
+
+Join the ends of an $M$-cell chain into a ring, with one delta
+interaction of strength $\kappa$ at each of its $M$ junctions.
+Translation by one cell is unitary, has order $M$, and commutes
+with the form. Its finite Fourier decomposition gives exactly
+the fibers at phases $2\pi j/M$. On each sector the norm and
+energy are both $M$ times their one-cell counterparts, so
+neither the eigenvalue nor the coupling is rescaled.
+The sum in \eqref{eq:phase-mesh} is therefore the ring count.
+
+Imposing zero trace at one specified ring junction has
+codimension one and cuts the ring to the Dirichlet-ended
+chain. The delta term at that junction vanishes, and the
+restricted form is exactly the chain form. Its count lies
+between the ring count minus one and the ring count.
+Combining this fact with \eqref{eq:phase-mesh} gives
+\eqref{eq:finite-chain-error}. At $z=0$, all counts vanish
+by the positive gap, so the same estimate holds.
+\end{proof}
+
+The periodic ingredients above are included to fix normalization
+and threshold conventions. The essential property for the
+nonperiodic problem is that the error in
+\eqref{eq:finite-chain-error} is independent of the number of
+cells and of the test frequency.

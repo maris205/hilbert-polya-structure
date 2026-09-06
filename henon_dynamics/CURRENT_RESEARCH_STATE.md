@@ -8,7 +8,7 @@
 用户在 C399–C403 完成封存、同步及五篇 PDF 交付后，于 2026-09-06 再次
 明确“确认，下一轮”。本次新授权范围为 **C404–C408**；起点 Git 为
 `5b2a654c4f0b82b0e2d5158146b377ee6bf4e804`，不是续补旧批次。
-当前停在 [新批次选题检查点](research_c404_c408/README.md)：四条线共九个
+首轮保留 [新批次选题检查点](research_c404_c408/README.md)：四条线共九个
 候选组，**0 份录取合同、0 篇新论文/PDF，C404–C408 未完成**。
 Hénon 算术三组、非仿射正特征三组、非线性几何两组、算术/谱迭代一组，
 各自保存明确的经典所有权、增量不足或证明未闭合理由；没有冻结五篇计划。
@@ -18,6 +18,52 @@ Hénon 算术三组、非仿射正特征三组、非线性几何两组、算术/
 最具体的未解入口是非加性共振在任意周期、尤其 p 整除周期时的无穷远
 抵消/交数理论；没有把“未证明”称为全族 no-go。独立交叉核查与最终
 同步状态见检查点总览。不得从此处跳到 C409 或重复计入旧批次。
+
+用户在该检查点交付后再次明确“确认，下一轮”。现从已同步的
+`ae2fdc72c865a61369ef74d03d5b266a94ace86d` 续接
+[第二轮研究计划](continuation_c404_c408_round2/SCOUT_PLAN.md)，状态为
+`PARTIAL_THREE_PAPERS_SEALED`；用户随后“继续”续接
+收尾，仍是 C404–C408，不重启已通过的研究门槛。当前三篇完整正文与
+PDF 已完成，共 **33 页（10/10/13）**，见
+[三个 PDF 与实际缺额](continuation_c404_c408_round2/README.md) 及
+[准入决定与部分合同计划](continuation_c404_c408_round2/ADMISSION_AND_BATCH_PLAN.md)：
+C404 非线性 Hénon–Frobenius 共振全周期计数、C405 临界整除 Gram
+奇异型/强预解式二分、C406 调和 δ 链临界第二 Weyl 系数。三份正文均
+通过非作者内部全文与实际引文审查，未留下必须修订的数学/引用问题；
+每稿两次新空目录构建及与经审查初稿的 PDF 比较均同字节，全部 33 页
+已实际逐页查看，详见 [终构建记录](continuation_c404_c408_round2/FINAL_BUILD_REPORT.md)。
+野性动力学加权公式数学成立但不够独立成篇，只保留札记；几何候选
+被经典归属或新边界重数反例淘汰。尚未凑齐五个合同，C407/C408 保持空缺。
+新工作写入独立续接目录，不回写第一轮筛选记录。
+
+三份 [正式评价及范围](continuation_c404_c408_round2/EVALUATION_SCOPE.md)
+均保留目标 A2/A3 FAIL、三类算术对照 INCOMPLETE、27 项 false scope flags
+及 27 项 NOT_TESTABLE 目标指标。C404/C405 为源机制 EXPLORATORY，C406
+为 REJECTED；源 A1/A4 标签没有提升为目标结论，另有独立一致性核对。
+不将这个三篇检查点表述为 C404–C408 五篇已完成，也不进入 C409。
+
+本轮精确封存及最终只读核验已完成：177 个 payload，ledger 排除
+自身与 manifest；manifest 包含 ledger 而自排除，共 178 项，树内
+实际文件 179 个。`sha256sum -c MANIFEST.sha256` 退出 0、178 项全部
+OK；另用独立集合比较核对实际文件等于 ledger 加两清单、也等于
+manifest 加自身，无重复、额外/遗漏、符号链接或其他特殊文件，退出 0。
+这只证明成员与字节一致，不替代数学正确性。未新增发布程序或篡改测试。
+manifest SHA256：`30a886cb0103ff0a0d5f6dae09c7902aca9d794fb14de25571716da9429d59ef`；
+ledger SHA256：`1a708210edc404f5a9083c7b8f2f89ac389167229ac70bafec6d6e849f6bdc28`。
+封存后不再修改本轮 payload，也不回写首轮或其他旧冻结包。
+
+[独立本地链接审计](continuation_c404_c408_round2/reviews/RELEASE_LINK_AUDIT.md)
+覆盖 39 份 Markdown、59 处本地链接：审计时 57 处存在、两清单为
+明确预留、0 意外断链。根协调者封存后已实际确认这唯二预留目标生成
+并存在。三个主 PDF 的页数/大小/摘要均与终构建收据一致；未复查外部 URL。
+
+Git 整合先后核对远端新变动仅限 symbolic 的 state、P207 与相关记录，
+无本批写入路径或 evaluator 重叠，已安全快进至
+`eee9dcc3b89e1b822ad4f711aa57be5d7bd1bfd4`。本轮科研提交由 Git 中
+`Complete C404-C406 partial batch and seal three reviewed papers` 主题的
+对象绑定；同步以真实 refs 为准，不在封存载荷中循环写入自身提交号。
+精确暂存范围仅本续接目录、当前入口和两份 Hénon 注册表；八个继承
+未跟踪目录保留，不进入本次提交。
 
 ## 最近完成：C399–C403
 

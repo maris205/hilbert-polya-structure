@@ -17,6 +17,21 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C404--HCS-C406 partial source-boundary register (2026-09-06)
+
+| ID | Candidate / scope | Exact boundary | Surviving result and limitation |
+|---|---|---|---|
+| HEN-O388 | HCS-C404 fixed native zeta and each positive integer power | Dense p-power root directions give noninteger radial orders arbitrarily close to zero; every positive integer power has natural boundary `abs(t)=q^(-2)` and is nonalgebraic. Deleting the `p` not dividing `m` hypothesis also fails in the recorded `q=8,m=6,n=2` example (2816, not 2944). | Full coefficient-uniform counts under the stated coprimality survive. This does not classify all excluded degrees or rule out every changed clock, quotient or renormalized object. [Proof](../continuation_c404_c408_round2/henon_resonance/PROOF_PACKAGE.md) |
+| HEN-O389 | HCS-C405 divergent critical GCD form on the fixed unweighted `ell^2(N)` | Every nonnegative closable minorant is zero, so no nonnegative closed extension agrees with the form on finite sequences. Positive entrywise approximants have zero strong-resolvent limit despite the first diagonal entry of native Grams remaining one. | The square-summable branch has a nonzero maximal-convolution limit. Other Hilbert spaces, normalizations, indefinite forms and unrelated spectral representations are not excluded. [Proof](../continuation_c404_c408_round2/arithmetic_forms/PROOF_PACKAGE.md) |
+| HEN-O390 | HCS-C406 critical second coefficient as a target selector | The source coefficient varies continuously and strictly over `(2gamma-1,infinity)` as the positive asymptotic coupling varies. A matched mean coefficient therefore does not by itself identify an individual arithmetic divisor; the proved `o(k)` remainder supplies no bounded-residual target no-go. | Complete critical two-term law and hard/soft comparisons survive. This is a proved source range plus an unprovided target bridge, not a proof that every such spectrum fails every possible target normalization. [Proof](../continuation_c404_c408_round2/critical_delta/PROOF_PACKAGE.md) |
+
+These three records concern specified source observables and survive true
+identifications that transport those observables. They do not combine the
+three owners into a single arithmetic mechanism. C407/C408 have no admitted
+contract: the unnumbered weighted note and local cluster counterexample are
+documented in [the partial batch](../continuation_c404_c408_round2/README.md),
+not counted as extra papers or universal model-class no-go theorems.
+
 ## HCS-C399--HCS-C403 source-boundary register (2026-09-05)
 
 | ID | Candidate / scope | Exact boundary | Surviving result and limitation |

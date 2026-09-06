@@ -1,0 +1,118 @@
+\section{Critical regular variation and the divergent branch}
+\label{sec:critical}
+
+We now identify the entrywise limit in Theorem~\ref{thm:main}.
+The only regular-variation input is the classical uniform convergence
+theorem for positive measurable slowly varying functions
+\citep{bingham1987regular}: for each compact $J\subset(0,\infty)$,
+\begin{equation}
+ \sup_{t\in J}\abs{\frac{L(tx)}{L(x)}-1}\longrightarrow0
+ \qquad(x\to\infty).
+ \label{eq:uct}
+\end{equation}
+We state the version used explicitly, without requiring monotonicity of
+$L$ or convergence of $L$ itself.
+
+\begin{lemma}[Critical partial sums]
+\label{lem:critical-sums}
+If $F(N)\to\infty$, then
+\begin{equation}
+ L(N)^2=o(F(N)),\qquad
+ \frac{F(N/c)}{F(N)}\longrightarrow1
+ \quad\text{for each fixed }c\ge1.
+ \label{eq:critical-sums}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Fix $A>1$. Uniform convergence on $[1/A,1]$ gives
+\begin{equation}
+ \frac{1}{L(N)^2}
+ \sum_{\lceil N/A\rceil\le k\le N}\frac{L(k)^2}{k}
+ \longrightarrow\log A,
+ \label{eq:multiplicative-block}
+\end{equation}
+since the harmonic sum on the same interval tends to $\log A$.
+Hence $\liminf_{N\to\infty}F(N)/L(N)^2\ge\log A$.
+Only after this limit do we let $A$ grow: for every fixed bound $M$,
+choose $A$ with $\log A>M$. It follows that $F(N)/L(N)^2\to\infty$.
+
+For fixed $c>1$, the omitted indices in
+$F(N)-F(N/c)$ satisfy $N/c<k\le N$.
+By \eqref{eq:uct}, their weights $L(k)^2$ are at most a fixed
+multiple of $L(N)^2$ for all sufficiently large $N$, and
+$\sum_{N/c<k\le N}1/k$ is bounded in $N$.
+Thus $0\le F(N)-F(N/c)=O_c(L(N)^2)=o(F(N))$.
+Floors change only the interval endpoints and are already included
+in these sums. The case $c=1$ is immediate.
+\end{proof}
+
+\begin{lemma}[Finite Gram identity]
+\label{lem:gram}
+For fixed $m,n$ and $\ell=\lcm(m,n)$, if $N\ge\ell$ then
+\begin{equation}
+ \ip{e_m}{A_Ne_n}
+ =\frac{\sqrt{mn}}{\ell F(N)}
+   \sum_{k\le N/\ell}
+   \frac{L(k\ell/m)L(k\ell/n)}{k}.
+ \label{eq:finite-gram}
+\end{equation}
+If $N<\ell$, the entry is zero.
+\end{lemma}
+\begin{proof}
+A row contributes to $\ip{T_Ne_m}{T_Ne_n}$ precisely when it is
+a common multiple of $m$ and $n$. Write that row as $k\ell$.
+Its contribution is
+\[
+ a(k\ell/m)a(k\ell/n)
+ =\frac{\sqrt{mn}}{k\ell}
+   L(k\ell/m)L(k\ell/n).
+\]
+Summing over $k\ell\le N$ and dividing by $F(N)$ proves the claim.
+This is the specialization of the arbitrary-coefficient identity in
+\citet[Proposition~2.1]{hilberdink2017singular}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}, divergent branch]
+Fix $m,n$, and set $\ell=\lcm(m,n)$.
+The two factors $\ell/m$ and $\ell/n$ are fixed positive integers, so
+slow variation implies
+\[
+ \frac{L(k\ell/m)L(k\ell/n)}{L(k)^2}\longrightarrow1.
+\]
+For any $\varepsilon>0$, this ratio lies between $1-\varepsilon$
+and $1+\varepsilon$ for all $k$ beyond a fixed index.
+Split the sum in \eqref{eq:finite-gram} at that index.
+The initial part is finite, whereas $F(N/\ell)\to\infty$.
+Consequently
+\[
+ \sum_{k\le N/\ell}
+ \frac{L(k\ell/m)L(k\ell/n)}{k}
+ \sim F(N/\ell)\sim F(N),
+\]
+the second equivalence following from Lemma~\ref{lem:critical-sums}.
+Formula~\eqref{eq:finite-gram} therefore tends to
+$\sqrt{mn}/\ell=\gcd(m,n)/\sqrt{mn}$.
+
+Unique prime factorization identifies this kernel as
+\[
+ K(m,n)=\prod_p
+ \left(p^{-1/2}\right)^{\abs{v_p(m)-v_p(n)}}.
+\]
+The classical divergence of $\sum_p1/p$ gives the hypothesis of
+Propositions~\ref{prop:singularity} and \ref{prop:collapse}.
+They establish pure singularity, the nonexistence of a nonnegative
+closed extension, \eqref{eq:divergent-limit}, and norm divergence.
+\end{proof}
+
+The diagonal identity
+\begin{equation}
+ \ip{e_1}{A_Ne_1}
+ =F(N)^{-1}\sum_{r\le N}a(r)^2=1
+ \label{eq:diagonal-one}
+\end{equation}
+holds for every $N$, in both branches.
+In the divergent branch it precludes strong operator convergence
+$A_N\to0$, since such convergence would force the displayed scalar
+to tend to zero. Strong-resolvent convergence in
+\eqref{eq:divergent-limit} is a different assertion and is compatible
+with \eqref{eq:diagonal-one}.

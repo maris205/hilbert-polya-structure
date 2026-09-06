@@ -1,0 +1,156 @@
+\section{Prime-product forms and their closability boundary}
+\label{sec:product}
+
+Let $(r_p)$ be numbers indexed by the rational primes with $0\le r_p<1$.
+Write $v_p(m)$ for the exponent of $p$ in $m$ and put
+\begin{equation}
+ K_r(m,n)=\prod_p r_p^{\abs{v_p(m)-v_p(n)}},
+ \qquad
+ q_r(f,g)=\sum_{m,n}\overline{f(m)}K_r(m,n)g(n),
+ \label{eq:product}
+\end{equation}
+for $f,g\in\cc$, with $0^0=1$ and $q_r[f]=q_r(f,f)$.
+Only finitely many factors of each product differ from one.
+
+\begin{lemma}[Finite Poisson positivity]
+\label{lem:positive}
+The form $q_r$ is nonnegative.
+\end{lemma}
+\begin{proof}
+For $0\le r<1$, the probability density on the unit circle
+\[
+ P_r(e^{it})=\frac{1-r^2}{\abs{1-re^{it}}^2}
+\]
+has Fourier coefficients $r^{\abs{j-k}}$:
+\[
+ \int_0^{2\pi}e^{i(k-j)t}P_r(e^{it})\,\frac{dt}{2\pi}
+ =r^{\abs{j-k}}.
+\]
+This follows by multiplying the two absolutely convergent geometric
+series; for $r=0$ the density is one. Given $f\in\cc$, choose the finite
+set $S$ of primes occurring in its support and set
+$P_f(z)=\sum_m f(m)\prod_{p\in S}z_p^{v_p(m)}$.
+Integration over $\T^S$ with the product of the displayed probability
+densities gives $q_r[f]=\int_{\T^S}\abs{P_f(z)}^2\,d\mu_S(z)\ge0$.
+This is the finite-product representation of
+\citet[Section~3, Lemma~1 in the consulted preprint]{aistleitner2015gcd}.
+No infinite product measure is required.
+\end{proof}
+
+The next identities use primes absent from the support of a vector.
+Their absence is a hypothesis, not merely a convenient choice of indices.
+Define the Hilbert-space isometry $S_pe_m=e_{pm}$.
+
+\begin{lemma}[Prime shifts]
+\label{lem:shifts}
+Let $f\in\cc$, and let $S$ contain every prime dividing an index in
+$\supp f$. If $p,\ell\notin S$ are distinct primes, then
+\begin{equation}
+ \begin{split}
+ q_r[S_pf]&=q_r[f],\\
+ q_r(f,S_pf)&=r_pq_r[f],\\
+ q_r(S_pf,S_\ell f)&=r_pr_\ell q_r[f].
+ \end{split}
+ \label{eq:shift-identities}
+\end{equation}
+Moreover, the supports of $f$ and of the vectors $S_pf$ for distinct
+primes outside $S$ are pairwise disjoint.
+\end{lemma}
+\begin{proof}
+For support indices $m,n$, their $p$- and $\ell$-adic valuations are zero.
+Formula~\eqref{eq:product} therefore gives
+$K_r(pm,pn)=K_r(m,n)$,
+$K_r(m,pn)=r_pK_r(m,n)$, and
+$K_r(pm,\ell n)=r_pr_\ell K_r(m,n)$.
+Summing proves \eqref{eq:shift-identities}. If $pm=\ell n$ or $pm=n$
+for such indices, unique prime factorization contradicts the asserted
+absence of $p$ from the relevant index. This proves disjointness.
+\end{proof}
+
+\begin{proposition}[Explicit singularity and converse]
+\label{prop:singularity}
+The form $q_r$ is closable on $\cc$ if and only if
+$\sum_p r_p^2<\infty$. If this sum diverges, $q_r$ is purely singular.
+More precisely, for every $f\in\cc$ there are finite vectors $h_j$ such that
+\begin{equation}
+ \norm{h_j}\longrightarrow0,\qquad
+ q_r[h_j-f]\longrightarrow0.
+ \label{eq:singular-approx}
+\end{equation}
+Consequently there are finite vectors $u_j\to f$ in $\HH$ with
+$q_r[u_j]\to0$.
+\end{proposition}
+\begin{proof}
+Suppose first that $\sum_p r_p^2=\infty$.
+Fix $f$ and a finite prime set $S$ as in Lemma~\ref{lem:shifts}.
+For a finite set $E$ of primes outside $S$, write
+\[
+ s_E=\sum_{p\in E}r_p^2>0,\qquad
+ h_E=s_E^{-1}\sum_{p\in E}r_pS_pf.
+\]
+Disjoint supports and \eqref{eq:shift-identities} yield the exact formulas
+\begin{align}
+ \norm{h_E}^2&=\frac{\norm{f}^2}{s_E},
+ &q_r(f,h_E)&=q_r[f], \label{eq:tail-norm}\\
+ q_r[h_E]&=
+ q_r[f]\left(1+
+  \frac{\sum_{p\in E}r_p^2(1-r_p^2)}{s_E^2}\right).
+ \label{eq:tail-energy}
+\end{align}
+Indeed, the diagonal terms of the double sum for $q_r[h_E]$ contribute
+$q_r[f]s_E/s_E^2$, and the off-diagonal terms contribute
+$q_r[f](s_E^2-\sum_{p\in E}r_p^4)/s_E^2$.
+Subtracting the mixed terms gives
+\begin{equation}
+ q_r[h_E-f]
+ =q_r[f]\frac{\sum_{p\in E}r_p^2(1-r_p^2)}{s_E^2}
+ \le \frac{q_r[f]}{s_E}.
+ \label{eq:tail-residual}
+\end{equation}
+Removing the finite set $S$ does not affect divergence, so choose
+finite $E_j$ with $s_{E_j}\to\infty$. Equations
+\eqref{eq:tail-norm} and \eqref{eq:tail-residual} prove
+\eqref{eq:singular-approx}.
+
+Let $b\le q_r$ be a nonnegative closable minorant.
+The triangle inequality for the seminorm $\sqrt{b[\cdot]}$ shows that
+$b[h_{E_j}-h_{E_k}]\to0$, because both vectors approximate $f$ in that
+seminorm. Since $h_{E_j}\to0$ in $\HH$, closability gives
+$b[h_{E_j}]\to0$. Applying the triangle inequality once more, and using
+$b[h_{E_j}-f]\le q_r[h_{E_j}-f]\to0$, gives $b[f]=0$.
+This holds for every finite $f$, so the form is purely singular.
+It is not zero, since $q_r[e_1]=1$, and hence cannot itself be closable.
+Setting $u_j=f-h_{E_j}$ proves the recovery assertion.
+
+Conversely, suppose $\sum_p r_p^2<\infty$.
+For a fixed $m$ and $a_p=v_p(m)$, nonnegative summation over prime
+factorizations gives
+\begin{equation}
+ \sum_{n=1}^{\infty}\abs{K_r(m,n)}^2
+ =
+ \prod_{p\mid m}
+ \left(\sum_{j=0}^{\infty}r_p^{2\abs{a_p-j}}\right)
+ \prod_{p\nmid m}(1-r_p^2)^{-1}<\infty.
+ \label{eq:column-l2}
+\end{equation}
+The first product is finite and each of its factors is a finite sum plus
+a convergent geometric tail. For the second product, all but finitely
+many $r_p^2$ are at most $1/2$, and
+$-\log(1-r_p^2)\le2r_p^2$ there. This proves its convergence; zero
+parameters cause no exception.
+
+Thus each column of $K_r$ belongs to $\HH$, and finite linear
+combinations define an operator $Q_0$ on $\cc$.
+The symmetry of the kernel and Lemma~\ref{lem:positive} make $Q_0$ a
+densely defined nonnegative symmetric operator.
+The quadratic form of such an operator is closable, a standard
+semibounded-form fact recalled in \citet[Section~2.1]{yafaev2017semibounded}.
+Its form on $\cc$ is exactly $q_r$, proving the converse.
+\end{proof}
+
+A nonnegative closed extension agreeing with the divergent-case form
+on $\cc$ would have a nonzero closable restriction to $\cc$.
+Proposition~\ref{prop:singularity} rules this out. The proposition supplies
+an explicit witness within Simon's regular/singular
+framework~\citep{simon1978canonical}; it does not introduce a new
+general decomposition theorem.

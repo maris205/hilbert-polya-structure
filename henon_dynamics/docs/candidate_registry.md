@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C404--HCS-C406 partial source-theorem register (2026-09-06)
+
+Three independent complete manuscripts total 33 pages, with proof/source
+admission, non-author full-text review, two fresh byte-identical final builds
+and all-page QA. The authorized five-paper batch C404--C408 is **not complete**:
+C407/C408 remain vacant. See [the three PDFs and concrete limit](../continuation_c404_c408_round2/README.md).
+Baseline `ae2fdc72c865a61369ef74d03d5b266a94ace86d`; evaluator v0.2.0,
+SHA256 `6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| Candidate | One complete source increment | Strict tuple | Evidence |
+|---|---|---|---|
+| HCS-C404 | Coefficient-uniform ordinary Hénon--Frobenius resonant counts at every period, for `2<=deg(g)=m<q` and `p` not dividing `m`; the nonlinear pullback leading-term lemma controls the full p-power tower. The associated zeta and every positive integer power have a natural boundary. | `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FAIL)` | [proof](../continuation_c404_c408_round2/henon_resonance/PROOF_PACKAGE.md) · [evaluation](../continuation_c404_c408_round2/evaluations/route_a/HCS-C404/2026-09-06.yaml) |
+| HCS-C405 | At the critical slowly varying Dirichlet scale, divergent squared coefficients give a purely singular GCD form and universal zero strong-resolvent limit of positive entrywise approximants; summable coefficients give the nonzero maximal-convolution Gram limit without a presumed finite-support graph core. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../continuation_c404_c408_round2/arithmetic_forms/PROOF_PACKAGE.md) · [evaluation](../continuation_c404_c408_round2/evaluations/route_a/HCS-C405/2026-09-06.yaml) |
+| HCS-C406 | A harmonic delta chain with `b_n/n -> kappa>0` has the full critical second Weyl coefficient, a regularized periodic-IDS integral with range `(2gamma-1,infinity)`. A local-periodic reduction controls cumulative error by `o(k)`; rate-free stability and hard/soft conclusions belong to the same theorem. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [proof](../continuation_c404_c408_round2/critical_delta/PROOF_PACKAGE.md) · [evaluation](../continuation_c404_c408_round2/evaluations/route_a/HCS-C406/2026-09-06.yaml) |
+
+C404/C405 are source-local `ROUTE_A_EXPLORATORY`; C406 is
+`ROUTE_A_REJECTED`. C404's A1 analytic label is native-cycle-only; C405/C406
+A4 labels concern only their stated source operators. All target A2/A3 fail,
+the mandatory three-type control panel remains INCOMPLETE, and all target /
+Route-B flags are false. No target arithmetic, zero divisor or HP operator
+follows. The [scope record](../continuation_c404_c408_round2/EVALUATION_SCOPE.md)
+and separate consistency review retain these restrictions.
+
+The weighted wild-dynamics result is an attributed unnumbered note, not a
+fourth paper. Classical Lyness ownership and a cluster boundary-multiplicity
+counterexample leave the fifth contract unresolved, not universally impossible.
+No frozen earlier paper, evaluation, or first-scout snapshot is rewritten.
+
 ## HCS-C399--HCS-C403 source-theorem register (2026-09-05)
 
 Five independent contracts are frozen in

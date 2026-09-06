@@ -1,0 +1,115 @@
+\section{Leading terms through the entire divisibility tower}\label{sec:leading}
+
+All degrees in this section are total polynomial degrees. Saying that
+$P$ has unique highest homogeneous term $cy^D$ means that
+$P-cy^D$ has degree at most $D-1$. This stronger assertion, not merely
+the value of $\deg P$, prevents hidden cancellations after substitution.
+
+\begin{lemma}\label{lem:difference}
+Let $P\in R$ have unique highest homogeneous term $cy^D$, where
+$c\ne0$ and $p\nmid D$. Then $\delta(P)$ has unique highest homogeneous
+term
+\begin{equation}\label{eq:one-difference}
+ c\overline D b\,y^{q(D-1)+m}.
+\end{equation}
+Here $\overline D$ is the residue of $D$ in $\F_p$.
+\end{lemma}
+
+\begin{proof}
+Write $P=cy^D+P_0$ with $\deg P_0\le D-1$, and set $h=g(y)-ax$.
+The coordinate degrees of $H$ and $\Phi$ are at most $q$, so both
+$T(P_0)$ and $U(P_0)$ have degree at most $q(D-1)$. The contribution
+of the top monomial is
+\[
+ c\bigl((y^q+h)^D-y^{qD}\bigr)
+ =c\sum_{j=1}^{D}\binom Dj y^{q(D-j)}h^j.
+\]
+Since $\deg h=m$ and its unique top term is $by^m$, the term with
+$j=1$ has the nonzero unique top monomial in \eqref{eq:one-difference}.
+For $j\ge2$, the degree is at most
+\[
+ q(D-j)+jm=q(D-1)+m-(j-1)(q-m),
+\]
+strictly smaller because $m<q$. The contribution from $P_0$ also has
+strictly smaller degree. Thus no other term can cancel the stated
+monomial.
+\end{proof}
+
+\begin{lemma}\label{lem:delta-iterates}
+For every $j\ge1$, the unique highest homogeneous term of $\delta^j(y)$
+is $c_jy^{D_j}$, where
+\begin{align}
+ c_j&=b^j\overline m^{\,j-1}\ne0,\label{eq:coefficient}\\
+ D_1&=m,\qquad D_{j+1}=qD_j-(q-m),\label{eq:degree-recurrence}\\
+ D_j&=\frac{(m-1)q^j+(q-m)}{q-1}.
+ \label{eq:degree-closed}
+\end{align}
+In particular, $D_j\equiv m\pmod p$ and $0<D_j<q^j$.
+\end{lemma}
+
+\begin{proof}
+For $j=1$ the assertion follows from \eqref{eq:delta-basic}, since
+$m\ge2$. If the assertion holds at $j$, then
+$D_j\equiv m\pmod p$, so Lemma~\ref{lem:difference} applies. It gives
+\[
+ D_{j+1}=q(D_j-1)+m,\qquad
+ c_{j+1}=c_j\overline m b.
+\]
+The degree recurrence again gives $D_{j+1}\equiv m\pmod p$, closing
+the induction. The coefficient recurrence yields \eqref{eq:coefficient}.
+Solving the degree recurrence gives
+\[
+ D_j=q^j-(q-m)(1+q+\cdots+q^{j-1}),
+\]
+equivalent to \eqref{eq:degree-closed}. Positivity and the strict upper
+bound follow either from this expression and \eqref{eq:degree-closed},
+or by induction using $1<m<q$.
+\end{proof}
+
+The hypothesis $p\nmid m$ is used at every step, not only at the first
+period: it ensures that the first noncancelled binomial term always
+has nonzero coefficient. Its failure is treated explicitly in
+Example~\ref{ex:failure}.
+
+\begin{proposition}\label{prop:period-degree}
+For $n=rs$, where $r=p^{v_p(n)}$ and $p\nmid s$, the polynomial
+$T^n(y)-U^n(y)$ has unique highest homogeneous term
+\begin{equation}\label{eq:period-term}
+ s c_r y^{q^{n-r}D_r}.
+\end{equation}
+The polynomial $T^n(x)-U^n(x)$ has unique highest homogeneous term
+$-x^{q^n}$.
+\end{proposition}
+
+\begin{proof}
+Commutativity of $T$ and $U$ and the characteristic-$p$ binomial
+identity give
+\[
+ T^r-U^r=(T-U)^r=\delta^r.
+\]
+The difference-of-powers factorization in the same commuting operator
+algebra then gives
+\begin{equation}\label{eq:factorization}
+ T^n-U^n
+ =\sum_{i=0}^{s-1}T^{ri}U^{r(s-1-i)}\delta^r.
+\end{equation}
+For any polynomial in $R$ with unique top term $cy^D$, applying either
+$T$ or $U$ gives unique top term $cy^{qD}$. For $T$, the monic $y^q$
+term in the second coordinate supplies it, while every lower term
+has substituted degree at most $q(D-1)$. For $U$ this is immediate.
+Coefficients in $\F_q$ remain unchanged.
+
+Lemma~\ref{lem:delta-iterates} therefore shows that every summand of
+\eqref{eq:factorization}, applied to $y$, has unique highest homogeneous
+term
+\[
+ c_r y^{q^{r(s-1)}D_r}=c_r y^{q^{n-r}D_r}.
+\]
+The $s$ such terms add to a nonzero coefficient, because $p\nmid s$.
+This proves \eqref{eq:period-term}, including $s=1$.
+
+Finally, $T^n(x)=T^{n-1}(y)$ has degree $q^{n-1}$ and unique top
+term $y^{q^{n-1}}$, by the same substitution observation starting
+with $y$. Since $U^n(x)=x^{q^n}$ has strictly larger degree, the first
+equation has the asserted top term.
+\end{proof}

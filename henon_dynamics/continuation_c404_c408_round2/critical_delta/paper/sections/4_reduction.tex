@@ -1,0 +1,180 @@
+\section{The critical local-periodic reduction}
+\label{sec:reduction}
+
+In this section $b_n=\kappa n$ exactly, for a fixed
+$\kappa>0$. We write $N_{(\kappa n)}$ for its count.
+
+\begin{proposition}[Local-periodic reduction]
+\label{prop:reduction}
+As real $k\to\infty$,
+\begin{equation}
+ N_{(\kappa n)}(k^2)=\sum_{n\ge1}J_\kappa(k/n)+o(k).
+ \label{eq:local-periodic-reduction}
+\end{equation}
+The sum has only finitely many nonzero terms for each $k$.
+\end{proposition}
+
+\begin{proof}
+We separate the high-frequency head from the transition region
+and first exclude a sufficiently distant tail.
+
+\paragraph{Tail exclusion.}
+For the exact linear couplings, \eqref{eq:tail-general} gives
+\begin{equation}
+ \int_{x_M}^\infty\abs{f(x)}^2\dd x
+ \le\frac{A_\kappa}{(M+1)^2}q_{(\kappa n)}[f],
+ \qquad A_\kappa=\frac{2\pi}{\kappa}+2\pi^2.
+ \label{eq:critical-tail}
+\end{equation}
+Choose a fixed $R$ satisfying
+\begin{equation}
+ R^2>A_\kappa,\qquad R>r(\kappa)^{-1}+1,
+ \qquad M=\lceil Rk\rceil.
+ \label{eq:tail-cutoff}
+\end{equation}
+On the tail with Dirichlet condition at $x_M$, the Rayleigh
+quotient is at least $(M+1)^2/A_\kappa>k^2$.
+One may apply \eqref{eq:critical-tail} there by extending a tail
+function by zero to the left. Thus the tail contributes no
+eigenvalue at most $k^2$. By Lemma~\ref{lem:cuts}, cutting at
+$x_M$ changes the count by at most one.
+
+\paragraph{The head.}
+Set
+\begin{equation}
+ m=\lfloor\sqrt{k}\rfloor,
+ \qquad \varepsilon=(\log k)^{-2},
+ \label{eq:mesoscopic-parameters}
+\end{equation}
+for $k$ sufficiently large. The first $m$ cells, with
+Dirichlet conditions at $0$ and $x_m$, have total length
+$\pi\harm_m$. Both their coupled form and the free interval
+form restrict to the same sum of $m$ Dirichlet-cell forms
+on imposing zero traces at the $m-1$ internal vertices.
+Each count is within $m-1$ of that common restricted count.
+The free interval count is $\lfloor k\harm_m\rfloor$, so
+\begin{equation}
+ N_{\mathrm{head}}(k^2)=k\harm_m+O(m).
+ \label{eq:head-count}
+\end{equation}
+No estimate on individual head couplings is required.
+
+\paragraph{Geometric blocks.}
+Starting with $a_0=m$, recursively set
+\[
+ a_{i+1}=\min\{M,\lfloor(1+\varepsilon)a_i\rfloor\}
+\]
+until $a_B=M$. For large $k$, $\varepsilon m>2$.
+Every block is nonempty, and, except possibly for the last
+shortened block, the endpoints grow by at least a factor
+$1+\varepsilon/2$. In every block $a<n\le b$,
+\begin{equation}
+ 0<b-a\le\varepsilon a,
+ \qquad \rho=\frac ba\le1+\varepsilon,
+ \qquad B=O_\kappa(\varepsilon^{-1}\log k).
+ \label{eq:geometric-blocks}
+\end{equation}
+Cutting at the block boundaries and at the head endpoint
+costs $O(B+1)$ in the count.
+
+\paragraph{Block form comparison.}
+Fix one block $a<n\le b$ with Dirichlet ends.
+Map each original cell of length $\pi/n$ affinely onto a
+reference cell of length $\pi/a$, preserving its endpoint
+values. On the resulting common function space put
+$s_n=a/n\in[\rho^{-1},1]$. If $v$ denotes the reference
+function, then the original norm and derivative energy are
+\[
+ \sum_{n=a+1}^b s_n\int_{\text{cell }n}\abs{v}^2,
+ \qquad
+ \sum_{n=a+1}^b s_n^{-1}\int_{\text{cell }n}\abs{v'}^2,
+\]
+respectively. Consequently
+\begin{equation}
+ \rho^{-1}\norm{v}_{\mathrm{ref}}^2
+    \le\norm{v}_{\mathrm{orig}}^2
+    \le\norm{v}_{\mathrm{ref}}^2,
+ \qquad
+ q_{\mathrm{ref}}[v]\le q_{\mathrm{orig}}[v]
+                         \le\rho q_{\mathrm{ref}}[v],
+ \label{eq:block-norm-form}
+\end{equation}
+where the reference form has coupling $\kappa a$ at every
+internal junction. Indeed, the original internal coupling
+$\kappa n$ lies between $\kappa a$ and $\rho\kappa a$,
+and the endpoint terms vanish. These affine maps give an
+isomorphism of the finite block form domains, so
+\eqref{eq:block-norm-form} implies the Rayleigh inequalities
+\begin{equation}
+ \mathcal R_{\mathrm{ref}}[v]
+     \le\mathcal R_{\mathrm{orig}}[v]
+     \le\rho^2\mathcal R_{\mathrm{ref}}[v].
+ \label{eq:block-rayleigh}
+\end{equation}
+Scaling the reference coordinate by $a$ makes every cell have
+length $\pi$. Its squared $L^2$ norm gains factor $a^{-1}$ and its energy
+factor $a$, while the dimensionless delta strength becomes
+$\kappa$. Hence its eigenvalues are $a^2$ times those of
+the $(b-a)$-cell comparison chain. Min--max and
+Proposition~\ref{prop:finite-chain} yield
+\begin{equation}
+ (b-a)J_\kappa(k/b)-5
+       \le N_{\mathrm{block}}(k^2)
+       \le(b-a)J_\kappa(k/a)+5.
+ \label{eq:block-count}
+\end{equation}
+
+\paragraph{Accumulated freezing error.}
+Monotonicity of $J_\kappa$ places
+$\sum_{a<n\le b}J_\kappa(k/n)$ between the two main terms
+of \eqref{eq:block-count}. Thus the total error in replacing
+the block counts by that discrete sum is at most $5B$ plus
+\[
+ \mathcal E=\sum_{i=0}^{B-1}
+       (a_{i+1}-a_i)(j_i-j_{i+1}),
+ \qquad j_i=J_\kappa(k/a_i).
+\]
+The sequence $(j_i)$ is nonincreasing. Summation by parts,
+\eqref{eq:geometric-blocks}, and \eqref{eq:cell-bounds} give
+\begin{align}
+ \mathcal E
+ &\le\varepsilon\sum_{i=0}^{B-1}a_i(j_i-j_{i+1})\notag\\
+ &=\varepsilon\left[
+        m j_0+\sum_{i=1}^{B-1}(a_i-a_{i-1})j_i
+                        -a_{B-1}j_B\right]\notag\\
+ &\le\varepsilon k\left[
+              1+\sum_{i=1}^{B-1}\frac{a_i-a_{i-1}}{a_i}\right]
+ \le\varepsilon k\left[1+\log\frac{M}{m}\right].
+ \label{eq:telescoping-error}
+\end{align}
+The final inequality uses
+$(a_i-a_{i-1})/a_i\le\log(a_i/a_{i-1})$.
+The discarded terminal term is nonpositive. In particular,
+no derivative or Lipschitz estimate for the IDS has been used.
+
+\paragraph{Reassembling the chain.}
+The head estimate, the finite cuts, and
+\eqref{eq:telescoping-error} imply
+\begin{equation}
+ N_{(\kappa n)}(k^2)
+   =k\harm_m+\sum_{m<n\le M}J_\kappa(k/n)
+       +O_\kappa\bigl(m+B+\varepsilon k\log k\bigr).
+ \label{eq:reassembled-count}
+\end{equation}
+Here $m=O(\sqrt{k})$, $B=O_\kappa(\log^3 k)$, and
+$\varepsilon k\log k=k/\log k$, so the error is $o(k)$.
+Since $0\le z-J_\kappa(z)\le1$,
+\[
+ \abs{k\harm_m-\sum_{n\le m}J_\kappa(k/n)}\le m.
+\]
+For $n>M$, the cutoff in \eqref{eq:tail-cutoff} ensures
+$k/n<1/R<r(\kappa)$, and the remaining IDS terms vanish.
+Equation~\eqref{eq:reassembled-count} therefore proves
+\eqref{eq:local-periodic-reduction}.
+\end{proof}
+
+The finite chain remains periodic only inside each comparison
+block. The reduction neither averages the delta interactions
+into an ordinary scalar potential nor identifies the original
+operator with a globally periodic one. It retains their
+finite transmission precisely in the critical transition region.

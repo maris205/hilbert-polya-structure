@@ -1,0 +1,22 @@
+// Finite-characteristic feasibility only; NOT a characteristic-zero certificate.
+// The driver limits this calculation to 60 seconds.
+LIB "elim.lib";
+ring r=32003,x(1..6),dp;
+ideal equations;
+poly cycleProduct=1;
+int left;
+int right;
+for (int j=1; j<=6; j++)
+{
+    left=j-1;
+    right=j+1;
+    if (left==0) { left=6; }
+    if (right>6) { right=1; }
+    equations[j]=x(j)^3+1-x(left)*x(right);
+    cycleProduct=cycleProduct*x(j);
+}
+list saturated=sat(equations,ideal(cycleProduct));
+print("characteristic=32003, k=3, n=6, torus_length="
+    +string(vdim(saturated[1]))
+    +", saturation_power="+string(saturated[2]));
+quit;

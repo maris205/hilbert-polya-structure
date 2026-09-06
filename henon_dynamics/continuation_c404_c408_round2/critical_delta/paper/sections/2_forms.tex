@@ -1,0 +1,88 @@
+\section{The closed form, compactness, and cuts}
+\label{sec:forms}
+
+\begin{proposition}[Quantitative compactness]
+\label{prop:compact}
+The form \eqref{eq:source-form} is densely defined, closed, and
+nonnegative. Under \eqref{eq:compact-assumption}, its domain embeds
+compactly into $L^2(0,\infty)$. For every integer $M\ge1$,
+\begin{equation}
+ \int_{x_M}^\infty\abs{f(x)}^2\dd x\le a_Mq_b[f],
+ \qquad
+ a_M=2\pi\sup_{n>M}\frac1{n b_n}
+                 +\frac{2\pi^2}{(M+1)^2},
+ \label{eq:tail-general}
+\end{equation}
+for $f\in\D_b$, and $a_M\to0$. The represented operator has a
+positive first eigenvalue and discrete spectrum tending to infinity.
+\end{proposition}
+
+\begin{proof}
+Since $x_n\to\infty$, a compact interval meets only finitely many
+vertices. Thus $C_c^\infty(0,\infty)\subset\D_b$, proving density.
+Suppose $(f_j)$ is Cauchy for the norm
+$(\norm{f}_2^2+q_b[f])^{1/2}$. It converges to some $f\in\V$
+in $H^1(0,\infty)$, and
+$(\sqrt{b_n}f_j(x_n))_{n\ge1}$ converges in $\ell^2$.
+For each fixed $n$, point evaluation is continuous on a finite
+interval containing $x_n$. Therefore the $n$th coordinate of the
+second limit is $\sqrt{b_n}f(x_n)$. Hence $f\in\D_b$ and $f_j$
+converges in the form norm. This proves closedness.
+
+For $x\in I_n$, the fundamental theorem for Sobolev functions and
+Cauchy--Schwarz give
+\[
+ \abs{f(x)}^2\le 2\abs{f(x_n)}^2
+      +2\abs{I_n}\int_{I_n}\abs{f'(y)}^2\dd y.
+\]
+After integration,
+\begin{equation}
+ \int_{I_n}\abs{f(x)}^2\dd x
+ \le \frac{2\pi}{n}\abs{f(x_n)}^2
+          +\frac{2\pi^2}{n^2}\int_{I_n}\abs{f'(x)}^2\dd x.
+ \label{eq:cell-tail}
+\end{equation}
+Summing over $n>M$ proves \eqref{eq:tail-general}.
+Assumption~\eqref{eq:compact-assumption} makes $a_M\to0$.
+The form unit ball is bounded in $H^1(0,x_M)$ for each $M$, so
+Rellich compactness gives local $L^2$ compactness. The uniform tail
+bound upgrades it to compactness in $L^2(0,\infty)$.
+
+The compact form embedding gives compact resolvent. If $q_b[f]=0$,
+then $f'=0$ almost everywhere, and the zero left trace forces $f=0$.
+Thus zero is not an eigenvalue. The compact spectral theorem now
+gives the final assertions.
+\end{proof}
+
+\begin{lemma}[Finite-codimension count comparison]
+\label{lem:cuts}
+Impose zero traces at $r$ specified internal vertices of the chain.
+Let $N_b^D(E)$ be the inclusive eigenvalue count of the restricted
+form. For every real $E$,
+\begin{equation}
+ N_b(E)-r\le N_b^D(E)\le N_b(E).
+ \label{eq:cut-count}
+\end{equation}
+The restricted form is the orthogonal sum of the Dirichlet-ended
+block forms and, if present, the remaining tail form.
+\end{lemma}
+
+\begin{proof}
+Each point trace is a bounded linear functional on the form domain.
+The joint kernel therefore has codimension at most $r$. If $V_E$
+is the span of the original eigenvectors of eigenvalues at most
+$E$, its intersection with that kernel has dimension at least
+$\dim V_E-r$. The Rayleigh quotient on this intersection is at
+most $E$. Conversely, every subspace of the restricted form domain
+is a subspace of the original one. The variational characterization
+of the inclusive count proves \eqref{eq:cut-count}, including at
+eigenvalue thresholds. At a cut the corresponding delta term
+vanishes; continuity and the zero traces identify the restricted
+form with the stated direct sum.
+\end{proof}
+
+\begin{remark}
+An infinite set of cuts is not a finite-codimension perturbation.
+When the fully Dirichlet operator is used below, its comparison
+with $H_b$ is by form-domain inclusion, not by a finite count error.
+\end{remark}

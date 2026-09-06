@@ -1,0 +1,176 @@
+\section{Introduction and main results}
+\label{sec:introduction}
+
+Point interactions on a chain of shrinking intervals can remain visible
+in the second term of a high-energy counting law. On the harmonic chain,
+the critical balance occurs when the interaction at the $n$th vertex
+has strength comparable to $n$. We prove that the resulting second
+coefficient is determined by the full periodic-cell integrated density
+of states, rather than by its free or Dirichlet endpoint.
+
+The harmonic-chain model is classical. Egger n\'e Endres and
+Steiner~\cite{egger2011trace} considered constant positive coupling,
+proved discreteness, and analyzed in detail the fully decoupled
+Dirichlet limit. Its eigenvalues are the squares of positive integers
+with divisor multiplicities, so its counting law is an instance of
+Dirichlet's divisor problem. General realization and discreteness
+results for shrinking-gap point interactions are developed by Kostenko
+and Malamud~\cite{kostenko2010point}. We include a direct form argument
+because its quantitative tail bound is needed for the counting proof,
+not because compactness itself is new.
+
+The periodic comparison uses the usual delta-jump and free-propagation
+matrices; their constant-coupling specialization and band structure
+are recalled, for example, in Drabkin, Kirsch, and
+Schulz-Baldes~\cite[Secs.~2.1--2.3]{drabkin2012transport}. The spectral
+comparison work of Bifulco and Kerner~\cite{bifulco2024comparison}
+also revisits the harmonic chain. Its modified local Weyl theorem
+in \emph{arXiv v1, Section~5, Theorem~11} assumes fully Dirichlet
+coupling. That local theorem does not provide the global critical
+second coefficient considered here. These comparisons identify the
+background used below; we make no general priority claim concerning
+all slowly varying periodic-operator asymptotics.
+
+\subsection{The source operator and the periodic comparison}
+
+Write
+\begin{equation}
+ x_0=0,\qquad x_n=\pi\harm_n,
+ \qquad \harm_n=\sum_{j=1}^n\frac1j,
+ \qquad I_n=(x_{n-1},x_n).
+ \label{eq:geometry}
+\end{equation}
+Thus $\abs{I_n}=\pi/n$, while $x_n\to\infty$.
+Throughout the paper, $(b_n)_{n\ge1}$ is a sequence of positive real
+numbers, fixed independently of the spectral frequency $k$, and
+\begin{equation}
+ n b_n\longrightarrow\infty.
+ \label{eq:compact-assumption}
+\end{equation}
+Let
+\begin{equation}
+ \begin{split}
+ \V&=\{f\in H^1(0,\infty):f(0)=0\},\\
+ q_b[f]&=\int_0^\infty\abs{f'(x)}^2\dd x
+            +\sum_{n\ge1}b_n\abs{f(x_n)}^2,\\
+ \D_b&=\left\{f\in\V:
+                 \sum_{n\ge1}b_n\abs{f(x_n)}^2<\infty\right\}.
+ \end{split}
+ \label{eq:source-form}
+\end{equation}
+Only the trace at zero is prescribed; there is no additional boundary
+condition at infinity. Section~\ref{sec:forms} proves that this form is
+densely defined and closed, with compact embedding into $L^2(0,\infty)$.
+Its represented self-adjoint operator is denoted by $H_b$.
+It is the form realization of
+$-\mathrm d^2/\mathrm dx^2+\sum_n b_n\delta_{x_n}$, with continuity
+and derivative jump $f'(x_n+)-f'(x_n-)=b_n f(x_n)$ at each vertex.
+The associated source dynamics is $\exp(-\ii tH_b)$; our observable is
+the inclusive spectral count
+\begin{equation}
+ N_b(k^2)=\#\{j:\lambda_j(H_b)\le k^2\},\qquad k\ge0,
+ \label{eq:inclusive-count}
+\end{equation}
+where eigenvalues are counted with multiplicity.
+
+For $\kappa>0$ and $\theta\in[0,2\pi)$, define the comparison-cell form
+\begin{equation}
+ \begin{split}
+ \D_\theta&=\{u\in H^1(0,\pi):
+                       u(\pi)=e^{\ii\theta}u(0)\},\\
+ q_{\kappa,\theta}[u]
+    &=\int_0^\pi\abs{u'(x)}^2\dd x+\kappa\abs{u(0)}^2.
+ \end{split}
+ \label{eq:fiber-form}
+\end{equation}
+Let $\nu_\kappa(z,\theta)$ count its eigenvalues at most $z^2$, and put
+\begin{equation}
+ J_\kappa(z)=\frac1{2\pi}\int_0^{2\pi}
+                   \nu_\kappa(z,\theta)\dd\theta,
+ \qquad z\ge0.
+ \label{eq:ids-definition}
+\end{equation}
+This is the integrated density of states \emph{per cell of length
+$\pi$}, not per unit length. The periodic operator is a local comparison
+problem, not a claimed global conjugate of $H_b$.
+
+\begin{theorem}[Critical second coefficient]
+\label{thm:critical}
+Under \eqref{eq:compact-assumption}, $H_b$ has strictly positive
+discrete spectrum. If
+\begin{equation}
+ \frac{b_n}{n}\longrightarrow\kappa\in(0,\infty),
+ \label{eq:critical-assumption}
+\end{equation}
+then, as real $k\to\infty$,
+\begin{equation}
+ N_b(k^2)=k\log k+C(\kappa)k+o(k),
+ \label{eq:main-law}
+\end{equation}
+where
+\begin{equation}
+ C(\kappa)=\gamma+
+     \int_0^\infty
+       \frac{J_\kappa(z)-z\ind_{[1,\infty)}(z)}{z^2}\dd z.
+ \label{eq:coefficient-definition}
+\end{equation}
+The integral converges. The function $C:(0,\infty)\to\R$ is
+continuous and strictly decreasing, with
+\begin{equation}
+ C((0,\infty))=(2\gamma-1,\infty),\qquad
+ \lim_{\kappa\to\infty}C(\kappa)=2\gamma-1,
+ \qquad \lim_{\kappa\downarrow0}C(\kappa)=\infty.
+ \label{eq:coefficient-range}
+\end{equation}
+No rate or monotonicity is required in \eqref{eq:critical-assumption}.
+In particular, the conclusion holds for every positive sequence
+$b_n=\kappa n+o(n)$.
+\end{theorem}
+
+\begin{theorem}[Hard and soft limits]
+\label{thm:endpoint}
+Retain positivity of $(b_n)$ and \eqref{eq:compact-assumption}.
+If $b_n/n\to\infty$, then
+\begin{equation}
+ N_b(k^2)=k\log k+(2\gamma-1)k+o(k).
+ \label{eq:hard-law}
+\end{equation}
+If $b_n/n\to0$, then the conclusion is precisely
+\begin{equation}
+ \frac{N_b(k^2)-k\log k}{k}\longrightarrow\infty.
+ \label{eq:soft-law}
+\end{equation}
+All limits include eigenvalue thresholds. In the second case no
+general leading-order formula for $N_b(k^2)$ is asserted.
+\end{theorem}
+
+Fixed positive couplings $b_n\equiv b$ belong to the soft side,
+not to \eqref{eq:critical-assumption}. Passing to a finite nonzero
+limit of $b_n/n$ changes the asymptotic balance: for indices $n$ of
+order $k$, the product $b_n\abs{I_n}$ approaches $\pi\kappa$.
+Finite transmission therefore persists on an order-$k$ set of cells.
+An endpoint replacement on those cells can change the coefficient
+of $k$ even when it leaves the leading term unchanged.
+
+\subsection{The counting mechanism}
+
+The principal analytic assertion is
+\begin{equation}
+ N_{(\kappa n)}(k^2)=\sum_{n\ge1}J_\kappa(k/n)+o(k).
+ \label{eq:intro-reduction}
+\end{equation}
+Here $N_{(\kappa n)}$ denotes the count for $b_n=\kappa n$ exactly.
+A bounded error on each individual cell would accumulate to order
+$k$, too large for \eqref{eq:main-law}. We instead cut into geometric
+blocks, use a uniform finite-chain Floquet estimate, and control
+the total variation between block endpoints by summation by parts.
+This proves \eqref{eq:intro-reduction} without assuming that the
+periodic density of states is smooth at band edges.
+
+Section~\ref{sec:forms} establishes the source form and cut comparison.
+Section~\ref{sec:periodic} supplies the periodic estimates, including
+the uniform finite-chain error. The reduction is proved in
+Section~\ref{sec:reduction}; Section~\ref{sec:coefficient} evaluates
+and analyzes its second coefficient. Section~\ref{sec:general}
+proves the asymptotic-coupling and endpoint statements by form
+comparison, with the domain inclusions made explicit.

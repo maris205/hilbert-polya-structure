@@ -1,0 +1,34 @@
+// Exact, bounded feasibility check; no all-period theorem is inferred.
+// Run: Singular -q cluster_periodic_saturation.sing
+LIB "elim.lib";
+
+proc check(int exponent, int period)
+{
+    ring r=0,x(1..period),dp;
+    ideal equations;
+    poly product=1;
+    int j;
+    int left;
+    int right;
+    for (j=1; j<=period; j++)
+    {
+        left=j-1;
+        right=j+1;
+        if (left==0) { left=period; }
+        if (right>period) { right=1; }
+        equations[j]=x(j)^exponent+1-x(left)*x(right);
+        product=product*x(j);
+    }
+    ideal fullBasis=std(equations);
+    list saturated=sat(fullBasis,ideal(product));
+    ideal torusBasis=std(saturated[1]);
+    print("k="+string(exponent)+", n="+string(period)
+        +", full_length="+string(vdim(fullBasis))
+        +", torus_length="+string(vdim(torusBasis))
+        +", saturation_power="+string(saturated[2]));
+}
+
+int n;
+for (n=1; n<=5; n++) { check(3,n); }
+for (n=1; n<=4; n++) { check(4,n); }
+quit;

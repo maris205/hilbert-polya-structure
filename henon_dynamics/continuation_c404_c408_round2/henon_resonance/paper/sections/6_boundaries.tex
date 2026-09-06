@@ -1,0 +1,131 @@
+\section{Model boundaries and bounded exact checks}\label{sec:boundaries}
+
+\subsection{A direct additive-model obstruction}
+
+The first coordinate of $S$ contains the nonzero term
+$a^{-1}b x^{mq}$, where $mq$ is not a power of $p$.
+Thus $S$ is not additive for the standard vector-group law on $\A^2$.
+That coordinate observation alone would not exclude a different
+coordinate system. The first-period count gives a stronger but still
+limited statement.
+
+\begin{proposition}\label{prop:no-vector}
+The point dynamical system $S\colon\A^2(K)\to\A^2(K)$ is not conjugate,
+even by a set-theoretic bijection, to an algebraic-group endomorphism
+of any vector group $\Ga^d(K)$ having finite fixed sets at every iterate.
+\end{proposition}
+
+\begin{proof}
+For a vector-group endomorphism $\tau$, its fixed points form the
+subgroup $\ker(\tau-\id)(K)$ of $\Ga^d(K)$. If finite, this is a
+finite-dimensional vector space over $\F_p$, and therefore has
+cardinality a power of $p$. On the other hand,
+Theorem~\ref{thm:count}, or the first-period elimination in
+Section~\ref{sec:count}, gives $N_1=qm$. Since $m>1$ and $p\nmid m$,
+this is not a power of $p$. A conjugacy preserves fixed-set
+cardinalities, giving a contradiction.
+\end{proof}
+
+This elementary obstruction distinguishes the family from the direct
+vector-group setting of \cite[Theorem 5.2.5]{bch2024groups}.
+It says nothing about finite quotients, other algebraic groups, or a
+birational presentation restricted to a smaller domain. In particular,
+it is not a theorem excluding every dynamically affine presentation.
+Such a classification is not needed for the count proved here and is
+not supplied by it.
+
+\subsection{Why the coprimality hypothesis cannot be dropped}
+
+\begin{example}\label{ex:failure}
+Take $q=8$, $a=1$, $g(y)=y^6+y^3+1$, and $n=2$, so $p\mid m$.
+The geometric count is $2816$, whereas extending
+\eqref{eq:count} to these parameters would give $2944$.
+\end{example}
+
+\begin{proof}
+Work in characteristic two and put $h=y^6+y^3+1+x$.
+The commuting-operator identity still gives $T^2-U^2=\delta^2$, and
+direct expansion gives
+\begin{align*}
+ \delta^2(y)
+ &=y^{32}h^2+y^{16}h^4+h^6
+   +y^{16}h+y^8h^2+h^3+y+x^8.
+\end{align*}
+The unique top term is $y^{44}$: the first three displayed products
+have degrees $44,40,36$, and the remaining degrees are smaller.
+The first equation has unique top term $x^{64}$. The quotient-length
+and Jacobian arguments of Section~\ref{sec:count}, here with determinant
+one, therefore give $64\cdot44=2816$ reduced points.
+The unjustified extension of \eqref{eq:count} gives
+$(5\cdot8^4+2\cdot8^2)/7=2944$, as claimed.
+\end{proof}
+
+This is a nonlinear failure example, not an additive degeneration. It
+shows that deleting $p\nmid m$ is invalid; it does not classify every
+degree divisible by $p$.
+
+\subsection{Exact checks and their evidentiary role}
+
+The accompanying bounded calculation literally composes $H$ and forms
+the two fixed polynomials. It does not construct them from the degree
+recurrence. Exact coefficient arithmetic then determines their degrees,
+highest homogeneous terms, and Jacobian. Table~\ref{tab:checks} records
+the five archived cases. These values are supplementary checks of the
+implementation and hypotheses, not the proof of a universally
+quantified statement.
+
+For the genuine extension-field examples, we use
+$\F_4=\F_2[\alpha]/(\alpha^2+\alpha+1)$ and
+\[
+ a=\alpha+1,\qquad
+ g(y)=\alpha y^3+(\alpha+1)y^2+y+\alpha.
+\]
+Thus their leading and lower coefficients do not all lie in the prime
+field. In the archived encoding, the integers $2$ and $3$ mean
+$\alpha$ and $\alpha+1$, respectively; arithmetic is not performed in
+the nonfield ring $\mathbb Z/4\mathbb Z$.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}clrr@{}}
+\toprule
+$q$ & Coefficients and period & Degrees & Count\\
+\midrule
+$5$ & $a=2$, $g=2y^3+3y^2+y+4$, $n=2$ & $(25,15)$ & $375$\\
+$9$ & $a=2$, $g=2y^2+y+1$, $n=3$ & $(729,92)$ & $67068$\\
+$4$ & Genuine $\F_4$ map above, $n=2$ & $(16,11)$ & $176$\\
+$4$ & Same genuine $\F_4$ map, $n=4$ & $(256,171)$ & $43776$\\
+$8$ & Example~\ref{ex:failure}, $n=2$ & $(64,44)$ & $2816$\\
+\bottomrule
+\end{tabular}
+\caption{Bounded exact checks from the archived literal-composition run.
+The final row is outside the theorem's hypotheses.}\label{tab:checks}
+\end{table}
+
+For the three prime-subfield coefficient cases, an additional F5B
+Gr\"obner calculation with SymPy computes the quotient length from a
+returned basis. That secondary method was not run for the two genuine
+$\F_4$ cases; no extension-field SymPy Gr\"obner check is claimed.
+The counts inferred from the coprime leading terms use the same
+elementary length principle as the proof and are not an independent
+proof of that principle. The checks include a prime-to-$p$ period,
+a wild period over a nonprime base size, non-prime-field coefficients,
+a second $p$-power level, and an out-of-hypothesis control. They are
+not a large census or an empirical extrapolation to all periods.
+
+\subsection{What is, and is not, being counted}
+
+The clock is the positive integer $n$ for the one fixed map $S$ on
+$\A^2(K)$. Equivalently, both $H$ and $\Phi$ are iterated $n$ times
+in the coincidence condition. This is not the count of ordinary
+$H$-periodic points over a fixed finite field, and it is not the
+Hasse--Weil point count of a fixed variety under Frobenius alone.
+Accordingly, the natural boundary does not assert a failure of
+Hasse--Weil rationality.
+
+All lower coefficients of $g$ are permitted, but the monic $y^q$ term,
+the coefficient field $\F_q$, $a\ne0$, and $2\le m<q$ with $p\nmid m$
+are structural hypotheses. The result is not a classification of all
+resonant H\'enon maps, of independently varying two-clock resonances,
+or of the case $p\mid m$.

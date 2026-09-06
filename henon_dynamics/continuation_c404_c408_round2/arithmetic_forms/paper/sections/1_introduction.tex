@@ -1,0 +1,134 @@
+\section{Introduction and the critical dichotomy}
+\label{sec:introduction}
+
+A positive limit of finite matrix entries need not define a closed
+quadratic form on the ambient Hilbert space. Critical divisibility Grams
+give an arithmetic instance of this distinction: their first diagonal
+entry stays equal to one, but their resolvents can converge strongly to
+the resolvent of zero. The issue is therefore not only whether the
+limiting matrix is bounded, but whether any nonzero closable part survives.
+
+Throughout, $\HH=\ell^2(\N)$ with its usual coordinate basis $(e_m)$.
+Inner products are conjugate-linear in the first argument.
+Let $L:[1,\infty)\to(0,\infty)$ be measurable, bounded above and away
+from zero on compact intervals, and slowly varying:
+\begin{equation}
+ \frac{L(tx)}{L(x)}\longrightarrow1
+ \qquad(x\to\infty),\quad t>0.
+ \label{eq:slow}
+\end{equation}
+Define
+\begin{equation}
+ a(k)=k^{-1/2}L(k),\qquad
+ F(x)=\sum_{k\le \lfloor x\rfloor}a(k)^2,
+ \label{eq:coefficients}
+\end{equation}
+with an empty sum equal to zero. For an integer $N\ge1$, let
+\begin{equation}
+ T_N(r,m)=
+ \begin{cases}
+ a(r/m),&m\mid r\le N,\\
+ 0,&\text{otherwise},
+ \end{cases}
+ \qquad
+ A_N=F(N)^{-1}T_N^*T_N.
+ \label{eq:gram-definition}
+\end{equation}
+These are finite matrices extended by zero on $\HH$, so $A_N$ is bounded,
+nonnegative and self-adjoint. No uniform bound in $N$ is assumed.
+
+For clarity, a nonnegative form $q$ on $\cc$ is \emph{closable} if
+$u_j\to0$ in $\HH$ and $q[u_j-u_k]\to0$ imply $q[u_j]\to0$.
+A \emph{closable minorant} is a nonnegative closable form $b$ on $\cc$
+such that $b[u]\le q[u]$ there. We call $q$ \emph{purely singular} when
+every such minorant is zero. This refers to form relaxation, not to a
+singular spectral measure of an already defined self-adjoint operator.
+
+\begin{theorem}[Critical summability dichotomy]
+\label{thm:main}
+Under \eqref{eq:slow}--\eqref{eq:gram-definition}, exactly one of the
+following alternatives holds.
+\begin{enumerate}
+\item If $F(N)\to\infty$, then for every fixed $m,n\in\N$,
+\begin{equation}
+ \ip{e_m}{A_Ne_n}\longrightarrow
+ K(m,n):=\frac{\gcd(m,n)}{\sqrt{mn}}.
+ \label{eq:critical-kernel}
+\end{equation}
+The nonnegative form
+$q_K[u]=\sum_{m,n}\overline{u(m)}K(m,n)u(n)$ on $\cc$ is nonzero
+and purely singular. It has no nonnegative closed extension agreeing
+with it on $\cc$. Nevertheless, for every $\lambda>0$,
+\begin{equation}
+ (A_N+\lambda I)^{-1}f\longrightarrow\lambda^{-1}f
+ \quad\text{for every } f\in\HH,
+ \qquad \norm{A_N}\longrightarrow\infty.
+ \label{eq:divergent-limit}
+\end{equation}
+\item If $F(N)\to F_\infty<\infty$, define the maximal rowwise
+Dirichlet convolution operator by
+\begin{equation}
+ \begin{split}
+ (Cx)(r)&=\sum_{m\mid r}a(r/m)x(m),\\
+ D(C)&=\left\{x\in\HH:
+  \sum_{r=1}^{\infty}
+  \abs{\sum_{m\mid r}a(r/m)x(m)}^2<\infty\right\}.
+ \end{split}
+ \label{eq:maximal-C}
+\end{equation}
+Then $C$ is densely defined and closed. The operator
+$A_\infty=F_\infty^{-1}C^*C$ is nonnegative, self-adjoint and nonzero,
+and for every $\lambda>0$ and $f\in\HH$,
+\begin{equation}
+ (A_N+\lambda I)^{-1}f
+ \longrightarrow(A_\infty+\lambda I)^{-1}f.
+ \label{eq:summable-limit}
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+Here and below, strong-resolvent convergence for nonnegative operators is
+expressed by the resolvent limits at $-\lambda$, $\lambda>0$.
+Theorem~\ref{thm:main} is one endpoint statement with two alternatives.
+Its arithmetic ingredient is an explicit prime-tail approximation for
+the limiting form. The square-summable alternative uses the maximal domain
+in \eqref{eq:maximal-C}, rather than an unproved identification with the
+graph closure of finitely supported sequences.
+
+\paragraph{Position relative to earlier work.}
+The GCD kernel and its finite positivity are classical.
+Aistleitner, Berkes and Seip~\citep{aistleitner2015gcd} give the
+finite-product Poisson representation and study finite GCD sums and
+spectral norms; the role of the prime-square summability threshold
+already appears there. Hilberdink's arbitrary-coefficient Gram identity
+\citep[Proposition~2.1]{hilberdink2017singular} supplies the finite algebra
+underlying \eqref{eq:gram-definition}. We rederive that algebra, and do
+not claim either identity as new.
+
+For power coefficients below the critical line,
+Hilberdink and Pushnitski~\citep{hilberdink2023spectral} obtain compact
+LCM operators and rescaled-Gram convergence in Schatten classes in their
+stated range. The comparison here concerns Sections~2.2--2.3 of their
+2021 preprint, where the Gram result assumes $\sigma<1/2$.
+Theorem~\ref{thm:main} addresses what replaces a closed limiting
+operator at the critical coefficient exponent, including slowly varying
+weights that need not be multiplicative. It does not supply new finite
+GCD norm asymptotics or a new diagonalization of LCM operators.
+
+General regular/singular form decomposition and the largest closable
+minorant belong to Simon~\citep[Section~2]{simon1978canonical}.
+Our prime-tail vectors identify the purely singular case for the present
+arithmetic kernel; their resolvent consequence is a direct variational
+argument within that classical framework. Simon's monotone convergence
+theorems are not invoked as an entrywise convergence theorem.
+Yafaev~\citep{yafaev2017semibounded} also emphasizes the distinction
+between a semibounded matrix form and its closed-operator realization.
+His one-circle Toeplitz closability criterion is not transferred here
+to an infinite-prime space.
+
+Section~\ref{sec:product} proves the prime-product form criterion.
+Section~\ref{sec:variational} converts its recovery vectors into
+resolvent convergence. Sections~\ref{sec:critical} and
+\ref{sec:summable} prove the two branches of Theorem~\ref{thm:main}.
+The final sections give a boundary example, finite verification scopes,
+and the limits of the fixed-space conclusion.

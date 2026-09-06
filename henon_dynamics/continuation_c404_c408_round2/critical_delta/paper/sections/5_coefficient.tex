@@ -1,0 +1,162 @@
+\section{Evaluation and dependence of the second coefficient}
+\label{sec:coefficient}
+
+\subsection{The regularized Riemann sum}
+
+\begin{proposition}[The exact critical sequence]
+\label{prop:exact-law}
+For each fixed $\kappa>0$, the integral in
+\eqref{eq:coefficient-definition} converges and
+\begin{equation}
+ \sum_{n\ge1}J_\kappa(k/n)
+           =k\log k+C(\kappa)k+o(k).
+ \label{eq:ids-sum-law}
+\end{equation}
+Consequently \eqref{eq:main-law} holds for $b_n=\kappa n$.
+\end{proposition}
+
+\begin{proof}
+For $x>0$, define
+\begin{equation}
+ G_\kappa(x)=J_\kappa(1/x)-x^{-1}\ind_{(0,1]}(x).
+ \label{eq:regularized-summand}
+\end{equation}
+By \eqref{eq:cell-bounds}, $\abs{G_\kappa(x)}\le1$
+for $0<x\le1$. By \eqref{eq:ids-gap}, it vanishes for
+$x>1/r(\kappa)$. Lemma~\ref{lem:phase} shows that it is
+continuous except possibly at the cutoff $x=1$, away from
+the endpoint zero. It is thus absolutely integrable.
+
+Its normalized Riemann sums obey
+\begin{equation}
+ \frac1k\sum_{n\ge1}G_\kappa(n/k)
+              \longrightarrow\int_0^\infty G_\kappa(x)\dd x.
+ \label{eq:riemann-limit}
+\end{equation}
+Indeed, for $0<\delta<1$, the integral over $(0,\delta)$
+has absolute value at most $\delta$, and the portion of the
+normalized mesh sum with $n/k<\delta$ is bounded by
+$\delta+1/k$. On the remaining compact interval ordinary
+Riemann-sum convergence applies. First let $k\to\infty$
+and then let $\delta\downarrow0$. This argument does not
+require a limit of $G_\kappa$ at zero.
+
+For every real $k\ge1$ there is the exact identity
+\begin{equation}
+ \sum_{n\ge1}J_\kappa(k/n)
+        =k\harm_{\lfloor k\rfloor}
+                         +\sum_{n\ge1}G_\kappa(n/k).
+ \label{eq:harmonic-separation}
+\end{equation}
+Since $\harm_{\lfloor k\rfloor}=\log k+\gamma+o(1)$,
+\eqref{eq:riemann-limit} proves the expansion with coefficient
+$\gamma+\int_0^\infty G_\kappa(x)\dd x$.
+The substitution $z=1/x$ gives
+\[
+ \int_0^\infty G_\kappa(x)\dd x
+       =\int_0^\infty
+          \frac{J_\kappa(z)-z\ind_{[1,\infty)}(z)}{z^2}\dd z.
+\]
+Convergence also follows directly: the integrand is zero
+below the positive band bottom and is bounded in absolute
+value by $z^{-2}$ for $z\ge1$.
+This proves \eqref{eq:ids-sum-law} and
+\eqref{eq:coefficient-definition}. Combining it with
+Proposition~\ref{prop:reduction} proves the last assertion.
+\end{proof}
+
+\subsection{Continuity, strict monotonicity, and limits}
+
+\begin{proposition}[Range of the coefficient]
+\label{prop:coefficient-range}
+The function $C$ has all the properties in
+\eqref{eq:coefficient-range}.
+\end{proposition}
+
+\begin{proof}
+For a fixed phase, the finite-cell forms have a fixed domain
+as $\kappa$ varies. Point evaluation is bounded on $H^1$,
+so their eigenvalues vary continuously at every finite
+$\kappa\ge0$. At a fixed $\kappa>0$ and $z>0$, only
+finitely many phases have an eigenvalue exactly at $z^2$,
+by Lemma~\ref{lem:phase}. The phase counts therefore converge
+almost everywhere when $\kappa$ varies to that value, and
+\eqref{eq:cell-bounds} dominates them. Hence $J_\kappa(z)$
+is continuous in $\kappa>0$.
+
+On a compact positive interval of couplings, the increasing
+band bottom $r(\kappa)$ gives a uniform gap at zero.
+The $z^{-2}$ bound at infinity is also uniform.
+Dominated convergence in \eqref{eq:coefficient-definition}
+proves continuity of $C$.
+
+If $0<\kappa_1<\kappa_2$, form ordering gives
+$J_{\kappa_1}(z)\ge J_{\kappa_2}(z)$ for all $z$.
+Moreover, $r(\kappa_1)<r(\kappa_2)$. On the nonempty
+interval between these band bottoms, the second integrated
+count is zero and the first is positive by
+\eqref{eq:ids-gap}. Therefore
+\begin{equation}
+ C(\kappa_1)-C(\kappa_2)
+     =\int_0^\infty
+          \frac{J_{\kappa_1}(z)-J_{\kappa_2}(z)}{z^2}\dd z>0.
+ \label{eq:strict-monotonicity}
+\end{equation}
+
+As $\kappa\to\infty$, the increasing cell forms impose
+$u(0)=0$ in the limit, and quasiperiodicity then imposes
+$u(\pi)=0$. Their limiting form domain is the dense
+Dirichlet domain. Each fixed indexed eigenvalue increases
+to the corresponding Dirichlet eigenvalue $j^2$.
+This also follows directly by min--max: Dirichlet test
+spaces give the upper bound $j^2$; any sequence of normalized
+eigenvectors with bounded energy is compact in $L^2$ and
+has endpoint values tending to zero, so the limiting
+variational spaces lie in the Dirichlet domain.
+Thus, for noninteger $z$,
+\begin{equation}
+ J_\kappa(z)\longrightarrow\lfloor z\rfloor
+                         \quad(\kappa\to\infty).
+ \label{eq:ids-hard-limit}
+\end{equation}
+The uniform gap for $\kappa$ bounded away from zero and
+the integrable tail bound justify dominated convergence
+in the coefficient integral. Its limiting value is
+\begin{align}
+ \int_1^\infty\frac{\lfloor z\rfloor-z}{z^2}\dd z
+ &=\sum_{j=1}^\infty
+         \left[\frac1{j+1}-\log\frac{j+1}{j}\right]
+   =\gamma-1.
+ \label{eq:dirichlet-integral}
+\end{align}
+The last equality follows by taking partial sums,
+$\harm_{L+1}-1-\log(L+1)$, and letting $L\to\infty$.
+Consequently $\lim_{\kappa\to\infty}C(\kappa)=2\gamma-1$.
+
+As $\kappa\downarrow0$, finite-cell form convergence
+gives the free spectrum. At a fixed $z>0$, a free fiber
+has eigenvalue $z^2$ at only finitely many phases, so
+the same dominated-convergence argument and the free
+normalization in Lemma~\ref{lem:cell-bounds} imply
+\begin{equation}
+ J_\kappa(z)\longrightarrow z
+                           \quad(\kappa\downarrow0).
+ \label{eq:ids-soft-limit}
+\end{equation}
+The portion of the coefficient integral over $z\ge1$
+is at least $-1$, by \eqref{eq:cell-bounds}. On
+$0<z<1$ the integrand is nonnegative. For any fixed
+$0<\delta<1$, \eqref{eq:ids-soft-limit} gives
+\[
+ \lim_{\kappa\downarrow0}\int_\delta^1
+                \frac{J_\kappa(z)}{z^2}\dd z
+             =\int_\delta^1\frac{\mathrm dz}{z}
+             =\log(1/\delta).
+\]
+It follows that
+$\liminf_{\kappa\downarrow0}C(\kappa)
+\ge\gamma-1+\log(1/\delta)$ for every such $\delta$.
+Letting $\delta\downarrow0$ proves the infinite endpoint
+limit. Strict monotonicity and continuity now give the
+exact range in \eqref{eq:coefficient-range}.
+\end{proof}
