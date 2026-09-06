@@ -17,6 +17,32 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C399--HCS-C403 source-boundary register (2026-09-05)
+
+| ID | Candidate / scope | Exact boundary | Surviving result and limitation |
+|---|---|---|---|
+| HEN-O383 | HCS-C399 finite-real Boole periodic product versus circle operator | Deleting infinity divides out its complete stability factor and can introduce poles; the critical germ has fractional behavior at `u=1`. Removing a measure-zero orbit does not by itself change an ordinary Lp operator. | Full source divisor and compensated limits survive. No universal theorem excludes a different natural trace space. [Proof](../research_c399_c403/boole/PROOF_PACKAGE.md) |
+| HEN-O384 | HCS-C400 fixed-level norm-resolvent limit versus high-energy count | The leading coefficient of `N_kappa(k²)/(k log k)` is 2 at every finite positive kappa and 1 at the Dirichlet endpoint despite norm-resolvent convergence. Endpoint `zeta(2s)^2` does not become the finite-coupling zeta. | Complete finite-coupling two-term law and inclusive threshold convergence survive. The O(log k) remainder does not give C398's bounded-residual target exclusion. [Proof](../research_c399_c403/delta_comb/PROOF_PACKAGE.md) |
+| HEN-O385 | HCS-C401 fixed-n all-Frobenius trace representation, non-p-power degree and `d^n>q` | The positive finite defect from `q^(2r)` cannot equal a finite signed sum `Tr(F_i^r A_i)` for all r if every F_i is invertible: Cayley--Hamilton would propagate the zero tail backwards. Resonance `p=q=d=3,f=y³+y²,a=1,n=r=1` gives six points, not nine. | The exact nonresonant max-law and genuine diagonal rational zeta survive. Infinite-dimensional traces, corrected boundaries and resonant classification are not excluded universally. [Proof](../continuation_c399_c403_round2/henon_arithmetic/CONTRACT_SCOUT.md) |
+| HEN-O386 | HCS-C402 ordinary trace-class owner of the frozen signed sequence | An ordinary trace-class T with `Tr(T^n)=tau_n` for all n exists iff W is nilpotent. Otherwise `det(I-zT)*det(I-zW)=1` contradicts the zero of a nonconstant polynomial and entire Fredholm analyticity. | The same finite edge matrix gives all global residue traces and the rational reciprocal determinant. Other signed/super/regularized traces and physical operator spaces are not covered by this exclusion. [Proof](../continuation_c399_c403_round2/nonlinear_return/CONTRACT_SCOUT.md) |
+| HEN-O387 | HCS-C403 Schatten convergence outside the sharp range | For `q(1-2sigma)<=1`, `A_N-E_sigma` is not in S_q for any N, since A_N is finite rank and the classical limit is not in that ideal. Entrywise domination alone is not a Schatten estimate; the valid proof uses positive congruence. | Full sharp-range nonmultiplicative universality survives. No uniform rate over all slowly varying L, growing-index relative asymptotic, or target orbit correspondence is asserted. [Proof](../continuation_c399_c403_round2/spectral_regular_variation/PROOF_PACKAGE.md) |
+
+These are fixed-object source statements, preserved by the appropriate true
+coordinate/unitary identification together with its transported observable.
+Changing the domain, trace, clock, weight or operator ideal is a new contract.
+None is a universal exclusion of all dynamical or Hilbert--Pólya constructions.
+
+### Historical implementation defect: C108
+
+[Independent literal-map counterexample](../continuation_c399_c403_round2/nonlinear_return/BUG_FINDING_C108.md):
+the archived two-cycle producer solved the wrong equations. For the stated
+`F(z,w)=(w,w²-z/4)`, the correct four weights sum to `tau_2=0`, not
+`-1664/1725`. Quarantine that old trace and its directly dependent determinant
+prefix; do not use them as passed source evidence. This is an implementation
+defect with a new exact witness, not an extra paper or a general mathematical
+obstruction. The old snapshot is preserved and its other claims are not
+automatically judged by this focused finding.
+
 ## HCS-C394--HCS-C398 source-boundary register (2026-09-05)
 
 | ID | Candidate | Status | Exact obstruction or boundary | Surviving source theorem and scope |

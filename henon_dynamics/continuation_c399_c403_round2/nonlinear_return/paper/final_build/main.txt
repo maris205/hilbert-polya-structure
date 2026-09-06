@@ -1,0 +1,663 @@
+                 Finite-state residue traces for Hénon maps
+                    with polynomial coordinate weights
+
+
+                                         5 September 2026
+                                  Internal research manuscript C402
+
+
+
+                                              Abstract
+         We construct a finite matrix that represents every global residue trace of a complex
+     Hénon map with a fixed polynomial coordinate weight. For H(x, y) = (p(x) − ay, x), where
+     p is monic of degree d ≥ 2 and a ̸= 0, the weight at a point is q(x) with deg q ≤ m. The
+     cyclic fixed-point scheme at period n has length dn , but the matrix constructed here has size
+     (B + 1)2 , where B = ⌊max(0, m − d + 1)(d + 1)/(d − 1)2 ⌋ is independent of n. Its entries
+     are integer-coefficient polynomials in the parameters. The proof expands a global residue
+     into nearest-neighbour exponent flows and bounds each local flow by a column-stochastic
+     propagation argument. The signed stability trace is − Tr(W n ), and the associated generating
+     function is det(I − zW )−1 . All identities remain valid at degenerate parameters when the
+     trace is defined by the full local-residue sum. For quadratic maps and quadratic coordinate
+     weights, we obtain an explicit factorization of degree at most four. We also characterize when
+     this trace sequence has an ordinary trace-class representative: exactly when W is nilpotent.
+
+Keywords: Hénon maps; global residues; polynomial weights; transfer matrices; periodic points;
+dynamical determinants.
+
+
+1    Introduction
+Global sums over periodic points can be easier to compute than the individual points, but a
+finite computation at each period does not by itself give a finite representation valid at all
+periods. This distinction is explicit for a polynomial Hénon map. Its period-n orbit equations
+form a zero-dimensional complete intersection of length dn , where d is the degree of the nonlinear
+polynomial. A separate quotient algebra therefore gives a finite answer for every n, while its
+dimension grows with n. The question considered here is whether one fixed matrix can represent
+all of these answers for a prescribed polynomial coordinate weight.
+     The observable is the all-complex signed stability sum. At a nondegenerate fixed point of
+H , its denominator is det(I − DH n ), with no absolute value. The numerator is the product of
+   n
+
+a single one-variable polynomial q along the first coordinates of the orbit. At a multiple fixed
+point, the pointwise quotient is undefined. We use the sum of local Grothendieck residues as the
+definition at such a parameter. This choice retains the complete fixed scheme and makes the
+parameter dependence algebraic.
+
+Classical inputs. The global-residue algorithms of Cattani, Dickenstein, and Sturmfels [2,
+Theorem 2.3 and Lemma 4.2 of the author preprint] provide Laurent coefficient and Gröbner
+normal-form descriptions for a fixed polynomial system. Their pure-power initial-form hypothesis
+holds for the cyclic Hénon equations. The conversion from the cyclic Jacobian to the return
+derivative is the scalar cyclic Hill identity, contained in Molinari’s block-tridiagonal determinant
+
+
+
+                                                   1
+formula [3, Eq. (1) of the author preprint v3]. Both ingredients are used here with their original
+ownership.
+   A preceding time-ordered Hénon calculation in the accompanying research notes [4, Lemma 4
+and Theorem 5] already records the Hill relation for its family, the all-period unit-weight residue
+cancellation, a numerator given by the return-derivative trace, and a signed scheme-residue
+convention at degenerate points. The present result does not count any of these facts as a new
+contribution. Likewise, the Fredholm determinant argument used later is classical operator
+theory [1, Sec. 3 of the author manuscript].
+
+Uniform finite-state result. The additional step is a local bound in the Laurent expansion.
+Each term has a left-going and a right-going nonnegative exponent at every cyclic position.
+Nonvanishing imposes a system of nearest-neighbour inequalities. A column-stochastic matrix
+redistributes these exponents, and the number of sites that can reach a fixed site in k steps is at
+most 2k + 1. The resulting geometric series bounds every local exponent by a constant depending
+only on d and deg q. After this bound, the residue sum is the trace of a finite edge-state matrix.
+    More precisely, for every degree bound m we construct one matrix W of size (B + 1)2 , with
+                                    max(0, m − d + 1)(d + 1)
+                                                                        
+                                 B=                          ,
+                                            (d − 1)2
+such that the signed residue traces satisfy τn = − Tr(W n ) for all n ≥ 1. The same matrix works
+at every period, including periods one and two with their coincident neighbours. Its entries are
+polynomial in all source parameters, so specialization does not require a genericity assumption.
+The associated generating function is the reciprocal of det(I − zW ).
+    The comparison made here is between this uniform construction and the specific fixed-system
+residue and Hill inputs just cited. No assertion of global priority follows from that comparison.
+The theorem concerns the stated coordinate-weight observation on all complex fixed points. It
+does not construct a natural transfer operator for real dynamics. Sections 2–4 give the complete
+proof. Section 5 treats quadratic weights and the ordinary trace-class boundary, and Section 6
+records the scope and finite verification evidence.
+
+
+2    Cyclic fixed schemes and the main theorem
+Fix integers d ≥ 2 and m ≥ 0. Let
+                                    d−1                       m
+                                                                               a ∈ C∗ .
+                                    X                         X
+                    p(X) = X d +          pj X j ,   q(X) =         qj X j ,                      (2.1)
+                                    j=0                       j=0
+
+All coefficients in (2.1) are arbitrary complex numbers. The actual degree of q may be smaller
+than m, and q = 0 is allowed. The map and its one-step weight are
+
+                   H(x, y) = (p(x) − ay, x),         Q(x, y) = q(x) = q(π1 (x, y)).               (2.2)
+
+Thus Q depends only on the first coordinate. The map is a polynomial automorphism because
+a ̸= 0. All periods below refer to its original integer iteration.
+    For each n ≥ 1, use indices in Z/nZ and set
+
+                          Fn,i (x) = p(xi ) − xi+1 − axi−1 ,          0 ≤ i < n.                  (2.3)
+
+Incidences are added when neighbours coincide. In particular,
+
+              F1,0 (x0 ) = p(x0 ) − (1 + a)x0 ,                                                   (2.4)
+          F2,0 (x0 , x1 ) = p(x0 ) − (1 + a)x1 ,         F2,1 (x0 , x1 ) = p(x1 ) − (1 + a)x0 .   (2.5)
+
+
+                                                     2
+The cyclic scheme Zn cut out by (2.3) identifies with the fixed scheme of H n by
+
+                                    (x0 , . . . , xn−1 ) 7−→ (x0 , xn−1 ).                           (2.6)
+
+Indeed, the recurrence xi+1 = p(xi ) − axi−1 gives H i (x0 , xn−1 ) = (xi , xi−1 ). Conversely, the first
+coordinates of a fixed orbit give (2.3). These are polynomial maps on the coordinate rings and
+are inverse by the same recurrence, so the statement also holds for nonreduced schemes. In
+period one, the fixed point is (x0 , x0 ).
+    Write
+                                                        n−1
+                                                        Y
+                                           gn (x) =             q(xi ).                              (2.7)
+                                                        i=0
+When all fixed points of H n are nondegenerate, the pointwise signed stability trace is
+                                                     Qn−1        i
+                                                       i=0 q(π1 H P )
+                                         X
+                                                                       .                             (2.8)
+                                     P ∈Fix(H n )
+                                                    det(I − DH n (P ))
+
+Here Fix(H n ) is the set of fixed points with their chosen starting positions. A primitive orbit of
+length dividing n is not identified with a single point in this sum.
+Definition 2.1 (Trace at every parameter). For any parameters (2.1), define
+
+                                    ρn = ResFn (gn ),             τn = −ρn ,                         (2.9)
+
+where ResFn is the sum of the local Grothendieck residues at all finite common zeros of (2.3).
+The denominator order is Fn,0 , . . . , Fn,n−1 and the differential order is dx0 ∧ · · · ∧ dxn−1 . At a
+multiple zero the full local residue is used, rather than a quotient by a vanishing Jacobian or a
+deletion of the point. Define the formal generating function
+                                                                           
+                                                                X τn
+                                   Dp,a,q (z) = exp −                    zn .                     (2.10)
+                                                                n≥1
+                                                                    n
+
+    The finite complete-intersection property needed for this definition is proved in Lemma 3.1.
+The minus sign in (2.9) is forced by the return derivative, as proved in Lemma 3.2. Consequently
+(2.9) equals (2.8) whenever all fixed points at that particular period are nondegenerate. To
+interpret every coefficient of (2.10) by pointwise sums, this nondegeneracy condition must hold
+for every n. The residue definition needs no such condition.
+    Set
+                                                   M (d + 1)
+                                                            
+              M = max(0, m − d + 1),        B=                 ,     E = {0, . . . , B}2 . (2.11)
+                                                    (d − 1)2
+For nonnegative integers k, e, define a coefficient at infinity by
+
+                                                                 q(X)X k
+                                      ck,e (p, q) = [X −1 ]              .                          (2.12)
+                                                                 p(X)e+1
+
+The notation [X −1 ] refers to the Laurent expansion at infinity, not to an expansion at the origin.
+Let W be the matrix indexed by E with entries
+                                                            !
+                                                    ℓ+s ℓ
+                                 W(r,ℓ),(s,v) =         a cr+v,ℓ+s (p, q).                          (2.13)
+                                                     ℓ
+
+Theorem 2.2 (Period-independent finite-state representation). For every choice of (2.1) and
+every n ≥ 1, the residue in Definition 2.1 is well defined and
+                                                                                         1
+                ρn = Tr(W n ),        τn = − Tr(W n ),              Dp,a,q (z) =                .   (2.14)
+                                                                                   det(I − zW )
+
+                                                        3
+The same (B + 1)2 -dimensional matrix is used for all n. Each of its entries belongs to
+                                    Z[p0 , . . . , pd−1 , a, q0 , . . . , qm ].               (2.15)
+Each coefficient identity in (2.14) is compatible with arbitrary parameter specialization within
+(2.1). The generating function identity holds formally and defines an analytic germ at z = 0.
+    The dimension bound is sufficient, not asserted to be minimal. In particular, some edge
+states may not participate in any closed path. The theorem is an algebraic representation of the
+specified trace sequence. It does not identify W , −W , or an infinite-dimensional extension with
+a natural Perron operator.
+
+
+3     Residues, stability, and local coefficients
+3.1   Finite schemes and the normal-form residue
+Lemma 3.1. For every n ≥ 1 and every parameter choice, Zn is a finite complete intersection
+of length dn , with no common zero at infinity in the homogenized cyclic equations. For any
+polynomial g(x),
+                            ResFn (g) = [xd−1
+                                          0   · · · xd−1
+                                                     n−1 ] NFFn (g).                   (3.1)
+In particular, the residue of gn is a polynomial in the parameters.
+Proof. Choose any monomial order that first compares total degree. Since d ≥ 2, the leading
+monomial of Fn,i is xdi , including the two short-period cases (2.4)–(2.5). These leading monomials
+are pairwise relatively prime. The relatively prime leading-monomial criterion therefore shows
+that the Fn,i form a Gröbner basis. The standard monomials are exactly
+                                               j
+                                    xj00 · · · xn−1
+                                                 n−1
+                                                     ,        0 ≤ ji < d.
+They give a basis of the quotient algebra of size dn . An ideal of finite colength generated by n
+polynomials in n variables is a zero-dimensional complete intersection. Its scheme length is the
+dimension just computed.
+    The top homogeneous equations are xdi = 0 for all i. Their only common affine zero is the
+origin, so they have no common projective zero. This verifies the no-infinity hypothesis for
+the global residue. The pure-power initial-form residue formula [2, Lemma 4.2 of the author
+preprint] gives (3.1). The formula includes multiplicities through local residues and requires no
+reducedness assumption.
+    All reductions use monic polynomials, so the division procedure never divides by a parameter
+or a discriminant. Applying (3.1) to gn therefore gives a polynomial in the pj , a, and qj even at
+parameters where the fixed scheme is nonreduced.
+
+3.2   The sign in the return denominator
+At a cyclic point, put
+                                                             !
+                                                   vi −a
+                   vi = p′ (xi ),     Ai =               ,             Mn = An−1 · · · A0 .    (3.2)
+                                                   1 0
+
+The chronological order in (3.2) gives Mn = DH n (x0 , xn−1 ).
+Lemma 3.2 (Cyclic Hill sign). Let Jn = DFn be the cyclic Jacobian, with all coincident
+incidences added. Then
+                          det Jn = Tr(Mn ) − 1 − an = − det(I − Mn )                           (3.3)
+for every n ≥ 1. Hence the residue trace (2.9) agrees with the pointwise sum (2.8) on the
+nondegenerate locus.
+
+                                                         4
+Proof. For n ≥ 3, the cyclic matrix Jn has diagonal vi , right-neighbour entries −1, and left-
+neighbour entries −a. In the scalar cyclic formula of Molinari [3, Eq. (1) of the author preprint
+v3], substitute these entries. The two corner products contribute
+
+                                  (−1)n+1 (−1)n + (−a)n = −1 − an ,
+                                                                 
+
+
+and the transfer-product term is Tr(Mn ). Its nonzero off-diagonal assumptions hold since
+a ̸= 0. This gives the first equality in (3.3). Also det Ai = a, so det Mn = an . The identity
+det(I − M ) = 1 − Tr M + det M for a two-by-two matrix proves the second equality.
+    For n = 1, direct differentiation gives det J1 = v0 − 1 − a, while Tr M1 = v0 . For n = 2, the
+neighbours coincide and
+                                                         !
+                                v0    −(1 + a)
+                   J2 =                        ,                 Tr(A1 A0 ) = v0 v1 − 2a.
+                             −(1 + a)    v1
+
+Thus
+                           det J2 = v0 v1 − (1 + a)2 = Tr(A1 A0 ) − 1 − a2 .
+The sign is therefore independent of n.
+    At a simple common zero, the local residue of g is g/ det Jn . By (3.3), its negative equals
+g/ det(I − DH n ). Summing over the fixed points and using (2.6) proves the final assertion.
+
+3.3    A local exponent expansion
+The next formula separates the single-coordinate residue coefficients from the nearest-neighbour
+combinatorics. Choose a radius R large enough that
+
+                                |p(X)| > (1 + |a|)R             when |X| = R.                     (3.4)
+
+Such a choice exists since d ≥ 2. It depends on p, a, but not on n.
+Lemma 3.3. For each n ≥ 1, the global residue ρn is the convergent sum
+                                                   n−1
+                                                                 !
+                                 X                 Y     Li + Ri Li
+                ρn =                                             a cRi−1 +Li+1 , Li +Ri (p, q).   (3.5)
+                       L0 ,R0 ,...,Ln−1 ,Rn−1 ≥0 i=0
+                                                            Li
+
+If a product in this sum is nonzero, then with ei = Li + Ri it satisfies
+
+                          dei ≤ m − d + 1 + Ri−1 + Li+1                 (0 ≤ i < n).              (3.6)
+
+Proof. The global coefficient formula for a system with these pure-power initial forms [2, Theo-
+rem 2.3 of the author preprint] identifies its residue with the coefficient of x−1        −1
+                                                                                 0 · · · xn−1 in the
+expansion at infinity. Equivalently, on a sufficiently large product torus it is
+                                   1                           gn (x) dx0 · · · dxn−1
+                                          Z
+                         ρn =                                      Qn−1               ,           (3.7)
+                                 (2πi)n    |x0 |=···=|xn−1 |=R      i=0 Fn,i (x)
+
+where each circle has positive orientation and the factor order is as in Definition 2.1. In this
+pure-power setting the large-torus formula is the coefficient formula just cited. The lower degree
+terms may be expanded as convergent geometric series at large R, and regrouping the terms
+involving only xi gives
+                                                              Li
+                                                                  xR
+                                                     !
+                              1       X      Li + Ri aLi xi−1        i
+                                                                   i+1
+                                 =                                      .                     (3.8)
+                             Fn,i L ,R ≥0       Li      p(xi )Li +Ri +1
+                                           i   i
+
+Condition (3.4) makes this expansion uniformly absolutely convergent on the integration torus.
+For each fixed n, its finite product can therefore be integrated term by term. Uniformity of the
+whole product norm in n is not needed.
+
+                                                          5
+    The variable xi receives Ri−1 powers from its left neighbour and Li+1 powers from its right
+neighbour. Its one-variable integral is consequently cRi−1 +Li+1 ,Li +Ri . Multiplying the local
+factors proves (3.5).
+    For n = 1, both neighbouring factors use the same variable. Summing over L0 + R0 = e
+produces the coefficient eL0 =0 Le0 aL0 = (1 + a)e , as required by (2.4). For n = 2, the left and
+                           P
+
+right neighbours again coincide, but their exponents add in the same variable. Formula (3.5)
+therefore retains the correct two incidences without treating them as different coordinates.
+    Finally, if ck,e ̸= 0, the highest possible power at infinity in (2.12) cannot be below X −1 .
+Hence
+                                       m + k − d(e + 1) ≥ −1.                                 (3.9)
+Apply this necessary condition to each local factor of a nonzero product to obtain (3.6). No
+sufficiency claim is made for this degree condition.
+
+
+4    A uniform flow bound and finite-state closure
+A total-degree estimate would only bound the sum of the exponents by a quantity proportional to
+n. The finite-state construction instead requires a bound at each position. The one-dimensional
+geometry of the cyclic index set supplies that bound.
+Lemma 4.1 (Period-independent local flow bound). Let n ≥ 1, d ≥ 2, and µ ∈ Z. Suppose
+nonnegative integers Li , Ri , indexed cyclically, satisfy
+
+                         d(Li + Ri ) ≤ µ + Ri−1 + Li+1          (0 ≤ i < n).                  (4.1)
+
+If µ < 0, no such configuration exists. If µ = 0, every exponent is zero. If µ > 0, then for every
+i,
+                                                  µ(d + 1)
+                                       Li + Ri ≤           .                                  (4.2)
+                                                  (d − 1)2
+Proof. Set ei = Li + Ri . Summing (4.1) over the cyclic index set gives
+                                                 X
+                                       (d − 1)       ei ≤ nµ.                                 (4.3)
+                                                 i
+
+This is impossible for µ < 0. For µ = 0, nonnegativity forces all ei , and hence all Li , Ri , to
+vanish.
+    Assume now that µ > 0 and fix one configuration. Construct an n × n nonnegative matrix P
+column by column. If ej > 0, put Lj /ej in row j − 1 of column j and Rj /ej in row j + 1 of that
+column. Add the two contributions if the rows coincide. If ej = 0, put 1 in row j + 1 of column
+j. All unspecified entries are zero. Each column has sum one, and the zero-flow convention does
+not affect P e. Specifically,
+                                       (P e)i = Ri−1 + Li+1 .                               (4.4)
+The inequalities become de ≤ µ1 + P e, componentwise. Because P is nonnegative, iterating
+this inequality K times gives
+
+                                      µ K−1
+                                            d−k P k 1 + d−K P K e.
+                                        X
+                                 e≤                                                           (4.5)
+                                      d k=0
+
+   Every power of P is column-stochastic. Thus each of its entries lies between zero and one,
+and
+                                    ∥P K e∥∞ ≤ ∥e∥1 .                                   (4.6)
+Here n and the configuration are fixed. Since d > 1, the last term in (4.5) tends to zero as
+K → ∞. There is no need to bound ∥e∥1 uniformly in n at this stage.
+
+                                                 6
+    To control the first term, fix a row i. The support of P allows only steps between adjacent
+cyclic positions. If (P k )ij ̸= 0, then the cyclic distance between i and j is at most k. There are at
+most min(n, 2k+1) such starting columns j. Using the entrywise bound from column-stochasticity
+gives the row-sum estimate                        X
+                                       (P k 1)i =    (P k )ij ≤ 2k + 1.                           (4.7)
+                                                     j
+
+In particular, the proof does not mistake a column-stochastic matrix for a row-stochastic one.
+The same estimate is valid for n = 1, 2, where the adjacent positions may coincide.
+   Take K → ∞ in (4.5) and use (4.7). Then
+                                     µ X 2k + 1
+                              ei ≤
+                                     d k≥0 dk
+                                  µ          d      2d                   µ(d + 1)
+                                                                
+                                =               +                    =            ,               (4.8)
+                                  d        d − 1 (d − 1)2                (d − 1)2
+which proves (4.2).
+
+   The auxiliary matrix P depends on the exponent configuration. It is only a proof device,
+not a Markov model of the Hénon dynamics. Its entries are nonnegative even when p, a, q are
+complex. The quadratic case d = 2 is covered without a denominator d − 2.
+
+Proof of Theorem 2.2. Lemma 3.1 gives the finite scheme and defines the residue for all parame-
+ters. By Lemma 3.3, each nonzero product in (3.5) satisfies (4.1) with µ = m − d + 1. Lemma 4.1
+shows that either all products vanish, only the zero configuration contributes, or
+
+                                       0 ≤ Li , Ri ≤ Li + Ri ≤ B                                  (4.9)
+
+for every i. The integer part in (2.11) is justified because Li + Ri is an integer. Hence every
+nonzero term of the convergent residue sum lies in a single finite box independent of n.
+    Associate to a cyclic configuration the edge states
+
+                              Ei = (Ri−1 , Li ),             Ei+1 = (Ri , Li+1 ).                (4.10)
+
+If Ei = (r, ℓ) and Ei+1 = (s, v), the ith local factor in (3.5) is
+                                            !
+                                      ℓ+s ℓ
+                                          a cr+v,ℓ+s = WEi ,Ei+1 .
+                                       ℓ
+
+Conversely, any labelled closed sequence of edge states determines the Li as its second coordinates
+and the Ri as the first coordinates of the following states. This is inverse to (4.10), including for
+n = 1, 2. There is no quotient by cyclic rotation. Consequently
+                                       X
+                           ρn =                     WE0 ,E1 WE1 ,E2 · · · WEn−1 ,E0
+                                  E0 ,...,En−1 ∈E
+                                           n
+                              = Tr(W ).                                                          (4.11)
+
+Additional states or configurations inside the box with zero product do not affect this equality.
+When m − d + 1 ≤ 0, B = 0 and the same identity follows from the vanishing or the unique zero
+configuration already established.
+   For the coefficient ring, set T = 1/X. The reversed monic polynomial is
+
+                           pe(T ) = T d p(1/T ) = 1 + pd−1 T + · · · + p0 T d .
+
+Every coefficient of pe(T )−(e+1) is an integer-coefficient polynomial in the pj . Indeed, expand (1 +
+U )−(e+1) in powers of U = pd−1 T + · · · + p0 T d , whose constant term is zero. A given T -coefficient
+
+                                                         7
+receives only finitely many terms, each with an integer binomial coefficient. Formula (2.12)
+therefore gives an integer-coefficient polynomial in the pj , qj . The extra binomial factor and aℓ
+in (2.13) prove (2.15).
+    Definition 2.1 now gives τn = − Tr(W n ). The finite-dimensional identity
+                                                       X Tr(W n )
+                               − log det(I − zW ) =                    zn                    (4.12)
+                                                       n≥1
+                                                                n
+
+holds as a formal series. Substitution into (2.10) yields the reciprocal determinant in (2.14).
+Both the residue coefficients and the entries of W are polynomials, so the coefficient identities
+specialize at any parameter, including a drop in the actual degree of q. Finally det(I − zW ) has
+constant term one, hence its reciprocal is analytic near z = 0.
+
+Remark 4.2 (The low-degree threshold). For m < d−1, the negative-surplus case gives ρn = τn = 0
+for all n. For m = d − 1, only Li = Ri = 0 contributes and c0,0 = qd−1 . Thus
+
+                           n                n                               1
+                     ρn = qd−1 ,     τn = −qd−1 ,        Dp,a,q (z) =              .
+                                                                        1 − qd−1 z
+
+The subcritical vanishing is the classical Euler–Jacobi degree phenomenon [2, Corollary 1.18 of
+the author preprint]. It is not the additional uniform-flow assertion needed for larger m.
+
+
+5     Quadratic weights and ordinary trace representatives
+5.1   An explicit factorization for all quadratic weights
+Let
+                 p(X) = X 2 + bX + c,        q(X) = uX 2 + vX + w,              a ∈ C∗ .      (5.1)
+We use the degree bound m = 2, so B = 3 even if u = 0.
+
+Proposition 5.1. For all parameters (5.1),
+
+                    Dp,a,q (z)−1 = (1 − uz)(1 − auz) 1 − (v − bu)z − au2 z 2 .
+                                                                                  
+                                                                                              (5.2)
+
+In particular, this polynomial has degree at most four and is independent of c and w.
+
+Proof. The matrix (2.13) initially has the sixteen states {0, 1, 2, 3}2 . From (3.9), an entry from
+(r, ℓ) to (s, v) can be nonzero only when
+
+                                      r + v ≥ 2(ℓ + s) − 1.                                   (5.3)
+
+A state with no incoming edge or no outgoing edge cannot occur in a closed walk. Deleting it
+preserves all power traces and det(I − zW ): in the latter determinant its row or column has
+only the diagonal entry 1 after the corresponding zero row or column of W is used.
+   Using (5.3), delete the following groups in order, always in the current graph:
+
+                                   {(0, 3), (1, 3), (3, 0), (3, 1)},
+                                   {(0, 2), (2, 3), (2, 0), (3, 2)},
+                                   {(1, 2), (2, 1), (3, 3)}.
+
+In each group every listed state has no incoming or no outgoing edge before that group
+is removed. This follows directly from (5.3). The remaining five states, in order, are
+(0, 0), (0, 1), (1, 0), (1, 1), (2, 2).
+
+
+                                                  8
+   Put
+                                A = v − bu,       C = b2 u − bv − cu + w,
+                                                                                                (5.4)
+                                E = −b3 u + b2 v + 2bcu − bw − cv.
+
+The Laurent coefficients in (2.12) give the following remaining block directly:
+                                                                              
+                                       A     C                0    u          0
+                                     0
+                                            au               0    0          0
+                                W∗ =  C     E                u v − 2bu       u .              (5.5)
+                                                                               
+                                     au a(v − 2bu)
+                                                                               
+                                                              0    0          0
+                                       0    a2 u              0    0          0
+
+For example, c0,0 = A, c1,0 = C, c2,0 = E, c1,1 = u, and c2,1 = v − 2bu, which account for the
+displayed entries together with their binomial and a factors.
+    The state (2, 2) is still a noncyclic bridge: its only possible incoming edge is from (1, 0) and
+its only possible outgoing edge is to (0, 1), from which there is no return. Its presence affects
+neither a power trace nor det(I − zW∗ ). Among the other states, the only possible nontrivial
+cyclic blocks are                                              !
+                                                          A u
+                                    [u],      [au],               .                             (5.6)
+                                                         au 0
+After a simultaneous reordering of rows and columns, the matrix is block triangular with these
+blocks and the zero bridge block. Therefore
+
+              det(I − zW ) = det(I − zW∗ ) = (1 − uz)(1 − auz)(1 − Az − au2 z 2 ).
+
+Theorem 2.2 proves (5.2). All deletions and coefficient calculations were polynomial identities,
+so parameter values that remove further edges require no separate genericity argument.
+
+Example 5.2 (A nonconstant generating determinant). Take p(X) = X 2 − X + 2, a = 2/3,
+and q(X) = X 2 + X + 1. Then (5.2) becomes
+
+                            D(z)−1 = (1 − z)(1 − 2z/3)(1 − 2z − 2z 2 /3).
+
+The first five residue coefficients are
+                         11             61            359            2329             15611
+                  ρ1 =      ,    ρ2 =      ,   ρ3 =       ,   ρ4 =        ,    ρ5 =         .
+                          3             9              27             81               243
+These are obtained from the three blocks in (5.6), or equivalently from the logarithm of the
+displayed polynomial. The signed stability trace, when interpreted pointwise, is their negative.
+Thus the uniform theorem contains cases beyond the low-degree vanishing of Remark 4.2.
+
+Example 5.3 (A nonreduced fixed point). Let p(X) = X 2 + 1, a = 1, and q(X) = X 2 + X + 1.
+The period-one equation is (X − 1)2 = 0. At the fixed point (1, 1), det(I − DH) = 0, so the
+ordinary pointwise summand is undefined. The residue convention instead gives
+
+                                    (X 2 + X + 1) dX
+                    ρ1 = ResX=1                      = q ′ (1) = 3,             τ1 = −3.
+                                         (X − 1)2
+For all periods, Proposition 5.1 gives
+
+                                    D(z)−1 = (1 − z)2 (1 − z − z 2 ).
+
+Its residue coefficients begin 3, 5, 6, 9. These values include the degenerate scheme. They are not
+values assigned to the undefined pointwise quotient by cancelling or removing its denominator.
+
+                                                       9
+5.2    A complete ordinary trace-class boundary
+The finite-state residue formula does not itself supply an ordinary operator with traces τn . In
+particular, replacing W by −W would give (−1)n Tr(W n ), not − Tr(W n ) for every n. There is
+a complete criterion for the existence of any ordinary trace-class representative of the frozen
+sequence.
+Proposition 5.4. For fixed parameters (2.1), a trace-class operator T on some complex Hilbert
+space satisfies
+                              Tr(T n ) = τn    for every n ≥ 1                          (5.7)
+if and only if W is nilpotent.
+Proof. If T is trace class, its ordinary Fredholm determinant DT (z) = det(I − zT ) is entire, and
+near zero it has the trace expansion
+                                                                  
+                                                    X Tr(T n )
+                                 DT (z) = exp −                 zn .
+                                                    n≥1
+                                                          n
+
+These are the classical determinant properties summarized in Bornemann [1, Sec. 3, in particular
+Eq. (3.3) of the author manuscript]. By (5.7) and Theorem 2.2,
+                                      DT (z) det(I − zW ) = 1
+near zero. Both sides are entire functions, so the identity theorem extends the equality to all
+z ∈ C. If det(I − zW ) were nonconstant, it would have a complex zero, contradicting this
+identity. Hence det(I − zW ) = 1.
+    For a finite complex matrix, this last condition means that all eigenvalues are zero. Equiva-
+lently, its characteristic polynomial is a pure power of its variable, and the Cayley–Hamilton
+theorem implies that W is nilpotent. Conversely, if W is nilpotent then Tr(W n ) = 0 for every
+positive n. Thus all τn vanish, and T = 0 is a trace-class representative.
+
+    The criterion uses the classical obstruction that an ordinary Fredholm determinant is entire
+while a nonconstant reciprocal polynomial has a pole. It is a consequence of the specific residue
+sequence, not a separate construction of a dynamical operator. It does not exclude supertraces,
+distributional traces, different observables, or operators with absolute stability weights.
+
+
+6     Scope and reproducibility
+Theorem 2.2 replaces the period-dependent cyclic quotient algebras by a single edge-state matrix
+for a fixed map and coordinate weight. Its local bound is uniform in the period, but the matrix
+size still depends on the degree bound m. No minimal-dimension assertion is made. A different
+degree bound for the same polynomial can give a larger matrix with the same power traces and
+generating function.
+    The scope is tied to both the domain and the numerator. The residue includes every finite
+complex fixed point, with its scheme structure. Restricting to a real invariant set would change
+the sum. An absolute stability denominator is not the signed holomorphic denominator in
+(2.8). The argument also does not cover arbitrary two-variable weights, nonpolynomial weights,
+or compositions with a time-dependent polynomial. These changes are outside the theorem,
+irrespective of whether a finite representation might exist for some of them.
+    The quadratic calculation displays a loss of information in this observable: the coefficients c, w
+in (5.1) disappear from (5.2). The residue determinant therefore does not encode all parameters
+of the underlying map and weight. Its rationality, and its coefficient ring in (2.15), do not
+supply target Euler factors, root numbers, automorphy, a correspondence of zero divisors, or a
+Hilbert–Pólya realization.
+
+                                                   10
+Exact finite checks. The accompanying files exact_check.py and EXACT_CHECK_OUTPUT.
+json record exact symbolic checks performed during proof development. Across seven choices of
+p, q, a with d = 2, 3, 4, there are 27 comparisons through period five between the edge-matrix
+power traces and the normal-form coefficient in (3.1). Two nondegenerate fixed schemes are also
+checked by constructing quotient-algebra multiplication matrices and evaluating Tr(mgn m−1      det Jn ).
+The checks assert that this inverse exists in those examples. The output includes six symbolic
+Hill identities, for n = 1, . . . , 6, and a direct symbolic calculation of the quadratic determinant
+with free coefficients.
+    The stored run used Python 3.12.3 and SymPy 1.14.0 and exited successfully. These checks
+test signs, local coefficients, short periods, and an explicit degeneracy. They were not rerun
+to produce the manuscript, and they do not establish its all-period quantifier. That quantifier
+follows from Lemma 4.1 and the bijection (4.10). No empirical data or stochastic numerical
+experiment is used in the proof.
+
+Conclusion. The finite-state result follows from a local fact about every nonzero Laurent
+configuration: nearest-neighbour propagation and the factor d > 1 impose a period-independent
+exponent bound. This converts the complete global residue sum into the power trace of one
+polynomial matrix. The residue definition keeps the result valid at degenerate parameters, while
+the Hill sign fixes the reciprocal determinant and the ordinary trace-class boundary.
+
+
+Availability and declarations
+Data and code availability. The accompanying research package contains the complete proof,
+the symbolic checker, its saved exact output, and source-verification notes. The mathematical
+argument is contained in this manuscript. No empirical dataset is required.
+
+Ethics. This mathematical work involves no human participants, animal experiments, or
+personal data.
+
+Authorship, funding, and interests. This anonymous working draft does not identify
+human authors. CRediT assignments, funding information, and conflict-of-interest declarations
+have not been supplied and require author confirmation before any external submission.
+
+AI assistance. The proof development, code, manuscript, and internal checking in the research
+package used AI assistance. The internal checks do not constitute external peer review. No
+external submission is asserted.
+
+
+References
+[1] Folkmar Bornemann. On the numerical evaluation of Fredholm determinants. Mathematics
+    of Computation, 79(270):871–915, 2010. doi: 10.1090/S0025-5718-09-02280-7. URL https://
+    doi.org/10.1090/S0025-5718-09-02280-7. Published online in 2009. Author manuscript:
+    https://arxiv.org/abs/0804.2543.
+
+[2] Eduardo Cattani, Alicia Dickenstein, and Bernd Sturmfels. Computing multidimensional
+    residues. In Laureano González-Vega and Tomás Recio, editors, Algorithms in Algebraic Ge-
+    ometry and Applications, volume 143 of Progress in Mathematics, pages 135–164. Birkhäuser,
+    Basel, 1996. doi: 10.1007/978-3-0348-9104-2_8. URL https://doi.org/10.1007/
+    978-3-0348-9104-2_8. Author preprint: https://arxiv.org/abs/alg-geom/9404011
+    (1994).
+
+
+                                                  11
+[3] Luca Guido Molinari. Determinants of block tridiagonal matrices. Linear Algebra and
+    its Applications, 429(8–9):2221–2226, 2008. doi: 10.1016/j.laa.2008.06.015. URL https:
+    //doi.org/10.1016/j.laa.2008.06.015. Author preprint v3: https://arxiv.org/abs/
+    0712.0681v3.
+
+[4] Time-ordered Henon notes. HCS-C22: T1–T3 derivation package. Unpublished accompanying
+    research note, 2026. Dated 9 August 2026. Lemma 4 and Theorem 5. Repository file:
+    henon_dynamics/henon_time_ordered_ruelle_cocycle/DERIVATION_PACKAGE.md.
+
+
+
+
+                                           12
+

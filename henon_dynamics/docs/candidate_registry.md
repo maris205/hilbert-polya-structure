@@ -3,6 +3,39 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C399--HCS-C403 source-theorem register (2026-09-05)
+
+Five independent contracts are frozen in
+[the batch plan](../continuation_c399_c403_round2/BATCH_PLAN.md).
+Baseline `1667dfc0c24e10a8a3627e80f93e301538d18012`; evaluator v0.2.0,
+SHA256 `6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The five complete manuscripts total 59 pages. C399/C400 preserve their
+accepted original bytes; C401--C403 have non-author full-text reviews and
+two-fresh-directory, identical-PDF builds with all 36 new pages inspected.
+See [the five PDFs and release record](../continuation_c399_c403_round2/README.md).
+This source completion does not promote any target grade below.
+
+| Candidate | One complete source increment | Strict tuple | Evidence |
+|---|---|---|---|
+| HCS-C399 | Full finite-real Boole stability product, complete subcritical resonance divisor, critical nonmeromorphic germ and two-sided compensated limit; classical phase geometry and circle spectrum remain attributed. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof/PDF](../research_c399_c403/boole/BUILD_REPORT.md) · [evaluation](../continuation_c399_c403_round2/evaluations/route_a/HCS-C399/2026-09-05.yaml) |
+| HCS-C400 | Every finite positive harmonic delta-comb coupling has the two-term count with logarithmic error, heat/zeta/ideal consequences, norm-resolvent endpoint and noncommuting leading coefficients. The endpoint divisor identity is not transferred to finite coupling. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [proof/PDF](../research_c399_c403/delta_comb/BUILD_REPORT.md) · [evaluation](../continuation_c399_c403_round2/evaluations/route_a/HCS-C400/2026-09-05.yaml) |
+| HCS-C401 | Every nonresonant Hénon--Frobenius pair has exactly `max(q^(2r),d^n q^r)` distinct affine points. Both infinity lengths, sharp trace threshold, finite defect and slice/diagonal distinction hold uniformly in coefficients. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [proof](../continuation_c399_c403_round2/henon_arithmetic/CONTRACT_SCOUT.md) · [evaluation](../continuation_c399_c403_round2/evaluations/route_a/HCS-C401/2026-09-05.yaml) |
+| HCS-C402 | A period-independent integer-flow bound produces one finite edge matrix for every polynomial coordinate weight, with `tau_n=-Tr W^n` and reciprocal determinant for all periods and residue-defined degeneracies. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [proof](../continuation_c399_c403_round2/nonlinear_return/CONTRACT_SCOUT.md) · [evaluation](../continuation_c399_c403_round2/evaluations/route_a/HCS-C402/2026-09-05.yaml) |
+| HCS-C403 | Nonmultiplicative pointwise slowly varying divisibility Grams converge in every and only the sharp Schatten range to the classical LCM kernel, including quasi-Banach exponents. The limiting spectral law is explicitly inherited. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../continuation_c399_c403_round2/spectral_regular_variation/PROOF_PACKAGE.md) · [evaluation](../continuation_c399_c403_round2/evaluations/route_a/HCS-C403/2026-09-05.yaml) |
+
+C401/C403 remain source-local `ROUTE_A_EXPLORATORY`; the other three are
+`ROUTE_A_REJECTED`. All target A2/A3 fail, and the mandatory three arithmetic
+control categories are explicitly incomplete, not relabelled as passed.
+No Route B, target local data/Euler factors/root number/automorphy/zero divisor
+or Hilbert--Pólya claim follows. See
+[the complete evaluation scope](../continuation_c399_c403_round2/EVALUATION_SCOPE.md).
+Classical inputs and bounded novelty-search limitations are retained.
+
+The separate [C108 literal-map defect](../continuation_c399_c403_round2/nonlinear_return/BUG_FINDING_C108.md)
+quarantines its old second trace and directly dependent determinant prefix.
+The frozen C108 files and old evaluation are not rewritten; unrelated claims
+are not automatically invalidated by this focused correction.
+
 ## HCS-C394--HCS-C398 source-theorem register (2026-09-05)
 
 Frozen baseline `697518b6db90458f86f7916fbf397b8ad5ef2372`;

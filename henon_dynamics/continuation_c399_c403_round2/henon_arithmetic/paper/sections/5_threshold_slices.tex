@@ -1,0 +1,202 @@
+\section{The exact trace threshold and fixed-time slices}\label{sec:slices}
+
+For this section assume that $d$ is not a power of $p$. This hypothesis
+ensures that the count is available at every positive Frobenius power
+for any fixed $n$, with no missing resonant coefficient in a generating
+series.
+
+\subsection{Compactly supported trace and its exact defect}
+
+Fix a prime $\ell\ne p$. The isomorphism $H^{-n}$ and the finite
+morphism $\Phi_r$ are proper, so their composite acts by pullback on
+compactly supported \texorpdfstring{\'etale}{etale} cohomology. Define
+\begin{equation}\label{eq:cohomtrace}
+ T_H(n,r)=\sum_{i=0}^4(-1)^i
+ \Tr\!\left((H^{-n}\circ\Phi_r)^*;
+ H_c^i(\A^2_k,\Ql)\right).
+\end{equation}
+The classical cohomology computation gives
+\begin{equation}\label{eq:affinecohom}
+ H_c^i(\A^2_k,\Ql)=
+ \begin{cases}\Ql(-2),&i=4,\\0,&i\ne4.\end{cases}
+\end{equation}
+Indeed, acyclicity of affine space and Poincar\'e duality give
+\eqref{eq:affinecohom}; see the inputs cited in
+Section~\ref{sec:context}. A polynomial automorphism has degree one
+and acts as one on this top group. The power morphism has degree $Q^2$
+and acts as $Q^2$. This can also be computed on $\Pj^2$: Frobenius
+pulls a hyperplane class back to $Q$ times itself, and hence its square
+to $Q^2$ times itself; the top compactly supported group of $\A^2$
+identifies with that top projective group. Thus
+\begin{equation}\label{eq:tracevalue}
+ T_H(n,r)=q^{2r}.
+\end{equation}
+This cohomological calculation interprets, but does not prove, the
+geometric count.
+
+\begin{proposition}[Sharp trace-agreement threshold]\label{prop:threshold}
+For each fixed $n\geq1$, put
+\begin{equation}\label{eq:Rn}
+ R_n=\left\lfloor\log_q(d^n)\right\rfloor.
+\end{equation}
+Then
+\begin{equation}\label{eq:defect}
+ M_H(n,r)-T_H(n,r)=
+ \begin{cases}
+ d^nq^r-q^{2r}>0,&1\leq r\leq R_n,\\
+ 0,&r\geq R_n+1.
+ \end{cases}
+\end{equation}
+The first positive integer at which equality occurs, and the first
+integer from which equality always holds, are both $R_n+1$.
+In particular, this threshold equals
+$n\log_qd+O(1)$ as $n\to\infty$.
+\end{proposition}
+
+\begin{proof}
+The number $\log_q(d^n)$ is not an integer, since an integer value
+would give a resonance excluded by Corollary~\ref{cor:allclocks}.
+Thus $q^r<d^n$ holds exactly for positive integers $r\leq R_n$,
+and $q^r>d^n$ holds exactly for $r\geq R_n+1$. Combining
+Theorem~\ref{thm:main} with \eqref{eq:tracevalue} gives
+\eqref{eq:defect}. The inequality is strict at every integer before
+$R_n+1$, and equality holds at every later integer, proving both
+threshold statements. Finally,
+$R_n+1=n\log_qd+\theta_n$ with $0<\theta_n<1$, which proves the
+stated asymptotic without an unspecified coefficient-dependent error.
+\end{proof}
+
+For example, the all-clock degree family contains every quadratic map
+\eqref{eq:map} in odd characteristic and every cubic map of that form
+in characteristic two. Proposition~\ref{prop:threshold} computes an
+exact source-system threshold in these families. It does not assert
+that iteration-dependent thresholds or eventual trace agreement are
+new phenomena.
+
+\subsection{Fixed-H\'enon-time Frobenius slices}
+
+\begin{definition}\label{def:slice}
+For fixed $n\geq1$, the Frobenius slice generating function is
+\begin{equation}\label{eq:slicedef}
+ \mathcal Z_{H,n}(t)=
+ \exp\!\left(\sum_{r\geq1}M_H(n,r)\frac{t^r}{r}\right)
+ \in\mathbb Q[[t]].
+\end{equation}
+The word ``slice'' records that $n$ stays fixed while $r$ varies.
+\end{definition}
+
+\begin{proposition}[Slice formula and transcendence]\label{prop:slice}
+For every $n\geq1$,
+\begin{equation}\label{eq:sliceformula}
+ \mathcal Z_{H,n}(t)=\frac{\exp(P_n(t))}{1-q^2t},
+ \qquad
+ P_n(t)=\sum_{r=1}^{R_n}(d^nq^r-q^{2r})\frac{t^r}{r}.
+\end{equation}
+If $d^n<q$, then $P_n=0$ and the slice is rational. If $d^n>q$,
+then the slice is transcendental over $\C(t)$.
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:defect}, the logarithm in \eqref{eq:slicedef} is the sum of
+\[
+ \sum_{r\geq1}q^{2r}\frac{t^r}{r}=-\log(1-q^2t)
+\]
+and the finite polynomial $P_n(t)$. Exponentiating the formal identity
+gives \eqref{eq:sliceformula}. If $d^n<q$, then $R_n=0$ and the finite
+sum is empty.
+
+Suppose $d^n>q$. Then $R_n\geq1$, and every coefficient appearing
+in $P_n$ is positive by \eqref{eq:defect}. In particular $P_n$ is a
+nonconstant real polynomial with positive leading coefficient. We give
+an elementary proof that $\exp(P_n)$ is transcendental. If it were
+algebraic over $\C(t)$, clearing the denominators of an algebraic
+relation would give
+\begin{equation}\label{eq:algebraicrelation}
+ \sum_{j=0}^{J}b_j(t)\exp(jP_n(t))=0,
+ \qquad b_j\in\C[t],\quad b_J\not\equiv0,
+\end{equation}
+with $J\geq1$. A relation holding as a formal series at zero holds
+analytically near zero, because each term is entire, and hence holds
+everywhere by the identity theorem. For all sufficiently large positive
+real $t$, divide \eqref{eq:algebraicrelation} by
+$b_J(t)\exp(JP_n(t))$ to obtain
+\[
+ 1+\sum_{j=0}^{J-1}
+ \frac{b_j(t)}{b_J(t)}\exp(-(J-j)P_n(t))=0.
+\]
+Each rational quotient has at most polynomial growth on this ray.
+Since $P_n(t)\to+\infty$ with positive polynomial leading term,
+each summand after the $1$ tends to zero. The limit would be $1=0$,
+a contradiction. Thus $\exp(P_n)$ is transcendental. Multiplying it
+by the nonzero rational function $(1-q^2t)^{-1}$ preserves
+transcendence, proving the assertion about the slice.
+\end{proof}
+
+The defining equations in \eqref{eq:equalizer} change with $r$.
+Definition~\ref{def:slice} therefore does not start from the rational
+points of one fixed variety. The classical fixed-variety rationality
+theorem of Dwork~\cite{dwork1960rationality} imposes no rationality
+conclusion on this construction. When $d^n<q$, the resulting function
+does happen to coincide with the Hasse--Weil zeta function of $\A^2$;
+when $d^n>q$, Proposition~\ref{prop:slice} proves its transcendence.
+The construction also differs from the cohomologically defined zeta
+function discussed in Section~\ref{sec:context}. Its defining clock
+must be specified even when two resulting rational functions coincide.
+% ref:dwork1960rationality; anchor:section:fixed-variety-rationality-setting
+
+\subsection{A finite-dimensional trace obstruction}
+
+\begin{proposition}[No invertible-Frobenius weighted trace for a defective slice]
+\label{prop:traceobstruction}
+Fix $n\geq1$ with $d^n>q$. There do not exist finitely many
+finite-dimensional vector spaces $V_i$ over a characteristic-zero field,
+endomorphisms $A_i$ and invertible endomorphisms $F_i$ of $V_i$, and
+signs $\epsilon_i\in\{1,-1\}$ such that
+\begin{equation}\label{eq:weightedtrace}
+ M_H(n,r)=\sum_i\epsilon_i\Tr(F_i^r A_i)
+ \quad\text{for every }r\geq1.
+\end{equation}
+No commutation condition on $F_i$ and $A_i$ is imposed.
+\end{proposition}
+
+\begin{proof}
+Suppose \eqref{eq:weightedtrace} holds. For each $i$, write the
+characteristic polynomial of $F_i$ as
+\[
+ \chi_i(z)=z^{m_i}+c_{i,m_i-1}z^{m_i-1}+\cdots+c_{i,0}.
+\]
+Invertibility of $F_i$ implies $c_{i,0}\ne0$; zero-dimensional spaces
+may be omitted. By Cayley--Hamilton, $\chi_i(F_i)=0$. Multiplying
+on the left by $F_i^r$, on the right by $A_i$, and taking the trace
+shows that $u_{i,r}=\Tr(F_i^rA_i)$ satisfies the recurrence with
+characteristic polynomial $\chi_i$ for all $r\geq1$.
+This operation does not move $A_i$ past $F_i$, which is why no
+commutation is required.
+
+Let $\mathcal E$ denote the forward shift of a sequence indexed by
+$r\geq1$. The polynomial
+\[
+ \chi(z)=(z-q^2)\prod_i\chi_i(z)
+\]
+has nonzero constant coefficient and annihilates
+\[
+ v_r=\sum_i\epsilon_i u_{i,r}-q^{2r}=M_H(n,r)-q^{2r}.
+\]
+Indeed, each summand is annihilated by one of the factors of
+$\chi(\mathcal E)$, and the polynomial shift factors commute.
+Writing $\chi(z)=b_0+b_1z+\cdots+b_Lz^L$ gives
+\begin{equation}\label{eq:backward}
+ b_0v_r+b_1v_{r+1}+\cdots+b_Lv_{r+L}=0,
+ \qquad r\geq1,\qquad b_0\ne0.
+\end{equation}
+By Proposition~\ref{prop:threshold}, $v_r=0$ for every
+$r\geq R_n+1$. Substituting $r=R_n$ into \eqref{eq:backward}
+therefore gives $v_{R_n}=0$. Repeating with $r=R_n-1$ and then
+decreasing $r$ one at a time proves $v_r=0$ for every $r\geq1$.
+But $v_1=d^nq-q^2>0$, a contradiction in a characteristic-zero field.
+\end{proof}
+
+The obstruction is both finite-dimensional and all-clock. It permits
+eventual trace agreement, as \eqref{eq:defect} already demonstrates.
+It also leaves infinite-dimensional constructions and explicit boundary
+corrections outside its conclusion.

@@ -1,0 +1,149 @@
+\section{Normalization, singular values, and admissible examples}
+\label{sec:consequences}
+
+\subsection{Normalization by cumulative coefficient energy}
+
+The natural cumulative normalization is
+\begin{equation}
+ F(N)=\sum_{k\le N}|a(k)|^2,\qquad
+ C_N=F(N)^{-1}T_N^*T_N.
+ \label{eq:cumulative-normalization}
+\end{equation}
+
+\begin{corollary}
+\label{cor:cumulative}
+Under the standing assumptions,
+$\opnorm{C_N-E_\sigma}\to0$. For every $q>0$ with $q\rho>1$,
+\begin{equation}
+ \qnorm{C_N-E_\sigma}\longrightarrow0.
+ \label{eq:cumulative-ideal}
+\end{equation}
+For $q\rho\le1$, $C_N-E_\sigma\notin\Sq$ for every $N$.
+\end{corollary}
+
+\begin{proof}
+Proposition~\ref{prop:entry-limit} gives
+\begin{equation}
+ C_N=c_N A_N,\qquad
+ c_N=\frac{N^\rho L(N)^2}{\rho F(N)}\longrightarrow1.
+ \label{eq:scalar-normalization}
+\end{equation}
+The scalars $c_N$ are positive and bounded: they converge for large
+$N$, and only finitely many initial values remain. Theorem~\ref{thm:main}
+also gives uniform boundedness of $\opnorm{A_N}$. Thus
+\[
+ \opnorm{C_N-E_\sigma}
+ \le |c_N-1|\opnorm{A_N}+\opnorm{A_N-E_\sigma}
+ \longrightarrow0.
+\]
+For every $0<\eta<\rho$, the eigenvalues of $C_N$ satisfy the
+same type of uniform bound $C j^{-\eta}$, by
+\eqref{eq:scalar-normalization} and Corollary~\ref{cor:tails}.
+If $q\rho>1$, choose $\eta$ as in~\eqref{eq:eta-choice} and
+repeat the singular-value dominated-convergence argument of
+Section~\ref{sec:ideal}. This proves
+\eqref{eq:cumulative-ideal} also when $q<1$. The negative statement
+uses finite rank and Theorem~\ref{thm:classical}, exactly as before.
+\end{proof}
+
+\subsection{Ordered singular values and spectral moments}
+
+\begin{corollary}
+\label{cor:singular-values}
+For every fixed $j\ge1$,
+\begin{equation}
+ \frac{s_j(T_N)^2}{F(N)}\longrightarrow
+ \lambda_j(E_\sigma)>0.
+ \label{eq:fixed-index}
+\end{equation}
+After zero extension, the errors even satisfy
+\begin{equation}
+ \sup_{j\ge1}
+ \left|\frac{s_j(T_N)^2}{F(N)}-\lambda_j(E_\sigma)\right|
+ \longrightarrow0.
+ \label{eq:absolute-uniform}
+\end{equation}
+For every real $q>0$ with $q\rho>1$,
+\begin{equation}
+ \sum_{j\ge1}\left(\frac{s_j(T_N)^2}{F(N)}\right)^q
+ \longrightarrow\sum_{j\ge1}\lambda_j(E_\sigma)^q.
+ \label{eq:moments}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The eigenvalues of $C_N$ are precisely $s_j(T_N)^2/F(N)$.
+Apply~\eqref{eq:eigen-lipschitz} and
+Corollary~\ref{cor:cumulative} to obtain
+\eqref{eq:absolute-uniform}, hence~\eqref{eq:fixed-index}.
+The strict positivity of every fixed limiting eigenvalue follows
+from positivity, compactness, and injectivity of $E_\sigma$ on
+the infinite-dimensional space $\Hsp$, as stated in
+Theorem~\ref{thm:classical}.
+
+For the last assertion, choose $\eta\in(1/q,\rho)$.
+The proof of Corollary~\ref{cor:cumulative} gives
+$\lambda_j(C_N)\le Cj^{-\eta}$ uniformly in $N,j$, and
+Corollary~\ref{cor:tails} supplies the corresponding bound for
+$E_\sigma$. Pointwise convergence of the ordered eigenvalues
+and dominated convergence with the summable sequence
+$C^qj^{-\eta q}$ prove~\eqref{eq:moments}.
+\end{proof}
+
+Equation~\eqref{eq:absolute-uniform} is an absolute-error statement.
+It does not assert a relative asymptotic uniformly over indices growing
+with $N$. In particular, the finite matrix has zero eigenvalues beyond
+its rank, whereas every fixed eigenvalue of $E_\sigma$ is positive.
+For fixed $j$, combining~\eqref{eq:fixed-index} with
+\eqref{eq:energy} does give
+\begin{equation}
+ s_j(T_N)^2\sim
+ \frac{\lambda_j(E_\sigma)}{\rho}N^\rho L(N)^2.
+ \label{eq:fixed-index-asymptotic}
+\end{equation}
+No joint $j,N$ limit or new formula for the known LCM spectral
+constant is needed for this conclusion.
+
+\subsection{Nonmultiplicative and oscillatory examples}
+
+For every $\beta\in\mathbb R$, the function
+\begin{equation}
+ L_\beta(x)=(1+\log x)^\beta,\qquad x\ge1,
+ \label{eq:log-example}
+\end{equation}
+is positive and continuous, with positive lower and finite upper
+bounds on compact intervals. For fixed $t>0$,
+\[
+ \frac{L_\beta(tx)}{L_\beta(x)}
+ =\left(1+\frac{\log t}{1+\log x}\right)^\beta
+ \longrightarrow1.
+\]
+For $\beta=1$, it is already nonmultiplicative on the integers:
+\[
+ L_1(2)L_1(3)
+ =1+\log6+\log2\log3\ne1+\log6=L_1(6).
+\]
+Since the power factor $k^{-\sigma}$ is completely multiplicative,
+the same comparison shows that $a(k)=k^{-\sigma}L_1(k)$ is not
+multiplicative even at the coprime pair $2,3$.
+
+A bounded example with no limiting value is
+\begin{equation}
+ L_{\mathrm{osc}}(x)=2+\sin\bigl(\log\log(e+x)\bigr).
+ \label{eq:oscillatory-example}
+\end{equation}
+It lies between one and three. For each fixed $t>0$,
+\[
+ \log\log(e+tx)-\log\log(e+x)
+ =\log\left(\frac{\log(e+tx)}{\log(e+x)}\right)
+ \longrightarrow0.
+\]
+The sine function is Lipschitz and the denominator
+$L_{\mathrm{osc}}(x)$ is at least one, so
+$L_{\mathrm{osc}}(tx)/L_{\mathrm{osc}}(x)\to1$.
+The inner phase is continuous, increasing, and unbounded, hence
+there are sequences tending to infinity on which the sine equals
+$1$ and $-1$, respectively. Thus the slowly varying factor need
+not converge. Both examples satisfy all hypotheses of
+Theorem~\ref{thm:main}; an eventual constant is not being substituted
+for slow variation.

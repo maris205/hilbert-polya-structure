@@ -1,0 +1,151 @@
+\section{Positive congruence and uniform spectral control}
+\label{sec:tails}
+
+\subsection{An \texorpdfstring{$N$}{N}-independent diagonal majorant}
+
+\begin{proposition}
+\label{prop:congruence}
+For every $0<\eta<\rho$, put
+\begin{equation}
+ D_\eta=\diag\{m^{-\eta/2}:m\ge1\}.
+ \label{eq:diagonal}
+\end{equation}
+There are positive finite-rank operators $B_N$ and a constant
+$M=M(\sigma,L,\eta)$ such that
+\begin{equation}
+ A_N=D_\eta B_ND_\eta,\qquad
+ \sup_N\opnorm{B_N}\le M.
+ \label{eq:factorization}
+\end{equation}
+In particular,
+\begin{equation}
+ 0\le A_N\le M D_\eta^2,\qquad
+ 0\le E_\sigma\le M D_\eta^2.
+ \label{eq:operator-majorant}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Choose $\varepsilon>0$ so that $\eta+2\varepsilon<\rho$.
+Define the finite matrix, extended by zero,
+\begin{equation}
+ B_N(m,n)=(mn)^{\eta/2}A_N(m,n).
+ \label{eq:BN}
+\end{equation}
+On the first $N$ coordinates this is a congruence of $A_N$ by
+the positive diagonal matrix with entries $m^{\eta/2}$. Thus
+$B_N$ is positive. This definition is finite-dimensional and does
+not invoke an unbounded inverse of $D_\eta$ on $\Hsp$.
+
+Set
+\begin{equation}
+ s=\sigma+\varepsilon+\eta/2<1/2.
+ \label{eq:shift}
+\end{equation}
+Proposition~\ref{prop:entry-bound} gives
+$0\le B_N(m,n)\le C E_s(m,n)$ for all indices, with $C$
+independent of $N$. If $u,v$ are finitely supported complex sequences,
+write $|u|=(|u_m|)_m$ and similarly for $v$. Nonnegativity of the
+entries implies
+\begin{align}
+ |\inner{u}{B_Nv}|
+ &\le C\inner{|u|}{E_s|v|}\notag\\
+ &\le C\opnorm{E_s}\opnorm{u}\opnorm{v}.
+ \label{eq:bilinear}
+\end{align}
+The boundedness of $E_s$ follows from Theorem~\ref{thm:classical}.
+Density therefore gives $\opnorm{B_N}\le M:=C\opnorm{E_s}$
+uniformly in $N$. Direct comparison of matrix entries proves
+$A_N=D_\eta B_ND_\eta$. Since $B_N$ is positive and bounded by
+$M I$, this factorization yields $0\le A_N\le M D_\eta^2$.
+
+For any finitely supported $u$, Proposition~\ref{prop:entry-limit}
+permits passage to the limit in its finite quadratic form:
+\[
+ 0\le\inner{u}{E_\sigma u}
+ =\lim_{N\to\infty}\inner{u}{A_Nu}
+ \le M\inner{u}{D_\eta^2u}.
+\]
+Both $E_\sigma$ and $D_\eta^2$ are bounded operators, so density
+extends the inequality to every $u\in\Hsp$. This proves the
+second majorant in~\eqref{eq:operator-majorant}.
+\end{proof}
+
+\begin{corollary}[Uniform eigenvalue tails]
+\label{cor:tails}
+For every $0<\eta<\rho$, the bounds~\eqref{eq:main-tail} hold.
+\end{corollary}
+
+\begin{proof}
+The positive compact operator $D_\eta^2$ has ordered eigenvalues
+$j^{-\eta}$. Apply the min--max principle to
+\eqref{eq:operator-majorant}.
+\end{proof}
+
+The route from entries to spectrum in this argument is important.
+The entrywise estimate is used in the bilinear-form bound
+\eqref{eq:bilinear}; it does not directly order the two positive
+matrices. The uniform norm bound on the positive congruence then
+produces the genuine operator inequality
+\eqref{eq:operator-majorant}.
+
+\subsection{Finite heads and compact tails}
+
+\begin{proposition}
+\label{prop:operator-convergence}
+The normalized Gram operators converge in operator norm:
+\begin{equation}
+ \opnorm{A_N-E_\sigma}\longrightarrow0.
+ \label{eq:operator-limit}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix any $\eta\in(0,\rho)$ and take $B_N,M$ from
+Proposition~\ref{prop:congruence}. Let $P_K$ project onto the
+first $K$ coordinates and set $Q_K=I-P_K$. Since
+$\opnorm{D_\eta}=1$ and
+$\opnorm{Q_KD_\eta}=(K+1)^{-\eta/2}$, the factorization gives
+\begin{equation}
+ \opnorm{Q_KA_N}
+ \le M(K+1)^{-\eta/2}.
+ \label{eq:one-sided-tail}
+\end{equation}
+The same estimate holds for $A_NQ_K$ by self-adjointness. Using
+$A_N-P_KA_NP_K=Q_KA_N+P_KA_NQ_K$, we obtain
+\begin{equation}
+ \opnorm{A_N-P_KA_NP_K}
+ \le2M(K+1)^{-\eta/2},
+ \label{eq:uniform-operator-tail}
+\end{equation}
+uniformly in $N$.
+
+The operator $E_\sigma$ is compact by
+Theorem~\ref{thm:classical}, and $P_K$ converges strongly to the
+identity. Hence
+\begin{equation}
+ \opnorm{E_\sigma-P_KE_\sigma P_K}\longrightarrow0
+ \qquad(K\to\infty).
+ \label{eq:limit-tail}
+\end{equation}
+One may see this directly by first approximating $E_\sigma$ in
+operator norm by a finite-rank operator; strong convergence of the
+projections is uniform on the finitely many vectors in a finite-rank
+representation, and then the approximation error is made arbitrarily
+small.
+
+For each fixed $K$, entrywise convergence on the $K$ by $K$ head
+implies
+$\opnorm{P_K(A_N-E_\sigma)P_K}\to0$. The triangle inequality
+with~\eqref{eq:uniform-operator-tail} gives
+\begin{align*}
+ \limsup_{N\to\infty}\opnorm{A_N-E_\sigma}
+ \le 2M(K+1)^{-\eta/2}
+      +\opnorm{E_\sigma-P_KE_\sigma P_K}.
+\end{align*}
+Let $K\to\infty$ to conclude~\eqref{eq:operator-limit}.
+\end{proof}
+
+Thus operator-norm convergence is supplied by a uniform tail estimate
+and finite-dimensional convergence. Entrywise convergence alone is
+not being used as a substitute for this argument.

@@ -1,0 +1,122 @@
+\section{Cyclic fixed schemes and the main theorem}\label{sec:setup}
+
+Fix integers $d\ge2$ and $m\ge0$. Let
+\begin{equation}\label{eq:parameters}
+ p(X)=X^d+\sum_{j=0}^{d-1}p_jX^j,
+ \qquad q(X)=\sum_{j=0}^{m}q_jX^j,
+ \qquad a\in\C^*.
+\end{equation}
+All coefficients in \eqref{eq:parameters} are arbitrary complex numbers.
+The actual degree of $q$ may be smaller than $m$, and $q=0$ is allowed.
+The map and its one-step weight are
+\begin{equation}\label{eq:map}
+ H(x,y)=(p(x)-ay,x),\qquad Q(x,y)=q(x)=q(\pi_1(x,y)).
+\end{equation}
+Thus $Q$ depends only on the first coordinate. The map is a polynomial
+automorphism because $a\ne0$. All periods below refer to its original
+integer iteration.
+
+For each $n\ge1$, use indices in $\Z/n\Z$ and set
+\begin{equation}\label{eq:cyclic}
+ F_{n,i}(\xx)=p(x_i)-x_{i+1}-a x_{i-1},
+ \qquad 0\le i<n.
+\end{equation}
+Incidences are added when neighbours coincide. In particular,
+\begin{align}
+ F_{1,0}(x_0)&=p(x_0)-(1+a)x_0,\label{eq:period-one}\\
+ F_{2,0}(x_0,x_1)&=p(x_0)-(1+a)x_1,
+ &F_{2,1}(x_0,x_1)&=p(x_1)-(1+a)x_0.\label{eq:period-two}
+\end{align}
+The cyclic scheme $Z_n$ cut out by \eqref{eq:cyclic} identifies with the
+fixed scheme of $H^n$ by
+\begin{equation}\label{eq:scheme-correspondence}
+ (x_0,\ldots,x_{n-1})\longmapsto (x_0,x_{n-1}).
+\end{equation}
+Indeed, the recurrence $x_{i+1}=p(x_i)-a x_{i-1}$ gives
+$H^i(x_0,x_{n-1})=(x_i,x_{i-1})$. Conversely, the first coordinates of a
+fixed orbit give \eqref{eq:cyclic}. These are polynomial maps on the
+coordinate rings and are inverse by the same recurrence, so the statement
+also holds for nonreduced schemes. In period one, the fixed point is
+$(x_0,x_0)$.
+
+Write
+\begin{equation}\label{eq:numerator}
+ g_n(\xx)=\prod_{i=0}^{n-1}q(x_i).
+\end{equation}
+When all fixed points of $H^n$ are nondegenerate, the pointwise signed
+stability trace is
+\begin{equation}\label{eq:pointwise-trace}
+ \sum_{P\in\Fix(H^n)}
+ \frac{\prod_{i=0}^{n-1}q(\pi_1H^iP)}{\det(I-DH^n(P))}.
+\end{equation}
+Here $\Fix(H^n)$ is the set of fixed points with their chosen starting
+positions. A primitive orbit of length dividing $n$ is not identified
+with a single point in this sum.
+
+\begin{definition}[Trace at every parameter]\label{def:residue-trace}
+For any parameters \eqref{eq:parameters}, define
+\begin{equation}\label{eq:residue-trace}
+ \rho_n=\Res_{F_n}(g_n),\qquad \tau_n=-\rho_n,
+\end{equation}
+where $\Res_{F_n}$ is the sum of the local Grothendieck residues at all
+finite common zeros of \eqref{eq:cyclic}. The denominator order is
+$F_{n,0},\ldots,F_{n,n-1}$ and the differential order is
+$dx_0\wedge\cdots\wedge dx_{n-1}$. At a multiple zero the full local
+residue is used, rather than a quotient by a vanishing Jacobian or a
+deletion of the point. Define the formal generating function
+\begin{equation}\label{eq:generating-function}
+ D_{p,a,q}(z)=\exp\left(-\sum_{n\ge1}\frac{\tau_n}{n}z^n\right).
+\end{equation}
+\end{definition}
+
+The finite complete-intersection property needed for this definition is
+proved in Lemma~\ref{lem:normal-form}. The minus sign in
+\eqref{eq:residue-trace} is forced by the return derivative, as proved in
+Lemma~\ref{lem:hill}. Consequently \eqref{eq:residue-trace} equals
+\eqref{eq:pointwise-trace} whenever all fixed points at that particular
+period are nondegenerate. To interpret every coefficient of
+\eqref{eq:generating-function} by pointwise sums, this nondegeneracy
+condition must hold for every $n$. The residue definition needs no such
+condition.
+
+Set
+\begin{equation}\label{eq:state-bound}
+ M=\max(0,m-d+1),\qquad
+ B=\left\lfloor\frac{M(d+1)}{(d-1)^2}\right\rfloor,
+ \qquad \mathcal E=\{0,\ldots,B\}^2.
+\end{equation}
+For nonnegative integers $k,e$, define a coefficient at infinity by
+\begin{equation}\label{eq:local-coefficient}
+ c_{k,e}(p,q)=[X^{-1}]\frac{q(X)X^k}{p(X)^{e+1}}.
+\end{equation}
+The notation $[X^{-1}]$ refers to the Laurent expansion at infinity,
+not to an expansion at the origin. Let $W$ be the matrix indexed by
+$\mathcal E$ with entries
+\begin{equation}\label{eq:edge-matrix}
+ W_{(r,\ell),(s,v)}=
+ \binom{\ell+s}{\ell}a^\ell c_{r+v,\ell+s}(p,q).
+\end{equation}
+
+\begin{theorem}[Period-independent finite-state representation]\label{thm:main}
+For every choice of \eqref{eq:parameters} and every $n\ge1$, the residue
+in Definition~\ref{def:residue-trace} is well defined and
+\begin{equation}\label{eq:main}
+ \rho_n=\Tr(W^n),\qquad
+ \tau_n=-\Tr(W^n),\qquad
+ D_{p,a,q}(z)=\frac{1}{\det(I-zW)}.
+\end{equation}
+The same $(B+1)^2$-dimensional matrix is used for all $n$. Each of its
+entries belongs to
+\begin{equation}\label{eq:coefficient-ring}
+ \Z[p_0,\ldots,p_{d-1},a,q_0,\ldots,q_m].
+\end{equation}
+Each coefficient identity in \eqref{eq:main} is compatible with arbitrary
+parameter specialization within \eqref{eq:parameters}. The generating
+function identity holds formally and defines an analytic germ at $z=0$.
+\end{theorem}
+
+The dimension bound is sufficient, not asserted to be minimal. In
+particular, some edge states may not participate in any closed path.
+The theorem is an algebraic representation of the specified trace
+sequence. It does not identify $W$, $-W$, or an infinite-dimensional
+extension with a natural Perron operator.

@@ -1,0 +1,180 @@
+\section{Quadratic weights and ordinary trace representatives}\label{sec:consequences}
+
+\subsection{An explicit factorization for all quadratic weights}
+
+Let
+\begin{equation}\label{eq:quadratic-parameters}
+ p(X)=X^2+bX+c,\qquad q(X)=uX^2+vX+w,
+ \qquad a\in\C^*.
+\end{equation}
+We use the degree bound $m=2$, so $B=3$ even if $u=0$.
+
+\begin{proposition}\label{prop:quadratic}
+For all parameters \eqref{eq:quadratic-parameters},
+\begin{equation}\label{eq:quadratic-determinant}
+ D_{p,a,q}(z)^{-1}
+   =(1-uz)(1-auz)\bigl(1-(v-bu)z-au^2z^2\bigr).
+\end{equation}
+In particular, this polynomial has degree at most four and is
+independent of $c$ and $w$.
+\end{proposition}
+
+\begin{proof}
+The matrix \eqref{eq:edge-matrix} initially has the sixteen states
+$\{0,1,2,3\}^2$. From \eqref{eq:local-degree-condition}, an entry
+from $(r,\ell)$ to $(s,v)$ can be nonzero only when
+\begin{equation}\label{eq:quadratic-support}
+ r+v\ge2(\ell+s)-1.
+\end{equation}
+A state with no incoming edge or no outgoing edge cannot occur in a
+closed walk. Deleting it preserves all power traces and
+$\det(I-zW)$: in the latter determinant its row or column has only
+the diagonal entry $1$ after the corresponding zero row or column
+of $W$ is used.
+
+Using \eqref{eq:quadratic-support}, delete the following groups in
+order, always in the current graph:
+\begin{align*}
+ &\{(0,3),(1,3),(3,0),(3,1)\},\\
+ &\{(0,2),(2,3),(2,0),(3,2)\},\\
+ &\{(1,2),(2,1),(3,3)\}.
+\end{align*}
+In each group every listed state has no incoming or no outgoing
+edge before that group is removed. This follows directly from
+\eqref{eq:quadratic-support}. The remaining five states, in order,
+are $(0,0),(0,1),(1,0),(1,1),(2,2)$.
+
+Put
+\begin{equation}\label{eq:quadratic-shorthand}
+ \begin{split}
+ A&=v-bu,\qquad C=b^2u-bv-cu+w,\\
+ E&=-b^3u+b^2v+2bcu-bw-cv.
+ \end{split}
+\end{equation}
+The Laurent coefficients in \eqref{eq:local-coefficient} give the
+following remaining block directly:
+\begin{equation}\label{eq:five-state}
+ W_*=
+ \begin{pmatrix}
+ A&C&0&u&0\\
+ 0&au&0&0&0\\
+ C&E&u&v-2bu&u\\
+ au&a(v-2bu)&0&0&0\\
+ 0&a^2u&0&0&0
+ \end{pmatrix}.
+\end{equation}
+For example, $c_{0,0}=A$, $c_{1,0}=C$, $c_{2,0}=E$,
+$c_{1,1}=u$, and $c_{2,1}=v-2bu$, which account for the displayed
+entries together with their binomial and $a$ factors.
+
+The state $(2,2)$ is still a noncyclic bridge: its only possible
+incoming edge is from $(1,0)$ and its only possible outgoing edge
+is to $(0,1)$, from which there is no return. Its presence affects
+neither a power trace nor $\det(I-zW_*)$. Among the other states,
+the only possible nontrivial cyclic blocks are
+\begin{equation}\label{eq:cyclic-blocks}
+ [u],\qquad [au],\qquad
+ \begin{pmatrix}A&u\\au&0\end{pmatrix}.
+\end{equation}
+After a simultaneous reordering of rows and columns, the matrix is
+block triangular with these blocks and the zero bridge block.
+Therefore
+\[
+ \det(I-zW)=\det(I-zW_*)
+   =(1-uz)(1-auz)(1-Az-au^2z^2).
+\]
+Theorem~\ref{thm:main} proves \eqref{eq:quadratic-determinant}.
+All deletions and coefficient calculations were polynomial identities,
+so parameter values that remove further edges require no separate
+genericity argument.
+\end{proof}
+
+\begin{example}[A nonconstant generating determinant]\label{ex:nontrivial}
+Take $p(X)=X^2-X+2$, $a=2/3$, and $q(X)=X^2+X+1$.
+Then \eqref{eq:quadratic-determinant} becomes
+\[
+ D(z)^{-1}=(1-z)(1-2z/3)(1-2z-2z^2/3).
+\]
+The first five residue coefficients are
+\[
+ \rho_1=\frac{11}{3},\quad
+ \rho_2=\frac{61}{9},\quad
+ \rho_3=\frac{359}{27},\quad
+ \rho_4=\frac{2329}{81},\quad
+ \rho_5=\frac{15611}{243}.
+\]
+These are obtained from the three blocks in
+\eqref{eq:cyclic-blocks}, or equivalently from the logarithm of the
+displayed polynomial. The signed stability trace, when interpreted
+pointwise, is their negative. Thus the uniform theorem contains
+cases beyond the low-degree vanishing of
+Remark~\ref{rem:threshold}.
+\end{example}
+
+\begin{example}[A nonreduced fixed point]\label{ex:parabolic}
+Let $p(X)=X^2+1$, $a=1$, and $q(X)=X^2+X+1$.
+The period-one equation is $(X-1)^2=0$. At the fixed point $(1,1)$,
+$\det(I-DH)=0$, so the ordinary pointwise summand is undefined.
+The residue convention instead gives
+\[
+ \rho_1=\Res_{X=1}\frac{(X^2+X+1)\,dX}{(X-1)^2}=q'(1)=3,
+ \qquad\tau_1=-3.
+\]
+For all periods, Proposition~\ref{prop:quadratic} gives
+\[
+ D(z)^{-1}=(1-z)^2(1-z-z^2).
+\]
+Its residue coefficients begin $3,5,6,9$. These values include the
+degenerate scheme. They are not values assigned to the undefined
+pointwise quotient by cancelling or removing its denominator.
+\end{example}
+
+\subsection{A complete ordinary trace-class boundary}
+
+The finite-state residue formula does not itself supply an ordinary
+operator with traces $\tau_n$. In particular, replacing $W$ by $-W$
+would give $(-1)^n\Tr(W^n)$, not $-\Tr(W^n)$ for every $n$.
+There is a complete criterion for the existence of any ordinary
+trace-class representative of the frozen sequence.
+
+\begin{proposition}\label{prop:trace-class}
+For fixed parameters \eqref{eq:parameters}, a trace-class operator
+$T$ on some complex Hilbert space satisfies
+\begin{equation}\label{eq:ordinary-representative}
+ \Tr(T^n)=\tau_n\qquad\text{for every }n\ge1
+\end{equation}
+if and only if $W$ is nilpotent.
+\end{proposition}
+
+\begin{proof}
+If $T$ is trace class, its ordinary Fredholm determinant
+$D_T(z)=\det(I-zT)$ is entire, and near zero it has the
+trace expansion
+\[
+ D_T(z)=\exp\left(-\sum_{n\ge1}\frac{\Tr(T^n)}n z^n\right).
+\]
+These are the classical determinant properties summarized in
+\citet[Sec.~3, in particular Eq.~(3.3) of the author manuscript]{bornemann2010fredholm}.
+By \eqref{eq:ordinary-representative} and Theorem~\ref{thm:main},
+\[
+ D_T(z)\det(I-zW)=1
+\]
+near zero. Both sides are entire functions, so the identity theorem
+extends the equality to all $z\in\C$. If $\det(I-zW)$ were
+nonconstant, it would have a complex zero, contradicting this
+identity. Hence $\det(I-zW)=1$.
+
+For a finite complex matrix, this last condition means that all
+eigenvalues are zero. Equivalently, its characteristic polynomial
+is a pure power of its variable, and the Cayley--Hamilton theorem
+implies that $W$ is nilpotent. Conversely, if $W$ is nilpotent then
+$\Tr(W^n)=0$ for every positive $n$. Thus all $\tau_n$ vanish,
+and $T=0$ is a trace-class representative.
+\end{proof}
+
+The criterion uses the classical obstruction that an ordinary
+Fredholm determinant is entire while a nonconstant reciprocal
+polynomial has a pole. It is a consequence of the specific residue
+sequence, not a separate construction of a dynamical operator.
+It does not exclude supertraces, distributional traces, different
+observables, or operators with absolute stability weights.

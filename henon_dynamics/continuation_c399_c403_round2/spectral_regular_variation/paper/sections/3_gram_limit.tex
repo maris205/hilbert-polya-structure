@@ -1,0 +1,155 @@
+\section{Gram entries and their regular-variation limit}
+\label{sec:gram}
+
+\subsection{The exact common-multiple identity}
+
+Put $\ell=\lcm(m,n)$. Multiplying the matrices in
+\eqref{eq:operators} gives
+\begin{align}
+ A_N(m,n)
+ &=\frac{\rho}{N^\rho L(N)^2}
+   \sum_{\substack{r\le N\\m\mid r,\ n\mid r}}
+   (r/m)^{-\sigma}(r/n)^{-\sigma}L(r/m)L(r/n)\notag\\
+ &=\frac{\rho(mn)^\sigma}{N^\rho L(N)^2}
+   \sum_{k\le N/\ell}(k\ell)^{-2\sigma}
+       L(k\ell/m)L(k\ell/n).
+ \label{eq:gram}
+\end{align}
+The sum is empty when $\ell>N$, so the identity also covers an
+index greater than $N$. This elementary Gram identity is the
+common-multiple formula behind the multiplicative Toeplitz literature;
+compare Proposition~2.1 of~\cite{Hilberdink2017}.
+Here it uses no multiplicativity. Every entry of $A_N$ is nonnegative,
+and $A_N$ is positive semidefinite because it is a positive scalar
+multiple of a Gram matrix.
+
+\begin{lemma}[Power-sum bound]
+\label{lem:powers}
+For every real $\alpha<1$, there is $C_\alpha<\infty$ such that
+\begin{equation}
+ \sum_{1\le k\le X}k^{-\alpha}\le C_\alpha X^{1-\alpha}
+ \qquad(X\ge1).
+ \label{eq:powers}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+If $\alpha<0$, each summand is at most $X^{-\alpha}$ and there
+are at most $X$ terms. If $0\le\alpha<1$, integral comparison
+gives $\sum_{k\le X}k^{-\alpha}\le1+\int_1^X t^{-\alpha}\,dt$,
+which is bounded by a constant times $X^{1-\alpha}$.
+\end{proof}
+
+\subsection{Uniform entrywise domination}
+
+\begin{proposition}
+\label{prop:entry-bound}
+For every $\varepsilon>0$ with $2\varepsilon<\rho$, there is a
+constant $C=C(\sigma,L,\varepsilon)$ such that
+\begin{equation}
+ 0\le A_N(m,n)\le C E_{\sigma+\varepsilon}(m,n)
+ \qquad(N,m,n\ge1).
+ \label{eq:entry-bound}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The assertion is immediate for an empty Gram sum. Otherwise write
+$r=k\ell\le N$. Its arguments satisfy $1\le r/m,r/n\le N$.
+The global Potter estimate~\eqref{eq:potter} therefore gives
+\begin{equation}
+ \frac{L(r/m)}{L(N)}\le K_\varepsilon(mN/r)^\varepsilon,
+ \qquad
+ \frac{L(r/n)}{L(N)}\le K_\varepsilon(nN/r)^\varepsilon.
+ \label{eq:two-potter}
+\end{equation}
+Let $\alpha=2\sigma+2\varepsilon<1$. Substituting these bounds
+in~\eqref{eq:gram} and using Lemma~\ref{lem:powers} yields
+\begin{align*}
+ A_N(m,n)
+ &\le C(mn)^{\sigma+\varepsilon}N^{-\rho+2\varepsilon}
+      \ell^{-\alpha}\sum_{k\le N/\ell}k^{-\alpha}\\
+ &\le C'(mn)^{\sigma+\varepsilon}N^{-\rho+2\varepsilon}
+      \ell^{-\alpha}(N/\ell)^{1-\alpha}
+ =C'\frac{(mn)^{\sigma+\varepsilon}}{\ell}.
+\end{align*}
+The powers of $N$ cancel because $1-\alpha=\rho-2\varepsilon$.
+This proves the proposition.
+\end{proof}
+
+The estimate~\eqref{eq:entry-bound} is only entrywise domination.
+We will use it to bound a bilinear form after taking coordinatewise
+absolute values. Positivity and a separate congruence argument are
+needed to obtain operator-order and eigenvalue bounds.
+
+\subsection{Entrywise convergence with the small-index tail controlled}
+
+\begin{proposition}
+\label{prop:entry-limit}
+For every fixed pair $m,n\ge1$,
+\begin{equation}
+ A_N(m,n)\longrightarrow E_\sigma(m,n).
+ \label{eq:entry-limit}
+\end{equation}
+Moreover, with $F(N)=\sum_{k\le N}k^{-2\sigma}L(k)^2$,
+\begin{equation}
+ F(N)\sim\frac{N^\rho L(N)^2}{\rho}.
+ \label{eq:energy}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix $m,n$, put $\ell=\lcm(m,n)$, and write
+$h=\ell/N$ and $t_k=kh$. Formula~\eqref{eq:gram} becomes
+\begin{equation}
+ A_N(m,n)=\frac{\rho(mn)^\sigma}{\ell}\,
+ h\sum_{k\le1/h}t_k^{-2\sigma}
+   \frac{L(Nt_k/m)}{L(N)}\frac{L(Nt_k/n)}{L(N)}.
+ \label{eq:riemann}
+\end{equation}
+All arguments of $L$ in this sum are at least one, because
+$Nt_k/m=k\ell/m\ge1$, and similarly for $n$.
+
+Fix $0<\delta<1$. On the portion $\delta\le t_k\le1$, the
+two ratios in~\eqref{eq:riemann} converge uniformly to one by
+\eqref{eq:uct}, applied on $[\delta/m,1/m]$ and
+$[\delta/n,1/n]$. The function $t^{-2\sigma}$ is continuous and
+bounded on $[\delta,1]$. Consequently, this portion of the sum,
+including its factor $h$, tends to
+\begin{equation}
+ \int_\delta^1 t^{-2\sigma}\,dt.
+ \label{eq:truncated-integral}
+\end{equation}
+
+It remains to justify removal of the lower cutoff. Choose
+$\varepsilon>0$ with $2\varepsilon<\rho$, and again set
+$\alpha=2\sigma+2\varepsilon<1$. By~\eqref{eq:two-potter}, the
+product of ratios in~\eqref{eq:riemann} is at most
+$C(mn)^\varepsilon t_k^{-2\varepsilon}$. If $\delta/h<1$,
+there are no terms with $t_k<\delta$. Otherwise
+Lemma~\ref{lem:powers} gives
+\begin{align}
+ h\sum_{t_k<\delta}t_k^{-2\sigma}
+   \frac{L(Nt_k/m)}{L(N)}\frac{L(Nt_k/n)}{L(N)}
+ &\le C_{m,n}h\sum_{k<\delta/h}(kh)^{-\alpha}\notag\\
+ &\le C'_{m,n}\delta^{1-\alpha}.
+ \label{eq:small-tail}
+\end{align}
+The last bound is uniform in $N$ and tends to zero as
+$\delta\downarrow0$. The omitted integral
+$\int_0^\delta t^{-2\sigma}\,dt$ also tends to zero, since
+$2\sigma<1$. Letting first $N\to\infty$ and then
+$\delta\downarrow0$ in~\eqref{eq:riemann} proves
+\[
+ A_N(m,n)\longrightarrow
+ \frac{\rho(mn)^\sigma}{\ell}
+ \int_0^1t^{-2\sigma}\,dt
+ =\frac{(mn)^\sigma}{\ell}.
+\]
+Finally $A_N(1,1)=\rho F(N)/(N^\rho L(N)^2)$ and
+$E_\sigma(1,1)=1$, so the same limit gives~\eqref{eq:energy}.
+\end{proof}
+
+The proof of~\eqref{eq:energy} is thus contained in the Gram-entry
+argument. In particular, no unproved passage from pointwise slow
+variation to a sum down to its smallest indices is needed.

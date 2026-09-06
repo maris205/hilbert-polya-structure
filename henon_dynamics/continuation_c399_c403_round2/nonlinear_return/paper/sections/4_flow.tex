@@ -1,0 +1,167 @@
+\section{A uniform flow bound and finite-state closure}\label{sec:flow}
+
+A total-degree estimate would only bound the sum of the exponents by a
+quantity proportional to $n$. The finite-state construction instead
+requires a bound at each position. The one-dimensional geometry of the
+cyclic index set supplies that bound.
+
+\begin{lemma}[Period-independent local flow bound]\label{lem:uniform-flow}
+Let $n\ge1$, $d\ge2$, and $\mu\in\Z$. Suppose nonnegative integers
+$L_i,R_i$, indexed cyclically, satisfy
+\begin{equation}\label{eq:abstract-flow}
+ d(L_i+R_i)\le\mu+R_{i-1}+L_{i+1}
+ \qquad(0\le i<n).
+\end{equation}
+If $\mu<0$, no such configuration exists. If $\mu=0$, every exponent
+is zero. If $\mu>0$, then for every $i$,
+\begin{equation}\label{eq:uniform-bound}
+ L_i+R_i\le\frac{\mu(d+1)}{(d-1)^2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Set $e_i=L_i+R_i$. Summing \eqref{eq:abstract-flow} over the cyclic
+index set gives
+\begin{equation}\label{eq:total-flow}
+ (d-1)\sum_i e_i\le n\mu.
+\end{equation}
+This is impossible for $\mu<0$. For $\mu=0$, nonnegativity forces
+all $e_i$, and hence all $L_i,R_i$, to vanish.
+
+Assume now that $\mu>0$ and fix one configuration. Construct an
+$n\times n$ nonnegative matrix $P$ column by column. If $e_j>0$, put
+$L_j/e_j$ in row $j-1$ of column $j$ and $R_j/e_j$ in row $j+1$
+of that column. Add the two contributions if the rows coincide. If
+$e_j=0$, put $1$ in row $j+1$ of column $j$. All unspecified entries
+are zero. Each column has sum one, and the zero-flow convention does
+not affect $P\ee$. Specifically,
+\begin{equation}\label{eq:redistribution}
+ (P\ee)_i=R_{i-1}+L_{i+1}.
+\end{equation}
+The inequalities become $d\ee\le\mu\one+P\ee$, componentwise.
+Because $P$ is nonnegative, iterating this inequality $K$ times gives
+\begin{equation}\label{eq:iterated-flow}
+ \ee\le\frac{\mu}{d}\sum_{k=0}^{K-1}d^{-k}P^k\one
+         +d^{-K}P^K\ee.
+\end{equation}
+
+Every power of $P$ is column-stochastic. Thus each of its entries lies
+between zero and one, and
+\begin{equation}\label{eq:tail-flow}
+ \|P^K\ee\|_\infty\le\|\ee\|_1.
+\end{equation}
+Here $n$ and the configuration are fixed. Since $d>1$, the last term
+in \eqref{eq:iterated-flow} tends to zero as $K\to\infty$. There is
+no need to bound $\|\ee\|_1$ uniformly in $n$ at this stage.
+
+To control the first term, fix a row $i$. The support of $P$ allows
+only steps between adjacent cyclic positions. If $(P^k)_{ij}\ne0$,
+then the cyclic distance between $i$ and $j$ is at most $k$. There are
+at most $\min(n,2k+1)$ such starting columns $j$. Using the entrywise
+bound from column-stochasticity gives the row-sum estimate
+\begin{equation}\label{eq:row-sum}
+ (P^k\one)_i=\sum_j(P^k)_{ij}\le2k+1.
+\end{equation}
+In particular, the proof does not mistake a column-stochastic matrix
+for a row-stochastic one. The same estimate is valid for $n=1,2$,
+where the adjacent positions may coincide.
+
+Take $K\to\infty$ in \eqref{eq:iterated-flow} and use
+\eqref{eq:row-sum}. Then
+\begin{align}
+ e_i&\le\frac{\mu}{d}\sum_{k\ge0}\frac{2k+1}{d^k}\notag\\
+    &=\frac{\mu}{d}
+      \left(\frac{d}{d-1}+\frac{2d}{(d-1)^2}\right)
+      =\frac{\mu(d+1)}{(d-1)^2},\label{eq:geometric-flow-bound}
+\end{align}
+which proves \eqref{eq:uniform-bound}.
+\end{proof}
+
+The auxiliary matrix $P$ depends on the exponent configuration. It is
+only a proof device, not a Markov model of the H\'enon dynamics.
+Its entries are nonnegative even when $p,a,q$ are complex. The
+quadratic case $d=2$ is covered without a denominator $d-2$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Lemma~\ref{lem:normal-form} gives the finite scheme and defines the
+residue for all parameters. By Lemma~\ref{lem:local-expansion}, each
+nonzero product in \eqref{eq:configuration-sum} satisfies
+\eqref{eq:abstract-flow} with $\mu=m-d+1$.
+Lemma~\ref{lem:uniform-flow} shows that either all products vanish,
+only the zero configuration contributes, or
+\begin{equation}\label{eq:box-cutoff}
+ 0\le L_i,R_i\le L_i+R_i\le B
+\end{equation}
+for every $i$. The integer part in \eqref{eq:state-bound} is justified
+because $L_i+R_i$ is an integer. Hence every nonzero term of the
+convergent residue sum lies in a single finite box independent of $n$.
+
+Associate to a cyclic configuration the edge states
+\begin{equation}\label{eq:edge-bijection}
+ E_i=(R_{i-1},L_i),\qquad E_{i+1}=(R_i,L_{i+1}).
+\end{equation}
+If $E_i=(r,\ell)$ and $E_{i+1}=(s,v)$, the $i$th local factor in
+\eqref{eq:configuration-sum} is
+\[
+ \binom{\ell+s}{\ell}a^\ell c_{r+v,\ell+s}
+ =W_{E_i,E_{i+1}}.
+\]
+Conversely, any labelled closed sequence of edge states determines
+the $L_i$ as its second coordinates and the $R_i$ as the first
+coordinates of the following states. This is inverse to
+\eqref{eq:edge-bijection}, including for $n=1,2$. There is no quotient
+by cyclic rotation. Consequently
+\begin{align}
+ \rho_n
+ &=\sum_{E_0,\ldots,E_{n-1}\in\mathcal E}
+       W_{E_0,E_1}W_{E_1,E_2}\cdots W_{E_{n-1},E_0}\notag\\
+ &=\Tr(W^n).\label{eq:trace-closure}
+\end{align}
+Additional states or configurations inside the box with zero product
+do not affect this equality. When $m-d+1\le0$, $B=0$ and the same
+identity follows from the vanishing or the unique zero configuration
+already established.
+
+For the coefficient ring, set $T=1/X$. The reversed monic polynomial is
+\[
+ \widetilde p(T)=T^dp(1/T)
+    =1+p_{d-1}T+\cdots+p_0T^d.
+\]
+Every coefficient of $\widetilde p(T)^{-(e+1)}$ is an
+integer-coefficient polynomial in the $p_j$. Indeed, expand
+$(1+U)^{-(e+1)}$ in powers of
+$U=p_{d-1}T+\cdots+p_0T^d$, whose constant term is zero. A given
+$T$-coefficient receives only finitely many terms, each with an
+integer binomial coefficient. Formula~\eqref{eq:local-coefficient}
+therefore gives an integer-coefficient polynomial in the $p_j,q_j$.
+The extra binomial factor and $a^\ell$ in \eqref{eq:edge-matrix}
+prove \eqref{eq:coefficient-ring}.
+
+Definition~\ref{def:residue-trace} now gives
+$\tau_n=-\Tr(W^n)$. The finite-dimensional identity
+\begin{equation}\label{eq:logdet}
+ -\log\det(I-zW)=\sum_{n\ge1}\frac{\Tr(W^n)}{n}z^n
+\end{equation}
+holds as a formal series. Substitution into
+\eqref{eq:generating-function} yields the reciprocal determinant in
+\eqref{eq:main}. Both the residue coefficients and the entries of
+$W$ are polynomials, so the coefficient identities specialize at any
+parameter, including a drop in the actual degree of $q$.
+Finally $\det(I-zW)$ has constant term one, hence its reciprocal is
+analytic near $z=0$.
+\end{proof}
+
+\begin{remark}[The low-degree threshold]\label{rem:threshold}
+For $m<d-1$, the negative-surplus case gives $\rho_n=\tau_n=0$ for
+all $n$. For $m=d-1$, only $L_i=R_i=0$ contributes and
+$c_{0,0}=q_{d-1}$. Thus
+\[
+ \rho_n=q_{d-1}^{n},\qquad
+ \tau_n=-q_{d-1}^{n},\qquad
+ D_{p,a,q}(z)=\frac{1}{1-q_{d-1}z}.
+\]
+The subcritical vanishing is the classical Euler--Jacobi degree
+phenomenon \citep[Corollary~1.18 of the author preprint]{cattani1996residues}.
+It is not the additional uniform-flow assertion needed
+for larger $m$.
+\end{remark}

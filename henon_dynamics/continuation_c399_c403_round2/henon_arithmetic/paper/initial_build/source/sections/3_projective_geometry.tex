@@ -1,0 +1,159 @@
+\section{Iterate geometry and projective graph classes}\label{sec:geometry}
+
+Fix $n,r\geq1$ and write
+\begin{equation}\label{eq:gDQ}
+ g=H^n=(g_1,g_2),\qquad D=d^n,\qquad Q=q^r.
+\end{equation}
+Unless stated otherwise, all varieties, graphs and local rings are over
+the algebraically closed field $k$. Use homogeneous coordinates
+$[x:y:z]$ on $\Pj^2$, and let $\Linfty=\{z=0\}$.
+
+\begin{lemma}[Degrees and the two infinity points]\label{lem:degrees}
+The coordinate polynomials of $g$ satisfy
+\[
+ \deg g_1=d^{n-1},\qquad \deg g_2=D,
+\]
+and the degree-$D$ homogeneous part of $g_2$ is $L_ny^D$ for some
+$L_n\in\F_q^*$. The degree of $g^{-1}$ is also $D$; its first coordinate
+has leading homogeneous part $K_nx^D$, where $K_n\ne0$, and its second
+coordinate has degree $d^{n-1}$.
+
+The projective rational extension of $g$ is regular outside
+$\Ip=[1:0:0]$. It sends $\Linfty\setminus\{\Ip\}$ to
+$\Imn=[0:1:0]$ and fixes $\Imn$. The inverse extension is regular outside
+$\Imn$, sends $\Linfty\setminus\{\Imn\}$ to $\Ip$, and fixes $\Ip$.
+\end{lemma}
+
+\begin{proof}
+Let $c_d\in\F_q^*$ be the leading coefficient of $f$. For $n=1$,
+$g_1=y$ and $g_2=f(y)-ax$ give the asserted degrees and $L_1=c_d$.
+Suppose the forward assertions hold for $n$. Composition on the left by
+$H$ gives
+\[
+ H^{n+1}=\bigl(g_2,f(g_2)-ag_1\bigr).
+\]
+The degrees of $f(g_2)$ and $ag_1$ are $d^{n+1}$ and $d^{n-1}$,
+respectively. They are unequal, so the leading term cannot cancel.
+The leading homogeneous part of the second coordinate is
+$c_dL_n^d y^{d^{n+1}}$, and $c_dL_n^d\ne0$. This proves the forward
+induction in every characteristic.
+
+For the inverse, the case $n=1$ follows from \eqref{eq:inverse}, with
+$K_1=c_d/a$. If $H^{-n}=(u_1,u_2)$ has first degree $d^n$, leading
+term $K_nx^{d^n}$, and second degree $d^{n-1}$, then
+\[
+ H^{-(n+1)}=\bigl((f(u_1)-u_2)/a,u_1\bigr).
+\]
+Its first degree is $d^{n+1}$, with leading term
+$(c_d/a)K_n^d x^{d^{n+1}}$, and its second degree is $d^n$.
+This establishes the inverse assertions without a separability condition
+on either coordinate polynomial.
+
+Let $G_1,G_2$ be the homogenizations of $g_1,g_2$ to the common degree $D$.
+The projective extension is
+\begin{equation}\label{eq:homogeneous}
+ [x:y:z]\longmapsto[G_1(x,y,z):G_2(x,y,z):z^D].
+\end{equation}
+Because $\deg g_1<D$, one has $G_1(x,y,0)=0$, whereas
+$G_2(x,y,0)=L_ny^D$. There is no indeterminacy on $z\ne0$, since
+\eqref{eq:map} is a polynomial morphism. On $z=0$ the three coordinates
+in \eqref{eq:homogeneous} vanish simultaneously exactly when $y=0$.
+This is the single point $\Ip$. For $y\ne0$ their value is $[0:1:0]$,
+which also shows regularity and fixedness at $\Imn$. Homogenizing the
+inverse coordinates gives, at $z=0$, the triple $[K_nx^D:0:0]$.
+It has base point $\Imn$ and the asserted value $\Ip$ everywhere else
+on $\Linfty$.
+\end{proof}
+
+Let $X=\Pj^2\times\Pj^2$. The notation $\Gamma_g$ denotes the closure
+in $X$ of the graph of $g$ on $\A^2$. The map $\Phi_r$ extends to the
+morphism
+\[
+ [x:y:z]\longmapsto[x^Q:y^Q:z^Q]
+\]
+on all of $\Pj^2$, so its graph $\Gamma_{\Phi_r}$ is already closed.
+
+\begin{lemma}[Graph charts]\label{lem:graphcharts}
+The surface $\Gamma_g$ is the transpose of $\Gamma_{g^{-1}}$.
+Over an open subset of the first factor where $g$ is regular it is the
+ordinary graph of $g$. Over an open subset of the second factor where
+$g^{-1}$ is regular it is parameterized by
+$Y\mapsto(g^{-1}(Y),Y)$. In particular, $\Gamma_g$ is smooth at
+$(\Imn,\Imn)$ and $(\Ip,\Ip)$.
+\end{lemma}
+
+\begin{proof}
+On $\A^2\times\A^2$, the graph of an automorphism is the transpose of
+the graph of its inverse. Taking closures gives the first assertion.
+If $g$ is regular on an open set $U\subset\Pj^2$, its graph over $U$
+is closed in $U\times\Pj^2$, since the target is separated. The graph
+over $U\cap\A^2$ is dense in that graph, because projection identifies
+it with the dense open subset $U\cap\A^2$ of $U$. Thus restriction of
+$\Gamma_g$ to the first-factor open set $U$ is exactly that graph.
+Applying this reasoning to $g^{-1}$ and transposing proves the second
+chart assertion. Lemma~\ref{lem:degrees} supplies the required regular
+neighborhoods of $\Imn$ and $\Ip$. Each graph chart is isomorphic to
+an open subset of the smooth surface $\Pj^2$.
+\end{proof}
+
+Write $h_1$ and $h_2$ for the pullbacks of the hyperplane class from the
+two factors of $X$. We use the classical ring and degree convention
+\begin{equation}\label{eq:chowring}
+ A^*(X)=\Z[h_1,h_2]/(h_1^3,h_2^3),\qquad
+ \deg(h_1^2h_2^2)=1.
+\end{equation}
+The three codimension-two coefficients of a surface in this ring are
+determined by intersecting it with two generic lines on one factor or
+one generic line on each factor. These are intersection degrees,
+so inseparable fibers are counted with their scheme lengths.
+
+\begin{lemma}[Graph classes]\label{lem:classes}
+In the convention \eqref{eq:chowring},
+\begin{equation}\label{eq:classes}
+ [\Gamma_g]=h_1^2+D h_1h_2+h_2^2,
+ \qquad
+ [\Gamma_{\Phi_r}]=Q^2h_1^2+Qh_1h_2+h_2^2.
+\end{equation}
+Consequently their Chow intersection has degree
+\begin{equation}\label{eq:total}
+ \deg\bigl([\Gamma_g]\cdot[\Gamma_{\Phi_r}]\bigr)
+ =1+DQ+Q^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Both projections from $\Gamma_g$ to $\Pj^2$ are birational, as is seen
+on the dense affine graph of the automorphism. Thus
+$\deg([\Gamma_g]h_1^2)=1$ and
+$\deg([\Gamma_g]h_2^2)=1$. These give the coefficients of $h_2^2$
+and $h_1^2$ in \eqref{eq:classes}.
+
+For the mixed coefficient choose a line $L$ in the first factor avoiding
+$\Ip$, and a generic line $L'$ in the second factor avoiding $\Imn$.
+On $L$ the rational extension of $g$ is a morphism. The equation of
+$g^{-1}(L')$ is a generic linear combination of $G_1,G_2,z^D$, of degree
+$D$. Its restriction to $L\simeq\Pj^1$ is a nonzero section of
+$\mathcal O_L(D)$, and hence has zero scheme of length $D$. It is nonzero
+at the unique point $L\cap\Linfty$, because that point maps to
+$\Imn\notin L'$. The graph chart over $L$ is therefore sufficient to
+compute the mixed intersection, which is $D$.
+
+For $\Gamma_{\Phi_r}$ the first projection is an isomorphism, giving
+the coefficient $1$ of $h_2^2$. The pullback of a line by $\Phi_r$ has
+degree $Q$, giving the coefficient $Q$ of $h_1h_2$. The second projection
+is the finite morphism $\Phi_r$, of degree $Q^2$. For example, its
+function-field extension on the affine chart is
+\[
+ k(x^Q,y^Q)\subset k(x,y),
+\]
+and the $Q^2$ monomials $x^iy^j$, $0\leq i,j<Q$, form a basis of the
+larger field over the smaller one. This yields the coefficient $Q^2$
+of $h_1^2$. Here $Q^2$ is the degree of a finite morphism, not the
+cardinality of a geometric fiber: the Frobenius morphism is radicial
+and has one point in each geometric fiber.
+
+Multiplying the two classes, the only surviving degree-four monomial
+is $h_1^2h_2^2$. Its coefficient is $1+DQ+Q^2$, proving
+\eqref{eq:total}. We have computed a Chow product; the next section
+checks properness before using it as a sum of local intersection numbers.
+\end{proof}
