@@ -1,0 +1,94 @@
+\section{A finite-adelic image theorem}\label{sec:image}
+
+For a prime $p$, write $\Z_p$ for the $p$-adic integers, $v_p$ for the
+normalized valuation, and $|z|_p=p^{-v_p(z)}$ for $z\neq0$. Set
+$v_p(0)=+\infty$. If $s,t\geq0$, define
+\begin{equation}\label{eq:kernel}
+ \Hp{p}{s}{t}(z)=p^{-s v_p(z)-t p^{v_p(z)}}\qquad(z\neq0),
+\end{equation}
+and prescribe
+\begin{equation}\label{eq:kernel_zero}
+ \Hp{p}{s}{t}(0)=
+ \begin{cases}
+  0,&(s,t)\neq(0,0),\\
+  1,&(s,t)=(0,0).
+ \end{cases}
+\end{equation}
+An exponent pair is called \emph{active} when $(s,t)\neq(0,0)$.
+Every kernel is continuous and takes values in $[0,1]$.
+Indeed, the valuation is locally constant away from zero, and an active
+kernel tends to zero as the valuation tends to infinity.
+The inactive kernel $\Hp{p}{0}{0}$ is the constant function one.
+Convention~\eqref{eq:kernel_zero} avoids any interpretation of $0^0$.
+
+Fix the following data throughout Sections~\ref{sec:image}--\ref{sec:perfectness}:
+\begin{itemize}
+ \item a finite set $S$ of primes and a real number $\Lambda>1$;
+ \item a positive periodic sequence $(r_n)_{n\in\Z}$;
+ \item for every $p\in S$, nonnegative real periodic sequences
+ $(s_{p,n})_{n\in\Z}$ and $(t_{p,n})_{n\in\Z}$ with a common period
+ $m_p$ satisfying $\gcd(m_p,p)=1$.
+\end{itemize}
+Let $w\geq1$ be a common period of all the sequences. A prime is active if
+at least one of its exponent sequences is not identically zero. Inactive
+primes can be removed from $S$ without changing any of the functions below.
+We make this removal and write $d=|S|$. The list of exponent pairs at
+each prime is finite, but a pair is not required to have integer or rational
+entries.
+
+Give $\Z/w\Z$ the discrete topology and set
+\begin{equation}\label{eq:detector_definition}
+ \D=\overline{\{(n\bmod w,(n)_{p\in S}):n\in\Z\}}
+ \ \subseteq\ (\Z/w\Z)\times\prod_{p\in S}\Z_p.
+\end{equation}
+This is a nonempty compact metrizable group. On it define
+\begin{equation}\label{eq:detector_function}
+ \Phi(a,x)=\sum_{\ell=0}^{\infty}\Lambda^{-\ell}r_{a-\ell}
+       \prod_{p\in S}\Hp{p}{s_{p,a-\ell}}{t_{p,a-\ell}}(x_p-\ell).
+\end{equation}
+The indices $a-\ell$ are evaluated by periodicity, so the summand does not
+depend on a representative of $a\in\Z/w\Z$. Write
+\begin{equation}\label{eq:RB}
+ R=\max_n r_n,\qquad B=\frac{R}{1-\Lambda^{-1}}.
+\end{equation}
+Each summand of~\eqref{eq:detector_function} is bounded by
+$R\Lambda^{-\ell}$. The Weierstrass criterion therefore gives uniform
+convergence and continuity of $\Phi$.
+
+For a nonempty compact $E\subset\R$, let $N_{\eps}(E)$ denote the least
+number of closed real intervals of length $\eps$ covering $E$. The upper
+box dimension is
+\begin{equation}\label{eq:box_definition}
+ \boxdim E=\limsup_{\eps\downarrow0}
+          \frac{\log N_{\eps}(E)}{\log(1/\eps)}.
+\end{equation}
+The term \emph{Cantor set} will mean a nonempty compact, perfect,
+totally disconnected metric space, here realized as a nowhere dense subset
+of $\R$. Such a space is homeomorphic to the usual Cantor space.
+
+\begin{theorem}[Quantitative image theorem]\label{thm:image}
+For the fixed data above, the following statements hold.
+\begin{enumerate}
+ \item If $d=0$, then $\Phi(\D)$ is the finite set
+ \begin{equation}\label{eq:finite_image}
+  \left\{\frac{\displaystyle\sum_{\ell=0}^{w-1}
+              r_{a-\ell}\Lambda^{-\ell}}
+             {1-\Lambda^{-w}}:a\in\Z/w\Z\right\}.
+ \end{equation}
+ \item If $d>0$, then $\Phi(\D)$ is a Cantor set.
+ \item If $d>0$, there are $C,\eps_0>0$, depending on the fixed data,
+ such that
+ \begin{equation}\label{eq:main_cover}
+  N_{\eps}\bigl(\Phi(\D)\bigr)
+   \leq C\bigl(1+\log(1/\eps)\bigr)^{2d}
+   \qquad(0<\eps<\eps_0).
+ \end{equation}
+ Consequently $\boxdim\Phi(\D)=\hausdim\Phi(\D)=0$.
+\end{enumerate}
+\end{theorem}
+
+Only positivity and periodicity are assumed for $r_n$, not the stronger
+gcd-sequence property used in the dynamical application. The coprimality
+of the exponent periods with their own prime is used to prove perfectness.
+The covering estimate does not need that coprimality. These roles will be
+kept separate in the proof.

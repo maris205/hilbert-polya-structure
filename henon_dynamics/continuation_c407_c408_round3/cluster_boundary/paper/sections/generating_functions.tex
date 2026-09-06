@@ -1,0 +1,94 @@
+\section{Rational multiplicity-generating functions}\label{sec:series}
+
+We now aggregate the local formula without introducing an orbit-counting
+interpretation. Let
+\[
+ P_m=\sum_{S\subsetneq C_m}\prod_{R\in\Runs(S)}w_{|R|}(k)
+\]
+be its proper-subset part. Set $w_0=1$ for a block with no selected site.
+The periodic path weights give
+\begin{equation}\label{eq:runseries}
+ R_k(t):=\sum_{L\geq1}w_L(k)t^L
+ =\frac{(k-1)t+t^2+(2k-1)t^3+t^4}{1-t^4}.
+\end{equation}
+A separator followed by a possibly empty selected run has series
+\begin{equation}\label{eq:blockseries}
+ B_k(t)=t(1+R_k(t))
+ =\frac{t+(k-1)t^2+t^3+(2k-1)t^4}{1-t^4}.
+\end{equation}
+
+For fixed $m,q$, let $P_{m,q}$ be the total weight of subsets with exactly
+$q\geq1$ unselected sites. Marking one of these sites yields weighted
+count $qP_{m,q}$. Alternatively choose the mark's labeled position in
+$m$ ways and read the cyclic word from that site. There are $q$ ordered
+blocks, each a separator followed by a selected run. Their total weighted
+count is $m[t^m]B_k(t)^q$. Thus
+\begin{equation}\label{eq:markcount}
+ qP_{m,q}=m[t^m]B_k(t)^q.
+\end{equation}
+This equality holds also for rotationally symmetric words: sites are
+labeled, and no quotient by rotation has been taken. The empty selected
+subset corresponds to $q=m$ with all runs empty, so it is included.
+
+Since $B_k$ has zero constant term, the following sums are defined
+coefficientwise in $\C[[t]]$. Summing \eqref{eq:markcount} gives
+\begin{equation}\label{eq:logproper}
+ \sum_{m\geq1}\frac{P_m}{m}t^m
+ =\sum_{q\geq1}\frac{B_k(t)^q}{q}
+ =-\log(1-B_k(t)).
+\end{equation}
+By \eqref{eq:D} and \eqref{eq:blockseries},
+\[
+ 1-B_k(t)=\frac{D_k(t)}{1-t^4}.
+\]
+Define $T_m$ exactly by the formal coefficients
+\begin{equation}\label{eq:Tm}
+ \sum_{m\geq1}\frac{T_m}{m}t^m=-\log D_k(t).
+\end{equation}
+Equations \eqref{eq:logproper} and \eqref{eq:Tm} imply
+\[
+ P_m=T_m-4\one_{4\mid m}.
+\]
+Adding the full-cycle contribution from \cref{prop:cycles} yields the
+useful alternative form
+\begin{equation}\label{eq:traceform}
+ \ell_m(k)=T_m+1+4(k-1)\one_{4\mid m}.
+\end{equation}
+Exponentiating its formal sum divided by $m$ proves \eqref{eq:Z}.
+In particular \eqref{eq:firstfour} follows directly from the first four
+coefficients of $-\log D_k$; it is not an interpolation rule.
+
+There is also a finite matrix expression for $T_m$, useful for exact
+algebraic checks. The companion matrix
+\begin{equation}\label{eq:companion}
+ M_k=\begin{pmatrix}
+ 1&k-1&1&2k\\
+ 1&0&0&0\\
+ 0&1&0&0\\
+ 0&0&1&0
+ \end{pmatrix}
+\end{equation}
+satisfies $\det(I-tM_k)=D_k(t)$, so the formal determinant identity gives
+$T_m=\operatorname{tr}(M_k^m)$. For example, this identity follows by
+extending scalars to split the characteristic polynomial and expanding
+$-\log(1-\lambda t)$ for each eigenvalue, counted with algebraic
+multiplicity; both sides are then identities in the original coefficient
+ring. This matrix represents the combinatorial coefficient formula. We
+do not assert that it realizes the local algebra as a finite dynamical
+system.
+
+At the original clock $n$, \cref{lem:finite_support} gives
+\begin{equation}\label{eq:bclock}
+ b_{2m}=\bigl[k+1+(k-1)(-1)^m\bigr]\ell_m(k),\qquad b_{2m-1}=0.
+\end{equation}
+Indeed the bracket is $2$ for odd $m$ and $2k$ for even $m$.
+Substitution into its formal exponential gives
+\[
+ \sum_{n\geq1}\frac{b_n}{n}u^n
+ =\frac{k+1}{2}\log Z_k(u^2)
+   +\frac{k-1}{2}\log Z_k(-u^2),
+\]
+which proves \eqref{eq:native} and completes \cref{cor:series}.
+The exponents are integers because $k$ is odd, so the native-clock
+expression is rational as well. Both series encode scheme lengths on the
+specified stratum, not ordinary periodic-point numbers.

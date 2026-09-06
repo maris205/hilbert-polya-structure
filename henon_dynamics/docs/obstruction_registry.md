@@ -17,6 +17,27 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C407--HCS-C408 source-boundary register (2026-09-06)
+
+| ID | Candidate / scope | Exact boundary | Surviving result and limitation |
+|---|---|---|---|
+| HEN-O391 | HCS-C407 finite-adelic detector image after deleting the own-prime-coprime-period hypothesis | At p=2, period 2, r=1, t=0, and s_n=1 for odd n and zero for even n, detector compatibility makes every kernel one. The image is the singleton `{1/(1-Lambda^(-1))}` despite an active prime. | The admitted coprime-period theorem is not refuted. Its full finite-prime/wild Cantor and cover conclusion survives; signed weights, infinitely many primes, nonhyperbolic phases, injectivity and target divisors are not inferred. [Independent counterexample and proof review](../continuation_c407_c408_round3/wild_ordinary/CROSS_REVIEW_ARITHMETIC_TOPOLOGY.md) |
+| HEN-O392 | HCS-C408 unsaturated cyclic relation length as ordinary torus periodic cardinality or a smooth-surface fixed scheme | Alternating-zero points are outside the original torus domain. Their local relation algebra has embedding dimension m, hence for m>=3 cannot be a fixed subscheme of a smooth surface, whose local embedding dimension is at most two. | The exact all-m, all-odd-k local-thickness and rational multiplicity-series theorem survives. No classification of other zero patterns, total torus count or ordinary Artin--Mazur zeta follows. [Independent scope audit](../continuation_c407_c408_round3/ROOT_CLUSTER_REVIEW.md) |
+
+These are specified-source boundaries, invariant under actual identifications
+transporting the named observable. They do not exclude new clocks, different
+domains or future arithmetic bridges. C407/C408 now have complete reviewed
+manuscripts and PDFs, closing the five-paper batch at 58 pages; see
+[the final delivery](../continuation_c407_c408_round3/README.md). The following
+section retains the earlier partial-checkpoint statement, not the current
+completion status. No previous frozen payload is rewritten.
+
+The separate [wild ordinary-count scout](../continuation_c407_c408_round3/ROOT_WILD_CHECK.md)
+gives a new p=3, least-period-12 point with first-return multiplicity 12,
+not 3. It refutes the primitive-weight-one conjecture for `x+x^4`, not all
+possible ordinary-count formulas. Its general finite-field extension note
+is unadmitted and unnumbered, not an additional paper.
+
 ## HCS-C404--HCS-C406 partial source-boundary register (2026-09-06)
 
 | ID | Candidate / scope | Exact boundary | Surviving result and limitation |

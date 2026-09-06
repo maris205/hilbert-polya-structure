@@ -1,0 +1,45 @@
+// Independent local standard-basis check of original cyclic equations.
+// Coefficients are rational; ds is a local monomial ordering at the origin.
+// Shift the alternating point (0,-1,0,-1,...) to the origin.
+// No dilogarithm expansion or potential-derived equations are used.
+
+proc check_local(int k, int m, int expected)
+{
+    int n=2*m;
+    execute("ring R=0,(x(1.."+string(n)+")),ds;");
+    ideal I;
+    int j;
+    int jm;
+    int jp;
+    poly middle;
+    poly left;
+    poly right;
+    for(j=0;j<n;j++)
+    {
+        jm=(j+n-1)%n;
+        jp=(j+1)%n;
+        middle=var(j+1)-(j%2);
+        left=var(jm+1)-(jm%2);
+        right=var(jp+1)-(jp%2);
+        I[j+1]=middle^k+1-left*right;
+    }
+    ideal G=std(I);
+    int observed=vdim(G);
+    print("k="+string(k)+", m="+string(m)+", n="+string(n)
+          +", local_length="+string(observed)+", expected="+string(expected));
+    if(observed!=expected)
+    {
+        ERROR("local length mismatch");
+    }
+}
+
+check_local(3,1,2);
+check_local(3,2,6);
+check_local(3,3,11);
+// m=4, k=3 was attempted separately and stopped after > 77 seconds
+// and about 0.9 GiB RSS, without a result. Do not count it as a pass.
+check_local(5,1,2);
+check_local(5,2,10);
+check_local(5,3,17);
+print("ALL_SIX_SMALL_LOCAL_LENGTH_CHECKS_MATCH");
+quit;

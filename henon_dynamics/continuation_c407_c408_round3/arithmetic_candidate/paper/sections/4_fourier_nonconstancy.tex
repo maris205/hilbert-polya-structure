@@ -1,0 +1,148 @@
+\section{Positive radial sums and local nonconstancy}\label{sec:fourier}
+
+Fix a prime $p$ and give $\Z_p$ its Haar probability measure $dz$.
+For $k\geq1$, use the additive character
+\begin{equation}\label{eq:character}
+ \chi_k(z)=\exp\!\left(\frac{2\pi i\,[z]_{p^k}}{p^k}\right),
+\end{equation}
+where $[z]_{p^k}$ is the representative in $\{0,\ldots,p^k-1\}$.
+The conductor of this character is $p^k$. In particular, for every fixed
+ordinary integer $j$, one has $\chi_k(j)\longrightarrow1$ as $k\to\infty$.
+The choice of a sequence of characters with this last property will
+prevent cancellation in a positive sum with integer centers.
+
+\begin{lemma}[Radial Fourier coefficients]\label{lem:fourier}
+For an active exponent pair $(s,t)$, put
+\[
+ h(v)=p^{-sv-tp^v}\quad(v\geq0),\qquad
+ A_{s,t}(k)=\sum_{j\geq k}p^{-j}\bigl(h(j-1)-h(j)\bigr).
+\]
+Then $A_{s,t}(k)>0$ and
+\begin{equation}\label{eq:fourier_kernel}
+ \int_{\Z_p}\Hp{p}{s}{t}(z)\overline{\chi_k(z)}\,dz=-A_{s,t}(k).
+\end{equation}
+If $t=0$ and $s>0$, then
+\begin{equation}\label{eq:fourier_tame}
+ A_{s,0}(k)=
+ \frac{(p^s-1)p^{-(s+1)k}}{1-p^{-(s+1)}}.
+\end{equation}
+If $t>0$ and $s\geq0$, then
+\begin{equation}\label{eq:fourier_wild}
+ A_{s,t}(k)\sim p^{-k-s(k-1)-tp^{k-1}}
+ \qquad(k\to\infty).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The sequence $h(v)$ is strictly decreasing to zero. With
+$\delta_j=h(j-1)-h(j)>0$, telescoping gives
+\begin{equation}\label{eq:radial_expansion}
+ \Hp{p}{s}{t}(z)=h(0)-\sum_{j\geq1}\delta_j\1_{p^j\Z_p}(z).
+\end{equation}
+This identity holds also at zero, since $\sum_{j\geq1}\delta_j=h(0)$.
+The series converges uniformly, its remainder being bounded by the tail
+of that convergent positive numerical series. The character integral on
+$p^j\Z_p$ is zero for $j<k$ and is $p^{-j}$ for $j\geq k$.
+Termwise integration of~\eqref{eq:radial_expansion} proves
+\eqref{eq:fourier_kernel} and strict positivity of $A_{s,t}(k)$.
+
+When $t=0$, the summand in $A_{s,0}(k)$ equals
+$(p^s-1)p^{-(s+1)j}$, giving~\eqref{eq:fourier_tame} by a geometric sum.
+When $t>0$,
+\[
+ \frac{h(k)}{h(k-1)}=p^{-s-t(p-1)p^{k-1}}\longrightarrow0.
+\]
+Thus the first summand of $A_{s,t}(k)$ is asymptotic to
+$p^{-k}h(k-1)$. The sum of all later summands is bounded by
+\[
+ \sum_{j\geq k+1}p^{-j}h(j-1)
+ \leq\frac{p^{-k-1}h(k)}{1-p^{-1}},
+\]
+which is negligible compared with $p^{-k}h(k-1)$. This proves
+\eqref{eq:fourier_wild}.
+\end{proof}
+
+\begin{lemma}[Positive translated radial series]\label{lem:positive_series}
+Let $T$ be a finite set of active exponent pairs in $[0,\infty)^2$.
+Let $I$ be a nonempty finite or countable index set, with ordinary integers
+$j_i$, types $\theta_i=(s_i,t_i)\in T$, and positive real numbers $b_i$
+such that $\sum_{i\in I}b_i<\infty$. Then the continuous function
+\begin{equation}\label{eq:positive_series}
+ F(z)=\sum_{i\in I}b_i\Hp{p}{s_i}{t_i}(z-j_i)
+\end{equation}
+is not constant on $\Z_p$.
+\end{lemma}
+
+\begin{proof}
+The series is uniformly convergent because its kernels are bounded by one.
+Among the types actually present, choose $\theta_*=(s_*,t_*)$ by first
+minimizing $t$ and then minimizing $s$.
+Equations~\eqref{eq:fourier_tame}--\eqref{eq:fourier_wild} imply
+\begin{equation}\label{eq:dominant_ratio}
+ \frac{A_{s,t}(k)}{A_{s_*,t_*}(k)}\longrightarrow
+ \begin{cases}1,&(s,t)=(s_*,t_*),\\0,&(s,t)\neq(s_*,t_*).
+ \end{cases}
+\end{equation}
+For completeness, if $t_*=0$, any positive $t$ has faster than geometric
+decay, and among the types with $t=0$ the smallest $s$ has the slowest
+geometric decay. If $t_*>0$, a larger $t$ contributes a factor
+$p^{-(t-t_*)p^{k-1}}$ that dominates any geometric factor; at equal $t$,
+a larger $s$ contributes $p^{-(s-s_*)(k-1)}$. These observations give all
+cases in~\eqref{eq:dominant_ratio}.
+The ratios are bounded uniformly over $k\geq1$ and the finite set of
+types: each converges, and every denominator is strictly positive.
+
+With $\widehat F(\chi)=\int_{\Z_p}F(z)\overline{\chi(z)}\,dz$,
+translation and Lemma~\ref{lem:fourier} give
+\begin{equation}\label{eq:fourier_sum_limit}
+ \frac{\widehat F(\chi_k)}{A_{s_*,t_*}(k)}
+ =-\sum_{i\in I}b_i\overline{\chi_k(j_i)}
+             \frac{A_{s_i,t_i}(k)}{A_{s_*,t_*}(k)}
+ \longrightarrow-\sum_{\{i:\theta_i=\theta_*\}}b_i<0.
+\end{equation}
+The interchange with the integral follows from uniform absolute
+convergence. The displayed limit follows from dominated convergence for
+the counting measure, using the uniform ratio bound, $\sum_i b_i<\infty$,
+and $\chi_k(j_i)\to1$ for each fixed $i$.
+The sum on the right is strictly positive before its minus sign, because
+the selected type is present. Hence $\widehat F(\chi_k)\neq0$ for all
+sufficiently large $k$. A constant function has zero integral against
+every nontrivial character, proving the assertion.
+\end{proof}
+
+\begin{lemma}[Local form]\label{lem:local}
+Let $c_\ell>0$ for $\ell\geq0$, with $\sum_{\ell\geq0}c_\ell<\infty$,
+and let $(s_\ell,t_\ell)$ range over a finite set of nonnegative real
+exponent pairs, now allowing inactive pairs. Consider
+\[
+ G(z)=\sum_{\ell\geq0}c_\ell\Hp{p}{s_\ell}{t_\ell}(z-\ell).
+\]
+If the ball $a+p^K\Z_p$, with $K\geq0$ and $0\leq a<p^K$, contains
+at least one integer center $\ell$ whose pair is active, then $G$ is
+not constant on that ball.
+\end{lemma}
+
+\begin{proof}
+A center outside the ball has constant valuation distance from every
+point of the ball, by the ultrametric inequality. Its summand is therefore
+constant there. An inactive pair contributes a constant on every ball.
+The sum of these constant terms converges absolutely and is constant.
+
+For an active center in the ball write $\ell=a+p^Kj$, where $j\geq0$,
+and write $z=a+p^Ky$. The kernel rescales as
+\begin{equation}\label{eq:local_rescaling}
+ \Hp{p}{s}{t}(z-\ell)
+   =p^{-sK}\Hp{p}{s}{tp^K}(y-j).
+\end{equation}
+The identity follows by adding $K$ to the valuation, and the zero
+convention verifies it at $y=j$ as well. The transformed exponent pairs
+still form a finite active set. Their coefficients $c_\ell p^{-s_\ell K}$
+are positive and summable, since $p^{-s_\ell K}\leq1$.
+The active part is nonempty by hypothesis, so
+Lemma~\ref{lem:positive_series} proves its nonconstancy on $\Z_p$.
+Rescaling back proves the result.
+\end{proof}
+
+The proofs use nonnegative real exponents directly. In particular, no
+integrality condition on these exponents or injectivity conclusion from a
+one-prime detector theorem has been imported.

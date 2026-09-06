@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C407--HCS-C408 completing-contract register (2026-09-06)
+
+The two remaining contracts in the authorized C404--C408 batch have passed
+independent internal proof/source admission and non-author manuscript/citation
+review. The two complete PDFs total 25 pages; each has two fresh byte-identical
+builds and all-page QA. Together with the frozen 33 pages, all five papers are
+complete (58 pages). See [the five-paper delivery](../continuation_c407_c408_round3/README.md)
+and [the five-contract plan](../continuation_c407_c408_round3/BATCH_PLAN.md).
+Baseline `ec024cadfbb728cc66aa0dcaca88a6d2f4dbd4d0`; evaluator v0.2.0,
+SHA256 `6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| Candidate | Complete admitted source theorem | Strict tuple | Evidence |
+|---|---|---|---|
+| HCS-C407 | Every distorted hyperbolic FAD orbit-limit image is Cantor with zero upper box dimension and `N_epsilon<=C(1+log(1/epsilon))^(2d)` for any fixed finite active-prime set, including wild terms. Adaptive covers and finite-type positive Fourier nonconstancy close the regimes left open by the checked BCH 2024 v2. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [proof](../continuation_c407_c408_round3/arithmetic_candidate/PROOF_PACKAGE.md) · [evaluation](../continuation_c407_c408_round3/evaluations/route_a/HCS-C407/2026-09-06.yaml) |
+| HCS-C408 | For all odd k>=3 and all relation lengths n=2m, every alternating-zero local algebra of the unsaturated cyclic exchange relations has its exact Artin length, including path/cycle resonances `2k-1` and `4k+1`, and an explicit rational multiplicity series. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [proof](../continuation_c407_c408_round3/cluster_boundary/PROOF_PACKAGE.md) · [evaluation](../continuation_c407_c408_round3/evaluations/route_a/HCS-C408/2026-09-06.yaml) |
+
+C407 is source-local `ROUTE_A_EXPLORATORY`; C408 is target
+`ROUTE_A_REJECTED`. All target A2/A3 fail, three-type arithmetic controls
+remain INCOMPLETE and all target/Route-B scope flags are false. C407 does
+not certify worldwide priority: an EMS final book version was not obtained.
+C408 does not count ordinary periodic points or identify its local scheme
+with a smooth-surface fixed scheme. See [evaluation scope](../continuation_c407_c408_round3/EVALUATION_SCOPE.md).
+The unnumbered wild period-12 counterexample and finite-field note remain
+unadmitted; no sixth paper or C409 is started. C404--C406 retain their 179
+sealed files unchanged. The following partial-register section records the
+earlier checkpoint and its then-vacant slots, superseded only by this entry.
+
 ## HCS-C404--HCS-C406 partial source-theorem register (2026-09-06)
 
 Three independent complete manuscripts total 33 pages, with proof/source

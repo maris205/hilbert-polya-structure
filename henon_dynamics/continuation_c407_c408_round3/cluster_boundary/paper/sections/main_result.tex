@@ -1,0 +1,108 @@
+\section{Cyclic relation algebras and the main theorem}\label{sec:main}
+
+Fix an odd integer $k\geq3$. For $n\geq1$ define
+\begin{equation}\label{eq:algebra}
+ \Acyc_{k,n}
+ =\C[x_0,\ldots,x_{n-1}]
+   \big/(x_i^k+1-x_{i-1}x_{i+1}:0\leq i<n),
+\end{equation}
+where indices are modulo $n$. The neighbor product is literal: at $n=2$
+the equation for $x_i$ contains the square of the other coordinate.
+This is the \emph{unsaturated cyclic relation algebra}. No saturation by
+the coordinates, cluster-surface replacement, or passage to reduced
+points is part of its definition.
+
+\begin{lemma}\label{lem:finite_support}
+The algebra $\Acyc_{k,n}$ has dimension $k^n$ over $\C$.
+For $n=2m$, its alternating-zero points in one phase are
+\begin{equation}\label{eq:alt_point}
+ x_{2j}=0,\qquad x_{2j+1}=t_j,\qquad
+ t_j^k=-1,\quad t_{j-1}t_j=1 \quad(j\bmod m).
+\end{equation}
+There are $k$ choices in each phase when $m$ is even, and one choice
+in each phase when $m$ is odd. The two phases are disjoint.
+\end{lemma}
+
+\begin{proof}
+For a monomial order refining total degree, the displayed relations have
+leading monomials $x_i^k$, since $k>2$. These monomials are pairwise
+relatively prime, so the relations form a Gr\"obner basis by the product
+criterion. The standard monomials have all exponents below $k$; there are
+$k^n$ of them. Thus every localization at a point is an Artin local algebra.
+
+Substitution of alternating zeros gives exactly
+\eqref{eq:alt_point}. The product conditions imply
+$t_j=t_0^{(-1)^j}$. If $m$ is even this is cyclic for any of the $k$
+roots of $-1$. If $m$ is odd, closure forces $t_0^2=1$; for odd $k$,
+the condition $t_0^k=-1$ leaves only $t_0=-1$.
+Shifting all indices by one gives the other phase. Its zero coordinates
+and nonzero coordinates are interchanged, hence the phases cannot coincide.
+\end{proof}
+
+These are labeled solutions of the cyclic equations, not a count of
+orbits of exact period $2m$. In particular the support pattern has period
+dividing four. We shall prove that all its permitted root choices and both
+phases have isomorphic local algebras. Denote their common length by
+$\ell_m(k)$.
+
+For combinatorial purposes let $C_m$ be the labeled cyclic set of $m$
+sites. Its cycle potential has one loop when $m=1$ and two copies of the
+edge when $m=2$. Every nonempty proper induced connected component is an
+ordinary path, with an isolated site counted as a path of length one.
+For a proper subset $S\subsetneq C_m$, let $\Runs(S)$ be its maximal
+cyclic runs of selected sites. Put
+\begin{equation}\label{eq:weights}
+ w_L(k)=
+ \begin{cases}
+  1,&L\equiv0,2\pmod4,\\
+  k-1,&L\equiv1\pmod4,\\
+  2k-1,&L\equiv3\pmod4,
+ \end{cases}
+ \qquad
+ c_m(k)=
+ \begin{cases}
+  1,&4\nmid m,\\
+  4k+1,&4\mid m.
+ \end{cases}
+\end{equation}
+
+\begin{theorem}[Alternating-zero local length]\label{thm:length}
+For every odd $k\geq3$ and every $m\geq1$, all alternating-zero
+points of $\Acyc_{k,2m}$ have isomorphic local algebras, of length
+\begin{equation}\label{eq:main_length}
+ \ell_m(k)=c_m(k)+
+  \sum_{S\subsetneq C_m}\ \prod_{R\in\Runs(S)}w_{|R|}(k).
+\end{equation}
+The empty subset contributes one. Their total contribution to the
+length of $\Acyc_{k,2m}$ is $2\ell_m(k)$ when $m$ is odd and
+$2k\ell_m(k)$ when $m$ is even.
+\end{theorem}
+
+\begin{corollary}[Rational multiplicity series]\label{cor:series}
+Define
+\begin{equation}\label{eq:D}
+ D_k(t)=1-t-(k-1)t^2-t^3-2kt^4.
+\end{equation}
+As an identity of formal power series,
+\begin{equation}\label{eq:Z}
+ Z_k(t):=\exp\!\left(\sum_{m\geq1}\frac{\ell_m(k)}m t^m\right)
+ =\frac1{(1-t)D_k(t)(1-t^4)^{k-1}}.
+\end{equation}
+Let $b_n$ be the total alternating-zero contribution at clock $n$, with
+$b_n=0$ for odd $n$. Then
+\begin{equation}\label{eq:native}
+ \exp\!\left(\sum_{n\geq1}\frac{b_n}n u^n\right)
+ =Z_k(u^2)^{(k+1)/2}Z_k(-u^2)^{(k-1)/2}.
+\end{equation}
+\end{corollary}
+
+The theorem is proved by the local reductions in the next three sections;
+the corollary is proved by an exact double count in \cref{sec:series}.
+For orientation, the first four lengths are
+\begin{equation}\label{eq:firstfour}
+ \ell_1=2,\qquad \ell_2=2k,\qquad
+ \ell_3=3k+2,\qquad \ell_4=2k(k+6).
+\end{equation}
+The weights in \eqref{eq:weights} are local gradient colengths, not numbers
+of reduced branches. This is why the intersection argument below must
+retain nilpotents.

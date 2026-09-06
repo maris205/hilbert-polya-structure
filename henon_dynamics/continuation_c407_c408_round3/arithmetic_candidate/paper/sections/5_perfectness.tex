@@ -1,0 +1,103 @@
+\section{Every detector cylinder has nonconstant image}\label{sec:perfectness}
+
+\begin{lemma}[The detector group]\label{lem:detector_group}
+Set $\nu_p=v_p(w)$. The group in~\eqref{eq:detector_definition} is
+\begin{equation}\label{eq:detector_congruences}
+ \D=\left\{(a,x)\in(\Z/w\Z)\times\prod_{p\in S}\Z_p:
+       x_p\equiv a\pmod{p^{\nu_p}}\text{ for every }p\in S\right\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Every diagonal integer point satisfies the congruences, whose solution
+set is closed. This proves one inclusion. Conversely, take a point
+satisfying them and prescribe a neighborhood by fixing $a\bmod w$ and
+finitely many residues $x_p\bmod p^{K_p}$. Increasing the $K_p$ if
+necessary, assume $K_p\geq\nu_p$. The congruences
+\[
+ n\equiv a\pmod w,\qquad n\equiv x_p\pmod{p^{K_p}}\quad(p\in S)
+\]
+are compatible, since their only overlapping prime powers are those
+already controlled by~\eqref{eq:detector_congruences}.
+The Chinese remainder theorem provides an arithmetic progression of
+integer solutions. Thus every such neighborhood contains a diagonal
+integer point, proving the other inclusion.
+\end{proof}
+
+\begin{proposition}[Nowhere local constancy]\label{prop:nowhere_constant}
+If $d>0$, the function $\Phi$ is not constant on any nonempty relative
+open subset of $\D$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:detector_group}, every nonempty relative open subset
+contains a product cylinder
+\begin{equation}\label{eq:cylinder}
+ U=\{a\}\times\prod_{p\in S}(b_p+p^{K_p}\Z_p),
+ \qquad K_p\geq\nu_p,\quad b_p\equiv a\pmod{p^{\nu_p}}.
+\end{equation}
+Choose the representatives $0\leq b_p<p^{K_p}$ and fix any active prime
+$p_0\in S$. For every other prime $q\in S\setminus\{p_0\}$, select a
+negative ordinary integer $m_q$ in its prescribed ball. This is possible
+by subtracting a sufficiently large positive multiple of $q^{K_q}$ from
+$b_q$. Freeze these coordinates and vary only $x_{p_0}$ in its ball.
+The resulting slice lies in $U$ by~\eqref{eq:detector_congruences}.
+On this slice the detector function becomes
+\begin{equation}\label{eq:slice_series}
+ \sum_{\ell\geq0}c_\ell
+   \Hp{p_0}{s_{p_0,a-\ell}}{t_{p_0,a-\ell}}(x_{p_0}-\ell),
+\end{equation}
+where
+\[
+ c_\ell=\Lambda^{-\ell}r_{a-\ell}
+       \prod_{q\neq p_0}
+       \Hp{q}{s_{q,a-\ell}}{t_{q,a-\ell}}(m_q-\ell).
+\]
+Every $c_\ell$ is strictly positive: $r_{a-\ell}>0$, and
+$m_q<0\leq\ell$ prevents any argument $m_q-\ell$ from vanishing.
+Every active kernel is strictly positive away from zero, and an inactive
+one is identically one. Also $c_\ell\leq R\Lambda^{-\ell}$, so these
+coefficients are summable.
+
+Because $p_0$ is active, some residue $n_0\bmod m_{p_0}$ has a nonzero
+exponent pair. Coprimality of $m_{p_0}$ with $p_0$ implies that
+\begin{equation}\label{eq:active_crt}
+ \ell\equiv b_{p_0}\pmod{p_0^{K_{p_0}}},\qquad
+ a-\ell\equiv n_0\pmod{m_{p_0}}
+\end{equation}
+has an ordinary integer solution. Its solution progression contains
+nonnegative integers. Hence the varying ball contains an active center
+of~\eqref{eq:slice_series}. Lemma~\ref{lem:local} proves nonconstancy
+on the slice, and therefore on $U$.
+\end{proof}
+
+The use of negative integers in the other coordinates is already present
+in~\cite[proof of Theorem 12.5.1, pp.~132--133]{bch2024}. Here it is
+combined with Lemma~\ref{lem:local} and~\eqref{eq:active_crt} to obtain
+nonconstancy on every cylinder, which is the stronger property needed
+to exclude isolated values.
+
+\begin{proof}[Completion of the proof of Theorem~\ref{thm:image}]
+Suppose first that $d>0$. The image $E=\Phi(\D)$ is nonempty and compact.
+If $y$ were an isolated point of $E$, there would be an open real interval
+$J$ such that $J\cap E=\{y\}$. The nonempty set
+$\Phi^{-1}(\{y\})=\Phi^{-1}(J)$ would then be open in $\D$, and $\Phi$
+would be constant on it. This contradicts
+Proposition~\ref{prop:nowhere_constant}. Thus $E$ is perfect.
+
+Section~\ref{sec:covers} proves~\eqref{eq:main_cover} and shows that $E$
+is nowhere dense and contains no nondegenerate interval. Every connected
+subset of $\R$ is an interval, so $E$ is totally disconnected. It is
+therefore a Cantor set in the stated sense, with the two dimensions
+already obtained from the covers.
+
+If $d=0$, the detector group is just $\Z/w\Z$, and the empty product in
+\eqref{eq:detector_function} is one. Writing $\ell=j+kw$, with
+$0\leq j<w$ and $k\geq0$, gives
+\[
+ \Phi(a)=\sum_{j=0}^{w-1}r_{a-j}\Lambda^{-j}
+                   \sum_{k\geq0}\Lambda^{-kw}
+   =\frac{\sum_{j=0}^{w-1}r_{a-j}\Lambda^{-j}}{1-\Lambda^{-w}}.
+\]
+This is exactly the finite image in~\eqref{eq:finite_image}.
+\end{proof}

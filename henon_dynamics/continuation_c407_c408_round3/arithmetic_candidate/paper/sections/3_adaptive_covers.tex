@@ -1,0 +1,125 @@
+\section{Adaptive valuation covers}\label{sec:covers}
+
+A full partition of $\Z_p$ into residues modulo $p^K$ has exponentially
+many pieces in $K$. For the detector series, only distances to a finite
+list of integer centers matter after truncation. Refining the occupied
+branches of the residue tree gives a smaller partition.
+
+\begin{lemma}[Adaptive partition]\label{lem:partition}
+Let $E\subset\Z_p$ contain at most $L$ points, and let $K\geq1$ be an
+integer. There is a finite clopen partition of $\Z_p$ into at most
+\begin{equation}\label{eq:partition_count}
+ 1+(p-1)LK
+\end{equation}
+atoms such that, for every $e\in E$, the function
+$z\mapsto\min\{v_p(z-e),K\}$ is constant on each atom.
+\end{lemma}
+
+\begin{proof}
+Start with the ball $\Z_p$ of depth zero. For $j=0,\ldots,K-1$, split
+each current depth-$j$ ball containing a point of $E$ into its $p$ children
+of depth $j+1$. There are at most $L$ such balls at each depth. Thus at
+most $LK$ splits occur, and each split increases the leaf count by $p-1$.
+The terminal leaves form a clopen partition satisfying~\eqref{eq:partition_count}.
+
+A terminal ball of depth less than $K$ contains no center. For a center
+outside a ball, the ultrametric inequality makes its distance from every
+point of that ball the same: if $z,z'$ lie in the ball and $e$ lies outside,
+then $v_p(z-e)<v_p(z-z')$, hence $v_p(z'-e)=v_p(z-e)$.
+On a leaf of depth $K$, either the center is outside and this argument
+applies, or the center lies inside and both valuations are at least $K$.
+This proves the required constancy of the truncated valuations.
+\end{proof}
+
+\begin{lemma}[Valuation tails]\label{lem:valuation_tail}
+For each active prime $p$, there is a constant $c_p>0$ such that every
+active exponent pair occurring at $p$ satisfies
+\begin{equation}\label{eq:valuation_tail}
+ \sup_{v_p(z)\geq K}\Hp{p}{s}{t}(z)\leq e^{-c_pK}
+ \qquad(K\geq1).
+\end{equation}
+The same $c_p$ works for all pairs at this fixed prime and all integers $K$.
+\end{lemma}
+
+\begin{proof}
+If $s>0$, then the kernel is at most $p^{-sK}$ on the indicated set.
+If $s=0<t$, then
+$p^{-tp^K}\leq p^{-tK}$, since $p^K\geq K$.
+For each active pair choose $s\log p$ in the first case and $t\log p$
+in the second. Their minimum is positive because there are finitely many
+active pairs. It can be used as $c_p$. At $z=0$ the kernel vanishes,
+so the prescribed value obeys the same bound.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:image}, the covering and dimension assertions]
+Assume $d>0$, and let $R,B$ be as in~\eqref{eq:RB}. For $0<\eps<1$ choose
+\begin{align}
+ L&=\max\left\{1,\left\lceil
+                \frac{\log(8B/\eps)}{\log\Lambda}
+               \right\rceil\right\},\label{eq:L_choice}\\
+ K_p&=\max\left\{1,\left\lceil
+                    \frac{\log(8dB/\eps)}{c_p}
+                   \right\rceil\right\}\quad(p\in S).
+                   \label{eq:K_choice}
+\end{align}
+The tail of~\eqref{eq:detector_function} beginning at $\ell=L$ is bounded
+uniformly by
+\begin{equation}\label{eq:series_tail}
+ \sum_{\ell\geq L}R\Lambda^{-\ell}
+   =B\Lambda^{-L}\leq\eps/8.
+\end{equation}
+Lemma~\ref{lem:valuation_tail} and~\eqref{eq:K_choice} also give
+\begin{equation}\label{eq:small_kernel}
+ \Hp{p}{s}{t}(z)\leq\frac{\eps}{8dB}
+ \quad\text{if }v_p(z)\geq K_p\text{ and }(s,t)\text{ is active}.
+\end{equation}
+
+Apply Lemma~\ref{lem:partition} in coordinate $p$ with centers
+$\{0,\ldots,L-1\}$ and depth $K_p$. Fix a residue $a\in\Z/w\Z$ and
+two points $(a,x),(a,y)$ in the same product atom. For $\ell<L$ and
+$p\in S$, their valuations at center $\ell$ either agree below $K_p$
+or are both at least $K_p$. In the first case their kernel values are
+equal. In the second case an inactive kernel is constant one, while two
+active kernel values both lie in $[0,\eps/(8dB)]$. Therefore
+\begin{equation}\label{eq:coordinate_variation}
+ \left|\Hp{p}{s_{p,a-\ell}}{t_{p,a-\ell}}(x_p-\ell)
+       -\Hp{p}{s_{p,a-\ell}}{t_{p,a-\ell}}(y_p-\ell)\right|
+ \leq\frac{\eps}{8dB}.
+\end{equation}
+
+For numbers $u_p,v_p\in[0,1]$, telescoping the product gives
+\begin{equation}\label{eq:product_telescope}
+ \left|\prod_{p\in S}u_p-\prod_{p\in S}v_p\right|
+ \leq\sum_{p\in S}|u_p-v_p|.
+\end{equation}
+Indeed, replace one factor at a time; the other factors in each difference
+have absolute value at most one. By~\eqref{eq:coordinate_variation}, the
+variation of the first $L$ summands of $\Phi$ on one product atom is at most
+\[
+ \sum_{\ell<L}\Lambda^{-\ell}r_{a-\ell}
+                  \frac{\eps}{8B}\leq\eps/8.
+\]
+The two tails contribute at most $\eps/4$ by~\eqref{eq:series_tail}.
+Hence the image of the atom, restricted to $\D$, has diameter at most
+$3\eps/8<\eps$. Each nonempty restricted atom is compact, so its image
+fits in a closed interval of length $\eps$.
+
+The total number of intervals needed is consequently at most
+\begin{equation}\label{eq:product_cover_count}
+ w\prod_{p\in S}\bigl(1+(p-1)LK_p\bigr).
+\end{equation}
+All the data are fixed, and both $L$ and every $K_p$ are
+$O(1+\log(1/\eps))$ as $\eps\downarrow0$.
+Absorbing the finitely many factors in~\eqref{eq:product_cover_count}
+into $C$ proves~\eqref{eq:main_cover}.
+
+Definition~\eqref{eq:box_definition} now gives upper box dimension zero.
+For every $\alpha>0$, the same covers have total $\alpha$-power of their
+diameters at most
+$C(1+\log(1/\eps))^{2d}\eps^\alpha$, which tends to zero.
+Thus the Hausdorff dimension is also zero. A nondegenerate interval
+requires at least a fixed positive multiple of $\eps^{-1}$ intervals of
+length $\eps$ to cover it, so $\Phi(\D)$ contains no such interval.
+It is compact and hence closed. Its empty interior makes it nowhere dense.
+Perfectness, which is not implied by these estimates, is proved below.
+\end{proof}

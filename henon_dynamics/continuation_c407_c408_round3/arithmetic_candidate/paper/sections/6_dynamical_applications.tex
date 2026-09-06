@@ -1,0 +1,196 @@
+\section{Hyperbolic FAD systems and realized examples}\label{sec:dynamics}
+
+We now state precisely the classical reduction that makes the image
+theorem an orbit-counting result. No fixed-point realizability assertion
+is made for arbitrary data in Theorem~\ref{thm:image}.
+
+\subsection{The FAD convention and detector reduction}
+
+A self-map $f:X\to X$ is \emph{confined} when $\Fix(f^n)$ is finite for
+every $n\geq1$. Write $f_n=\#\Fix(f^n)$ and let $P_f(n)$ be the number
+of primitive periodic orbits of length exactly $n$. Thus
+\[
+ f_n=\sum_{k\mid n}kP_f(k),\qquad
+ \pi_f(N)=\sum_{n=1}^{N}P_f(n).
+\]
+All time parameters here are native integer iterates; no time change or
+alternative normalization is introduced.
+
+A sequence $(a_n)_{n\geq1}$ is a \emph{gcd sequence} if some $h\geq1$
+satisfies $a_n=a_{\gcd(n,h)}$ for every $n\geq1$. It is periodic and can
+be extended to all integer indices by periodicity.
+Following~\cite[Definitions 7.1.1--7.1.2]{bch2024}, a FAD system is a
+confined system whose fixed-point counts admit a representation
+\begin{equation}\label{eq:fad_counts}
+ f_n=|\det(A^n-I)|c^n r_n
+       \prod_{p\in S}|n|_p^{s_{p,n}}p^{-t_{p,n}|n|_p^{-1}},
+ \qquad n\geq1.
+\end{equation}
+Here $A$ is an integral square matrix, $c>0$, $S$ is a finite prime set,
+$(r_n)$ is a positive real gcd sequence, and for each $p\in S$ the
+sequences $(s_{p,n})$ and $(t_{p,n})$ are nonnegative real gcd sequences
+whose periods are coprime to $p$. Their least common period is therefore
+coprime to $p$ as well. The matrix may have size zero, with determinant
+factor interpreted as one. These are restrictions on the counts of a
+genuine self-map, not a claim that every integer sequence of this form is
+realizable.
+
+Expand the multiplicative part as an exponential polynomial, collecting
+distinct roots with nonzero coefficients:
+\begin{equation}\label{eq:dominant_roots}
+ |\det(A^n-I)|c^n=\sum_j m_j\lambda_j^n,
+ \qquad \Lambda=\max_j|\lambda_j|.
+\end{equation}
+For the systems considered below this expression is nonzero. A root of
+modulus $\Lambda$ is dominant. The FAD meaning of \emph{hyperbolic} is
+that there is exactly one dominant root
+\cite[Definition 10.3.9]{bch2024}. It is then the positive real root
+$\Lambda$; moreover the normalized leading factor is identically one,
+not just an unspecified positive constant
+\cite[Lemmas 10.3.2 and 10.3.10]{bch2024}.
+The entropy in this convention is $\log\Lambda$
+\cite[Definition 10.3.4]{bch2024}. We assume it is positive, equivalently
+$\Lambda>1$, without asserting equality with topological entropy for an
+arbitrary realization of the count sequence.
+
+Remove inactive primes from the representation and let $d$ be the number
+remaining. Take $w$ to be a common period of its data and form $\D$ and
+$\Phi$ as in~\eqref{eq:detector_definition}--\eqref{eq:detector_function}.
+The classical detector-image theorem specializes to
+\begin{equation}\label{eq:classical_reduction}
+ \LL_f:=\operatorname{Acc}_{N\to\infty}
+       \frac{N\pi_f(N)}{\Lambda^N}=\Phi(\D).
+\end{equation}
+To specify the specialization, the general detector of
+\cite[Definition 12.4.1]{bch2024} also includes the phases
+$(\lambda_j/\Lambda)^n$ of the dominant roots. Hyperbolicity leaves only
+$\lambda_1/\Lambda=1$, so this coordinate is trivial.
+The factor denoted $u$ in that source is identically one. Its equation
+(12.4) is consequently exactly~\eqref{eq:detector_function}, with the
+continuous zero values in~\eqref{eq:kernel_zero}. Its Theorem 12.4.3(ii)
+then gives~\eqref{eq:classical_reduction}. Thus the counting asymptotics
+and the detector construction in this step are entirely prior input.
+
+\begin{corollary}[Orbit-limit geometry]\label{cor:fad}
+Let $(X,f)$ be a positive-entropy hyperbolic FAD system in the convention
+above. If $d=0$, the accumulation set of $N\pi_f(N)/\Lambda^N$ is the
+finite set in~\eqref{eq:finite_image}. If $d>0$, that accumulation set
+is a Cantor set and
+\begin{equation}\label{eq:dynamical_cover}
+ N_{\eps}(\LL_f)\leq C\bigl(1+\log(1/\eps)\bigr)^{2d}
+ \qquad(0<\eps<\eps_0)
+\end{equation}
+for constants depending on the fixed system. In particular
+$\boxdim\LL_f=\hausdim\LL_f=0$.
+\end{corollary}
+
+\begin{proof}
+The data in~\eqref{eq:fad_counts} satisfy the hypotheses of
+Theorem~\ref{thm:image}; the gcd condition is stronger than the
+periodicity used there. Apply that theorem to the classical equality
+\eqref{eq:classical_reduction}.
+\end{proof}
+
+\subsection{Two distortion primes on a solenoid}
+
+Let $X$ be the Pontryagin dual of the discrete additive group $\Z[1/15]$,
+and let $T:X\to X$ be dual to multiplication by $2$.
+This is a classical $S$-integer system, and its fixed-point formula is
+\begin{equation}\label{eq:solenoid_count}
+ \#\Fix(T^n)=(2^n-1)|2^n-1|_3|2^n-1|_5
+ \qquad(n\geq1)
+\end{equation}
+by~\cite[Definition 9.1.2 and Proposition 9.1.4]{bch2024}.
+In this particular case the formula can also be seen from the finite
+quotient $\Z[1/15]/(2^n-1)\Z[1/15]$: localization removes exactly the
+$3$- and $5$-parts of $2^n-1$, and duality identifies its cardinality with
+the fixed-point count.
+
+The familiar lifting-of-valuations calculation gives
+\begin{align*}
+ v_3(2^n-1)&=\begin{cases}0,&2\nmid n,\\1+v_3(n),&2\mid n,\end{cases}
+ &
+ v_5(2^n-1)&=\begin{cases}0,&4\nmid n,\\1+v_5(n),&4\mid n.\end{cases}
+\end{align*}
+For example, in the first active case write $2^n=(2^2)^{n/2}$ and use
+$v_3(2^2-1)=1$; in the second use $2^n=(2^4)^{n/4}$ and
+$v_5(2^4-1)=1$. Consequently the FAD data are
+\begin{align}
+ &A=[2],\qquad c=1,\qquad \Lambda=2,\qquad w=4,\notag\\
+ &r_n=3^{-\1_{2\mid n}}5^{-\1_{4\mid n}},\qquad
+ s_{3,n}=\1_{2\mid n},\qquad s_{5,n}=\1_{4\mid n},\qquad
+ t_{3,n}=t_{5,n}=0.\label{eq:solenoid_data}
+\end{align}
+The exponent periods $2$ and $4$ are coprime to $3$ and $5$ respectively,
+and $r_n$ is a positive gcd sequence of period $4$. The multiplicative
+part $2^n-1$ has the unique dominant root $2$. Both primes are active.
+Corollary~\ref{cor:fad} shows that the accumulation set of
+$N\pi_T(N)/2^N$ is a Cantor set with covering bound
+$C(1+\log(1/\eps))^4$. The count~\eqref{eq:solenoid_count} is classical;
+the conclusion being applied is the limit-set geometry.
+
+\subsection{A genuinely wild additive example}
+
+Fix an odd prime $p$, and consider $U(x)=x^p+x$ on
+$\overline{\F}_p$, the points of the additive algebraic group.
+The classical formula is
+\begin{equation}\label{eq:wild_count}
+ \#\Fix(U^n)=p^{\,n-p^{v_p(n)}}
+ \qquad(n\geq1).
+\end{equation}
+It is recorded in~\cite[Example 7.2.7]{bch2024}, which attributes it to
+Bridy. The following calculation verifies this input directly without
+assigning novelty to the formula.
+
+Let $F(x)=x^p$ and write $n=p^a m$ with $p\nmid m$. In the commuting
+composition ring generated by $F$ over $\F_p$,
+\[
+ U^n-I=(I+F)^n-I=(I+F^{p^a})^m-I.
+\]
+The first nonzero power of $F$ on the right is $F^{p^a}$, with coefficient
+$m\neq0$ in $\F_p$, and the highest is $F^n$, with coefficient one.
+The associated additive polynomial therefore has degree $p^n$ and can
+be written as
+\[
+ (U^n-I)(x)=Q\bigl(x^{p^{p^a}}\bigr),
+\]
+where $Q$ is an additive polynomial of degree $p^{n-p^a}$ and derivative
+$m\neq0$. Thus $Q$ has exactly $p^{n-p^a}$ distinct roots over the
+algebraic closure. The map $x\mapsto x^{p^{p^a}}$ is bijective there,
+which proves~\eqref{eq:wild_count}, including the case $n=p^a$.
+
+Take the size-zero matrix $A$, with
+\[
+ c=\Lambda=p,\qquad r_n=1,\qquad S=\{p\},\qquad
+ s_{p,n}=0,\qquad t_{p,n}=1,\qquad w=1.
+\]
+The multiplicative part is $p^n$, and the wild exponent is genuinely
+nonzero. Corollary~\ref{cor:fad} yields a Cantor accumulation set for
+$N\pi_U(N)/p^N$ and the bound $C(1+\log(1/\eps))^2$.
+The cellular automaton $(x_i)_{i\in\Z}\mapsto(x_{i+1}+x_i)_{i\in\Z}$
+on $\F_p^{\Z}$ has the same classical count
+\cite[Example 7.2.6]{bch2024}. Equality of these counts is sufficient for
+the same orbit-counting conclusion; it is not a claim of conjugacy between
+the two systems.
+
+\subsection{Multiprime and wild distortion together}
+
+Take the preceding additive example at $p=7$ and the product map
+$V=T\times U$ on $X\times\overline{\F}_7$. Fixed-point counts multiply
+under products; FAD closure under this operation is also recorded
+in~\cite[Example 7.1.3]{bch2024}. Hence
+\begin{equation}\label{eq:product_count}
+ \#\Fix(V^n)=(2^n-1)|2^n-1|_3|2^n-1|_5\,7^{\,n-7^{v_7(n)}}.
+\end{equation}
+Here $A=[2]$ and $c=7$, so the multiplicative part is $14^n-7^n$ and
+has the unique dominant root $\Lambda=14$. The $3$- and $5$-data and
+$r_n$ are those in~\eqref{eq:solenoid_data}; additionally
+$s_{7,n}=0$ and $t_{7,n}=1$. The common period is $4$, and the active
+prime set is $\{3,5,7\}$.
+This single genuine system lies in both the multiprime and the wild
+regimes. Its accumulation set for $N\pi_V(N)/14^N$ is a Cantor set with
+\[
+ N_{\eps}(\LL_V)\leq C\bigl(1+\log(1/\eps)\bigr)^6
+\]
+and zero upper box dimension. These examples are applications of one
+image theorem, not separate fixed-point-count discoveries.

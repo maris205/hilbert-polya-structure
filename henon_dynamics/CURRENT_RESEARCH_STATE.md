@@ -65,6 +65,57 @@ Git 整合先后核对远端新变动仅限 symbolic 的 state、P207 与相关�
 精确暂存范围仅本续接目录、当前入口和两份 Hénon 注册表；八个继承
 未跟踪目录保留，不进入本次提交。
 
+三篇终稿交付并核实 `ec024cadfbb728cc66aa0dcaca88a6d2f4dbd4d0` 与
+远端一致后，用户再次明确“继续”。当前从
+[C407/C408 缺额续接计划](continuation_c407_c408_round3/SCOUT_PLAN.md)
+进入新一轮有范围的证明与选题，现已通过两个实质合同准入，状态
+`FIVE_PAPERS_SEALED`，见
+[续接冻结五项合同](continuation_c407_c408_round3/BATCH_PLAN.md)。
+只补未完成的两项；round2 的三篇及其 179 个封存文件不回写、不重跑。
+新增 C407 为 hyperbolic FAD 聚点集的全有限素数／野性 Cantor 与
+零上盒维定理；C408 为全奇 k、全 m 交替零点的未饱和循环关系局部
+厚度分类。两篇实际完整正文分别为 13、12 页，均通过非作者全文
+与引文内部审查及定点修订；各两次新空目录终构建逐对同字节，
+全部 25 页已实际查看，见 [终构建证据](continuation_c407_c408_round3/FINAL_BUILD_REPORT.md)。
+连同原三篇，**C404–C408 五篇已完成，共 58 页**，见
+[五个 PDF](continuation_c407_c408_round3/README.md)。新包精确封存与
+只读核验已完成；Git 同步以以下提交主题及真实 refs 为准。
+未把加权札记或低期反例补编 C 号，未开始 C409。
+
+C407 正式 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`，
+源机制 EXPLORATORY；C408 为全 FAIL、REJECTED。新两项的三类算术
+对照 INCOMPLETE、18 个目标指标 NOT_TESTABLE、18 个 scope flags false，
+见 [正式评价范围与边界](continuation_c407_c408_round3/EVALUATION_SCOPE.md)。
+五篇目标 A2/A3 均无提升。C407 的优先权比较只及已核读公开版本，
+EMS 最终书稿未取得；C408 不作普通周期点或光滑曲面固定概形断言。
+
+本次新包封存 **91 个 payload、92 项 manifest、93 个实际文件**。
+ledger 排除自身与 manifest，manifest 包含 ledger 而自排除。
+实际 `sha256sum -c MANIFEST.sha256` 退出 0、92 项全 OK；另从磁盘
+重读两清单并独立比较集合，实际树等于 ledger 加两清单，也等于
+manifest 加自身，无重复、额外/遗漏、符号链接或特殊文件。成员
+核查通过，不把文件一致性当作证明正确性；封存后不再编辑新载荷。
+ledger SHA256：`6cdc3f7cae99906fc80fbe482b59023725829710ae94c555d4a1f18cfb4c0ee8`；
+manifest SHA256：`4e014721b21b6af032b7f70aaddca74fee697b56be46e8a28c3aab85eb4d98f5`。
+
+[独立交付审计](continuation_c407_c408_round3/reviews/RELEASE_LINK_AUDIT.md)
+实际覆盖 29 份新树 Markdown 与当时三份共享新增段，共 32 份文档；
+82 处本地链接、51 个唯一目标，78 处存在，四处指向唯二预留清单，
+0 意外断链。协调者封存后实际确认唯二清单均已生成并包含在精确
+成员核验内。审计还只读核对五个 PDF 的页数、大小与摘要；不声称
+复查外部 URL、旧证明或全历史索引。当前完成状态的扩展段由协调者
+在封存后更新，不伪称已纳入先前审计的固定行范围。
+
+整合前实际遍历远端 658 个变更路径：1 个 symbolic 状态文件、
+469 个 `docs/papers204_208_sequence/` 文件、188 个 P207 文件，
+没有本批、旧封存包、AGENTS/工作流或 evaluator 的重叠；安全快进到
+`cb93dcab58009f6e70cff56b527ecf565f4313d6`，随后再次 fetch 仍一致。
+新科研提交由主题 `Complete C407-C408 and seal five-paper batch` 的
+Git 对象绑定；最终同步核对本地 HEAD、origin/main 与真实远端 main，
+不为写入自身提交号而循环改写载荷。暂存范围仅新续接目录与当前
+入口、两份 Hénon 注册表；八个继承未跟踪目录保留且不暂存。
+五篇批次止于 C408；下一批须等待用户明确授权。
+
 ## 最近完成：C399–C403
 
 该批最初要求：先按最新官方指导审计优化仓库 AGENTS、skills 与 workflow，
