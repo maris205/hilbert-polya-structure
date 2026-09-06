@@ -265,3 +265,38 @@ This receipt and object output were written after the named push, and
 are not claimed within their own referenced commit. Later B/tenth work
 is not implicitly included. Current status is two retained, one complete,
 three unfilled; P207 B is active. OWNER_AMBER / HOLD_EXTERNAL remains.
+
+## P207 internal completion and closed OFS candidate checkpoint
+
+On 2026-09-06 UTC the scoped 658-file change was committed and actually
+pushed as `cb93dcab58009f6e70cff56b527ecf565f4313d6`. It archives P207's
+accepted B delta, real resolved diagnostic finding and failed evidence,
+105-file Round2, both terminal source-only builds, all seven actual final
+page views, complete 614-entry paper manifest and the complete terminal/
+lifecycle artifact audit. P205 and P207 are internally complete in that
+checkpoint. The tenth author/desk and eleventh closures plus the sealed
+OFS independent narrow candidate gate are included. OFS was still awaiting
+root admission in those committed status bytes.
+
+The actual remote advance from eee9dcc3 to ec024cad was read-only checked:
+all 182 changed paths belonged to disjoint `henon_dynamics/` material. A
+normal fast-forward preserved that work. A fresh fetch before commit
+showed 0/0; no force push or history rewrite occurred. All 658 staged paths
+were in this stream's three owned scopes. Active twelfth/thirteenth scouts,
+new root OFS replay/recorder and subsequent P208 admission were excluded.
+Raw compiler evidence was explicitly staged; the tenth package's two
+manifested historical probe caches were preserved and staged as exact
+evidence, not swept up from unrelated caches. A preliminary read-only
+manifest-staging adapter stopped on an assumed desk filename; the actual
+`MANIFEST.sha256` was then used with no manifest rewrite or ignored hash.
+
+Push exited zero, actual `ls-remote` returned the SHA above, ahead/behind
+was 0/0 and mirror status was empty. The [nine-manifest Git-object check](qa/GIT_OBJECT_P207_CB93DCAB.json)
+passed **1,201 entries**, including whole P207, Round2, terminal QA, B,
+tenth author/desk, eleventh, OFS gate and P207's final artifact package.
+The exact directory-relative bases were used; this is object integrity,
+not another mathematical run or a five-paper terminal PASS.
+
+This receipt/object output and all later root OFS admission, P208 writing
+and active scout results are outside the named historical commit unless
+a later actual push says otherwise. `OWNER_AMBER / HOLD_EXTERNAL` remains.

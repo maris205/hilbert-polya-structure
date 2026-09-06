@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/root/miniconda3/bin/python3.12",
+    "-I",
+    "-B",
+    "-c",
+    "\nimport collections, functools, hashlib, itertools, json, math, os, platform, sys\nfrom pathlib import Path\nassert sys.flags.optimize == 0 and sys.flags.isolated == 1 and sys.dont_write_bytecode\nfiles = {}\nfor name, module in sorted(sys.modules.items()):\n    origin = getattr(module, '__file__', None)\n    if origin and Path(origin).is_file():\n        p = Path(origin).resolve()\n        files[name] = {'path': str(p), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}\nprint(json.dumps({'version': sys.version, 'executable': str(Path(sys.executable).resolve()),\n    'flags': repr(sys.flags), 'optimize': sys.flags.optimize, 'isolated': sys.flags.isolated,\n    'dont_write_bytecode': sys.dont_write_bytecode, 'platform': platform.platform(),\n    'environment': dict(sorted(os.environ.items())), 'module_files': files},\n    sort_keys=True, indent=2))\n"
+  ],
+  "cwd": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p208_author",
+  "ended_utc": "2026-09-06T10:51:12.180345+00:00",
+  "environment": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONHASHSEED": "0",
+    "TZ": "UTC"
+  },
+  "exit_code": 0,
+  "label": "runtime_before",
+  "started_utc": "2026-09-06T10:51:12.131118+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "runtime_before.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 10673,
+    "path": "runtime_before.stdout",
+    "sha256": "40ed49db1288b99bf062d8a4b6434785309f17c0e48a6f779b03fba6f076f3c2"
+  }
+}

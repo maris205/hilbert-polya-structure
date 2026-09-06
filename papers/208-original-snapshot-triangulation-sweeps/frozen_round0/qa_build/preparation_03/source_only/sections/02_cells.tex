@@ -1,0 +1,96 @@
+\section{Protected cells and the exact recursion}\label{sec:cells}
+
+For a nonleaf \(T\), its left-spine list is the unique nonempty list
+\(\LS(T)=[B_1,\ldots,B_k]\) such that
+\[
+ T=\Fold(B_1,\ldots,B_k)
+   =(\cdots((e,B_1),B_2),\ldots,B_k).
+\]
+Let \(\iota(S,A)\) replace the leftmost leaf of \(S\) by \(A\); hence
+\(\iota(e,A)=A\) and
+\(\iota((L,R),A)=(\iota(L,A),R)\).
+Put \(G(B)=F((e,B))\), and for lists of length at least two define
+\begin{equation}\label{eq:product}
+ P(B_1,B_2)=F((B_1,B_2)),\qquad
+ P(B_1,\ldots,B_k)=\iota\bigl(G(B_k),P(B_1,\ldots,B_{k-1})\bigr)
+ \quad(k\ge3).
+\end{equation}
+Unlike \(F\), \(G\) adds one leaf.
+
+\begin{lemma}[Protected-cell dictionary]\label{lem:cells}
+Every scheduled diagonal is present at its visit. The geometric sweep is
+given exactly by
+\begin{align}
+ F(e)&=e,\qquad F(c)=c,\qquad G(e)=c, \label{eq:bases}\\
+ F(T)&=(e,P(\LS(T))) &&\text{if }|\LS(T)|\ge2, \label{eq:non-ear}\\
+ G((e,C))&=\iota(G(C),c), \label{eq:ear-one}\\
+ G(B)&=(c,P(\LS(B))) &&\text{if }|\LS(B)|\ge2. \label{eq:ear-many}
+\end{align}
+The recursion is well founded, with strictly smaller recursive cells.
+\end{lemma}
+
+\begin{proof}
+Flipping one diagonal removes only that diagonal, so every unvisited
+original diagonal remains present. Its replacement crosses the removed
+original. Since the original set is noncrossing, this replacement was
+not original and will never be scheduled. Every inserted diagonal is
+therefore protected for the remainder of this sweep.
+
+Suppose first that vertex \(0\) is not an ear. Its original neighbours
+are \(1=a_0<a_1<\cdots<a_k=n-1\), \(k\ge2\). The triangles incident to
+\(0\) are \((0,a_{j-1},a_j)\); their other-side subpolygons encode
+\(B_j\) in \(\LS(T)\). The first scheduled diagonals are
+\((0,a_1),\ldots,(0,a_{k-1})\). At visit \(i\), the adjacent triangles are
+\((0,1,a_i)\) and \((0,a_i,a_{i+1})\): for \(i>1\), the preceding flip
+has created the first triangle. Thus the flip inserts \((1,a_{i+1})\).
+
+These new diagonals protect the ear at \(0\) and partition its complement
+into cells. The first cell, bounded by \((1,a_2)\), has the initial tree
+\((B_1,B_2)\). Its remaining scheduled diagonals include the original
+root of each nonleaf \(B_1,B_2\), not only the roots' proper descendants.
+For \(j\ge3\), the cell between \((1,a_{j-1})\), \((1,a_j)\) and the
+boundary arc encoded by \(B_j\) has tree \((e,B_j)\), with the preceding
+prefix represented by one boundary interval. Its scheduled diagonals are
+exactly the original root of \(B_j\), if nonleaf, and its descendants.
+
+The increasing relabelling within each cell preserves every comparison
+of endpoint pairs. Consequently the restriction of the original schedule
+is precisely the smaller lexicographic sweep. Protected boundaries prevent
+flips in other cells from changing its interior; any interleaving of
+different cells is harmless for this reason. Induction gives cell outputs
+\(F((B_1,B_2))\) and \(G(B_j)\). Gluing in increasing order replaces the
+leftmost leaf of each later cell by the preceding union. This is
+\eqref{eq:product}; the outer ear gives \eqref{eq:non-ear}.
+
+Now suppose \(0\) is an ear, so \(T=(e,B)\). If \(B=e\), the triangle
+has no diagonals. If \(B=(e,C)\), the only original diagonal incident to
+\(1\) is \((1,n-1)\). Its opposite vertices are \(0,2\), so its flip
+creates the protected edge \((0,2)\). Contract the triangle on \(0,1,2\)
+to a boundary leaf. The remaining initial tree is \((e,C)\), with
+exactly the remaining original diagonals, including the root of \(C\)
+when present. Increasing relabelling of \(0,2,\ldots,n-1\) gives its
+smaller sweep \(G(C)\). Expanding the contracted leaf gives
+\eqref{eq:ear-one}, including \(C=e\).
+
+Finally, let \(\LS(B)=[C_1,\ldots,C_r]\), \(r\ge2\). Write the neighbours
+of \(1\), other than \(0\), as
+\(2=b_0<b_1<\cdots<b_r=n-1\).
+The first \(r-1\) fan flips create the protected edges
+\((2,b_2),\ldots,(2,b_r)\). The final original fan diagonal \((1,n-1)\)
+has adjacent triangles \((0,1,n-1)\) and \((1,2,n-1)\); it flips to
+\((0,2)\). Beyond the protected ear, the seed and later cells are exactly
+those of the preceding non-ear argument for \(C_1,\ldots,C_r\), with
+the same scheduled root edges. Their glued output is \(P(\LS(B))\);
+the ear contributes the root left cherry, proving \eqref{eq:ear-many}.
+Every cell has fewer leaves than the input under consideration.
+Triangle cells use \(F(c)=c\). This completes the induction.
+\end{proof}
+
+The same recursion implies an output-shape fact used throughout:
+every nonleaf \(F\)-output is \((\LC_l,R)\), \(l\ge1\).
+Every \(G(B)\) for \(B\ne e\) has \(l\ge2\), whereas \(G(e)=c\).
+Indeed \eqref{eq:non-ear} begins with a leaf,
+\eqref{eq:ear-many} begins with \(c\), and \eqref{eq:ear-one}
+extends the root left comb of its smaller output by one leaf.
+In particular every first image has root left child \(e\) or a nonleaf
+left comb.

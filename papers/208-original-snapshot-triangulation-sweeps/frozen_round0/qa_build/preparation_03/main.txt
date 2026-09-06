@@ -1,0 +1,389 @@
+                          SOURCE SETS AND SHARP CLOCKS OF
+                      ORIGINAL-SNAPSHOT TRIANGULATION SWEEPS
+
+
+                                                      ANONYMOUS
+
+
+         Abstract. We determine the source sets and recurrent dynamics of a fixed sweep on triangulations
+         of a convex polygon with cyclic labels 0, . . . , n − 1. At each iteration, the current internal diagonals
+         are snapshotted, ordered lexicographically by their endpoint pairs, and flipped once in that order; new
+         diagonals are not visited during the same sweep. Protected diagonals split the update into smaller cells
+         and give an exact binary-tree recursion. A disjoint parser of seed and subsequent cells then constructs
+         every labelled one-step predecessor, including the zero and comb boundaries. Every positive fibre is a
+         power of two, and for n ≥ 5 the unique maximum target is the fan at vertex 1, with 2n−4 predecessors.
+         A size-preserving auxiliary map intertwines the two square phases of the sweep. Its stronger closed-class
+         inclusion, together with a commuting odd phase, proves that the triangle is fixed and every n ≥ 4 carrier
+         has a unique two-cycle. The maximum entrance time is zero for n = 3, 4 and exactly n − 2 for n ≥ 5;
+         explicit witnesses treat both parities. These are deductive all-size results. Complete finite checks on the
+         original sizes 3 ≤ n ≤ 10 provide separate numerical pressure.
+
+
+
+
+                                   1. The sweep and its two conclusions
+   A flip is reversible, but resetting an ordered list of diagonals after a whole sweep need not be. We
+study this reset operation on the full set of triangulations of a convex n-gon, n ≥ 3, whose vertices carry
+fixed cyclic labels 0, 1, . . . , n − 1. Write each internal diagonal as (a, b) with a < b, snapshot the n − 3
+diagonals, and sort these pairs lexicographically. In the current triangulation, flip each diagonal of this
+original list once, in that order. Denote the resulting self-map by Fn , or F when the size is understood.
+The snapshot is reset at every iteration; it is never refreshed during an iteration.
+   We use the classical ordered-tree dictionary rooted at the boundary edge (0, n−1): the triangle incident
+to that edge gives an ordered pair of subpolygons, recursively [6]. A boundary interval is a leaf e, and a
+tree is e or an ordered pair (L, R). A polygon tree has N = n − 1 leaves and m = n − 2 internal vertices.
+The one-leaf tree is only an auxiliary recursion boundary. We extend F (e) = e. Write |T | for the number
+of leaves and q(T ) = |T | − 1 for the internal size. Let
+               c = (e, e),      LC1 = RC1 = e,              LCa+1 = (LCa , e),        RCa+1 = (e, RCa ).
+All trees are ordered, so the dictionary retains every polygon label.
+Theorem 1 (Complete sources and extremum). The recursive construction in Section 3 produces every
+labelled one-step source of every target exactly once. A nonleaf target Y has fibre
+                                     (
+                           −1          h(R), Y = (LCl , R), l ≥ 1,
+                        |F (Y )| =
+                                       0,      its root left child is not a left comb,
+where the evaluated recursion for h, including h(e) = 1, is (6). Every positive fibre is a power of two.
+For n ≥ 5, the maximum is 2n−4 , attained only at the fan at vertex 1. For n = 3, 4, every target has one
+source.
+   Define
+                               Z1 = e,        Z2 = c,        ZN = (c, ZN −2 )     (N ≥ 3).
+                                                        t
+An entrance time is the least t ≥ 0 for which F (T ) is periodic; thus a periodic starting state has entrance
+zero.
+Theorem 2 (Unique recurrence and sharp clock). The triangle is fixed. For every n ≥ 4, the unique
+recurrent component is the two-cycle
+                                        ZN ←→ (e, ZN −1 ),             N = n − 1.
+The maximum entrance time over the full carrier is zero for n = 3, 4, and exactly n − 2 for every n ≥ 5.
+
+   Key words and phrases. finite dynamics, polygon triangulation, diagonal flip, inverse fibre, sharp entrance time.
+                                                              1
+2                                                       ANONYMOUS
+
+
+  The two conclusions share a geometric recursion but use different deductions: a source-set parser for
+Theorem 1, and exact square-phase transport through a map K for Theorem 2. The flip primitive, its
+edge-labelled lift, static counting and generic prefix freezing are not claimed as separate contributions;
+Section 7 states these deductions and the limits of the comparison.
+
+                               2. Protected cells and the exact recursion
+      For a nonleaf T , its left-spine list is the unique nonempty list LS(T ) = [B1 , . . . , Bk ] such that
+                                T = Fold(B1 , . . . , Bk ) = (· · · ((e, B1 ), B2 ), . . . , Bk ).
+Let ι(S, A) replace the leftmost leaf of S by A; hence ι(e, A) = A and ι((L, R), A) = (ι(L, A), R). Put
+G(B) = F ((e, B)), and for lists of length at least two define
+                                                                                                 
+(1)       P (B1 , B2 ) = F ((B1 , B2 )),  P (B1 , . . . , Bk ) = ι G(Bk ), P (B1 , . . . , Bk−1 ) (k ≥ 3).
+Unlike F , G adds one leaf.
+Lemma 3 (Protected-cell dictionary). Every scheduled diagonal is present at its visit. The geometric
+sweep is given exactly by
+(2)                      F (e) = e,      F (c) = c,         G(e) = c,
+(3)                     F (T ) = (e, P (LS(T )))                                             if | LS(T )| ≥ 2,
+(4)                 G((e, C)) = ι(G(C), c),
+(5)                     G(B) = (c, P (LS(B)))                                                if | LS(B)| ≥ 2.
+The recursion is well founded, with strictly smaller recursive cells.
+Proof. Flipping one diagonal removes only that diagonal, so every unvisited original diagonal remains
+present. Its replacement crosses the removed original. Since the original set is noncrossing, this replace-
+ment was not original and will never be scheduled. Every inserted diagonal is therefore protected for the
+remainder of this sweep.
+     Suppose first that vertex 0 is not an ear. Its original neighbours are 1 = a0 < a1 < · · · < ak = n − 1,
+k ≥ 2. The triangles incident to 0 are (0, aj−1 , aj ); their other-side subpolygons encode Bj in LS(T ).
+The first scheduled diagonals are (0, a1 ), . . . , (0, ak−1 ). At visit i, the adjacent triangles are (0, 1, ai ) and
+(0, ai , ai+1 ): for i > 1, the preceding flip has created the first triangle. Thus the flip inserts (1, ai+1 ).
+     These new diagonals protect the ear at 0 and partition its complement into cells. The first cell, bounded
+by (1, a2 ), has the initial tree (B1 , B2 ). Its remaining scheduled diagonals include the original root of each
+nonleaf B1 , B2 , not only the roots’ proper descendants. For j ≥ 3, the cell between (1, aj−1 ), (1, aj ) and
+the boundary arc encoded by Bj has tree (e, Bj ), with the preceding prefix represented by one boundary
+interval. Its scheduled diagonals are exactly the original root of Bj , if nonleaf, and its descendants.
+     The increasing relabelling within each cell preserves every comparison of endpoint pairs. Consequently
+the restriction of the original schedule is precisely the smaller lexicographic sweep. Protected boundaries
+prevent flips in other cells from changing its interior; any interleaving of different cells is harmless for
+this reason. Induction gives cell outputs F ((B1 , B2 )) and G(Bj ). Gluing in increasing order replaces the
+leftmost leaf of each later cell by the preceding union. This is (1); the outer ear gives (3).
+     Now suppose 0 is an ear, so T = (e, B). If B = e, the triangle has no diagonals. If B = (e, C), the only
+original diagonal incident to 1 is (1, n − 1). Its opposite vertices are 0, 2, so its flip creates the protected
+edge (0, 2). Contract the triangle on 0, 1, 2 to a boundary leaf. The remaining initial tree is (e, C), with
+exactly the remaining original diagonals, including the root of C when present. Increasing relabelling of
+0, 2, . . . , n − 1 gives its smaller sweep G(C). Expanding the contracted leaf gives (4), including C = e.
+     Finally, let LS(B) = [C1 , . . . , Cr ], r ≥ 2. Write the neighbours of 1, other than 0, as 2 = b0 < b1 <
+· · · < br = n − 1. The first r − 1 fan flips create the protected edges (2, b2 ), . . . , (2, br ). The final original
+fan diagonal (1, n − 1) has adjacent triangles (0, 1, n − 1) and (1, 2, n − 1); it flips to (0, 2). Beyond the
+protected ear, the seed and later cells are exactly those of the preceding non-ear argument for C1 , . . . , Cr ,
+with the same scheduled root edges. Their glued output is P (LS(B)); the ear contributes the root left
+cherry, proving (5). Every cell has fewer leaves than the input under consideration. Triangle cells use
+F (c) = c. This completes the induction.                                                                             □
+   The same recursion implies an output-shape fact used throughout: every nonleaf F -output is (LCl , R),
+l ≥ 1. Every G(B) for B ̸= e has l ≥ 2, whereas G(e) = c. Indeed (3) begins with a leaf, (5) begins with
+c, and (4) extends the root left comb of its smaller output by one leaf. In particular every first image has
+root left child e or a nonleaf left comb.
+                               ORIGINAL-SNAPSHOT TRIANGULATION SWEEPS                                      3
+
+
+                           3. An operational decoder for every source
+   We specify sets, not just their cardinalities. Let A(Y ) = {T : F (T ) = Y } and B(Y ) = {B : G(B) = Y };
+the following recursion constructs them without searching the carrier. For nonleaf R, let D(R) be the set
+of lists of length at least two whose P -output is R. Write W0 (T ) = T and Wj+1 (T ) = (e, Wj (T )). For a
+set of lists L, notation Wj Fold(L) means {Wj (Fold(B)) : B ∈ L}.
+Lemma 4 (Simultaneous inverse boundaries). For nonleaf targets, the source sets are given by the
+following table. In its last three rows R ̸= e. The formal bases are A(e) = {e}, B(e) = ∅.
+                             target Y                  A(Y )                 B(Y )
+                       noncomb root left child           ∅                     ∅
+                            LCs , s ≥ 2               {RCs }               {RCs−1 }
+                               (e, R)               Fold(D(R))                 ∅
+                               (c, R)             W1 Fold(D(R))           Fold(D(R))
+                          (LCl , R), l > 2        Wl−1 Fold(D(R))       Wl−2 Fold(D(R))
+Proof. We induct simultaneously on leaf count. The output shape excludes the first row. For l = 1 and
+R ̸= e, a source must have a nonleaf left child, and (3) identifies it with exactly a list in D(R). No
+G-source exists by the stronger G-output shape.
+   For a G-target (c, R), R ̸= e, (5) gives exactly Fold(D(R)). The other branch (4) would require a G-
+output (e, R) with nonleaf R, which has just been excluded. Its F -sources attach one leading e, yielding
+the fourth row. For l > 2, only (4) can produce the longer left comb; removing its leftmost cherry uniquely
+reduces l by one and removes one leading e from the source. This proves the last row.
+   When the target is a comb, P cannot contribute a leaf right child: its seed pair has at least two leaves
+and its output is nonleaf. The forced leading-e reduction instead ends at F (c) = c or G(e) = c. It
+gives exactly the right combs stated in the second row. In particular the triangle and the exceptional
+root-comb targets have not acquired an extra seed branch.                                                □
+
+  Here is the promised construction of D(R). Cut the nonempty list LS(R) in every possible way into
+nonempty consecutive blocks Q0 , Q1 , . . . , Qs , with s ≥ 0. For the seed, choose any ordered pair
+                                           (B1 , B2 ) ∈ A(Fold(Q0 )).
+For each later block choose Bj+2 ∈ B(Fold(Qj )), 1 ≤ j ≤ s. Output [B1 , B2 , B3 , . . . , Bs+2 ]. A choice
+from an empty source set contributes nothing. The seed target is nonleaf, so its source really is an ordered
+pair. Together with Lemma 4, these instructions are a terminating recursion: each D(R) uses inverse
+problems on at most |R| leaves, whereas the target (LCl , R) using it has strictly more leaves.
+Proposition 5 (Source-set bijection). The block construction gives precisely D(R), without repeated lists.
+Therefore the displayed decoder gives precisely all labelled polygon sources, without repetitions.
+Proof. Following the leftmost branch gives the exact concatenation identity
+                                         LS(ι(S, A)) = LS(A) LS(S).
+Thus each chosen seed and later source produces, by (1), the concatenated output list LS(R); folding
+reconstructs R. Conversely, an original list [B1 , . . . , Bk ] determines its seed output F ((B1 , B2 )) and
+every later output G(Bj ). Each has a nonempty left-spine list, and their lengths locate every cut. The
+same original list also determines the seed pair and each later source. Hence two different cut-and-source
+choices cannot give the same list. The forced wrappers and comb cases of Lemma 4 are disjoint, so the
+same property holds for A. Finally the ordered-tree dictionary fixes the leaf intervals and therefore every
+polygon endpoint label.                                                                                     □
+
+   For evaluation it is useful to describe exactly which blocks survive. An all-leaf block has any positive
+length, in either position, and has multiplicity one by the comb row. A block ending in a nonleaf D has
+form ea D. Its seed is allowed for a ≥ 0; a later block requires a ≥ 1, by the l = 1 exclusion for B. In
+either case its multiplicity is |D(D)|. A block of any other shape has no source. These are consequences
+of the simultaneous source construction, not assumptions about possible cuts.
+
+                           4. Evaluating fibres and the unique maximum
+   Set h(e) = 1. If R ̸= e, write its unique left-spine list as
+                            LS(R) = ea0 D1 ea1 · · · Dr ear ,     ai ≥ 0,   Dj ̸= e.
+4                                                 ANONYMOUS
+
+
+For r = 0, the list has a0 ≥ 1 leaves. Define
+                              
+                              
+                              
+                                2a0 −1 ,           r = 0,
+                                                    r ≥ 1 and some ai = 0, 1 ≤ i < r,
+                              
+                              0,
+                      h(R) =             Yr
+                                 2E(R)
+                              
+(6)
+                              
+                              
+                                           h(Dj ), otherwise,
+                              
+                                            j=1
+                                                  r−1
+                                                  X
+                       E(R) = max(a0 − 1, 0) +        (ai − 1) + max(ar − 1, 0).
+                                                  i=1
+The last row is also zero if a recursive factor vanishes.
+Evaluation in Theorem 1. Put p(R) = |D(R)| for nonleaf R. We prove p(R) = h(R) by leaf-count
+induction using Proposition 5. An all-leaf list of length s ≥ 1 has one source choice per block, and its
+s − 1 internal cut positions give 2s−1 partitions.
+    Between two successive nonleaf decorations, a gap of a leaves must give at least one leaf to the next
+decorated block. If a = 0, no partition is allowed. If a ≥ 1, take the final k ≥ 1 leaves into that block,
+and cut the remaining a − k leaves into  all-leaf blocks. There is one choice for zero remaining leaves and
+                                      Pa−1
+2a−k−1 otherwise. The total is 1 + j=1 2j−1 = 2a−1 . For a leading run of length a ≥ 1, either the
+first decoration ends the seed, consuming the entire run, or it ends a later block preceded by a nonempty
+all-leaf composition. This gives the same sum; length zero has one choice because the decoration itself
+may end the seed. A trailing run is an arbitrary composition, giving one choice at length zero and 2a−1
+at positive length. The independent run factors and the recursively smaller multiplicities p(Dj ) = h(Dj )
+give (6). Lemma 4 then gives the full target formula, including its zero and comb branches. Its positive
+values are powers of two.                                                                                 □
+Lemma 6 (Strict loss from a decoration). For nonleaf R, h(R) ≤ 2q(R)−1 , with equality if and only if R
+is a left comb.
+Proof. A left                                                                      P fibre with r ≥ 1,
+         Pr comb has an all-leaf left-spine list and attains the bound. For a positive
+put A = i=0 ai . The spine contains A + r internal vertices, so q(R) = A + r + j q(Dj ). The gap
+exponent in (6) is at most A. Induction bounds the exponent supplied by each decoration by q(Dj ) − 1.
+Hence                             X
+                  log2 h(R) ≤ A +    (q(Dj ) − 1) = q(R) − 2r ≤ q(R) − 2 < q(R) − 1.
+                                        j
+A zero fibre cannot attain the positive bound. This proves both the inequality and all its equality
+cases.                                                                                           □
+    For a target (LCl , R) of internal size m, q(R) = m − l. If m ≥ 3, a leaf R gives fibre one, strictly below
+2m−2 . For nonleaf R, Lemma 6 gives at most 2m−l−1 ≤ 2m−2 ; equality forces l = 1 and R = LCm . This
+is exactly the fan at vertex 1. At m = 1 the cherry is fixed, and at m = 2 the two comb orientations each
+have one source. The extremal part of Theorem 1 follows, with no uniqueness assertion at these small
+sizes.
+
+                        5. The size-preserving map and its stronger closure
+      For a ≥ 2, abbreviate Da (R) = ι(G(R), LCa−1 ). The protected-cell product gives
+(7)                       F ((LCa , R)) = (e, Da (R)),      G((LCa , R)) = (c, Da (R)).
+                                a−1
+Indeed the left-spine list is e    R. At a = 2 its product is F ((e, R)) = G(R); at a > 2 the preceding
+all-leaf product is LCa−1 , so the final gluing gives Da (R). This includes R = e. In particular G((c, R)) =
+(c, G(R)).
+    If B ̸= e, write G(B) = (LCl , Q), where l ≥ 2. Define
+(8)               K(e) = e,      K(B) = Dl (Q). Then G2 (B) = (c, K(B))            for every B.
+                                                              2
+The last equality follows from (7); for B = e, it reads G (e) = G(c) = LC3 = (c, e). Since G adds one
+leaf twice and c has two leaves, K preserves leaf count.
+Lemma 7 (Intertwining and closure). The identities
+(9)                                   KG = GK,       K((c, R)) = (c, K(R))
+hold. Define
+                 CN = {(LCa , R) : a ≥ 2, a + |R| = N }     (N ≥ 3),      C1 = {e},   C2 = {c}.
+                               ORIGINAL-SNAPSHOT TRIANGULATION SWEEPS                                      5
+
+
+For every N ≥ 3, K(TN ) ⊆ CN , where TN is the full set of N -leaf trees. Moreover,
+(10)                                   K(CN ) ⊆ {(c, S) : S ∈ CN −2 }.
+Proof. Compute G3 (B) as G(G2 (B)) and as G2 (G(B)). Using G((c, S)) = (c, G(S)), their equality
+becomes (c, G(K(B))) = (c, K(G(B))). Cancellation proves commutation. Applying the same displayed
+identity twice to G2 ((c, R)) and using (8) gives
+                        (c, K((c, R))) = G2 ((c, R)) = (c, G2 (R)) = (c, (c, K(R))),
+which proves the second identity.
+   For the first inclusion, use K(B) = Dl (Q). If Q ̸= e, the root left comb of G(Q) has at least two leaves;
+substitution of LCl−1 cannot shorten it. If Q = e, the result is LCl ; size preservation and N ≥ 3 force
+l = N ≥ 3. Thus K(B) ∈ CN .
+   For the stronger inclusion, take T = (LCa , R) ∈ CN . Equation (7) followed by (8) gives K(T ) =
+G(Da (R)). When N ≥ 4, Da (R) ∈ CN −1 . For R = e it is LCa , with a = N − 1 ≥ 3; for R ̸= e,
+substitution lengthens an already nonleaf root left comb. Write Da (R) = (LCs , Q), s ≥ 2. Then
+K(T ) = (c, Ds (Q)). If N − 2 ≥ 3, the same two cases apply to Ds (Q): a nonleaf Q provides a nonleaf
+root left comb, while Q = e gives LCs with s = N − 2 ≥ 3. Thus its right child belongs to CN −2 . At
+N = 4, that child has two leaves and must be c. At N = 3, the only member of C3 is LC3 , and direct
+substitution gives K(LC3 ) = LC3 = (c, e). These are precisely the two boundary cases of (10).            □
+Proposition 8 (The K clock). Each ZN is the unique recurrent state of K at its size. For N ≥ 3,
+entrance to ZN takes at most
+                                                            
+                                N −2                          N
+                    dC (N ) =          from CN , dall (N ) =       from TN .
+                                  2                           2
+The one- and two-leaf auxiliary classes are already fixed.
+Proof. The bases e, c are K-fixed, and (9) fixes all ZN . In (10), one application of K fixes the initial
+cherry; subsequent applications act by K on its right child. At N = 3, C3 = {Z3 }; at N = 4, one step
+reaches Z4 . For N ≥ 5, induction gives 1 + ⌊(N − 4)/2⌋ = ⌊(N − 2)/2⌋. An arbitrary tree reaches CN
+in one step, adding one to this bound. Every orbit therefore reaches ZN , excluding any other periodic
+state.                                                                                                 □
+
+                          6. Both sweep phases and the sharp entrance
+Lemma 9 (Two square identities). For every tree R, and every T with a nonleaf root left child, respec-
+tively,
+(11)                           F 2 ((e, R)) = (e, K(R)),     F 2 (T ) = K(T ).
+The second identity does not require T ∈ CN . Also,
+(12)                        G(Zj ) = Zj+1 ,     F (ZN ) = (e, ZN −1 )    (N ≥ 3).
+Proof. For R = e, the first identity is F 2 (c) = c. Otherwise write G(R) = (LCl , Q), l ≥ 2, and apply
+(7): F (G(R)) = (e, Dl (Q)) = (e, K(R)). For the second identity put PT = P (LS(T )). The protected-cell
+equations give F (T ) = (e, PT ) and G(T ) = (c, PT ). Thus F 2 (T ) = G(PT ); also G2 (T ) = G((c, PT )) =
+(c, G(PT )), so K(T ) = G(PT ). The bases G(e) = c, G(c) = (c, e), together with G((c, S)) = (c, G(S)),
+give G(Zj ) = Zj+1 by induction. Finally the product for ZN = (c, ZN −2 ) is G(ZN −2 ) = ZN −1 , proving
+its F -action.                                                                                            □
+Recurrence and upper bound in Theorem 2. For N ≥ 3, the two distinct states ZN and (e, ZN −1 ) are
+exchanged by (12). Their root left children are nonleaf and leaf, respectively. Every first image belongs
+to CN or has form (e, R), by the output-shape fact.
+   For a first image in CN , the second square identity and Proposition 8 give at most 2⌊(N −2)/2⌋ ≤ N −2
+further sweep steps. For a first image (e, R) and N ≥ 4, the even iterates are (e, K t (R)), giving the bound
+2⌊(N − 1)/2⌋. There is a second, essential representation of the odd iterates:
+                                 F 2t+1 ((e, R)) = G(K t (R)) = K t (G(R)).
+Here commutation is (9), and G(R) ∈ CN , since R is nonleaf. The class clock gives the independent
+bound 1 + 2⌊(N − 2)/2⌋. Their minimum is exactly
+                                                     
+                                   N −1            N −2
+                           min 2           , 1+2             = N − 2.
+                                     2               2
+6                                                    ANONYMOUS
+
+
+Adding the first-image step proves the global upper bound N − 1 = n − 2. It also shows that every orbit
+enters the displayed pair, so no other recurrent component exists. At N = 3, the full carrier consists of
+exactly these two trees, already recurrent. At N = 2, the carrier is the fixed cherry. Hence the entrance
+maximum is zero for n = 3, 4.                                                                          □
+
+    To retain the final unit in the upper bound, define a witness family
+                        S3 = (e, c),        SN = (SN −1 , e)   (N ≥ 4),       J(S) = (c, S).
+For N ≥ 4 the root left child of SN is nonleaf, but need not be a comb, which is why the unrestricted
+second clause of (11) is needed. Its left-spine list is [c, e, . . . , e]; the seed is F ((c, e)) = (e, c) = S3 , and
+every later G(e) = c appends a right leaf. Consequently
+(13)             F (SN ) = (e, SN −1 ),       K(S4 ) = LC4 ,       K(SN ) = J(SN −2 )     (N ≥ 5).
+The last two statements follow from K(SN ) = G(SN −1 ) and G(S3 ) = LC4 . Also KJ = JK and GJ = JG
+by (9) and (7).
+  For even N = 2k ≥ 4, repeated use of (13) gives
+                                       F N −2 (SN ) = K k−1 (SN ) = J k−2 (LC4 ).
+This has a nonleaf root left child and therefore is not (e, ZN −1 ). It is not ZN = J k−2 (Z4 ) either, because
+LC4 ̸= Z4 = (c, c).
+    For odd N = 2k + 1 ≥ 5, the same recurrence first gives K k−1 (SN ) = J k−1 (S3 ). Using F ((c, S)) =
+(e, G(S)), and then GJ = JG, yields
+                      F N −2 (SN ) = F (J k−1 (S3 )) = (e, J k−2 (G(S3 ))) = (e, J k−2 (LC4 )).
+Its left child is a leaf, so it is not ZN . The four-leaf tail again excludes (e, ZN −1 ), whose corresponding
+tail is Z4 . Thus in both parities SN is outside the core at time N − 2. The proved upper bound puts it
+inside by N − 1. Its entrance is exactly N − 1 = n − 2, completing Theorem 2.
+
+                          7. Source deductions, validation and limitations
+Flips, rotations and resetting. The classical tree–triangulation dictionary and deterministic choices of
+rotations precede this map. In particular, Pallo [6] studies the uniquely selected leftmost rotation and
+a weight coordinate which reaches its maximum and stays there. Fan building, deterministic scheduling
+and prefix-fixing arguments therefore carry no separate claim here.
+   There is also an exact lift to the edge-labelled flips of Bose et al. [3], not just an analogy. Let R label
+the original diagonals 1, . . . , n − 3 in lexicographic order, let τi flip the edge with label i and transfer that
+label to its replacement, and let E erase labels. Then
+                                                 F = E τn−3 · · · τ1 R.
+Before τi , flips of other labels leave its original edge intact. Each τi is an involution on the larger labelled
+carrier; erasing and resetting the labels removes that invertibility. Thus noninjectivity does not exclude
+this composition. Our claims concern its explicit geometric source sets and its repeated reset dynamics,
+not a new flip primitive or a general scheduling principle.
+Nearby inverse and orbit results. Lattice pop-stack operators send an element to the meet of itself and
+its lower covers. Tamari image enumeration [4], torsion-class preimage descriptions and Cambrian orbit
+bounds [2, Theorem 5.3 and Section 9], and ornamentation-lattice image and orbit results [1] are relevant
+precedents. They show that all-target preimages and extremal orbit lengths are established questions
+on related Catalan structures. They are not used as black-box proofs of either theorem here. Already
+on the two-element quadrilateral Tamari chain, descending pop-stack sends both states to its minimum,
+whereas this sweep exchanges them. This excludes a direct same-carrier conjugacy there, but does not
+exclude enlarged carriers, reset lifts such as the displayed one, or every composed adapter.
+What is and is not counted as a conclusion. Once the disjoint parser is proved, its binary-cut factors and
+recursive products are elementary. The associated static Catalan/avoidance series also coincides with an
+older Dyck-path specialization [5]; it is not a third result of this paper. Equality of a series does not
+identify its labelled objects. The retained inverse statement is which seed and later blocks reconstruct
+each source of this precise map, including the excluded boundaries and the unique fan extremum. On
+the temporal side it is the exact K factorization, stronger closed-class inclusion and two-phase transport,
+not generic prefix freezing alone.
+                              ORIGINAL-SNAPSHOT TRIANGULATION SWEEPS                                     7
+
+
+Bounded validation. The standalone author checker generates every tree for 3 ≤ n ≤ 10, all 2055 polygon
+states, and independently performs each literal geometric sweep. It compares those transitions with the
+recursive dictionary, reconstructs each complete source set, tests the evaluated fibres and all maximizers,
+and extracts the full F - and K-graphs. Its canonical output contains every labelled transition, source set
+and entrance depth, not only aggregate counts or hashes. Auxiliary identities are tested only when their
+constructed trees stay within the original maximum size. Both sharp witness parities are checked. The
+implementation adapts the original author code, so this is author evidence rather than an independent
+review. The all-size conclusions rest on the proofs above, not on this finite enumeration.
+   The conclusions are confined to fixed cyclic labels and this precise original-snapshot lexicographic
+sweep. They do not assert a result for arbitrary schedules or unlabelled quotients, an all-time inverse
+or basin atlas, or global priority among all possible encodings. A directly applicable prior theorem or
+complete adapter would require reassessing the corresponding contribution.
+
+                                              References
+[1] Khalid Ajran and Colin Defant.             The pop-stack operator on ornamentation lattices.
+    arXiv:2501.10311v1, 2025. URL https://arxiv.org/abs/2501.10311v1.
+[2] Emily Barnard, Colin Defant, and Eric J. Hanson. Pop-stack operators for torsion classes and cam-
+    brian lattices. arXiv:2312.03959v1, 2023. URL https://arxiv.org/abs/2312.03959v1.
+[3] Prosenjit Bose, Anna Lubiw, Vinayak Pathak, and Sander Verdonschot. Flipping edge-labelled tri-
+    angulations. Computational Geometry, 68:309–326, 2018. doi: 10.1016/j.comgeo.2017.06.005. URL
+    https://doi.org/10.1016/j.comgeo.2017.06.005. Read version: arXiv:1310.1166v2 (2016).
+[4] Letong Hong. The pop-stack-sorting operator on Tamari lattices. Advances in Applied Mathematics,
+    139:102362, 2022. doi: 10.1016/j.aam.2022.102362. URL https://doi.org/10.1016/j.aam.2022.
+    102362. Read version: arXiv:2201.10030v1.
+[5] Toufik Mansour. Statistics on Dyck paths. Journal of Integer Sequences, 9, 2006. URL https:
+    //cs.uwaterloo.ca/journals/JIS/VOL9/Mansour/mansour86.pdf. Article 06.1.5.
+[6] Jean Marcel Pallo. Rotational tree structures on binary trees and triangulations. Acta Cybernetica,
+    17:799–810, 2006. URL https://acta.bibl.u-szeged.hu/12796/1/Pallo_2006_ActaCybernetica.
+    pdf.
+

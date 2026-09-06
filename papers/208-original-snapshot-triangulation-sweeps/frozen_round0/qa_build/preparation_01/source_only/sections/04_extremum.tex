@@ -1,0 +1,74 @@
+\section{Evaluating fibres and the unique maximum}\label{sec:extremum}
+
+Set \(h(e)=1\). If \(R\ne e\), write its unique left-spine list as
+\[
+ \LS(R)=e^{a_0}D_1e^{a_1}\cdots D_re^{a_r},
+ \qquad a_i\ge0,\quad D_j\ne e.
+\]
+For \(r=0\), the list has \(a_0\ge1\) leaves. Define
+\begin{equation}\label{eq:h}
+ h(R)=
+ \begin{cases}
+ 2^{a_0-1},&r=0,\\
+ 0,&r\ge1\text{ and some }a_i=0,\ 1\le i<r,\\
+ 2^{E(R)}\displaystyle\prod_{j=1}^r h(D_j),&\text{otherwise},
+ \end{cases}
+ \quad
+ E(R)=\max(a_0-1,0)+
+       \sum_{i=1}^{r-1}(a_i-1)+\max(a_r-1,0).
+\end{equation}
+The last row is also zero if a recursive factor vanishes.
+
+\begin{proof}[Evaluation in Theorem~\ref{thm:inverse}]
+Put \(p(R)=|\Lists(R)|\) for nonleaf \(R\). We prove \(p(R)=h(R)\)
+by leaf-count induction using Proposition~\ref{prop:parser}.
+An all-leaf list of length \(s\ge1\) has one source choice per block,
+and its \(s-1\) internal cut positions give \(2^{s-1}\) partitions.
+
+Between two successive nonleaf decorations, a gap of \(a\) leaves must
+give at least one leaf to the next decorated block. If \(a=0\), no
+partition is allowed. If \(a\ge1\), take the final \(k\ge1\) leaves into
+that block, and cut the remaining \(a-k\) leaves into all-leaf blocks.
+There is one choice for zero remaining leaves and \(2^{a-k-1}\) otherwise.
+The total is \(1+\sum_{j=1}^{a-1}2^{j-1}=2^{a-1}\).
+For a leading run of length \(a\ge1\), either the first decoration ends
+the seed, consuming the entire run, or it ends a later block preceded by
+a nonempty all-leaf composition. This gives the same sum; length zero
+has one choice because the decoration itself may end the seed.
+A trailing run is an arbitrary composition, giving one choice at length
+zero and \(2^{a-1}\) at positive length. The independent run factors and
+the recursively smaller multiplicities \(p(D_j)=h(D_j)\) give
+\eqref{eq:h}. Lemma~\ref{lem:inverse-boundaries} then gives the full
+target formula, including its zero and comb branches. Its positive
+values are powers of two.
+\end{proof}
+
+\begin{lemma}[Strict loss from a decoration]\label{lem:strict}
+For nonleaf \(R\), \(h(R)\le 2^{q(R)-1}\), with equality if and only if
+\(R\) is a left comb.
+\end{lemma}
+
+\begin{proof}
+A left comb has an all-leaf left-spine list and attains the bound.
+For a positive fibre with \(r\ge1\), put \(A=\sum_{i=0}^r a_i\).
+The spine contains \(A+r\) internal vertices, so
+\(q(R)=A+r+\sum_jq(D_j)\).
+The gap exponent in \eqref{eq:h} is at most \(A\).
+Induction bounds the exponent supplied by each decoration by \(q(D_j)-1\).
+Hence
+\[
+ \log_2h(R)\le A+\sum_j(q(D_j)-1)
+             =q(R)-2r\le q(R)-2<q(R)-1.
+\]
+A zero fibre cannot attain the positive bound. This proves both the
+inequality and all its equality cases.
+\end{proof}
+
+For a target \((\LC_l,R)\) of internal size \(m\), \(q(R)=m-l\).
+If \(m\ge3\), a leaf \(R\) gives fibre one, strictly below \(2^{m-2}\).
+For nonleaf \(R\), Lemma~\ref{lem:strict} gives at most
+\(2^{m-l-1}\le2^{m-2}\); equality forces \(l=1\) and
+\(R=\LC_m\). This is exactly the fan at vertex \(1\).
+At \(m=1\) the cherry is fixed, and at \(m=2\) the two comb orientations
+each have one source. The extremal part of Theorem~\ref{thm:inverse}
+follows, with no uniqueness assertion at these small sizes.
