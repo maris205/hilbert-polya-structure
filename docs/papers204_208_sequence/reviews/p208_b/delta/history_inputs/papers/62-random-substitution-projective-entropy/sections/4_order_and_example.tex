@@ -1,0 +1,125 @@
+\section{Parameter order and the binary correction}
+\label{sec:example}
+
+For a fixed length $\ell$, changing $p$ changes $q=\ell-p$ and hence the
+order of the projective numerator.  The resulting entropy order is strict.
+
+\begin{proposition}[Strict monotonicity at fixed length]
+\label{prop:monotone}
+For fixed $\ell\ge2$,
+\[
+ h_{\ell,1}<h_{\ell,2}<\cdots<h_{\ell,\ell-1}.
+\]
+\end{proposition}
+
+\begin{proof}
+For $1\le q\le\ell-1$, write
+\[
+ f_q(r)=\frac{r^q}{1+r^\ell}.
+\]
+On $0<r\le1/2$,
+\[
+ \frac{d}{dr}\log f_q(r)
+ =\frac{q-(\ell-q)r^\ell}{r(1+r^\ell)}>0,
+\]
+because $(\ell-q)r^\ell\le(\ell-1)2^{-\ell}<1\le q$.
+Thus every $f_q$ is strictly increasing on the part of the interval visited
+by the orbit.  Also $f_{q'}(r)>f_q(r)$ whenever $q'<q$ and $0<r<1$.
+
+Consider $p'<p$ and hence $q'=\ell-p'>q=\ell-p$.  The two orbits start at
+$1/2$, and at the next step the orbit for the smaller exponent $q$ is
+strictly larger.  The two monotonicity facts give by induction
+\[
+ r_m^{(p)}>r_m^{(p')}\qquad(m\ge2).
+\]
+The first summand in \cref{eq:entropy} is common, as is the $m=1$ correction;
+every correction with $m\ge2$ is strictly larger for $p$.  Summing proves
+the claim.
+\end{proof}
+
+We next specialize to $(\ell,p,q)=(2,1,1)$, that is,
+\begin{equation}
+ a\mapsto\{aa,bb\},\qquad b\mapsto\{ab\}.
+ \label{eq:binary-example}
+\end{equation}
+This is the substitution in \cite[Example~4.8]{Mitchell2024}.
+
+\begin{corollary}[Certified value for the binary example]
+\label{cor:binary}
+Exact integer iteration through level $14$ gives
+\begin{equation}
+ H_{14}=\frac{\log A_{14}}{2^{14}}
+ =0.4328844689033557739\ldots .
+ \label{eq:H14}
+\end{equation}
+Moreover,
+\begin{equation}
+ 0<h-H_{14}<1.933\times10^{-6},
+ \label{eq:H14-tail}
+\end{equation}
+and high-precision iteration, certified by the same tail inequality, gives
+\begin{equation}
+ h=0.4328862961227668396\ldots .
+ \label{eq:corrected-value}
+\end{equation}
+In particular the value $0.4115$ displayed in
+\cite[Example~4.8]{Mitchell2024} is incompatible with the exact level-$14$
+lower bound.
+\end{corollary}
+
+\begin{proof}
+Starting from $(A_1,B_1)=(2,1)$, iterate
+\[
+ (A_{m+1},B_{m+1})=(A_m^2+B_m^2,A_mB_m)
+\]
+using integers.  This produces \cref{eq:H14}.  With
+$r_{14}=B_{14}/A_{14}$, \cref{eq:tail-certificate} gives
+\[
+ 0<h-H_{14}\le2^{-14}\log(1+r_{14}^2)<1.933\times10^{-6}.
+\]
+For the displayed digits in \cref{eq:corrected-value}, the companion script
+uses the integer scale $D=10^{80}$.  At every step it stores integers
+$L_m,U_m$ with $L_m/D\le r_m\le U_m/D$.  The map
+$f(r)=r/(1+r^2)$ is increasing on $[0,1/2]$, so evaluating its rational
+formula at the two endpoints and rounding down/up propagates a valid
+enclosure.  Every logarithm is enclosed by the rational identity
+\[
+ \log x=2\sum_{j\ge0}\frac{z^{2j+1}}{2j+1},
+ \qquad z=\frac{x-1}{x+1},
+\]
+together with, after $N$ retained terms, the explicit upper remainder
+\[
+ 0\le 2\sum_{j=N}^{\infty}\frac{z^{2j+1}}{2j+1}
+ \le \frac{2z^{2N+1}}{(2N+1)(1-z^2)}.
+\]
+All operations in this enclosure use integer floor or ceiling division;
+$N=100$ is used for every logarithm.  After the $80$ correction terms
+$m=1,\ldots,80$, the partial sum is $H_{81}$ and the propagated interval
+contains $r_{81}$.  Applying \cref{eq:tail-certificate} with $M=81$ gives
+the rigorous interval
+\[
+ 0.4328862961227668396437868413
+ <h<
+ 0.4328862961227668396437868439.
+\]
+A separate 90-digit decimal evaluation through $H_{261}$ (that is, using
+$260$ correction terms) agrees with this interval, and the corresponding
+theoretical tail bound is below $10^{-81}$.
+\end{proof}
+
+\begin{remark}[What is being corrected]
+The contradiction concerns one printed numerical conclusion.  The source's
+set recurrence and its general constant-length entropy theorem are not
+challenged.  A public version should be coordinated with the source author or
+journal and refreshed against any correction issued after the audit date.
+\end{remark}
+
+\begin{remark}[A coarse parameter-only bound]
+Since $r_m\le1/2$, \cref{eq:tail-certificate} also yields
+\[
+ 0<h_{\ell,p}-H_M
+ \le\frac{\ell^{-M}}{\ell-1}\log(1+2^{-\ell}).
+\]
+The orbit-dependent bound is much smaller in the superattracting regime and
+is the recommended certificate.
+\end{remark}

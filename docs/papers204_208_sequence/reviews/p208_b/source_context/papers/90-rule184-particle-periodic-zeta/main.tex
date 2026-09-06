@@ -1,0 +1,357 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\1}{\mathbf 1}
+
+\title[Periodic orbits of Rule 184]{Particle-Resolved Periodic Orbits and Sharp Recurrent-Core Entry for Rule 184 on Finite Rings}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B15, 37B10, 68Q80, 05A15}
+\keywords{Rule 184, cellular automaton, traffic flow, periodic orbit, Artin--Mazur zeta function, cyclic independent set}
+
+\begin{document}
+
+\begin{abstract}
+We study elementary cellular automaton Rule 184 on a binary ring of length
+$n$, retaining the conserved particle number.  The classical asymptotic
+description says that every orbit reaches either the cyclic no-$11$ shift,
+where particles translate right, or the cyclic no-$00$ shift, where holes
+translate left.  We refine this finite-ring picture in two directions.  On
+the layer with $m$ particles, the largest first-entry time into this recurrent
+core is exactly
+\[
+ \bigl(\min\{m,n-m\}-1\bigr)_+.
+\]
+The proof uses a min-plus formula for labeled particle positions.  We also
+derive the particle-weighted iterate-fixed polynomial.  If
+$d=\gcd(n,k)$, $r=n/d$, and
+$H(d,j)=\frac d{d-j}\binom{d-j}{j}$ counts $j$-subsets of a labeled cycle,
+then
+\[
+ \sum_{F_n^kx=x}u^{|x|}
+ =\sum_{j=0}^{\lfloor d/2\rfloor}H(d,j)
+   (u^{rj}+u^{n-rj})-2\1_{2\mid d}u^{n/2}.
+\]
+Consequently $\#\Fix(F_n^k)=2L_d-2\1_{2\mid d}$, where $L_d$ is a Lucas
+number.  M\"obius inversion gives every temporal orbit, its particle-number
+refinement, and the finite-map Artin--Mazur zeta function.  Exact enumeration
+checks all stated ledgers on the registered finite ranges.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and ownership boundary}
+
+Rule 184 is the number-conserving elementary cellular automaton obtained from
+Wolfram's binary local-rule numbering \cite{Wolfram1983}.  It is also the
+parallel, deterministic, unit-speed traffic rule: a particle moves one site
+to the right precisely when that site is empty.  Nishinari and Takahashi
+connected the rule to an ultradiscrete Burgers equation and derived its
+traveling-wave asymptotics \cite{NishinariTakahashi1998}.  Belitsky and
+Ferrari treated invariant measures and convergence \cite{BelitskyFerrari2005},
+while Fuk\'s developed exact preimage methods and the density-classification
+use of Rule 184 \cite{Fuks1997}.  Recent work studies space--time jam
+clusters, relaxation observables, and their height-function description in
+the same traffic model \cite{JhaEtAl2025,JhaEtAl2026}.
+
+We therefore take as owned background the traffic interpretation, particle
+conservation, density transition, no-$11$/no-$00$ asymptotic phases, and the
+fact that those phases translate.  The residual finite-ring questions here
+are narrower: the exact worst first-entry time at each conserved particle
+number, and the complete temporal orbit ledger refined by that number.
+
+The main results are:
+\begin{enumerate}
+\item a sharp layerwise transient bound, proved by a closed min-plus solution
+for labeled car positions;
+\item a particle-weighted formula for every $\Fix(F_n^k)$;
+\item exact-period and exact-particle orbit counts, hence a finite temporal
+Artin--Mazur zeta product;
+\item the microcanonical exponential rate of recurrent states.
+\end{enumerate}
+No claim is made to the discovery of Rule 184, its recurrent phases, the
+Lucas enumeration of the golden-mean shift, or M\"obius inversion.  The zeta
+below is temporal for a finite, noninvertible cellular map; it is not the
+spatial zeta of a frozen subshift.
+
+\section{The recurrent core}
+
+Fix an integer $n\geq1$.  Let $\Z_n=\Z/n\Z$ and write
+$x=(x_i)_{i\in\Z_n}\in\{0,1\}^{\Z_n}$.  We use the local rule
+\begin{equation}\label{eq:rule}
+ (F_nx)_i=x_ix_{i+1}+x_{i-1}(1-x_i).
+\end{equation}
+The two summands cannot both equal one.  The first records a particle blocked
+by its right neighbor; the second records a particle entering from the left.
+Thus $|F_nx|=|x|$, where $|x|=\sum_i x_i$.
+
+Let $X_n^{11}$ be the cyclic words avoiding $11$, and let $X_n^{00}$ avoid
+$00$.  On $X_n^{11}$ every particle moves right, so $F_n$ is right rotation.
+On $X_n^{00}$ every hole moves left, so $F_n$ is left rotation.  The standard
+finite-ring convergence theorem gives
+\begin{equation}\label{eq:core}
+ \Rec(F_n)=X_n^{11}\cup X_n^{00}.
+\end{equation}
+The next section reproves entry into this set while sharpening its time to an
+exact layerwise extremum.  Since $F_n$ restricts to rotations on the two
+pieces, entry also proves that no point outside the union is recurrent.
+
+The intersection is empty for odd $n$.  For even $n$ it consists of the two
+alternating configurations; Rule 184 interchanges them.
+
+\section{A sharp first-entry time}
+
+Define
+\[
+ \tau_n(x)=\min\{t\geq0:F_n^t(x)\in X_n^{11}\cup X_n^{00}\}.
+\]
+
+\begin{lemma}[min-plus particle formula]\label{lem:minplus}
+Suppose $x$ has $m\geq1$ particles.  Label their lifted positions so that
+\[
+ p_j(0)<p_{j+1}(0),\qquad p_{j+m}(0)=p_j(0)+n.
+\]
+Then, for every $t\geq0$,
+\begin{equation}\label{eq:minplus}
+ p_j(t)=\min_{0\leq s\leq t}
+ \bigl(p_{j+s}(0)+t-2s\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+A particle either advances one site or is stopped one site behind the next
+particle, hence
+\[
+ p_j(t+1)=\min\{p_j(t)+1,p_{j+1}(t)-1\}.
+\]
+Substitution of the formula at time $t$ makes the first minimum range over
+$0\leq s\leq t$ and the second over $1\leq s\leq t+1$; their union is exactly
+\eqref{eq:minplus} at time $t+1$.
+\end{proof}
+
+\begin{theorem}[sharp layerwise entry depth]\label{thm:depth}
+For $0\leq m\leq n$,
+\begin{equation}\label{eq:depth}
+ \max_{|x|=m}\tau_n(x)
+ =\bigl(\min\{m,n-m\}-1\bigr)_+.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+First assume $1\leq m\leq n/2$.  Put
+$a_j=p_j(0)-2j$.  Then
+$a_{j+m}=a_j+n-2m\geq a_j$.  At time $m-1$, define
+\[
+ b_j=\min_{0\leq s\leq m-1}a_{j+s}.
+\]
+The window defining $b_{j+1}$ drops $a_j$ and adds
+$a_{j+m}\geq a_j$, so $b_{j+1}\geq b_j$.  By
+\cref{lem:minplus},
+\[
+ p_{j+1}(m-1)-p_j(m-1)=2+b_{j+1}-b_j\geq2.
+\]
+Every particle is therefore isolated, and $F_n^{m-1}(x)\in X_n^{11}$.
+
+For the word $1^m0^{n-m}$, with occupied positions initially
+$0,\ldots,m-1$, a direct induction gives, for $0\leq t\leq m-1$, the occupied
+set
+\begin{equation}\label{eq:witness-evolution}
+ \{0,\ldots,m-t-1\}
+ \cup\{m-t+1,m-t+3,\ldots,m+t-1\}.
+\end{equation}
+The second set is empty at $t=0$.  Indeed, one application of the traffic
+rule shortens the first block at its right end and advances every already
+detached particle by one.  The assumption $n\geq2m$ leaves a cyclic gap of
+at least two after the last displayed particle.  Thus an adjacent pair
+remains for every $t<m-1$, whereas at $t=m-1$ all particles are isolated.
+The bound is attained.  The cases $m=0,1$ have entry time zero.
+
+For completeness, define
+\[
+ (\Theta x)_i=1-x_{-i},\qquad i\in\Z_n.
+\]
+A substitution in \eqref{eq:rule} gives $F_n\Theta=\Theta F_n$; moreover,
+$\Theta$ exchanges avoidance of $11$ and avoidance of $00$, and sends the
+$m$-particle layer to the $(n-m)$-particle layer.  Hence
+$\tau_n(\Theta x)=\tau_n(x)$, which proves the high-density half of
+\eqref{eq:depth}.
+\end{proof}
+
+The global worst depth is therefore $(\lfloor n/2\rfloor-1)_+$.  Notice that
+\cref{thm:depth} concerns first entry into the recurrent core at fixed density;
+it is not a distributional jam-lifetime statement.
+
+\section{Particle-weighted iterate-fixed counts}
+
+For $d\geq1$ and $0\leq j\leq\lfloor d/2\rfloor$, set
+\begin{equation}\label{eq:H}
+ H(d,j)=\frac d{d-j}\binom{d-j}{j},
+\end{equation}
+with $H(d,0)=1$.  Cutting a labeled cycle immediately after a marked vertex,
+or using the standard cycle/path decomposition, shows that $H(d,j)$ counts
+cyclic binary words of length $d$ with $j$ ones and no adjacent ones.
+
+\begin{theorem}[weighted fixed polynomial]\label{thm:fixed}
+Let $d=\gcd(n,k)$ and $r=n/d$.  Then
+\begin{equation}\label{eq:fixedpoly}
+ \Phi_{n,k}(u):=\sum_{F_n^kx=x}u^{|x|}
+ =\sum_{j=0}^{\lfloor d/2\rfloor}H(d,j)
+   \bigl(u^{rj}+u^{n-rj}\bigr)
+   -2\1_{2\mid d}u^{n/2}.
+\end{equation}
+If $L_0=2,L_1=1$ and $L_{s+1}=L_s+L_{s-1}$, then
+\begin{equation}\label{eq:fixedtotal}
+ \#\Fix(F_n^k)=2L_{\gcd(n,k)}-2\1_{2\mid\gcd(n,k)}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+An iterate-fixed point is recurrent, hence lies in \eqref{eq:core}.  On
+$X_n^{11}$, $F_n^k$ is rotation by $k$.  Such a configuration is the
+$r$-fold repetition of a labeled cyclic word of length $d$; if the base word
+has $j$ particles, it contributes $H(d,j)u^{rj}$.  Particle--hole reflection
+gives the term $H(d,j)u^{n-rj}$ from $X_n^{00}$.
+
+The two alternating configurations occur in both sums exactly when they are
+fixed by the $k$th iterate.  Rule 184 swaps them, so this requires $k$ even.
+When $n$ is even, $k$ is even exactly when $d=\gcd(n,k)$ is even; if $d$ is
+even then $n$ is automatically even.  Their common weight is $n/2$, and
+each of the two points was counted once in each branch, giving the displayed
+subtraction by two.  Finally,
+$\sum_jH(d,j)=L_d$, the cyclic golden-mean count, which yields
+\eqref{eq:fixedtotal}.
+\end{proof}
+
+Thus all unweighted temporal fixed data collapse to the gcd and one parity
+bit, while $\Phi_{n,k}$ retains the conserved-particle decomposition.
+
+\section{Exact temporal orbits and zeta}
+
+Let $\mu$ be the number-theoretic M\"obius function.  For $\ell,j\geq0$, put
+\begin{equation}\label{eq:primitiveH}
+ P(\ell,j)=
+ \sum_{e\mid\gcd(\ell,j)}\mu(e)
+ H\left(\frac\ell e,\frac je\right).
+\end{equation}
+This is the number of labeled no-$11$ cyclic words having least rotation
+period $\ell$ and $j$ ones, by ordinary divisor M\"obius inversion
+\cite{Stanley2012}.
+
+\begin{theorem}[orbit ledger]\label{thm:orbits}
+Let $c_{n,\ell}$ be the number of temporal Rule-184 orbits of exact length
+$\ell$.  Then
+\begin{equation}\label{eq:orbitcount}
+ c_{n,\ell}=
+ \begin{cases}
+ \displaystyle
+ \frac2\ell\sum_{e\mid\ell}\mu(\ell/e)L_e-\1_{\ell=2},
+ &\ell\mid n,\\[7pt]
+ 0,&\ell\nmid n.
+ \end{cases}
+\end{equation}
+Consequently the temporal Artin--Mazur zeta function is
+\begin{equation}\label{eq:zeta}
+ \zeta_{F_n}(z)
+ =\exp\!\left(\sum_{k\geq1}\frac{\#\Fix(F_n^k)}kz^k\right)
+ =\prod_{\ell\mid n}(1-z^\ell)^{-c_{n,\ell}}.
+\end{equation}
+
+More precisely, set $r=n/\ell$.  If $m=rj<n/2$, the number of length-$\ell$
+orbits with $m$ particles is $P(\ell,j)/\ell$; the same formula holds for
+$m=n-rj>n/2$.  At half filling there is exactly one orbit, of length two,
+when $n$ is even.  All other particle-resolved entries vanish.
+\end{theorem}
+
+\begin{proof}
+Every temporal period divides $n$ because both recurrent branches are
+rotations of an $n$-ring.  For $\ell\mid n$, M\"obius inversion of
+\eqref{eq:fixedtotal} gives the number of exact-period points.  The parity
+term is explicit:
+\[
+ \sum_{e\mid\ell}\mu(\ell/e)\1_{2\mid e}=\1_{\ell=2}.
+\]
+For odd $\ell$ the sum is empty; for $\ell=2s$ it equals
+$\sum_{f\mid s}\mu(s/f)$, which is one only at $s=1$.  Hence the correction
+to exact-period points is $-2\1_{\ell=2}$, and division by $\ell$ gives the
+term $-\1_{\ell=2}$ in \eqref{eq:orbitcount}.  The standard finite-map
+fixed-point-to-orbit identity then gives \eqref{eq:zeta}
+\cite{LindMarcus1995}.
+
+For the refinement, a low-density configuration of least temporal period
+$\ell$ is the $r$-fold repetition of a primitive cyclic word counted by
+\eqref{eq:primitiveH}.  Divide its labeled points into rotation orbits of
+size $\ell$.  Reflection and complementation give the high-density statement.
+The two alternating descriptions coincide at half filling, producing one
+two-cycle rather than two.
+\end{proof}
+
+\section{Recurrent-state entropy by density}
+
+At particle number $m$, \eqref{eq:core} and the intersection correction give
+\[
+ R_{n,m}=H\bigl(n,\min\{m,n-m\}\bigr).
+\]
+Along any sequence of integer pairs with $n\to\infty$ and $m/n\to\rho$, let
+$\alpha=\min\{\rho,1-\rho\}\in[0,1/2]$, Stirling's formula gives
+\begin{equation}\label{eq:microentropy}
+ \lim_{\substack{n\to\infty\\ m/n\to\rho}}
+ \frac1n\log R_{n,m}
+ =(1-\alpha)\log(1-\alpha)-\alpha\log\alpha
+  -(1-2\alpha)\log(1-2\alpha).
+\end{equation}
+The endpoint convention is continuous.  Differentiation shows that the two
+density-symmetric maxima occur when
+$\alpha=(5-\sqrt5)/10$, and their value is $\log\varphi$, with
+$\varphi=(1+\sqrt5)/2$.  This is a microcanonical count of recurrent states,
+not a new version of the traffic flux diagram.
+
+\section{Exact control and scope}
+
+The accompanying standard-library Python program independently implements
+the local rule, functional graphs, cyclic hard-core counts, min-plus particle
+motion, M\"obius inversion, and the closed formulas.  It exhausts recurrent
+cores, the particle--hole reflection conjugacy, and sharp layer depths for
+$n\leq14$; checks the all-time min-plus formula through $t=2n$ for every
+low-density state with $n\leq12$; verifies all weighted fixed polynomials for
+$n\leq12$ and $k\leq2n$; and checks particle-resolved temporal cycles for
+$n\leq13$.  The control guards conventions and endpoints; the proofs above
+carry the all-size claims.
+
+The result is a finite-ring exact closure.  Its first-entry variable $\tau_n$
+is the first time the full configuration reaches the translating recurrent
+core.  It is not the lifetime of a chosen jam cluster, nor an ensemble
+relaxation statistic of the kind studied in
+\cite{JhaEtAl2025,JhaEtAl2026}.  The paper does not address noisy traffic,
+infinite-volume mixing rates, hydrodynamic limits, or priority beyond the
+bounded owner audit described in the introduction.  External release remains
+on hold.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

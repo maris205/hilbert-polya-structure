@@ -1,0 +1,181 @@
+\section{Sharp two-parameter trace-class theorem}
+\label{sec:traceclass}
+
+The endpoint and cofactor roofs control different directions in the matrix.
+The following theorem identifies both boundaries exactly.
+
+\begin{theorem}[Sharp trace-class phase diagram]
+\label{thm:traceclass}
+Let \(\sigma=\Re s\) and \(a=\Re u\).  Then
+
+\begin{equation}
+ \boxed{
+ L_{s,u}\in\Sone(\cH)
+ \quad\Longleftrightarrow\quad
+ \sigma>\frac12
+ \quad\text{and}\quad
+ \sigma+a>\frac12.}
+\label{eq:S1-domain}
+\end{equation}
+
+On this domain, \((s,u)\mapsto L_{s,u}\) is locally holomorphic in trace norm,
+and \(D(s,u;z)\) is jointly holomorphic in \((s,u,z)\) and entire in \(z\).
+\end{theorem}
+
+\begin{proof}[Proof of sufficiency]
+Group the matrix by output row \(d\).  Every source entering row \(d\) is
+\(n=dq-1\).  The restriction \(n\ge2\) gives
+
+\[
+ q_0(2)=2,
+ \qquad q_0(d)=1\quad(d\ge3).
+\]
+
+Set
+
+\begin{equation}
+ R_d(s,u)=
+ \sum_{q\ge q_0(d)}[d(dq-1)]^{-s}q^{-u}E_{d,dq-1}.
+\label{eq:row-block}
+\end{equation}
+
+Each \(R_d\) is rank one.  Its trace norm equals its Hilbert--Schmidt norm,
+and
+
+\begin{equation}
+ \|R_d(s,u)\|_1^2=
+ \sum_{q\ge q_0(d)}
+ d^{-2\sigma}(dq-1)^{-2\sigma}q^{-2a}.
+\label{eq:row-norm}
+\end{equation}
+
+Because \(dq\ge3\), one has
+
+\[
+ \frac23dq\le dq-1<dq.
+\]
+
+Consequently, whenever \(\sigma+a>1/2\),
+
+\begin{equation}
+ \|R_d(s,u)\|_1^2
+ \asymp_{\sigma,a}
+ d^{-4\sigma}
+ \sum_{q\ge q_0(d)}q^{-2(\sigma+a)}
+ \asymp_{\sigma,a}d^{-4\sigma}
+\label{eq:row-asymptotic}
+\end{equation}
+
+for \(d\ge3\).  The upper constant is uniform in \(d\), and the \(q=1\)
+term supplies the lower constant.  Therefore
+
+\[
+ \sum_{d\ge2}\|R_d(s,u)\|_1<\infty
+\]
+
+exactly when \(\sigma>1/2\).  Under both strict inequalities, the sum
+\(\sum_dR_d\) converges in trace norm and agrees with \cref{eq:Lsu} on
+finitely supported vectors.
+
+On a compact subset of the two strict half-planes, both exponent margins are
+uniform.  Differentiating the entries introduces only powers of
+\(\log d\), \(\log(dq-1)\), and \(\log q\), which are absorbed by a smaller
+positive margin in \cref{eq:row-asymptotic}.  The row series is therefore
+locally trace-norm holomorphic.  Standard Fredholm theory
+\citep{Simon1977} yields the determinant statement.
+\end{proof}
+
+\begin{proof}[Necessity of \(\sigma+a>1/2\)]
+If the frozen matrix had a bounded extension, each fixed output row would be
+an \(\ell^2\) coefficient vector.  At \(d=2\), its squared norm is
+
+\[
+ \sum_{q\ge2}|[2(2q-1)]^{-s}q^{-u}|^2
+ \asymp
+ \sum_{q\ge2}q^{-2(\sigma+a)}.
+\]
+
+This diverges when \(\sigma+a\le1/2\).  In that region the matrix is not
+even bounded, hence cannot be trace class.
+\end{proof}
+
+\begin{proof}[Necessity of \(\sigma>1/2\)]
+Let \(U_te_n=\e^{int}e_n\).  The first-superdiagonal Fourier projection
+
+\begin{equation}
+ \mathcal P_1(T)=\frac1{2\pi}
+ \int_0^{2\pi}\e^{-it}U_tTU_t^{-1}\,\dd t
+\label{eq:fourier-projection}
+\end{equation}
+
+is contractive on \(\Sone\).  On a matrix unit \(E_{d,n}\), the conjugation
+has phase \(\e^{i(d-n)t}\), so \cref{eq:fourier-projection} retains exactly
+\(d=n+1\).  In the successor--divisor graph this is the cofactor-one spine.
+Therefore
+
+\begin{equation}
+ \mathcal P_1(L_{s,u})e_n=
+ [n(n+1)]^{-s}e_{n+1}.
+\label{eq:successor-extraction}
+\end{equation}
+
+The twist disappears because \(1^{-u}=1\).  The singular values of this
+weighted unilateral shift are the moduli of its weights, so
+
+\[
+ \|\mathcal P_1(L_{s,u})\|_1
+ =\sum_{n\ge2}[n(n+1)]^{-\sigma}.
+\]
+
+This converges exactly when \(\sigma>1/2\).  Trace-class membership of
+\(L_{s,u}\) would force membership of its contractive projection, proving
+the remaining necessity.
+\end{proof}
+
+\begin{corollary}[Unitary character fibers]
+\label{cor:character-S1}
+For every \(\chi\in\widehat\Gamma\),
+
+\begin{equation}
+ L_{s,\chi}\in\Sone
+ \quad\Longleftrightarrow\quad
+ \Re s>\frac12.
+\label{eq:character-domain}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Unitary phases do not change the row norms, and
+\(\chi(1)=1\) leaves \cref{eq:successor-extraction} unchanged.  The proof of
+\cref{thm:traceclass} with \(a=0\) applies uniformly in \(\chi\).
+\end{proof}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Independent mechanisms in the sharp phase diagram.  Finite
+prefixes may illustrate these regimes but do not prove either boundary.}
+\label{tab:phase}
+\begin{tabularx}{\textwidth}{L{0.21\textwidth}L{0.24\textwidth}Y}
+\toprule
+Region & Exact conclusion & Witness \\
+\midrule
+\(\sigma>1/2,\ \sigma+a>1/2\)
+& \(L_{s,u}\in\Sone\)
+& summable rank-one output rows \\
+\(\sigma+a\le1/2\)
+& no bounded extension
+& fixed output row \(d=2\) is not in \(\ell^2\) \\
+\(\sigma\le1/2\)
+& not trace class
+& cofactor-one successor Fourier component \\
+\(u=it\)
+& base threshold \(\sigma>1/2\)
+& phases preserve all row magnitudes \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The exact iff statement is the analytic advance of SD-C24.  It also explains
+why increasing cofactor decay cannot repair the endpoint boundary: the
+successor spine carries the identity label and is invisible to \(u\).

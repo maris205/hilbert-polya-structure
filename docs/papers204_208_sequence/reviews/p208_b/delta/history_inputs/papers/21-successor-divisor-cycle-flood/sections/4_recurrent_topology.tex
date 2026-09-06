@@ -1,0 +1,114 @@
+\section{Recurrent topology and the primitive-cycle flood}
+\label{sec:topology}
+
+The edge grammar has two elementary consequences:
+\[
+ n\to n+1
+\]
+for every \(n\ge2\), because \(n+1\) divides itself, and
+\[
+ n\to d\quad\Longrightarrow\quad d\le n+1.
+\]
+The successor edges supply ascent.  Small factors of \(n+1\) supply descent.
+
+\begin{theorem}[Strong connectivity and mixing]
+\label{thm:mixing}
+The graph \(G_{\SD}\) is strongly connected.  Moreover, for every
+\(u,v\in V\), there is \(N(u,v)\) such that every \(n\ge N(u,v)\) occurs as
+the length of a path from \(u\) to \(v\).  Hence \(X_{\SD}^{+}\) is
+topologically mixing in the path sense.
+\end{theorem}
+
+\begin{proof}
+If \(n\) is odd, then \(2\mid n+1\), so \(n\to2\).  If \(n\) is even, then
+\[
+ n\to n+1\to2.
+\]
+Thus every vertex reaches \(2\) in at most two edges.  Conversely, the
+successor chain
+\[
+ 2\to3\to\cdots\to m
+\]
+reaches any \(m\ge2\), proving strong connectivity.
+
+For mixing, use the two loops based at \(3\),
+\[
+ 3\to2\to3,
+ \qquad
+ 3\to4\to5\to3,
+\]
+of lengths two and three.  Fix paths \(u\to3\) and \(3\to v\), with total
+length \(b\).  Every integer at least two is \(2a+3c\) for some
+\(a,c\ge0\).  For every sufficiently large \(n\), insert the required
+numbers of the two based loops to obtain length \(n-b\), then follow the
+fixed exit path.
+\end{proof}
+
+\begin{theorem}[Canonical all-length flood]
+\label{thm:canonical}
+For every \(k\ge2\),
+\[
+ C_k=(k,k+1,\ldots,2k-1)
+\]
+is a simple primitive directed cycle of length \(k\).  Its vertex mass and
+weight are
+\[
+ M_k=\prod_{j=k}^{2k-1}j=\frac{(2k-1)!}{(k-1)!},
+ \qquad
+ w_s(C_k)=M_k^{-2s}.
+\]
+\end{theorem}
+
+\begin{proof}
+Successor edges traverse \(k,k+1,\ldots,2k-1\).  The last vertex returns to
+\(k\) because
+\[
+ k\mid2k=(2k-1)+1.
+\]
+All displayed vertices are distinct, so the closed word is simple.  A simple
+closed word of length at least two cannot be a positive temporal power of a
+shorter word.  The mass and weight follow from
+\cref{eq:cyclic-weight}.
+\end{proof}
+
+\begin{proposition}[Divisor-indexed subflood]
+\label{prop:subflood}
+Let \(d\mid r\) with \(d\ge2\).  Then
+\[
+ C_{r,d}=(d,d+1,\ldots,d+r-1)
+\]
+is a simple primitive cycle of length \(r\).  If \(P_r\) counts primitive
+rotation classes of length \(r\), then
+\[
+ P_r\ge \tau(r)-1,
+\]
+where \(\tau(r)\) is the number of positive divisors of \(r\).
+\end{proposition}
+
+\begin{proof}
+Successor edges traverse the interval, and the final edge closes because
+\[
+ d\mid d+r=(d+r-1)+1.
+\]
+The cycle is simple.  Distinct divisors \(d\) give distinct minimum vertices,
+so their rotation classes differ.  There are \(\tau(r)-1\) divisors
+\(d\ge2\).
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\resizebox{\textwidth}{!}{\input{figures/successor_divisor_anatomy}}
+\caption{The induced prefix illustrates the two mechanisms behind the cycle
+flood.  Successor edges move \(n\) to \(n+1\), while the quotient-two edge
+\(2k-1\to k\) closes \(C_k\).  The right panel emphasizes that the pruned
+\(q\in\{1,2\}\) spine already retains every canonical cycle.  Dotted gray
+edges belong to the full graph but are unnecessary for this obstruction.
+Edge type is encoded by both color and line style.}
+\label{fig:anatomy}
+\end{figure}
+
+\Cref{fig:anatomy} makes the structural tension visible.  The successor
+transition is the only unbounded ascent mechanism needed for connectivity.
+The quotient-two return is the only descent mechanism needed for the entire
+canonical flood.  The remaining divisor edges enrich the periodic inventory
+but do not create the decisive obstruction.

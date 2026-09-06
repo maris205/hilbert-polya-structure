@@ -1,0 +1,606 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathcal A}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Exp}{\mathbb E}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\degf}{\operatorname{deg}}
+\newcommand{\cyl}[1]{[#1]}
+
+\title[Random push--pop stack cocycles]{Running-Maximum Normal Forms for Random Push--Pop Stack Cocycles:\\
+Image Contraction, Fibre Growth, and Two Exact Thresholds}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37H15, 37B10, 60G50, 60J10}
+\keywords{random dynamical system, one-sided full shift, bicyclic monoid, reflected random walk, synchronization, annealed exponent}
+
+\begin{document}
+
+\begin{abstract}
+Let $X=\A^{\N_0}$, where $|\A|=b\geq2$.  At each time, independently
+apply the left shift $D$ with probability $p$, or prefix a uniformly chosen
+letter with probability $1-p$.  If $S_n$ counts shifts minus prefixes and
+$M_n=\max_{0\leq k\leq n}S_k$, every length-$n$ cocycle has the exact
+normal form
+\[
+ \Phi_n=C_{u_n}D^{J_n},\qquad J_n=M_n,\qquad |u_n|=I_n=M_n-S_n.
+\]
+Consequently, $\Phi_n(X)$ is one cylinder of diameter $b^{-I_n}$ and every
+point in that cylinder has exactly $b^{J_n}$ preimages.  We prove the
+almost-sure rates $(1-2p)_+\log b$ for image contraction and
+$(2p-1)_+\log b$ for fibre growth.  For
+$A_n=\Exp b^{J_n}$ and $\lambda=bp+(1-p)/b$, a first-passage expansion and
+an exponential change of measure give the full trichotomy: $A_n$ converges
+if $p<1/(b+1)$, grows linearly at $p=1/(b+1)$, and is asymptotic to an
+explicit constant times $\lambda^n$ above that threshold.  Thus the
+annealed exponent turns on at $1/(b+1)$, while synchronization and quenched
+fibre growth change at $1/2$.  At $p=1/2$, the typical logarithmic scales
+are of order $\sqrt n$, although the annealed fibre moment is exponential.
+The general monoid-walk, reflected-walk, and random-cocycle frameworks are
+classical; this internal note makes no absolute novelty or priority claim.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A one-sided shift forgets one symbol, while a prefix map inserts one.  Their
+composition is elementary, but a random sequence of the two operations has
+two different records of information loss: unmatched shifts create
+preimages, and unmatched prefixes shrink the image to a cylinder.  The two
+records are not independent.  They are the running maximum and the
+drawdown of the same nearest-neighbour walk.
+
+This note turns that observation into an exact random dynamical calculation.
+One-sided full shifts and their cylinder geometry are standard symbolic
+systems \cite{LindMarcus1995}; random cocycles belong to the general
+framework developed in, for example, Arnold's monograph
+\cite{Arnold1998}.  The algebra also has a clear prior owner boundary.  If
+one fixes a single prefix letter, the shift and prefix maps realize the
+bicyclic relation $DC=\Id$.  Normal forms, drift, entropy, and harmonic
+measures for random walks on suitable groups and monoids have an established
+theory, including Mairesse's treatment of zero-automatic monoids and the
+bicyclic example \cite{Mairesse2005}.  Ballot identities, first-passage
+laws, and reflected random walks are classical probability
+\cite{Feller1968,Asmussen2003}.
+
+The residual purpose here is narrower: we couple that normal form to exact
+symbolic image and fibre observables, then compute the exponential moment of
+the fibre degree with its reflection correction intact.  Four conclusions
+result.
+\begin{enumerate}
+\item Every finite cocycle is one prefix followed by a power of the shift;
+      the two exponents are exactly $I_n=M_n-S_n$ and $J_n=M_n$.
+\item The pathwise image contraction and fibre-growth rates have the sharp
+      drift threshold $p=1/2$, and uniform synchronization occurs exactly
+      for $p<1/2$.
+\item The annealed fibre degree has a different threshold,
+      $p=1/(b+1)$.  We give its finite ballot sum, its subcritical limit,
+      its critical linear coefficient, and its supercritical exponential
+      prefactor.
+\item At $p=1/2$, each of $I_n/\sqrt n$ and $J_n/\sqrt n$, marginally,
+      converges in law to a half-normal variable, whereas
+      $\Exp b^{J_n}$ grows exponentially.  No joint-limit claim is made.
+\end{enumerate}
+
+All logarithms are natural.  External release is \textbf{HOLD}: the
+displayed conjunction is supported by complete proofs and exact controls,
+but the note does not claim that no equivalent specialization appears in
+the monoid, queueing, or random-dynamical-systems literature.
+
+\section{The cocycle and its finite normal form}
+\label{sec:model}
+
+Fix a finite alphabet $\A$ with cardinality $b\geq2$, and put
+$X=\A^{\N_0}$.  For distinct $x,y\in X$, let
+\[
+ \kappa(x,y)=\min\{k\geq0:x_k\neq y_k\},
+ \qquad d_b(x,y)=b^{-\kappa(x,y)},
+\]
+with $d_b(x,x)=0$.  If $u=u_0\cdots u_{r-1}\in\A^r$, write
+\[
+ \cyl{u}=\{x\in X:x_0\cdots x_{r-1}=u\},
+ \qquad C_u(x)=ux.
+\]
+The restriction $b\geq2$ is essential for this formulation.  If $b=1$,
+$X$ is a singleton, every generator is the identity map, the stated normal
+form is nonunique, and every image has diameter zero rather than the formal
+quantity $b^{-I}=1$.
+The empty word $\epsilon$ satisfies $C_\epsilon=\Id$.  For a letter
+$a\in\A$, write $C_a$ for the corresponding one-letter prefix map, and let
+\[
+ D(x_0x_1x_2\ldots)=x_1x_2\ldots .
+\]
+The defining cancellation is
+\begin{equation}\label{eq:cancellation}
+ DC_a=\Id\qquad(a\in\A).
+\end{equation}
+
+Let $(\omega_t)_{t\geq1}$ be iid with
+\begin{equation}\label{eq:environment-law}
+ \Prob(\omega_t=D)=p,
+ \qquad
+ \Prob(\omega_t=C_a)=\frac{q}{b},
+ \qquad q=1-p,
+\end{equation}
+and define the forward cocycle
+\begin{equation}\label{eq:cocycle}
+ \Phi_0=\Id,
+ \qquad
+ \Phi_n=\omega_n\circ\cdots\circ\omega_1.
+\end{equation}
+The uniform law on prefix letters is convenient but inessential for all
+length, image-diameter, and fibre-degree statements below.
+
+Set
+\begin{equation}\label{eq:walk}
+ \xi_t=\begin{cases}+1,&\omega_t=D,\\-1,&\omega_t=C_a\text{ for some }a,
+ \end{cases}
+ \qquad
+ S_n=\sum_{t=1}^n\xi_t,
+ \qquad
+ M_n=\max_{0\leq k\leq n}S_k.
+\end{equation}
+Thus $\Exp\xi_t=2p-1$.
+
+\begin{theorem}[Running-maximum normal form]\label{thm:normal-form}
+For every finite environment word, there is a unique word $u_n\in\A^*$
+and a unique integer $J_n\geq0$ such that
+\begin{equation}\label{eq:normal-form}
+ \Phi_n=C_{u_n}D^{J_n}.
+\end{equation}
+Their lengths are
+\begin{equation}\label{eq:IJ}
+ \boxed{\quad J_n=M_n,\qquad I_n:=|u_n|=M_n-S_n.\quad}
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:image-fibre}
+ \Phi_n(X)=\cyl{u_n},
+ \qquad
+ \diam\Phi_n(X)=b^{-I_n},
+ \qquad
+ \#\Phi_n^{-1}(y)=b^{J_n}\quad(y\in\cyl{u_n}).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We induct on $n$.  The empty product has $u_0=\epsilon$ and $J_0=0$.
+Suppose $\Phi_n=C_uD^J$.
+
+If $\omega_{n+1}=C_a$, then
+$\Phi_{n+1}=C_{au}D^J$.  The walk decreases by one and its running maximum
+does not change, so $J=M_n=M_{n+1}$ and
+$|au|=M_{n+1}-S_{n+1}$.
+
+Suppose next that $\omega_{n+1}=D$.  If $u=av$ is nonempty, then
+\eqref{eq:cancellation} gives
+$\Phi_{n+1}=C_vD^J$.  Here $I_n=M_n-S_n>0$, so
+$S_n+1\leq M_n$.  The maximum and $J$ stay fixed, while the prefix length
+decreases by one.  If $u=\epsilon$, then $S_n=M_n$ and
+\[
+ \Phi_{n+1}=D^{J+1},\qquad
+ S_{n+1}=M_{n+1}=M_n+1.
+\]
+This proves existence and \eqref{eq:IJ}.
+
+The map $D^J$ is onto and every point of $X$ has exactly $b^J$ preimages
+under it.  The map $C_u$ is injective with image $\cyl{u}$.  Hence
+\eqref{eq:image-fibre} follows, including the exact cylinder diameter in
+the metric $d_b$.  Finally, the image determines $u$ and $|u|$, while the
+constant fibre cardinality determines $J$.  The normal form is unique.
+\end{proof}
+
+For later use, write $\degf(\Phi_n)=b^{J_n}$ for this common fibre
+cardinality on $\Phi_n(X)$.
+
+\begin{remark}\label{rem:bicyclic}
+For a fixed prefix letter, \eqref{eq:cancellation} is the bicyclic relation.
+The theorem does not claim ownership of that algebraic normal form.  Its
+role here is to identify the two symbolic observables in
+\eqref{eq:image-fibre} with $M_n$ and $M_n-S_n$ without a subadditive error.
+\end{remark}
+
+\section{Quenched geometry and the drift threshold}
+\label{sec:quenched}
+
+Define the quenched fibre-growth and image-contraction rates by
+\begin{equation}\label{eq:quenched-rates}
+ g_{\mathrm q}(p)=\lim_{n\to\infty}\frac1n\log b^{J_n},
+ \qquad
+ c_{\mathrm q}(p)=\lim_{n\to\infty}
+   -\frac1n\log\diam\Phi_n(X),
+\end{equation}
+whenever the limits exist.
+
+\begin{theorem}[Quenched rates and synchronization]\label{thm:quenched}
+For every $0\leq p\leq1$, both limits in \eqref{eq:quenched-rates} exist
+almost surely and
+\begin{equation}\label{eq:quenched-formulas}
+ \boxed{
+ g_{\mathrm q}(p)=(2p-1)_+\log b,
+ \qquad
+ c_{\mathrm q}(p)=(1-2p)_+\log b.}
+\end{equation}
+The random cocycle synchronizes uniformly,
+\begin{equation}\label{eq:synchronization}
+ \sup_{x,y\in X}d_b(\Phi_nx,\Phi_ny)\longrightarrow0,
+\end{equation}
+if and only if $p<1/2$.
+\end{theorem}
+
+\begin{proof}
+The strong law gives $S_n/n\to\delta:=2p-1$ almost surely.  We first show
+\begin{equation}\label{eq:max-rate}
+ \frac{M_n}{n}\longrightarrow\delta_+.
+\end{equation}
+If $\delta<0$, then $S_n\to-\infty$, so the all-time maximum is finite and
+$M_n/n\to0$.  If $\delta=0$, the strong law implies that, for every
+$\varepsilon>0$, all sufficiently large $k$ satisfy
+$|S_k|\leq\varepsilon k$.  After dividing by $n$, the maximum over the
+finitely many earlier $k$ vanishes, and the later maximum is at most
+$\varepsilon$.  If $\delta>0$, the same uniform tail estimate gives
+$M_n\leq(\delta+\varepsilon)n+o(n)$, while $M_n\geq S_n$ gives the matching
+lower bound.  This proves \eqref{eq:max-rate}.
+
+Now use $J_n=M_n$, $I_n=M_n-S_n$, and \eqref{eq:image-fibre} to obtain
+\eqref{eq:quenched-formulas}.  If $p<1/2$, then $I_n/n\to1-2p>0$, so the
+diameter in \eqref{eq:image-fibre} tends to zero and
+\eqref{eq:synchronization} holds.  If $p>1/2$, then $S_n\to+\infty$ and
+there are infinitely many strict record times; at each record time
+$S_n=M_n$, hence $I_n=0$ and the image diameter is one.  At $p=1/2$, the
+simple symmetric walk hits every positive integer almost surely, so the
+same record-time argument applies.  Uniform synchronization therefore fails
+for every $p\geq1/2$.
+\end{proof}
+
+At the drift boundary the quenched exponential rates vanish, but the
+normal-form exponents still have a precise diffusive scale.
+
+\begin{proposition}[Half-normal critical scale]\label{prop:critical-scale}
+If $p=1/2$ and $Z$ is standard normal, then
+\begin{equation}\label{eq:critical-law}
+ \frac{J_n}{\sqrt n}\xrightarrow{\mathrm d}|Z|,
+ \qquad
+ \frac{I_n}{\sqrt n}\xrightarrow{\mathrm d}|Z|,
+\end{equation}
+and
+\begin{equation}\label{eq:critical-means}
+ \Exp J_n\sim\Exp I_n\sim\sqrt{\frac{2n}{\pi}}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Donsker's invariance principle and the continuous-mapping theorem
+\cite{Billingsley1999} give
+$M_n/\sqrt n\Rightarrow\sup_{0\leq t\leq1}B_t$.  The reflection principle
+identifies the last variable with $|Z|$.  Time reversal and sign reversal of
+the symmetric increments show, for each fixed $n$, that
+\[
+ I_n=M_n-S_n
+ =\max_{0\leq k\leq n}(S_k-S_n)
+ \quad\text{has the same law as }M_n.
+\]
+This proves \eqref{eq:critical-law}.  Doob's $L^2$ maximal inequality gives
+$\Exp[M_n^2]\leq\Exp[\max_{k\leq n}|S_k|^2]\leq4n$.  Thus
+$M_n/\sqrt n$ is uniformly integrable.  Taking expectations in the weak
+limit yields $\Exp M_n/\sqrt n\to\Exp|Z|=\sqrt{2/\pi}$, and the equality in
+law transfers the result to $I_n$.
+\end{proof}
+
+\section{Annealed fibre degree and the rare-event threshold}
+\label{sec:annealed}
+
+Put
+\begin{equation}\label{eq:annealed-def}
+ A_n(p)=\Exp\bigl[b^{J_n}\bigr],
+ \qquad
+ \lambda=bp+\frac qb.
+\end{equation}
+The number $\lambda$ is the moment-generating factor
+$\Exp[b^{\xi_1}]$.  Reflection changes finite-time constants and even
+creates a bounded phase, so $A_n$ is not simply $\lambda^n$.
+
+For $k\geq1$, let $T_k=\inf\{n\geq0:S_n=k\}$.  Since
+\[
+ b^m=1+(b-1)\sum_{k=1}^m b^{k-1}\qquad(m\in\N_0),
+\]
+we have
+\begin{equation}\label{eq:first-passage-decomposition}
+ A_n(p)=1+(b-1)\sum_{k=1}^n b^{k-1}\Prob(T_k\leq n).
+\end{equation}
+For $0<p<1$, the ballot theorem gives, for $m\geq k$ with
+$m\equiv k\pmod2$,
+\begin{equation}\label{eq:ballot}
+ \Prob(T_k=m)=\frac{k}{m}
+ \binom{m}{(m+k)/2}
+ p^{(m+k)/2}q^{(m-k)/2}.
+\end{equation}
+Equations \eqref{eq:first-passage-decomposition}--\eqref{eq:ballot} are an
+exact finite-$n$ formula for $A_n$.
+
+\begin{theorem}[Full annealed trichotomy]\label{thm:annealed}
+Assume $0<p<1$, and let $A_n$ and $\lambda$ be as in
+\eqref{eq:annealed-def}.
+\begin{enumerate}
+\item If $p<1/(b+1)$, put $r=p/q$.  Then
+\begin{equation}\label{eq:subcritical}
+ A_n\longrightarrow\frac{1-r}{1-br}.
+\end{equation}
+\item If $p=1/(b+1)$, then
+\begin{equation}\label{eq:critical-linear}
+ A_n=\frac{(b-1)^2}{b(b+1)}n+O(1).
+\end{equation}
+More exactly, if $\widehat M_n$ is the maximum of a walk whose $+1$
+probability is $b/(b+1)$, then
+\begin{equation}\label{eq:critical-exact}
+ A_n=1+\frac{b-1}{b}\,\widehat\Exp\widehat M_n.
+\end{equation}
+\item If $p>1/(b+1)$, put
+\begin{equation}\label{eq:rho}
+ \rho=\frac{q}{pb^2}<\frac1b.
+\end{equation}
+Then
+\begin{equation}\label{eq:supercritical}
+ \frac{A_n}{\lambda^n}\longrightarrow
+ \frac{1-\rho}{1-b\rho}.
+\end{equation}
+\end{enumerate}
+At the endpoints, $A_n(0)=1$ and $A_n(1)=b^n$.  Consequently the annealed
+fibre-degree exponent is
+\begin{equation}\label{eq:annealed-exponent}
+ \boxed{
+ g_{\mathrm a}(p):=\lim_{n\to\infty}\frac1n\log A_n(p)
+ =\log\max\left\{1,bp+\frac{1-p}{b}\right\}.}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The equivalence
+\begin{equation}\label{eq:threshold-equivalence}
+ \lambda-1=(b-1)\left(p-\frac qb\right)
+\end{equation}
+places the threshold at $p=q/b=1/(b+1)$.
+
+Suppose first that $p<1/(b+1)$.  Then $p<q$, and the negatively drifting
+walk has a finite all-time maximum $M_\infty$.  The classical gambler's-ruin
+calculation gives
+\[
+ \Prob(M_\infty\geq k)=\Prob(T_k<\infty)=\left(\frac pq\right)^k=r^k.
+\]
+Thus $M_\infty$ is geometric on $\N_0$ with mass
+$(1-r)r^m$.  Since $br<1$, monotone convergence yields
+\[
+ A_n\uparrow\Exp b^{M_\infty}
+ =(1-r)\sum_{m\geq0}(br)^m=\frac{1-r}{1-br}.
+\]
+
+Now let $p=1/(b+1)$.  Tilt each first-hit path by $b^{S_m}$.  Because
+$\lambda=1$, the tilted walk has $+1$ probability $bp=q=b/(b+1)$ and
+$-1$ probability $q/b=p=1/(b+1)$.  Every path stopped upon first hitting
+$k$ acquires the same likelihood factor $b^k$, hence
+\begin{equation}\label{eq:critical-hit-tilt}
+ \Prob(T_k\leq n)=b^{-k}\widehat\Prob(T_k\leq n).
+\end{equation}
+Substitution into \eqref{eq:first-passage-decomposition} gives
+\[
+ A_n=1+\frac{b-1}{b}\sum_{k\geq1}
+ \widehat\Prob(\widehat M_n\geq k)
+ =1+\frac{b-1}{b}\widehat\Exp\widehat M_n,
+\]
+which is \eqref{eq:critical-exact}.  Under the tilted law the drift is
+$\widehat\delta=(b-1)/(b+1)$.  Set
+$\widehat Y_n=\widehat M_n-\widehat S_n$.  This reflected birth--death
+chain moves toward zero with probability $b/(b+1)$ and away from zero with
+probability $1/(b+1)$; at zero those moves lead respectively to zero and
+one.  Its stationary law is
+\[
+ \widehat\pi(y)=(1-b^{-1})b^{-y}\qquad(y\in\N_0).
+\]
+The monotone common-increment coupling of the chain started at zero with a
+stationary copy gives
+\[
+ 0\leq\widehat\Exp\widehat Y_n
+ \leq\sum_{y\geq0}y\widehat\pi(y)=\frac1{b-1}.
+\]
+Since $\widehat M_n=\widehat S_n+\widehat Y_n$ and
+$\widehat\Exp\widehat S_n=\widehat\delta n$, it follows that
+\[
+ \widehat\Exp\widehat M_n
+ =\widehat\delta n+O(1),
+\]
+and \eqref{eq:critical-linear} follows.
+
+Finally suppose $p>1/(b+1)$.  On paths through time $n$, define the tilted
+law $\Prob_*$ by
+\begin{equation}\label{eq:exponential-tilt}
+ \frac{d\Prob_*}{d\Prob}\bigg|_{\sigma(\xi_1,\ldots,\xi_n)}
+ =\frac{b^{S_n}}{\lambda^n}.
+\end{equation}
+Indeed,
+\[
+ \frac{b^{S_n}}{\lambda^n}
+ =\prod_{t=1}^n\frac{b^{\xi_t}}{\lambda}
+\]
+is a mean-one product martingale.  Hence the finite-dimensional tilted laws
+are consistent and define iid increments on the infinite path space.
+Under $\Prob_*$, the $+1$ and $-1$ probabilities are
+\begin{equation}\label{eq:tilted-probabilities}
+ \alpha=\frac{bp}{\lambda},
+ \qquad
+ \beta=\frac{q}{b\lambda},
+ \qquad \alpha>\beta.
+\end{equation}
+Writing $Y_n=M_n-S_n$, the change of measure gives the exact identity
+\begin{equation}\label{eq:tilted-moment}
+ A_n=\lambda^n\Exp_*[b^{Y_n}].
+\end{equation}
+The process $Y_n$ moves from $y\geq1$ to $y-1$ with probability $\alpha$
+and to $y+1$ with probability $\beta$; at zero,
+$P_*(0,0)=\alpha$ and $P_*(0,1)=\beta$.  It is an irreducible aperiodic
+reflected birth--death chain with
+stationary law
+\begin{equation}\label{eq:stationary-drawdown}
+ \pi(y)=(1-\rho)\rho^y,
+ \qquad
+ \rho=\frac\beta\alpha=\frac{q}{pb^2}.
+\end{equation}
+Starting from zero, the monotone common-increment coupling bounds $Y_n$ by
+a stationary copy.  Because $b\rho<1$, this domination makes
+$(b^{Y_n})_n$ uniformly integrable.  Ergodic convergence of the chain and
+\eqref{eq:stationary-drawdown} now give
+\[
+ \Exp_*b^{Y_n}\longrightarrow
+ \sum_{y\geq0}(1-\rho)(b\rho)^y
+ =\frac{1-\rho}{1-b\rho}.
+\]
+Together with \eqref{eq:tilted-moment}, this proves
+\eqref{eq:supercritical}.  The endpoint identities follow directly from
+$M_n=0$ at $p=0$ and $M_n=n$ at $p=1$.  The three cases then imply
+\eqref{eq:annealed-exponent}.
+\end{proof}
+
+The trichotomy exposes a rare-event regime that an almost-sure drift
+calculation cannot see.
+
+\begin{corollary}[Two thresholds and a strict annealed gap]
+\label{cor:two-thresholds}
+For $1/(b+1)<p<1$,
+\begin{equation}\label{eq:strict-gap}
+ g_{\mathrm a}(p)>g_{\mathrm q}(p).
+\end{equation}
+For $0\leq p\leq1/(b+1)$ and for $p=1$, equality holds.  In particular,
+when
+\begin{equation}\label{eq:intermediate-window}
+ \frac1{b+1}<p<\frac12,
+\end{equation}
+the fibre degree $b^{J_n}$ is eventually constant almost surely, but its
+expectation grows exponentially.
+\end{corollary}
+
+\begin{proof}
+If $1/(b+1)<p\leq1/2$, then $g_{\mathrm a}>0=g_{\mathrm q}$.  If
+$1/2<p<1$, strict Jensen applied to the nonconstant variable
+$b^{\xi_1}$ gives
+\[
+ g_{\mathrm a}=\log\Exp b^{\xi_1}
+ >\Exp\log b^{\xi_1}=(2p-1)\log b=g_{\mathrm q}.
+\]
+The equality cases follow from \eqref{eq:quenched-formulas} and
+\eqref{eq:annealed-exponent}.  In the window
+\eqref{eq:intermediate-window}, the walk has negative drift, so
+$J_n=M_n$ increases to the finite all-time maximum almost surely, while
+$\lambda>1$ gives exponential annealed growth.
+\end{proof}
+
+At the second threshold, \cref{prop:critical-scale,thm:annealed} combine to
+give a particularly sharp separation.
+
+\begin{corollary}[Diffusive typical scale, exponential mean]
+\label{cor:symmetric-annealed}
+At $p=1/2$,
+\begin{equation}\label{eq:symmetric-degree-law}
+ \frac{\log\degf(\Phi_n)}{\sqrt n}
+ \xrightarrow{\mathrm d}(\log b)|Z|,
+ \qquad
+ \frac{-\log\diam\Phi_n(X)}{\sqrt n}
+ \xrightarrow{\mathrm d}(\log b)|Z|,
+\end{equation}
+whereas
+\begin{equation}\label{eq:symmetric-annealed-asymptotic}
+ \Exp\degf(\Phi_n)
+ \sim\frac{b+1}{b}
+ \left(\frac{b+b^{-1}}2\right)^n.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Equation \eqref{eq:symmetric-degree-law} is
+\cref{prop:critical-scale} combined with \eqref{eq:image-fibre}.  In
+\eqref{eq:rho}, $p=q=1/2$ gives $\rho=b^{-2}$, so the prefactor in
+\eqref{eq:supercritical} is
+$(1-b^{-2})/(1-b^{-1})=(b+1)/b$.  The base is
+$\lambda=(b+b^{-1})/2$, proving
+\eqref{eq:symmetric-annealed-asymptotic}.
+\end{proof}
+
+\section{Exact controls and ownership boundary}
+\label{sec:controls}
+
+The accompanying standard-library program separates exact regression
+checks from floating diagnostics.  Its integer and rational layer performs
+265,861 assertions:
+\begin{itemize}
+\item all $65{,}535$ direction words through time $15$ satisfy
+      $J=M$ and $I=M-S$, with three identities checked per word;
+\item all $29{,}524$ labelled words over $\{D,C_0,C_1\}$ through time $9$
+      agree with definition-level composition on symbolic tails;
+\item exhaustive finite-input maps verify the exact image cylinders and
+      constant fibre degrees through $(b,n)=(2,10)$ and $(3,7)$;
+\item the ballot sum \eqref{eq:first-passage-decomposition}--\eqref{eq:ballot}
+      agrees with direct rational walk propagation for $b=2,3,5$, five
+      interior rational probabilities through $n=18$, and separately at
+      $p=0,1$ through $n=20$;
+\item the critical identity \eqref{eq:critical-exact}, the supercritical
+      tilt \eqref{eq:tilted-moment}, the stationary prefactor, and the
+      symmetric equality in law of $I_n$ and $J_n$ are checked independently.
+\end{itemize}
+Five rescaled floating values illustrate convergence but do not certify an
+identity, almost-sure limit, or weak limit.
+
+The scope boundary is equally explicit.  Arnold provides the cited broad random
+cocycle framework \cite{Arnold1998}.  Mairesse provides the cited general normal-form,
+drift, entropy, and harmonic-measure results for the relevant monoid-walk
+setting \cite{Mairesse2005}.  Feller and Asmussen represent the classical
+ballot, first-passage, exponential-tilting, and reflected-walk tools
+\cite{Feller1968,Asmussen2003}.  The note does not claim any of those
+ingredients.  Its residual theorem package is the exact coupling
+\[
+ \text{prefix--shift cocycle}
+ \longleftrightarrow
+ (\text{image cylinder},\text{fibre degree})
+ \longleftrightarrow
+ (M_n-S_n,M_n),
+\]
+together with the alphabet-dependent annealed trichotomy and its comparison
+with pathwise synchronization.
+
+This system is not a random subshift of finite type: there is no random
+adjacency constraint, forbidden language, or path-count matrix.  It is also
+not a rank-one reset or a renewal-reward model.  A shift can cancel any
+currently unmatched prefix, and the surviving normal form depends on the
+running maximum of the entire direction walk rather than on iid reset gaps.
+Nor is it a hidden-output process: the assertions concern images and fibres
+of actual random maps on the full shift.  These distinctions are an internal
+collision firewall, not a novelty claim.  Public posting, submission, and
+priority language remain unauthorized pending a specialist literature
+review.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

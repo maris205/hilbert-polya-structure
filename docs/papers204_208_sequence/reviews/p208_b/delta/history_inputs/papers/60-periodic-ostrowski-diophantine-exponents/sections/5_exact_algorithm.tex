@@ -1,0 +1,99 @@
+\section{The exact algorithm}
+\label{sec:algorithm}
+
+An input consists of finite preperiods and cyclic tails for both $(a_i)$ and
+$(b_i)$.  This is a finite presentation, but two points require care: legality
+must be checked across the cyclic seam, and a plateau of asymptotic length zero
+must not be classified by floating-point sampling.
+
+\begin{proposition}[Terminating exact construction]
+\label{prop:exact-algorithm}
+From a finite ultimately periodic presentation satisfying the hypotheses of
+\cref{thm:main}, one can terminate with
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the exact finite set $\mathcal C$ in \eqref{eq:finite-maximum};
+\item a primitive minimal polynomial and rational isolating interval for
+      $\dio(x)$; and
+\item an exact equality and order decision for the outputs of two inputs.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We give the construction in steps.
+
+\smallskip
+\noindent\emph{Input validation.}
+Check $a_i\geq1$, the exceptional first bound $0\leq b_1\leq a_1-1$, and
+all later bounds and carry implications in \eqref{eq:legality}.  Because the
+conditions are local, the finite preperiod followed by two copies of the tail
+also checks the periodic seam.  Enlarge and align the two tails to a common
+period $L$.  The case of each phase depends only on the adjacent displayed
+digits, so the same finite check selects its rows in \cref{tab:eight-cases}.
+
+\smallskip
+\noindent\emph{Exact spectral data.}
+Construct the integer matrices $M$ and $P$ in
+\eqref{eq:block-period}.  The Perron root is the larger real root of
+\begin{equation}
+ f(X)=X^2-\tr(P)X+(-1)^L.
+ \label{eq:perron-polynomial}
+\end{equation}
+Factor $f$ over $\Q$ and use Sturm-sequence root isolation to select its larger
+real root.  This also covers a rational root by the degree-one branch.  Thus
+$K=\Q(\Lam)$ is represented exactly, with each element reduced to
+$x+y\Lam$, $x,y\in\Q$.  The projectors in the proof of
+\cref{lem:three-scales} compute the three coefficients of every endpoint,
+denominator, and interval length.
+
+\smallskip
+\noindent\emph{Eventual nonemptiness.}
+For a nominal plateau let $D_k=B_k-A_k$.  It is nonempty exactly when
+$D_k\geq0$.  Write its exact phase expansion as
+\begin{equation}
+ D_k=C_\Lam\Lam^k+C_1+C_\mu\mu^k,
+ \qquad |\mu|<1.
+ \label{eq:length-expansion}
+\end{equation}
+If $C_\Lam\ne0$, its exact sign decides the eventual sign of $D_k$.  If
+$C_\Lam=0$ and $C_1\ne0$, the exact sign of $C_1$ does so.  If both vanish,
+$D_k$ is an integer sequence tending to zero; hence $D_k=0$ for all
+sufficiently large $k$, and the row is an eventual singleton rather than an
+empty interval.  This also handles odd $L$, when $\mu<0$: an alternating
+nonzero tail cannot remain an integer while tending to zero.
+
+Zero and sign in $K$ are decidable.  One may clear rational denominators and
+use the isolating interval for $\Lam$; exact zero is tested algebraically
+before interval refinement, and refinement terminates for a nonzero element.
+This produces the sets $\mathcal R_j$ and hence the at most $4L$ elements of
+$\mathcal C$.
+
+\smallskip
+\noindent\emph{Maximum and certified output.}
+Compare two candidates by the exact sign of their difference in $K$, retaining
+one representative when the difference is zero.  The winning value and hence
+$\dio(x)$ reduce to $z=x+y\Lam$ with $x,y\in\Q$.  If $y=0$, its minimal
+polynomial is linear.  Otherwise conjugating the quadratic equation
+\eqref{eq:perron-polynomial} gives a rational quadratic polynomial for $z$;
+clearing denominators, taking the irreducible factor containing $z$, and
+normalizing its content and leading sign gives the primitive minimal
+polynomial.  Rational interval arithmetic, refined against the isolated root
+$\Lam$, produces a rational interval containing $z$ and no other root.
+
+For outputs from two possibly different quadratic fields, compute the gcd of
+their primitive minimal polynomials.  If it is $1$, the numbers are unequal.
+If a common factor remains, compare their isolating intervals against the
+isolated roots of that factor; this decides equality.  Only after inequality
+is known do we refine the two intervals until they are disjoint, which decides
+order.  Therefore an equal pair cannot cause an endless numerical refinement.
+Every operation above is an exact terminating operation over $\Z$ and $\Q$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+The complete corrected table and \eqref{eq:dio-repetition}, through
+\cref{prop:finite-interface}, reduce the exponent to plateau endpoint ratios.
+\Cref{lem:three-scales,lem:four-per-phase} and
+\eqref{eq:finite-maximum} put at most $4L$ of their limits in the single field
+$\Q(\Lam)$.  A maximum of finitely many elements is one of them, so adding
+$1$ preserves algebraic degree at most two.  The construction, output, and
+comparison assertions are exactly \cref{prop:exact-algorithm}.
+\end{proof}

@@ -1,0 +1,209 @@
+\section{Hard-core models and exact counting}\label{sec:models}
+
+We begin with two elementary structural facts and then isolate the
+approximate-to-exact step needed for entropy.
+
+\begin{proposition}\label{prop:mixing}
+The action $\F_2\curvearrowright X_3$ is a nearest-neighbour SFT and is
+topologically mixing.  In fact, if two legal finite patterns have supports at
+graph distance at least two in the right Cayley graph, their union, filled by
+zero elsewhere, belongs to $X_3$.
+\end{proposition}
+
+\begin{proof}
+The forbidden list consists of pairs of nonzero symbols on one generator
+edge, so $X_3$ is a nearest-neighbour SFT.  If the two prescribed supports
+have no edge between them, every generator edge either lies inside one legal
+pattern or has at least one endpoint filled by zero.  The pasted
+configuration is therefore legal.  Translating one of two fixed finite
+supports sufficiently far makes their distance at least two, which is the
+usual topological mixing criterion for a group subshift.
+\end{proof}
+
+Fix a finite set $V$ and a homomorphism
+$\sigma:\F_2\to\Sym(V)$.  Let $n=|V|$.  The exact hard-core model set is
+\[
+ \cE(\sigma)=\left\{\xi\in A^V:
+ \xi(v)\xi(\sigma(s)v)=0 \text{ in support for all }
+ v\in V,\ s\in\{a,b\}\right\}.
+\]
+Here and below ``zero in support'' means that the two entries are not both
+nonzero.
+
+\begin{lemma}[Exact support--colour identity]\label{lem:exact}
+For every homomorphism $\sigma$,
+\[
+ |\cE(\sigma)|=Z_{G_\sigma}(3).
+\]
+This identity includes action graphs with loops and multiple edges.
+\end{lemma}
+
+\begin{proof}
+If $\xi\in\cE(\sigma)$, then $I=\supp(\xi)$ contains no two endpoints of a
+generator edge.  A loop at $v$ forces $\xi(v)=0$, so $I$ also contains no
+looped vertex.  Hence $I\in\Ind(G_\sigma)$.  Conversely, any independent set
+$I$ supports an exact model after assigning any of the three symbols
+$1,2,3$ to each vertex of $I$ and assigning zero to $V\setminus I$.  There
+are $3^{|I|}$ such assignments.  Parallel edges repeat a constraint and do
+not change the count.  Summing over $I$ proves the formula.
+\end{proof}
+
+For $0<\delta<1$, define the number of bad oriented generator incidences by
+\[
+ b_\sigma(\xi)=
+ \left|\left\{(s,v)\in\{a,b\}\times V:
+ \xi(v)\ne0,\ \xi(\sigma(s)v)\ne0\right\}\right|
+\]
+and the local approximate model set by
+\[
+ \cE_\delta(\sigma)
+ =\{\xi\in A^V:b_\sigma(\xi)\le\delta n\}.
+\]
+
+We use the map definition of topological sofic entropy with the continuous
+dynamically generating coordinate pseudometric
+\[
+ \rho_0(x,y)=\boldsymbol 1_{\{x_e\ne y_e\}}.
+\]
+For maps $\varphi,\psi:V\to X_3$, write
+\[
+ \rho_2(\varphi,\psi)^2
+ =\frac1{|V|}\sum_{v\in V}\rho_0(\varphi(v),\psi(v))^2,
+ \qquad
+ \rho_\infty(\varphi,\psi)=\max_{v\in V}\rho_0(\varphi(v),\psi(v)).
+\]
+This coordinate-pseudometric formulation is equivalent to the usual
+topological sofic entropy definition \citep{KerrLi2011,KerrLi2013}.  We record
+the full specialization needed here.
+
+\begin{lemma}[Local-model sandwich]\label{lem:local-model}
+Let $\Sigma=(\sigma_n:\F_2\to\Sym(V_n))$ be a homomorphic sofic
+approximation.  Then
+\begin{equation}\label{eq:local-model}
+ \limsup_{n\to\infty}\frac1{|V_n|}\log Z_{G_{\sigma_n}}(3)
+ \le h_\Sigma(X_3)\le
+ \inf_{\delta>0}\limsup_{n\to\infty}
+ \frac1{|V_n|}\log|\cE_\delta(\sigma_n)|.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For a finite $F\subset\F_2$ and $\eta>0$, let
+$\operatorname{Map}(\rho_0,F,\eta,\sigma_n)$ consist of maps
+$\varphi:V_n\to X_3$ satisfying
+\[
+ \rho_2\bigl(g\varphi,\varphi\circ\sigma_n(g)\bigr)<\eta
+ \qquad(g\in F).
+\]
+Take $F$ to contain $a$ and $b$.  An exact labelling
+$\xi\in\cE(\sigma_n)$ gives the pullback-name map
+\begin{equation}\label{eq:pullback}
+ \varphi_\xi(v)_g=\xi(\sigma_n(g^{-1})v).
+\end{equation}
+Because $\sigma_n$ is a homomorphism and $\xi$ is legal on every generator
+edge, $\varphi_\xi(v)\in X_3$: indeed, for $u\in\F_2$ and
+$s\in\{a,b\}$, if $w=\sigma_n(s^{-1}u^{-1})v$, then the two coordinates at
+$u$ and $us$ are respectively $\xi(\sigma_n(s)w)$ and $\xi(w)$.  Moreover,
+for $g,u\in\F_2$,
+\[
+ \varphi_\xi(\sigma_n(g)v)_u
+ =\xi(\sigma_n(u^{-1}g)v)
+ =(g\varphi_\xi(v))_u,
+\]
+so $\varphi_\xi(\sigma_n(g)v)=g\varphi_\xi(v)$ exactly.  Distinct identity
+labellings give $1$-separated maps in $\rho_\infty$.
+
+Conversely, take
+$\varphi\in\operatorname{Map}(\rho_0,F,\eta,\sigma_n)$ and record
+$\xi(v)=\varphi(v)_e$.  For each $s\in\{a,b\}$, equivariance can fail at the
+identity coordinate for fewer than $\eta^2|V_n|$ vertices; outside that set,
+\begin{equation}\label{eq:identity-equivariance}
+ \xi(\sigma_n(s)v)
+ =\varphi(\sigma_n(s)v)_e
+ =(s\varphi(v))_e
+ =\varphi(v)_{s^{-1}}.
+\end{equation}
+The coordinates $e$ and $s^{-1}$ of a point in $X_3$ cannot both be active.
+Thus every bad $s$-incidence of $\xi$ lies in the exceptional set for
+\eqref{eq:identity-equivariance}, and
+$b_{\sigma_n}(\xi)<2\eta^2|V_n|$.  Hence
+$\xi\in\cE_{2\eta^2}(\sigma_n)$.
+
+Finally, if $0<\varepsilon<1$, then a
+$\rho_\infty$-$\varepsilon$-separated family of maps has pairwise distinct
+identity labellings, because maps with the same $\xi$ have
+$\rho_\infty=0$.  Exact pullback names give the reverse separated-set lower
+bound for every $F$ and $\eta$.  Taking the infima over $F$ and $\eta$ and
+then the usual supremum over $\varepsilon$ gives the sandwich
+\eqref{eq:local-model}.  No extension of a merely approximate graph
+labelling is asserted or needed.
+\end{proof}
+
+We now prove the quantitative repair that collapses the right side of
+\eqref{eq:local-model} to exact counts.
+
+\begin{proposition}[Safe-symbol repair]\label{prop:repair}
+For every $0<\delta\le1/2$ and every homomorphism $\sigma$ on an $n$-point
+set,
+\begin{equation}\label{eq:repair-bound}
+ Z_{G_\sigma}(3)
+ \le |\cE_\delta(\sigma)|
+ \le Z_{G_\sigma}(3)
+ \sum_{j=0}^{\lfloor\delta n\rfloor}\binom nj3^j.
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:repair-exponent}
+ |\cE_\delta(\sigma)|
+ \le Z_{G_\sigma}(3)(n+1)
+ \exp\!\left(n[H(\delta)+\delta\log3]\right),
+\end{equation}
+where $H(t)=-t\log t-(1-t)\log(1-t)$.
+\end{proposition}
+
+\begin{proof}
+The lower bound holds because every exact model is a $\delta$-model.  Given
+$\xi\in\cE_\delta(\sigma)$, let
+\[
+ B(\xi)=\{v\in V:\text{there is }s\in\{a,b\}
+ \text{ with }\xi(v)\ne0\ne\xi(\sigma(s)v)\}.
+\]
+Every vertex in $B(\xi)$ is the source of at least one bad incidence, hence
+$|B(\xi)|\le b_\sigma(\xi)\le\delta n$.  Define $R\xi$ by setting the symbols
+on $B(\xi)$ to zero and leaving every other symbol unchanged.  Each violated
+oriented edge has its source in $B(\xi)$, so $R\xi\in\cE(\sigma)$.
+
+Fix an exact model $\eta$.  A preimage $\xi$ with $|B(\xi)|=j$ is specified,
+overcountingly, by choosing its change set of size $j$ and one of the three
+nonzero symbols at each changed coordinate.  Thus the fibre has size at most
+$\sum_{j\le\delta n}\binom nj3^j$, proving \eqref{eq:repair-bound}.  For
+$j/n\le\delta\le1/2$, the entropy estimate
+$\binom nj\le\exp(nH(j/n))\le\exp(nH(\delta))$ and $3^j\le3^{\delta n}$,
+together with at most $n+1$ summands, proves
+\eqref{eq:repair-exponent}.
+\end{proof}
+
+\begin{corollary}[Exact-model entropy formula]\label{cor:model-formula}
+For every homomorphic sofic approximation
+$\Sigma=(\sigma_n:\F_2\to\Sym(V_n))$,
+\begin{equation}\label{eq:model-formula}
+ h_\Sigma(X_3)=\limsup_{n\to\infty}\frac1{|V_n|}
+ \log Z_{G_{\sigma_n}}(3).
+\end{equation}
+In particular, the entropy is nonnegative.
+\end{corollary}
+
+\begin{proof}
+Combine \Cref{lem:local-model,prop:repair}.  After division by $|V_n|$, the
+upper overhead is at most
+$H(\delta)+\delta\log3+o_n(1)$, which tends to zero with $\delta$.  Exact
+models supply the reverse inequality.  The all-zero model shows that every
+partition function is at least one.
+\end{proof}
+
+\begin{remark}\label{rem:repair-robust}
+Zeroing the \emph{source} of every bad oriented incidence is why the changed
+set has size at most the number of violations rather than twice that number.
+The convention is harmless because the defining constraints are indexed by
+all sources $v$.  Loops are automatically repaired: an active looped vertex
+is its own bad source.
+\end{remark}

@@ -1,0 +1,353 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\operatorname{Fix}}
+\newcommand{\Per}{\operatorname{Per}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\one}{\mathbf 1}
+
+\title[Least-valuation digit erasure]{Least-Valuation Digit Erasure:\\
+Exact Transient Profiles Beyond Periodic Data}
+\author{Anonymous}
+\date{Internal preprint, 29 August 2026}
+\subjclass[2020]{37P35, 11A63, 60F05, 05A15}
+\keywords{finite dynamical system, p-adic digit sum, absorption time, transient profile, local limit theorem, dynamical zeta}
+
+\begin{document}
+
+\begin{abstract}
+For a prime $p$ and $r\geq1$, consider the absorbing map on
+$\Z/p^r\Z$ that subtracts the place value of the least significant nonzero
+base-$p$ digit.  We give an exact digit-vector normal form: every step lowers
+the digit sum by one, so the hitting time of zero is precisely the base-$p$
+digit sum.  Consequently the complete transient-depth polynomial is
+\[
+ (1+u+\cdots+u^{p-1})^r.
+\]
+We derive every depth-layer cardinality, the sharp global absorption depth,
+symmetry and unimodality, exact moments, and the fixed-base central and local
+limit laws.  All members of the family have the same periodic-point sequence
+and Artin--Mazur zeta, whereas the transient profile recovers both $p$ and
+$r$.  This gives a small exact model in which periodic data are completely
+blind but finite-time basin geometry is rigid.  Classical digit-sum and
+local-limit results are treated as owned background; the residual result is
+their coupling to this explicit finite dynamical system.
+For $p=2$ the update is Wegner's classical rightmost-one clearing step, and
+that specialization is expressly not claimed here.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and claim boundary}
+
+Periodic-orbit data are among the most effective invariants of finite and
+symbolic dynamical systems.  They can nevertheless discard all transient
+information.  We exhibit an elementary family where this loss is total:
+every parameter choice has one fixed point and no other recurrent point, but
+the complete distribution of entrance times is explicit and determines the
+parameters.
+
+The statistic that appears is the ordinary sum of base-$p$ digits.  Its
+distribution, asymptotics, and refinements have a substantial independent
+literature; for example, Drmota and Gajdosik study general distributional
+questions for the sum-of-digits function \cite{DrmotaGajdosik1998}.
+Likewise, the central and lattice local limit theorems used below are
+classical results for sums of independent variables \cite{Petrov1975}.
+There is also a direct algorithmic owner at the binary endpoint:
+\[
+ E_{2,r}(x)=x-2^{v_2(x)}=x\mathbin{\&}(x-1).
+\]
+Wegner introduced this rightmost-one clearing step to count binary ones
+\cite{Wegner1960}; its iteration count is the binary digit sum.  We do not
+claim that specialization or identity.  Our residual contribution is the
+general-prime standard-representative dynamics, its full transient
+polynomial and parameter recovery, and the contrast between universally
+blind periodic data and a rigid transient profile.  A bounded search did
+not locate that combined general-$p$ dynamical package; this is not a
+priority certification.
+
+There is also a deliberate internal distinction from earlier work on
+digit-weight automatic orbit closures.  Here the phase space is the finite
+local ring itself, time is an absorbing arithmetic update, and the invariant
+is the entire hitting-time profile.  No countable subshift, cellular
+endomorphism monoid, or Cantor--Bendixson analysis is used.
+
+\section{The erasure map and its digit normal form}
+
+Fix a prime $p$ and an integer $r\geq1$.  We use the standard representatives
+$0,1,\ldots,p^r-1$ of $R_{p,r}=\Z/p^r\Z$.  For nonzero $x$, let $v_p(x)$ be
+the largest $j$ for which $p^j$ divides $x$.  Thus the choice of standard
+representative is part of the definition; no representative-independent ring
+operation is being asserted.
+
+\begin{definition}
+The \emph{least-valuation digit erasure map} is
+\[
+ E_{p,r}(0)=0,
+ \qquad
+ E_{p,r}(x)=x-p^{v_p(x)}\quad (x\ne0).
+\]
+Its absorption time is
+\[
+ \tau_{p,r}(x)=\min\{t\geq0:E_{p,r}^t(x)=0\}.
+\]
+\end{definition}
+
+Write the unique base-$p$ expansion
+\[
+ x=\sum_{j=0}^{r-1}a_jp^j,
+ \qquad 0\leq a_j\leq p-1,
+\]
+and put $s_p(x)=\sum_ja_j$.
+
+\begin{lemma}[digit normal form]\label{lem:normal}
+If $x\ne0$ and $j=\min\{i:a_i>0\}$, then $E_{p,r}$ replaces $a_j$ by
+$a_j-1$ and leaves every other digit unchanged.  In particular,
+\[
+ s_p(E_{p,r}x)=s_p(x)-1.
+\]
+\end{lemma}
+
+\begin{proof}
+The digits below $j$ vanish, so $v_p(x)=j$.  Subtracting $p^j$ decreases the
+$j$th digit by one and produces neither a borrow nor a carry.  The assertion
+about the digit sum follows immediately.
+\end{proof}
+
+The choice of the \emph{least} nonzero digit is essential.  It makes the
+map triangular in digit coordinates; subtracting the highest nonzero place
+would generally create a different ordered traversal, while subtracting an
+arbitrary $p$-power can require a state-dependent convention.
+
+\begin{theorem}[complete hitting-time normal form]\label{thm:hitting}
+For every $x\in R_{p,r}$,
+\[
+ \tau_{p,r}(x)=s_p(x),
+ \qquad
+ \tau_{p,r}(E_{p,r}^t x)=\max\{s_p(x)-t,0\}.
+\]
+The unique recurrent point is $0$, and the sharp global absorption depth is
+\[
+ D_{p,r}=(p-1)r.
+\]
+The unique state at this maximum depth is $p^r-1$.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:normal}, every nonzero iterate lowers the nonnegative integer
+$s_p$ by exactly one.  It therefore takes exactly $s_p(x)$ steps to reach
+digit sum zero, which is equivalent to reaching $0$.  This also proves the
+iterate formula and rules out nontrivial recurrence.  The digit sum is at
+most $(p-1)r$, with equality exactly when every digit is $p-1$.
+\end{proof}
+
+\section{The full transient profile}
+
+Let
+\[
+ N_{p,r}(k)=\#\{x\in R_{p,r}:\tau_{p,r}(x)=k\}
+\]
+and call
+\[
+ H_{p,r}(u)=\sum_{k\geq0}N_{p,r}(k)u^k
+\]
+the transient-depth polynomial.
+
+\begin{theorem}[depth polynomial and exact layers]\label{thm:profile}
+One has
+\[
+ \boxed{H_{p,r}(u)=(1+u+\cdots+u^{p-1})^r.}
+\]
+For $0\leq k\leq(p-1)r$,
+\[
+ \boxed{
+ N_{p,r}(k)=
+ \sum_{j=0}^{\lfloor k/p\rfloor}
+ (-1)^j\binom rj\binom{k-pj+r-1}{r-1},}
+\]
+where a binomial coefficient with an inadmissible lower argument is zero.
+The sequence $k\mapsto N_{p,r}(k)$ is symmetric and unimodal.
+\end{theorem}
+
+\begin{proof}
+The bijection from ring elements to their $r$ digits, together with
+\cref{thm:hitting}, gives
+\[
+ H_{p,r}(u)=
+ \prod_{j=0}^{r-1}\sum_{a=0}^{p-1}u^a.
+\]
+Using $(1+\cdots+u^{p-1})^r=(1-u^p)^r(1-u)^{-r}$ and extracting the
+$u^k$ coefficient gives the displayed inclusion--exclusion formula.
+
+Symmetry follows by complementing every digit, $a_j\mapsto p-1-a_j$.
+For unimodality, induct on $r$, the case $r=1$ being immediate.  If $c_r(k)$ denotes the coefficient at
+level $r$, extended by zero outside $0\leq k\leq(p-1)r$, then
+\[
+ c_{r+1}(k)-c_{r+1}(k-1)=c_r(k)-c_r(k-p).
+\]
+Put $C_r=(p-1)r/2$.  If the integer $k\leq C_{r+1}$, then
+$k\leq C_r+p/2$, and hence
+$|k-C_r|\leq|k-p-C_r|$.  Symmetry and the inductive monotonicity toward
+$C_r$ therefore give $c_r(k)\geq c_r(k-p)$, so the displayed difference is
+nonnegative.  Symmetry supplies the nonpositive differences after the
+centre and also covers an integral or half-integral centre.
+\end{proof}
+
+The polynomial contains more information than merely the maximal depth.  In
+fact, it is a complete parameter fingerprint.
+
+\begin{corollary}[transient rigidity]\label{cor:rigidity}
+If $H_{p,r}=H_{q,s}$ for primes $p,q$ and positive integers $r,s$, then
+$(p,r)=(q,s)$.  More explicitly,
+\[
+ r=[u]H_{p,r}(u),
+ \qquad
+ p=1+\frac{\deg H_{p,r}}{[u]H_{p,r}(u)}.
+\]
+\end{corollary}
+
+\begin{proof}
+The coefficient of $u$ counts digit vectors with one unit digit and is
+$r$.  The degree is $(p-1)r$, which then recovers $p$.
+\end{proof}
+
+\section{Exact laws and asymptotics from a uniform state}
+
+Let $X_{p,r}$ be uniform on $R_{p,r}$.  Its digits are independent and
+uniform on $\{0,\ldots,p-1\}$.  Thus the dynamical hitting time is exactly a
+sum of iid bounded lattice variables.
+
+\begin{proposition}[moment transform and moments]\label{prop:moments}
+For real $\theta$,
+\[
+ \E e^{\theta\tau_{p,r}(X_{p,r})}
+ =\left(\frac{1+e^\theta+\cdots+e^{(p-1)\theta}}p\right)^r.
+\]
+Moreover,
+\[
+ \boxed{\E\tau_{p,r}=\frac{r(p-1)}2,\qquad
+ \Var(\tau_{p,r})=\frac{r(p^2-1)}{12}.}
+\]
+\end{proposition}
+
+\begin{proof}
+Apply \cref{thm:hitting} and multiply the moment generating functions of the
+$r$ independent uniform digits.  A single such digit has mean $(p-1)/2$ and
+variance $(p^2-1)/12$.
+\end{proof}
+
+Put $\mu_{p,r}=r(p-1)/2$ and
+$\sigma_{p,r}^2=r(p^2-1)/12$.
+
+\begin{theorem}[central and local limits]\label{thm:limits}
+Fix $p$ and let $r\to\infty$.  Then
+\[
+ \frac{\tau_{p,r}(X_{p,r})-\mu_{p,r}}{\sigma_{p,r}}
+ \Longrightarrow \mathcal N(0,1).
+\]
+In addition, the span-one lattice local limit holds uniformly in
+$k\in\Z$:
+\[
+ \sup_{k\in\Z}\left|
+ \sigma_{p,r}\frac{N_{p,r}(k)}{p^r}
+ -\frac1{\sqrt{2\pi}}
+ \exp\!\left(-\frac{(k-\mu_{p,r})^2}{2\sigma_{p,r}^2}\right)
+ \right|\longrightarrow0.
+\]
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:hitting}, the centered hitting time is a sum of iid bounded
+nondegenerate variables, so the classical central limit theorem applies.
+The digit distribution has maximal lattice span one and finite moments of
+all orders.  The standard iid lattice local limit theorem therefore gives
+the uniform statement in the displayed normalization
+\cite[Chapter~VII]{Petrov1975}.  The contribution specific to the present
+system is the exact identification of that sum with the hitting time.
+\end{proof}
+
+\begin{remark}
+The fixed-$p$ hypothesis in \cref{thm:limits} is part of the statement.
+Joint regimes in which $p$ varies with $r$ require a triangular-array
+formulation and are not claimed here.
+\end{remark}
+
+\section{Periodic blindness}
+
+For a self-map $F$ of a finite set, write
+$\F_n(F)=\#\{x:F^n(x)=x\}$.  The Artin--Mazur zeta is
+\cite{ArtinMazur1965}
+\[
+ \zeta_F(z)=\exp\left(\sum_{n\geq1}\frac{\F_n(F)}n z^n\right).
+\]
+We use this as an identity in $\mathbb Q[[z]]$.
+
+\begin{theorem}[universal periodic data, rigid transient data]
+For every prime $p$, every $r\geq1$, and every $n\geq1$,
+\[
+ \F_n(E_{p,r})=1,
+ \qquad
+ \zeta_{E_{p,r}}(z)=\frac1{1-z}.
+\]
+Thus periodic counts and zeta distinguish no two members of the family,
+while the transient-depth polynomial distinguishes all of them by
+\cref{cor:rigidity}.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:hitting} shows that every nonzero state strictly decreases
+its digit sum until it reaches zero.  Hence only zero can be fixed by an
+iterate.  Substitution of $\F_n=1$ into the defining exponential gives
+$\exp(\sum_{n\ge1}z^n/n)=(1-z)^{-1}$.
+\end{proof}
+
+This contrast is the main dynamical point of the example.  Adding a restart
+edge at zero would manufacture a nontrivial cycle but obscure the canonical
+absorbing map, so we do not do so.
+
+\section{Exact controls and limitations}
+
+The accompanying deterministic program follows every arithmetic orbit in
+five registered parameter lanes and builds the resulting depth histogram.
+It cross-checks that exhaustive histogram against an independently convolved
+coefficient vector and the inclusion--exclusion formula, then verifies
+symmetry, unimodality, exact rational moments, nilpotency depth, fixed data,
+and parameter recovery.  The frozen run contains $46{,}319{,}420$ exact
+assertions.  These finite checks guard conventions and endpoints; the proofs
+above establish the infinite family.
+
+The present result is deliberately narrow.  It does not assert a new theorem
+about the classical sum-of-digits distribution or its local limits, does not
+classify arbitrary digit-decrement rules, and does not infer global novelty
+from a bounded literature search.  In particular it does not re-claim
+Wegner's binary clearing step or popcount identity.  Public release and
+priority language remain on hold pending specialist review.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

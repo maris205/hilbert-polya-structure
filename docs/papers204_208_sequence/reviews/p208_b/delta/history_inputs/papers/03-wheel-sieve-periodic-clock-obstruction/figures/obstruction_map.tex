@@ -1,0 +1,153 @@
+% Reproducible pure-TikZ conceptual figure.
+% Required preamble support:
+%   \usepackage{tikz}
+%   \usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+% No external graphics, empirical data, or shell escape are used.
+% The parent manuscript owns the figure float, centering, caption, and label.
+\begin{tikzpicture}[
+      font=\footnotesize,
+      >=Latex,
+      source/.style={
+        draw=black,
+        line width=0.75pt,
+        rounded corners=2pt,
+        fill=black!4,
+        text width=14.2cm,
+        align=center,
+        inner sep=5.5pt
+      },
+      theorem/.style={
+        draw=blue!65!black,
+        line width=0.9pt,
+        rounded corners=2pt,
+        fill=blue!7,
+        text width=4.15cm,
+        minimum height=2.65cm,
+        align=left,
+        inner sep=5pt
+      },
+      control/.style={
+        draw=orange!75!black,
+        line width=0.85pt,
+        dashed,
+        rounded corners=2pt,
+        fill=orange!10,
+        text width=4.15cm,
+        minimum height=2.65cm,
+        align=left,
+        inner sep=5pt
+      },
+      invalid/.style={
+        draw=black!70,
+        line width=0.85pt,
+        densely dotted,
+        rounded corners=2pt,
+        fill=black!5,
+        text width=4.15cm,
+        minimum height=2.65cm,
+        align=left,
+        inner sep=5pt
+      },
+      closuregate/.style={
+        draw=blue!65!black,
+        line width=0.8pt,
+        rounded corners=2pt,
+        fill=blue!4,
+        text width=10.6cm,
+        minimum height=1.15cm,
+        align=center,
+        inner sep=4.5pt
+      },
+      closuregood/.style={
+        draw=blue!65!black,
+        line width=0.9pt,
+        rounded corners=2pt,
+        fill=blue!7,
+        text width=6.25cm,
+        minimum height=2.45cm,
+        align=left,
+        inner sep=5pt
+      },
+      closurebad/.style={
+        draw=orange!75!black,
+        line width=0.85pt,
+        dashed,
+        rounded corners=2pt,
+        fill=orange!10,
+        text width=6.25cm,
+        minimum height=2.45cm,
+        align=left,
+        inner sep=5pt
+      },
+      solidarrow/.style={->,draw=blue!65!black,line width=0.9pt},
+      dasharrow/.style={->,draw=orange!75!black,line width=0.85pt,dashed},
+      dotarrow/.style={->,draw=black!70,line width=0.85pt,densely dotted},
+      neutralarrow/.style={->,draw=black,line width=0.7pt}
+    ]
+
+    \node[source] (source) at (0,0)
+      {\textbf{Frozen graded wheel--sieve source}\\[-1pt]
+       $X=\bigsqcup_{k\geq0}X_k$,\quad
+       $\sigma(X_k)\subseteq X_{k+1}$,\quad
+       $\kappa(x)=q_{k+1}$ (or $\tau(x)=\log q_{k+1}$) for $x\in X_k$.\\[-1pt]
+       Test a shift-commuting recoding $\pi$ by asking whether its \emph{current target
+       state} autonomously and exactly determines the source clock.};
+
+    \node[theorem] (exact) at (-4.55,-3.25)
+      {\textbf{I. EXACT CLOCK}\par\textbf{RETAINED}\par
+       A single-valued state decoder satisfies
+       $d(\pi x)=\kappa(x)$, with
+       $\kappa(\sigma^m x)\neq\kappa(x)$ for every $m\geq1$.\par
+       \textbf{THEOREM:} the direct image $\pi(X)$ remains strictly clocked;
+       $\operatorname{Per}(\pi(X))=\varnothing$.};
+
+    \node[control] (erase) at (0,-3.25)
+      {\textbf{II. CLOCK ERASED}\par
+       A quotient such as $k\mapsto k\bmod m$ can be periodic after $\pi$
+       forgets the exact value of $\kappa$.\par
+       \textbf{CONTROL:} periodicity is possible, but no autonomous exact
+       decoder remains; next-prime arithmetic is \emph{not inherited}.};
+
+    \node[invalid] (external) at (4.55,-3.25)
+      {\textbf{III. CLOCK}\par\textbf{EXTERNALIZED}\par
+       The alleged clock depends on a lift $x$, an external visit counter,
+       or traversal time rather than on the current target state $y$.\par
+       \textbf{INVALID MODEL:} this is nonautonomous or multivalued, so it is
+       not an exact symbolic factor carrying the arithmetic clock.};
+
+    \coordinate (fork) at (0,-1.35);
+    \draw[neutralarrow] (source.south) -- (fork);
+    \draw[solidarrow] (fork) -| (exact.north);
+    \draw[dasharrow] (fork) -- (erase.north);
+    \draw[dotarrow] (fork) -| (external.north);
+
+    \node[closuregate] (closure) at (0,-6.85)
+      {\textbf{CLOSURE TEST (branch I only):}\quad
+       On $Y_0=\overline{\pi(X)}$, does a total continuous decoder survive,
+       with every lag-pair closure separated from the clock diagonal?};
+    \draw[solidarrow] (exact.south) -- ++(0,-0.50) -|
+      node[pos=0.28,above,font=\scriptsize] {branch I only} (closure.west);
+
+    \node[closuregood] (good) at (-3.55,-10.05)
+      {\textbf{UNCOMPACTIFIED CLOCK}\par\textbf{+ LAG SEPARATION}\par
+       Let $d:Y_0\to C$ be continuous in the ordinary, uncompactified clock
+       space ($C=\mathbb N_{\mathrm{disc}}$ for $q$, or $C=\mathbb R$ for
+       $\log q$).  If every lag-pair closure avoids the diagonal,
+       $\overline{E_m}\cap\Delta_C=\varnothing$, then\par
+       \textbf{THEOREM:} $\operatorname{Per}(Y_0)=\varnothing$.};
+
+    \node[closurebad] (bad) at (3.55,-10.05)
+      {\textbf{DECODER BREAKS}\par\textbf{AT THE BOUNDARY}\par
+       A discontinuous finite-clock decoder, or a compactified clock admitting
+       $\kappa\to\infty$, may add a fixed or periodic boundary state.\par
+       \textbf{COUNTERCONTROL:} such a cycle is arithmetic-sterile: it carries
+       no finite exact next-prime clock value.};
+
+    \coordinate (split) at (0,-8.10);
+    \draw[solidarrow] (closure.south) -- (split) -| (good.north);
+    \draw[dasharrow] (split) -| (bad.north);
+    \node[font=\scriptsize,align=center,fill=white,inner sep=1pt]
+      at (-1.75,-8.10) {yes + separation};
+    \node[font=\scriptsize,align=center,fill=white,inner sep=1pt]
+      at (1.75,-8.10) {no, or compactify};
+\end{tikzpicture}

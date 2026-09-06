@@ -1,0 +1,122 @@
+\section{Fixed arithmetic symmetry obstruction}
+\label{sec:symmetry}
+
+The Burnside class of \Cref{thm:pqr} is functorial under relabeling.  A
+character Fredholm factor needs more: the same group must commute with one
+fixed transfer operator.  This section tests that requirement directly.
+
+\subsection{Semilinear covariance}
+
+For $g\in G_P=\SP(P)$, let $\rho(g)e_S=e_{gS}$.  Define the relabeled
+variables by $(g\cdot x)_S=x_{g^{-1}S}$.
+
+\begin{theorem}[Covariance and commutator criterion]
+\label{thm:covariance}
+The rank-one family satisfies
+\[
+  \rho(g)A_x\rho(g)^{-1}=A_{g\cdot x}.
+  \tag{5.1}
+\]
+For a fixed specialization $x$, the following are equivalent:
+\begin{enumerate}
+\item $[A_x,\rho(g)]=0$;
+\item $x_{gS}=x_S$ for every nonempty $S\subseteq P$;
+\item $x_{gp}=x_p$ for every $p\in P$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The vector $u_P$ is invariant.  On a basis vector,
+\[
+ (\ell_x\rho(g)^{-1})(e_S)
+ =\eps(S)x_{g^{-1}S}=\ell_{g\cdot x}(e_S),
+ \tag{5.2}
+\]
+which proves (5.1).  Commutation is equivalent to invariance of the covector
+$\ell_x$, giving the equivalence of the first two statements.  Singleton
+subsets show that the second statement implies the third; multiplicativity
+of $x_S$ gives the converse.
+\end{proof}
+
+Equation (5.1) is a semilinear symmetry of a family: the permutation changes
+both the subset basis and the coefficient point.  It is not a decomposition
+of $A_x$ into invariant character fibers unless the equivalent conditions of
+\Cref{thm:covariance} hold.
+
+\begin{corollary}[Arithmetic stabilizer]
+\label{cor:arithmetic-stabilizer}
+Under $x_{F_p}=p^{-s}$ with $\Ree s>0$, the fixed operator $A_x$ has trivial
+atom-permutation stabilizer.
+\end{corollary}
+
+\begin{proof}
+If $p\ne q$, then
+$|p^{-s}|=p^{-\Ree s}\ne q^{-\Ree s}=|q^{-s}|$.  A stabilizing permutation
+must fix every singleton weight and hence every atom.
+\end{proof}
+
+Central idempotents of $\C[S_n]$ therefore do not project the fixed arithmetic
+operator onto invariant character fibers.  They project the unweighted
+permutation representation, but $A_x$ moves those subspaces when the weights
+are distinct.
+
+\subsection{Equal weights and rank-one collapse}
+
+One can restore commutation by setting $x_p=t$ for all labels.  This removes
+the arithmetic distinctions and exposes a second obstruction.
+
+\begin{theorem}[Nontrivial isotypes are determinant-invisible]
+\label{thm:equal-weight}
+At equal weights, $A_t$ is $S_n$-equivariant,
+\[
+  \operatorname{im}A_t=\C u_P,
+  \tag{5.3}
+\]
+and its restriction to every nontrivial isotype is zero.  Hence
+\[
+  \det(I-A_t\mid V_\lambda)=1
+  \tag{5.4}
+\]
+for every nontrivial irreducible type $\lambda$.  The only nonzero eigenvalue
+is
+\[
+  b_P(t)=1-(1-t)^n.
+  \tag{5.5}
+\]
+\end{theorem}
+
+\begin{proof}
+Equal weights make $\ell_t$ invariant, so \Cref{thm:covariance} gives
+equivariance.  The rank-one formula (3.5) gives (5.3), and $u_P$ spans a
+trivial representation.  An equivariant map from a nontrivial irreducible
+summand to the trivial line is zero.  The determinant on every such summand
+is therefore one.  Finally, the rank-one eigenvalue is
+$\ell_t(u_P)=b_P(t)$.
+\end{proof}
+
+The full subset representation has one trivial basis vector for each subset
+cardinality, so its trivial isotypic component has dimension $n$.  The
+operator on that component is still rank one.  Its determinant at $z=1$ is
+\[
+  1-b_P(t)=(1-t)^n.
+  \tag{5.6}
+\]
+All resolved nontrivial modes are identically one.  Equalization thus restores
+the group only after deleting the label scale that made the specialization
+arithmetic and the character motion that motivated SD-C18.
+
+\subsection{What the finite character still means}
+
+The obstruction does not make $R_3$ spurious.  It means that $R_3$ belongs to
+the formal primitive-cycle functor, not to invariant fibers of the fixed
+prime-weighted rank-one operator.  Three statements must be kept separate:
+
+\begin{itemize}
+\item the formal variable family is equivariant under simultaneous relabeling;
+\item the squarefree primitive coefficient is a nonzero virtual $S_3$ class;
+\item the arithmetically specialized transfer has no nontrivial $S_3$ symmetry.
+\end{itemize}
+
+The first two earn \texttt{GO\_FORMAL\_EQUIVARIANT\_LEDGER}.  The third
+blocks a character Fredholm interpretation of the canonical rank-one
+specialization.

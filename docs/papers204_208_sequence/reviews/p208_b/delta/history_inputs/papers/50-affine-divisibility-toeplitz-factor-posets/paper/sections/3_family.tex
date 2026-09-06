@@ -1,0 +1,156 @@
+\section{The affine family and conventions}
+\label{sec:family}
+
+This section fixes the objects once, including the hypotheses that will be
+used for surjectivity, uniqueness, and quotient normalization.
+
+Let $\calA$ be a finite alphabet, let $\calA^{\Z}$ carry the product
+topology, and write $\sigma$ for the left shift.  A subshift is a closed
+$\sigma$-invariant subset.  For $x\in\calA^{\Z}$ and $q\geq1$, put
+\begin{equation}
+  \Per_q(x)=\{k\in\Z:x(k+tq)=x(k)\text{ for every }t\in\Z\}.
+  \label{eq:per-position}
+\end{equation}
+The $q$-skeleton is the partial word that records $x$ on $\Per_q(x)$ and
+places a hole elsewhere.  A positive $q$ is \emph{essential} when this
+skeleton has least positive translation period $q$.  A divisibility chain
+of essential periods whose periodic positions cover $\Z$ is a period
+structure.
+
+We use \emph{normal simple Toeplitz sequence} in the following local sense.
+There are nested periodic hole sets $H_0\supset H_1\supset\cdots$, with one
+residue class of holes at each stage, such that every layer
+$H_N\setminus H_{N+1}$ is filled uniformly by one letter.  The presentation
+is \emph{normal} when $\bigcap_N H_N=\varnothing$, so no integer coordinate
+remains unfilled.  This is the only meaning of that term used below.
+
+For a finite interval $I\subset\Z$, a common period of $x|_I$ means a
+positive $q$ for which every $k\in I$ belongs to $\Per_q(x)$.  Its
+essential period is the least such $q$.  In particular, every coordinate
+in the interval is included.  A pure-power period structure $(p^N)$ is
+called \emph{constructive} here when the initial block
+\begin{equation}
+  B_N=x[0,p^N-1]
+  \label{eq:initial-block}
+\end{equation}
+has essential period $p^{N+1}$ for every $N\geq1$.  This is the
+all-coordinate finite-block convention used throughout.
+
+\begin{definition}[Frozen directive]
+  A directive is a bi-infinite periodic sequence
+  $u=(u_n)_{n\in\Z}$ over $\calA$.  It is \emph{frozen} if its least period
+  $h$ satisfies $h\geq2$, its exact support is
+  $\calA=\{u_0,\dots,u_{h-1}\}$, and
+  \begin{equation}
+    u_n\neq u_{n+1}\qquad(n\in\Z).
+    \label{eq:neighbor-distinct}
+  \end{equation}
+  Thus the last and first letters in a least-period word are also unequal.
+\end{definition}
+
+Fix an integer $p\geq3$.  For a nonzero integer $m$, define
+\begin{equation}
+  \nu_p(m)=\max\{e\geq0:p^e\mid m\}.
+  \label{eq:div-exponent}
+\end{equation}
+When $p$ is composite, $\nu_p$ is only the $p$-divisibility exponent; we
+will never infer that every residue not divisible by $p$ is a unit.  Put
+\begin{equation}
+  L_p(k)=(p-1)k+1,
+  \qquad
+  r_N=1+p+\cdots+p^{N-1}=\frac{p^N-1}{p-1}\quad(N\geq1),
+  \label{eq:L-r}
+\end{equation}
+and set $r_0=0$.  The equation $L_p(k)=0$ has no integral solution because
+$p-1\geq2$.  Thus the following definition never evaluates \cref{eq:div-exponent}
+at zero.
+
+\begin{definition}[Affine divisibility Toeplitz system]
+  For a frozen directive $u$, let
+  \begin{equation}
+    x_{p,u}(k)=u_{\nu_p(L_p(k))},\qquad
+    X_{p,u}=\cl\{\sigma^t x_{p,u}:t\in\Z\},
+    \label{eq:affine-system}
+  \end{equation}
+  and retain the distinguished point in
+  $T_{p,u}=(X_{p,u},\sigma,x_{p,u})$.
+\end{definition}
+
+A morphism $F:T_{p,u}\to T_{p,v}$ means a continuous onto map commuting
+with the shifts and satisfying $F(x_{p,u})=x_{p,v}$.  Source and target
+always use the same fixed base $p$.  We call such a map a pointed factor.
+A pointed conjugacy is an invertible pointed factor.
+
+For a frozen directive on $\calA$, define the simple graph
+\begin{equation}
+  G_u=\bigl(\calA,E_u\bigr),
+  \qquad
+  E_u=\bigl\{\{u_i,u_{i+1}\}:i\in\Z/h\Z\bigr\}.
+  \label{eq:adjacency-graph}
+\end{equation}
+A partition $\mathcal P$ of $\calA$ is \emph{admissible} if every block is
+an independent set of $G_u$.  We say $\mathcal P$ \emph{refines}
+$\mathcal Q$ if every $\mathcal P$-block is contained in a
+$\mathcal Q$-block.
+For an admissible $\mathcal P$, put
+$u^{\mathcal P}_n=[u_n]_{\mathcal P}$ and reduce this quotient directive to
+its least period; the canonical quotient target is
+$T_{\mathcal P}=T_{p,u^{\mathcal P}}$ on the block alphabet
+$\calA/\mathcal P$.
+
+The results can now be stated as a single theorem.  Separate statements and
+proofs in the next sections expose the dependencies.
+
+\begin{theorem}[Main classification]
+\label{thm:main}
+  Fix an integer $p\geq3$ and frozen directives $u$ and $v$.
+  \begin{enumerate}[label=(\alph*),leftmargin=2.2em]
+    \item For every $N\geq1$,
+      \begin{equation}
+        \Per_{p^N}(x_{p,u})
+        =\Z\setminus\bigl(r_N+p^N\Z\bigr).
+        \label{eq:main-skeleton}
+      \end{equation}
+      Every $p^N$ is essential, $(p^N)_{N\geq1}$ is a period structure,
+      and $x_{p,u}$ is an aperiodic normal simple Toeplitz sequence.
+    \item The structure is constructive in the convention of
+      \cref{eq:initial-block} if and only if $p$ is prime.  If $p$ is
+      composite and $\ell$ is any prime divisor of $p$, then
+      $\ell p^N<p^{N+1}$ is a common period of $B_N$ for every $N\geq1$.
+    \item A pointed factor $T_{p,u}\to T_{p,v}$ exists if and only if
+      there is a surjective letter map $\lambda:\calA\to\calB$ such that
+      \begin{equation}
+        v_n=\lambda(u_n)\qquad(n\in\Z).
+        \label{eq:directive-quotient}
+      \end{equation}
+      In that case $\lambda$ and the factor map are unique, and
+      $F=\lambda^{\Z}$ on $X_{p,u}$.  Pointed conjugacy is exactly a
+      bijective relabeling of directive letters, with no phase shift.
+    \item For fixed $T_{p,u}$, pointed-conjugacy classes of same-base
+      in-family factor targets are in bijection with the admissible
+      partitions of $\calA$.  Before quotienting by pointed conjugacy, the
+      canonical representatives form a thin category: there is a unique
+      factor arrow $T_{\mathcal P}\to T_{\mathcal Q}$ exactly when
+      $\mathcal P$ refines $\mathcal Q$.  After identifying arbitrary
+      relabelings with their canonical representatives, the class-level
+      object is the admissible-partition refinement poset.  If
+      $S_{G_u}(k)$ counts its partitions into $k$ nonempty independent
+      blocks, then
+      \begin{align}
+        \#\{\text{$k$-letter target classes}\}&=S_{G_u}(k),
+        \label{eq:main-count}\\
+        \min\{\text{target alphabet size}\}&=\chi(G_u),
+        \label{eq:main-chi}\\
+        P_{G_u}(z)&=\sum_k S_{G_u}(k)\fall{z}{k}.
+        \label{eq:main-chromatic}
+      \end{align}
+      A binary target exists exactly when $G_u$ is bipartite.
+  \end{enumerate}
+\end{theorem}
+
+The proof graph is short but rigid.  Coordinate periodicity gives the exact
+skeleton, which gives essential periods and the one-hole recursion.  A
+separate common-period calculation gives the prime/composite split.  The
+high-center identity and the Curtis--Hedlund--Lyndon theorem give the letter
+map, after which kernels become admissible graph partitions.  No finite
+enumeration is used in any of these implications.

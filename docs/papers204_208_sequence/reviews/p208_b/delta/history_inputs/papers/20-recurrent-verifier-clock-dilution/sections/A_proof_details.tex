@@ -1,0 +1,108 @@
+\section{Supplementary proof details}
+\label{app:proofs}
+
+\subsection{Endpoint count in the contracted convention}
+
+For prime $p$, each tested divisor $d$ contributes the edges
+\[
+T_{p,d}\to Q_{p,d,2}\to\cdots\to
+Q_{p,d,\lfloor p/d\rfloor+1}\to T_{p,d+1}.
+\]
+There are $1+\lfloor p/d\rfloor=\lceil p/d\rceil$ such edges, because
+$d\nmid p$.  The two remaining edges are the initial
+$I_p\to T_{p,2}$ and terminal $T_{p,m+1}\to I_p$.  Retaining a separate
+accept state would add one edge; it is not the object studied here.
+
+For $p=2,3$ the divisor sum is empty and $\ell(p)=2$.  For $p\ge5$ every
+$p/d$ in the sum is nonintegral, explaining why the lower harmonic bound in
+\eqref{eq:length-bounds} is strict there but not at the two smallest primes.
+
+\subsection{Boundedness and reducing prime blocks}
+
+On the functional graph every vertex has exactly one forward image and every
+nonnegative-roof edge weight has modulus at most one.  For a finitely
+supported vector $x$ on a component whose forward map is injective, the
+weighted shift is a contraction.  The accepted prime components are simple
+cycles and hence injective; their direct sum has norm at most one.  The frozen
+composite source roofs provide a bounded whole operator as well.  All
+compactness and Schatten obstructions already occur on the reducing accepted
+subspace, so no claim depends on the detailed cemetery bound.
+
+\subsection{Essential-norm witness modulo compact operators}
+
+Let $K$ be compact and let $(\delta_{u_p})$ be the orthonormal sequence from
+\cref{thm:noncompact}.  Then
+$K\delta_{u_p}\to0$ in norm, while
+$\norm{L_s\delta_{u_p}}\to1$.  Hence
+\[
+\norm{L_s-K}\ge
+\limsup_p\norm{(L_s-K)\delta_{u_p}}\ge1.
+\]
+Taking the infimum over compact $K$ gives the essential-norm lower bound.
+The contraction upper bound gives equality.
+
+\subsection{Schatten calculation for a nonnormal block}
+
+No eigenvalue/singular-value substitution is made.  If
+$B_s\delta_{v_j}=w_j\delta_{v_{j+1}}$, then
+\[
+B_s^*B_s\delta_{v_j}=|w_j|^2\delta_{v_j}.
+\]
+Thus the singular values are exactly $|w_j|$.  The block is generally
+nonnormal when the edge moduli differ, but Jensen's inequality in
+\eqref{eq:jensen-schatten} is therefore still an exact Schatten calculation.
+
+\subsection{Singular Weyl sequence}
+
+For a cyclic block, solve
+$B_sx=\lambda_px$ recursively from one nonzero coordinate.  The compatibility
+condition is $\lambda_p^{\ell(p)}=p^{-s}$, which is exactly
+\eqref{eq:block-spectrum}; finite dimension permits normalization.  Choosing
+one such eigenvector on each of pairwise disjoint prime blocks makes the
+sequence orthonormal even though individual blocks are nonnormal.  Nearest
+roots approximate any prescribed unit phase because the angular mesh tends
+to zero.  This proves the singular-sequence argument without invoking a
+normal-operator spectral theorem.
+
+\subsection{Normal convergence of the raw product}
+
+Let $K$ be compact in
+$\{(s,z):\RePart s>1,\ |z|\le1\}$.  There is $\epsilon>0$ with
+$\RePart s\ge1+\epsilon$ on $K$.  Then
+\[
+\sum_p\sup_K|z^{\ell(p)}p^{-s}|
+\le\sum_pp^{-1-\epsilon}<\infty.
+\]
+The Weierstrass criterion proves normal convergence.  This statement needs
+no trace of the infinite noncompact adjacency; it is a direct convergence
+theorem for the primitive factors.
+
+\subsection{Why the return marker changes}
+
+For one $\ell$-cycle of total weight $w$,
+\[
+\Tr B^r=
+\begin{cases}
+\ell w^k,&r=k\ell,\\
+0,&\ell\nmid r.
+\end{cases}
+\]
+The finite trace-log identity gives
+\[
+\exp\left(-\sum_{k\ge1}
+\frac{z^{k\ell}}{k\ell}\ell w^k\right)=1-z^\ell w.
+\]
+The first-return loop instead has trace $w^k$ at every return power and factor
+$1-zw$.  The specialization $z=1$ forgets the elapsed graph time.  Carrying
+$z^\ell$ as part of the return weight preserves it explicitly but does not
+turn return steps back into original graph steps.
+
+\subsection{Universal padding quantifiers}
+
+The padding in
+\cref{thm:decider} is fixed uniformly as a function of input, before the
+accept/reject result is consulted.  For instance, run $n$ dummy successor
+steps after the original total machine halts, then branch according to the
+stored result.  This is acceptance-independent, although it is of course part
+of the chosen source presentation.  It shows sensitivity to runtime
+presentation, not independence from all source choices.

@@ -1,0 +1,93 @@
+\section{SD-C14 and its determinant data types}
+\label{sec:determinants}
+
+Let $F_p$ be the tensor-prime full-shift atom with entropy $\log p$.  Its
+primitive loop $\gamma_p$ and repetitions $\gamma_p^r$ remain the base
+grammar.  The fiber is
+\[
+ \cA=\CC\oplus L(\ZZ),\qquad W=1\oplus u,                 \tag{4.1}
+\]
+where the canonical group trace satisfies $\tau(u^r)=0$ for $r\ne0$.  For a
+frozen $c\ge0$, put
+\[
+ \Phi_c(a\oplus x)=a+c\tau(x).                             \tag{4.2}
+\]
+For $c>0$ this is a faithful finite positive trace, but
+\[
+ \Phi_c(1)=1+c,\qquad \Phi_c(W^r)=1\quad(r\ne0).
+ \tag{4.3}\label{eq:power-moments}
+\]
+The normalized trace $\widetilde\Phi_c=\Phi_c/(1+c)$ instead gives
+$\widetilde\Phi_c(W^r)=1/(1+c)$, so normalization and the exact one-copy
+ledger are incompatible when $c>0$.
+
+\subsection{The analytic trace-log}
+
+For $|q|<1$, norm functional calculus defines
+\[
+ D_c(q)=\exp\Phi_c\bigl(\log(1-qW)\bigr).                 \tag{4.4}
+\]
+
+\begin{theorem}[Exact ghost blindness]
+\label{thm:blindness}
+For every $c\ge0$ and $|q|<1$,
+\[
+ D_c(q)=1-q.                                               \tag{4.5}
+\]
+More generally, two scalar trace-log germs agree near $q=0$ if and only if
+their aggregated positive power traces agree at every order.
+\end{theorem}
+
+\begin{proof}
+The logarithm series and the moment identity in
+\eqref{eq:power-moments} give
+\[
+ \log D_c(q)
+ =-\sum_{r\ge1}\frac{q^r}{r}\Phi_c(W^r)
+ =-\sum_{r\ge1}\frac{q^r}{r}=\log(1-q).                  \tag{4.6}
+\]
+Equality of germs is equivalent to equality of their Taylor coefficients,
+which are the power traces divided by $r$.
+\end{proof}
+
+On the tensor-prime direct sum, take $q=zp^{-s}$ at atom $p$.  For
+$\RePart s>1$ and $|z|\,2^{-\RePart s}<1$, absolute convergence yields
+\[
+ D_c(s,z)=\prod_pD_c(zp^{-s})=\prod_p(1-zp^{-s}),         \tag{4.7}
+\]
+independently of $c$.  This is an exact analytic determinant and an unchanged
+Euler ledger.  It contains no new Haar-fiber information.
+
+\subsection{Magnitude and normalized spectral distribution}
+
+The Fuglede--Kadison determinant answers a different question.
+
+\begin{proposition}[Exact magnitude formula]
+\label{prop:fk}
+For $q\in\CC$,
+\[
+ \Delta_{\Phi_c}(1-qW)
+ =|1-q|\max(1,|q|)^c.                                     \tag{4.8}
+\]
+\end{proposition}
+
+\begin{proof}
+Spectral calculus and Jensen's circle formula give
+\begin{align}
+ \log\Delta_{\Phi_c}(1-qW)
+ &=\log|1-q|+c\int_\TT\log|1-qz|\,dm_{\rm H}(z)\\
+ &=\log|1-q|+c\log^+|q|.                                 \tag{4.9}
+\end{align}
+Exponentiation proves the formula.
+\end{proof}
+
+Inside $|q|<1$, \cref{prop:fk} is as blind as the analytic determinant.
+Outside the disk it detects $c$ through radial magnitude, but is positive
+real rather than a holomorphic oriented divisor.  With the normalized trace,
+the normal unitary $W$ has probability spectral distribution
+\[
+ \frac1{1+c}\delta_1+\frac{c}{1+c}m_{\rm H}.              \tag{4.10}
+\]
+It sees the continuous circle spectrum only after diluting the base atom
+coefficient.  These coordinates cannot be spliced into \cref{thm:blindness}
+as a single Route-A determinant.

@@ -1,0 +1,423 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Part}{\mathcal P}
+\newcommand{\RF}{\mathsf F}
+\newcommand{\len}{\ell}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Fib}{\operatorname{Fib}}
+\newcommand{\T}{\operatorname T}
+
+\title[Rank-feedback splitting]{Rank-Feedback Splitting of Finite Abelian
+$p$-Groups: A Sharp Triangular Clock and Exact Target Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{20K01, 05A17, 37P05}
+\keywords{finite abelian p-group, integer partition, rank feedback, finite dynamics, triangular number, fibre formula}
+
+\begin{document}
+
+\begin{abstract}
+For a finite abelian $p$-group $G$, let $d(G)$ be its minimum number of
+generators and iterate
+\[
+                 \RF(G)=p^{d(G)}G\oplus G[p^{d(G)}].
+\]
+If $G$ has partition type $\lambda=(a_1,\ldots,a_r)$, the induced rule keeps
+each $a_i\leq r$ and splits each $a_i>r$ into $(r,a_i-r)$.  We prove that
+the recurrent types are exactly the fixed types $a_1\leq r$ and give their
+ordinary generating function.  More sharply, for every type of order $p^n$
+and initial rank $r_0$, a transient of length $d$ satisfies
+$n\geq r_0(d+1)+\binom d2$.  Consequently the maximum transient length is
+\[
+ \left\lceil\frac{\sqrt{8n+1}-3}{2}\right\rceil,
+\]
+and the unique type attaining it is the cyclic type $(n)$, whose whole orbit
+is explicit.  Finally, a bounded-coefficient formula counts the one-step
+fibre over every target partition and yields a necessary and sufficient
+image criterion.  The classification of finite abelian groups, cyclic
+kernel/image formulas, torsion terminology, and Gaussian-binomial partition
+enumeration are assigned zero contribution credit.  Exact enumeration is
+used only for falsification, and external release remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{The literal operator and complete statement}
+
+Fix a prime $p$.  Let $\mathcal A_{p,n}$ be the set of isomorphism classes
+of finite abelian groups of order $p^n$.  For $G\in\mathcal A_{p,n}$ put
+\[
+ d(G)=\dim_{\mathbb F_p}(G/pG),\qquad
+ G[p^s]=\{g\in G:p^sg=0\},
+\]
+and define
+\begin{equation}\label{eq:group-map}
+                      \RF(G)=p^{d(G)}G\oplus G[p^{d(G)}].
+\end{equation}
+The direct sum in \eqref{eq:group-map} is external.  The zero group is fixed
+by convention.
+
+Write $\Part_n$ for the integer partitions of $n$.  Parts are decreasing,
+$\len(\lambda)$ is their number, and $m_j(\lambda)$ is the multiplicity of
+$j$.  Put $\T_t=t(t+1)/2$.  The \emph{entry time} $\tau(\lambda)$ is the
+least $t\geq0$ for which the $t$th iterate is recurrent.
+
+For later use, fix a target $\mu\in\Part_n$ of length $L$ and write
+$m_j=m_j(\mu)$.  For
+\[
+             \left\lceil\frac L2\right\rceil\leq r\leq L,
+             \qquad c_r=L-r,
+\]
+if $m_r\geq c_r$, define
+\begin{equation}\label{eq:q-and-h}
+ q_j^{(r)}=m_j-c_r\mathbf 1_{\{j=r\}},\qquad
+ h_r=\sum_{j>r}q_j^{(r)},
+\end{equation}
+and set
+\begin{equation}\label{eq:Ar}
+ A_r(\mu)=
+ \begin{cases}
+ [u^{c_r-h_r}]\displaystyle\prod_{j=1}^{r}
+       (1+u+\cdots+u^{q_j^{(r)}}),&m_r\geq c_r,\ h_r\leq c_r,\\
+ 0,&\text{otherwise}.
+ \end{cases}
+\end{equation}
+
+\begin{theorem}[Dynamics, sharp clock, and inverse geometry]\label{thm:main}
+For every $n\geq1$, the following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Under the usual type bijection
+\[
+ \lambda=(a_1,\ldots,a_r)\longleftrightarrow
+ G_\lambda=\bigoplus_{i=1}^{r}C_{p^{a_i}},
+\]
+the group operator \eqref{eq:group-map} is the weight-preserving partition
+map
+\begin{equation}\label{eq:type-map}
+ \RF(\lambda)=\operatorname{sort}
+ \left(\biguplus_{a_i\leq r}\{a_i\}
+       \uplus\biguplus_{a_i>r}\{r,a_i-r\}\right).
+\end{equation}
+In particular, its type dynamics is independent of $p$.
+\item A type $\lambda=(a_1,\ldots,a_r)$ is recurrent if and only if it is
+fixed, if and only if $a_1\leq r$.  If $f_n$ counts fixed types and
+$f_0=1$, then, as a formal power series,
+\begin{equation}\label{eq:fixed-ogf}
+ \sum_{n\geq0}f_nz^n
+   =1+\sum_{r\geq1}z^r
+       \genfrac{[}{]}{0pt}{}{2r-1}{r}_{\!z}.
+\end{equation}
+\item If $\lambda\vdash n$ has initial length $r_0$ and entry time $d$, then
+\begin{equation}\label{eq:pointwise-clock}
+                         n\geq r_0(d+1)+\binom d2.
+\end{equation}
+The exact maximum and its unique maximizer are
+\begin{equation}\label{eq:sharp-clock}
+ \max_{\lambda\vdash n}\tau(\lambda)
+  =D(n):=\left\lceil\frac{\sqrt{8n+1}-3}{2}\right\rceil,
+ \qquad \tau(\lambda)=D(n)\Longleftrightarrow\lambda=(n).
+\end{equation}
+Moreover, for $0\leq t\leq D(n)$,
+\begin{equation}\label{eq:deep-orbit}
+ \RF^t((n))=\operatorname{sort}(n-\T_t,t,t-1,\ldots,1),
+\end{equation}
+where the list after $n-\T_t$ is empty when $t=0$.
+\item The fibre over every target, including a target outside the image, is
+\begin{equation}\label{eq:fibre-formula}
+ |\RF^{-1}(\mu)|=
+ \sum_{r=\lceil L/2\rceil}^{L}A_r(\mu).
+\end{equation}
+The corresponding exact image criterion is
+\begin{equation}\label{eq:image-criterion}
+ \mu\in\operatorname{im}\RF
+ \quad\Longleftrightarrow\quad
+ \text{some }r\in[\lceil L/2\rceil,L]\text{ satisfies }
+ m_r\geq L-r\text{ and }\sum_{j>r}m_j\leq L-r.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\section{From groups to a feedback split}
+
+The classification and cyclic decomposition of finite abelian groups are
+standard; see, for example, Fuchs \cite{Fuchs2015}.  We nevertheless include
+the short calculation that fixes the literal map and all conventions.
+
+\begin{proposition}[Group/type identity]\label{prop:type}
+The operator \eqref{eq:group-map} preserves group order and induces
+\eqref{eq:type-map}.
+\end{proposition}
+
+\begin{proof}
+For $G_\lambda=\bigoplus_{i=1}^rC_{p^{a_i}}$ one has
+$G_\lambda/pG_\lambda\cong\mathbb F_p^r$, and $r$ generators visibly
+suffice.  Hence $d(G_\lambda)=r$.  On one cyclic factor,
+\begin{align}\label{eq:cyclic-pieces}
+ p^rC_{p^a}&\cong C_{p^{\max(a-r,0)}},&
+ C_{p^a}[p^r]&\cong C_{p^{\min(a,r)}},
+\end{align}
+with an exponent zero denoting the trivial factor.  Thus $a\leq r$ yields
+one exponent $a$, while $a>r$ yields exponents $r$ and $a-r$.  Direct sums
+commute with both constructions, proving \eqref{eq:type-map}.
+
+Multiplication by $p^r$ also gives an exact sequence
+\[
+ 0\longrightarrow G[p^r]\longrightarrow G
+   \longrightarrow p^rG\longrightarrow0.
+\]
+Therefore $|p^rG|\,|G[p^r]|=|G|$, so \eqref{eq:group-map} indeed remains in
+$\mathcal A_{p,n}$.
+\end{proof}
+
+Both \eqref{eq:cyclic-pieces} and the order identity are classical inputs,
+not contribution claims.  The dynamics begins only when their exponent $r$
+is fed back from the current state.
+
+\section{Fixed and recurrent types}
+
+For a type $\lambda$ of length $r$, set
+\begin{equation}\label{eq:split-count}
+                         c(\lambda)=|\{i:a_i>r\}|.
+\end{equation}
+Every such part splits into two and every other part remains one part, so
+\begin{equation}\label{eq:rank-rise}
+                  \len(\RF(\lambda))=r+c(\lambda).
+\end{equation}
+
+\begin{proposition}[No nontrivial recurrence]\label{prop:recurrent}
+A partition is recurrent precisely when $c(\lambda)=0$, equivalently when
+$a_1\leq\len(\lambda)$, and all recurrent types are fixed.
+\end{proposition}
+
+\begin{proof}
+If $c(\lambda)=0$, \eqref{eq:type-map} leaves every part unchanged.  If
+$c(\lambda)>0$, \eqref{eq:rank-rise} strictly increases the length.  A
+partition of $n$ has length at most $n$, so every orbit eventually reaches a
+fixed type.  Strict length increase also prevents a nonfixed state from
+lying on a directed cycle.
+\end{proof}
+
+\begin{proof}[Proof of \eqref{eq:fixed-ogf}]
+Fix the length $r$.  A fixed type has exactly $r$ positive parts, all at
+most $r$.  Subtracting one from every part produces a Ferrers diagram in an
+$r$-by-$(r-1)$ rectangle, with zero rows allowed.  Its size enumerator is
+the Gaussian polynomial
+$\genfrac{[}{]}{0pt}{}{2r-1}{r}_{z}$.  Restoring the removed column shifts
+the weight by $r$ and gives the $r$th summand of \eqref{eq:fixed-ogf}.  The
+initial $1$ is the empty type.  Rectangle enumeration by Gaussian
+polynomials is standard partition theory \cite{Andrews1984} and receives
+zero credit here.
+\end{proof}
+
+\section{Frozen markers and the unique sharp clock}
+
+Let
+\[
+ \lambda^{(0)}\longmapsto\lambda^{(1)}\longmapsto\cdots
+ \longmapsto\lambda^{(d)}
+\]
+be an orbit segment in which the first $d$ states are nonfixed and the last
+is fixed.  Write $r_t=\len(\lambda^{(t)})$ and
+$c_t=c(\lambda^{(t)})$ for $0\leq t<d$.
+
+\begin{lemma}[Pointwise marker budget]\label{lem:budget}
+For every such segment,
+\begin{equation}\label{eq:marker-budget}
+ n\geq r_0+\sum_{t=0}^{d-1}c_tr_t
+   \geq r_0(d+1)+\binom d2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Temporarily tag the $r_0$ initial parts.  Within each tag, distinguish one
+positive \emph{residual}.  When a residual part $a>r_t$ splits, designate
+the new part $r_t$ as a marker and retain $a-r_t>0$ as that tag's residual.
+Unsplit parts remain residuals.  The map never merges parts.
+
+Equation \eqref{eq:rank-rise} gives
+$r_{t+1}=r_t+c_t>r_t$.  Hence a marker of size $r_t$ is at most every later
+rank and can never split later.  At time $d$ there are consequently $c_t$
+disjoint permanent markers of weight $r_t$ from each transition $t$, plus
+one positive residual for every initial tag.  Their weights give the first
+inequality in \eqref{eq:marker-budget}.
+
+Since every $c_t\geq1$, the rank recurrence implies $r_t\geq r_0+t$.
+Therefore
+\[
+ r_0+\sum_{t=0}^{d-1}c_tr_t
+ \geq r_0+\sum_{t=0}^{d-1}(r_0+t)
+ =r_0(d+1)+\binom d2,
+\]
+which proves the second inequality.
+\end{proof}
+
+\begin{theorem}[Sharpness and uniqueness]\label{thm:clock}
+Equations \eqref{eq:pointwise-clock}--\eqref{eq:deep-orbit} hold.
+\end{theorem}
+
+\begin{proof}
+Taking $r_0\geq1$ in Lemma~\ref{lem:budget} gives
+\[
+                              n\geq\T_d+1,
+\]
+so $\T_d<n$.  The largest integer with that strict inequality is
+$D(n)$ in \eqref{eq:sharp-clock}; equivalently
+$\T_{D(n)}<n\leq\T_{D(n)+1}$.  This proves the universal upper bound and the
+displayed radical form.
+
+Starting from $(n)$, suppose $0\leq t<D(n)$ and
+\eqref{eq:deep-orbit} holds.  Its length is $t+1$, its parts
+$t,t-1,\ldots,1$ are already at most that length, and
+\[
+                         n-\T_t>t+1
+\]
+because $\T_{t+1}<n$.  Thus only $n-\T_t$ splits, into
+$(t+1,n-\T_{t+1})$, proving the next instance of
+\eqref{eq:deep-orbit}.  At $t=D(n)$, the reverse inequality
+$n\leq\T_{D(n)+1}$ says that $n-\T_{D(n)}\leq D(n)+1$; all parts are then
+at most the rank, so this state is fixed.  Hence $(n)$ attains the bound.
+
+Finally, suppose a type of length $r_0\geq2$ had entry time $D=D(n)$.
+The pointwise bound would give
+\[
+ n\geq2(D+1)+\binom D2=\T_{D+1}+1,
+\]
+contrary to $n\leq\T_{D+1}$.  Thus every maximizer has $r_0=1$, and the
+only partition of $n$ with one part is $(n)$.  This also covers $n=1$, for
+which $D(n)=0$.
+\end{proof}
+
+\section{Every-target fibres and the image}
+
+\begin{theorem}[Marker removal and bounded choices]\label{thm:fibres}
+The fibre formula \eqref{eq:fibre-formula} and image criterion
+\eqref{eq:image-criterion} hold for every $\mu\vdash n$.
+\end{theorem}
+
+\begin{proof}
+Fix a source rank $r$, and let $c$ of its $r$ parts exceed $r$.  Each of
+those $c$ parts contributes a marker $r$ and one positive remainder; every
+other source part is unchanged.  Hence the target length is $L=r+c$.  Since
+$0\leq c\leq r$, the possible source ranks are exactly in
+$[\lceil L/2\rceil,L]$, with $c=c_r=L-r$.
+
+For one such $r$, the target must contain at least $c_r$ copies of $r$.
+Remove those marker copies.  The residual multiset has counts
+$q_j^{(r)}$ and exactly $r$ parts.  Every residual part greater than $r$
+must have come from a split source part, so all $h_r$ such copies are forced
+remainders.  Among the copies of sizes $1,\ldots,r$, choose another
+$c_r-h_r$ remainders.  If $s_j$ copies of size $j$ are chosen, then
+\[
+ 0\leq s_j\leq q_j^{(r)},\qquad
+ \sum_{j=1}^{r}s_j=c_r-h_r.
+\]
+The number of such multiplicity vectors is exactly the coefficient in
+\eqref{eq:Ar}.
+
+The reconstruction is explicit: combine every selected remainder $j$ with
+one removed marker to make the source part $r+j>r$, and retain each
+unselected residual part as an unsplit source part.  It produces $c_r$
+large and $r-c_r$ small source parts, hence a source of rank $r$.  The
+construction and marker removal are inverse, and different source ranks are
+disjoint.  Summing over $r$ proves \eqref{eq:fibre-formula}.
+
+It remains to read positivity.  If $m_r\geq c_r$ and $h_r\leq c_r$, then
+there are $r-h_r$ residual copies of size at most $r$, and
+\[
+                 0\leq c_r-h_r\leq r-h_r
+\]
+because $c_r\leq r$.  Thus a choice exists, so $A_r(\mu)>0$.  Conversely,
+a preimage necessarily supplies both the $c_r$ markers and at most $c_r$
+large residuals.  Since $h_r=\sum_{j>r}m_j$, these are precisely the two
+conditions in \eqref{eq:image-criterion}.
+\end{proof}
+
+\section{Ownership boundary and exact controls}
+
+All classical structure is subtracted.  The finite abelian $p$-group
+classification, $d(G)=\dim_{\mathbb F_p}G/pG$, and the cyclic formulas
+\eqref{eq:cyclic-pieces} are standard group theory \cite{Fuchs2015}.
+Delaunay and Jouhet use partition-indexed finite abelian groups and
+$p^\ell$-torsion statistics in a different probabilistic and combinatorial
+setting \cite{DelaunayJouhet2014}; that torsion machinery is prior art, not
+part of the residual claim.  Ferrers diagrams, Gaussian polynomials, and
+formal coefficient extraction are likewise standard \cite{Andrews1984}.
+Existing iterated maps on partitions include multiplicity-description and
+continued-fraction-type systems \cite{EliahouErickson2013,BaalbakiEtAl2024}.
+They do not supply ownership clearance for the present map, and their general
+partition-dynamics language receives zero credit.
+
+The residual package is limited to the conjunction for the literal
+state-dependent operator \eqref{eq:group-map}: the monotone feedback split,
+pointwise marker budget, unique sharp triangular clock, and all-target
+one-step inverse decoder.  Internally, this is not P126's synchronous
+balanced refinement of ordered compositions: there the threshold is fixed,
+the split is nearly halving, and the main result concerns complete iterate
+kernels.  It is not P135's derived-centralizer multiplicity rule, which has
+mergers and genuine two-cycles, and it is not P115's linear Cartier/Frobenius
+coefficient dynamics.  Merely sharing splitting, partition, or finite
+algebraic vocabulary transfers no theorem.
+
+The paper-local exact audit constructs literal cyclic kernels and images,
+enumerates every partition through weight $50$, compares the fixed counts
+with an independent Gaussian recurrence, and checks \eqref{eq:fibre-formula}
+and \eqref{eq:image-criterion} over every target through weight $35$.  A
+bounded source audit did not locate the exact literal operator or theorem
+conjunction.  This non-hit is not novelty, priority, or authorship evidence;
+external status is \texttt{HOLD\_EXTERNAL}.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+control & exact count \\
+\midrule
+partition states, all $n\leq50$ & 1,295,970 \\
+target fibre cells, all $n\leq35$ & 81,155 \\
+zero-fibre targets among those cells & 30,923 \\
+literal cyclic cells / base elements & 176 / 10,350 \\
+fixed-OGF coefficients & 51 \\
+exact assertions & 18,504,770 \\
+\bottomrule
+\end{tabular}
+\caption{Dependency-free exact controls.  Enumeration is falsification
+evidence only, not an all-weight proof or an ownership certificate.}
+\label{tab:controls}
+\end{table}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

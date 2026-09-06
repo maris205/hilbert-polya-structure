@@ -1,0 +1,43 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=7mm and 10mm,
+  every node/.style={font=\small,align=center},
+  source/.style={draw=formalblue,very thick,rounded corners,fill=formalblue!7,
+    text width=33mm,minimum height=13mm},
+  bare/.style={draw=stopred,very thick,rounded corners,fill=stopred!6,
+    text width=37mm,minimum height=13mm},
+  match/.style={draw=deepgreen,very thick,rounded corners,fill=deepgreen!7,
+    text width=37mm,minimum height=13mm},
+  result/.style={draw=charcoal,rounded corners,fill=softgray,
+    text width=38mm,minimum height=11mm},
+  arr/.style={-{Latex[length=2.2mm]},very thick},
+  isoarr/.style={{Latex[length=2.2mm]}-{Latex[length=2.2mm]},very thick,deepgreen},
+  failarr/.style={-{Bar[width=3mm]},very thick,stopred},
+]
+\node[source] (src) {finite full shifts\\
+  $F_m\boxplus F_n\cong F_{m+n}$\\
+  $F_m\boxtimes F_n\cong F_{mn}$};
+\node[bare,above right=6mm and 13mm of src] (bare) {bare monomial UFD clone\\
+  $\Phi(n)=\prod_p x_p^{v_p(n)}$\\ordinary polynomial $+$};
+\node[match,below right=6mm and 13mm of src] (match) {matched semiring clone\\
+  $y_m\oplus_Yy_n=y_{m+n}$\\
+  $y_m\otimes_Yy_n=y_{mn}$};
+\node[result,right=9mm of bare] (break) {$\Phi(1+1)=x_2$\\
+  $\Phi(1)+\Phi(1)=2$\\\textbf{bare clone breaks}};
+\node[result,right=9mm of match] (copy) {same Wilson paths, cycles,\\
+  roofs, markers, and ledgers\\\textbf{exact copy}};
+
+\draw[arr,formalblue] (src) -- node[above,sloped]{multiplication transports} (bare);
+\draw[failarr] (bare) -- node[above]{addition} (break);
+\draw[isoarr] (src) -- node[below,sloped]{decorated isomorphism} (match);
+\draw[arr,deepgreen] (match) -- node[below]{naturality} (copy);
+\end{tikzpicture}
+\caption{Alphabet sum separates two clone questions.  Ordinary polynomial
+addition cannot extend the multiplicative monomial map, so the exact bare UFD
+clone from Paper 30 fails.  Transporting both semiring operations to a
+relabeling restores a decorated isomorphism and copies the entire Wilson
+ledger.  Bare-clone separation is therefore genuine but not clone-proof
+arithmetic selectivity.}
+\label{fig:semiring-clone-boundary}
+\end{figure}

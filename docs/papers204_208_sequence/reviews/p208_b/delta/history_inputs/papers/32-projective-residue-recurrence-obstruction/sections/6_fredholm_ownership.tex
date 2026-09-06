@@ -1,0 +1,117 @@
+\section{Same-object trace class and Fredholm ownership}
+\label{sec:fredholm}
+
+The primitive ledger has already failed A1, but Paper 32 also asks whether the
+analytic ownership obstruction from Paper 31 can be removed.  This section
+keeps every state and every original graph edge.  No first return, induced
+map, or block projection is used.
+
+Let
+\[
+ \Hspace=\bigoplus_{n\ge2}\ell^2(X_n).
+\]
+Write $P_{S,n}$ and $P_{R,n}$ for the two permutation operators on
+$\ell^2(X_n)$.  If $c_n$ also denotes its unit basis vector, define the
+rank-one cusp maps
+\[
+ J^+_{k,n}=|c_{kn}\rangle\langle c_n|,
+ \qquad J^-_{k,n}=(J^+_{k,n})^*,
+ \qquad k\in\{2,3\}.
+\]
+
+\begin{definition}[Primary graph-step operator]
+\label{def:primary-operator}
+For $s\in\C$, set
+\[
+ B_s^{\mathrm{mod}}
+ =\bigoplus_{n\ge2}n^{-s}(P_{S,n}+P_{R,n}),
+\]
+\[
+ C_s=\sum_{n\ge2}\sum_{k\in\{2,3\}}(kn)^{-s}
+ (J^+_{k,n}+J^-_{k,n}),\qquad B_s=B_s^{\mathrm{mod}}+C_s.
+\]
+The marker $z$ counts one application of this exact $B_s$.
+\end{definition}
+
+\begin{theorem}[Trace-class ownership]
+\label{thm:trace-class}
+The map $s\mapsto B_s$ is trace-norm holomorphic on $\Ree s>2$.  In
+particular, $B_s$ is trace class there and
+\[
+ D_{\mathrm{PR}}(s,z)=\det(I-zB_s)
+\]
+is an ordinary Fredholm determinant of the uninduced graph-step operator,
+entire in $z$ and holomorphic in $s$.
+\end{theorem}
+
+\begin{proof}
+Each projective generator is a permutation on $\psi(n)$ states and has trace
+norm $\psi(n)$.  For $\sigma=\Ree s$,
+\[
+ \|B_s^{\mathrm{mod}}\|_1
+ \le2\sum_{n\ge2}\psi(n)n^{-\sigma}.
+\]
+The factorwise inequality
+$1+p^{-1}\le1+p^{-1}+\cdots+p^{-a}$ gives
+$\psi(n)\le\sigma_1(n)$.  Hence, for $\sigma>2$,
+\[
+ \|B_s^{\mathrm{mod}}\|_1
+ \le2\sum_{n\ge2}\sigma_1(n)n^{-\sigma}
+ <2\zeta(\sigma)\zeta(\sigma-1)<\infty.
+\]
+Every $J^+_{k,n}$ and $J^-_{k,n}$ has trace norm one, so
+\[
+ \|C_s\|_1
+ \le2(2^{-\sigma}+3^{-\sigma})\sum_{n\ge2}n^{-\sigma},
+\]
+which converges for $\sigma>1$.  On a compact subset of $\Ree s>2$, the same
+majorants with the minimum real part give uniform trace-norm convergence.
+Termwise holomorphy then proves trace-norm holomorphy.  The standard
+trace-class determinant construction \citep{simon1977infinite} yields the
+remaining assertions.
+\end{proof}
+
+This theorem is the main positive advance.  The primary operator itself owns
+the determinant, the free marker retains graph-step time, and both
+within-block and cross-modulus edges enter the trace-norm estimate.  The
+analytic statement does not rely on a formal orbit product.
+
+\subsection{What the owned traces contain}
+
+For trace-class $B_s$ and sufficiently small $z$, the usual trace-log identity
+is
+\[
+ \log\det(I-zB_s)
+ =-\sum_{r\ge1}\frac{z^r}{r}\Tr(B_s^r).
+\]
+Its coefficients count the labelled closed walks of the frozen operator with
+their source roofs.  Ownership therefore makes the primitive-ledger failure
+more, rather than less, consequential.
+
+\begin{proposition}[Positive composite trace terms]
+\label{prop:composite-traces}
+For real $s>2$, every modulus $n$ contributes positive within-block terms to
+the trace ledger, and every base modulus contributes a positive primitive
+cusp-diamond term.
+\end{proposition}
+
+\begin{proof}
+The word $SS$ fixes all $psi(n)$ projective states and contributes
+\[
+ \psi(n)n^{-2s}
+\]
+to $\Tr(B_s^2)$.  Likewise, $RRR$ contributes
+$\psi(n)n^{-3s}$ to $\Tr(B_s^3)$.  The diamond from
+\cref{prop:orientation-dichotomy} contributes $(216n^4)^{-s}$ at length four.
+All matrix entries are nonnegative for real $s$, so these terms cannot cancel.
+\end{proof}
+
+An ordinary determinant is therefore present, but it encodes universal
+modular cycles and composite diamonds.  The analytic gate A2 passes; the
+arithmetic primitive gate A1 remains failed.  This distinction prevents
+determinant existence from being used as evidence of prime selectivity.
+
+No claim is made beyond $\Ree s>2$.  We do not prove meromorphic continuation,
+a gamma completion, functional equation, explicit-formula correspondence, or
+critical-line control.  Those omissions are recorded as A3 and A4 failures in
+\cref{sec:route-closure}.

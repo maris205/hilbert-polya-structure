@@ -1,0 +1,58 @@
+\section{Controls, ownership, and scope}
+\label{sec:controls}
+
+The proofs above are symbolic.  A deterministic companion script protects
+the graph orientation, determinant sign, edge-count exponent, Perron
+normalization, and regime split against implementation and transcription
+errors.  Its frozen coverage is summarized in \cref{tab:controls}.
+
+\input{figures/control_table}
+
+The exact layer constructs $A_N$ and verifies
+\[
+ \det(I-zA_N)-\{D(z)-z^NC_v(z)\}=0
+\]
+as a polynomial for five matrices and $N=1,\ldots,6$.  The three
+positive-entropy examples verify $F_v(r)=1$ and both identities in
+\cref{eq:derivative}; one example is the nonsymmetric multigraph
+\[
+ A=\begin{pmatrix}1&1\\2&1\end{pmatrix},
+\]
+for which $\pi_v=1/2$.  This example detects the omission of a left
+eigenvector.  High-precision roots then compare $\Gap_N$ with $\pi_vr^N$.
+The ratios for the deliberately wrong normalizations $r^{N-1}$ and
+$r^{N+1}$ converge to $r$ and $r^{-1}$ rather than one.  Finally, six
+zero-entropy sizes compare the exact scalar root with both terms of
+\cref{eq:lambert}.  The run terminates with \texttt{ALL CHECKS PASS}.
+
+The script \texttt{code/verify\_split\_gap.py} uses SymPy for exact
+polynomials and fixes mpmath precision at 90 decimal digits for regression
+tables.  It has no random input.  The stored output and environment receipt
+are included in the internal artifact.  Numerical convergence is
+falsification evidence only: it neither proves an asymptotic theorem nor
+establishes priority.
+
+\paragraph{What is standard.}
+The image of a continuous section is a conjugate subshift, entropy minimality
+of irreducible SFTs is standard, and the first-return determinant ratio is a
+classical renewal mechanism \cite{LindMarcus2021,Gomez2010,BlockEtAl1980}.
+Perron spectral projectors likewise own the residue calculation.  The paper
+does not advertise any of these ingredients separately as a new theorem.
+
+\paragraph{What is not addressed.}
+We do not characterize which prescribed factor maps split, extend the
+construction canonically across graph presentations, or assert that $\pi_v$
+is a conjugacy invariant.  The old image return walk need not avoid $v$
+internally.  Primitivity is needed for every sufficiently large $N$, and
+irreducibility is essential in \cref{prop:rigidity}.  Broad small-gap
+existence is already available by a product construction and is not the
+headline.
+
+\paragraph{Release rule.}
+The source audit found no exact owner for the combined edgewise split
+construction, determinant/radius equation, normalized constant, and Lambert
+boundary correction.  This is negative evidence, not a novelty proof.
+An exact prior source or a specialist assessment that the package is routine
+forces publication HOLD.  Until that review occurs, this document is an
+internal mathematically closed candidate only.
+

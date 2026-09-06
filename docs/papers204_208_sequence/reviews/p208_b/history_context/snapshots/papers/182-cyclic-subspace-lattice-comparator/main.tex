@@ -1,0 +1,355 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage{booktabs,array}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,
+  citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},
+  pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\qbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{q}}
+\newcommand{\meet}{\mathbin{\cap}}
+\newcommand{\join}{\mathbin{+}}
+
+\title[Cyclic subspace-lattice comparator]{Cyclic Subspace-Lattice Comparator:\\
+A Complete Depth-Two and Fibre Atlas}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 05A30, 06C05, 15A03}
+\keywords{finite dynamical system, subspace lattice, Gaussian coefficient,
+meet and join, functional graph, predecessor fibre}
+
+\begin{document}
+
+\begin{abstract}
+For three subspaces, retain the third, replace the first two by their
+intersection and sum, and cyclically move the retained subspace to the front.
+We determine the resulting functional graph.  On every lattice the analogous
+map satisfies $T^4=T^2$; its recurrent states are exactly the triples whose
+middle coordinate lies below both outer coordinates, where $T$ swaps the
+outer coordinates.  On $\cL_d(q)^3$, the cube of the subspace lattice of
+$\F_q^d$, we give closed formulas for the image, fixed points, two-cycles, and
+all three depth populations for every prime power $q$ and every $d\ge0$.
+We also determine every predecessor fibre: a target $(C,M,J)$ is unreachable
+unless $M\subseteq J$, and otherwise its fibre is the set of ordered
+complementary pairs in $J/M$.  This yields the complete fibre histogram and
+all maximizers.  At $(q,d)=(2,4)$, for example, the $300{,}763$ states split
+into depths $9{,}265$, $157{,}272$, and $134{,}226$, with $513$ fixed points
+and $4{,}376$ strict two-cycles.  A paper-local exact audit checks $328{,}700$
+transitions.  External status remains \textsc{hold\_external}.
+\end{abstract}
+
+\maketitle
+
+\section{The rule and complete theorem package}
+
+Let $L$ be a lattice.  The cyclic comparator is the lattice polynomial
+\begin{equation}\label{eq:map}
+        T_L(a,b,c)=(c,a\wedge b,a\vee b),\qquad (a,b,c)\in L^3.
+\end{equation}
+The third register rotates to the front while the first two emit their meet
+and join.  Lattice polynomials and absorption are classical
+\cite{Birkhoff1967}.  Recent work studies different lattice operators, such
+as the meet-of-covers pop map on Tamari lattices \cite{Hong2022}; meet--join
+sorting relations also appear in Hibi-type algebras
+\cite{GasanovaNicklasson2024}.  These sources provide background, not a claim
+about the functional graph of \eqref{eq:map}.
+
+We first state the finite-field specialization.  Fix a prime power $q$ and
+let $\cL_d(q)$ be the lattice of subspaces of $V=\F_q^d$, with meet
+$A\meet B$ and join $A\join B$.  Gaussian coefficients and finite subspace
+enumeration are standard \cite{GoldmanRota1970,ChajdaLanger2019}.  Write
+\begin{align}
+ g_n&=\sum_{r=0}^n\qbinom nr,\label{eq:galois}\\
+ \alpha_d&=\sum_{b=0}^d\qbinom db g_{d-b},&
+ \rho_d&=\sum_{b=0}^d\qbinom db g_{d-b}^{2},\label{eq:alpha-rho}\\
+ Q_n&=\sum_{a=0}^n\sum_{s=0}^{n-a}
+       \qbinom na\qbinom{n-a}s q^{as},&
+ \eta_d&=\sum_{m=0}^d\qbinom dm Q_{d-m}g_{d-m},\label{eq:q-eta}\\
+ \kappa_k&=\sum_{a=0}^k\qbinom ka q^{a(k-a)}.\label{eq:kappa}
+\end{align}
+Thus $g_n$ is the number of subspaces of an $n$-space.  The other quantities
+will count intervals, recurrent triples, disjoint pairs, the depth-at-most-one
+set, and ordered complementary pairs, respectively.
+
+For a finite self-map, the depth of a state is its distance to the recurrent
+set.  A strict two-cycle means an orbit of two distinct states.
+
+\begin{theorem}[complete atlas]\label{thm:main}
+For every prime power $q$ and every $d\ge0$, let $T=T_{\cL_d(q)}$.
+Then the following statements hold.
+\begin{enumerate}[(i)]
+\item On every lattice, not merely $\cL_d(q)$,
+\begin{equation}\label{eq:square-collapse}
+ T^2(a,b,c)=(a\vee b,c\wedge a\wedge b,c\vee(a\wedge b)),
+ \qquad T^4=T^2.
+\end{equation}
+
+\item The image consists exactly of triples $(C,M,J)$ with $M\subseteq J$.
+The recurrent set consists exactly of triples $(A,B,C)$ with
+$B\subseteq A\meet C$; there $T(A,B,C)=(C,B,A)$.  Hence a recurrent state is
+fixed exactly when $A=C$, and every other recurrent orbit is a strict
+two-cycle.
+
+\item The carrier has $g_d^3$ states.  The image, fixed-point set, recurrent
+set, and strict two-cycle set have respective sizes
+\begin{equation}\label{eq:basic-counts}
+ g_d\alpha_d,\qquad \alpha_d,\qquad \rho_d,
+ \qquad \frac{\rho_d-\alpha_d}{2}.
+\end{equation}
+
+\item A state outside the recurrent set has depth one exactly when
+$A\meet B\subseteq C$, and depth two otherwise.  The depth populations are
+\begin{equation}\label{eq:depth-counts}
+           N_0=\rho_d,\qquad N_1=\eta_d-\rho_d,
+           \qquad N_2=g_d^3-\eta_d.
+\end{equation}
+For $d\ge1$, the height is exactly two.
+
+\item Every target has the target-local fibre formula
+\begin{equation}\label{eq:fibre}
+ |T^{-1}(C,M,J)|=
+ \begin{cases}
+  \kappa_{\dim(J/M)},&M\subseteq J,\\
+  0,&M\not\subseteq J.
+ \end{cases}
+\end{equation}
+
+\item For $0\le k\le d$, the number of targets with fibre $\kappa_k$ is
+\begin{equation}\label{eq:fibre-histogram}
+ g_d\sum_{m=0}^{d-k}\qbinom dm\qbinom{d-m}k;
+\end{equation}
+the remaining $g_d^3-g_d\alpha_d$ targets have empty fibre.  Moreover
+$\kappa_0<\kappa_1<\cdots<\kappa_d$.  The maximum fibre $\kappa_d$ occurs
+at exactly the $g_d$ targets $(C,0,V)$, and the minimum positive fibre one
+occurs at exactly the $g_d^2$ targets $(C,M,M)$.
+\end{enumerate}
+\end{theorem}
+
+The package separates two mechanisms:
+\begin{center}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.29\linewidth}
+                >{\raggedright\arraybackslash}p{0.61\linewidth}}
+\toprule
+input & output \\
+\midrule
+lattice absorption & $T^4=T^2$, recurrence, periods, and depth predicates \\
+finite-field modularity & all populations and every target fibre via $J/M$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Universal lattice dynamics}
+
+The temporal collapse does not depend on finiteness, distributivity, or
+modularity.
+
+\begin{lemma}\label{lem:universal}
+For every lattice $L$, \eqref{eq:square-collapse} holds.  The image of $T_L$
+is the set of $(c,m,j)$ with $m\le j$.  A point is recurrent exactly when
+$b\le a,c$; the restriction of $T_L$ to the recurrent set swaps the outer
+coordinates.
+\end{lemma}
+
+\begin{proof}
+Put $m=a\wedge b$ and $j=a\vee b$.  Direct substitution gives
+\begin{equation}\label{eq:square}
+             T^2(a,b,c)=(j,c\wedge m,c\vee m).
+\end{equation}
+If $u=c\wedge m$ and $v=c\vee m$, then $u\le m\le j$ and $u\le v$.
+Absorption therefore gives
+\[
+             T^3(a,b,c)=(v,u,j),\qquad
+             T^4(a,b,c)=(j,u,v)=T^2(a,b,c).
+\]
+Every image has its second coordinate below its third.  Conversely,
+$T(m,j,c)=(c,m,j)$ whenever $m\le j$, proving the image statement.
+
+Identity $T^4=T^2$ puts $T^2x$ on a cycle of length at most two.  Thus a
+point is recurrent precisely when $T^2(a,b,c)=(a,b,c)$.  The first equation
+says $b\le a$.  Under that condition, the remaining equations reduce to
+$b\le c$.  Finally $a\wedge b=b$ and $a\vee b=a$ on this set, so
+$T(a,b,c)=(c,b,a)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i), (ii), and the depth
+predicate in (iv)]
+Lemma~\ref{lem:universal} proves (i)--(ii).  The first image of $(A,B,C)$ is
+$(C,A\meet B,A\join B)$.  By the recurrent criterion, it is recurrent if
+and only if $A\meet B\subseteq C$, since
+$A\meet B\subseteq A\join B$ is automatic.  A nonrecurrent source satisfying
+this inclusion has depth one; if the inclusion fails, its first image is not
+recurrent and its second image is recurrent by $T^4=T^2$, giving depth two.
+When $d\ge1$, take $A=B$ to be a line and $C=0$ to realize depth two.
+\end{proof}
+
+\section{Subspace counts and the functional graph}
+
+The universal predicates reduce every population to a finite-geometry count.
+We include the reductions to make clear which uses of Gaussian coefficients
+are needed.
+
+\begin{lemma}[disjoint-pair count]\label{lem:disjoint}
+The number of ordered pairs $(X,Y)$ of subspaces of an $n$-space satisfying
+$X\meet Y=0$ is $Q_n$ from \eqref{eq:q-eta}.
+\end{lemma}
+
+\begin{proof}
+Fix $a=\dim X$ and $s=\dim Y$.  There are $\qbinom na$ choices for $X$.
+Projection to $V/X$ embeds $Y$ as an $s$-subspace, with
+$\qbinom{n-a}s$ possible images.  Above a fixed image, the subspaces $Y$ are
+the graphs of the $q^{as}$ linear maps to $X$.  Sum over $a$ and $s$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iii)--(iv)]
+Choose a middle subspace $B$ of dimension $b$.  Its superspaces correspond to
+arbitrary subspaces of $V/B$, so there are $g_{d-b}$ of them.  A fixed state
+is $(A,B,A)$ with $B\subseteq A$, giving $\alpha_d$.  Recurrent states allow
+two independent superspaces $A,C$, giving $\rho_d$.  Lemma
+\ref{lem:universal} pairs all recurrent nonfixed states, proving the
+two-cycle count.  The image has an arbitrary first coordinate and an interval
+$M\subseteq J$, so its size is $g_d\alpha_d$.
+
+It remains to count triples with $A\meet B\subseteq C$.  Fix
+$M=A\meet B$ of dimension $m$.  In $V/M$, the images of $A$ and $B$ are an
+ordered disjoint pair, counted by $Q_{d-m}$, while $C/M$ is an arbitrary
+subspace, counted by $g_{d-m}$.  Choosing $M$ and summing gives $\eta_d$.
+The depth predicate already proved now yields \eqref{eq:depth-counts}.
+\end{proof}
+
+\section{Every-target fibres and their extrema}
+
+The fibre theorem is local: its input is the interval carried by the target,
+not a global rank statistic.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(v)--(vi)]
+A predecessor of $(C,M,J)$ has forced third coordinate $C$ and first two
+coordinates satisfying
+\begin{equation}\label{eq:meet-join-fibre}
+                 A\meet B=M,\qquad A\join B=J.
+\end{equation}
+These equations have no solution unless $M\subseteq J$.  If the inclusion
+holds and $k=\dim(J/M)$, quotienting \eqref{eq:meet-join-fibre} by $M$
+identifies its solutions with ordered decompositions
+\[
+                 J/M=(A/M)\oplus(B/M).
+\]
+After choosing $A/M$ of dimension $a$, it has $q^{a(k-a)}$ complements
+\cite{ChajdaLanger2019}.  Summing over $a$ proves \eqref{eq:fibre}.
+
+An interval $M\subseteq J$ with $\dim(J/M)=k$ is obtained by choosing
+$m=\dim M$, then $M$, then a $k$-subspace of $V/M$.  Multiplication by the
+$g_d$ choices of $C$ gives \eqref{eq:fibre-histogram}; summing over $k$
+recovers $g_d\alpha_d$ nonempty fibres.
+
+To compare the fibre values, write a $(k+1)$-space as $H\oplus\ell$ with
+$\dim H=k$.  The injection
+\[
+        (X,Y)\longmapsto (X,Y\oplus\ell)
+\]
+sends ordered decompositions of $H$ to ordered decompositions of
+$H\oplus\ell$ and misses $(\ell,H)$.  Hence
+$\kappa_k<\kappa_{k+1}$.  The maximum therefore requires
+$\dim(J/M)=d$, equivalently $(M,J)=(0,V)$, and $C$ remains arbitrary.  The
+minimum positive value is $\kappa_0=1$, attained exactly when $M=J$.
+\end{proof}
+
+\begin{remark}[zero-dimensional boundary]
+For $d=0$, the carrier is the unique fixed triple, and all formulas give one
+state, one image point, and a unit fibre.  The strict height-two statement is
+therefore correctly restricted to $d\ge1$.
+\end{remark}
+
+\section{Exact audit, subtraction, and limitations}
+
+The paper-local verifier enumerates canonical reduced row-echelon bases,
+builds every transition, decomposes the functional graph, and checks every
+target fibre.  It covers $15$ prime-field boxes:
+\[
+ (q,d)\in\{2\}\!\times\!\{0,\ldots,4\}
+ \cup\{3\}\!\times\!\{0,\ldots,3\}
+ \cup\{5,7\}\!\times\!\{0,1,2\}.
+\]
+The run checks $328{,}700$ transitions with $1{,}667{,}850$ explicit
+assertions and a frozen transition digest.  For orientation, selected boxes
+are shown below.
+\begin{center}
+\small
+\begin{tabular}{rrrrrr}
+\toprule
+$(q,d)$ & states & image & fixed & strict $2$-cycles & depth $2$ \\
+\midrule
+$(2,4)$ & $300{,}763$ & $34{,}371$ & $513$ & $4{,}376$ & $134{,}226$ \\
+$(3,3)$ & $21{,}952$ & $3{,}724$ & $133$ & $586$ & $7{,}619$ \\
+$(5,2)$ & $512$ & $168$ & $21$ & $34$ & $115$ \\
+$(7,2)$ & $1{,}000$ & $270$ & $27$ & $53$ & $201$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The exact audit is a falsifier, not the proof above and not ownership evidence.
+
+We assign no contribution credit to lattice absorption, Gaussian
+coefficients, standard counts of subspace complements, Hibi meet--join sorting,
+pop-operator dynamics, or generic finite-map bookkeeping.  Internally, the
+rule was also screened against monotone join/gcd folds, subspace-product
+closures, polarity maps, and fixed-linear/Jordan dynamics.  Those engines do
+not transfer the conjunction of a universal cyclic-register identity and the
+target-local ordered-complement atlas.
+
+Two limitations remain.  First, the explicit census uses the homogeneous
+geometry of a finite subspace lattice; an arbitrary finite lattice retains
+the temporal theorem but not these Gaussian formulas.  Second, a bounded
+primary-source search found no exact owner for the full conjunction, but a
+non-hit is not a novelty or priority result.  The owner gate is
+\textsc{owner\_amber}, and external circulation remains
+\textsc{hold\_external} pending deeper database search and independent proof
+review.
+
+\section*{Data availability}
+No external data are used.  The standard-library verifier and canonical
+stdout are included with the paper source.
+
+\section*{Ethics statement}
+This theoretical study uses no human participants, animals, personal data,
+or deployed decision system.
+
+\section*{CRediT author statement}
+Anonymous author(s): Conceptualization, Formal analysis, Methodology,
+Software, Validation, Visualization, and Writing---original draft.
+
+\section*{Competing interests}
+The author(s) declare no competing interests.
+
+\section*{Funding}
+No external funding is declared for this work.
+
+\section*{AI-use statement}
+Generative-AI tools assisted with exploratory algebra, code drafting, and
+language editing.  The author(s) remain responsible for every definition,
+proof, citation, computation, and disclosure.  No AI output is treated as
+owner or novelty evidence.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

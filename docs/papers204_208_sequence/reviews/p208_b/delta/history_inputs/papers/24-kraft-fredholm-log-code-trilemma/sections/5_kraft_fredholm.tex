@@ -1,0 +1,72 @@
+\section{Finite coding forces the Fredholm failure}
+
+\begin{lemma}[finite-code counting]\label{lem:counting}
+There exist infinitely many primes $p$ such that
+\[
+  \ell(p)\ge \frac{\log p}{4\log b}.
+\]
+\end{lemma}
+
+\begin{proof}
+The number of nonempty words of length at most $L$ is less than
+$b^{L+1}/(b-1)$, and the number of cyclic words is no larger.  If $p_N$ is
+the $N$th prime and $M_N=\max_{k\le N}\ell(p_k)$, visible separation gives
+\[
+  N<\frac{b^{M_N+1}}{b-1}.
+\]
+For sufficiently large $N$, the elementary estimate $p_N\le N^2$ holds.
+Passing to record indices of $M_N$ and absorbing the fixed additive
+constant yields the stated subsequence bound.
+\end{proof}
+
+Under unique decipherability, Kraft--McMillan gives the sharper familiar
+constraint
+\[
+  \sum_p b^{-\ell(p)}\le1.
+\]
+The divergence of $\sum_p1/p$ again forces logarithmic length on a
+subsequence.  We keep the elementary counting lemma because it needs only
+cyclic separation.
+
+\begin{theorem}[whole-adjacency noncompactness]\label{thm:noncompact}
+For every $\sigma>0$ for which $L_\sigma$ is bounded, it is noncompact and
+hence belongs to no finite Schatten class.
+\end{theorem}
+
+\begin{proof}
+Choose distinct primes $p_j$ from \cref{lem:counting}.  The average roof on
+$\gamma_{p_j}$ is at most $4\log b$, so some edge
+$e_j:u_j\to v_j$ satisfies $\tau(e_j)\le4\log b$.  By
+\cref{lem:separate}, the sources $u_j$ are distinct.  The standard basis
+vectors $e_{u_j}$ are weakly null, while positivity gives
+\[
+  \|L_\sigma e_{u_j}\|_2
+    \ge e^{-\sigma\tau(e_j)}
+    \ge b^{-4\sigma}.
+\]
+A compact operator maps bounded weakly null sequences to norm-null
+sequences.  The contradiction proves noncompactness; every
+$\Schatten_q$ operator is compact \citep{simon2005}.
+\end{proof}
+
+\begin{corollary}[finite clock rank]\label{cor:roofrank}
+No finite roof inventory can produce all values $\log p$.
+\end{corollary}
+
+\begin{proof}
+Period sums of finitely many roof values lie in their finite-dimensional
+$\mathbb Q$-span.  The numbers $\{\log p:p\in\Pset\}$ are
+$\mathbb Q$-linearly independent: clearing denominators in a relation and
+exponentiating gives a multiplicative relation among distinct primes.
+\end{proof}
+
+\Cref{thm:trilemma} now follows from
+\cref{lem:separate,lem:counting,thm:noncompact}.  The exact private-cycle
+blocks make the mechanism transparent: their singular values are precisely
+$e^{-\sigma\tau(e)}$, and
+\[
+  \|L_{p,\sigma}\|_1
+   \ge \ell(p)p^{-\sigma/\ell(p)}.
+\]
+No redistribution of a fixed positive total roof repairs the weak-null
+witness.

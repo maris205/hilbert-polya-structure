@@ -1,0 +1,101 @@
+\section{The size-preserving map and its stronger closure}\label{sec:k}
+
+For \(a\ge2\), abbreviate
+\(D_a(R)=\iota(G(R),\LC_{a-1})\).
+The protected-cell product gives
+\begin{equation}\label{eq:comb-action}
+ F((\LC_a,R))=(e,D_a(R)),\qquad
+ G((\LC_a,R))=(c,D_a(R)).
+\end{equation}
+Indeed the left-spine list is \(e^{a-1}R\).
+At \(a=2\) its product is \(F((e,R))=G(R)\);
+at \(a>2\) the preceding all-leaf product is \(\LC_{a-1}\), so the
+final gluing gives \(D_a(R)\). This includes \(R=e\).
+In particular \(G((c,R))=(c,G(R))\).
+
+If \(B\ne e\), write \(G(B)=(\LC_l,Q)\), where \(l\ge2\).
+Define
+\begin{equation}\label{eq:k-definition}
+ K(e)=e,\qquad K(B)=D_l(Q).
+ \quad\text{Then}\quad G^2(B)=(c,K(B))\quad\text{for every }B.
+\end{equation}
+The last equality follows from \eqref{eq:comb-action}; for \(B=e\),
+it reads \(G^2(e)=G(c)=\LC_3=(c,e)\).
+Since \(G\) adds one leaf twice and \(c\) has two leaves, \(K\)
+preserves leaf count.
+
+\begin{lemma}[Intertwining and closure]\label{lem:k}
+The identities
+\begin{equation}\label{eq:intertwine}
+ KG=GK,\qquad K((c,R))=(c,K(R))
+\end{equation}
+hold. Define
+\[
+ \CC_N=\{(\LC_a,R):a\ge2,\ a+|R|=N\}\quad(N\ge3),
+ \qquad \CC_1=\{e\},\quad\CC_2=\{c\}.
+\]
+For every \(N\ge3\), \(K(\Trees_N)\subseteq\CC_N\), where \(\Trees_N\)
+is the full set of \(N\)-leaf trees. Moreover,
+\begin{equation}\label{eq:strong-closure}
+ K(\CC_N)\subseteq\{(c,S):S\in\CC_{N-2}\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Compute \(G^3(B)\) as \(G(G^2(B))\) and as \(G^2(G(B))\).
+Using \(G((c,S))=(c,G(S))\), their equality becomes
+\((c,G(K(B)))=(c,K(G(B)))\). Cancellation proves commutation.
+Applying the same displayed identity twice to \(G^2((c,R))\)
+and using \eqref{eq:k-definition} gives
+\[
+ (c,K((c,R)))=G^2((c,R))=(c,G^2(R))=(c,(c,K(R))),
+\]
+which proves the second identity.
+
+For the first inclusion, use \(K(B)=D_l(Q)\).
+If \(Q\ne e\), the root left comb of \(G(Q)\) has at least two leaves;
+substitution of \(\LC_{l-1}\) cannot shorten it. If \(Q=e\), the result
+is \(\LC_l\); size preservation and \(N\ge3\) force \(l=N\ge3\).
+Thus \(K(B)\in\CC_N\).
+
+For the stronger inclusion, take \(T=(\LC_a,R)\in\CC_N\).
+Equation~\eqref{eq:comb-action} followed by
+\eqref{eq:k-definition} gives
+\(K(T)=G(D_a(R))\).
+When \(N\ge4\), \(D_a(R)\in\CC_{N-1}\).
+For \(R=e\) it is \(\LC_a\), with \(a=N-1\ge3\);
+for \(R\ne e\), substitution lengthens an already nonleaf root left comb.
+Write \(D_a(R)=(\LC_s,Q)\), \(s\ge2\). Then
+\(K(T)=(c,D_s(Q))\). If \(N-2\ge3\), the same two cases apply to
+\(D_s(Q)\): a nonleaf \(Q\) provides a nonleaf root left comb, while
+\(Q=e\) gives \(\LC_s\) with \(s=N-2\ge3\).
+Thus its right child belongs to \(\CC_{N-2}\).
+At \(N=4\), that child has two leaves and must be \(c\).
+At \(N=3\), the only member of \(\CC_3\) is \(\LC_3\), and direct
+substitution gives \(K(\LC_3)=\LC_3=(c,e)\).
+These are precisely the two boundary cases of \eqref{eq:strong-closure}.
+\end{proof}
+
+\begin{proposition}[The \(K\) clock]\label{prop:k-clock}
+Each \(Z_N\) is the unique recurrent state of \(K\) at its size.
+For \(N\ge3\), entrance to \(Z_N\) takes at most
+\[
+ d_C(N)=\left\lfloor\frac{N-2}{2}\right\rfloor
+ \quad\text{from }\CC_N,\qquad
+ d_{\mathrm{all}}(N)=\left\lfloor\frac N2\right\rfloor
+ \quad\text{from }\Trees_N.
+\]
+The one- and two-leaf auxiliary classes are already fixed.
+\end{proposition}
+
+\begin{proof}
+The bases \(e,c\) are \(K\)-fixed, and \eqref{eq:intertwine} fixes all
+\(Z_N\). In \eqref{eq:strong-closure}, one application of \(K\) fixes the
+initial cherry; subsequent applications act by \(K\) on its right child.
+At \(N=3\), \(\CC_3=\{Z_3\}\); at \(N=4\), one step reaches \(Z_4\).
+For \(N\ge5\), induction gives
+\(1+\lfloor(N-4)/2\rfloor=\lfloor(N-2)/2\rfloor\).
+An arbitrary tree reaches \(\CC_N\) in one step, adding one to this
+bound. Every orbit therefore reaches \(Z_N\), excluding any other
+periodic state.
+\end{proof}

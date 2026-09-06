@@ -1,0 +1,176 @@
+\section{Complete labeled cyclic closure}
+\label{sec:cycles}
+
+Fix a length $r\ge1$ and an ordered tuple of dyadic labels
+$q_i=2^{a_i}\ge2$.  We seek positive integers
+$n_1,\ldots,n_r$, with $n_{r+1}=n_1$, satisfying
+\begin{equation}
+  n_i+n_{i+1}=q_i,\qquad 1\le i\le r.
+  \label{eq:cycle-system}
+\end{equation}
+The length range here includes $r=1$ because the graph retains loops.  By
+contrast, traces in the Hilbert--Schmidt-only domain use $r\ge2$.
+
+Iterating $n_{i+1}=q_i-n_i$ gives, for $2\le i\le r+1$,
+\begin{equation}
+  n_i=(-1)^{i-1}n_1+
+      \sum_{j=1}^{i-1}(-1)^{i-1-j}q_j.
+  \label{eq:cycle-recurrence}
+\end{equation}
+Closing at $i=r+1$ yields the single equation
+\begin{equation}
+  (1-(-1)^r)n_1
+  =\sum_{j=1}^r(-1)^{r-j}q_j.
+  \label{eq:cycle-closing}
+\end{equation}
+
+\begin{theorem}[Odd/even labeled cycle solver]
+\label{thm:cycle-solver}
+For the ordered system \cref{eq:cycle-system}:
+\begin{enumerate}
+  \item If $r$ is odd, there is one algebraic candidate,
+  \begin{equation}
+    n_1=\frac12(q_1-q_2+q_3-\cdots+q_r).
+    \label{eq:odd-candidate}
+  \end{equation}
+  It is a positive solution exactly when every vertex obtained from
+  \cref{eq:cycle-recurrence} is positive.
+  \item If $r$ is even, a solution exists only if
+  \begin{equation}
+    q_1-q_2+q_3-\cdots-q_r=0.
+    \label{eq:even-compatibility}
+  \end{equation}
+  Under this condition, set
+  \begin{equation}
+    b_1=0,\qquad
+    b_i=\sum_{j=1}^{i-1}(-1)^{i-1-j}q_j\quad(2\le i\le r),
+    \label{eq:bi-definition}
+  \end{equation}
+  and
+  \begin{equation}
+    L(q)=\max_{\substack{1\le i\le r\\i\ {\rm odd}}}(-b_i),
+    \qquad
+    U(q)=\min_{\substack{1\le i\le r\\i\ {\rm even}}}b_i.
+    \label{eq:LU-definition}
+  \end{equation}
+  The positive solutions are exactly
+  \begin{equation}
+    n_1=x\in\Z\cap(L(q),U(q)),\qquad
+    n_i=(-1)^{i-1}x+b_i.
+    \label{eq:even-solutions}
+  \end{equation}
+  Thus their number is $\max\{0,U(q)-L(q)-1\}$.
+\end{enumerate}
+In the odd block $A_s$, retain precisely those solutions for which $n_1$
+is odd.
+\end{theorem}
+
+\begin{proof}
+\Cref{eq:cycle-recurrence,eq:cycle-closing} follow by induction.  If $r$ is
+odd, the coefficient on the left of \cref{eq:cycle-closing} is $2$, which
+gives \cref{eq:odd-candidate}; it is integral because every $q_i$ is even.
+The recurrence fixes every remaining vertex, so positivity is the only
+condition left.
+
+If $r$ is even, the left side of \cref{eq:cycle-closing} vanishes, and its
+right side vanishes exactly under \cref{eq:even-compatibility}.  Write
+$x=n_1$.  Formula \cref{eq:cycle-recurrence} becomes
+$n_i=(-1)^{i-1}x+b_i$.  For odd $i$, positivity says $x>-b_i$; for even
+$i$, it says $x<b_i$.  Their intersection is exactly
+$\Z\cap(L(q),U(q))$.  The endpoints are integers, giving the stated count.
+Finally, subtracting a vertex from the even integer $q_i$ preserves parity
+along every edge.  Hence all vertices are odd exactly when $n_1$ is odd.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.88\textwidth}{!}{\input{figures/fig3_cycle_solver.tex}}
+  \caption{For fixed ordered dyadic labels, odd length fixes one candidate
+  vertex word, whereas even length first imposes the alternating
+  compatibility condition and then leaves an integer positivity interval.
+  The displayed examples classify based vertex solutions, not primitive
+  orbits modulo rotation.}
+  \label{fig:cycle-solver-main}
+\end{figure}
+
+The frozen examples illustrate all branches.  Labels $(2,4,4)$ give the
+unique odd-length solution $(1,1,3)$.  Labels $(4,8,8,4)$ satisfy
+\cref{eq:even-compatibility}; here
+\[
+  (n_1,n_2,n_3,n_4)=(x,4-x,4+x,4-x),
+\]
+so positivity gives $x\in\{1,2,3\}$, with $x=1,3$ in the odd block.  Labels
+$(4,4,8,4)$ have nonzero alternating sum and no solution.
+
+The passage from matrices to an absolutely convergent infinite walk sum uses
+the following ideal estimate.
+
+\begin{lemma}[Powers of finite compressions]
+\label{lem:compression-powers}
+Let $T\in\Schatten{2}$, let $P_N$ be the coordinate projection onto the
+first $N$ basis vectors, and set $T_N=P_NTP_N$.  Then
+$\norm{T_N-T}_2\to0$ and, for every integer $r\ge2$,
+\begin{equation}
+  \norm{T_N^r-T^r}_1\longrightarrow0.
+  \label{eq:compression-power-convergence}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The Hilbert--Schmidt convergence follows first for finite-rank operators and
+then for $T$ by finite-rank density, because left and right multiplication by
+an orthogonal projection are contractions in $\Schatten{2}$.  Put
+$\delta_N=\norm{T_N-T}_2$.  Schatten H\"older gives the explicit square
+estimate
+\begin{equation}
+  \norm{T_N^2-T^2}_1
+  \le \delta_N(\norm{T_N}_2+\norm{T}_2)
+  \longrightarrow0.
+  \label{eq:compression-square-estimate}
+\end{equation}
+For $r>2$, the exact identity
+\[
+  T_N^r-T^r
+  =(T_N^2-T^2)T_N^{r-2}
+   +T^2(T_N^{r-2}-T^{r-2})
+\]
+and the ideal inequality yield
+\[
+  \norm{T_N^r-T^r}_1
+  \le \norm{T_N^2-T^2}_1\norm{T_N}^{r-2}
+   +\norm{T^2}_1\norm{T_N^{r-2}-T^{r-2}}.
+\]
+Here $\norm{T_N}\le\norm{T}$ and $\norm{T_N-T}\le\delta_N$; the usual
+telescoping formula for bounded powers therefore makes the last factor tend
+to zero.  This proves \cref{eq:compression-power-convergence}.
+\end{proof}
+
+When $\sigma>1/2$ and $r\ge2$, the trace admits a closed-walk
+interpretation.  The product of edge weights around a based closed walk is
+\begin{equation}
+  \prod_{i=1}^r h_s(n_i,n_{i+1})
+  =\prod_{i=1}^r n_i^{-s}.
+  \label{eq:walk-weight}
+\end{equation}
+Indeed, apply \cref{lem:compression-powers} first to $H_\sigma$.  For every
+$N$, expansion of the finite matrix trace gives
+\[
+  \Tr\!\left((P_NH_\sigma P_N)^r\right)
+  =\sum_{1\le n_1,\ldots,n_r\le N}
+    \prod_{i=1}^r h_\sigma(n_i,n_{i+1}),
+  \qquad n_{r+1}=n_1.
+\]
+Every summand is nonnegative.  These finite sums increase with $N$ and,
+by \cref{eq:compression-power-convergence}, converge to the finite value
+$\Tr(H_\sigma^r)$.  Moreover,
+\[
+  \left|\prod_{i=1}^r h_s(n_i,n_{i+1})\right|
+  =\prod_{i=1}^r h_\sigma(n_i,n_{i+1}),
+\]
+so the complex closed-walk series is absolutely convergent by comparison.
+A second application of the lemma to $H_s$ identifies its sum with
+$\Tr(H_s^r)$.  Consequently the solver is a matrix-independent trace
+evaluator: enumerate an ordered label tuple, solve it using
+\cref{thm:cycle-solver}, and add \cref{eq:walk-weight} for the accepted based
+vertex words.  Primitive-period reduction and quotienting by cyclic base
+point are separate operations, as detailed in \cref{app:cycles}.

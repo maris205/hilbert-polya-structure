@@ -1,0 +1,391 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathcal R}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Fix}{\operatorname{Fix}}
+
+\title[Cyclic Euclidean-quotient queues]{Cyclic Euclidean-Quotient Queues:\\
+Terminal Cores, Depth Layers, and Small Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P25, 11A55, 05A17, 05A15}
+\keywords{finite continued fraction, subtractive Euclidean algorithm,
+finite dynamical system, composition, necklace, fibre}
+
+\begin{document}
+
+\begin{abstract}
+Fix the sum $N$ of the canonical continued-fraction digits of a rational in
+$(0,1)$.  We move its first Euclidean quotient to the back of the queue and,
+when necessary, apply the terminal-one identity that restores the unique
+finite expansion.  The entrance time is exactly the position of the last
+quotient equal to one, with sharp maximum $N-2$.  We give a cyclic
+run-absorption decoder for the terminal core and identify the eventual
+period with its primitive rotation period.  Formal generating functions
+enumerate every exact-depth layer.  Two explicit inverse branches give every
+one-step fibre, the image, and all Garden states; fibres have size at most
+two.  A second derivation uses the alternating run blocks of the subtractive
+Euclidean path.  Restricted compositions, Stern--Brocot coding, continuants,
+and necklace enumeration are treated as background.  The owner search is
+bounded; no novelty, priority, or external-release claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{An honest rational level and the queue map}
+
+Every rational $q\in(0,1)$ has a unique canonical finite regular continued
+fraction
+\[
+ q=[0;a_1,\ldots,a_k],\qquad a_i\ge1,\quad a_k\ge2.
+\]
+For $N\ge2$, define
+\[
+ \R_N=\{q\in\mathbb Q:0<q<1,\ \textstyle\sum_i a_i=N\}.
+\]
+The levels $N=0,1$ are empty.  Subtracting one from the final digit identifies
+the digit words in $\R_N$ with the positive compositions of $N-1$, so
+\begin{equation}
+                         |\R_N|=2^{N-2}.                \label{eq:size}
+\end{equation}
+
+To fix the Euclidean convention, write $q=u/v$ in lowest terms.  Repeatedly
+subtract the smaller positive coordinate from the larger, recording $L$ for
+$v\leftarrow v-u$ and $R$ for $u\leftarrow u-v$.  At equality, repeat the
+preceding letter: if it was $L$, record $L$ and perform
+$v\leftarrow v-u=0$; if it was $R$, record $R$ and perform
+$u\leftarrow u-v=0$.  A preceding letter always exists because initially
+$0<u<v$.  The run word is
+\begin{equation}
+ E(q)=L^{a_1}R^{a_2}L^{a_3}\cdots,                     \label{eq:path}
+\end{equation}
+with alternating letters, and its length is $N$.  This follows by grouping
+successive subtractions between exchanges of the smaller coordinate; the
+last equality step belongs to the final quotient, explaining $a_k\ge2$.
+Thus $N$ is the step count for this explicitly stated subtractive algorithm.
+Euclidean cost statistics are established territory
+\cite{MinelliSourmelidisTechnau2023}, and the Stern--Brocot/run-word relation
+is classical \cite{Reutenauer2019}; both receive zero contribution credit.
+
+On digit words put
+\begin{equation}
+ \Phi(a_1,\ldots,a_k)=
+ \begin{cases}
+ (a_1),&k=1,\\
+ (a_2,\ldots,a_k,a_1),&k>1,\ a_1>1,\\
+ (a_2,\ldots,a_{k-1},a_k+1),&k>1,\ a_1=1.
+ \end{cases}                                           \label{eq:update}
+\end{equation}
+The final branch is rotation followed by the canonical identity
+$[\ldots,b,1]=[\ldots,b+1]$.  It is part of the definition, not an optional
+postprocessing step.  Digit sum and the terminal condition are preserved, so
+$\Phi$ is a self-map of every $\R_N$.
+
+Finite words, continuants, prefixes, endings, and cyclic permutations are
+well-developed interfaces \cite{Kan2026,Jones2026}.  Cyclic and
+restricted-part compositions likewise have direct enumerative owners
+\cite{GibsonJustWang2018,Hadjicostas2016}.  All uniqueness, continuant,
+composition, regular-language, Burnside, and divisor-counting machinery is
+zero credit.  Internally, P117 already owns cyclic run reduction and recurrent
+classification language, while P122 owns the sharp-linear-clock plus
+target-fibre/image/Garden presentation silhouette; both receive zero credit.
+P126 is the hard collision: after $a_k\mapsto a_k-1$, the carrier is literally
+the compositions of $N-1$.  It already has depth layers, pointwise fibres,
+and image enumeration for synchronous balanced refinement, with logarithmic
+absorption, an all-iterate kernel, and one attractor.  Here a one-place
+Euclidean-path queue has linear marker depth, fibres at most two, and many
+cycles.  Thus levelwise nonconjugacy holds for $N\ge4$ (the $N=2,3$ graphs
+are isomorphic), proving graded-family separation but no priority.  Generic
+composition dynamics receive no credit.  The residual is the exact temporal
+conjunction for \eqref{eq:update}, including the raw $L/R$-path engine below.
+
+A state is \emph{recurrent} if it lies on a directed cycle of this finite
+map.  Its depth is
+\[
+ \depth(w)=\min\{t\ge0:\Phi^t(w)\text{ is recurrent}\}.
+\]
+
+\section{The marker clock and terminal core}
+
+For a digit word $w=(a_1,\ldots,a_k)$, set
+\[
+ \delta(w)=\max\{i:a_i=1\},
+\]
+with $\delta(w)=0$ when no digit equals one.  View the indices cyclically.
+For every maximal run of ones, add its length to the non-one digit immediately
+preceding it and delete the run.  If $j$ is the last original position equal
+to one, mark the gap between $a_j$ and the first original non-one following
+it cyclically.  (Such a non-one exists because $a_k\ge2$.)  Transport this
+gap through the contractions and cut so that this surviving non-one is first;
+call the ordered word $\kappa(w)$.  If there was no one, put
+$\kappa(w)=w$.
+
+\begin{theorem}[terminal-core theorem]\label{thm:core}
+For every $w\in\R_N$,
+\begin{equation}
+ \depth(w)=\delta(w),\qquad
+ \Phi^{\delta(w)}(w)=\kappa(w).                         \label{eq:core}
+\end{equation}
+The recurrent set is exactly the words whose digits are all at least two.
+On it $\Phi$ is left rotation.  Hence the eventual period of $w$ is the
+primitive rotation period of $\kappa(w)$.  The maximum depth on $\R_N$ is
+$N-2$, attained by $(1^{N-2},2)$.
+\end{theorem}
+
+\begin{proof}
+If the leading digit exceeds one, \eqref{eq:update} moves it behind every
+one; if it equals one, the update deletes it and increments the current last
+digit, which is at least two.  No step creates a one.  Therefore the largest
+index occupied by a one decreases by exactly one at each step until it
+vanishes, proving the first formula.
+
+Track a maximal cyclic run of $s$ ones.  When its leading member reaches the
+front, deletion contributes one to the digit preceding that run in cyclic
+order; repeating this $s$ times adds $s$ there.  Runs do not interfere because
+no new one is created.  After the last original one is deleted, the next
+original non-one digit is at the front, which is exactly the prescribed cut.
+This proves \eqref{eq:core}.  A word with no one is merely rotated, so it is
+recurrent and has the stated primitive period; every other word has positive
+depth.  Finally, a word of weight $N$ ending at least two has at most $N-2$
+digits before its end, and the displayed witness realizes that bound.
+\end{proof}
+
+For example,
+\[
+ (2,1,3)\longmapsto(1,3,2)\longmapsto(3,3).
+\]
+The marked gap follows the original one, so the surviving original $3$ is
+first in the core; the preceding $2$ has absorbed that one and becomes the
+second $3$.
+
+\subsection{Independent raw Euclidean-path route}
+
+Let $\mathcal E_N$ be the strings in $\{L,R\}^N$ that begin with $L$ and
+whose terminal constant block has length at least two.  The map $E$ in
+\eqref{eq:path} is a bijection $\R_N\to\mathcal E_N$: its inverse takes the
+successive run lengths as canonical quotients.
+
+We now define a self-map $\Psi$ on the \emph{strings}, before taking any run
+lengths.  Exchange $L$ and $R$ symbolwise with an overline.  A string with
+more than one block has a unique factorisation $W=L^aY$, where $Y$ begins
+with $R$.  Put $\epsilon=\operatorname{last}(\overline Y)$ and let
+$\overline\epsilon$ be the opposite letter.  Define
+\begin{equation}
+ \Psi(W)=
+ \begin{cases}
+ W,&Y=\varnothing,\\
+ \overline Y\,\epsilon,&a=1,\\
+ \overline Y\,\overline\epsilon^{\,a},&a>1.
+ \end{cases}                                           \label{eq:path-map}
+\end{equation}
+The second branch extends the final block by one symbol; the third appends a
+new block of length $a$.  Thus every output again begins with $L$ and has a
+terminal block of length at least two.
+
+\begin{proposition}[raw-path conjugacy and inverse]\label{prop:path}
+For every $q\in\R_N$,
+\begin{equation}
+                         E(\Phi(q))=\Psi(E(q)).         \label{eq:conjugacy}
+\end{equation}
+In path language alone, the last singleton-block index is the depth, cyclic
+runs of singleton blocks contract into their preceding nonsingleton block,
+and every target path has exactly the two inverse alternatives described
+below when their stated conditions hold.
+\end{proposition}
+
+\begin{proof}
+Suppose the successive blocks of $W$ have lengths
+$(a_1,\ldots,a_k)$.  If $k=1$, both maps fix the state.  Otherwise
+$a=a_1$, and symbolwise complementation makes $Y$ a normalized string with
+block lengths $(a_2,\ldots,a_k)$.  When $a>1$, the last branch of
+\eqref{eq:path-map} appends a distinct block of length $a$, giving
+$(a_2,\ldots,a_k,a_1)$.  When $a=1$, it repeats the current final symbol,
+giving $(a_2,\ldots,a_{k-1},a_k+1)$.  These are exactly the three branches
+of \eqref{eq:update}, proving \eqref{eq:conjugacy} for every size without
+compressing the output string first.
+
+Now mark the maximal constant blocks of length one directly in $W$.  A
+nonsingleton first block is transported to the end, whereas a singleton first
+block is deleted and contributes one symbol to the last block.  Hence the
+last marked-block index decreases by exactly one, and no new singleton is
+created.  Successive deletions absorb every cyclic run of marked singletons
+into its preceding nonsingleton block; after the last deletion, the marked
+gap specifies the first surviving block.  This proves the path versions of
+the clock and core independently of the digit recurrence.
+
+Finally let $V$ be a target path and let $Z$ be its terminal block.  If $V$
+has one block, its rotation predecessor is $V$ itself.  Otherwise write
+$V=UZ$.  A rotation predecessor exists exactly when the terminal block of
+$U$ has length at least two, and it is
+\begin{equation}
+                         L^{|Z|}\overline U.            \label{eq:path-rho}
+\end{equation}
+The other possibility exists exactly when $|Z|\ge3$: delete the final symbol
+of $V$ to obtain $V^-$ and take
+\begin{equation}
+                         L\,\overline{V^-}.             \label{eq:path-eta}
+\end{equation}
+Direct substitution in \eqref{eq:path-map} returns $V$ in both cases.
+Conversely, its $a>1$ and $a=1$ branches force
+\eqref{eq:path-rho} and \eqref{eq:path-eta}, respectively, so there is no
+third source.  The alternatives have different block counts and cannot
+collide.  This is a path-string proof of the complete predecessor split.
+\end{proof}
+
+\section{Every exact-depth layer}
+
+Let $D_t(x)$ be the formal ordinary generating function in digit sum for
+states of exact depth $t$.  A recurrent word is a nonempty sequence of parts
+at least two.  If $t\ge1$, its first $t-1$ parts are arbitrary positive
+parts, part $t$ equals one, and its nonempty suffix has all parts at least two.
+Consequently
+\begin{equation}
+ D_0(x)=\frac{x^2}{1-x-x^2},\qquad
+ D_t(x)=\frac{x^{t+2}}{(1-x)^{t-1}(1-x-x^2)}\quad(t\ge1). \label{eq:layers}
+\end{equation}
+With $F_0=0,F_1=1$, this says
+\[
+ [x^N]D_0=F_{N-1},\qquad [x^N]D_1=F_{N-2},
+\]
+and, for $t\ge2$ and $M=N-t-2\ge0$,
+\begin{equation}
+ [x^N]D_t=\sum_{j=0}^{M}
+ \binom{j+t-2}{t-2}F_{M-j+1};                          \label{eq:coeff}
+\end{equation}
+the coefficient is zero when $N<t+2$.  As a boundary check,
+\begin{equation}
+ \sum_{t\ge0}D_t(x)=\frac{x^2}{1-2x},                 \label{eq:layer-sum}
+\end{equation}
+whose weight-$N$ coefficient is \eqref{eq:size}.
+
+\begin{proof}
+The atomic series for a positive part is $x/(1-x)$ and for a part at least
+two is $x^2/(1-x)$.  The two sequence decompositions above give
+\eqref{eq:layers}.  Expanding
+$(1-x)^{-(t-1)}$ and
+$(1-x-x^2)^{-1}=\sum_{m\ge0}F_{m+1}x^m$ gives
+\eqref{eq:coeff}.  Summing the geometric series over $t$ yields
+\eqref{eq:layer-sum}.
+\end{proof}
+
+\section{Every one-step fibre}
+
+For a target $y=(b_1,\ldots,b_\ell)$, define the possible rotation inverse
+\[
+ \rho(y)=
+ \begin{cases}
+ y,&\ell=1,\\
+ (b_\ell,b_1,\ldots,b_{\ell-1}),&\ell>1, b_{\ell-1}\ge2,
+ \end{cases}
+\]
+when the displayed branch applies, and the possible deletion inverse
+\[
+ \eta(y)=
+ \begin{cases}
+  (1,b_1-1),&\ell=1,\ b_1\ge3,\\
+  (1,b_1,\ldots,b_{\ell-1},b_\ell-1),
+      &\ell>1,\ b_\ell\ge3.
+ \end{cases}
+\]
+
+\begin{theorem}[complete fibre law]\label{thm:fibres}
+The fibre of $y$ consists exactly of the applicable, distinct words
+$\rho(y)$ and $\eta(y)$.  Hence every fibre has size $0,1$, or $2$.  Moreover
+\begin{equation}
+ |\im\Phi|=
+ \begin{cases}
+ 1,&N=2,3,\\
+ 3\cdot2^{N-4},&N\ge4,
+ \end{cases}                                           \label{eq:image}
+\end{equation}
+and the number of Garden states is $0$ for $N=2$, $1$ for $N=3$, and
+$2^{N-4}$ for $N\ge4$.
+\end{theorem}
+
+\begin{proof}
+The first two branches of \eqref{eq:update} invert only by moving the last
+digit to the front; for length greater than one the resulting last digit is
+$b_{\ell-1}$, so canonicality is exactly the displayed condition.  The last
+branch can invert only by inserting a leading one and removing one from the
+last digit, which is legal exactly when $b_\ell\ge3$.  These sources have
+different lengths and direct substitution verifies them, so there are no
+others and no collision.
+
+A target has no inverse precisely when it has length at least two and ends
+in $(1,2)$.  For $N=3$ this is the sole word $(1,2)$.  For $N\ge4$, deleting
+that suffix leaves an arbitrary positive composition of $N-3$, giving
+$2^{N-4}$ Garden states.  Subtracting from \eqref{eq:size} proves
+\eqref{eq:image}; $N=2$ is immediate.
+\end{proof}
+
+\section{Recurrent necklaces}
+
+For recurrent words of weight $N$ and length $k$, Burnside's lemma gives the
+number of rotation orbits
+\begin{equation}
+ \mathcal C_{N,k}=\frac1k\sum_{d\mid\gcd(N,k)}\varphi(d)
+ \binom{N/d-k/d-1}{k/d-1},
+ \quad1\le k\le\lfloor N/2\rfloor.                    \label{eq:burnside}
+\end{equation}
+Indeed a word fixed by a rotation with repetition factor $d$ reduces to a
+length-$k/d$ composition of $N/d$ with parts at least two.  The binomial is
+well-defined because $N\ge2k$.  Formula \eqref{eq:burnside} counts cycles by
+word length, not by primitive dynamical period; no zeta formula is inferred.
+Fixed points are the constant digit words, so
+\begin{equation}
+                         |\Fix\Phi|=d(N)-1,             \label{eq:fixed}
+\end{equation}
+where $d(N)$ is the number of positive divisors.  Both formulas are classical
+necklace consequences and receive zero contribution credit; their role is
+only to complete the recurrent picture produced by \cref{thm:core}.
+
+\section{Exact control and limitations}
+
+The deterministic verifier constructs the rational numerator/denominator by
+continuants, independently reconstructs its subtractive $L/R$ path, and
+exhausts every state for $2\le N\le18$.  It checks the path blocks, terminal
+core, exact depth, primitive period, every target fibre, all layer counts,
+image and Garden counts, Burnside orbits, and fixed points.  These finite
+checks are falsification evidence, not proofs.
+
+The map is specific to canonical finite expansions in $(0,1)$ and to the
+stated terminal convention.  It is not a map on all positive rationals, not a
+Gauss/Farey shift, and not an assertion about general continued fractions or
+continuants.  The owner screen was bounded and cannot certify absence.
+Novelty, priority, authorship, posting, submission, and every external-release
+decision remain on hold.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

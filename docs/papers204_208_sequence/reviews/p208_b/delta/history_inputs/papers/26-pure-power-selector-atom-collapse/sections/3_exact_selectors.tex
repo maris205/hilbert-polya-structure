@@ -1,0 +1,127 @@
+\section{Frozen coefficient and two exact selectors}
+\label{sec:selectors}
+
+\subsection{Wordwise and empty-word conventions}
+
+Let \(A_m^+\) denote the positive words in \(A_m\).  The support of a word is
+the set of letters that occur in it.
+
+\begin{definition}[pure-power cyclic coefficient]
+For \(w\in A_m^+\), define
+\begin{equation}
+ \chi_m(w)=\mathbf 1_{\{|\supp(w)|=1\}}.
+ \label{eq:chi-definition}
+\end{equation}
+The equality in \eqref{eq:chi-definition} is imposed on each individual
+positive word before any commuting color variables are introduced.
+\end{definition}
+
+Cyclic rotation does not change support, and
+\(\supp(w^r)=\supp(w)\).  Thus \(\chi_m\) is an exact cyclic and
+all-repetition coefficient.  The empty word needs a separate convention.
+
+\begin{convention}[empty-word firewall]
+We use two extensions to \(A_m^*=A_m^+\cup\{\epsword\}\).
+\begin{enumerate}
+ \item The \emph{character convention} sets
+ \(\chi_m(\epsword)=m\), the identity trace on the canonical color fiber.
+ \item The \emph{language convention} sets
+ \(\chi_m(\epsword)=0\), so the series is the characteristic series of the
+ nonempty pure-power language.
+\end{enumerate}
+The empty word never occurs in a determinant trace logarithm, but it changes
+minimal linear realization by one dormant mode.
+\end{convention}
+
+This distinction also separates two theorem classes.  A general recognizable
+series may have a bilinear readout
+\(f(w)=\alpha\mu(w)\beta\); its minimal dimension is controlled by the Hankel
+matrix.  The character theorem in \Cref{sec:character} assumes instead that
+the coefficient is a matrix trace or supertrace of a stationary
+multiplicative representation.  No character classification is asserted for
+an arbitrary bilinear readout.
+
+\subsection{An orbitwise support-incidence coefficient}
+
+For a nonempty finite set \(S\), define its reduced permutation space
+\begin{equation}
+ Q_S=\ker\!\left(\C^S\xrightarrow{\sum}\C\right),
+ \qquad \dim Q_S=|S|-1.
+ \label{eq:reduced-support}
+\end{equation}
+Give \(\Lambda^\bullet Q_S\) the parity of exterior degree.
+
+\begin{lemma}[support-Euler selector]
+For every positive word \(w\),
+\begin{equation}
+ \Str\!\left(I\mid\Lambda^\bullet Q_{\supp(w)}\right)
+ =(1-1)^{|\supp(w)|-1}=\chi_m(w).
+ \label{eq:support-euler}
+\end{equation}
+The coefficient is invariant under cyclic rotation, relabeling, and
+repetition.
+\end{lemma}
+
+\begin{proof}
+The alternating dimension is
+
+\[
+ \sum_{j=0}^{|S|-1}(-1)^j\binom{|S|-1}{j}=(1-1)^{|S|-1}.
+\]
+For a singleton support, \(\Lambda^0(0)=\C\), so the value is one; otherwise it
+is zero.  The asserted invariances follow because only the cardinality of
+support occurs.
+\end{proof}
+
+Equation \eqref{eq:support-euler} is a genuine positive answer to the
+coefficient problem, but it is not yet a stationary transfer representation.
+The fiber \(Q_{\supp(w)}\) is selected after the completed word is known.  With
+zero differential, the even and odd mixed-support classes cancel in Euler
+characteristic; they are not acyclic.  We will not call this virtual
+cancellation a homological deletion.
+
+\subsection{A stationary projector character}
+
+Let \(V_m=\C^m\) with basis \(e_1,\ldots,e_m\), and let
+\begin{equation}
+ P_i=e_ie_i^*,\qquad P_iP_j=\delta_{ij}P_i.
+ \label{eq:projectors}
+\end{equation}
+
+\begin{proposition}[finite stationary selector]
+For \(w=a_{i_1}\cdots a_{i_r}\),
+\begin{equation}
+ \Tr(P_{i_1}\cdots P_{i_r})=\chi_m(w).
+ \label{eq:projector-selector}
+\end{equation}
+The representation is positive, permutation-natural, and exact at every
+repetition.
+\end{proposition}
+
+\begin{proof}
+If all letters agree, the product is \(P_i\) and has trace one.  If two colors
+occur, cyclically rotate the word until an unequal adjacent pair occurs; the
+corresponding projector product is zero, and cyclicity of trace gives the
+claim.
+\end{proof}
+
+The construction is stationary, but its state space already contains one
+orthogonal recurrent line per supplied color.  This observation does not by
+itself prove minimality: a different nonorthogonal or graded realization
+might appear smaller.  The next two sections close precisely that loophole.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The two exact constructions solve different parts of the selector
+problem.  Neither yet supplies arithmetic selectivity.}
+\label{tab:selector-comparison}
+\begin{tabularx}{\textwidth}{L{37mm} c c c Y}
+\toprule
+Construction & exact words & repetitions & stationary & retained data \\
+\midrule
+Reduced-support exterior & yes & yes & no & completed support \(S\) \\
+Coordinate projectors & yes & yes & yes & one line per supplied color \\
+\bottomrule
+\end{tabularx}
+\end{table}

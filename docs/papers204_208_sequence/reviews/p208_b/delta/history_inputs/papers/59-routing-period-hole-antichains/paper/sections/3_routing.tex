@@ -1,0 +1,146 @@
+\section{Finite clopen routing}
+\label{sec:routing}
+
+Throughout this section, let
+
+\begin{equation}
+  X=\bigsqcup_{i\in I}X_i,
+  \label{eq:finite-clopen-partition}
+\end{equation}
+
+where $I$ is finite and every $X_i$ is nonempty, clopen, invariant, and
+irreducible.  Pairwise disjointness and compactness provide the separation
+that preinjectivity needs.
+
+\begin{lemma}[Homoclinic separation]
+\label{lem:homoclinic-separation}
+Every homoclinicity class in $X$ is contained in one $X_i$.  Consequently, for
+an endomorphism $T:X\to X$,
+\begin{equation}
+ T\text{ is preinjective}
+ \quad\Longleftrightarrow\quad
+ T|_{X_i}\text{ is preinjective for every }i\in I.
+ \label{eq:componentwise-pi}
+\end{equation}
+The equivalence does not require the sets $T(X_i)$ to be disjoint.
+\end{lemma}
+
+\begin{proof}
+Fix $i\ne j$.  The disjoint compact sets $X_i$ and $X_j$ have positive
+distance $\delta_{ij}$ in a compatible product metric.  If $x\in X_i$ and
+$y\in X_j$, invariance gives
+\[
+ d(\sigma^n x,\sigma^n y)\geq\delta_{ij}
+ \qquad(n\in\Z).
+\]
+If $x\sim_h y$, their finite disagreement set escapes every central
+coordinate window under $\sigma^n$ as $n\to+\infty$ and as $n\to-\infty$.
+Thus $d(\sigma^n x,\sigma^n y)$ tends to zero in both tails, a contradiction.
+Every homoclinic pair therefore lies in one piece.
+
+The forward implication in \eqref{eq:componentwise-pi} follows by
+restriction.  Conversely, every homoclinic collision for $T$ has both sources
+in one $X_i$ and is excluded by the corresponding restriction.  A collision
+between sources in different pieces has no bearing on preinjectivity.
+\end{proof}
+
+\begin{lemma}[Finite clopen pasting]
+\label{lem:clopen-pasting}
+Suppose $T_i:X_i\to X$ is continuous and shift commuting for every $i\in I$.
+The piecewise map $T:X\to X$ defined by $T|_{X_i}=T_i$ is a cellular
+automaton.
+\end{lemma}
+
+\begin{proof}
+A map continuous on every member of a finite clopen partition is continuous
+on the union.  Because each $X_i$ is invariant, $T\sigma=\sigma T$ can be
+checked on each piece.  Hence $T$ is continuous and equivariant.  The
+Curtis--Hedlund characterization supplies a finite memory and one local rule
+on all of $X$.
+\end{proof}
+
+The target of a piece is also well defined.
+
+\begin{lemma}[Unique component image]
+\label{lem:unique-component-image}
+If $T:X\to X$ is an endomorphism, then for every $i\in I$ there is a unique
+$\rho_T(i)\in I$ such that
+\begin{equation}
+  T(X_i)\subset X_{\rho_T(i)}.
+  \label{eq:component-route}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The restriction $T|_{X_i}$ maps the irreducible system $X_i$ onto its image,
+so $T(X_i)$ is irreducible.  Suppose it met $X_j$ and $X_k$ with $j\ne k$.
+The intersections with those invariant clopen sets would be nonempty
+relatively open subsets of $T(X_i)$, and no shift iterate of one could meet
+the other.  This contradicts irreducibility.  The image is nonempty, so the
+target index exists and is unique.
+\end{proof}
+
+The preceding lemmas close the routing criterion.
+
+\begin{theorem}[Finite-clopen routing criterion]
+\label{thm:routing}
+For the decomposition \eqref{eq:finite-clopen-partition},
+\begin{equation}
+ X\text{ is Myhill}
+ \quad\Longleftrightarrow\quad
+ \begin{cases}
+ X_i\text{ is Myhill for every }i\in I,\\
+ X_i\not\pito X_j\text{ for all }i\ne j.
+ \end{cases}
+ \label{eq:routing-theorem}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Suppose some $X_i$ is not Myhill.  Choose a preinjective nonsurjective
+endomorphism $S_i:X_i\to X_i$ and paste it with the identity on every other
+piece.  By \cref{lem:clopen-pasting} this is an endomorphism of $X$, and by
+\cref{lem:homoclinic-separation} it is preinjective.  A point in
+$X_i\setminus S_i(X_i)$ cannot be supplied by an unchanged disjoint piece, so
+the pasted map is not onto.  Thus $X$ is not Myhill.
+
+Now suppose $i\ne j$ and let $\phi:X_i\pito X_j$.  Define
+\begin{equation}
+ T(x)=
+ \begin{cases}
+ \phi(x),&x\in X_i,\\
+ x,&x\in X_k,\ k\ne i.
+ \end{cases}
+ \label{eq:redirect}
+\end{equation}
+Again \cref{lem:clopen-pasting,lem:homoclinic-separation} make $T$ a
+preinjective endomorphism.  Its image may contain collisions between
+$\phi(X_i)$ and the identity image of $X_j$, but their sources lie in
+different homoclinicity classes.  More importantly,
+\[
+ T(X_i)\subset X_j,
+ \qquad T(X_k)=X_k\quad(k\ne i),
+\]
+so no point of the source component $X_i$ belongs to $T(X)$.  Hence $T$ is
+not onto and $X$ is not Myhill.
+
+Conversely, assume both conditions on the right of
+\eqref{eq:routing-theorem}, and let $T:X\to X$ be preinjective.  By
+\cref{lem:unique-component-image}, its restriction gives a preinjective arrow
+\[
+ T|_{X_i}:X_i\pito X_{\rho_T(i)}.
+\]
+The absence of off-diagonal arrows forces $\rho_T(i)=i$.  Since $X_i$ is
+Myhill, the restriction maps $X_i$ onto itself.  Taking the union over the
+finite partition gives $T(X)=X$.
+\end{proof}
+
+\begin{remark}[Why the hypotheses are visible]
+\label{rem:routing-scope}
+An infinite union can fail the continuity step at an accumulation set.  A
+general reducible SFT can contain heteroclinic or wandering configurations
+outside its irreducible components, so the displayed pieces need not exhaust
+the homoclinicity classes or support a piecewise definition on the whole
+space.  Neither situation is covered by \cref{thm:routing}.
+\end{remark}
+

@@ -1,0 +1,121 @@
+\section{Frozen source ledger and typed comparison}
+\label{sec:source-ledger}
+
+Fix $q\in\{2,3,5\}$ and let
+\[
+  \Sigma_q=\F_q^{\mathbb Z}
+\]
+with the left shift $\sigma$. A nonempty word is \emph{primitive} when it is
+not a proper power. The source primitive object is its oriented cyclic class:
+cyclic rotations are identified, but reversal is not identified unless it is
+already a rotation. We write $\Prim_q$ for these primitive necklaces and
+$n(\gamma)$ for the length of $\gamma\in\Prim_q$. Ordinary word powers encode
+temporal repetition.
+
+\begin{definition}[Frozen source fields]
+For $\gamma\in\Prim_q$ of length $n$, define
+\[
+ T_q(\gamma)=n\log q,
+ \qquad
+ F_\gamma(s,z)=\left(1-z^nq^{-ns}\right)^{-1}.
+\]
+The free variable $z$ marks one original shift symbol. Thus the $r$th
+repetition contributes $z^{nr}q^{-nrs}$; marker degree and temporal
+repetition are distinct pieces of data.
+\end{definition}
+
+The weighted adjacency of the one-vertex, $q$-loop graph acts on $\C$ by
+\[
+  \Lop f=zq^{1-s}f.
+\]
+It is a scalar operator, but it still owns a complete dynamical determinant.
+Indeed, the full shift has exactly $q^r$ points fixed by $\sigma^r$. The
+marked periodic-point exponential is therefore
+\begin{align}
+ Z_q(s,z)
+ &=\exp\left(\sum_{r\ge1}\frac{q^r(zq^{-s})^r}{r}\right) \\
+ &=\exp\left(\sum_{r\ge1}\frac{(zq^{1-s})^r}{r}\right)
+ =\frac{1}{1-zq^{1-s}}.                                      \label{eq:source-zeta}
+\end{align}
+This is a formal identity in $z$ and an analytic identity in the disk where
+the displayed logarithmic series converges. Its inverse is the ordinary
+finite-dimensional determinant
+\begin{equation}
+  \Dq(s,z)=\det(I-\Lop)=1-zq^{1-s}.                           \label{eq:source-det}
+\end{equation}
+The periodic-point and determinant organization follows the standard finite-
+shift framework \citep{artin1965periodic,bowen1970zeta}.
+
+Let $\Nq(n)$ denote the number of primitive cyclic classes of length $n$.
+Every word fixed by $\sigma^r$ repeats a unique primitive necklace of length
+$d\mid r$, and each such necklace has $d$ based representatives. Hence
+\begin{equation}
+ q^r=\sum_{d\mid r}d\Nq(d),
+ \qquad
+ \Nq(n)=\frac1n\sum_{d\mid n}\mu(d)q^{n/d}.                 \label{eq:necklace}
+\end{equation}
+Regrouping repetitions in \cref{eq:source-zeta} gives
+\begin{equation}
+ Z_q(s,z)=\prod_{\gamma\in\Prim_q}
+ \left(1-z^{n(\gamma)}q^{-s n(\gamma)}\right)^{-1}.          \label{eq:source-product}
+\end{equation}
+The count in \cref{eq:necklace} also counts monic irreducible polynomials of
+degree $n$ over $\F_q$ \citep{chebolu2026necklace}. Under the finite-field
+norm, both types carry $q^n$ and the degree clock $n\log q$. This is the
+source positive control. We use only count equality; no canonical objectwise
+bijection is asserted.
+
+The rational-prime comparator has a different primitive type. Let $\Primes$
+be the positive rational primes and define, on $\ell^2(\Primes)$,
+\[
+ Q_se_p=p^{-s}e_p.
+\]
+For $\RePart s>1$, the operator is trace class because
+$\sum_p|p^{-s}|<\infty$. It owns
+\begin{equation}
+ \DP(s,z)=\det(I-zQ_s)
+ =\prod_{p\in\Primes}(1-zp^{-s}),                             \label{eq:target-det}
+\end{equation}
+whose reciprocal specializes at $z=1$ to the rational Euler product
+\citep{nistDLMF25211}. For sufficiently small $|z|$,
+\begin{equation}
+ -\log\DP(s,z)
+ =\sum_{r\ge1}\frac{z^r}{r}P(rs),
+ \qquad
+ P(s)=\sum_{p\in\Primes}p^{-s}.                              \label{eq:target-log}
+\end{equation}
+The diagonal comparator proves that the target product has a valid operator;
+it does not make that operator source-owned.
+
+Any credited factorwise descent must preserve several necessary fields at
+once. Comparing one source factor with one target factor produces the matrix
+in \cref{tab:necessary-fields}.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Necessary fields for an in-place identification. These conditions
+are not asserted to be sufficient for a completed rational-prime model.}
+\label{tab:necessary-fields}
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash}p{0.20\textwidth}
+  >{\raggedright\arraybackslash}p{0.23\textwidth}
+  >{\raggedright\arraybackslash}p{0.23\textwidth}Y@{}}
+\toprule
+Field & Source length $n$ & Rational-prime target & Forced consequence \\
+\midrule
+Clock/weight & $n\log q$, $q^{-ns}$ & $\log p$, $p^{-s}$ & $p=q^n$ \\
+Primitive marker & $z^n$ & $z$ & $n=1$ \\
+Multiplicity & $\Nq(n)$ factors & one factor per $p$ & bijective factor count \\
+Repetition & $z^{nr}q^{-nrs}$ & $z^rp^{-rs}$ & only after primitive fields agree \\
+Ownership & scalar $q$-loop adjacency & diagonal prime inventory & same owner required \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The full-ledger claim also requires totality: every source primitive factor
+must be accounted for. A partial map can produce a correct local factor, but
+it cannot identify the complete source product with the complete target
+product. With these types fixed, the three obstructions in the next section
+are direct consequences rather than post-hoc choices of a convenient marker
+or projection.

@@ -1,0 +1,97 @@
+\section{Direct sums of Hilbert--Carleman determinants}
+\label{app:determinants}
+
+We prove the specialized direct-sum statement used in
+\cref{prop:det2-product}.  The proof is included so that the block product
+does not depend on a brittle page citation.
+
+\begin{lemma}[Square-summable direct-sum product]
+\label{lem:abstract-det2-sum}
+Let $T_k$ be compact Hilbert--Schmidt operators, and suppose
+\[
+  \sum_{k\ge0}\norm{T_k}_2^2<\infty.
+\]
+Then $T=\bigoplus_{k\ge0}T_k$ is Hilbert--Schmidt and
+\begin{equation}
+  \det_2(I-zT)=\prod_{k\ge0}\det_2(I-zT_k),
+  \label{eq:abstract-det2-product}
+\end{equation}
+with uniform convergence on compact subsets of $\C$.
+\end{lemma}
+
+\begin{proof}
+List the nonzero eigenvalues of $T_k$, with algebraic multiplicity, as
+$\lambda_{k,j}$.  Weyl's eigenvalue inequality gives
+\begin{equation}
+  \sum_{k,j}\abs{\lambda_{k,j}}^2
+  \le\sum_k\norm{T_k}_2^2<\infty.
+  \label{eq:combined-eigenvalue-l2}
+\end{equation}
+Also $\norm{T_k}\le\norm{T_k}_2\to0$.  Hence the nonzero eigenvalues of the
+compact direct sum $T$ are exactly the combined multiset
+$\{\lambda_{k,j}\}_{k,j}$.
+
+Fix a compact set $K\subset\C$ and put $R=\max_{z\in K}\abs z$.  By
+\cref{eq:combined-eigenvalue-l2}, only finitely many combined eigenvalues
+satisfy $R\abs{\lambda_{k,j}}>1/2$.  For every remaining factor, use the
+analytic branch at zero:
+\begin{equation}
+  \log E_2(w)=\log(1-w)+w
+  =-\sum_{r\ge2}\frac{w^r}{r},
+  \qquad \abs w\le\frac12.
+  \label{eq:E2-log-bound}
+\end{equation}
+The series gives $\abs{\log E_2(w)}\le\abs w^2$ on this disk.  Therefore
+\[
+  \sum_{k,j}\sup_{z\in K}
+  \abs{\log E_2(z\lambda_{k,j})}
+  \le R^2\sum_{k,j}\abs{\lambda_{k,j}}^2<\infty
+\]
+after removing the finite exceptional set.  The combined canonical product
+thus converges normally on $K$.  Normal convergence makes its value
+independent of the ordering and permits grouping first over $j$ and then
+over $k$.  The ungrouped product is the eigenvalue definition of
+$\det_2(I-zT)$; each grouped product is $\det_2(I-zT_k)$.  This proves
+\cref{eq:abstract-det2-product}, including compact-uniform convergence.
+Zeros among the finitely many exceptional factors cause no difficulty,
+because the identity follows between the resulting entire products.
+\end{proof}
+
+Apply the lemma with $T_k=2^{-ks}A_s$.  In the domain $\sigma>1/2$,
+$A_s\in\Schatten{2}$ and
+\[
+  \sum_{k\ge0}\norm{T_k}_2^2
+  =\norm{A_s}_2^2\sum_{k\ge0}2^{-2k\sigma}<\infty.
+\]
+The unitary equivalence in \cref{thm:direct-sum} identifies
+$T=\bigoplus_kT_k$ with $H_s$, proving \cref{eq:det2-product}.
+
+For completeness, if $\abs z\norm{H_s}<1$, then $I-zH_s$ is invertible by
+the Neumann series, so the determinant has no zero on that disk.  The branch
+of its logarithm fixed at zero satisfies
+\[
+  \log\det_2(I-zH_s)
+  =-\sum_{r\ge2}\frac{z^r}{r}\Tr(H_s^r).
+\]
+Indeed,
+\[
+  \abs{\Tr(H_s^r)}
+  \le\norm{H_s^r}_1
+  \le\norm{H_s}_2^2\norm{H_s}^{r-2},
+\]
+so the series converges absolutely under the displayed condition.  Inserting
+\cref{eq:trace-factor} gives \cref{eq:local-log-det2}.  This derivation also
+shows why the local logarithm cannot be promoted to a single global branch
+when the entire determinant has zeros.
+
+If $\sigma>1$, then $A_s\in\Schatten{1}$ and
+\[
+  \sum_{k\ge0}\norm{2^{-ks}A_s}_1
+  =\norm{A_s}_1\sum_{k\ge0}2^{-k\sigma}<\infty.
+\]
+The genus-zero eigenvalue products consequently converge normally on compact
+$z$-sets and give \cref{eq:det-product}.  Finally, the defining relation
+$\det_2(I+T)=\det(I+T)e^{-\Tr T}$ for trace-class $T$, applied to
+$T=-zH_s$ and combined with \cref{eq:ordinary-trace}, gives
+\cref{eq:det-overlap}.
+

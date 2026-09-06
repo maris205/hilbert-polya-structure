@@ -1,0 +1,136 @@
+\section{Periodic reduction to a finite quadratic-field maximum}
+\label{sec:periodic}
+
+Assume from now on that both $(a_i)$ and $(b_i)$ are ultimately periodic.
+After increasing the preperiod, choose a common aligned period $L$.  The state
+\[
+ S_n=(q_n,q_{n-1},\rho_n)^T
+\]
+satisfies
+\begin{equation}
+ S_{n+1}=T(a_{n+1},b_{n+1})S_n,
+ \qquad
+ T(a,b)=
+ \begin{pmatrix}
+ a&1&0\\
+ 1&0&0\\
+ b&0&1
+ \end{pmatrix}.
+ \label{eq:state-recurrence}
+\end{equation}
+
+\begin{lemma}[Three spectral scales]
+\label{lem:three-scales}
+Let $M$ be the product of the matrices in \eqref{eq:state-recurrence} over one
+aligned tail period.  Then
+\begin{equation}
+ M=\begin{pmatrix}P&0\\v^T&1\end{pmatrix},
+ \qquad
+ \det P=(-1)^L,
+ \label{eq:block-period}
+\end{equation}
+where $P$ is a primitive nonnegative $2\times2$ continuant matrix.  If
+$\Lam>1$ is its Perron root and
+$\mu=(-1)^L/\Lam$, then
+\[
+ \Spec(M)=\{\Lam,1,\mu\},
+ \qquad |\mu|<1.
+\]
+For each fixed tail phase, every integer affine form in a bounded collection
+of nearby $q$- and $\rho$-coordinates has an exact expansion
+\begin{equation}
+ C_\Lam\Lam^k+C_1+C_\mu\mu^k,
+ \qquad C_\Lam,C_1,C_\mu\in\Q(\Lam).
+ \label{eq:three-scale-expansion}
+\end{equation}
+All three coefficients are effectively computable.
+\end{lemma}
+
+\begin{proof}
+The upper-left block of $T(a,b)$ is
+$\left(\begin{smallmatrix}a&1\\1&0\end{smallmatrix}\right)$ and its upper-right
+column is zero, so multiplication gives \eqref{eq:block-period}.  The
+continuant block is primitive: every partial quotient is positive, and a
+positive power of the product has all entries positive.  Each factor has
+determinant $-1$, hence $\det P=(-1)^L$.
+
+The eigenvalues of $P$ are $\Lam$ and
+$\mu=\det(P)/\Lam$.  They are distinct from each other and from $1$, since
+$\Lam>1$ and $|\mu|<1$.  The block form gives the stated spectrum of $M$ and
+makes $M$ diagonalizable over $\Q(\Lam)$.  For example, its dominant spectral
+projector is
+\[
+ \Pi_\Lam=
+ \frac{(M-I)(M-\mu I)}{(\Lam-1)(\Lam-\mu)}.
+\]
+The other two projectors are obtained cyclically.  If $A_j$ is the fixed
+prefix product leading to phase $j$, then
+$S_{n_0+j+kL}=A_jM^kS_{n_0}$.  Applying an integer linear functional and the
+three projectors gives \eqref{eq:three-scale-expansion}; an affine constant is
+absorbed into $C_1$.  Nearby indices only change the fixed phase product.
+\end{proof}
+
+\begin{remark}
+\label{rem:not-primitive}
+The full matrix $M$ is reducible: its third column is fixed.  Perron--Frobenius
+theory is used only for the continuant block $P$.  No primitivity assertion
+about the $3\times3$ state matrix is needed or valid.
+\end{remark}
+
+The next lemma contains the finite-mass step of the proof.
+
+\begin{lemma}[At most four candidates per phase]
+\label{lem:four-per-phase}
+Fix a tail phase.  Every nonempty row of \cref{tab:eight-cases} has a
+repetition denominator whose coefficient of $\Lam^k$ is positive.  The
+right-endpoint ratio therefore converges to an effectively constructible
+element of $\Q(\Lam)$.  There are at most four such limits in the phase.
+\end{lemma}
+
+\begin{proof}
+Along a fixed phase, both $q_n$ and $q_{n-1}$ grow as positive multiples of
+$\Lam^k$.  It remains to exclude cancellation in the other displayed
+denominators.  This is transparent row by row from
+$0\leq s<p$, $0\leq t<q$, and $u=t+bq$.
+
+In cases~1--3 the only additional forms are $Q-s$ and $Q-t$; in case~3,
+$a\geq2$.  They dominate $q$ or $p$.  In case~4,
+$Q-t=q+p-t>p$.  In case~5, $b\leq a-2$, and hence
+\[
+ Q-u=(a-b)q+p-t>q,
+ \quad Q-bq=(a-b)q+p\geq2q+p,
+ \quad Q+q-u>2q.
+\]
+In case~6, $t=s<p$, and its forms $q+p-s$, $q+p$, and $2q+p-s$
+dominate $q$.  In case~7, $q+p-t>p$ and
+$2q+p-t>q+p$.  Finally, case~8 uses $p$ and $q+p-s>q$.
+Thus every displayed repetition value is bounded below by either $p$ or $q$
+on its phase and has positive dominant coefficient.
+
+By \cref{lem:three-scales}, both the right endpoint $B_k$ and the denominator
+$V_k$ have expansions \eqref{eq:three-scale-expansion}.  Since the dominant
+coefficient of $V_k$ is positive,
+\[
+ \lim_{k\to\infty}\frac{B_k}{V_k}
+ =\frac{C_\Lam(B)}{C_\Lam(V)}\in\Q(\Lam).
+\]
+The finite constants $-1$ and $-2$ disappear only at this step.  Inspection of
+\cref{tab:eight-cases} gives at most four rows in any one phase.
+\end{proof}
+
+For completeness, the phase maximum can already be stated independently of
+the algorithm used to decide empty rows.  If $\mathcal R_j$ is the set of rows
+that are eventually nonempty in phase $j$, then
+\begin{equation}
+ \dio(x)=1+
+ \max_{0\leq j<L}\ 
+ \max_{R\in\mathcal R_j}
+ \frac{C_\Lam(B_{j,R})}{C_\Lam(V_{j,R})}.
+ \label{eq:finite-maximum}
+\end{equation}
+Indeed, \cref{prop:finite-interface} reduces each plateau to its right
+endpoint, every phase sequence converges by \cref{lem:four-per-phase}, and the
+limsup of finitely many convergent phase sequences is the maximum of their
+limits.  The remaining issue---deciding $\mathcal R_j$ and producing certified
+algebraic output---is exact and finite.
+

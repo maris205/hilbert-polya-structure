@@ -1,0 +1,81 @@
+{
+  "accepted_b_delta_sha256": "4a050c8d8104aed90adf149cdb7ab1c2ac4c7e1f93025cc59a630e71e13e286d",
+  "accepted_b_review_manifest_sha256": "4c9df2fa330b7b930c91e4e9ef661886a6bb2bacdd84f4196c09bdd3df886485",
+  "actual_raw_manifest_comparisons": [
+    {
+      "argv": [
+        "/usr/bin/cmp",
+        "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/frozen_round2/SHA256SUMS",
+        "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/frozen_round0/SHA256SUMS"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/cmp",
+        "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/frozen_round2/SHA256SUMS",
+        "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/frozen_round1/SHA256SUMS"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "copied_inputs": 487,
+  "manifest_sha256": "12dca26eeb68503737846c633170bd427101648c21a9e89ef710d9ddaef01ace",
+  "root_live_round0_round1_round2_all_payloads_checked": true,
+  "source_only_inputs": {
+    "main.tex": {
+      "bytes": 1173,
+      "sha256": "3664f35386e4b0de4aca8deb6e10f05f6edc198909e8a133f5b79f4e18ba348c"
+    },
+    "math_commands.tex": {
+      "bytes": 545,
+      "sha256": "ccb662a56a9c51a25664dc3f389e42fb63a07b9b28dc90aea602f8e8df2a2050"
+    },
+    "references.bib": {
+      "bytes": 1969,
+      "sha256": "daa42a6a291a27d5063c528d3d75b30cf596682d00ebdeab9a944bc130adec79"
+    },
+    "sections/00_abstract.tex": {
+      "bytes": 1226,
+      "sha256": "48e71bd219c75cbe68d20e77ccf8136dc2f028a79680dbd6d920d1da50c48a3c"
+    },
+    "sections/01_setup.tex": {
+      "bytes": 2966,
+      "sha256": "20afd98eda91f8a3f6e9b649bc3be61eea20becd74423dc0858818346352872d"
+    },
+    "sections/02_cells.tex": {
+      "bytes": 4879,
+      "sha256": "9331bd452841db3632163e92d8118942634174ddfedbd23298eed9870b4670a0"
+    },
+    "sections/03_sources.tex": {
+      "bytes": 4724,
+      "sha256": "147e992ab7d527b6db6e424a8aa90fe064a44506f98bbad66a2f4884b5ba929c"
+    },
+    "sections/04_extremum.tex": {
+      "bytes": 3259,
+      "sha256": "090ca6f7c7d644116053749e0018c4b45faecb68b17949f9bbd72184c24df45b"
+    },
+    "sections/05_kmap.tex": {
+      "bytes": 3876,
+      "sha256": "034ed00cf307b43f3b6d465b9a6c1da306ea19182aec6a677b1623eaf2d7ee3d"
+    },
+    "sections/06_clock.tex": {
+      "bytes": 4030,
+      "sha256": "86ecd872ef41a5ed36ca3b83de650a5c8bf2b338d275f687292b7c60fa70d043"
+    },
+    "sections/07_scope.tex": {
+      "bytes": 4055,
+      "sha256": "a6ae095d630adfee17bbb18b836a67fb2bb496b17e40f915b0472f7f4ea54497"
+    }
+  },
+  "status": "ROOT_ROUND2_PHYSICAL_FREEZE_PASS",
+  "actual_root_command": "env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C TZ=UTC /root/miniconda3/bin/python3 -I -S -B -c 'from pathlib import Path; import ast,json,hashlib,subprocess; r=Path.cwd(); b=r/\"docs/papers204_208_sequence\"; p=r/\"papers/208-original-snapshot-triangulation-sweeps\"; h=lambda q:hashlib.sha256(q.read_bytes()).hexdigest(); info=lambda q:{\"sha256\":h(q),\"bytes\":q.stat().st_size}; f=p/\"frozen_round2\"; rows=dict(line.split(\"  \",1)[::-1] for line in (f/\"SHA256SUMS\").read_text().splitlines()); assert len(rows)==487 and set(rows)=={q.relative_to(f).as_posix() for q in f.rglob(\"*\") if q.is_file() and q.name!=\"SHA256SUMS\"}; assert all(not (f/n).is_symlink() and h(p/n)==h(p/\"frozen_round0\"/n)==h(p/\"frozen_round1\"/n)==h(f/n)==v for n,v in rows.items()); a=json.loads((b/\"qa/P208_A_ROOT_DELTA_INSPECTION.actual.json\").read_bytes()); z=json.loads((b/\"qa/P208_B_ROOT_DELTA_INSPECTION.actual.json\").read_bytes()); assert a[\"current_open_findings\"]==z[\"current_open_findings\"]==0; assert z[\"status\"]==\"ROOT_ACCEPTED_B_DELTA_ORIGINAL_CLOSURE_PASS\"; assert h(b/\"reviews/p208_b/SHA256SUMS\")==z[\"review_manifest_sha256\"] and h(b/\"reviews/p208_b/DELTA.md\")==z[\"delta_sha256\"]; t=ast.parse((b/\"qa/run_p208_terminal_builds_v2.py\").read_bytes()); names=next(ast.literal_eval(n.value) for n in t.body if isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name) and n.targets[0].id==\"SOURCE_NAMES\"); commands=[]; \nfor k in (0,1):\n argv=[\"/usr/bin/cmp\",str(f/\"SHA256SUMS\"),str(p/(\"frozen_round\"+str(k))/\"SHA256SUMS\")]; c=subprocess.run(argv,capture_output=True); commands.append({\"argv\":argv,\"exit_code\":c.returncode,\"stdout\":c.stdout.decode(),\"stderr\":c.stderr.decode()}); assert c.returncode==0\nprint(json.dumps({\"status\":\"ROOT_ROUND2_PHYSICAL_FREEZE_PASS\",\"copied_inputs\":len(rows),\"manifest_sha256\":h(f/\"SHA256SUMS\"),\"accepted_b_review_manifest_sha256\":z[\"review_manifest_sha256\"],\"accepted_b_delta_sha256\":z[\"delta_sha256\"],\"source_only_inputs\":{n:info(f/n) for n in names},\"actual_raw_manifest_comparisons\":commands,\"root_live_round0_round1_round2_all_payloads_checked\":True},sort_keys=True,indent=2))'",
+  "actual_root_exit_code": 0,
+  "freeze_command": "env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C TZ=UTC /root/miniconda3/bin/python3 -I -S -B docs/papers204_208_sequence/qa/freeze_p208.py papers/208-original-snapshot-triangulation-sweeps 2",
+  "freeze_exit_code": 0,
+  "freeze_actual_stdout": "FROZEN /root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/frozen_round2 files=487; review acceptance remains a separate evidence gate\n"
+}

@@ -3,6 +3,39 @@
 This is a work-in-progress backup, not five-paper completion or admission.
 All research remains `HOLD_EXTERNAL`.
 
+## Latest: P208 accepted A / Round1 and closed fourteenth–eighteenth
+
+On 2026-09-06 UTC, the scoped 1,600-file checkpoint was actually committed
+and pushed as `8e4e21d0c41da865bd12081879a09fd6eaa70de6`.
+It preserves A's complete accepted documentary delta and all initial/failed
+evidence, the unchanged 487-input physical Round1, both strict root replay
+packages, root original/delta/freeze inspections, and the closed fourteenth
+through eighteenth handoffs. The two last desks are explicitly zero-execution
+NO_FRESH_SLATE outcomes, not newly completed six-system pilots.
+
+The mirror was clean at 076cfbd4. Actual fetch and comparison showed `0 0`,
+so no merge was required. Copy and explicit force-staging included owned
+raw evidence despite generic ignore rules, and excluded active p208_b,
+nineteenth scouting and unmanifested Python caches. The later twentieth
+assignment is outside this ref. No scientific or historical sealed payload
+was rewritten; only separate current lifecycle/index files were updated.
+The precommit check passed 11 manifests/2,537 referents, all 1,600 staged
+workspace/mirror byte comparisons and 112 current local links. The scoped
+authored source/document whitespace check passed; raw historical/compiler
+evidence was not reformatted or claimed whitespace-clean.
+
+Actual commit and push exits were zero. `git ls-remote origin refs/heads/main`
+returned the exact ref above, ahead/behind was `0 0`, and mirror status
+was empty. The subsequent read-only [Git-object check](qa/GIT_OBJECT_P208_8E4E21D0.json)
+passed all 2,537 referents in the eleven named directory-relative manifests,
+with zero missing or changed objects. A's archived initial seal retains its
+original review-root-relative semantics and was not incorrectly interpreted
+as rooted in its two-file archive directory.
+
+This is private archival integrity, not B acceptance, Round2 or five-paper
+completion. This receipt/object result and later current indexes were made
+after the named push and are not claimed to be included in their own ref.
+
 On 2026-09-05 UTC, the owned checkpoint was committed in the documented
 mirror `/root/autodl-tmp/hilbert-polya-structure` as `f7a50884`.
 Its 40-file scope contained the current recovery index and closed/new

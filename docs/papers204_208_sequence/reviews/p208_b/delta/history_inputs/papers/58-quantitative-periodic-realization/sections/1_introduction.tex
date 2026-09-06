@@ -1,0 +1,88 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Periodic points provide finite witnesses for two different aspects of a
+symbolic system.  Their multiplicity at large periods can reveal entropy,
+whereas the set of their least periods records which orbit lengths actually
+occur.  Standard asymptotic statements leave finite questions unanswered.
+At which \emph{specified} period can one already certify a given entropy
+accuracy?  From which \emph{computable} integer onward can one certify every
+least period?  This note gives one explicit answer to each question.
+
+The first answer concerns a nonempty shift of finite type
+$X\subseteq\Sigma^{\ZZ^d}$ equipped with a nearest-neighbour presentation
+whose allowed edges are closed under reversal in every coordinate direction.
+(In particular, $X$ is invariant under every coordinate reflection.)
+Write $C_n$ for the number of locally admissible patterns on $[1,n]^d$ and
+$P_m$ for the number of points fixed by $m\ZZ^d$.  For $n\ge4$, we prove
+\begin{equation}
+\frac{\log C_n-[n^d-(n-3)^d]\log|\Sigma|}{(n-1)^d}
+\le \frac{\log P_{2n-2}}{(2n-2)^d}
+\le \frac{\log C_{2n-2}}{(2n-2)^d}.
+\label{eq:intro-sandwich}
+\end{equation}
+Combining this injection estimate with Bui's explicit local-cube estimate
+\cite{Bui2026} gives a completely specified two-sided $O_d(n^{-1})$
+distance from entropy.  In particular, \cref{cor:target-accuracy} turns a
+requested tolerance $\delta$ directly into a sufficient period using only
+$(d,|\Sigma|,\delta)$.  The proof takes a largest fibre of local patterns
+with common boundary data and places independently selected members in the
+$2^d$ reflected orthants.  A two-layer lower shell controls the periodic
+seam, and disjoint private interiors make the construction injective.  The
+same coordinatewise construction gives an anisotropic rectangular form.
+
+The second answer concerns the edge shift of a primitive nonnegative integral
+$r\times r$ matrix $A$.  Let $\lambda>1$ be its Perron root and let $\theta$
+be the largest modulus of a non-Perron eigenvalue.  If $L_n$ denotes the
+number of \emph{points} of least period $n$, then
+\begin{equation}
+L_n\ge \lambda^n-(r-1)\theta^n
+-\tau(n)\bigl(\lambda^{n/2}
+ +(r-1)\max(1,\theta)^{n/2}\bigr).
+\label{eq:intro-least}
+\end{equation}
+Positivity of the right-hand side certifies period $n$.  More globally, the
+three normalized error bases are strictly below one, which yields an
+algorithmically certified conductor $N(A)$ such that every $n\ge N(A)$ is a
+least period.  This conclusion follows from the standard trace formula and
+M\"obius inversion; the contribution here is the displayed directly testable
+lower bound and its effective tail certificate, not a new qualitative
+eventual-period theorem.  Recent qualitative context includes the work of de
+Jong \cite{deJong2025}; standard edge-shift background is in
+\cite{LindMarcus2021}.
+
+These statements use different geometries and should not be conflated.
+Their common feature is instead operational: each turns a finite datum into a
+finite periodic certificate while accounting explicitly for the discarded
+information.  In \cref{eq:intro-sandwich}, the loss is a boundary shell.  In
+\cref{eq:intro-least}, it is the population of fixed points inherited from
+proper divisors.  \Cref{tab:certificates} compares the hypotheses, outputs,
+and principal failure modes.
+
+\input{figures/certificate_comparison_table}
+
+\paragraph{Ownership and claim posture.}
+The reflection-extension geometry and the explicit local-count estimate used
+here belong to Bui \cite{Bui2026}; Friedland \cite{Friedland1997} provides
+foundational entropy context for multidimensional shifts of finite type.
+Trace counting, Perron separation, and M\"obius inversion are standard.  The
+source records used for this internal draft were frozen at Bui v1 and de Jong
+v3 on 25 August 2026.  We make no priority claim based on a search miss.  The
+manuscript is a source-adjacent quantitative note and remains on hold for an
+independent priority and standalone-mass review.
+
+\paragraph{Scope.}
+The reflection certificate is a nearest-neighbour theorem.  A simple
+range-two rule, printed in \cref{ex:range-two}, invalidates the naive
+extension.  The least-period certificate requires both primitivity and
+$\lambda>1$; it does not cover arbitrary irreducible shifts or zero-entropy
+cycles.  Moreover, $L_n$ counts points, so the number of least-period orbits
+is $L_n/n$.  The conductor obtained below is sufficient and effective, but
+not asserted to be minimal.
+
+The rest of the note is organized as follows.  \Cref{sec:preliminaries}
+fixes notation.  \Cref{sec:reflection} proves the reflected-shell
+certificate and entropy bounds.  \Cref{sec:least-period} proves the
+Perron--M\"obius certificate and gives the conductor algorithm.
+\Cref{sec:controls} records falsification controls and the sharp scope
+firewalls, and \cref{sec:conclusion} concludes.

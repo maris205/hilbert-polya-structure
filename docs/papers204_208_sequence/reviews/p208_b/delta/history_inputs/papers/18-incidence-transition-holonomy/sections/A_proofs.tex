@@ -1,0 +1,178 @@
+\section{Proofs}
+\label{app:proofs}
+
+\subsection{Same-object factorization and gauge}
+\label{app:artin-proof}
+
+\begin{proof}[Proof of \cref{prop:artin}]
+The right regular representation decomposes as
+$\bigoplus_{\rho\in\Irr}\rho^{\oplus d_\rho}$, with contragredients if one
+uses the opposite multiplication convention.  Applying the same fiber
+Fourier transform at every state block-diagonalizes $B_{\regrep,P}$ and
+gives \eqref{3.3} after taking determinants.
+
+For the trivial representation, $B_{\one,P}(S,T)=w(T)$, so all rows are
+identical.  Its only possible nonzero eigenvalue is $\sum_Tw(T)$, whence
+\[
+D_{\one,P}=1-\sum_{\varnothing\ne T\subseteq P}
+(-1)^{|T|+1}x_T=\prod_{p\in P}(1-x_p)
+\]
+by finite inclusion--exclusion.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:gauge}]
+Let $C_b$ be block diagonal with state block $\rho(b(S))$.  Scalar arrival
+weights commute with the representation matrices, and therefore
+$B_\rho^{\alpha^b}=C_b^{-1}B_\rho^\alpha C_b$.  This proves determinant
+invariance.  Multiplication around a based closed word telescopes the
+intermediate gauge values and leaves
+\[
+H_{\alpha^b}(\gamma)=b(S_0)^{-1}H_\alpha(\gamma)b(S_0).
+\]
+
+For the converse test, adjoin to every directed edge a formal inverse dart
+with inverse gain.  Fix a root, spanning tree, and proposed root conjugator.
+The gauge equation uniquely propagates the vertex values along the tree.
+Every non-tree edge is then satisfied exactly when its fundamental based
+closed-walk holonomy agrees under the same root conjugator.  This is both
+necessary and sufficient.
+\end{proof}
+
+\subsection{Incidence classification and counting gauges}
+
+\begin{proof}[Proof of \cref{thm:incidence}]
+Partition $P$ into
+$S\setminus T$, $S\cap T$, $T\setminus S$, and
+$P\setminus(S\cup T)$.  Two ordered pairs lie in the same orbit under atom
+bijections exactly when these four region sizes agree.  At fixed $|P|=n$,
+the fourth is determined by $(u,v,w)$.  Relabeling naturality makes the
+cocycle constant on each triple, while restriction compatibility identifies
+the same triple across larger inventories.  Conversely, any stable table on
+the triples defines a natural local rule.
+
+There are $\binom{n+3}{3}$ nonnegative triples with $u+v+w\le n$.  The
+condition $S=\varnothing$ removes $n+1$ triples with $u=v=0$; the condition
+$T=\varnothing$ removes $n+1$ triples with $v=w=0$.  Their intersection is
+the zero triple.  Inclusion--exclusion therefore gives
+$\binom{n+3}{3}-2(n+1)+1$, which is \eqref{4.3}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:count-gauge}]
+Atom relabelings act transitively on subsets of a given cardinality, so a
+natural vertex map has the form $b_P(S)=q_{|S|}$.  Gauging \eqref{4.4}
+gives \eqref{4.5} because $|S|=u+v$ and $|T|=v+w$.
+
+Before gauging, the blocks in every row of $B_\rho$ agree.  The determinant
+lemma reduces the state-space determinant to
+\[
+\det\!\left(I-\sum_{\varnothing\ne T\subseteq P}
+ (-1)^{|T|+1}x_T\rho(a)^{|T|}\right).
+\]
+All powers of $\rho(a)$ commute, so matrix-valued inclusion--exclusion turns
+the matrix inside the determinant into
+$\prod_{p\in P}(I-x_p\rho(a))$.  Gauge invariance proves \eqref{4.6} on the
+whole orbit.
+
+For two atoms set $q_1=e$.  The refinement equation gives
+$u_0=a_0^2q_2$, hence $q_2=a_0^{-2}u_0$.  Substitution into the remaining
+four types yields \eqref{4.7}; reversing the substitution proves
+sufficiency.
+\end{proof}
+
+\subsection{The exact \texorpdfstring{$S_3$}{S3} block}
+
+\begin{proof}[Proof of \cref{prop:not-clock}]
+Suppose \eqref{6.1} were gauge equivalent to $a^{|T|}$.  The candidate
+holonomy on the singleton loop $p\to p$ is $e$, while the reference
+holonomy is $a$.  Conjugacy forces $a=e$.  The reference then has identity
+holonomy on every closed word, but $p\to pq\to p$ has candidate holonomy
+$rt$, a nonidentity three-cycle.  This contradicts \cref{prop:gauge}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:standard-block}]
+In the state order $(p,q,pq)$ the arrival weights are $(x,y,-xy)$.  The
+trivial block follows from \cref{prop:artin}.  Since both $r$ and $t$ act by
+$-1$ in the sign representation, direct evaluation of the $3\times3$
+determinant gives the same factor $(1-x)(1-y)$.
+
+With the matrices in \eqref{6.5}, the standard arrival matrix is
+\[
+B_{\stdrep}=
+\begin{pmatrix}
+xI&yI&-xyR\\
+xI&yI&-xyR\\
+xT&yT&-xyI
+\end{pmatrix}.
+\tag{A.1}
+\]
+Exact expansion of the $6\times6$ determinant, followed by collection
+relative to $(1-x)^2(1-y)^2$, gives
+\[
+\det(I-B_{\stdrep})-(1-x)^2(1-y)^2
+=3xy(x+y)(xy+1)(x+y-1),
+\]
+which proves \eqref{6.6}.  Since this is a polynomial identity, it may also
+be checked by direct multiplication.  Expanding
+\[
+\log\frac{D_{\stdrep}}{(1-x)^2(1-y)^2}
+\]
+through total degree four gives
+$-3x^2y-3xy^2-3x^3y-6x^2y^2-3xy^3+O_{\mathrm{tot}}(5)$, proving
+\eqref{6.7}.  Continuing the same exact formal expansion to total degree six
+gives $[x^3y^3]\Delta\log D=-9$.
+\end{proof}
+
+\subsection{Marked-cycle separation}
+\label{app:leak-proof}
+
+\begin{proof}[Proof of \cref{thm:separated-leak}]
+Attach directed-edge markers and use \eqref{5.3}.  If $\gamma$ has primitive
+length $\ell$, its $\ell$ cyclic starting points contribute the same scalar
+marker and conjugate holonomies to $\tr(B_\rho^\ell)$.  Division by $\ell$
+leaves the first-traversal coefficient
+\[
+-\chi_\rho(H_\alpha(\gamma))w(\gamma)z_\gamma.
+\]
+The isolation hypothesis excludes a second connected primitive word with
+the same marker.  Irreducible characters form a basis of the class functions
+on $G$, so nonconjugate candidate and reference holonomies differ in some
+irreducible character.
+
+If the reference is $e$ and every irreducible character took the value
+$d_\rho$ at $H_\alpha(\gamma)$, unitarity and finite order would force all
+eigenvalues of every $\rho(H_\alpha(\gamma))$ to be one.  The regular
+representation, which contains every irreducible, is faithful; hence the
+holonomy would equal $e$, a contradiction.
+\end{proof}
+
+For $\gamma_\square$, the edge values are $r,t,r,t$, so its holonomy is the
+nonidentity three-cycle $(rt)^2$.  The alternative pairing of its four
+directed edges gives the two disconnected cycles $[p,pq]$ and $[q,pq]$;
+there is no competing connected cyclic traversal.  The standard-character
+values $-1$ and $2$ give the gap in \eqref{6.8}.
+
+\subsection{Trace class and cutoff convergence}
+
+\begin{proof}[Proof of \cref{thm:trace-class}]
+For $\sigma>2$,
+\[
+\sum_{S\in\Einfty}|q_S(s)|
+=\sum_{\varnothing\ne S\subset_{\mathrm{fin}}\mathbb P}
+ \prod_{p\in S}p^{-\sigma/2}
+=\prod_p(1+p^{-\sigma/2})-1<\infty,
+\]
+because $\sum_pp^{-\sigma/2}$ converges.  Decompose each finite-dimensional
+block into matrix units.  Since $\rho(\alpha(S,T))$ is unitary, its trace
+norm is $d_\rho$.  Summing the entrywise nuclear norms proves \eqref{8.3}.
+
+For projection $\Pi_N$ onto subsets of the first $N$ primes, the same sum
+with at least one index outside the cutoff yields \eqref{8.5}.  Hence the
+operators converge in trace norm, and continuity of Fredholm determinants
+gives locally uniform convergence on every closed half-plane
+$\sigma\ge2+\delta$.
+
+For finite $P$, let $Q=\operatorname{diag}(q_S)$ and
+$A_\rho(S,T)=\rho(\alpha(S,T))$.  Then $K=QA_\rho Q$, while the arrival
+matrix is $A_\rho Q^2$.  Sylvester's identity applied to
+$U=QA_\rho$ and $V=Q$ proves \eqref{8.2}.
+\end{proof}

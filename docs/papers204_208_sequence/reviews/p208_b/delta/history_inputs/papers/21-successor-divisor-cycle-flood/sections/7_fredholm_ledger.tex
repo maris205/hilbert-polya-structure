@@ -1,0 +1,152 @@
+\section{Fredholm determinant and the primitive ledger}
+\label{sec:fredholm}
+
+Trace class supplies a whole determinant; finite confinement supplies an
+exact path interpretation of every trace coefficient.
+
+\begin{theorem}[Same-object Fredholm and primitive factorization]
+\label{thm:fredholm}
+For \(\sigma=\RePart s>1/2\),
+\[
+ D_{\SD}(s,z)=\det(I-zL_s)
+\]
+is holomorphic in \(s\) and entire in \(z\).  For \(z\) sufficiently close
+to zero,
+\begin{equation}
+\label{eq:logdet}
+ -\log D_{\SD}(s,z)
+ =
+ \sum_{r\ge1}\frac{z^r}{r}\Tr L_s^r,
+\end{equation}
+and
+\begin{equation}
+\label{eq:primitive-product}
+ D_{\SD}(s,z)
+ =
+ \prod_{[\gamma]\ {\rm primitive}}
+ \left(
+ 1-z^{\ell(\gamma)}N(\gamma)^{-2s}
+ \right).
+\end{equation}
+More precisely, \cref{eq:primitive-product} is absolutely convergent for
+\[
+ |z|<\|L_{\sigma}\|^{-1}.
+\]
+No primitive-product convergence at \(z=1\) is asserted.
+\end{theorem}
+
+\begin{proof}
+\Cref{thm:traceclass,prop:holomorphy} and trace-class Fredholm theory give
+the first statement and \cref{eq:logdet}; see, for example,
+\citet{Simon1977}.  The logarithmic series converges whenever
+\(|z|\|L_s\|<1\).
+
+By \cref{cor:cutoff}, each trace is the finite closed-walk sum
+\[
+ \Tr L_s^r
+ =
+ \sum_{n_0\to\cdots\to n_{r-1}\to n_0}
+ \prod_{j=0}^{r-1}(n_jn_{j+1})^{-s}.
+\]
+Taking absolute values gives the corresponding trace for the positive
+operator \(L_\sigma\).  The estimate
+\[
+ \Tr L_\sigma^r
+ \le\|L_\sigma\|_1\|L_\sigma\|^{r-1}
+\]
+shows absolute summability when \(|z|\|L_\sigma\|<1\).
+Group each closed word by its unique primitive root and use
+\[
+ -\log(1-x)=\sum_{m\ge1}\frac{x^m}{m}.
+\]
+The cyclic weight is \(N(\gamma)^{-2s}\) by
+\cref{eq:cyclic-weight}, giving \cref{eq:primitive-product}.
+\end{proof}
+
+\begin{corollary}[Conjugation symmetry]
+\label{cor:conjugation}
+\[
+ D_{\SD}(\overline s,\overline z)
+ =
+ \overline{D_{\SD}(s,z)}.
+\]
+\end{corollary}
+
+\begin{proof}
+The matrix satisfies \(L_{\overline s}=\overline{L_s}\) entrywise, and the
+Fredholm determinant respects conjugation.
+\end{proof}
+
+\begin{remark}
+\Cref{cor:conjugation} is a reality symmetry of one holomorphic operator
+family.  It is not a functional equation and gives no reflection across
+\(\RePart s=1/2\).
+\end{remark}
+
+\subsection{First weighted traces}
+
+\begin{proposition}[Low-order trace ledger]
+\label{prop:first-traces}
+The first four traces are
+\begin{align}
+\Tr L_s&=0,                                                   \label{eq:t1}\\
+\Tr L_s^2&=2\,6^{-2s},                                       \label{eq:t2}\\
+\Tr L_s^3&=3\,60^{-2s},                                      \label{eq:t3}\\
+\Tr L_s^4&=2\,6^{-4s}+4\,120^{-2s}+4\,840^{-2s}.              \label{eq:t4}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+There is no loop.  The only primitive length-two class is
+\((2,3)\), with vertex product \(6\).  The only primitive length-three class
+is \((3,4,5)\), with product \(60\).  At length four there is the double
+traversal of \((2,3)\) and the two primitive classes
+\[
+ (2,3,4,5),
+ \qquad
+ (4,5,6,7),
+\]
+with products \(120\) and \(840\).  Each primitive length-\(r\) class has
+\(r\) rooted rotations.  A finite-prefix classification justified by
+\cref{thm:confinement} is expanded in \cref{app:proofs}.
+\end{proof}
+
+At \(s=1\), \cref{eq:t1,eq:t2,eq:t3,eq:t4} become
+\[
+ 0,\qquad\frac1{18},\qquad\frac1{1200},\qquad\frac{29}{15876}.
+\]
+The first primitive factors are
+\[
+ (1-z^2\,6^{-2s})
+ (1-z^3\,60^{-2s})
+ (1-z^4\,120^{-2s})
+ (1-z^4\,840^{-2s})\cdots.
+\]
+
+\subsection{Determinant coefficients}
+
+Write
+\[
+ D_{\SD}(s,z)=\sum_{m\ge0}a_m(s)z^m,\qquad a_0=1.
+\]
+Differentiating \cref{eq:logdet} gives the Newton recurrence
+\begin{equation}
+\label{eq:newton}
+ ma_m(s)=-\sum_{r=1}^m\Tr(L_s^r)a_{m-r}(s).
+\end{equation}
+The first coefficients are
+\begin{align*}
+a_1(s)&=0,\\
+a_2(s)&=-6^{-2s},\\
+a_3(s)&=-60^{-2s},\\
+a_4(s)&=-120^{-2s}-840^{-2s}.
+\end{align*}
+The temporal double of \(C_2\) appears in the logarithm but cancels from
+\(a_4\), as multiplication of primitive factors requires.  At \(s=1\),
+\[
+ a_0,a_1,a_2,a_3,a_4
+ =
+ 1,0,-\frac1{36},-\frac1{3600},-\frac1{14112}.
+\]
+This is a small but useful audit that primitive factors and repetitions have
+not been conflated.

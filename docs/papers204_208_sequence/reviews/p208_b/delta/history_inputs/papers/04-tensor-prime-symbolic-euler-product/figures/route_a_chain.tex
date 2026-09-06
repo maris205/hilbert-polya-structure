@@ -1,0 +1,134 @@
+% Pure TikZ content: input inside a figure environment supplied by the paper.
+% Required libraries: arrows.meta, positioning.
+\begin{tikzpicture}[
+  font=\footnotesize,
+  node distance=3.8mm,
+  >={Latex[length=2.2mm,width=1.5mm]},
+  exact/.style={
+    draw=blue!68!black,
+    fill=blue!7,
+    line width=0.85pt,
+    rounded corners=1.5pt,
+    text width=0.53\linewidth,
+    align=left,
+    inner xsep=5.5pt,
+    inner ysep=4.5pt
+  },
+  construction/.style={
+    draw=orange!82!black,
+    fill=orange!10,
+    line width=0.85pt,
+    rounded corners=1.5pt,
+    text width=0.53\linewidth,
+    align=left,
+    inner xsep=5.5pt,
+    inner ysep=4.5pt
+  },
+  barrier/.style={
+    draw=orange!82!black,
+    fill=orange!7,
+    line width=1.05pt,
+    densely dashed,
+    rounded corners=1.5pt,
+    text width=0.275\linewidth,
+    align=left,
+    inner xsep=5pt,
+    inner ysep=5pt
+  },
+  locked/.style={
+    draw=gray!78!black,
+    fill=gray!13,
+    line width=0.85pt,
+    dash pattern=on 1.2pt off 1.2pt,
+    rounded corners=1.5pt,
+    text width=0.275\linewidth,
+    align=left,
+    inner xsep=5pt,
+    inner ysep=5pt
+  },
+  flow/.style={
+    ->,
+    draw=blue!68!black,
+    line width=0.95pt
+  },
+  modelFlow/.style={
+    ->,
+    draw=orange!82!black,
+    line width=0.95pt
+  },
+  boundaryLine/.style={
+    draw=orange!82!black,
+    line width=0.9pt,
+    densely dashed
+  },
+  lockLine/.style={
+    draw=gray!78!black,
+    line width=0.85pt,
+    dash pattern=on 1.2pt off 1.2pt
+  }
+]
+
+\node[exact] (full) {%
+  {\sffamily\scriptsize\bfseries [EXACT]}\quad
+  \textbf{Finite full shifts + Cartesian tensor}\\[-1pt]
+  $F_m\otimes F_n:=F_m\times F_n\cong F_{mn}$, with tensor unit $F_1$.
+};
+
+\node[exact, below=of full] (atoms) {%
+  {\sffamily\scriptsize\bfseries [EXACT]}\quad
+  \textbf{Tensor atoms + intrinsic entropy}\\[-1pt]
+  $\operatorname{At}(\mathsf{FSh})=\{[F_p]:p\ \text{prime}\}$,
+  $h_{\mathrm{top}}(F_p)=\log p$, and
+  $F_n\cong\bigotimes_p F_p^{\otimes v_p(n)}$.
+};
+
+\node[construction, below=of atoms] (loops) {%
+  {\sffamily\scriptsize\bfseries [CONSTRUCTION]}\quad
+  \textbf{Diagonal atom--loop shift}\\[-1pt]
+  One primitive loop $\gamma_p$ per tensor atom; no mixed loops.
+  The roof is inherited from entropy:
+  $\ell(\gamma_p^r)=r\log p$.
+};
+
+\node[construction, below=of loops] (fredholm) {%
+  {\sffamily\scriptsize\bfseries [HALF-PLANE]}\quad
+  \textbf{Trace-class Fredholm ledger}\\[-1pt]
+  $\mathcal L_s e_p=p^{-s}e_p$ is trace class for
+  $\operatorname{Re}s>1$, and
+  $D_\otimes(s):=\det(I-\mathcal L_s)=\prod_p(1-p^{-s})$.
+};
+
+\node[exact, below=of fredholm] (zeta) {%
+  {\sffamily\scriptsize\bfseries [EXACT FOR $\operatorname{Re}s>1$]}\quad
+  \textbf{Symbolic Euler product}\\[-1pt]
+  $Z_\otimes(s):=D_\otimes(s)^{-1}
+   =\prod_p(1-p^{-s})^{-1}
+   =\sum_{n\geq1}n^{-s}=\zeta(s)$,\\[-1pt]
+  $-Z_\otimes'(s)/Z_\otimes(s)=\sum_n\Lambda(n)n^{-s}$.
+};
+
+\node[barrier, right=6.2mm of fredholm, yshift=7mm] (a3) {%
+  {\sffamily\scriptsize\bfseries [A3 BLOCK]}\\[1pt]
+  \textbf{No intrinsic global completion}\\[1pt]
+  $\bullet$ no analytic continuation,\\[-1pt]
+  $\bullet$ no $\Gamma$-factor,\\[-1pt]
+  $\bullet$ no functional equation.\\[2pt]
+  The half-plane identity is not a completed $\zeta/\xi$ determinant.
+};
+
+\node[locked, below=4mm of a3] (routeb) {%
+  {\sffamily\scriptsize\bfseries [ROUTE B LOCKED]}\\[1pt]
+  No self-adjoint operator and no zero/divisor correspondence are supplied.
+};
+
+\draw[flow] (full.south) -- (atoms.north);
+\draw[modelFlow] (atoms.south) -- (loops.north);
+\draw[modelFlow] (loops.south) -- (fredholm.north);
+\draw[flow] (fredholm.south) -- (zeta.north);
+
+\draw[boundaryLine] (fredholm.east) -- (a3.west)
+  node[midway, above, text=orange!82!black, font=\sffamily\tiny]
+  {boundary};
+\draw[lockLine] (zeta.east) -| (routeb.west);
+
+\end{tikzpicture}

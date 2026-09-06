@@ -1,0 +1,309 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\qbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{q}}
+
+\title[Random quotient-leakage erosion]{Random Quotient-Leakage Erosion:\
+Every-Target Fibres and a Complementary Jordan Ladder}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{60J10, 15B52, 05E16, 37P05}
+\keywords{finite Markov chain, subspace lattice, random linear map,
+Gaussian coefficient, Jordan block}
+
+\begin{document}
+
+\begin{abstract}
+Let $V=\F_q^n$.  At every epoch, resample a uniform endomorphism $T$ of
+$V$ and replace the current subspace $U$ by $U\cap T^{-1}(U)$.  Factoring
+$T|_U$ through $V/U$ identifies the update with the kernel of a uniform
+quotient map.  This gives the exact fibre of every labelled target, an
+$(n+1)$-state dimension quotient, and every-time labelled transition
+probabilities.  The full transition operator has algebraic eigenvalues
+$q^{-a(n-a)}$ with Gaussian multiplicities.  In the dimension quotient,
+each equality between complementary dimensions $a$ and $n-a$ produces a
+forced $2$-by-$2$ Jordan block away from the endpoints.  For $n\ge1$ the
+two endpoint occurrences of eigenvalue one are semisimple, whereas at
+$n=0$ they coincide and give one $J_1(1)$.  Exact absorption formulas
+complete the finite atlas.  Finite-field rank laws, Gaussian
+incidence, and generic triangular-chain algebra are treated as background;
+the external status is \textsc{hold\_external}.
+\end{abstract}
+
+\maketitle
+
+\section{The quotient-kernel chain}
+
+Fix a prime power $q$ and an $n$-dimensional vector space $V$ over $\F_q$.
+Let $T_1,T_2,\ldots$ be independent uniform elements of $\End(V)$ and set
+\begin{equation}\label{eq:update}
+                 U_r=U_{r-1}\cap T_r^{-1}(U_{r-1}).
+\end{equation}
+This is a Markov chain on the full labelled subspace lattice.  The ordinary
+rank and nullity distributions of uniform finite-field matrices are well
+developed; the uniform rectangular ensemble is treated directly by
+\citet{FulmanGoldstein2015}.  \citet{Balakin1968} is broader nonuniform,
+sparse random-rank background rather than an owner of that uniform count,
+and Gaussian subspace enumeration is classical \cite{GoldmanRota1970}.
+Those rank laws, the Gaussian subspace census, the symmetry refinement to a
+fixed kernel, the elementary ambient-lift exponent, and generic finite-chain
+facts are assigned no contribution credit here.  Evans's elementary-divisor
+filtration gives a dimension-chain precursor, and Van Peski's labelled
+refinement reduces a descending subspace transition to the kernel of a
+uniform square map and derives its fixed-target injection count
+\cite{Evans2002,VanPeski2018}.  That uniform-kernel architecture and ordinary
+Markov powering also receive zero credit.  Our narrow object is the fixed-
+ambient rectangular codimension schedule in \eqref{eq:update} and the
+complementary spectral resonance it forces.
+
+For $0\le b\le a\le n$, put $d=a-b$ and define
+\begin{equation}\label{eq:C}
+ C_{n,q}(a,b)=
+ \begin{cases}
+ \displaystyle\prod_{i=0}^{d-1}(q^{n-a}-q^i),&d\le n-a,\\[2mm]
+ 0,&d>n-a.
+ \end{cases}
+\end{equation}
+The empty product is one.  Write $\qbinom ab$ for a Gaussian coefficient and
+let
+\begin{equation}\label{eq:Q}
+ Q_{ab}=\qbinom ab\frac{C_{n,q}(a,b)}{q^{a(n-a)}}
+ \quad(0\le b\le a\le n),
+\end{equation}
+with all other entries zero.  Let $P$ be the full transition matrix indexed
+by labelled subspaces.
+
+\begin{theorem}[labelled fibre and spectral atlas]\label{thm:main}
+The chain \eqref{eq:update} has the following exact description.
+\begin{enumerate}[(i)]
+\item Fix $B\le U\le V$ with $\dim U=a$ and $\dim B=b$.  Then
+\begin{equation}\label{eq:ambient-fibre}
+ \#\{T\in\End(V):U\cap T^{-1}(U)=B\}
+ =q^{n^2-a(n-a)}C_{n,q}(a,b).
+\end{equation}
+A target not contained in $U$ has empty fibre.  Consequently
+\begin{equation}\label{eq:one-step}
+ P(U,B)=\frac{C_{n,q}(a,b)}{q^{a(n-a)}}.
+\end{equation}
+
+\item The matrix $Q$ in \eqref{eq:Q} is the dimension transition matrix.
+For every $t\ge0$ and every fixed $B\le U$,
+\begin{equation}\label{eq:alltime}
+             P^t(U,B)=\frac{(Q^t)_{ab}}{\qbinom ab}.
+\end{equation}
+The probability is zero when $B\nleq U$.
+
+\item The complete algebraic eigenvalue multiset of $P$ is
+\begin{equation}\label{eq:spectrum}
+ \left\{q^{-a(n-a)}\text{ with multiplicity }\qbinom na:
+                                      0\le a\le n\right\}.
+\end{equation}
+The full Jordan form is not asserted.  The Jordan form of the dimension
+quotient $Q$, however, is completely determined: the eigenvalue one has two
+$J_1$ blocks when $n\ge1$, while for $n=0$ the quotient is the single block
+$J_1(1)$; for every $1\le b<n/2$, the common eigenvalue
+\begin{equation}\label{eq:paired-eigenvalue}
+                 q^{-b(n-b)}=q^{-(n-b)b}
+\end{equation}
+has one $J_2$ block; and when $n$ is positive and even, the middle eigenvalue
+$q^{-n^2/4}$ has one $J_1$ block.
+
+\item The subspaces $0$ and $V$ are fixed.  Every proper nonzero starting
+subspace is absorbed at $0$ almost surely.  If $0<a<n$, then
+\begin{align}
+ \Prb_a(\tau_0\le t)&=(Q^t)_{a0},                       \label{eq:cdf}\\
+ E_0&=0,\qquad
+ E_a=\frac{1+\sum_{b<a}Q_{ab}E_b}{1-Q_{aa}}=\E_a\tau_0.
+                                                               \label{eq:mean}
+\end{align}
+For $n=2$ the sole transient row is
+\begin{equation}\label{eq:n2}
+ Q_{10}=\frac{q-1}{q},\qquad Q_{11}=\frac1q,
+ \qquad E_1=\frac q{q-1},
+\end{equation}
+while $0$ and $V$ remain fixed.
+\end{enumerate}
+\end{theorem}
+
+\section{Every-target fibres and labelled powers}
+
+Let $\pi_U:V\to V/U$ be the quotient projection.  Only the map
+\begin{equation}\label{eq:leak-map}
+ L_T=\pi_U\circ T|_U:U\longrightarrow V/U
+\end{equation}
+is visible to the update, and
+\begin{equation}\label{eq:kernel}
+                  U\cap T^{-1}(U)=\ker L_T.
+\end{equation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i)]
+The linear map
+\[
+ \End(V)\longrightarrow\Hom(U,V/U),\qquad T\longmapsto L_T,
+\]
+is surjective.  Its codomain has dimension $a(n-a)$, so every quotient map
+has $q^{n^2-a(n-a)}$ lifts to an ambient endomorphism.  Requiring
+$\ker L_T=B$ is equivalent to requiring the induced map
+$U/B\to V/U$ to be injective.  There are exactly
+\[
+ \prod_{i=0}^{a-b-1}(q^{n-a}-q^i)=C_{n,q}(a,b)
+\]
+such maps, with none when $a-b>n-a$.  Multiplying by the common number of
+lifts proves \eqref{eq:ambient-fibre}; dividing by $q^{n^2}$ proves
+\eqref{eq:one-step}.
+\end{proof}
+
+Summing \eqref{eq:one-step} over the $\qbinom ab$ subspaces $B\le U$ of
+dimension $b$ proves both the row-sum identity for \eqref{eq:Q} and the
+dimension quotient.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(ii)]
+Every trajectory is nested.  Moreover, the stabilizer of $U$ in
+$\operatorname{GL}(V)$ acts transitively on its $b$-subspaces and preserves
+the distribution of the freshly sampled endomorphisms.  For two such targets
+$B,B'$, choose a stabilizer element $g$ with $gB=B'$.  Conjugating every map
+in a complete history by $g$ is an unconditional probability-preserving
+bijection between the raw events $\{U_t=B\}$ and $\{U_t=B'\}$, including
+when both events have mass zero.  Thus all $\qbinom ab$ labelled endpoint
+probabilities are equal.  Their total mass is $(Q^t)_{ab}$, giving
+\eqref{eq:alltime}, including $t=0$.
+\end{proof}
+
+Thus the small quotient loses no labelled endpoint information: once $Q^t$
+is known, one division recovers every reachable target.
+
+\section{Complementary-dimension resonance}
+
+Order the labelled subspaces by nondecreasing dimension.  The transition
+matrix is lower triangular because \eqref{eq:update} only decreases the
+state.  Remaining at an $a$-space is equivalent to $L_T=0$, hence
+\begin{equation}\label{eq:diagonal}
+                         P(U,U)=q^{-a(n-a)}.
+\end{equation}
+There are $\qbinom na$ such subspaces, proving the algebraic multiset
+\eqref{eq:spectrum}.
+
+\begin{lemma}\label{lem:adjacent}
+For $1\le k\le n-1$, the adjacent entry $Q_{k,k-1}$ is positive.
+\end{lemma}
+
+\begin{proof}
+Here the dimension loss is one and the codomain has dimension $n-k\ge1$.
+Thus $C_{n,q}(k,k-1)=q^{n-k}-1>0$ in \eqref{eq:Q}.
+\end{proof}
+
+\begin{proof}[Proof of the quotient Jordan assertion]
+The exponent $x(n-x)$ is strictly concave and symmetric around $n/2$.
+Consequently the only repetitions among the diagonal entries of $Q$ are the
+complementary pairs $b,n-b$, together with the endpoints $0,n$.
+
+Fix $1\le b<n/2$, put $a=n-b$, and let
+$\lambda=q^{-b(n-b)}$.  Consider the right-eigenvector recursion
+$(Q-\lambda I)x=0$ in increasing row order.  Rows below $b$ force
+$x_0=\cdots=x_{b-1}=0$, while row $b$ leaves $x_b$ free.  Scale a putative
+eigenvector born there so that $x_b=1$.  For $b<k<a$, strict concavity gives
+$Q_{kk}<\lambda$, and the recursion reads
+\[
+ x_k=\frac{\sum_{j<k}Q_{kj}x_j}{\lambda-Q_{kk}}>0.
+\]
+The inequality follows inductively from Lemma~\ref{lem:adjacent}.  At row
+$a$, however, the diagonal again equals $\lambda$, while the compatibility
+sum is strictly positive because it contains
+$Q_{a,a-1}x_{a-1}>0$.  Hence no eigenvector can be born at $b$.
+
+The eigenvector born at $a$ remains, so this algebraically double eigenvalue
+has geometric multiplicity one and therefore one $J_2$ block.  At eigenvalue
+one and $n\ge1$, the constant column vector is a right eigenvector because
+$Q$ is row stochastic, while the indicator column of the full-dimension
+state is a second right eigenvector because no lower-dimensional row reaches
+dimension $n$ and $Q_{nn}=1$.  They are independent, so the algebraically
+double endpoint eigenvalue gives two $J_1$ blocks.  If $n$ is positive and
+even, the midpoint occurs only once and gives one $J_1$.  These blocks
+exhaust the $n+1$ quotient dimensions.  When $n=0$, the endpoint states
+coincide, $Q=(1)$, and the inventory is instead one $J_1(1)$.
+\end{proof}
+
+Functions depending only on subspace dimension form a $P$-invariant
+subspace represented by $Q$.  Therefore every displayed $J_2$ is also a
+genuine obstruction to diagonalizability of the full operator.  We do not
+infer the remaining full-operator Jordan multiplicities from this quotient.
+
+\section{Absorption, boundaries, and claim boundary}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iv)]
+The quotient in \eqref{eq:leak-map} is zero when $U=0$ or $U=V$, so those
+states are fixed.  If $0<\dim U<n$, there is positive probability that
+$L_T$ is nonzero, and hence positive probability of strict dimension loss.
+The finite nested chain consequently reaches zero almost surely.  Formula
+\eqref{eq:cdf} is \eqref{eq:alltime} with the unique zero-dimensional
+target.  First-step conditioning gives \eqref{eq:mean}.  Substitution in
+\eqref{eq:Q} gives \eqref{eq:n2}.  The cases $n=0$ and $n=1$ consist only of
+fixed boundary states.
+\end{proof}
+
+The residual claim is intentionally narrower than random-matrix rank theory.
+The uniform finite-field nullity law studied by Fulman and Goldstein owns the
+dimension-level matrix count used in \eqref{eq:C}; Balakin's sparse,
+nonuniform ensemble is only broader random-rank context
+\cite{Balakin1968,FulmanGoldstein2015}.  Gaussian incidence owns the number
+of labelled subspaces \cite{GoldmanRota1970}; fixed-kernel uniformity is its
+standard symmetry refinement; the ambient lift factor is elementary linear
+algebra; and triangular spectra, Jordan recursions, and hitting-time
+identities are standard.  Evans's dimension precursor and Van Peski's
+labelled square-kernel chain own the descending-subspace architecture,
+fixed-target injection count, Gaussian lumping, and ordinary powers
+\cite{Evans2002,VanPeski2018}.  Their current $a$-space maps to an
+$a$-dimensional codomain inside a filtration of one Haar local-field matrix;
+P173 instead resamples in one fixed $n$-space and sees the rectangular map
+$U\to V/U$ of dimensions $a\to n-a$.  The sources do not supply this
+complementary-codimension schedule or its Jordan ladder.
+
+Internally, P109, P162, P165, and P168 own their subspace carriers,
+random-intersection language, and reusable proof devices.  The same-batch
+P172 additionally owns fresh ambient maps, nested erosion, a small quotient,
+labelled recovery, triangular/Jordan tactics, and absorption formulas.
+Those shared shells earn zero separation credit.  P172's inverse axis is
+specified-box set-image occupancy with one terminal $J_2$; it does not
+specialize to the present linear injection fibre.  What remains under
+evaluation here is only the literal fixed-ambient leakage schedule
+$a\to n-a$, its every-target realization inside \eqref{eq:update}, and the
+forced complementary-dimension Jordan ladder.
+
+The standalone verifier independently enumerates every binary subspace and
+every ambient endomorphism through $n=3$, checks labelled powers through four
+epochs, and tests exact rational Jordan nullities for
+$q\in\{2,3,4,5\}$ through $n=9$.  These computations can falsify arithmetic
+or boundary errors but do not prove the uniform statements.  The source
+search was bounded; a non-hit is not evidence of novelty, priority, or
+freedom to operate.  The manuscript therefore remains anonymous and
+\textsc{hold\_external}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

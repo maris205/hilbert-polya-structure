@@ -1,0 +1,104 @@
+\section{Reproducibility and Evidence Ledger}
+\label{app:reproducibility}
+
+\subsection{Frozen commands}
+
+All six evaluator records bind the experiment code to the full source commit
+recorded in the accompanying test report (prefix \texttt{7c059754141b}).
+The relocation and paper generation do not alter that experiment-code
+provenance.  A fresh frozen
+rerun from the Stage-01 root used
+\begin{verbatim}
+python -m pytest -q
+\end{verbatim}
+and returned \(29/29\) passing tests.  The stage-manifest entry for the test
+report binds the command, output, and Python/package versions.
+
+From the Stage-01 root, the four experiment entry points are:
+\begin{verbatim}
+python finite_state_arithmetic_skeleton/experiments/run_session4_core.py
+bash farey_gauss_transfer/experiments/run.sh
+bash wheel_sieve_level_shift/experiments/run.sh
+bash knauf_spin_chain_audit/experiments/run.sh
+\end{verbatim}
+The first command runs the \candidate{01}--\candidate{03} core.  Candidate
+directories retain their frozen configurations, run logs, machine-readable
+results, and tests.
+
+From the paper directory, regenerate all paper figures and the candidate table
+with:
+\begin{verbatim}
+python figures/generate_all.py
+\end{verbatim}
+The figure scripts resolve the Stage-01 root from their own file locations.
+They read YAML, CSV, and JSON inputs and fail if cross-format summary fields do
+not agree.
+
+\subsection{Cutoffs, precision, and seeds}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}X}
+\toprule
+Object & Frozen finite protocol \\
+\midrule
+\candidate{01} &
+\(q=2,3,5\), formula degree 12; determinant rectangles
+\(T=10,20,40,80\); exact integers and 80 decimal digits; unitary seed
+20260815. \\
+\candidate{02} &
+Brute periods through 14, exact census through 30, binary window length 4096;
+shuffle seed 20260816. \\
+\candidate{03} &
+Degree-12 rational controls; 80-digit positive-root bracketing; seeds
+20260813--20260814 plus master control seed 20260812. \\
+\candidate{04} &
+Digit cutoffs \(D=2,3,4,5\), word cutoffs \(L=4,6,8\), 80 decimal digits and
+an independent 40-digit audit. \\
+\candidate{05} &
+Levels 0--7; arithmetic, fixed, cyclic, and five random deletion controls
+with seeds 20260812--20260816; exact integer graph certificates. \\
+\candidate{06} &
+Depths \(k=8,10,\ldots,22\), 16 frozen real/complex points, complex double
+precision and independent 50/100-digit direct sums; every random seed is
+reported. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Claims to artifacts}
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.27\textwidth}>{\raggedright\arraybackslash}X}
+\toprule
+Claim & Primary artifact classes \\
+\midrule
+Finite-memory \(O(R)\) obstruction &
+\path{finite_state_arithmetic_skeleton/PROOF_PACKAGE.md} and exact
+count JSON/CSV. \\
+Squarefree periodic collapse &
+\path{squarefree_admissible_shift/PROOF_PACKAGE.md} and periodic census
+CSV. \\
+Renewal inverse design and mixed words &
+\path{renewal_inverse_design_obstruction/PROOF_PACKAGE.md}, result JSON,
+and control CSV. \\
+Gauss ledger and collisions &
+\path{farey_gauss_transfer/DERIVATION_PACKAGE.md}, cutoff CSV, compressed
+orbit ledger, and summary JSON. \\
+Wheel prime recursion and DAG &
+\path{wheel_sieve_level_shift/PROOF_PACKAGE.md}, level CSV, compressed
+edge ledger, and DAG certificate JSON. \\
+Knauf quotient and finite-depth boundaries &
+\path{knauf_spin_chain_audit/DERIVATION_PACKAGE.md},
+\path{POST_RUN_AUDIT.md}, final-grid and precision CSV files, and summary
+JSON. \\
+Route-A matrix and Route-B lock &
+Six append-only YAML files under \path{evaluations/route_a/}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Stage-01 manifest records artifact hashes.  The paper itself does not
+embed a Riemann-zero table, prime-indexed fitted parameters, or a best-seed
+selection.

@@ -1,0 +1,67 @@
+\section{Scope, comparison, and computational controls}
+
+\subsection{What the theorem does and does not say}
+The exact finite-group statement, \cref{thm:finite-group-intro}, converts a
+geometric separation problem into a local inverse-window formula.  For the
+rank-one family, the spacer/defect coding solves that separation problem
+exactly and gives \eqref{eq:main-bound-intro}.  The argument does not say that every
+radius-one conjugacy on every bounded rank-one family has a large inverse.
+It gives one fixed radius-one rule and one explicit family for which no
+coarse uniform bound is possible.
+
+The factor theorem of Gao and Ziegler~\cite{GaoZiegler2020} supplies important
+qualitative context: subshift factors of rank-one subshifts are finite or
+isomorphic to the source.  Our injectivity proof is independent and specific
+to the derivative; its residual contribution is the exact inverse-window
+criterion and the quantitative family.  The construction is also compatible
+with the finite-spacer-rank framework of Gao et al.~\cite{GaoEtAl2025}.
+Durand--Leroy's computable bounds~\cite{DurandLeroy2022} concern a fixed pair
+of minimal substitution systems and allow a shift power; they do not provide
+the coarse-parameter uniformity ruled out here.
+
+\subsection{Deterministic control}
+The companion script \texttt{code/verify\_rank\_one\_radius.py} performs the
+following finite checks.
+\begin{itemize}
+\item For cyclic groups of orders $2$ through $5$, and separately for the
+  noncommutative group $S_3$, it enumerates short source words and verifies
+  that every derivative fibre is exactly a left-translation orbit.
+\item For $1\leq N\leq8$, it constructs $v_N,v_{N+1},v_{N+2}$, checks the
+  alternating formula, locates $W$ and $\comp(W)$ at the positions used in
+  \cref{lem:witness}, verifies the spacer recursion and $101$ avoidance, and
+  checks the exact separation/radius arithmetic.
+\item For $1\leq N\leq8$, a collision-free integer-window enumeration at
+  finite tail depth verifies that the longest complementary overlap is
+  $3|v_N|+1$ and that the next length is disjoint.
+\item It checks the length, one-count, and discrepancy recurrences as exact
+  integer or rational identities and reproduces the density and exact-radius
+  formulas.
+\end{itemize}
+The frozen output terminates in \texttt{ALL CHECKS PASS}.  These enumerations
+are regression evidence only.  Compactness, minimality, unique ergodicity,
+and all asymptotic statements are proved in the text and do not depend on the
+finite cutoff.
+
+\subsection{Parameter ledger}
+For clarity, \cref{tab:ledger} separates assumptions, exact conclusions, and
+items deliberately left open.
+
+\begin{table}[t]
+\centering
+\caption{Claim and parameter ledger for the constructed family.}
+\label{tab:ledger}
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\toprule
+Item & Status\\
+\midrule
+Construction parameters & alphabet $2$, cutting $\leq4$, spacers $\leq2$\\
+Dynamics & minimal, aperiodic, uniquely ergodic; proved directly\\
+Forward code & fixed XOR derivative, memory $0$, anticipation $1$\\
+Injectivity & exact, from density imbalance and complement disjointness\\
+Inverse window & exact criterion in terms of $s_G(X)$ for every finite group\\
+Family radius & exact formula $R_N=3\cdot2^N-1$\\
+Separating length & exact formula $s_{\Ftwo}(X_N)=3\cdot2^{N+1}-1$\\
+Priority & bounded source search only; no priority claim\\
+\bottomrule
+\end{tabularx}
+\end{table}

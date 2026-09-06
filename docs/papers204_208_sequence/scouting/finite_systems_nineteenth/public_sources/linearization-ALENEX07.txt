@@ -1,0 +1,627 @@
+                   Linearization: Locally Self-Stabilizing Sorting in Graphs
+
+                         Melih Onus∗                 Andrea Richa†                 Christian Scheideler‡
+
+
+Abstract                                                                to be self-stabilizing. In general, self-stabilization of a
+We consider the problem of designing a distributed algo-                system guarantees that regardless of a current system’s
+rithm that, given an arbitrary connected graph G of nodes               state, the system will converge to a legal state in a finite
+with unique labels, converts G into a sorted list of nodes.
+This algorithm should be as simple as possible and, for scal-           number of steps. Before presenting previous work on
+ability, should guarantee a polylogarithmic runtime as well             self-stabilization, we start with some basic definitions.
+as at most a polylogarithmic increase in the degree of each
+node during its execution. Furthermore, it should be self-              Definition 1.1. A system is a pair S = (C, →) where
+stabilizing, that is, it should be able to eventually construct
+a sorted list from any state in which the graph is connected.           C is a set of states of the system and → is a binary
+It turns out that satisfying all of these demands at the same           transition relation on C. A computation of S is a
+time is not easy.                                                       non-empty sequence (c1 , c2 , . . .) such that for all i ≥ 0,
+     Our basic approach towards this goal is the so-called
+linearization technique: each node v repeatedly does the                ci ∈ C and ci → ci+1 .
+following with its neighbors:
+  • for its left (i.e., smaller) neighbors u1 , . . . , uk in the or-      In distributed systems the above mentioned ci ex-
+    der of decreasing labels, v replaces {v, u1 }, . . . , {v, uk }   presses a global state, which is the concatenation of the
+    by {v, u1 }, {u1 , u2 }, . . . , {uk−1 , uk }, and                local states of every process and the contents of every
+  • for its right (i.e., larger) neighbors w1 , . . . , w` in the or- communication channel. A commonly used definition of
+    der of increasing labels, v replaces {v, w1 }, . . . , {v, w` }
+    by {v, w1 }, {w1 , w2 }, . . . , {w`−1 , w` }.                    self-stabilization is:
+     As shown in this paper, this technique transforms any              Definition 1.2. A system S is self-stabilizing with
+connected graph into a sorted list, but there are graphs for            respect to a set of legal states L ⊂ C if for any state
+which this can take a long time. Hence, we propose several              c ∈ C, any computation of the system starting with c
+extensions of the linearization technique and experimentally            will eventually reach a state in L.
+evaluate their performance. Our results indicate that some
+of these have a polylogarithmic performance, so there is hope        The subset L is problem-specific. Often, it is
+that there are distributed algorithms that can achieve all of    assumed that L is closed, i.e. every non-faulty move
+our goals above.                                                 from a state in L ends in a state in L. An algorithm is
+                                                                 said to be self-stabilizing if it promotes self-stabilization
+1 Introduction                                                   of the system. A locally self-stabilizing algorithm is a
+Due to their many applications, peer-to-peer systems self-stabilizing algorithm that runs locally at each node
+have recently received a lot of attention both inside and that only assumes local knowledge of the network
+and outside of the research community. Peer-to-peer by the nodes (e.g., the algorithm does not assume that
+systems are usually dynamic in nature, that is, peers nodes know or have an estimate on the number of nodes
+continuously enter and leave the system. Also, peers in the network).
+may fail. In order to handle such a situation, distributed           It turns out that the crux of designing truly self-
+algorithms are needed that can quickly and reliably stabilizing algorithms for many structured overlay peer-
+recover a peer-to-peer system from any inconsistent to-peer networks such as Chord and skip graphs is
+state. Systems with such a property are also known to find a self-stabilizing protocol that can convert an
+                                                                 arbitrary connected graph into a sorted list or ring.
+   ∗ Department of Computer Science and Engineering, Ari-        For scalability, such algorithms should converge to a
+zona State University, Tempe, AZ 85287-8809, USA. Email: sorted list in at most a polylogarithmic number of
+melih@asu.edu                                                    rounds. A distributed algorithm for arranging the
+   † Department of Computer Science and Engineering, Ari-
+                                                                 nodes of an arbitrary connected graph into a sorted
+zona State University, Tempe, AZ 85287-8809, USA. Email: list in a polylogarithmic number of rounds and with
+aricha@asu.edu. This work was supported in part by NSF CA-
+REER award no. 9985284.
+                                                                 polylogarithmic work for each node is already known [1],
+   ‡ Institute for Computer Science, Technical University of Mu- but the algorithm is not locally self-stabilizing. In fact,
+nich, 85748 Garching, Germany. Email: scheideler@in.tum.de       under certain conditions it can run into a deadlock (i.e.,
+
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+the nodes cannot escape a certain invalid state). Hence,              one of these conditions is violated, it is locally repaired.
+there exists the need for developing truly (locally) self-            It is shown that an overlay network forms a skip graph
+stabilizing algorithms that can converge to a sorted list             if and only if all of the six conditions are satisfied for
+from an arbitrary initial state in polylogarithmic time.              all nodes. However, the local checking of the conditions
+     We are now ready to formally state the problem                   does not work for arbitrary states but only for states
+we consider in this paper. We are given an arbitrary                  in which the nodes form a degenerate version of a
+connected graph G(V, E), |V | = n, with node labels                   skip graph that may be created due to node faults or
+which induce a total order on V . For nodes u and                     inconsistencies in concurrent join or leave operations.
+v, we say that u < v (resp., u > v), whenever the                     As for the Chord repair mechanisms, the total running
+label of node u is smaller (resp., greater) than that                 time for repairing the conditions at each node depends
+of node v. For simplicity, we assume that all the                     on the distortion of the degenerate state and can be as
+node labels are distinct. We consider the problem of                  high as linear.
+designing a distributed, locally self-stabilizing algorithm                Self-stabilizing protocols for organizing the nodes
+that converts G into a sorted list H({v1 , . . . , vn }, EH ),        into a sorted ring have already been proposed in [5, 9].
+where vi ∈ V , and vi−1 < vi and {vi−1 , vi } ∈ EH for all            In the Iterative Successor Pointer Rewiring Protocol
+i.                                                                    (ISPRP) proposed in [5], each node aims at maintaining
+     The idea of self-stabilization in distributed comput-            correct successor pointers. If there is a local inconsis-
+ing first appeared in a classical paper by E.W. Dijk-                 tency, i.e., there are two nodes u and v with successor
+stra in 1974 [6] in which he looked at the problem of                 pointers to a node w, w asks either u or v (depending on
+self-stabilization in a token ring. Since Dijktra’s paper,            their label) to repair its successor pointer. In the Ring
+self-stabilization has been studied in many contexts, in-             Network (RN) protocol proposed in [9], each node v pe-
+cluding communication protocols, graph theory prob-                   riodically initiates the search for a closest successor by
+lems, termination detection, clock synchronization, and               sending a search request to a randomly chosen neighbor.
+fault containment. For a recent survey see, e.g., [4],                Any node w receiving such a request forwards it to the
+and a very comprehensive list of papers can be found in               neighbor of w closest to v. This is continued until there
+Herman’s Self-Stabilization Bibliography from 2002 [8].               is no such neighbor, or a neighbor is found that is closer
+For more information about self-stabilizing algorithms                to v than its closest successor. In the latter case, v is
+we also recommend the book by Dolev [7].                              informed about it. Both protocols can have a very long
+     Self-stabilization issues have also been considered              runtime. Hence, the question remains whether there are
+for peer-to-peer networks. In the technical report of the             simple self-stabilizing protocols with a polylogarithmic
+Chord system [10], for example, several techniques such               runtime.
+as the weak stabilization protocol and the strong sta-
+bilization protocol are presented that allow the Chord                1.1 Our contributions We propose linearization as
+network to recover quickly from various kinds of degen-               the basic technique to sort any connected graph. This
+erate states which the authors call pseudo-trees or loopy             technique works as follows: each node v repeatedly does
+states. However, the running time of these algorithms                 the following with its neighbors:
+depends on the degree of distortion of the degenerate
+state, and can be as high as linear on the number of                     • for its left (i.e., smaller) neighbors u1 , . . . , uk in
+nodes. Moreover, no technique is given that allows the                     the order of decreasing labels, v replaces {v, u1 },
+Chord network to recover from an arbitrary connected                       . . . , {v, uk } by {v, u1 }, {u1 , u2 }, . . . , {uk−1 , uk },
+state. Instead, to prevent Chord from ever running into                    and
+a state outside of pseudo-trees or loopy states, it is sug-
+gested that each node keeps Θ(log n) successor point-                    • for its right (i.e., larger) neighbors w1 , . . . , w` in
+ers instead of just one. In this way, nodes can recover                    the order of increasing labels, v replaces {v, w1 },
+their successor pointers with high probability even if                     . . . , {v, w` } by {v, w1 }, {w1 , w2 }, . . . , {w`−1 , w` }.
+the nodes in the system fail with constant probability.
+                                                                           As shown in this paper, the linearization technique
+Though this protects against faulty nodes, it is known
+                                                                      is self-stabilizing and transforms any connected graph
+that this technique will not protect against adversarial
+                                                                      into a sorted list, but there are graphs for which this
+nodes [3], and therefore it is still important to under-
+                                                                      can take a long time. Even for random graphs, the
+stand how to recover from an arbitrary state.
+                                                                      pure linearization (PL) technique appears to perform
+     In a technical report on skip graphs [2] the authors
+                                                                      poorly. Our goal is to find self-stabilizing protocols that
+propose a self-stabilization protocol in which each node
+                                                                      are guaranteed to have a polylogarithmic runtime (with
+v periodically checks six locally checkable conditions. If
+                                                                      high probability), or at least a polylogarithmic runtime
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+for random graphs. Hence, we propose several exten-                   v < u (resp., u < v).
+sions of the linearization technique and experimentally               Figure 1 illustrates the left and right neighbors of a node
+evaluate their performance. These are:                                u with label 10.
+  • Linearization with memory: Each node only lin-
+    earizes the edges that it got in the previous round
+    but also maintains (“remembers”) edges to all
+    nodes that it was connected to at any time. It uses
+    this node list to accelerate the linearization process
+    of the new edges. See Section 3 for details.
+   • Linearization with shortcut neighbors: Each node
+     only linearizes the edges that it got in the previous
+     round but also maintains edges to a certain set of            Figure 1: Left and right neighbors of node u
+     O(log n) other shortcut nodes that it learned about
+     over the time. Also, every node exchanges its set
+     of shortcut nodes with every node it is connected            In the pure linearization algorithm (PL), each node
+     with by a new edge. See Section 4 for details.         repeatedly converts its left neighborhood and its right
+                                                            neighborhood into sorted lists at each round. More
+Though linearization with memory (LM) still has a lin-
+                                                            specifically, if a node u has left neighbors w1 < w2 <
+ear runtime in the worst case, our experiments demon-
+                                                            . . . < wk at the start of a left linearization step, it
+strate that for random graphs the LM protocol signif-
+                                                            converts its left neighbors into a sorted list by removing
+icantly outperforms the PL protocol. LM appears to
+                                                            the edges {u, wi }, 1 ≤ i ≤ k − 1 and adding the edges
+have a polylogarithmic runtime for these graphs, and
+                                                            {wi , wi+1 }, 1 ≤ i ≤ k − 1 (Figure 2(a)). Similarly, if
+the node degree seems to be polylogarithmic as well.
+                                                            v < v2 < . . . < vj are the right neighbors of u at
+Since linearization with shortcut neighbors (LSN) is 1
+                                                            the start of a right linearization step, u removes the
+based on the concept of a virtual space, also this pro-
+                                                            edges {u, vi }, 2 ≤ i ≤ j and adds the edges {vi , vi+1 },
+tocol can perform poorly in the worst case (extremely
+                                                            1 ≤ i ≤ j − 1 (Figure 2(b)) to the graph. Note that in
+unevenly distributed node labels), but our experiments
+                                                            a round every node first converts its left neighbors into
+with LSN demonstrate that it is still much better than
+                                                            a sorted list and then converts its right neighbors into a
+the LM protocol for random graphs. Thus, LSN ap-
+                                                            sorted list. If at any step there is a conflict where a node
+pears to be a good candidate for further, rigorous inves-
+                                                            u wants to remove an edge {u, v} and an another node w
+tigations towards the goal of finding a self-stabilizing
+                                                            wants to add this edge {u, v}, the final outcome will be
+protocol with polylogarithmic runtime.
+                                                            that the edge {u, v} remains in the graph. Algorithm 1
+                                                            summarizes the PL algorithm.
+1.2 Structure of the paper In Section 2 we present
+and analyze the pure linearization technique. After- Algorithm 1 Pure Linearization (PL)
+wards, we study the linearization with memory tech-
+                                                            Each node u executes the following:
+nique in Section 3 and the linearization with shortcut
+neighbors technique in Section 4. Section 5 presents and      1: for each round do
+interprets the simulation results for all three techniques.   2:    (Left linearization step) If w1 < w2 < . . . < wk
+The paper ends with conclusions.                                    are  the current left neighbors of u, u removes the
+                                                                    edges {u, wi }, 1 ≤ i ≤ k − 1 and adds the edges
+2 Pure Linearization                                                {wi , wi+1 }, 1 ≤ i ≤ k − 1 to the graph.
+                                                              3:    (Right linearization step) If v1 < v2 < . . . < vj
+In this section we present the pure linearization tech-
+                                                                    are the current right neighbors of u, u removes
+nique. We are given as input a connected undirected
+                                                                    the edges {u, vi }, 2 ≤ i ≤ j and adds the edges
+graph G(V, E) with node labels. At any time t during
+                                                                    {vi , vi+1 }, 1 ≤ i ≤ j − 1 to the graph.
+the execution of the algorithm, we will let G(V, E) de-
+                                                              4: end for
+note the current configuration of graph G, after edges
+may have been inserted or removed from the original
+                                                                  The following two sections provide a formal analysis
+edge set during prior time steps. We start with some
+                                                            of the complexity and several other properties of the PL.
+definitions:
+Definition 2.1. At any time t, node v is a left (resp., 2.1 Analysis. Note that the PL algorithm is memo-
+right) neighbor of node u if {u, v} ∈ E at time t and ryless, that is, it only needs to know the current state
+
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+                                                                      Proof. Let V = {a1 , a2 , a3 , ..., an }, where ai < aj for all
+                                                                      i < j, i, j ∈ {1, 2, ..., n}. Recall that one round of the
+                                                                      PL algorithm consists of a left linearization step followed
+                                                                      by a right linearization step. The following three claims
+                                                                      will be used in the proof of Theorem 2.2. The claims
+                                                                      bound the number of left and right neighbors out of each
+                               (a)                                    node after each round of the PL algorithm.
+
+                                                                      Claim 2.1. After k rounds an , an−1 , an−2 , ..., an−k+1
+                                                                      will each have exactly one left neighbor for every k =
+                                                                      1, 2, ..., n − 2.
+
+                                                                      Proof. We will prove this claim by induction on k.
+                                                                            Base case: k = 1. We will show that after the first
+                               (b)                                    round an will have exactly one left neighbor. During
+                                                                      the left linearization step of the first round, an will
+Figure 2: Neighbors of node u after one round of pure                 remove all of its left neighbors except for one. Since an is
+linearization.                                                        the largest node, it does not have any right neighbors.
+                                                                      Thus no node can add a left neighbor to an during a
+                                                                      left linearization step. Hence after the left linearization
+of the connections in order to converge to a sorted list.             step, an will have only one left neighbor, which we call
+Hence, if we can show that the PL algorithm converges                 bn . If bn only has one right neighbor (an itself) after the
+to a sorted list for any connected graph, the PL algo-                right linearization step, the left neighbor of an will not
+rithm is self-stabilizing. In the following two theorems              change. If bn has more than one right neighbor, after
+we will prove matching lower and upper bounds showing                 the right linearization step, the left neighbor of an will
+that in the worst case the PL algorithm requires (n − 2)              change and it will be the second largest right neighbor
+rounds to converge to a sorted list.                                  of bn . Thus, after the first round an will have only one
+                                                                      left neighbor.
+Theorem 2.1. (Lower bound) The pure lineariza-                              Inductive Hypothesis:             After   k    rounds
+tion algorithm requires at least (n−2) rounds to generate             an , an−1 , an−2 , ..., an−k+1 will each have exactly
+a sorted list out of an arbitrary graph G.                            one left neighbor, k < n − 2.
+                                                                            Inductive Step: We will show that after k + 1
+Proof. Consider the example graph G(V, E), E =                        rounds an , an−1 , an−2 , ..., an−k+1 , an−k will each have
+{{i, i + 1}|i ∈ {2, 3, ..., n − 1}} ∪ {{n, 1}} illustrated in         exactly one left neighbor, k ≤ n − 2.
+Figure 3. After the first round, the edge {n, 1} is re-
+moved and the edge {n − 1, 1} is added to G. After the                      We will first show that after k + 1 rounds
+second round, the edge {n − 1, 1} is removed and the                  an , an−1 , an−2 , ..., an−k+1 will still have one left neigh-
+edge {n − 2, 1} is added to G. After the third round,                 bor each. From the inductive hypothesis, we know
+the edge {n − 2, 1} is removed and the edge {n − 3, 1} is             that after k rounds an , an−1 , an−2 , ..., an−k+1 will
+added to G. The PL algorithm will take (n − 2) rounds                 have only one left neighbor each. Consider node ai ,
+to convert G to a sorted list since after the j th round,             n − k + 1 ≤ i ≤ n at round k + 1. Since ai only has
+the edge {n−j +1, 1} is removed and the edge {n−j, 1}                 one left neighbor it will not do anything during the
+is added to G, 1 ≤ j ≤ n − 2.                               t
+                                                            u         left linearization step of this round. Since all nodes
+                                                                      aj > ai have only one left neighbor each, they cannot
+                                                                      add a left neighbor to ai . So, after the left linearization
+                                                                      step of round (k + 1), ai will still have only one left
+                                                                      neighbor (say bi ). If bi has no right neighbor smaller
+  Figure 3: Lower bound example for PL algorithm                      than ai , the left neighbor of ai will not change after
+                                                                      right linearization step of round k + 1. If bi has a
+                                                                      right neighbor smaller than ai , the left neighbor of ai
+                                                                      will change and it will be the largest right neighbor
+Theorem 2.2. (Upper bound) After (n − 2) rounds,                      of bi which is less than ai . Thus, after k + 1 rounds
+the pure linearization algorithm will generate a sorted               ai will have only one left neighbor, n−k +1 ≤ i ≤ n−1.
+list out of any graph G.
+
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+      Secondly, we will show that after k + 1 rounds                  Proof. This statement is the dual of Claim 2.2 and its
+an−k will also have only one left neighbor. From                      proof is analogous. The main difference in the proof is
+the inductive hypothesis, we know that after k rounds                 that we start the algorithm with a left linearization, but
+an , an−1 , an−2 , ..., an−k+1 will have only one left neigh-         this will not affect the proof significantly.            t
+                                                                                                                               u
+bor each. We start by showing that an−k must have
+at least one left neighbor after round k + 1. Then we                      We are now ready to prove Theorem 2.2. We know,
+will show that an−k cannot have more than one left                    by Claim 2.2 and Claim 2.3, that each node ai has
+neighbor after this round. By contradiction, assume                   exactly one left and one right neighbor after n − 2
+that after k rounds an−k has no left neighbor. Since                  rounds of the PL algorithm. In addition, we will show
+all nodes greater than an−k have only one left neighbor               that the (only) left neighbor of node ai must be ai−1 ,
+each, all of the right neighbors of an−k must have only               1 < i ≤ n. This is trivially true for i = 2. Assume
+one left neighbor which is an−k (if an−k has no right                 that the left neighbor of ai is ai−1 , and hence the (only)
+neighbor the graph is disconnected.). Since the graph                 right neighbor of ai−1 is ai , for all 1 ≤ i ≤ k. This
+is connected, an−k must have a path to a1 . However,                  trivially implies that the left neighbor of ak+1 must be
+the right neighbors of an−k cannot have a left neighbor               ak (and the right neighbor of ak must be ak+1 ), and
+smaller than an−k (since an−k is their only left neighbor)            hence a1 , ..., an is a sorted list of V .               t
+                                                                                                                               u
+and similarly the right neighbors of the right neighbors
+of an−k cannot have a left neighbor smaller than an−k ,               2.2 Other properties of PL In the following
+and so on. Therefore, there is no path between an−k                   claims, we will present several properties of PL algo-
+and a1 which is a contradiction.                                      rithm regarding the degree of the nodes and the required
+      Now we show that an−k cannot have more than one                 number of rounds.
+left neighbor after round (k + 1). We have just seen
+that after k rounds an−k has at least one left neighbor.              Claim 2.4. At each round of the PL algorithm, the
+During the left linearization step of round (k + 1), an−k             degree of a node v increases by at most an additive
+will remove all of its left neighbors except one. Since               constant.
+all nodes aj > an−k have only one left neighbor, they
+cannot add a left neighbor to an−k . So, after the left      Proof. Assume a node u has l left and r right neighbors
+linearization step, an−k will have only one left neighbor    at the start of a round. After the left linearization step
+(say bn−k ). If bn−k has no right neighbor smaller than      of this round, node u will have (i) at most r+1 left
+an−k , the left neighbor of an−k will not change during      neighbors, since each of its right neighbors can add at
+the right linearization step of round (k + 1). If bn−k has   most one more left edge to u and only one of its previous
+a right neighbor smaller than an−k , the left neighbor of    left neighbors will remain; and (ii) node u will have at
+an−k will change and it will become the largest right        most r right neighbors, since each of its right neighbors
+neighbor of bn−k which is less than an−k . Hence, after      will either remain or be changed to another node. In
+k + 1 rounds an−k will have exactly one left neighbor,       summary, after the left linearization step, node u will
+completing the proof.                                      t
+                                                           u have at most r + 1 left and r right neighbors. Similarly,
+                                                             after the right linearization step of this round, node u
+Claim 2.2. After n − 2 rounds all nodes except a1 will will have at most r + 1 left and r + 2 right neighbors.
+have exactly one left neighbor each.                         Following the same argument, after the left linearization
+                                                             step of the next round, node u will have at most r+3 left
+Proof. From Claim 2.1 we know that after n − 2 rounds and r + 2 right neighbors, and after the corresponding
+an , an−1 , an−2 , ..., a3 will have one left neighbor each. right linearization step, node u will have r + 3 left and
+We show that a2 will also have exactly one left neighbor r + 4 right neighbors. Hence, after t left and right
+(a1 ). After n − 2 rounds, since the graph is connected, linearizations steps, node u will have at most r + 2t − 1
+there must be a path between a2 and a1 . By contra- left and r + 2t right neighbors.                                  t
+                                                                                                                      u
+diction, assume a2 and a1 are not neighbors, implying
+that a2 has only right neighbors. By Claim 2.1, the               An edge {u, w} is said to cross a node v if u ≤ v ≤
+right neighbors of a2 only have right neighbors and so w. The following claim bounds the degree of a node v
+on. Thus we cannot reach a1 from a2 , a contradiction. by the number of edges crossing the node.
+                                                          t
+                                                          u
+                                                             Claim 2.5. The maximum degree of a node v during
+Claim 2.3. After n − 2 rounds all nodes except an will the PL algorithm is bounded by the number of edges
+have exactly one right neighbor each.                        crossing it.
+
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+Proof. Linearization ensures that for any edge (u, w)
+converted into (u0 , w0 ) during a linearization step: u ≤
+u0 ≤ w0 ≤ w.
+
+3 Linearization with Memory
+In this section we present an extension of the pure lin-
+earization technique called the linearization with mem-                                          (a)
+ory (LM). In the linearization with memory algorithm,
+nodes remember all of their old neighbors. While plac-
+ing current neighbors into sorted lists, a node u will also
+use its old neighbors in order to ”better place” its cur-
+rent neighbors within the final total order, as we will
+show.
+     In the LM algorithm, nodes will place their current                                         (b)
+left and right neighbors into sorted lists by reconnecting
+them. When placing a left neighbor v into the sorted                  Figure 4: Node u places its current left neighbors into
+list, a node u will remove the edge {u, v} and edge                   sorted list by reconnecting them.
+{v, w} will be added, where w is the smallest node u
+remembers (w may be a current neighbor of node u)
+such that v < w. If v is the largest left neighbor of
+node u, edge {u, v} remains. When placing a right                     on the average running time of the PL algorithm. The
+neighbor v into the sorted list, a node u will remove                 major drawback of the LM technique is that the degree
+the edge {u, v} and edge {w, v} will be added, where w                of a node may increase very fast, since nodes ”never
+is the largest node u remembers (w may be a current                   forget” a neighbor (see Table 2). The linearization with
+neighbor of node u) such that w < v. If v is the                      shortcut neighbors (LSN), introduced in Section 4, is a
+smallest right neighbor of node u, edge {u, v} remains.               refinement of the LM technique that aims at keeping
+For example, consider a node u that currently has left                the degree of the nodes lower (and at speeding up the
+neighbors v1 < v2 < v3 < v4 and in addition remembers                 LM process).
+the nodes w1 < w2 < w3 < w4 , where w1 < v1 < v2 <                         We now show that LM algorithm requires n − 2
+w2 < v3 < w3 < w4 < v4 < u. The LM algorithm                          rounds to generate a sorted list of the nodes in the worst
+would place u’s left neighbors into the sorted list by                case. For any two nodes v and w, where u < w, let
+removing the edges {u, v1 }, {u, v2 }, {u, v3 } and adding            |w−u| denote the cardinality of the set {v : u < v ≤ w}.
+the edges {v1 , v2 }, {v2 , w2 }, {v3 , w3 }, as illustrated in
+                                                                      Theorem 3.1. The linearization with memory algo-
+Figure 4. Algorithm 2 summarizes the LM technique.
+                                                                      rithm still requires n − 2 rounds to generate a sorted
+Algorithm 2 Linearization with Memory (LM)                            list of the nodes in the worst-case.
+Each node u executes the following:                                   Proof. The LM algorithm will behave just like the PL
+ 1: for each round do                                                 algorithm for the graph in Figure 3 and hence the lower
+ 2:   Node u will remember all of its neighbors                       bound of Theorem 2.1 also applies to the LM algorithm.
+ 3:   For each current left neighbor v of u, u replaces                   The following two claims are needed to prove that
+      edge {u, v} by edge {v, w}, where w is the smallest             the LM algorithm requires at most n − 2 rounds to
+      node u remembers such that v < w, if such a node                generate a sorted list of the nodes.
+      w exists. Otherwise, u keeps the edge {u, v}.
+ 4:   For each current right neighbor v of u, u replaces  Claim 3.1. At any round of the algorithm, if a node
+      edge {u, v} by edge {w, v}, where w is the largest  u remembers a node v < u (node v may be a current
+      node u remembers such that w < v, if such a node    neighbor of u), then there exists an increasing path
+      w exists. Otherwise, u keeps the edge {u, v}.       between u and v in the current graph, i.e. there exists
+ 5: end for                                               a path P = v1 , v2 , ..., vp , where v1 = v, vp = u, and vi
+                                                          is a current left neighbor of vi+1 , 1 ≤ i ≤ j − 1 (also
+    While the LM technique alone still has a linear implying that v1 < v2 < ... < vj , j ≥ 2).
+worst-case running time (see Corollary 3.1), its average
+running time seems to be polylogarithmic as the experi- Proof. Let v be a left neighbor that u currently remem-
+mental results in Section 5 show, improving significantly bers. We will prove by induction on |u − v|.
+
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+     Base case: |u − v| = 1. Node v is thus the largest               only remembers at most 2(log n + 1) carefully selected
+left neighbor node u has seen. According to the LM                    shortcut neighbors, which function as representatives of
+algorithm, v must still be a current left neighbor of node            exponentially increasing length intervals out of node v,
+u, and hence P = vu.                                                  and (ii) at each round, a node exchanges information
+     Inductive Hypothesis: If |u − v| ≤ k, k ≥ 1, there               about its shortcut neighbors with all of its current
+exists an increasing path between u and v in the current              or shortcut neighbors at that time. Without loss of
+graph.                                                                generality, we assume that each node has an arbitrary
+     Inductive Step: We will show that if |u − v| = k + 1,            label belonging to the interval [0, 1). Each node v
+then there exists an increasing path P between u and v                divides [v, 1) into the intervals Ii+ (v) = [v + 2i−1 /n, v +
+in the current graph.                                                 2i /n), for all 1 ≤ i ≤ k such that v + 2k /n < 1 and
+     If v is a current left neighbor of node u, P = vu and            v + 2k+1 /n > 1; and the intervals I0+ (v) = [v, v + 1/n)
+                                                                             +
+we are done. Thus assume that node u only remembers                   and Ik+1   (v) = [v + 2k /n, 1). Each node v divides [0, v]
+node v. Since v is not a current left neighbor of node                into the intervals Ii− (v) = [v − 2i /n, v − 2i−1 /n), for all
+u, either u reconnected node v (i.e., u replaced edge                 1 ≤ i ≤ j such that v − 2j /n > 0 and v − 2j+1 /n < 0;
+{u, v} by another edge in step 3 of the LM algorithm)                 and the intervals I0− (v) = [v − 1/n, v] and Ij+1  +
+                                                                                                                             (v) =
+or v reconnected node u, at some prior time. Without                           j                                 +       −
+                                                                      [0, v−2 /n). For each of the intervals Ii and Ii , node v
+loss of generality, assume that u reconnected node v (the             will remember one shortcut neighbor that belongs to the
+proof is analogous if v reconnected u), by replacing edge             interval, if such a node exists. Hence v will remember
+{u, v} by an edge {v, w}, where w was (and may still be)              at most 2(log n + 1) shortcut nodes. Those shortcut
+a current neighbor of u and v < w < u. Hence |v − w|                  neighbors that v remembers will aid v in placing its
+and |w − u| are at most k (and u remembers both v and                 current neighbors within the sorted list, in the same
+w currently). By the induction hypothesis, there must                 way as the LM algorithm.
+exist increasing paths P1 and P2 in the current graph
+between v and w and between w and u, respectively.
+Hence P1 P2 is an increasing path between u and v in
+the current graph and the induction hypothesis follows.
+                                                         t
+                                                         u
+                                                                                    Figure 5: Intervals for node v
+Claim 3.2. The graph remains connected after any
+number of rounds of the LM algorithm.
+
+Proof. From Claim 3.1, we know that if a node u Algorithm 3 Linearization with Shortcut Neighbors
+remembers a node v, there exists an increasing path (LSN)
+between u and v in the current graph (either v was a
+                                                           Each node u executes the following:
+left neighbor of u at some prior time, or u was a left
+                                                            1: for each round do
+neighbor of v, and the theorem above applies). Nodes
+will always remember their initial neighbors. So, from      2:   Send your shortcut neighbors to your original and
+Claim 3.1, there exists a current neighbor path between          shortcut neighbors
+nodes and their initial neighbors. So, graph will always    3:   Receive shortcut neighbors of your neighbors.
+remain connected.                                        t
+                                                         u  4:   Check the shortcut neighbors u just received from
+                                                                 its neighbors and the current neighbors u has. If
+     Claim 3.2 shows that the graph will remain con-             there exists a node v that belongs to an interval
+nected. Thus, Claims 2.1, 2.2, and Claim 2.3 all hold            Ii+ (u) or Ii− (u) which was not covered by any of
+for the LM algorithm (taking into account only the cur-          the prior neighbors of node u (i.e., there is no
+rent neighbors of a node, and not all the neighbors the          shortcut neighbor for this interval at node u), add
+node remembers). Hence, the upper bound in Theorem               v to u’s shortcut neighbors list (if there are two or
+2.2 also applies to the LM algorithm.                            more such nodes, select one of them arbitrarily).
+                                                         t
+                                                         u  5:   Reconnect the current left neighbors of u, as de-
+                                                                 scribed in Step 3 of the LM algorithm (node u
+4 Linearization with Shortcut Neighbors                          only remembers its current neighbors and short-
+In this section we present the linearization with shortcut       cut neighbors, at any time).
+neighbors (LSN) technique. This technique can be            6:   Reconnect the current right neighbors, as de-
+seen as a variation of the LM technique. The main                scribed in Step 4 of the LM algorithm.
+                                                            7: end for
+ideas behind the LSN algorithms are that (i) a node v
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+     The intuition behind the LSN algorithm is our
+hope that by using geometrically decreasing intervals
+near each node and collecting neighbors for these, the
+network topology converges quickly against something
+close to a hypercubic network. A hypercubic network
+structure would have the advantage that nearest neigh-
+bors can be found much quicker (basically in logarithmic
+time via binary search) than in arbitrary networks. In
+fact, it is not difficult to show that linearization on top
+of a hypercubic network would result in a sorted line
+within O(log n) communication rounds. Algorithm 3
+describes the LSN algorithm in detail.
+     The LSN algorithm also performs poorly in the                                                 (a)
+worst-case, since, like the PL and LM algorithm, it is
+based on the concept of a virtual space (an extremely
+unevenly distribution of node labels would hurt the
+algorithm). However, it is not clear what the exact
+worst-case complexity of the LSN algorithm is. The
+upper bound given by Theorem 2.2 still applies to the
+LSN algorithm. However, since nodes now exchange
+their neighbor information with each other, the example
+used in the proof of Theorem 2.1 no longer gives a lower
+bound of n − 2.
+
+5 Experimental Results
+5.1 Regular Graphs All three algorithms, PL, LM,                                                   (b)
+and LSN, are implemented with Java. The runtimes of
+the algorithms are first compared for connected random                Figure 6: Average number of rounds for PL, LM and
+graphs such that the expected degree of each node is                  LSN
+10. The random graphs are generated such that the
+probability of existence of each edge is 10/(n−1), where
+n is number of nodes in the graph. If the generated                   maximum node degree is computed experimentally (Fig-
+graph is not connected, a new graph is generated. We                  ure 7 and Table 2). As expected, the LM algorithm
+run experiments for graphs with up to 16000 nodes.                    has a greater average maximum degree than the LSN
+Each experiment is repeated 1000 times. We calculate                  algorithm. Still, the experimental results indicate that
+the average number of required rounds.                                the maximum node degree might be polylogarithmic for
+                                                                      both algorithms.
+         500     1000     2000      4000     8000      16000
+  PL     122     275.7    634.6     1347     2835      5485.2                      50    100    200       400    1000    2000
+ LM      26.3    45.41    79.47     135.2    227.7     394.83               LM    25.9    35    46.1     58.38   76.8    92.1
+ LSN     18.5    25.97    35.28     43.93    53.4       65.1                LSN   12.9   17.1   22.1     27.15   33.39   37.74
+
+Table 1: Average number of rounds for PL, LM and Table 2: Average maximum node degree for LM and
+LSN (for each node avg number of neighbors is 10) LSN (for each node avg number of neighbors is 10)
+
+    The experimental results show that the LSN algo-
+rithm improves over the LM algorithm and both LM and
+LSN algorithms seem to have a polylogarithmic runtime                 5.2 Power Law Graphs In recent work, it is
+(Table 1 and Figure 6). The former observation is some-               claimed that the Internet and certain unstructured P2P
+what surprising when taking into account that the nodes               network topologies satisfy the power law [11, 12, 13, 14].
+in LM may collect much more edges over time than LSN.
+However, the fact that LSN uses a structured approach                 Definition 5.1. (Power law) The number of nodes
+of collecting edges still seems to give it an advantage               that have degree k is proportional to 1/k α , where α is a
+    Next, for the LM and LSN algorithms the average                   constant number and α > 1.
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+                                                                                                  (a)
+Figure 7: Average maximum node degree for LM and
+LSN (for each node avg number of neighbors is 10)
+
+
+     We generated random power law graphs according
+to the Chung-Lu model [15], with α = 2 and ran
+some experiments. To generate these graphs, we first
+generated the degrees of the nodes according to the
+power law. Then we considered every node pair {i, j}
+and selected an edge between them with probability
+di ∗dj
+  2m where di is the desired degree of node i and m
+is number of edges in the graph (Chung-Lu model [15]).
+Thus, we have a graph with node i having expected                                                 (b)
+degree di .
+                                                                      Figure 8: Average number of rounds for PL, LM and
+                                                                      LSN (graphs satisfy power law with α = 2)
+         500     1000     2000      4000     8000      16000
+  PL     170      339     699.2     1420     2786       7142
+ LM      13.9    21.62    30.08     39.74    54.15     62.67          6 Conclusions
+ LSN     12.1    15.21    18.12     22.97    28.08     38.167
+                                                                      We presented distributed local self-stabilizing algo-
+Table 3: Average number of rounds for PL, LM and                      rithms for converting an arbitrary graph into a sorted
+LSN (graphs satisfy power law with α = 2)                             list. In the pure linearization (PL) algorithm, each node
+                                                                      repeatedly converts its neighbors into a sorted list. We
+                                                                      show that the worst-case running time of the PL al-
+    As for regular random graphs, the experimental                    gorithm is linear. Hence, we further looked at proper
+results indicate that the LM and LSN algorithms seem                  extensions of the PL algorithm, namely, the lineariza-
+both to have an expected polylogarithmic runtime for                  tion with memory (LM) and linearization with shortcut
+random power law graphs (Table 3 and Figure 8).                       neighbors (LSN) algorithms. Both algorithms are based
+                                                                      on the idea of remembering old neighbors. Experimen-
+5.3 Bounded Locality We generated random                              tal results on random graphs, random power law graphs
+graphs with bounded locality B, i.e. each edge in the                 and random graphs with bounded locality show that the
+graph crosses at most B nodes. Recall that an edge                    LM and LSN algorithms significantly improve the PL al-
+{u, v} crosses a node w if u < w < v. We generated                    gorithm and that these algorithms seem to have a poly-
+random graphs with 1000 nodes and expected node                       logarithmic time complexity in expectation. Moreover,
+degree of 10. We ran experiments for different values of              the LSN algorithm has better average runtime and max-
+B, by letting B = 125, 250, 500, 1000.                                imum node degree than the LM algorithm. Ultimately,
+     The experimental results also indicate that the                  we would like to provide a rigourous argument proving
+expected running time of the PL algorithm increases                   the expected polylogarithmic behaviour of the LSN and
+linearly and that the expected running time of both the               LM algorithms. However, this has proven to be a very
+LM and LSN algorithms increase polylogarithmicly with                 challenging task and is left for future work.
+B (Table 4, Figure 9).
+
+
+
+   Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+                    125       250      500     1000                   [10] I. Stoica, R. Morris, D. Liben-Nowell, D. Karger,
+            PL     45.18     88.25    181.1    275.7                       M.F. Kaashoek, F. Dabek and H. Balakrishnan, Chord:
+           LM      13.82      22      34.13    45.41                       A Scalable Peer-to-peer Lookup Service for Internet
+           LSN     11.04     15.36    21.55    25.97                       Applications, Technical Report, MIT, 2002.
+                                                                      [11] Michalis Faloutsos, Petros Faloutsos and Christos
+Table 4: Average number of rounds for PL, LM and                           Faloutsos, On power-law relationships of the Internet
+LSN with bounded locality                                                  topology, SIGCOMM ’99: Proceedings of the confer-
+                                                                           ence on Applications, technologies, architectures, and
+                                                                           protocols for computer communication, 1999, pp. 251–
+                                                                           262.
+                                                                      [12] Andrei Broder, Ravi Kumar, Farzin Maghoul, Prab-
+                                                                           hakar Raghavan, Sridhar Rajagopalan, Raymie Stata,
+                                                                           Andrew Tomkins and Janet Wiener, Graph structure
+                                                                           in the web, 9th Int. WWW Conference, 2000.
+                                                                      [13] Albert-Laszlo Barabasi and Reka Albert, Emergence
+                                                                           of Scaling in Random Networks, Science, (286) 1999,
+                                                                           pp. 509–512.
+                                                                      [14] Matei Ripeanu, Ian Foster and Adriana Iamnitchi,
+                                                                           Mapping the Gnutella Network: Properties of Large-
+                                                                           Scale Peer-to-Peer Systems and Implications for Sys-
+                                                                           tem Design, IEEE Internet Computing Journal special
+                                                                           issue on peer-to-peer networking, vol. 6(1) 2002.
+                                                                      [15] F. Chung, L. Lu. Connected components in random
+Figure 9: Average number of rounds for PL, LM and                          graphs with given degree sequences. Annals of Combi-
+                                                                           natorics 6 (2002) 125-145.
+LSN with bounded locality
+
+
+References
+
+
+ [1] D. Angluin, J. Aspnes, J. Chen, Y. Wu and Y. Yin,
+     Fast construction of overlay networks, Proc. of the 17th
+     ACM Symp. on Parallel Algorithms and Architectures
+     (SPAA), 2005, pp. 145–154.
+ [2] J. Aspnes and G. Shah, Skip graphs, Proc. of the 14th
+     ACM Symp. on Discrete Algorithms (SODA), 2003,
+     pp. 384–393.
+ [3] B. Awerbuch and C. Scheideler, Group Spreading: A
+     protocol for provably secure distributed name service,
+     Proc. of the 31th International Colloquium on Au-
+     tomata, Languages and Programming (ICALP), 2004,
+     pp. 183–195.
+ [4] J. Brzezinski and M. Szychowiak, Self-Stabilization in
+     Distributed Systems - a Short Survey, Foundations of
+     Computing and Decision Sciences, 25 (1), 2000.
+ [5] C. Cramer and T. Fuhrmann, Self-Stabilizing Ring Net-
+     works on Connected Graphs, Technical Report 2005-5,
+     System Architecture Group, University of Karlsruhe,
+     2005.
+ [6] E.W. Dijkstra, Self-stabilization in spite of distributed
+     control, Communications of the ACM, 17 (1974),
+     pp. 643–644.
+ [7] S. Dolev, Self-Stabilization, MIT Press, 2000.
+ [8] T. Herman, Self-Stabilization Bibliography: Access
+     Guide, University of Iowa, 2002.
+ [9] A. Shaker and D.S. Reeves, Self-stabilizing structured
+     ring topology P2P systems, 5th IEEE Int. Conference
+     on Peer-to-Peer Computing, 2005, pp. 39–46.
+
+
+
+
+  Copyright © by SIAM. Unauthorized reproduction of this article is prohibited
+

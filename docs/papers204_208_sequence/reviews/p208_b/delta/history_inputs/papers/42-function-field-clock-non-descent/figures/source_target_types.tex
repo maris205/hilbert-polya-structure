@@ -1,0 +1,38 @@
+\begin{tikzpicture}[
+  font=\small,
+  >=Latex,
+  node distance=10mm and 13mm,
+  box/.style={draw=charcoal, rounded corners=2pt, very thick, align=center,
+    minimum height=12mm, text width=37mm, fill=softgray},
+  source/.style={box, draw=formalblue, fill=formalblue!8},
+  control/.style={box, draw=governancepurple, fill=governancepurple!8},
+  target/.style={box, draw=warningamber, fill=warningamber!9},
+  owns/.style={->, very thick, draw=formalblue},
+  exact/.style={->, very thick, draw=governancepurple},
+  blocked/.style={->, very thick, dashed, draw=warningamber}
+]
+\node[source] (shift) at (0,0) {full $q$-shift\\one vertex, $q$ loops};
+\node[source] (necklace) at (4.8,0)
+  {$\gamma\in\Prim_q$\\length $n$, marker $z^n$\\clock $n\log q$};
+\node[source] (det) at (4.8,-2.35)
+  {$D_q(s,z)=1-zq^{1-s}$\\source-owned determinant};
+
+\node[control] (ff) at (9.6,1.45)
+  {monic irreducible $P\in\F_q[x]$\\degree $n$, norm $q^n$\\same counts only};
+\node[target] (prime) at (9.6,-1.45)
+  {rational-prime atom $p$\\marker $z$, clock $\log p$\\would require
+  $p=q^n$ and $n=1$};
+
+\draw[owns] (shift) -- (necklace);
+\node[font=\scriptsize,align=center,text=charcoal] at (2.4,0.85)
+  {primitive cyclic classes};
+\draw[owns] (necklace) -- node[left,align=right]{Euler\\regrouping} (det);
+\draw[exact] (necklace) -- (ff);
+\draw[blocked] (necklace) -- (prime);
+
+\node[draw=warningamber, very thick, circle, inner sep=1.2pt,
+  fill=white] at ($(necklace)!0.43!(prime)$) {$\times$};
+\node[align=center, text=charcoal, below=8mm of det, text width=118mm]
+  {Purple records a countwise function-field control. The dashed lane is the
+  frozen rational-prime retyping test; marker and multiplicity still fail.};
+\end{tikzpicture}

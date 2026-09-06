@@ -1,0 +1,133 @@
+\section{The sharp trace-class half-plane}
+\label{sec:traceclass}
+
+The endpoint weights are much more summable than a direct entry count
+suggests.  The right decomposition is by target rows, not by individual
+edges.
+
+\begin{theorem}[Sharp trace-class criterion]
+\label{thm:traceclass}
+The matrix in \cref{def:operator} extends to a trace-class operator on
+\(\ell^2(V)\) exactly on the half-plane
+\[
+ L_s\in\Sone
+ \quad\Longleftrightarrow\quad
+ \RePart s>\frac12.
+\]
+\end{theorem}
+
+\begin{proof}
+Write \(\sigma=\RePart s\).
+
+\emph{Sufficiency.}
+Fix a target row \(d\ge2\).  Its source columns are precisely
+\[
+ n=kd-1\ge2,\qquad k\ge1.
+\]
+Let \(R_{d,s}\) be the operator consisting of that row.  It maps into
+\(\mathbb Ce_d\) and is therefore rank one, with
+\begin{align}
+\|R_{d,s}\|_1
+&=
+\left(
+ \sum_{\substack{k\ge1\\kd-1\ge2}}
+ [d(kd-1)]^{-2\sigma}
+\right)^{1/2}.                                      \label{eq:row-exact}
+\end{align}
+Since \(kd-1\ge kd/2\),
+\begin{equation}
+\label{eq:row-bound}
+\|R_{d,s}\|_1
+\le
+2^\sigma\zeta(2\sigma)^{1/2}d^{-2\sigma}.
+\end{equation}
+For \(\sigma>1/2\), both the inner \(k\)-series and outer \(d\)-series are
+finite, and
+\[
+\sum_{d\ge2}\|R_{d,s}\|_1<\infty.
+\]
+Hence
+\[
+ L_s=\sum_{d\ge2}R_{d,s}
+\]
+converges in trace norm.
+
+\emph{Necessity.}
+Let
+\[
+ U_te_n=\e^{int}e_n,\qquad 0\le t\le2\pi.
+\]
+If \(L_s\) were trace class, its first Fourier diagonal
+\begin{equation}
+\label{eq:fourier-extraction}
+ \mathcal E_1(L_s)
+ =
+ \frac1{2\pi}\int_0^{2\pi}
+ \e^{-it}U_tL_sU_t^*\,\dd t
+\end{equation}
+would be a trace-class Bochner integral.  A matrix entry in row \(d\), column
+\(n\), acquires the phase \(\e^{i(d-n)t}\), so
+\cref{eq:fourier-extraction} selects \(d-n=1\).  Those entries are exactly
+the successor edges:
+\[
+ \mathcal E_1(L_s)e_n=[n(n+1)]^{-s}e_{n+1}.
+\]
+This unilateral weighted shift has singular values
+\([n(n+1)]^{-\sigma}\), \(n\ge2\).  It is trace class if and only if
+\[
+ \sum_{n\ge2}[n(n+1)]^{-\sigma}<\infty,
+\]
+which is equivalent to \(2\sigma>1\).  Thus no trace-class extension of the
+frozen matrix exists when \(\sigma\le1/2\).
+\end{proof}
+
+\begin{remark}[Why an entrywise estimate is nonsharp]
+Summing \(|(L_s)_{d,n}|\) over all edges treats each row as an \(\ell^1\)
+object and discards its rank-one geometry.  The exact row norm in
+\cref{eq:row-exact} takes an inner \(\ell^2\) sum before the outer nuclear
+sum, producing \(d^{-2\sigma}\) and the sharp boundary.  A cruder sufficient
+domain must not be reported as the operator threshold.
+\end{remark}
+
+\begin{proposition}[Trace-norm holomorphy]
+\label{prop:holomorphy}
+The map
+\[
+ s\longmapsto L_s
+\]
+is holomorphic from \(\{\RePart s>1/2\}\) into \(\Sone\).
+\end{proposition}
+
+\begin{proof}
+Let \(K\) be compact in the half-plane and choose
+\(\sigma_0>1/2\) with \(\RePart s\ge\sigma_0\) on \(K\).  Differentiating an
+entry \(m\) times introduces \(\log^m(nd)\).  Choose
+\(0<\varepsilon<\sigma_0-1/2\).  For \(x\ge2\),
+\[
+ \log^m x\le C_{m,\varepsilon}x^\varepsilon.
+\]
+The derivative row series is therefore dominated by the same estimate as
+\cref{eq:row-bound}, with real part
+\(\sigma_0-\varepsilon>1/2\).  The row series and its derivative series
+converge locally uniformly in trace norm.
+\end{proof}
+
+\begin{corollary}[Sharpness survives finite quotient pruning]
+\label{cor:successor-necessity}
+Any subgraph that retains every successor edge has no larger trace-class
+domain than \(\RePart s>1/2\) for the inherited endpoint weights.
+\end{corollary}
+
+\begin{proof}
+The Fourier extraction in \cref{eq:fourier-extraction} depends only on the
+first superdiagonal, so the same necessary condition applies.
+\end{proof}
+
+\subsection{Interpretation of the boundary}
+
+\Cref{thm:traceclass} is an own-object analytic result.  It says neither that
+\(D_{\SD}\) continues to \(\RePart s=1/2\) nor that this boundary is a
+natural boundary.  It also gives no symmetry \(s\mapsto1-s\).  The theorem
+does show that the wrong candidate determinant is analytically well defined
+through much of the classical critical strip.  Analytic availability alone
+is therefore not evidence of the correct prime-orbit ledger.

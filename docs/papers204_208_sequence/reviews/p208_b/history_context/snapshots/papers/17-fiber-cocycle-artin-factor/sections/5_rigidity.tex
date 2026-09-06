@@ -1,0 +1,132 @@
+\section{Rigidity of natural one-letter factorizations}
+\label{sec:rigidity}
+
+The degree cocycle was not selected merely because it produces a convenient
+example.  Within the frozen one-letter class, it is forced by a natural
+operator-level no-leak requirement.  We make the quantifiers explicit because
+weakening any one of them changes the conclusion.
+
+\begin{definition}[Natural one-letter family]
+\label{def:natural-family}
+For every finite atom set \(P\), let
+\(\alpha_P:\E_P\to G\).  The family is \emph{relabeling-natural} if
+\[
+\alpha_{P'}(\phi S)=\alpha_P(S)
+\]
+for every bijection \(\phi:P\to P'\), and it is
+\emph{inclusion-compatible} if
+\(\alpha_Q(S)=\alpha_P(S)\) whenever \(P\subseteq Q\) and
+\(\varnothing\ne S\subseteq P\).  These are conditions on the symbolic
+alphabet rule, not changes of coordinates on the transfer operator.
+\end{definition}
+
+Naturality makes the label depend only on subset cardinality.  Compatibility
+then makes that dependence independent of the ambient inventory: there are
+elements \(g_k\in G\) such that
+\[
+\alpha_P(S)=g_{|S|}
+\quad\text{whenever}\quad |P|\ge |S|.
+\tag{5.1}\label{5.1}
+\]
+Let \(\rho:G\to \mathrm{GL}(V)\) be a representation and put
+\(A=\rho(g_1)\).
+
+\begin{theorem}[Natural one-letter no-leak rigidity]
+\label{thm:rigidity}
+Suppose the family in \cref{def:natural-family} is inclusion-compatible and
+relabeling-natural.  Assume that, for every finite \(P\), the same
+matrix-valued transfer obeys the operator-coherent atom-local identity
+\[
+I-\sum_{\varnothing\ne S\subseteq P}
+  \eps(S)x_S\rho(g_{|S|})
+=\prod_{p\in P}(I-x_pA).
+\tag{5.2}\label{5.2}
+\]
+Then
+\[
+\rho(g_k)=A^k\qquad(k\ge1).
+\tag{5.3}\label{5.3}
+\]
+If \(\rho\) is faithful, then \(g_k=g_1^k\).  In particular, for the faithful
+regular representation the cocycle has the degree-power form
+\[
+\alpha_P(S)=a^{|S|},\qquad a=g_1.
+\tag{5.4}\label{5.4}
+\]
+If the corresponding skew-product shift is transitive on the entire fiber
+\(G\), then \(G=\langle a\rangle\), so \(G\) is cyclic.
+\end{theorem}
+
+\begin{proof}
+The symmetric group on \(P\) is transitive on its \(k\)-subsets; this and
+inclusion compatibility give \eqref{5.1}.  Fix \(k\) and choose
+\(|P|\ge k\).  For any squarefree monomial \(x_S\), \(|S|=k\), its
+coefficient on the left of \eqref{5.2} is
+\((-1)^k\rho(g_k)\), while expansion of the right side gives
+\((-1)^kA^k\).  Thus \eqref{5.3} holds.  Faithfulness gives
+\(g_k=g_1^k\).
+
+Every edge label in the skew product then lies in \(\langle a\rangle\).
+Starting from one fiber state, all reachable fiber states remain in one
+coset of that subgroup.  Transitivity on all of \(G\) therefore forces a
+single coset, hence \(G=\langle a\rangle\).  A more detailed coefficient
+proof is recorded in \cref{app:proof-rigidity}.
+\end{proof}
+
+The theorem explains both the strength and the limitation of the construction.
+Genuine finite-fiber motion is compatible with exact atom locality, but in the
+natural one-letter class the motion must be carried by powers of one element.
+Transitivity consequently reduces the regular fiber to a cyclic group.  This
+is a classification statement about the present class, not a classification
+of finite-group extensions of shifts.
+
+\begin{corollary}[First character leakage]
+\label{cor:first-leak}
+For a one-dimensional character \(\chi\), put
+\(\lambda_k=\chi(g_k)\).  If \(k\) is the least index for which
+\(\lambda_k\ne\lambda_1^k\), then the first squarefree discrepancy between
+the actual block and the atom product is
+\[
+\left[
+D_\chi(x)-\prod_{p\in P}(1-\lambda_1x_p)
+\right]_{\mathrm{degree}\ k}
+=(-1)^k(\lambda_k-\lambda_1^k)e_k(x).
+\tag{5.5}\label{5.5}
+\]
+At matrix level, the two-atom discrepancy is
+\[
+xy\bigl[\rho(g_2)-\rho(g_1)^2\bigr].
+\tag{5.6}\label{5.6}
+\]
+\end{corollary}
+
+\begin{proof}
+In \(D_\chi=1-B_\chi\), the degree-\(k\) term is
+\((-1)^k\lambda_ke_k(x)\); in the proposed product it is
+\((-1)^k\lambda_1^ke_k(x)\).  The matrix formula is the same coefficient
+comparison before taking a determinant.
+\end{proof}
+
+\paragraph{Two firewalls.}
+First, \cref{thm:rigidity} assumes equality of matrix polynomials.  Equality
+of one determinant in a selected higher-dimensional representation may hide
+spectral coincidences and is not covered.  Second, the theorem is deliberately
+one-letter: it does not constrain a transition cocycle
+\(\alpha(S,T)\), a higher-memory cocycle, or a cocycle obtained after a
+state-splitting presentation.  Those objects are outside the theorem rather
+than counterexamples to it.
+
+\begin{proposition}[The degree cocycle is not a relabeling]
+\label{prop:not-coboundary}
+If \(a\ne e\), the cocycle \(\alpha(S)=a^{|S|}\) is not cohomologous to the
+identity cocycle on the full subset shift.
+\end{proposition}
+
+\begin{proof}
+The period-one orbit repeating a singleton has cocycle product \(a\ne e\).
+Every coboundary has identity product around every periodic orbit, because
+its transfer terms telescope.  The periodic obstruction therefore rules out
+a coboundary.  This is the smallest witness that the fiber motion is genuine;
+it does not depend on a relabeling of the original symbols
+\citep{Livsic1972,ParryPollicott1997,Kalinin2011}.
+\end{proof}

@@ -1,0 +1,422 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Fp}{\mathbb F_p}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\card}[1]{\lvert #1\rvert}
+\newcommand{\mob}{\mu}
+\newcommand{\AM}{\mathrm{AM}}
+\newcommand{\calX}{\mathcal X}
+
+\title[Sumset-squaring dynamics]{Sumset-Squaring Dynamics on Prime Cyclic Groups:
+Exact Absorption Layers and Finite Zeta Data}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+\subjclass[2020]{37B40, 11B13, 05A15}
+\keywords{finite dynamical system, sumset, Cauchy--Davenport theorem,
+Artin--Mazur zeta function, absorption time, periodic orbit}
+
+\begin{document}
+
+\begin{abstract}
+Let $p$ be an odd prime and let $\Phi_p(A)=A+A$ on the nonempty
+subsets of the additive group $\mathbb F_p$.  Although the phase space has
+$2^p-1$ points, additive growth collapses its recurrent dynamics to a small
+explicit core.  We prove that every nonsingleton other than $\mathbb F_p$
+is transient, while the nonzero singletons form cycles of common length
+$h=\operatorname{ord}_p(2)$.  Consequently
+\[
+ \#\operatorname{Fix}(\Phi_p^n)
+ =2+(p-1)\mathbf 1_{h\mid n},
+ \qquad
+ \zeta_{\Phi_p}(z)
+ =(1-z)^{-2}(1-z^h)^{-(p-1)/h}.
+\]
+The associated M\"obius census has only two fixed cycles and
+$(p-1)/h$ cycles of length $h$.  On the layer of $m$-element subsets,
+$2\leq m\leq p$, the exact worst time to reach $\mathbb F_p$ is
+\[
+ \left\lceil\log_2\frac{p-1}{m-1}\right\rceil;
+\]
+arithmetic progressions attain the bound.  The first deviation of the fixed
+sequence from $2$ occurs at time $h$ and has height $p+1$, recovering both
+$p$ and $h$.  Deterministic power-set enumeration and a separately constructed
+iterated-sumset control verify the registered finite cases.  Classical
+sumset growth, critical-pair rigidity, and iterated-sumset structure are
+treated as inputs rather than residual claims.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Set addition can itself be iterated as a finite dynamical system.  Fix an
+odd prime $p$, write $\Fp$ additively, and let
+\[
+ \calX_p=2^{\Fp}\setminus\{\varnothing\},
+ \qquad
+ \Phi_p:\calX_p\longrightarrow\calX_p,
+ \qquad
+ \Phi_p(A)=A+A.
+\]
+This is not the pointwise hyperspace lift of a self-map of $\Fp$: every
+output element uses a pair of input elements, and the same binary operation
+is applied again at the next time.  The iterates are therefore sumsets with
+exponentially many summands.
+
+The phase portrait separates into two regimes.  Cauchy--Davenport growth
+forces every nonsingleton into the full group, whereas a singleton
+$\{a\}$ follows the multiplicative orbit $a,2a,4a,\ldots$.  This separation
+simultaneously determines recurrence, fixed counts, temporal cycles, zeta
+data, and the exact transient depth on every cardinality layer.
+
+The contribution is a closed finite-dynamics package for this particular
+self-map:
+\begin{enumerate}
+\item We classify every recurrent point and cycle, then derive all fixed
+  counts, the Artin--Mazur zeta function, and the least-period M\"obius
+  census.
+\item For each $2\leq m\leq p$, we prove the exact maximum absorption time
+  among all $m$-element subsets.  A concrete arithmetic progression reaches
+  the Cauchy--Davenport lower envelope at every pre-absorption time.
+\item The first fixed-count anomaly recovers $p$ and
+  $\ord_p(2)$.  The endpoint $m=p$, the excluded singleton layer, the empty
+  set convention, and the exceptional prime $p=2$ are recorded separately.
+\end{enumerate}
+
+The central statement is given next.  Its proof occupies
+\cref{sec:growth,sec:periodic,sec:depth}.
+
+\section{Statement, notation, and owner boundary}
+
+For a nonempty set $A\subseteq\Fp$ and an integer $q\geq1$, write
+\[
+ qA=\{a_1+\cdots+a_q:a_i\in A\}
+\]
+for the $q$-fold sumset.  This notation is deliberately different from the
+scalar image $\{qa:a\in A\}$.  We use recurrence in the standard
+topological sense: every neighborhood of the state is revisited at
+arbitrarily large positive times.  Because $\calX_p$ is finite and
+discrete, a state is recurrent exactly when $\Phi_p^n(A)=A$ for some
+$n\geq1$, equivalently when it lies on a cycle of the functional graph.
+
+For $\card A\geq2$, define the absorption time
+\[
+ \tau_p(A)=\min\{t\geq0:\Phi_p^t(A)=\Fp\}.
+\]
+For $2\leq m\leq p$, put
+\[
+ T_p(m)=\max\{\tau_p(A):A\subseteq\Fp,\ \card A=m\}.
+\]
+Finally, let $h=\ord_p(2)$, the multiplicative order of $2$ in
+$\Fp^\times$.  Since $p$ is odd, $h$ is defined and $h\geq2$.
+Lagrange's theorem also gives $h\mid p-1$.
+
+\begin{theorem}[complete phase portrait and layer depth]\label{thm:main}
+Let $p$ be an odd prime and $h=\ord_p(2)$.
+\begin{enumerate}
+\item For every $t\geq0$ and nonempty $A\subseteq\Fp$,
+  \begin{equation}\label{eq:iterate}
+   \Phi_p^t(A)=2^tA.
+  \end{equation}
+\item The recurrent states are precisely
+  \begin{equation}\label{eq:recurrent-set}
+   \{\Fp,\{0\}\}\cup\{\{a\}:a\in\Fp^\times\}.
+  \end{equation}
+  The first two states are fixed, and the nonzero singletons split into
+  $(p-1)/h$ cycles of length $h$.
+\item For every $n\geq1$,
+  \begin{equation}\label{eq:fixed-count}
+   F_p(n):=\card{\Fix(\Phi_p^n)}
+   =2+(p-1)\mathbf 1_{h\mid n}.
+  \end{equation}
+  Consequently the Artin--Mazur zeta function is
+  \begin{equation}\label{eq:zeta}
+   \zeta_{\Phi_p}^{\AM}(z)
+   =(1-z)^{-2}(1-z^h)^{-(p-1)/h}.
+  \end{equation}
+  This is an identity of formal power series.
+\item If $C_p(n)$ denotes the number of cycles of least temporal period
+  $n$, then
+  \begin{equation}\label{eq:cycle-census}
+   C_p(n)=\frac1n\sum_{d\mid n}\mob\!\left(\frac nd\right)F_p(d)
+   =\begin{cases}
+     2,&n=1,\\
+     (p-1)/h,&n=h,\\
+     0,&\text{otherwise}.
+   \end{cases}
+  \end{equation}
+\item On every nonsingleton cardinality layer,
+  \begin{equation}\label{eq:layer-depth}
+   \boxed{\displaystyle
+   T_p(m)=\left\lceil\log_2\frac{p-1}{m-1}\right\rceil,
+   \qquad 2\leq m\leq p.}
+  \end{equation}
+  Every affine arithmetic progression
+  $a+r\{0,1,\ldots,m-1\}$ with $r\in\Fp^\times$ attains this value.
+\item The first $n\geq1$ for which $F_p(n)\ne2$ is $n=h$, and
+  $F_p(h)=p+1$.  Thus the fixed sequence recovers
+  \begin{equation}\label{eq:recovery}
+   h=\min\{n\geq1:F_p(n)\ne2\},
+   \qquad p=F_p(h)-1.
+  \end{equation}
+\end{enumerate}
+\end{theorem}
+
+The growth input is the Cauchy--Davenport theorem
+\cite{Davenport1935,TaoVu2006}: for nonempty $A,B\subseteq\Fp$,
+\begin{equation}\label{eq:cd}
+ \card{A+B}\geq\min\{p,\card A+\card B-1\}.
+\end{equation}
+We use it as a cited theorem, not as a result of this manuscript.  The
+critical equality cases also have an established owner.  In the range
+$\card A,\card B\geq2$ and
+\[
+ \card{A+B}=\card A+\card B-1\leq p-2,
+\]
+Vosper's theorem says that $A$ and $B$ are arithmetic progressions with a
+common difference \cite{Vosper1956,TaoVu2006}.  We invoke only this safe
+range in \cref{prop:vosper}; no endpoint extension is implicit.
+
+The notation $qA$, its growth, and inverse questions for iterated sumsets
+belong to additive combinatorics; modern structural work includes
+\cite{Grynkiewicz2020}.  Artin--Mazur introduced the periodic-point zeta
+ledger used in \eqref{eq:zeta} \cite{ArtinMazur1965}.  The residual package
+here is limited to assembling these inputs into the complete phase portrait
+of the specific self-map $A\mapsto A+A$, including its exact cardinality
+layers and recovery statement.  A bounded search through 29 August 2026 did
+not locate this exact combined dynamics package.  Search absence is not a
+priority or novelty proof, and external release remains on hold.
+
+\section{Iterated growth and recurrence}\label{sec:growth}
+
+\begin{lemma}[iterates and the growth envelope]\label{lem:growth}
+For every nonempty $A\subseteq\Fp$, every integer $q\geq1$, and every
+$t\geq0$,
+\begin{align}
+ \Phi_p^t(A)&=2^tA,\label{eq:iterate-lemma}\\
+ \card{qA}&\geq\min\{p,q(\card A-1)+1\}.\label{eq:q-growth}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+The identity at $t=0$ is the convention $1A=A$.  If
+$\Phi_p^t(A)=2^tA$, then
+\[
+ \Phi_p^{t+1}(A)=(2^tA)+(2^tA)=2^{t+1}A,
+\]
+which proves \eqref{eq:iterate-lemma} by induction.
+
+For \eqref{eq:q-growth}, the case $q=1$ is equality.  Apply
+\eqref{eq:cd} to $qA$ and $A$.  Unless the full group has already been
+reached, each added copy of $A$ increases the lower bound by
+$\card A-1$.  Induction gives the displayed minimum.
+\end{proof}
+
+\begin{corollary}[strict nonsingleton growth]\label{cor:strict}
+If $2\leq\card A<p$, then either $A+A=\Fp$ or
+$\card{A+A}>\card A$.  Every such $A$ reaches $\Fp$ in finite time.
+\end{corollary}
+
+\begin{proof}
+Equation \eqref{eq:cd} with $B=A$ gives
+$\card{A+A}\geq\min\{p,2\card A-1\}$.  If the minimum is not $p$, then
+$2\card A-1>\card A$.  Finite absorption follows directly from
+\eqref{eq:q-growth} with $q=2^t$.
+\end{proof}
+
+We can now prove the recurrent part of \cref{thm:main}.  The full group is
+fixed.  A proper nonsingleton cannot return to itself because its
+cardinality strictly increases until absorption.  For a singleton,
+\begin{equation}\label{eq:singleton}
+ \Phi_p^t(\{a\})=\{2^ta\}.
+\end{equation}
+The state $\{0\}$ is fixed.  If $a\ne0$, the least return time in
+\eqref{eq:singleton} is the least $t\geq1$ with $2^t=1$ in
+$\Fp^\times$, namely $h$.  All nonzero singletons therefore have period
+$h$, and they form $(p-1)/h$ cycles.  This proves parts 1 and 2 of
+\cref{thm:main}.
+
+\section{Fixed data, zeta factors, and recovery}\label{sec:periodic}
+
+The recurrent classification makes the entire temporal ledger finite.
+
+\begin{proof}[Proof of \cref{thm:main}, parts 3, 4, and 6]
+A state fixed by $\Phi_p^n$ is recurrent.  The two fixed states in
+\eqref{eq:recurrent-set} contribute $2$.  Every nonzero singleton is fixed
+exactly when $h\mid n$, contributing another $p-1$ in that case.  This
+proves \eqref{eq:fixed-count}.
+
+For a finite map with $c_r$ cycles of length $r$, the fixed sequence obeys
+\[
+ F_p(n)=\sum_{r\mid n}r c_r,
+\]
+and hence
+\[
+ \exp\!\left(\sum_{n\geq1}F_p(n)\frac{z^n}{n}\right)
+ =\prod_{r\geq1}(1-z^r)^{-c_r}.
+\]
+Here $c_1=2$, $c_h=(p-1)/h$, and all other $c_r$ vanish, giving
+\eqref{eq:zeta}.  M\"obius inversion of the same divisor sum gives the first
+expression in \eqref{eq:cycle-census}; substitution of
+\eqref{eq:fixed-count} gives its three cases.
+
+Because $h\geq2$, the counts are $2$ through time $h-1$ and jump to $p+1$
+at time $h$.  Formula \eqref{eq:recovery} follows.  Equivalently, the first
+nontrivial zeta factor has degree $h$ and exponent $(p-1)/h$; the fixed
+sequence formulation avoids any factorization convention.
+\end{proof}
+
+The first registered examples are shown in \cref{tab:examples}.  The last
+column is the deepest layer, namely the two-point layer.
+\begin{table}[ht]
+\centering
+\caption{Early periodic and transient signals.  The fixed count is constant
+at $2$ before time $h$ and equals $p+1$ at time $h$.}
+\label{tab:examples}
+\begin{tabular}{rrrrr}
+\toprule
+$p$ & $h=\ord_p(2)$ & $F_p(1)$ & $F_p(h)$ & $T_p(2)$\\
+\midrule
+3  & 2  & 2 & 4  & 1\\
+5  & 4  & 2 & 6  & 2\\
+7  & 3  & 2 & 8  & 3\\
+11 & 10 & 2 & 12 & 4\\
+13 & 12 & 2 & 14 & 4\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Exact cardinality-layer absorption}\label{sec:depth}
+
+The lower envelope in \eqref{eq:q-growth} determines an upper bound for
+every orbit.  Arithmetic progressions show that the bound cannot be
+improved on any layer.
+
+\begin{proof}[Proof of \cref{thm:main}, part 5]
+Fix $2\leq m\leq p$ and set
+\[
+ K=\left\lceil\log_2\frac{p-1}{m-1}\right\rceil.
+\]
+For every $m$-element set $A$, \cref{lem:growth} gives
+\[
+ \card{\Phi_p^K(A)}
+ \geq\min\{p,2^K(m-1)+1\}=p.
+\]
+Thus $\Phi_p^K(A)=\Fp$ and $T_p(m)\leq K$.
+
+For sharpness, take an affine arithmetic progression
+\[
+ A=a+r\{0,1,\ldots,m-1\},\qquad r\in\Fp^\times.
+\]
+Every integer between $0$ and $q(m-1)$ is a sum of $q$ integers from
+$\{0,\ldots,m-1\}$.  Hence
+\begin{equation}\label{eq:ap-sumset}
+ qA=qa+r\{0,1,\ldots,q(m-1)\}\pmod p.
+\end{equation}
+If $0\leq t<K$, the definition of $K$ gives
+$2^t(m-1)<p-1$.  The residues displayed in \eqref{eq:ap-sumset} are then
+distinct, so
+\[
+ \card{\Phi_p^t(A)}=2^t(m-1)+1<p.
+\]
+At $t=K$, we have $2^K(m-1)+1\geq p$, so the displayed integer interval
+contains at least $p$ consecutive integers.  Their residues cover all of
+$\Fp$; any further wraparound does not change that conclusion.  Thus
+$\tau_p(A)=K$, proving \eqref{eq:layer-depth}.
+\end{proof}
+
+The progression construction proves existence of extremizers.  It does not
+by itself classify every set of maximal absorption time.  The following
+owner-subtracted statement records exactly the local rigidity that we use.
+
+\begin{proposition}[Vosper range only]\label{prop:vosper}
+Let $A\subseteq\Fp$ satisfy $\card A\geq2$ and
+\begin{equation}\label{eq:vosper-range}
+ \card{A+A}=2\card A-1\leq p-2.
+\end{equation}
+Then $A$ is an arithmetic progression modulo $p$.
+\end{proposition}
+
+\begin{proof}
+Apply Vosper's theorem to the pair $(A,A)$.  The hypotheses in
+\eqref{eq:vosper-range} are precisely the critical equality and endpoint
+restriction in the cited form of that theorem \cite{Vosper1956}.
+\end{proof}
+
+\begin{remark}[no global rigidity overclaim]\label{rem:no-overclaim}
+An orbit can attain the maximal absorption time even when one intermediate
+Cauchy--Davenport inequality has slack, provided the slack does not fill the
+remaining distance to $p$.  Accordingly, \cref{prop:vosper} is a
+classification of the sharp first doubling step in its valid range, not a
+claim that every maximizer in \eqref{eq:layer-depth} is an arithmetic
+progression.
+\end{remark}
+
+\section{Exact controls, endpoints, and authority}
+
+The deterministic script \texttt{code/verify\_sumset\_squaring.py} registers
+two complementary exact finite routes.  The first enumerates every nonempty subset
+for $p=3,5,7,11,13$, constructs its literal functional orbit, and checks the
+recurrent classification, every fixed count through time $2h$, and every
+cardinality-layer maximum.  It examines 10,403 states in total.
+
+The second route builds $2^tA$ by adding one copy of $A$ at a time rather
+than applying $\Phi_p$ recursively.  It checks the iterate identity on 863
+state--time cases, verifies 17,139 ordered Cauchy--Davenport pairs, tests the
+safe Vosper equality range, and checks arithmetic-progression extremizers
+for every layer of every odd prime through $43$.  M\"obius reconstruction
+independently verifies that only periods $1$ and $h$ survive, while the
+cycle-product factors reconstruct every registered logarithmic zeta
+coefficient.  The final registered run contains 91,509 exact assertions and no floating-point or
+randomized test.
+
+The endpoints are material.
+\begin{itemize}
+\item The singleton layer is not an absorption layer: $\{0\}$ is fixed and
+  the nonzero states have period $h$.
+\item At $m=p$, the only state is already $\Fp$, and
+  \eqref{eq:layer-depth} gives $T_p(p)=0$.
+\item The empty set was excluded.  If adjoined, it is one additional fixed
+  state and multiplies \eqref{eq:zeta} by $(1-z)^{-1}$.
+\item At $p=2$, doubling is not a permutation on nonzero singletons:
+  $\{1\}\mapsto\{0\}$.  Direct enumeration gives only the two fixed
+  recurrent states $\{0\}$ and $\mathbb F_2$ and no first anomaly.  This is
+  why \cref{thm:main} assumes an odd prime.
+\end{itemize}
+
+All infinite-family assertions are proved in the manuscript.  Computation
+is a finite control, not evidence for untested primes.  Cauchy--Davenport,
+Vosper critical-pair rigidity, general iterated-sumset structure, and the
+Artin--Mazur construction remain positively attributed to their owners.
+Public posting, submission, author contact, specialist priority claims, and
+absolute novelty language remain \textbf{HOLD}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

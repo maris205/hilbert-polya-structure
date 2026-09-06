@@ -1,0 +1,87 @@
+\section{Projective residue states and static field separation}
+\label{sec:projective}
+
+\begin{definition}[Projective residue block]
+For $n\ge2$, a pair $(a,b)\in\Rring_n^2$ is unimodular if there exist
+$u,v\in\Rring_n$ such that $ua+vb=1$.  Define
+\[
+ X_n=P^1(\Rring_n)
+ =\{(a,b):\Rring_na+\Rring_nb=\Rring_n\}/\Rring_n^\times,
+\]
+where a unit acts by simultaneous multiplication of both coordinates.
+\end{definition}
+
+This definition uses no field test.  In particular, it is valid for prime
+powers and mixed composite moduli, where zero divisors alter the geometry.
+The unit-scaling quotient is also compatible with a transported semiring
+presentation, a property used in \cref{sec:exact-audit}.
+
+\begin{lemma}[Prime-power count]
+\label{lem:prime-power-count}
+For $q=p^a$,
+\[
+ |P^1(\Z/q\Z)|=q+q/p.
+\]
+\end{lemma}
+
+\begin{proof}
+The ring $A=\Z/q\Z$ is local with maximal ideal $pA$.  A unimodular pair has
+at least one unit coordinate.  If the second coordinate is a unit, unit
+scaling gives a unique representative $[t:1]$ with $t\in A$, hence $q$
+classes.  If the second coordinate is a nonunit, the first is a unit and the
+class has a unique representative $[1:u]$ with $u\in pA$, hence $q/p$
+further classes.  The two families are disjoint.
+\end{proof}
+
+\begin{lemma}[Product compatibility]
+\label{lem:product-projective}
+For finite commutative rings $A,B$,
+\[
+ P^1(A\times B)\cong P^1(A)\times P^1(B).
+\]
+\end{lemma}
+
+\begin{proof}
+Unimodularity and unit scaling are componentwise over $A\times B$.
+Passing to equivalence classes gives the bijection.
+\end{proof}
+
+\begin{theorem}[Projective count]
+\label{thm:projective-count}
+For every $n\ge2$,
+\[
+ |X_n|=\psi(n):=n\prod_{p\mid n}\left(1+\frac1p\right).
+\]
+\end{theorem}
+
+\begin{proof}
+Apply the Chinese remainder theorem to the prime-power factorization of $n$
+and combine \cref{lem:prime-power-count,lem:product-projective}.
+\end{proof}
+
+\begin{corollary}[Static field criterion]
+\label{cor:static-field}
+For $n\ge2$,
+\[
+ |X_n|=n+1\quad\Longleftrightarrow\quad n\text{ is prime}.
+\]
+\end{corollary}
+
+\begin{proof}
+For $n=p$, \cref{thm:projective-count} gives $p+1$.  Conversely, if $n$ is
+composite and $p\mid n$, then $n/p\ge2$ and
+\[
+ \psi(n)\ge n(1+1/p)=n+n/p\ge n+2.
+\]
+\end{proof}
+
+The defect
+\[
+ \delta(n):=|X_n|-(n+1)
+\]
+therefore recognizes precisely when the residue ring is a field.  This is a
+real source-level arithmetic distinction, and it escapes the bare
+multiplicative-UFD clone inherited from the earlier source program.  It is
+not yet a primitive-orbit distinction.  Every state and transition in the
+next section is created without consulting $\delta(n)$; only that frozen
+ledger can decide A1.

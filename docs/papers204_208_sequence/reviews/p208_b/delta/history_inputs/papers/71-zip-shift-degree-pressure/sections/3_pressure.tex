@@ -1,0 +1,90 @@
+\section{Degree pressure and equilibrium states}\label{sec:pressure}
+
+For $t\in\R$, let $P_\tau(t)$ denote the topological pressure of
+$t\phi_\tau$ for $F_\tau$.  Define
+\[
+ Q_\tau(t)=\sum_{z\in Z}k_z^{t+1}
+ =\sum_{s\in S}k_{\tau(s)}^t.
+ \tag{3.1}\label{eq:q}
+\]
+
+\begin{theorem}[Pressure, equilibrium, and curvature]\label{thm:pressure}
+For every $t\in\R$,
+\[
+ P_\tau(t)=\log Q_\tau(t).
+ \tag{3.2}\label{eq:pressure}
+\]
+There is a unique equilibrium state $\mu_t$.  Its natural extension is the
+Bernoulli measure on $S^\Z$ with one-symbol probabilities
+\[
+ p_t(s)=\frac{k_{\tau(s)}^t}{Q_\tau(t)}.
+ \tag{3.3}\label{eq:pt}
+\]
+If
+\[
+ r_t(z)=\sum_{s\in\tau^{-1}(z)}p_t(s)
+ =\frac{k_z^{t+1}}{Q_\tau(t)},
+ \tag{3.4}\label{eq:rt}
+\]
+then
+\[
+ P_\tau'(t)=\sum_z r_t(z)\log k_z,
+ \qquad
+ P_\tau''(t)=\Var_{r_t}(\log k_z).
+ \tag{3.5}\label{eq:derivatives}
+\]
+Hence $P_\tau$ is strictly convex exactly when the fibre profile is
+nonuniform.
+\end{theorem}
+
+\begin{proof}
+By \cref{prop:natural}, the variational functional for $F_\tau$ equals that
+for the full shift on $S^\Z$ with the one-coordinate potential
+$t\log k_{\tau(s)}$.  For any shift-invariant measure $\nu$, its entropy rate
+is bounded by the Shannon entropy $H(p)$ of its one-symbol marginal $p$.
+The finite-alphabet Gibbs inequality gives
+\[
+ H(p)+t\sum_{s\in S}p(s)\log k_{\tau(s)}
+ \leq\log\sum_{s\in S}k_{\tau(s)}^t,
+ \tag{3.6}\label{eq:gibbs}
+\]
+with equality only at \eqref{eq:pt}; entropy-rate equality then forces the
+Bernoulli process.  This proves \eqref{eq:pressure} and uniqueness.
+
+Summing \eqref{eq:pt} over a fibre gives \eqref{eq:rt}.  Differentiating the
+finite exponential sum yields \eqref{eq:derivatives}.  Its variance vanishes
+for one, hence every, $t$ exactly when all values $\log k_z$ coincide.
+\end{proof}
+
+Two parameter values have immediate meanings:
+\[
+ P_\tau(0)=\log|S|,
+ \qquad
+ P_\tau(-1)=\log|Z|.
+ \tag{3.7}\label{eq:end-alphabets}
+\]
+Thus the curve contains both alphabet sizes, while its curvature records
+the nonuniform distribution of information loss.
+
+The next corollary explicitly uses the main entropy formulae of
+\citet{MartinsMattosVarao2026}; it is not a reattribution of those formulae.
+
+\begin{corollary}[Metric and folding entropy along equilibrium]\label{cor:folding}
+For the equilibrium state $\mu_t$,
+\[
+ h_{\mu_t}(F_\tau)=P_\tau(t)-tP_\tau'(t),
+ \qquad
+ \cF_{\mu_t}(F_\tau)=P_\tau'(t).
+ \tag{3.8}\label{eq:entropy-bridge}
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem A of \citet{MartinsMattosVarao2026} identifies metric entropy with
+$H(p_t)$.  From \eqref{eq:pt},
+$-\log p_t(s)=P_\tau(t)-t\log k_{\tau(s)}$, so averaging gives the first
+identity.  Their Theorem B writes folding entropy as the average conditional
+entropy inside the fibres.  Equation \eqref{eq:pt} is uniform within each
+fibre, so the conditional entropy over $z$ is $\log k_z$.  Averaging with
+$r_t$ and using \eqref{eq:derivatives} gives the second identity.
+\end{proof}

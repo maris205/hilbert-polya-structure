@@ -1,0 +1,149 @@
+\section{Frozen code and analytic source}
+\label{sec:source}
+
+\subsection{Arithmetic skeleton and prefix-free histories}
+
+The source-side integer relation remains the full-shift semiring skeleton
+\[
+ F_m\boxtimesf F_n\cong F_{mn},\qquad
+ F_m\boxplusf F_n\cong F_{m+n},\qquad
+ S(F_n)\cong F_{n+1},\qquad h(F_n)=\log n.
+\]
+Rational primes are the multiplicative atoms of this skeleton.  The
+analytic construction below is frozen over all integers before an inventory
+\(S\subseteq\{2,3,\ldots\}\) is chosen.  Selecting \(S=\Pp\) is therefore
+an evaluation restriction, not an intrinsic output of the code.
+
+For \(n\ge1\), put
+\[
+ L(n)=\lfloor\log_2n\rfloor+1.
+\]
+The Elias gamma word \(c(n)\) consists of \(L(n)-1\) zeros followed by the
+\(L(n)\)-digit binary expansion of \(n\).  It is prefix-free and has length
+\begin{equation}
+ \ell(n)=2L(n)-1=2\lfloor\log_2n\rfloor+1.
+ \label{eq:gamma-length}
+\end{equation}
+For example,
+\[
+ c(2)=010,\qquad c(3)=011,\qquad c(4)=00100.
+\]
+The choice supplies a fixed \(O(\log n)\) history.  It supplies no
+prime-selection predicate.
+
+\subsection{Affine digit maps}
+
+On the unit disk \(\D\), freeze
+\begin{equation}
+ \psi_0(z)=\frac z2-\frac14,
+ \qquad
+ \psi_1(z)=\frac z2+\frac14.
+ \label{eq:digit-maps}
+\end{equation}
+Both maps send the closed disk into \(|z|\le3/4\).  For a binary word
+\(c=c_1\cdots c_\ell\), let \(\phi_c\) denote the corresponding ordered
+composition, and define
+\[
+        \phi_n=\phi_{c(n)}.
+\]
+It is affine:
+\begin{equation}
+        \phi_n(z)=a_n+q_nz,
+        \qquad q_n=2^{-\ell(n)}.
+ \label{eq:code-branch}
+\end{equation}
+The translation \(a_n\) distinguishes ordered histories; the derivative
+records their lengths.  Composition orientation affects the explicit
+translation but not any derivative product or theorem below.  Every
+\(\phi_n(\D)\) lies in a common compact subset of \(\D\).
+
+\subsection{Zero- and one-form pullbacks}
+
+Let
+\[
+ \cH^0=A^2(\D),\qquad \cH^1=A^2(\D)\,dz
+\]
+with their usual Bergman norms.  For \(\phi(z)=a+qz\), define
+\begin{equation}
+ U_{\phi,0}f=f\circ\phi,
+ \qquad
+ U_{\phi,1}(g\,dz)=q(g\circ\phi)\,dz.
+ \label{eq:form-pullbacks}
+\end{equation}
+The densely defined holomorphic differential intertwines them:
+\[
+        dU_{\phi,0}=U_{\phi,1}d.
+\]
+For exact finite algebra we use
+\begin{equation}
+ 0\longrightarrow\C\longrightarrow P_N
+ \xrightarrow{d}P_{N-1}dz\longrightarrow0,
+ \label{eq:polynomial-complex}
+\end{equation}
+where \(P_N\) contains polynomials of degree at most \(N\).  Affine
+pullback preserves this complex.  We do not infer that \(d\) is bounded
+between the two infinite Bergman spaces; infinite identities will be proved
+by nuclear fixed-word traces.
+
+\subsection{Shared and disjoint assemblies}
+
+Let \(w_n(s)=n^{-s}\).  The \emph{shared renewal} pair is
+\begin{equation}
+ \cL^k_{S,s}=\sum_{n\in S}w_n(s)U_{\phi_n,k},
+ \qquad k=0,1.
+ \label{eq:shared-pair}
+\end{equation}
+All returns act on one disk.  Once a code return is completed, every next
+return label is legal; the induced symbolic object is a countable full
+shift.
+
+The \emph{disjoint} pair is
+\begin{equation}
+ \cE^k_{S,s}=\bigoplus_{n\in S}w_n(s)U_{\phi_n,k}.
+ \label{eq:disjoint-pair}
+\end{equation}
+Every label acts on a private disk.  This removes mixed cycles by separating
+recurrent components, so the component index visibly contains the supplied
+inventory.
+
+\begin{proposition}[Degreewise trace class]
+\label{prop:trace-class}
+For every inventory \(S\subseteq\{2,3,\ldots\}\) and \(\Re s>1\), all four
+operators in \cref{eq:shared-pair,eq:disjoint-pair} are trace class.
+\end{proposition}
+
+\begin{proof}
+Common compact containment gives a uniform trace-norm estimate for the
+zero-form composition operators in the holomorphic map-weight framework of
+\citet{BandtlowJenkinson2008}.  Multiplication by \(q_n\), with
+\(|q_n|\le1\), gives the same type of estimate in degree one.  Since
+\[
+ \sum_{n\in S}|n^{-s}|\le\sum_{n\ge2}n^{-\Re s}<\infty,
+\]
+the shared sums converge in trace norm, and the trace norm of each disjoint
+sum is bounded by the same componentwise series.
+\end{proof}
+
+\subsection{Determinant convention}
+
+For any trace-class pair \(L=(L_0,L_1)\), put
+\begin{equation}
+ \Dgr(z;L)=\frac{\det(I-zL_0)}{\det(I-zL_1)}.
+ \label{eq:graded-det}
+\end{equation}
+Near \(z=0\),
+\begin{equation}
+ \Dgr(z;L)
+ =\exp\left[-\sum_{r\ge1}\frac{z^r}{r}
+ \left(\Tr L_0^r-\Tr L_1^r\right)\right].
+ \label{eq:graded-log}
+\end{equation}
+This quotient is a graded or relative determinant.  The ordinary ungraded
+block determinant is
+\begin{equation}
+ \det(I-z(L_0\oplus L_1))
+ =\det(I-zL_0)\det(I-zL_1).
+ \label{eq:block-product}
+\end{equation}
+Equations \eqref{eq:graded-det} and \eqref{eq:block-product} have different
+ownership and will never be interchanged.

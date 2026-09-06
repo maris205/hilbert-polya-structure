@@ -1,0 +1,121 @@
+\section{Exponent rectangles and boundary laws}\label{sec:rectangles}
+
+Arithmetic prefixes intersect many root components irregularly.  An exponent
+rectangle instead stays inside one component and retains a Cartesian set of
+valuation coordinates.  Fix $r\in\cR_{a,b}$ and define
+\begin{equation}\label{eq:rectangle}
+ Q_r(M,N)=\{r a^i b^j:0\leq i<M,\ 0\leq j<N\},
+ \qquad M,N\geq1.
+\end{equation}
+
+\begin{proposition}[Exact exponent-box law]\label{prop:rectangle}
+For every $M,N\geq1$,
+\begin{align}
+ \dim\proj_{Q_r(M,N)}(X_{a,b})&=M+N-1,
+ \label{eq:rectangle-dimension}\\
+ |\proj_{Q_r(M,N)}(X_{a,b})|&=q^{M+N-1},
+ \label{eq:rectangle-count}\\
+ \beta(Q_r(M,N))&=(M-1)(N-1).
+ \label{eq:rectangle-beta}
+\end{align}
+Under normalized Haar measure,
+\begin{equation}\label{eq:rectangle-haar}
+ \Ent_\mu(Z_{Q_r(M,N)})=(M+N-1)\log q,
+ \qquad
+ \TC_\mu(Z_{Q_r(M,N)})=(M-1)(N-1)\log q.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The graph $G_r(Q_r(M,N))$ contains all edges between its $M$ row vertices and
+$N$ column vertices.  It is the connected complete bipartite graph
+$K_{M,N}$.  Its graphic rank is $M+N-1$, while its cycle rank is
+\[
+ MN-(M+N)+1=(M-1)(N-1).
+\]
+Apply \Cref{cor:graphic-matroid,prop:haar}.
+\end{proof}
+
+The pattern exponent has boundary rather than area order:
+\begin{equation}\label{eq:rectangle-area-rate}
+ \frac{1}{MN}\log|\proj_{Q_r(M,N)}(X_{a,b})|
+ =\frac{M+N-1}{MN}\log q.
+\end{equation}
+In particular, \eqref{eq:rectangle-area-rate} tends to zero whenever both
+$M$ and $N$ diverge.  This vanishing reflects the factorization into row and
+column potentials.  It does not contradict the positive arithmetic-prefix
+rate in \eqref{eq:prefix-rate}; the two sequences sample different portions
+of the product coordinates.
+
+\begin{corollary}[Rectangles on distinct roots]\label{cor:root-rectangles}
+Let $r_1,\ldots,r_s$ be distinct roots and let
+\[
+ F=\bigsqcup_{t=1}^s Q_{r_t}(M_t,N_t).
+\]
+Then
+\begin{align*}
+ \dim\proj_F(X_{a,b})
+ &=\sum_{t=1}^s(M_t+N_t-1),\
+ \beta(F)&=\sum_{t=1}^s(M_t-1)(N_t-1).
+\end{align*}
+The corresponding Haar random vectors are independent across the roots.
+\end{corollary}
+
+\begin{proof}
+Distinct roots belong to distinct factors in the product
+\eqref{eq:global-product}.  Their incidence matrices and finite Haar images
+form direct products, so dimensions, cycle ranks, and entropies add.
+\end{proof}
+
+The same calculation applies to nonrectangular shapes without new extension
+arguments.  We make the one-edge law explicit.
+
+\begin{corollary}[One-edge rank update]\label{cor:edge-update}
+Let $F\subset\N$ be finite.  If $n\in F$ and its edge lies on a cycle of its
+root graph, then
+\[
+ d(F\setminus\{n\})=d(F),\qquad
+ \beta(F\setminus\{n\})=\beta(F)-1.
+\]
+If that edge is a bridge, then
+\[
+ d(F\setminus\{n\})=d(F)-1,\qquad
+ \beta(F\setminus\{n\})=\beta(F).
+\]
+Conversely, let $n=r a^i b^j\notin F$.  If its two endpoints already lie in
+the same connected component of $G_r(F)$, then adjoining $n$ preserves $d$
+and increases $\beta$ by one.  In every other case, adjoining $n$ increases
+$d$ by one and preserves $\beta$.
+\end{corollary}
+
+\begin{proof}
+An edge on a cycle is dependent on the remaining cycle edges, so its deletion
+preserves rank; a bridge belongs to every maximal spanning forest, so its
+deletion lowers rank by one.
+The deletion formulas for $\beta=|F|-d$ follow.  An added edge is dependent
+exactly when its endpoints were already connected.  This proves the two
+addition formulas.
+\end{proof}
+
+Thus the arbitrary-shape theorem records more than the number of rows and
+columns: it tracks precisely which missing cells destroy which dependencies.
+
+\begin{table}[ht]
+\centering
+\caption{Three finite geometries governed by the same graph-rank formula.
+The last column records the normalization used in this paper, not a universal
+dynamical entropy.}\label{tab:geometries}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{.18\textwidth}
+>{\raggedright\arraybackslash}p{.22\textwidth}
+>{\raggedright\arraybackslash}p{.19\textwidth}
+>{\raggedright\arraybackslash}p{.18\textwidth}Y@{}}
+\toprule
+Finite set & Incidence graph & Projection dimension & Cycle defect & Reading\\
+\midrule
+arbitrary $F$ & root-wise $G_r(F)$ & $\sum_r(|I_r|+|J_r|-c_r)$ & $\sum_r\beta_1(G_r)$ & exact finite-shape rank\\
+prefix $[L]$ & irregular union over roots & $L-\lfloor L/(ab)\rfloor$ & $\lfloor L/(ab)\rfloor$ & divide log count by $L$\\
+rectangle $Q_r(M,N)$ & $K_{M,N}$ & $M+N-1$ & $(M-1)(N-1)$ & area-normalized rate tends to zero\\
+\bottomrule
+\end{tabularx}
+\end{table}

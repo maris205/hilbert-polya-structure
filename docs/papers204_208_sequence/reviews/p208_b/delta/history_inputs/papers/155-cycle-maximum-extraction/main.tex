@@ -1,0 +1,334 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,microtype,xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Sym}{\mathfrak S}
+\newcommand{\std}{\operatorname{std}}
+\newcommand{\CME}{\mathsf C}
+\newcommand{\rtlmin}{\operatorname{rlmin}}
+\newcommand{\stirfirst}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}}
+
+\title[Cycle-maximum extraction]{Cycle-Maximum Extraction on Permutations:\\
+Exact Images and Weighted Fibres}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Write a permutation as disjoint cycles, order the cycle supports by their
+least elements, read their greatest elements, and standardize the resulting
+word.  Iterating this rule gives a rank-changing map on the disjoint union of
+finite symmetric groups.  For a target $\sigma\in\Sym_m$, we prove that its
+least possible source rank is
+\[
+ \mu(\sigma)=2m-\rtlmin(\sigma),
+\]
+and construct a source in every rank at least $\mu(\sigma)$.  The proof is an
+explicit opener--closer schedule: precisely the right-to-left minima may use
+one coordinate simultaneously as a cycle minimum and maximum.  Independently,
+we resolve every target fibre as a sum over ordered set partitions, with a
+block of size $b$ carrying weight $(b-1)!$.  The only recurrent permutations
+are the identities, and every other step strictly lowers rank.  Static cycle
+maxima, ordered-cycle conventions, and set-partition endpoint technology are
+treated as prior inputs.  A deterministic audit executes $16{,}473{,}121$
+exact assertions; it is counterexample pressure rather than proof.  No sharp
+absorption clock is claimed.
+\end{abstract}
+
+\maketitle
+
+\section{The map and its ownership boundary}\label{sec:map}
+
+Let $\Sym_n$ be the permutations of $[n]$ in functional notation.  For
+$\pi\in\Sym_n$, write $B_1,\ldots,B_m$ for the supports of its disjoint
+cycles, ordered so that
+\[
+ \min B_1<\min B_2<\cdots<\min B_m.
+\]
+For a word of distinct integers, $\std$ replaces its smallest letter by $1$,
+its next smallest by $2$, and so on.  Define the \emph{cycle-maximum
+extraction map}
+\begin{equation}\label{eq:map}
+ \CME(\pi)=\std(\max B_1,\ldots,\max B_m)\in\Sym_m.
+\end{equation}
+On $\Sym_{\le N}=\bigsqcup_{1\le n\le N}\Sym_n$, this is a finite
+self-map.  For example, the permutation with supports
+\[
+ \{1,3,5\},\quad\{2,4\},\quad\{6\}
+\]
+maps to $\std(5,4,6)=213$; cyclic order within a support is invisible to
+\eqref{eq:map}.
+
+The ingredients around \eqref{eq:map} are mature and receive no contribution
+credit.  Chen--Deng--Du--Stanley--Yan fix block minima and maxima in their
+crossing/nesting theory~\cite{ChenDengDuStanleyYan2005}; Rubey--Stump preserve
+opener and closer configurations~\cite{RubeyStump2009}; Mongelli explicitly
+orders cycles by increasing minima~\cite{Mongelli2012}; and
+Andrews--Egge--Gawronski--Littlejohn use prescribed sets of cycle
+maxima~\cite{AndrewsEggeGawronskiLittlejohn2011}.  We therefore claim neither
+the endpoint language, the ordering convention, nor the elementary count of
+cyclic orders.  The scope here is the exact inverse geometry of the literal
+map \eqref{eq:map}: target-dependent image thresholds, all-rank sections, and
+target-resolved weighted fibres.  The source search was bounded; a non-hit for
+the exact map is not evidence of novelty, priority, or clearance.
+
+For $\sigma=\sigma_1\cdots\sigma_m$, let $\rtlmin(\sigma)$ denote the number
+of indices $i$ such that $\sigma_i<\sigma_j$ for all $j>i$.  Put
+\begin{equation}\label{eq:mu}
+ \mu(\sigma)=2m-\rtlmin(\sigma).
+\end{equation}
+For $n\ge m$, let $\mathcal P_n(\sigma)$ consist of the ordered set
+partitions $(B_1,\ldots,B_m)$ of $[n]$ satisfying
+\begin{equation}\label{eq:support-class}
+ \min B_1<\cdots<\min B_m,
+ \qquad \std(\max B_1,\ldots,\max B_m)=\sigma.
+\end{equation}
+
+\begin{theorem}[exact images, fibres, and recurrence]\label{thm:main}
+For every $\sigma\in\Sym_m$ and $n\ge m$:
+\begin{enumerate}
+\item\label{it:image}
+$\sigma\in\CME(\Sym_n)$ if and only if $n\ge\mu(\sigma)$.  The proof
+constructs a deterministic right section in every admissible rank.
+\item\label{it:fibre}
+The complete target fibre is
+\begin{equation}\label{eq:fibre}
+ |\CME_n^{-1}(\sigma)|
+ =\sum_{(B_1,\ldots,B_m)\in\mathcal P_n(\sigma)}
+       \prod_{i=1}^m(|B_i|-1)!.
+\end{equation}
+In particular, the sum is zero precisely below the threshold in
+\ref{it:image}.
+\item\label{it:recurrent}
+$\CME(\pi)=\pi$ holds exactly for identity permutations.  Every
+nonidentity step strictly lowers rank, so the recurrent states of
+$\Sym_{\le N}$ are $\mathrm{id}_1,\ldots,\mathrm{id}_N$.
+\end{enumerate}
+\end{theorem}
+
+The image and fibre assertions are logically independent: the first resolves
+existence and least rank through endpoints, whereas the second retains all
+support choices and all cyclic orders.
+
+\section{The endpoint schedule}\label{sec:image}
+
+We first prove the lower bound in Theorem~\ref{thm:main}(\ref{it:image}).
+Suppose $(B_1,\ldots,B_m)$ satisfies \eqref{eq:support-class}.  If $B_i$ is a
+singleton, then for every $j>i$,
+\[
+ \max B_j\ge\min B_j>\min B_i=\max B_i.
+\]
+Thus $\sigma_i$ is a right-to-left minimum.  At most
+$\rtlmin(\sigma)$ supports are singletons; all remaining supports use at least
+two coordinates.  Hence
+\[
+ n=\sum_i|B_i|\ge\rtlmin(\sigma)+
+ 2\bigl(m-\rtlmin(\sigma)\bigr)=\mu(\sigma).
+\]
+
+The reverse implication is constructive.  Introduce formal opener and closer
+chains
+\begin{equation}\label{eq:chains}
+ O_1<\cdots<O_m,\qquad K_1<\cdots<K_m,
+\end{equation}
+and pair $O_i$ with $K_{\sigma_i}$.  An opener records $\min B_i$, while its
+paired closer records $\max B_i$.  A simultaneous event $S_i=O_i=K_{\sigma_i}$
+will encode a singleton.
+
+\begin{lemma}[greedy minimum schedule]\label{lem:schedule}
+There is a precedence-respecting endpoint word of length
+$2m-\rtlmin(\sigma)$ in which $O_i$ and $K_{\sigma_i}$ are simultaneous
+exactly at the right-to-left minima of $\sigma$.
+\end{lemma}
+
+\begin{proof}
+Let $i$ openers and $j$ closers have already been emitted, and continue while
+$i<m$ or $j<m$.  If $i=m$, emit $K_{j+1}$; this is the forced final-closing
+phase.  Otherwise $j<m$ as well, because an emitted closer requires its
+owner to have opened.  Consider $O_{i+1}$ and $K_{j+1}$ and apply the
+following deterministic rule:
+\begin{enumerate}
+\item if $i+1$ is a right-to-left-minimum position and
+$\sigma_{i+1}=j+1$, emit the simultaneous event $S_{i+1}$;
+\item otherwise, if the opener paired with $K_{j+1}$ has already appeared,
+emit $K_{j+1}$;
+\item otherwise emit $O_{i+1}$.
+\end{enumerate}
+The rule cannot become stuck: the boundary branch exhausts all remaining
+closers after the last opener, and before then the third move is available
+whenever the first two are not.
+
+It remains to show that every designated simultaneous event is reached.  Let
+$i+1$ be a right-to-left-minimum position and put $v=\sigma_{i+1}$.  Every
+value smaller than $v$ occurs at a position at most $i$.  Its opener is
+therefore available before $O_{i+1}$, and the closer-priority rule exhausts
+$K_1,\ldots,K_{v-1}$ before opening $O_{i+1}$.  The next closer is then
+$K_v$, so the first move applies.  No other position is declared
+simultaneous.  Starting from $2m$ formal endpoints and making exactly
+$\rtlmin(\sigma)$ identifications gives the stated length.
+\end{proof}
+
+Assign the integers $1,2,\ldots,\mu(\sigma)$ successively to the events in
+Lemma~\ref{lem:schedule}.  For each $i$, take the coordinates at $O_i$ and
+$K_{\sigma_i}$ as the endpoints of $B_i$; a simultaneous event gives a
+singleton.  The opener chain orders the minima by $i$, and the closer chain
+orders the maxima by their values, so \eqref{eq:support-class} holds.
+
+This construction also gives every larger source rank.  Replacing a
+simultaneous event by adjacent separate opener and closer events adds one
+coordinate without changing either endpoint order.  After all simultaneous
+events have been split, every support has two endpoints; further coordinates
+may be inserted strictly between the opener and closer of one support.  Thus
+there is a support family in $\mathcal P_n(\sigma)$ for every
+$n\ge\mu(\sigma)$.  To obtain a permutation, put any one cycle on each
+support---for instance, map its elements in increasing order cyclically.
+This proves Theorem~\ref{thm:main}(\ref{it:image}), including the asserted
+right sections.
+
+For illustration, $\sigma=231$ has one right-to-left minimum, so
+$\mu(231)=5$.  The supports of the permutation
+\[
+ \pi=(4,5,3,1,2)
+\]
+are $\{1,4\},\{2,5\},\{3\}$, and their maxima standardize to $231$.
+The lower bound shows that rank five is best possible.
+
+The scheduler is algorithmic as well as existential.  The inverse word
+$\sigma^{-1}$ identifies which block owns the next closer; a right-to-left
+scan marks the simultaneous positions.  The three-case rule in
+Lemma~\ref{lem:schedule} then emits a minimum schedule in linear time after
+these two scans.  Splits and interior insertions give a deterministic section
+at any requested admissible rank.
+
+\begin{corollary}[image census]\label{cor:image-count}
+Let $\stirfirst{m}{r}$ be the unsigned Stirling number of the first kind.
+Then
+\begin{equation}\label{eq:image-count}
+ |\CME(\Sym_n)|=
+ \sum_{m=1}^n\ \sum_{r=\max(1,2m-n)}^m \stirfirst{m}{r}.
+\end{equation}
+At the minimum source rank of a target,
+\begin{equation}\label{eq:min-fibre}
+ |\CME_{\mu(\sigma)}^{-1}(\sigma)|
+ =|\mathcal P_{\mu(\sigma)}(\sigma)|.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Right-to-left minima on $\Sym_m$ have the unsigned first-kind Stirling
+distribution: inserting the largest letter either creates a distinguished
+record position or inserts into one of the existing gaps, giving the usual
+Stirling recurrence.  The threshold $2m-r\le n$ now gives
+\eqref{eq:image-count}.  This classical distribution receives no contribution
+credit; the corollary merely specializes the target threshold.
+
+If $n=\mu(\sigma)$, equality in the singleton lower bound forces precisely
+the right-to-left-minimum blocks to have size one and every other block to
+have size two.  Each factor in \eqref{eq:fibre} is then either $0!$ or $1!$,
+so every feasible support family has weight one, proving
+\eqref{eq:min-fibre}.
+\end{proof}
+
+For orientation, \eqref{eq:image-count} gives the first exact image sizes
+shown below.
+\begin{table}[ht]
+\centering
+\small
+\caption{Exact literal profile used only as falsification pressure.}
+\label{tab:profile}
+\begin{tabular}{@{}lrrrrrrrrrr@{}}
+\toprule
+$n$ &1&2&3&4&5&6&7&8&9&10\\
+\midrule
+$|\CME(\Sym_n)|$&1&2&4&8&17&39&96&253&706&2074\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Weighted fibres and dynamics}\label{sec:fibre}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(\ref{it:fibre})]
+The support partition of a permutation is unique.  Fix
+$(B_1,\ldots,B_m)\in\mathcal P_n(\sigma)$.  On a labelled set $B_i$ of size
+$b_i$, there are $(b_i-1)!$ cyclic permutations: anchor one element and order
+the remaining $b_i-1$ elements around it.  Cyclic orders on disjoint supports
+are independent, giving $\prod_i(b_i-1)!$ sources with this support family.
+
+Conversely, a support family satisfying \eqref{eq:support-class}, equipped
+with one cyclic order on every block, determines a unique permutation, and
+\eqref{eq:map} sends it to $\sigma$.  Distinct support families or cyclic
+orders give distinct sources.  Summing the disjoint classes proves
+\eqref{eq:fibre}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(\ref{it:recurrent})]
+The rank of $\CME(\pi)$ is the number of cycles of $\pi$.  Equality with the
+source rank $n$ occurs only when all $n$ cycles are singletons, that is, only
+for $\pi=\mathrm{id}_n$.  Identities are fixed.  Every other orbit therefore
+strictly decreases in positive integer rank until it reaches an identity, so
+no other recurrent state exists.
+\end{proof}
+
+\section{Exact control and declarations}\label{sec:control}
+
+The accompanying standard-library verifier independently constructs the
+literal map through rank ten.  It checks $4{,}037{,}913$ source states, the
+fixed/recurrent classification, $145{,}684$ target/rank image cells, $46{,}233$
+minimum endpoint dynamic programs, $3{,}161$ explicit all-rank sections, and
+$53{,}218$ fibre cells through source rank eight.  Restricted-growth words
+generate the support side of \eqref{eq:fibre}; literal permutations generate
+the other side.  The frozen run has $16{,}473{,}121$ exact assertions and ends
+in \texttt{PASS}.  Enumeration is used only to look for counterexamples and
+implementation errors; the proofs above are all-parameter arguments.
+
+\paragraph{Limitations.}
+The paper treats only the literal map \eqref{eq:map}.  It neither classifies
+absorption times nor proves a sharp global clock.  Exact enumeration through
+rank ten gives finite maximum tails
+\(0,1,2,2,3,3,3,3,4,4\), suggesting a power-of-two pattern, but this is an
+open computational observation only: no all-parameter bound, pointwise
+clock, or global minimum-rank theorem for iterated preimages is asserted.
+Static endpoint and cycle statistics are fully subtracted, and the bounded
+direct-map search is not a novelty or priority claim.  No conclusion is
+offered for other rules that choose representatives from cycles.
+
+\paragraph{Data availability.}
+All exact-control source code and its frozen text transcript are included in
+the accompanying internal artifact.  They use no external data, runtime
+network access, random sampling, or nonstandard Python package.
+
+\paragraph{Ethics statement.}
+This mathematical study involves no human participants, animals, personal
+data, or field intervention.
+
+\paragraph{Author contributions.}
+The anonymous author is responsible for the definitions, proofs, software,
+source audit, and manuscript.
+
+\paragraph{Conflict of interest.}
+The author declares no conflict of interest.
+
+\paragraph{Funding.}
+No external funding is declared.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

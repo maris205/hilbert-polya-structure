@@ -1,0 +1,26 @@
+\begin{tikzpicture}[
+  cell/.style={minimum width=1.72cm,minimum height=.67cm,
+    draw=white,align=center,font=\scriptsize},
+  row/.style={minimum width=3.05cm,minimum height=.67cm,
+    draw=white,align=left,font=\scriptsize,anchor=east},
+  head/.style={cell,fill=charcoal,text=white,font=\scriptsize\bfseries},
+  yes/.style={cell,fill=green!18,text=passgreen,font=\small\bfseries},
+  no/.style={cell,fill=red!12,text=stopred,font=\small\bfseries}
+]
+  \node[head,minimum width=3.05cm] at (0,0) {fixture};
+  \node[head] at (2.4,0) {mixed Gram};
+  \node[head] at (4.15,0) {native $B^2$};
+  \node[head] at (5.9,0) {native $B^4$};
+  \node[head] at (7.65,0) {metric phase};
+  \foreach \name/\y in {
+    standard divisibility/-0.72,
+    mutated divisibility/-1.44,
+    composite-only poset/-2.16,
+    seeded generic DAG/-2.88}{
+      \node[row] at (1.525,\y) {\name};
+      \node[yes] at (2.4,\y) {nonzero};
+      \node[yes] at (4.15,\y) {moves};
+      \node[yes] at (5.9,\y) {moves};
+      \node[no] at (7.65,\y) {absent};
+  }
+\end{tikzpicture}

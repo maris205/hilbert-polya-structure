@@ -1,0 +1,140 @@
+\section{The canonical de Rham escape}
+\label{sec:escape}
+
+The odd sector suggested by \cref{thm:tensor-rigidity} is already present in
+the source geometry.  Pullback on one-forms contributes exactly one
+derivative factor at every step.
+
+\begin{theorem}[Local all-order Lefschetz cancellation]
+\label{thm:local-cancellation}
+For an affine branch \(\phi(z)=a+qz\), set
+\[
+        W_0=wU_{\phi,0},\qquad W_1=wU_{\phi,1}.
+\]
+Then for every \(r\ge1\),
+\begin{equation}
+        \Tr W_0^r-\Tr W_1^r=w^r.
+ \label{eq:local-supertrace}
+\end{equation}
+The degreewise Fredholm determinants obey
+\begin{equation}
+ \det(I-zW_0)=(1-zw)\det(I-zW_1).
+ \label{eq:local-det-identity}
+\end{equation}
+Consequently the graded ratio equals \(1-zw\) wherever it is defined.
+\end{theorem}
+
+\begin{proof}
+Since \(U_{\phi,1}=qU_{\phi,0}\), the one-form repetition trace is
+\[
+        \Tr W_1^r=\frac{w^rq^r}{1-q^r}.
+\]
+Subtracting it from \eqref{eq:zero-trace} proves
+\eqref{eq:local-supertrace}.  Substitute the full power identity into the
+two trace logarithms.  The resulting equality holds near \(z=0\), and both
+sides of \eqref{eq:local-det-identity} are entire, so the identity theorem
+extends it to every \(z\).
+\end{proof}
+
+The numerator is the one-dimensional exterior character
+\begin{equation}
+ \operatorname{tr}\Lambda^0(q^r)-
+ \operatorname{tr}\Lambda^1(q^r)=1-q^r.
+ \label{eq:exterior-character}
+\end{equation}
+It depends on the repeated derivative \(q^r\), unlike a hand-assigned odd
+scalar whose sign or value would be raised incorrectly under repetition.
+
+\subsection{Exact polynomial certificate}
+
+Write \(\phi(z)=a+qz\).  On the monomial bases of \(P_N\) and
+\(P_{N-1}dz\), the pullback matrices are
+\begin{align}
+ (M_0)_{j,k}
+ &=\binom{k}{j}a^{k-j}q^j,
+ &&0\le j\le k\le N,
+ \label{eq:M0}\\
+ (M_1)_{j,k}
+ &=q\binom{k}{j}a^{k-j}q^j,
+ &&0\le j\le k\le N-1.
+ \label{eq:M1}
+\end{align}
+If \(D_{k-1,k}=k\) is the differentiation matrix, direct binomial algebra
+gives
+\[
+        DM_0=M_1D.
+\]
+The sequence \eqref{eq:polynomial-complex} is exact.  Constants carry the
+scalar \(w\), while differentiation identifies the nonconstant zero-form
+quotient with the one-form space.  Hence
+\begin{equation}
+ \det(I-zwM_0)=(1-zw)\det(I-zwM_1)
+ \label{eq:finite-characteristic}
+\end{equation}
+as a polynomial identity for every \(N\).  This is a full characteristic-
+polynomial certificate, not a finite list of trace checks.
+
+\subsection{Spectral telescoping}
+
+Centering the fixed point makes the two ordinary spectra transparent:
+\[
+ \spec(W_0)=\{wq^m:m\ge0\},\qquad
+ \spec(W_1)=\{wq^{m+1}:m\ge0\}.
+\]
+Therefore
+\begin{equation}
+ \frac{\det(I-zW_0)}{\det(I-zW_1)}
+ =\frac{\prod_{m\ge0}(1-zwq^m)}
+        {\prod_{m\ge0}(1-zwq^{m+1})}
+ =1-zw.
+ \label{eq:spectral-telescope}
+\end{equation}
+All positive-degree modes pair.  The constant zero-form is the sole
+cohomological survivor.
+
+\begin{proposition}[Ordinary/graded firewall]
+\label{prop:ordinary-graded}
+The identity \eqref{eq:local-det-identity} concerns the graded quotient.
+The ordinary determinant on \(\cH^0\oplus\cH^1\) is
+\[
+ \det(I-z(W_0\oplus W_1))
+ =\det(I-zW_0)\det(I-zW_1),
+\]
+and is not \(1-zw\) for \(0<|q|<1\) and \(w\ne0\).
+\end{proposition}
+
+\begin{proof}
+Fredholm determinants multiply under direct sums.  The product retains both
+degree spectra, while \eqref{eq:spectral-telescope} cancels their paired
+factors by division.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\caption{Local determinant objects and their exact ownership.}
+\label{tab:local-objects}
+\small
+\begin{tabularx}{\textwidth}{L{3.2cm}L{5.2cm}Y}
+\toprule
+Object & Formula & Meaning \\
+\midrule
+zero-form ordinary determinant
+& $\prod_{m\ge0}(1-zwq^m)$
+& honest composition spectrum; stability tower retained \\
+one-form ordinary determinant
+& $\prod_{m\ge0}(1-zwq^{m+1})$
+& honest derivative-twisted spectrum \\
+ordinary block determinant
+& product of the two rows above
+& no cancellation between parity sectors \\
+graded/relative determinant
+& quotient of the first two rows, $1-zw$
+& exact Lefschetz cancellation; not an ordinary block determinant \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The escape is therefore genuine but typed.  Each parity sector has a valid
+trace-class operator; their ratio supplies the desired local factor.  The
+next question is not local analytic legitimacy but what survives when many
+code returns share one recurrent object.

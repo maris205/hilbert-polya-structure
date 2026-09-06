@@ -1,0 +1,262 @@
+\section{Proof details}
+\label{app:proofs}
+
+This appendix records the algebra suppressed from the main-text proofs.
+Every infinite conclusion is derived here or in
+\cref{thm:qadic-boundary,thm:golden,thm:natural}; finite computations are not
+used to close a limiting argument.
+
+\subsection{Chain census and Perron decay}
+
+\begin{lemma}[Exact chain histogram]
+\label{lem:histogram}
+For every \(N\ge1\) and \(\ell\ge1\), the number of roots \(i\) with
+\(q\nmid i\) whose truncated chain has length exactly \(\ell\) is
+\[
+  C_\ell(N)=
+  \lfloor N/q^{\ell-1}\rfloor
+  -2\lfloor N/q^\ell\rfloor
+  +\lfloor N/q^{\ell+1}\rfloor .
+\]
+Moreover, \(\sum_{\ell\ge1}\ell C_\ell(N)=N\).
+\end{lemma}
+
+\begin{proof}
+The roots with chain length at least \(\ell\) are the \(i\le
+N/q^{\ell-1}\) not divisible by \(q\).  Their number is
+\[
+  \lfloor N/q^{\ell-1}\rfloor-\lfloor N/q^\ell\rfloor.
+\]
+Subtracting the corresponding count at level \(\ell+1\) gives the formula.
+Every site belongs to one chain, so summing chain lengths counts
+\(\{1,\ldots,N\}\) once.
+\end{proof}
+
+\begin{lemma}[Summable Perron deviations]
+\label{lem:perron}
+For primitive \(A\), the sequence \(d_v=c_v-\log\rho(A)\) satisfies
+\[
+  \sum_{v\ge0}|d_v|<\infty,\qquad
+  \sum_{v\ge1}|d_v-d_{v-1}|<\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+Let \(u,w\) be positive right and left Perron vectors, normalized by
+\(w^Tu=1\).  Finite-dimensional Jordan decomposition gives constants
+\(C_1>0\), \(0<\theta<1\), and \(m\ge0\) for which
+\[
+  A^{\ell-1}=\rho^{\ell-1}uw^T+
+  O(\ell^m(\theta\rho)^\ell)
+\]
+in any fixed matrix norm.  Multiplication by \(\one^T\) and \(\one\) yields
+\[
+  W_\ell=(\one^Tu)(w^T\one)\rho^{\ell-1}
+  (1+O(\ell^m\theta^\ell)),
+\]
+where the leading coefficient is positive.  For sufficiently large
+\(\ell\), the relative error has modulus below \(1/2\); the logarithm is
+Lipschitz on that interval.  Hence
+\[
+  \log\frac{W_{v+1}}{W_v}=\log\rho+O(v^m\theta^v).
+\]
+The first series follows after absorbing finitely many initial terms, and
+the second follows from
+\(|d_v-d_{v-1}|\le|d_v|+|d_{v-1}|\).
+\end{proof}
+
+\subsection{Exact summation by parts}
+
+Starting from \eqref{eq:increment}, group cutoffs according to their
+valuation:
+\[
+  \log Z(N)=\sum_{v\ge0}c_vA_v(N).
+\]
+Only finitely many \(A_v(N)\) are nonzero.  Equation
+\eqref{eq:valuation-census} and \(\sum_vA_v(N)=N\) give
+\[
+  \log Z(N)-hN
+  =\sum_{v\ge0}d_v
+   (-\frac{r_v(N)}{q^v}
+         +\frac{r_{v+1}(N)}{q^{v+1}}),
+\]
+with \(r_0(N)=0\).  By \cref{lem:perron}, the index shift is absolutely
+convergent, so
+\[
+  \log Z(N)-hN
+  =-\sum_{v\ge1}(d_v-d_{v-1})\frac{r_v(N)}{q^v}.
+\]
+This also gives a coefficientwise check.  If
+\(p_j=(q-1)/q^{j+1}\), then the coefficient of the formal variable \(d_j\)
+on the left is \(A_j(N)-Np_j\).  On the right it is
+\[
+  \begin{cases}
+    r_1(N)/q,&j=0,\\[1mm]
+    -r_j(N)/q^j+r_{j+1}(N)/q^{j+1},&j\ge1,
+  \end{cases}
+\]
+and \eqref{eq:valuation-census} makes the two expressions identical for
+every \(j\).
+
+\subsection{Both accumulation inclusions}
+
+The inverse limit \(\mathbb Z_q\) is a closed subset of the product of the
+finite discrete spaces \(\mathbb Z/q^v\mathbb Z\); it is compact.  The
+partial sums in \eqref{eq:boundary-map} are continuous because each
+coordinate is locally constant.  The majorant from \cref{lem:perron} is
+independent of \(x\), so the Weierstrass test gives a continuous uniform
+limit.
+
+Suppose \(E(N_j)\to y\) along \(N_j\to\infty\).  Compactness supplies a
+further subsequence \(N_{j_k}\to x\) in \(\mathbb Z_q\).  Since
+\(E(N)=E_{A,q}(N)\) for positive integer states, continuity gives
+\(y=E_{A,q}(x)\).  This proves one inclusion without assuming that the
+original integer sequence converges \(q\)-adically.
+
+For the other inclusion, fix \(x\in\mathbb Z_q\) and define
+\[
+  N_j=(x\bmod q^j)+q^j.
+\]
+Then \(N_j\ge q^j\to\infty\).  For fixed \(v\) and \(j\ge v\),
+\[
+  N_j\equiv x\bmod q^j\equiv x\bmod q^v\pmod{q^v},
+\]
+so \(N_j\to x\) in the inverse limit.  Continuity proves
+\(E(N_j)\to E_{A,q}(x)\).  These two arguments establish
+\eqref{eq:acc-log}; applying the real exponential establishes
+\eqref{eq:acc-exp}.
+
+\subsection{Derivation of the golden modes}
+
+Let \(\Delta_v=d_v-d_{v-1}\).  Substitution of the binary digits into
+\eqref{eq:boundary-map} is justified by
+\[
+  \sum_{v\ge1}|\Delta_v|2^{-v}
+  \sum_{k=0}^{v-1}2^k
+  \le\sum_{v\ge1}|\Delta_v|<\infty.
+\]
+It yields \eqref{eq:gamma-residue}.  Define
+\[
+  B_k=\sum_{j\ge1}\frac{d_{k+j}}{2^j}.
+\]
+An index shift in \eqref{eq:gamma-residue} gives
+\begin{equation}
+  \gamma_k=\frac12(d_k-B_k).
+  \label{eq:gamma-B}
+\end{equation}
+Since \(|r|<1\),
+\[
+  d_k
+  =\log(1-r^{k+3})-\log(1-r^{k+2})
+  =\sum_{m\ge1}\frac{1-r^m}{m}r^{m(k+2)}.
+\]
+For each \(m\),
+\[
+  \sum_{j\ge1}\frac{r^{mj}}{2^j}
+  =\frac{r^m}{2-r^m}.
+\]
+Absolute convergence permits the \(j,m\) sums to be interchanged in \(B_k\).
+Substituting the last two identities into \eqref{eq:gamma-B} gives
+\[
+  \gamma_k=\sum_{m\ge1}
+  \frac{(1-r^m)^2}{m(2-r^m)}r^{m(k+2)},
+\]
+which is \eqref{eq:gamma-modes}.
+
+\subsection{All-level separation and dimension}
+
+For completeness, we verify every algebraic comparison in
+\eqref{eq:separation-certificate}.  Since
+\(|1-r^m|\le1+t^m\le1+t^2\) and \(2-r^m\ge2-t^2\) for \(m\ge2\),
+\[
+  a_m\le\frac1m\frac{(1+t^2)^2}{2-t^2}=\frac Km.
+\]
+Therefore
+\[
+  S\le\frac{K}{1-t^2}\sum_{m\ge2}\frac{t^{2m}}m
+  \le\frac{K}{1-t^2}\frac12\sum_{m\ge2}t^{2m}
+  =\frac{Kt^4}{2(1-t^2)^2}.
+\]
+Reducing in \(\mathbb Q(\sqrt5)\) gives the two displayed values in
+\eqref{eq:separation-certificate}.  Both \(6557\) and \(2929\sqrt5\) are
+positive, and
+\[
+  6557^2-(2929\sqrt5)^2=99044>0,
+\]
+so the difference is strictly positive.
+
+For \(R_k=\sum_{m\ge2}a_mr^{m(k+2)}\),
+\[
+  |R_k|+\sum_{j>k}|R_j|
+  \le\sum_{m\ge2}\frac{a_mt^{m(k+2)}}{1-t^m}
+  \le t^kS<a_1t^{k+3}.
+\]
+The first-mode gap is also \(a_1t^{k+3}\), because
+\(1-2t=t(1-t)\).  The difference is positive at every \(k\), proving
+strong separation, while \(|R_k|<a_1t^{k+2}\) proves
+\(\operatorname{sgn}\gamma_k=(-1)^k\).  Dividing by \(a_1r^{k+2}\)
+and applying dominated convergence to the modes \(m\ge2\) proves
+\(\gamma_{k+1}/\gamma_k\to r\).
+
+The ratio limit lets us choose \(b_1,b_2>0\) with
+\[
+  b_1t^k\le|\gamma_k|\le b_2t^k
+\]
+for every \(k\), after modifying the constants for finitely many initial
+indices.  The level-\(n\) tail diameter is at most
+\(C_2t^n\), while the first-difference argument gives separation at least
+\(C_1t^{n-1}\).  For \(s>s_0=\log2/(-\log t)\), the \(2^n\) cylinders have
+total \(s\)-content at most
+\[
+  2^n(C_2t^n)^s=C_2^s(2t^s)^n\longrightarrow0.
+\]
+This proves the Hausdorff upper bound and the upper box bound.
+
+For completeness, let \(\mathcal N(K,\delta)\) be the minimum number of
+intervals of diameter at most \(\delta\) covering \(K\).  A level-\(n\)
+cylinder requires at most a fixed number of intervals of diameter \(t^n\),
+while such an interval can meet at most a fixed number of the mutually
+\(C_1t^{n-1}\)-separated cylinders.  Thus there are constants \(c,C>0\)
+such that
+\[
+  c\,2^n\le \mathcal N(K,t^n)\le C\,2^n \qquad(n\ge1).
+\]
+Monotonicity for \(t^{n+1}<\delta\le t^n\) proves both box dimensions are
+\(s_0\).
+
+Push the fair Bernoulli measure on \(\{0,1\}^{\mathbb N}\) to \(K\).
+Choose \(n\) so that \(t^{n+1}<R\le t^n\).  Separation implies that an
+interval of radius \(R\) meets at most a constant number \(M\) of
+level-\(n\) cylinders.  Hence
+\[
+  \mu(I)\le M2^{-n}=M(t^n)^{s_0}
+  \le Mt^{-s_0}R^{s_0}.
+\]
+The mass-distribution principle gives \(\dim_HK\ge s_0\), while the same
+separation gives the lower box bound.  This completes the proof of
+\cref{thm:golden}.
+
+\subsection{Interchange and dominated radial passage}
+
+For \(|z|<1\),
+\[
+  \sum_{v\ge1}\frac{|\Delta_v|}{2^v}
+  \sum_{N\ge0}(N\bmod2^v)|z|^N
+  \le\frac1{1-|z|}\sum_{v\ge1}|\Delta_v|<\infty.
+\]
+Thus the \(N,v\) sums may be interchanged to obtain
+\eqref{eq:G-residue}.  At a primitive \(2^v\)-th root \(\xi\), the finite
+geometric derivative gives
+\[
+  P_Q(\xi)=\sum_{a=0}^{Q-1}a\xi^a=-\frac Q{1-\xi}
+  \qquad(Q=2^w,\;w\ge v).
+\]
+For \(s\in(0,1)\),
+\[
+  (1-s)\frac{|R_Q(s\xi)|}{Q}\le1.
+\]
+After multiplication by \(|\Delta_w|/2^w=|\Delta_w|/Q\), this supplies the
+summable dominating sequence \((|\Delta_w|)\).  Dominated convergence
+therefore proves \eqref{eq:radial-coefficient}.  Its coefficient is nonzero
+by strong separation, and density plus the identity theorem gives the
+continuation contradiction in \cref{thm:natural}.

@@ -1,0 +1,40 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  every node/.style={font=\small,align=center},
+  state/.style={circle,draw=formalblue,very thick,fill=formalblue!7,
+    minimum size=10mm,inner sep=1pt},
+  box/.style={draw=charcoal,rounded corners,fill=softgray,
+    text width=42mm,minimum height=12mm},
+  return/.style={draw=deepgreen,very thick,rounded corners,fill=deepgreen!7,
+    text width=39mm,minimum height=12mm},
+  arr/.style={-{Latex[length=2.1mm]},very thick},
+  changed/.style={-{Latex[length=2.1mm]},very thick,dashed,warningamber},
+]
+\node[state] (v1) at (-3.2,0) {$v_{p,1}$};
+\node[state] (v2) at (-1.6,1.2) {$v_{p,2}$};
+\node[state] (vd) at (0,1.2) {$\cdots$};
+\node[state] (vn) at (1.6,0) {$v_{p,p-1}$};
+\draw[arr,formalblue] (v1) -- (v2);
+\draw[arr,formalblue] (v2) -- (vd);
+\draw[arr,formalblue] (vd) -- (vn);
+\draw[arr,deepgreen] (vn) to[bend left=30]
+  node[below]{Wilson return} (v1);
+\node[box] (clock) at (-0.8,-1.7) {graph length $p-1$\\
+  total roof $\sum\tau=\log p$\\return weight $p^{-s}$};
+\node[box] (raw) at (4.2,1.2) {raw graph time\\
+  $1-z^{p-1}p^{-s}$};
+\node[return] (ind) at (4.2,-1.7) {first-return time\\
+  $R_se_p=p^{-s}e_p$\\$1-zp^{-s}$};
+\draw[arr,formalblue] (vn) -- (raw);
+\draw[changed] (clock.east) -- (ind.west);
+\draw[decorate,decoration={brace,amplitude=4pt},warningamber,very thick]
+  (3.1,-2.45) -- (5.3,-2.45)
+  node[midway,below=4pt,text=charcoal]{equal at $z=1$, unequal for free $z$};
+\end{tikzpicture}
+\caption{The Wilson cycle carries two clocks.  Its full return always has
+entropy weight $p^{-s}$, but the original graph records $p-1$ steps.  First
+return preserves the entropy weight and replaces $z^{p-1}$ by $z$; the Euler
+specialization at $z=1$ therefore does not identify the two marked objects.}
+\label{fig:wilson-cycle-marker}
+\end{figure}

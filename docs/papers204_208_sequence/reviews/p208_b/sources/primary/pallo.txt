@@ -1,0 +1,579 @@
+                         Acta Cybernetica 17 (2006) 799–810.
+
+
+
+
+     Rotational tree structures on binary trees and
+                     triangulations∗
+                                   Jean Marcel Pallo†
+
+
+                                        Abstract
+          A rotation in a binary tree is a simple and local restructuring technique
+      commonly used in computer science. We propose in this paper three restric-
+      tions on the general rotation operation. We study the case when only leftmost
+      rotations are permitted, which corresponds to a natural ﬂipping on polygon
+      triangulations. The resulting combinatorial structure is a tree structure with
+      the root as the greatest element. We exhibit an eﬃcient algorithm for com-
+      puting the join of two trees and the minimum number of leftmost rotations
+      necessary to transform one tree into the other.
+
+      Keywords: Binary trees; Rotation; Distance; Lattice; Algorithms
+
+
+1     Introduction
+Rotation is one of the most common operations for restructuring binary trees. It
+has the advantage of altering the depths of some of the nodes in the tree while
+preserving the symmetric order of all the nodes. Thus rotation is commonly used
+in a variety of algorithms for maintaining binary search trees with a good amortized
+behavior [10, 24, 28].
+    The combinatorial properties of binary trees under the rotation operation have
+been studied for thirty years [27]. In [17] we have shown that a directed version
+of the rotation graph of binary trees with n nodes is a lattice, known as the nth
+Tamari lattice. This corresponds to the case when only left rotations are permitted
+in the binary tree transformation. Over the last ten years, Tamari lattices have
+often been used as examples to illustrate algebraic theories [1, 3, 16, 25].
+    Initially, Tamari lattices were orderings of parenthesizations of words. But
+nowadays they can be described in other ways via the well-known bijections between
+families of Catalan combinatorial objects. A system that is isomorphic to Tamari
+lattices is that of triangulations of a convex polygon related by the diagonal ﬂip
+operation. This is the transformation that converts one triangulation into another
+   ∗ The results reported in this paper were presented at the 11th International Conference AFL
+
+2005 (Automata and Formal Languages) held at Dobogókő, Hungary, May 17–20.
+   † LE2I, UMR 5158, Université de Bourgogne, BP 47870, F21078 DIJON-Cedex, France, E-mail:
+
+pallo@u-bourgogne.fr
+
+
+                                             799
+800                                                                       Jean Marcel Pallo
+
+
+                 1           7                        1               7
+
+
+
+             2                   6            2                           6
+
+
+
+                 3           5                        3               5
+                     4                                        4
+
+
+
+
+         1               4                                        4   5
+
+
+                 2   3       5                    1                       6       7
+
+
+                                 6     7                  2       3
+
+
+
+Figure 1: A triangulation diagonal ﬂip and its corresponding binary tree rotation
+
+
+by removing a diagonal in the triangulation and adding the diagonal that subdivides
+the resulting quadrilateral on the opposite way [8, 9, 26] (see Fig. 1).
+    In 1982, Culik and Wood deﬁned the rotation distance between two binary trees
+with the same number of leaves as the minimum number of rotations necessary to
+transform one tree into the other [4]. Using the classical bijection between binary
+trees with n internal nodes and triangulations of (n+2)- gons, the previous distance
+is equivalent to the minimum number of diagonal-ﬂip transformations needed to
+convert one triangulation of a polygon into another. There remains today an open
+problem whether the rotation distance can be computed in polynomial time.
+    Therefore it seems natural to consider special instances of rotation transforma-
+tions in order to obtain simpler operations [12, 24]. In [2] the rotation operation is
+limited to the case where the leftmost subtree is constrained to be a leaf. In [5, 6,
+11, 22] the authors only allow rotations at nodes along the right arm of a tree.
+    The current paper belongs to this appoach. We consider the problem by limiting
+the general rotation operation to the restricted version where only leftmost rotations
+on trees are allowed. We obtain a tree structure which is a join-semilattice with the
+root as the greatest element. An eﬃcient algorithm computes the corresponding
+restricted rotation distance. This algorithm is constructive: it builds a sequence of
+leftmost rotations transforming one tree into the other.
+    Clearly, the restricted rotation distance deﬁned above is bounded below by the
+usual rotation distance for which no eﬃcient algorithm is known to compute it
+Rotational tree structures on binary trees and triangulations                       801
+
+
+exactly. However, this restricted rotation distance is a weak approximation of the
+usual rotation distance. A better approximation can be found in [21, 23]. This new
+metric can be considered as a way of measuring the diﬀerence in shape between
+two binary trees.
+
+
+2       Definitions and terminology
+Let us denote by  (respectively 2) internal nodes (respectively leaves) of a binary
+tree. Let TL (respectively TR ) denote the left (respectively right) subtree of a binary
+tree T (the order is signiﬁcant). Thus we can write T = TL TR in Polish notation,
+i.e. by traversing T in preorder (visit the root and then the left and right subtrees
+recursively). The weight |T | of a binary tree T is the number of leaves of T . Let Bn
+denote the set of binary trees with n internal nodes (and thus with n + 1 leaves).
+The leaves of T ∈ Bn are numbered from 1 to n + 1 by a preorder traversal of T
+(i.e. from left to right). The left (respectively right) arm of T ∈ Bn is the path
+from the root of T to its ﬁrst (respectively (n + 1)th) leaf. The mirror image T of
+                                                 ∼
+T is recursively deﬁned by T = T      
+                                       R TL and 2 = 2. Let us deﬁne 0n = (2) 2
+                                                                                     n
+                        n n+1
+(respectively 1n =  2        ) the tree of Bn where every internal node has a leaf as
+a left (respectively right) child.
+     In this paper we use the representation of binary trees via weight sequences
+introduced in [17]. This coding is deﬁned as follows. Given T ∈ Bn , the weight
+sequence of T is the integer sequence wT = (wT (1), . . . , wT (n)) where wT (i) is
+the weight of the largest subtree of T whose last leaf is the ith leaf (see Fig. 2).
+The usual left-rotation → on Bn is deﬁned as follows. A tree T ∈ Bn being given,
+it associates a tree T  obtained by replacing some subtree T1  T2 T3 of T by the
+
+
+
+
+                     ;                   ;                       ;
+
+
+
+
+ 22222            22222              22222               22222
+    1121                 1131                   1231                    1234
+         root                root                   root                    root
+    1            5       1           5         1            5         1             5
+
+
+    2            4       2           4         2            4         2             4
+          3                    3                      3                      3
+
+    Figure 2: Three lefmost left-rotations in B4 and the corresponding ﬂips in T6
+802                                                                 Jean Marcel Pallo
+
+
+                          −1                                    ∗
+subtree T1 T2 T3 . Let → denote the right-rotation and let→ denote the reﬂexive
+transitive closure of →. The usual rotation distance between T and T  ∈ Bn is the
+fewest number of left- and right-rotations required to convert T into T  . We have
+                                                                               ∗
+proved in [17] the following characterization: given T, T  ∈ Bn , we have T → T  iﬀ
+for all i ∈ [1, n]: wT (i) ≤ wT  (i).
+    Let us consider (n + 2)-gons, i.e. convex polygons with n + 2 sides and with a
+distinguished side as the top. We label the other sides from 1 to n + 1 counterclock-
+wise. Any triangulation of the (n + 2)-gon has n triangles and n − 1 non-crossing
+diagonals. Let Tn+2 denote the set of triangulations of the (n + 2)-gon. There is an
+explicit bijection τ between Bn and Tn+2 [23,26]. The top of the (n + 2)-gon τ (T )
+corresponds to the root of the tree T . The ith side of τ (T ) corresponds to the ith
+leaf of T . Diagonals corresponds to internal nodes recursively as follows. If j is the
+last leaf of the left subtree TL of T , then TL corresponds to the (j + 1)-gon having
+edge set {1, . . . , j} and the right subtree TR corresponds to the (n − j + 2)-gon
+having edge set {j + 1, . . . , n + 1} (see Fig. 1 and 2).
+    Given some T ∈ Bn with T = 1n , according to the Polish notation of T , consider
+the leftmost 2 followed by a  which respectively are the last leaf of a subtree T1
+and the root of a subtree T2 T3 . Thus the root of T1  T2 T3 is located on the
+left arm of T . Then deﬁne as the leftmost left-rotation on Bn the transformation
+T ; T  which consists in converting the leftmost subtree T1  T2 T3 of T into
+  T1 T2 T3 (see Fig. 2). Given T ∈ Bn , the leftmost left-rotation transformation
+is uniquely deﬁned.
+    Let us describe the transformation on τ (T ) ∈ Tn+2 which corresponds to the
+leftmost left-rotation on T ∈ Bn via the classical bijection τ between Bn and Tn+2 .
+This transformation is the unique operation on τ (T ) which consists in removing
+some diagonal and adding a new diagonal an end of which coincides with the
+vertex located between the root side and the side labelled 1 (see Fig. 2 and 3).
+This alternative formulation may seem more natural and intuitive. But the weight
+sequences of binary trees are more appropriate for calculations.
+          ∗
+    Let ; denote the reﬂexive transitive closure of ;. The leftmost rotation graph
+LGn is the directed graph which has a node for each tree of Bn . Two nodes are
+adjacent when their corresponding trees diﬀer by a single leftmost left-rotation.
+Since the leftmost left-rotation operation on T is uniquely deﬁned, LGn enjoys a
+tree structure. The leftmost rotation distance d(T, T  ) between T and T  ∈ Bn is
+the length of the unique path between T and T  in the directed graph LGn . LGn is
+a subgraph of the graph Gn according to the usual rotation. Algebraic properties
+of Gn can be found in [1, 3, 16, 20, 25, 26].
+
+
+3     Tree structure Bn
+Given T ∈ Bn with T = 1n and wT , we obtain the weight sequence of the unique
+T  such that T ; T  in the following way. Let i ≥ 2 be the smallest integer such
+that wT (i) = 1. Let j = max{m ∈ [i, n]|i = m − wT (m) + 1}, i.e. the greatest
+integer m such that the largest subtree with last leaf m has i as the ﬁrst leaf. Then
+Rotational tree structures on binary trees and triangulations                                803
+
+
+
+
+                         Figure 3: The ﬂipping tree structure T6
+
+
+
+wT  = wT except for the integer j: wT  (j) = j. It is worth noting that this integer
+j cannot be modiﬁed further since we have 1 ≤ wT (k) ≤ k for all T ∈ Bn and
+k ∈ [1, n].
+                          ∗                                                                     ∗
+     The poset (Bn , ;) enjoys some properties which can be easily obtained. (Bn , ;
+) is a poset with greatest element 1n for which w1n = (1, 2, 3, . . . , n). This poset has
+a tree structure (with the greatest element 1n as root) and thus is a join-semilattice
+                                            ∗
+(see Fig. 4 and 5). The poset (Bn , ;) is graded, i.e. there exists an integer-valued
+                                                                                             ∗
+function r deﬁned on Bn by r(T ) = card{i ∈ [1, n]|wT (i) = i} such that T ; T 
+and r(T  ) = 1 + r(T ) iﬀ T ; T  . r(T ) is equal to the number of internal nodes
+that are on the left arm of T . We have r(1n ) = n − 1.
+     Let us remark that Bn is isomorphic to two subtrees of Bn+1 . One is obtained
+by sustituting 22 for the last leaf 2 in all the Bn trees. If (w1 , . . . , wn ) ∈ Bn ,
+then (w1 , . . . , wn , 1) is the weight sequence of a tree in the corresponding subtree of
+Bn+1 . The other is obtained by sustituting 22 for the one before last leaf 2 in
+all the Bn trees. If (w1 , . . . , wn ) ∈ Bn , then (w1 , . . . , wn−1 , 1, 1 + wn ) is the weight
+sequence of a tree in the corresponding subtree of Bn+1 . For example in Fig. 5,
+the left and right subtrees of B5 are isomorphic to B4 (Fig. 4).
+804                                                                                         Jean Marcel Pallo
+
+
+                        1121            1111             1123           1112           1113
+
+
+
+                        1131            1211             1124           1212           1114
+
+
+
+                                1231                     1134                  1214
+
+
+
+                                                         1234
+
+                           Figure 4: The leftmost tree structure B4
+
+
+11231   11131   11121   11211   11111    11134     11123     11124     11234   11112    11212   11113   11114   11214
+
+
+
+
+11241   11141   12121   11311   12111    11135     12123     11125     11235   12112    11312   12113   11115   11215
+
+
+
+
+    11341   12141           12311        11145           12125         11245       12312            12115   11315
+
+
+
+
+                12341                            12145               11345                      12315
+
+
+
+
+                                                     12345
+
+
+                           Figure 5: The leftmost tree structure B5
+
+
+   The leftmost rotation distance between T and T  can be computed by the for-
+mula d(T, T  ) = 2r(T ∨ T  ) − r(T ) − r(T  ). Thus we are led to compute the join
+T ∨ T  of any couple of trees T and T  .
+
+
+4       Computing joins and leftmost rotation distance
+We already have observed that in applying the leftmost rotation T ; T  the
+unique integer which has been transformed reaches its maximal possible value
+and thus cannot increase. Now, for every T ∈ Bn , compute from wT an ordered
+array aT which keeps track of the sequence of all the integer transformations for
+designing the unique path between T and 1n .
+Rotational tree structures on binary trees and triangulations                       805
+
+
+Algorithm (Computation of aT from wT )
+Given T ∈ Bn and its weight sequence wT
+k := 1
+for i := 1 to n do
+    if wT (i) = 1 then
+        for j := n downto i do
+             if i = j − wT (j) + 1 then aT (k) := j;k := k + 1 endif
+        enddo
+    endif
+enddo
+This algorithm requires O(n2 ) time in the worst case and O(n) space.
+    The join T ∨ T  of T and T  is located at the intersection of the two paths
+connecting T and T  to 1n . Thus we compute wT ∨T  in the following way.
+    Let us consider the greatest suﬃx which is common to aT and aT  (if it exists).
+The corresponding preﬁxes of aT and aT  contain the same integers i (possibly in
+diﬀerent order) for which wT ∨T  (i) = i. The remaining integers j verify wT ∨T  (j) =
+wT (j) = wT  (j). Therefore it is easy to compute wT ∨T  , and then r(T ), r(T  ),
+d(T, T  ) = 2r(T ∨ T  ) − r(T ) − r(T  ) using the rank function r(T ) = card{i ∈
+[1, n]|wT (i) = i}. See some examples in Table 1 where suﬃxes are shown in bold
+type.
+
+
+                                       Table 1:
+                 wT       wT       aT       aT     wT ∨T    d(T, T  )
+                11112    11315    12354     53124    12315        4
+                11234    11345    15432     54312    11345        3
+                11214    11215    15324     51324    11215        1
+                11111    12345    12345     54321    12345        4
+                11111    11114    12345     15234    12345        8
+                11315    12112    53124     21354    12315        3
+                11212    11114    13254     15234    12315        6
+
+
+aT (respectively aT  ) allows to build the unique path between T and T ∨ T 
+(respectively T  and T ∨ T  ). Thus we obtain the unique path (T, T ∨ T  , T  )
+between T and T  .
+
+
+
+5    Mirror leftmost rotation distance
+Let us deﬁne the mirror leftmost rotation → on Bn by T → T  iﬀ T  ; T. Then
+       ∗
+(Bn , →) is a poset with least element 0n for which w0n = (1, 1, 1, . . . , 1). This
+poset has a tree structure (with the least element 0n as root) and thus is a meet-
+806                                                                  Jean Marcel Pallo
+
+                                 ∗
+semilattice. This poset (Bn , →) is ranked by the rank function ρ(T ) = n − kT + 1
+where kT is the number of internal nodes on the right arm of T ∈ Bn . We have
+ρ(0n ) = 1 The following algorithm computes ρ(T ) using the weight sequence of T :
+
+Rank algorithm (Computation of ρ(T ) from wT )
+Given T ∈ Bn and its weight sequence wT ;
+kT := 1; i := n;
+while i > 1 do
+    if wT (i) = 1 then kT := kT + 1;i := i − 1
+    else i := i − wT (i) + 1 endif
+enddo
+ρ(T ) = n − kT + 1
+              ∗
+   See (B4 , →) in Fig. 6. Observe that → is a particular case of the right-arm
+rotation transformation deﬁned in [22]. As illustration, compare for example Fig.
+3 of [22, p. 176] and Fig. 6 of this paper. The edge which links 1112 and 1212 in
+Fig. 3 of [22] has disappeared in Fig. 6. The graph drawn in Fig. 3 of [22] does
+not enjoy the tree structure property.
+
+                                         1111
+
+
+
+                          1211           1112              1121
+
+
+
+                   1231          1212    1113       1131          1123
+
+
+
+                   1234          1214    1114       1134          1124
+
+                          Figure 6: The mirror image of B4
+
+
+
+                                                       T  ) between T and
+   Let us deﬁne the mirror leftmost rotation distance d(T,
+T ∈ Bn as the length of the unique path between T and T  in the graph of
+ 
+       ∗
+                               T  ) = d(T, T
+(Bn , →). Therefore we have: d(T,             ).
+    Since wTe can be easily computed recursively from wT , the mirror leftmost ro-
+                   T  ) = d(T, 
+tation distance d(T,                T  ) is computed using Section 4. Then δ(T, T  ) =
+min(d(T, T ), d(T, 
+                     T  )) is bounded below by the usual rotation distance for which
+no polynomial time algorithm is known to compute it exactly today. See some
+examples in B8 (Table 2).
+Rotational tree structures on binary trees and triangulations                             807
+
+
+
+                                         Table 2:
+
+      wT           wT      d(T, T  )      wTe        wTf     d(Te, T
+                                                                      f )   δ(T, T  )
+    11121511     12123611      8          12312148   12311141       9           8
+    11121518     11234112     11          11212147   11341118      11          11
+    11312312     11214111     13          11311612   12341218       6           6
+    11115123     12311312     11          11141234   11312611      11          11
+    11111123     11231237     14          11145678   11114118       8           8
+    11235112     12115111     11          11341114   12341231       9           9
+    11211612     11111312      5          11312315   11312678       9           5
+    11311245     11341678      6          11113612   12112678       9           6
+
+
+
+
+6    Open problems
+We propose below two other new deﬁnitions of restricted rotations which lead to
+computing open problems.
+First we can restrict the general deﬁnition of the rotation transformation by choos-
+ing T1  T2 T3 as the rightmost subtree in the Polish notation of T . More pre-
+cisely, let us consider in the Polish notation of T the rightmost pattern 2 made
+up of a 2 followed by a . This  is the root of a subtree denoted by T2 T3 ,
+and thus T3 is always equal to a leaf 2. Let us denote by T1 the largest sub-
+tree of T whose last leaf is the leaf 2 involved in the previous pattern 2. The
+uniquely deﬁned rotation which transforms T1  T2 2 of T into   T1 T2 2 is
+called rightmost left-rotation on the tree T . Bn endowed with this transforma-
+tion has a tree structure (with the root as the greatest element 1n ) and thus is
+a join-semilattice (see Fig. 7). Despite this tree structure, the direct computa-
+tion of the joins of two trees seems to be more arduous. The deﬁnition of an
+eﬃcient algorithm for computing the corresponding rightmost rotation distance d
+seems diﬃcult, too. However, we can easily exhibit the unique paths connect-
+ing T and T  with 1n . The weight sequence of the unique tree succ(T ) obtained
+from T by a rightmost rotation is such that wsucc(T ) = wT except for the integer
+i = max{k ∈ [j, n]|wT (k) = k − j + 1} where j = max{l ∈ [1, n]|wT (l) = 1}.
+For this integer i, we have wsucc(T ) (i) = wT (i) + wT (i − wT (i)). The join T ∨ T 
+of T and T  is located at the intersection of the two paths (T, 1n ) and (T  , 1n ).
+Unfortunately, this rough construction requires O(n3 ) time and O(n2 ) space.
+     It is worth noting that leftmost d and rightmost d rotation distances can-
+not be compared. For example: d(1112, 1114) = 3 < d (1112, 1114) = 4 and
+d (1113, 1121) = 2 < d(1113, 1121) = 6 (see Fig. 4 and 7).
+     Second, we have limited in [2] the rotation operation to the case where the
+leftmost subtree T1 of the subtree T1  T2 T3 is always constrained to be a leaf 2.
+                                   L
+This transformation 2T2 T3 → 2T2 T3 induces a graded lower semimodular
+meet-semilattice structure on Bn . We can deﬁne a new restricted rotation by
+compelling, this time, the central subtree T2 of the subtree T1 T2 T3 to be always
+808                                                                                   Jean Marcel Pallo
+
+
+                                      1111
+
+
+                                      1112
+
+
+                             1121     1113
+
+
+                                      1123           1114              1211
+
+
+                             1131     1124                1212
+
+
+                             1231     1134           1214
+
+
+                                      1234
+
+                     Figure 7: The rightmost tree structure B4
+
+
+                                    1111
+
+
+
+
+                   1113      1121   1112      1211      1131                   1114
+
+
+
+
+                      1123             1212      1231       1134        1214      1124
+
+
+
+
+                                                            1234
+
+
+                             Figure 8: The central poset B4
+
+
+
+                                                                   C
+equal to a leaf 2. This transformation T1  2T3 →   T1 2T3 induces a graded
+poset structure on Bn , but does not have as good algebraic properties as before.
+                                             C                                    C
+However, this ”central” rotation operation → has a nice characterization: T → T 
+iﬀ wT = wT  except for an integer i such that wT (i) = 1 < wT  (i) (see Fig. 8). The
+rank of T ∈ Bn is easily computed by r(T ) = n + 1 − card{i ∈ [1, n]|wT (i) = 1}.
+Here too, it seems diﬃcult to exhibit an eﬃcient algorithm for computing the
+corresponding central rotation distance.
+Rotational tree structures on binary trees and triangulations                  809
+
+
+Acknowledgement
+I would like to thank the anonymous referees for their constructive remarks and
+recommendations which have greatly helped to improve this paper.
+
+
+References
+ [1] M.K. Bennet, G. Birkhoﬀ, Two families of Newman lattices, Alg. Universalis
+     32(1994), 115-144.
+
+ [2] A. Bonnin, J. Pallo, A shortest path metric on unlabeled binary trees, Pattern
+     Recognition Lett. 13(1992), 411-415.
+
+ [3] C. Chameni-Nembua, B. Monjardet, Les treillis pseudocomplments ﬁnis, Eu-
+     ropean J. Combin. 13(1992), 89-107.
+
+ [4] K. Cukik, D. Wood, A note on some tree similarity measures, Inform. Process.
+     Lett. 15(1982), 39-42.
+
+ [5] S. Cleary, Restricted rotation distance between binary trees, Inform. Process.
+     Lett. 84(2002), 333-338.
+
+ [6] S. Cleary, J. Taback, Bounding restricted rotation distance, Inform. Process.
+     Lett. 88(2003), 251-256.
+
+ [7] R.D. Dutton, R.O. Rogers, Properties of the rotation graph of binary trees,
+     Congr. Numer. 109(1995), 51-63.
+
+ [8] S. Hanke, T. Ottmann, S. Schuierer, The edge-ﬂipping distance of triangula-
+     tions, J. Universal Comput. Sci. 2(1996), 570-579.
+
+ [9] F. Hurtado, M. Noy, J. Urrutia, Flipping edges in triangulations, Discrete
+     Comput. Geom. 22(1999), 333-346.
+
+[10] K.S. Larsen, E. Soisalon-Soininen, P. Widmayer, Relaxed balance using stan-
+     dard rotations, Algorithmica 31(2001), 501-512.
+
+[11] J.M. Lucas, A direct algorithm for restricted rotation distance, Inform. Pro-
+     cess. Lett. 90(2004), 129-134.
+
+[12] J.M. Lucas, Localized rotation distance in binary trees, Congr. Numer.
+     169(2004), 161-178.
+
+[13] J.M. Lucas, Untangling binary trees via rotations, Comput. J. 47(2004), 259-
+     269.
+
+[14] F. Luccio, L. Pagli, On the upper bound of the rotation distance of binary
+     trees, Inform. Process. Lett. 31(1989), 57-60.
+810                                                             Jean Marcel Pallo
+
+
+[15] E. Mäkinen, On the rotation distance of binary trees, Inform. Process. Lett.
+     26(1987/88), 271-272.
+[16] G. Markowski, Primes, irreducibles and extremal lattices, Order 9(1992), 265-
+     290.
+[17] J.M. Pallo, Enumerating, ranking and unranking binary trees, Comput. J.
+     29(1986), 171-175.
+[18] J.M. Pallo, On the rotation distance in the lattice of binary trees, Inform.
+     Process. Lett. 25(1987), 369-373.
+[19] J.M. Pallo, Some properties of the rotation lattice of binary trees, Comput. J.
+     31(1988), 564-565.
+[20] J.M. Pallo, An algorithm to compute the Mbius function of the rotation lattice
+     of binary trees, RAIRO Theoret. Inform. Appl. 27(1993), 341-348.
+[21] J.M. Pallo, An eﬃcient upper bound of the rotation distance of binary trees,
+     Inform. Process. Lett. 73(2000), 87-92.
+[22] J.M. Pallo, Right-arm rotation distance between binary trees, Inform. Process.
+     Lett. 87(2003), 173-177.
+[23] R.O. Rogers, On ﬁnding shortest paths in the rotation graph of binary trees,
+     Congr. Numer. 137(1999), 75-95.
+[24] A.A. Ruiz, F. Luccio, A.M. Enriquez, L. Pagli, k-restricted rotation with an
+     application to search tree rebalancing, 9th WADS, Lecture Notes in Computer
+     Science, Springer, vol. 3608(2005), 2-13.
+[25] B.E. Sagan, A generalization of Rota’s NBC theorem, Adv. Math. 111(1995),
+     195-207.
+[26] D.D. Sleator, R.E. Tarjan, W. Thurston, Rotation distance, triangulations and
+     hyperbolic geometry, J. Amer. Math. Soc. 1(1988), 647-681.
+[27] D. Tamari, Monodes prordonns et chanes de Malcev, Bull. Soc. Math. France
+     82(1954), 53-96.
+[28] R. Wilber, Lower bounds for accessing binary search trees with rotations,
+     SIAM J. Comput. 18(1989), 56-67.
+

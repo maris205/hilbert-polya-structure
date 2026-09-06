@@ -1,0 +1,96 @@
+\section{Exact verification and reproducibility}
+\label{app:reproducibility}
+
+The proof package and its two audits were frozen before manuscript writing.
+The writer consumed complete byte inventories, not mutable directory names.
+The principal anchors are as follows.
+
+\noindent\textbf{Stage-2 manifest.}\par
+\noindent\texttt{bea7a189ea0b3472cc6b469eb36e6460b60c4bae66265659b19af6e89883f0da}.
+
+\noindent\textbf{Cross-audit manifest.}\par
+\noindent\texttt{273f18e57b55f4fac76cefc3f9544e8d180508cc2297bdd9e4a3c781edb082d6}.
+
+\noindent\textbf{Independent-audit tree record.}\par
+\noindent\texttt{59b8451bd0356e70d95295209d60b5d128882e51afb5774ae806770dea450765}.
+All manifest entries verified before drafting; the input trees contained no
+symbolic links, bytecode caches, or nonregular files.
+
+\subsection{Independent exact lanes}
+
+The primary validation has two implementations.  The closed-form lane stores
+each logarithmic expression as a rational vector of prime-log coefficients,
+enumerates weak compositions, and evaluates both the $H(b)$ and direct
+circular-convolution forms.  The level-recursion lane does not import the
+closed-form engine: it loops directly over tree levels, uses the exact
+denominator $|\Delta_n|$, factors integers independently, and evaluates
+finite-tree pattern counts.  An abstract-syntax check confirms the absence of
+cross-imports.
+
+The deterministic domains were:
+\begin{itemize}
+  \item $d=2,3,4$, $p=1,2,3,4$, and every $a_j\in\{1,2,3\}$ for the general
+  formulas, all one-level compositions, component depths through $2p+2$, and
+  feeder depths $p+1$ and $2p+2$;
+  \item $d=2,\ldots,8$ and $a_0,a_1=1,\ldots,5$ for every two-phase
+  composition;
+  \item $d=2,3$, $p=2,3,4$, two fixed phase profiles, and $L=1,2,3$ for all
+  $d^L$-compositions;
+  \item $d=2,3,4$, $p=2,\ldots,6$, and $L=1,\ldots,8$ for balanced
+  convergence controls.
+\end{itemize}
+The primary run made $73{,}517$ assertions.  Its selected counts include
+$13{,}302$ exact core-prefix identities, $12{,}438$ exact feeder-prefix
+identities, $4{,}734$ residue comparisons, $6{,}219$ one-level compositions,
+$10{,}212$ depth-$L$ compositions, $816$ independent recursive core counts,
+and $1{,}086$ recursive feeder counts.  The cross-audit rederived the ledger
+and made $56{,}710$ independent assertions.  A third rational audit checked
+$1{,}740$ profiles, $127{,}500$ compositions, $37{,}440$ prefix-residue
+identities, and nine nested allocation grids.
+
+\subsection{Negative controls}
+
+Six controls are required to fire:
+\begin{enumerate}
+  \item the nondivisible saturating witness in \cref{ex:nondivisible} rejects
+  unconditional divisibility necessity;
+  \item deletion of a complete-core edge rejects the complete-block count;
+  \item insertion of a core-to-feeder return edge rejects the transient finite
+  union;
+  \item deletion of a feeder-to-core edge rejects the unrestricted
+  composition domain;
+  \item $d=1$, a zero phase size, and a composition with the wrong total are
+  rejected at the parameter boundary;
+  \item \cref{eq:four-state-matrix} rejects the arbitrary cyclic-essential-SCC dimension
+  formula.
+\end{enumerate}
+Both independent audits replayed these controls.  Their purpose is to expose
+silent hypothesis drift, not to classify every graph outside the theorem.
+
+\subsection{Figure and build receipts}
+
+The data source for \cref{fig:deep-convergence} has SHA-256
+\[
+\texttt{cf8ae3ee10fd798d937bed725b6a55ad0635e5dcdfdb29fb0c1070f2290a63f9}.
+\]
+From the writer artifact root, the commands
+\begin{verbatim}
+python -B tools/generate_figure_data.py
+python -B tools/verify_figure_data.py
+\end{verbatim}
+regenerate the canonical CSV/JSON files and independently verify 153 plotted
+data assertions.  The generation script refuses a source-hash mismatch.
+
+The manuscript uses only TikZ/PGFPlots and generated vector data.  Builds fix
+\texttt{SOURCE\_DATE\_EPOCH=1787270400}.  Because \texttt{latexmk} was absent
+from the frozen environment, the deterministic clean-build fallback is
+\begin{verbatim}
+pdflatex main.tex
+bibtex main
+pdflatex main.tex
+pdflatex main.tex
+\end{verbatim}
+inside the manuscript directory.  Build reports record tool versions, source
+hashes, warnings, page count, embedded fonts, and equality across repeated
+clean builds.  Finite validation never upgrades the status of an analytical
+claim.

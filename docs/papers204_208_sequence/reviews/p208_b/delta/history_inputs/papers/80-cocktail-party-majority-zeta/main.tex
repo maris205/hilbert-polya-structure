@@ -1,0 +1,318 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\CP}{\operatorname{CP}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Bin}{\operatorname{Bin}}
+\newcommand{\Prob}{\mathbb P}
+
+\title[Cocktail-party majority dynamics]{Exact State Partition, Zeta Function, and Critical Window for Majority Dynamics on Cocktail-Party Graphs}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 27 August 2026}
+\subjclass[2020]{37B15, 05C82, 68Q87, 60C05}
+\keywords{majority dynamics, cocktail-party graph, threshold network, two-cycle, Artin--Mazur zeta function, critical window}
+
+\begin{document}
+
+\begin{abstract}
+Let $\CP_n=K_{2n}\setminus M$ be the cocktail-party graph obtained by
+deleting a perfect matching, and apply synchronous strict majority with
+inertia at a tie.  We determine the image of every one of its $4^n$ Boolean
+states after one step.  The recurrent core consists of $2+2^n$ fixed states
+and
+\[
+ \frac{1}{2}\left\{\binom{2n}{n}-2^n\right\}
+\]
+genuine two-cycles; every other state reaches consensus in one step.  This
+gives exact consensus-basin sizes, every iterate fixed-point count, the
+Artin--Mazur zeta function, and the complete symbolic natural extension.  For
+i.i.d. Bernoulli initial data we also obtain exact outcome probabilities.  In
+the critical window $p=1/2+a/\sqrt n$, the probability of one-consensus tends
+to $\Phi(2\sqrt2a)$, while the genuine two-cycle probability is asymptotic to
+$e^{-4a^2}/\sqrt{\pi n}$.  An exhaustive implementation of the literal local
+rule checks all states through $n=8$ and the first twelve iterate counts.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Synchronous Boolean threshold networks with symmetric interaction have no
+cycles longer than two, a foundational fact due to Goles and Olivos
+\cite{GolesOlivos1980}.  For majority dynamics with the convention that a
+vertex retains its state at a tie, Ginosar and Holzman study the same local
+rule on infinite graphs \cite{GinosarHolzman2000}.  Quantitative work on
+finite majority processes has emphasized convergence time and graph modules
+\cite{KaaserEtAl2016}.  Those general results tell us the maximum possible
+period, but do not by themselves enumerate the recurrent states or their
+basins on a specified graph family.
+
+This note performs that enumeration for the cocktail-party graph.  Its
+vertices come in $n$ nonadjacent mate pairs, while every two vertices from
+different pairs are adjacent.  A global imbalance forces consensus in one
+step.  At exact balance, each mate pair evolves independently: a monochrome
+pair flips and a mixed pair freezes.  This elementary dichotomy yields a
+complete state partition and, from it, several dynamical quantities that are
+usually studied separately.
+
+Our scope is intentionally exact and family-specific.  We use the general
+period-two theorem as prior art, and do not treat irreversible conversion
+processes, whose multipartite theory has a different update rule
+\cite{AdamsEtAl2011}.  The residual contribution is the joint package of
+state counts, basin counts, zeta function, natural extension, and Bernoulli
+critical-window asymptotics for the symmetric synchronous rule on
+$\CP_n$.
+
+\section{The local rule}
+
+Fix $n\geq1$.  Write the vertices of $\CP_n$ as
+\[
+ V_n=\{1,\bar1,\ldots,n,\bar n\},
+\]
+where $i$ and $\bar i$ are mates and hence are the only distinct
+nonadjacent pair involving either vertex.  A state is
+$x=(x_v)_{v\in V_n}\in\{0,1\}^{V_n}$.  Let
+\[
+ S(x)=\sum_{v\in V_n}x_v.
+\]
+Every vertex has degree $2n-2$.  The synchronous majority map
+$F_n:\{0,1\}^{V_n}\to\{0,1\}^{V_n}$ is
+\[
+ (F_nx)_v=
+ \begin{cases}
+ 1,&\sum_{w\sim v}x_w>n-1,\\
+ 0,&\sum_{w\sim v}x_w<n-1,\\
+ x_v,&\sum_{w\sim v}x_w=n-1.
+ \end{cases}
+\]
+Thus a tie is inertial.  This convention also makes $F_1$ the identity on
+the four states of the edgeless graph $\CP_1$.
+
+\begin{lemma}[one-step trichotomy]\label{lem:trichotomy}
+For every $x\in\{0,1\}^{V_n}$:
+\begin{enumerate}
+\item if $S(x)<n$, then $F_nx=0^{V_n}$;
+\item if $S(x)>n$, then $F_nx=1^{V_n}$;
+\item if $S(x)=n$, then on each mate pair $\{i,\bar i\}$ the map fixes
+the patterns $01$ and $10$ and interchanges $00$ with $11$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The number of one-neighbors seen by $v$ is
+\[
+ N_v(x)=S(x)-x_v-x_{\bar v}.
+\]
+If $S(x)<n$, then $N_v(x)\leq n-1$.  Equality can occur only when
+$S(x)=n-1$ and the mate pair of $v$ is $00$, so inertia still leaves $v$
+equal to zero.  Otherwise $N_v(x)<n-1$ and $v$ becomes zero.  This proves
+the first assertion; complementation proves the second.
+
+Suppose $S(x)=n$.  A $00$ pair has $N_v(x)=n$ at both vertices and becomes
+$11$.  A $11$ pair has $N_v(x)=n-2$ and becomes $00$.  A mixed pair has
+$N_v(x)=n-1$ at both vertices, so both coordinates retain their values.
+\end{proof}
+
+\section{Complete finite dynamics}
+
+Call a state \emph{pairwise mixed} if each mate pair is either $01$ or
+$10$.  There are exactly $2^n$ such states, all of weight $n$.
+
+\begin{theorem}[state partition]\label{thm:partition}
+For $n\geq1$, the recurrent core of $F_n$ has:
+\begin{align*}
+ \#\{\text{fixed states}\}&=2+2^n,\\
+ \#\{\text{genuine two-cycles}\}
+ &=\frac{1}{2}\left\{\binom{2n}{n}-2^n\right\}.
+\end{align*}
+The fixed states are the two consensus states and the $2^n$ pairwise-mixed
+states.  Each full consensus basin has cardinality
+\[
+ B_n=\frac{4^n-\binom{2n}{n}}{2}.
+\]
+Every nonrecurrent state enters the recurrent core after exactly one step,
+and $F_n^3=F_n$.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:trichotomy}, all states of weight below $n$ enter zero-consensus
+and all states of weight above $n$ enter one-consensus.  Complementation is a
+bijection between these two sets, while the middle layer has size
+$\binom{2n}{n}$.  Hence each consensus basin, including its consensus state,
+has size
+\[
+ \sum_{j=0}^{n-1}\binom{2n}{j}
+ =\frac{4^n-\binom{2n}{n}}2.
+\]
+
+On the middle layer, pairwise-mixed states are fixed.  Every other state has
+at least one monochrome mate pair; all monochrome pairs flip and all mixed
+pairs freeze.  A second step therefore returns the original state, but the
+first step does not.  Thus the remaining
+$\binom{2n}{n}-2^n$ middle-layer states form genuine two-cycles.  The same
+description shows that every image is recurrent and proves $F_n^3=F_n$.
+\end{proof}
+
+The formula is more informative than the general statement that symmetric
+threshold networks have period at most two: it records the complete
+functional graph up to the individual leaves attached to the two consensus
+states.
+
+\section{Iterate counts, zeta function, and natural extension}
+
+For a map on a finite set, define its Artin--Mazur zeta function by
+\[
+ \zeta_{F_n}(z)
+ =\exp\left(\sum_{k\geq1}\frac{|\Fix(F_n^k)|}{k}z^k\right).
+\]
+
+\begin{corollary}[iterate counts and zeta]\label{cor:zeta}
+For every $k\geq1$,
+\[
+ |\Fix(F_n^k)|=
+ \begin{cases}
+ 2+2^n,&k\text{ odd},\\
+ 2+\binom{2n}{n},&k\text{ even}.
+ \end{cases}
+\]
+Consequently
+\[
+ \zeta_{F_n}(z)
+ =(1-z)^{-(2+2^n)}
+  (1-z^2)^{-\frac12\{\binom{2n}{n}-2^n\}}.
+\]
+\end{corollary}
+
+\begin{proof}
+An odd iterate fixes exactly the fixed states.  An even iterate additionally
+fixes every point on a two-cycle.  The Euler product of a finite dynamical
+system contributes $(1-z^\ell)^{-1}$ for each cycle of length $\ell$, giving
+the displayed formula.
+\end{proof}
+
+There is also a canonical invertible symbolic system associated with the
+noninvertible map.  Its natural extension is
+\[
+ \widehat X_n
+ =\{(x_t)_{t\in\mathbb Z}:F_n(x_t)=x_{t+1}\text{ for every }t\},
+ \qquad \widehat\sigma((x_t)_t)=(x_{t+1})_t.
+\]
+
+\begin{corollary}[symbolic natural extension]\label{cor:natural}
+The projection $(x_t)_t\mapsto x_0$ conjugates
+$(\widehat X_n,\widehat\sigma)$ to the restriction of $F_n$ to its recurrent
+core.  Hence $\widehat X_n$ is the disjoint union of $2+2^n$ fixed orbits and
+$\frac12\{\binom{2n}{n}-2^n\}$ orbits of length two, and its zeta function is
+the one in \cref{cor:zeta}.
+\end{corollary}
+
+\begin{proof}
+In a finite functional graph, a point has prehistories of every length that
+fit into a bi-infinite orbit if and only if it lies on a directed cycle.
+Theorem~\ref{thm:partition} identifies all such points.  On this recurrent
+core $F_n$ is bijective, so the zeroth coordinate uniquely determines the
+entire bi-infinite orbit.
+\end{proof}
+
+\section{Bernoulli initial data and the critical window}
+
+Let the $2n$ initial coordinates be independent Bernoulli variables of
+parameter $p\in[0,1]$.  Write $H_n\sim\Bin(2n,p)$.
+
+\begin{theorem}[exact outcome law]\label{thm:bernoulli}
+Under Bernoulli$(p)$ initial data,
+\begin{align*}
+ \Prob(\text{one-consensus})&=\Prob(H_n>n),\\
+ \Prob(\text{zero-consensus})&=\Prob(H_n<n),\\
+ \Prob(\text{nonconsensus fixed state})&=[2p(1-p)]^n,\\
+ \Prob(\text{genuine two-cycle})
+ &=\left\{\binom{2n}{n}-2^n\right\}[p(1-p)]^n.
+\end{align*}
+These four events partition the probability space.
+\end{theorem}
+
+\begin{proof}
+The first two identities are \cref{lem:trichotomy}.  Every pairwise-mixed
+state contains exactly $n$ ones and has probability $p^n(1-p)^n$; there are
+$2^n$ such states.  Every other balanced state lies on a genuine two-cycle,
+and there are $\binom{2n}{n}-2^n$ of them.
+\end{proof}
+
+At $p=1/2$, the genuine two-cycle probability is
+\[
+ \frac{\binom{2n}{n}-2^n}{4^n}
+ =\frac{1}{\sqrt{\pi n}}(1+O(n^{-1}))-2^{-n}.
+\]
+The next result resolves the whole $n^{-1/2}$ bias window.
+
+\begin{corollary}[critical window]\label{cor:window}
+Fix $a\in\mathbb R$ and put $p_n=1/2+a/\sqrt n$, for all sufficiently large
+$n$.  Then
+\begin{align*}
+ \Prob_{p_n}(\text{one-consensus})&\longrightarrow\Phi(2\sqrt2a),\\
+ \Prob_{p_n}(\text{zero-consensus})&\longrightarrow\Phi(-2\sqrt2a),\\
+ \Prob_{p_n}(\text{genuine two-cycle})
+ &\sim\frac{e^{-4a^2}}{\sqrt{\pi n}}.
+\end{align*}
+The nonconsensus fixed-state probability is exponentially small.
+\end{corollary}
+
+\begin{proof}
+For $H_n\sim\Bin(2n,p_n)$,
+\[
+ \frac{n-2np_n}{\sqrt{2np_n(1-p_n)}}\longrightarrow-2\sqrt2a.
+\]
+The central limit theorem gives the first two limits; the atom at $n$ is
+$O(n^{-1/2})$ and does not affect them.  Stirling's formula and
+\[
+ [p_n(1-p_n)]^n
+ =4^{-n}(1-4a^2/n)^n
+ \sim4^{-n}e^{-4a^2}
+\]
+give the two-cycle asymptotic.  Finally,
+$[2p_n(1-p_n)]^n=2^{-n}(1-4a^2/n)^n$.
+\end{proof}
+
+\section{Deterministic control and claim boundary}
+
+The companion script constructs the deleted-matching neighbor list and
+evaluates the literal local majority rule; it does not use the trichotomy as
+an update shortcut.  It exhausts all $4^n$ states for $1\leq n\leq8$, checks
+$F_n^3=F_n$, the state and basin formulas, and $|\Fix(F_n^k)|$ for
+$1\leq k\leq12$.  This is a finite regression control, not a substitute for
+the proofs.
+
+General period-two behavior is explicitly attributed to
+\citet{GolesOlivos1980}, and the tie convention to the established majority
+literature \cite{GinosarHolzman2000}.  A bounded search through 27 August
+2026 found no exact collision with the combined cocktail-party formulas in
+\cref{thm:partition,cor:zeta,cor:natural,thm:bernoulli,cor:window}; this is a
+search record, not a worldwide priority claim.  Public release and venue
+selection remain outside the scope of this internal draft.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

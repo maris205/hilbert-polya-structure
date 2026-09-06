@@ -1,0 +1,95 @@
+\section{The expanded semiring sieve graph}
+\label{sec:graph}
+
+For each input object $F_n$, $n\ge2$, introduce an input state $I_n$ and a
+divisor state $T_{n,2}$.  Further states are
+\[
+T_{n,d},\qquad Q_{n,d,q},\qquad A_n,\qquad R_{n,k},
+\]
+where $d,q\ge2$ and $k\ge1$.  The graph is the union of the unique forward
+orbits of all $I_n$ under the following transition program, together with
+the full one-way cemetery continuations.
+
+First,
+\[
+I_n\longrightarrow T_{n,2}.
+\]
+At a divisor state, compare $F_d\boxtimes F_d$ with $F_n$:
+\begin{equation}
+T_{n,d}\longrightarrow
+\begin{cases}
+A_n,&d^2>n,\\
+Q_{n,d,2},&d^2\le n.
+\end{cases}
+\label{eq:T-transition}
+\end{equation}
+At a quotient state, compare $F_d\boxtimes F_q$ with $F_n$:
+\begin{equation}
+Q_{n,d,q}\longrightarrow
+\begin{cases}
+Q_{n,d,q+1},&dq<n,\\
+R_{n,1},&dq=n,\\
+T_{n,d+1},&dq>n.
+\end{cases}
+\label{eq:Q-transition}
+\end{equation}
+Finally,
+\begin{equation}
+A_n\longrightarrow A_n,
+\qquad
+R_{n,k}\longrightarrow R_{n,k+1}.
+\label{eq:terminal-transitions}
+\end{equation}
+
+The square comparison in \eqref{eq:T-transition} occurs before quotient
+search.  This accepts $n=2,3$ rather than incorrectly testing $d=2$ as a
+proper factor.  The cemetery is an infinite unilateral ray.  Making it an
+absorbing loop would create a false primitive orbit for every composite and
+is forbidden.
+
+\paragraph{No-oracle boundary.}
+The edge rule does not contain the predicate $d\mid n$.  Starting at
+$Q_{n,d,2}$, it forms successive products
+\[
+F_d\boxtimes F_2, F_d\boxtimes F_3,ldots
+\]
+until equality or the first strict overshoot.  Only after
+\eqref{eq:Q-transition} has been defined and proved correct may the phrase
+``reject if $d$ divides $n$'' be used as a macro.
+
+\begin{theorem}[Trial-division correctness]
+\label{thm:trial}
+The orbit of $I_n$ reaches $A_n$ if and only if $n$ is prime.  Consequently,
+the only directed cycles in the graph are the self-loops at $A_p$, one for
+each rational prime $p$.
+\end{theorem}
+
+\begin{proof}
+For fixed $n,d$ with $d^2\le n$, the quotient index strictly increases.
+Hence it reaches equality $dq=n$ exactly when $d$ divides $n$, and otherwise
+reaches the first $q$ with $dq>n$ and advances to $d+1$.  If $n=ab$ is
+composite with $2\le a\le b$, then $a\le\sqrt n$; the divisor chain reaches
+$d=a$ before the strict-square stop and quotient search reaches $q=b$.
+Conversely, equality with $d,q\ge2$ is a nontrivial factorization.  Passing
+all $d\le\sqrt n$ therefore characterizes primes.
+
+Outside $A_n$, every transition strictly increases the active quotient,
+divisor, or cemetery index along its functional forward orbit.  Those states
+cannot lie on a directed cycle.  The declared accept loops are consequently
+all the cycles, and correctness restricts them to prime indices.
+\end{proof}
+
+\subsection{One-sided phase space}
+
+Let $G$ denote this countable graph and let $\XG$ be its one-sided edge
+shift.  The one-sided qualification matters.  A two-sided edge shift retains
+only edges admitting an infinite legal past; input and early computation
+states would disappear.  We make no two-sided claim and use the vertex space
+of the full source graph for the operator below.
+
+The graph is stationary in the standard sense that one fixed adjacency rule
+is iterated.  The input index $n$ labels countably many components; it is not
+a time-dependent change of dynamics.  The construction is effective and
+contains no precomputed prime list.  It is nevertheless extensionally a
+complete prime selector, a distinction made precise in
+\cref{sec:pruning,sec:compiler}.

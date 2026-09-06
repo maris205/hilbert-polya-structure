@@ -1,0 +1,286 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Fix}{\operatorname{Fix}}
+
+\title[Unitary Cayley shifts]{Ramanujan Period Spectra and Rigidity of Unitary Cayley Shifts}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 11A25, 05C25, 37A25}
+\keywords{subshift of finite type, unitary Cayley graph, Ramanujan sum, dynamical zeta function, Parry measure, conjugacy rigidity}
+
+\begin{document}
+
+\begin{abstract}
+For $n\geq2$, let $X_n$ be the nearest-neighbor shift on $\Z/n\Z$ in
+which $x_j$ may be followed by $x_{j+1}$ exactly when their difference is a
+unit modulo $n$.  We compute its complete periodic spectrum from Ramanujan
+sums:
+\[
+ \#\Fix(\sigma^k)=
+ \sum_{d\mid n}\varphi(d)
+ \left(\mu(d)\frac{\varphi(n)}{\varphi(d)}\right)^k.
+\]
+Consequently
+\[
+ \zeta_{X_n}(z)=
+ \prod_{\substack{d\mid n\\ \mu(d)\ne0}}
+ \left(1-\mu(d)\frac{\varphi(n)}{\varphi(d)}z\right)^{-\varphi(d)}.
+\]
+The shift is irreducible with entropy $\log\varphi(n)$; it is mixing for odd
+$n$ and has exact period two for even $n$.  Its unique maximal-entropy law is
+the uniform unit-increment Markov chain.  For odd $n$, correlations of vertex
+observables decay at the sharp spectral rate $(p_{\min}-1)^{-k}$, where
+$p_{\min}$ is the least prime factor of $n$.  Finally, entropy together with
+the two-period count $n\varphi(n)$ recovers $n$, so distinct members of the
+family are not topologically conjugate; equivalently, the dynamical zeta
+function is rigid inside this family.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The unitary Cayley graph on $\Z/n\Z$ joins two residues when their difference
+is invertible modulo $n$.  Its graph spectrum is classical: Fourier
+characters diagonalize its adjacency matrix and the eigenvalues are
+Ramanujan sums.  Klotz and Sander established this formula and a broad set of
+graph-theoretic properties \cite{KlotzSander2007}.  We use that owned spectral
+input to solve the symbolic dynamics of the associated edge constraint.
+
+For a finite-type shift with adjacency matrix $A$, periodic counts are
+$\operatorname{tr}(A^k)$ and the Bowen--Lanford identity is
+$\zeta(z)=\det(I-zA)^{-1}$ \cite{BowenLanford1970}.  Applying these standard
+facts to the Ramanujan spectrum produces more than a restatement of graph
+regularity: it gives a divisor-indexed orbit spectrum, an arithmetic
+mixing-period dichotomy, a sharp correlation rate, and a two-observable
+conjugacy classifier.
+
+The narrow contribution is this complete dynamical package for the unitary
+Cayley shift.  We do not claim the graph definition, its integral spectrum,
+Ramanujan-sum identities, the Parry construction, or the finite-type zeta
+determinant.
+
+\section{Definition and irreducibility}
+
+Let $U_n=(\Z/n\Z)^\times$ and let $A_n$ be the $n\times n$ zero-one matrix
+\[
+ (A_n)_{ab}=\mathbf 1_{\{b-a\in U_n\}},
+ \qquad a,b\in\Z/n\Z.
+\]
+Define the two-sided vertex shift
+\[
+ X_n=\{x\in(\Z/n\Z)^\Z:A_{x_jx_{j+1}}=1\text{ for every }j\},
+\]
+with left shift $\sigma$.  Every row and column of $A_n$ has
+$\varphi(n)$ ones.  Since $1\in U_n$, the directed graph is connected.
+
+\begin{proposition}[period and entropy]\label{prop:period}
+For every $n\geq2$, $X_n$ is irreducible and
+\[
+ h_{\mathrm{top}}(X_n)=\log\varphi(n).
+\]
+If $n$ is odd, $X_n$ is mixing.  If $n$ is even, its exact topological period
+is two.
+\end{proposition}
+
+\begin{proof}
+Steps by $+1$ connect all residues, proving irreducibility.  The constant
+vector is a positive eigenvector of $A_n$ with eigenvalue $\varphi(n)$; the
+maximum row sum bounds the spectral radius from above by the same number.
+The entropy formula follows.
+
+Every edge can be immediately reversed because $-U_n=U_n$, so closed walks
+of length two exist.  If $n$ is odd, $n$ successive $+1$ steps give an odd
+closed walk; the gcd of $2$ and $n$ is one.  If $n$ is even, every unit is
+odd, so every step changes parity and all closed walks have even length.
+The existing two-cycles make the period exactly two.
+\end{proof}
+
+\section{Ramanujan orbit spectrum}
+
+Let $\omega=e^{2\pi i/n}$.  The Fourier vector
+$v_r=(\omega^{ra})_{a\in\Z/n\Z}$ is an eigenvector of $A_n$ with eigenvalue
+\[
+ c_n(r)=\sum_{u\in U_n}\omega^{ru},
+\]
+the Ramanujan sum.  If
+\[
+ d=\frac{n}{\gcd(n,r)},
+\]
+then the classical formula, in the notation convenient here, is
+\begin{equation}\label{eq:ramanujan}
+ c_n(r)=\mu(d)\frac{\varphi(n)}{\varphi(d)}.
+\end{equation}
+Exactly $\varphi(d)$ residues $r$ give a specified divisor $d\mid n$.
+Indeed, they are $r=(n/d)s$ with $s$ running through the reduced residue
+classes modulo $d$.  This includes the unique class $r=0$ for $d=1$.
+
+\begin{theorem}[periodic points and zeta]\label{thm:zeta}
+For every $n\geq2$ and $k\geq1$,
+\begin{equation}\label{eq:fixed}
+ P_k(n):=\#\Fix_{X_n}(\sigma^k)
+ =\sum_{d\mid n}\varphi(d)
+ \left(\mu(d)\frac{\varphi(n)}{\varphi(d)}\right)^k.
+\end{equation}
+The Artin--Mazur zeta function is the rational function
+\begin{equation}\label{eq:zeta}
+ \zeta_{X_n}(z)
+ =\prod_{\substack{d\mid n\\\mu(d)\ne0}}
+ \left(1-\mu(d)\frac{\varphi(n)}{\varphi(d)}z\right)^{-\varphi(d)}.
+\end{equation}
+In particular,
+\[
+ P_1(n)=0,\qquad P_2(n)=n\varphi(n).
+\]
+\end{theorem}
+
+\begin{proof}
+A point fixed by $\sigma^k$ is a based closed walk of length $k$, so its
+number is $\operatorname{tr}(A_n^k)$.  Summing the $k$th powers of the
+eigenvalues in \eqref{eq:ramanujan}, grouped by $d$, proves
+\eqref{eq:fixed}.  The determinant identity of Bowen and Lanford gives
+\[
+ \zeta_{X_n}(z)=\det(I-zA_n)^{-1};
+\]
+inserting the eigenvalues and omitting zero factors gives \eqref{eq:zeta}.
+There are no self-loops, proving $P_1=0$.  Alternatively, a based two-step
+loop is specified by its starting residue and one of $\varphi(n)$ unit
+increments, so $P_2=n\varphi(n)$.
+\end{proof}
+
+For example, if $p$ is prime then $X_p$ is the complete graph shift without
+self-loops and
+\[
+ \zeta_{X_p}(z)=\frac{1}{(1-(p-1)z)(1+z)^{p-1}}.
+\]
+If $n=2^a$, the only nonzero adjacency eigenvalues are
+$\pm2^{a-1}$, each simple, and
+\[
+ \zeta_{X_{2^a}}(z)=\frac{1}{1-2^{2a-2}z^2}.
+\]
+The remaining $n-2$ zero eigenvalues are invisible to periodic counts but
+not to the alphabet size; the two-period formula retains that size.
+
+\section{The maximal measure and a sharp mixing rate}
+
+Because $A_n$ is irreducible, the shift has a unique measure of maximal
+entropy, the Parry measure \cite{Parry1964}.  Regularity makes it elementary:
+the stationary distribution is uniform on $\Z/n\Z$ and
+\begin{equation}\label{eq:transition}
+ \mathbb P(x_{j+1}=b\mid x_j=a)
+ =\frac{(A_n)_{ab}}{\varphi(n)}.
+\end{equation}
+Equivalently, the increments $x_{j+1}-x_j$ are independent and uniform on
+$U_n$, with an independent uniform initial residue.
+
+For odd $n$, let $p_{\min}$ be its smallest prime divisor.  The normalized
+transition operator $K_n=A_n/\varphi(n)$ is self-adjoint in uniform
+$L^2$, and \eqref{eq:ramanujan} gives its eigenvalues
+\begin{equation}\label{eq:normalized}
+ \frac{c_n(r)}{\varphi(n)}=\frac{\mu(d)}{\varphi(d)}.
+\end{equation}
+Among $d\mid n$, $d>1$, the largest nonzero modulus is
+$1/(p_{\min}-1)$.
+
+\begin{theorem}[sharp correlation rate]\label{thm:mixing}
+Suppose $n$ is odd.  For mean-zero real-valued functions $f,g$ on
+$\Z/n\Z$,
+\[
+ \left|\mathbb E_{\mu_n}[f(x_0)g(x_k)]\right|
+ \leq (p_{\min}-1)^{-k}
+ \|f\|_{L^2(u_n)}\|g\|_{L^2(u_n)},
+\]
+where $u_n$ is the uniform law.  The exponential factor is sharp for every
+$k$: equality is attained by normalized real eigenfunctions whose
+associated divisor is $p_{\min}$.
+\end{theorem}
+
+\begin{proof}
+On the orthogonal complement of constants, \eqref{eq:normalized} bounds the
+operator norm of $K_n^k$ by $(p_{\min}-1)^{-k}$.  The Markov correlation is
+$\langle f,K_n^kg\rangle_{L^2(u_n)}$, so Cauchy--Schwarz gives the
+inequality.  The
+divisor $p_{\min}$ occurs with multiplicity $\varphi(p_{\min})$ and has
+normalized eigenvalue $-1/(p_{\min}-1)$.  The real or imaginary part of a
+nonzero Fourier eigenvector is a real eigenfunction; taking $f=g$ to be its
+normalization proves sharpness after the absolute value.
+\end{proof}
+
+For even $n$, the eigenvalue $-1$ arising from $d=2$ is the spectral form of
+the parity obstruction in \cref{prop:period}; ordinary mixing cannot hold.
+
+\section{Rigidity inside the family}
+
+Euler's totient is not injective, so entropy alone does not classify these
+shifts.  The first nonzero periodic statistic repairs exactly that loss.
+
+\begin{theorem}[two-statistic conjugacy rigidity]\label{thm:rigidity}
+If $X_m$ and $X_n$, with $m,n\geq2$, are topologically conjugate, then
+$m=n$.  More precisely, the pair
+\[
+ \left(h_{\mathrm{top}}(X_n),\#\Fix(\sigma^2)\right)
+ =\left(\log\varphi(n),n\varphi(n)\right)
+\]
+recovers $n$.  Hence equality of the dynamical zeta functions also forces
+$m=n$ within this family.
+\end{theorem}
+
+\begin{proof}
+Conjugacy preserves entropy and periodic-point counts.  Equality of the
+entropies gives $\varphi(m)=\varphi(n)$.  Equality of the two-period counts
+then gives $m\varphi(m)=n\varphi(n)$, hence $m=n$.  If the zeta functions are
+equal, all periodic counts agree.  Their exponential growth recovers the
+entropy of an irreducible finite-type shift.  More precisely,
+Perron--Frobenius theory gives
+\[
+ \limsup_{k\to\infty}P_k(n)^{1/k}=\varphi(n),
+\]
+so the same argument applies even in the period-two case.
+\end{proof}
+
+\section{Controls and ownership boundary}
+
+The deterministic control constructs $A_n$ directly, multiplies it over the
+integers, compares traces with \eqref{eq:fixed}, checks the grouped
+Ramanujan characteristic polynomial, verifies parity/mixing witnesses, and
+tests the rigidity pair over a finite registry.  These computations guard
+the divisor indexing and endpoints; the proofs establish the formulas for
+all $n$.
+
+The adjacency spectrum, including its Ramanujan-sum expression, belongs to
+the unitary-Cayley-graph literature \cite{KlotzSander2007}.  Rational zeta and
+trace identities for finite-type shifts belong to Bowen and Lanford
+\cite{BowenLanford1970}; the maximal-entropy Markov law is the Parry
+construction \cite{Parry1964}.  Our residual claim is only the explicit
+symbolic-dynamical synthesis, the sharp odd-modulus correlation rate in this
+notation, and the two-statistic rigidity statement.  No absolute novelty or
+priority claim is made.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

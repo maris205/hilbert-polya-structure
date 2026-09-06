@@ -1,0 +1,62 @@
+\section{The Exact-Clock Locality Obstruction}
+\label{sec:clock}
+
+Removing the explicit level label does not by itself make the arithmetic
+clock local.  A fixed finite symbolic observation has only finitely many
+possible values, independently of the decoder codomain.
+
+\begin{theorem}[Finite-local finite-image obstruction]
+\label{thm:finite-local}
+Let $A$ be a finite alphabet, let $W$ be a fixed finite coordinate window,
+let $Z$ be any set, and let $d:A^W\to Z$ be a fixed decoder.  Then
+$\im(d)$ is finite.  Consequently, no such decoder can recover every member
+of an infinite prescribed target set.
+\end{theorem}
+
+\begin{proof}
+The pattern set $A^W$ is finite because both $A$ and $W$ are finite.  The
+image of a function on a finite domain is finite.
+\end{proof}
+
+\begin{corollary}[Exact wheel multiplier and clock]
+\label{cor:finite-local-wheel}
+Neither a fixed decoder $d_q:A^W\to\N$ nor a fixed decoder
+$d_\tau:A^W\to\R$ can recover, respectively, all exact values $q_k$ or all
+exact values $\log q_k$ from a finite-alphabet fixed-window observation.
+\end{corollary}
+
+\begin{proof}
+By \cref{lem:prime-enumeration}, the set $\{q_k:k\geq1\}$ is infinite.  The
+logarithm is injective on positive numbers, so
+$\{\log q_k:k\geq1\}$ is infinite as well.  Apply
+\cref{thm:finite-local} to each codomain.
+\end{proof}
+
+\begin{corollary}[Necessary escape from finite locality]
+\label{cor:local-escape}
+Any recoding that recovers all exact multipliers with one unchanged rule must
+drop at least one hypothesis of \cref{thm:finite-local}: it must use an
+infinite alphabet, an unbounded observation domain or memory, or an additional
+unbounded input to the decoder.
+\end{corollary}
+
+\Cref{cor:local-escape} is necessary, not sufficient.  A countable alphabet
+can carry unbounded data, and an infinite-memory map can inspect unbounded
+context, so neither class is excluded by the finite-image proof.  The theorem
+does not establish that either class admits a shift-commuting, level-blind,
+arithmetic-faithful recoding.
+
+There is also a distinction between escaping the theorem and satisfying the
+research scope.  A decoder that reads the external level, consults a stored
+prime table, or changes with cutoff has an infinite source of information and
+may evade the cardinality argument.  Such a decoder violates
+\cref{def:stationarization}; its failure is an arithmetic-fidelity failure,
+not a consequence of \cref{thm:finite-local}.
+
+The exact boundary is therefore:
+\begin{quote}
+Finite alphabet plus fixed finite window is impossible for exact recovery of
+an infinite clock range.  Countable alphabet or infinite memory is
+unclassified until one explicit function space, topology, shift rule, and
+decoder are defined.
+\end{quote}

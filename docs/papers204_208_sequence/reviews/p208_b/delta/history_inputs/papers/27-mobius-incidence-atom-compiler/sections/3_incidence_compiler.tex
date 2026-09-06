@@ -1,0 +1,134 @@
+\section{The incidence atom compiler}
+\label{sec:compiler}
+
+Let \(I(P;\C)\) denote the locally finite incidence algebra. Its product is
+\begin{equation}
+(f*g)(a,b)=\sum_{a\mid c\mid b}f(a,c)g(c,b).
+\label{eq:incidence-product}
+\end{equation}
+The zeta and Möbius elements are
+\begin{equation}
+\zeta(a,b)=\id_{\{a\mid b\}},
+\qquad
+\mu=\zeta^{-1},
+\qquad
+\mu(a,b)=\mob(b/a).
+\label{eq:zeta-mobius}
+\end{equation}
+For every source object \(n\), including composites, introduce the uniform
+coordinate idempotent
+\begin{equation}
+\epscoord_n(a,b)=\id_{\{a=b=n\}}.
+\label{eq:coordinate-idempotent}
+\end{equation}
+
+\begin{definition}[Incidence compiler]
+\label{def:compiler}
+The compiled source coordinate is
+\begin{equation}
+q_n=\zeta*\epscoord_n*\mu.
+\label{eq:compiler}
+\end{equation}
+\end{definition}
+
+No factorization or primality test is used in \cref{def:compiler}. Directly
+expanding the two convolutions gives
+\begin{equation}
+q_n(a,b)
+=\id_{\{a\mid n\mid b\}}\mob(b/n).
+\label{eq:kernel}
+\end{equation}
+This formula will later yield the countable rank-one representation.
+
+\begin{theorem}[Complete primitive-idempotent system]
+\label{thm:primitive-system}
+For every finite cutoff \(P_N\), and intervalwise in the countable incidence
+algebra,
+\begin{equation}
+q_nq_m=\delta_{nm}q_n,
+\qquad
+\sum_n q_n=\delta.
+\label{eq:complete-idempotents}
+\end{equation}
+Each \(q_n\) is primitive.
+\end{theorem}
+
+\begin{proof}
+Using \(\mu\zeta=\delta\),
+\[
+q_nq_m
+=\zeta\epscoord_n\mu\zeta\epscoord_m\mu
+=\zeta\epscoord_n\epscoord_m\mu
+=\delta_{nm}q_n.
+\]
+At finite cutoff, \(\sum_n \epscoord_n=\delta\), whence
+\[
+\sum_n q_n
+=\zeta\left(\sum_n \epscoord_n\right)\mu
+=\zeta\delta\mu=\delta.
+\]
+The countable sum has only finitely many contributions on every interval.
+Each \(\epscoord_n\) is primitive in the finite incidence algebra and
+conjugation by the unit \(\zeta\) preserves primitivity. The countable claim
+is the compatible intervalwise statement.
+\end{proof}
+
+The compiler itself does not select primes: it produces one idempotent for
+every integer. Selection enters through the fixed source predicate.
+
+\begin{definition}[Source-derived letter action]
+\label{def:letter-action}
+For a positive-integer return letter \(n\), define
+\begin{equation}
+A_n=\id_{\At(P)}(n)q_n,
+\label{eq:letter-action}
+\end{equation}
+where membership in \(\At(P)\) is evaluated by
+\eqref{eq:atom-predicate}.
+\end{definition}
+
+\begin{theorem}[Exact necklace-resolved atom selector]
+\label{thm:word-selector}
+For every nonempty word \(w=n_1\cdots n_r\),
+\begin{equation}
+\Tr(A_{n_1}\cdots A_{n_r})
+=
+\begin{cases}
+1,&n_1=\cdots=n_r=p\in\At(P),\\
+0,&\text{otherwise}.
+\end{cases}
+\label{eq:word-selector}
+\end{equation}
+The coefficient is invariant under cyclic rotation. The selected primitive
+cyclic classes are precisely the one-letter source-atom loops, and their
+\(r\)-fold temporal repetitions have weight
+\begin{equation}
+u^{r\ell(p)}p^{-rs}
+\label{eq:repetition-weight}
+\end{equation}
+with multiplicity one.
+\end{theorem}
+
+\begin{proof}
+If a letter is not an atom, its action is zero. If all letters are atoms but
+two differ, \cref{thm:primitive-system} makes the product zero. A
+monochromatic atom word equals \(q_p^r=q_p\). At a finite cutoff \(q_p\) is
+similar to the rank-one coordinate idempotent and has trace one. The
+countable trace-one statement is proved directly in \cref{thm:rank-one}.
+Cyclic invariance follows either from the trace or directly from the
+dichotomy.
+\end{proof}
+
+\begin{remark}[Source exponent versus time]
+\label{rem:source-time}
+The single source letter \(p^r\) is a composite integer and is killed by
+\eqref{eq:letter-action}. The word with \(r\) copies of \(p\) is the temporal
+repetition of the primitive loop and survives. The exponent in
+\eqref{eq:repetition-weight} records both distinctions: \(p^{-rs}\) comes
+from \(r\) traversals, and \(u^{r\ell(p)}\) records all underlying digit
+steps.
+\end{remark}
+
+This is the analytic A1 advance. It is stronger than an equality obtained
+only after commuting letter variables or aggregating endpoints: mixed and
+composite-letter products vanish before the cyclic trace is taken.

@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\sffamily\small,
+  box/.style={draw=charcoal, rounded corners=2pt, line width=.8pt,
+    align=center, inner sep=6pt, fill=white},
+  source/.style={box, draw=formalblue, fill=formalblue!8},
+  owned/.style={box, draw=deepgreen, fill=deepgreen!9},
+  boundary/.style={box, draw=warningamber, fill=warningamber!10},
+  stopped/.style={box, draw=stopred, fill=stopred!8},
+  flow/.style={->, line width=.9pt, draw=charcoal},
+  attempt/.style={->, dashed, line width=.9pt, draw=governancepurple}
+]
+  \path[use as bounding box] (-2.2,-3.3) rectangle (12.8,5.0);
+
+  \node[source, text width=3.2cm] (root) at (0,1.2)
+    {\code{Knauf} \code{RootedWord}\\$M_w$, $h(w)$, depth $k$};
+  \node[owned, text width=3.3cm] (stable) at (6.0,1.2)
+    {\code{Knauf} \code{StableState}\\$w\sim w0$; $h$ descends};
+  \draw[flow] (root) -- node[above, fill=white, inner sep=1pt, align=center]
+    {trailing-zero\\colimit} (stable);
+
+  \node[boundary, text width=2.5cm] (eq) at (0,4.0)
+    {$\eps\sim0$};
+  \node[stopped, text width=4.1cm] (append) at (6.0,4.0)
+    {append $1$ fails\\$h(1)=2\ne3=h(01)$};
+  \draw[attempt] (eq) -- node[below, fill=white, inner sep=1pt]
+    {right append $1$} (append);
+  \draw[stopred, line width=1.4pt]
+    ($(append.west)+(-.12,.16)$) -- ($(append.west)+(.12,-.16)$);
+
+  \node[boundary, text width=3.2cm] (neck) at (0,-2.0)
+    {\code{Binary} \code{Necklace}\\$01\sim_{\rm cyc}10$};
+  \draw[attempt] (root) -- node[left, fill=white, inner sep=1pt]
+    {cyclic quotient} (neck);
+  \node[stopped, text width=3.5cm] (cyc) at (6.0,-2.0)
+    {$h$ does not descend\\$h(01)=3\ne2=h(10)$};
+  \draw[attempt] (neck) -- (cyc);
+  \draw[stopred, line width=1.4pt]
+    ($(cyc.west)+(-.12,.16)$) -- ($(cyc.west)+(.12,-.16)$);
+
+  \node[boundary, dotted, text width=4.2cm] at (10.2,1.2)
+    {chosen roots or full matrices\\are changed state spaces};
+\end{tikzpicture}

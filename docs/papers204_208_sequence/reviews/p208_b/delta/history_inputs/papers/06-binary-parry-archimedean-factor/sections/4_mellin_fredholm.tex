@@ -1,0 +1,114 @@
+\section{From binary fluctuations to the Gamma factor}
+\label{sec:gamma}
+
+Let $(X_j)_{j\ge0}$ be the sign observable along the Parry process of $F_2$,
+so the $X_j$ are independent and uniform on $\{-1,1\}$. Put
+\[
+ S_N=\sum_{j=0}^{N-1}X_j,
+ \qquad Y_N=\frac{S_N}{\sqrt{2\pi N}}.
+\]
+We take $N$ odd. This removes the finite-$N$ atom at zero, which would make
+negative moments undefined even though the limiting singularity is
+integrable.
+
+\begin{theorem}[Binary Archimedean limit]
+\label{thm:gamma}
+For odd $N$ and $\RePart s>0$, define
+\[
+ M_N(s)=\mathbb E|Y_N|^{s-1}.
+\]
+Then, locally uniformly on the half-plane $\RePart s>0$,
+\[
+ M_N(s)\longrightarrow
+ \int_{\RR}|x|^{s-1}e^{-\pi x^2}\dd x
+ =\pi^{-s/2}\Gamma(s/2).
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch with the uniformity mechanism]
+The specialization in \cref{thm:tilted-trace} gives the central limit
+theorem. A lattice local
+central limit estimate gives uniform Gaussian approximation on bounded
+windows, while the binomial tail estimate controls large $|Y_N|$. Near zero,
+the local estimate implies a uniform small-ball bound
+$\mathbb P(|Y_N|\le x)\le Cx+C N^{-1/2}$. For every compact
+$C\Subset\{\RePart s>0\}$ this controls
+$|Y_N|^{\RePart s-1}(1+|\log|Y_N||^k)$ uniformly for the finitely many
+$s$-derivatives needed by normal-family convergence. Truncation at small and
+large radii therefore upgrades weak convergence to locally uniform Mellin
+convergence. Finally, $u=\pi x^2$ gives
+\[
+ 2\int_0^\infty x^{s-1}e^{-\pi x^2}\dd x
+ =\pi^{-s/2}\int_0^\infty u^{s/2-1}e^{-u}\dd u.
+\]
+\end{proof}
+
+The $1/2$ is now an internal fluctuation exponent, not a number copied from
+the target critical line. The constant $\pi$ is the normalization for the
+self-dual Gaussian density $e^{-\pi x^2}$ under Fourier transform. Changing
+Gaussian convention would multiply the Mellin transform by a zero-free
+exponential in $s$, but we freeze the self-dual convention before comparison.
+
+\subsection{Representation-dimensional controls}
+
+For the uniform $q$-shift, place its $q$ symbols at the vertices
+$v_1,\ldots,v_q$ of a centered regular simplex in
+$E_q\cong\RR^{d}$, $d=q-1$, with
+$\|v_j\|=1$ and $\langle v_j,v_k\rangle=-1/d$ for $j\ne k$.
+This uses the full standard representation and does not select a favorable
+scalar projection.
+
+\begin{proposition}[Radial $q$-symbol control]
+\label{prop:qcontrol}
+If $V_j$ are independent uniform simplex vertices and
+\[
+ R_N=\frac{\|\sum_{j=1}^NV_j\|}{\sqrt{2\pi N}},
+\]
+then, for $\RePart s>1-d$ where the limiting moment is locally integrable,
+\[
+ \mathbb E R_N^{s-1}\longrightarrow
+ M_d(s):=(\pi d)^{-(s-1)/2}
+ \frac{\Gamma((d+s-1)/2)}{\Gamma(d/2)}.
+\]
+For $d=1$ this is $\pi^{-s/2}\Gamma(s/2)$; for every $d>1$ the Gamma shift
+is different.
+\end{proposition}
+
+\begin{proof}
+The simplex covariance is $I_d/d$, so
+$\sqrt{d/N}\sum_jV_j$ converges to a standard $d$-dimensional Gaussian $Z$.
+The radial moment formula
+\[
+ \mathbb E\|Z\|^{s-1}
+ =2^{(s-1)/2}\frac{\Gamma((d+s-1)/2)}{\Gamma(d/2)}
+\]
+and the scale $R_N=\|\sqrt{d/N}\sum_jV_j\|/\sqrt{2\pi d}$ give the claim.
+\end{proof}
+
+This control restores a meaningful part of binary specificity: the canonical
+full standard representation has the exact Archimedean shape only in
+dimension one. It does not defeat every genericity challenge. A biased
+binary chain, after centering and variance normalization, has the same
+one-dimensional Gaussian limit; an arbitrarily selected scalar projection of
+$F_q$ does too. Those choices are not the multiplicity-one
+$S_q$-representation supplied by the source, but their success means the
+Gamma limit alone cannot carry the arithmetic claim.
+
+\subsection{The same-source Mellin--Fredholm factorization}
+
+The stationary and sign channels are specializations of the same tilted
+trace family $H(z)$. Combining \cref{thm:euler,thm:gamma} therefore defines,
+on their common initial domain,
+\[
+ \mathfrak Z_{\rm SD}(s)
+ :=\left(\lim_{N\to\infty}M_N(s)\right)
+   \Ber(I-\cA_{s,0})
+ =\pi^{-s/2}\Gamma(s/2)\zeta(s),
+ \qquad \RePart s>1.                       \tag{4.1}
+\]
+Equation (4.1) is an exact factorization on that half-plane. It is stronger
+than coordinate splicing because both transforms descend from the same
+multiplicity-free $S_2$ source and the same matrix trace deformation. It is
+weaker than a unified determinant because the Mellin limit and Berezinian are
+still distinct analytic operations. No continuation or functional equation
+is inferred from their product.

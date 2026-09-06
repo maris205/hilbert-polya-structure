@@ -1,0 +1,54 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  >=Latex,
+  src/.style={draw=formalblue, rounded corners=2pt, very thick, align=center,
+    text width=30mm, minimum height=12mm, fill=formalblue!8},
+  repair/.style={draw=charcoal, rounded corners=2pt, thick, align=center,
+    text width=35mm, minimum height=9mm, fill=softgray},
+  good/.style={draw=governancepurple, rounded corners=2pt, very thick,
+    align=center, text width=36mm, minimum height=11mm,
+    fill=governancepurple!8},
+  changed/.style={draw=warningamber, rounded corners=2pt, very thick,
+    align=center, text width=39mm, minimum height=9mm, fill=warningamber!9},
+  route/.style={->, thick, draw=charcoal},
+  positive/.style={->, very thick, draw=governancepurple},
+  loss/.style={->, thick, dashed, draw=warningamber}
+]
+\node[src] (source) at (0,0)
+  {full source ledger\\object, clock, marker\\multiplicity, owner};
+
+\node[good] (ff) at (5.0,2.5)
+  {finite-field prime polynomials\\all source fields retained};
+\node[repair] (norm) at (4.8,1.15) {norm labels $q^n$};
+\node[repair] (degree) at (4.8,0.10) {keep degree one};
+\node[repair] (single) at (4.8,-0.95) {choose one orbit};
+\node[repair] (enumerate) at (4.8,-2.00) {enumerate by primes};
+\node[repair] (induce) at (4.8,-3.05) {induce one return};
+
+\node[changed] (support) at (10.0,1.15) {support lost: $q^n$ composite};
+\node[changed] (total) at (10.0,0.10) {totality/multiplicity lost};
+\node[changed] (local) at (10.0,-0.95) {local factor only};
+\node[changed] (clock) at (10.0,-2.00) {exact clock lost};
+\node[changed] (marker) at (10.0,-3.05) {marker and owner changed};
+
+\draw[positive] (source) -- (ff);
+\node[align=center, text=governancepurple, font=\scriptsize,
+  text width=27mm] at (1.35,2.65)
+  {function-field\\positive control};
+\draw[route] (source) -- (norm);
+\draw[route] (source) -- (degree);
+\draw[route] (source) -- (single);
+\draw[route] (source) -- (enumerate);
+\draw[route] (source) -- (induce);
+
+\draw[loss] (norm) -- (support);
+\draw[loss] (degree) -- (total);
+\draw[loss] (single) -- (local);
+\draw[loss] (enumerate) -- (clock);
+\draw[loss] (induce) -- (marker);
+
+\node[draw=charcoal, rounded corners=2pt, align=center, fill=white,
+  text width=139mm, below=8mm of induce]
+  {The purple route retains the function-field primitive type. Every
+   rational-prime repair crosses at least one declared ownership boundary.};
+\end{tikzpicture}

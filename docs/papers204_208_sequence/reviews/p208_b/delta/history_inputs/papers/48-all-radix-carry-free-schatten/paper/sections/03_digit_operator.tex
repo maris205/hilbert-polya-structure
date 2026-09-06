@@ -1,0 +1,142 @@
+\section{The carry-free source and the digit operator}
+\label{sec:digit}
+
+\subsection{Conventions and phase removal}
+
+For \(d\ge1\), define
+\[
+  C_d=(\one_{\{a+c<d\}})_{0\le a,c<d},
+  \qquad
+  \kappa_{d,q}=\|C_d\|_{S_q},
+\]
+and let \(C_0\) denote the zero block, with \(\kappa_{0,q}=0\).  The
+positive-vertex alphabet is always \(\N=\{1,2,\ldots\}\).  When a
+length-\(L\) tensor \(C_b^{\otimes L}\) is used as a finite control, its
+all-zero word is therefore not a vertex of the infinite source.
+
+The imaginary part of \(s\) has no effect on singular values, but the
+relation is a two-sided unitary equivalence rather than a unitary
+conjugation.  Indeed, for \(s=\sigma+\ii t\), let
+\[
+  U_te_n=n^{-\ii t/2}e_n.
+\]
+Entrywise,
+\begin{equation}
+  B_{b,s}=U_t B_{b,\sigma}U_t.
+  \label{eq:two-sided-unitary}
+\end{equation}
+Both factors are unitary, so every singular-value assertion can be proved
+for the real symmetric matrix \(B_{b,\sigma}\).  We do not infer from
+\cref{eq:two-sided-unitary} that \(B_{b,s}\) is positive or self-adjoint
+when \(t\ne0\).
+
+\subsection{Exact singular values}
+
+\begin{proposition}[Digit spectrum]
+\label{prop:digit-spectrum}
+The singular values of \(C_b\), in decreasing order, are
+\begin{equation}
+  s_j(C_b)=
+  [
+    2\sin\frac{(2j-1)\pi}{4b+2}
+  ]^{-1},
+  \qquad 1\le j\le b.
+  \label{eq:digit-spectrum}
+\end{equation}
+Consequently,
+\begin{equation}
+  \kappa_{b,q}
+  =
+  [
+    \sum_{j=1}^{b}
+    (
+      2\sin\frac{(2j-1)\pi}{4b+2}
+    )^{-q}
+  ]^{1/q}.
+  \label{eq:kappa-explicit}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The \((a,a')\) entry of \(C_bC_b^*\) counts the digits \(c\) satisfying
+\(c<b-\max(a,a')\), and hence equals \(b-\max(a,a')\).  Reverse the row
+and column order and index the result by \(1,\ldots,b\).  The resulting
+matrix is
+\[
+  K_b=(\min(i,j))_{1\le i,j\le b}.
+\]
+Its inverse is the tridiagonal matrix
+\[
+  L_b=K_b^{-1}
+  =
+  \begin{pmatrix}
+    2&-1\\
+    -1&2&-1\\
+    &\ddots&\ddots&\ddots\\
+    &&-1&2&-1\\
+    &&&-1&1
+  \end{pmatrix}.
+\]
+For completeness, multiplying \(K_b\) by this matrix subtracts consecutive
+columns twice in the interior and once at the terminal boundary, producing
+the identity.
+
+The eigenvalue equation for \(L_b\) has the interior solution
+\(v_i=\sin(i\theta)\), with
+\(\lambda=2-2\cos\theta=4\sin^2(\theta/2)\) and the left boundary
+\(v_0=0\).  The final row is equivalent to the ghost boundary
+\(v_{b+1}=v_b\), so
+\[
+  \sin((b+1)\theta)-\sin(b\theta)=0.
+\]
+The \(b\) roots in \((0,\pi)\) are
+\(\theta_j=(2j-1)\pi/(2b+1)\).  Thus the eigenvalues of \(K_b\) are
+\([4\sin^2(\theta_j/2)]^{-1}\).  Taking square roots proves
+\cref{eq:digit-spectrum}, and summing their \(q\)th powers proves
+\cref{eq:kappa-explicit}.
+\end{proof}
+
+\begin{corollary}[Two exact comparisons]
+\label{cor:digit-comparisons}
+For every \(b\ge2\),
+\begin{equation}
+  \kappa_{b,2}^2=\frac{b(b+1)}2<b^2,
+  \qquad
+  \tau_b:=\kappa_{b,1}>b.
+  \label{eq:digit-comparisons}
+\end{equation}
+In particular \(\log_b\kappa_{b,2}<1\) and
+\(\alpha_b:=\log_b\tau_b>1\).
+\end{corollary}
+
+\begin{proof}
+The Hilbert--Schmidt norm squared counts the ones in \(C_b\), giving
+\(b+(b-1)+\cdots+1=b(b+1)/2\).  Reversing the columns of \(C_b\) makes it
+triangular with unit diagonal, so
+\(\lvert\det C_b\rvert=1\).  The product of its singular values is
+therefore one.  Their arithmetic mean is at least their geometric mean,
+and the inequality is strict because their squared sum
+\(b(b+1)/2\) exceeds \(b\).  Hence \(\tau_b>b\).
+\end{proof}
+
+\begin{table}[t]
+  \centering
+  \small
+  \input{../figures/tables/thresholds}
+  \caption{Display evaluations of the exact formulas in
+  \cref{eq:kappa-explicit,eq:digit-comparisons}.  The last column is
+  \(\sigma_c(q=2)=\max\{1,\log_b\kappa_{b,2}\}\); the decimals are not
+  empirical estimates and do not define the theorem.}
+  \label{tab:digit-thresholds}
+\end{table}
+
+At \(b=2\), \cref{eq:digit-spectrum} gives the golden-ratio pair
+\((1+\sqrt5)/2\) and \((\sqrt5-1)/2\).  Their sum is \(\sqrt5\), so
+\begin{equation}
+  \tau_2=\sqrt5,
+  \qquad
+  \alpha_2=\log_2\sqrt5.
+  \label{eq:binary-alpha}
+\end{equation}
+These identities will distinguish the binary trace-class wall from its
+Hilbert--Schmidt wall.

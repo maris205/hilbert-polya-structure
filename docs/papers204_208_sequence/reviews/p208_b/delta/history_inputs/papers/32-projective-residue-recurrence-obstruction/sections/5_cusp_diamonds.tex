@@ -1,0 +1,80 @@
+\section{Cross-modulus cusp diamonds}
+\label{sec:cusp-diamonds}
+
+Within-block recurrence could still be dismissed as a direct sum over
+moduli.  To require shared recurrence across arithmetic scales, choose the
+source-defined cusp
+\[
+ c_n=[1:0]_n
+\]
+and connect it in both directions to $c_{2n}$ and $c_{3n}$ for every
+$n\ge2$.  These edges use only multiplication by the fixed source constants 2
+and 3.  They do not inspect prime or composite labels.
+
+There are two natural orientations.  Reduction maps can point from $kn$ down
+to $n$, reflecting the ordinary residue reduction direction.  Alternatively,
+one may retain both reduction and lift directions to make the cross-modulus
+graph recurrent.  The following proposition shows why neither orientation
+provides prime-selective periodic data.
+
+\begin{proposition}[Orientation dichotomy]
+\label{prop:orientation-dichotomy}
+If all cross-modulus cusp edges are oriented downward, no closed path uses
+one.  If the edges are bidirectional, then every $n\ge2$ has the simple
+primitive nonbacktracking cycle
+\[
+ c_n\to c_{2n}\to c_{6n}\to c_{3n}\to c_n.
+\]
+Its top modulus is composite, and diamonds based at consecutive dyadic scales
+share cusp states.
+\end{proposition}
+
+\begin{proof}
+A downward cross edge strictly decreases the positive integer modulus, while
+a within-block edge leaves it unchanged.  A closed path cannot contain a
+strict decrease with no increasing cross edge.
+
+For bidirectional edges, the displayed path uses the operation word
+$\times2,\times3,\div2,\div3$.  Its four moduli are distinct, and no operation
+immediately reverses its predecessor, including cyclically.  A simple closed
+path cannot be a proper temporal repetition, so the cycle is primitive.  The
+top modulus $6n$ is composite.  The diamond based at $2n$ has vertices
+$2n,4n,12n,6n$ and shares $c_{2n}$ and $c_{6n}$ with the diamond based at
+$n$.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\resizebox{0.94\textwidth}{!}{\input{figures/cusp_diamond}}
+\caption{Bidirectional cusp correspondences create a simple primitive
+nonbacktracking cycle for every base modulus.  The adjacent lighter diamond
+shows that different members of the family share recurrent cusps.  If only
+downward edges are kept, modulus is strictly monotone and all cross-modulus
+arithmetic is transient in closed-walk traces.}
+\label{fig:cusp-diamond}
+\end{figure}
+
+\subsection{Frozen roof and diamond weight}
+
+The roof is fixed before evaluating \cref{prop:orientation-dichotomy}.  A
+within-$n$ edge has roof $\log n$.  Either direction of the cusp edge between
+$n$ and $kn$, for $k\in\{2,3\}$, has roof $\log(kn)$.  The four weight bases
+along the diamond are therefore
+\[
+ 2n,\quad6n,\quad6n,\quad3n,
+\]
+so the weighted cycle contributes
+\[
+ (2n)^{-s}(6n)^{-s}(6n)^{-s}(3n)^{-s}
+ =(216n^4)^{-s}.
+\]
+For positive real $s$, this term is strictly positive.  Its existence was
+proved in the unweighted graph, so the formula records the cycle rather than
+creating it.
+
+The orientation dichotomy also recovers the pruning lesson in a nonterminal
+setting.  A directed reduction architecture may carry substantial arithmetic
+information, yet its strictly decreasing states disappear from all periodic
+traces.  Adding the reverse edges restores recurrence but introduces the
+entire composite-diamond family.  For this source-natural cusp skeleton,
+cross-modulus recurrence is thus either transient or arithmetically flooded.

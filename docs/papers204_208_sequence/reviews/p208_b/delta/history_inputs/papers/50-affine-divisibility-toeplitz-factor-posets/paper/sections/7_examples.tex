@@ -1,0 +1,71 @@
+\section{Exact examples and proof diagnostics}
+\label{sec:examples}
+
+Three small examples separate the notions used above before we report the
+bounded falsification controls.
+
+\begin{example}[Prime base]
+\label{ex:prime-three}
+  Let $p=3$.  Then
+  \[
+    r_1=1,\qquad r_2=4,\qquad r_3=13,
+  \]
+  so the first hole classes are $1+3\Z$, $4+9\Z$, and $13+27\Z$.
+  They are exact skeleton holes for every frozen directive.  The initial
+  block of length $3^N$ has essential period $3^{N+1}$; in particular, the
+  three coordinates of $B_1$ share period $9$ and no smaller positive
+  common period.
+\end{example}
+
+\begin{example}[Composite base]
+\label{ex:composite-four}
+  Let $p=4$.  The exact skeleton periods are still $4^N$, with hole
+  residues $r_1=1$, $r_2=5$, and $r_3=21$.  However, choosing the prime
+  divisor $\ell=2$ in \cref{thm:constructive-split} gives the common period
+  \[
+    2\cdot4^N<4^{N+1}
+  \]
+  for every initial block $B_N$.  At $N=1$, the strict counterperiod is
+  $8<16$.  This example prevents one from conflating an essential skeleton
+  period with the common period of a finite collection of positions.
+\end{example}
+
+\begin{example}[Least-period reduction after quotienting]
+\label{ex:period-reduction}
+  The directive $(0,1,0,2)^{\Z}$ is frozen.  Merging the nonadjacent letters
+  $1$ and $2$ is admissible and produces $(0,a,0,a)^{\Z}$, whose least
+  period is two rather than four.  This is why quotient directives are
+  normalized after applying the block map.  By contrast, merging $0$ with
+  $1$ identifies an adjacency edge and leaves the frozen target family.
+\end{example}
+
+\subsection{Finite falsification controls}
+\label{subsec:diagnostics}
+
+The proof above is deductive and independent of computation.  We
+nevertheless used deterministic finite searches to catch indexing errors,
+improper composite-base inversions, wrong refinement directions, and
+unlicensed scope extensions.  \Cref{tab:diagnostics} reports selected
+counts from three frozen checkers.  The Stage-2 implementation compares the
+direct affine formula with a nested-hole evaluator and includes a bounded
+local-rule census.  A reciprocal checker independently implements its
+arithmetic, directive, partition, and chromatic routines.  A third checker
+uses larger skeleton, constructiveness, and partition ranges.  None imports
+the theorem proof as code.
+
+\input{../figures/table2_diagnostics.tex}
+
+The local-rule census tested $972$ bounded source/target/radius/base cases;
+its $132$ context-consistent cases were exactly its $132$ letter-quotient
+cases, with no false positive or false negative.  This equality motivated a
+search for a uniform proof but is not used in
+\cref{thm:factor-collapse}.  Typed mutations include a wrong-base identity
+proposal, a nonpointed shift, an adjacent merge, a nonsurjective target
+map, and the false all-base constructive assertion.  Rejection of a
+wrong-base or nonpointed mutation means only that it lies outside the frozen
+contract, not that no such map exists in a larger category.
+
+The full deterministic protocol, input hashes, and rerun command are given
+in \cref{app:reproducibility}.  All integer counts in
+\cref{tab:diagnostics} are exact for the declared finite ranges, and every
+infinite statement is closed separately in \cref{sec:skeletons,sec:factors,sec:poset}.

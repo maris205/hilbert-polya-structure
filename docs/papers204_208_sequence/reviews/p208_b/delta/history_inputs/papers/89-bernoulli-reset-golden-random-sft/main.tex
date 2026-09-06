@@ -1,0 +1,456 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Exp}{\mathbb E}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\hq}{h_{\mathrm q}}
+\newcommand{\ha}{h_{\mathrm a}}
+
+\title[Bernoulli-reset golden random shifts]{Fibonacci Regeneration in a Bernoulli-Reset Golden Random Shift:\
+Exact Quenched--Annealed Gap and Gaussian Fluctuations}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 37H15, 60F05, 60K05}
+\keywords{random subshift of finite type, golden-mean shift, random matrix product, quenched entropy, annealed entropy, renewal-reward process}
+
+\begin{document}
+
+\begin{abstract}
+At every time, choose independently between the golden-mean adjacency
+matrix
+\[
+ A=\begin{pmatrix}1&1\\1&0\end{pmatrix}
+ \quad\text{and the reset matrix}\quad
+ E=\begin{pmatrix}1&1\\0&0\end{pmatrix},
+\]
+using $E$ with probability $p$.  The number $N_n$ of fibre paths through
+$n$ random constraints is a random matrix product.  The rank-one identity
+$EA^kE=F_{k+2}E$ turns its logarithm into a renewal-reward process.  We
+obtain, for $0<p<1$,
+\[
+ \hq(p)=p^2\sum_{k\geq0}(1-p)^k\log F_{k+2},
+ \qquad
+ \ha(p)=\log\frac{1+\sqrt{5-4p}}2,
+\]
+and prove the strict disorder gap $\hq(p)<\ha(p)$.  We also prove
+\[
+ \frac{\log N_n-n\hq(p)}{\sqrt n}
+ \Longrightarrow \mathcal N(0,\sigma_p^2),
+\]
+where
+\[
+ \sigma_p^2=p^2\sum_{k\geq0}(1-p)^k
+ \bigl(\log F_{k+2}-(k+1)\hq(p)\bigr)^2>0.
+\]
+The general random-subshift, random-matrix, and regenerative limit theories
+are established background.  This note records an exact two-matrix
+specialization and makes no absolute novelty or priority claim.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The topological entropy of a deterministic shift of finite type is the
+logarithm of a Perron eigenvalue.  In a random shift, the corresponding path
+count is a product of adjacency matrices, and two distinct growth rates
+appear: the almost-sure, or quenched, exponent of the path count and the
+annealed exponent of its expectation.  Products of random matrices have a
+classical general theory beginning with Furstenberg and Kesten
+\cite{FurstenbergKesten1960}; random subshifts and their thermodynamic
+formalism are developed, at much greater generality, by Kifer and by
+Denker--Kifer--Stadlbauer \cite{Kifer2008,DenkerKiferStadlbauer2008}.
+
+This note isolates a degenerate but exactly solvable Bernoulli model.  One
+matrix is the familiar presentation of the golden-mean shift
+\cite{LindMarcus1995}.  The other deletes its second row and acts as a
+rank-one reset.  A block of ordinary golden constraints between two resets
+contributes exactly one Fibonacci number.  Reset gaps are geometric, so the
+entire cocycle becomes regenerative rather than merely subadditive.
+
+The resulting calculation has three features.  First, it gives a closed
+series for the quenched fibre entropy.  Second, the annealed exponent remains
+a quadratic Perron root, and a cycle-normalized strict Jensen argument proves
+that the two exponents differ at every nontrivial reset probability.  Third,
+the same cycles yield a central limit theorem with an explicit positive
+variance.  No perturbation, irreducibility theorem for random operators, or
+numerical Lyapunov-exponent approximation is required.
+
+All logarithms are natural.  We use the classical Fibonacci normalization
+$F_0=0$, $F_1=1$, and $F_{j+2}=F_{j+1}+F_j$, and write
+$\varphi=(1+\sqrt5)/2$.  The external-release status of
+this internal manuscript is \textbf{HOLD}: the broad mechanisms have clear
+owners, and the exact conjunction of formulas below is presented without a
+claim that it has not appeared elsewhere.
+
+\section{The random nearest-neighbor shift}
+\label{sec:model}
+
+Let $\Omega=\{0,1\}^{\Z}$ and let $\nu_p$ be the Bernoulli measure for which
+$\nu_p\{\omega:\omega_i=1\}=p$.  The symbol $1$ marks a reset.  Put
+\begin{equation}\label{eq:matrices}
+ A=\begin{pmatrix}1&1\\1&0\end{pmatrix},
+ \qquad
+ E=\begin{pmatrix}1&1\\0&0\end{pmatrix},
+ \qquad
+ M_i(\omega)=\begin{cases}A,&\omega_i=0,\\E,&\omega_i=1.\end{cases}
+\end{equation}
+For a fixed environment $\omega$, define the fibre
+\begin{equation}\label{eq:fibre}
+ X_\omega=\left\{x\in\{0,1\}^{\Z}:
+ M_i(\omega)_{x_i,x_{i+1}}=1\text{ for every }i\in\Z\right\}.
+\end{equation}
+The all-zero point belongs to every fibre, so no exceptional empty fibre
+arises.  The number of paths across the constraints at times
+$0,\ldots,n-1$ is
+\begin{equation}\label{eq:path-count}
+ N_n(\omega)=\one^{\mathsf T}M_0(\omega)M_1(\omega)\cdots
+ M_{n-1}(\omega)\one,
+ \qquad \one=\binom11.
+\end{equation}
+Thus $N_n$ counts words $x_0\cdots x_n$, not words of length $n$; this
+one-symbol convention does not affect any exponential rate.
+
+When the limits exist, define
+\begin{equation}\label{eq:two-entropies}
+ \hq(p)=\lim_{n\to\infty}\frac1n\log N_n(\omega)
+ \quad(\nu_p\text{-a.s.}),
+ \qquad
+ \ha(p)=\lim_{n\to\infty}\frac1n\log\Exp_{\nu_p}N_n.
+\end{equation}
+The first is the fibre topological entropy along a typical environment; the
+second averages path counts before taking the logarithm.
+
+\section{Fibonacci regeneration and quenched entropy}
+\label{sec:quenched}
+
+The exact solvability is contained in one matrix identity.
+
+\begin{lemma}[Fibonacci reset identity]\label{lem:fibonacci-reset}
+For every $k\geq0$,
+\begin{equation}\label{eq:reset-identity}
+ EA^kE=F_{k+2}E.
+\end{equation}
+More precisely, if the reset positions in $\{0,\ldots,n-1\}$ are
+$r_1<\cdots<r_m$, put
+\[
+ \ell=r_1,\qquad q=n-1-r_m,
+ \qquad k_j=r_{j+1}-r_j-1\quad(1\leq j<m).
+\]
+Then
+\begin{equation}\label{eq:factorization}
+ N_n(\omega)=B_{\ell,q}\prod_{j=1}^{m-1}F_{k_j+2},
+ \qquad
+ B_{\ell,q}=\one^{\mathsf T}A^\ell EA^q\one.
+\end{equation}
+The boundary factor satisfies
+\begin{equation}\label{eq:boundary-bound}
+ 1\leq B_{\ell,q}\leq2^{\ell+q+2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $k\geq1$, induction gives
+\[
+ A^k=\begin{pmatrix}F_{k+1}&F_k\\F_k&F_{k-1}\end{pmatrix}.
+\]
+Multiplication on the left and right by $E$ gives
+$EA^kE=F_{k+2}E$.  At $k=0$, the same statement is
+$E^2=E=F_2E$.  Repeatedly applying this identity to
+\[
+ A^\ell EA^{k_1}E\cdots EA^{k_{m-1}}EA^q
+\]
+proves \eqref{eq:factorization}.  At least the all-zero state path is
+counted by $B_{\ell,q}$, while there are at most
+$2^{\ell+q+2}$ binary state words of the required length.  This proves
+\eqref{eq:boundary-bound}.
+\end{proof}
+
+Let $r=1-p$.  For $0<p<1$, start with the first reset at or after time zero
+and enumerate later reset times.  The numbers $K_j$ of ordinary $A$-steps
+strictly between consecutive resets are independent and satisfy
+\begin{equation}\label{eq:gap-law}
+ \Prob(K_j=k)=p r^k,
+ \qquad k\geq0.
+\end{equation}
+The cycle length and logarithmic reward are
+\begin{equation}\label{eq:cycle-pair}
+ L_j=K_j+1,
+ \qquad
+ R_j=\log F_{K_j+2}.
+\end{equation}
+They obey $\Exp L_j=1/p$ and have moments of every order.
+
+\begin{theorem}[Exact quenched fibre entropy]\label{thm:quenched}
+For $0<p<1$, the first limit in \eqref{eq:two-entropies} exists almost
+surely and in $L^1(\nu_p)$, and
+\begin{equation}\label{eq:quenched-formula}
+ \boxed{\displaystyle
+ \hq(p)=p^2\sum_{k=0}^{\infty}r^k\log F_{k+2}.}
+\end{equation}
+At the deterministic endpoints,
+\begin{equation}\label{eq:quenched-endpoints}
+ \hq(0)=\log\frac{1+\sqrt5}{2},
+ \qquad \hq(1)=0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The renewal-reward strong law applied to \eqref{eq:gap-law}--\eqref{eq:cycle-pair}
+gives
+\begin{equation}\label{eq:reward-rate}
+ \frac{\sum_{j<J(n)}R_j}{n}
+ \longrightarrow
+ \frac{\Exp R_0}{\Exp L_0}
+ =p^2\sum_{k\geq0}r^k\log F_{k+2}
+ \quad\text{almost surely},
+\end{equation}
+where $J(n)$ is the number of completed reset-to-reset cycles seen by time
+$n$.  The series converges because $\log F_{k+2}=O(k+1)$.
+
+It remains to compare the reward sum with the exact path count.  Let $H_n$
+be the longest reset-free run inside the environment word
+$\omega_0\cdots\omega_{n-1}$.  For any
+$c>2/|\log r|$, a union bound gives
+\[
+ \Prob(H_n\geq c\log n)\leq n r^{c\log n},
+\]
+and the right side is summable.  The Borel--Cantelli lemma therefore gives
+$H_n=O(\log n)$ almost surely.  In \eqref{eq:factorization}, the initial
+reset delay is almost surely finite and the terminal reset-free length is at
+most $H_n$.  Hence \eqref{eq:boundary-bound} shows that
+\begin{equation}\label{eq:boundary-negligible}
+ \log N_n-\sum_{j<J(n)}R_j=O(\log n)
+ \quad\text{almost surely}.
+\end{equation}
+Combining \eqref{eq:reward-rate} and \eqref{eq:boundary-negligible} proves
+the almost-sure formula.  Since
+$0\leq n^{-1}\log N_n\leq(1+n^{-1})\log2$, dominated convergence gives
+$L^1$ convergence.
+
+If $p=0$, then $N_n=\one^{\mathsf T}A^n\one=F_{n+3}$, whose rate is the
+logarithm of the golden ratio.  If $p=1$, then $E^n=E$ and $N_n=2$, so the
+rate is zero.
+\end{proof}
+
+\section{Annealed exponent and the strict disorder gap}
+\label{sec:annealed}
+
+Independence of the environment matrices gives an exact finite-time
+annealed formula despite their noncommutativity:
+\begin{equation}\label{eq:annealed-finite}
+ \Exp N_n
+ =\one^{\mathsf T}\overline M_p^{\,n}\one,
+ \qquad
+ \overline M_p=(1-p)A+pE
+ =\begin{pmatrix}1&1\\r&0\end{pmatrix}.
+\end{equation}
+Indeed, successively integrating the last independent factor replaces it by
+its mean, and iteration yields the displayed product.
+
+\begin{theorem}[Annealed exponent and strict gap]\label{thm:gap}
+For every $0\leq p\leq1$,
+\begin{equation}\label{eq:annealed-formula}
+ \boxed{\displaystyle
+ \ha(p)=\log\lambda_p,
+ \qquad
+ \lambda_p=\frac{1+\sqrt{5-4p}}2.}
+\end{equation}
+For every nontrivial disorder parameter,
+\begin{equation}\label{eq:strict-gap}
+ \hq(p)<\ha(p),\qquad 0<p<1.
+\end{equation}
+Equality holds at $p=0$ and $p=1$.
+\end{theorem}
+
+\begin{proof}
+The characteristic polynomial of $\overline M_p$ is
+$t^2-t-r$.  For $p<1$, the matrix is primitive and its Perron root is
+$\lambda_p$ in \eqref{eq:annealed-formula}; \eqref{eq:annealed-finite} and
+Perron--Frobenius theory give the exponent.  At $p=1$, the mean matrix is the
+idempotent $E$, and the same formula gives $\lambda_1=1$.
+
+For strictness, take a gap $K$ with law \eqref{eq:gap-law} and define the
+positive cycle-normalized gain
+\begin{equation}\label{eq:normalized-gain}
+ Z=\frac{F_{K+2}}{\lambda_p^{K+1}}.
+\end{equation}
+The Fibonacci generating function is
+\begin{equation}\label{eq:fib-generating}
+ \sum_{k\geq0}F_{k+2}z^k=\frac{1+z}{1-z-z^2}.
+\end{equation}
+Because $\lambda_p^2=\lambda_p+r$, one has
+$r/\lambda_p=\lambda_p-1<\varphi-1=\varphi^{-1}$, so substitution of
+$z=r/\lambda_p$ into the convergent series \eqref{eq:fib-generating} gives
+\begin{align}
+ \Exp Z
+ &=\frac p{\lambda_p}
+   \frac{1+r/\lambda_p}{1-r/\lambda_p-r^2/\lambda_p^2}=1.\label{eq:gain-mean}
+\end{align}
+For the last equality, after multiplication by $\lambda_p^2$ the
+denominator is
+$\lambda_p^2-r\lambda_p-r^2=p(\lambda_p+r)$, exactly the corresponding
+numerator.  Moreover, $Z$ is not constant: its values at $K=0$ and $K=1$
+are $\lambda_p^{-1}$ and $2\lambda_p^{-2}$, respectively, and
+$1<\lambda_p<2$.  Strict concavity of the logarithm and
+\eqref{eq:gain-mean} now yield
+\[
+ \hq(p)-\log\lambda_p
+ =\frac{\Exp\log F_{K+2}-(\Exp L)\log\lambda_p}{\Exp L}
+ =p\,\Exp\log Z
+ <p\log\Exp Z=0.
+\]
+The endpoint equalities follow from \cref{thm:quenched} and
+\eqref{eq:annealed-formula}.
+\end{proof}
+
+The proof identifies the strict gap with within-cycle variability.  It is
+stronger than applying Jensen's inequality separately at finite $n$, since
+it exhibits a nonconstant normalized gain whose strictness survives after
+division by time.
+
+\section{A renewal central limit theorem}
+\label{sec:clt}
+
+The same exact cycles determine the fluctuations.  Regenerative central
+limit theorems in the required form are classical; see, for example, the
+renewal and regenerative chapters of Asmussen \cite{Asmussen2003}.  We state
+all moments and the boundary transfer explicitly for this model.
+
+\begin{theorem}[Gaussian path-count fluctuations]\label{thm:clt}
+For every $0<p<1$,
+\begin{equation}\label{eq:clt}
+ \frac{\log N_n-n\hq(p)}{\sqrt n}
+ \xrightarrow{\mathrm d}\mathcal N(0,\sigma_p^2),
+\end{equation}
+where
+\begin{equation}\label{eq:variance}
+ \boxed{\displaystyle
+ \sigma_p^2=p^2\sum_{k=0}^{\infty}r^k
+ \left(\log F_{k+2}-(k+1)\hq(p)\right)^2>0.}
+\end{equation}
+The series converges exponentially.
+\end{theorem}
+
+\begin{proof}
+Write $h=\hq(p)$ and center one cycle by
+\[
+ W_j=R_j-hL_j.
+\]
+The pairs $(L_j,R_j)$ are independent and identically distributed,
+$\Exp W_j=0$, and $|W_j|=O(L_j)$.  The geometric tail of $L_j$ therefore
+gives $\Exp W_j^2<\infty$.  To keep the delayed initial cycle explicit, let
+$\tau=\min\{t\geq0:\omega_t=1\}$, put
+$S_m=\sum_{j<m}L_j$, and for $n>\tau$ set
+\[
+ J_n=\max\{m\geq0:\tau+S_m\leq n-1\}.
+\]
+Thus $J_n$ counts reset-to-reset cycles completed inside the observation
+window.  Conditional on the almost-surely finite $\tau$, the future cycle
+pairs are iid with the law in \eqref{eq:gap-law}--\eqref{eq:cycle-pair}.
+The delayed renewal-reward central limit theorem therefore gives
+\begin{equation}\label{eq:regenerative-clt}
+ \frac{\sum_{j<J_n}R_j-h(n-1-\tau)}{\sqrt n}
+ \xrightarrow{\mathrm d}
+ \mathcal N\left(0,\frac{\Exp W_0^2}{\Exp L_0}\right).
+\end{equation}
+Replacing $h(n-1-\tau)$ by $hn$ changes the numerator by the fixed random
+quantity $h(\tau+1)=o(\sqrt n)$ almost surely.  The terminal unfinished cycle is
+bounded by the longest reset-free block $H_n$, and the exact matrix boundary
+in \eqref{eq:boundary-negligible} is $O(\log n)$ almost surely.  Both are
+$o(\sqrt n)$, so \eqref{eq:regenerative-clt} transfers to $\log N_n$.
+
+Finally, using \eqref{eq:gap-law} and $\Exp L_0=1/p$,
+\[
+ \frac{\Exp W_0^2}{\Exp L_0}
+ =p^2\sum_{k\geq0}r^k
+  \left(\log F_{k+2}-(k+1)h\right)^2,
+\]
+which is \eqref{eq:variance}.  Exponential convergence follows because the
+squared term is $O((k+1)^2)$.  Positivity is also exact: if the variance
+vanished, the positive-probability cases $K=0$ and $K=1$ would give
+$0=W(0)=-h$ and $0=W(1)=\log2-2h$ simultaneously, a contradiction.
+\end{proof}
+
+\section{Exact controls, scope, and ownership boundary}
+\label{sec:controls}
+
+The accompanying standard-library program is independent of the proofs at
+the definition level.  It enumerates state paths and environments rather
+than inserting the theorem formulas.  Its discrete layer performs 66,787
+integer or rational assertions:
+\begin{itemize}
+\item $EA^kE=F_{k+2}E$ and the Fibonacci form of $A^k$ through $k=50$;
+\item matrix counts against direct enumeration of every state path for every
+      environment of lengths $0\leq n\leq9$;
+\item the full renewal factorization for every environment of lengths
+      $0\leq n\leq15$;
+\item the exact identity \eqref{eq:annealed-finite} for three rational values
+      of $p$ and all $0\leq n\leq16$;
+\item the rational generating-function reductions used in the strict-gap
+      proof.
+\end{itemize}
+Floating-point evaluations are diagnostics only.  Representative values are
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$p$ & $\hq(p)$ & $\ha(p)$ & $\sigma_p^2$\\
+\midrule
+$0.10$ & $0.447641693679$ & $0.452590731810$ & $0.011161475035$\\
+$0.25$ & $0.392429805910$ & $0.405465108108$ & $0.029582718017$\\
+$0.50$ & $0.285678394376$ & $0.311905358182$ & $0.057612583213$\\
+$0.75$ & $0.156807280841$ & $0.188226406460$ & $0.062358024158$\\
+$0.90$ & $0.066539324973$ & $0.087651818647$ & $0.037293341513$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The ownership boundary is deliberate.  Furstenberg--Kesten own the general
+random-matrix-product setting \cite{FurstenbergKesten1960}; Kifer and
+Denker--Kifer--Stadlbauer own broad random-subshift thermodynamic frameworks
+\cite{Kifer2008,DenkerKiferStadlbauer2008}; and the renewal-reward strong law
+and central limit theorem are classical regenerative probability
+\cite{Asmussen2003}.  The golden-mean matrix itself is standard
+\cite{LindMarcus1995}.  The residual content of this note is the exact
+Fibonacci-reset specialization that ties those mechanisms together.
+
+A bounded search through 28 August 2026 using combinations of
+\emph{random golden mean shift}, \emph{Bernoulli reset}, \emph{quenched
+entropy}, and the exact matrix identity did not identify a direct source for
+the entire displayed package.  That negative search is a collision
+firewall, not evidence of absolute novelty.  In particular, randomness here
+acts on time-dependent transition constraints, not on substitution images,
+and the note does not claim a general theorem for random substitutions or
+arbitrary matrix pairs.  External dissemination remains on HOLD pending a
+separate expert literature and priority review.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,150 @@
+\section{High centers and pointed factor rigidity}
+\label{sec:factors}
+
+The exact skeleton furnishes centers at which every bounded off-center
+coordinate has stabilized.  This is the step that collapses arbitrary
+finite context to a letter map.
+
+\begin{lemma}[High-center identity]
+\label{lem:high-center}
+  Let $c_n=r_n$.  For every nonzero $j\in\Z$ and every
+  $n>\nu_p(j)$,
+  \begin{equation}
+    \nu_p\bigl(L_p(c_n+j)\bigr)=\nu_p(j).
+    \label{eq:high-center}
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  Put $e=\nu_p(j)$ and write $j=p^e a$, where $p\nmid a$; the integer $a$
+  may be negative.  By \cref{eq:center-identities},
+  \begin{equation}
+    L_p(c_n+j)=p^n+(p-1)j
+      =p^e\bigl[p^{n-e}+(p-1)a\bigr].
+    \label{eq:high-center-factor}
+  \end{equation}
+  Since $n-e\geq1$, the bracket is congruent to
+  $(p-1)a\equiv-a$ modulo $p$.  It is not divisible by $p$, proving
+  \cref{eq:high-center}.  The calculation uses no inverse and applies to
+  prime and composite bases alike.
+\end{proof}
+
+We use the Curtis--Hedlund--Lyndon theorem in the following standard form:
+a continuous shift-commuting map between subshifts is induced by a finite
+local rule \citep{Hedlund1969}.  Padding its window if necessary, we may
+take a symmetric radius $R$.
+
+\begin{theorem}[Arbitrary-radius pointed factors collapse to letters]
+\label{thm:factor-collapse}
+  Let $u$ and $v$ be frozen directives at the same base $p$.  A pointed
+  factor $F:T_{p,u}\to T_{p,v}$ exists if and only if there is a
+  surjective letter map $\lambda:\calA\to\calB$ satisfying
+  $v_n=\lambda(u_n)$ for all $n\in\Z$.  When it exists, $\lambda$ is
+  unique and
+  \begin{equation}
+    F(z)(k)=\lambda(z(k))
+    \qquad(z\in X_{p,u},\ k\in\Z).
+    \label{eq:factor-coordinatewise}
+  \end{equation}
+  In particular, the pointed factor itself is unique.
+\end{theorem}
+
+\begin{proof}
+  Suppose first that $F$ is a pointed factor.  Choose $R\geq0$ and a local
+  rule $\phi$ such that
+  \begin{equation}
+    F(z)(k)=\phi\bigl(z[k-R,k+R]\bigr).
+    \label{eq:chl-rule}
+  \end{equation}
+  If $R>0$, set
+  \begin{equation}
+    M=\max\{\nu_p(j):0<|j|\leq R\};
+    \label{eq:window-threshold}
+  \end{equation}
+  if $R=0$, put $M=-1$.  For every $n>M$, the center coordinate is
+  $x_{p,u}(c_n)=u_n$, while \cref{lem:high-center} gives
+  \begin{equation}
+    x_{p,u}(c_n+j)=u_{\nu_p(j)}
+    \qquad(0<|j|\leq R).
+    \label{eq:high-window-normal-form}
+  \end{equation}
+  Thus all entries in the radius-$R$ window except its center are
+  independent of $n$.  Every source letter occurs at arbitrarily large
+  indices because $u$ is periodic with exact support.  For $a\in\calA$,
+  let $W_a$ be the stabilized window with center $a$ and define
+  \begin{equation}
+    \lambda(a)=\phi(W_a).
+    \label{eq:lambda-definition}
+  \end{equation}
+  This is independent of the chosen large occurrence of $a$.
+
+  Pointedness and $L_p(c_n)=p^n$ now yield, for $n>M$,
+  \begin{equation}
+    v_n=x_{p,v}(c_n)=F(x_{p,u})(c_n)=\lambda(u_n).
+    \label{eq:large-directive-relation}
+  \end{equation}
+  Let $h_u$ and $h_v$ be the least directive periods and set
+  $H=\lcm(h_u,h_v)$.  Given any $n\in\Z$, choose $s$ so large that
+  $n+sH>M$.  Periodicity extends \cref{eq:large-directive-relation} to
+  \begin{equation}
+    v_n=v_{n+sH}=\lambda(u_{n+sH})=\lambda(u_n).
+    \label{eq:all-directive-relation}
+  \end{equation}
+  Therefore, at every $k\in\Z$,
+  \begin{align}
+    x_{p,v}(k)
+      &=v_{\nu_p(L_p(k))}
+        =\lambda\bigl(u_{\nu_p(L_p(k))}\bigr)
+        =\lambda(x_{p,u}(k)).
+    \label{eq:basepoint-coordinate-map}
+  \end{align}
+  The original map $F$ and $\lambda^{\Z}$ agree on the distinguished
+  point, hence on its shift orbit by equivariance, and hence on its closure
+  by continuity.  This proves \cref{eq:factor-coordinatewise}.
+
+  Every target letter is some $v_n$ by exact target support.
+  \Cref{eq:all-directive-relation} therefore makes $\lambda$ surjective.
+  Exact source support also makes it unique: if $u_n=a$, then necessarily
+  $\lambda(a)=v_n$.  Consequently $F$ is unique as well.
+
+  Conversely, suppose that a surjective letter map satisfies
+  $v=\lambda\circ u$.  Its coordinatewise extension is continuous and
+  shift commuting and sends $x_{p,u}$ to $x_{p,v}$.  We verify its image
+  by two inclusions.  If $y\in X_{p,u}$, choose integers $n_i$ such that
+  $\sigma^{n_i}x_{p,u}\to y$.  Continuity and equivariance give
+  \[
+    \lambda^{\Z}(y)
+      =\lim_i\sigma^{n_i}x_{p,v}\in X_{p,v},
+  \]
+  so $\lambda^{\Z}(X_{p,u})\subseteq X_{p,v}$.  Conversely,
+  $\lambda^{\Z}(X_{p,u})$ is compact and therefore closed, and it contains
+  $\Orb(x_{p,v})$ because it contains $x_{p,v}$ and is shift invariant.
+  It consequently contains $\cl\,\Orb(x_{p,v})=X_{p,v}$.  The two
+  inclusions prove equality, so the coordinatewise extension is onto and
+  is the required pointed factor.
+\end{proof}
+
+\begin{corollary}[Pointed conjugacy]
+\label{cor:pointed-conjugacy}
+  Two systems $T_{p,u}$ and $T_{p,v}$ are pointedly conjugate exactly when
+  their directives differ by a bijective relabeling of letters.  The
+  conjugacy has no phase shift.
+\end{corollary}
+
+\begin{proof}
+  A bijective letter map has the inverse coordinate map.  Conversely, the
+  inverse of a pointed conjugacy is again pointed and same-base.  Apply
+  \cref{thm:factor-collapse} in both directions.  The two resulting letter
+  maps compose to the identity on every directive letter, because every
+  such letter occurs at a center $c_n$.  They are therefore bijections.
+\end{proof}
+
+\begin{remark}[Where the argument uses the scope]
+\label{rem:factor-scope}
+  Same-base scope provides common centers $c_n$ in
+  \cref{eq:large-directive-relation}; pointedness identifies the local-rule
+  output there with $v_n$ rather than a shifted target coordinate; and an
+  in-family target supplies its directive and exact support.  Removing any
+  of these hypotheses breaks a displayed step.  The theorem does not assert
+  that wrong-base or nonpointed maps are impossible in broader categories.
+\end{remark}

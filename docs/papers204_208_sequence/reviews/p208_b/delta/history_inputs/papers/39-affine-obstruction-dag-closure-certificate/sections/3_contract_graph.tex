@@ -1,0 +1,180 @@
+\section{Frozen contract and typed graph}
+\label{sec:contract}
+
+The theorem domain is data, not an inferred universe.  We first state the
+timing and trust assumptions, then define the token classifier and the two
+graphs that realize it.
+
+\begin{assumption}[Retrospective checker freeze]
+\label{ass:timing}
+The final source, proof, derivation, clue, and Route artifacts of Papers
+35--38 are fixed by the hashes in the Paper-39 source lock.  Their outcomes
+were known when the Paper-39 encoding was assembled.  The resulting contract
+and its checker inputs were frozen before the Paper-39 checker was run.
+\end{assumption}
+
+\begin{assumption}[Inherited theorem validity]
+\label{ass:predecessors}
+The mathematical statements cited from Papers 35--38 hold under their own
+quantifiers and hypotheses.  Paper 39 audits their typed use; it does not
+independently re-prove external results or turn finite execution into a proof of
+their infinite claims.
+\end{assumption}
+
+These assumptions separate three questions that hashes alone cannot collapse.
+Byte identity of the inputs is checkable.  Truth of the inherited theorems is a
+mathematical dependency.  Prospective completeness of every possible repair is
+neither assumed nor concluded.
+
+\subsection{The success predicate}
+
+For a typed candidate state $c$, define
+\begin{equation}
+\Good(c)=I(c)\wedge R(c)\wedge S(c)\wedge D(c)\wedge M(c)\wedge C(c).
+\label{eq:good}
+\end{equation}
+The coordinates are mnemonic abbreviations for the six named predicates in
+\cref{tab:good}.  Each coordinate comes from a pre-existing Route or source
+field; the Paper-39 checker merely normalizes the names.
+
+\begin{table}[t]
+\centering
+\caption{The six success coordinates and their pre-existing ownership.  A
+candidate must satisfy all six on one typed object; coordinates cannot be
+borrowed across nodes.}
+\label{tab:good}
+\small
+\begin{tabularx}{\textwidth}{@{}L{1.9cm}L{4.1cm}Y@{}}
+\toprule
+Coordinate & Pre-existing field & Frozen meaning \\
+\midrule
+$I$: intrinsic & Route A0 arithmetic origin; allowed/forbidden data & No prime,
+support, target-zero, terminal-projector, or post-result oracle. \\
+$R$: recurrence & Route A1; object, dynamics, clock & Nonempty primitive family
+with compatible repetitions on the declared object. \\
+$S$: selectivity & Route A0/A1 arithmetic sector; generic controls & A
+source-proved sector that fails matched generic controls. \\
+$D$: owned determinant & Route A2; operator object; determinant convention & One
+declared operator on the same space owns the claimed determinant category. \\
+$M$: marker & clock; theorem marker; normalization & One free marker counts the
+frozen primitive step and is not a quotient clock, return time, or fugacity. \\
+$C$: controls & adversarial controls; proves-too-much risk; stop rule & Balanced,
+composite, mutation, generic, and proves-too-much controls survive. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Classes, tokens, and normalization}
+
+The top-level alphabet $\Aaff$ has the following 14 labels:
+{\footnotesize
+\begin{align*}
+\Aaff=\{&\code{affine\_cayley\_representation},
+            \code{finite\_rank\_local\_system},\\
+          &\code{character},\code{grading},\code{quotient},
+            \code{induced\_shift},\\
+          &\code{first\_return\_map},\code{bass\_serre\_splitting},
+            \code{valuation\_tree},\code{boundary\_model},\\
+          &\code{modular\_phase},\code{basepoint\_damping},
+            \code{finite\_total\_weight\_retrofit},\code{groupoid\_trace}\}.
+\end{align*}
+}
+
+The request domain $\SigmaReq$ contains exactly 16 stable tokens.  Six tokens
+name theorem-covered frozen families, six name explicit exits, and the two
+mixed classes each contribute one canonical tested token and one alternative
+exit token.  There is no catch-all \code{OTHER\_INSTANCE}, and no token denotes
+an arbitrary compound repair.  The complete table appears in
+\cref{tab:tokens}.
+
+The frozen normalizer is simply the finite record map
+\begin{equation}
+\mathsf{norm}:\SigmaReq\longrightarrow
+  \mathsf{ObsPath}\;\sqcup\;\mathsf{ExitPath}.
+\label{eq:normalizer}
+\end{equation}
+An obstruction record contains its class, instance scope, endpoint set,
+internal-edge witnesses, provenance paths, and terminal codes.  An exit record
+contains the same scope information but an empty obstruction set and an
+explicit boundary/exit path.  The codomain is a disjoint union, so an exit
+cannot be read as a failed-\Good{} proof.
+
+\subsection{Node and edge types}
+
+The invariant object is the history
+\begin{equation}
+\mathcal H_{35:38}=(\mathcal V,\mathcal E,\Type,\Owner,
+  \operatorname{obstruction},\Status).
+\label{eq:history}
+\end{equation}
+Every node records an inherited obligation, source object, marker, operator
+owner, determinant owner, exact obstruction, forbidden escape, and terminal
+code.  Every edge records its source and target, historical authority, one of
+the internal/closure/exit/firewall/guard roles, and field-transfer semantics.
+
+An ownership label is part of the type.  Consequently, an operator or
+determinant at one node does not travel across an object-changing edge unless a
+source-owned transport theorem says so.  Historical successor edges may carry
+an audit obligation while resetting every candidate-state field.  This rule
+prevents a coordinatewise assembly of four individually useful but mutually
+incompatible predecessor facts.
+
+\subsection{Expanded DAG and structural spine}
+
+The expanded proof graph has the 22 nodes
+\begin{multline*}
+\code{N00};\quad
+\code{N35F,N35P,N35S,N35H,N35Q,N35D,N35B};\\
+\code{N36F,N36G};\quad
+\code{N37O,N37D,N37N};\quad
+\code{N38T,N38M,N38L,N38O,N38K};\quad
+\code{NX,NC,NR,NS}.
+\end{multline*}
+Its 28 edges are partitioned exactly as
+\begin{equation}
+28=17\;\text{internal}+5\;\text{closure}+3\;\text{token exits}
+  +1\;\text{non-domain firewall}+2\;\text{guards}.
+\label{eq:edge-partition}
+\end{equation}
+The bridge assigns ranks $0,\ldots,11$ to the nodes, and every edge strictly
+increases rank.  Hence the expanded graph is acyclic.  The proof does not rely
+on a reflexive reachability formula disguised as termination; acyclicity only
+certifies the recorded graph structure.
+
+The structural spine is
+\begin{center}
+\small
+\code{N35\_OBJECT\_FIREWALL}
+$\to$ \code{N36\_CELLULAR\_CANCELLATION}
+$\to$ \code{N37\_COEFFICIENT\_SATURATION}
+$\to$ \code{N38\_TREE\_ORBITAL\_TRILEMMA}
+$\to$ \code{N39\_AFFINE\_BRANCH\_CLOSED}
+$\to$ \code{N\_REGISTRY\_HANDOFF}.
+\end{center}
+Its five edges retain the predecessor obligation flow and governance action.
+The bridge map $\pi$ sends every expanded node and edge to a spine fiber or a
+named auxiliary target.  It is total and surjective onto the structural spine,
+but many-to-one.  The bridge remains auditable because it stores the entire
+expanded record set and both fiber maps; “projection” never means that the
+coarse graph alone can reconstruct the proof.
+
+\subsection{The candidate domain}
+
+Let $\Paths$ be the nonempty in-contract provenance paths through the 17
+internal transitions.  If $p$ ends at $v$, its candidate datum belongs only to
+the endpoint family $X_v(r)$.  Define
+\begin{equation}
+\Caff(r)=\coprod_{p\in\Paths}\{p\}\times X_{\End(p)}(r).
+\label{eq:candidate-domain}
+\end{equation}
+The coproduct tag prevents histories with distinct endpoints from being
+identified.  More importantly, a path is provenance, not cumulative repair
+composition.  For example, the path from the Paper-36 filling node to the
+Paper-37 coefficient node records why the latter was tested; it does not apply
+finite coefficients to the filled object.
+
+The auxiliary sink \code{NX} is outside \cref{eq:candidate-domain}.  It receives
+explicit exit tokens and the separate historical firewall \code{E22}.  Closure
+over $\Caff(r)$ and total classification over $\SigmaReq$ are related finite
+statements, but neither quantifies over arbitrary mechanisms outside these
+sets.

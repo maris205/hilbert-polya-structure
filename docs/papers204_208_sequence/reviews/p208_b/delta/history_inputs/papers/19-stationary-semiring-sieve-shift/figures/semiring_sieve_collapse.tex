@@ -1,0 +1,65 @@
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  >=Latex,
+  every node/.style={font=\scriptsize,align=center},
+  source/.style={draw=formalblue,very thick,rounded corners,fill=formalblue!7,
+                 text width=13.2cm,minimum height=8mm,inner sep=3pt},
+  program/.style={draw=formalblue,thick,rounded corners,fill=formalblue!5,
+                  text width=3.75cm,minimum height=13mm,inner sep=3pt},
+  pass/.style={draw=passgreen,thick,rounded corners,fill=passgreen!8,
+               text width=5.6cm,minimum height=14mm,inner sep=3pt},
+  warn/.style={draw=warningamber,thick,rounded corners,fill=warningamber!10,
+               text width=5.6cm,minimum height=14mm,inner sep=3pt},
+  stop/.style={draw=stopred,very thick,rounded corners,fill=stopred!8,
+               text width=13.2cm,minimum height=9mm,inner sep=3pt},
+  arrow/.style={->,thick,draw=charcoal}
+]
+\node[source] (source) at (0,0) {Finite full-shift semiring skeleton:\quad
+$F_m\boxtimes F_n\cong F_{mn}$,\quad
+$F_m\boxplus F_n\cong F_{m+n}$,\quad $h(F_n)=\log n$};
+
+\node[program] (input) at (-4.8,-1.55) {$I_n\to T_{n,2}$\\
+successive divisor and square tests};
+\node[program] (quotient) at (0,-1.55) {$Q_{n,d,2}\to Q_{n,d,3}\to\cdots$\\
+explicit tensor quotient search};
+\node[program] (decision) at (4.8,-1.55) {$dq=n$: reject\\
+$dq>n$: $d\mapsto d+1$\\
+$d^2>n$: accept};
+
+\node[pass] (accept) at (-3.3,-3.35) {\textbf{prime branch}\\[2pt]
+$A_p\circlearrowleft$ with roof $\log p$; the only recurrent orbit};
+\node[warn] (reject) at (3.3,-3.35) {\textbf{composite branch}\\[2pt]
+$R_{n,1}\to R_{n,2}\to\cdots$; acyclic cemetery ray};
+
+\node[source] (operator) at (0,-5.05) {One whole weighted vertex adjacency
+$L_s$ on $\ell^2(V(G))$; rank-one edge sum is trace class for $\RePart s>1$};
+
+\node[pass] (euler) at (-3.3,-6.75) {\textbf{exact analytic ledger}\\[2pt]
+$\Tr L_s^r=\sum_p p^{-rs}$\\[1pt]
+$\det(I-zL_s)=\prod_p(1-zp^{-s})$};
+\node[warn] (prune) at (3.3,-6.75) {\textbf{recurrent-core collapse}\\[2pt]
+delete every $I,T,Q,R$ state; all traces and determinants unchanged};
+
+\node[source] (universal) at (0,-8.45) {The same time-damped wrapper compiles
+every total decidable support and every effective factorial-monoid atom inventory};
+\node[stop] (verdict) at (0,-9.75) {
+\texttt{SELECTOR\_TAUTOLOGICAL}\qquad
+\texttt{PRUNING\_EQUIVALENT}\qquad
+\texttt{PROVES\_TOO\_MUCH}\\[-1pt]
+\texttt{ROUTE\_A\_REJECTED}\qquad \texttt{ROUTE\_B\_LOCKED}};
+
+\draw[arrow] (source.south west) -- (input.north);
+\draw[arrow] (source.south) -- (quotient.north);
+\draw[arrow] (source.south east) -- (decision.north);
+\draw[arrow] (input.east) -- (quotient.west);
+\draw[arrow] (quotient.east) -- (decision.west);
+\draw[arrow] (decision.south west) -- (accept.north east);
+\draw[arrow] (decision.south) -- (reject.north);
+\draw[arrow] (accept.south) -- (operator.north west);
+\draw[arrow] (reject.south) -- (operator.north east);
+\draw[arrow] (operator.south west) -- (euler.north);
+\draw[arrow] (operator.south east) -- (prune.north);
+\draw[arrow] (euler.south) -- (universal.north west);
+\draw[arrow] (prune.south) -- (universal.north east);
+\draw[arrow] (universal.south) -- (verdict.north);
+\end{tikzpicture}

@@ -1,0 +1,48 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small},
+  digit/.style={circle,draw=chainblue,thick,minimum size=6.5mm,inner sep=1pt},
+  leaf/.style={rounded corners,draw=boundaryteal,thick,fill=boundaryteal!7,
+               minimum width=18mm,minimum height=6mm,inner sep=2pt},
+  lab/.style={font=\scriptsize,align=center}
+]
+  \node[digit] (r) at (0,2.5) {\(\varnothing\)};
+  \node[digit] (a0) at (-2.3,1.4) {\(0\)};
+  \node[digit] (a1) at (2.3,1.4) {\(1\)};
+  \node[digit] (b00) at (-3.45,0.25) {\(00\)};
+  \node[digit] (b01) at (-1.15,0.25) {\(01\)};
+  \node[digit] (b10) at (1.15,0.25) {\(10\)};
+  \node[digit] (b11) at (3.45,0.25) {\(11\)};
+  \draw[chainblue,thick] (r)--node[above left,lab] {\(+0\gamma_0\)}(a0);
+  \draw[goldenorange,thick] (r)--node[above right,lab] {\(+1\gamma_0\)}(a1);
+  \draw[chainblue,thick] (a0)--node[left,lab] {\(+0\gamma_1\)}(b00);
+  \draw[goldenorange,thick] (a0)--node[right,lab] {\(+1\gamma_1\)}(b01);
+  \draw[chainblue,thick] (a1)--node[left,lab] {\(+0\gamma_1\)}(b10);
+  \draw[goldenorange,thick] (a1)--node[right,lab] {\(+1\gamma_1\)}(b11);
+
+  \node[leaf] (l00) at (-3.45,-0.95) {\(K_{00}\)};
+  \node[leaf] (l01) at (-1.15,-0.95) {\(K_{01}\)};
+  \node[leaf] (l10) at (1.15,-0.95) {\(K_{10}\)};
+  \node[leaf] (l11) at (3.45,-0.95) {\(K_{11}\)};
+  \draw[->,thin] (b00)--(l00);
+  \draw[->,thin] (b01)--(l01);
+  \draw[->,thin] (b10)--(l10);
+  \draw[->,thin] (b11)--(l11);
+  \draw[decorate,decoration={brace,mirror,amplitude=4pt},proofgreen,thick]
+    (-4.35,-1.55)--(4.35,-1.55)
+    node[midway,below=5pt,lab,text=proofgreen!70!black]
+    {\(2^n\) level-\(n\) cylinders; diameter \(O(t^n)\), separation \(\Omega(t^n)\)};
+
+  \node[draw=goldenorange,rounded corners,align=left,inner sep=5pt]
+    (cert) at (8.1,1.35)
+    {\(\operatorname{sgn}\gamma_k=(-1)^k\)\\
+     \(\displaystyle |\gamma_k|>\sum_{j>k}|\gamma_j|\)\\
+     \(\displaystyle \gamma_{k+1}/\gamma_k\to-t\)};
+  \node[draw=proofgreen,rounded corners,align=center,inner sep=5pt]
+    (dim) at (8.1,-0.55)
+    {\(\displaystyle
+       \dim_H K=\dim_B K=\frac{\log2}{-\log t}
+       =\frac{\log2}{2\log\varphi}\)};
+  \draw[->,very thick,proofgreen] (cert)--(dim);
+  \draw[->,thick,dashed] (l11.east) to[out=0,in=200] (cert.west);
+\end{tikzpicture}

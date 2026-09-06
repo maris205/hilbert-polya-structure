@@ -1,0 +1,87 @@
+\section{Transient pruning and universal controls}
+\label{sec:transient-controls}
+
+A second repair moves the computation into feed-forward states.  It can be
+made trace class, but then the verification never participates in a closed
+walk.  This is the pruning alternative.
+
+For each input $n$, let a finite deterministic DAG compute the terminal
+Wilson relation and feed an accept vertex.  Put a loop of weight $n^{-s}$ on
+that vertex precisely when it accepts.  Multiply the DAG and feed edges by a
+fixed summable regulator so that their direct-sum operators are trace class.
+On accepted-loop and transient subspaces the full operator has the form
+\[
+  \Ts=\begin{pmatrix}
+      D_s&B_s\\[2pt]
+      0&Q_s
+    \end{pmatrix},
+  \qquad D_s=\diag_{p}(p^{-s}),
+\]
+where $Q_s$ is the regulated acyclic part.
+
+\begin{proposition}[Trace-class DAG invisibility]
+\label{prop:transient-pruning}
+Assume $Q_s$ and $B_s$ are trace class.  For $\Ree s>1$, $\Ts$ is trace
+class and
+\[
+  \operatorname{Tr}(\Ts^r)=\sum_p p^{-sr},\qquad
+  \det(I-z\Ts)=\prod_p(1-zp^{-s}).
+\]
+Deleting all verifier-DAG states preserves every power trace and the
+Fredholm determinant.
+\end{proposition}
+
+\begin{proof}
+Order the vertices of every finite DAG topologically.  No positive-length
+closed walk uses a DAG edge, so every basis-diagonal coefficient of $Q_s^r$
+vanishes.  Since $Q_s^r$ is trace class, its trace is the sum of these
+diagonal coefficients and is zero.  The countable direct sum need not be
+globally nilpotent; acyclicity, not a nonexistent uniform nilpotence index, is
+the relevant fact.
+
+Block triangularity gives
+\[
+  \operatorname{Tr}(\Ts^r)
+  =\operatorname{Tr}(D_s^r)+\operatorname{Tr}(Q_s^r)
+  =\sum_p p^{-sr}.
+\]
+The trace-log identity near $z=0$, followed by analytic continuation of the
+entire Fredholm determinants, gives
+\[
+  \det(I-z\Ts)=\det(I-zD_s)\det(I-zQ_s)
+  =\prod_p(1-zp^{-s}).
+\]
+The same formula remains after deleting the transient block and feed edges.
+\end{proof}
+
+Thus the honest determinant belongs to the accepted-loop diagonal.  The
+Wilson computation supplies which loops are installed but contributes no
+periodic term after installation.  Calling this a dynamical Wilson
+cancellation would confuse an algorithm that populates a support with the
+closed-walk mechanism that owns its determinant.
+
+\begin{corollary}[Total-decider compiler]
+\label{cor:universal-decider}
+Let $P:\N\to\{0,1\}$ be any total decidable predicate.  Replacing the Wilson
+DAG by a terminating computation of $P$ and installing the loop exactly when
+$P(n)=1$ produces the same pruning identity.  If instead the accepted
+computations are closed into vertex-disjoint cycles of lengths $\ell_P(n)$
+and exact total roofs $\log n$, the recurrent operator has the same
+minimum-roof obstruction whenever $\log n/\ell_P(n)$ fails to diverge along
+an unbounded accepted subsequence.
+\end{corollary}
+
+The exact controls instantiate the compiler for Wilson primes, squares,
+powers of two, Fibonacci numbers, and a seeded computable support.  These
+supports have different arithmetic meanings; the point is that their
+terminal analytic wrappers are identical.  The architecture therefore proves
+too much at the compiler level.
+
+\input{figures/verifier_trichotomy}
+
+The three outcomes in \cref{fig:verifier-trichotomy} are mutually compatible.
+The matched clone defeats presentation selectivity, the transient model loses
+the computation from recurrence, and the recurrent model retains the
+computation only by diluting $\log p$ across $p-1$ disjoint steps.  Neither
+repair supplies an honest determinant of the original Wilson adjacency with
+its original marker.

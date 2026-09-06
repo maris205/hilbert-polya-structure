@@ -1,0 +1,63 @@
+\section{Exact density and complement separation}
+
+Let $L_n=|v_n|$, let $W_n=|v_n|_1$, and define the signed discrepancy
+\[
+ d_n=2W_n-L_n.
+\]
+By \cref{lem:alternating},
+\begin{equation}\label{eq:initial-counts}
+ L_N=2^{N+1}-1,\qquad W_N=2^N-1,\qquad d_N=-1.
+\end{equation}
+For every $n\geq N$, the tail construction gives the exact recurrences
+\begin{equation}\label{eq:count-recurrences}
+ L_{n+1}=4L_n+2,\qquad W_{n+1}=4W_n+2,\qquad d_{n+1}=4d_n+2.
+\end{equation}
+
+\begin{proposition}[exact one-density]\label{prop:density}
+The common one-density of the points in $X_N$ is
+\[
+ \rho_N=\frac{3\cdot2^N-1}{3\cdot2^{N+1}-1}<\frac12.
+\]
+\end{proposition}
+
+\begin{proof}
+The affine shifts in \eqref{eq:count-recurrences} satisfy
+\[
+ L_{n+1}+\frac23=4\left(L_n+\frac23\right),
+ \qquad
+ d_{n+1}+\frac23=4\left(d_n+\frac23\right).
+\]
+Together with \eqref{eq:initial-counts}, this yields
+\[
+ \lim_{n\to\infty}\frac{d_n}{L_n}
+ =\frac{d_N+2/3}{L_N+2/3}
+ =-\frac{1}{3L_N+2}.
+\]
+Since $W_n/L_n=(1+d_n/L_n)/2$, substitution of
+$L_N=2^{N+1}-1$ gives
+\[
+ \lim_{n\to\infty}\frac{W_n}{L_n}
+ =\frac{3\cdot2^N-1}{3\cdot2^{N+1}-1}.
+\]
+This is the frequency of the one-letter word $1$ by
+\cref{prop:unique-ergodicity}.  Its strict inequality from $1/2$ follows
+equally from the negative limiting discrepancy.
+\end{proof}
+
+\begin{corollary}[complement disjointness]\label{cor:complement-disjoint}
+The subshifts $X_N$ and $\comp(X_N)$ are disjoint.  Consequently the XOR
+derivative is a conjugacy from $X_N$ onto $Y_N=\Delta(X_N)$.
+\end{corollary}
+
+\begin{proof}
+Every $x\in X_N$ has one-density $\rho_N$.  Its complement $\comp(x)$ has
+one-density $1-\rho_N$, which differs from $\rho_N$.  Thus $x$ and
+$\comp(x)$ cannot both belong to $X_N$, proving
+$X_N\cap\comp(X_N)=\varnothing$.  The binary case of
+\cref{thm:finite-group-intro}, recorded in \cref{rem:binary}, now applies.
+\end{proof}
+
+The role of unique ergodicity is quantitative but clean: it promotes the
+prefix count to a density shared by every point.  The strict density imbalance
+then separates the two compact subshifts globally, while the next section
+shows that this global separation can require long words to detect.

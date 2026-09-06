@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=6mm and 7mm,
+  box/.style={rounded corners,draw=charcoal,thick,align=center,
+    fill=white,inner sep=5pt,font=\small},
+  old/.style={box,draw=formalblue,text width=4.2cm},
+  new/.style={box,draw=warningamber,text width=4.2cm},
+  category/.style={box,text width=6.5cm,align=left,font=\scriptsize},
+  arr/.style={->,very thick,formalblue}
+]
+\node[old] (oldclock)
+  {old displayed Cayley paths\\
+   $|u^m|=m$, $|u^mv|=m+1$\\
+   $|vuv^{-1}u^{-r}|=r+3$};
+\node[new,below=of oldclock] (newclock)
+  {Bass--Serre translation clock\\
+   $\ell_T(u^m)=0$, $\ell_T(u^mv)=1$\\
+   $\ell_T(vuv^{-1}u^{-r})=0$};
+\draw[->,very thick,warningamber] (oldclock) --
+  node[right,font=\scriptsize,align=left] {many-to-one\\no marker credit} (newclock);
+
+\node[category,right=14mm of oldclock] (ordinary)
+  {\textbf{Full-tree ordinary Fredholm:} unavailable because the
+   Hashimoto operator is noncompact and non-trace-class.};
+\node[category,below=4mm of ordinary] (lattice)
+  {\textbf{Discrete tree-lattice/von Neumann:} $r\ge2$ image non-discrete;
+   $r=1$ frozen action non-proper with infinite kernel.};
+\node[category,below=4mm of lattice] (weighted)
+  {\textbf{Finite-total-weight graph:} rigorous in its own category, but a
+   summable radial weight selects a basepoint and changes the object.};
+\node[category,below=4mm of weighted] (groupoid)
+  {\textbf{Groupoid/double-coset:} uses a different trace or a different
+   Dirichlet invariant and cannot transfer ordinary full-tree ownership.};
+
+\node[rounded corners,draw=stopred,dashed,thick,fit=(ordinary)(groupoid),
+  inner sep=4pt,label={[font=\scriptsize,text=stopred]above:
+  determinant-category firewall}] (fitbox) {};
+\draw[dashed,very thick,stopred,-|] (newclock.east) -- (fitbox.west);
+\end{tikzpicture}

@@ -1,0 +1,88 @@
+\section{Deterministic verification protocol}
+\label{app:reproducibility}
+
+The finite checks in \cref{subsec:diagnostics} are an audit trail for proof
+development.  They are deliberately separated from the logical proofs of
+unbounded statements.
+
+\subsection{Two arithmetic evaluators}
+
+The first evaluator computes $\nu_p((p-1)k+1)$ directly by repeated exact
+division.  The second starts with one hole class, fills
+$H_N\setminus H_{N+1}$ by $u_N$, and iterates until the queried coordinate
+leaves the next hole.  The implementations do not import one another.  A
+third, auditor-owned checker independently implements both viewpoints as
+well as restricted-growth enumeration of directives and set partitions.
+
+For constructiveness, the finite searches quantify over all tested
+coordinates and all tested integer progression multipliers, rather than
+comparing only one translated block.  Prime-base searches return an exact
+congruence witness for each smaller candidate period; composite-base
+searches check the strict period $\ell p^N$ in both direct and nested-fill
+evaluators.  Graph checks enumerate independent-set partitions, refinement
+pairs, and the falling-factorial expansion of the chromatic polynomial.
+
+\subsection{Frozen receipts}
+
+The writer-owned diagnostic receipt binds the following SHA-256 values:
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{.30\textwidth}X@{}}
+\toprule
+Artifact & SHA-256 \\
+\midrule
+Stage-2 self-excluding manifest
+& \texttt{c070bd76d8a28e1b918fa040d9346db3}\newline
+  \texttt{2776f238e7081d8c3504648b137a583e} \\
+Reciprocal-audit self-excluding manifest
+& \texttt{8b4d54a8cc7ce505dea3c26110346b31}\newline
+  \texttt{5af0e30c8753e5c95227d6ff82d75ca3} \\
+Root-audit result
+& \texttt{e1dca456aecfe25a7c1a133d33c1a6a6}\newline
+  \texttt{bf43724775c0a4a3b5c4a1199e32ee64} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+The generated table input has SHA-256
+\begin{quote}\ttfamily\footnotesize
+d0d8627e8becaee43a0eccecff206293\newline
+812e6f8fceed445e5f5efc657448fb05,
+\end{quote}
+and the resulting LaTeX bytes have SHA-256
+\begin{quote}\ttfamily\footnotesize
+73562e6763d2df25826aa3fea56f5d014\newline
+02a5539c0570ca4887e1bb128b5ba5c.
+\end{quote}
+Two isolated regenerations were byte-identical.
+
+\subsection{Typed mutations}
+
+The control suite includes the following intended failures.
+\begin{enumerate}[leftmargin=2.2em]
+  \item A declared target letter omitted by a letter map is rejected as
+    nonsurjective.
+  \item Merging a cyclic adjacency edge is rejected because the quotient
+    leaves the frozen target family.
+  \item A base-$3$ to base-$4$ identity proposal is rejected after a
+    distinguished-point mismatch.  This is a scope control, not a theorem
+    that all wrong-base factors are impossible.
+  \item A shift map is rejected as nonpointed after a distinguished-point
+    mismatch, again without a broader impossibility claim.
+  \item At $p=4$ and $N=1$, the period $8<16$ rejects the false statement
+    that every integer base has a constructive period structure.
+\end{enumerate}
+
+\subsection{One-command writer check}
+
+From the root of the reproducibility archive, run
+\begin{quote}
+\ttfamily
+PYTHONDONTWRITEBYTECODE=1 python3 qa/run\_writer\_checks.py
+\end{quote}
+The script rehashes the three frozen receipts without writing to them,
+regenerates \cref{tab:diagnostics} in an isolated temporary directory,
+independently enumerates all $15$ partitions of the four-cycle's vertex
+set, and checks that exactly four are admissible with four Hasse covers.  A
+passing finite rerun increases confidence that the packaged statements were
+transcribed correctly; it does not establish any theorem quantified over
+all bases, levels, radii, or directives.

@@ -1,0 +1,110 @@
+\section{Finite-group derivatives and exact inverse windows}
+
+We prove \cref{thm:finite-group-intro}.  Standard sliding-block terminology is
+as in Lind and Marcus~\cite{LindMarcus1995}.  Coordinatewise left
+multiplication is essential below; it makes the argument valid without
+assuming that $G$ is abelian.
+
+\begin{lemma}[fibres are left-translation orbits]\label{lem:fibres}
+For $x,x'\in G^\Z$,
+\[
+ \Delta_G(x)=\Delta_G(x')
+ \quad\Longleftrightarrow\quad
+ x'=cx\text{ for a unique }c\in G.
+\]
+\end{lemma}
+
+\begin{proof}
+If $x'=cx$, then
+\[
+ (cx_i)^{-1}(cx_{i+1})=x_i^{-1}c^{-1}cx_{i+1}
+ =x_i^{-1}x_{i+1}
+\]
+at every coordinate.  Conversely, suppose the derivatives agree and set
+$c=x'_0x_0^{-1}$.  Thus $x'_0=cx_0$.  If $x'_i=cx_i$, derivative equality at
+$i$ gives
+\[
+ x'_{i+1}=x'_i(x_i^{-1}x_{i+1})=cx_{i+1}.
+\]
+The same equality, solved for the preceding coordinate, propagates to the
+left.  Hence $x'=cx$ on all of $\Z$.  Evaluating at coordinate $0$ also shows
+that $c$ is unique.
+\end{proof}
+
+\begin{lemma}[compact separation]\label{lem:compact-separation}
+The number $s_G(X)$ in \eqref{eq:separation-length-intro} is finite if and only
+if $X\cap cX=\varnothing$ for all $c\neq e$.
+\end{lemma}
+
+\begin{proof}
+If $x\in X\cap cX$, write $x=cz$ with $z\in X$.  Every finite block of $x$ is
+then a $c$-translate of a block of $z$, so the languages overlap at every
+length.
+
+For the converse, suppose $s_G(X)=\infty$.  Since $G$ is finite, some fixed
+$c\neq e$ has language overlap at arbitrarily large lengths.  Passing to
+subblocks, it has overlap at every length.  For each $j$ choose $x^{(j)}$ and
+$z^{(j)}$ in $X$, shifted so that
+\[
+ z^{(j)}_{[-j,j]}=c x^{(j)}_{[-j,j]}.
+\]
+Compactness of $X\times X$ gives a convergent subsequence with limit $(x,z)$.
+For every fixed coordinate the displayed equality eventually applies, so
+$z=cx$.  Thus $z\in X\cap cX$, proving the contrapositive.
+\end{proof}
+
+\begin{proposition}[exact prescribed-window criterion]\label{prop:window}
+Assume $s_G(X)<\infty$, and put $Y=\Delta_G(X)$.  For $m,n\geq0$, there is a
+sliding-block inverse $Y\to X$ whose output at $0$ uses exactly the available
+coordinates in $[-m,n]$ if and only if
+\[
+ m+n+2\geq s_G(X).
+\]
+Here ``uses'' permits the local rule to ignore some coordinates of the
+specified window.
+\end{proposition}
+
+\begin{proof}
+Let $\ell=m+n+2$.  A derivative block
+$y_{[-m,n]}$ is obtained from the source block
+\[
+ u=x_{[-m,n+1]}\in\Lang_\ell(X).
+\]
+For two words $u,u'\in G^\ell$, equality of their consecutive derivatives is,
+by the finite version of \cref{lem:fibres}, equivalent to $u'=cu$ for a unique
+$c\in G$.
+
+Suppose first that $\ell\geq s_G(X)$.  Language separation at length
+$s_G(X)$ persists at every longer length: an overlap of longer words would
+restrict to an overlap of their length-$s_G(X)$ subwords.  Hence among the
+source blocks in $\Lang_\ell(X)$ producing a given derivative block, exactly
+one can occur.  Define the inverse local rule to return its coordinate in the
+position corresponding to source index $0$.  Every block in $\Lang(Y)$ has a
+source, so the rule is defined on the full relevant block language, and its
+coordinatewise application recovers every $x\in X$.
+
+Suppose instead that $\ell<s_G(X)$.  By minimality of the separating length,
+there are $c\neq e$ and $u,cu\in\Lang_\ell(X)$.  Shift two realizing points of
+$X$ so that these blocks occupy $[-m,n+1]$.  Their derivative blocks on
+$[-m,n]$ agree, whereas their source symbols at $0$ are $u_m$ and $cu_m$.
+Left multiplication acts freely on $G$, so those two symbols are distinct.
+No local rule on $[-m,n]$ can recover both points.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:finite-group-intro}]
+By \cref{lem:fibres}, injectivity on $X$ is equivalent to the absence of a
+pair $x,cx\in X$ with $c\neq e$, which is equivalent to
+$X\cap cX=\varnothing$ for every such $c$.  In that case
+\cref{lem:compact-separation} gives $s_G(X)<\infty$.  The continuous
+injective map $\Delta_G:X\to Y$ is a homeomorphism because $X$ is compact and
+$Y$ is Hausdorff; it commutes with the shift, so it is a conjugacy.
+\Cref{prop:window} proves the prescribed-window assertion.  Setting $m=n=r$
+and minimizing over $r\geq0$ gives \eqref{eq:radius-intro}, including the
+boundary cases $s_G(X)=1,2$, for which the minimum is $r=0$.
+\end{proof}
+
+\begin{remark}[binary specialization]\label{rem:binary}
+For $G=\Ftwo$, the unique nonidentity translation is bitwise complement
+$\comp(x)_i=1-x_i$, and $\Delta_G$ is exactly the XOR derivative.  Thus it is
+injective on $X$ precisely when $X\cap\comp(X)=\varnothing$.
+\end{remark}

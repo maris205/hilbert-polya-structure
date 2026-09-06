@@ -1,0 +1,129 @@
+\section{Full-shift source and the frozen symbolic object}
+\label{sec:source}
+
+\subsection{A semiring skeleton of full shifts}
+
+For a finite alphabet \(A_n\) of cardinality \(n\), write
+\[
+ F_n=A_n^{\mathbb Z}
+\]
+for the two-sided full shift, up to topological conjugacy.  We use two
+alphabet-level operations:
+\[
+ F_m\boxtimes F_n
+ :=F_{A_m\times A_n}\cong F_{mn},
+\]
+\[
+ F_m\boxplus F_n
+ :=F_{A_m\sqcup A_n}\cong F_{m+n}.
+\]
+The second is alphabet-sum followed by the full-shift functor; it is not a
+topological disjoint union of \(F_m\) and \(F_n\).  The only numerical
+invariant used to set the roof is the full-shift entropy
+\[
+ h(F_n)=\log n.
+\]
+Define the successor object
+\[
+ S(F_n)=F_n\boxplus F_1\cong F_{n+1}.
+\]
+The displayed family realizes the positive-integer semiring in one
+conjugacy-class representative per alphabet size.  We claim no stronger
+categorical universality.
+
+\begin{definition}[Successor--divisor graph]
+\label{def:graph}
+Let \(G_{\SD}=(V,E)\), where
+\[
+ V=\{2,3,\ldots\},
+\]
+and
+\[
+ n\to d
+ \quad\Longleftrightarrow\quad
+ d\ge2,\qquad d\mid n+1.
+\]
+Equivalently, an edge is the unique exposed factorization
+\[
+ S(F_n)\cong F_d\boxtimes F_q,
+ \qquad
+ q=\qedge:=\frac{n+1}{d}\in\N.
+\]
+\end{definition}
+
+The quotient label is available for auditing and pruning, but is not a prime
+predicate.  In particular, the full source grammar accepts every nonunit
+factor of \(n+1\).
+
+\subsection{Countable Markov shift and orbit convention}
+
+The one-sided phase space is
+\[
+ X_{\SD}^{+}
+ =
+ \{(n_0,n_1,\ldots)\in V^{\N}:
+   n_j\to n_{j+1}\text{ for every }j\}.
+\]
+A rooted period-\(r\) word is a closed path
+\[
+ n_0\to n_1\to\cdots\to n_{r-1}\to n_0.
+\]
+An orbit identifies cyclic rotations but not reflections.  It is primitive
+when the closed word is not a positive temporal power of a shorter word.
+These conventions separate three quantities that must not be conflated:
+rooted trace terms, primitive rotation classes, and temporal repetitions.
+
+\subsection{Roof, weighted adjacency, and determinant}
+
+\begin{definition}[Endpoint roof and adjacency]
+\label{def:operator}
+On an edge \(n\to d\), set
+\[
+ \tau(n,d)=h(F_n\boxtimes F_d)=\log n+\log d.
+\]
+On
+\[
+ \Hilb=\ell^2(V)
+\]
+with standard basis \((e_n)_{n\ge2}\), define the column-source operator
+\[
+ L_se_n
+ =
+ \sum_{\substack{d\ge2\\d\mid n+1}}
+ (nd)^{-s}e_d.
+\]
+\end{definition}
+
+Each source column is finite because \(n+1\) has finitely many divisors.
+For a closed orbit
+\[
+ \gamma=(n_0,\ldots,n_{\ell-1}),
+ \qquad n_\ell=n_0,
+\]
+define
+\[
+ N(\gamma)=\prod_{j=0}^{\ell-1}n_j.
+\]
+Every cyclic vertex occurs once as a source and once as a target, hence
+\begin{equation}
+\label{eq:cyclic-weight}
+\prod_{j=0}^{\ell-1}(n_jn_{j+1})^{-s}
+=N(\gamma)^{-2s}.
+\end{equation}
+The factor two is forced by the frozen roof; it is not removed after target
+comparison.
+
+Once trace class is proved, the whole determinant convention is
+\[
+ D_{\SD}(s,z)=\det(I-zL_s).
+\]
+There are no character blocks or hidden components in this paper: every
+trace and primitive factor belongs to this whole adjacency.
+
+\subsection{Source firewall}
+
+The construction uses only integer successor, divisor enumeration,
+multiplication/equality, alphabet cardinality, and full-shift entropy.  It
+uses no prime inventory, von Mangoldt weights, target zeros, or fitted
+parameter.  Target comparison begins only after
+\Cref{def:graph,def:operator} have been frozen.

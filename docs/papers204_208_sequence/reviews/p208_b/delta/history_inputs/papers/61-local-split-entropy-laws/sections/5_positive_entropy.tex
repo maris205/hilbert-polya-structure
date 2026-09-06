@@ -1,0 +1,136 @@
+\section{The positive-entropy law}
+\label{sec:positive}
+
+Assume throughout this section that $\lambda=\rho(A)>1$ and
+$r=\lambda^{-1}<1$.  Choose positive right and left Perron eigenvectors
+\[
+ Ax=\lambda x,\qquad y^TA=\lambda y^T,
+\]
+with no normalization imposed, and define the vertex weight
+\begin{equation}
+ \pi_v=\frac{x_vy_v}{y^Tx}.
+ \label{eq:pi}
+\end{equation}
+This quantity depends on the chosen presentation and vertex.
+All $O$-constants in this section may depend on the fixed pair $(A,v)$.
+
+\begin{lemma}[Derivative normalization]
+\label{lem:derivative}
+At the old entropy radius,
+\begin{equation}
+ F_v'(r)=\frac{\lambda}{\pi_v}
+ =-\frac{D'(r)}{C_v(r)}.
+ \label{eq:derivative}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The spectral projector at the simple Perron eigenvalue is
+$P=xy^T/(y^Tx)$.  The diagonal resolvent therefore has the local expansion
+\begin{equation}
+ [(I-zA)^{-1}]_{vv}
+ =\frac{\pi_v}{1-\lambda z}+H_v(z),
+ \label{eq:resolvent}
+\end{equation}
+where $H_v$ is analytic near $r$.  Taking the reciprocal in
+\cref{eq:resolvent} and using \cref{eq:renewal} gives
+\[
+ 1-F_v(z)=\frac{1-\lambda z}{\pi_v}
+ +O\bigl((1-\lambda z)^2\bigr).
+\]
+Differentiation at $r$ yields the first equality in
+\cref{eq:derivative}.  Differentiating
+\cref{eq:F-determinant} at $r$, where $D(r)=0$, yields the second.
+\end{proof}
+
+\begin{theorem}[Normalized positive-entropy excess]
+\label{thm:positive}
+For the local split extensions of \cref{thm:construction}, let
+\[
+ \Gap_N=h(X_{G_N})-h(X_G).
+\]
+As $N\to\infty$,
+\begin{equation}
+ \Gap_N=\pi_v r^N\{1+O(Nr^N)\}.
+ \label{eq:positive-law}
+\end{equation}
+Equivalently,
+\begin{equation}
+ \lim_{N\to\infty}
+ \frac{\Gap_N}{\pi_v\lambda^{-N}}=1.
+ \label{eq:ratio-limit}
+\end{equation}
+In particular, for every $\varepsilon>0$, all sufficiently large $N$ give a
+nonconjugate split mixing extension with
+$0<\Gap_N<\varepsilon$.
+\end{theorem}
+
+\begin{proof}
+We first show $r_N\to r$.  Fix $s<r$.  Since $F_v(s)<1$ and $s^N\to0$, for
+all sufficiently large $N$ one has $F_v(s)+s^N<1$.  The unique root in
+\cref{prop:radius} then satisfies $s<r_N<r$.  Letting $s\uparrow r$ proves
+the convergence.
+
+Put $\delta_N=r-r_N$.  From
+$F_v(r)=1$ and \cref{eq:radius}, the mean-value theorem gives
+\begin{equation}
+ \delta_NF_v'(\xi_N)=r_N^N
+ \label{eq:mvt}
+\end{equation}
+for some $\xi_N\in(r_N,r)$.  By \cref{lem:derivative} and $r_N\to r$,
+$F_v'(\xi_N)$ is bounded away from zero.  Hence
+$\delta_N=O(r^N)$ and
+\[
+ N\delta_N=O(Nr^N)=o(1).
+\]
+It follows that
+\begin{align}
+ r_N^N
+ &=r^N\left(1-\frac{\delta_N}{r}\right)^N
+ =r^N\{1+O(Nr^N)\},
+ \label{eq:power-expand}\\
+ \frac1{F_v'(\xi_N)}
+ &=\frac1{F_v'(r)}\{1+O(r^N)\}.
+ \label{eq:derivative-expand}
+\end{align}
+Combining \cref{eq:mvt,eq:power-expand,eq:derivative-expand},
+\[
+ r-r_N=\frac{r^N}{F_v'(r)}\{1+O(Nr^N)\}.
+\]
+Finally,
+\begin{align*}
+ \Gap_N
+ &=\log\frac r{r_N}
+ =-\log\left(1-\frac{\delta_N}{r}\right)\\
+ &=\frac{r^{N-1}}{F_v'(r)}\{1+O(Nr^N)\}\\
+ &=\pi_vr^N\{1+O(Nr^N)\},
+\end{align*}
+where the last equality is \cref{eq:derivative} and $r\lambda=1$.
+This proves \cref{eq:positive-law,eq:ratio-limit}.  Strict positivity also
+follows from $\rho(A_N)>\rho(A)$, and convergence to zero gives the final
+claim.
+\end{proof}
+
+\begin{example}[One-vertex exponent check]
+\label{ex:one-vertex}
+If $A=[q]$ with $q\ge2$, then $F(z)=qz$ and
+\[
+ qr_N+r_N^N=1
+ \quad\Longleftrightarrow\quad
+ \lambda_N=q+\lambda_N^{-(N-1)}.
+\]
+Here $\pi_v=1$, so \cref{eq:positive-law} reads
+\[
+ \log\lambda_N-\log q\sim q^{-N}.
+\]
+The Perron-root equation contains exponent $N-1$, but division by the old
+radius in the logarithmic entropy gap restores the exponent $N$.  This
+simple case detects a common normalization error.
+\end{example}
+
+\begin{remark}
+For a nonsymmetric matrix, $\pi_v$ cannot be recovered from an arbitrarily
+normalized right eigenvector alone.  The invariant expression
+$x_vy_v/(y^Tx)$ is exactly the diagonal entry of the Perron spectral
+projector.
+\end{remark}

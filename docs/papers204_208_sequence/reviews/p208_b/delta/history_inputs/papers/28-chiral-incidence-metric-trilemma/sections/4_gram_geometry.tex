@@ -1,0 +1,105 @@
+\section{Native mixed-Gram geometry}
+\label{sec:gram}
+
+The source formula for a primitive incidence idempotent is
+\[
+ q_n(a,b)=\one_{a\mid n}\,
+ \mu(b/n)\one_{n\mid b}.
+\]
+Write $q_n=u_nv_n^{\mathsf T}$ and define
+\[
+ G_{pq}=\Tr(q_pq_q^{\sharpop}),\qquad
+ C_\eta=\sum_{k\ge1}\frac{\mu(k)^2}{k^{2\eta}}
+ =\frac{\zeta(2\eta)}{\zeta(4\eta)}.
+\]
+
+\begin{theorem}[Divisibility Gram coefficients]
+\label{thm:gram}
+For primes $p,q$,
+\[
+ G_{pp}=C_\eta(1+p^{-2\eta}),
+\]
+and, if $p\ne q$,
+\[
+ G_{pq}=
+ C_\eta\,
+ \frac{(pq)^{-2\eta}}
+ {(1+p^{-2\eta})(1+q^{-2\eta})}>0.
+\]
+\end{theorem}
+
+\begin{proof}
+The weighted rank-one contraction factors as
+\[
+ G_{pq}=
+ \left(\sum_a u_p(a)u_q(a)a^{2\eta}\right)
+ \left(\sum_b v_p(b)v_q(b)b^{-2\eta}\right).
+\]
+For $p=q$ the two factors are $1+p^{2\eta}$ and
+$p^{-2\eta}C_\eta$.  For $p\ne q$, the primal overlap is the shared
+bottom coordinate $1$.  A nonzero dual term has $b=pqk$, with $k$
+squarefree and coprime to $pq$; the two M\"obius signs multiply to
+$+1$.  Removing the $p,q$ Euler factors from $C_\eta$ gives the
+formula.  Details are recorded in \cref{app:gram}.
+\end{proof}
+
+\begin{proposition}[Finite two/three-atom phase]
+\label{prop:b2}
+For a finite atom set $F$ and $s=1/2+it$,
+\[
+ \Tr\cB_s^2
+ =2\sum_{p\in F}\frac{G_{pp}}p+
+ 4\sum_{\substack{p<q\\p,q\in F}}
+ \frac{G_{pq}}{\sqrt{pq}}
+ \cos\left(t\log\frac qp\right).
+\]
+\end{proposition}
+
+\begin{proof}
+Both diagonal blocks of $\cB_s^2$ have the same trace.  Expanding one
+of them gives
+\[
+ \Tr\cB_s^2
+ =2\sum_{p,q\in F}
+ p^{-1/2-it}q^{-1/2+it}G_{pq}.
+\]
+Pair the ordered terms $(p,q)$ and $(q,p)$.
+\end{proof}
+
+At $\eta=2$,
+\[
+ C_2=\frac{105}{\pi^4},\quad
+ G_{22}=\frac{1785}{16\pi^4},\quad
+ G_{33}=\frac{2870}{27\pi^4},\quad
+ G_{23}=\frac{105}{1394\pi^4}.
+\]
+The exact two-atom cutoff is therefore
+\[
+ G_{22}+\frac{2G_{33}}3+
+ \frac{4G_{23}}{\sqrt6}
+ \cos\left(t\log\frac32\right).
+\]
+For atoms $2,3,5$, add the three pair frequencies, with
+\[
+ G_{55}=\frac{105\cdot626}{625\pi^4},\quad
+ G_{25}=\frac{105}{10642\pi^4},\quad
+ G_{35}=\frac{105}{51332\pi^4}.
+\]
+
+\subsection{The second-trace firewall}
+
+\begin{proposition}[No countable second trace]
+\label{prop:no-b2}
+On the critical line, $\cB_s^2$ is not trace class.  Its diagonal
+cutoff contribution satisfies
+\[
+ \sum_p\frac{2G_{pp}}p
+ \ge2C_\eta\sum_p\frac1p=\infty.
+\]
+\end{proposition}
+
+Thus \cref{prop:b2} is an exact finite-cutoff diagnostic, not a
+conditionally interpreted infinite trace.  The mixed terms decay
+rapidly for $\eta>1$, but their summability does not repair the missing
+full trace.  The correct countable object begins with third
+regularization.

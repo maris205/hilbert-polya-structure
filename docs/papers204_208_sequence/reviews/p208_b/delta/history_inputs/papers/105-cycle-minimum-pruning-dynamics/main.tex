@@ -1,0 +1,410 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Sn}{\mathfrak S_n}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\cyc}{\operatorname{cyc}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\card}[1]{\lvert #1\rvert}
+\newcommand{\E}{\mathbb E}
+\newcommand{\N}{\mathbb N}
+
+\title[Cycle-minimum pruning]{Cycle-Minimum Pruning on Permutations:\
+Exact Transient Layers and One-Step Fibers}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+\subjclass[2020]{37P35, 05A05, 05A15}
+\keywords{finite dynamical system, permutation cycle, longest cycle,
+restricted permutation, absorption time, functional graph}
+
+\begin{document}
+
+\begin{abstract}
+In every nontrivial cycle of a permutation of $[n]$, simultaneously delete
+its least label from the cyclic word and make that label fixed.  This gives a
+self-map $P_n$ of $\mathfrak S_n$ without standardization.  After $t$ steps,
+the $t$ least labels of each original cycle are fixed, stopping when one
+label remains.  Hence the absorption time is $L(\pi)-1$, where $L(\pi)$ is
+the longest cycle length.  The identity is the unique recurrent state and
+the Artin--Mazur zeta function is $(1-z)^{-1}$.  If $A_{n,k}$ counts permutations
+with all cycle lengths at most $k$, then the exact depth-$t$ layer has size
+\[
+ A_{n,t+1}-A_{n,t},\qquad
+ \sum_{n\geq0}A_{n,k}\frac{z^n}{n!}
+ =\exp\!\left(\sum_{j=1}^k\frac{z^j}{j}\right).
+\]
+A threshold-matching formula determines every one-step fiber and the
+Garden-of-Eden states.  Exhaustive checks through $\mathfrak S_9$ and
+independent recurrences give $17{,}219{,}241$ exact assertions.  Classical
+cycle enumeration and longest-cycle laws are owner-subtracted; release is on
+hold.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Deleting an entry from a permutation cycle is elementary, but applying a
+label-sensitive deletion simultaneously to every cycle produces a rigid
+finite dynamics.  Let $[n]=\{1,\ldots,n\}$.  At each time step, we remove the
+minimum from every cycle of length at least two, reconnect the predecessor
+to the successor, and retain the removed label as a one-cycle.  Labels are
+never compressed: the phase space remains the same symmetric group $\Sn$.
+
+Two complementary structures govern this map.  Orbitwise, each original
+cycle loses its labels in increasing order while retaining its cyclic
+orientation.  Enumeratively, the absorption depth is the longest cycle
+length minus one, so restricted-cycle exponential generating functions give
+every depth layer.  A third structure appears when the map is reversed:
+nontrivial output cycles must be matched to smaller fixed points, while the
+unmatched fixed points encode an involution.
+
+The finite-dynamics package proved here has four parts.
+\begin{enumerate}
+\item We give the exact $t$-step state of every permutation and the induced
+  evolution of every cycle type.
+\item We classify recurrence, all iterate-fixed counts, least periods, and
+  the formal Artin--Mazur zeta function.
+\item We determine every transient layer by a restricted-cycle generating
+  function and a second, cycle-containing-$1$ recurrence, including sharp
+  deepest layers.
+\item We count every one-step fiber and characterize the states with no
+  ancestor.
+\end{enumerate}
+
+The depth statistic itself is classical.  Labelled permutation cycles and
+their exponential formula are standard material
+\cite{FlajoletSedgewick2009,Stanley2011}, and Shepp and Lloyd own the
+classical distribution theory of ordered cycle lengths, including the
+longest cycle \cite{SheppLloyd1966}.  Random deletion-consistent permutation
+and partition structures also have an established literature
+\cite{Pitman2006}.  None of those results is re-claimed below.  The residual
+object is the deterministic simultaneous surgery just described, its exact
+orbit normal form, and especially its one-step fiber geometry.  A bounded
+search through 29 August 2026 did not locate this same combined package;
+search absence is not a novelty or priority certification.
+
+\section{The exact map and its iterates}\label{sec:map}
+
+Every nontrivial cycle has a unique minimum-first display
+\[
+ C=(m,c_1,\ldots,c_{\ell-1}),\qquad m=\min C.
+\]
+
+\begin{definition}[cycle-minimum pruning]\label{def:map}
+For a cycle $C$ as above, set
+\[
+ P(C)=(m)(c_1,\ldots,c_{\ell-1}),
+\]
+where a one-letter parenthesis is a fixed point.  A fixed cycle is left
+unchanged.  Apply this rule to all disjoint cycles of $\pi\in\Sn$ in
+parallel; the resulting permutation is $P_n(\pi)$.
+\end{definition}
+
+Equivalently, if $p$ is the predecessor of $m$ and $s$ its successor in
+$C$, the surgery changes the arrows $p\mapsto m\mapsto s$ to
+$p\mapsto s$ and $m\mapsto m$.  Because distinct cycles have disjoint arrow
+sets, the parallel update is unambiguous.  In particular, $P_n$ is a
+self-map of $\Sn$, not a map to $\mathfrak S_{n-r}$ followed by
+standardization.
+
+For a cycle $C$, write its labels increasingly as
+$s_1<\cdots<s_\ell$.  If $0\leq t\leq\ell-1$, let $C[t]$ be the cycle on
+$C\setminus\{s_1,\ldots,s_t\}$ with cyclic order inherited from $C$.
+When one label remains, $C[t]$ denotes its one-cycle.
+
+\begin{theorem}[full iterate normal form]\label{thm:iterate}
+Let $\pi\in\Sn$ have disjoint cycles $C_1,\ldots,C_q$, with
+$\ell_i=\card{C_i}$.  For every $t\geq0$, the contribution of $C_i$ to
+$P_n^t(\pi)$ consists of
+\[
+ (s_{i,1})\cdots(s_{i,r_i})\,C_i[r_i],
+ \qquad r_i=\min\{t,\ell_i-1\}.
+\]
+Consequently a cycle of initial length $\ell$ contributes
+$\min\{t,\ell-1\}$ new one-cycles and one cycle of length
+$\max\{\ell-t,1\}$ at time $t$.
+\end{theorem}
+
+\begin{proof}
+At time zero the assertion is tautological.  Suppose the displayed form
+holds at time $t<\ell_i-1$.  Its surviving cycle has label set
+$C_i\setminus\{s_{i,1},\ldots,s_{i,t}\}$, whose minimum is
+$s_{i,t+1}$.  Definition~\ref{def:map} fixes that label and deletes it from
+the inherited cyclic word.  This gives $C_i[t+1]$.  Once one label remains,
+all labels from the original cycle are fixed and further pruning does
+nothing.  The cycles evolve independently, completing the induction.
+\end{proof}
+
+Let $L(\pi)$ be the largest cycle length, and define the absorption time
+\[
+ \tau_n(\pi)=\min\{t\geq0:P_n^t(\pi)=\id_{[n]}\}.
+\]
+
+\begin{corollary}[exact absorption time]\label{cor:depth}
+For every $\pi\in\Sn$,
+\[
+ \boxed{\tau_n(\pi)=L(\pi)-1.}
+\]
+The global maximum is $n-1$, attained precisely by the $(n-1)!$
+$n$-cycles.
+\end{corollary}
+
+\begin{proof}
+An original $\ell$-cycle becomes pointwise fixed after exactly $\ell-1$
+steps.  All cycles are processed simultaneously, so the slowest cycle gives
+the maximum.  Depth $n-1$ is equivalent to having an $n$-cycle, of which
+there are $(n-1)!$.
+\end{proof}
+
+\section{Recurrence, periodic blindness, and recovery}\label{sec:periodic}
+
+At every nonidentity state, $P_n$ creates at least one new fixed point and
+never destroys a fixed point.  This Lyapunov statistic closes the periodic
+ledger.
+
+\begin{theorem}[complete recurrent and zeta data]\label{thm:zeta}
+For every $n\geq1$:
+\begin{enumerate}
+\item the identity is the unique recurrent state and the unique fixed point
+  of $P_n^r$ for every $r\geq1$;
+\item the number $C_n(r)$ of cycles of least temporal period $r$ is
+  $C_n(1)=1$ and $C_n(r)=0$ for $r>1$;
+\item as an identity in $\mathbb Q[[z]]$,
+  \[
+   \zeta_{P_n}(z)
+   =\exp\!\left(\sum_{r\geq1}
+      \frac{\card{\Fix(P_n^r)}}r z^r\right)
+   =\frac1{1-z}.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The iterate normal form shows that every nonidentity state reaches the
+identity and cannot return to itself.  Thus every iterate fixes only the
+identity.  M\"obius inversion of
+$\card{\Fix(P_n^r)}=\sum_{d\mid r}dC_n(d)$ gives the stated cycle census.
+Finally,
+$\exp(\sum_{r\geq1}z^r/r)=\exp(-\log(1-z))=(1-z)^{-1}$.
+The definition of this periodic-point zeta ledger is due to Artin and Mazur
+\cite{ArtinMazur1965}.
+\end{proof}
+
+The periodic data are identical for all $n$ and therefore cannot recover
+the phase parameter.  The transient profile does recover it: its greatest
+occupied depth is $n-1$.  This differs from a digit-erasure absorber, where
+time is a digit sum on a changing ring family.  Here the update preserves
+the labelled ground set, processes several cycles in parallel, and has the
+fiber structure proved in \cref{sec:fibers}.
+
+\section{Every transient layer}\label{sec:layers}
+
+For $n,k\geq0$, let
+\[
+ A_{n,k}=\#\{\pi\in\Sn:L(\pi)\leq k\},
+\]
+with $A_{0,k}=1$ and $A_{n,0}=0$ for $n\geq1$.  Let
+$D_{n,t}=\#\{\pi\in\Sn:\tau_n(\pi)=t\}$.
+
+\begin{theorem}[exact depth profile]\label{thm:profile}
+For $0\leq t\leq n-1$,
+\begin{equation}\label{eq:layers}
+ \boxed{D_{n,t}=A_{n,t+1}-A_{n,t}.}
+\end{equation}
+The cumulative counts have the formal exponential generating function
+\begin{equation}\label{eq:egf}
+ \boxed{
+ \sum_{n\geq0}A_{n,k}\frac{z^n}{n!}
+ =\exp\!\left(\sum_{j=1}^k\frac{z^j}{j}\right).}
+\end{equation}
+Independently, they satisfy the exact recurrence
+\begin{equation}\label{eq:recurrence}
+ A_{n,k}=\sum_{j=1}^{\min\{k,n\}}
+ \frac{(n-1)!}{(n-j)!}\,A_{n-j,k}
+ \qquad(n\geq1).
+\end{equation}
+In particular,
+\begin{align}
+ D_{n,0}&=1,\label{eq:first-layer}\\
+ D_{n,n-1}&=(n-1)!,\label{eq:deepest}\\
+ D_{n,n-2}&=n(n-2)!\qquad(n\geq3).\label{eq:penultimate}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Corollary~\ref{cor:depth} identifies depth at most $t$ with longest cycle at
+most $t+1$.  Subtracting adjacent cumulative counts proves
+\eqref{eq:layers}.
+
+For \eqref{eq:egf}, a labelled cycle of length $j$ contributes $z^j/j$.
+Taking an unordered set of cycles with allowed lengths
+$1,\ldots,k$ gives the exponential.  This is the classical labelled
+exponential formula for permutations, used here as an enumerative input
+\cite{FlajoletSedgewick2009}.
+
+For the second route, expose the cycle containing label $1$.  If it has
+length $j$, choose its other $j-1$ labels and arrange them around $1$ in
+$(j-1)!$ ways, giving
+\[
+ \binom{n-1}{j-1}(j-1)!=\frac{(n-1)!}{(n-j)!}.
+\]
+The remaining labels carry any permutation counted by $A_{n-j,k}$, which
+proves \eqref{eq:recurrence}.
+
+Depth zero contains only the identity.  The deepest formula was proved in
+\cref{cor:depth}.  At depth $n-2$, one chooses the singleton outside an
+$(n-1)$-cycle and then chooses that cycle, giving
+$n(n-2)!$.
+\end{proof}
+
+The first exact profiles are shown in \cref{tab:profiles}.  These are raw
+state counts, not normalized probabilities.
+\begin{table}[ht]
+\centering
+\caption{Depth histograms $(D_{n,0},\ldots,D_{n,n-1})$ from the closed
+formula and exhaustive functional graphs.}
+\label{tab:profiles}
+\small
+\begin{tabular}{rl}
+\toprule
+$n$ & depth histogram \\
+\midrule
+4 & $(1,9,8,6)$ \\
+5 & $(1,25,40,30,24)$ \\
+6 & $(1,75,200,180,144,120)$ \\
+7 & $(1,231,980,1260,1008,840,720)$ \\
+8 & $(1,763,5152,8820,8064,6720,5760,5040)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For a uniform random permutation, $\tau_n=L-1$ transfers any theorem about
+the longest cycle to the absorption time by a deterministic shift.  In
+particular, its scaling limits and moment asymptotics are consequences of
+classical longest-cycle theory \cite{SheppLloyd1966}; they are not residual
+claims of this paper.
+
+\section{Exact one-step fibers}\label{sec:fibers}
+
+The forward depth depends only on cycle lengths, but the reverse graph sees
+the labels.  Fix $\sigma\in\Sn$.  Let $F(\sigma)$ be its fixed-point set and
+put $f=\card{F(\sigma)}$.  Order the nontrivial cycles
+$B_1,\ldots,B_r$ so that
+\[
+ b_1<\cdots<b_r,
+ \qquad b_i=\min B_i.
+\]
+Write $\ell_i=\card{B_i}$ and
+\[
+ e_i=\#\{x\in F(\sigma):x<b_i\}.
+\]
+Finally, let
+\begin{equation}\label{eq:involution}
+ I_s=\sum_{q=0}^{\lfloor s/2\rfloor}
+ \frac{s!}{2^q q!(s-2q)!}
+\end{equation}
+be the number of involutions on an $s$-element set.
+
+\begin{theorem}[one-step fiber formula]\label{thm:fiber}
+If $e_i<i$ for some $i$, then $P_n^{-1}(\sigma)$ is empty.  Otherwise
+\begin{equation}\label{eq:fiber}
+ \boxed{
+ \card{P_n^{-1}(\sigma)}
+ =I_{f-r}\prod_{i=1}^r \ell_i(e_i-i+1).}
+\end{equation}
+Thus $\sigma$ is a Garden-of-Eden state exactly when
+$e_i<i$ for at least one $i$.
+\end{theorem}
+
+\begin{proof}
+Consider a source cycle of length at least three.  Pruning separates its
+minimum $m$ as a fixed point and leaves one nontrivial output cycle $B$.
+Necessarily $m<\min B$.  Distinct source cycles supply distinct fixed
+points, so every nontrivial output cycle must be matched injectively to an
+eligible point of $F(\sigma)$.
+
+Process $B_1,\ldots,B_r$ in increasing order of their minima.  Cycle $B_i$
+has $e_i$ eligible fixed points.  The $i-1$ earlier choices are all among
+those $e_i$ points, leaving $e_i-i+1$ choices.  Hence the number of eligible
+matchings is $\prod_i(e_i-i+1)$, and such a matching exists exactly when
+$e_i\geq i$ for every $i$.
+
+After matching a point $m$ to $B_i$, insert $m$ into one of the $\ell_i$
+directed edges of that cycle.  This gives all $\ell_i$ source cycles whose
+pruning is $(m)B_i$, with no duplication.  The remaining $f-r$ fixed points
+are either source fixed points or are paired into source transpositions.
+Choosing an arbitrary involution on those labels records exactly that
+singleton/pair decomposition, giving the factor $I_{f-r}$.  These choices
+are independent, and every source cycle has been recovered uniquely, which
+proves \eqref{eq:fiber}.
+\end{proof}
+
+\begin{corollary}[the identity fiber]\label{cor:identity-fiber}
+The identity has exactly $I_n$ one-step ancestors.  Equivalently,
+$P_n(\pi)=\id$ precisely when every cycle of $\pi$ has length at most two.
+\end{corollary}
+
+\begin{proof}
+In \cref{thm:fiber}, the identity has $f=n$ and $r=0$.  The equivalent
+description also follows directly from the fact that one pruning step
+shortens every nontrivial cycle by one.
+\end{proof}
+
+\section{Exact controls and limitations}\label{sec:controls}
+
+The deterministic program
+\texttt{code/verify\_cycle\_minimum\_pruning.py} uses two separately coded
+representations of time evolution.  The literal route edits predecessor and
+successor arrows at the minimum of each cycle.  The closed route deletes the
+successive smallest labels from every original cyclic word.  Exhaustive
+enumeration of $\mathfrak S_1$ through $\mathfrak S_9$ covers $409{,}113$
+states and performs $1{,}981{,}326$ nontrivial trajectory-step evaluations.
+The latter count includes repeated visits to the same functional-graph edge
+from different starting states; it is not a count of distinct edges.  The
+program checks every full orbit, cycle-type evolution, absorption depth,
+iterate-fixed predicate, and depth histogram.
+
+The same enumeration constructs every literal one-step indegree and compares
+all $409{,}113$ values with \eqref{eq:fiber}.  A separate implementation of
+\eqref{eq:recurrence} checks all depth layers through $n=50$, including the
+sharp endpoint formulas, while M\"obius and formal-zeta coefficients are
+checked through period $60$.  The stored run contains $17{,}219{,}241$ exact
+assertions.  It uses only integers and rational numbers; there is no random
+seed, floating-point theorem check, symbolic simplifier, or optimization
+solver.
+
+The controls test conventions and finite instances; the proofs establish
+the infinite family.  The manuscript does not claim a new theorem about the
+classical longest-cycle distribution, random permutation asymptotics, or
+general deletion-consistent structures.  It also does not classify arbitrary
+label-pruning rules or all multi-step fibers.  Public posting, submission,
+venue selection, specialist contact, and absolute novelty language remain
+\textbf{HOLD}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

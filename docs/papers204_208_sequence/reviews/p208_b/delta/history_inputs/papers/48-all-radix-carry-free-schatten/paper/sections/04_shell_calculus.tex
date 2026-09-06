@@ -1,0 +1,143 @@
+\section{Exact radix-shell calculus}
+\label{sec:shells}
+
+Let
+\[
+  I_k=[b^k,b^{k+1})\cap\N,\qquad k\ge0,
+\]
+and let \(P_k\) be the coordinate projection from \(\ell^2(\N)\) onto
+\(\ell^2(I_k)\).  We write \(A_{k\ell}\) for the unweighted carry-free
+matrix from \(I_\ell\) to \(I_k\), and
+\[
+  B_{k\ell}=P_kB_{b,\sigma}P_\ell.
+\]
+The notation \(X\svsim Y\) below means that \(X\) and \(Y\) have the same
+nonzero singular values, with multiplicity; zero rows and columns may have
+been deleted.
+
+\begin{proposition}[Exact unweighted shell blocks]
+\label{prop:shell-blocks}
+For \(k>\ell\),
+\begin{equation}
+  A_{k\ell}
+  \svsim
+  \mathbf 1_{(b-1)b^{k-\ell-1}}
+  \otimes C_{b-1}\otimes C_b^{\otimes\ell},
+  \label{eq:cross-shell-factor}
+\end{equation}
+and hence
+\begin{equation}
+  \|A_{k\ell}\|_{S_q}
+  =
+  ((b-1)b^{k-\ell-1})^{1/2}
+  \kappa_{b-1,q}\kappa_{b,q}^{\ell}.
+  \label{eq:cross-shell-norm}
+\end{equation}
+For \(k=\ell\),
+\begin{equation}
+  A_{kk}\svsim C_{b-2}\otimes C_b^{\otimes k},
+  \qquad
+  \|A_{kk}\|_{S_q}
+  =\kappa_{b-2,q}\kappa_{b,q}^{k}.
+  \label{eq:same-shell-factor}
+\end{equation}
+The case \(k<\ell\) follows by transposition.
+\end{proposition}
+
+\begin{proof}
+Take \(m\in I_k\) and \(n\in I_\ell\), with \(k>\ell\).  At each position
+\(0,\ldots,\ell-1\), both digits range from \(0\) to \(b-1\), and the
+compatibility matrix is \(C_b\).  At position \(\ell\), the leading digit
+of \(n\) ranges from \(1\) to \(b-1\).  The row indexed by the digit
+\(m_\ell=b-1\) is zero; after deleting it and subtracting one from the
+column digit of \(n\), the compatibility matrix is \(C_{b-1}\).
+
+All higher digits of \(n\) vanish.  The top digit \(m_k\) has \(b-1\)
+choices, and the intervening \(k-\ell-1\) digits of \(m\) have \(b\)
+choices each.  They repeat the same lower-digit block, producing the
+column vector of ones in \cref{eq:cross-shell-factor}.  A permutation of
+digit coordinates now gives the displayed tensor product.
+
+When \(k=\ell\), both leading digits lie in
+\(\{1,\ldots,b-1\}\).  Subtracting one from each turns the condition
+\(m_k+n_k<b\) into a \(C_{b-2}\) block; the lower \(k\) digit positions
+again give \(C_b^{\otimes k}\).  Tensor products multiply singular values,
+and the lone nonzero singular value of a length-\(r\) ones vector is
+\(\sqrt r\).  This proves all norm identities.
+\end{proof}
+
+\begin{remark}[The binary zero block]
+\label{rem:binary-zero-block}
+For \(b=2\), \cref{eq:same-shell-factor} contains \(C_0\), so every
+\(A_{kk}\) is exactly zero.  On the adjacent shells, however,
+\(\kappa_{1,q}=1\), and \cref{eq:cross-shell-norm} gives
+\begin{equation}
+  \|A_{2j+1,2j}\|_{S_q}=\kappa_{2,q}^{2j}.
+  \label{eq:binary-adjacent-exact}
+\end{equation}
+Thus the binary endpoint is not absent; it lives off the shell diagonal.
+\end{remark}
+
+\subsection{Uniform transfer to weighted blocks}
+
+Let \(D_k\) be diagonal on \(\ell^2(I_k)\), with
+\((D_k)_{m,m}=m^{-\sigma/2}\).  For real \(\sigma>0\),
+\[
+  B_{k\ell}=D_kA_{k\ell}D_\ell,
+  \qquad
+  b^{-(k+1)\sigma/2}I
+  \le D_k\le
+  b^{-k\sigma/2}I.
+\]
+
+\begin{lemma}[Uniform weighted comparison]
+\label{lem:weighted-comparison}
+For \(\sigma>0\), every \(k,\ell\ge0\), and \(1\le q<\infty\),
+\begin{equation}
+  b^{-\sigma}b^{-(k+\ell)\sigma/2}
+  \|A_{k\ell}\|_{S_q}
+  \le
+  \|B_{k\ell}\|_{S_q}
+  \le
+  b^{-(k+\ell)\sigma/2}
+  \|A_{k\ell}\|_{S_q}.
+  \label{eq:weighted-comparison}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The upper bound is the ideal inequality
+\(\|RXT\|_{S_q}\le\|R\|\|X\|_{S_q}\|T\|\).  For the lower bound, write
+\(A_{k\ell}=D_k^{-1}B_{k\ell}D_\ell^{-1}\) and use
+\(\|D_k^{-1}\|\le b^{(k+1)\sigma/2}\) and the analogous estimate for
+\(D_\ell^{-1}\).  The resulting constants are independent of the shell
+indices, which is what preserves equality endpoints.
+\end{proof}
+
+Combining \cref{eq:cross-shell-norm,eq:weighted-comparison} and putting
+\(k=\ell+h\), \(h\ge1\), yields
+\begin{equation}
+  \|B_{\ell+h,\ell}\|_{S_q}
+  \le
+  c_{b,q}\,
+  b^{h(1-\sigma)/2}
+  (\kappa_{b,q}b^{-\sigma})^\ell,
+  \qquad
+  c_{b,q}=\sqrt{\frac{b-1}{b}}\,\kappa_{b-1,q}.
+  \label{eq:two-ratios}
+\end{equation}
+The two ratios in \cref{eq:two-ratios} are the two walls of the theorem.
+The exact critical curves obtained from \cref{eq:kappa-explicit} are shown
+in \cref{fig:critical-surfaces}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{../figures/generated/critical_surfaces.pdf}
+  \caption{The exact critical abscissa
+  \(\sigma_c(q)=\max\{1,\log_b\kappa_{b,q}\}\), evaluated from
+  \cref{eq:kappa-explicit} for four radices.  The points at \(q=1\) are the
+  trace-class thresholds.  Once the digit curve falls below \(1\), the
+  universal column wall is active and produces the plateau.  Line styles
+  and markers duplicate the color encoding.}
+  \label{fig:critical-surfaces}
+\end{figure}

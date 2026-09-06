@@ -1,0 +1,30 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=8mm and 11mm,
+  chain/.style={rounded corners,draw=charcoal,thick,fill=softgray,
+    minimum width=2.1cm,minimum height=9mm,align=center,font=\small},
+  input/.style={rounded corners,draw=formalblue,thick,fill=white,
+    align=center,font=\scriptsize,inner sep=4pt},
+  arr/.style={->,very thick,formalblue}
+]
+\node[chain] (c2) {$C_2$\\$+1$ even copy};
+\node[chain,right=of c2] (c1) {$C_1$\\$-2$ odd copies};
+\node[chain,right=of c1] (c0) {$C_0$\\$+1$ even copy};
+\draw[arr] (c2) -- node[above,font=\scriptsize] {$\partial_2$} (c1);
+\draw[arr] (c1) -- node[above,font=\scriptsize] {$\partial_1$} (c0);
+
+\node[input,above=7mm of c1] (rels)
+  {affine, balanced, mutated, arbitrary relator};
+\draw[dashed,very thick,warningamber] (rels.south) --
+  node[right,font=\scriptsize,text=warningamber] {word unread} (c1.north);
+
+\node[rounded corners,draw=deepgreen,thick,fill=white,
+  below=9mm of c1,align=center,font=\small,inner sep=5pt] (formula)
+  {$\Str(\widetilde A^n)=(1-2+1)\tau(A^n)=0$ for all $n\ge1$\\
+   $\SDet(I-z\widetilde A)=1$};
+\node[rounded corners,draw=stopred,thick,fill=white,
+  right=10mm of formula,align=center,font=\small\bfseries,
+  text=stopred,inner sep=5pt] (stop)
+  {exact cancellation\\zero selectivity};
+\draw[->,very thick,stopred] (formula) -- (stop);
+\end{tikzpicture}

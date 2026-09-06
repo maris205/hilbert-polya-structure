@@ -1,0 +1,42 @@
+\section{Controls and a finite check}\label{sec:controls}
+
+The stored script \texttt{code/check\_completion.py} implements the two balanced closures and checks a nontrivial NCA example.  Take
+$A=\ZZ/3\ZZ$, the full horizontal trace, $R=0$, and
+\[
+ F^+(c)=\set{c,c+1},
+ \qquad
+ F^-(c)=\set{c,c-1}.
+\]
+Thus a vertical edge increments each cell independently by $0$ or $1$ modulo $3$; both row degrees are $2^m$.  For the valid $4\times3$ rectangle
+\[
+ \begin{array}{c|cccc}
+ t=2&1&2&0&2\\
+ t=1&1&1&0&1\\
+ t=0&0&1&2&0
+ \end{array}
+\]
+the program closes horizontally with $m=4$, searches the $3^4=81$ row states, and returns an explicit vertical cycle.  It verifies every wraparound transition and the embedded rectangle.  The frozen output is reproduced in the package and summarized in \cref{tab:controls}.
+
+\begin{table}[ht]
+\centering
+\caption{Analytic and executable controls.  A PASS is a falsification check, not a substitute for proof.}\label{tab:controls}
+\begin{tabularx}{\textwidth}{@{}lXl@{}}
+\toprule
+Control & Expected invariant & Status\\
+\midrule
+balanced four-cycle & path $0,1,2$ closes through $3$ & PASS\\
+unbalanced interface & globally valid $01$ cannot lie on a cycle & PASS (negative)\\
+$\ZZ/3\ZZ$ NCA & all cyclic horizontal/vertical constraints hold & PASS\\
+rectangle recovery & the first three cycle rows equal the input patch & PASS\\
+advertised bounds & $m\leq6$ and $T\leq84$ in the example & PASS\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Sharp horizontal control.}
+The additive $a-1$ in \eqref{eq:m-bound} cannot be uniformly reduced under the stated hypotheses.  Let the trace graph be the directed $a$-cycle and let the vertical rule be the identity ($R=0$, $b=1$).  A one-symbol pattern is globally valid, but every horizontal period containing it is a multiple of $a$.  For $W=H=1$, the construction gives $m\leq1+a-1=a$, with equality forced.  We make no analogous sharpness claim for the coarse vertical state-count bound.
+
+\paragraph{Balance controls.}
+On the graph with loops $0\to0$, $1\to1$ and an extra edge $0\to1$, the word $01$ occurs in a bi-infinite trace (zeros to its left and ones to its right) but in no periodic trace.  Thus local validity and even global validity do not replace horizontal balance.  The same graph used as a vertical row relation admits a globally valid temporal interface that no vertical cycle can contain.  This shows why the reverse uniform NCA rule, which balances $D_m$, is not decorative.
+
+The executable check uses exact integer tuples and exhaustive breadth-first search; it has no floating-point or random component.  Its purpose is to catch orientation, wraparound, and off-by-one errors in the proof's two closures.

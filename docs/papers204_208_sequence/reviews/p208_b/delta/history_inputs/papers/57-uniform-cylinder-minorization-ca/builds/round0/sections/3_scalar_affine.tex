@@ -1,0 +1,103 @@
+\section{Scalar affine cellular automata}
+\label{sec:affine}
+
+Let $q$ be a prime power and write
+\[
+  R_q=\F_q[z_1^{\pm1},\ldots,z_d^{\pm1}].
+\]
+For $u=(u_1,\ldots,u_d)\in\Z^d$, put
+$z^u=z_1^{u_1}\cdots z_d^{u_d}$.  Consider
+\begin{equation}\label{eq:affine-rule}
+  F(x)_v=b+\sum_{u\in N}c_u x_{v+u},
+\end{equation}
+where $N\subset\Z^d$ is finite and nonempty, $b,c_u\in\F_q$, and at least one
+$c_u$ is nonzero.  The associated Laurent polynomial
+\[
+  P(z)=\sum_{u\in N}c_u z^u
+\]
+is therefore nonzero.
+
+\begin{lemma}[Finite-time row independence]\label{lem:affine-rank}
+Let $t\geq0$ and let $S\subset\Z^d$ be finite.  The linear part of the map
+from time-zero coordinates to $F^t(x)|_S$ has row rank $|S|$ over $\F_q$.
+\end{lemma}
+
+\begin{proof}
+The ring $R_q$ is a localization of a polynomial ring over a field, hence an
+integral domain.  The linear part of $F^t$ is convolution by $P^t$; the
+constant part is some spatially constant $\beta_t\in\F_q$.  In particular,
+\begin{equation}\label{eq:iterate-affine}
+  F^t(x)_s=\beta_t+
+    \sum_{w\in\supp(P^t)}[z^w]P(z)^t\,x_{s+w}.
+\end{equation}
+Only the finite input set
+$T=S+\supp(P^t)$ occurs, where $P^0=1$ when $t=0$.
+
+Suppose that the rows indexed by $S$ satisfy a relation with coefficients
+$\alpha_s\in\F_q$.  In Laurent notation the vanishing of the corresponding
+translated-kernel sum is
+\begin{equation}\label{eq:laurent-relation}
+   \left(\sum_{s\in S}\alpha_s z^s\right)P(z)^t=0.
+\end{equation}
+Since $P^t\neq0$ in the domain $R_q$, the first factor in
+\eqref{eq:laurent-relation} is zero.  Distinct Laurent monomials are linearly
+independent over $\F_q$, so every $\alpha_s$ is zero.  The $|S|$ rows are
+independent.
+\end{proof}
+
+\begin{theorem}[Scalar affine minorization]\label{thm:affine}
+Let $F$ be as in \eqref{eq:affine-rule}, and suppose that $\mu$ on
+$\F_q^{\Z^d}$ has uniform strong finite energy with constant $\eta$.  For
+every $t\geq0$, finite $S\subset\Z^d$, and $a\in\F_q^S$,
+\[
+   (F^t_*\mu)([a]_S)\geq\eta^{|S|}.
+\]
+\end{theorem}
+
+\begin{proof}
+The empty-shape assertion is immediate.  For nonempty $S$, use the input set
+$T$ from the proof of \cref{lem:affine-rank}.  Full row rank allows us to
+choose a set $B\subset T$ of exactly $|S|$ columns forming an invertible
+square submatrix.  After every coordinate in $T\setminus B$ is fixed,
+\eqref{eq:iterate-affine} is an affine bijection from $\F_q^B$ to
+$\F_q^S$.  Applying \cref{prop:pivot} and integrating
+\eqref{eq:pivot-conditional} proves the claim.  The affine constant changes
+only the target of the pivot equations and not their invertibility.
+\end{proof}
+
+\begin{corollary}\label{cor:affine-consequences}
+Under the assumptions of \cref{thm:affine}, the following hold.
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item If $\mu=\nu^{\Z^d}$ and
+  $\eta=\min_{c\in\F_q}\nu(c)>0$, then every weak-star limit point of
+  $(F^t_*\mu)_{t\geq0}$ has full support and assigns every cylinder
+  $[a]_S$ mass at least $\eta^{|S|}$.
+  \item For every $t\geq1$, the map $F^t$ is surjective on
+  $\F_q^{\Z^d}$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+For an iid law, conditioning on all other sites leaves the one-site law
+$\nu$, so \cref{thm:affine} applies.  Cylinders are clopen in the full shift;
+their probabilities therefore converge under weak-star convergence and
+retain the same lower bounds.
+
+For the second assertion, \cref{lem:affine-rank} shows that every target
+pattern on every finite $S$ has a preimage pattern on the finite set
+$S+\supp(P^t)$.  Given a full target $y$, let
+\[
+  C_S=\{x:F^t(x)|_S=y|_S\}.
+\]
+These nonempty closed sets have the finite-intersection property because a
+finite collection is controlled by the union of its shapes.  Compactness of
+the full shift gives an $x$ in their total intersection, and $F^t(x)=y$.
+\end{proof}
+
+\begin{remark}\label{rem:affine-scope}
+The integral-domain step uses a scalar field and a nonzero linear part.  The
+argument makes no claim for arbitrary finite coefficient rings or modules.
+It also takes place on the full lattice; no finite periodic quotient is used,
+so cancellation peculiar to a torus is irrelevant.
+\end{remark}
+

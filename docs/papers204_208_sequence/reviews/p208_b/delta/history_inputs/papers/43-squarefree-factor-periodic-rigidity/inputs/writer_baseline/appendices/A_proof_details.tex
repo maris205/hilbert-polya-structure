@@ -1,0 +1,138 @@
+\section{Exact proof certificates and edge cases}
+\label{app:proof-details}
+
+This appendix expands the finite calculations used in the main proof.  The
+purpose is auditability: none of these computations depends on a numerical
+search or on a finite surrogate for an all-prime statement.
+
+\subsection{Source-only periodic collapse}
+
+There is also a direct source-only proof that \(0^{\mathbb Z}\) is the sole
+periodic source point.  Suppose \(x\in\Xsf\) has period \(n\geq1\) and some
+\(x_a=1\).  Choose a rational prime \(p\nmid n\).  Periodicity gives
+\[
+  a+n\mathbb Z\subseteq\supp(x).
+\]
+Because \(n\) is invertible modulo \(p^2\), the progression
+\(a+n\mathbb Z\) meets every residue class modulo \(p^2\).  Therefore
+\(\supp(x)\bmod p^2=\mathbb Z/p^2\mathbb Z\), contradicting admissibility.
+Thus \(x=0^{\mathbb Z}\).
+
+This argument alone is not enough for \cref{thm:factor-rigidity}: source
+aperiodicity need not descend to a factor.  The CRT proof supplies the
+stronger proximality property that does descend.
+
+\subsection{CRT certificate for a finite window}
+
+For fixed \(L\), enumerate the index set
+\[
+  I_L=[-L,L]\times\{1,2\}.
+\]
+Choose an injective map \((j,i)\mapsto p_{j,i}\) from \(I_L\) into the
+rational primes.  The exact congruence packet is
+\[
+  n\equiv a_{j,i}-j\pmod{p_{j,i}^2}
+  \qquad((j,i)\in I_L),
+\]
+where \(a_{j,i}\in M_{p_{j,i}}(x^{(i)})\).  Since distinct primes have
+coprime squares, the Chinese remainder theorem gives one class
+\[
+  n\pmod{\prod_{(j,i)\in I_L}p_{j,i}^2}.
+\]
+No compatibility condition between the residues is needed.  Selecting the
+least nonnegative representative produces a forward time \(n_L\geq0\).
+For each \((j,i)\), the congruence says that \(n_L+j\) lies in a residue
+missing from \(\supp(x^{(i)})\), and hence the indicated coordinate is zero.
+
+The smallest-window case \(L=0\) uses two distinct primes \(p_x,p_y\) and
+two congruences
+\[
+  n\equiv a_x\pmod{p_x^2},
+  \qquad
+  n\equiv a_y\pmod{p_y^2}.
+\]
+It synchronizes the central symbols.  Larger windows use the same argument
+with fresh primes, not an induction that reuses potentially incompatible
+moduli.
+
+\subsection{Product-metric normalization}
+
+For the metric in \cref{eq:product-metric}, the total mass is
+\[
+  \frac13\sum_{k\in\mathbb Z}2^{-|k|}
+  =\frac13\left(1+2\sum_{k=1}^{\infty}2^{-k}\right)=1.
+\]
+If \(x_k=y_k\) for \(|k|\leq L\), then \(|x_k-y_k|\leq1\) outside the
+window and
+\[
+  d_X(x,y)
+  \leq\frac13\left(2\sum_{k=L+1}^{\infty}2^{-k}\right)
+  =\frac{2^{1-L}}{3}.
+\]
+The right-hand side tends to zero.  This supplies an explicit convergence
+rate, although the theorem needs only convergence.
+
+\subsection{Why a periodic orbit has a positive gap}
+
+Let \(y\) have least period \(r>1\).  If
+\(S^k y=S^{k+1}y\) for some \(k\), applying \(S^{-k}\) gives \(y=Sy\),
+contradicting least period \(r>1\).  Thus every one of the finitely many
+numbers
+\[
+  d_Y(S^k y,S^{k+1}y),\qquad 0\leq k<r,
+\]
+is positive.  Their minimum \(\delta_r\) is positive.  For
+\(n=qr+k\), periodicity gives
+\[
+  d_Y(S^n y,S^n(Sy))
+  =d_Y(S^k y,S^{k+1}y)\geq\delta_r.
+\]
+This proves nonproximality of the pair \((y,Sy)\) without any expansivity or
+symbolic structure.
+
+For a second fixed point \(y\neq y_0\), the constant distance
+\(d_Y(y,y_0)>0\) gives the analogous contradiction.  Both cases are needed:
+the adjacent-orbit argument degenerates when \(r=1\).
+
+\subsection{Fixed-point exponential and primitive accounting}
+
+Substituting \(\#\Fix(S^m)=1\) into the definition yields
+\[
+  \log\zeta_{\AM,Y}(z)=\sum_{m=1}^{\infty}\frac{z^m}{m}.
+\]
+Formal differentiation gives
+\[
+  \frac{d}{dz}\log\zeta_{\AM,Y}(z)
+  =\sum_{m=1}^{\infty}z^{m-1}=\frac{1}{1-z},
+\]
+and the constant term is zero, so
+\(\log\zeta_{\AM,Y}(z)=-\log(1-z)\).  Exponentiating yields
+\((1-z)^{-1}\).  Analytically the same calculation holds for \(|z|<1\).
+
+The primitive Euler form has one factor because the only primitive orbit is
+\(\mathcal O_0\):
+\[
+  \prod_{\mathcal O\in\operatorname{Prim}(Y,S)}
+  (1-z^{|\mathcal O|})^{-1}
+  =(1-z)^{-1}.
+\]
+Expanding the logarithm of this one factor produces all powers \(z^r\).
+The expansion changes traversal number, not primitive identity.
+
+\subsection{Finite-P0 witness, including the empty case}
+
+For nonempty finite \(P_0\), \cref{eq:finite-witness} has support
+\(1+Q\mathbb Z\).  Modulo any \(p^2\mid Q\), this support is exactly the
+single residue \(1\), so every other residue is missing.  If \(d>0\) is a
+period, the implication
+\[
+  x_1=1\Longrightarrow x_{1+d}=1
+\]
+forces \(1+d\equiv1\pmod Q\), hence \(Q\mid d\).  Since \(Q\) itself is a
+period, the least period is exactly \(Q\).
+
+When \(P_0=\varnothing\), the empty product is \(Q=1\) and admissibility
+places no restriction on the full binary shift.  The all-zero and all-one
+points are two distinct fixed points.  This is the correct edge-case
+certificate; describing it as a nontrivial period-one orbit would be false.
+

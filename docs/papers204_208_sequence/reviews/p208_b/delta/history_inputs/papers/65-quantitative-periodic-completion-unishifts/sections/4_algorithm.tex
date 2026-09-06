@@ -1,0 +1,46 @@
+\section{Construction and complexity}\label{sec:algorithm}
+
+The proof used an ambient extension $x$ for clarity, but no infinite object is required.  Let
+\begin{equation}\label{eq:S}
+ S=\sum_{t=0}^{H-1}\card{J_t}
+   =HW+RH(H-1)
+\end{equation}
+be the number of sites in the finite cone.  The following algorithm takes the presentation tables and a globally valid rectangle $p$.  The global-validity promise can be replaced by failure if the finite cone search in Step~1 finds no candidate.
+
+\begin{enumerate}
+\item Enumerate labelings $q$ of the cone
+      $\set{(i,t):0\leq t<H,\ i\in J_t}$.  Retain the first labeling that agrees with $p$ on the central $W\times H$ rectangle, has every horizontal edge allowed by $G$, and satisfies
+      \[
+      q_{i,t+1}\in F^+(\restr{q^{(t)}}{i+N^+})
+      \quad(i\in J_{t+1},\ 0\leq t<H-1).
+      \]
+      A candidate exists because $p$ is globally valid.
+\item Run breadth-first search in $G$ to find a shortest positive return from the last symbol of $q^{(0)}$ to its first.  If the endpoints coincide, search from its outgoing neighbors back to it.  Close the bottom word and obtain $m$.
+\item For $t=0,\ldots,H-2$, preserve $q^{(t+1)}$ on $J_{t+1}$ and choose the first listed value of $F^+$ at every other cylinder coordinate.  This constructs $r_0,\ldots,r_{H-1}$.
+\item Enumerate $Y_m$, and run on-the-fly breadth-first search in $D_m$ from $r_{H-1}$ back to $r_0$, again requiring a positive path.  Store parent pointers and output the resulting vertical cycle.
+\end{enumerate}
+
+Every test is finite.  In particular, a cyclic word belongs to $Y_m$ exactly when its $m$ cyclic adjacent pairs lie in $E$.  Successors of a row $y$ can be generated as the Cartesian product
+$\prod_{i\in\ZZ/m\ZZ}F^+(\restr y{i+N^+})$, which has exactly $b^m$ members.
+
+\begin{proposition}[Explicit cost]\label{prop:complexity}
+With $n_m=\card{Y_m}$ and unit-cost table access, the construction can be implemented with
+\begin{align*}
+\Time={}&O\!\left(S(R+1)a^S+(a+\card E)
+        +Hm(R+1)+m(R+1)n_m b^m\right),\\
+\Space={}&O\!\left(S+mn_m\right)
+\end{align*}
+working memory, apart from the output itself.  Consequently the presentation-only worst-case bounds are
+\[
+ \Time=O\!\left(S(R+1)a^S+m(R+1)a^{2m}\right),
+ \qquad
+ \Space=O(S+ma^m).
+\]
+The output uses $O(mT)$ symbols and may itself have exponential length.
+\end{proposition}
+
+\begin{proof}
+There are at most $a^S$ cone assignments, each checked at $O(S(R+1))$ cost.  Horizontal breadth-first search costs $O(a+\card E)$.  The protected-row construction performs $O(Hm)$ rule lookups on contexts of at most $2R+1$ sites.  The row search visits at most $n_m$ vertices and generates $b^m$ successors per vertex, each in $O(m(R+1))$ time; keeping the row list, visited bits, and parent rows costs $O(mn_m)$.  Finally $n_m\leq a^m$ and $b\leq a$.
+\end{proof}
+
+The algorithm is intentionally elementary rather than complexity-optimal.  For a concrete trace graph, transfer-matrix generation can reduce the enumeration of $Y_m$, and bidirectional search can reduce typical return time.  Neither optimization changes the theorem contract.

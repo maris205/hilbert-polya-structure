@@ -1,0 +1,122 @@
+\section{Homogeneous polynomial maps and a posteriori enclosures}
+\label{sec:enclosures}
+
+The family above is one instance of a general counting reduction.  We state
+the reusable part with the exact-decoding hypothesis exposed.  This avoids
+suggesting that polynomial history counts automatically count distinct
+words.
+
+\begin{definition}[Disjoint polynomial count system]
+Fix $\ell\ge2$.  A two-letter constant-length random-substitution level-count
+system is \emph{disjoint polynomial} if its distinct inflation-word counts
+satisfy
+\begin{equation}
+ A_{m+1}=P(A_m,B_m),\qquad B_{m+1}=Q(A_m,B_m),
+ \label{eq:PQ-count}
+\end{equation}
+where $P,Q$ are nonzero homogeneous polynomials of degree $\ell$ with
+nonnegative integer coefficients, and the identities have been justified by
+disjoint level-block decoding.
+\end{definition}
+
+Put
+\begin{equation}
+ \phi(r)=\frac{Q(1,r)}{P(1,r)},\qquad
+ \psi(r)=\log P(1,r).
+ \label{eq:phi-psi}
+\end{equation}
+On any positive interval on which $P(1,r)>0$, both functions are continuous.
+
+\begin{proposition}[Projective cocycle]
+\label{prop:general-cocycle}
+For a disjoint polynomial count system with $A_m,B_m>0$, let
+$r_m=B_m/A_m$ and $G_m=\ell^{-m}\log A_m$.  Then
+\begin{equation}
+ r_{m+1}=\phi(r_m),\qquad
+ G_{m+1}=G_m+\ell^{-(m+1)}\psi(r_m).
+ \label{eq:general-cocycle}
+\end{equation}
+If the forward orbit lies in a compact interval on which $\psi$ is bounded,
+then $G_m$ converges and
+\begin{equation}
+ G_\infty-G_M=\sum_{m=M}^{\infty}\ell^{-(m+1)}\psi(r_m).
+ \label{eq:general-tail}
+\end{equation}
+Whenever an external entropy theorem identifies inflation-word entropy with
+topological entropy, $G_\infty$ is that topological entropy.
+\end{proposition}
+
+\begin{proof}
+Homogeneity gives
+\[
+ P(A_m,B_m)=A_m^\ell P(1,r_m),\qquad
+ Q(A_m,B_m)=A_m^\ell Q(1,r_m).
+\]
+Division and logarithms yield \cref{eq:general-cocycle}.  Boundedness of
+$\psi$ makes the discounted increment series absolutely convergent, and
+telescoping gives \cref{eq:general-tail}.  The final identification is not a
+counting consequence and is therefore stated conditionally.
+\end{proof}
+
+The next result turns rational interval arithmetic into a rigorous entropy
+certificate.  It is deliberately formulated for arbitrary compact intervals;
+monotonicity of $\phi$ or $\psi$ is useful computationally but is not assumed.
+
+\begin{theorem}[Finite interval enclosure with invariant tail]
+\label{thm:interval}
+Fix integers $K\ge M$.  Suppose compact intervals
+$I_M,I_{M+1},\ldots,I_K$ and a compact interval $J$ satisfy
+\begin{equation}
+ r_M\in I_M,\qquad
+ \phi(I_m)\subseteq I_{m+1}\ (M\le m<K),\qquad
+ I_K\subseteq J,\quad \phi(J)\subseteq J.
+ \label{eq:interval-hyp}
+\end{equation}
+Assume $P(1,r)>0$ on their union.  Define
+\begin{align}
+ L_{M,K}&=\sum_{m=M}^{K-1}\ell^{-(m+1)}\min_{r\in I_m}\psi(r)
+ +\frac{\ell^{-K}}{\ell-1}\min_{r\in J}\psi(r),\label{eq:enclosure-L}\\
+ U_{M,K}&=\sum_{m=M}^{K-1}\ell^{-(m+1)}\max_{r\in I_m}\psi(r)
+ +\frac{\ell^{-K}}{\ell-1}\max_{r\in J}\psi(r).
+ \label{eq:enclosure-U}
+\end{align}
+Then
+\begin{equation}
+ L_{M,K}\le G_\infty-G_M\le U_{M,K}.
+ \label{eq:enclosure-result}
+\end{equation}
+All endpoints are a posteriori quantities: replacing an interval by a
+smaller enclosure, while re-verifying \cref{eq:interval-hyp}, can only sharpen
+the corresponding extrema.
+\end{theorem}
+
+\begin{proof}
+The inclusions in \cref{eq:interval-hyp} imply inductively that
+$r_m\in I_m$ for $M\le m\le K$ and $r_m\in J$ for every $m\ge K$.
+Bound the first $K-M$ terms of \cref{eq:general-tail} by the extrema on
+$I_m$.  Bound every remaining term by the extrema on $J$ and use
+\[
+ \sum_{m=K}^{\infty}\ell^{-(m+1)}
+ =\frac{\ell^{-K}}{\ell-1}.
+\]
+This proves both sides of \cref{eq:enclosure-result}.
+\end{proof}
+
+\begin{example}[Recovery of the family certificate]
+For \cref{eq:substitution},
+\[
+ P(x,y)=x^\ell+y^\ell,\qquad Q(x,y)=x^py^q,\qquad
+ \psi(r)=\log(1+r^\ell).
+\]
+The interval $J=[0,r_M]$ is forward invariant, and $\psi$ is increasing.
+Taking $K=M$ in the evident invariant-tail specialization of
+\cref{thm:interval} gives exactly \cref{eq:tail-certificate}; its lower
+endpoint is zero, while strict positivity follows directly from the orbit.
+\end{example}
+
+\begin{remark}[What the general theorem does not say]
+One must first prove \cref{eq:PQ-count} for \emph{sets of words}.  The
+theorem neither detects collisions nor supplies recognizability.  It also
+does not replace the hypotheses of the entropy-identification results in
+\cite{Gohlke2020,Mitchell2024}.
+\end{remark}

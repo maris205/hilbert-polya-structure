@@ -1,0 +1,520 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathcal A}
+\newcommand{\Lcal}{\mathcal L}
+\newcommand{\Mcal}{\mathcal M}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\one}{\mathbf 1}
+
+\title[Marked symmetric $S$-adic shifts]{Marked Symmetric $S$-Adic Shifts:\
+Exact Measure Intervals and a Summability Transition}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 37A05, 37B20, 68R15}
+\keywords{$S$-adic shift, invariant measure, recognizability,
+constant-length directive sequence, summability transition, substitution}
+
+\begin{document}
+
+\begin{abstract}
+Let $(a_n)_{n\geq1}$ be positive integers and consider the constant-length
+directive morphisms
+\[
+ \sigma_n(0)=0^{a_n+1}1,
+ \qquad
+ \sigma_n(1)=01^{a_n+1}.
+\]
+We give a word-level analysis of the resulting binary $S$-adic shift.  The
+word $10$ occurs exactly across image boundaries, so it supplies an explicit
+marker at every level.  This yields unique desubstitution, two clopen towers
+at each scale, minimality, and aperiodicity without invoking an abstract
+recognizability theorem.  If
+\[
+ R=\prod_{n\geq1}\frac{a_n}{a_n+2},
+\]
+then the invariant-measure simplex is affinely homeomorphic to $[-R,R]$ by
+the symbol bias $b(\mu)=\mu([0])-\mu([1])$.  Thus the actual frequency of
+$0$ ranges over an interval of radius $R/2$, not $R$.  The system is uniquely
+ergodic exactly when $\sum_n1/a_n$ diverges; otherwise it has exactly two
+ergodic measures.  For $a_n=n$, the finite-prefix bias radius is
+$R_N=2/((N+1)(N+2))$ and tends to zero.  For $a_n=n^2$, the limiting bias radius
+is $\pi\sqrt2/\sinh(\pi\sqrt2)$.  Literal marker enumeration and independent
+exact incidence arithmetic verify the registered finite controls.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A nonstationary substitution can be primitive at every level and still fail
+to be uniquely ergodic.  The obstruction is not visible in any one incidence
+matrix: it is the accumulated contraction, or lack of contraction, along the
+entire directive sequence.  The binary family in this note isolates that
+mechanism in a form where both the symbolic cutting and the measure simplex
+are explicit.
+
+Fix positive integers $a_n$ and set
+\begin{equation}\label{eq:morphisms-intro}
+ \sigma_n(0)=0^{a_n+1}1,
+ \qquad
+ \sigma_n(1)=01^{a_n+1}.
+\end{equation}
+Both images have length $a_n+2$, begin with $0$, and end with $1$.  More
+decisively, neither image contains $10$, while every concatenation boundary
+does.  The same two-letter word therefore marks every level-$n$ cut.  This
+first anomaly turns a matrix construction into a concrete symbolic system.
+
+The contribution of the note is an exact, self-contained package for this
+marked realization.
+\begin{enumerate}
+\item We prove all-level recognizability directly from the marker $10$ and
+  use the resulting nested cuts to establish minimality and aperiodicity.
+\item We identify invariant probabilities with the inverse limit of the two
+  normalized incidence simplices.  The proof constructs every measure from
+  compatible two-tower weights and does not assume unique ergodicity.
+\item We diagonalize that inverse limit in the physical symbol-bias
+  coordinate.  Its radius is the infinite product $R$, whereas the radius of
+  the $0$-frequency interval is $R/2$.  This also gives the two ergodic
+  endpoints and the closed constants for $a_n=n$ and $a_n=n^2$.
+\end{enumerate}
+
+\paragraph{Prior-results boundary.}
+The $S$-adic formalism and incidence-cone approach to frequencies are
+standard; see the survey of Berth\'e and Delecroix
+\cite{BertheDelecroix2014}.  Berth\'e, Steiner, Thuswaldner, and Yassawi
+develop recognizability for sequences of morphisms
+\cite{BertheSteinerThuswaldnerYassawi2019}, while B\'edaride, Hilion, and
+Lustig develop the tower description of invariant measures
+\cite{BedarideHilionLustig2021} and the associated measure-transfer
+framework \cite{BedarideHilionLustig2024}.
+
+Most importantly, Ferenczi, Fisher, and Talet already treated the
+unique-ergodicity criterion for adic systems with symmetric matrix sequence
+\(\bigl(\begin{smallmatrix}a_n&1\\1&a_n\end{smallmatrix}\bigr)\)
+\cite{FerencziFisherTalet2009}.  Arbul\'u, Durand, and Espinoza explicitly
+record the same summability criterion in their constant-length $S$-adic
+discussion \cite{ArbuluDurandEspinoza2024}.  Accordingly, the equivalence
+with $\sum1/a_n=\infty$ below is a specialized rederivation, not a priority
+claim.  The latter paper also contains close two-letter constant-length
+examples in which a reciprocal-sum condition separates unique ergodicity
+from a two-measure regime.  Thus neither the inverse-limit mechanism nor the
+qualitative phase-transition pattern is claimed as new.  What is recorded
+here is the full word-level realization
+\eqref{eq:morphisms-intro}: its elementary marker proof, its complete affine
+measure interval in the symbol-frequency coordinate, and two exact product
+specializations.  A bounded search through 28 August 2026 did not locate this
+precise combined package.  That search is not a novelty proof, and external
+release remains on hold.
+
+\section{Directive language and the marker}
+
+Let $\A=\{0,1\}$.  For $1\leq m<n$, write
+\[
+ \tau_{m,n}=\sigma_m\sigma_{m+1}\cdots\sigma_{n-1},
+ \qquad
+ h_{m,n}=\prod_{j=m}^{n-1}(a_j+2),
+\]
+and put $\tau_{n,n}=\mathrm{id}$ and $h_{n,n}=1$.  Composition is read from
+right to left, so $\tau_{m,n}$ maps level-$n$ letters to level-$m$ words.
+
+\begin{definition}\label{def:tails}
+For $m\geq1$, the level-$m$ tail shift $X^{(m)}\subseteq\A^{\Z}$ consists
+of the sequences all of whose finite factors occur in
+$\tau_{m,n}(c)$ for some $n>m$ and $c\in\A$.  The shift studied in this note
+is $X=X^{(1)}$, with the left shift $T$.
+\end{definition}
+
+Every incidence matrix is strictly positive, so a word that occurs at one
+level occurs inside both sufficiently high supertile types.  The directive
+language is therefore recurrent and extendable, and the compact subshifts in
+\cref{def:tails} are nonempty.
+
+The next proposition is the symbolic hinge of the paper.
+
+\begin{proposition}[the $10$ marker]\label{prop:marker}
+Put $L_m=a_m+2$.  For every $y\in X^{(m+1)}$, the occurrences of $10$ in
+$\sigma_m(y)$ start exactly at the positions
+\[
+ L_m\Z-1.
+\]
+Consequently every $x\in X^{(m)}$ has a unique centered representation
+\begin{equation}\label{eq:centered}
+ x=T^r\sigma_m(y),
+ \qquad 0\leq r<L_m,\quad y\in X^{(m+1)}.
+\end{equation}
+The cut phase $r$ is read from the residue class of the occurrences of $10$,
+and each block between consecutive cuts uniquely determines its preimage
+letter.
+\end{proposition}
+
+\begin{proof}
+Set $a=a_m$.  The two image words are
+\[
+ A=0^{a+1}1,
+ \qquad B=01^{a+1}.
+\]
+Neither contains $10$.  Both start with $0$ and end with $1$, so every image
+boundary contributes exactly one occurrence of $10$.  In an unshifted image
+$\sigma_m(y)$, those boundaries lie between coordinates $kL_m-1$ and
+$kL_m$.  This proves the first assertion.
+
+For existence in \eqref{eq:centered}, approximate a point of $X^{(m)}$ by
+shifted factors of higher supertiles.  Pass to a subsequence on which the
+natural level-$m$ cut has one fixed residue modulo $L_m$.  Compactness of
+$\A^{\Z}$ gives a limiting preimage $y$, and its finite factors belong to the
+level-$(m+1)$ directive language.  Hence $y\in X^{(m+1)}$.
+
+In any representation, the starts of $10$ form one residue class modulo
+$L_m$.  That residue determines $r$ uniquely.  Once the cuts are known,
+every intervening length-$L_m$ block is either $A$ or $B$, which are
+distinct and decode to $0$ and $1$, respectively.  Thus $y$ is unique as
+well.
+\end{proof}
+
+Iterating \cref{prop:marker} gives a unique level-$n$ cut phase modulo
+\begin{equation}\label{eq:height}
+ h_n:=h_{1,n}=\prod_{j=1}^{n-1}(a_j+2).
+\end{equation}
+This is stronger than an almost-everywhere cutting statement: every point
+has one cut phase at every level.
+
+\section{Minimality and aperiodicity}
+
+The marker supplies the cuts; strict positivity supplies recurrence.
+
+\begin{theorem}[minimal aperiodic realization]\label{thm:minimal}
+For every sequence of positive integers $(a_n)$, the subshift $(X,T)$ is
+minimal and has no periodic point.
+\end{theorem}
+
+\begin{proof}
+Let $u\in\Lcal(X)$.  Choose $n$ and $c\in\A$ such that $u$ occurs in the
+level-$n$ supertile $\tau_{1,n}(c)$.  Each word $\sigma_n(b)$ contains both
+letters for $b\in\A$.  Therefore each level-$(n+1)$ supertile
+$\tau_{1,n+1}(b)$ contains $\tau_{1,n}(c)$ and hence contains $u$.  By
+\cref{prop:marker}, every $x\in X$ is tiled by level-$(n+1)$ supertiles of
+common length $h_{n+1}$.  Consecutive occurrences of $u$ in $x$ are thus
+separated by at most $2h_{n+1}$.  Every allowed word is uniformly recurrent,
+which is equivalent to minimality for a subshift.
+
+Now suppose $T^p x=x$ for some $p>0$.  The unique level-$n$ cut set of $x$
+is one residue class modulo $h_n$.  Shifting by $p$ translates that cut set,
+while periodicity and uniqueness require the translated set to equal the
+original one.  Hence $h_n$ divides $p$ for every $n$.  Since $h_n\geq
+3^{n-1}$, no positive integer has this property.  Thus $X$ is aperiodic.
+\end{proof}
+
+The proof also explains why recognizability cannot be discarded as a
+technical convenience: the divisibility argument uses the uniqueness, not
+merely the existence, of every supertile phase.
+
+\section{Two towers and invariant measures}
+
+For $n\geq1$ and $c\in\A$, let
+\[
+ W_{n,c}=\tau_{1,n}(c),
+ \qquad
+ B_{n,c}=\tau_{1,n}([c]_{X^{(n)}}).
+\]
+The set $B_{n,c}$ consists of the points whose level-$n$ cut is at the
+origin and whose supertile there has type $c$.  The marker makes these sets
+clopen.  The families
+\begin{equation}\label{eq:towers}
+ \mathcal P_n=
+ \{T^jB_{n,c}:c\in\A,\ 0\leq j<h_n\}
+\end{equation}
+are two-tower clopen partitions, and $\mathcal P_{n+1}$ refines
+$\mathcal P_n$.
+
+With rows indexed by output letters and columns by input letters, the
+incidence and normalized incidence matrices are
+\begin{equation}\label{eq:matrices}
+ M_n=
+ \begin{pmatrix}a_n+1&1\\[2pt]1&a_n+1\end{pmatrix},
+ \qquad
+ P_n=\frac{M_n}{a_n+2}.
+\end{equation}
+Write $\Delta=\{(p_0,p_1)^{\mathsf T}:p_c\geq0, p_0+p_1=1\}$.
+
+\begin{theorem}[two-tower affine bijection]\label{thm:towers}
+For a $T$-invariant probability $\mu$, define
+\begin{equation}\label{eq:towerweights}
+ p_c^{(n)}=h_n\mu(B_{n,c}),
+ \qquad c\in\A.
+\end{equation}
+Then $p^{(n)}\in\Delta$ and
+\begin{equation}\label{eq:compatibility}
+ p^{(n)}=P_np^{(n+1)}.
+\end{equation}
+The map
+\begin{equation}\label{eq:affine-map}
+ \mu\longmapsto (p^{(n)})_{n\geq1}
+\end{equation}
+is an affine bijection from $\Mcal(X,T)$ onto
+\[
+ \varprojlim(\Delta,P_n)
+ =\{(p^{(n)}):p^{(n)}\in\Delta,
+                    \ p^{(n)}=P_np^{(n+1)}\}.
+\]
+\end{theorem}
+
+\begin{proof}
+The $h_n$ floors above a fixed base have equal measure.  Since
+\eqref{eq:towers} partitions $X$, the two numbers in
+\eqref{eq:towerweights} sum to one.  A level-$(n+1)$ supertile of type $b$
+contains $M_n(c,b)$ level-$n$ supertiles of type $c$.  Refining the bases,
+using shift invariance, and recalling $h_{n+1}=(a_n+2)h_n$ gives
+\[
+ p_c^{(n)}
+ =\sum_{b\in\A}\frac{M_n(c,b)}{a_n+2}p_b^{(n+1)},
+\]
+which is \eqref{eq:compatibility}.
+
+We prove that no information is lost and that every compatible sequence is
+realized.  For a finite word $u$, let $N_u(w)$ count occurrences of $u$
+whose full support lies inside the finite word $w$.  Given compatible tower
+weights, set
+\begin{equation}\label{eq:gamma}
+ \Gamma_n(u)=\sum_{c\in\A}p_c^{(n)}
+                    \frac{N_u(W_{n,c})}{h_n}.
+\end{equation}
+The level-$(n+1)$ words are concatenations of level-$n$ words.  By
+\eqref{eq:compatibility}, occurrences wholly contained in one constituent
+block contribute exactly $\Gamma_n(u)$.  Only occurrences crossing a
+constituent boundary remain.  There are at most
+$(a_n+1)(|u|-1)$ of those in each level-$(n+1)$ supertile, and hence
+\begin{equation}\label{eq:cauchy}
+ |\Gamma_{n+1}(u)-\Gamma_n(u)|
+ \leq\frac{|u|-1}{h_n}.
+\end{equation}
+Because $h_n\geq3^{n-1}$, the sequence $\Gamma_n(u)$ converges.
+
+Define $\mu([u])=\lim_n\Gamma_n(u)$.  Nonnegativity is immediate.  Summing
+over all one-letter extensions fails at finite level only for occurrences
+touching an endpoint of $W_{n,c}$; the normalized error is at most $1/h_n$.
+Taking limits gives both cylinder consistency identities and shift
+invariance.  Thus the values extend to a $T$-invariant Borel probability.
+Words outside the directive language have zero value, so the measure is
+supported on $X$.
+
+Conversely, decompose a cylinder $[u]$ over the towers
+\eqref{eq:towers}.  The floors on which $u$ stays inside one supertile give
+\eqref{eq:gamma}; the total measure of the boundary floors is at most
+$(|u|-1)/h_n$.  Therefore every invariant $\mu$ satisfies
+$\mu([u])=\lim_n\Gamma_n(u)$ and is determined by its tower weights.
+For the measure constructed from compatible weights, counting the marked
+level-$n$ bases inside higher supertiles recovers
+$h_n\mu(B_{n,c})=p_c^{(n)}$; high-super-tile endpoints have vanishing
+density.  The two constructions are inverse and affine.
+\end{proof}
+
+General tower and measure-transfer results cover much wider classes
+\cite{BedarideHilionLustig2021,BedarideHilionLustig2024}.  The proof above is included to make the
+normalization and the direction of \eqref{eq:compatibility} auditable for
+this family.
+
+\section{Bias interval and the phase transition}
+
+The matrices in \eqref{eq:matrices} share the eigenvectors $(1,1)$ and
+$(1,-1)$.  Put
+\begin{equation}\label{eq:rho}
+ \rho_n=\frac{a_n}{a_n+2},
+ \qquad
+ R_N=\prod_{n=1}^{N}\rho_n,
+ \qquad
+ R=\prod_{n\geq1}\rho_n.
+\end{equation}
+For $t\in[-1,1]$, write
+\[
+ v(t)=\frac12\binom{1+t}{1-t}.
+\]
+Direct multiplication gives the key one-line identity
+\begin{equation}\label{eq:contraction}
+ P_nv(t)=v(\rho_nt).
+\end{equation}
+
+\begin{theorem}[exact invariant-measure interval]\label{thm:interval}
+The map
+\begin{equation}\label{eq:bias}
+ \Theta:\Mcal(X,T)\longrightarrow\mathbb R,
+ \qquad
+ \Theta(\mu)=b(\mu):=\mu([0])-\mu([1])
+\end{equation}
+is an affine homeomorphism from $\Mcal(X,T)$ onto $[-R,R]$.
+Consequently
+\begin{equation}\label{eq:frequencyinterval}
+ \{\mu([0]):\mu\in\Mcal(X,T)\}
+ =\left[\frac{1-R}{2},\frac{1+R}{2}\right].
+\end{equation}
+Thus $R$ is the bias radius, while $R/2$ is the radius of the symbol-frequency
+interval around $1/2$.
+\end{theorem}
+
+\begin{proof}
+Let $b_n=p_0^{(n)}-p_1^{(n)}$ be the level-$n$ tower bias.  By
+\eqref{eq:contraction}, compatibility is equivalent to
+\begin{equation}\label{eq:biascompat}
+ b_n=\rho_nb_{n+1}.
+\end{equation}
+In particular, $b_1=R_Nb_{N+1}$, so $|b_1|\leq R_N$ for every $N$ and
+$|b_1|\leq R$.
+
+Suppose first that $R>0$.  For any $t\in[-R,R]$, set
+\[
+ b_1=t,
+ \qquad
+ b_n=\frac{t}{R_{n-1}}\quad(n\geq2).
+\]
+Since $R_{n-1}\geq R$, all $b_n$ lie in $[-1,1]$, and
+\eqref{eq:biascompat} holds.  This produces one compatible sequence, and
+\eqref{eq:biascompat} shows that it is the only one with first bias $t$.
+
+If $R=0$, then for each fixed $n$ the tail product
+$\prod_{j=n}^{N}\rho_j$ tends to zero.  Iterating
+\eqref{eq:biascompat} gives
+\[
+ |b_n|\leq\prod_{j=n}^{N}\rho_j,
+\]
+so every $b_n$ is zero.  The inverse limit is then a singleton.
+\Cref{thm:towers} proves bijectivity in both cases.  The map is continuous,
+and a continuous bijection from the compact measure simplex to a Hausdorff
+interval is a homeomorphism.  Finally,
+$\mu([0])=(1+b(\mu))/2$, which proves \eqref{eq:frequencyinterval}.
+\end{proof}
+
+\begin{corollary}[summability transition]\label{cor:transition}
+The shift $(X,T)$ is uniquely ergodic if and only if
+\begin{equation}\label{eq:summability}
+ \sum_{n\geq1}\frac1{a_n}=\infty.
+\end{equation}
+If the series converges, then $R>0$ and $(X,T)$ has exactly two ergodic
+probability measures, corresponding to the biases $-R$ and $R$.
+\end{corollary}
+
+\begin{proof}
+Write $\rho_n=1-y_n$ with $y_n=2/(a_n+2)$.  Since
+$0<y_n\leq2/3$,
+\[
+ y_n\leq-\log(1-y_n)\leq\frac{y_n}{1-y_n}\leq3y_n.
+\]
+Hence $R>0$ exactly when $\sum_n1/(a_n+2)<\infty$.  For $a_n\geq1$,
+\[
+ \frac1{3a_n}\leq\frac1{a_n+2}\leq\frac1{a_n},
+\]
+so this is equivalent to convergence of $\sum_n1/a_n$.
+
+By \cref{thm:interval}, $R=0$ gives one invariant probability.  When
+$R>0$, the invariant-measure simplex is a nondegenerate interval, whose only
+extreme points are its two endpoints.  Ergodic invariant probabilities are
+exactly the extreme points, proving the last assertion.
+\end{proof}
+
+As noted in the introduction, the yes/no criterion in
+\cref{cor:transition} is already present at the adic matrix level in
+\cite{FerencziFisherTalet2009}; the contribution of
+\cref{thm:interval} is the explicit affine interval for the marked symbolic
+realization and the conversion to physical one-symbol frequencies.
+
+\section{Two closed directive sequences}
+
+The general product becomes elementary for two natural choices of $a_n$.
+
+\begin{corollary}[linear directive]\label{cor:linear}
+If $a_n=n$, then
+\begin{equation}\label{eq:linear-product}
+ R_N=\prod_{n=1}^{N}\frac{n}{n+2}
+ =\frac{2}{(N+1)(N+2)}.
+\end{equation}
+Thus $R=0$, the system is uniquely ergodic, and its unique measure has
+$\mu([0])=\mu([1])=1/2$.
+\end{corollary}
+
+\begin{proof}
+Cancel $1\cdot2\cdots N$ against $3\cdot4\cdots(N+2)$ in the finite
+product.  The remaining assertions follow from \cref{thm:interval}.
+\end{proof}
+
+\begin{corollary}[quadratic directive]\label{cor:quadratic}
+If $a_n=n^2$, then
+\begin{equation}\label{eq:quadratic-product}
+ R=\prod_{n\geq1}\frac{n^2}{n^2+2}
+ =\frac{\pi\sqrt2}{\sinh(\pi\sqrt2)}
+ =0.104528666176957\ldots.
+\end{equation}
+There are exactly two ergodic probabilities.  Their $0$-symbol frequencies
+are
+\begin{equation}\label{eq:quadratic-frequencies}
+ \frac12\left(1\pm\frac{\pi\sqrt2}{\sinh(\pi\sqrt2)}\right)
+ =0.4477356669\ldots,
+   \ 0.5522643331\ldots.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Euler's product
+\[
+ \frac{\sinh(\pi x)}{\pi x}
+ =\prod_{n\geq1}\left(1+\frac{x^2}{n^2}\right)
+\]
+at $x=\sqrt2$ gives \eqref{eq:quadratic-product}.  The measure statements
+and the factor $1/2$ in \eqref{eq:quadratic-frequencies} follow from
+\cref{thm:interval,cor:transition}.
+\end{proof}
+
+The contrast is sharp at the first level: the linear directive loses every
+nonzero bias in the infinite tower limit, whereas the quadratic directive
+retains a bias interval of positive width.  No finite prefix distinguishes
+the two regimes categorically; the infinite product does.
+
+\section{Exact controls and scope}
+
+The registered script has two independent exact lanes.  The literal lane
+enumerates every binary preimage word of lengths one through seven for
+$1\leq a\leq9$.  It checks both linearly and cyclically that $10$ occurs
+exactly at image boundaries, that consecutive cyclic markers have gap
+$a+2$, and that the cut blocks decode to the original letters.  The matrix
+lane uses \texttt{fractions.Fraction} to verify
+\eqref{eq:contraction} for individual matrices, all directives of lengths
+one through six over $a\in\{1,2,3,4\}$, and compatible finite inverse-limit
+biases.  It also verifies \eqref{eq:linear-product} exactly through
+$N=200$ and the quadratic partial-product recurrence through $N=100$.
+
+These controls guard marker endpoints, matrix orientation, normalization,
+and the factor-of-two conversion from bias to frequency.  They do not
+replace the compactness argument in \cref{prop:marker}, the all-level measure
+construction in \cref{thm:towers}, or the infinite-product proof.
+
+This manuscript is an internal theorem record.  It does not claim that the
+summability criterion is new, and it does not make a global claim about all
+constant-length $S$-adic systems.  Public posting, submission, and priority
+language remain on hold pending a specialist comparison with the adic and
+Toeplitz literature.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

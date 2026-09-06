@@ -1,0 +1,101 @@
+\section{Primorial growth of saturated spectral projections}
+\label{sec:primorial}
+
+The failure of uniform similarity for $0<\sigma\le1$ has a precise
+maximal order.  Let $p_1<p_2<\cdots$ be the primes and
+$P_k=\prod_{j\le k}p_j$, with $P_0=1$.  For $x\ge1$, let $k(x)$ be the
+largest integer for which
+\begin{equation}
+  P_{k(x)}^{h-1}\le x,
+  \qquad m_x=P_{k(x)}^{h-1}.
+  \label{eq:primorial-index}
+\end{equation}
+
+\begin{proposition}[Exact optimizer]
+\label{prop:primorial-optimizer}
+For every $x\ge1$ and $\sigma>0$,
+\begin{equation}
+  \max_{\substack{m\le x\\m\in\Fh}}\|\Pi_{S,m}\|
+  =\prod_{p\mid P_{k(x)}}(1-p^{-\sigma})^{-1/2},
+  \label{eq:exact-primorial-max}
+\end{equation}
+and $m_x$ is a maximizing label.
+\end{proposition}
+
+\begin{proof}
+Suppose $m\le x$ has $r=|J_h(m)|$ saturated primes.  Their mandatory
+contribution to $m$ gives
+\[
+  \prod_{p\in J_h(m)}p^{h-1}\le m\le x.
+\]
+If $r\ge k(x)+1$, the left side is at least
+$P_{k(x)+1}^{h-1}>x$, a contradiction.  For fixed $r$, replacing a
+saturated prime by a smaller omitted prime decreases the arithmetic cost and
+increases its factor $(1-p^{-\sigma})^{-1/2}$.  Thus the best $r$-prime
+set is $\{p_1,\ldots,p_r\}$.  Adding another admissible saturated prime
+strictly increases the projection norm.  The optimum therefore uses
+$r=k(x)$ and is attained at $m_x$.
+\end{proof}
+
+The exact optimizer turns the similarity wall into a classical prime-product
+problem.  Write $y=p_{k(x)}$.  The prime number theorem gives
+\begin{equation}
+  (h-1)\vartheta(y)\sim\log x,
+  \qquad
+  y\sim\frac{\log x}{h-1}.
+  \label{eq:y-asymptotic}
+\end{equation}
+
+\begin{theorem}[Three maximal-order regimes]
+\label{thm:three-regimes}
+As $x\to\infty$,
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item if $\sigma>1$, then
+  \[
+    \max_{m\le x,\,m\in\Fh}\|\Pi_{S,m}\|
+      \longrightarrow\sqrt{\zeta(\sigma)};
+  \]
+  \item if $\sigma=1$, then
+  \[
+    \max_{m\le x,\,m\in\Fh}\|\Pi_{S,m}\|
+      \sim\sqrt{\e^\gamma\log\log x};
+  \]
+  \item if $0<\sigma<1$, then
+  \[
+    \log\max_{m\le x,\,m\in\Fh}\|\Pi_{S,m}\|
+      \sim
+      \frac{(h-1)^{\sigma-1}(\log x)^{1-\sigma}}
+           {2(1-\sigma)\log\log x}.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For $\sigma>1$, the partial Euler products in
+\cref{eq:exact-primorial-max} converge to
+$\prod_p(1-p^{-\sigma})^{-1/2}=\sqrt{\zeta(\sigma)}$.
+At $\sigma=1$, Mertens' product theorem
+\cite[Thm.~2.7(e), p.~50]{MontgomeryVaughan2006} gives
+\[
+  \prod_{p\le y}(1-p^{-1})^{-1/2}
+    \sim\sqrt{\e^\gamma\log y},
+\]
+and \cref{eq:y-asymptotic} implies $\log y\sim\log\log x$.
+
+For $0<\sigma<1$, expanding the logarithm and applying partial summation to
+the prime number theorem \cite[Thm.~6.9, p.~179]{MontgomeryVaughan2006},
+\begin{align*}
+  \log\prod_{p\le y}(1-p^{-\sigma})^{-1/2}
+    &=\frac12\sum_{p\le y}-\log(1-p^{-\sigma})\\
+    &\sim \frac12\sum_{p\le y}p^{-\sigma}
+     \sim\frac{y^{1-\sigma}}{2(1-\sigma)\log y}.
+\end{align*}
+Substituting \cref{eq:y-asymptotic} produces the factor
+$(h-1)^{\sigma-1}$.  In particular, neither its reciprocal nor its
+deletion is compatible with the exact optimizer.
+\end{proof}
+
+The proof uses no finite maximization.  The finite optimizer rows reported in
+\cref{app:canonical-evidence} are implementation checks of
+\cref{prop:primorial-optimizer}; they are not evidence for the asymptotic
+regimes.

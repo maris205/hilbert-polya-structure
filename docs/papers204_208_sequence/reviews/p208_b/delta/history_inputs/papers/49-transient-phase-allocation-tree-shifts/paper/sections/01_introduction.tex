@@ -1,0 +1,104 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Markov constraints on a rooted tree amplify local choices very differently
+from constraints on a one-dimensional shift.  A decision made at a vertex is
+replicated across exponentially many descendants, while the natural metric
+assigns its scale through the size of an entire finite tree.  In this setting,
+even one strictly transient graph state can affect a boundary-weighted
+dimension: its $d$ children can enter different cyclic phases, and the chosen
+phase proportions persist through exponentially large descendant subtrees.
+The phenomenon studied here is this finite integer allocation, not arbitrary
+reducibility.
+
+Tree-shifts of finite type and Markov hom tree-shifts have an established
+entropy theory; see, among others, \citet{aubrunBeal2012},
+\citet{petersenSalama2018}, and \citet{petersenSalama2020}.  Reducible
+topological entropy need not be the maximum of the component entropies
+\citep{banEtAl2021,banEtAl2022}.  More recently,
+\citet{banLaiWu2025} developed Hausdorff-dimension theory for irreducible
+Markov hom tree-shifts in the metric used below and identified the general
+reducible case as a separate problem.  These results set the boundary of the
+present article: we neither claim the component-failure mechanism for
+topological entropy nor solve the general reducible Hausdorff problem.
+
+Our core is deliberately rigid.  Its alphabet is partitioned into $p$
+nonempty phases $V_0,\ldots,V_{p-1}$, and every label in $V_j$ may be followed
+by every label in $V_{j+1}$, with indices modulo $p$.  Put
+$a_j=|V_j|$ and $c_j=\log a_j$.  For the complete core, direct counting gives
+the supporting quantity
+\[
+ H_j(c)=\frac{d-1}{d^p-1}
+ \sum_{t=0}^{p-1}d^{p-1-t}c_{j-t}.
+\]
+The core dimension is $\min_j H_j(c)$.  We then add one transient state $r$
+that sees every core label and has no return edge.  Fixing the phases of its
+ordered children gives a composition $m=(m_0,\ldots,m_{p-1})$ of $d$ and the
+dimension
+\[
+ D_1(m;c)=\min_j\frac1d\sum_s m_s H_{s+j}(c).
+\]
+There are only finitely many phase assignments, so maximizing this expression
+over integer compositions gives the dimension of the full one-level shift.
+This order of operations matters: the minimum over depth residues remains
+inside the integer optimization.
+
+\begin{figure}[t]
+  \centering
+  \input{../figures/phase_allocation.tikz}
+  \caption{The unrestricted one-level feeder chooses an integer phase
+  allocation $m$ at its frontier.  The complete cyclic core turns each fixed
+  allocation into an equiprobable stratum, whose least depth residue controls
+  its Hausdorff dimension.  Children are grouped only for counting; the tree
+  remains ordered.  The diagram does not represent an arbitrary reducible
+  graph.}
+  \label{fig:mechanism}
+\end{figure}
+
+The complete-core calculation above is an ingredient rather than a novelty
+claim about irreducible theory.  The residual contributions are as follows.
+
+\begin{enumerate}[label=(\roman*)]
+  \item We derive the exact phase-allocation max--min for the unrestricted
+  one-level feeder.  The proof includes both Hausdorff bounds, the finite-union
+  step, and the fact that concentrated compositions dominate all core-root
+  strata.  The same argument covers only explicitly declared finite sets of
+  one-level compositions.
+
+  \item We identify the exact saturation arithmetic.  Every allocation lies
+  below the spectral mean $\bar c=p^{-1}\sum_jc_j$, and equality is equivalent
+  to constancy of a circular convolution, or equivalently of shifted integer
+  products.  Uniform allocation proves $p\mid d$ sufficient.  The converse is
+  stated only when every nonzero Fourier mode of $c$ is nonzero; an explicit
+  $p=4,d=2$ witness rejects an unconditional converse.
+
+  \item We obtain closed formulas for two phases and extend the allocation to
+  the canonical unrestricted $L$-level forced chain.  The exact denominator is
+  $d^L$, the optimized dimensions are monotone, and a balanced composition
+  gives an explicit $O(d^{-L})$ distance to $\bar c$.  Restricted multilevel
+  variants are mentioned only with a stated balanced-access condition.
+
+  \item We exhibit a four-state binary shift for which the sole cyclic
+  essential strongly connected component has dimension $\log 2/3$, whereas
+  the full reducible shift has dimension $\log 2/2$.  Thus the cyclic-essential-SCC
+  maximum fails.  Exact programs replay
+  the identities and negative controls, but no finite census substitutes for
+  the universal proofs.
+\end{enumerate}
+
+The proof strategy is elementary but sensitive to indices and metric scales.
+We first identify balls with finite-tree cylinders and prove a matching
+cylinder-cover/Frostman lemma.  We then compute periodic weighted limits with
+the backward index $j-t$.  Only after the exact one-level optimizer is proved
+do we study equality through a circulant operator and discrete Fourier
+modes.  Finally, the map $m\mapsto dm$ embeds the depth-$L$ allocation grid in
+the depth-$(L+1)$ grid, while balanced integer compositions control the
+remaining gap.
+
+The scope is narrow throughout.  We assume positive phase sizes, complete
+phase-to-phase blocks, and no return to a feeder.  Arbitrary finite strictly
+transient feeder shapes, incomplete blocks, communicating cyclic components,
+and nontransient reuse are excluded.  Section~\ref{sec:related} fixes the
+source boundary; Sections~\ref{sec:setting}--\ref{sec:deep} prove the main
+results; Section~\ref{sec:example} gives the four-state application and exact
+verification; and the appendices record endpoints and reproducibility.

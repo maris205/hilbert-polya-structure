@@ -1,0 +1,134 @@
+\section{Existence, ideal membership, and the common cyclic ledger}
+\label{sec:ledger}
+
+The block decomposition converts operator questions into positive sums.
+This also makes every strict endpoint visible without analytic
+continuation or finite truncation.
+
+\begin{proposition}[Exact boundedness and compactness domains]
+\label{prop:existence}
+$S_{h,s}$ is bounded exactly when $\sigma>0$, and $M_{h,s}$ is bounded
+exactly when $\sigma>1/h$.  Each bounded operator is compact.
+\end{proposition}
+
+\begin{proof}
+If $\sigma\le0$, the saturated block $m=p^{h-1}$ contains
+$p^{h-1+r}$ for every $r\ge0$, and its coefficient square mass diverges.
+Thus $S_{h,s}$ cannot be bounded.  Suppose $\sigma>0$.  A nonsaturated
+local contribution to \cref{eq:rho-S} is $p^{-e\sigma}<1$.  A saturated
+contribution is
+\[
+  b_p=p^{-(h-1)\sigma}(1-p^{-\sigma})^{-1}.
+\]
+Since $b_p\to0$, only finitely many $b_p$ exceed one; their product is a
+uniform bound for all squared block norms.  Hence $S_{h,s}$ is bounded.
+
+As $m\to\infty$ through $\Fh$, at least one prime divisor of $m$ tends to
+infinity because every exponent is at most $h-1$.  Its local contribution
+tends to zero, while all other contributions are bounded by the fixed
+product of the finitely many exceptional factors.  Therefore
+$\rho_S(m)\to0$.  An orthogonal direct sum of rank-one blocks is compact
+exactly when its block norms tend to zero.
+
+For $M_{h,s}$, the block at $m=1$ has squared mass $\zeta(h\sigma)$,
+which is finite exactly for $\sigma>1/h$.  On this domain
+$\rho_M(m)=\zeta(h\sigma)^{1/2}m^{-\sigma/2}\to0$, giving both boundedness
+and compactness.
+\end{proof}
+
+\begin{proposition}[Powers and Schatten walls]
+\label{prop:schatten}
+For $k\ge1$ and $0<q<\infty$,
+\begin{align*}
+  S_{h,s}^{k}\in\Sq&\iff k\sigma q>2,\\
+  M_{h,s}^{k}\in\Sq&\iff \sigma>1/h\ \text{and}\ k\sigma q>2.
+\end{align*}
+Every equality endpoint fails.
+\end{proposition}
+
+\begin{proof}
+For $k=1$, orthogonality and \cref{eq:rho-S} give
+\begin{equation}
+  \sum_{m\in\Fh}\rho_S(m)^q
+  =\prod_p\left[
+    1+\sum_{e=1}^{h-2}p^{-e\sigma q/2}
+    +p^{-(h-1)\sigma q/2}(1-p^{-\sigma})^{-q/2}
+    \right].
+  \label{eq:S-schatten-product}
+\end{equation}
+When $h\ge3$, the first nonconstant term is $p^{-\sigma q/2}$; when
+$h=2$, the saturated term is asymptotic to the same quantity.  The positive
+Euler product converges exactly for $\sigma q/2>1$.
+
+For $M$,
+\begin{equation}
+  \sum_{m\in\Fh}\rho_M(m)^q
+  =\zeta(h\sigma)^{q/2}
+    \sum_{m\in\Fh}m^{-\sigma q/2}
+  =\zeta(h\sigma)^{q/2}
+    \frac{\zeta(\sigma q/2)}{\zeta(h\sigma q/2)}.
+  \label{eq:M-schatten-product}
+\end{equation}
+The first factor imposes the boundedness condition $\sigma>1/h$; the
+positive $h$-free sum converges exactly for $\sigma q/2>1$.
+
+By \cref{eq:block-power}, the unique singular value of $T_m^k$ is
+$|\lambda_m|^{k-1}\rho_T(m)$.  Repeating the two products replaces the
+leading exponent $\sigma q/2$ by $k\sigma q/2$ while leaving the modulo
+fiber factor $\zeta(h\sigma)^{q/2}$ unchanged.  This proves the stated
+conditions.  At equality, the leading positive prime sum is harmonic over
+the primes, so cancellation cannot rescue the endpoint.
+\end{proof}
+
+\begin{proposition}[Common spectrum and traces]
+\label{prop:cyclic}
+On either bounded domain, the nonzero spectrum is the simple set
+$\{m^{-s/2}:m\in\Fh\}$.  On the common bounded domain, if $k\sigma>2$,
+then \cref{eq:intro-trace} holds.  For every integer $r\ge1$ satisfying
+$\sigma>1/h$ and $r\sigma>2$, the regularized determinant identity
+\cref{eq:intro-det} holds.
+\end{proposition}
+
+\begin{proof}
+Each block has the sole nonzero eigenvalue $\lambda_m$ by
+\cref{lem:block-ledger}.  Since $\sigma>0$ on every bounded domain,
+$|\lambda_m|=m^{-\sigma/2}$ is strictly decreasing with $m$; hence no two
+blocks contribute the same eigenvalue.  Compactness adds only zero to the
+spectrum.
+
+If $k\sigma>2$, \cref{prop:schatten} makes the relevant powers trace
+class, and absolute convergence permits the block traces to be summed:
+\begin{align*}
+  \Tr(T^k)
+    &=\sum_{m\in\Fh}\lambda_m^k
+      =\prod_p\sum_{e=0}^{h-1}p^{-eks/2}\\
+    &=\prod_p\frac{1-p^{-hks/2}}{1-p^{-ks/2}}
+      =\frac{\zeta(ks/2)}{\zeta(hks/2)}.
+\end{align*}
+At $k\sigma=2$, the modulus sum is the divergent $h$-free harmonic
+series, so the equality line is excluded.
+
+The determinant statement follows from the common simple nonzero
+eigenvalues and the regularized determinant product in Simon
+\cite[Ch.~9, pp.~75--80]{Simon2005}; the exact product and its legality are recorded in
+\cref{app:determinants}.  Nothing in that argument implies similarity.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\caption{The common cyclic ledger and the distinct metric/angular ledgers.}
+\label{tab:ledgers}
+\begin{tabular}{@{}p{0.27\linewidth}p{0.31\linewidth}p{0.31\linewidth}@{}}
+\toprule
+Quantity & Saturated $S_{h,s}$ & Modulo $M_{h,s}$ \\
+\midrule
+Bounded domain & $\sigma>0$ & $\sigma>1/h$ \\
+Nonzero eigenvalues & \multicolumn{2}{c}{$m^{-s/2}$, $m\in\Fh$, simple} \\
+Block singular square & $m^{-\sigma}\prod_{p\in J_h(m)}(1-p^{-\sigma})^{-1}$
+ & $m^{-\sigma}\zeta(h\sigma)$ \\
+Riesz norm & $\prod_{p\in J_h(m)}(1-p^{-\sigma})^{-1/2}$
+ & $\zeta(h\sigma)^{1/2}$ \\
+Similarity to normal & $\sigma>1$ & $\sigma>1/h$ \\
+\bottomrule
+\end{tabular}
+\end{table}

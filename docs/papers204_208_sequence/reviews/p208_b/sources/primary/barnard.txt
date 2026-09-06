@@ -1,0 +1,2589 @@
+                                              POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN
+                                                                    LATTICES
+
+                                                                 EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+arXiv:2312.03959v1 [math.CO] 7 Dec 2023
+
+
+
+
+                                                 Abstract. The pop-stack operator of a finite lattice L is the map pop↓L : L → L that sends each
+                                                 element x ∈ L to the meet of {x} ∪ covL (x), where covL (x) is the set of elements covered by x in
+                                                 L. We study several properties of the pop-stack operator of tors Λ, the lattice of torsion classes of
+                                                 a τ -tilting finite algebra Λ over a field K. We describe the pop-stack operator in terms of certain
+                                                 mutations of 2-term simple-minded collections. This allows us to describe preimages of a given
+                                                 torsion class under the pop-stack operator.
+                                                    We then specialize our attention to Cambrian lattices of a finite irreducible Coxeter group W .
+                                                 Using tools from representation theory, we provide simple Coxeter-theoretic and lattice-theoretic
+                                                 descriptions of the image of the pop-stack operator of a Cambrian lattice (which can be stated
+                                                 without representation theory). When specialized to a bipartite Cambrian lattice of type A, this
+                                                 result settles a conjecture of Choi and Sun. We also settle a related enumerative conjecture of
+                                                 Defant and Williams. When L is an arbitrary lattice quotient of the weak order on W , we prove
+                                                 that the maximum size of a forward orbit under the pop-stack operator of L is at most the Coxeter
+                                                 number of W ; when L is a Cambrian lattice, we provide an explicit construction to show that this
+                                                 maximum forward orbit size is actually equal to the Coxeter number.
+
+
+                                                                                            Contents
+                                            1. Introduction                                                                                               1
+                                            2. Posets and Lattices                                                                                        4
+                                            3. Finite-Dimensional Algebras                                                                                6
+                                            4. Mutation of Semibrick Pairs                                                                               11
+                                            5. Pop-Stack Operators for Torsion Classes                                                                   14
+                                            6. The Weak Order and Cambrian Lattices                                                                      19
+                                            7. The Image of Pop-Stack on a Cambrian Lattice                                                              23
+                                            8. Cambrian Lattices in Type A                                                                               27
+                                            9. Maximum-Size Pop-Stack Orbits                                                                             33
+                                            10. Future Directions                                                                                        42
+                                            Appendix A. Proof of Theorem 4.6                                                                             43
+                                            Acknowledgments                                                                                              48
+                                            References                                                                                                   48
+
+
+
+                                                                                        1. Introduction
+                                          1.1. Pop-stack. Let L be a finite lattice with meet operation ∧ and join operation ∨. The pop-
+                                          stack operator pop↓L : L → L and the dual pop-stack operator pop↑L : L → L are defined by
+                                                                       ^                                    _              
+                                                       pop↓L (x) = x ∧   {y | y <· x}   and pop↑L (x) = x ∨       {y | x <· y} ,
+                                          where we write u ⋖ v to mean that u is covered by v in L. These operators have appeared in various
+                                          contexts; they serve as both useful tools [AP22, BH, Eno23, ES22, Hana, Müh19, Rea11, Sak]
+                                          and objects of interest in their own right [CS, CG19, CGP21, Def22b, Def22a, DW23, Hon22,
+                                                                                                  1
+2                        EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+PS19, Ung82]. When the lattice L is understood, we will omit subscripts and simply denote these
+operators by pop↓ and pop↑ .
+   In [CG19, Def22b, Def22a, Hon22, PS19, Ung82], the pop-stack operator has been considered as
+a dynamical system. Given a map f : L → L and an element x ∈ L, the forward orbit of x under
+f is the set
+                             Orbf (x) = {x, f (x), f 2 (x), f 3 (x), . . .},
+where f t is the map obtained by composing f with itself t times. To ease notation, let us write
+                                         OL (x) = Orbpop↓ (x)
+                                                          L
+
+
+for the forward orbit of x under pop↓L .  If t is sufficiently large, then (pop↓L )t (x) is equal to the
+minimal element 0̂ of L (which is a fixed point of pop↓L ). Thus, |OL (x)| − 1 is equal to the number
+of iterations of pop↓L needed to send x to 0̂. Given an interesting lattice L, one of the primary
+problems one can consider about its pop-stack operator is that of computing
+                                             max |OL (x)|.
+                                             x∈L
+
+For a fixed t, one can also consider the t-pop-stack sortable elements of L, which are the elements
+x ∈ L such that (pop↓L )t (x) = 0̂.
+  Defant and Williams [DW23] also found that it is fruitful to study the image of the pop-stack
+operator when L is a semidistrim lattice; this is because the image of pop↓ has numerous interesting
+properties, some of which relate to a certain bijective rowmotion operator row : L → L. For example,
+|pop↓ (L)| and |pop↑ (L)| are both equal to the number of elements x ∈ L such that row(x) ≤ x. The
+images of pop↓ and pop↑ are also naturally in bijection with the set of facets of a certain simplicial
+complex called the canonical join complex of L.
+
+1.2. Lattices of torsion classes. In this article, we take a representation-theoretic perspective
+and consider a finite-dimensional basic algebra Λ over a field K. The set of torsion classes (see
+Section 3.2 for the definition) of finitely-generated (right) Λ-modules forms a complete lattice
+[IRTT15] that we denote by tors Λ. Examples of lattices arising in this way include the weak order
+and Cambrian lattices associated to any finite crystallographic Coxeter group [AHI+ , Miz14, IT09].
+This paper continues a rich tradition of using lattices of torsion classes as a tool for proving new
+results in both representation theory and in algebraic combinatorics; see, e.g., [DIR+ 23, Eno23,
+IRRT18, RST21, TW19b, TW19a] and many others.
+   We focus our attention on the case when Λ is τ -tilting finite (in the sense of [DIJ17]); this is
+equivalent to assuming tors Λ is finite. Our goal is to study the image and the dynamical properties
+of the pop-stack operator of tors Λ. While pop↓ has already appeared (sometimes under different
+names) in the theory of lattices of torsion classes [AP22, BH, Eno23, ES22, Hana, Sak], it has
+primarily been used as a tool rather than a dynamical operator worthy of its own investigation.
+Let us remark that the article [BTZ21] initiated the study of dynamical combinatorics of torsion
+classes by considering rowmotion.
+   In Section 4, we consider certain pairs of sets of modules called 2-term simple-minded collections
+and semibrick pairs. 2-term simple-minded collections were first introduced in the special case
+when Λ is a symmetric algebra in [Ric02]; they are special cases of the more general simple-minded
+collections introduced in [AN09] (under the name spherical collections). Semibrick pairs are a
+generalization of 2-term simple-minded collections that were introduced in [HI21b] as a tool for
+studying a generalization of the picture group of [ITW]. As we recall in Section 3.3, there is
+a bijection between tors Λ (with Λ τ -tilting finite) and the set 2-smc Λ of 2-term simple-minded
+collections [Asa20]. By the results of [BCZ19], this bijection encodes information about cover
+relations and canonical join representations in tors Λ.
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                                3
+
+
+   The set 2-smc Λ also comes equipped with a set of mutation operators that categorify the mutation
+theory of cluster algebras. See [BY13, Section 3.7] and [KY14, Section 7.2] (special cases also
+appeared earlier in [KS, Section 8.1] and [KQ15, Section 3]). These mutation formulas can also
+be applied to many of the more general semibrick pairs; see [BH22, HI21a]. Moreover, under
+the bijection between 2-smc Λ and tors Λ, the mutation operators give a representation-theoretic
+formula for how the corresponding 2-term simple-minded collection changes when one traverses a
+cover relation in tors Λ.
+   For each semibrick pair (X , Y), there is classically one mutation operator for each module in
+X ∪Y. In the present paper, we more generally define a mutation operator for each nonempty subset
+X ′ ⊆ X or Y ′ ⊆ Y. Our first main result (Theorem 5.1) states that, under the bijection between
+tors Λ and 2-smc Λ, applying the pop-stack operator and its dual to a torsion class corresponds to
+performing certain mutations on the associated 2-term simple-minded collections.
+   In Section 5.2, we characterize the preimages of a prescribed torsion class under pop↓tors Λ and
+pop↑tors Λ . As corollaries, we obtain descriptions of the 1-pop-stack sortable and the 2-pop-stack
+sortable elements of tors Λ (Corollaries 5.4 and 5.5).
+
+1.3. Cambrian lattices. Let W be a finite irreducible Coxeter group, and let Weak(W ) denote
+the (right) weak order on W . Given a Coxeter element c of W , one can construct the c-Cambrian
+lattice Cambc , which is the sublattice of Weak(W ) consisting of Reading’s c-sortable elements
+[Rea06, Rea07]. (The c-Cambrian lattice is also a lattice quotient of Weak(W ).) When W is
+crystallographic, we can realize Cambc as the lattice of torsion classes of the tensor algebra KQc
+associated to the weighted Dynkin quiver associated to c [IT09].
+   Two very special Cambrian lattices are the Tamari lattice and the type-B Tamari lattice; the
+images of the pop-stack operators on these lattices were characterized and enumerated in [Hon22]
+and [CS], respectively. On the other hand, analogous results for the Cambrian lattice Cambc× asso-
+ciated to a type-A bipartite Coxeter element c× have remained elusive: a conjectural enumeration
+of the image was formulated by Defant and Williams [DW23], while a characterization of the image
+was conjectured by Choi and Sun [CS].
+   It turns out that our representation-theoretic perspective is quite useful for understanding the
+image of pop↓Cambc . In Theorem 5.10, we provide a representation-theoretic characterization of the
+image of pop↓tors Λ whenever Λ is hereditary. When the Coxeter group W is crystallographic, the
+tensor algebra KQc is hereditary, and we can reformulate our description of the image of the pop-
+stack operator in purely lattice-theoretic and Coxeter-theoretic terms. We then check directly (by
+hand and by computer) that these lattice-theoretic and Coxeter-theoretic descriptions still holds
+when W is not crystallographic.
+   Our Coxeter-theoretic description of the image of pop↓Cambc is surprisingly simple: we will prove
+(Theorem 7.8) that a c-sortable element w ∈ Cambc is in the image of pop↓Cambc if and only if the
+right descents of w all commute and w has no left inversions in common with c−1 .
+   To state our purely lattice-theoretic description of the image of pop↓Cambc , let us write s1 , . . . , sn
+for the simple reflections of W ; these are the atoms of Cambc . For 1 ≤ i ≤ n, let pi be the unique
+maximal element of the set
+
+                        {x ∈ Cambc | si ≤ x and sj ̸≤ x for all sj ∈ S \ {si }}.
+
+We will prove that an element w ∈ Cambc is in the image of pop↓Cambc if and only if the interval
+[pop↓Cambc (w), w] (in Cambc ) is Boolean and pi ̸≤ w for all 1 ≤ i ≤ n. When W is crystallographic,
+the elements p1 , . . . , pn correspond in a natural way to the projective indecomposable modules of
+the tensor algebra KQc ; this is one reason why our representation-theoretic perspective was so
+useful for discovering and proving our description of the image of pop↓Cambc .
+4                        EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+   Along the way to proving our characterization of the image of pop↓Cambc , we prove (as part of
+Theorem 7.6) that for w ∈ Cambc , the right descents of w all commute with each other if and only
+if the interval [pop↓Cambc (w), w] of Cambc is equal to the interval [pop↓Weak(W ) (w), w] of Weak(W ).
+By combining this surprising result with our characterization of the image of pop↓Cambc , we obtain
+an equally surprising dynamical corollary (Corollary 7.10); namely, for w ∈ Cambc , we have
+(1.1)                     (pop↓Weak(W ) )t (pop↓Cambc (w)) = (pop↓Cambc )t+1 (w)
+for all t ≥ 0.
+   When W is of type An and c = c× is a bipartite Coxeter element, our description of the image
+of pop↓Cambc resolves the aforementioned conjecture of Choi and Sun [CS]. We will also construct
+a bijection from the image of pop↓Camb × to a certain set of Motzkin paths (Theorem 8.10); this
+                                          c
+allows us to resolve the aforementioned enumerative conjecture of Defant and Williams [DW23].
+This result, the bijective proof of which utilizes the combinatorics of arc diagrams, provides an exact
+enumeration of the facets of the canonical join complex of a bipartite type-A Cambrian lattice.
+   Finally, we turn our attention to forward orbits under pop↓L when L is a lattice quotient of
+the weak order on a finite irreducible Coxeter group W . In this setting, we first show that
+maxx∈L |OL (x)| ≤ h, where h is the Coxeter number of W . We then prove that this inequality
+is actually an equality when L = Cambc for some Coxeter element c of W . To do so, we utilize the
+combinatorial properties of the c-sorting word for the long element of W to construct an element
+zc ∈ Cambc such that |OCambc (zc )| = h.
+
+1.4. Organization. Sections 2 and 3 provide necessary background on posets and representation
+theory, respectively. In Section 4, we discuss the theory of mutation of semibrick pairs, and we
+extend the theory to allow mutation at multiple bricks simultaneously; the proof of one of the
+main results of this section (Theorem 4.6) is postponed until Appendix A. Section 5 provides a
+representation-theoretic description of the pop-stack operator on tors Λ, describes preimages of a
+torsion class under pop↓tors Λ , and characterizes the image of pop↓tors Λ . Beginning in Section 6, we
+fixate on Cambrian lattices. Section 6 provides background on Coxeter groups, root systems, and
+Cambrian lattices (including their realizations as lattices of torsion classes). Section 7 is devoted to
+characterizing the image of the pop-stack operator on an arbitrary Cambrian lattice and deducing
+Equation (1.1). In Section 8, we provide explicit combinatorial characterizations and enumerations
+of the images of pop-stack operators on Cambrian lattices of type A. In Section 9, we prove our
+results concerning the maximum sizes of forward orbits under the pop-stack operators on lattice
+quotients of the weak order. Section 10 collects several ideas for future work.
+
+                                      2. Posets and Lattices
+   Let P be a finite poset. For x, y ∈ P with x ≤ y, the interval between x and y is the induced
+subposet [x, y] = {z ∈ P | x ≤ z ≤ y} of P . We say y covers x and write x ⋖ y if x < y and
+[x, y] = {x, y}. The Hasse diagram of P is the graph with vertex set P in which x and y are
+adjacent whenever x ⋖ y or y ⋖ x. We say P is connected if its Hasse diagram is connected. A rank
+function on P is a function rank : P → Z such that rank(y) = rank(x) + 1 whenever x ⋖ y. We
+say P is ranked if there exists a rank function on P . An antichain is a poset P in which any two
+distinct elements are incomparable (that is, if x, y ∈ P are such that x ≤ y, then x = y). The dual
+of P is the poset P ∗ with the same underlying set as P defined so that x ≤ y in P ∗ if and only if
+y ≤ x in P . A subset X of P is called convex if for all x, y ∈ X and all z ∈ P with x ≤ z ≤ y, we
+have z ∈ X. An order ideal is a subset I of P such that if x ∈ P and y ∈ I satisfy x ≤ y, then
+x ∈ I. An upper set of P is a subset U ⊆ P such that P \ U is an order ideal. We write J(P ) for
+the set of order ideals of P , ordered by inclusion.
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                             5
+
+
+    A lattice is a poset L such that any two elements x, y ∈ L have a greatest lower bound, which
+is called their meet and denoted by x ∧ y, and a least upper bound, which is called their join and
+denoted by x ∨ y. A finite lattice is distributive if it is isomorphic to J(P ) for some finite poset P .
+A lattice is Boolean if it is isomorphic to the power set of a set, ordered by inclusion. Hence, if P
+is an antichain, then J(P ) is Boolean.
+    A lattice L is complete if every (possibly infinite)
+                                                      V subset  W has a meet (i.e., greatest lower bound)
+and a join (i.e., least upper bound). We write X and X for the meet and join, respectively,
+of a subset X of a complete lattice. Given lattices L and L′ , a lattice homomorphism is a map
+ϕ : L → L′ such that ϕ(x ∧ y) = ϕ(x) ∧ ϕ(y) and ϕ(x ∨ y) = ϕ(x) ∨ ϕ(y) for all x, y ∈ L. We say L′
+is a lattice quotient if there is a surjective lattice homomorphism from LVto L′ .
+    Assume L W  is a finite lattice. Then L has a unique minimal element 0̂ = L and a unique maximal
+element 1̂ = L. An element of L that covers 0̂ is called an atom, while an element covered by 1̂ is
+called a coatom.  W An element j ∈ L is called join-irreducible if there does not exist a set X ⊆ L \ {j}
+such that j = X. Equivalently, j is join-irreducible  W     if it covers exactly one element of L. (Note
+that 0̂ is not join-irreducible because it is equal to ∅.) Dually,
+                                                                V an element m ∈ L is meet-irreducible
+if there does not exist a set X ⊆ L \ {m} such that j = X.         V Equivalently, m is meet-irreducible
+if it is covered by exactly one element of L. (Note that 1̂ = ∅ is not meet-irreducible.) Let JIrrL
+(resp. MIrrL ) be the set of join-irreducible (resp. meet-irreducible) elements of L. For j ∈ JIrrL and
+m ∈ MIrr, let j∗ be the unique element covered by j, and let m∗Wbe the W      unique element
+                                                                                          V that  V covers
+m. A set A ⊆ L is join-irredundant (resp. meet-irredundant) if A′ < A (resp. A′ > A) for
+every proper subset A′ of A. The canonical join representation of an element x ∈ L (if it exists) is
+the unique join-irredundant set A ⊆ JIrrL satisfying the following:
+              W
+       • x = A.                                                        W
+       • For every join-irredundant set B ⊆ JIrrL such that x = B, there exist a ∈ A and b ∈ B
+          such that a ≤ b.
+Dually, the canonical meet representation of x (if it exists) is the unique meet-irredundant set
+A ⊆ MIrrL satisfying the following:
+            V
+     • x = A.                                                    W
+     • For every meet-irredundant set B ⊆ MIrrL such that x = B, there exist a ∈ A and b ∈ B
+       such that a ≥ b.
+  We say a lattice L is semidistributive if for all x, y, z ∈ L, we have
+
+       x ∧ y = x ∧ z =⇒ x ∧ y = x ∧ (y ∨ z)       and x ∨ y = x ∨ z =⇒ x ∨ y = x ∨ (y ∧ z).
+
+Suppose L is finite and semidistributive. It is known that every element v of L has a canonical
+join representation D(v) and a canonical meet representation U(v); in fact, the existence of both
+representations for every v ∈ L is equivalent to semidistributivity (see [FJN95, Theorem 2.24]).
+Moreover, the collection of canonical join representations (resp. canonical meet representations)
+of elements of L forms a simplicial complex called the canonical join complex (resp. canonical
+meet complex ) of L. There is a unique bijection κ : JIrrL → MIrrL such that κ(j) ∧ j = j∗ and
+κ(j) ∨ j = (κ(j))∗ for all j ∈ JIrrL . The map A 7→ κ(A) is an isomorphism from canonical join
+complex of L to the canonical meet complex of L [Bar19, Corollary 5]. Moreover, the number of
+facets in each of these simplicial complexes is equal to both |pop↓L (L)| and |pop↑L (L)| by [DW23,
+Theorem 9.13]. Indeed, the facets of the canonical join complex (resp. canonical meet complex)
+of L are precisely the canonical meet representations (resp. canonical join representations) of the
+elements of pop↓L (L) (resp. pop↑L (L)). Let PL (q) be the generating function that counts the facets
+of the canonical join complex (equivalently, the canonical meet complex) according to their sizes.
+6                            EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+Then
+                                                X                           X
+(2.1)                             PL (q) =                 q |U (v)| =                 q |D(v)| .
+                                             v∈pop↓L (L)                 v∈pop↑L (L)
+
+The canonical join complex of L is equal to the canonical meet complex of the dual lattice L∗ , so
+                                                  PL (q) = PL∗ (q).
+   The Galois graph of a finite semidistributive lattice L is the loopless directed graph with vertex
+set JIrrL in which there is an arrow j → j ′ if and only if j ̸= j ′ and j ̸≤ κ(j ′ ). For each edge
+x ⋖ y in the Hasse diagram of L, there is a unique join-irreducible element jx,y ∈ JIrrL such that
+jx,y ≤ y and κ(jx,y ) ≥ x (see [Bar19, Proposition 2.2 & Lemma 3.3]). We call jx,y the shard label of
+the edge x ⋖ y. The canonical join representation and canonical meet representation of an element
+v ∈ L are given by D(v) = {jx,v : x ⋖ v} and U(v) = {κ(jv,y ) : v ⋖ y}. Moreover, the canonical join
+complex of L is just the collection of independent sets of the Galois graph of L.
+   Note that intervals in semidistributive lattices are semidistributive. The following lemma was
+stated in [DW23] for semidistrim lattices, which are more general than semidistributive lattices,
+but we only need to consider semidistributive lattices. (See also [RST21, Section 4].)
+Lemma 2.1 ([DW23, Corollary 7.10]). Let L be a finite semidistributive lattice, and let [u, v] be
+an interval in L. There is a bijection from {j ∈ JIrrL | j ≤ v and κ(j) ≥ u} to JIrr[u,v] given by
+j 7→ u ∨ j. This bijection is an isomorphism from an induced subgraph of the Galois graph of L to
+the Galois graph of [u, v]. If x ⋖ y is an edge in [u, v] whose shard label in L is jx,y , then the shard
+label of x ⋖ y in [u, v] is u ∨ jx,y .
+Example 2.2. Let P be a finite antichain, and consider the Boolean lattice J(P ). The join-
+irreducible elements of J(P ) are the singleton subsets of P . If A ⋖ B is an edge in J(P ), then there
+exists b ∈ B such that A = B \ {b}. The shard label of A ⋖ B is jA,B = {b}. The Galois graph of
+J(P ) has no edges.
+Example 2.3. Let L be the lattice obtained by adding a minimal element 0̂ and a maximal element
+1̂ to a disjoint union of two chains a1 ⋖ · · · ⋖ am−1 and am ⋖ · · · ⋖ a2m−2 (so a1 and am are the
+atoms of L, while am−1 and a2m−2 are the coatoms). This lattice is isomorphic to the weak order
+on the dihedral group I2 (m) (see Section 6). We have JIrrL = MIrrL = {a1 , . . . , a2m−2 }, and the
+bijection κ is given by κ(ai ) = ai−1 , where we let a0 = a2m−2 . For 1 ≤ i ≤ m − 1, there is an arrow
+from ai to ai′ in the Galois graph of L if and only if 1 ≤ i′ ≤ i − 1 or m + 1 ≤ i′ ≤ 2m − 2. For
+m ≤ i ≤ 2m−2, there is an arrow from ai to ai′ in the Galois graph of L if and only if 2 ≤ i′ ≤ m−1
+or m ≤ i′ ≤ i − 1. See Figure 1.
+
+                                     3. Finite-Dimensional Algebras
+   In this section, we recall background information on the representation theory of quivers and
+finite-dimensional algebras. We refer to the textbooks [ARS95, ASS06, Sch14] as standard back-
+ground references.
+   Let Λ be a finite-dimensional basic1 algebra over a field K. In the second half of the paper,
+we will mainly consider the case where Λ is the tensor algebra over a weighted Dynkin quiver ;
+discussion of this special case is deferred to Section 6.3.
+   We denote by mod Λ the category of finitely-generated right Λ-modules and by Db (mod Λ)
+the bounded derived category of mod Λ with shift functor [1]. We recall that Λ is hereditary if
+Extm Λ (M, N ) = 0 for all M, N ∈ mod Λ and m > 1. Given a basic object M ∈ mod Λ, we de-
+note by |M | the number of indecomposable direct summands of M . For M, N ∈ mod Λ, we will
+    1Recall that a module M is basic if there does not exist a nonzero module N such that N ⊕ N is a direct summand
+of M . An algebra Λ is basic if it is basic as a free Λ-module.
+              POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                            7
+
+
+
+
+       Figure 1. The Hasse diagram (left) and Galois graph (right) of the lattice L from
+       Example 2.3 with m = 5. The red arrows on the left indicate the bijection κ.
+
+sometimes write M ,→ N (resp. M ↠ N ) to represent a monomorphism/injection (resp. epi-
+morphism/surjection) in HomΛ (M, N ). A module X ∈ mod Λ is called a brick if every nonzero
+endomorphism of X is invertible. In particular, every brick must be indecomposable.
+   Let n = |Λ|, and choose an indexing P (1), . . . , P (n) of the indecomposable direct summands of
+Λ. Then for every indecomposable and projective module Q ∈ mod Λ, there exists a unique i such
+that Q ∼ = P (i). Moreover, up to isomorphism, mod Λ contains n simple modules. These can be
+indexed S(1), . . . , S(n) so that HomΛ (P (i), S(j)) ̸= 0 if and only if i = j. Moreover, each S(i) is
+a brick, and we have HomΛ (P (i), S(i)) ∼ = EndΛ (S(i)). Given an arbitrary module M ∈ mod Λ, we
+define its dimension vector to be
+                           dimM = dimEndΛ (S(i)) HomΛ (P (i), M ) i∈[n] ∈ Nn .
+                                                                    
+(3.1)
+Remark 3.1. As defined, the dimension vector dimM depends on the indexing of the projective
+modules. To avoid this dependency, one can instead define dimM to be the class [M ] of M in the
+Grothendieck group K0 (mod Λ). Indeed, this group is free abelian and has {[S(i)] | i ∈ [n]} as a
+basis. Thus, identifying each [S(i)] ∈ K0 (mod Λ) with the standard basis element ei ∈ Zn identifies
+the class [M ] with the vector dimM as defined above.
+   The purpose of the remainder of this section is to recall the definitions of torsion pairs and 2-term
+simple-minded collections, as well as the relationship between them. In doing so, we follow much
+of the exposition of [BH, Section 3].
+3.1. Subcategories and functorial finiteness. By a subcategory of mod Λ, we will always mean
+a subcategory that is full and closed under isomorphisms. For a subcategory C ⊆ mod Λ, we define
+several additional subcategories as follows:
+     • add(C) is the subcategory of mod Λ consisting of all direct summands of finite direct sums
+        of the objects in C.
+     • Gen(C) is the subcategory of mod Λ consisting of all objects that can be written as quotients
+        of objects in add(C).
+8                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+     • Cogen(C) is the subcategory of mod Λ consisting of all objects that can be written as sub-
+       objects of objects in add(C).
+     • Filt(C) is the subcategory of mod Λ consisting of all objects that can be written as iterated
+       extensions of objects in C; that is, M ∈ Filt(C) if and only if there exists a chain
+                                   0 = M0 ⊊ M1 ⊊ · · · ⊊ Mk = M
+          of modules such that each factor Mi /Mi−1 is in add(C).
+        • T(C) = Filt(Gen(C)).
+        • C ⊥ = C ⊥0 = {Y ∈ mod Λ | HomΛ (−, Y )|C = 0}.
+        • ⊥ C = ⊥0 C = {Y ∈ mod Λ | HomΛ (Y, −)|C = 0}.
+        • C ⊥1 = {Y ∈ mod Λ | Ext1Λ (−, Y )|C = 0}
+        • ⊥1 C = {Y ∈ mod Λ | Ext1Λ (Y, −)|C = 0}.
+        • C ⊥0,1 = C ⊥ ∩ C ⊥1 and ⊥0,1 C = ⊥ C ∩ ⊥1 C.
+We also apply the above definitions to the objects of mod Λ by considering (the isomorphism class
+of) a given object as a subcategory.
+   Now let C ⊆ mod Λ be an arbitrary subcategory and M ∈ mod Λ. A minimal left C-approximation
+of M is a morphism gM,C : M → C with C ∈ C such that
+      (i) the induced map (gM,C )∗ : HomΛ (C, D) → HomΛ (M, D) is surjective for all D ∈ C and
+     (ii) if f : C → C is such that f ◦ gM,C = gM,C , then f is an isomorphism.
+Dually, a minimal right C-approximation of M is a morphism gC,M : C → M with C ∈ C such that
+    (i*) the induced map (gC,M )∗ : HomΛ (D, C) → HomΛ (D, M ) is surjective for all D ∈ C and
+   (ii*) if f : C → C is such that gC,M ◦ f = gC,M , then f is an isomorphism.
+It is well known that minimal left and right C-approximations are unique up to isomorphism when-
+ever they exist. If every object of mod Λ admits both a minimal left C-approximation and a minimal
+right C-approximation, then C is said to be functorially finite. Almost all of the subcategories we
+consider in this paper will be functorially finite.
+3.2. Torsion classes. A pair (T , F) of subcategories of mod Λ is called a torsion pair if
+     (i) HomΛ (T, F ) = 0 for all T ∈ T and F ∈ F and
+    (ii) every M ∈ mod Λ is the middle term of an exact sequence tT M ,→ M ↠ fF M with
+         tT M ∈ T and fF M ∈ F.
+In this case, we say that T is a torsion class and that F is a torsion-free class. We denote by tors Λ
+and torsf Λ the sets of torsion classes and torsion-free classes in mod Λ, respectively. Torsion pairs
+were introduced by Dickson in [Dic66] as a generalization of the torsion and torsion-free abelian
+groups. We refer to the expository article [Tho21] for background information on torsion pairs,
+including formal statements for the facts mentioned in this section.
+   It is well known that a subcategory T ⊆ mod Λ (resp. F ⊆ mod Λ) is a torsion class (resp.
+torsion-free class) if and only if it is closed under extensions and quotients (resp. extensions and
+submodules). Moreover, every torsion class determines a unique torsion pair and vice versa via the
+associations T 7→ (T , T ⊥ ) and (T , F) 7→ T . Similarly, every torsion-free class determines a unique
+torsion pair and vice versa via the associations F 7→ (⊥ F, F) and (T , F) 7→ F.
+   For C ⊆ mod Λ an arbitrary subcategory, we have that T(C) is the smallest torsion class containing
+C; the corresponding torsion pair is (T(C), C ⊥ ). Dually, Filt(Cogen(C)) is the smallest torsion-free
+class containing C, and the corresponding torsion pair is (⊥ C, Filt(Cogen(C))).
+   We consider tors Λ and torsf Λ as posets under the containment relation. Each of these is a
+complete    lattice whose meet
+                            operation is given by intersection and whose join operation is given
+       A = Filt T ∈A T . The associations T 7→ T ⊥ and F 7→ ⊥ F thus give lattice anti-
+    W               S
+by
+isomorphisms between tors Λ and torsf Λ. In particular, the join operation in tors Λ can be rewritten
+as T ∨ U = ⊥ (T ⊥ ∩ U ⊥ ). The maximum element of tors Λ is 1̂ = mod Λ (the torsion class consisting
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                              9
+
+
+of all modules), and the minimum element is 0̂ = 0 (the torsion class consisting only of the zero
+module). The atoms of tors Λ are precisely those torsion classes of the form Filt(S) for S ∈ mod Λ
+a simple module.
+   In this paper, we restrict our attention to algebras Λ for which the lattice tors Λ is finite. These are
+precisely the τ -tilting finite algebras introduced in [DIJ17]. They are also precisely the algebras Λ for
+which every torsion class in mod Λ is functorially finite. A related class is that of representation-
+finite algebras, which are characterized by the property that mod Λ contains only finitely many
+indecomposable modules (up to isomorphism). If Λ is hereditary, then it is τ -tilting finite if and
+only if it is representation-finite. For Λ not hereditary, representation-finiteness implies τ -tilting
+finiteness, but not vice versa. Another special class is that of silting discrete algebras [AM17]; an
+algebra Λ belongs to this class when every algebra that is derived equivalent to Λ (including Λ
+itself) is τ -tilting finite. All representation-finite hereditary algebras are silting discrete.
+   From now on, Λ will always denote a τ -tilting finite algebra. While many of the results of the
+following subsections admit generalizations to arbitrary finite-dimensional algebras, this allows us
+to streamline the exposition.
+3.3. Semibricks and 2-term simple-minded collections. Recall that a module X ∈ mod Λ is
+called a brick if EndΛ (X) is a division ring. A set X of bricks is called a semibrick if X ∈ Y ⊥ ∩ ⊥ Y
+for all distinct X, Y ∈ X . LWe adopt the convention of using the term X to represent both a set
+of bricks and the module       X∈X X. We denote by brick Λ and sbrick Λ the sets of (isomorphism
+classes of) bricks and semibricks in mod Λ, respectively. This leads to the following definition,
+which we state in this form in light of [BY13, Remark 4.11]. See Section 1.2 for historical notes
+and references.
+Definition 3.2. Let X , Y ∈ sbrick(Λ).
+    (1) We say (X , Y) is a semibrick pair if Y ∈ X ⊥0,1 .
+    (2) We say a semibrick pair (X , Y) is a 2-term simple-minded collection if the only triangulated
+         subcategory of Db (mod Λ) that contains X ⊕ Y[1] and is closed under direct summands is
+         Db (mod Λ) itself.
+    (3) We say a semibrick pair (X , Y) is completable if there exists a 2-term simple-minded collec-
+         tion (X ′ , Y ′ ) with X ⊆ X ′ and Y ⊆ Y ′ .
+We denote by sbp Λ the set of semibrick pairs and by 2-smc Λ the set of 2-term simple-minded
+collections.
+Remark 3.3.
+  (1) Not every semibrick pair is completable, even in the τ -tilting finite case; see, e.g., [HI21b,
+      Counterexample 1.9].
+  (2) If (X , Y) is a 2-term simple-minded collection, then |X | + |Y| = |Λ|. If the algebra Λ is
+      silting discrete, then the converse also holds by [HW, Corollary 6.12]; that is, if (X , Y) is a
+      semibrick pair with |X | + |Y| = |Λ|, then (X , Y) must be a 2-term simple-minded collection.
+3.4. Semidistributivity and the brick labeling. The lattice of torsion classes is known to be a
+(completely) semidistributive lattice [DIR+ 23, GM19]. Therefore, each edge in the Hasse diagram
+of tors Λ has a join-irreducible shard label as described at the end of Section 2. In this section,
+we recall from [Asa20] (τ -tilting finite case) and [BCZ19, DIR+ 23] (general case) how this labeling
+can be formulated and interpreted representation-theoretically. We note that many of the results
+recalled in this section have been specialized to the τ -tilting finite case.
+Theorem 3.4 ([BCZ19, BTZ21]). Let Λ be a τ -tilting finite algebra.
+  (1) There is a bijection brick Λ → JIrrtors Λ given by X 7→ T(X).
+  (2) There is a bijection brick Λ → MIrrtors Λ given by X 7→ ⊥ X.
+  (3) The bijection κ : JIrrtors Λ → MIrrtors Λ is given by κ(T(X)) = ⊥ X for all X ∈ brick Λ.
+10                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+  The brick label of a cover relation T <· T ′ in tors Λ is the unique brick X for which jT ,T ′ = T(X).
+For a fixed T ∈ tors Λ, we (slightly abusing notation) denote by D(T ) and U(T ) the sets of bricks
+that label cover relations of the form T ′ <· T and T <· T ′ , respectively.
+Lemma 3.5 ([BCZ19, Corollary 3.9]). Let T ∈ tors Λ.
+  (1) If Y ∈ U(T ) and Y ↠ Y ′ is a surjection with nonzero kernel, then Y ∈ T .
+  (2) If X ∈ D(T ) and X ′ ,→ X is an injection with nonzero cokernel, then X ′ ∈ T ⊥ .
+  Theorem 3.4 and Lemma 3.5 immediately yield the following characterization of the pop-stack
+operators.
+Corollary 3.6. For T ∈ tors Λ, we have
+                  pop↓tors Λ (T ) = T ∩ ⊥ D(T )   and   pop↑tors Λ (T ) = Filt(T ∪ U(T )).
+   We now recall how Theorem 3.4 relates to 2-term simple-minded collections. Once again, we
+note that the following theorem is simplified since we consider only the case where every torsion
+class is functorially finite. This result is essentially contained in [Asa20, Theorems 2.3 and 2.12],
+but we give a short argument utilizing [BTZ21, Corollary 5.1.8] and other results from [Asa20].
+Note that it is implicitly included in Theorem 3.7(1) that the sets D(T ) and U(T ) are semibricks
+for any T ∈ tors Λ.
+Theorem 3.7.
+  (1) There are bijections sbrick Λ → tors Λ given by X 7→ T(X ) and X 7→ ⊥ X . Their inverses
+      are given by T 7→ D(T ) and T 7→ U(T ), respectively.
+  (2) If (X , Y) ∈ sbp Λ, then T(X ) ⊆ ⊥ Y, with equality if and only if (X , Y) ∈ 2-smc Λ. In
+      particular, there is a bijection 2-smc Λ → tors Λ given by (X , Y) 7→ T(X ) = ⊥ Y. The
+      inverse is given by T 7→ (D(T ), U(T )).
+  (3) There are bijections 2-smc Λ → sbrick Λ given by (X , Y) 7→ X and (X , Y) 7→ Y.
+Proof.
+  (1) The fact that these associations are bijections is from [Asa20, Theorem 2.3]. The explicit
+description of the inverses follows from [Asa20, Proposition 1.26] and [BTZ21, Corollary 5.1.8].
+  (2) That T(X) ⊆ ⊥ Y follows immediately from the definition. The fact that we have equality if
+and only if (X , Y) ∈ 2-smc Λ then follows from [Asa20, Theorem 2.3].
+  (3) This follows from [Asa20, Theorem 2.3(i)].                                                 □
+   In particular, Theorem 3.7 implies that any semibrick pair of the form (X , ∅) or (∅, Y) is com-
+pletable. For (X , Y) ∈ 2-smc Λ, we write T(X , Y) = T(X ) = ⊥ Y.
+3.5. Wide and Serre subcategories. A subcategory W ⊆ mod Λ is called wide if it is closed
+under extensions, kernels, and cokernels. Alternatively, a subcategory is wide if it is an exact-
+embedded abelian subcategory. We denote by wide Λ the set of wide subcategories of mod Λ.
+   It is a classical result of [Rin76] that there is a bijection sbrick Λ → wide Λ given by X 7→ Filt(X ).
+The inverse sends a wide subcategory W to the set of objects that are simple in W (i.e., those X ∈ W
+that admit no proper submodules in W). Combining this with Theorem 3.7, we see that, under
+the τ -tilting finite hypothesis, there are two bijections tors Λ → wide Λ given by T 7→ Filt(D(T ))
+and T 7→ Filt(U(T )). The inverses of these bijections are given by W 7→ T(W) and W 7→ ⊥ W,
+respectively. Moreover, these bijections correspond to the so-called Ingalls–Thomas bijections of
+[IT09, MŠ17]; that is, we have the following. (See also [Eno23, Remark 4.20], which relates this
+result to the rowmotion operators.)
+Proposition 3.8 ([Asa20, Theorem 2.3]). Let T ∈ tors Λ.
+  (1) We have Filt(D(T )) = {M ∈ T | kerf ∈ T for all N ∈ T and f : N → M }.
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                              11
+
+
+   (2) We have Filt(U(T )) = {M ∈ T ⊥ | cokerf ∈ T ⊥ for all N ∈ T ⊥ and f : M → N }.
+Remark 3.9. Since Λ is τ -tilting finite, every wide subcategory of mod Λ is functorially finite by
+[MŠ17, Corollary 3.11]. Equivalently (see [Eno22, Proposition 4.12]), for every W ∈ wide Λ, there
+exists a finite-dimensional algebra Λ′ such that W is exact-equivalent to mod Λ′ .
+   We conclude this section with a brief discussion of Serre subcategories. A subcategory W ⊆ mod Λ
+is called Serre if it is closed under extensions, submodules, and quotient modules. The following is
+well known.
+Proposition 3.10. Let W ⊆ mod Λ. Then the following are equivalent.
+  (1) The subcategory W is Serre.
+  (2) The subcategory W is at least two of the following: a wide subcategory, a torsion class, and
+      a torsion-free class.
+  (3) The subcategory W is a wide subcategory, a torsion class, and a torsion-free class.
+  (4) We have W = Filt(S) for some set S of modules that are simple in mod Λ.
+  (5) There exists a projective module P ∈ mod Λ such that W = P ⊥ .
+  (6) There exists an injective module I ∈ mod Λ such that W = ⊥ I.
+  (7) The subcategory W is wide, and every object that is simple in W is also simple in mod Λ.
+   Given a wide subcategory W, we will also say that a wide subcategory W ′ ⊆ W is Serre in W
+if every object that is simple in W ′ is also simple in W.
+
+                                 4. Mutation of Semibrick Pairs
+   In this section, we extend the theory of mutation of semibrick pairs established in [HI21a, Sec-
+tion 3] and [BH22, Section 3.4]. This extends the mutation formulas for 2-term simple-minded
+collections from [KY14, Section 7.2] and [BY13, Section 3.7]. In those papers, one mutates a
+semibrick pair (resp. 2-term simple-minded collection) at a single brick. In the present paper, we
+extend this to be able to mutate at multiple bricks simultaneously.
+   Recall that Λ denotes a τ -tilting finite algebra, and let (X , Y) be a semibrick pair. For X ∈ X
+and Y ′ ⊆ Y, denote by gY ′ ,X : YX′ → X a minimal right Filt(Y ′ )-approximation of X. (Note that
+YX′ = 0 if Y ′ = ∅.) Likewise for Y ∈ Y and X ′ ⊆ X , denote by gY,X ′ : Y → XY′ a minimal left
+Filt(X ′ )-approximation of Y . (Note that XY′ = 0 if X ′ = ∅.) We note that both gY ′ ,X and gY,X ′
+exist and are unique up to isomorphism because Filt(X ′ ) and Filt(Y ′ ) are functorially finite wide
+subcategories; see Sections 3.1 and 3.5.
+Definition 4.1. We say a semibrick pair (X , Y) is singly mutation (SM) compatible if for all X ∈ X ,
+Y ∈ Y, X ′ ⊆ X , and Y ′ ⊆ Y, the map gY ′ ,X is either injective or surjective and the map gY,X ′ is
+either injective or surjective.
+Remark 4.2. Note that SM compatibility is stronger than, but similar to, the notions of singly
+left mutation compatible and singly right mutation compatible used in [BH22, HI21b, HI21a]
+Proposition 4.3. Every completable semibrick pair is SM compatible.
+Proof. It suffices to prove the result only for 2-term simple-minded collections. We use an argument
+similar to that of [BTZ21, Proposition 5.2.1]. Let (X , Y) ∈ 2-smc Λ.
+   Let (X , Y) ∈ 2-smc Λ, and denote T := T(X ) and F := Filt(Cogen Y). Recall from Theorem 3.7
+that (T , F) is a torsion pair, that T = ⊥ Y and F = X ⊥ , and that X = D(T ) and Y = U(T ).
+   Let X ′ ⊆ X and Y ∈ Y, and suppose that gY,X ′ is not injective. Then Z := im(gY,X ′ ) ∈ T by
+Lemma 3.5. Denote by ι : Z → XY′ the inclusion map. Then for W ∈ T and f : W → Z, we have
+ker(f ) = ker(ι ◦ f ). Since XY′ ∈ Filt(X ′ ) ⊆ Filt(D(T )), Proposition 3.8 implies that ker(f ) ∈ T , and
+therefore that Z ∈ Filt(X ). The fact that Filt(X ′ ) is Serre in Filt(X ) thus implies that Z ∈ Filt(X ′ ).
+By the minimality of gY,X ′ , we conclude that Z = XY′ ; i.e., gY,X ′ is surjective. The argument that
+each map gX,Y ′ is either injective or surjective is dual.                                                □
+12                         EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+   We now prepare to define the mutation of an SM compatible semibrick pair (X , Y) at either
+a subset X ′ ⊆ X or a subset Y ′ ⊆ Y. We will first formulate the mutation formulas within the
+category mod Λ (Definition 4.4) and then explain how they can be restated using the language of
+the bounded derived category (Remark 4.5).
+   Fix an SM compatible semibrick pair (X , Y) and subsets X ′ ⊆ X and Y ′ ⊆ Y. Let X ∈ X \ X ′ .
+Since the wide subcategory Filt(X ) is functorially finite, it is well known that it contains a projective
+generator; that is, there exists PX ∈ Filt(X ) such that Filt(X ) is the subcategory obtained by closing
+add(PX ) under cokernels. See [Eno22, Proposition 4.12] for an explicit proof. Thus, we can consider
+a short exact sequence
+                                            ΩX X ,→ PX ,X ↠ X,
+where PX ,X ∈ add(PX ) and ΩX X ∈ Filt(X ) are the projective cover and first syzygy of X in the
+wide subcategory Filt(X ). Let γX,X ′ : ΩX X → XX   ′ be a minimal left Filt(X ′ )-approximation of
+                                              ′
+ΩX X. Then γX,X ′ is surjective because Filt(X ) is a Serre subcategory of Filt(X ). Hence, we can
+form the following pushout diagram:
+
+                                                ΩX X              PX ,X           X
+(4.1)                                               γX,X ′
+
+                                ηX,X ′ :            ′
+                                                   XX             EX,X ′          X.
+
+We can consider the short exact sequence ηX,X ′ ∈ Ext1Λ (X, XX   ′ ) as a morphism X → X ′ [1] in the
+                                                                                            X
+bounded derived category Db (mod Λ). Then ηX,X ′ [1] is a minimal left Filt(X ′ )-approximation of
+X[−1] with cone EX,X ′ .
+  Dually, let Y ∈ Y \ Y ′ . Since Filt(Y) is functorially finite, it contains an injective cogenerator;
+that is, there exists IY ∈ Filt(Y) such that Filt(Y) is the subcategory obtained by closing add(IY )
+under kernels. Thus, we can consider a short exact sequence
+                                             Y ,→ IY,Y ↠ ΣY Y,
+where YY,Y and ΣY Y are the injective envelope and first cosyzygy of Y in the wide subcategory
+Filt(Y). Let γY ′ ,Y : YY′ → ΣY Y be a minimal right Filt(Y ′ )-approximation of ΣY Y . Then γY ′ ,Y
+is injective because Filt(Y ′ ) is a Serre subcategory of Filt(Y). Hence, we can form the following
+pullback diagram:
+
+                               ηY ′ ,Y :       Y             EY ′ ,Y        YY′
+(4.2)                                                                         γY ′ ,Y
+
+                                               Y             IY,Y          ΣY Y.
+
+As above, we can consider the short exact sequence ηY ′ ,Y ∈ Ext1Λ (YY′ , Y ) as a morphism YY′ → Y [1]
+in the bounded derived category Db (mod Λ). Then ηY ′ ,Y is a minimal right Filt(Y)-approximation
+of Y [1] with cocone EY ′ ,Y .
+   We now present our generalized definition.
+Definition 4.4. Let (X , Y) be an SM compatible semibrick pair.
+     (1) Let X ′ ⊆ X . Let
+             µX ′ (X , Y)d = {coker(gY,X ′ ) | gY,X ′ is injective} ∪ {EX,X ′ | X ∈ X \ X ′ };
+             µX ′ (X , Y)u = {ker(gY,X ′ ) | gY,X ′ is surjective} ∪ X ′ .
+         The left mutation of (X , Y) at X ′ is µX ′ (X , Y) = (µX ′ (X , Y)d , µX ′ (X , Y)u ).
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                            13
+
+
+   (2) Let Y ′ ⊆ Y. Let
+
+               µY ′ (X , Y)d = {coker(gY ′ ,X ) | gY ′ ,X is injective} ∪ Y ′ ;
+               µY ′ (X , Y)u = {ker(gY ′ ,X ) | gY ′ ,X is surjective} ∪ {EY | Y ∈ Y \ Y ′ }.
+
+        The right mutation of (X , Y) at Y ′ is µY ′ (X , Y) = (µY ′ (X , Y)d , µY ′ (X , Y)u ).
+
+   We note that µX ′ (X , Y) and µY ′ (X , Y) are well defined by the existence and uniqueness (up to iso-
+morphism) of projective covers, injective envelopes, minimal left Filt(X ′ )-approximations, minimal
+right Filt(Y ′ )-approximations, finite limits, and finite colimits. Note also that µ∅ (X , Y) = (X , Y)
+by the definition of either left or right mutation. Since X ∩ Y = ∅ for any semibrick pair, there is
+therefore no ambiguity in the notation.
+   Recalling that if f : M → N is a monomorphism (resp. epimorphism) in mod Λ, then its cone
+(resp. cocone) in Db (mod Λ) is cokerf (resp. kerf [1]), we have the following reformulation of Defi-
+nition 4.4.
+
+Remark 4.5. Let (X , Y) ∈ sbp Λ be SM compatible, and consider X ⊕ Y[1] ∈ Db (mod Λ).
+   (1) Let X ′ ⊆ X . For Z ∈ (X \ X ′ ) ∪ Y[1], let gZ,X ′ : Z[−1] → XZ′ be a minimal left Filt(X ′ )-
+       approximation in Db (mod Λ). Then
+
+             µX ′ (X , Y)d ⊕ µX ′ (X , Y)u = {cone(gZ,X ′ ) | Z ∈ (X \ X ′ ) ∪ Y[1]} ⊕ X ′ [1]}.
+
+   (2) Let Y ′ ⊆ Y. For Z ∈ (Y[1] \ Y ′ [1]) ∪ X , let gY ′ ,Z [1] : YZ′ [1] → Z[1] be a minimal right
+       Filt(Y ′ )[1]-approximation in Db (mod Λ). Then
+
+            µY ′ (X , Y)d ⊕ µY ′ (X , Y)u = {cocone(gY ′ ,Z [1]) | Z ∈ (Y[1] \ Y ′ [1]) ∪ X } ⊕ Y ′ .
+
+In particular, in the cases |X ′ | = 1 and |Y ′ | = 1, Items (1) and (2) of Definition 4.4 correspond to
+the notions of left and right mutations of semibrick pairs from [HI21a, Section 3].
+
+  We conclude this section by stating the following result, which justifies the name mutation
+and tabulates several useful facts about mutations of semibrick pairs. In Appendix A, we prove
+Theorem 4.6 in multiple steps using arguments similar to those appearing in [HI21a, Section 3] and
+[KY14, Section 7.2].
+
+Theorem 4.6. Let (X , Y) ∈ sbp Λ be SM compatible. Let X ′ ⊆ X , and denote X1 = µX ′ (X , Y)d
+and Y1 = µX ′ (X , Y)u . Then the following hold.
+   (1) (X1 , Y1 ) is a semibrick pair.
+   (2) If (X1′ , Y1′ ) is an SM compatible semibrick pair such that X1 ⊆ X1′ and Y1 ⊆ Y1′ , then
+       X ⊆ µX ′ (X1′ , Y1′ )d and Y ⊆ µX ′ (X1′ , Y1′ )u .
+   (3) (X , Y) ∈ 2-smc Λ if and only if (X1 , Y1 ) ∈ 2-smc Λ.
+   (4) (X , Y) is completable if and only if (X1 , Y1 ) is completable.
+   (5) If (X , Y) ∈ 2-smc Λ, then T(µX ′ (X , Y)) = T(X , Y) ∩ ⊥ X ′ .
+Similarly, let Y ′ ⊆ Y, and denote X2 = µY ′ (X , Y)d and Y2 = µY ′ (X , Y)u . Then the following hold.
+  (1*) (X2 , Y2 ) is a semibrick pair.
+  (2*) If (X2′ , Y2′ ) is an SM compatible semibrick pair such that X2 ⊆ X2′ and Y2 ⊆ Y2′ , then
+       X ⊆ µY ′ (X2′ , Y2′ )d and Y ⊆ µY ′ (X2′ , Y2′ )u .
+  (3*) (X , Y) ∈ 2-smc Λ if and only if (X2 , Y2 ) ∈ 2-smc Λ.
+  (4*) (X , Y) is completable if and only if (X2 , Y2 ) is completable.
+  (5*) If (X , Y) ∈ 2-smc Λ, then T(µY ′ (X , Y)) = Filt(Y ′ ∪ T(X , Y)).
+14                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+                        5. Pop-Stack Operators for Torsion Classes
+    Recall the definition of the pop-stack and dual pop-stack operators from Section 1. For Λ a
+τ -tilting finite algebra, recall the description of pop↓tors Λ and pop↑tors Λ from Corollary 3.6. In this
+section, we study further properties of these operators. In Section 5.1, we explain how the pop-
+stack operators interact with the mutation of 2-term simple-minded collection. In Section 5.2, we
+describe preimages under the pop-stack operators. In Section 5.3, we describe the images of the
+pop-stack operators.
+5.1. Pop-stack and mutation. We now prove our first main result, which describes the relation-
+ship between the pop-stack operators and the mutation of 2-term simple-minded collections.
+Theorem 5.1. For (X , Y) ∈ 2-smc Λ, let µ↓ (X , Y) := µX (X , Y) and µ↑ (X , Y) := µY (X , Y). There
+are commutative diagrams as follows:
+                                  T(−)                                    T(−)
+                     2-smc Λ              tors Λ              2-smc Λ            tors Λ
+                         µ↓ (−)              pop↓ (−)            µ↑ (−)              pop↑ (−)
+                                  T(−)                                    T(−)
+                     2-smc Λ              tors Λ              2-smc Λ            tors Λ.
+Proof. Let (X , Y) ∈ 2-smc Λ. Then by Theorem 4.6(5) and Corollary 3.6, we have that
+                       T(µ↓ (X , Y)) = T(X ) ∩ ⊥ X
+                                               \ n                    o
+                                     = T(X ) ∩     T(X ) ∩ ⊥ X | X ∈ X
+                                           = pop↓ (T(X , Y)).
+This shows that the left diagram commutes. Similarly, Theorem 4.6(5*) and Corollary 3.6 imply
+that
+                    T(µ↑ (X , Y)) = Filt(⊥ Y ∪ Y)
+                                              [ n                       o
+                                  = Filt ⊥ Y ∪     Filt(⊥ Y ∪ Y ) | Y ∈ Y
+                                         = pop↑ (T(X , Y)).
+This shows that the right diagram commutes.                                                             □
+Remark 5.2. One can also generalize the proof of Theorem 5.1 to show that the torsion classes
+of the form T(µX ′ (X , Y)) (with X ′ ⊆ X ) are precisely those obtained by intersecting T(X ) with
+a subset of the torsion classes it covers. (The dual result likewise holds for right mutation.) In
+the language of [DL, DKW], these are precisely the torsion classes obtained by applying Ungar
+moves to T(X ). Intervals of the form [T(µX ′ (X , Y)), T(X )] have also appeared in many of the
+previously-cited papers on lattices of torsion classes such as [AP22, Hana].
+5.2. Preimages under the pop-stack operators. We now characterize the preimages of a given
+torsion class under the pop-stack operator and its dual. As a consequence, we describe the 1-pop-
+stack sortable elements and the 2-pop-stack sortable elements.
+Theorem 5.3. Let T , T ′ ∈ tors Λ. Then pop↓tors Λ (T ′ ) = T if and only if both of the following hold.
+  (1) There is an inclusion D(T ′ ) ⊆ U(T ).
+  (2) For every X ∈ D(T ), there exists Z ∈ Filt(D(T ′ )) admitting a surjection Z ↠ X.
+Moreover, if pop↓tors Λ (T ′ ) = T , then (D(T ′ ), U(T ′ )) = µD(T ′ ) (D(T ), U(T )).
+Dually, pop↑tors Λ (T ) = T ′ if and only if both of the following hold.
+  (1*) There is an inclusion U(T ) ⊆ D(T ′ ).
+  (2*) For every Y ∈ U(T ′ ), there exists Z ∈ Filt(U(T )) admitting an injection X ,→ Z.
+                POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                        15
+
+
+Moreover, if pop↑tors Λ (T ) = T ′ , then (D(T ), U(T )) = µU (T ) (D(T ′ ), U(T ′ )).
+Proof. We prove only the first half of the theorem; the proof of the second half is dual.
+  First suppose pop↓tors Λ (T ′ ) = T . Then
+                       (D(T ), U(T )) = µ↓ (D(T ′ ), U(T ′ )) = µD(T ′ ) (D(T ′ ), U(T ′ ))
+by Theorem 5.1, so in particular, (1) holds. It follows from Theorem 4.6(2) that
+                                  µD(T ′ ) (D(T ), U(T )) = (D(T ′ ), U(T ′ )).
+Finally, because µD(T ′ ) (D(T ), U(T )) = (D(T ′ ), U(T ′ )), (2) must hold by Definition 4.4.
+  Suppose now that (1) and (2) both hold. Then µD(T ′ ) (D(T ), U(T ))d = D(T ′ ) by Definition 4.4,
+and therefore T(µD(T ′ ) (D(T ), U(T ))) = T ′ . Theorem 4.6(2) then implies that
+                       µ↓ (D(T ′ ), U(T ′ )) = µD(T ′ ) (D(T ′ ), U(T ′ )) = (D(T ), U(T )).
+We conclude that pop↓tors Λ (T ′ ) = T by Theorem 5.1.                                               □
+  We now characterize the 1-pop-stack sortable elements of tors Λ.
+Corollary 5.4. Let T ∈ tors Λ. The following are equivalent.
+  (1) We have pop↓tors Λ (T ) = 0̂.
+  (2) Every brick in D(T ) is simple.
+  (3) The torsion class T is a Serre subcategory of mod Λ.
+  (4) There exists a nonzero injective module I such that T = ⊥ I.
+Dually, the following are equivalent.
+  (1*) We have pop↑tors Λ (T ) = mod Λ.
+  (2*) Every brick in U(T ) is simple.
+  (3*) The torsion-free class T ⊥ is a Serre subcategory of mod Λ.
+  (4*) There exists a nonzero projective module P such that T = Gen(P ).
+Proof. We prove only the first result as the second is dual. The equivalences among (2), (3), and
+(4) are contained in Proposition 3.10.
+   To see that (1) implies (2), suppose pop↓tors Λ (T ) = 0̂. Then every brick in U(pop↓tors Λ (T )) is
+simple. But D(T ′ ) ⊆ U(pop↓tors Λ (T )) by Theorem 5.3.
+   We now show that (3) implies (1). Suppose T is a Serre subcategory. Then in particular, T is
+closed under submodules. Thus, for Y ∈ U(T ), the map gY,X must be surjective. Theorem 5.1 then
+implies that D(pop↓tors Λ (T )) = ∅, so pop↓tors Λ (T ) = 0.                                         □
+  The following characterizes all 2-pop-stack sortable elements of tors Λ; it also describes the image
+under pop↓tors Λ of each 2-pop-stack sortable element.
+
+Corollary 5.5. Let T ∈ tors Λ, and let S be a set of simple modules. Then pop↓tors Λ (T ) = Filt(S)
+if and only if the following all hold.
+    (1) We have HomΛ (S, D(T )) = 0 = Ext1Λ (S, D(T )).
+    (2) The socle2 soc(D(T )) of D(T ) satisfies D(T )/soc(D(T )) ∈ Filt(S).
+    (3) There does not exist S ∈ S with HomΛ (D(T ), S) = 0. (Equivalently, there is a surjection
+        D(T ) ↠ S.)
+Proof. Suppose first that pop↓tors Λ (T ) = Filt(S). Since D(Filt(S)) = S, it follows from Theo-
+rem 5.3 that D(T ) ⊆ U(Filt(S)). Then the fact that (1) holds follows from the definition of a
+2-term simple-minded collection. Theorem 5.3 also implies that for every S ∈ S, there exists
+  2Recall that the socle socM of a module M is the sum of all of its semisimple submodules.
+16                         EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+Z ∈ Filt(D(T )) that admits a surjection Z ↠ S. This shows that (3) holds. To prove (2), consider
+X ∈ D(T ) ⊆ U(Filt(S)). Since Filt(S) is closed under submodules, the map gX,S : X → SX must be
+surjective. Moreover, we have that pop↓tors Λ (Filt(S)) = 0 by Corollary 5.4. Theorem 5.1 implies that
+kergX,S is in U(0), which is precisely the set of simple modules. If follows that kergX,S ⊆ soc(X)
+and therefore that X/soc(X) ∈ Filt(S).
+   To prove the converse, suppose T satisfies Items (1) to (3). Then (1) implies that (S, D(T ))
+is a semibrick pair. Moreover, for X ∈ D(T ), the map gX,S must be surjective since Filt(S) is
+closed under submodules. This map must also have a semisimple kernel by (2). We then have that
+µS (S, D(T )) = (∅, S ∪ S ′ ) for S ′ = {kergX,S | X ∈ D(T )}. Proposition A.3 therefore implies that
+kergX,S is simple for all X. Letting S ′′ denote the set of all simple modules, we find that (∅, S ′′ ) is
+a 2-term simple-minded collection satisfying S ∪ S ′ ⊆ S ′′ . By Proposition A.4, (S, Y) := µS (∅, S ′′ )
+is a 2-term simple-minded collection satisfying D(T ) ⊆ Y. Now note that Y = U(Filt(S)) by
+Theorem 3.7. Hence, D(T ) ⊆ U(Filt(S)). Together with (3), this allows us to use Theorem 5.3 to
+conclude that pop↓tors Λ (T ) = Filt(S).                                                                □
+5.3. The image of pop-stack. We now build toward a complete description of the images of
+pop↓tors Λ and pop↑tors Λ (and, hence, the facets of the canonical join complex of tors Λ) for any τ -
+tilting finite algebra Λ. Our first result is proven more generally for arbitrary semidistrim lattices
+in [DW23, Section 9]. We give a new representation-theoretic proof for lattices of torsion classes.
+Proposition 5.6. Let T ∈ tors Λ.
+  (1) We have pop↓tors Λ (pop↑tors Λ (T )) ⊆ T .
+  (2) We have pop↑tors Λ (pop↓tors Λ (T )) ⊇ T .
+  (3) We have pop↓tors Λ (pop↑tors Λ (pop↓tors Λ (T ))) = pop↓tors Λ (T ).
+  (4) We have pop↑tors Λ (pop↓tors Λ (pop↑tors Λ (T ))) = pop↑tors Λ (T ).
+Proof. We prove only (1) and (3) as the proofs of (2) and (4) are similar.
+   We have U(T ) ⊆ D(pop↑tors Λ (T )) ⊆ U(pop↓tors Λ (pop↑tors Λ (T ))) by Theorem 5.1. By Theorem 3.4,
+this implies (1).
+   To prove (3), let (X , Y) = (D(T ), U(T )). Let (X1 , Y1 ) = µ↓ (X , Y) and (X2 , Y2 ) = µ↑ (X1 , Y1 ).
+By Theorem 5.1, we need to show that µ↓ (X2 , Y2 ) = (X1 , Y1 ). By Definition 4.4, this is equivalent
+to showing that X2 = Y1 , which is equivalent to showing that gY1 ,Z is surjective for every Z ∈ X1 .
+   Now recall that X1 = {coker(gY,X ) | Y ∈ Y and gY,X is injective}. Thus, for Z ∈ X1 , we have
+a quotient map XY ↠ Z for some XY ∈ Filt(X ). Since X ⊆ Y1 , this map must factor through
+the minimal right Filt(Y1 )-approximation gY1 ,Z : (Y1 )Z → Z. This implies that gY1 ,Z must be
+surjective.                                                                                            □
+     As a consequence, we can characterize the image of the pop-stack operators as follows.
+Corollary 5.7. Let T ∈ tors Λ. Then the following are equivalent.
+   (1) There exists T ′ ∈ tors Λ such that T = pop↓tors Λ (T ′ ).
+   (2) We have pop↓tors Λ (pop↑tors Λ (T )) = T .
+   (3) The semibricks U(T ) and D(pop↑tors Λ (T )) coincide.
+   (4) For all X ∈ D(T ), the map gU (T ),X is surjective.
+   (5) For all X ∈ D(T ), there exists Z ∈ Filt(U(T )) such that there is a surjective map Z ↠ X.
+Dually, the following are equivalent.
+  (1*) There exists T ′ ∈ tors Λ such that T = pop↑tors Λ (T ′ ).
+  (2*) We have pop↓tors Λ (pop↑tors Λ (T )) = T .
+  (3*) The semibricks D(T ) and U(pop↓tors Λ (T )) coincide.
+  (4*) For all Y ∈ U(T ), the map gY,D(T ) is injective.
+              POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                           17
+
+
+  (5*) For all Y ∈ U(T ), there exists Z ∈ Filt(D(T )) such that there is an injective map Y ,→ Z.
+    We now wish to further characterize the image of the pop-stack operators for representation-
+finite hereditary algebras. We first prove the following result (still in the generality of an arbitrary
+τ -tilting finite algebra).
+Lemma 5.8. Let T ∈ tors Λ.
+  (1) If there exists a nonzero projective module P ∈ T , then T is not in the image of pop↓tors Λ .
+  (2) If there exists a nonzero injective module I ∈ T ⊥ , then T is not in the image of pop↑tors Λ .
+Proof. We prove only (1) since (2) is dual. It suffices to consider the case where P is indecomposable.
+   We claim that there exists X ∈ D(T ) such that there is a surjection P ↠ X and there does
+not exist Z ∈ Filt(U(T )) admitting a surjection Z ↠ X. We prove the claim by induction on the
+length of the shortest path from Gen(P ) to T in tors Λ.
+   For the base case, we consider T = Gen(P ). In this case, there is a short exact sequence
+                                                      f
+                                       0→M →P −
+                                              →X→0
+such that M ∈ T and D(T ) = X. (If P is a brick, then X = P and M = 0. Otherwise, M is the
+sum of the images of the noninvertable endomorphisms of P .) Now suppose for a contradiction that
+                                                 g
+there exist Z ∈ Filt(U(T )) and a surjection Z →− X. Then by the definition of projective, there is a
+nonzero map h : P → Z such that f = g ◦ h. But Z ∈ Filt(U(T )) ⊆ P ⊥ , which is a contradiction.
+  For the induction step, suppose Gen(P ) ⊊ T , and choose some T ′ <· T such that Gen(P ) ⊆ T ′ .
+Let Y ∈ U(T ′ ) be the brick label of the cover relation T ′ <· T . By the induction hypothesis, there
+exists X ∈ D(T ′ ) such that there is a surjection P ↠ X and there does not exist Z ∈ Filt(U(T ′ ))
+admitting a surjection Z ↠ X. Let gY,X : YX → X be a minimal right Filt(Y )-approximation of
+X. Then gY,X is injective since there is no surjection from an object in Filt(U(T ′ )) onto X. Thus,
+coker(gY,X ) ∈ D(T ) by Theorem 4.6. Moreover, coker(gY,X ) is a quotient of P since X is, and we
+have that T ⊥ ⊆ P ⊥ . Consequently, no map from an object in Filt(U(T )) to coker(gY,X ) can be
+surjective for the same reason as in the base case.
+  Given the claim, the result follows from Corollary 5.7.                                           □
+
+   Note that a torsion class T contains a projective module P if and only if Gen(P ) ⊆ T . Moreover,
+recall that the atoms of tors Λ are precisely the torsion classes of the form Filt(S) for S ∈ mod Λ
+simple. We can thus give a combinatorial interpretation of what it means for a torsion class to
+contain a projective module as follows.
+Proposition 5.9. For T ∈ tors Λ, the following are equivalent.
+   (1) There exists a projective module P such that T = Gen(P ).
+   (2) There exists a set A of atoms of tors Λ such that T is the maximal element of tors Λ that
+        lies (weakly) above all of the atoms in A and does not lie (weakly) above any of the atoms
+        that are not in A.
+   (3) There exists a set S of simple modules such that T is the largest torsion class that contains
+        all of the modules in S and does not contain any simple module that is not in S.
+When these conditions hold, the semibrick S is the top of the module P (equivalently, P is the
+projective cover of S); in particular, P = 0 if and only if A = ∅ = S.
+Proof. The equivalence of (2) and (3) follows from the description of the atoms of tors Λ.
+  Let us prove that (1) implies (3). Let P be a projective module, and let S be the set of simple
+modules that are direct summands of top(P ). Then S is a quotient of P , so Filt(S) ⊆ Gen(P ).
+Moreover, for a simple S ∈/ S, we have HomΛ (P, S) = 0, so S ∈  / Gen(P ). It remains to show that
+Gen(P ) is maximal with respect to these properties. Let T be another torsion class satisfying S ∈ T
+18                            EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+and S ∈/ T for any simple S ∈  / S. Then top(D(T )) ∈ add(S) ⊆ Filt(S). Thus, the projective cover
+of D(T ) lies in add(P ), so D(T ) ∈ Gen(P ). It follows that T ⊆ Gen(P ).
+   We now show that (3) implies (1). Let S be a set of simple modules, and let T be the largest
+torsion class of tors Λ that contains S and does not contain any simple that does not lie in S. Then,
+as shown above, we have T = Gen(P ), where P is the projective cover of S.                         □
+  We now give a characterization of the image of the pop-stack operator when Λ is hereditary
+(and representation-finite). We give a combinatorial interpretation of this characterization in The-
+orem 7.8.
+Theorem 5.10. Suppose Λ is hereditary, and let T ∈ tors Λ. Then T is in the image of pop↓tors Λ
+if and only if both of the following hold:
+    (1) Ext1Λ (X, X ′ ) = 0 for all X, X ′ ∈ D(T ).
+    (2) There does not exist a nonzero projective module P ∈ T .
+Dually, T is in the image of pop↑tors Λ if and only if both of the following hold.
+     (1*) Ext1Λ (Y, Y ′ ) = 0 for all Y, Y ′ ∈ U(T ).
+     (2*) There does not exist a nonzero injective module I ∈ T ⊥ .
+Proof. We prove only the first statement since the second is dual. We first note that (2) is necessary
+by Lemma 5.8.
+   Suppose that (1) holds and that T is not in the image of pop↓tors Λ . By Corollary 5.7, this means
+there exists X ∈ D(T ) such that gU (T ),X is injective. We will prove that X is projective by induction
+on |D(T )|. First suppose |D(T )| = 1. Then Theorem 5.1 implies that |D(pop↑tors Λ (T ))| = |Λ|.
+Now, |D(pop↑tors Λ (T ))| + |U(pop↑tors Λ (T ))| = |Λ| by Theorem 3.7 and [KY14, Corollary 5.5]3, so
+pop↑tors Λ (T ) = mod Λ. In particular, U(T ) ⊆ D(pop↑tors Λ (T )) consists of only simple modules, so
+T ⊥ is a Serre subcategory. By Proposition 3.10, this means T ⊥ = X ⊥ = P ⊥ for some projective
+module P . It is straightforward to show that X = P must be the projective cover of the unique
+simple module that does not lie in U(T ).
+   For the induction step, suppose that the result holds for |D(T )| = k and that |D(T )| = k + 1.
+Let X ̸= Z ∈ D(T ), and let D′ := D(T ) \ {Z}. By the assumption of (2), we have that D′ ∪ U(T ) ⊆
+Z ⊥0,1 . Furthermore, since Λ is hereditary, Z ⊥0,1 is a wide subcategory4. Consequently, T ′ := Z ⊥ ∩T
+is a torsion class of Z ⊥0,1 that satisfies D(T ′ ) = D′ and U(T ′ ) = U(T ). In particular, (1) holds for
+the torsion class T ′ , and the injective map gX,U (T ) is a minimal right Filt(U(T ′ ))-approximation.
+By the induction hypothesis, we conclude that X is projective in Z ⊥0,1 ; i.e., Ext1Λ (X, M ) = 0 for
+all M ∈ Z ⊥0,1 .
+   Recall from Section 3.2 that every M ∈ mod Λ admits a short exact sequence tT M ,→ M ↠ fF M
+with tT M ∈ T and fF M ∈ T ⊥ = Filt(Cogen(U(T ))). The module tT M then fits into a short exact
+sequence tGen(Z) (tT M ) ,→ tT M ↠ fZ ⊥ (tT M ) with tGen(Z) (tT M ) ∈ Gen(Z) and fZ ⊥ (tT M ) ∈ Z ⊥ .
+Note that fZ ⊥ (tT M ) is in T ′ since it is a quotient of tT M and tT M ∈ T . By the above paragraph,
+we have Ext1Λ (X, fZ ⊥ (tT M )) = 0. Similarly, Ext1Λ (X, tGen(Z) (tT M )) = 0 since Ext1Λ (X, Z) = 0 (by
+assumption) and Λ is hereditary. Thus, to show that X is projective in mod Λ, it suffices to show
+that Ext1Λ (X, N ) = 0 for all N ∈ Cogen(U(T )). Let Y ∈ U(T ), and let N ⊆ Y be a submodule.
+Then N ∈ Z ⊥ . If Ext1Λ (Z, N ) = 0, we already know that Ext1Λ (X, N ) = 0. Otherwise, the fact
+that Ext1Λ (Z, Z) = 0 and HomΛ (Z, N ) = 0 means that there exist Z k ∈ add(Z) and a short exact
+sequence
+                                           0 → N → E → Zk → 0
+     3This is a classical and well-known fact that was proved much earlier than [KY14], but this logical deduction suits
+the organization of this paper.
+   4The perpendicular subcategory Z ⊥0,1 was first considered in [GL91].
+              POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                            19
+
+
+such that the induced map HomΛ (Z, Z k ) → Ext1Λ (Z, N ) is surjective. If we take k to be minimal
+with respect to this property, then there is an induced long exact sequence
+        0 = HomΛ (Z, E) → HomΛ (Z, Z k ) → Ext1Λ (Z, N ) → Ext1Λ (Z, E) → Ext1Λ (Z, Z) = 0.
+(We know that the first term is 0 because Z is a brick and HomΛ (Z, N ) = 0, so any nonzero
+morphism Z → E would have trivial intersection with N and would consequently be a splitting of
+a composition E ↠ Z k ↠ Z.) It follows that E ∈ Z ⊥0,1 and therefore that Ext1Λ (X, E) = 0 (since
+X is projective in that wide subcategory). Hence, there is an induced exact sequence
+                        0 = HomΛ (X, Z k ) → Ext1Λ (X, N ) → Ext1Λ (X, E) = 0.
+We conclude that Ext1Λ (X, N ) = 0. Since Cogen(U(T )) is the closure under Filt of all indecompos-
+able quotients of the bricks in U(T ), this proves that X is projective in mod Λ.
+   It remains to show that if T is in the image of pop↓tors Λ , then (1) holds. To see this, suppose that
+T is in the image of pop↓tors Λ , and let X1 , X2 ∈ D(T ). If X1 = X2 , then there is nothing to show
+since all bricks over Λ are also rigid. Otherwise, by Corollary 5.7, the map gU (T ),X2 : UX2 → X2
+must be injective. Therefore, there is an induced exact sequence
+                  Ext1Λ (X1 , ker(gU (T ),X2 )) → Ext1Λ (X1 , UX2 ) → Ext1Λ (X1 , X2 ) → 0,
+where the last 0 comes from the fact that Λ is hereditary. Since Ext1Λ (X1 , UX2 ) = 0, it follows that
+Ext1Λ (X1 , X2 ) = 0; i.e., (1) holds.                                                               □
+Remark 5.11. If Λ is not hereditary, then the Ext-orthogonality of the bricks in D(T ) is generally
+not a necessary or sufficient condition for T to be in the image of pop↓tors Λ . See Remark 7.9 for an
+explicit example.
+   We conclude this section by combining several known results into a lattice-theoretic interpretation
+of the Ext-orthogonality condition in Theorem 5.10. As we discuss in Remark 7.7, a special case
+of this result can also be interpreted (and proved) using Coxeter combinatorics.
+Lemma 5.12. Let Λ be an arbitrary τ -tilting finite algebra, and let T ∈ tors Λ. The following are
+equivalent.
+   (1) Ext1Λ (X, X ′ ) = 0 for all distinct X, X ′ ∈ D(T ).
+   (2) The interval [pop↓tors Λ (T ), T ] ⊆ tors Λ is a distributive lattice.
+   (3) The interval [pop↓tors Λ (T ), T ] ⊆ tors Λ is a Boolean lattice.
+   (4) The map X 7→ Filt(T ∪ X ) is an isomorphism from the Boolean lattice of subsets of D(T )
+        to the interval [pop↓tors Λ (T ), T ] of tors Λ.
+   (5) There exist a set of finite-dimensional local K-algebras {ΛX | X ∈ D(T )} and an equivalence
+        of categories (pop↓tors Λ (T ))⊥ ∩ T ∼
+                                                         Q
+                                                = mod( X∈D(T ) ΛX ).
+Proof. Denote U = pop↓tors Λ (T ). By [AP22, Theorem 6.3], Corollary 3.6, and Proposition 3.8, we
+have that U ⊥ ∩ T = Filt(D(T )). Since this is a functorially finite wide subcategory, there exists
+a finite-dimensional algebra Λ′ such that Filt(D(T )) is equivalent to mod Λ′ . Moreover, [AP22,
+Theorem 1.4] says that the interval [U, T ] is isomorphic to tors Λ′ . (See also [Jas15, Theorem 3.12]
+and [DIR+ 23, Section 4.2].) It therefore suffices to assume T = mod Λ, in which case D(T ) is the
+set of simple modules and pop↓tors Λ (T ) = 0. The result then follows from [LW, Theorem 1.1]. □
+
+                         6. The Weak Order and Cambrian Lattices
+6.1. Coxeter groups. A standard reference for much of the material in this subsection is [BB05].
+   Let (W, S) be a finite Coxeter system. This means that S is a finite set and that W is a finite
+group with a presentation of the form
+                                                 ′
+                                  ⟨S | (ss′ )m(s,s ) = e for all s, s′ ∈ S⟩,
+20                          EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+where e is the identity element of W and we have
+                            m(s, s) = 1     and    m(s, s′ ) = m(s′ , s) ∈ {2, 3, . . .}
+for all distinct s, s′ ∈ S. (We often refer only to the Coxeter group, tacitly assuming S is part of
+the data of W .)
+   The elements of S are called the simple reflections. A reflection is an element of the form wsw−1
+for w ∈ W and s ∈ S. The Coxeter graph of W is the graph ΓW with vertex set S in which two
+simple reflections s and s′ are connected by an edge whenever m(s, s′ ) ≥ 3; this edge is labeled
+with the number m(s, s′ ) if m(s, s′ ) ≥ 4. We will assume that W is irreducible, which means that
+ΓW is connected. We say W is simply-laced if m(s, s′ ) ≤ 3 for all s, s′ ∈ S. There is a well known
+characterization of finite irreducible Coxeter groups (see [BB05, Appendix A1]).
+   We will use sans serif font when we write words over the alphabet S; this allows us to distinguish
+a word s1 · · · sk from the element s1 · · · sk ∈ W that it represents.
+   A reduced word for an element w ∈ W is a word over the alphabet S that represents w and is
+as short as possible. The number of letters in a reduced word for w is called the length of w and is
+denoted ℓ(w). A right inversion (resp. left inversion) of w is a reflection t such that ℓ(wt) < ℓ(w)
+(resp. ℓ(tw) < ℓ(w)). The (right) weak order is the partial order ≤ on W defined so that u ≤ v if
+and only if there exists a reduced word for v that has a reduced word for u as a prefix. Equivalently,
+u ≤ v if and only if every left inversion of u is a left inversion of v. Let Weak(W ) denote the poset
+(W, ≤). It is well known that Weak(W ) is a ranked semidistributive lattice (ℓ is a rank function).
+In fact, if W is crystallographic, then Weak(W ) is isomorphic to the lattice of torsion classes of the
+preprojective algebra of type W (see Remark 7.7).
+   A cover reflection of an element w ∈ W is a reflection t of W such that ℓ(tw) = ℓ(w) − 1 and
+tw = ws for some s ∈ S. Thus, the cover reflections of w corresponds bijectively to the elements
+covered by w in Weak(W ). Because Weak(W ) is a semidistributive lattice, each element w ∈ W
+has a canonical join representation
+                                D(w) = {jtw,w | t is a cover reflection of w}.
+The following result, which appears as [RS11, Theorem 8.1] (see also [BR18, Proposition 4.13]),
+describes the elements of D(w) more explicitly.
+Proposition 6.1. Let t be a cover reflection of an element w ∈ W . The shard label jtw,w of the
+edge tw ⋖ w in Weak(w) is the unique minimal element of
+                          {x ∈ Weak(W ) | x ≤ w and t is a left inversion of x}.
+   The long element of W is the unique element w◦ of W that has maximum length. It is known
+that w◦2 = e. If J ⊆ S, then the subgroup WJ of W generated by J is called a (standard) parabolic
+subgroup of W . The pair (WJ , J) is a finite Coxeter system; the long element of WJ is denoted by
+w◦ (J).
+   A descent of an element w ∈ W is a simple reflection s such that ℓ(ws) < ℓ(w); in other words,
+it is a simple reflection that is also a right inversion of w. Let Des(w) denote the set of descents of
+w. A simple reflection is a descent of w if and only if there is a reduced word for w that ends in
+s. If u−1 ≤ v −1 , then Des(u) ⊆ Des(v). The pop-stack operator on Weak(W ) has an alternative
+description [Def22b] given by
+
+(6.1)                                   pop↓Weak(W ) (x) = xw◦ (Des(x)).
+
+   Let n = |S|. For α = (α1 , . . . , αn ) and β = (β1 , . . . , βn ) in Rn , let
+                                             X
+(6.2)                            (α, β) =        −2 cos(π/m(i, j)) · αi βj .
+                                             i,j∈[n]
+                POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                           21
+
+
+Because W is finite, it is known that (−, −) is a positive definite symmetric bilinear form. For
+i ∈ [n], we let ei denote the i-th standard basis vector of Rn , and we let e∨    i = 2ei /(ei , ei ). By
+abuse of notation, we use si ∈ S to denote the linear transformation si : Rn → Rn given by
+si (α) = α − (e∨                                                                          n
+                 i , α)ei . This definition extends to a linear representation of W on R . A vector
+        n
+α ∈ Z is called a root of W if there exists w ∈ W such that α = w(ei ) for some i. A root is
+positive if its coordinates are all nonnegative. We denote by ΦW and Φ+       W the sets of roots and
+positive roots of W , respectively.
+    The action of W induces a permutation on the set of roots; that is, ΦW = {w(α) | α ∈ ΦW } for
+all w ∈ W . Given a reflection t in W , we can write t = wsi w−1 for some w ∈ W and si ∈ S; let βt
+be the unique positive root in {±w(ei )}. It is known that βt does not depend on the choices of w
+and si . Moreover, the map t 7→ βt is a bijection from the set of reflections of W to the set Φ+      W of
+positive roots.
+    For w ∈ W , let
+                                                       −1
+                                   inv(w) = {α ∈ Φ+             +
+                                                  W | w (α) ∈ −ΦW }.
+
+It is known that βt ∈ inv(w) if and only if t is a left inversion of w. Thus, for u, v ∈ W , we have
+u ≤ v in the weak order if and only if inv(u) ⊆ inv(v).
+
+6.2. Coxeter elements and Cambrian lattices. A (standard) Coxeter element of W is an
+element c obtained by multiplying the simple reflections in some order (with each appearing once
+in the product). Thus, a reduced word for c is a word representing c in which each simple reflection
+appears exactly once. Let us orient each edge {s, s′ } in ΓW from s to s′ if and only if s appears
+before s′ in some (equivalently, every) reduced word for c. The result is an acyclic orientation of
+ΓW . This construction establishes a one-to-one correspondence between Coxeter elements of W and
+acyclic orientations of ΓW . We denote the acyclic orientation corresponding to a Coxeter element
+c by Qc . As is standard in representation theory, we will sometimes call Qc a quiver instead of a
+directed graph. We write S = {s1 , . . . , sn } and denote by (Qc )0 = [n] the set of vertices of Qc ,
+identifying each index i ∈ [n] with si . Likewise, we denote by (Qc )1 the set of arrows of Qc . Our
+convention is to use the notation ai,j ∈ (Qc )1 to represent an arrow pointing from the vertex i to
+the vertex j.
+   Fix a reduced word c for a Coxeter element c, and consider the infinite word c∞ = c(1) c(2) · · · ,
+where each c(k) is a copy of c. Following Reading [Rea07], we define the c-sorting word of an
+element w ∈ W to be the reduced word sortc (w) for w that is lexicographically first as a subword
+              (k)
+of c∞ . Let Ic (w) be the set of simple reflections that are taken from c(k) when we form sortc (w)
+                                                             (k)
+as the lexicographically first subword of c∞ . Although Ic (w) depends on the Coxeter element
+c, it does not depend on the choice of the reduced word c. The element w is called c-sortable if
+ (1)        (2)
+Ic (w) ⊇ Ic (w) ⊇ · · · .
+   The set of c-sortable elements of W forms a sublattice of Weak(W ) called the c-Cambrian lattice,
+which we denote by Cambc . We will recall in Section 6.3 that Cambc can be realized as the lattice
+of torsion classes of a finite-dimensional (hereditary) algebra when W is crystallographic.
+
+Example 6.2. A basic yet important example of a Coxeter group is the dihedral group I2 (m),
+                          m s
+whose Coxeter graph is s1     2 (if m = 2, then there is no edge). Let c = s1 s2 . The c-sortable
+
+elements of I2 (m) are s2 and the m + 1 elements e, s1 , s1 s2 , s1 s2 s1 , . . . , w◦ .
+
+  For each w ∈ W , the set Cambc ∩ {v ∈ W | v ≤ w} has a unique maximal element in the weak
+order; we denote this element by π↓c (w). The map π↓c is a surjective lattice homomorphism from
+Weak(W ) to Cambc , so Cambc is a lattice quotient of Weak(W ) [Rea06, Rea07]. The fibers of π↓c
+are the equivalence classes of an equivalence relation on W known as the c-Cambrian congruence.
+22                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+     According to [Def22a, Theorem 3.2], we have
+(6.3)                               pop↓Cambc = π↓c ◦ pop↓Weak(W ) .
+  The following lemma, which is immediate from the definition of a c-sortable element (see also
+[Rea07, Lemmas 2.4 & 2.5]), gives a recursive characterization of c-sortable elements.
+Lemma 6.3. Let W be a finite Coxeter group, and let c be a reduced word for a Coxeter element
+c of W . Let s be the first letter in s. Let w ∈ W . If ℓ(sw) > ℓ(w), then w is c-sortable if and only
+if it is an (sc)-sortable element of the standard parabolic subgroup WS\{s} . If ℓ(sw) < ℓ(w), then w
+is c-sortable if and only if sw is (scs)-sortable.
+   We will also make use of the following characterization of c-sortable elements in terms of canonical
+join representations.
+Lemma 6.4. Let c be a Coxeter element of a finite Coxeter group W . An element w ∈ W is
+c-sortable if and only if every element of the canonical join representation of w in Weak(W ) is
+c-sortable. If w is c-sortable, then the canonical join representation of w in Weak(W ) is equal to
+the canonical join representation of w in Cambc .
+Proof. According to [RS11, Proposition 8.2], if w is c-sortable, then each element of its canonical join
+representation is c-sortable. On the other hand, if each element of the canonical join representation
+of w is c-sortable, then w is c-sortable because Cambc is a sublattice of the weak order.             □
+6.3. Cambrian lattices as lattices of torsion classes. Suppose for this subsection that W is
+crystallographic (i.e., W is not of type H3 , H4 , or I2 (m) for m ∈
+                                                                   / {3, 4, 6}). Fix a Coxeter element
+c ∈ W . Associated to the acyclic orientation Qc of c is a finite-dimensional algebra KQc known as
+the tensor algebra of Qc (More precisely, the definition of KQc depends on a choice of symmetrizable
+Cartan matrix with Weyl group W .) In this subsection, we recall the properties of KQc that we
+will use to interpret Theorem 5.10 in terms of Coxeter combinatorics. Notably, the definition of
+the algebra KQc is not needed in order to state these results and is thus omitted from this paper.
+Readers interested in more details are referred to [DR76].
+   Recall the notation of the projective modules P (i) and simple modules S(i) from Section 3. The
+indexing of these modules can be chosen so that dim(S(i)) = ei = βsi for all i ∈ [n]. We fix this
+indexing for the remainder of this section. For i ∈ [n], we then denote
+(6.4)                                ρi = sn sn−1 · · · si+1 (ei ).
+                                −1
+Note that {ρi | i ∈ [n]} = inv(c ). The roots ρi are sometimes called projective roots, a name that
+is justified by Item (5) in Proposition 6.5 below.
+   We now recall the following well-known properties of the algebra KQc . Note that Items (2)
+to (4) together constitute Gabriel’s Theorem. These results can be found in the classical references
+[DR75, DR76].
+Proposition 6.5.
+  (1) The algebra KQc is hereditary.
+  (2) The algebra KQc is representation-finite.
+  (3) The association M 7→ dimM is a bijection from the set of (isomorphism classes of ) inde-
+      composable modules in mod KQc to the set Φ+   W of positive roots.
+  (4) Every indecomposable module in mod KQc is a brick.
+  (5) For i ∈ [n], the dimension vector of the indecomposable projective module P (i) ∈ mod KQc
+      is dimP (i) = ρi .
+Remark 6.6. Let T ∈ tors KQc be a torsion class that satisfies Ext1KQc (X, X ′ ) = 0 for all
+X, X ′ ∈ D(T ). Then Item (4) in Proposition 6.5 implies that there exists a nonzero projective
+module P ∈ T if and only if there exists an indecomposable projective module P (i) ∈ D(T ).
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                               23
+
+
+   We now recall the explicit bijection between the Cambrian lattice Cambc and the lattice of
+torsion classes tors(KQc ) established in [IT09]. Note that while the result is only proved explicitly
+for the simply-laced case in [IT09], it is remarked in [IT09, Section 4.4] that the results can be
+generalized using folding arguments.
+Theorem 6.7 ([IT09, Theorem 4.3]). There is a lattice isomorphism φc : Cambc → tors KQc
+characterized by the condition that
+                         φc (w) ∩ brick KQc = {M ∈ brick KQc | dimM ∈ inv(w)}
+for every c-sortable element w ∈ W .
+
+                     7. The Image of Pop-Stack on a Cambrian Lattice
+   In this section, we recast Theorem 5.10 as a combinatorial description of the image of pop↓Cambc
+for any finite irreducible Coxeter group W and any Coxeter element c. As we discuss in the proof
+of Theorem 7.8, the results of Section 5 only yield a proof for W of crystallographic type, while
+the non-crystallographic types can be verified by computer. Thus, when not directly specified, we
+assume that W is an arbitrary finite Coxeter group (not necessarily crystallographic). When W is
+crystallographic, we use the notation KQc as in Section 6.3. In any case, we denote by c a fixed
+Coxeter element of W .
+   We first give an interpretation of the Ext-orthogonality condition in Theorem 5.10(1). For each
+w ∈ Cambc , Lemma 5.12 and Theorem 6.7 say that the torsion class φc (w) satisfies the Ext-
+orthogonality condition if and only if [pop↓Cambc (w), w] is Boolean. Theorem 7.6 below provides
+several equivalent conditions characterizing when this holds. Before we state and prove this result,
+we require some lemmas.
+Lemma 7.1. Let L be a finite lattice, and let x ∈ L. If the interval [pop↓L (x), x] is distributive,
+then it is Boolean.
+Proof. Suppose [pop↓L (x), x] is distributive, and let P be a finite poset such that [pop↓L (x), x]
+is isomorphic to J(P ). The bottom and top elements of J(P ) are ∅ and P , respectively, so
+∅ = pop↓J(P ) (P ) = y∈max(P ) (P \ {y}), where max(P ) is the set of maximal elements of P . This
+                    T
+
+implies that P = max(P ), so P is an antichain. Hence, J(P ) is Boolean.                         □
+Lemma 7.2. If L is a finite semidistributive lattice with k coatoms, then |L| ≥ 2k .
+Proof. The map v 7→ D(v) is a bijection from L to the canonical join complex of L. Since |D(1̂)| = k,
+the canonical join complex of L must have at least 2k faces.                                       □
+  The next result follows from [Rea04, Lemma 3.8]; we include a short self-contained proof.
+Lemma 7.3 ([Rea04, Lemma 3.8]). If y1 ⋖ z1 and y2 ⋖ z2 are two edges of Weak(W ) with the same
+shard label, then z1 y1−1 = z2 y2−1 .
+Proof. Let t1 = z1 y1−1 and t2 = z2 y2−1 . Proposition 6.1 tells us that the join-irreducible element
+jy1 ,z1 has t1 as a left inversion while (jy1 ,z1 )∗ does not have t1 as a left inversion. If follows that
+t1 is the unique cover reflection of jy1 ,z1 . Similarly, t2 is the unique cover reflation of jy2 ,z2 . Since
+jy1 ,z1 = jy2 ,z2 , we have t1 = t2 .                                                                      □
+  The following lemma is a special case of [Rea11, Proposition 5.7].
+Lemma 7.4 ([Rea11, Proposition 5.7]). If w and z are elements of Weak(W ) such that the
+canonical join representation of w contains that of z, then the set of shard labels of edges in
+the interval [pop↓Weak(W ) (z), z] is contained in the set of shard labels of the edges in the interval
+[pop↓Weak(W ) (w), w].
+24                        EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+Lemma 7.5. Suppose w is a c-sortable element of W whose descents commute. The interval
+[pop↓Weak(W ) (w), w] of Weak(W ) is Boolean, and pop↓Cambc (w) is c-sortable.
+
+Proof. The fact that the interval [pop↓Weak(W ) (w), w] is Boolean is immediate from the observation
+that it consists of the elements of the form wv −1 such that v is the product of some subset of
+Des(w). Let us now show that pop↓Weak(W ) (w) is c-sortable. Our proof will proceed by induction
+on |S| and ℓ(w) (the base cases are trivial). To ease notation, let us write w′ = pop↓Weak(W ) (w).
+  Let s be the first letter in some reduced word for c. Suppose first that ℓ(sw) > ℓ(w). According
+to Lemma 6.3, w is an (sc)-sortable element of WS\{s} . By induction, pop↓Weak(W          ) (w) is an
+                                                                                          S\{s}
+
+(sc)-sortable element of WS\{s} . Invoking Lemma 6.3 again, we find that pop↓Weak(W                     (w) is
+                                                                                              S\{s} )
+
+c-sortable. The desired result now follows from the fact that w′ = pop↓Weak(W     (w).
+                                                                          S\{s} )
+   Now assume that ℓ(sw) < ℓ(w).         Then (sw) ≤ w , so every left inversion of (sw)−1 is a
+                                                  −1  −1
+
+left inversion of w−1 . Hence, every right inversion of sw is a right inversion of w. It follows that
+Des(sw) ⊆ Des(w). We consider two cases.
+Case 1. Suppose s ≤ w′ (equivalently, ℓ(sw′ ) = ℓ(w′ ) − 1). Let v = sw′ . We have w =
+svw◦ (Des(w)), and ℓ(w) = ℓ(v) + ℓ(w◦ (Des(w))) + 1. Hence, sw = vw◦ (Des(w)), and ℓ(sw) =
+ℓ(v) + ℓ(w◦ (Des(w))). This shows that sw has a reduced word that contains a reduced word for
+w◦ (Des(w)) as a suffix. Hence, Des(w) = Des(w◦ (Des(w))) ⊆ Des(sw).
+   This shows that Des(w) = Des(sw), so pop↓Weak(W ) (sw) = sww◦ (Des(w)) = v. Because w
+is c-sortable, we know by Lemma 6.3 that sw is (scs)-sortable. Furthermore, the descents of
+sw commute. Because ℓ(sw) < ℓ(w), we can use induction (replacing c by scs) to find that
+pop↓Weak(W ) (sw) = v is (scs)-sortable. But since v = sw′ and ℓ(sw′ ) < ℓ(w′ ), we can invoke
+Lemma 6.3 once again to find that w′ is c-sortable.
+Case 2. Suppose s ̸≤ w′ (equivalently, ℓ(sw′ ) = ℓ(w′ ) + 1). Since w′ is the meet of the elements
+covered by w in Weak(W ), there must exist an element x that is covered by w such that s ̸≤ x.
+The unique left inversion of w that is not a left inversion of x is wx−1 . Since s is a left inversion of
+w but not a left inversion x, we must have wx−1 = s. Hence, x = sw.
+   We have seen that Des(sw) ⊆ Des(w), and we have just shown that sw ⋖ w. There exists s′ ∈ S
+such that sw = ws′ . Because [w′ , w] is Boolean, we must have Des(sw) = Des(w) \ {s′ }, and it
+follows from Lemma 2.1 and Example 2.2 that D(sw) = D(w) \ {s}. Hence,
+
+           pop↓Weak(W ) (sw) = sw
+                                    Y                     Y                   Y
+                                           s′′ = ws′                s′′ = w          s′′ = w′ .
+                                   s′′ ∈Des(sw)       s′′ ∈Des(w)\{s′ }     s′′ ∈Des(w)
+
+Since w is c-sortable, it follows from Lemma 6.4 that sw is also c-sortable. The descents of sw
+commute, so we can use induction to find that pop↓Weak(W ) (sw) = w′ is c-sortable.           □
+
+Theorem 7.6. Let c be a Coxeter element of a finite Coxeter group W . For every c-sortable
+element w, the following are equivalent.
+     (1) The descents of w commute.
+     (2) The interval [pop↓Weak(W ) (w), w] of Weak(W ) is a distributive lattice.
+     (3) The interval [pop↓Weak(W ) (w), w] of Weak(W ) is a Boolean lattice.
+     (4) The interval [pop↓Cambc (w), w] of Cambc is a distributive lattice.
+     (5) The interval [pop↓Cambc (w), w] of Cambc is a Boolean lattice.
+     (6) The interval [pop↓Cambc (w), w] of Cambc equals the interval [pop↓Weak(W ) (w), w] of Weak(W ).
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                             25
+
+
+Proof. It is immediate from Lemma 7.1 that (2) and (3) are equivalent and that (4) and (5)
+are equivalent. Lemma 7.5 tells us that (1) implies (3). To see that (3) implies (1), suppose
+[pop↓Weak(W ) (w), w] is Boolean, and suppose s and s′ are distinct descents of W . Let w′ = ws ∧ ws′ .
+The interval [w′ , w] in Weak(W ) is contained in [pop↓Weak(W ) (w), w], so [w′ , w] is Boolean. We also
+know that [w′ , w] is isomorphic to the weak order on the dihedral group I2 (m(s, s′ )). This implies
+that m(s, s′ ) = 2, so s and s′ commute.
+  According to Lemma 6.4, the canonical join representations of w in Weak(W ) and Cambc are
+equal; thus, we can unambiguously write D(w) for this canonical join representation.
+  Let us show that (1) implies (6). Suppose the descents of w commute. Let k = D(w) = |Des(w)|.
+According to Lemma 7.5, the interval [pop↓Weak(W ) (w), w] in Weak(W ) is Boolean, and the element
+pop↓Weak(W ) (w) is c-sortable. This implies that [pop↓Cambc (w), w] is contained in [pop↓Weak(W ) (w), w]
+and that [pop↓Weak(W ) (w), w] has size 2k . But [pop↓Cambc (w), w] is a semidistributive lattice with
+k coatoms, so Lemma 7.2 tells us that it has size at least 2k . This implies that [pop↓Cambc (w), w]
+equals [pop↓Weak(W ) (w), w].
+   In [Tho06], Thomas introduced the notion of a trim lattice; he proved that intervals in trim
+lattices are trim and that a lattice is distributive if and only if it is ranked and trim. Ingalls and
+Thomas [IT09] proved that Cambrian lattices are trim. These facts allow us to prove that (6)
+implies (2). Indeed, [pop↓Weak(W ) (w), w] is an interval in the weak order on W , so it is ranked. If
+[pop↓Weak(W ) (w), w] is equal to an interval of Cambc , then it is trim, so it must be distributive.
+   We now know that Items (1) to (3) and (6) are equivalent and that Items (4) and (5) are
+equivalent. It is also obvious that (3) and (6) together imply (5). Therefore, to complete the proof,
+it suffices to show that (5) implies (1).
+   Assume [pop↓Cambc (w), w] is Boolean. Suppose by way of contradiction that s and s′ are de-
+scents of w that do not commute. Because {jws,w , jws′ ,w } is contained in D(w), it follows from
+Lemma 6.4 that there exists a c-sortable element z of Weak(W ) whose canonical join representa-
+tion is {jws,w , jws′ ,w }. Let y and y ′ be the two elements covered by z, and assume without loss of
+generality that jy,z = jws,w and jy′ ,z = jws′ ,w . Deleting the last letter in the c-sorting word for
+z yields the c-sorting word for a c-sortable element covered by z; this element must be y or y ′ .
+Assume without loss of generality that y is c-sortable. By Lemma 7.3, we have zy −1 = wsw−1
+and z(y ′ )−1 = ws′ w−1 . It follows that zy −1 and z(y ′ )−1 do not commute. Hence, the interval
+[pop↓Weak(W ) (z), z] = [y ∧ y ′ , z] is isomorphic to the weak order on the dihedral group I2 (m) for
+some m ≥ 3. Let x be the unique element of [pop↓Weak(W ) (z), z] covered by y. Since y is c-sortable,
+Lemma 6.4 tells us that the shard label jx,y is c-sortable. According to Lemma 7.4, jx,y is the shard
+label of an edge in [pop↓Weak(W ) (w), w]. Since jx,y is c-sortable, it is also a shard label of an edge in
+[pop↓Cambc (w), w]. Because [pop↓Cambc (w), w] is Boolean, it follows from Lemma 2.1 that jx,y ∈ D(w).
+Because D(w) is an independent set of the Galois graph of Weak(W ) and jy,z = jws,w ∈ D(w),
+there cannot be an arrow from jy,z to jx,y in the Galois graph of Weak(W ). However, since [y ∧y ′ , z]
+is isomorphic to the weak order on I2 (m), it follows from Lemma 2.1 and Example 2.3 that there is
+an arrow from jy,z to jx,y in the Galois graph of Weak(W ). This is our desired contradiction. □
+
+
+
+Remark 7.7. It is also possible to prove many of the equivalences in Theorem 7.6 using arguments
+from representation theory, or conversely to use Theorem 7.6 to prove special cases of Lemma 5.12.
+Since these arguments highlight further connections between Coxeter groups and lattices of torsion
+classes, we give a short overview of them here.
+26                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+   In addition to the hereditary algebras KQc , one can also associate a (non-hereditary) prepro-
+jective algebra Π(W ) to each finite crystallographic Coxeter group W . (For background out-
+side the simply-laced case, see [Kül17, Section 4] and the references therein.) It is shown in
+[Miz14] (simply-laced case) and [AHI+ , Section 7] (general case) that there is an isomorphism
+φ : Weak(W ) → tors(Π(W )) induced by the symmetric bilinear form (−, −).
+   For any Coxeter element c, the hereditary algebra KQc is a quotient of the preprojective algebra.
+Thus the algebra quotient Π(W ) → KQc induces a lattice quotient
+                         Weak(W ) ∼ = tors(Π(W )) → tors(KQc ) ∼= Cambc ,
+and it is shown (in the simply-laced case) in [MT20] that this lattice quotient coincides with the
+map π↓c . The algebra quotient also induces a (fully faithful) inclusion brick KQc ⊆ brick Π(W ),
+which is known to preserve Ext-orthogonality. Given this, Theorem 7.6 becomes equivalent to the
+specialization of Items (1) to (4) in Lemma 5.12 to the cases Λ = KQc and Λ = Π(W ).
+  We now turn toward interpreting Item (2) in Theorem 5.10. Recall that S is precisely the set of
+atoms of Cambc . In the crystallographic case, Theorem 6.7 says that these atoms can be indexed
+(by [n]) so that φc (si ) = Filt(Si ) for all i. In the non-crystallographic case, we fix an arbitrary
+indexing of S by [n]. In either case, for si ∈ S, we let
+                     Θi = {x ∈ Cambc | si ≤ x and sj ̸≤ x for all sj ∈ S \ {si }}
+             W
+and let pi = Θi . (One can show that pi is actually the unique maximal element of Θi .) If W is
+crystallographic, then Proposition 5.9 and Theorem 6.7 imply that φc (pi ) = Gen(P (i)) for each i.
+In particular, Remark 6.6 implies that, for w ∈ Cambc , the torsion class φc (w) contains a projective
+module if and only if pi ≤ w for some i.
+   We now state the main result of this section, which provides purely lattice-theoretic and Coxeter-
+theoretic descriptions of the image of the pop-stack operator on any Cambrian lattice.
+Theorem 7.8. Let W be a finite irreducible Coxeter group, and let c ∈ W be a Coxeter element.
+For w ∈ Cambc , the following are equivalent.
+   (1) w is in the image of pop↓Cambc .
+   (2) The descents of w all commute, and w has no left inversions in common with c−1 .
+   (3) The interval [pop↓Cambc (w), w] is Boolean, and pi ̸≤ w for all i ∈ [n].
+Proof. Suppose first that W is crystallographic. By Theorem 6.7, we have that w is in the image of
+pop↓Cambc if and only if φc (w) is in the image of pop↓tors KQc . Furthermore, it was established above
+that φc (w) contains a nonzero projective module if and only if there exists i ∈ [n] such that pi ≤ w,
+and we know that pi ≤ w if and only if the root ρi (defined in Equation (6.4)) is in inv(w). Finally,
+we have that the descents of w all commute with one another if and only if Ext1KQc (X, X ′ ) = 0
+for all distinct X, X ′ ∈ D(φc (w)) by Lemma 5.12 and Theorem 7.6. Therefore, the desired result
+follows from Theorems 5.10 and 7.6 and the fact that {ρi | i ∈ [n]} = inv(c−1 ).
+   It remains to consider the non-crystallographic cases. We verified the theorem when W is of
+type H3 or H4 using Sage [The23]. When W is of type I2 (m), it is straightforward to check the
+desired result by hand.                                                                              □
+Remark 7.9. The naive analogue of Theorem 7.8 fails for the weak order on An . For example, the
+pop-stack operator on Weak(A4 ) sends the permutation 52341 to the permutation 25314, but the
+descents of 25314 (s2 and s3 ) do not commute with each other. In the language of representation
+theory, this means that there exist bricks X, X ′ ∈ D(φ(25314)) such that Ext1Π(A4 ) (X, X ′ ) ̸= 0 (the
+notation φ is from Remark 7.7). Thus, the naive analogue of Theorem 5.10 likewise fails for the
+preprojective algebra Π(A4 ).
+   It is also worth mentioning that the image of pop↓Cambc is not necessarily contained in the image
+of pop↓Weak(W ) . For example, if W = A9 and c = s1 s3 s5 s7 s9 s2 s4 s6 s8 , then one can use [ABB+ 19,
+                 POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                          27
+
+
+Theorem 1] and Corollary 8.5 below to show that the permutation 1, 2, 8, 10, 6, 9, 4, 5, 3, 7 is in the
+image of pop↓Cambc but not the image of pop↓Weak(W ) .
+  The following surprising consequence of Theorem 7.6 tells us that when we compute a forward
+orbit of pop↓Cambc , all applications of the pop-stack operator after the first can be computed in the
+weak order. We believe this could have interesting further implications concerning the dynamical
+properties of pop↓Cambc .
+Corollary 7.10. Let c be a Coxeter element of a finite irreducible crystallographic Coxeter group
+W . If w ∈ Cambc , then
+                          (pop↓Weak(W ) )t (pop↓Cambc (w)) = (pop↓Cambc )t+1 (w)
+for all t ≥ 0.
+Proof. The result is trivial if t = 0, so we may assume t ≥ 1 and assume inductively that
+                          (pop↓Weak(W ) )t−1 (pop↓Cambc (w)) = (pop↓Cambc )t (w).
+
+Let u = (pop↓Cambc )t (w). Since u is in the image of pop↓Cambc , we know by Theorem 7.8 that
+all of the descent of u commute with each other. Therefore, it follows from Theorem 7.6 that
+pop↓Weak(W ) (u) = pop↓Cambc (u); this is equivalent to the desired result.                □
+
+                                 8. Cambrian Lattices in Type A
+   In this section, we restrict to Cambrian lattices of type A. We first recall the permutation model
+for the Coxeter group An and the definition of bipartite Coxeter elements. In Sections 8.3 and 8.4,
+we recall two classes of combinatorial objects: arc diagrams and Motzkin paths. We use these in
+Section 8.5 to resolve a conjecture (stated in Equation (8.1)) of Defant and Williams from [DW23].
+This yields an explicit formula for the generating function that counts the images of the pop-stack
+operators on bipartite Cambrian lattices of type A.
+8.1. Permutations and Coxeter elements. The Coxeter group An is the same as the symmetric
+group whose elements are permutations of the set [n + 1] = {1, . . . , n + 1}. We will frequently
+represent a permutation w ∈ An in one-line notation as the word w(1) · · · w(n + 1). The simple
+reflections of An are s1 , . . . , sn , where si is the transposition that swaps i and i + 1. The Coxeter
+graph ΓAn is a path that contains an (unlabeled) edge {si , si+1 } for each i ∈ [n]. A simple reflection
+si is a descent of w if and only if w(i) > w(i+1); when this is the case, we will also refer to the index
+i as a descent of w. A left inversion of w is a transposition (i j) such that i < j and w−1 (i) > w−1 (i).
+   Let                                        Y                    Y
+                                         c1 =      si and c2 =         si .
+                                           i∈[n]          i∈[n]
+                                           i odd         i even
+The bipartite Coxeter elements of An are c×                 ××
+                                          (n) = c1 c2 and c(n) = c2 c1 . These will be the focus of
+much (but not all) of this section. The following result shows that it generally suffices to consider
+only c×
+      (n) .
+
+Proposition 8.1. The canonical join complexes of Cambc× and Cambc×× are isomorphic.
+                                                                (n)             (n)
+
+Proof. The map x 7→ w◦ xw◦ is an automorphism of Weak(An ); when n is even, it restricts to an
+isomorphism from Cambc× to Cambc×× . Thus, the desired result is immediate when n is even. The
+                           (n)            (n)
+map x 7→ w◦ x is an antiautomorphism of Weak(An ); when n is odd, it restricts to an isomorphism
+from Cambc× to Cambc×× . The canonical join complex of the dual of Cambc×× is equal to the
+             (n)           (n)                                                        (n)
+canonical meet complex of Cambc×× . Therefore, when n is odd, the desired result follows from the
+                                    (n)
+28                           EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+fact that the canonical join complex and the canonical meet complex of a semidistributive lattice
+are isomorphic.                                                                                □
+     Recall that if L is a finite semidistributive lattice, then the generating function
+                                             X                  X
+                                 PL (q) =           q |U (v)| =        q |D(v)|
+                                             v∈pop↓L (L)           v∈pop↑L (L)
+
+defined in Equation (2.1) counts the facets of the canonical join complex of L according to their
+sizes. In [DW23, Conjecture 11.2], Defant and Williams conjectured5 that
+                                                                                 !
+           X
+                          n    1                        2
+(8.1)        PCamb × (q)z =                          p                        − 1 − 1.
+                   c
+                     (n)      qz 1 − qz(1 − 2z) + 1 + q 2 z 2 − 2qz(1 + 2z)
+             n≥1
+We will prove this conjecture in Section 8.5.
+8.2. The image of pop-stack in An . For this subsection, we let c denote an arbitrary (not
+necessarily bipartite) Coxeter element of An . Define νc : {2, . . . , n} → {A, B} by
+                             (
+                              A if si precedes si−1 in every reduced word for c;
+(8.2)               νc (i) =
+                              B if si−1 precedes si in every reduced word for c.
+The map c 7→ νc is a bijection from the set of Coxeter elements of An to the set of functions from
+{2, . . . , n} to {A, B}.
+Theorem 8.2 ([Rea15, Example 4.9]). Let c be a Coxeter element of An . An element w ∈ An is
+c-sortable if and only if the following hold for all i, j ∈ [n + 1] such that w(j + 1) < w(i) < w(j):
+      • If νc (i) = A, then j < i.
+      • If νc (i) = B, then i < j.
+   For w ∈ An , we recall that a simple reflection si is in Des(w) if and only if w(i) > w(i + 1). We
+say that i is a double descent of w if i ̸= n and w(i) > w(i + 1) > w(i + 2). Note that the descents
+of w all commute with one another if and only if w does not have any double descents.
+Example 8.3. Let c = s1 s2 · · · sn ∈ An . Then νc (i) = B for all i ∈ {2, . . . , n}. A permutation
+w ∈ An is c-sortable if and only if it avoids the pattern 312 (i.e., there do not exist indices
+i1 < i2 < i3 such that w(i2 ) < w(i3 ) < w(i1 )). The c-Cambrian lattice is often called the (n + 1)-st
+Tamari lattice.
+   The one-line notation of c−1 is (n + 1)123 · · · n. Hence, the left inversions of c−1 are the transpo-
+sitions of the form (i n + 1) for i ∈ [n]. It follows from Theorem 7.8 that a c-sortable permutation
+w is in the image of pop↓Cambc if and only if w has no double descents and the one-line notation of
+w ends with n + 1. This recovers one of the main results of [Hon22].
+Example 8.4. Let c be the bipartite Coxeter element c×
+                                                     (7) of A7 . We have
+                                       (
+                                        A if i ≡ 1 (mod 2);
+                              νc (i) =
+                                        B if i ≡ 0 (mod 2)
+for all i ∈ {2, . . . , 7}.
+   One can readily compute that the left inversions of c−1 are
+                                     s2 = (2 3),     s4 = (4 5),     s6 = (6 7),
+               s2 s1 s2 = (1 3),   s2 s4 s3 s4 s2 = (2 5),   s4 s6 s5 s6 s4 = (4 7),       s6 s7 s6 = (6 8).
+     5This conjecture was stated in [DW23] in terms of an explicit formula for P                 (q) for each particular n, but
+                                                                                   Camb ×
+                                                                                       c
+                                                                                           (n)
+we prefer to write it here in terms of the generating function that encompasses all n ≥ 1.
+              POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                           29
+
+
+According to Theorem 7.8, a c-sortable permutation w is in the image of pop↓Cambc if and it has no
+double descents and does not have any of the seven transpositions in this list as left inversion.
+   A straightforward extension of Example 8.4 yields the following corollary to Theorem 7.8, which
+settles [CS, Conjecture 4.2].
+Corollary 8.5. An element w ∈ Cambc× is in the image of pop↓Camb × if and only if all of the
+                                           (n)                             c
+                                                                            (n)
+following hold:
+      • w does not have any double descents;
+      • w−1 (2k) < w−1 (2k + 1) for all integers k with 3 ≤ 2k + 1 ≤ n + 1;
+      • w−1 (2k) < w−1 (2k + 3) for all integers k with 5 ≤ 2k + 3 ≤ n + 1;
+      • w−1 (n − 1) < w−1 (n + 1) if n ≡ 1 (mod 2);
+      • w−1 (1) < w−1 (3) if n ̸= 1.
+8.3. Arc diagrams. Arrange n + 1 points along a horizontal line, and identify them with the
+numbers 1, . . . , n + 1 from left to right. An arc is a curve that moves monotonically rightward
+from a point i to another point j (for some i < j), passing above or below each of the points
+i + 1, . . . , j − 1. Two arcs are considered to be the same if they have the same endpoints and they
+pass above the same collection of numbered points. A noncrossing arc diagram (of type An ) is a
+collection of arcs that can be drawn so that no two arcs have the same left endpoint or have the
+same right endpoint or cross in their interiors. We write |δ| for the number of arcs in a noncrossing
+arc diagram δ. Let ADn be the set of noncrossing arc diagrams of type An .
+    Given a permutation w ∈ An , form a noncrossing arc diagram ∆(w) ∈ ADn as follows. For
+each descent i of w, draw an arc from w(i + 1) to w(i) such that for each integer k satisfy-
+ing w(i + 1) < k < w(i), the arc passes above (resp. below) the point k if w−1 (k) > i + 1 (resp.
+w−1 (k) < i). This defines a map ∆ : An → ADn , and it is straightforward to check that ∆ is a
+bijection. (See [Rea15].)
+    Given a Coxeter element c of An , say an arc a with left endpoint i and right endpoint j is
+c-sortable if for every k ∈ {i + 1, . . . , j − 1}, a passes above (resp. below) k if νc (k) = A (resp.
+νc (k) = B). Note that for all 1 ≤ i < j ≤ n + 1, there is a unique c-sortable arc from i to j.
+Let AD(c) = ∆(Cambc ) be the set of noncrossing arc diagrams of c-sortable elements of An . It is
+immediate from Theorem 8.2 that a noncrossing arc diagram is in AD(c) if and only if all of its
+arcs are c-sortable. Hence, AD(c) is a simplicial complex whose vertices are the c-sortable arcs.
+Example 8.6. Suppose n = 8, and let c = s1 s2 s4 s8 s3 s5 s7 s6 . Then νc−1 (A) = {4, 7, 8}, and
+νc−1 (B) = {2, 3, 5, 6}. Let w be the permutation 325148679. The noncrossing arc diagram ∆(w)
+is depicted in Figure 2. In this figure, each of the points i ∈ [9] is represented by a circle filled
+with the number i; for 2 ≤ i ≤ 8, a blue semicircle appears on the top (resp. bottom) of the
+circle if νc (i) = A (resp. if νc (i) = B). All of the arcs in ∆(w) are c-sortable, so w is a c-sortable
+permutation.
+
+
+
+
+       Figure 2. The noncrossing arc diagram ∆(325148679). For each 2 ≤ i ≤ 8, a blue
+       semicircle appears on the top (resp. bottom) of the circle containing i if νc (i) = A
+       (resp. if νc (i) = B), where c = s1 s2 s4 s8 s3 s5 s7 s6 .
+
+Remark 8.7. Noncrossing arc diagrams and other similar objects have been used to model the
+bricks over hereditary and preprojective algebras of type A. In particular, (c-sortable) arcs are
+30                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+in bijection with bricks, and (c-sortable) noncrossing arc diagrams are in bijection with semib-
+ricks. One can then use noncrossing arc diagrams to compute information about morphisms and
+extensions between bricks, and thus also to model 2-term simple-minded collections. See, e.g.,
+[BCZ19, BH22, Eno21, GIMO19, Hanb, HY23, Miz22] and references therein.
+   Cambrian lattices are semidistributive, so we can consider the canonical join complex and the
+canonical meet complex of Cambc (and we know these simplicial complexes are isomorphic by
+[Bar19, Corollary 5]). An element v ∈ Cambc is join-irreducible if and only if it has exactly one
+descent, and this occurs if and only if ∆(v) contains a single arc. Therefore, ∆ establishes a
+one-to-one correspondence between the join-irreducible elements of Cambc and the c-sortable arcs.
+Then for each w ∈ Cambc , the noncrossing arc diagram ∆(w) corresponds to the canonical join
+representation of w. It follows that the simplicial complex AD(c) is isomorphic to the canonical
+join complex of Cambc . Say a noncrossing arc diagram in AD(c) is maximal if it is a facet of AD(c).
+In other words, a noncrossing arc diagram in AD(c) is maximal if it is not properly contained in
+another noncrossing arc diagram in AD(c). Let MAD(c) denote the set of maximal noncrossing arc
+diagrams in AD(c).
+   The preceding discussion yields the identity
+                                                     X
+(8.3)                               PCambc (q) =          q |δ| .
+                                                     δ∈MAD(c)
+
+
+8.4. Motzkin paths. A Motzkin path is a lattice path in the plane that consists of up (i.e., (1, 1))
+steps, down (i.e., (1, −1)) steps, and horizontal (i.e., (1, 0)) steps, starts at the origin, never passes
+below the horizontal axis, and ends on the horizontal axis. Let U, D, and H denote up, down, and
+horizontal steps, respectively. Given a word P over the alphabet {U, D, H}, let #U (P ), #D (P ), and
+#H (P ) denote the number of U′ s, the number of D’s, and the number of H’s in P , respectively. We
+can think of a Moztkin path as a word M over the alphabet {U, D, H} such that #U (M ) = #D (M )
+and #U (P ) ≥ #D (P ) for every prefix P of M . For example, the word UHHDHUDUHUDD represents the
+Motzkin path in Figure 3.
+
+
+
+
+                            Figure 3. The Motzkin path UHHDHUDUHUDD.
+
+   A peak of a Motzkin path M is a point (j, k) where an up step in M ends and a down step in
+M begins; the height of this peak is the number k. If we view M as a word over {U, D, H}, then a
+peak corresponds to a consecutive occurrence of UD, and the height of the peak is #U (P ) − #D (P ),
+where P is the prefix of M that ends with the up step involved in the peak. The two peaks of the
+Motzkin path in Figure 3 are the points (6, 1) and (10, 2).
+   Let Mn denote the set of Motzkin paths of length n, and let MnSbe the subset of M S    consisting
+of Motzkin paths that do not have any peaks of height 1. Let M = n≥0 Mn and M = n≥0 Mn .
+Let
+                         X X                                   X X
+              M(q, z) =            q #U (M ) z n and M(q, z) =            q #U (M ) z n .
+                           n≥0 M ∈Mn                                n≥0 M ∈Mn
+
+If M is a nonempty Motzkin path, then either M = UM ′ DM ′′ for some M ′ , M ′′ ∈ M, or M = HM ′′′
+for some M ′′′ ∈ M. This translates into the functional equation
+                                M(q, z) − 1 = qz 2 M(q, z)2 + zM(q, z),
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                            31
+
+
+which we can solve to find that
+                                                   p
+                                          1−z−      1 − 2z + (1 − 4q)z 2
+                              M(q, z) =                                  .
+                                                      2qz 2
+If M is a nonempty Motzkin path with no peaks of height 1, then either M = UM ′ DM ′′ for some
+nonempty M ′ ∈ M and some M ′′ ∈ M, or M = HM ′′′ for some M ′′′ ∈ M. This translates into the
+functional equation
+                         M(q, z) − 1 = qz 2 (M(q, z) − 1)M(q, z) + zM(q, z).
+We can solve this equation and use the above formula for M(q, z) to obtain
+                                               1
+                        M(q, z) =            2
+                                   1 − z − qz (M(z, q) − 1)
+                                                    2
+(8.4)                           =                 p                     .
+                                   1 − z + 2qz 2 + 1 − 2z + (1 − 4q)z 2
+   Using Equation (8.4), one can readily check that the expression on the right-hand side of Equa-
+tion (8.1) is
+                        1                         X X
+                                                               q n−#U (M ) z n .
+                                           
+                           M(1/q, qz) − 1 − 1 =
+                       qz
+                                                      n≥1 M ∈Mn+1
+
+Therefore, in order to prove Equation (8.1), it suffices (by Equation (8.3)) to exhibit a bijection
+Ψ : MAD(c×                                                                  ×
+           (n) ) → Mn+1 such that |δ| = n − #U (Ψ(δ)) for every δ ∈ MAD(c(n) ).
+
+8.5. The bijection. Throughout the remainder of this section, let us fix a positive integer n and
+write c× = c×
+            (n) . The map νc× : {2, . . . , n} → {A, B} is given by
+                                                 (
+                                                  A if i is odd;
+                                      νc× (i) =
+                                                  B if i is even.
+As in Section 8.3, we consider noncrossing arc diagrams drawn on n + 1 points that are arranged
+horizontally and identified with the numbers 1, . . . , n + 1 from left to right.
+Lemma 8.8. If δ ∈ MAD(c× ) and i ∈ {2, . . . , n}, then i − 1 is the left endpoint of an arc in δ, or
+i + 1 is the right endpoint of an arc in δ (or both).
+Proof. Suppose instead that i − 1 is not a left endpoint of an arc in δ and that i + 1 is not a right
+endpoint of an arc in δ. Let a be the unique c× -sortable arc whose endpoints are i − 1 and i + 1.
+Because νc× (i − 1) = νc× (i + 1) ̸= νc× (i), it is straightforward to check that δ ⊔ {a} is a noncrossing
+arc diagram in AD(c× ). This contradicts the maximality of δ.                                            □
+   Suppose δ ∈ MAD(c× ). Let Ψ(δ) be the word M1 · · · Mn+1 , where for 1 ≤ i ≤ n + 1, we define
+                  
+                  U if i ≤ n and i + 1 is not the right endpoint of an arc in δ;
+                  
+(8.5)         Mi = D if i ≥ 2 and i − 1 is not the left endpoint of an arc in δ;
+                  
+                   H otherwise.
+                  
+
+Lemma 8.8 guarantees that Ψ(δ) is well defined (i.e., that no letter in Ψ(δ) can be both U and D).
+See Figure 4 for an illustration.
+Proposition 8.9. For each δ ∈ MAD(c× ), we have Ψ(δ) ∈ Mn+1 and |δ| = n − #U (Ψ(δ)).
+Proof. Let Ψ(δ) = M1 · · · Mn+1 , where the steps M1 , . . . , Mn+1 are as defined in Equation (8.5). It
+is immediate from Equation (8.5) that n − #U (Ψ(δ)) and n − #D (Ψ(δ)) are both equal to |δ|. In
+particular, #U (Ψ(δ)) = #D (Ψ(δ)).
+32                        EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+
+
+        Figure 4. When n = 13, the map Ψ sends a noncrossing arc diagram of type A13
+        to a Motzkin path of length 14 with no peaks of height 1. For each 2 ≤ i ≤ 13,
+        a blue semicircle appears on the top (resp. bottom) of the circle containing i if
+        νc× (i) = A (resp. if νc× (i) = B). (The letters drawn below the noncrossing arc
+        diagram represent the Moztkin path; they are not part of the noncrossing arc dia-
+        gram.)
+
+   Suppose k ∈ {0, . . . , n} is such that the prefix P = M1 · · · Mk of Ψ(δ) satisfies #U (P ) = #D (P ).
+If k ≥ 1, then k − #U (P ) is the number of elements of {2, . . . , k + 1} that are right endpoints of
+arcs in δ. Similarly, if k ≥ 1, then k − 1 − #D (P ) is the number of elements of {1, . . . , k − 1} that
+are left endpoints of arcs in δ. It follows that either k = 0, or there is an arc from k to k + 1 in
+δ. In either case, it is immediate from Equation (8.5) that Mk+1 ̸= D. Moreover, none of the arcs
+with left endpoints in {1, . . . , k} have right endpoints in {k + 2, . . . , n + 1}. If we had Mk+1 = U and
+Mk+2 = D, then we could add the arc from k + 1 to k + 2 to δ in order to form a larger noncrossing
+arc diagram in AD(c× ), contradicting the maximality of δ. Together, this shows that Ψ(δ) cannot
+pass below the horizontal axis and cannot have any peaks of height 1. Hence, Ψ(δ) ∈ Mn+1 .                 □
+  We can now state and prove the main theorem of this section; as mentioned at the end of
+Section 8.4, this theorem and Proposition 8.9 imply the identity in Equation (8.1), thereby settling
+the conjecture of Defant and Williams.
+Theorem 8.10. The map Ψ : MAD(c× ) → Mn+1 is a bijection.
+Proof. Given an arc a and a vertical line l that lies strictly between the endpoints of a, let al be
+the curve obtained from a by deleting the portion of a that lies to the right of l. We call a curve al
+obtained in this manner a partial arc.
+   Consider M = M1 · · · Mn+1 ∈ Mn+1 . Let us try to construct δ ∈ MAD(c× ) such that Ψ(δ) = M .
+We can build δ step by step from left to right. This process is illustrated in Figure 5. For the
+first step, we create a small partial arc that starts at the point 1. In general, at the k-th step, we
+consider the point k. At this point in time, there may be some partial arcs that were produced in
+the previous k − 1 steps. If k ≥ 2 and Mk−1 ̸= U, then we extend one of these partial arcs and attach
+it to the point k in order to create an arc, and we extend the rest of the partial arcs above (if k is
+odd) or below (if k is even) the point k. The condition that arcs cannot cross uniquely determines
+which partial arc we must attach to the point k. During the same k-th step, if k ≤ n and Mk+1 ̸= D,
+then we create a new small partial arc that starts at the point k.
+                POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                                    33
+
+
+  To see that the above procedure succeeds in producing a noncrossing arc diagram in AD(c× ), we
+must check two things:
+      • If k ≥ 2 and Mk−1 ̸= U, then there is actually a partial arc from the first k − 1 steps that we
+        can attach to the point k.
+      • The total number of steps during which we create a new partial arc is equal to the total
+        number of steps during which we attach a partial arc to a point to create an arc.
+For the first item, note that the number of partial arcs remaining after the first k − 1 steps is
+(k − 1 − #D (M2 · · · Mk )) − (k − 2 − #U (M1 · · · Mk−2 )) = #U (M1 · · · Mk−2 ) − #D (M2 · · · Mk ) + 1. Because M
+is a Motzkin path, this quantity is nonnegative; furthermore, it can only be 0 if the steps Mk−1 and
+Mk are U and D (respectively) and form a peak of height 1. But M has no peaks of height 1, so the
+number of partial arcs remaining after k − 1 steps must actually be at least 1. The second bulleted
+item follows from the fact that #U (M ) = #D (M ).
+   Let us now show that the noncrossing arc diagram δ constructed through the above procedure is
+actually maximal in AD(c× ); it will then follow immediately from the construction that Ψ(δ) = M .
+Note also that the steps outlined above for constructing δ were forced upon us; in other words, Ψ
+is injective.
+   Let ai,j denote the unique c× -sortable arc from i to j. Suppose by way of contradiction that
+there exist i < j such that ai,j is not in δ and δ ⊔ {ai,j } is a noncrossing arc diagram. We will
+assume i is even; the case when i is odd is almost identical. We consider three cases.
+Case 1. Assume j = i + 1. Then we have Mi = U and Mi+1 = D, so the steps Mi and Mi+1 form a
+peak. Since ai,i+1 does not cross any of the arcs in δ, none of the arcs in δ can pass below i and
+above i + 1. Hence, every arc in δ whose left endpoint is in {1, . . . , i − 1} has its right endpoint
+in {2, . . . , i}. It follows from the construction of δ that #U (M1 · · · Mi−1 ) = #D (M1 · · · Mi−1 ). But this
+implies that the peak formed by Mi and Mi+1 has height 1, which contradicts the fact that M has
+no peaks of height 1.
+Case 2. Assume j = i + 2. Then the point i is not the left endpoint of an arc in δ, and the point
+i + 2 is not the right endpoint of an arc in δ. However, this implies that Mi+1 is both U and D, which
+is impossible.
+Case 3. Assume j ≥ i + 3. Note that Mi+1 = D. Since Mi+1 ̸= U, there must be an arc a′ in δ whose
+right endpoint is i + 2. The arc ai,j passes above i + 1 and below i + 2. The left endpoint of a′
+cannot be i + 1 since, if it were, the arcs ai,j and a′ would cross. Therefore, a′ passes above i + 1.
+The lower endpoint of a′ also cannot be i because i is the left endpoint of ai,j . Therefore, a′ passes
+below i. However, this forces ai,j and a′ to cross, which is a contradiction.                        □
+
+
+                                  9. Maximum-Size Pop-Stack Orbits
+   Let W be a finite irreducible Coxeter group. All Coxeter elements of W are conjugate to each
+other, so they have the same group-theoretic order; this order is called the Coxeter number of W
+and is denoted by h. (It is also known that h = 2N/n, where N and n are the number of reflection
+in W and the number of simple reflections in W , respectively.) Recall that, given a finite lattice L,
+we write OL (x) for the forward orbit of an element x ∈ L under the pop-stack operator. If c is a
+Coxeter element of W , then Cambc is a quotient of Weak(W ). Let L be an arbitrary lattice quotient
+W≡ on W . We begin this section by showing that h is an upper bound for maxx∈W≡ |OW≡ (x)| when
+L is an arbitrary quotient of Weak(W ) (Theorem 9.6). In the process, we also provide a formula
+for computing popW≡ for any lattice quotient W≡ of the weak order. We then prove that this upper
+bound is tight when W≡ is a Cambrian lattice (Theorem 9.17). We also discuss how the techniques
+used in this section relate back to representation theory in Section 9.4.
+34                      EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+
+
+       Figure 5. The step-by-step procedure for constructing the noncrossing arc diagram
+       δ such that Ψ(δ) = UHUUDHDD.
+
+9.1. Quotients of the weak order. As above, let L be a finite lattice. An equivalence relation ≡
+on L is a lattice congruence provided that equivalence classes respect the meet and join operations
+in L. That is, ≡ is a lattice congruence if for all x, y, z ∈ L satisfying x ≡ y, we have x ∨ z ≡ y ∨ z
+and x ∧ z ≡ y ∧ z.
+   Let ≡ be a lattice congruence. Let [x]≡ denote the equivalence class of an element x ∈ L under
+≡. One can define a lattice structure on the set L/ ≡ of equivalence classes as follows. We set
+[x]≡ ≤ [y]≡ if and only if there exist x′ ∈ [x]≡ and y ′ ∈ [y]≡ such that x′ ≤ y ′ . We then have
+[x]≡ ∧ [y]≡ = [x ∧ y]≡ and [x]≡ ∨ [y]≡ = [x ∨ y]≡ . The lattice L/ ≡ is called a lattice quotient of L.
+Observe that there is a surjective lattice homomorphism η≡ : L → L/ ≡ that sends each element
+x ∈ L to its equivalence class [x]≡ . (See [Rea16, Proposition 9.5-4].)
+   Given an equivalence relation ≡ on L, one can check that ≡ is a lattice congruence order-
+theoretically using the following result.
+Proposition 9.1 ([Rea16, Proposition 9-5.2]). An equivalence relation ≡ on a finite lattice L is a
+lattice congruence if and only if the following three conditions hold:
+      • Each equivalence class is an interval of L.
+      • The map π↓≡ that sends each element x ∈ L to the unique minimal element of its equivalence
+         class is order-preserving.
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                             35
+
+                   ↑
+     • The map π≡    that sends each element x ∈ L to the unique maximal element of its equivalence
+       class is order-preserving.
+  Finally, we note that if ≡ is a lattice congruence on L, then the map π↓≡ : L → L is a lattice
+homomorphism whose image π↓≡ (L) (taken as an induced subposet of L) is isomorphic to the
+                                      ↑
+quotient L/ ≡. (Dually, the image of π≡ is also isomorphic to the quotient L/ ≡.)
+Remark 9.2. Although the subposet π↓≡ (L) is a lattice in its own right, it meet and join operations
+may not coincide with those of L. Said another way, π↓≡ (L) is not generally a sublattice of L. In
+general, the join operation of π↓≡ (L) does coincide with that of L; dually, the meet operation of
+ ↑
+π≡ (L) does coincide with that of L. However, each c-Cambrian lattice (of type W ) is both a lattice
+quotient and sublattice of the weak order on W .
+   Below, we realize an arbitrary lattice quotient of the weak order as the subposet induced by the
+image of π↓≡ , where ≡ is a lattice congruence. We have two main tasks as we consider the pop-stack
+operator on π↓≡ (W ). First, we must we identify the lower covers of each x ∈ π↓≡ (W ); this is done
+in the following lemma.
+Lemma 9.3. Let L be a finite lattice, and let ≡ be a lattice congruence on L. If x ∈ π↓≡ (L), then
+the map π↓≡ restricts to a bijection from the set of elements covered by x in L to the set of elements
+covered by x in π↓≡ (L).
+
+Proof. First assume that a ⋖ x in L, and let a′ = π↓≡ (a). Since π↓≡ : L → L is order-preserving, we
+have a′ ≤ x. Suppose that there exists b ∈ π↓≡ (L) with a′ < b < x. We cannot have a′ < b < a
+because a′ is the largest element of π↓≡ (L) lying below a. Moreover, we cannot have a′ < a < b
+because a <· x. Therefore, a and b are incomparable. This implies that a ∨ b = x (because a <· x
+and b < x). Since a ≡ a′ , we have x = a ∨ b ≡ a′ ∨ b = b. But this contradicts the fact that b and
+x are distinct elements of π↓≡ (L). From this contradiction, we deduce that a′ <· x in π↓≡ (L).
+   We have shown that π↓≡ restricts to a map from the set of elements covered by x in L to the
+set of elements covered by x in π↓≡ (L); we must show that it is bijective. To show it is injective,
+suppose instead that there exist distinct elements a1 , a2 that are covered by x in L such that
+π↓≡ (a1 ) = π↓≡ (a2 ). Then a1 ≡ a2 , so a1 ≡ a1 ∨ a2 = x, contradicting the fact that x is the unique
+minimal element of [x]≡ . To prove surjectivity, suppose d <· x in π↓≡ (L). Then there exists d′ ∈ L
+such that d ≤ d′ <· x. Since π↓≡ is order-preserving, we have d ≤ π↓≡ (d′ ) < x. Thus, d = π↓≡ (d′ ). □
+
+  Now that we have identified the lower covers of the elements of a lattice quotient π↓≡ (L), we
+describe the pop-stack operator on a lattice quotient of L. It will be convenient to write ∧L and
+∧≡ for the meet operation of L and the meet operation of π↓≡ (L), respectively.
+
+Proposition 9.4. Let L be a finite lattice, and let ≡ be a lattice congruence on L. For x ∈ π↓≡ (L),
+we have                                     ^                           
+                       pop↓π≡ (L) (x) = π↓≡       {π↓≡ (a) | a <· x in L} .
+                                 ↓                  L
+
+Proof. By Lemma 9.3, it suffices to show that for x, y ∈ π↓≡ (L), we have x ∧≡ y = π↓≡ (x ∧L y).
+Observe that x ∧L y ≥ x ∧≡ y ≥ π↓≡ (x ∧L y) in L. Since x ∧≡ y and π↓≡ (x ∧L y) are both in the image
+of π↓≡ , the desired result follows from the fact that π↓≡ (x ∧L y) is the largest element of π↓≡ (L) lying
+below x ∧L y.                                                                                             □
+Remark 9.5. Let L be a the weak order on a finite Coxeter group W . Let ≡ be the c-Cambrian
+congruence on W . The fact that each c-Cambrian lattice is a sublattice of the weak order implies
+36                     EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+that π↓≡ and the meet operation of the weak order commute (see, e.g., [Def22a, Lemma 3.1]). Hence,
+                              ^                                  ^                             
+          pop↓Cambc (x) = π↓≡       {π↓≡ (a) : a <· x in L} = π↓≡         {π↓≡ (a) : a <· x in L}
+                                  L                                     ≡
+                          ^                               ^
+                                 ≡                              ≡
+                        =      {π↓ (a) : a <· x in L} =       {π↓ (a) : a <· x in L}
+                             ≡                              L
+                              ^                        
+                        = π↓≡       {a : a <· x in W } = π↓≡ ◦ pop↓L (x).
+                               L
+
+We obtain equality from the first line to the second line because the meet taken in the c-Cambrian
+lattice stays in the c-Cambrian lattice (so the outermost π↓≡ acts as the identity). The equality
+from the second to the third line results from the fact that π↓≡ and the meet operation commute.
+Thus, we obtain the simpler expression for popCambc from Equation (6.3).
+  We now specialize to the case where L is the weak order on W and prove our main result of this
+subsection. Let W≡ denote a lattice quotient of W coming from a congruence ≡.
+Theorem 9.6. If W≡ is a lattice quotient of Weak(W ), then
+                                         max |OW≡ (x)| ≤ h.
+                                        x∈W≡
+
+Proof. We may assume that W≡ is the subposet π↓≡ (W ) of Weak(W ), where ≡ is a lattice congruence
+on Weak(W ). We write ∧≡ and ⋖≡ to denote meets and cover relations, respectively, in W≡ (while
+∧ and ⋖ will denote meets and cover relations in Weak(W )). Define a map g : W → W by
+
+                                      pop↓W≡ (x)
+                                    (
+                                                        if x ∈ W≡ ;
+                             g(x) =       ↓
+                                      popWeak(W ) (x) otherwise.
+
+Note that
+                                   max |OW≡ (x)| ≤ max |Orbg (w)|
+                                x∈W≡              w∈6W
+
+(recall that Orbg (w) denotes the forward orbit of w under g).
+   Following [Def22b], we say a map f : W → W is compulsive if f (x) ≤ pop↓Weak(W ) (x) for all
+x ∈ W . [Def22b, Theorem 1.5] states that if f is compulsive, then
+                                        max |Orbf (w)| ≤ h.
+                                        w∈W
+
+Hence, it suffices to show that g is compulsive.
+  Consider x ∈ W≡ \ 0̂. By Lemma 9.3, we have
+
+                 g(x) = pop↓W≡ (x) =
+                                      ^                      ^
+                                         {y ∈ W≡ | y ⋖≡ x} =   {π↓≡ (a) | a ⋖ x}.
+                                        ≡                        ≡
+
+But then since π↓≡ (a) ≤ a for all a, we have
+
+               {π↓≡ (a) | a ⋖ x} ≤ {π↓≡ (a) | a ⋖ x} ≤ {a | a ⋖ x} = pop↓Weak(W ) (x).
+           ^                        ^                 ^
+              ≡
+
+On the other hand, g(z) = pop↓Weak(W ) (z) whenever z ∈ W \ W≡ or z = 0̂. This shows that g is
+compulsive.                                                                                 □
+Remark 9.7. One cannot weaken the hypothesis in Theorem 9.6 by assuming that L is just a
+meet-semilattice quotient or a join-semilattice quotient. For example, suppose W = A2 . Let ≡ be
+the meet-semilattice congruence on Weak(W ) with one nontrivial equivalence class consisting of 0̂,
+s1 , and s1 s2 . The lattice L = W/ ≡ is a 4-element chain, so maxx∈L |OL (x)| = 4 > 3 = h.
+              POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                            37
+
+
+9.2. Heaps and combinatorial AR quivers. Our goal is now to show that the upper bound
+in Theorem 9.6 is tight when L is a Cambrian lattice Cambc . We will do this by constructing
+an explicit element zc ∈ Cambc whose forward orbit under pop↓Cambc has size exactly h. Our
+construction makes use of the combinatorial AR quivers of [STW, Section 9]. As we explain in
+Section 9.4, these are intimately related with the representation theory of the tensor algebra KQc .
+   It will be convenient to think of the letters in a word over the alphabet S as being distinct entities
+even if they represent the same simple reflection. For example, the two occurrences of s2 in the
+word s2 s1 s2 s3 are considered to be different. If s and s′ are letters representing simple reflections
+s and s′ , then we let m(s, s′ ) = m(s, s′ ) (recall that m(s, s′ ) is the order of ss′ ). We can apply a
+commutation move to a word by swapping two consecutive letters s and s′ if m(s, s′ ) = 2 (this move
+is not allowed if m(s, s′ ) = 1). The commutation class of a word Q over S is the set of words that
+can be obtained from Q via a sequence of commutation moves. We write Q ≡ Q′ if Q and Q′ are in
+the same commutation class.
+   Let Q be a word over S. The heap of Q is the poset Heap(Q) whose elements are the letters
+in Q (which we view as distinct from one another) and whose order relation is defined so that if s
+and s′ are two letters (which could represent the same simple reflection), then s < s′ if and only if
+s appears to the left of s′ in every word in the commutation class of Q. A word Q′ is in the same
+commutation class as Q if and only if Heap(Q) = Heap(Q′ ). More generally, Heap(Q′ ) is an order
+ideal of Heap(Q) if and only if there exists a word Q′′ such that Q′ Q′′ ≡ Q.
+   Suppose H is the heap of a word w. We write ζ(H) for the element of W represented by w and
+write Z(H) for the set of simple reflections that appear in w. If w ≡ w′ , then w and w′ represent
+the same element of W ; therefore, ζ(H) and Z(H) depend only on H (and not the particular word
+w). Let J (H) denote the set of order ideals of H.
+   Let c be a reduced word for a Coxeter element c, and let ck denote the word obtained by
+                                                                           (j)
+concatenating c with itself k times. Let S = {s1 , . . . , sn }, and let si denote the j-th letter in ck
+that represents si . For example, if c = s1 s3 s2 , then
+                                        (1) (1) (1) (2) (2) (2) (3) (3) (3)
+                                 c3 = s1 s3 s2 s1 s3 s2 s1 s3 s2 .
+Lemma 9.8. For each k ≥ 1, the poset Heap(ck ) is ranked.
+Proof. Because ΓW is a tree, it is straightforward to see that Heap(c) is ranked. Let rank : S → Z
+be the unique rank function of Heap(c) whose minimum value is 1. Let us extend this rank function
+                                                    (j)
+to a map rank : Heap(ck ) → Z by letting rank(si ) = rank(si ) + 2j − 2. We claim that this map is
+                                                         (j)    (j ′ )
+a rank function on Heap(ck ). To see this, suppose si ⋖ si′ is a cover relation in Heap(ck ). Then
+{si , si′ } is an edge in ΓW . If si appears before si′ in c, then we have rank(si′ ) = rank(si ) + 1 and
+j ′ = j. If si appears after si′ in c, then we have rank(si′ ) = rank(si ) − 1 and j ′ = j + 1. In either
+                                  (j ′ )       (j)
+case, we compute that rank(si′ ) = rank(si ) + 1.                                                       □
+
+   Let rank : Heap(ch ) → Z be the rank function on Heap(ch ) that was constructed in the proof of
+Lemma 9.8. When we consider a heap H that can be naturally identified with a convex subset of
+Heap(ch ), the rank of an element s of H will simply be rank(s), the rank of s in Heap(ch ). We will
+also find it convenient to write
+                  Hk = {s ∈ H | rank(s) = k} and          H≤k = {s ∈ H | rank(s) ≤ k}.
+  There is an involution ψ : S → S given by ψ(s) = w◦ sw◦ ; this map is an automorphism of ΓW .
+We can extend ψ to the set of words over S by letting ψ(s1 · · · sM ) = ψ(s1 ) · · · ψ(sM ).
+  Let Hc = Heap(sortc (w◦ )) and H
+                                 e c = Heap(ψ(sortc (w◦ ))); note that Hc and H       e c depend only on
+the Coxeter element c (and not the reduced word c). It follows from [STW, Lemma 2.6.5] that
+(9.1)                                 sortc (w◦ )ψ(sortc (w◦ )) ≡ ch .
+38                         EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+Therefore, we can think of Hc as an order ideal of Heap(ch ) whose complement (in Heap(ch )) is H
+                                                                                                e c.
+Define
+                                                    zc = ζ(H≤h−1
+                                                            c    ).
+Remark 9.9. We have defined zc using Coxeter–Catalan combinatorics because we deemed this
+approach to be the most amenable for proving that |OCambc (zc )| = h. However, there is also a more
+direct lattice-theoretic way to define zc . The spine of Cambc , denoted spine(Cambc ), is the union of
+the maximum-length chains of Cambc . Thomas and Williams [TW19b] proved that spine(Cambc )
+is a distributive sublattice of Cambc . It is also known [TW19b] that
+                                     spine(Cambc ) = {ζ(I) | I ∈ J (Hc )}.
+
+One can show that zc = (pop↑spine(Cambc ) )h−1 (e) (where e = 0̂ is the identity element).
+
+Example 9.10. Suppose W = A8 . The edges in ΓW are {si , si+1 } for 1 ≤ i ≤ 7. The Coxeter
+number of W is h = 9. The map ψ is given by ψ(sk ) = s9−k . Let c = s1 s3 s2 s4 s6 s5 s7 s8 and
+c = s1 s3 s2 s4 s6 s5 s7 s8 . The acyclic orientation of ΓW corresponding to c is
+                          Qc = (                                                                  ).
+Figure 6 shows the Hasse diagram of Heap(c9 ); it is drawn sideways so that each cover relation
+ (j)     (j ′ )             (j)               (j ′ )
+si ⋖ si′ is drawn with si to the left of si′ . As explained in Section 9.4, this Hasse diagram
+is referred to as the combinatorial AR quiver of c9 in [STW, Section 9.2]. Note that Heap(c9 ) is
+drawn by lining up 9 copies of Heap(c) (depicted in 9 different colors) in a row and adding (black)
+edges as appropriate. The columns are labeled from 1 to 20 from left to right; the column labeled
+i consists of the elements of rank i. The region shaded in yellow is Hc , while the unshaded region
+   e c . The region outlined in blue is H≤h−1
+is H                                     c    = H≤8  c . Thus,
+
+                 zc = s1 s3 s2 s4 s6 s5 s7 s8 s1 s3 s2 s4 s6 s5 s7 s8 s1 s3 s2 s4 s6 s5 s7 s8 s1 s3 s2 s4 s6 .
+
+
+
+
+       Figure 6. The Hasse diagram of Heap(ch ) from Example 9.10, in which W = A8 .
+       The heap Hc is shaded in yellow, while H≤h−1
+                                               c    is outlined in blue.
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                                39
+
+
+9.3. Realization of the upper bound. We need a little more preparation before we can prove
+that |OCambc (zc )| = h.
+   For k ∈ Z, let                      (
+                                        1 if k is odd;
+                                ε(k) =
+                                        2 if k is even.
+                      (j)                                       (j)
+Note that for each si       ∈ Heap(ch ), the parity of rank(si ) only depends on si (and not j). Let
+                             (j)                                                  (j)
+   X1 = {si ∈ S | rank(si ) is odd for all j} and X2 = {si ∈ S | rank(si ) is even for all j}.
+Then S = X1 ⊔ X2 is a bipartition of the tree ΓW .
+Lemma 9.11. We have Z(Hh−1
+                       c   ) = Xε(h−1) .
+
+Proof. We already know that Z(Hh−1     c   ) ⊆ Xε(h−1) , so we just need to prove the reverse containment.
+We will show that each element of Hc has rank at least h + 1; this will imply that the elements of
+                                         e
+Heap(ch ) with rank h − 1 must belong to Hc .
+   Fix a simple reflection si ∈ S, and let si′ = ψ(si ). Let j be the smallest integer such that
+ (j)                                                         ′
+si ∈ H e c . Let j ′ be the smallest integer such that s(j′ ) ∈ He c . Then j ′ − 1 is the number of letters
+                                                           i
+in sortc (w◦ ) that represent si′ , so it is also the number of letters in ψ(sortc (w◦ )) that represent si .
+But the number of letters in ψ(sortc (w◦ )) that represent si is h − j + 1, so j + j ′ − 2 = h. Hence,
+                                   (j)
+                        rank(si ) = rank(si ) + 2j − 2 = rank(si ) + 2h − 2j ′ + 2.
+Because ψ : S → S is an automorphism of ΓW , the map ψ : Hc → H    e c is a poset isomorphism. It
+                   (j ′ )       (j)         (1)         (1)
+follows that rank(si′ ) − rank(si ) = rank(si ) − rank(si′ ) = rank(si ) − rank(si′ ). By definition,
+                (j)                                    (j ′ )
+we have rank(si ) = rank(si ) + 2j − 2 and rank(si′ ) = rank(si′ ) + 2j ′ − 2, so
+                  rank(si′ ) + (2j ′ − 2) − (rank(si ) + 2j − 2) = rank(si ) − rank(si′ ).
+Rearranging this equation yields rank(si ) = rank(si′ ) + j ′ − j. Consequently,
+                      (j)
+               rank(si ) = rank(si ) + 2j − 2 = rank(si′ ) + j + j ′ − 2 = rank(si′ ) + h.
+                      (j)
+In particular, rank(si ) ≥ h + 1. This shows that every element of H     e c that represents si has rank
+at least h + 1. As si was arbitrary, it follows that all of the elements of He c have rank at least h + 1.
+                                                                                  (k)
+   Suppose sm ∈ Xε(h−1) , and let k be the unique integer such that rank(sm ) = h − 1. It follows
+                                       (k)   e c , so s(k)                                  h−1 ). Hence,
+from the preceding paragraph that sm ̸∈ H              m ∈ Hc . This shows that sm ∈ Z(Hc
+                h−1
+Xε(h−1) ⊆ Z(Hc ).                                                                                       □
+Example 9.12. Let us use Figure 6 to illustrate the proof of Lemma 9.11. Recall that, in this
+example, the map ψ is given by ψ(sk ) = s9−k . Let i = 3 so that i′ = 6. Then j = 6, j ′ = 5,
+                                                                                    (j)
+rank(si ) = 1, and rank(si′ ) = 2. Note that j + j ′ − 2 = 9 = h and rank(si ) = 11 = h + rank(si′ ).
+We have Z(Hh−1 c   ) = {s2 , s4 , s6 , s8 } = X2 = Xε(h−1) , as Lemma 9.11 claims.
+                        Q                                    Q
+   Let c1 = w◦ (X1 ) = s∈X1 s and c2 = w◦ (X2 ) = s∈X2 s, and fix reduced words c1 and c2 for c1
+and c2 , respectively. The element c× = c1 c2 is called a bipartite Coxeter element of W . (In type A,
+this definition of c× coincides with that of either c×               ××                         ×
+                                                            (n) or c(n) from Section 8.1.) Let c = c1 c2 . Let
+uk be the word c1 c2 c1 · · · cε(k) that begins with c1 and alternates between c1 and c2 , using ⌈k/2⌉
+copies of c1 and ⌊k/2⌋ copies of c2 . In other words,
+                                              (
+                                               (c× )k/2          if k is even;
+                                        uk =     ×  (k−1)/2
+                                               (c )         c1 if k is odd.
+40                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+It is known [Bou02, §V.6 Exercise 2] that sortc× (w◦ ) = uh . Hence, for 1 ≤ j ≤ k ≤ h, the word uk
+is a reduced word for an element uk ∈ W , and Z(Heap(uk )j ) = Xε(j) .
+Lemma 9.13. For each k ∈ [h − 1], we have Des(uk ) = Xε(k) .
+Proof. The reduced word uk ends with cε(k) , and Z(cε(k) ) = cε(k) . Since all of the simple reflections
+in Xε(k) commute with each other, we have Xε(k) ⊆ Des(uk ).
+   Now suppose by way of contradiction that s ∈ Des(uk ) ∩ Xε(k+1) . Let v = uk s, and note that
+ℓ(v) = ℓ(uk ) − 1. Since uk+1 = uk cε(k+1) , we have ℓ(uk+1 ) = ℓ(uk ) + ℓ(cε(k+1) ). Let
+                                              Y
+                                   v′ =               s′ = scε(k+1) .
+                                          s′ ∈Xε(k+1) \{s}
+
+Then ℓ(v ′ ) = ℓ(cε(k+1) ) − 1. We have
+                                    uk+1 = uk cε(k+1) = vssv ′ = vv ′ ,
+which is a contradiction because
+                  ℓ(v) + ℓ(v ′ ) = ℓ(uk ) − 1 + ℓ(cε(k+1) ) − 1 = ℓ(uk+1 ) − 2 < ℓ(uk+1 ).               □
+Example 9.14. Let W = D5 . Our convention is that S = {s0 , s1 , s2 , s3 , s4 } and that the edges of
+ΓW (each of which is unlabeled) are {s0 , s2 }, {s1 , s2 }, {s2 , s3 }, {s3 , s4 }. The Coxeter number of W
+is h = 8. The map ψ is given by ψ(s0 ) = s1 , ψ(s1 ) = s0 , and ψ(sk ) = sk for all k ∈ {2, 3, 4}. Let
+c = s0 s2 s1 s3 s4 and c = s0 s2 s1 s3 s4 . The acyclic orientation of ΓW corresponding to c is
+
+
+                                                                .
+We have X1 = {s0 , s1 , s3 } and X2 = {s2 , s4 }. The region outlined in blue in Figure 7 is Heap(c8 )
+(drawn sideways, similarly to Figure 6). The region shaded in yellow is Hc . We have added the extra
+           (0) (0) (0)
+elements s1 , s3 , s4 (and appropriate edges) to the left of Heap(c8 ) in order to realize Heap(u5 )
+as the region enclosed by the black rectangle. The yellow shaded region that lies inside of the black
+rectangle is H≤5                                                    ≤5
+               c ; this illustrates how we can naturally identify Hc with a subposet of Heap(u5 ).
+
+
+
+
+        Figure 7. An illustration of Example 9.14, in which W = D5 . The region outlined
+        in blue is Heap(c8 ). The heap Hc is shaded in yellow. The region enclosed by the
+        black rectangle is Heap(u5 ).
+
+
+Lemma 9.15. For each k ∈ [h − 1], we have Z(Hkc ) = Des(ζ(H≤k
+                                                           c )).
+
+Proof. We have Z(Hkc ) ⊆ Xε(k) , so all of the elements of Z(Hkc ) commute with each other. Therefore,
+ζ(Hkc ) = s∈Z(Hkc ) s. Because H≤k−1     is an order ideal of H≤k   whose complement (in H≤k        k
+         Q
+                                  c                             c                           c ) is Hc ,
+                POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                                               41
+
+
+we have ζ(H≤k c ) = ζ(Hc
+                         ≤k−1 )ζ(Hk ), so Z(Hk ) ⊆ Des(ζ(H≤k )). Now choose some r ∈ Des(ζ(H≤k ));
+                                  c             c            c                                   c
+we will show that r ∈ Z(Hkc ).
+   Because Z(Hm                                                      ≤k with a subposet of Heap(u )
+                 c ) ⊆ Xε(m) for every m ∈ [k], we can identify Hc                                 k
+(as illustrated in Figure 7). We will also continue to use Equation (9.1) to view Hc as an order
+ideal of Heap(ch ) whose complement is H     e c . We claim that H≤k
+                                                                  c  is an upper set of Heap(uk ). To
+                     (j)    ≤k        (j ′ )                          (j)    (j ′ )
+see this, suppose si ∈ Hc and si′ ∈ Heap(uk ) are such that si < si′ in Heap(uk ). Let si′′
+be a simple reflection in Xε(h−1) such that m(si′ , si′′ ) ̸= 2. There is a unique integer j ′′ ∈ [h]
+                    (j ′′ )                         (j ′′ )                                       (j ′ )         (j ′′ )
+such that rank(si′′ ) = h − 1. Then si′′                      is maximal in Heap(uh−1 ). Since si′         and si′′        are
+                                                               (j ′ )     (j ′′ )
+comparable (because m(si′ , si′′ ) ̸= 2), we must have si′ < si′′ . It follows from Lemma 9.11 that
+ (j ′′ )                           (j ′′ )                                                                      (j ′ )
+si′′ ∈ Hh−1c   ; in particular, si′′ ∈ Hc . Because Hc is an order ideal of Heap(ch ), it contains si′ .
+             (j ′ )         (j ′ )
+But rank(si′ ) ≤ k, so si′ ∈ H≤k           c . This proves that Hc
+                                                                      ≤k is an upper set of Heap(u ). Because
+                                                                                                       k
+uk is a reduced word for uk , it follows that ζ(H≤k          )−1 ≤ u−1 (in the weak order). Consequently,
+                                                           c            k
+r ∈ Des(ζ(H≤k  c )) ⊆ Des(uk ) = Xε(k) .
+    Let r be the unique element of rank k in Heap(uk ) that represents r. Because r ∈ Des(ζ(H≤k                c )),
+there must be an element r′ ∈ H≤k            c that represents r.     Because     rank(r ′ ) ≤ k = rank(r), we have
+
+r′ ≤ r in Heap(uk ). But H≤k                                                       ≤k
+                              c is an upper set of Heap(uk ), so r ∈ Hc . As r has rank k, it must be
+         k                                 k
+in Hc . This proves that r ∈ Z(Hc ), as desired.                                                                   □
+Lemma 9.16. Let c be a Coxeter element of W . We have
+                                                    |OCambc (zc )| = h.
+Proof. As before, let X1 (resp. X2 ) be the set of simple reflections s such that the letters representing
+s in ch have odd (resp. even) rank. For 0 ≤ j ≤ h − 1, let vj = ζ(H≤j     c ). In particular, v0 = e, and
+vh−1 = zc . Suppose k ∈ [h − 1]. We know that Z(Hc ) ⊆ Xε(k) , so all of the elements of Z(Hkc )
+                                                            k
+
+commute with each other. Along with Lemma 9.15, this implies that
+                                                                     Y
+                   w◦ (vk ) = w◦ (Des(ζ(H≤k
+                                          c  ))) =   w ◦ (Z(H k
+                                                              c )) =       s = ζ(Hkc ).
+                                                                              s∈Z(Hkc )
+
+We have vk = vk−1 ζ(Hkc ), so it follows from Equation (6.1) that
+                     pop↓Weak(W ) (vk ) = vk−1 ζ(Hkc )w◦ (Des(vk )) = vk−1 ζ(Hkc )2 = vk−1 .
+Because H≤k−1
+           c      is an order ideal of Hc , we know by Remark 9.9 that vk−1 is in the spine of Cambc ;
+in particular, it is in Cambc . Invoking Equation (6.3), we find that
+                              pop↓Cambc (vk ) = π↓c (pop↓Weak(W ) (vk )) = π↓c (vk−1 ) = vk−1 .
+As this is true for all k ∈ [h − 1], we deduce that
+                                OCambc (zc ) = OCambc (vh−1 ) = {vh−1 , vh−2 , . . . , v0 }.                                □
+   Combining Theorem 9.6 with Lemma 9.16 yields our last main result.
+Theorem 9.17. Let W be a finite irreducible Coxeter group, and let c ∈ W be a Coxeter element.
+The maximum size of a forward orbit under pop↓Cambc is exactly the Coxeter number h of W .
+9.4. Heaps and representation theory. We conclude this section with a brief explanation of
+how the heap of a c-sortable word Q relates to representation theory of KQc .
+   Let Λ be an arbitrary finite-dimensional algebra. A morphism f : M → N in mod Λ is said to
+be irreducible if it is not an isomorphism and whenever L ∈ mod Λ, g : M → L, and h : L → N
+are such that f = h ◦ g, we have that either g or h is an isomorphism. For M, N ∈ mod Λ, we
+denote by irr(M, N ) the linear subspace of HomΛ (M, N ) spanned by the irreducible morphisms.
+The Auslander–Reiten (AR) quiver of Λ is then the directed graph defined as follows.
+42                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+       • The vertices of the AR quiver are the indecomposable objects in mod Λ.
+       • For any two vertices M, N , the number of arrows M → N in the AR quiver coincides with
+         the dimension of irr(M, N ).
+   Now let Q be a word over S. In [STW, Section 9.2], the Hasse diagram of Heap(Q) is referred to as
+the combinatorial AR quiver of Q. To explain this, consider the special case when Q = sortc (w◦ ). By
+[STW, Theorem 9.3.1], there is a bijection Ξ : Heap(sortc (w◦ )) → brick KQ    c . Under  this bijection,
+                     (j ′ )                                                                  (j ′ )
+                                                                                                  
+            (j)                                                                  (j)
+we have si <· si′ if and only if there is an irreducible morphism from Ξ si            to Ξ si′ . Thus,
+under the bijection Ξ, the Hasse diagram of Heap(sortc (w◦ )) is precisely the AR quiver of KQc .
+(In this setting, the dimension of irr(M, N ) does not exceed 1.) In particular, the drawing of
+Heap(sortc (w◦ )) shown as the shaded yellow part of Figure 6 agrees with the standard way of
+embedding the AR quiver of KQc in the plane; see, e.g., [Sch14, Section 3.1].
+   It is also
+             shown  in [STW, Theorem 9.3.1] that, for all si ∈ S, the projective module P (i) satisfies
+                (1)
+P (i) = Ξ si . Because every nonzero morphism can be written as a composition of irreducible
+morphisms, the first copy of QL  c = Heap(c) in Heap(sortc (w◦ )) thus provides a visualization of the
+well-known fact that EndKQc ( ni=1 P (i)) ∼ = KQc .
+
+                                       10. Future Directions
+10.1. Images. Consider the linear Coxeter element c→ = s1 s2 · · · sn of An . The Cambrian lattice
+Cambc→ is the (n + 1)-st Tamari lattice. Hong [Hon22] proved that the size of the image of
+pop↓Cambc→ is the n-th Motzkin number (i.e., the number of Motzkin paths of length n). In Section 8,
+we determined the size of the image of pop↓Camb × , where c× is a bipartite Coxeter element of
+                                                        c
+An . Using these formulas, one can verify that |pop↓Cambc→ (Cambc→ )| ≤ |pop↓Camb × (Cambc× )|.
+                                                                                     c
+Numerical evidence has led us to conjecture that the linear and bipartite Coxeter elements are, in
+some sense, extremal with regard to the sizes of the images of pop-stack operators.
+Conjecture 10.1. For every Coxeter element c of An , we have
+               |pop↓Cambc→ (Cambc→ )| ≤ |pop↓Cambc (Cambc )| ≤ |pop↓Camb × (Cambc× )|.
+                                                                            c
+
+10.2. Forward orbits. Suppose L is a finite lattice, and let υL = maxx∈L |OL (x)|. Let
+                                     ΥL = {x ∈ L | |OL (x)| = υL }
+be the set of elements of L whose forward orbits under pop↓L attain the maximum possible size.
+   Let c be a Coxeter element of a finite irreducible Coxeter group W . We saw in Theorem 9.17 that
+υCambc is the Coxeter number h, and we constructed an explicit element zc ∈ ΥCambc . However,
+we said nothing about the other elements ΥCambc . In the case when W = An and c is the linear
+Coxeter element c→ (i.e., Cambc is the (n + 1)-st Tamari lattice), it is known that |ΥCambc | is the
+(n − 1)-st Catalan number [Def22a]. It would be interesting to understand ΥCambc for other choices
+of c. In particular, we have the following conjecture.
+Conjecture 10.2. Assume n ≥ 3, and let c× be the bipartite Coxeter element of type An given by
+                                         Y      Y
+                                  c× =       si      sj .
+                                                i∈[n]        j∈[n]
+                                                i odd       j even
+
+The set of elements of Cambc× whose forward orbits under the pop-stack operator have size h is
+given by                               (
+                                        {zc }         if n is odd;
+                            ΥCambc× =
+                                        {zc , zc s1 } if n is even.
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                            43
+
+
+   The original use of the term pop-stack comes from the setting where L is the weak order on An ;
+in this case, Ungar proved that maxx∈Weak(An ) |OWeak(An ) (x)| is n + 1 (which is the Coxeter number
+of An ).
+Question 10.3. What can be said about |ΥWeak(An ) |?
+   Defant [Def22b] proved that if W is a finite irreducible Coxeter group with Coxeter number h,
+then maxx∈W |OWeak(W ) (x)| = h. In Theorem 9.6, we found that maxx∈L |OL (x)| ≤ h whenever L
+is a lattice quotient of Weak(W ), and we saw in Theorem 9.17 that this inequality is an equality
+whenever L is a Cambrian lattice. We are naturally led to ask the following questions.
+Question 10.4. Let W be a finite irreducible Coxeter group with Coxeter number h. For which
+lattice quotients L of Weak(W ) is it the case that maxx∈L |OL (x)| = h?
+Question 10.5. Let L′ be a lattice quotient of a finite lattice L. Is it necessarily the case that
+                                     max |OL′ (x′ )| ≤ max |OL (x)|?
+                                    x′ ∈L′             x∈L
+
+10.3. Generalizations. It would be interesting to see how much of our work on Cambrian lattices
+can be extended to more general families of lattices. For example, it could be interesting to study
+the pop-stack operators on m-Cambrian lattices, which were introduced by Stump, Thomas, and
+Williams [STW].
+
+                              Appendix A. Proof of Theorem 4.6
+   In this appendix, we prove Theorem 4.6. More precisely, we prove only the first half of the
+theorem, as the second half is just the dual. We follow arguments similar to those appearing in
+[HI21a, Section 3] and [KY14, Section 7.2]. The main difference is that we work almost exclusively
+in the category mod Λ (with the exception of a portion of the proof of Lemma A.1 below), while
+the referenced papers work primarily in the bounded derived category.
+   In the arguments that follow, we recall that for any wide subcategory W ⊆ mod Λ and any
+M, N ∈ W, we have HomΛ (M, N ) = HomW (M, N ) and Ext1Λ (M, N ) = Ext1W (M, N ). On the
+other hand, we may have that Extm                m
+                                  Λ (M, N ) ⊋ ExtW (M, N ) for m > 1.
+
+Lemma A.1. Let (X , Y) ∈ sbp Λ be SM compatible. Let X ′ ⊆ X , X ∈ X \ X ′ , and Z ∈ Filt(X ′ ).
+  (1) The map HomΛ (XX      ′ , Z) → Ext1 (X, Z) induced by the short exact sequence η
+                                        Λ                                                  X,X ′ from
+      Equation (4.1) is bijective.
+  (2) The map Ext1Λ (XX  ′ , Z) → Ext2 (X, Z) induced by the short exact sequence η
+                                     Λ                                             X,X ′ from Equa-
+      tion (4.1) is injective.
+Proof.
+   (1) Since Filt(X ) is a wide subcategory, we have that Ext1Λ (X, Z) ∼     = HomΛ (ΩX X, Z). We have
+ker(γX,X ′ ) ∈ Filt(X ) since Filt(X ) is a wide subcategory. Now, Filt(X ′ ) is a Serre subcategory
+of Filt(X ), so in particular, there is a torsion pair (⊥ X ′ , Filt(X ′ )) in Filt(X ). This implies that
+ker(γX,X ′ ) ∈ ⊥ X ′ . From the exact sequence
+                                ′
+                   0 → HomΛ (XX   , Z) → HomΛ (ΩX X, Z) → HomΛ (ker(γX,X ′ , Z),
+we therefore conclude that the induced map HomΛ (XX     ′ , Z) → Hom (Ω X, Z) ∼ Ext1 (X, Z) is a
+                                                                    Λ   X       =     Λ
+bijection.
+   (2) We first claim that HomΛ (Ω2X X, Z) ⊆ Ext2Λ (X, Z). We know from Theorem 3.7 that there
+exists Xu ∈ sbrick Λ such that (X , Xu ) is a 2-term simple-minded collection. Then, as in [KY14,
+Lemma 7.8], there exist a finite-dimensional algebra Γ and a triangle functor
+                                    real : Db (mod Γ) → Db (mod Λ)
+such that the following hold:
+44                       EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+     • mod Γ = Filt(X ⊕ Xu [1]).
+     • real acts as the identity on mod Γ.
+     • For all M, N ∈ mod Γ, the induced map Ext1Γ (M, N ) → HomDb (mod Λ) (M, N [1]) is a bijec-
+       tion, and the induced map Ext2Γ (M, N ) → HomDb (mod Λ) (M, N [2]) is an injection.
+Now, Filt(X ) is a Serre subcategory of mod Γ and a wide subcategory of mod Λ. Thus, taking
+M = X and N = Z above, we find that real induces an inclusion Ext2Γ (X, Z) ⊆ Ext2Λ (X, Z). To
+prove the claim, it therefore suffices to show that (HomΛ (Ω2X X, Z) =)HomΓ (Ω2X , Z) ⊆ Ext1Γ (X, Z).
+  Consider the following commutative diagram, where the first row consists of projective covers
+and syzygies in mod Γ and the second row consists of projective covers and syzygies in Filt(X ).
+
+                        Ω2 X             PX1         ΩX            PX0          X
+                           g                            f
+
+                        Ω2X X           PX1 ,X      ΩX X          PX0 ,X       X.
+
+Since Filt(X ) is a Serre subcategory of mod Γ, every module in Filt(X ) has the same top in both
+Filt(X ) and in mod Γ. Thus, the induced map PX0 → PX0 ,X , and so also f , must be surjective. Now
+for S ∈ X , we get an induced exact sequence
+          0 → HomΓ (PX0 ,X , S) → HomΓ (PX0 , S) → HomΓ (kerf, S) → Ext1Γ (PX0 ,X , S) = 0,
+where the last term is 0 because PX0 ,X is projective in Filt(X ). Since PX0 and PX0 ,X have the same
+top, this implies that HomΓ (kerf, S) = 0, and hence also that kerf ∈ ⊥ X . Moreover, we see that
+the top of ΩX X is a direct summand of the top of ΩX, and thus that the induced map PX1 ↠ PX1 ,X
+is surjective. From the snake lemma, this means there is a surjective map ker(f ) ↠ coker(g). On
+the other hand, coker(g) ∈ Filt(X ) since Filt(X ) is a Serre subcategory of mod Γ. It follows that g
+is surjective. In particular, the induced map HomΓ (Ω2X X, Z) → HomΓ (Ω2 X, Z) = Ext1Γ (X, Z) is
+injective. This proves the claim.
+   Now consider the following commutative diagram of projective covers and syzygies in Filt(X ):
+
+                                  Ω2X X           PX1 ,X        ΩX X
+                                        αX,X ′                      γX,X ′
+
+                                      ′
+                                  ΩX XX          PX0 ,X ′         ′ .
+                                                                 XX
+                                                        X
+
+
+The induced map PX1 ,X → PX0 ,X ′ is a (split) epimorphism. Consequently, we have a surjection
+                                    X
+ker(γX,X ′ ) ↠ coker(αX,X ′ ). On the other hand, we have that ker(γX,X ′ ) ∈ ⊥ X ′ , as observed in
+the proof of (1). Similarly, we have coker(αX,X ′ ) ∈ Filt(X ′ ) since Filt(X ′ ) is a Serre subcategory of
+Filt(X ). We conclude that coker(αX,X ′ ) = 0. In particular, the induced map
+                           ′                  ′
+            Ext1Filt(X ) (XX , Z) = HomΓ (ΩX XX , Z) → HomΓ (Ω2X X, Z) = Ext2Filt(X ) (X, Z)
+                                                             ′ , Z) = Ext1
+is injective. Together with the claim, the fact that Ext1Λ (XX                      ′
+                                                                         Filt(X ) (XX , Z) then implies
+the result.                                                                                          □
+Lemma A.2. Let (X , Y) ∈ sbp Λ be SM compatible. Let X ′ ⊆ X , Y ∈ Y, and Z ∈ Filt(X ′ ).
+  (1) The map HomΛ (XY′ , Z) → HomΛ (Y, Z) induced by gY,X ′ is bijective.
+  (2) The map Ext1Λ (XY′ , Z) → Ext1Λ (Y, Z) induced by gY,X ′ is injective.
+Proof.
+  (1) Let f : XY′ → Z be such that f ◦ gY,X ′ = 0. Equivalently, we have Im(gY,X ′ ) ⊆ ker(f ).
+Note that ker(f ) ∈ Filt(X ′ ) since Filt(X ′ ) is a wide subcategory. Since gY,X ′ is a right minimal
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                          45
+
+
+Filt(X ′ )-approximation, it follows that YX′ = kerf ; i.e., f = 0. This shows that the induced map is
+injective; the fact that it is surjective comes from the definition of an approximation.
+   (2) Let η ∈ Ext1Λ (XY′ , Z) be such that η ◦ gY,X ′ = 0. Then η is a short exact sequence of the form
+                                                               q
+                                   η:           Z        E             XY′ ,
+so this means that there exists h : Y → E such that gY,X ′ = q ◦ h. Now, E ∈ Filt(X ′ ), so there
+exists h′ : XY′ → E such that h = h′ ◦ gY,X ′ . We therefore have
+                                 q ◦ h = q ◦ h′ ◦ gY,X ′ = IdXY′ ◦ gY,X ′ .
+It then follows from (1) that q ◦ h′ = IdXY′ ; i.e., the exact sequence η is split.                   □
+Proposition A.3 (Theorem 4.6, (1)). Let (X , Y) ∈ sbp Λ be SM compatible, and let X ′ ⊆ X .
+Then µX ′ (X , Y) is a semibrick pair.
+Proof. The proof is similar to that of [HI21a, Proposition 3.5]. For readability, let µX ′ (X , Y)d = X1
+and µX ′ (X , Y)u = Y1 .
+Claim 1: The set X2 is a semibrick.
+   Let Z1 , Z2 ∈ X2 . First suppose that Z1 ∈ X ′ . If Z2 ∈ X ′ , then there is nothing to show since
+X′ ⊆ X     is a semibrick. If Z2 = ker(gY,X ′ ) for some Y ∈ Y such that gY,X ′ is surjective, then
+HomΛ (Z1 , Z2 ) = 0 because Z2 ⊆ Y and HomΛ (Z1 , Y ) = 0.
+   Now suppose that there exists Y1 ∈ Y such that gY1 ,X ′ is surjective and Z1 = ker(gY1 ,X ′ ). We
+first consider the case Z2 ∈ X ′ . Then we have a long exact sequence
+                                                                   0             0
+                      0 → HomΛ (XY′ , Z2 ) → HomΛ (Y, Z2 ) →
+                                                           − HomΛ (Z, Z2 ) →
+                                                                           −
+                                   0
+                                  − Ext1Λ (XY′ , Z2 ) → Ext1Λ (Y, Z2 ),
+                                  →
+where we know the indicated maps are 0 by Lemma A.2.
+  It remains to consider the case where there exists Y2 ∈ Y such that gY2 ,X ′ is surjective and
+Z2 = ker(gY2 ,X ′ ). We then have a long exact sequence
+                    0 → HomΛ (Z1 , Z2 ) → HomΛ (Z1 , Y2 ) → HomΛ (Z1 , XY′ 2 ) = 0,
+where the last term is 0 by the case considered above. Similarly, we have a long exact sequence
+                      0 = HomΛ (Y1 , Y2 ) → HomΛ (Z1 , Y2 ) → Ext1Λ (XY′ 1 , Y2 ).
+Together, these sequences show that HomΛ (Z1 , Z2 ) ∼
+                                                    = Hom(Y1 , Y2 ). In particular, setting Z1 = Z2 ,
+we conclude that Z1 is a brick. This proves the claim.
+Claim 2: We have HomΛ (Z, X1 ) = 0 = Ext1Λ (Z, X1 ) for all X1 ∈ X ′ and Z ∈ X1 .
+  Again, there are two possibilities. Suppose first that there exists X2 ∈ X \ X ′ such that
+Z = EX2 ,X ′ . Then we have a long exact sequence
+                                                               0  ′
+                     0 = HomΛ (X2 , X1 ) → HomΛ (Z, X1 ) →
+                                                         − HomΛ (XX 2
+                                                                      , X1 ) →
+                                  0                  0       ′
+              → Ext1Λ (X2 , X1 ) →− Ext1Λ (Z, X1 ) →
+                                                   − Ext1Λ (XX 2
+                                                                 , X1 ) → Ext2Λ (X2 , X1 ),
+where we know the indicated maps are 0 by Lemma A.1. This proves the claim in this case.
+  The other case to consider is that in which there exists Y ∈ Y such that gY,X ′ is injective and
+Z = coker(gY,X ′ ). In this case, we have a long exact sequence
+                                           0                                     0
+                                        − HomΛ (XY′ , X1 ) → HomΛ (Y, X1 ) →
+                      0 → HomΛ (Z, X1 ) →                                  −
+                           0                0
+                                       − Ext1Λ (XY′ , X1 ) → Ext1Λ (Y, X1 ),
+                      − Ext1Λ (Z, X1 ) →
+                      →
+where again we know the indicated maps are 0 by Lemma A.2. This proves the claim.
+46                        EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+Claim 3: We have HomΛ (Z, ker(gY1 ,X ′ )) = 0 = Ext1Λ (Z, ker(gY1 ,X ′ )) for all Z ∈ X1 and Y1 ∈ Y
+such that gY1 ,X ′ is surjective.
+  Again, there are two possibilities. Suppose first that there exists X2 ∈ X \ X ′ such that
+Z = EX2 ,X ′ . Then HomΛ (Z, ker(gY1 ,X ′ )) = 0 because Z ∈ Filt(X ). Moreover, we have a long
+exact sequence
+                   0 = HomΛ (Z, XY′ 1 ) → Ext1Λ (Z, ker(gY1 ,X ′ )) → Ext1Λ (Z, Y1 ) = 0,
+where the first term is 0 by Claim 2 and the last term is 0 because Z ∈ Filt(X ). This proves the
+claim in this case.
+   The other case to consider is that in which there exists Y2 ∈ Y such that gY2 ,X ′ is injective and
+Z = coker(gY2 ,X ′ ). The fact that HomΛ (Z, ker(gY1 ,X ′ )) = 0 then follows from the fact that Y1 ∈ X ⊥ .
+Moreover, we have an exact sequence
+                             0 = HomΛ (Z, XY′ 1 ) → Ext1Λ (Z, ker(gY1 ,X ′ )) →
+                               → Ext1Λ (Z, Y1 ) → Ext1Λ (Z, XY′ 1 ) = 0,
+where the first and last terms are 0 by Claim 2. Likewise, we have an exact sequence
+                       0 = HomΛ (Y2 , Y1 ) → Ext1Λ (Z, Y1 ) → Ext1Λ (XY′ 2 , Y1 ) = 0,
+where the first and last terms are 0 since Y1 ∈ Y2⊥ ∩ X ⊥0,1 . Together, these two exact sequences
+yield that Ext1Λ (Z, ker(gY1 ,X ′ )) = 0, as desired.
+Claim 4: The set X1 is a semibrick.
+  Let Z1 , Z2 ∈ X1 . First suppose that there exist X1 , X2 ∈ X \ X ′ such that Z1 = EX1 ,X ′ and
+Z2 = EX2 ,X ′ . Then there is an exact sequence
+                          ′                                                        ′
+          0 = HomΛ (Z1 , XX 2
+                              ) → HomΛ (Z1 , Z2 ) → HomΛ (Z1 , X2 ) → Ext1Λ (Z1 , XX 2
+                                                                                       ) = 0,
+where the first and last terms are 0 by Claim 2. We also have a long exact sequence
+                                                                   ′
+                    0 → Hom(X1 , X2 ) → Hom(Z1 , X2 ) → Hom(XX       1
+                                                                       , X2 ) = 0.
+                                                      ∼
+Together, these sequences show that HomΛ (Z1 , Z2 ) = HomΛ (X1 , X2 ). In particular, by setting
+Z1 = Z2 , we conclude that Z1 is a brick. This proves the claim in this case.
+  Now suppose there exists Y1 ∈ Y such that gY1 ,X ′ is injective and Z1 = coker(gY1 ,X ′ ) and that
+there exists X2 ∈ X \ X ′ such that Z2 = EX2 ,X ′ . Then HomΛ (Z1 , X2 ) = 0 since X2 ∈ (X ′ )⊥ . We
+then have an exact sequence
+                                    ′
+                    0 = HomΛ (Z1 , XX 2
+                                        ) → HomΛ (Z1 , Z2 ) → HomΛ (Z1 , X2 ) = 0,
+where the first term is 0 by Claim 2. Similarly, we have an exact sequence
+                     0 = HomΛ (Z2 , XY′ 1 ) → HomΛ (Z2 , Z1 ) → Ext1Λ (Z2 , Y1 ) = 0,
+where the first term is 0 by Claim 2 and the last term is 0 because Y ∈ X ⊥0,1 . We conclude that
+Z1 ∈ Z2⊥ ∩ ⊥ Z2 .
+   It remains to consider the case where there exist Y1 , Y2 ∈ Y such that gY1 ,X ′ and gY2 ,X ′ are
+injective, Z1 = coker(gY1 ,X ′ ), and Z2 = coker(gY2 ,X ′ ). As in earlier cases, we have an exact sequence
+          0 = HomΛ (Z1 , XY′ 2 ) → HomΛ (Z1 , Z2 ) → HomΛ (Z1 , Y2 [1]) → Ext1Λ (Z1 , XY′ 2 ) = 0,
+where the first and last terms are 0 by Claim 2. Similarly, we have an exact sequence
+             0 = Hom(XY′ 1 , Y2 ) → HomΛ (Y1 , Y2 ) → Ext1Λ (Z1 , Y2 ) → Ext1Λ (XY′ 1 , Y2 ) = 0,
+where the first and last terms are 0 since Y ∈ X ⊥0,1 . We again conclude that HomΛ (Z1 , Z2 ) ∼
+                                                                                               =
+HomΛ (Y1 , Y2 ). This concludes the proof.                                                     □
+               POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                            47
+
+
+Proposition A.4 (Theorem 4.6,(2)–(5)). Let (X , Y) ∈ sbp Λ be SM compatible, and let X ′ ⊆ X .
+Write µX ′ (X , Y) = (X1 , Y1 ).
+  (1) If (X1′ , Y1′ ) is an SM compatible semibrick pair such that X1 ⊆ X1′ and Y1 ⊆ Y1′ , then we
+       have X ⊆ µX ′ (X1′ , Y1′ )d and Y ⊆ µX ′ (X1′ , Y1′ )u .
+  (2) (X , Y) ∈ 2-smc Λ if and only if (X1 , Y1 ) ∈ 2-smc Λ.
+  (3) (X , Y) is completable if and only if (X1 , Y1 ) is completable.
+  (4) If (X , Y) ∈ 2-smc Λ, then T(µX ′ (X , Y)) = T(X , Y) ∩ ⊥ X ′ .
+Proof.
+   (1) First note that X ′ ⊆ Y1′ and therefore that X ′ ⊆ µX ′ (X1′ , Y1′ )d by construction.
+   Now let X ∈ X \ X ′ so that EX,X ′ ∈ Y1′ . Then Lemma A.1 tells us that the map XX         ′ ,→ E
+                                                                                                    X,X ′
+                              ′
+is a minimal right Filt(X )-approximation of EX,X ′ that is injective and has cokernel X. It follows
+that X ∈ µX ′ (X1′ , Y1′ )d .
+   It remains to consider Y ∈ Y. Suppose first that gY,X ′ is injective. For any Z ∈ Filt(X ′ ), the
+quotient map q : XY′ → coker(gY,X ′ ) induces a bijection HomΛ (Z, XY′ 2 ) → HomΛ (Z, coker(gY,X ′ )).
+Thus, q is a minimal right Filt(X ′ )-approximation of coker(gY,X ′ ) that is surjective and has kernel
+Y . We conclude that Y ∈ µX ′ (X1′ , Y1′ )u .
+   It remains to consider the case when gY,X ′ is surjective. Let Y ′ = ker(gY,X ′ ). We consider the
+commutative diagram
+                                                               gY,X ′
+                                    Y′                Y                   XY′
+                                                                             γ
+
+                                    Y′             IY1′ ,Y ′            ΣY1′ Y ′ ,
+where the bottom row consists of the injective envelope and first cosyzygy of Y ′ in Filt(Y1′ ). The
+vertical maps are induced by the fact that the top row is an element of Ext1Λ (XY′ , Y ′ ), so in
+particular, the right square is a pullback. Now for Z ∈ Filt(X ′ ), we have an exact sequence
+               0 = HomΛ (Z, Y ) → HomΛ (Z, XY′ ) → Ext1Λ (Z, Y ′ ) → Ext1Λ (Z, Y ) = 0,
+where the first and last terms are 0 since Y ∈ X ⊥0,1 . Moreover, we have a canonical isomorphism
+Ext1Λ (Z, Y ′ ) ∼= HomΛ (Z, ΣY1′ Y ′ ) since Filt(X ′ ) ⊆ Filt(Y ′ ) is a wide subcategory of mod Λ. We
+conclude that γ induces a bijection HomΛ (Z, XY′ ) ∼       = HomΛ (Z, ΣY1′ Y ′ ), so it is a minimal right
+          ′
+Filt(X )-approximation. Thus, the top row of our diagram coincides with the short exact sequence
+ηY1′ ,Y ′ described above Definition 4.4. We conclude that Y ∈ µX ′ (X1′ , Y1′ )u .
+   (2) Let X ∈ X \ X ′ . Then the short exact sequence ηX,X ′ corresponds to a triangle
+                                              ′
+                                     X[−1] → XX → EX,X ′ → X
+in Db (mod Λ). Thus, any triangulated subcategory that is closed under direct summands and
+contains (some shift of) X ′ will contain X if and only if it contains EX,X ′ . Similarly, for Y ∈ Y,
+we have a triangle
+                                          gY,X ′
+                                       Y −−−→ XY′ → Z → Y [1],
+where either Z = coker(gY,X ′ ) or Z = ker(gY,X ′ )[1]. Thus again, any triangulated subcategory that
+is closed under direct summands and contains X ′ will contain Y if and only if it contains Z. This
+proves the result.
+   (3) This is an immediate consequence of (1) and (3).
+   (4) Recall that T(µX ′ (X , Y)) = ⊥ Y1 and T(X , Y) = ⊥ Y by Theorem 3.7.
+   The fact that ⊥ Y1 ⊆ ⊥ X ′ follows from the definitions. Hence, let M ∈ ⊥ X ′ . Then for all Y ∈ Y
+such that gY,X ′ is injective, we necessarily have that M ∈ ⊥ Y . It therefore suffices to show that
+for Y ∈ Y such that gY,X ′ is surjective, we have that M ∈ ⊥ Y if and only if M ∈ ⊥ ker(gY,X ′ ). The
+48                          EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+inclusion ⊥ Y ⊆ ⊥ ker(gY,X ′ ) holds in general, so suppose that M ∈ ⊥ ker(gY,X ′ ). Then the fact that
+M ∈ ⊥ X ′ implies that M ∈ ⊥ Y as well. This concludes the proof.                                    □
+
+                                              Acknowledgments
+   Colin Defant was supported by the National Science Foundation under Award No. 2201907 and
+by a Benjamin Peirce Fellowship at Harvard University. Eric Hanson was partially supported by
+Canada Research Chairs CRC-2021-00120 and by NSERC Discovery Grants RGPIN-2022-03960
+and RGPIN/04465-2019. A portion of this work was completed while Eric Hanson was a postdoc-
+toral fellow at l’Université du Québec à Montréal and l’Université de Sherbrooke. We are grateful
+to Nathan Williams for helpful conversations.
+
+                                                  References
+[AM17]    A. Aihara and Y. Mizuno, Classifying tilting complexes over preprojective algebras of Dynkin type, Algebra
+          Number Theory 11 (2017), no. 6, 1287–1315.
+[AN09]    S. Al-Nofayee, Simple objects in the heart of a t-structure, J. Pure Appl. Algebra 213 (2009), no. 1, 54–59.
+[AHI+ ]   T. Aoki, A. Higashitani, O. Iyama, R. Kase, and Y. Mizuno, Fans and polytopes in tilting theory I:
+          Foundations, arXiv:2203.15213.
+[Asa20]   S. Asai, Semibricks, Int. Math. Res. Not. IMRN 2020 (2020), no. 16, 4993–5054.
+[AP22]    S. Asai and C. Pfeifer, Wide subcategories and lattices of torsion classes, Algebr. Represent. Theory 25
+          (2022), 1611–1629.
+[ABB+ 19] A. Asinowski, C. Banderier, S. Biley, B. Hackl, and S. Linusson, Pop-stack sorting and its image: permu-
+          tations with overlapping runs, Acta Math. Univ. Comenianae 88 (2019), 395–402.
+[ASS06]   I. Assem, D. Simson, and A. Skowroński, Elements of the representation theory of associative algebras, vol-
+          ume 1: techniques of representation theory, London Math. Soc. Stud. Texts, vol. 65, Cambridge University
+          Press, Cambridge, 2006.
+[ARS95] M. Auslander, I. Reiten, and S. O. Smalø, Representation theory of Artin algebras, Cambridge Stud. Adv.
+          Math., vol. 36, Cambridge University Press, Cambridge, 1995.
+[Bar19]   E. Barnard, The canonical join complex, Electron. J. Combin. 26 (2019).
+[BCZ19] E. Barnard, A. Carroll, and S. Zhu, Minimal inclusions of torsion classes, Algebr. Comb. 2 (2019), no. 5,
+          879–901.
+[BH]      E. Barnard and E. J. Hanson, Exceptional sequences in semidistributive lattices and the poset topology of
+          wide subcategories, arXiv:2209.11734.
+[BH22]    E. Barnard and E. J. Hanson, Pairwise compatibility for 2-simple minded collections II: preprojective
+          algebras and full rank semibirck pairs, Ann. Comb. 26 (2022), 803–855.
+[BR18]    E. Barnard and N. Reading, Coxeter-biCatalan combinatorics, J. Algebraic Combin. 47 (2018), no. 2,
+          241–300.
+[BTZ21] E. Barnard, G. Todorov, and S. Zhu, Dynamical combinatorics and torsion classes, J. Pure Appl. Algebra
+          225 (2021).
+[BB05]    A. Björner and F. Brenti, Combinatorics of coxeter groups, Graduate Texts in Mathematics, vol. 231,
+          Springer, Berlin, Heidelberg, 2005.
+[Bou02]   N. Bourbaki, Lie groups and Lie algebras Chapters 4-6, Springer–Verlag, Berlin, Copyright Information
+          Springer-Verlag Berlin, Heidelberg, 2002.
+[BY13]    T. Brüstle and D. Yang, Oriented exchange graphs, In (D. J. Benson, H. Krause, and A. Skowroński, eds.)
+          Advances in Representation Theory of Algebras, EMS Series of Congress Reports, vol. 9, 2013.
+[CS]      Y. Choi and N. Sun, The image of the pop operator on various lattices, To appear in Adv. Appl. Math.
+[CG19]    A. Claesson and B. Á. Guðmundsson, Enumerating permutations sortable by k passes through a pop-stack,
+          Adv. Appl. Math. 108 (2019), 79–96.
+[CGP21] A. Claesson, B. Á Guðmundsson, and J. Pantone, Counting pop-stacked permutations in polynomial time,
+          Experiment. Math. (2021).
+[Def22a] C. Defant, Meeting covered elements in ν-tamari lattices, Adv. Appl. Math. 134 (2022).
+[Def22b] C. Defant, Pop-stack-sorting for Coxeter groups, Comb. Theory 2 (2022).
+[DKW]     C. Defant, N. Kravitz, and N. Williams, The Ungar games, arXiv:2302.06552.
+[DL]      C. Defant and R. Li, Ungarian Markov chains, arXiv:2301.08206.
+[DW23]    C. Defant and N. Williams, Semidistrim lattices, Forum Math. Sigma 11 (2023), no. 50, 1–35.
+[DIJ17]   L. Demonet, O. Iyama, and G. Jasso, τ -tilting finite algebras, bricks, and g-vectors, Int. Math. Res. Not.
+          IMRN 2019 (2017), no. 3, 852–892.
+                POP-STACK OPERATORS FOR TORSION CLASSES AND CAMBRIAN LATTICES                                      49
+
+
+[DIR+ 23] L. Demonet, O. Iyama, N. Reading, I. Reiten, and H. Thomas, Lattice theory of torsion classes: beyond
+          τ -tilting theory, Trans. Amer. Math. Soc. Ser. B 10 (2023), 542–612.
+[Dic66]   S. E. Dickson, A torsion theory for abelian categories, Trans. Amer. Math. Soc. 121 (1966), no. 1, 223–235.
+[DR75]    V. Dlab and C. M. Ringel, On algebras of finite representation type, J. Algebra 33 (1975), 306–394.
+[DR76]    V. Dlab and C. M. Ringel, Indecomposable representations of graphs and algebras, Mem. Am. Math. Soc.
+          6 (1976).
+[Eno21]   H. Enomoto, Bruhat inversions in Weyl groups and torsion-free classes over preprojective algebras, Comm.
+          Algebra 49 (2021), no. 5, 2156–2189.
+[Eno22]   H. Enomoto, Rigid modules and ICE-closed subcategories in quiver representations, J. Algebra 594 (2022),
+          364–388.
+[Eno23]   H. Enomoto, From the lattice of torsion classes to the posets of wide subcategories and ICE-closed subcat-
+          egories, Algebr. Represent. Theory (2023).
+[ES22]    H. Enomoto and A. Sakai, ICE-closed subcategories and wide τ -tilting modules, Math. Z. 300 (2022),
+          541–577.
+[FJN95] R. Freese, J. Jezek, and J. Nation, Free lattices, Mathematical Surveys and Monographs, vol. 42, American
+          Mathematical Society, 1995.
+[GIMO19] A. Garver, K. Igusa, J. P. Matherne, and J. Ostroff, Combinatorics of exceptional sequences in type A,
+          Electron. J. Combin. 26 (2019), no. 1.
+[GM19]    A. Garver and T. McConville, Lattice properties of oriented exchange graphs and torsion classes, Algebr.
+          Represent. Theory 22 (2019), 43–78.
+[GL91]    W. Geigle and H. Lenzing, Perpendicular categories with applications to representations and sheaves, J.
+          Algebra 144 (1991), no. 2, 273–343.
+[Hana]    E. J. Hanson, A facial order for torsion classes, arXiv:2305.06031.
+[Hanb]    E. J. Hanson, τ -exceptional sequences and the shard intersection order in type A, arXiv:2303.11517.
+[HI21a]   E. J. Hanson and K. Igusa, Pairwise compatibility for 2-simple minded collections, J. Pure Appl. Algebra
+          225 (2021), no. 6.
+[HI21b]   E. J. Hanson and K. Igusa, τ -cluster morphism categories and picture groups, Comm. Alg. 49 (2021),
+          no. 10, 4376–4415.
+[HW]      W. Hara and M. Wemyss, Spherical objects in dimension two and three, arXiv:2206.11552.
+[HY23]    E. J. Hanson and X. You, Morphisms and extensions between bricks over preprojective algebras of type A,
+          J. Algebra (2023).
+[Hon22]   L. Hong, The pop-stack-sorting operator on Tamari lattices, Adv. Appl. Math. 139 (2022).
+[ITW]     K. Igusa, G. Todorov, and J. Weyman, Picture groups of finite type and cohomology in type An ,
+          arXiv:1609.02636.
+[IT09]    C. Ingalls and H. Thomas, Noncrossing partitions and representations of quivers, Compos. Math. 145
+          (2009), no. 6, 1533–1562.
+[IRRT18] O. Iyama, N. Reading, I. Reiten, and H. Thomas, Lattice structure of Weyl groups via representation
+          theory of preprojective algebras, Compos. Math. 154 (2018), no. 6, 1269–1305.
+[IRTT15] O. Iyama, I. Reiten, H. Thomas, and G. Todorov, Lattice structure of torsion classes for path algebras,
+          Bull. Lond. Math. Soc. 47 (2015), no. 4, 639–650.
+[Jas15]   G. Jasso, Reduction of τ -tilting modules and torsion pairs, Int. Math. Res. Not. IMRN 2015 (2015), no. 16,
+          7190–7237.
+[KQ15]    A. King and Y. Qiu, Exchange graphs and Ext quivers, Adv. Math. 285 (2015), 1106–1154.
+[KY14]    S. Koenig and D. Yang, Silting objects, simple-minded collections, t-structures and co-t-structures for
+          finite-dimensional algebras, Doc. Math. 19 (2014), 403–438.
+[KS]      M. Kontsevich and Y. Soibelman, Stability structures, motivic Donaldson-Thomas invariants and cluster
+          transformations, arXiv:0811.2435.
+[Kül17]  J. Külshammer, Pro-species of algebras I: Basic properties, Algebr. Represent. Theory 20 (2017), no. 5,
+          1215–1238.
+[LW]      Y. Luo and J. Wei, Boolean lattices of torsion classes over finite-dimensional algebras, arXiv:2303.15802.
+[MŠ17]   F. Marks and J. Šťovı́ček, Torsion classes, wide subcategories, and localisations, Bull. Lond. Math. Soc.
+          49 (2017), no. 3.
+[Miz14]   Y. Mizuno, Classifying τ -tilting modules over preprojective algebras of Dynkin type, Math. Z. 277 (2014),
+          no. 3-4, 665–690.
+[Miz22]   Y. Mizuno, Arc diagrams and 2-term simple-minded collections of preprojective algebras of type A, J.
+          Algebra 595 (2022), 444–478.
+[MT20]    Y. Mizuno and H. Thomas, Torsion pairs for quivers and the Weyl groups, Selecta Math. 3 (2020), no. 46.
+[Müh19] H. Mühle, The core label order of a congruence-uniform lattice, Algebra Universalis 80 (2019).
+[PS19]    L. Pudwell and R. Smith, Two-stack-sorting with pop stacks, Australas. J. Combin. 74 (2019), 179–195.
+50                         EMILY BARNARD, COLIN DEFANT, AND ERIC J. HANSON
+
+
+[Rea04]    N. Reading, Lattice congruences of the weak order, Order 21 (2004), 315–344.
+[Rea06]    N. Reading, Cambrian lattices, Adv. Math. 205 (2006), 313–353.
+[Rea07]    N. Reading, Clusters, Coxeter-sortable elements and noncrossing partitions, Trans. Amer. Math. Soc. 359
+           (2007), no. 12, 5931–5958.
+[Rea11]    N. Reading, Noncrossing partitions and the shard intersection order, J. Algebraic Combin. 33 (2011),
+           483–530.
+[Rea15]    N. Reading, Noncrossing arc diagrams and canonical join representations, SIAM J. Discrete Math. 29
+           (2015).
+[Rea16]    N. Reading, Lattice theory of poset of regions, In (G. Grätzer and F. Wehrung, eds.) Lattice Theory:
+           Special Topics and Applications, vol. 2, Birkhäuser, 2016.
+[RS11]     N. Reading and D. E Speyer, Sortable elements in infinite Coxeter groups, Trans. Amer. Math. Soc. 363
+           (2011), no. 2, 699–761.
+[RST21]    N. Reading, D. E Speyer, and H. Thomas, The fundamental theorem of finite semidistributive lattices,
+           Selecta Math. 27 (2021), no. 59.
+[Ric02]    J. Rickard, Equivalences of derived categories for symmetric algebras, J. Algebra 257 (2002), 460–481.
+[Rin76]    C. M. Ringel, Representations of K-species and bimodules, J. Algebra 41 (1976), 269–302.
+[The23]    The Sage Developers, Sagemath, the Sage Mathematics Software System (Version 9.2), 2023,
+           https://www.sagemath.org.
+[Sak]      A. Sakai, Classifying t-structures via ICE-closed subcategories and a lattice of torsion classes,
+           arXiv:2307.11347.
+[Sch14]    R. Schiffler, Quiver representations, CMS Books in Mathematics/Ouvrages de Mathématiques de la SMC,
+           Springer, Cham, 2014.
+[STW]      C. Stump, H. Thomas, and N. Williams, Cataland: Why the Fuß, To appear in Mem. Amer. Math. Soc.
+[Tho06]    H. Thomas, An analogue of distributivity for ungraded lattices, Order 23 (2006), 249–269.
+[Tho21]    H. Thomas, An introduction to the lattice of torsion classes, Bull. Iranian Math. Soc. (2021).
+[TW19a]    H. Thomas and N. Williams, Independence posets, J. Comb. 10 (2019), no. 3, 545–578.
+[TW19b]    H. Thomas and N. Williams, Rowmotion in slow motion, Proc. Lon. Math. Soc. 119 (2019), no. 5, 1149–
+           1178.
+[Ung82]    P. Ungar, 2N noncollinear points determine at least 2N directions, J. Combin. Theory Ser. A 33 (1982),
+           343–347.
+
+     Department of Mathematical Sciences, DePaul University, Chicago, IL 60604, USA
+     Email address: e.barnard@depaul.edu
+
+     Department of Mathematics, Harvard University, Cambridge, MA 02139, USA
+     Email address: colindefant@gmail.com
+
+     Department of Mathematics, North Carolina State University, Raleigh, NC 27695, USA
+     Email address: ejhanso3@ncsu.edu
+

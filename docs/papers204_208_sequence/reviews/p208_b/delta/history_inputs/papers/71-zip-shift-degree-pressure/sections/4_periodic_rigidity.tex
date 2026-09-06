@@ -1,0 +1,118 @@
+\section{Weighted periodic data and profile rigidity}\label{sec:rigidity}
+
+The same exponential sum in \eqref{eq:q} appears without a variational
+argument when periodic points are weighted by their local degrees.
+
+\begin{proposition}[Degree-weighted periodic identity]\label{prop:periodic}
+For every $n\geq1$ and $t\in\R$,
+\[
+ \sum_{x\in\Fix(F_\tau^n)}
+ \exp\!\left(t\sum_{j=0}^{n-1}\phi_\tau(F_\tau^j x)\right)
+ =Q_\tau(t)^n.
+ \tag{4.1}\label{eq:periodic}
+\]
+In particular $|\Fix(F_\tau^n)|=|S|^n$.
+\end{proposition}
+
+\begin{proof}
+Each word $(s_0,\ldots,s_{n-1})\in S^n$ determines one fixed point of
+$F_\tau^n$ by the unambiguous coordinate formula
+\[
+ x_i=s_{i\bmod n}\quad(i\geq0),
+ \qquad
+ x_{-j}=\tau(s_{(-j)\bmod n})\quad(j\geq1),
+ \tag{4.2}\label{eq:periodic-coordinates}
+\]
+where residues lie in $\{0,\ldots,n-1\}$.  Every fixed point arises uniquely
+in this way.  Its local degrees at times $0,\ldots,n-1$ are
+$k_{\tau(s_{n-1})},k_{\tau(s_0)},\ldots,k_{\tau(s_{n-2})}$, a cyclic
+permutation of the advertised list.  Summing the product of their $t$th
+powers over $S^n$ factorizes as
+$(\sum_s k_{\tau(s)}^t)^n=Q_\tau(t)^n$.
+\end{proof}
+
+The weighted orbit sums also give a closed zeta function.  For
+$|u|<Q_\tau(t)^{-1}$, set
+\[
+ \zeta_\tau(t,u)=\exp\!\left(
+ \sum_{n\geq1}\frac{u^n}{n}
+ \sum_{x\in\Fix(F_\tau^n)}e^{tS_n\phi_\tau(x)}
+ \right).
+\]
+
+\begin{corollary}[Degree-weighted zeta function]\label{cor:zeta}
+For every real $t$,
+\[
+ \zeta_\tau(t,u)=\frac{1}{1-uQ_\tau(t)}.
+ \tag{4.3}\label{eq:zeta}
+\]
+Its smallest positive pole is $e^{-P_\tau(t)}$.
+\end{corollary}
+
+\begin{proof}
+Insert \eqref{eq:periodic} and use
+$\sum_{n\geq1}(uQ)^n/n=-\log(1-uQ)$.
+\end{proof}
+
+We now compare two surjections $\tau:S\to Z$ and $\kappa:T\to W$.  A
+topological conjugacy means a homeomorphism $H:X_\tau\to X_\kappa$ satisfying
+$HF_\tau=F_\kappa H$.
+
+\begin{theorem}[Profile, pressure, and conjugacy]\label{thm:rigidity}
+The following are equivalent.
+\begin{enumerate}
+\item $(X_\tau,F_\tau)$ and $(X_\kappa,F_\kappa)$ are topologically
+conjugate.
+\item The fibre-size multisets $\{k_z:z\in Z\}$ and
+$\{|\kappa^{-1}(w)|:w\in W\}$ agree.
+\item $P_\tau(t)=P_\kappa(t)$ for every $t\in\R$.
+\end{enumerate}
+Equal profiles admit a one-block conjugacy on the negative and nonnegative
+coordinates separately.
+\end{theorem}
+
+\begin{proof}
+Conjugacy preserves local degree pointwise because it bijects the preimage
+sets of corresponding points.  It also bijects fixed points.  There is one
+fixed point for each $s\in S$, and that point has degree $k_{\tau(s)}$.
+Consequently the number of fixed points of degree $k$ is
+\[
+ N_k=k\,m_k.
+ \tag{4.4}\label{eq:degree-hist}
+\]
+The conjugacy-invariant histogram $N_k$ recovers every multiplicity
+$m_k=N_k/k$, proving $(1)\Rightarrow(2)$.
+
+If the profiles agree, choose a bijection $\beta:Z\to W$ matching equal-size
+fibres and, for each $z$, a bijection
+$\alpha_z:\tau^{-1}(z)\to\kappa^{-1}(\beta z)$.  Put
+$\alpha(s)=\alpha_{\tau(s)}(s)$ and define
+\[
+ H(x)_i=
+ \begin{cases}
+ \beta(x_i),&i<0,\\
+ \alpha(x_i),&i\geq0.
+ \end{cases}
+ \tag{4.5}\label{eq:one-block-conj}
+\]
+The relation $\kappa\alpha=\beta\tau$ shows directly from
+\eqref{eq:zip-map} that $HF_\tau=F_\kappa H$.  Coordinatewise inverse
+bijections make $H$ a conjugacy, proving $(2)\Rightarrow(1)$.
+
+Equal profiles give equal sums in \eqref{eq:q}, hence $(2)\Rightarrow(3)$.
+Conversely suppose the pressure curves agree and set
+\[
+ R_\tau(u)=\exp P_\tau(u-1)=\sum_{k\geq1}m_k k^u.
+ \tag{4.6}\label{eq:dirichlet}
+\]
+The largest fibre size is
+$K=\lim_{u\to\infty}R_\tau(u)^{1/u}$, and its multiplicity is
+$m_K=\lim_{u\to\infty}R_\tau(u)/K^u$.  Subtract $m_KK^u$ and repeat on the
+finite remaining sum.  This recovers the whole profile from the curve and
+proves $(3)\Rightarrow(2)$.
+\end{proof}
+
+The fixed-point argument already proves profile necessity.  The pressure
+formulation is stronger as a thermodynamic representation: one convex
+function simultaneously carries the profile, equilibrium degree averages,
+and the spectrum proved next.

@@ -1,0 +1,62 @@
+\section{Schedule rigidity and upper-envelope flexibility}
+\label{sec:schedules}
+
+The asymptotic law does not license arbitrary exact convergence schedules.  The integer geometry of the positions creates a strong restriction, while the freedom to enlarge future gaps gives a complementary one-sided realization result.
+
+\begin{theorem}[Rigidity/flexibility dichotomy]
+\label{thm:schedules}
+The following statements hold.
+\begin{enumerate}
+    \item For every increasing-gap sequence,
+    \begin{equation}
+    n_{j+1}\geq 1+jq_1+\frac{j(j-1)}{2}.
+    \label{eq:quadratic-position}
+    \end{equation}
+    There is a constant $C_\beta>0$ such that
+    \begin{equation}
+    0<L_j\leq C_\beta\beta^{-n_{j+1}}.
+    \label{eq:superexp-bound}
+    \end{equation}
+    In particular, $j^rL_j\to0$ for every $r>0$.
+    \item Let $(\varepsilon_j)_{j\geq2}$ be any sequence of positive real numbers.  There exists a strictly increasing integer gap sequence for which
+    \begin{equation}
+    0<L_j\leq\varepsilon_j\qquad(j\geq2).
+    \label{eq:upper-envelope}
+    \end{equation}
+\end{enumerate}
+The second assertion is an upper-envelope statement; it does not assert $L_j\sim\varepsilon_j$ or equality at any index.
+\end{theorem}
+
+\begin{proof}
+Because the $q_j$ are strictly increasing positive integers,
+$q_j\geq q_1+j-1$.  Summing \eqref{eq:positions} gives \eqref{eq:quadratic-position}.  Moreover, $M_j\geq\beta^{-1}$ and \eqref{eq:tail-geometric} imply
+\[
+ L_j\leq\frac{T_j}{M_j}
+ \leq\frac{\beta\,\beta^{-n_{j+1}}}{1-\beta^{-q_{j+1}}}
+ \leq\frac{\beta}{1-\beta^{-1}}\,\beta^{-n_{j+1}}.
+\]
+Thus \eqref{eq:superexp-bound} holds with $C_\beta=\beta/(1-\beta^{-1})$.  Combining it with \eqref{eq:quadratic-position} proves the final assertion of part~1.
+
+For part~2, fix $q_1=2$, so $n_1=1$, $n_2=3$, and let $\underline\beta>1$ be the solution of
+\[
+ \underline\beta^{-1}+\underline\beta^{-3}=1.
+\]
+Any infinite completion has $\beta\geq\underline\beta$.  Suppose $q_1,\ldots,q_{j-1}$ have been chosen.  Choose an integer $q_j>q_{j-1}$ so large that, with $n_{j+1}=n_j+q_j$,
+\begin{equation}
+ \frac{2\underline\beta^{-n_{j+1}}}{1-\underline\beta^{-1}}
+ \leq\varepsilon_j.
+ \label{eq:recursive-choice}
+\end{equation}
+This recursion defines an infinite strictly increasing sequence.
+
+After completing it, use $\beta<2$ to obtain $M_j\geq\beta^{-1}>1/2$.  Since future positions are distinct integers at least $n_{j+1}$ and $\beta\geq\underline\beta$,
+\[
+ T_j\leq\sum_{n\geq n_{j+1}}\underline\beta^{-n}
+ =\frac{\underline\beta^{-n_{j+1}}}{1-\underline\beta^{-1}}.
+\]
+The upper half of \eqref{eq:certificate}, followed by \eqref{eq:recursive-choice}, gives $L_j\leq\varepsilon_j$.
+\end{proof}
+
+\begin{remark}[Why exact schedules are excluded]
+Taking $\varepsilon_j=1/j$ illustrates the obstruction: \cref{thm:schedules}(1) forces $L_j=o(j^{-r})$ for every $r$, so $L_j\sim1/j$ is impossible.  Even among faster schedules, \cref{cor:log-rigidity} confines the principal scale to the discrete locations $\beta^{-n_{j+1}}$.  Characterizing which two-sided target sequences are realizable would require controlling the feedback of the entire chosen tail on $\beta$ and $D_\beta$; that problem is not solved here.
+\end{remark}

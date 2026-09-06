@@ -1,0 +1,91 @@
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >={Latex[length=2mm]},
+  state/.style={draw=formalblue,very thick,rounded corners=2pt,
+    fill=formalblue!6,minimum height=7mm,inner xsep=5pt},
+  smallstate/.style={draw=formalblue,thick,circle,fill=formalblue!5,
+    minimum size=6mm,inner sep=0pt},
+  edge/.style={->,thick,formalblue},
+  danger/.style={draw=stopred,very thick,rounded corners=2pt,
+    fill=stopred!6,align=center,inner sep=5pt},
+  good/.style={draw=passgreen,very thick,rounded corners=2pt,
+    fill=passgreen!6,align=center,inner sep=5pt},
+  note/.style={align=center,text=charcoal},
+  panel/.style={draw=charcoal!35,rounded corners=3pt,inner sep=7pt}
+]
+
+% Panel A
+\node[state] (I) at (0,-0.15) {$I_p$};
+\node[smallstate] (T2) at (1.55,-0.15) {$T_2$};
+\node[smallstate] (Q1) at (2.75,-0.15) {$Q$};
+\node[note] (dots) at (3.85,-0.15) {$\cdots$};
+\node[smallstate] (Q2) at (4.8,-0.15) {$Q$};
+\node[smallstate] (Tm) at (6.0,-0.15) {$T_{m+1}$};
+\draw[edge] (I)--(T2);
+\draw[edge] (T2)--(Q1);
+\draw[edge] (Q1)--(dots);
+\draw[edge] (dots)--(Q2);
+\draw[edge] (Q2)--(Tm);
+\draw[edge] (Tm) to[bend left=30] node[above] {prime return} (I);
+\node[smallstate,draw=stopred,fill=stopred!6] (R1) at (4.8,-1.15) {$R_1$};
+\node[note] (Rdots) at (6.0,-1.15) {$R_2\to\cdots$};
+\draw[->,thick,stopred] (Q2)--node[right] {equality} (R1);
+\draw[->,thick,stopred] (R1)--(Rdots);
+\node[note,text width=6.2cm] at (3.0,1.35)
+ {\textbf{A. Explicit recurrent verifier}};
+\node[note,font=\scriptsize,text width=6.2cm] (FORM) at (3.0,0.82)
+ {$\displaystyle \ell(p)=2+\sum_{d=2}^{\lfloor\sqrt p\rfloor}
+ \left\lceil\frac pd\right\rceil\sim\frac12p\log p$};
+\node[panel,fit=(FORM)(I)(Tm)(R1)(Rdots),inner sep=8pt] (PA) {};
+
+% arrow A to B
+\draw[->,very thick,charcoal!60] (PA.east) -- ++(0.65,0);
+
+% Panel B
+\begin{scope}[xshift=8.2cm]
+\node[smallstate,minimum size=4.3mm] (c0) at (2.22,-0.23) {};
+\node[smallstate,minimum size=4.3mm] (c1) at (1.98,0.35) {};
+\node[smallstate,minimum size=4.3mm] (c2) at (1.40,0.59) {};
+\node[smallstate,minimum size=4.3mm] (c3) at (0.82,0.35) {};
+\node[smallstate,minimum size=4.3mm] (c4) at (0.58,-0.23) {};
+\node[smallstate,minimum size=4.3mm] (c5) at (0.82,-0.81) {};
+\node[smallstate,minimum size=4.3mm] (c6) at (1.40,-1.05) {};
+\node[smallstate,minimum size=4.3mm] (c7) at (1.98,-0.81) {};
+\draw[edge] (c0)--(c1);
+\draw[edge] (c1)--(c2);
+\draw[edge] (c2)--(c3);
+\draw[edge] (c3)--(c4);
+\draw[edge] (c4)--(c5);
+\draw[edge] (c5)--(c6);
+\draw[edge] (c6)--(c7);
+\draw[edge] (c7)--(c0);
+\draw[->,ultra thick,warningamber] (c5)--(c6);
+\node[note,text width=3.3cm] at (1.4,1.35)
+ {\textbf{B. Exact clock dilution}};
+\node[note,font=\scriptsize] (TOTAL) at (1.4,0.91)
+ {$\sum_e\tau_e=\log p$};
+\node[note,text width=3.6cm] at (1.4,-1.47)
+ {$\displaystyle \min_e\tau_e\le\frac{\log p}{\ell(p)}$\par
+  $\displaystyle \max_e|w_e|\ge p^{-\sigma/\ell(p)}\to1$};
+\node[danger,text width=3.1cm] (NC) at (1.4,-2.48)
+ {whole vertex adjacency\\noncompact; $\norm{L_s}_{\ess}=1$};
+\node[panel,fit=(TOTAL)(c2)(c6)(NC),inner xsep=8pt,inner ysep=7pt] (PB) {};
+\end{scope}
+
+% arrow B to C
+\draw[->,very thick,charcoal!60] (PB.east) -- ++(0.65,0);
+
+% Panel C
+\begin{scope}[xshift=13.6cm]
+\node[state] (Ip) at (1.4,0.05) {$I_p$};
+\draw[->,very thick,passgreen] (Ip) to[out=55,in=125,looseness=5]
+  node[above] {$p^{-s}$} (Ip);
+\node[note,text width=3.7cm] at (1.4,1.35)
+ {\textbf{C. First-return contraction}};
+\node[good,text width=3.4cm] (RET) at (1.4,-1.02)
+ {$R_s e_p=p^{-s}e_p$\\trace class for $\RePart s>1$};
+\node[note,text width=4.2cm] (MARK) at (1.4,-2.08)
+ {$1-z^{\ell(p)}p^{-s}$ \;vs.\; $1-zp^{-s}$\\equal at $z=1$ only};
+\node[panel,fit=(Ip)(RET)(MARK),inner xsep=8pt,inner ysep=7pt] (PC) {};
+\end{scope}
+\end{tikzpicture}

@@ -1,0 +1,133 @@
+\section{Parabolic and superattracting entropy tails}
+\label{sec:tails}
+
+The integer $q=\ell-p$ is the order of the numerator at the projective fixed
+point zero.  We now show that $q=1$ and $q\ge2$ produce different certified
+remainder laws.
+
+\begin{theorem}[Parabolic boundary]
+\label{thm:parabolic}
+If $q=1$, then
+\begin{equation}
+ r_m^\ell=\frac1{\ell m}
+ \left\{1+O\left(\frac{\log m}{m}\right)\right\},
+ \label{eq:r-parabolic}
+\end{equation}
+and
+\begin{equation}
+ h_{\ell,\ell-1}-H_M
+ =\frac{\ell^{-M}}{\ell(\ell-1)M}
+ \left\{1+O\left(\frac{\log M}{M}\right)\right\}.
+ \label{eq:tail-parabolic}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Put $s_m=r_m^{-\ell}$.  From
+$r_{m+1}=r_m/(1+r_m^\ell)$ we obtain the exact recurrence
+\begin{equation}
+ s_{m+1}=s_m(1+s_m^{-1})^\ell.
+ \label{eq:s-rec}
+\end{equation}
+Since $s_m\ge s_1=2^\ell$, the binomial theorem gives, uniformly in $m$,
+\begin{equation}
+ s_{m+1}=s_m+\ell+O(s_m^{-1}).
+ \label{eq:s-increment}
+\end{equation}
+In particular $s_m\ge s_1+\ell(m-1)$, and summing the error in
+\cref{eq:s-increment} yields
+\begin{equation}
+ s_m=\ell m+O(\log m).
+ \label{eq:s-asymptotic}
+\end{equation}
+Taking reciprocals proves \cref{eq:r-parabolic}.
+
+Let $E_M=h_{\ell,\ell-1}-H_M$.  Since
+$\log(1+x)=x+O(x^2)$ uniformly for $0\le x\le2^{-\ell}$,
+\begin{align}
+ E_M
+ &=\sum_{k\ge0}\ell^{-(M+k+1)}
+ \left\{\frac1{\ell(M+k)}
+ +O\left(\frac{\log(M+k)}{(M+k)^2}\right)\right\}.
+ \label{eq:E-expand}
+\end{align}
+For $k\ge0$,
+$(M+k)^{-1}=M^{-1}\{1+O(k/M)\}$ whenever $k\le M$, while the part
+$k>M$ is exponentially small because of the factor $\ell^{-k}$.
+Consequently
+\[
+ \sum_{k\ge0}\frac{\ell^{-k}}{M+k}
+ =\frac1M\left\{\frac{\ell}{\ell-1}+O(M^{-1})\right\}.
+\]
+The summed error in \cref{eq:E-expand} is
+$O(\ell^{-(M+1)}\log M/M^2)$.  Substitution proves
+\cref{eq:tail-parabolic}.
+\end{proof}
+
+\begin{theorem}[Superattracting regime]
+\label{thm:super}
+Suppose $q\ge2$ and set $u_m=-\log r_m$.  The positive constant
+\begin{equation}
+ c_{\ell,p}:=\frac{u_1}{q}
+ +\sum_{j=1}^{\infty}q^{-(j+1)}\log(1+r_j^\ell)
+ \label{eq:c-constant}
+\end{equation}
+is finite, and
+\begin{equation}
+ u_m=c_{\ell,p}q^m+o(1).
+ \label{eq:double-exponential}
+\end{equation}
+Furthermore,
+\begin{equation}
+ h_{\ell,p}-H_M
+ =\ell^{-(M+1)}r_M^\ell\{1+O(r_M^\ell)\}.
+ \label{eq:tail-super}
+\end{equation}
+Thus $r_m$ and the correction beyond its first omitted discounted term are
+doubly exponentially small in the level.
+\end{theorem}
+
+\begin{proof}
+Taking negative logarithms in \cref{eq:r-rec} gives
+\begin{equation}
+ u_{m+1}=qu_m+\log(1+r_m^\ell).
+ \label{eq:u-rec}
+\end{equation}
+Iteration yields
+\begin{equation}
+ \frac{u_m}{q^m}=\frac{u_1}{q}
+ +\sum_{j=1}^{m-1}q^{-(j+1)}\log(1+r_j^\ell).
+ \label{eq:u-sum}
+\end{equation}
+The summands are positive and bounded by $q^{-(j+1)}2^{-\ell}$, so the
+series converges to the positive number in \cref{eq:c-constant}.  The tail
+omitted from \cref{eq:u-sum}, after multiplication by $q^m$, is at most
+\[
+ \sum_{j=m}^{\infty}q^{m-j-1}r_j^\ell.
+\]
+Because $r_{j+1}\le r_j^q$ and $r_m\to0$, this bound is
+$O(r_m^\ell)=o(1)$, proving \cref{eq:double-exponential}.
+
+For the entropy tail, isolate its first term:
+\begin{align*}
+ h_{\ell,p}-H_M
+ &=\ell^{-(M+1)}\log(1+r_M^\ell)
+ +\sum_{k\ge1}\ell^{-(M+k+1)}\log(1+r_{M+k}^\ell).
+\end{align*}
+The first term is
+$\ell^{-(M+1)}r_M^\ell\{1+O(r_M^\ell)\}$.
+Since $r_{M+k}\le r_M^{q^k}$, the remaining sum is at most
+\[
+ \ell^{-(M+1)}\sum_{k\ge1}\ell^{-k}r_M^{\ell q^k}
+ =\ell^{-(M+1)}r_M^\ell O(r_M^{\ell(q-1)}).
+\]
+As $q-1\ge1$, this is absorbed by the displayed error.
+\end{proof}
+
+\begin{remark}
+The discount $\ell^{-m}$ alone is exponential in the level in both regimes.
+The distinction is the projective multiplier: polynomial decay at a
+parabolic fixed point versus double-exponential decay at a superattracting
+one.  This is why the a posteriori bound in \cref{eq:tail-certificate} is
+much sharper than a parameter-only geometric bound.
+\end{remark}

@@ -1,0 +1,61 @@
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >=Latex,
+  vtx/.style={circle,draw=charcoal,thick,minimum size=7mm,inner sep=1pt,fill=white},
+  panel/.style={draw=charcoal,rounded corners=2mm,minimum width=4.65cm,
+    minimum height=3.55cm,fill=softgray!35},
+  arrow/.style={->,thick,draw=formalblue},
+  deck/.style={->,thick,dashed,draw=warningamber},
+  map/.style={->,thick,dotted,draw=passgreen},
+  note/.style={align=center,font=\scriptsize}
+]
+  \node[panel] (basepanel) at (0,0) {};
+  \node[font=\bfseries,anchor=north] at ([yshift=-2mm]basepanel.north)
+    {base cocycle};
+  \node[vtx] (n) at (-1.25,0.45) {$n$};
+  \node[vtx] (d) at (1.25,0.45) {$d$};
+  \draw[arrow] (n) -- node[above] {$q=(n+1)/d$} (d);
+  \draw[arrow,bend left=48] (d) to node[below] {$\gamma$ closes} (n);
+  \node[note] at (0,-0.95)
+    {$Q(\gamma)=\prod q$\\[-1mm]
+     $=\prod(1+1/n)>1$};
+
+  \node[panel] (liftpanel) at (5.25,0) {};
+  \node[font=\bfseries,anchor=north] at ([yshift=-2mm]liftpanel.north)
+    {regular deck lift};
+  \node[vtx,minimum size=8mm] (ng) at (4.0,0.55) {$n,g$};
+  \node[vtx,minimum size=8mm] (dqg) at (6.5,0.55) {$d,qg$};
+  \draw[deck] (ng) -- node[above] {$q$} (dqg);
+  \node[vtx,minimum size=9mm] (nQg) at (5.25,-0.8) {$n,Qg$};
+  \draw[deck,bend left=28] (dqg) to node[right] {rest of $\gamma$} (nQg);
+  \draw[deck,bend left=24] (nQg) to node[below] {$\ne(n,g)$} (ng);
+
+  \node[panel] (chipanel) at (10.5,0) {};
+  \node[font=\bfseries,anchor=north] at ([yshift=-2mm]chipanel.north)
+    {character resolution};
+  \node[draw=formalblue,rounded corners,fill=white,align=center,
+    minimum width=3.75cm,minimum height=8mm] (fiber) at (10.5,0.62)
+    {$L_{s,\chi}$\\edge phase $\chi(q)$};
+  \node[draw=passgreen,rounded corners,fill=white,align=center,
+    minimum width=3.75cm,minimum height=9mm] (haar) at (10.5,-0.75)
+    {$\displaystyle\int\overline{\chi(m)}[-\log D_\chi]\,d\chi$\\
+     extracts $Q=m$};
+  \draw[map] (fiber) -- (haar);
+
+  \draw[map] ([xshift=1mm]basepanel.east) --
+    node[above,font=\scriptsize] {lift} ([xshift=-1mm]liftpanel.west);
+  \draw[map] ([xshift=1mm]liftpanel.east) --
+    node[above,font=\scriptsize] {Fourier} ([xshift=-1mm]chipanel.west);
+
+  \node[draw=stopred,rounded corners,align=center,font=\scriptsize,
+    minimum width=4.35cm,minimum height=8mm] at (0,-2.45)
+    {neutral recurrence: none\\$\Phi(\mathbb L_s^r)=0$};
+  \node[draw=warningamber,rounded corners,align=center,font=\scriptsize,
+    minimum width=4.35cm,minimum height=8mm] at (5.25,-2.45)
+    {ordinary lift: noncompact\\infinite deck multiplicity};
+  \node[draw=passgreen,rounded corners,align=center,font=\scriptsize,
+    minimum width=4.35cm,minimum height=8mm] at (10.5,-2.45)
+    {semifinite trace: $L^1$ iff $\Re s>1/2$\\
+     scalar fibers: honest Fredholm};
+\end{tikzpicture}
+

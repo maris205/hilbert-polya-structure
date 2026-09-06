@@ -1,0 +1,99 @@
+\section{Poisson clocks and interface additivity}\label{sec:interfaces}
+
+The clock construction must preserve the discrete scheduler, not merely the
+set of possible moves.  Fix an initial state $S$, put $M=\max S$, and place
+an independent rate-one Poisson clock at each site in the finite accessible
+set $\{1,\ldots,M\}$.  A ring at an occupied site triggers
+\eqref{eq:update}; a ring at an empty site is ignored, and the root has no
+clock.  Every effective ring time is a stopping time for this finite clock
+vector.  The strong Markov property gives fresh independent rate-one
+exponential residuals there, including at a newly occupied site whose clock
+may have rung earlier while empty.  If the current state has $k$ nonroot
+piles, the next effective ring is consequently uniform among their $k$
+sites, with total rate $k$.  Hence the embedded effective-jump chain is
+exactly the chain of \cref{sec:model}.
+
+For $0\leq a\leq b$, define $h(a,b)$ by
+\begin{align}
+ h(a,a)&=0,                                             \label{eq:hdiag}\\
+ h(0,b)&=b,                                             \label{eq:hroot}\\
+ h(a,b)&=\frac12+
+ \frac{h(a-1,b)+h(a,b-1)}2 \quad(0<a<b).               \label{eq:hrec}
+\end{align}
+This triangular recursion uniquely defines nonnegative rational values.
+
+\begin{theorem}[interface-additive update count]\label{thm:additivity}
+Let
+$S=\{0=s_0<s_1<\cdots<s_r\}$.  Then
+\begin{equation}
+ \boxed{\displaystyle
+ \E[T_S]=\sum_{i=1}^{r}h(s_{i-1},s_i).}                \label{eq:additivity}
+\end{equation}
+The empty sum for $S=\{0\}$ equals zero.
+\end{theorem}
+
+\begin{proof}
+Label the initial piles $0,1,\ldots,r$ from left to right and follow each
+label through the site-clock arrows.  Labels that meet share one path
+thereafter.  Rootward nearest-neighbor paths preserve order: they can
+coalesce but cannot cross.
+
+More precisely, at every time each current pile carries a nonempty interval
+of initial labels, and the spatial order of the piles is the order of these
+intervals.  This holds initially for the singleton intervals.  A move to an
+empty predecessor carries one interval without changing the order.  At a
+collision the occupied predecessor is the immediately preceding pile, so
+the two label intervals are consecutive and their union is again an
+interval.  Induction over effective rings proves the claim.  In particular,
+an outside label joining either member of a designated adjacent pair does
+not alter that path's future site arrows.
+
+For $1\leq i\leq r$, let $\tau_i$ be the first meeting time of the paths
+started at $s_{i-1}$ and $s_i$.  At time $t$, consecutive initial labels
+belong to the same current pile exactly when their interface has closed.
+The current piles are therefore the consecutive label blocks separated by
+open interfaces.  One block contains the root, so the number $N_t$ of
+nonroot piles satisfies the pathwise identity
+\begin{equation}
+ N_t=\sum_{i=1}^{r}\1_{\{\tau_i>t\}}.                  \label{eq:interfaces}
+\end{equation}
+
+Let $J_t$ count effective updates by continuous time $t$.  Conditional on
+the past just before $t$, its predictable intensity is $N_{t-}$.  Thus, for
+each finite $t$,
+\[
+ J_t-\int_0^tN_{u-}\,du
+\]
+is the compensated jump-count martingale and
+$\E J_t=\E\int_0^tN_{u-}\,du$.  By \cref{prop:pgf}, there are at most
+$\PhiPot(S)$ effective waits; each has positive finite rate before
+absorption, so $J_\infty=T_S\leq\PhiPot(S)$ almost surely.  Monotone
+convergence on both sides, followed by Tonelli's theorem, gives
+\begin{align}
+ \E T_S
+ &=\E J_\infty
+  =\E\int_0^\infty N_{t-}\,dt
+  =\E\int_0^\infty N_t\,dt \notag\\
+ &=\sum_{i=1}^{r}\E\int_0^\infty
+       \1_{\{\tau_i>t\}}\,dt
+  =\sum_{i=1}^{r}\E\tau_i.                             \label{eq:compensator}
+\end{align}
+The two time integrals agree because the jump times are Lebesgue-null.
+
+It remains to identify one interface marginal.  Before two paths at
+$0<a<b$ meet, they occupy distinct sites and read independent rate-one
+clocks.  The next event takes mean time $1/2$; either the lower path moves to
+$a-1$ or the upper path moves to $b-1$, each with probability $1/2$.
+The strong Markov property supplies fresh exponentials even when a site was
+visited earlier.  At equality the interface is closed, while a lower path at
+zero is fixed and the upper path needs $b$ mean-one moves.  First-event
+conditioning is exactly \eqref{eq:hdiag}--\eqref{eq:hrec}, so
+$\E\tau_i=h(s_{i-1},s_i)$.  Substitution into
+\eqref{eq:compensator} proves \eqref{eq:additivity}.
+\end{proof}
+
+\begin{remark}
+The interface lifetimes are generally dependent.  Equation
+\eqref{eq:additivity} uses only the pathwise count
+\eqref{eq:interfaces}, Tonelli's theorem, and their individual means.
+\end{remark}

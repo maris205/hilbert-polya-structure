@@ -1,0 +1,80 @@
+\section{The one-chain split construction}
+\label{sec:construction}
+
+Let $G=(V,E)$ be a finite directed multigraph.  We use the convention
+\[
+ a_{ij}=\#\{e\in E:\text{$e$ starts at $i$ and ends at $j$}\}.
+\]
+The edge shift $X_G$ consists of bi-infinite incidence-compatible edge
+sequences.  A primitive adjacency matrix presents a mixing SFT and
+$h(X_G)=\log\rho(A)$.
+
+Fix $v\in V$.  Since $A$ is primitive, there is $N_0\ge2$ such that
+$(A^N)_{vv}>0$ for every $N\ge N_0$.  For each such $N$, select an old
+return walk
+\[
+ \gamma_N=e_0e_1\cdots e_{N-1},\qquad
+ i(e_0)=t(e_{N-1})=v.
+\]
+The walk may revisit $v$ internally.  Form $G_N$ by adding new vertices
+$w_1,\ldots,w_{N-1}$ and new edges
+\[
+ v\xrightarrow{\widetilde e_0}w_1
+ \xrightarrow{\widetilde e_1}\cdots
+ \xrightarrow{\widetilde e_{N-2}}w_{N-1}
+ \xrightarrow{\widetilde e_{N-1}}v.
+\]
+Thus $N$ denotes the number of added edges.
+
+\begin{theorem}[Local split extension]
+\label{thm:construction}
+For every $N\ge N_0$, the graph $G_N$ is primitive.  There are one-block maps
+\[
+ \pi_N:X_{G_N}\longrightarrow X_G,\qquad
+ \iota_N:X_G\longrightarrow X_{G_N}
+\]
+such that $\pi_N\circ\iota_N=\id_{X_G}$, and $\pi_N$ is not a conjugacy.
+\end{theorem}
+
+\begin{proof}
+Define a graph morphism $q_N:G_N\to G$ as follows.  It fixes every old vertex
+and edge.  If the successive vertices of $\gamma_N$ are
+$v=v_0,v_1,\ldots,v_N=v$, set
+\[
+ q_N(w_j)=v_j,\qquad q_N(\widetilde e_j)=e_j.
+\]
+The initial and terminal vertices of each $\widetilde e_j$ map to those of
+$e_j$, so incidence is respected.  Applying $q_N$ coordinatewise to edge
+sequences gives the one-block code $\pi_N$.
+
+Old-graph inclusion is also incidence preserving and gives $\iota_N$.
+Because $q_N$ fixes the old graph,
+$\pi_N\circ\iota_N=\id_{X_G}$; in particular, $\pi_N$ is onto.
+
+The enlarged graph is strongly connected.  From an old vertex one can travel
+inside $G$ to $v$ and then along the new chain; from a new vertex one can
+continue to $v$ and then travel inside $G$.  Every old cycle remains in
+$G_N$, so the gcd of cycle lengths in $G_N$ divides the old gcd, which is
+one.  Strong connectivity and gcd one prove primitivity.
+
+Finally, repeating $\gamma_N$ gives an old periodic point and repeating
+$\widetilde e_0\cdots\widetilde e_{N-1}$ gives a distinct new periodic point.
+Their $\pi_N$-images coincide.  Hence $\pi_N$ is not injective and cannot be
+a conjugacy.
+\end{proof}
+
+\begin{remark}[Why equal lengths matter]
+A one-block edge code maps one edge to one edge.  Adding a single edge and
+declaring that it maps to the length-$N$ word $\gamma_N$ would not define the
+graph morphism above.  The $N$ new edges and their intermediate vertex images
+are essential unless one first performs a recoding, which would change the
+presentation and the bookkeeping.
+\end{remark}
+
+\begin{remark}[Primitivity versus irreducibility]
+For an irreducible graph of period $p>1$, based returns occur only in the
+appropriate congruence class.  For example, adding an even return chain to a
+two-cycle preserves period two.  Thus an assertion for every sufficiently
+large integer $N$ genuinely uses primitivity.
+\end{remark}
+

@@ -1,0 +1,132 @@
+\section{Neutral generators and deterministic endpoints}
+\label{sec:generators}
+
+On $\Rmax$, write $u\oplus v=\max\{u,v\}$ and $u\trop v=u+v$.
+For compatible matrices,
+\[
+ (C\trop D)_{ij}=\max_k(C_{ik}+D_{kj}).
+\]
+The max-plus identity has zero on the diagonal and $-\infty$ off the
+diagonal.  Both generators in this paper have finite entries.
+
+For a finite $2\times2$ matrix $C$, the tropical spectral radius is the
+maximum mean weight of a directed cycle:
+\[
+ \rho_{\max}(C)=
+ \max\left\{C_{11},C_{22},\frac{C_{12}+C_{21}}2\right\}.
+\]
+Such a matrix has tropical rank one precisely when
+$C_{11}+C_{22}=C_{12}+C_{21}$, equivalently when its two rows differ by an
+additive scalar.
+
+\begin{proposition}[Neutral full-rank generators]
+\label{prop:generators}
+For
+\[
+ A=\begin{pmatrix}-2&-1\\1&-1\end{pmatrix},\qquad
+ B=\begin{pmatrix}-1&1\\-1&-2\end{pmatrix},
+\]
+one has
+\[
+ \rho_{\max}(A)=\rho_{\max}(B)=0,
+ \qquad \trank(A)=\trank(B)=2.
+\]
+Both max-plus power sequences are bounded.  More precisely, for $m\geq1$,
+\begin{align*}
+ A^{\trop 2m}&=\begin{pmatrix}0&-2\\0&0\end{pmatrix},&
+ A^{\trop(2m+1)}&=\begin{pmatrix}-1&-1\\1&-1\end{pmatrix},\\
+ B^{\trop 2m}&=\begin{pmatrix}0&0\\-2&0\end{pmatrix},&
+ B^{\trop(2m+1)}&=\begin{pmatrix}-1&1\\-1&-1\end{pmatrix},
+\end{align*}
+where the two odd formulas apply for $m\geq1$; the first odd powers are
+$A$ and $B$ themselves.  Consequently,
+\[
+ \max_{i,j}(A^{\trop n})_{ij}
+ =\max_{i,j}(B^{\trop n})_{ij}=n\bmod2,
+ \qquad n\geq1.
+\]
+\end{proposition}
+
+\begin{proof}
+For $A$, the two loop weights are $-2,-1$ and the two-cycle mean is
+$(-1+1)/2=0$.  For $B$, the corresponding values are $-1,-2$ and
+$(1-1)/2=0$.  This proves both spectral-radius statements.  In each matrix
+the diagonal cross-sum is $-3$, whereas the off-diagonal cross-sum is zero;
+neither matrix has tropical rank one.
+
+Direct multiplication gives the displayed second and third powers.  Left
+multiplication by the same generator swaps its displayed even and stable odd
+forms.  Induction proves all four power identities.  Taking the largest
+entry gives the last assertion.
+\end{proof}
+
+\begin{proposition}[Minimal rank-one reset words]
+\label{prop:reset-words}
+Neither generator, and no word of length two, has tropical rank one.  At
+length three, exactly four chronological words do:
+\[
+\begin{array}{c@{\qquad}c@{\qquad}c}
+\toprule
+\text{word}&X_3\trop X_2\trop X_1&
+ \text{forced output gap}\\
+\midrule
+ABA&\begin{pmatrix}0&-2\\3&1\end{pmatrix}&-3\\[3pt]
+ABB&\begin{pmatrix}1&-1\\1&-1\end{pmatrix}&0\\[3pt]
+BAA&\begin{pmatrix}-1&1\\-1&1\end{pmatrix}&0\\[3pt]
+BAB&\begin{pmatrix}1&3\\-2&0\end{pmatrix}&3\\
+\bottomrule
+\end{array}
+\]
+Here a displayed word is in sampling order, so, for example,
+$ABB=B\trop B\trop A$.  Each listed product sends every finite input
+vector to the stated projective gap.
+\end{proposition}
+
+\begin{proof}
+For a finite $2\times2$ matrix $C$, set
+$\delta(C)=C_{11}+C_{22}-C_{12}-C_{21}$; tropical rank one is equivalent
+to $\delta(C)=0$.  Direct chronological multiplication gives defects
+\[
+\begin{array}{c|cc}
+\text{length one}&A&B\\ \hline
+\delta&-3&-3
+\end{array},\qquad
+\begin{array}{c|cccc}
+\text{length two}&AA&AB&BA&BB\\ \hline
+\delta&2&1&1&2
+\end{array},
+\]
+and, in lexicographic order $AAA,AAB,ABA,ABB,BAA,BAB,BBA,BBB$, the
+length-three defects are
+\[
+ -2,-1,0,0,0,0,-1,-2.
+\]
+Thus the four displayed words are precisely the shortest rank-one words.
+Their products are obtained by the same literal multiplication.  In those
+four matrices the first row minus the second is respectively
+$-3,0,0,3$ in both columns.  Taking maxima after adding any finite input
+therefore gives the asserted constant output gaps.
+\end{proof}
+
+\begin{corollary}[Endpoints are deterministic and neutral]
+\label{cor:endpoints}
+If $p=1$, then $M_n=A^{\trop n}$; if $p=0$, then
+$M_n=B^{\trop n}$.  At either endpoint,
+\[
+ H_n=n\bmod2,\qquad \frac{H_n}{n}\longrightarrow0,
+ \qquad
+ \lim_{n\to\infty}\frac1n\log\Exp e^{tH_n}=0
+ \quad(t\in\R).
+\]
+The centered fluctuation $(H_n-n\cdot0)/\sqrt n$ converges deterministically
+to zero.
+\end{corollary}
+
+\begin{proof}
+The environment contains only one generator.  The power calculation in
+\cref{prop:generators} gives every statement directly.
+\end{proof}
+
+The endpoint proof uses neither a stationary projective distribution nor an
+irreducible Markov chain.  Those interior tools enter only after the literal
+reduction below.

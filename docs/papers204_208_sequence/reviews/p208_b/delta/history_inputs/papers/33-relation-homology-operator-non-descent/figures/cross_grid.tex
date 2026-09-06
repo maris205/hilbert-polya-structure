@@ -1,0 +1,25 @@
+\begin{tikzpicture}[>=Latex,scale=1.0,
+  v/.style={circle,draw=charcoal,fill=softgray,minimum size=8mm,inner sep=0pt,font=\scriptsize},
+  e/.style={line width=0.65pt,charcoal},
+  cell/.style={fill=warningamber!14,draw=warningamber,line width=0.7pt}]
+  \draw[cell] (0,0) rectangle (1.45,1.35);
+  \draw[cell] (1.45,0) rectangle (2.90,1.35);
+  \draw[cell] (0,1.35) rectangle (1.45,2.70);
+  \foreach \a in {0,1,2,3} {
+    \foreach \b in {0,1,2} {
+      \node[v] (n\a\b) at (1.45*\a,1.35*\b) {$\a,\b$};
+    }
+  }
+  \foreach \a/\anext in {0/1,1/2,2/3} {
+    \foreach \b in {0,1,2} {
+      \draw[e] (n\a\b) -- (n\anext\b);
+    }
+  }
+  \foreach \a in {0,1,2,3} {
+    \foreach \b/\bnext in {0/1,1/2} {
+      \draw[e] (n\a\b) -- (n\a\bnext);
+    }
+  }
+  \node[align=center] at (2.2,-0.85) {\small vertex $(a,b)$ denotes $m2^a3^b$;\\[-1mm]
+  \small shaded unit squares are filled cusp diamonds};
+\end{tikzpicture}

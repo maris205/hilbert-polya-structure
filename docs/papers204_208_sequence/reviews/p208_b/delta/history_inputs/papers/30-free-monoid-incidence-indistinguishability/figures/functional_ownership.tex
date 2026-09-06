@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  >=Latex,
+  input/.style={draw=formalblue,thick,rounded corners=2pt,fill=formalblue!7,
+    text width=31mm,align=center,minimum height=12mm},
+  owned/.style={draw=deepgreen,very thick,rounded corners=2pt,fill=deepgreen!7,
+    text width=42mm,align=center,minimum height=17mm},
+  denied/.style={draw=stopred,thick,dashed,rounded corners=2pt,fill=stopred!4,
+    text width=34mm,align=center,minimum height=11mm},
+  auxiliary/.style={draw=warningamber,very thick,rounded corners=2pt,fill=warningamber!7,
+    text width=42mm,align=center,minimum height=14mm},
+  inherited/.style={draw=charcoal,thick,rounded corners=2pt,fill=softgray,
+    text width=42mm,align=center,minimum height=13mm},
+  every node/.style={font=\small}
+]
+\node[input] (kernel) {source-natural pair weight\\$K_2(p,q)$};
+\node[input,below=8mm of kernel] (gram) {mixed Gram kernel\\$G_{pq}$ and roof marks};
+\node[owned,right=17mm of $(kernel)!0.5!(gram)$] (mk)
+  {new functional $\MK(s)$\\holomorphic on\\$1-2\eta<\Ree s<2\eta$};
+\draw[->,thick] (kernel.east) -- (mk.west);
+\draw[->,thick] (gram.east) -- (mk.west);
+
+\node[denied,right=14mm of mk,yshift=8mm] (trace) {$\MK$ as ordinary trace\\not constructed};
+\node[denied,right=14mm of mk,yshift=-8mm] (detm) {$\MK$ as $\det_m$\\not available};
+\draw[->,dashed,stopred] (mk) -- node[above,sloped] {does not imply} (trace);
+\draw[->,dashed,stopred] (mk) -- node[below,sloped] {does not imply} (detm);
+
+\node[auxiliary,below=16mm of gram] (aux)
+  {trace-class $H$\\honest auxiliary $\det(I+zH)$};
+\draw[->,thick,warningamber] (gram) -- (aux);
+\node[inherited,right=17mm of aux] (det3)
+  {inherited honest $\detthree$\\separate lane; quadratic power deleted};
+\draw[<->,dotted,thick] (aux) -- node[above,text width=24mm,align=center]
+  {distinct analytic objects} (det3);
+\draw[->,dashed,stopred] (aux.south east) to[bend right=18]
+  node[below,text width=38mm,align=center] {does not upgrade the chiral object} (det3.south west);
+\end{tikzpicture}

@@ -1,0 +1,175 @@
+\section{Interior drift and Gaussian fluctuations}
+\label{sec:limits}
+
+Throughout this section, $0<p<1$, $q=1-p$, and $a=pq$.  At zero tilt,
+$P_p:=Q_p(1)$ is the transition matrix of the lumped projective chain.
+
+\begin{lemma}[Stationary law of the lumped projective chain]
+\label{lem:stationary}
+The unique stationary row vector of $P_p$ is
+\begin{equation}
+ \label{eq:stationary}
+ \boxed{\quad
+ \pi_N=\frac{p}{1+p},\qquad
+ \pi_Z=\frac{1-a}{2+a},\qquad
+ \pi_P=\frac{q}{1+q}.
+ \quad}
+\end{equation}
+Its stationary mean reward is
+\begin{equation}
+ \label{eq:drift}
+ \boxed{\quad \mu_p=\frac{3a}{2+a}>0.\quad}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Every transition into $N$ uses $A$, except the transition from $N$ itself.
+Stationarity therefore gives $\pi_N=p(1-\pi_N)$ and hence
+$\pi_N=p/(1+p)$.  Likewise, $\pi_P=q(1-\pi_P)$, so
+$\pi_P=q/(1+q)$.  The remaining mass is
+\[
+ 1-\frac{p}{1+p}-\frac{q}{1+q}=\frac{1-a}{2+a}.
+\]
+Only $N\xrightarrow{A}Z$ and $P\xrightarrow{B}Z$ carry reward $-1$.
+All other transitions carry reward $+1$.  Thus
+\begin{align*}
+ \mu_p
+ &=1-2(p\pi_N+q\pi_P)\\
+ &=1-2\left(\frac{p^2}{1+p}+\frac{q^2}{1+q}\right)
+ =1-\frac{2(1-a)}{2+a}=\frac{3a}{2+a}.
+\end{align*}
+\end{proof}
+
+\begin{theorem}[SLLN and explicit CLT]
+\label{thm:slln-clt}
+For every $0<p<1$,
+\begin{equation}
+ \label{eq:slln}
+ \frac{H_n}{n}\longrightarrow\mu_p=\frac{3a}{2+a}
+ \qquad\text{almost surely}.
+\end{equation}
+Moreover,
+\begin{equation}
+ \label{eq:clt}
+ \frac{H_n-n\mu_p}{\sqrt n}
+ \xrightarrow{\mathrm d}\mathcal N(0,\sigma_p^2),
+\end{equation}
+where
+\begin{equation}
+ \label{eq:variance}
+ \boxed{\quad
+ \sigma_p^2=
+ \frac{4a(1-a)(5-2a)}{(2+a)^3}>0.
+ \quad}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $g(i,\ell)\in\{-1,+1\}$ be the reward from state $i$ when the letter is
+$\ell\in\{A,B\}$.  The conditional reward means are
+\[
+ f_N=q-p,\qquad f_Z=1,\qquad f_P=p-q.
+\]
+The finite chain is irreducible and aperiodic.  The ergodic theorem applied
+to its transition rewards proves \eqref{eq:slln} with the stationary mean in
+\cref{lem:stationary}.
+
+To calculate fluctuations rather than cite an unspecified variance, solve
+the Poisson equation
+\[
+ (I-P_p)h=f-\mu_p\one.
+\]
+Direct substitution gives the bounded solution
+\begin{equation}
+ \label{eq:poisson-solution}
+ h_N=-\frac{2p}{1+p},\qquad h_Z=0,
+ \qquad h_P=-\frac{2q}{1+q}.
+\end{equation}
+If $S_k$ is the projective state after $k$ letters, then
+\begin{equation}
+ \label{eq:martingale-difference}
+ D_k=g(S_{k-1},X_k)-\mu_p+h(S_k)-h(S_{k-1})
+\end{equation}
+has conditional mean zero.  Indeed, conditioning on $S_{k-1}=i$ gives
+$f_i-\mu_p+(P_ph)_i-h_i=0$.  The six state--letter values of $D_k$ are
+\begin{center}
+\renewcommand{\arraystretch}{1.13}
+\begin{tabular}{c@{\qquad}cc}
+\toprule
+state & letter $A$ & letter $B$\\
+\midrule
+$N$ & $-2q/(1+q)$ & $2p/(1+q)$\\
+$Z$ & $-2q(2p-1)/[(1+p)(1+q)]$
+    & $2p(2p-1)/[(1+p)(1+q)]$\\
+$P$ & $2q/(1+p)$ & $-2p/(1+p)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Consequently, the stationary conditional second moment is
+\begin{align}
+ \sum_i\pi_i\Exp(D_k^2\mid S_{k-1}=i)
+ &=4a\left[
+ \frac{\pi_N}{(1+q)^2}
+ +\frac{\pi_Z(2p-1)^2}{(1+p)^2(1+q)^2}
+ +\frac{\pi_P}{(1+p)^2}\right] \notag\\
+ &=\frac{4a(1-a)(5-2a)}{(2+a)^3}.
+ \label{eq:variance-derivation}
+\end{align}
+The last equality uses $(1+p)(1+q)=2+a$ and
+$(2p-1)^2=1-4a$.
+
+Summing \eqref{eq:martingale-difference} yields
+\[
+ H_n-n\mu_p=\sum_{k=1}^nD_k+h(S_0)-h(S_n).
+\]
+The final difference is bounded.  The conditional quadratic variation of
+the martingale, divided by $n$, converges almost surely to
+\eqref{eq:variance-derivation} by the finite-chain ergodic theorem.
+The increments are bounded, so the conditional Lindeberg condition holds.
+The martingale central limit theorem
+\cite[Theorem~3.2]{HallHeyde1980} proves \eqref{eq:clt}.  Since
+$0<a\leq1/4$, every factor in \eqref{eq:variance} is positive.
+\end{proof}
+
+The tilted cubic gives an additional algebraic check.  Once the literal
+kernel is fixed, its variance calculation is independent of the Poisson
+calculation above; the two proof routes as a whole are complementary.
+
+\begin{proposition}[Perron derivative calculation]
+\label{prop:perron-derivatives}
+Let $\rho_p(t)=\pf(Q_p(e^t))$ for $0<p<1$.  Then
+\[
+ \rho_p(0)=1,\qquad
+ (\log\rho_p)'(0)=\mu_p,\qquad
+ (\log\rho_p)''(0)=\sigma_p^2.
+\]
+\end{proposition}
+
+\begin{proof}
+Set
+\[
+ F(r,t)=r^3+(2a-1-ae^{2t})r-ae^t.
+\]
+At $(r,t)=(1,0)$,
+\[
+ F_r=2+a,\quad F_t=-3a,\quad
+ F_{rr}=6,\quad F_{rt}=-2a,\quad F_{tt}=-5a.
+\]
+Implicit differentiation of $F(\rho_p(t),t)=0$ gives
+\[
+ \rho_p'(0)=\frac{3a}{2+a}=\mu_p
+\]
+and
+\[
+ (2+a)\rho_p''(0)+6\mu_p^2-4a\mu_p-5a=0.
+\]
+Therefore
+\begin{align*}
+ (\log\rho_p)''(0)
+ &=\rho_p''(0)-\mu_p^2\\
+ &=\frac{5a+4a\mu_p-(8+a)\mu_p^2}{2+a}
+ =\frac{4a(1-a)(5-2a)}{(2+a)^3}.
+\end{align*}
+This independently agrees with the martingale variance calculation in
+\eqref{eq:variance-derivation}.
+\end{proof}

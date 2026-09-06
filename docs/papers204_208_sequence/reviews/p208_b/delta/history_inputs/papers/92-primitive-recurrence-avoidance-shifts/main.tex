@@ -1,0 +1,479 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\htop}{h_{\mathrm{top}}}
+\newcommand{\one}{\mathbf 1}
+
+\title[Primitive-recurrence avoidance shifts]{Primitive-Recurrence Avoidance Shifts:\\
+Singer-Cycle Compression and a Delayed Periodic Anomaly}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 37C30, 11T71, 94A55, 05C50}
+\keywords{shift of finite type, primitive polynomial, Singer cycle, finite Fourier transform, periodic point, dynamical zeta function}
+
+\begin{document}
+
+\begin{abstract}
+Fix a primitive degree-$r$ recurrence over $\F_q$ and forbid its discrepancy
+from vanishing at every time.  For $q\geq3$ and $r\geq2$, the resulting
+$(q-1)$-regular shift of finite type is mixing and has a unique, uniform
+measure of maximal entropy.  Put
+\[
+ L=q^r-1,\qquad H=q^{r-1}-1,\qquad D=(q-1)^H.
+\]
+Although its state matrix has size $q^r$, finite Fourier transform reduces it
+to one scalar block and one weighted Singer cycle.  We obtain
+\[
+ \det(tI-A)=(t-(q-1))(t^L-D),
+ \qquad
+ \zeta(z)=\frac{1}{(1-(q-1)z)(1-Dz^L)}.
+\]
+Consequently every fixed-point count before time $L$ is exactly
+$(q-1)^n$, the count of the full $(q-1)$-shift; the first discrepancy occurs
+at $L$ and has size $LD$.  Thus $F_1$ and the location of the first anomaly
+recover $(q,r)$.  The same algebraic formulas remain valid at $q=2$, where
+mixing fails and the system becomes one fixed orbit plus one orbit of length
+$2^r-1$.  Exact controls build the full adjacency matrices over
+$\F_2,\F_3,\F_4$, and $\F_5$ and verify the Fourier-cycle ingredients, full
+characteristic polynomial, periodic counts, and recovery statement.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A primitive linear feedback shift register has the simplest possible
+nonzero state dynamics: its companion matrix cycles through all nonzero
+states.  That deterministic cycle structure and its relation to primitive
+polynomials and Singer cycles are classical and remain active subjects in
+coding theory \cite{GhorpadeHasanKumari2011,ChangEzermanLingWang2018}.  We
+change the local rule in one specific way.  Instead of enforcing zero
+recurrence error, we forbid zero error and allow every nonzero error at every
+step.  The deterministic register then becomes a regular shift of finite
+type with $q-1$ choices from each state.
+
+The change is small at the level of the defining recurrence but not at the
+level of periodic data.  A direct determinant has degree $q^r$.  The useful
+coordinates are additive characters: the zero character gives the entropy
+root, while a primitive companion matrix puts every nonzero character into
+one orbit.  Along that orbit the Fourier weights are $q-1$ on one coordinate
+hyperplane and $-1$ off it.  Counting the hyperplane intersections produces
+the complete determinant with two factors.
+
+The contribution is the following scope-delimited theorem package.
+\begin{itemize}
+ \item We give an explicit finite affine skew-product model and a full
+ Fourier/block proof of the two-factor characteristic polynomial.
+ \item We compute every fixed-point count, every least-period orbit count,
+ and the Artin--Mazur zeta function.  Periodic data agree with the full
+ $(q-1)$-shift until the sharp time $q^r-1$.
+ \item We prove mixing and identify the unique maximal-entropy measure for
+ $q\geq3$, isolate the reducible binary boundary, and recover $(q,r)$ from
+ the first periodic anomaly.
+\end{itemize}
+
+The ownership boundary is important.  We do not claim primitive
+polynomials, Singer cycles, or the cycle structure of deterministic linear
+feedback registers \cite{GhorpadeHasanKumari2011,ChangEzermanLingWang2018}.
+We also do not claim the determinant formula for a general shift of finite
+type \cite{BowenLanford1970} or the Parry maximal-entropy construction
+\cite{Parry1964}.  The residual object is the nonzero-error relation and the
+weighted Fourier cycle it creates.  A bounded search found no direct source
+for this combined formula and delayed-anomaly theorem, but no absolute
+novelty or priority claim is made.  External posting and submission remain
+on hold pending specialist literature and priority review.
+
+\section{The avoidance shift and its state model}
+\label{sec:model}
+
+Let $q$ be a prime power and $r\geq2$.  Fix a primitive polynomial
+\begin{equation}\label{eq:primitive-polynomial}
+ f(t)=t^r-c_{r-1}t^{r-1}-\cdots-c_1t-c_0\in\F_q[t]
+\end{equation}
+and its companion matrix
+\begin{equation}\label{eq:companion}
+ C=
+ \begin{pmatrix}
+  0&1&0&\cdots&0\\
+  0&0&1&\cdots&0\\
+  \vdots&&&\ddots&\vdots\\
+  0&0&0&\cdots&1\\
+  c_0&c_1&c_2&\cdots&c_{r-1}
+ \end{pmatrix}.
+\end{equation}
+Primitivity means that a root of $f$ generates $\F_{q^r}^{\times}$.  In
+particular, $C$ has order
+\[
+ L=q^r-1
+\]
+and acts transitively on $\F_q^r\setminus\{0\}$.
+
+\begin{definition}[Primitive-recurrence avoidance shift]
+The shift $X_{q,r,C}\subset\F_q^{\Z}$ consists of the sequences $x$ for
+which
+\begin{equation}\label{eq:error}
+ e_n(x):=x_{n+r}-\sum_{j=0}^{r-1}c_jx_{n+j}\in\F_q^{\times}
+ \qquad(n\in\Z).
+\end{equation}
+It is equipped with the left shift $\sigma$.
+\end{definition}
+
+For $s=(s_0,\ldots,s_{r-1})^{\mathsf T}\in\F_q^r$, write
+$\mathbf e_r=(0,\ldots,0,1)^{\mathsf T}$.  The $r$-block presentation has
+state adjacency matrix $A$, indexed by $\F_q^r$, with
+\begin{equation}\label{eq:adjacency}
+ A_{s,t}=1
+ \quad\Longleftrightarrow\quad
+ t=Cs+u\mathbf e_r\text{ for some }u\in\F_q^{\times}.
+\end{equation}
+The overlap coordinates in \eqref{eq:companion} show that this presentation
+is conjugate to $X_{q,r,C}$, not merely a cover.
+
+There is also a useful global description.  Let
+$E=(\F_q^{\times})^{\Z}$ and define
+\begin{equation}\label{eq:skew-product}
+ T(s,e)=\bigl(Cs+e_0\mathbf e_r,\sigma e\bigr)
+ \quad\text{on }\F_q^r\times E.
+\end{equation}
+
+\begin{proposition}[Finite affine skew product]
+\label{prop:skew}
+The map
+\[
+ x\longmapsto \bigl((x_0,\ldots,x_{r-1})^{\mathsf T},(e_n(x))_{n\in\Z}\bigr)
+\]
+is a topological conjugacy from $(X_{q,r,C},\sigma)$ to
+$(\F_q^r\times E,T)$.  Moreover, every row and every column of $A$ has sum
+$q-1$.
+\end{proposition}
+
+\begin{proof}
+Given a state and a two-sided error sequence, \eqref{eq:error} determines
+the future recursively.  Since $c_0\ne0$, or equivalently $C$ is invertible,
+the same equation determines the past.  This construction is inverse to the
+displayed map and intertwines the dynamics with \eqref{eq:skew-product}.
+
+For a fixed source state, the $q-1$ nonzero values of $u$ in
+\eqref{eq:adjacency} give distinct targets.  For a fixed target $t$ and each
+$u\ne0$, invertibility gives the unique source
+$C^{-1}(t-u\mathbf e_r)$.  Thus both degrees equal $q-1$.
+\end{proof}
+
+\section{Fourier compression}
+\label{sec:fourier}
+
+Put
+\begin{equation}\label{eq:parameters}
+ H=q^{r-1}-1,
+ \qquad
+ D=(q-1)^H.
+\end{equation}
+The exponent $H$ counts the nonzero points of a coordinate hyperplane.
+
+Fix a nontrivial additive character $\psi\colon\F_q\to\mathbb C^\times$.
+For $\xi,s\in\F_q^r$, set
+\[
+ \chi_\xi(s)=\psi(\langle\xi,s\rangle).
+\]
+The $q^r$ functions $\chi_\xi$ form a basis of the complex functions on
+$\F_q^r$.  Indeed, if $\delta\ne0$, choose a nonzero coordinate
+$\delta_j$, choose $a\in\F_q$ with $\psi(a)\ne1$, and put
+$s_j=a/\delta_j$ with the other coordinates zero; then
+$\psi(\langle\delta,s\rangle)\ne1$.  Thus the character pairing is
+nondegenerate even when $q$ is not prime.  Regard $A$ as the forward transfer operator
+\[
+ (A\varphi)(s)=\sum_{u\in\F_q^\times}\varphi(Cs+u\mathbf e_r).
+\]
+
+\begin{lemma}[Weighted dual permutation]
+\label{lem:fourier-action}
+For every $\xi\in\F_q^r$,
+\begin{equation}\label{eq:fourier-action}
+ A\chi_\xi=w(\xi_r)\chi_{C^{\mathsf T}\xi},
+ \qquad
+ w(a)=
+ \begin{cases}
+  q-1,&a=0,\\
+  -1,&a\ne0.
+ \end{cases}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Substitution into the transfer operator gives
+\[
+ (A\chi_\xi)(s)
+ =\psi(\langle C^{\mathsf T}\xi,s\rangle)
+   \sum_{u\in\F_q^\times}\psi(u\xi_r).
+\]
+The last sum is $q-1$ when $\xi_r=0$.  When $\xi_r\ne0$, multiplication by
+$\xi_r$ permutes $\F_q^\times$, and the sum over the whole field is zero;
+deleting the term at zero leaves $-1$.
+\end{proof}
+
+\begin{theorem}[Two-block characteristic polynomial]
+\label{thm:charpoly}
+For every prime power $q\geq2$ and every $r\geq2$,
+\begin{equation}\label{eq:charpoly}
+ \boxed{\det(tI-A)=(t-(q-1))(t^L-D).}
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:zeta-determinant}
+ \det(I-zA)=(1-(q-1)z)(1-Dz^L).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The zero character spans an invariant line, and
+\eqref{eq:fourier-action} acts there by $q-1$.  Since $C$ is a Singer cycle,
+$C^{\mathsf T}$ is conjugate to a Singer cycle and therefore has one orbit
+of length $L$ on the nonzero dual vectors.  The remaining Fourier block is a
+weighted cyclic permutation.  Its characteristic polynomial is
+\begin{equation}\label{eq:weighted-cycle}
+ t^L-\prod_{i=0}^{L-1}w\bigl(((C^{\mathsf T})^i\xi)_r\bigr)
+\end{equation}
+for any $\xi\ne0$.
+
+The orbit visits every nonzero vector exactly once.  Among those vectors,
+exactly $q^{r-1}-1=H$ have last coordinate zero.  The other
+\[
+ L-H=q^{r-1}(q-1)
+\]
+vectors contribute a factor $-1$.  This number is even: if $q$ is odd then
+$q-1$ is even, and if $q$ is even then $q^{r-1}$ is even because $r\geq2$.
+The product in \eqref{eq:weighted-cycle} is therefore $(q-1)^H=D$.
+Multiplying the zero-frequency factor and the nonzero-frequency factor gives
+\eqref{eq:charpoly}.  Replacing $t$ by $z^{-1}$ and multiplying by $z^{q^r}$
+gives \eqref{eq:zeta-determinant}.
+\end{proof}
+
+The proof identifies the compression mechanism rather than inferring it
+from traces: one scalar Fourier mode and one weighted cycle account for all
+$q^r$ eigenvalues.
+
+\section{All periods, zeta, and recovery}
+\label{sec:periods}
+
+Write
+\[
+ F_n=\#\Fix(\sigma^n\mid X_{q,r,C}).
+\]
+The block presentation is a conjugacy, so $F_n=\tr(A^n)$.
+
+\begin{theorem}[Complete periodic data]
+\label{thm:periodic}
+For every $n\geq1$,
+\begin{equation}\label{eq:fixed-count}
+ \boxed{
+ F_n=(q-1)^n+\one_{\{L\mid n\}}L(q-1)^{Hn/L}.}
+\end{equation}
+The Artin--Mazur zeta function is
+\begin{equation}\label{eq:zeta}
+ \boxed{
+ \zeta_{q,r,C}(z)
+ =\exp\!\left(\sum_{n\geq1}\frac{F_n}{n}z^n\right)
+ =\frac{1}{(1-(q-1)z)(1-Dz^L)}.}
+\end{equation}
+The number $O_n$ of shift orbits of least period $n$ is
+\begin{equation}\label{eq:least-period}
+ O_n=\frac1n\sum_{d\mid n}\mu(n/d)
+ \left((q-1)^d+\one_{\{L\mid d\}}L(q-1)^{Hd/L}\right),
+\end{equation}
+where $\mu$ is the M\"obius function.
+\end{theorem}
+
+\begin{proof}
+The $L$ roots of $t^L-D$ have $n$th-power sum zero unless $L\mid n$.
+When $n=kL$, that sum is $LD^k$.  Adding the $n$th power of the scalar
+eigenvalue $q-1$ proves \eqref{eq:fixed-count}.  Summing the contribution of
+the multiples $n=kL$ in the defining logarithm gives
+\[
+ \sum_{k\geq1}\frac{LD^kz^{kL}}{kL}
+ =\sum_{k\geq1}\frac{(Dz^L)^k}{k}
+ =-\log(1-Dz^L),
+\]
+while the scalar mode gives $-\log(1-(q-1)z)$.  This proves
+\eqref{eq:zeta}.  Finally, $F_n=\sum_{d\mid n}dO_d$; M\"obius inversion gives
+\eqref{eq:least-period}.
+\end{proof}
+
+The formula has a sharp identification consequence.
+
+\begin{corollary}[First-anomaly rigidity]
+\label{cor:recovery}
+Let $\Delta_n=F_n-F_1^n$.  Then
+\begin{equation}\label{eq:first-anomaly}
+ F_1=q-1,
+ \qquad
+ \min\{n\geq1:\Delta_n>0\}=L=q^r-1,
+ \qquad
+ \Delta_L=LD.
+\end{equation}
+Hence the fixed-point sequence recovers
+\[
+ q=F_1+1,
+ \qquad
+ r=\log_q(L+1).
+\]
+In particular, two shifts in this family with identical fixed-point data
+have the same pair $(q,r)$.
+\end{corollary}
+
+\begin{proof}
+Because $r\geq2$, one has $L>1$, and \eqref{eq:fixed-count} gives
+$F_1=q-1$.  The correction term in that formula is positive exactly at
+multiples of $L$, proving all three assertions in \eqref{eq:first-anomaly}.
+The displayed recovery formulas follow.
+\end{proof}
+
+The agreement before $L$ is exact, not asymptotic: through time $L-1$ the
+periodic counts are indistinguishable from those of the full shift on
+$q-1$ symbols.
+
+\section{Mixing, maximal entropy, and the binary boundary}
+\label{sec:mixing}
+
+\begin{theorem}[Mixing and uniform maximal entropy]
+\label{thm:mixing}
+Suppose $q\geq3$.  Then $X_{q,r,C}$ is topologically mixing,
+\begin{equation}\label{eq:entropy}
+ \htop(X_{q,r,C})=\log(q-1),
+\end{equation}
+and it has a unique measure of maximal entropy.  In the state presentation,
+that measure has stationary distribution $q^{-r}$ on $\F_q^r$ and transition
+probabilities
+\begin{equation}\label{eq:parry}
+ P_{s,t}=\frac{A_{s,t}}{q-1}.
+\end{equation}
+Equivalently, the recurrence errors form an i.i.d. uniform process on
+$\F_q^\times$, independent of the uniform time-zero state.
+\end{theorem}
+
+\begin{proof}
+By \cref{prop:skew}, $A$ is both row- and column-$(q-1)$-regular.  Hence
+$q-1$ is a Perron eigenvalue with constant left and right eigenvectors.  The
+other eigenvalues have modulus
+\[
+ D^{1/L}=(q-1)^{H/L}<q-1,
+\]
+because $q-1>1$ and $H<L$.  Thus the Perron eigenvalue is simple and is the
+only eigenvalue on its spectral circle.
+
+For completeness, double regularity turns simplicity into irreducibility.
+If the directed graph were not strongly connected, a sink strongly
+connected component would have no outgoing edges.  Its total internal row
+sum would already equal $(q-1)$ times its number of vertices.  The equal
+column sums then leave no incoming edges either, so this component and its
+nonempty complement would each contribute an eigenvalue $q-1$, contradicting
+simplicity.  An irreducible nonnegative matrix of period $d$ has $d$
+eigenvalues on its spectral circle.  Therefore $d=1$, and $A$ is primitive.
+This proves mixing and \eqref{eq:entropy}.
+
+The Parry construction for a primitive matrix is unique
+\cite{Parry1964}.  Substituting the constant Perron vectors gives the
+uniform stationary law and \eqref{eq:parry}.
+Since each labeled error determines one successor and its conditional law is
+uniform independently of the current state, successive errors are i.i.d.;
+the same factorization shows independence from the stationary initial state.
+\end{proof}
+
+The restriction $q\geq3$ is necessary.
+
+\begin{proposition}[Binary boundary]
+\label{prop:binary}
+When $q=2$, the algebraic formulas in \cref{thm:charpoly,thm:periodic} remain
+valid with $D=1$, but the shift is not mixing.  It is the disjoint union of
+one fixed orbit and one orbit of length $L=2^r-1$.  Consequently it has two
+ergodic maximal-entropy measures and
+\[
+ \zeta_{2,r,C}(z)=\frac1{(1-z)(1-z^L)}.
+\]
+\end{proposition}
+
+All maximal-entropy measures in the binary case are the convex combinations
+of these two ergodic periodic-orbit measures.
+
+\begin{proof}
+There is only one allowed error, so the state map is the permutation
+$s\mapsto Cs+\mathbf e_r$.  Since $1$ is not an eigenvalue of the primitive
+companion matrix, $I-C$ is invertible and the affine permutation has a unique
+fixed point $s_*$.  Translation by $s_*$ conjugates it to $C$.  The latter
+fixes zero and cycles through all $L$ nonzero states, which proves the orbit
+decomposition and the measure statement.
+\end{proof}
+
+\section{Exact controls and scope}
+\label{sec:controls}
+
+The deterministic control program constructs the full state matrices rather
+than substituting the theorem formulas.  It also constructs the dual Singer
+orbit, counts its coordinate-hyperplane intersections, computes
+$\det(tI-A)$ by the integer Faddeev--LeVerrier algorithm, checks strong
+connectivity and period, and compares traces through time $L+1$.  The frozen
+cases are shown in \cref{tab:controls}.
+
+\begin{table}[ht]
+\centering
+\caption{Exact full-matrix controls.  Coefficients are ordered
+$(c_0,\ldots,c_{r-1})$ as in \eqref{eq:primitive-polynomial}.  The anomaly
+column is $F_L-(q-1)^L=LD$.}
+\label{tab:controls}
+\begin{tabular}{@{}rrrrrrl@{}}
+\toprule
+$q$&$r$&coefficients&$q^r$&$L$&$LD$&mixing\\
+\midrule
+2&2&$(1,1)$&4&3&3&no (boundary)\\
+3&2&$(1,1)$&9&8&32&yes\\
+3&3&$(2,0,1)$&27&26&6656&yes\\
+4&2&$(2,1)$&16&15&405&yes\\
+5&2&$(2,2)$&25&24&6144&yes\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The $\F_4$ lane uses the independent model
+$\F_2[u]/(u^2+u+1)$.  Across the five lanes, the script records 258 exact
+assertions.  For example, at $(q,r)=(3,3)$ it verifies
+\[
+ F_{26}=2^{26}+6656=67{,}115{,}520,
+\]
+whereas every $F_n$ for $1\leq n<26$ equals $2^n$.
+
+The theorem does not cover nonprimitive recurrence polynomials or arbitrary
+allowed error sets.  In those regimes the nonzero dual frequencies can split
+into several orbits, and the weight product in \eqref{eq:weighted-cycle}
+need not reduce to one factor.  That orbit splitting is a different problem.
+Within the primitive, nonzero-error family, the Fourier proof gives the
+complete spectrum, dynamics, and recovery statement without an unverified
+genericity assumption.
+
+\bibliographystyle{abbrvnat}
+\bibliography{references}
+
+\end{document}

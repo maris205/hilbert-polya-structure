@@ -1,0 +1,49 @@
+\section{The fixed presentation}\label{sec:presentation}
+
+Let $A$ be a finite alphabet, $a=\card A$, and let
+$G=(A,E)$ be a directed graph.  Its vertex shift is
+\[
+ Y_G=\set{y\in A^{\ZZ}:(y_i,y_{i+1})\in E\text{ for every }i\in\ZZ}.
+\]
+We retain every symbol as a vertex and assume that $G$ is \emph{uniformly balanced}: there is $d\geq1$ such that every vertex has exactly $d$ incoming and $d$ outgoing neighbors.  In particular $Y_G$ is nonempty.  This is the one-dimensional uniform binondeterministic trace in the two-dimensional IUBS definition \citep[Definitions~8--9]{salo2025iubs}.
+
+Fix finite neighborhoods $N^+,N^-\subset[-R,R]$ and rules
+\[
+ F^+:A^{N^+}\longrightarrow\mathcal P(A)\setminus\{\varnothing\},
+ \qquad
+ F^-:A^{N^-}\longrightarrow\mathcal P(A)\setminus\{\varnothing\}.
+\]
+For $y,z\in Y_G$, write $y\cR z$ when
+\begin{equation}\label{eq:forward-relation}
+ z_i\in F^+(\restr y{i+N^+})\quad\text{for every }i\in\ZZ.
+\end{equation}
+The fixed-presentation hypotheses are:
+\begin{enumerate}
+\item every coordinatewise choice prescribed by $F^+$ belongs to $Y_G$, and every coordinatewise choice prescribed by $F^-$ belongs to $Y_G$;
+\item $y\cR z$ if and only if
+      $y_i\in F^-(\restr z{i+N^-})$ for all $i$; and
+\item there is $b\geq1$ such that $\card{F^+(c)}=\card{F^-(c')}=b$ for all contexts $c,c'$.
+\end{enumerate}
+The equality of the two uniform branch counts is automatic for a uniform binondeterministic spacetime \citep[after Lemma~23]{salo2025iubs}; printing it as part of the finite presentation makes the later degree count auditable.
+
+The associated spacetime is
+\begin{equation}\label{eq:X}
+ X_\Pi=\set{x\in A^{\ZZ^2}:x^{(t)}\in Y_G
+             \text{ and }x^{(t)}\cR x^{(t+1)}
+             \text{ for every }t\in\ZZ},
+\end{equation}
+where $x^{(t)}=(x_{i,t})_{i\in\ZZ}$ and
+$\Pi=(A,G,N^+,N^-,F^+,F^-)$ records the presentation.  These assumptions are exactly what the proof uses: a balanced one-step trace, independent forward choices, and equally many independent reverse choices.  They are stronger data than merely knowing that $X_\Pi$ is conjugate to some unishift.
+
+For $m\geq1$, let
+\[
+ Y_m=\set{y\in Y_G:\sigma^m y=y}.
+\]
+We identify $Y_m$ with cyclic words on $\ZZ/m\ZZ$.  The finite \emph{row graph} $D_m$ has vertex set $Y_m$ and an edge $y\to z$ precisely when $y\cR z$.  Independent choices on the cylinder give
+\begin{equation}\label{eq:row-degrees}
+ \outdeg_{D_m}(y)=b^m=\indeg_{D_m}(y)
+ \quad(y\in Y_m).
+\end{equation}
+Even when $m\leq2R$, repeated input sites modulo $m$ cause no loss: output symbols are still selected independently at the $m$ distinct output coordinates.  Hypothesis~1 in the corresponding direction ensures that every such output or predecessor is again in $Y_m$.
+
+A pattern $p$ on a finite set is \emph{globally valid} if it is the restriction of some $x\in X_\Pi$.  An $(m,T)$-periodic point is fixed by the shifts through $(m,0)$ and $(0,T)$.  We ask only that the given rectangle occur somewhere, so translations made below do not change the problem.

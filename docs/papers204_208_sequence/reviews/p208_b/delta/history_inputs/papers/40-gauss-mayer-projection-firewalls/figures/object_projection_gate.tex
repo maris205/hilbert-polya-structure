@@ -1,0 +1,65 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\sffamily\small,
+  box/.style={draw=charcoal, rounded corners=2pt, line width=.7pt,
+    align=center, inner sep=5pt, fill=white},
+  source/.style={box, draw=formalblue, fill=formalblue!8},
+  owned/.style={box, draw=deepgreen, fill=deepgreen!9},
+  proj/.style={box, draw=governancepurple, fill=governancepurple!8,
+    text width=2.45cm},
+  gate/.style={box, draw=stopred, fill=stopred!8, line width=1pt,
+    text width=3.15cm},
+  meta/.style={box, draw=warningamber, fill=warningamber!10},
+  flow/.style={->, line width=.8pt, draw=charcoal},
+  analytic/.style={->, densely dotted, line width=1pt, draw=deepgreen},
+  scalar/.style={->, dashed, line width=.9pt, draw=governancepurple}
+]
+  \node[source, text width=2.4cm] (digit) at (0,2.7)
+    {$X=\N^{\N}$\\one-digit shift $\sigma$\\marker $u$};
+  \node[meta, text width=2.1cm] (group) at (3.25,2.7)
+    {group adjacent digits\\$\iota$};
+  \node[source, text width=2.9cm] (pair) at (6.65,2.7)
+    {$\Xtwo=(\N^2)^{\N}$\\one-pair shift $\rho$\\{\scriptsize\RhoPrimitive}, marker $u^2$};
+
+  \draw[flow] (digit) -- node[above, font=\scriptsize] {$\iota$} (group);
+  \draw[flow] (group) -- (pair);
+  \node[font=\scriptsize, text=governancepurple] at (3.25,1.75)
+    {$\rho\circ\iota=\iota\circ\sigma^2$};
+
+  \node[source, text width=3.25cm] (mono) at (10.55,4.0)
+    {ordered monodromy\\$M=A(a_1)\cdots A(a_{2k})$\\
+     $t,\ \Delta_{\Z[M]},\ \lambda$};
+  \node[owned, text width=3.25cm] (oper) at (10.55,1.35)
+    {same-space analytic owner\\$K_s=\Ls^2$\\
+     $\Dforty(s,u)=\det(I-u^2K_s)$};
+  \draw[flow] (pair.north east) -- node[above, sloped, font=\scriptsize]
+    {stored word} (mono.west);
+  \draw[analytic] (pair.south east) -- node[below, sloped, font=\scriptsize]
+    {raw-index reversal} (oper.west);
+  \draw[flow] (mono) -- node[right, font=\scriptsize]
+    {$T=2\log\lambda=-\log d$} (oper);
+
+  \node[proj] (pt) at (14.25,4.55) {$P_t=t$};
+  \node[proj] (pd) at (14.25,3.35)
+    {$P_\Delta=t^2-4$};
+  \node[proj] (pn) at (14.25,2.15)
+    {$P_N=\lambda^2$};
+  \draw[scalar] (mono.east) -- (pt.west);
+  \draw[scalar] (mono.east) -- (pd.west);
+  \draw[scalar] (mono.east) -- (pn.west);
+
+  \node[gate] (stop) at (18.25,3.35)
+    {rational-prime reciprocal-Euler-ledger conjunction\\[2pt]
+     \textcolor{stopred}{\bfseries STOP}\\
+     \scriptsize support/multiplicity; clock/powers; amplitude; owner};
+  \draw[scalar] (pt.east) -- (stop.west);
+  \draw[scalar] (pd.east) -- (stop.west);
+  \draw[scalar] (pn.east) -- (stop.west);
+  \draw[stopred, line width=1.3pt]
+    ([xshift=-3pt,yshift=5pt]stop.west) -- ([xshift=3pt,yshift=-5pt]stop.west);
+
+  \node[owned, text width=10.8cm] (go) at (11.7,-.35)
+    {\textbf{GO:} intrinsic primitive-pair ledger $+$ same-object Fredholm determinant\\
+     \scriptsize the $u=1$ Selberg equality is functional, not an orbitwise coercion};
+  \draw[analytic] (oper.south) -- (go.north);
+\end{tikzpicture}

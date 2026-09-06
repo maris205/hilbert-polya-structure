@@ -1,0 +1,56 @@
+\begin{tikzpicture}[
+  x=1cm,y=1cm,>=Latex,
+  classbox/.style={rounded corners=2pt,draw=charcoal,very thick,fill=white,
+    align=left,text width=4.35cm,minimum height=4.15cm,font=\scriptsize,
+    inner sep=5pt},
+  obstructed/.style={classbox,draw=deepgreen},
+  mixed/.style={classbox,draw=formalblue,double},
+  exitonly/.style={classbox,draw=warningamber,dashed},
+  endpoint/.style={rounded corners=2pt,draw=charcoal,thick,align=center,
+    text width=4.2cm,minimum height=.95cm,font=\small,fill=white},
+  solidarr/.style={->,very thick,deepgreen},
+  exitarr/.style={->,very thick,dashed,warningamber},
+  note/.style={rounded corners,draw=charcoal,fill=softgray,align=center,
+    font=\scriptsize,inner sep=4pt}
+]
+\node[obstructed] (obs) at (0,1.3) {\textbf{6 obstructed classes}\\[2pt]
+  affine Cayley representation\\
+  finite-rank local system\\
+  character\\grading\\quotient\\modular phase\\[4pt]
+  \textbf{6 frozen-family tokens}\\
+  each has an in-domain witness path};
+
+\node[mixed] (mix) at (5.45,1.3) {\textbf{2 mixed classes}\\[2pt]
+  Bass--Serre splitting\\
+  groupoid trace\\[6pt]
+  \textbf{2 canonical tokens}\\
+  frozen splitting / frozen groupoid import\\[4pt]
+  \textbf{2 alternative EXIT tokens}\\
+  changed splitting / determinant category};
+
+\node[exitonly] (ext) at (10.9,1.3) {\textbf{6 exit-only classes}\\[2pt]
+  induced shift\\first-return map\\valuation tree\\
+  boundary model\\basepoint damping\\finite-total-weight retrofit\\[4pt]
+  \textbf{6 explicit EXIT tokens}\\
+  no canonical obstruction credit};
+
+\node[endpoint,draw=deepgreen,below=9mm of obs] (bad)
+  {\textbf{obstruction endpoint}\\nonempty failed-\texttt{Good} set};
+\node[endpoint,draw=warningamber,dashed,below=9mm of ext] (out)
+  {\textbf{typed EXIT endpoint}\\empty failed-\texttt{Good} set};
+
+\draw[solidarr] (obs.south) -- (bad.north);
+\draw[solidarr] (mix.south west) -- (bad.north east);
+\draw[exitarr] (mix.south east) -- (out.north west);
+\draw[exitarr] (ext.south) -- (out.north);
+
+\node[note,below=6mm of mix,text width=4.55cm] (total)
+  {$8$ obstructed tokens $+8$ EXIT tokens $=\Sigma_{16}$\\
+   no \texttt{OTHER\_INSTANCE}; no implicit compound request};
+\draw[solidarr] (bad.east) -- (total.west);
+\draw[exitarr] (out.west) -- (total.east);
+
+\node[note,below=4mm of total,text width=10.2cm,fill=white] (scope)
+  {class dispositions are not token outcomes: mixed classes contribute one
+   obstructed canonical token and one explicit category-changing EXIT token};
+\end{tikzpicture}

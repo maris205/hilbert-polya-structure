@@ -1,0 +1,101 @@
+\section{Proof, computation, and scope details}
+
+\subsection{Augmented boundary convention}
+
+For a nonempty simplex
+$\sigma=[d_0<\cdots<d_j]$, the signed boundary is
+\[
+ \partial\sigma
+ =\sum_{i=0}^j(-1)^i
+ [d_0<\cdots<\widehat d_i<\cdots<d_j].
+\]
+At degree zero, the augmented boundary sends each vertex to the unique empty
+generator. Pairwise deletion of indices proves $\partial^2=0$ over the
+integers. The prime interval contains no vertices, so its reduced homology is
+one-dimensional in degree $-1$. This convention is the source of odd atom
+parity and is fixed before any Euler comparison.
+
+\subsection{Finite chain algorithm}
+
+For each $n$, the implementation enumerates all strict chains of proper
+divisors, groups them by dimension, and constructs signed boundary columns.
+It verifies $\partial^2=0$ over $\mathbb Z$. Boundary ranks and Betti numbers
+are computed exactly over $\mathbb F_2$ by bit-column elimination; the
+crosscut proof in \cref{thm:factorization-homology} supplies the integral
+classification. Reduced Euler characteristic is calculated directly from
+the augmented chain dimensions, while the poset M\"obius coefficient is
+computed independently by its divisor recursion.
+
+Every cutoff $64,128,256,512$ is a complete prefix; no best cutoff is
+selected. Result tables contain all $511$ fibers at the largest cutoff.
+
+\subsection{Trace-class and Schatten criteria}
+
+Since $\cL_s$ is diagonal,
+\[
+ \|\cL_s\|_{\cS_q}^q
+ =\sum_p|p^{-s}|^q
+ =\sum_p p^{-q\RePart s}.
+\]
+The prime subseries converges for exponent greater than one and diverges at
+or below one. This proves \cref{thm:schatten} and also shows why no finite
+cutoff phase identity can establish an infinite determinant.
+
+For the relative diagonal ratio,
+\[
+ \cL_{1-s}\cL_s^{-1}-I
+ =\operatorname{diag}(p^{2s-1}-1).
+\]
+If $\RePart s>1/2$, its entries grow; if $\RePart s<1/2$, they tend to
+$-1$; and if $\RePart s=1/2$ with nonzero imaginary part, their moduli do
+not tend to zero. Only $s=1/2$ makes every entry vanish. Thus the relative
+perturbation is compact at one isolated point and on no open set.
+
+\subsection{Regularized determinant convention}
+
+For $A\in\cS_3$,
+\[
+ \det\nolimits_3(I-A)
+ =\det\!\left((I-A)\exp(A+A^2/2)\right),
+\]
+and
+\[
+ \log\det\nolimits_3(I-A)
+ =-\sum_{r\ge3}\frac{\Tr(A^r)}r.
+\]
+This definition explains both properties in \cref{thm:det3}: the determinant
+is well defined in the shared Schatten strip, and the arithmetic trace
+powers $r=1,2$ have been subtracted by construction.
+
+\subsection{Same-source audit}
+
+\begin{center}
+\small
+\begin{tabularx}{0.96\textwidth}{L{0.25\textwidth}X}
+\toprule
+Coordinate & Frozen source \\
+\midrule
+Atoms & tensor indecomposability in finite full shifts \\
+Mass/clock & topological entropy $\log n$ \\
+Factorization degree & reduced order complex of $(F_1,F_n)$ \\
+Exterior transfer & finite subsets of the same tensor atoms \\
+Koszul differential & multiplication by those atom generators \\
+Reversal & time reversal of the corresponding two-sided full shifts \\
+Group completion & Grothendieck group of the same tensor monoid \\
+Function space & $\ell^2$ atom space and its stated graded completions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+No coordinate is imported from another symbolic candidate. The adversarial
+$1/2$-centering is explicitly denied source credit and is used only to prove
+the stronger regularization obstruction.
+
+\subsection{Non-claims}
+
+The project does not claim a new general theorem about divisor lattices,
+Koszul resolutions, exterior automata, or Smale-space homology. It does not
+claim operator continuation, a Gamma factor, a functional equation,
+Riemann--von Mangoldt zero count, completed-$\xi$ divisor, natural Weil
+compression, or self-adjoint Hilbert--P\'olya operator. No Riemann zero is
+read, fitted, or used as a diagnostic. Route B is not invoked.

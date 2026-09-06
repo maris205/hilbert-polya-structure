@@ -1,0 +1,102 @@
+\section{Introduction}
+\label{sec:introduction}
+
+An arithmetic dynamical model should do more than place a desired Euler
+factor on a diagonal.  Its recurrent language should explain why the
+primitive inventory is arithmetic and why temporal repetitions have the
+correct powers.  This demand is especially severe for the Riemann Euler
+product.  The formal target
+\[
+\prod_p(1-p^{-s})
+\]
+is easy to write once the primes have been selected.  The harder question is
+whether one symbolic system can generate the selection, the repetitions, and
+the determinant without importing a prime table.
+
+Finite full shifts offer a deliberately elementary source.  If $F_n$ is the
+full shift on $n$ symbols, then product alphabets and disjoint alphabet union
+recover multiplication and addition of cardinalities, while
+$h(F_n)=\log n$.  This skeleton is arithmetically exact and invariant under
+alphabet relabeling.  We ask whether it can drive a countable Markov grammar
+that computes primality locally and turns the accepted result into periodic
+orbits.
+
+The answer has an exact positive half.  We build a deterministic graph with
+input states $I_n$, divisor states $T_{n,d}$, quotient states $Q_{n,d,q}$,
+accepted states $A_n$, and cemetery states $R_{n,k}$.  At fixed $d$, the graph
+does not ask whether a cofactor exists.  It constructs $q=2,3,\ldots$ by
+successor and compares $F_d\boxtimes F_q$ with $F_n$.  Equality rejects;
+strict overshoot advances $d$; passing the square test accepts.  Consequently
+$A_n$ is reached exactly for prime $n$.  Positive entropy roofs make the
+weighted adjacency of the entire unpruned graph trace class for
+$\RePart s>1$.  Its only cycles are the accepted self-loops, and the standard
+trace-class determinant identity \citep{Simon1977} gives
+\[
+\Tr L_s^r=\sum_p p^{-rs},\qquad
+\det(I-zL_s)=\prod_p(1-zp^{-s}).
+\]
+This is one operator, not a coordinatewise family assembled after the fact.
+
+The negative half is just as exact.  Every operation that establishes
+primality occurs before the periodic loop is entered.  The verifier states
+form feeding trees and cemetery rays, hence occur in no closed walk.  If they
+are all deleted, every power trace and the full Fredholm determinant remains
+unchanged.  The recurrent model is then the diagonal prime-loop construction
+that the verifier was meant to improve.
+
+We prove two broader obstructions.  First, under positive nonzero formal
+weights, an exact one-primitive-per-atom ledger forces every recurrent
+strongly connected component to be a simple directed cycle: recurrent
+branching creates another primitive orbit.  Second, any total deterministic
+decider can be wrapped in time-damped configuration chains, accepted loops,
+and reject rays.  The resulting adjacency is trace class on the same
+half-plane and has the Euler product of the chosen decidable support.  The
+construction therefore works for squares, powers of two, Fibonacci numbers,
+hash predicates, and atom sets of effective factorial monoids.  It is
+\emph{algorithmically non-oracular, but dynamically selector-tautological}.
+
+Our contributions are the following.
+
+\begin{enumerate}
+\item We freeze the alphabet-sum/tensor semiring of finite full shifts with
+  categorical language kept explicit.
+\item We expand trial division into local $Q_{n,d,q}$ successor states and
+  prove that no factor-existence oracle is hidden in the graph.
+\item We define one weighted vertex-adjacency on the whole one-sided
+  countable Markov graph and prove $\Sone$-holomorphy for $\RePart s>1$.
+\item We prove the exact primitive/repetition ledger and the two-variable
+  Fredholm--Euler identity.
+\item We prove transient pruning, a scoped positive exact-ledger SCC theorem,
+  and deterministic-verifier collapse.
+\item We prove a universal total-decider compiler and its factorial-monoid
+  specialization, including the $\Fq[t]$ control.
+\item We report exact finite implementation certificates behind a strict
+  theorem/evidence firewall.
+\end{enumerate}
+
+\begin{figure}[t]
+\centering
+\input{figures/semiring_sieve_collapse}
+\caption{The full-shift semiring executes explicit quotient search on the
+same graph whose weighted adjacency is trace class.  The Euler determinant
+is exact, but periodic traces forget every computation and cemetery edge.
+The universal-decider branch shows why this is a selector compiler rather
+than a recurrent arithmetic mechanism.  No critical-zero or RH claim is
+depicted.}
+\label{fig:overview}
+\end{figure}
+
+The result remains entirely within Symbolic Dynamics.  We call $L_s$ a
+weighted vertex-adjacency, not a Ruelle operator; no thermodynamic Banach
+space is used.  We do not continue the operator across $\RePart s=1$, append
+a Gamma factor, construct a self-adjoint realization, or infer anything
+about the location of zeta zeros.
+
+\paragraph{Organization.}
+\Cref{sec:boundary} places the candidate against classical symbolic,
+computational, and determinant work.  \Cref{sec:semiring,sec:graph} freeze the
+source and verifier.  \Cref{sec:operator,sec:euler} prove trace class and the
+Euler identity.  \Cref{sec:pruning,sec:compiler} give the no-go theorems.
+\Cref{sec:finite} reports exact finite certificates, and
+\cref{sec:route,sec:conclusion} records the strict route decision and next
+in-family obligation.

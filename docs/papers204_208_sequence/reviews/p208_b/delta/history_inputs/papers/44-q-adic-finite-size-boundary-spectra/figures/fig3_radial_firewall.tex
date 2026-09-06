@@ -1,0 +1,32 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small},
+  box/.style={rounded corners,draw,thick,align=center,text width=3.35cm,
+              minimum height=1.45cm,inner sep=5pt}
+]
+  \node[box,draw=chainblue] (rem) at (0,1.25)
+    {\(\displaystyle E(N)=
+      -\sum_{v\ge1}\frac{\Delta_v}{2^v}(N\bmod2^v)\)};
+  \node[box,draw=boundaryteal] (rat) at (5.0,1.25)
+    {\(\displaystyle R_{2^v}(z)=
+      \frac{\sum_{a=0}^{2^v-1}az^a}{1-z^{2^v}}\)};
+  \node[box,draw=goldenorange,text width=3.7cm] (rad) at (10.0,1.25)
+    {\(\displaystyle \lim_{r\uparrow1}(1-r)G(r\xi)
+      =-\frac{\gamma_{v-1}}{2^{v-1}(1-\xi)}\ne0\)};
+  \node[box,draw=proofgreen] (nat) at (15.0,1.25)
+    {primitive dyadic roots are dense\\
+     \(\Longrightarrow\) unit circle is a natural boundary};
+  \draw[->,very thick] (rem)--
+    node[above,font=\scriptsize,fill=white,inner sep=1pt] {residue OGF}(rat);
+  \draw[->,very thick] (rat)--
+    node[above,font=\scriptsize,fill=white,inner sep=1pt] {radial limit}(rad);
+  \draw[->,very thick] (rad)--
+    node[above,font=\scriptsize,fill=white,inner sep=1pt] {dense set}(nat);
+
+  \node[box,draw=stopred,fill=stopred!5,text width=10.2cm,
+        minimum height=1.35cm] (forbid) at (7.5,-1.25)
+    {\textcolor{stopred}{\textbf{Type firewall.}}
+     \(N\) is a prefix cutoff, not a periodic orbit; \(G\) is neither an
+     Artin--Mazur zeta nor a Fredholm determinant; dense radial singularities
+     are not isolated meromorphic poles.};
+\end{tikzpicture}

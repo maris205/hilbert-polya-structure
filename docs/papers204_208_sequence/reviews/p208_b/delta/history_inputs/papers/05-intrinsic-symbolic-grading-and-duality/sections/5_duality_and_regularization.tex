@@ -1,0 +1,144 @@
+\section{Three duality tests}
+
+The determinant orientation in \cref{thm:exterior} does not explain why a
+completed object should relate $s$ and $1-s$. We test three constructions
+that remain attached to the same symbolic source.
+
+\subsection{Stable/unstable symbolic reversal}
+
+Let $V^s$ and $V^u$ be stable and unstable copies of the tensor-atom space,
+and let $J:V^s\to V^u$ be induced by reversal of the corresponding two-sided
+full shifts. Reversal preserves alphabet size and entropy.
+
+\begin{proposition}[Reversal preserves the spectral variable]
+\label{prop:reversal}
+The natural chain transfer is
+\[
+  \cL_s\oplus\cL_s,
+  \qquad J\cL_s=\cL_sJ.
+\]
+Its ordinary determinant is $\zeta(s)^{-2}$ and its superdeterminant is one
+in $\RePart s>1$. Replacing the unstable block by $\cL_{1-s}$ breaks the
+chain identity except at $s=1/2$.
+\end{proposition}
+
+\begin{proof}
+Both copies of $F_p$ have entropy $\log p$, so both diagonal weights are
+$p^{-s}$. Equality $J\cL_s=\cL_{1-s}J$ would require
+$p^{-s}=p^{-(1-s)}$ for every atom, which holds only at the center.
+\end{proof}
+
+There is also no ordinary Fredholm overlap: $\cL_s$ is trace class for
+$\RePart s>1$, while $\cL_{1-s}$ is trace class for $\RePart s<0$.
+Time reversal therefore supplies the familiar transpose/reversal invariance
+of a symbolic determinant, not the Riemann reflection.
+
+\subsection{Tensor group completion}
+
+The group completion of the object monoid is
+\[
+  G=M^{\mathrm{gp}}\cong\mathbb Q_{>0}^{\times}
+  \cong\bigoplus_p\mathbb Z.
+\]
+Inversion sends $q^{-s}$ to $q^s=q^{-(-s)}$.
+
+\begin{proposition}[Inversion is parity-even]
+\label{prop:inversion}
+For every monoidal grading
+$\varepsilon:G\to\mathbb Z/2\mathbb Z$,
+\[
+  \varepsilon(g^{-1})=-\varepsilon(g)=\varepsilon(g).
+\]
+Thus group inversion cannot flip determinant parity and naturally implements
+$s\mapsto-s$, not $s\mapsto1-s$.
+\end{proposition}
+
+Centering $u=s-1/2$ rewrites
+\[
+ p^{-s}=p^{-1/2}p^{-u},
+ \qquad
+ p^{-(1-s)}=p^{-1/2}p^u.
+\]
+The shared factor $p^{-1/2}$ is a half-density character. Entropy permits
+one to write it, but the bare tensor skeleton contains no principle that
+selects the coefficient $1/2$. Choosing it because the target functional
+equation has that center would be circular.
+
+\subsection{Adversarial Schatten regularization}
+
+We now grant the missing half-density pairing and ask whether regularized
+determinants could rescue the critical strip. This is an obstruction test,
+not a promoted candidate.
+
+\begin{theorem}[First shared Schatten strip]
+\label{thm:schatten}
+For $q\ge1$,
+\[
+ \cL_s\in\cS_q\iff q\RePart s>1,
+ \qquad
+ \cL_{1-s}\in\cS_q\iff q(1-\RePart s)>1.
+\]
+There is no common $\cS_1$ or $\cS_2$ domain. The first integer order with
+an overlap is $q=3$, on
+\[
+ \frac13<\RePart s<\frac23.
+\]
+\end{theorem}
+
+\begin{proof}
+The $q$-th singular-value sum is $\sum_p p^{-q\RePart s}$. It converges
+exactly when $q\RePart s>1$. Applying the same calculation to $1-s$ gives
+the second condition. The common interval is
+$1/q<\RePart s<1-1/q$, which is nonempty first for $q=3$.
+\end{proof}
+
+\begin{theorem}[Regularized critical-strip obstruction]
+\label{thm:det3}
+On $1/3<\RePart s<2/3$, define
+\[
+ D_3(s)
+ =\det\nolimits_3(I-\cL_s)
+  \det\nolimits_3(I-\cL_{1-s}).
+\]
+Then $D_3(s)=D_3(1-s)$, but $D_3$ is zero-free throughout this strip and
+\[
+ \log D_3(s)
+ =-\sum_{r\ge3}\frac1r
+  \sum_p\left(p^{-rs}+p^{-r(1-s)}\right).
+\]
+\end{theorem}
+
+\begin{proof}
+The regularized determinant identity starts at trace power $r=3$.
+Both diagonal blocks have spectral radius less than one in the open strip,
+so none of their regularized factors vanishes. Reflection swaps the two
+factors.
+\end{proof}
+
+The symmetry is exact but sterile. It has removed the $r=1$ prime trace and
+the $r=2$ prime-square trace. Restoring them requires counterterms with no
+common nuclear definition near the critical line. The first regularization
+that enters the desired region therefore loses the arithmetic divisor it was
+meant to complete.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{0.98\textwidth}{L{0.20\textwidth}L{0.20\textwidth}X}
+\toprule
+Construction & Natural involution & Decisive outcome \\
+\midrule
+Stable/unstable reversal & $s\mapsto s$ &
+Same entropy block; superdeterminant cancels \\
+Group completion & $s\mapsto-s$ &
+Inversion parity-even; no selected center \\
+Forced Fredholm pair & $s\mapsto1-s$ &
+Trace-class domains are disjoint \\
+Paired $\det_3$ & $s\mapsto1-s$ &
+Shared strip, but zero-free and omits $r=1,2$ \\
+\bottomrule
+\end{tabularx}
+\caption{Natural and adversarial dualities remain distinct. Only the last
+two display the target reflection, and both fail the analytic ledger gate.}
+\label{tab:duality}
+\end{table}

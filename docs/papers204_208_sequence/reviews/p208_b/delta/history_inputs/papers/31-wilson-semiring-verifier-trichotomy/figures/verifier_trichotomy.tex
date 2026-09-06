@@ -1,0 +1,49 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=6mm and 8mm,
+  every node/.style={font=\small,align=center},
+  root/.style={draw=formalblue,very thick,rounded corners,fill=formalblue!7,
+    text width=50mm,minimum height=12mm},
+  lane/.style={draw=charcoal,rounded corners,fill=softgray,
+    text width=39mm,minimum height=16mm},
+  stop/.style={draw=stopred,very thick,rounded corners,fill=stopred!7,
+    text width=50mm,minimum height=11mm,font=\scriptsize},
+  repair/.style={draw=warningamber,very thick,rounded corners,fill=warningamber!7,
+    text width=35mm,minimum height=13mm},
+  arr/.style={-{Latex[length=2.2mm]},very thick},
+  changedarr/.style={-{Latex[length=2.2mm]},very thick,dashed,warningamber},
+]
+\node[root] (root) {source-natural\\Wilson recurrence\\
+  terminal congruence closes accepted block};
+\node[lane,below left=11mm and 8mm of root] (clone) {matched semiring\\clone\\
+  exact path/cycle/roof copy\\
+  \textbf{no presentation selectivity}};
+\node[lane,below=11mm of root] (trans) {trace-class transient\\verifier\\
+  acyclic DAG power traces vanish\\
+  \textbf{prunes to prime diagonal}};
+\node[lane,below right=11mm and 8mm of root] (rec) {recurrent exact-clock\\verifier\\
+  $\ell(p)=p-1$, $T_p=\log p$\\
+  \textbf{whole operator noncompact}};
+\node[repair,below=8mm of rec] (ret) {first return\\honest determinant\\
+  changed marker $z^{p-1}\mapsto z$};
+\node[stop,below=18mm of trans] (decision) {\texttt{ROUTE\_A\_REJECTED}\\
+  \texttt{CLOSE\_TERMINAL\_}\\
+  \texttt{SEMIRING\_VERIFIER\_BRANCH}};
+
+\draw[arr,deepgreen] (root) -- (clone);
+\draw[arr,formalblue] (root) -- (trans);
+\draw[arr,stopred] (root) -- (rec);
+\draw[changedarr] (rec) -- node[right]{changed object} (ret);
+\draw[arr,stopred] (clone) -- (decision);
+\draw[arr,stopred] (trans) -- (decision);
+\draw[arr,stopred] (rec) |- (decision);
+\draw[arr,stopred] (ret) -| (decision);
+\end{tikzpicture}
+\caption{Ownership trichotomy for a terminal semiring verifier.  Transported
+addition restores a matched clone; transient computation disappears from the
+periodic ledger; recurrent computation retains graph time but dilutes the
+entropy clock and destroys compactness.  First return repairs trace class only
+on a changed time object.}
+\label{fig:verifier-trichotomy}
+\end{figure}

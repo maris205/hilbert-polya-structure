@@ -1,0 +1,152 @@
+\section{A renewal family with unbounded component count}
+\label{sec:renewal}
+
+The antichain criterion has content for arbitrarily large finite
+decompositions.  Fix $s\geq1$ and set
+\begin{equation}
+  m=2s+1.
+  \label{eq:m-def}
+\end{equation}
+Let $R_s$ be the directed graph formed from a simple $m$-cycle and a simple
+$(m+1)$-cycle that share exactly one vertex $v$.  Apart from $v$, their
+vertices and edges are disjoint.  Let $M_s$ be the edge shift of $R_s$.
+
+\begin{proposition}[Mixing and Perron equation]
+\label{prop:perron}
+The graph $R_s$ is primitive, $M_s$ is a positive-entropy mixing SFT, and its
+Perron root $\lambda_s$ is the unique solution above one of
+\begin{equation}
+  \lambda_s^{-m}+\lambda_s^{-(m+1)}=1.
+  \label{eq:perron-equation}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Every vertex reaches $v$, and $v$ reaches every vertex, so $R_s$ is strongly
+connected.  It contains cycles of consecutive lengths $m$ and $m+1$; their
+gcd is one.  Hence the adjacency matrix is primitive and the edge shift is
+mixing.
+
+Let $r$ be a positive right Perron eigenvector and normalize $r_v=1$.  Along
+a deterministic return branch of length $\ell$, the eigenvector equations
+give value $\lambda_s^{-(\ell-1)}$ at the vertex immediately after $v$.  The
+equation at $v$ is therefore
+\[
+ \lambda_s
+ =\lambda_s^{-(m-1)}+\lambda_s^{-m},
+\]
+which is \eqref{eq:perron-equation}.  Its right side is continuous and
+strictly decreasing from $2$ at $\lambda=1$ to zero as
+$\lambda\to\infty$.  There is a unique solution above one, so
+$\ent(M_s)=\log\lambda_s>0$.
+\end{proof}
+
+The fixed-period support has a particularly simple description.
+
+\begin{proposition}[Exact fixed support]
+\label{prop:renewal-support}
+For every $n\geq1$,
+\begin{equation}
+ \Fix_{M_s}(\sigma^n)\ne\varnothing
+ \quad\Longleftrightarrow\quad
+ n\in\langle m,m+1\rangle
+ :=\{am+b(m+1):a,b\in\N\}.
+ \label{eq:renewal-support}
+\end{equation}
+Writing $n=qm+r$ with $0\leq r<m$ gives the equivalent membership test
+\begin{equation}
+  n\in\langle m,m+1\rangle
+  \quad\Longleftrightarrow\quad q\geq r.
+  \label{eq:qr-membership}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Every positive-length closed walk in $R_s$ meets $v$.  Indeed, a walk that
+starts inside either branch follows its deterministic edges to $v$ before it
+can close.  Rotate a closed walk to begin at a visit to $v$.  Between
+successive visits it traverses exactly one of the two return loops, so its
+length has the form $am+b(m+1)$.  Conversely, every concatenation of those
+return loops is a closed walk.  A length-$n$ closed walk exists precisely when
+the edge shift has a point fixed by $\sigma^n$, which proves
+\eqref{eq:renewal-support}.
+
+If $q\geq r$, then
+\[
+ n=(q-r)m+r(m+1),
+\]
+so $n$ belongs to the semigroup.  Conversely, suppose
+$n=am+b(m+1)$ and write $b=tm+r$ with $0\leq r<m$.  Then
+\[
+ n=(a+b+t)m+r.
+\]
+Uniqueness of Euclidean division gives $q=a+b+t\geq b\geq r$.  This proves
+\eqref{eq:qr-membership}.
+\end{proof}
+
+\begin{corollary}[Hole formulas]
+\label{cor:hole-formulas}
+The period-hole set of $M_s$ is
+\begin{equation}
+ H(M_s)=\{qm+r:q\in\N,\ 0\leq r<m,\ q<r\},
+ \label{eq:renewal-holes}
+\end{equation}
+where only positive integers are retained.  Moreover,
+\begin{equation}
+ \max H(M_s)=m^2-m-1,
+ \qquad
+ |H(M_s)|=\frac{m(m-1)}2,
+ \label{eq:hole-count}
+\end{equation}
+and every integer at least $m^2-m$ is realized as a fixed period.
+\end{corollary}
+
+\begin{proof}
+Equation \eqref{eq:renewal-holes} is the negation of
+\eqref{eq:qr-membership}.  For each remainder $r\in\{1,\ldots,m-1\}$, the
+holes have $q=0,\ldots,r-1$.  Summing their counts gives
+\[
+ \sum_{r=1}^{m-1}r=\frac{m(m-1)}2.
+\]
+The largest hole occurs at $r=m-1$ and $q=m-2$, with value
+$(m-2)m+(m-1)=m^2-m-1$.  The next integer is therefore the conductor.
+\end{proof}
+
+We now choose a large antichain from the initial holes.
+
+\begin{theorem}[Exactly $s+1$ clopen components]
+\label{thm:many-components}
+Let
+\begin{equation}
+ P_s=\{s+1,s+2,\ldots,2s\}.
+ \label{eq:Ps}
+\end{equation}
+Then $P_s$ is an $s$-element divisibility antichain in $H(M_s)$, and
+\begin{equation}
+ X_s=M_s\sqcup\bigsqcup_{p=s+1}^{2s}O_p
+ \label{eq:Xs}
+\end{equation}
+is a Myhill SFT with exactly $s+1$ clopen irreducible components.
+\end{theorem}
+
+\begin{proof}
+Every $p\in P_s$ satisfies $p<m=2s+1$, so it is a hole by
+\eqref{eq:renewal-holes}.  If $p<q$ lie in $P_s$ and $p\mid q$, then
+\[
+ q\geq2p\geq2s+2,
+\]
+contrary to $q\leq2s$.  Hence $P_s$ is an antichain.  The
+period-hole criterion, \cref{thm:antichain}, makes $X_s$ Myhill.
+
+On disjoint edge alphabets, $X_s$ is the edge shift of the block-diagonal
+graph with one block $R_s$ and one $p$-cycle block for each $p\in P_s$.
+These blocks are exactly its clopen irreducible components.  There is one
+mixing block and $s$ cycle blocks, for a total of $s+1$.
+\end{proof}
+
+\begin{remark}
+The symbolic proof covers every $s\geq1$.  Finite trace computations in
+\cref{sec:controls} are consistency checks, not the source of the
+arbitrary-parameter conclusion.
+\end{remark}
+

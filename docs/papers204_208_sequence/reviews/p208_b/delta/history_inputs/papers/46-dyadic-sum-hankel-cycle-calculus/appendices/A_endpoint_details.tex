@@ -1,0 +1,100 @@
+\section{Endpoint estimates and the trace-dual matching}
+\label{app:endpoints}
+
+This appendix records the quantitative bounds used in
+\cref{sec:bounded,sec:ideals}.  They are included to make the endpoint
+strictness independent of any finite-cutoff trend.
+
+\subsection{Anti-diagonal levels}
+
+For $N\ge2$ and $\alpha>0$, put
+\[
+  S_\alpha(N)=\sum_{m=1}^{N-1}[m(N-m)]^{-\alpha}.
+\]
+By symmetry,
+\[
+  S_\alpha(N)
+  =2\sum_{1\le m<N/2}[m(N-m)]^{-\alpha}
+   +\one_{\{N\ {\rm even}\}}(N^2/4)^{-\alpha}.
+\]
+On $m\le N/2$,
+\[
+  N^{-\alpha}m^{-\alpha}
+  \le [m(N-m)]^{-\alpha}
+  \le 2^\alpha N^{-\alpha}m^{-\alpha}.
+\]
+For $0<\alpha<1$, the integral comparison
+\[
+  c_\alpha M^{1-\alpha}
+  \le\sum_{m\le M}m^{-\alpha}
+  \le C_\alpha M^{1-\alpha}
+\]
+therefore gives
+\[
+  c_\alpha N^{1-2\alpha}
+  \le S_\alpha(N)
+  \le C_\alpha N^{1-2\alpha}.
+\]
+At $\alpha=1$, summing the partial-fraction identity in
+\cref{lem:level-estimates} gives
+$S_1(N)=2H_{N-1}/N$.  For $\alpha>1$, the same half-interval estimate and
+$\sum_{m\ge1}m^{-\alpha}<\infty$ give
+$S_\alpha(N)\le C_\alpha N^{-\alpha}$.
+
+At the Hilbert--Schmidt boundary $\sigma=1/2$, one can see divergence
+without invoking the full comparison.  For
+$N/4\le m\le3N/4$, both factors are at most $3N/4$, so each of the
+$\gg N$ central summands in \cref{eq:hs-levels} is $\gg N^{-1}$.
+Every dyadic level therefore has mass bounded below by a positive constant.
+
+\subsection{Compactness from row decay}
+
+The row-decay estimate in \cref{eq:row-decay} gives both
+$\sup_mR_m<\infty$ and $R_m\to0$.  The second assertion alone does not
+immediately make an arbitrary bounded matrix compact, so we record the
+finite-row tail step.  For fixed $M$, absolute summability of each of the
+rows $1,\ldots,M$ permits one common $N$ for their tails.  Rows above $M$
+are controlled in their entirety by $R_m$.  Thus the modulus of
+$H_s-P_NH_sP_N$ has uniformly small row and column sums.  This is the
+precise norm-approximation argument used in \cref{thm:bounded}.
+
+\subsection{Disjoint matching details}
+
+For $Q_j=4^j$, the sets in \cref{eq:matching-sets} satisfy
+\[
+ I_j\subset[Q_j/4,Q_j/3],
+ \qquad
+ J_j\subset[2Q_j/3,3Q_j/4].
+\]
+They are disjoint within a scale.  Their union lies below $3Q_j/4$, whereas
+the next interval $I_{j+1}$ begins at $Q_{j+1}/4=Q_j$; consequently all
+domains and ranges used by the matchings are pairwise disjoint across
+scales.
+
+If $m\in I_j$ and $n\in J_j$, then
+$11Q_j/12\le m+n\le13Q_j/12$.  The only power of two in that interval is
+$Q_j$, so the selected support entry is present exactly when
+$n=Q_j-m$.  Define the matrix of $V_J$ on these entries by
+\[
+  (V_J)_{m,Q_j-m}
+  =\frac{h_s(m,Q_j-m)}{\abs{h_s(m,Q_j-m)}}.
+\]
+Disjointness makes $V_J$ a partial isometry of norm one.  With the matrix
+convention $T_{m,n}=\ip{Te_n}{e_m}$,
+\[
+  \Tr(V_J^*H_s)
+  =\sum_{j\le J}\sum_{m\in I_j}
+    \overline{(V_J)_{m,Q_j-m}}\,h_s(m,Q_j-m),
+\]
+which is the positive sum in \cref{eq:trace-dual-pairing}.  Moreover,
+$\abs{I_j}\asymp Q_j$ and
+$m,Q_j-m\asymp Q_j$ uniformly on $I_j$, so
+\[
+  \sum_{m\in I_j}[m(Q_j-m)]^{-\sigma/2}
+  \asymp_\sigma Q_j^{1-\sigma}.
+\]
+For $\sigma=1$ each scale contributes a positive constant; for
+$\sigma<1$ its contribution grows.  Trace duality would require all finite
+partial sums to be at most $\norm{H_s}_1$, completing the endpoint
+contradiction without estimating finite-cutoff trace norms.
+

@@ -1,0 +1,310 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage{microtype}
+\microtypesetup{expansion=false}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdfauthor={},pdftitle={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\F}{\mathbb F}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\E}{\mathsf E}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\rank}{\operatorname{rank}}
+
+\title[Random Translation Intersections]{Random Translation Intersections on Binary Vector Spaces:\
+Sharp Span Clocks and Stabilizer-Weighted Fibres}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Let $V=\F_2^d$ and repeatedly replace a subset $A\subseteq V$ by
+$A\cap(A+v)$, where $v$ is sampled uniformly from $V$.  A length-$t$
+history acts exactly as intersection by every translate in the span of its
+sampled vectors.  We use this sufficient statistic to give the complete rank
+law and a sharp worst-non-full-source emptying clock, witnessed by $V\setminus
+\{0\}$.  For every target $B$, every time, and every source size, we then
+enumerate source--history pairs by a polynomial determined by the translation
+stabilizer of $B$.  Its one-step boundary separates targets with trivial
+stabilizer and recovers the stabilizer dimension once the phase dimension and
+target size are known.  The forward erosion algebra and finite-field rank law
+are classical inputs; the contribution assessed here is the exact conjunction
+with the target-dependent inverse atlas.  All release claims remain under
+\texttt{HOLD\_EXTERNAL}.
+\end{abstract}
+
+\maketitle
+
+\section{Process and theorem}
+
+Write $A+v=\{a+v:a\in A\}$.  Starting from $A_0\in\cP(V)$, sample independent
+uniform vectors $v_1,v_2,\ldots$ and set
+\begin{equation}\label{eq:update}
+ A_i=A_{i-1}\cap(A_{i-1}+v_i).
+\end{equation}
+For a subspace $H\leq V$, define
+\[
+ \E_H(A)=\bigcap_{h\in H}(A+h),
+ \qquad H_t=\langle v_1,\ldots,v_t\rangle.
+\]
+Let
+\begin{equation}\label{eq:S}
+ S(t,r)=\prod_{i=0}^{r-1}(2^t-2^i),
+\end{equation}
+with the empty product equal to one, and put $S(t,r)=0$ for $r>t$.  We write
+$\genfrac{[}{]}{0pt}{}{m}{r}_2$ for the Gaussian binomial coefficient.
+
+For a target $B\subseteq V$, set $b=|B|$ and
+\[
+ \Stab(B)=\{v\in V:B+v=B\},\qquad s=\dim\Stab(B).
+\]
+The joint source-size/history polynomial is
+\begin{equation}\label{eq:Fdef}
+ F_t(B;z)=\sum_{A\subseteq V}\ \sum_{(v_1,\ldots,v_t)\in V^t}
+ \mathbf 1\{A_t=B\}z^{|A|}.
+\end{equation}
+
+\begin{theorem}[Span clock and every-target inverse atlas]\label{thm:main}
+For every $d,t\geq0$ the following statements hold.
+\begin{enumerate}
+\item Every history satisfies the pointwise identity
+\begin{equation}\label{eq:span}
+ A_t=\E_{H_t}(A_0).
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:rank}
+ \Pr(\dim H_t=r)=
+ \genfrac{[}{]}{0pt}{}{d}{r}_2\frac{S(t,r)}{2^{dt}}.
+\end{equation}
+\item The only states fixed by every possible sampled update are $\varnothing$
+and $V$.  Let $\sigma=\min\{t:H_t=V\}$.  Every $A_0\neq V$ is empty by
+time $\sigma$, and this bound is attained by $A_\star=V\setminus\{0\}$.
+Thus the sharp worst-source emptying distribution is
+\begin{equation}\label{eq:cdf}
+ \Pr(\sigma\leq t)=
+ \begin{cases}
+ 0,&t<d,\\[2pt]
+ \displaystyle\prod_{i=0}^{d-1}(1-2^{i-t}),&t\geq d,
+ \end{cases}
+\end{equation}
+and
+\begin{equation}\label{eq:mean}
+ \mathbb E\sigma=\sum_{r=0}^{d-1}\frac{1}{1-2^{r-d}}.
+\end{equation}
+\item For every target $B$ and indeterminate $z$,
+\begin{equation}\label{eq:fibre}
+ F_t(B;z)=z^b\sum_{r=0}^{s}
+ \genfrac{[}{]}{0pt}{}{s}{r}_2 S(t,r)
+ \left((1+z)^{2^r}-z^{2^r}\right)^{2^{d-r}-b/2^r}.
+\end{equation}
+For $r\leq s$, the exponent is a nonnegative integer.  Formula
+\eqref{eq:fibre} includes $t=0$, $d=0$, and the empty and full targets.
+At one step its unweighted specialization is the boundary-safe formula
+\begin{equation}\label{eq:one-step}
+ F_1(B;1)=
+ \begin{cases}
+ 1,&s=0,\\[2pt]
+ 1+(2^s-1)3^{2^{d-1}-b/2},&s\geq1.
+ \end{cases}
+\end{equation}
+\item The phase cardinality $|\cP(V)|=2^{2^d}$ determines $d$.  At fixed
+$(d,b)$, the value in \eqref{eq:one-step} is strictly increasing over the
+feasible values of $s$, with value one occurring exactly at $s=0$.
+Consequently phase size, target size, and one-step inverse mass recover the
+target stabilizer dimension.
+\end{enumerate}
+\end{theorem}
+
+The clock in part~(2) is a sharp universal bound, not an assertion that every
+non-full source empties exactly at $\sigma$.  This distinction is important:
+individual sources may disappear earlier.
+
+\section{History spans and the sharp clock}
+
+The algebra of erosions by translates is standard in mathematical morphology
+\citep{heijmans_ronse_1990,heijmans_serra_1992}; stochastic morphological
+sampling is also established background \citep{sivakumar_goutsias_1996}.
+We record the short reduction needed for this particular process.
+
+\begin{lemma}\label{lem:semigroup}
+For subspaces $H,K\leq V$,
+$\E_K(\E_H(A))=\E_{H+K}(A)$.
+\end{lemma}
+
+\begin{proof}
+Distributing intersections over translation gives
+\[
+ \E_K(\E_H(A))
+ =\bigcap_{k\in K}\bigcap_{h\in H}(A+h+k)
+ =\bigcap_{u\in H+K}(A+u).
+\]
+Repeated factors do not affect an intersection.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(1)]
+Because $\langle v\rangle=\{0,v\}$ in characteristic two, one update is
+$\E_{\langle v\rangle}$.  Lemma~\ref{lem:semigroup} iterated over the history
+proves \eqref{eq:span}.
+
+For a fixed $r$-subspace $H$, histories spanning $H$ are surjective linear
+maps $\F_2^t\to H$.  Choosing the images dually as an ordered independent
+$r$-tuple in $\F_2^t$ gives \eqref{eq:S}.  There are
+$\genfrac{[}{]}{0pt}{}{d}{r}_2$ choices of $H$, which proves
+\eqref{eq:rank}.  This finite-field rank enumeration is classical; we do not
+claim it as a standalone increment \citep{balakin_1968}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(2)]
+If $A$ is fixed by every update, then $A\subseteq A+v$ for every $v$.
+Cardinalities force equality, so $A$ is invariant under all translations and
+hence is either $\varnothing$ or $V$.
+
+When $H_t=V$, the set $\E_V(A)$ is $V$ for $A=V$ and is empty otherwise.
+Sharpness follows from the stronger identity
+\begin{equation}\label{eq:witness}
+ \E_H(V\setminus\{0\})=V\setminus H:
+\end{equation}
+$x$ survives exactly when $x+h\neq0$ for every $h\in H$, equivalently when
+$x\notin H$.  Therefore the witness empties exactly at full span.
+
+Equation \eqref{eq:cdf} is the full-rank probability in \eqref{eq:rank}.
+At rank $r<d$, a fresh uniform vector increases the rank with probability
+$1-2^{r-d}$.  The independent geometric waiting times for the successive
+rank increments have means $(1-2^{r-d})^{-1}$, proving \eqref{eq:mean}.
+\end{proof}
+
+\section{Stabilizer-weighted inverse fibres}
+
+The inverse enumeration uses information absent from the rank marginal: the
+specific target controls which history spans are possible.
+
+\begin{lemma}[Fixed-span fibre]\label{lem:fixed}
+Let $H\leq V$ have dimension $r$.  There exists a source $A$ with
+$\E_H(A)=B$ if and only if $H\leq\Stab(B)$.  In that case the source-size
+polynomial is
+\begin{equation}\label{eq:fixed}
+ \sum_{A:\,\E_H(A)=B}z^{|A|}
+ =z^b\left((1+z)^{2^r}-z^{2^r}\right)^{2^{d-r}-b/2^r}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The set $\E_H(A)$ is the union of precisely those $H$-cosets wholly contained
+in $A$.  Hence it is $H$-invariant, proving necessity.  Conversely, if
+$H\leq\Stab(B)$, then $B$ is a union of $b/2^r$ full $H$-cosets.  A source
+with erosion $B$ must contain all of them.  On each of the remaining
+$2^{d-r}-b/2^r$ cosets it may choose any proper subset, independently.  One
+coset contributes $(1+z)^{2^r}-z^{2^r}$, which proves \eqref{eq:fixed}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(3)]
+For a rank-$r$ history, Lemma~\ref{lem:fixed} permits exactly the subspaces
+$H\leq\Stab(B)$.  Their number is
+$\genfrac{[}{]}{0pt}{}{s}{r}_2$, and each is generated by $S(t,r)$ ordered
+histories.  Summing \eqref{eq:fixed} proves \eqref{eq:fibre}.
+
+When $t=0$, only $r=0$ remains and the expression reduces to $z^b$, as it
+must.  If $B=V$, the only source is $V$ and the rank sum gives
+$F_t(V;z)=2^{dt}z^{2^d}$.  The empty target and $d=0$ require no exceptional
+convention beyond empty products.
+
+At $t=1$, the zero history has rank zero and contributes one at $z=1$.
+Every nonzero vector of $\Stab(B)$ spans a rank-one subspace, and each outside
+two-point coset has three proper subsets.  There are $2^s-1$ such histories.
+If $s\geq1$, then $B$ is a union of two-point orbits, so $b$ is even and the
+second line of \eqref{eq:one-step} follows.  If $s=0$, there is no nonzero
+stabilizing history and the value is one.  Keeping this branch separate is
+essential for odd $b$, where the other displayed exponent would not be an
+integer.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(4)]
+The map $d\mapsto2^{2^d}$ is injective.  At fixed $(d,b)$ the power of three
+in the second line of \eqref{eq:one-step} is constant, while $2^s-1$ is
+strictly increasing.  Its positive contribution also separates every
+$s\geq1$ from the value one at $s=0$.
+\end{proof}
+
+The polynomial contains more than unweighted fibre sizes: its coefficient of
+$z^k$ counts all length-$t$ histories and $k$-point sources reaching the
+prescribed target.  Thus target shape enters through $\Stab(B)$ even when
+target cardinality is held fixed.
+
+\section{Source subtraction, controls, and scope}
+
+The update's erosion interpretation and composition algebra receive zero
+contribution credit \citep{heijmans_ronse_1990,heijmans_serra_1992}; so do
+the generic stochastic-morphology setting \citep{sivakumar_goutsias_1996}
+and the finite-field rank distribution \citep{balakin_1968}.  The bounded
+source audit found no primary source for the exact conjunction of the sharp
+witness \eqref{eq:witness}, the arbitrary-target polynomial
+\eqref{eq:fibre}, and the recovery law \eqref{eq:one-step}.  This non-hit is
+not a novelty, priority, or freedom-to-publish claim.  Internally, the closest
+comparators use deterministic linear-subspace descent or random graph-cut
+signatures; neither transfers the affine-coset proper-subset fibre proof.
+
+A paper-local, standard-library verifier applies every literal update and
+independently evaluates the span erosion over finite exhaustive boxes.  It
+compares every target and source-size coefficient with \eqref{eq:fibre},
+checks the rank census and full-rank boundary, tests the witness over all
+subspaces through dimension six, and exercises $d=0$, $t=0$, empty/full
+targets, odd-cardinality trivial stabilizers, and the repaired one-step
+branch.  The frozen assertion total and transcript digest are recorded in
+the accompanying canonical file and build record.  The run executes
+$1{,}712{,}974$ integer assertions; two fresh replays were byte-identical.
+The canonical transcript has SHA-256 (the following two lines concatenate):
+\begin{center}
+\small\texttt{c31ec0a098bab52241eb2765bd6fef06}\\[-2pt]
+\small\texttt{69fdacdb4486ca69bea9dfc56fbab62b}.
+\end{center}
+Enumeration supplies counterexample pressure only; the all-parameter
+conclusions rest on the proofs above.
+
+\section*{Limitations}
+The process uses independent uniform translations of a binary vector space
+and begins from an arbitrary labelled subset.  We do not treat biased or
+dependent histories, non-elementary finite groups, noisy observations,
+unlabelled targets, or asymptotic distributional limits.  The source search
+was bounded, so a direct owner under different terminology would reopen the
+claim boundary.
+
+\section*{Data Availability}
+No external data were used.  The deterministic verifier and its canonical
+transcript provide the complete paper-local exact control.
+
+\section*{Ethics Statement}
+This mathematical study involved no human participants, animals, personal
+data, or field intervention.
+
+\section*{Author Contributions}
+The anonymous author performed the derivation, proof, exact checks,
+source-boundary audit, and manuscript preparation.
+
+\section*{Conflict of Interest}
+The author declares no conflict of interest.
+
+\section*{Funding}
+No external funding is declared.
+
+\section*{External Status}
+This anonymous internal artifact remains \texttt{HOLD\_EXTERNAL}.  It is not
+cleared for posting, submission, circulation, or author contact.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

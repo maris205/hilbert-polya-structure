@@ -1,0 +1,76 @@
+\section{Quantitative periodic completion}\label{sec:completion}
+
+The same finite graph lemma performs both closures.
+
+\begin{lemma}[Balanced closure]\label{lem:balanced}
+Let $D=(V,E_D)$ be a finite directed graph with
+$\indeg(v)=\outdeg(v)$ for every $v\in V$.  Then every weakly connected component of $D$ is strongly connected.  Moreover, if a directed path begins at $s$ and ends at $t$ inside a component with $n$ vertices and $t$ has positive outdegree, there is a positive-length directed path from $t$ back to $s$ of length at most $n$.
+\end{lemma}
+
+\begin{proof}
+Contract the strongly connected components.  The result is an acyclic digraph.  If a source component $C$ had an outgoing edge, summing
+$\outdeg(v)-\indeg(v)=0$ over $v\in C$ would give strictly more edges leaving $C$ than entering it, a contradiction.  Thus every source is isolated in the condensation graph.  Removing it and repeating shows that the condensation has no edges, hence weak components are strongly connected.
+
+For $t\neq s$, a shortest path from $t$ to $s$ is simple and has at most $n-1$ edges.  For $t=s$, positive outdegree and strong connectivity give a positive closed walk through $s$.  Choose a shortest one.  Removing any repeated segment away from the endpoints makes it a directed cycle of length at most $n$.  In our two applications every vertex has positive in- and outdegree.
+\end{proof}
+
+\begin{theorem}[Fixed-presentation completion]\label{thm:completion}
+Let $X_\Pi$ satisfy the hypotheses of \cref{sec:presentation}, and let
+$p$ be a globally valid pattern on a $W\times H$ rectangle, where
+$W,H\geq1$.  Then $p$ occurs in an $(m,T)$-periodic point $z\in X_\Pi$ with
+\begin{align}
+ m&\leq W+2R(H-1)+a-1,\label{eq:m-bound}\\
+ T&\leq H+a^m.\label{eq:T-bound}
+\end{align}
+More precisely, the construction gives $T\leq H+\card{Y_m}-1$.
+\end{theorem}
+
+\begin{proof}
+Choose $x\in X_\Pi$ containing $p$, translate vertically so that the rectangle occupies rows $0,\ldots,H-1$, and translate horizontally as follows.  Put
+\[
+ L=W+2R(H-1),
+ \qquad
+ J_t=[Rt,L-1-Rt]\cap\ZZ \quad(0\leq t<H).
+\]
+Thus $\card{J_t}=W+2R(H-1-t)$ and
+\begin{equation}\label{eq:cone-inclusion}
+ J_{t+1}+N^+\subseteq J_t.
+\end{equation}
+We may place the prescribed width-$W$ interval at
+$[R(H-1),R(H-1)+W-1]$, which lies in every $J_t$.  The word
+$u=\restr{x^{(0)}}{J_0}$ has length $L$ and is a directed path in $G$.
+
+The trace graph is balanced, so \cref{lem:balanced} gives a positive return path from the last symbol of $u$ to its first symbol of length
+$q\leq a$.  Append the $q-1$ internal symbols of this return path to $u$ and repeat the resulting cyclic word.  This defines a row
+$r_0\in Y_m$ with
+\begin{equation}\label{eq:horizontal-period}
+ m=L+q-1\leq L+a-1
+\end{equation}
+that agrees with $x^{(0)}$ on $J_0$.  Requiring a positive return path is useful when the two endpoints coincide: it keeps $m\geq L$, so the protected cone does not identify its two ends on the cylinder.
+
+We next construct rows $r_1,\ldots,r_{H-1}\in Y_m$.  Suppose
+$r_t$ agrees with $x^{(t)}$ on $J_t$.  At every $i\in J_{t+1}$ choose
+the output $x_{i,t+1}$.  This is allowed because of
+\eqref{eq:cone-inclusion} and the agreement on $J_t$.  At the remaining coordinates of $\ZZ/m\ZZ$, choose any symbol from the corresponding value of $F^+$.  The choices are coordinatewise independent, and the NCA closure hypothesis puts the resulting periodic row $r_{t+1}$ in $Y_m$.  It agrees with $x^{(t+1)}$ on $J_{t+1}$.  Induction reconstructs the entire prescribed rectangle and gives a path
+\begin{equation}\label{eq:row-path}
+ r_0\longrightarrow r_1\longrightarrow\cdots\longrightarrow r_{H-1}
+\end{equation}
+in $D_m$.
+
+By \eqref{eq:row-degrees}, $D_m$ is balanced.  Apply
+\cref{lem:balanced} to \eqref{eq:row-path}.  There is a positive return path
+\[
+ r_{H-1}=s_0\longrightarrow s_1\longrightarrow\cdots
+ \longrightarrow s_d=r_0,
+ \qquad 1\leq d\leq\card{Y_m}.
+\]
+Repeat vertically the row word
+$(r_0,\ldots,r_{H-1},s_1,\ldots,s_{d-1})$.  It has period
+\[
+ T=H+d-1\leq H+\card{Y_m}-1\leq H+a^m-1,
+\]
+and every consecutive pair, including the wraparound pair, is an edge of
+$D_m$.  Hence it defines a point of $X_\Pi$, contains $p$, and satisfies the advertised slightly looser bound \eqref{eq:T-bound}.
+\end{proof}
+
+Two details carry real load.  First, the cone has width $L$ because only the forward rule reconstructs the rectangle; the reverse rule is used later to balance $D_m$.  Second, the vertical graph is built from whole $m$-periodic rows, not from individual symbols.  Replacing it by the alphabet graph would lose the compatibility of the $H$ reconstructed rows.

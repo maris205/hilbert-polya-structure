@@ -1,0 +1,165 @@
+\section{Canonical deeper transient chains}
+\label{sec:deep}
+
+We now iterate the one-level mechanism in one specific way.  Fix $L\geq1$
+and add transient states $r_0,\ldots,r_{L-1}$.  The only transient edges are
+\[
+ r_0\longrightarrow r_1\longrightarrow\cdots\longrightarrow r_{L-1}
+ \longrightarrow\bigcup_{s=0}^{p-1}V_s.
+\]
+An arrow to a single transient state forces all $d$ children to carry that
+state.  The final state $r_{L-1}$ sees every core label, and the core has no
+edge back to the chain.  We call this the \emph{canonical unrestricted
+$L$-level forced chain}.  Starting at $r_0$, level $L$ consists of
+\[
+ N=d^L
+\]
+ordered core roots whose phases may be selected independently.
+
+For $m\in\Comp_p(d^L)$, define
+\begin{equation}
+ D_L(m;c)=\min_j\frac1{d^L}\sum_{s=0}^{p-1}m_sH_{s+j}(c),
+ \qquad
+ D_L^*(c)=\max_{m\in\Comp_p(d^L)}D_L(m;c).
+ \label{eq:DL-definition}
+\end{equation}
+
+\begin{theorem}[Exact forced-chain optimizer]
+\label{thm:deep-exact}
+The full Markov hom tree-shift consisting of the complete cyclic core and the
+canonical unrestricted $L$-level forced chain has Hausdorff dimension
+\begin{equation}
+ \dimH T_{M_L(a)}=D_L^*(c).
+ \label{eq:deep-full-dimension}
+\end{equation}
+For a fixed phase assignment at level $L$ with composition $m$, its top-root
+stratum has dimension $D_L(m;c)$.  In particular, the denominator in
+\eqref{eq:DL-definition} is exactly $d^L$.
+\end{theorem}
+
+\begin{proof}
+Fix a phase assignment of the $d^L$ level-$L$ core roots.  At total depth
+$n\geq L$, its exact cylinder count is
+\begin{equation}
+ P_{n,L,m}=\prod_{s=0}^{p-1}\prod_{\ell=0}^{n-L}
+ a_{s+\ell}^{m_s d^\ell}.
+ \label{eq:deep-prefix-count}
+\end{equation}
+The $L$ transient levels have forced labels and contribute no multiplicity.
+Since
+\begin{equation}
+ \frac{|\Delta_{n-L}|}{|\Delta_n|}\longrightarrow d^{-L},
+ \label{eq:deep-scale-ratio}
+\end{equation}
+the proof of \cref{prop:fixed-one-level}, now using
+\cref{lem:weighted-limit}, gives the residue limits
+\[
+ \frac1{d^L}\sum_sm_sH_{s+j}(c).
+\]
+The cylinder lemma proves the fixed-composition statement.  There are only
+$p^{d^L}$ phase assignments, so their finite union has dimension $D_L^*(c)$
+at the top root.
+
+The full shift also allows roots in the core or at $r_q$ for $q>0$.  A root
+at $r_q$ has $K=L-q$ transient levels and therefore value $D_K^*(c)$.  If
+$m\in\Comp_p(d^K)$, then $dm\in\Comp_p(d^{K+1})$ and
+\begin{equation}
+ D_{K+1}(dm;c)=D_K(m;c).
+ \label{eq:grid-embedding}
+\end{equation}
+Thus $D_{K+1}^*(c)\geq D_K^*(c)$.  A composition concentrated in one phase
+also recovers $\min_jH_j(c)$ at every $K$, so the top-root value dominates
+the core-root strata.  The finite-union identity now proves
+\eqref{eq:deep-full-dimension}.
+\end{proof}
+
+\begin{theorem}[Finite-depth saturation and convergence]
+\label{thm:deep-convergence}
+For the canonical unrestricted chain,
+\begin{align}
+ D_L(m;c)=\bar c
+ &\quad\Longleftrightarrow\quad
+ \sum_sm_sc_{s+k}\text{ is independent of }k,
+ \label{eq:DL-saturation}\\
+ D_L^*(c)&\leq\bar c,
+ \label{eq:DL-upper}\\
+ D_{L+1}^*(c)&\geq D_L^*(c),
+ \label{eq:DL-monotone}\\
+ 0\leq\bar c-D_L^*(c)
+ &\leq\frac{p\max_jH_j(c)}{d^L}.
+ \label{eq:DL-rate}
+\end{align}
+Consequently $D_L^*(c)\to\bar c$.  If $p\mid d^L$, equality already holds
+at level $L$.  Under the full nonzero Fourier-support hypothesis of
+\cref{thm:fourier-divisibility}, a saturating level-$L$ composition exists
+only if $p\mid d^L$; no such converse is asserted without that hypothesis.
+\end{theorem}
+
+\begin{proof}
+The quantity $D_L(m;c)$ is $\Psi_*^{(N)}(m;c)$ from
+\eqref{eq:Psi-definition} with $N=d^L$.  Therefore
+\eqref{eq:DL-saturation} and \eqref{eq:DL-upper} follow from
+\cref{thm:saturation}, and the divisibility statements follow from
+\cref{thm:fourier-divisibility}.  Monotonicity is exactly the embedding
+\eqref{eq:grid-embedding}.
+
+For the rate, choose a balanced composition $m\in\Comp_p(N)$, $N=d^L$,
+whose entries are $\lfloor N/p\rfloor$ or $\lceil N/p\rceil$.  Write
+$m_s=N/p+e_s$.  Then $\sum_se_s=0$ and $|e_s|<1$.  Mean preservation gives,
+for every $j$,
+\begin{align*}
+ \left|\frac1N\sum_sm_sH_{s+j}(c)-\bar c\right|
+ &=\left|\frac1N\sum_se_sH_{s+j}(c)\right|\\
+ &\leq\frac{p\max_qH_q(c)}{N}.
+\end{align*}
+The optimized minimum is at least the minimum produced by this balanced
+composition and at most its phase mean $\bar c$.  This proves
+\eqref{eq:DL-rate} and the limit.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \input{../figures/optimizer_convergence.tikz}
+  \caption{Finite-depth phase allocation.  \emph{Left:} exhaustive exact
+  optimizers from the frozen composition sweep for three profiles at
+  $L=1,2,3$; dashed horizontal lines are the corresponding spectral means.
+  The $d=2,p=4$ profile saturates when $4\mid2^L$.  \emph{Right:} gaps of the
+  displayed balanced compositions for $a=(2,3,4)$ with $(d,p)=(2,3)$ and
+  $a=(2,3,4,2)$ with $(d,p)=(3,4)$, together with the proved certificate
+  $p\max_jH_j(c)/d^L$.  The right panel shows a certificate, not an assertion
+  that the balanced composition is always the optimizer.}
+  \label{fig:deep-convergence}
+\end{figure}
+
+\begin{proposition}[A bounded restricted extension]
+\label{prop:balanced-access}
+Let $F_L\subseteq\Comp_p(d^L)$ be a nonempty finite family of compositions
+admitted by a separately declared depth-$L$ feeder, with the same complete
+core and no return edge.  Its top-root dimension is
+$\max_{m\in F_L}D_L(m;c)$.  If there is a constant $C$ and a choice
+$m^{(L)}\in F_L$ for every $L$ such that
+\begin{equation}
+ \max_s\left|m_s^{(L)}-\frac{d^L}{p}\right|\leq C,
+ \label{eq:balanced-access}
+\end{equation}
+then
+\begin{equation}
+ 0\leq \bar c-\max_{m\in F_L}D_L(m;c)
+ \leq\frac{Cp\max_jH_j(c)}{d^L}.
+ \label{eq:restricted-rate}
+\end{equation}
+Monotonicity for restricted families additionally requires a nesting
+condition such as $dF_L\subseteq F_{L+1}$; it is not inferred from
+\eqref{eq:balanced-access} alone.
+\end{proposition}
+
+\begin{proof}
+The finite-union argument in \cref{thm:deep-exact} gives the exact maximum
+over $F_L$.  Write $m_s^{(L)}=d^L/p+e_s$ and repeat the last estimate in the
+proof of \cref{thm:deep-convergence}, now with $|e_s|\leq C$.
+\end{proof}
+
+The canonical chain is therefore more than a continuous-simplex heuristic:
+each finite $L$ is an exact integer optimization on the grid with denominator
+$d^L$.  The limit follows because these grids contain balanced points with
+uniformly bounded coordinate discrepancy.

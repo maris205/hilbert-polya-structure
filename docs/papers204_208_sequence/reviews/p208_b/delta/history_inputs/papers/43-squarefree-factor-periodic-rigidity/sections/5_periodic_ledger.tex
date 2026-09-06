@@ -1,0 +1,111 @@
+\section{Periodic ledger, determinant, and ownership firewalls}
+\label{sec:periodic-ledger}
+
+The topological theorem has an immediate generating-function consequence,
+but its typing matters.  A fixed-point count, a primitive orbit, a temporal
+traversal, a rational prime, and an operator acting only on the periodic core
+are different objects.
+
+\subsection{Fixed counts and the Artin--Mazur determinant}
+
+By \cref{thm:factor-rigidity}, the point \(y_0\) is fixed and is the only
+periodic point.  Hence
+\begin{equation}
+  \Fix(S^m)=\{y_0\},
+  \qquad \#\Fix(S^m)=1
+  \qquad(m\geq1).
+  \label{eq:fixed-counts}
+\end{equation}
+Using the Artin--Mazur convention \citep{artin1965periodic},
+\begin{align}
+  \zeta_{\AM,Y}(z)
+  &:=\exp\left(
+    \sum_{m\geq1}\frac{\#\Fix(S^m)}{m}z^m
+  \right) \notag\\
+  &=\exp\left(\sum_{m\geq1}\frac{z^m}{m}\right)
+   =\exp\bigl(-\log(1-z)\bigr)
+   =\frac{1}{1-z}.
+  \label{eq:am-zeta}
+\end{align}
+This is a formal-power-series identity and an analytic identity for
+\(|z|<1\).  With the frozen inverse convention,
+\begin{equation}
+  D_{\AM,Y}(z):=\zeta_{\AM,Y}(z)^{-1}=1-z.
+  \label{eq:am-determinant}
+\end{equation}
+No regularization or analytic continuation is required to obtain the
+polynomial in \cref{eq:am-determinant}.
+
+\subsection{Primitive orbit versus repetition}
+
+Let \(\mathcal O_0=\{y_0\}\) denote the sole primitive periodic orbit.  Its
+least period is one and its primitive Euler factor is
+\[
+  (1-z)^{-1}.
+\]
+The logarithmic term \(z^r/r\) is the contribution of the \(r\)-fold
+traversal of this same orbit.  It is not a new primitive orbit.  Equivalently,
+\[
+  \operatorname{Prim}(Y,S)=\{\mathcal O_0\},
+  \qquad
+  \log\zeta_{\AM,Y}(z)=\sum_{r\geq1}\frac{z^r}{r}.
+\]
+This distinction prevents a common bookkeeping error: an infinite list of
+repetition exponents does not constitute infinite primitive support.
+
+The marker \(z\) has one meaning throughout the note: one application of the
+original factor dynamics.  Thus \(\mathcal O_0\) carries \(z\), and its
+\(r\)-fold traversal carries \(z^r\).  No period-dependent regrading is
+allowed under the frozen contract.
+
+\subsection{The periodic-core operator}
+
+Let \(\mathcal H_{\rm per}=\mathbb C e_0\) and define
+\(\Kper e_0=e_0\).  Then for every \(m\geq1\),
+\begin{equation}
+  \operatorname{tr}(\Kper^m)=1,
+  \qquad
+  \det(I-z\Kper)=1-z.
+  \label{eq:rank-one-owner}
+\end{equation}
+The identity in \cref{eq:rank-one-owner} is an exact realization of the already
+proved periodic ledger.  It does not elevate \(\Kper\) to a transfer
+operator on \(\Xsf\) or on \(C(Y)\).  The matrix does not generate the source
+language, encode aperiodic points, form an analytic family, or define a
+self-adjoint Hilbert--Polya operator.  Calling it a full-state operator would
+reverse the proof's ownership direction: the theorem proves the ledger
+first, and \([1]\) merely packages it afterward.
+
+\subsection{Rational-prime comparator}
+
+If one writes the external formal comparator
+\begin{equation}
+  Z_{\Pset}(s,u)=
+  \prod_{p\in\Pset}(1-u p^{-s})^{-1},
+  \label{eq:prime-comparator}
+\end{equation}
+then \(u\) is an independent marker and each \(p\) is a distinct object of
+type \texttt{RationalPrimeAtom}.  By contrast, the factor ledger contains one
+object of type \texttt{PeriodicOrbit(Y,S)}.  Its primitive support has
+cardinality one, whereas the support in \cref{eq:prime-comparator} is
+countably infinite.  No same-type bijection exists.  Specializing \(u=z\)
+would only identify symbols; it would not repair primitive support,
+ownership, or repetition.
+
+\begin{proposition}[Primitive-support obstruction]
+\label{prop:primitive-obstruction}
+Under the frozen object, marker, and repetition types, no lawful factor
+ledger is bijectively identifiable with the rational-prime primitive ledger.
+\end{proposition}
+
+\begin{proof}
+The factor side has the single primitive object \(\mathcal O_0\).  Every
+\(z^r\) is a traversal of \(\mathcal O_0\).  The prime side has one distinct
+primitive atom for each \(p\in\Pset\).  A bijection cannot map a singleton to
+an infinite set while preserving primitive type.  The obstruction occurs
+before weights, clocks, or analytic divisors are compared.
+\end{proof}
+
+The conclusion is deliberately negative and local.  It does not say that no
+externally constructed prime diagonal operator exists.  It says that such an
+operator is not owned by the periodic ledger of a factor of \(\Xsf\).

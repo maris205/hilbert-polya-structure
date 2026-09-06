@@ -1,0 +1,349 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\raggedbottom
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\cL}{\mathcal L}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+
+\title[Unipotent shear on sublattices]{Unipotent Shear on Fixed-Index Sublattices:\ Complete Cycle Data and Valuation Staircases}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+For a positive integer $N$, let $\cL_N$ be the finite set of index-$N$
+sublattices of $\Z^2$.  We determine the complete finite dynamics on
+$\cL_N$ induced by the unipotent shear
+$U=\left(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\right)$.
+Unique column Hermite coordinates turn the action into a disjoint union of
+translations $b\mapsto b+N/a$ on $\Z/a\Z$, one for every divisor $a$ of
+$N$.  This gives every cycle, every fixed-point count, and the finite
+Artin--Mazur zeta function in closed form.  For $N=p^r$, the fixed counts
+form a parity-sensitive valuation staircase and the zeta function has an
+explicit sparse prime-power product.  Finally, the maximal cycle is unique
+and has length $N$, so the full temporal data recover the index.  Exact
+integer controls enumerate every canonical phase and trace its orbit for
+$1\leq N\leq120$, with separate prime-power tests.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Fix $N\geq1$ and write
+\[
+ \cL_N=\{L\leq\Z^2:[\Z^2:L]=N\}.
+\]
+The integral matrix
+\[
+ U=\begin{pmatrix}1&1\\0&1\end{pmatrix}
+\]
+lies in $\operatorname{SL}_2(\Z)$ and therefore acts by the permutation
+$T_N(L)=UL$ of $\cL_N$.  Although $U$ has infinite order on $\Z^2$, every
+$T_N$ is a finite permutation.  The purpose of this note is to give its
+complete temporal census.
+
+The calculation has two ingredients.  First, column Hermite normal form
+provides a canonical divisor-layer coordinate system; see, for example,
+\citet[Chapter~2]{Cohen1993}.  Second, on each layer the shear is a cyclic
+translation.  The resulting formulas simultaneously describe cycle
+lengths, fixed points, and the Artin--Mazur zeta function
+\citep{ArtinMazur1965}.  The prime-power specialization exposes a sharp
+valuation staircase that is less visible in the undigested divisor sum.
+
+Classical ownership includes Hermite normal form, the enumeration
+$|\cL_N|=\sigma_1(N)$, and finite-index subgroup and subgroup-zeta theory
+\citep{GrunewaldSegalSmith1988}.  Our bounded contribution is the temporal
+package for this one fixed-index shear and its recovery consequence.  No
+priority is claimed for Hermite normal form, subgroup enumeration,
+subgroup-zeta theory, or Hecke correspondences.  The external literature
+status of the exact package remains on hold.
+
+\section{Hermite coordinates and the shear action}
+
+For positive integers $a,c$ and $0\leq b<a$, put
+\[
+ H(a,b,c)=\begin{pmatrix}a&b\\0&c\end{pmatrix},
+ \qquad
+ L(a,b,c)=H(a,b,c)\Z^2=\Z(a,0)+\Z(b,c).
+\]
+
+\begin{proposition}[Canonical coordinates and exact action]
+\label{prop:hnf}
+Every $L\in\cL_N$ has a unique expression
+\[
+ L=L(a,b,c),\qquad ac=N,\quad 0\leq b<a.
+\]
+In these coordinates,
+\begin{equation}
+ \label{eq:action}
+ T_N\bigl(L(a,b,c)\bigr)=L(a,b+c\bmod a,c).
+\end{equation}
+Consequently $|\cL_N|=\sum_{a\mid N}a=\sigma_1(N)$.
+\end{proposition}
+
+\begin{proof}
+Let the image of $L$ under projection onto the second coordinate be
+$c\Z$, and let
+$L\cap(\Z\times\{0\})=a\Z\times\{0\}$.  Choose $(b,c)\in L$ and reduce
+$b$ modulo $a$ into $0\leq b<a$.  If $(x,y)\in L$, then $y=kc$ for some
+$k\in\Z$, and
+$(x,y)-k(b,c)\in L\cap(\Z\times\{0\})$.  Thus $(a,0)$ and $(b,c)$
+generate $L$.  Projection, intersection, and the residue class of $b$
+show uniqueness.  The determinant of this basis is $ac$, hence $ac=N$.
+
+Left multiplication acts on the displayed column basis as
+\[
+ U H(a,b,c)=
+ \begin{pmatrix}1&1\\0&1\end{pmatrix}
+ \begin{pmatrix}a&b\\0&c\end{pmatrix}
+ =\begin{pmatrix}a&b+c\\0&c\end{pmatrix}.
+\]
+Reducing the first coordinate of the second generator modulo $a$ proves
+\eqref{eq:action}.  For each $a\mid N$ there are exactly $a$ permitted
+values of $b$, giving the final assertion.
+\end{proof}
+
+Thus the divisor $a$ labels an invariant layer, with $c=N/a$ and phase
+$b\in\Z/a\Z$.  Define
+\begin{equation}
+ \label{eq:gh}
+ g_a=\gcd(a,N/a),\qquad h_a=\frac{a}{g_a}.
+\end{equation}
+
+\section{Complete temporal census}
+
+Let $C_N(m)$ denote the number of cycles of exact length $m$, and let
+$F_N(n)=\#\Fix(T_N^n)$.
+
+\begin{theorem}[All cycles, fixed points, and zeta]
+\label{thm:census}
+For every $N,n,m\geq1$,
+\begin{align}
+ C_N(m)
+   &=\sum_{\substack{a\mid N\\h_a=m}}g_a,                                      \label{eq:cycles}\\
+ F_N(n)
+   &=\sum_{\substack{a\mid N\\a\mid n(N/a)}}a
+     =\sum_{\substack{a\mid N\\h_a\mid n}}a.                                \label{eq:fixed}
+\end{align}
+In particular,
+\begin{equation}
+ \label{eq:mobius}
+ C_N(m)=\frac1m\sum_{d\mid m}\mu(m/d)F_N(d),
+\end{equation}
+and the finite Artin--Mazur zeta function is the rational function
+\begin{equation}
+ \label{eq:zeta}
+ \zeta_N(z)
+ :=\exp\left(\sum_{n\geq1}\frac{F_N(n)}{n}z^n\right)
+ =\prod_{a\mid N}(1-z^{h_a})^{-g_a}
+ =\prod_{m\geq1}(1-z^m)^{-C_N(m)}.
+\end{equation}
+The products are finite, and
+\begin{equation}
+ \label{eq:accounting}
+ \sum_{m\geq1}mC_N(m)=\sigma_1(N).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+On the $a$-layer, \cref{eq:action} is translation by $c=N/a$ on
+$\Z/a\Z$.  Such a translation has $g_a=\gcd(a,c)$ orbits, each of length
+$h_a=a/g_a$.  Summing these layer inventories proves \eqref{eq:cycles}
+and \eqref{eq:accounting}.
+
+The $n$th iterate translates by $nc$.  It fixes a phase if and only if
+$a\mid nc$; when this happens, it fixes all $a$ phases in the layer.
+Writing $a=g_aa'$ and $c=g_ac'$ with $\gcd(a',c')=1$ shows that
+$a\mid nc$ is equivalent to $h_a=a'\mid n$, proving \eqref{eq:fixed}.
+
+Every finite permutation satisfies
+$F_N(n)=\sum_{m\mid n}mC_N(m)$.  M\"obius inversion gives
+\eqref{eq:mobius}.  Finally, one cycle of length $m$ contributes
+\[
+ \exp\left(\sum_{k\geq1}\frac{z^{km}}{k}\right)=(1-z^m)^{-1}
+\]
+to the zeta function.  Multiplication over the cycles proves
+\eqref{eq:zeta}.
+\end{proof}
+
+The formulas retain the layer decomposition rather than merely the
+characteristic polynomial of a permutation matrix.  For example,
+\cref{tab:examples} records three complete inventories.
+
+\begin{table}[t]
+\centering
+\caption{Exact cycle data for selected indices.  An entry $m^{C_N(m)}$
+means $C_N(m)$ cycles of length $m$.}
+\label{tab:examples}
+\begin{tabular}{@{}ccll@{}}
+\toprule
+$N$ & $|\cL_N|$ & nonzero cycle inventory & $\zeta_N(z)$ \\
+\midrule
+$8$  & $15$ & $1^3,\ 2^2,\ 8^1$
+ & $(1-z)^{-3}(1-z^2)^{-2}(1-z^8)^{-1}$ \\
+$12$ & $28$ & $1^3,\ 3^3,\ 4^1,\ 12^1$
+ & $(1-z)^{-3}(1-z^3)^{-3}(1-z^4)^{-1}(1-z^{12})^{-1}$ \\
+$16$ & $31$ & $1^7,\ 4^2,\ 16^1$
+ & $(1-z)^{-7}(1-z^4)^{-2}(1-z^{16})^{-1}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Prime powers and the valuation staircase}
+
+The divisor layers become particularly sparse when $N=p^r$.  Let
+$v_p(n)$ be the $p$-adic valuation of $n$.
+
+\begin{theorem}[Prime-power staircase]
+\label{thm:primepower}
+Let $p$ be prime and $r\geq1$.  For the layer $a=p^j$, $c=p^{r-j}$,
+$0\leq j\leq r$, one has
+\begin{equation}
+ \label{eq:prime-layer}
+ g_j=p^{\min(j,r-j)},\qquad
+ h_j=
+ \begin{cases}
+  1,&2j\leq r,\\
+  p^{2j-r},&2j>r.
+ \end{cases}
+\end{equation}
+Hence, with
+\[
+ A_{p,r}=\sum_{j=0}^{\lfloor r/2\rfloor}p^j
+ =\frac{p^{\lfloor r/2\rfloor+1}-1}{p-1},
+\]
+the complete cycle inventory consists of $A_{p,r}$ fixed cycles and,
+for each $j>r/2$, exactly $p^{r-j}$ cycles of length $p^{2j-r}$.
+Equivalently,
+\begin{equation}
+ \label{eq:prime-zeta}
+ \zeta_{p^r}(z)
+ =(1-z)^{-A_{p,r}}
+ \prod_{j=\lfloor r/2\rfloor+1}^{r}
+       (1-z^{p^{2j-r}})^{-p^{r-j}}.
+\end{equation}
+For every $n\geq1$, put $s=v_p(n)$ and
+\[
+ J=\min\left\{r,\left\lfloor\frac{r+s}{2}\right\rfloor\right\}.
+\]
+Then
+\begin{equation}
+ \label{eq:staircase}
+ F_{p^r}(n)=\sum_{j=0}^{J}p^j=\frac{p^{J+1}-1}{p-1}.
+\end{equation}
+Thus the fixed count changes only when the valuation crosses a threshold
+of the same parity as $r$ and saturates at $\sigma_1(p^r)$ when $s\geq r$.
+\end{theorem}
+
+\begin{proof}
+Substitution of $a=p^j$ and $c=p^{r-j}$ into \cref{eq:gh} gives
+$g_j=p^{\min(j,r-j)}$ and then \eqref{eq:prime-layer}.  The layers with
+$2j\leq r$ consist entirely of fixed cycles, whose total number is
+$A_{p,r}$.  In every remaining layer, $g_j=p^{r-j}$ and
+$h_j=p^{2j-r}$, proving the inventory and \eqref{eq:prime-zeta}.
+
+By \eqref{eq:fixed}, the $j$th layer contributes its $p^j$ states precisely
+when $p^j\mid n p^{r-j}$, or equivalently $2j\leq r+s$.  Therefore the
+contributing layers are exactly $0\leq j\leq J$, which gives
+\eqref{eq:staircase}.  If $s\geq r$, then $J=r$.
+\end{proof}
+
+The parity effect is exact: both the nontrivial period exponents in base $p$
+and the fixed-count jump valuations $s=v_p(n)$ are $1,3,\ldots,r$ for odd
+$r$ and $2,4,\ldots,r$ for even $r$.
+
+\section{Temporal recovery}
+
+The cycle census contains a rigid marker that is present for every index,
+not only at prime powers.
+
+\begin{theorem}[Recovery of the index]
+\label{thm:recovery}
+For every $N\geq1$, the maximal cycle length of $T_N$ is $N$, and there is
+exactly one cycle of that length.  Consequently each of the following data
+determines $N$:
+\begin{enumerate}
+ \item the complete cycle inventory $\{C_N(m)\}_{m\geq1}$;
+ \item the complete fixed sequence $\{F_N(n)\}_{n\geq1}$;
+ \item the formal zeta series $\zeta_N(z)$.
+\end{enumerate}
+For $N=p^r$, the recovered integer then determines both $p$ and $r$ by
+unique factorization.
+\end{theorem}
+
+\begin{proof}
+The layer $a=N$, $c=1$ has $g_N=1$ and $h_N=N$, so it is one $N$-cycle.
+For every divisor layer,
+$h_a=a/g_a\leq a\leq N$.  Equality $h_a=N$ forces $a=N$ and $g_a=1$,
+so the displayed cycle is the unique maximal one.  Thus
+\[
+ N=\max\{m:C_N(m)>0\}.
+\]
+The fixed sequence determines the cycle inventory through
+\cref{eq:mobius}.  The formal identity
+\[
+ z\frac{d}{dz}\log\zeta_N(z)=\sum_{n\geq1}F_N(n)z^n
+\]
+shows coefficient by coefficient that the zeta series determines every
+$F_N(n)$; hence it also determines the inventory and $N$.
+The case $N=1$ is included: there is one fixed lattice and the maximal
+period is $1$.
+\end{proof}
+
+The conclusion deliberately uses temporal data.  Although
+$|\cL_N|=\sigma_1(N)$ is a useful accounting identity, no injectivity claim
+for the divisor-sum function is needed or made.
+
+\section{Exact controls and scope}
+
+The accompanying standard-library script constructs all HNF states, applies
+$U$ to the two raw basis columns, reduces the off-diagonal residue, verifies
+mutual lattice containment, enumerates the permutation cycles, and compares
+the result with \cref{eq:cycles}.  For every
+$1\leq N\leq120$ it also checks every fixed count through time $2N$,
+M\"obius reconstruction through period $N$, state accounting, and maximal
+cycle recovery.  Separate symbolic lanes test \cref{thm:primepower} for
+$p\in\{2,3,5,7\}$ and $1\leq r\leq10$.  All calculations use exact
+integers; no floating-point spectral inference enters a theorem.
+
+The result is intentionally finite and rank two.  It does not address
+higher-rank unipotent actions, random walks on sublattices, orbit statistics
+as $N\to\infty$, or the Hecke-algebraic organization of related
+correspondences.  Those would require distinct ownership audits and proof
+engines.
+
+\section{Conclusion}
+
+The fixed-index sublattice action of a unipotent shear reduces exactly to
+divisor-indexed cyclic translations.  This reduction gives a full temporal
+census, turns prime powers into explicit valuation staircases, and exposes
+the unique maximal orbit that recovers the index.  The formulas are closed
+at finite $N$ and are independently checkable by exhaustive integer
+enumeration in the accompanying artifact.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

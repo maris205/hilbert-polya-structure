@@ -1,0 +1,113 @@
+\section{Exact determinant and renewal equations}
+\label{sec:exact}
+
+Let $A_N$ be the adjacency matrix of $G_N$ and define
+\[
+ D(z)=\det(I-zA),\qquad
+ C_v(z)=\det(I-zA^{(v)}).
+\]
+The empty determinant is one when $A$ is $1\times1$.
+The graph enlargement obtained by adding the new $N$-edge chain is defined
+for every $N\ge1$, independently of whether an old length-$N$ return walk
+has been selected.  The determinant statements below therefore hold for
+every $N\ge1$; the split factor of \cref{thm:construction} is asserted only
+for $N\ge N_0$, when the required image walk exists.
+
+\begin{proposition}[Path-elimination identity]
+\label{prop:determinant}
+For every $N\ge1$,
+\begin{equation}
+ \det(I-zA_N)=D(z)-z^NC_v(z).
+ \label{eq:determinant}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Assume first $N\ge2$ and order the old vertices before the $N-1$ new
+vertices along the chain.  Let $Q$ be the nilpotent adjacency matrix of the
+directed chain on the new vertices and put $R=I-zQ$.  Then $\det R=1$ and
+\[
+ (R^{-1})_{1,N-1}=z^{N-2}.
+\]
+Writing coordinate vectors for the relevant endpoints gives
+\[
+ I-zA_N=
+ \begin{pmatrix}
+ I-zA & -z e_ve_1^T\\
+ -z e_{N-1}e_v^T & R
+ \end{pmatrix}.
+\]
+The Schur complement of $R$ is
+\[
+ I-zA-z^2(R^{-1})_{1,N-1}e_ve_v^T
+ =I-zA-z^Ne_ve_v^T.
+\]
+The determinant is linear in its $(v,v)$ entry, whose cofactor is $C_v(z)$.
+Since $\det R=1$, \cref{eq:determinant} follows.  When $N=1$, the operation
+adds a parallel loop at $v$, and the same identity is the corresponding
+one-entry determinant update.
+\end{proof}
+
+Let $f_n$ count old length-$n$ paths from $v$ to $v$ that avoid $v$ at
+times $1,\ldots,n-1$, and put
+\[
+ F_v(z)=\sum_{n\ge1}f_nz^n.
+\]
+Every based loop decomposes uniquely into first-return loops.  Hence, as
+formal power series,
+\begin{align}
+ L_v(z)
+ &:=\sum_{n\ge0}(A^n)_{vv}z^n
+ =[(I-zA)^{-1}]_{vv} \notag\\
+ &=\frac{C_v(z)}{D(z)}
+ =1+F_v(z)+F_v(z)^2+\cdots
+ =\frac1{1-F_v(z)}.
+ \label{eq:renewal}
+\end{align}
+The determinant ratio is a standard renewal identity; compare
+\cite{Gomez2010,BlockEtAl1980}.  In particular,
+\begin{equation}
+ F_v(z)=1-\frac{D(z)}{C_v(z)}.
+ \label{eq:F-determinant}
+\end{equation}
+
+\begin{proposition}[Entropy-radius equation]
+\label{prop:radius}
+Let $r=\rho(A)^{-1}$ and $r_N=\rho(A_N)^{-1}$.  Then $F_v$ is analytic on a
+neighborhood of $[0,r]$, $F_v(r)=1$, and $r_N$ is the unique point in
+$(0,r)$ satisfying
+\begin{equation}
+ F_v(r_N)+r_N^N=1.
+ \label{eq:radius}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Since $A$ is irreducible, the proper principal submatrix $A^{(v)}$ has
+$\rho(A^{(v)})<\rho(A)$.  Thus $C_v$ has no zero at $r$, the first-return
+series is analytic beyond $r$, and \cref{eq:F-determinant} with $D(r)=0$
+gives $F_v(r)=1$.
+
+All internal vertices of the added chain are new and different from $v$.
+The chain is therefore one new first-return path and changes the series to
+$F_v(z)+z^N$.  Its old image may revisit $v$; that does not alter this count.
+The new series is continuous and strictly increasing on $[0,r]$, takes value
+zero at zero, and exceeds one at $r$.  It consequently has a unique root
+$s_N\in(0,r)$ of \cref{eq:radius}.
+
+\Cref{eq:determinant,eq:F-determinant} show that $s_N$ is a
+positive zero of $\det(I-zA_N)$.  For $N\ge2$, the old matrix is a proper
+principal block of the irreducible $A_N$, so strict Perron monotonicity gives
+$\rho(A_N)>\rho(A)$.  For $N=1$, one has
+$A_1=A+e_ve_v^T$, so $A_1\ge A$ and $A_1\ne A$; the strict comparison
+theorem for irreducible nonnegative matrices gives the same inequality.  Thus the
+reciprocal Perron root lies in $(0,r)$ and is the smallest positive
+determinant zero.  Hence $s_N=r_N$.
+\end{proof}
+
+\begin{remark}
+\Cref{eq:determinant} and \cref{eq:radius} describe the same perturbation,
+but they protect different errors.  The Schur complement fixes the minus sign
+and exponent; the renewal equation explains why the old image walk need not
+itself be first return.
+\end{remark}

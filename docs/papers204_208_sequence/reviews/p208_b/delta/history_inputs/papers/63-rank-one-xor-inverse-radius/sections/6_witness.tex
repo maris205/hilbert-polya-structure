@@ -1,0 +1,217 @@
+\section{Exact complementary separation}
+
+We now exhibit the language collision that forces a large inverse window.  Let
+the notation of \cref{lem:alternating} stand, and put
+\begin{equation}\label{eq:PQ-def}
+ Q=(01)^m,\qquad P=(10)^m,\qquad m=2^N-1.
+\end{equation}
+Then $|P|=|Q|=L-1$ and
+\begin{equation}\label{eq:PQ-identities}
+ U=Q0=0P,\qquad \comp(U)=P1,\qquad P1=1Q,\qquad \comp(P)=Q.
+\end{equation}
+The first two tail stages are
+\begin{equation}\label{eq:A-def}
+ A=v_{N+1}=UUU11U,\qquad v_{N+2}=AAA11A.
+\end{equation}
+
+\begin{lemma}[complementary witness]\label{lem:witness}
+The language of $X_N$ contains a word $W$ and its complement $\comp(W)$, both
+of length
+\[
+ \ell_N=3L+1.
+\]
+\end{lemma}
+
+\begin{proof}
+At the outer spacer between the third and fourth copies of $A$ in
+$v_{N+2}$, start at the second symbol of the final $U$ in the third $A$.
+Because $U=0P$, the word of length $3L+1$ beginning there is
+\begin{equation}\label{eq:W-def}
+ W=P\,11\,U\,U.
+\end{equation}
+Indeed, the displayed pieces have total length
+$(L-1)+2+L+L=3L+1$.
+
+Now work inside the final copy of $A$ and start at its second $U$.  Reading
+$3L+1$ symbols gives
+\begin{equation}\label{eq:B-def}
+ B=U\,U\,11\,Q,
+\end{equation}
+because only the length-$(L-1)$ prefix $Q$ of the final $U$ is used.  The
+identities in \eqref{eq:PQ-identities} give
+\begin{align*}
+ B
+ &= (Q0)(0P)11Q\\
+ &=Q00(P1)(1Q)\\
+ &=Q00(P1)(P1)\\
+ &=\comp(P11UU)=\comp(W).
+\end{align*}
+Thus both $W$ and $\comp(W)$ occur in $v_{N+2}$ and hence in
+$\Lang_{3L+1}(X_N)$.
+\end{proof}
+
+We next prove that this witness has the largest possible length.  A
+\emph{defect} will mean the left endpoint of an equal adjacent pair.
+
+\begin{lemma}[spacer and defect coding]\label{lem:defect-coding}
+For $t\geq0$, put $T_t=v_{N+t}$.  There is a word
+$S_t=a_1\cdots a_{4^t-1}\in\{0,1\}^{4^t-1}$ such that
+\begin{equation}\label{eq:base-tiling}
+ T_t=U(11)^{a_1}U(11)^{a_2}\cdots U(11)^{a_{4^t-1}}U.
+\end{equation}
+Here $(11)^0$ is empty.  Every finite boundary-type word in $V_N$ is a
+factor of some $S_t$, and none contains $101$.
+
+If $d_i$ is the defect at the boundary of type $a_i$, then its equal pair is
+$00$ when $a_i=0$ and $11$ when $a_i=1$, and
+\begin{equation}\label{eq:defect-distance}
+ d_{i+1}-d_i=L+a_i+a_{i+1}.
+\end{equation}
+In particular consecutive defects have distance between $L$ and $L+2$.
+\end{lemma}
+
+\begin{proof}
+The tail recursion gives $S_0=\eps$ and
+\begin{equation}\label{eq:spacer-recursion}
+ S_{t+1}=S_t0S_t0S_t1S_t,
+ \qquad S_1=001.
+\end{equation}
+For $t\geq1$, induction shows that $S_t$ begins in $00$, ends in $01$, and
+avoids $101$.  Indeed, a new junction has context either
+$01\,0\,00=01000$ or $01\,1\,00=01100$, neither of which contains $101$.
+Every finite boundary block of the nested limit occurs in some finite
+$S_t$, so it has the same avoidance property.
+
+The word $U$ is alternating, has odd length, and begins and ends in $0$.
+Thus a type-$0$ boundary $UU$ contributes exactly the defect $00$, while a
+type-$1$ boundary $U11U$ contributes exactly the middle defect $11$.
+If $c_i$ is the start of the $U$ preceding boundary $a_i$, then
+$d_i=c_i+L-1+a_i$ and $c_{i+1}=c_i+L+2a_i$.  Subtracting the corresponding
+formulas for $d_i$ and $d_{i+1}$ proves \eqref{eq:defect-distance}.
+\end{proof}
+
+\begin{proposition}[exact complement separation]\label{prop:exact-separation}
+The longest word $z$ for which both $z$ and $\comp(z)$ belong to the language
+of $X_N$ has length $3L+1$.  Equivalently,
+\begin{equation}\label{eq:exact-separation}
+ s_{\Ftwo}(X_N)=3L+2=3\cdot2^{N+1}-1.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The lower bound is \cref{lem:witness}.  For the upper bound, if
+$z=z_0\cdots z_{q-1}$ is binary, set
+\[
+ E(z)=\{j\in\{0,\ldots,q-2\}:z_j=z_{j+1}\}.
+\]
+The set $E(z)$ and the first symbol determine $z$ recursively.  Hence
+$E(z)$ alone determines exactly the pair $\{z,\comp(z)\}$.
+
+Every language word can be placed with defects on both sides.  Namely, first
+choose $t$ so that an occurrence is contained in $T_t$, then take the same
+occurrence in the second copy of $T_t$ inside
+$T_{t+1}=T_tT_tT_t11T_t$.  We use such interior occurrences for $z$ and
+$\comp(z)$.  Their relative defect positions agree, and the boundary types
+at corresponding visible defects are complementary.
+
+Suppose first that at least three defects are visible.  For the first three,
+write the two type triples as
+$(a_i,a_{i+1},a_{i+2})$ and $(b_j,b_{j+1},b_{j+2})$.  Complementarity gives
+$b_{j+r}=1-a_{i+r}$.  Equality of the two consecutive distances in
+\eqref{eq:defect-distance} then gives
+\[
+ a_i+a_{i+1}=1,
+ \qquad a_{i+1}+a_{i+2}=1.
+\]
+One triple is therefore $010$ and the other is $101$, contradicting
+\cref{lem:defect-coding}.  Thus at most two defects are visible.
+
+With no visible defect, the word lies between two consecutive defect starts,
+so $q\leq L+2$.  With one visible defect, let $d_-<d<d_+$ be the preceding,
+visible, and following starts.  The first coordinate of the word is at least
+$d_-+1$, while its last coordinate is at most $d_+$.  Therefore
+\begin{equation}\label{eq:one-defect-bound}
+ q\leq d_+-d_-\leq2(L+2)\leq3L+1,
+\end{equation}
+where the last inequality uses $L\geq3$.
+
+It remains to consider two visible defects.  Their equal spacing and
+complementary types force the two type pairs to be $01$ and $10$; exchange
+the occurrences so that the first has type $01$.  Align their first visible
+defects at coordinate $0$.  Avoidance of $101$ forces the type preceding
+$01$ to be $0$, so the preceding defect in the first occurrence starts at
+$-L$.  The preceding defect in the $10$ occurrence starts at most at
+$-(L+1)$.  Hence the common word starts no earlier than $-L+1$.
+
+The second visible defect starts at $L+1$.  Avoidance of $101$ forces the
+type following $10$ to be $0$, so the next defect in that occurrence starts
+at $2L+1$; the next defect in the $01$ occurrence starts at least at
+$2L+2$.  A defect whose left endpoint is the last coordinate of a word is
+not internal, so the common word may end at $2L+1$ but no later.  Consequently
+\[
+ q\leq(2L+1)-(-L+1)+1=3L+1.
+\]
+This proves the upper bound, while \cref{lem:witness} attains it.  Restricting
+that complementary pair also gives overlap at every shorter length, so the
+first disjoint length is exactly $3L+2$.
+\end{proof}
+
+\begin{proposition}[exact inverse radius]\label{prop:radius-lower}
+Let $R_N$ be the least $r\geq0$ for which the inverse of
+$\Delta:X_N\to\Delta(X_N)$ has a local rule on $[-r,r]$.  Then
+\[
+ R_N=\frac{3L+1}{2}=3\cdot2^N-1.
+\]
+More generally, an inverse window $[-m,n]$ exists exactly when
+$m+n\geq3L$.
+\end{proposition}
+
+\begin{proof}
+By \cref{prop:exact-separation} and the exact window criterion
+\eqref{eq:window-intro}, the condition is
+$m+n+2\geq3L+2$, or $m+n\geq3L$.  The number
+$L=2^{N+1}-1$ is odd.  Applying \eqref{eq:radius-intro},
+\[
+ R_N
+ =\left\lceil\frac{3L}{2}\right\rceil
+ =\frac{3L+1}{2}
+ =\frac{3(2^{N+1}-1)+1}{2}
+ =3\cdot2^N-1.
+\]
+\end{proof}
+
+Combining
+\cref{prop:minimality,prop:aperiodicity,prop:unique-ergodicity,cor:complement-disjoint,prop:radius-lower}
+proves
+\cref{thm:main-intro}.  The first few certified values are shown in
+\cref{tab:values}; they are consequences of the formulas, not numerical
+estimates.
+
+\begin{table}[t]
+\centering
+\caption{Exact separation lengths and symmetric inverse radii.}
+\label{tab:values}
+\begin{tabular}{rrrr}
+\toprule
+$N$ & $|v_N|$ & $s_{\Ftwo}(X_N)$ & $R_N$\\
+\midrule
+1 & 3  & 11 & 5\\
+2 & 7  & 23 & 11\\
+3 & 15 & 47 & 23\\
+4 & 31 & 95 & 47\\
+5 & 63 & 191 & 95\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{corollary}[no coarse uniform inverse bound]\label{cor:no-uniform}
+There is no uniform bound on inverse symmetric radius depending only on
+alphabet size $2$, cutting bound $4$, spacer bound $2$, and forward radius
+$1$, even after restricting to minimal, aperiodic, uniquely ergodic rank-one
+subshifts and to the fixed XOR derivative.
+\end{corollary}
+
+\begin{proof}
+All four coarse parameters are independent of $N$, while
+$R_N=3\cdot2^N-1\to\infty$.
+\end{proof}

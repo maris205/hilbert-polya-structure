@@ -1,0 +1,54 @@
+\section{Computational controls, ownership, and scope}
+\label{sec:controls}
+
+The proof is symbolic; the companion computation is a deterministic
+falsifier.  The script \texttt{code/verify\_projective\_entropy.py} performs
+four independent checks:
+
+\begin{enumerate}
+ \item it explicitly constructs level sets for several small parameters and
+ verifies the disjoint-union identities before comparing their cardinalities
+ with the polynomial recurrence;
+ \item it iterates exact integers for the binary example through level $14$
+ and evaluates both endpoints of \cref{eq:tail-certificate};
+ \item it constructs an outward rational/fixed-point entropy interval using
+ the atanh series for logarithms, with $80$ correction terms (hence partial
+ sum $H_{81}$), then independently evaluates through $H_{261}$ at
+ 90-decimal precision;
+ \item it checks strict parameter ordering for $2\le\ell\le8$ and reports
+ scaled parabolic and superattracting tail ratios.  These finite tests do not
+ prove \cref{prop:monotone,thm:parabolic,thm:super}.
+\end{enumerate}
+
+The stored output ends with \texttt{ALL CHECKS PASS}.  There is no random
+seed and no external data.  Python's arbitrary-precision integers protect the
+word-count recurrence; the scale $10^{80}$, directed integer division, and a
+rational atanh remainder give the certified interval, while the
+standard-library \texttt{decimal} module is fixed at 90 digits for an
+independent evaluation.  The latter is a regression check, not part of the
+outward proof.
+
+\paragraph{Owned background.}
+Equality of topological and inflation-word entropy in the primitive
+constant-length setting is due to Mitchell \cite{Mitchell2024}.  Gohlke's
+semi-compatible framework owns broad inflation-word bounds
+\cite{Gohlke2020}, and ratio recurrences also occur in recent intrinsic
+ergodicity work \cite{GohlkeMitchell2026}.  We claim neither mechanism in
+isolation.  Our candidate residual is the exact two-parameter cocycle together
+with its parabolic/superattracting remainder classification, strict parameter
+order, and reusable a posteriori enclosure.
+
+\paragraph{Limitations.}
+The substitution is compatible in length but not deterministic.  We do not
+classify invariant measures, recognizability, or intrinsic ergodicity.  The
+general polynomial result begins only after exact distinct-word recurrences
+have been proved.  Constants in the $O$-terms of \cref{thm:parabolic,thm:super}
+may depend on the fixed pair $(\ell,p)$.  The displayed decimal is not a
+machine-assisted proof of the universal theorems.
+
+\paragraph{Release gate.}
+Before submission, refresh the arXiv and journal records, visually inspect the
+version of record if access is authorized, and give the affected source a
+reasonable opportunity to assess the numerical correction.  If an exact
+owner of the tail-regime theorem is found, publication status changes to
+HOLD even though the computation remains correct.

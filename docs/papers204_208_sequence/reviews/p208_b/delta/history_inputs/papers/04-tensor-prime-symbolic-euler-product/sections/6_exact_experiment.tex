@@ -1,0 +1,54 @@
+\section{Exact finite certification and controls}
+
+The computation registers $F_1,\ldots,F_N$ as opaque objects.  Candidate-side
+code sees their partial tensor table, entropy, the reciprocal Artin--Mazur
+linear coefficient, and fixed counts through period four.  It marks an
+object as an atom exactly when no registered pair of nonunits tensors to it.
+A separate primality predicate is used only after recovery for scoring.
+
+\begin{proposition}[Exact prefix certification]
+\label{prop:prefix}
+For every cutoff $N$, tensor indecomposability of each $F_n$ with $n\leq N$
+is decided exactly from the truncated registry.  The resulting Euler,
+reciprocal, and logarithmic-derivative Dirichlet coefficients are exact for
+all masses $n\leq N$.
+\end{proposition}
+
+\begin{proof}
+Every proper factor of an integer $n\leq N$ lies in the registry.  Hence a
+decomposition is never missed.  All atom factors of every registered object
+are also present.  Unique factorization then determines the Euler
+coefficients, M\"obius coefficients, and prime-power support through $N$.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{rrrrrr}
+\toprule
+$N$ & recovered atoms & $\pi(N)$ & UFD & $Z$ coefficients & $\mu/\Lambda$ \\
+\midrule
+32  & 11 & 11 & 1.000 & 1.000 & 1.000 \\
+64  & 18 & 18 & 1.000 & 1.000 & 1.000 \\
+128 & 31 & 31 & 1.000 & 1.000 & 1.000 \\
+256 & 54 & 54 & 1.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\caption{Exact atom and coefficient recovery.  The prime predicate appears
+only in the sealed score columns.}
+\label{tab:main-experiment}
+\end{table}
+
+All rows of \cref{tab:main-experiment} pass.  At $N=256$, $64$ matched-size
+random atom sets achieve only $0.2607\pm0.0327$ Euler-coefficient accuracy
+and relative $\Lambda$ error $1.5823\pm0.0806$.  A shifted multiplication
+law has perfect abstract unique factorization but only $0.1758$ accuracy with
+the intrinsic full-shift entropy clock.  It becomes exact only after the
+post-hoc substitution $\log(n-1)$, an explicit proves-too-much witness.
+
+Finally, all $28$ pairs among the first eight recovered atoms were tested at
+four cutoffs.  Isolated loops always give coefficient one at $pq$ and zero in
+the logarithmic derivative; free mixing always gives coefficient two and the
+spurious positive value $\log(pq)$.  This is an exact finite implementation
+of \cref{thm:no-mixing}, not a statistical preference.  Code, raw tables,
+seeds, and the machine-readable coefficient ledger accompany the paper.

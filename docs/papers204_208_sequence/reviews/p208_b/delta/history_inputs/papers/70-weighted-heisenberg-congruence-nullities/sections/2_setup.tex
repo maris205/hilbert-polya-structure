@@ -1,0 +1,80 @@
+\section{The shift, the quotient, and the formula}
+
+Write the discrete Heisenberg group in coordinates as $\GammaH=\mathbb Z^3$
+with multiplication
+\begin{equation}\label{eq:heis-product}
+ (r,s,t)(u,v,w)=(r+u,s+v,t+w+rv).
+\end{equation}
+Set $a=(1,0,0)$, $b=(0,1,0)$, and $c=(0,0,1)$, so that
+$[a,b]=c$ and $c$ is central.  For an odd prime $\ell$, reduction of all
+three coordinates modulo $\ell$ gives
+\[
+ \pi_\ell:\GammaH\longrightarrow
+ \Ql:=\Heis(\Fell),
+ \qquad N_\ell:=\ker\pi_\ell.
+\]
+
+Let $p\ne\ell$ be prime, and fix
+$\alpha,\beta,\gamma\in\Fp^\times$.  On $\Fp^{\GammaH}$ use the left shift
+$(h\cdot x)_g=x_{h^{-1}g}$ and define
+\begin{equation}\label{eq:shift-definition}
+ X_{p;\alpha,\beta,\gamma}
+ =\{x:\alpha x_g+\beta x_{ga}+\gamma x_{gb}=0
+       \text{ for every }g\in\GammaH\}.
+\end{equation}
+This is a closed shift-invariant linear group shift.
+
+An $N_\ell$-fixed configuration is constant on left cosets.  Normality of
+$N_\ell$ identifies those cosets with $\Ql$, and \eqref{eq:shift-definition}
+becomes the right-convolution kernel
+\begin{equation}\label{eq:finite-operator}
+ (T_{\alpha,\beta,\gamma}f)(q)
+  =\alpha f(q)+\beta f(qa)+\gamma f(qb),
+ \qquad f\in\Fp^{\Ql}.
+\end{equation}
+
+Define
+\begin{equation}\label{eq:D-definition}
+ \Dcycl(\alpha,\beta,\gamma)
+ :=\deg\gcd_{\Fp[t]}
+ \bigl(t^\ell-1,(\alpha+\beta t)^\ell+\gamma^\ell\bigr)
+\end{equation}
+and
+\begin{equation}\label{eq:Fermat-delta}
+ \Delta_\ell(\alpha,\beta,\gamma)
+ :=\alpha^\ell+\beta^\ell+\gamma^\ell\in\Fp.
+\end{equation}
+
+\begin{theorem}[Exact congruence-fixed dimension]\label{thm:main}
+Under the assumptions above,
+\begin{equation}\label{eq:main-formula}
+ \dim_{\Fp}\Fix_{N_\ell}
+ X_{p;\alpha,\beta,\gamma}
+ =\Dcycl(\alpha,\beta,\gamma)
+  +\ell(\ell-1)\one_{\{\Delta_\ell(\alpha,\beta,\gamma)=0\}}.
+\end{equation}
+Equivalently, the number of $N_\ell$-fixed configurations is $p$ raised to
+the right-hand side of \eqref{eq:main-formula}.
+\end{theorem}
+
+The two terms in \eqref{eq:main-formula} are summarized in
+\cref{tab:block-ledger}.  Their different scales are essential: the character
+term is at most $\ell$, whereas the nonlinear term is either zero or
+$\ell(\ell-1)$.
+
+\begin{table}[t]
+\centering
+\caption{The two representation strata in the fixed-space formula.  A block
+nullity is multiplied by its multiplicity in the regular representation.}
+\label{tab:block-ledger}
+\begin{tabularx}{\textwidth}{@{}YcccY@{}}
+\toprule
+Stratum & Types & Degree & Multiplicity & Singular contribution \\
+\midrule
+Characters & $\ell^2$ & $1$ & $1$ &
+$\Dcycl(\alpha,\beta,\gamma)$ \\
+Nontrivial central character & $\ell-1$ & $\ell$ & $\ell$ &
+$\ell(\ell-1)\one_{\{\Delta_\ell=0\}}$ \\
+\bottomrule
+\end{tabularx}
+\end{table}

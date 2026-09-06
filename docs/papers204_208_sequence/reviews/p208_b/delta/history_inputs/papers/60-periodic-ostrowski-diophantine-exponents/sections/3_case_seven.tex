@@ -1,0 +1,94 @@
+\section{Why the seventh case contains \texorpdfstring{$\rho_n$}{rho-n}}
+\label{sec:case-seven}
+
+We isolate the correction because it is logically prior to the periodic
+argument and because merely changing a subscript would conceal both the branch
+selection and an endpoint clipping.
+
+\begin{lemma}[Corrected seventh case]
+\label{lem:case-seven}
+Suppose
+\[
+ b_{n+1}=a_{n+1}-1,
+ \qquad a_{n+1}\ne1,
+ \qquad b_n\ne0.
+\]
+Then the three candidate plateaus on $I_n$ are
+\[
+\begin{array}{c|c}
+\text{interval for }m&r(x,m)\\ \hline
+[q_n-1,\ q_n+q_{n-1}-2]
+  &q_n+q_{n-1}-\rho_n\\
+{}[q_n+q_{n-1}-1,\ 2q_n+q_{n-1}-\rho_n-2]
+  &q_n+q_{n-1}\\
+{}[2q_n+q_{n-1}-\rho_n-1,\ q_{n+1}-2]
+  &2q_n+q_{n-1}-\rho_n.
+\end{array}
+\]
+As usual, an interval whose lower endpoint exceeds its upper endpoint is
+discarded.
+\end{lemma}
+
+\begin{proof}
+Set $a=a_{n+1}$ and $b=b_{n+1}$.  The hypotheses give
+$b=a-1>0$.  If $b_{n+2}=a_{n+2}$, the carry condition
+\eqref{eq:legality} would force $b_{n+1}=0$, a contradiction.  Therefore the
+truncation rule in \cite[Proposition~2.2.2]{Wojcik2025v1} selects the
+$\rho_{n+1}$ branch of the four plateau templates in
+\cite[Corollary~2.2.1]{Wojcik2025v1}; this is the applicable branch, not a
+formal substitution into an unused case.
+
+With the shorthand in \eqref{eq:table-shorthand}, the recurrence
+\eqref{eq:rho-recurrence} gives
+\[
+ u=(a-1)q+t,
+ \qquad Q=aq+p.
+\]
+Consequently the three template values after the initial value $q$ become
+\begin{equation}
+ Q-u=q+p-t,
+ \qquad Q-bq=q+p,
+ \qquad Q+q-u=2q+p-t.
+ \label{eq:case7-values}
+\end{equation}
+Before intersection with $I_n$, the four substituted template rows are
+\begin{align*}
+ &[q-1,q+p-t-2];q,\\
+ &[q+p-t-1,q+p-2];q+p-t,\\
+ &[q+p-1,2q+p-t-2];q+p,\\
+ &[2q+p-t-1,Q-2];2q+p-t.
+\end{align*}
+Here $b_n\ne0$ implies
+\begin{equation}
+ t=\rho_n=\rho_{n-1}+b_nq_{n-1}=s+b_np\geq p.
+ \label{eq:t-ge-p}
+\end{equation}
+The first row is therefore empty: its upper endpoint is at most $q-2$.
+The lower endpoint of the second row is at most $q-1$, so intersection with
+$I_n=[q-1,Q-2]$ clips it to $q-1$.  The remaining three rows are exactly those
+in the statement.  Both the values and the endpoints are thus forced to
+contain $t=\rho_n$, not $s=\rho_{n-1}$.
+\end{proof}
+
+\begin{example}[A finite contradiction certificate]
+\label{ex:case7-certificate}
+Take $a_i=3$ and the legal digits
+\[
+ (b_1,b_2,b_3,b_4)=(0,1,2,0),
+\]
+extend the digit sequence by zeros, and set $n=2$.  Then
+\[
+ q_1=3,\qquad q_2=10,\qquad \rho_1=0,\qquad \rho_2=3.
+\]
+The case-7 hypotheses hold because $b_3=a_3-1=2$ and $b_2\ne0$.
+At $m=q_2-1=9$, the printed v1 subscript gives
+\[
+ r(x,9)=q_2+q_1-\rho_1=13>10=m+1,
+\]
+contradicting the Sturmian bound.  The corrected value is
+\[
+ r(x,9)=q_2+q_1-\rho_2=10=m+1.
+\]
+Thus the correction is visible at a finite index, independently of the
+periodic asymptotic argument.
+\end{example}

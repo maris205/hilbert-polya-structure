@@ -1,0 +1,93 @@
+\section{Ostrowski data and the complete repetition table}
+\label{sec:repetition}
+
+Let $0<\alpha<1$ be irrational, with continued fraction
+$\alpha=[0;a_1,a_2,\ldots]$.  Its continuant denominators are normalized by
+\begin{equation}
+  q_{-1}=0,
+  \qquad q_0=1,
+  \qquad q_{n+1}=a_{n+1}q_n+q_{n-1}.
+  \label{eq:continuants}
+\end{equation}
+A digit sequence $(b_i)_{i\geq1}$ is \emph{legal} if
+\begin{equation}
+  0\leq b_1\leq a_1-1,
+  \qquad
+  0\leq b_i\leq a_i\quad(i\geq2),
+  \qquad
+  b_{i+1}=a_{i+1}\Longrightarrow b_i=0.
+  \label{eq:legality}
+\end{equation}
+Following the formal-intercept convention of \cite[Section~2]{Wojcik2025v1},
+put
+\begin{equation}
+  \rho_n=\sum_{i=0}^{n-1}b_{i+1}q_i,
+  \qquad
+  \rho_{n+1}=\rho_n+b_{n+1}q_n.
+  \label{eq:rho-recurrence}
+\end{equation}
+Legality gives $0\leq\rho_n<q_n$.  The infinite digit data specify a formal
+intercept $\rho$ and hence a Sturmian word $x=T^\rho(c_\alpha)$; no numerical
+convergence of the displayed formal sum is being asserted.
+
+For an infinite word $x$, let $r(x,m)$ be the largest $k$ for which the first
+$k$ length-$m$ factors
+\[
+  \mathbb P_m(x),\mathbb P_m(Tx),\ldots,
+  \mathbb P_m(T^{k-1}x)
+\]
+are pairwise distinct.  This is the convention used in
+\cite[Definition~1.1.2]{Wojcik2025v1}; it differs by an additive $m$ from the
+prefix-length convention in \cite{BugeaudKim2019}.  For a Sturmian word,
+$r(x,m)\leq m+1$, and the standard repetition identity becomes
+\begin{equation}
+  \dio(x)=1+\limsup_{m\to\infty}\frac{m}{r(x,m)}.
+  \label{eq:dio-repetition}
+\end{equation}
+
+We now record the finite interface used in the proof.  Write
+\begin{equation}
+\begin{gathered}
+ q=q_n,\quad p=q_{n-1},\quad Q=q_{n+1},\\
+ s=\rho_{n-1},\quad t=\rho_n,\quad u=\rho_{n+1},
+ \qquad b=b_{n+1},\quad a=a_{n+1}.
+\end{gathered}
+\label{eq:table-shorthand}
+\end{equation}
+The integer interval belonging to level $n$ is
+$I_n=[q-1,Q-2]$.  Each row below has the form
+``$[A,B];V$'', meaning $r(x,m)=V$ for every integer $m\in[A,B]$.
+A row is discarded exactly when $A>B$.  Its last column records the ratio
+obtained from the right endpoint after the finite constants disappear in a
+fixed-phase limit.
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.16}
+\input{figures/eight_case_table.tex}
+\endgroup
+
+The table is the content of the complete case split in
+\cite[Theorem~2.2.1]{Wojcik2025v1}, transcribed with finite endpoint constants
+intact, except for the explicitly marked correction in case~7.  Cases~2 and~3
+can overlap; then $b_n=0$ gives $t=s$, so their rows agree.  In case~8,
+legality likewise forces $b_n=0$ and hence $t=s$.  Thus the apparent overlap
+does not increase the number of distinct plateau rows.
+
+\begin{proposition}[Finite-table interface]
+\label{prop:finite-interface}
+For all sufficiently large $n$, the applicable rows in
+\cref{tab:eight-cases} cover $I_n$, and $r(x,m)$ has the displayed constant
+value on each nonempty row.  Consequently, if a row is $[A_n,B_n];V_n$, its
+contribution to the limsup in \eqref{eq:dio-repetition} is determined by
+$B_n/V_n$.
+\end{proposition}
+
+\begin{proof}
+Coverage and the plateau values, apart from the case-7 subscript, are precisely
+the cited source theorem; the missing correction is proved independently in
+\cref{lem:case-seven}.  Since $V_n$ is a positive integer and is constant on a
+nonempty row, $m/V_n$ increases with $m$.  Its maximum on that row is therefore
+$B_n/V_n$.
+\end{proof}

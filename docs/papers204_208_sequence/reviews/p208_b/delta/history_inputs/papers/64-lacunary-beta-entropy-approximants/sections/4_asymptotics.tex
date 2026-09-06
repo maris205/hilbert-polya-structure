@@ -1,0 +1,81 @@
+\section{First-omitted-digit asymptotics}
+\label{sec:asymptotics}
+
+Define
+\begin{equation}
+ D_\beta=-F'(\beta)=\sum_{k\geq1}n_k\beta^{-n_k-1},
+ \qquad
+ M=\beta D_\beta=\sum_{k\geq1}n_k\beta^{-n_k}.
+ \label{eq:derivative-normalization}
+\end{equation}
+The defining series and its termwise derivative converge locally uniformly in a neighborhood of the fixed point $\beta>1$, because both are dominated there by the corresponding full integer geometric series.  Thus \eqref{eq:derivative-normalization} is legitimate.
+
+\begin{theorem}[Sharp entropy-gap law]
+\label{thm:asymptotic}
+As $j\to\infty$,
+\begin{equation}
+ L_j=
+ \frac{\beta^{-n_{j+1}}}{\beta D_\beta}
+ \left[
+ 1+\bigO_\beta\!\left(
+ \beta^{-q_{j+1}}+n_{j+1}\beta^{-n_{j+1}}
+ \right)
+ \right].
+ \label{eq:main-asymptotic}
+\end{equation}
+Equivalently, the denominator may be written $M$, but no additional factor of $\beta$ may then be inserted.
+\end{theorem}
+
+\begin{proof}
+Put $N=n_{j+1}$ and $r=\beta^{-q_{j+1}}$.  The proof of \eqref{eq:tail-geometric} gives
+\begin{equation}
+ T_j=\beta^{-N}\left(1+\bigO_\beta(r)\right),
+ \label{eq:T-asymptotic}
+\end{equation}
+because $q_{j+1}\to\infty$ and hence $r\to0$.  Also,
+\[
+ 0\leq M-M_j
+ \leq\sum_{n\geq N}n\beta^{-n}
+ =\bigO_\beta(N\beta^{-N}).
+\]
+Since $M>0$, this gives
+\begin{equation}
+ \frac{1}{M_j}=\frac{1}{M}
+ \left(1+\bigO_\beta(N\beta^{-N})\right).
+ \label{eq:M-asymptotic}
+\end{equation}
+
+By \eqref{eq:certificate}, the quotient of $L_j$ by $T_j/M_j$ lies between
+$\exp(-n_jT_j/M_j)$ and one.  Since $M_j\geq\beta^{-1}$ and \eqref{eq:tail-geometric} holds,
+\[
+ \frac{n_jT_j}{M_j}=\bigO_\beta(N\beta^{-N}).
+\]
+Consequently,
+\begin{equation}
+ L_j=\frac{T_j}{M_j}
+ \left(1+\bigO_\beta(N\beta^{-N})\right).
+ \label{eq:L-linearized}
+\end{equation}
+Combining \eqref{eq:T-asymptotic}, \eqref{eq:M-asymptotic}, and \eqref{eq:L-linearized}, and using $M=\beta D_\beta$, proves \eqref{eq:main-asymptotic}.
+\end{proof}
+
+\begin{corollary}[Logarithmic scale rigidity]
+\label{cor:log-rigidity}
+The first omitted one determines the normalized logarithmic error:
+\begin{equation}
+ \lim_{j\to\infty}\frac{-\log L_j}{n_{j+1}}=\log\beta.
+ \label{eq:normalized-log}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The relative error in \eqref{eq:main-asymptotic} tends to zero.  Taking logarithms gives
+\[
+ -\log L_j=n_{j+1}\log\beta+\log(\beta D_\beta)+o(1).
+\]
+Division by $n_{j+1}\to\infty$ proves the claim.
+\end{proof}
+
+\begin{remark}
+The tail location $n_{j+1}$, not merely the retained prefix length $n_j$, is indispensable.  A statement with leading scale $\beta^{-n_j}$ can be wrong by the arbitrarily large factor $\beta^{-q_j}$.
+\end{remark}

@@ -1,0 +1,117 @@
+\section{Introduction}
+
+Sofic entropy extends entropy theory beyond amenable groups, but its value is
+defined relative to a sequence of finite models
+\citep{KerrLi2011,KerrLi2013}.  Dependence on that sequence can therefore
+encode genuine finite-model geometry.  The strongest qualitative version of
+this phenomenon is not new: Airey, Bowen, and Lin constructed a mixing
+subshift of finite type with two different positive sofic entropies
+\citep{AireyBowenLin2022}.  Their mechanism compares planted and uniform
+random hypergraph colourings.
+
+Our starting point is a recent and much more elementary model.  Li and Liu
+considered the continuous-alphabet hard-core subshift over the free group and
+showed that its sofic mean dimension changes between a parity-compatible
+finite-quotient approximation and an approximation selected from uniform
+random permutations \citep{LiLiu2026}.  We retain both approximation
+templates, but discretize the active coordinate into three colours.  The
+finite statistic is no longer the dimension of a free coordinate set.  It is
+the entire activity-three independence polynomial, and its exponential rate
+is topological sofic entropy.
+
+Write $\F_2=\langle a,b\rangle$ and $A=\{0,1,2,3\}$.  With the left shift
+$(g x)_h=x_{g^{-1}h}$, define
+\begin{equation}\label{eq:X3}
+ X_3=\left\{x\in A^{\F_2}:
+ x_g\ne0\Longrightarrow x_{gs}=0
+ \text{ for every }g\in\F_2,
+ \ s\in\{a,b\}\right\}.
+\end{equation}
+Since $g$ ranges over the whole group, these rules also impose exclusion in
+the $a^{-1}$ and $b^{-1}$ directions.  The symbol $0$ is safe.
+
+For a homomorphism $\sigma:\F_2\to\Sym(V)$, let $G_\sigma$ be the undirected
+multigraph with edges
+\[
+ \{v,\sigma(s)v\},\qquad v\in V,\quad s\in\{a,b\}.
+\]
+Loops and multiple edges are retained.  If $\Ind(G_\sigma)$ denotes the
+independent sets, with looped vertices excluded, put
+\begin{equation}\label{eq:partition}
+ Z_{G_\sigma}(3)
+ =\sum_{I\in\Ind(G_\sigma)}3^{|I|}.
+\end{equation}
+The activity is $3$, one for each nonzero colour.
+
+The main result is the following.
+
+\begin{theorem}\label{thm:main}
+There are two homomorphic sofic approximations
+$\Sigma_{\bip}$ and $\Sigma_{\unif}$ of $\F_2$ for which
+\begin{equation}\label{eq:main-chain}
+ 0<\frac15\log4
+ \le h_{\Sigma_{\unif}}(X_3)
+ \le C_3
+ <\log2
+ \le h_{\Sigma_{\bip}}(X_3),
+\end{equation}
+where
+\begin{equation}\label{eq:C3}
+ C_3=-\log\bigl((1+y_3)(1-y_3)^2\bigr),
+ \qquad y_3=3(1-y_3)^4,\qquad y_3\in(0,1).
+\end{equation}
+Numerically,
+\[
+ y_3=0.3968993633863\ldots,
+ \qquad C_3=0.6770873658955\ldots
+ <\log2=0.6931471805599\ldots.
+\]
+In particular, both entropies are positive and they are different.
+\end{theorem}
+
+There are four proof layers.  First, exact $X_3$-models on $G_\sigma$ are
+counted by \eqref{eq:partition}.  Topological sofic entropy counts approximate
+microstates, however, so this observation alone is insufficient.  We prove a
+uniform repair estimate: zeroing at most a $\delta$ fraction of coordinates
+repairs every labelling with at most $\delta|V|$ bad generator incidences, and
+the Hamming fibres of this repair have size
+\[
+ \exp\!\left(|V|[H(\delta)+\delta\log3+o(1)]\right).
+\]
+Consequently, for every homomorphic sofic approximation $\Sigma=(\sigma_n)$,
+\begin{equation}\label{eq:model-formula-intro}
+ h_\Sigma(X_3)
+ =\limsup_{n\to\infty}\frac{1}{|V_n|}
+  \log Z_{G_{\sigma_n}}(3).
+\end{equation}
+
+Second, finite quotients inside the kernel of the parity map
+$\F_2\to\mathbb Z/2\mathbb Z$ yield bipartite action graphs.  One side has
+half the vertices and each of its vertices can independently carry zero or
+one of the three active colours, giving $4^{|V_n|/2}$ models.
+
+Third, if $\sigma(a)$ and $\sigma(b)$ are independent uniform permutations of
+$[n]$, then an exact first-moment calculation and Stirling's formula give the
+annealed exponent
+\begin{equation}\label{eq:Psi-intro}
+ \Psi_3(t)=H(t)+2\left[
+ 2(1-t)\log(1-t)-(1-2t)\log(1-2t)\right]+t\log3
+\end{equation}
+on $0\le t\le1/2$.  Its unique maximum is $C_3$.  Finally, Markov's inequality
+and asymptotic freeness permit a deterministic diagonal selection.  Deleting
+the $o(n)$ looped vertices leaves maximum degree at most four, so a greedy
+independent set gives the positive lower bound.
+
+The inequalities in \eqref{eq:main-chain} are deliberately one-sided.  We do
+not identify either entropy exactly and do not assert convergence of the
+normalized partition functions.  More importantly, the theorem is not
+presented as the first mixing SFT with two positive values.  Its residual
+contribution is the natural four-symbol nearest-neighbour system, the exact
+safe-symbol bridge, and the explicit elementary interval.
+
+\paragraph{Organization.}
+\Cref{sec:models} proves the model formula.
+\Cref{sec:bip} constructs the parity approximation.
+\Cref{sec:annealed} computes and optimizes the weighted first moment.
+\Cref{sec:selection} makes the random construction deterministic and proves
+positivity.  \Cref{sec:scope} records comparison and claim boundaries.

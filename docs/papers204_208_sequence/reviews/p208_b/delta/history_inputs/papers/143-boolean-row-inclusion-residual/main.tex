@@ -1,0 +1,340 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\B}{\mathcal B}
+\newcommand{\Pre}{\mathsf{Pre}}
+\newcommand{\Up}{\mathsf{Up}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\T}{\mathsf T}
+
+\title[Row-inclusion residual dynamics]{Row-Inclusion Residual Dynamics on Boolean Relations:\\Preorder Two-Cycles and Exact Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 06A07, 05A15, 03G15}
+\keywords{finite dynamics, Boolean relation, relational residual, preorder, Boolean lattice, induced order embedding, fibre formula}
+
+\begin{document}
+
+\begin{abstract}
+For an $n\times n$ Boolean matrix $A$, replace $A$ by the matrix that records
+inclusion among its row supports.  The first image is always a labelled
+preorder, and on every preorder the update is transpose.  We derive the
+global identity $\T_n^3=\T_n$: nonpreorders have tail one, equivalence
+relations are exactly the fixed points, and all other preorders form strict
+transpose two-cycles.  This gives every temporal fixed-set count and the
+dynamical zeta function.  We also solve the one-step inverse problem for
+every target.  For a preorder $P$, preimages are canonically bijective to
+labelled induced order-embedding maps from its antisymmetric quotient into
+the Boolean lattice $\B_n$.
+Encoding Boolean coordinates as upper sets yields an explicit
+inclusion--exclusion formula for $|\T_n^{-1}(P)|$; nonpreorder targets have
+empty fibre.  Relational self-residuation and its preorder property are
+standard background and receive no contribution credit.  Exact exhaustion
+through $n=4$ is used only for falsification, and external release remains
+on hold.
+\end{abstract}
+
+\maketitle
+\enlargethispage{2pt}
+
+\section{The literal map and theorem}
+
+Let $\B_n=2^{[n]}$ be the Boolean lattice.  For a Boolean matrix
+$A\in\{0,1\}^{n\times n}$, write
+\[
+ R_i(A)=\{j\in[n]:A_{ij}=1\}.
+\]
+Define the literal self-map
+\begin{equation}\label{eq:map}
+ \T_n(A)_{ij}=1
+ \quad\Longleftrightarrow\quad
+ R_i(A)\subseteq R_j(A).
+\end{equation}
+We represent a preorder $P$ on $[n]$ by the Boolean matrix with
+$P_{ij}=1$ exactly when $i\le_Pj$.  Let $q_n$ denote the number of labelled
+preorders on $[n]$, and let $B_n$ denote the $n$th Bell number.
+
+For a finite preorder $S$, let
+\[
+ J(S)=|\Up(S)|
+\]
+be its number of upper sets.  Given a preorder $P$, define
+$i\sim_Pj$ when $i\le_Pj$ and $j\le_Pi$, and let $Q=P/{\sim_P}$ be the
+resulting quotient poset.  Put
+\begin{equation}\label{eq:DQ}
+ D_Q=\{(q,r)\in Q^2:q\not\le_Qr\}.
+\end{equation}
+For $S\subseteq D_Q$, let $Q_S$ be the preorder obtained by adjoining every
+pair in $S$ to $Q$ and taking reflexive--transitive closure.
+
+\begin{theorem}[Complete forward and inverse dynamics]\label{thm:main}
+For every $n\geq1$, the following hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The image of $\T_n$ is precisely the set of labelled preorders, and
+\begin{equation}\label{eq:transpose}
+                       \T_n(P)=P^{\mathsf T}
+\end{equation}
+for every preorder $P$.  In particular,
+\begin{equation}\label{eq:T3}
+                             \T_n^3=\T_n.
+\end{equation}
+\item Every nonpreorder has tail exactly one.  The fixed points are exactly
+the equivalence relations; every other preorder belongs to a strict
+transpose two-cycle.  Consequently, for every $k\geq1$,
+\begin{equation}\label{eq:fixed-iterates}
+ |\Fix(\T_n^k)|=
+ \begin{cases}
+ B_n,&k\text{ odd},\\
+ q_n,&k\text{ even},
+ \end{cases}
+\end{equation}
+and the Artin--Mazur zeta function is
+\begin{equation}\label{eq:zeta}
+ \zeta_{\T_n}(z)
+ =(1-z)^{-B_n}(1-z^2)^{-(q_n-B_n)/2}.
+\end{equation}
+\item A target outside the preorders has empty fibre.  For every preorder
+$P$,
+\begin{equation}\label{eq:fibre}
+ |\T_n^{-1}(P)|
+ =\sum_{S\subseteq D_Q}(-1)^{|S|}J(Q_S)^n.
+\end{equation}
+Equivalently, the fibre is canonically bijective to the set of labelled
+induced order-embedding maps $Q\hookrightarrow\B_n$; no quotient by
+automorphisms of $Q$ is taken.
+\end{enumerate}
+\end{theorem}
+
+The operation in \eqref{eq:map} is a row-oriented instance of relational
+self-residuation.  Schmidt's \cite[\S4.4, especially Fig.~4.4.2,
+p.~45]{Schmidt2011} right-residual convention relates a row of the numerator
+to the rows of the denominator that it contains; reversing that displayed
+orientation gives exactly the row-containment convention in \eqref{eq:map}.
+Relation algebra and containment preorders are standard.  Principal-upper-set
+representations are classical \cite[pp.~525--526]{Botts1954}, and induced
+embeddings in Boolean lattices belong to an established order-theoretic
+literature \cite{KatonaNagy2015}.  Our scope is the iterated finite map and
+its complete inverse atlas, not invention of any of those constructions.
+
+\section{Collapse to a preorder and order reversal}
+
+\begin{lemma}[The residual preorder]\label{lem:preorder}
+For every Boolean matrix $A$, the relation $\T_n(A)$ is reflexive and
+transitive.
+\end{lemma}
+
+\begin{proof}
+Every row support contains itself, so $R_i(A)\subseteq R_i(A)$ gives
+reflexivity.  If $R_i(A)\subseteq R_j(A)$ and
+$R_j(A)\subseteq R_k(A)$, then $R_i(A)\subseteq R_k(A)$, giving
+transitivity.
+\end{proof}
+
+\begin{lemma}[Principal upper sets reverse inclusion]\label{lem:reverse}
+If $P$ is a preorder, then $\T_n(P)=P^{\mathsf T}$.
+\end{lemma}
+
+\begin{proof}
+Row $i$ of $P$ is the principal upper set
+$\mathord{\uparrow}i=\{x:i\le_Px\}$.  We claim
+\[
+ \mathord{\uparrow}i\subseteq\mathord{\uparrow}j
+ \quad\Longleftrightarrow\quad j\le_Pi.
+\]
+If the inclusion holds, reflexivity puts $i$ in
+$\mathord{\uparrow}i$, hence in $\mathord{\uparrow}j$, so $j\le_Pi$.
+Conversely, $j\le_Pi\le_Px$ implies $j\le_Px$ by transitivity.  Substitution
+in \eqref{eq:map} proves the lemma.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}(i)--(ii)]
+By \cref{lem:preorder}, the image is contained in the preorders.  Conversely,
+if $P$ is a preorder then so is $P^{\mathsf T}$, and
+\cref{lem:reverse} gives
+\[
+                         \T_n(P^{\mathsf T})=P.
+\]
+Thus every preorder occurs in the image.  Applying
+\cref{lem:reverse} twice after the first update gives \eqref{eq:T3}.
+
+A state is periodic only if it lies in the image, hence only if it is a
+preorder.  On the preorder image the map is transpose, so every period is one
+or two.  A preorder is fixed exactly when it is symmetric.  A reflexive,
+transitive, symmetric relation is an equivalence relation, and the converse
+is immediate.  Equivalence relations on $[n]$ are counted by $B_n$; the
+remaining $q_n-B_n$ preorder states pair into strict cycles.
+
+Equation \eqref{eq:fixed-iterates} follows directly.  Finally, using
+$\zeta_{\T_n}(z)=\exp(\sum_{k\geq1}|\Fix(\T_n^k)|z^k/k)$, or multiplying one
+factor for each cycle, yields \eqref{eq:zeta}.
+\end{proof}
+
+The numbers $q_n$ also count finite labelled topologies, a classical
+correspondence and enumeration problem \cite{ErneStege1991}.  We use this
+census only to state the periodic population; it is not part of the residual
+claim.
+
+\section{Quotient-poset geometry of a fibre}
+
+\begin{proposition}[Fibre as an induced embedding set]\label{prop:embedding}
+Let $P$ be a preorder and $Q=P/{\sim_P}$.  Sending a source matrix $A$ to
+its row-support map induces a bijection to labelled embedding maps
+\begin{equation}\label{eq:bijection}
+ \T_n^{-1}(P)
+ \longleftrightarrow
+ \{f:Q\hookrightarrow\B_n:
+       q\le_Qr\Longleftrightarrow f(q)\subseteq f(r)\}.
+\end{equation}
+No automorphism quotient is taken: the elements of $Q$ are the distinguished
+equivalence classes of the fixed labelled target $P$.
+\end{proposition}
+
+\begin{proof}
+Suppose $\T_n(A)=P$.  By definition,
+\begin{equation}\label{eq:iff}
+ i\le_Pj\quad\Longleftrightarrow\quad R_i(A)\subseteq R_j(A).
+\end{equation}
+If $i\sim_Pj$, both inclusions in \eqref{eq:iff} hold and the rows are
+equal.  Conversely, equal rows force both relations, so the row assignment
+descends to an injective map $f:Q\to\B_n$.  The two directions in
+\eqref{eq:iff} say exactly that $f$ preserves and reflects order.
+
+Conversely, from an induced order embedding $f$ assign row support $f([i])$
+to every $i$.  Order preservation and reflection then make
+\eqref{eq:iff} hold, so the resulting Boolean matrix maps to $P$.  The two
+constructions are inverse.
+\end{proof}
+
+The quotient is essential.  Mutual comparability in a preorder is exactly
+the equality forced among source rows; treating all $n$ labels as distinct
+would incorrectly demand an injective embedding before this forced collapse.
+
+\section{Every-target inclusion--exclusion}
+
+\begin{lemma}[Coordinate encoding]\label{lem:coordinates}
+For any finite preorder $S$, the number of order-preserving maps
+$f:S\to\B_n$ is $J(S)^n$.
+\end{lemma}
+
+\begin{proof}
+For coordinate $c\in[n]$, put
+\[
+ U_c=\{q\in S:c\in f(q)\}.
+\]
+The map $f$ is order preserving exactly when every $U_c$ is an upper set.
+The $n$ coordinates are independently chosen, giving $J(S)^n$.  Conversely,
+the chosen upper sets recover $f(q)=\{c:q\in U_c\}$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}(iii)]
+A nonpreorder cannot be a target by \cref{lem:preorder}.  Fix a preorder
+$P$ and its quotient poset $Q$.  Begin with all order-preserving maps
+$f:Q\to\B_n$.  For each $(q,r)\in D_Q$, let $E_{q,r}$ be the bad event
+\[
+                             f(q)\subseteq f(r).
+\]
+Avoiding every such event is precisely order reflection, and hence, by
+\cref{prop:embedding}, membership in the desired fibre.
+
+If all events indexed by $S\subseteq D_Q$ are imposed, then $f$ must preserve
+the original order of $Q$ together with every adjoined comparison in $S$.
+This is equivalent to being order preserving for the reflexive--transitive
+closure $Q_S$.  By \cref{lem:coordinates}, the number of such maps is
+$J(Q_S)^n$.  Inclusion--exclusion over the bad events gives \eqref{eq:fibre}.
+\end{proof}
+
+The formula remains valid when added comparisons identify elements in
+$Q_S$: upper sets depend only on the resulting preorder.  Standard
+inclusion--exclusion and poset enumeration are used in their ordinary senses
+\cite{Stanley2012}; no algorithmic novelty is asserted.
+
+\section{Exact audit and limitations}
+
+The paper-local verifier exhausts all $2^{n^2}$ matrices for $n\leq4$.  For
+each source it independently checks preorder formation,
+$\T(P)=P^{\mathsf T}$, and $\T^3=\T$.  It then compares the formula
+\eqref{eq:fibre} with direct fibre counts for every preorder target.
+\Cref{tab:audit} is a compact fingerprint of the frozen run.
+
+\begin{table}[ht]
+\centering
+\caption{Exact theorem-interface audit.  ``Strict states'' counts states in
+strict two-cycles, not cycles.}
+\label{tab:audit}
+\begin{tabular}{rrrrrrr}
+\toprule
+$n$ & states & preorders & fixed & strict states & min fibre & max fibre\\
+\midrule
+1 & 2 & 1 & 1 & 0 & 2 & 2\\
+2 & 16 & 4 & 2 & 2 & 2 & 5\\
+3 & 512 & 29 & 5 & 24 & 8 & 24\\
+4 & 65,536 & 355 & 15 & 340 & 16 & 600\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The run contains 265,050 exact assertions.  Enumeration supplies no step of
+the proofs and says nothing about novelty beyond the tested boxes.
+
+A second, independently implemented lane does not call the
+inclusion--exclusion evaluator.  It enumerates labelled maps into Boolean
+lattices, tests order preservation and reflection, expands each map
+class-by-class to a source matrix, and compares the resulting set with every
+direct fibre through $n=4$.  It also checks all 219 labelled four-element
+posets in $\B_5$.  That lane executes 13,238,845 further exact assertions;
+it too is only counterexample pressure.
+
+There are also substantive limitations.  Formula \eqref{eq:fibre} is exact
+but exponential in the number of missing ordered pairs; we do not claim an
+efficient general evaluator.  It does not simplify the still-difficult
+global enumeration of labelled preorders.  Most importantly, the first-step
+self-residual construction is owned relation-algebra background.  A bounded
+source search did not locate the precise iterated-plus-inverse conjunction,
+but a non-hit is not a priority or novelty certificate.
+
+\section{Conclusion}
+
+Row-support inclusion sends the full Boolean-relation cube onto the preorder
+stratum in one step, and principal upper sets turn the next update into order
+reversal.  This produces a complete one-step-tail, one/two-cycle dynamical
+atlas.  Quotienting mutual comparability exposes the inverse geometry:
+source rows are labelled induced Boolean-lattice representation maps, and upper-set
+coordinates make every fibre accessible to inclusion--exclusion.  These
+statements form an internally verified theorem package; external release,
+priority, authorship, and submission remain on hold.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

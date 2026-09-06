@@ -1,0 +1,92 @@
+\section{The dyadic-sum source and its weighted operator}
+\label{sec:source}
+
+Let $G_2$ be the undirected looped graph with vertex set $\N$ and
+\begin{equation}
+  m\sim n \quad\Longleftrightarrow\quad
+  m+n=2^a\text{ for some integer }a\ge1.
+  \label{eq:edge-relation}
+\end{equation}
+Its one-sided edge shift consists of sequences
+$(n_j)_{j\ge0}$ satisfying $n_j\sim n_{j+1}$.  One edge is one unit of
+time, and the formal marker $z$ records that time.  A primitive orbit, when
+needed, is a cyclic vertex word of least shift period, modulo rotation.
+Dyadic edge labels are constraints derived from a vertex word; they are not
+the primitive objects.
+
+For $s\in\C$, define the coefficient array $h_s$ by
+\cref{eq:intro-matrix}, with
+$n^{-s/2}=\exp[-(s/2)\log n]$ and the real logarithm.  We say that $h_s$
+has a \emph{bounded realization} if there is $H_s\in\Bop(\ell^2(\N))$ with
+matrix coefficients $\ip{H_se_n}{e_m}=h_s(m,n)$.  This formulation matters
+when $\sigma\le0$: a column then need not lie in $\ell^2$, so we do not
+silently introduce an unbounded operator on finitely supported vectors.  On
+odd vertices, $A_s$ denotes the corresponding compression whenever the
+bounded realization exists.
+
+\begin{table}[t]
+  \centering
+  \caption{The typed objects used in the operator and walk ledgers.}
+  \label{tab:typed-objects}
+  \small
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Object & Mathematical type & Not identified with \\
+    \midrule
+    $n$ & positive-integer vertex & rational-prime primitive \\
+    $q_i=2^{a_i}$ & derived edge label & temporal orbit \\
+    $(n_1,\ldots,n_r)$ & based closed vertex walk & unordered labels \\
+    $z$ & one-edge time marker & valuation weight \\
+    $2^{-krs}$ & $r$-step block weight & time marker \\
+    $H_s$ & bounded weighted adjacency, when legal & nonreal self-adjoint operator \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{lemma}[Left--right phase factorization]
+\label{lem:phase}
+Let $s=\sigma+it$, let $U_t e_n=n^{-it/2}e_n$, and write
+$H_s^{(N)}=(h_s(m,n))_{1\le m,n\le N}$ and
+$U_t^{(N)}=\diag(n^{-it/2})_{1\le n\le N}$.  Entrywise, and hence for every
+finite matrix,
+\begin{equation}
+  H_s^{(N)}=U_t^{(N)}H_\sigma^{(N)}U_t^{(N)}.
+  \label{eq:finite-phase}
+\end{equation}
+If the coefficient arrays have bounded realizations, then
+$H_s=U_tH_\sigma U_t$.  Consequently boundedness, compactness, singular
+values, Schatten membership, and the corresponding norms depend only on
+$\sigma$.
+\end{lemma}
+
+\begin{proof}
+The $(m,n)$ coefficient on the right of \cref{eq:finite-phase} is
+$m^{-it/2}h_\sigma(m,n)n^{-it/2}=h_s(m,n)$.  Each finite compression is an
+ordinary matrix identity.  If $H_\sigma$ is bounded, the same calculation
+gives the full bounded identity.  Conversely, $U_t^*H_sU_t^*$ is a bounded
+operator with coefficients $h_\sigma$.  Left and right multiplication by
+unitaries preserves singular values and all properties listed above.
+\end{proof}
+
+The factorization is not a unitary conjugacy: the two copies of $U_t$ point
+in the same direction.  It therefore transfers neither spectra nor powers,
+traces, or determinants.  All such identities below retain the complex
+parameter and come instead from an actual basis-reordering direct sum.
+
+The loop locations and valuation constraint are elementary but structural.
+There is a loop at $m$ precisely when $2m=2^a$, hence precisely at
+$m=2^k$, $k\ge0$.
+
+\begin{lemma}[Valuation preservation]
+\label{lem:valuation}
+If $m+n=2^a$ with $m,n\in\N$, then $\vTwo(m)=\vTwo(n)$.  If this common
+value is $k$ and $m=2^ku$, $n=2^kv$, then $u,v$ are odd and
+$u+v=2^{a-k}$.
+\end{lemma}
+
+\begin{proof}
+If the two valuations differed, the valuation of their sum would equal the
+smaller one.  Because $m,n<2^a$, that value is strictly smaller than $a$,
+contradicting $\vTwo(m+n)=a$.  Dividing the equality by $2^k$ gives the
+second statement.
+\end{proof}

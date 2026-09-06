@@ -1,0 +1,104 @@
+\section{Arithmetic prefixes}\label{sec:prefixes}
+
+Let $[L]=\{1,\ldots,L\}$.  The global free-axis coordinates immediately
+give the exact prefix law, including extension to a full point.
+
+\begin{proposition}[Exact prefix count]\label{prop:prefix-count}
+For every $L\geq1$,
+\begin{equation}\label{eq:prefix-count}
+ \left|\proj_{[L]}(X_{a,b})\right|
+ =q^{L-\lfloor L/(ab)\rfloor}.
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:prefix-dimension}
+ \dim_{\F_q}\proj_{[L]}(X_{a,b})
+ =L-\left\lfloor\frac{L}{ab}\right\rfloor.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The free indices in the prefix are
+\[
+ \cB\cap[L]=\{n\leq L:ab\nmid n\},
+\]
+whose cardinality is $L-\lfloor L/(ab)\rfloor$.  Every coordinate at most
+$L$ is determined by these free values: if $n=r a^i b^j\leq L$, then the
+three indices $r a^i$, $r b^j$, and $r$ in
+\eqref{eq:inverse-map} are all at most $n$.
+
+Conversely, every assignment on $\cB\cap[L]$ occurs in a global point.  Extend
+it arbitrarily, for example by zero, to all of $\cB$ and apply
+\Cref{prop:global-homeo}.  Restriction from the prefix pattern set to
+$\cB\cap[L]$ is therefore a bijection.  Counting its assignments proves
+\eqref{eq:prefix-count}.
+\end{proof}
+
+There is also an independent check of the rank of the internally visible
+constraint matrix.  The identification of its kernel with the actual prefix
+projection still uses the global extension established in
+\Cref{prop:global-homeo}; the pivot computation below is not, by itself, an
+extension theorem.  The constraints visible inside $[L]$ are indexed by
+$1\leq n\leq\lfloor L/(ab)\rfloor$.  Each has the form
+\begin{equation}\label{eq:prefix-row}
+ x_n-x_{an}-x_{bn}+x_{abn}=0.
+\end{equation}
+
+\begin{lemma}[Triangular prefix pivots]\label{lem:prefix-pivots}
+The rows \eqref{eq:prefix-row}, for
+$n\leq\lfloor L/(ab)\rfloor$, are linearly independent over every field.
+Their rank is $\lfloor L/(ab)\rfloor$.
+\end{lemma}
+
+\begin{proof}
+Suppose that a nontrivial linear combination vanishes and choose the largest
+index $n$ with nonzero row coefficient.  The coordinate $abn$ appears in the
+row indexed by $n$ with coefficient one.  If it appears in another row
+indexed by $m$, then one of
+\[
+ m=abn,\qquad am=abn,\qquad bm=abn,\qquad abm=abn
+\]
+holds.  Apart from $m=n$ in the last equality, each possible $m$ is larger
+than $n$.  All such row coefficients vanish by maximality.  The coefficient
+of $x_{abn}$ in the linear combination is therefore the nonzero coefficient
+of the $n$th row, a contradiction.
+\end{proof}
+
+The pivot proof shows that the local constraint matrix has exactly one
+independent row for each multiple of $ab$.  Together with the extension and
+dimension results in \Cref{prop:global-homeo,prop:prefix-count}, this confirms
+that there are no further prefix relations.  In the graph language it gives
+the identity
+\begin{equation}\label{eq:prefix-cycle-rank}
+ \beta([L])=\left\lfloor\frac{L}{ab}\right\rfloor.
+\end{equation}
+Thus the same number is the codimension of the prefix projection and the total
+root-wise cycle rank of its incidence graphs.
+
+\begin{definition}[Arithmetic-prefix complexity]\label{def:prefix-complexity}
+Define
+\[
+ h_{\mathrm{pref}}(X_{a,b})
+ =\lim_{L\to\infty}\frac1L
+ \log|\proj_{[L]}(X_{a,b})|.
+\]
+\end{definition}
+
+\begin{corollary}\label{cor:prefix-rate}
+The limit in \Cref{def:prefix-complexity} exists and equals
+\begin{equation}\label{eq:prefix-rate}
+ h_{\mathrm{pref}}(X_{a,b})
+ =\left(1-\frac1{ab}\right)\log q.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Divide \eqref{eq:prefix-count} by $L$ on the logarithmic scale and let
+$L\to\infty$.
+\end{proof}
+
+\begin{remark}[Terminology firewall]\label{rem:prefix-not-entropy}
+The sets $[L]$ are arithmetic intervals, not a declared F\o lner sequence for
+the multiplicative semigroup acting by decimations.  Accordingly,
+\eqref{eq:prefix-rate} is a prefix pattern-growth invariant.  No topological
+or measure entropy for a multiplicative action is inferred from it.
+\end{remark}

@@ -1,0 +1,307 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\cV}{\mathcal V}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Span}{\operatorname{span}}
+
+\title[State-selected finite differences]{State-Selected Finite Differences:\\
+Complete Fibres and Jordan Blocks}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 11T06, 15A21}
+\keywords{finite dynamical system, finite difference, functional graph,
+augmentation ideal, Jordan block}
+
+\begin{document}
+
+\begin{abstract}
+For a prime $p$, consider all functions $f:\F_p\to\F_p$ and update
+\[
+             f(x)\longmapsto f(x+f(0))-f(x).
+\]
+The current value at zero selects a new translation direction at every
+epoch, so the map is nonlinear despite being assembled from linear
+differences.  We prove a complete finite atlas.  The $t$th image is the
+$t$th cyclic-difference layer and has size $p^{p-t}$ for $0\le t\le p$;
+each nonzero target in that layer has exactly $(p-1)^t$ time-$t$
+preimages, while the zero fibre is obtained explicitly by mass balance.
+The functional graph is one rooted component of sharp height $p$, with
+closed depth shells.  Its complex transition operator has one
+$J_1(1)$ block, $(p-1)^2p^{p-s-1}$ blocks $J_s(0)$ for $s<p$, and
+$p-1$ blocks $J_p(0)$.  Fixed finite differences, augmentation-ideal
+nilpotence, and generic rank-to-Jordan conversion are assigned no
+contribution credit.  The literal feedback conjunction remains
+owner-thin and externally held.
+\end{abstract}
+
+\maketitle
+
+\section{The feedback map and theorem}
+
+Fix a prime $p$ and put
+\[
+ \cV=\F_p^{\F_p}=\{f:\F_p\to\F_p\}.
+\]
+For $a\in\F_p$, let $(\tau_a f)(x)=f(x+a)$ and
+$D_a=\tau_a-I$.  Our literal self-map is
+\begin{equation}\label{eq:T}
+                  T(f)=D_{f(0)}f.
+\end{equation}
+Thus $T(f)=0$ immediately when $f(0)=0$; otherwise the direction used at
+the next epoch depends on the new state.  Write $\tau=\tau_1$,
+$N=\tau-I$, and
+\[
+                     J^t=N^t\cV\qquad(0\le t\le p).
+\]
+
+Difference operators and their augmentation-ideal formulation are standard
+\cite{AichingerMoosbauer2021}.  The nilpotent/bijective decomposition and
+functional graphs of fixed linear maps over finite fields are likewise
+classical \cite{HernandezToledo2005}.  We assign the filtration $J^\bullet$,
+fixed-difference nilpotence, affine kernel counts, and rank-to-Jordan
+conversion no contribution credit.  The object isolated here is the
+state-selected direction in \eqref{eq:T}, especially its anchored inverse
+system.
+
+\begin{theorem}[complete temporal, inverse, and algebraic atlas]\label{thm:atlas}
+For every prime $p$, the map \eqref{eq:T} has the following properties.
+\begin{enumerate}[(i)]
+\item For $0\le t\le p$,
+\begin{equation}\label{eq:image}
+       \im T^t=J^t,\qquad \dim_{\F_p}J^t=p-t,\qquad
+       |\im T^t|=p^{p-t}.
+\end{equation}
+In particular $T^p=0$, and this exponent is sharp.
+
+\item If $1\le t\le p$ and $g\in\cV$, then
+\begin{equation}\label{eq:fibres}
+ |(T^t)^{-1}(g)|=
+ \begin{cases}
+ p^p-\bigl(p^{p-t}-1\bigr)(p-1)^t,&g=0,\\
+ (p-1)^t,&0\ne g\in J^t,\\
+ 0,&g\notin J^t.
+ \end{cases}
+\end{equation}
+At $t=0$ every fibre is a singleton.  For $t\ge p$, the only
+nonempty fibre is the zero fibre, of size $p^p$.
+
+\item Zero is the unique recurrent state, and the functional graph is one
+rooted component with its root loop retained.  If $\delta(f)$ is the least
+$t$ with $T^t(f)=0$, then the number $A_d$ of states of exact depth $d$ is
+\begin{equation}\label{eq:depth}
+ A_0=1,\qquad
+ A_d=(p-1)^{d-1}\bigl(p^{p-d}+p-2\bigr)
+ \quad(1\le d\le p).
+\end{equation}
+Every nonzero target in $J^1$ has $p-1$ immediate predecessors, every
+target outside $J^1$ has none, and zero has
+\begin{equation}\label{eq:rootdegree}
+             p^p-\bigl(p^{p-1}-1\bigr)(p-1)
+\end{equation}
+immediate predecessors, including its loop.
+
+\item On the complex vector space with basis $\{e_f:f\in\cV\}$, define the
+deterministic transition operator $P e_f=e_{T(f)}$.  Then
+\begin{equation}\label{eq:charpoly}
+                   \chi_P(\lambda)=(\lambda-1)\lambda^{p^p-1}.
+\end{equation}
+Besides one $J_1(1)$ block, the number $m_s$ of zero-Jordan blocks of
+size $s$ is
+\begin{equation}\label{eq:jordan}
+ m_s=(p-1)^2p^{p-s-1}\quad(1\le s<p),
+ \qquad m_p=p-1.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\section{The difference flag and anchored lifting}
+
+For $0\le j<p$, regard
+\[
+ e_j(x)=\binom{x}{j}=\frac{x(x-1)\cdots(x-j+1)}{j!}
+\]
+as a function on $\F_p$, with $e_0=1$.  Their evaluation matrix on
+$0,1,\ldots,p-1$ is lower triangular with diagonal one, so
+$e_0,\ldots,e_{p-1}$ form a basis of $\cV$.  Pascal's identity gives
+\begin{equation}\label{eq:pascal}
+             Ne_0=0,\qquad Ne_j=e_{j-1}\quad(1\le j<p).
+\end{equation}
+Consequently
+\begin{equation}\label{eq:flag}
+        J^i=\Span_{\F_p}\{e_0,\ldots,e_{p-1-i}\},
+        \qquad \dim J^i=p-i.
+\end{equation}
+This is the familiar one-block cyclic-difference flag.
+
+\begin{lemma}[nonzero directions and zero anchoring]\label{lem:anchor}
+Let $a\in\F_p^\times$ and $0\le i<p$.  The restriction
+\[
+                       D_a:J^i\longrightarrow J^{i+1}
+\]
+is onto and has kernel $\F_p e_0$.  For each $h\in J^{i+1}$ and each
+$b\in\F_p$, exactly one solution $f\in J^i$ of $D_af=h$ satisfies
+$f(0)=b$.
+\end{lemma}
+
+\begin{proof}
+Choose the integer representative $r\in\{1,\ldots,p-1\}$ of $a$.
+Since $\tau_a=\tau^r=(I+N)^r$,
+\[
+ D_a=N U_a(N),\qquad
+ U_a(z)=\sum_{k=1}^{r}\binom rk z^{k-1},\qquad U_a(0)=a.
+\]
+The polynomial $U_a(N)$ is invertible because $N$ is nilpotent and its
+constant coefficient is nonzero.  It preserves every $J^i$, commutes with
+$N$, and acts on $\ker N=\F_p e_0$ as multiplication by $a$.  Equations
+\eqref{eq:pascal}--\eqref{eq:flag} now show that $D_a$ maps $J^i$ onto
+$J^{i+1}$ with kernel $\F_p e_0$.  A nonempty solution set is therefore
+an affine line $f_0+\F_p e_0$.  Since $e_0(0)=1$, evaluation at zero is a
+bijection from this line to $\F_p$, proving the anchored assertion.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas}(i)--(ii)]
+Suppose a trajectory has not yet reached zero and record its direction word
+\[
+          (a_0,\ldots,a_{t-1})
+          =\bigl(f_0(0),\ldots,f_{t-1}(0)\bigr)
+          \in(\F_p^\times)^t.
+\]
+Each nonzero difference raises the flag index by one, while a zero direction
+sends the state to zero.  Hence $T^t(\cV)\subseteq J^t$ and $T^p=0$.
+
+Conversely, fix $0\ne g\in J^t$ and a word
+$(a_0,\ldots,a_{t-1})\in(\F_p^\times)^t$.  Set $f_t=g$ and solve backward,
+for $i=t-1,\ldots,0$,
+\begin{equation}\label{eq:backward}
+             D_{a_i}f_i=f_{i+1},\qquad f_i(0)=a_i,
+             \qquad f_i\in J^i.
+\end{equation}
+Lemma~\ref{lem:anchor} gives exactly one $f_i$ at every step.  Distinct
+words give distinct sources because a forward orbit recovers each $a_i$.
+Thus every nonzero $g\in J^t$ has exactly $(p-1)^t$ sources, proving the
+second line of \eqref{eq:fibres} and the reverse inclusion in
+\eqref{eq:image}.  A target outside $J^t$ is unreachable.  Subtracting the
+mass of the $p^{p-t}-1$ nonzero targets from the $p^p$ sources yields the
+zero line of \eqref{eq:fibres}.
+
+For sharpness, let $f_\star=\sum_{j=0}^{p-1}e_j$.  Repeated use of
+\eqref{eq:pascal} gives
+\[
+        N^k f_\star=\sum_{j=0}^{p-1-k}e_j,\qquad
+        (N^k f_\star)(0)=1\quad(0\le k<p).
+\]
+The selected direction therefore remains one until the last step:
+$T^{p-1}f_\star=e_0\ne0$ and $T^pf_\star=0$.
+\end{proof}
+
+\section{The rooted graph and transition operator}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas}(iii)]
+The relation $T^p=0$ makes zero the sole recurrent state.  Formula
+\eqref{eq:fibres} at $t=1$ gives every immediate indegree and
+\eqref{eq:rootdegree}.  Thus the graph is a single rooted component; the
+stated indegrees describe all of its branching.
+
+Let $Z_t=|(T^t)^{-1}(0)|$.  Exact depth $d$ means membership in the
+$d$th zero fibre but not the $(d-1)$st, so $A_d=Z_d-Z_{d-1}$.  Using
+\eqref{eq:fibres}, with $Z_0=1$ and $Z_p=p^p$, gives
+\[
+ Z_d-Z_{d-1}
+ =(p-1)^{d-1}\bigl(p^{p-d}+p-2\bigr)
+\]
+for every $1\le d\le p$, including the two endpoints.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas}(iv)]
+Put $E=P^p$.  Since $T^p(f)=0$ for every state, $Ee_f=e_0$; hence $E$ is a
+rank-one idempotent commuting with $P$.  This gives the invariant
+decomposition
+\[
+       \mathbb C^{\cV}=\im E\oplus\ker E.
+\]
+The restriction of $P$ to $\im E=\mathbb C e_0$ is the identity, whereas
+$Q=P|_{\ker E}$ is nilpotent of exponent at most $p$.  This proves
+\eqref{eq:charpoly}.
+
+For $0\le t\le p$, the image of $P^t$ is spanned by
+$\{e_g:g\in J^t\}$ and therefore has dimension $p^{p-t}$.  Moreover
+\[
+ P^t(\ker E)=\im P^t\cap\ker E.
+\]
+Indeed, only the reverse inclusion needs comment: if $y=P^tx$ and $Ey=0$,
+then $P^t(x-Ex)=y$.  Since $E$ has rank one on $\im P^t$, it follows that
+\begin{equation}\label{eq:ranks}
+                \rank Q^t=p^{p-t}-1=:r_t.
+\end{equation}
+For a nilpotent operator, the number of blocks of exact size $s<p$ is the
+second rank difference
+\[
+                   m_s=r_{s-1}-2r_s+r_{s+1},
+\]
+while $m_p=r_{p-1}$.  Substitution into \eqref{eq:ranks} gives
+\eqref{eq:jordan}.  This rank-to-block conversion is generic linear
+algebra and is not part of the claimed mechanism.
+\end{proof}
+
+\begin{remark}[the smallest boundary]\label{rem:p2}
+At $p=2$, the image sizes are $4,2,1$, the depth layers are $1,2,1$, and
+the transition operator has $J_1(1)\oplus J_1(0)\oplus J_2(0)$.  Thus the
+sharp clock and the top zero block already occur in the first admissible
+prime.
+\end{remark}
+
+\section{Exact controls, ownership, and limits}
+
+The paper-local verifier represents functions directly as value tuples and
+starts from the literal update \eqref{eq:T}.  It exhausts every state, every
+target, and every time through $p=5$, including the direction-word lift
+behind \eqref{eq:backward}.  A separate modular-matrix certificate checks
+the binomial flag, all ranks, and anchor injectivity for
+$p=2,3,5,7,11,13,17,19$.  The settled run makes $44{,}689$ exact
+assertions over $3{,}156$ literal arrows.  These computations pressure-test
+arithmetic and boundary cases; they do not prove the theorem.
+
+The ownership subtraction is intentionally severe.  The operators
+$D_a=\tau_a-I$, augmentation powers, and their nilpotency belong to the
+finite-difference background represented by \cite{AichingerMoosbauer2021}.
+Fixed linear finite dynamical systems and their nilpotent flags are also
+established territory \cite{HernandezToledo2005}.  Internally, the A05 scout
+already discarded iteration of one fixed cyclic difference, and P164
+already used a nonlinear first step followed by a fixed cyclic-difference
+tail.  Their image flags, kernel cosets, clocks, and Jordan conversions all
+receive zero separation credit here.
+
+What remains is narrower: \eqref{eq:T} selects its direction at every epoch,
+the nonzero direction word is observable along the orbit, and the same
+observed values anchor each reverse integration uniquely.  That feedback
+mechanism yields the simultaneous nonuniform zero/nonzero fibre atlas
+\eqref{eq:fibres} and the $p-1$ top Jordan blocks.  A bounded exact-literal
+search found no direct owner of this conjunction, but a search nonhit does
+not establish novelty, priority, or freedom to operate.  The note therefore
+remains \textsc{owner\_thin} and \textsc{hold\_external}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

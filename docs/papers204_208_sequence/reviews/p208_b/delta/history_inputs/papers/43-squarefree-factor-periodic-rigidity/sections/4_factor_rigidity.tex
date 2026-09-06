@@ -1,0 +1,141 @@
+\section{Arbitrary-factor periodic rigidity}
+\label{sec:factor-rigidity}
+
+Source proximality becomes useful only after its quantifiers survive the
+factor map.  We therefore separate factor permanence from periodic-orbit
+separation.  This also makes clear that the target need not be symbolic.
+
+\subsection{Proximality passes to every lawful factor}
+
+Fix a compact metrizable space \(Y\), a homeomorphism \(S:Y\to Y\), and a
+continuous surjection \(\pi:\Xsf\twoheadrightarrow Y\) satisfying
+\begin{equation}
+  \pi\circ\sigma^n=S^n\circ\pi
+  \qquad(n\in\mathbb Z).
+  \label{eq:factor-equivariance}
+\end{equation}
+
+\begin{lemma}[Factor permanence]
+\label{lem:factor-proximal}
+The target system \((Y,S)\) is proximal.
+\end{lemma}
+
+\begin{proof}
+Let \(y_1,y_2\in Y\).  Surjectivity supplies lifts
+\(x_1,x_2\in\Xsf\) with \(\pi(x_i)=y_i\).  Because \(\Xsf\) is compact,
+continuity of \(\pi\) is uniform: for every \(\varepsilon>0\), some
+\(\delta>0\) satisfies
+\[
+  d_X(u,v)<\delta
+  \Longrightarrow
+  d_Y(\pi u,\pi v)<\varepsilon.
+\]
+By \cref{cor:source-proximal}, choose \(n\geq0\) with
+\(d_X(\sigma^n x_1,\sigma^n x_2)<\delta\).  Equivariance gives
+\[
+  d_Y(S^n y_1,S^n y_2)
+  =d_Y(\pi\sigma^n x_1,\pi\sigma^n x_2)<\varepsilon.
+\]
+As \(\varepsilon\) is arbitrary, \((y_1,y_2)\) is proximal.
+\end{proof}
+
+Each hypothesis has a distinct role.  Surjectivity lifts arbitrary target
+pairs.  Continuity and source compactness yield uniform control.  Equivariance
+compares the same time in source and target.  The theorem does not extend by
+wordplay to a map missing any of these properties.
+
+\subsection{Finite-orbit separation}
+
+Equivariance anchors the fixed point
+\begin{equation}
+  y_0:=\pi(0^{\mathbb Z}),
+  \qquad Sy_0=y_0.
+  \label{eq:fixed-anchor}
+\end{equation}
+
+\begin{lemma}[Periodic separation]
+\label{lem:periodic-separation}
+Let \((Y,S)\) be a proximal metrizable \(\mathbb Z\)-system with a fixed
+point \(y_0\).  Then \(y_0\) is the only periodic point.
+\end{lemma}
+
+\begin{proof}
+Suppose \(y\) has least period \(r\).  If \(r=1\) and \(y\neq y_0\), then
+\[
+  d_Y(S^n y,S^n y_0)=d_Y(y,y_0)>0
+  \qquad(n\geq0),
+\]
+so the pair \((y,y_0)\) is not proximal.
+
+Now suppose \(r>1\).  The points \(S^k y\) and \(S^{k+1}y\) are distinct
+for every \(0\leq k<r\).  The finite minimum
+\begin{equation}
+  \delta_r:=\min_{0\leq k<r}
+  d_Y(S^k y,S^{k+1}y)
+  \label{eq:periodic-gap}
+\end{equation}
+is therefore positive.  Reducing \(n\) modulo \(r\) shows
+\[
+  d_Y(S^n y,S^n(Sy))\geq\delta_r
+  \qquad(n\geq0).
+\]
+Thus \((y,Sy)\) is not proximal.  Both cases contradict proximality unless
+\(y=y_0\).
+\end{proof}
+
+\input{figures/fig2_factor_separation}
+
+\subsection{The theorem}
+
+\begin{theorem}[Squarefree factor periodic rigidity]
+\label{thm:factor-rigidity}
+Let \(\Xsf\) be the exact source in
+\cref{eq:source-definition-intro}.  For every compact metrizable
+\(\mathbb Z\)-system \((Y,S)\) and every continuous surjective equivariant
+map \(\pi:\Xsf\twoheadrightarrow Y\),
+\[
+  \Per(Y,S)=\{\pi(0^{\mathbb Z})\}.
+\]
+\end{theorem}
+
+\begin{proof}
+By \cref{eq:fixed-anchor}, \(y_0=\pi(0^{\mathbb Z})\) is fixed.
+\Cref{cor:source-proximal,lem:factor-proximal} make \((Y,S)\) proximal, and
+\cref{lem:periodic-separation} excludes every periodic point other than
+\(y_0\).
+\end{proof}
+
+The word ``every'' in \cref{thm:factor-rigidity} refers to the entire lawful
+factor category, not to a finite list of symbolic quotients.  The proof never
+examines a target alphabet or a coding radius.  Conversely, the theorem is
+not a universal statement that factors of aperiodic systems are aperiodic.
+It succeeds because the frozen source is proximal; deleting that property
+invalidates the finite-orbit contradiction.
+
+\subsection{Assumption ledger}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Where the factor assumptions enter.}
+\label{tab:factor-assumptions}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}X@{}}
+\toprule
+Assumption & Use in the proof & What deletion permits \\
+\midrule
+all prime-square exclusions & fresh coprime moduli for every window & finite
+  approximants with cycles \\
+continuity & small source distance gives small target distance & arbitrary
+  observations need not preserve proximality \\
+surjectivity & lifts every target pair & a partial image says nothing about
+  all target points \\
+equivariance & aligns source and target time & time-varying or unrelated maps \\
+compact metric source & uniform continuity & merely pointwise control is
+  insufficient for the stated argument \\
+homeomorphic \(\mathbb Z\)-action & exact two-sided factor category & changed
+  semigroup/induced dynamics \\
+\bottomrule
+\end{tabularx}
+\end{table}
+

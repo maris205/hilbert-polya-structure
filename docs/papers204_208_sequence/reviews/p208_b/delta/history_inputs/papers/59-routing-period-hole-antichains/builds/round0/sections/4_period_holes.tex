@@ -1,0 +1,131 @@
+\section{Period-hole antichains}
+\label{sec:period-holes}
+
+Let $M$ be a positive-entropy topologically mixing one-dimensional SFT.  Its
+\emph{period-hole set} is
+\begin{equation}
+ H(M)=\{n\in\N_{>0}:\Fix_M(\sigma^n)=\varnothing\},
+ \label{eq:hole-set}
+\end{equation}
+ordered by divisibility.
+
+\begin{proposition}[Finite downward ideal]
+\label{prop:hole-ideal}
+The set $H(M)$ is a finite downward ideal.  If $A$ is a primitive adjacency
+presentation and $e$ satisfies $A^e>0$, then
+\begin{equation}
+ H(M)=\{1\leq n<e:\tr(A^n)=0\}.
+ \label{eq:hole-traces}
+\end{equation}
+In particular, $H(M)$ and all of its antichains are effectively computable.
+\end{proposition}
+
+\begin{proof}
+If $d\mid n$ and $x\in\Fix_M(\sigma^d)$, then
+$x\in\Fix_M(\sigma^n)$.  Taking the contrapositive, every positive divisor of
+a hole is a hole.
+
+Equation \eqref{eq:trace-fix} identifies holes with zero traces.  A primitive
+matrix has no zero column.  Hence $A^e>0$ implies $A^{e+1}=A^eA>0$: for each
+column $j$, choose $k$ with $A_{kj}>0$, and then
+$(A^{e+1})_{ij}\geq(A^e)_{ik}A_{kj}>0$ for every $i$.  Induction gives
+$A^n>0$ for all $n\geq e$, and therefore $\tr(A^n)>0$ for those $n$.  This
+proves \eqref{eq:hole-traces} and finiteness.
+\end{proof}
+
+Let $O_p$ denote one orbit whose points have minimal period $p$.  We realize
+all disjoint unions below on pairwise disjoint alphabets.  Thus their pieces
+are clopen; when $M$ is an SFT, the union is the edge shift of a block-diagonal
+finite graph and is again an SFT.
+
+\input{figures/routing_table.tex}
+
+\begin{lemma}[Routes involving periodic orbits]
+\label{lem:periodic-routes}
+For positive integers $p,q$:
+\begin{enumerate}[label=(\roman*)]
+  \item $O_p\pito O_q$ if and only if $q\mid p$;
+  \item $O_p\pito M$ if and only if
+  $\Fix_M(\sigma^p)\ne\varnothing$;
+  \item there is no preinjective cellular automaton $M\to O_p$;
+  \item $M$ and every $O_p$ are Myhill.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Choose $x\in O_p$.  An equivariant map $O_p\to O_q$ is determined by
+$y=\phi(x)$ and is well defined precisely when $\sigma^p y=y$.  Since $y$ has
+minimal period $q$, this is equivalent to $q\mid p$.  Distinct phases in
+$O_p$ disagree periodically at infinitely many coordinates.  Every
+homoclinicity class in $O_p$ is therefore a singleton, so every such map is
+preinjective, even when it collapses phases.
+
+The same base-point argument shows that a map $O_p\to M$ exists exactly when
+some $y\in M$ satisfies $\sigma^p y=y$.  Define
+$\phi(\sigma^k x)=\sigma^k y$.  Singleton homoclinicity classes make $\phi$
+preinjective even if the minimal period of $y$ properly divides $p$.
+
+The mixing SFT $M$ is strongly irreducible.  If a preinjective map
+$\phi:M\to O_p$ existed, the arbitrary-target entropy identity
+\eqref{eq:entropy-preservation} would give
+\[
+  \ent(\phi(M))=\ent(M)>0.
+\]
+But $\phi(M)$ is finite and has entropy zero, a contradiction.
+
+The strongly irreducible Myhill theorem makes $M$ Myhill.  An endomorphism of
+$O_p$ is determined by the image of one phase in $O_p$ and is a cyclic
+rotation, hence bijective.  Thus $O_p$ is Myhill.
+\end{proof}
+
+We can now state the complete periodic-extension classification.
+
+\begin{theorem}[Period-hole antichain criterion]
+\label{thm:antichain}
+For a finite tuple $(p_1,\ldots,p_t)$ of positive integers, put
+\begin{equation}
+ X(M;p_1,\ldots,p_t)
+ =M\sqcup O_{p_1}\sqcup\cdots\sqcup O_{p_t}.
+ \label{eq:periodic-extension}
+\end{equation}
+Then
+\begin{equation}
+ X(M;p_1,\ldots,p_t)\text{ is Myhill}
+ \quad\Longleftrightarrow\quad
+ \begin{cases}
+ p_1,\ldots,p_t\text{ are pairwise distinct},\\
+ \{p_1,\ldots,p_t\}\text{ is an antichain in }H(M).
+ \end{cases}
+ \label{eq:antichain-iff}
+\end{equation}
+After the order of the adjoined orbit components is forgotten, the finite
+Myhill extensions \eqref{eq:periodic-extension} are parametrized by the finite
+antichains of $H(M)$, including the empty antichain.
+\end{theorem}
+
+\begin{proof}
+All pieces in \eqref{eq:periodic-extension} are Myhill.  By
+\cref{lem:periodic-routes}(ii), the absence of $O_{p_i}\pito M$ is equivalent
+to $p_i\in H(M)$.  By part (i), the absence of arrows between distinct orbit
+components is equivalent to
+\[
+  p_j\nmid p_i\qquad(i\ne j).
+\]
+This condition rejects equal labels as well as strict divisibility
+comparisons.  Part (iii) excludes all routes from the core to an orbit.
+Applying \cref{thm:routing} proves both directions of
+\eqref{eq:antichain-iff}.
+\end{proof}
+
+\begin{corollary}[Finite decision procedure]
+\label{cor:finite-decision}
+Given a primitive adjacency presentation $A$ of $M$ and a finite tuple of
+period labels, the Myhill property of \eqref{eq:periodic-extension} is decided
+by exact integer arithmetic: compute zero traces below a primitive exponent,
+test membership of every label, then test equality and pairwise divisibility.
+\end{corollary}
+
+\begin{proof}
+This is \cref{prop:hole-ideal,thm:antichain}.
+\end{proof}
+

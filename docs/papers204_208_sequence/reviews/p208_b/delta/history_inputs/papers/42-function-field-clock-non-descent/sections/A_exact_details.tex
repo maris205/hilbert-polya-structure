@@ -1,0 +1,89 @@
+\section{Exact combinatorics, witness ledger, and analytic details}
+\label{app:exact-details}
+
+\subsection{Möbius inversion and the first two degrees}
+
+Let $a_r=q^r$ be the number of based words fixed by $\sigma^r$. If
+$\Nq(d)$ counts primitive cyclic classes of length $d$, then each class has
+$d$ based representatives and contributes whenever $d\mid r$. Therefore
+\[
+ a_r=\sum_{d\mid r}d\Nq(d).
+\]
+Möbius inversion gives
+\[
+ n\Nq(n)=\sum_{d\mid n}\mu(d)q^{n/d}.
+\]
+For $n=1,2$,
+\[
+ \Nq(1)=q,
+ \qquad
+ \Nq(2)=\frac{q^2-q}{2}.
+\]
+The exact frozen witness ledger is
+\[
+\begin{array}{c|ccc|c}
+q&\Nq(1)&\Nq(2)&[01]\text{ primitive}&q^2\text{ prime?}\\
+\hline
+2&2&1&\text{yes}&\text{no}\\
+3&3&3&\text{yes}&\text{no}\\
+5&5&10&\text{yes}&\text{no}
+\end{array}
+\]
+The table illustrates proved formulas; no finite census is used to infer an
+infinite statement. The word $01$ is primitive for every alphabet containing
+the distinct symbols $0$ and $1$, and the same symbolic witness handles all
+three frozen values of $q$.
+
+\subsection{Primitive regrouping}
+
+Starting from the primitive product,
+\begin{align*}
+ \log Z_q(s,z)
+ &=\sum_{\gamma\in\Prim_q}\sum_{r\ge1}
+   \frac{z^{n(\gamma)r}q^{-s n(\gamma)r}}{r}\\
+ &=\sum_{m\ge1}\frac{z^mq^{-sm}}{m}
+   \sum_{d\mid m}d\Nq(d)\\
+ &=\sum_{m\ge1}\frac{(zq^{1-s})^m}{m}.
+\end{align*}
+The middle line sets $m=n(\gamma)r$; the cyclic multiplicity $d$ converts the
+primitive count into the $q^m$ fixed based words. Exponentiation gives
+\cref{eq:source-zeta}. This calculation is formal in $z$ and analytic wherever
+the series is absolutely convergent.
+
+\subsection{Target coefficient limit}
+
+For $\sigma\ge2$,
+\[
+ 2^\sigma P(\sigma)
+ =1+\sum_{p\ge3}(2/p)^\sigma.
+\]
+Each tail term tends to zero. Moreover,
+\[
+ 0\le \sum_{p\ge3}(2/p)^\sigma
+ \le \sum_{n\ge3}(2/n)^2<\infty.
+\]
+Dominated convergence therefore yields the target limit one. The source
+limits after the same scaling are two for $q=2$ and zero for $q=3,5$.
+Consequently $q^{1-s}$ and $P(s)$ cannot agree on a nonempty open subset of
+$\RePart s>1$.
+
+\subsection{Direct falsifiers}
+
+Each main theorem has a concrete defeat condition.
+
+\begin{itemize}
+\item \Cref{thm:clock} would fail if $[01]$ were imprimitive in the frozen
+  shift or if $q^2$ were a rational prime. Neither condition holds.
+\item \Cref{thm:multiplicity} would fail if a bijection of all factors
+  preserved $z^nq^{-ns}=zp^{-s}$ and target multiplicity one. Formal marker
+  degree and \cref{eq:necklace} rule this out.
+\item \Cref{thm:coefficient} would fail if $q^{1-s}=P(s)$ on a nonempty open
+  subset. The exact limits above rule this out.
+\item The repair corollary would require revision if a listed row preserved
+  every locked field. An unlisted model instead requires a new contract.
+\end{itemize}
+
+The positive-control falsifier is equally important: if the necklace count
+did not match finite-field irreducible-polynomial counts, the paper would have
+damaged its source object. The verified count identity
+\citep{chebolu2026necklace} prevents that failure.

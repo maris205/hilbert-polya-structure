@@ -1,0 +1,75 @@
+\section{The parity-compatible approximation}\label{sec:bip}
+
+We reproduce the residual-chain mechanism from \citep{LiLiu2026}, because its
+normality and parity properties are both used in the entropy bound.
+
+Let
+\[
+ \chi:\F_2\longrightarrow\mathbb Z/2\mathbb Z,
+ \qquad \chi(a)=\chi(b)=1.
+\]
+
+\begin{lemma}\label{lem:residual-chain}
+There is a decreasing sequence of finite-index normal subgroups
+$N_m\lhd\F_2$ such that
+\[
+ N_m\subseteq\ker\chi,
+ \qquad \bigcap_{m\ge1}N_m=\{e\}.
+\]
+The left actions on $V_m=\F_2/N_m$ form a homomorphic sofic approximation
+$\Sigma_{\bip}$.
+\end{lemma}
+
+\begin{proof}
+Enumerate $\F_2\setminus\{e\}$ as $g_1,g_2,\ldots$.  Residual finiteness of
+the free group gives a finite-index normal subgroup $H_j$ with
+$g_j\notin H_j$.  Put
+\[
+ K_m=\bigcap_{j=1}^m H_j,
+ \qquad N_m=K_m\cap\ker\chi.
+\]
+These groups have the stated finite-index, normality, containment, and
+intersection properties.
+
+Let $\sigma_m(g)$ be left multiplication by $g$ on $\F_2/N_m$.  It is a
+homomorphism.  If $g=g_j\ne e$ and $m\ge j$, then $g\notin N_m$.  A fixed
+coset $xN_m$ for left multiplication by $g$ would give
+$x^{-1}gx\in N_m$; normality would then imply $g\in N_m$, a contradiction.
+Thus every nonidentity element has no fixed points for all sufficiently
+large $m$.  The indices tend to infinity because the chain has trivial
+intersection in an infinite group.  Hence $(\sigma_m)$ is a homomorphic
+sofic approximation.
+\end{proof}
+
+Parity descends to $V_m$.  Let
+\[
+ L_m=\{gN_m:\chi(g)=0\},\qquad
+ R_m=\{gN_m:\chi(g)=1\}.
+\]
+Multiplication by either generator exchanges the two sets, and multiplication
+by $a$ is a bijection between them.  Hence
+$|L_m|=|R_m|=|V_m|/2$, and every generator edge crosses the bipartition.
+
+\begin{proposition}\label{prop:bip-lower}
+The parity-compatible approximation satisfies
+\[
+ h_{\Sigma_{\bip}}(X_3)\ge\log2.
+\]
+\end{proposition}
+
+\begin{proof}
+The set $L_m$ is independent.  Assign to each vertex of $L_m$ any symbol in
+$\{0,1,2,3\}$ and assign zero to $R_m$.  Every such assignment is exact, so
+\[
+ Z_{G_{\sigma_m}}(3)\ge4^{|L_m|}=4^{|V_m|/2}.
+\]
+Apply \Cref{cor:model-formula} and take normalized logarithms.
+\end{proof}
+
+The same graph also has a perfect matching made of $a$-edges, so its
+independence number is exactly $|V_m|/2$ \citep{LiLiu2026}.  That observation
+computes the corresponding mean-dimension statistic, but it does not force
+the weighted partition function to have exponential rate $\log2$; supports
+using both sides may contribute additional entropy.  We therefore retain only
+the proved lower bound.
+

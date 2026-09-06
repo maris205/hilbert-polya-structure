@@ -1,0 +1,49 @@
+\begin{figure}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  node distance=8mm and 10mm,
+  box/.style={draw,rounded corners=2pt,align=center,minimum height=12mm,
+              inner sep=5pt,line width=.7pt},
+  source/.style={box,draw=fiberblue,fill=fiberblue!6},
+  block/.style={box,draw=blockgreen,fill=blockgreen!7},
+  whole/.style={box,draw=routegray,fill=routegray!6,line width=1pt},
+  stop/.style={box,draw=stopamber,fill=stopamber!8,dashed},
+  arr/.style={-{Latex[length=2.2mm]},line width=.7pt}
+]
+\node[source] (source) {signed subset shift\\
+  \(w(S)=(-1)^{|S|+1}x_S\)\\
+  \(\alpha(S)=|S|\bmod2\)};
+\node[source,right=of source] (regular) {\(C_2\) regular transfer\\
+  \(\displaystyle \Breg=\sum_S\eps(S)x_SL_a^{|S|}\)\\
+  deck action commutes};
+\node[block,above right=2mm and 12mm of regular] (plus) {trivial isotype\\
+  \(D_+=\prod_p(1-x_p)\)};
+\node[block,below right=2mm and 12mm of regular] (minus) {sign isotype\\
+  \(D_-=\prod_p(1+x_p)\)};
+\node[whole,right=15mm of regular] (whole) {whole extension\\
+  \(\Dreg=D_+D_-\)\\
+  \(\displaystyle =\prod_p(1-x_p^2)\)};
+\draw[arr] (source) -- (regular);
+\draw[arr] (regular.east) -- ++(5mm,0) |- (plus.west);
+\draw[arr] (regular.east) -- ++(5mm,0) |- (minus.west);
+\draw[arr] (plus.east) -- ++(5mm,0) |- (whole.west);
+\draw[arr] (minus.east) -- ++(5mm,0) |- (whole.west);
+
+\node[stop,below=14mm of source,xshift=13mm] (primitive) {primitive stop\\
+  singleton clock \(\times m\); mixed lifts remain};
+\node[stop,right=12mm of primitive] (controls) {selectivity stop\\
+  arbitrary inventories reproduce the identity};
+\node[whole,right=12mm of controls] (route) {\(\RouteA\) rejected\\
+  \(\RouteB\) locked};
+\draw[arr,dashed,draw=stopamber] (regular.south) |- (primitive.north);
+\draw[arr,dashed,draw=stopamber] (whole.south) |- (controls.north);
+\draw[arr] (primitive) -- (controls);
+\draw[arr] (controls) -- (route);
+\end{tikzpicture}}
+\caption{Same-object Artin factorization and its scope.  Both character
+determinants are isotypic blocks of one regular transfer; their product alone
+is the whole-extension determinant.  Atom-local factors coexist with mixed
+lifted primitives and exact replication by nonprime controls.}
+\label{fig:factorization-scope}
+\end{figure}

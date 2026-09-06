@@ -1,0 +1,28 @@
+\begin{tikzpicture}[
+  >=Latex,
+  source/.style={draw=formalblue,very thick,rounded corners=2pt,fill=formalblue!7,
+    minimum height=15mm,text width=45mm,align=center,inner sep=5pt},
+  value/.style={draw=deepgreen,thick,rounded corners=2pt,fill=deepgreen!7,
+    minimum height=11mm,text width=37mm,align=center},
+  bad/.style={draw=stopred,thick,dashed,rounded corners=2pt,fill=stopred!4,
+    text width=93mm,align=center,inner sep=5pt},
+  every node/.style={font=\small}
+]
+\node[source] (ints) {decorated integer source\\
+  $(\N_{>0},\mid,1,\lcmop;F_N,w,G,\ldots)$};
+\node[source,right=18mm of ints] (formal) {transported formal UFD clone\\
+  $(\bigoplus_{p\in P}\N e_p,\le,0,\max;F'_N,w',G',\ldots)$};
+\draw[<->,very thick,formalblue] (ints) -- node[above,fill=white,inner sep=2pt]
+  {$\PhiVal(n)=(v_p(n))_p$} (formal);
+
+\node[value,below=13mm of ints] (iv) {$I(\MZ)$};
+\node[value,below=13mm of formal] (fv) {$\PhiVal^* I(\Ffree)$};
+\draw[->,thick] (ints) -- node[left] {natural $I$} (iv);
+\draw[->,thick] (formal) -- node[right] {natural $I$} (fv);
+\draw[<->,double,thick,deepgreen] (iv) -- node[above,fill=white] {equal} (fv);
+
+\node[bad,below=12mm of $(iv)!0.5!(fv)$] (gate)
+  {Impossible universal separator:\quad $I(\MZ)\ne0$ but
+   $I(U)=0$ for every free-commutative/UFD control $U$};
+\draw[stopred,very thick] ($(gate.west)+(4mm,-4mm)$) -- ($(gate.east)+(-4mm,4mm)$);
+\end{tikzpicture}

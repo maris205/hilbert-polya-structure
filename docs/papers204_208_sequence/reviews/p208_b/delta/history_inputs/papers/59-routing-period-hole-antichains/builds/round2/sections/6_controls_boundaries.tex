@@ -1,0 +1,75 @@
+\section{Exact controls, ownership, and boundaries}
+\label{sec:controls}
+
+The proofs above are symbolic.  We supplement them with a deterministic
+integer harness designed to falsify their finite consequences.  The harness
+performs four groups of checks:
+
+\begin{enumerate}[label=(\roman*)]
+  \item it exhausts every relation containing the diagonal on at most four
+  component labels and every route map allowed by that relation;
+  \item it computes exact Boolean powers for the renewal graphs with
+  $s=1,\ldots,8$ and verifies primitivity;
+  \item it computes integer traces through the Frobenius number plus $2m$ and
+  compares their support with $\langle m,m+1\rangle$; and
+  \item it checks the hole count, conductor, divisor-ideal condition, selected
+  antichain, and three forbidden predicates.
+\end{enumerate}
+
+The relation census covers $4{,}165$ diagonal-containing relations and
+$160{,}522$ allowed route maps, with no failure of the finite statement that
+every allowed route map is onto exactly when the relation has no
+off-diagonal arrow.  The renewal checks have zero trace-support mismatch for
+all eight sampled parameters.
+
+The frozen reproduction command is
+\begin{verbatim}
+PYTHONHASHSEED=0 python3 controls/exact_control.py
+\end{verbatim}
+and its terminal line is \texttt{STATUS PASS}.  The package records the full
+integer output and the script hash.
+
+The three hostile mutations are intentionally modest predicate checks.  They
+verify that the loop length $m$ is realized by the core, that the hole labels
+$1$ and $2$ are comparable, and that duplicating a label creates equality and
+hence divisibility between distinct copies.  The program does not construct
+mutated subshifts and send them through an independent end-to-end classifier.
+It also does not test compact separation, clopen pasting, or the imported
+entropy theorem.  Its role is exact finite falsification and reproducibility.
+
+\input{figures/boundary_table.tex}
+
+The ownership boundary in \cref{tab:boundary} is part of the theorem's
+interpretation.  The 2026 component paper treats general one-dimensional SFT
+component posets, including configurations outside the nonwandering pieces
+\cite{ceccheriniCoornaertSalo2026}.  Our finite-clopen hypothesis is narrower:
+the irreducible pieces exhaust the entire subshift.  That restriction is what
+makes every homoclinicity class component-local and every redirect definable
+on the whole space.
+
+Because the adjacent component action, the two mixing-core theorems, and the
+semigroup arithmetic are all subtracted, the residual package should be
+assessed only after specialist checking under alternate routing and coproduct
+terminology.
+
+The scope firewall can be summarized as follows.
+
+\begin{enumerate}[label=(\alph*)]
+  \item No assertion is made for infinitely many accumulating pieces.
+  \item No assertion is made for a reducible SFT with heteroclinic or wandering
+  configurations outside the displayed irreducible pieces.
+  \item The positive-entropy assumption cannot be removed from the entropy
+  obstruction $M\not\pito O_p$.  A zero-entropy mixing SFT is a finite orbit
+  case and requires a separate finite-system analysis.
+  \item The antichain theorem classifies only disjoint periodic-orbit
+  extensions of one fixed core, not arbitrary finite factors and not all
+  Myhill SFTs.
+  \item Search misses do not establish priority.  The finite-clopen iff and
+  its antichain specialization remain subject to specialist checking under
+  terminology such as coproducts, factor preorders, and Garden-of-Eden
+  properties of disjoint unions.
+\end{enumerate}
+
+These boundaries also explain why the route theorem does not answer the open
+general characterization problem in
+\cite[Section~9]{ceccheriniCoornaertSalo2026}.

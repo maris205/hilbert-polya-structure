@@ -1,0 +1,155 @@
+\section{The Fredholm trilemma}
+\label{sec:trilemma}
+
+The exact phase diagram separates three natural attempts to exploit the
+cofactor.
+
+\subsection{Pure cofactor roof}
+
+Set \(s=0\) in \cref{eq:Lsu} and write
+
+\[
+ Q_ue_n=\sum_{d\mid n+1,\ d\ge2}q(n,d)^{-u}e_d.
+\]
+
+\begin{theorem}[Pure cofactor obstruction]
+\label{thm:pure-obstruction}
+For every \(u\in\mathbb C\), \(Q_u\) is not trace class.  Whenever it has a
+bounded extension, it is noncompact.
+\end{theorem}
+
+\begin{proof}
+The trace-class conclusion follows immediately from \cref{thm:traceclass},
+which would require \(0>1/2\).  More directly, the Fourier component
+\cref{eq:successor-extraction} is now the unweighted unilateral shift
+
+\[
+ e_n\longmapsto e_{n+1}.
+\]
+
+Fourier averaging maps compact operators to compact operators, while this
+shift is not compact.  Thus a bounded \(Q_u\) cannot be compact.
+\end{proof}
+
+For example, Schur's test proves boundedness when \(\Re u>1\): the row and
+column sums are controlled by the convergent series
+\(\sum_{q\ge1}q^{-\Re u}\).  We do not need a complete boundedness
+classification in the remaining strip.
+
+\begin{theorem}[Pure cofactor class series]
+\label{thm:pure-series}
+As a formal or \(|z|<1\) connected series,
+
+\begin{equation}
+ \mathcal H_2^{\mathrm{cof}}(u,z)
+ =2^{-u}\sum_{k\ge2}z^k
+ =2^{-u}\frac{z^2}{1-z}.
+\label{eq:pure-H2}
+\end{equation}
+
+It diverges at \(z=1\) for every finite \(u\).  More generally, for an atom
+\(p\),
+
+\[
+ \mathcal H_p^{\mathrm{cof}}(u,z)
+ =p^{-u}\frac{z^{2(p-1)}}{1-z^{p-1}},
+ \qquad |z|<1.
+\]
+\end{theorem}
+
+\begin{proof}
+Every \(C_k\) has cofactor weight \(2^{-u}\) and period \(k\); summing over
+\(k\ge2\) gives \cref{eq:pure-H2}.  For \(C_{k,p}\), the period is
+\((p-1)k\) and the cofactor weight is \(p^{-u}\), giving the second geometric
+series.
+\end{proof}
+
+The formula \cref{eq:pure-H2} is not a Fredholm coefficient of a trace-class
+whole operator.  Its attractive atomic weight comes with infinite
+multiplicity at the unmarked specialization.
+
+\subsection{Endpoint regularization}
+
+In the honest domain \cref{eq:S1-domain}, the combined class is
+
+\begin{equation}
+ \mathcal H_2(s,u;z)=
+ 2^{-u}\sum_{k\ge2}z^kM_k^{-2s}.
+\label{eq:regularized-H2}
+\end{equation}
+
+It is entire in \(z\), because \(M_k\) grows factorially.  The same growth is
+the arithmetic defect: the orbit indexed by \(k\) has roof
+\(2\log M_k\), not an atomic roof \(\log2\).  For general \(p\), the
+factor \(M_{k,p}^{-2s}\) remains.
+
+\subsection{Unitary characters}
+
+By \cref{cor:character-S1}, a unitary character has the base threshold
+\(\Re s>1/2\).  By \cref{cor:character-persistence}, it multiplies every
+canonical primitive by the same nonzero phase \(\chi(2)\).  It changes no
+magnitude and deletes no \(C_k\).
+
+\begin{theorem}[Fredholm trilemma]
+\label{thm:trilemma}
+For the frozen successor--divisor cofactor cocycle, the three natural choices
+have the following mutually obstructing outcomes:
+
+\begin{center}
+\small
+\begin{tabularx}{0.96\textwidth}{L{0.24\textwidth}L{0.30\textwidth}Y}
+\toprule
+Choice & Analytic outcome & Arithmetic outcome \\
+\midrule
+\(s=0\), pure cofactor
+& never trace class; noncompact whenever bounded
+& weight \(Q^{-u}\), but infinitely many canonical representatives \\
+endpoint regularized
+& honest Fredholm determinant in the two-half-plane domain
+& factorial \(M_{k,p}^{-2s}\) dependence \\
+unitary character
+& same \(\Re s>1/2\) threshold as the base
+& phases only; every \(C_k\) survives \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+No choice gives both an honest same-object Fredholm determinant and the
+one-atom/one-primitive target ledger.
+\end{theorem}
+
+\begin{proof}
+The three rows are respectively
+\cref{thm:pure-obstruction,thm:pure-series},
+\cref{thm:traceclass,eq:regularized-H2}, and
+\cref{cor:character-S1,cor:character-persistence}.  Their conclusions are
+properties of the frozen graph and weights, so there is no remaining choice
+among these three that changes the stated ledger.
+\end{proof}
+
+\subsection{First-return collapse}
+
+One might attempt to collapse the long successor segments by inducing on
+edges with \(q>1\).
+
+\begin{proposition}[Return grammar preserves the obstruction]
+\label{prop:return}
+Every \(C_k\) becomes one fixed first-return branch indexed by \(k\ge2\).
+Its diagonal entry is \(2^{-u}z^k\) for the pure cofactor-time marking and
+\(2^{-u}z^kM_k^{-2s}\) for the endpoint-regularized marking.
+
+At \(s=0,z=1\), the induced pure diagonal has the constant nonzero entry
+\(2^{-u}\) with infinite multiplicity and is noncompact.  Endpoint
+regularization restores summability only while retaining the factorial
+\(k\)-ledger.
+\end{proposition}
+
+\begin{proof}
+By \cref{thm:q2}, every \(C_k\) has exactly one \(q>1\) edge.  It therefore
+defines one return branch.  Multiplication of its time, cofactor, and endpoint
+weights gives the two entries.  The compactness and summability claims are
+the corresponding diagonal-operator criteria.
+\end{proof}
+
+Thus Poincaré collapse trades the original graph for a countable return
+grammar; it does not turn the family indexed by \(k\) into a single atom.

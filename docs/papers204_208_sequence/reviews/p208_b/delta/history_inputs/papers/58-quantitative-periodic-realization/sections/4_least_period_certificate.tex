@@ -1,0 +1,183 @@
+\section{A Perron--M\"obius least-period certificate}
+\label{sec:least-period}
+
+We now turn from abundance at a prescribed multidimensional period to exact
+least periods in one dimension.  Let $A$ be a primitive $r\times r$
+nonnegative integral matrix.  Its Perron root $\lambda$ is simple and
+strictly dominates the moduli of all other eigenvalues.  Throughout this
+section we impose the positive-entropy condition $\lambda>1$.  If $r>1$, set
+\[
+ \theta=\max_{2\le j\le r}|\lambda_j|<\lambda,
+\]
+where the eigenvalues are counted with algebraic multiplicity; when $r=1$,
+set $\theta=0$.
+
+\begin{theorem}[Perron--M\"obius lower certificate]
+\label{thm:least-period}
+For every $n\ge1$, the number $L_n$ of points of least period $n$ in $X_A$
+satisfies
+\begin{equation}
+L_n\ge \lambda^n-(r-1)\theta^n
+-\tau(n)\left(\lambda^{n/2}
+ +(r-1)\max(1,\theta)^{n/2}\right).
+\label{eq:least-bound}
+\end{equation}
+Consequently, every $n$ for which the right-hand side is positive occurs as a
+least period.  There is furthermore an effectively computable $N(A)$ such
+that the right-hand side is positive for every $n\ge N(A)$.
+\end{theorem}
+
+\begin{proof}
+Let $F_n=\tr(A^n)$, as in \cref{eq:trace-fixed}.  The trace of a matrix power
+is the sum of the corresponding eigenvalue powers, whether or not the matrix
+is diagonalizable.  The triangle inequality therefore gives
+\begin{equation}
+ \lambda^n-(r-1)\theta^n
+ \le F_n
+ \le \lambda^n+(r-1)\theta^n.
+ \label{eq:trace-spectral}
+\end{equation}
+By \cref{eq:mobius}, or directly by subtracting every possible contribution
+from a proper divisor,
+\begin{align}
+ L_n
+ &\ge F_n-\sum_{\substack{e\mid n\\e<n}}F_e. 
+ \label{eq:subtract-divisors}
+\end{align}
+Every proper divisor $e$ of $n$ satisfies $e\le n/2$.  Since $\lambda>1$,
+\[
+ \lambda^e\le\lambda^{n/2}.
+\]
+Also
+\[
+ \theta^e\le \max(1,\theta)^{n/2},
+\]
+including the case $0\le\theta<1$.  There are at most $\tau(n)$ proper
+divisors.  Substitution of \cref{eq:trace-spectral} into
+\cref{eq:subtract-divisors} proves \cref{eq:least-bound}.
+
+For effectivity, divide the right-hand side of \cref{eq:least-bound} by
+$\lambda^n$ and use $\tau(n)\le n$.  It suffices that
+\begin{equation}
+ E(n):=(r-1)\alpha^n+n\beta^n+n(r-1)\gamma^n<1,
+ \label{eq:normalized-error}
+\end{equation}
+where
+\begin{equation}
+ \alpha=\frac{\theta}{\lambda},\qquad
+ \beta=\lambda^{-1/2},\qquad
+ \gamma=\frac{\sqrt{\max(1,\theta)}}{\lambda}.
+ \label{eq:error-bases}
+\end{equation}
+Primitivity gives $\alpha<1$, and $\lambda>1$ gives $\beta<1$.  Finally,
+$\max(1,\theta)<\lambda$; hence
+$\sqrt{\max(1,\theta)}<\sqrt\lambda<\lambda$, so $\gamma<1$.
+
+The characteristic polynomial of $A$ is integral.  Standard algebraic root
+isolation therefore computes certified rational upper enclosures
+\[
+ \alpha<\widehat\alpha<1,\qquad
+ \beta<\widehat\beta<1,\qquad
+ \gamma<\widehat\gamma<1.
+\]
+For a rational $0<a<1$, the sequence $na^n$ is nonincreasing once
+$n\ge a/(1-a)$, because
+\[
+ \frac{(n+1)a^{n+1}}{na^n}=a\left(1+\frac1n\right)\le1.
+\]
+Choose an integer $M$ beyond the corresponding thresholds for
+$\widehat\beta$ and $\widehat\gamma$.  Starting at $M$, search for the first
+$m$ for which the rational inequality
+\begin{equation}
+ (r-1)\widehat\alpha^m+m\widehat\beta^m
+ +m(r-1)\widehat\gamma^m<1
+ \label{eq:rational-certificate}
+\end{equation}
+holds.  The search terminates because every term tends to zero.  At and after
+that $m$, each term in the rational majorant is nonincreasing, so
+\cref{eq:normalized-error} holds for every $n\ge m$.  Taking $N(A)=m$ proves
+both computability and the tail assertion.
+\end{proof}
+
+\begin{proposition}[A finite verifier payload]
+\label{prop:finite-payload}
+Suppose rational numbers $a,b,c\in(0,1)$ satisfy
+\[
+ \alpha<a,\qquad \beta<b,\qquad \gamma<c
+\]
+for the bases in \cref{eq:error-bases}.  If an integer $m$ satisfies
+\begin{align}
+ m&\ge \left\lceil\frac{b}{1-b}\right\rceil,
+ &
+ m&\ge \left\lceil\frac{c}{1-c}\right\rceil,
+ \label{eq:monotone-thresholds}\\
+ (r-1)a^m+mb^m+m(r-1)c^m&<1,
+ \label{eq:payload-inequality}
+\end{align}
+then every $n\ge m$ is a least period of $X_A$.
+\end{proposition}
+
+\begin{proof}
+The first term in \cref{eq:payload-inequality} decreases with $n$.  The two
+thresholds in \cref{eq:monotone-thresholds} make $nb^n$ and $nc^n$
+nonincreasing for $n\ge m$.  Consequently the rational left-hand side of
+\cref{eq:payload-inequality} majorizes $E(n)$ and remains below one for every
+$n\ge m$.  The normalized estimate in the proof of
+\cref{thm:least-period} then gives $L_n>0$.
+\end{proof}
+
+Thus a conductor computation can export the finite tuple
+\[
+ \mathfrak C(A)=(a,b,c,m)
+\]
+together with algebraic interval certificates for the three strict upper
+bounds.  A verifier need not rerun the search or diagonalize $A$: it checks
+the root-isolation intervals, the two rational threshold inequalities, and
+the single rational inequality \cref{eq:payload-inequality}.  This separates
+the potentially expensive discovery step from a small auditable proof
+object.
+
+\begin{remark}[What is certified]
+\label{rem:points-orbits}
+The theorem certifies $L_n>0$, and therefore the existence of at least one
+orbit of least period $n$.  Quantitatively, however, its left-hand side is a
+point count.  A lower bound for the number of orbits is obtained only after
+division by $n$.  Positivity of \cref{eq:least-bound} is sufficient but not
+necessary, so neither the first positive $n$ nor $N(A)$ is asserted optimal.
+\end{remark}
+
+\begin{example}[A fully rational tail check]
+\label{ex:fibonacci}
+For the Fibonacci matrix
+\[
+ A=\begin{pmatrix}1&1\\1&0\end{pmatrix},
+\]
+one has $r=2$, $\lambda=\varphi=(1+\sqrt5)/2$, and
+$\theta=\varphi^{-1}$.  Certified rational enclosures are
+\[
+ \alpha=\varphi^{-2}<\frac{191}{500},\qquad
+ \beta=\varphi^{-1/2}<\frac{787}{1000},\qquad
+ \gamma=\varphi^{-1}<\frac{619}{1000}.
+\]
+At $n=10$ their rational majorant is
+\[
+ \left(\frac{191}{500}\right)^{10}
+ +10\left(\frac{787}{1000}\right)^{10}
+ +10\left(\frac{619}{1000}\right)^{10}
+ =0.9941325545\ldots<0.995<1,
+\]
+where both strict inequalities are checks in exact rational arithmetic.
+The two sequences carrying a factor $n$ are already decreasing by this
+point.  Thus the procedure proves, without enumerating words, that every
+$n\ge10$ is realized as a least period.  This is a certificate, not a claim
+that $10$ is the least possible conductor for the shift.
+\end{example}
+
+\begin{remark}[Why the hypotheses matter]
+Primitivity is used exactly at the strict spectral separation
+$\theta<\lambda$.  The condition $\lambda>1$ gives a growing main term and
+forces $\beta<1$.  A periodic irreducible matrix can have additional
+peripheral eigenvalues, while a permutation cycle has $\lambda=1$ and only a
+thin set of least periods.  The proof therefore does not extend by simply
+removing either hypothesis.
+\end{remark}

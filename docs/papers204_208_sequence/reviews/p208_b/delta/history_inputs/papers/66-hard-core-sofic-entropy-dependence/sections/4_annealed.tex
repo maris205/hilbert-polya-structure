@@ -1,0 +1,133 @@
+\section{Annealed weighted independent sets}\label{sec:annealed}
+
+For each $n$, choose $A_n,B_n\in\Sym([n])$ independently and uniformly.  By
+freeness of $\F_2$, the assignments $a\mapsto A_n$ and $b\mapsto B_n$ extend
+to a homomorphism $\sigma_n:\F_2\to\Sym([n])$.  At this stage the sequence is
+random and need not yet be sofic.
+
+\begin{lemma}[Exact first moment]\label{lem:first-moment}
+For the random action graph $G_n=G_{\sigma_n}$,
+\begin{equation}\label{eq:first-moment}
+ \mathbb E Z_{G_n}(3)
+ =\sum_{k=0}^{\lfloor n/2\rfloor}
+ \binom nk3^k
+ \left(\frac{\binom{n-k}{k}}{\binom nk}\right)^2.
+\end{equation}
+This formula includes loops and multiple edges.
+\end{lemma}
+
+\begin{proof}
+Fix $I\subseteq[n]$ with $|I|=k$.  It contains no $A_n$-edge exactly when
+$A_n(I)\cap I=\varnothing$.  The image $A_n(I)$ is a uniform $k$-subset of
+$[n]$, so for $k\le n/2$,
+\[
+ \mathbb P(A_n(I)\cap I=\varnothing)
+ =\frac{\binom{n-k}{k}}{\binom nk}.
+\]
+For $k>n/2$ the probability is zero.  The conditions for $A_n$ and $B_n$ are
+independent.  Multiplying their probabilities, multiplying by the
+$\binom nk$ possible supports and the $3^k$ active-colour assignments, and
+summing over $k$ proves \eqref{eq:first-moment}.  A fixed point of either
+permutation makes a loop and violates the corresponding disjointness
+condition; parallel edges merely repeat it.  Thus no correction is needed.
+\end{proof}
+
+For $0\le t\le1/2$, with $0\log0=0$, set
+\begin{equation}\label{eq:Psi}
+ \Psi_3(t)=H(t)+2\left[
+ 2(1-t)\log(1-t)-(1-2t)\log(1-2t)\right]+t\log3.
+\end{equation}
+
+\begin{proposition}[Annealed exponent]\label{prop:annealed}
+One has
+\begin{equation}\label{eq:annealed-limit}
+ \lim_{n\to\infty}\frac1n\log\mathbb E Z_{G_n}(3)
+ =\max_{0\le t\le1/2}\Psi_3(t)=C_3,
+\end{equation}
+where $C_3$ is defined in \eqref{eq:C3}.
+\end{proposition}
+
+\begin{proof}
+Let $k/n\to t\in[0,1/2]$.  Stirling's formula gives
+\[
+ \frac1n\log\binom nk\longrightarrow H(t)
+\]
+and
+\begin{align*}
+ \frac1n\log\frac{\binom{n-k}{k}}{\binom nk}
+ &\longrightarrow
+ 2(1-t)\log(1-t)-(1-2t)\log(1-2t).
+\end{align*}
+Applying the standard bounds
+\[
+ (N+1)^{-1}e^{NH(K/N)}\le\binom NK\le e^{NH(K/N)}
+\]
+to each binomial coefficient makes the error $O(\log n/n)$ uniformly in
+$k$, including $k=0$ and $k=\lfloor n/2\rfloor$.  Hence every summand in
+\eqref{eq:first-moment} has normalized logarithm
+$\Psi_3(k/n)+O(\log n/n)$, uniformly.  There are at most $n+1$ summands.
+The largest-term bounds therefore prove the first equality in
+\eqref{eq:annealed-limit}.
+
+It remains to optimize.  On $0<t<1/2$,
+\begin{equation}\label{eq:Psi-derivative}
+ \Psi_3'(t)
+ =\log\frac{1-t}{t}
+ +4\log\frac{1-2t}{1-t}+\log3.
+\end{equation}
+Put $y=t/(1-t)$, which maps $(0,1/2)$ onto $(0,1)$.  Then
+$(1-2t)/(1-t)=1-y$, and the critical equation becomes
+\begin{equation}\label{eq:y-critical}
+ y=3(1-y)^4.
+\end{equation}
+The left side is strictly increasing from zero to one, while the right side
+is strictly decreasing from three to zero.  Thus there is exactly one
+critical point.  The derivative in \eqref{eq:Psi-derivative} tends to
+$+\infty$ at zero and to $-\infty$ at $1/2$, so this point is the unique
+global maximizer.
+
+In terms of $y$, direct simplification gives
+\begin{align*}
+ \Psi_3(t)
+ &=-\log(1+y)
+ +\frac{y}{1+y}\log\frac3y
+ -2\frac{1-y}{1+y}\log(1-y).
+\end{align*}
+At the critical point,
+$\log(3/y)=-4\log(1-y)$ by \eqref{eq:y-critical}.  Substitution yields
+\[
+ \Psi_3(t_*)=-\log(1+y)-2\log(1-y)
+ =-\log\bigl((1+y)(1-y)^2\bigr)=C_3.
+\]
+\end{proof}
+
+The numerical gap in \Cref{thm:main} is supported by the companion control,
+but strict separation has a short exact proof.
+
+\begin{lemma}[Exact separation]\label{lem:strict-gap}
+The constant $C_3$ satisfies $C_3<\log2$.
+\end{lemma}
+
+\begin{proof}
+Let $f(y)=3(1-y)^4-y$.  It is strictly decreasing on $(0,1)$ and
+\[
+ f(2/5)=3(3/5)^4-2/5=-\frac7{625}<0.
+\]
+Since $f(y_3)=0$, we have $y_3<2/5$.  The function
+$p(y)=(1+y)(1-y)^2$ has derivative
+$p'(y)=(3y+1)(y-1)<0$ on $(0,1)$.  Therefore
+\[
+ (1+y_3)(1-y_3)^2>p(2/5)=\frac{63}{125}>\frac12.
+\]
+Taking negative logarithms gives $C_3<\log2$.
+\end{proof}
+
+\begin{remark}[Other activities]\label{rem:activity}
+With $q$ active colours, the same first-moment calculation replaces
+$t\log3$ by $t\log q$.  The critical equation becomes
+$y=q(1-y)^4$, and the critical value remains
+$-\log((1+y)(1-y)^2)$.  We use $q=3$ because the exact comparison in
+\Cref{lem:strict-gap} separates this annealed upper bound from the parity
+lower bound $\frac12\log(q+1)$.  No statement about exact quenched free
+energy is needed.
+\end{remark}

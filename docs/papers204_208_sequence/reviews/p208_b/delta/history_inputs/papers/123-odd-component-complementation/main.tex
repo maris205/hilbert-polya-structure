@@ -1,0 +1,332 @@
+\documentclass[10pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Comp}{\operatorname{Comp}}
+\newcommand{\Odd}{\operatorname{Odd}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\Fix}{\operatorname{Fix}}
+
+\title[Odd-component complementation]{Odd-Component Complementation:\\
+Pointwise Split Clocks and an All-Depth Labelled Census}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{05C25, 05A15, 37B15, 05C30}
+\keywords{graph complementation, finite dynamical system, transient depth,
+labelled generating function, cograph, dynamical zeta function}
+
+\begin{document}
+
+\begin{abstract}
+On a finite simple labelled graph, synchronously complement the subgraph
+induced by every connected component of odd order and leave every even
+component unchanged. We show that the resulting finite dynamics is
+linearized pointwise by a parity-pruned component/co-component split tree.
+Its active height is the exact entrance time into the recurrent set, all
+periods divide two, and the largest transient depth on \(n\) vertices is the
+sharp value \(\lfloor(n-1)/2\rfloor\). We then derive a recursive labelled
+exponential generating function for every cumulative and exact depth layer.
+It yields the fixed and recurrent censuses, the number of two-cycles, and the
+finite-order dynamical zeta function. Gallai decomposition, cographs and
+cotrees, labelled SET calculus, and connected-graph enumeration are treated
+as background. The direct-owner search is bounded; no novelty, priority, or
+external-release claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{The map and the subtraction boundary}
+
+All graphs are finite, simple, and labelled. For a graph \(G\), define
+\begin{equation}
+ \Phi(G)=\bigsqcup_{C\in\Comp(G)}
+ \begin{cases}
+   \overline{G[C]},& |C|\text{ odd},\\
+   G[C],& |C|\text{ even}.
+ \end{cases}                                             \label{eq:map}
+\end{equation}
+Thus no edge is added between distinct components, and every odd component
+is complemented synchronously. We regard \(K_1\) as connected and
+co-connected. The \emph{depth} of a state is its first entrance time into
+the recurrent set.
+
+Component/co-component decomposition belongs to classical modular
+decomposition, beginning with Gallai's work \cite{Gallai1967}. Cographs,
+their cotrees, and recognition are likewise classical
+\cite{CorneilLerchsStewart1981,CorneilPerlStewart1985}; modern labelled
+cotree enumeration appears, for example, in \cite{Stufler2021,BassinoEtAl2022}.
+Labelled SET constructions and connected-graph enumeration are standard
+\cite{BergeronLabelleLeroux1998,HararyPalmer1973}. None of those facts,
+nor the co-connected count used below, receives contribution credit here.
+Our residual question is temporal: what is the exact clock of the literal
+parity-triggered map \eqref{eq:map}, and can every clock layer be counted?
+
+\begin{lemma}[refinement]\label{lem:refinement}
+The component partition of \(\Phi(G)\) refines that of \(G\). Every even
+component is fixed forever. If \(H\) is odd and connected, then either
+\(\overline H\) is connected and \(H\leftrightarrow\overline H\), or the
+components of \(\overline H\) are permanent separate blocks after one step.
+\end{lemma}
+
+\begin{proof}
+Equation \eqref{eq:map} never creates a cross-component edge. An even block
+is copied unchanged. On an odd connected block \(H\), one step produces
+\(\overline H\). If that graph is connected, the next step complements it
+back to \(H\). If it is disconnected, no later step can join its components,
+so they evolve independently.
+\end{proof}
+
+\section{The pointwise split clock}
+
+The classical component/co-component tree is useful here only after a
+parity pruning that records which blocks remain dynamically active.
+
+\begin{definition}\label{def:tree}
+For a connected odd graph \(H\), build its \emph{parity-pruned split tree} as
+follows. If \(\overline H\) is connected, stop. Otherwise create the
+connected components of \(\overline H\) as children; declare every even child
+a leaf and recurse only on odd children. Let \(D(H)\) be the largest number
+of split nodes on a root-to-leaf branch. Equivalently,
+\begin{equation}
+D(H)=
+\begin{cases}
+0,&\overline H\text{ connected},\\
+1+\max\{D(C):C\in\Comp(\overline H),\ |C|\text{ odd}\},
+   &\overline H\text{ disconnected},
+\end{cases}                                               \label{eq:D}
+\end{equation}
+where the maximum of the empty set is \(0\). For arbitrary \(G\), put
+\(D(G)=\max D(C)\) over its odd components, with empty maximum \(0\).
+\end{definition}
+
+This is not asserted to be a new cotree or modular decomposition. It is a
+pointwise clock obtained by pruning the familiar split operation according
+to the update parity.
+
+\begin{theorem}[exact entrance clock]\label{thm:clock}
+For every graph \(G\),
+\[
+                         \depth(G)=D(G).
+\]
+\end{theorem}
+
+\begin{proof}
+Even components are recurrent fixed blocks. Distinct odd components evolve
+independently, so the entrance time of their disjoint union is the maximum
+of their entrance times. It remains to consider an odd connected \(H\).
+If \(\overline H\) is connected, \(H\) already lies on a cycle. Otherwise
+the first step splits \(H\) into the components of \(\overline H\). Its even
+children freeze, while its odd children require exactly their individual
+entrance times. Hence the entrance time satisfies precisely \eqref{eq:D};
+induction on \(|H|\) finishes the proof.
+\end{proof}
+
+\begin{corollary}[periodic classification]\label{cor:period}
+Every eventual period is \(1\) or \(2\). A graph is recurrent exactly when
+every nontrivial odd component is co-connected. It is fixed exactly when
+every component is either a singleton or has even order. Every other
+recurrent graph lies on a genuine two-cycle.
+\end{corollary}
+
+\begin{proof}
+Theorem \ref{thm:clock} reduces every state to leaves of the split tree.
+Even leaves are fixed. A singleton is fixed by complementation, whereas a
+nontrivial odd co-connected component alternates with its connected
+complement. A disjoint union synchronizes these periods.
+\end{proof}
+
+\section{The sharp global clock}
+
+\begin{theorem}[sharp maximum depth]\label{thm:sharp}
+Among all graphs on \(n\geq1\) vertices,
+\begin{equation}
+ \max_{|V(G)|=n}\depth(G)=\left\lfloor\frac{n-1}{2}\right\rfloor.
+                                                               \label{eq:sharp}
+\end{equation}
+The value for \(n=0\) is \(0\).
+\end{theorem}
+
+\begin{proof}
+Follow an active branch from an odd parent \(H\) to an odd child \(C\). The
+complement \(\overline H\) has at least two components, and the vertices
+outside \(C\) have even positive total order because both \(|H|\) and \(|C|\)
+are odd. Thus \(|C|\leq |H|-2\). Every split consumes at least two vertices
+along the branch, giving \(D(H)\leq (|H|-1)/2\). Taking the maximum over odd
+components proves the upper bound for every \(G\).
+
+For sharpness, let \(H_1=K_1\) and recursively set
+\begin{equation}
+                  H_{2r+1}=\overline{\,H_{2r-1}\sqcup K_2\,}.
+\end{equation}
+The complement of \(H_{2r+1}\) has the odd child \(H_{2r-1}\) and the even
+child \(K_2\), so \(D(H_{2r+1})=1+D(H_{2r-1})=r\). This attains
+\eqref{eq:sharp} for odd order. For even \(n=2r+2\), the graph
+\(H_{2r+1}\sqcup K_1\) has depth \(r\), proving sharpness there as well.
+\end{proof}
+
+The bound is structural, not an extrapolation from the finite census in
+\cref{sec:census}.
+
+\section{All-depth labelled generating functions}
+
+Let \(c_n\) be the number of connected labelled graphs on \([n]\), and work
+throughout with formal exponential generating functions. Put
+\begin{equation}
+ C_{\mathrm e}(x)=\sum_{\substack{n\geq2\\n\ {\rm even}}}
+ c_n\frac{x^n}{n!}.
+\end{equation}
+For odd \(n\), let \(q_n\) count connected graphs whose complements are also
+connected, and define
+\begin{equation}
+ q_1=1,\qquad q_n=2c_n-2^{\binom n2}\quad(n\geq3\text{ odd}),\qquad
+ Q(x)=\sum_{n\ {\rm odd}}q_n\frac{x^n}{n!}.               \label{eq:Q}
+\end{equation}
+Indeed, a graph and its complement cannot both be disconnected when
+\(n\geq2\), so \eqref{eq:Q} is inclusion--exclusion; this identity is
+zero-credit background. For a series \(A(x)\), write
+\(\Odd A=(A(x)-A(-x))/2\).
+
+\begin{theorem}[complete depth recurrence]\label{thm:egf}
+Let \(O_t(x)\) be the EGF of connected odd graphs of depth at most \(t\), and
+let \(F_t(x)\) be the EGF of all graphs of depth at most \(t\). Then
+\begin{align}
+ O_0(x)&=Q(x),                                             \label{eq:O0}\\
+ O_t(x)&=Q(x)+\Odd\!\left(
+  \exp(C_{\mathrm e}(x)+O_{t-1}(x))-1-C_{\mathrm e}(x)-O_{t-1}(x)
+                         \right),\qquad t\geq1,           \label{eq:Ot}\\
+ F_t(x)&=\exp(C_{\mathrm e}(x)+O_t(x)).                   \label{eq:Ft}
+\end{align}
+Consequently, for \(t\geq1\), the number of labelled \(n\)-vertex graphs of
+exact depth \(t\) is
+\begin{equation}
+ n![x^n]\bigl(F_t(x)-F_{t-1}(x)\bigr),                    \label{eq:layers}
+\end{equation}
+while \(n![x^n]F_0(x)\) is the recurrent count.
+\end{theorem}
+
+\begin{proof}
+Depth-zero connected odd graphs are precisely the co-connected ones, giving
+\eqref{eq:O0}. Consider a positive-depth connected odd graph \(H\).
+Complementation bijects it with a disconnected labelled graph whose
+connected components have odd total order. Its even components are
+unrestricted connected graphs, counted by \(C_{\mathrm e}\); by
+\eqref{eq:D}, every odd component has depth at most \(t-1\), counted by
+\(O_{t-1}\). The labelled SET construction gives the exponential in
+\eqref{eq:Ot}; subtracting \(1+C_{\mathrm e}+O_{t-1}\) forces at least two
+components, and odd extraction forces odd total order. Adding the
+co-connected base class \(Q\) proves \eqref{eq:Ot}.
+
+An arbitrary graph of depth at most \(t\) is a SET of unrestricted even
+connected components and odd connected components counted by \(O_t\).
+The exponential formula gives \eqref{eq:Ft}, and subtraction of successive
+cumulative classes gives \eqref{eq:layers}.
+\end{proof}
+
+\begin{proposition}[fixed census]\label{prop:fixed}
+The EGF for fixed graphs is
+\begin{equation}
+ F_{\mathrm{fix}}(x)=\exp(x+C_{\mathrm e}(x)).            \label{eq:Ffix}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By \cref{cor:period}, the allowed connected components are singletons and
+arbitrary even connected graphs. Apply the labelled SET construction.
+\end{proof}
+
+\section{Recurrent and zeta census}\label{sec:census}
+
+Write
+\[
+ f_n=n![x^n]F_{\mathrm{fix}}(x),\qquad
+ r_n=n![x^n]F_0(x).
+\]
+Thus \(f_n\) and \(r_n\) are respectively the fixed and recurrent state
+counts on the finite state space of labelled graphs on \([n]\).
+
+\begin{corollary}[two-cycles and zeta]\label{cor:zeta}
+The number of genuine two-cycles is \((r_n-f_n)/2\). Moreover,
+\begin{equation}
+ \#\Fix(\Phi^k)=
+ \begin{cases}f_n,&k\text{ odd},\\r_n,&k\text{ even},\end{cases}
+ \qquad
+ \zeta_n(z)=\exp\!\left(\sum_{k\geq1}\frac{\#\Fix(\Phi^k)}{k}z^k\right)
+ =(1-z)^{-f_n}(1-z^2)^{-(r_n-f_n)/2}.                    \label{eq:zeta}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Corollary \ref{cor:period} partitions the recurrent set into \(f_n\)
+one-cycles and \((r_n-f_n)/2\) two-cycles. Transient states are fixed by no
+positive iterate. Hence the displayed fixed-iterate counts hold. Splitting
+the defining Artin--Mazur series \cite{ArtinMazur1965} into odd and even
+powers and applying the logarithmic series gives \eqref{eq:zeta}.
+\end{proof}
+
+For orientation, exact coefficients and exhaustive orbits give:
+\begin{center}
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+\(n\)&\(f_n\)&\(r_n\)&two-cycles&maximum depth\\
+\midrule
+0&1&1&0&0\\
+1&1&1&0&0\\
+2&2&2&0&0\\
+3&4&4&0&1\\
+4&48&48&0&1\\
+5&216&648&216&2\\
+6&27,920&30,512&1,296&2\\
+\bottomrule
+\end{tabular}
+\end{center}
+The paper-local verifier exhausts every labelled graph through \(n=6\).  It
+compares literal orbit depth with a separately evaluated split tree, checks
+the refinement and fixed/recurrent criteria state by state, checks periods
+and depth histograms, and independently assembles the coefficients of
+\eqref{eq:Ot}--\eqref{eq:Ft}. It executes 203,244 exact assertions. These
+computations test definitions and translations; the all-order conclusions
+rest on the proofs above.
+
+\section{Scope and conclusion}
+
+The parity-pruned split tree simultaneously exposes the pointwise and
+enumerative structure of odd-component complementation. It gives an exact
+entrance clock, the sharp maximum \(\lfloor(n-1)/2\rfloor\), and a recursive
+EGF for every temporal layer. The recurrent and fixed specializations then
+produce the two-cycle and zeta censuses without further orbit analysis.
+
+The contribution boundary is deliberately narrow. Gallai decomposition,
+cographs and cotrees, connected labelled graph counts, and labelled species
+operators remain zero-credit background. The direct-owner search was
+bounded rather than exhaustive, and the finite verifier stops at order six.
+Accordingly, this manuscript makes no novelty or priority assertion and is
+held from external release pending a broader owner audit.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

@@ -1,0 +1,87 @@
+\section{Deterministic exact adversarial audit}
+\label{sec:audit}
+
+The exact prototype compiles every idempotent from a finite poset
+relation as $q_x=ZE_xZ^{-1}$.  It does not supply a projector table or
+a primality oracle.  All identities use integers, rational arithmetic,
+or exact symbolic radicals; floating point is used only to display
+common-$t$ samples.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{L{3.6cm}L{2.5cm}cccc}
+\toprule
+Fixture & active labels & mixed Gram & native $B^2$ & native $B^4$
+& metric phase\\
+\midrule
+standard divisibility, $N=30$ & $2,3,5$ & yes & moves & moves & absent\\
+mutated divisibility, $N=12$ & $2,3,5,6$ & yes & moves & moves & absent\\
+composite-only subposet & $4,6,9$ & yes & moves & moves & absent\\
+seeded locally finite DAG & $10,14,21$ & yes & moves & moves & absent\\
+\bottomrule
+\end{tabular}
+\caption{Aggregate adversaries.  The native phase survives every
+fixture, while every positive-metric characteristic polynomial is
+phase independent.}
+\label{tab:controls}
+\end{table}
+
+The mutated relation deletes $2<6$ and $3<6$, making $6$ an atom.
+The composite-only subposet has bottom covers $4,6,9$.  The generic
+fixture is a deterministic DAG with seed $2801$.  Exact witnesses
+include
+\[
+ G_{23}^{(N=30)}=\frac{313}{405000},\qquad
+ G_{4,6}^{(\mathrm{comp})}=\frac1{20736},\qquad
+ G_{10,14}^{(\mathrm{DAG})}=\frac1{390625}.
+\]
+These nonzero rational entries establish that the phase signal is not
+rounding noise.
+
+\begin{figure}[t]
+\centering
+\input{figures/control_matrix}
+\caption{Every source fixture has native mixed-Gram and fourth-order
+motion.  Orthogonalization erases the phase in every fixture.  The
+matrix visualizes lack of arithmetic selectivity, not relative effect
+size.}
+\label{fig:controls}
+\end{figure}
+
+\subsection{Representative common-\texorpdfstring{$t$}{t} samples}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Fixture & $\Tr B^2(0)$ & $\Tr B^2(1.3)$
+& $\Tr B^4(0)$ & $\Tr B^4(1.3)$\\
+\midrule
+standard & 2.3055980793 & 2.3053415717 & 1.0173068797 & 1.0168511063\\
+mutated & 2.5967636512 & 2.5966667902 & 1.0287302339 & 1.0285865294\\
+composite-only & 1.1031574816 & 1.1031514332 & 0.2215897527 & 0.2215846316\\
+seeded DAG & 0.4773464242 & 0.4773463427 & 0.0400704387 & 0.0400704092\\
+\bottomrule
+\end{tabular}
+\caption{Displayed evaluations of exact symbolic expressions.  The
+proof of nonconstancy uses nonzero exact Laurent coefficients, not the
+decimal differences.}
+\label{tab:samples}
+\end{table}
+
+\subsection{Reproducibility and inference boundary}
+
+The frozen prototype has SHA-256
+\begin{center}\small
+\texttt{e29553c5a04cb31393b6ef8f93d2718285bac52d956cffc04d4c8d53fc6cc737},
+\end{center}
+and the result JSON has SHA-256
+\begin{center}\small
+\texttt{118ae2e85e4ce8d403673f1d00725520c7137a3a032bb9201cda186a61cb5cfb}.
+\end{center}
+Two fresh executions were byte-identical and every exact control
+passed.  The computation certifies finite formulas, control behavior,
+and metric identities.  It does not replace the countable Schatten,
+Fourier-isolation, or metric-rigidity proofs.

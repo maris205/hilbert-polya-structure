@@ -1,0 +1,152 @@
+\section{Boolean and connected candidates}
+\label{sec:candidates}
+
+Let \(A=(a_1,\ldots,a_r)\) be a tuple of distinct atoms, initially with
+\(r\in\{2,3\}\).  Suppose its join \(j(A)=\bigvee_i a_i\) exists.  The
+subset-join map is
+\begin{equation}
+ \beta_A:2^{[r]}\longrightarrow[\bot,j(A)],
+ \qquad S\longmapsto\bigvee_{i\in S}a_i,
+ \label{eq:beta}
+\end{equation}
+with empty join \(\bot\).
+
+\begin{definition}[Normalized Boolean-join weight]
+\begin{equation}
+ \KBool_r(A)
+ :=\one_{\{\beta_A\text{ is a pointed order isomorphism}\}}
+   (-1)^r\mu_X(\bot,j(A)).
+ \label{eq:boolean-weight}
+\end{equation}
+If the join is undefined, the value is zero.
+\end{definition}
+
+On a Boolean lattice \(B_r\),
+\(
+ \mu(\hat0,\hat1)=(-1)^r
+\), so every accepted tuple has \(\KBool_r=1\).
+
+\begin{proposition}[Naturality and compatible cutoffs]
+\label{prop:boolean-natural}
+The weight \eqref{eq:boolean-weight} is invariant under admissible pointed
+isomorphisms.  Its value on an old tuple is unchanged under a compatible
+active-cutoff enlargement evaluated in the same ambient source.
+\end{proposition}
+\begin{proof}
+An isomorphism carries atoms to atoms, preserves every subset join, and
+restricts to an isomorphism of the two pointed join intervals.  It therefore
+preserves the Boolean certificate and the top M{\"o}bius value.  An active
+cutoff changes only which already compiled atoms enter a finite sum; it does
+not replace the ambient interval of an old tuple.
+\end{proof}
+
+\begin{proposition}[Conditional uniqueness and scheme freedom]
+\label{prop:conditional-unique}
+Equation~\eqref{eq:boolean-weight} is the unique \(\{0,1\}\)-valued tuple
+weight supported exactly on Boolean tuple-join intervals and normalized to
+one there.  Isomorphism naturality alone does not select it.
+\end{proposition}
+\begin{proof}
+The support and normalization axioms fix both possible values.  The M{\"o}bius
+factor realizes the normalization because the Boolean top value is
+\((-1)^r\).  Conversely, let \(\mathfrak I_r\) be the set of pointed
+isomorphism classes of tuple-join intervals.  Every function
+\(f:\mathfrak I_r\to\C\) yields the natural weight
+\(
+ f([\bot,j(A)]_{\rm pt})
+\).  Global filtered-source data permit still more choices.
+\end{proof}
+
+The proposition separates a useful exact formula from an overclaim.
+“Natural” does not mean “canonical”; Boolean support, range, and unit
+normalization are scheme axioms.
+
+\subsection{The connected alternative}
+
+Fix a moment \(m(A_S)\) for each nonempty subset.  Its partition-lattice
+connected transform is
+\begin{equation}
+ \kappa_r(A)=
+ \sum_{\pi\in\Pi_r}(-1)^{|\pi|-1}(|\pi|-1)!
+ \prod_{B\in\pi}m(A_B).
+ \label{eq:cumulant}
+\end{equation}
+The coefficients in \eqref{eq:cumulant} are classical
+\citep{Speed1983}; the source does not thereby choose \(m\).
+
+\begin{lemma}[Factorization cancellation]
+\label{lem:factorization-cancellation}
+If
+\(
+ m(A_S)=\prod_{i\in S}u_i
+\)
+for every nonempty \(S\), then \(\kappa_r(A)=0\) for every \(r\ge2\).
+\end{lemma}
+\begin{proof}
+Every partition product in \eqref{eq:cumulant} equals
+\(\prod_i u_i\).  The remaining coefficient is
+\[
+ c_r=\sum_{\pi\in\Pi_r}(-1)^{|\pi|-1}(|\pi|-1)!.
+\]
+Its exponential generating function is
+\(
+ \sum_{r\ge1}c_r z^r/r!=\log(e^z)=z
+\), so \(c_r=0\) for \(r\ge2\).
+\end{proof}
+
+For the Boolean moment on a free commutative source, every nonempty subset
+moment is one.  Thus
+\begin{equation}
+ \kappa_2=1-1=0,
+ \qquad
+ \kappa_3=1-1-1-1+2=0.
+ \label{eq:low-cumulants}
+\end{equation}
+The connected transform detects failure of multiplicative factorization;
+it removes the desired free baseline signal.
+
+\subsection{The frozen five-predicate refinement}
+
+The exact suite strengthened the Boolean support before execution.  For a
+pair or triple \(A\), define \(\chi_r(A)=1\) precisely when all five
+conditions hold:
+\begin{enumerate}
+\item the join \(j(A)\) is unique;
+\item \(\beta_A\) identifies its pointed interval with \(B_r\);
+\item \(\mu(\bot,j(A))=(-1)^r\);
+\item the roof is multiplicative,
+  \(w(j(A))=\prod_{a\in A}w(a)\); and
+\item iterated binary joins own \(j(A)\) associatively.
+\end{enumerate}
+All five predicates are source-resident and natural under the admitted
+decorated isomorphisms.  The 31 nonempty predicate masks were enumerated as
+a robustness audit; none was selected after observing controls.
+
+The rank-three connected contraction used by that suite is
+\begin{equation}
+ \Theta_3
+ =2\sum_{a<b<c}\chi_3(a,b,c)
+ \frac{G_{ab}G_{bc}G_{ca}}{w(a)w(b)w(c)}.
+ \label{eq:theta3}
+\end{equation}
+It is important not to conflate \(\Theta_3\) with the partition-lattice
+cumulant \eqref{eq:cumulant}.  It is a separately filtered triangle
+contraction, not the full \(\operatorname{Tr}\cB_s^6\) and not a chiral
+determinant coefficient.  It can be nonzero on a factorizing baseline.
+
+The final exact audit finds \(\chi_3\) and \(\Theta_3\) nonzero at all three
+integer cutoffs and exactly zero on the four finite non-UFD fixtures.  This
+is a genuine finite-fixture GO.  It is not arithmetic selectivity: every
+pair, triple, coefficient, and predicate mask is reproduced by the
+transported free and polynomial-UFD clones.
+
+\begin{figure}[t]
+\centering
+\input{figures/candidate_dichotomy}
+\caption{The two frozen candidates fail complementary gates.  The Boolean
+weight is nonzero but survives on the formal UFD control.  The connected
+cumulant of a factorizing moment vanishes on the control and on the integer
+baseline.  Changing the moment adds scheme data but cannot break the
+isomorphism proved next.}
+\label{fig:candidate-dichotomy}
+\end{figure}

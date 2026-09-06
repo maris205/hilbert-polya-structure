@@ -1,0 +1,22 @@
+\begin{tikzpicture}[
+  node distance=7mm and 8mm,
+  box/.style={draw,rounded corners=2pt,align=center,text width=0.82\linewidth,
+              minimum height=9mm,inner sep=4pt,font=\small},
+  exact/.style={box,draw=exactblue,very thick},
+  stop/.style={box,draw=stoporange,dashed,very thick},
+  lock/.style={box,draw=mutedgray,densely dotted,thick},
+  arr/.style={-{Latex[length=2.3mm]},thick}
+]
+\node[exact] (source) {Finite visible alphabet; distinct cyclic code for each intended prime orbit\\
+positive scalar weights and total roof $\roof(\gamma_p)=\log p$};
+\node[stop,below=of source] (share) {\textbf{Share recurrent states}\\
+concatenation produces a mixed primitive root and violates the prime-only ledger};
+\node[stop,below=of share] (separate) {\textbf{Separate the prime cycles}\\
+finite coding forces $\ell(p)\gtrsim\log p$ on a subsequence; a bounded-roof edge remains, so the whole adjacency is noncompact};
+\node[lock,below=of separate] (escape) {\textbf{Length-one/countable escape}\\
+one visible atom state per selected integer gives an honest diagonal Fredholm determinant, but collapses to Paper~04 and works for every supplied inventory};
+\draw[arr] (source) -- node[right,font=\scriptsize]{recurrent compression} (share);
+\draw[arr] (share) -- node[right,font=\scriptsize]{enforce literal ledger} (separate);
+\draw[arr] (separate) -- node[right,font=\scriptsize]{change alphabet/object} (escape);
+\end{tikzpicture}
+

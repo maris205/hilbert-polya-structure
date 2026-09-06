@@ -1,0 +1,139 @@
+\section{Literal projective dynamics and the finite-time law}
+\label{sec:finite-law}
+
+Set $\zerovec=(0,0)^{\mathsf T}$ and write
+\[
+ M_n\trop\zerovec=(u_n,v_n)^{\mathsf T},\qquad
+ \Delta_n=u_n-v_n.
+\]
+Because the two coordinates are the row maxima of $M_n$,
+\begin{equation}
+ \label{eq:height-vector}
+ H_n=\max\{u_n,v_n\}.
+\end{equation}
+To update the projective state, normalize a vector to $(d,0)^{\mathsf T}$.
+Literal max-plus multiplication gives
+\begin{align}
+ A\trop(d,0)^{\mathsf T}
+ &=\bigl(\max\{d-2,-1\},\max\{d+1,-1\}\bigr)^{\mathsf T},
+ \label{eq:A-gap-action}\\
+ B\trop(d,0)^{\mathsf T}
+ &=\bigl(\max\{d-1,1\},\max\{d-1,-2\}\bigr)^{\mathsf T}.
+ \label{eq:B-gap-action}
+\end{align}
+The reward is the change in the coordinate maximum.
+
+\begin{theorem}[Five literal gaps and strong reward lumping]
+\label{thm:lumping}
+Starting from $\Delta_0=0$, the literal gap belongs to
+\[
+ \mathcal D=\{-3,-2,0,2,3\}
+\]
+at every time.  Its next gap and height reward are as follows.
+\begin{center}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{c@{\qquad}cc}
+\toprule
+current gap $d$ & choose $A$: $(d',H'-H)$ & choose $B$: $(d',H'-H)$\\
+\midrule
+$-3$ & $(0,-1)$ & $(3,+1)$\\
+$-2$ & $(0,-1)$ & $(3,+1)$\\
+$0$  & $(-2,+1)$ & $(2,+1)$\\
+$2$  & $(-3,+1)$ & $(0,-1)$\\
+$3$  & $(-3,+1)$ & $(0,-1)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Group the negative gaps as $N$, zero as $Z$, and the positive gaps as $P$.
+Then this partition is strongly lumpable jointly with the reward, and the
+lumped table is
+\begin{center}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{c@{\qquad}cc}
+\toprule
+current state & choose $A$ & choose $B$\\
+\midrule
+$N$ & $(Z,-1)$ & $(P,+1)$\\
+$Z$ & $(N,+1)$ & $(P,+1)$\\
+$P$ & $(N,+1)$ & $(Z,-1)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The accumulated reward equals the literal matrix height $H_n$ for every
+chronological word.
+\end{theorem}
+
+\begin{proof}[Tropical literal/projective route]
+Evaluate \eqref{eq:A-gap-action}--\eqref{eq:B-gap-action} at the five values
+in $\mathcal D$ and subtract the old maximum $\max\{d,0\}$.  This gives the
+first table.  Every listed next gap again lies in $\mathcal D$, so induction
+proves confinement.  All five values really occur: the empty word has gap
+$0$, the one-letter words $A,B$ have gaps $-2,2$, and the words $AB,BA$
+have gaps $3,-3$, respectively.
+
+The two representatives of $N$ have the same target lump and reward under
+each generator; the same is true for the two representatives of $P$.
+The singleton $Z$ causes no ambiguity.  This proves strong reward lumping
+and the second table.  Finally, \eqref{eq:height-vector} identifies each
+literal maximum increment with the table reward.  Since $H_0=0$, summing the
+rewards gives $H_n$.
+\end{proof}
+
+The orientation is fixed before this reduction.  For example, the word
+$A,A,B$ means $B\trop A\trop A$ and gives
+\[
+ \begin{pmatrix}1&1\\-1&-2\end{pmatrix},
+\]
+whereas the reversed word gives a different matrix.  Thus the construction
+does not silently commute the generators.
+
+\begin{theorem}[Exact finite-time transform and cubic]
+\label{thm:finite-pgf}
+Let $0\leq p\leq1$, $q=1-p$, and $y>0$.  With state order $(N,Z,P)$, define
+\begin{equation}
+ \label{eq:Q}
+ Q_p(y)=
+ \begin{pmatrix}
+ 0&p/y&qy\\
+ py&0&qy\\
+ py&q/y&0
+ \end{pmatrix}.
+\end{equation}
+Then, for every $n\geq0$,
+\begin{equation}
+ \label{eq:finite-pgf}
+ \boxed{\quad
+ \Exp[y^{H_n}]=\eZ^{\mathsf T}Q_p(y)^n\one.
+ \quad}
+\end{equation}
+Writing $a=pq$, one also has
+\begin{equation}
+ \label{eq:cubic}
+ \boxed{\quad
+ \det(rI-Q_p(y))
+ =r^3+(2a-1-ay^2)r-ay.
+ \quad}
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Markov-additive transfer route]
+For a transition of probability $w$ and reward $g$, put $wy^g$ in its
+matrix entry.  The reward table in \cref{thm:lumping} gives exactly
+\eqref{eq:Q}.  If the row vector $m_n$ records
+$\Exp[y^{H_n}\mathbf 1_{\{S_n=s\}}]$, then
+$m_0=\eZ^{\mathsf T}$ and $m_{n+1}=m_nQ_p(y)$.  Summing over the terminal
+state proves \eqref{eq:finite-pgf}, including $n=0$.
+
+For the determinant, the three two-cycles contribute
+$p^2$, $q^2$, and $pqy^2$ to the coefficient of $-r$.  The two oriented
+three-cycles have total weight $p^2qy+pq^2y=pqy$.  Hence
+\[
+ \det(rI-Q_p(y))
+ =r^3-(p^2+q^2+pqy^2)r-pqy.
+\]
+Using $p^2+q^2=1-2pq$ gives \eqref{eq:cubic}.
+\end{proof}
+
+For $0<p<1$, $Q_p(y)$ is primitive for every $y>0$: its directed graph has
+positive two-cycles and three-cycles.  This observation supplies all
+finite-dimensional spectral hypotheses used below.

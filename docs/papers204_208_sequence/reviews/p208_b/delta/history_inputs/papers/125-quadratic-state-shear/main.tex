@@ -1,0 +1,440 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\depth}{\operatorname{depth}}
+
+\title[Quadratic-state shear]{Quadratic-State Shear over \(\F_2\):\\
+Exact Fibres and the Complete Witt-Sensitive Functional Graph}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 05E18, 11E04, 20B25}
+\keywords{finite dynamical system, quadratic form, characteristic two,
+functional graph, fibre, Witt type, dynamical zeta function}
+
+\begin{document}
+
+\begin{abstract}
+Let \((V,Q)\) be a nonsingular quadratic space of dimension \(2m\) over
+\(\F_2\), and iterate
+\[
+                 \Phi(x,y)=(y,x+Q(x)y)
+\]
+on \(V^2\).  We determine its complete functional graph for both Witt signs.
+The polar bit is invariant, and a three-bit quotient shows that every
+transient has depth at most two and every eventual period belongs to
+\(\{1,2,3,4\}\), with all pointwise exceptions classified.  A two-candidate
+inverse formula gives every fibre, the full image tower, and the exact three
+depth layers.  Character sums then resolve the Witt dependence, while the
+reverse fibres force precisely six decorated cycle shapes.  This yields
+closed counts for every component and cycle, hence the finite-map zeta
+function.  The map is nonbijective and fails both standard Yang--Baxter
+relations; transvection actions, Yang--Baxter pair maps, static quadratic-form
+counts, and zeta bookkeeping are therefore treated only as owner boundaries.
+Exact exhaustive controls through dimension ten include literal image-set
+equality and component traversal.  The owner search is bounded, and no
+novelty, priority, or external-release claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{The map and the residual question}
+
+Let \((V,Q)\) be a nonsingular quadratic space of dimension \(2m\) over
+\(\F_2\), with polar form
+\[
+ B(x,y)=Q(x+y)+Q(x)+Q(y).
+\]
+On \(V^2\), define
+\begin{equation}
+                  \Phi(x,y)=(y,x+Q(x)y).                 \label{eq:map}
+\end{equation}
+The update is basis-free and equivariant for the diagonal action of
+\(O(V,Q)\).  It swaps the pair when the departing vector is singular and
+adds that vector to its partner when it is nonsingular.
+
+Put
+\begin{equation}
+ N=|V|=2^{2m},\qquad
+ S=\sum_{x\in V}(-1)^{Q(x)}=\varepsilon2^m,\qquad
+ \varepsilon\in\{+1,-1\}.                               \label{eq:NS}
+\end{equation}
+For \(m=0\), only the plus convention occurs and the unique state is fixed.
+For \(m\ge1\), the two signs are the two Witt types.  Classical
+characteristic-two quadratic counts and orthogonal geometry are background
+\cite{Fulton1977,HallShpectorov2021}.  We prove the counts needed below, so
+no static census receives contribution credit.
+
+The word ``shear'' does not identify \eqref{eq:map} with a transvection.
+A symplectic transvection has a fixed centre and coefficient supplied by the
+polar pairing; its generated group acts bijectively
+\cite{Sjostrand2025}.  Here the moving state supplies \(Q(x)\), the active
+vector changes at every step, and the map is noninjective.  Set-theoretic
+Yang--Baxter maps are another pair-map neighbor, including both bijective
+\cite{EtingofSchedlerSoloviev1999} and nonbijective finite-order settings
+\cite{CatinoColazzoStefanelli2021}.  We give explicit failures of both
+Yang--Baxter relations in \cref{rem:ybe}.
+
+After these deductions, the residual package is the conjunction of exact
+pointwise dynamics, every fibre and image, Witt-sensitive temporal layers,
+and all decorated components of the literal map.  The finite-map zeta is a
+consequence, not a separate contribution.
+
+There are also internal package collisions.  The following firewall records
+them without claiming an external literature comparison.
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.13\linewidth}p{0.79\linewidth}@{}}
+\toprule
+Neighbor & Subtraction and distinction\\
+\midrule
+P99 & A fixed unipotent matrix acts bijectively on integer sublattices; here
+the shear is state-gated and nonbijective.\\
+P103 & Double-adjugate dynamics uses rank strata and scalar power maps; here
+the engine is the quadratic/polar quotient and nonuniform fibres.\\
+P106 & Its cubic polarity identity gives depth at most one and periods at
+most two; this is the closest temporal silhouette, but \eqref{eq:map} has a
+Witt-sensitive depth-two layer and periods three and four.\\
+P109 & Nilpotent image acts on a subspace lattice with one recurrent state;
+\eqref{eq:map} acts on vector pairs and has four cycle lengths.\\
+P118 & Quotient, fibre, basin, and zeta packaging is already spent; its
+carrier and labelled-EGF fibre engine are unrelated.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Pointwise temporal classification}
+
+For a state \((x,y)\), set
+\[
+                  a=Q(x),\qquad b=Q(y),\qquad c=B(x,y).
+\]
+
+\begin{proposition}[three-bit quotient]\label{prop:quotient}
+The polar bit \(c\) is invariant, and
+\begin{equation}
+          (a,b,c)\longmapsto\bigl(b,a(1+b+c),c\bigr).     \label{eq:quotient}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Writing \((u,v)=\Phi(x,y)\), polarization and alternation give
+\[
+ Q(u)=b,\quad Q(v)=Q(x+ay)=a+ab+ac=a(1+b+c),\quad
+ B(u,v)=B(y,x+ay)=c.
+\]
+\end{proof}
+
+\begin{theorem}[complete pointwise clock]\label{thm:clock}
+Every transient has depth at most two, and every eventual period belongs to
+\(\{1,2,3,4\}\).  More precisely:
+\begin{center}
+\small
+\begin{tabular}{@{}ccl@{}}
+\toprule
+\(c\)&\((a,b)\)& pointwise fate\\
+\midrule
+0&00& recurrent; period 1 iff \(x=y\), otherwise 2\\
+0&01& recurrent; period 2 iff \(x=0\), otherwise 4\\
+0&10& recurrent; period 2 iff \(y=0\), otherwise 4\\
+0&11& depth 1; eventual period 2 iff \(x=y\), otherwise 4\\
+1&00& recurrent of exact period 2\\
+1&01& depth 2, followed by exact period 2\\
+1&10& depth 1, followed by exact period 2\\
+1&11& recurrent of exact period 3\\
+\bottomrule
+\end{tabular}
+\end{center}
+Depth two occurs in the plus plane for \(m=1\), in both signs for \(m\ge2\),
+and not in the minus plane for \(m=1\).
+\end{theorem}
+
+\begin{proof}
+Equation \eqref{eq:quotient} gives, for \(c=0\),
+\[
+00\to00,\qquad01\leftrightarrow10,\qquad11\to10,
+\]
+and, for \(c=1\),
+\[
+00\to00,\qquad01\to10\to00,
+\qquad10\to00,\qquad11\to11.
+\]
+On the pair of vectors, a singular or nonsingular departing state acts by
+\[
+ A_0=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+ \qquad
+ A_1=\begin{pmatrix}0&1\\1&1\end{pmatrix}
+ \quad\text{over }\F_2.
+\]
+In particular,
+\[
+ A_0^2=I,\qquad A_1^3=I,\qquad
+ A_1A_0=\begin{pmatrix}1&0\\1&1\end{pmatrix},\qquad
+ A_0A_1=\begin{pmatrix}1&1\\0&1\end{pmatrix},
+\]
+and both two-step products square to \(I\).  The matrix word or landing test
+for every quotient row is therefore as follows.
+\begin{center}
+\small
+\begin{tabular}{@{}ccp{0.68\linewidth}@{}}
+\toprule
+\(c\)&start&word and pointwise consequence\\
+\midrule
+0&00&\(A_0^2=I\); one step fixes the pair exactly when \(x=y\).\\
+0&01&\((A_1A_0)^2=I\); two steps fix the pair exactly when \(x=0\).\\
+0&10&\((A_0A_1)^2=I\); two steps fix the pair exactly when \(y=0\).\\
+0&11&\(A_1\) lands in type 10 with second coordinate \(x+y\); hence the
+eventual period is two exactly when \(x=y\).\\
+1&00&\(A_0^2=I\), while \(\Fix(A_0)\) would force \(x=y\), excluded by
+\(B(x,y)=1\).\\
+1&01&\(A_1A_0\) lands in type 00 after two steps, whose period is exactly two.\\
+1&10&\(A_1\) lands in type 00 after one step, whose period is exactly two.\\
+1&11&\(A_1^3=I\), and \(\Fix(A_1)=\{(0,0)\}\), excluded by this type.\\
+\bottomrule
+\end{tabular}
+\end{center}
+These products give all listed periods and the only possible shortenings
+\(x=y\), \(x=0\), or \(y=0\).  Thus no further period or transient occurs.
+
+The depth-two type has the cardinality computed as \(A\) in
+\eqref{eq:HMaz}; the stated small-form boundary follows immediately.
+\end{proof}
+
+\begin{remark}[not a Yang--Baxter map]\label{rem:ybe}
+In a plus hyperbolic plane choose \(e,f\) with
+\(Q(e)=Q(f)=0\), \(B(e,f)=1\).  Directly,
+\[
+ \Phi_{12}\Phi_{23}\Phi_{12}(e+f,e,f)=(f,e,f),\qquad
+ \Phi_{23}\Phi_{12}\Phi_{23}(e+f,e,f)=(f,e,e).
+\]
+Thus the braid relation fails.  Put \(R=\Phi\).  With products acting
+right-to-left, the two sides of
+\(R_{12}R_{13}R_{23}=R_{23}R_{13}R_{12}\), evaluated at
+\((e+f,e+f,e)\), are \((e,f,e)\) and \((e,f,0)\).  Hence the quantum
+Yang--Baxter convention fails as well.
+\end{remark}
+
+\section{Fibres, images, and Witt layers}
+
+\begin{theorem}[every fibre]\label{thm:fibre}
+For each target \((u,v)\in V^2\),
+\begin{equation}
+ \Phi^{-1}(u,v)=
+ \{(v,u):Q(v)=0\}\ \cup\
+ \{(u+v,u):Q(u+v)=1\}.                                  \label{eq:fibre}
+\end{equation}
+The two candidates are distinct whenever both occur.  Consequently the
+numbers of targets of indegree \(0,1,2\) are
+\begin{equation}
+ d_0=d_2=\frac{N(N-1)}4,
+ \qquad d_1=\frac{N(N+1)}2.                              \label{eq:fibrehist}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+An unknown preimage has the form \((x,u)\), with
+\(v=x+Q(x)u\).  The alternatives \(Q(x)=0,1\) give exactly
+\eqref{eq:fibre}, and substitution proves sufficiency.  Equality of the two
+candidates would force \(u=0\), contradicting their simultaneous conditions
+\(Q(v)=0\) and \(Q(v)=1\).
+
+The change of variables \((u,v)\leftrightarrow(v,w=u+v)\) is a bijection.
+A missing target has \(Q(v)=1,Q(w)=0\), while a double target has
+\(Q(v)=0,Q(w)=1\).  Since the numbers of singular and nonsingular vectors are
+\(N_0=(N+S)/2\) and \(N_1=(N-S)/2\), either class has size
+\(N_0N_1=(N^2-S^2)/4=N(N-1)/4\).  Edge mass gives \(d_1\).
+\end{proof}
+
+To enumerate the temporal types, let
+\[
+ C_{abc}=\#\{(x,y):Q(x)=a,Q(y)=b,B(x,y)=c\}.
+\]
+
+\begin{lemma}[pair census]\label{lem:pairs}
+The eight counts reduce to
+\begin{equation}
+\begin{aligned}
+ H=C_{000}&=\frac{N(N+3S+4)}8,\\
+ M=C_{010}=C_{100}=C_{110}&=\frac{N(N-S)}8,\\
+ A=C_{001}=C_{011}=C_{101}&=\frac{N(N+S-2)}8,\\
+ Z=C_{111}&=\frac{N(N-3S+2)}8.
+\end{aligned}
+\label{eq:HMaz}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Expanding the three binary indicators gives
+\begin{equation}
+\begin{aligned}
+ C_{abc}=\frac18[&N^2+(-1)^aNS+(-1)^bNS+(-1)^{a+b}S^2\\
+ &+(-1)^cN\{1+(-1)^a+(-1)^b+(-1)^{a+b}S\}].
+\end{aligned}
+\label{eq:walsh}
+\end{equation}
+Indeed, nondegeneracy gives the three mixed polar sums \(N,N,N\), while
+\(Q(x)+Q(y)+B(x,y)=Q(x+y)\) gives the final sum \(NS\).  Now use \(S^2=N\).
+This self-contained Walsh calculation is retained even though such static
+quadratic counts belong to the classical owner region.
+\end{proof}
+
+\begin{theorem}[image tower and exact layers]\label{thm:layers}
+The second image is exactly the recurrent set, and
+\begin{equation}
+ |\im\Phi^0|=N^2,\qquad
+ |\im\Phi|=\frac{N(3N+1)}4,\qquad
+ |\im\Phi^t|=\frac{N(5N-S+4)}8\quad(t\ge2).              \label{eq:images}
+\end{equation}
+The numbers \(L_j\) of states of depth \(j\) are
+\begin{equation}
+ L_0=\frac{N(5N-S+4)}8,\qquad
+ L_1=\frac{N(N-1)}4,\qquad
+ L_2=\frac{N(N+S-2)}8.                                  \label{eq:layers}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Formula \eqref{eq:fibre} has values, on the four \((a,b)\)-columns,
+\[
+\begin{array}{c|cccc}
+c&00&01&10&11\\\hline
+0&1&1&2&0\\
+1&2&0&1&1
+\end{array}.
+\]
+Together with \cref{thm:clock}, this says that the first image is the
+recurrent set plus type \((c,a,b)=(1,1,0)\).  That extra type maps to the
+recurrent type \((1,0,0)\), while recurrent points have predecessors of every
+iterate along their cycles.  Hence \(\im\Phi^2=\Rec(\Phi)\) setwise.
+The first image size follows from \eqref{eq:fibrehist}; reading the transient
+rows and substituting \eqref{eq:HMaz} gives
+\(L_2=A\), \(L_1=M+A\), and the displayed formulas.
+\end{proof}
+
+\section{All components and the zeta function}
+
+The reverse dynamics is complementary to the forward quotient: it determines
+the trees attached to the cycles already classified in \cref{thm:clock}.
+
+\begin{theorem}[six decorated component shapes]\label{thm:components}
+Every connected component has exactly one of the following shapes.
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.57\linewidth}r@{}}
+\toprule
+Shape & Number\\
+\midrule
+bare fixed point & \(N_0\)\\
+bare 2-cycle & \((H-N_0)/2\)\\
+2-cycle with one leaf at one cycle vertex & \(N_1\)\\
+2-cycle with one length-two tail at each cycle vertex & \(A/2\)\\
+bare 3-cycle & \(Z/3\)\\
+4-cycle with one leaf at each of two alternating vertices & \((M-N_1)/2\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+There are no other reverse trees.
+\end{theorem}
+
+\begin{proof}
+In \(c=0\), type \(00\) is the swap: its \(N_0\) diagonal states are fixed,
+and the others form bare 2-cycles.  Types \(01\) and \(10\) form 2-cycles
+when one coordinate is zero and 4-cycles otherwise.  The fibre table in the
+proof of \cref{thm:layers} gives every type-10 cycle vertex one additional
+type-11 leaf.  Thus the exceptional 2-cycles number \(N_1\); the remaining
+mixed states give \((M-N_1)/2\) four-cycles, with leaves at alternating
+vertices.
+
+In \(c=1\), each type-00 state lies on a 2-cycle and has one extra type-10
+predecessor; that predecessor has one type-01 predecessor.  This gives
+\(A/2\) components with a length-two tail at both cycle vertices.  Type 11
+gives \(Z/3\) bare 3-cycles.  The zero fibres of the leaf types and the global
+indegree ceiling two exclude every deeper or branched tree.
+\end{proof}
+
+\begin{corollary}[cycles and zeta]\label{cor:zeta}
+If \(c_j\) is the number of cycles of exact length \(j\), then
+\begin{equation}
+\begin{aligned}
+ c_1&=\frac{N+S}{2},\\
+ c_2&=\frac{N^2+2NS+3N-6S}{8},\\
+ c_3&=\frac{N(N-3S+2)}{24},\\
+ c_4&=\frac{N^2-NS-4N+4S}{16}.
+\end{aligned}
+\label{eq:cycles}
+\end{equation}
+The finite-map zeta function is
+\begin{equation}
+ \zeta_\Phi(t)=
+ (1-t)^{-c_1}(1-t^2)^{-c_2}
+ (1-t^3)^{-c_3}(1-t^4)^{-c_4}.                          \label{eq:zeta}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Sum the corresponding rows of \cref{thm:components} and substitute
+\eqref{eq:HMaz}.  The standard periodic-point definition and cycle product
+of Artin--Mazur zeta functions \cite{ArtinMazur1965} give \eqref{eq:zeta}.
+\end{proof}
+
+\section{Exact controls and release boundary}
+
+The paper-local standard-library verifier exhausts the zero-dimensional
+boundary and both Witt signs for \(1\le m\le5\), hence every ordered pair
+through dimension ten.  It checks the literal update, polarization, every
+quotient transition, every pointwise depth and period, all target fibres,
+all eight pair counts, the fibre histogram, image and layer formulas, and all
+cycle counts.  It also constructs the second-image set and compares it
+pointwise with \(\Rec(\Phi)\), then traverses every functional component,
+canonically records the reverse rooted tree at each cycle vertex modulo
+directed cyclic rotation only, and checks the six shapes and their counts.
+An asymmetric sentinel prevents reflection identification.  The canonical
+run makes \(27{,}405{,}887\) exact assertions.
+
+Finite exhaustion proves none of the all-size arguments or owner statements.
+The source search included the literal formula, state-dependent shear and
+switch vocabulary, orthogonal and symplectic transvections, and bijective and
+nonbijective Yang--Baxter pair maps.  No direct or conjugate-map owner was
+located in this bounded pass.  Because \eqref{eq:map} is extremely short,
+owner risk remains substantial: a direct prior classification would supersede
+the residual claim.  There is no assertion of first occurrence, novelty, or
+priority.  Public posting, submission, and external circulation remain on
+hold.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

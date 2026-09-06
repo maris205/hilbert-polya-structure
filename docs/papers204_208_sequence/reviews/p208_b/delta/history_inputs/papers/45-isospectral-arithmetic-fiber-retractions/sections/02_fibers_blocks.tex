@@ -1,0 +1,106 @@
+\section{Arithmetic fibers and rank-one blocks}
+\label{sec:fibers}
+
+Write
+\[
+  \Fh=\{m\in\N:v_p(m)<h\ \text{for every prime }p\},
+  \qquad
+  J_h(m)=\{p:v_p(m)=h-1\}.
+\]
+The set $J_h(m)$ records the prime exponents at which saturation has lost
+information.  It need not equal the set of all prime divisors of $m$.
+
+\begin{lemma}[Exact fibers]
+\label{lem:fibers}
+For every $m\in\Fh$,
+\begin{align}
+  \tau_h^{-1}(m)
+    &=\left\{m\prod_{p\in J_h(m)}p^{r_p}:r_p\in\N\cup\{0\}\right\},
+      \label{eq:saturated-fiber}\\
+  \omega_h^{-1}(m)
+    &=\{ma^h:a\in\N\}.
+      \label{eq:modulo-fiber}
+\end{align}
+Both maps fix $m$.
+\end{lemma}
+
+\begin{proof}
+If $v_p(m)\le h-2$, the equality
+$\min\{v_p(n),h-1\}=v_p(m)$ forces $v_p(n)=v_p(m)$.  If
+$v_p(m)=h-1$, it forces only $v_p(n)\ge h-1$, leaving a nonnegative
+extra exponent at that same prime.  No new prime can occur, which proves
+\cref{eq:saturated-fiber}.  On the other hand,
+$v_p(n)\equiv v_p(m)\pmod h$, with $0\le v_p(m)<h$, is equivalent to
+$v_p(n)=v_p(m)+h v_p(a)$ for a unique positive integer $a$.  This proves
+\cref{eq:modulo-fiber}.  Taking every extra exponent to be zero shows that
+both maps fix $m$.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\linewidth}{!}{\input{figures/fiber_schematic}}
+  \caption{The common fixed label produces the same eigenline.  The
+  saturated fiber varies only primes in $J_h(m)$, whereas the modulo fiber
+  permits an arbitrary $h$th-power multiplier.}
+  \label{fig:fibers}
+\end{figure}
+
+For $f=\tau_h$ or $\omega_h$, let
+\[
+  \Hs_m^f=\overline{\operatorname{span}}\{e_n:f(n)=m\}.
+\]
+The fibers partition $\N$, so
+\begin{equation}
+  \ell^2(\N)=\bigoplus_{m\in\Fh}\Hs_m^f.
+  \label{eq:block-decomp}
+\end{equation}
+
+\begin{lemma}[Block ledger]
+\label{lem:block-ledger}
+Let $T$ denote either algebraic map in \cref{eq:intro-operators}, and
+write $T_m=T|_{\Hs_m^f}$.  Whenever the coefficient sequence of this block
+is square summable, $T_m$ is rank one, its range is $\C e_m$, and its
+unique nonzero singular value $\rho_T(m)$ satisfies
+\begin{align}
+  \rho_S(m)^2
+    &=m^{-\sigma}\prod_{p\in J_h(m)}(1-p^{-\sigma})^{-1},
+      &&\sigma>0,                                      \label{eq:rho-S}\\
+  \rho_M(m)^2
+    &=m^{-\sigma}\zeta(h\sigma),
+      &&\sigma>1/h.                                    \label{eq:rho-M}
+\end{align}
+Moreover, with $\lambda_m=m^{-s/2}$,
+\begin{equation}
+  T_m e_m=\lambda_m e_m,
+  \qquad
+  T_m^k=\lambda_m^{k-1}T_m\quad(k\ge1).
+  \label{eq:block-power}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For a finitely supported $x=\sum_n x_ne_n$ in the block,
+\[
+  T_mx=\left(\sum_{f(n)=m}x_n n^{-s/2}\right)e_m.
+\]
+Thus the squared norm of the coefficient functional is
+$\sum_{f(n)=m}n^{-\sigma}$, and this is the only nonzero squared singular
+value.  Applying \cref{lem:fibers},
+\begin{align*}
+  \sum_{\tau_h(n)=m}n^{-\sigma}
+    &=m^{-\sigma}\prod_{p\in J_h(m)}\sum_{r\ge0}p^{-r\sigma},\\
+  \sum_{\omega_h(n)=m}n^{-\sigma}
+    &=m^{-\sigma}\sum_{a\ge1}a^{-h\sigma},
+\end{align*}
+which gives \cref{eq:rho-S,eq:rho-M} with their exact convergence
+conditions.  Because $m$ lies in its own fiber, $T_me_m=\lambda_me_m$.
+A rank-one map with range $\C e_m$ then obeys
+$T_m^2=\lambda_mT_m$, and induction proves \cref{eq:block-power}.
+\end{proof}
+
+Two type distinctions will be used repeatedly.  The eigenvalue
+$\lambda_m$ depends on the full complex parameter $s$; the block singular
+value depends only on $\sigma$.  Also, the block index $m$ is an $h$-free
+integer, not a prime.  Confusing either pair erases the phenomenon we are
+trying to measure.
+

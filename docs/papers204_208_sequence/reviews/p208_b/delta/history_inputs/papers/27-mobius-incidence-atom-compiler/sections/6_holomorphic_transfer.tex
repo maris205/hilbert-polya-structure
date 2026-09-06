@@ -1,0 +1,192 @@
+\section{Trace-class transfer and holomorphic de Rham coupling}
+\label{sec:holomorphic}
+
+\subsection{Marked atom transfer}
+
+Fix \(\eta>\half\) and define
+\begin{equation}
+T_\eta(s,u)
+=\sum_{p\in\At(P)}u^{\ell(p)}p^{-s}q_p.
+\label{eq:atom-transfer}
+\end{equation}
+The summation index is derived by the cover predicate, not read from a prime
+table.
+
+\begin{theorem}[Holomorphic trace-class family]
+\label{thm:trace-class-transfer}
+Whenever
+\begin{equation}
+\sum_{p\in\At(P)}
+|u|^{\ell(p)}p^{-\Re s}<\infty,
+\label{eq:absolute-domain}
+\end{equation}
+the series \eqref{eq:atom-transfer} converges in trace norm, locally uniformly
+in \((s,u)\). For every \(r\ge1\),
+\begin{equation}
+T_\eta(s,u)^r
+=\sum_p u^{r\ell(p)}p^{-rs}q_p,
+\qquad
+\Tr T_\eta(s,u)^r
+=\sum_p u^{r\ell(p)}p^{-rs}.
+\label{eq:all-power-traces}
+\end{equation}
+Its Fredholm determinant is
+\begin{equation}
+\det(I-zT_\eta(s,u))
+=\prod_p \left(1-zu^{\ell(p)}p^{-s}\right).
+\label{eq:atom-fredholm}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The uniform bound \eqref{eq:uniform-trace-norm} and
+\eqref{eq:absolute-domain} prove absolute trace-norm convergence, locally
+uniformly on compact subsets of the domain. Holomorphy as an
+\(\Sone\)-valued map follows. Pair annihilation from
+\cref{thm:rank-one} gives the operator identity in
+\eqref{eq:all-power-traces}; tracing uses \(\Tr q_p=1\).
+
+For small \(z\), the trace-class determinant identity
+\[
+\log\det(I-zT)
+=-\sum_{r\ge1}\frac{z^r}{r}\Tr T^r
+\]
+and absolute convergence give
+\[
+\log\det(I-zT_\eta)
+=\sum_p \log\left(1-zu^{\ell(p)}p^{-s}\right).
+\]
+Both sides of \eqref{eq:atom-fredholm} are entire in \(z\), so equality
+extends globally.
+\end{proof}
+
+For \(\rho=|u|>0\), the gamma duration has the two-sided comparison
+\begin{equation}
+\rho^{\ell(n)}
+\asymp_\rho n^{2\log_2\rho}.
+\label{eq:gamma-asymptotic}
+\end{equation}
+The prime series therefore gives the exact threshold
+\begin{equation}
+\Re s>1+2\log_2\rho.
+\label{eq:marker-half-plane}
+\end{equation}
+At \(u=0\) the transfer is identically zero. A common, marker-transparent safe
+domain is \(|u|\le1\) and \(\Re s>1\).
+
+At \(u=z=1\), \eqref{eq:atom-fredholm} becomes
+\begin{equation}
+\det(I-T_\eta(s,1))
+=\prod_p(1-p^{-s})
+=\frac1{\zeta(s)},
+\qquad \Re s>1.
+\label{eq:reciprocal-zeta}
+\end{equation}
+Equation \eqref{eq:reciprocal-zeta} is a consequence of the source-derived
+loop theorem. It is not advertised as a new scalar identity.
+
+\begin{proposition}[Sharp \(u=1\) trace-class barrier]
+\label{prop:trace-barrier}
+The realization \(T_\eta(s,1)\) cannot be trace class when \(\Re s\le1\).
+\end{proposition}
+
+\begin{proof}
+For each source atom \(p\), the vector \(r_p=e_1+e_p\) satisfies
+\[
+T_\eta(s,1)r_p=p^{-s}r_p.
+\]
+These vectors are linearly independent. The eigenvalues of a trace-class
+operator, with algebraic multiplicity, are absolutely summable. Their
+absolute values here include \(p^{-\Re s}\), whose sum over primes diverges
+for \(\Re s\le1\).
+\end{proof}
+
+The marker may shift the absolute half-plane when \(|u|<1\), but this does
+not continue the \(u=1\) arithmetic operator. In particular, a scalar
+continuation of the right side of \eqref{eq:reciprocal-zeta} is not a
+same-object continuation of \(T_\eta(s,1)\).
+
+\subsection{Two honest holomorphic degrees}
+
+We now couple the incidence selector to the inherited prefix-coded affine
+renewal sector. Let \(U_{p,0}\) and \(U_{p,1}\) denote its zero- and one-form
+pullbacks on the fixed holomorphic cylinder space. The prior construction
+provides a common degreewise trace-norm bound on the absolute domain and, for
+every branch word \(w\), the local Lefschetz identity
+\begin{equation}
+\Tr U_{w,0}-\Tr U_{w,1}=1
+\label{eq:local-lefschetz}
+\end{equation}
+after removing the scalar branch weight. Concretely, if the derivative of the
+affine word is \(\vartheta_w\), the two local traces are
+\[
+\frac1{1-\vartheta_w},
+\qquad
+\frac{\vartheta_w}{1-\vartheta_w},
+\]
+whose difference is one. This is the canonical de Rham cancellation of the
+fixed-point denominator.
+
+Define the degreewise operators
+\begin{equation}
+\cT_k(s,u)
+=\sum_p u^{\ell(p)}p^{-s}q_p\otimes U_{p,k},
+\qquad k=0,1.
+\label{eq:degreewise-transfer}
+\end{equation}
+
+\begin{theorem}[Honest graded determinant]
+\label{thm:graded-determinant}
+On the common absolute trace-class domain, both operators in
+\eqref{eq:degreewise-transfer} are trace class and, for every \(r\ge1\),
+\begin{equation}
+\Tr\cT_0(s,u)^r-\Tr\cT_1(s,u)^r
+=\sum_p u^{r\ell(p)}p^{-rs}.
+\label{eq:graded-power-trace}
+\end{equation}
+Consequently
+\begin{equation}
+\Dgr(s,u,z)
+:=\frac{\det(I-z\cT_0(s,u))}
+        {\det(I-z\cT_1(s,u))}
+=\prod_p \left(1-zu^{\ell(p)}p^{-s}\right).
+\label{eq:graded-ratio}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The common local trace-norm bound, \eqref{eq:absolute-domain}, and
+\eqref{eq:uniform-trace-norm} give degreewise trace-norm convergence. In an
+\(r\)-fold product, the incidence factor annihilates every mixed atom word
+before the holomorphic trace is taken. A monochromatic word contributes
+\(\Tr q_p=1\), and \eqref{eq:local-lefschetz} removes its local stability
+factor. This proves \eqref{eq:graded-power-trace}. Taking the difference of
+the two ordinary trace-log expansions yields \eqref{eq:graded-ratio}.
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\resizebox{0.94\textwidth}{!}{\input{figures/analytic_domain_map}}
+\caption{The theorem domains have different owners. Individual incidence
+idempotents exist for \(\eta>\half\); a bounded global incidence similarity
+is proved for \(\eta>1\); and the marked transfer plus both holomorphic
+degrees are trace class in the stated \((s,u)\)-half-plane. At \(u=1\), the
+eigenvalue obstruction stops the operator at \(\Re s=1\), irrespective of
+any scalar continuation of its product.}
+\label{fig:analytic-domains}
+\end{figure}
+
+\begin{remark}[Ordinary versus graded]
+\label{rem:ordinary-graded}
+The numerator and denominator in \eqref{eq:graded-ratio} are separately
+defined ordinary Fredholm determinants. Their quotient is the graded
+relative determinant. It is not the ordinary determinant of
+\(\cT_0\oplus\cT_1\), which would multiply rather than divide the two
+degreewise determinants.
+\end{remark}
+
+The two cancellations also have separate ownership. Incidence pair
+annihilation removes mixed source labels. The de Rham difference removes a
+local holomorphic stability denominator. After both steps, one scalar class
+remains per source-derived atom, so the final determinant is again the atom
+product.

@@ -1,0 +1,91 @@
+\section{One-site pressure and equilibrium states}\label{sec:pressure}
+
+Let $\varphi:A\sqcup B\to\mathbb R$ be a one-site potential and abbreviate
+\[
+ Z_A(\varphi)=\sum_{a\in A}e^{\varphi(a)},
+ \qquad
+ Z_B(\varphi)=\sum_{b\in B}e^{\varphi(b)}.
+\]
+Write $q_A(a)=e^{\varphi(a)}/Z_A(\varphi)$ and define $q_B$ analogously.
+
+In statistical-mechanics terms, $X_{m,n}^{(d)}$ is a hard-constraint spin
+system; its checkerboard orientation is a two-valued sector variable, and
+$e^{\varphi}$ supplies the single-site activities.  Conditioning on a sector
+removes all residual interactions because the target is complete bipartite,
+so the remaining spins form independent parity-wise products.  The full
+translation action exchanges the two sectors and therefore forces their
+equal mixture at equilibrium.  For a non-complete bipartite target,
+conditioning on phase would generally leave constraints between neighbouring
+dimers, so this reduction would no longer be an independent-spin model.
+
+\begin{theorem}[Pressure and equilibrium state]\label{thm:pressure}
+For every $d\geq1$,
+\[
+ P_{X_{m,n}^{(d)}}(\varphi)
+ =\frac12\bigl(\log Z_A(\varphi)+\log Z_B(\varphi)\bigr).
+ \tag{5.1}\label{eq:pressure}
+\]
+There is a unique equilibrium state invariant under the full $\Z^d$ action:
+\[
+ \mu_\varphi=\frac12\left(
+ \bigotimes_{v\in\E}q_A\otimes\bigotimes_{v\in\OO}q_B
+ +
+ \bigotimes_{v\in\E}q_B\otimes\bigotimes_{v\in\OO}q_A
+ \right),
+ \tag{5.2}\label{eq:eqstate}
+\]
+where in the second product the symbols $q_A,q_B$ are assigned to the
+parity classes on which their alphabets occur.  At $\varphi=0$, this is the
+unique full-action measure of maximal entropy.
+\end{theorem}
+
+\begin{proof}
+For every nonempty finite $F$, the weighted sum over globally extendible
+patterns is
+\[
+ Z_A(\varphi)^{|F\cap\E|}Z_B(\varphi)^{|F\cap\OO|}
+ +Z_B(\varphi)^{|F\cap\E|}Z_A(\varphi)^{|F\cap\OO|}.
+ \tag{5.3}\label{eq:weighted-count}
+\]
+On rectangular Følner boxes the two parity densities tend to $1/2$.
+Taking normalized logarithms proves \eqref{eq:pressure}.
+
+We include the uniqueness argument because it records the role of full-action
+invariance.  By \cref{prop:phase-full}, conditioning on one phase identifies
+the even-subgroup action with the full shift on $A\times B$.  Under this
+identification, the potential accumulated on one dimer is
+$\varphi(a)+\varphi(b)$.  The full-shift variational problem therefore has
+partition sum
+\[
+ \sum_{(a,b)\in A\times B}e^{\varphi(a)+\varphi(b)}
+ =Z_A(\varphi)Z_B(\varphi).
+\]
+Its unique equilibrium law is the Bernoulli product with one-dimer marginal
+$q_A\times q_B$.  Indeed, if $p$ is an arbitrary probability on $A\times B$
+with marginals $p_A,p_B$, then
+\begin{align*}
+ H(p)+\sum_{a,b}p(a,b)(\varphi(a)+\varphi(b))
+ &\leq H(p_A)+H(p_B)
+   +\sum_a p_A(a)\varphi(a)+\sum_b p_B(b)\varphi(b)\\
+ &\leq \log Z_A(\varphi)+\log Z_B(\varphi).
+\end{align*}
+Equality in the first line forces independence within a dimer, and the two
+finite-alphabet Gibbs equalities force $p_A=q_A$ and $p_B=q_B$.  For an
+arbitrary invariant process on the dimer full shift, entropy rate is at most
+the entropy of its one-dimer marginal; equality forces independence across
+the $\E$-sites.  Thus the dimer Bernoulli law is the unique optimizer.
+
+Every full-action invariant probability gives mass $1/2$ to each phase,
+since an odd translation exchanges them.  Entropy and potential average for
+the index-two subaction both scale by two relative to their per-$\Z^d$
+values, and the finite phase mixture contributes zero entropy density.  Thus
+the unique dimer
+Bernoulli equilibrium on one component and its odd translate must occur with
+equal weights.  This is precisely \eqref{eq:eqstate}, and its variational
+value is the right-hand side of \eqref{eq:pressure}.
+\end{proof}
+
+The phase mixture in \eqref{eq:eqstate} is long-range dependent: knowing the
+target part at one site determines it at every site of the same parity.  Thus
+the equilibrium state is compatible with \cref{thm:fd}: it is not finitely
+dependent, even though each conditional product measure is $0$-dependent.

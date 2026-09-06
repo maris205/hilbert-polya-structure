@@ -1,0 +1,129 @@
+\section{Strong-Bisimulation Quotients: Well-Founded and Labelled Cases}
+\label{sec:bisimulation}
+
+A quotient may contain a cycle even when its source graph does not: different
+quotient edges can be witnessed by incompatible representatives.  Successor
+matching prevents that defect whenever the source admits no infinite forward
+path.
+
+\begin{theorem}[Forward-well-founded bisimulation obstruction]
+\label{thm:well-founded-bisim}
+Let $G=(V,E)$ be forward well-founded and let $\sim$ be a strong forward
+bisimulation.  Then the quotient graph $G/{\sim}$ is acyclic.
+\end{theorem}
+
+\begin{proof}
+Assume, for contradiction, that the quotient contains a directed cycle
+\[
+  C_0\longrightarrow C_1\longrightarrow\cdots
+  \longrightarrow C_{m-1}\longrightarrow C_m=C_0,
+  \qquad m\geq1.
+\]
+For each $i\in\{0,\ldots,m-1\}$, choose representatives
+$a_i\in C_i$ and $b_{i+1}\in C_{i+1}$ such that $a_iEb_{i+1}$, with indices
+read modulo $m$.
+
+Choose any $v_0\in C_0$.  Suppose $v_j\in C_i$ has been chosen, where
+$i\equiv j\pmod m$.  Since $v_j\sim a_i$ and $a_iEb_{i+1}$, successor
+matching supplies $v_{j+1}$ such that
+\[
+  v_jEv_{j+1}
+  \qquad\text{and}\qquad
+  v_{j+1}\sim b_{i+1}.
+\]
+Thus $v_{j+1}\in C_{i+1}$.  Induction constructs an infinite directed path
+$v_0Ev_1Ev_2E\cdots$ in $G$, contradicting forward well-foundedness.
+\end{proof}
+
+\begin{corollary}[Finite-DAG case]
+\label{cor:finite-bisim}
+A strong forward-bisimulation quotient of a finite directed acyclic graph is
+acyclic.
+\end{corollary}
+
+\begin{proof}
+An infinite path in a finite graph repeats a vertex, and the positive segment
+between two repetitions is a directed cycle.  A finite DAG is therefore
+forward well-founded, so \cref{thm:well-founded-bisim} applies.
+\end{proof}
+
+Acyclicity alone cannot replace forward well-foundedness for an arbitrary
+infinite source.
+
+\begin{remark}[Infinite-ray counterexample]
+\label{rem:infinite-ray}
+Let $V=\N$ and put one edge $n\to n+1$ at every vertex.  This infinite graph
+is acyclic but not forward well-founded.  The universal equivalence relation,
+under which all vertices are equivalent, is a strong forward bisimulation:
+the unique successors of any two vertices are again equivalent.  Its quotient
+has one vertex and a self-loop.  Thus \cref{thm:well-founded-bisim} cannot be
+enlarged to all infinite DAGs by retaining acyclicity alone.
+\end{remark}
+
+For the wheel system, an independent grading argument applies when one
+state-class decoder must be exact for every representative of that class.
+
+\begin{proposition}[Level-injective labels preserve acyclicity]
+\label{prop:label-grading}
+Let $V=\bigsqcup_{k\geq0}V_k$, and suppose every edge goes from $V_k$ to
+$V_{k+1}$.  Let $\lambda:V\to\Lambda$ be constant on each $V_k$, with
+pairwise distinct values across levels.  If
+\begin{equation}
+  v\sim w \quad\Longrightarrow\quad \lambda(v)=\lambda(w),
+  \label{eq:label-respecting}
+\end{equation}
+then $G/{\sim}$ is acyclic.  Graph finiteness and bisimulation are not needed.
+\end{proposition}
+
+\begin{proof}
+Condition \eqref{eq:label-respecting} and injectivity of the level labels
+force every equivalence class to lie in a single $V_k$.  Define
+\[
+  \overline{\level}([v])=k \qquad\text{when }v\in V_k.
+\]
+This quotient grading is well-defined.  If $[v]\to[w]$, some representatives
+$v'\in[v]$ and $w'\in[w]$ satisfy $v'Ew'$, hence
+\[
+  \overline{\level}([w])=\overline{\level}([v])+1.
+\]
+The quotient level increases along every positive-length path, so no path can
+return to its starting class.
+\end{proof}
+
+\begin{corollary}[Representative-exact next-prime decoder]
+\label{cor:q-label}
+Let $G$ be the graded wheel graph and suppose there is one state-class decoder
+$D:V/{\sim}\to\N$ satisfying
+\begin{equation}
+  D([v])=q_{\level(v)+1}
+  \qquad\text{for every source representative }v.
+  \label{eq:class-decoder-exact}
+\end{equation}
+Then the quotient cannot merge different levels and cannot contain a directed
+cycle.
+\end{corollary}
+
+\begin{proof}
+If $v\sim w$, then \eqref{eq:class-decoder-exact} gives
+$q_{\level(v)+1}=D([v])=D([w])=q_{\level(w)+1}$.  By
+\cref{lem:prime-enumeration}, the values $q_k$ are pairwise distinct, so
+$\level(v)=\level(w)$.  Apply \cref{prop:label-grading} with
+$\lambda(v)=q_{\level(v)+1}$.
+\end{proof}
+
+\begin{remark}[What the quotient results do not cover]
+The proof of \cref{thm:well-founded-bisim} uses successor matching and the
+absence of an infinite forward source path.  It does not apply to an infinite
+ray, a one-way simulation, a bounded-radius observational equivalence, or an
+arbitrary graph homomorphic image.  The proof of
+\cref{prop:label-grading} applies only when the state-class decoder is exact
+for every representative.  An edge decoder or a path-window decoder that
+distinguishes representatives within one state class falls outside that
+proposition.  Falling outside either theorem creates an open proof
+obligation, not evidence of an arithmetic periodic orbit.
+\end{remark}
+
+For a finite cutoff, \cref{cor:finite-bisim} removes the proposed positive
+branch entirely: a correctly computed strong-bisimulation quotient cannot
+produce a cycle.  Running the quotient code could still serve as a regression
+test, but it could not supply positive Stage-02 evidence.

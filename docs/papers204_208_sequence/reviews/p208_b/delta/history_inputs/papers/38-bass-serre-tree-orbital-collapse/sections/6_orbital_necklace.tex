@@ -1,0 +1,144 @@
+\section{Orbital necklace collapse}
+\label{sec:orbital}
+
+We now give the strongest favorable calculation after explicitly changing
+the primitive unit from full-tree periods to positive-height group conjugacy
+classes.  The fixed-height congruence is consistent with current conjugacy
+theory for soluble Baumslag--Solitar groups
+\citep{ciobanu2020conjugacy,guo2026conjugacy}.
+
+\subsection{Conjugacy at fixed height}
+
+For $r\ge2$, write
+\begin{equation}
+  \Gr\cong\mathbb Z[1/r]\rtimes\mathbb Z,
+  \qquad
+  (a,\ell)(b,k)=(a+r^\ell b,\ell+k).
+  \label{eq:semidirect}
+\end{equation}
+The inverse is $(-r^{-\ell}a,-\ell)$, and direct multiplication yields
+\begin{equation}
+  (c,m)(b,k)(c,m)^{-1}
+  =\bigl(r^m b+(1-r^k)c,k\bigr).
+  \label{eq:conjugation}
+\end{equation}
+Height is therefore a conjugacy invariant.  At fixed $k>0$, addition by
+$(1-r^k)c$ passes to
+\[
+  \mathbb Z[1/r]/(r^k-1)\mathbb Z[1/r]
+  \cong \mathbb Z/(r^k-1)\mathbb Z,
+\]
+and conjugation by height $m$ acts by multiplication by $r^m$.
+
+\begin{proposition}[Burnside class count]
+\label{prop:burnside}
+The number of conjugacy classes at height $k$ is
+\begin{equation}
+  \Cclass(k)=\frac1k\sum_{j=0}^{k-1}
+  \bigl(r^{\gcd(j,k)}-1\bigr)=\Nneck(k)-1,
+  \label{eq:class-count}
+\end{equation}
+where $\Nneck(k)$ is the number of length-$k$ necklaces on $r$ symbols.
+\end{proposition}
+
+\begin{proof}
+Multiplication by $r$ has exact order $k$ modulo $r^k-1$.  Its $j$th power
+fixes
+\[
+  \gcd(r^j-1,r^k-1)=r^{\gcd(j,k)}-1
+\]
+residues.  Burnside's lemma gives the first equality.  The ordinary necklace
+formula has the same average with $r^{\gcd(j,k)}$ in place of
+$r^{\gcd(j,k)}-1$, proving the second equality.
+\end{proof}
+
+The explicit digit map sends $(d_0,\ldots,d_{k-1})$ to
+$\sum_i d_ir^i$ modulo $r^k-1$.  Rotation acts by multiplication by $r$.
+The only duplicate in the integer range $[0,r^k-1]$ is the pair
+$0^k$ and $(r-1)^k$, which explains the subtraction of one.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.99\textwidth}{!}{\input{figures/orbital_necklace}}
+  \caption{The exact positive-height group-orbital pipeline.  Conjugacy
+  reduces to multiplication-by-$r$ residue orbits, which are endpoint-
+  identified necklaces.  Burnside and primitive-root inversion give the
+  rational product.  The dashed barrier records the decisive ownership fact:
+  this group-conjugacy ledger is not a periodic ledger or ordinary Fredholm
+  factor of the literal full-tree shift.}
+  \label{fig:orbital-necklace}
+\end{figure}
+
+\subsection{Primitive roots and the Euler product}
+
+Let $\Pclass(k)$ count primitive positive-height conjugacy classes.  A word of
+minimal period $d\mid k$ repeats $k/d$ times, and the associated translation
+coordinate is multiplied by
+$1+r^d+\cdots+r^{k-d}$.  This is exactly the first coordinate of the
+corresponding semidirect-product power.  M\"obius inversion gives
+\begin{equation}
+  \Pclass(1)=r-1,
+  \qquad
+  \Pclass(k)=\frac1k\sum_{d\mid k}\mu(d)r^{k/d}\quad(k>1),
+  \qquad
+  \Cclass(k)=\sum_{d\mid k}\Pclass(d).
+  \label{eq:primitive-count}
+\end{equation}
+
+The ordinary Witt necklace product is $(1-rz)^{-1}$.  Our primitive counts
+differ only by one missing degree-one class, so
+\begin{equation}
+  \Zpos(z)
+  =\prod_{k\ge1}(1-z^k)^{-\Pclass(k)}
+  =\frac{1-z}{1-rz}.
+  \label{eq:orbital-product}
+\end{equation}
+This factorization owns primitive/repetition bookkeeping inside the
+group-orbital ledger.  It does not repair the object change.
+
+\subsection{The modular cocycle only rescales length}
+
+At positive height $k$, Convention~\ref{conv:height} gives
+$\modc^{-s}=r^{-sk}$.  Weighting \eqref{eq:orbital-product} therefore makes
+the substitution $z\mapsto r^{-s}z$:
+\begin{equation}
+  Z_{+,r,s}(z)
+  =\frac{1-r^{-s}z}{1-r^{1-s}z}.
+  \label{eq:modular-product}
+\end{equation}
+The cocycle supplies no second label beyond signed tree length.  In
+particular, it produces neither a graded cancellation nor a prime/composite
+split.
+
+\subsection{Balanced divergence and genericity}
+
+For $r=1$, the group is $\mathbb Z^2$ and conjugacy is equality.  At each
+height $k>0$, the elements $(b,k)$ for $b\in\mathbb Z$ give infinitely many
+classes.  The orbital Euler product is not locally finite.  Quotienting the
+infinite height-zero kernel leaves a generic line action and changes the
+object again.
+
+\begin{table}[t]
+\centering
+\small
+\caption{First six total and primitive orbital counts.  Prime and composite
+rows follow one index law; the table is a genericity control, not a
+factorization classifier.}
+\label{tab:necklace-counts}
+\begin{tabular}{cll}
+\toprule
+$r$ & $C_r(1{:}6)$ & $P_r(1{:}6)$ \\
+\midrule
+2 & $1,2,3,5,7,13$ & $1,1,2,3,6,9$ \\
+3 & $2,5,10,23,50,129$ & $2,3,8,18,48,116$ \\
+4 & $3,9,23,69,207,699$ & $3,6,20,60,204,670$ \\
+5 & $4,14,44,164,628,2634$ & $4,10,40,150,624,2580$ \\
+6 & $5,20,75,335,1559,7825$ & $5,15,70,315,1554,7735$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Every cyclic index-$r$ ascending HNN control reproduces
+\eqref{eq:orbital-product}.  The formula remembers the numerical incidence
+index, but it does not distinguish the source presentation from its matched
+controls.  Under the preregistered rule, that genericity is terminal.

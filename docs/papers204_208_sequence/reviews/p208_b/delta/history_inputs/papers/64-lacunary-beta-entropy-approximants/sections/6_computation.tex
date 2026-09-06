@@ -1,0 +1,39 @@
+\section{An exact-arithmetic triangular control}
+\label{sec:computation}
+
+Take $g_j=j$, equivalently
+\[
+ q_j=j+1,\qquad n_j=\frac{j(j+1)}2.
+\]
+Then $\beta$ is the unique root in $(1,2)$ of
+\[
+ \sum_{k\geq1}\beta^{-k(k+1)/2}=1,
+\]
+numerically $\beta\approx1.5498524695188884304$.  The accompanying program uses no external packages; its relative location is
+\begin{center}
+\path{checks/verify_certificates.py}.
+\end{center}
+With the first 18 positions and denominator $2^{72}$, exact rational sign tests from \cref{prop:rational-certificate} give
+\[
+ \frac{7318971355448747171761}{4722366482869645213696}
+ <\beta<
+ \frac{3659485677724373585881}{2361183241434822606848}.
+\]
+The same dyadic procedure encloses each $\beta_j$.  The output stores the resulting symbolic logarithmic interval, not merely a decimal approximation.
+
+\begin{table}[H]
+\centering
+\small
+\input{figures/numerical_certificate_table}
+\caption{Triangular-position control.  Here $A_j=\beta^{-n_{j+1}}/(\beta D_\beta)$.  The two slack columns report the relative distances from $L_j$ to the lower and upper analytic bounds in \eqref{eq:certificate}.  The analytic values are evaluated at high precision only after a separate exact rational root enclosure.  Unrounded data and exact rational log-ratio endpoints are stored in the accompanying JSON file.}
+\label{tab:triangular}
+\end{table}
+
+The ratio $L_j/A_j$ in \cref{tab:triangular} approaches one, as predicted by \cref{thm:asymptotic}.  The shrinking positive slacks separately confirm both inequalities in \eqref{eq:certificate}; the test is not a regression fit.  Re-running the script overwrites the table and the captured output deterministically.
+
+\paragraph{Reproduction.}
+From the paper directory, run
+\begin{quote}
+\texttt{./checks/verify\_certificates.py}.
+\end{quote}
+The frozen standard output is \texttt{checks/triangular\_gap\_check.out}.  The script asserts strict gap growth, every exact rational root enclosure, every analytic two-sided inequality, and containment of the decimal diagnostics in the rational intervals.

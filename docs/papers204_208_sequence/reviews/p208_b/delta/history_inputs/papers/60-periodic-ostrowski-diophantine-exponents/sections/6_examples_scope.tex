@@ -1,0 +1,82 @@
+\section{Exact checks, boundary behavior, and scope}
+\label{sec:examples}
+
+Two period-one/two computations illustrate different parts of the theorem.
+
+\begin{example}[A constant interior tail]
+\label{ex:constant-three}
+Let $a_i=3$ and $b_i=1$ on the tail.  This is case~5 with $L=1$.  The exact
+phase maximum gives
+\[
+ \dio(x)=\frac{5+\sqrt{13}}{3}
+          =2.868517091821330\ldots .
+\]
+Thus the primitive minimal polynomial is $3X^2-10X+4$.  For example,
+\[
+  (2868/1000,2869/1000)
+\]
+is a rational isolating interval for the intended root.
+\end{example}
+
+\begin{example}[A boundary Fibonacci tail]
+\label{ex:fibonacci-boundary}
+Let $a_i=1$ and take the legal periodic digit tail
+$0,1,0,1,\ldots$.  Maximal digits occur on every second position, so the
+eventual-interior four-quotient shortcut is inapplicable.  The boundary rows
+of \cref{tab:eight-cases}, with $L=2$, instead give
+\[
+ \dio(x)=1+\varphi=\frac{3+\sqrt5}{2}
+          =2.618033988749895\ldots .
+\]
+Its primitive minimal polynomial is $X^2-3X+1$.  Formally inserting this tail
+into an interior-only quotient can make a denominator subscale and suggests a
+spurious divergence; the complete table is essential.
+\end{example}
+
+The package contains two deterministic regression controls.  The first checks
+the structural table and partition consistency on 225,000 legal digit/phase
+states, hits every case, certifies
+11,682,880,721 individual interval positions by exact interval-length
+summation, checks the left-endpoint bound $r(x,m)\leq m+1$, and reproduces the
+case-7 values $13$ and $10$ in \cref{ex:case7-certificate}.  The second combines
+exact standard-library quadratic polynomial and isolation certificates with
+exact integer recurrences on long tails; only its displayed convergence check
+uses binary floating point.  It recovers the two algebraic values in
+\cref{ex:constant-three,ex:fibonacci-boundary}.  These controls are
+regression evidence; the proofs above do not depend on random testing.
+The first control does not independently generate a Sturmian word or recompute
+$r(x,m)$ point by point; its role is exact structural consistency checking of
+the printed table.  A separate external audit performed that word-level
+recomputation for all eight cases.
+
+\subsection*{Scope and release status}
+
+The result assumes a quadratic slope and legal ultimately periodic intercept
+digits.  It gives no nonperiodic extension and no uniform bit-complexity
+estimate.  The state matrix is reducible, and only its continuant block is
+primitive.  All eight boundary cases are used; coordinate digit bounds alone
+are not treated as legality.
+
+This is an internal verification draft tied explicitly to
+arXiv:2504.13636v1.  As checked on 25 August 2026, the official record still
+listed only v1.  External release remains on hold until that record is checked
+again for a later version and a defensible author-notification or
+correction-priority trail is documented.  No author notification or priority
+clearance is claimed here.
+
+\Needspace{8\baselineskip}
+\subsection*{Declarations}
+
+\paragraph{Data and code availability.}
+No empirical dataset was used.  The two control scripts, their exact
+certificates, and their frozen outputs are included in the internal paper
+package.
+
+\paragraph{Funding and competing interests.}
+No external funding is declared for this anonymous internal draft.  No
+competing interests are declared.
+
+\paragraph{AI-assisted preparation.}
+Automated academic-writing tools assisted the preparation of this internal
+draft.  Mathematical claims, source locators, and any future release decision
+remain the responsibility of the author or authors.

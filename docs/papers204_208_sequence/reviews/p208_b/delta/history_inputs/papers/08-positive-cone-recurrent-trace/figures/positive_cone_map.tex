@@ -1,0 +1,28 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+ atom/.style={circle,draw,minimum size=10mm},
+ arr/.style={-{Latex[length=2mm]},thick},
+ note/.style={align=center,font=\small},
+ every loop/.style={looseness=7}]
+\node[atom] (p2) {$F_2$};
+\node[atom,right=27mm of p2] (p3) {$F_3$};
+\node[atom,right=27mm of p3] (p5) {$F_5$};
+\node[right=12mm of p5] (dots) {$\cdots$};
+\draw[arr] (p2) edge[loop above] node {$e$} (p2);
+\draw[arr] (p3) edge[loop above] node {$e$} (p3);
+\draw[arr] (p5) edge[loop above] node {$e$} (p5);
+\draw[arr,bend left=17] (p2) to node[above,font=\scriptsize] {$g_{1,+}$} (p3);
+\draw[arr,bend left=17] (p3) to node[below,font=\scriptsize] {$g_{1,-}$} (p2);
+\draw[arr,bend left=17] (p3) to node[above,font=\scriptsize] {$g_{2,+}$} (p5);
+\draw[arr,bend left=17] (p5) to node[below,font=\scriptsize] {$g_{2,-}$} (p3);
+\draw[arr] (p5) -- (dots);
+\node[note,below=18mm of p3] (base) {base cycles recur\\positive cocycle words $\ne e$};
+\node[note,below=18mm of p5] (adj) {chiral adjoint adds $g^{-1}$\\backtracking gives $gg^{-1}=e$};
+\draw[arr,dashed] (p3) -- (base);
+\draw[arr,dashed] (p5) -- (adj);
+\end{tikzpicture}
+\caption{The base grammar is bidirectional.  The canonical trace deletes
+mixed positive lifts, but self-adjointization restores inverse backtracks.}
+\label{fig:positive-cone}
+\end{figure}

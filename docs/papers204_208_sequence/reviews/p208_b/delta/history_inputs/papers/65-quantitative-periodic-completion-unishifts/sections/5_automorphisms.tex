@@ -1,0 +1,52 @@
+\section{Quantitative finite quotients for automorphisms}\label{sec:automorphisms}
+
+For $m,T\geq1$, define the finite rectangular periodic-point set
+\[
+ P_{m,T}(X_\Pi)=Fix(\sigma^{(m,0)})\cap\Fix(\sigma^{(0,T)}).
+\]
+It has at most $a^{mT}$ elements.  Every automorphism preserves it because automorphisms commute with both shifts.  Thus restriction gives a homomorphism
+\begin{equation}\label{eq:restriction-hom}
+ \theta_{m,T}:\Aut(X_\Pi)\longrightarrow
+ \Sym(P_{m,T}(X_\Pi)).
+\end{equation}
+The local-rule representation of shift-commuting continuous maps goes back to Hedlund \citep{hedlund1969}.
+
+\begin{corollary}[Radius-controlled separation]\label{cor:aut}
+Let $\varphi\in\Aut(X_\Pi)$ be nonidentity and suppose its local rule is supported in the square $[-\rho,\rho]^2$.  Put
+\[
+ M_\rho=(4R+2)\rho+a.
+\]
+There are integers $m,T$ such that
+\begin{align}
+ 2\rho+1\leq m&\leq M_\rho,\label{eq:aut-m}\\
+ 2\rho+1\leq T&\leq 2\rho+1+a^m
+                    \leq2\rho+1+a^{M_\rho},\label{eq:aut-T}
+\end{align}
+and $\theta_{m,T}(\varphi)$ is nonidentity.  In particular
+$\Aut(X_\Pi)$ is residually finite, and $\varphi$ is separated by a finite quotient of order at most
+\[
+ \left(a^{mT}\right)!.
+\]
+All radii and periods here are measured in the fixed presentation coordinates.
+\end{corollary}
+
+\begin{proof}
+Choose $x\in X_\Pi$ and translate it so that
+$\varphi(x)_{0,0}\neq x_{0,0}$.  The square pattern
+$p=\restr x{[-\rho,\rho]^2}$ is globally valid and determines both sides of this inequality.  Apply \cref{thm:completion} with
+$W=H=2\rho+1$.  It gives a periodic $z$ containing $p$ and
+\[
+ m\leq2\rho+1+2R(2\rho)+a-1=(4R+2)\rho+a,
+\]
+together with \eqref{eq:aut-T}.  The construction uses positive return paths, so $m\geq W$ and $T\geq H$.  Aligning the occurrence of $p$ at the origin gives
+$\varphi(z)_{0,0}\neq z_{0,0}$.  Therefore restriction to
+$P_{m,T}(X_\Pi)$ does not kill $\varphi$.  The target of
+\eqref{eq:restriction-hom} is finite and has order at most $(a^{mT})!$.
+\end{proof}
+
+This proof is the standard dense-periodic-points separation mechanism
+\citep{ceccherini2012,salo2026residual}, with an explicit choice of periodic-point set.  It is also algorithmic once a globally valid witness window is supplied.  Enumerate all $a^{mT}$ labelings of the $m\times T$ torus, retain those satisfying the cyclic trace and NCA constraints, and evaluate the local rule of $\varphi$ on them.  A direct implementation takes
+\[
+ O\!\left(a^{mT}mT(R+\rho+1)\right)
+\]
+time before representing the induced permutation.  This is a finite certificate, not a claim of an efficient residual-finiteness growth function.  In particular, the corollary does not solve the separate problem of finding a witness for a black-box automorphism.

@@ -1,0 +1,578 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+% Load the display and blackboard-bold math fonts before the first shipout;
+% otherwise pdfTeX can issue a late font-expansion warning on a dense page 1.
+\AtBeginDocument{%
+  \begingroup\setbox0=\hbox{$\displaystyle\sum_{j=1}^d\mathbb F$}\endgroup}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\N}{\mathbb N}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cX}{\mathcal X}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Lev}{\mathsf L}
+\newcommand{\Vol}{\mathsf V}
+\newcommand{\Unif}{\operatorname{Unif}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\I}{\operatorname{I}}
+\newcommand{\Hsh}{\operatorname{H}}
+
+\title[Finite-field parity tree shifts]{Finite-Field Parity Tree Shifts:\\
+Exact Boundary Complexity, IID Rays, and Coordinate-Deletion Reconstruction}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 37A50, 60J10, 68Q70, 94A17}
+\keywords{tree shift, finite field, free semigroup action, block Markov chain, tree entropy, boundary reconstruction, mutual information, threshold secret sharing}
+
+\begin{document}
+
+\begin{abstract}
+Let $q$ be a prime power, let $d\geq2$, and fix nonzero coefficients
+$c_1,\ldots,c_d\in\F_q$.  We study labelings of the full rooted $d$-ary
+tree that satisfy the linear parity rule
+\[
+ x_w=\sum_{j=1}^d c_jx_{wj}
+\]
+at every vertex.  Every height-$h$ block is parametrized uniquely by its
+$d^h$ terminal labels, so the exact block count is $q^{d^h}$.  This gives a
+complete normalization ledger: boundary-normalized complexity is $\log q$,
+site-normalized complexity tends to $(d-1)\log q/d$, and double-logarithmic
+growth is $\log d$.
+
+Uniform terminal data define compatible uniform block laws and hence a
+shift-invariant probability measure.  This measure is a homogeneous
+block-Markov chain with an affine-hyperplane offspring kernel.  Although
+siblings are jointly constrained, the labels on every deterministic ray are
+iid uniform on $\F_q$.  In the opposite direction, the full level at depth
+$h$ reconstructs the root through an explicit nonzero linear functional.
+Every proper subset of that level is independent of the root: its mutual
+information with the root is exactly zero, while the complete level has
+mutual information $\log q$.  Thus an iid process on each ray coexists with
+an exact coordinate-deletion threshold on every complete level.  The
+tree-shift, entropy-normalization, joint-offspring, reconstruction, and
+secret-sharing frameworks are assigned to their prior owners; the residual
+contribution is this finite-field formula package, with no absolute priority
+claim.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Local constraints on a rooted tree can be invisible along every individual
+lineage and still be perfectly visible across a complete generation.  The
+example in this note makes that separation exact.  Labels take values in a
+finite field, and every parent is a fixed nondegenerate linear combination
+of its children.  A single ray therefore sees a new uniform field element at
+every step, while the exponentially wide boundary carries one field symbol
+of purely collective information about the root.
+
+Tree shifts of finite type and their automata-theoretic foundations are due
+to Aubrun and B\'eal \cite{AubrunBeal2012}.  Ban and Chang developed the
+nonlinear-recurrence approach to finite-type tree-shift complexity and used
+the double-logarithmic entropy normalization \cite{BanChang2017}.  Petersen
+and Salama introduced and established the site-normalized tree-shift entropy
+used below \cite{PetersenSalama2018}.  These frameworks are prior.  We keep
+both normalizations visible because the same exact block count produces
+different constants under them.
+
+Tree-indexed Markov processes form another established line, including the
+work of Benjamini and Peres \cite{BenjaminiPeres1994}.  In the binary case,
+a parent-to-pair kernel allowing conditional dependence between siblings is
+already the bifurcating Markov-chain framework used by Guyon
+\cite{Guyon2007}.  Souissi later introduced block Markov chains on rooted
+trees \cite{Souissi2022}.  Our children are not conditionally independent:
+given their parent, they are uniform on one affine hyperplane.  We use the
+displayed joint-offspring factorization and claim no new Markov framework.
+
+Root reconstruction from noisy independent-edge broadcasts is likewise an
+established tree problem \cite{EvansEtAl2000}.  The law below is instead
+noiseless and sibling-coupled, and our result is a finite-depth statement
+about deleting coordinates from a complete level.  We claim no general
+broadcasting or reconstruction theorem.
+
+The residual results are four exact statements.
+\begin{enumerate}
+\item Restriction to the terminal level is a bijection, giving
+      $|\cB_h|=q^{d^h}$ and an explicit root functional.
+\item Boundary, volume, and double-log normalizations are all evaluated
+      from this one formula, without fitting a nonlinear recurrence.
+\item The compatible uniform law factors through a homogeneous joint
+      offspring kernel, and every deterministic ray is iid uniform.
+\item The root has zero mutual information with every proper subset of a
+      complete level but is determined by the complete level.
+\end{enumerate}
+All four statements hold over every finite field, not only over prime
+fields.  The accompanying control program performs exact enumeration over
+$\F_2,\F_3,\F_4$, and $\F_5$, together with modular row reduction over
+$\F_2,\F_3,\F_5$, and $\F_7$.  The single $\F_4$ lane is an extension-field
+regression test; the all-prime-power scope comes from the proofs, not from
+experimental extrapolation.
+
+\subsection*{Internal collision firewall}
+
+Two earlier internal systems require an explicit separation.  P49 concerns
+complete cyclic \emph{hom} tree-shifts defined by parent--child adjacency,
+transient phase allocation, and Hausdorff dimension in a boundary-weighted
+metric.  The present shift instead has a star constraint coupling all
+siblings to their parent; it has no transient feeder, phase optimizer, graph
+homomorphism constraint, or Hausdorff-dimension claim.  P77 concerns a
+one-dimensional countable orbit closure of fixed digit-weight automatic
+sets, its Cantor--Bendixson tower, and cellular-automaton endomorphisms.  The
+present system is an uncountable free-semigroup tree shift and uses neither
+automatic digit support nor orbit-closure topology.  Accordingly, no claim
+or proof from either internal paper is reused.
+
+\section{The parity tree shift}
+\label{sec:setup}
+
+Fix an integer $d\geq2$ and write $D=\{1,\ldots,d\}$.  The vertex set of
+the full rooted ordered $d$-ary tree is the free monoid
+\[
+ \cT_d=D^*=\bigcup_{h\geq0}D^h,
+\]
+whose root is the empty word $\eps$.  Put
+\[
+ \Lev_h=D^h,
+ \qquad
+ \Vol_h=\bigcup_{r=0}^h\Lev_r.
+\]
+Thus $|\Lev_h|=d^h$ and
+\begin{equation}\label{eq:volume-size}
+ |\Vol_h|=1+d+\cdots+d^h=\frac{d^{h+1}-1}{d-1}.
+\end{equation}
+For a labeling $x\in\F_q^{\cT_d}$ and $j\in D$, define the subtree shift by
+$(\sigma_jx)_w=x_{jw}$.
+
+Let $q$ be a prime power and let
+\begin{equation}\label{eq:nonzero-coefficients}
+ \boldsymbol c=(c_1,\ldots,c_d)\in(\F_q^\times)^d.
+\end{equation}
+
+\begin{definition}[Parity tree shift]\label{def:shift}
+The finite-field parity tree shift is
+\begin{equation}\label{eq:shift}
+ X_{q,d,\boldsymbol c}
+ =\left\{x\in\F_q^{\cT_d}:
+ x_w=\sum_{j=1}^dc_jx_{wj}\text{ for every }w\in\cT_d\right\}.
+\end{equation}
+Let $\cB_h(X_{q,d,\boldsymbol c})$ be the set of its restrictions to
+$\Vol_h$.
+\end{definition}
+
+The rule is a finite list of allowed labeled stars, so
+$X_{q,d,\boldsymbol c}$ is a tree shift of finite type.  It is preserved by
+each $\sigma_j$.  When $q=2$ and $c_1=\cdots=c_d=1$, the rule says that the
+parent is the parity, or xor, of its children.  The terminology ``parity''
+will also be used for its finite-field linear extension.
+
+For $u=u_1\cdots u_h\in\Lev_h$, set
+\begin{equation}\label{eq:path-coefficient}
+ c_u=\prod_{r=1}^h c_{u_r},
+ \qquad c_\eps=1.
+\end{equation}
+Every $c_u$ is nonzero by \eqref{eq:nonzero-coefficients}.
+
+\begin{theorem}[Exact boundary parametrization]\label{thm:boundary}
+For every $h\geq0$, restriction to the terminal level is a bijection
+\begin{equation}\label{eq:boundary-bijection}
+ \cB_h(X_{q,d,\boldsymbol c})\longrightarrow\F_q^{\Lev_h},
+ \qquad b\longmapsto b|_{\Lev_h}.
+\end{equation}
+For the inverse block, every vertex is reconstructed upward.  In particular,
+\begin{equation}\label{eq:root-reconstruction}
+ b_\eps=\sum_{u\in\Lev_h}c_ub_u.
+\end{equation}
+Consequently
+\begin{equation}\label{eq:block-count}
+ |\cB_h(X_{q,d,\boldsymbol c})|=q^{d^h},
+\end{equation}
+and exactly $q^{d^h-1}$ of these blocks have any prescribed root label
+$a\in\F_q$.
+\end{theorem}
+
+\begin{proof}
+Starting with arbitrary labels on $\Lev_h$, apply
+\eqref{eq:shift} successively at levels $h-1,h-2,\ldots,0$.  This constructs
+one legal block and shows both existence and uniqueness on $\Vol_h$.
+The block extends to an infinite tree: for each terminal vertex, choose
+$d-1$ child labels arbitrarily and solve for the last one using
+$c_d\ne0$; repeat at every new terminal level.  Thus every upward-constructed
+block belongs to $\cB_h(X_{q,d,\boldsymbol c})$.
+
+Iterating the local equation gives \eqref{eq:root-reconstruction}.  More
+explicitly, substituting the children of the root once produces coefficients
+$c_j$; each additional substitution multiplies the coefficient along the
+new edge, yielding $c_u$ after $h$ levels.  The bijection now gives
+\eqref{eq:block-count}.  Finally, the right side of
+\eqref{eq:root-reconstruction} is a nonzero linear functional on the
+$d^h$-dimensional space $\F_q^{\Lev_h}$.  Each fiber is an affine hyperplane
+of cardinality $q^{d^h-1}$.
+\end{proof}
+
+The root-refined block count also closes the Ban--Chang nonlinear recurrence
+in one line.  If $A_h(a)$ denotes the number of height-$h$ blocks rooted at
+$a$, then $A_h(a)$ is independent of $a$; writing the common value as $A_h$
+gives
+\begin{equation}\label{eq:snre-collapse}
+ A_0=1,
+ \qquad A_{h+1}=q^{d-1}A_h^d,
+ \qquad A_h=q^{d^h-1}.
+\end{equation}
+Indeed there are $q^{d-1}$ child tuples with a prescribed parent, and the
+$d$ rooted subblocks can then be selected independently.  Equation
+\eqref{eq:snre-collapse} is a specialization of the prior nonlinear-
+recurrence framework, not a new recurrence formalism.
+
+\section{A normalization ledger}
+\label{sec:complexity}
+
+Because tree volumes grow exponentially with height, the word ``entropy''
+has been used for more than one normalization.  We therefore state the
+unambiguous finite-height quantity first:
+\begin{equation}\label{eq:finite-complexity}
+ C_h:=\log|\cB_h(X_{q,d,\boldsymbol c})|=d^h\log q.
+\end{equation}
+All logarithms are natural.
+
+\begin{theorem}[Exact normalized complexity]\label{thm:complexity}
+For every $h\geq0$, the boundary- and site-normalized complexities satisfy
+the first two identities below.  For every $h\geq1$, the double-logarithmic
+complexity satisfies the third:
+\begin{align}
+ \frac{C_h}{|\Lev_h|}
+   &=\log q,\label{eq:boundary-rate}\\
+ \frac{C_h}{|\Vol_h|}
+   &=\frac{(d-1)d^h}{d^{h+1}-1}\log q
+     \longrightarrow\frac{d-1}{d}\log q,\label{eq:site-rate}\\
+ \frac{\log C_h}{h}
+   &=\log d+\frac{\log\log q}{h}
+     \longrightarrow\log d.\label{eq:double-log-rate}
+\end{align}
+In particular, the Petersen--Salama site-normalized entropy is
+$(d-1)\log q/d$, while the Ban--Chang double-logarithmic entropy is
+$\log d$.
+\end{theorem}
+
+\begin{proof}
+Insert \eqref{eq:finite-complexity}, $|\Lev_h|=d^h$, and
+\eqref{eq:volume-size}.  The three displayed identities and their limits
+follow directly.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\caption{The same exact block count under three normalizations.  The first
+row is retained as a boundary complexity rather than called a third standard
+entropy.}
+\label{tab:normalizations}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Normalization & Finite-height value & Limit \\
+\midrule
+terminal level & $C_h/d^h$ & $\log q$ \\
+all sites & $C_h/|\Vol_h|$ & $(d-1)\log q/d$ \\
+double logarithm ($h\geq1$) & $(\log C_h)/h$ & $\log d$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The coefficient $\log q$ in
+$|\cB_h|=\exp((\log q)d^h)$ records one free field symbol per terminal site.
+By contrast, the full tree shift on $q$ symbols has one free symbol at every
+site and hence the larger site-normalized rate $\log q$.  The parity rule
+removes precisely the internal-site degrees of freedom.
+
+\section{The compatible uniform block-Markov law}
+\label{sec:measure}
+
+Let $\nu_h$ be the uniform probability on
+$\cB_h(X_{q,d,\boldsymbol c})$.  The next proposition shows that these finite
+laws define one infinite law without a boundary choice at infinity.
+
+\begin{proposition}[Compatibility and invariance]\label{prop:compatible}
+The restriction map from height $h+1$ to height $h$ has constant fiber size
+\begin{equation}\label{eq:restriction-fiber}
+ q^{(d-1)d^h}=q^{d^{h+1}-d^h}.
+\end{equation}
+Hence the laws $(\nu_h)_{h\geq0}$ are projectively compatible and determine
+a probability measure $\mu_{q,d,\boldsymbol c}$ on
+$X_{q,d,\boldsymbol c}$.  It satisfies
+\begin{equation}\label{eq:uniform-cylinder}
+ \mu_{q,d,\boldsymbol c}([b])=q^{-d^h}
+ \qquad(b\in\cB_h),
+\end{equation}
+and is invariant under every subtree shift $\sigma_j$.
+\end{proposition}
+
+\begin{proof}
+Fix a legal block on $\Vol_h$.  At each of its $d^h$ terminal vertices, a
+child tuple must satisfy one nonzero linear equation in $d$ variables.  It
+has $q^{d-1}$ solutions.  The choices at distinct terminal vertices are
+independent, proving \eqref{eq:restriction-fiber}.  Uniform measures
+therefore push forward to uniform measures.  The projective-limit measure
+exists because the alphabet is finite, and \eqref{eq:uniform-cylinder}
+follows from \eqref{eq:block-count}.
+
+For shift invariance, fix a vertex $v$ and a height $h$.  The labels at the
+$d^h$ descendants $vu$, $u\in\Lev_h$, are an iid uniform subcollection of
+the uniform level $|v|+h$.  Upward reconstruction inside the subtree rooted
+at $v$ therefore gives the uniform law on $\cB_h$.  Cylinder sets generate
+the Borel sigma-field, so every $\sigma_j$ preserves $\mu_{q,d,\boldsymbol c}$.
+\end{proof}
+
+For $a\in\F_q$ and $y=(y_1,\ldots,y_d)\in\F_q^d$, define
+\begin{equation}\label{eq:offspring-kernel}
+ K(a;y_1,\ldots,y_d)
+ =q^{-(d-1)}\mathbf 1
+   \left\{a=\sum_{j=1}^dc_jy_j\right\}.
+\end{equation}
+This is a probability kernel from a parent to its ordered child block.  For
+$h\geq1$ and a labeling $b$ of $\Vol_h$,
+\begin{equation}\label{eq:block-markov-factorization}
+ \mu_{q,d,\boldsymbol c}([b])
+ =q^{-1}\prod_{w\in\Vol_{h-1}}
+ K(b_w;b_{w1},\ldots,b_{wd}),
+\end{equation}
+with the convention that the right side is zero when a local rule fails.
+For $h=0$, the factorization consists only of the root factor $q^{-1}$.
+For a legal block, the exponent is
+$1+(d-1)|\Vol_{h-1}|=d^h$, so
+\eqref{eq:block-markov-factorization} agrees with
+\eqref{eq:uniform-cylinder}.  Thus the measure is a homogeneous block
+Markov chain in the joint-offspring sense of \cite{Souissi2022}.
+
+\begin{lemma}[Local proper-subset uniformity]\label{lem:local-uniform}
+Fix a parent value $a\in\F_q$.  Under the kernel $K(a;\cdot)$, every proper
+subset of the $d$ child coordinates is iid uniform on the corresponding
+power of $\F_q$, and its law does not depend on $a$.
+\end{lemma}
+
+\begin{proof}
+Fix $s<d$ child coordinates and prescribe their values.  At least one child
+coordinate remains free, and its coefficient is nonzero.  The residual
+linear equation in $d-s$ variables has exactly $q^{d-s-1}$ solutions.
+There are $q^{d-1}$ offspring tuples in total.  The probability of each
+prescribed $s$-tuple is therefore $q^{d-s-1}/q^{d-1}=q^{-s}$, independently
+of the parent value.
+\end{proof}
+
+The lemma shows why a standard independent-offspring branching description
+would be inaccurate: a complete sibling block lies on a codimension-one
+hyperplane.  Every proper sibling subblock nevertheless looks exactly
+independent.
+
+\begin{theorem}[Every ray is iid]\label{thm:ray}
+Let
+\[
+ w_0=\eps,
+ \qquad w_{r+1}=w_rj_{r+1}
+ \quad(r\geq0)
+\]
+be any deterministic ray.  Under $\mu_{q,d,\boldsymbol c}$, the process
+$(X_{w_r})_{r\geq0}$ is iid with common law $\Unif(\F_q)$.  Equivalently,
+for all $h\geq0$ and $a_0,\ldots,a_h\in\F_q$,
+\begin{equation}\label{eq:ray-law}
+ \mu_{q,d,\boldsymbol c}
+ \{X_{w_0}=a_0,\ldots,X_{w_h}=a_h\}=q^{-(h+1)}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The root is uniform by \eqref{eq:uniform-cylinder} with $h=0$.  By
+\eqref{eq:block-markov-factorization}, conditional on the labels through one
+generation, the ordered offspring block at each exposed vertex has kernel
+$K$.  Lemma \ref{lem:local-uniform} with a single selected child says that
+the next label on the ray is uniform and its conditional law does not depend
+on the parent or on the earlier ray labels.  Multiplying these $h+1$
+conditional probabilities proves \eqref{eq:ray-law}.
+\end{proof}
+
+Ray iid should not be confused with independence of the whole tree.  The
+next section gives the strongest possible obstruction: one complete level
+determines the root exactly.
+
+\section{Exact coordinate-deletion reconstruction}
+\label{sec:reconstruction}
+
+Let $R=X_\eps$ and let $Z_h=(X_u)_{u\in\Lev_h}$.  For a subset
+$A\subseteq\Lev_h$, write $Z_A=(X_u)_{u\in A}$.  Shannon entropy and mutual
+information are computed with natural logarithms.
+
+For a fixed depth, the information condition ``all coordinates recover,
+while every proper coordinate subset reveals nothing'' is the perfect
+$(n,n)$ threshold criterion from classical secret sharing, introduced
+independently by Blakley and Shamir \cite{Blakley1979,Shamir1979}.  We claim
+neither that access structure nor its additive finite-field mechanism.  The
+calculation below identifies its simultaneous realization at every depth by
+one shift-invariant tree law.
+
+\begin{theorem}[Exact reconstruction threshold]\label{thm:threshold}
+For every $h\geq1$, the complete level is an iid uniform vector in
+$\F_q^{d^h}$ and
+\begin{equation}\label{eq:root-from-level}
+ R=\sum_{u\in\Lev_h}c_uX_u
+ \quad\text{almost surely, and indeed pointwise on }X_{q,d,\boldsymbol c}.
+\end{equation}
+For every proper subset $A\subsetneq\Lev_h$,
+\begin{equation}\label{eq:proper-independence}
+ \mu(R=a,Z_A=z)=q^{-(|A|+1)}
+ \quad(a\in\F_q,\ z\in\F_q^A).
+\end{equation}
+Consequently
+\begin{align}
+ \Hsh(R\mid Z_A)&=\log q,
+ &\I(R;Z_A)&=0,\label{eq:proper-information}\\
+ \Hsh(R\mid Z_h)&=0,
+ &\I(R;Z_h)&=\log q.
+ \label{eq:full-information}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+The terminal-level bijection and the uniform block law show that $Z_h$ is
+uniform on $\F_q^{\Lev_h}$, hence its coordinates are iid uniform.
+Equation \eqref{eq:root-from-level} is
+\eqref{eq:root-reconstruction}.
+
+Fix $A\subsetneq\Lev_h$ and condition on $Z_A=z$.  Choose one omitted
+vertex $v\in\Lev_h\setminus A$.  All coefficients $c_u$ are nonzero, so
+$c_vX_v$ is uniform on $\F_q$ and independent of the conditioned
+coordinates.  Even after conditioning on every other omitted coordinate,
+the sum in \eqref{eq:root-from-level} is therefore uniform.  Removing that
+extra conditioning leaves
+$\mu(R=a\mid Z_A=z)=q^{-1}$.  Since
+$\mu(Z_A=z)=q^{-|A|}$, this proves
+\eqref{eq:proper-independence}.
+
+The root is uniform, so $\Hsh(R)=\log q$.  Independence gives
+\eqref{eq:proper-information}; deterministic reconstruction gives
+\eqref{eq:full-information}.
+\end{proof}
+
+Thus deleting even one label from a complete level removes all information
+about the root, not merely some fraction of it.  The phenomenon is
+high-order: every finite ray is a product process by Theorem
+\ref{thm:ray}, and the whole generation is also an unconditional product
+vector, yet one linear combination of all generation coordinates equals the
+root.
+
+\begin{remark}[Role of the assumptions]\label{rem:assumptions}
+The condition $d\geq2$ is needed for ray iid: with one child the local rule
+determines that child from its parent.  Nonzero coefficients are needed for
+the all-proper-subsets statement.  If $c_j=0$, then at level one the root is
+already reconstructed after child $j$ is omitted, so
+\eqref{eq:proper-information} fails.  Boundary parametrization alone is
+less restrictive; the assumptions are frozen because the combined theorem
+package requires all of them.
+\end{remark}
+
+\section{Owner subtraction, controls, and scope}
+\label{sec:scope}
+
+\begin{table}[H]
+\centering
+\caption{Ownership and collision boundary.  ``Residual here'' means the
+specialized calculation proved in this note, not a priority assertion.}
+\label{tab:owners}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}
+                    >{\raggedright\arraybackslash}p{0.33\textwidth}
+                    >{\raggedright\arraybackslash}p{0.32\textwidth}@{}}
+\toprule
+Source or internal system & Owned framework & Residual here \\
+\midrule
+Aubrun--B\'eal & finite-type and sofic tree shifts & one affine-star family \\
+Ban--Chang & SNRE and double-log entropy & closed scalar count $q^{d^h}$ \\
+Petersen--Salama & site-normalized tree entropy & exact rate $(d-1)\log q/d$ \\
+Benjamini--Peres & tree-indexed Markov processes & no new general process \\
+Guyon; Souissi & joint sibling kernels and block-Markov language & explicit $d$-ary affine kernel and iid rays \\
+Evans et al. & tree broadcasting and root reconstruction & noiseless coordinate-deletion law \\
+Blakley; Shamir & perfect threshold secret sharing & one law at every tree depth \\
+Internal P49 & hom-tree Hausdorff phase allocation & no parent--child graph or phase optimization \\
+Internal P77 & one-dimensional automatic towers & no automatic support or Cantor--Bendixson claim \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The broad object, both entropy conventions, the joint-offspring and
+block-Markov language, noisy reconstruction, and the threshold access
+condition are therefore subtracted from the contribution.  A bounded
+primary-source audit through 28 August 2026 did not locate the combined
+finite-field formula package stated here.  That sentence records a search
+boundary only; it is not a claim of worldwide novelty.  Public posting,
+submission, author contact, and priority language remain on \textbf{HOLD}.
+
+The accompanying script \texttt{code/verify\_parity\_tree.py} uses only the
+Python standard library.  Its two lanes are deliberately redundant.
+\begin{enumerate}
+\item The enumeration lane constructs every block from every terminal word,
+checks local legality and injectivity, brute-forces all legal labelings in
+the smallest cases, measures restriction-fiber multiplicities, enumerates
+every deterministic ray, and compares complete joint tables for the root
+and every proper terminal subset in selected cases.
+\item The rank lane forms the local constraint matrix over $\F_p$, verifies
+its rank and nullity, constructs the full boundary-extension matrix, checks
+that it lies in the constraint kernel, and certifies that adjoining the root
+functional increases the rank of every tested proper observation matrix by
+one.
+\end{enumerate}
+The recorded run covers $8{,}315$ enumerated blocks, $811$ exhaustive proper
+subsets, $78$ constraint rows, $567$ observation-rank certificates, and
+$19{,}764$ assertions.  These finite controls are not proofs of arbitrary
+$q,d,h$.  The implementation has one exhaustive $\F_4$ lane, while its rank
+lane handles prime fields only; all-prime-power scope rests on the
+finite-field arguments in Theorems \ref{thm:boundary} and
+\ref{thm:threshold}.
+
+\section{Conclusion}
+
+The parity tree shift has one free field coordinate per terminal vertex and
+no other finite-block degrees of freedom.  That leaf parametrization gives
+the entire complexity ledger and a canonical compatible uniform measure.
+The same measure has two opposing exact faces: every lineage is iid, while
+every complete generation reconstructs the root and loses all root
+information after any coordinate is deleted.  The coefficient of each
+terminal label is simply the product of the edge coefficients along its
+path, so nondegeneracy at one local star propagates to every depth.
+
+The scope is intentionally narrow.  We do not classify general linear tree
+shifts with several equations, spatially varying coefficients, missing
+coefficients, noisy parity checks, or nonlinear local rules.  Those changes
+can alter rank density, compatibility, or the sharp reconstruction
+threshold.  A natural next problem is to replace the single parity equation
+by a matrix-valued local code and determine which rank profiles preserve iid
+rays while producing a nontrivial hierarchy of boundary information.
+
+\bibliographystyle{plainnat}
+\renewcommand{\bibfont}{\small}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,55 @@
+\section{Increasing-gap expansions and their truncations}
+\label{sec:setup}
+
+Let $(g_j)_{j\geq1}$ be a strictly increasing sequence of nonnegative integers.  Put
+\begin{equation}
+ n_1=1,\qquad q_j=g_j+1,\qquad n_{j+1}=n_j+q_j.
+ \label{eq:positions}
+\end{equation}
+Thus $(q_j)$ is a strictly increasing sequence of positive integers.  Define $a=(a_m)_{m\geq1}$ by
+\[
+ a_m=\one_{\{n_j:j\geq1\}}(m),
+\]
+so that $a=10^{g_1}10^{g_2}1\cdots$.
+
+For $x>1$, write
+\[
+ F(x)=\sum_{k\geq1}x^{-n_k},\qquad
+ S_j(x)=\sum_{k=1}^j x^{-n_k}.
+\]
+The function $F$ is continuous and strictly decreasing.  As $x\downarrow1$, its value tends to $+\infty$ because it contains infinitely many positive terms that each tend to one.  Strict growth of the $q_j$ forces the support $\{n_j\}$ to omit at least one positive integer, so
+$F(2)<\sum_{n\geq1}2^{-n}=1$.  Hence there is a unique $\beta\in(1,2)$ with $F(\beta)=1$.  For $j\geq2$, let $\beta_j\in(1,2)$ be the unique solution of
+\begin{equation}
+ S_j(\beta_j)=1.
+ \label{eq:truncated-root}
+\end{equation}
+The index starts at two because $S_1(x)=x^{-1}=1$ has only the boundary root $x=1$.
+
+We use $d_\gamma(1)$ for the greedy expansion, including trailing zeros when it terminates, and $d_\gamma^*(1)$ for the infinite quasi-greedy ceiling.  Confusing these two sequences creates an incorrect symbolic boundary at a simple Parry number.
+
+\begin{proposition}[Symbolic realization and simple-Parry truncations]
+\label{prop:realization}
+The sequence $a$ is the greedy $\beta$-expansion of one.  Moreover, for every $j\geq2$,
+\begin{align}
+ d_{\beta_j}(1)&=a_1a_2\cdots a_{n_j}0^\infty,\label{eq:finite-greedy}\\
+ d_{\beta_j}^*(1)&=(a_1a_2\cdots a_{n_j-1}0)^\infty.\label{eq:periodic-ceiling}
+\end{align}
+In particular, $\beta_j$ is simple Parry, each $X_{\beta_j}$ is a shift of finite type, $\beta_j\uparrow\beta$, while $\beta$ is non-Parry, and
+\[
+ \htop(X_{\beta_j})=\log\beta_j,
+ \qquad
+ \htop(X_\beta)=\log\beta.
+\]
+\end{proposition}
+
+\begin{proof}
+The sequence $a$ begins with one.  Consider a proper shift $\sigma^r a$.  If it begins with zero, then $\sigma^r a<a$ lexicographically.  Otherwise it begins at $n_m$ for some $m\geq2$.  After that initial one it has $q_m-1$ zeros, whereas $a$ has only $q_1-1$ zeros.  Since $q_m>q_1$, the first discrepancy is a zero in the shift and a one in $a$.  Thus $\sigma^r a<a$ for every $r\geq1$.  Parry's criterion, together with $F(\beta)=1$, gives $d_\beta(1)=a$ \cite{parry_1960}.
+
+The same comparison applies to the finite sequence $a_1\cdots a_{n_j}0^\infty$.  A suffix beginning at its last one never reaches another one and is again smaller than the original at offset $q_1$.  Equation~\eqref{eq:truncated-root} and Parry's finite criterion therefore give \eqref{eq:finite-greedy}.  The standard terminating-expansion rule subtracts one from the last nonzero digit and repeats the resulting word, yielding \eqref{eq:periodic-ceiling}.
+
+Because $S_{j+1}(\beta_j)>1$, monotonicity gives $\beta_{j+1}>\beta_j$, and $S_j(\beta)<1$ gives $\beta_j<\beta$.  Let $\ell\leq\beta$ be the limit of the increasing roots.  If $\ell<\beta$, then $F(\ell)>1$, so some finite $m$ satisfies $S_m(\ell)>1$.  Continuity would give $S_m(\beta_j)>1$ for all sufficiently large $j\geq m$, contradicting $S_m(\beta_j)\leq S_j(\beta_j)=1$.  Thus $\ell=\beta$.  The unbounded gaps make $a$ non-eventually periodic, so $\beta$ is non-Parry.  Finally, the entropy of a $\gamma$-shift is $\log\gamma$; this is part of the classical R\'enyi--Parry theory and is also discussed in the symbolic formulation of Blanchard \cite{renyi_1957,parry_1960,blanchard_1989}.
+\end{proof}
+
+\begin{remark}
+The increasing-gap assumption does two separate jobs.  It makes the expansion self-admissible, and it provides a geometric majorant for the discarded tail.  Mere divergence $q_j\to\infty$ does not by itself give the same one-line suffix comparison if early gaps are reordered.
+\end{remark}

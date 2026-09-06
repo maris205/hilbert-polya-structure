@@ -1,0 +1,80 @@
+% Reproducible pure-TikZ theorem relationship figure.
+% No empirical data or external graphics are used.
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[
+      font=\footnotesize,
+      >=Latex,
+      source/.style={
+        draw=black,
+        rounded corners=2pt,
+        fill=black!4,
+        text width=13.2cm,
+        align=center,
+        inner sep=6pt
+      },
+      stop/.style={
+        draw=black,
+        rounded corners=2pt,
+        fill=orange!12,
+        text width=3.02cm,
+        align=left,
+        inner sep=4.5pt
+      },
+      open/.style={
+        draw=black,
+        dashed,
+        rounded corners=2pt,
+        fill=blue!6,
+        text width=3.02cm,
+        align=left,
+        inner sep=4.5pt
+      },
+      arrow/.style={->,line width=0.65pt}
+    ]
+
+    \node[source] (source) at (0,0) {Frozen graded wheel-sieve shift
+      $X=\bigsqcup_{k\geq0}X_k$, with
+      $\sigma(X_k)\subseteq X_{k+1}$ and exact clock
+      $\tau_k=\log q_{k+1}$.  A proposed target is classified by its own
+      frozen definitions; the branches below are not a yes/no decision tree.};
+
+    \node[stop] (b1) at (-5.25,-3.55)
+      {\textbf{Strict equivariant extension}\par
+      $\pi\circ S=\sigma\circ\pi$.\par
+      \textbf{Obstruction:} the target has no periodic points; independently,
+      the source's full-backward inverse limit is empty.};
+
+    \node[stop] (b2) at (-1.75,-3.55)
+      {\textbf{Forward-well-founded strong bisimulation}\par
+      Includes every finite DAG.\par
+      \textbf{Obstruction:} quotient acyclic.  An infinite ray is not
+      covered.};
+
+    \node[stop] (b3) at (1.75,-3.55)
+      {\textbf{Finite-alphabet fixed-window decoder}\par
+      \textbf{Obstruction:} finite image cannot recover the infinite exact
+      clock range.  Infinite data domains are not covered.};
+
+    \node[open] (b4) at (5.25,-3.55)
+      {\textbf{Other infinite factor or observational recoding}\par
+      Not excluded and not validated.  A fixed rule, representative-exact
+      decoders, and global path semantics remain pending.};
+
+    \coordinate (fork) at (0,-1.35);
+    \draw[line width=0.65pt] (source.south) -- (fork);
+    \draw[arrow] (fork) -| (b1.north);
+    \draw[arrow] (fork) -| (b2.north);
+    \draw[arrow] (fork) -| (b3.north);
+    \draw[arrow,dashed] (fork) -| (b4.north);
+  \end{tikzpicture}
+  \caption{The obstruction map is hypothesis-sensitive and parallel rather
+  than exhaustive.  Strict equivariant extensions, forward-well-founded
+  strong-bisimulation quotients, and finite-alphabet fixed-window decoders
+  are closed by different arguments.  A representative-exact next-prime
+  state decoder supplies an additional grading obstruction
+  (\cref{cor:q-label}).  The dashed branch is merely the class retained for
+  further definition by this project: it is unresolved, not supported by
+  positive evidence.}
+  \label{fig:obstruction-map}
+\end{figure}

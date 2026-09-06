@@ -1,0 +1,76 @@
+\section{Weighted-cycle algebra}
+\label{sec:cycle-algebra}
+
+We first isolate the finite calculation that controls every accepted block.
+It is independent of how the total roof is distributed.
+
+\begin{lemma}[One weighted cyclic block]
+\label{lem:cycle-block}
+Let $C_\ell$ be a simple directed cycle with vertices
+$v_0,\ldots,v_{\ell-1}$ and clocks $\tau_0,\ldots,\tau_{\ell-1}\ge0$.
+Set $T=\sum_{j=0}^{\ell-1}\tau_j$ and define
+\[
+B_s\delta_{v_j}=e^{-s\tau_j}\delta_{v_{j+1\bmod\ell}}.
+\]
+Then
+\begin{align}
+B_s^\ell&=e^{-sT}I,                                      \label{eq:block-power}\\
+\spec(B_s)&=\{e^{-sT/\ell}\omega:\omega^\ell=1\},       \label{eq:block-spectrum}\\
+\{\text{singular values of }B_s\}
+ &=\{e^{-\sigma\tau_j}:0\le j<\ell\},                   \label{eq:block-singular}\\
+\det(I-zB_s)&=1-z^\ell e^{-sT}.                           \label{eq:block-det}
+\end{align}
+Here any fixed choice of the $\ell$th root in
+\eqref{eq:block-spectrum} yields the same set.
+\end{lemma}
+
+\begin{proof}
+One complete traversal multiplies every basis vector by the product of the
+edge weights, proving \eqref{eq:block-power}.  Its roots give
+\eqref{eq:block-spectrum}.  Since $B_s^*B_s$ is diagonal with entries
+$e^{-2\sigma\tau_j}$, \eqref{eq:block-singular} follows.  Finally the only
+nonconstant term in the permutation expansion of $\det(I-zB_s)$ selects the
+whole cyclic permutation, giving \eqref{eq:block-det}.  Equivalently, multiply
+$1-z\lambda$ over the spectrum in \eqref{eq:block-spectrum}.
+\end{proof}
+
+For a prime block, $T=\log p$ and $\ell=\ell(p)$, so
+\begin{equation}
+B_{p,s}^{\ell(p)}=p^{-s}I,
+\qquad
+\det(I-zB_{p,s})=1-z^{\ell(p)}p^{-s}.
+\label{eq:prime-block}
+\end{equation}
+The eigenvalue radius is
+\begin{equation}
+r_p(s)=p^{-\sigma/\ell(p)}\longrightarrow1.
+\label{eq:block-radius}
+\end{equation}
+This spectral radius depends only on the total clock, not on its allocation.
+By contrast, the singular values record every individual edge clock.
+
+The graph-step power trace also retains the subdivision.  For $r\ge1$,
+\begin{equation}
+\Tr(B_{p,s}^{r})=
+\begin{cases}
+\ell(p)p^{-sk},&r=k\ell(p),\\
+0,&\ell(p)\nmid r.
+\end{cases}
+\label{eq:block-traces}
+\end{equation}
+Thus the usual return-time weight $p^{-s}$ does not imply a nonzero
+length-one graph trace.  This distinction will prevent the first-return map
+from being mistaken for the original discrete-time operator.
+
+\begin{remark}[Uniform allocation is optimal for the largest edge]
+For fixed total $T$,
+\[
+\max_j e^{-\sigma\tau_j}
+=e^{-\sigma\min_j\tau_j}
+\ge e^{-\sigma T/\ell}.
+\]
+Equality holds for the uniform allocation.  Consequently the representative
+roof used in the certificate is the most favorable possible allocation for
+compactness; an adversarial concentration of the clock only increases the
+largest edge weight.
+\end{remark}

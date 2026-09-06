@@ -1,0 +1,108 @@
+\section{Finite entropy-gap certificates}
+\label{sec:certificates}
+
+Set
+\begin{equation}
+ L_j=\log\frac{\beta}{\beta_j},\qquad
+ T_j=\sum_{k>j}\beta^{-n_k},\qquad
+ M_j=\sum_{k\leq j}n_k\beta^{-n_k}.
+ \label{eq:LTM}
+\end{equation}
+By \cref{prop:realization}, $L_j$ is exactly the topological entropy gap $\htop(X_\beta)-\htop(X_{\beta_j})$.
+
+\begin{theorem}[Exact identity and two-sided certificate]
+\label{thm:finite-certificate}
+For every $j\geq2$,
+\begin{equation}
+ T_j=\sum_{k\leq j}\beta^{-n_k}\bigl(e^{n_kL_j}-1\bigr),
+ \label{eq:exact-tail-identity}
+\end{equation}
+and
+\begin{equation}
+ \boxed{
+ \frac{T_j}{M_j}\exp\!\left(-\frac{n_jT_j}{M_j}\right)
+ \leq L_j\leq\frac{T_j}{M_j}.}
+ \label{eq:certificate}
+\end{equation}
+Furthermore,
+\begin{equation}
+ \beta^{-n_{j+1}}\leq T_j\leq
+ \frac{\beta^{-n_{j+1}}}{1-\beta^{-q_{j+1}}},
+ \label{eq:tail-geometric}
+\end{equation}
+and hence the fully explicit bounds
+\begin{equation}
+ \frac{\beta^{-n_{j+1}}}{M_j}
+ \exp\!\left[
+ -\frac{n_j\beta^{-n_{j+1}}}
+ {M_j(1-\beta^{-q_{j+1}})}\right]
+ \leq L_j\leq
+ \frac{\beta^{-n_{j+1}}}
+ {M_j(1-\beta^{-q_{j+1}})}.
+ \label{eq:explicit-certificate}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Since $\beta_j=\beta e^{-L_j}$, the two root equations give
+\[
+ 1=\sum_{k\leq j}\beta_j^{-n_k}
+  =\sum_{k\leq j}\beta^{-n_k}e^{n_kL_j},
+ \qquad
+ 1=\sum_{k\leq j}\beta^{-n_k}+T_j.
+\]
+Subtracting proves \eqref{eq:exact-tail-identity}.  For $u\geq0$,
+\[
+ u\leq e^u-1\leq ue^u.
+\]
+The lower inequality in this display and \eqref{eq:exact-tail-identity} imply $T_j\geq L_jM_j$, giving the upper bound in \eqref{eq:certificate}.  The upper inequality, together with $n_k\leq n_j$, gives
+\[
+ T_j\leq L_jM_je^{n_jL_j}.
+\]
+Thus $L_j\geq(T_j/M_j)e^{-n_jL_j}$.  Substituting the already proved inequality $L_j\leq T_j/M_j$ into the decreasing exponential proves the lower bound in \eqref{eq:certificate}.
+
+The first term of $T_j$ gives its lower bound.  For $m\geq0$, strict increase of the $q_r$ gives
+\[
+ n_{j+1+m}-n_{j+1}
+ =\sum_{r=j+1}^{j+m}q_r\geq mq_{j+1}.
+\]
+Summing the resulting geometric series proves \eqref{eq:tail-geometric}.  In the lower half of \eqref{eq:certificate}, replace the prefactor $T_j$ by its lower bound and the occurrence of $T_j$ in the negative exponent by its upper bound.  This and the upper half give \eqref{eq:explicit-certificate}.
+\end{proof}
+
+The preceding certificate is analytic: it is expressed at the limiting root $\beta$.  The next result turns root enclosures, and therefore entropy-gap enclosures, into finitely many rational sign tests.
+
+\begin{proposition}[Finite rational interval certificate]
+\label{prop:rational-certificate}
+Fix $K\geq j$ and define
+\[
+ U_K(x)=S_K(x)+\frac{x^{-n_{K+1}}}{1-x^{-1}}.
+\]
+Let $1<r_-<r_+<2$ be rational numbers such that
+\begin{equation}
+ S_K(r_-)>1,\qquad U_K(r_+)<1.
+ \label{eq:beta-rational-tests}
+\end{equation}
+Then $r_-<\beta<r_+$.  If rational $1<s_-<s_+<2$ also satisfy
+\begin{equation}
+ S_j(s_-)>1>S_j(s_+),
+ \label{eq:betaj-rational-tests}
+\end{equation}
+then
+\begin{equation}
+ \log\frac{r_-}{s_+}<L_j<\log\frac{r_+}{s_-}.
+ \label{eq:rational-log-certificate}
+\end{equation}
+Every predicate in \eqref{eq:beta-rational-tests}--\eqref{eq:betaj-rational-tests} is an exact rational inequality.  Thus the certificate uses finite rational data together with the standing increasing-gap family promise; if a positive displayed lower bound is desired, one additionally checks $r_->s_+$.
+\end{proposition}
+
+\begin{proof}
+Future positions are distinct integers no smaller than $n_{K+1}$.  Therefore, for every $x>1$,
+\[
+ S_K(x)<F(x)\leq S_K(x)+\sum_{m\geq n_{K+1}}x^{-m}=U_K(x).
+\]
+The two inequalities in \eqref{eq:beta-rational-tests} imply $F(r_-)>1>F(r_+)$.  Since $F$ is strictly decreasing and $F(\beta)=1$, they imply $r_-<\beta<r_+$.  The same monotonicity applied to the finite sum $S_j$ proves $s_-<\beta_j<s_+$.  Taking the extreme ratios and then logarithms gives \eqref{eq:rational-log-certificate}.
+\end{proof}
+
+\begin{remark}
+The rational certificate does not replace the infinite system with a numerical guess.  A finite prefix provides the lower test, and the universal geometric tail provides the upper test.  Dyadic bisection can evaluate both tests with integer arithmetic only.
+\end{remark}

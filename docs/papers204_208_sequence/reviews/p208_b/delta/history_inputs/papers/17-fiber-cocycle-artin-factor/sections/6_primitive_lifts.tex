@@ -1,0 +1,139 @@
+\section{Primitive lifting and the orbit-level mismatch}
+\label{sec:lifts}
+
+The determinant factorization is exact, but an Artin block is not an
+independent inventory of base primitive cycles.  This section separates the
+three objects that are easiest to conflate:
+
+\begin{enumerate}
+  \item a primitive necklace in the base subset shift;
+  \item its Frobenius displacement in the finite fiber; and
+  \item the primitive cycles lying above it in the skew-product shift.
+\end{enumerate}
+
+Let
+\[
+\gamma=[S_0S_1\cdots S_{r-1}]
+\tag{6.1}\label{6.1}
+\]
+be a primitive base necklace of least period \(r\).  Its total subset degree is
+\[
+c(\gamma)=\sum_{i=0}^{r-1}|S_i|.
+\tag{6.2}\label{6.2}
+\]
+For the \(C_m=\langle a\rangle\) degree cocycle, one base traversal translates
+the fiber by \(a^{c(\gamma)}\).
+
+\begin{theorem}[Primitive lift formula]
+\label{thm:primitive-lift}
+Put
+\[
+q(\gamma)=\ord(a^{c(\gamma)})
+=\frac{m}{\gcd(m,c(\gamma))}.
+\tag{6.3}\label{6.3}
+\]
+The preimage of \(\gamma\) contains exactly
+\[
+\gcd(m,c(\gamma))
+\tag{6.4}\label{6.4}
+\]
+primitive lifted cycles, and every such cycle has least period
+\[
+r\,q(\gamma)
+=r\,\frac{m}{\gcd(m,c(\gamma))}.
+\tag{6.5}\label{6.5}
+\]
+\end{theorem}
+
+\begin{proof}
+On the \(m\) fiber points, the return map after one base traversal is
+translation by \(c(\gamma)\) modulo \(m\).  Every orbit of this translation
+has length \(q(\gamma)\), and there are \(m/q(\gamma)=\gcd(m,c(\gamma))\)
+such orbits.  A lifted return must project to a return of the primitive base
+cycle, hence its time is a multiple of \(r\); the fiber closes for the first
+time after \(q(\gamma)\) such traversals.  Therefore the lifted period is
+exactly \(rq(\gamma)\), and each translation orbit produces one primitive
+lift.  See also \cref{app:proof-lifts}.
+\end{proof}
+
+For \(C_2\), an odd-degree base primitive has one lifted primitive of period
+\(2r\), whereas an even-degree base primitive has two lifted primitives of
+period \(r\).  Thus a repeated singleton does not close at the original
+clock, but many mixed words do.  For example, the base fixed point
+\([\{p,q\}]\) has total degree two and therefore gives two period-one lifted
+cycles.  The mixed base word \([\{p\}\{q\}]\), when primitive as a necklace,
+also has even total degree and closes after a single base traversal.
+
+\subsection{Exact primitive-necklace recurrence}
+
+For an \(n\)-atom inventory define
+\[
+A_n(y)=\sum_{k=1}^{n}\binom nk y^k=(1+y)^n-1.
+\tag{6.6}\label{6.6}
+\]
+The coefficient \([y^c]A_n(y)^r\) counts length-\(r\) base words of total
+degree \(c\).  If \(Q_r(c)\) counts those with least period exactly \(r\),
+unique least period gives
+\[
+Q_r(c)=[y^c]A_n(y)^r-
+\sum_{\substack{d\mid r,\ d<r\\(r/d)\mid c}}
+Q_d\!\left(\frac{c}{r/d}\right).
+\tag{6.7}\label{6.7}
+\]
+Every primitive necklace has \(r\) distinct rotations, so the number of
+primitive base necklaces at \((r,c)\) is \(Q_r(c)/r\).  Only after this base
+count is fixed may \cref{thm:primitive-lift} be applied.  Consequently the
+lifted count at period \(rq\) is a weighted sum over base periods and degrees;
+it is not obtained by calling every base necklace a lifted cycle.
+
+As a scale certificate, at \(n=5,r=10,m=2\) the exact census contains
+\[
+\begin{array}{lr}
+\text{primitive base necklaces}&81{,}962{,}825{,}835{,}072,\\
+\text{mixed base primitives closing immediately}&40{,}981{,}411{,}486{,}080,\\
+\text{primitive lifted cycles contributed by the census}&
+122{,}944{,}237{,}321{,}152.
+\end{array}
+\tag{6.8}\label{6.8}
+\]
+These integers answer different questions.  Their simultaneous appearance is
+a bookkeeping check, not an identity between inventories.
+
+\subsection{Why local products do not delete mixed dynamics}
+
+Equation~\eqref{4.10} has one local factor per atom.  Nevertheless its
+expanded coefficients include mixed monomials, and
+\(-\log D_\chi\) collects all repetitions of the one-step transfer.  With
+all \(n\) variables specialized to \(t\),
+\[
+B_+(t)=1-(1-t)^n,\qquad
+B_-(t)=1-(1+t)^n,
+\tag{6.9}\label{6.9}
+\]
+and the determinant convention gives
+\[
+-\log D_\chi(t)=\sum_{\ell\ge1}\frac{B_\chi(t)^\ell}{\ell}.
+\tag{6.10}\label{6.10}
+\]
+Therefore
+\[
+\coeff{t^k}{-\log D_+}=\frac nk,\qquad
+\coeff{t^k}{-\log D_-}=\frac{n(-1)^k}{k},
+\tag{6.11}\label{6.11}
+\]
+and
+\[
+\coeff{t^k}{-\log\Dreg}=
+\begin{cases}
+0,&k\ \text{odd},\\[2pt]
+2n/k,&k\ \text{even}.
+\end{cases}
+\tag{6.12}\label{6.12}
+\]
+The cancellation of odd trace coefficients is a character sum across
+isotypic blocks.  It does not assert that odd-degree base primitives do not
+exist; \cref{thm:primitive-lift} says instead that their closing time changes.
+Likewise, absence of a mixed local factor means neither absence of a mixed
+coefficient nor absence of a mixed primitive cycle.  This separation is the
+orbit-level reason that the exact Artin factorization does not solve the
+prime-singleton selection problem.

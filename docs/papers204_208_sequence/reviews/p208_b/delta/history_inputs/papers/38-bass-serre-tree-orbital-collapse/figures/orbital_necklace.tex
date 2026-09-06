@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=6mm,
+  box/.style={rounded corners,draw=charcoal,thick,align=center,
+    fill=white,inner sep=5pt,font=\small,text width=3.25cm,
+    minimum height=1.15cm},
+  algebra/.style={box,draw=formalblue},
+  count/.style={box,draw=deepgreen},
+  result/.style={box,draw=warningamber},
+  arr/.style={->,very thick,formalblue}
+]
+\node[algebra] (semi)
+  {$\mathbb Z[1/r]\rtimes\mathbb Z$\\
+   $(c,m)(b,k)(c,m)^{-1}$\\
+   $=(r^m b+(1-r^k)c,k)$};
+\node[algebra,right=of semi] (residue)
+  {fixed height $k>0$\\
+   $\mathbb Z/(r^k-1)\mathbb Z$\\
+   modulo $x\mapsto rx$};
+\node[count,right=of residue] (necklace)
+  {$r$-ary necklaces\\cyclic rotation\\
+   $0^k\sim(r-1)^k$};
+\node[count,right=of necklace] (burnside)
+  {$C_r(k)=N_r(k)-1$\\
+   primitive $P_r(k)$\\
+   by M\"obius inversion};
+\node[result,right=of burnside] (zeta)
+  {$Z_{+,r}(z)=\dfrac{1-z}{1-rz}$\\
+   $z\mapsto r^{-s}z$\\
+   under $\Delta^{-s}$};
+
+\draw[arr] (semi) -- (residue);
+\draw[arr] (residue) -- (necklace);
+\draw[arr] (necklace) -- (burnside);
+\draw[arr] (burnside) -- (zeta);
+
+\node[rounded corners,draw=stopred,dashed,thick,fill=white,
+  below=9mm of necklace,align=center,font=\small,text=stopred,
+  text width=10.2cm] (barrier)
+  {exact group-orbital classification, but not a periodic point or an
+   ordinary Fredholm factor of the literal full-tree shift};
+\draw[dashed,very thick,stopred,-|] (barrier.north) -- (necklace.south);
+\end{tikzpicture}

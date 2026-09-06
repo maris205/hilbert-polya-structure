@@ -1,0 +1,212 @@
+\section{Traces, determinants, and temporal support}
+\label{sec:dynamics}
+
+\subsection{The diagonal trace}
+
+A diagonal entry is present precisely when a positive integer is
+carry-free with itself.  Define
+\begin{equation}
+  \mathcal D_b
+  =
+  \{
+    m\ge1:
+    \text{every base-\(b\) digit of \(m\) is at most }
+    \lfloor\frac{b-1}{2}\rfloor
+  \}.
+  \label{eq:loop-digit-set}
+\end{equation}
+The all-zero digit word would satisfy the digit restriction, but it is
+deleted because the source alphabet is \(\N\).
+
+\begin{proposition}[Trace and its domain]
+\label{prop:diagonal-trace}
+If \(\sigma>\alpha_b\), then
+\begin{equation}
+  \Tr(B_{b,s})
+  =
+  \sum_{m\in\mathcal D_b}m^{-s},
+  \label{eq:trace-dirichlet}
+\end{equation}
+and the series is absolutely convergent.  In this trace-class domain, the
+trace is zero for \(b=2\).  For \(b>2\), it is strictly positive on the
+real half-line \(s=\sigma>\alpha_b\).
+\end{proposition}
+
+\begin{proof}
+By \cref{cor:operator-classes}, \(B_{b,s}\) is trace class in the stated
+domain, so its trace is the absolutely convergent sum of its diagonal
+entries in the standard basis.  The condition \(m\carryfree m\) is exactly
+\(2m_j<b\) at every digit, which is
+\cref{eq:loop-digit-set}; the diagonal weight is \(m^{-s}\).
+For \(b=2\), the only allowed digit is zero, so no positive vertex remains
+and \(\mathcal D_2=\varnothing\).  For \(b>2\), the vertex \(1\) is in
+\(\mathcal D_b\), and every term is positive when \(s=\sigma\) is real.
+\end{proof}
+
+The statement that the binary trace is zero in
+\cref{prop:diagonal-trace} is an operator-trace statement only for
+\(\sigma>\alpha_2\).  Outside that domain, the diagonal or loop support is
+still empty, but we do not thereby define an operator trace.  Likewise,
+positivity of the real Dirichlet series gives no zero-free statement for
+nonreal \(s\).
+
+\subsection{Trace powers as absolutely convergent walk sums}
+
+Let a \emph{based closed \(r\)-walk} be a tuple
+\((n_1,\ldots,n_r)\in\N^r\) satisfying
+\[
+  n_i\carryfree n_{i+1},
+  \qquad i\pmod r,
+\]
+where \(n_{r+1}=n_1\).  The base point matters, so cyclic rotations are
+not identified.
+
+\begin{proposition}[Trace-power expansion]
+\label{prop:trace-powers}
+If \(\sigma>1\) and \(r\ge2\), then \(B_{b,s}^r\in S_1\) and
+\begin{equation}
+  \Tr(B_{b,s}^r)
+  =
+  \sum_{\substack{n_1,\ldots,n_r\ge1\\
+                  n_i\carryfree n_{i+1}\ (i\bmod r)}}
+  \prod_{i=1}^{r}n_i^{-s}.
+  \label{eq:closed-walk-trace}
+\end{equation}
+The series on the right is absolutely convergent.
+\end{proposition}
+
+\begin{proof}
+By \cref{cor:operator-classes}, \(B_{b,s}\in S_2\) and is bounded.  Hence
+\(B_{b,s}^2\in S_1\), and multiplying by bounded powers shows
+\(B_{b,s}^r\in S_1\) for every \(r\ge2\).
+
+Let \(Q_K=\sum_{k=0}^{K}P_k\) and
+\(T_K=Q_KB_{b,s}Q_K\).  Because \(B_{b,s}\) is Hilbert--Schmidt and
+\(Q_K\) increases strongly to the identity,
+\[
+  \|T_K-B_{b,s}\|_{S_2}\longrightarrow0.
+\]
+For \(r=2\), the ideal inequality gives
+\[
+  \|T_K^2-B_{b,s}^2\|_{S_1}
+  \le
+  (\|T_K\|_{S_2}+\|B_{b,s}\|_{S_2})
+  \|T_K-B_{b,s}\|_{S_2}.
+\]
+For \(r>2\), a telescoping expansion followed by bounded multiplication
+gives the same convergence in \(S_1\):
+\begin{equation}
+  T_K^r\longrightarrow B_{b,s}^r
+  \quad\text{in }S_1.
+  \label{eq:power-trace-norm-limit}
+\end{equation}
+Thus the finite traces converge to the operator trace.
+
+For each \(K\), direct finite matrix multiplication yields
+\[
+  \Tr(T_K^r)
+  =
+  \sum_{\substack{n_1,\ldots,n_r<b^{K+1}\\
+                  n_i\carryfree n_{i+1}\ (i\bmod r)}}
+  \prod_{i=1}^{r}n_i^{-s}.
+\]
+To justify passage through the infinite sum, repeat the construction with
+the real matrix \(B_{b,\sigma}\).  Every term is nonnegative, the finite
+walk sums increase with \(K\), and
+\cref{eq:power-trace-norm-limit} shows that their traces converge to the
+finite number \(\Tr(B_{b,\sigma}^r)\).  Monotone convergence therefore
+gives
+\[
+  \sum_{\text{based closed \(r\)-walks}}
+  \prod_{i=1}^{r}n_i^{-\sigma}<\infty.
+\]
+This is exactly the sum of the absolute values of the complex-\(s\) terms.
+The complex finite sums may consequently pass term by term to the
+absolutely convergent limit, and their trace-norm limit identifies that
+limit with \(\Tr(B_{b,s}^r)\).
+\end{proof}
+
+\subsection{Regularized and ordinary determinants}
+
+\begin{corollary}[Determinant domains]
+\label{cor:determinant-domains}
+For \(\sigma>1\), the Hilbert--Schmidt regularized determinant
+\[
+  \Dettwo(I-zB_{b,s})
+\]
+is an entire function of \(z\).  On a sufficiently small neighborhood of
+\(z=0\), with the logarithm normalized to vanish at zero,
+\begin{equation}
+  \log\Dettwo(I-zB_{b,s})
+  =
+  -\sum_{r=2}^{\infty}
+  \frac{z^r}{r}\Tr(B_{b,s}^r),
+  \label{eq:det2-local-log}
+\end{equation}
+and each coefficient has the absolutely convergent walk expansion in
+\cref{eq:closed-walk-trace}.  The ordinary trace and Fredholm determinant
+\(\det(I-zB_{b,s})\) are asserted only for
+\(\sigma>\alpha_b\).
+\end{corollary}
+
+\begin{proof}
+For an \(S_2\) operator, the regularized determinant
+\(\Dettwo(I-zB)=\det((I-zB)\exp(zB))\) is entire in \(z\); this is the
+standard trace-ideal construction \cite{simon2005trace}.  For, say,
+\(|z|\|B_{b,s}\|<1\), the norm-convergent logarithm and
+\cref{prop:trace-powers} give \cref{eq:det2-local-log}.  The ordinary
+Fredholm determinant requires \(B_{b,s}\in S_1\), whose exact domain is
+\(\sigma>\alpha_b\) by \cref{cor:operator-classes}.
+\end{proof}
+
+We make no claim that \cref{eq:det2-local-log} converges for all \(z\), even
+though the determinant itself is entire in \(z\).  Nor do we construct a
+completed function of \(s\), a functional equation, or a prescribed
+divisor.
+
+\subsection{Least periods of the graph shift}
+
+Let
+\[
+  \Sigma_b
+  =
+  \{(x_j)_{j\in\mathbb N_0}\in\N^{\mathbb N_0}:
+    x_j\carryfree x_{j+1}\text{ for every }j\in\mathbb N_0\}
+\]
+with the one-sided left shift.  Repeating a cyclically admissible
+period-\(r\) word to the right gives a periodic point, and every periodic
+point arises this way; its least period is its least shift period.  We
+discuss support only, independently of the complex weights.
+
+\begin{proposition}[Least-period support]
+\label{prop:least-periods}
+The least-period sets are
+\begin{equation}
+  \LPS(\Sigma_2)=\{2,3,\ldots\},
+  \qquad
+  \LPS(\Sigma_b)=\{1,2,3,\ldots\}\quad(b>2).
+  \label{eq:least-period-sets}
+\end{equation}
+For every allowed length, there are infinitely many periodic points.
+\end{proposition}
+
+\begin{proof}
+Distinct powers of \(b\) are pairwise carry-free because their nonzero
+digits occupy distinct positions.  At \(b=2\), no positive vertex has a
+loop: any nonzero binary digit produces a carry when added to itself.
+Two distinct powers give a cyclic word of least period two.  For each
+\(r\ge3\), a word of \(r\) distinct powers is cyclically admissible and
+cannot have a smaller period because all of its symbols are distinct.
+
+For \(b>2\), the vertex \(1\) has a loop, providing least period one, and
+the same distinct-power construction gives every \(r\ge2\).  Finally,
+shifting every chosen digit position upward by an arbitrary common amount
+produces infinitely many distinct witnesses of the same least period.
+\end{proof}
+
+It follows that the unweighted fixed-point count is infinite at every
+allowed length (for \(b=2\), at every length at least two).  Therefore the
+usual Artin--Mazur coefficients are not finite and no unweighted
+Artin--Mazur zeta function is claimed.  The period statement is proved from
+support witnesses, not inferred from traces that could cancel for complex
+\(s\).

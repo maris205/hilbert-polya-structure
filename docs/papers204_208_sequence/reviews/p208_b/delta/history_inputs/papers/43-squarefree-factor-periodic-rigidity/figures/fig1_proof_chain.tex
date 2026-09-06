@@ -1,0 +1,37 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=8mm and 9mm,
+  box/.style={draw,rounded corners=2pt,align=center,minimum height=12mm,
+    text width=0.27\textwidth,font=\small,inner sep=4pt},
+  arrow/.style={-{Latex[length=2.4mm]},thick},
+  every node/.style={font=\small}
+]
+\node[box,draw=sourceblue,fill=sourceblue!7] (missing)
+  {missing residue modulo every chosen \(p^2\)};
+\node[box,draw=sourceblue,fill=sourceblue!7,right=of missing] (crt)
+  {fresh pairwise-coprime moduli and one CRT time};
+\node[box,draw=proofgreen,fill=proofgreen!7,right=of crt] (zero)
+  {both translates vanish on an arbitrary finite window};
+
+\node[box,draw=proofgreen,fill=proofgreen!7,below=of zero] (sourceprox)
+  {\((\Xsf,\sigma)\) is proximal};
+\node[box,draw=factorblue,fill=factorblue!7,left=of sourceprox] (factorprox)
+  {every lawful compact metrizable factor is proximal};
+\node[box,draw=stopred,fill=stopred!6,left=of factorprox] (ledger)
+  {one periodic point, hence \(D_{\AM,Y}(z)=1-z\)};
+
+\draw[arrow,sourceblue] (missing) -- (crt);
+\draw[arrow,sourceblue] (crt) -- (zero);
+\draw[arrow,proofgreen] (zero) -- (sourceprox);
+\draw[arrow,factorblue] (sourceprox) -- (factorprox);
+\draw[arrow,stopred] (factorprox) -- (ledger);
+
+\node[below=2mm of factorprox,align=center,font=\scriptsize,text=black!70]
+  {onto lifts + uniform continuity + equivariance};
+\end{tikzpicture}
+\caption{The proof chain.  Arithmetic is used only to build the source
+proximality certificate; the last two arrows are topological.}
+\label{fig:proof-chain}
+\end{figure}
+

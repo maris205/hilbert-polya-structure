@@ -1,0 +1,153 @@
+\section{Adversarial audit and finite verification}
+\label{sec:audit}
+
+The theorems determine the route decision; computation checks the
+implementation, finite local escape routes, convergence bookkeeping, and
+control semantics.  The protocol used no Riemann zeros, root search, fitted
+phase, or fitted cutoff.  All 18 unit tests and all 18 code/result checksum
+checks passed.
+
+\subsection{Local character search}
+
+The local audit was inherited from the preceding character-resolved symbolic
+grammar and evaluated at the fixed parameters $s=2$, $z=1/3$, and cutoffs
+$N\in\{16,32,64,128\}$.  It contains 2,574 exact rational rows from 18 named
+rules, with 16 presentation shuffles and 16 random-increasing controls.
+
+Several rules that encode three through eight consecutive tensor-prime
+adjacency tokens pass a naive random control.  They all fail when the control
+is strengthened to a nontrivial prefix- or block-preserving shuffle of the
+same marked tokens.  An exhaustive scan of 256 binary radius-one truth tables
+found one naive pass, the prime mask itself, and zero robust passes.  A scan of
+260 labelled one- and two-state Mealy rules also found zero robust passes.
+Rank, factor-depth, $v_2$, and entropy-bin coboundaries produce the same exact
+continuant as their constant representative.
+
+These finite results do not prove the algebraic no-go; they show that the
+implementation reproduces it and that plausible finite-local exceptions are
+either data-loaded masks or generic positive motion.  The evidence label is
+\texttt{STOP\_FINITE\_LOCAL\_SELECTOR}, consistent with
+\Cref{cor:prime-no-go,thm:coboundary}.
+
+\subsection{Global incidence and entropy controls}
+
+The global audit computed $\muten$ recursively from the tensor-divisor
+relation without supplying a prime coefficient table.  It represented
+entropy exactly in the free formal basis $\{\log p\}$ and tested cutoffs
+$64,128,256,512$.  All 960 ledger rows satisfy the convolution inverse and
+the profile in \Cref{prop:lambda}; every overlap between cutoffs agrees
+exactly.
+
+At cutoff $512$, there are 117 prime-power endpoints and 394 mixed-factor
+endpoints.  Every one of the 394 mixed-factor entropy innovations is the zero
+vector.  The 136 inventory-control rows distinguish relabeling from changing
+the ambient monoid: ordered and shuffled atom lists become divisor closed
+after the tensor unit is adjoined, whereas composite-only and generic random
+lists do not redefine $\muten$.  Evaluated in the ambient tensor monoid, each
+inventory has the predicted prime-power support.
+
+Eight seeded entropy relabelings at four cutoffs give 32 further controls.
+All 32 break the selector and each creates at least 36 mixed-factor leaks.
+This is useful source evidence: incidence syntax alone does not carry the
+support rule; it is the compatibility of the tensor product with the
+intrinsic entropy $\log n$ that makes (5.7) close.
+
+\subsection{Raw and grouped bar regimes}
+
+An 80-digit solve gives
+\[
+\begin{split}
+\sbar={}&1.728647238998183618135103010297691464234109849335035732321285908423179
+\ldots.
+\end{split}
+\]
+All 28 raw convergence rows satisfy $\Ree s>\sbar$ and
+$\zeta(\Ree s)-1<1$.  The maximum 80-digit residual in the exact geometric
+remainder identity is $1.913\times10^{-81}$, and the maximum residual in
+$1-\Fbar=1/\zeta$ is $1.055\times10^{-81}$.
+
+The experiment deliberately resolves slow convergence near the raw boundary.
+At internal word length $64$, the absolute truncation errors are shown in
+\Cref{tab:raw}.
+
+\begin{table}[t]
+\centering
+\caption{Raw word-length residuals and rigorous absolute geometric tail
+bounds at $L=64$.  The complex point uses the same absolute bound
+$B(\Ree s)^{L+1}/(1-B(\Ree s))$.}
+\label{tab:raw}
+\begin{tabular}{lrr}
+\toprule
+$s$ & $|\Fbar-F_{64}|$ & tail bound\\
+\midrule
+$1.75$ & $4.1976\times10^{-2}$ & $2.1861$\\
+$1.8$ & $1.5422\times10^{-4}$ & $2.4647\times10^{-3}$\\
+$2$ & $2.5255\times10^{-13}$ & $1.1701\times10^{-12}$\\
+$1.9+0.6i$ & $4.5195\times10^{-14}$ & $2.9584\times10^{-8}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Independently, all 512 formal endpoint rows enumerate ordered factorization
+layers and compute the Dirichlet inverse.  Every row satisfies exactly
+\[
+  [n]\Fbar=-\muten(n),
+  \qquad
+  [n]\Dbar=\muten(n).
+\]
+This verifies the endpoint completion separately from raw word summation.
+As a numerical observation only, an 80-digit M\"obius sieve through
+$10^5$ gives determinant residuals ranging from
+$1.55\times10^{-4}$ at $s=1.1$ to $1.59\times10^{-7}$ at $s=1.7$; these
+conditional partial sums are not used as proof or zero-fitting metrics.
+
+The trace-log matrix contains 81 rows over three source points, three $z$
+values, and repetition cutoffs through $256$, always with
+$|z\Fbar(s)|<1$.  At the final cutoff its maximum trace-log residual is
+$7.16\times10^{-30}$.  This verifies temporal repetitions of the scalar
+return sum, not an atom-to-primitive-cycle bijection.
+
+\subsection{Universal controls}
+
+The identical alternating grammar was applied to ten inventories, including
+all-object, composite-only, prime-only, random-positive, random-support,
+synthetic-signed, shuffled-ramp, and scalar examples.  Explicit word layers
+and an independent Dirichlet inverse agree exactly in all ten cases, with
+zero convolution mismatch.  Every case satisfies (5.9).
+
+This successful control is negative evidence.  It gives
+\[
+  \texttt{STOP\_ARITHMETIC\_SELECTIVITY / PROVES\_TOO\_MUCH}.
+\]
+The arithmetic content lies in the chosen tensor inventory and compatible
+entropy; the reduced-bar inversion itself is universal.  Pure shuffles remain
+invariant, as functoriality requires, rather than collapsing.
+
+\subsection{Audit summary}
+
+\begin{table}[h]
+\centering
+\caption{Frozen evidence labels.  Exact finite verification does not upgrade
+the route beyond the analytic theorems.}
+\begin{tabularx}{\textwidth}{L{0.33\textwidth}X}
+\toprule
+Label & Reason\\
+\midrule
+\begin{tabular}[t]{@{}l@{}}\texttt{GO\_FUNCTORIAL\_}\\[-2pt]
+\texttt{COCYCLE\_RIGIDITY}\end{tabular} &
+Valuation, coboundary, entropy, and shuffle classifications are exact.\\
+\begin{tabular}[t]{@{}l@{}}\texttt{GO\_TENSOR\_MOBIUS\_}\\[-2pt]
+\texttt{INCIDENCE\_DETERMINANT}\end{tabular} &
+One frozen shift yields the raw determinant, endpoint completion, and roof derivative.\\
+\begin{tabular}[t]{@{}l@{}}\texttt{STOP\_PRIME\_EXCLUSIVE\_}\\[-2pt]
+\texttt{ABELIAN\_CHARACTER}\end{tabular} &
+The $p^2,p^3$ relations erase every abelian atom charge.\\
+\begin{tabular}[t]{@{}l@{}}\texttt{STOP\_ORBITWISE\_PRIME\_}\\[-2pt]
+\texttt{CORRESPONDENCE}\end{tabular} &
+Primitive code cycles are factorization necklaces.\\
+\begin{tabular}[t]{@{}l@{}}\texttt{STOP\_ARITHMETIC\_}\\[-2pt]
+\texttt{SELECTIVITY}\end{tabular} &
+All ten generic inventories obey the same reciprocal inversion.\\
+\bottomrule
+\end{tabularx}
+\end{table}

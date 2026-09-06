@@ -1,0 +1,331 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\raggedbottom
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\I}{\mathcal I}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\depth}{\operatorname{depth}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[Annihilator--power ideal dynamics]{Annihilator--Power Dynamics on Ideals of Residue Rings:\ Resonant Fixed Points, Two-Cycles, and Exact Transients}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+Fix $r\geq2$.  On the ideal lattice of $\Z/N\Z$ we study
+$T_r(I)=\Ann(I)^r$.  For a prime-power component $p^a$, the valuation
+coordinate is the clipped reflection
+\[
+ f_{a,r}(e)=\min\{a,r(a-e)\},\qquad 0\leq e\leq a.
+\]
+The endpoints form a two-cycle, while an interior fixed point exists exactly
+when $r+1$ divides $a$.  Before clipping, the centered deviation
+$\Delta(e)=(r+1)e-ra$ is multiplied by $-r$ at every step.  This gives an
+exact hitting-time formula, a closed transient cumulative distribution, and
+a sharp logarithmic maximum depth.  Chinese remaindering then yields the
+complete recurrent set, all fixed and two-cycle counts, and the Artin--Mazur
+zeta function for arbitrary $N$.  Literal ideal arithmetic for every
+$N\leq1000$ independently checks the valuation proof.
+\end{abstract}
+
+\maketitle
+
+\section{Map and ownership boundary}
+
+Let $N\geq2$, $R_N=\Z/N\Z$, and let $\I_N$ be its finite set of ideals.
+For a fixed integer $r\geq2$, define
+\begin{equation}
+ \label{eq:map}
+ T_r\colon\I_N\longrightarrow\I_N,
+ \qquad T_r(I)=\Ann_{R_N}(I)^r.
+\end{equation}
+Ideal annihilators, ideal powers, and the Chinese remainder theorem are
+standard commutative-algebra ingredients; see \citet{AtiyahMacdonald1969}.
+Annihilating-ideal graphs and their residue-ring specializations are also an
+established topic \citep{BehboodiRakeei2011,AfkhamiEtAl2016}.  We assign
+these ingredients no novelty credit.  More directly, Schwiebert treats the
+radical and annihilator as operators on the ideal poset, studies their
+generated monoid, and analyzes finite-product behavior
+\citep{Schwiebert2017}.  That operator-dynamics viewpoint, the bare
+annihilator iteration, and its product-decomposition framework are owned
+background here.  Our bounded target is only the temporal package for the
+specific power-after-annihilator self-map \eqref{eq:map}: the
+clipped-reflection normal form, the divisibility-controlled fixed-point
+anomaly, exact transient layers, and the full one/two-cycle census.  A
+targeted search completed on 29 August 2026 did not locate that conjunction.
+This is not an exhaustive owner certificate; external circulation and every
+priority claim remain on \textbf{HOLD}.
+
+Factor $N$ as
+\begin{equation}
+ \label{eq:factor}
+ N=\prod_{i=1}^{s}p_i^{a_i}.
+\end{equation}
+The Chinese remainder theorem identifies $\I_N$ with
+$\prod_i\{0,1,\ldots,a_i\}$: the coordinate $e_i$ denotes the ideal
+$(p_i^{e_i})$ in $\Z/p_i^{a_i}\Z$.  The first proof route works entirely in
+these valuation coordinates.  The control route instead represents an ideal
+of $R_N$ by its unique divisor generator $(d)$, computes
+\begin{equation}
+ \label{eq:literal}
+ T_r((d))=\left(\gcd\!\left(N,(N/d)^r\right)\right),
+\end{equation}
+and only then compares with the coordinate formulas.
+
+\section{Prime-power normal form}
+
+Fix $a\geq1$ and abbreviate $f=f_{a,r}$.  Since
+$\Ann((p^e))=(p^{a-e})$ and $(p^b)^r=(p^{\min(a,rb)})$, we have the following
+exact model.
+
+\begin{proposition}[Clipped reflection]
+\label{prop:normal}
+On $\I_{p^a}$, the map \eqref{eq:map} is conjugate to
+\begin{equation}
+ \label{eq:f}
+ f(e)=\min\{a,r(a-e)\},\qquad 0\leq e\leq a.
+\end{equation}
+Put $\Delta(e)=(r+1)e-ra$.  Whenever $f(e)<a$,
+\begin{equation}
+ \label{eq:deviation}
+ \Delta(f(e))=-r\Delta(e).
+\end{equation}
+Clipping occurs precisely when $\Delta(e)\leq-a/r$.
+\end{proposition}
+
+\begin{proof}
+Only the deviation statements require verification.  In the unclipped
+branch $f(e)=r(a-e)$, whence
+\[
+ (r+1)f(e)-ra
+ =r\bigl((r+1)(a-e)-a\bigr)=-r\Delta(e).
+\]
+The inequality $r(a-e)\geq a$ is equivalent to
+$(r+1)e-ra\leq-a/r$.
+\end{proof}
+
+The endpoints satisfy $0\leftrightarrow a$.  An interior point is fixed if
+and only if $e=r(a-e)$, which already exposes the arithmetic anomaly.
+
+\begin{theorem}[Recurrent states and resonance]
+\label{thm:recurrent-coordinate}
+The recurrent set of $f_{a,r}$ is
+\begin{equation}
+ \label{eq:rec-coordinate}
+ \{0,a\}\ \cup\
+ \left\{\frac{ra}{r+1}:\ (r+1)\mid a\right\}.
+\end{equation}
+The endpoints form one two-cycle.  The displayed interior state, when it
+exists, is fixed.  There are no other cycles.
+\end{theorem}
+
+\begin{proof}
+The endpoint statements and the fixed-point equation follow from
+\eqref{eq:f}.  Suppose $\Delta(e)\neq0$ and the orbit has not clipped.  By
+\eqref{eq:deviation}, its deviation alternates sign and its absolute value is
+multiplied by $r>1$.  It therefore eventually enters the clipping region.
+The next state is $a$, hence belongs to the endpoint two-cycle.  Thus every
+nonfixed interior state is transient.
+\end{proof}
+
+\section{Exact transient layers}
+
+For a state $e$, let $\depth(e)$ be the first time its orbit is recurrent.
+The deviation gives a closed hitting-time clock rather than only an upper
+bound.
+
+\begin{theorem}[Exact depth]
+\label{thm:depth-coordinate}
+For $e$ in \eqref{eq:rec-coordinate}, $\depth(e)=0$.  For every other state,
+put $D=\Delta(e)$.  If $D<0$, let
+\[
+ k_- =\min\{k\geq0:r^{2k+1}|D|\geq a\};
+\]
+if $D>0$, let
+\[
+ k_+ =\min\{k\geq0:r^{2k+2}D\geq a\}.
+\]
+Then
+\begin{equation}
+ \label{eq:depth-coordinate}
+ \depth(e)=
+ \begin{cases}
+  2k_-+1,&D<0,\\
+  2k_++2,&D>0.
+ \end{cases}
+\end{equation}
+Consequently, on each sign side that contains transient states, the largest
+depth occurs at the smallest available value of $|D|$.  The global maximum
+is the larger of those sidewise values, or zero when there are no transient
+states.  In particular it is $O(\log_r a)$, and
+\eqref{eq:depth-coordinate} is a sharp formula for every $(a,r)$, including
+$a=1$.
+\end{theorem}
+
+\begin{proof}
+Before clipping, the deviation at time $j$ is $(-r)^jD$.  A negative
+deviation clips on the following update exactly when its magnitude times
+$r$ is at least $a$.  If $D<0$, negative signs occur at times $2k$; if
+$D>0$, they occur at times $2k+1$.  The two displayed threshold conditions
+and the additional clipping update give \eqref{eq:depth-coordinate}.
+Monotonicity in $|D|$ proves the sharp maximum statement.
+\end{proof}
+
+For completeness, the whole transient distribution also has a floor/ceiling
+form.  Put $\varepsilon_{a,r}=\mathbf1_{(r+1)\mid a}$ and, for $L\geq1$,
+\begin{align}
+ M_-(L)&=\max\left\{0,
+  \min\left(a-1,\left\lfloor\frac{ra-L}{r+1}\right\rfloor\right)\right\},
+ \label{eq:Mminus}\\
+ M_+(L)&=\max\left\{0,
+  a-\max\left(1,\left\lceil\frac{ra+L}{r+1}\right\rceil\right)\right\}.
+ \label{eq:Mplus}
+\end{align}
+These count interior states with $\Delta\leq-L$ and $\Delta\geq L$,
+respectively.
+
+\begin{corollary}[Transient cumulative distribution]
+\label{cor:cdf}
+Let $C_{a,r}(t)=\#\{e:\depth(e)\leq t\}$.  Then
+$C_{a,r}(0)=2+\varepsilon_{a,r}$.  For $t\geq1$, set
+\[
+ j_-(t)=2\left\lfloor\frac{t-1}{2}\right\rfloor,
+ \qquad L_-(t)=\left\lceil\frac{a}{r^{j_-(t)+1}}\right\rceil.
+\]
+For $t\geq2$, also set
+\[
+ j_+(t)=2\left\lfloor\frac{t-2}{2}\right\rfloor+1,
+ \qquad L_+(t)=\left\lceil\frac{a}{r^{j_+(t)+1}}\right\rceil.
+\]
+Then
+\begin{equation}
+ \label{eq:cdf}
+ C_{a,r}(t)=2+\varepsilon_{a,r}+M_-(L_-(t))
+ +\mathbf1_{t\geq2}M_+(L_+(t)).
+\end{equation}
+Thus the exact depth-$t$ shell is $C_{a,r}(t)-C_{a,r}(t-1)$.
+\end{corollary}
+
+\begin{proof}
+Among negative starting deviations, the largest even exponent available by
+time $t-1$ is $j_-(t)$; among positive ones, the largest admissible odd
+exponent is $j_+(t)$, which exists only for $t\geq2$.  The clipping test in
+\cref{prop:normal} becomes $|D|\geq L_-(t)$ or $D\geq L_+(t)$.  Counting the
+arithmetic progression $D=(r+1)e-ra$ over $1\leq e\leq a-1$ gives
+\eqref{eq:Mminus}--\eqref{eq:Mplus}.  The endpoints and possible resonant
+fixed point contribute $2+\varepsilon_{a,r}$.
+\end{proof}
+
+\section{Chinese products, cycles, and zeta}
+
+Return to \eqref{eq:factor} and put
+\begin{equation}
+ \label{eq:AB}
+ A=\prod_{i=1}^{s}\varepsilon_{a_i,r},
+ \qquad B=\prod_{i=1}^{s}(2+\varepsilon_{a_i,r}).
+\end{equation}
+
+\begin{theorem}[Complete finite dynamics]
+\label{thm:global}
+Under Chinese remaindering, $T_r$ is the product of the maps
+$f_{a_i,r}$.  Its recurrent set has size $B$, its maximum transient depth is
+\begin{equation}
+ \label{eq:global-depth}
+ \max_{1\leq i\leq s}\ \max_{0\leq e\leq a_i}\depth_{a_i,r}(e),
+\end{equation}
+and the number of states of depth at most $t$ is
+\begin{equation}
+ \label{eq:global-cdf}
+ \prod_{i=1}^{s}C_{a_i,r}(t).
+\end{equation}
+For every $k\geq1$,
+\begin{equation}
+ \label{eq:fixed-global}
+ \#\Fix(T_r^k)=
+ \begin{cases}
+  A,&k\text{ odd},\\
+  B,&k\text{ even}.
+ \end{cases}
+\end{equation}
+Hence there are $A$ fixed points and $(B-A)/2$ two-cycles, and the
+Artin--Mazur zeta function \citep{ArtinMazur1965} is
+\begin{equation}
+ \label{eq:zeta}
+ \zeta_{T_r}(z)=(1-z)^{-A}(1-z^2)^{-(B-A)/2}.
+\end{equation}
+No period greater than two occurs.
+\end{theorem}
+
+\begin{proof}
+Annihilators, products, and powers commute with the finite product
+decomposition of $R_N$, giving the coordinate product.  A product point is
+recurrent exactly when each coordinate is recurrent; every such coordinate
+has period one or two, so the product period also divides two.  Depth is the
+maximum coordinate depth, proving \eqref{eq:global-depth}, while independent
+coordinate choices give \eqref{eq:global-cdf}.  An odd iterate fixes only
+the resonant fixed coordinate in every component, producing $A$.  An even
+iterate fixes every recurrent coordinate, producing $B$.  Subtracting the
+fixed points from the points fixed by the square and dividing by two gives
+the cycle counts and \eqref{eq:zeta}.
+\end{proof}
+
+The dynamics depends on the prime exponents and not on the primes themselves:
+moduli with the same exponent multiset have conjugate systems.  This is a
+nonrigidity statement, not a claim that the phase portrait always recovers
+that multiset.
+
+The internal collision boundary is also explicit.  P100 uses least-valuation
+digit erasure on residue classes and reconstructs prime data from a transient
+profile; it does not act on the ideal lattice or alternate an annihilator with
+an ideal power.  P102 uses an involution--norm map in a cyclic group algebra;
+its orbit structure comes from polynomial factorization rather than the
+clipped expanding reflection \eqref{eq:f}.  Shared valuation, CRT, and zeta
+bookkeeping receive no contribution credit.
+
+\section{Independent exact control}
+
+The accompanying standard-library verifier implements two independent
+lanes.  The first enumerates $e=0,\ldots,a$, checks the deviation clock,
+the cumulative formula, and all iterate-fixed counts.  The second enumerates
+actual divisor ideals $(d)$ for every $N\leq1000$, applies the literal gcd
+rule \eqref{eq:literal}, and compares trajectories, depths, recurrent sets,
+and fixed counts with the CRT prediction.  These finite computations are
+falsification controls, not proofs of the quantified theorems.
+
+\section{Conclusion}
+
+Annihilation followed by an ideal power becomes a clipped expanding
+reflection on each prime exponent.  Its sign alternation forces a universal
+two-cycle, while the single equation $(r+1)e=ra$ creates a sharp divisibility
+resonance.  The same normal form supplies every transient layer and, after
+Chinese remaindering, the complete cycle and zeta data.  Specialist owner
+review remains necessary before any external use.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

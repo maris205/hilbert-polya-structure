@@ -1,0 +1,379 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage{microtype}
+\microtypesetup{expansion=false}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdfauthor={},pdftitle={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\cJ}{\mathcal J}
+\newcommand{\cS}{\mathsf S}
+\newcommand{\cK}{\mathsf K}
+\newcommand{\supp}{\operatorname{supp}}
+
+\title[Complemented-Shadow Dynamics]{Complemented-Shadow Dynamics on Set Families:\\
+Atomic Kernels and Support-Resolved Deepest Shells}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Fix $n\geq2$ and map a set family to the complements of all members of its
+lower shadow.  We determine every atomic iterate: even times are closed balls
+in a Johnson graph, while odd times satisfy a dual intersection threshold.
+These kernels give a parity-sensitive clock for every mixed-rank family and a
+recurrent core governed by an involution on rank support.  The central result
+classifies the full phase-space shell at maximum depth.  For $n\geq3$, a
+family has tail $n-1$ exactly when its rank-$\lceil n/2\rceil$ slice contains
+one set.  Hence the shell has
+$\binom{n}{\lceil n/2\rceil}2^{2^n-\binom{n}{\lceil n/2\rceil}}$ members.  We
+refine this count by the rank support inherited by the eventual cycle and
+factor the shell into eventual periods one and two.  The exceptional case
+$n=2$ has twelve deepest states, split six and six.  Shadow, Johnson-ball,
+Boolean-relation, and covering ingredients are treated as owned background;
+the artifact remains \texttt{HOLD\_EXTERNAL}.
+\end{abstract}
+
+\maketitle
+
+\section{The literal map and main contracts}
+
+Let $[n]=\{1,\ldots,n\}$, $\cB_n=2^{[n]}$, and let the phase space be
+$2^{\cB_n}$.  Complements are taken in $[n]$.  The deterministic map is
+\begin{equation}\label{eq:map}
+ \cS_n(\cF)=
+ \{\,\overline{A\setminus\{a\}}:A\in\cF,\ a\in A\,\}.
+\end{equation}
+Thus the empty set is a silent atom and \eqref{eq:map} distributes over
+unions.  For $A\neq\varnothing$, define
+$\cK_t(A)=\cS_n^t(\{A\})$ and $\phi(k)=n-k+1$ on the nonzero ranks.
+
+For a family $\cF$, write
+$\cF_k=\cF\cap\binom{[n]}k$ and
+$R(\cF)=\{k\geq1:\cF_k\neq\varnothing\}$.  When $\cF_k$ is nonempty, put
+\begin{align}
+ e_k(\cF)&=\max_{B\in\binom{[n]}k}\min_{A\in\cF_k}
+   \bigl(k-|A\cap B|\bigr),\label{eq:e}\\
+ o_k(\cF)&=\max_{C\in\binom{[n]}{\phi(k)}}\min_{A\in\cF_k}
+   \bigl(|A\cap C|-1\bigr).\label{eq:o}
+\end{align}
+Let $e(\cF)$ and $o(\cF)$ be the maxima over $k\in R(\cF)$.  The tail
+$\mu(\cF)$ is the least time at which the orbit enters its eventual cycle.
+
+\begin{theorem}[Atomic kernels, clock, and recurrent support]\label{thm:forward}
+For $n\geq2$, the following hold.
+\begin{enumerate}
+\item If $A$ has rank $k\geq1$, then for every $s\geq0$,
+\begin{align}
+ \cK_{2s}(A)
+ &=\left\{B\in\binom{[n]}k:k-|A\cap B|\leq s\right\},\label{eq:even}\\
+ \cK_{2s+1}(A)
+ &=\left\{C\in\binom{[n]}{\phi(k)}:|A\cap C|\leq s+1\right\}.
+ \label{eq:odd}
+\end{align}
+The silent atom satisfies $\cK_0(\varnothing)=\{\varnothing\}$ and
+$\cK_t(\varnothing)=\varnothing$ for $t\geq1$, and
+$\cS_n^t(\cF)=\bigcup_{A\in\cF}\cK_t(A)$.
+\item If $R(\cF)\neq\varnothing$, then
+\begin{equation}\label{eq:clock}
+ \mu(\cF)=\max\left\{\mathbf1_{\{\varnothing\in\cF\}},
+ \min\{2e(\cF),\,2o(\cF)+1\}\right\}.
+\end{equation}
+The empty family has tail zero and $\{\varnothing\}$ has tail one.  The
+global height is $n-1$.
+\item For $R\subseteq\{1,\ldots,n\}$, let
+\begin{equation}\label{eq:UR}
+ U_R=\bigcup_{k\in R}\binom{[n]}k.
+\end{equation}
+The recurrent states are exactly the $2^n$ families $U_R$, with
+$\cS_n(U_R)=U_{\phi(R)}$.  There are $2^{\lceil n/2\rceil}$ fixed states;
+all other recurrent states lie in strict two-cycles.  Hence
+\begin{equation}\label{eq:fix}
+ |\operatorname{Fix}(\cS_n^j)|=
+ \begin{cases}2^{\lceil n/2\rceil},&j\text{ odd},\\2^n,&j\text{ even},
+ \end{cases}
+\end{equation}
+and the Artin--Mazur zeta function is
+\begin{equation}\label{eq:zeta}
+ \zeta_{\cS_n}(z)=
+ (1-z)^{-2^{\lceil n/2\rceil}}
+ (1-z^2)^{-(2^n-2^{\lceil n/2\rceil})/2}.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+The full phase space is much larger than the recurrent core.  The next
+theorem resolves which of its $2^{2^n}$ states occupy the last transient
+shell.
+
+\begin{theorem}[Atomic depths and the deepest shell]\label{thm:deep}
+For a nonempty rank-$k$ atom, the singleton family $\{A\}$ has depth
+\begin{equation}\label{eq:delta}
+ \delta_n(k)=\min\{2\min(k,n-k),\,2\min(k-1,n-k)+1\}.
+\end{equation}
+Every $d\in\{0,\ldots,n-1\}$ is realized by exactly one rank,
+\begin{equation}\label{eq:rank-depth}
+ k_n(d)=
+ \begin{cases}n-d/2,&d\text{ even},\\(d+1)/2,&d\text{ odd},\end{cases}
+\end{equation}
+so exactly $\binom n{\lceil d/2\rceil}$ nonempty atomic singleton families
+have depth $d$.
+
+Assume now $n\geq3$, and set
+\begin{equation}\label{eq:middle}
+ k_\star=\lceil n/2\rceil,\qquad M_n=\binom n{k_\star}.
+\end{equation}
+Then
+\begin{equation}\label{eq:iff}
+ \mu(\cF)=n-1\quad\Longleftrightarrow\quad |\cF_{k_\star}|=1,
+\end{equation}
+and therefore
+\begin{equation}\label{eq:deep-total}
+ D_n:=|\{\cF:\mu(\cF)=n-1\}|=M_n2^{2^n-M_n}.
+\end{equation}
+More precisely, for each endpoint rank support
+$R\subseteq\{1,\ldots,n\}$,
+\begin{equation}\label{eq:deep-support}
+ D_n(R)=
+ \begin{cases}
+ 0,&k_\star\notin R,\\[2pt]
+ \displaystyle 2M_n\prod_{k\in R\setminus\{k_\star\}}
+   \left(2^{\binom nk}-1\right),&k_\star\in R.
+ \end{cases}
+\end{equation}
+Here $R=R(\cF)$ labels one endpoint of the eventual support cycle
+$R\leftrightarrow\phi(R)$.
+
+Let $\Omega_n$ be the orbit set of $\phi$ on the ranks, put
+$w_k=2^{\binom nk}-1$, and define
+\begin{equation}\label{eq:qO}
+ q_O=
+ \begin{cases}
+ \displaystyle\prod_{j\in O\setminus\{k_\star\}}w_j,&k_\star\in O,\\[6pt]
+ \displaystyle1+\prod_{j\in O}w_j,&k_\star\notin O.
+ \end{cases}
+\end{equation}
+The numbers of deepest states with eventual periods one and two are
+\begin{align}
+ D_n^{(1)}&=2M_n\prod_{O\in\Omega_n}q_O,\label{eq:period-one}\\
+ D_n^{(2)}&=M_n2^{2^n-M_n}-D_n^{(1)}.\label{eq:period-two}
+\end{align}
+At $n=2$, the height is one and all twelve nonrecurrent states are deepest;
+six have eventual period one and six have eventual period two.  Condition
+\eqref{eq:iff} selects only eight states, so
+\eqref{eq:iff}--\eqref{eq:period-two} are not asserted at this boundary.
+\end{theorem}
+
+\section{Johnson kernels and the mixed-rank clock}
+
+Lower shadows and their extremal theory are classical
+\citep{kruskal1963,katona2009}.  The exact identity between a shadow followed
+by an upper shadow and closed-neighbourhood dilation in a Johnson graph is
+also recorded directly in the Johnson-graph literature \citep{diego2018}.
+It supplies the owned forward primitive used below.
+
+\begin{lemma}\label{lem:square}
+On rank $k\geq1$, $\cS_n^2$ is closed-neighbourhood expansion in the Johnson
+graph $J(n,k)$.
+\end{lemma}
+
+\begin{proof}
+The one-step images of $A$ are $\bar A\cup\{a\}$ for $a\in A$.  From this
+set, choosing $a$ returns $A$, while choosing $b\in\bar A$ returns
+$(A\setminus\{a\})\cup\{b\}$.  These are exactly $A$ and its Johnson
+neighbours.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:forward}]
+Iterating Lemma~\ref{lem:square} gives the closed Johnson ball
+\eqref{eq:even}.  A rank-$\phi(k)$ set $C$ has one-step predecessors
+$\bar C\cup\{c\}$ for $c\in C$.  Since every rank-$k$ set $A$ meets $C$,
+the minimum Johnson distance from $A$ to these predecessors is
+$|A\cap C|-1$.  Applying one further step to \eqref{eq:even} proves
+\eqref{eq:odd}.  Union preservation proves the arbitrary-family formula.
+
+At time $2s$, a nonempty rank slice fills its layer exactly when
+$s\geq e_k$; at time $2s+1$, its image fills the dual layer exactly when
+$s\geq o_k$.  The map $\phi$ is bijective, so all occupied slices must fill
+at the same parity.  The earlier of these two saturation times, together with
+the one-step loss of the silent atom, proves \eqref{eq:clock}.
+
+A periodic family cannot contain the silent atom.  Lemma~\ref{lem:square}
+also makes every rank slice inflationary under $\cS_n^2$, so periodicity
+forces that square to fix the family.  Each nonempty slice is then invariant
+under closed-neighbourhood expansion in the connected graph $J(n,k)$, hence
+is either empty or the whole layer.  This gives precisely \eqref{eq:UR}.
+Rank support follows the involution $\phi$, proving the recurrent and fixed
+counts, \eqref{eq:fix}, and \eqref{eq:zeta}.  The height statement follows
+from Theorem~\ref{thm:deep}, including its $n=2$ branch.
+\end{proof}
+
+For a singleton rank-$k$ source, the even covering radius is
+$\min(k,n-k)$.  The largest odd defect is
+$\min(k,n-k+1)-1=\min(k-1,n-k)$.  Substitution into
+\eqref{eq:clock} proves \eqref{eq:delta}; separating even and odd depths gives
+\eqref{eq:rank-depth} and its binomial census.
+
+\section{Central equality rigidity and support products}
+
+\begin{proof}[Proof of Theorem~\ref{thm:deep},
+\eqref{eq:iff}--\eqref{eq:deep-total}]
+Suppose $n=2m$.  Every occupied slice has $e_k\leq m$ and $o_k\leq m-1$.
+Tail $2m-1$ therefore requires $e(\cF)=m$ and $o(\cF)=m-1$.  Only rank $m$
+can attain the even equality.  In $J(2m,m)$, the sole point at distance $m$
+from a fixed vertex is its complement.  Thus a rank-$m$ slice has covering
+radius $m$ exactly when it is a singleton, and such a singleton also attains
+the odd bound.
+
+Now suppose $n=2m+1$.  Both radii are at most $m$, and tail $2m$ forces
+$e(\cF)=o(\cF)=m$.  Only rank $m+1$ can attain the odd equality.  Equality
+means that some $(m+1)$-set $C$ satisfies $|A\cap C|-1=m$ for every
+$A\in\cF_{m+1}$, forcing every such $A$ to equal $C$.  Conversely, a
+singleton central slice attains both bounds.  This proves \eqref{eq:iff} in
+both parities.
+
+There are $M_n$ choices for the central atom.  Every one of the other
+$2^n-M_n$ atoms, including the silent atom, is unrestricted.  This proves
+\eqref{eq:deep-total}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:deep},
+\eqref{eq:deep-support}--\eqref{eq:period-two}]
+Fix $R$.  The central slice contributes $M_n$ choices.  Each other occupied
+rank $k$ contributes any nonempty slice, hence $w_k$ choices; an absent rank
+is forced, and the silent atom is optional.  This gives
+\eqref{eq:deep-support}, whose sum over $R$ is
+\eqref{eq:deep-total}.
+
+The eventual period is one precisely when $R=\phi(R)$.  On a $\phi$-orbit
+not containing $k_\star$, invariant support is either absent on the whole
+orbit or occupied at every rank, contributing $1+\prod_{j\in O}w_j$.  The
+orbit containing $k_\star$ is forced occupied and contributes
+$\prod_{j\in O\setminus\{k_\star\}}w_j$.  Including the central choice and
+the optional silent atom proves \eqref{eq:period-one}; subtraction proves
+\eqref{eq:period-two}.  Direct enumeration of the sixteen phase states gives
+the stated $n=2$ exception.
+\end{proof}
+
+\section{Inverse completeness and claim boundary}
+
+The atomic description also yields a complete inverse formula, although its
+proof is ordinary cover inclusion--exclusion and is not used as a residual
+contribution axis.  For $t\geq1$ and a target family $\cG$, define
+\[
+ c_t(\cG)=|\{A\in\cB_n\setminus\{\varnothing\}:\cK_t(A)\subseteq\cG\}|.
+\]
+
+\begin{proposition}[Every-target completeness]\label{prop:inverse}
+For $t\geq1$,
+\begin{equation}\label{eq:inverse}
+ |\cS_n^{-t}(\cG)|=
+ 2\sum_{\cJ\subseteq\cG}(-1)^{|\cJ|}2^{c_t(\cG\setminus\cJ)}.
+\end{equation}
+The target is in the image exactly when
+\begin{equation}\label{eq:image}
+ \cG=\bigcup_{A\neq\varnothing:\ \cK_t(A)\subseteq\cG}\cK_t(A).
+\end{equation}
+For $t\geq n-1$, only recurrent targets occur, and
+\begin{equation}\label{eq:stable-fibre}
+ |\cS_n^{-t}(U_R)|=
+ 2\prod_{k\in\phi^t(R)}\left(2^{\binom nk}-1\right).
+\end{equation}
+In particular, the empty target has two preimages at every positive time.
+\end{proposition}
+
+\begin{proof}
+A source consists of admissible nonempty atoms whose kernels lie in $\cG$
+and whose union covers $\cG$.  Inclusion--exclusion over missed target atoms
+gives the sum in \eqref{eq:inverse}; the optional silent atom supplies the
+factor two.  Taking the union of all admissible kernels gives
+\eqref{eq:image}.  After time $n-1$, every occupied rank slice has saturated,
+so each required source rank may be any nonempty slice.  The source support
+is $\phi^t(R)$, which proves \eqref{eq:stable-fibre}.
+\end{proof}
+
+The owner subtraction is substantial.  Shadow extremality and Johnson
+dilation receive zero contribution credit
+\citep{kruskal1963,katona2009,diego2018}.  Representing a union-preserving
+powerset map by a Boolean relation, and using relation powers to describe its
+eventual behaviour, are also established frameworks
+\citep{rosenblatt1957,gregory1993,akin2024}.  Formula \eqref{eq:inverse} is
+standard cover inclusion--exclusion.  The assessed residual is only the
+integrated parity clock, atomic depth census, and central-slice deepest-shell
+classification with its support and period products.  The bounded source
+audit does not establish originality, precedence, or publication safety.
+
+The internal comparison makes the same subtraction.  P97 removes generic
+union-driven subset growth; P110 and P115 already contain deepest-shell
+formats on different carriers; P143 removes generic Boolean-relation and
+eventual-period language.  None of those arguments transfers the simultaneous
+even/odd radius optimization or central-slice equality condition used in
+\eqref{eq:iff}.
+
+\section{Exact controls, limitations, and declarations}
+
+A paper-local standard-library verifier constructs \eqref{eq:map} literally
+and compares it with both atomic kernel formulas through $n=9$.  It exhausts
+all phase states and all audited targets through $n=4$, including mixed-rank
+clocks, union iterates, recurrent and fixed states, image criteria, inverse
+fibres, deepest support counts, and the $n=2$ split.  Central singleton and
+pair controls extend through $n=12$.  The run executes $1{,}430{,}898$
+integer assertions.  Two fresh replays were byte-identical; the canonical
+transcript has SHA-256 (the following two lines concatenate):
+\begin{center}
+\small\texttt{21d2dc8e66580e7b78ef9c4bd2bda3ea}\\[-2pt]
+\small\texttt{a393757ee466497a62defb0f15700434}.
+\end{center}
+Enumeration supplies counterexample pressure only.  The all-parameter claims
+rest on the preceding proofs.
+
+\section*{Limitations}
+The theorem is restricted to complementation after the ordinary lower shadow
+on labelled subsets of a fixed $[n]$.  It does not cover weighted families,
+biased deletion, other rank-selected shadows, quotienting by relabelling, or
+perturbations of the Boolean union rule.  The phase-space shell is counted by
+labelled states.  The source audit was bounded, so a direct conjunction owner
+under different terminology would require the claim boundary to be reopened.
+
+\section*{Data Availability}
+No external data were used.  The deterministic verifier and frozen transcript
+provide the complete paper-local exact control.
+
+\section*{Ethics Statement}
+This mathematical study involved no human participants, animals, personal
+data, or field intervention.
+
+\section*{Author Contributions}
+The anonymous author performed the derivation, proof, exact checks,
+source-boundary audit, and manuscript preparation.
+
+\section*{Conflict of Interest}
+The author declares no conflict of interest.
+
+\section*{Funding}
+No external funding is declared.
+
+\section*{External Status}
+This anonymous internal artifact remains \texttt{HOLD\_EXTERNAL}.  It is not
+cleared for posting, submission, circulation, or author contact.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,66 @@
+\section{Falsification controls and scope}
+\label{sec:controls}
+
+The preceding results are deductive.  We nevertheless used two finite
+controls to expose indexing, boundary, and divisor mistakes during theorem
+development.  Their frozen scope and minimum margins appear in
+\cref{tab:controls}; the scripts are distributed with the internal artifact
+as \texttt{code/verify\_reflection\_rate.py} and
+\texttt{code/verify\_least\_period.py}.
+
+\input{figures/control_table}
+
+The reflection control exhausts nonempty symmetric $0$--$1$ adjacency
+matrices of orders two through four and checks the one-dimensional integer
+specialization
+\[
+ P_{2n-2}q^6\ge C_n^2,
+ \qquad P_{2n-2}\le C_{2n-2},
+\]
+for the recorded sizes.  The exponent $6$ is $2b_1(n)$, since $b_1(n)=3$.
+The least-period control computes $F_n=\tr(A^n)$ and exact M\"obius counts as
+integers for all primitive positive-entropy binary matrices through order
+four.  Eigenvalues enter only the floating-point regression comparison with
+\cref{eq:least-bound}; the theorem does not depend on that numerical step.
+
+These controls have three deliberately limited roles.  They can falsify a
+proposed universal inequality on the exhausted family, detect off-by-one
+errors in the period cell, and preserve a regression target for later edits.
+They cannot establish a universal theorem, certify novelty, or validate an
+unexamined floating-point implementation.
+
+\begin{example}[Range-two reflection firewall]
+\label{ex:range-two}
+Consider the one-dimensional reflection-invariant range-two rule
+\begin{equation}
+ x_i\ne x_{i+2} \qquad(i\in\ZZ).
+ \label{eq:range-two-rule}
+\end{equation}
+Reflecting a block across the site $n$ makes the positions $n-1$ and $n+1$
+read the same source position $n-1$.  The reflected pattern therefore has
+$x_{n-1}=x_{n+1}$ and violates \cref{eq:range-two-rule}.  Merely sharing a
+thicker boundary word does not repair this self-copying obstruction.  Thus
+\cref{thm:fixed-period} is a nearest-neighbour result; it must not be quoted
+as a general finite-range theorem.
+\end{example}
+
+\paragraph{Further limitations.}
+The error constants in \cref{eq:entropy-sandwich} depend on the dimension,
+and no dimension-uniform rate is claimed.  The shell construction supplies a
+lower bound rather than an exact formula for $P_{2n-2}$.  In the edge-shift
+setting, the spectral certificate is restricted to primitive matrices with
+$\lambda>1$ and may fail to detect small realized periods.  The algorithm in
+\cref{thm:least-period} is effective from algebraic spectral data but is not
+optimized for numerical conditioning or for the smallest conductor.
+
+\paragraph{Relation to existing mechanisms.}
+Bui's reflected periodic extension and explicit entropy estimates
+\cite{Bui2026} are the source engine for \cref{sec:reflection}; the residual
+step here is the thickness-two common-fibre count with a recoverability
+argument and its specified-period normalization.  In
+\cref{sec:least-period}, the trace identity, Perron--Frobenius theory, and
+M\"obius inversion are standard \cite{LindMarcus2021}.  The residual is the
+closed certificate \cref{eq:least-bound} and the rational tail procedure.
+No statement in this section upgrades this ownership accounting into a
+priority claim.
+

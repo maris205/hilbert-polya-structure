@@ -1,0 +1,197 @@
+\section{Seven Scoped Obstructions}
+\label{sec:obstructions}
+
+The following statements are stop rules for specific classes, not universal
+claims about symbolic dynamics.  Full proofs and edge cases appear in
+\cref{app:proofs}.
+
+\begin{table}[t]
+\centering
+\caption{The seven obstruction claims and their escape boundaries. Each row
+is conditional on the named class; none is a universal statement about
+symbolic dynamics.}
+\label{tab:obstructions}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}p{0.22\textwidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.25\textwidth}@{}}
+\toprule
+ID & Frozen class & Exact conclusion & Not covered \\
+\midrule
+SD-O01 & finite graph, positive finite-range roofs, finite-range weights, fixed finite-dimensional cocycle & determinant divisor has disk count \(O(R)\) & countable state, infinite memory, or infinite dimension \\
+SD-O02 & squarefree admissible two-sided shift & only \(0^{\Z}\) is periodic & other \(\mathscr B\)-free observables or systems \\
+SD-O03 & freely concatenable shared-base returns & mixed primitive necklaces occur & grammars without shared-base free concatenation \\
+SD-O04 & unrestricted complex renewal coefficients & every normalized holomorphic germ is locally representable & independently derived restricted weights \\
+SD-O05 & unary regular/context-free return language & accepted lengths cannot be exactly the primes & binary or stronger computational grammars \\
+SD-O06 & fixed finite-dimensional unitary twist & one mixed primitive factor cannot vanish identically & infinite-dimensional or differently sourced cancellations \\
+SD-O07 & strict wheel level shift & endogenous prime recursion is acyclic & a separately source-locked factor or recoding \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Finite memory has the wrong divisor scale}
+
+Let \(G=(V,E)\) be a finite directed multigraph.  Finite-range symbolic data
+can first be recoded on a finite higher-block graph, so assume the data are
+edge-local.  Assign each edge a positive roof \(\tau_e\), a complex weight
+\(w_e\), and a fixed matrix \(A_e\in\operatorname{Mat}_d(\C)\).  The block
+transfer matrix is
+\[
+  M(s)_{uv}=\sum_{e:u\to v} w_e e^{-s\tau_e}A_e,
+  \qquad D(s)=\det(I-M(s)).
+\]
+
+\begin{theorem}[Finite-memory divisor obstruction; \obstruction{01}]
+\label{thm:finite-memory}
+If \(D\not\equiv0\), then \(D\) is a finite exponential polynomial and the
+number \(n_D(R)\) of its zeros in \(\lvert s\rvert\le R\), counted with
+multiplicity, satisfies
+\[
+  n_D(R)=O(R).
+\]
+For any finite product or meromorphic quotient of nonzero determinants of this
+form, the zero-plus-pole divisor total variation in the disk is \(O(R)\).
+Consequently it cannot have the completed Riemann divisor up to multiplication
+by a zero-free entire factor.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Every entry of \(M(s)\) is a finite sum of exponentials.  Expanding the finite
+determinant gives
+\[
+  D(s)=\sum_{j=0}^{K}a_j e^{-\lambda_j s},
+\]
+where the identity term permits \(\lambda_0=0\).  Thus
+\(\lvert D(s)\rvert\le C e^{\Lambda\lvert s\rvert}\).  Jensen's formula,
+centered at any \(s_0\) with \(D(s_0)\ne0\), gives a linear disk-zero bound.
+For a quotient, the zero-plus-pole count is bounded by the sum of the zero
+counts of its nonzero numerator and denominator factors.  Finite products and
+quotients therefore retain \(O(R)\) total variation.  By contrast,
+Riemann--von Mangoldt gives
+\[
+  N(T)=\frac{T}{2\pi}\log\frac{T}{2\pi}
+       -\frac{T}{2\pi}+O(\log T),
+\]
+so the nontrivial Riemann zeros alone contribute
+\(\Theta(R\log R)\) zeros in a comparable disk \citep{dlmf2510}.  A zero-free
+factor changes no divisor.
+\end{proof}
+
+Unitarity is not needed for this bound; only the fixed finite matrix dimension
+is used.  The hypotheses are the content of the theorem.  A finite alphabet with an
+infinite-memory H\"older potential or an infinite-dimensional transfer
+operator is not covered \citep{pollicott1986meromorphic}.
+
+\subsection{Arithmetic language need not yield arithmetic cycles}
+
+\begin{proposition}[Squarefree periodic collapse; \obstruction{02}]
+\label{prop:squarefree}
+Let \(X_{\mathrm{sf}}\subset\{0,1\}^{\Z}\) consist of sequences whose support
+misses at least one residue class modulo \(p^2\) for every rational prime
+\(p\).  The only periodic point is \(0^{\Z}\).  Hence
+\[
+  \#\Fix(\sigma^n)=1,\qquad
+  \zeta_{\mathrm{AM}}(z)=\frac{1}{1-z}.
+\]
+\end{proposition}
+
+\begin{proof}
+If a period-\(n\) point has an occupied position \(a\), its support contains
+\(a+n\Z\).  Choose a prime \(p\nmid n\).  Multiplication by \(n\) is invertible
+modulo \(p^2\), so \(a+n\Z\) meets every residue class modulo \(p^2\), contrary
+to admissibility.
+\end{proof}
+
+Finite families of prime-square exclusions may retain many cycles.  They do
+not approximate the periodic ledger monotonically in a way that could replace
+the proposition.
+
+\subsection{Unconstrained renewal determinants are non-identifying}
+
+For a shared-base renewal code, let
+\[
+  F(z)=\sum_{n\ge1}a_nz^n,\qquad D_{\mathrm{ren}}(z)=1-F(z).
+\]
+
+\begin{proposition}[Renewal inverse design; \obstruction{04}]
+\label{prop:inverse-design}
+For every germ \(H(z)=1+\sum_{n\ge1}h_nz^n\) holomorphic near zero, choosing
+\(a_n=-h_n\) gives \(D_{\mathrm{ren}}=H\) throughout their common disk of
+convergence.
+\end{proposition}
+
+The proof is coefficient matching.  Its simplicity is the diagnostic: a
+determinant match carries no arithmetic information until the return weights
+are derived independently.  The statement is local to the convergence disk
+and does not grant continuation.
+
+\begin{proposition}[Mixed words and finite twists;
+\obstruction{03} and \obstruction{06}]
+\label{prop:mixed}
+If two distinct return atoms \(a,b\) freely concatenate through one base, the
+renewal zeta contains the mixed primitive necklace represented by \(ab\).
+Moreover, a finite-dimensional unitary cocycle cannot erase its individual
+factor identically.
+\end{proposition}
+
+\begin{proof}
+With formal atom weights \(x_a,x_b\),
+\[
+  Z_{\mathrm{ren}}=\frac{1}{1-x_a-x_b}
+  \quad\text{whereas}\quad
+  Z_{\mathrm{ind}}=\frac{1}{(1-x_a)(1-x_b)}.
+\]
+The coefficient of \(x_ax_b\) is two in the first based-word expansion and one
+in the second; cyclically, the discrepancy is the primitive necklace \(ab\).
+If the cocycle products are \(U_a,U_b\in U(d)\), its factor contains
+\(\det(I-tU_aU_b)\), \(t=x_ax_b\).  This degree-\(d\) polynomial has nonzero
+leading coefficient \((-1)^d\det(U_aU_b)\), so it is not identically one.
+\end{proof}
+
+\subsection{A unary low-complexity grammar cannot select the primes}
+
+\begin{proposition}[Unary length obstruction; \obstruction{05}]
+\label{prop:unary}
+No unary regular or context-free language has the rational primes as its exact
+set of accepted lengths.
+\end{proposition}
+
+\begin{proof}
+The length set is ultimately periodic by the unary specialization of Parikh's
+theorem \citep{esparza2011parikh}.  If the primes had eventual period \(m\),
+choose a sufficiently large prime \(q\).  Then \(q(1+m)\equiv q\pmod m\)
+would also be classified as prime, although it is composite.
+\end{proof}
+
+The proposition does not cover binary encodings, context-sensitive languages,
+or general computation shifts.
+
+\subsection{The endogenous wheel clock lives on a DAG}
+
+Set \(Q_0=1\), \(q_1=2\), and \(Q_1=q_1\).  Given \(Q_k\), take
+\(q_{k+1}\) to be the least integer
+larger than \(q_k\) and coprime to \(Q_k\), set
+\(Q_{k+1}=q_{k+1}Q_k\), and retain the unit residue branches modulo
+\(Q_{k+1}\).
+
+\begin{proposition}[Wheel prime induction and acyclicity; \obstruction{07}]
+\label{prop:wheel}
+The recursion gives \(q_k=p_k\), the \(k\)-th rational prime, and
+\[
+  \log\frac{Q_{k+1}}{Q_k}=\log p_{k+1}.
+\]
+The frozen path shift whose every edge raises the level by one has no
+positive-period point.  Its formal Artin--Mazur series and inverse determinant
+are both \(1\).
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Assume \(Q_k=\prod_{j\le k}p_j\).  The next prime is an admissible coprime
+successor.  A composite minimizer would have either a prime divisor already in
+\(Q_k\), contradicting coprimality, or a smaller new prime divisor,
+contradicting minimality.  Thus the minimizer is \(p_{k+1}\).  For the
+dynamical claim, a path beginning at level \(k\) begins at level \(k+n\) after
+\(n>0\) shifts, so it cannot equal the original path.
+\end{proof}
+
+Reset edges would create cycles but would define a new object.  The proposition
+also leaves open a separately source-locked factor or observational recoding;
+it rules out only the frozen strict level shift.

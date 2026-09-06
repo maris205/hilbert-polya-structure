@@ -1,0 +1,144 @@
+\section{Exact audit, controls, and route decision}
+\label{sec:audit}
+
+The proofs determine the decision.  Computation checks that the frozen
+enumerator, cyclic convention, temporal powers, and symmetry actions
+implement those proofs without a hidden presentation choice.  Every
+calculation uses integers or exact rational arithmetic; no Riemann-zero data,
+root search, fitted phase, or fitted pairing is present.
+
+\subsection{Primitive and power certificates}
+
+The primitive ledger contains seven exact rows across contents $pq$ and
+$p^2q^2$.  It recovers the two primitives in (4.2), the three target-degree
+primitives in (4.3), and the two imprimitive words assigned to their correct
+lower-content primitive roots.  The machine-readable certificate records
+\[
+  N_+(p^2q^2)=1,\qquad N_-(p^2q^2)=2,
+  \qquad c_{\rm prim}=-1,
+  \tag{7.1}
+\]
+and
+\[
+  c_{r=2}(pq)=\frac12+\frac12=1,
+  \qquad c_{\rm total}(p^2q^2)=0.
+  \tag{7.2}
+\]
+These are exact coefficient statements, not floating residuals.
+
+\subsection{Equivariant and general squarefree checks}
+
+The $S_3$ certificate independently constructs the action on (5.1)--(5.2).
+It returns orbit sizes $1+2$ and $3$, fixed-character difference $(0,0,3)$,
+and irreducible multiplicities $(1,1,-1)$ for
+$(\one,\sgnrep,\stdrep)$.  A frozen lexicographic pairing commutes with only
+two of the six atom permutations; each of the other four permutations has
+three failed images.
+
+The general audit checks (4.6) through $k=12$.  All eleven mixed rows
+$2\le k\le12$ vanish exactly.  An independent explicit enumeration of cyclic
+set partitions checks all 27 block-count rows through $k=7$.  The total
+numbers of cyclic set partitions are shown in \Cref{tab:cyclic-counts}.
+
+\begin{table}[t]
+\centering
+\caption{Exact cyclic set-partition counts.  Each block-count component
+equals $(m-1)!S(k,m)$; the table reports totals over $m$.}
+\label{tab:cyclic-counts}
+\begin{tabular}{rrrrrrr}
+\toprule
+$k$ & 2 & 3 & 4 & 5 & 6 & 7\\
+\midrule
+total & 2 & 6 & 26 & 150 & 1,082 & 9,366\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The scalar zeros at all tested orders confirm the determinant.  The nonzero
+$S_3$ character confirms that a scalar zero is weaker than a natural
+orbitwise cancellation.
+
+\subsection{Scalar/supertrace firewall}
+
+For repetition orders $1\le r\le8$, the audit compares (6.5) and (6.6).
+All four even repetitions disagree; at $r=2$ the coefficients are $+1$ and
+$-1$.  After the trace-log factor, a non-power-compatible pairing leaks
+exactly one unit.
+
+The true contractible control uses basis order even, odd and matrices
+\[
+  d=\begin{pmatrix}0&1\\0&0\end{pmatrix},
+  \qquad
+  h=\begin{pmatrix}0&0\\1&0\end{pmatrix}.
+  \tag{7.3}
+\]
+Exact multiplication verifies $dh+hd=I$.  With $T=wI$, $dT=Td$ and every
+supertrace through $r=8$ is zero.  The block contains no mixed length-two
+primitive, whereas the scalar alphabet $\{+w,-w\}$ contains
+$[+w][-w]$.  This control catches precisely the forbidden substitution of a
+chain contraction for a scalar signed alphabet.
+
+\subsection{Universality and proves-too-much control}
+
+The arbitrary-variable theorem is itself the strongest adversarial control.
+The experiment instantiates it with $16$ frozen rational seeds for each
+$2\le k\le8$, giving 112 exact controls.  Every row satisfies
+\[
+  1-\sum_{S\ne\varnothing}(-1)^{|S|+1}x_S
+  =\prod_{i=1}^k(1-x_i)
+  \tag{7.4}
+\]
+and remains invariant under presentation shuffles.
+
+Passing all 112 controls is negative arithmetic evidence.  Equation (7.4)
+holds for random, composite-labelled, and synthetic inventories just as it
+does for tensor atoms.  The mechanism therefore receives
+\[
+  \texttt{STOP\_ARITHMETIC\_SELECTIVITY / PROVES\_TOO\_MUCH}.
+  \tag{7.5}
+\]
+The arithmetic information in (3.8) lies in the tensor-atom inventory and its
+entropy specialization, not in the universal subset cancellation.
+
+\subsection{Verification status}
+
+All 10 unit tests and all 11 code/result checksum checks pass.  CSV files use
+LF line endings.  The executable summary, exact certificates, and checksums
+are stored under \texttt{results/}; the source and tests are stored under
+\texttt{code/}.  These checks certify the finite implementation, while
+\Cref{thm:formal-determinant,thm:p2q2,thm:s3,thm:no-lift} carry the theorem
+claims.
+
+\subsection{Route-A evaluation}
+
+\begin{table}[h]
+\centering
+\caption{Strict Route-A decision for SD-C17.}
+\label{tab:route}
+\begin{tabularx}{\textwidth}{L{0.16\textwidth}L{0.27\textwidth}X}
+\toprule
+Gate & Verdict & Reason\\
+\midrule
+A0 & \begin{tabular}[t]{@{}l@{}}\ttfamily A0\_ANALYTIC\\
+ARITHMETIC\_ORIGIN\end{tabular} &
+Tensor-indecomposable full shifts give the atom inventory and entropy gives
+the roof without target data.\\
+A1 & \texttt{A1\_FAIL} &
+Primitive objects are subset necklaces; power-compatible and equivariant
+atom reduction is impossible by \Cref{thm:p2q2,thm:s3}.\\
+A2 & \begin{tabular}[t]{@{}l@{}}\ttfamily A2\_ANALYTIC\\
+DETERMINANT\end{tabular} &
+The declared one-dimensional Fredholm determinant is exact, and the
+countable edge sum is absolutely convergent for $\Ree s>1$.\\
+A3 & \texttt{A3\_FAIL} &
+There is no new continuation, completed functional equation, Gamma factor,
+global divisor theorem, counting law, or intrinsic Weil compression.\\
+A4 & \texttt{A4\_FAIL} &
+No natural unitary, scattering, Hamiltonian, or self-adjoint lift is defined.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Overall, SD-C17 is rejected on Route A.  A2 cannot compensate for A1, and the
+proves-too-much control prevents promotion.  Route B is false for the present
+candidate and remains locked.

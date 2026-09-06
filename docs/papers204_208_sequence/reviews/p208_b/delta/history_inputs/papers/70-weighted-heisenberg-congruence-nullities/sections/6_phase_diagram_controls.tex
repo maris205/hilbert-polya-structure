@@ -1,0 +1,108 @@
+\section{Coefficient phase diagram and finite controls}
+
+Multiplying $(\alpha,\beta,\gamma)$ by a nonzero scalar multiplies the finite
+operator by that scalar and does not change its kernel.  The family therefore
+lives naturally in the projective coefficient plane.
+
+\begin{corollary}[Projective phase diagram]\label{cor:phase-diagram}
+On $\mathbb P^2(\Fp)$ away from the coordinate axes, the nonlinear part of
+the fixed dimension is zero off the Fermat curve
+\[
+ \alpha^\ell+\beta^\ell+\gamma^\ell=0
+\]
+and equals $\ell(\ell-1)$ on that curve.  The remaining variation is the
+bounded term $\Dcycl\le\ell$.
+\end{corollary}
+
+\begin{proof}
+The Fermat equation is homogeneous, and scaling both polynomials in
+\eqref{eq:D-definition} by a nonzero $\ell$th power does not change their
+common roots.  The claim now follows from \cref{thm:main}.
+\end{proof}
+
+\begin{center}
+\fbox{\begin{minipage}{0.92\linewidth}
+\textbf{Bounded coding/spectral transfer.}
+On the quotient $\Ql$, the kernel of $T_{\alpha,\beta,\gamma}$ is a linear
+code of length
+\[
+ n_{\rm code}=|\Ql|=\ell^3
+\]
+and dimension
+\[
+ k_{\rm code}=\Dcycl(\alpha,\beta,\gamma)
+ +\ell(\ell-1)\one_{\{\Delta_\ell=0\}}.
+\]
+Thus the theorem determines the rate-like normalized dimension
+$k_{\rm code}/\ell^3$.  Spectrally, the same number is the geometric
+multiplicity of the zero eigenvalue of the displayed finite convolution
+matrix.  The argument does \emph{not} determine the code's minimum distance,
+weight enumerator, or decoding performance, nor the nonzero eigenvalues,
+their algebraic multiplicities, or a spectral gap.
+\end{minipage}}
+\end{center}
+
+\begin{corollary}[The unit-coefficient shift]\label{cor:unit}
+For the rule $x_g+x_{ga}+x_{gb}=0$,
+\[
+ \dim_{\Fp}\Fix_{N_\ell}X_{p;1,1,1}
+ =\deg\gcd_{\Fp[t]}(t^\ell-1,(-1-t)^\ell-1)
+  +\ell(\ell-1)\one_{\{p=3\}}.
+\]
+\end{corollary}
+
+\begin{proof}
+For odd $\ell$,
+$(-1-t)^\ell-1=-((1+t)^\ell+1)$, so the two gcd expressions agree up to a
+unit.  The nonlinear determinant is $1+1+1=3$, which vanishes in a prime
+field exactly in characteristic three.
+\end{proof}
+
+We checked the formula by constructing the full matrix of
+\eqref{eq:finite-operator} in the coordinate model \eqref{eq:heis-product}.
+Gaussian elimination was performed over the indicated prime field.  A
+selection of the frozen results appears in \cref{tab:controls}; the complete
+receipt and code accompany the paper.  The control also constructs four
+clock--shift blocks directly over fields containing the required roots of
+unity: two singular and two nonsingular cases verify both
+\cref{lem:clock-shift-det} and the zero/one nullity dichotomy in
+\cref{lem:nonlinear-nullity}.
+
+\begin{table}[t]
+\centering
+\caption{Independent full-matrix controls.  In every row the observed
+nullity equals \eqref{eq:main-formula}.}
+\label{tab:controls}
+\begin{tabular}{ccclc}
+\toprule
+$\ell$ & $p$ & $(\alpha,\beta,\gamma)$ & Fermat stratum & Nullity \\
+\midrule
+3 & 2  & $(1,1,1)$ & nonsingular & 2 \\
+3 & 5  & $(1,1,2)$ & singular & 6 \\
+3 & 5  & $(1,2,3)$ & nonsingular & 0 \\
+3 & 7  & $(2,3,4)$ & nonsingular & 1 \\
+5 & 3  & $(1,1,1)$ & singular & 21 \\
+5 & 11 & $(1,1,1)$ & nonsingular & 3 \\
+5 & 11 & $(2,3,5)$ & nonsingular & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The full quotient matrices verify the implementation of the displayed group
+law, the selected finite operator, and the final nullity formula on the sample
+tuples.  They can expose many transcription or implementation mistakes,
+including an omitted regular multiplicity.  Nullity comparison alone does not
+distinguish the selected right-translation convention from the dual left
+convention, because \cref{rem:left-right} shows that the total nullity is
+invariant under that change.  All computations remain finite regression
+evidence and are not used to infer the all-prime theorem.
+
+An additional non-split fixture takes $(\ell,p)=(3,2)$, so the nontrivial
+cube roots lie in $\mathbb F_4$ rather than $\mathbb F_2$.  Writing them as
+$a$ and $1+a$ with $a^2+a+1=0$, exact enumeration of $1+u+v=0$ gives
+precisely $(u,v)=(a,1+a),(1+a,a)$.  The count two agrees with
+\[
+ \deg\gcd_{\mathbb F_2[t]}(t^3-1,(1+t)^3+1)=2.
+\]
+This independently checks that the ground-field gcd degree counts geometric
+character solutions even when the roots do not split over the prime field.

@@ -1,0 +1,113 @@
+\section{The mixing zero-entropy boundary}
+\label{sec:zero}
+
+The positive-entropy proof uses $Nr^N\to0$ and therefore stops when $r=1$.
+We now derive the boundary law independently.
+
+\begin{lemma}[Essential zero-entropy reduction]
+\label{lem:zero-reduction}
+Every mixing zero-entropy SFT is conjugate to the singleton fixed orbit.  Its
+essential primitive graph presentation is the one-loop graph with adjacency
+matrix $[1]$.
+\end{lemma}
+
+\begin{proof}
+Let $A$ be an essential irreducible nonnegative integral adjacency matrix
+with $\rho(A)=1$, and choose a positive Perron vector $x$.  Pick a vertex
+$i$ for which $x_i=m:=\min_jx_j$.  Since $Ax=x$,
+\[
+ m=x_i=\sum_j a_{ij}x_j\ge m\sum_j a_{ij}.
+\]
+Essentiality gives at least one outgoing edge, so row $i$ has exactly one
+edge, of multiplicity one, and its terminal vertex also has Perron coordinate
+$m$.  Repeating the argument at that vertex produces a deterministic path
+all of whose vertices have coordinate $m$.  Finiteness makes it enter a
+directed cycle.  If that cycle omitted a vertex, no vertex on the cycle could
+reach the omitted vertex, contradicting irreducibility.  Hence the cycle
+contains every vertex and the graph is a directed cycle.  Mixing forces its
+period, and thus its length, to be one.  Before applying the construction to
+a nonessential presentation, remove vertices and edges that belong to no
+bi-infinite path; this does not change the presented edge shift.
+\end{proof}
+
+For $A=[1]$, the old first-return series is $F(z)=z$.  Duplicating the
+length-$N$ return walk gives
+\[
+ r_N+r_N^N=1.
+\]
+Set $h_N=-\log r_N$.
+
+\begin{theorem}[Lambert boundary law]
+\label{thm:zero}
+The number $h_N>0$ is the unique solution of
+\begin{equation}
+ \ee^{-h_N}+\ee^{-Nh_N}=1.
+ \label{eq:zero}
+\end{equation}
+Moreover, as $N\to\infty$, if $w_N=W(N)$ is the principal Lambert function,
+then
+\begin{equation}
+ h_N=\frac{w_N}{N}
+ +\frac{w_N^2}{2N^2(w_N+1)}
+ +O\left(\frac{w_N^2}{N^3}\right).
+ \label{eq:lambert}
+\end{equation}
+In particular, $h_N\sim W(N)/N$.
+\end{theorem}
+
+\begin{proof}
+The radius equation gives \cref{eq:zero}.  Its left-hand side minus one is
+strictly decreasing from one to minus one, proving existence and uniqueness.
+For every fixed $\varepsilon>0$, its value at $\varepsilon$ is eventually
+negative, so $h_N\to0$.
+
+Put $u_N=Nh_N$ and
+\[
+ q(t)=\frac{1-\ee^{-t}}{t}.
+\]
+\Cref{eq:zero} is equivalent to
+\begin{equation}
+ \frac{u_N\ee^{u_N}}{N}q(u_N/N)=1.
+ \label{eq:u-equation}
+\end{equation}
+For small positive $t$, $1/2<q(t)\le1$.  Hence, for all sufficiently large
+$N$,
+\[
+ N\le u_N\ee^{u_N}\le2N.
+\]
+Since $w_N\ee^{w_N}=N$, monotonicity yields
+\[
+ w_N\le u_N\le W(2N)=O(\log N),
+\]
+and therefore $u_N/N\to0$.
+
+Let $g(u)=u+\log u$.  Taking logarithms in
+\cref{eq:u-equation} and expanding $q$ at zero gives
+\begin{align}
+ g(u_N)-g(w_N)
+ &=-\log q(u_N/N)\notag\\
+ &=\frac{u_N}{2N}-\frac{u_N^2}{24N^2}
+ +O\left(\frac{u_N^3}{N^3}\right).
+ \label{eq:q-expand}
+\end{align}
+Because $g'(u)=1+1/u$, \cref{eq:q-expand} first implies
+$u_N-w_N=O(w_N/N)$.  Substituting this estimate back into
+\cref{eq:q-expand} and Taylor expanding $g$ at $w_N$ gives
+\[
+ (u_N-w_N)\left(1+\frac1{w_N}\right)
+ =\frac{w_N}{2N}+O\left(\frac{w_N^2}{N^2}\right).
+\]
+Consequently,
+\[
+ u_N=w_N+\frac{w_N^2}{2N(w_N+1)}
+ +O\left(\frac{w_N^2}{N^2}\right).
+\]
+Division by $N$ proves \cref{eq:lambert}.
+\end{proof}
+
+\begin{remark}[The regime firewall]
+Formally inserting $r=1$ into \cref{eq:positive-law} would predict a
+nondecaying main term.  The correct gap instead tends to zero at the
+subexponential scale $W(N)/N$.  The two formulas are separate theorems with
+different proof engines.
+\end{remark}

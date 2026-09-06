@@ -1,0 +1,119 @@
+\section{Clock dilution and first-return ownership}
+\label{sec:clock-return}
+
+The same exact source clock that gives the desired return weight forces a
+large-edge obstruction.  The conclusion does not depend on uniform roofs.
+
+\begin{theorem}[Whole recurrent operator is noncompact]
+\label{thm:noncompact}
+Suppose $\tau(e)\geq0$ on every edge and
+$\sum_{e\in\Gamma_p}\tau(e)=\log p$.  For every $s$ with
+$\sigma=\Ree s>0$, the primary recurrent adjacency $\Ls$ on
+$\ell^2(\Vrec(\GW))$ is noncompact.  Consequently
+$\Ls\notin\Schatten_q$ for every finite $q\geq1$, and it owns no ordinary
+trace-class Fredholm determinant.
+\end{theorem}
+
+\begin{proof}
+Choose on each $\Gamma_p$ an edge $e_p$ of minimum roof.  Since the block has
+$p-1$ edges,
+\[
+  \tau(e_p)\leq\frac{\log p}{p-1},\qquad
+  |e^{-s\tau(e_p)}|
+  \geq p^{-\sigma/(p-1)}\longrightarrow1.
+\]
+Let $\delta_p$ be the basis vector at the source of $e_p$.  The vectors
+$\delta_p$ are orthonormal, hence weakly null, and their images lie in
+mutually orthogonal prime blocks with norms that do not tend to zero.  A
+compact operator must send a weakly null bounded sequence to a norm-null
+sequence.  This contradiction proves noncompactness.  Every finite
+Schatten-class operator is compact.
+\end{proof}
+
+The argument gives the exact design condition for the entire class of
+vertex-disjoint cyclic successors.
+
+\begin{corollary}[Disjoint-cycle length criterion]
+\label{cor:length-criterion}
+Consider finite directed cycles of lengths $\ell_n$ with nonnegative edge
+roofs totaling $T_n$.  For fixed $\sigma>0$, there exists an allocation for
+which the direct-sum weighted successor is compact if and only if
+\[
+  \frac{T_n}{\ell_n}\longrightarrow\infty.
+\]
+Thus a prime-indexed disjoint successor with $T_p=\log p$ requires
+$\ell(p)=o(\log p)$; an $O(\log p)$ bound is insufficient.
+\end{corollary}
+
+\begin{proof}
+For necessity, compactness forces the largest edge modulus in the $n$th block
+to tend to zero.  This modulus is determined by a minimum-roof edge, so its
+roof tends to infinity; the average roof $T_n/\ell_n$ is at least that
+minimum and also tends to infinity.  Conversely, allocate the roof uniformly.
+Every block norm is then $e^{-\sigma T_n/\ell_n}\to0$.  A direct sum of
+finite-dimensional operators whose norms tend to zero is compact.
+\end{proof}
+
+Uniform roofs make the spectral accumulation explicit.
+
+\begin{corollary}[Unit-circle essential approximate spectrum]
+\label{cor:essential-circle}
+For the uniform Wilson allocation and every $s$ with $\Ree s>0$, every point
+of the unit circle admits an orthonormal approximate-eigenvector sequence for
+$\Ls$.  In particular, the unit circle lies in the essential approximate
+point spectrum.
+\end{corollary}
+
+\begin{proof}
+The eigenvalues in the $p$-block are
+\[
+  \lambda_{p,j}=p^{-s/(p-1)}
+  \exp\!\left(\frac{2\pi i j}{p-1}\right),
+  \qquad0\leq j<p-1.
+\]
+Their radii tend to one, their additional phase from $\Im s$ tends to zero,
+and their angular mesh tends to zero.  Given $|\lambda|=1$, choose eigenvalues
+from distinct prime blocks converging to $\lambda$.  The corresponding
+normalized block eigenvectors are orthogonal and satisfy
+$\|(\Ls-\lambda)u_p\|\to0$.
+\end{proof}
+
+This circle is a noncompactness witness, not a Hilbert--P\'olya spectrum.  It
+has no asserted relation to the nontrivial zeros of $\zeta$.
+
+\subsection{First return: an honest determinant of another clock}
+
+Choose one base vertex $b_p$ on each prime cycle and induce to the base set.
+The first-return operator acts on $\ell^2(\{b_p\})$.
+
+\begin{theorem}[Return determinant and marker change]
+\label{thm:first-return}
+The induced operator is diagonal,
+\[
+  \Rs b_p=p^{-s}b_p.
+\]
+It is trace class exactly when $\Ree s>1$, and in that half-plane
+\[
+  \det(I-z\Rs)=\prod_p(1-zp^{-s}).
+\]
+The raw and induced factors are respectively
+$1-z^{p-1}p^{-s}$ and $1-zp^{-s}$.  Hence the induced determinant does not
+preserve the free graph-step marker.
+\end{theorem}
+
+\begin{proof}
+One first return multiplies every edge weight around $\Gamma_p$, giving
+$e^{-s\log p}=p^{-s}$.  Its trace norm is $\sum_p p^{-\sigma}$, finite
+exactly for $\sigma>1$.  The standard diagonal Fredholm product follows in
+that region.  A return traverses $p-1$ original edges but is one induced step,
+which proves the marker statement.
+\end{proof}
+
+\input{figures/wilson_cycle_marker}
+
+At $z=1$ the products agree in the Euler half-plane.  That equality forgets
+the coordinate which distinguishes the two time evolutions.  State expansion
+and return-time changes are familiar in symbolic dynamics
+\citep{ParrySullivan1975}; here the free marker turns the distinction into an
+exact finite certificate, while trace-class theory fixes which object owns
+the ordinary determinant \citep{Simon1977}.

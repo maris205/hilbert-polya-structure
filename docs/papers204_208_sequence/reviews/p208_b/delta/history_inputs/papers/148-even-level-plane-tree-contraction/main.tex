@@ -1,0 +1,352 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=28mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,microtype,xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PT}{\mathcal{PT}}
+\newcommand{\one}{\boldsymbol{\cdot}}
+\newcommand{\im}{\operatorname{im}}
+
+\title[Even-level plane-tree contraction]{Even-Level Contraction of Plane Rooted Trees:\\
+Divisibility Iterates and Complete Size-Refined Fibres}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Delete every odd generation of a plane rooted tree, promote each deleted
+vertex's ordered child block to its parent, reset parity, and repeat.  We
+analyze this literal map on the finite carrier of trees with at most $N$
+vertices while keeping its exact-size source layers distinct.  After $k$
+steps, precisely the original depths divisible by $2^k$ survive.  Hence a
+tree of height $h$ reaches the singleton after
+$\lceil\log_2(h+1)\rceil$ steps, and the sharp maximum on $n$ vertices is
+$\lceil\log_2n\rceil$.  For every target $U$ with $m$ vertices and $I(U)$
+internal vertices, a reversible ordered block-and-gap construction gives
+\[
+ \sum_{E(T)=U}y^{|T|-m}=\frac{y^{I(U)}}{(1-y)^{2m-1}}.
+\]
+Thus $U$ occurs from the exact $n$-vertex layer exactly when
+$m+I(U)\le n$, with an explicit binomial fibre.  Weighting a target by its
+minimum predecessor size yields the algebraic series
+$H=z+z^2H/(1-H)$, and $H/(1-z)$ counts exact-layer images.  An exact audit of
+all $23{,}714$ plane trees through $11$ vertices supplies counterexample
+pressure but is not used as proof.
+\end{abstract}
+
+\maketitle
+
+\section{The finite map and the exact-layer question}
+
+Let $\PT_n$ be the set of plane rooted trees with $n$ vertices, and fix
+$N\ge1$.  The literal dynamical carrier is the finite disjoint union
+\[
+                  \PT_{\le N}:=\bigsqcup_{1\le n\le N}\PT_n.
+\]
+A tree is an ordered list of its child trees.  If
+$T=(T_1,\ldots,T_d)$ and
+$T_i=(T_{i1},\ldots,T_{ir_i})$, define recursively
+\begin{equation}\label{eq:E-recursive}
+ E(T):=\bigl(E(T_{11}),\ldots,E(T_{1r_1}),
+             \ldots,E(T_{d1}),\ldots,E(T_{dr_d})\bigr).
+\end{equation}
+Geometrically, the root and every even-depth vertex are retained.  Each
+odd-depth child is deleted, its child block is promoted, and the blocks are
+concatenated in the original plane order.  Equation~\eqref{eq:E-recursive}
+then resets parity within every retained grandchild subtree.  The singleton
+$\one$ is fixed.
+
+The output uses a subset of the input vertices, so $E$ is a self-map of
+$\PT_{\le N}$.  It is generally not a self-map of $\PT_n$.  We therefore use
+$\PT_n$ only as an \emph{exact source layer}: expressions such as
+$E(\PT_n)$ always mean the image of that subset inside the finite carrier.
+The formal fibre series below ranges coefficientwise over all finite source
+layers; for fixed $N$, it is truncated after source size $N$.
+Because $N$ is arbitrary, we state exact-layer results for every $n$; inside
+a fixed carrier they are read with $1\le n\le N$.
+
+Plane-tree decompositions and parity-sensitive statistics have a mature
+enumerative literature~\citep{ChenLiShapiro2007}.  More directly,
+outward-contraction groups every even-level vertex with all its odd-level
+children and takes the resulting partition-tree~\citep[Definition
+6.6]{SooKhoussainovLinz2022}.  If $\operatorname{For}$ forgets plane order,
+then, with the same designated root,
+\begin{equation}\label{eq:forgetful-owner}
+ \operatorname{For}(E(T))\cong
+ \operatorname{OutContr}(\operatorname{For}(T),\operatorname{root}(T)).
+\end{equation}
+Indeed, the quotient vertices are indexed by the original even-depth
+vertices, and each quotient edge crosses an odd vertex to an original
+grandchild.  Thus the unordered one-step rule, its partition-tree
+interpretation, and bare height compression receive zero contribution credit.
+Ordered child promotion also occurs inside generic forest
+contractions~\citep{BerkemerSiederdissenStadler2021}, while simultaneous
+plane-tree transitions~\citep{NicholsEtAl2020} and Horton-style leaf
+pruning~\citep{KovchegovZaliapin2016} give nearby but different dynamics.
+Catalan enumeration, parity statistics, generic contraction, transition
+vocabulary, and pruning clocks likewise receive zero credit.  The residual
+claims concern the plane-order lift under repeated parity reset, its all-rank
+divisibility and sharp pointwise clock, and its complete ordered target
+inverse and exact-layer image series.
+
+\section{Divisible-depth skeletons and the sharp clock}
+
+Write $h(T)$ for the maximum root depth and let $\tau(T)$ be the least
+$k\ge0$ such that $E^k(T)=\one$.
+
+\begin{theorem}[iterate skeleton and clock]\label{thm:clock}
+For every plane rooted tree $T$ and $k\ge0$, the vertices of $E^k(T)$ are
+exactly the original vertices whose depths are divisible by $2^k$.  Each is
+joined to its nearest retained ancestor, and the plane order is induced by
+the original contour order.  Consequently
+\begin{equation}\label{eq:height-clock}
+ h(E(T))=\left\lfloor\frac{h(T)}2\right\rfloor,
+ \qquad
+ \tau(T)=\left\lceil\log_2(h(T)+1)\right\rceil.
+\end{equation}
+The singleton is the unique recurrent state, and for every $n\ge1$,
+\begin{equation}\label{eq:max-clock}
+       \max_{T\in\PT_n}\tau(T)=\lceil\log_2n\rceil.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Track original vertex identities.  The assertion at $k=0$ is immediate.
+Assume that at rank $k$ an original vertex of depth $d$ survives precisely
+when $2^k\mid d$, in which case its current depth is $d/2^k$.  The next
+contraction retains it precisely when this current depth is even, or
+equivalently when $2^{k+1}\mid d$.  Promoting across the deleted current
+level joins nearest retained ancestors.  Since concatenation of ordered
+blocks is associative, the resulting order is the one induced from the
+original contour.  This proves the iterate assertion by induction.
+
+A deepest root path contains a vertex at every depth from $0$ through $h(T)$.
+It follows that
+$h(E^k(T))=\lfloor h(T)/2^k\rfloor$.  Thus $E^k(T)$ is the singleton exactly
+when $2^k>h(T)$, whose least solution is the second formula in
+\eqref{eq:height-clock}.  Every nonsingleton loses at least one depth-one
+vertex, so it cannot be recurrent.  Finally $h(T)\le n-1$, and the
+$n$-vertex path has height $n-1$; this proves~\eqref{eq:max-clock}, including
+non-powers of two.
+\end{proof}
+
+\section{A complete ordered block-and-gap inverse}
+
+For a target tree $U$, let $m=|U|$, let $d_U(v)$ be the outdegree of $v$, and
+let
+\[
+           I(U):=|\{v\in U:d_U(v)>0\}|.
+\]
+Weight every source vertex deleted in one contraction by $y$.
+
+\begin{lemma}[local inverse factor]\label{lem:local}
+At a target vertex of outdegree $d$, the generating function for its inserted
+odd children is
+\begin{equation}\label{eq:local-factor}
+ A_0(y)=\frac1{1-y},
+ \qquad
+ A_d(y)=\frac{y}{(1-y)^{d+1}}\quad(d>0).
+\end{equation}
+These choices form a reversible local construction.
+\end{lemma}
+
+\begin{proof}
+For $d=0$, every odd child must be a leaf; an arbitrary number gives
+$A_0(y)$.  Suppose $d>0$ and exactly $r$ odd children are productive.  Their
+grandchildren split the ordered target child list into $r$ nonempty
+consecutive blocks, in $\binom{d-1}{r-1}$ ways.  Any number of empty odd
+leaves may occupy each of the $r+1$ gaps before, between, and after those
+productive children.  Hence
+\begin{align*}
+ A_d(y)
+ &=\sum_{r=1}^d\binom{d-1}{r-1}\frac{y^r}{(1-y)^{r+1}}\\
+ &=\frac{y}{(1-y)^2}
+   \left(1+\frac{y}{1-y}\right)^{d-1}
+ =\frac{y}{(1-y)^{d+1}}.
+\end{align*}
+The predecessor child list uniquely recovers which odd children are empty
+and which consecutive block each productive child carries.  Thus the
+construction is reversible.
+\end{proof}
+
+\begin{theorem}[every-target fibre]\label{thm:fibre}
+For every target $U$ with $m$ vertices,
+\begin{equation}\label{eq:fibre-series}
+ \sum_{E(T)=U}y^{|T|-m}
+       =\frac{y^{I(U)}}{(1-y)^{2m-1}}.
+\end{equation}
+Consequently, among sources in $\PT_n$ the fibre size is
+\begin{equation}\label{eq:fibre-coefficient}
+ |E^{-1}(U)\cap\PT_n|=
+ \begin{cases}
+ \displaystyle\binom{n-m-I(U)+2m-2}{2m-2},&n-m\ge I(U),\\[6pt]
+ 0,&n-m<I(U).
+ \end{cases}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For a target $U$, write
+\[
+ F_U(y):=\sum_{E(T)=U}y^{|T|-|U|}.
+\]
+If $U=(U_1,\ldots,U_d)$, the reversible construction in
+Lemma~\ref{lem:local} gives the coefficientwise formal-series recursion
+\begin{equation}\label{eq:fibre-recursion}
+                  F_U(y)=A_d(y)\prod_{j=1}^dF_{U_j}(y).
+\end{equation}
+Indeed, each productive inserted odd child carries predecessor subtrees for
+one nonempty consecutive block of the ordered list $(U_1,\ldots,U_d)$;
+empty inserted odd children occupy the intervening gaps.  The predecessor
+child list recovers both the block partition and every subtree predecessor,
+so the construction is injective and surjective with no double counting.
+Induction on $|U|$ proves \eqref{eq:fibre-recursion}; for each coefficient
+only finitely many inserted vertices occur.
+
+Now apply Lemma~\ref{lem:local} through this recursion.  Internal vertices
+contribute one numerator factor $y$ and leaves contribute none.  Since a
+rooted tree satisfies
+$\sum_vd_U(v)=m-1$, the total denominator exponent is
+\[
+              \sum_{v\in U}(d_U(v)+1)=(m-1)+m=2m-1.
+\]
+This proves~\eqref{eq:fibre-series}.  Extracting the coefficient of
+$y^{n-m}$ gives~\eqref{eq:fibre-coefficient} by the negative-binomial
+expansion.  For the singleton target, the formula correctly gives one source
+of every size: the corresponding star.
+\end{proof}
+
+The temporal and inverse proofs use different structures.  The first tracks
+depth divisibility, whereas the second reconstructs ordered child lists; the
+fibre is not inferred from the clock or a state census.
+
+\section{Exact-size images and an algebraic series}
+
+\begin{corollary}[image criterion]\label{cor:image}
+A target $U$ lies in $E(\PT_n)$ if and only if
+\begin{equation}\label{eq:image-condition}
+                     |U|+I(U)\le n.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The coefficient in~\eqref{eq:fibre-coefficient} is positive exactly under
+condition~\eqref{eq:image-condition}.
+\end{proof}
+
+Define the minimum-source-weight series
+\begin{equation}\label{eq:H-def}
+                    H(z):=\sum_Uz^{|U|+I(U)},
+\end{equation}
+where the sum is over all finite plane rooted trees.  A leaf contributes $z$.
+An internal root contributes $z^2$ and has a nonempty ordered sequence of
+child trees.  Therefore
+\begin{equation}\label{eq:H-equation}
+          H=z+z^2\sum_{d\ge1}H^d
+           =z+\frac{z^2H}{1-H}.
+\end{equation}
+Equivalently, $H$ is the root with zero constant term of
+\[
+             H^2-(1+z-z^2)H+z=0.
+\]
+Explicitly,
+\begin{equation}\label{eq:H-closed}
+ H(z)=\frac{1+z-z^2-
+ \sqrt{(1+z-z^2)^2-4z}}{2},
+\end{equation}
+where the minus branch is forced by $H(0)=0$.
+Corollary~\ref{cor:image} now gives
+\begin{equation}\label{eq:image-gf}
+ \sum_{n\ge1}|E(\PT_n)|z^n=\frac{H(z)}{1-z}.
+\end{equation}
+The factor $(1-z)^{-1}$ takes cumulative sums of the minimum source weights;
+it does not turn $E$ into a size-preserving map.
+
+\section{Exact audit and conclusion}
+
+An independent standard-library verifier generates every plane tree through
+$11$ vertices.  For every state it labels original vertices, compares each
+iterate with the predicted divisible-depth skeleton, and checks the clock.
+For every target and source size it compares observed fibres with
+\eqref{eq:fibre-coefficient}; it also checks the local factors
+coefficientwise and solves~\eqref{eq:H-equation} as a formal series.  The
+$216{,}905$ exact assertions all pass.  Table~\ref{tab:audit} records the
+main profile; it is falsification pressure, not proof evidence.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Exact source-layer profile.  The state column is the Catalan carrier
+count; it receives no contribution credit.}
+\label{tab:audit}
+\begin{tabular}{@{}l*{11}{r}@{}}
+\toprule
+$n$&1&2&3&4&5&6&7&8&9&10&11\\
+\midrule
+$|\PT_n|$&1&1&2&5&14&42&132&429&1430&4862&16796\\
+$|E(\PT_n)|$&1&1&2&3&5&9&17&34&71&153&338\\
+$\max\tau$&0&1&2&2&3&3&3&3&4&4&4\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The result identifies both what survives repeated reset-parity contraction
+and exactly how every target can be expanded one step.  Its source-layer
+image series follows from the same local inverse threshold, while the literal
+dynamics remains on $\PT_{\le N}$.
+
+\section*{Limitations}
+The theorem is specific to finite plane rooted trees and the simultaneous
+deletion of every odd generation.  It does not cover unordered trees,
+arbitrary selected levels, weighted contractions, or asymptotic random-tree
+questions.  The unordered one-step shadow is the directly owned
+outward-contraction in~\cite{SooKhoussainovLinz2022}; only the ordered
+iterate/fibre/image conjunction is retained.  The reopened literature audit
+was bounded; no novelty or priority claim is made.  Enumeration through $11$
+vertices cannot replace the proofs.  The manuscript remains under
+\texttt{HOLD\_EXTERNAL}.
+
+\section*{Data Availability}
+No external data were used.  The anonymous artifact contains the
+standard-library verifier and its frozen exact output.  External release of
+the artifact is not authorized at this stage.
+
+\section*{Ethics Statement}
+The work uses no human participants, animals, personal data, or deployed
+decision system.
+
+\section*{Author Contributions}
+Contributor identities are withheld for anonymous review.  The anonymous
+author team takes responsibility for conceptualization, formal analysis,
+software, validation, and writing.
+
+\section*{Conflict of Interest}
+The authors declare no known conflict of interest relevant to this internal
+mathematical study.
+
+\section*{Funding}
+No funding claim is made in this anonymous internal draft.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

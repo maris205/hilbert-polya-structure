@@ -1,0 +1,76 @@
+\section{Introduction}
+\label{sec:introduction}
+
+The Diophantine exponent of an infinite word records how efficiently
+arbitrarily long prefixes can be built from a short initial part followed by a
+fractional power.  It arose in the study of low-complexity digital expansions
+and Diophantine approximation \cite{AdamczewskiBugeaud2007}.  For Sturmian
+words, the repetition function gives a particularly effective interface with
+this exponent \cite{BugeaudKim2019}.  Standard background on Sturmian words and
+Ostrowski numeration may be found in \cite{Lothaire2002,AlloucheShallit2003}.
+
+Wojcik's v1 preprint introduces formal intercepts and gives a complete
+eight-case description of the repetition function of
+$T^\rho(c_\alpha)$ \cite{Wojcik2025v1}.  The same source extracts four
+quotients when the Ostrowski digits are eventually strictly inside their
+allowed ranges.  Boundary tails are different: the digits $0$, $a_i-1$, and
+$a_i$ activate several other rows, and substituting them into the four
+interior expressions can create a zero or subscale denominator.  This note
+asks whether an ultimately periodic boundary tail nevertheless gives a finite,
+exact computation.
+
+The result below uses the source's complete finite table as an input, with one
+necessary correction.  In case~7 of Theorem~2.2.1 of the cited v1 source,
+every occurrence of $\rho_{n-1}$ must be replaced by $\rho_n$.  The change is
+not a silent normalization: \cref{sec:case-seven} derives it from the source's
+preceding corollary and carry rule, explains an endpoint clipping, and gives a
+finite instance in which the printed row violates $r(x,m)\leq m+1$.
+
+The division of ownership is sharp.  Wojcik v1 owns the formal intercept
+formalism, the repetition-function engine, the eight local cases, and their
+connection with the Diophantine exponent.  The contribution here is the
+documented case-7 correction and the effective periodic reduction of the full
+boundary table: a three-scale exact calculation, a maximum of at most $4L$
+quadratic-field elements, and certified algebraic output.  We do not claim a
+new general repetition formula, a nonperiodic extension, or a runtime
+complexity estimate.
+
+Our answer is the following.  The terms ``legal'', ``formal intercept'', and
+the matrix $P$ are defined in \cref{sec:repetition,sec:periodic}.
+
+\Needspace{21\baselineskip}
+\begin{theorem}[Main theorem]
+\label{thm:main}
+Let
+\[
+  \alpha=[0;a_1,a_2,\ldots]
+\]
+be quadratic, and let $(b_i)_{i\geq1}$ be a legal ultimately periodic
+Ostrowski digit sequence defining the formal intercept $\rho$ of the Sturmian
+word $x=T^\rho(c_\alpha)$.  Then $\dio(x)$ is an effectively computable real
+algebraic number of degree at most two.
+
+More precisely, let $L$ be any common phase-aligned period of the tails of
+$(a_i)$ and $(b_i)$, and let $\Lam>1$ be the Perron root of the associated
+$2\times2$ continuant period matrix $P$.  Then
+\[
+  \dio(x)=1+\max \mathcal C,
+  \qquad
+  \mathcal C\subseteq\Q(\Lam),
+  \qquad
+  |\mathcal C|\leq4L,
+\]
+where $\mathcal C$ is explicitly constructible.  Empty plateau rows are
+discarded by a terminating exact eventual-sign test.  There is a terminating
+algorithm that validates the finite input, returns a primitive minimal
+polynomial and a rational isolating interval for $\dio(x)$, and decides
+equality and order for two such outputs.  No eventual-interior hypothesis is
+imposed on the digits.
+\end{theorem}
+
+\Cref{sec:repetition} fixes notation and displays the corrected eight-case
+interface.  \Cref{sec:case-seven} proves the correction.  The periodic matrix
+and finite maximum are established in \cref{sec:periodic};
+\cref{sec:algorithm} turns them into an exact terminating algorithm.
+\Cref{sec:examples} gives two exact boundary-sensitive checks and records the
+scope and release gate.

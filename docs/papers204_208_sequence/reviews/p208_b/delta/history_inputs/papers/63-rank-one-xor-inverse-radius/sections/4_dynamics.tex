@@ -1,0 +1,137 @@
+\section{Minimality, aperiodicity, and unique ergodicity}
+
+We prove the structural assertions in \cref{thm:main-intro} directly from the
+construction.  The frequency proof is included because the exact density in
+the next section must hold for every point, not merely along the defining
+prefixes.
+
+\begin{proposition}[minimality]\label{prop:minimality}
+The subshift $X_N$ is minimal.
+\end{proposition}
+
+\begin{proof}
+Let $w\in\Lang(V_N)$.  Choose $k\geq N$ so that $w$ occurs in $v_k$, and fix
+one such occurrence inside every canonical copy of $v_k$.  Consecutive starts
+of canonical $v_k$-copies in $V_N$ are at distance at most $|v_k|+2$.
+Therefore occurrences of $w$ in $V_N$ have bounded gaps.  Equivalently, some
+$M(w)$ has the property that every word in $\Lang_M(V_N)$ contains $w$.
+Every $x\in X_N$ has all of its length-$M$ blocks in $\Lang_M(V_N)$, so $w$
+occurs in every $x$.  Since this holds for every language word, the orbit of
+each $x$ meets every nonempty cylinder in $X_N$, and is dense.
+In particular, the argument proves the language equality
+$\Lang(X_N)=\Lang(V_N)$ that will be used below.
+\end{proof}
+
+\begin{proposition}[aperiodicity]\label{prop:aperiodicity}
+The subshift $X_N$ has no periodic point.
+\end{proposition}
+
+\begin{proof}
+For every $n\geq N$,
+\[
+ v_{n+1}=v_nv_nv_n11v_n.
+\]
+The word $v_n$ ends in $0$.  Its first occurrence in the displayed
+decomposition is followed by the first symbol $0$ of the second copy, whereas
+its third occurrence is followed by the first spacer symbol $1$.  Hence
+$v_n0,v_n1\in\Lang(V_N)$: the word $v_n$ is right-special.  The lengths
+$|v_n|$ tend to infinity.
+
+If a minimal subshift contains a periodic point of least period $p$, it is the
+finite orbit of that point.  In such an orbit, every word of length at least
+$p$ determines its phase and therefore has a unique right extension.  The
+arbitrarily long right-special words above rule this out.  Minimality from
+\cref{prop:minimality} then shows that no point of $X_N$ is periodic.
+\end{proof}
+
+For a finite word $w$, let $C_w(z)$ be the number of starting positions of
+occurrences of $w$ wholly contained in the finite word $z$.
+
+\begin{lemma}[prefix frequencies converge]\label{lem:prefix-frequency}
+For every finite word $w$, the sequence
+\[
+ a_n(w)=\frac{C_w(v_n)}{|v_n|},\qquad n\geq N,
+\]
+converges.
+\end{lemma}
+
+\begin{proof}
+Write $q=|w|$, $L_n=|v_n|$, and $C_n=C_w(v_n)$.  Occurrences in
+$v_{n+1}=v_nv_nv_n11v_n$ that are wholly inside a displayed copy of $v_n$
+contribute $4C_n$.  Every remaining occurrence either crosses one of the four
+junctions or is contained in the two-letter spacer.  Thus
+\begin{equation}\label{eq:occurrence-recurrence}
+ C_{n+1}=4C_n+e_n,\qquad 0\leq e_n\leq 4q+2.
+\end{equation}
+Since $L_{n+1}=4L_n+2$ and $0\leq C_n\leq L_n$, we obtain
+\begin{align*}
+ |a_{n+1}(w)-a_n(w)|
+ &=\frac{|e_nL_n-2C_n|}{L_n(4L_n+2)}\\
+ &\leq \frac{4q+4}{4L_n}.
+\end{align*}
+The lengths satisfy $L_{n+1}\geq4L_n$, so
+$\sum_{n\geq N}L_n^{-1}<\infty$.  The displayed estimate makes
+$(a_n(w))_{n\geq N}$ Cauchy.
+\end{proof}
+
+\begin{lemma}[uniform frequencies]\label{lem:uniform-frequency}
+If $f_w=\lim_n a_n(w)$, then
+\begin{equation}\label{eq:uniform-frequency}
+ \lim_{M\to\infty}\ 
+ \sup_{z\in\Lang_M(V_N)}
+ \left|\frac{C_w(z)}{M}-f_w\right|=0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Fix a level $n\geq N$ and put $L=L_n$, $C=C_w(v_n)$, and $q=|w|$.
+Intersect a factor $z$ of $V_N$ with the canonical level-$n$ decomposition.
+It consists of $t$ complete copies of $v_n$, gaps of length $0$ or $2$, and
+at most two incomplete end pieces, each shorter than $L$.
+
+An occurrence of $w$ not counted among the $tC$ internal occurrences either
+starts in an end piece or lies within distance $q-1$ to the left of a gap, or
+starts in the gap itself.  There are at most $q-1+2$ such starts per gap, so
+the convenient choice $B_q=2q+2$ is valid and is independent of $n,z$.
+Consequently
+\begin{equation}\label{eq:factor-count-error}
+ |C_w(z)-tC|\leq 2L+B_q(t+1).
+\end{equation}
+The length not accounted for by the complete copies obeys
+\begin{equation}\label{eq:factor-length-error}
+ 0\leq |z|-tL\leq2L+2(t+1).
+\end{equation}
+Using $C/L\leq1$, \eqref{eq:factor-count-error} and
+\eqref{eq:factor-length-error} give
+\[
+ \left|\frac{C_w(z)}{|z|}-\frac{C}{L}\right|
+ \leq \frac{4L+(B_q+2)(t+1)}{|z|}.
+\]
+Because $tL\leq|z|$, the limit superior of the right-hand side as
+$|z|\to\infty$ is at most $(B_q+2)/L$.  This bound is uniform over all factors
+of the given length.  Now let $n\to\infty$: then $L_n\to\infty$ and
+$C_w(v_n)/L_n\to f_w$ by \cref{lem:prefix-frequency}.  This proves
+\eqref{eq:uniform-frequency}.
+\end{proof}
+
+\begin{proposition}[unique ergodicity]\label{prop:unique-ergodicity}
+The subshift $X_N$ is uniquely ergodic.  For every word $w$, every point of
+$X_N$ has frequency $f_w$, uniformly in the point and starting coordinate.
+\end{proposition}
+
+\begin{proof}
+Every finite block of every $x\in X_N$ belongs to $\Lang(V_N)$.  An $M$-term
+Birkhoff average of the indicator of a length-$q$ cylinder uses a source block
+of length $M+q-1$.  If $C$ is the corresponding occurrence count, then
+\[
+ \left|\frac{C}{M}-\frac{C}{M+q-1}\right|
+ \leq\frac{q-1}{M}.
+\]
+Hence \cref{lem:uniform-frequency} gives the asserted uniform convergence of
+cylinder Birkhoff averages.  Invariant probability measures exist by
+compactness.  For any such measure $\mu$, invariance and integration of the
+uniform Birkhoff limit give
+$\mu([w])=f_w$.  Two invariant measures therefore agree on every cylinder,
+and cylinders generate the Borel sigma-algebra.  Hence the invariant measure
+is unique.
+\end{proof}

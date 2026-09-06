@@ -1,0 +1,94 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Random substitutions replace a letter by a finite \emph{set} of words.
+Even at constant length, distinct histories can collide, so a recursion for
+the number of histories need not be a recursion for the number of distinct
+inflation words.  This note isolates a family in which constant-length block
+parsing and a persistent two-colour separation remove that ambiguity exactly.
+The resulting count dynamics is nonlinear but one-dimensional after
+projectivization.
+
+Fix integers $\ell\ge2$ and $1\le p\le\ell-1$, set $q=\ell-p$, and define
+\begin{equation}
+ \vartheta_{\ell,p}(a)=\{a^\ell,b^\ell\},\qquad
+ \vartheta_{\ell,p}(b)=\{a^pb^q\}.
+ \label{eq:substitution}
+\end{equation}
+To match the probabilistic definition of a random substitution, one may give
+the two $a$-images any probabilities $t,1-t$ with $0<t<1$ and give the sole
+$b$-image probability one.  The language, inflation-word sets, and entropy
+below depend only on these supports, not on $t$.
+Let $\cU_m=\vartheta_{\ell,p}^m(a)$ and
+$\cV_m=\vartheta_{\ell,p}^m(b)$ be sets of distinct level-$m$ inflation
+words, and write $A_m=|\cU_m|$, $B_m=|\cV_m|$.  We prove
+\begin{equation}
+ A_{m+1}=A_m^\ell+B_m^\ell,\qquad
+ B_{m+1}=A_m^pB_m^q,\qquad
+ \cU_m\cap\cV_m=\varnothing.
+ \label{eq:count-recurrence}
+\end{equation}
+Thus $r_m=B_m/A_m$ satisfies
+\begin{equation}
+ r_{m+1}=\frac{r_m^q}{1+r_m^\ell},\qquad r_1=\frac12.
+ \label{eq:projective}
+\end{equation}
+
+Mitchell proved that inflation-word entropy equals topological entropy for
+primitive constant-length random substitutions \cite[Theorem~4.1]{Mitchell2024}.
+Applying that result after the exact decoding step gives
+\begin{equation}
+ h_{\ell,p}=\frac{\log2}{\ell}
+ +\sum_{m\ge1}\frac{\log(1+r_m^\ell)}{\ell^{m+1}}.
+ \label{eq:entropy-series}
+\end{equation}
+If $H_M=\ell^{-M}\log A_M$, then the computable pair $(H_M,r_M)$ certifies
+\begin{equation}
+ 0<h_{\ell,p}-H_M
+ \le \frac{\ell^{-M}}{\ell-1}\log(1+r_M^\ell).
+ \label{eq:basic-tail}
+\end{equation}
+
+The main point is not the existence of the scalar recurrence.  Ratio
+recurrences and inflation-word estimates already occur in the random
+substitution literature \cite{Gohlke2020,GohlkeMitchell2026}.  The residual
+result is the tail classification forced by the order of the projective
+fixed point.  For $q=1$,
+\begin{equation}
+ r_m^\ell\sim\frac1{\ell m},\qquad
+ h_{\ell,\ell-1}-H_M
+ \sim\frac{\ell^{-M}}{\ell(\ell-1)M}.
+ \label{eq:parabolic-intro}
+\end{equation}
+For $q\ge2$, there is $c_{\ell,p}>0$ such that
+\begin{equation}
+ -\log r_m=c_{\ell,p}q^m+o(1),\qquad
+ h_{\ell,p}-H_M\sim\ell^{-(M+1)}r_M^\ell.
+ \label{eq:super-intro}
+\end{equation}
+This is a parabolic--superattracting transition inside one elementary family.
+
+The example $\vartheta(a)=\{aa,bb\}$, $\vartheta(b)=\{ab\}$ is
+Example~4.8 of \cite{Mitchell2024}.  The set recurrence printed there is
+compatible with our calculation, but the displayed numerical conclusion
+$0.4115$ is not: the exact level-$14$ value is already
+$H_{14}=0.4328844689\ldots$.  We give a certified replacement interval and a
+high-precision value in \cref{sec:example}.  This affects one example, not
+Mitchell's entropy theorem.
+
+\paragraph{Scope and release status.}
+The paper treats the family \cref{eq:substitution} completely and gives a
+conditional enclosure theorem for any two-letter system whose \emph{distinct}
+inflation-word counts are known to obey a homogeneous polynomial recurrence.
+It does not assert that every random substitution has such a recurrence.
+The source audit found no indexed correction through 25 August 2026, but a
+search miss is not a priority proof.  Author/journal verification is required
+before external release; no external contact was made in producing this
+internal draft.
+
+\paragraph{Organization.}
+\Cref{sec:exact} proves disjoint decoding and the entropy cocycle.
+\Cref{sec:tails} establishes the two tail regimes.  \Cref{sec:example}
+proves parameter monotonicity and records the corrected numerical example.
+\Cref{sec:enclosures} gives the general polynomial-map enclosure, and
+\cref{sec:controls} records reproducible controls and ownership limits.

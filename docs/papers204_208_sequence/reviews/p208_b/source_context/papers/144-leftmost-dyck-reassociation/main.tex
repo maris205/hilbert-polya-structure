@@ -1,0 +1,518 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Dyck}{\mathcal D}
+\newcommand{\PhiMap}{\Phi}
+\newcommand{\End}{\operatorname E}
+\newcommand{\Cat}{\operatorname{Cat}}
+\newcommand{\fac}{\kappa}
+\newcommand{\Fib}{\mathcal B}
+
+\title[Leftmost Dyck reassociation]{Leftmost Reassociation of Dyck
+Components: Exact Transient Layers and Terminal Depth Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{05A05, 05A15, 06A07, 37P05}
+\keywords{Dyck path, primitive component, Tamari cover, finite dynamics,
+transient depth, terminal fibre}
+
+\begin{document}
+
+\begin{abstract}
+Let a nonempty Dyck path have primitive factorisation
+$P=C_1\cdots C_k$, with $C_1=UAD$.  We iterate the deterministic rule that
+fixes $P$ when $k=1$ and otherwise replaces its first two components by
+$UAC_2D$.  The complete orbit is explicit: for $0\le t\le k-1$, after $t$
+updates the first component has absorbed $C_2,\ldots,C_{t+1}$, and the
+endpoint is fixed thereafter.  Consequently the entry time is
+exactly $k-1$, all recurrent paths are fixed and primitive, and the unique
+path of maximum depth $n-1$ in semilength $n$ is $(UD)^n$.  The number of
+paths at depth $k-1$ is
+\[
+                 \frac{k}{2n-k}\binom{2n-k}{n}.
+\]
+We also resolve every terminal basin by depth.  If a fixed target is $UQD$
+and the interior $Q$ has $r$ primitive factors, then it has exactly one basin
+state at each depth $0,\ldots,r$.  Hence its depth-fibre polynomial is
+$1+u+\cdots+u^r$, and the unique largest terminal fibre has size $n$.
+First-return decomposition, Catalan and ballot enumeration, ground-level
+comb/Tamari covers, deterministic leftmost-rotation precedents, and the
+ordered-tree graft/lift representation are treated as background inputs.  The
+residual is only the exact temporal/target-fibre conjunction for this literal
+selector.  No priority follows, and external circulation remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:introduction}
+
+A local cover relation does not by itself determine a dynamical system: one
+must also specify which available cover is chosen at each state.  This note
+fixes a particularly rigid selector on Dyck paths.  At every nonfixed state,
+we perform the reassociation at the leftmost return to ground level.  The
+selected down-step crosses the next primitive Dyck component, and no other
+part of the path changes.
+
+The atomic reassociation belongs to the Tamari setting.  Associativity orders
+and their lattice property go back to Huang and Tamari
+\cite{HuangTamari1972Associativity}; path formulations of Tamari-type covers
+also appear in the $m$-Tamari literature
+\cite{BousquetMelouFusyPrevilleRatelle2012Intervals}.  Primitive decomposition
+of Dyck words and enumeration by the number of primitive components are
+likewise established topics \cite{PanayotopoulosSapounakis2002Prime}, while
+Catalan and ballot enumeration are standard background
+\cite{Stanley2015Catalan}.  We assign all of these ingredients zero
+contribution credit.
+
+Two closer rotation precedents further narrow the boundary.  Pallo studies a
+uniquely selected leftmost left-rotation on binary trees and the resulting
+rooted directed tree, rank, and distance
+\cite[pp.~802--803]{Pallo2006Rotational}.  That deterministic map is not the
+map below: after adjoining a loop at its terminal root it has one fixed tree,
+whereas our map has $\Cat_{n-1}$ fixed paths, more than one for $n\geq3$.
+Thus it is neither equal nor conjugate, by mirror or reversal, to our map.
+Separately, Chapoton identifies the comb-order covers on Dyck paths as exactly
+the Tamari covers whose moved subpath lies at height zero
+\cite[\S1.2, p.~438]{Chapoton2020DyckOrder}, tracing the comb order to Pallo's
+right-arm rotations \cite{Pallo2003RightArm}.  Every nonfixed update below is
+one of those ground-level covers, chosen at the leftmost ground return.  The
+idea of a deterministic leftmost scheduler and the ground-level cover
+correspondence both receive zero contribution credit.
+
+The purpose here is narrower: to record, for this particular selector, the
+exact conjunction of its full temporal law with its target-indexed inverse
+fibres.  None of the scheduler, its individual covers, its tree model, or its
+component census is claimed separately.  The argument has four parts.
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item We give a closed formula for every iterate.  It turns the number of
+primitive factors into the pointwise clock $\tau(P)=\fac(P)-1$ and identifies
+$(UD)^n$ as the unique depth-$n-1$ path.
+\item We derive the complete temporal census: depth $k-1$ contains
+$\frac{k}{2n-k}\binom{2n-k}{n}$ states.
+\item For every fixed target and every feasible depth, we construct one basin
+state and prove that no second state exists at that depth.
+\item We derive the depth-fibre polynomial and classify the unique target of
+largest fibre.
+\end{enumerate}
+The closed iterate in \cref{lem:closed-orbit} is the common mechanism: it
+proves the clock and leaves only a suffix cut to invert an endpoint.  No figure
+is needed because that formula exposes the whole state change.
+
+This package is owner-thin.  The source boundary in
+\cref{sec:ownership} is a conservative credit assignment, not a priority or
+originality decision.  The record is maintained for internal theorem
+evaluation under \textsc{hold\_external}.
+
+\section{Dyck factors and the literal map}\label{sec:setup}
+
+A \emph{Dyck path of semilength $n$} is a word in $U,D$ with $n$ occurrences
+of each letter such that every prefix contains at least as many $U$'s as
+$D$'s.  Let $\Dyck_n$ denote the set of such paths.  A nonempty Dyck path is
+\emph{primitive} if its only return to height zero occurs after its final
+step.  Cutting at all positive returns gives a unique factorisation
+\begin{equation}\label{eq:primitive-factorisation}
+                         P=C_1C_2\cdots C_k
+\end{equation}
+into primitive Dyck paths.  We write $\fac(P)=k$.
+
+Every primitive first factor has a unique first-return form $C_1=UAD$ with
+$A$ a possibly empty Dyck path.  Define
+\begin{equation}\label{eq:literal-map}
+ \PhiMap_n(P)=
+ \begin{cases}
+ P,&k=1,\\
+ UAC_2D\,C_3\cdots C_k,&k\geq2.
+ \end{cases}
+\end{equation}
+We suppress the subscript $n$ when the semilength is fixed.  The word
+$AC_2$ is a Dyck path, so $UAC_2D$ is primitive.  Thus
+\eqref{eq:literal-map} lies in $\Dyck_n$ and is well defined.
+
+There is a standard ordered-tree form of the same rule.  Under the contour
+bijection between Dyck paths and rooted ordered plane trees
+\cite[Theorem~1.5.1]{Stanley2015Catalan}, the primitive factors
+$C_1,\ldots,C_k$ encode the ordered subtrees rooted at the $k$ children of the
+tree root.  Write these subtrees as $T_1,\ldots,T_k$.  For $k\geq2$,
+\eqref{eq:literal-map} is precisely
+\begin{equation}\label{eq:tree-graft}
+ (T_1,T_2,T_3,\ldots,T_k)
+ \longmapsto
+ (T_1\mathbin{\triangleleft}T_2,T_3,\ldots,T_k),
+\end{equation}
+where $T_1\mathbin{\triangleleft}T_2$ appends $T_2$ as the rightmost child of
+the root of $T_1$.  Thus the factor clock below is just root degree minus one.
+This contour conjugacy and graft description are representation-level
+background, not residual claims.
+
+Let $\tau(P)$ be the least $t\geq0$ for which $\PhiMap^t(P)$ is fixed, and
+put
+\[
+                         \End(P)=\PhiMap^{\tau(P)}(P).
+\]
+A path is \emph{recurrent} when it lies on a directed cycle of $\PhiMap_n$.
+For a fixed target $T$, define its depth-fibre polynomial
+\begin{equation}\label{eq:fibre-definition}
+                 \Fib_T(u)=\sum_{P:\,\End(P)=T}u^{\tau(P)}.
+\end{equation}
+
+The complete claim package follows.  We use
+$\Cat_m=\frac{1}{m+1}\binom{2m}{m}$.
+
+\begin{theorem}[Clock, layers, and terminal depth fibres]\label{thm:main}
+For every $n\geq1$, the map $\PhiMap_n$ has the following properties.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Every nonfixed update reduces $\fac$ by exactly one.  The recurrent
+paths are exactly the fixed paths, these are exactly the primitive paths, and
+there are $\Cat_{n-1}$ of them.
+\item If $P$ has $k$ primitive factors, then
+\begin{equation}\label{eq:pointwise-clock}
+                             \tau(P)=k-1.
+\end{equation}
+The maximum entry time is $n-1$, attained uniquely by $(UD)^n$.
+\item For $1\leq k\leq n$, the number of paths at depth $k-1$ is
+\begin{equation}\label{eq:ballot-layer}
+ \bigl|\{P\in\Dyck_n:\tau(P)=k-1\}\bigr|
+       =\frac{k}{2n-k}\binom{2n-k}{n}.
+\end{equation}
+\item Let $T=UQD$ be fixed, and factor its interior as
+$Q=Q_1\cdots Q_r$ into primitive paths.  For every $0\leq d\leq r$, the
+unique basin state of $T$ at depth $d$ is
+\begin{equation}\label{eq:source-formula}
+ P_d=\bigl(UQ_1\cdots Q_{r-d}D\bigr)
+             Q_{r-d+1}\cdots Q_r,
+\end{equation}
+with the empty-prefix and empty-suffix conventions.  Consequently
+\begin{equation}\label{eq:terminal-polynomial}
+                              \Fib_T(u)=1+u+\cdots+u^r.
+\end{equation}
+The unique terminal fibre of maximum size is the fibre over
+\begin{equation}\label{eq:largest-target}
+                         T_n^{\max}=U(UD)^{n-1}D,
+\end{equation}
+and it contains $n$ states.
+\end{enumerate}
+\end{theorem}
+
+\section{The factor-count clock}\label{sec:clock}
+
+The first primitive component absorbs exactly one following component per
+round.  The next lemma makes that statement precise at every time.
+
+\begin{lemma}[Closed orbit]\label{lem:closed-orbit}
+Let $P=C_1\cdots C_k$, where $C_1=UAD$.  For every
+$0\leq t\leq k-1$,
+\begin{equation}\label{eq:closed-orbit}
+ \PhiMap^t(P)=UA\,C_2\cdots C_{t+1}D\,
+                         C_{t+2}\cdots C_k.
+\end{equation}
+When $t=0$, the block $C_2\cdots C_{t+1}$ is empty; when $t=k-1$, the
+suffix $C_{t+2}\cdots C_k$ is empty.
+\end{lemma}
+
+\begin{proof}
+At $t=0$, \eqref{eq:closed-orbit} reads
+$UADC_2\cdots C_k=P$.  Suppose the formula holds for some $t<k-1$.
+The word
+\[
+                         UA\,C_2\cdots C_{t+1}D
+\]
+is primitive: after its initial $U$, the Dyck word
+$AC_2\cdots C_{t+1}$ stays at or above height one, and the displayed $D$ is
+its first return to height zero.  Hence the primitive factorisation of the
+right-hand side of \eqref{eq:closed-orbit} consists of that first word,
+followed by $C_{t+2},\ldots,C_k$.  Applying \eqref{eq:literal-map} moves the
+closing $D$ across $C_{t+2}$ and gives
+\[
+          UA\,C_2\cdots C_{t+1}C_{t+2}D\,
+                         C_{t+3}\cdots C_k,
+\]
+which is \eqref{eq:closed-orbit} at time $t+1$.  Induction proves the claim.
+\end{proof}
+
+\begin{corollary}[Recurrent set and pointwise clock]\label{cor:clock}
+The statements in \cref{thm:main}(i)--(ii) hold.
+\end{corollary}
+
+\begin{proof}
+For $t<k-1$, the factorisation displayed in the proof of
+\cref{lem:closed-orbit} has one first component and
+$k-t-1$ untouched components, for a total of $k-t$ primitive factors.  Thus
+each nonfixed step decreases $\fac$ by one.  At $t=k-1$, the formula is the
+single primitive path
+\begin{equation}\label{eq:endpoint-formula}
+                         \End(P)=UAC_2\cdots C_kD.
+\end{equation}
+It is fixed, so $\tau(P)=k-1$.
+
+If $k=1$, the definition fixes $P$.  If $k>1$, the strict decrease of $\fac$
+prevents $P$ from lying on a cycle.  Fixed and recurrent paths are therefore
+exactly the primitive paths.  Deleting the first $U$ and last $D$ is a
+bijection from primitive paths in $\Dyck_n$ to $\Dyck_{n-1}$, giving
+$\Cat_{n-1}$ fixed paths.
+
+Every primitive factor has semilength at least one, so $k\leq n$.  Equality
+holds only when all $k$ factors have semilength one, and the only such factor
+is $UD$.  In view of \eqref{eq:pointwise-clock}, the depth is at most $n-1$,
+with equality exactly at $(UD)^n$.
+\end{proof}
+
+The proof gives more than a global bound: the component statistic is the
+exact amount of time remaining at every state.  In particular, no transient
+can merge with another transient of a different factor count before their
+depths agree.
+
+\section{Complete temporal layers}\label{sec:layers}
+
+The clock reduces temporal enumeration to a component census.  We include the
+coefficient calculation to fix the boundary case and normalisation, while
+treating the enumerative machinery as background.
+
+Let
+\[
+                 C(z)=\sum_{m\geq0}\Cat_m z^m
+\]
+be the Catalan series, which satisfies $C(z)=1+zC(z)^2$.  A primitive path is
+$UAD$ with $A$ an arbitrary Dyck path, so the semilength generating function
+for one primitive component is
+\begin{equation}\label{eq:primitive-gf}
+                              R(z)=zC(z).
+\end{equation}
+
+\begin{proposition}[Ballot layer formula]\label{prop:layers}
+For $1\leq k\leq n$, the number of paths in $\Dyck_n$ with exactly $k$
+primitive factors is the right-hand side of \eqref{eq:ballot-layer}.
+\end{proposition}
+
+\begin{proof}
+A path with $k$ primitive factors is an ordered sequence of $k$ primitive
+paths.  By \eqref{eq:primitive-gf}, its number is
+\begin{equation}\label{eq:power-coefficient}
+                  [z^n]R(z)^k=[z^{n-k}]C(z)^k.
+\end{equation}
+Put $m=n-k$ and $W=C-1$.  Then $W=z(1+W)^2$.  If $m=0$, the coefficient in
+\eqref{eq:power-coefficient} is $1$, which agrees with
+$k(2n-k)^{-1}\binom{2n-k}{n}=1$ because $n=k$.
+
+For $m\geq1$, Lagrange inversion gives
+\begin{align*}
+ [z^m]C(z)^k
+  &=[z^m](1+W)^k\\
+  &=\frac{1}{m}[w^{m-1}]k(1+w)^{k-1}(1+w)^{2m}\\
+  &=\frac{k}{m}\binom{2m+k-1}{m-1}\\
+  &=\frac{k}{2m+k}\binom{2m+k}{m}.
+\end{align*}
+Substituting $m=n-k$ and using binomial symmetry yields
+\[
+             \frac{k}{2n-k}\binom{2n-k}{n-k}
+             =\frac{k}{2n-k}\binom{2n-k}{n},
+\]
+as required.
+\end{proof}
+
+Combining \cref{cor:clock,prop:layers} proves
+\cref{thm:main}(iii).  It also gives the complete temporal polynomial
+\begin{equation}\label{eq:temporal-polynomial}
+ \sum_{P\in\Dyck_n}u^{\tau(P)}
+   =\sum_{k=1}^{n}\frac{k}{2n-k}\binom{2n-k}{n}u^{k-1}.
+\end{equation}
+Across all semilengths, the same sequence construction yields
+\begin{equation}\label{eq:bivariate-gf}
+ \sum_{n\geq1}\sum_{P\in\Dyck_n}u^{\tau(P)}z^n
+                  =\frac{R(z)}{1-uR(z)}
+                  =\frac{zC(z)}{1-uzC(z)}.
+\end{equation}
+Equations \eqref{eq:temporal-polynomial}--\eqref{eq:bivariate-gf} package the
+clock after it has been proved; generic generating-function extraction is not
+part of the residual theorem claim.
+
+\section{The terminal depth-fibre atlas}\label{sec:fibres}
+
+The endpoint formula \eqref{eq:endpoint-formula} absorbs every component after
+the first into the interior of one primitive path.  Inverting it amounts to
+choosing how many final primitive components of the target interior should be
+moved back outside.
+
+\begin{theorem}[One source at every feasible depth]\label{thm:fibres}
+Let $T=UQD\in\Dyck_n$ be primitive, and let
+$Q=Q_1\cdots Q_r$ be the primitive factorisation of its interior.  For each
+$0\leq d\leq r$, the path $P_d$ in \eqref{eq:source-formula} is the unique
+path satisfying
+\[
+                            \End(P_d)=T,
+                    \qquad \tau(P_d)=d.
+\]
+There is no basin state of $T$ at any other depth.
+\end{theorem}
+
+\begin{proof}
+Fix $d\in\{0,\ldots,r\}$.  The word
+\[
+                         UQ_1\cdots Q_{r-d}D
+\]
+is primitive because its interior is a Dyck path.  The suffix
+$Q_{r-d+1},\ldots,Q_r$ consists of $d$ primitive paths.  Hence $P_d$ has
+exactly $d+1$ primitive factors.  By \cref{cor:clock}, its depth is $d$, and
+the endpoint formula gives
+\[
+ \End(P_d)=UQ_1\cdots Q_{r-d}Q_{r-d+1}\cdots Q_rD=T.
+\]
+This proves existence.
+
+For uniqueness, take any $P$ with $\End(P)=T$ and $\tau(P)=d$.  The clock
+implies that $P$ has $d+1$ primitive factors, say
+\[
+                         P=B_1B_2\cdots B_{d+1},
+                         \qquad B_1=UAD.
+\]
+Its endpoint is $UA B_2\cdots B_{d+1}D$.  Equality with $UQD$ implies
+\begin{equation}\label{eq:interior-split}
+                         Q=A B_2\cdots B_{d+1}.
+\end{equation}
+Because $A$ is a Dyck path, the boundary immediately after $A$ is a return of
+$Q$ unless $A$ is empty.  Each $B_i$ for $i\geq2$ is primitive.  Therefore
+the unique factorisation of $Q$ into primitive paths forces
+\[
+ A=Q_1\cdots Q_{r-d},\qquad
+ (B_2,\ldots,B_{d+1})=(Q_{r-d+1},\ldots,Q_r).
+\]
+Thus $P=P_d$.  The same argument shows that $d$ must lie between $0$ and $r$,
+so no other depth occurs.
+\end{proof}
+
+The boundary cases are included in the construction.  If $r=0$, then $T=UD$
+and only $d=0$ occurs.  For arbitrary $r$, the case $d=0$ gives $P_0=T$,
+while $d=r$ gives $P_r=(UD)Q_1\cdots Q_r$.
+
+In the ordered-tree language of \eqref{eq:tree-graft}, the fixed target has a
+root with one child $S$, and $Q_1,\ldots,Q_r$ encode the ordered children of
+$S$.  The source $P_d$ is obtained by lifting the last $d$ children of $S$,
+in order, to become root-level siblings after $S$.  Hence the suffix-cut and
+suffix-lift descriptions are the same elementary inverse operation; the
+graft/lift representation itself receives zero contribution credit.
+
+\begin{corollary}[Fibre polynomial and unique maximum]\label{cor:max-fibre}
+Equations \eqref{eq:terminal-polynomial}--\eqref{eq:largest-target} hold.
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:fibres}, the coefficient of $u^d$ in $\Fib_T(u)$ is one for
+$0\leq d\leq r$ and zero otherwise.  This proves
+\eqref{eq:terminal-polynomial}; in particular, the ordinary fibre size is
+$\Fib_T(1)=r+1$.
+
+The interior $Q$ has semilength $n-1$.  Since every $Q_i$ has positive
+semilength, $r\leq n-1$, and hence $\Fib_T(1)\leq n$.  Equality forces all
+$r=n-1$ factors to have semilength one.  The only primitive factor of
+semilength one is $UD$, so equality occurs exactly when
+$Q=(UD)^{n-1}$.  This gives the unique target \eqref{eq:largest-target}.
+\end{proof}
+
+The terminal atlas is pointwise: it identifies the source word, not merely the
+number of sources.  It also records when each source enters the fixed set,
+rather than collapsing all depths into one ordinary fibre count.
+
+\section{Exact finite controls}\label{sec:controls}
+
+The standard-library program \texttt{verify\_p144.py} supplies finite
+counterexample pressure.  It generates every Dyck path of semilength at most
+twelve.  The literal map is implemented from the first two return positions,
+whereas the closed iterate is implemented separately from the initial
+primitive-factor list.  Basin profiles are accumulated from the enumerated
+functional graph and compared with the constructive source formula for every
+fixed target and every feasible depth.
+
+\begin{table}[ht]
+\centering
+\caption{Selected exact control sizes.  The audit is exhaustive within each
+displayed semilength and uses no random sampling.}\label{tab:controls}
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule
+$n$ & states & fixed targets & maximum depth & maximum fibre & assertions\\
+\midrule
+1  & 1       & 1      & 0  & 1  & 24\\
+4  & 14      & 5      & 3  & 4  & 277\\
+8  & 1,430   & 429    & 7  & 8  & 28,901\\
+12 & 208,012 & 58,786 & 11 & 12 & 4,308,839\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Across semilengths $1$ through $12$, the run covers $290{,}511$ states and
+$82{,}500$ fixed targets.  It performs $6{,}005{,}502$ exact assertions and
+ends in \texttt{STATUS=PASS}.  The frozen transcript is
+\texttt{verification\_output.txt}.  The audit checks closure, factor drop,
+every iterate, every temporal layer, the unique sharp source, all terminal
+depth profiles, and the unique maximum target.
+
+Finite enumeration does not prove an all-parameter identity.  The proofs in
+\cref{sec:clock,sec:layers,sec:fibres} establish the theorem; the program can
+only reveal errors within its exhaustive range.  It also supplies no evidence
+about priority or ownership.
+
+\section{Ownership boundary and conclusion}\label{sec:ownership}
+
+The ownership subtraction is now explicit.  Huang--Tamari and the
+$m$-Tamari path literature own the lattice and atomic cover background
+\cite{HuangTamari1972Associativity,BousquetMelouFusyPrevilleRatelle2012Intervals}.
+Pallo's right-arm rotations and Chapoton's Dyck-path comparison own the comb
+order and its height-zero cover characterisation
+\cite{Pallo2003RightArm,Chapoton2020DyckOrder}.  Pallo's later leftmost
+left-rotation supplies a direct precedent for a unique deterministic
+leftmost-rotation scheduler, a rooted rotation tree, a grading, and a distance
+\cite{Pallo2006Rotational}.  Its unique terminal root separates that map from
+$\PhiMap_n$, whose terminal set has size $\Cat_{n-1}$, but the general
+leftmost-scheduling idea is not residual here.
+
+Prime factorisation and component enumeration are also direct background
+\cite{PanayotopoulosSapounakis2002Prime}.  The standard contour bijection
+\cite{Stanley2015Catalan} turns the literal move into the root-child graft
+\eqref{eq:tree-graft}, makes the clock root degree minus one, and turns the
+inverse formula into a suffix lift.  We therefore assign zero separate credit
+to the scheduler, atomic or ground-level rotations, primitive decomposition,
+comb/height-zero correspondence, root-degree clock, graft/lift representation,
+ballot layers, Catalan enumeration, and generic coefficient extraction.
+
+After those deductions, the only retained internal residual is the exact
+conjunction, for the particular map \eqref{eq:literal-map}, of the all-time
+iterate formula with the targetwise assertion that every feasible depth has
+one specified preimage.  Its polynomial and extremal consequences are kept
+only as consequences of that conjunction.  This is a bookkeeping residual,
+not a novelty or ownership claim: the bounded searches recorded in the source
+ledger did not establish an owner, but a non-hit provides no priority evidence.
+We do not classify other schedulers or arbitrary chains.  The manuscript
+therefore remains owner-thin and anonymous under \textsc{hold\_external}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

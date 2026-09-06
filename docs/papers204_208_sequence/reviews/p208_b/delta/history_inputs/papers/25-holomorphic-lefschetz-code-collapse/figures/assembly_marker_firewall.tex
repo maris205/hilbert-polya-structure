@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  >=Latex,
+  cell/.style={draw=charcoal,rounded corners=2pt,very thick,align=center,
+    inner sep=5pt,minimum width=58mm,minimum height=21mm},
+  digit/.style={cell,fill=formalblue!8,draw=formalblue},
+  ret/.style={cell,fill=warningamber!9,draw=warningamber},
+  arr/.style={->,very thick,draw=charcoal},
+  lab/.style={font=\sffamily\scriptsize,align=center,fill=white,inner sep=2pt}
+]
+\node[font=\sffamily\bfseries,text=formalblue] at (-3.5,3.05) {shared recurrence};
+\node[font=\sffamily\bfseries,text=stopred] at (3.5,3.05) {disjoint recurrence};
+
+\node[digit] (sd) at (-3.5,1.55) {
+  digit time\\[-1pt]
+  $1-\sum_nu^{\ell(n)}n^{-s}$\\
+  mixed code-return words};
+\node[digit] (dd) at (3.5,1.55) {
+  digit time\\[-1pt]
+  $\prod_n(1-u^{\ell(n)}n^{-s})$\\
+  listed recurrent components};
+\node[ret] (sr) at (-3.5,-1.55) {
+  completed-return time\\[-1pt]
+  $1-z\sum_nn^{-s}$\\
+  induced full return shift};
+\node[ret] (dr) at (3.5,-1.55) {
+  completed-return time\\[-1pt]
+  $\prod_n(1-zn^{-s})$\\
+  induced atom loops};
+
+\draw[arr] (sd) -- node[lab,rotate=90] {separate components} (dd);
+\draw[arr] (sr) -- node[lab,rotate=90] {separate components} (dr);
+\draw[arr] (sd) -- node[lab] {induce: one codeword $\mapsto$ one return} (sr);
+\draw[arr] (dd) -- node[lab] {induce: one codeword $\mapsto$ one return} (dr);
+
+\node[draw=stopred,dashed,very thick,rounded corners=2pt,fill=stopred!5,
+  align=center,minimum width=132mm,inner sep=5pt] at (0,-3.35) {
+  exterior grading cancels tangent stability --- not code duration and not mixed branch content};
+\end{tikzpicture}

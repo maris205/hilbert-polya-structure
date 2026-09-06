@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small},
+  cusp/.style={circle,draw=formalblue,very thick,fill=formalblue!6,
+    minimum size=10mm,inner sep=1pt},
+  composite/.style={regular polygon,regular polygon sides=6,draw=warningamber,
+    very thick,densely dashed,fill=warningamber!10,minimum size=13mm,inner sep=1pt},
+  edge/.style={->,formalblue,very thick},
+  neighbor/.style={->,charcoal!60,thick,densely dotted}
+]
+\node[cusp] (n) at (-3.2,0) {$c_n$};
+\node[cusp] (n2) at (0,2.0) {$c_{2n}$};
+\node[composite,align=center] (n6) at (3.2,0) {$c_{6n}$};
+\node[cusp] (n3) at (0,-2.0) {$c_{3n}$};
+
+\draw[edge] (n) -- node[above left] {$\times2$} (n2);
+\draw[edge] (n2) -- node[above right] {$\times3$} (n6);
+\draw[edge] (n6) -- node[below right] {$\div2$} (n3);
+\draw[edge] (n3) -- node[below left] {$\div3$} (n);
+\node[font=\scriptsize\bfseries,text=warningamber!80!black,align=center]
+  at (3.2,-1.05) {$6n$ is composite\\for every $n\ge2$};
+
+\node[cusp,draw=charcoal!60,fill=softgray] (n4) at (2.0,3.55) {$c_{4n}$};
+\node[composite,draw=charcoal!60,fill=softgray] (n12) at (4.8,2.0) {$c_{12n}$};
+\draw[neighbor] (n2) -- node[above left,font=\scriptsize] {$\times2$} (n4);
+\draw[neighbor] (n4) -- node[above right,font=\scriptsize] {$\times3$} (n12);
+\draw[neighbor] (n12) -- node[right,font=\scriptsize] {$\div2$} (n6);
+\node[font=\scriptsize,align=left,text=charcoal!80,anchor=west] at (2.75,3.75)
+  {neighboring diamond based at $2n$;\\shared cusps show recurrent overlap};
+
+\node[rounded corners,draw=charcoal,fill=softgray,align=left,
+  text width=4.3cm,inner sep=5pt] at (-4.6,-3.25)
+  {\textbf{Downward only:} modulus strictly decreases, so every cross edge is
+   transient in closed-walk traces.};
+\node[rounded corners,draw=warningamber,very thick,densely dashed,
+  fill=warningamber!8,align=left,text width=4.3cm,inner sep=5pt] at (1.0,-3.25)
+  {\textbf{Both directions:} the displayed length-four word is simple,
+   primitive, and nonbacktracking.};
+\end{tikzpicture}

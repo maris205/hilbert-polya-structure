@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  box/.style={draw=charcoal,rounded corners=2pt,very thick,align=left,
+    inner sep=7pt},
+  pass/.style={box,fill=passgreen!9,draw=passgreen},
+  warn/.style={box,fill=warningamber!10,draw=warningamber},
+  stop/.style={box,fill=stopred!8,draw=stopred},
+  lab/.style={font=\sffamily\scriptsize,text=charcoal},
+  arr/.style={-{Latex[length=1.5mm,width=1.1mm]},very thick,draw=charcoal}
+]
+\node[font=\sffamily\bfseries] at (2.6,2.7) {weighted incidence fiber};
+\node[pass,minimum width=64mm] (individual) at (2.6,1.55) {
+  $\eta>\half$\\
+  each $q_p$ is rank-one trace class\\
+  $\norm{q_p}_1\le\sqrt{2C_\eta}$};
+\node[pass,minimum width=64mm] (global) at (2.6,-0.55) {
+  $\eta>1$\\
+  $Z_\eta,M_\eta$ bounded inverses\\
+  whole family similar to coordinates};
+
+\node[font=\sffamily\bfseries] at (10.5,2.7) {marked transfer family};
+\node[pass,minimum width=76mm] (domain) at (10.5,1.4) {
+  $\Re s>1+2\log_2|u|$\\
+  $T_\eta(s,u)$ and both de Rham degrees\\
+  converge in trace norm};
+\node[warn,minimum width=76mm] (safe) at (10.5,-0.6) {
+  common safe domain\\
+  $|u|\le1,\ \Re s>1$};
+\node[stop,minimum width=76mm] (barrier) at (10.5,-2.45) {
+  at $u=1$: stop at $\Re s=1$\\
+  eigenvalues $p^{-s}$ are not absolutely summable};
+
+\draw[arr] (individual.south) -- (global.north);
+\draw[arr] (domain.south) -- (safe.north);
+\draw[arr] (safe.south) -- (barrier.north);
+\draw[very thick,draw=stopred,dashed] (6.65,-3.55) -- (14.35,-3.55);
+\node[lab,text=stopred] at (10.5,-3.95)
+  {scalar continuation of the product is not continuation of this operator};
+\end{tikzpicture}

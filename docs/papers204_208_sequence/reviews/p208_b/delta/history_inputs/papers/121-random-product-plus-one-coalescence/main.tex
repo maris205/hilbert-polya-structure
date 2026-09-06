@@ -1,0 +1,594 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\one}{\mathbf 1}
+
+\title[Higher-moment poles in coalescence]{Higher-Moment Pole Ladders in Product-Plus-One Coalescence:\\A Yule-Averaged Marked Refinement}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{60C05, 05C05, 05A15, 05A16}
+\keywords{random coalescence, binary search tree, antichain polynomial,
+Riccati equation, moment generating function, singularity analysis}
+
+\begin{document}
+
+\begin{abstract}
+Start with $n$ ordered copies of $1$, repeatedly choose a current adjacent
+pair uniformly, and replace $(x,y)$ by $xy+1$; write $X_n$ for the terminal
+value.  Disanto, Fuchs, Paningbatan, and Rosenberg proved that the number
+$R_n$ of root ancestral configurations in a Yule--Harding random tree obeys
+the same recursion after the shift $X_n=R_n+1$.  We prove the identification
+under the common ordered-history coupling and assign their split law, finite
+distribution, unmarked antichain interpretation, mean analysis, and
+second-moment neighborhood zero contribution credit.  After this
+subtraction, and after crediting the existing fixed-tree cardinality marker,
+we obtain its Yule-averaged bivariate transform in closed form.  The
+all-order moment equation is a mechanical expansion of the owned exact law.
+The main residual theorem continues the two owned low-order radii to a strict ladder:
+for every $r\geq3$, the $r$th raw-moment series has a normalized positive
+simple pole at a radius $\rho_r<\rho_{r-1}$ and
+$\limsup_n(\E X_n^r)^{1/n}=\rho_r^{-1}$.  No full coefficient asymptotic is
+claimed for $r\geq3$.  The residual has passed only a bounded owner
+audit; novelty, priority, and external release remain open.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and scope}
+
+Consider the following rank-decreasing random dynamics.  Begin with the
+ordered word $(1,\ldots,1)$ of length $n$.  If the current word has $j$
+entries, choose one of its $j-1$ adjacent pairs with probability $1/(j-1)$
+and apply
+\begin{equation}\label{eq:merge}
+                 (x,y)\longmapsto xy+1.
+\end{equation}
+After $n-1$ mergers a positive integer $X_n$ remains.  The local rule is
+nonassociative, so $X_n$ depends on the entire merger genealogy.  The first
+nondegenerate law already occurs at $n=4$:
+\[
+        \Pp(X_4=4)=\frac23,\qquad \Pp(X_4=5)=\frac13.
+\]
+
+The decisive owner is not merely a generic random-tree neighbor.
+\citet{DisantoEtAl2022} study the number $R_n$ of root ancestral
+configurations under the Yule--Harding model.  Their Proposition~3.5 gives
+$R_1=0$ and the uniform-split recurrence
+$R_n\overset d=(R_I+1)(R'_{n-I}+1)$, including the exact finite law.  Their
+Section~3.2 identifies root configurations with nonempty antichains of the
+pruned internal-node tree; Sections~5.2--5.3 derive the mean and
+second-moment Riccati analyses.  Thus $X_n=R_n+1$ is the same statistic in
+shifted notation.  All of those statements, including the mean pole
+$1-\exp(-2\pi/(3\sqrt3))$ and the order-two growth analysis, receive zero
+contribution credit here.
+
+Two further owners narrow the residual.  The cardinality refinement on a
+fixed rooted-tree poset is studied by
+\citet{AndriantianaWagnerWang2013}; only its average under the Yule/uniform
+ordered-history law and the resulting closed bivariate transform are at
+issue here.  Moreover, \citet[Table~1]{ChangFuchs2010} give the exact
+Yule--Harding probability $2^{n-2}/(n-1)!$ of an $n$-caterpillar, building on
+the caterpillar analysis of \citet{Rosenberg2006}.  Both the minimizing shape
+and its probability therefore receive zero credit.
+
+The genealogy itself is also classical.  Each current boundary is an
+undeleted original boundary, and successive uniform choices form a uniform
+permutation.  Its max-Cartesian tree has the usual random binary-search-tree
+(BST) root-split law.  The same subtraction applies to deterministic subtree enumeration
+\cite{Ruskey1981Subtrees}, ideals of forest posets
+\cite{KodaRuskey1993Ideals}, antichain statistics on rooted plane trees
+\cite{Klazar1997Twelve}, and random forest ideals
+\cite{Janson2002Ideals}.  Random-BST generating-function schemes and
+singularity methods are also established
+\cite{FlajoletGourdonMartinez1997Patterns,MartinezPanholzerProdinger1998Descendants,FlajoletSedgewick2009}.
+
+After those deductions, the paper records only the following residual
+package:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the Yule-averaged bivariate ordinary generating function for the
+      owned fixed-tree cardinality marker, together with its closed Euler
+      form; and
+\item beginning at $r=3$, a strict continuation of the moment-radius ladder
+      with unit residues and exact exponential limsups.  The all-order
+      triangular identity is retained only as the mechanical interface from
+      the owned exact law.
+\end{enumerate}
+The higher-moment conclusion is deliberately limited to a positive simple
+pole and an exact exponential \emph{limsup}.  Without control of all complex
+singularities, no full asymptotic is asserted for $r\geq3$.  The direct owner
+has a stronger order-two conclusion than the ceiling used here.
+
+Two complementary viewpoints organize the proofs.  The temporal viewpoint
+uses uniform deletion orders, conditional root splits, moments, and
+Riccati--Euler equations.  The structural viewpoint regards the same orders
+as heap labelings of Cartesian trees and interprets the output as a
+cardinality-marked antichain count.  Both viewpoints use the same split law;
+we do not present them as probabilistically independent proofs.  The second
+viewpoint supplies a Yule-averaged cardinality transform and exact comb
+controls rather than a new random-tree model.  A focused search of the direct owner's
+citation neighborhood and current root-configuration formulations did not
+locate the averaged transform or a strict $r\geq3$ continuation of the owned
+low-order pole ladder.  This bounded non-hit
+is not evidence of novelty or priority.
+External circulation remains \textsc{hold}.
+
+\section{Direct-owner interface and the exact shift}
+
+Label the $n-1$ original boundaries by $1,\ldots,n-1$.  A merger deletes
+exactly the boundary separating the two merged blocks; every other current
+boundary retains its original label.
+
+\begin{theorem}[Owned split law and objectwise shift]\label{thm:split}
+Let $I_n$ be uniform on $\{1,\ldots,n-1\}$.  Conditional on $I_n=i$, let
+$X_i$ and $X'_{n-i}$ be independent copies generated on the two sides of the
+last-deleted boundary.  Then
+\begin{equation}\label{eq:split}
+ X_1=1,\qquad
+ X_n\ \overset d=\ 1+X_{I_n}X'_{n-I_n}\quad(n\geq2).
+\end{equation}
+Consequently, if $p_n(v)=\Pp(X_n=v)$, then $p_1(v)=\one_{\{v=1\}}$ and
+\begin{equation}\label{eq:law}
+ p_n(v)=\frac1{n-1}\sum_{i=1}^{n-1}
+ \sum_{\substack{a,b\geq1\\1+ab=v}}p_i(a)p_{n-i}(b).
+\end{equation}
+Every law in \eqref{eq:law} has finite support.
+Moreover, couple the merger process to the ordered unlabeled history having
+the same boundary order.  If $R_n$ counts its root configurations, then
+\begin{equation}\label{eq:shift}
+                         X_n=R_n+1
+\end{equation}
+for every history, not only in distribution.
+\end{theorem}
+
+\begin{proof}
+When $j$ blocks remain, precisely $j-1$ original boundaries remain, and the
+process selects each with probability $1/(j-1)$.  Thus the complete deletion
+order is a uniform permutation of $\{1,\ldots,n-1\}$.  Its last element is
+uniform.  Conditional on that element being $i$, the relative orders of the
+$i-1$ left boundaries and the $n-i-1$ right boundaries are independent and
+uniform.  All mergers on each side occur before the last deletion, after
+which \eqref{eq:merge} combines the two terminal side values.  This proves
+\eqref{eq:split}.  Conditioning on $I_n$ and the two side values gives
+\eqref{eq:law}.  Finiteness follows inductively.  These distributional
+statements reproduce Proposition~3.5 of \citet{DisantoEtAl2022} after a
+shift and receive zero credit.
+
+For the objectwise identification, let $T$ be the common ordered evaluation
+tree.  At a leaf, its root-configuration count is $R(T)=0$, while the merger
+value is $V(T)=1$.  At an internal root, the standard root-configuration
+decomposition gives
+\[
+ R(T)=\bigl(R(T_L)+1\bigr)\bigl(R(T_R)+1\bigr).
+\]
+Induction and $V(T)=1+V(T_L)V(T_R)$ now give $V(T)=R(T)+1$.  This proves
+\eqref{eq:shift}; the root-configuration recurrence and its unmarked
+antichain interpretation are owned by \citet{DisantoEtAl2022}.
+\end{proof}
+
+The proof also fixes the orientation: the \emph{last} deleted boundary is the
+root of the evaluation tree.  Reversing the deletion order exchanges maxima
+and minima in the Cartesian-tree description and is not the process above.
+
+\section{Heap labelings and a marked antichain transform}
+
+For a fixed deletion order, let $T$ be the ordered full binary evaluation
+tree.  Its leaves carry $1$, and every internal vertex applies
+$V(T)=1+V(T_L)V(T_R)$.  Order the internal vertices by ancestry.  For an
+indeterminate $s$, define
+\[
+ P_T(s)=\sum_{B} s^{|B|},
+\]
+where $B$ ranges over antichains of internal vertices, including the empty
+antichain.  Put $P_{\mathrm{leaf}}(s)=1$.
+
+\begin{lemma}[Owned unmarked interface and its marker]\label{lem:antichain}
+For every evaluation tree,
+\begin{equation}\label{eq:treepoly}
+ P_T(s)=s+P_{T_L}(s)P_{T_R}(s),\qquad V(T)=P_T(1).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+An antichain either contains the root, in which case it is the singleton
+root, or excludes the root, in which case its restrictions to the two
+subtrees are arbitrary antichains and can be chosen independently.  The
+first identity follows.  Its specialization at $s=1$ is the same recursion
+and initial condition as $V(T)$.
+\end{proof}
+
+At $s=1$, this is precisely the direct owner's correspondence: $R(T)$
+counts nonempty antichains and $X(T)=R(T)+1$ also includes the empty one.
+For general $s$, the fixed-tree cardinality marker and the equivalent
+root-subtree leaf statistic are also owned by
+\citet{AndriantianaWagnerWang2013}.  Only averaging this marker under the
+Yule/uniform ordered-history law and solving the resulting bivariate equation
+belong to the residual claim set.
+
+Let $T_n$ denote the tree induced by a uniform boundary order and write
+\[
+ a_n(s)=\E P_{T_n}(s),\qquad
+ A(z,s)=\sum_{n\geq1}a_n(s)z^{n-1}.
+\]
+
+\begin{theorem}[Expected cardinality-marked antichains]\label{thm:marked}
+Coefficientwise as a formal series in $z$ and $s$,
+\begin{equation}\label{eq:markedriccati}
+ \partial_z A=A^2+\frac{s}{(1-z)^2},\qquad A(0,s)=1.
+\end{equation}
+Set $w=1-z$,
+\[
+ \delta=\sqrt{1-4s},\qquad
+ \beta_\pm=\frac{1\pm\delta}{2},
+\]
+and
+\begin{equation}\label{eq:Y}
+ Y(w,s)=\frac{\beta_+w^{\beta_+}-\beta_-w^{\beta_-}}{\delta}.
+\end{equation}
+With the removable value
+\[
+ Y(w,1/4)=w^{1/2}\left(1+\frac12\log w\right),
+\]
+the solution is
+\begin{equation}\label{eq:markedclosed}
+                     A(z,s)=\frac{Y_w(1-z,s)}{Y(1-z,s)}.
+\end{equation}
+In particular, $[z^{n-1}s^k]A$ is the exact expected number of
+$k$-element internal-node antichains, and $A(z,1)$ is the mean series of
+$X_n$.
+\end{theorem}
+
+\begin{proof}
+The split law and \cref{lem:antichain} give, for $n\geq2$,
+\begin{equation}\label{eq:markedrec}
+ a_n(s)=s+\frac1{n-1}\sum_{i=1}^{n-1}a_i(s)a_{n-i}(s).
+\end{equation}
+Multiplying by $(n-1)z^{n-2}$ and summing gives
+\eqref{eq:markedriccati}.  The function in \eqref{eq:Y} satisfies
+\[
+ Y_{ww}+\frac{s}{w^2}Y=0,\qquad Y(1,s)=Y_w(1,s)=1.
+\]
+Because $\partial_z=-\partial_w$, the logarithmic derivative
+$A=Y_w/Y$ satisfies \eqref{eq:markedriccati} and the initial condition.
+Uniqueness of formal solutions proves \eqref{eq:markedclosed}.  Taking the
+limit $\delta\to0$ in \eqref{eq:Y} gives the displayed removable value.
+The coefficient interpretation is the definition of $a_n(s)$, and
+\cref{lem:antichain} gives $a_n(1)=\E X_n$.
+\end{proof}
+
+Equation \eqref{eq:markedclosed} is interpreted formally near $s=0$, or
+analytically with consistent branches.  At $s=0$ it gives
+$A(z,0)=(1-z)^{-1}$, recording the unique empty antichain.  The marked
+transform adds a coefficient-level statement, but its derivation still uses
+the same classical root split as \cref{thm:split}.
+
+\section{All raw moments and a strict radius cascade}
+
+For integers $r\geq0$ set
+\[
+ m_{r,n}=\E X_n^r,\qquad
+ F_r(z)=\sum_{n\geq1}m_{r,n}z^{n-1}.
+\]
+Thus $m_{0,n}=1$ and $F_0(z)=(1-z)^{-1}$.
+
+\begin{proposition}[Mechanical all-order moment interface]\label{prop:moments}
+For $n\geq2$ and $r\geq0$,
+\begin{equation}\label{eq:momentrec}
+ (n-1)m_{r,n}=\sum_{i=1}^{n-1}\sum_{k=0}^r
+       \binom rk m_{k,i}m_{k,n-i}.
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:momentode}
+ F_r'(z)=\sum_{k=0}^r\binom rk F_k(z)^2,
+ \qquad F_r(0)=1.
+\end{equation}
+At level $r$, the only new function on the right is $F_r^2$.
+\end{proposition}
+
+\begin{proof}
+Condition on the split in \eqref{eq:split}, expand
+$(1+ab)^r=\sum_{k=0}^r\binom rk a^k b^k$, and use conditional
+independence.  This gives \eqref{eq:momentrec}.  Coefficient extraction from
+the square of each $F_k$ gives \eqref{eq:momentode}.
+\end{proof}
+
+The cases $r=1,2$ lie in the mean/variance analysis of
+\citet{DisantoEtAl2022}.  More generally, the displayed identity is a
+one-line binomial expansion of their exact distributional recurrence.  It
+therefore receives zero contribution credit and serves only as the interface
+for the strict higher-order theorem; no elementary solution is claimed at
+every level.
+
+\begin{theorem}[Strict higher-moment radius continuation]\label{thm:radii}
+There are numbers
+\begin{equation}\label{eq:rholadder}
+             1=\rho_0>\rho_1>\rho_2>\cdots>0
+\end{equation}
+such that $\rho_r$ is the radius of convergence of $F_r$.  For every
+$r\geq1$,
+\begin{equation}\label{eq:localpole}
+ F_r(z)=\frac1{\rho_r-z}+O(1)\qquad(z\to\rho_r),
+\end{equation}
+and
+\begin{equation}\label{eq:limsup}
+ \limsup_{n\to\infty}\bigl(\E X_n^r\bigr)^{1/n}=\rho_r^{-1}.
+\end{equation}
+The residual assertion begins at $r=3$: the cases $r=1,2$ are retained only
+as the owned base of the continuation.
+\end{theorem}
+
+\begin{proof}
+Proceed by induction from $F_0(z)=(1-z)^{-1}$ and $\rho_0=1$.  For
+$r\geq1$, separate the new unknown in \eqref{eq:momentode}:
+\begin{equation}\label{eq:Gr}
+ F_r'=F_r^2+G_r,\qquad
+ G_r=\sum_{k=0}^{r-1}\binom rk F_k^2.
+\end{equation}
+On $|z|<\rho_{r-1}$, let $U_r$ solve
+\begin{equation}\label{eq:Ur}
+ U_r''+G_rU_r=0,\qquad U_r(0)=1,\quad U_r'(0)=-1.
+\end{equation}
+The logarithmic derivative $-U_r'/U_r$ satisfies \eqref{eq:Gr} and agrees
+with $F_r$ near zero.
+
+By induction, all terms in $G_r$ except the one containing $F_{r-1}$ are
+analytic at $\rho_{r-1}$, while \eqref{eq:localpole} gives
+\begin{equation}\label{eq:Gedge}
+ G_r(x)=\frac{r}{(\rho_{r-1}-x)^2}
+        +O\!\left(\frac1{\rho_{r-1}-x}\right)
+ \quad (x\uparrow\rho_{r-1}).
+\end{equation}
+Choose $c$ with $1/4<c<r$.  Close enough to $\rho_{r-1}$,
+$G_r(x)\geq c(\rho_{r-1}-x)^{-2}$.  Every nonzero solution of the Euler
+comparison equation
+\[
+ V''+\frac{c}{(\rho_{r-1}-x)^2}V=0
+\]
+has infinitely many zeros accumulating at $\rho_{r-1}$: after putting
+$s=\rho_{r-1}-x$, it is a linear combination of
+$s^{1/2}\cos(\nu\log s)$ and $s^{1/2}\sin(\nu\log s)$, with
+$\nu=\sqrt{4c-1}/2$.  If $U_r$ has not already vanished, choose two
+consecutive comparison zeros after the point where the coefficient
+inequality holds.  The Sturm comparison theorem forces a zero of $U_r$
+strictly between them \cite[Chapter~1]{Zettl2005}.  Hence $U_r$ vanishes
+strictly before $\rho_{r-1}$.  Let $\rho_r$ be its first positive zero.
+Then $0<\rho_r<\rho_{r-1}$.
+
+The coefficient $G_r$ is analytic at $\rho_r$.  A double zero of $U_r$
+would contradict uniqueness for \eqref{eq:Ur}, so the zero is simple.
+Consequently $-U_r'/U_r$ has the normalized local form
+\eqref{eq:localpole}.
+
+It remains to identify the positive pole with the complex radius.  The
+coefficients of $F_r$ are positive.  If its radius $R$ were smaller than
+$\rho_r$, Pringsheim's theorem would force a singularity at the positive
+point $R$ \cite[Section~IV.6]{FlajoletSedgewick2009}.  Yet $G_r$ is analytic
+there and $U_r$ has no positive zero before $\rho_r$, so $-U_r'/U_r$ is
+analytic in a neighborhood of $R$, a contradiction.  Thus $R=\rho_r$.
+Cauchy--Hadamard now gives \eqref{eq:limsup}; replacing the exponent
+$1/(n-1)$ by $1/n$ does not change the limit superior.
+\end{proof}
+
+\begin{remark}[Hard ceiling for $r\geq3$]\label{rem:ceiling}
+The local pole in \eqref{eq:localpole} lies at the positive convergence
+radius, but the proof does not exclude other singularities of the same
+modulus.  Accordingly, \cref{thm:radii} claims only \eqref{eq:limsup} for
+$r\geq3$.  A statement such as
+$\E X_n^r\sim\rho_r^{-n}$ would require an additional dominant-singularity
+theorem and is not part of this paper.  The stronger order-two asymptotic in
+\citet{DisantoEtAl2022} is not weakened or reclaimed.
+\end{remark}
+
+\section{Owned mean and endpoint normalizations}
+
+At $r=1$, the forcing in \eqref{eq:Gr} is explicit.  This permits a complete
+coefficient asymptotic, unlike the higher levels.
+
+\begin{theorem}[Direct-owner mean, reproduced for normalization]\label{thm:mean}
+Let $M=F_1$ and $w=1-z$.  Then
+\begin{equation}\label{eq:meanode}
+ M'=M^2+\frac1{(1-z)^2},\qquad M(0)=1,
+\end{equation}
+and
+\begin{equation}\label{eq:meanclosed}
+ M(z)=\frac1w\left[
+ \frac12-\frac{\sqrt3}{2}
+ \tan\!\left(\frac{\sqrt3}{2}\log w-\frac\pi6\right)
+ \right].
+\end{equation}
+Its unique dominant singularity is the simple pole
+\begin{equation}\label{eq:rho}
+ \rho=1-\exp\!\left(-\frac{2\pi}{3\sqrt3}\right)
+      =0.7015639408\ldots .
+\end{equation}
+For some $R>\rho$,
+\begin{equation}\label{eq:meanasymptotic}
+ \E X_n=\rho^{-n}+O(R^{-n}),\qquad
+ \rho^{-1}=1.4253868276\ldots .
+\end{equation}
+In particular, the leading coefficient is one.
+\end{theorem}
+
+\begin{proof}
+Equation \eqref{eq:meanode} is the case $r=1$ of
+\cref{prop:moments}.  Write $M=-U'/U$.  Then
+\[
+ U''+\frac{U}{(1-z)^2}=0,\qquad U(0)=1,\quad U'(0)=-1.
+\]
+With $\alpha=\sqrt3/2$, the solution is
+\begin{equation}\label{eq:Umean}
+ U(z)=\frac2{\sqrt3}w^{1/2}
+ \cos\!\left(\alpha\log w-\frac\pi6\right).
+\end{equation}
+Since $M=U_w/U$, differentiation yields \eqref{eq:meanclosed}.
+
+In $|z|<1$, the number $w=1-z$ lies in the right half-plane, so the
+principal logarithm is analytic.  The zeros of the cosine in
+\eqref{eq:Umean} satisfy
+\[
+ w_k=\exp\!\left[\frac2{\sqrt3}
+       \left(\frac{2\pi}{3}+k\pi\right)\right],
+ \qquad k\in\mathbb Z.
+\]
+They are positive real because all complex zeros of cosine are real.  The
+zero $k=-1$ gives \eqref{eq:rho}.  The zeros with $k\leq-2$ correspond to
+larger positive $z<1$, while those with $k\geq0$ give $|z|>1$; the logarithm
+first branches at $z=1$.  Hence $\rho$ is the unique singularity on its
+circle and is isolated from the next one.  The logarithmic derivative of a
+simple zero has local form $1/(\rho-z)+O(1)$.  Coefficient extraction gives
+\eqref{eq:meanasymptotic}.
+\end{proof}
+
+The theorem is the shifted form of the Yule--Harding mean analysis in
+\citet[Section~5.2]{DisantoEtAl2022}; no part of it is counted as a residual
+advance.
+
+The opposite edge of the distribution also has a closed form.
+
+\begin{proposition}[Fully owned caterpillar normalization]\label{prop:minimum}
+For every $n\geq1$, $X_n\geq n$.  For $n\geq2$,
+\begin{equation}\label{eq:minatom}
+       \min\supp X_n=n,
+       \qquad
+       \Pp(X_n=n)=\frac{2^{n-2}}{(n-1)!}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For positive integers, $xy+1\geq x+y$, with equality exactly when $x=1$ or
+$y=1$.  Induct on $n$ in \eqref{eq:split}.  If the root split has sizes
+$i$ and $j=n-i$, then
+\[
+ 1+X_iX'_j\geq1+ij=i+j+(i-1)(j-1)\geq n.
+\]
+Equality requires minimal values in both subtrees and an endpoint split
+$i=1$ or $j=1$.  Iterating this condition gives precisely the planar combs.
+Among the $(n-1)!$ boundary orders, their number $c_n$ satisfies
+$c_2=1$ and $c_n=2c_{n-1}$ for $n\geq3$.  Thus
+$c_n=2^{n-2}$, which proves \eqref{eq:minatom}.
+\end{proof}
+
+The fact that the caterpillar minimizes the number of root configurations is
+already recorded by \citet[Section~2.4.4]{DisantoEtAl2022}.  The displayed
+mass is exactly the Yule--Harding $n$-caterpillar probability printed by
+\citet[Table~1]{ChangFuchs2010}; \citet{Rosenberg2006} is the earlier
+caterpillar-pattern owner.  The proof is retained only as a translation to
+the adjacent-deletion encoding, and the entire proposition receives zero
+contribution credit.
+
+\section{Exact coefficient controls and proof dependencies}
+
+The first marked polynomials make the coefficient interpretation concrete.
+They were obtained both from \eqref{eq:markedrec} and by averaging over every
+boundary order through $n=9$.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Exact expected cardinality-marked antichain polynomials.  At
+$s=1$, the owned root-configuration statistic satisfies $R_n=X_n-1$.
+The machine-readable artifact continues through $n=12$.}
+\label{tab:marked}
+\begin{tabular}{@{}rll@{}}
+\toprule
+$n$ & $a_n(s)=\E P_{T_n}(s)$ & $\E X_n$ \\
+\midrule
+1 & $1$ & $1$ \\
+2 & $1+s$ & $2$ \\
+3 & $1+2s$ & $3$ \\
+4 & $1+3s+\frac13s^2$ & $\frac{13}{3}$ \\
+5 & $1+4s+\frac76s^2$ & $\frac{37}{6}$ \\
+6 & $1+5s+\frac{13}{5}s^2+\frac{2}{15}s^3$ & $\frac{131}{15}$ \\
+7 & $1+6s+\frac{47}{10}s^2+\frac{59}{90}s^3$ & $\frac{556}{45}$ \\
+8 & $1+7s+\frac{263}{35}s^2+\frac{121}{63}s^3+\frac{17}{315}s^4$
+  & $\frac{787}{45}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The standard-library verifier implements two independent finite
+calculations where such independence is literal: direct adjacent merging for
+each boundary permutation and dynamic programming from the split law.  It
+also compares the marked tree polynomials with \eqref{eq:markedriccati}, raw
+moments with \eqref{eq:momentode}, the Euler-series logarithmic derivative
+with the mean coefficients, and the comb count with \eqref{eq:minatom}.
+The exact artifact
+\path{code/marked_antichain_coefficients.tsv} records $a_n(s)$, the first two
+moments, minimum mass, and support size through $n=12$.
+
+These checks do not prove the singularity statements.  Conversely, the
+analytic proof does not turn the heap-labeling viewpoint into a second
+probability law: both temporal and structural calculations inherit the same
+uniform split from \cref{thm:split}.  The honest dependency chain is
+\[
+ \text{uniform boundaries}
+ \Longrightarrow \text{BST split}
+ \Longrightarrow
+ \begin{cases}
+   \text{finite law and moment Riccati hierarchy},\\
+   \text{heap-labeled tree and marked antichains}.
+ \end{cases}
+\]
+The two branches cross-check finite coefficients and extremal combs, while
+the Sturm--Pringsheim argument is specific to the temporal moment branch.
+
+\section{Ownership boundary and conclusion}
+
+Most importantly, \citet{DisantoEtAl2022} own the same statistic under
+$R_n=X_n-1$: the Yule split and finite law, root configurations and unmarked
+antichains, the mean Riccati equation and pole, and the second-moment/variance
+neighborhood all receive zero credit.  Uniform random-BST splitting,
+Cartesian trees, forest ideals, Riccati linearization, Pringsheim's theorem,
+and generic singularity extraction are also background.
+\citet{AndriantianaWagnerWang2013} own fixed-tree cardinality-marked
+antichains, and \citet{ChangFuchs2010,Rosenberg2006} own the caterpillar
+probability neighborhood.  The residual recorded here is only the
+Yule-averaged bivariate transform and, centrally, the strict pole/radius
+continuation for every $r\geq3$.  The all-order identity is a mechanical
+interface, not a separate advance.  We do not claim that all equivalent
+terminology or unpublished work has been exhausted.
+
+The product-plus-one encoding is useful because it turns the owned
+root-configuration statistic into a literal adjacent dynamics.  Retaining a
+fixed-tree cardinality marker and averaging it under the Yule law yields the
+exact transform, while the triangular Riccati system lets the two low-order
+owner results propagate to a strict hierarchy at every higher order.  Those higher moments stop at the exact limsup in
+\cref{rem:ceiling}.  Novelty, priority, and external dissemination remain
+\textsc{hold} pending specialist review.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

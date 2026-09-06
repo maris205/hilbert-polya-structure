@@ -1,0 +1,113 @@
+\section{Exact certificate definitions}
+\label{app:certificates}
+
+\subsection{Formal determinant and trace certificates}
+
+For a cutoff \(n\), the formal certificate uses independent indeterminates
+\(x_1,\ldots,x_n\).  It constructs
+\[
+B_+=\sum_{\varnothing\ne S}\eps(S)x_S,\qquad
+B_-=\sum_{\varnothing\ne S}\eps(S)(-1)^{|S|}x_S
+\tag{B.1}\label{B.1}
+\]
+and the regular matrix
+\[
+\Breg=\sum_{\varnothing\ne S}\eps(S)x_SL_a^{|S|}.
+\tag{B.2}\label{B.2}
+\]
+Sparse polynomial comparison tests
+\[
+1-B_+=\prod_i(1-x_i),\quad
+1-B_-=\prod_i(1+x_i),\quad
+\det(I-\Breg)=(1-B_+)(1-B_-).
+\tag{B.3}\label{B.3}
+\]
+No block is reconstructed by dividing the regular determinant after the fact.
+
+The repetition ledger specializes all \(x_i=t\), expands
+\[
+\sum_{\ell=1}^{K}\frac{\tr(B^\ell)}{\ell}
+\tag{B.4}\label{B.4}
+\]
+with enough temporal powers to determine degrees through \(K\), and compares
+each coefficient with the truncated series of
+\(-\log\det(I-B)\).  In particular, the scalar sign attached to each symbol
+is multiplied along a word.  The 300 reported rows comprise the three
+transfers \(+\), \(-\), and regular, ten atom cutoffs, and ten coefficient
+degrees.
+
+\subsection{Cyclic phases and primitive recurrence}
+
+For a \(C_m\) character, a coefficient is stored as a pair
+\((q,r)\) representing \(q\omega^r\), with \(q\in\Z\) and
+\(r\in\Z/m\Z\).  Multiplication adds phase exponents modulo \(m\), so no
+floating approximation to \(\omega\) enters.  The independent regular test
+forms the exact cyclic permutation matrix and verifies
+\[
+\det(I-xL_a)=1-x^m.
+\tag{B.5}\label{B.5}
+\]
+
+Primitive words are counted first in the base.  The dynamic recurrence is
+initialized by \(Q_1(c)=\binom nc\) for \(1\le c\le n\) and zero outside the
+allowed range; higher \(Q_r(c)\) use \eqref{6.7}.  Divisibility by \(r\) is
+checked before forming \(Q_r(c)/r\).  For each base cell, the separate lift
+ledger records
+\[
+\Frob(\gamma)=a^c,\qquad
+q=\frac{m}{\gcd(m,c)},\qquad
+\text{lift multiplicity}=\gcd(m,c).
+\tag{B.6}\label{B.6}
+\]
+The base-necklace count, immediate mixed-closure count, and lifted-cycle
+count remain separate output fields.
+
+\subsection{Naturality, gauges, and transition controls}
+
+The naturality audit fixes \(r_1=1\) and enumerates
+\[
+(r_2,\ldots,r_K)\in(\Z/m\Z)^{K-1}
+\tag{B.7}\label{B.7}
+\]
+for \(m=2,\ldots,8\) and \(K=2,\ldots,6\).  A table is
+operator-coefficient-clean only when every full-regular coefficient satisfies
+\[
+L_{a^{r_k}}=L_a^k,\qquad 1\le k\le K.
+\tag{B.8}\label{B.8}
+\]
+Character-clean counts are retained separately because a nonfaithful
+character can satisfy \(\chi(a^{r_k})=\chi(a)^k\) without satisfying
+\eqref{B.8}.  This convention accounts for 72,079 enumerated tables and the
+unique normalized power table in each of 35 cells.
+
+For a vertex gauge \(b\), the transition label has the form
+\[
+\alpha(i,j)=b(j)b(i)^{-1}
+\tag{B.9}\label{B.9}
+\]
+up to the fixed left/right convention.  Products of \eqref{B.9} around closed
+words telescope.  The gauge audit therefore checks both edge recovery and
+periodic identity.  Negative controls retain an explicit shortest periodic
+witness.
+
+The four transition countercontrols are not evidence for a clean extension.
+They test the boundary of the one-letter theorem by comparing an independently
+formed two-symbol transition determinant with its nearest atom-local baseline.
+The first nonzero coefficient of their difference is the leakage reported in
+\eqref{7.6}.  Squarefree degrees and temporal powers are both retained, which
+is why the strict-symbol-change control is detected at \(x^2y^2\).
+
+\subsection{Adversarial inventories and evidence policy}
+
+The inventory control substitutes exact rational values into the same four
+formal determinant identities.  Sixteen frozen seeds are used for each of
+four families.  An inventory passes only if every identity is exact; numerical
+closeness is not a criterion.  The pass-rate margin compares these Boolean
+outcomes across families and is zero.
+
+All reported calculations are deterministic finite certificates.  They have
+no training split, fitted parameter, uncertainty estimate, or statistical
+generalization claim.  Riemann-zero tables, target spectra, target-derived
+phases, and fitted clocks are forbidden and were not used.  The certificates
+support the implementation of proved finite identities; they do not provide
+evidence for RH, meromorphic continuation, or a Hilbert--Pólya operator.

@@ -1,0 +1,121 @@
+\section{The flat-connection subshift}
+\label{sec:flat-shift}
+
+\subsection{A local holonomy rule}
+
+Fix a finite group $\K$.  A point $A\in(\K^3)^{\LambdaSurf}$ is written
+\[
+ A(g)=(A_1(g),A_2(g),A_3(g)).
+\]
+Interpret $A_i(g)$ as the parallel transport on the positive oriented edge
+$g\to gx_i$; the reverse edge has transport $A_i(g)^{-1}$.  Starting at $g$,
+the lift of $x_1^2x_2^2x_3^2$ traverses six positive edges.  Define its
+holonomy by
+\begin{align}
+ \mathcal H_A(g)={}&A_1(g)A_1(gx_1)
+ A_2(gx_1^2)A_2(gx_1^2x_2)\notag\\
+ &\quad\cdot A_3(gx_1^2x_2^2)
+ A_3(gx_1^2x_2^2x_3).
+ \label{eq:local-holonomy}
+\end{align}
+
+\begin{definition}
+\label{def:flat-shift}
+The \emph{$\K$-flat surface shift} is
+\[
+ X_{\K}=\{A\in(\K^3)^{\LambdaSurf}:
+              \mathcal H_A(g)=\eK\text{ for every }g\in\LambdaSurf\}.
+\]
+\end{definition}
+
+\begin{proposition}
+\label{prop:sft}
+$X_{\K}$ is a $\LambdaSurf$-subshift of finite type.
+\end{proposition}
+
+\begin{proof}
+The condition at the identity reads only the coordinates in the fixed finite
+set
+\[
+ \{1,x_1,x_1^2,x_1^2x_2,x_1^2x_2^2,
+   x_1^2x_2^2x_3\}.
+\]
+There are finitely many forbidden patterns on this set, namely those for
+which the ordered product in \eqref{eq:local-holonomy} is not $\eK$.  Its
+translates are exactly the conditions at all $g$.  The resulting set is closed
+and shift invariant, and it is defined by this finite forbidden list.
+\end{proof}
+
+\subsection{Fixed configurations as flat connections}
+
+Let $H\leq\LambdaSurf$ have finite index $V$.  By the left-shift convention,
+an $H$-fixed $A$ descends to one label on each positively oriented edge of
+$H\backslash\widetilde N_3$.  Equation \eqref{eq:local-holonomy} says precisely
+that every lifted face has trivial holonomy.  Thus $\Fix_H(X_{\K})$ is the set
+of flat $\K$-connections on this finite cellulation.
+
+We count these connections without quotienting by gauge.  If
+$u\colon H\backslash\LambdaSurf\to\K$ is a vertex gauge, use the convention
+\begin{equation}
+ (u\cdot A)(v\to w)=u(v)A(v\to w)u(w)^{-1}.
+ \label{eq:gauge-action}
+\end{equation}
+Face holonomy is conjugated by the value of $u$ at its initial vertex, so
+flatness is preserved.
+
+\begin{proposition}[Rooted gauge count]
+\label{prop:gauge-count}
+For every finite-index subgroup $H\leq\LambdaSurf$,
+\begin{equation}
+ |\Fix_H(X_{\K})|
+ =|\K|^{[\LambdaSurf:H]-1}|\Hom(H,\K)|.
+ \label{eq:gauge-count}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write $Y=H\backslash\widetilde N_3$ and choose a root vertex $v_0$ and a
+spanning tree $T$ in its $1$-skeleton.  A based gauge is a vertex map $u$ with
+$u(v_0)=\eK$.  There are $|\K|^{V-1}$ based gauges, where
+$V=[\LambdaSurf:H]$.
+
+The based gauge action on edge labellings is free.  Indeed, if $u\cdot A=A$,
+then along an oriented tree edge $v\to w$,
+\[
+ u(w)=A(v\to w)^{-1}u(v)A(v\to w).
+\]
+Starting from $u(v_0)=\eK$ and moving along the unique tree paths gives
+$u(v)=\eK$ at every vertex.
+
+Every connection has a unique based gauge transform whose labels on all tree
+edges are $\eK$.  Existence follows recursively: once $u(v)$ is fixed and
+$v\to w$ is the next outward tree edge, set $u(w)=u(v)A(v\to w)$.  With the
+convention \eqref{eq:gauge-action}, the transformed edge label is the identity.
+Uniqueness follows by the same tree recursion.
+
+It remains to identify the tree-trivial flat connections.  For such a
+connection, multiply edge labels along a based cellular loop, using inverses
+on reversed edges.  Flatness makes this holonomy invariant under insertion or
+deletion of a lifted face boundary, and tree triviality fixes the chosen
+based representatives.  Consequently holonomy defines a homomorphism
+\[
+ \pi_1(Y,v_0)\cong H\longrightarrow\K.
+\]
+Conversely, collapse $T$ to the root.  A homomorphism $H\to\K$ assigns labels
+to the remaining oriented $1$-cells, and the relators given by the $2$-cells
+are sent to $\eK$; expanding the tree with identity labels gives a
+tree-trivial flat connection.  The two constructions are inverse.
+
+Hence the set of flat connections is the Cartesian product of the
+$|\K|^{V-1}$ based gauges with $\Hom(H,\K)$, proving
+\eqref{eq:gauge-count}.
+\end{proof}
+
+\begin{remark}
+\label{rem:unbased-gauge}
+The based condition is essential for this clean count.  The full gauge group
+can have stabilizers governed by centralizers of holonomy images.  No orbit
+count is taken here: $X_{\K}$ contains raw edge labellings, so
+\eqref{eq:gauge-count} is the required cardinality.
+\end{remark}
+

@@ -1,0 +1,503 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\G}{\mathcal G}
+\newcommand{\A}{\mathcal A}
+\newcommand{\E}{\mathcal E}
+\newcommand{\Lyn}{\mathsf L}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\invz}{\operatorname{inv}_0}
+
+\title[Zero-totalized Lyness dynamics]{The All-Affine Functional Graph of the
+Zero-Totalized Lyness Map over Odd Finite Fields}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 37P25, 11T06}
+\keywords{finite dynamics, finite field, Lyness map, functional graph, entry time, dynamical zeta function, fibre}
+
+\begin{document}
+
+\begin{abstract}
+Let $\F_q$ be a finite field of odd order, set $\invz(0)=0$ and
+$\invz(x)=x^{-1}$ for $x\ne0$, and consider the all-affine self-map
+$\Lyn(x,y)=(y,(1+y)\invz(x))$.  We determine its complete functional graph.
+The plane splits disjointly into a generic Lyness locus, the two coordinate
+axes, and three exceptional tail layers.  The recurrent set has
+$q^2-3q+5$ points, while the tail polynomial is
+\[
+ (q^2-3q+5)+(q-1)z+(q-2)z^2+(q-2)z^3;
+\]
+thus the maximum tail is exactly three for every odd $q$.  If $r_q$ counts
+the roots of $a^2-a-1$, then the graph has $1+r_q$ fixed points, two
+2-cycles, $(q-3)/2$ 4-cycles, and
+$((q-2)(q-3)-r_q)/5$ 5-cycles.  We also prove a codomain-wide inverse law:
+fibres have size $q$ at $(-1,0)$, size zero at $(-1,v)$ for $v\ne0$, and
+size one elsewhere.  Classical Lyness five-periodicity, QRT and cluster
+interpretations, and general finite-field birational dynamics receive zero
+contribution credit.  The residual result is the exact zero-totalized affine
+boundary completion.  External release remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{Scope and complete statement}
+
+The parameter-one Lyness recurrence and its five-cycle are classical.  The
+same map is a basic QRT system and a type-$A_2$ cluster example
+\citep{Lyness1942,HoneKouloukas2023,Hone2020}.  Integrable birational maps
+over finite fields also admit general algebraic-geometric and
+almost-good-reduction treatments~\citep{JogiaRobertsVivaldi2006,Kanki2013}.
+Kanki resolves division-by-zero obstructions by extending/reducing the state
+space, not by setting inverse zero to zero.  All of that material is
+background here.
+We study one boundary convention on the whole affine plane, including every
+point at which the usual rational formula has a zero denominator.
+
+Fix a finite field $\F_q$ of odd order.  Define
+\begin{equation}\label{eq:invzero}
+ \invz(x)=
+ \begin{cases}
+ 0,&x=0,\\
+ x^{-1},&x\ne0,
+ \end{cases}
+ \qquad
+ \Lyn(x,y)=\bigl(y,(1+y)\invz(x)\bigr).
+\end{equation}
+Let $r_q$ be the number of roots in $\F_q$ of
+\begin{equation}\label{eq:fixed-polynomial}
+ a^2-a-1=0.
+\end{equation}
+For a point $P$, its tail $\tau(P)$ is the least $t\geq0$ such that
+$\Lyn^t(P)$ is recurrent.
+
+The five sets below will describe every point.  Put
+\begin{align}
+ \G&=\{(x,y):xy(1+x)(1+y)(1+x+y)\ne0\},\label{eq:generic}\\
+ \A&=(\{0\}\times\F_q)\cup(\F_q\times\{0\}),\label{eq:axes}\\
+ \E_1&=\{(a,-1):a\in\F_q\setminus\{0\}\},\label{eq:e1}\\
+ \E_2&=\{(-1-a,a):a\in\F_q\setminus\{0,-1\}\},\label{eq:e2}\\
+ \E_3&=\{(-1,-1-a):a\in\F_q\setminus\{0,-1\}\}.\label{eq:e3}
+\end{align}
+
+\begin{theorem}[Complete all-affine atlas]\label{thm:main}
+For every odd prime power $q$, the following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The five sets in \eqref{eq:generic}--\eqref{eq:e3} are pairwise
+disjoint and their union is $\F_q^2$.  Their respective sizes are
+\begin{equation}\label{eq:strata-sizes}
+ (q-2)(q-3),\qquad 2q-1,\qquad q-1,\qquad q-2,\qquad q-2.
+\end{equation}
+The recurrent set is $\G\cup\A$, and $\tau$ equals $j$ on $\E_j$.
+Consequently
+\begin{equation}\label{eq:temporal}
+ \sum_{P\in\F_q^2}z^{\tau(P)}
+ =(q^2-3q+5)+(q-1)z+(q-2)z^2+(q-2)z^3.
+\end{equation}
+In particular, the maximum tail is exactly three.
+\item The cycle census is
+\begin{center}
+\begin{tabular}{@{}cc@{}}
+\toprule
+cycle length & number of cycles\\
+\midrule
+$1$ & $1+r_q$\\
+$2$ & $2$\\
+$4$ & $(q-3)/2$\\
+$5$ & $((q-2)(q-3)-r_q)/5$\\
+\bottomrule
+\end{tabular}
+\end{center}
+There are no other cycles.  Hence the dynamical zeta function is
+\begin{equation}\label{eq:zeta}
+ \zeta_{\Lyn}(z)=
+ (1-z)^{-(1+r_q)}(1-z^2)^{-2}
+ (1-z^4)^{-(q-3)/2}
+ (1-z^5)^{-((q-2)(q-3)-r_q)/5}.
+\end{equation}
+\item For every target $(u,v)\in\F_q^2$,
+\begin{equation}\label{eq:fibre-law}
+ |\Lyn^{-1}(u,v)|=
+ \begin{cases}
+ q,&(u,v)=(-1,0),\\
+ 0,&u=-1\text{ and }v\ne0,\\
+ 1,&u\ne-1.
+ \end{cases}
+\end{equation}
+Thus $|\im\Lyn|=q^2-q+1$, and the exceptional in-tree attached to the
+two-cycle $(-1,0)\leftrightarrow(0,-1)$ is exactly the one displayed in
+\cref{cor:tree} below.
+\end{enumerate}
+\end{theorem}
+
+The next three sections prove \cref{thm:main}.  Enumeration is used only for
+the independent controls reported in \cref{sec:controls}.
+
+\section{Disjoint strata and the sharp tail polynomial}
+
+We first prove coverage pointwise; the cardinality identity will be a
+consequence rather than a substitute.
+
+\begin{proposition}[Pointwise all-plane partition]\label{prop:partition}
+The sets $\G,\A,\E_1,\E_2,\E_3$ are pairwise disjoint and cover $\F_q^2$.
+Their sizes are given by \eqref{eq:strata-sizes}.
+\end{proposition}
+
+\begin{proof}
+Every point of $\A$ has a zero coordinate.  Every point in an exceptional
+set has two nonzero coordinates: the exclusions on the parameter in
+\eqref{eq:e1}--\eqref{eq:e3} guarantee this.  Hence $\A$ is disjoint from
+the other four sets.
+
+Now take $(x,y)\notin\A$.  If $y=-1$, then $(x,y)\in\E_1$.  Suppose
+$y\ne-1$.  If $x=-1$, set $a=-1-y$.  Since $y\notin\{0,-1\}$, one has
+$a\notin\{0,-1\}$ and $(x,y)=(-1,-1-a)\in\E_3$.  Suppose also $x\ne-1$.
+If $1+x+y=0$, then $(x,y)=(-1-a,a)\in\E_2$ with $a=y\notin\{0,-1\}$.
+If none of these three equalities holds, all five factors in
+\eqref{eq:generic} are nonzero, so $(x,y)\in\G$.  The tests are ordered by
+mutually exclusive equations.  They therefore prove both coverage and
+unique membership.
+
+The axis union has size $2q-1$, while the three exceptional parametrizations
+are injective and have sizes $q-1,q-2,q-2$.  Subtracting these disjoint sets
+from the $q^2$ points of the plane gives
+\[
+ |\G|=q^2-(2q-1)-(q-1)-2(q-2)=(q-2)(q-3).
+\]
+\end{proof}
+
+On $\G$, the zero-totalized map agrees for five steps with the classical
+rational recurrence.  We record the algebra because it also verifies that
+no zero denominator is crossed.
+
+\begin{lemma}[Five iterates on the generic locus]\label{lem:five}
+If $(x,y)\in\G$, then
+\begin{align}
+ \Lyn(x,y)&=\left(y,\frac{1+y}{x}\right),\nonumber\\
+ \Lyn^2(x,y)&=\left(\frac{1+y}{x},
+                  \frac{1+x+y}{xy}\right),\nonumber\\
+ \Lyn^3(x,y)&=\left(\frac{1+x+y}{xy},
+                  \frac{1+x}{y}\right),\label{eq:five-iterates}\\
+ \Lyn^4(x,y)&=\left(\frac{1+x}{y},x\right),\nonumber\\
+ \Lyn^5(x,y)&=(x,y).\nonumber
+\end{align}
+In particular every point of $\G$ is recurrent.
+\end{lemma}
+
+\begin{proof}
+The five possible first coordinates at successive divisions are
+\[
+ x,\quad y,\quad \frac{1+y}{x},\quad
+ \frac{1+x+y}{xy},\quad \frac{1+x}{y}.
+\]
+They are all nonzero by \eqref{eq:generic}, so $\invz$ is ordinary inversion
+at every displayed step.  Repeated substitution in \eqref{eq:invzero} gives
+\eqref{eq:five-iterates}; the only cancellations use
+$(1+x)(1+y)=1+x+y+xy$.  The last line proves recurrence.
+\end{proof}
+
+The complement of $\G$ has equally explicit arrows.
+
+\begin{lemma}[Axes and exceptional layers]\label{lem:arrows}
+For $a\in\F_q$,
+\begin{equation}\label{eq:axis-arrows}
+ \Lyn(0,a)=(a,0),\qquad
+ \Lyn(a,0)=(0,a^{-1})\quad(a\ne0),
+\end{equation}
+and $(0,0)$ is fixed.  For $a\in\F_q\setminus\{0,-1\}$,
+\begin{equation}\label{eq:tail-chain}
+ (-1,-1-a)\longmapsto(-1-a,a)
+ \longmapsto(a,-1)\longmapsto(-1,0),
+\end{equation}
+while
+\begin{equation}\label{eq:leaf-and-cycle}
+ (-1,-1)\longmapsto(-1,0)
+ \longmapsto(0,-1)\longmapsto(-1,0).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Equations \eqref{eq:axis-arrows} follow directly from $\invz(0)=0$ and
+$\invz(a)=a^{-1}$ for $a\ne0$.  For the exceptional arrows, substitute into
+\eqref{eq:invzero}:
+\begin{align*}
+ \Lyn(-1,-1-a)&=(-1-a,a),\\
+ \Lyn(-1-a,a)&=\left(a,\frac{1+a}{-1-a}\right)=(a,-1),\\
+ \Lyn(a,-1)&=(-1,0).
+\end{align*}
+The parameter exclusions make each displayed denominator nonzero.  The two
+remaining arrows in \eqref{eq:leaf-and-cycle} are immediate.
+\end{proof}
+
+\begin{theorem}[Recurrent set and exact tails]\label{thm:tails}
+The recurrent set is $\G\cup\A$.  The sets $\E_1,\E_2,\E_3$ are exactly the
+tail layers of depths $1,2,3$, respectively.  Hence
+\eqref{eq:temporal} holds and the maximum tail is three.
+\end{theorem}
+
+\begin{proof}
+The generic points are recurrent by \cref{lem:five}.  Equations
+\eqref{eq:axis-arrows} show that $(0,0)$ is fixed and every other axis point
+lies in a cycle generated by inversion in $\F_q^*$.  Thus every point of
+$\A$ is recurrent.
+
+By \cref{lem:arrows}, $\E_1$ maps into the recurrent two-cycle in one step,
+$\E_2$ maps into $\E_1$, and $\E_3$ maps into $\E_2$.  The disjointness in
+\cref{prop:partition} makes these depths exact.  No exceptional point is
+recurrent because its orbit enters the invariant axis set and never returns
+to its exceptional stratum.  This proves the recurrent-set assertion and all
+pointwise depths.
+
+The recurrent coefficient is
+\[
+ |\G|+|\A|=(q-2)(q-3)+2q-1=q^2-3q+5.
+\]
+Adding the three exceptional layer sizes gives \eqref{eq:temporal}.  Since
+$q\geq3$, the set $\E_3$ has size $q-2>0$, so depth three is attained for
+every allowed field.
+\end{proof}
+
+\section{The complete cycle census and zeta function}
+
+The generic locus contributes only periods one and five.  The axes contribute
+the remaining periods.
+
+\begin{lemma}[Fixed points]\label{lem:fixed}
+The fixed points are $(0,0)$ and the $r_q$ points $(a,a)$ satisfying
+\eqref{eq:fixed-polynomial}.  Every latter point belongs to $\G$.
+\end{lemma}
+
+\begin{proof}
+If $\Lyn(x,y)=(x,y)$, then $y=x$.  At $x=0$ this gives $(0,0)$.  For
+$x\ne0$, the second coordinate equation is
+$(1+x)/x=x$, equivalently $x^2-x-1=0$.  Conversely every such root gives a
+fixed point.
+
+A root $a$ is neither $0$ nor $-1$.  It also satisfies $1+2a\ne0$: otherwise
+$a=-1/2$, and substitution into $a^2-a-1$ gives $-1/4\ne0$ because the
+characteristic is odd.  Thus all five factors defining $\G$ are nonzero at
+$(a,a)$.
+\end{proof}
+
+\begin{lemma}[Axis cycles]\label{lem:axis-cycles}
+The axes contain $(0,0)$, exactly two 2-cycles, and exactly $(q-3)/2$
+4-cycles.  The 2-cycles are
+\begin{equation}\label{eq:two-cycles}
+ (0,1)\longleftrightarrow(1,0),\qquad
+ (0,-1)\longleftrightarrow(-1,0).
+\end{equation}
+For $a\in\F_q^*\setminus\{1,-1\}$, the inversion pair
+$\{a,a^{-1}\}$ indexes the 4-cycle
+\begin{equation}\label{eq:four-cycle}
+ (0,a)\longmapsto(a,0)\longmapsto(0,a^{-1})
+ \longmapsto(a^{-1},0)\longmapsto(0,a).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The arrows are \eqref{eq:axis-arrows}.  An element of $\F_q^*$ is fixed by
+inversion exactly when $a^2=1$.  Since the characteristic is odd, these are
+the two distinct elements $1$ and $-1$, and they give \eqref{eq:two-cycles}.
+Inversion acts without fixed points on the remaining $q-3$ elements, giving
+$(q-3)/2$ unordered pairs and the cycles \eqref{eq:four-cycle}.  Distinct
+inversion pairs give disjoint cycles.
+\end{proof}
+
+\begin{theorem}[Cycle census]\label{thm:cycles}
+The cycle counts in \cref{thm:main}\textup{(ii)} are complete.
+\end{theorem}
+
+\begin{proof}
+The exceptional layers contain no recurrent point by \cref{thm:tails}.
+The axis contribution is completely classified by \cref{lem:axis-cycles},
+including the fixed point $(0,0)$.  On $\G$, \cref{lem:five} shows that every
+least period divides the prime $5$.  By \cref{lem:fixed}, exactly $r_q$
+generic points have period one; all other
+$(q-2)(q-3)-r_q$ generic points therefore have exact period five.  Dividing
+these points into their disjoint five-element $\Lyn$-orbits simultaneously
+proves the divisibility of $(q-2)(q-3)-r_q$ by five and gives their cycle
+count.  These cases exhaust the disjoint partition from
+\cref{prop:partition}.
+\end{proof}
+
+\begin{remark}[small-field boundaries]\label{rem:small-fields}
+For $q=3$, the generic locus is empty, so the 4- and 5-cycle families are
+empty, while $|\E_3|=1$ still attains tail three.  In characteristic five,
+the discriminant of $a^2-a-1$ is zero, so the polynomial has one double root
+and $r_q=1$ over every finite extension; at $q=5$ this yields one generic
+5-cycle.  These degeneracies are already included in the census.
+\end{remark}
+
+For a finite self-map, define
+\begin{equation}\label{eq:zeta-definition}
+ \zeta_{\Lyn}(z)=
+ \exp\left(\sum_{n\geq1}\frac{|\Fix(\Lyn^n)|}{n}z^n\right).
+\end{equation}
+Equivalently, a cycle of length $d$ contributes $(1-z^d)^{-1}$.  Substituting
+the four counts from \cref{thm:cycles} gives \eqref{eq:zeta}.  This last Euler
+product conversion is standard finite-map bookkeeping and receives zero
+contribution credit.
+
+\section{Every-target fibres and the complete singular in-tree}
+
+The inverse problem is simpler than the forward stratification because a
+target's first coordinate fixes one source coordinate.
+
+\begin{theorem}[Every-target inverse law]\label{thm:fibres}
+Equation \eqref{eq:fibre-law} holds.  Consequently
+$|\im\Lyn|=q^2-q+1$, and $(-1,0)$ is the unique target of maximum fibre.
+\end{theorem}
+
+\begin{proof}
+If $\Lyn(x,y)=(u,v)$, the first coordinate forces $y=u$, and the remaining
+equation is
+\begin{equation}\label{eq:inverse-equation}
+ (1+u)\invz(x)=v.
+\end{equation}
+If $u=-1$, its left side is zero for every $x\in\F_q$.  This gives all $q$
+sources $(x,-1)$ when $v=0$ and no source when $v\ne0$.
+
+Suppose $u\ne-1$.  If $v=0$, then \eqref{eq:inverse-equation} forces
+$\invz(x)=0$, hence $x=0$, giving the unique source $(0,u)$.  If $v\ne0$,
+the unique solution is the nonzero element $x=(1+u)/v$.  These cases prove
+\eqref{eq:fibre-law}.
+
+There are $q(q-1)$ targets with $u\ne-1$, all in the image, and the only
+image target with $u=-1$ is $(-1,0)$.  Thus the image size is
+$q(q-1)+1=q^2-q+1$.  Since $q\geq3$, the fibre of size $q$ is uniquely
+maximal.
+\end{proof}
+
+\begin{corollary}[Whole exceptional component]\label{cor:tree}
+The connected functional-graph component containing
+$(-1,0)\leftrightarrow(0,-1)$ consists exactly of that two-cycle, the leaf
+\begin{equation}\label{eq:single-leaf}
+ (-1,-1)\longmapsto(-1,0),
+\end{equation}
+and, for each $a\in\F_q\setminus\{0,-1\}$, the length-three chain
+\begin{equation}\label{eq:all-chains}
+ (-1,-1-a)\longmapsto(-1-a,a)\longmapsto(a,-1)
+ \longmapsto(-1,0).
+\end{equation}
+There are no further vertices or incoming branches in this component.
+\end{corollary}
+
+\begin{proof}
+The displayed arrows are \cref{lem:arrows}.  It remains to prove
+completeness.  The fibre of $(-1,0)$ is exactly
+$\{(x,-1):x\in\F_q\}$.  Among these sources, $(0,-1)$ is the cycle
+predecessor, $(-1,-1)$ is \eqref{eq:single-leaf}, and the other $q-2$ points
+are the endpoints $(a,-1)$ in \eqref{eq:all-chains}.
+
+For $a\notin\{0,-1\}$, the target $(a,-1)$ has the unique predecessor
+$(-1-a,a)$, and that target has the unique predecessor $(-1,-1-a)$, by the
+unique-source case of \cref{thm:fibres}.  Finally,
+$(-1,-1-a)$ has first coordinate $-1$ and nonzero second coordinate, so its
+fibre is empty.  The point $(-1,-1)$ has empty fibre for the same reason.
+The target $(0,-1)$ has the unique predecessor $(-1,0)$.  Thus no additional
+branch can enter any displayed vertex.
+\end{proof}
+
+\section{Exact controls, limitations, and declarations}\label{sec:controls}
+
+The paper-local verifier constructs every literal state and target over all
+odd prime fields through $101$ and six nonprime fields of orders
+$9,25,27,49,121,125$.  It checks the field arithmetic, unique stratum
+membership, the five generic iterates, every pointwise tail and period, the
+cycle census, the temporal polynomial, every target fibre, and the complete
+exceptional predecessor sets.  It uses exact standard-library arithmetic
+without sampling, floating point, a computer algebra system, runtime network
+access, or a third-party package.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+control & exact count\\
+\midrule
+finite-field boxes & 31\\
+state/target cells & 110,095 each\\
+nonprime field boxes & 6\\
+Boolean assertions & 2,144,131\\
+\bottomrule
+\end{tabular}
+\caption{Dependency-free falsification controls.  These counts prove neither
+the all-parameter statements nor any ownership claim.}
+\label{tab:controls}
+\end{table}
+
+\paragraph{Limitations.}
+The cycle census uses odd characteristic: in characteristic two the two
+elements $1$ and $-1$ coincide, so the displayed pair of 2-cycles and the
+4-cycle count do not persist.  The note treats only the literal affine
+convention \eqref{eq:invzero}; it does not classify projective
+compactifications, other values assigned to inverse zero, general Lyness
+parameters, or higher-order recurrences.  The exact controls cover finitely
+many fields and serve only as falsification.  The source search was also
+bounded.  A direct owner of the residual all-affine conjunction would reopen
+the result.
+
+\paragraph{Data and code availability.}
+No external dataset is used.  The deterministic verifier and its frozen
+stdout transcript accompany the internal paper package.  They are not an
+external release authorization.
+
+\paragraph{Ethics statement.}
+The work uses no human participants, animal subjects, personal data, or
+stochastic intervention, and raises no application-specific ethical issue.
+
+\paragraph{Author contributions.}
+The anonymous author or authors developed the finite system, proved the
+results, implemented the exact controls, audited the sources, and prepared
+the manuscript.
+
+\paragraph{Conflict of interest.}
+The anonymous author or authors declare no conflict of interest.
+
+\paragraph{Funding.}
+No external funding is declared for this anonymous internal manuscript.
+
+Classical Lyness five-periodicity, QRT and cluster interpretations,
+finite-field birational methods, and generic zeta algebra remain zero-credit
+inputs.  The residual is limited to the exact zero-totalized all-affine graph
+proved above.  A bounded source non-hit is not novelty, priority, authorship,
+or ownership evidence.  No posting, specialist contact, submission, or
+release is authorized; status remains \texttt{HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

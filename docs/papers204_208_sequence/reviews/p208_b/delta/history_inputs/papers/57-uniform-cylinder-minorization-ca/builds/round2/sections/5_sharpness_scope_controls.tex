@@ -1,0 +1,143 @@
+\section{Sharpness, scope, and exact controls}
+\label{sec:scope}
+
+The numerical lower bound cannot be increased under the printed hypotheses.
+
+\begin{proposition}[Equality under the identity rule]\label{prop:sharpness}
+Let $A$ have cardinality $q\geq2$ and let $0<\eta\leq1/q$.  Choose
+$a_0\in A$ and define a one-site law by
+\[
+  \nu(a_0)=\eta,\qquad
+  \nu(a)=\frac{1-\eta}{q-1}\quad(a\neq a_0).
+\]
+For the iid law $\nu^{\Z^d}$, the identity cellular automaton, and every
+finite $S$,
+\[
+  \Prob(X_s=a_0\text{ for all }s\in S)=\eta^{|S|}.
+\]
+Thus the universal bound in \cref{thm:corner} is exact; when $q$ is a prime
+power and $A=\F_q$, the same example makes \cref{thm:affine} exact.
+\end{proposition}
+
+\begin{proof}
+The inequality $\eta\leq1/q$ gives
+$(1-\eta)/(q-1)\geq\eta$, so the optimal one-site strong finite-energy
+constant of the iid law is $\eta$.  Independence gives the displayed
+probability.  The identity rule is permutive on the radius-zero neighborhood
+$\{0\}$, and over $\F_q$ it has the nonzero scalar polynomial $P=1$.
+\end{proof}
+
+\subsection{The whole-site vector analogue fails}
+
+The scalar hypothesis in \cref{thm:affine} is load-bearing even for a
+reversible linear rule.
+
+\begin{proposition}[Vector firewall]\label{prop:vector-firewall}
+Let $V=(\F_2)^2$ and let the whole sites be iid with
+\[
+ \Prob(00)=\Prob(01)=\Prob(10)=\frac1{100},
+ \qquad
+ \Prob(11)=\frac{97}{100}.
+\]
+The optimal whole-site strong finite-energy constant is $\eta=1/100$.  The
+linear cellular automaton
+\[
+  F(x)_i=(x_i^{(1)},x_{i+1}^{(2)})
+\]
+is reversible, but
+\[
+  \Prob(F(x)_0=00)=\frac1{2500}<\frac1{100}=\eta.
+\]
+Consequently, the direct vector-alphabet version of the one-site estimate is
+false under a whole-site finite-energy hypothesis.
+\end{proposition}
+
+\begin{proof}
+The inverse is
+$F^{-1}(y)_i=(y_i^{(1)},y_{i-1}^{(2)})$.  The probability that the leading
+coordinate at site $0$ is zero is $2/100$, and the probability that the
+second coordinate at site $1$ is zero is also $2/100$.  These events concern
+independent sites, giving $(2/100)^2=1/2500$.  Here the two scalar pivots for
+one output vector occupy two different whole sites.  A whole-site
+application of \cref{lem:block} would therefore pay two factors of $\eta$,
+not one.
+\end{proof}
+
+A vector-valued statement can be recovered under stronger hypotheses, for
+example when one whole input site acts bijectively as the pivot for each
+whole output site, or when a suitably normalized coordinate-level
+finite-energy condition is imposed.  Neither variant is asserted here.
+
+\subsection{Surjectivity is not the triangular hypothesis}
+
+We next give a compact certificate showing that an onto rule need not be
+permutive in any coordinate.
+
+\begin{proposition}[Surjective/nonpermutive firewall]
+\label{prop:surjective-firewall}
+Define a binary one-dimensional cellular automaton with neighborhood
+$\{0,1,2,3\}$ as follows.  For
+$m=8x_0+4x_1+2x_2+x_3$, let
+$f(x_0,x_1,x_2,x_3)=a_m$, where
+\[
+  (a_0,a_1,\ldots,a_{15})
+  =(0,1,1,1,1,1,0,0,0,0,1,1,1,0,0,0).
+\]
+This rule has integer code
+\[
+  \sum_{m=0}^{15}a_m2^m=7230.
+\]
+It is surjective and is permutive in no input coordinate.
+\end{proposition}
+
+\begin{proof}
+Use the labelled de Bruijn graph with vertices the three-bit suffixes,
+identified with $\{0,\ldots,7\}$.  An edge appending a bit is labelled by the
+output of the corresponding four-bit word.  Starting from all vertices, the
+subset construction has exactly the seven reachable states and transitions
+listed in \cref{tab:subset-certificate}.  Every listed transition is
+nonempty.  Hence every finite binary output word labels a path in the de
+Bruijn graph.  Compactness then gives a preimage for every bi-infinite output
+configuration, so the cellular automaton is surjective.
+
+\input{figures/subset_certificate_table.tex}
+\FloatBarrier
+
+Nonpermutivity has four direct witnesses.  In coordinates $0,1,2,3$,
+respectively, the pairs
+\[
+ (0000,1000),\quad(0001,0101),\quad
+ (0001,0011),\quad(0010,0011)
+\]
+differ only in the indicated coordinate and have equal outputs
+$0,1,1,1$, respectively.
+\end{proof}
+
+\begin{remark}\label{rem:surjective-boundary}
+\Cref{prop:surjective-firewall} separates surjectivity from the hypothesis of
+\cref{thm:corner}.  No assertion is made about whether this particular rule
+satisfies or violates a cylinder lower bound for full-support product input.
+In particular, it is not a counterexample to the arbitrary-surjective
+product question.
+\end{remark}
+
+\FloatBarrier
+\subsection{Exact finite controls}
+
+The accompanying script uses integer arithmetic and rational probabilities
+to test representative instances of every proof interface.  Its receipt is
+summarized in \cref{tab:control-receipt}.
+
+\input{figures/control_receipt_table.tex}
+\FloatBarrier
+
+The rank and pivot enumerations are finite falsifiers for the Laurent and
+triangular arguments.  The dependent-law checks verify finite analogues of
+the conditional block estimate and the resulting output lower bound.  The
+sharpness and firewall computations reproduce the displayed fractions.
+None of these calculations proves the infinite-lattice theorems, certifies a
+priority claim, or tests the unresolved arbitrary-surjective product
+question.  The exact script and its complete receipt are included as
+supplementary internal artifacts.
+
+\FloatBarrier

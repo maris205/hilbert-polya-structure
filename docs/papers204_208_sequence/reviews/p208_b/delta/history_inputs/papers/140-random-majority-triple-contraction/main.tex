@@ -1,0 +1,362 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={},
+  pdfauthor={},
+  pdfsubject={},
+  pdfkeywords={}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\Exp}{\operatorname{Exp}}
+\newcommand{\Beta}{\operatorname{Beta}}
+\newcommand{\Gam}{\operatorname{Gamma}}
+\newcommand{\1}{\mathbf 1}
+
+\title{Exact Absorption and Clock Laws for Random Majority Triple Contraction}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Choose a consecutive triple of a binary word uniformly, replace it by its
+majority bit, and repeat until one bit remains.  On a two-run word
+$0^a1^b$ of odd length, the two-run family is closed and the terminal-one
+probability is $(b-1)/(a+b-2)$.  We enumerate the terminal histories, derive
+a marked recursion for the number of cross-boundary contractions, and obtain
+a reciprocal formula for the event that exactly one such contraction occurs.
+With independent rate-one clocks on current windows, the entire vector of
+holding times is independent of the embedded window history.  At length one
+the completion time is zero; from every odd length at least three it is an
+odd-rate hypoexponential sum whose exponential is exactly beta distributed,
+and the resulting family has a gamma scaling limit.  The discrete contraction
+count is deterministic and is kept separate from this continuous elapsed time.
+\end{abstract}
+
+\maketitle
+
+\section{Position and model}
+
+Majority-rule opinion dynamics on fixed populations is classical; for
+example, \citet{krapivskyredner2003} update groups of agents without shrinking
+the population.  Majority automata likewise retain a fixed carrier
+\citep{golesetal2016}.  We give both bodies of work full ownership of the
+majority operation and its consensus interpretation.  Our deliberately narrow
+object is instead the following length-reducing word process.
+
+Let $w=w_1\cdots w_n\in\{0,1\}^n$, where $n$ is odd.  At length
+$\ell>1$, choose one of the $\ell-2$ consecutive length-three windows
+uniformly and replace its three bits by their majority.  Thus the length falls
+by two, and absorption at one bit occurs after the deterministic number
+$(n-1)/2$ of contractions.  A \emph{history} records the successive window
+positions in the current, shortened words.  It is not an unlabelled
+contraction tree.
+
+We focus on $0^a1^b$ with $a,b\geq1$ and odd $n=a+b$.  A contraction is
+\emph{crossing} if its window is heterogeneous.  Because the word has two
+runs at every step below, this is equivalent to crossing the current run
+boundary.  We use $(-1)!!=1$.
+
+\section{Two-run closure and absorption}
+
+\begin{proposition}[Closed two-run kernel]\label{prop:kernel}
+From state $(a,b)$ the only successors and their window multiplicities are
+\begin{equation}\label{eq:kernel}
+\begin{array}{c|c}
+\text{successor}&\text{multiplicity}\\ \hline
+(a-2,b)&\max\{a-2,0\},\\
+(a,b-2)&\max\{b-2,0\},\\
+(a-1,b-1)&\1_{\{a\geq2\}}+\1_{\{b\geq2\}}.
+\end{array}
+\end{equation}
+The displayed multiplicities sum to $a+b-2$.  In particular, the two-run
+family, allowing a zero-size terminal block, is closed.
+\end{proposition}
+
+\begin{proof}
+A $000$ window removes two zeros and a $111$ window removes two ones.  There
+are $a-2$ and $b-2$ such windows when the corresponding block has size at
+least three.  At the boundary, $001$ exists exactly when $a\geq2$ and contracts
+to $0$, while $011$ exists exactly when $b\geq2$ and contracts to $1$; either
+operation removes one bit from each block.  These cases partition all current
+windows, and direct addition gives $a+b-2$.
+\end{proof}
+
+\begin{theorem}[Endpoint and history laws]\label{thm:endpoint}
+For $a,b\geq1$ and odd $n=a+b$,
+\begin{equation}\label{eq:endpoint}
+ \Pr_{a,b}(1)=\frac{b-1}{n-2},\qquad
+ \Pr_{a,b}(0)=\frac{a-1}{n-2}.
+\end{equation}
+Moreover, among the $(n-2)!!$ complete window-position histories,
+\begin{equation}\label{eq:history-counts}
+ \#\{h:h\to1\}=(b-1)(n-4)!!,
+ \quad
+ \#\{h:h\to0\}=(a-1)(n-4)!!.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Put $p(0,b)=1$ and $p(a,0)=0$.  The boundary cases $a=1$ and $b=1$ are
+forced: homogeneous contractions reduce the non-singleton block until its
+boundary window absorbs the singleton of the opposite type.  Hence
+$p(1,b)=1$ and $p(a,1)=0$, in agreement with \eqref{eq:endpoint}.
+
+For $a,b\geq2$, use the transition multiplicities in
+Proposition~\ref{prop:kernel}.  Substitution of
+$p(a,b)=(b-1)/(a+b-2)$ in the first-step recurrence, using the forced boundary
+values when a successor block has size zero or one, gives
+\[
+ p(a,b)=\frac{1}{n-2}\sum_{(a',b')}
+       m\bigl((a,b),(a',b')\bigr)p(a',b').
+\]
+After multiplying by $(n-2)(n-4)$, both sides reduce to
+$(b-1)(n-4)$; terms whose multiplicity is zero are absent.  Induction on odd
+$n$ proves the first formula, and complementation proves the second.
+
+At successive lengths the numbers of available windows are
+$n-2,n-4,\ldots,1$.  Thus every complete position history has the common
+probability $1/(n-2)!!$, and there are $(n-2)!!$ histories.  Multiplying
+\eqref{eq:endpoint} by this denominator proves \eqref{eq:history-counts}.
+\end{proof}
+
+\section{The marked cross-boundary law}
+
+For a history $h$, let $C(h)$ be its number of crossing contractions.  Define
+the history-count polynomials
+\[
+ H^\varepsilon_{a,b}(u)=
+ \sum_{h:\,h\to\varepsilon}u^{C(h)},\qquad \varepsilon\in\{0,1\}.
+\]
+
+\begin{theorem}[Cross-count PGF before normalization]\label{thm:cross-pgf}
+For $a,b\geq1$ with $a+b$ odd,
+\begin{align}
+H^1_{a,b}(u)
+={}&\1_{\{a\geq3\}}(a-2)H^1_{a-2,b}(u)
+ +\1_{\{b\geq3\}}(b-2)H^1_{a,b-2}(u) \notag\\
+&+\bigl(\1_{\{a\geq2\}}+\1_{\{b\geq2\}}\bigr)
+ uH^1_{a-1,b-1}(u),                                      \label{eq:cross-rec}
+\end{align}
+with $H^1_{0,b}(u)=(b-2)!!$ on the reachable odd one-run boundary,
+$H^1_{a,0}(u)=0$, and
+\begin{equation}\label{eq:symmetry}
+ H^0_{a,b}(u)=H^1_{b,a}(u).
+\end{equation}
+If $b\geq2$, the coefficient support of $H^1_{a,b}$ is exactly
+\begin{equation}\label{eq:support}
+ \{c:1\leq c\leq\min(a,b-1),\ c\equiv a\pmod 2\};
+\end{equation}
+if $b=1$, this polynomial is zero.
+The probability PGF conditional on terminal one is
+$H^1_{a,b}(u)/H^1_{a,b}(1)$ whenever $b\geq2$.
+\end{theorem}
+
+\begin{proof}
+Marking the third transition of \eqref{eq:kernel} by $u$ gives
+\eqref{eq:cross-rec}; the one-run boundary and bit-complement symmetry give
+the remaining identities.  On a terminal-one history, each homogeneous-zero
+contraction removes two zeros and each crossing contraction removes one.
+Hence $C\equiv a\pmod2$ and $C\leq a$.  Each crossing also removes one one,
+so at least one one remaining at absorption gives $C\leq b-1$.  A crossing is
+necessary when $a>0$.
+
+It remains to see that every allowed coefficient is positive.  Induct on
+$a+b$.  If an allowed $c$ satisfies $c\leq a-2$, first use a homogeneous-zero
+window and apply the induction hypothesis to $(a-2,b)$.  Otherwise parity
+forces $c=a$.  If $a=1$ (and hence $b$ is even), a crossing $011\mapsto1$
+leads directly to the odd one-run boundary $(0,b-1)$ and contributes the
+positive coefficient of $u$.  If $a\geq2$, a crossing transition leads to
+$(a-1,b-1)$, where $c-1=a-1\leq b-2$ satisfies the inductive support
+conditions.  The transition multiplicities are positive, completing the
+induction.
+\end{proof}
+
+\begin{corollary}[Exactly one crossing]\label{cor:one-cross}
+For odd $n=a+b$,
+\begin{align}
+ \Pr_{a,b}(\text{terminal }1,C=1)
+ &=\begin{cases}1/a,&a\text{ odd},\\0,&a\text{ even},\end{cases}\label{eq:onecross1}\\
+ \Pr_{a,b}(\text{terminal }0,C=1)
+ &=\begin{cases}1/b,&b\text{ odd},\\0,&b\text{ even}.
+ \end{cases}\label{eq:onecross0}
+\end{align}
+Equivalently, when $a$ is odd,
+$[u]H^1_{a,b}(u)=(n-2)!!/a$, with the symmetric zero formula.  Consequently
+the unconditional probability of exactly one crossing is the reciprocal of
+the unique odd block size.
+\end{corollary}
+
+\begin{proof}
+The parity statement follows from \eqref{eq:support}.  Suppose $a$ is odd,
+so $b$ is even, and write $q(a,b)$ for the probability on the left of
+\eqref{eq:onecross1}.  The case $a=1$ has exactly one eventual crossing, hence
+$q(1,b)=1$.  For odd $a\geq3$, a crossing at the first step leaves a positive
+even zero block, which cannot disappear using only homogeneous triples; that
+branch cannot have total cross count one.  The two homogeneous first steps,
+when present, and induction therefore give
+\[
+q(a,b)=\frac{a-2}{n-2}\frac1{a-2}
+       +\frac{b-2}{n-2}\frac1a=\frac1a,
+\]
+where a zero-multiplicity term is omitted.  Complementing bits proves
+\eqref{eq:onecross0}.  Multiplication by the common history denominator proves
+the coefficient formula.  Exactly one of $a,b$ is odd, so the two terminal
+events are disjoint and only the corresponding term is nonzero.
+\end{proof}
+
+\section{Continuous time and whole-history independence}
+
+Give every current length-three window an independent rate-one exponential
+clock and apply the first ring.  After an update, use the standard Markov
+construction: new clocks are fresh, while surviving clocks have fresh
+residual exponentials by memorylessness.  Let $J_r$ be the winning current
+window at contraction $r$, $E_r$ its holding time, and $\tau_n=\sum_rE_r$.
+
+\begin{theorem}[Clock/history separation]\label{thm:independence}
+For every odd initial word, the vector $(E_r)_{r=1}^{(n-1)/2}$ is independent
+of the complete embedded history $(J_r)_{r=1}^{(n-1)/2}$.  If $n=1$, both
+vectors are empty and $\tau_1=0$ almost surely.  If $n\geq3$, the holding-time
+coordinates are independent and
+\begin{equation}\label{eq:sumexp}
+ \tau_n\ \stackrel d=\
+ \sum_{k=1,3,\ldots,n-2}Y_k,\qquad Y_k\sim\Exp(k).
+\end{equation}
+In particular, $\tau_n$ is independent of the terminal bit and of $C$.
+\end{theorem}
+
+\begin{proof}
+For $n=1$ there is no active window, so the two vectors are empty and the
+assertion is immediate.  Assume $n\geq3$.
+At length $\ell$, the minimum of the $\ell-2$ rate-one clocks is
+$\Exp(\ell-2)$, its winning index is uniform, and the two variables are
+independent.  Conditional on the complete past, strong Markov memorylessness
+restarts the same statement at deterministic length $\ell-2$.  Induction over
+the deterministic length sequence proves the product factorization of the
+whole holding-time vector and the whole winner vector.  Summing the holding
+times gives \eqref{eq:sumexp}; the endpoint and $C$ are functions of the
+winner history.
+\end{proof}
+
+At the boundary $n=1$, $\tau_1=0$ almost surely.  Accordingly, the empty
+product in \eqref{eq:laplace} equals one and the empty sums in
+\eqref{eq:moments} equal zero.  For the nondegenerate laws below, write
+$n=2m+1\geq3$, so $m\geq1$.  These consequences concern elapsed time only;
+they are not statements about the fixed discrete count $m$.
+
+\begin{corollary}[Exact transform, Beta law, and moments]\label{cor:beta}
+Let $n=2m+1\geq3$, with $m\geq1$.  For $s\geq0$,
+\begin{align}
+ \mathbb E e^{-s\tau_n}
+ &=\prod_{j=0}^{m-1}\frac{2j+1}{2j+1+s} \label{eq:laplace}\\
+ &=\frac{\Gamma(m+\tfrac12)\Gamma(\tfrac{1+s}{2})}
+ {\Gamma(\tfrac12)\Gamma(m+\tfrac{1+s}{2})}.       \label{eq:gamma-ratio}
+\end{align}
+Moreover,
+\begin{equation}\label{eq:beta}
+ e^{-2\tau_n}\ \stackrel d=\ B_m,\qquad
+ B_m\sim\Beta\!\left(\tfrac12,m\right),
+\end{equation}
+and
+\begin{equation}\label{eq:moments}
+ \mathbb E\tau_n=\sum_{j=0}^{m-1}\frac1{2j+1},
+ \qquad
+ \operatorname{Var}(\tau_n)=\sum_{j=0}^{m-1}\frac1{(2j+1)^2}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Independence in \eqref{eq:sumexp} gives \eqref{eq:laplace}; separating factors
+of two and using $\Gamma(x+m)/\Gamma(x)=\prod_{j=0}^{m-1}(x+j)$ gives
+\eqref{eq:gamma-ratio}.  For $q\geq0$, substitute $s=2q$ in that formula.
+The result is
+\[
+ \mathbb E(e^{-2\tau_n})^q
+ =\frac{\Gamma(q+\tfrac12)\Gamma(m+\tfrac12)}
+ {\Gamma(\tfrac12)\Gamma(m+q+\tfrac12)},
+\]
+the moment formula of $\Beta(1/2,m)$.  Since both variables lie in $[0,1]$,
+their moments determine their laws.  Finally, means and variances add in
+\eqref{eq:sumexp}.
+\end{proof}
+
+\begin{theorem}[Gamma scaling limit]\label{thm:gamma-limit}
+Along the odd lengths $n=2m+1$ as $m\to\infty$, and with the shape--rate
+convention,
+\begin{equation}\label{eq:limit}
+ m e^{-2\tau_n}\ \xrightarrow{d}\
+ G,\qquad G\sim\Gam\!\left(\tfrac12,1\right).
+\end{equation}
+Equivalently,
+$\tau_n-\tfrac12\log m\xrightarrow d-\tfrac12\log G$.
+\end{theorem}
+
+\begin{proof}
+Use the beta--gamma representation
+$B_m=X/(X+Y_m)$ with independent
+$X\sim\Gam(1/2,1)$ and $Y_m\sim\Gam(m,1)$.  The law of large numbers gives
+$Y_m/m\to1$ in probability, while $X/m\to0$.  Hence
+$mB_m=X/[X/m+Y_m/m]\to X$ in distribution.  Apply
+Corollary~\ref{cor:beta}; the logarithmic statement follows by the continuous
+mapping theorem.
+\end{proof}
+
+\section{Exact controls and limits of scope}
+
+The paper-local verifier uses only integer and rational arithmetic.  It does
+not sample.  Table~\ref{tab:controls} records its finite falsification grid.
+
+\begin{table}[h]
+\centering
+\caption{Exact-arithmetic control envelope.}\label{tab:controls}
+\begin{tabular}{lr}
+\toprule
+control lane & checked cells or inputs\\
+\midrule
+all binary words, odd length at most $15$ & $43{,}690$\\
+two-run inputs, odd length at most $201$ & $10{,}100$\\
+marked cross-polynomial coefficients, length at most $101$ & $90{,}950$\\
+clock product-transform cells & $1{,}000$\\
+exact assertions & $190{,}740$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Literal marked word histories are also compared through length $13$, and the
+joint transform factorization from Theorem~\ref{thm:independence} is checked
+on every word through length $11$.  These bounded controls are not proofs of
+the all-length statements or of the limit, and they provide no novelty
+evidence.
+
+We have not derived a comparable closed atlas for arbitrary multi-run words.
+The result is therefore a special invariant-family calculation, not a general
+solution of random majority contraction.  The majority operation, standard
+clock construction, beta--gamma identities, and convergence tools receive no
+credit.  The exact conjunction above remains an internal theorem package;
+external circulation is on hold pending a deeper owner search.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

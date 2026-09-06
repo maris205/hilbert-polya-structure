@@ -1,0 +1,68 @@
+\section{Every target fibre after two steps}
+Fix $(r,m)$ with $r\ge0,m\ge1$ and a set $A\subseteq\{2,\ldots,m\}$.
+For $B\subseteq A$, let $\Seg(B)$ partition $\{1,\ldots,m\}$ into
+consecutive segments by cutting immediately before each $j\in B$.
+Define the globally flagged count
+\begin{equation}\label{eq:cut}
+ D_{r,m}(A)=\sum_{B\subseteq A}(-1)^{|A|-|B|}
+       \prod_{[a,b]\in\Seg(B)}\binom{r+b}{b-a+1}.
+\end{equation}
+The word ``flagged'' refers to the position-dependent bounds $r+j$;
+the offset $r$ is part of the count, not an ignorable block label.
+For $y\in\Core_n$ and $t\ge2$, set
+\begin{equation}\label{eq:mask}
+ A_t(y;r,m)=
+ \begin{cases}
+ \{j\in\{2,\ldots,m\}:y_{r+j}=j\},&t\text{ even},\\
+ \{j\in\{2,\ldots,m\}:y_{r+j}=1\},&t\text{ odd}.
+ \end{cases}
+\end{equation}
+
+\begin{theorem}[Target-resolved post-collapse fibres]\label{thm:fibre}
+For every $n\ge1$, every $t\ge2$ and every $y\in E_n$,
+\begin{equation}\label{eq:fibre}
+ \bigl|(P^t)^{-1}(y)\bigr|=
+ \begin{cases}
+ \displaystyle\prod_{(r,m)\in\Blocks(y)}D_{r,m}(A_t(y;r,m)),
+       &y\in\Core_n,\\
+ 0,&y\notin\Core_n.
+ \end{cases}
+\end{equation}
+The empty product is one. Thus the all-zero target has exactly one source.
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:temporal} gives $P^t(x)=J^{t-2}P^2(x)$.
+A source of $y$ must have exactly its zero set. For a core target,
+\eqref{eq:decoder} says that the source's internal ascent set in block
+$(r,m)$ must be $A_t(y;r,m)$, and this condition is sufficient.
+Different positive blocks are independent after the zero positions are
+fixed. It remains to count one block with entries $1\le x_{r+j}\le r+j$
+and exact internal ascent set $A$.
+
+Impose nonascent on each edge outside $A$. Inclusion--exclusion on failures
+of the required ascents gives the sum over $B\subseteq A$ with sign
+$(-1)^{|A|-|B|}$, where ascents are allowed only before positions in $B$.
+The resulting word is weakly decreasing on every segment $[a,b]$ of
+$\Seg(B)$. All entries of that segment are at most its first entry,
+which is at most $r+a$. Conversely, every weakly decreasing sequence of
+length $b-a+1$ in $\{1,\ldots,r+a\}$ satisfies the later, increasing
+position bounds. Counting its value multiplicities gives
+\[
+ \binom{(r+a)+(b-a+1)-1}{b-a+1}=\binom{r+b}{b-a+1}.
+\]
+Segments are independent, giving \eqref{eq:cut}; blocks are independent,
+giving \eqref{eq:fibre}. Noncore targets have no source because every
+iterate at time at least two lies in $\Core_n$.
+\end{proof}
+
+\begin{example}[The global offset cannot be dropped]
+For a two-letter block, the number of strictly rising positive sources is
+\[
+ D_{r,2}(\{2\})=(r+1)(r+2)-\binom{r+2}{2}
+               =\binom{r+2}{2}.
+\]
+It equals one at offset zero and three at offset one. Thus an unflagged
+ascent count cannot substitute for the block factor in \eqref{eq:fibre}.
+At even times this ascent factor belongs to the local target $12$;
+at odd times at least three it belongs to the exchanged target $11$.
+\end{example}

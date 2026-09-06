@@ -1,0 +1,122 @@
+\section{Permutivity at an exposed corner}
+\label{sec:corner}
+
+Let $A$ be a finite alphabet, let $N\subset\Z^d$ be finite and nonempty, and
+write
+\begin{equation}\label{eq:local-rule}
+  F(x)_v=f\bigl((x_{v+u})_{u\in N}\bigr)
+\end{equation}
+for a local rule $f\colon A^N\to A$.  Suppose that $u_*\in N$ and a real
+linear functional $\ell\colon\mathbb R^d\to\mathbb R$ satisfy
+\begin{equation}\label{eq:exposed}
+  \ell(u_*)>\ell(u)\qquad(u\in N\setminus\{u_*\}),
+\end{equation}
+and that $f$ is permutive in coordinate $u_*$.  Thus, after all other local
+inputs are fixed, varying the $u_*$ input permutes $A$.
+
+For $t\geq1$, let $tN$ denote the $t$-fold Minkowski sum of $N$ and put
+$0N=\{0\}$.
+
+\begin{lemma}[The corner survives iteration]\label{lem:corner-iterate}
+For every $t\geq0$, the time-$t$ local map has a dependency set contained in
+$tN$ and is permutive in the raw coordinate $tu_*$.  Moreover, $tu_*$ is
+the unique maximizer of $\ell$ on $tN$.
+\end{lemma}
+
+\begin{proof}
+Put $M=\ell(u_*)$.  A sum of $t$ elements of $N$ has $\ell$-value at most
+$tM$, and equality requires every summand to be $u_*$.  Thus $tu_*$ is the
+unique maximizer on $tN$.  The dependency-set inclusion follows directly by
+induction under composition.
+
+We prove permutivity by induction on $t$.  At $t=0$ the local map is the
+identity.  Suppose the assertion holds at time $t$ and write the
+time-$(t+1)$ output at the origin as
+\[
+  f\bigl((F^t(x)_u)_{u\in N}\bigr).
+\]
+The raw site $(t+1)u_*$ can enter the inner branch indexed by $u$ only if
+$(t+1)u_*-u\in tN$.  If $u\neq u_*$, then
+\[
+   \ell((t+1)u_*-u)=(t+1)M-\ell(u)>tM,
+\]
+which is impossible for an element of $tN$.  For $u=u_*$, the raw site is
+the coordinate $tu_*$ of that inner branch.  When the raw corner symbol
+varies and all other raw symbols are fixed, every other branch remains
+fixed, the $u_*$ branch changes by a permutation by induction, and the outer
+rule changes by a permutation in its $u_*$ input.  Their composition is a
+permutation.
+\end{proof}
+
+\begin{lemma}[Triangular pivots on arbitrary shapes]\label{lem:corner-pivots}
+Let $t\geq0$, let $S\subset\Z^d$ be finite, and set
+\[
+  B_t=\{s+tu_*:s\in S\}.
+\]
+After all input sites outside $B_t$ are fixed, the map from the pattern on
+$B_t$ to $F^t(x)|_S$ is a bijection $A^{B_t}\to A^S$.
+\end{lemma}
+
+\begin{proof}
+Write $p_s=s+tu_*$ for the pivot belonging to $s\in S$.  Translation is
+injective, so the pivots are distinct.  If $p_s$ can influence the
+time-$t$ output at $r\in S$, then
+$p_s-r\in tN$.  By the unique-maximizer statement in
+\cref{lem:corner-iterate},
+\[
+  \ell(s)-\ell(r)+tM=\ell(p_s-r)\leq tM.
+\]
+Hence $\ell(s)\leq\ell(r)$.  If equality holds, then $p_s-r$ is the unique
+maximizer $tu_*$ of $tN$, and therefore $s=r$.  We have shown
+\begin{equation}\label{eq:cross-pivot}
+ p_s\text{ influences the output at }r,\ s\neq r
+ \quad\Longrightarrow\quad \ell(s)<\ell(r).
+\end{equation}
+
+Order $S$ by increasing $\ell$-value, breaking ties arbitrarily, and prescribe
+a target $a\in A^S$.  When the equation at $r$ is reached, every distinct
+pivot that can affect that output has already been assigned by
+\eqref{eq:cross-pivot}; a distinct tied pivot cannot affect it.  All
+nonpivot inputs are fixed, while the own pivot $p_r$ enters permutively by
+\cref{lem:corner-iterate}.  There is exactly one value of $x_{p_r}$ that
+produces $a_r$.  Proceeding through the order constructs a solution, and
+each step is forced, so the solution is unique.
+\end{proof}
+
+\begin{theorem}[Exposed-corner minorization]\label{thm:corner}
+Let $F$ satisfy \eqref{eq:local-rule}--\eqref{eq:exposed} and be permutive in
+$u_*$.  If $\mu$ has uniform strong finite energy with constant $\eta$, then
+for every $t\geq0$, finite $S\subset\Z^d$, and $a\in A^S$,
+\[
+  (F^t_*\mu)([a]_S)\geq\eta^{|S|}.
+\]
+\end{theorem}
+
+\begin{proof}
+The time-$t$ output on $S$ depends on the finite set $S+tN$.
+\Cref{lem:corner-pivots} supplies the pivot set $B_t$ of cardinality $|S|$
+and verifies the bijectivity hypothesis of \cref{prop:pivot}.  Integrating
+\eqref{eq:pivot-conditional} gives the result.
+\end{proof}
+
+\begin{corollary}\label{cor:corner-consequences}
+If $\mu=\nu^{\Z^d}$ with
+$\eta=\min_{c\in A}\nu(c)>0$, then every weak-star limit point of
+$(F^t_*\mu)_{t\geq0}$ has full support with the same cylinder lower bounds.
+Every iterate $F^t$, $t\geq1$, is globally surjective.
+\end{corollary}
+
+\begin{proof}
+The product and weak-star assertions are the same as in
+\cref{cor:affine-consequences}.  The pivot bijection in
+\cref{lem:corner-pivots} makes every finite target pattern attainable.
+Compactness and the finite-intersection argument from
+\cref{cor:affine-consequences} give global surjectivity.
+\end{proof}
+
+\begin{remark}\label{rem:corner-scope}
+Unique exposure is used twice: to keep the raw corner in one outer branch
+under iteration and to make cross-pivot influence strict.  Permutivity at a
+site that is not uniquely exposed need not supply either property.
+\end{remark}
+

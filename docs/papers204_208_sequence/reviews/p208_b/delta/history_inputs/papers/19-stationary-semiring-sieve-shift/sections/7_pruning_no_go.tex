@@ -1,0 +1,128 @@
+\section{Recurrent-core collapse}
+\label{sec:pruning}
+
+Let $\HA$ be the closed span of the accepted states and set
+$\HT=\HA^\perp$.  Ordering the decomposition as $\HA\oplus\HT$ gives
+\begin{equation}
+L_s=
+\begin{pmatrix}
+D_s&B_s\\
+0&Q_s
+\end{pmatrix},
+\qquad
+D_s\delta_{A_p}=p^{-s}\delta_{A_p}.
+\label{eq:block}
+\end{equation}
+The cross block records the last transition from a successful trial trace to
+its accepted state.  There is no edge from an accepted state back into the
+verifier.
+
+\begin{theorem}[Off-diagonal DAG invisibility]
+\label{thm:invisibility}
+For every $r\ge1$ and $\RePart s>1$,
+\[
+\Tr Q_s^r=0,
+\qquad
+\Tr L_s^r=\Tr D_s^r.
+\]
+For every $z\in\C$,
+\[
+\det(I-zQ_s)=1,
+\qquad
+\det(I-zL_s)=\det(I-zD_s).
+\]
+Changing or deleting all transient edges, provided the replacement remains
+trace class, changes none of these determinants.
+\end{theorem}
+
+\begin{proof}
+The quotient graph underlying $Q_s$ has no closed walk.  Every diagonal
+coefficient of $Q_s^r$ therefore vanishes, and trace class justifies summing
+those coefficients.  The block-triangular form then gives equality of the
+power traces.  Near $z=0$, the trace-log identity gives
+\[
+\log\det(I-zQ_s)
+=-\sum_{r\ge1}\frac{z^r}{r}\Tr Q_s^r=0.
+\]
+Both determinants are entire in $z$, so the identities extend globally.
+Any transient modification has the same closed-walk census and the same
+argument applies.
+\end{proof}
+
+This theorem proves two facts that should not be conflated.  The whole
+operator is analytically legitimate, so the Euler identity is not obtained
+by silently discarding a non-trace-class decoration.  Nevertheless, the
+determinant is completely insensitive to the decoration.  The computation
+and its chosen transient roofs earn no periodic-orbit credit.
+
+\subsection{A positive exact-ledger obstruction}
+
+The collapse is not peculiar to trial division.  We next isolate the
+mechanism under assumptions strong enough to make the result true and narrow
+enough to avoid claims about cancellation-based models.
+
+\begin{theorem}[Exact-ledger pruning]
+\label{thm:ledger-pruning}
+Let $G'$ be a directed graph with nonzero formal edge weights in the positive
+power-series semiring over independent variables $(x_a)_{a\in\mathcal A}$.
+Assume an exact orbitwise ledger: for every $a$ there is one declared
+primitive class $\gamma_a$ of total weight $x_a$, its powers are temporal
+repetitions, and there is no other primitive class, including no mixed formal
+monomial and no distinct primitive of weight $x_a^r$.  Then:
+
+\begin{enumerate}
+\item every recurrent strongly connected component is a simple directed
+  cycle;
+\item these components are in bijection with the declared primitive classes;
+\item every vertex and edge outside those cycles is absent from every power
+  trace;
+\item pruning the nonrecurrent graph preserves all raw power traces and the
+  full $z$-Fredholm determinant whenever defined.
+\end{enumerate}
+
+A simple cycle of graph length $\ell$ and total weight $w$ contributes
+$1-z^\ell w$.  First-return contraction to one loop preserves the unmarked
+factor $1-w$; it preserves the marked determinant only when the contracted
+loop retains the composite marker $z^\ell$.
+\end{theorem}
+
+\begin{proof}
+Every recurrent edge lies on a directed cycle.  Suppose one recurrent SCC
+contains two declared cycles.  Strong connectivity supplies finite directed
+connector paths in both directions.  Following the first cycle, one
+connector, the second cycle, and the return connector produces a closed word
+that is not a temporal repetition of either declared class.  Dividing by its
+least period yields an additional primitive orbit, contrary to the exact
+ledger.
+
+If an SCC contains one declared cycle and any extra recurrent edge or vertex,
+that edge lies on another directed cycle and the same connector argument
+applies.  Positivity and independent formal variables prohibit cancellation
+or specialization from erasing the extra primitive.  Thus each recurrent SCC
+is exactly one simple declared cycle.  Nonrecurrent edges lie in no closed
+walk, so they occur in no power trace.  Trace-log identities give pruning
+invariance.  The factor of an $\ell$-cycle follows by multiplying its edge
+weights around one return; graph-step marking contributes $z^\ell$.
+\end{proof}
+
+\begin{corollary}[Deterministic verifier collapse]
+\label{cor:functional}
+Every outdegree-one verifier graph is a functional digraph whose recurrent
+components are cycles with feeding trees.  If its ledger has exactly one
+primitive per accepted object, computation in the feeding trees is
+determinant-invisible.  Computation placed along an accepted cycle becomes a
+state subdivision of the accepted first-return loop after contraction, with
+graph-step length retained by $z^\ell$.
+\end{corollary}
+
+The corollary is an orbit and determinant statement, not a topological
+conjugacy of the original one-sided systems.  Nor does
+\cref{thm:ledger-pruning} classify signed, complex, supertrace, or homological
+grammars: distinct cycles can then cancel after applying an additional
+functional.  That broader dichotomy remains open and requires a different
+data-type audit.
+
+For SD-C21, every declared cycle already has graph length one.  Pruning and
+contraction therefore produce exactly the diagonal operator $D_s$ with no
+$z$-marker ambiguity.  This is the precise sense in which the model is
+\texttt{PRUNING\_EQUIVALENT} to a prime-loop core.

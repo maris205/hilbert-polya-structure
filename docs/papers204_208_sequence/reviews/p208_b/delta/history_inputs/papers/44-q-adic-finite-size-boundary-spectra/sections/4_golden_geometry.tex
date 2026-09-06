@@ -1,0 +1,151 @@
+\section{Golden boundary geometry}
+\label{sec:golden}
+
+Specialize to
+\[
+  q=2,\qquad
+  A=\begin{pmatrix}1&1\\[1mm]1&0\end{pmatrix},
+  \qquad
+  \varphi=\frac{1+\sqrt5}{2}.
+\]
+With \(F_0=0,F_1=1\), the word counts are \(W_\ell=F_{\ell+2}\).
+Set
+\[
+  t=\varphi^{-2}=\frac{3-\sqrt5}{2},\qquad r=-t.
+\]
+Binet's formula in the form
+\[
+  F_n=\frac{\varphi^n}{\sqrt5}(1-r^n)
+\]
+gives
+\begin{equation}
+  d_v=\log\frac{1-r^{v+3}}{1-r^{v+2}}.
+  \label{eq:golden-d}
+\end{equation}
+
+Every \(x\in\mathbb Z_2\) has a unique expansion
+\(x=\sum_{k\ge0}\varepsilon_k2^k\), with
+\(\varepsilon_k\in\{0,1\}\).  Substituting
+\(x\bmod2^v=\sum_{k=0}^{v-1}\varepsilon_k2^k\) into
+\eqref{eq:boundary-map} and reordering an absolutely convergent double
+series yields
+\begin{equation}
+  E_{A,2}(x)=\sum_{k\ge0}\gamma_k\varepsilon_k,\qquad
+  \gamma_k=-\sum_{v\ge k+1}(d_v-d_{v-1})2^{k-v}.
+  \label{eq:gamma-residue}
+\end{equation}
+Expanding the logarithms in \eqref{eq:golden-d} gives a second exact formula:
+\begin{equation}
+  \gamma_k=\sum_{m\ge1}a_m r^{m(k+2)},\qquad
+  a_m=\frac{(1-r^m)^2}{m(2-r^m)}>0.
+  \label{eq:gamma-modes}
+\end{equation}
+The second expression separates one dominant signed mode from a certified
+tail.
+
+\begin{theorem}[Golden strong separation and dimension]
+\label{thm:golden}
+The coefficients in \eqref{eq:gamma-residue} satisfy
+\[
+  \operatorname{sgn}(\gamma_k)=(-1)^k,\qquad
+  |\gamma_k|>\sum_{j>k}|\gamma_j|,\qquad
+  \frac{\gamma_{k+1}}{\gamma_k}\longrightarrow-\varphi^{-2}.
+\]
+Consequently
+\[
+  K:=E_{A,2}(\mathbb Z_2)
+  =\{\sum_{k\ge0}\varepsilon_k\gamma_k:
+          \varepsilon_k\in\{0,1\}\}
+\]
+is a Cantor set, and
+\[
+  \dim_HK=\dim_BK=\frac{\log2}{2\log\varphi}.
+\]
+\end{theorem}
+
+\begin{proof}
+The algebraic number \(t\) satisfies \(0<t<1/2\) and
+\(t^2-3t+1=0\).  For \(m\ge2\),
+\[
+  a_m\le\frac Km,\qquad
+  K=\frac{(1+t^2)^2}{2-t^2}=-6+3\sqrt5.
+\]
+Define
+\[
+  S=\sum_{m\ge2}\frac{a_mt^{2m}}{1-t^m}.
+\]
+The elementary bounds \(1/(1-t^m)\le1/(1-t^2)\) and \(1/m\le1/2\)
+give the exact certificate
+\begin{align}
+  S
+  &\le \frac{Kt^4}{2(1-t^2)^2}
+    =\frac{-87+39\sqrt5}{20} \notag\\
+  &<a_1t^3=\frac{280-125\sqrt5}{11}.
+  \label{eq:separation-certificate}
+\end{align}
+The strict comparison is certified without decimals:
+\[
+  a_1t^3-\frac{Kt^4}{2(1-t^2)^2}
+   =\frac{6557-2929\sqrt5}{220}>0,\qquad
+  6557^2-5\cdot2929^2=99044>0.
+\]
+
+Write \(\gamma_k=a_1r^{k+2}+R_k\), where the modes \(m\ge2\) form
+\(R_k\).  Equation \eqref{eq:separation-certificate} implies, for every
+\(k\ge0\),
+\[
+  |R_k|+\sum_{j>k}|R_j|
+  \le t^kS<a_1t^{k+3}.
+\]
+The first mode alone has the exact gap
+\[
+  a_1t^{k+2}-\sum_{j>k}a_1t^{j+2}
+  =a_1t^{k+2}\frac{1-2t}{1-t}
+  =a_1t^{k+3}.
+\]
+Subtracting the higher-mode error proves full-tail domination.  It also
+fixes the sign, while geometric decay of every \(m\ge2\) mode proves the
+ratio limit.
+
+If two binary digit sequences first differ at \(k\), their images differ by
+at least
+\(|\gamma_k|-\sum_{j>k}|\gamma_j|>0\).  The digit map is therefore a
+continuous injection from compact \(\mathbb Z_2\) into \(\mathbb R\), hence
+a homeomorphism onto \(K\).  This proves the Cantor topology.
+
+The ratio limit and the uniform gap give constants \(C_1,C_2>0\) such that
+level-\(n\) cylinders have diameter at most \(C_2t^n\) and distinct
+level-\(n\) cylinders are separated by at least \(C_1t^{n-1}\).  There are
+\(2^n\) such cylinders.  If \(\mathcal N(K,\delta)\) is the least number of
+intervals of diameter at most \(\delta\) needed to cover \(K\), these two
+estimates give constants \(c,C>0\), independent of \(n\), for which
+\[
+  c\,2^n\le \mathcal N(K,t^n)\le C\,2^n.
+\]
+Thus both box dimensions equal \(s_0=\log2/(-\log t)\), and the same
+cylinders give the Hausdorff upper bound.  For the reverse Hausdorff bound,
+push the fair Bernoulli measure to \(K\).  Every level-\(n\) cylinder has
+mass \(2^{-n}\), and the separation estimate implies that an interval of
+radius comparable to \(t^n\) meets at most a fixed number of them.  Hence
+\(\mu(I)\le C'|I|^{s_0}\), and the mass-distribution principle gives
+\(\dim_HK\ge s_0\).  Since \(t=\varphi^{-2}\),
+\(s_0=\log2/(2\log\varphi)\).
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/fig2_golden_cylinders}}
+  \caption{The golden digit map.  The exact all-level inequality
+  \(|\gamma_k|>\sum_{j>k}|\gamma_j|\) separates siblings at every depth.
+  With \(2^n\) cylinders of diameter and separation comparable to \(t^n\),
+  the boundary image has dimension \(\log2/(-\log t)\).}
+  \label{fig:golden-cylinders}
+\end{figure}
+
+\begin{remark}[Which dimension is computed]
+The set \(K\subset\mathbb R\) is the image of the finite-size boundary map.
+It is not the original multiplicative shift, and its dimension is not a
+restatement of the leading shift dimensions in
+\citep{fan2012level,kenyon2012hausdorff}.  Nor does the argument analyze
+ordinary Minkowski content over all continuous covering scales.
+\end{remark}

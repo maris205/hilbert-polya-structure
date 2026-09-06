@@ -1,0 +1,217 @@
+\section{A prescribed-period entropy certificate}
+\label{sec:reflection}
+
+For $n\ge4$, set
+\[
+ S_n=\{x\in[1,n]^d:x_i\in\{1,2,n\}\text{ for some }i\},
+ \qquad I_n=[3,n-1]^d,
+\]
+and
+\begin{equation}
+ b_d(n)=|S_n|=n^d-(n-3)^d.
+ \label{eq:shell-size}
+\end{equation}
+The upper face in $S_n$ synchronizes reflected orthants, while the two lower
+layers control the eventual periodic seam.  This division of labour is the
+reason for the apparently asymmetric shell.
+
+\begin{lemma}[Recoverable reflected-shell injection]
+\label{lem:reflection-injection}
+Let $X\subseteq\Sigma^{\ZZ^d}$ be a nonempty SFT with a coordinate-reflection-
+invariant nearest-neighbour presentation.  For every $n\ge4$, there is a set $\cC_n$ of locally
+admissible $n$-blocks such that
+\[
+ |\cC_n|\ge C_nq^{-b_d(n)}
+\]
+and an injection
+\[
+ \Phi_n:\cC_n^{\{0,1\}^d}
+ \longrightarrow \Fix((2n-2)\ZZ^d,X).
+\]
+\end{lemma}
+
+\begin{proof}
+Partition the $C_n$ locally admissible patterns according to their
+restriction to $S_n$.  There are at most $q^{b_d(n)}$ such restrictions, so
+a largest fibre $\cC_n$ satisfies the stated lower bound.  Fix its common
+shell word $g$.
+
+Put $H_0=[1,n]$ and $H_1=[n,2n-1]$.  For $a\in\{0,1\}$ define
+\[
+ r_0(t)=t,\qquad r_1(t)=2n-t,
+\]
+so both maps send their respective intervals to $[1,n]$ and satisfy
+$r_0(n)=r_1(n)=n$.  Given a tuple
+$(u_\eps)_{\eps\in\{0,1\}^d}\in\cC_n^{\{0,1\}^d}$, place $u_\eps$ on
+$H_\eps=\prod_iH_{\eps_i}$ by the source map
+\[
+ r_\eps(x)=(r_{\eps_1}(x_1),\ldots,r_{\eps_d}(x_d)).
+\]
+In other words, for $x\in H_\eps$, set
+\begin{equation}
+ w(x)=u_\eps(r_\eps(x)).
+ \label{eq:orthant-placement}
+\end{equation}
+This defines a pattern on $[1,2n-1]^d$.
+
+We verify that \cref{eq:orthant-placement} is well defined.  Two orthant
+boxes overlap only where every coordinate on which their indices differ is
+equal to $n$.  Their source vectors are therefore identical and belong to
+$S_n$.  Both blocks take there the value prescribed by $g$.  Moreover, every
+ordinary nearest-neighbour edge in $[1,2n-1]^d$ lies in at least one orthant
+box.  Its two values come from a locally admissible block, possibly after
+some coordinate reflections.  Reflection invariance of $X$ makes the
+reflected edge admissible.
+
+Now put $N=2n-2$, restrict $w$ to $D_N=[1,N]^d$, and repeat the restriction
+$N$-periodically.  Only the wrap edges require a check.  Consider a wrap in
+coordinate $i$, holding the other coordinates fixed.  Choose the same
+low/high source convention for those other coordinates on both sides.  The
+site at coordinate $N$ has source coordinate $2$, while the site at
+coordinate $1$ has source coordinate $1$.  Both source sites lie in $S_n$,
+so their symbols are supplied by $g$.  The wrap edge therefore reads the
+reverse $(2,1)$ of the locally admissible shell edge $(1,2)$.  Coordinate
+reflection invariance makes this reversed edge admissible.  Thus the
+periodic extension lies in $X$.
+
+It remains to prove injectivity, since merely producing periodic points would
+not preserve multiplicity.  For $a\in\{0,1\}$, let
+\[
+ J_0=[3,n-1],\qquad J_1=[n+1,2n-3].
+\]
+The $2^d$ boxes $J_\eps=\prod_iJ_{\eps_i}$ are pairwise disjoint subsets of
+$D_N$.  On $J_\eps$, the periodic pattern records exactly the restriction of
+$u_\eps$ to its private interior $I_n$, up to the known coordinate
+reflection.  Hence the output recovers every private interior.  The shell
+word $g$ is fixed across the chosen fibre, and $I_n\sqcup S_n=[1,n]^d$;
+therefore each entire block $u_\eps$ is recovered.  This proves injectivity.
+\end{proof}
+
+\begin{theorem}[Explicit fixed-period entropy sandwich]
+\label{thm:fixed-period}
+Under the hypotheses of \cref{lem:reflection-injection}, for every $n\ge4$,
+\begin{equation}
+\frac{\log C_n-b_d(n)\log q}{(n-1)^d}
+\le \frac{\log P_{2n-2}}{(2n-2)^d}
+\le \frac{\log C_{2n-2}}{(2n-2)^d}.
+\label{eq:finite-sandwich}
+\end{equation}
+Define
+\begin{equation}
+ q_d(k)=(2^d-1)\sum_{j=0}^{d-1}
+ \frac{\binom dj}{2^d-2^j}k^j.
+ \label{eq:bui-polynomial}
+\end{equation}
+Then
+\begin{equation}
+h(X)-\frac{b_d(n)\log q}{(n-1)^d}
+\le \frac{\log P_{2n-2}}{(2n-2)^d}
+\le h(X)+\frac{q_d(2n-3)\log q}{(2n-2)^d}.
+\label{eq:entropy-sandwich}
+\end{equation}
+In particular, the specified period sequence $2n-2$ approaches entropy with
+a fully explicit two-sided $O_d(n^{-1})$ error.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:reflection-injection},
+\[
+ P_{2n-2}\ge |\cC_n|^{2^d}
+ \ge \left(C_nq^{-b_d(n)}\right)^{2^d}.
+\]
+Take logarithms and use $(2n-2)^d=2^d(n-1)^d$ to obtain the lower half of
+\cref{eq:finite-sandwich}.  The upper half is
+\cref{eq:periodic-upper-basic} at $m=2n-2$.
+
+Since $h(X)\le n^{-d}\log C_n$ and $h(X)\ge0$, the lower half of
+\cref{eq:finite-sandwich} implies the lower half of
+\cref{eq:entropy-sandwich}.  The explicit local-cube estimate in
+\cite{Bui2026}, written in the present notation, is
+\begin{equation}
+ \log C_m\le (m-1)^dh(X)+q_d(m-1)\log q.
+ \label{eq:bui-local}
+\end{equation}
+Apply \cref{eq:bui-local} with $m=2n-2$ and combine it with the upper half of
+\cref{eq:finite-sandwich}.  The entropy term is multiplied by
+$((m-1)/m)^d\le1$, so discarding that gain proves the stated upper bound.
+Finally, $b_d(n)$ and $q_d(2n-3)$ are polynomials of degree $d-1$ in $n$,
+whereas the denominators have degree $d$, proving the claimed rate.
+\end{proof}
+
+\begin{corollary}[A target-accuracy period]
+\label{cor:target-accuracy}
+Put
+\[
+ A_d=(2^d-1)\sum_{j=0}^{d-1}
+ \frac{\binom dj}{2^d-2^j},
+ \qquad
+ K_d(q)=\log q\,
+ \max\left\{3d\,2^{d-1},\frac{A_d}{2}\right\}.
+\]
+For every tolerance $\delta>0$, every integer
+\begin{equation}
+ n\ge \max\left\{4,\;1+\left\lceil\frac{K_d(q)}{\delta}\right\rceil\right\}
+ \label{eq:target-n}
+\end{equation}
+certifies
+\[
+ \left|
+ \frac{\log P_{2n-2}}{(2n-2)^d}-h(X)
+ \right|\le\delta.
+\]
+Thus an admissible period can be selected directly from $(d,q,\delta)$,
+without estimating any mixing constant of $X$.
+\end{corollary}
+
+\begin{proof}
+The shell is a union of $3d$ coordinate hyperplanes, each containing
+$n^{d-1}$ sites, so $b_d(n)\le3dn^{d-1}$.  Since $n/(n-1)\le2$,
+\[
+ \frac{b_d(n)}{(n-1)^d}
+ \le \frac{3d\,2^{d-1}}{n-1}.
+\]
+For $k\ge1$, every monomial $k^j$ in \cref{eq:bui-polynomial} is at most
+$k^{d-1}$, and hence $q_d(k)\le A_dk^{d-1}$.  With
+$k=2n-3<2n-2$, the upper error in \cref{eq:entropy-sandwich} is at most
+\[
+ \frac{A_d\log q}{2(n-1)}.
+\]
+Both one-sided errors are therefore at most $K_d(q)/(n-1)$, and
+\cref{eq:target-n} completes the proof.
+\end{proof}
+
+The same proof remembers side lengths independently.  For
+$\bn=(n_1,\ldots,n_d)$, let $C_{\bn}$ count locally admissible patterns on
+$\prod_i[1,n_i]$.  For $\bN=(N_1,\ldots,N_d)$, let $P_{\bN}$ count points
+periodic by $N_i$ in coordinate $i$.
+
+\begin{corollary}[Anisotropic certificate]
+\label{cor:anisotropic}
+If every $n_i\ge4$ and $N_i=2(n_i-1)$, then
+\begin{equation}
+\frac{\log C_{\bn}-\left(\prod_i n_i-\prod_i(n_i-3)\right)\log q}
+     {\prod_i(n_i-1)}
+\le \frac{\log P_{\bN}}{\prod_iN_i}
+\le \frac{\log C_{\bN}}{\prod_iN_i}.
+\label{eq:anisotropic}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Use the shell consisting of sites whose $i$th coordinate belongs to
+$\{1,2,n_i\}$ for at least one $i$.  Its complement has cardinality
+$\prod_i(n_i-3)$, and hence the shell has the cardinality printed in
+\cref{eq:anisotropic}.  Reflect independently in each coordinate, delete the
+last face in each direction, and use the same overlap, seam, and
+private-interior arguments as in \cref{lem:reflection-injection}.  The map is
+an injection from a $2^d$-fold fibre product, while
+$\prod_iN_i=2^d\prod_i(n_i-1)$.  The upper bound again follows by periodic
+restriction.
+\end{proof}
+
+\begin{remark}
+The bound retains all constants rather than hiding them in asymptotic
+notation.  It is not asserted to be optimal: the shell was selected for a
+uniform recoverable construction, not by solving a boundary-minimization
+problem.
+\end{remark}

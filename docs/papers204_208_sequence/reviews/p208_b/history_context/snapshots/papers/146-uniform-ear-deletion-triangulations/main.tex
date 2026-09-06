@@ -1,0 +1,251 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=28mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,microtype,xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\cT}{\mathcal T}
+
+\title[Uniform ear deletion]{Uniform Ear Deletion of a Convex Polygon:\\
+Exact Triangulation Masses and a Sharp Path-Dual Minimum}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Start with a labelled convex $n$-gon.  Repeatedly choose a current vertex
+uniformly, delete it, and record the chord between its two current
+neighbours, stopping at a triangle.  Although all $n!/6$ deletion histories
+are equiprobable, their triangulation endpoints need not be; nonuniformity
+first occurs at $n=6$.  For a triangulation
+$T$ and one of its triangular faces $r$, root the weak dual at $r$ and let
+$s_v^{(r)}$ be the rooted-subtree size at $v$.  We prove that the number of
+histories with endpoint $T$ and final face $r$ is
+\[
+  H(T,r)=\frac{(n-3)!}{\prod_{v\ne r}s_v^{(r)}}.
+\]
+Consequently $\Prob(T)=6H(T)/n!$, where $H(T)=\sum_r H(T,r)$.
+Equivalently, $H(T)$ counts complete leaf-deletion orders of the unrooted
+weak dual.  This yields the sharp bound $H(T)\ge 2^{n-3}$, with equality
+exactly when the weak dual is a path.  An exhaustive exact-arithmetic audit
+through $n=9$ checks every endpoint and final-face refinement.  Classical ear
+clipping, triangulation enumeration, weak duals, and tree hook formulas are
+treated as inputs rather than contributions.
+\end{abstract}
+
+\maketitle
+
+\section{The process and the theorem}
+
+Let $P_n$ be a convex polygon whose vertices have distinct labels.  If its
+current cyclic vertex set has size at least four, choose one current vertex
+uniformly, join its two current neighbours, and delete it.  Stop as soon as
+three vertices remain.  The recorded chords form the random endpoint
+triangulation $T$.  Ear clipping is classical in polygon triangulation
+algorithms~\cite{EderHeldPalfrader2018}, and convex-polygon ear deletion also
+appears in bijections for triangulations~\cite{Regev2013}.  Here the object of
+study is the endpoint law induced by uniform choice among \emph{all} current
+vertices.
+
+For a triangulation $T$, its weak dual $D_T$ has one vertex for each triangular
+face and one edge for each pair of faces sharing a diagonal.  It is a tree on
+$m=n-2$ vertices.  If a face $r$ is distinguished and $D_T$ is rooted at $r$,
+write $s_v^{(r)}$ for the number of vertices in the subtree rooted at $v$.
+Define
+\begin{equation}\label{eq:root-hook}
+ H(T,r):=\frac{(n-3)!}{\prod_{v\in V(D_T)\setminus\{r\}}s_v^{(r)}},
+ \qquad H(T):=\sum_{r\in V(D_T)}H(T,r).
+\end{equation}
+
+\begin{theorem}[complete endpoint law and sharp minimum]\label{thm:main}
+For every labelled convex $n$-gon, $n\ge3$, the following hold.
+\begin{enumerate}
+\item The process lasts $n-3$ steps, and each complete deletion history has
+probability $6/n!$.
+\item For every triangulation $T$ and face $r$, exactly $H(T,r)$ histories
+end at $T$ with $r$ as the final face.  In particular,
+\begin{equation}\label{eq:endpoint-law}
+       \Prob(T)=\frac{6}{n!}H(T).
+\end{equation}
+\item The endpoint multiplicity obeys
+\begin{equation}\label{eq:lower}
+       H(T)\ge 2^{n-3}.
+\end{equation}
+Equality holds if and only if $D_T$ is a path.  Thus the least endpoint
+probability is $6\,2^{n-3}/n!$, attained exactly by path-dual triangulations.
+\end{enumerate}
+\end{theorem}
+
+The theorem gives every endpoint mass, not just the extremum.  Formula
+\eqref{eq:root-hook} is integer-valued because it counts histories; it is the
+familiar rooted-tree hook expression, used here after identifying the exact
+deletion poset.  The forest hook formula and its refinements are classical
+\cite{BjornerWachs1989} and receive zero contribution credit.
+
+\section{Histories as dual-tree orders}
+
+At a stage with $k$ current vertices, every vertex of the convex $k$-gon is
+an ear.  Hence every ordered list of $n-3$ distinct original labels is a
+legal history.  Its probability is
+\begin{equation}\label{eq:history-prob}
+ \frac1n\frac1{n-1}\cdots\frac14=\frac{3!}{n!},
+\end{equation}
+and there are $n!/3!$ such lists.  Each deletion inserts the diagonal that
+cuts off its ear.  The induction invariant is that the remaining convex
+polygon together with the already cut-off ear triangles triangulates the
+original polygon.  Thus the next neighbour chord is new and noncrossing.
+After $n-3$ steps there are exactly $n-3$ distinct diagonals, hence a
+triangulation.
+
+Fix now an endpoint triangulation $T$ and a proposed final face $r$.  Removing
+an ear of $T$ removes a leaf of $D_T$; the ear tip uniquely determines the
+leaf face, and conversely a leaf face different from $r$ has a unique ear tip
+that can be deleted.  Iterating gives the following precise correspondence.
+
+\begin{lemma}[root-resolved bijection]\label{lem:bijection}
+Histories ending at $(T,r)$ are in bijection with orders of
+$V(D_T)\setminus\{r\}$ in which every child occurs before its parent when
+$D_T$ is rooted at $r$.
+\end{lemma}
+
+\begin{proof}
+Given a history, label each deleted vertex by the triangular face cut off at
+that step.  A face can disappear only after all faces below it in the rooted
+dual have disappeared, so descendants occur before ancestors.  The last
+triangle is $r$.  Conversely, take any such order.  Every prefix removes a
+descendant-closed set, so the unremoved faces form the connected
+ancestor-closed subtree containing $r$ and triangulate the current convex
+polygon.  When a dual vertex $v$ is scheduled, all its children have gone
+while its parent remains.  Thus $v$ is a leaf of the remaining dual and its
+unique ear tip is currently deletable.
+Deleting those tips reconstructs a unique polygon history and records
+exactly the diagonals of $T$.  The two constructions are inverse.
+\end{proof}
+
+\begin{proposition}[rooted hook count]\label{prop:hook}
+The number of orders in Lemma~\ref{lem:bijection} is the quantity
+$H(T,r)$ in \eqref{eq:root-hook}.
+\end{proposition}
+
+\begin{proof}
+Put $q=n-3=m-1$.  For a rooted tree, split the $q$ nonroot vertices into
+the branches below the root, of sizes $q_1,\ldots,q_d$.  Orders internal to
+different branches may be interleaved in
+$\binom{q}{q_1,\ldots,q_d}$ ways.  Applying the same decomposition within
+each branch and cancelling the factorials gives
+\[
+ \frac{q!}{\prod_{v\ne r}s_v^{(r)}}.
+\]
+The one-vertex case initializes the induction.  Lemma~\ref{lem:bijection}
+then gives the asserted history count.
+\end{proof}
+
+Summing Proposition~\ref{prop:hook} over the mutually exclusive final faces
+gives $H(T)$.  Multiplying by the common history probability
+\eqref{eq:history-prob} proves parts (1) and (2) of
+Theorem~\ref{thm:main}.  It also proves normalization without a separate
+identity: all $n!/6$ histories have exactly one endpoint and final face.
+
+\section{The sharp path-dual minimum}
+
+For an unrooted tree $D$, let $L(D)$ be the number of ways to delete leaves
+one at a time until a single vertex remains.  Choosing that final vertex as
+$r$ and then orienting all edges toward it partitions these orders by their
+surviving vertex.  Lemma~\ref{lem:bijection} therefore gives
+\begin{equation}\label{eq:L=H}
+       H(T)=L(D_T).
+\end{equation}
+If $\mathop{Leaf}(D)$ is the leaf set, then
+\begin{equation}\label{eq:recurrence}
+ L(K_1)=1,
+ \qquad
+ L(D)=\sum_{v\in\mathop{Leaf}(D)}L(D-v)\qquad (|V(D)|\ge2).
+\end{equation}
+
+\begin{proposition}[sharp leaf-order bound]\label{prop:min}
+For every tree $D$ on $m\ge1$ vertices,
+\[
+       L(D)\ge2^{m-1},
+\]
+with equality if and only if $D$ is a path (including the one-vertex path).
+\end{proposition}
+
+\begin{proof}
+Proceed by induction on $m$.  The claim is immediate for $m=1$.  Every tree
+with $m\ge2$ has at least two leaves, and $D-v$ is a tree on $m-1$ vertices
+for each leaf $v$.  By \eqref{eq:recurrence} and induction,
+\[
+ L(D)\ge |\mathop{Leaf}(D)|\,2^{m-2}\ge2^{m-1}.
+\]
+If equality holds, then $D$ has exactly two leaves; a finite tree with exactly
+two leaves is a path.  Conversely, deleting either endpoint of a path leaves
+a path, so equality follows recursively from \eqref{eq:recurrence}.
+\end{proof}
+
+Taking $m=n-2$ in Proposition~\ref{prop:min}, using
+\eqref{eq:L=H}, proves part (3) of Theorem~\ref{thm:main}.
+
+\section{Exact audit and scope}
+
+An independent standard-library verifier enumerates every ordered deletion
+history through $n=9$.  For each endpoint it reconstructs all triangular
+faces and the connected weak dual, checks every final-face count against
+\eqref{eq:root-hook}, independently computes the leaf-order recurrence,
+brute-forces bounded rooted linear extensions, checks total probability in
+exact rational arithmetic, and tests the equality class in
+Proposition~\ref{prop:min}.  Table
+\ref{tab:audit} is frozen output, not proof evidence.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Exhaustive endpoint audit.  Here $H_{\min}$ and $H_{\max}$ are
+endpoint history multiplicities, and the last column counts path-dual
+triangulations.}
+\label{tab:audit}
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule
+$n$ & histories & triangulations & $H_{\min}$ & $H_{\max}$ & path dual \\
+\midrule
+3 & 1     & 1   & 1  & 1   & 1   \\
+4 & 4     & 2   & 2  & 2   & 2   \\
+5 & 20    & 5   & 4  & 4   & 5   \\
+6 & 120   & 14  & 8  & 12  & 12  \\
+7 & 840   & 42  & 16 & 28  & 28  \\
+8 & 6720  & 132 & 32 & 112 & 64  \\
+9 & 60480 & 429 & 64 & 316 & 144 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The claims are deliberately bounded.  The polygon is convex, selection is
+uniform over current vertices, and the theorem does not address nonconvex
+visibility, weighted choices, or a classification of the maximum of $H(T)$.
+Ear clipping, Catalan enumeration, weak-dual trees, reduction-order/linear-
+extension correspondences---including a different-carrier example for
+phylogenetic networks \citep{CoronadoPonsRiera2024}---and the generic tree
+hook formula receive no priority claim.  A bounded source search did not locate the combined endpoint
+law and sharp minimum above, but a search non-hit is not a novelty or priority
+certificate.  The residual is elementary and owner-thin.  The manuscript
+remains anonymous and under \texttt{HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

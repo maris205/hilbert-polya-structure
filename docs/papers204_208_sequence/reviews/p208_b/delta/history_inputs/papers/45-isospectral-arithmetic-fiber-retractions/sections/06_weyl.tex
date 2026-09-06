@@ -1,0 +1,200 @@
+\section{Singular-value Weyl laws and the crossover}
+\label{sec:weyl}
+
+The saturated block mass is not a constant multiple of
+$m^{-\sigma}$, so ordinary $h$-free counting is insufficient.  Define the
+positive generalized weight
+\begin{equation}
+  \wt(m)=m\prod_{p\in J_h(m)}(1-p^{-\sigma})^{1/\sigma}.
+  \label{eq:generalized-weight}
+\end{equation}
+Then \cref{eq:rho-S} is exactly
+$\rho_S(m)=\wt(m)^{-\sigma/2}$.
+
+\subsection{The saturated count}
+
+Consider the generalized Dirichlet series
+\begin{equation}
+  F_{h,\sigma}(z)=\sum_{m\in\Fh}\wt(m)^{-z}
+  =\prod_p L_p(z),
+  \label{eq:F-series}
+\end{equation}
+where initially $\Re z>1$ and
+\begin{equation}
+  L_p(z)=\sum_{e=0}^{h-2}p^{-ez}
+    +p^{-(h-1)z}(1-p^{-\sigma})^{-z/\sigma}.
+  \label{eq:L-local}
+\end{equation}
+Factor the single zeta pole:
+\begin{equation}
+  F_{h,\sigma}(z)=\zeta(z)G_{h,\sigma}(z),
+  \qquad
+  G_{h,\sigma}(z)=\prod_p(1-p^{-z})L_p(z).
+  \label{eq:F-factorization}
+\end{equation}
+
+\begin{lemma}[Local cancellation and strip]
+\label{lem:tauberian-strip}
+$G_{h,\sigma}$ is holomorphic in
+\begin{equation}
+  \Re z>\theta_{h,\sigma}
+    :=\max\{\frac1h,\frac{1-\sigma}{h-1}\}<1.
+  \label{eq:theta-strip}
+\end{equation}
+At $z=1$ it has the positive value $\Chs$ in
+\cref{eq:intro-C}.
+\end{lemma}
+
+\begin{proof}
+On a compact subset of a right half-plane, expand the final term of
+\cref{eq:L-local} uniformly for large $p$.  Multiplication by
+$1-p^{-z}$ cancels the first-order $p^{-z}$ term, leaving
+\begin{equation}
+  (1-p^{-z})L_p(z)
+  =1+O(p^{-h\Re z})
+      +O(p^{-(h-1)\Re z-\sigma}).
+  \label{eq:local-cancellation}
+\end{equation}
+Both error sums converge locally uniformly precisely when
+$h\Re z>1$ and $(h-1)\Re z+\sigma>1$.  The Weierstrass theorem for
+Euler products gives holomorphy in \cref{eq:theta-strip}.  Because
+$h\ge2$ and $\sigma>0$, the boundary lies strictly to the left of one.
+Substituting $z=1$ gives \cref{eq:intro-C}; every local factor is positive.
+\end{proof}
+
+\begin{lemma}[Wiener--Ikehara hypotheses in Mellin--Stieltjes form]
+\label{lem:wiener-ikehara-check}
+Let
+\begin{equation}
+  \mu_{h,\sigma}=\sum_{m\in\Fh}\delta_{\wt(m)},
+  \qquad
+  A_S(x)=\mu_{h,\sigma}((0,x]).
+  \label{eq:counting-measure}
+\end{equation}
+This positive measure is locally finite and has only finitely many atoms
+below one.  If $\mu_+$ is its restriction to $[1,\infty)$, then, for
+$\Re z>1$,
+\begin{equation}
+  \int_{1^-}^{\infty}x^{-z}\,d\mu_+(x)
+    =F_{h,\sigma}(z)-E_{h,\sigma}(z),
+  \label{eq:mellin-stieltjes}
+\end{equation}
+where $E_{h,\sigma}$ is a finite entire sum.  Moreover,
+\begin{equation}
+  F_{h,\sigma}(z)-E_{h,\sigma}(z)
+    -\frac{\Chs}{z-1}
+  \label{eq:ikehara-remainder}
+\end{equation}
+extends holomorphically to a neighborhood of the closed half-plane
+$\Re z\ge1$.  Thus the classical nondecreasing Mellin--Stieltjes form of
+Wiener--Ikehara \cite[Ch.~III, Sec.~4, pp.~124--127]{Korevaar2004}
+applies to $\mu_+$ with residue $\Chs$.
+\end{lemma}
+
+\begin{proof}
+For exponent $e<h-1$ the nontrivial local weight is $p^e>1$, whereas for
+$e=h-1$ it is
+$p^{h-1}(1-p^{-\sigma})^{1/\sigma}$, which tends to infinity with $p$.
+Only finitely many prime--exponent pairs therefore have local weight at
+most any prescribed bound.  More explicitly, the pairs with local weight
+at most one form a finite set; the product of their smallest possible
+contributions is some $c_0>0$.  If $\wt(m)\le B$, every other nontrivial
+local factor is at most $B/c_0$, so it belongs to another finite set of
+prime--exponent pairs.  Since one exponent is chosen per prime, only
+finitely many such $m$ exist.  This proves local finiteness and, with
+$B=1$, finiteness below one.
+
+Removing the atoms below one subtracts the finite entire Dirichlet
+polynomial $E_{h,\sigma}$, proving \cref{eq:mellin-stieltjes}.  By
+\cref{eq:F-factorization,lem:tauberian-strip},
+$F_{h,\sigma}=\zeta G_{h,\sigma}$ throughout a strip crossing
+$\Re z=1$, $G_{h,\sigma}(1)=\Chs$, and
+$\zeta(z)-(z-1)^{-1}$ is holomorphic there.  Expanding
+$G_{h,\sigma}(z)=\Chs+(z-1)H(z)$ near one shows that
+\cref{eq:ikehara-remainder} is holomorphic at one and elsewhere in a
+neighborhood of $\Re z\ge1$.  These are precisely the positivity,
+convergence, pole, and boundary-regularity hypotheses of the cited theorem.
+\end{proof}
+
+\begin{proposition}[Saturated Weyl law]
+\label{prop:S-weyl}
+For $\sigma>0$, let
+\[
+  A_S(x)=\#\{m\in\Fh:\wt(m)\le x\}.
+\]
+Then
+\begin{equation}
+  A_S(x)\sim\Chs x,
+  \qquad
+  s_n(S_{h,s})\sim(\frac{\Chs}{n})^{\sigma/2}.
+  \label{eq:S-weyl}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The verified hypotheses in \cref{lem:wiener-ikehara-check} give
+$A_S(x)\sim\Chs x$; the finitely many removed atoms contribute only
+$O(1)$.  The number of singular values
+at least $t$ equals $A_S(t^{-2/\sigma})$.  Monotone asymptotic inversion
+gives the second relation.  Normal convergence of the Euler product is
+detailed in \cref{app:tauberian-details}.
+\end{proof}
+
+\subsection{Modulo and eigenvalue counts}
+
+The elementary $h$-free density is
+\begin{equation}
+  \#\{m\le x:m\in\Fh\}\sim\frac{x}{\zeta(h)}.
+  \label{eq:hfree-density}
+\end{equation}
+For completeness, the identity
+$\1_{\Fh}(n)=\sum_{d^h\mid n}\mu(d)$ gives
+\[
+  \sum_{n\le x}\1_{\Fh}(n)
+  =\sum_{d\le x^{1/h}}\mu(d)\lfloor\frac{x}{d^h}\rfloor
+  =\frac{x}{\zeta(h)}+O_h(x^{1/h}).
+\]
+
+\begin{proposition}[Modulo and eigenvalue Weyl laws]
+\label{prop:M-weyl}
+For $\sigma>1/h$,
+\begin{align}
+  s_n(M_{h,s})
+    &\sim(\frac{\Dhs}{n})^{\sigma/2},
+      &\Dhs&=\frac{\zeta(h\sigma)^{1/\sigma}}{\zeta(h)},
+      \label{eq:M-weyl}\\
+  |\lambda_n|
+    &\sim(\frac{1/\zeta(h)}{n})^{\sigma/2}.
+      \label{eq:eigen-weyl}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+By \cref{eq:rho-M}, $\rho_M(m)\ge t$ exactly when
+$m\le\zeta(h\sigma)^{1/\sigma}t^{-2/\sigma}$.  Applying
+\cref{eq:hfree-density} yields the singular-value count
+$\Dhs t^{-2/\sigma}$.  The same count without the fiber multiplier gives
+the eigenvalue constant $1/\zeta(h)$.  Monotone inversion proves
+\cref{eq:M-weyl,eq:eigen-weyl}.
+\end{proof}
+
+\begin{corollary}[Exact crossover]
+\label{cor:crossover}
+For every $h\ge2$, $C_{h,1}=D_{h,1}=1$.
+\end{corollary}
+
+\begin{proof}
+At $\sigma=1$, the bracket in \cref{eq:intro-C} is
+\[
+  \sum_{e=0}^{h-2}p^{-e}
+  +p^{-(h-1)}(1-p^{-1})^{-1}
+  =\sum_{e=0}^{\infty}p^{-e}=(1-p^{-1})^{-1}.
+\]
+Every Euler factor in $C_{h,1}$ is therefore one.  Independently,
+$D_{h,1}=\zeta(h)/\zeta(h)=1$.
+\end{proof}
+
+The crossover is an equality, not a sign-change theorem: we make no claim
+about the ordering of $C_{h,\sigma}$ and $D_{h,\sigma}$ for
+$\sigma\ne1$.  None of the asymptotic or endpoint statements in this
+section depends on finite records.
