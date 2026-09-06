@@ -109,3 +109,29 @@ checks archival pins only, not mathematical acceptance or five-paper
 completion. The receipt and object result were produced after the named
 commit and are not claimed to be inside their own referenced commit.
 Later visibility/local-rank pilots are not included. HOLD_EXTERNAL remains.
+
+## P205 internally complete / P206 rejected checkpoint
+
+On 2026-09-06 UTC the 244-file scoped checkpoint was actually committed
+and pushed as `ef9deb8582712be0e6d174a0c58a23b1f5b977dc`.
+It contains P205's accepted B delta, new root B replay pair, physical
+Round2, two terminal source-only builds, three actual final-page views,
+paper-level artifact gate and complete 256-entry paper manifest. It also
+preserves P206's full adverse A review/root rejection and root replay pair,
+closed LUB/fifth scouting evidence, and the root's LNR temporal proof and
+actual author checker output. This is one completed seat, not five papers.
+
+Before copying/staging, a read-only remote comparison found `5b2a654c`
+changed only `henon_dynamics/` paths, disjoint from this owned scope. A
+normal fast-forward merge preserved them. No force push or history rewrite
+occurred. All owned ignored raw compiler products were explicitly staged;
+the scoped source/doc whitespace check passed. Active LNR_INVERSE_WORK,
+LNR_GATE, set_partition_sixth and Python caches were excluded.
+
+Actual push exit was zero. `ls-remote` returned the exact commit above,
+ahead/behind was `0 0`, and mirror status was empty. The subsequent
+[Git-object check](qa/GIT_OBJECT_CHECKPOINT_EF9DEB85.json) passed **712
+entries in 28 manifests**, with zero missing/mismatched objects. This is
+committed-byte integrity, not a new mathematical execution or batch verdict.
+This receipt and that object result were written after the named commit;
+neither claims inclusion in its own referenced object. HOLD_EXTERNAL remains.

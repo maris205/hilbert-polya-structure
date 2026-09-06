@@ -36,10 +36,10 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | scouting/word_local/, P204/P206 lifecycle, P205 integration | 33 literal pilots; LNR temporal proof; P204/P206 rejected |
-| Combinatorial objects | batch197_fosp_gate | closed reviews/p206_a/; word_local/LNR_INVERSE_WORK/ | P206 A adverse complete; LNR inverse/extremal proof contributor |
-| Algebra / finite geometry | batch197_lzk_gate | closed reviews/p205_b/; word_local/LNR_GATE/ | P205 B accepted; independent LNR candidate source/proof gate |
-| Graphs / relations | batch197_fifth_scout | closed lanes/LUB_PROOF_WORK/; scouting/set_partition_sixth/ | fifth six NO_PROMOTION; new bounded set/partition lane |
+| Words / local maps | root | scouting/word_local/, central integration | 37 literal pilots; LNR source hold; contrast/source integration |
+| Combinatorial objects | batch197_fosp_gate | closed LNR_INVERSE_WORK/; word_local/UGR_PROOF_WORK/ | LNR inverse contributor; upper-neighbor rank temporal proof scout |
+| Algebra / finite geometry | batch197_lzk_gate | closed LNR_GATE/; word_local/CONTRAST_PROOF_WORK/ | LNR HOLD_SOURCE gate complete; MNC temporal/extremal author scout |
+| Graphs / relations | batch197_fifth_scout | closed set_partition_sixth/; scouting/discrete_geometry_seventh/ | sixth seven NO_PROMOTION; new bounded geometry lane |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -192,19 +192,42 @@ P205/P206 admissions below do not reverse that rejection.
   numerical replays or independent candidate reviews.
   Six visibility/local probes have actual 42-row stdout; LNR alone has a
   completed author temporal proof and a successful standalone author pair
-  (1,127,472 assertions each). Its inverse/extremal author proof and distinct
-  nonauthor source/proof gate are active. LNR is not a retained paper.
+  (1,127,472 assertions each). Its inverse/extremal author proof is complete.
+  The distinct nonauthor [candidate gate](scouting/word_local/LNR_GATE/CANDIDATE_GATE.md)
+  is **MATH_VALID / HOLD_SOURCE / NO_ADMISSION**: Mukherjee 2011 directly
+  studies iterative local-rank convergence, but its theorem body remains
+  unread. Root read the complete original proof/source/execution evidence,
+  checked all six gate/two author context pins and 26/20 manifest entries,
+  and completed two new 3,157,633-assertion raw-canonical replays; see the
+  [root receipt](qa/root_replays/lnr_gate/RECEIPT.md). LNR-S1 remains open;
+  neither the old theorem nor a new refinement is invented from a preview.
+  LNR has no number or reserve status. Upper-neighbor rank is related by
+  input complement and cannot supply a separate inverse axis or second seat.
+  Four new [contrast/diversity literals](scouting/word_local/CONTRAST_INTAKE.md)
+  have actual full 28-row pilot output on their predeclared boxes. MNC's
+  temporal/extremal proof scout is active. MDE remains a bounded signal,
+  not another prospective paper within that same contrast family.
+- The [sixth set/partition lane](scouting/set_partition_sixth/SCOUT_REPORT.md)
+  is closed: seven executed literals, including an old negative control,
+  all NO_PROMOTION. Root read its full report, proof boundaries and source/
+  execution record, and passed all 13 nonself manifest entries and three
+  historical pins. The full UPC closure-generator adapter deducts both
+  axes; other gaps and the duplicate remain explicit. The 46-box/307,234
+  state-map census is author evidence, not a new root numerical replay.
+  A separate bounded geometry lane is now active.
 
 The [private checkpoint receipt](GIT_SYNC_RECEIPT.md) confirms actual push
-`bad9dff9f11155a8ee8fd8ea7f40bdf5eb5f183d`, following `1fb268cb`.
-It includes P205 accepted A/Round1, P206 complete Round0 and closed fourth
-intakes. Generic ignored compiler evidence was explicitly retained; the
-[committed-object check](qa/GIT_OBJECT_CHECKPOINT_BAD9DFF9.json) passed 312
-pins in 22 manifests. Then-active P205 B, P206 A, LUB and fifth intake were
-excluded. The newer rejection/B/scouting milestones await scoped sync.
+`ef9deb8582712be0e6d174a0c58a23b1f5b977dc`, following `bad9dff9` and a
+normal fast-forward of disjoint remote Henon work. It includes P205's
+internal completion, P206's adverse A/root rejection, closed LUB/fifth
+intakes and root LNR temporal evidence. Generic ignored compiler evidence
+was explicitly retained; the [committed-object check](qa/GIT_OBJECT_CHECKPOINT_EF9DEB85.json)
+passed 712 pins in 28 manifests. Active LNR inverse/gate and the sixth
+set/partition intake were excluded. Later working changes are not
+implicitly synchronized by this historical ref.
 WIP archival integrity is not manuscript or batch acceptance.
 
-Next: preserve and synchronize P205's actual completion; replace
+Next: continue the active candidate/source gates; replace
 failed directions with fresh bounded scouting, then admit only proved,
 nonduplicate conjunctions. No five-paper completion claim is available.
 Routine phase transitions use the standing authorization without another

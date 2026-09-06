@@ -4,7 +4,7 @@
 
 ## 当前结论
 
-- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P205_INTERNALLY_COMPLETE / P206_REJECTED_IN_A / FOUR_SEATS_OPEN`。P204、P206 稿审 A 淘汰，原稿、冻结和 critical open value finding 保留。P205 两份独立稿审及实际无修改 delta 已接受、三轮冻结完整；root B 双次各 12,023,630 断言及原始字节比较通过，两个终端冷构建、三页实际视读和单篇 artifact gate 完成。当前保留 1、完成 1、空缺 4，下一编号 P207，整批远未完成。LNR 全参数时间证明及作者核验已有，逆像极值证明和独立候选 gate 正在进行；不是 reserve 或论文。最近已核实 WIP 推送 `bad9dff9` 包含 P205 A/Round1、P206 Round0，312 pins/22 manifests Git 对象检查通过；当前完成/否决/侦查里程碑待范围同步。
+- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P205_INTERNALLY_COMPLETE / P206_REJECTED_IN_A / FOUR_SEATS_OPEN`。P204、P206 稿审 A 淘汰，原稿、冻结和 critical open value finding 保留。P205 两份独立稿审及实际无修改 delta 已接受、三轮冻结完整；root B 双次各 12,023,630 断言及原始字节比较通过，两个终端冷构建、三页实际视读和单篇 artifact gate 完成。当前保留 1、完成 1、空缺 4，下一编号 P207，整批远未完成。LNR 数学证明经独立检查成立，但直接相关旧文的收敛定理全文未核，gate 为 HOLD_SOURCE；root 原件检查及双次各 3,157,633 断言原始字节重放通过，未消除 source finding。第六线七个 literal 全部 NO_PROMOTION；新对比度、相关秩映射及几何方向仍是 proof scout，不是 reserve 或论文。最近已核实范围推送 `ef9deb85` 包含 P205 内部完成、P206 否决、LUB/第五线闭合及 root LNR 时间证明，712 pins/28 manifests Git 对象检查通过；后续 LNR 逆像/gate、第六线与新 scout 未包含。
 - 路线仍为 **Route A / Symbolic Dynamics**，当前子轨广泛探索有限自主确定性映射。短论文 Stage/Round 不是原始 HP 算术路线的 A0–A4；没有进入 Route B。
 - 最新内部完成批次：**P197 / P199 / P200 / P202 / P203**。五篇各四页，十份实际论文审查、十次终端冷构建、二十页实际视读完成；整批终端审计 `PASS`。全部仍为 `OWNER_AMBER / HOLD_EXTERNAL`。
 - 研究完成提交 `0236e3e7` 已随正常合并 `1b55fbda` 实际推送，远端 ref 已确认；见 [同步回执](docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md)。[配置审计](docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md) 和独立情境/修订测试完成。
