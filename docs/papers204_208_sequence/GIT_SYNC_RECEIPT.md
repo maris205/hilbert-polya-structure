@@ -3,7 +3,38 @@
 This is a work-in-progress backup, not five-paper completion or admission.
 All research remains `HOLD_EXTERNAL`.
 
-## Latest: P208 accepted A / Round1 and closed fourteenth–eighteenth
+## Latest: P208 accepted B / Round2 / terminal builds and views
+
+On 2026-09-06 UTC, the scoped 4,475-file checkpoint was actually committed
+and pushed as `b8bf6c52f0a1a7c2075e86fd3bd950222acf5be1`.
+It preserves complete accepted B and its 3,545-payload seal, root's strict
+B pair/original/delta closure, 487-input physical Round2, the new terminal
+v2 pair and actual seven-page root views, and closed nineteenth/twentieth
+evidence. The complete 2,178-entry paper seal records ARTIFACT_GATE_PENDING,
+not paper completion. Original recorders, adverse/failing records, initial
+review bytes and all explicit historical mappings remain intact.
+
+The mirror was clean at 8e4e21d0; actual fetch showed no remote advance and
+0/0. All staged paths matched current workspace bytes. Active FTH_GATE,
+the separately finishing twenty-first lane, audit_p208.py and its active
+terminal-artifact output were explicitly excluded; no next number is implied.
+The first force-add raced the still-active preceding scoped add and returned
+index.lock exit 128. Root waited for that original add to exit 0, did not
+remove the lock, then retried the same force-add successfully.
+
+The actual named-manifest object auditor passed **13 manifests / 8,914
+referents** on Git tree `3ee35d5afc492038b9b5c7d08bd0c5d64b3bb344` before
+commit. Actual post-commit HEAD-tree inspection returned that exact object;
+this is verification of the committed tree, not a falsely labelled second
+audit. Commit and push exited 0; ls-remote returned the exact b8bf6c52 ref,
+ahead/behind remained 0/0 and final mirror status was empty. See the
+[actual object and push record](qa/GIT_OBJECT_P208_B8BF6C52.json).
+
+The live terminal artifact gate and whole five-paper gate are not included
+or accepted by this backup. This later receipt/object result and updated
+recovery text are outside their own named commit. HOLD_EXTERNAL remains.
+
+## Previous: P208 accepted A / Round1 and closed fourteenth–eighteenth
 
 On 2026-09-06 UTC, the scoped 1,600-file checkpoint was actually committed
 and pushed as `8e4e21d0c41da865bd12081879a09fd6eaa70de6`.

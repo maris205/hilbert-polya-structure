@@ -1,0 +1,610 @@
+{
+  "kind": "ROOT_ORIGINAL_TERMINAL_ARTIFACT_INSPECTION",
+  "command": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C TZ=UTC /root/miniconda3/bin/python3 -I -S -B -X pycache_prefix=/tmp/p208-root-initial-inspection-unused-20260907 - <<'PY'\nfrom pathlib import Path\nfrom hashlib import sha256\nfrom collections import Counter\nimport json, os, re, sys\nroot=Path('/root/autodl-tmp/symbolic_dynamics')\nbatch=root/'docs/papers204_208_sequence'\nbase=batch/'qa/p208_terminal_artifact'\nchecks=Counter()\ndef ck(ok,kind,detail):\n checks[kind]+=1\n if not ok: raise AssertionError((kind,detail))\ndef info(p):\n raw=Path(p).read_bytes()\n return {'bytes':len(raw),'sha256':sha256(raw).hexdigest()}\ndef j(p): return json.loads(Path(p).read_bytes())\ndef manifest(d,count):\n rows={}\n for line in (d/'SHA256SUMS').read_text().splitlines():\n  m=re.fullmatch(r'([0-9a-f]{64})  (.+)',line); ck(m is not None,'manifest_syntax',str(d))\n  h,n=m.groups(); p=Path(n)\n  ck(n not in rows and n!='SHA256SUMS' and not p.is_absolute() and '..' not in p.parts,'manifest_path',n)\n  ck(not (d/p).is_symlink() and info(d/p)['sha256']==h,'manifest_hash',str(d/p)); rows[n]=h\n ck(len(rows)==count and set(rows)=={p.relative_to(d).as_posix() for p in d.rglob('*') if p.is_file() and p!=d/'SHA256SUMS'},'manifest_complete',(str(d),len(rows)))\n return info(d/'SHA256SUMS')\nck(sys.flags.optimize==0 and sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode and not Path(sys.pycache_prefix).exists(),'actual_flags','strict')\nck(dict(os.environ)=={'PATH':'/usr/bin:/bin','LANG':'C','LC_ALL':'C','TZ':'UTC'},'actual_env','exact')\nseal=manifest(base,54)\nck(seal['sha256']=='e3b64033ca95f890e87f1ca7fa669077212fd924277febfa9bc97d71cd74c1b1','initial_seal','exact')\nsource=batch/'qa/audit_p208.py'\nck(info(source)['sha256']=='086170c8a4784ed3dc560a7fc19ff0de0fbfd22f6afc0ea7ec18fd0fa53c36d8','auditor_source','full-read-final')\nattempts=[]\nfor k in range(1,6):\n d=base/('initial_%02d'%k); m=manifest(d,8); c=j(d/'COMMAND.json'); a=j(d/'ATTEMPT.json'); before=j(d/'INPUTS_BEFORE.json'); after=j(d/'INPUTS_AFTER.json')\n ck(before==after and c['inputs_unchanged'] and c['unused_cache_absent'] and not (d/'unused_pycache').exists(),'attempt_inputs',k)\n ck(c['exit_code']==(0 if k==5 else 1),'actual_attempt_exit',k)\n for s in ('stdout','stderr'): ck(info(d/('audit.'+s))==c[s],'actual_stream_pin',(k,s))\n ck(a['status']=='ATTEMPTED' and all(a[n]==c[n] for n in ('argv','cwd','environment','started_utc')),'actual_attempt_record',k)\n ck(before['auditor']==info(d/'executed_auditor_snapshot.py') and before['recorder']==info(d/'executed_recorder_snapshot.py'),'exact_executed_sources',k)\n if k==5: ck((d/'executed_auditor_snapshot.py').read_bytes()==source.read_bytes(),'passing_executed_source','exact')\n attempts.append({'attempt':d.name,'manifest':m,'command':c,'complete_stderr':(d/'audit.stderr').read_text(),'executed_source':before['auditor']})\nr=j(base/'initial_05/audit.stdout')\nck(r['status']=='PASS_P208_TERMINAL_ARTIFACT_GATE' and r['checks']==2232943 and r['all_consumed_input_count']==115334 and r['checks']==sum(r['checks_by_section'].values()),'actual_complete_result','counts')\nck(info(base/'initial_05/audit.stdout')=={'bytes':42125698,'sha256':'394f79aa4a5f100430014a1fcc290b2e30523708ec5a2db396d1b6a176cfd72c'},'passing_stdout','exact')\nledger=r['all_consumed_inputs_rechecked']; ck(len(ledger)==115334,'full_read_ledger_count','exact')\nfor p,v in ledger.items(): ck(info(p)==v,'every_consumed_input_current',p)\nfor p,q in r['host_path_resolutions_rechecked'].items(): ck(str(Path(p).resolve(strict=True))==q,'every_host_resolution_current',p)\nck(len(r['host_path_resolutions_rechecked'])==108534,'host_count','exact')\nfor row in r['all_local_links_checked']:\n p=Path(row['resolved_target']); p=p if p.is_absolute() else root/p\n ck(p.exists(),'all_local_links_current',str(p))\nck(len(r['all_local_links_checked'])==973,'links_count','exact')\nfor when in ('before','after'):\n rt=r['actual_auditor_runtime_'+when]\n ck(rt['environment']==dict(os.environ) and not Path(rt['pycache_prefix']).exists() and all(v in rt['flags'] for v in ('optimize=0','no_site=1','isolated=1','dont_write_bytecode=1')),'auditor_actual_runtime',when)\n for p,v in rt['mapped_files'].items(): ck(info(p)==v,'auditor_mapped_current',p)\n for v in rt['modules'].values(): ck(info(v['path'])=={n:v[n] for n in ('sha256','bytes')},'auditor_modules_current',v['path'])\nlife=j(base/'lifecycle_before/RECEIPT.json'); manifest(base/'lifecycle_before',3)\nck(life['status']=='PASS_INITIAL_LIFECYCLE_BYTES_PRESERVED_NOT_ROOT_ACCEPTANCE','lifecycle_preserved_status','exact')\nfor p,row in life['original_to_snapshot'].items():\n v={n:row[n] for n in ('sha256','bytes')}\n ck(v==ledger[p]==info(p)==info(base/row['snapshot']),'two_pre_lifecycle_bytes',p)\nfor role in ('author','a','b'):\n rr=batch/('qa/root_replays/p208_'+role+'_strict')\n p= root/'papers/208-original-snapshot-triangulation-sweeps' if role=='author' else batch/('reviews/p208_'+role)\n ck((rr/'run1.stdout').read_bytes()==(rr/'run2.stdout').read_bytes()==(p/'CANONICAL.json').read_bytes(),'strict_current_raw_full_pair',role)\npaper=root/'papers/208-original-snapshot-triangulation-sweeps'\nck((paper/'qa_final/cold_build_1/main.pdf').read_bytes()==(paper/'qa_final/cold_build_2/main.pdf').read_bytes()==(paper/'frozen_round2/main.pdf').read_bytes(),'terminal_current_raw_full_pair','two+frozen')\nfor p,v in ledger.items(): ck(info(p)==v,'every_consumed_input_after',p)\nck(seal==manifest(base,54),'own_scope_seal_after','unchanged')\nkeys=('paper','status','started_utc','ended_utc','checks','checks_by_section','whole_paper_manifest_entries','frozen_and_author','accepted_reviews','root_strict_replays_reused','terminal_builds','actual_root_views_and_links','complete_manifests_validated','fresh_mathematical_executions','fresh_builds','fresh_page_views','role','limits','owner','external_status')\nprint(json.dumps({'status':'ROOT_P208_INITIAL_TERMINAL_ARTIFACT_ORIGINAL_INSPECTION_PASS','initial_package_seal':seal,'auditor_source':info(source),'actual_stdout':info(base/'initial_05/audit.stdout'),'checks':dict(checks),'attempts':attempts,'passing_summary':{k:r[k] for k in keys},'current_consumed_inputs':len(ledger),'host_resolutions':len(r['host_path_resolutions_rechecked']),'lifecycle_originals':life,'root_fresh_science_build_view':0,'environment':dict(os.environ),'flags':str(sys.flags),'cache_prefix':sys.pycache_prefix,'cache_absent':not Path(sys.pycache_prefix).exists()},indent=2,sort_keys=True))\nPY",
+  "actual_exit_code": 0,
+  "actual_tool_chunk": "054db3",
+  "result": {
+    "actual_stdout": {
+      "bytes": 42125698,
+      "sha256": "394f79aa4a5f100430014a1fcc290b2e30523708ec5a2db396d1b6a176cfd72c"
+    },
+    "attempts": [
+      {
+        "attempt": "initial_01",
+        "command": {
+          "argv": [
+            "/root/miniconda3/bin/python3.12",
+            "-I",
+            "-S",
+            "-B",
+            "-X",
+            "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_terminal_artifact/initial_01/unused_pycache",
+            "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py"
+          ],
+          "cwd": "/root/autodl-tmp/symbolic_dynamics",
+          "ended_utc": "2026-09-06T13:26:09.640863+00:00",
+          "environment": {
+            "LANG": "C",
+            "LC_ALL": "C",
+            "PATH": "/usr/bin:/bin",
+            "TZ": "UTC"
+          },
+          "exit_code": 1,
+          "inputs_unchanged": true,
+          "role": "Actual documentary artifact audit execution; no new science, build or views.",
+          "started_utc": "2026-09-06T13:26:08.848615+00:00",
+          "stderr": {
+            "bytes": 1023,
+            "sha256": "7ffb44ba080631ff50eb64eff26a76c4a6d21e084a439533c3ed468a1a41b328"
+          },
+          "stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "unused_cache_absent": true
+        },
+        "complete_stderr": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 600, in <module>\n    main()\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 563, in main\n    history = load_aliases()\n              ^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 158, in load_aliases\n    alias(ROOT / rel, base / rel, value)\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 135, in alias\n    ck(key not in ALIASES or ALIASES[key] == preserved, 'alias_unique', key)\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 47, in ck\n    raise AssertionError((section, detail))\nAssertionError: ('alias_unique', ('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/OFS_GATE/SOURCE_AND_PROOF.md', '8547616e52c125f51de808fb69eb67a56aa5520c2d01294e94703a42077cccf4'))\n",
+        "executed_source": {
+          "bytes": 35815,
+          "sha256": "698db9cb464d4756d19ed7dd8887d3e107dfd2d6e1065dfadd7116eb00369ce5"
+        },
+        "manifest": {
+          "bytes": 676,
+          "sha256": "d9ac3cd243f2e17f8c4628604eb10c932f505cb7a4be81b3fa937ef42234c195"
+        }
+      },
+      {
+        "attempt": "initial_02",
+        "command": {
+          "argv": [
+            "/root/miniconda3/bin/python3.12",
+            "-I",
+            "-S",
+            "-B",
+            "-X",
+            "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_terminal_artifact/initial_02/unused_pycache",
+            "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py"
+          ],
+          "cwd": "/root/autodl-tmp/symbolic_dynamics",
+          "ended_utc": "2026-09-06T13:26:26.970214+00:00",
+          "environment": {
+            "LANG": "C",
+            "LC_ALL": "C",
+            "PATH": "/usr/bin:/bin",
+            "TZ": "UTC"
+          },
+          "exit_code": 1,
+          "inputs_unchanged": true,
+          "role": "Actual documentary artifact audit execution; no new science, build or views.",
+          "started_utc": "2026-09-06T13:26:20.488076+00:00",
+          "stderr": {
+            "bytes": 730,
+            "sha256": "129e290d898c5badfa022ee79cd5fa5ed7882678f219bb0a1915fd3c1acd776b"
+          },
+          "stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "unused_cache_absent": true
+        },
+        "complete_stderr": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 602, in <module>\n    main()\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 568, in main\n    accepted = reviews(history)\n               ^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 268, in reviews\n    ck(baseline == j(base / 'delta/INPUTS_AFTER.json'), 'delta_full_before_after', letter)\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 47, in ck\n    raise AssertionError((section, detail))\nAssertionError: ('delta_full_before_after', 'a')\n",
+        "executed_source": {
+          "bytes": 35861,
+          "sha256": "e165732250e0fe91d21a7acfe882bdb53aece9ac3f57705e1978c3456533098e"
+        },
+        "manifest": {
+          "bytes": 676,
+          "sha256": "2c19864c055321d04ea64471f64dbe7a89498db62d445398b34cd940ef47f860"
+        }
+      },
+      {
+        "attempt": "initial_03",
+        "command": {
+          "argv": [
+            "/root/miniconda3/bin/python3.12",
+            "-I",
+            "-S",
+            "-B",
+            "-X",
+            "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_terminal_artifact/initial_03/unused_pycache",
+            "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py"
+          ],
+          "cwd": "/root/autodl-tmp/symbolic_dynamics",
+          "ended_utc": "2026-09-06T13:28:51.171639+00:00",
+          "environment": {
+            "LANG": "C",
+            "LC_ALL": "C",
+            "PATH": "/usr/bin:/bin",
+            "TZ": "UTC"
+          },
+          "exit_code": 1,
+          "inputs_unchanged": true,
+          "role": "Actual documentary artifact audit execution; no new science, build or views.",
+          "started_utc": "2026-09-06T13:27:27.438218+00:00",
+          "stderr": {
+            "bytes": 998,
+            "sha256": "a089204db6d4f6a28f9c85f1ade93e18476f141d7f76fecdd7db9c63d50795a1"
+          },
+          "stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "unused_cache_absent": true
+        },
+        "complete_stderr": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 612, in <module>\n    main()\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 581, in main\n    views = pages_and_links()\n            ^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 562, in pages_and_links\n    ck(destination.exists(), 'local_link_closure', (label(doc), target, label(origin)))\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 47, in ck\n    raise AssertionError((section, detail))\nAssertionError: ('local_link_closure', ('docs/papers204_208_sequence/reviews/p208_a/assignment_context_recovery/historical/SYMBOLIC_DYNAMICS_STATE.md', 'docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md', 'docs/papers204_208_sequence/reviews/p208_a/assignment_context_recovery/historical/SYMBOLIC_DYNAMICS_STATE.md'))\n",
+        "executed_source": {
+          "bytes": 36550,
+          "sha256": "162906c17375f701a8ed531097e27abca12ea52d5153610ef0691311a53b0480"
+        },
+        "manifest": {
+          "bytes": 676,
+          "sha256": "279f5933105d49ed2bf87a210be39f1200401f75ed11ed58c9c1340f04c83e9c"
+        }
+      },
+      {
+        "attempt": "initial_04",
+        "command": {
+          "argv": [
+            "/root/miniconda3/bin/python3.12",
+            "-I",
+            "-S",
+            "-B",
+            "-X",
+            "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_terminal_artifact/initial_04/unused_pycache",
+            "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py"
+          ],
+          "cwd": "/root/autodl-tmp/symbolic_dynamics",
+          "ended_utc": "2026-09-06T13:33:00.283866+00:00",
+          "environment": {
+            "LANG": "C",
+            "LC_ALL": "C",
+            "PATH": "/usr/bin:/bin",
+            "TZ": "UTC"
+          },
+          "exit_code": 1,
+          "inputs_unchanged": true,
+          "role": "Actual documentary artifact audit execution; no new science, build or views.",
+          "started_utc": "2026-09-06T13:31:16.306760+00:00",
+          "stderr": {
+            "bytes": 936,
+            "sha256": "7c4cd6a9fca47988424f105a763564959e0e8e258f83fc14944ca24b7029db9e"
+          },
+          "stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "unused_cache_absent": true
+        },
+        "complete_stderr": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 670, in <module>\n    main()\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 634, in main\n    views = pages_and_links()\n            ^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 593, in pages_and_links\n    ck(destination.exists(), 'local_link_closure', (label(doc), target, label(origin)))\n  File \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py\", line 47, in ck\n    raise AssertionError((section, detail))\nAssertionError: ('local_link_closure', ('docs/papers204_208_sequence/reviews/p208_b/delta/history_inputs/docs/papers204_208_sequence/scouting/word_local/CRC_PROOF_SPIKE.md', 'z^(-1', 'docs/papers204_208_sequence/scouting/word_local/CRC_PROOF_SPIKE.md'))\n",
+        "executed_source": {
+          "bytes": 40166,
+          "sha256": "e256937034c839ddf7517b56f4e9a344792262a75d815f794f0babc20f835d5b"
+        },
+        "manifest": {
+          "bytes": 676,
+          "sha256": "32dbc4ac2e2778e725f774f47b7a9fa89741c6eda521910d820eec44d41f7620"
+        }
+      },
+      {
+        "attempt": "initial_05",
+        "command": {
+          "argv": [
+            "/root/miniconda3/bin/python3.12",
+            "-I",
+            "-S",
+            "-B",
+            "-X",
+            "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_terminal_artifact/initial_05/unused_pycache",
+            "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/audit_p208.py"
+          ],
+          "cwd": "/root/autodl-tmp/symbolic_dynamics",
+          "ended_utc": "2026-09-07T02:11:10.647113+00:00",
+          "environment": {
+            "LANG": "C",
+            "LC_ALL": "C",
+            "PATH": "/usr/bin:/bin",
+            "TZ": "UTC"
+          },
+          "exit_code": 0,
+          "inputs_unchanged": true,
+          "role": "Actual documentary artifact audit execution; no new science, build or views.",
+          "started_utc": "2026-09-07T02:09:15.954129+00:00",
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stdout": {
+            "bytes": 42125698,
+            "sha256": "394f79aa4a5f100430014a1fcc290b2e30523708ec5a2db396d1b6a176cfd72c"
+          },
+          "unused_cache_absent": true
+        },
+        "complete_stderr": "",
+        "executed_source": {
+          "bytes": 41003,
+          "sha256": "086170c8a4784ed3dc560a7fc19ff0de0fbfd22f6afc0ea7ec18fd0fa53c36d8"
+        },
+        "manifest": {
+          "bytes": 676,
+          "sha256": "c68b51410e1aec3574032d6149183c0a0e0e908ea77738bd2b212d6027b4d3d6"
+        }
+      }
+    ],
+    "auditor_source": {
+      "bytes": 41003,
+      "sha256": "086170c8a4784ed3dc560a7fc19ff0de0fbfd22f6afc0ea7ec18fd0fa53c36d8"
+    },
+    "cache_absent": true,
+    "cache_prefix": "/tmp/p208-root-initial-inspection-unused-20260907",
+    "checks": {
+      "actual_attempt_exit": 5,
+      "actual_attempt_record": 5,
+      "actual_complete_result": 1,
+      "actual_env": 1,
+      "actual_flags": 1,
+      "actual_stream_pin": 10,
+      "all_local_links_current": 973,
+      "attempt_inputs": 5,
+      "auditor_actual_runtime": 2,
+      "auditor_mapped_current": 26,
+      "auditor_modules_current": 92,
+      "auditor_source": 1,
+      "every_consumed_input_after": 115334,
+      "every_consumed_input_current": 115334,
+      "every_host_resolution_current": 108534,
+      "exact_executed_sources": 5,
+      "full_read_ledger_count": 1,
+      "host_count": 1,
+      "initial_seal": 1,
+      "lifecycle_preserved_status": 1,
+      "links_count": 1,
+      "manifest_complete": 8,
+      "manifest_hash": 151,
+      "manifest_path": 151,
+      "manifest_syntax": 151,
+      "own_scope_seal_after": 1,
+      "passing_executed_source": 1,
+      "passing_stdout": 1,
+      "strict_current_raw_full_pair": 3,
+      "terminal_current_raw_full_pair": 1,
+      "two_pre_lifecycle_bytes": 2
+    },
+    "current_consumed_inputs": 115334,
+    "environment": {
+      "LANG": "C",
+      "LC_ALL": "C",
+      "PATH": "/usr/bin:/bin",
+      "TZ": "UTC"
+    },
+    "flags": "sys.flags(debug=0, inspect=0, interactive=0, optimize=0, dont_write_bytecode=1, no_user_site=1, no_site=1, ignore_environment=1, verbose=0, bytes_warning=0, quiet=0, hash_randomization=1, isolated=1, dev_mode=False, utf8_mode=1, warn_default_encoding=0, safe_path=True, int_max_str_digits=4300)",
+    "host_resolutions": 108534,
+    "initial_package_seal": {
+      "bytes": 5064,
+      "sha256": "e3b64033ca95f890e87f1ca7fa669077212fd924277febfa9bc97d71cd74c1b1"
+    },
+    "lifecycle_originals": {
+      "initial_attempt": "initial_05",
+      "initial_attempt_manifest": {
+        "bytes": 676,
+        "sha256": "c68b51410e1aec3574032d6149183c0a0e0e908ea77738bd2b212d6027b4d3d6"
+      },
+      "initial_audit_stdout": {
+        "bytes": 42125698,
+        "sha256": "394f79aa4a5f100430014a1fcc290b2e30523708ec5a2db396d1b6a176cfd72c"
+      },
+      "original_to_snapshot": {
+        "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/PAPER_STATUS.md": {
+          "bytes": 1818,
+          "sha256": "1baa2adda556eba4acc1edeb9b9d4bf3974214b507333db93c33f9a18be58f05",
+          "snapshot": "lifecycle_before/PAPER_STATUS.md"
+        },
+        "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/SHA256SUMS": {
+          "bytes": 259063,
+          "sha256": "926afeafef8eb2e2d5d642fb1b5f9b48d81fa7d7f1dc9bdabd42e155031a93dc",
+          "snapshot": "lifecycle_before/PAPER_SHA256SUMS"
+        }
+      },
+      "scope": "Only the exact initial PAPER_STATUS.md and whole-paper manifest are copied; no input is edited.",
+      "status": "PASS_INITIAL_LIFECYCLE_BYTES_PRESERVED_NOT_ROOT_ACCEPTANCE",
+      "utc": "2026-09-07T02:11:41.702681+00:00"
+    },
+    "passing_summary": {
+      "accepted_reviews": {
+        "a": {
+          "accepted_manifest": "aeb4582df20a6401c754a24e17be3173acb58da79f23e6583b993480b7ae9cb8",
+          "current_open": {
+            "critical": 0,
+            "major": 0,
+            "minor": 0
+          },
+          "dependency_referents": 4219,
+          "initial_payloads_preserved": 743,
+          "payloads": 764
+        },
+        "b": {
+          "accepted_manifest": "4c9df2fa330b7b930c91e4e9ef661886a6bb2bacdd84f4196c09bdd3df886485",
+          "current_open": {
+            "critical": 0,
+            "major": 0,
+            "minor": 0
+          },
+          "dependency_referents": 114998,
+          "initial_payloads_preserved": 1546,
+          "payloads": 3545
+        }
+      },
+      "actual_root_views_and_links": {
+        "actual_root_attested_pages": 7,
+        "auditor_views": 0,
+        "documents": 1048,
+        "local_links": 973
+      },
+      "checks": 2232943,
+      "checks_by_section": {
+        "accepted_narrow_verdict": 2,
+        "actual_command_argv": 53,
+        "actual_command_exit_environment": 53,
+        "actual_delta_empty_stderr": 4,
+        "actual_delta_result": 4,
+        "actual_documentary_delta_command": 4,
+        "actual_embedded_command_equality": 53,
+        "actual_empty_stderr": 53,
+        "actual_raw_cmp": 9,
+        "actual_root_delta": 2,
+        "actual_root_delta_hashes": 2,
+        "actual_root_page_view_exact_artifact": 1,
+        "actual_root_page_view_individual": 7,
+        "actual_root_page_view_receipt": 1,
+        "actual_round2": 2,
+        "actual_view_report_boundary": 1,
+        "actual_warning_page_inspected": 1,
+        "alias_duplicate_exact_bytes": 5,
+        "auditor_exact_actual_environment_cache": 2,
+        "auditor_invocation": 1,
+        "auditor_source_module_not_bytecode": 92,
+        "author_subset": 1,
+        "complete_payload_comparison_receipt": 1,
+        "complete_payload_comparison_scope": 1,
+        "configuration_existence": 1968,
+        "configuration_explicit_absent_hash": 30,
+        "configuration_file_kind": 1788,
+        "configuration_resolution": 1912,
+        "contracts_responses": 3,
+        "current_raw_cmp_reuse": 9,
+        "delta_exact_dependency_mapping": 114998,
+        "delta_exact_enriched_after_schema": 4219,
+        "delta_full_before_after": 2,
+        "delta_full_before_after_names": 1,
+        "delta_full_dependency_count": 2,
+        "delta_response_before_after": 2,
+        "distinct_review_acceptance": 2,
+        "exact_before_after_map": 16,
+        "exact_ugr_four_report_archival_origin": 4,
+        "external_hold": 2,
+        "failed_history_preserved": 29,
+        "final_every_read_input_recheck": 115334,
+        "final_host_resolution_recheck": 108534,
+        "finite_nested_snapshot_origins": 1048,
+        "frozen_full_identical": 1,
+        "historical_local_snapshot_origin": 4,
+        "history_exact_mapping": 1917,
+        "history_scope": 2,
+        "host_resolution_stability": 437865,
+        "initial_assignment_context": 1,
+        "initial_review_exact_path": 2289,
+        "initial_review_mapping": 3,
+        "initial_review_scope": 2,
+        "lifecycle_boundary": 1,
+        "local_link_closure": 973,
+        "manifest_duplicate": 11066,
+        "manifest_exact_count": 11,
+        "manifest_full_coverage": 10,
+        "manifest_nonself": 11,
+        "manifest_syntax": 11066,
+        "package_no_symlink": 9553,
+        "read_stability": 475098,
+        "referent_hash": 261134,
+        "referent_size": 132222,
+        "regular_file": 475098,
+        "regular_workspace_file": 37233,
+        "root_response_snapshot_mapping": 45,
+        "safe_relative_reference": 21859,
+        "strict_all_commands": 3,
+        "strict_complete_canonical": 6,
+        "strict_config_before_after": 3,
+        "strict_consumed_flags_environment": 6,
+        "strict_consumed_full_coverage": 300,
+        "strict_exact_producer": 6,
+        "strict_exact_science_count": 6,
+        "strict_full_ldd_closure": 6,
+        "strict_inventory_counts": 3,
+        "strict_literal_wrapper": 6,
+        "strict_no_generated_file": 6,
+        "strict_pair_actual_result": 3,
+        "strict_source_execution": 6,
+        "strict_source_only_exact": 6,
+        "terminal_actual_command_unique": 32,
+        "terminal_actual_generated_bibliography": 2,
+        "terminal_actual_pair": 1,
+        "terminal_actual_raw_cmp": 3,
+        "terminal_all_fls_consumed_coverage": 4554,
+        "terminal_all_fonts_embedded": 2,
+        "terminal_attempt_chronology": 32,
+        "terminal_bibtex_style": 2,
+        "terminal_build_not_view": 1,
+        "terminal_complete_configuration_set": 1,
+        "terminal_complete_render_set": 2,
+        "terminal_complete_runtime_set": 1,
+        "terminal_config_before_after": 1,
+        "terminal_consumed_exact_union": 1,
+        "terminal_effective_cwd_user_roots": 6,
+        "terminal_exact_final_diagnostics": 2,
+        "terminal_exact_final_pdf": 2,
+        "terminal_exact_recorder": 1,
+        "terminal_exact_tex_command": 6,
+        "terminal_full_ldd_closure": 2,
+        "terminal_page_count": 2,
+        "terminal_parent_map_coverage": 48,
+        "terminal_parent_module_coverage": 142,
+        "terminal_parent_runtime": 2,
+        "terminal_resolved_text": 2,
+        "terminal_source_only_set": 2,
+        "terminal_tex_recapture": 1,
+        "zero_open_findings": 2
+      },
+      "complete_manifests_validated": [
+        {
+          "base": "papers/208-original-snapshot-triangulation-sweeps",
+          "complete_nonself": true,
+          "entries": 2178,
+          "name": "SHA256SUMS",
+          "sha256": "926afeafef8eb2e2d5d642fb1b5f9b48d81fa7d7f1dc9bdabd42e155031a93dc"
+        },
+        {
+          "base": "papers/208-original-snapshot-triangulation-sweeps",
+          "complete_nonself": false,
+          "entries": 483,
+          "name": "AUTHOR_MANIFEST.sha256",
+          "sha256": "c3dd3c405c891b2f444b3593afde80895edeb3950ead1d460851620fb55112d4"
+        },
+        {
+          "base": "papers/208-original-snapshot-triangulation-sweeps/frozen_round0",
+          "complete_nonself": true,
+          "entries": 487,
+          "name": "SHA256SUMS",
+          "sha256": "12dca26eeb68503737846c633170bd427101648c21a9e89ef710d9ddaef01ace"
+        },
+        {
+          "base": "papers/208-original-snapshot-triangulation-sweeps/frozen_round1",
+          "complete_nonself": true,
+          "entries": 487,
+          "name": "SHA256SUMS",
+          "sha256": "12dca26eeb68503737846c633170bd427101648c21a9e89ef710d9ddaef01ace"
+        },
+        {
+          "base": "papers/208-original-snapshot-triangulation-sweeps/frozen_round2",
+          "complete_nonself": true,
+          "entries": 487,
+          "name": "SHA256SUMS",
+          "sha256": "12dca26eeb68503737846c633170bd427101648c21a9e89ef710d9ddaef01ace"
+        },
+        {
+          "base": "docs/papers204_208_sequence/reviews/p208_a",
+          "complete_nonself": true,
+          "entries": 764,
+          "name": "SHA256SUMS",
+          "sha256": "aeb4582df20a6401c754a24e17be3173acb58da79f23e6583b993480b7ae9cb8"
+        },
+        {
+          "base": "docs/papers204_208_sequence/reviews/p208_b",
+          "complete_nonself": true,
+          "entries": 3545,
+          "name": "SHA256SUMS",
+          "sha256": "4c9df2fa330b7b930c91e4e9ef661886a6bb2bacdd84f4196c09bdd3df886485"
+        },
+        {
+          "base": "docs/papers204_208_sequence/qa/root_replays/p208_author_strict",
+          "complete_nonself": true,
+          "entries": 38,
+          "name": "SHA256SUMS",
+          "sha256": "5629ada257a37afd0fcbdbc562472cfd4fc10075fdc2d4d160b3d6709f1e3704"
+        },
+        {
+          "base": "docs/papers204_208_sequence/qa/root_replays/p208_a_strict",
+          "complete_nonself": true,
+          "entries": 38,
+          "name": "SHA256SUMS",
+          "sha256": "441506a2257387071fb104ea2bf169ff85c890c56cc6a66aa4ae02345b3d0284"
+        },
+        {
+          "base": "docs/papers204_208_sequence/qa/root_replays/p208_b_strict",
+          "complete_nonself": true,
+          "entries": 38,
+          "name": "SHA256SUMS",
+          "sha256": "59934004f5974b8d2978268bd86c5441bdefc889ae02272630824da8ed068bbc"
+        },
+        {
+          "base": "papers/208-original-snapshot-triangulation-sweeps/qa_final",
+          "complete_nonself": true,
+          "entries": 225,
+          "name": "SHA256SUMS",
+          "sha256": "f21c81c30476e80c57687a80a99ea69bf928ff1ec9f54a309f4b738291edeccd"
+        }
+      ],
+      "ended_utc": "2026-09-07T02:11:09.284127+00:00",
+      "external_status": "HOLD_EXTERNAL",
+      "fresh_builds": 0,
+      "fresh_mathematical_executions": 0,
+      "fresh_page_views": 0,
+      "frozen_and_author": {
+        "author_entries": 483,
+        "each_frozen_round": 487,
+        "live_exact": true
+      },
+      "limits": [
+        "Root proof/source judgment remains controlling; this audit proves no all-size theorem.",
+        "Prior actual author/A/B strict pairs are reused only under the entire unchanged recorded input/runtime key.",
+        "Original failures, reviewer development qualifications and accepted documentary deltas remain original evidence.",
+        "Terminal known-resource inventories and sampled parent maps do not reconstruct a hermetic OS or unobserved child/transient loads.",
+        "Actual root final-page attestations are checked, not replaced by hash-based viewing.",
+        "Only P208 is audited; no five-paper batch completion, specialist review or external clearance is asserted.",
+        "Future lifecycle-only edits require a separately preserved follow-up audit, not replacement of this initial result."
+      ],
+      "owner": "OWNER_AMBER",
+      "paper": "P208",
+      "role": "Read-only artifact infrastructure; not a third manuscript review or reviewer delta acceptance.",
+      "root_strict_replays_reused": {
+        "a": {
+          "checks_each": 130961,
+          "commands_exit_zero": 7,
+          "configuration": 29,
+          "link_inventory_files_not_distinct_libraries": 112,
+          "runs": 2,
+          "runtime": 918,
+          "science_inputs": 1878
+        },
+        "author": {
+          "checks_each": 62101,
+          "commands_exit_zero": 7,
+          "configuration": 29,
+          "link_inventory_files_not_distinct_libraries": 112,
+          "runs": 2,
+          "runtime": 918,
+          "science_inputs": 981
+        },
+        "b": {
+          "checks_each": 3144418,
+          "commands_exit_zero": 7,
+          "configuration": 33,
+          "link_inventory_files_not_distinct_libraries": 112,
+          "runs": 2,
+          "runtime": 918,
+          "science_inputs": 3037
+        }
+      },
+      "started_utc": "2026-09-07T02:09:16.066666+00:00",
+      "status": "PASS_P208_TERMINAL_ARTIFACT_GATE",
+      "terminal_builds": {
+        "boundary": "Before/after byte inventories of known runtime, TeX and potential font/Poppler/gconv resources; ldd link-time closure; actual early/late parent file-backed map samples; TeX .fls per-pass inputs observed. TeX/BibTeX/Poppler child maps, transient dlopen and non-fls resource accesses are not directly observed. No claim of hermetic OS/kernel reconstruction or continuous tracing.",
+        "commands_actual_exit_zero": 32,
+        "configuration": 1788,
+        "fonts_embedded": 27,
+        "inventories": {
+          "CONSUMED_TEX": 146,
+          "INPUTS": 5290,
+          "LIBRARIES": 146,
+          "RECORDER_INPUTS": 83,
+          "RUNTIME": 925,
+          "TEX_INVENTORY": 105987
+        },
+        "pages": 7,
+        "payloads": 225,
+        "retained_underfull_badness": 5681,
+        "source_files_per_build": 11
+      },
+      "whole_paper_manifest_entries": 2178
+    },
+    "root_fresh_science_build_view": 0,
+    "status": "ROOT_P208_INITIAL_TERMINAL_ARTIFACT_ORIGINAL_INSPECTION_PASS"
+  }
+}

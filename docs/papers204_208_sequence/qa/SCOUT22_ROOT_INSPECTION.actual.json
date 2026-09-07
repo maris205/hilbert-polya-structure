@@ -1,0 +1,49 @@
+{
+  "actual_command": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /root/miniconda3/bin/python3.12 -I -S -B - <<'PY'\nfrom pathlib import Path\nimport hashlib,json,itertools,os,subprocess,re\nroot=Path('/root/autodl-tmp/symbolic_dynamics');base=root/'docs/papers204_208_sequence/scouting/finite_systems_twenty_second'\ndef sha(p):\n with Path(p).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()\ndef j(p):return json.loads(Path(p).read_text())\ndef pins(p,b):\n d={}\n for line in Path(p).read_text().splitlines():\n  h,n=line.split('  ',1);q=Path(n);assert re.fullmatch('[0-9a-f]{64}',h) and not q.is_absolute() and '..' not in q.parts and n not in d;assert sha(b/n)==h,n;d[n]=h\n return d\nassert sha(base/'SHA256SUMS')=='91dc2af7d0a8354b8a95b88a479bb35f8b343be13efcef2022a8882a38ae4412'\nouter=pins(base/'SHA256SUMS',base);assert len(outer)==479 and set(outer)=={str(p.relative_to(base)) for p in base.rglob('*') if p.is_file() and p!=base/'SHA256SUMS'}\nhist=pins(base/'HISTORICAL_INPUTS.sha256',root);assert len(hist)==16\nruns=[]\nfor label in ['execution_01','execution_02']:\n b=base/label;r=j(b/'RECEIPT.json');assert r['status']=='PASS' and r['producer_exit']==0 and r['before_after_equal'] and r['copies_equal'] and r['no_written_cache'] and not r['uncovered']\n for kind,parent,capsule in [('source',base,b/'source_inputs'),('history',root,b/'historical_inputs')]:\n  before=j(b/(kind+'.before.json'));assert before==j(b/(kind+'.after.json'))\n  for n,h in before.items():assert sha(parent/n)==h==sha(capsule/n)\n runtime=j(b/'runtime.before.json');assert runtime==j(b/'runtime.after.json') and len(runtime)==632\n for n,h in runtime.items():assert sha(n)==h,n\n conf=j(b/'configuration.before.json');assert conf==j(b/'configuration.after.json') and len(conf)==25\n config_names={str(p) for p in [Path('/etc/ld.so.cache'),Path('/etc/ld.so.conf'),Path('/etc/ld.so.preload')]+sorted(Path('/etc/ld.so.conf.d').glob('*.conf'))};assert set(conf)==config_names\n for n,v in conf.items():\n  p=Path(n);assert p.exists()==v['exists'] and str(p.resolve())==v['resolved'] and (sha(p) if p.is_file() else None)==v['sha256']\n links=j(b/'dynamic_links.json');assert len(links)==60\n for row in links:\n  assert row['exit']==0 and row['target_before']==row['target_after']==sha(row['target'])\n  d=j(b/'dynamic_links'/(row['tag']+'.command.json'));assert d['exit']==0 and d['command']==['/usr/bin/ldd',row['target']]\n  for n in row['dependencies']:assert sha(n)==runtime[n]\n  stdout=(b/'dynamic_links'/(row['tag']+'.stdout')).read_text();assert 'not found' not in stdout\n  decoded={str(Path(s).resolve()) for s in stdout.split() if s.startswith('/') and Path(s).is_file()};assert decoded==set(row['dependencies'])\n obs=j(b/'runtime.observed.json');assert not obs['uncovered'] and len(obs['paths'])==37\n used=set(obs['runtime']['mapped_files'])|{str(Path(v['file']).resolve()) for v in obs['runtime']['modules'].values() if v['file'] and Path(v['file']).is_file()}\n assert used==set(obs['paths']) and not any(p.endswith(('.pyc','.pyo')) for p in used)\n coverage=set(runtime)|{str(p.resolve()) for p in (b/'source_inputs').iterdir()};assert {str(Path(p).resolve()) for p in used}<=coverage\n choices=j(b/'execution_choices.json');assert not choices['cache_exists_before'] and not Path(choices['pycache_prefix']).exists();assert obs['runtime']['xoptions']['pycache_prefix']==choices['pycache_prefix']\n assert all(s in obs['runtime']['flags'] for s in ['optimize=0','isolated=1','no_site=1','dont_write_bytecode=1'])\n cmd=j(b/'producer.command.json');assert cmd['exit']==0 and cmd['command'][1:5]==['-I','-S','-B','-X']\n raw=(b/'producer.stdout').read_bytes();assert len(raw)==5718053 and sha(b/'producer.stdout')=='786119671bf7183d8ed6e421dc5b43bdc39291b0294dc44649dbdbd3d2eba142'\n lines=[json.loads(line) for line in raw.splitlines()];assert len(lines)==14 and lines[-1]=={'status':'PASS','rules':2,'boxes':13,'states':38821,'checks':244755}\n for idx,box in enumerate(lines[:-1]):\n  rule='ORR' if idx<8 else 'HXC';n=idx if idx<8 else idx-8;assert box['rule']==rule and box['n']==n\n  states=list(itertools.permutations(range(1,n+1))) if rule=='ORR' else [tuple(a for a in range(1,1<<n) if m>>(a-1)&1) for m in range(1<<((1<<n)-1))]\n  rows=box['rows'];assert len(rows)==box['states']==len(states) and [tuple(r['state']) for r in rows]==states\n  incoming=[[] for s in states]\n  for i,row in enumerate(rows):\n   t=row['successor_index'];assert 0<=t<len(rows);incoming[t].append(i);assert row['period']==1 and row['entrance']>=0\n   if rule=='ORR':assert row['decoded_indices']==row['fibre_indices'] and len(row['interval_codes'])==len(row['fibre_indices'])\n  for i,row in enumerate(rows):assert row['fibre_indices']==incoming[i]\n  assert sum(map(len,incoming))==len(rows) and max(map(len,incoming))==box['max_fibre'] and max(r['entrance'] for r in rows)==box['max_entrance']\n runs.append({'label':label,'full_boxes':13,'all_rows':38821,'checks':244755,'runtime_files':632,'observed_files':37,'ldd_commands':60,'configuration_records':25,'stdout_sha256':sha(b/'producer.stdout')})\ne=base/'evidence_capture';before=j(e/'history_search.before.json');assert before==j(e/'history_search.after.json') and len(before)==3548\nfor n,h in before.items():assert sha(n)==h,n\nfor name in ['rg','comparator']:\n d=j(e/(name+'.before.json'));assert d==j(e/(name+'.after.json'))\n for n,h in d.items():assert sha(n)==h,n\nh=j(e/'HISTORY_SEARCH.json');assert h['status']=='PASS' and h['selected_files']==3548\nfor d in base.rglob('*.command.json'):\n v=j(d);assert v['exit']==0,(str(d),v['exit'])\nsource=j(base/'public_sources/RETRIEVAL.json');assert source['curl_exit']==source['pdftotext_exit']==0 and source['download_bytes']==1837458 and source['download_sha256']==sha(base/'public_sources/flip_sort.pdf');assert (base/'public_sources/flip_sort.pdf').read_bytes().startswith(b'%PDF-')\nargv=['/usr/bin/cmp','--',str(base/'execution_01/producer.stdout'),str(base/'execution_02/producer.stdout')];c=subprocess.run(argv,cwd=root,env=dict(os.environ),capture_output=True);assert c.returncode==0 and not c.stdout and not c.stderr\nassert outer==pins(base/'SHA256SUMS',base)\nprint(json.dumps({'status':'ROOT_SCOUT22_ORIGINAL_CLOSURE_PASS_NO_PROMOTION','outer_payloads':479,'outer_seal_sha256':sha(base/'SHA256SUMS'),'historical_pins':16,'history_discovery_inputs':3548,'runs':runs,'all_recorded_command_exits_zero':len(list(base.rglob('*.command.json'))),'primary_pdf_sha256':source['download_sha256'],'fresh_raw_comparison':{'argv':argv,'exit':c.returncode,'stdout':c.stdout.decode(),'stderr':c.stderr.decode()},'scope':'Original author outputs and provenance inspected completely; no fresh root mathematical producer. Author runtime superset is not a terminal reuse key: full early loader/locale/config presence and pre-spawn failure closure are not supplied. NO_PROMOTION and source/proof gaps remain. HOLD_EXTERNAL.'},indent=2,sort_keys=True))\nPY",
+  "actual_exit_code": 0,
+  "result": {
+    "all_recorded_command_exits_zero": 129,
+    "fresh_raw_comparison": {
+      "argv": [
+        "/usr/bin/cmp",
+        "--",
+        "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_twenty_second/execution_01/producer.stdout",
+        "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_twenty_second/execution_02/producer.stdout"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "historical_pins": 16,
+    "history_discovery_inputs": 3548,
+    "outer_payloads": 479,
+    "outer_seal_sha256": "91dc2af7d0a8354b8a95b88a479bb35f8b343be13efcef2022a8882a38ae4412",
+    "primary_pdf_sha256": "23fc2dd648af4e835385b51b7ad5eeb0a115040203e57694abd8901332ed1e45",
+    "runs": [
+      {
+        "all_rows": 38821,
+        "checks": 244755,
+        "configuration_records": 25,
+        "full_boxes": 13,
+        "label": "execution_01",
+        "ldd_commands": 60,
+        "observed_files": 37,
+        "runtime_files": 632,
+        "stdout_sha256": "786119671bf7183d8ed6e421dc5b43bdc39291b0294dc44649dbdbd3d2eba142"
+      },
+      {
+        "all_rows": 38821,
+        "checks": 244755,
+        "configuration_records": 25,
+        "full_boxes": 13,
+        "label": "execution_02",
+        "ldd_commands": 60,
+        "observed_files": 37,
+        "runtime_files": 632,
+        "stdout_sha256": "786119671bf7183d8ed6e421dc5b43bdc39291b0294dc44649dbdbd3d2eba142"
+      }
+    ],
+    "scope": "Original author outputs and provenance inspected completely; no fresh root mathematical producer. Author runtime superset is not a terminal reuse key: full early loader/locale/config presence and pre-spawn failure closure are not supplied. NO_PROMOTION and source/proof gaps remain. HOLD_EXTERNAL.",
+    "status": "ROOT_SCOUT22_ORIGINAL_CLOSURE_PASS_NO_PROMOTION"
+  }
+}

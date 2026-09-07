@@ -1,0 +1,1777 @@
+                                           Discrete Mathematics and Theoretical Computer Science                                  DMTCS vol. 22:2, 2021, #4
+
+
+
+                                           Flip-sort and combinatorial aspects of
+                                           pop-stack sorting
+                                                   Andrei Asinowski1                       Cyril Banderier2                    Benjamin Hackl1
+arXiv:2003.04912v3 [math.CO] 26 Apr 2021
+
+
+
+
+                                               1   University of Klagenfurt, Klagenfurt, Austria
+                                               2   University of Sorbonne Paris Nord, Villetaneuse, France
+
+                                           received 12th Mar. 2020, revised 7th Apr. 2021, accepted 7th Apr. 2021
+
+                                           Flip-sort is a natural sorting procedure which raises fascinating combinatorial questions. It finds its
+                                           roots in the seminal work of Knuth on stack-based sorting algorithms and leads to many links with
+                                           permutation patterns. We present several structural, enumerative, and algorithmic results on permutations
+                                           that need few (resp. many) iterations of this procedure to be sorted. In particular, we give the shape of the
+                                           permutations after one iteration, and characterize several families of permutations related to the best and
+                                           worst cases of flip-sort. En passant, we also give some links between pop-stack sorting, automata, and
+                                           lattice paths, and introduce several tactics of bijective proofs which have their own interest.
+
+                                           UUU We dedicate this article to Don Knuth, for his 1111000th birthday. . . up to a permutation! UUU
+
+                                           Keywords: permutation, stack sorting, generating function, finite automaton, generating tree, lattice path
+
+
+                                           1   Introduction and definitions                                                                                          2
+                                               1.1 Flip-sort and pop-stack sorting . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                         2
+                                               1.2 Summary of our results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                          3
+                                           2   Results concerning one iteration of the flip-sort algorithm                                                           6
+                                               2.1 Structural characterization of pop-stacked permutations . . . . . . . . . . . . . .                               6
+                                               2.2 Pop-stacked permutations with a fixed number of runs . . . . . . . . . . . . . . .                                7
+                                               2.3 A functional equation for pop-stacked permutations and the corresponding
+                                                   polynomial-time algorithm for the enumeration . . . . . . . . . . . . . . . . . . .                             13
+                                               2.4 Asymptotics of pop-stacked permutations . . . . . . . . . . . . . . . . . . . . . .                             18
+                                           3   Best cases of flip-sort: permutations with low cost                                                                 19
+                                               3.1 Notation and earlier work . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                       19
+                                               3.2 The pre-images of 1-pop-stack-sortable permutations . . . . . . . . . . . . . . . .                             19
+                                               3.3 2-pop-stack-sortable permutations and lattice paths . . . . . . . . . . . . . . . . .                           20
+                                           4   Worst-cases of flip-sort: permutations with high cost                                                               25
+                                               4.1 Definitions and notation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                      25
+                                               4.2 The worst case: n − 1 iterations, and a key statistic: bandwidth of permutations                                27
+                                               4.3 The penultimate step of flip-sort: the theorem about Im( T n−2 ). . . . . . . . . . .                           32
+                                               4.4 Skew-layered permutations: a family of worst cases . . . . . . . . . . . . . . . . .                            36
+                                           5   Conclusion                                                                                                          37
+                                           ISSN 1365–8050        © 2021 by the author(s)     Distributed under a Creative Commons Attribution 4.0 International License
+2                                                    Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+1     Introduction and definitions
+1.1    Flip-sort and pop-stack sorting
+Sorting algorithms are addressing one of the most fundamental tasks in computer science,
+and, accordingly, have been intensively studied. This is well illustrated by the third volume
+of Knuth’s Art of Computer Programming [24], which tackles many questions related to the
+worst/best/average case behaviour of sorting algorithms, and gives many examples of links
+between these questions and the combinatorial structures hidden behind permutations (see
+also [12, Chapter 8.2] and [29]). For example, in [23, Sec. 2.2.1], Knuth considers the model
+of permutations sortable by one stack (neatly illustrated by a sequence of n wagons on a
+railway line, with a side track that can be used for permuting wagons) and show that they
+are characterized as 231-avoiding permutations: this result is a cornerstone of the field of
+permutation patterns. Since that time, many results were also obtained e.g. on permutations
+sortable with 2 stacks, which offer many nice links with the world of planar maps [17, 33]. The
+analysis of sorting with 3 stacks remains an open problem (see [16] for some recent investiga-
+tions). Numerous variants were considered (stacks in series, in parallel, etc.). Our article pursues
+this tradition by dealing with the combinatorial aspects of the flip-sort algorithm, a procedure
+for sorting permutations via a pop-stack (as considered in [7, 8]), which we now detail.
+   We use the following notation. Permutations will be written in one-line notation, π =
+a1 a2 . . . an . An ascent (resp. descent) is a gap between two neighbouring positions, i and i + 1,
+such that ai < ai+1 (resp. ai > ai+1 ). Descents of π split it into runs (maximal ascending strings),
+and ascents split it into falls (maximal descending strings). For example, the permutation
+3276145 splits into runs as 3|27|6|145, and into falls as 32|761|4|5.
+   Flip-sort consists of iterating flips on the input permutation, where flip is the transformation T
+that reverses all the falls of a permutation. For example, T (3276145) = 2316745. If one
+applies T repeatedly (thus obtaining T (π ), T 2 (π ), . . .), then one eventually obtains the identity
+permutation id. For example: 3276145 7→ 2316745 7→ 2136475 7→ 1234657 7→ 1234567; see
+Figure 1 for a visualization of this example by means of permutation diagrams. Nota bene: if
+one does not impose the stack to contain increasing values, then the process can be related to
+the famous pancake sorting problem (see [20]).
+
+
+
+
+    3276145             2316745                 2136475                1234657                1234567
+
+Fig. 1: The flip-sort algorithm iteratively flips all the falls until the permutation gets sorted. In these
+drawings, the solid vertical bars separate the falls. Each iteration can also be seen as sending the input into
+a pop-stack: while reading the permutation from left to right, each decreasing value is added to the stack,
+and the whole content of the stack is popped when an increasing value is met.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                             3
+
+   Let the cost of π be the (minimum) number of iterations needed to sort π, that is, cost(π ) =
+min{m ≥ 0 : T m (π ) = id}. To see that the cost is always finite, observe that at each iteration the
+number of inversions strictly decreases until id is reached. It follows that, for any permutation
+of size n, we have cost(π ) ≤ (n2 ). In fact, the cost is always lower than this naive upper bound:
+Ungar [32] proved(i) that one always has cost(π ) ≤ n − 1 (we refine this result in our Section 4.2).
+Moreover, this bound is tight since for each n there are permutations of size n with cost n − 1
+(we give some examples in Section 4.4).
+   The pop-stack sorting leads to many interesting combinatorial questions. Some of them can
+be visualized by means of the pop-stack-sorting tree whose nodes are all permutations of size n,
+with directed arcs from π to T (π ). It is convenient to draw such a tree with levels corresponding
+to the distance to id: see Figure 2 that shows the tree for n = 5 (the arcs are understood to be
+directed from left to right). When, more generally, one considers this tree for any value of n,
+it is natural to ask for a characterization of the permutations that need few iterations of T to
+be sorted (i.e. the right side of the tree), or many iterations (i.e. the left side of the tree); or
+the image of T (i.e. the non-leaves of the tree). We address these questions in this article, thus
+extending previous works [14, 28, 32].
+   Another challenging problem is describing a typical shape of T m (π ), as m runs from 1 to
+n − 1, for random π. Computer simulations show a very distinctive shape of the corresponding
+permutation diagrams: they possess some empty areas and a cloud of points accumulating
+along two curves that tend to unite and ultimately converge to the identity permutation; see
+Figure 3. We prove a more rigorous formalization of some of these claims in this article.
+
+1.2     Summary of our results
+The article is organized as follows.
+   In Section 2, we study the permutations that belong to Im( T ), the image of the flip trans-
+formation. We find a structural characterization of such permutations, and we prove that the
+generating function of these permutations is rational when the number of runs is fixed. We
+then use a generating tree approach to design some efficient algorithms enumerating such
+permutations. We also show that their generating function satisfies a curious functional equation,
+and we give an asymptotic bound.
+   Section 3 is dedicated to permutations with low cost. A permutation π is k-pop-stack-sortable
+if cost(π ) ≤ k, or, equivalently, T k (π ) = id. Avis and Newborn showed that 1-pop-stack-
+sortable are precisely the layered permutations [8], while k-pop-stack-sortable permutations are
+recognizable by an automaton (see Claesson and Guðmundsson [14]). For k = 2, Pudwell and
+Smith [28] listed some conjectures that we prove via a bijection between 2-pop-stack-sortable
+permutations to a family of lattice paths.
+   In contrast, in Section 4, we deal with permutations with high cost, and with Im( T m ) for
+arbitrary m. Our main result is a (tight) bound on bandwidth of τ ∈ Im( T m ), which provides
+a partial explanation of the phenomena that we observe in Figure 3. Additionally, we find a
+full characterization of Im( T n−2 ), and some conditions for cost(τ ) = n − 1. We conclude with a
+conjecture concerning the cost of skew-layered permutations.
+(i) This result was conjectured by Goodman and Pollack [21], and proved by Ungar, in the context of allowable sequences
+
+  of permutations in links with the minimum number of directions determined by n non-collinear points in the plane; see
+  the crisp presentation of this nice geometrical question in [1, Chapter 12].
+4                                                    Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+                          45312                                  2-pop-stack-sortable
+                                                 41352
+                          52341
+                                                 25314
+                          42531                                          14325     1-pop-stack-sortable
+                          24531                  24135                   21354
+                          42315
+    45231                 42513
+                                                 24153                   21435                Im(T n−2 )
+    54231                 24513
+                          53142
+                          53124                  13524
+                          15342
+    53412                 35142
+                                                 31524                   13254
+    53421                 35124
+    43512                 34152                  31542
+    34512                 34125                  13542
+    43521                 43152                  31425
+                                                                         13245
+    34521                 14352
+    35412                 31452                  13425
+    54312                 13452
+                          43125                  31254
+                          35214
+                                                 31245
+                          34215
+                          35421
+    45132                 41523                  42153
+    45123                 14523                  42135
+    54132                 41532                  14253
+                                                                         12435
+    54123                 41325
+    45213                 41253                  14235                                           12345
+    45321                 41235
+                          14532                  21453
+                                                                         21345
+                          25413
+                                                 12453
+                          15423
+                          54213                  25431
+    35241
+                          32514                  23154
+    53241
+                          23514                  24315
+    25341
+                          42351                  23145
+    34251
+                          32415
+    43251
+                          23415
+    24351                                                                12354
+                          23541
+    32451
+                          32541
+    23451
+                                                 53214
+    52413
+                          25143                  21534
+    52431                                                                12543
+                          25134                  15324
+    52314                                                                32145
+                          51342                  12534
+    51423                                                                21543
+                          15243
+    51432                                                                32154
+                          15234
+    51324                                                                15432
+                          52134
+    51243                                                                43215
+                          52143
+    51234                                                                54321
+
+
+
+
+Fig. 2: The pop-stack-sorting tree for n = 5. Flipping the falls in each permutation leads to its successor
+until one reaches the identity permutation. The leftmost column thus corresponds to the worst cases of
+this procedure. In this figure, we also mark three sets considered in this article: 1- and 2-pop-stack-sortable
+permutations, and Im( T n−2 ). Additionally, Im( T ) consists of all internal nodes.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                     5
+
+
+
+
+Fig. 3: The evolution of the flip-sort algorithm on a sample permutation of size n = 1200. In this article,
+we show that for any input permutation there are two areas (the grey areas in the above plots, which are
+proportional to the number m of iterations) without any dots inside. This entails that the permutations
+“shrink” (in the white area) until they finally get fully sorted (after ≤ n − 1 iterations). We also show that,
+for all m, for any coordinates in the white area, there exists an input permutation which will have a dot at
+these coordinates. (See lipn.fr/~cb/Papers/popstack.html for some animations of this flip-sort process.)
+6                                                       Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+2     Results concerning one iteration of the flip-sort algorithm
+2.1    Structural characterization of pop-stacked permutations
+We start this section with a characterization of the image of T, i.e. the internal nodes in the
+pop-stack tree from Figure 2.
+Definition 1. A permutation τ is pop-stacked if it belongs to Im( T ), that is, if there is a permuta-
+tion π such that we have τ = T (π ).
+Definition 2. A pair ( Ri , Ri+1 ) of adjacent runs of π is overlapping if min( Ri ) < max( Ri+1 ).
+(Notice that max( Ri ) > min( Ri+1 ) holds automatically since Ri and Ri+1 are distinct runs.)
+  We begin our investigations of the image of T by giving a characterization of the permutations
+in Im( T ) in terms of overlapping runs. In fact, in the following theorem we prove that a
+permutation is pop-stacked if and only if all pairs of adjacent runs are overlapping. See Figure 4
+for a schematic drawing that represents the structure of permutations with overlapping adjacent
+runs, and an example. Despite its very natural definition, this family of permutations was, to
+the best of our knowledge, never studied before our initial conference contributions [4, 5].
+
+
+
+
+Fig. 4: Pop-stacked permutations: a general schematic drawing of permutation with adjacent overlapping
+runs (a run can be of length 1), and an example: the permutation 5 7 14 | 1 2 3 11 | 4 12 15 | 9 | 6 16 17 | 8 10 13.
+
+Theorem 3. A permutation τ is pop-stacked if and only if all its pairs ( Ri , Ri+1 ) of adjacent runs are
+overlapping.
+
+Proof:      [First part of the proof: pop-stacked ⇒ overlapping runs.] Let τ = b1 b2 . . . bn be a
+permutation with min( Ri ) > max( Ri+1 ) for some pair ( Ri , Ri+1 ) of its adjacent runs. Let bα be
+the last letter in Ri and bα+1 be the first letter in Ri+1 (that is, Ri = [. . . , bα ], Ri+1 = [bα+1 , . . .]).
+   Assume for contradiction that we have τ = T (π ) for some permutation π = a1 a2 . . . an . In π,
+we have aα < aα+1 because otherwise the string [ aα aα+1 ] is a part of a fall in π, and upon
+applying T we have bα < bα+1 , which is impossible, because bα and bα+1 lie in different runs
+of τ. Therefore, if we consider the partition of π into falls, then aα is the last letter of some
+fall Fj , and aα+1 is the first letter of the next fall Fj+1 . However, the values of Fj are a subset of
+those of Ri , and the values of Fj+1 are a subset of those of Ri+1 . Therefore we have aα > aα+1 ,
+which is a contradiction to aα < aα+1 observed above.
+   [Second part of the proof: overlapping runs ⇒ pop-stacked.] Consider a permutation τ with
+min( Ri ) < max( Ri+1 ) for all pairs ( Ri , Ri+1 ) of adjacent runs. Let π be the permutation
+obtained from τ by reversal of all its runs. Then the partition of π into falls is the same as the
+partition of τ into runs, and, therefore, π is a (not necessarily unique) pre-image of τ.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                                 7
+
+2.2     Pop-stacked permutations with a fixed number of runs
+Sections 2.2–2.4 are dedicated to enumerative aspects of pop-stacked permutations. Let pn
+denote the number of pop-stacked permutations of size n. The sequence ( pn )n≥1 starts with
+1, 1, 3, 11, 49, 263, 1653, 11877, 95991, 862047, 8516221, 91782159, 1071601285, 13473914281,
+181517350571, 2608383775171, 39824825088809, 643813226048935; we have added it as A307030
+to the On-Line Encyclopedia of Integer Sequences. While it is hard to compute more terms
+directly, the introduction of additional parameters provides further insights. Specifically, in this
+section we consider the number of runs in pop-stacked permutations. In particular, we show
+that for each fixed k, the generating function for pop-stacked permutations of size n with exactly
+k runs is rational.
+   Let pn,k denote the number of pop-stacked permutations of size n with exactly k runs. The
+case k = 1 is trivial: for any size, the only permutation with only one run is the identity
+permutation, and it is pop-stacked as it is e.g. the image of itself. Thus, we have pn,1 = 1 for each
+n ≥ 1. Note that, for k > 1, pn,k is always an even number (indeed, listing the runs from the last
+one to the first one gives an involution without fixed points among pop-stacked permutations),
+therefore pn is always an odd number.
+   One key ingredient of our further results is the following encoding of permutations, which we
+call scanline mapping. Let π be a permutation with k runs. Let ri be the index of the run in which
+the letter i lies. Consider the word w(π ) = rπ −1 (1) rπ −1 (2) . . . rπ −1 (n) ∈ {1, . . . , k}n . Visually, we
+scan the graph of π from the bottom to the top, and for each point that we encounter in this
+order, we record to which run it belongs; see Figure 5.
+
+
+
+
+Fig. 5: The scanline mapping allows us to encode permutations by words: here, π = 261453 is encoded by
+the word w(π ) = 213221 (the sequence of runs encountered if one reads the permutation bottom-to-top).
+
+Proposition 4. The scanline mapping has the following three properties.
+   1. The scanline mapping π 7→ w(π ) is injective.
+   2. The scanline mapping π 7→ w(π ) induces a bijection between permutations of size n with k runs
+      and the words in {1, . . . , k}n in which there is an occurrence of j + 1 before(ii) an occurrence of j,
+      for each j (1 ≤ j ≤ n − 1).
+   3. The scanline mapping π 7→ w(π ) induces a bijection between pop-stacked permutations of size
+      n with k runs and the words in {1, . . . , k}n in which there is an occurrence of j + 1 before an
+      occurrence of j, and also an occurrence of j before an occurrence of j + 1, for each j (1 ≤ j ≤ n − 1).
+(ii) N.B.: There should be some occurrence of j + 1 somewhere before some occurrence of j, not necessarily just before.
+
+  For example, the sequence 42312 with k = 4 satisfies the condition. Similarly for the last item of this proposition.
+8                                                  Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+Proof:
+    1. The positions of i (1 ≤ i ≤ k) in w(π ) are the values in the ith run of π. Thus, π is
+       reconstructed from w(π ) uniquely.
+    2. If (and only if) for some j, all the occurrences of j in w(π ) are before the occurrences of
+       j + 1, then the corresponding positions of π do not form two distinct runs and thus we do
+       not get a permutation with k runs.
+
+    3. If (and only if) for some j, all the occurrences of j + 1 in w(π ) are before the occurrences
+       of j, then all the values in the jth run of π are larger than all the values in the ( j + 1)st
+       run, and thus these runs are not overlapping.
+    Proposition 4 can be used to obtain a formula for the case of two runs directly:
+Proposition 5. For n ≥ 1, the number of pop-stacked permutations of size n with exactly two runs, is
+pn,2 = 2n − 2n.
+Proof: By Proposition 4, pn,2 is the number of words in {1, 2}n with an occurrence of 1 before
+an occurrence of 2, and also an occurrence of 2 before an occurrence of 1. There are 2n words
+that violate this condition (including the “all-1” and the “all-2” words).
+  It is pleasant to have a combinatorial explanation for the number of pop-stacked permutations
+with two runs, and this game could be pursued (algorithmically) for a fixed number of runs k,
+but to get a closed-form formula holding for any arbitrary number of runs is still open. While
+the following theorem does not give an explicit formula for all of those cases immediately, it
+proves that the counting sequence for pop-stacked permutations with precisely k runs is nice
+and simple from a structural point of view.
+Theorem 6. Let k ≥ 1 be fixed. Then Pk (z) := ∑n≥1 pn,k zn , the generating function for the number of
+pop-stacked permutations with exactly k runs, is rational.
+
+Proof: It is well known that the generating function of words recognized by an automaton is
+rational (see e.g. [18, Sec. I.4.2]). We use Proposition 4 to construct a deterministic automaton
+Ak over the alphabet {1, . . . , k} that precisely recognizes the words w(π ) that correspond to the
+pop-stacked permutations. The states of Ak are labelled by pairs ( L, C ), where
+
+    • L ⊆ {1, . . . , k} indicates the already visited letters, and
+             −1
+    • C ⊆ kj= 1 {( j, j + 1), ( j + 1, j )} indicates the already fulfilled conditions “there is an occur-
+            S
+
+      rence of j before an occurrence of j + 1” resp. “there is an occurrence of j + 1 before an
+      occurrence of j”, such that
+    • if j, j + 1 ∈ L, then at least one of ( j, j + 1) and ( j + 1, j) belongs to C.
+It is then straightforward to see that Ak precisely recognizes those words in {1, 2, . . . , k}n that
+correspond bijectively to the pop-stacked permutations of size n with k runs by Proposition 4.
+Figure 6 shows such an automaton for k = 3.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                            9
+
+                                    {1, 2}    3                     {1,2,3}   1         {1,2,3}
+                                  1..2                             1..2                1..2 2..1
+                                              1                    2..3       2        2..3
+                            2
+                                                     {1, 2}                                         2
+                    {1}            {1, 2}     2    1..2 2..1   3
+                                                                                          {1,2,3}
+                            3          2..1   3
+                                                                                         1..2
+            1               1                       {1,2,3} 3          {1,2,3}           2..3 3..2      1    {1,2,3}
+    ∅       2       {2}            {1, 3}     2                                    2
+                                                   1..2                     2..1                            1..2 2..1
+            3               3                           3..2 1        2..3                {1,2,3}       3   2..3 3..2
+                            1       {2, 3}    1                                          1..2 2..1
+                    {3}                                                                       3..2
+                                  2..3        2      {2, 3}    1
+                            2                                                                       2
+                                                   2..3 3..2
+                                              3                    {1,2,3} 2            {1,2,3}
+                                   {2, 3}                               2..1                 2..1
+                                       3..2   1                        3..2 3          2..3 3..2
+
+Fig. 6: Automaton A3 that recognizes the words encoding the pop-stacked permutations with k = 3 runs.
+In each state, the upper blue area indicates the letters from the alphabet {1, . . . , k} already encountered,
+and the lower green area contains i..j (where j = i ± 1) if and only if there was already an occurrence of i
+before an occurrence of j in the word read by this point. If a state is entered after reading the letter j, then
+reading j again loops back to the same state: such transitions are omitted in this figure.
+
+  In the next theorem, we address the complexity of Ak : its number of states grows roughly as
+3.41k . This exponential growth of the number of states also gives an insight on the complexity
+of the generating functions associated to these automata.
+Theorem 7. Denote by ak the number of states in the automaton Ak . The sequence ( ak )k≥1 satisfies
+the linear recurrence ak = 4ak−1 − 2ak−2 . Together with initial conditions, this implies that ( ak )k≥1
+is A006012: √  (2, 6, 20, 68, 232, . . . ). Accordingly, the number of states of Ak grows exponentially:
+ak = Θ((2 + 2)k ).
+
+Proof: We proceed by induction on k (starting at k ≥ 3). Denote by Qk the set of states of the
+automaton Ak defined in the proof of Theorem 6. Recall that the states are labelled by ( L, C ),
+where L is the set of already encountered letters, and C is the list of already fulfilled conditions
+of the kind ( j, j + 1) or ( j + 1, j).
+  We partition the states of Ak into three parts as follows.
+   1. The states of Ak whose letters do not contain k: they are precisely all the states of Ak−1 .
+   2. The states of Ak whose letters contain k but do not contain k − 1. They correspond
+      bijectively to the states of Ak−1 whose letters do not contain k − 1, and thus to all the
+      states of Ak−2 :
+
+                       ( L, C ) ∈ Qk−2 ←→ ( L, C ) ∈ Qk−1 ←→ ( L ∪ {k}, C ) ∈ Qk ,                                (1)
+
+        where k − 1 6∈ L.
+10                                                          Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+     3. Finally, the states of Ak whose letters contain both k and k − 1. They correspond (3 : 1)-
+        bijectively to the states of Ak−1 whose letters contain k − 1:
+                                                                                    
+                                           ( L ∪ {k}, C ∪ {(k − 1, k)}),            
+                    ( L, C ) ∈ Qk−1 ←→ ( L ∪ {k}, C ∪ {(k, k − 1)}),                  ∈ Qk ,   (2)
+                                           ( L ∪ {k}, C ∪ {(k − 1, k), (k, k − 1)})
+                                                                                    
+
+       where k − 1 ∈ L.
+Therefore, summing over these three cases, we have
+                                                                                       √                 √
+                                                                                (2 +       2) k − (2 −       2) k
+           a k = a k −1 + a k −2 + 3 ( a k −1 − a k −2 ),     and thus ak =                    √                    ,   (3)
+                                                                                                 2
+which completes the proof.
+  Remark: Upon performing minimization on Ak , we obtain automata with the number of states
+given by (bk )k≥1 = (2, 6, 16, 40, 98, . . . ). This leads us to conjecture that this sequence satisfies
+the linear recurrence bk = 3bk−1 − bk−2 − bk−3 , and that it is in fact A293004(iii) . Possibly, this
+could be proved by following the impact of each step of Brzozowski’s algorithm for minimizing
+an automaton, see [13]. It is interesting to √    notice that the exponential
+                                                                        √     growth of the number of
+states would then drop from ak = Θ((2 + 2)k ) to bk = Θ((1 + 2)k ).
+  Before we continue with our investigations towards efficient computation of the numbers pn,k ,
+we want to make some observations concerning the particular shape of the rational generating
+functions Pk (z). Recall that Theorem 6 provides a construction for a deterministic finite
+automaton that recognizes pop-stacked permutations of length n. Given such an automaton, the
+associated generating function can be extracted in a straightforward way. Doing so for 1 ≤ k ≤ 5
+yields the rational functions
+            z
+P1 (z) =       ,
+           1−z
+                 2z3
+P2 (z) =                     ,
+           (1 − z)2 (1 − 2z)
+               2z4 (1 + 3z − 6z2 )
+P3 (z) =                               ,
+           (1 − z)3 (1 − 2z)2 (1 − 3z)
+           2z6 (21 − 74z + 5z2 + 180z3 − 144z4 )
+P4 (z) =                                          ,
+            (1 − z)4 (1 − 2z)3 (1 − 3z)2 (1 − 4z)
+           2z7 (21 + 198z − 3856z2 + 18982z3 − 40581z4 + 33060z5 + 12784z6 − 37600z7 + 17280z8 )
+P5 (z) =                                                                                         .
+                                 (1 − z)5 (1 − 2z)4 (1 − 3z)3 (1 − 4z)2 (1 − 5z)
+   Some further functions can still be computed in reasonable time. However, as the number of
+states in the automaton grows exponentially in k, this approach is not feasible for large values of k.
+
+(iii) The goddess of combinatorics is thumbing her nose at us, as this sequence is also related to permutation patterns in
+
+  many ways: it counts permutations related to the elevator problem [24, 5.4.8 Ex.8], permutations avoiding 2413, 3142,
+  2143, 3412, and some guillotine partitions [6]!
+Flip-sort and combinatorial aspects of pop-stack sorting                                                         11
+
+  Note that the lowest degree in the numerator is b3k/2c. This is because the smallest possible
+permutation size for a pop-stacked permutation with k runs can only be obtained by alternating
+runs of lengths 1 and 2. It is even possible to (experimentally) observe further structure in
+these Pk , for example they have the following partial fraction decomposition:
+                                                       k −1     Nk,j (z)
+                                                  1
+                              Pk (z) = −1 +           +∑                      ,                                  (4)
+                                                1 − kz j=1 (1 − (k − j)z) j+1
+
+where Nk,j is a polynomial of degree j in z and 2j in k:
+Nk,1 (z) =3(k − 1) − (k − 1)(3k − 4)z,
+                                                                            9k4   69k3
+                                                                                                        
+              1                                                  
+Nk,2 (z) = − (3k − 4) (3k − 11) + 9k3 − 57k2 + 102k − 44 z + −                  +       − 90k2 + 90k − 26 z2 ,
+              2                                                              2      2
+            3
+                      81k2                         27k4                  2
+                                                                                      
+             9k                                                    1149k
+Nk,3 (z) =        −         + 102k − 70 + −              + 153k3 −         + 793k − 256 z+
+              2         2                           2                 2
+             
+                27k 5     369k 4   1845k  3    4067k 2                
+           +           −         +          −           + 1814k − 406 z2
+                  2         2         2           2
+                  9k6                                  4223k2
+                                                                           
+           + −          + 72k5 − 450k4 + 1379k3 −             + 1423k − 244 z3 ,
+                    2                                     2
+                27k4      189k3    1737k2                         27k5            2943k3
+                                                                                                              
+                                              1533k
+Nk,4 (z) = −          +          −          +         − 214 +           − 234k4 +         − 4065k2 + 4536k − 1184 z
+                 8          4        8           4                  2                2
+                  81k6      837k5    13383k4       25887k3
+                                                                                      
+           + −            +        −           +            − 24395k2 + 19081k − 3418 z2
+                     4        2          4             2
+                27k7                     5
+                                                                                            
+                                   6291k
+           +           − 324k6 +            − 15777k4 + 43070k3 − 61182k2 + 37856k − 4956 z3
+                  2                  2
+             
+                  27k  8    369k 7   8433k6      26061k5
+                                                                                                          
+           + −            +        −          +            − 23493k4 + 49493k3 − 57030k2 + 29420k − 2968 z4 .
+                     8        4         8            4
+   We listed the first few values of these polynomial Nk,j in case that some clever mind could
+find the general pattern for any j. We failed to find a generic closed-form formula, but it is
+noteworthy that the decomposition of Formula (4) has some similarities with the partial fraction
+decomposition of Eulerian numbers.
+Proposition 8. Consider the Eulerian numbers hnki, defined as the number of permutations of size n that
+have precisely k runs(iv) . The generating functions Ek (z) for the columns of the Eulerian number triangle
+have the following partial fraction decomposition
+
+                                                     k −1
+                                                          (−1) j ((k − j)z) j−1
+                                       
+                                       n n      1
+                        Ek (z) = ∑        z =       +∑                          .                                (5)
+                                 n ≥0
+                                       k      1 − kz j=1 (1 − (k − j)z) j+1
+
+
+(iv) Sometimes, Eulerian numbers are defined such that n enumerates all permutations of size n that have k descents.
+                                                      hki
+ Both cases (counting with respect to runs vs. counting with respect to descents) can be obtained from each other by
+ shifting k by one.
+12                                                  Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+Proof: We were surprised to find no trace of this nice formula in the literature, so we now give
+a short proof of it. First, inserting n + 1 into a permutation of size n with k runs either enlarges
+one of the runs if n + 1 is inserted at its end, or it creates a new run in all other cases; this gives
+the classical recurrence
+                                                                            
+               n+1                        n          n                            1
+                       = (n + 1 − k)            +k            for n, k ≥ 1, with      = 1.          (6)
+                 k                      k−1           k                           1
+From it, it is easy to get by induction that
+                                   k −1                      
+                                  n                         n+1
+                                      = ∑ (−1) j (k − j)n         .
+                                  k      j =0
+                                                             j
+
+We refer to [19, 26] for possible alternative proofs and thorough surveys on Eulerian numbers.
+  Then, rewriting the Eulerian numbers in Ek (z) by means of this formula and carrying out
+some algebraic manipulations yields
+                               k −1                     
+                                                     n+1
+               Ek (z) = ∑ ∑ (−1) j (k − j)n                  zn
+                         n ≥0   j =0
+                                                        j
+                                     k −1                            
+                            1                                    n+1 n
+                      =           + ∑ (−1) j ∑ (k − j)n                 z
+                         1 − kz j=1            n ≥ j −1
+                                                                   j
+                                     k −1                                            
+                            1                                        n+j
+                      =           + ∑ (−1) j ((k − j)z) j−1 ∑               ((k − j)z)n
+                         1 − kz j=1                           n ≥0
+                                                                      j
+                                   k −1
+                              1         (−1) j ((k − j)z) j−1
+                        =         +∑                          .
+                            1 − kz j=1 (1 − (k − j)z) j+1
+
+This proves the partial fraction decomposition.
+  The partial fraction decomposition (5) allows us to make statements about the structure
+of Ek (z). We now list several of these properties, comparing them with our observations for the
+generating functions Pk (z).
+     • The degree of the numerator of Ek (z) is (k+2 1) − 1, and for Pk (z) we conjecture it to be (k+2 1).
+
+     • The leading coefficient in the numerator of Ek (z) is ± 1k ∏km=1 m! (only the first summand
+       in (5) contributes towards the maximum degree), and for Pk (z) we conjecture it to be
+       ± ∏km=1 m!.
+     • For Ek (z), summing the coefficients in the numerator yields ± ∏km−=11 m! (setting z = 1 in
+       the numerator of Ek (z) only collects contributions from the last summand in (5)), for Pk (z)
+       we conjecture that it is ±2 ∏km−=11 m!.
+  While we think that it is unlikely that the sequence pn,k satisfies a simple linear recurrence
+relation as in (6), we derive in the next section a useful, but more complex, recurrence scheme
+that depends on some additional parameters.
+Flip-sort and combinatorial aspects of pop-stack sorting                                        13
+
+2.3 A functional equation for pop-stacked permutations and the corresponding
+    polynomial-time algorithm for the enumeration
+As noted above, the counting sequence ( pn )n≥0 is hard to compute directly without introducing
+additional parameters. In [5], we mentioned that a generating tree approach leads to an efficient
+enumeration algorithm for pop-stacked permutations; it relies on an additional parameter
+which is either the number of runs, or the final value of the permutation. Such generating tree
+approaches lead to polynomial time algorithms for computing pn (see [9] for further examples
+of enumerations via generating tree approaches).
+   When the additional parameter is the number of runs, this gives a recurrence which encodes
+the addition of a new run of length k to the end of a given permutation of size n (and relabels
+this concatenation to get a permutation of size n + k). The cost of this approach is analysed
+in [15], and was implemented with care on a computer cluster, allowing the computation of the
+number of pop-stacked permutations of size n, for all n ≤ 1000.
+   When the additional parameter is the final value of the permutation, this gives an approach
+that we now detail in this section. Based on a generation strategy where either one or two
+elements are added to a given permutation, we consider the corresponding generating tree.
+With this strategy, we can derive an appropriate recurrence which also allows us to compute
+the sequence in polynomial time, and also offers a functional equation for the corresponding
+multivariate generating function.
+   For this generation strategy, we need to keep track of a few additional parameters in pop-
+stacked permutations. Let n, k, a, b, c be non-negative integers such that k ≤ n and 1 ≤ a ≤ b ≤
+c ≤ n. Let the set Pn,k;a,b,c denote all pop-stacked permutations where
+   • n denotes the length of the permutation,
+   • k denotes the number of runs,
+   • a and c denote the smallest and largest element of the last run, respectively,
+   • if a < c, then b denotes the second-largest element of the last run; else, if a = c, then also
+     b := a = c.
+Just to give some examples, the permutation 26|1345 is contained in P6,2;1,4,5 , 14|25|36 is
+contained in P6,3;3,3,6 , and 12356|4 ∈ P6,2;4,4,4 .
+
+  The following set of rules describes how, starting from two initial permutation sets
+P1,1;1,1,1 = {1} and P2,1;1,1,2 = {12}, all other sets Pn,k;a,b,c can be generated. This heavily
+relies on the characterization, given in Theorem 3, of pop-stacked permutations.
+(Rule 1) A new run consisting of a single element is added to the end of all generated permu-
+         tations. For all integers i with a + 1 ≤ i ≤ c, this operation corresponds to an injection
+         Pn,k;a,b,c ,→ Pn+1,k+1;i,i,i .
+(Rule 2) A new run consisting of two elements is added to the end of all generated permutations.
+         For all integers i < j with 1 ≤ i ≤ c and a + 2 ≤ j ≤ n + 2, this corresponds to an
+         injection Pn,k;a,b,c ,→ Pn+2,k+1;i,i,j .
+(Rule 3) Insert a new second-largest element into the last run of all generated permutations.
+         For all integers i with b + 1 ≤ i ≤ c, this corresponds to the injection Pn,k;a,b,c ,→
+         Pn+1,k;a,i,c+1 .
+14                                                      Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+Proposition 9. The algorithm described above, starting with P1,1;1,1,1 and P2,1;1,1,2 and iteratively
+applying the expansion rules (Rule 1), (Rule 2), and (Rule 3) generates all pop-stacked permutations in a
+unique way.
+
+Proof: In order to see that all permutations are generated by this strategy we study the
+corresponding inverse operation. Given a pop-stacked permutation σ of length n that is
+different from 1 or 12, we consider its last run. Then we carry out the following operations,
+based on the length of the final run:
+     • If the last run is of length 1 or 2, then one deletes it. This reverses (Rule 1) and (Rule 2).
+     • Otherwise, if the run is of length at least 3, the second-largest (and therefore penultimate)
+       element is deleted. This is the reversal of (Rule 3).
+After proper relabelling, this results in a shorter permutation σ̃ that is still pop-stacked. Applying
+the appropriate expansion rule to σ̃ constructs a set of “successors” also containing σ. Observe
+that by the nature of the expansion rules, only pop-stacked permutations can be generated
+(as long as we start with a pop-stacked permutation) as it is made sure that the last and the
+penultimate run always overlap.
+  This proves that for every permutation (apart from 1 and 12) a unique predecessor in the
+generating tree can be found. The permutations 1 and 12 are special in the sense that they are
+the only permutations for which the above strategy does not yield a well-defined result. At
+the same time, this implies that when starting at any other permutation σ and iterating the
+procedure of finding the predecessor eventually leads to either 1 or 12. This proves that when
+starting with these permutations (in our notation, this corresponds to the sets P1,1;1,1,1 and
+P2,1;1,1,2 ), all other pop-stacked permutations can be generated by applying (Rule 1), (Rule 2),
+and (Rule 3) iteratively.
+   Now, let us turn our focus from generating these permutations to their enumeration. Let
+pn,k;a,b,c := |Pn,k;a,b,c |, the number of pop-stacked permutations in Pn,k;a,b,c . With the notation
+from Section 2.2, we have
+
+                          pn,k =    ∑ pn,k;a,b,c            and         pn = ∑ pn,k .
+                                   a,b,c≥0                                     k ≥0
+
+ The generating tree approach can be utilized to derive a functional equation for the associated
+multivariate generating function
+
+                            P(z, u, v1 , v2 , v3 ) =    ∑ pn,k;a,b,c zn uk v1a v2b v3c ,               (7)
+                                                        n,k ≥0
+                                                       a,b,c≥0
+
+as well as a recurrence scheme the numbers pn,k;a,b,c .
+  We begin with the functional equation for P(z, u, v1 , v2 , v3 ), which is proved by translating
+the expansion rules from above to the level of algebraic operations on generating functions.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                           15
+
+Theorem 10. The multivariate generating function P(z, u, v1 , v2 , v3 ) as given in (7) satisfies the
+functional equation
+
+ P(z, u, v1 , v2 , v3 ) = 1 + zuv1 v2 v3 + z2 uv1 v2 v23
+                                                        
+                             zuv1 v2 v3        zv v2 v3
+                                           1− 1
+                                                                                                               
+                         +                                 P(z, u, v1 v2 v3 , 1, 1) − P(z, u, 1, 1, v1 v2 v3 )
+                            1 − v1 v2 v3       1 − v1 v2
+                                z2 uv1 v2 v23                                                   
+                        +                         P(z, u, v3 , 1, 1) − P(z, u, 1, 1, v1 v2 v3 )                    (8)
+                            (1 − v1 v2 )(1 − v3 )
+                                 z2 uv1 v2 v33                                                           
+                        +                               P(zv3 , u, 1, 1, v1 v2 ) − P(zv3 , u, 1, 1, 1)
+                         (1 − v1 v2 )(1 − v3 )
+                         zv v
+                        + 2 3 P(z, u, v1 , v2 , v3 ) − P(z, u, v1 , 1, v2 v3 ) .
+                                                                              
+                         1 − v2
+
+Proof: This functional equation is just the reflection of the fact that any pop-stacked permutation
+is either empty, or one of the two roots of the generating tree, namely 1 (encoded in (8) by the
+monomial zuv1 v2 v3 ) or 12 (encoded in (8) by z2 uv1 v2 v23 ), or a permutation obtained by applying
+one the three expansions rules to a smaller pop-stacked permutation.
+   Now, each of the four remaining summands in the right-hand side of (8) can be explained
+by considering that each of the expansion rules acts as a linear operator on the monomials
+zn uk v1a v2b v3c of the generating function P. While the corresponding calculations are not too
+difficult, they can be a bit tedious — which is why we choose to illustrate it for one of the rules,
+and give only the results for the remaining ones.
+   Let us first consider (Rule 3), which describes the injection Pn,k;a,b,c ,→ Pn+1,k;a,i,c+1 for
+b + 1 ≤ i ≤ c. Starting from a given permutation whose associated monomial is zn uk v1a v2b v3c , this
+rule generates longer permutations by inserting a new second-largest element into the last run.
+On the level of monomials, this corresponds to the map
+                                                c                                  vb − vc
+                      zn uk v1a v2b v3c 7→     ∑ zn+1 v1a v2i v3c+1 = zn+1 v1a v2 12− v22 v3c+1 .
+                                             i = b +1
+
+As this operator is linear, its application to the generating function P (seen as sum of monomials)
+leads to a sum which can itself also be written in terms of P; this yields a total contribution of
+                               zv2 v3                                                 
+                                      P(z, u, v1 , v2 , v3 ) − P(z, u, v1 , 1, v2 v3 ) .
+                               1 − v2
+
+Similarly, (Rule 1) yields a total contribution corresponding to the summand
+                                         
+               zuv1 v2 v3       zv v2 v3
+                             1− 1
+                                                                                               
+                                            P(z, u, v1 v2 v3 , 1, 1) − P(z, u, 1, 1, v1 v2 v3 ) ,
+              1 − v1 v2 v3      1 − v1 v2
+
+and (Rule 2) yields the two remaining summands on the right-hand side of (8).
+16                                                  Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+  This allows us to obtain a recurrence relation for pn,k;a,b,c as given in the following theorem.
+Therein, for the sake of simplicity, we make use of the Iverson bracket [expr], a notation
+popularized in [22], which evaluates to 1 if expr is a true expression, and 0 otherwise.
+Theorem 11 (Polynomial-time computations for pop-stacked permutations). Let N, K, A, B, C be
+non-negative integers. The number of pop-stacked permutations of length N with K runs where the last
+run starts with A, ends with C, and where B is either the penultimate element (if it exists) or coincides
+with A and C as given by p N,K;A,B,C satisfies the recurrence relation
+                                                        A −1 N −1 N −1
+                       p N,K;A,B,C = [ A = B = C ] ∑           ∑ ∑ p N −1,K−1;a,b,c
+                                                        a =1 b =1 c = A
+                                                          C −2 N −2 N −2
+                                     + [ A = B < C] ∑ ∑                 ∑ p N −2,K−1;a,b,c            (9)
+                                                          a =1 b =1 c = A
+                                                          B −1
+                                     + [ A < B < C ] ∑ p N −1,K;A,b,C−1
+                                                          b= A
+
+together with the initial conditions p1,1;1,1,1 = p2,1;1,1,2 = 1.
+  The number of pop-stacked permutations of length n with k runs is thus
+                                               n     n     n
+                                       pn,k = ∑ ∑ ∑ pn,k;a,b,c                                      (10)
+                                              a =1 b = a c = b
+
+and the number of pop-stacked permutations of length n is thus pn = ∑nk=1 pn,k , which can be computed
+with ∼ n4 /8 time-complexity and ∼ n3 /3 memory-complexity.
+
+Proof: We can either go back to the combinatorial description of the generation of permutations
+via the generating tree approach, or consider the functional equation (8) and extract the
+coefficient of the monomial z N uK v1A v2B v3C on both sides in order to obtain the recurrence
+relation (9) for pn,k;a,b,c . Now, for the complexity analysis, observe that the triple sums appearing
+in the first and second branch of (9) can be computed more efficiently by defining the auxiliary
+sequence
+                                                    N     N
+                                     d N,K,a,A = ∑ ∑ p N,K;a,b,c ,
+                                                   b =1 c = A
+and note that this sequence can be computed with a backward recurrence A from N − 1 to 1 via
+                                                                  A
+                                d N,K,a,A = d N,K,a,A+1 + ∑ p N,K;a,b,A .                           (11)
+                                                                 b= a
+
+Furthermore, observe that we can actually rewrite the third branch of the recurrence (9) (for
+A < B − 1 and B < C) as
+                        B −1
+                         ∑ p N −1,K;A,b,C−1 = p N,K;A,B−1,C + p N −1,K;A,B−1,C .
+                        b= A
+Flip-sort and combinatorial aspects of pop-stack sorting                                          17
+
+  We are now able to rewrite the recurrence in the form
+                                         A −1
+             p N,K;A,B,C = [ A = B = C ] ∑ d N −1,K −1,a,A
+                                         a =1
+                                                          C −2              
+                          + [ A = B < C ] p N −1,K;A,A,A + ∑ d N −2,K−1,a,A                     (12)
+                                                          a= A
+                          + [ A < B < C ] [ A < B − 1]( p N,K;A,B−1,C + p N −1,K;A,B−1,C )
+                                                                         
+                                          + [ A = B − 1] p N −1,K;A,A,C−1 .
+  This approach allows us to compute pn,k for 1 ≤ k ≤ n ≤ N in O( N 5 ) arithmetic operations.
+Furthermore, observe that the number of runs is actually not relevant in the recurrence. If
+we were only interested in pn , the number of pop-stacked permutations of length n, then
+we could drop this additional parameter: this allows us to compute pn for 1 ≤ n ≤ N in
+O( N 4 ) arithmetic operations, with O( N 3 ) simultaneous allocations in memory. Actually, we
+can be even more precise and obtain the main asymptotic term of the number of operations:
+In the computation of pn for 1 ≤ n ≤ N, the branches of the recurrence (12) are visited for all
+1 ≤ A ≤ B ≤ C ≤ N. Investigating these branches more closely reveals that while the case of
+A = B = C is asymptotically negligible for the main term, both the case of A = B < C as well
+as A < B < C contribute ∼ N 4 /24 to the total number of additions required. Finally, adding all
+pn;A,B,C for 1 ≤ A ≤ B ≤ C and 1 ≤ n ≤ N, one gets ∼ N 4 /24 more additions — which means
+that in total the number of additions behaves like N 4 /8. Similar considerations show that this
+approach requires ∼ N 3 /3 simultaneous memory allocations.
+  A straightforward implementation of the optimized recurrence (12) in SageMath [31] that
+stores relevant intermediate results in cache memory makes it possible to compute the first 100
+terms of the sequence pn on a standard desktop PC in less than 3 minutes. Figure 7 illustrates
+the number of additions carried out by our strategy and confirms our assertion regarding the
+main asymptotic term.
+                              1.2e7
+
+
+                               1e7
+
+
+                               8e6
+
+
+                               6e6
+
+
+                               4e6
+
+
+                               2e6
+
+
+                                        20      40         60   80    100
+
+Fig. 7: Number of additions required to compute pn for 1 ≤ n ≤ 100. The experimental cost (blue dots)
+nicely fits a quartic polynomial (in red) whose main term is n4 /8.
+
+  However, unfortunately, neither the recurrence scheme nor the functional equation for the
+generating function yield sufficient leverage to carry out an exact analysis of the asymptotic
+behaviour of the sequence pn . In the following section, we provide a lower bound for the growth
+of pn and give pointers to experimental observations.
+18                                                  Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+2.4     Asymptotics of pop-stacked permutations
+In many cases, the growth of restricted families of permutations is much less than n!, and is just
+exponential: for example, by the Stanley–Wilf conjecture (proved by Marcus and Tardos [25]),
+this always holds for permutation classes defined by classical forbidden patterns. It is natural to
+ask whether this is the case for pop-stacked permutations. We now prove that they in fact grow
+much faster.
+Theorem 12 (Superexponential growth of pop-stacked permutations). The asymptotic growth of
+the number of pop-stacked permutations is at least exp(n ln(n) − n ln(2) − n + o (n)).
+Proof: We achieve this by constructing an explicit class of permutations, as follows. Assume
+that n is even, and consider any pair of permutations, π and τ, each of size n/2. Intertwine them
+as shown in Figure 8, i.e. consider the permutation σ of size n defined by
+                         for 1 ≤ j ≤ n/2 :     σ (2j − 1) = π ( j), σ (2j) = τ ( j).                 (13)
+
+
+
+
+                               τ
+
+
+
+                               π                     σ
+      Fig. 8: Intertwining two permutations gives a pop-stacked permutation and proves Theorem 12.
+
+   It is easy to see that such σ is necessarily pop-stacked (it clearly satisfies the overlapping run
+condition from Theorem 3). Since the mapping (π, τ ) → σ is injective, we conclude that we
+have at least ((n/2)!)2 pop-stacked permutations of size n. Then, Stirling’s approximation for
+the factorial leads to the theorem. Note that the fact that the above argument holds for even n
+only is not a restriction: by inserting n + 1 at the end of any pop-stacked permutation of length
+n, one obtains a new pop-stacked permutation of size n + 1; therefore the sequence pn is strictly
+increasing, and thus the Stirling bound given in the claim remains valid for odd n.
+   Due to the nature of the counting sequence and the fact that we have no appropriate rep-
+resentation of the associated generating function, an exact asymptotic analysis of the growth
+behaviour of the sequence remains a challenge. The above theorem gives a lower bound of .5n n!,
+it is also possible to compare with André’s alternating permutations to get a lower bound of
+.63n n! (see e.g. [18, p. 5]). Note that the authors of [15] carried out an experimental analysis
+using automated fitting and differential approximation. Their analysis of the counting sequence
+led them to conjecture that the corresponding exponential generating function possesses an
+infinite number of singularities, thus implying non-D-finiteness. Ultimately, they conjecture that
+the asymptotic growth of the sequence pn counting pop-stacked permutations of size n is
+                               pn ∼ (0.695688 . . .) · (0.898118 . . .)n · n!;
+see [15, Section 3.3] for more details.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                         19
+
+3     Best cases of flip-sort: permutations with low cost
+3.1     Notation and earlier work
+Some of the earlier work on pop-stack sorting dealt with permutation with low cost. The
+following notation was introduced there.
+Definition 13. A permutation π is k-pop-stack-sortable if cost(π ) ≤ k (or, equivalently, if
+Im( T k )(π ) = id).
+  1- and 2-pop-stack-sortable permutations are shown by the red and the blue frames in the
+pop-stack-sorting tree in Figure 2.
+  Several results concerning k-pop-stack-sortability are known:
+    • Avis and Newborn [8] proved that a permutation is 1-pop-stack-sortable if and only if it is
+      layered(v) .
+    • Pudwell and Smith [28] found a structural characterization of 2-pop-stack-sortable per-
+      mutations, as well as a bijection between such permutations and polyominoes on a twisted
+      cylinder of width 3 (see [3]). Moreover, they proved that the generating function for
+      2-pop-stack-sortable permutations is rational (we shall reprove their result below).
+    • Claesson and Guðmundsson [14] generalized the latter result showing that for each fixed k,
+      the generating function for k-pop-stack-sortable permutations is rational.
+
+3.2     The pre-images of 1-pop-stack-sortable permutations
+We begin with a nice enumerative result in which the notion of 1- and 2-pop-stack-sortable
+permutations is combined with our notion of pop-stacked permutations. Specifically, it concerns
+those 1-pop-stack-sortable permutations that belong to the image of T (thus, corresponding to
+internal nodes in the right column before the identity in the pop-stack tree from Figure 2).
+Theorem 14. Pop-stack layered permutations have the following properties:
+    1. Let LI n be the set of pop-stacked layered permutations (or, equivalently, of 1-pop-stack-sortable
+       permutations that belong to Im( T )) of size n. The generating function for (|LI n |)n≥1 is
+                             ( x + x 2 )2
+                   x+                        = x + x2 + 3x3 + 5x4 + 9x5 + 17x6 + 31x7 + . . . .                 (14)
+                         1 − ( x + x2 + x3 )
+       Consequently, this family is enumerated by “tribonacci numbers” (A000213).
+    2. Let τ ∈ LI n . All the permutations π such that T (π ) = τ can be constructed by the following
+       procedure:
+          • Put primary bars at all descents of τ.
+          • Optionally, put secondary bars at some descents so that each primary bar has at least one
+            neighbouring position without any bar.
+          • Reverse all the blocks determined by the bars.
+
+(v) A layered permutation is a direct sum of its falls, for example 321|654|87. See also Definition 16 below.
+20                                                  Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+Proof:
+  1. Let τ be a layered permutation of size n. Partition it into falls. Refer to the first and the
+     last falls as outer falls, to all other falls as inner falls. For n ≥ 3 it is easy to see that we have
+     non-overlapping adjacent runs if and only if there is an outer fall of size ≥ 3 or an inner
+     fall of size ≥ 4. For n = 2 the permutation 12 is pop-stacked, and the permutation 21 is
+     not. It follows that for n ≥ 2 we have τ ∈ LI n if and only if it has at least two falls, the
+     outer falls being of size 1 or 2, the inner falls of size 1 or 2 or 3. This implies the generating
+     function (14).
+  2. As τ is obtained from π by reversing all its falls, π is obtained from τ by reversing its runs
+     — possibly, further partitioned. That is, we must first partition τ into runs (by primary
+     bars), then optionally further partition the runs (by secondary bars), then reverse all the
+     blocks.
+       We need to prove the condition on secondary bars. Suppose a primary bar separates a
+       descent bi |bi+1 (we have bi > bi+1 ). If we put bars at both adjacent gaps, |bi |bi+1 |, then
+       we have the same values in positions i and i + 1 in π. However, this would be a descent,
+       that is, a part of a fall in π, and it should be reversed when we apply T. Otherwise, both
+       sub-runs (that from the left and that from the right of the primary bar) will yield, upon
+       reversal, two distinct falls in π, that will recover these sub-runs when we apply T.
+  Example. Let τ = 13254687. The primary bars are inserted at the descents: 13|25|468|7. All
+the possibilities to insert secondary bars (for the sake of clarity, we indicate them by ·) are
+13|25|468|7, 1·3|25|468|7, 13|2·5|468|7, 13|25|4·68|7, 1·3|25|4·68|7, which gives all the pre-images
+of τ: 31|52|864|7, 1·3|52|864|7, 31|2·5|864|7, 31|52|4·86|7, 1·3|52|4·86|7. Further, it can be shown
+that the number of pre-images of τ ∈ LI n is always the product of some Fibonacci numbers
+depending on the sequence of sizes of falls of τ.
+
+3.3 2-pop-stack-sortable permutations and lattice paths
+In this section we extend some of the results by Pudwell and Smith [28]. Namely, we reprove
+one of their theorems and prove (a generalization of) one of their conjectures. All this is done
+via the uniform framework of lattice paths. By doing this, we not only construct a bijection
+between 2-pop-stack sortable permutations and lattice paths, but also benefit from the fact that
+the theory of lattice paths is well developed (see e.g. [10]), thus offering additional structural
+insight.
+  First, we reprove the theorem by Pudwell and Smith in a more combinatorial way. Then we
+construct a bijection between 2-pop-stack-sortable permutations and a certain family of lattice
+paths, which enables us to prove two of their conjectures.
+Theorem 15. For n ≥ 1, 0 ≤ k ≤ n − 1, let an,k be the number of 2-pop-stack-sortable permutations of
+size n with exactly k ascents.
+     1. (Pudwell and Smith [28], Thm. 2.5) Let A( x, y) be the bivariate generating function A( x, y) =
+        ∑ an,k x n yk . Then we have
+
+                                                        x (1 + x 2 y )
+                                    A( x, y) =                              .                         (15)
+                                                 1 − x − xy − x2 y − 2x3 y2
+Flip-sort and combinatorial aspects of pop-stack sorting                                                                 21
+
+   2. (For k = 0, Pudwell and Smith [28], Conj. 4.3) Let k ≥ 0. The generating functions for
+      “diagonal-parallel” arrays are
+                                                                  r                          p                   !k
+                                                                      1+x           1−x−       (1 + x )(1 − 7x )
+                    Dk ( x ) = ∑ a2n+k+1,n+k x =            n
+                                                                                                                    ,
+                               n ≥0
+                                                                      1 − 7x                     2x
+                                                                 r                         p                   !k       (16)
+                                                                      1+x           1 − x − (1 + x )(1 − 7x )
+                    D−k ( x ) = ∑ a2n+k+1,n x n =                                                                 .
+                                 n ≥0
+                                                                      1 − 7x               2x (1 + 2x )
+
+       For the “diagonal array” a2n+1,n (that is, for k = 0) we have explicit formulas
+                     n −1
+                                             2( n − i )          n−1
+                                                                                                   
+                                                                                   n  2k 2k+1 n−2k−1      k
+         a2n+1,n = ∑ (−1) 2     i n −i
+                                                                           = ∑           2   3         2−     . (17)
+                      i =0
+                                              n−i                 i          k ≥0
+                                                                                   2k  k                  n
+
+   The two-dimensional array an,k is shown in Figure 9. The nth row (n ≥ 1) contains coefficients
+an,0 , an,1 , . . . , an,n−1 . The “diagonal-parallel” arrays from part 2 are vertical in this drawing
+(k = 0 corresponds to 1, 4, 20, 116, . . ., k = 1 to 1, 8, 48, 296, . . ., etc.).
+
+                                                                      1
+                                                                 1         1
+                                                            1         4        1
+                                                       1         6         8        1
+                                                  1         8         20       12       1
+                                              1        10        36    48  16    1
+                                        1         12        56      116 92    20   1
+                                  1          14        80        224 296 152 24      1
+
+
+Fig. 9: The two-dimensional array an,k , n ≥ 1, 0 ≤ k ≤ n − 1. The coefficient an,k is the number of
+2-pop-stack-sortable permutations with exactly k ascents.
+
+Proof:
+   1. It is shown in [28, Lemma 2.1] that a permutation π is 2-pop-stack-sortable if and only
+      if for each pair of its adjacent falls, Fi and Fi+1 , one has max( Fi ) ≤ min( Fi+1 ) + 1.(vi)
+      Consider an ascent that separates two adjacent falls Fi and Fi+1 . We say that this ascent is
+      regular if max( Fi ) < min( Fi+1 ), and twisted if max( Fi ) = min( Fi+1 ) + 1. An ascent can be
+      twisted only when at least one of the falls Fi or Fi+1 is of size > 1 (equivalently, when at
+      least one of the adjacent gaps is a descent).
+       As Pudwell and Smith show, 2-pop-stack-sortable permutations are bijectively encoded by
+       sequences of their ascents and descents (we use a for ascents, d for descents), where for
+       each a that has an adjacent d it is indicated whether this a is regular or twisted. We find it
+(vi) Notice that layered permutations are similarly characterized by max( F ) = min( F
+                                                                           i          i +1 ) − 1.
+22                                                Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+     convenient to use instead lattice paths: we replace each a by the up-step U = (1, 1), d by
+     the down-step D = (1, −1), and corner-adjacent U-steps (that is, U-steps which have at least
+     one adjacent D-step) will be bicoloured: U-steps that correspond to a regular ascent will
+     be coloured black, U-steps that correspond to a twisted ascent will be coloured red. In
+     this way, we obtain a certain family of Dyck walks. The length of a walk is smaller by 1
+     than the size of the corresponding permutation, and the final altitude is #(a) − #(d). See
+     Figure 10 for illustration.
+
+
+
+
+Fig. 10: Encoding of 2-pop-stack-sortable permutations by Dyck walks with bicoloured corner-adjacent
+U-steps.
+
+     To enumerate such walks, we make use of the symbolic method (see [18, Chapter I]) to
+     find a combinatorial specification for (non-coloured) Dyck walks in which corner-adjacent
+     U-steps are marked by y:
+                                                                                         
+     W = e ∪ Seq≥1 (U) × e ∪ ySeq≥1 (D) × (e ∪ Uy × W ) ∪ Seq≥1 (D) × e ∪ Uy × W .
+
+
+     This leads to the following functional equation for the trivariate generating function
+     W (t, u, y), where t is the variable for length, u for final altitude, y for occurrences of
+     corner-adjacent U-steps:
+                                                         !                         !
+                            tu           t/u                       t/u
+                W = 1+            1+y            1 + tuyW      +           1 + tuyW .       (18)
+                         1 − tu        1 − t/u                   1 − t/u
+
+     This yields the generating function
+
+                                                     u 1 − t2 (1 − y )
+                                                                       
+                         W (t, u, y) =                                              ,           (19)
+                                         u − t − tu2 + t2 u(1 − y) + t3 u2 y(1 − y)
+Flip-sort and combinatorial aspects of pop-stack sorting                                              23
+
+      and the bivariate generating function for those walks in which corner-adjacent U-steps are
+      bicoloured, is
+                                                      u 1 + t2
+                                                               
+                                W (t, u, 2) =                             .                 (20)
+                                              u − t − tu2 − t2 u − 2t3 u2
+      Upon performing the transformation that corresponds to the way in which we rearranged
+                                                     √ √
+      the array of the coefficients, we obtain xW ( x y, y, 2) = A( x, y). This completes the
+      proof of part 1.
+
+   2. First, we find the generating function E(t, y) for excursions — that is, those walks that stay
+      (weakly) above and terminate at the t-axis — in our model of Dyck walks with marked
+      corner-adjacent U-steps. The functional equation for E(t, y) is
+
+                                                 t2 y + ( E − 1)
+                                                                 
+                                       E = 1+                      ,                            (21)
+                                                     1 − t2 yE
+
+      which yields
+                                                      q
+                                  1 − t2 (1 − y ) −
+                                                                                        
+                                                          1 − t2 (1 − y) 1 − t2 (1 + 3y)
+                      E(t, y) =                                                              .      (22)
+                                                             2t2 y
+
+      Therefore, the generating function for Dyck excursions with bicoloured corner-adjacent
+      U-steps is                                       p
+                                             1 + t2 − (1 + t2 )(1 − 7t2 )
+                                 E(t, 2) =                                .                 (23)
+                                                         4t2
+                                        t2 y      t2 y
+                                                      
+      (In fact, we have E(t, y) = 1 + 1−t2 M 1−t2 , where M ( x ) is the generating function for
+      Motzkin numbers. This can be shown bijectively, starting from the fact that the number
+                                                                                       −1
+      of Dyck excursions of semilength n with exactly k corner-adjacent U-steps, is (nk− 1 ) Mk − 1 ,
+      where Mk−1 is the (k − 1)st Motzkin number. A similar result on Dyck paths with marked
+      pattern UDU was proved by Sun in [30, Thm. 2.2].)
+      The “diagonal coefficients” a2n+1,n = [ x2n+1 yn ] of A( x, y) correspond to coefficients [t2n u0 ]
+      of W (t, u, 2). Therefore we look for the generating function B(t, y) for bridges — that is,
+      those walks that terminate at the t-axis — in our model. It can be routinely found by
+      residue analysis (extracting [u0 ] in W (t, u, y)). However, we give a more structural proof.
+      We decompose a bridge into an alternating sequence of excursions and anti-excursions
+      (= rotated by 180◦ excursions that stay weakly below the x-axis). Since we use only U and
+      D steps, such a decomposition is unambiguous. Moreover, the generating function for
+      anti-excursions is the same as for excursions. When we join excursions and anti-excursions,
+      new corner-adjacent U-steps are never created. Therefore we have
+                                                             p
+                                             E(t, y)             1 − t2 (1 − y )
+                             B(t, y) =                     = p                   ,                 (24)
+                                       1 − ( E(t, y) − 1)       1 − t2 (1 + 3y)
+24                                                 Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+     and finally
+                            √
+                                1 + t2
+                B(t, 2) = √              = 1 + 4t2 + 20t4 + 116t6 + 708t8 + 4452t10 + . . . .          (25)
+                              1 − 7t2
+     Notice that we can rewrite this as
+                                               1                 1
+                             B(t, 2) = q                 = √                         ,
+                                             1 − 18t
+                                                     2         1 − 4x x=2t2 /(1+t2 )
+                                                  + t2
+                                √
+     and the coefficients of 1/ 1 − 4x are well known to be central binomial coefficients. This
+     directly leads to the first closed-form formula of Equation (17) for a2n+1,n . The second
+     equivalent closed-form formula is proved easily via closure properties from holonomy
+     theory; see [27].
+     Finally, we consider generating functions Wk (t, 2) for walks that terminate at fixed alti-
+     tude k. For unmarked paths we have the classical decomposition Wk (t) = B(t)(tE(t))k .
+     Taking care of corner-adjacent U-steps, we obtain, for k ≥ 0,
+                                   √                   p                   !k
+                                      1 + t2  1 − t2 − (1 + t2 )(1 − 7t2 )
+                      W+k (t, 2) = √                                          ,
+                                     1 − 7t2               2t
+     and
+                                 √                   p                    !k
+                                    1 + t2   1 − t2 − (1 + t2 )(1 − 7t2 )
+                    W−k (t, 2) = √                                           ,
+                                   1 − 7t2           2t(1 + 2t2 )
+     which, upon due modification, yields (16).
+ Finally, if we look again at (20) and rewrite it                       u
+                                                                                              1
+                                 1+ t2
+ in the form W (t, u, 2) = 1− t −tu −t2 −2t3 u
+                                               then it
+                                 u                                                       1
+ is immediate from the theory of lattice paths
+ that it is also the bivariate generating function                                  1         16
+ for lattice paths that start either at (0, 0) or at
+ (2, 0), and use steps (1, −1), (1, 1), (2, 0), and                             1        12
+ bicoloured (3, 1).                                                         1       8         48
+
+                                                                    1           4        20
+                                                                                                   t
+                                                                            1       6         36
+
+                                                                                1        8
+
+                                                                                    1         10
+ These paths can also be used to obtain formu-
+ las (16) for diagonal-parallel arrays, and the                                          1
+ computations are even easier because the bi-                                                 1
+ colouration of some steps does not require con-
+ sidering their adjacent steps.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                                 25
+
+4     Worst-cases of flip-sort: permutations with high cost
+              “Conventional wisdom might say that extremal problems tend to be very difficult
+              to solve exactly if the extreme configurations are so diverse and irregular.”
+              Martin Aigner & Günter Ziegler, in Proofs from THE BOOK.
+   This claim by Aigner and Ziegler is concerning an extremal problem in geometry which is in
+fact solved by understanding the worst cases of flip-sort! We refer to [1, Chapter 12] and [32] for
+more details on this geometric problem. In this section, we strongly extend these studies by
+proving structural and enumerative results concerning the evolution of permutations during the
+flip-sort process, focussing on permutations with worst costs. We start with some definitions,
+notation, and basic observations.
+
+4.1     Definitions and notation
+By idn we denote the identity permutation of size n, and by −idn we denote its reversal:
+idn = 12 . . . n, and −idn = n . . . 21.
+Definition 16 (Layered and skew-layered permutations). The layered permutation ⊕(m1 , . . . , ms )
+is the direct sum of −idm1 , . . . , −idms . The skew-layered permutation (m1 , . . . , ms ) is the skew
+sum of idm1 , . . . , idms .(vii) For example, ⊕(2, 1, 3) = 213654 and (2, 1, 3) = 564123.
+Definition 17 (k-shadows). Let π be a permutation of size n, and let k be a fixed number,
+1 ≤ k ≤ n − 1. Let S := {1, . . . , k}, L := {k + 1, . . . , n} (S for small, L for large). The k-shadow
+of π is defined to be the {S, L}-word shadowk (π ) obtained from π by replacing all the numbers
+from S by S, and all the numbers from L by L. When k is fixed, we shall usually omit the
+subscript and write just shadow(π ). Example: for π = 6317524 we have shadow3 (π ) = LSSLLSL.
+   For 1 ≤ j ≤ k, we denote by s j (π ) the position of the jth occurrence of S counted from left
+in shadow(π ); for 1 ≤ j ≤ n − k, we denote by ` j (π ) the position of the jth occurrence of L
+counted from right in shadow(π ). In the example just considered, we have s1 (π ) = 2, s2 (π ) = 3,
+s3 (π ) = 6; `1 (π ) = 7, `2 (π ) = 5, `3 (π ) = 4, `4 (π ) = 1.
+Definition 18 (S- and L-paths, k-wiring diagram). Let π and k be as above. For 1 ≤ j ≤ k, the
+jth S-path is the sequence (s j ( T m (π )))m≥0 . For 1 ≤ j ≤ n − k, the jth L-path is the sequence
+(` j ( T m (π )))m≥0 . The k-wiring diagram is a drawing on the rectangular grid with infinitely many
+rows, labelled (from above) by 0, 1, 2, . . ., that correspond to π, T (π ), T 2 (π ), . . .; and n columns
+labelled by 1, 2, . . . , n. In this drawing, we represent the jth S-path (1 ≤ j ≤ k) by a polygonal red
+line connecting the points (m, s j ( T m (π )))m≥0 , and we represent the jth L-path (1 ≤ j ≤ n − k)
+by a polygonal blue line connecting the points (m, ` j ( T m (π )))m≥0 . The jth S-path (resp. S-path)
+of π will be denoted by S j (π ) (resp. by L j (π )). See Figure 11 for an example.
+    Remark: Since we show below that after the (n − 1)st row the paths stay in the same position
+(namely, the S j (π ) in the position j, and the L j (π )-path in the position n + 1 − j), we draw
+k-wiring diagrams with only n rows, from the one corresponding to π to the one corresponding
+to T n−1 (π ).
+(vii) We refer to Permutation patterns: basic definitions and notation by David Bevan [11] for the definitions of direct sum
+
+  and of skew sum.
+26                                                          Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+                                                                      L2 (π) L1 (π) S3 (π) S5 (π)
+                                                                   L3 (π) S1 (π) S2 (π) S4 (π)
+
+
+                            π   8   6   4   7   5   2   3   1
+                       T (π)    4   6   8   2   5   7   1   3
+                      T 2 (π)   4   6   2   8   5   1   7   3
+                      T 3 (π)   4   2   6   1   5   8   3   7
+                      T 4 (π)   2   4   1   6   5   3   8   7
+                      T 5 (π)   2   1   4   3   5   6   7   8
+                      T 6 (π)   1   2   3   4   5   6   7   8
+                      T 7 (π)   1   2   3   4   5   6   7   8
+
+                          Fig. 11: The k-wiring diagram for π = 86231745 and k = 5.
+
+   In the following considerations, the k-wiring diagram of the permutation ρk := (n − k, k)
+will play an important role. When k is fixed, we shall usually omit the subscript and write just ρ.
+It is easy to verify that shadow(ρ) = Ln−k Sk , and that for each m ≥ 0 the word shadow( T m+1 (ρ))
+is obtained from shadow( T m (ρ)) by replacing each consecutive occurrence of LS by SL. This
+yields                            
+                                   n − k + j,              0 ≤ m ≤ j − 1,
+               s j ( T m (ρ)) =      n − k + 2j − m − 1,    j − 1 ≤ m ≤ n − k + j − 1,
+                                     j,                     n − k + j − 1 ≤ m;
+                                  
+
+                                                                                              (26)
+                                       n − k + 1  − j,       0  ≤  m ≤ j − 1,
+                   ` j ( T m (ρ)) =     n − k − 2j + m + 2,    j − 1 ≤ m ≤ k + j − 1,
+                                        n + 1 − j,            k + j − 1 ≤ m.
+                                    
+
+Accordingly, the k-wiring diagram of ρ has a very distinctive shape, with S- and L-paths typically
+consisting of three segments. This is illustrated in Figure 12 (since we later combine the k-wiring
+diagram of the fixed permutation ρ with that of an arbitrary permutation π, the S- and L-paths
+of ρ will be shown by thick pink and light-blue lines). Finally, we notice that, since the sets S
+and L are already sorted in ρ, all the values along S j (ρ) are j, and all the values along L j (ρ)
+are n + 1 − j, so that for ρ = (n − k, k) the k-wiring diagram coincides with the usual wiring
+diagram where paths connect occurrences of the same value.
+Definition 19 (Poset of words). Assume 1 ≤ k ≤ n − 1. Let SL(k, n − k) be the set of words
+of length n with k occurrences of S and n − k occurrences of L. For λ, µ ∈ SL(k, n − k) we
+write λ 4 µ if for each j, 1 ≤ j ≤ k, the position of the jth S in λ is weakly to the left from
+the position of the jth S in µ. Equivalently, λ 4 µ if for each j, 1 ≤ j ≤ n − k, the position
+of the jth L in λ is weakly to the right from the position of the jth L in µ(viii) . For example,
+SSSLL 4 SLSLS 4 LSLSS. It is easy to verify that 4 is a partial order relation, and that these
+two definitions are indeed equivalent.
+(viii) We remind that the occurrences of S are counted from left, and the occurrences of L are counted from right.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                              27
+                                                                        L2 (ρ) S1 (ρ) S3 (ρ) S5 (ρ)
+                                                                     L3 (ρ) L1 (ρ) S2 (ρ) S4 (ρ)
+
+
+
+                        ρ     6   7   8   1   2   3   4   5
+                   T (ρ)      6   7   1   8   2   3   4   5
+                  T 2 (ρ)     6   1   7   2   8   3   4   5
+                  T 3 (ρ)     1   6   2   7   3   8   4   5
+                  T 4 (ρ)     1   2   6   3   7   4   8   5
+                  T 5 (ρ)     1   2   3   6   4   7   5   8
+                  T 6 (ρ)     1   2   3   4   6   5   7   8
+                  T 7 (ρ)     1   2   3   4   5   6   7   8
+
+                     Fig. 12: The k-wiring diagram for ρ =           (n − k, k) for n = 8, k = 5.
+
+   In fact, 4 is the transitive closure of the relation “u is obtained from v by replacing some
+consecutive occurrence of LS by SL”. In particular, it follows that Ln−k Sk — the maximum
+element of SL(k, n − k) — covers just one element: Ln−k−1 SLSk−1 , and that Sk Ln−k — the
+minimum element of SL(k, n − k) — is covered by just one element: Sk−1 LSLn−k−1 .
+   See Figure 13 for the Hasse diagram of SL(k, n − k) with the partial order 4, for n = 6, k = 3
+(the words marked by blue colour are the 3-shadows of ρ, T (ρ), . . .).
+
+Definition 20 (Bandwidth). The bandwidth (also called maximum displacement) of a permutation
+π = a1 a2 . . . an is
+                                   d(π ) := max | ai − i |.                             (27)
+                                                          1≤ i ≤ n
+
+  The inequality d(π ) ≤ r corresponds to the diagram of π being (2r + 1)-diagonal. This means
+that it is entirely contained in the main diagonal and its r shifts to either side. Obviously, for
+each permutation π of size n, we have d(π ) ≤ n − 1, and d(π ) = 0 if and only if π = id.
+
+4.2 The worst case: n − 1 iterations, and a key statistic: bandwidth of permuta-
+    tions
+The main result of this section is the following theorem about the bandwidth of a permutation
+in Im( T m ). In terms of permutation diagrams, this theorem says that grey areas as in Figure 3
+do not contain any points of respective diagrams.
+Theorem 21. If τ = b1 b2 . . . bn ∈ Im( T m ) (where 0 ≤ m ≤ n − 1), then we have d(τ ) ≤ n − 1 − m.
+  Notice that for m = n − 1 we obtain that a permutation in Im( T n−1 ) has d = 0, and thus we
+recover Ungar’s result mentioned above, Im( T n−1 ) = {id}. The proof that we give is also a
+generalization of Ungar’s proof of this special case(ix) .
+(ix) Note that another perspective on Ungar’s result can also be found in the recent work of Albert and Vatter [2],
+
+ inspired by Knuth’s zero-one principle [24, Theorem Z of Section 5.3.4], and offering links with a nondeterministic sort.
+28                                                 Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+                                                LLLSSS
+
+                                                LLSLSS
+
+                                          LSLLSS       LLSSLS
+
+                                    SLLLSS      LSLSLS      LLSSSL
+
+                                    SLLSLS      LSSLLS      LSLSSL
+
+                                    SLSLLS      SLLSSL      LSSLSL
+
+                                    SSLLLS      SLSLSL      LSSSLL
+
+                                          SSLLSL       SLSSLL
+
+                                                SSLSLL
+
+                                                SSSLLL
+
+Fig. 13: The Hasse diagram of SL(k, n − k) with the partial order 4, for n = 6, k = 3. The k-shadows of
+ρ, T (ρ), T 2 (ρ), . . . are shown by blue colour.
+
+  The proof of Theorem 21 will follow from the following propositions.
+Proposition 22. Let σ be a permutation of size n. Let 1 ≤ k ≤ n − 1. Let λ ∈ SL(k, n − k ) (the poset
+defined in Definition 19) such that λ 6= Sk Ln−k . Let λ0 be the word obtained from λ by replacing each
+consecutive occurrence of LS by SL. Then we have: If shadow(σ ) 4 λ then shadow( T (σ )) 4 λ0 .
+
+Proof: The word shadow( T (σ)) is obtained from shadow(σ ) by flips of the form La Sb → Sb La
+(for some a, b ≥ 0), induced by flips in σ. It follows that for each j (1 ≤ j ≤ k) we have
+s j (shadow( T (σ ))) ≤ s j (shadow(σ)). Moreover, if s j (shadow(σ )) = α and the (α − 1)st position in
+shadow(σ )) is L, then we have s j (shadow( T (σ ))) < s j (shadow(σ)). As for λ: since all the flips
+in λ are of the form LS → SL, we always have s j (λ0 ) = s j (λ) or s j (λ0 ) = s j (λ) − 1.
+     In terms of k-wiring diagram, this means that S-paths are monotone in the sense that, as we
+scan them from the top to the bottom, they move weakly to the left at each step. Moreover, if
+there is L before S, then the path that goes through this S will move strongly to the left at the
+next step.
+     We now prove the claim. Assume for contradiction that we have shadow(σ ) 4 λ but
+shadow( T (σ )) 64 λ0 . Due to the properties just seen, this can only happen if for some j,
+we have (α :=) s j (shadow(σ)) = s j (shadow( T (σ ))) = s j (λ) = s j (λ0 ) + 1 (see Figure 14). Since
+s j (λ0 ) = s j (λ) − 1, the (α − 1)st position in λ0 is occupied by L. Since s j (shadow( T (σ ))) =
+s j (shadow(σ )), the (α − 1)st position in shadow(σ ) is occupied by S. This means s j−1 (σ ) = α − 1
+and s j−1 (λ) < α − 1, which contradicts shadow(σ ) 4 λ.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                      29
+                       1                   α           n                        1              α          n
+       shadow(σ)                       S S                                 λ                L S
+
+   shadow(T (σ))                           S                               λ0               S L
+
+        Fig. 14: Illustration to the proof of Proposition 22 (shadow(σ) 4 λ ⇒ shadow( T (σ)) 4 λ).
+
+  The next proposition is a rephrasing of one of the claims in Ungar’s proof.
+Proposition 23. Let π be any permutation of size n, and let 1 ≤ k ≤ n − 1. Let ρ = (n − k, k) as
+defined in Section 4.1. Then, for each m (1 ≤ m ≤ n − 1), we have for k-shadows shadow( T m (π )) 4
+shadow( T m (ρ)).
+
+Proof: First, we have shadow(π ) 4 shadow(ρ) because in shadow(ρ) the k letters S occupy the
+last k positions.
+  Then, the claim follows from Proposition 22 by induction since for 0 ≤ m ≤ n − 2 we have
+shadow( T m+1 (ρ)) = (shadow( T m (ρ)))0 .
+  In terms of k-wiring diagrams, Proposition 23 says that the paths in the k-wiring diagram of ρ
+majorize the paths in the k-wiring diagram of π in the following sense: for each j (1 ≤ j ≤ k),
+the path S j (π ) is weakly to the left of the path S j (ρ); and similarly, for each j (1 ≤ j ≤ n − k),
+the path L j (π ) is weakly to the right of the path L j (ρ). For illustration, see Figure 15 in which S-
+and L-paths of π (thin red and blue lines) are shown together with S- and L-paths of ρ (thick
+pink and light-blue lines).
+
+ shadow(T m (π)), 0 ≤ m ≤ n − 1            shadow(T m (ρ)), 0 ≤ m ≤ n − 1
+
+   8   6   4   7   5       2   3   1   4       6   7   8   1   2   3   4   5
+   4   6   8   2   5       7   1   3   4       6   7   1   8   2   3   4   5
+   4   6   2   8   5       1   7   3   4       6   1   7   2   8   3   4   5
+   4   2   6   1   5       8   3   7   4       1   6   2   7   3   8   4   5
+   2   4   1   6   5       3   8   7   4       1   2   6   3   7   4   8   5
+   2   1   4   3   5       6   7   8   4       1   2   3   6   4   7   5   8
+   1   2   3   4   5       6   7   8   4       1   2   3   4   6   5   7   8
+   1   2   3   4   5       6   7   8   4       1   2   3   4   5   6   7   8
+
+Fig. 15: Illustration to Proposition 23. Left part: For each m ≥ 0, shadow( T m (π )) 4 shadow( T m (ρ)). Right
+part: The wiring diagrams for π and for ρ shown superimposed. For each j, the red path S j (π ) is weakly
+to the left of the pink path S j (ρ); for each j, the blue path L j (π ) is weakly to the right of the light-blue
+path L j (ρ). The triangular areas (indicated by a yellow colour) only contain S for the left triangle and L for
+the right triangle.
+
+  We now can complete the proof of Theorem 21 on the bandwidth of permutations in Im( T m ).
+30                                                Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+Proof of Theorem 21: We notice that, along the last (vertical) segment of any path of ρ, the
+corresponding path of π coincides with it (these areas are marked by yellow triangles in
+Figure 15). More formally, it follows from Proposition 23 and from Equations (26) (which
+describe the shape of the S- and L-paths of ρ) that
+
+                   for each j (1 ≤ j ≤ k) : m ≥ n − k − 1 + j ⇒ s j (shadow( T m (π ))) = j,          (28)
+                                                                          m
+          for each j (1 ≤ j ≤ n − k) : m ≥ k − 1 + j ⇒ ` j (shadow( T (π ))) = n + 1 − j.             (29)
+
+  Now, we fix m (0 ≤ m ≤ n − 1), and let τ = T m (π ) = b1 b2 . . . bn . Since s j (shadow(τ )) = α for
+some j implies bα ≤ k, and since ` j (shadow(τ )) = β for some j implies bβ ≥ k + 1, equations (28)
+and (29) translate to
+
+                                 1 ≤ i ≤ k + m + 1 − n ⇒ bi ≤ k,                                      (30)
+                                 k + n − m ≤ i ≤ n ⇒ bi ≥ k + 1.                                      (31)
+
+   Now we make the final step. Let 1 ≤ i ≤ n. Equations (30) and (31) hold for any k,
+1 ≤ k ≤ n − 1, and we choose two specific values. First, we take k = i + n − 1 − m. Now we
+have i ≤ k + m + 1 − n, and therefore (30) implies bi ≤ k = i + (n − 1 − m). Second, we take k =
+i − n + m. Now we have i ≥ k + n − m, and therefore (31) implies bi ≥ k + 1 = i − (n − 1 − m).
+Thus, we have |bi − i | ≤ n − 1 − m for each i (1 ≤ i ≤ n), that is, d(τ ) ≤ n − 1 − m, as
+claimed.
+  In terms of permutation diagrams, Equations (30) and (31) (for fixed m) mean that for each k
+some rectangular areas in the diagram of τ ∈ Im( T m ) are forbidden. Taking the union of these
+areas for 1 ≤ k ≤ n − 1, we obtain forbidden corners, which yield the bound on the bandwidth.
+See Figure 16 for illustration (the forbidden areas are indicated by grey colour).
+
+
+
+
+        k=1               k=2                k=3               k=4
+
+       Fig. 16: Illustration to proof of Theorem 21 for n = 5: forbidden areas for fixed m (m = 3).
+
+  In Figure 17 we show the forbidden corners for n = 5 and 0 ≤ m ≤ 4.
+  Now, if we compare this to Figure 3 (where grey areas are precisely those forbidden by
+Theorem 21), we see many other areas without points, and it is natural to ask whether there are
+some larger forbidden areas. In fact, contrary to what Figure 3 could suggest, the forbidden
+areas characterized in Theorem 21 are maximal in the sense that for each position outside the
+grey corners we can find a permutation that contains a point at this position. In fact, all the
+positions not forbidden by Theorem 21 are “covered” by skew-layered permutations with ≤ 2
+runs, as our next result shows.
+Flip-sort and combinatorial aspects of pop-stack sorting                                              31
+
+
+
+
+      m=0                   m=1                   m=2                     m=3               m=4
+        Fig. 17: Illustration to proof of Theorem 21 for n = 5: forbidden areas for 0 ≤ m ≤ n − 1.
+
+Proposition 24. Let n be fixed, and let 0 ≤ m ≤ n − 1. For 1 ≤ i ≤ n, let max{0, i − (n − 1 − m)} ≤
+j ≤ min{n, i + (n − 1 − m)}. Then there exists π, a skew-layered permutation with ≤ 2 runs, such
+that for τ = T m (π ) = b1 b2 . . . bn we have bi = j.
+
+Proof: Assume j < i. Let π = (k, n − k ) where k will be determined below. From (26) and
+discussion thereafter, we know: if m ≤ j − 1 then j = bi for i = k + j, if j − 1 ≤ m ≤ k − 1 + j
+then j = bi for i = k + j − (m − ( j − 1)), and if k − 1 + j ≤ m ≤ n − 1 then j = b j . Solving the first
+two expressions for k we obtain that we need to set k = i − j if m ≤ j − 1, and k = i − 2j + m + 1
+if j ≤ m ≤ k − 1 + j.
+   The case j > i is similar, and for j = i we can take π = id which will do for any m.
+
+                                            1               k                           n
+                       π=     (k, n − k)                    n 1                    j
+                                                                                   j
+                                                                                   j
+                     T m (π), m < j − 1                                            j
+                                                                                   j
+                     T m (π), m = j − 1                                            j
+                                                                              j
+                                                                          j
+                                                                      j
+                     T m (π), m > j − 1                           j
+
+
+
+                                                 k + j − (m − (j − 1))            k+j
+                            Fig. 18: Illustration to the proof of Proposition 24.
+
+   Finally, we remark that, since Theorem 21 establishes that the bandwidth of allowed positions
+for permutations in Im( T m ) decreases with m, one can be tempted to conjecture that for π 6= id
+we always have d( T (π )) < d(π ). Such a claim would, of course, imply Theorem 21! However,
+such a conjecture is wrong: the smallest counter-example is π = 3412, and it is easy to see that
+any skew-layered permutation with at least two blocks, such that the first and last blocks are of
+size ≥ 2, is a counter-example.
+32                                                           Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+4.3      The penultimate step of flip-sort: the theorem about Im( T n−2 ).
+In view of Ungar’s result, we have Im( T n−1 ) = {id}. The main result of this section is a
+structural characterization of Im( T n−2 ). According to Theorem 21, τ ∈ Im( T n−2 ) implies
+d(τ ) ≤ 1. In fact, d(τ ) ≤ 1 is a necessary, but not sufficient, condition for being in Im( T n−2 ).
+(For example, for n = 5, one can see in Figure 2 that the permutation 21354 with d = 1 is not in
+Im( T 3 ).) However, permutations that satisfy d(τ ) ≤ 1 with will play an important role in our
+next results, and so we introduce a notation for them, and list some of their (nearly obvious)
+properties.
+Definition 25. A permutation τ is thin if d(τ ) ≤ 1.
+Observation 26.
+  1. A thin permutation is uniquely defined by the sequence of lengths of its runs. The thin permutation
+     with runs of lengths r1 , r2 , . . . , rs (left to right) will be denoted by thin(r1 , r2 , . . . , rs ). For example,
+     thin(3, 4, 1) = 124|3568|7. If s ≥ 2, the runs ri with 1 < i < s will be referred to as inner runs.
+     2. A sequence (r1 , r2 , . . . , rs ) of natural numbers is realizable as the sequence of lengths of runs of a
+        thin permutation if and only if ri > 1 for 2 ≤ i ≤ s − 1.
+     3. Any inner run of a thin permutation a1 a2 . . . an 6= id has the form
+
+               [ a` , a`+1 , a`+2 , . . . , am−2 , am−1 , am ] = [` − 1, ` + 1, ` + 2, . . . , m − 2, m − 1, m + 1]
+
+        The first and, respectively, the last run, have the forms
+
+                           [ a1 , a2 , . . . , am−2 , am−1 , am ] = [1, 2, . . . , m − 2, m − 1, m + 1],
+
+                         [ a` , a`+1 , a`+2 , . . . , an−1 , an ] = [` − 1, ` + 1, ` + 2, . . . , , n − 1, n].
+
+     4. A thin permutation is also uniquely defined by the sequence of lengths of its falls, that can only
+        have lengths 1 or 2. Any {1, 2}-sequence is realizable as the sequence of lengths of falls of a thin
+        permutation. It follows that thin permutations are enumerated by Fibonacci numbers.
+  Now we state and prove the characterization of Im( T n−2 ).
+Theorem 27. A permutation τ = b1 b2 . . . bn belongs to Im( T n−2 ) if and only if it is thin and has no
+inner runs of odd size.
+  Accordingly, |Im( T n−2 )| = 2n/2−1 + 2n/2 − 1 for even n, 2(n+1)/2 − 1 for odd n (OEIS A052955)(x) .
+
+Proof: [First part of the proof: τ ∈ Im( T n−2 ) ⇒ τ is thin and with no inner runs of odd size.]
+Let τ = b1 b2 . . . bn ∈ Im( T n−2 ). By Theorem 21 we have d(τ ) ≤ (n − 1) − (n − 2) = 1: thus, τ is
+thin. The second condition will be proved by contradiction. To this end we assume that τ is
+a thin permutation with at least one inner run of odd size, and that we have τ = T n−2 (π ) for
+some permutation π. Specifically, we assume that τ has a run [bk+1 , bk+2 , . . . , b`−1 , b` ] such that
+1 ≤ k, ` ≤ n − 1, ` − k is odd, and ` − k ≥ 3 (because, by Observation 26.2, a thin permutation
+has no inner runs of size 1).
+(x) OEIS stands for the On-Line Encyclopedia of Integer Sequences, accessible at https://oeis.org/.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                  33
+
+ For the proof, we shall exploit shadows and wiring diagrams for both k and `. First, due to
+Observation 26.3, we know the k- and the `-shadows of τ:
+
+                    shadowk (τ ) = Sk−1 LSLn−k−1 ,     shadow` (τ ) = S`−1 LSLn−`−1 .                   (32)
+
+   Now we introduce the (k − `)-wiring diagram of π: the drawing that consists of S-paths from
+the k-wiring diagram of π, and the L-paths from the `-wiring diagram of π. Thus, in the (k − `)-
+wiring diagram we have k (red) S-paths: for 1 ≤ j ≤ k, the jth S-path (denoted by S j ) connects
+the jth from left occurrences of the values from S := {1, 2, . . . , k }; and we have `0 := n − ` (blue)
+L-paths: for 1 ≤ j ≤ `0 the jth L-path (denoted by L j ) connects the jth from right occurrences of
+the values from L := {` + 1, ` + 2, . . . , n}. The remaining values from {k + 1, k + 2, . . . , `} are
+not connected by paths in such a diagram.
+   Additionally, we consider the pink paths of ρk = (n − k, k ) and the light-blue paths of
+ρ` = (n − `, `). By Proposition 23, these paths majorize the corresponding paths of π: For
+1 ≤ j ≤ k, the path S j (π ) is weakly to the left from the S j (ρk ), and for 1 ≤ j ≤ `0 , the path L j (π )
+is weakly to the right from the L j (ρ` ).
+   At this point we notice that, since ` − k is odd, all the pink paths S j (ρk ) and the light-blue
+paths L j (ρ` ) cross each other at grid points of the diagram, see Figure 19. (Compare with
+Figure 12, where pink and light-blue paths cross each other between the rows of the diagram!)
+Denote by Pi,j (1 ≤ i ≤ k, 1 ≤ j ≤ `0 ) the crossing point of the path Si (ρk ) and the path L j (ρ` ):
+we refer to these points as conflict points.
+
+                               L`0 (ρ` ) L1 (ρ` )           S1 (ρk )   Sk (ρk )
+
+
+
+
+Fig. 19: Illustration to the proof of Theorem 27: pink paths of ρk =       (n − k, k) and blue-light paths of
+ρ` = (n − `, `). The conflict points are drawn as yellow discs.
+
+  Since S ∩ L = ∅, it is impossible that both Si (π ) and L j (π ) pass through Pi,j . This means
+that in the row of Pi,j , at least one of the paths Si (π ) and L j (π ) is strongly majorized by the
+corresponding pink or, respectively, light-blue path.
+34                                                    Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+   For 1 ≤ i ≤ k, 1 ≤ j ≤ `0 we say that the pair (i, j) is regular if some point of Si (π ) lies on
+Si (ρk ) after Pi,j and before Si (π ) and Si (ρk ) reach their final position i, and some point of L j (π )
+lies on L j (ρ` ) after Pi,j and before L j (π ) and L j (ρ` ) reach their final position n + 1 − j. Next we
+prove two claims:
+     • Claim 1: The pair (k, `0 ) is regular.
+       Indeed, we have bk+1 = k and b` = ` + 1; this means that, in the row which corresponds
+       to τ = T n−2 (π ), Sk (π ) coincides with Sk (ρk ), and L`0 (π ) coincides with L`0 (ρ` ). In both
+       cases, the paths are after the conflict points and before their final columns.
+     • Claim 2: If a pair (i, j) is regular, then at least one of the pairs (i − 1, j), (i, j − 1) is regular.
+       At least one of the paths Si (π ), L j (π ) does not contain the point Pij . Assume without loss
+       of generality that Si (π ) does not contain the point Pij . That is, in the row of Pij , Si (π ) is
+       strictly to the left from the pink path Si (ρk ). Since Si (π ) has later a point that lies on Si (ρk )
+       (after Pi,j , but before both paths reach their final position i), it makes a vertical step there,
+       from a point α to a point β (refer to Figure 20). But this means that γ, the left neighbour of
+       α, is also from S. Therefore γ is a point of Si−1 (π ) on Si−1 (ρk ), after Pi−1,j but before both
+       paths reach their final position i − 1. This means that the pair (i − 1, j) is regular. (If we
+       assume above that L j (π ) does not contain the point Pij , we obtain that (i, j − 1) is regular.)
+
+                                   Lj (ρ` )                 Si−1 (ρk )   Si (ρk )
+
+                                                                                       Pi−1,j
+                                                                                       Pi,j
+
+                   Si (π)
+
+                                     γ        α
+                                              β
+
+
+
+
+Fig. 20: Illustration to the proof of the claim: if (i, j) is regular, then (i − 1, j) is regular or (i, j − 1) is
+regular.
+
+  Starting with Claim 1 and applying Claim 2 repeatedly, we obtain that the pair (1, 1) is regular.
+However, the proof of Claim 2 applies to (1, 1) as well. Since (1, 1) is the highest conflict point,
+we get a contradiction.
+  It is also possible to reverse this proof and to explain it “from the top to the bottom”. Then it
+essentially says that at least one of the sets, S and L, arrives at its final position sooner than in
+n − 1 iterations. However in τ these sets are not at their final position (as witnessed by (32)),
+and this is a contradiction.
+Flip-sort and combinatorial aspects of pop-stack sorting                                                                       35
+
+    [Second part of the proof: τ is thin and with no inner runs of odd size ⇒ τ ∈ Im( T n−2 ).]
+For each τ which is a thin permutation without odd inner runs, we will construct π such that
+T n−2 (π ) = τ. If τ = id we can take π = id, so we assume from now on that τ 6= id. Let
+τ = thin(r1 , r2 , . . . , rs−1 , rs ) so that s > 1 and the numbers r2 , . . . , rs−1 are even. We define π to
+be the skew-layered permutation (rs , rs−1 , . . . , r2 , r1 ).
+   We claim that for this π we have T n−2 (π ) = τ. To see that, we analyse the wiring diagram of
+π, T (π ), T 2 (π ), . . .; an example is illustrated in Figure 21. Notice that this is the usual wiring
+diagram, in which paths connect fixed values. For the sake of visualization, each inner run of π
+is partitioned into two blocks of equal size, the left one and the right one. For the values from
+the left blocks of inner runs, and for all the values from the last run, we colour the paths in
+green. For the values from the right blocks of inner runs, and for all the values from the first
+run, we colour the paths in orange. Then, the paths have very clear description. Specifically,
+for an inner run of length r, the jth from left value (1 ≤ j ≤ r/2) generates the green path that
+consists of 5 segments (some of them can be empty): (1) a vertical segment of length ( j − 1),
+(2) a slanted segment of slope 1 until the path reaches the position j, (3) a vertical segment of
+length r − 2j + 1, (4) a slanted segment of slope −1 until the path reaches its final position, (5)
+a vertical segment. The green paths of the last run do not have (4) and (5); orange paths are
+described similarly. The whole diagram is symmetric, and therefore the sequence of lengths of
+runs of τ is the reversal of the sequence of lengths of runs of π.
+
+                                              π 10 6 7 8 9 4 5 1 2 3
+
+
+
+
+                               τ = T n−2 (π)          1 2 4 3 6 5 7 8 10 9
+
+
+  Fig. 21: Illustration to the proof of T n−2 ( (rs , . . . , r1 )) = thin(r1 , . . . , rs ) (where r2 , . . . , rs−1 are even).
+
+  Our proof shows that in order to construct a permutation in Im( T n−2 ), one only has to choose
+positions (of the same parity) for the gaps between runs. This yields the enumerative formula,
+as stated in the claim.
+  Remark. In general, there are several permutations π that satisfy T n−2 (π ) = τ for given
+τ ∈ Im( T n−2 ). Characterizing all such π is a challenging problem.
+36                                                  Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+4.4      Skew-layered permutations: a family of worst cases
+By Theorem 27, each skew-layered permutation of size n without odd inner runs has the
+(maximum possible for permutations of size n) cost n − 1. Characterizing all permutations with
+that cost is a challenging open problem. In this section, we present a necessary condition, and
+then we conclude with a conjecture concerning the cost of any skew-layered permutation.
+Proposition 28. Let π be a permutation of size n with cost(π ) = n − 1. Let τ = b1 b2 . . . bn =
+T n −2 ( π ).
+     1. There exists k, 1 ≤ k ≤ n − 1, such that shadowk (τ ) 6= Sk Ln−k .
+     2. For each such k, we have shadowk (π ) = Ln−k Sk . Consequently, π can be written as a skew sum
+        σ σ0 , where σ, σ0 are permutations of sizes n − k, k.
+
+Proof:
+     1. Since cost(π ) = n − 1, we have τ 6= id. For each i with bi > i we can take k = bi − 1, and
+        for each i with bi < i we can take k = bi .
+     2. In order to find a contradiction, assume that shadowk (π ) 6= Ln−k Sk . Since the only element
+        of the set of words SL(n − k, k) covered by Ln−k Sk is shadowk ( T (ρ)) = Ln−k−1 SLSk−1 , we
+        necessarily have shadowk (π ) 4 shadowk ( T (ρ)). Then, by Proposition 22 and by induction,
+        we have shadowk ( T n−2 (π )) 4 shadowk ( T n−1 (ρ)), that is, shadowk (τ ) = Sk Ln−k , which is a
+        contradiction.
+
+  As for skew-layered permutations, we expect that their cost is always high (excluding the
+cases of id and −id); however, this cost is not always n − 1. Our computer experiments then
+suggest the following classification.
+Conjecture 29. Let π be a skew-layered permutation of size n such that π is neither id nor −id.
+     • For even n, one has cost(π ) = n − 1.
+
+     • For odd n, if the (n + 1)/2-st position of π is the central point of a run or of a fall of size ≥ 3,
+       then cost(π ) = n − 2. Otherwise, cost(π ) = n − 1.
+  As a direct corollary of this conjecture, among the 2n−1 skew-layered permutations, there are:
+     • for even n, 2n−1 − 2 skew-layered permutations with cost(π ) = n − 1;
+     • for odd n, (2n−2 − 2)/3 skew-layered permutations with cost(π ) = n − 2,
+     • for odd n, (5 · 2n−2 − 4)/3 skew-layered permutations with cost(π ) = n − 1.
+These are respectively the sequences A000918, A020988, and A080675 from the OEIS.
+Flip-sort and combinatorial aspects of pop-stack sorting                                           37
+
+5    Conclusion
+In this article, we have seen that a simple sorting procedure like flip-sort has many interesting
+combinatorial and algorithmic facets. Our analysis of the best cases and the worst cases of this
+algorithm, our results on the underlying poset, the links with lattice paths, are just some first
+steps towards a more refined understanding of this process.
+   En passant, we listed a few conjectures, which, we hope, could tease the desire of the reader
+to work on this topic. The optimal cost of the computation of pop-stacked permutations is still
+open; other challenges are a finer analysis of the automata which recognize them (when the
+number of runs is fixed), the existence of closed-form formulas, a method to solve puzzling
+functional equations like the one given in Theorem 10.
+   We also believe that several of the notions and structures introduced in this article can also be
+useful for the next natural step: the average-case analysis of flip-sort. Even if this algorithm
+is not, in its naive version, as efficient as quicksort, it is very easy to implement, to parallelize,
+and it is still possible to optimize its implementation (this is a subject per se, like using double
+chained lists to perform the flips efficiently, or using some additional data structures to have a
+parsimonious reading of each iteration, etc). So there is not a “flip-sort” algorithm, but a family
+of flip-sort algorithms, and to finely tune them in order to decide what could be the optimal
+variant should clearly be the subject of future research.
+
+
+Acknowledgements
+This research was supported by the Austrian Science Fund (FWF) in the framework of the
+project Analytic Combinatorics: Digits, Automata and Trees (P 28466). Cyril Banderier thanks the
+Department of Mathematics at the University of Klagenfurt for funding his visit in July 2019.
+Let us end by thanking the referees for their feedback.
+
+
+References
+ [1] Martin Aigner and Günter M. Ziegler. Proofs from THE BOOK. Springer, 2018. Revised and
+     enlarged 6th edition (1st ed: 1998).
+ [2] Michael Albert and Vincent Vatter. How many pop-stacks does it take to sort a permutation?
+     Computer Journal, to appear.
+ [3] Gadi Aleksandrowicz, Andrei Asinowski, and Gill Barequet. Permutations with forbid-
+     den patterns and polyominoes on a twisted cylinder of width 3. Discrete Mathematics,
+     313(10):1078–1086, 2013.
+ [4] Andrei Asinowski, Cyril Banderier, Sara Billey, Benjamin Hackl, and Svante Linusson.
+     Pop-stack sorting and its image: permutations with overlapping runs. Acta Mathematica
+     Universitatis Comenianae. New Series, 88(3):395–402, 2019. Proceedings of the European
+     Conference on Combinatorics, Graph Theory and Applications (EuroComb 2019, Bratislava,
+     26-30 August 2019).
+38                                             Andrei Asinowski, Cyril Banderier, Benjamin Hackl
+
+ [5] Andrei Asinowski, Cyril Banderier, and Benjamin Hackl. On extremal cases of pop-stack
+     sorting. In Proceedings of Permutation Patterns 2019 (Zürich, 17-21 June 2019), 2019.
+
+ [6] Andrei Asinowski and Toufik Mansour. Separable d-permutations and guillotine partitions.
+     Annals of Combinatorics, 14(1):17–43, 2010. [doi].
+ [7] Michael D. Atkinson and Jörg-Rüdiger Sack. Pop-stacks in parallel. Information Processing
+     Letters, 70(2):63–67, 1999. [doi].
+
+ [8] David Avis and Monroe Newborn. On pop-stacks in series. Utilitas Mathematica, 19:129–140,
+     1981.
+ [9] Cyril Banderier, Mireille Bousquet-Mélou, Alain Denise, Philippe Flajolet, Danièle Gardy,
+     and Dominique Gouyou-Beauchamps. Generating functions for generating trees. Discrete
+     Mathematics, 246(1-3):29–55, 2002.
+
+[10] Cyril Banderier and Philippe Flajolet. Basic analytic combinatorics of directed lattice paths.
+     Theoretical Computer Science, 281(1-2):37–80, 2002.
+[11] David Bevan. Permutation patterns: basic definitions and notation. arXiv, 2015.
+[12] Miklós Bóna. Combinatorics of Permutations. CRC Press, 2012. Second edition (1st ed: 2004).
+
+[13] Janusz A. Brzozowski. Canonical regular expressions and minimal state graphs for definite
+     events. In Proceedings of the Symposium on Mathematical Theory of Automata (New York, 24-26
+     April 1962), pages 529–561. Polytechnic Press, Brooklyn, 1963.
+[14] Anders Claesson and Bjarki Ágúst Guðmundsson. Enumerating permutations sortable by
+     k passes through a pop-stack. Advances in Applied Mathematics, 108:79–96, 2019. [doi].
+
+[15] Anders Claesson, Bjarki Ágúst Guðmundsson, and Jay Pantone. Counting pop-stacked
+     permutations in polynomial time. Experimental Mathematics, To appear.
+[16] Colin Defant. Counting 3-stack-sortable permutations. Journal of Combinatorial Theory,
+     Series A, 172:105–209, 2020. [doi].
+
+[17] Serge Dulucq, Sophie Gire, and Olivier Guibert. A combinatorial proof of J. West’s
+     conjecture. Discrete Mathematics, 187(1-3):71–96, 1998.
+[18] Philippe Flajolet and Robert Sedgewick. Analytic Combinatorics. Cambridge University
+     Press, 2009.
+[19] Dominique Foata and Marcel-Paul Schützenberger. Théorie géométrique des polynômes
+     eulériens. Lecture Notes in Mathematics, Vol. 138. Springer, 1970.
+[20] William H. Gates and Christos H. Papadimitriou. Bounds for sorting by prefix reversal.
+     Discrete Mathematics, 27(1):47–57, 1979.
+Flip-sort and combinatorial aspects of pop-stack sorting                                          39
+
+[21] Jacob E. Goodman and Richard Pollack. A combinatorial perspective on some problems in
+     geometry. Congressus Numerantium, 32:383–394, 1981. Proceedings of the 12th Southeastern
+     Conference on Combinatorics, Graph Theory, and Computing (Baton Rouge, 2–5 March
+     1981).
+[22] Ronald L. Graham, Donald E. Knuth, and Oren Patashnik. Concrete Mathematics. A Founda-
+     tion for Computer Science. Addison-Wesley, 1994. Second edition (1st ed: 1988).
+[23] Donald E. Knuth. The Art of Computer Programming. Vol. 1: Fundamental Algorithms. Addison-
+     Wesley, 1998. Third edition (1st ed: 1968).
+[24] Donald E. Knuth. The Art of Computer Programming. Vol. 3: Sorting and Searching. Addison-
+     Wesley, 1998. Second edition (1st ed: 1973).
+[25] Adam Marcus and Gábor Tardos. Excluded permutation matrices and the Stanley–Wilf
+     conjecture. Journal of Combinatorial Theory, Series A, 107(1):153–160, 2004.
+[26] T. Kyle Petersen. Eulerian numbers. Birkhäuser/Springer, 2015.
+[27] Marko Petkovšek, Herbert S. Wilf, and Doron Zeilberger. A = B. A. K. Peters, 1996.
+[28] Lara Pudwell and Rebecca Smith. Two-stack-sorting with pop stacks. Australasian Journal
+     of Combinatorics, 74(1):179–195, 2019.
+[29] Robert Sedgewick. Algorithms in C. Parts 1-4: Fundamentals, data structures, sorting, searching.
+     Addison-Wesley, 3rd edition, 1997.
+[30] Yidong Sun. The statistic “number of udu’s” in Dyck paths. Discrete Mathematics, 287(1-
+     3):177–186, 2004.
+
+[31] The Sage Developers. SageMath, the Sage Mathematics Software System (Version 9.2), 2020.
+     http://www.sagemath.org.
+[32] Peter Ungar. 2N noncollinear points determine at least 2N directions. Journal of Combinato-
+     rial Theory. Series A, 33(3):343–347, 1982.
+
+[33] Julian West. Sorting twice through a stack. Theoretical Computer Science, 117(1-2):303–313,
+     1993. Conference on Formal Power Series and Algebraic Combinatorics (Bordeaux, 1991).
+

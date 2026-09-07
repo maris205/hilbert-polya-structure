@@ -1,0 +1,53 @@
+{
+  "actual_command": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C TZ=UTC /root/miniconda3/bin/python3.12 -I -S -B - <<'PY'\nfrom pathlib import Path\nimport hashlib,json,re\nroot=Path('/root/autodl-tmp/symbolic_dynamics');batch=root/'docs/papers204_208_sequence';base=batch/'qa/p208_terminal_artifact';paper=root/'papers/208-original-snapshot-triangulation-sweeps';work=base/'lifecycle_01'\ndef sha(p):\n with Path(p).open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()\ndef j(p):return json.loads(Path(p).read_text())\ndef info(p):return {'sha256':sha(p),'bytes':Path(p).stat().st_size}\ndef pin(p,v):assert info(p)==v,(str(p),v,info(p))\ndef rows(p):\n result={}\n for line in Path(p).read_text().splitlines():\n  h,n=line.split('  ',1);q=Path(n);assert re.fullmatch('[0-9a-f]{64}',h) and not q.is_absolute() and '..' not in q.parts and n not in result;result[n]=h\n return result\ndef manifest(b,count=None,name='SHA256SUMS',complete=True):\n r=rows(b/name);assert name not in r\n if count is not None:assert len(r)==count\n if complete:assert set(r)=={str(p.relative_to(b)) for p in b.rglob('*') if p.is_file() and p!=b/name}\n for n,h in r.items():assert not (b/n).is_symlink() and sha(b/n)==h,(str(b),n)\n return r\nassert sha(base/'SHA256SUMS')=='32e4a638ee67d7f90c5c8d49956d38fc931ae60f4611ea4a2b9ba55ad8d5887d';outer=manifest(base,74)\nassert sha(work/'INITIAL_PACKAGE_SHA256SUMS')=='e3b64033ca95f890e87f1ca7fa669077212fd924277febfa9bc97d71cd74c1b1'\ninitial=rows(work/'INITIAL_PACKAGE_SHA256SUMS');assert len(initial)==54\nfor n,h in initial.items():assert sha(base/n)==h\nassert (work/'INITIAL_REPORT.md').read_bytes()==(base/'REPORT.md').read_bytes()\nassert sha(base.parent/'audit_p208.py')=='086170c8a4784ed3dc560a7fc19ff0de0fbfd22f6afc0ea7ec18fd0fa53c36d8'\nassert sha(base/'lifecycle_audit.py')=='c3dcb90a1f2c8dc5bafddca0118226bf2eb36d23cf7f1d6a8c6d04e31e0b0051'\nmanifest(work/'attempt_01',5);c=j(work/'attempt_01/COMMAND.json');attempt=j(work/'attempt_01/ATTEMPT.json')\nassert c['exit_code']==0 and c['source_unchanged'] and c['unused_cache_absent'] and c['source_before']==c['source_after']\npin(base/'lifecycle_audit.py',c['source_before']);pin(work/'attempt_01/executed_source_snapshot.py',c['source_before'])\nfor stream in ['stdout','stderr']:pin(work/('attempt_01/audit.'+stream),c[stream])\nassert c['stdout']=={'bytes':23456613,'sha256':'cd975a507d758af1e166a57f50060e62aea3488fe89d94abe5ae45b8d8bad67d'} and c['stderr']['bytes']==0\nassert c['argv']==attempt['argv'] and c['cwd']==str(root)==attempt['cwd'] and c['argv'][1:5]==['-I','-S','-B','-X']\nassert c['environment']==attempt['environment']=={'PATH':'/usr/bin:/bin','LANG':'C','LC_ALL':'C','TZ':'UTC'} and not (work/'attempt_01/unused_pycache').exists()\nr=j(work/'attempt_01/audit.stdout');original=j(base/'initial_05/audit.stdout')\nassert r['status']=='PASS_P208_LIFECYCLE_ONLY_FOLLOWUP' and r['checks']==1697335 and r['all_current_read_input_count']==115403\nassert original['status']=='PASS_P208_TERMINAL_ARTIFACT_GATE' and original['checks']==2232943 and original['all_consumed_input_count']==115334\naliases={str(paper/'PAPER_STATUS.md'):base/'lifecycle_before/PAPER_STATUS.md',str(paper/'SHA256SUMS'):base/'lifecycle_before/PAPER_SHA256SUMS'}\nassert set(aliases)==set(r['exact_aliases'])\nfor n,p in aliases.items():assert r['exact_aliases'][n]['preserved_path']==str(p) and r['exact_aliases'][n]['old_sha256']==original['all_consumed_inputs_rechecked'][n]['sha256']\nfor twice in range(2):\n for n,v in original['all_consumed_inputs_rechecked'].items():pin(aliases.get(n,Path(n)),v)\n for n,v in r['all_current_read_inputs_rechecked'].items():pin(n,v)\n for n,p in original['host_path_resolutions_rechecked'].items():assert str(Path(n).resolve(strict=True))==p,n\nold=rows(base/'lifecycle_before/PAPER_SHA256SUMS');current=manifest(paper,2178);assert set(old)==set(current) and [n for n in old if old[n]!=current[n]]==['PAPER_STATUS.md']\nassert (paper/'SHA256SUMS').read_bytes()==(base/'lifecycle_before/PAPER_SHA256SUMS').read_bytes().replace((old['PAPER_STATUS.md']+'  PAPER_STATUS.md\\n').encode(),(current['PAPER_STATUS.md']+'  PAPER_STATUS.md\\n').encode())\nfor d in original['complete_manifests_validated']:\n b=root/d['base'];name=d['name']\n if b==paper and name=='SHA256SUMS':continue\n assert sha(b/name)==d['sha256'];manifest(b,d['entries'],name,d['complete_nonself'])\nfor d in original['all_local_links_checked']:\n p=Path(d['resolved_target']);assert (p if p.is_absolute() else root/p).exists()\nfor d in r['new_links_checked']:assert Path(d['resolved']).exists()\nfor n,v in r['new_document_pins'].items():\n wanted={k:v[k] for k in ['bytes','sha256']};pin(n,wanted);pin(base/v['snapshot'],wanted)\nfor label in ['before','after']:\n obs=r['runtime_'+label];assert obs['environment']==c['environment'] and 'optimize=0' in obs['flags'] and 'isolated=1' in obs['flags'] and 'no_site=1' in obs['flags'] and 'dont_write_bytecode=1' in obs['flags'] and not Path(obs['pycache_prefix']).exists()\n for d in obs['modules'].values():pin(d['path'],{k:d[k] for k in ['sha256','bytes']})\n for n,v in obs['mapped_files'].items():pin(n,v)\nfinal=j(work/'FINAL_SEAL_RECEIPT.json');assert final['payload_count']==74 and final['followup_checks']==r['checks'];pin(work/'attempt_01/COMMAND.json',final['followup_command']);pin(work/'attempt_01/audit.stdout',final['followup_stdout']);pin(base/'LIFECYCLE_REPORT.md',final['followup_report']);pin(base/'lifecycle_audit.py',final['followup_source'])\nassert outer==manifest(base,74)\ncentral={str(p):{'present_in_original_ledger':str(p) in original['all_consumed_inputs_rechecked'],'present_in_lifecycle_ledger':str(p) in r['all_current_read_inputs_rechecked'],**info(p)} for p in [root/'SYMBOLIC_DYNAMICS_STATE.md',batch/'PIPELINE_STATE.md',batch/'FINAL_THEOREM_CONTRACTS.md',batch/'GIT_SYNC_RECEIPT.md']}\nprint(json.dumps({'status':'ROOT_P208_LIFECYCLE_FINAL_ORIGINAL_INSPECTION_PASS','final_package_payloads':74,'final_seal_sha256':sha(base/'SHA256SUMS'),'initial_54_payloads_unchanged':True,'original_ledger_checked_twice':115334,'lifecycle_current_ledger_checked_twice':115403,'host_resolutions_checked_twice':len(original['host_path_resolutions_rechecked']),'paper_payloads':len(current),'exact_changed_payloads':['PAPER_STATUS.md'],'actual_checks':r['checks'],'actual_stdout':c['stdout'],'scientific_executions_builds_pageviews_added':0,'new_links':len(r['new_links_checked']),'complete_manifests_rechecked':len(original['complete_manifests_validated']),'future_central_lifecycle_inputs':central,'scope':'Read-only original closure. Original science/build/views and accepted reviews remain unchanged. OWNER_AMBER / HOLD_EXTERNAL.'},sort_keys=True,indent=2))\nPY",
+  "actual_exit_code": 0,
+  "result": {
+    "actual_checks": 1697335,
+    "actual_stdout": {
+      "bytes": 23456613,
+      "sha256": "cd975a507d758af1e166a57f50060e62aea3488fe89d94abe5ae45b8d8bad67d"
+    },
+    "complete_manifests_rechecked": 11,
+    "exact_changed_payloads": [
+      "PAPER_STATUS.md"
+    ],
+    "final_package_payloads": 74,
+    "final_seal_sha256": "32e4a638ee67d7f90c5c8d49956d38fc931ae60f4611ea4a2b9ba55ad8d5887d",
+    "future_central_lifecycle_inputs": {
+      "/root/autodl-tmp/symbolic_dynamics/SYMBOLIC_DYNAMICS_STATE.md": {
+        "bytes": 12633,
+        "present_in_lifecycle_ledger": false,
+        "present_in_original_ledger": false,
+        "sha256": "c55e011282df813941aab89aa6cafab198b0adf458ad033d0ef5b6186f0a8883"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md": {
+        "bytes": 17599,
+        "present_in_lifecycle_ledger": true,
+        "present_in_original_ledger": true,
+        "sha256": "baa278de72e8d82075c094ec05e95118c3794057cbb70430a6c7f363b621059c"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/GIT_SYNC_RECEIPT.md": {
+        "bytes": 24303,
+        "present_in_lifecycle_ledger": false,
+        "present_in_original_ledger": false,
+        "sha256": "af66a3d606dd38fc9a2b399daba3fd3785e00ae38260a43f8748645611d3da6d"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/PIPELINE_STATE.md": {
+        "bytes": 47725,
+        "present_in_lifecycle_ledger": false,
+        "present_in_original_ledger": false,
+        "sha256": "5a0c595b8a404b418e97374bb0fc0c11435976ef68ed56f07cb48a852d50f269"
+      }
+    },
+    "host_resolutions_checked_twice": 108534,
+    "initial_54_payloads_unchanged": true,
+    "lifecycle_current_ledger_checked_twice": 115403,
+    "new_links": 12,
+    "original_ledger_checked_twice": 115334,
+    "paper_payloads": 2178,
+    "scientific_executions_builds_pageviews_added": 0,
+    "scope": "Read-only original closure. Original science/build/views and accepted reviews remain unchanged. OWNER_AMBER / HOLD_EXTERNAL.",
+    "status": "ROOT_P208_LIFECYCLE_FINAL_ORIGINAL_INSPECTION_PASS"
+  },
+  "scope": "Read-only original lifecycle evidence inspection; not a fresh mathematical/build/view execution."
+}

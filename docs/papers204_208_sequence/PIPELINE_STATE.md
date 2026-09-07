@@ -1,7 +1,7 @@
 # Batch after P203 — recovery state
 
 Started 2026-09-05 UTC on the user's “确认，下一轮”, reaffirmed by “继续”.
-Status: **P205_P207_COMPLETE / P208_AB_ACCEPTED_ROUND2_FROZEN / TWO_SEATS_OPEN / HOLD_EXTERNAL**.
+Status: **P205_P207_P208_COMPLETE / P209_ADMITTED_WRITING / ONE_SEAT_OPEN / HOLD_EXTERNAL**.
 The folder name reserves a five-seat working label, not five accepted paper IDs.
 
 ## Scope and next obligation
@@ -23,19 +23,28 @@ root replay admitted P207 as one rank-family representative. P207 has now
 also passed its two accepted manuscript rounds, terminal builds/views and
 actual artifact gate. OFS then passed its narrow nonauthor candidate gate,
 root's complete original inspection and fresh replay pair, and is admitted
-as P208. Three papers are retained, two complete and two seats unfilled.
-Next number P209.
+as P208. P208 has now also completed both accepted manuscript rounds,
+physical freezes, terminal builds/views and the actual full artifact plus
+lifecycle follow-up gates. FTH then passed its nonauthor candidate gate
+and root's complete proof/source/original inspection and actual strict
+replay pair; it is admitted as P209 under the exact three-theorem ceiling.
+Four papers are retained, three complete and one seat unfilled.
+Next number P210.
 P205 manuscript A's exact no-change delta is accepted and Round1 is frozen;
 its B actual no-change delta is now accepted with zero findings. Round2,
 two terminal cold builds, all three actual final-page views and its
 paper-level terminal artifact gate are complete. P206's four-page Round0
 and adverse A remain preserved; no accepted A delta or later round exists.
-P205 and P207 are internally complete; P208 has accepted nonauthor A's
+P205, P207 and P208 are internally complete. P208 accepted nonauthor A's
 documentary delta and a physically verified 487-input Round1. Distinct
 nonauthor manuscript B has accepted the exact no-change delta; root checked
 its full final closure and physically froze 487 inputs as Round2. Terminal
-builds and all-seven actual root views have now passed; artifact acceptance
-remains pending.
+builds and all-seven actual root views passed. Root accepted the initial
+2,232,943-check artifact gate and the separate 1,697,335-check status-only
+follow-up after full original closure; 74 final payloads preserve all 54
+initial payloads. See [root final acceptance](qa/P208_LIFECYCLE_ROOT_INSPECTION.md).
+P209's [admission](P209_ROOT_ADMISSION.md) is not a manuscript acceptance;
+its author package and later manuscript/terminal gates remain pending.
 The requested five-paper batch is not complete.
 
 Follow [the project workflow](../research_state/WORKFLOW.md) and
@@ -48,20 +57,23 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | central integration, original checks and scoped Git | P207 complete and actually pushed cb93dcab; P208 admitted after that ref |
+| Words / local maps | root | central integration, original checks and scoped Git | P205/P207/P208 complete; P209 narrowly admitted, one seat open; new milestone sync pending |
 | Combinatorial objects | batch197_fosp_gate | closed scouting/finite_systems_eleventh/; now idle | eleventh root inspection and 32/7 pins complete, no promotion |
 | Algebra / finite geometry | batch197_lzk_gate | sealed scouting/finite_systems_seventeenth/; now idle | root accepted bounded NO_FRESH_SLATE desk, zero scientific executions |
 | Graphs / relations | batch197_fifth_scout | sealed scouting/finite_systems_fourteenth/; now idle | fourteenth root-verified NO_PROMOTION, OFS/P208 proof/code unread and B eligibility preserved |
 | New nonauthor OFS gate | ofs_candidate_gate | sealed scouting/OFS_GATE/; now idle | actual narrow gate plus root fresh closure admitted P208; no manuscript review yet |
 | P208 author | p208_author | sealed author paper set; now idle | draft, author evidence and root adoption complete; physical 487-file Round0, no manuscript acceptance yet |
 | P208 manuscript A | p208_a_reviewer | sealed reviews/p208_a/; now idle | actual documentary delta accepted, root checked all 764 payloads/4,219 referents and froze Round1 |
-| P208 manuscript B | p208_b_reviewer | reviews/p208_b/ only | accepted exact no-change delta; root 3,545/114,998 closure passed, Round2 physically frozen; now separate terminal artifact infrastructure |
+| P208 manuscript B | p208_b_reviewer | sealed reviews/p208_b/ and qa/p208_terminal_artifact/ | accepted exact no-change delta and sealed terminal/lifecycle infrastructure; root final acceptance complete |
 | Sixteenth finite scout | sixteenth_finite_scout | sealed scouting/finite_systems_sixteenth/; now idle | root accepted six NO_PROMOTION, 151 outer pins and original-box sidecar inspected |
 | Eighteenth broad scout | eighteenth_finite_scout | sealed scouting/finite_systems_eighteenth/; now idle | root accepted bounded NO_FRESH_SLATE desk after seven payload/thirteen historical pins; zero scientific executions |
 | Nineteenth finite scout | nineteenth_finite_scout | sealed scouting/finite_systems_nineteenth/ | root original closure 132/15+2 and actual raw pair checks complete; FTH author proof offered to separate gate, MCR/TCR NO_PROMOTION |
 | Twentieth algebra scout | twentieth_algebra_scout | sealed scouting/finite_systems_twentieth/ | root accepted exact three-attempt NO_FRESH_SLATE closure; 12/9/18 pins, zero scientific execution |
-| Independent FTH candidate gate | twentieth_algebra_scout | scouting/FTH_GATE/ only | fresh noncontributor gate assigned after root complete originals; no verdict, number or admission yet |
-| Twenty-first bounded scout | nineteenth_finite_scout | scouting/finite_systems_twenty_first/ only | new disjoint word/resource/incidence lens assigned; no new result or next-round authorization |
+| Independent FTH candidate gate | twentieth_algebra_scout | sealed scouting/FTH_GATE/ and root-pair preparation; now idle | GO_BOUNDED_CONTRACT, full 1,053-payload gate and root actual strict pair/closure admitted P209; not manuscript A/B |
+| Twenty-first bounded scout | nineteenth_finite_scout | sealed scouting/finite_systems_twenty_first/ | root full123/10+10+1 closure and original pair inspection complete; NED partial proof/source gap NO_PROMOTION |
+| Twenty-second bounded scout | nineteenth_finite_scout | sealed scouting/finite_systems_twenty_second/ | root full proof/source/code/479-payload and 16 historical-pin closure accepted NO_PROMOTION; no new math producer |
+| Twenty-third bounded scout | nineteenth_finite_scout | scouting/finite_systems_twenty_third/ only | disjoint final-seat desk assigned; no admission or new batch |
+| P209 author | p208_b_reviewer | papers/209-ordered-fibre-threading/ only | fresh anonymous short-note author package assigned after root admission; P209 author, ineligible to review P209 |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -498,7 +510,14 @@ mathematical producer and does not label the scout runtime superset strict
 terminal replay reuse. MCR/TCR close NO_PROMOTION. FTH alone is offered to
 a new noncontributor gate in FTH_GATE; root/scout are contributors, not
 independent assessors. No sharp entrance-clock theorem, reserve or paper
-number is asserted. A separately bounded twenty-first fresh lens is assigned.
+number is asserted. The twenty-first is now
+[root-closed](scouting/TWENTY_FIRST_ROOT_INSPECTION.md) NO_PROMOTION: one NED
+literal, two desk controls, all123 payloads and10+10+1 historical pins passed.
+Its correct inverse/low-mass permutation proof does not close the dense
+temporal or primary-owner-body gaps. Both original33-box/1,725-state outputs
+and actual root raw comparisons were inspected; the initial180-path scope
+failure is preserved, corrected history has3,544 selected inputs. No strict
+runtime reuse is granted. A separate disjoint twenty-second is assigned.
 
 ## P208 manuscript Round0 milestone
 
@@ -586,6 +605,16 @@ sealed sixteenth, seventeenth and eighteenth negative handoffs; the last two
 are bounded zero-execution desks, not completed six-system pilots.
 
 The newest [private checkpoint](GIT_SYNC_RECEIPT.md) is actual push
+`b8bf6c52f0a1a7c2075e86fd3bd950222acf5be1`: accepted P208 B, full root
+strict/original/delta closure, unchanged 487-input Round2, two terminal
+cold builds and actual seven-page views, plus closed nineteenth/twentieth.
+All 8,914 Git-object referents in thirteen named manifests passed on the
+exact subsequently committed tree; remote ref matched, 0/0 and clean.
+Active FTH gate, twenty-first lane and terminal artifact auditor were
+excluded. This is ARTIFACT_GATE_PENDING archival integrity, not P208 or
+five-paper completion; the later receipt is outside its own named ref.
+
+The preceding [private checkpoint](GIT_SYNC_RECEIPT.md) is actual push
 `8e4e21d0c41da865bd12081879a09fd6eaa70de6`: accepted P208 A, unchanged
 487-input Round1, strict root author/A pairs and final original/delta checks,
 plus closed fourteenth–eighteenth evidence. All 2,537 Git-object referents
@@ -636,7 +665,49 @@ Henon material is preserved. Later working changes are not implicitly
 synchronized by these historical refs.
 WIP archival integrity is not manuscript or batch acceptance.
 
-Next: continue the active candidate/source gates; replace
+## Latest completion and replacement admission — 2026-09-07
+
+P208's [full terminal QA](P208_FINAL_QA.md),
+[initial root artifact acceptance](qa/P208_TERMINAL_ROOT_INSPECTION.md) and
+[final lifecycle acceptance](qa/P208_LIFECYCLE_ROOT_INSPECTION.md) are complete.
+Root checked all final 74 payloads, initial 54 preserved payloads, 115,334
+original and 115,403 lifecycle current input paths twice, 108,534 host
+resolutions twice and all eleven named manifests. The 2,178-payload paper
+changed only its separate status file and one whole-manifest digest.
+Scientific inputs, actual author/A/B replays, accepted reviews, freezes,
+terminal builds and seven actual page views remain unchanged. No third
+manuscript review or fresh math/build/view is inferred from the lifecycle pass.
+
+FTH/P209 is admitted by [root's exact decision](P209_ROOT_ADMISSION.md).
+The nonauthor gate has a complete 1,053-payload seal. Root independently
+ran its unchanged kernel twice at the original n=0..5 cutoff: 147,091
+checks and 3,414 states each, complete raw-canonical equality. The new
+520-payload pair's 5,309 known inputs and all actual commands/configuration/
+observed runtime closures passed. Its three admitted statements are the
+exact labelled recurrent path/cycle carrier and attached-cycle LCM, the
+all-target increasing-path-cover inverse, and the unique 2^(n-1) extremizer.
+No sharp all-size entrance clock is admitted. Root and the original scout
+are proof contributors; the new manuscript writer is also ineligible to
+review P209. The candidate assessor's familiarity remains disclosed.
+
+The [twenty-second root closure](scouting/TWENTY_SECOND_ROOT_INSPECTION.md)
+also passed: complete 479-payload package, 16 historical inputs/copies,
+3,548 discovery pins, all original 38,821 rows and actual raw pair
+comparison. ORR's proved Fibonacci maximum does not fill its missing
+nontrivial temporal axis; HXC's generic edge-count clock lacks an inverse
+residual and direct-owner clearance. Neither is promoted. Author
+runtime/provenance limitations remain; no terminal reuse key is conferred.
+
+The [contract index](FINAL_THEOREM_CONTRACTS.md) now has four retained,
+three complete and one unfilled seat. Its previous P208-audit input bytes
+are physically preserved in an exact historical snapshot before the
+status-only P208 update and separate P209 section addition. Accepted
+audits remain immutable; later readers use the explicit path/hash mapping.
+The latest actual private push is still b8bf6c52 pending the new sync;
+the new P208 completion and P209 admission are not claimed inside that ref.
+
+Next: complete P209's author and two manuscript-review/terminal gates;
+continue final-seat bounded scouting and replace
 failed directions with fresh bounded scouting, then admit only proved,
 nonduplicate conjunctions. No five-paper completion claim is available.
 Routine phase transitions use the standing authorization without another

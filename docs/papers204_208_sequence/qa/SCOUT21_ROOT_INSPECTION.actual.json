@@ -1,0 +1,126 @@
+{
+  "actual_author_runs_inspected": [
+    {
+      "boxes": 33,
+      "checks": 7076,
+      "directory": "execution_01",
+      "history": 10,
+      "inputs": 5,
+      "observed_files": 37,
+      "runtime_superset": 606,
+      "states": 1725
+    },
+    {
+      "boxes": 33,
+      "checks": 7076,
+      "directory": "execution_02",
+      "history": 10,
+      "inputs": 5,
+      "observed_files": 37,
+      "runtime_superset": 606,
+      "states": 1725
+    }
+  ],
+  "additional_exposure_paths_preserved": 180,
+  "fresh_raw_comparisons": [
+    {
+      "argv": [
+        "/usr/bin/cmp",
+        "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_twenty_first/execution_01/producer.stdout",
+        "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_twenty_first/execution_02/producer.stdout"
+      ],
+      "exit_code": 0,
+      "label": "root_raw_pair_1",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/cmp",
+        "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_twenty_first/execution_01/producer.stdout",
+        "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_twenty_first/execution_02/producer.stdout"
+      ],
+      "exit_code": 0,
+      "label": "root_raw_pair_2",
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "historical_manifests": [
+    {
+      "checked": 10,
+      "name": "HISTORICAL_INPUTS.sha256"
+    },
+    {
+      "checked": 10,
+      "name": "HISTORICAL_SUPPLEMENT.sha256"
+    },
+    {
+      "checked": 1,
+      "name": "POSTREAD_INPUTS.sha256"
+    }
+  ],
+  "history_captures": [
+    {
+      "commands": [
+        {
+          "exit": 0,
+          "label": "history_inventory.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "history_relation.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "history_resource.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "history_word.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "pilot.cmp.command.json"
+        }
+      ],
+      "directory": "evidence_capture",
+      "scope_valid": false,
+      "selected_inputs": 4079
+    },
+    {
+      "commands": [
+        {
+          "exit": 0,
+          "label": "history_inventory.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "history_relation.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "history_resource.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "history_word.command.json"
+        },
+        {
+          "exit": 0,
+          "label": "pilot.cmp.command.json"
+        }
+      ],
+      "directory": "evidence_capture_02",
+      "scope_valid": true,
+      "selected_inputs": 3544
+    }
+  ],
+  "manifest_entries": 123,
+  "manifest_sha256": "68f49093a532d4538aa16224b78b43f9809ead8441de3c89c347be647d39731b",
+  "root_new_mathematical_execution": false,
+  "source_body_status": "PRIMARY_CANNINGS_HAIGH_NOT_READ",
+  "status": "ROOT_SCOUT21_ORIGINAL_CLOSURE_PASS_NO_PROMOTION",
+  "actual_root_command": "python3 -I -S -B - <<'PY'\nfrom pathlib import Path\nfrom hashlib import sha256\nimport json, math, subprocess\nroot=Path.cwd()\nbase=root/'docs/papers204_208_sequence/scouting/finite_systems_twenty_first'\nh=lambda p:sha256(Path(p).read_bytes()).hexdigest()\nj=lambda p:json.loads(Path(p).read_bytes())\nseal=h(base/'SHA256SUMS')\nrows=dict(line.split('  ',1)[::-1] for line in (base/'SHA256SUMS').read_text().splitlines())\nassert len(rows)==123 and set(rows)=={p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file() and p!=base/'SHA256SUMS'}\nassert all(not (base/n).is_symlink() and h(base/n)==v for n,v in rows.items())\nhist=[]\nfor name,count in [('HISTORICAL_INPUTS.sha256',10),('HISTORICAL_SUPPLEMENT.sha256',10),('POSTREAD_INPUTS.sha256',1)]:\n r=dict(line.split('  ',1)[::-1] for line in (base/name).read_text().splitlines()); assert len(r)==count\n assert all(h(root/n)==v for n,v in r.items()); hist.append({'name':name,'checked':len(r)})\nruns=[]\nfor name in ('execution_01','execution_02'):\n d=base/name; receipt=j(d/'RECEIPT.json')\n assert receipt['status']=='PASS' and receipt['producer_exit']==0 and not receipt['uncovered']\n assert receipt['before_after_equal'] and receipt['output_bytes']==260304\n for stem,anchor,count in [('source',base,5),('history',root,10),('runtime',Path('/'),606)]:\n  before=j(d/(stem+'.before.json')); after=j(d/(stem+'.after.json')); assert before==after and len(before)==count\n  assert all(h(anchor/n)==v for n,v in before.items())\n  if stem=='source':\n   assert set(before)=={p.name for p in (d/'source_inputs').iterdir() if p.is_file()}\n   assert all(h(d/'source_inputs'/n)==v for n,v in before.items())\n command=j(d/'producer.command.json'); assert command['exit']==0 and command['command'][1:4]==['-I','-S','-B']\n rt=j(d/'runtime.observed.json')\n assert len(rt['paths'])==37 and not rt['uncovered']\n assert rt['runtime']==j(d/'producer.stderr') and 'optimize=0' in rt['runtime']['flags']\n covered={str((d/'source_inputs'/n).resolve()):v for n,v in j(d/'source.before.json').items()}\n covered.update(j(d/'runtime.before.json'))\n assert all(str(Path(p).resolve()) in covered and h(p)==covered[str(Path(p).resolve())] for p in rt['paths'])\n assert not (d/'never_written_cache').exists()\n payload=[json.loads(line) for line in (d/'producer.stdout').read_text().splitlines()]\n assert len(payload)==34 and payload[-1]=={'status':'PASS','boxes':33,'states':1725,'checks':7076}\n expected=[(n,m) for n,cap in ((1,2),(2,5),(3,6),(4,7),(5,8)) for m in range(cap+1)]\n assert [(r['n'],r['mass']) for r in payload[:-1]]==expected\n for row in payload[:-1]:\n  n,m=row['n'],row['mass']; states=row['rows']\n  assert len(states)==row['states']==math.comb(m+n-1,n-1)\n  assert len({tuple(x['state']) for x in states})==len(states)\n  assert all(len(x['state'])==n and sum(x['state'])==m and min(x['state'])>=0 for x in states)\n  assert all(x['actual_fibre']==x['decoded_fibre'] for x in states)\n  assert sum(len(x['actual_fibre']) for x in states)==row['states']\n assert h(d/'producer.stdout')==receipt['raw_stdout_sha256']=='a2301b40c5dccefbad1a628b9e1adefd176bfa5409a7bd7e23dfa26961274bd6'\n runs.append({'directory':name,'boxes':33,'states':1725,'checks':7076,'inputs':5,'history':10,'runtime_superset':606,'observed_files':37})\ncaptures=[]\nfor name,count in [('evidence_capture',4079),('evidence_capture_02',3544)]:\n d=base/name; before=j(d/'history_search.before.json')\n assert before==j(d/'history_search.after.json') and len(before)==count\n # These are contemporaneous selected inputs; no new discovery or absence claim.\n assert all(h(p)==v for p,v in before.items())\n assert set(before)==set(j(d/'history_selected.json'))\n cmp=j(d/'COMPARISON.json'); assert cmp['status']=='PASS' and cmp['runtime_unchanged']\n assert j(d/'comparator.before.json')==j(d/'comparator.after.json')\n assert all(h(p)==v for p,v in j(d/'comparator.before.json').items())\n assert j(d/'rg.before.json')==j(d/'rg.after.json') and all(h(p)==v for p,v in j(d/'rg.before.json').items())\n for row in cmp['comparisons']:\n  assert row['exit']==0 and row['source_before']==row['source_after'] and all(h(p)==v for p,v in row['source_before'].items())\n commands=[]\n for p in sorted(d.glob('*.command.json')):\n  c=j(p); assert c['exit']==0; assert (d/c['stdout']).is_file() and (d/c['stderr']).is_file()\n  commands.append({'label':p.name,'exit':c['exit']})\n captures.append({'directory':name,'selected_inputs':count,'commands':commands,'scope_valid':name.endswith('_02')})\nexp=j(base/'evidence_capture/EXACT_ADDITIONAL_EXPOSURE.json')\nassert exp['excluded_scientific_paths_scanned']==180 and len(exp['exact_paths'])==180 and not exp['corrected_remaining_excluded']\nretrieval=j(base/'public_sources/RETRIEVAL.json')\nfor row in retrieval:\n c=j(base/'public_sources'/(row['tag']+'.command.json')); assert c['exit']==row['exit']\n if 'output' in row: assert h(base/'public_sources'/row['output'])==row['sha256'] and (base/'public_sources'/row['output']).stat().st_size==row['bytes']\nactual=[]\nfor label in ('root_raw_pair_1','root_raw_pair_2'):\n argv=['/usr/bin/cmp',str(base/'execution_01/producer.stdout'),str(base/'execution_02/producer.stdout')]\n c=subprocess.run(argv,capture_output=True); assert c.returncode==0\n actual.append({'label':label,'argv':argv,'exit_code':c.returncode,'stdout':c.stdout.decode(),'stderr':c.stderr.decode()})\nassert h(base/'SHA256SUMS')==seal and all(h(base/n)==v for n,v in rows.items())\nprint(json.dumps({'status':'ROOT_SCOUT21_ORIGINAL_CLOSURE_PASS_NO_PROMOTION','manifest_entries':123,'manifest_sha256':seal,'historical_manifests':hist,'actual_author_runs_inspected':runs,'history_captures':captures,'additional_exposure_paths_preserved':180,'root_new_mathematical_execution':False,'source_body_status':'PRIMARY_CANNINGS_HAIGH_NOT_READ','fresh_raw_comparisons':actual},sort_keys=True,indent=2))\nPY",
+  "actual_root_exit_code": 0
+}

@@ -1,9 +1,9 @@
 # Admitted and retired theorem contracts
 
-Date: 2026-09-06 UTC. A candidate is numbered only after its deductive and
+Date: 2026-09-07 UTC. A candidate is numbered only after its deductive and
 collision/source gate. Manuscript review can subsequently retire that
-contract without reusing the number. There are currently **three retained
-papers, two completed papers and two unfilled seats**. P204 and P206 are
+contract without reusing the number. There are currently **four retained
+papers, three completed papers and one unfilled seat**. P204 and P206 are
 historically admitted, subsequently rejected numbered drafts.
 
 ## P204 — previous-smaller distance feedback — REJECTED IN REVIEW A
@@ -226,7 +226,7 @@ version. No mathematical contract or producer dependency changed.
 At P207 completion: two retained, two complete, three unfilled. P208 follows.
 `OWNER_AMBER / HOLD_EXTERNAL`.
 
-## P208 — original-snapshot triangulation sweeps — ADMITTED, WRITING
+## P208 — original-snapshot triangulation sweeps — INTERNALLY COMPLETE
 
 Proof authors: `/root/batch197_fosp_gate` and `/root/batch197_lzk_gate`.
 Root and any manuscript writer are contributors, not eligible reviewers.
@@ -279,6 +279,74 @@ atlas, extra image-enumeration paper or global-priority theorem is admitted.
 Directly applicable later source evidence reopens the bounded value gate.
 
 Paper path: `papers/208-original-snapshot-triangulation-sweeps/`.
+Status: `P208_INTERNALLY_COMPLETE / ARTIFACT_GATE_PASS / OWNER_AMBER / HOLD_EXTERNAL`.
+Both distinct nonauthor manuscript rounds have accepted their exact deltas,
+with zero current open findings. Physical Round0/1/2 each contains 487
+checked inputs. The two terminal source-only builds and all seven actual
+root page views passed, followed by the actual full terminal artifact gate
+and the separately accepted lifecycle-only follow-up. See
+[final QA](P208_FINAL_QA.md) and
+[root final acceptance](qa/P208_LIFECYCLE_ROOT_INSPECTION.md).
+No P208 theorem, manuscript, accepted review or frozen evidence changed in
+this lifecycle update. The exact previous contract document remains at
+[the historical snapshot](qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md)
+for the accepted audit's original path/hash key; see its
+[scope and change record](qa/central_lifecycle_p209_20260907/README.md).
+At P208 completion: three retained, three complete, two unfilled. P209 follows.
+
+## P209 — ordered fibre threading — ADMITTED, WRITING
+
+Proof contributors: root and `/root/nineteenth_finite_scout`; manuscript and
+paper-local verifier author: `/root/p208_b_reviewer`. None can serve as
+independent P209 manuscript reviewer. Candidate assessor
+`/root/twentieth_algebra_scout` supplied no new lemma and must disclose its
+candidate-gate/infra familiarity in any later manuscript review.
+
+Admission is controlled by [root's exact original-evidence decision](P209_ROOT_ADMISSION.md),
+the full [author proof](scouting/finite_systems_nineteenth/FTH_PROOF_PACKAGE.md),
+[nonauthor candidate gate](scouting/FTH_GATE/CANDIDATE_GATE.md), and
+[root's actual strict replay and closure](qa/FTH_ROOT_STRICT_PAIR.actual.json).
+The final 1,053-payload gate and 520-payload root pair are complete; each
+root run checks all 3,414 original states at $n=0,\ldots,5$ with 147,091
+checks, full raw-canonical equality and unchanged known dependency closure.
+This is candidate admission, not either manuscript review.
+
+For every labelled endofunction on $[n]=\{0,\ldots,n-1\}$, $n\ge0$,
+thread each increasingly ordered **old** fibre into a path, retaining its
+old destination at the maximum fibre member. The simultaneous whole-function
+update $T$ has exactly this contract:
+
+1. A state is recurrent iff every weak functional-graph component is a
+   directed cycle with disjoint unbranched feeding paths, at most one per
+   cycle vertex, and every final path label lies below the minimum label
+   of its cycle. Cycle/internal-path arrows are unchanged; attachments
+   move one cycle predecessor backwards. The exact labelled period is
+   the LCM of lengths of cycles carrying nonempty paths, with empty LCM
+   one. A pure vertex cycle is fixed under the whole-function update.
+2. For every target $g$, select
+   $S\subseteq E_+(g)=\{i:i<g(i)\}$. It is admissible exactly when the
+   heads $g(i)$ for $i\in S$ and the endpoint values $g(j)$ for $j\notin S$
+   are each pairwise distinct within their respective sets. Its increasing
+   paths include singletons. If $e_S(i)$ is the endpoint of the path
+   containing $i$, then $f_S(i)=g(e_S(i))$ bijects admissible codes with
+   the complete one-step fibre. Selected unchanged arrows are not omitted.
+3. For $n\ge1$, the unique global maximum fibre is $2^{n-1}$, attained by
+   the cyclic successor target $g_*(i)=i+1$ for $i<n-1$ and $g_*(n-1)=0$.
+   At $n=0$ the unique target has one predecessor; $n=1$ agrees.
+
+Star-to-chain linearization, connectivity by walk substitution, rooted
+tree-to-path rewiring, static increasing-path covers, Boolean bounds and
+rotation/LCM calculations receive zero separate novelty credit. The
+retained conjunction is the label-sensitive recurrent geometry forced by
+all backward-image sets and the separate literal all-target inverse and
+unique extremizer. Primary PL/ISPRP/RN/2025-tree-path and internal
+FSP/NOG/PR/P167/DFJ/P169/MOC subtraction remain exactly bounded by the root
+decision and gate originals. No all-size sharp entrance clock, general-time
+inverse, recurrent EGF, global-priority or arbitrary-conjugacy exclusion is
+admitted. A complete applicable owner adapter reopens the affected gate.
+
+Paper path: `papers/209-ordered-fibre-threading/`.
 Status: `ADMITTED_WRITING / OWNER_AMBER / HOLD_EXTERNAL`.
-No manuscript review, physical freeze or completion is claimed yet.
-Current census: three retained, two complete, two unfilled; next number P209.
+Paper-local author evidence, Round0, two actual nonauthor manuscript reviews,
+accepted deltas and terminal obligations remain pending.
+Current census: four retained, three complete, one unfilled; next number P210.

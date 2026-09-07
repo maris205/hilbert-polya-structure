@@ -1,0 +1,306 @@
+\documentclass[a4paper,11pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,
+  citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},
+  pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Fix}{\operatorname{Fix}}
+
+\title[Self-cardinality truncation]{Self-Cardinality Truncation of Finite Sets:\\
+Rank Descent, Sharp Depth, and Exact Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 05A15}
+\keywords{finite dynamical system, subset, rank iteration, transient depth,
+fibre, Fibonacci number}
+
+\begin{document}
+
+\begin{abstract}
+For $A\subseteq[n]$, intersect $A$ with the initial segment whose length is
+the current cardinality, and feed the result back into the same rule.  We
+derive a pointwise all-time iterate from a scalar rank recursion and prove
+that every orbit ends at the longest initial segment contained in the source.
+The $n+1$ initial segments are the only recurrent states.  For $n\geq2$, the
+sharp transient height is $n-1$, attained uniquely by
+$\{2,\ldots,n\}$.  Every terminal basin has a closed power-of-two size.  We
+also count every labelled target fibre at every time by a chain of binomial
+factors, obtain a necessary and sufficient first-image inequality, and show
+that the first image contains exactly the Fibonacci number $F_{n+2}$ of
+states; the empty target has $F_{n+1}$ one-step predecessors and is the unique
+largest fibre for $n\geq2$.  Exhaustive finite checks are
+counterexample pressure, not proof or novelty evidence.  Rank feedback and
+binomial--Fibonacci identities receive no contribution credit, and the paper
+remains \texttt{HOLD\_EXTERNAL} pending a complete owner audit.
+\end{abstract}
+
+\maketitle
+
+\section{Definition and contribution boundary}
+
+Write $[k]=\{1,\ldots,k\}$ and $[0]=\varnothing$.  On the power set of
+$[n]$, including $n=0$, define
+\begin{equation}\label{eq:T}
+ T_n(A)=A\cap[|A|].
+\end{equation}
+This is a synchronous finite map in the general language of finite parallel
+dynamics \cite{AledoMartinezValverde2015}.  The operation couples a set to
+its own cardinality; the cutoff is recomputed after every step.
+
+Initial-segment notation and monotone set deletion receive zero contribution
+credit.  The same is true of rank recursions and classical binomial identities
+for Fibonacci numbers \cite{GrahamKnuthPatashnik1994}.  Internally, this rule is neither the
+prefix-diversity feedback of P185 nor the rank-subtraction support map of
+P186: it acts on one subset, never reorders elements, and its scalar clock is
+self-cardinality.  A bounded literal and semantic search did not return the
+full rule and theorem package.  That non-hit is not a novelty or priority
+claim.
+
+For $A\subseteq[n]$, define the rank function
+\begin{equation}\label{eq:rank}
+ r_A(k)=|A\cap[k]|,
+\end{equation}
+and the scalar sequence
+\begin{equation}\label{eq:k}
+ k_0=|A|,\qquad k_{t+1}=r_A(k_t).
+\end{equation}
+Let
+\begin{equation}\label{eq:rho}
+ \rho(A)=\max\{r:[r]\subseteq A\}
+\end{equation}
+be the length of the initial run contained in $A$.
+
+\section{All-time normal form and endpoint}
+
+\begin{theorem}[pointwise iterate]\label{thm:iterate}
+For every $t\geq1$,
+\begin{equation}\label{eq:iterate}
+ T_n^t(A)=A\cap[k_{t-1}].
+\end{equation}
+The sequence $(k_t)$ decreases to $\rho(A)$, and
+\begin{equation}\label{eq:endpoint}
+ T_n^t(A)=[\rho(A)]
+\end{equation}
+for all sufficiently large $t$.
+\end{theorem}
+
+\begin{proof}
+The case $t=1$ is \eqref{eq:T}.  If \eqref{eq:iterate} holds at time $t$,
+then its cardinality is $r_A(k_{t-1})=k_t$; intersecting it with $[k_t]$
+gives $A\cap[k_t]$, because $k_t\leq k_{t-1}$.  This proves the formula by
+induction.
+
+The sequence is nonincreasing because $r_A(k)\leq k$.  It never falls below
+$\rho(A)$, since $[\rho(A)]\subseteq A$.  If $k>\rho(A)$, the missing element
+$\rho(A)+1$ lies in $[k]$, so $r_A(k)\leq k-1$.  Therefore the scalar
+sequence reaches and then remains at $\rho(A)$.  Formula
+\eqref{eq:iterate} now gives \eqref{eq:endpoint}.
+\end{proof}
+
+\begin{corollary}[recurrence and terminal fibres]\label{cor:terminal}
+The fixed and recurrent states are exactly
+\begin{equation}\label{eq:fixed}
+ \varnothing,[1],[2],\ldots,[n].
+\end{equation}
+For $0\leq r\leq n$, the number of sources whose endpoint is $[r]$ is
+\begin{equation}\label{eq:basin}
+ \#\{A:T_n^\infty(A)=[r]\}=
+ \begin{cases}
+ 2^{n-r-1},&r<n,\\
+ 1,&r=n.
+ \end{cases}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:iterate} makes every recurrent state fixed.  A set is fixed
+only if a set of size $k$ is contained in $[k]$, which forces it to equal
+$[k]$.  Endpoint $[r]$ means that $A$ contains $[r]$, omits $r+1$ when
+$r<n$, and makes arbitrary choices above $r+1$, proving
+\eqref{eq:basin}.
+\end{proof}
+
+\section{Sharp transient height}
+
+\begin{theorem}[unique deepest state]\label{thm:height}
+For $n\geq2$, the maximum tail is $n-1$ and its unique attaining state is
+\begin{equation}\label{eq:deepest}
+ A_\star=\{2,3,\ldots,n\}.
+\end{equation}
+For $n=0,1$, every state is fixed.
+\end{theorem}
+
+\begin{proof}
+Unless $A$ is fixed, $T_n(A)$ is a proper subset of $A$: a set of size $k$
+contained in $[k]$ would be exactly $[k]$.  Along an orbit ending at
+$[\rho(A)]$, each transient step therefore lowers cardinality by at least
+one, and the tail is at most $|A|-\rho(A)$.  If $\rho(A)=0$, omission of
+$1$ gives $|A|\leq n-1$.  If $\rho(A)>0$ and $A$ is nonfixed, omission of
+$\rho(A)+1$ gives $|A|-\rho(A)\leq n-1-\rho(A)<n-1$.  This proves the upper
+bound and shows that equality can only occur when $\rho(A)=0$ and
+$|A|=n-1$, which uniquely forces \eqref{eq:deepest}.
+
+Starting from $A_\star$, each update removes its current largest element:
+\[
+ \{2,\ldots,n\}\to\{2,\ldots,n-1\}\to\cdots\to\{2\}\to\varnothing.
+\]
+There are $n-1$ arrows, so the bound is sharp.  The two small carriers are
+immediate.
+\end{proof}
+
+\section{Every-target inverse law}
+
+For a target $B$, put $b=|B|$ and $M(B)=\max B$, with $M(\varnothing)=0$.
+We use the convention $\binom uv=0$ unless $0\leq v\leq u$.
+
+\begin{theorem}[all-time labelled fibres]\label{thm:alltime-fibre}
+Fix $t\geq1$ and set $k_t=b$.  Then
+\begin{equation}\label{eq:alltime-fibre}
+ |(T_n^t)^{-1}(B)|=
+ \sum_{\substack{n\geq k_0\geq k_1\geq\cdots\geq k_{t-1}\\
+                         k_{t-1}\geq\max\{b,M(B)\}}}
+ \binom{n-k_0}{k_0-k_1}
+ \prod_{j=1}^{t-1}
+ \binom{k_{j-1}-k_j}{k_j-k_{j+1}}.
+\end{equation}
+For $t=1$, the first binomial is read as
+$\binom{n-k_0}{k_0-b}$ and the product is empty.  At time zero every target
+has its single identity predecessor.  At every time,
+\begin{equation}\label{eq:alltime-mass}
+ \sum_{B\subseteq[n]}|(T_n^t)^{-1}(B)|=2^n.
+\end{equation}
+For $t\geq n-1$, the only nonempty fibres are the terminal fibres in
+\eqref{eq:basin}.
+\end{theorem}
+
+\begin{proof}
+Every source $A$ determines the unique rank chain \eqref{eq:k}.  Fixing its
+values $k_0,\ldots,k_{t-1}$ partitions $[n]$ into the disjoint intervals
+\[
+ (k_0,n],\ (k_1,k_0],\ldots,\ (k_{t-1},k_{t-2}],\ [k_{t-1}].
+\]
+The intermediate intervals are absent when $t=1$.
+The first interval must contain $k_0-k_1$ source elements.  For
+$1\leq j<t$, the interval $(k_j,k_{j-1}]$ must contain
+$k_j-k_{j+1}$ source elements.  Inside the final interval the source is
+forced to equal $B$, which also requires $k_{t-1}\geq M(B)$.  Independent
+choices in the preceding intervals give the product in
+\eqref{eq:alltime-fibre}.  Conversely, every such choice realizes exactly
+the displayed rank chain and target, so neither omission nor overcounting is
+possible.  Summing over targets partitions all $2^n$ sources and proves
+\eqref{eq:alltime-mass}.  The terminal claim follows from
+Theorem~\ref{thm:height} and Corollary~\ref{cor:terminal}.
+\end{proof}
+
+\begin{corollary}[one-step fibres and image]\label{thm:fibre}
+Every labelled target $B\subseteq[n]$ has
+\begin{equation}\label{eq:fibre}
+ |T_n^{-1}(B)|=
+ \sum_{k=\max\{b,M(B)\}}^{\lfloor(n+b)/2\rfloor}
+ \binom{n-k}{k-b},
+\end{equation}
+where an empty sum is zero.  Equivalently,
+\begin{equation}\label{eq:imagecriterion}
+ B\in\im T_n\quad\Longleftrightarrow\quad
+ 2M(B)\leq n+|B|.
+\end{equation}
+The formula conserves all source mass:
+\begin{equation}\label{eq:mass}
+ \sum_{B\subseteq[n]}|T_n^{-1}(B)|=2^n.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Set $t=1$ and $k_0=k$ in Theorem~\ref{thm:alltime-fibre}.  Equivalently, fix
+a source cardinality $k$.  The equality $T_n(A)=B$ requires
+$B\subseteq[k]$, no other source elements in $[k]$, and exactly $k-b$
+source elements chosen from $\{k+1,\ldots,n\}$.  These conditions contribute
+$\binom{n-k}{k-b}$ and are possible exactly when
+\[
+ k\geq\max\{b,M(B)\},\qquad k-b\leq n-k.
+\]
+Summing over $k$ gives \eqref{eq:fibre}.  Since $M(B)\geq b$ for nonempty
+$B$ and both vanish for the empty set, the range is nonempty exactly under
+\eqref{eq:imagecriterion}.  Finally, the construction partitions all sources
+by their unique target, proving \eqref{eq:mass}; this is also the time-one
+case of \eqref{eq:alltime-mass}.
+\end{proof}
+
+Let $F_0=0,F_1=1$, and $F_{j+1}=F_j+F_{j-1}$.
+
+\begin{corollary}[Fibonacci shadows]\label{cor:fibonacci}
+For every $n\geq0$,
+\begin{equation}\label{eq:imagecount}
+ |\im T_n|=F_{n+2},\qquad |T_n^{-1}(\varnothing)|=F_{n+1}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+For the empty target, \eqref{eq:fibre} becomes the standard identity
+$\sum_k\binom{n-k}{k}=F_{n+1}$.  For the image, targets of size $b$ satisfy
+\eqref{eq:imagecriterion} exactly when they lie in
+$[\lfloor(n+b)/2\rfloor]$.  Hence
+\[
+ |\im T_n|=\sum_{b=0}^n
+ \binom{\lfloor(n+b)/2\rfloor}{b}=F_{n+2}.
+\]
+Indeed, the terms with $n-b=2j$ and $n-b=2j+1$ are respectively
+$\binom{n-j}{j}$ and $\binom{n-j-1}{j}$.  Their sums are the standard
+binomial forms of $F_{n+1}$ and $F_n$, so their total is $F_{n+2}$.
+\end{proof}
+
+\begin{corollary}[image layers and the largest fibre]\label{cor:extremal}
+For each $0\leq b\leq n$, the first image contains exactly
+\begin{equation}\label{eq:image-layer}
+ \binom{\lfloor(n+b)/2\rfloor}{b}
+\end{equation}
+targets of cardinality $b$.  If $n\geq2$, the empty target is the unique
+largest one-step fibre, of size $F_{n+1}$.  At $n=1$, both fibres have size
+one.
+\end{corollary}
+
+\begin{proof}
+Criterion \eqref{eq:imagecriterion} says that a size-$b$ target may choose
+its elements freely from $[\lfloor(n+b)/2\rfloor]$, proving
+\eqref{eq:image-layer}.  If $B$ is nonempty, set $j=k-b$ in
+\eqref{eq:fibre}.  Dropping the lower restriction $k\geq M(B)$ gives
+\[
+ |T_n^{-1}(B)|\leq
+ \sum_{j\geq0}\binom{n-b-j}{j}=F_{n-b+1}\leq F_n.
+\]
+For $n\geq2$, this is strictly smaller than the empty fibre $F_{n+1}$.
+The carrier $n=1$ is checked directly.
+\end{proof}
+
+\begin{remark}[scope and evidence]
+The rank recursion proves the forward theorem, while the inverse theorem
+partitions sources into nested rank intervals.  Neither is inferred from the
+exhaustive verifier.  The finite control checks all subsets through $n=18$,
+including $n=0$, and separately checks all-time fibres in smaller boxes, but
+cannot certify an all-parameter theorem or an ownership claim.  External
+circulation remains prohibited.
+\end{remark}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

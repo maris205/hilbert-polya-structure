@@ -1,0 +1,1211 @@
+{
+  "actual_command": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C TZ=UTC /root/miniconda3/bin/python3.12 -I -S -B - <<'PY'\nfrom pathlib import Path\nimport hashlib,json,re\nroot=Path('/root/autodl-tmp/symbolic_dynamics');batch=root/'docs/papers204_208_sequence';base=batch/'qa/central_lifecycle_p209_20260907';old=base/'before/FINAL_THEOREM_CONTRACTS.md';new=batch/'FINAL_THEOREM_CONTRACTS.md'\ndef info(p):\n r=p.read_bytes();return {'bytes':len(r),'sha256':hashlib.sha256(r).hexdigest()}\na,b=old.read_text(),new.read_text();assert info(old)=={'bytes':17599,'sha256':'baa278de72e8d82075c094ec05e95118c3794057cbb70430a6c7f363b621059c'}\nassert a.split('## P204 —',1)[1].split('## P208 —',1)[0]==b.split('## P204 —',1)[1].split('## P208 —',1)[0]\nx=a.split('## P208 —',1)[1];y=b.split('## P208 —',1)[1].split('## P209 —',1)[0]\nassert x.split('Proof authors:',1)[1].split('Paper path:',1)[0]==y.split('Proof authors:',1)[1].split('Paper path:',1)[0]\nassert len(re.findall(r'^## P209 —',b,re.M))==1\nmaps=[]\nfor p,k in [(batch/'qa/p208_terminal_artifact/initial_05/audit.stdout','all_consumed_inputs_rechecked'),(batch/'qa/p208_terminal_artifact/lifecycle_01/attempt_01/audit.stdout','all_current_read_inputs_rechecked')]:\n d=json.loads(p.read_text());assert d[k][str(new)]==info(old);maps.append({'ledger':str(p.relative_to(root)),'original_path':str(new.relative_to(root)),'old':info(old),'snapshot':str(old.relative_to(root))})\nlinks=[]\nfor p,origin in [(old,batch),(new,batch),(batch/'P209_ROOT_ADMISSION.md',batch),(batch/'PIPELINE_STATE.md',batch),(root/'SYMBOLIC_DYNAMICS_STATE.md',root)]:\n text=p.read_text();text=re.sub(r'```[\\s\\S]*?```',' ',text);text=re.sub(r'`[^`]*`',' ',text)\n for t in re.findall(r'\\[[^\\]]*\\]\\(([^)]+)\\)',text):\n  t=t.strip('<>').split('#',1)[0]\n  if not t or re.match(r'[A-Za-z][A-Za-z0-9+.-]*:',t):continue\n  target=(origin/t).resolve();assert target.exists(),(str(p),t,str(target));links.append({'document':str(p.relative_to(root)),'semantic_origin':str(origin.relative_to(root)),'target':t,'resolved':str(target)})\nexpected=json.loads((batch/'qa/root_fth_gate_pair_01/sealed.expected.json').read_text());fth_key=expected.get(str(new))\nassert fth_key is None or fth_key==info(old)['sha256']\nprint(json.dumps({'status':'PASS_SCOPED_CENTRAL_CONTRACT_LIFECYCLE_AND_P209_ADDITION','before':info(old),'after':info(new),'unchanged_sections':['P204 entire','P205 entire','P206 entire','P207 entire','P208 complete mathematical contract'],'allowed_changes':['date/census','P208 heading/lifecycle paragraph','new separately admitted P209 section'],'exact_accepted_ledger_mappings':maps,'fth_root_expected_old_document_sha256':fth_key,'links_checked':links,'new_mathematics_source':'P209_ROOT_ADMISSION.md and its separate original proof/gate/root actual pair, not P208 artifact reuse','new_math_build_view_executions_by_this_check':0,'external':'OWNER_AMBER / HOLD_EXTERNAL'},sort_keys=True,indent=2))\nPY",
+  "actual_exit_code": 0,
+  "result": {
+    "after": {
+      "bytes": 21894,
+      "sha256": "92e3d713329f66d1f0f8e499018e007f0ac6112ae6f9988d0948bfc84a478072"
+    },
+    "allowed_changes": [
+      "date/census",
+      "P208 heading/lifecycle paragraph",
+      "new separately admitted P209 section"
+    ],
+    "before": {
+      "bytes": 17599,
+      "sha256": "baa278de72e8d82075c094ec05e95118c3794057cbb70430a6c7f363b621059c"
+    },
+    "exact_accepted_ledger_mappings": [
+      {
+        "ledger": "docs/papers204_208_sequence/qa/p208_terminal_artifact/initial_05/audit.stdout",
+        "old": {
+          "bytes": 17599,
+          "sha256": "baa278de72e8d82075c094ec05e95118c3794057cbb70430a6c7f363b621059c"
+        },
+        "original_path": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "snapshot": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md"
+      },
+      {
+        "ledger": "docs/papers204_208_sequence/qa/p208_terminal_artifact/lifecycle_01/attempt_01/audit.stdout",
+        "old": {
+          "bytes": 17599,
+          "sha256": "baa278de72e8d82075c094ec05e95118c3794057cbb70430a6c7f363b621059c"
+        },
+        "original_path": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "snapshot": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md"
+      }
+    ],
+    "external": "OWNER_AMBER / HOLD_EXTERNAL",
+    "fth_root_expected_old_document_sha256": null,
+    "links_checked": [
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/NS_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/NS_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/NS_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/NS_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p204_a/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p204_a/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P204_ROOT_REJECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P204_ROOT_REJECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_GATE/SOURCE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_GATE/SOURCE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_GATE/AUTHOR_RESPONSE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_GATE/AUTHOR_RESPONSE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p205_a/DELTA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p205_a/DELTA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/205-conflict-triggered-cyclic-increments/PAPER_STATUS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/205-conflict-triggered-cyclic-increments/PAPER_STATUS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC_TERNARY_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC_TERNARY_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC3_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC3_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC3_GATE/SOURCE_AND_ADAPTERS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC3_GATE/SOURCE_AND_ADAPTERS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/admission_replays/crc3/REPLAY_LOG.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/admission_replays/crc3/REPLAY_LOG.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p206_a/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p206_a/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P206_ROOT_REJECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P206_ROOT_REJECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/UGR_PROOF_WORK/PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/UGR_PROOF_WORK/PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/LNR_INVERSE_WORK/PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/LNR_INVERSE_WORK/PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/UGR_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/UGR_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/UGR_GATE/SOURCE_AUDIT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/UGR_GATE/SOURCE_AUDIT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/ugr_gate/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/ugr_gate/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P207_FINAL_QA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P207_FINAL_QA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/OFS_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/OFS_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/OFS_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/OFS_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/NS_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/NS_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/NS_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/NS_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p204_a/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p204_a/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P204_ROOT_REJECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P204_ROOT_REJECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_GATE/SOURCE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_GATE/SOURCE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_GATE/AUTHOR_RESPONSE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_GATE/AUTHOR_RESPONSE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p205_a/DELTA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p205_a/DELTA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/205-conflict-triggered-cyclic-increments/PAPER_STATUS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/205-conflict-triggered-cyclic-increments/PAPER_STATUS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC_TERNARY_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC_TERNARY_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC3_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC3_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC3_GATE/SOURCE_AND_ADAPTERS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC3_GATE/SOURCE_AND_ADAPTERS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/admission_replays/crc3/REPLAY_LOG.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/admission_replays/crc3/REPLAY_LOG.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p206_a/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p206_a/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P206_ROOT_REJECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P206_ROOT_REJECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/UGR_PROOF_WORK/PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/UGR_PROOF_WORK/PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/LNR_INVERSE_WORK/PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/LNR_INVERSE_WORK/PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/UGR_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/UGR_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/UGR_GATE/SOURCE_AUDIT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/UGR_GATE/SOURCE_AUDIT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/ugr_gate/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/ugr_gate/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P207_FINAL_QA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P207_FINAL_QA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/OFS_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/OFS_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/OFS_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/OFS_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P208_FINAL_QA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P208_FINAL_QA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_LIFECYCLE_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_LIFECYCLE_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/central_lifecycle_p209_20260907/before/FINAL_THEOREM_CONTRACTS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/README.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/central_lifecycle_p209_20260907/README.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P209_ROOT_ADMISSION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_nineteenth/FTH_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/finite_systems_nineteenth/FTH_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/FTH_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/FTH_ROOT_STRICT_PAIR.actual.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/FTH_ROOT_STRICT_PAIR.actual.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_nineteenth/FTH_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/finite_systems_nineteenth/FTH_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/FTH_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/SOURCE_AND_PROOF.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/FTH_GATE/SOURCE_AND_PROOF.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/FTH_GATE_ROOT_ORIGINAL_INSPECTION.actual.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/FTH_GATE_ROOT_ORIGINAL_INSPECTION.actual.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/FTH_ROOT_STRICT_PAIR.actual.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/FTH_ROOT_STRICT_PAIR.actual.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_fth_gate_pair_01/SHA256SUMS",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_fth_gate_pair_01/SHA256SUMS"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_LIFECYCLE_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_LIFECYCLE_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P209_ROOT_ADMISSION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../research_state/WORKFLOW.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/PROBLEM_ANCHOR.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "PROBLEM_ANCHOR.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers197_201_sequence/FINAL_QA_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../papers197_201_sequence/FINAL_QA_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/combinatorial/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/combinatorial/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/GM_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/GM_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/GM_CANONICAL.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/GM_CANONICAL.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/GM_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/GM_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/ZA_PROOF_WORK/PROOF_ATTEMPT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/ZA_PROOF_WORK/PROOF_ATTEMPT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/algebra/CS_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/algebra/CS_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/algebra_second/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/algebra_second/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/SI_ROOT_DISPOSITION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/SI_ROOT_DISPOSITION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "FINAL_THEOREM_CONTRACTS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/NS_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/NS_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/204-previous-smaller-distance-feedback/PAPER_PLAN.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/204-previous-smaller-distance-feedback/PAPER_PLAN.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/ARTIFACT_CONTRACT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "ARTIFACT_CONTRACT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p204_a/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p204_a/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P204_ROOT_REJECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P204_ROOT_REJECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/graph_relation_second/CCI_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/graph_relation_second/CCI_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p205_a/DELTA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p205_a/DELTA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p205_a/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/p205_a/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p205_b/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p205_b/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P205_B_RESPONSE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P205_B_RESPONSE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p205_b/DELTA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p205_b/DELTA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/205-conflict-triggered-cyclic-increments/PAPER_STATUS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/205-conflict-triggered-cyclic-increments/PAPER_STATUS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC_TERNARY_PROOF_PACKAGE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC_TERNARY_PROOF_PACKAGE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CRC3_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CRC3_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "FINAL_THEOREM_CONTRACTS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p206_a/SOURCE_AND_PROOF.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p206_a/SOURCE_AND_PROOF.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P206_ROOT_REJECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P206_ROOT_REJECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/COMPONENT_SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/COMPONENT_SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/LNR_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/LNR_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/lnr_gate/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/lnr_gate/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/LNR_EXTRA_COLLISION_NOTE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/LNR_EXTRA_COLLISION_NOTE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CONTRAST_INTAKE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CONTRAST_INTAKE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/MNC_DISTANCE_DECODER.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/MNC_DISTANCE_DECODER.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/RANK_CONTRAST_AUTHOR_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/RANK_CONTRAST_AUTHOR_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/MNC_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/MNC_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/MNC_ROOT_DISPOSITION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/MNC_ROOT_DISPOSITION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/UGR_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/UGR_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/ugr_gate/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/ugr_gate/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "FINAL_THEOREM_CONTRACTS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p207_a/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p207_a/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p207_a_controlled/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/p207_a_controlled/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P207_A_RESPONSE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P207_A_RESPONSE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p207_a/DELTA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p207_a/DELTA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p207_b/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p207_b/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p207_b_controlled/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/p207_b_controlled/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P207_B_RESPONSE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P207_B_RESPONSE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P207_B_RESPONSE_SUPPLEMENT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P207_B_RESPONSE_SUPPLEMENT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p207_b/DELTA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p207_b/DELTA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P207_B_ROOT_DELTA_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P207_B_ROOT_DELTA_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P207_FINAL_QA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P207_FINAL_QA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/set_partition_sixth/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/set_partition_sixth/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/discrete_geometry_seventh/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/discrete_geometry_seventh/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/HVD_PROOF_WORK/PROOF_AND_DISPOSITION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/HVD_PROOF_WORK/PROOF_AND_DISPOSITION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_structures_eighth/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/finite_structures_eighth/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/ARITHMETIC_LOCAL_INTAKE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/ARITHMETIC_LOCAL_INTAKE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CPRM_PROOF_BOUNDARY.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CPRM_PROOF_BOUNDARY.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/cprm_boundary/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/cprm_boundary/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/NCC_INTAKE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/NCC_INTAKE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/NCC_PROOF_BOUNDARY.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/NCC_PROOF_BOUNDARY.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/ncc_boundary/RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/root_replays/ncc_boundary/RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_algebra_ninth/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/finite_algebra_ninth/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/word_local/CPC_DISPOSITION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/word_local/CPC_DISPOSITION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/order_geometry_tenth/SCOUT_REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/order_geometry_tenth/SCOUT_REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/TENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/TENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/OFS_GATE/CANDIDATE_GATE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/OFS_GATE/CANDIDATE_GATE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/OFS_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/OFS_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/ELEVENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/ELEVENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/TWELFTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/TWELFTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/THIRTEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/THIRTEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FOURTEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/FOURTEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FIFTEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/FIFTEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/SIXTEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/SIXTEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/SEVENTEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/SEVENTEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/EIGHTEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/EIGHTEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/TWENTIETH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/TWENTIETH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/NINETEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/NINETEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/TWENTY_FIRST_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "scouting/TWENTY_FIRST_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/frozen_round0/SHA256SUMS",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/208-original-snapshot-triangulation-sweeps/frozen_round0/SHA256SUMS"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/INTEGRITY_REVIEW.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/208-original-snapshot-triangulation-sweeps/INTEGRITY_REVIEW.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/papers/208-original-snapshot-triangulation-sweeps/PAPER_STATUS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "../../papers/208-original-snapshot-triangulation-sweeps/PAPER_STATUS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_STRICT_AUTHOR_REPLAY.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_STRICT_AUTHOR_REPLAY.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p208_a/REPORT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p208_a/REPORT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_A_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_A_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P208_A_RESPONSE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P208_A_RESPONSE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p208_a/DELTA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "reviews/p208_a/DELTA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_A_ROOT_DELTA_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_A_ROOT_DELTA_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P208_B_RESPONSE.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P208_B_RESPONSE.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_B_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_B_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_B_ROOT_DELTA_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_B_ROOT_DELTA_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_TERMINAL_ROOT_VIEWS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_TERMINAL_ROOT_VIEWS.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/GIT_SYNC_RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "GIT_SYNC_RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/GIT_SYNC_RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "GIT_SYNC_RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/GIT_SYNC_RECEIPT.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "GIT_SYNC_RECEIPT.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/GIT_OBJECT_P208_076CFBD4.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/GIT_OBJECT_P208_076CFBD4.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/GIT_OBJECT_P207_CB93DCAB.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/GIT_OBJECT_P207_CB93DCAB.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/GIT_OBJECT_P207_EEE9DCC3.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/GIT_OBJECT_P207_EEE9DCC3.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/GIT_OBJECT_P207_BB32F397.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/GIT_OBJECT_P207_BB32F397.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/GIT_OBJECT_CANDIDATES_FF020CEC.json",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/GIT_OBJECT_CANDIDATES_FF020CEC.json"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P208_FINAL_QA.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P208_FINAL_QA.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_TERMINAL_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_TERMINAL_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_LIFECYCLE_ROOT_INSPECTION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "qa/P208_LIFECYCLE_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "P209_ROOT_ADMISSION.md"
+      },
+      {
+        "document": "docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/FINAL_THEOREM_CONTRACTS.md",
+        "semantic_origin": "docs/papers204_208_sequence",
+        "target": "FINAL_THEOREM_CONTRACTS.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/PIPELINE_STATE.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/PIPELINE_STATE.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_LIFECYCLE_ROOT_INSPECTION.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/qa/P208_LIFECYCLE_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P209_ROOT_ADMISSION.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/P209_ROOT_ADMISSION.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md",
+        "semantic_origin": ".",
+        "target": "docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md",
+        "semantic_origin": ".",
+        "target": "docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers197_201_sequence/PIPELINE_STATE.md",
+        "semantic_origin": ".",
+        "target": "docs/papers197_201_sequence/PIPELINE_STATE.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers197_201_sequence/FINAL_QA_REPORT.md",
+        "semantic_origin": ".",
+        "target": "docs/papers197_201_sequence/FINAL_QA_REPORT.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers197_201_sequence/ROUND2_REPORT.md",
+        "semantic_origin": ".",
+        "target": "docs/papers197_201_sequence/ROUND2_REPORT.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_A_ROOT_DELTA_INSPECTION.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/qa/P208_A_ROOT_DELTA_INSPECTION.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/P208_B_RESPONSE.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/P208_B_RESPONSE.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_B_ROOT_DELTA_INSPECTION.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/qa/P208_B_ROOT_DELTA_INSPECTION.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P208_STRICT_AUTHOR_REPLAY.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/qa/P208_STRICT_AUTHOR_REPLAY.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/TWENTIETH_ROOT_INSPECTION.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/scouting/TWENTIETH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/NINETEENTH_ROOT_INSPECTION.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/scouting/NINETEENTH_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/TWENTY_FIRST_ROOT_INSPECTION.md",
+        "semantic_origin": ".",
+        "target": "docs/papers204_208_sequence/scouting/TWENTY_FIRST_ROOT_INSPECTION.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md",
+        "semantic_origin": ".",
+        "target": "docs/research_state/WORKFLOW.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers192_196_sequence/FINAL_QA_REPORT.md",
+        "semantic_origin": ".",
+        "target": "docs/papers192_196_sequence/FINAL_QA_REPORT.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/research_state/HISTORY_AND_CAVEATS.md",
+        "semantic_origin": ".",
+        "target": "docs/research_state/HISTORY_AND_CAVEATS.md"
+      },
+      {
+        "document": "SYMBOLIC_DYNAMICS_STATE.md",
+        "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/research_state/ARTIFACT_SNAPSHOT_2026-09-05.json",
+        "semantic_origin": ".",
+        "target": "docs/research_state/ARTIFACT_SNAPSHOT_2026-09-05.json"
+      }
+    ],
+    "new_math_build_view_executions_by_this_check": 0,
+    "new_mathematics_source": "P209_ROOT_ADMISSION.md and its separate original proof/gate/root actual pair, not P208 artifact reuse",
+    "status": "PASS_SCOPED_CENTRAL_CONTRACT_LIFECYCLE_AND_P209_ADDITION",
+    "unchanged_sections": [
+      "P204 entire",
+      "P205 entire",
+      "P206 entire",
+      "P207 entire",
+      "P208 complete mathematical contract"
+    ]
+  }
+}

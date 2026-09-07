@@ -1,0 +1,243 @@
+{
+  "kind": "ROOT_ORIGINAL_FTH_GATE_ARTIFACT_INSPECTION",
+  "command": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C TZ=UTC /root/miniconda3/bin/python3 -I -S -B -X pycache_prefix=/tmp/fth-root-original-inspection-unused-20260907 - <<'PY'\nfrom pathlib import Path\nfrom hashlib import sha256\nfrom collections import Counter\nimport json, re, subprocess, sys\nR=Path('/root/autodl-tmp/symbolic_dynamics'); G=R/'docs/papers204_208_sequence/scouting/FTH_GATE'; A=G.parent/'finite_systems_nineteenth'; C=Counter()\ndef ck(q,k,d):\n C[k]+=1\n if not q: raise AssertionError((k,d))\ndef h(p): return sha256(Path(p).read_bytes()).hexdigest()\ndef j(p): return json.loads(Path(p).read_bytes())\ndef lines(p):\n out={}\n for line in Path(p).read_text().splitlines():\n  m=re.fullmatch(r'([0-9a-f]{64})  (.+)',line); ck(m is not None,'manifest_syntax',str(p)); s,n=m.groups(); z=Path(n)\n  ck(n not in out and not z.is_absolute() and '..' not in z.parts,'manifest_safe',n); out[n]=s\n return out\ndef pins(p,base):\n rows=lines(p)\n for n,s in rows.items(): ck(h(base/n)==s,'manifest_pin',str(base/n))\n return rows\ndef obs(o):\n a=set(o['mapped_files'])\n a.update(str(Path(v['file']).resolve()) for v in o['modules'].values() if v['file'] and Path(v['file']).is_file())\n a.update(str(Path(p).resolve()) for p in o.get('opened_existing_files',[]) if Path(p).is_file() and not p.startswith('/proc/'))\n return a\nck(sys.flags.optimize==0 and sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode,'root_flags','controlled')\nseal=h(G/'SHA256SUMS'); ck(seal=='6989fad02d78655482d50a1eb18e6e099b44e016f1cec4478e7e94e88a483940','outer_seal','final')\nouter=pins(G/'SHA256SUMS',G)\nck(len(outer)==1053 and set(outer)=={p.relative_to(G).as_posix() for p in G.rglob('*') if p.is_file() and p!=G/'SHA256SUMS'},'outer_complete','1053')\nfor name,n in [('resume_closure/INITIAL_COMPLETE_SHA256SUMS',1004),('final_resume_closure/PRESERVED_ATTEMPT_SHA256SUMS',1038)]: ck(len(pins(G/name,G))==n,'historical_seal_preserved',name)\ninitial=pins(G/'INPUT_PINS.sha256',R); supplement=pins(G/'SUPPLEMENT_INPUTS.sha256',R)\nck(len(initial)==164 and len(supplement)==6,'input_count','164+6')\nck(pins(G/'INPUT_PINS.sha256',G/'reviewed_input_snapshot')==initial and pins(G/'SUPPLEMENT_INPUTS.sha256',G/'supplementary_source_snapshot')==supplement,'physical_reviewed_snapshots','exact')\nfor n,s in pins(G/'VALIDATION_INPUTS.sha256',G).items(): ck(outer[n]==s,'initial_validation_preserved',n)\nfind=j(G/'FINDINGS.json')\nck(find['verdict']=='GO_BOUNDED_CONTRACT' and all(find[k]==0 for k in ('open_mathematical_findings','open_evidence_findings','open_in_scope_source_blockers','new_reviewer_lemma_repairs','new_paper_numbers')),'gate_findings','zero')\nck(h(G/'pre_author_code/kernel_v0.py')=='d172db91901a2d087ed96cadb8e6a38690330cce414b117f07a0e769910c5107','committed_kernel','same')\ncanon=j(G/'CANONICAL.json'); ck(canon['checks']==147091 and canon['total_states']==canon['total_decoded_sources']==3414 and canon['boxes']==list(range(6)),'science_result','full')\nsummary=[]\ndef authorrows(run,rule): return {z['parameter']:z for z in (json.loads(s) for s in (A/run/'producer.stdout').read_text().splitlines()) if z.get('rule')==rule}\npilot=[authorrows(run,'FTH') for run in ('execution_01','execution_02')]; proof=[authorrows(run,'FTH_PROOF_CHECK') for run in ('proof_execution_01','proof_execution_02')]\ndef cycles(a):\n out=[]\n for x in a:\n  k=min(range(len(x)),key=x.__getitem__); out.append(tuple(x[k:]+x[:k]))\n return sorted(out)\nfor row in canon['rows']:\n n=row['n']; entries=row['complete_transitions_sources_geometry_and_inverse_codes']; states=[tuple(v['state']) for v in entries]; ix={s:i for i,s in enumerate(states)}\n ck(states==sorted(set(states)) and len(states)==(n**n if n else 1),'complete_carrier',n)\n trans=[ix[tuple(v['transition'])] for v in entries]; reverse=[[ix[tuple(f)] for f in v['predecessors']] for v in entries]; depths=[v['entrance_depth'] for v in entries]; periods=[v['eventual_period'] for v in entries]; count=list(map(len,reverse)); cyc=cycles([[ix[tuple(f)] for f in x] for x in row['complete_whole_function_cycles']])\n ck(sum(count)==len(states)==row['decoded_source_count'],'full_inverse_mass',n)\n for p in pilot:\n  old=p[n]; rev=[[] for v in entries]\n  for src,target in enumerate(old['transition']): rev[target].append(src)\n  ck(trans==old['transition'] and reverse==rev and depths==old['depths'] and count==old['indegrees'] and cyc==cycles(old['cycle_state_indices']) and row['all_maximizers']==old['max_fibre_targets'],'full_author_pilot_fields',n)\n for p in proof:\n  old=p[n]; predicted=[v['recurrent_predicted_period'] or 0 for v in entries]\n  ck(trans==old['transition'] and depths==old['depths'] and periods==old['periods'] and predicted==old['predicted_recurrent_periods'] and count==old['inverse_counts'] and row['all_maximizers']==old['maximizing_targets'],'full_author_proof_fields',n)\n for e in entries: ck(sorted(tuple(c['source']) for c in e['inverse_codes'])==[tuple(s) for s in e['predecessors']],'full_code_source_set',e['state'])\n summary.append({k:row[k] for k in ('n','state_count','recurrent_state_count','maximum_one_step_fibre','all_maximizers','observed_maximum_entrance_depth_not_all_size_theorem')})\nruns=[]; allmaps=[]\nfor name in ('replay_01','replay_02'):\n d=G/name; rec=j(d/'RECEIPT.json'); command=j(d/'producer.command.json'); allmaps+=[]; groups={}\n for kind,number in [('science',166),('runtime',932)]:\n  before=j(d/(kind+'.before.json')); after=j(d/(kind+'.after.json'))\n  ck(before==after and len(before)==number,'run_before_after',(name,kind))\n  for p,s in before.items(): ck(h(p)==s,'run_current_dependency',p)\n  groups[kind]=before; allmaps.append(before)\n ck(command['exit']==0 and command['argv'][1:4]==['-I','-S','-B'] and command['env']=={'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC'},'producer_actual_command',name)\n ck((d/'producer.stderr').read_bytes()==b'' and (d/'producer.stdout').read_bytes()==(G/'CANONICAL.json').read_bytes(),'producer_actual_complete_stream',name)\n ck(rec['status']=='PASS' and rec['stdout_sha256']==h(d/'producer.stdout') and rec['stdout_bytes']==5605960,'run_actual_result',name)\n for f in ('bootstrap.py','kernel_v0.py'): ck((d/'source_inputs'/f).read_bytes()==(G/('pre_author_code/'+f if f=='kernel_v0.py' else f)).read_bytes(),'exact_capsule',f)\n ck({p.name for p in (d/'source_inputs').iterdir()}=={'bootstrap.py','kernel_v0.py'},'source_only_capsule',name)\n child=j(d/'child.observed.json'); before=j(d/'parent.before.json'); after=j(d/'parent.after.json')\n used=obs(before)|obs(after)|obs(child); cover=set(groups['science'])|set(groups['runtime'])\n ck(len(used)==78 and used<=cover and used==set(rec['observed_consumed_files']) and not any(p.endswith(('.pyc','.pyo')) for p in used),'full_observed_coverage',name)\n ck(child['optimization']==0 and child['isolated']==child['no_site']==1 and child['dont_write_bytecode'] and not child['cache_exists_after'] and not Path(child['pycache_prefix']).exists(),'actual_child_flags',name)\n ld=j(d/'ldd.index.json'); ck(len(ld['links'])==113,'ldd_count',name)\n for row in ld['links']:\n  c=j(d/'ldd'/row['receipt']); out=d/'ldd'/c['stdout']; err=d/'ldd'/c['stderr']\n  ck(c['exit']==0 and c['argv']==['/usr/bin/ldd',row['target']] and c['env']==command['env'],'all_actual_ldd_commands',row['target'])\n  raw=out.read_text(); dependencies={str(Path(p).resolve()) for p in re.findall(r'/[^\\s()]+',raw) if Path(p).is_file()}\n  ck(dependencies==set(row['dependencies']) and dependencies<=cover and 'not found' not in raw,'all_raw_ldd_dependencies',row['target'])\n  ck(err.exists(),'actual_ldd_stderr_preserved',row['target'])\n ck(j(d/'ldd.bootstrap.before.json')==j(d/'ldd.bootstrap.after.json'),'ldd_bootstrap',name)\n runs.append({'run':name,'science':166,'runtime':932,'observed':len(used),'ldd_actual_exits_zero':len(ld['links']),'producer':command})\nhist=j(G/'history_discovery/before.json'); ck(hist==j(G/'history_discovery/after.json') and len(hist)==3162,'history_before_after','exact')\nfor p,s in hist.items(): ck(h(p)==s,'all_current_history',p)\nhr=j(G/'history_discovery/RECEIPT.json'); ck(hr['selected_files']==3160 and len(hr['runs'])==21,'history_scope','bounded')\nfor row in hr['runs']:\n d=G/'history_discovery'; c=j(d/(row['tag']+'.command.json'))\n ck(c['exit'] in (0,1) and c['exit']==row['exit'] and (d/(row['tag']+'.stdout')).stat().st_size==row['bytes'] and (d/(row['tag']+'.stderr')).read_bytes()==b'','history_actual_commands',row['tag'])\narchive=j(G/'ARTIFACT_AUDIT.json'); ck(archive['status']=='PASS' and archive['check_count']==396 and archive['before']==archive['after'] and all(x['pass'] for x in archive['checks']),'original_archival_comparator','396')\nfor p,s in archive['before'].items(): ck(h(p)==s,'archival_comparator_inputs',p)\nactual=[]\nfor left,right in [('replay_01/producer.stdout','replay_02/producer.stdout'),('CANONICAL.json','replay_01/producer.stdout'),('CANONICAL.json','replay_02/producer.stdout')]:\n argv=['/usr/bin/cmp','--',str(G/left),str(G/right)]; p=subprocess.run(argv,cwd=R,capture_output=True,check=False)\n actual.append({'argv':argv,'cwd':str(R),'exit':p.returncode,'stdout':p.stdout.decode(),'stderr':p.stderr.decode()}); ck(p.returncode==0,'actual_root_raw_cmp',(left,right))\nfor maps in allmaps+[hist]:\n for p,s in maps.items(): ck(h(p)==s,'full_after_referents',p)\nck(pins(G/'SHA256SUMS',G)==outer and h(G/'SHA256SUMS')==seal,'gate_after_unchanged','all1053')\nprint(json.dumps({'status':'ROOT_FTH_GATE_ORIGINAL_ARTIFACT_INSPECTION_PASS_NOT_ADMISSION','gate_seal':seal,'payloads':len(outer),'checks':dict(C),'original_runs':runs,'canonical_summary':summary,'canonical_sha256':h(G/'CANONICAL.json'),'reviewed_inputs':len(initial),'supplement':len(supplement),'historical_inputs_and_tools':len(hist),'historical_search_stdout_bytes':sum(x['bytes'] for x in hr['runs']),'actual_root_raw_comparisons':actual,'root_new_scientific_runs':0,'boundary':'Full original archival inspection; source/proof reads recorded separately; fresh root kernel pair remains required.'},indent=2,sort_keys=True))\nPY",
+  "actual_exit_code": 0,
+  "actual_tool_chunk": "5ecbc6",
+  "result": {
+    "actual_root_raw_comparisons": [
+      {
+        "argv": [
+          "/usr/bin/cmp",
+          "--",
+          "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_01/producer.stdout",
+          "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_02/producer.stdout"
+        ],
+        "cwd": "/root/autodl-tmp/symbolic_dynamics",
+        "exit": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "argv": [
+          "/usr/bin/cmp",
+          "--",
+          "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/CANONICAL.json",
+          "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_01/producer.stdout"
+        ],
+        "cwd": "/root/autodl-tmp/symbolic_dynamics",
+        "exit": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "argv": [
+          "/usr/bin/cmp",
+          "--",
+          "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/CANONICAL.json",
+          "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_02/producer.stdout"
+        ],
+        "cwd": "/root/autodl-tmp/symbolic_dynamics",
+        "exit": 0,
+        "stderr": "",
+        "stdout": ""
+      }
+    ],
+    "boundary": "Full original archival inspection; source/proof reads recorded separately; fresh root kernel pair remains required.",
+    "canonical_sha256": "3898b7c2957d47388366f0eb21740349ab8a2fcb5301f68576705b7e74cd4177",
+    "canonical_summary": [
+      {
+        "all_maximizers": [
+          []
+        ],
+        "maximum_one_step_fibre": 1,
+        "n": 0,
+        "observed_maximum_entrance_depth_not_all_size_theorem": 0,
+        "recurrent_state_count": 1,
+        "state_count": 1
+      },
+      {
+        "all_maximizers": [
+          [
+            0
+          ]
+        ],
+        "maximum_one_step_fibre": 1,
+        "n": 1,
+        "observed_maximum_entrance_depth_not_all_size_theorem": 0,
+        "recurrent_state_count": 1,
+        "state_count": 1
+      },
+      {
+        "all_maximizers": [
+          [
+            1,
+            0
+          ]
+        ],
+        "maximum_one_step_fibre": 2,
+        "n": 2,
+        "observed_maximum_entrance_depth_not_all_size_theorem": 1,
+        "recurrent_state_count": 3,
+        "state_count": 4
+      },
+      {
+        "all_maximizers": [
+          [
+            1,
+            2,
+            0
+          ]
+        ],
+        "maximum_one_step_fibre": 4,
+        "n": 3,
+        "observed_maximum_entrance_depth_not_all_size_theorem": 2,
+        "recurrent_state_count": 14,
+        "state_count": 27
+      },
+      {
+        "all_maximizers": [
+          [
+            1,
+            2,
+            3,
+            0
+          ]
+        ],
+        "maximum_one_step_fibre": 8,
+        "n": 4,
+        "observed_maximum_entrance_depth_not_all_size_theorem": 3,
+        "recurrent_state_count": 87,
+        "state_count": 256
+      },
+      {
+        "all_maximizers": [
+          [
+            1,
+            2,
+            3,
+            4,
+            0
+          ]
+        ],
+        "maximum_one_step_fibre": 16,
+        "n": 5,
+        "observed_maximum_entrance_depth_not_all_size_theorem": 4,
+        "recurrent_state_count": 671,
+        "state_count": 3125
+      }
+    ],
+    "checks": {
+      "actual_child_flags": 2,
+      "actual_ldd_stderr_preserved": 226,
+      "actual_root_raw_cmp": 3,
+      "all_actual_ldd_commands": 226,
+      "all_current_history": 3162,
+      "all_raw_ldd_dependencies": 226,
+      "archival_comparator_inputs": 733,
+      "committed_kernel": 1,
+      "complete_carrier": 6,
+      "exact_capsule": 4,
+      "full_after_referents": 5358,
+      "full_author_pilot_fields": 12,
+      "full_author_proof_fields": 12,
+      "full_code_source_set": 3414,
+      "full_inverse_mass": 6,
+      "full_observed_coverage": 2,
+      "gate_after_unchanged": 1,
+      "gate_findings": 1,
+      "historical_seal_preserved": 2,
+      "history_actual_commands": 21,
+      "history_before_after": 1,
+      "history_scope": 1,
+      "initial_validation_preserved": 1002,
+      "input_count": 1,
+      "ldd_bootstrap": 2,
+      "ldd_count": 2,
+      "manifest_pin": 5490,
+      "manifest_safe": 5490,
+      "manifest_syntax": 5490,
+      "original_archival_comparator": 1,
+      "outer_complete": 1,
+      "outer_seal": 1,
+      "physical_reviewed_snapshots": 1,
+      "producer_actual_command": 2,
+      "producer_actual_complete_stream": 2,
+      "root_flags": 1,
+      "run_actual_result": 2,
+      "run_before_after": 4,
+      "run_current_dependency": 2196,
+      "science_result": 1,
+      "source_only_capsule": 2
+    },
+    "gate_seal": "6989fad02d78655482d50a1eb18e6e099b44e016f1cec4478e7e94e88a483940",
+    "historical_inputs_and_tools": 3162,
+    "historical_search_stdout_bytes": 11200,
+    "original_runs": [
+      {
+        "ldd_actual_exits_zero": 113,
+        "observed": 78,
+        "producer": {
+          "argv": [
+            "/root/miniconda3/bin/python3.12",
+            "-I",
+            "-S",
+            "-B",
+            "-X",
+            "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_01/never_created_child_cache",
+            "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_01/source_inputs/bootstrap.py"
+          ],
+          "cwd": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_01",
+          "env": {
+            "LANG": "C.UTF-8",
+            "LC_ALL": "C.UTF-8",
+            "PATH": "/usr/bin:/bin",
+            "TZ": "UTC"
+          },
+          "exit": 0,
+          "finished_epoch": 1788700819.0822666,
+          "started_epoch": 1788700818.47967,
+          "stderr": "producer.stderr",
+          "stdout": "producer.stdout"
+        },
+        "run": "replay_01",
+        "runtime": 932,
+        "science": 166
+      },
+      {
+        "ldd_actual_exits_zero": 113,
+        "observed": 78,
+        "producer": {
+          "argv": [
+            "/root/miniconda3/bin/python3.12",
+            "-I",
+            "-S",
+            "-B",
+            "-X",
+            "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_02/never_created_child_cache",
+            "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_02/source_inputs/bootstrap.py"
+          ],
+          "cwd": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/FTH_GATE/replay_02",
+          "env": {
+            "LANG": "C.UTF-8",
+            "LC_ALL": "C.UTF-8",
+            "PATH": "/usr/bin:/bin",
+            "TZ": "UTC"
+          },
+          "exit": 0,
+          "finished_epoch": 1788700820.9421623,
+          "started_epoch": 1788700820.3383567,
+          "stderr": "producer.stderr",
+          "stdout": "producer.stdout"
+        },
+        "run": "replay_02",
+        "runtime": 932,
+        "science": 166
+      }
+    ],
+    "payloads": 1053,
+    "reviewed_inputs": 164,
+    "root_new_scientific_runs": 0,
+    "status": "ROOT_FTH_GATE_ORIGINAL_ARTIFACT_INSPECTION_PASS_NOT_ADMISSION",
+    "supplement": 6
+  }
+}
