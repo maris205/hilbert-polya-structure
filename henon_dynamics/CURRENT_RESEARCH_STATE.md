@@ -7,7 +7,7 @@
 
 用户在三项准入研究检查点后明确 **“继续”**，续接同一 **C414–C418**
 批次。现已完成 **5/5 项独立合同、五篇完整论文及最终发布门槛**，
-状态 `FIVE_PAPERS_SEALED; RELEASE_COMMIT_PENDING`。
+状态 `FIVE_PAPERS_SEALED_AND_RELEASE_COMMIT_SYNCED`。
 [五篇交付入口](continuation_c414_c418_round2/README.md) 提供真实 PDF、
 可编辑源码、各篇独立增量和完整证据；最终页数依次为 **9、11、15、
 17、9 页，共 61 页**。不把储备札记、提纲或推论另计论文。
@@ -105,7 +105,20 @@ Hilbert–Pólya 实现；`NO_BAD_EULER_OR_ROOT_NUMBER` 持续有效。
 （终构建总报告及 C416 两份作者记录、四个 TeX 章节）。
 它们不影响已核 PDF／数学／程序；为保留冻结字节不作格式化，
 不将这次全包检查写成 PASS。发布代码／评价子树的同项检查退出 0。
-科研提交及真实远端同步仍待下一个 Git 动作，不预填自指提交号。
+最终精确暂存集合检查为 261 个路径（封存树 258 加三个全局索引），
+三个索引的暂存 blob 与磁盘一致，无未暂存的跟踪文件改动、无其他
+暂存路径；三个索引、发布代码及评价的空白检查均退出 0。
+
+科研提交已实际生成并推送：
+`5581ba88f112c795d38d4f64b10274e7b2272cd6`
+（`Complete and seal five reviewed C414-C418 manuscripts`），
+父提交为上面的 `2ebe9f4e712007ddf57260800c9ebda94f5d2a9d`。
+`git push origin main` 退出 0；之后重新 fetch 及
+`git ls-remote origin refs/heads/main` 均实际完成，确认当次核验的
+HEAD、origin/main、实时远端 main 三者皆为该科研提交，ahead/behind
+为 0/0。提交后跟踪文件及暂存区无残留改动，仅原八个继承未跟踪
+目录保留。此节另记真实同步收据，不改封存载荷，也不预填收据
+自身的自指提交号；后续收据提交的实际编号由 Git refs 和交付消息给出。
 
 ## C414–C418 三项研究检查点（已封存，以下保留原记录）
 
