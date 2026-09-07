@@ -1,0 +1,46 @@
+--- docs/papers204_208_sequence/qa/batch_four_build_original_preparation/inspect_four_builds.py	2026-09-07 21:18:58.442134408 +0800
++++ docs/papers204_208_sequence/qa/batch_four_build_original_revision_01/inspect_four_builds.py	2026-09-07 21:36:04.722182518 +0800
+@@ -12,6 +12,7 @@
+ import re
+ import shlex
+ import sys
++import sysconfig
+ 
+ HERE = Path(__file__).resolve().parent
+ QA = HERE.parent
+@@ -149,12 +150,31 @@
+         for base in roots:
+             if base.is_dir():
+                 selected.update(base.rglob("*"))
+-        # Fixed configuration candidates outside recursive roots are retained
+-        # exactly from the pinned original ledger and checked for presence below.
+         if name == "configuration":
+-            selected.update(Path(p) for p in snapshot[name] if not any(Path(p).is_relative_to(b) for b in roots))
++            # Restore the original explicit selection, including ABSENT fixed
++            # children underneath recursive roots; never inherit ledger extras.
++            selected.update(map(Path, ("/etc/ld.so.cache", "/etc/ld.so.conf", "/etc/ld.so.preload",
++                "/etc/locale.conf", "/etc/default/locale", "/etc/nsswitch.conf", "/etc/localtime",
++                "/etc/bash.bashrc", "/etc/profile", "/etc/passwd", "/etc/group", "/etc/fonts/local.conf",
++                "/usr/lib/locale/locale-archive", "/root/.fonts.conf", "/root/.config/fontconfig/fonts.conf",
++                "/usr/lib/python310.zip", "/usr/bin/pyvenv.cfg", "/usr/pyvenv.cfg")))
++            for base in (Path("/usr/bin"), Path("/usr/lib")):
++                selected.update(base / n for n in ("python._pth", "python3._pth", "python310._pth", "python3.10._pth"))
++            selected.update(map(Path, (sysconfig.get_makefile_filename(), sysconfig.get_config_h_filename())))
++            for key in ("LDLIBRARY", "INSTSONAME"):
++                value = sysconfig.get_config_var(key)
++                if value:
++                    selected.add(STDLIB.parent / (value + "._pth"))
++            ldd = text("/usr/bin/ldd")
++            match = re.search(r'^RTLDLIST="([^"]+)"', ldd, re.M)
++            require(ldd.startswith("#!/bin/bash\n") and match is not None, "original ldd interpreter/loader-list rule")
++            selected.update(map(Path, match.group(1).split()))
+         groups[name] = {str(p) for p in selected}
+-    require(set(snapshot) == set(groups) and all(set(snapshot[k]) == v for k, v in groups.items()), "complete original-scope current directory membership")
++    differences = {name: dict(missing=sorted(set(snapshot.get(name, {})) - groups.get(name, set())),
++                              unexpected=sorted(groups.get(name, set()) - set(snapshot.get(name, {}))))
++                   for name in sorted(set(snapshot) | set(groups))}
++    require(set(snapshot) == set(groups) and all(not d["missing"] and not d["unexpected"] for d in differences.values()),
++            "complete original-scope current directory membership: " + json.dumps(differences, sort_keys=True))
+ 
+ 
+ def originals(contract):

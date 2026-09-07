@@ -1,0 +1,130 @@
+\section{A finite growth lemma and the exact two-period core}
+
+Call a site a strict extremum when it is strictly larger than both
+neighbors or strictly smaller than both; let $E(x)$ be their set.
+
+\begin{lemma}[Permanent extrema]\label{lem:permanent}
+ $E(x)\subseteq E(Ux)$. Each such site alternates between strict minimum
+ and strict maximum, and its values alternate between $0$ and $2$ after
+ the first update.
+\end{lemma}
+\begin{proof}
+ A strict minimum becomes two, while either neighbor can count at most
+ its other neighbor as greater and so becomes at most one. A strict
+ maximum becomes zero, while both neighbors count the old maximum and
+ so become at least one. The argument repeats at each step.
+\end{proof}
+
+The following fixed finite lemma is the sole computer-assisted step in
+the all-orbit convergence proof. Its quantifiers and exhaustiveness
+argument are included to distinguish a finite certificate from an
+extrapolation of short cyclic trajectories.
+
+\begin{lemma}[Radius-six certificate]\label{lem:local}
+ Let $w=(w_{-6},\ldots,w_6)\in\{0,1,2\}^{13}$ and define its truncated
+ forward cone by $v^0=w$ and
+ \[
+ v^{t+1}_j=\ind{v^t_{j-1}>v^t_j}+\ind{v^t_{j+1}>v^t_j},
+ \qquad |j|\le5-t,\quad 0\le t<4.
+ \]
+ If $v^4_0\ne v^2_0$, there are $1\le s\le4$ and $|j|\le5-s$ such
+ that $j$ is a strict extremum in $v^s$ but not in $v^0$.
+\end{lemma}
+\begin{proof}[Finite certificate and complete coverage]
+ The accompanying standalone verifier enumerates all $3^{11}=177147$
+ inner words $(w_{-5},\ldots,w_5)$, forming their cones on
+ $|j|\le5-t$. The time-two and time-four centers are determined there.
+ Exactly $158643$ inner words have equal centers, so the premise is
+ false for all nine exterior-letter choices. For $18300$ inner words
+ with unequal centers, a witness satisfies $|j|\le4-s$; its row-$s$
+ neighbors and initial extremum test use only inner coordinates and
+ persist for every exterior choice. The remaining $204$ inner words
+ are each checked with all nine pairs $(w_{-6},w_6)$. All $1836$
+ extensions have a witness in the stated larger cone. The complete
+ canonical output records these inner words and every extension witness.
+
+ These three disjoint cases exhaust every thirteen-letter word. Cone
+ locality proves independence of the outer letters in the first two
+ cases, rather than assuming it in the exceptions. Evolution is
+ computed from edge signs and each witness is also tested by direct
+ height inequalities. Thus the certificate covers all $3^{13}=1594323$
+ words, not a sample. Its successful finite execution is a declared
+ proof dependency. A separate candidate checker has additionally
+ enumerated all thirteen-letter words directly.
+\end{proof}
+
+\begin{theorem}[Uniform nonsharp entrance bound]\label{thm:clock}
+ For every $n\ge3$, $U^{4n+4}=U^{4n+2}$ on $X_n$. In particular
+ $H(n)\le4n+2$ and all periods are one or two.
+\end{theorem}
+\begin{proof}
+ Read thirteen coordinates around any site of a cycle, allowing repeated
+ coordinates for $n<13$. This is one of the certified words. Its cone
+ agrees with the cyclic trajectory wherever computed, by induction on
+ time. If $E(U^4a)=E(a)$, monotonicity from Lemma~\ref{lem:permanent}
+ forbids a new extremum at any intermediate time. Applying
+ Lemma~\ref{lem:local} at every center gives $U^4a=U^2a$.
+
+ The $n+1$ inclusions between $E(U^{4q}x)$ for $q=0,\ldots,n+1$
+ cannot all be strict subsets of an $n$-element set. For some
+ $0\le q\le n$, the four-step endpoint sets coincide. Hence
+ $U^{4q+4}x=U^{4q+2}x$, so the orbit enters $\Fix(U^2)$ by
+ $4q+2\le4n+2$. This set is forward invariant because $U$ commutes
+ with its square. The claimed uniform identity follows.
+\end{proof}
+
+The recurrent language below has a separate deductive proof; it does
+not depend on the local certificate. A run is maximal in the cyclic
+word, and the word's left-to-right orientation fixes its left and right
+boundaries.
+
+\begin{theorem}[Exact core]\label{thm:core}
+ The sole fixed point is $0^n$. Every other point of $\Fix(U^2)$ has
+ both zero and positive entries and has the following run language:
+ \begin{enumerate}
+ \item every zero run has length one or two;
+ \item every positive run is $2,11,12,21$, or $121$;
+ \item a positive run $12$ or $121$ has a singleton zero run on its
+ left; a positive run $21$ or $121$ has one on its right.
+ \end{enumerate}
+ Conversely every such labelled cyclic word belongs to $\Fix(U^2)$.
+ All its nonzero members have exact period two.
+\end{theorem}
+\begin{proof}
+ Let $y=Ux$ and $x=Uy$. A height two maps to zero, so the possible
+ temporal columns $(x_i,y_i)$ are
+ \[
+ S_0=(0,2),\quad S_1=(2,0),\quad W_0=(0,1),\quad
+ W_1=(1,0),\quad N=(1,1),\quad (0,0).
+ \]
+ At a $(0,0)$ column the two zero-output equations force both neighbors
+ to be $(0,0)$. Connectedness then gives the all-zero state. Exclude
+ that case. A neutral column $N$ needs one height-two neighbor at
+ each time. They are distinct, hence are $S_0,S_1$ in either order.
+ In particular a neutral column cannot neighbor a weak column.
+
+ At $W_0$, exactly one neighbor is positive in $x$, and no neighbor
+ has height two in $y$. The zero $x$-neighbor must consequently be
+ $W_0$, while the other is $S_1$ or $W_1$. The exclusion of $N$ uses
+ the neutral site's \emph{own} equation just proved. Interchanging
+ the two times proves the rule for $W_1$. Each weak site therefore
+ has exactly one same-phase weak neighbor: weak sites form unique
+ adjacent dimers, with opposite-phase strong or weak exterior neighbors.
+ An $S_0$ has neighbors $S_1,W_1$, or $N$, since both are positive
+ in $x$; interchanging time gives the rule for $S_1$. Substitution
+ shows these column rules are also sufficient for both time equations.
+
+ In the emitted word $x$, a zero run is one $S_0$ or one $W_0$ dimer.
+ A positive run is one $S_1$ with an optional neutral on either side,
+ or a $W_1$ dimer. The neutral's other neighbor must be a strong
+ singleton zero, which gives precisely the two boundary restrictions.
+ Conversely the stated run language recovers strong roles at twos and
+ singleton zeros, weak roles on $00$ and $11$ dimers, and neutral roles
+ on the remaining ones. The column rules hold at each coordinate,
+ proving sufficiency. No zero-free exception occurs: a global maximum
+ in a source gives a zero in every image of $U$.
+
+ A fixed point cannot contain two, since two maps to zero. Without twos,
+ every one maps to zero as well. Thus only $0^n$ is fixed; the remaining
+ core points have exact period two.
+\end{proof}

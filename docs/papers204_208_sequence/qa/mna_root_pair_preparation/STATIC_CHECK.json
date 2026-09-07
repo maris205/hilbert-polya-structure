@@ -1,0 +1,52 @@
+{
+  "schema": "mna-root-pair-preparation-static-evidence-v1",
+  "status": "READY_SOURCE_ONLY_PREPARATION_NOT_EXECUTED_NOT_ACCEPTED",
+  "actual_static_command": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B -X pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/mna_root_pair_preparation/never_created_static_cache -c 'import ast,hashlib,json,os,pathlib,re,sys,sysconfig; root=pathlib.Path(\"/root/autodl-tmp/symbolic_dynamics\"); prep=root/\"docs/papers204_208_sequence/qa/mna_root_pair_preparation\"; gate=root/\"docs/papers204_208_sequence/scouting/MNA_GATE\"; target=root/\"docs/papers204_208_sequence/qa/root_replays/mna_gate_pair_01\"; data=(prep/\"run_pair.py\").read_bytes(); source_before={\"sha256\":hashlib.sha256(data).hexdigest(),\"bytes\":len(data)}; tree=ast.parse(data); compile(tree,str(prep/\"run_pair.py\"),\"exec\"); imports=sorted({n.module if isinstance(n,ast.ImportFrom) else a.name for n in ast.walk(tree) if isinstance(n,(ast.Import,ast.ImportFrom)) for a in (n.names if isinstance(n,ast.Import) else [None])}); assert imports==[\"argparse\",\"datetime\",\"hashlib\",\"json\",\"os\",\"pathlib\",\"re\",\"subprocess\",\"sys\",\"sysconfig\"]; fixed=json.loads((prep/\"INPUT_PINS.json\").read_bytes())[\"inputs\"]; old=json.loads((gate/\"evidence/pair03/inputs_before.json\").read_bytes()); assert old==json.loads((gate/\"evidence/pair03/inputs_after.json\").read_bytes()) and len(old)==997; seal=(gate/\"SHA256SUMS\").read_bytes(); assert hashlib.sha256(seal).hexdigest()==\"5e15111b5dc6b4a585126e32fc59752b10cba8605f846d225e9efa26c656dc34\"; rows={};\nfor line in seal.decode().splitlines():\n m=re.fullmatch(r\"([0-9a-f]{64})  (.+)\",line); assert m; d,n=m.groups(); p=pathlib.Path(n); assert not p.is_absolute() and \"..\" not in p.parts and n not in rows and n!=\"SHA256SUMS\"; rows[n]=d\nassert len(rows)==309; physical={p.relative_to(gate).as_posix() for p in gate.rglob(\"*\") if p.is_file()}; assert physical==set(rows)|{\"SHA256SUMS\"}; assert all(not p.is_symlink() for p in gate.rglob(\"*\")); counts=[]\nfor passno in (1,2):\n checks=0\n for n,d in rows.items():\n  assert hashlib.sha256((gate/n).read_bytes()).hexdigest()==d; checks+=1\n for n,v in list(old.items())+list(fixed.items()):\n  b=pathlib.Path(n).read_bytes(); assert v=={\"sha256\":hashlib.sha256(b).hexdigest(),\"bytes\":len(b)}; checks+=1\n assert (gate/\"SHA256SUMS\").read_bytes()==seal; counts.append(checks)\nsource_after={\"sha256\":hashlib.sha256((prep/\"run_pair.py\").read_bytes()).hexdigest(),\"bytes\":(prep/\"run_pair.py\").stat().st_size}; assert source_before==source_after; assert not os.path.lexists(target); assert not os.path.lexists(sys.pycache_prefix); assert sys.path==[\"/usr/lib/python310.zip\",\"/usr/lib/python3.10\",\"/usr/lib/python3.10/lib-dynload\"]; assert not os.path.lexists(sys.path[0]); print(json.dumps({\"status\":\"PASS_STATIC_PREPARATION_DIAGNOSTIC_NOT_TARGET_EXECUTION\",\"source_before\":source_before,\"source_after\":source_after,\"source_functions\":len([n for n in tree.body if isinstance(n,ast.FunctionDef)]),\"source_lines\":len(data.splitlines()),\"imports\":imports,\"gate_payloads_checked_twice\":309,\"gate_manifest_sha256\":hashlib.sha256(seal).hexdigest(),\"original_dependencies_checked_twice\":997,\"fixed_input_pins_checked_twice\":len(fixed),\"pin_checks_each_pass\":counts,\"system_interpreter\":str(pathlib.Path(sys.executable).resolve()),\"exact_system_import_path\":sys.path,\"optional_development_files\":{n:os.path.lexists(n) for n in [sysconfig.get_makefile_filename(),sysconfig.get_config_h_filename()]},\"target_absent\":str(target),\"cache_absent\":sys.pycache_prefix,\"runner_preflight_executed\":False,\"runner_executed\":False,\"scientific_verifier_executed\":False},sort_keys=True,indent=2))'",
+  "actual_native_tool_result": {
+    "chunk_id": "f1891c",
+    "wall_time_seconds": 0.528645716,
+    "exit_code": 0,
+    "original_token_count": 377,
+    "output": "{\n  \"cache_absent\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/mna_root_pair_preparation/never_created_static_cache\",\n  \"exact_system_import_path\": [\n    \"/usr/lib/python310.zip\",\n    \"/usr/lib/python3.10\",\n    \"/usr/lib/python3.10/lib-dynload\"\n  ],\n  \"fixed_input_pins_checked_twice\": 14,\n  \"gate_manifest_sha256\": \"5e15111b5dc6b4a585126e32fc59752b10cba8605f846d225e9efa26c656dc34\",\n  \"gate_payloads_checked_twice\": 309,\n  \"imports\": [\n    \"argparse\",\n    \"datetime\",\n    \"hashlib\",\n    \"json\",\n    \"os\",\n    \"pathlib\",\n    \"re\",\n    \"subprocess\",\n    \"sys\",\n    \"sysconfig\"\n  ],\n  \"optional_development_files\": {\n    \"/usr/include/python3.10/pyconfig.h\": false,\n    \"/usr/lib/python3.10/config-3.10-x86_64-linux-gnu/Makefile\": false\n  },\n  \"original_dependencies_checked_twice\": 997,\n  \"pin_checks_each_pass\": [\n    1320,\n    1320\n  ],\n  \"runner_executed\": false,\n  \"runner_preflight_executed\": false,\n  \"scientific_verifier_executed\": false,\n  \"source_after\": {\n    \"bytes\": 29693,\n    \"sha256\": \"5a8afbf5c9094b9e7549b08e17b71ab8c78a94751c8ffee5be79ba42afb086ea\"\n  },\n  \"source_before\": {\n    \"bytes\": 29693,\n    \"sha256\": \"5a8afbf5c9094b9e7549b08e17b71ab8c78a94751c8ffee5be79ba42afb086ea\"\n  },\n  \"source_functions\": 24,\n  \"source_lines\": 478,\n  \"status\": \"PASS_STATIC_PREPARATION_DIAGNOSTIC_NOT_TARGET_EXECUTION\",\n  \"system_interpreter\": \"/usr/bin/python3.10\",\n  \"target_absent\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/mna_gate_pair_01\"\n}\n"
+  },
+  "execution_boundary": {
+    "prepared_preflight_executed": false,
+    "prepared_runner_executed": false,
+    "old_helper_executed": false,
+    "scientific_verifier_executed": false,
+    "build_or_view_executed": false,
+    "original_gate_or_paper_or_index_or_git_written": false,
+    "native_tool_output_role": "Complete native diagnostic tool result; not a newly fabricated split stdout/stderr capture.",
+    "static_diagnostic_role": "AST parse and compile without executing compiled code; direct original-byte hash/size checks twice."
+  },
+  "independent_infrastructure_desk": {
+    "agent": "/root/thirty_third_finite_scout/orientation_source_desk/mna_runtime_source_audit",
+    "role": "Read-only source/provenance inspection, not mathematics/manuscript review or target execution.",
+    "reviewed_source_sha256": "5a8afbf5c9094b9e7549b08e17b71ab8c78a94751c8ffee5be79ba42afb086ea",
+    "reviewed_readme_sha256": "ff3e8eb539f98c685e883f64773aa385ad3484f27ea689b4bd8d0fe4d4248251",
+    "source_lines": 478,
+    "current_blocking_findings_reported": 0,
+    "changes_from_static_findings": [
+      "Absent development Makefile/header moved to exact optional configuration, not treated as missing runtime payloads.",
+      "Timeout/spawn failures separate unknown native returncodes/streams from wrapper status and diagnostics.",
+      "Only explicit absent child-cache probes accepted for observed nonfiles; unexpected volatile/disappeared verifier paths fail.",
+      "Physical write-parent resolution and all native receipts/attempts/full streams rechecked.",
+      "Execution-check result distinguished from successful native parent return and full sealing."
+    ],
+    "qualification": "The preparer and source reviewer supplied infrastructure only; no independent theorem/source-novelty judgment is claimed."
+  },
+  "preserved_preseal_edit_failure": {
+    "action": "apply_patch verification, not a diagnostic/target execution",
+    "observed_result": "Script failed\nScript error:\napply_patch verification failed: Failed to find expected lines in /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/mna_root_pair_preparation/README.md:\nevents. Full resource and",
+    "atomic_no_edits_confirmed_by_native_hash_command": {
+      "chunk_id": "787998",
+      "exit_code": 0,
+      "run_pair_sha256_before_and_after": "7ce0349a8b3ef61ad7f94449f726bcf16b2108ea3ab61274a726df7ede174dfc",
+      "readme_sha256_before_and_after": "dbcaac6e97384c8f9086dfc61286c15447147a0e7d79d91ff2a08e0a52789950"
+    },
+    "resolution": "Corrected patch context applied separately to unsealed own sources; no old source, gate or target artifact changed."
+  },
+  "handoff": "Root must read all source, verify this complete preparation seal, then run its actual read-only preflight and fresh pair. A preparation status is never an execution or admission.",
+  "owner": "OWNER_AMBER",
+  "external_status": "HOLD_EXTERNAL"
+}

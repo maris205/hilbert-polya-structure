@@ -1,0 +1,18 @@
+{
+  "role": "ACTUAL_STATIC_SYNTAX_AND_READONLY_SURFACE_ONLY",
+  "argv": [
+    "/usr/bin/python3.10",
+    "-I",
+    "-S",
+    "-B",
+    "-c",
+    "import ast,pathlib; p=pathlib.Path(\"docs/papers204_208_sequence/qa/batch_four_build_original_preparation/inspect_four_builds.py\"); t=ast.parse(p.read_text()); imports=sorted({a.name for n in ast.walk(t) if isinstance(n,ast.Import) for a in n.names}|{n.module for n in ast.walk(t) if isinstance(n,ast.ImportFrom)}); assert imports==[\"gzip\",\"hashlib\",\"json\",\"os\",\"pathlib\",\"re\",\"shlex\",\"sys\"],imports; badnames={\"exec\",\"eval\",\"compile\",\"__import__\",\"write_text\",\"write_bytes\",\"mkdir\",\"unlink\",\"rename\",\"replace\",\"system\",\"popen\",\"run\",\"call\",\"check_call\",\"check_output\",\"run_path\",\"run_module\"}; calls=[n for n in ast.walk(t) if isinstance(n,ast.Call)]; bad=[getattr(n.func,\"id\",getattr(n.func,\"attr\",\"\")) for n in calls if getattr(n.func,\"id\",getattr(n.func,\"attr\",\"\")) in badnames]; assert not bad,bad; opens=[n for n in calls if isinstance(n.func,ast.Attribute) and n.func.attr==\"open\"]; assert all(len(n.args)==1 and isinstance(n.args[0],ast.Constant) and n.args[0].value==\"rb\" for n in opens); print(\"STATIC_ONLY syntax and read-only call surface PASS; original adapter NOT imported or executed\")"
+  ],
+  "cwd": "/root/autodl-tmp/symbolic_dynamics",
+  "native_exit": 0,
+  "combined_native_output": "STATIC_ONLY syntax and read-only call surface PASS; original adapter NOT imported or executed\n",
+  "inspector_executions": 0,
+  "builds": 0,
+  "new_views": 0,
+  "limit": "The source was parsed as AST only. The native exec tool supplied combined output; no distinct stdout/stderr files were captured. This is not a run of the original inspector."
+}

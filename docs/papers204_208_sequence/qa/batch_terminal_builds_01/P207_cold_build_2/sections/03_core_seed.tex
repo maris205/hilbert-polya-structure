@@ -1,0 +1,105 @@
+\section{Enumeration and an exact seed clock}
+
+Split weak dimers into left and right roles, and orient each neutral
+by its adjacent strong phases. In the order
+\[
+ S_0,S_1,W_{0L},W_{0R},W_{1L},W_{1R},N_{01},N_{10},
+\]
+the emitted heights are $0,2,0,0,1,1,1,1$. Let $Q$ be the adjacency
+matrix of the following complete transition list.
+\begin{center}
+\begin{tabular}{ll@{\qquad}ll}
+\toprule
+Role & Following roles & Role & Following roles\\
+\midrule
+$S_0$ & $S_1,W_{1L},N_{01}$ & $S_1$ & $S_0,W_{0L},N_{10}$\\
+$W_{0L}$ & $W_{0R}$ & $W_{0R}$ & $S_1,W_{1L}$\\
+$W_{1L}$ & $W_{1R}$ & $W_{1R}$ & $S_0,W_{0L}$\\
+$N_{01}$ & $S_1$ & $N_{10}$ & $S_0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{proposition}\label{prop:count}
+ For $n\ge3$ the core size is $1+\tr Q^n$ and the number of two-cycles
+ is $\tr Q^n/2$. Moreover
+ \begin{equation}\label{eq:det}
+ D(z):=\det(I-zQ)=1-z^2-4z^3-2z^4+z^8.
+ \end{equation}
+\end{proposition}
+\begin{proof}
+ Theorem~\ref{thm:core} uniquely recovers the role at each labelled
+ position, including both ends of each weak dimer. Thus closed labelled
+ walks of length $n$ are in bijection with nonzero core words. No
+ rotation quotient is taken. Exchanging phase labels applies $U$ and
+ pairs every such word with its distinct partner.
+
+ To evaluate the determinant, compress deterministic dimer and neutral
+ roles. Strong blocks have length one, weak blocks length two; a neutral
+ may appear only between successive strong blocks. Successive blocks
+ have opposite phases, and the strong/weak block transfer is
+ \[
+ B(z)=\begin{pmatrix}z(1+z)&z^2\\z&z^2\end{pmatrix}.
+ \]
+ Eliminating the intermediate roles from $I-zQ$ leaves
+ $\bigl(\begin{smallmatrix}I&-B(z)\\-B(z)&I\end{smallmatrix}\bigr)$;
+ the eliminated diagonal blocks have determinant one. Therefore
+ \[
+ \det(I-zQ)=\det(I-B(z))\det(I+B(z))
+ =(1+z^4)^2-(z+2z^2)^2,
+ \]
+ which is~\eqref{eq:det}. This identity can also be checked by the
+ explicit eight-by-eight determinant, as in the finite certificate.
+\end{proof}
+
+Writing $a_n=\tr Q^n$, the standard formal identity
+$\sum_{n\ge1}a_nz^n=-zD'(z)/D(z)$ gives
+\[
+ a_n=a_{n-2}+4a_{n-3}+2a_{n-4}-a_{n-8}\quad(n\ge9),
+\]
+with $a_1,\ldots,a_8=0,2,12,10,20,62,84,154$. This is an enumeration
+of the proved language, not an additional dynamical assertion.
+
+\begin{proposition}[Seed entrance]\label{prop:seed}
+ $H(3)=1$. For every $n\ge4$,
+ \[
+ h(01^{n-1})=\lfloor n/2\rfloor+1,
+ \qquad \lfloor n/2\rfloor+1\le H(n)\le4n+2.
+ \]
+\end{proposition}
+\begin{proof}
+ Put $m=\lfloor n/2\rfloor$ and $z^s=U^s(20^{n-1})$. For
+ $d(i)=\min\{i,n-i\}$ and $0\le s<m$, the exact profile is
+ \begin{equation}\label{eq:seed}
+ z_i^s=\begin{cases}
+ 2\ind{s\text{ even}},&d(i)=0,\\
+ 2\ind{s-d(i)\text{ even}},&0<d(i)<s,\\
+ 1,&d(i)=s>0,\\
+ 0,&d(i)>s.
+ \end{cases}
+ \end{equation}
+ At $s=0$ this is the initial seed. Before the fronts meet, an interior
+ site has opposite-phase neighbors and alternates; the frontier one
+ has two zero neighbors and becomes zero. The next outer zero sees
+ one positive neighbor and becomes one. Just inside the old front,
+ a zero sees two positive neighbors and becomes two. The central
+ seed alternates by Lemma~\ref{lem:permanent}; more distant sites
+ have zero neighbors. These cases prove the induction.
+
+ At time $m$, for $n=2m$ the sole remaining zero sees two frontier
+ ones and becomes two, giving an alternating $02$ word. For $n=2m+1$,
+ the two remaining zeros each see one frontier one and become the
+ weak dimer $11$; the other sites are alternating strong sites. Both
+ words lie in the core. For $1\le s<m$ a frontier is a strict maximum
+ of height one, hence its value after two further updates is two by
+ Lemma~\ref{lem:permanent}; it is not in the core. The initial seed
+ is outside the core because its zero run has length $n-1\ge3$.
+ Thus $h(20^{n-1})=m$. Since $U(01^{n-1})=20^{n-1}$ and the latter
+ is not initially recurrent, the source has entrance $m+1$.
+
+ For $n=3$ the cycle is the complete three-vertex graph. Equal heights
+ map to $000$; two equal lower heights map to a rotation of $110$;
+ two equal higher heights map to a rotation of $200$; three distinct
+ heights map to a permutation of $210$. Each lies in the core.
+ The nonrecurrent source $001$ shows the upper bound one is attained.
+\end{proof}

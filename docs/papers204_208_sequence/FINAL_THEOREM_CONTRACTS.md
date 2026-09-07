@@ -2,8 +2,10 @@
 
 Date: 2026-09-07 UTC. A candidate is numbered only after its deductive and
 collision/source gate. Manuscript review can subsequently retire that
-contract without reusing the number. There are currently **four retained
-papers, four completed papers and one unfilled seat**. P204 and P206 are
+contract without reusing the number. There are currently **five retained
+papers, four completed papers and no unfilled seat**. P210's physical Round0
+is complete and actual independent A is in progress; it is not accepted or
+complete. P204 and P206 are
 historically admitted, subsequently rejected numbered drafts.
 
 ## P204 — previous-smaller distance feedback — REJECTED IN REVIEW A
@@ -359,6 +361,81 @@ This status-only index update changes no theorem, manuscript, author seal,
 accepted review or frozen evidence. The exact previous contract bytes are
 [physically preserved](qa/central_lifecycle_p209_complete/README.md) for
 all original audit path/hash roles.
-Current census: four retained, four complete, one unfilled; next number P210.
-MNA's actual candidate GO still requires root originals and fresh replays;
-it is not an admitted contract in this index.
+At P209 completion the census was four retained, four complete, one unfilled;
+P210 admission and its still-pending manuscript gates follow below.
+
+## P210 — weakly increasing run aggregation — ROUND0 COMPLETE, A IN PROGRESS
+
+Proof contributors: root and `/root/twenty_seventh_finite_scout`. The
+manuscript/verifier author `/root/p210_author` and author-evidence helper
+`/root/p210_author/author_runtime` are also contributors; none may review P210.
+The fresh nonauthor `/root/mna_candidate_gate` supplied a candidate assessment
+but no repair lemma. Candidate familiarity is not blind review and cannot
+substitute for either later manuscript round.
+
+The exact controlling admission is [root's decision](P210_ROOT_ADMISSION.md),
+the [complete frozen author proof](scouting/MNA_GATE/inputs/author_lane40/MNA_PROOF.md),
+its [image-bijection addendum](scouting/MNA_GATE/inputs/author_lane40/MNA_IMAGE_ENUMERATION_ADDENDUM.md),
+the [nonauthor gate](scouting/MNA_GATE/CANDIDATE_GATE.md) and root's linked
+full source, actual pair and original-artifact reception. Root's two fresh
+unchanged independent-code runs each passed115,680 checks on all4,095
+original states N=1..12, with full raw equality and4,237 input closure.
+The 309-payload gate and its two genuine provenance failures are unchanged.
+
+For every $N\ge1$, the carrier is all positive compositions of N. In one
+synchronous update, replace every maximal weakly increasing run of OLD
+parts by its sum. No new sum is re-tested within that update. Retain:
+
+1. Fixed points are exactly strictly decreasing compositions. With $\tau$
+   counting nonfixed updates before first fixation, the sharp uniform time is
+   $$H(N)=\max\{h\ge0:1+h(h+1)/2\le N\}.$$
+   Two linked all-size inductions prove old left mass at least t for each
+   cut deleted at round t, and new-block mass at least $1+t(t+1)/2$.
+   The witness $(h,h-1,\ldots,1,1+r)$ is valid for all $h\ge1,r\ge0$;
+   N=1 has time zero. Generic coarsening/ancestry is deducted.
+2. For target $(s_1,\ldots,s_m)$, initialize $r_m=1$. Scanning right to
+   left from threshold r, fail if $s_i\le r$, increment to $r_i=s_i$ if
+   $s_i=r+1$, and reset to $r_i=1$ if $s_i\ge r+2$. This characterizes
+   the complete one-step image using O(m) integer comparisons. The threshold
+   is an attained suffix minimum, not a claim that feasible first parts
+   form an interval. The explicit mutually inverse weight-preserving coding
+   identifies this image with nonempty positive-triangular-part compositions.
+   This threshold/bijection/series is ONE separate structural axis.
+3. Unique segmentation into weakly increasing target refinements with
+   strict boundary descents gives the correct endpoint-partition fibre
+   formula for every target. It is supporting infrastructure with ZERO
+   separate contribution credit, not another axis.
+
+CRG's sum-coarsening carrier/segmentation, P147's ancestry/equality doubling
+and divisor transfer, P121 genealogy, FPT unit transfer and PDCF prefix
+divisibility are deducted. The primary sources own their literal run rules,
+generic ribbon/run-network enumeration, triangular-composition count,
+reciprocal series/recurrence and reset/increment code. None is presented as
+new. Only the sharp oriented mass induction and exact image-class connection
+survive the bounded inspected subtraction. MNA is not an unrelated new
+carrier family; no bounded source nonhit proves global ownership.
+
+No maximum-fibre result, pointwise closed clock, all-time inverse, complete
+deepest-state classification, asymptotic theorem or global-priority claim
+is admitted. The Robbins extracted-table discrepancy and old retrieval
+failures remain disclosed. A complete applicable owner adapter reopens the
+affected scope. OWNER_AMBER / HOLD_EXTERNAL remain.
+
+Paper path: `papers/210-weakly-increasing-run-aggregation/`.
+Status: `P210_ROUND0_COMPLETE / MANUSCRIPT_A_IN_PROGRESS / NOT_COMPLETE`.
+Root adopted the unchanged anonymous six-page author package and physically
+froze 493 payloads after actual original reception, strict author pair and
+all-six-page viewing. Root's two new runs each passed 197,471 checks on the
+unchanged original box; all 3,639 known inputs and raw outputs matched.
+The complete author-original reception checked all 489 handoff payloads,
+66 native records and 118,295 reread current paths. Physical Round0 seal is
+`e8446cd17b1a283c74f9a6b4ced413b9e30810396c3d30f936ac2986ce790e26`;
+its separate root closure passed all 1,022 paths, 57 links and six complete
+native manifest/raw checks. See [root physical milestone](qa/P210_ROUND0_ROOT_INSPECTION.md).
+Fresh nonauthor `/root/p210_a_reviewer` is actually assigned; no A verdict or
+accepted delta yet. Physical Round1/2, two actual accepted nonauthor rounds,
+root A/B replays, terminal builds/views and final artifact/batch gate remain.
+Current census is five retained, four complete, no unfilled seat; the requested
+five-paper batch has NOT completed. Previous index bytes are
+[physically preserved](qa/central_round0_p210/README.md); P204–P209's
+scientific contracts and accepted evidence were not changed.

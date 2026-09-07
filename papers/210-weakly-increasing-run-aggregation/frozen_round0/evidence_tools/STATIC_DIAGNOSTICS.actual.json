@@ -1,0 +1,75 @@
+{
+  "artifact_role": "Preservation of selected pre-existing author-helper static/configuration diagnostic tool returns; no new command execution",
+  "author": "/root/p210_author/author_runtime",
+  "scope": "Initial and final AST checks and the failed/default plus successful/explicit-engine kpsewhich discovery commands",
+  "evidence_boundary": {
+    "not_scientific_replay_or_build_evidence": true,
+    "not_independent_review": true,
+    "no_commands_rerun_for_this_record": true,
+    "raw_field_meaning": "observed_tool_result.output is the exact output string returned by the command tool; separate raw stdout and stderr streams were not retained by these diagnostic calls",
+    "native_return_meaning": "observed_tool_result.exit_code is the command tool's reported native return code for the entire requested shell command, not an independently recorded return code for every command joined with &&",
+    "argv_boundary": "The exact requested shell command is retained. The tool did not expose the shell launch argv, so that field is null. Commands shown inside the string are not represented as independently captured argv arrays.",
+    "cwd_boundary": "The tool calls omitted workdir and used the active default workspace directory. The environment context and earlier pwd established the directory below; these three calls did not print cwd themselves.",
+    "source_version_boundary": "The initial AST result predates subsequent helper edits. The final AST/hash result is the 298-line helper version delivered to the parent. This record does not claim that every intermediate diagnostic was a final-version check."
+  },
+  "default_working_directory": "/root/autodl-tmp/symbolic_dynamics",
+  "records": [
+    {
+      "role": "Initial AST check and default format-lookup diagnostic",
+      "requested_tool_input": {
+        "cmd": "wc -l papers/210-weakly-increasing-run-aggregation/evidence_tools/*.py && /usr/bin/python3.10 -I -S -B -c 'import ast,pathlib; base=pathlib.Path(\"papers/210-weakly-increasing-run-aggregation/evidence_tools\"); [(ast.parse(p.read_text(), filename=str(p)), print(\"AST_OK\",p)) for p in sorted(base.glob(\"*.py\"))]' && /usr/bin/kpsewhich -all pdflatex.fmt && /usr/bin/kpsewhich -all pdftex.fmt && /usr/bin/kpsewhich -all fmtutil.cnf && /usr/bin/kpsewhich -all updmap.cfg",
+        "max_output_tokens": 4000
+      },
+      "shell_launch_argv": null,
+      "separate_stdout": null,
+      "separate_stderr": null,
+      "independently_recorded_subcommand_returns": null,
+      "observed_tool_result": {
+        "chunk_id": "e2624e",
+        "wall_time_seconds": 0.000005021,
+        "exit_code": 1,
+        "original_token_count": 84,
+        "output": "  240 papers/210-weakly-increasing-run-aggregation/evidence_tools/evidence.py\n   38 papers/210-weakly-increasing-run-aggregation/evidence_tools/runtime_probe.py\n  278 total\nAST_OK papers/210-weakly-increasing-run-aggregation/evidence_tools/evidence.py\nAST_OK papers/210-weakly-increasing-run-aggregation/evidence_tools/runtime_probe.py\n"
+      },
+      "interpretation": "Both AST_OK lines are actually present. The shell command returned 1, and no format/configuration paths followed. This was described in the original handoff as the default pdflatex.fmt lookup failure. It is not an independent per-kpsewhich stdout/stderr/exit receipt; the exact shell-chain evidence and its limitation are preserved here."
+    },
+    {
+      "role": "Explicit-engine format/configuration discovery",
+      "requested_tool_input": {
+        "cmd": "/usr/bin/kpsewhich -engine=pdftex -progname=pdflatex -all pdflatex.fmt && /usr/bin/kpsewhich -all texmf.cnf && /usr/bin/kpsewhich -all pdftex.map && /usr/bin/kpsewhich -all fmtutil.cnf && /usr/bin/kpsewhich -all updmap.cfg",
+        "max_output_tokens": 4000
+      },
+      "shell_launch_argv": null,
+      "separate_stdout": null,
+      "separate_stderr": null,
+      "independently_recorded_subcommand_returns": null,
+      "observed_tool_result": {
+        "chunk_id": "61625c",
+        "wall_time_seconds": 0.049156656,
+        "exit_code": 0,
+        "original_token_count": 91,
+        "output": "/var/lib/texmf/web2c/pdftex/pdflatex.fmt\n/etc/texmf/web2c/texmf.cnf\n/usr/share/texmf/web2c/texmf.cnf\n/usr/share/texlive/texmf-dist/web2c/texmf.cnf\n/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map\n/usr/share/texmf/web2c/fmtutil.cnf\n/usr/share/texlive/texmf-dist/web2c/fmtutil.cnf\n/usr/share/texmf/web2c/updmap.cfg\n/usr/share/texlive/texmf-dist/web2c/updmap.cfg\n"
+      },
+      "interpretation": "The exact returned output resolves pdflatex.fmt and the named TeX configuration/map paths. The && shell chain returned native 0; separate subprocess stream/exit records were not created. No TeX compilation ran."
+    },
+    {
+      "role": "Final helper AST check, line count, absent-cache check and SHA-256 output",
+      "requested_tool_input": {
+        "cmd": "/usr/bin/python3.10 -I -S -B -X pycache_prefix=/root/autodl-tmp/symbolic_dynamics/papers/210-weakly-increasing-run-aggregation/evidence_tools/absent_static_cache -c 'import ast,pathlib; root=pathlib.Path(\"papers/210-weakly-increasing-run-aggregation/evidence_tools\"); [(ast.parse(p.read_text(), filename=str(p)), print(\"AST_OK\",p)) for p in sorted(root.glob(\"*.py\"))]; print(\"PYTHON_LINES\",sum(len(p.read_text().splitlines()) for p in root.glob(\"*.py\"))); print(\"STATIC_CACHE_ABSENT\",not (root/\"absent_static_cache\").exists())' && sha256sum papers/210-weakly-increasing-run-aggregation/evidence_tools/evidence.py papers/210-weakly-increasing-run-aggregation/evidence_tools/runtime_probe.py papers/210-weakly-increasing-run-aggregation/evidence_tools/README.md",
+        "max_output_tokens": 2000
+      },
+      "shell_launch_argv": null,
+      "separate_stdout": null,
+      "separate_stderr": null,
+      "independently_recorded_subcommand_returns": null,
+      "observed_tool_result": {
+        "chunk_id": "5cadb6",
+        "wall_time_seconds": 0.000005351,
+        "exit_code": 0,
+        "original_token_count": 156,
+        "output": "AST_OK papers/210-weakly-increasing-run-aggregation/evidence_tools/evidence.py\nAST_OK papers/210-weakly-increasing-run-aggregation/evidence_tools/runtime_probe.py\nPYTHON_LINES 298\nSTATIC_CACHE_ABSENT True\n9f01dfd9fe84ffc397cf0a5872cb82b72b9d88f01f541c04b56fea8190777408  papers/210-weakly-increasing-run-aggregation/evidence_tools/evidence.py\n7fbe41067c485b2fee7cce9abf286968d68db084dfe829196530badc0a6bf641  papers/210-weakly-increasing-run-aggregation/evidence_tools/runtime_probe.py\n55d25358e49693426af7672c6e6300ddf37e47893ddc4789ecbe7f02a514ad55  papers/210-weakly-increasing-run-aggregation/evidence_tools/README.md\n"
+      },
+      "interpretation": "This is the final previously returned AST/hash diagnostic, not a new syntax/hash execution. The surrounding orchestration call also completed an apply_patch before this command; that patch acknowledgement is not subprocess output and is not included in the exact output field above."
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+\section{A target decoder and sharp fibres}\label{sec:inverse}
+For a target $y$, let $H_y$ be the spanning graph of its monochromatic
+edges. Let $D_y$ have an arc $u\to v$ when $u\sim v$ and
+$y_v=y_u+1\pmod q$. A vertex cover whose induced graph has no isolated
+vertex is called a $2$-total cover; we allow the empty cover. In particular,
+isolates of $H_y$ must be outside such a cover.
+
+\begin{theorem}\label{thm:decoder}
+The predecessors of $y$ are, uniquely,
+$x_v=y_v-\ind_A(v)\pmod q$, where $A\subseteq V$ satisfies:
+\begin{enumerate}
+\item $A$ is a vertex cover of $H_y$;
+\item every vertex of $A$ has a neighbor in $A$ in $H_y$;
+\item an arc $u\to v$ in $D_y$ with $v\in A$ implies $u\in A$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $A$ be the advancing set of any predecessor. Its old colours are
+necessarily $y-\ind_A$. Every old equal-colour edge has both endpoints in
+$A$. For two endpoints in $A$, old equality is exactly target equality;
+each vertex in $A$ therefore needs an internal $H_y$ neighbor. Two endpoints
+outside $A$ cannot be equal in the target, since both held. Finally, when
+$u\notin A$ and $v\in A$, old equality is equivalent to
+$y_v=y_u+1\pmod q$, which would contradict $u$ holding. These are the
+three conditions. Conversely they ensure that the endpoints of the old
+equal-colour edges in $y-\ind_A$ are exactly $A$. Thus precisely these
+vertices advance and the image is $y$. Different masks give different old
+states, completing the bijection.
+\end{proof}
+
+Write $T(H)$ for the number of $2$-total covers of a simple graph $H$,
+with our empty-cover convention. Equivalently it counts independent sets
+$I$ for which $H-I$ has no isolated vertex. The decoder gives
+\begin{equation}\label{eq:static-bound}
+ |F^{-1}(y)|\le T(H_y).
+\end{equation}
+For a constant target, $H_y=G$ and $D_y$ has no arcs, so equality holds.
+We include the following elementary static support proof to make the
+dynamical extremum self-contained.
+
+\begin{lemma}\label{lem:cover-bound}
+For a graph $H$ on $n\ge4$ vertices, $T(H)\le2^{n-1}-1$, with equality
+exactly for a star $K_{1,n-1}$. On three vertices, $T(H)\le4$, with equality
+exactly for a triangle.
+\end{lemma}
+\begin{proof}
+For a star on $k\ge3$ vertices the covers consist of the centre and any
+nonempty set of leaves, giving $2^{k-1}-1$. A single edge has one such cover;
+on three connected vertices the path has three and the triangle four.
+
+A connected nonstar with at least four vertices contains a four-vertex
+path as a subgraph. To see this, if a longest path were $a,b,c$, any further
+vertex can attach only to $b$: attachment to $a$ or $c$, or a longer route
+from the path, extends it. An edge between leaves, including $a,c$, would
+also create a four-vertex path. The graph would therefore be a star.
+
+Now suppose a connected nonstar has $k\ge5$ vertices. Choose a four-vertex
+path and an edge $uv$ from a vertex $u$ of the path to a vertex $v$ outside
+it. The path has eight independent sets, at least two containing each
+chosen $u$. Ignoring other edges gives $8\cdot2^{k-4}$ independent sets;
+the extra edge forbids at least $2\cdot2^{k-5}$ of them. Hence
+\[
+ T(H)\le i(H)\le7\cdot2^{k-4}<2^{k-1}-1,
+\]
+where $i(H)$ is the number of independent sets and the strict inequality
+uses $2^{k-4}\ge2$. For $k=4$, the connected graphs are the star, path,
+paw, four-cycle, diamond and complete graph. Listing independent
+complements with no isolated vertex left gives, respectively,
+$7,4,6,5,6,5$. Thus only the star attains seven.
+
+The count $T$ multiplies over components, and an isolate contributes one.
+A nontrivial component of size $k$ has $T\le2^{k-1}$. Two or more
+nontrivial components therefore give at most $2^{n-2}<2^{n-1}-1$.
+One such component with isolates has strictly smaller order and again
+gives a strict bound, including the triangle count four. An edgeless graph
+has $T=1$. The three-vertex disconnected cases also have $T=1$.
+These cases complete the proof and the equality classification.
+\end{proof}
+
+\begin{theorem}\label{thm:maximum}
+For any $q\ge3$, the maximum time-one fibre over all graphs and targets
+on $n$ vertices is
+\[
+ M(n)=\begin{cases}1,&n\le2,\\4,&n=3,\\2^{n-1}-1,&n\ge4.\end{cases}
+\]
+For $n=3$ the extremizers are exactly constant targets on triangles, and
+for $n\ge4$ exactly constant targets on stars.
+\end{theorem}
+\begin{proof}
+Combine \eqref{eq:static-bound} with Lemma~\ref{lem:cover-bound}.
+At equality $H_y$ is a spanning star, or a triangle when $n=3$.
+Since this monochromatic graph is connected, $y$ is constant on all
+vertices. Then $H_y=G$, so no extra nonmonochromatic edges are possible.
+Conversely every constant target on the claimed graph attains $T(G)$.
+For $n\le2$, an edgeless graph has the identity update; on a single edge,
+unequal colours hold and equal colours rotate together. This is a
+permutation and every fibre has size one, including the empty state.
+\end{proof}

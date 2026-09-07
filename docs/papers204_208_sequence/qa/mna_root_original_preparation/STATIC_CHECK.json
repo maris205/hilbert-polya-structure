@@ -1,0 +1,53 @@
+{
+  "schema": "mna-root-original-preparation-static-v1",
+  "status": "READY_STATIC_ONLY_NOT_ROOT_ACCEPTANCE",
+  "command": {
+    "cmd": "/usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json,pathlib,re; r=pathlib.Path(\"/root/autodl-tmp/symbolic_dynamics\"); p=r/\"docs/papers204_208_sequence/qa/mna_root_original_preparation\"; a=r/\"docs/papers204_208_sequence/qa/mna_gate_documentary_audit\"; g=r/\"docs/papers204_208_sequence/scouting/MNA_GATE\"; sources={};\nfor n in (\"inspect.py\",\"record.py\"):\n d=(p/n).read_bytes(); t=ast.parse(d); compile(t,str(p/n),\"exec\"); sources[n]={\"bytes\":len(d),\"sha256\":hashlib.sha256(d).hexdigest(),\"lines\":len(d.splitlines())}\noriginal=json.loads((a/\"attempt_01/stdout.raw\").read_bytes()); before=original[\"physical_inputs_before\"]; assert before==original[\"physical_inputs_after\"] and len(before)==1294; fixed=json.loads((p/\"INPUT_PINS.json\").read_bytes())[\"inputs\"]; counts=[]\nfor passno in (1,2):\n for name,v in list(before.items())+list(fixed.items()):\n  d=pathlib.Path(name).read_bytes(); assert v=={\"bytes\":len(d),\"sha256\":hashlib.sha256(d).hexdigest()}\n for base,h,count in [(g,\"5e15111b5dc6b4a585126e32fc59752b10cba8605f846d225e9efa26c656dc34\",309),(a,\"921de8d98e2a2a7ab968cec622054338a59da2ebbf7ffed15c23936b4c16bccd\",10)]:\n  seal=(base/\"SHA256SUMS\").read_bytes(); assert hashlib.sha256(seal).hexdigest()==h; rows={}\n  for line in seal.decode().splitlines():\n   m=re.fullmatch(r\"([0-9a-f]{64})  (.+)\",line); assert m; digest,name=m.groups(); assert name not in rows and name!=\"SHA256SUMS\" and not pathlib.Path(name).is_absolute() and \"..\" not in pathlib.Path(name).parts; rows[name]=digest; assert hashlib.sha256((base/name).read_bytes()).hexdigest()==digest\n  assert len(rows)==count and {q.relative_to(base).as_posix() for q in base.rglob(\"*\") if q.is_file()}==set(rows)|{\"SHA256SUMS\"}; assert all(not q.is_symlink() for q in base.rglob(\"*\"))\n counts.append({\"original_paths\":1294,\"fixed_pins\":len(fixed),\"gate_payloads\":309,\"documentary_payloads\":10})\nfor n,v in sources.items():\n d=(p/n).read_bytes(); assert v=={\"bytes\":len(d),\"sha256\":hashlib.sha256(d).hexdigest(),\"lines\":len(d.splitlines())}\nprint(json.dumps({\"status\":\"PASS_NARROW_STATIC_AND_ORIGINAL_PIN_DIAGNOSTIC_NOT_EXECUTION\",\"sources_before_and_after\":sources,\"checks_each_pass\":counts,\"prepared_checker_executed\":False,\"prepared_recorder_executed\":False,\"old_auditor_executed\":False,\"science_or_projection_reconstruction_executed\":False,\"new_cmp_or_web_or_build_or_view\":0},sort_keys=True,indent=2))'",
+        "execution_interface": "exec_command; the cmd string is the actual submitted shell command, not a reconstructed shell-process argv",
+    "cwd": "/root/autodl-tmp/symbolic_dynamics",
+    "native_tool_return": {
+      "chunk_id": "217337",
+      "wall_time_seconds": 0.337969878,
+      "exit_code": 0,
+      "original_token_count": 228,
+      "output": "{\n  \"checks_each_pass\": [\n    {\n      \"documentary_payloads\": 10,\n      \"fixed_pins\": 14,\n      \"gate_payloads\": 309,\n      \"original_paths\": 1294\n    },\n    {\n      \"documentary_payloads\": 10,\n      \"fixed_pins\": 14,\n      \"gate_payloads\": 309,\n      \"original_paths\": 1294\n    }\n  ],\n  \"new_cmp_or_web_or_build_or_view\": 0,\n  \"old_auditor_executed\": false,\n  \"prepared_checker_executed\": false,\n  \"prepared_recorder_executed\": false,\n  \"science_or_projection_reconstruction_executed\": false,\n  \"sources_before_and_after\": {\n    \"inspect.py\": {\n      \"bytes\": 26081,\n      \"lines\": 352,\n      \"sha256\": \"7260ee79891bd1c7dacfaa3bf75cae34871962fc667dd59b84f5e2ff92eba97a\"\n    },\n    \"record.py\": {\n      \"bytes\": 12553,\n      \"lines\": 180,\n      \"sha256\": \"3d40c49cb7e5294dc54231625389a2e0c771cabc7786554e434bfbe4fddb270b\"\n    }\n  },\n  \"status\": \"PASS_NARROW_STATIC_AND_ORIGINAL_PIN_DIAGNOSTIC_NOT_EXECUTION\"\n}\n"
+    }
+  },
+  "scope": {
+    "prepared_checker_executed": false,
+    "prepared_recorder_executed": false,
+    "old_auditor_imported_or_executed": false,
+    "scientific_or_projection_reconstruction_executed": false,
+    "new_cmp_commands": 0,
+    "new_web_queries": 0,
+    "new_builds": 0,
+    "new_views": 0,
+    "originals_changed": false
+  },
+  "review": {
+    "reviewer": "/root/thirty_third_finite_scout/orientation_source_desk/mna_runtime_source_audit",
+    "kind": "Independent bounded static infrastructure/source-schema review only; not an independent mathematical or manuscript review and not execution evidence.",
+    "reviewed_sources": {
+      "inspect.py": {
+        "bytes": 26081,
+        "lines": 352,
+        "sha256": "7260ee79891bd1c7dacfaa3bf75cae34871962fc667dd59b84f5e2ff92eba97a"
+      },
+      "record.py": {
+        "bytes": 12553,
+        "lines": 180,
+        "sha256": "3d40c49cb7e5294dc54231625389a2e0c771cabc7786554e434bfbe4fddb270b"
+      }
+    },
+    "result": "No concrete blocking issue remains in the reviewed checker/recorder pair.",
+    "resolved_finding": "Fresh cmp attempted rows are now retained before spawning; timeout/spawn failures retain null native exit and separately labelled failure details.",
+    "final_schema_checks": [
+      "Recorder and checker agree on the generated runtime-input path and plain bytes/sha256 pin values.",
+      "Exact source-only import paths and separate absent cache paths agree.",
+      "Original-source inspection is AST/text-only; legacy failure classifications remain unchanged."
+    ],
+    "reviewer_executed_or_wrote_anything": false
+  },
+  "authorship": "This preparation was authored by the documentary/source desk. It prepares a later root-executed check of original MNA evidence; its static result does not close MNA or establish scientific validity.",
+  "required_future_acceptance": "Root must inspect the final pinned source (including the final 22-line checker expansion since the earlier 330-line read), launch the recorder explicitly in a new scoped QA output path, retain its real native exit and full streams, then verify the complete resulting non-self seal. No future result is synthesized here."
+}

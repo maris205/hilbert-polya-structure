@@ -1,0 +1,60 @@
+\section{The complete image from an attained minimum}\label{sec:image}
+A weakly increasing refinement of $s$ is a positive weakly increasing
+sequence with total $s$. The following decomposition supplies the inverse
+language; its ordinary segmentation argument is supporting infrastructure.
+
+\begin{lemma}[Unique refinement]\label{lem:refinement}
+A composition maps to $s=(s_1,\ldots,s_m)$ if and only if it is a
+concatenation of weakly increasing refinements $\lambda_1,\ldots,\lambda_m$
+of the target parts, with
+$\operatorname{last}(\lambda_i)>\operatorname{first}(\lambda_{i+1})$
+for $i<m$. This segmentation is unique.
+\end{lemma}
+\begin{proof}
+An output cut is an input cut at the same cumulative mass. The target
+therefore uniquely specifies every input segment. Under $F$ these segments
+are maximal weakly increasing runs, so the stated conditions are necessary.
+Conversely, those conditions make the segments exactly the maximal runs;
+their sums are the target parts.
+\end{proof}
+
+Call a tuple of refinements of a target suffix \emph{feasible} if its
+internal boundary descents hold. When it exists, let $r_i$ be the minimum
+first part among feasible refinements of the entire suffix
+$(s_i,\ldots,s_m)$. The finite minimum is attained; we make no interval
+claim about the set of possible first parts.
+
+\begin{theorem}[Three-branch image test]\label{thm:image}
+Set $r_m=1$ and scan right to left. Given $r=r_{i+1}$, use
+\begin{equation}\label{eq:scan}
+ \begin{cases}
+ \text{fail},&s_i\le r,\\
+ r_i=s_i,&s_i=r+1,\\
+ r_i=1,&s_i\ge r+2.
+ \end{cases}
+\end{equation}
+Then $s\in\Img_N$ if and only if the scan never fails. Every successful
+$r_i$ is the attained suffix minimum just defined. The test takes $O(m)$
+integer comparisons.
+\end{theorem}
+\begin{proof}
+The last part has an all-one refinement, so its minimum is $1$. Suppose
+the suffix to the right has attained minimum $r$. A new refinement must
+end at $b>c$ for some attainable right first part $c\ge r$. Necessarily
+$b\ge r+1$. Conversely, a refinement ending at least $r+1$ can be attached
+to a suffix attaining $r$.
+
+If $s_i\le r$, no ending part can suffice. If $s_i=r+1$, a sufficient
+ending part uses the entire mass, forcing the singleton $(s_i)$ and minimum
+$s_i$. If $s_i\ge r+2$, the refinement $(1,s_i-1)$ is weakly increasing
+and has a sufficient ending part; it attains the absolute minimum $1$.
+These exhaustive cases prove the induction and construct a feasible
+preimage whenever the scan succeeds. Selecting a larger right first part
+cannot avoid failure. Lemma~\ref{lem:refinement} completes the equivalence.
+\end{proof}
+
+For example, $(2,3,2)$ passes and is the image of $(2,1,2,1,1)$, whereas
+$(2,2,3)$ fails with backward thresholds $1,2$. Equal total mass and equal
+multisets of target parts thus do not determine image membership. The
+complexity assertion counts integer comparisons, not bit operations
+independent of the sizes of the integers.

@@ -3,7 +3,50 @@
 This is a work-in-progress backup, not five-paper completion or admission.
 All research remains `HOLD_EXTERNAL`.
 
-## Latest confirmed: artifact corrections and closed scouts33–36
+## New local milestone after that ref — not yet synchronized
+
+P210's unchanged anonymous six-page author package and 493-payload physical
+Round0 are now complete, with fresh nonauthor A actually assigned. Root's
+full author-original reception, strict pair, six actual page views and
+physical/native closure are in [the local milestone](qa/P210_ROUND0_ROOT_INSPECTION.md).
+The six new P205/P207 strict pairs, four supplemental source-only builds and
+ten actual root page views are also newer local evidence. These additions,
+their preparations/receipts and this index update are NOT in a380d247.
+No new commit, push or remote check is asserted here. The exact four previous
+controls are [physically preserved](qa/central_round0_p210/README.md).
+
+## Latest confirmed: P209 completion and selected closed scouts37–41
+
+The actual normal private push on2026-09-07 UTC is
+`a380d24718fec4ef27365f44e96fb7ffa2b0fd10`, tree
+`9cedcdbde3ee647a1bc60b56afcfe7c63e05c466`, parent4bc38b63. Exactly1,482
+paths changed:1,476 additions,six modifications,no deletion or out-of-scope
+entry. Nineteen named manifests/12,474 payload rows,53 exact extras and
+the explicit nine-file preparation amendment yield12,555 expected blobs.
+All complete staged and committed blob bytes/lengths/SHA256/object identities
+passed; actual remote matched,0/0 and clean mirror.
+
+[The full execution originals](qa/p209_completion_private_checkpoint/README.md)
+retain both actual multi-gigabyte native object streams as lossless gzip,
+with separately checked original/compressed lengths and digests. The first
+literal-flag failure and superseded successful preflight are preserved.
+Root read the full executor and then independently
+[accepted the originals and current objects](qa/P209_CHECKPOINT_ROOT_INSPECTION.md):
+129,024 checks,67 original native records,all12,555 blob keys,one full
+decompression with both archives raw-byte identical,and six new native Git
+queries including the actual remote ref. No third large object stream,
+force-push,reset,cleanup or deletion occurred.
+
+This ref archives P209 completion and selected root-closed scouts37–41/MNA
+candidate evidence in its frozen root-pending state. It does NOT include
+the later MNA root closure/replays/sources,P210,execution/reception records
+or these later central edits. Those records cannot include themselves in
+their own historical ref. The exact previous controls were
+[physically preserved](qa/central_admission_p210/README.md) before this update.
+This is a private backup,not manuscript acceptance or five-paper completion.
+OWNER_AMBER / HOLD_EXTERNAL remain.
+
+## Previous: artifact corrections and closed scouts33–36
 
 The actual scoped private push on 2026-09-07 UTC is
 `4bc38b63e7e0bbfd5365c08e5635ebc7ac9af953`, tree

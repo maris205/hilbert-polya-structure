@@ -1,0 +1,37 @@
+{
+  "role": "STATIC_SYNTAX_AND_READONLY_CHECKS_ONLY",
+  "checker_executions": 0,
+  "original_science_build_view_executions": 0,
+  "source_changed_to_clear_static_false_positive": false,
+  "attempts": [
+    {
+      "argv": [
+        "/usr/bin/python3.10",
+        "-I",
+        "-S",
+        "-B",
+        "-c",
+        "import ast,pathlib; p=pathlib.Path(\"docs/papers204_208_sequence/qa/p210_round0_original_preparation/inspect_originals.py\"); t=ast.parse(p.read_text()); imports=sorted({a.name for n in ast.walk(t) if isinstance(n,ast.Import) for a in n.names}|{n.module for n in ast.walk(t) if isinstance(n,ast.ImportFrom)}); assert imports==[\"gzip\",\"hashlib\",\"json\",\"pathlib\",\"re\",\"sys\"],imports; forbidden={\"exec\",\"eval\",\"compile\",\"__import__\",\"write_text\",\"write_bytes\",\"mkdir\",\"unlink\",\"rename\",\"replace\",\"system\",\"popen\",\"run\",\"call\",\"check_call\",\"check_output\",\"run_path\",\"run_module\"}; calls=[n for n in ast.walk(t) if isinstance(n,ast.Call)]; bad=[getattr(n.func,\"id\",getattr(n.func,\"attr\",\"\")) for n in calls if getattr(n.func,\"id\",getattr(n.func,\"attr\",\"\")) in forbidden]; assert not bad,bad; opens=[n for n in calls if isinstance(n.func,ast.Attribute) and n.func.attr==\"open\"]; assert all(len(n.args)==1 and isinstance(n.args[0],ast.Constant) and n.args[0].value==\"rb\" for n in opens); print(\"STATIC_ONLY source parsed; 6 standard-library imports; no original import/execution/subprocess/write call; explicit opens are rb; checker NOT executed\")"
+      ],
+      "cwd": "/root/autodl-tmp/symbolic_dynamics",
+      "native_exit": 1,
+      "combined_native_output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nAssertionError: ['replace', 'replace']\n",
+      "finding": "Overbroad method-name scan falsely matched two string name.replace('.', '_') calls. Original checker source unchanged."
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.10",
+        "-I",
+        "-S",
+        "-B",
+        "-c",
+        "import ast,pathlib; p=pathlib.Path(\"docs/papers204_208_sequence/qa/p210_round0_original_preparation/inspect_originals.py\"); t=ast.parse(p.read_text()); imports=sorted({a.name for n in ast.walk(t) if isinstance(n,ast.Import) for a in n.names}|{n.module for n in ast.walk(t) if isinstance(n,ast.ImportFrom)}); assert imports==[\"gzip\",\"hashlib\",\"json\",\"pathlib\",\"re\",\"sys\"],imports; forbidden={\"exec\",\"eval\",\"compile\",\"__import__\",\"write_text\",\"write_bytes\",\"mkdir\",\"unlink\",\"rename\",\"replace\",\"system\",\"popen\",\"run\",\"call\",\"check_call\",\"check_output\",\"run_path\",\"run_module\"}; calls=[n for n in ast.walk(t) if isinstance(n,ast.Call)]; bad=[getattr(n.func,\"id\",getattr(n.func,\"attr\",\"\")) for n in calls if getattr(n.func,\"id\",getattr(n.func,\"attr\",\"\")) in forbidden and not (isinstance(n.func,ast.Attribute) and n.func.attr==\"replace\" and isinstance(n.func.value,ast.Name) and n.func.value.id==\"name\" and len(n.args)==2 and all(isinstance(a,ast.Constant) for a in n.args) and [a.value for a in n.args]==[\".\",\"_\"])]; assert not bad,bad; opens=[n for n in calls if isinstance(n.func,ast.Attribute) and n.func.attr==\"open\"]; assert all(len(n.args)==1 and isinstance(n.args[0],ast.Constant) and n.args[0].value==\"rb\" for n in opens); print(\"STATIC_ONLY source parsed; 6 standard-library imports; no original import/execution/subprocess/write call; explicit opens are rb; checker NOT executed\")"
+      ],
+      "cwd": "/root/autodl-tmp/symbolic_dynamics",
+      "native_exit": 0,
+      "combined_native_output": "STATIC_ONLY source parsed; 6 standard-library imports; no original import/execution/subprocess/write call; explicit opens are rb; checker NOT executed\n",
+      "finding": "Static scan explicitly allows only those exact string replacement calls; no importing/executing the checker."
+    }
+  ],
+  "limit": "exec_command supplied combined native output, not separately captured stdout/stderr. These are static source inspections, not executions of inspect_originals.py."
+}
