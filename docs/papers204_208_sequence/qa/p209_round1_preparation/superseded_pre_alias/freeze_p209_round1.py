@@ -1,0 +1,385 @@
+#!/usr/bin/env python3
+"""One-time P209 Round1 after actual accepted A and root closure, never before.
+
+Disclosed infrastructure-only adaptation of the preserved Round0 freezer.
+No mathematical code is imported, read for interpretation, or executed.
+The exact 1,989-file core is copied by its explicit immutable manifest;
+accepted A/root evidence is physically anchored or completely hash-pinned.
+"""
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+from urllib.parse import unquote
+
+ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+BATCH = ROOT / 'docs/papers204_208_sequence'
+PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ROUND0 = PAPER / 'frozen_round0'
+TARGET = PAPER / 'frozen_round1'
+PREPARATION = BATCH / 'qa/p209_round1_preparation'
+REVIEW = BATCH / 'reviews/p209_a'
+RESPONSE = BATCH / 'P209_A_RESPONSE.md'
+ACCEPTANCE = BATCH / 'qa/P209_A_ROOT_DELTA_INSPECTION.actual.json'
+PAIR = BATCH / 'qa/root_replays/p209_a_strict/root_a_pair_01'
+LAUNCHER = BATCH / 'qa/root_replays/p209_a_strict/launcher_root_a_pair_01'
+AUTHOR_SEAL = '9fd20cd746f1ae03c22a87283313248ad79ffcfb9a0f1ea45458937dd5901a0e'
+ROUND0_SEAL = '0f77871539b374027ab42910471cc74cefcd570e214a8242ac0a30c7a83e70ba'
+OLD_FREEZER = '95473c820d305410ae042eed50c288fef02244e6ab41234648db641f0dd7866a'
+A_CANONICAL = '9dd6229968748e2caf0e3fe74b802603b6dc51f37704bdf098dbdfb969433b36'
+ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
+ANCHORS = {
+    'ROUND0_CORE_MANIFEST.sha256': ROUND0 / 'SHA256SUMS',
+    'A_REVIEW_MANIFEST.sha256': REVIEW / 'SHA256SUMS',
+    'A_DELTA.md': REVIEW / 'DELTA.md',
+    'A_FINDINGS.json': REVIEW / 'FINDINGS.json',
+    'A_INPUT_PINS.sha256': REVIEW / 'INPUT_PINS.sha256',
+    'ROOT_RESPONSE.md': RESPONSE,
+    'ROOT_DELTA_CLOSURE.actual.json': ACCEPTANCE,
+    'ROOT_PAIR_MANIFEST.sha256': PAIR / 'SHA256SUMS',
+    'ROOT_LAUNCHER_MANIFEST.sha256': LAUNCHER / 'SHA256SUMS',
+}
+READ_PINS = {}
+COMPARISONS = []
+
+
+def digest(path):
+    path = Path(path)
+    if not path.is_file() or path.is_symlink():
+        raise AssertionError('not a regular nonsymlink file: ' + str(path))
+    value = sha256(path.read_bytes()).hexdigest()
+    name = str(path)
+    assert name not in READ_PINS or READ_PINS[name] == value, 'input changed during freeze: ' + name
+    READ_PINS[name] = value
+    return value
+
+
+def safe(name):
+    p = Path(name)
+    assert name and p.as_posix() == name and not p.is_absolute()
+    assert '..' not in p.parts and '.' not in p.parts
+    return p
+
+
+def read_manifest(path, base):
+    digest(path)
+    rows = {}
+    for line in path.read_text().splitlines():
+        value, name = line.split('  ', 1)
+        assert re.fullmatch('[0-9a-f]{64}', value) and name not in rows
+        rel = safe(name)
+        assert digest(base / rel) == value, name
+        rows[name] = value
+    return rows
+
+
+def complete_manifest(base):
+    path = base / 'SHA256SUMS'
+    rows = read_manifest(path, base)
+    entries = list(base.rglob('*'))
+    assert 'SHA256SUMS' not in rows and all(not p.is_symlink() for p in entries)
+    assert {p.relative_to(base).as_posix() for p in entries if p.is_file()} == set(rows) | {'SHA256SUMS'}
+    return rows
+
+
+def load(path):
+    digest(path)
+    return json.loads(path.read_bytes())
+
+
+def raw_cmp(a, b):
+    argv = ['/usr/bin/cmp', '--', str(a), str(b)]
+    row = {'argv': argv, 'cwd': str(ROOT), 'environment': ENV,
+           'started_epoch': time.time(), 'exit': None,
+           'outcome': 'PRE_SPAWN_ATTEMPT', 'stdout': None, 'stderr': None}
+    COMPARISONS.append(row)
+    p = subprocess.run(argv, capture_output=True, check=False, cwd=ROOT, env=ENV)
+    row.update(exit=p.returncode, outcome='COMPLETED',
+               stdout=p.stdout.decode(), stderr=p.stderr.decode())
+    assert p.returncode == 0, row
+    return row
+
+
+def core_inputs():
+    assert digest(ROUND0 / 'SHA256SUMS') == ROUND0_SEAL
+    core = complete_manifest(ROUND0)
+    assert len(core) == 1989 and not any(p.startswith('frozen_round') for name in core for p in safe(name).parts)
+    historical, alias = PAPER / 'SHA256SUMS', PAPER / 'AUTHOR_MANIFEST.sha256'
+    assert digest(historical) == digest(alias) == AUTHOR_SEAL
+    author = read_manifest(alias, PAPER)
+    assert len(author) == 1985 and 'SHA256SUMS' not in author
+    expected = dict(author)
+    expected.update({'AUTHOR_MANIFEST.sha256': AUTHOR_SEAL,
+        'ROOT_ADOPTION.md': digest(PAPER / 'ROOT_ADOPTION.md'),
+        'FREEZE_ADAPTER.py': OLD_FREEZER,
+        'FROZEN_LINK_MAP.json': digest(ROUND0 / 'FROZEN_LINK_MAP.json')})
+    assert core == expected and read_manifest(ROUND0 / 'AUTHOR_MANIFEST.sha256', ROUND0) == author
+    assert digest(BATCH / 'qa/freeze_p209_round0.py') == OLD_FREEZER
+    old_origin = PREPARATION / 'original_snapshot/freeze_p209_round0.py'
+    assert digest(old_origin) == OLD_FREEZER
+    all_paper_entries = list(PAPER.rglob('*'))
+    assert all(not p.is_symlink() for p in all_paper_entries)
+    live = {p.relative_to(PAPER).as_posix() for p in all_paper_entries
+            if p.is_file() and not p.is_relative_to(ROUND0)}
+    assert live == set(author) | {'SHA256SUMS', 'AUTHOR_MANIFEST.sha256', 'ROOT_ADOPTION.md'}
+    assert digest(PAPER / 'PAPER_STATUS.md') == core['PAPER_STATUS.md']
+    return core, author, live
+
+
+def accepted_a(core):
+    # All fixed acceptance anchors must pre-exist before any target is created.
+    for path in ANCHORS.values():
+        digest(path)
+    accepted = load(ACCEPTANCE)
+    assert accepted['schema'] == 'p209-a-root-delta-closure-v1'
+    assert accepted['status'] == 'ROOT_ACCEPTED_A_DELTA_ORIGINAL_CLOSURE_PASS'
+    assert accepted['paper'] == 'P209' and accepted['input_round'] == 0
+    for field in ('reviewer_delta_accepted', 'root_original_inspection_complete', 'root_replay_closure_complete'):
+        assert accepted[field] is True, field
+    assert type(accepted['current_open_findings']) is int and accepted['current_open_findings'] == 0
+    assert accepted['unchanged_author_payloads'] == 1985 and accepted['unchanged_round0_payloads'] == 1989
+    assert accepted['round0_manifest_sha256'] == ROUND0_SEAL and accepted['author_manifest_sha256'] == AUTHOR_SEAL
+    review_rows = complete_manifest(REVIEW)
+    pair_rows, launcher_rows = complete_manifest(PAIR), complete_manifest(LAUNCHER)
+    assert accepted['review_manifest_entries'] == len(review_rows)
+    for field, path in (
+        ('review_manifest_sha256', REVIEW / 'SHA256SUMS'),
+        ('delta_sha256', REVIEW / 'DELTA.md'),
+        ('findings_sha256', REVIEW / 'FINDINGS.json'),
+        ('response_sha256', RESPONSE),
+        ('root_pair_manifest_sha256', PAIR / 'SHA256SUMS'),
+        ('root_launcher_manifest_sha256', LAUNCHER / 'SHA256SUMS')):
+        assert accepted[field] == digest(path), field
+    for name in ('REPORT.md', 'DELTA.md', 'FINDINGS.json', 'INPUT_PINS.sha256',
+                 'verify.py', 'CANONICAL.json', 'SOURCE_AND_PROOF.md', 'REPLAY_LOG.md', 'BUILD_REPORT.md'):
+        assert name in review_rows, 'missing accepted review role: ' + name
+    findings = load(REVIEW / 'FINDINGS.json')
+    assert findings['schema'] == 'p209-manuscript-review-findings-v1'
+    assert findings['reviewer'] == '/root/p209_a_reviewer' and findings['input_round'] == 0
+    assert findings['current_open_counts'] == {'critical': 0, 'major': 0, 'minor': 0}
+    assert isinstance(findings['findings'], list)
+    assert all(str(row['status']).lower() == 'resolved' for row in findings['findings'])
+    assert findings.get('delta_status') not in (None, '', 'NOT_YET_SUBMITTED_OR_ASSESSED')
+    expected_inputs = {str((ROUND0 / name).relative_to(ROOT)): value for name, value in core.items()}
+    expected_inputs[str((ROUND0 / 'SHA256SUMS').relative_to(ROOT))] = ROUND0_SEAL
+    assert read_manifest(REVIEW / 'INPUT_PINS.sha256', ROOT) == expected_inputs
+    pair = load(PAIR / 'RECEIPT.json')
+    launcher = load(LAUNCHER / 'RECEIPT.json')
+    assert pair['status'] == 'PASS_ROOT_REVIEW_A_PAIR' and pair['mode'] == 'pair' and pair['failures'] == []
+    result = pair['result']
+    assert result['canonical_adopted'] is False and result['canonical']['sha256'] == A_CANONICAL
+    assert len(result['replays']) == 2 and all(r['status'] == 'PASS' and r['total_states'] == 3414 for r in result['replays'])
+    assert len(result['comparisons']) == 3 and all(r['exit'] == 0 and r['process_outcome'] == 'COMPLETED' for r in result['comparisons'])
+    assert digest(REVIEW / 'CANONICAL.json') == A_CANONICAL
+    assert launcher['status'] == 'PASS_ROOT_LAUNCH' and launcher['exit'] == 0
+    assert launcher['inputs_unchanged'] is True and launcher['cache_absent'] is True
+    assert launcher['recorder_seal']['sha256'] == digest(PAIR / 'SHA256SUMS')
+    assert launcher['recorder_closure']['payloads'] == len(pair_rows)
+    assert launcher['recorder_closure']['status'] == pair['status']
+    external = {str(base / name): value for base, rows in
+                ((REVIEW, review_rows), (PAIR, pair_rows), (LAUNCHER, launcher_rows))
+                for name, value in rows.items()}
+    return accepted, external, {'accepted_review_payloads': len(review_rows),
+        'root_pair_payloads': len(pair_rows), 'root_launcher_payloads': len(launcher_rows)}
+
+
+def resolve_history(accepted, old):
+    aliases = {}
+    for row in accepted['historical_input_aliases']:
+        assert set(row) == {'original_path', 'sha256', 'physical_path'}
+        origin, physical = Path(row['original_path']), Path(row['physical_path'])
+        assert origin.is_absolute() and physical.is_absolute() and physical.is_relative_to(ROOT)
+        assert str(origin) in old['external_input_pins'] and old['external_input_pins'][str(origin)] == row['sha256']
+        assert str(origin) not in aliases and physical != origin
+        assert physical.resolve() == physical and digest(physical) == row['sha256']
+        aliases[str(origin)] = row
+    resolved, used = {}, set()
+    for origin, expected in old['external_input_pins'].items():
+        p = Path(origin)
+        current = digest(p) if p.is_file() and not p.is_symlink() else None
+        physical = p
+        if current != expected:
+            assert origin in aliases, 'unmapped historical dependency drift: ' + origin
+            physical = Path(aliases[origin]['physical_path'])
+            used.add(origin)
+        assert digest(physical) == expected
+        resolved[origin] = {'original_path': origin, 'sha256': expected,
+            'current_original_sha256': current, 'physical_path': str(physical),
+            'mode': 'exact-historical-alias' if origin in used else 'unchanged-original'}
+    assert used == set(aliases), 'unused/broad historical alias rejected'
+    return resolved
+
+
+def link_mapping(core, accepted):
+    old = load(ROUND0 / 'FROZEN_LINK_MAP.json')
+    assert old['historical_author_manifest_sha256'] == AUTHOR_SEAL and old['author_payloads'] == 1985
+    history = resolve_history(accepted, old)
+    result = []
+    for row in old['links']:
+        assert row['document'] in core
+        origin = Path(row['physical_target'])
+        if origin.is_relative_to(ROUND0):
+            rel = origin.relative_to(ROUND0).as_posix()
+            assert core[rel] == row['sha256']
+            physical = TARGET / rel
+            mode = 'round0-core-remapped-to-round1'
+        else:
+            assert history[str(origin)]['sha256'] == row['sha256']
+            physical = Path(history[str(origin)]['physical_path'])
+            mode = history[str(origin)]['mode']
+        result.append({**row, 'round0_physical_target': str(origin),
+            'physical_target': str(physical), 'round1_mode': mode})
+    assert len(result) == 243
+    origins = {str(ROUND0 / name): (TARGET / name, value) for name, value in core.items()}
+    for name, value in core.items():
+        if (PAPER / name).is_file():
+            assert digest(PAPER / name) == value
+            origins[str(PAPER / name)] = (TARGET / name, value)
+    origins[str(PAPER / 'SHA256SUMS')] = (TARGET / 'AUTHOR_MANIFEST.sha256', AUTHOR_SEAL)
+    for name, source in ANCHORS.items():
+        origins[str(source)] = (TARGET / 'ROUND1_ACCEPTANCE' / name, digest(source))
+    new_links = []
+    for name, source in ANCHORS.items():
+        if source.suffix != '.md':
+            continue
+        for href in re.findall(r'\[[^\]]*\]\(([^)]+)\)', source.read_text()):
+            href = href.strip().strip('<>')
+            if href.startswith(('https://', 'http://', 'mailto:', '#')):
+                continue
+            pathpart = unquote(href.split('#', 1)[0])
+            if not pathpart:
+                continue
+            origin = (source.parent / pathpart).resolve()
+            if str(origin) in origins:
+                physical, value = origins[str(origin)]
+                mode = 'physical-core-or-anchor'
+            else:
+                # Anchor prose keeps its original workspace origin. A directory
+                # link must have a complete nonself manifest, never a fake hash.
+                if origin.is_dir():
+                    complete_manifest(origin)
+                    physical = origin / 'SHA256SUMS'
+                    mode = 'external-directory-via-complete-manifest'
+                else:
+                    physical = origin
+                    mode = 'external-original-origin'
+                value = digest(physical)
+            new_links.append({'document': 'ROUND1_ACCEPTANCE/' + name,
+                'original_document': str(source), 'href': href, 'original_target': str(origin),
+                'physical_target': str(physical), 'sha256': value, 'mode': mode})
+    return history, result, new_links
+
+
+def main():
+    created = False
+    try:
+        assert sys.argv[1:] == ['freeze-round1-after-accepted-a'], 'explicit root invocation required'
+        assert Path(__file__).resolve() == PREPARATION / 'freeze_p209_round1.py'
+        assert dict(os.environ) == ENV and Path.cwd() == ROOT
+        assert sys.flags.isolated == 1 and sys.flags.no_site == 1 and sys.flags.optimize == 0 and sys.dont_write_bytecode
+        assert Path(sys.executable).resolve() == Path('/usr/bin/python3.10')
+        assert sys.pycache_prefix == str(TARGET / 'never_created_freezer_cache') and not Path(sys.pycache_prefix).exists()
+        assert not TARGET.exists() and not TARGET.is_symlink(), 'existing freeze'
+        complete_manifest(PREPARATION)
+        digest(Path('/usr/bin/python3.10'))
+        digest(Path('/usr/bin/cmp'))
+        core, author, live = core_inputs()
+        accepted, accepted_external, counts = accepted_a(core)
+        history, core_links, anchor_links = link_mapping(core, accepted)
+        source = Path(__file__).resolve(strict=True)
+        selfhash = digest(source)
+        anchors = {name: digest(path) for name, path in ANCHORS.items()}
+        raw_cmp(PAPER / 'SHA256SUMS', PAPER / 'AUTHOR_MANIFEST.sha256')
+        before = dict(READ_PINS)
+        # No filesystem mutation above this line: missing acceptance cannot
+        # create a premature Round1 or an acceptance-shaped placeholder.
+        TARGET.mkdir()
+        created = True
+        for name in sorted(core):
+            dest = TARGET / safe(name)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROUND0 / name, dest)
+            assert digest(dest) == core[name]
+        acceptance_dir = TARGET / 'ROUND1_ACCEPTANCE'
+        acceptance_dir.mkdir()
+        for name, origin in ANCHORS.items():
+            shutil.copyfile(origin, acceptance_dir / name)
+            assert digest(acceptance_dir / name) == anchors[name]
+        shutil.copyfile(source, TARGET / 'ROUND1_FREEZE_ADAPTER.py')
+        assert digest(TARGET / 'ROUND1_FREEZE_ADAPTER.py') == selfhash
+        raw_cmp(PAPER / 'AUTHOR_MANIFEST.sha256', TARGET / 'AUTHOR_MANIFEST.sha256')
+        raw_cmp(ROUND0 / 'SHA256SUMS', acceptance_dir / 'ROUND0_CORE_MANIFEST.sha256')
+        assert read_manifest(TARGET / 'AUTHOR_MANIFEST.sha256', TARGET) == author
+        for row in core_links + anchor_links:
+            assert digest(Path(row['physical_target'])) == row['sha256']
+        assert complete_manifest(ROUND0) == core
+        accepted_after, external_after, counts_after = accepted_a(core)
+        assert accepted_after == accepted and external_after == accepted_external and counts_after == counts
+        assert resolve_history(accepted, load(ROUND0 / 'FROZEN_LINK_MAP.json')) == history
+        complete_manifest(PREPARATION)
+        assert {p.relative_to(PAPER).as_posix() for p in PAPER.rglob('*')
+                if p.is_file() and not p.is_relative_to(ROUND0) and not p.is_relative_to(TARGET)} == live
+        assert not any(p.is_symlink() for p in PAPER.rglob('*'))
+        assert all(digest(Path(p)) == value for p, value in before.items())
+        metadata = {'schema': 'p209-round1-provenance-v1',
+            'scope': 'Physical Round1 after actual accepted A delta and root closure; not B, Round2 or terminal acceptance.',
+            'author_payloads_preserved': 1985, 'round0_core_payloads_copied': 1989,
+            'author_manifest_sha256': AUTHOR_SEAL, 'round0_manifest_sha256': ROUND0_SEAL,
+            'historical_core_status_and_metadata_unchanged': True,
+            'new_complete_manifest_role': 'SHA256SUMS covers exactly the 1989 core + 9 physical acceptance anchors + new adapter + this provenance; old core manifests keep their historical roles.',
+            'core_source_manifest': str(ROUND0 / 'SHA256SUMS'), 'core_payload_pins': core,
+            'anchor_mapping': {name: {'original_path': str(ANCHORS[name]),
+                'physical_path': 'ROUND1_ACCEPTANCE/' + name, 'sha256': value}
+                for name, value in anchors.items()},
+            'accepted_review_and_root_manifest_referents': accepted_external,
+            'accepted_root_assertions': accepted, 'accepted_evidence_counts': counts,
+            'historical_external_resolution': history, 'round1_core_link_map': core_links,
+            'acceptance_anchor_link_map': anchor_links,
+            'all_source_inputs_before_and_rechecked_after': before,
+            'freezer_origin': str(source), 'freezer_sha256': selfhash,
+            'original_round0_freezer_sha256': OLD_FREEZER,
+            'launch_argv': sys.argv, 'launch_orig_argv': sys.orig_argv,
+            'environment': ENV, 'cwd': str(ROOT), 'raw_comparisons': COMPARISONS,
+            'limitations': 'Root acceptance is a hash-bound attestation to actual reviewer delta and completed original/replay closure. This freezer rechecks artifacts, not mathematics, runtime-replay validity, build quality or visual reading.',
+            'external': 'OWNER_AMBER / HOLD_EXTERNAL'}
+        with (TARGET / 'ROUND1_PROVENANCE.json').open('x') as stream:
+            json.dump(metadata, stream, indent=2, sort_keys=True)
+            stream.write('\n')
+        expected = dict(core)
+        expected.update({'ROUND1_ACCEPTANCE/' + name: value for name, value in anchors.items()})
+        expected['ROUND1_FREEZE_ADAPTER.py'] = selfhash
+        expected['ROUND1_PROVENANCE.json'] = digest(TARGET / 'ROUND1_PROVENANCE.json')
+        assert len(expected) == 2000
+        assert {p.relative_to(TARGET).as_posix(): digest(p) for p in TARGET.rglob('*') if p.is_file()} == expected
+        assert all(digest(Path(p)) == value for p, value in before.items())
+        with (TARGET / 'SHA256SUMS').open('x') as stream:
+            stream.write(''.join(value + '  ' + name + '\n' for name, value in sorted(expected.items())))
+        assert complete_manifest(TARGET) == expected
+        print(json.dumps({'status': 'PASS_PHYSICAL_P209_ROUND1', 'payloads': len(expected),
+            'manifest_sha256': digest(TARGET / 'SHA256SUMS'), 'core_payloads': 1989,
+            'acceptance_anchor_payloads': 9, 'author_payloads_unchanged': 1985,
+            'accepted_root_closure_sha256': anchors['ROOT_DELTA_CLOSURE.actual.json'],
+            'raw_comparisons': COMPARISONS,
+            'boundary': 'No new science/build/view; distinct B and terminal gates remain.'}, indent=2, sort_keys=True))
+        return 0
+    except BaseException:
+        failure = {'status': 'FAIL_ROUND1_PRESERVED' if created else 'REFUSED_BEFORE_ROUND1_CREATION',
+            'traceback': traceback.format_exc(), 'target_created_by_this_invocation': created,
+            'raw_comparisons': COMPARISONS, 'known_read_pins': READ_PINS,
+            'acceptance_or_completion_not_inferred': True}
+        if created and not (TARGET / 'SHA256SUMS').exists():
+            with (TARGET / 'ROUND1_FAILURE.json').open('x') as stream:
+                json.dump(failure, stream, indent=2, sort_keys=True)
+                stream.write('\n')
+        print(json.dumps(failure, indent=2, sort_keys=True))
+        return 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

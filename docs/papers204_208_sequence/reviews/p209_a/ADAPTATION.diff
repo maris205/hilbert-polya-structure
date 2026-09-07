@@ -1,0 +1,172 @@
+--- frozen_round0/record_author.py
++++ reviews/p209_a/record_review.py
+@@ -22,7 +22,8 @@
+ 
+ SCRIPT = Path(__file__).resolve()
+ PAPER = SCRIPT.parent
+-ROOT = PAPER.parents[1]
++ROOT = PAPER.parents[3]
++FREEZE = ROOT / "papers/209-ordered-fibre-threading/frozen_round0"
+ PYTHON = Path(sys.executable).resolve()
+ STDLIB = Path(sysconfig.get_path("stdlib")).resolve()
+ ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
+@@ -31,7 +32,7 @@
+            "sections/02_recurrence.tex", "sections/03_inverse.tex", "sections/04_scope.tex")
+ SCIENCE = ("PAPER_PLAN.md", "NARRATIVE_REPORT.md", "CLAIMS_EVIDENCE.md",
+            "PROOF_PACKAGE.md", "SOURCE_AUDIT.md", "README.md", "verify.py",
+-           "bootstrap.py", "PARAMETERS.json", "collect_context.py", "record_author.py", "launch_author.py",
++           "bootstrap.py", "PARAMETERS.json", "collect_context.py", "record_review.py", "launch_author.py",
+            "metadata_web_01.json", "metadata_web_02.json") + SOURCES
+ TOOLS = tuple(Path(p) for p in ("/usr/bin/env", "/usr/bin/cmp", "/usr/bin/ldd", "/bin/bash", "/bin/sh"))
+ BUILD_TOOLS = tuple(Path("/usr/bin") / name for name in
+@@ -182,19 +183,18 @@
+ 
+ 
+ def science():
+-    require(sorted(p.relative_to(PAPER).as_posix() for p in (PAPER / "sections").glob("*.tex"))
+-            == sorted(SOURCES[3:]), "SECTION_SET")
+-    check_manifest(PAPER / "source_context")
+-    files = [PAPER / n for n in SCIENCE]
+-    files += [p for p in (PAPER / "source_context").rglob("*") if p.is_file()]
++    check_manifest(FREEZE)
++    require(info(FREEZE / "SHA256SUMS")["sha256"] == "0f77871539b374027ab42910471cc74cefcd570e214a8242ac0a30c7a83e70ba", "EXACT_ROUND0_SEAL")
++    files = [p for p in FREEZE.rglob("*") if p.is_file()]
++    files += [PAPER / n for n in ("verify.py", "bootstrap.py", "record_review.py", "launch_review.py", "PARAMETERS.json", "INDEPENDENCE_COMMITMENT.md", "COMMITMENT_PINS.sha256", "prepare_infrastructure.py", "INFRASTRUCTURE_INPUT_PINS.sha256", "ADAPTATION.diff", "INPUT_PINS.sha256")]
++    files += [p for p in (PAPER / "infrastructure_originals").rglob("*") if p.is_file()]
+     if (PAPER / "CANONICAL.json").is_file():
+         files.append(PAPER / "CANONICAL.json")
+     value = pins(files)
+     REGISTERED_INPUTS.update(value)
+     require(all("error" not in p for p in value.values()), "MISSING_SCIENTIFIC_INPUT")
+     config = json.loads((PAPER / "PARAMETERS.json").read_bytes())
+-    require(config["n_values"] == list(range(6)) and config["total_states"] == 3414,
+-            "ORIGINAL_CUTOFF_CHANGED")
++    require(config["n_values"] == list(range(6)) and config["total_states"] == 3414, "ORIGINAL_CUTOFF_CHANGED")
+     return value
+ 
+ 
+@@ -407,13 +407,14 @@
+         require(not cache.exists(), "CHILD_CACHE_NOT_ABSENT")
+         row, mapped = command(argv, folder, folder, "producer", ENV)
+         payload = json.loads((folder / "producer.stdout").read_bytes())
+-        require(payload["status"] == "PASS" and payload["schema"] == "p209-author-v1"
+-                and payload["total_states"] == 3414 and [b["n"] for b in payload["boxes"]] == list(range(6))
+-                and all(len(b["rows"]) == b["state_count"] for b in payload["boxes"]), "PRODUCER_PAYLOAD_SCOPE")
+-        details = {"checks": payload["checks"], "total_states": payload["total_states"],
+-                   "boxes": [{k: b[k] for k in ("n", "state_count", "checks", "recurrent_count",
+-                              "recurrent_period_census", "fibre_census", "maximum_fibre", "maximizing_targets")}
++        require(payload["schema"] == "p209-review-a-independent-v1"
++                and sum(b["state_count"] for b in payload["boxes"]) == 3414
++                and [b["n"] for b in payload["boxes"]] == list(range(6))
++                and all(len(b["records"]) == b["state_count"] for b in payload["boxes"]), "PRODUCER_PAYLOAD_SCOPE")
++        details = {"checks": payload["checks"], "total_states": 3414,
++                   "boxes": [{k: b[k] for k in ("n", "state_count", "partition_count", "maximum_fibre", "extremizer_ranks")}
+                              for b in payload["boxes"]]}
++
+     except BaseException:
+         problem = traceback.format_exc()
+     finally:
+@@ -498,11 +499,11 @@
+     for name in SOURCES:
+         destination = folder / name
+         destination.parent.mkdir(parents=True, exist_ok=True)
+-        shutil.copyfile(PAPER / name, destination)
++        shutil.copyfile(FREEZE / name, destination)
+     source_pins = pins(folder / name for name in SOURCES)
+     REGISTERED_INPUTS.update(source_pins)
+     require({p.relative_to(folder).as_posix() for p in folder.rglob("*") if p.is_file()} == set(SOURCES), "BUILD_NOT_SOURCE_ONLY")
+-    require(all(byteinfo(folder / n) == byteinfo(PAPER / n) for n in SOURCES), "BUILD_SOURCE_COPY")
++    require(all(byteinfo(folder / n) == byteinfo(FREEZE / n) for n in SOURCES), "BUILD_SOURCE_COPY")
+     save(out / "SOURCE_ONLY_INITIAL.json", source_pins)
+     env = {**ENV, "SOURCE_DATE_EPOCH": "1788652800", "FORCE_SOURCE_DATE": "1", "openin_any": "p", "openout_any": "p"}
+     roots = {key: str(out / ("never_created_" + key.lower())) for key in ("TEXMFHOME", "TEXMFCONFIG", "TEXMFVAR")}
+@@ -539,7 +540,7 @@
+                 if p.is_relative_to(folder):
+                     local = p.relative_to(folder).as_posix()
+                     if local in SOURCES:
+-                        require(value == byteinfo(PAPER / local), "FLS_LOCAL_SOURCE_CHANGED", p)
++                        require(value == byteinfo(FREEZE / local), "FLS_LOCAL_SOURCE_CHANGED", p)
+                     else:
+                         require(p.suffix in {".aux", ".bbl", ".out", ".toc"}, "UNEXPECTED_LOCAL_BUILD_INPUT", p)
+                         generated_tex[str(index) + ":" + local] = value
+@@ -585,9 +586,9 @@
+ 
+ 
+ def main():
+-    require(len(sys.argv) == 3 and sys.argv[1] in {"pair", "build"}, "USAGE", "record_author.py pair|build new_label")
++    require(len(sys.argv) == 3 and sys.argv[1] in {"pair", "build"}, "USAGE", "record_review.py pair|build new_label")
+     mode, label = sys.argv[1:]
+-    require(re.fullmatch(r"author_(?:pair|build)_[0-9]+", label), "INVALID_OUTPUT_LABEL")
++    require(re.fullmatch(r"review_(?:pair|build)_[0-9]+", label), "INVALID_OUTPUT_LABEL")
+     out = PAPER / label
+     require(not out.exists() and not out.is_symlink(), "REFUSE_EXISTING_OUTPUT")
+     out.mkdir(mode=0o700)
+@@ -670,14 +671,14 @@
+             require(not closed["uncovered"] and not closed["bytecode"] and not late["cache_exists"], "OBSERVED_RUNTIME_CLOSURE", closed)
+         except BaseException:
+             failures.append({"stage": "observed_closure", "traceback": traceback.format_exc()})
+-        value = {"status": "PASS_AUTHOR_" + mode.upper() if not failures else "FAIL_PRESERVED",
++        value = {"status": "PASS_REVIEW_A_" + mode.upper() if not failures else "FAIL_PRESERVED",
+                  "mode": mode, "failures": failures, "result": result,
+                  "science_inputs": len(scientific), "runtime_files": len(runtime_before),
+                  "known_all_inputs_including_capsules": len(complete_before),
+                  "ldd_commands": sum(r["tag"].startswith("ldd_") for r in COMMAND_RECORDS),
+                  "ldd_commands_completed_exit_zero": sum(r["tag"].startswith("ldd_") and r["command"]["exit"] == 0 for r in COMMAND_RECORDS),
+                  "linkage_returned_complete": bool(link_rows), "tex_resources": len(tex_before.get("files", {})),
+-                 "scope": "P209 author evidence only. No manuscript review, freeze or terminal acceptance.",
++                 "scope": "P209 A actual verifier/build execution evidence; no review verdict, delta or terminal acceptance.",
+                  "observations": "Early/late parent and scientific-child modules/maps; sampled direct-child maps; conservative stdlib, OS libraries, loader/locale/gconv/config inventories; TeX per-pass .fls. No continuous or grandchild tracing, no OS-hermetic claim.",
+                  "external": "HOLD_EXTERNAL"}
+         save(out / "RECEIPT.json", value)
+
+--- frozen_round0/launch_author.py
++++ reviews/p209_a/launch_review.py
+@@ -17,7 +17,7 @@
+ import traceback
+ 
+ PAPER = Path(__file__).resolve().parent
+-ROOT = PAPER.parents[1]
++ROOT = PAPER.parents[3]
+ ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
+ 
+ 
+@@ -53,7 +53,7 @@
+     if seen != {p.relative_to(base).as_posix() for p in base.rglob("*") if p.is_file() and p != manifest}:
+         raise RuntimeError("Recorder manifest is not complete")
+     receipt = json.loads((base / "RECEIPT.json").read_bytes())
+-    if receipt["mode"] != mode or (exit_code == 0 and receipt["status"] != "PASS_AUTHOR_" + mode.upper()):
++    if receipt["mode"] != mode or (exit_code == 0 and receipt["status"] != "PASS_REVIEW_A_" + mode.upper()):
+         raise RuntimeError("Recorder receipt disagrees with actual normal exit")
+     if exit_code != 0 and receipt["status"] != "FAIL_PRESERVED":
+         raise RuntimeError("Nonzero recorder exit lacks a closed failure receipt")
+@@ -62,9 +62,9 @@
+ 
+ def main():
+     if len(sys.argv) != 3 or sys.argv[1] not in {"pair", "build"}:
+-        raise RuntimeError("launch_author.py pair|build author_pair_N|author_build_N")
++        raise RuntimeError("launch_review.py pair|build review_pair_N|review_build_N")
+     mode, label = sys.argv[1:]
+-    prefix = "author_" + mode + "_"
++    prefix = "review_" + mode + "_"
+     if not label.startswith(prefix) or not label[len(prefix):].isdigit():
+         raise RuntimeError("Invalid direct-child output label")
+     out, recorder_out = PAPER / ("launcher_" + label), PAPER / label
+@@ -79,15 +79,15 @@
+     ):
+         raise RuntimeError("Launcher settings differ from declared isolated minimal environment")
+     out.mkdir(mode=0o700)
+-    for name in ("launch_author.py", "record_author.py", "bootstrap.py", "verify.py"):
++    for name in ("launch_review.py", "record_review.py", "bootstrap.py", "verify.py"):
+         shutil.copyfile(PAPER / name, out / name)
+-    inputs = [PAPER / name for name in ("launch_author.py", "record_author.py", "bootstrap.py", "verify.py", "PARAMETERS.json")]
++    inputs = [PAPER / name for name in ("launch_review.py", "record_review.py", "bootstrap.py", "verify.py", "PARAMETERS.json")]
+     inputs += [Path("/usr/bin/python3.10"), Path("/usr/bin/env")]
+     before = {str(p): pin(p) for p in inputs}
+     save(out / "INPUTS_BEFORE.json", before)
+     argv = ["/usr/bin/python3.10", "-I", "-S", "-B", "-X",
+             "pycache_prefix=" + str(recorder_out / "never_created_parent_cache"),
+-            str(PAPER / "record_author.py"), mode, label]
++            str(PAPER / "record_review.py"), mode, label]
+     row = {"argv": argv, "cwd": str(ROOT), "env": ENV,
+            "started_epoch": time.time(), "exit": None, "outcome": "NOT_STARTED",
+            "launcher_orig_argv": sys.orig_argv, "launcher_flags": str(sys.flags),

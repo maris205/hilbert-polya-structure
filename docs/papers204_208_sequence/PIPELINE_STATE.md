@@ -1,7 +1,7 @@
 # Batch after P203 — recovery state
 
 Started 2026-09-05 UTC on the user's “确认，下一轮”, reaffirmed by “继续”.
-Status: **P205_P207_P208_COMPLETE / P209_ROUND0_COMPLETE_A_ACTIVE / ONE_SEAT_OPEN / HOLD_EXTERNAL**.
+Status: **P205_P207_P208_COMPLETE / P209_ROUND1_COMPLETE_B_ACTIVE / ONE_SEAT_OPEN / HOLD_EXTERNAL**.
 The folder name reserves a five-seat working label, not five accepted paper IDs.
 
 ## Scope and next obligation
@@ -48,7 +48,17 @@ is complete; a fresh nonauthor manuscript A is actually assigned. Root
 checked the full author/source/build evidence and performed two new
 98,278-check author-code runs with full raw-canonical equality. See
 [root adoption and physical closure](qa/P209_ROUND0_ROOT_INSPECTION.md).
-There is no A verdict/accepted delta, B or terminal acceptance yet.
+The initial nonauthor A report now passes the exact contract with zero
+findings. Root inspected the full originals and completed its own strict
+A pair, two 135,605-check runs on the original 3,414 states; the
+[exact no-change response](P209_A_RESPONSE.md) was actually accepted by that
+same A process. Root completed the full final 1,342-payload review closure,
+preserving all 1,227 initial payloads, and physically froze 2,003-payload
+Round1. All 1,989 core/1,985 author bytes remain unchanged. A fresh distinct
+nonauthor p209_b_reviewer is now assigned actual B from that pinned Round1;
+no B verdict, Round2 or terminal acceptance yet. See
+[final A acceptance](qa/P209_A_ROOT_DELTA_INSPECTION.md) and
+[actual Round1/root physical closure](qa/P209_ROUND1_ROOT_INSPECTION.md).
 The requested five-paper batch is not complete.
 
 Follow [the project workflow](../research_state/WORKFLOW.md) and
@@ -61,7 +71,7 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | central integration, original checks and scoped Git | P205/P207/P208 complete; P209 physical Round0 and actual A assignment complete, one seat open; checkpoint 2ebe9f4e actually pushed |
+| Words / local maps | root | central integration, original checks and scoped Git | P205/P207/P208 complete; P209 accepted A/full root closure/physical Round1, distinct B active; one seat open; checkpoint f8ee398c actually pushed, later work not yet synced |
 | Combinatorial objects | batch197_fosp_gate | closed scouting/finite_systems_eleventh/; now idle | eleventh root inspection and 32/7 pins complete, no promotion |
 | Algebra / finite geometry | batch197_lzk_gate | sealed scouting/finite_systems_seventeenth/; now idle | root accepted bounded NO_FRESH_SLATE desk, zero scientific executions |
 | Graphs / relations | batch197_fifth_scout | sealed scouting/finite_systems_fourteenth/; now idle | fourteenth root-verified NO_PROMOTION, OFS/P208 proof/code unread and B eligibility preserved |
@@ -80,9 +90,13 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 | Twenty-fourth bounded scout | nineteenth_finite_scout | sealed scouting/finite_systems_twenty_fourth/ | root full originals/102-payload, 16 history pins and 3,535 discovery pins accepted NO_PROMOTION; zero science |
 | Twenty-fifth bounded scout | nineteenth_finite_scout | sealed scouting/finite_systems_twenty_fifth/ | root originals/115-payload, 15 historical inputs and 3,520 discovery pins closed NO_PROMOTION; zero science |
 | ORR bounded second clock attempt | nineteenth_finite_scout | sealed scouting/ORR_SECOND_CLOCK_ATTEMPT/ | root full proof and 6/7 closure complete; exact lower/quadratic upper proved, sharp linear clock still open, NO_PROMOTION |
-| Twenty-sixth fresh finite scout | twenty_sixth_finite_scout | scouting/finite_systems_twenty_sixth/ only | separate disjoint final-seat scope assigned, max four literals/two original small pilots; no new batch |
+| Twenty-sixth fresh finite scout | twenty_sixth_finite_scout | sealed scouting/finite_systems_twenty_sixth/; now idle | root full originals/76 payloads/26 snapshots/5,435 search pins accepted NO_PROMOTION; three literals, zero science |
+| Twenty-seventh fresh finite scout | twenty_seventh_finite_scout | sealed scouting/finite_systems_twenty_seventh/ | root accepted NO_PROMOTION after full originals/148 payloads/6,420 current paths and raw comparisons; three literals/two families, one original pilot |
+| Twenty-eighth fresh finite scout | twenty_eighth_finite_scout | scouting/finite_systems_twenty_eighth/ only | one matrix literal author HOLD_PROOF_SOURCE, zero science; actual discovery-scope failure preserved; final sealing/root closure pending |
+| Twenty-ninth bounded finite scout | twenty_seventh_finite_scout | scouting/finite_systems_twenty_ninth/ only | explicitly assigned fresh bounded final-seat search outside gcd and matrix directions; no automatic next lane or new batch |
 | P209 author | p208_b_reviewer | sealed paper author set and qa/scout25_documentary_audit/; now idle | P209 author package adopted; ineligible to review P209; separate scout-25 documentary audit complete and root-inspected |
-| P209 manuscript A | p209_a_reviewer | reviews/p209_a/ only | fresh nonauthor actual assignment from complete 1,989-payload Round0; no verdict yet |
+| P209 manuscript A | p209_a_reviewer | sealed reviews/p209_a/; now idle | exact no-change delta actually accepted; root final 1,342-payload/124,281-path closure passed, original 1,227 preserved |
+| P209 manuscript B | p209_b_reviewer | reviews/p209_b/ only | fresh distinct nonauthor assigned actual B from complete 2,003-payload Round1; independent representation/code design required before author/A checker inspection |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -762,8 +776,8 @@ input, 243 mapped links and 132 external pins twice. The actual separate
 root pair has two 98,278-check runs on the unchanged 3,414 original states;
 the two author builds have identical four-page PDFs and root actually
 viewed every page. A fresh nonauthor process p209_a_reviewer has been
-assigned actual manuscript A, not candidate-gate reuse. No A verdict or
-accepted delta exists yet. The prior three control-index bytes are
+assigned actual manuscript A, not candidate-gate reuse. At that Round0
+milestone no A verdict or accepted delta existed. The prior three control-index bytes are
 [physically preserved](qa/central_lifecycle_p209_round0/README.md).
 
 The [twenty-fifth root closure](scouting/TWENTY_FIFTH_ROOT_INSPECTION.md)
@@ -785,7 +799,77 @@ separately received the bounded twenty-sixth final-seat scope in intrinsic
 multistate finite structures, excluding the exhausted wrappers; it may not
 automatically launch a twenty-seventh lane. The five-paper batch is unchanged.
 
-Next: complete P209's two manuscript-review/terminal gates;
+The [twenty-sixth root closure](scouting/TWENTY_SIXTH_ROOT_INSPECTION.md)
+is complete: 76 payloads, 26 exact snapshots, sixteen historical originals,
+three 5,435-file search pinsets and all 5,516 current read paths twice.
+Full raw documentary receipts retain the real filename-resolution failure.
+ASC's fixed-skew full linear conjugacy consumes its temporal axis; EMD's
+complete local inverse and two-pile factor do not classify all partitions;
+UTR is the exact old T01 literal. Three definitions, zero scientific
+executions, NO_PROMOTION. The separately assigned twenty-seventh excludes
+these directions and continues only the original final seat.
+
+P209's [initial A and root fresh pair acceptance](qa/P209_A_ROOT_INITIAL_INSPECTION.md)
+is complete: initial 1,227-payload A seal, 1,990 frozen inputs and all
+120,491 recorded original dependencies passed; root then ran A's unchanged
+independent checker twice, 135,605 checks each on 3,414 states. The new
+462+10-payload pair, all 5,147 inputs and raw canonical comparisons passed.
+The [exact no-change response](P209_A_RESPONSE.md) is now under actual
+same-reviewer delta assessment. No accepted delta/physical Round1 or B
+exists yet, and optional PDF structural preflight remains UNAVAILABLE.
+
+Latest actual private push is **f8ee398c**, with complete scope/object/push
+evidence in [the receipt](GIT_SYNC_RECEIPT.md). It archives P209 Round0 and
+closed twenty-third–twenty-fifth/second-ORR evidence, but excludes active
+A/root-A and twenty-sixth. The later twenty-seventh and this receipt/index
+refresh are outside that historical ref. All thirteen named manifests and
+8,817 committed-tree referents passed; remote ref was exact and 0/0/clean.
+
+## P209 accepted A / physical Round1 and final-seat closure — 2026-09-07
+
+The same A actually accepted the exact no-change response; the
+[complete root delta inspection](qa/P209_A_ROOT_DELTA_INSPECTION.md) passed
+all 1,342 final payloads, 1,227 initial preserved payloads, twenty explicit
+manifest roles, 124,214 successful delta inputs and all 124,281 actual
+current read paths twice. The real first documentary audit failure and
+its corrected separate attempt remain. The old receipt af175… is preserved
+by exact pushed-Git-object recovery, not omitted or called an at-time copy.
+The already successful strict root A pair retains its complete unchanged
+scientific/runtime key; no new math/build/view is claimed for this delta.
+
+Root then fully inspected the new separate V2 freeze preparation, performed
+the actual read-only preflight and invoked it once successfully.
+[Round1](qa/P209_ROUND1_ROOT_INSPECTION.md) has 2,003 payloads under seal
+`c93e16cf20d2eb87f3b454fbdb3576e52c6c79fb74c8712a277efeab7e60ce57`:
+1,989 unchanged core, eleven acceptance/history anchors, two new metadata/
+adapter files and one exact historical alias. The new independent physical
+checker passed all 7,971 current read paths, 243+16 links and four actual
+raw comparisons. V1's omitted current whole-paper file was found before
+execution; its complete ten-payload preparation remains untouched. The
+prior whole manifest cd8… has an exact physical Round1 anchor with original
+PAPER-relative basis; the root-only current rollup now includes Round1.
+The distinct at-freezer current receipt 2f699… and old batch/root controls
+were [physically copied before this lifecycle update](qa/central_lifecycle_p209_round1/README.md).
+Fresh nonauthor p209_b_reviewer is actually assigned from Round1. No B
+verdict, accepted B delta, Round2 or paper completion is inferred.
+
+The [twenty-seventh root closure](scouting/TWENTY_SEVENTH_ROOT_INSPECTION.md)
+passed all 148 payloads, 43,447 pin rows, 22 exact copies, 6,420 current
+read paths and actual raw pair comparisons. SRT's complete threshold
+adapter consumes its time axis. GCF0/GCF+ have a valid zero-boundary
+potential and independent-support inverse, but not full-positive temporal
+classification or full-target extremum/source clearance. Three literals,
+two families, one original 33-carrier pilot/two author producer runs;
+NO_PROMOTION. The real root wrapper runtime-symlink failure and separate
+corrected v2 are preserved. The twenty-eighth is author-negative, with
+original scope-failure searches retained, but awaits complete root closure;
+the explicitly assigned twenty-ninth is a new bounded scope in this same
+last seat, not another batch. No P210 admission exists.
+
+These milestones and the new central copies are later than actual pushed
+f8ee398c; they are not implicitly present in that historical Git ref.
+
+Next: finish P209's distinct B, accepted delta, physical Round2 and terminal gates;
 continue final-seat bounded scouting and replace
 failed directions with fresh bounded scouting, then admit only proved,
 nonduplicate conjunctions. No five-paper completion claim is available.

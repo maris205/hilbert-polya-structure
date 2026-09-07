@@ -1,0 +1,188 @@
+--- original_snapshot/freeze_p209_round1_v1.py
++++ freeze_p209_round1.py
+@@ -23,7 +23,7 @@
+ PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ ROUND0 = PAPER / 'frozen_round0'
+ TARGET = PAPER / 'frozen_round1'
+-PREPARATION = BATCH / 'qa/p209_round1_preparation'
++PREPARATION = BATCH / 'qa/p209_round1_preparation_v2'
+ REVIEW = BATCH / 'reviews/p209_a'
+ RESPONSE = BATCH / 'P209_A_RESPONSE.md'
+ ACCEPTANCE = BATCH / 'qa/P209_A_ROOT_DELTA_INSPECTION.actual.json'
+@@ -32,6 +32,8 @@
+ AUTHOR_SEAL = '9fd20cd746f1ae03c22a87283313248ad79ffcfb9a0f1ea45458937dd5901a0e'
+ ROUND0_SEAL = '0f77871539b374027ab42910471cc74cefcd570e214a8242ac0a30c7a83e70ba'
+ OLD_FREEZER = '95473c820d305410ae042eed50c288fef02244e6ab41234648db641f0dd7866a'
++PRIOR_WHOLE_SEAL = 'cd8b345c2e8c7e71afa9d2d2d64e6ca74332828b4447e43ba6894c5a8398a4b2'
++V1_FREEZER = 'e62f11c0eaed932c364fe2bd44f37cc9a92a4819739fc51d306f41c01a2b0096'
+ A_CANONICAL = '9dd6229968748e2caf0e3fe74b802603b6dc51f37704bdf098dbdfb969433b36'
+ ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
+ ANCHORS = {
+@@ -39,11 +41,13 @@
+     'A_REVIEW_MANIFEST.sha256': REVIEW / 'SHA256SUMS',
+     'A_DELTA.md': REVIEW / 'DELTA.md',
+     'A_INITIAL_FINDINGS.json': REVIEW / 'FINDINGS.json',
++    'A_CURRENT_FINDINGS.json': REVIEW / 'CURRENT_FINDINGS.json',
+     'A_INPUT_PINS.sha256': REVIEW / 'INPUT_PINS.sha256',
+     'ROOT_RESPONSE.md': RESPONSE,
+     'ROOT_DELTA_CLOSURE.actual.json': ACCEPTANCE,
+     'ROOT_PAIR_MANIFEST.sha256': PAIR / 'SHA256SUMS',
+     'ROOT_LAUNCHER_MANIFEST.sha256': LAUNCHER / 'SHA256SUMS',
++    'PRE_ROUND1_PAPER_MANIFEST.sha256': PAPER / 'PAPER_MANIFEST.sha256',
+ }
+ READ_PINS = {}
+ COMPARISONS = []
+@@ -123,13 +127,22 @@
+     assert digest(BATCH / 'qa/freeze_p209_round0.py') == OLD_FREEZER
+     old_origin = PREPARATION / 'original_snapshot/freeze_p209_round0.py'
+     assert digest(old_origin) == OLD_FREEZER
++    assert digest(PREPARATION / 'original_snapshot/freeze_p209_round1_v1.py') == V1_FREEZER
++    # This existing whole-paper manifest is complete only BEFORE Round1.
++    # Preserve its exact bytes and original PAPER-relative basis, never reuse
++    # it as the new complete Round1 seal or rewrite it during this operation.
++    prior_manifest = PAPER / 'PAPER_MANIFEST.sha256'
++    assert digest(prior_manifest) == PRIOR_WHOLE_SEAL
++    prior_whole = read_manifest(prior_manifest, PAPER)
++    assert len(prior_whole) == 3978 and 'PAPER_MANIFEST.sha256' not in prior_whole
+     all_paper_entries = list(PAPER.rglob('*'))
+     assert all(not p.is_symlink() for p in all_paper_entries)
++    assert {p.relative_to(PAPER).as_posix() for p in all_paper_entries if p.is_file()} == set(prior_whole) | {'PAPER_MANIFEST.sha256'}
+     live = {p.relative_to(PAPER).as_posix() for p in all_paper_entries
+             if p.is_file() and not p.is_relative_to(ROUND0)}
+-    assert live == set(author) | {'SHA256SUMS', 'AUTHOR_MANIFEST.sha256', 'ROOT_ADOPTION.md'}
++    assert live == set(author) | {'SHA256SUMS', 'AUTHOR_MANIFEST.sha256', 'ROOT_ADOPTION.md', 'PAPER_MANIFEST.sha256'}
+     assert digest(PAPER / 'PAPER_STATUS.md') == core['PAPER_STATUS.md']
+-    return core, author, live
++    return core, author, live, prior_whole
+ 
+ 
+ def accepted_a(core):
+@@ -152,11 +165,13 @@
+         ('review_manifest_sha256', REVIEW / 'SHA256SUMS'),
+         ('delta_sha256', REVIEW / 'DELTA.md'),
+         ('findings_sha256', REVIEW / 'FINDINGS.json'),
++        ('current_findings_sha256', REVIEW / 'CURRENT_FINDINGS.json'),
+         ('response_sha256', RESPONSE),
+         ('root_pair_manifest_sha256', PAIR / 'SHA256SUMS'),
+         ('root_launcher_manifest_sha256', LAUNCHER / 'SHA256SUMS')):
+         assert accepted[field] == digest(path), field
+-    for name in ('REPORT.md', 'DELTA.md', 'FINDINGS.json', 'INPUT_PINS.sha256',
++    for name in ('REPORT.md', 'DELTA.md', 'FINDINGS.json', 'CURRENT_FINDINGS.json',
++                 'INITIAL_REVIEW_SEAL.sha256', 'INPUT_PINS.sha256',
+                  'verify.py', 'CANONICAL.json', 'SOURCE_AND_PROOF.md', 'REPLAY_LOG.md', 'BUILD_REPORT.md'):
+         assert name in review_rows, 'missing accepted review role: ' + name
+     findings = load(REVIEW / 'FINDINGS.json')
+@@ -166,8 +181,21 @@
+     assert isinstance(findings['findings'], list)
+     assert all(str(row['status']).lower() == 'resolved' for row in findings['findings'])
+     # This is the immutable initial census, not the current acceptance record.
+-    # Actual current acceptance/open counts are bound above through the new
+-    # DELTA and the measured root closure; never force an initial-file rewrite.
++    # Actual current acceptance has its own separately pinned census below;
++    # never force an initial-file rewrite.
++    current = load(REVIEW / 'CURRENT_FINDINGS.json')
++    assert current['schema'] == 'p209-manuscript-review-findings-v1'
++    assert current['reviewer'] == '/root/p209_a_reviewer' and current['input_round'] == 0
++    assert current['phase'] == 'ACTUAL_EXACT_NOCHANGE_DELTA'
++    assert current['verdict'] == current['delta_status'] == 'ACCEPTED_EXACT_NOCHANGE_DELTA'
++    assert current['current_open_counts'] == {'critical': 0, 'major': 0, 'minor': 0}
++    assert current['findings'] == [] and current['scientific_inputs_changed'] is False
++    assert current['response_sha256'] == accepted['response_sha256'] == digest(RESPONSE)
++    assert current['initial_complete_manifest_role'] == 'INITIAL_REVIEW_SEAL.sha256'
++    assert digest(REVIEW / 'INITIAL_REVIEW_SEAL.sha256') == current['initial_complete_manifest_sha256']
++    initial_rows = read_manifest(REVIEW / 'INITIAL_REVIEW_SEAL.sha256', REVIEW)
++    assert len(initial_rows) == accepted['initial_review_payloads_preserved'] == 1227
++    assert all(review_rows.get(name) == value for name, value in initial_rows.items())
+     expected_inputs = {str((ROUND0 / name).relative_to(ROOT)): value for name, value in core.items()}
+     expected_inputs[str((ROUND0 / 'SHA256SUMS').relative_to(ROOT))] = ROUND0_SEAL
+     assert read_manifest(REVIEW / 'INPUT_PINS.sha256', ROOT) == expected_inputs
+@@ -188,6 +216,7 @@
+                 ((REVIEW, review_rows), (PAIR, pair_rows), (LAUNCHER, launcher_rows))
+                 for name, value in rows.items()}
+     return accepted, external, {'accepted_review_payloads': len(review_rows),
++        'initial_review_payloads_preserved': len(initial_rows),
+         'root_pair_payloads': len(pair_rows), 'root_launcher_payloads': len(launcher_rows)}
+ 
+ 
+@@ -311,7 +340,7 @@
+         complete_manifest(PREPARATION)
+         digest(Path('/usr/bin/python3.10'))
+         digest(Path('/usr/bin/cmp'))
+-        core, author, live = core_inputs()
++        core, author, live, prior_whole = core_inputs()
+         accepted, accepted_external, counts = accepted_a(core)
+         history, core_links, anchor_links = link_mapping(core, accepted)
+         alias_copies = {row['copy_relative']: (Path(row['physical_path']), row['sha256'])
+@@ -348,6 +377,10 @@
+         for row in core_links + anchor_links:
+             assert digest(Path(row['physical_target'])) == row['sha256']
+         assert complete_manifest(ROUND0) == core
++        # After Round1 exists, only the OLD referents and preserved bytes are
++        # rechecked: this is explicitly not a complete current-paper audit.
++        assert read_manifest(PAPER / 'PAPER_MANIFEST.sha256', PAPER) == prior_whole
++        assert digest(acceptance_dir / 'PRE_ROUND1_PAPER_MANIFEST.sha256') == PRIOR_WHOLE_SEAL
+         accepted_after, external_after, counts_after = accepted_a(core)
+         assert accepted_after == accepted and external_after == accepted_external and counts_after == counts
+         assert resolve_history(accepted, load(ROUND0 / 'FROZEN_LINK_MAP.json')) == history
+@@ -356,13 +389,13 @@
+                 if p.is_file() and not p.is_relative_to(ROUND0) and not p.is_relative_to(TARGET)} == live
+         assert not any(p.is_symlink() for p in PAPER.rglob('*'))
+         assert all(digest(Path(p)) == value for p, value in before.items())
+-        metadata = {'schema': 'p209-round1-provenance-v1',
++        metadata = {'schema': 'p209-round1-provenance-v2',
+             'scope': 'Physical Round1 after actual accepted A delta and root closure; not B, Round2 or terminal acceptance.',
+             'author_payloads_preserved': 1985, 'round0_core_payloads_copied': 1989,
+             'author_manifest_sha256': AUTHOR_SEAL, 'round0_manifest_sha256': ROUND0_SEAL,
+             'historical_core_status_and_metadata_unchanged': True,
+             'physical_historical_alias_payloads': len(alias_copies),
+-            'new_complete_manifest_role': 'SHA256SUMS covers exactly the 1989 core + 9 physical acceptance anchors + actually used historical alias copies + new adapter + this provenance; old core manifests keep their historical roles.',
++            'new_complete_manifest_role': 'SHA256SUMS covers exactly the 1989 core + 11 physical acceptance/history anchors + actually used historical alias copies + new adapter + this provenance; old core manifests keep their historical roles.',
+             'core_source_manifest': str(ROUND0 / 'SHA256SUMS'), 'core_payload_pins': core,
+             'anchor_mapping': {name: {'original_path': str(ANCHORS[name]),
+                 'physical_path': 'ROUND1_ACCEPTANCE/' + name, 'sha256': value}
+@@ -370,13 +403,27 @@
+             'accepted_review_and_root_manifest_referents': accepted_external,
+             'immutable_initial_census_anchor': 'ROUND1_ACCEPTANCE/A_INITIAL_FINDINGS.json',
+             'current_acceptance_anchors': ['ROUND1_ACCEPTANCE/A_DELTA.md',
++                'ROUND1_ACCEPTANCE/A_CURRENT_FINDINGS.json',
+                 'ROUND1_ACCEPTANCE/ROOT_DELTA_CLOSURE.actual.json'],
+             'accepted_root_assertions': accepted, 'accepted_evidence_counts': counts,
++            'prior_whole_paper_manifest': {
++                'original_path': str(PAPER / 'PAPER_MANIFEST.sha256'),
++                'original_referent_base': str(PAPER),
++                'sha256': PRIOR_WHOLE_SEAL,
++                'physical_path': str(acceptance_dir / 'PRE_ROUND1_PAPER_MANIFEST.sha256'),
++                'physical_relative_path': 'ROUND1_ACCEPTANCE/PRE_ROUND1_PAPER_MANIFEST.sha256',
++                'payloads': len(prior_whole),
++                'original_referent_pins': prior_whole,
++                'exact_whole_tree_checked_before_creation': True,
++                'original_referents_and_manifest_bytes_rechecked_after_creation': True,
++                'complete_current_paper_after_round1': False,
++                'lifecycle_rule': 'A later root whole-paper manifest refresh may change the original manifest path; preserve this exact historical hash through the physical anchor and keep the original PAPER-relative referent basis.'},
+             'historical_external_resolution': history, 'round1_core_link_map': core_links,
+             'acceptance_and_historical_anchor_link_map': anchor_links,
+             'all_source_inputs_before_and_rechecked_after': before,
+             'freezer_origin': str(source), 'freezer_sha256': selfhash,
+             'original_round0_freezer_sha256': OLD_FREEZER,
++            'preserved_unexecuted_v1_freezer_sha256': V1_FREEZER,
+             'launch_argv': sys.argv, 'launch_orig_argv': sys.orig_argv,
+             'environment': ENV, 'cwd': str(ROOT), 'raw_comparisons': COMPARISONS,
+             'limitations': 'Root acceptance is a hash-bound attestation to actual reviewer delta and completed original/replay closure. This freezer rechecks artifacts, not mathematics, runtime-replay validity, build quality or visual reading. Newly scanned links in a copied historical control retain that original document origin; newly pinned navigation targets are not an assertion of historical target-body identity.',
+@@ -389,7 +436,7 @@
+         expected.update({name: value for name, (_, value) in alias_copies.items()})
+         expected['ROUND1_FREEZE_ADAPTER.py'] = selfhash
+         expected['ROUND1_PROVENANCE.json'] = digest(TARGET / 'ROUND1_PROVENANCE.json')
+-        assert len(expected) == 2000 + len(alias_copies)
++        assert len(expected) == 2002 + len(alias_copies)
+         assert {p.relative_to(TARGET).as_posix(): digest(p) for p in TARGET.rglob('*') if p.is_file()} == expected
+         assert all(digest(Path(p)) == value for p, value in before.items())
+         with (TARGET / 'SHA256SUMS').open('x') as stream:
+@@ -397,7 +444,7 @@
+         assert complete_manifest(TARGET) == expected
+         print(json.dumps({'status': 'PASS_PHYSICAL_P209_ROUND1', 'payloads': len(expected),
+             'manifest_sha256': digest(TARGET / 'SHA256SUMS'), 'core_payloads': 1989,
+-            'acceptance_anchor_payloads': 9, 'author_payloads_unchanged': 1985,
++            'acceptance_anchor_payloads': 11, 'author_payloads_unchanged': 1985,
+             'physical_historical_alias_payloads': len(alias_copies),
+             'accepted_root_closure_sha256': anchors['ROOT_DELTA_CLOSURE.actual.json'],
+             'raw_comparisons': COMPARISONS,
