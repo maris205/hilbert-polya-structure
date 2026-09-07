@@ -1,0 +1,190 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\raggedbottom
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\A}{\mathcal A}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\what}[1]{\widehat{#1}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[Involutive norms in cyclic group algebras]{Involutive Norm Dynamics in Split Cyclic Group Algebras:\ Fixed Sequences, Sharp Depth, and Rigidity}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $n\mid(q-1)$ and let inversion on the cyclic group $C_n$ induce the
+canonical involution $*$ of the split group algebra
+$\A_{q,n}=\F_q[C_n]$.  We determine the complete finite dynamics of the
+nonlinear norm map $T(a)=aa^*$.  Character inversion partitions the Fourier
+coordinates into self-inverse blocks $z\mapsto z^2$ and paired blocks
+$(u,v)\mapsto(uv,uv)$.  If $s=\gcd(n,2)$ and $o=(n+s)/2$, then
+\[
+ \#\Fix(T^k)=\bigl(1+\gcd(2^k-1,q-1)\bigr)^o
+\]
+for every $k\geq1$.  Writing $q-1=2^\alpha m$ with $m$ odd, the recurrent
+core has size $(m+1)^o$, while the maximum transient depth is exactly
+$\alpha+\mathbf1_{\{n>s\}}$.  M\"obius inversion gives every cycle and a
+finite product for the Artin--Mazur zeta function.  Finally, phase-space
+size, the fixed sequence, and maximum depth recover $(q,n)$, including the
+ambiguous two-orbit branch.  Literal cyclic convolution over prime fields
+and explicit models of $\F_4$ and $\F_{16}$ independently check the formulas.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and ownership boundary}
+
+Let $q=p^h$ be a prime power, let $n\geq1$ divide $q-1$, and choose a
+generator $g$ of $C_n$.  On
+\[
+ \A_{q,n}=\F_q[C_n]
+   =\left\{\sum_{r=0}^{n-1}a_rg^r:a_r\in\F_q\right\}
+\]
+consider the canonical inversion involution
+\[
+ \left(\sum_{r=0}^{n-1}a_rg^r\right)^*
+   =\sum_{r=0}^{n-1}a_rg^{-r}
+\]
+and the self-map
+\begin{equation}
+ \label{eq:T}
+ T\colon\A_{q,n}\longrightarrow\A_{q,n},\qquad T(a)=aa^*.
+\end{equation}
+The phase space has $q^n$ elements.  The assumption $n\mid(q-1)$ is kept
+throughout: it makes the cyclic algebra split over the stated ground field
+and excludes modular nilpotents from $x^n-1$.
+
+Group-algebra involutions and their symmetric and unitary units are classical;
+see, for example, \citet{BovdiGrishkov2019}.  Finite Fourier decomposition is
+standard \citep{Terras1999}, and scalar power-map functional graphs over
+finite fields have an established literature
+\citep{VasigaShallit2004,QureshiReis2023}.  We assign those ingredients no
+novelty credit.  Our bounded target is their conjunction for the map
+\eqref{eq:T} on the \emph{whole} group algebra, including zero divisors:
+the paired-coordinate synchronization, all fixed and cycle counts, the
+sharp transient depth, and a recovery statement.  A targeted source search
+completed on 29 August 2026 did not locate this exact package, but that
+database- and query-bounded observation is not a priority or novelty claim.
+External circulation remains on \textbf{HOLD} pending a specialist review.
+
+There are two proof routes.  A coefficient-free involution calculation first
+collapses every orbit to ordinary powering inside the symmetric algebra.
+Fourier idempotents then expose independent inversion-orbit blocks and make
+the census exact.  The computational control reverses this order: it starts
+from literal coefficient convolution and cyclic reversal, then compares the
+result with the Fourier and arithmetic predictions.
+
+\section{One-step collapse and Fourier blocks}
+
+Write
+\[
+ \A_{q,n}^+=\{b\in\A_{q,n}:b^*=b\}.
+\]
+The first route requires neither a primitive root nor a choice of
+coordinates.
+
+\begin{proposition}[Algebraic collapse]
+\label{prop:collapse}
+For every $a\in\A_{q,n}$,
+\[
+ T(a)\in\A_{q,n}^+,
+ \qquad
+ T^k(a)=(aa^*)^{2^{k-1}}\quad(k\geq1).
+\]
+Moreover $T(b)=b^2$ for every $b\in\A_{q,n}^+$.
+\end{proposition}
+
+\begin{proof}
+The cyclic group algebra is commutative, so
+$(aa^*)^*=a^*a=aa^*$.  Thus $T(a)$ is symmetric.  If $b=b^*$, then
+$T(b)=bb^*=b^2$.  Starting with $b=aa^*$ and iterating squaring proves the
+displayed formula.
+\end{proof}
+
+For the second route, choose a primitive $n$th root $\omega\in\F_q$.  The
+Fourier transform
+\[
+ \what a(j)=\sum_{r=0}^{n-1}a_r\omega^{jr},\qquad j\in\mathbb Z/n\mathbb Z,
+\]
+is an algebra isomorphism from $\A_{q,n}$ to $\F_q^n$.  Indeed,
+$p\nmid n$ and the usual Fourier matrix is invertible.  Multiplication becomes
+coordinatewise, while
+\[
+ \what{a^*}(j)=\what a(-j).
+\]
+Let
+\begin{equation}
+ \label{eq:so}
+ s=\gcd(n,2),\qquad o=\frac{n+s}{2}.
+\end{equation}
+Here $s$ is the number of self-inverse characters and $o$ is the number of
+orbits of $j\mapsto-j$.
+
+\begin{theorem}[Fourier block normal form]
+\label{thm:normal}
+Under the Fourier isomorphism, a self-inverse character carries the block
+\[
+ z\longmapsto z^2,
+\]
+whereas a two-element orbit $\{j,-j\}$ carries
+\[
+ (u,v)\longmapsto(uv,uv).
+\]
+In particular, for every $k\geq1$ and every $j$,
+\begin{equation}
+ \label{eq:iterate}
+ \what{T^k(a)}(j)
+ =\bigl(\what a(j)\what a(-j)\bigr)^{2^{k-1}}.
+\end{equation}
+The fixed algebra $\A_{q,n}^+$ is isomorphic, as an algebra, to $\F_q^o$.
+\end{theorem}
+
+\begin{proof}
+Coordinatewise multiplication gives
+\[
+ \what{T(a)}(j)=\what a(j)\what a(-j).
+\]
+If $j=-j$, this is $z^2$.  Otherwise the two output coordinates coincide,
+giving the paired block.  After the first step both kinds of blocks square,
+which proves \eqref{eq:iterate}.  Finally, $a=a^*$ is equivalent to
+$\what a(j)=\what a(-j)$ on every inversion orbit; choosing one common
+coordinate on each orbit identifies the fixed algebra with $\F_q^o$.
+\end{proof}
+
+The paired block exhibits the first qualitative anomaly: two independent
+input coordinates synchronize in one step and never separate.  This is the
+only source of an extra transient level beyond scalar squaring.
+
+\section{Fixed points and the complete recurrent census}
+
+For $k\geq1$, put
+\begin{equation}
+ \label{eq:Lk}
+ L_k=1+\gcd(2^k-1,q-1).
+\end{equation}
+

@@ -1,0 +1,118 @@
+# Closed author proof and disposition
+
+Status: **NO_PROMOTION**. The three literal descriptions in INTAKE.md
+belong to two rule-families; the two gcd carriers are not independent
+breadth or seat candidates. No new theorem is assigned a paper number.
+
+## Claims and proof status
+
+The pre-execution boundary remains immutable in PREPILOT_PROOF.md.
+Its SRT symmetric-threshold representation, GCF0 closure and fixed-current
+criterion, invariant positive stratum and nonsharp zero-boundary potential
+are **PROVABLE AS STATED**. SRT is rejected by its complete old threshold
+adapter without a pilot. GCF0's complete all-size temporal/recurrent theorem
+and a full-target inverse extremum are **NOT CURRENTLY JUSTIFIED**.
+
+The original GCF0 pair contains only fixed cycles, but this is exactly
+33 declared carriers and 2,743 labelled states, not an all-parameter
+convergence proof. The ordinary boundary potential does not cover the
+all-positive sector. It cannot be extended by silently assuming that some
+coordinate reaches zero, since the positive sector is invariant.
+
+The only additional post-pilot deductive result is the fixed-sector inverse
+below. It is an elementary local divisor-splitting mechanism, not a full
+target decoder, sharp global extremum or independently qualifying time axis.
+
+## Independent-support inverse theorem
+
+**Status: PROVABLE AS STATED.** Let $n\ge3$, $N\ge0$, and let
+$y\in X_{n,N}$ have independent positive support in the cyclic adjacency
+relation: $y_jy_{j+1}=0$ for every $j$. For a positive target site $j$,
+call it eligible when $y_{j-2}=0$. Let $d(m)$ be the number of positive
+integer divisors of a positive integer $m$.
+
+Every predecessor of $y$ is obtained by the following disjoint choices.
+At each eligible positive target site $j$, choose either $a_j=0$ or a
+positive proper divisor $a_j$ of $y_j$, and replace the target pile $y_j$
+by a pile $y_j-a_j$ at $j$ and a pile $a_j$ at $j-1$. At an ineligible
+positive target site choose only $a_j=0$. All remaining sites stay zero.
+The construction is a bijection, and consequently
+
+$$|T^{-1}(y)|=\prod_{\substack{j:y_j>0\\y_{j-2}=0}}d(y_j).$$
+
+The empty product is one; it covers $N=0$ and the all-zero target.
+In particular, a target consisting of a single pile $N>0$ has exactly
+$d(N)$ predecessors at every $n\ge3$. For $n=1,2$ the whole map is the
+identity, so every target has exactly one predecessor instead.
+
+### Assumptions, strategy and dependencies
+
+The carrier, cyclic labels and old-snapshot guarded currents are exactly
+GCF0. No inequality on $N$ or on its prime factors is assumed. The proof
+uses the hereditary-zero lemma, then the vanishing-output equality to
+locate every erased donor. The gcd divisibility condition then gives a
+finite disjoint encoding. It uses no finite output or external theorem.
+
+### Proof
+
+Let $T(x)=y$. A zero source coordinate stays zero, so every positive
+target site is positive in the source. Suppose $x_i>0$ while $y_i=0$.
+The update equality and $g_i\le x_i$ imply
+
+$$0=x_i-g_i+g_{i-1},\qquad g_i=x_i>0,\qquad g_{i-1}=0.$$
+
+Thus $x_{i+1}>0$ and $x_{i-1}=0$. If $y_{i+1}=0$, applying the same
+zero-output equality at $i+1$ would force $g_i=0$, a contradiction.
+Therefore $i+1$ is a positive target site. Every extra source site is
+exactly the immediate predecessor of a positive target site, and its
+own preceding source site must be zero.
+
+Fix $j$ with $y_j>0$. By independent support, $y_{j-1}=y_{j+1}=0$.
+The coordinate $x_{j+1}$ must be zero: if it were positive, its zero target
+value would force its preceding source coordinate $x_j$ to be zero,
+contradicting $y_j>0$. Hence no current leaves site $j$.
+
+An extra donor $a_j=x_{j-1}>0$ is impossible if $y_{j-2}>0$, since the
+preceding source coordinate would then also be positive. If $y_{j-2}=0$,
+then $x_{j-2}=0$: an extra positive source there would require $j-1$ to
+be a positive target site, which independent support forbids. Therefore
+the preceding-zero constraint is exactly the stated eligibility condition.
+
+For an eligible positive donor, the vanishing output at $j-1$ gives
+$\gcd(a_j,x_j)=a_j$, equivalently $a_j\mid x_j$. The target equality
+at $j$ is $y_j=x_j+a_j$, so equivalently $a_j\mid y_j$ and $a_j<y_j$.
+With no donor, $x_j=y_j$. A proper positive divisor of $y_j$ is at most
+$y_j/2$, ensuring $x_j=y_j-a_j>0$.
+
+Conversely, perform the stated choices. Distinct positive targets are
+nonadjacent, so their two-site donor/recipient pairs are disjoint.
+When two positive target sites are separated by exactly one zero, the
+later target is ineligible, so no donor is inserted next to the earlier
+positive source in a way that violates the necessary preceding-zero
+condition. All other eligible donors have a zero source immediately
+before them. Thus each donor sends exactly its whole $a_j$ pile to $j$,
+and every recipient has zero outgoing current. All other currents vanish,
+and the update is exactly $y$.
+
+Each source recovers every choice by $a_j=x_{j-1}$, proving injectivity.
+There are $1+(d(y_j)-1)=d(y_j)$ choices at an eligible site, and one
+at every ineligible site. Multiplication proves the formula. The single
+pile and $N=0$ consequences follow directly. The separate $n=1,2$
+identity lemma proves the boundary statement. ∎
+
+## Why the inverse result does not fill the seat
+
+This is a subset of target fibres, selected by the independent-support
+fixed locus. Positive/full-support target inverses can involve circulating
+gcd currents and are not described here. Even on the original small
+carriers, maximum fibres can lie outside this subset: at $n=3,N=9$ the
+unique maximum target is $(3,3,3)$, with four predecessors; a single-pile
+target has $d(9)=3$. At $n=3,N=11$ positive nonconstant targets also
+attain the maximum. These are exact original-box observations, not an
+all-size extremal theorem.
+
+Full-positive convergence, a complete recurrent classification, sharp
+global entrance time and a full-target maximum all remain open here.
+Generic conservation, boundary transport, divisor counting and totality
+repair receive no novelty credit. GCF0/GCF+ close as
+**HOLD_PROOF_SOURCE / NO_PROMOTION**, with no second or enlarged pilot.

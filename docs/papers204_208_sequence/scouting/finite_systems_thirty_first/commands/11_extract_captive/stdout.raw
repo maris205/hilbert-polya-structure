@@ -1,0 +1,2127 @@
+   SELF-ORGANISATION IN CELLULAR AUTOMATA WITH COALESCENT
+      PARTICLES: QUALITATIVE AND QUANTITATIVE APPROACHES
+
+                      BENJAMIN HELLOUIN DE MENIBUS AND MATHIEU SABLIK
+
+
+       Abstract. This article introduces new tools to study self-organisation in a family of simple cellular
+       automata which contain some particle-like objects with good collision properties (coalescence) in
+       their time evolution. We draw an initial configuration at random according to some initial shift-
+       ergodic measure, and use the limit measure to describe the asymptotic behaviour of the automata.
+          We first take a qualitative approach, i.e. we obtain information on the limit measure(s). We prove
+       that only particles moving in one particular direction can persist asymptotically. This provides some
+       previously unknown information on the limit measures of various deterministic and probabilistic
+       cellular automata: 3 and 4-cyclic cellular automata (introduced by Fisch, 1990), one-sided captive
+       cellular automata (introduced by Theyssier, 2004), the majority-traffic cellular automaton, a self
+       stabilisation process towards a discrete line (introduced by Regnault and Remila, 2015). . .
+          In a second time we restrict our study to to a subclass, the gliders cellular automata. For
+       this class we show quantitative results, consisting in the asymptotic law of some parameters: the
+       entry times (generalising [KFD11]), the density of particles and the rate of convergence to the limit
+       measure.
+
+
+
+
+                                          1. Introduction
+A cellular automaton is a complex system defined by a local rule which acts synchronously and
+uniformly on a configuration space. These simple models exhibit a wide variety of dynamical
+behaviour and even in the one-dimensional case (the focus of this article) they are not completely
+understood. Formally, given a finite alphabet A, a configuration is an element of the set AZ . This
+set is compact for the product topology. A cellular automaton F : AZ → AZ is defined by a local
+function f : A[−r,r] → A, for some radius r > 0, which acts synchronously and uniformly on every
+cell of the configuration:
+                             F (x)i = f (x[i−r,i+r] ) for all x ∈ AZ and i ∈ Z.
+Equivalently, cellular automata can be defined as continuous functions that commute with the shift
+map σ defined by σ(x)i = xi+1 for all x ∈ AZ and i ∈ Z.
+   Even though cellular automata have been introduced by J. Von Neumann [vN56], the impulsion
+for their systematic study was given by the work of S. Wolfram [Wol84]. He instigated a systematic
+study of elementary cellular automata, which are the cellular automata defined on the alphabet
+                                     3
+{0, 1} with radius 1 (there are 22 = 256 such cellular automata; to each of them we associate a
+number #n). In particular he proposed a classification according to the observation of the space-time
+diagrams produced by the time evolution of cellular automata starting from a random configuration.
+   One of these classes corresponds to a particular form of self-organisation: from a random configu-
+ration, after a short transitional regime, regions consisting in a simple repeated pattern emerge and
+grow in size, while the boundaries between them persist under the action of the cellular automaton
+and can be followed from an instant to the next. Therefore their movement (time evolution) can be
+defined inductively, and in this case we call these boundaries particles. In the simplest case, these
+particles evolve at constant speed and are annihilated when colliding with other particles; however,
+  Key words and phrases. Cellular automata, Particles, limit measures, Brownian motion.
+                                                        1
+they can sometimes exhibit a periodic behaviour or even perform a random walk, and the collisions
+may give birth to new particles following some more or less complicated rules.
+   This type of behaviour was first observed empirically in elementary cellular automata #18, #122,
+#126, #146, and #182 [Gra83, Gra84], then #54, #62, #184 [BNR91], etc. The interest for these
+automata stems from their dynamics that appeared neither too simple nor too chaotic, giving hope
+to better understand their underlying structure. In Figure 1, we show the space-time diagrams of
+a sample of such automata iterated on a (uniform) random configuration.
+   Roughly speaking, studying particles in cellular automata requires two steps:
+      • identifying and describing the particles, usually as finite words;
+      • describing the particle dynamics and understanding its effect on the properties of the CA.
+   Historically, this study was often performed on individual or small groups of similar-looking CA,
+and the first step was done in a case-by-case manner. See for example [Fis90b, Fis90a] for the 3-state
+cyclic automaton, [BF95, BF05] for Rule #184 and other automata with similar dynamics, [Gra84,
+EN92] for Rule #18. . . Other works such as [Elo94] skip the first step and study particle dynamics
+in an abstract manner, deducing dynamical properties of automata by making assumptions on the
+dynamics of their particles. This approach was used successfully on probabilistic cellular automata
+simulating traffic jams, generalising standard stochastic processes such as the TASEP [GG01].
+   The first general formalism of particles in cellular automata was introduced by M. Pivato: homo-
+geneous regions correspond to words from a subshift Σ and particles are defects in a configuration
+of Σ. He developed some invariants to characterise the persistence of a defect [Piv07a, Piv07c] and
+he described the different possible dynamics of propagation of a defect [Piv07b].
+
+   In the present work we focus on the second step first. More precisely, we are interested in how
+the existence of some particle set with good dynamical properties affects the typical asymptotic be-
+haviour. Then we apply this general framework to a variety of examples, finding the sets of particles
+by Pivato’s methods or otherwise, to explain the self-organisation that is observed experimentally.
+   Let us define more formally what we mean by typical asymptotic behaviour. Starting from a
+σ-invariant measure µ ∈ Mσ (AZ ) (i.e. µ(σ −1 (U )) = µ(U ) for all Borel set U ), we consider the
+iteration of a cellular automaton F on this measure:
+          F∗ : Mσ (AZ ) −→ Mσ (AZ )
+                 µ      7−→ F∗ µ              where F∗ µ(U ) = µ(F −1 (U )) for all Borel U.
+   We then study the asymptotic properties of the sequence (F∗t µ)t∈N , and particularly the set of
+cluster points called the µ-limit measures set. Sometimes, we are only able to provide information
+on the µ-limit set, introduced in [KM00], which is the union of the supports of all limit measures.
+Equivalently, it is the set of configurations containing only patterns whose probability to appear in
+the space-time diagram does not tend to zero as time tends to infinity.
+   When studying typical asymptotic behaviour in this sense, it is unreasonable to expect a general
+result since a wide variety of limit measures can be reached in the general case [HdMS13] and any
+nontrivial property of the µ-limit set is undecidable [Del11]. That is why we consider restricted cases
+for the dynamics of the particles. To determine the µ-limit set in some cases, P. Kůrka suggests
+an approach based on particle weight function which assigns weights to certain words [Kůr03].
+However, this method does not cover any case when a defect can remain in the µ-limit set. Hence
+we aim at a more general approach, in terms of particle dynamics as well as initial measures.
+   One of our main motivations for this study is the class of captive cellular automata, where the
+local rule cannot make a colour appear if it is not already present in the neighbourhood. These
+automata were introduced by G. Theyssier in [The04] for their algebraic properties, but he also
+noticed an interesting phenomenon: when drawing a captive cellular automaton at random (fixed
+alphabet and neighbourhood), most captive automata exhibited the type of self-organised behaviour
+                                                   2
+described above. Any kind of general result regarding self-organisation of captive cellular automata
+remains a challenging open problem.
+
+   This article is divided into two main sections, corresponding to improved versions of results
+previously published in conferences [HdMS11, HdMS12]. In Section 2, we present a qualitative
+result generalised from [HdMS11] with an improved formalism, shorter proofs and a new application
+to probabilistic cellular automata (Section 2.7). Then, in Section 3, we refine our approach on a
+subclass to obtain some quantitative results. Sections 3.1 to 3.3 were published in [HdMS12]; we
+correct some inaccuracies in the proofs and extend the study to other parameters.
+Qualitative approach. In Section 2, we prove a qualitative result: for any initial σ-ergodic measure
+µ, assuming particles have good collision properties (coalescence), only particles moving in one
+particular direction can persist aymptotically. We introduce our own formalism of particle system
+in Section 2.1 so as to be able to describe the dynamics of the particles, and Section 2.4 is dedicated
+to the proof itself. Section 2.5 presents a simplified version of Pivato’s formalism which is by far
+the simplest way to find such a particle system in most examples.
+   We spend Section 2.6 on various examples of automata where this result can be applied:
+      Section 2.6.1: we characterise the µ-limit set of the “traffic” automaton (rule #184), a sim-
+        ple case that may clarify the formalism. The results were known for initial Bernoulli mea-
+        sures [BF95, BF05] but our method applies for every σ-ergodic measure.
+      Section 2.6.2: we consider the family of n-cyclic cellular automata introduced in [Fis90a,
+        Fis90b]. Using our method, we go further in the study of these simple automata: in partic-
+        ular, for n = 3 or 4, we show that the limit measure is unique and is a convex combination
+        of Dirac measures supported by uniform configurations.
+      Section 2.6.3: we characterise the µ-limit set of all one-sided captive cellular automata. This
+        is a first step to the study of asymptotic behaviour of captive cellular automata.
+      Section 2.6.4: last, we apply our formalism to a cellular automaton where the particles do
+        not have a linear speed but instead perform random walks by drawing randomness from the
+        initial measure.
+   However, our results are not general enough to apply to defects of a sofic subshift that can have a
+particle-like behaviour, such as in Rule #18 (see the bottom right picture in Figure 1 and [EN92]),
+or to more complicated particle systems such as those observed in general captive cellular automata.
+   Finally, in Section 2.7, we generalise our method to probabilistic cellular automata. As an appli-
+cation, we partially describe limit measures of the probabilistic majority-traffic cellular automaton
+proposed by N. Fatès in [Fat13] as a candidate to solve the density classification problem. This
+complements the approach of [BFMM13] which characterises invariant measures. Another appli-
+cation proposed in Section 2.7.3 presents a generalisation to the infinite line of a self stabilisation
+process toward a discrete line proposed in [RR15].
+Quantitative approach. In Section 3, we improve the previous qualitative results with a quanti-
+tative approach, considering the time evolution of some parameters when the particle dynamics are
+very simple. This research direction was inspired by [KFD11], where the authors consider the wait-
+ing time before a particle crosses the central column (called entry time). Using the same approach
+as in [BF95, KM00], we show that the behaviour of these automata can be described by a random
+walk process (Section 3.1), and we approximate this process by a Brownian motion using scale in-
+variance (Section 3.3). Thanks to this tool, we answer negatively a conjecture proposed in [KFD11]
+by determining the correct asymptotic law for the entry time of a particle in the central column
+(Section 3.2). We then use the same approach on various natural parameters such as the density of
+particles at time t (Section 3.4) or the rate of convergence to the limit measure (Section 3.5). This
+generalises some known results on initial Bernoulli measures from [KFD11] and [BF05], in particular
+                                                   3
+relaxing the conditions on the initial measures. In Section 3.6, we exhibit various examples with
+similar dynamics on which these results apply.
+   In all the article, space-time diagrams were produced using the Sage mathematical software [S+ 12]
+and follow the convention  = 0,  = 1,  = 2,  = 3.
+                                             Cases with quantitative results (Section 3)
+
+
+
+                                                                                           (-1,1)-gliders CA (Sec. 3.1)        Rule 184 or traffic rule (Sec. 2.6.1)         3-state cyclic CA (Sec. 2.6.2)
+ Cases with qualitative result (Section 2)
+
+
+
+
+                                                                                           (0,1)-gliders CA (Sec. 3.1)         One-sided captive CA (Sec. 2.6.3)             One-sided captive CA (Sec. 2.6.3)
+
+
+
+
+                                                                                           4-state cyclic CA (Sec. 2.6.2)      5-state cyclic CA (Sec. 2.6.2)                Random walk CA (Sec. 2.6.4)
+                                             Prob. CA (Sec. 2.7)
+
+
+
+
+                                                                                           Majority-traffic PCA (Sec. 2.7.2)   Self-stabilisation of the line (Sec. 2.7.3)   Generic one-sided captive PCA
+
+
+
+
+                                                                                           Generic captive CA                  Generic captive CA                            Generic captive CA
+ Unknown cases
+
+
+
+
+                                                                                           Generic captive CA                  Generic captive CA                            Rule 18
+
+
+
+
+                                                                                   Figure 1. Space-time diagrams of some cellular automata with particles, starting
+                                                                                   from a configuration drawn uniformly at random.
+
+                                                                                                                                       4
+         2. Particle-based organisation: qualitative results
+In this section, we take a qualitative approach to self-organisation: that is, we assume some prop-
+erties on the dynamics of the particles of some cellular automaton and try to deduce properties of
+its µ-limit measures set, with no regard to how fast this organisation takes place.
+
+2.1. Particles
+2.1.1. Definition of symbolic systems
+Given a finite alphabet A, a word is a finite sequence of elements of A. Denote by A∗ = n An
+                                                                                              S
+the set of all words where A0 is the empty word ε. An infinite sequence indexed by Z is called
+a configuration. The set of configurations AZ is a compact set for the product topology. For a
+word u ∈ A∗ the cylinder
+                       S [u] is the set of configurations where u appears at the position 0, and for
+U ⊂ A∗ we have [U ] = u∈U [u]. Cylinders are a clopen basis of the topology.
+   On AZ we define the shift map σ(x)i = xi+1 for all x ∈ AZ and i ∈ Z. A subshift is a closed
+σ-invariant subset of AZ . Equivalently, a subshift can be defined by a set of forbidden patterns
+F ⊂ A∗ as the set of configurations where no pattern of F appears. If F is finite, we call the
+corresponding subshift a subshift of finite type or SFT. The radius of an SFT Σ is the smallest `
+such that Σ can be defined by a set of forbidden patternsSin A` . The language of a subshift Σ is
+defined as Ln (Σ) = {u ∈ An : Σ ∩ [u] 6= ∅} and L(Σ) = n∈N Ln (Σ). A SFT is σ-transitive if for
+any two patterns u, v ∈ L(Σ), there exists w ∈ A∗ such that uwv ∈ L(Σ).
+   Given two finite alphabets A and B, a morphism from AZ to B Z is a continuous function π :
+A → B Z which commutes with the shift (i.e. σ(π(x)) = π(σ(x)) for all x ∈ AZ ). Equivalently
+  Z
+
+a morphism can be defined by a local map f : AN → B where N ⊂ Z is a finite set called the
+neighbourhood such that
+                             π(x)i = f (xi+N ) for all x ∈ AZ and i ∈ Z.
+The radius of π is the minimal r ∈ N such that π admits a local map with N ⊂ [−r, r]. A cellular
+automaton is a morphism from AZ to itself, that is, the input and the output are defined on the
+same alphabet. In particular a cellular automaton can be iterated and it makes sense to study its
+dynamics.
+2.1.2. Particle system
+Definition 1 (Particle system). Let F : AZ → AZ be a cellular automaton. A particle system for
+F is a triplet (P, π, φ), where:
+      • P is a finite set of elements called particles;
+      • π : AZ 7→ (P ∪{0})Z is a morphism identifying the presence of particles at each position; The
+        set of positions that carry particles on x is denoted by PartP,π (x) = {k ∈ Z : π(x)k ∈ P}
+        (we omit P and π when they are clear from the context);
+      • φ : AZ × Z 7→ 2Z (where 2Z denotes the set of subsets of Z) is a function called the update
+        function that describes the movement and/or offsprings of each particle after one iteration
+        of F ;
+such that the following conditions are satisfied for all x ∈ AZ and k ∈ Z:
+     Locality: There is a constant r > 0 (the radius of the system) such that φ(x, k) ⊂ [k −r, k +r].
+           The particles cannot
+                           S      “jump” arbitrarily far; the radius does not depend on x and k.
+                                       φ(x, k) = Part(F (x))
+     Redistribution: Sk∈Part(x)                               .
+                             k∈Part(x)
+                              /        φ(x, k) = ∅
+           The particle in F (x) are exactly the offsprings of particles of x, and non-particles do not
+        have offsprings.
+                                                   5
+     Disjunction: k < k 0 ⇒ φ(x, k) = φ(x, k 0 ) or max φ(x, k) < min φ(x, k 0 ).
+         Two particles either do not interact (in which case they cannot cross), or they share the
+       same set of offsprings.
+
+  The four conditions ensure that the update function accurately describes the time evolution of
+the particles. Notice that since the morphism and update function are defined locally, the conditions
+can be checked algorithmically by simple enumeration of patterns up to a certain length.
+
+  In the context of a fixed particle system for F , we use shorthands for the composition of the
+update function, defined inductively:
+                                             [
+                                φt (x, k) =        φt−1 (F (x), k 0 ),
+                                            k0 ∈φ(x,k)
+
+and a notion of pre-image (with an abuse of notation):
+                                φ−1
+                                 x (A) = {k ∈ Z | φ(x, k) ∩ A 6= ∅}.
+
+If φ(x, k) is a singleton, we use “φ(x, k)” instead of “the only member of φ(x, k)” as an abuse of
+notation.
+
+2.1.3. Coalescence
+We postpone the discussion on how to find a particle system in a given cellular automaton to
+Section 2.5. We now look for assumptions on the dynamics of the particles that let us deduce that
+some particles disappear asymptotically. Simulations suggest that this is the case when the particles
+are forced to collide, and that these collisions are destructive in the sense that the total number of
+particles decreases; thus we introduce the notion of coalescence.
+Definition 2 (Coalescence). Let F : AZ → AZ be a cellular automaton, and (P, π, φ) a particle
+system for F . This particle system is coalescent if, for every x ∈ AZ and k ∈ Part(x), the particle
+has one of the two following behaviours:
+     Progression: |φ(x, k)| = |φ−1 x (φ(x, k))| = 1, and π(x)k = π(F (x))φ(x,k)
+          (the particle persists and its type does not change), or
+     Destructive interaction: |φ(x, k)| < |φ−1   x (φ(x, k))|
+          (particles collide and generate strictly fewer particles (possibly 0); or a single particle
+       disappears).
+   Progressing and interacting particles of a configuration x ∈ AZ are denoted by ProgP,π,φ (x) and
+InterP,π,φ (x), respectively, and P, π and φ are omitted when the particle system is clear from the
+context. k ∈ ProgP,π,φ (x) is the case when we use “φ(x, k)” to mean “the only member of the
+singleton φ(x, k)”.
+
+
+2.2. Probability measures and µ-limit sets
+The µ-limit set was introduced in [KM00] to describe the asymptotic behaviour corresponding to
+empirical observations. It consists in the patterns whose probability to appear does not tend to 0
+when the initial point is chosen at random. To define it formally, let us introduce some notations.
+   Denote by Mσ (AZ ) the set of σ-invariant probability measures on AZ (i.e. measures µ such that
+µ(σ −1 (U )) = µ(U ) for any Borel set U ). A measure is σ-ergodic if every σ-invariant Borel set has
+measure 0 or 1, and we denote by Mσ−erg (AZ ) the set of σ-ergodic probability measures. [Wal82]
+gives a good introduction to ergodic probability measures.
+                                                   6
+Examples. The Bernoulli measure λ(pa )a∈A associated with a sequence (pa )a∈A of elements of [0, 1]
+whose sum is 1 is defined by λ(pa )a∈A ([u]) = pu0 pu1 . . . pu|u|−1 for all u ∈ A∗ . If all the elements of
+                               1
+(pa )a∈A have the same value |A|   we call it the uniform Bernoulli measure and denote it by λ. For
+any finite word u ∈ A∗ , define δbu as the unique σ-invariant probability measure supported by the
+σ-periodic configuration ω uω and its translations.
+
+   Given a cellular automaton F : AZ → AZ and an initial measure µ ∈ Mσ (AZ ), we define the
+measure F∗ µ by F∗ µ(U ) = µ(F −1 (U )) for any Borel set U . Since F commutes with σ, one has
+F∗ µ ∈ Mσ (AZ ). Moreover if µ ∈ Mσ−erg (AZ ), then F∗ µ ∈ Mσ−erg (AZ ) as well. This allows to
+define the following action:
+                                   F∗ : Mσ (AZ ) −→ Mσ (AZ )
+                                              µ      7−→     F∗ µ.
+                                                           t
+   We consider the set of cluster points of the sequence (F∗ µ)t∈N called the µ-limit measures set and
+denoted by V(F, µ). The closure of the union of the supports of these measures is called the µ-limit
+set and it is denoted by Λµ (F ). Equivalently, it can be defined as the subshift
+                                   n                                        o
+                         Λµ (F ) = x ∈ AZ : ∀i, j ∈ Z, F∗t µ([x[i,j] ]) 9 0 .
+   See [KM00] for all basic examples. The µ-limit (measures) set has been also well studied for two
+classes of cellular automata : automata exhibiting particle-like behaviour ([Fis90a, BF05] and many
+others) and automata with an algebraic structure ([Lin84] and others).
+
+2.3. Evoution of the density of particles for coalescent systems
+Define the frequency with which the pattern u appears in the configuration x as
+                                             Card{i ∈ [−n, n] : x[i,i+|u|−1] = u}
+                       Freq(u, x) = lim sup                                       .
+                                       n→∞                 2n + 1
+Similarly we define Freq(S, x) where S is a set of patterns.
+  We introduce the following notations for all the subsequent proofs. For n ∈ N, let Bn be the set
+[−n, n] ⊂ Z. Let F : AZ → AZ be a cellular automaton. In the context of a fixed particle system
+(P, π, φ), the densities of particles in a configuration x ∈ AZ are defined by:
+                    for p ∈ P, Dp (x) = Freq(p, π(x)) and D(x) = Freq(P, π(x));
+                                       1
+                 DProg (x) = lim sup       |Prog(x) ∩ Bt | and similarly for DInter (x),
+                               t→∞ 2t + 1
+the last two definitions applying only if the particle system is coalescent.
+   For µ ∈ Mσ−erg (AZ ), by Birkhoff’s ergodic theorem, the lim sup can be replaced by a simple
+         the definition of frequency for µ-almost all configurations. This implies for example that
+limit in P
+D(x) = p∈P Dp (x) for µ-almost all x.
+   First of all, the following proposition clarifies how controlling the frequency of interactions gives
+us information about the evolution of the density of the different kinds of particles.
+Proposition 1 (Evolution of densities). Let F : AZ → AZ be a cellular automaton, µ ∈ Mσ−erg (AZ ),
+(P, π, φ) a coalescent particle system for F , and r the radius of the update function φ. Then, for
+µ-almost all x ∈ AZ :
+                              1
+    (1) D(F (x)) ≤ D(x) − r+1   DInter (x);
+    (2) ∀p ∈ P, Dp (F (x)) ≤ Dp (x) + DInter (x).
+Lemma 1.         (1) For all x and k:
+                                   |φ(x, k)| + |φ−1
+                                                 x (φ(x, k))| ≤ 2r + 2,
+                                                     7
+   (2) which implies when k ∈ Inter(x):
+                                                     r
+                                     |φ(x, k)| ≤       |φ−1 (φ(x, k))|.
+                                                    r+1 x
+Proof. (of Lemma 1) Take i ≤ i0 , resp. j ≤ j 0 , the extremal points of |φ(x, k)| and |φ−1
+                                                                                         x (φ(x, k))|
+respectively. By locality of the update function, we have:
+      |φ(x, k)| + |φ−1               0             0             0         0
+                    x (φ(x, k))| ≤ (i − i + 1) + (j − j + 1) = (i − j) + (j − i) + 2 ≤ 2r + 2.
+  The proof is illustrated in Figure 2.
+
+                                                      φ(x, k)
+          F (x)
+                                      ≤r                                ≤r
+            x
+                                                    φ−1
+                                                     x (φ(x, k))
+
+
+                  Figure 2. Visual proof that |φ(x, k)| + |φ−1
+                                                            x (φ(x, k))| ≤ 2r + 2.
+
+
+  If furthermore k ∈ Inter(x), since the particle system is coalescent, we have |φ(x, k)| < |φ−1
+                                                                                              x (φ(x, k))|.
+                               |φ(x,k)|                                      −1
+The maximum of the ratio |φ−1 (φ(x,k))| is then reached on |φ(x, k)| = r, |φx (φ(x, k))| = r + 1. 
+                                x
+
+  We continue the proof of Proposition 1
+                                                                                                     S
+Proof. (1) By the redistribution property of the update function, we have Part(F (x)) =                  k∈Part(x) φ(x, k).
+Furthermore, by locality,
+                                                    [
+      ∀x ∈ AZ , ∀n ∈ N, Part(F (x)) ∩ Bn ⊆                   φ(x, k)
+                                                    k∈Part(x)∩Bn+r
+                                                            [                            [
+                                                ⊆                    φ(x, k)   t                     φ(x, k),
+                                                    k∈Prog(x)∩Bn+r                 k∈Inter(x)∩Bn+r
+
+  where t denotes a disjoint union. The second line is obtained by coalescence: since Part(x) =
+Prog(x) t Inter(x), particles in F (x) are either images of progressing particles or of interacting
+particles. By disjunction:
+                                    [
+                  ∀x ∈ AZ ,                     φ(x, k) = |Prog(x) ∩ Bn+r |
+                              k∈Prog(x)∩Bn+r
+                                                                                                     
+                                    [                      r                       [
+          and     ∀x ∈ AZ ,                     φ(x, k) ≤     φ−1                           φ(x, k)
+                                                          r+1 x
+                              k∈Inter(x)∩Bn+r                              k∈Inter(x)∩Bn+r
+                                                        r
+                                                   ≤        |Inter(x) ∩ Bn+2r | .
+                                                      r+1
+  This first equality is because progressing particles are “one-to-one”. The second inequality is by
+Lemma 1 and by locality. It follows:
+                                                                   r
+           ∀x ∈ AZ , |Part(F (x)) ∩ Bn | ≤ |Prog(x) ∩ Bn+r | +          |Inter(x) ∩ Bn+2r | .
+                                                                 r+1
+Then, passing to the limit:
+                                                          r                          1
+    For µ-almost all x ∈ AZ , D(F (x)) ≤ DProg (x) +         DInter (x) = D(x) −        DInter (x).
+                                                       r+1                         r+1
+                                                        8
+  (2) Similarly, for any particle p ∈ P, one has for all x ∈ AZ and n ∈ N:
+                                                      [
+                    {k ∈ Bn | π(F (x))k = p} ⊆                φ(x, k) (locality).
+                                                  k∈Part(x)∩Bn+r
+
+For k ∈ Prog(x), if π(F (x))φ(x,k) = p, then by definition of coalescence π(x)k = p. For µ-almost all
+x, using Part(x) = Prog(x) t Inter(x), we conclude that Dp (F (x)) ≤ Dp (x) + Dinter (x) by passing
+to the limit.                                                                                      
+
+2.4. A particle-based self-organisation result
+We state our main result. A simple version (Corollary 1) states that in a coalescent particle system
+with a σ-ergodic initial measure, if all particles can be assigned a speed, then only particles with
+one fixed speed may survive asymptotically. The more general result is designed to handle more
+difficult cases such as particles performing random walks, as in the last example of Section 2.6.
+Definition 3 (Clashing). Let F : AZ → AZ be a cellular automaton, (P, π, φ) a coalescent particle
+system for F , and P1 and P2 two subsets of P. We say that P1 clashes with P2 µ-almost surely if,
+for every n ∈ N∗ and µ-almost all x ∈ AZ ,
+     π(x)0 ∈ P1 and π(x)n ∈ P2 =⇒ ∃t ∈ N, φt (x, 0) ∈ Inter(F t (x)) or φt (x, n) ∈ Inter(F t (x))
+   The abuse of notation in the last line is justified by the fact that, if the images φt (x, k) (k = 0, n)
+are not in interaction for all t0 < t, then φt (x, k) is still a singleton.
+   The intuition behind clashing particles is the following: if two clashing particles are present
+with positive frequency, then at least one of them end up almost surely in interaction with positive
+frequency, decreasing the global frequency of particles. This is why they cannot both persist asymp-
+totically. Note that clashing is oriented left to right: intuitively, particles with speed +1 clash with
+particles with speed −1, but the converse is not true.
+Theorem 1 (Main qualitative result). Let F : AZ → AZ be a cellular automaton, µ an initial
+σ-ergodic measure and (P, π, φ) a coalescent particle system for F where P can be partitioned into
+sets P1 . . . Pn such that, for every i < j, Pi clashes with Pj µ-almost surely.
+   Then:
+    (1) All particles appearing in the µ-limit set belong to the same subset, i.e.
+                           ∃i ∈ [1, n], ∀p ∈ P, p ∈ L(π(Λµ (F ))) ⇒ p ∈ Pi .
+   (2) If furthermore there exists a j such that Pj clashes with itself µ-almost surely, then this
+       subset of particles does not appear in the µ-limit set, i.e.
+                                 ∀p ∈ P, p ∈ L(π(Λµ (F ))) ⇒ p ∈
+                                                               / Pj .
+   We introduce the notion of speed which is less general but easier to handle than the notion of
+clashing.
+Definition 4 (Speed). Let F be a cellular automaton and (P, π, φ) be a particle system for F .
+  A particle p ∈ P has speed v ∈ Z if for any configuration x ∈ AZ and k ∈ Z such that π(x)k = p,
+we have one of the following:
+    Eventual interaction: ∃t, φt (x, k) ∈ Inter(F t (x));
+                                                                 t
+    Progression at speed v: ∀t, φt (x, k) ∈ Prog(F t (x)) and φ (x,k)−k
+                                                                   t     → v.
+                                                                              t→∞
+
+Corollary 1 (Version with speedy particles). Let F         : AZ → AZ be a cellular automaton, µ an
+initial σ-ergodic measure and (P, π, φ) a coalescent particle system for F .
+                                                     9
+  If each particle p ∈ P has speed vp ∈ R,then there is a speed v ∈ R such that:
+                                  ∀p ∈ P, p ∈ L(π(Λµ (F ))) ⇒ vp = v.
+Proof of Theorem 1. For the first point, Let i = 1, j = 2 for clarity and let p1 ∈ P1 , p2 ∈ P2 be two
+particles. We show that they cannot both appear in the µ-limit set.
+   First we study the behaviour of the sequences of density of particles. For all x ∈ AZ , by
+Proposition 1(1), (D(F t (x)))t∈N is a decreasing sequence of positive reals and admits a limit
+d∞ (x). In particular DInter (x) → 0. Applying Birkhoff’s theorem        to π∗ F∗t µ for any t, we get
+that D(F t (x)) = π∗ F∗t µ([P]) for µ-almost all x (recall that [P] = p∈P [p]). In particular there is a
+                                                                     S
+
+real d∞ such that d∞ (x) = d∞ for µ-almost all x.
+   For x ∈ AZ , we define DPi (x) = Freq(Pi , π(x)); we prove that this sequence also admits a limit.
+By Proposition 1(2), we have:
+                                                                         ∞
+                                                                         X
+              For i ∈ {1, 2}, sup |DPi (F t+n (x)) − DPi (F t (x))| ≤          DInter (F t+n (x)).
+                               n∈N                                       n=0
+
+ To prove that (DPi (F t (x)))t∈N is a Cauchy sequence, we need to show that t∈N DInter (F t (x)) <
+                                                                             P
++∞. By Proposition 1(1), we have:
+                                                              !
+  X                              X
+     DInter (F t (x)) ≤ (r + 1)      D(F t (x)) − D(F t+1 (x)) ≤ (r + 1)(D(x) − d∞ (x)) < +∞.
+    t∈N                              t∈N
+
+Thus (DPi (F t (x)))t∈N is a Cauchy sequence and admits a limit di (x) 6= 0. Using again Birkhoff’s
+theorem, we have that (DPi (F t (x)))t∈N = (π∗ F∗t µ([Pi ]))t∈N for µ-almost all x, and therefore there
+is a real di such that di (x) = di for µ-almost all x.
+
+   Assume that pi ∈ L(π(Λµ (F ))) for i = 1, 2. This implies di > 0 for i P      = 1, 2. Since clashing
+particles generate interactions, we show that this contradicts the fact that      DInter (F t (x)) < +∞
+for all x.
+             1 ·d2
+   Fix ε < dr+3    and T large enough such that for t ≥ T, π∗ F∗t µ([P])−d∞ < ε and |π∗ F∗t µ([Pi ])−di | <
+ε for i ∈ {1, 2}. By Birkhoff’s ergodic theorem applied on π∗ F∗T µ, we have:
+                         K
+                     1 X
+                         π∗ F∗T µ ([p1 ]0 ∩ [p2 ]k ) −→ π∗ F∗T µ([p1 ]) · π∗ F∗T µ([p2 ]).
+                     K                              K→∞
+                        k=0
+
+Note that [p1 ]0 ∩ [p2 ]k are words containing clashing particles positioned so that they will generate
+an interaction. We have π∗ F∗T µ([p1 ]) · π∗ F∗T µ([p2 ]) ≥ (d1 − ε) · (d2 − ε) ≥ d1 · dS  2 − 2ε. By
+Birkhoff’s theorem, this means that for µ-almost all x ∈ AZ , words belonging in k Vk where
+Vk = p1 (P ∪ {0})k−1 p2 ⊂ (P ∪ {0})∗ have frequency at least d1 · d2 − 2ε in πF T (x).
+      S P1 and P2 clash
+  Since                      µ-almost surely, any occurrence of Vk yields a future interaction: that is,
+Freq k Vk , πF T (x) ≤ ∞                   t
+                        P
+                              t=T DInter (F (x)). We show the contradiction:
+                                                               ∞
+                                                         1 X
+     For µ-almost all x ∈ AZ , D(F T (x)) − d∞ ≥             DInter (F t (x))            Proposition 1(i)
+                                                        r+1
+                                                              t=T
+                                                         1
+                                                    ≥       (d1 · d2 − 2ε) > ε,
+                                                        r+1
+which is a contradiction with the definition of ε. To prove the second point, apply the same proof
+to two particles in Pj .                                                                        
+                                                      10
+Proof of Corollary 1. Consider the set of speeds {vp : p ∈ P} and order it as v1 > v2 > · · · > vn .
+Now partition the set of particles into (Pvi )0≤i≤n where Pvi is the set of particles with speed vi ,
+and apply the Theorem 1.
+   We check the hypothesis of Theorem 1: for any i < j, Pvi clashes with Pvj µ-almost surely. Let
+pi ∈ Pvi and pj ∈ Pvj , and x ∈ AZ such that π(x)0 = pi and π(x)n = pj for some n ∈ N∗ . If
+both particles satisfy the second property in the definition of speed (Progression at speed v), then
+for some t large enough we have φt (x, 0) > φt (x, n), which is forbidden by coalescence since two
+particles in progression cannot cross. Thus at some time t we have either φt (x, 0) ∈ Inter(F t (x)) or
+φt (x, n) ∈ Inter(F t (x)).                                                                          
+
+2.5. Pivato’s defect formalism
+Before giving a series of examples where this result can be used to describe the typical asymptotic
+behaviour of a cellular automaton, we present the formalism introduced by Pivato in [Piv07a, Piv07c]
+that defines particles as defects with respect to a F -invariant subshift Σ. Indeed, this formalism
+gives us an easier way to find the particle systems in our examples.
+   Intuitively, the F -invariant subshift describes the homogeneous regions that persist under the
+action of F in the space-time diagram, and defects are the borders between these regions. This
+allows us to define P and π in a way that corresponds to the intuition, even though it gives no
+information on the dynamics of the particles (the update function φ).
+
+2.5.1. Defects
+For a cellular automaton F , consider Σ a F -invariant subshift. The defect field of x ∈ AZ with
+respect to Σ is defined as:
+                             Z → N ∪ {∞}
+                     FxΣ :                                                      ,
+                                     n                                        o
+                             k   7→ max n ∈ N : xk+[−b n−1 c,d n−1 e] ∈ Ln (Σ)
+                                                           2     2
+
+where the result is possibly 0 or ∞ if the set is empty or infinite. Intuitively, this function returns
+the size of the largest word admissible for Σ centred on the cell k. A defect in a configuration
+x relative to Σ is a local minimum of FxΣ . Then the interval [k, l] between two defects forms a
+homogeneous region in the sense that x[k+1,l] ∈ L(Σ).
+
+   However, it is not true that we can always make a correspondence between defects and a finite
+set of words (forbidden patterns), so as to obtain a finite set of particles and a morphism. This is
+the case only when the set of forbidden patterns is finite, that is, when Σ is a SFT. In this case, a
+defect corresponds to the centre of the occurrence of a forbidden word. This is a limitation of our
+result.
+
+  The examples given in Figure 1 suggest that defects can usually be classified using one of these
+approaches:
+     • Regions correspond to different subshifts and defects behave according to their surrounding
+       regions (interfaces - e.g. cyclic automaton);
+     • Regions correspond to the same periodic subshift and defects correspond to a “phase change”
+       (dislocations - e.g. rule 184 automaton).
+
+2.5.2. Interfaces
+Assume that Σ is a SFT and can be decomposed as a disjoint union Σ1 t · · · t Σn of F -invariant σ-
+transitive SFTs (the domains). Intuitively, the region between two defects belongs to the language
+of (at least) one of the domains; we classify each defect according to which domain the regions
+                                                   11
+surrounding it on the left and on the right correspond to. Since each domain is F -invariant, this
+classification is conserved under the action of F for non-interacting defects.
+   Formally, since the different domains (Σk )k∈[1,n] are disjoint SFTs, there is a length α > 0
+such that (Lα (Σk ))k∈[1,n] are disjoint (if two subshifts share arbitrarily long words, they share a
+configuration by closure). In particular, if u ∈ Lα (Σ), then there is a unique k such that u ∈ L(Σk ):
+we say that u belongs to the domain k. Thus, for a given configuration, we can assign a choice of
+a domain to each homogeneous region between two consecutive defects, and this choice is unique if
+this region is larger than α cells.
+
+                                    1−0                            0−2                   2−0
+        domain 1       1    1       1   0   0    0    0        0    2    2   2   2   2    0    0   0
+         x ...                                                                                         ...
+         Fa (x)   7    5    3       1   2   4    5    3        1    2    4   5   3   1    2    4   6
+
+        Figure 3. Interfaces between monochromatic domains, marked by slanted patterns.
+        To each interface corresponds a domain change, marked by a red line.
+
+   Defects relative to such an SFT are called interface defects and can be classified according to the
+domain of the surrounding regions. Let P = {pij : (i, j) ∈ [1, n]2 } be the set of particles. Define
+the morphism π : AZ → (P ∪ {0})Z of radius max(dr/2e, α), where r is the radius of Σ, in the
+following way. For x ∈ AZ and k ∈ Z:
+      • if xk+[−b r2 c,d r2 e] ∈ L(Σ), then π(x)k = 0;
+                  
+                   u1 = x[k−m,k] where m = max{` ≤ α : x[k−`,k] ∈ L(Σ)}
+      • else, let      u2 = x[k+1,k+m] where m = max{` ≤ α : x[k+1,k+`] ∈ L(Σ)}
+                       di a domain to which ui belongs (i ∈ {1, 2})
+                  
+           and put π(x)k = pd1 d2 .
+   The domain choice (choice of di ) is unique when domains contain at least α cells; otherwise, the
+choice between the possible di is arbitrary, or fixed beforehand. Notice that the first check requires
+radius at least d 2r e and the second check requires radius at least α.
+2.5.3. Dislocations
+Contrary to interface defects that mark a change between languages of different SFT, dislocation
+defects mark a “change of phase” inside a single SFT.
+   Let Σ be a σ-transitive SFT of order r > 1. We say that Σ is P -periodic if there exists a partition
+V1 , . . . , VP of Lr−1 (Σ) such that
+             a1 · · · ar ∈ Lr (Σ)       ⇔   ∃i ∈ Z/P Z, a1 · · · ar−1 ∈ Vi and a2 · · · ar ∈ Vi+1 .
+The period of Σ is the maximal P ∈ N such that Σ is P -periodic. For example, the orbit of a finite
+word u ∈ A∗ , defined as {σ k (∞ u∞ ) : k ∈ Z} is a periodic SFT of period at most |u|.
+   We thus associate to each x ∈ Σ its phase ϕ(x) ∈ Z/P Z such that x[0,r−2] ∈ Vϕ(x) . Obviously,
+ϕ(σ k (x)) = ϕ(x) + k mod p. For x ∈ AZ , we say that an homogeneous region [a, b] (i.e. a region
+such that x[a,b] ∈ Σ) is in phase k if ∃y ∈ Σ, ϕ(y) = k, x[a,b] = y[a,b] . If b − a > r − 2, the phase of a
+region is unique and means x[a,a+r−2] ∈ Vk+a mod p .
+   As we can see in Figure 4, the finite word corresponding to a defect (here 00 or 11) does not
+depend only on the phase of the surrounding region but also on the position of the defect. More
+precisely, since ϕ(σ(x)) = ϕ(x) + 1, a defect in position j with a region in phase f to its left and a
+defect in position 0 with a region in phase f + j mod P to its left “observe” the same finite word
+to their left.
+                                                          12
+                            1−0                        0−1                    0−1
+      phase    1   1    1   1    0   0   0    0   0    0   1   1      1   1   1   0   0   0
+       x ...                                                                                  ...
+      Fa (x)   7   5    3   1    2   4   6    5   3    1   2   4      5   3   1   2   4   6
+
+       Figure 4. Dislocations in the chequerboard subshift (P = 2), marked by slanted
+       patterns. Red lines show the visual intuition of a change of phase, with the sur-
+       rounding local phases.
+
+
+   Therefore, we define for each defect its local phases. Assume a defect is in position j surrounded
+by homogeneous regions [i, j] and [j, k] in phase ϕ` and ϕr , respectively. Then its left local phase
+(resp. right local phase) is ϕ` + j mod P , resp. ϕr + j mod P .
+   Now we classify the defects according to the local phase of the surrounding regions. Let P =
+{pij : (i, j) ∈ Z/P Z2 } be the set of particles. Since defects correspond to the centre of occurrences
+of forbidden words and the phase of a region can be locally distinguished, the morphism π : AZ →
+(P ∪ {0}) of order 2r − 2 is defined exactly as in the interface case. The choice of local phase is
+unique if the region is larger than r − 1 cells.
+
+                                                                                        F
+   In the general case, those two formalisms can be mixed by fixing a decomposition Σ = i∈A Σi
+where some of the Σi have nonzero periods. We can classify defects according to the domains and
+local phase of the surrounding regions in a similar manner. Except for the arbitrary choices for
+small regions, obtaining the set of particles and the morphism from the SFT decomposition can be
+done in an automatic way.
+
+
+2.6. Examples
+2.6.1. Rule 184
+We consider the rule #184 or “traffic” automaton F184 : {0, 1}Z → {0, 1}Z defined by the following
+local rule: f184 (x−1 x0 x1 ) = 1 if and only if x0 x1 = 11 or x−1 x0 = 10.
+   The time evolution of this automaton can be seen as a road where the symbol 1 represent vehicles
+and the symbol 0 an empty space. The vehicles move forward if the cell in front of them is empty
+and stay put otherwise. In this context, the rule #184 has been very well studied, especially in the
+case of initial Bernoulli measures [BF95, BF05]. We use this example mostly as a simple case to
+better understand the formalism, although our method has the advantage to hold for more general
+probability measures.
+
+Proposition 2. Let F184 be the traffic automaton and µ ∈ Mσ−erg . Then:
+
+                                µ([00]) > µ([11]) ⇒ 11 ∈
+                                                       / L(Λµ (F184 ));
+                                µ([00]) < µ([11]) ⇒ 00 ∈
+                                                       / L(Λµ (F184 ));
+                                                     t
+                                µ([00]) = µ([11]) ⇒ F184∗ µ → δc
+                                                               01 .
+
+
+
+Proof. We consider the chequerboard SFT Σ = {∞ (01)∞ , ∞ (10)∞ }, which is 2-periodic and F184 -
+invariant. Using the dislocation formalism, we define the phases ϕ(∞ (01)∞ ) = 0 and ϕ(∞ (10)∞ ) =
+1, obtaining a set of particles defined by their local phases {p01 , p10 }. The corresponding morphism
+                                                  13
+                                                   →
+
+
+
+
+                        Figure 5. Particle system for the traffic automaton.
+
+of order r = 2 is defined by the local rule:
+                                             00     → p01
+                                             11     → p10 .
+                                          otherwise → 0
+Indeed, consider x ∈ AZ with a defect x01 = 00. The phase of the 0 in position 0 is 0 and the phase
+of the 0 in position 1 is 1, so this corresponds to a particle p01 . Changing the position of the defect
+would not change the particle since the local phase would be modified accordingly.
+   The update function is defined in the intuitive manner: with p01 evolving at speed +1 and p10
+at speed −1 and both particles being sent to ∅ in case of collision.
+                                       
+                                        {k − 1} if π(x)k = p10 and π(x)k−2 6= p01
+        ∀x ∈ AZ , ∀k ∈ Z, φ(x, k) =       {k + 1} if π(x)k = p01 and π(x)k+2 6= p10
+                                             ∅     otherwise (and in particular if π(x)k = 0)
+                                       
+
+We now check that the particle system satisfies all necessary conditions. To do that, one should
+verify that the update function is defined properly, that is:
+
+              ∀x ∈ AZ , ∀k ∈ Z, π(F (x))k−1 = p10 ⇔ F (x){k−1,k} = 11
+                                                        ⇔ x[k−2,k+1] ∈ {1011, 0111, 1111}
+                                                        ⇔ π(x)k = p10 and π(x)k+2 6= p01 ,
+and similarly for p01 . This type of proof can become tedious due to the high number of cases but
+can be automated by straightforward enumeration, here of all patterns of length 4. The different
+conditions follow from this property:
+     Locality: Obvious by definition of φ.
+     Redistribution: The claim can be restated as π(F (x))k+1 = p10 ⇔ π(x)k = p10 and φ(x, k) =
+        {k+1}, and similarly for p01 . The first condition follows. Since φ(x, k) = ∅ when k ∈  / Part(x)
+        by definition of φ, the second condition follows.
+     Disjunction: For k < k 0 , to have φ(x, k) > φ(x, k 0 ), the only way would be to have π(x)k0 =
+        p01 , π(x)k = p10 and k 0 = k + 1. In that case, by definition, φ(x, k) = φ(x, k 0 ) = ∅.
+     Coalescence and speeds: Obvious by definition of φ.
+  Therefore we can apply Corollary 1 and only one type of particle remains in Λµ (F184 ).
+
+  Furthermore, since the collisions are of the form p01 + p10 → ∅, it is clear that for all x ∈ AZ ,
+Dp01 (F184 (x)) − Dp01 (x) = Dp10 (F184 (x)) − Dp10 (x). Therefore, which particle remains is decided
+according to whether µ([00]) > µ([11]) or the opposite, both particles disappearing in case of
+                                                   14
+equality. The third case follows from the fact that if 00, 11 ∈
+                                                              / L(Λµ (F184 )), then Λµ (F184 ) =
+ ∞   ∞   ∞ ∞
+{ 01 , 10 } which support a unique measure δ01 .
+                                               c                                               
+2.6.2. n-state cyclic automaton
+The n-state cyclic automaton Cn is a cellular automaton defined on the alphabet A = Z/nZ by the
+local rule                                
+                                            xi + 1 if xi−1 = xi + 1 or xi+1 = xi + 1;
+                 cn (xi−1 , xi , xi+1 ) =
+                                            xi     otherwise.
+See Figure 1 for an example of space-time diagram.
+
+   This automaton was introduced by [Fis90b]. In this paper, the author shows that for all Bernoulli
+measure µ, the set [i]0 (for i ∈ A) is a µ-attractor iff n ≥ 5: that is, µ({x ∈ AZ : ∃T ∈ N, ∀t ≥
+T, F t x ∈ [i]}) > 0 for all i. Simulations starting from a random configuration suggest the following:
+for n = 3 or 4, monochromatic regions keep increasing in size; for n ≥ 5, we observe the convergence
+to a fixed point where small regions are delimited by vertical lines. We use the main result to
+explain this observation.
+Proposition 3. Define:
+                           u+ = {ab ∈ A2 : (b − a)     mod n = +1};
+                                         2
+                           u− = {ab ∈ A : (b − a)      mod n = −1};
+                           u0 = {ab ∈ A2 : (b − a)     mod n ∈
+                                                             / {−1, 0, 1}}.
+Then, for any measure µ ∈ Mσ−erg ((Z/nZ)Z ), only one of those three sets may intersect the language
+of Λµ (Cn ).
+
+  If furthermore µ is a Bernoulli measure, then the persisting set can only be u0 .
+                                                                                  F
+Proof. We consider the interface defects relatively to the decomposition Σ = i∈A Σi , where Σi =
+{∞ i∞ }. Σ is a Cn -invariant SFT of radius r = 2, and defects are exactly transitions between colours.
+Thus we define P = {pab : ab ∈ A2 , a 6= b}. One cell is enough to distinguish the domains (α = 1)
+and we obtain a morphism π of radius 2 defined by the local rule:
+                                A2 → P ∪ {0}
+                               a · a 7→  0               for all a, b ∈ A.
+                               a · b 7→ pab
+Simulations suggest that pab evolves at constant speed +1 if ab ∈ u+ , −1 if ab ∈ u− and 0 if
+ab ∈ u0 . Particles progress at their assigned speed unless they meet another particle, in which case
+they interact according to the following chemistry:
+      • pab + pba → ∅ (if pab has speed +1);
+      • pab + pbc → pac (if pab and pbc have speeds (+1, 0) or (0, −1), only when n ≥ 4), or
+      • pab + pbc + pcd → pad . (if pab , pbc and pcd have speeds +1, 0, −1 respectively, which is only
+        possible for n = 4).
+   We group together the particles of same speed, writing p+ = {pab : ab ∈ u+ } and p− and p0
+similarly. Formally, for x ∈ AZ and k ∈ Z the update function is defined as:
+                                                       
+                                                                  π(x)k+1 ∈ p+ , or
+                        {k + 1} if π(x)k ∈ p+ and                                            ;
+                     
+                     
+                                                          π(x) k+1 ∈/ P and π(x)k+2 ∈ / p−
+                     
+                     
+                     
+                                                       
+                                                                  π(x)k−1 ∈ p− , or
+                     
+           φ(x, k) =    {k − 1} if π(x)k ∈ p− and
+                     
+                                                         π(x) k−1  ∈
+                                                                    / P and π(x)k−2 ∈ / p+ ;
+                          {k}     if π(x)    ∈ p   and π(x)    ∈/ p   and π(x)     ∈
+                                                                                   / p
+                     
+                                           k     0         k+1     −           k−1     +
+                     
+                     
+                     
+                            ∅     otherwise (and in particular if π(x)k = 0).
+                     
+                                                  15
+As previously, we can check that the update function actually describes the dynamics of the particles.
+For all x ∈ Z, we check that:
+π(F (x))1 ∈ p+ ⇔ F (x){1,2} = ab with a = b + 1
+                          
+                           abbc where c 6= a
+               ⇔ x[0,3] ∈   abc_ where b = c + 1
+                            dacb where d 6= a + 1 and c = b − 1
+                          
+                 
+                    π(x)0 ∈ p+ and π(x)1 ∈
+                                         / P and π(x)2 ∈/ p− , or
+               ⇔
+                    π(x)1 ∈ p0 and π(x)2 ∈ p− with good chemistry (pa,a−2 + pa−2,a−1 → pa,a−1 )
+   and so on for other particle types, from which we deduce the hypotheses of Corollary 1. Since
+[p+ ] = π([u+ ]) and so on, we obtain the result.
+
+   If µ is a Bernoulli measure: Consider the “mirror” map γ((ak )k∈Z ) = (a−k )k∈Z . γ is continu-
+ous, and thus measurable. We have µ(γ([u])) = µ([u−1 ]) = µ([u]), where (u1 · · · un )−1 = un · · · u1 .
+But π(x)k ∈ p+ ⇔ π(γ(x))−k ∈ p− , and conversely; since F ◦ γ = γ ◦ F , all measures F∗t µ are
+γ-invariant, and thus no particle in p+ or p− can persist in L(π(Λµ (F ))) (since otherwise, the
+symmetrical particle would persist too).                                                             
+   For small values of n or particular initial measures, this proposition can be refined in the following
+manner:
+      n = 3: p0 is empty. Given the combinatorics of collisions, where a particle in p+ can only
+        disappear by colliding with a particle in p− , we see that particles in p+ persist if and only
+        if π∗ µ([p+ ]) > π∗ µ([p− ]), and symmetrically. In the equality case (in particular, for any
+        Bernoulli measure), no defect can persist in the µ-limit set, which means that Λµ (F ) is a
+        set of monochromatic configurations.
+      n = 4: If µ is a Bernoulli measure, the result of [Fis90b] shows that [i]0 cannot be a µ-attractor
+        for any i. In other words, for µ-almost all x, F t (x) does not converge, which means that
+        particles in p+ or p− cross the central column infinitely often (even though their probability
+        to appear tends to 0). This could not happen if particles in p0 were persisting in π(Λµ (F )),
+        and thus Λµ (F ) is a set of monochromatic configurations.
+      n ≥ 5: If µ is a nondegenerate Bernoulli measure, the result of [Fis90b] shows that [i]0 is a
+        µ-attractor for all i. This means that some particles in p0 persist in π(Λµ (F )), and any
+        configuration of Λµ (F ) contains only homogeneous regions separated by vertical lines.
+   For n = 3 or 4, since Λµ (F ) is a set of monochromatic configurations we deduce that the sequence
+(F n µ)n∈N converges to a convex combination of Dirac measures. However this method does not
+give any insight as to the coefficient of each component. As shown in [HdM14], if µ is a Bernoulli
+measure then
+                                   t
+                                C3∗  µ −→ µ([2])δb0 + µ([0])δb1 + µ([1])δb2 .
+                                     t→∞
+  The problem is open for the 4-cyclic cellular automaton.
+2.6.3. One-sided captive cellular automata
+We consider the family of captive cellular automata F : AZ → AZ of neighbourhood {0, 1}, which
+means that the local rule f : A{0,1} → A satisfies f (a0 a1 ) ∈ {a0 , a1 }. See Figure 1 for an example
+of space-time diagram.
+Proposition 4. Let F be a one-sided captive automaton and µ ∈ Mσ−erg (AZ ). Define:
+                                u+ = {ab ∈ A2 : a 6= b, f (a, b) = a}
+                                u− = {ab ∈ A2 : a 6= b, f (a, b) = b}
+                                                   16
+Then either u+ ∩ L(Λµ (F )) = ∅ or u− ∩ L(Λµ (F )) = ∅.
+
+   If moreover, for all a, b ∈ A, the local rule satisfies f (ab) = f (ba) and µ is a Bernoulli measure,
+then Λµ (F ) ⊆ {∞ a∞ : a ∈ A} (no particle remains).
+                                                                                    F
+Proof. We consider the interface defects relative to the decomposition Σ = i∈A Σi where Σi =
+{∞ i∞ } and obtain the same particles P and morphism π as the n-state cyclic automata. pab evolve
+at speed −1 if f (a, b) = b and 0 if f (a, b) = a, and we define p−1 and p0 accordingly. The update
+function is defined as follows:
+                                            
+                                             {k}         if π(x)k ∈ p0 and π(x)k+1 ∈ / p−1
+                    Z
+             ∀x ∈ A , ∀k ∈ Z, φ(x, k) =        {k − 1} if π(x)k ∈ p−1 and π(x)k−1 ∈    / p0
+                                                  ∅       otherwise
+                                            
+
+As in the two previous examples, we check by enumeration of cases that the update function describes
+the particle dynamics on all words of length 3:
+            ∀x ∈ AZ , ∀k ∈ Z, F (x)k ∈ p0 ⇔ F (x)[k,k+1] = ab where a 6= b and f (a, b) = a
+                                                 ⇔ x[k,k+1] = abc where b = c or f (b, c) = b
+                                                 ⇔ π(x)k ∈ p0 and π(x)k+1 ∈
+                                                                          / p−1
+  and deduce the properties of locality, redistribution, disjunction, coalescence and speed from
+there. The main result implies the theorem.
+  If µ is a Bernoulli measure: Then µ is invariant under the mirror map γ and F ◦ γ = γ ◦ F
+by hypothesis. As in the previous example, we conclude that no particle can persist in Λµ (F ). 
+2.6.4. An automaton performing random walks
+Let F be defined on the alphabet A = (Z/2Z)2 on the neighbourhood {−2, . . . , 2} by the local rule
+f defined as follows:
+                                                                    1 if (a−1 , b−1 ) = (1, 1) or (a0 , b0 ) = (0, 1);
+ f : (a−2 , b−2 ), . . . , (a2 , b2 ) 7→ (a−2 + a2 , c) where c =
+                                                                    0 otherwise.
+Intuitively, the first layer performs addition mod 2 at distance 2, while the ones on the second layer
+behave as particles, moving right if the first layer contains a 1 and not moving if it contains a 0.
+Two colliding particles simply merge.
+
+
+
+
+        Figure 6. Automaton performing random walks iterated on the uniform measure.
+         is a particle, while the second layer is represented by  (0) or  (1).
+
+
+Proposition 5. Let ν ∈ Mσ−erg ((Z/2Z)Z ) and µ = λ × ν, where λ is the uniform measure on
+(Z/2Z)Z . Then F∗t µ −→ λ × δb0 .
+                        t→∞
+                                                           17
+Proof. Pivato’s formalism is not necessary here. Consider the set of particles P = {1} and the
+morphism π that is the projection on the second layer. The update function is defined as:
+                                                 
+                                                  {k + 1} if xk = (1, 1);
+                            Z
+                     ∀x ∈ A , ∀k ∈ Z, φ(x, k) =       {k}    if xk = (0, 1);
+                                                       ∅       otherwise.
+                                                 
+
+Checking locality, redistribution, disjunction and coalescence is trivial here. Intuitively, each particle
+performs a random walk with independent steps and bias 12 . Thus Corollary 1 is not sufficient to
+conclude, and we need to use the general result of Theorem 1 by proving that {1} clashes with itself.
+
+
+  Writing (atk , btk ) = F t (x)k , we have atk = tn=0 nt a0k−2t+4n mod 2 by straightforward induction.
+                                                 P       
+
+Now take some configuration x with a particle at position k and consider φt (x, k) the walk performed
+by the particle. First we prove that the particle performs a random walk as claimed above. We
+have:
+        φt+1 (x, k) − φt (x, k) = atφt (x,k)
+                                       t  
+                                                             !
+                                     X       n 0
+                                =              a t              mod 2
+                                             t φ (x,k)−2t+4n
+                                     n=0
+                                                   t−1  
+                                                                                        !
+                                       0
+                                                   X     n 0                0
+                                = aφt (x,k)−2t +            a t          + aφt (x,k)+2t     mod 2.
+                                                         t φ (x,k)−2t+4n
+                                                 n=1
+
+In the last line, we isolated the leftmost and rightmost term. Since φt (x, k)−2t is strictly decreasing
+                                                                                   0              0
+and φt (x, k) + 2t is strictly increasing in t, these terms do not appear in any φt +1 (x, k) − φt (x, k)
+for t0 < t. Therefore, if x is drawn according to a Bernoulli measure, the value of a0φt (x,k)±2t is
+                                    0             0
+independent of the value of all φt +1 (x, k) − φt (x, k) for t0 < t.
+                                   0
+   Formally, the behaviour of φt (x, k) (for t0 ≤ t) only depends on the random variables {a0n :
+φt (x, k) − 2t + 1 ≤ n ≤ φt (x, k) + 2t − 1}. Let U be any event in the sigma-algebra generated by
+these variables. Then we have:
+                                                                 t  
+                                                                                              !
+        t+1          t
+                                             0
+                                                                X      n 0
+    µ φ (x, k) − φ (x, k) = 0 | U = µ aφt (x,k)−2t = 0 ∧                  a t          =0|U
+                                                                       t φ (x,k)−2t+4n
+                                                                n=1
+                                                                    t  
+                                                                                                !
+                                                                  X      n
+                                         + µ a0φt (x,k)−2t = 1 ∧            a0 t         =1|U
+                                                                         t φ (x,k)−2t+4n
+                                                                  n=1
+                                                                      t  
+                                                                                                 !
+                                          
+                                             0
+                                                                   X      n 0
+                                       = µ aφt (x,k)−2t = 0 · µ               a t          =0|U
+                                                                           t φ (x,k)−2t+4n
+                                                                    n=1
+                                                                        t  
+                                                                                                   !
+                                                                     X     n
+                                         + µ a0φt (x,k)−2t = 1 · µ               a0 t        =1|U
+                                                                             t φ (x,k)−2t+4n
+                                                                     n=1
+                                         1
+                                        = ,
+                                         2
+where the second step is by independence
+                                          of the leftmost term from all the other variables, and
+                        0                1
+the third step uses µ aφt (x,k)−2t = 0 = 2 since µ is the uniform Bernoulli measure on the first
+component. We proved that (φt (x, k))t∈N is a random walk with independent steps and bias 12 .
+                                                      18
+   To apply the theorem, we now prove that the particle clashes with itself. Note that the random
+walks performed by different particles are not independent; however, we prove that they are pairwise
+independent.
+   Let k ∈ N. We prove that, when x is chosen according to µk the conditional measure of µ relative
+to the event π(x)0 = π(x)k = 1, φt (x, k) − φt (x, 0) performs an unbiased and independent random
+walk with a “death condition” on 0 (particle collision). Consider the evolution of φt (x, k) − φt (x, 0)
+at each step:
+          δt (x) = (φt+1 (x, k) − φt (x, k)) − (φt+1 (x, 0) − φt (x, 0))
+                      t                                      t  
+                                                       !                                        !
+                     X     n 0                                X      n 0
+                 =             aφt (x,k)−2t+4n mod 2 −                   a t            mod 2
+                           t                                          t φ (x,0)−2t+4n
+                     n=0                                      n=0
+                   |                  {z                } |                  {z                 }
+                                    T1                                          T2
+  Note that the leftmost term of T1 is independent from T2 and all the past values of φt+1 (x, k) −
+φt (x, k); similarly, the rightmost term of T2 is independent from T1 and all past values of φt+1 (x, 0)−
+φt (x, 0). By the same argument as above, T1 and T2 are each worth 0 or 1 with probability 12
+independently of each other and of all values of δt0 for t0 < t. We conclude that δt takes values
+−1, 0, +1 with probability 41 , 21 , 14 respectively independently of all values of δt0 for t0 < t.
+
+   Therefore φt (x, k) − φt (x, 0) performs an unbiased and independent random walk. This implies
+that µk ({x : ∀t, φt (x, k) > φt (x, 0)}) = 0 (standard result in one-dimensional random walks). Since
+particles cannot cross, they almost surely end up being in interaction, and therefore {1} clashes with
+itself µ-almost surely. Applying the theorem, we find that no particle can remain in Λµ (F ).
+   More precisely, if we write πi the morphism projecting on the i-th coordinate, π2∗ F∗t µ → δb0 . Since
+the addition mod 2 automaton is surjective, it leaves the uniform measure invariant. Therefore
+π1∗ F∗t µ = λ, and we conclude that F∗t µ → λ × δb0 .                                                  
+
+2.7. Probabilistic cellular automata
+2.7.1. Adaptation of our formalism for probabilistic cellular automata
+This approach can be adapted to non-deterministic cellular automata, and in particular probabilistic
+cellular automata. We use here a generalised version of the standard definition.
+Definition 5. Let A be a finite alphabet and N ⊂ Z. We define a map that applies a bi-infinite
+sequence of local rules to a configuration componentwise:
+                                          N
+                                     (AA )Z × AZ → AZ
+                           ΦN :
+                                  ((fi )i∈Z , (xi )i∈Z ) 7→ (fi ((xi+r )r∈N )i∈Z .
+Definition 6 (Generalised probabilistic cellular automata). A generalised probabilistic cellular au-
+tomaton F̃ on the alphabet A with neighbourhood N is defined by a measure on bi-infinite sequence
+                           N
+of local rules ν ∈ Mσ ((AA )Z ).
+   For a configuration x ∈ AZ , F̃ : AZ → Mσ (AZ ) is then defined as:
+                                                     Z
+                   For any Borel set U, F̃ (x)(U ) =         1U (ΦN (f, x))dν(f ).
+                                                           (AAN )Z
+
+   A deterministic cellular automaton F defined by a local rule f corresponds in this formalism
+to a Dirac ν = δbf (in which case the image measure is a Dirac on the image configuration), and
+usual probabilistic cellular automata correspond to the case where ν is a Bernoulli measure; in other
+words, the local rule that applies at each coordinate is drawn independently among a finite set of
+local rules AN → A.
+                                                     19
+Definition 7 (Action on the space of measures). A generalised probabilistic cellular automaton
+                                   N
+defined by a measure ν ∈ Mσ ((AA )Z ) extends naturally to an action F˜∗ : Mσ (AZ ) → Mσ (AZ )
+by defining
+                                   Z Z
+                        ˜
+                        F∗ µ(U ) =          1U (ΦN (f, x))dν(f )dµ(x).
+                                       AZ     (AAN )Z
+                                                                                            t
+The µ-limit measures set of F̃ , V(F̃ , µ), is the set of cluster points of the sequence (F˜∗ µ)t∈N , and
+the µ-limit set can be defined as
+                                                     [
+                                       Λµ (F̃ ) =          supp η.
+                                                    η∈V(F̃ ,µ)
+
+   The definitions of a particle system extend directly, except that the update function also depends
+on the choice of the local rules as well as on the configuration. Therefore we write φ(x, n, (fi ))
+                                                               N
+instead of φ(x, n), where x ∈ AZ , n ∈ Z and (fi ) ∈ (AA )Z , and the composition notation is
+simplified as follows (inductively):
+                                           [                                      
+                  φt x, n, (f k )0≤k<t =            φt−1 ΦN (f 1 , x), m, (f k )1≤k<t ,
+                                            m∈φ(x,n,f 1 )
+                      N
+where each f t ∈ (AA )Z is a bi-infinite sequence of local rules.
+  A particle system is said to be coalescent ν-almost surely if the coalescence conditions hold for all
+                                     N
+x ∈ AZ and ν-almost every f ∈ (AA )Z , and a particle p ∈ P has speed v ν ∞ -almost surely if the
+speed conditions hold for ν ∞ -almost every sequence (f t )t∈N , where ν ∞ is the product measure (i.e.
+each f t is drawn independently according to ν). The clashing conditions are extended similarly.
+
+
+Theorem 2 (Qualitative result for probabilistic automata). Let F̃ : AZ → Mσ (AZ ) be a probabilis-
+                                                  N
+tic cellular automaton defined by ν ∈ Mσ ((AA )Z ), µ an initial σ-ergodic measure and (P, π, φ)
+a ν ∞ -almost surely coalescent particle system for F̃ where P can be partitioned into sets P1 . . . Pn
+such that, for any i < j, Pi clashes with Pj µ, ν ∞ -almost surely.
+   Then all particles appearing in the µ-limit set belong to the same subset, i.e. there exists an i
+such that
+                                 ∀p ∈ P, p ∈ L(π(Λµ (F ))) ⇒ p ∈ Pi .
+If furthermore there exists a j such that Pj clashes with itself µ, ν ∞ -almost surely, then this set of
+particles does not appear in the µ-limit set, i.e.
+                                 ∀p ∈ P, p ∈ L(π(Λµ (F ))) ⇒ p ∈
+                                                               / Pj .
+
+Corollary 2 (Main result with speedy particles - probabilistic automata). Let F̃ : AZ → AZ be
+                                                             N
+a probabilistic cellular automaton defined by ν ∈ Mσ ((AA )Z ), µ an initial σ-ergodic measure and
+(P, π, φ) a ν ∞ -almost surely coalescent particle system for F̃ . Assume that each particle p ∈ P has
+speed vp ∈ R ν ∞ -almost surely, then there is a speed v ∈ R such that:
+                                 ∀p ∈ P, p ∈ L(π(Λµ (F ))) ⇒ vp = v.
+   The proof of these statements are exactly the same as the proofs of Theorem 1 and Corollary 1,
+except that every statement in the proof holds ν ∞ -almost surely.
+   This Theorem and Corollary can be applied for different probabilistic cellular automata, for
+example when we mix two one sided captive CA (see Figure 7). We are going to detail two examples
+from the literature and obtain new information about its limit measures (Section 2.7.2 and 2.7.3).
+                                                        20
+        Figure 7. Example of probabilistic cellular automata where the update of each cell
+        is chosen between two one sided captive CA.
+
+2.7.2. Example: Majority-traffic PCA
+For any real p ∈ [0, 1], consider the probabilistic automaton F̃ on the alphabet {0, 1} defined on
+the neighbourhood N = {−1, 0, 1} by local rules drawn independently between the traffic rule (rule
+#184 defined in Section 2.6.1) with probability p and the majority rule (rule #232 where F (x)i = 1
+if and only if x−1 + x0 + x1 ≥ 2) with probability 1 − p. This corresponds to the case where ν is a
+Bernoulli measure.
+   This automaton was introduced by Fatès in [Fat13] as a candidate to solve the density classifica-
+tion problem.
+
+
+
+
+               p = 41                            p = 21                             p = 34
+
+        Figure 8. Dynamics of the traffic-majority automaton iterated on the initial mea-
+        sure Ber( 53 , 25 ). Density classification is more efficient with p close to 1.
+
+  In [BFMM13], the authors completely describe the invariant measures of this PCA. In the conti-
+nuity of the rest of the article, we are interested in the convergence properties of all σ-ergodic initial
+measure. None of these two results imply the other.
+Proposition 6 (Prop. 5.5 in [BFMM13]). For any p in [0, 1], the set of F̃ -invariant measures is
+the set of convex combinations of δb0 , δb1 and δc
+                                                 01 .
+                                                    21
+Proposition 7. Let µ ∈ Mσ−erg (AZ ) and p be a real in [0, 1]. Then
+
+
+                              Λµ (F̃ ) ⊂ {∞ 0∞ , ∞ 1∞ , ∞ (01)∞ , ∞ (10)∞ }.
+
+
+As a consequence, any µ-limit measure of (F̃∗t µ)t∈N is a convex combination of δb0 , δb1 and δc
+                                                                                               01 .
+
+
+Proof. The cases p = 0, 1 correspond to deterministic automata and can be treated easily.
+
+
+
+   The visual intuition suggests to consider interface defects according to the decomposition Σ0 t
+Σ1 tΣ2 , where Σ0 = {∞ 0∞ }, Σ1 = {∞ 1∞ } (monochromatic subshifts) and Σ2 = {∞ (01)∞ , ∞ (10)∞ }
+(chequerboard subshift), since those SFTs are invariant under the action of both rules. The set of
+particles would be P = {pi,j : i 6= j ∈ {0, 1, 2}}.
+   However, as Figure 9 shows, the particle p10 can “explode” and give birth to two particles p12 and
+p20 , contradicting the condition of coalescence. To solve this problem, we tweak the particle system
+by replacing each particle p10 by one particle p12 and one particle p20 .
+
+
+
+                                                     p02 + p21 = p01
+                                           p02 + p20 = ∅
+
+
+                                       “explosion”
+
+
+
+                             p12 p20                                   p01
+
+
+              Figure 9. Fatès’ traffic-majority probabilistic automaton, with p = 34 .
+
+
+  The corresponding morphism π is defined on the neighbourhood {0, . . . , 3} by the local rule:
+
+
+                                0011 7→ p01                 110_      7→ p12
+                                0010 7→ p02                 100_     7→ p20
+                                1011 7→ p21               otherwise 7→ 0
+
+where the wildcards _ can take both values.
+   Empirically, the particle behaviour without interactions is as follows. Regardless of the rule that
+is applied, p01 , p02 and p21 move at a constant speed 0, +1 and −1 respectively. A particle p12
+moves at speed −1 if rule #184 is applied at its position and at speed +1 otherwise (independent
+random walk with bias 1 − 2p), except if a particle p20 prevents its movement to the right, in which
+case it does not move. The particle p20 behaves symmetrically. As an abuse of notation, we denote
+for easier reading π(x)0 = p− 12 if π(x)0 = p12 and fk = #184 and so on.
+   Particle interactions are of the form pij + pji → ∅, pij + pjk + pki → ∅, or pij + pjk → pik , although
+some of these can not happen. Interactions involve particles at distance at most 3.
+                                                         22
+   Formally, we prove through exhaustive case enumeration of all patterns of length 7 and possible
+local rules that:
+                                                                −
+π(F (x))0 = p01 ⇐⇒ (π(x)0 = p01 and π(x)−1 6= p+
+                                               20 and π(x)2 6= p12 )                 p01 moves at speed 0
+                        or (π(x)−1 = p02 and π(x)1 = p21 )                                p02 + p21 → p01
+π(F (x))0 = p02    ⇐⇒ (π(x)−1 = p02 and π(x)1 ∈ / {p21 , p−
+                                                          20 })                     p02 moves at speed +1
+                                                     −
+                      or (π(x)0 = p01 and π(x)2 = p12 and π(x)−1 6= p+  20 )              p01 + p12 → p02
+                                  +                       −                          +
+π(F (x))0 = p12    ⇐⇒ (π(x)−1 = p12 and π(x)0 ∈ / {p21 , p20 })                     p12 moves at speed +1
+                      or (π(x)0 = p12 and π(x)1 = p−
+                                    +
+                                                     20 )                                   p+
+                                                                                             12 is blocked
+                                    −                                                −
+                      or (π(x)1 = p12 and π(x)−1 6= p01 )                           p12 moves at speed −1
+π(F (x))0 = p20    ⇐⇒ (π(x)−1 = p+20 and π(x)1 6= p01 )                             p+
+                                                                                     20 moves at speed +1
+                      or (π(x)0 = p−                    +
+                                    20 and π(x)−1 = p12 )                                   p−
+                                                                                             20 is blocked
+                                                                                     −
+                      or (π(x)1 = p20− and π(x)−1 6= p02 and π(x)0 = p+  12 )       p20 moves at speed −1
+                                                                    +
+π(F (x))0 = p21    ⇐⇒ (π(x)1 = p21 and π(x)−1 6= p02 and π(x)0 6= p12 )             p21 moves at speed −1
+                                                                        −
+                      or (π(x)−1 = p+ 20 and π(x)0 = p01 and π(x)2 6= p12 )               p20 + p01 → p21
+   π(F (x))0 = 0       in all other cases (including other possible interactions)
+
+  Using this statement, it is straightforward though tedious to define formally the update function,
+and the various conditions of locality, disjunction, particle control, surjectivity and coalescence are
+proved similarly to the previous examples.
+
+
+   Assume p ≥ 12 . We show that no particle can remain asymptotically by applying the main result
+on the sets (Pi )0≤i≤4 : {p02 }, {p20 }, {p01 }, {p12 } and {p21 }. We need only to show the clashes
+relative to the second and fourth sets since all other clashes are consequences of the speed of these
+particles.
+   Let k ∈ N and x be such that π(x)0 = p02 and π(x)k ∈ {p12 , p20 }. Since p02 progresses at speed
+1, the distance φt (x, k) − φt (x, 0) cannot increase, and it decreases by at least one with probability
+p (respectively 1 − p). It is clear that the particles end up in interaction ν ∞ -almost surely. Showing
+that p12 and p20 clash with p21 is symmetric.
+   Let x be such that π(x)0 = p20 and π(x)k = p01 . As long as there are no interactions, the
+distance φt (x, k) − φt (x, 0) = −φt (x, 0) performs an independent random walk of bias 2p − 1, where
+a increasing step is sometimes replaced by a constant step. Such a random walk reaches 0 ν ∞ -
+almost surely, which shows that the particles end up in interaction. The clashes between p01 and
+p12 , and between {p20 } and {p12 }, are proved in a similar manner. The same proof holds for p ≤ 21
+by exchanging the roles of p20 and p12 .
+
+
+   Applying Theorem 2, we conclude that only one particle pij can remain in the µ-limit set. This
+result can be improved further: consider Vk = {x ∈ Λµ (F ) : π(x)k = pij }. Configurations in Vk are
+of the form y · z, where y ∈ A]−∞,k] is admissible for Σi and z ∈ A[k+1,+∞[ is admissible for Σj ;
+in particular, they contain only
+                               S one particle.
+                                         P     For any measure η ∈ V(F̃ , µ), η(Vk ) is independent
+from k by σ-invariance, and η ( k Vk ) = k η(Vk ) ≤ 1 by disjunction of the (Vk )k∈Z . Consequently,
+η(Vk ) = 0, which means Vk ∈ / supp(η). We conclude that no particle remain in the µ-limit set, or
+in other words, Λµ (F ) ⊂ Σ0 ∪ Σ1 ∪ Σ2 .                                                          
+                                                   23
+2.7.3. Example: Approximation of a line
+A finite word of {0, 1}∗ can be seen as a finite curve in Z2 taking its origin in (0, 0), moving right on
+a 0 and up on a 1. In [RR15], the authors introduce for any α ∈ Q ∩ [0, 1] a random process that,
+starting from a finite word w ∈ {0, 1}∗ whose frequency of symbols 1 is α, organises bits through
+local flips to obtain asymptotically a discrete segment of slope α.
+   We adapt these processes so that the flips are performed in parallel and on an infinite configu-
+ration, which gives a probabilistic cellular automaton for every slope α ∈ Q ∩ [0, 1]. We consider
+the action of this PCA on any initial σ-ergodic measure satisfying µ([1]) = α. Using Theorem 2,
+we show that the sequence of measures converges towards the measure supported by a periodic
+configuration representing a discrete line of slope α. To simplify the presentation, we consider here
+that α = 12 ; the method can be easily generalised to other slopes.
+
+  Define the following local rules:
+     • i is the identity;        (
+                                  x0    if x−2 x−1 x0 x1 = 0101 or 1010,
+     • r(x−2 , x−1 , x0 , x1 ) =
+                                  x     otherwise;
+                                ( −1
+                                 x0 if x−1 x0 x1 x2 = 0101 or 1010,
+     • `(x−1 , x0 , x1 , x2 ) =
+                                 x1 otherwise.
+   Let F̃line be a probabilistic cellular automaton (represented in Figure 10) defined by a σ-ergodic
+measure ν ∈ Mσ ({g0 , g1 , g−1 }Z ) whose support is the subshift of finite type defined by the set of
+forbidden patterns
+                                           {ir, ``, `i, rr, r`}.
+To put it more simply, any time the local rules in two consecutive cells are ` and r (which happens
+with positive probability), the probabilistic CA permutes these two letters, except if they are at the
+centre of a four-letter words 1010 or 0101. In any other situation, it acts as the identity.
+Proposition 8. Let µ ∈ Mσ−erg (AZ ). Then:
+                                  µ([00]) > µ([11]) ⇒ 11 ∈
+                                                         / Λµ (F̃line );
+                                  µ([00]) < µ([11]) ⇒ 00 ∈
+                                                         / Λµ (F̃line );
+                                                         t
+                                  µ([00]) = µ([11]) ⇒ F̃line µ → δc
+                                                                  01 .
+
+Proof. We consider the dislocation defects with regards to the chequerboard SFT Σ = {∞ (01)∞ , ∞ (10)∞ }.
+As in Section 2.6.1, we obtain the particles 11 7→ p01 and 00 7→ p10 . A particle p10 at position 0
+moves at speed +2 if ` is applied at position 1, at speed −2 if ` is applied on position −1, and
+at speed 0 otherwise. The particle p01 is symmetrical and they annihilate on contact. Indeed, we
+check by straightforward case enumeration that:
+
+
+         π(F̃line (x))0 = p10 ⇔ F̃line (x)[0,1] = 00
+                                
+                                 x[0,1] = 00           and f−1 , x−1 6= (`, 1), (f1 , x2 ) 6= (`, 1)
+                              ⇔      x          = 00    and f−1 = `, x1 = 0
+                                 [−2,−1]
+                                     x[2,3] = 00        and f1 = `, x0 = 0
+                                
+                                 π(x)0 = p10           at speed 0
+                              ⇔      π(x)−2 = p10       at speed + 2 and π(x)0 6= p10 ,
+                                     π(x)2 = p10        at speed − 2 and π(x)0 6= p10
+                                
+                                                       24
+and similarly for p01 . From this we deduce the various hypotheses of theorem, including ν ∞ -almost
+sure clashing which stems from the fact that particles perform random walks. The exact statement
+of the proposition follows through the same arguments as in Section 2.6.1; in particular, the third
+case corresponds to the discrete line of slope 21 .                                               
+
+
+
+
+        Figure 10. Example of a space-time diagram of F̃line , where ν is the Markov mea-
+        sure maximising the entropy of the subshift of finite type defined by the forbidden
+        patterns {f0 f−1 , f1 f1 , f1 f0 , f−1 f−1 , f−1 f1 }.
+
+
+
+         3. Particle-based organisation: quantitative results
+For some cellular automata with simple defect dynamics, the previous results can be refined with a
+quantitative approach: that is, to determine the asymptotic distribution of random variables related
+to the particles. In [KFD11], P. Kůrka, E. Formenti and A. Dennunzio considered Tn (x), the entry
+time after time n on the initial configuration x, which is the waiting time before a particle appears
+in a given position after time n. They restricted their study to a gliders automaton, which is a
+cellular automaton on 3 states: a background state and two particles evolving at speeds 0 and -1
+that annihilate on contact. Thus, we have one entry time for each type of particle (Tn+ (x) and
+Tn− (x)). When the initial configuration is drawn according to the Bernoulli measure of parameters
+( 21 , 0, 12 ), which means that each cell contains, independently, a particle of each type with probability
+1
+2 , they proved that:                         −
+                                                                            √
+                                                           
+                                        +      Tn (x)              2
+                                ∀α ∈ R , µ             ≤ α −→ arctan α.
+                                                  n          n→∞ π
+
+They also suggested to develop formal tools in order to be able to handle more complex automata,
+starting with the (−1, 1) symmetric case.
+     In Section 3.2, we extend this result to allow arbitrary values for the particle speeds v− and v+ ,
+and relax the conditions on the initial measure to some mixing conditions. Then, when v− < 0 and
+v+ ≥ 0, we have:
+                                    −                           r                    
+                                     Tn (x)               2                 −v− α
+                       ∀α ∈ R+ , µ           ≤ α −→ arctan                                ,
+                                        n           n→∞ π              v+ − v− + v+ α
+and symmetrically if we exchange + and −. The proof relies on the fact that the behaviour of
+gliders automata can be characterised by some random walk process; this idea was introduced by
+V. Belitsky and P. Ferrari in [BF95] and was already used in [KM00] and [KFD11]. In our case, a
+particle appearing in a position corresponds to a minimum between two concurrent random walks.
+                                                     25
+The new tool here is that under α-mixing conditions, we rescale this process and approximate it
+with a Brownian motion. Thus we obtain the explicit asymptotic distribution of entry times.
+   This method, consisting in associating a random walk to each gliders automata and studying
+this random walk using scale invariance, is not limited to this particular conjecture concerning
+entry times. Indeed, we see in the next two sections that it can be used to study the asymptotic
+behaviour of two other, arguably more natural, parameters: the particle density at time t and the
+rate of convergence to the limit measure. However, we obtain only an upper bound instead of an
+explicit asymptotic distribution. There is no doubt this method can be adapted to other parameters
+in a similar way.
+   Furthermore, these results can be extended to other automata with similar behaviour, such
+as those in Figure 1, by factorising them onto a gliders automaton. This point is discussed in
+Section 3.6. This method is more difficult to generalise when there is birth of particle, even in a
+simple case such as the 4-cyclic cellular automaton.
+
+3.1. Gliders automata and random walks
+In this section we give the definition and the first properties of the class of gliders automata.
+Definition 8 (Gliders automata). Let v− < v+ ∈ Z. The (v− , v+ )-gliders automaton (or GA) G is
+the cellular automaton of neighbourhood [−v+ , −v− ] defined on the alphabet A = {−1, 0, +1} by
+the local rule:
+                                                                    PN
+                                   +1 if x−v+ = +1 and ∀N ≤ −v− , n=−v+ +1 xn ≥ 0
+                                                                     P−v− −1
+           f (x−v+ . . . x−v− ) =   −1            −1     ∀N ≥ −v
+                                      if x −v− =    and         + ,  n=N xn ≤ 0
+                                    0 otherwise.
+
+
+  In all the following, A = {−1, 0, +1} and the diagrams are represented with the convention
+ = 0,  = +1,  = −1.
+
+
+
+
+       Figure 11. Space-time diagram of the (−1, 0)-gliders automaton on a random ini-
+       tial configuration.
+
+
+   Our results apply on automata with simple defects dynamics, namely, automata admitting a
+particle system with P = {±1} and whose update function corresponds to a gliders automaton. We
+first prove our results for gliders automata before generalising them in Section 3.6. Let us introduce
+some tools that turn the study of the dynamics of a gliders automaton into the study of some
+random walk.
+                                                  26
+Definition 9 (Random walk associated with a configuration). Let x ∈ {−1, 0, 1}Z . Define the
+partial sums Sx by:
+                          Sx (0) = 0 and ∀k ∈ Z, Sx (k + 1) − Sx (k) = xk .
+   We extend Sx to R by piecewise linear interpolation: Sx (t) = (dte − t)Sx (btc) + (t − btc)Sx (dte)
+for t ∈ R\Z. We also introduce the rescaled process Sxk : t 7→ Sx√(kt)
+                                                                   k
+                                                                       .
+
+  This random walk is simpler to study than the space-time diagram of the gliders automaton, and
+actually contains the same amount of information, as shown by the following technical lemmas.
+Definition 10. Let f : R → R and U ⊂ R. We define argmin f by:
+                                                                    U
+
+                         ∀t ∈ U, t = argmin f ⇐⇒ ∀t ∈ U \{t}, f (t) < f (t0 ).
+                                                           0
+                                             U
+  In other words, t realises the strict minimum of f on U ; this point is not always defined.
+Lemma 2. Let G be the (v− , v+ )-gliders automaton. For all j ∈ Z and n ≥ 1,
+                           j = argmin SG(x) ⇐⇒ j − v+ =                 argmin        Sx ,
+                                [j, j+n]                          [j−v+ , j+n−v− ]
+                           j = argmin SG(x) ⇐⇒ j − v− =                 argmin        Sx .
+                                [j−n, j]                          [j−n−v+ , j−v− ]
+
+Proof. We prove those equivalences by induction on n. At each step, we prove only the first equiv-
+alence, the other one being symmetric.
+     Base case:
+             SG(x) (j) < SG(x) (j + 1) ⇔ G(x)j = +1
+                                                                                       N
+                                                                                       X
+                                           ⇔ xj−v+ = +1 and ∀N ≤ −v− ,                          xj+t ≥ 0
+                                                                                     t=−v+ +1
+                                           ⇔ Sx (j − v+ ) <             min          Sx .
+                                                               [j+1−v+ , j+1−v− ]
+
+     Induction: Assume both equivalences hold for some n ≥ 1.
+         Suppose j = argmin SG(x) . In particular j = argmin SG(x) , and by induction hypothesis
+                         [j, j+n+1]                               [j, j+n]
+       j − v+ =      argmin          Sx . We distinguish two cases:
+                  [j−v+ , j+n−v− ]
+          • if Sx (j + n − v− + 1) > Sx (j − v+ ), then j − v+ =               argmin            Sx and we conclude;
+                                                                          [j−v+ , j+n−v− +1]
+          • otherwise, this means that Sx (j + n − v− + 1) = Sx (j − v+ ) (the walk can decrease by
+            at most one at each step), and thus
+                                 j + n − v− + 1 =          argmin             Sx .
+                                                      [j−v+ +1, j+n−v− +1]
+
+            By induction hypothesis,
+                                         j + n + 1 = argmin         SG(x) ,
+                                                     [j+1, j+n+1]
+
+           and in particular SG(x) (j + n + 1) < SG(x) (j + 1). Therefore SG(x) (j + n + 1) ≤ SG(x) (j),
+           a contradiction with the first assumption.
+       The converse is proved in a similar manner.
+                                                                                                      
+                                                      27
+Lemma 3. Let G be the (v− , v+ )-gliders automaton. For all j ∈ Z and k ≥ 0,
+                          Gt (x)j = −1 ⇐⇒ j − v− t + 1 =          argmin             Sx
+                                                             [j−v+ t, j−v− t+1]
+
+                          Gt (x)j = +1 ⇐⇒ j − v+ t =         argmin           Sx .
+                                                         [j−v+ t, j−v− t+1]
+
+This is illustrated in Figure 12.
+
+
+
+                                          Gk (x)j
+
+
+
+
+                         k
+
+
+
+                     a
+                                                j
+                         Sx
+
+                         j−k+1                                        j+k
+
+
+         Figure 12. Illustration of Lemma 3. A strict minimum is reached on j − k + 1.
+
+
+Proof. By induction on t, proving only the first equivalence at each step:
+     Base case (t = 0): By definition of Sx , Sx (j + 1) < Sx (j) ⇔ xj = −1.
+     Induction: Assume that both equivalences hold for a given time t. By applying the induction
+       hypothesis on G(x), Gt+1 (x)j = −1 ⇔ j − v− t + 1 =        argmin     SG(x) and we conclude
+                                                                   [j−v+ t, j−v− t+1]
+        by applying Lemma 2.
+                                                                                                     
+
+3.2. Entry times
+The main result of Section 2 implies that, for any σ-ergodic initial measure µ, ΛG (µ) contains at
+most one kind of particle, which one depending on whether µ([+1]) > µ([−1]) or the opposite.
+When µ([+1]) = µ([−1]), ΛG (µ) only contains the particle-free configuration ∞ 0∞ . In other words,
+Gt∗ µ → δb0 , which means that the probability of seeing a particle in any fixed finite window tends to
+0 as t → ∞.
+Definition 11 (Entry times). Let v− < 0 ≤ v+ ∈ Z, G the (v− , v+ )-GA and x ∈ {−1, 0, 1}Z . We
+define:
+                  Tn− (x) = min{k ∈ N : ∃i ∈ [0, |v− | − 1], Gk+n (x)i = −1},
+ with Tn− (x) = ∞ if this set is empty. This is the entry time in the set {b ∈ {−1, 0, 1}Z : ∃i ∈
+[0, |v− | − 1], bi = −1} after time n at position 0 starting from x. We define Tn+ (x) in a symmetrical
+manner.
+                                                    28
+                                        Tn− (x)
+
+
+
+                                            n
+                    x
+
+                   Figure 13. An entry time for the (-3,1)-gliders automaton.
+
+
+  The size of the considered window is such that any particle “passing through” the column 0
+appears in this window exactly once (See Figure 13). Of course entry times for particles of speed 0
+make no sense. From now on, we only consider T − for simplicity, all the results being valid for T + .
+  As a consequence of Birkhoff’s ergodic theorem, when µ([−1]) > µ([+1]), −1 particles persist
+µ-almost surely and their density converges to a positive number. Therefore:
+     • µ(Tn+ (x) = ∞) −→ 1;
+                  − n→∞ 
+     • ∀α > 0, µ Tnn(x) ≤ α −→ 1,
+                               n→∞
+  and symmetrically. This is why we only consider the case µ([−1]) = µ([+1]). Kůrka and al.
+proved the following result:
+Theorem 3 ([KFD11]). For the (−1, 0)-GA (“Asymmetric gliders”) with an initial measure µ =
+Ber 21 , 0, 12 :
+                                  −
+                                                             √
+                                              
+                                    Tn (x)          2
+                       ∀α > 0, µ           ≤ α −→ arctan α.
+                                      n         n→∞ π
+
+  In the same article, they conjectured that this result could be extended to any initial Bernoulli
+                                                                                               √
+measure of parameters (p, 1−2p, p) for 0 ≤ p ≤ 12 by replacing the right-hand term by π2 arctan 2pα.
+We will prove that this conjecture is actually incorrect.
+
+  To state our result, we introduce two particular subclasses of Mσ (AZ ). We introduce α-mixing
+coefficients of a measure µ ∈ Mσ (AZ ):
+                αµ (n) = sup{|µ(A ∩ B) − µ(A)µ(B)| : A ∈ B]−∞,0] , B ∈ B[n,+∞[ }.
+
+where B[a,b] is the Borel σ-algebra generated by the random variables (Xi )a≤i≤b .
+  Define:
+     • Ber= the set of Bernoulli measures on {−1, 0, +1}Z and parameters (p, 1 − 2p, p) for some
+       0 < p ≤ 12 ;
+     • MixRthe set of measures µ ∈ Mσ ({−1, 0, +1}Z ) satisfying:
+         – AZ x0Rdµ(x) = 0, i.e., µ([−1]) = µ([+1]);
+           P∞                                                      2
+         –    k=0 AZ x0 · xk dµ(x) converges absolutely to a real σµ > 0 (asymptotic variance);
+                               1
+         – ∃ε > 0, n≥0 αµ (n) 4 −ε < ∞.
+                    P
+
+In particular, Ber= ⊂ Mix.
+
+                                                  29
+Theorem 4 (Quantitative result for entry time). For any (v− , v+ )-GA with v− < 0 and v+ ≥ 0
+and any initial measure µ ∈ Mix,
+                             −                      r                  
+                             Tn (x)           2                 −v− α
+                  ∀α > 0, µ         ≤ α −→ arctan                           .
+                               n         n→∞ π            v+ − v− + v+ α
+  Notice that this limit is independent from µ (as long as µ ∈ Mix), disproving the conjecture
+when µ ∈ Ber= .
+
+3.3. Brownian motion and proof of the main result
+The third hypothesis for Mix is chosen so that the large-scale behaviour of the partial sums Sx (t)
+can be approximated by a Brownian motion. This invariance principle is the core of our proofs.
+The first and second conditions ensure that the Brownian motion obtained this way have no bias
+and nonzero variance, respectively.
+Definition 12 (Brownian motion). A Brownian motion (or Wiener process) B of mean 0 and
+variance σ 2 is a continuous time stochastic process taking values in R such that:
+     – B(0) = 0,
+     – t 7→ B(t) is almost surely continuous,
+     – B(t2 ) − B(t1 ) follow the normal law of mean 0 and variance (t2 − t1 )σ 2 ;
+     – For t1 < t2 ≤ t01 < t02 , increments B(t2 ) − B(t1 ) and B(t02 ) − B(t01 ) are independent.
+  See [MP10] for a general introduction to Brownian motion.
+Proposition 9 (Rescaling property). Let B be a Brownian motion. Then, for any k > 0, t 7→
+√1 B(kt) is a Brownian motion with same mean and variance.
+  k
+
+  We now state some invariance principles, which consists in approximating rescaled random walks
+by Brownian motion. We use a strong version, which guarantees an almost sure convergence by
+considering a copy of the process in a richer probability space.
+Theorem 5 ([ZC96], Corollary 9.3.1). Let X = (Xi )i∈N be a family of random variables taking
+values in {−1, 0, 1}. We denote by αX (n) its α-mixing coefficients defined as:
+
+             αX (n) = sup{|P (A ∩ B) − P (A)P (B)| : t ∈ N, A ∈ B[0,t] , B ∈ B[t+n,+∞[ },
+where again B[a,b] is the sigma-algebra generated by (Xa , . . . , Xb ).
+
+   Assume that:
+    (1) ∀i, E(X
+            P i ) = 0;       
+        1      btc
+    (2) t E    i,j=1 X i · Xj    converges absolutely to some positive real σ 2 ;
+                                1
+    (3) ∃ε > 0, ∞                 +ε
+                P
+                   n=1 αX (n)        .
+                                4
+
+   Then we can define two processes X 0 = (Xi0 )i∈N and B on a richer probability space (Ω, P) such
+that:
+    (1) X and X 0 have the same distribution;
+    (2) B is a Brownian motion of mean 0, variance σ 2 ;
+    (3) for any ε > 0,
+                             btc                 1 
+                             X
+                                   Xi − B(t) = O t 4 +ε      P-almost surely.
+                             i=1
+                                                     30
+Corollary 3. Let µ ∈ Mix. For any fixed constants q < r ∈ R, we can define a process X 0 =
+(Xi0 )i∈Z and a family of processes (t 7→ Bn (t))n∈N on a richer probability space (Ω, P) such that:
+     (1) X 0 has distribution µ;
+     (2) every Bn is a Brownian motion of mean 0 and variance σµ2 > 0;
+     (3) for any ε > 0, denoting by SX 0 the piecewise linear function defined by SX 0 (0) = 0 and
+         SX 0 (k + 1) − SX 0 (k) = Xk0 for all k ∈ Z,
+                                     SX 0 (nt)              1 
+                    ∀n ∈ N, sup        √       − Bn (t) = O n− 4 +ε P-almost surely.
+                             t∈[q,r]      n
+Proof. We apply Theorem 5 on (Xi )i∈N , where (Xi )i∈Z is distributed according to µ. Because µ is
+σ-invariant, this is a stationary process. The first and third conditions are satisfied by definition of
+Mix. For the second condition,
+                                                 n    n−i
+           1    X                        1XX
+                         |E(Xi · Xj )| =     E(|X0 · Xj−i |)                     by stationarity
+           n                             n
+               0≤i,j≤n                         i=0 j=−i
+                                              n
+                                              X      n + 1 − |i|
+                                         =                       E(|X0 · Xi |)      by reordering the sum
+                                                         n
+                                              i=−n
+                                                      n
+                                                      X
+                                         ∼n→∞ 2             E(|X0 · Xi |) −→ 2σµ2 ,
+                                                                        n→∞
+                                                      i=0
+
+by stationarity and the equivalence criterion for positive series. We obtain two processes X 1 =
+(Xi1 )i∈N and B 1 on a richer probability space (Ω, P) such that X 1 has the same distribution as x,
+B 1 is a Brownian motion of mean 0, variance σµ2 , and:
+                                   btc                                1 
+                                   X
+                         ∀ε > 0,         Xi1 − B 1 (t) =        O     t 4 +ε     P-almost surely.
+                                                              t→+∞
+                                   i=1
+                                                                     Pbtc 1
+Since the variables Xi1 take value in {−1, 0, 1}, we have for any t    i=1 Xi − SX 1 (t) < 1 (a staircase
+and piecewise linear function having the same values on N). Therefore:
+                                                         1 
+                     ∀ε > 0, SX 1 (t) − B 1 (t) = O       t 4 +ε    P-almost surely.
+                                                              t→+∞
+                       1                                1           1 
+    ∀ε > 0, ∀n ∈ N, √ SX 1 (tn) − B 1 (tn) = O n− 4 + · O |t| 4 +          P-almost surely.
+                        n                         n→∞            t→∞
+
+For any r ∈ R2+ , taking the sup for t ∈ [0, r], we obtain:
+                                    SX 1 (tn) B 1 (tn)           1 
+          ∀ε > 0, ∀n ∈ N, sup         √      − √        = O n− 4 +     P-almost surely.
+                            t∈[0,r]      n          n       n→∞
+
+                                          1
+By rescaling property Bn1 : t 7→ B √(tn)
+                                     n
+                                         is a Brownian motion of same mean and variance as B 1 .
+
+  To extend the result to negative values, we apply the theorem again to (x−i−1 )i∈N , obtaining a
+process X 2 and a Brownian motion B 2 satisfying the same asymptotic bound on t → −∞. Joining
+both parts, we can see that the process X 0 = . . . X−2   2 , X 2 , X 1 , X 1 . . . have distribution µ and
+                                                               −1    0     1
+           1                2
+Bn : t 7→ Bn (t) if t ≥ 0, Bn (t) if t < 0 is a Brownian motion.                                          
+  For a survey of invariance principles under different assumptions, see [MR12].
+
+  We now prove the main theorem.
+                                                                31
+Proof of Theorem 4. For any x ∈ {−1, 0, 1}Z , Lemma 3 applied on the column 0 gives:
+                                                                                                                  
+   Tn− (x) = min       k ∈ N | ∃j ∈ [0, −v− [ , Sx (−v− (n + k) + j + 1) <                min                 Sx
+                                                                             [−v+ (n+k)+j, −v− (n+k)+j]
+                                                                                                        
+          = min k ∈ N | ∃j ∈ [0, −v− [ , Sx (−v− (n + k) + j + 1) <                    min          Sx
+                                                                             [−v+ (n+k)+j, −v− n]
+
+
+Indeed, if (k, j) is the smallest pair (in lexicographic order) such that Sx (−v− (n + k) + j +
+1) < min[−v+ (n+k)+j, −v− n] Sx , then all pairs (k 0 , j 0 ) < (k, j) verify Sx (−v− (n + k 0 ) + j 0 + 1) ≥
+min[−v+ (n+k)+j, −v− n] Sx , and therefore Sx (−v− (n + k) + j + 1) < min[−v+ (n+k)+j, −v− (n+k)+j] Sx .
+   Note that if this last condition is reached on k ∈ N, since Sx is piecewise linear, it is attained for
+t as soon as t > k − 1 and reciprocally. Thus:
+                                                                                                             
+       Tn− (x) = inf       t ≥ 0 | ∃j ∈ [0, −v− [ , Sx (−v− (n + t) + j + 2) <           min             Sx
+                                                                                 [−v+ (n+t)+j+1,−v− n]
+
+
+   Replacing j by 0 in this expression adds to the infimum a value comprised between 0 and −v−v−−−1
+(remember v− < 0). Since the infimum is necessarily an integer, we compensate by taking the
+integer part:
+                                                                                       
+             Tn− (x) =   inf t ≥ 0 | Sx (−v− (n + t) + 2) <         min            Sx
+                                                            [−v+ (n+t)+1,−v− n]
+                        $ (                                                                 )%
+                                                     t      2
+                       = inf t ≥ 0 | Sxn −v− 1 +         +      <          min              Sxn
+                                                     n      n      [−v+ (1+ nt )+ n1
+                                                                                     ,−v− ]
+                        $       (                                                           )%
+                                                            2
+                       = n · inf t ≥ 0 | Sxn −v− (1 + t) +      <         min             Sxn
+                                                            n      [−v+ (1+t)+ n 1
+                                                                                   ,−v− ]
+
+                                                                                    √
+where Sxn is the rescaled process t 7→ Sx√(nt)  n
+                                                  . Since Sx is 1-Lipschitz, Sxn is n-Lipschitz (i.e.
+                       √
+|Skn (t0 ) − Skn (t)| ≤ n|t0 − t|). Dividing the previous expression by n, using the fact that t − n1 ≤
+bntc
+  n ≤ t for all t, n ∈ R × N:
+                                                                        −             
+                                            4                               Tn (x)
+(1a)             µ             min   Sxn + √ <          min      Sxn ≤ µ           ≤α
+                    [−v− ,−v− (1+α)]         n [−v+ (1+α),−v− ]               n
+                    −                                                                 
+                     Tn (x)                                  n    3                    n
+(1b)             µ          ≤α ≤µ                min        Sx − √ <       min       S
+                       n                   [−v− ,−v− (1+α)]        n [−v+ (1+α),−v− ] x
+
+  We now bound the left-hand term of (1a) from below and the right-hand term of (1b) from above.
+Using Corollary 3, we build a process X 0 and a family of processes (Bn )n∈N on a richer probability
+space (Ω, P) such that X 0 is distributed according to µ and the Bn are Brownian motions.
+
+                                             SX 0 (nt)              1 
+           ∀n ∈ N,              sup            √       − Bn (t) = O n− 4 +ε         P-almost surely.
+                       [−v+ (1+α),−v− (1+α)]      n
+
+By symmetry, Bnl (t) = Bn (−v− − t) − Bn (−v− ) and Bnr (t) = Bn (−v− + t) − Bn (−v− ) are two
+independent Brownian motions on [0, v− − v+ (1 + α)] and [0, −v− α], respectively. Consequently,
+                                                        32
+for any ε > 0 and n large enough:
+                                                                                                                                                  
+  µ       min     Sxn + ε <     min                       Sxn       =P                    min           n
+                                                                                                       SX 0 + ε <           min                n
+                                                                                                                                              SX 0
+       [−v− ,−v− (1+α)]             [−v+ (1+α),−v− ]                           [−v− ,−v− (1+α)]                        [−v+ (1+α),−v− ]
+                                                                                                                                                   
+                                                                    ≥P                    min          Bn + 2ε <             min              Bn
+                                                                               [−v− ,−v− (1+α)]                        [−v+ (1+α),−v− ]
+                                                                                                                                         
+(2a)                                                                ≥P           min Bnl + 2ε <                       min           Bnr
+                                                                               [0,−v− α]                        [0,−v− +v+ (1+α)]
+
+  and a symmetrical upper bound for (1b):
+                                                                                                                                                 
+(2b) µ      min       Sxn − ε <    min                              Sxn       ≤P            min Bnl − 2ε <                  min               Bnr
+            [−v− ,−v− (1+α)]             [−v+ (1+α),−v− ]                                 [0,−v− α]                  [0,−v− +v+ (1+α)]
+
+  We now evaluate the right-hand expression in (2a).
+                                                                                              
+                                                                                            m
+  For any Brownian motion B and b > 0, we have by rescaling P min B ≥ m = P min B ≥ √ .
+                                                                [0,b]               [0,1]     b
+Furthermore, since Bnl and Bnr are independent, so are min Bxl and min Bxr . Denote by µm the law
+                                                                                  [0,1]                 [0,1]
+of the minimum of a Brownian motion on [0, 1], which is defined by the density function:
+                                    R → R
+                                                      2
+                                              e−t                                         (see [MP10]).
+                                     t 7→      2           if t ≤ 0,
+                                              0            otherwise.
+This means that for any y, z > 0:
+                                                    Z 0 Z 0
+                  P       min Bnl < min Bnr       =                       1{√y·m1 ≤√z·m2 } dµm (m2 )dµm (m1 )
+                          [0,y]     [0,z]                 −∞    −∞
+                                                                           √
+                                                            Z 0 Z              z·m2
+                                                                               √           −m2   −m2
+                                                       4                         y           1     2
+                                                  =                                   e 2 e 2 dm1 dm2
+                                                  (i) 2π        −∞        −∞
+                                                           Z π+arctan(√ y ) Z +∞
+                                                       2                              z                −r 2
+                                                  =                                                  re 2 drdθ
+                                                  (ii) π    π                               0
+                                                           r 
+                                                   2         y
+(3)                                               = arctan
+                                                   π         z
+  (i) by using the law of the minimum of a Brownian motion, (ii) by passing in polar variables. For
+ε > 0, a similar calculation gives:
+                                                                        √
+                                                             Z 0 Z z·m√ 2     −m2    2
+              l         r              l              r        4           y         1 −m2
+   P min Bn < min Bn − P min Bn + 2ε < min Bn ≤                        √         e 2 e 2 dm1 dm2
+       [0,y]      [0,z]          [0,y]          [0,z]         2π −∞ z·m   √2
+                                                                             −2ε
+                                                                           y
+                                                                    Z 0 −ym2 −m2
+                                                                8ε            2     2
+                                                           ≤ √           e 2z e 2 dm2
+                                                              2π y −∞
+(4)                                                        −→ 0
+                                                           ε→0
+                                                                                       q              
+                                                                                             −v− α
+   Using (3) and (4), we see that the right-hand term in (2a) converges to π2 arctan      v+ −v− +v+ α
+as ε → 0. The left-hand term in (2b) can be bounded from above by the same method. We apply
+this result to (1a) and (1b) by taking ε = √3n (resp. √4n ), and the theorem follows.                 
+                                                                     33
+3.4. Particle density
+Definition 13 (Particle density in a configuration). The −1 particle density in x ∈ {−1, 0, 1}Z is
+defined as d− (x) = Freq(−1, x). d+ (x) is defined in a symmetrical manner.
+  In all the following, any result on d− also holds for d+ by symmetry.
+Theorem 6 (Decrease rate of the particle density). Let G be a (v− , v+ )-GA with initial measure
+µ ∈ Mix. Then:
+                                                                         1 
+             For µ-almost all x ∈ {−1, 0, 1}Z , ∀ε > 0, d− (Gt (x)) = O t− 4 +ε
+  If furthermore µ ∈ Ber= :
+                                                                                           1
+                              For µ-almost all x ∈ {−1, 0, 1}Z , d− (Gt (x)) ∼ t− 2
+Proof. When µ ∈ Mix, it is in particular σ-ergodic, and so are its images Gt∗ µ. By Birkhoff’s ergodic
+theorem, one has d− (Gt (x)) = Gt∗ µ([−1]) = µ(Gt (x)0 = −1) for µ-almost all x ∈ {−1, 0, 1}Z .
+
+  We first prove the theorem when G is the (−1, 0)-gliders automaton. By Lemma 3,
+                                                                 
+                              t
+                           µ(G (x)0 = −1) = µ Sx (t + 1) < min Sx .
+                                                                             [0,t]
+
+Equivalence (µ ∈ Ber= ): By symmetry,
+                                                           
+                     µ Sx (t + 1) < min Sx = µ Sx (0) < min Sx ,
+                                                 [0,t]                        [1,t+1]
+
+which is the probability that the random walk starting from 0 remains strictly positive during t
+steps, also known as its probability of survival. According to [Red01], when the random walk is
+symmetric and the steps are independent, we have the equivalence µ(Gt (x)0 = −1) ∼ √1t .
+Upper bound:                                                           
+                                                         t+1          t+1
+                              µ Sx (t + 1) < min Sx ≤ µ Sx (1) = min Sx     .
+                                               [0,t]                               [0,1]
+  Using Corollary 3, we have:
+                                                                
+                       t+1          t+1        t+1             t+1
+                  µ Sx (1) = min Sx       = P SX 0 (1) = min SX 0
+                              [0,1]                      [0,1]
+                                                                        
+                                          ≤ P Bt+1 (1) ≤ min Bt+1 + Ct+1
+                                                         [0,1]
+                                                                        
+                                          ≤ P Bt+1 (0) ≤ min Bt+1 + Ct+1 ,
+                                                                           [0,1]
+                                                 1
+                                                         
+                  t+1             − +ε
+where Ct+1 = sup SX 0 − Bt+1 = O t 4   P-almost surely, and where the third line is obtained
+              [0,1]
+by symmetry of the
+                 Brownian motion.                    Z 0
+                                                                    2
+                                                                                      1 
+  Furthermore P min Bt+1 > −Ct+1                =                e−x /2 dx ≤ Ct+1 = O t− 4 +ε .
+                      [0,1]                              −Ct+1
+
+General case (any v− < v+          ):Let G0 be the (v        − , v+ )-GA. Then
+
+                                               G0 = σ v+ ◦ Gv+ −v− .
+To conclude, it is enough to see that the particle density is σ-invariant and decreasing under the
+action of G.                                                                                    
+                                                             34
+3.5. Rate of convergence
+In this section, we estimate the rate of convergence to the limit measure. For that we fix a distance
+on the space Mσ (AZ ) of σ-invariant measures, which induces the weak∗ topology:
+                                           X 1
+                              dM (µ, ν) =         max |µ([u]) − ν([u])| .
+                                               2n u∈An
+                                             n∈N
+
+Theorem 7 (Rate of convergence to the limit measure). Let G be the (v− , v+ )-GA with initial
+measure µ ∈ Mix. Then:
+                                                              
+                          ∀ε > 0, dM (Gt∗ µ, δb0 ) = O t−1/4+ε
+  If furthermore µ ∈ Ber= :
+                                                                  
+                                        dM (Gt∗ µ, δb0 ) = Ω t−1/2
+
+Proof. We first prove the theorem when G is the (−1, 0)-gliders automaton. By defining 0` ∈ A`
+the word containing only zeroes, the distance can be rewritten:
+                                                          ∞
+                                                          X 1                         
+                           ∀t ∈ N, dM (Gt∗ µ, δb0 ) =                 G
+                                                                     ` ∗
+                                                                        t
+                                                                          µ   AZ
+                                                                                 \[0`
+                                                                                      ]  .
+                                                                2
+                                                          `=1
+
+   Lower bound when µ ∈ Ber= : dM (Gt∗ µ, δb0 ) > Gt∗ µ AZ \[0] . We conclude with Theorem 6.
+                                                               
+
+   Upper bound: We give an upper bound for Gt∗ µ(AZ \[0` ]) = µ(∃0 ≤ d ≤ `, Gt (x)d = ±1) for
+` ∈ N and t ∈ N. By Lemma 3,
+                           ∀d ∈ Z, Gt (x)d = +1 ⇔ Sx (d) <                    min Sx .
+                                                                           [d+1,d+t]
+
+Therefore:
+                                      `
+                                                  !                      
+                                      \
+                              Gt∗ µ       [+1]d       ≤ µ min Sx < min Sx
+                                                             [0,`]          [`+1,t]
+                                      d=0
+                                                                    
+                                                      ≤ µ min Sx ≥ −`
+                                                           [0,t]
+                                                                         
+                                                                 t    `
+                                                      ≤ µ min Sx ≥ − √
+                                                           [0,1]        t
+By Corollary 3, using the same notations as in the previous proofs:
+                                                          
+         t                                     t       `
+      G∗ µ (∃0 ≤ d ≤ `, xd = +1) ≤ P min SX 0 ≥ − √
+                                        [0,1]            t
+                                                             
+                                                     `                           1 
+                                  ≤ P min Bt ≥ −    √    − Ct       where Ct = O t− 4 +ε
+                                        [0,1]          t
+                                       1 
+                                         − 4 +ε
+                                  =O t
+
+for any ε > 0, following the same calculations as in Section 3.4. The case of −1 particles is
+symmetrical, and we conclude.
+General case:Apply the same method as in the previous section, considering that dM and all
+considered measures are σ-invariant and that any CA is Lipschitz w.r.t dM .             
+                                                        35
+3.6. Extension to other cellular automata
+Definition 14. Let F1 , F2 be two CAs on AZ and B Z , respectively. We say that F1 factorises onto
+F2 if there exists a factor π : AZ → B Z such that π ◦ F1 = F2 ◦ π.
+  In particular, if F2 admits a particle system (P, π2 , φ), then F1 admits a particle system with
+(P, π ◦ π2 , φ).
+  In this section, we extend the Theorems 4 and 6 to automata that factorise onto a gliders au-
+tomaton, and discuss conditions for the extension of Theorem 7. In Section 2.5, we exhibited a
+general method to find such a factor using experimental intuition when such a factor is not obvious.
+In other words, we extend our results to automata that admit a particle system (P, π, φ), where
+P = {−1, +1} and φ updates the particle positions similarly to a gliders automaton.
+
+  In order to extend the theorem to such CAs, starting from an initial measure µ, we must first
+ensure that π∗ µ ∈ Mix. We show that the third condition in the definition of Mix is invariant
+under morphism.
+Proposition 10. Let π : A
+                        P → B be ak morphism, µ ∈ Mσ (A ) and k > 0 any real such that
+                          Z      Z                     Z
+            k
+P
+  n≥0 αµ (n) < ∞. Then,    n≥0 απ∗ µ (n) < ∞.
+
+Proof. We keep the notations from the definition of αµ (n). π is defined by a local rule with neigh-
+bourhood N ⊂ [−r, r] for some r > 0. Then, π −1 B]−∞,0] ⊂ B]−∞,r] and π −1 B[n,+∞[ ⊂ B[n−r,+∞[ .
+By σ-invariance, we have for all n απ∗ µ (n) < αµ (n − 2r), and the result follows.               
+  Hence, if µ ∈ Mix, we only have to prove that π∗ µ weighs evenly the sets of particles −1 and
++1, and that the corresponding asymptotic variance is not zero. Under these assumptions, we can
+extend some of the previous results with the forbidden patterns playing the role of the particles.
+Corollary 4. Let F : AZ → AZ be a CA and µ ∈ Mσ (AZ ). Suppose that F factorises onto a
+(v− , v+ )-GA via a factor π such that π∗ µ ∈ Mix.
+  Then Theorem 4 and the first point of Theorem 6 hold if we replace “xk = ±1” by “π(x)k = ±1”.
+   Even if µ is a simple, e.g. Bernoulli measure, π∗ µ can fail to satisfy the first and second condition
+of Mix. We provide a counterexample at the end of this section.
+Examples:
+   Traffic automaton: Let A = {0, 1} and F184 be the elementary CA corresponding to rule
+     #184 as defined in Section 2.6.1. F184 factorises on the (−1, +1)-gliders automaton, using
+     the factor introduced in that section:
+                                          00   7→ +1
+                                          11    7→ −1
+                                        01, 10 7→ 0
+          This factor is represented in Figure 5. If µ is a measure such that π∗ µ ∈ Mix, then
+        Theorem 4 and the first point of Theorem 6 hold.                                              
+                                                                                             p    1−p
+          For example, this is true for the 2-step Markov measure defined by the matrix
+                                                                                           1−p      p
+                                     
+                                  1/2
+        and the eigenvector              with p > 0. A particular case is the Bernoulli measure of pa-
+                                  1/2
+        rameters ( 21 , 21 ).
+          The upper bound in Theorem 7 can also be extended by considering the fact that
+                                                     X 1                       
+                                   t                           t        Z    n
+                              dM (F184∗     01 ) ≤ 2
+                                        µ, δc             π∗ F184∗ µ   A  \[0  ]  .
+                                                       2n
+                                                n∈N
+                                                  36
+         Figure 14. The 3-state cyclic CA, a one-sided captive CA and the product CA.
+
+       From there the upper bound can be obtained as in the original proof.
+     3-state cyclic automaton: Let A = Z/3Z and C3 be the 3-state cyclic automaton. We
+       consider the factor π defined in Section 2.6:
+                                ab 7→ +1 if a = b + 1 mod 3
+                                ab 7→ −1 if a = b − 1 mod 3
+                                ab 7→ 0        if a = b
+      If µ is such that π∗ µ ∈ Mix, then Theorem 6 applies. This is true in particular when µ
+      is any 2-step Markov measure defined by a matrix (pij )1≤i,j≤3 satisfying p01 + p12 + p20 =
+      p10 + p21 + p02 , all of these values being nonzero, with (µi )1≤i≤3 its only eigenvector. This
+      includes any nondegenerate Bernoulli measure. However, even when the limit measure is
+      known (e.g. starting from the uniform measure), Theorem 7 does not apply directly.
+     One-sided captive automata: Let F be any one-sided captive cellular automaton defined
+      by a local rule f . As explained in Section 2.6, F factorises onto the (−1, 0)-gliders automaton
+      with a factor defined by:
+                                  ab →
+                                     7     +1    if a 6= b, f (a, b) = a
+                                  ab → 7   −1    if a 6= b, f (a, b) = b
+                                  ab →   7  0    if a = b
+        For an initial measure µ, if π∗ µ ∈ Mix, then Theorem 4 and the first point of Theorem 6
+        apply.
+
+           Notice that this class of automata contains the identity (∀a, b ∈ A, f (a, b) = b) and the
+        shift σ (∀a, b ∈ A, f (a, b) = a). However, since we have in each case π −1 (+1) = ∅ or
+        π −1 (−1) = ∅, it is impossible to find an initial measure that weighs evenly each kind of
+        particle, and so π∗ µ cannot belong in Mix. The limit measure, however, depends on the
+        exact rule, and Theorem 7 does not apply directly.
+Counter-example:
+   Product automaton: Let A = Z/2Z and F128 be the CA of neighbourhood {−1, 0, 1} defined
+     by the local rule f (x−1 , x0 , x1 ) = x−1 · x0 · x1 . Using the formalism from Section 2.5, we can
+                                                   37
+         see that F128 factorises onto the (−1, 1)-GA by the factor
+                                          
+                                                01    → +1
+                                      π:         10    → −1
+                                             otherwise → 0
+                                          
+
+         If µ is any Bernoulli measure, then π∗ µ satisfies all conditions of Mix except that σµ =
+         0; indeed, we can check that for π∗ µ-almost all configurations, the particles +1 and −1
+         alternate. Hence,
+                     − onlyone particle can cross any given column after time 0, and therefore
+         ∀α > 0, µ Tnn(x) ≤ α −→ 0. Furthermore, any particle survives up to time t only if it
+                                   n→∞
+         is the border of a initial cluster of black cells larger than 2t cells, which happens with a
+         probability µ([1])2t decreasing exponentially in t.
+   Even though we showed that the asymptotic distributions of entry times are known for some class
+of cellular automata and a large class of measures, this covers only very specific dynamics. It is not
+known how these results extend for more than 2 particles and/or other kinds of particle interaction.
+In particular, there is no obvious stochastic process characterising the behaviour of such automata
+that would play the role of Sx in our proofs.
+
+Acknowledgements
+This work was partially supported by the ANR project QuasiCool (ANR-12-JS02-011-01). The
+first author acknowledges the financial support of Basal project No. PFB-03 CMM, Universidad de
+Chile. We also thank two anonymous referees for their careful reading and many remarks.
+
+
+                                               References
+[BF95]   Vladimir Belitsky and Pablo A. Ferrari. Ballistic annihilation and deterministic surface growth. Journal
+         of Statistical Physics, 80:517–543, 1995.
+[BF05]   Vladimir Belitsky and Pablo A. Ferrari. Invariant measures and convergence properties for cellular au-
+         tomaton 184 and related processes. Journal of Statistical Physics, 118(3-4):589–623, 2005.
+[BFMM13] Ana Bušić, Nazim Fatès, Jean Mairesse, and Irène Marcovici. Density classification on infinite lattices
+         and trees. Electron. J. Probab., 18:22 pp., 2013.
+[BNR91]  Nino Boccara, Jamil Nasser, and Michel Roger. Particle-like structures and their interactions in spatiotem-
+         poral patterns generated by one-dimensional deterministic cellular-automaton rules. Physical Review A,
+         44(2):866–875, 1991.
+[Del11]  Martin Delacourt. Rice’s theorem for µ-limit sets of cellular automata. In Luca Aceto, Monika Henzinger,
+         and Jiří Sgall, editors, Automata, Languages and Programming: 38th International Colloquium, ICALP
+         2011, Zurich, Switzerland, July 4-8, 2011, Proceedings, Part II, pages 89–100, Berlin, Heidelberg, 2011.
+         Springer Berlin Heidelberg.
+[Elo94]  Kari Eloranta. The dynamics of defect ensembles in one-dimensional cellular automata. Journal of Sta-
+         tistical Physics, 76:1377–1398, 1994. 10.1007/BF02187067.
+[EN92]   Kari Eloranta and Esa Nummelin. The kink of cellular automaton rule 18 performs a random walk.
+         Journal of Statistical Physics, 69(5-6):1131–1136, 1992.
+[Fat13]  Nazim Fatès. Stochastic cellular automata solutions to the density classification problem. Theory of
+         Computing Systems, 53(2):223–242, 2013.
+[Fis90a] Robert Fisch. Cyclic cellular automata and related processes. Physica D: Nonlinear Phenomena, 45(1–
+         3):19–25, 1990.
+[Fis90b] Robert Fisch. The one-dimensional cyclic cellular automaton: a system with deterministic dynamics that
+         emulates an interacting particle system with stochastic dynamics. Journal of Theoretical Probabilities,
+         3(2):311–338, 1990.
+[GG01]   Lawrence Gray and David Griffeath. The ergodic theory of traffic jams. Journal of Statistical Physics,
+         105(3-4):413–452, 2001.
+[Gra83]  Peter Grassberger. New mechanism for deterministic diffusion. Physical Review A, 28:3666–3667, 1983.
+                                                        38
+[Gra84]  Peter Grassberger. Chaos and diffusion in deterministic cellular automata. Physica D: Nonlinear Phe-
+         nomena, 10(1–2):52 – 58, 1984.
+[HdM14]  Benjamin Hellouin de Menibus. Asymptotic behaviour of cellular automata: computation and random-
+         ness. Thèse présentée pour obtenir le grade universitaire de docteur, 2014.
+[HdMS11] Benjamin Hellouin de Menibus and Mathieu Sablik. Self-organization in cellular automata: a particle-
+         based approach. In Developments in Language Theory, pages 251–263, 2011.
+[HdMS12] Benjamin Hellouin de Menibus and Mathieu Sablik. Entry times in automata with simple defect dy-
+         namics. In Enrico Formenti, editor, Proceedings 18th international workshop on Cellular Automata and
+         Discrete Complex Systems and 3rd international symposium Journées Automates Cellulaires, volume 90
+         of Electronic Proceedings in Theoretical Computer Science, pages 97–109. Open Publishing Association,
+         2012.
+[HdMS13] Benjamin Hellouin de Menibus and Mathieu Sablik. Characterisation of sets of limit measures after
+         iteration of a cellular automaton on an initial measure. arXiv:1301.1998, accepted to Ergodic Theory and
+         Dynamical Systems, 2013.
+[KFD11]  Petr Kůrka, Enrico Formenti, and Alberto Dennunzio. Asymptotic distribution of entry times in a cellular
+         automaton with annihilating particles. Proceedings of AUTOMATA, pages 89–100, 2011.
+[KM00]   Petr Kůrka and Alejandro Maass. Limit sets of cellular automata associated to probability measures.
+         Journal of Statistical Physics, 100(5-6):1031–1047, 2000.
+[Kůr03]  Petr Kůrka. Cellular automata with vanishing particles. Fundamenta Informaticae, 58(2003):203–221,
+         2003.
+[Lin84]  Douglas A. Lind. Applications of ergodic theory and sofic systems to cellular automata. Physica D:
+         Nonlinear Phenomena, 10(1–2):36–44, 1984.
+[MP10]   Peter Mörters and Yuval Peres. Brownian motion. Cambridge Series in Statistical and Probabilistic Math-
+         ematics. Cambridge University Press, Cambridge, 2010.
+[MR12]   Florence Merlévède and Emmanuel Rio. Strong approximations of partial sums under dependence condi-
+         tions with applications to dynamical systems. Stochastic Processes and their Applications, 122:386–417,
+         2012.
+[Piv07a] Marcus Pivato. Algebraic invariants for crystallographic defects in cellular automata. Ergodic Theory and
+         Dynamical Systems, 27(01):199–240, 2007.
+[Piv07b] Marcus Pivato. Defect particle kinematics in one-dimensional cellular automata. Theoretical Computer
+         Science, 377(1-3):205–228, 2007.
+[Piv07c] Marcus Pivato. Spectral domain boundaries in cellular automata. Fundamenta Informaticae, 78(3):417–
+         447, 2007.
+[Red01]  Sidney Redner. A Guide to First-Passage Processes. Cambridge University Press, New York, 2001.
+[RR15]   Damien Regnault and Eric Rémila. Lost in self-stabilization. In Mathematical Foundations of Computer
+         Science 2015 - 40th International Symposium, MFCS 2015, Milan, Italy, August 24-28, 2015, Proceedings,
+         Part I, pages 432–443, 2015.
+[S+ 12]  William A. Stein et al. Sage Mathematics Software (Version 4.2.1). The Sage Development Team, 2012.
+         http://www.sagemath.org.
+[The04]  Guillaume Theyssier. Captive Cellular Automata. MFCS 2004, LNCS 3153:427–438, 2004.
+[vN56]   John von Neumann. Probabilistic logics and the synthesis of reliable organisms from unreliable compo-
+         nents. Automata studies, 34:43–98, 1956.
+[Wal82]  Peter Walters. An introduction to ergodic theory, volume 79 of Graduate Texts in Mathematics. Springer-
+         Verlag, New York, 1982.
+[Wol84]  Stephen Wolfram. Universality and complexity in cellular automata. Physica D: Nonlinear Phenomena,
+         10(1):1–35, 1984.
+[ZC96]   Lin Zhengyan and Lu Chuanrong. Limit theory for mixing dependent random variables, volume 378.
+         Springer, 1996.
+
+   Andrés Bello University and Centro de Modelamiento Matemático (Universidad de Chile), San-
+tiago.
+   E-mail address: benjamin.hellouin@gmail.com
+   URL: http://mat-unab.cl/~hellouin/
+
+  Institut de Mathématiques de Toulouse, UMR5219, Université de Toulouse; CNRS UPS IMT,
+F-31062 Toulouse Cedex 9, France.,
+  E-mail address: msablik@math.univ-toulouse.fr
+
+
+                                                       39
+

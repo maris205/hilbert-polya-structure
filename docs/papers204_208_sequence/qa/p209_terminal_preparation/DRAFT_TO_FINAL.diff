@@ -1,0 +1,69 @@
+--- history/draft_01/root_terminal_builds.py
++++ root_terminal_builds.py
+@@ -233,6 +233,11 @@
+     return pins(p for root in roots if root.is_dir() for p in root.rglob('*') if p.is_file())
+ 
+ 
++def is_elf(path):
++    with Path(path).open('rb') as stream:
++        return stream.read(4) == b'\x7fELF'
++
++
+ def runtime_inventory():
+     std = []
+     for directory, folders, files in os.walk(STDLIB):
+@@ -385,8 +390,10 @@
+                    (OUT / (label + '.stdout')).read_bytes(), (OUT / (label + '.stderr')).read_bytes())
+ 
+     def library_capture(label):
+-        objects = sorted({str(p.resolve()) for p in TOOLS if p.name != 'ldd'} |
+-                         {p for p in runtime_before if p.endswith('.so')})
++        candidates = {str(p.resolve()) for p in TOOLS if p.name != 'ldd'}
++        candidates.update(p for p in runtime_before if Path(p).is_relative_to(STDLIB) and p.endswith('.so'))
++        objects = sorted(p for p in candidates if is_elf(p))
++        assert objects, 'no ELF linkage targets'
+         raw = command(label, ['/usr/bin/ldd', *objects], OUT).stdout.decode()
+         assert 'not found' not in raw
+         paths = [Path(p).resolve() for p in re.findall(r'/[^\s():]+', raw) if Path(p).is_file()]
+--- history/draft_01/root_launch_terminal.py
++++ root_launch_terminal.py
+@@ -175,21 +175,30 @@
+         save(out / "UNCLOSED.json", row)
+         print(json.dumps({"status": "UNCLOSED_NO_SEAL", "output": str(out), "exit": row["exit"]}, sort_keys=True))
+         return 1
+-    after = {str(p): pin(p) for p in inputs}
+-    save(out / "INPUTS_AFTER.json", after)
+-    row.update(finished_epoch=time.time(), failure=failure, inputs_unchanged=before == after,
++    after = None
++    try:
++        after = {str(p): pin(p) for p in inputs}
++        save(out / "INPUTS_AFTER.json", after)
++    except BaseException:
++        failure = (failure or "") + "\nINPUT_CLOSURE:\n" + traceback.format_exc()
++    row.update(finished_epoch=time.time(), inputs_unchanged=before == after,
+                cache_absent=not Path(sys.pycache_prefix).exists())
+     for name in ("recorder.stdout", "recorder.stderr"):
+         if (out / name).is_file():
+             row[name + "_pin"] = pin(out / name)
+     row["recorder_closure"] = closed
+     row["recorder_seal"] = closed["manifest"]
+-    late = runtime("AFTER_RECORDER_AND_INPUT_CLOSURE")
+-    save(out / "LAUNCHER_RUNTIME_AFTER.json", late)
+-    late_inputs = {**late["mapped_files"], **{v["path"]: {k: v[k] for k in ("sha256", "bytes", "resolved")}
+-                   for v in late["modules"].values()}}
+-    known = {v["resolved"]: v for v in before.values()}
+-    launcher_closure = all(path in known and known[path] == value for path, value in late_inputs.items())
++    launcher_closure = False
++    try:
++        late = runtime("AFTER_RECORDER_AND_INPUT_CLOSURE")
++        save(out / "LAUNCHER_RUNTIME_AFTER.json", late)
++        late_inputs = {**late["mapped_files"], **{v["path"]: {k: v[k] for k in ("sha256", "bytes", "resolved")}
++                       for v in late["modules"].values()}}
++        known = {v["resolved"]: v for v in before.values()}
++        launcher_closure = all(path in known and known[path] == value for path, value in late_inputs.items())
++    except BaseException:
++        failure = (failure or "") + "\nLAUNCHER_OBSERVATION_CLOSURE:\n" + traceback.format_exc()
++    row["failure"] = failure
+     row["launcher_observed_input_closure"] = launcher_closure
+     okay = failure is None and row["exit"] == 0 and before == after and row["cache_absent"] and launcher_closure
+     row["status"] = "PASS_ROOT_TERMINAL_LAUNCH_NOT_VIEWED" if okay else "FAIL_PRESERVED"

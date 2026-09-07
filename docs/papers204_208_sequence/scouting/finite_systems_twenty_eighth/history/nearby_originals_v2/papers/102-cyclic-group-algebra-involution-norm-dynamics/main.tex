@@ -1,0 +1,462 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\raggedbottom
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\A}{\mathcal A}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\what}[1]{\widehat{#1}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[Involutive norms in cyclic group algebras]{Involutive Norm Dynamics in Split Cyclic Group Algebras:\ Fixed Sequences, Sharp Depth, and Rigidity}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $n\mid(q-1)$ and let inversion on the cyclic group $C_n$ induce the
+canonical involution $*$ of the split group algebra
+$\A_{q,n}=\F_q[C_n]$.  We determine the complete finite dynamics of the
+nonlinear norm map $T(a)=aa^*$.  Character inversion partitions the Fourier
+coordinates into self-inverse blocks $z\mapsto z^2$ and paired blocks
+$(u,v)\mapsto(uv,uv)$.  If $s=\gcd(n,2)$ and $o=(n+s)/2$, then
+\[
+ \#\Fix(T^k)=\bigl(1+\gcd(2^k-1,q-1)\bigr)^o
+\]
+for every $k\geq1$.  Writing $q-1=2^\alpha m$ with $m$ odd, the recurrent
+core has size $(m+1)^o$, while the maximum transient depth is exactly
+$\alpha+\mathbf1_{\{n>s\}}$.  M\"obius inversion gives every cycle and a
+finite product for the Artin--Mazur zeta function.  Finally, phase-space
+size, the fixed sequence, and maximum depth recover $(q,n)$, including the
+ambiguous two-orbit branch.  Literal cyclic convolution over prime fields
+and explicit models of $\F_4$ and $\F_{16}$ independently check the formulas.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and ownership boundary}
+
+Let $q=p^h$ be a prime power, let $n\geq1$ divide $q-1$, and choose a
+generator $g$ of $C_n$.  On
+\[
+ \A_{q,n}=\F_q[C_n]
+   =\left\{\sum_{r=0}^{n-1}a_rg^r:a_r\in\F_q\right\}
+\]
+consider the canonical inversion involution
+\[
+ \left(\sum_{r=0}^{n-1}a_rg^r\right)^*
+   =\sum_{r=0}^{n-1}a_rg^{-r}
+\]
+and the self-map
+\begin{equation}
+ \label{eq:T}
+ T\colon\A_{q,n}\longrightarrow\A_{q,n},\qquad T(a)=aa^*.
+\end{equation}
+The phase space has $q^n$ elements.  The assumption $n\mid(q-1)$ is kept
+throughout: it makes the cyclic algebra split over the stated ground field
+and excludes modular nilpotents from $x^n-1$.
+
+Group-algebra involutions and their symmetric and unitary units are classical;
+see, for example, \citet{BovdiGrishkov2019}.  Finite Fourier decomposition is
+standard \citep{Terras1999}, and scalar power-map functional graphs over
+finite fields have an established literature
+\citep{VasigaShallit2004,QureshiReis2023}.  We assign those ingredients no
+novelty credit.  Our bounded target is their conjunction for the map
+\eqref{eq:T} on the \emph{whole} group algebra, including zero divisors:
+the paired-coordinate synchronization, all fixed and cycle counts, the
+sharp transient depth, and a recovery statement.  A targeted source search
+completed on 29 August 2026 did not locate this exact package, but that
+database- and query-bounded observation is not a priority or novelty claim.
+External circulation remains on \textbf{HOLD} pending a specialist review.
+
+There are two proof routes.  A coefficient-free involution calculation first
+collapses every orbit to ordinary powering inside the symmetric algebra.
+Fourier idempotents then expose independent inversion-orbit blocks and make
+the census exact.  The computational control reverses this order: it starts
+from literal coefficient convolution and cyclic reversal, then compares the
+result with the Fourier and arithmetic predictions.
+
+\section{One-step collapse and Fourier blocks}
+
+Write
+\[
+ \A_{q,n}^+=\{b\in\A_{q,n}:b^*=b\}.
+\]
+The first route requires neither a primitive root nor a choice of
+coordinates.
+
+\begin{proposition}[Algebraic collapse]
+\label{prop:collapse}
+For every $a\in\A_{q,n}$,
+\[
+ T(a)\in\A_{q,n}^+,
+ \qquad
+ T^k(a)=(aa^*)^{2^{k-1}}\quad(k\geq1).
+\]
+Moreover $T(b)=b^2$ for every $b\in\A_{q,n}^+$.
+\end{proposition}
+
+\begin{proof}
+The cyclic group algebra is commutative, so
+$(aa^*)^*=a^*a=aa^*$.  Thus $T(a)$ is symmetric.  If $b=b^*$, then
+$T(b)=bb^*=b^2$.  Starting with $b=aa^*$ and iterating squaring proves the
+displayed formula.
+\end{proof}
+
+For the second route, choose a primitive $n$th root $\omega\in\F_q$.  The
+Fourier transform
+\[
+ \what a(j)=\sum_{r=0}^{n-1}a_r\omega^{jr},\qquad j\in\mathbb Z/n\mathbb Z,
+\]
+is an algebra isomorphism from $\A_{q,n}$ to $\F_q^n$.  Indeed,
+$p\nmid n$ and the usual Fourier matrix is invertible.  Multiplication becomes
+coordinatewise, while
+\[
+ \what{a^*}(j)=\what a(-j).
+\]
+Let
+\begin{equation}
+ \label{eq:so}
+ s=\gcd(n,2),\qquad o=\frac{n+s}{2}.
+\end{equation}
+Here $s$ is the number of self-inverse characters and $o$ is the number of
+orbits of $j\mapsto-j$.
+
+\begin{theorem}[Fourier block normal form]
+\label{thm:normal}
+Under the Fourier isomorphism, a self-inverse character carries the block
+\[
+ z\longmapsto z^2,
+\]
+whereas a two-element orbit $\{j,-j\}$ carries
+\[
+ (u,v)\longmapsto(uv,uv).
+\]
+In particular, for every $k\geq1$ and every $j$,
+\begin{equation}
+ \label{eq:iterate}
+ \what{T^k(a)}(j)
+ =\bigl(\what a(j)\what a(-j)\bigr)^{2^{k-1}}.
+\end{equation}
+The fixed algebra $\A_{q,n}^+$ is isomorphic, as an algebra, to $\F_q^o$.
+\end{theorem}
+
+\begin{proof}
+Coordinatewise multiplication gives
+\[
+ \what{T(a)}(j)=\what a(j)\what a(-j).
+\]
+If $j=-j$, this is $z^2$.  Otherwise the two output coordinates coincide,
+giving the paired block.  After the first step both kinds of blocks square,
+which proves \eqref{eq:iterate}.  Finally, $a=a^*$ is equivalent to
+$\what a(j)=\what a(-j)$ on every inversion orbit; choosing one common
+coordinate on each orbit identifies the fixed algebra with $\F_q^o$.
+\end{proof}
+
+The paired block exhibits the first qualitative anomaly: two independent
+input coordinates synchronize in one step and never separate.  This is the
+only source of an extra transient level beyond scalar squaring.
+
+\section{Fixed points and the complete recurrent census}
+
+For $k\geq1$, put
+\begin{equation}
+ \label{eq:Lk}
+ L_k=1+\gcd(2^k-1,q-1).
+\end{equation}
+
+\begin{theorem}[Exact fixed sequence]
+\label{thm:fixed}
+For every $k\geq1$,
+\begin{equation}
+ \label{eq:fixed}
+ F_k:=\#\Fix(T^k)=L_k^o
+ =\bigl(1+\gcd(2^k-1,q-1)\bigr)^o.
+\end{equation}
+Equivalently, $T^k(a)=a$ precisely when $a\in\A_{q,n}^+$ and each of its
+$o$ symmetric Fourier coordinates satisfies $z^{2^k}=z$.
+\end{theorem}
+
+\begin{proof}
+In a paired block, fixedness under the $k$th iterate and
+\cref{eq:iterate} force
+\[
+ u=v=(uv)^{2^{k-1}}.
+\]
+Writing the common value as $z$ reduces the condition to $z^{2^k}=z$.
+The same equation holds on a self-inverse block.  It has the root $0$ and
+exactly $\gcd(2^k-1,q-1)$ roots in the cyclic group $\F_q^\times$.  The $o$
+inversion orbits are independent, proving \eqref{eq:fixed}.  The equivalent
+description also follows directly from \cref{prop:collapse}: a fixed point of
+$T^k$ lies in the first image and hence is symmetric, where $T^k$ is
+$2^k$th powering.
+\end{proof}
+
+Write
+\begin{equation}
+ \label{eq:decomp}
+ q-1=2^\alpha m,\qquad m\ \text{odd},
+\end{equation}
+and let $\mu_m\leq\F_q^\times$ be the subgroup of order $m$.  Set
+\[
+ R_q=\{0\}\cup\mu_m.
+\]
+For a point $x$ in a finite dynamical system, define
+$\depth(x)=\min\{r\geq0:T^r(x)\text{ is periodic}\}$, and let $D$ be the
+maximum of this depth over the phase space.
+
+\begin{theorem}[Recurrent core and sharp depth]
+\label{thm:depth}
+The recurrent set is, in symmetric Fourier coordinates,
+\begin{equation}
+ \label{eq:recset}
+ \Rec(T)=R_q^o\subseteq\A_{q,n}^+.
+\end{equation}
+Consequently
+\begin{equation}
+ \label{eq:recsize}
+ \#\Rec(T)=(m+1)^o.
+\end{equation}
+The maximum transient depth is
+\begin{equation}
+ \label{eq:depth}
+ D=\alpha+\mathbf1_{\{n>s\}}.
+\end{equation}
+Both bounds are attained, including the cases $n=1,2$ and characteristic
+two.
+\end{theorem}
+
+\begin{proof}
+For $z\neq0$, write $\ord(z)=2^u d$ with $d$ odd.  Repeated squaring removes
+one factor of $2$ from the order at each step until $u=0$.  Thus $z$ is
+periodic under squaring if and only if $z\in\mu_m$; zero is fixed.  Its scalar
+depth is $u$, whose maximum is $\alpha$, attained by a primitive element of
+$\F_q^\times$.
+
+A periodic paired block must already be in the image of its update, hence
+must be diagonal.  On the diagonal it is scalar squaring, so its recurrent
+points are exactly $(z,z)$ with $z\in R_q$.  This proves \eqref{eq:recset}
+and \eqref{eq:recsize}.
+
+Every self-inverse block reaches its recurrent part in at most $\alpha$
+steps.  Every paired block becomes diagonal after one step and then needs at
+most $\alpha$ further squarings.  Hence the right side of \eqref{eq:depth} is
+an upper bound.  More precisely, if $d_q(z)$ denotes scalar depth under
+$z\mapsto z^2$, then a self block $z$ has depth $d_q(z)$, while a paired
+block $(u,v)$ has depth
+\[
+ \depth(u,v)=
+ \begin{cases}
+  d_q(u),&u=v,\\
+  1+d_q(uv),&u\ne v.
+ \end{cases}
+\]
+Indeed, diagonal pairs already follow scalar squaring, whereas a nondiagonal
+pair cannot be periodic and first synchronizes to $(uv,uv)$.  Thus the extra
+level belongs only to genuinely nondiagonal pairs.  If no paired orbit
+exists, then $n=s$, equivalently
+$n\in\{1,2\}$, and a primitive scalar coordinate attains depth $\alpha$.
+If a pair exists, put $(1,\gamma)$ on that block for a primitive
+$\gamma\in\F_q^\times$ and put recurrent values on the other blocks.  The
+first step gives $(\gamma,\gamma)$, which still has scalar depth $\alpha$;
+the total depth is $\alpha+1$.  When $q$ has characteristic two,
+$\alpha=0$; a pair can occur only when $n\geq3$, and the same construction
+attains the remaining one synchronization step.
+\end{proof}
+
+\section{Cycles and the Artin--Mazur zeta function}
+
+Let $P_k$ be the number of points of least period $k$ and $C_k=P_k/k$ the
+number of $k$-cycles.  Let $\mu$ denote the M\"obius function.
+
+\begin{theorem}[All cycles and zeta]
+\label{thm:zeta}
+For every $k\geq1$,
+\begin{align}
+ P_k&=\sum_{d\mid k}\mu(k/d)
+       \bigl(1+\gcd(2^d-1,q-1)\bigr)^o,                         \label{eq:Pk}\\
+ C_k&=\frac1k\sum_{d\mid k}\mu(k/d)
+       \bigl(1+\gcd(2^d-1,q-1)\bigr)^o.                         \label{eq:Ck}
+\end{align}
+If $\ell=\ord_m(2)$ for $m>1$ and $\ell=1$ for $m=1$, then $C_k=0$ unless
+$k\mid\ell$.  The Artin--Mazur zeta function \citep{ArtinMazur1965} is the
+rational finite product
+\begin{equation}
+ \label{eq:zeta}
+ \zeta_T(z)
+ :=\exp\left(\sum_{k\geq1}\frac{F_k}{k}z^k\right)
+ =\prod_{k\mid\ell}(1-z^k)^{-C_k}.
+\end{equation}
+In particular, \eqref{eq:Ck} is a complete cycle inventory, not only an
+asymptotic count.
+\end{theorem}
+
+\begin{proof}
+In any finite map, $F_k=\sum_{d\mid k}P_d$.  M\"obius inversion and
+\cref{thm:fixed} give \eqref{eq:Pk}; division by $k$ gives
+\eqref{eq:Ck}.  On $R_q\setminus\{0\}=\mu_m$, squaring is an automorphism of
+order $\ell$.  Coordinatewise squaring on $R_q^o$ also has order $\ell$, so
+every recurrent period divides $\ell$.  Finally, a cycle of length $k$
+contributes
+\[
+ \exp\left(\sum_{r\geq1}\frac{z^{rk}}r\right)=(1-z^k)^{-1}
+\]
+to the defining exponential.  Multiplying over all cycles proves
+\eqref{eq:zeta}.
+\end{proof}
+
+The small fixed sequences in \cref{tab:signals} show that the arithmetic is
+visible immediately.  The contrast between $q=7$ and $q=16$ at time four,
+for example, detects different odd parts of $q-1$ although both begin
+$4,16,4$ when $n=3$.
+
+\begin{table}[t]
+\centering
+\caption{Exact fixed-point signals; entries list $F_1,F_2,\ldots$.}
+\label{tab:signals}
+\begin{tabular}{@{}cccl@{}}
+\toprule
+$q$ & $n$ & $o$ & first fixed counts \\
+\midrule
+$7$  & $3$ & $2$ & $4,16,4,16,4,16$ \\
+$11$ & $2$ & $2$ & $4,4,4,36,4,4$ \\
+$5$  & $4$ & $3$ & $8,8,8,8,8,8$ \\
+$16$ & $3$ & $2$ & $4,16,4,256,4,16$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Rigidity from temporal data}
+
+The exponent $o$ remembers only the number of inversion orbits, so by itself
+it leaves an odd/even ambiguity in $n$.  Depth and phase size resolve it.
+
+\begin{theorem}[Recovery of the field size and cycle length]
+\label{thm:rigidity}
+Within the family $n\mid(q-1)$, the data
+\begin{equation}
+ \label{eq:data}
+ \left(q^n,\ (F_k)_{k\geq1},\ D\right)
+\end{equation}
+determine the ordered pair $(q,n)$ uniquely.  More explicitly:
+\begin{enumerate}
+\item $o=\log_2F_1$;
+\item $m=\max_{k\geq1}F_k^{1/o}-1$;
+\item the only possible lengths are $n=2o-1$ and, when $o\geq2$,
+      $n=2o-2$;
+\item for a candidate $n$, put
+\[
+ \varepsilon_n=\mathbf1_{\{n>\gcd(n,2)\}},\qquad
+ q_n=2^{D-\varepsilon_n}m+1.
+\]
+The unique candidate satisfying the phase-size identity $q_n^n=q^n$ (and
+the family conditions) is the original pair.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Since $L_1=2$, \cref{thm:fixed} gives $F_1=2^o$.  Because $2^k-1$ is odd,
+\[
+ \gcd(2^k-1,q-1)=\gcd(2^k-1,m).
+\]
+If $m>1$, some $k$ satisfies $2^k\equiv1\pmod m$; for $m=1$ the claim is
+immediate.  Thus the maximum in item 2 is exactly $m$.  Solving
+$2o=n+\gcd(n,2)$ gives precisely the candidates in item 3, and
+\cref{thm:depth} gives the formula for $q_n$.
+
+It remains to show that the candidates cannot both survive.  If $o=1$, only
+$n=1$ is positive.  If $o\geq3$, both candidate lengths have paired
+characters, so both have $\varepsilon_n=1$ and hence the same candidate
+field size.  Their distinct positive exponents cannot give the same phase
+size.
+
+The only delicate branch is $o=2$, where the candidates are $n=2$ and
+$n=3$.  Write their reconstructed field sizes as $q_2$ and $q_3$.  Their
+different synchronization corrections give
+\[
+ q_2-1=2(q_3-1).
+\]
+If both also matched the phase size, then $q_2^2=q_3^3$, so coprimality of
+$2$ and $3$ would give integers $q_2=r^3$ and $q_3=r^2$ with $r\geq2$.
+Substitution yields
+\[
+ r^3-1=2(r^2-1),\qquad
+ (r-1)(r^2-r-1)=0,
+\]
+which has no integer solution with $r\geq2$.  Hence at most one candidate
+survives in every branch, while the true one necessarily does.
+\end{proof}
+
+\begin{remark}[Scope of rigidity]
+The phase-size datum in \eqref{eq:data} is the cardinality of the given
+finite phase space, not an invariant inferred from the zeta function.  The
+theorem is therefore a qualified recovery statement inside the split cyclic
+family, not a claim that zeta functions classify arbitrary finite maps or
+group algebras.
+\end{remark}
+
+\section{Exact controls and limitations}
+
+The accompanying verifier uses no computer-algebra package.  For each stored
+small lane it enumerates all coefficient vectors, computes cyclic convolution
+and reversal literally, constructs the full functional graph, and checks:
+the Fourier product rule, \cref{eq:iterate,eq:fixed,eq:recsize,eq:depth}, the
+M\"obius cycle ledger, and the zeta exponents.  Prime-field lanes include
+$(q,n)=(3,1),(3,2),(5,2),(5,4),(7,3),(11,2),(13,3)$.  Separate polynomial
+basis implementations of
+\[
+ \F_4=\F_2[t]/(t^2+t+1),\qquad
+ \F_{16}=\F_2[t]/(t^4+t+1)
+\]
+exercise genuine extension-field arithmetic at $n=3$.  A broader arithmetic
+lane checks the recovery algorithm for all divisors $n\mid(q-1)$ over a
+registered list of prime powers.  The stored output is a deterministic exact
+certificate, not numerical evidence in place of the proofs.
+
+The splitting hypothesis is essential to the present formulas.  When
+$n\nmid(q-1)$, Frobenius acts nontrivially on character blocks; when
+$p\mid n$, the group algebra is not semisimple.  Neither regime is covered
+here.  Likewise, the cited unit literature focuses largely on units, whereas
+the transient maximum here is often attained using a whole-algebra block;
+this distinction motivates the calculation but does not establish priority.
+
+There is also an internal firewall against P86.  That paper studies the
+spatial two-block factor $Y_i=U_iU_{i+1}$ of an iid bi-infinite field process,
+with support entropy and prediction memory as its observables.  Here a paired
+product is only one Fourier block of a finite self-map; after one update it
+synchronizes and enters scalar squaring, and the observables are temporal
+fixed counts, cycles, and depth.  The shared multiplication primitive is
+therefore disclosed rather than counted as a separate contribution.
+
+\section*{Data and code availability}
+
+The exact verifier, its stored output, claim-to-evidence ledger, and build
+instructions accompany this internal manuscript.  No external data are used.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

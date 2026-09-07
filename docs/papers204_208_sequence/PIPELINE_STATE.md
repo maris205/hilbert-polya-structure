@@ -1,7 +1,7 @@
 # Batch after P203 — recovery state
 
 Started 2026-09-05 UTC on the user's “确认，下一轮”, reaffirmed by “继续”.
-Status: **P205_P207_P208_COMPLETE / P209_ROUND1_COMPLETE_B_ACTIVE / ONE_SEAT_OPEN / HOLD_EXTERNAL**.
+Status: **P205_P207_P208_COMPLETE / P209_TERMINAL_BUILDS_AND_VIEWS_DONE_ARTIFACT_GATE_PENDING / ONE_SEAT_OPEN / HOLD_EXTERNAL**.
 The folder name reserves a five-seat working label, not five accepted paper IDs.
 
 ## Scope and next obligation
@@ -55,8 +55,18 @@ A pair, two 135,605-check runs on the original 3,414 states; the
 same A process. Root completed the full final 1,342-payload review closure,
 preserving all 1,227 initial payloads, and physically froze 2,003-payload
 Round1. All 1,989 core/1,985 author bytes remain unchanged. A fresh distinct
-nonauthor p209_b_reviewer is now assigned actual B from that pinned Round1;
-no B verdict, Round2 or terminal acceptance yet. See
+nonauthor p209_b_reviewer completed actual initial B from that pinned
+Round1. Root accepted the complete originals and ran the unchanged B code
+twice, 54,794 checks each on all 3,414 states, with raw canonical equality
+and full 5,164-input closure. The same B has actually accepted the exact
+no-change response. Root checked the complete 1,472-payload final package,
+all 128,298 current read paths twice and preserved all initial bytes and
+failures. Physical 2,021-payload Round2 now exists after the actual accepted
+B/root gate and a separate 9,998-path preflight. Root's full physical
+Round2 inspection has now passed: 12,026 current paths twice, all7,307
+historical roles and259+39 links. Two actual source-only terminal builds
+and all-four actual root page views passed. Complete terminal dependency/
+artifact closure and the lifecycle follow-up are still pending. See
 [final A acceptance](qa/P209_A_ROOT_DELTA_INSPECTION.md) and
 [actual Round1/root physical closure](qa/P209_ROUND1_ROOT_INSPECTION.md).
 The requested five-paper batch is not complete.
@@ -71,7 +81,7 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | central integration, original checks and scoped Git | P205/P207/P208 complete; P209 accepted A/full root closure/physical Round1, distinct B active; one seat open; checkpoint f8ee398c actually pushed, later work not yet synced |
+| Words / local maps | root | central integration, original checks and scoped Git | P205/P207/P208 complete; P209 Round2 root accepted, actual terminal pair/four-page views done, full artifact pending; one seat open; private checkpoint remains 2974f8ea |
 | Combinatorial objects | batch197_fosp_gate | closed scouting/finite_systems_eleventh/; now idle | eleventh root inspection and 32/7 pins complete, no promotion |
 | Algebra / finite geometry | batch197_lzk_gate | sealed scouting/finite_systems_seventeenth/; now idle | root accepted bounded NO_FRESH_SLATE desk, zero scientific executions |
 | Graphs / relations | batch197_fifth_scout | sealed scouting/finite_systems_fourteenth/; now idle | fourteenth root-verified NO_PROMOTION, OFS/P208 proof/code unread and B eligibility preserved |
@@ -92,11 +102,20 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 | ORR bounded second clock attempt | nineteenth_finite_scout | sealed scouting/ORR_SECOND_CLOCK_ATTEMPT/ | root full proof and 6/7 closure complete; exact lower/quadratic upper proved, sharp linear clock still open, NO_PROMOTION |
 | Twenty-sixth fresh finite scout | twenty_sixth_finite_scout | sealed scouting/finite_systems_twenty_sixth/; now idle | root full originals/76 payloads/26 snapshots/5,435 search pins accepted NO_PROMOTION; three literals, zero science |
 | Twenty-seventh fresh finite scout | twenty_seventh_finite_scout | sealed scouting/finite_systems_twenty_seventh/ | root accepted NO_PROMOTION after full originals/148 payloads/6,420 current paths and raw comparisons; three literals/two families, one original pilot |
-| Twenty-eighth fresh finite scout | twenty_eighth_finite_scout | scouting/finite_systems_twenty_eighth/ only | one matrix literal author HOLD_PROOF_SOURCE, zero science; actual discovery-scope failure preserved; final sealing/root closure pending |
-| Twenty-ninth bounded finite scout | twenty_seventh_finite_scout | scouting/finite_systems_twenty_ninth/ only | explicitly assigned fresh bounded final-seat search outside gcd and matrix directions; no automatic next lane or new batch |
+| Twenty-eighth fresh finite scout | twenty_eighth_finite_scout | sealed scouting/finite_systems_twenty_eighth/; now idle | root accepted HOLD_PROOF_SOURCE / NO_PROMOTION after full originals/327 payloads/6,827 current paths; one literal, zero science, real scope/source failures preserved |
+| Twenty-ninth bounded finite scout | twenty_seventh_finite_scout | sealed scouting/finite_systems_twenty_ninth/ | root full168-payload/5512-path closure; MCC exact P169 restriction, one literal/zero science, NO_PROMOTION |
+| Thirtieth fresh finite scout | thirtieth_finite_scout | sealed scouting/finite_systems_thirtieth/ | root full170-payload/8122-path closure; MRT complete old signed-power adapter, one literal/zero science, NO_PROMOTION |
+| Thirty-first fresh finite scout | thirty_first_finite_scout | sealed scouting/finite_systems_thirty_first/ | root full143/1849-path closure accepted TCF temporal-wrapper NO_PROMOTION; one literal/zero science; original P209 access failure retained |
+| Thirty-second bounded finite scout | thirty_first_finite_scout | sealed scouting/finite_systems_thirty_second/ | root full153/1411-path closure accepted ONI NO_PROMOTION; original n0..5 pilot only; no new admission |
+| Thirty-third bounded finite scout | thirty_third_finite_scout | sealed scouting/finite_systems_thirty_third/ | author-negative OTC; initial wrong-cwd checksum and separate supplement retained; root originals pending |
+| Thirty-fourth bounded finite scout | thirty_third_finite_scout | scouting/finite_systems_thirty_fourth/ only | explicitly assigned different non-graph final-seat scope, not a new batch; no admitted theorem contract |
+| Thirty-fifth bounded finite scout | twenty_seventh_finite_scout | scouting/finite_systems_thirty_fifth/ only | separately assigned bounded non-graph/algebraic final-seat lane; no admitted theorem contract |
 | P209 author | p208_b_reviewer | sealed paper author set and qa/scout25_documentary_audit/; now idle | P209 author package adopted; ineligible to review P209; separate scout-25 documentary audit complete and root-inspected |
 | P209 manuscript A | p209_a_reviewer | sealed reviews/p209_a/; now idle | exact no-change delta actually accepted; root final 1,342-payload/124,281-path closure passed, original 1,227 preserved |
-| P209 manuscript B | p209_b_reviewer | reviews/p209_b/ only | fresh distinct nonauthor assigned actual B from complete 2,003-payload Round1; independent representation/code design required before author/A checker inspection |
+| P209 manuscript B | p209_b_reviewer | sealed reviews/p209_b/ | actual accepted exact delta; root final1472/128298-path complete closure passed; all original bytes/failures preserved |
+| P209 Round2 preparation | thirtieth_finite_scout | sealed qa/p209_round2_preparation/ | root actual preflight passed; physical2021-payload Round2 and full root physical closure passed; failed first root expectation preserved |
+| P209 terminal preparation | twenty_seventh_finite_scout | sealed qa/p209_terminal_preparation/ | root fully read final code/diff and actual11732-path preflight; root real terminal pair/all-four views now passed, full artifact pending |
+| P209 terminal artifact preparation | p209_b_reviewer | qa/p209_terminal_artifact_preparation/ only | separately assigned infrastructure-only adaptation; no execution or terminal verdict |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -869,9 +888,163 @@ last seat, not another batch. No P210 admission exists.
 These milestones and the new central copies are later than actual pushed
 f8ee398c; they are not implicitly present in that historical Git ref.
 
+## Actual Round1 private checkpoint and twenty-eighth root closure
+
+The confirmed private push is now **2974f8ea**, archiving accepted A,
+physical Round1 and closed scouts26–27. All twelve named manifests and
+8,056 Git-object referents passed on the exact committed tree; the remote
+ref matched, 0/0 and clean. The real prestage refusal of 51 ignored
+manifest payloads and scoped correction are retained. Active B and scouts
+28/29 were excluded; later30, root28 closure and this index/receipt update
+are outside that historical ref. See [actual sync evidence](GIT_SYNC_RECEIPT.md).
+The prior STATE 4b376b..., PIPELINE aeb4ca... and receipt 2f699... were
+[physically copied](qa/central_lifecycle_p209_round1_push/README.md) before
+the lifecycle edit; no scientific inputs changed.
+
+The [twenty-eighth root closure](scouting/TWENTY_EIGHTH_ROOT_INSPECTION.md)
+is complete: full originals and code, 327-payload seal, 13 snapshot
+manifests, all 52 documentary commands, 6,586 path/hash keys and 6,827
+current read paths checked twice. CTM's complete one-step inverse and
+zero-fibre count do not classify the invertible temporal sector or clear
+direct ownership. One literal, zero scientific executions, NO_PROMOTION.
+All original scope/source failures remain; root's later hashing of the
+42 protected references does not restore the scout's reviewer eligibility.
+The SRT/P112 shorthand is corrected by the actual threshold adapter, not
+an asserted literal identity. Twenty-ninth remains under its bounded
+closure task; the separately assigned thirtieth has a fresh bounded
+history-first scope. Neither is a new batch or a P210 admission.
+
 Next: finish P209's distinct B, accepted delta, physical Round2 and terminal gates;
 continue final-seat bounded scouting and replace
 failed directions with fresh bounded scouting, then admit only proved,
 nonduplicate conjunctions. No five-paper completion claim is available.
 Routine phase transitions use the standing authorization without another
 confirmation. Preserve failures and scope limits; all external release remains held.
+
+## P209 initial B / root strict pair and scouts29–30 closure
+
+The actual [initial B/root acceptance](qa/P209_B_ROOT_INITIAL_INSPECTION.md)
+passes the unchanged narrow contract: all 1,298 initial payloads, ten
+nested seals, 2,004 frozen pins, 127,544 recorded dependencies and 127,591
+current read paths twice. Two real documentary audit failures remain with
+their separate corrected code and full streams. The new root B pair has
+two 54,794-check executions on all original 3,414 states, 85 zero-exit
+commands and complete raw canonical equality. Root separately checked its
+462+10 payloads, all 5,164 inputs and 6,970 current paths twice.
+The [exact no-change response](P209_B_RESPONSE.md), SHA c2cab3d2…, is now
+assigned to the same actual B process for delta; no accepted delta,
+physical Round2 or terminal completion is inferred. Initial DELTA and
+initial seal must survive under explicit physical historical roles.
+
+The [twenty-ninth root closure](scouting/TWENTY_NINTH_ROOT_INSPECTION.md)
+passed all 168 payloads, 37,873 pin rows and 5,512 current paths twice.
+MCC is a full literal P169 restriction; its correct sharp queue clock and
+inverse do not rescue the spent mechanism. One literal, zero science.
+The [thirtieth root closure](scouting/THIRTIETH_ROOT_INSPECTION.md) passed
+all 170 payloads, 77,206 original pin rows, five 7,719-file searches and
+8,122 current paths twice. MRT's entire ordered time formula is the old
+involution sandwich with commuting coordinate swap, not only a product
+factor. One literal, zero science, NO_PROMOTION. Original metadata/hash
+scope failures and the real truncated first root return remain.
+
+Thirty-first is author-sealed negative but still awaits complete root
+original closure; its accidental access to 22 P209 files is disclosed and
+disqualifies independent P209 review. Thirty-second has a separately
+authorized original-only bounded final-seat scope; it is not another
+batch. Round2 and terminal infrastructure preparations do not authorize
+execution before actual B acceptance and root closure.
+
+Current prior STATE62eb…/PIPE29c…/GITa674… were
+[physically copied and byte-checked before this edit](qa/central_lifecycle_p209_b_initial/README.md).
+All science, accepted earlier reviews and frozen rounds remain unchanged.
+These milestones are later than confirmed private push 2974f8ea and are
+not implicitly in that historical ref. Three complete, one in delta review
+and one open is not five-paper completion. HOLD_EXTERNAL remains.
+
+## Actual B acceptance and physical Round2; root closure next
+
+The same B actually accepted the exact no-change response. Root read the
+complete actual delta, failed/corrected checkers and wrappers, full diff,
+intake/preservation/seal code, and checked the full final package. See
+[root accepted B](qa/P209_B_ROOT_DELTA_INSPECTION.md): 1,472 payloads,
+128,298 current read paths twice, all 127,544 old documentary dependencies,
+both failed/successful delta maps and all original science/build keys.
+The first outer wrapper's real exit1/child exit0 filename collision remains;
+its separate V2 wrapper/child both passed. Initial1,298 means1,297 unchanged
+same paths plus one exact old DELTA alias, not an overwritten initial review.
+
+Root's [Round2 preflight](qa/P209_ROUND2_PREPARATION_ROOT_INSPECTION.actual.json)
+checked all13 preparation payloads,9,998 current paths,7,307 historical
+path/hash roles,259 historical links and39 new anchor links. The actual
+[physical freezer](qa/P209_ROUND2_FREEZE.actual.json) then completed exit0:
+2,021 payloads, seal ac2a6d8f…, preserving2,003 core files and1,985 author
+payloads, with15 new acceptance anchors and one actual historical Git copy.
+The original whole-paper manifest remains its exact pre-Round2 historical
+role; it has not yet been refreshed. Root's complete physical Round2
+inspection, later whole-manifest refresh and terminal gates are next.
+
+The [thirty-first root closure](scouting/THIRTY_FIRST_ROOT_INSPECTION.md)
+passed143 payloads,9,860 original input rows and1,849 current paths twice,
+plus7 actual raw comparisons. TCF's whole-carrier time law is completely
+deducted through the captive/old-ballistic adapter; one literal, zero
+science, NO_PROMOTION. Initial22 protected P209 paths and119 build-copy
+paths remain disclosed; root hashing does not restore reviewer eligibility.
+Thirty-second is sealed author-negative ONI and awaits full root originals;
+the separately assigned thirty-third has a fresh bounded scope in this
+same last seat. No P210 admission or another batch is inferred.
+
+Terminal build and artifact infrastructures are preparation only. The
+original author-pinned PAPER_STATUS.md and ROOT_ADOPTION.md will remain
+immutable; later status belongs in a separate ROOT_LIFECYCLE.md. No terminal
+build, final page view, artifact acceptance or paper completion has occurred.
+The previous STATE94cc…/PIPEa1ad…/GITa674… were physically preserved and
+raw-byte checked [before this lifecycle edit](qa/central_lifecycle_p209_b_delta/README.md).
+All this work remains later than confirmed private push2974f8ea.
+
+## P209 actual terminal pair and every-page views; artifact gate pending
+
+Root accepted the [complete physical Round2](qa/P209_ROUND2_ROOT_INSPECTION.md):
+all2,021 payloads,2,003 unchanged core,1,985 author payloads,7,307 historical
+path/hash roles and259+39 links. All9,996 actually consumed freezer keys
+were unchanged. The first root checker wrongly expected two live-control
+aliases even though neither live control was consumed; its real failure
+and source remain, and a separate V2 requires the actual empty drift set.
+
+The [terminal preflight](qa/P209_TERMINAL_PREPARATION_ROOT_INSPECTION.actual.json)
+read the full190-payload preparation/final code/diff, checked11 old originals,
+eight sources and25 actual documentary commands, then ran19 fresh cmp and
+six full raw diffs. All11,732 current paths were checked twice. It verified
+the actual accepted A/B and Round2 roles before either terminal output existed.
+
+The [actual terminal pair](qa/P209_TERMINAL_BUILD_EXECUTION.actual.json)
+then exited zero. Its225-payload terminal seal2034f023… and10-payload outer
+seal6cfa3166… preserve32 successful commands, two physical source-only builds,
+all logs/streams and before/after known-input inventories. Each PDF is four
+pages/280,267 bytes, hashca2e3819…, with20 embedded fonts and no final
+undefined/overfull/underfull/warning/rerun diagnostics. All three actual raw
+PDF comparisons passed. Root [actually displayed and viewed all four pages](qa/P209_TERMINAL_ROOT_VIEWS.md),
+finding no visual defect; no viewing is inferred from matching hashes.
+
+The [separate root lifecycle](../../papers/209-ordered-fibre-threading/ROOT_LIFECYCLE.md)
+is explicitly ARTIFACT_GATE_PENDING. The complete8,231-payload whole-paper
+manifest includes the new terminal set and that pending status. The exact
+old8,004-entry whole seal was [preserved at its original base](qa/p209_postterminal_rollup/README.md),
+as were the old5,982 Round2 anchor and all author/frozen/review bytes.
+Full terminal input/artifact closure and the final lifecycle follow-up remain
+unfinished. Three complete, P209 pending final artifact and one open is not
+five-paper completion.
+
+The [thirty-second root closure](scouting/THIRTY_SECOND_ROOT_INSPECTION.md)
+passed153 payloads,22 receipts/5,043 original input rows,1,253 scoped originals,
+1,411 current paths twice and five actual raw comparisons. ONI's complete
+fixed class/generic inflation clock and bipartite inverse are classical
+mechanisms; the missing full temporal/inverse/extremal residual is not filled
+by the n0…5 pilot. NO_PROMOTION. Thirty-third's sealed OTC negative package
+still awaits root originals; two newly assigned bounded lanes34/35 scout
+different non-graph directions within the same last seat. No P210 or new batch.
+
+The previous STATEb3e9…/PIPE9dd4…/GITa674… were physically copied and
+[actually raw-byte checked before this update](qa/central_lifecycle_p209_terminal/README.md).
+Private checkpoint planning is done, but no new push beyond2974f8ea has yet
+occurred. Active artifact preparation and scouts34/35 are excluded from a
+checkpoint until separately selected at actual completed boundaries.

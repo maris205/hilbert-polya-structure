@@ -1,0 +1,100 @@
+\documentclass[a4paper,10pt]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\X}{\mathcal X}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\inc}{\mathrel{\|}}
+\title[Least alternating-rectangle switching]{Least Alternating-Rectangle Switching:\\
+A Width-Uniform Tail Bound and Exact Predecessors}
+\author{Anonymous}
+\date{}
+\keywords{binary matrix, interchange, finite dynamical system, lexicographic
+scheduler, transient bound, inverse fibre}
+\begin{document}
+\begin{abstract}
+For $r,s\ge2$, on labelled binary $r$ by $s$ matrices, repeatedly complement the
+lexicographically first alternating rectangle, with the row pair ordered
+before the column pair. A matrix without such a rectangle is held fixed.
+We prove that the first selected row is invariant and classify every
+recurrent state: all nonfixed cycles have length two. Every entrance
+time is at most $2r-3$, and this bound is attained for every $r\ge2$
+and $s\ge r+1$. The exact maximum for narrower boxes is not asserted.
+For each target, an exclusive-column prefix and row-containment test
+reconstruct every predecessor without running the full selector on
+candidate sources. The maximum fibre is $(r-1)(s-1)$, attained at exactly
+two targets except at $2$ by $2$, where all sixteen targets maximize.
+The local interchange, margin invariants, and lonesum fixed class are
+classical; the results concern the specified autonomous schedule.
+\end{abstract}
+\maketitle
+
+\section{The literal scheduler and classical background}
+
+Fix $r,s\ge2$ and let $\X_{r,s}=\{0,1\}^{r\times s}$, with row indices
+$0,\ldots,r-1$ and column indices $0,\ldots,s-1$. Order rectangles
+\[
+ q=(i,k,a,b),\qquad i<k,\quad a<b,
+\]
+lexicographically in the displayed coordinate order. A rectangle is
+alternating when its selected submatrix is one of
+\[
+ \begin{pmatrix}1&0\\0&1\end{pmatrix},
+ \qquad
+ \begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\]
+Write $q(A)$ for the least alternating rectangle, when one exists, and
+$A^q$ for the matrix obtained by complementing its four entries. Define
+\begin{equation}\label{eq:map}
+ F(A)=
+ \begin{cases}A^{q(A)},&q(A)\text{ exists},\\ A,&\text{otherwise}.\end{cases}
+\end{equation}
+All entries outside the chosen rectangle remain unchanged. The rule is
+autonomous and deterministic on the full labelled carrier.
+
+The move is Ryser's classical interchange
+\cite[Section 3]{ryser1957combinatorial}. Each changed row and column
+contains one zero and one one, so all margins are invariant.
+% <!--ref:ryser1957combinatorial--><!--anchor:section:3-->
+The fixed matrices are the classical lonesum matrices, equivalently those
+without an alternating rectangle; this characterization and the
+poly-Bernoulli census are background \cite[Section 1]{brewbaker2008combinatorial}.
+% <!--ref:brewbaker2008combinatorial--><!--anchor:section:1-->
+No new fixed-class counting result is claimed here.
+Baggett and Yan \cite[Section 2.1 and the proof of Lemma 5.10]{baggett2026interchange}
+study the full fixed-margin interchange graph using line fibres,
+quotients and compression. Their row-line fibres fix a row pattern, whereas
+the fibres below are preimages of the self-map \eqref{eq:map}. The
+inspected compression chooses moves toward a prescribed basis, not the
+repeated least-current-rectangle update.
+% <!--ref:baggett2026interchange--><!--anchor:section:5-->
+This is a comparison with that specified preprint version, not a claim
+that the general interchange framework is new.
+
+Let $A_i\subseteq\{0,\ldots,s-1\}$ be the support of row $i$.
+Two sets are comparable if one contains the other; write $P\inc Q$
+for incomparability. For an incomparable row pair put
+$D=A_i\setminus A_k$ and $E=A_k\setminus A_i$. Its least alternating
+rectangle uses the two columns $\min D$ and $\min E$, sorted increasingly.
+Indeed every alternating rectangle chooses one element of each set,
+and this choice lexicographically minimizes the sorted pair. Thus
+\eqref{eq:map} first chooses the least incomparable row pair.
+No rectangle exists exactly when all row supports form a containment chain.
+
+For any finite map, let $\tau(A)$ denote the first time its orbit enters
+a directed cycle. The row geometry below gives an explicit recurrent

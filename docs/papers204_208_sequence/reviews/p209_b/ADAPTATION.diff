@@ -1,0 +1,68 @@
+--- infrastructure_originals/record_review.py
++++ record_review.py
+@@ -23,7 +23,7 @@
+ SCRIPT = Path(__file__).resolve()
+ PAPER = SCRIPT.parent
+ ROOT = PAPER.parents[3]
+-FREEZE = ROOT / "papers/209-ordered-fibre-threading/frozen_round0"
++FREEZE = ROOT / "papers/209-ordered-fibre-threading/frozen_round1"
+ PYTHON = Path(sys.executable).resolve()
+ STDLIB = Path(sysconfig.get_path("stdlib")).resolve()
+ ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
+@@ -184,9 +184,9 @@
+ 
+ def science():
+     check_manifest(FREEZE)
+-    require(info(FREEZE / "SHA256SUMS")["sha256"] == "0f77871539b374027ab42910471cc74cefcd570e214a8242ac0a30c7a83e70ba", "EXACT_ROUND0_SEAL")
++    require(info(FREEZE / "SHA256SUMS")["sha256"] == "c93e16cf20d2eb87f3b454fbdb3576e52c6c79fb74c8712a277efeab7e60ce57", "EXACT_ROUND1_SEAL")
+     files = [p for p in FREEZE.rglob("*") if p.is_file()]
+-    files += [PAPER / n for n in ("verify.py", "bootstrap.py", "record_review.py", "launch_review.py", "PARAMETERS.json", "INDEPENDENCE_COMMITMENT.md", "COMMITMENT_PINS.sha256", "prepare_infrastructure.py", "INFRASTRUCTURE_INPUT_PINS.sha256", "ADAPTATION.diff", "INPUT_PINS.sha256")]
++    files += [PAPER / n for n in ("verify.py", "bootstrap.py", "record_review.py", "launch_review.py", "PARAMETERS.json", "INDEPENDENCE_DESIGN.md", "INDEPENDENCE_COMMITMENT.sha256", "intake.py", "prepare_infrastructure.py", "INFRASTRUCTURE_INPUT_PINS.sha256", "ADAPTATION.diff", "INPUT_PINS.sha256")]
+     files += [p for p in (PAPER / "infrastructure_originals").rglob("*") if p.is_file()]
+     if (PAPER / "CANONICAL.json").is_file():
+         files.append(PAPER / "CANONICAL.json")
+@@ -407,12 +407,12 @@
+         require(not cache.exists(), "CHILD_CACHE_NOT_ABSENT")
+         row, mapped = command(argv, folder, folder, "producer", ENV)
+         payload = json.loads((folder / "producer.stdout").read_bytes())
+-        require(payload["schema"] == "p209-review-a-independent-v1"
+-                and sum(b["state_count"] for b in payload["boxes"]) == 3414
++        require(payload["schema"] == "p209-b-ports-constructive-carrier-v1"
++                and sum(b["states"] for b in payload["boxes"]) == 3414
+                 and [b["n"] for b in payload["boxes"]] == list(range(6))
+-                and all(len(b["records"]) == b["state_count"] for b in payload["boxes"]), "PRODUCER_PAYLOAD_SCOPE")
++                and all(len(b["rows"]) == b["states"] for b in payload["boxes"]), "PRODUCER_PAYLOAD_SCOPE")
+         details = {"checks": payload["checks"], "total_states": 3414,
+-                   "boxes": [{k: b[k] for k in ("n", "state_count", "partition_count", "maximum_fibre", "extremizer_ranks")}
++                   "boxes": [{k: b[k] for k in ("n", "states", "recurrent", "image_size", "max_inverse")}
+                              for b in payload["boxes"]]}
+ 
+     except BaseException:
+@@ -671,14 +671,14 @@
+             require(not closed["uncovered"] and not closed["bytecode"] and not late["cache_exists"], "OBSERVED_RUNTIME_CLOSURE", closed)
+         except BaseException:
+             failures.append({"stage": "observed_closure", "traceback": traceback.format_exc()})
+-        value = {"status": "PASS_REVIEW_A_" + mode.upper() if not failures else "FAIL_PRESERVED",
++        value = {"status": "PASS_REVIEW_B_" + mode.upper() if not failures else "FAIL_PRESERVED",
+                  "mode": mode, "failures": failures, "result": result,
+                  "science_inputs": len(scientific), "runtime_files": len(runtime_before),
+                  "known_all_inputs_including_capsules": len(complete_before),
+                  "ldd_commands": sum(r["tag"].startswith("ldd_") for r in COMMAND_RECORDS),
+                  "ldd_commands_completed_exit_zero": sum(r["tag"].startswith("ldd_") and r["command"]["exit"] == 0 for r in COMMAND_RECORDS),
+                  "linkage_returned_complete": bool(link_rows), "tex_resources": len(tex_before.get("files", {})),
+-                 "scope": "P209 A actual verifier/build execution evidence; no review verdict, delta or terminal acceptance.",
++                 "scope": "P209 B actual verifier/build execution evidence; no review verdict, delta or terminal acceptance.",
+                  "observations": "Early/late parent and scientific-child modules/maps; sampled direct-child maps; conservative stdlib, OS libraries, loader/locale/gconv/config inventories; TeX per-pass .fls. No continuous or grandchild tracing, no OS-hermetic claim.",
+                  "external": "HOLD_EXTERNAL"}
+         save(out / "RECEIPT.json", value)
+--- infrastructure_originals/launch_review.py
++++ launch_review.py
+@@ -53,7 +53,7 @@
+     if seen != {p.relative_to(base).as_posix() for p in base.rglob("*") if p.is_file() and p != manifest}:
+         raise RuntimeError("Recorder manifest is not complete")
+     receipt = json.loads((base / "RECEIPT.json").read_bytes())
+-    if receipt["mode"] != mode or (exit_code == 0 and receipt["status"] != "PASS_REVIEW_A_" + mode.upper()):
++    if receipt["mode"] != mode or (exit_code == 0 and receipt["status"] != "PASS_REVIEW_B_" + mode.upper()):
+         raise RuntimeError("Recorder receipt disagrees with actual normal exit")
+     if exit_code != 0 and receipt["status"] != "FAIL_PRESERVED":
+         raise RuntimeError("Nonzero recorder exit lacks a closed failure receipt")

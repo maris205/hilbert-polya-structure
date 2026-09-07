@@ -1,0 +1,42 @@
+--- history/draft_01/root_launch_terminal.py
++++ root_launch_terminal.py
+@@ -175,21 +175,30 @@
+         save(out / "UNCLOSED.json", row)
+         print(json.dumps({"status": "UNCLOSED_NO_SEAL", "output": str(out), "exit": row["exit"]}, sort_keys=True))
+         return 1
+-    after = {str(p): pin(p) for p in inputs}
+-    save(out / "INPUTS_AFTER.json", after)
+-    row.update(finished_epoch=time.time(), failure=failure, inputs_unchanged=before == after,
++    after = None
++    try:
++        after = {str(p): pin(p) for p in inputs}
++        save(out / "INPUTS_AFTER.json", after)
++    except BaseException:
++        failure = (failure or "") + "\nINPUT_CLOSURE:\n" + traceback.format_exc()
++    row.update(finished_epoch=time.time(), inputs_unchanged=before == after,
+                cache_absent=not Path(sys.pycache_prefix).exists())
+     for name in ("recorder.stdout", "recorder.stderr"):
+         if (out / name).is_file():
+             row[name + "_pin"] = pin(out / name)
+     row["recorder_closure"] = closed
+     row["recorder_seal"] = closed["manifest"]
+-    late = runtime("AFTER_RECORDER_AND_INPUT_CLOSURE")
+-    save(out / "LAUNCHER_RUNTIME_AFTER.json", late)
+-    late_inputs = {**late["mapped_files"], **{v["path"]: {k: v[k] for k in ("sha256", "bytes", "resolved")}
+-                   for v in late["modules"].values()}}
+-    known = {v["resolved"]: v for v in before.values()}
+-    launcher_closure = all(path in known and known[path] == value for path, value in late_inputs.items())
++    launcher_closure = False
++    try:
++        late = runtime("AFTER_RECORDER_AND_INPUT_CLOSURE")
++        save(out / "LAUNCHER_RUNTIME_AFTER.json", late)
++        late_inputs = {**late["mapped_files"], **{v["path"]: {k: v[k] for k in ("sha256", "bytes", "resolved")}
++                       for v in late["modules"].values()}}
++        known = {v["resolved"]: v for v in before.values()}
++        launcher_closure = all(path in known and known[path] == value for path, value in late_inputs.items())
++    except BaseException:
++        failure = (failure or "") + "\nLAUNCHER_OBSERVATION_CLOSURE:\n" + traceback.format_exc()
++    row["failure"] = failure
+     row["launcher_observed_input_closure"] = launcher_closure
+     okay = failure is None and row["exit"] == 0 and before == after and row["cache_absent"] and launcher_closure
+     row["status"] = "PASS_ROOT_TERMINAL_LAUNCH_NOT_VIEWED" if okay else "FAIL_PRESERVED"

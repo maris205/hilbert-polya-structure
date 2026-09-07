@@ -1,0 +1,769 @@
+--- original_snapshot/p208_terminal_v2.py
++++ root_terminal_builds.py
+@@ -1,8 +1,9 @@
+ #!/usr/bin/env python3
+-"""Gated P208 terminal source-only build pair; no overwrite or visual verdict.
++"""Root-only gated P209 terminal source-only pair; no overwrite or view verdict.
+ 
+-Revision 2 implements the separate read-only infrastructure audit. Requires
+-accepted deltas and a root-verified exact Round2 closure. No old recorder import.
++Disclosed adaptation of P208 terminal v2, with P209 strict launch/stream
++failure preservation. Actual accepted deltas and physical Round2/root closure
++are prerequisites, never manufactured here. No old recorder is imported.
+ """
+ from datetime import datetime, timezone
+ from hashlib import sha256
+@@ -11,14 +12,21 @@
+ from pathlib import Path
+ import re
+ import shutil
++import signal
+ import subprocess
+ import sys
+ import sysconfig
+ import traceback
+ 
+-ROOT = Path(__file__).resolve().parents[3]
++SCRIPT = Path(__file__).resolve()
++ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
++PREPARATION = ROOT / 'docs/papers204_208_sequence/qa/p209_terminal_preparation'
++ROOT_LAUNCHER = PREPARATION / 'root_launch_terminal.py'
++SOURCE_PINS = PREPARATION / 'SOURCE_PINS.json'
++EXPECTED_SOURCE_PINS = 'bb707e351669318169eb558dc9097ef700bb44c01418253e3944aaa8dd4cd8f2'
+ BATCH = ROOT / 'docs/papers204_208_sequence'
+-PAPER = ROOT / 'papers/208-original-snapshot-triangulation-sweeps'
++PAPER = ROOT / 'papers/209-ordered-fibre-threading'
++ROUND1 = PAPER / 'frozen_round1'
+ FREEZE = PAPER / 'frozen_round2'
+ OUT = PAPER / 'qa_final'
+ PYTHON = Path(sys.executable).resolve()
+@@ -28,21 +36,23 @@
+        'openin_any': 'p', 'openout_any': 'p'}
+ TOOLS = [Path('/usr/bin') / n for n in ('pdflatex', 'bibtex', 'kpsewhich',
+          'pdfinfo', 'pdffonts', 'pdftotext', 'pdftoppm', 'ldd', 'cmp')]
+-TOOLS += [Path('/bin/bash'), PYTHON]
++TOOLS += [Path('/bin/bash'), Path('/bin/sh'), Path('/usr/bin/env'), PYTHON]
++LIB_ROOTS = (Path('/usr/lib/x86_64-linux-gnu'), Path('/usr/lib64'), Path('/usr/local/lib'))
+ TEX_ROOTS = [Path(p) for p in (
+-    '/usr/share/texlive/texmf-dist/tex', '/usr/share/texlive/texmf-dist/fonts',
+-    '/usr/share/texlive/texmf-dist/web2c', '/usr/share/texlive/texmf-dist/bibtex',
++    '/usr/share/texlive/texmf-dist',
+     '/usr/share/texmf', '/var/lib/texmf', '/etc/texmf', '/usr/local/share/texmf',
+     '/root/texmf', '/root/.texlive2021/texmf-config', '/root/.texlive2021/texmf-var')]
+ CONFIG_ROOTS = [Path(p) for p in ('/etc/ld.so.conf.d', '/usr/share/fonts',
+     '/etc/fonts', '/var/cache/fontconfig', '/usr/share/fontconfig', '/usr/lib/locale/C.utf8',
+-    '/usr/lib/x86_64-linux-gnu/gconv', '/usr/share/poppler')]
++    '/usr/lib/x86_64-linux-gnu/gconv', '/usr/lib/gconv', '/usr/share/poppler',
++    '/usr/local/share/fonts', '/etc/xdg/fontconfig', '/etc/profile.d',
++    '/root/.fonts', '/root/.fontconfig', '/root/.fonts.conf.d',
++    '/root/.config/fontconfig', '/root/.cache/fontconfig', '/root/.local/share/fonts')]
+ SOURCE_NAMES = ('main.tex', 'math_commands.tex', 'references.bib',
+     'sections/00_abstract.tex', 'sections/01_setup.tex',
+-    'sections/02_cells.tex', 'sections/03_sources.tex',
+-    'sections/04_extremum.tex', 'sections/05_kmap.tex',
+-    'sections/06_clock.tex', 'sections/07_scope.tex')
++    'sections/02_recurrence.tex', 'sections/03_inverse.tex', 'sections/04_scope.tex')
+ USER_TEX_VARS = ('TEXMFHOME', 'TEXMFCONFIG', 'TEXMFVAR')
++UNREAPED_CHILDREN = set()
+ 
+ 
+ def info(path):
+@@ -64,66 +74,181 @@
+ 
+ 
+ def manifest(base, name, complete=False):
+-    assert base.is_dir() and not base.is_symlink(), str(base)
++    assert base.is_dir() and base.resolve() == base and not base.is_symlink(), str(base)
+     source = base / name
+     records = {}
+     for line in source.read_text().splitlines():
+         digest, rel = line.split('  ', 1)
+         local = Path(rel)
+-        assert not local.is_absolute() and '..' not in local.parts and local.parts
++        assert re.fullmatch(r'[0-9a-f]{64}', digest)
++        assert local.as_posix() == rel and not local.is_absolute() and '..' not in local.parts and local.parts
+         assert rel != name and rel not in records
+         p = base / local
+-        assert p.is_file() and not p.is_symlink() and info(p)['sha256'] == digest, str(p)
++        assert p.resolve() == p and p.is_file() and not p.is_symlink() and info(p)['sha256'] == digest, str(p)
+         records[rel] = info(p)
+     if complete:
+-        assert set(records) == {p.relative_to(base).as_posix() for p in base.rglob('*')
++        entries = list(base.rglob('*'))
++        assert all(not p.is_symlink() for p in entries)
++        assert set(records) == {p.relative_to(base).as_posix() for p in entries
+                                 if p.is_file() and p != source}
+     records[name] = info(source)
+     return {str(base / n): v for n, v in records.items()}
+ 
+-
+ def science():
+-    result = manifest(FREEZE, 'SHA256SUMS', complete=True)
+-    for path, value in list(result.items()):
+-        rel = Path(path).relative_to(FREEZE)
+-        if rel.as_posix() == 'SHA256SUMS':
+-            continue
+-        assert info(PAPER / rel) == value, str(PAPER / rel)
+-        result[str(PAPER / rel)] = value
+-    for letter in ('a', 'b'):
+-        report = BATCH / ('qa/P208_' + letter.upper() + '_ROOT_DELTA_INSPECTION.actual.json')
+-        data = json.loads(report.read_bytes())
++    # Future acceptance values come only from actual root-controlled files.
++    # This function does not create a gate, copy a freeze or execute science.
++    result = manifest(PREPARATION, 'SHA256SUMS', complete=True)
++
++    def read_json(path):
++        result[str(path)] = info(path)
++        return json.loads(path.read_bytes())
++
++    assert info(SOURCE_PINS)['sha256'] == EXPECTED_SOURCE_PINS
++    expected_sources = read_json(SOURCE_PINS)
++    assert set(expected_sources) == set(SOURCE_NAMES) and len(expected_sources) == 8
++    core = manifest(ROUND1, 'SHA256SUMS', complete=True)
++    assert core[str(ROUND1 / 'SHA256SUMS')]['sha256'] == 'c93e16cf20d2eb87f3b454fbdb3576e52c6c79fb74c8712a277efeab7e60ce57'
++    assert len(core) == 2004
++    result.update(core)
++    frozen = manifest(FREEZE, 'SHA256SUMS', complete=True)
++    result.update(frozen)
++    for n, v in expected_sources.items():
++        assert all((base / n).resolve() == base / n and not (base / n).is_symlink()
++                   for base in (PAPER, ROUND1, FREEZE)), n
++        assert info(PAPER / n) == info(ROUND1 / n) == info(FREEZE / n) == v, n
++        result[str(PAPER / n)] = v
++    assert {p.relative_to(FREEZE).as_posix() for p in (FREEZE / 'sections').rglob('*.tex')} == set(SOURCE_NAMES[3:])
++    assert info(PAPER / 'main.pdf') == info(FREEZE / 'main.pdf') == info(ROUND1 / 'main.pdf')
++    result[str(PAPER / 'main.pdf')] = info(PAPER / 'main.pdf')
++    gates = {}
++    for letter, input_round in (('a', 0), ('b', 1)):
++        report = BATCH / ('qa/P209_' + letter.upper() + '_ROOT_DELTA_INSPECTION.actual.json')
++        data = read_json(report)
++        assert data['schema'] == 'p209-' + letter + '-root-delta-closure-v1'
+         assert data['status'] == 'ROOT_ACCEPTED_' + letter.upper() + '_DELTA_ORIGINAL_CLOSURE_PASS'
+-        assert data['current_open_findings'] == 0
+-        review = BATCH / ('reviews/p208_' + letter)
+-        assert info(review / 'SHA256SUMS')['sha256'] == data['review_manifest_sha256']
+-        assert info(review / 'DELTA.md')['sha256'] == data['delta_sha256']
+-        result.update(manifest(review, 'SHA256SUMS', complete=True))
+-        result[str(report)] = info(report)
+-    receipt = BATCH / 'qa/P208_ROUND2_FREEZE.actual.json'
+-    closure = json.loads(receipt.read_bytes())
+-    assert closure['status'] == 'ROOT_ROUND2_PHYSICAL_FREEZE_PASS'
+-    assert closure['copied_inputs'] == 487
+-    assert closure['manifest_sha256'] == info(FREEZE / 'SHA256SUMS')['sha256']
+-    assert len(manifest(FREEZE, 'SHA256SUMS', complete=True)) == 488
+-    assert closure['accepted_b_review_manifest_sha256'] == info(BATCH / 'reviews/p208_b/SHA256SUMS')['sha256']
+-    assert closure['accepted_b_delta_sha256'] == info(BATCH / 'reviews/p208_b/DELTA.md')['sha256']
+-    expected_sources = {n: info(FREEZE / n) for n in SOURCE_NAMES}
+-    assert closure['source_only_inputs'] == expected_sources
+-    assert {p.relative_to(FREEZE).as_posix() for p in (FREEZE / 'sections').glob('*.tex')} == set(SOURCE_NAMES[3:])
+-    result[str(receipt)] = info(receipt)
+-    result[str(Path(__file__).resolve())] = info(Path(__file__).resolve())
++        assert data['paper'] == 'P209' and type(data['input_round']) is int and data['input_round'] == input_round
++        assert type(data['current_open_findings']) is int and data['current_open_findings'] == 0
++        for field in ('reviewer_delta_accepted', 'root_original_inspection_complete', 'root_replay_closure_complete'):
++            assert data[field] is True, field
++        review = BATCH / ('reviews/p209_' + letter)
++        reviewed = manifest(review, 'SHA256SUMS', complete=True)
++        assert len(reviewed) - 1 == data['review_manifest_entries']
++        result.update(reviewed)
++        for field, path in (('review_manifest_sha256', review / 'SHA256SUMS'),
++                            ('delta_sha256', review / 'DELTA.md'),
++                            ('current_findings_sha256', review / 'CURRENT_FINDINGS.json'),
++                            ('response_sha256', BATCH / ('P209_' + letter.upper() + '_RESPONSE.md'))):
++            assert info(path)['sha256'] == data[field], field
++            result[str(path)] = info(path)
++        current = read_json(review / 'CURRENT_FINDINGS.json')
++        assert current['schema'] == 'p209-manuscript-review-findings-v1'
++        assert current['input_round'] == input_round and current['reviewer'] == '/root/p209_' + letter + '_reviewer'
++        assert current['delta_status'] == 'ACCEPTED_EXACT_NOCHANGE_DELTA'
++        assert current['current_open_counts'] == {'critical': 0, 'major': 0, 'minor': 0}
++        assert current['findings'] == [] and current['scientific_inputs_changed'] is False
++        assert current['response_sha256'] == data['response_sha256']
++        narrative = report.with_name(report.name.replace('.actual.json', '.md'))
++        result[str(narrative)] = info(narrative)
++        gates[letter] = (report, data)
++    b = gates['b'][1]
++    assert b['round1_path'] == str(ROUND1) and b['round1_manifest_sha256'] == core[str(ROUND1 / 'SHA256SUMS')]['sha256']
++    assert b['unchanged_author_payloads'] == 1985 and b['unchanged_round1_payloads'] == 2003
++    receipt = BATCH / 'qa/P209_ROUND2_ROOT_INSPECTION.actual.json'
++    closure = read_json(receipt)
++    assert closure['schema'] == 'p209-round2-root-physical-closure-v1'
++    assert closure['status'] == 'PASS_ROOT_ROUND2_COMPLETE_PHYSICAL_CLOSURE' and closure['paper'] == 'P209'
++    assert type(closure['round']) is int and closure['round'] == 2
++    assert type(closure['current_open_findings']) is int and closure['current_open_findings'] == 0
++    assert closure['round2_manifest_sha256'] == frozen[str(FREEZE / 'SHA256SUMS')]['sha256']
++    assert type(closure['round2_payloads']) is int and closure['round2_payloads'] == len(frozen) - 1
++    for letter in ('a', 'b'):
++        assert closure['accepted_' + letter.upper() + '_root_gate_sha256'] == info(gates[letter][0])['sha256']
++    assert set(closure['source_pins']) == {str(PAPER / n) for n in SOURCE_NAMES}
++    for n, value in expected_sources.items():
++        actual = closure['source_pins'][str(PAPER / n)]
++        assert all(actual[k] == value[k] for k in ('sha256', 'bytes'))
++    result[str(receipt.with_name('P209_ROUND2_ROOT_INSPECTION.md'))] = info(receipt.with_name('P209_ROUND2_ROOT_INSPECTION.md'))
++    provenance = read_json(FREEZE / 'ROUND2_PROVENANCE.json')
++    assert provenance['schema'] == 'p209-round2-provenance-v1'
++    assert provenance['round1_core_payloads_copied'] == 2003 and provenance['author_payloads_preserved'] == 1985
++    core_rows = {Path(p).relative_to(ROUND1).as_posix(): v['sha256'] for p, v in core.items()
++                 if p != str(ROUND1 / 'SHA256SUMS')}
++    assert provenance['core_payload_pins'] == core_rows
++    assert all(frozen[str(FREEZE / n)]['sha256'] == h for n, h in core_rows.items())
++    assert provenance['accepted_root_assertions'] == b
++    pair = BATCH / 'qa/root_replays/p209_b_strict/root_b_pair_01'
++    launcher = BATCH / 'qa/root_replays/p209_b_strict/launcher_root_b_pair_01'
++    for path, key in ((pair, 'root_pair_manifest_sha256'), (launcher, 'root_launcher_manifest_sha256')):
++        closed = manifest(path, 'SHA256SUMS', complete=True)
++        assert closed[str(path / 'SHA256SUMS')]['sha256'] == b[key]
++        result.update(closed)
++    anchors = {
++        'ROUND1_CORE_MANIFEST.sha256': ROUND1 / 'SHA256SUMS',
++        'B_REVIEW_MANIFEST.sha256': BATCH / 'reviews/p209_b/SHA256SUMS',
++        'B_INITIAL_REVIEW_SEAL.sha256': BATCH / 'reviews/p209_b/INITIAL_REVIEW_SEAL.sha256',
++        'B_DELTA.md': BATCH / 'reviews/p209_b/DELTA.md',
++        'B_INITIAL_DELTA.md': BATCH / 'reviews/p209_b/INITIAL_DELTA.md',
++        'B_INITIAL_FINDINGS.json': BATCH / 'reviews/p209_b/FINDINGS.json',
++        'B_CURRENT_FINDINGS.json': BATCH / 'reviews/p209_b/CURRENT_FINDINGS.json',
++        'B_INPUT_PINS.sha256': BATCH / 'reviews/p209_b/INPUT_PINS.sha256',
++        'ROOT_RESPONSE.md': BATCH / 'P209_B_RESPONSE.md',
++        'ROOT_INITIAL_INSPECTION.md': BATCH / 'qa/P209_B_ROOT_INITIAL_INSPECTION.md',
++        'ROOT_DELTA_INSPECTION.md': BATCH / 'qa/P209_B_ROOT_DELTA_INSPECTION.md',
++        'ROOT_DELTA_CLOSURE.actual.json': gates['b'][0],
++        'ROOT_PAIR_MANIFEST.sha256': pair / 'SHA256SUMS',
++        'ROOT_LAUNCHER_MANIFEST.sha256': launcher / 'SHA256SUMS',
++        'PRE_ROUND2_PAPER_MANIFEST.sha256': PAPER / 'PAPER_MANIFEST.sha256',
++    }
++    assert set(provenance['anchor_mapping']) == set(anchors)
++    for name, original in anchors.items():
++        row = provenance['anchor_mapping'][name]
++        local = 'ROUND2_ACCEPTANCE/' + name
++        assert row['original_path'] == str(original) and row['physical_path'] == local
++        assert frozen[str(FREEZE / local)]['sha256'] == row['sha256']
++        if name == 'PRE_ROUND2_PAPER_MANIFEST.sha256':
++            # Exact historical PAPER-relative role, not the later live whole seal.
++            assert row['sha256'] == '3e94a72637733ca46f7950f4feb8508fdf14b5ff6386c971821932ae9231e5a9'
++        else:
++            assert info(original)['sha256'] == row['sha256']
++            result[str(original)] = info(original)
++    aliases = {}
++    for row in provenance['historical_input_resolution']:
++        local = row['copy_relative']
++        if local is not None:
++            path = Path(local)
++            assert path.as_posix() == local and path.parts[0] == 'ROUND2_HISTORICAL_ALIASES' and '..' not in path.parts
++            assert local not in aliases and row['round2_physical_path'] == str(FREEZE / local)
++            assert frozen[str(FREEZE / local)]['sha256'] == row['sha256']
++            aliases[local] = row['sha256']
++    expected_names = set(core_rows) | {'ROUND2_ACCEPTANCE/' + n for n in anchors} | set(aliases)
++    expected_names |= {'ROUND2_FREEZE_ADAPTER.py', 'ROUND2_PROVENANCE.json'}
++    assert {Path(p).relative_to(FREEZE).as_posix() for p in frozen if p != str(FREEZE / 'SHA256SUMS')} == expected_names
++    assert closure['round2_payloads'] == 2020 + len(aliases)
++    assert info(FREEZE / 'ROUND2_FREEZE_ADAPTER.py')['sha256'] == '787357029ae3d4f50c1a9998a3b1e4fe9377786cc06cb024e3a7a96ef95b46c7'
++    result[str(SCRIPT)] = info(SCRIPT)
++    result[str(ROOT_LAUNCHER)] = info(ROOT_LAUNCHER)
+     return result
+ 
+-
+ def tree_inventory(roots):
+     return pins(p for root in roots if root.is_dir() for p in root.rglob('*') if p.is_file())
+ 
+ 
+-def runtime_inventory():
+-    return pins([p for p in STDLIB.rglob('*') if p.is_file()
+-                 and 'site-packages' not in p.parts and '__pycache__' not in p.parts] + TOOLS)
++def is_elf(path):
++    with Path(path).open('rb') as stream:
++        return stream.read(4) == b'\x7fELF'
++
+ 
++def runtime_inventory():
++    std = []
++    for directory, folders, files in os.walk(STDLIB):
++        folders[:] = [n for n in folders if n not in {'site-packages', 'dist-packages', '__pycache__'}]
++        std.extend(Path(directory) / n for n in files if not n.endswith(('.pyc', '.pyo')))
++    potential = []
++    for root in LIB_ROOTS:
++        if root.is_dir():
++            entries = root.glob('*') if root == Path('/usr/local/lib') else root.rglob('*')
++            potential.extend(p for p in entries if p.is_file() and (p.name.endswith('.so') or '.so.' in p.name))
++    return pins(std + potential + TOOLS)
+ 
+ def configuration():
+     candidates = set(CONFIG_ROOTS + TEX_ROOTS + TOOLS)
+@@ -133,7 +258,23 @@
+     candidates.add(STDLIB.parent / ('python%d%d.zip' % sys.version_info[:2]))
+     candidates.update([PYTHON.parent / 'pyvenv.cfg', PYTHON.parent.parent / 'pyvenv.cfg',
+         PYTHON.with_name(PYTHON.name + '._pth'), PYTHON.with_name('python._pth'),
+-        Path('/etc/locale.conf'), Path('/etc/default/locale')])
++        Path('/etc/locale.conf'), Path('/etc/default/locale'),
++        Path('/etc/nsswitch.conf'), Path('/etc/localtime'), Path('/etc/bash.bashrc'), Path('/etc/profile'),
++        Path('/usr/lib/locale/locale-archive'), Path('/etc/passwd'), Path('/etc/group'),
++        Path('/root/.fonts.conf'), Path('/root/.config/fontconfig/fonts.conf'), Path('/etc/fonts/local.conf'),
++        Path(sysconfig.get_makefile_filename()), Path(sysconfig.get_config_h_filename())])
++    names = {'python._pth', 'python3._pth', 'python%d%d._pth' % sys.version_info[:2],
++             'python%d.%d._pth' % sys.version_info[:2], PYTHON.name + '._pth'}
++    for directory in {PYTHON.parent, Path(sys.executable).parent, STDLIB.parent}:
++        candidates.update(directory / name for name in names)
++    for key in ('LDLIBRARY', 'INSTSONAME'):
++        value = sysconfig.get_config_var(key)
++        if value:
++            candidates.add(STDLIB.parent / (value + '._pth'))
++    ldd = Path('/usr/bin/ldd').read_text()
++    match = re.search(r'^RTLDLIST="([^"]+)"', ldd, re.M)
++    assert ldd.splitlines()[0] == '#!/bin/bash' and match
++    candidates.update(Path(p) for p in match.group(1).split())
+     for root in CONFIG_ROOTS:
+         if root.is_dir():
+             candidates.update(p for p in root.rglob('*') if p.is_file())
+@@ -167,12 +308,16 @@
+ 
+ def main():
+     # These guards must remain effective even with -O and run before any output.
+-    if len(sys.argv) != 1 or sys.flags.optimize != 0:
+-        raise RuntimeError('Require no script arguments and optimization zero')
++    if sys.argv[1:] != ['terminal-pair-after-round2'] or sys.flags.optimize != 0:
++        raise RuntimeError('Require exact terminal-pair-after-round2 argument and optimization zero')
++    if SCRIPT != PREPARATION / 'root_terminal_builds.py' or PYTHON != Path('/usr/bin/python3.10'):
++        raise RuntimeError('Require exact prepared recorder path and Python 3.10')
+     if sys.flags.isolated != 1 or sys.flags.no_site != 1 or not sys.dont_write_bytecode:
+         raise RuntimeError('Require -I -S -B')
+-    if not sys.pycache_prefix or not Path(sys.pycache_prefix).is_absolute() or Path(sys.pycache_prefix).exists():
+-        raise RuntimeError('Require an absolute absent alternate pycache prefix')
++    if sys.pycache_prefix != str(OUT / 'never_created_parent_cache') or Path(sys.pycache_prefix).exists():
++        raise RuntimeError('Require exact absent terminal recorder cache prefix')
++    if OUT.resolve() != OUT or OUT.exists() or OUT.is_symlink():
++        raise RuntimeError('Refuse aliased or existing terminal output root')
+     if dict(os.environ) != ENV or Path.cwd().resolve() != ROOT:
+         raise RuntimeError('Require exact controlled ENV and workspace cwd; environment values not dumped on refusal')
+     # No output/build directory is made before the real acceptance gates pass.
+@@ -181,6 +326,7 @@
+     save(OUT / 'executed_recorder_snapshot.py', Path(__file__).read_bytes())
+     dump(OUT / 'INPUTS_BEFORE.json', before)
+     commands, builds, failures = [], [], []
++    generated_tex = {}
+     runtime_before, config_before, tex_before, libs_before = {}, {}, {}, {}
+     consumed = {}
+     parent_before, parent_pins_before, user_roots = {}, {}, {}
+@@ -189,39 +335,72 @@
+     def command(label, argv, cwd):
+         started = datetime.now(timezone.utc).isoformat()
+         row = {'label': label, 'argv': argv, 'cwd': str(cwd), 'environment': ENV,
+-               'started_utc': started, 'status': 'ATTEMPTED'}
++               'started_utc': started, 'status': 'ATTEMPTED', 'exit_code': None,
++               'start_new_session': True, 'cleanup': []}
+         dump(OUT / (label + '.attempt.json'), row)
++        commands.append(row)
++        proc = None
+         try:
+-            child = subprocess.run(argv, cwd=cwd, env=ENV, capture_output=True, check=False)
++            with (OUT / (label + '.stdout')).open('xb') as stdout, (OUT / (label + '.stderr')).open('xb') as stderr:
++                proc = subprocess.Popen(argv, cwd=cwd, env=ENV, stdout=stdout, stderr=stderr, start_new_session=True)
++                UNREAPED_CHILDREN.add(proc.pid)
++                row.update(pid=proc.pid, status='UNKNOWN_UNTIL_WAIT')
++                code = proc.wait()
++                UNREAPED_CHILDREN.discard(proc.pid)
++                row.update(status='COMPLETED', exit_code=code)
+         except BaseException as error:
+-            row.update(status='NO_COMPLETED_CHILD_RESULT', exit_code=None,
+-                       exception_type=type(error).__name__, exception_message=str(error),
+-                       ended_utc=datetime.now(timezone.utc).isoformat())
+-            # OSError at creation implies NOT_STARTED; other interruptions do not.
+-            if isinstance(error, OSError):
+-                row['status'] = 'NOT_STARTED'
+-            commands.append(row)
++            row.update(status='NOT_STARTED' if proc is None else 'NO_COMPLETED_CHILD_RESULT',
++                       exception_type=type(error).__name__, exception_message=str(error))
++        finally:
++            if proc is not None and proc.pid in UNREAPED_CHILDREN:
++                try:
++                    if proc.poll() is None:
++                        try:
++                            os.killpg(proc.pid, signal.SIGTERM)
++                            row['cleanup'].append({'action': 'SIGTERM_OWNED_PROCESS_GROUP', 'pgid': proc.pid})
++                        except ProcessLookupError:
++                            pass
++                    try:
++                        cleaned = proc.wait(timeout=5)
++                    except subprocess.TimeoutExpired:
++                        os.killpg(proc.pid, signal.SIGKILL)
++                        row['cleanup'].append({'action': 'SIGKILL_OWNED_PROCESS_GROUP', 'pgid': proc.pid})
++                        cleaned = proc.wait(timeout=5)
++                    try:
++                        os.killpg(proc.pid, signal.SIGKILL)
++                        row['cleanup'].append({'action': 'SIGKILL_REMAINING_OWNED_GROUP', 'pgid': proc.pid})
++                    except ProcessLookupError:
++                        pass
++                    row['cleanup'].append({'action': 'DIRECT_CHILD_REAPED', 'cleanup_exit': cleaned,
++                                           'does_not_replace_original_exit': True})
++                    UNREAPED_CHILDREN.discard(proc.pid)
++                except BaseException:
++                    row['cleanup'].append({'action': 'CLEANUP_FAILED_DO_NOT_SEAL', 'traceback': traceback.format_exc()})
++            row['ended_utc'] = datetime.now(timezone.utc).isoformat()
++            if not UNREAPED_CHILDREN:
++                for kind in ('stdout', 'stderr'):
++                    path = OUT / (label + '.' + kind)
++                    if path.is_file():
++                        row[kind] = {'path': path.name, **info(path)}
++            else:
++                row['stream_scope'] = 'Raw streams only; no settled-stream hashes while owned child unreaped.'
+             dump(OUT / (label + '.command.json'), row)
+-            raise
+-        row.update(status='COMPLETED', exit_code=child.returncode,
+-                   ended_utc=datetime.now(timezone.utc).isoformat())
+-        for kind, raw in [('stdout', child.stdout), ('stderr', child.stderr)]:
+-            path = OUT / (label + '.' + kind)
+-            save(path, raw)
+-            row[kind] = {'path': path.name, **info(path)}
+-        commands.append(row)
+-        dump(OUT / (label + '.command.json'), row)
+-        assert child.returncode == 0, (label, child.returncode)
+-        return child
++        assert row['status'] == 'COMPLETED' and row['exit_code'] == 0, (label, row)
++        return subprocess.CompletedProcess(argv, row['exit_code'],
++                   (OUT / (label + '.stdout')).read_bytes(), (OUT / (label + '.stderr')).read_bytes())
+ 
+     def library_capture(label):
+-        objects = sorted({str(p.resolve()) for p in TOOLS if p.name != 'ldd'} |
+-                         {p for p in runtime_before if p.endswith('.so')})
++        candidates = {str(p.resolve()) for p in TOOLS if p.name != 'ldd'}
++        candidates.update(p for p in runtime_before if Path(p).is_relative_to(STDLIB) and p.endswith('.so'))
++        objects = sorted(p for p in candidates if is_elf(p))
++        assert objects, 'no ELF linkage targets'
+         raw = command(label, ['/usr/bin/ldd', *objects], OUT).stdout.decode()
+         assert 'not found' not in raw
+         paths = [Path(p).resolve() for p in re.findall(r'/[^\s():]+', raw) if Path(p).is_file()]
+         assert paths
+-        return pins(paths)
++        values = pins(paths)
++        assert all(runtime_before.get(path) == value for path, value in values.items()), 'ldd dependency absent from pre-child runtime inventory'
++        return values
+ 
+     def failure(phase, error):
+         failures.append({'phase': phase, 'type': type(error).__name__, 'message': str(error)})
+@@ -237,6 +416,10 @@
+         dump(OUT / 'RUNTIME_BEFORE.json', runtime_before)
+         config_before = configuration()
+         dump(OUT / 'CONFIGURATION_BEFORE.json', config_before)
++        dump(OUT / 'INTERPRETER_CONFIGURATION.json', {'sysconfig_paths': sysconfig.get_paths(),
++             'sysconfig_vars': sysconfig.get_config_vars(), 'stdlib': str(STDLIB),
++             'potential_library_roots': list(map(str, LIB_ROOTS)),
++             'bash_mode': 'Noninteractive non-login ldd shell; ENV/BASH_ENV absent.'})
+         tex_before = tree_inventory(TEX_ROOTS)
+         dump(OUT / 'TEX_INVENTORY_BEFORE.json', tex_before)
+         libs_before = library_capture('ldd_before')
+@@ -245,7 +428,7 @@
+             command(tool + '_version', ['/usr/bin/' + tool, '--version'], OUT)
+         command('texmf_roots', ['/usr/bin/kpsewhich', '-var-value=TEXMF'], OUT)
+         sources = [FREEZE / n for n in SOURCE_NAMES]
+-        assert len(sources) == 11
++        assert len(sources) == 8
+         for k in (1, 2):
+             label = 'cold_build_' + str(k)
+             cold = OUT / label
+@@ -255,7 +438,8 @@
+                 q.parent.mkdir(parents=True, exist_ok=True)
+                 shutil.copyfile(p, q)
+             initial = {p.relative_to(cold).as_posix(): info(p) for p in cold.rglob('*') if p.is_file()}
+-            assert len(initial) == 11 and not any(Path(n).suffix in ('.pdf', '.bbl', '.aux') for n in initial)
++            assert initial == {n: info(FREEZE / n) for n in SOURCE_NAMES} and len(initial) == 8
++            assert not any(Path(n).suffix in ('.pdf', '.bbl', '.aux') for n in initial)
+             dump(OUT / (label + '_SOURCE_ONLY_INITIAL.json'), initial)
+             for variable in USER_TEX_VARS:
+                 raw = command(label + '_' + variable, ['/usr/bin/kpsewhich', '-var-value=' + variable], cold).stdout.decode().strip()
+@@ -273,10 +457,19 @@
+                     if line.startswith('INPUT '):
+                         p = Path(line[6:]); p = (p if p.is_absolute() else cold / p).resolve()
+                         assert p.is_file(), str(p)
++                        value = info(p)
+                         if not p.is_relative_to(cold):
+-                            value = info(p)
+                             assert tex_before.get(str(p)) == value, str(p)
+                             consumed[str(p)] = value
++                        else:
++                            name = p.relative_to(cold).as_posix()
++                            if name in initial:
++                                assert value == initial[name], str(p)
++                            else:
++                                assert p.suffix in {'.aux', '.bbl', '.out', '.toc'}, str(p)
++                                generated_tex[label + ':pass' + str(j) + ':' + name] = value
++                dump(OUT / (label + '_pass' + str(j) + '_TEX_INPUTS.json'),
++                     {'consumed_external': consumed, 'generated_local': generated_tex})
+                 if j == 1:
+                     bst = command(label + '_bst', ['/usr/bin/kpsewhich', 'plainnat.bst'], cold).stdout.decode().strip()
+                     bp = Path(bst).resolve()
+@@ -290,7 +483,12 @@
+             command(label + '_pdftotext', ['/usr/bin/pdftotext', '-layout', 'main.pdf', str(OUT / (label + '_main.txt'))], cold)
+             pages = cold / 'pages'; pages.mkdir()
+             command(label + '_render', ['/usr/bin/pdftoppm', '-png', '-r', '120', 'main.pdf', str(pages / 'page')], cold)
+-            command(label + '_frozen_pdf_cmp', ['/usr/bin/cmp', str(cold / 'main.pdf'), str(FREEZE / 'main.pdf')], cold)
++            pages_n = int(re.search(r'^Pages:\s+(\d+)$', raw_info, re.M).group(1))
++            dump(OUT / (label + '_MEASURED_PDF.json'),
++                 {'pages': pages_n, 'expected_pages': 4, 'rendered_pages': len(list(pages.glob('*.png'))),
++                  'pdf': info(cold / 'main.pdf')})
++            assert pages_n == 4 and len(list(pages.glob('*.png'))) == pages_n, ('actual_page_mismatch', pages_n)
++            command(label + '_frozen_pdf_cmp', ['/usr/bin/cmp', '--', str(cold / 'main.pdf'), str(FREEZE / 'main.pdf')], cold)
+             log = (cold / 'main.log').read_text()
+             warnings = {k: re.findall(r'^.*' + v + r'.*$', log, re.M)
+                         for k, v in [('undefined', 'undefined'), ('overfull', 'Overfull'),
+@@ -301,19 +499,21 @@
+             assert not any(marker in extracted for marker in ('[VERIFY]', '??', '[?]'))
+             font_rows = [s.split()[-5:] for s in font_text.splitlines()[2:] if s.strip()]
+             assert font_rows and all(row[0] == 'yes' for row in font_rows)
+-            pages_n = int(re.search(r'^Pages:\s+(\d+)$', raw_info, re.M).group(1))
+-            assert pages_n == 7 and len(list(pages.glob('*.png'))) == pages_n
++            dump(OUT / (label + '_DIAGNOSTICS.json'),
++                 {'pages': pages_n, 'expected_pages': 4, 'rendered_pages': len(list(pages.glob('*.png'))),
++                  'pdf': info(cold / 'main.pdf'), 'diagnostics': warnings, 'embedded_fonts': len(font_rows)})
+             assert initial == {n: info(cold / n) for n in initial}
+             assert all(info(Path(p)) == value for p, value in consumed.items())
+             builds.append({'directory': label, 'source_only_initial': initial,
+                            'pdf': info(cold / 'main.pdf'), 'pages': pages_n,
+                            'embedded_fonts': len(font_rows), 'actual_diagnostics': warnings})
+-        command('pair_pdf_cmp', ['/usr/bin/cmp', str(OUT / 'cold_build_1/main.pdf'),
++        command('pair_pdf_cmp', ['/usr/bin/cmp', '--', str(OUT / 'cold_build_1/main.pdf'),
+                                 str(OUT / 'cold_build_2/main.pdf')], OUT)
+     except BaseException as error:
+         failure('build_phase', error)
+     # Independent capture/save: one inaccessible input never suppresses others.
+     dump(OUT / 'CONSUMED_TEX_BEFORE.json', consumed)
++    dump(OUT / 'GENERATED_LOCAL_TEX_INPUTS.json', generated_tex)
+     after_values = {}
+     collectors = [
+         ('INPUTS_AFTER', science), ('RUNTIME_AFTER', runtime_inventory),
+@@ -351,10 +551,27 @@
+         assert parent['environment'] == ENV
+     except BaseException as error:
+         failure('parent_coverage', error)
+-    passed = not failures and len(builds) == 2 and all(c['exit_code'] == 0 for c in commands)
+-    receipt = {'status': 'PASS_P208_TERMINAL_BUILD_PAIR_NOT_VIEWED' if passed else 'FAIL',
++    if UNREAPED_CHILDREN:
++        dump(OUT / 'UNCLOSED_BUILD.json', {'status': 'UNCLOSED_BUILD_NO_SEAL',
++             'unreaped_owned_children': sorted(UNREAPED_CHILDREN), 'commands': commands, 'failures': failures,
++             'scope': 'Do not hash unsettled output, create final manifest or infer descendant termination.'})
++        print(json.dumps({'status': 'UNCLOSED_BUILD_NO_SEAL', 'output': str(OUT)}))
++        raise SystemExit(1)
++    expected_labels = ['ldd_before', 'pdflatex_version', 'bibtex_version', 'texmf_roots']
++    for k in (1, 2):
++        label = 'cold_build_' + str(k)
++        expected_labels.extend(label + '_' + v for v in USER_TEX_VARS)
++        expected_labels.extend(label + '_' + v for v in ('tex1', 'bst', 'bibtex', 'tex2', 'tex3',
++                               'pdfinfo', 'pdffonts', 'pdftotext', 'render', 'frozen_pdf_cmp'))
++    expected_labels.extend(['pair_pdf_cmp', 'ldd_after'])
++    census_okay = [c['label'] for c in commands] == expected_labels
++    if not census_okay:
++        failures.append({'phase': 'command_census', 'actual': [c['label'] for c in commands], 'expected': expected_labels})
++    passed = not failures and len(builds) == 2 and all(c['status'] == 'COMPLETED' and c['exit_code'] == 0 for c in commands)
++    receipt = {'status': 'PASS_P209_TERMINAL_BUILD_PAIR_NOT_VIEWED' if passed else 'FAIL_PRESERVED',
+         'started_utc': began, 'ended_utc': datetime.now(timezone.utc).isoformat(),
+         'commands': commands, 'builds': builds, 'failures': failures,
++        'command_census_complete': census_okay, 'expected_command_labels': expected_labels,
+         'input_count': len(before), 'runtime_count': len(runtime_before),
+         'configuration_count': len(config_before), 'tex_inventory_count': len(tex_before),
+         'consumed_tex_count': len(consumed), 'resolved_link_file_count': len(libs_before),
+--- original_snapshot/p209_b_launch_review.py
++++ root_launch_terminal.py
+@@ -1,10 +1,10 @@
+ #!/usr/bin/env python3
+-"""Outer full-stream receipt for one new P209 author recorder invocation.
++"""Root-only outer full-stream receipt for the P209 terminal build pair.
+ 
+-This wrapper does not import the recorder or any scientific implementation.
+-The recorder is separately pinned before this wrapper starts its process;
+-the recorder inventories every known producer/build input before children.
+-No claim of tracing this wrapper's own OS startup is made.
++Direct disclosed adaptation of B's original launcher, not a manuscript
++review. It never imports the builder or old code. The builder requires real
++accepted A/B deltas and root-verified physical Round2 before qa_final exists.
++Bounded early/late launcher observations do not trace OS startup or children.
+ """
+ import hashlib
+ import json
+@@ -16,9 +16,17 @@
+ import time
+ import traceback
+ 
+-PAPER = Path(__file__).resolve().parent
+-ROOT = PAPER.parents[3]
+-ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
++SCRIPT = Path(__file__).resolve()
++ROOT = Path("/root/autodl-tmp/symbolic_dynamics")
++PREPARATION = ROOT / "docs/papers204_208_sequence/qa/p209_terminal_preparation"
++BATCH = ROOT / "docs/papers204_208_sequence"
++PAPER = ROOT / "papers/209-ordered-fibre-threading"
++RECORDER = PREPARATION / "root_terminal_builds.py"
++OUTPUT_ROOT = BATCH / "qa/root_replays/p209_terminal_strict"
++SOURCE_PINS = PREPARATION / "SOURCE_PINS.json"
++EXPECTED_SOURCE_PINS = "bb707e351669318169eb558dc9097ef700bb44c01418253e3944aaa8dd4cd8f2"
++ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC",
++       "SOURCE_DATE_EPOCH": "1788652800", "FORCE_SOURCE_DATE": "1", "openin_any": "p", "openout_any": "p"}
+ 
+ 
+ def pin(path):
+@@ -37,23 +45,51 @@
+         stream.write("\n")
+ 
+ 
+-def check_closed_recorder(base, mode, exit_code):
++def runtime(phase):
++    modules = {}
++    for name, module in sorted(sys.modules.items()):
++        path = getattr(module, "__file__", None)
++        if path and Path(path).is_file():
++            resolved = Path(path).resolve()
++            if resolved.suffix in {".pyc", ".pyo"}:
++                raise RuntimeError("Launcher consumed bytecode")
++            modules[name] = {"path": str(resolved), **pin(resolved)}
++    maps = Path("/proc/self/maps").read_text()
++    mapped = {}
++    for line in maps.splitlines():
++        parts = line.split(None, 5)
++        if len(parts) == 6 and parts[5].startswith("/"):
++            path = Path(parts[5]).resolve()
++            mapped[str(path)] = pin(path)
++    return {"phase": phase, "modules": modules, "maps": maps, "mapped_files": mapped,
++            "orig_argv": sys.orig_argv, "flags": str(sys.flags), "cwd": str(Path.cwd()),
++            "environment": dict(os.environ), "executable": sys.executable, "sys_path": sys.path,
++            "cache_prefix": sys.pycache_prefix, "cache_exists": Path(sys.pycache_prefix).exists(),
++            "scope": "Early/late launcher only; no continuous startup or child-process trace."}
++
++
++def check_closed_recorder(base, exit_code):
++    if base.resolve() != base or base.is_symlink():
++        raise RuntimeError("Aliased terminal output")
+     manifest = base / "SHA256SUMS"
+     seen = set()
+     for line in manifest.read_text().splitlines():
+         digest, name = line.split("  ", 1)
+         relative = Path(name)
+         if not (len(digest) == 64 and set(digest) <= set("0123456789abcdef") and
+-                not relative.is_absolute() and ".." not in relative.parts and
++                relative.as_posix() == name and not relative.is_absolute() and ".." not in relative.parts and
+                 name != "SHA256SUMS" and name not in seen):
+             raise RuntimeError("Unsafe, self or duplicate recorder manifest entry")
+-        if (base / name).is_symlink() or pin(base / name)["sha256"] != digest:
++        if (base / name).resolve() != base / name or (base / name).is_symlink() or pin(base / name)["sha256"] != digest:
+             raise RuntimeError("Recorder manifest payload mismatch: " + name)
+         seen.add(name)
+-    if seen != {p.relative_to(base).as_posix() for p in base.rglob("*") if p.is_file() and p != manifest}:
+-        raise RuntimeError("Recorder manifest is not complete")
+-    receipt = json.loads((base / "RECEIPT.json").read_bytes())
+-    if receipt["mode"] != mode or (exit_code == 0 and receipt["status"] != "PASS_REVIEW_B_" + mode.upper()):
++    entries = list(base.rglob("*"))
++    if any(p.is_symlink() for p in entries) or seen != {p.relative_to(base).as_posix() for p in entries if p.is_file() and p != manifest}:
++        raise RuntimeError("Recorder manifest is not complete and physical")
++    receipt = json.loads((base / "BUILD_EXECUTION.json").read_bytes())
++    if exit_code == 0 and not (receipt["status"] == "PASS_P209_TERMINAL_BUILD_PAIR_NOT_VIEWED" and
++            receipt["failures"] == [] and len(receipt["builds"]) == 2 and receipt["command_census_complete"] and
++            receipt["visual_review"] == "PENDING_NOT_INFERRED_FROM_HASH_OR_RENDER"):
+         raise RuntimeError("Recorder receipt disagrees with actual normal exit")
+     if exit_code != 0 and receipt["status"] != "FAIL_PRESERVED":
+         raise RuntimeError("Nonzero recorder exit lacks a closed failure receipt")
+@@ -61,13 +97,11 @@
+ 
+ 
+ def main():
+-    if len(sys.argv) != 3 or sys.argv[1] not in {"pair", "build"}:
+-        raise RuntimeError("launch_review.py pair|build review_pair_N|review_build_N")
+-    mode, label = sys.argv[1:]
+-    prefix = "review_" + mode + "_"
+-    if not label.startswith(prefix) or not label[len(prefix):].isdigit():
+-        raise RuntimeError("Invalid direct-child output label")
+-    out, recorder_out = PAPER / ("launcher_" + label), PAPER / label
++    if sys.argv[1:] != ["terminal-pair-after-round2"] or SCRIPT != PREPARATION / "root_launch_terminal.py":
++        raise RuntimeError("Require exact prepared root launcher and terminal-pair-after-round2 argument")
++    if OUTPUT_ROOT.resolve() != OUTPUT_ROOT:
++        raise RuntimeError("Terminal launcher output root aliases another directory")
++    out, recorder_out = OUTPUT_ROOT / "launcher_terminal_pair_01", PAPER / "qa_final"
+     if out.exists() or out.is_symlink() or recorder_out.exists() or recorder_out.is_symlink():
+         raise RuntimeError("Refuse existing launcher or recorder output")
+     if dict(os.environ) != ENV or Path.cwd() != ROOT or not (
+@@ -78,16 +112,38 @@
+         not Path(sys.pycache_prefix).exists()
+     ):
+         raise RuntimeError("Launcher settings differ from declared isolated minimal environment")
+-    out.mkdir(mode=0o700)
+-    for name in ("launch_review.py", "record_review.py", "bootstrap.py", "verify.py"):
+-        shutil.copyfile(PAPER / name, out / name)
+-    inputs = [PAPER / name for name in ("launch_review.py", "record_review.py", "bootstrap.py", "verify.py", "PARAMETERS.json")]
++    if pin(SOURCE_PINS)["sha256"] != EXPECTED_SOURCE_PINS:
++        raise RuntimeError("SOURCE_PIN_CONTRACT_CHANGED")
++    source_pins = json.loads(SOURCE_PINS.read_bytes())
++    if len(source_pins) != 8:
++        raise RuntimeError("SOURCE_PIN_COUNT_CHANGED")
++    inputs = [p for p in PREPARATION.rglob("*") if p.is_file()]
+     inputs += [Path("/usr/bin/python3.10"), Path("/usr/bin/env")]
++    for stem in ("P209_A_ROOT_DELTA_INSPECTION", "P209_B_ROOT_DELTA_INSPECTION", "P209_ROUND2_ROOT_INSPECTION"):
++        inputs.extend([BATCH / ("qa/" + stem + ".actual.json"), BATCH / ("qa/" + stem + ".md")])
++    for base in (PAPER, PAPER / "frozen_round1", PAPER / "frozen_round2"):
++        inputs.extend(base / name for name in source_pins)
++        inputs.append(base / "main.pdf")
++    inputs.extend([PAPER / "frozen_round1/SHA256SUMS", PAPER / "frozen_round2/SHA256SUMS"])
++    early = runtime("BEFORE_RECORDER_AND_SOURCE_COPY")
++    observed = set(early["mapped_files"]) | {v["path"] for v in early["modules"].values()}
++    inputs.extend(map(Path, observed))
+     before = {str(p): pin(p) for p in inputs}
++    if not all(all(before[str(PAPER / n)][key] == v[key] for key in ("sha256", "bytes"))
++               for n, v in source_pins.items()):
++        raise RuntimeError("UNCHANGED_LIVE_SOURCE_CONTRACT_FAILED")
++    OUTPUT_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
++    out.mkdir(mode=0o700)
+     save(out / "INPUTS_BEFORE.json", before)
++    save(out / "LAUNCHER_RUNTIME_BEFORE.json", early)
++    for source in (SCRIPT, RECORDER):
++        shutil.copyfile(source, out / source.name)
++        copied = pin(out / source.name)
++        if any(copied[key] != before[str(source)][key] for key in ("sha256", "bytes")):
++            raise RuntimeError("Pre-pinned terminal source copy changed")
+     argv = ["/usr/bin/python3.10", "-I", "-S", "-B", "-X",
+             "pycache_prefix=" + str(recorder_out / "never_created_parent_cache"),
+-            str(PAPER / "record_review.py"), mode, label]
++            str(RECORDER), "terminal-pair-after-round2"]
+     row = {"argv": argv, "cwd": str(ROOT), "env": ENV,
+            "started_epoch": time.time(), "exit": None, "outcome": "NOT_STARTED",
+            "launcher_orig_argv": sys.orig_argv, "launcher_flags": str(sys.flags),
+@@ -107,7 +163,7 @@
+     closed = None
+     if failure is None and row["outcome"] == "COMPLETED":
+         try:
+-            closed = check_closed_recorder(recorder_out, mode, row["exit"])
++            closed = check_closed_recorder(recorder_out, row["exit"])
+         except BaseException:
+             failure = traceback.format_exc()
+     if closed is None:
+@@ -119,17 +175,33 @@
+         save(out / "UNCLOSED.json", row)
+         print(json.dumps({"status": "UNCLOSED_NO_SEAL", "output": str(out), "exit": row["exit"]}, sort_keys=True))
+         return 1
+-    after = {str(p): pin(p) for p in inputs}
+-    save(out / "INPUTS_AFTER.json", after)
+-    row.update(finished_epoch=time.time(), failure=failure, inputs_unchanged=before == after,
++    after = None
++    try:
++        after = {str(p): pin(p) for p in inputs}
++        save(out / "INPUTS_AFTER.json", after)
++    except BaseException:
++        failure = (failure or "") + "\nINPUT_CLOSURE:\n" + traceback.format_exc()
++    row.update(finished_epoch=time.time(), inputs_unchanged=before == after,
+                cache_absent=not Path(sys.pycache_prefix).exists())
+     for name in ("recorder.stdout", "recorder.stderr"):
+         if (out / name).is_file():
+             row[name + "_pin"] = pin(out / name)
+     row["recorder_closure"] = closed
+     row["recorder_seal"] = closed["manifest"]
+-    okay = failure is None and row["exit"] == 0 and before == after and row["cache_absent"]
+-    row["status"] = "PASS_LAUNCH" if okay else "FAIL_PRESERVED"
++    launcher_closure = False
++    try:
++        late = runtime("AFTER_RECORDER_AND_INPUT_CLOSURE")
++        save(out / "LAUNCHER_RUNTIME_AFTER.json", late)
++        late_inputs = {**late["mapped_files"], **{v["path"]: {k: v[k] for k in ("sha256", "bytes", "resolved")}
++                       for v in late["modules"].values()}}
++        known = {v["resolved"]: v for v in before.values()}
++        launcher_closure = all(path in known and known[path] == value for path, value in late_inputs.items())
++    except BaseException:
++        failure = (failure or "") + "\nLAUNCHER_OBSERVATION_CLOSURE:\n" + traceback.format_exc()
++    row["failure"] = failure
++    row["launcher_observed_input_closure"] = launcher_closure
++    okay = failure is None and row["exit"] == 0 and before == after and row["cache_absent"] and launcher_closure
++    row["status"] = "PASS_ROOT_TERMINAL_LAUNCH_NOT_VIEWED" if okay else "FAIL_PRESERVED"
+     save(out / "RECEIPT.json", row)
+     paths = sorted(p for p in out.rglob("*") if p.is_file())
+     with (out / "SHA256SUMS").open("x") as stream:

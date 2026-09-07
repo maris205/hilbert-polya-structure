@@ -1,0 +1,895 @@
+                                         An improved kernelization algorithm for Trivially Perfect
+                                                                   Editing
+                                                                           Maël Dumas and Anthony Perez
+
+                                             Univ. Orléans, INSA Centre Val de Loire, LIFO EA 4022, F-45067 Orléans, France
+
+
+                                                                                     October 27, 2023
+arXiv:2306.16899v2 [cs.DS] 26 Oct 2023
+
+
+
+
+                                                                                          Abstract
+                                                    In the Trivially Perfect Editing problem one is given an undirected graph G =
+                                                (V, E) and an integer k and seeks to add or delete at most k edges in G to obtain a trivially
+                                                perfect graph. In a recent work, Dumas et al. [16] proved that this problem admits a kernel
+                                                with O(k 3 ) vertices. This result heavily relies on the fact that the size of trivially perfect
+                                                modules can be bounded by O(k 2 ) as shown by Drange and Pilipczuk [14]. To obtain their
+                                                cubic vertex-kernel, Dumas et al. [16] then showed that a more intricate structure, so-called
+                                                comb, can be reduced to O(k 2 ) vertices. In this work we show that the bound can be
+                                                improved to O(k) for both aforementioned structures and thus obtain a kernel with O(k 2 )
+                                                vertices. Our approach relies on the straightforward yet powerful observation that any large
+                                                enough structure contains unaffected vertices whose neighborhood remains unchanged by
+                                                an editing of size k, implying strong structural properties.
+
+
+                                         1     Introduction
+                                         In the Trivially Perfect Editing problem one is given an undirected graph G = (V, E) and
+                                         an integer k and seeks to edit (add or delete) at most k edges in G so that the resulting graph
+                                         is trivially perfect (i.e. does not contain any cycle on four vertices nor path on four vertices as
+                                         an induced subgraph). More formally we consider the following problem:
+
+                                               Trivially Perfect Editing
+                                              Input: A graph G = (V, E), a parameter k ∈ N
+                                              Question: Does there exist a set F ⊆ [V ]2 of size at most k, such that the graph
+                                              H = (V, E△F ) is trivially perfect?
+
+
+                                             Here [V ]2 denotes the set of all pairs of elements of V and E△F = (E ∪ F ) \ (E ∩ F ) is the
+                                         symmetric difference between sets E and F . We define similarly the deletion (resp. completion)
+                                         variant of the problem by only allowing to delete (resp. add) edges. Graph modification covers
+                                         a broad range of well-studied problems that find applications in various areas. For instance,
+                                         Trivially Perfect Editing has been used to define the community structure of complex
+                                         networks by Nastos and Gao [31] and is closely related to the well-studied graph parameter tree-
+                                         depth [21, 33]. Theoretically, some of the earliest NP-Complete problems are graph modification
+                                         problems [26, 20]. Regarding edge (graph) modification problems, one of the most notable one is
+                                         the Minimum Fill-in problem which aims at adding edges to a given graph to obtain a chordal
+
+                                                                                               1
+graph (i.e. a graph that does not contain any induced cycle of length at least 4). In a seminal
+result, Kaplan et al. [25] proved that Mininum Fill-in admits a parameterized algorithm as
+well as a kernel containing O(k 3 ) vertices. This result was later improved to O(k 2 ) vertices by
+Natanzon et al. [32]. Parameterized complexity and kernelization algorithms provide a powerful
+theoretical framework to cope with decision problems.
+
+Parameterized complexity A parameterized problem Π is a language of Σ∗ × N, where Σ is
+a finite alphabet. An instance of a parameterized problem is a pair (I, k) with I ⊆ Σ∗ and k ∈ N,
+called the parameter. A parameterized problem is said to be fixed-parameter tractable if it can
+be decided in time f (k) · |I|O(1) . An equivalent definition of fixed-parameter tractability is the
+notion of kernelization. Given an instance (I, k) of a parameterized problem Π, a kernelization
+algorithm for Π (kernel for short) is a polynomial-time algorithm that outputs an equivalent
+instance (I ′ , k ′ ) of Π such that |I ′ | ⩽ h(k) for some function h depending on the parameter
+only and k ′ ⩽ k. It is well-known that a parameterized problem is fixed-parameter tractable if
+and only if it admits a kernelization algorithm (see e.g. [19]). Problem Π is said to admit a
+polynomial kernel whenever h is a polynomial.
+
+Related work Since the work of Kaplan et al. [25] many polynomial kernels for edge mod-
+ification problems have been devised (see e.g. [3, 2, 12, 24, 1, 14, 27, 15, 11]). There is also
+evidence that under some reasonable theoretical complexity assumptions, some graph mod-
+ification problems do not admit polynomial kernels [28, 23, 8, 30]. We refer the reader to
+a recent comprehensive survey on kernelization for edge modification problems by Crespelle
+et al. [9]. The Trivially Perfect Editing problem has been well-studied in the litera-
+ture [5, 22, 4, 1, 14, 16, 29, 31]. Recall that trivially perfect graphs are a subclass of chordal
+graphs that additionally do not contain any path on four vertices as an induced subgraph. These
+graphs are also known as quasi-threshold graphs. We note here that while the NP-Completeness
+of completion and deletion toward trivially perfect graphs has been known for some time [34, 6],
+the NP-Completeness of Trivially Perfect Editing remained open until the work of Nas-
+tos and Gao [31]. Thanks to a result of Cai [7] stating that graph modification toward any
+graph class characterized by a finite set of forbidden induced subgraphs is fixed-parameter
+tractable, Trivially Perfect Editing is fixed-parameter tractable. Regarding kernelization
+algorithms, Drange and Pilipczuk [14] provided a kernel containing O(k 7 ) vertices, a result that
+was recently improved to O(k 3 ) vertices by Dumas et al. [16]. These results also work for the
+deletion and completion variants. For the latter problem, a recent result by Bathie et al. [1]
+improves the bound to O(k 2 ) vertices.
+   As part of the proof for the size of their cubic vertex-kernel, Dumas et al. [16] subsequently
+showed the following result. The structures used in Theorem 1 shall be defined later.
+
+Theorem 1 ([16]). Let (G, k) be an instance1 of Trivially Perfect Editing such that the
+sizes of its trivially perfect modules and combs are bounded by p(k) and c(k), respectively. If
+(G, k) is a Yes-instance then G has O(k 2 + k · (p(k) + c(k))) vertices.
+
+    The proof of [16, Theorem 1] actually implies an O(k 3 + k · (p(k) + c(k))) bound and needs
+a small adjustment for Theorem 1 to hold. We give a detailed proof of Theorem 1 for the sake
+of completeness (Section 3.2).
+   The cubic vertex-kernel of Dumas et al. [16] relied on a result of Drange and Pilipczuk [14]
+that proved that p ∈ O(k 2 ) and then used new reduction rules implying that c ∈ O(k 2 ).
+  1
+      As we shall see Section 3.1 the instance also needs to be further reduced under standard reduction rules.
+
+
+
+                                                         2
+Our contribution We provide reduction rules and structural properties on trivially perfect
+graphs that will imply an O(k) bound for both functions p and c of Theorem 1. These new
+reduction rules allow us to prove the existence a quadratic vertex-kernel for Trivially Perfect
+Editing. To bound the size of trivially perfect modules by O(k), we first reduce the ones that
+contain a large matching of non-edges with the use of a simple reduction rule. To bound the
+ones that do not contain such structures, we will rely on so-called combs, introduced by Dumas
+et al. [16]. Combs correspond to parts of the graph that induce trivially perfect graphs (but
+not necessarily modules) with strong properties on their neighborhoods. They are composed
+of two main parts, called the shaft and the teeth, that will be independently reduced to a size
+linear in k. The reduction rule dealing with shafts will ultimately allow us to bound the size
+of trivially perfect modules with no large matching of non-edges. Our approach relies on the
+straightforward yet powerful observation that any large enough structure contains unaffected
+vertices whose neighborhood remains unchanged by an editing of size k. Finally, we note that
+our kernel works for both the deletion and completion variants of the problem.
+
+Outline Section 2 presents some preliminary notions and structural properties on (trivially
+perfect) graphs. Section 3 describes known as well as our additional reduction rules to obtain the
+claimed kernelization algorithm while Section 4 explain why our kernel is safe for the deletion
+variant of the problem. We conclude with some perspectives in Section 5.
+
+
+2    Preliminaries
+We consider simple, undirected graphs G = (V, E) where V denotes the vertex set of G and
+E ⊆ [V ]2 its edge set. We will sometimes use V (G) and E(G) to clarify the context. The open
+(respectively closed) neighborhood of a vertex u ∈ V is denoted by NG (u) = {v ∈ V | {u, v} ∈
+E} (respectively NG [u] = NG (u) ∪ {u}). Given a subset of vertices S ⊆ V the neighborhood
+of S is defined as NG (S) = ∪v∈S NG (v) \ S. Similarly, given a vertex u ∈ V and S ⊆ V we let
+NS (u) = NG (u) ∩ S. In all aforementioned cases we forget the subscript mentioning graph G
+whenever the context is clear. Given a subset of vertices S ⊆ V we denote by G[S] the subgraph
+induced by S, that is G[S] = (S, ES ) where ES = {uv ∈ E : u ∈ S, v ∈ S}. In a slight abuse of
+notation, we use G \ S to denote the induced subgraph G[V \ S]. A connected component is a
+maximal subset of vertices S ⊆ V such that G[S] is connected. A module of G is a set M ⊆ V
+such that for all u, v ∈ M it holds that N (u) \ M = N (v) \ M . Two vertices u and v are true
+twins whenever N [u] = N [v], and a critical clique is a maximal set of true twins. A vertex
+u ∈ V is universal if NG [u] = V . The set of universal vertices forms a clique and is called the
+universal clique of G. A graph is trivially perfect if and only if it does not contain any C4 (a
+cycle on 4 vertices) nor P4 (a path on 4 vertices) as an induced subgraph. In the remainder of
+this section we describe characterizations and structural properties of trivially perfect graphs.
+The first one relies on the well-known fact that any connected trivially perfect graph contains
+a universal vertex (see e.g. [36]).
+
+Definition 1 (Universal clique decomposition, [13]). A universal clique decomposition
+                                                                                        (UCD)
+of a connected graph G = (V, E) is a pair T = T = (VT , ET ), B = {Bt }t∈VT where T is a
+rooted tree and B is a partition of the vertex set V into disjoint nonempty subsets such that:
+
+    • if {v, w} ∈ E and v ∈ Bt , w ∈ Bs then s and t are on a path from a leaf to the root, with
+      possibly s = t,
+
+    • forSevery node t ∈ VT , the set Bt of vertices is the universal clique of the induced subgraph
+      G[ s∈V (Tt ) Bs ], where Tt denotes the subtree of T rooted at t.
+
+                                                 3
+    A simple way of understanding Definition 1 is to observe that such a decomposition can be
+obtained by removing the set U of universal vertices of G and then recursively repeating this
+process on every trivially perfect connected component of G \ U . Drange et al. [13] showed that
+a connected graph admits a UCD if and only if it is trivially perfect. Using the notion of UCD,
+Dumas et al. [16] proved the following characterization for trivially perfect graphs that will be
+heavily used in our reduction rules. A collection of subsets F ⊆ 2U over some universe U is a
+nested family if A ⊆ B or B ⊆ A holds for any A, B ∈ F.
+
+Lemma 1 ([16]). Let G = (V, E) be a graph, S ⊆ V a maximal clique of G and {K1 , ..., Kr } the
+set of connected components of G\S. The graph G is trivially perfect if and only if the following
+conditions are verified:
+
+  (i) G[S ∪ Ki ] is trivially perfect, 1 ⩽ i ⩽ r
+      S
+ (ii) 1⩽i⩽r {NG (Ki )} is a nested family
+
+(iii) ∀u ∈ Ki , ∀v ∈ NG (Ki ), {u, v} ∈ E, 1 ⩽ i ⩽ r. In other words, Ki is a module of G.
+
+    In the remainder of this paper, a k-editing of G into a trivially perfect graph is a set F ⊆ [V ]2
+such that |F | ⩽ k and the graph H = (V, E△F ) is trivially perfect. Here E△F = (E ∪ F ) \
+(E ∩ F ) denotes the symmetric difference between sets E and F . For the sake of readability,
+we simply speak of k-editing of G. We say that F is a k-completion (resp. k-deletion) when
+H = (V, E ∪ F ) (resp. H = (V, E \ F )) is trivially perfect. A vertex is affected by a k-editing
+F if it is contained in some pair of F and unaffected otherwise.
+
+Packing, anti-matching and blow-up We now define some structures and operators that
+will be useful for our kernelization algorithm. We assume in the remainder of this section that
+we are given a graph G = (V, E). The notion of r-packing will be used in reduction rules to
+ensure the existence of unaffected vertices in ordered sets of critical cliques or of trivially perfect
+modules.
+
+Definition 2 (r-packing). Let S = {C1 , . . . , Cq } be an ordered collection of pairwise disjoint
+subsets
+Pp      of V . We say that C ⊆ S is a r-packing of S if C = {C1 , . . . , Cp } for 1 ⩽ p ⩽ q,
+  i=1 |Ci | ⩾ r and the number of vertices contained in C is minimum for this property.
+
+In a slight abuse of notation we use C to denote both {C1 , . . . , Cp } and the set ∪pi=1 Ci .
+
+Observation 1. Let S = {C1 , . . . , Cq } be an ordered collection of pairwise disjoint subsets of V
+such that |CP
+            j | ⩽ c, for 1 ⩽ j ⩽ q and some integer c > 0. Let C = {C1 , . . . , Cp } be a r-packing
+of S. Then pi=1 |Ci | ⩽ r + (c − 1).
+
+Proof. Since pi=1 |Ci | ⩾ r and the number of vertices in C is minimum for this property we
+              P
+
+have that p−1
+          P
+             i=1 |Ci | ⩽ r − 1. The result follows from the fact that |Cp | ⩽ c.
+
+Definition 3 (Anti-matching). An anti-matching of G is a set of pairwise disjoint pairs {u, v}
+of vertices of G such that {u, v} ̸∈ E.
+
+In a slight abuse of notation we denote by V (D) the set of vertices contained in pairs of an
+anti-matching D.
+
+Observation 2. Let (G, k) be a Yes-instance of Trivially Perfect Editing and M be a
+module containing a (k + 1)-sized anti-matching. Let F be a k-editing of G and H = G△F .
+Then NG (M ) is a clique in H.
+
+
+                                                   4
+Proof. Let D = {{ui , vi } | 1 ⩽ i ⩽ k + 1} be a (k + 1)-sized anti-matching of M . Assume
+for a contradiction that NG (M ) is not a clique in H and let {u, v} be a non-edge of H with
+u, v ∈ NG (M ). Since |F | ⩽ k there exists 1 ⩽ j ⩽ k + 1 such that {uj , vj } ∈     / F and for every
+x ∈ V (G) \ M , {uj , x}, {vj , x} ∈
+                                   / F . Hence {uj , u, vj , v} induces a C4 in H, a contradiction.
+
+   We conclude this section by introducing a gluing operation on trivially perfect graphs,
+namely blow-up, that will ease the design of some reduction rules.
+
+Definition 4 (Blow-up). Let u be a vertex of G = (V, E) and H = (VH , EH ) be any graph.
+The blow-up of G by H at u, denoted G(u → H) is the graph obtained by replacing u by H in
+G. More formally:
+                                                                          
+              G(u → H) = (V \ {u}) ∪ VH , E(G \ {u}) ∪ EH ∪ (VH × NG (u)
+
+Proposition 1. Assume that G is trivially perfect and let u be a vertex of G such that NG [u]
+is a clique. For any trivially perfect graph H, the graph G(u → H) is trivially perfect.
+
+Proof. Let S ⊆ V \ {u} be any maximal clique of G containing NG (u). We apply the forward
+direction of Lemma 1 on S to obtain components {K      S 1 , . . . , Kr } that are modules such that
+G[S ∪ Ki ] is trivially perfect for every 1 ⩽ i ⩽ r and 1⩽i⩽r {NG (Ki )} is a nested family. Note
+that by construction and w.l.o.g., we may assume K1 = {u}. The result then directly follows
+from the reverse direction of Lemma 1 by replacing K1 by H.
+
+
+3     Reduction rules
+In the remainder of this section we assume that we are given an instance (G = (V, E), k) of
+Trivially Perfect Editing.
+
+3.1   Standard reduction rules
+We first describe some well-known reduction rules [2, 3, 14, 16] that are essential to obtain a
+vertex-kernel using Theorem 1 [16]. We will assume in the remainder of this work that the
+instance at hand is reduced under Rules 1 and 2, meaning that none of them applies to the
+instance.
+
+Rule 1. Let C ⊆ V be a connected component of G such that G[C] is trivially perfect. Remove
+C from G.
+
+Rule 2. Let K ⊆ V be a critical clique of G such that |K| > k + 1. Remove |K| − (k + 1)
+arbitrary vertices in K from G.
+
+Lemma 2 (Folklore, [2, 14]). Rules 1 and 2 are safe and can be applied in polynomial time.
+
+3.2   An O(k) bound on the size of trivially perfect modules
+Using an additional reduction rule bounding the size of independent sets in any trivially perfect
+module by O(k), Drange and Pilipczuk [14] proved that such modules can be reduced to O(k 2 )
+vertices. We strengthen this result by proving that trivially perfect modules can further be
+reduced to O(k) vertices. We first deal with modules that contain a large anti-matching.
+
+Rule 3. Let M ⊆ V be a trivially perfect module of G. If G[M ] contains a (k + 1)-sized
+anti-matching D, then remove the vertices contained in M \ V (D).
+
+
+                                                  5
+Lemma 3. Rule 3 is safe.
+
+Proof. Let G′ = (V ′ , E ′ ) be the graph obtained after application of Rule 3. We need to prove
+that (G = (V, E), k) is a Yes-instance if and only if (G′ = (V ′ , E ′ ), k) is a Yes-instance.
+The forward direction is straightforward since G′ is an induced subgraph of G and trivially
+perfect graphs are hereditary. We now consider the reverse direction. Let M ′ = V (D), the
+set of vertices kept by Rule 3. Moreover, let F ′ be a k-editing of G′ and H ′ = G′ △F ′ . We
+will construct a k-editing F ∗ of G. Note that since the pairs contained in an anti-matching
+are disjoint (Definition 3), |M ′ | = 2(k + 1). Moreover, since |F ′ | ⩽ k there are at most 2k
+affected vertices. Hence let u be an unaffected vertex of M ′ . By Observation 2 and since M ′
+contains a (k + 1)-sized anti-matching we have that NG′ (M ′ ) is a clique in H ′ . The graph
+Hu = H ′ \ (M ′ \ {u}) is trivially perfect by heredity and NHu (u) = NG′ (M ′ ). It follows that
+NHu (u) is a clique and Proposition 1 implies that the graph H = Hu (u → M ) is trivially
+perfect. Let F ∗ be the editing such that H = G△F ∗ . Since u is unaffected by F ′ and u ∈ M
+we have NHu (u) = NG (M ). Hence, since M is a module in G we have that NH (v) = NG (v) for
+every vertex v ∈ M , implying that F ∗ ⊆ F ′ . This concludes the proof.
+
+   In order to bound the size of any trivially perfect module by O(k), we actually prove a more
+general reduction rule that will be useful for the rest of our kernelization algorithm. This rule
+operates on a more intricate structure, so-called comb [16], that induces a trivially perfect graph
+but not necessarily a module.
+
+
+
+
+                          Vp                                             Vf
+
+                                    C1      C2    C            Cl
+
+
+
+
+                                    R1      R2                 Rl
+                                                  R
+Figure 1: A comb of a graph G = (V, E) with shaft C and teeth R. Each set Ci is a critical
+clique while each set Ri induces a (possibly disconnected) trivially perfect module, 1 ⩽ i ⩽ l.
+Notice that the sets Vp and Vf might be adjacent to some other vertices of the graph.
+
+
+Definition 5 (Comb [16]). A pair (C, R) of disjoint subsets of V is a comb of G if:
+
+   • G[C] is a clique that can be partitioned into l critical cliques {C1 , ..., Cl }
+
+   • R can be partitioned into l non-empty non-adjacent trivially perfect modules {R1 , ..., Rl }
+
+   • NG (Ci ) ∩ R = lj=i Rj and NG (Ri ) ∩ C = ij=1 Cj for 1 ⩽ i ⩽ l
+                    S                         S
+
+   • there exist two (possibly empty) subsets of vertices Vf , Vp ⊆ V (G)\{C ∪ R} such that:
+
+        – ∀x ∈ C, NG (x)\(C ∪ R) = Vp ∪ Vf and
+        – ∀y ∈ R, NG (y)\(C ∪ R) = Vp .
+
+                                                  6
+   Given a comb (C, R), C is called the shaft of the comb and R the teeth of the comb. See
+Fig. 1 for an illustration of Definition 5. Recall that we assume that the graph is reduced under
+Rule 2, which means that |Ci | ⩽ k + 1 for 1 ⩽ i ⩽ l. Dumas et al. [16] showed the following
+proposition on the structure of combs.
+
+Proposition 2 ([16]). Given a comb (C, R) of G, the subgraph G[C ∪ R] is trivially perfect.
+Moreover the sets Vp and Vf , and the ordered partitions (C1 , . . . , Cl ) of C and (R1 , . . . , Rl ) of
+R are uniquely determined.
+
+    In the following we assume that any comb (C, R) is given with the ordered partitions
+(C1 , . . . , Cl ) of C and (R1 , . . . , Rl ) of R. We note here that Definition 5 slightly differs from the
+one given in [16] where the set Vf was required to be non-empty for technical reasons. Dropping
+this constraint will ease the presentation of our reduction rules.
+    We now give several observations that will help understand Definition 5, in particular its
+relation to trivially perfect modules. Given a trivially perfect graph G = (V, E) and its UCD
+TG = (T, B), one can construct a comb (C, R) of G by simply taking a path P from a node v1
+of T to one of its descendent vl . The shaft C are the vertices in bags of this path, the teeth R
+are the bags of subtrees rooted in the children (not on P ) of any node on the path P . We can
+observe that in this case, Vp corresponds to vertices in the bags on the path from the parent of
+v1 to the root of T and that Vf is empty.
+    In particular, the vertex set of any connected trivially perfect graph can be partitioned into
+a comb (C, R) by taking a path from the root of its UCD to one of its leaves. This means that
+when Vp = Vf = ∅, Definition 5 corresponds to a connected trivially perfect graph. Similarly, if
+only the set Vf is empty then Definition 5 corresponds to a connected trivially perfect module
+since for every u ∈ C ∪ R it holds that NG (u) \ (C ∪ R) = Vp .
+   The following directly comes from the definition of a comb and is verified whether sets Vp
+and Vf are empty or not.
+
+Observation 3. The set of vertices C (resp. R) is a module of G \ R (resp. G \ C).
+
+    We will show that combs can be safely reduced to O(k) vertices. We first focus on combs
+having a large shaft, which will allow us to reduce trivially perfect modules with small anti-
+matching to O(k) vertices (Lemma 6). Then we turn our attention to combs with many vertices
+in the teeth to bound the size of every comb to O(k) vertices (Lemma 8).
+
+Combs with large shafts Dumas et al. [16] showed that the length of a comb (i.e. the
+number l of different critical cliques in the shaft) can be reduced linearly in k. However, as
+critical cliques contain O(k) vertices by Rule 2, it only allowed the authors to bound the number
+of vertices in shafts of combs to O(k 2 ). Rule 4 presented in this section keeps two sets Ca and
+Cb containing a linear number (in k) of vertices at the beginning and at the end of the shaft,
+allowing to bound its size linearly in k. The two sets Ca and Cb will be large enough to ensure
+the existence of two vertices that will be unaffected by a given k-editing of the graph. We will
+use such vertices to prove that there exists a k-editing of the graph that does not affect any
+vertex in the shaft lying between Ca and Cb , implying the safeness of the rule.
+
+Rule 4. Let (C, R) be a comb of G such that there exist disjoint (2k + 1)-packings Ca of
+{C1 , . . . , Cl } and Cb of {Cl , Cl−1 , . . . , C1 }. Remove C ′ = C \ (Ca ∪ Cb ) from G.
+
+Lemma 4. Rule 4 is safe.
+
+
+
+                                                     7
+Proof. Let G′ = G \ C ′ be the graph obtained after application of Rule 4. Since G′ is an induced
+subgraph of G and since trivially perfect graphs are hereditary, any k-editing of G is a k-editing
+of G′ .
+    For the reverse direction, let F ′ be a k-editing of G′ and H ′ = G′ △F ′ . We will construct
+a k-editing F ∗ of G. Let ca and cb be unaffected vertices in Ca and Cb , respectively. Note
+that both sets contain at least 2k + 1 vertices and that F ′ affects at most 2k vertices, hence
+ca and cb are well-defined. Let Ca and Cb be the critical cliques of C containing ca and cb ,
+1 ⩽ a < b ⩽ l. Moreover, let C◦ = Ca+1 ∪ . . . ∪ Cb−1 and R◦ = Ra ∪ . . . ∪ Rb−1 . Similarly, let
+C< = C1 ∪ . . . ∪ Ca , C> = Cb ∪ . . . ∪ Cl and R> = Rb ∪ . . . ∪ Rl These sets are depicted Figure 2.
+Finally, let G◦ = G \ C◦ and H◦ = H ′ \ C◦ . Notice in particular that H◦ is trivially perfect and
+that C ′ ⊆ C◦ .
+
+                       C<                         C◦                         C>
+
+                  C1        Ca                                          Cb        Cl
+
+
+                  R1             Ra                                     Rb        Rl
+
+                                                  R◦                         R>
+Figure 2: Illustration of the comb and the sets used in the proof of Lemma 4. The circles are
+critical cliques of the shaft and the triangles are teeth. The red vertices correspond to ca and
+cb , the light blue rectangles correspond to sets Ca and Cb and the light red rectangle corresponds
+to C ′ , which is removed by Rule 4.
+
+    Let F◦ ⊆ F ′ be the k-editing such that H◦ = G◦ △F◦ and S◦ be a maximal clique of H◦
+containing {ca , cb }. Notice that since ca and cb are unaffected, S◦ is included in NG◦ ({ca , cb }) =
+C ∪ Vp ∪ Vf ∪ R> . We use Lemma 1 on S◦ to obtain a set of connected components {K1 , . . . , Kr }
+of H◦ \ S◦ such that {K1 , . . . , Kr } are modules in H◦ whose (possibly empty) neighborhoods in
+S◦ form a nested family. We first modify F◦ to obtain a k-editing of G◦ where vertices of R◦
+are affected uniformly.
+Claim 1. There exists a k-editing F ∗ of G◦ such that, in H ∗ = G◦ △F ∗ , R◦ is a module and
+H ∗ [R◦ ] = G[R◦ ].
+Proof. We begin with several useful observations. First, R◦ is a module in G◦ since R ⊃ R◦
+is a module in G \ C (Observation 3) and vertices of R◦ are adjacent to C< and non adjacent
+to C> . Next, since any component Ki is a module in H◦ , 1 ⩽ i ⩽ r, and since ca and cb are
+unaffected by F◦ , we have NH◦ (Ki ) ∩ {ca , cb } = NG◦ (Ki ) ∩ {ca , cb }. In other words, vertices in
+a same component Ki must have the same adjacency with {ca , cb } in G◦ and in H◦ . Similarly,
+no vertex v ∈ R◦ belongs to S◦ since NG◦ (v) ∩ {cb } = ∅. Moreover, the only vertices of G◦ that
+are adjacent to ca but not cb are exactly those of R◦ . Hence for any vertex v◦ ∈ R◦ it holds
+that NH◦ (v◦ ) ⊆ S◦ ∪ R◦ .
+    Assume now that R◦ is not a module in H◦ and let v◦ ∈ R◦ be a vertex contained in the least
+number of pairs of F◦ with the other element in S◦ . Consider the graph H̃ = H◦ \ (R◦ \ {v◦ }),
+which is trivially perfect by heredity. Since NH◦ (v◦ ) ⊆ S◦ ∪ R◦ , it follows that NH̃ (v◦ ) ⊆ S◦ is
+a clique. Hence Proposition 1 implies that the graph H ∗ = H̃(v◦ → G[R◦ ]) is trivially perfect.
+Let F ∗ be the editing such that H ∗ = G◦ △F ∗ . By the choice of v◦ we have |F ∗ | ⩽ |F◦ |. It
+follows that F ∗ is a desired k-editing, concluding the proof of Claim 1.                           ⋄
+
+
+                                                  8
+    We henceforth consider H ∗ = G◦ △F ∗ where F ∗ is the k-editing from Claim 1. Note that
+the components around S◦ may be different in H◦ \S◦ and H ∗ \S◦ . In a slight abuse of notation,
+we still define these components by {K1 , . . . , Kr }. Recall that {K1 , . . . , Kr } are modules in H ∗
+whose (possibly empty) neighborhoods in S◦ form a nested family.
+Claim 2. The graph H = G△F ∗ is trivially perfect.
+Proof. The graph H corresponds to H ∗ where vertices of C◦ have been added with the same
+neighborhood as in G. Let us first observe that S = S◦ ∪ C◦ is a maximal clique in H. Indeed,
+C◦ is a clique by definition and S◦ ⊆ C ∪ Vp ∪ Vf ∪ R> ⊆ NH (C◦ ) = NG (C◦ ) (recall that
+C is adjacent to Vp ∪ Vf by Definition 5 and that vertices of C◦ are adjacent to every vertex
+of R> ). Hence components {K1 , . . . , Kr } defined in H ∗ \ S◦ are the same in H \ S and their
+neighborhoods are nested in S◦ . We split {K1 , . . . , Kr } into three types components w.r.t their
+adjacencies with {ca , cb }, namely:
+
+   1. α-components that are non-adjacent to both ca and cb
+
+   2. β-components that are adjacent to ca but not cb
+
+   3. δ-components that are adjacent to both ca and cb
+
+    In what follows we let Kα , Kβ and Kδ denote any α-, β- and δ-component, respectively.
+Note that NH ∗ (Kα ) ⊆ NH ∗ (Kβ ) ⊆ NH ∗ (Kδ ) ⊆ S◦ holds by construction. Recall that since ca
+and cb are unaffected by F ∗ , NG (Ki ) ∩ {ca , cb } = NH (Ki ) ∩ {ca , cb } for any Ki . We claim that
+{NH (Ki ) | 1 ⩽ i ⩽ r} is a nested family. Note that Lemma 1 will imply the result since S is
+a maximal clique in H. To sustain this claim, recall that the neighborhoods of vertices of C◦
+are identical in G and H. Moreover, NH [cb ] ⊆ NH [C◦ ] ⊆ NH [ca ] holds as these vertices are
+unaffected by F ∗ . It follows that α-components (resp. δ-components) are non-adjacent (resp.
+adjacent) to every vertex of C◦ in H. This means in particular that the neighborhoods of both
+α- and δ-components are nested in S. Moreover we can observe that vertices of β-components
+are exactly the ones of R◦ since they are the only ones that are adjacent to ca but not cb in G.
+Hence, in H, we still have:
+                                 NH (Kα ) ⊆ NH (Kβ ) ⊆ NH (Kδ )
+   It remains to prove that the neighborhoods of β-components are nested in S. Let w.l.o.g.
+{K1 , . . . , Kp }, 1 ⩽ p ⩽ r be the β-components. By definition of a comb, the β-components
+(which are also R◦ ) can be ordered w.r.t. the inclusion of their neighborhood in G[C◦ ]. We can
+assume w.l.o.g. that the ordering is NG[C◦ ] (K1 ) ⊆ . . . ⊆ NG[C◦ ] (Kp ). Moreover we can observe
+that for any β-component Ki we have NG[C◦ ] (Ki ) = NH[C◦ ] (Ki ), 1 ⩽ i ⩽ p. Since R◦ is a
+module in H ∗ by Claim 1 and since vertices of β-components are exactly those of R◦ , it follows
+that the neighborhoods of β-components are nested. Hence {NH (Ki ) | 1 ⩽ i ⩽ r} is a nested
+family and H is a trivially perfect graph by Lemma 1.                                             ⋄
+
+    By Claim 2 the graph H = G△F ∗ is trivially perfect and as |F ∗ | ⩽ k, it follows that F ∗ is
+a k-editing of G, concluding the proof of Lemma 4.
+
+Observation 4. Assume that the instance (G, k) is reduced under Rules 2 and 4. For any comb
+(C, R) of G it holds that |C| ⩽ 6k + 2.
+Proof. Since G is reduced under Rule 2 every critical clique Ci of the shaft contains at most k+1
+vertices, 1 ⩽ i ⩽ l. By Observation 1, any (2k + 1)-packing of {C1 , . . . , Cl } (resp. {Cl , . . . , C1 })
+contains at most 3k + 1 vertices. It follows that |C| ⩽ 6k + 2 since otherwise one could find two
+disjoint (2k + 1)-packings of {C1 , . . . , Cl } and of {Cl , . . . , C1 } and Rule 4 would apply.
+
+                                                     9
+    We are now ready to show how to reduce the size of any trivially perfect module. We need
+a combinatorial result that will be useful to obtain the claimed bound.
+
+Lemma 5. Let G = (V, E) be a connected trivially perfect graph and α be the size of a maximum
+anti-matching of G. There exists a comb (C, R) of G such that V = C ∪ R and |R| ⩽ 4α.
+Moreover, such a comb can be computed in polynomial time.
+
+Proof. We provide a constructive proof that will directly imply the last part of the result. Recall
+that any trivially perfect graph contains a universal vertex and let U1 ⊆ V (G) be the universal
+clique of G. Let R11 , . . . , Rp11 denote the connected components of G \ U1 . Since G does not
+contain any (α + 1)-sized anti-matching, there is at most one set Ri1 , 1 ⩽ i ⩽ p1 such that
+|Ri1 | > α (as there is no edge between Ri1 and Rj1 , 1 ⩽ i < j ⩽ p1 ).
+     Assume without loss of generality that |R11 | > α. We add all vertices of ∪pi=2     1
+                                                                                           Ri1 to some set
+                                                   1
+R< and we will repeat this process on G[R1 ] until every connected component is smaller than
+α. More formally, at step j > 1, for the trivially perfect graph Gj = G[R1j−1 ], let Uj be its
+universal clique and R1j , . . . , Rpj j be the connected components of Gj \ Uj . Let R1j be the one
+of size greater than α if it exists, if it doesSnot, S  stop the process and let l be the last step. In
+                                                          pj   j
+particular, |Ril | ⩽ α, 1 ⩽ i ⩽ pl . Let R< = l−1                               l
+                                                     j=1 i=2 Ri and R> = R1 ∪ · · · ∪ Rpl .
+                                                                                           l
+
+     Recall that |R1l−1 | > α by construction. This implies that |R< | ⩽ α since otherwise G[R< ∪
+  l−1
+R1 ] would contain a (α + 1)-sized anti-matching. We claim that |R> | ⩽ 3α. To support             Sq thisl
+                                                      l      l       l           l             ′
+claim, let us consider the (α + 1)-packing {R1 , . . . , Rq } of {R1 , . . . , Rpl } and let R = i=1 Ri
+be its vertices. Let R′′ = R> \ R′ . Recall that l is the last step of the process and |Ril | ⩽ α
+for 1 ⩽ i ⩽ pl . Hence by Observation 1 it holds that |R′ | ⩽ 2α. Thus, we have that |R′′ | ⩽ α
+since otherwise G[R′ ∪ R′′ ] would contain a (α + 1)-sized anti-matching, a contradiction. Hence
+|R> | = |R′ | + |R′′ | ⩽ 3α.
+     To obtain a comb for G we consider the set C = {U1 , . . . , Ul } as the shaft (recall that U1
+is the universal clique of G and that Uj denotes the universal clique of G[R1j−1 ] at every step
+1 < j ⩽ l). Moreover, for every 1 ⩽ j < l, the tooth Rj is equal to R2j ∪. . .∪Rpj j , the last tooth Rl
+being R> . By construction (C, R = lj=1 Rj ) is a comb of G such that |R| = |R< | + |R> | ⩽ 4α.
+                                           S
+This concludes the proof.
+
+Lemma 6. Assume that the instance (G, k) is reduced under Rules 1 to 4 and let M be a
+trivially perfect module of G. Then M contains at most 11k + 2 vertices.
+
+Proof. Observe that if M contains an anti-matching of size more than k, then it is reduced under
+Rule 3 and contains 2k + 2 vertices. Hence, suppose that M does not contain a (k + 1)-sized
+anti-matching. Assume first that G[M ] is connected. Let (C, R) be a comb obtained through
+Lemma 5, such that C ∪ R = M and |R| ⩽ 4k. By Observation 4 we have that |C| ⩽ 6k + 2. It
+follows that |M | ⩽ |C| + |R| ⩽ 10k + 2.
+     To conclude it remains to deal with the case where G[M ] is disconnected. Let {M1 , . . . , Mp }
+denote the connected components of G[M ]. As M does not contain a (k+1)-sized anti-matching,
+at most one of its connected component has size greater than k, we may assume w.l.o.g. that
+it is M1 , if existent. Let C be the (k + 1)-packing of {M1 , . . . , Mp }. As |M1 | ⩽ 10k + 2 and
+|Mi | ⩽ k for 2 ⩽ i ⩽ p, we have that |C| ⩽ 10k + 2. Moreover, since M does not contain any
+(k + 1)-sized anti-matching, |M \ C| ⩽ k and thus |M | ⩽ 11k + 2. This concludes the proof.
+
+
+
+
+                                                    10
+3.3   Combs with large teeth
+We now turn our attention to the case were a given comb contains many vertices in its teeth.
+The arguments are somewhat symmetric to the ones used in the proof of Lemma 4. The main
+difference lies in the fact that the information provided by unaffected vertices differ when they
+are contained in the teeth rather than in the shaft.
+Rule 5. Let (C, R) be a comb of G such that there exist three disjoint sets Ra , Rb and Rc where:
+   • Ra is a (2k + 1)-packing of {R1 , . . . , Rl },
+
+   • Rc = {Rl , . . . , Rq } is a (2k + 1)-packing of {Rl , . . . , R1 },
+
+   • Rb is a (2k + 1)-packing of {Rq−1 , . . . , R1 },
+Remove R′ = R \ (Ra ∪ Rb ∪ Rc ) from G.
+Lemma 7. Rule 5 is safe.
+Proof. Let G′ = G \ R′ be the graph obtained after application of Rule 5. Since G′ is an induced
+subgraph of G and since trivially perfect graphs are hereditary, any k-editing of G is a k-editing
+of G′ .
+    For the reverse direction, let F ′ be a k-editing of G′ and H ′ = G′ △F ′ . We will construct
+a k-editing F ∗ of G. Let ra , rb and rc be unaffected vertices in Ra , Rb and Rc , respectively.
+Note that these vertices exist as these sets contain at least 2k + 1 vertices and F ′ affects at
+most 2k vertices. Let Ra , Rb and Rc , 1 ⩽ a < b < c ⩽ l, be the teeth of R containing ra , rb
+and rb , respectively (these sets are well-defined since the packings Ra , Rb and Rc are disjoint).
+Moreover, since ra , rb and                          ′                      are equal in G′ and H ′
+                            rc are unaffected by F their neighborhoods
+                                                                
+and hence NH ′ (ra ) \ Ra ⊆ NH ′ (rb ) \ Rb ⊆ NH ′ (rc ) \ Rc .
+Claim 3. The set NH ′ (rb ) \ Rb is a clique in H ′ .
+Proof. Assume for a contradiction that NH ′ (rb ) \ Rb contains a non-edge {u, v}. Recall that
+there is no edge between Rb and Rc . Hence, since NH ′ (rb ) \ Rb ⊆ NH ′ (rc ) \ Rc we have that
+the set {rb , u, v, rc } induces a C4 in H ′ , a contradiction.                                ⋄
+
+    Let R◦ = Ra+1 ∪ . . . ∪ Rb−1 and C◦ = Ca+1 ∪ . . . ∪ Cb . Similarly, let C< = C1 ∪ . . . ∪ Ca ,
+R< = R1 ∪ . . . ∪ Ra and R> = Rb ∪ . . . ∪ Rl . Finally, let G◦ = G \ R◦ and H◦ = H ′ \ R◦ . These
+sets are depicted Figure 3. Notice in particular that H◦ is trivially perfect and that R′ ⊆ R◦ .
+Let F◦ ⊆ F ′ be the k-editing such that H◦ = G◦ △F◦ . We first modify F◦ to obtain a k-editing
+of G◦ where every vertex of C◦ is affected uniformly.
+Claim 4. There exists a k-editing F ∗ of G◦ such that, in H ∗ = G◦ △F ∗ , C◦ is a clique module.
+Proof. Note that C◦ is a critical clique in G◦ since C ⊃ C◦ is a module in G \ R (Observation 3)
+and vertices of C◦ are non-adjacent to vertices of R< and adjacent to vertices of R> . Assume
+now that C◦ is not a clique module in H◦ and let v◦ ∈ C◦ be a vertex contained in the least
+number of pairs of F◦ . Consider the graph H◦′ = H◦ \ (C◦ \ {v◦ }), which is trivially perfect by
+heredity, and let H ∗ be the graph obtained from H◦′ by adding vertices of C◦ \ {v◦ } as true twins
+of v◦ . Let F ∗ be the editing such that H ∗ = G◦ △F ∗ . The graph H ∗ is trivially perfect as the
+class of trivially perfect graphs is closed under true twin addition. It follows from construction
+that C◦ is a clique module in H ∗ and by the choice of v◦ , |F ∗ | ⩽ |F◦ |.                       ⋄
+
+   We henceforth consider H ∗ = G◦ △F ∗ where F ∗ is the editing from Claim 4. We now show
+that vertices of R◦ can be added into H ∗ while ensuring it remains trivially perfect.
+
+                                                     11
+                   C<                         C◦
+
+              C1        Ca                                    Cb               Cc   Cl
+
+
+              R1        Ra                                         Rb         Rc    Rl
+
+                   R<                         R◦                            R>
+Figure 3: Illustration of the comb and the sets used in the proof of Lemma 7. The circles are
+critical cliques of the shaft and the triangles are teeth. The red vertices correspond to ra , rb
+and rc , the light blue rectangles correspond to sets Ra , Rb and Rc and the light red rectangle
+corresponds to R′ , which is removed by Rule 5.
+
+
+Claim 5. The graph H = G△F ∗ is trivially perfect.
+Proof. We start by removing the vertices of Rb \{rb } from H ∗ , which will give us more control on
+the neighborhood of rb and ease some arguments. Let H̃ = H ∗ \(Rb \{rb }), this graph is trivially
+perfect by heredity. Let S be a maximal clique of H̃ containing rb . By Claim 3, NH̃ (rb ) is a clique
+and since rb is unaffected by F ∗ we have that S = NH̃ [rb ] = C< ∪C◦ ∪Vp ∪{rb }. We use Lemma 1
+on S to obtain a set of connected components {K1 , . . . , Kr } of H̃ \ S such that {K1 , . . . , Kr }
+are modules in H̃ whose (possibly empty) neighborhoods in S form a nested family. We further
+split components {K1 , . . . , Kr } into two types: Ki is an α-component if NH̃ (Ki ) ⊆ NH̃ (ra )∩S
+and a β-component otherwise, 1 ⩽ i ⩽ r. Since NH̃ (ra ) ∩ S = Vp ∪ C< we have that, for any
+α-component Kα , NH̃ (Kα ) ⊆ Vp ∪ C< . Moreover, since S = NH̃ [rb ] and since C◦ is a clique
+module in H̃ by Claim 4, every β-component Kβ satisfies NH̃ (Kβ ) = Vp ∪ C< ∪ C◦ = S \ {rb }.
+    Observe now that (Vp ∪ C< ) ⊆ NG (R◦ ) ⊆ S \ {rb }. In other words, the neighborhood of
+any tooth of R◦ contains the neighborhood of any α-component and is contained in the neigh-
+borhood of any β-component. Moreover the neighborhoods of the teeth of R◦ are nested in G
+by definition of a comb. It follows that the vertices of R◦ can be safely added to H̃ with the
+same neighborhood as they have in G, ensuring that the resulting graph Hb is trivially perfect.
+It remains to add the vertices of Rb back into the graph. By Claim 3 and Proposition 1, the
+graph H = Hb (rb → G[Rb ]) is trivially perfect.                                             ⋄
+
+    By Claim 5 the graph H = G△F ∗ is trivially perfect and as |F ∗ | ⩽ k, it follows that F ∗ is
+a k-editing of G, concluding the proof of Lemma 7.
+
+Lemma 8. Assume that the instance (G, k) is reduced under Rules 1 to 5. Let (C, R) be a comb
+of G. Then |C ∪ R| = O(k).
+
+Proof. First, note that |C| ⩽ 6k + 2 thanks to Observation 4. We proceed in the same fashion
+to bound the size of R. As the teeth of a comb are trivially perfect modules, Lemma 6 implies
+that |Ri | ⩽ 11k + 2, 1 ⩽ i ⩽ l. Hence by Observation 1 any (2k + 1)-packing of {R1 , . . . , Rl }
+requires at most 13k + 2 vertices. It follows that |R| ⩽ 39k + 6 since otherwise one could find
+three disjoint (2k +1)-packings of R that meet the requirements of Rule 5. Altogether we obtain
+that |C ∪ R| ⩽ 45k + 8 which concludes the proof.
+
+3.4   Reducing the graph exhaustively
+We conclude this section by showing that the graph can be reduced in polynomial time.
+
+
+                                                   12
+Lemma 9. There is a polynomial time algorithm that outputs an instance G′ = (V ′ , E ′ ) such
+that none of Rules 1 to 5 applies.
+
+Proof. First, Rules 1 and 2 can be applied in polynomial time thanks to Lemma 2. We now
+need to apply the other rules on trivially perfect modules and combs. For the modules, it is
+sufficient to reduce strong modules, which are modules that do not overlap with other modules.
+We can enumerate strong modules in linear time [35]. For each strong module M we can check
+in polynomial time if it is trivially perfect. We can moreover check if M contains a (k + 1)-sized
+anti-matching by finding a maximum matching in the complement graph G[M ], for instance
+using Edmonds’ algorithm [17]. If M has a large anti-matching, then we can apply Rule 3.
+Otherwise, if |M | ⩾ 11k + 2 then it can be reduced using Rule 4. Indeed, G[M ] contains in this
+case at most one connected component M ′ with more than k vertices, such that |M \ M ′ | ⩽ k
+(since otherwise M would contain a (k + 1)-sized anti-matching). We compute a comb (C, R)
+through Lemma 5 in G[M ′ ], with |R| ⩽ 4k. It follows that |C| > 6k + 2 and Observation 4
+implies that Rule 3 applies.
+    It remains to show that the combs not included in a trivially perfect module can be reduced
+in polynomial time. In order to do this Dumas et al. [16] showed that so-called critical combs
+can be enumerated in polynomial time, a critical comb being an inclusion-wise maximal comb
+where Vf ̸= ∅ and R ∪ C ∪ Vf does not induce a trivially perfect module. In particular, critical
+combs contain every comb not included in a trivially perfect module. Hence it is sufficient to
+only reduce these combs. Given a critical comb, Rules 4 and 5 can be applied in polynomial
+time. This concludes the proof.
+
+   Combining Theorem 1 and Lemmata 6, 8 and 9 we obtain the main result of this work.
+
+Theorem 2. Trivially Perfect Editing admits a kernel with O(k 2 ) vertices.
+
+Proof. We give a formal proof of Theorem 1 for the sake of completeness. Note that most
+arguments and notations are extracted from the proof of [16, Theorem 1]. Recall that c(k) and
+p(k) are functions defined as, respectively, the maximum size of a trivially perfect module in
+and a comb of G in Theorem 1. Let (G = (V, E), k) be a reduced yes-instance of Trivially
+Perfect Editing and F a k-editing set of G. Let H = G△F and T = (T, B) the universal
+clique decomposition of H. The graph G is not necessarily connected, thus T is a forest. Let
+A be the set of nodes t ∈ V (T ) such that the bag Bt contains a vertex affected by F . Since
+|F | ⩽ k, we have |A| ⩽ 2k. Let A′ ⊆ V (T ) be the least common ancestor closure of A plus
+the root of each connected component of T . The least common ancestor closure is obtained as
+follows: start with A′ = A and while there is u, v ∈ A′ whose least common ancestor w (in T ) is
+not in A′ , add w to A′ . According to [18, Lemma 1] the least common ancestor closure of A is
+of size at most 2|A|. Moreover, Rule 1 implies that there are at most 2k connected components
+in H and thus 2k roots, hence |A′ | ⩽ 6k.
+     Let D be a connected component of T \ A′ . We can observe that, by construction of A′ ,
+only three cases are possibles:
+
+   • NT (D) = ∅ (D is a connected component of T ).
+
+   • NT (D) = {a} (D is a subtree of T whose parent is a ∈ A′ ).
+
+   • NT (D) = {a1 , a2 } with one of the nodes a1 , a2 ∈ A′ being an ancestor of the other in T .
+
+Dumas et al. [16] denoteS these connected components as respectively of type 0, 1 or 2. For
+D ⊆ V (T ), let W (D) = t∈D Bt denote the set of vertices of G corresponding to bags of D.
+
+
+
+                                               13
+     There is no connected component of type 0 or else W (D) would be a connected component
+of G inducing a trivially perfect graph. Rule 1 would have been applied to this component,
+contradicting the fact that G is a reduced instance.
+     Now consider the set of type 1 components D1 , D2 , . . . , Dr of T \ A′ attached in T to the
+same node a ∈ A′ . Dumas et al. [16] showed that Wa = W (D1 ) ∪ W (D2 ) ∪ · · · ∪ W (Dr ) is a
+trivially perfect module of G. By Lemma 6, we have |Wa | = c(k). There are at most |A′ | ⩽ 6k
+such sets Wa , thus the set of vertices of G in bags of type 1 components is of size O(k · c(k)).
+     Now consider the type 2 connected components D of T \ A′ which have two neighbors in T .
+Let a1 and a2 be these neighbors, one being the ancestor of the other, say a1 is the ancestor
+of a2 . Let {a1 , t1 , . . . , tl , a2 } be the path from a1 to a2 in the tree. The component D can
+be seen as a comb of shaft (Bt1 , . . . , Btl ). More precisely, by construction of the universal
+clique decomposition, W (D) can be partitioned into a comb (C, R) of H: the critical clique
+decomposition of C is (C1 = Bt1 , . . . , Cl = Btl ), and each Ri corresponds to the union of bags of
+the subtrees rooted at ti which do not contain Bti+1 , for 1 ⩽ i < l, and to the union of bags of
+the subtrees rooted at tl which do not contain a2 , for i = l. Since (C, R) was not affected by F ,
+it is also a comb of G. Thus for each type 2 component D, W (D) contains p(k) vertices. Since
+T is a forest, it can contain at most |A′ | − 1 ⩽ 6k − 1 such components in T \ A′ . Therefore the
+set of bags containing type 2 connected components of T \ A′ contains O(k · p(k)) vertices.
+It remains to bound the set of vertices of G which are in bags of A′ . The vertices corresponding
+to nodes of A′ \A are critical cliques of G, and are hence of size at most k + 1 by Rule 2.
+Thus the set of vertices in bags of A′ \A is of size O(k 2 ). We conclude by showing a similar
+bound for vertices in bags of A. Such vertices induce critical cliques in H but not necessarily
+in G. However, note that in each such critical clique the set of vertices not affected by F
+correspond to clique modules in G (not necessarily maximal). Such vertices are contained in
+exactly one critical clique of G and have thus been reduced by Rule 2. It follows that the set of
+affected critical cliques of H contains at most 2k + 2k · (k + 1) vertices. Altogether we obtain
+that |V (G)| = O(k 2 + k · (p(k) + c(k))) which concludes the proof of Theorem 1. To obtain
+Theorem 2 we simply recall that Lemmata 6 and 8 imply that c(k) = O(k) and p(k) = O(k),
+respectively.
+
+
+4    The deletion variant
+As mentioned in the introduction, a quadratic vertex-kernel is known to exist for Trivially
+Perfect Completion [1]. The results presented Section 3 can be adapted to prove that
+Trivially Perfect Deletion also admits a quadratic vertex-kernel by simply replacing any
+mention of “editing” by “deletion”.
+    More precisely, one can see that in order to prove the safeness of Rules 3 to 5, the k-editing
+F for the original graph that is derived from a k-editing F ′ for the reduced instance only uses
+  ∗
+
+operations that were done by F ′ . In particular, if F ′ only contains non-edges then so does F ∗ ,
+meaning that it is a valid solution. Together with the fact that Rules 1 and 2 are safe for the
+deletion variant, we obtain the following.
+
+Theorem 3. Trivially Perfect Deletion admits a kernel with O(k 2 ) vertices.
+
+    We conclude by mentioning that Theorem 2 also holds for Trivially Perfect Comple-
+tion for the same reasons as the deletion variant. However, a vertex-kernel with O(k 2 ) is
+already known for this problem [1]. Moreover, the constant factor on the number of vertices is
+smaller than the one of our kernel.
+
+
+
+
+                                                 14
+5    Conclusion
+In this work we improved known kernelization algorithms for the Trivially Perfect Editing
+and Trivially Perfect Deletion problems, providing a quadratic vertex-kernel for both of
+them. This matches the best known bound for the completion variant [1]. Improving upon these
+bounds is an appealing challenge that may require a novel approach. On the other hand, it
+would be interesting to develop lower bounds for kernelization on such problems. Finally, even
+if the use of unaffected vertices in the design of reduction rules is common, its combination with
+the structural properties of trivially perfect graphs in terms of their maximal cliques allowed us
+to design stronger reduction rules. We hope that the approach presented in this work may lead
+to finding or improving kernelization algorithms for some related problems. Let us for instance
+mention the cubic vertex-kernel for Proper Interval Completion [3] and the quartic one
+for Ptolemaic Completion [10] that might be appropriate candidates.
+
+
+References
+ [1] Gabriel Bathie, Nicolas Bousquet, Yixin Cao, Yuping Ke, and Théo Pierron. (Sub) linear
+     kernels for edge modification problems toward structured graph classes. Algorithmica,
+     84(11):3338–3364, 2022.
+
+ [2] Stéphane Bessy, Christophe Paul, and Anthony Perez. Polynomial kernels for 3-leaf power
+     graph modification problems. Discrete Applied Mathematics, 158(16):1732–1744, 2010.
+
+ [3] Stéphane Bessy and Anthony Perez. Polynomial kernels for proper interval completion and
+     related problems. Information and Computation, 231:89–108, 2013.
+
+ [4] Ulrik Brandes, Michael Hamann, Luise Häuser, and Dorothea Wagner. Skeleton-based
+     clustering by quasi-threshold editing. In Algorithms for Big Data: DFG Priority Program
+     1736, pages 134–151. Springer, 2023.
+
+ [5] Ulrik Brandes, Michael Hamann, Ben Strasser, and Dorothea Wagner. Fast quasi-threshold
+     editing. In Proceedings of the 23rd European Symposium on Algorithms, ESA, pages 251–
+     262, 2015.
+
+ [6] Pablo Burzyn, Flavia Bonomo, and Guillermo Durán. NP-completeness results for edge
+     modification problems. Discrete Applied Mathematics, 154(13):1824–1844, 2006.
+
+ [7] Leizhen Cai. Fixed-parameter tractability of graph modification problems for hereditary
+     properties. Information Processing Letters, 58(4):171–176, 1996.
+
+ [8] Leizhen Cai and Yufei Cai. Incompressibility of H-free edge modification problems. Algo-
+     rithmica, 71(3):731–757, 2015.
+
+ [9] Christophe Crespelle, Pål Grønås Drange, Fedor V. Fomin, and Petr Golovach. A survey
+     of parameterized algorithms and the complexity of edge modification. Computer Science
+     Review, 48:100556, 2023.
+
+[10] Christophe Crespelle, Benjamin Gras, and Anthony Perez. Completion to chordal distance-
+     hereditary graphs: a quartic vertex-kernel. In Proceedings of the 47th International Work-
+     shop on Graph-Theoretic Concepts in Computer Science, WG, pages 156–168, 2021.
+
+[11] Christophe Crespelle, Rémi Pellerin, and Stéphan Thomassé. A quasi-quadratic vertex
+     kernel for cograph edge editing, 2022.
+
+                                               15
+[12] Pål Grønås Drange, Markus Fanebust Dregi, Daniel Lokshtanov, and Blair D. Sullivan. On
+     the threshold of intractability. Journal of Computer and System Sciences, 124:1–25, 2022.
+
+[13] Pål Grønås Drange, Fedor V. Fomin, Michal Pilipczuk, and Yngve Villanger. Exploring the
+     subexponential complexity of completion problems. ACM Transactions on Computation
+     Theory, 7(4):1–38, 2015.
+
+[14] Pål Grønås Drange and Michal Pilipczuk. A polynomial kernel for trivially perfect editing.
+     Algorithmica, 80(12):3481–3524, 2018.
+
+[15] Maël Dumas, Anthony Perez, and Ioan Todinca. Polynomial kernels for strictly chordal
+     edge modification problems. In Proceedings of the 16th International Symposium on Pa-
+     rameterized and Exact Computation, IPEC, pages 17:1–17:16, 2021.
+
+[16] Maël Dumas, Anthony Perez, and Ioan Todinca. A cubic vertex-kernel for trivially perfect
+     editing. Algorithmica, 85(4):1091–1110, 2023.
+
+[17] Jack Edmonds. Paths, trees, and flowers. Canadian Journal of mathematics, 17:449–467,
+     1965.
+
+[18] Fedor V. Fomin, Daniel Lokshtanov, Neeldhara Misra, and Saket Saurabh. Planar F-
+     deletion: Approximation, kernelization and optimal FPT algorithms. In Proceedings of
+     the 53rd Annual IEEE Symposium on Foundations of Computer Science, FOCS, pages
+     470–479, 2012.
+
+[19] Fedor V. Fomin, Daniel Lokshtanov, Saket Saurabh, and Meirav Zehavi. Kernelization:
+     theory of parameterized preprocessing. Cambridge University Press, 2019.
+
+[20] Michael R. Garey and David S. Johnson. Computers and Intractability: A Guide to the
+     Theory of NP-Completeness. W. H. Freeman, 1979.
+
+[21] Martin Charles Golumbic. Trivially perfect graphs. Discrete Mathematics, 24(1):105–107,
+     1978.
+
+[22] Lars Gottesbüren, Michael Hamann, Philipp Schoch, Ben Strasser, Dorothea Wagner, and
+     Sven Zühlsdorf. Engineering exact quasi-threshold editing. In Proceedings of the 18th
+     International Symposium on Experimental Algorithms, SEA, pages 10:1–10:14, 2020.
+
+[23] Sylvain Guillemot, Frédéric Havet, Christophe Paul, and Anthony Perez. On the (non-
+     )existence of polynomial kernels for Pl -free edge modification problems. Algorithmica,
+     65(4):900–926, 2013.
+
+[24] Jiong Guo. Problem kernels for NP-complete edge deletion problems: Split and related
+     graphs. In Proceedings of the 18th International Symposium on Algorithms and Computa-
+     tion, ISAAC, pages 915–926, 2007.
+
+[25] Haim Kaplan, Ron Shamir, and Robert E. Tarjan. Tractability of parameterized completion
+     problems on chordal, strongly chordal, and proper interval graphs. SIAM Journal on
+     Computing, 28(5):1906–1922, 1999.
+
+[26] Richard M. Karp. Reducibility among combinatorial problems. In Complexity of Computer
+     Computations, pages 85–103. Springer, 1972.
+
+[27] Christian Komusiewicz and Johannes Uhlmann. A cubic-vertex kernel for flip consensus
+     tree. Algorithmica, 68(1):81–108, 2014.
+
+                                               16
+[28] Stefan Kratsch and Magnus Wahlström. Two edge modification problems without polyno-
+     mial kernels. Discrete Optimization, 10(3):193–199, 2013.
+
+[29] Yunlong Liu, Jianxin Wang, Jie You, Jianer Chen, and Yixin Cao. Edge deletion problems:
+     Branching facilitated by modular decomposition. Theoretical Computer Science, 573:63–70,
+     2015.
+
+[30] Dániel Marx and R.B. Sandeep. Incompressibility of H-free edge modification problems:
+     Towards a dichotomy. Journal of Computer and System Sciences, 125:25–58, 2022.
+
+[31] James Nastos and Yong Gao.      Familial groups in social networks.    Social Networks,
+     35(3):439–450, 2013.
+
+[32] Assaf Natanzon, Ron Shamir, and Roded Sharan. A polynomial approximation algorithm
+     for the minimum fill-in problem. SIAM Journal on Computing, 30(4):1067–1079, 2000.
+
+[33] Jaroslav Nešetřil and Patrice Ossona De Mendez. On low tree-depth decompositions.
+     Graphs and combinatorics, 31(6):1941–1963, 2015.
+
+[34] Roded Sharan. Graph modification problems and their applications to genomic research.
+     PhD thesis, Tel-Aviv University, 2002.
+
+[35] Marc Tedder, Derek Corneil, Michel Habib, and Christophe Paul. Simpler linear-time
+     modular decomposition via recursive factorizing permutations. In : Proceedings of the
+     35th International Colloquium on Automata, Languages, and Programming, ICALP, pages
+     634–645, 2008.
+
+[36] Jing-Ho Yan, Jer-Jeong Chen, and Gerard J. Chang. Quasi-threshold graphs. Discrete
+     applied mathematics, 69(3):247–255, 1996.
+
+
+
+
+                                             17
+

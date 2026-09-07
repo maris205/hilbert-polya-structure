@@ -1,0 +1,133 @@
+--- original_snapshot/record_review.py
++++ root_record_pair.py
+@@ -1,11 +1,11 @@
+ #!/usr/bin/env python3
+-"""P209-only strict author pair or source-only build recorder.
++"""Root-only P209 manuscript-B replay pair; existing canonical is read-only.
+ 
+-Fresh infrastructure informed by the inspected root FTH/P208 recorders. No
+-old scientific implementation is imported or executed. Immutable attempts,
+-complete logs, sampled maps and conservative inventories are evidence, not
+-a continuous trace or an OS-hermetic reconstruction. Each invocation owns
+-one previously nonexistent direct child of this paper directory.
++Disclosed path/role/canonical adaptation of the physically saved B recorder.
++No review recorder is imported; the unchanged B verifier is copied as code
++only. Original recording and closure machinery remains. Build helpers stay
++unchanged but unreachable through this exact pair-only entry point.
++Infrastructure preparation is not a manuscript review or replay.
+ """
+ import hashlib
+ import json
+@@ -21,8 +21,22 @@
+ import traceback
+ 
+ SCRIPT = Path(__file__).resolve()
+-PAPER = SCRIPT.parent
+-ROOT = PAPER.parents[3]
++ROOT = Path("/root/autodl-tmp/symbolic_dynamics")
++PAPER = ROOT / "docs/papers204_208_sequence/reviews/p209_b"
++OUTPUT_ROOT = ROOT / "docs/papers204_208_sequence/qa/root_replays/p209_b_strict"
++ROOT_LAUNCHER = SCRIPT.with_name("root_launch_pair.py")
++FIXED_INPUTS = SCRIPT.with_name("FIXED_INPUTS.json")
++EXPECTED_FIXED_INPUTS = "09a5033597e9b218296f624c256fe2d370331e08269bf1fcc2928352104fb7c8"
++EXPECTED_B_INPUTS = {
++    "record_review.py": "01623b42719e6159ae31c0e422079929766de61e4f07459c6d579b7f952fa272",
++    "launch_review.py": "f190bf2e91b130428a97025bfd708f9a652e80f31ca41706dd81d0259c15693d",
++    "bootstrap.py": "dc2f0ef968f2b451ceaf390ac7a8189005881246624a0f94ab64879efa18a80b",
++    "verify.py": "d5fd105ddfc162323f06cd530fbd696b0093643a7a0c24c64747cd9c9be30467",
++    "PARAMETERS.json": "3b292d4c771041cd07f82c5da2bf534bfa77e67fc971e78df3d08910e937b8e4",
++    "INPUT_PINS.sha256": "eee2b677a37c82bc3e99b209f0d310231f1bd0358752724ce7f9d0f3588f200f",
++    "CANONICAL.json": "612e1463162deba868cf7cf81d61c8f017713f9b28c4c38b81b00d376bac992c",
++    "SHA256SUMS": "d88b831e60414d47ae0b2afb2583b73d02fc9764877a00952f4a9d90d13488ea",
++}
+ FREEZE = ROOT / "papers/209-ordered-fibre-threading/frozen_round1"
+ PYTHON = Path(sys.executable).resolve()
+ STDLIB = Path(sysconfig.get_path("stdlib")).resolve()
+@@ -188,11 +202,18 @@
+     files = [p for p in FREEZE.rglob("*") if p.is_file()]
+     files += [PAPER / n for n in ("verify.py", "bootstrap.py", "record_review.py", "launch_review.py", "PARAMETERS.json", "INDEPENDENCE_DESIGN.md", "INDEPENDENCE_COMMITMENT.sha256", "intake.py", "prepare_infrastructure.py", "INFRASTRUCTURE_INPUT_PINS.sha256", "ADAPTATION.diff", "INPUT_PINS.sha256")]
+     files += [p for p in (PAPER / "infrastructure_originals").rglob("*") if p.is_file()]
+-    if (PAPER / "CANONICAL.json").is_file():
+-        files.append(PAPER / "CANONICAL.json")
++    require((PAPER / "CANONICAL.json").is_file(), "ROOT_CANONICAL_REQUIRED_NO_ADOPTION")
++    files += [PAPER / "CANONICAL.json", PAPER / "SHA256SUMS"]
++    require(info(FIXED_INPUTS)["sha256"] == EXPECTED_FIXED_INPUTS, "FIXED_INPUT_MANIFEST_CHANGED")
++    fixed = json.loads(FIXED_INPUTS.read_bytes())
++    require(set(fixed) == set(map(str, files)) and len(fixed) == 2021, "FIXED_ORIGINAL_SCOPE_CHANGED")
+     value = pins(files)
++    require(value == fixed, "EXACT_PREPARATION_FULL_INPUTS_CHANGED")
++    value.update(pins([SCRIPT, ROOT_LAUNCHER, FIXED_INPUTS]))
+     REGISTERED_INPUTS.update(value)
+     require(all("error" not in p for p in value.values()), "MISSING_SCIENTIFIC_INPUT")
++    require(all(value[str(PAPER / name)]["sha256"] == digest
++                for name, digest in EXPECTED_B_INPUTS.items()), "EXACT_PREPARATION_B_INPUTS_CHANGED")
+     config = json.loads((PAPER / "PARAMETERS.json").read_bytes())
+     require(config["n_values"] == list(range(6)) and config["total_states"] == 3414, "ORIGINAL_CUTOFF_CHANGED")
+     return value
+@@ -459,8 +480,8 @@
+     comparison.mkdir()
+     raw1, raw2 = out / "replay_01/producer.stdout", out / "replay_02/producer.stdout"
+     canonical = PAPER / "CANONICAL.json"
+-    adopted = str(canonical) not in all_before
+-    require(canonical.exists() != adopted, "CANONICAL_PRESENCE_CHANGED_BEFORE_COMPARISON")
++    adopted = False
++    require(str(canonical) in all_before and canonical.is_file(), "ROOT_CANONICAL_MUST_PREEXIST")
+     before = pins([raw1, raw2, "/usr/bin/cmp"] + ([canonical] if canonical.exists() else []))
+     REGISTERED_INPUTS.update(before)
+     save(comparison / "INPUTS_BEFORE.json", before)
+@@ -468,11 +489,6 @@
+     row, used = command(["/usr/bin/cmp", "--", str(raw1), str(raw2)], comparison, comparison, "pair", ENV)
+     comparisons.append(row)
+     observed |= used
+-    if adopted:
+-        bytesave(canonical, raw1.read_bytes())
+-        REGISTERED_INPUTS[str(canonical)] = info(canonical)
+-        save(comparison / "CANONICAL_ADOPTION.json", {"action": "ADOPT_ACTUAL_FIRST_STDOUT_AFTER_PAIR_CMP",
+-             "source": str(raw1), "source_pin": byteinfo(raw1), "canonical": str(canonical), "canonical_pin": byteinfo(canonical)})
+     for label, raw in (("canonical_01", raw1), ("canonical_02", raw2)):
+         row, used = command(["/usr/bin/cmp", "--", str(raw), str(canonical)], comparison, comparison, label, ENV)
+         comparisons.append(row)
+@@ -482,10 +498,7 @@
+     require(after == before, "RAW_COMPARISON_INPUT_CHANGED")
+     require(byteinfo(canonical) == byteinfo(raw1) == byteinfo(raw2), "ADOPTED_CANONICAL_BYTES")
+     canonical_pin = info(canonical)
+-    if adopted:
+-        added[str(canonical)] = canonical_pin
+-    else:
+-        require(canonical_pin == all_before[str(canonical)], "EXISTING_CANONICAL_INITIAL_PIN_CHANGED")
++    require(canonical_pin == all_before[str(canonical)], "EXISTING_CANONICAL_INITIAL_PIN_CHANGED")
+     REGISTERED_INPUTS.update(added)
+     save(comparison / "CANONICAL_PIN.json", canonical_pin)
+     manifest(comparison)
+@@ -586,10 +599,11 @@
+ 
+ 
+ def main():
+-    require(len(sys.argv) == 3 and sys.argv[1] in {"pair", "build"}, "USAGE", "record_review.py pair|build new_label")
++    require(sys.argv[1:] == ["pair", "root_b_pair_01"], "USAGE", "root_record_pair.py pair root_b_pair_01")
+     mode, label = sys.argv[1:]
+-    require(re.fullmatch(r"review_(?:pair|build)_[0-9]+", label), "INVALID_OUTPUT_LABEL")
+-    out = PAPER / label
++    require(OUTPUT_ROOT.resolve() == OUTPUT_ROOT, "ROOT_OUTPUT_PATH_ALIAS")
++    OUTPUT_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
++    out = OUTPUT_ROOT / label
+     require(not out.exists() and not out.is_symlink(), "REFUSE_EXISTING_OUTPUT")
+     out.mkdir(mode=0o700)
+     failures, scientific, runtime_before, all_before, added = [], {}, {}, {}, {}
+@@ -671,14 +685,14 @@
+             require(not closed["uncovered"] and not closed["bytecode"] and not late["cache_exists"], "OBSERVED_RUNTIME_CLOSURE", closed)
+         except BaseException:
+             failures.append({"stage": "observed_closure", "traceback": traceback.format_exc()})
+-        value = {"status": "PASS_REVIEW_B_" + mode.upper() if not failures else "FAIL_PRESERVED",
++        value = {"status": "PASS_ROOT_REVIEW_B_" + mode.upper() if not failures else "FAIL_PRESERVED",
+                  "mode": mode, "failures": failures, "result": result,
+                  "science_inputs": len(scientific), "runtime_files": len(runtime_before),
+                  "known_all_inputs_including_capsules": len(complete_before),
+                  "ldd_commands": sum(r["tag"].startswith("ldd_") for r in COMMAND_RECORDS),
+                  "ldd_commands_completed_exit_zero": sum(r["tag"].startswith("ldd_") and r["command"]["exit"] == 0 for r in COMMAND_RECORDS),
+                  "linkage_returned_complete": bool(link_rows), "tex_resources": len(tex_before.get("files", {})),
+-                 "scope": "P209 B actual verifier/build execution evidence; no review verdict, delta or terminal acceptance.",
++                 "scope": "Root executions of unchanged P209 B verifier; not a new independent review, verdict, delta or terminal acceptance.",
+                  "observations": "Early/late parent and scientific-child modules/maps; sampled direct-child maps; conservative stdlib, OS libraries, loader/locale/gconv/config inventories; TeX per-pass .fls. No continuous or grandchild tracing, no OS-hermetic claim.",
+                  "external": "HOLD_EXTERNAL"}
+         save(out / "RECEIPT.json", value)

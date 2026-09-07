@@ -1,0 +1,214 @@
+      RECURRENT FUNCTIONS AND INVERSE FIBRES OF ORDERED FIBRE
+                            THREADING
+
+
+                                                     ANONYMOUS
+
+
+        Abstract. We determine the recurrent functions and one-step inverse fibres of an ordered threading
+        operation on finite labelled endofunctions. In each old fibre, the operation links its members in increasing
+        order and retains the old destination at the largest member. This familiar local rewiring does not force
+        convergence to a permutation: noncycle paths can rotate their attachments indefinitely. We prove that
+        the recurrent graphs are exactly directed cycles with disjoint unbranched feeding paths, at most one per
+        cycle vertex, whose final labels lie below every label of their cycle. The exact period of a whole function
+        is the least common multiple of the lengths of cycles with nonempty feeding paths; pure cycles are
+        fixed. The necessity proof uses all iterated vertex-image sets to freeze backward heights. Independently,
+        admissible increasing path covers of a target give a nonredundant decoder for every predecessor. For
+        nonempty label sets, the maximum fibre is 2n−1 , uniquely at the cyclic successor permutation. Empty
+        and singleton cases are included. No sharp entrance-time or general-time inverse formula is asserted.
+
+
+
+
+                                       1. The operation and its scope
+   Let [n] = {0, . . . , n−1} and Xn = [n][n] , with n ≥ 0. For each nonempty fibre f −1 (v) = {i1 < · · · < ik },
+set
+
+(1)                             (T f )(ij ) = ij+1    (1 ≤ j < k),        (T f )(ik ) = v.
+
+Every fibre and its order are computed from the old function. Since the fibres partition [n], this simulta-
+neous prescription defines T : Xn → Xn . The empty function is fixed. We retain all labels; there is no
+quotient by rotation or graph isomorphism.
+   The functional digraph of f has arrows i → f (i). Its directed cycles, including loops, are called vertex
+cycles. In contrast, f is recurrent when T p (f ) = f for some p ≥ 1, and per(f ) is the least such p. These
+refer to the update on whole functions. Every permutation is fixed by (1), whatever its vertex-cycle
+lengths, but nonpermutations can have nontrivial periods:
+
+(2)                                     (1, 2, 1) 7−→ (2, 2, 1) 7−→ (1, 2, 1).
+
+Here 1 ↔ 2 is unchanged and the arrow from vertex 0 alternates between its two attachments.
+   Our results answer two separate questions. Section 2 classifies exactly the labelled graphs supporting
+recurrent motion and determines their periods. Section 3 reconstructs every one-step predecessor directly
+from the target and proves that the cyclic successor permutation uniquely maximizes the fibre, with value
+2n−1 for n ≥ 1. All proofs are given here; finite checks are supplementary.
+Known rewiring primitives. Replacing ordered stars by chains is established graph linearization. Onus,
+Richa and Scheideler’s pure linearization algorithm operates on connected undirected graphs, separates
+smaller and larger neighbours, and uses an add-wins convention when updates conflict [3, Algorithm 1 and
+Section 2]. Connectivity by replacing old edges with paths is also a shared primitive. Those operations
+and their proofs are not claimed as new here.
+   The successor-repair protocols of Cramer and Fuhrmann [2, Sections 4 and 5.1–5.3] and Shaker and
+Reeves [4, Figure 3 and Section 5.1] provide a closer directed comparison. Their successor changes shorten
+clockwise successor distance. In (2), the successor of 0 instead moves from 1 to 2 before returning. Thus
+this loop-free transition is neither a literal successor repair nor a batch consisting only of such shortening
+repairs. This witness does not exclude every abstract conjugacy or enlarged-state construction. Aradhya
+and Scheideler’s tree-to-path construction [1, Section 3.4, Algorithm 10 and Appendix B] also rewires
+ordered siblings, but takes a rooted tree with depth-parity labels; its distributed version additionally has
+supervisor and message state. It is not repeated (1) on arbitrary endofunctions with vertex cycles. We
+credit these primitives, ordinary path covers and rotation/LCM calculations. The contribution here is
+the exact recurrent and inverse/extremal conjunction for (1), not a general rewiring method or a global
+priority claim.
+                                                             1
+2                                                  ANONYMOUS
+
+
+                                 2. The exact recurrent geometry
+   A feeding path has at least one noncycle vertex and is directed towards a vertex cycle. Its final vertex
+a is the noncycle vertex whose image lies on that cycle. Internal path labels are unrestricted.
+Theorem 1 (Recurrent carrier and period). A function f ∈ Xn is recurrent under T if and only if each
+weak component of its functional digraph consists of a directed cycle C and pairwise disjoint unbranched
+feeding paths, at most one at each cycle vertex, with every final path vertex a satisfying
+(3)                                                 a < min C.
+On this set, all cycle and internal-path arrows are unchanged. Each path attachment moves one cycle
+predecessor backwards, and
+(4)                      per(f ) = lcm{|C| : C carries a nonempty feeding path}.
+The empty least common multiple is one; a pure vertex cycle is fixed.
+   Write Ir (f ) = f r ([n]), where f r denotes composition on vertices, not iteration of T . The backward
+height at v is
+(5)                      hf (v) = sup{r ≥ 0 : v ∈ Ir (f )} ∈ {0, . . . , n − 1} ∪ {∞}.
+It is infinite exactly on vertex cycles. Off a cycle it is the largest length of a directed path ending at v.
+Indeed, an arbitrarily long backward walk repeats a vertex; the resulting cycle cannot have a forward
+exit, so its terminal vertex also lies on that cycle. We order ∞ above every finite height.
+Proof of Theorem 1. Image inclusions. An old arrow ij → v in a fibre is replaced by the new directed
+walk
+                                       ij → ij+1 → · · · → ik → v.
+The walk has positive length even when its final destination is a fibre member. Replacing and concate-
+nating all arrows of an old length-r walk ending at v gives a new walk of length at least r ending there.
+Its last r arrows witness
+(6)                                       Ir (f ) ⊆ Ir (T f )    (r ≥ 0).
+Every new arrow stays inside one old weak component, while each old arrow has the displayed replacement
+joining its endpoints. Hence the component vertex sets are preserved.
+   Frozen heights. Suppose T p (f ) = f . For every r, inclusion (6) around the periodic orbit forces equality
+at each epoch. Thus every labelled vertex has an epoch-independent height, denoted h(v), and the vertex-
+cycle set is fixed. For any old arrow j → v, a finite height at v satisfies h(v) ≥ h(j) + 1. If its height is
+infinite, then h(j) ≤ h(v) still holds. Consequently
+(7)                        h(j) ≤ h(v),        h(j) = h(v) =⇒ h(j) = h(v) = ∞.
+   Fix a source coordinate i. If it is maximal in its fibre, its head is retained. Otherwise its new head is
+the next sibling j, where f (j) = f (i) = v. Equation (7) gives
+(8)                                          h((T f )(i)) ≤ h(f (i)).
+Because heights were already proved fixed at the vertices, this is a nonincreasing sequence of head heights
+around a periodic whole-function orbit. It must be constant. In the next-sibling case, (7) therefore forces
+j onto a vertex cycle. This also covers j = v: a selected sibling arrow may numerically equal the retained
+old arrow, and is not discarded from the argument.
+    Necessary geometry. Each fibre contains at most one cycle vertex, since a cycle target has exactly one
+cycle predecessor and an off-cycle target has none. Every member after the first in an ordered fibre is a
+next-sibling head, hence is on a cycle. Therefore a fibre has at most two members, and a two-member
+fibre is a smaller noncycle vertex followed by a cycle vertex. In particular, off-cycle indegree is at most
+one, while a cycle vertex has at most one noncycle predecessor. Following arrows towards cycles now
+partitions the noncycle vertices into unbranched paths, at most one per cycle target. A cycle arrow is
+retained because its source is maximal in the corresponding fibre; an internal-path arrow is retained
+because its target has a singleton fibre.
+    Let a be a final path vertex with f (a) = v ∈ C, and let u be the cycle predecessor of v. The fibre is
+(a, u), so the new attachment is T (f )(a) = u. Cycle arrows remain unchanged at every epoch. Repeated
+predecessor motion visits every label of C. At each epoch a must remain smaller than the relevant cycle
+predecessor, giving (3).
+    Sufficiency and exactness. Conversely assume the stated geometry and label bound. At every cycle
+target with an attached path, its cycle predecessor exceeds the path-final vertex. The rule therefore
+                                         ORDERED FIBRE THREADING                                                 3
+
+
+retains cycle and internal-path arrows and moves all attachments one predecessor backwards. Distinct
+attachments remain distinct because the predecessor map is bijective, and the label bound is preserved.
+After |C| updates, all attachments on C return.
+   A component without a path is fixed. In a component with a path, choose one final labelled vertex a. Its
+head visits all |C| distinct cycle labels, so its first return is exactly at time |C|. Labels are not identified by
+an unlabelled symmetry. Components update independently, and their return times synchronize precisely
+at the least common multiple in (4). The empty function obeys the same convention.                               □
+
+
+                           3. Every inverse fibre and its unique maximum
+   This inverse argument does not use the recurrent classification. Given g ∈ Xn , put E+ (g) = {i ∈ [n] :
+i < g(i)}. For S ⊆ E+ (g) select precisely the arrows i → g(i) with i ∈ S. Call S admissible when
+                                        (g(i))i∈S are pairwise distinct,
+(9)
+                                        (g(j))j ∈S
+                                                / are pairwise distinct.
+
+The first condition gives selected indegree at most one. Since every selected arrow strictly increases its
+label, the selected graph consists of disjoint increasing paths and singleton vertices. Its endpoints are
+exactly the vertices outside S. Let eS (i) be the endpoint of the path containing i.
+
+Theorem 2 (All-target decoder). For every target g ∈ Xn , the assignment S 7→ fS defined by
+
+(10)                                            fS (i) = g(eS (i))
+
+is a bijection from admissible subsets S ⊆ E+ (g) to T −1 (g). Consequently
+
+(11)                             |T −1 (g)| = #{S ⊆ E+ (g) : S satisfies (9)},
+
+including zero fibres and the unique empty target.
+
+Proof. Suppose T (f ) = g and select every nonmaximal member of every old fibre. The selected arrows
+are the consecutive increasing links of these fibres, so their heads are distinct. Each path endpoint is a
+fibre maximum, where g retains the old fibre value. Distinct old fibres have distinct values, proving the
+second condition in (9). Every coordinate of a fibre has its endpoint’s value in f , yielding (10).
+   Conversely take an admissible S. The selected paths are disjoint and increasing. Assigning to each path
+its endpoint’s g-value gives fS . By the second condition of (9), its fibres are exactly the path vertex sets,
+with no unintended merger. Threading them restores the selected arrows and retains g at each endpoint,
+so T (fS ) = g. Recovering all nonmaximal members of these fibres recovers S, proving injectivity as well
+as surjectivity. For the empty target the empty selection reconstructs the empty function.                 □
+
+   The selection is not the set of coordinates that change numerically. For example T (1, 1) = (1, 1), but its
+predecessor code selects coordinate 0. Nor are these increasing inverse-code paths the arbitrary-labelled
+feeding paths of Theorem 1.
+
+Theorem 3 (Unique extremizer). For n ≥ 1, the maximum one-step fibre has size 2n−1 , attained only
+at
+
+(12)                         g∗ (i) = i + 1   (0 ≤ i < n − 1),       g∗ (n − 1) = 0.
+
+At n = 0 the unique target has fibre one.
+
+Proof. For n ≥ 1, the largest label is not eligible. Theorem 2 therefore gives
+
+(13)                                      |T −1 (g)| ≤ 2|E+ (g)| ≤ 2n−1 .
+
+For g∗ the eligible arrows form 0 → 1 → · · · → n − 1. Every subset has distinct heads, and every set of
+endpoints has distinct values because g∗ is a permutation. Thus all 2n−1 subsets work.
+   If equality holds in (13), then all n − 1 lower labels are eligible and every subset is admissible. Taking
+S = ∅ shows that g is a permutation. Since g(i) > i for every i < n − 1, downward elimination forces
+g(n − 2) = n − 1, then g(n − 3) = n − 2, and eventually g(0) = 1. The remaining value is g(n − 1) = 0.
+At n = 1 the only permutation is already (0) and its fibre is one. The empty case follows directly from
+the definition.                                                                                            □
+4                                              ANONYMOUS
+
+
+                                  4. Finite checks and limitations
+   The companion standalone program enumerates every endofunction for n = 0, . . . , 5, a total of 1 + 1 +
+4+ 27+ 256+ 3125 = 3414 states. It constructs the literal transition independently of the graph predicate,
+follows each whole-function orbit, and compares recurrence and exact period with Theorem 1. For every
+target it enumerates all eligible subsets and compares the decoded source set with the complete literal
+predecessor set, then checks every equality target in Theorem 3. It also checks all vertex-image inclusions
+in the finite boxes and retains selected numerically unchanged arrows. Complete per-state output, not
+merely summary counts, is the canonical verification payload. These finite checks pressure the deductive
+proofs; they are not their justification.
+   The recurrent theorem does not determine a sharp entrance-time bound for arbitrary starting functions.
+Observed orbit entrance indices in the finite output make no all-size claim. We also assert no general-time
+inverse, recurrent generating function, arbitrary-size period census or unrestricted owner-nonexistence
+result. The source comparison is bounded, and the familiar local rewiring, path-cover and rotation
+mechanisms are credited. The conclusions are the exact labelled recurrent geometry and the independent
+all-target inverse with its unique extremizer.
+
+                                              References
+[1] Vijeth Aradhya and Christian Scheideler. Towards learning-augmented peer-to-peer networks: Self-
+    stabilizing graph linearization with untrusted advice, 2025. URL https://arxiv.org/abs/2504.
+    02448v1. arXiv:2504.02448v1. Version 1, 3 April 2025.
+[2] Curt Cramer and Thomas Fuhrmann. Self-stabilizing ring networks on connected graphs. Technical
+    Report 2005-5, Universität Karlsruhe (TH), Fakultät für Informatik, 2005.
+[3] Melih Onus, Andrea Richa, and Christian Scheideler. Linearization: Locally self-stabilizing sorting in
+    graphs. In Proceedings of the Ninth Workshop on Algorithm Engineering and Experiments (ALENEX),
+    pages 99–108. Society for Industrial and Applied Mathematics, 2007. doi: 10.1137/1.9781611972870.
+    10.
+[4] Ayman Shaker and Douglas S. Reeves. Self-stabilizing structured ring topology P2P systems. Technical
+    Report TR-2005-25, North Carolina State University, Department of Computer Science, 2005. URL
+    https://techrep.csc.ncsu.edu/2005/TR-2005-25.pdf.
+

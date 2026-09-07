@@ -1,0 +1,119 @@
+{
+  "status": "PASS_ACTUAL_PRIVATE_P209_ROUND1_CHECKPOINT",
+  "commit": "2974f8ea5f9e7cb0f8146cae017add38a6939da0",
+  "tested_and_committed_tree": "57345e3b97fab70f5d002c87fb343eddb79e03d0",
+  "scope": "Accepted P209 A, actual root strict/original/delta closure, physical Round1, role-aware lifecycle/whole-paper rollup, closed scouts26-27 and all preserved failures; active B and28/29 excluded; later30 and root28 closure outside this ref.",
+  "copy_invocation": {
+    "cmd": "/usr/bin/python3.10 -I -S -B docs/papers204_208_sequence/qa/sync_p209_round1.py",
+    "result": {
+      "chunk_id": "553c33",
+      "wall_time_seconds": 1.000150043,
+      "session_id": 32291,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "copy_completion": {
+    "chunk_id": "11d211",
+    "wall_time_seconds": 0.00000198,
+    "exit_code": 0,
+    "original_token_count": 169,
+    "output": "{\n  \"actual_record_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/P209_ROUND1_SCOPED_COPY.actual.json\",\n  \"actual_record_sha256\": \"ca80d39daf4fb01d43284f61afb54625bb68c65b37a0101d02db8afb5538feb7\",\n  \"boundary\": \"No Git stage/commit/push or new scientific verification by this command.\",\n  \"copied_files\": 4122,\n  \"excluded\": [\n    \"docs/papers204_208_sequence/reviews/p209_b/\",\n    \"docs/papers204_208_sequence/scouting/finite_systems_twenty_eighth/\",\n    \"docs/papers204_208_sequence/scouting/finite_systems_twenty_ninth/\",\n    \"all unrelated workspace/mirror paths\"\n  ],\n  \"selected_files\": 8104,\n  \"status\": \"PASS_SCOPED_COPY_NO_DELETIONS\"\n}\n"
+  },
+  "copy_record": "P209_ROUND1_SCOPED_COPY.actual.json",
+  "preserved_prestage_refusal": "P209_ROUND1_PRESTAGE_IGNORED_REFUSAL.actual.json",
+  "corrected_stage_invocation": {
+    "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nfrom pathlib import Path\nimport hashlib,json,subprocess\nroot=Path('/root/autodl-tmp/symbolic_dynamics');mirror=Path('/root/autodl-tmp/hilbert-polya-structure')\nrel='docs/papers204_208_sequence/qa/P209_ROUND1_SCOPED_COPY.actual.json'\nfailed='docs/papers204_208_sequence/qa/P209_ROUND1_PRESTAGE_IGNORED_REFUSAL.actual.json'\nraw=(root/rel).read_bytes();assert hashlib.sha256(raw).hexdigest()=='ca80d39daf4fb01d43284f61afb54625bb68c65b37a0101d02db8afb5538feb7'\nd=json.loads(raw);assert raw==(mirror/rel).read_bytes()\nassert (root/failed).read_bytes()==(mirror/failed).read_bytes()\nstatus=subprocess.run(['git','status','--porcelain=v1','-z','--untracked-files=all'],cwd=mirror,capture_output=True,check=True)\npaths={row[3:].decode() for row in status.stdout.split(b'\\0') if row}\nallowed=set(d['copied_paths'])|{rel,failed}\nassert paths<=allowed\nmissing=sorted(allowed-paths);assert len(missing)==51\nignore=subprocess.run(['git','check-ignore','--no-index','-z','--stdin'],cwd=mirror,input=b'\\0'.join(n.encode() for n in missing)+b'\\0',capture_output=True)\nassert ignore.returncode==0 and {x.decode() for x in ignore.stdout.split(b'\\0') if x}==set(missing)\nfor n in missing:\n assert n in d['selected_pins'] and hashlib.sha256((mirror/n).read_bytes()).hexdigest()==d['selected_pins'][n]\ncommands=[]\nfor argv in (['git','add','--',*d['stage_scopes'],failed],['git','add','-f','--',*missing]):\n r=subprocess.run(argv,cwd=mirror,capture_output=True)\n commands.append({'argv':argv,'exit':r.returncode,'stdout':r.stdout.decode(),'stderr':r.stderr.decode()})\n assert r.returncode==0\nstaged=subprocess.run(['git','diff','--cached','--name-only','-z'],cwd=mirror,capture_output=True,check=True).stdout\nactual={s.decode() for s in staged.split(b'\\0') if s};assert actual==allowed\nassert subprocess.run(['git','diff','--name-only'],cwd=mirror,capture_output=True,check=True).stdout==b''\ntree=subprocess.run(['git','write-tree'],cwd=mirror,capture_output=True,check=True).stdout.decode().strip()\nprint(json.dumps({'status':'PASS_EXACT_SCOPED_STAGE_WITH_EXPLICIT_IGNORED_PAYLOADS','commands':commands,'staged_paths':len(actual),'ignored_manifest_payloads_explicitly_checked':len(missing),'check_ignore_exit':ignore.returncode,'check_ignore_stderr':ignore.stderr.decode(),'exact_copy_paths_plus_generated_record_and_preserved_refusal':True,'unrelated_paths_staged':0,'tested_tree':tree},indent=2,sort_keys=True))\nPY",
+    "result": {
+      "chunk_id": "240d5d",
+      "wall_time_seconds": 1.00152147,
+      "session_id": 51243,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "corrected_stage_completion": {
+    "chunk_id": "a81c7e",
+    "wall_time_seconds": 0.00000312,
+    "exit_code": 0,
+    "original_token_count": 2194,
+    "output": "{\n  \"check_ignore_exit\": 0,\n  \"check_ignore_stderr\": \"\",\n  \"commands\": [\n    {\n      \"argv\": [\n        \"git\",\n        \"add\",\n        \"--\",\n        \"papers/209-ordered-fibre-threading\",\n        \"docs/papers204_208_sequence/reviews/p209_a\",\n        \"docs/papers204_208_sequence/scouting/finite_systems_twenty_sixth\",\n        \"docs/papers204_208_sequence/scouting/finite_systems_twenty_seventh\",\n        \"docs/papers204_208_sequence/qa/p209_a_root_preparation\",\n        \"docs/papers204_208_sequence/qa/root_replays/p209_a_strict\",\n        \"docs/papers204_208_sequence/qa/p209_round1_preparation\",\n        \"docs/papers204_208_sequence/qa/p209_round1_preparation_v2\",\n        \"docs/papers204_208_sequence/qa/central_lifecycle_p209_a\",\n        \"docs/papers204_208_sequence/qa/central_lifecycle_p209_round1\",\n        \"docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907\",\n        \"SYMBOLIC_DYNAMICS_STATE.md\",\n        \"docs/papers204_208_sequence/PIPELINE_STATE.md\",\n        \"docs/papers204_208_sequence/GIT_SYNC_RECEIPT.md\",\n        \"docs/papers204_208_sequence/P209_A_RESPONSE.md\",\n        \"docs/papers204_208_sequence/scouting/TWENTY_SIXTH_ROOT_INSPECTION.md\",\n        \"docs/papers204_208_sequence/scouting/TWENTY_SEVENTH_ROOT_INSPECTION.md\",\n        \"docs/papers204_208_sequence/qa/GIT_OBJECT_P209_ROUND0_F8EE398C.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_PAIR_PREPARATION.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_INITIAL_INSPECTION.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_INITIAL_INSPECTION.md\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_PAIR_INSPECTION.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_PREEXECUTION.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_EXACT_NOCHANGE_CHECK.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_SUBMITTED_CURRENT_LINKS.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_DELTA_INSPECTION.md\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_DELTA_INSPECTION.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_A_ROOT_DELTA_INSPECTION.execution.json\",\n        \"docs/papers204_208_sequence/qa/inspect_p209_a_initial.py\",\n        \"docs/papers204_208_sequence/qa/inspect_p209_a_root_pair.py\",\n        \"docs/papers204_208_sequence/qa/inspect_p209_a_delta.py\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_ROOT_INSPECTION.md\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_ROOT_INSPECTION.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_FREEZE.execution.json\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_PREFLIGHT.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_LIFECYCLE.actual.json\",\n        \"docs/papers204_208_sequence/qa/inspect_p209_round1_root.py\",\n        \"docs/papers204_208_sequence/qa/preflight_p209_round1_root.py\",\n        \"docs/papers204_208_sequence/qa/inspect_p209_round1_lifecycle.py\",\n        \"docs/papers204_208_sequence/qa/SCOUT26_ROOT_INSPECTION.actual.json\",\n        \"docs/papers204_208_sequence/qa/SCOUT26_POST_LIFECYCLE_MAPPING.actual.json\",\n        \"docs/papers204_208_sequence/qa/SCOUT27_ROOT_INSPECTION.actual.json\",\n        \"docs/papers204_208_sequence/qa/SCOUT27_ROOT_INSPECTION_v1.execution.json\",\n        \"docs/papers204_208_sequence/qa/inspect_scout27_root.py\",\n        \"docs/papers204_208_sequence/qa/inspect_scout27_root_v2.py\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_CURRENT_LINKS.actual.json\",\n        \"docs/papers204_208_sequence/qa/sync_p209_round1.py\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_SCOPED_COPY.actual.json\",\n        \"docs/papers204_208_sequence/qa/P209_ROUND1_PRESTAGE_IGNORED_REFUSAL.actual.json\"\n      ],\n      \"exit\": 0,\n      \"stderr\": \"\",\n      \"stdout\": \"\"\n    },\n    {\n      \"argv\": [\n        \"git\",\n        \"add\",\n        \"-f\",\n        \"--\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/cold_build/main.aux\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/cold_build/main.bbl\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/cold_build/main.blg\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/cold_build/main.fls\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/cold_build/main.log\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/cold_build/main.out\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/generated.bbl\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/generated.blg\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_1.aux\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_1.fls\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_1.log\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_2.aux\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_2.fls\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_2.log\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_3.aux\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_3.fls\",\n        \"docs/papers204_208_sequence/reviews/p209_a/review_build_01/pass_3.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/cold_build/main.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/cold_build/main.bbl\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/cold_build/main.blg\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/cold_build/main.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/cold_build/main.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/cold_build/main.out\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/generated.bbl\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/generated.blg\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_1.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_1.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_1.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_2.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_2.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_2.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_3.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_3.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_01/pass_3.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/cold_build/main.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/cold_build/main.bbl\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/cold_build/main.blg\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/cold_build/main.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/cold_build/main.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/cold_build/main.out\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/generated.bbl\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/generated.blg\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_1.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_1.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_1.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_2.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_2.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_2.log\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_3.aux\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_3.fls\",\n        \"papers/209-ordered-fibre-threading/frozen_round1/author_build_02/pass_3.log\"\n      ],\n      \"exit\": 0,\n      \"stderr\": \"\",\n      \"stdout\": \"\"\n    }\n  ],\n  \"exact_copy_paths_plus_generated_record_and_preserved_refusal\": true,\n  \"ignored_manifest_payloads_explicitly_checked\": 51,\n  \"staged_paths\": 4124,\n  \"status\": \"PASS_EXACT_SCOPED_STAGE_WITH_EXPLICIT_IGNORED_PAYLOADS\",\n  \"tested_tree\": \"57345e3b97fab70f5d002c87fb343eddb79e03d0\",\n  \"unrelated_paths_staged\": 0\n}\n"
+  },
+  "manifest_check_invocation": {
+    "command": "/usr/bin/python3.10 -I -S -B docs/papers204_208_sequence/qa/check_named_git_manifests.py /root/autodl-tmp/hilbert-polya-structure 57345e3b97fab70f5d002c87fb343eddb79e03d0 papers/209-ordered-fibre-threading/PAPER_MANIFEST.sha256 docs/papers204_208_sequence/reviews/p209_a/SHA256SUMS docs/papers204_208_sequence/scouting/finite_systems_twenty_sixth/SHA256SUMS docs/papers204_208_sequence/scouting/finite_systems_twenty_seventh/SHA256SUMS docs/papers204_208_sequence/qa/p209_a_root_preparation/SHA256SUMS docs/papers204_208_sequence/qa/root_replays/p209_a_strict/root_a_pair_01/SHA256SUMS docs/papers204_208_sequence/qa/root_replays/p209_a_strict/launcher_root_a_pair_01/SHA256SUMS docs/papers204_208_sequence/qa/p209_round1_preparation/SHA256SUMS docs/papers204_208_sequence/qa/p209_round1_preparation_v2/SHA256SUMS docs/papers204_208_sequence/qa/central_lifecycle_p209_a/SHA256SUMS docs/papers204_208_sequence/qa/central_lifecycle_p209_round1/SHA256SUMS docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/SHA256SUMS",
+    "manifests": [
+      "papers/209-ordered-fibre-threading/PAPER_MANIFEST.sha256",
+      "docs/papers204_208_sequence/reviews/p209_a/SHA256SUMS",
+      "docs/papers204_208_sequence/scouting/finite_systems_twenty_sixth/SHA256SUMS",
+      "docs/papers204_208_sequence/scouting/finite_systems_twenty_seventh/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/p209_a_root_preparation/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/root_replays/p209_a_strict/root_a_pair_01/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/root_replays/p209_a_strict/launcher_root_a_pair_01/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/p209_round1_preparation/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/p209_round1_preparation_v2/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/central_lifecycle_p209_a/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/central_lifecycle_p209_round1/SHA256SUMS",
+      "docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/SHA256SUMS"
+    ],
+    "tree": "57345e3b97fab70f5d002c87fb343eddb79e03d0",
+    "result": {
+      "chunk_id": "74a24a",
+      "wall_time_seconds": 1.000469634,
+      "session_id": 38949,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "manifest_check_completion": {
+    "chunk_id": "f16cdf",
+    "wall_time_seconds": 0.000003251,
+    "exit_code": 0,
+    "original_token_count": 305,
+    "output": "{\n  \"checked_entries\": 8056,\n  \"failures\": [],\n  \"manifests\": [\n    \"papers/209-ordered-fibre-threading/PAPER_MANIFEST.sha256\",\n    \"docs/papers204_208_sequence/reviews/p209_a/SHA256SUMS\",\n    \"docs/papers204_208_sequence/scouting/finite_systems_twenty_sixth/SHA256SUMS\",\n    \"docs/papers204_208_sequence/scouting/finite_systems_twenty_seventh/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/p209_a_root_preparation/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/root_replays/p209_a_strict/root_a_pair_01/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/root_replays/p209_a_strict/launcher_root_a_pair_01/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/p209_round1_preparation/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/p209_round1_preparation_v2/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/central_lifecycle_p209_a/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/central_lifecycle_p209_round1/SHA256SUMS\",\n    \"docs/papers204_208_sequence/qa/central_lifecycle_p209_20260907/SHA256SUMS\"\n  ],\n  \"ref\": \"57345e3b97fab70f5d002c87fb343eddb79e03d0\",\n  \"scope\": \"Explicit directory-relative package manifests; not root-relative input pins, coverage policy or mathematics\",\n  \"status\": \"PASS_GIT_OBJECT_PINS\"\n}\n"
+  },
+  "commit_invocation": {
+    "cmd": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport json,subprocess\nfrom pathlib import Path\nrepo=Path('/root/autodl-tmp/hilbert-polya-structure')\nwant='57345e3b97fab70f5d002c87fb343eddb79e03d0'\ndef git(*args):\n p=subprocess.run(['git',*args],cwd=repo,capture_output=True)\n assert p.returncode==0,(args,p.stdout,p.stderr)\n return p\nassert git('write-tree').stdout.decode().strip()==want\nassert git('rev-parse','HEAD').stdout.decode().strip()=='f8ee398cb7b0ddd5d1e5890543034a001cd2bc26'\nassert git('diff','--name-only').stdout==b''\nresult=git('commit','-q','-m','Archive P209 accepted A and Round1; close bounded scouts 26-27')\ncommit=git('rev-parse','HEAD').stdout.decode().strip()\ntree=git('rev-parse','HEAD^{tree}').stdout.decode().strip()\nassert tree==want\nassert git('status','--porcelain').stdout==b''\nprint(json.dumps({'status':'PASS_COMMITTED_EXACT_TESTED_TREE','commit':commit,'tree':tree,'commit_exit':result.returncode,'commit_stdout':result.stdout.decode(),'commit_stderr':result.stderr.decode(),'clean_mirror':True},indent=2,sort_keys=True))\nPY",
+    "result": {
+      "chunk_id": "a8115e",
+      "wall_time_seconds": 0.352317164,
+      "exit_code": 0,
+      "original_token_count": 63,
+      "output": "{\n  \"clean_mirror\": true,\n  \"commit\": \"2974f8ea5f9e7cb0f8146cae017add38a6939da0\",\n  \"commit_exit\": 0,\n  \"commit_stderr\": \"\",\n  \"commit_stdout\": \"\",\n  \"status\": \"PASS_COMMITTED_EXACT_TESTED_TREE\",\n  \"tree\": \"57345e3b97fab70f5d002c87fb343eddb79e03d0\"\n}\n"
+    }
+  },
+  "push_invocation": {
+    "cmd": "git push origin main",
+    "result": {
+      "chunk_id": "5203b7",
+      "wall_time_seconds": 1.001060432,
+      "session_id": 91321,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "push_completion": {
+    "chunk_id": "340a2a",
+    "wall_time_seconds": 0.00000292,
+    "exit_code": 0,
+    "original_token_count": 22,
+    "output": "To github.com:maris205/hilbert-polya-structure.git\n   f8ee398c..2974f8ea  main -> main\n"
+  },
+  "remote_confirmation_invocation": {
+    "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport json,subprocess\nfrom pathlib import Path\nrepo=Path('/root/autodl-tmp/hilbert-polya-structure')\ncommands=[]\ndef run(argv):\n p=subprocess.run(argv,cwd=repo,capture_output=True)\n commands.append({'argv':argv,'exit':p.returncode,'stdout':p.stdout.decode(),'stderr':p.stderr.decode()})\n assert p.returncode==0\n return p.stdout.decode().strip()\nhead=run(['git','rev-parse','HEAD'])\ntree=run(['git','rev-parse','HEAD^{tree}'])\nremote=run(['git','ls-remote','origin','refs/heads/main'])\nahead=run(['git','rev-list','--left-right','--count','HEAD...origin/main'])\nstatus=run(['git','status','--porcelain'])\nassert head=='2974f8ea5f9e7cb0f8146cae017add38a6939da0' and tree=='57345e3b97fab70f5d002c87fb343eddb79e03d0'\nassert remote.split()[0]==head and ahead.split()==['0','0'] and status==''\nprint(json.dumps({'status':'PASS_ACTUAL_PRIVATE_PUSH_REF_CONFIRMED','commit':head,'tree':tree,'remote_exact':True,'ahead_behind':[0,0],'mirror_clean':True,'commands':commands},indent=2,sort_keys=True))\nPY",
+    "result": {
+      "chunk_id": "8414c9",
+      "wall_time_seconds": 1.001299252,
+      "session_id": 3121,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "remote_confirmation_completion": {
+    "chunk_id": "8703ef",
+    "wall_time_seconds": 0.00000284,
+    "exit_code": 0,
+    "original_token_count": 311,
+    "output": "{\n  \"ahead_behind\": [\n    0,\n    0\n  ],\n  \"commands\": [\n    {\n      \"argv\": [\n        \"git\",\n        \"rev-parse\",\n        \"HEAD\"\n      ],\n      \"exit\": 0,\n      \"stderr\": \"\",\n      \"stdout\": \"2974f8ea5f9e7cb0f8146cae017add38a6939da0\\n\"\n    },\n    {\n      \"argv\": [\n        \"git\",\n        \"rev-parse\",\n        \"HEAD^{tree}\"\n      ],\n      \"exit\": 0,\n      \"stderr\": \"\",\n      \"stdout\": \"57345e3b97fab70f5d002c87fb343eddb79e03d0\\n\"\n    },\n    {\n      \"argv\": [\n        \"git\",\n        \"ls-remote\",\n        \"origin\",\n        \"refs/heads/main\"\n      ],\n      \"exit\": 0,\n      \"stderr\": \"\",\n      \"stdout\": \"2974f8ea5f9e7cb0f8146cae017add38a6939da0\\trefs/heads/main\\n\"\n    },\n    {\n      \"argv\": [\n        \"git\",\n        \"rev-list\",\n        \"--left-right\",\n        \"--count\",\n        \"HEAD...origin/main\"\n      ],\n      \"exit\": 0,\n      \"stderr\": \"\",\n      \"stdout\": \"0\\t0\\n\"\n    },\n    {\n      \"argv\": [\n        \"git\",\n        \"status\",\n        \"--porcelain\"\n      ],\n      \"exit\": 0,\n      \"stderr\": \"\",\n      \"stdout\": \"\"\n    }\n  ],\n  \"commit\": \"2974f8ea5f9e7cb0f8146cae017add38a6939da0\",\n  \"mirror_clean\": true,\n  \"remote_exact\": true,\n  \"status\": \"PASS_ACTUAL_PRIVATE_PUSH_REF_CONFIRMED\",\n  \"tree\": \"57345e3b97fab70f5d002c87fb343eddb79e03d0\"\n}\n"
+  },
+  "receipt_self_scope": "This record is created after the actual commit/push/remote confirmation and is not asserted within its own named commit. No external publication or five-paper completion."
+}

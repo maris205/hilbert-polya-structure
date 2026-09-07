@@ -1,0 +1,185 @@
+       SUCCESSOR TRANSFER ON CANONICALLY ORDERED SET PARTITIONS
+
+
+                                                        ANONYMOUS
+
+
+          Abstract. Order the blocks of a set partition by their minima. In one successor- transfer step, every
+          nonsingleton block simultaneously sends its maximum to the next block around a directed cycle. We
+          determine the finite dynamics of this literal rule. On partitions of [n] into k blocks, the maximum tail is
+          min{n − 2, 2k − 2} for 1 < k < n; the one-block and all-singleton states are fixed, and the global maximum
+          is n − 2. Recurrent states have explicit dense and sparse prefix–suffix forms, giving their exact counts, and
+          every nontrivial recurrent k-block state has period k. Independently, the one-step fibre of every target is
+          the trace of a product of explicit 5 × 5 matrices. Its states record whether an incoming label is absent, the
+          sole element, the minimum, the maximum, or an interior element of a target block. This trace is sensitive
+          to labelled interlacing: the targets 025 | 134 and 035 | 124 have identical block size/minimum/maximum
+          data but fibres two and one. Classical carrier and load mechanisms are treated as background. External
+          circulation remains on hold.
+
+
+
+
+                               1. The literal rule and the theorem package
+   Let [n] = {0, 1, . . . , n − 1}, and let Πn,k be the set of its set partitions into k nonempty blocks. We
+always write
+                       π = (B0 , B1 , . . . , Bk−1 ), min B0 < min B1 < · · · < min Bk−1 .
+Define T : Πn,k → Πn,k as follows. Every block with at least two elements removes its maximum and sends
+that element to Bi+1 , with subscripts modulo k; singleton blocks send nothing. All removals and additions
+occur simultaneously. For k = 1, removal and return occur in the same block and T is the identity.
+   The canonical ordering in this definition is not an update-dependent relabeling. Indeed, each block
+retains its minimum. Every element of the new block i + 1 is either from Bi+1 or is max Bi , hence is
+strictly larger than min Bi , whereas the new block i has minimum at most min Bi . Thus adjacent output
+minima remain strictly increasing. This argument includes the donation Bk−1 → B0 : it affects the first
+block but creates no last-to-first order comparison.
+   The restricted-growth word of π is w = w0 · · · wn−1 , where wj = i exactly when j ∈ Bi . Its first
+occurrences appear in the order 0, 1, . . . , k − 1 [8]. The literal rule becomes
+(1)       for every repeated letter i, replace its final occurrence by i + 1            (mod k), simultaneously.
+Every donating letter retains its original first occurrence. If replacing the last i by i + 1 creates an earlier
+first occurrence of i + 1, that position is still after the first i; the wrap to zero is harmless. Hence (1)
+remains a restricted-growth word on the same k letters.
+    Restricted-growth encodings and their Stirling enumeration are background [8]. Whirling already sup-
+plies sequential local actions on restricted-growth functions [4]; it is not (1). The excess-load projection
+below is exactly a threshold-one parallel chip-firing rule on a directed cycle and is likewise background
+[3]. We also distinguish the literal rule from Bulgarian solitaire [1], jeu-de-taquin promotion and rowmo-
+tion [5, 6], box-ball dynamics [7], and set-partition stack sorting [2]. None of these carrier, load, sorting,
+counting, or generic matrix mechanisms is counted as part of the residual theorem package.
+mFor a point in a finite self-map, let tail(π) be its least entrance time into a cycle. Put m = n − k, let
+  k   denote a Stirling number of the second kind, and write (k)m = k!/(k − m)!.
+Theorem 1 (sharp clocks and recurrent strata). The successor-transfer map has the following complete
+temporal behavior.
+    (i) If 1 < k < n, then
+(2)                                        max tail(π) = min{n − 2, 2k − 2}.
+                                          π∈Πn,k
+
+           For k = 1 and k = n, the unique state is fixed. Consequently, for every n ≥ 2, the maximum over
+           all set partitions of [n] is n − 2.
+      (ii) In the dense range n ≥ 2k, a k-block state is recurrent precisely when its first n − k letters form a
+           surjective restricted-growth word on all k letters and its final k letters are a permutation of them.
+           In the sparse range n ≤ 2k, it is recurrent precisely when its first k letters are 01 · · · (k − 1) and
+           its final n − k letters are distinct.
+                                                               1
+2                                                       ANONYMOUS
+
+
+    (iii) The number Rn,k of recurrent k-block states is
+                                                
+                                               k! n−k ,              n ≥ 2k,
+                                                       k
+(3)                                    Rn,k =
+                                               (k)
+                                                    n−k ,             n ≤ 2k.
+           At n = 2k, both descriptions read 01 · · · (k − 1) followed by a permutation, and both counts equal
+           k!. Every recurrent state with 1 < k < n has exact period k. The cases k = 1 and k = n have
+           period one. Thus for n ≥ 2 the possible periods over all strata are exactly 1, 2, . . . , n − 1; at n = 1
+           the unique state is fixed.
+
+                                     2. The directed-cycle load factor
+      Let ci be the multiplicity of letter i and set
+                                                                   k−1
+                                                                   X
+                                           zi = ci − 1 ≥ 0,                zi = m.
+                                                                   i=0
+
+Writing bi = 1{zi >0} , (1) gives
+(4)                             zi (t + 1) = zi (t) − bi (t) + bi−1 (t),       i (mod k).
+This entire factor is the directed-cycle chip-firing mechanism already subtracted above. We record its
+finite-time lemma because the labelled lift needs an exact entrance bound.
+Lemma 2 (queue smoothing). Assume m > 0. If m ≤ k, then every zi is in {0, 1} after at most m − 1
+steps. If m ≥ k, then every zi is positive after at most k − 1 steps. The resulting sparse and dense regimes
+are forward invariant.
+Proof. Lift indices periodically to Z. Choose integers Hi (0) with
+                               Hi (0) − Hi−1 (0) = zi (0),        Hi+k (0) = Hi (0) + m.
+Since zi is a nonnegative integer, (4) is equivalent to
+(5)                                    Hi (t + 1) = max{Hi (t) − 1, Hi−1 (t)}.
+Induction on t yields the explicit solution
+                                                                        
+(6)                                      Hi (t) = max Hi−r (0) − (t − r) .
+                                                   0≤r≤t
+
+Fix i, t and put Xr = Hi−r (0) + r. Taking the difference at adjacent indices in (6) gives
+(7)                                      zi (t) = 1 + max Xr − max Xr .
+                                                        0≤r≤t       1≤r≤t+1
+
+The two maxima share X1 , . . . , Xt . If zi (t) = 0, the second maximum must be the endpoint Xt+1 and
+exceed the first by one; hence
+                                   X  t
+                                        zi−r (0) = Hi (0) − Hi−t−1 (0) ≤ t.
+                                        r=0
+If zi (t) ≥ 2, the first maximum must instead be X0 and exceed the second by at least one; hence
+                                                  t
+                                                  X
+(8)                                                     zi−r (0) ≥ t + 2.
+                                                  r=0
+
+   For m ≤ k, take t = m − 1. A surviving value zi (t) ≥ 2 would force at least m + 1 units in a cone
+although the total mass is m. For m ≥ k, take t = k − 1. An empty zi (t) would bound the mass in one
+complete cycle by k − 1, contradicting m ≥ k. Finally, a binary load obeys zi (t + 1) = zi−1 (t), while an
+everywhere-positive load is fixed under (4); both regimes are invariant.                                 □
+
+                            3. Labelled windows, recurrence, and sharpness
+   Load smoothing does not yet make the labelled partition recurrent. A second phase orders a distin-
+guished word window.
+Lemma 3 (canonical windows). After Lemma 2, at most k − 1 further steps put the state in one of the
+following invariant forms.
+    (a) If m ≥ k, the final k word positions form a permutation of all k letters.
+     (b) If m ≤ k, the first k word positions are 01 · · · (k − 1).
+                                    SUCCESSOR TRANSFER ON SET PARTITIONS                                        3
+
+
+Proof. In the dense regime every letter remains repeated. Reverse the word and inspect its first k positions,
+equivalently the original final k positions. For every colour present in this window, exactly its first reversed
+occurrence moves one site clockwise under (1); an absent colour contributes no moving window token. The
+occupancy vector therefore follows (4), now with mass exactly k. The dense case of Lemma 2 makes all k
+occupancies positive by time k − 1, hence each is one.
+   In the sparse regime every full-word
+                                    P       multiplicity is one or two. Let qi count letter i in the first k
+positions. Then qi ∈ {0, 1, 2} and i qi = k. A value two has both copies in the prefix and moves its later
+copy clockwise; a value at most one does not move a prefix token. Thus
+(9)                                        qi′ = qi − 1{qi =2} + 1{qi−1 =2} .
+Regard each 2 as one excess particle and each 0 as a hole. Particles move one site per step through
+occupied sites, preserve cyclic order, and annihilate on the first unmatched hole. Pairing particles with
+holes in cyclic order on the universal cover shows that every pair meets within k − 1 steps. Then all qi = 1.
+A restricted-growth word whose first k letters are a permutation of 0, . . . , k − 1 must have those letters in
+the order 01 · · · (k − 1).
+   In the dense form, every last occurrence lies in the final permutation, so the prefix is fixed and the
+permutation is incremented modulo k. In the sparse form, the final m letters are exactly the duplicated
+letters, are distinct, and are incremented modulo k while the canonical prefix is fixed. Both forms are
+invariant.                                                                                                   □
+Proof of Theorem 1(ii)–(iii). A periodic state must already lie in the invariant smoothed-load regime;
+otherwise a forward iterate enters that regime and can never return. The same argument with Lemma 3
+forces the appropriate canonical window. In the dense case, deleting the final permutation leaves a length-
+m prefix that is a restricted-growth word and contains every letter, because every full-word multiplicity is
+at least two. In the sparse case, the canonical prefix contains one copy of every letter and the remaining
+m letters are distinct. This proves necessity.
+   Conversely, each stated form is invariant by the last paragraph of the lemma. When 1 < k < n, its
+nonempty  final permutation or injection is increased componentwise modulo k, so the exact period is k.
+There are m  k   surjective restricted-growth prefixes and k! final permutations in the dense case. In the
+sparse case, the final m letters form an injection chosen in (k)m ways. This proves (3), including equality
+of the two formulas at m = k. The boundary strata were already observed to be fixed, and the period-set
+statement follows by ranging over k = 2, . . . , n − 1.                                                   □
+Proof of Theorem 1(i). Lemma 2 costs at most min{m, k} − 1 steps and Lemma 3 at most k − 1. Their
+sum is n − 2 when m ≤ k and 2k − 2 when m ≥ k, proving the upper bound in (2).
+  For sharpness, use the single restricted-growth word
+(10)                                         wn,k = 0m+1 12 · · · (k − 1).
+For 0 ≤ t ≤ min{m − 1, k − 1}, direct use of (1) gives
+(11)                         T t (wn,k ) = 0m+1−t 12 22 · · · t2 (t + 1)(t + 2) · · · (k − 1).
+Thus load smoothing takes exactly m − 1 steps if m ≤ k and exactly k − 1 steps if m ≥ k.
+  Suppose first that m ≤ k. At the end of this load phase, the occupancy of the first k positions is
+                                        2r 1k−2r 0r ,      r = min{m, ⌊k/2⌋}.
+Iteration of (9) shows by induction that its last coordinate remains zero for the first k − 1 times and that
+the vector becomes 1k at time k − 1. Hence the labelled phase costs exactly k − 1.
+   If m ≥ k, write d = m − k. The load phase ends at 0d+2 12 · · · (k − 1)2 . For 1 ≤ s ≤ k − 1, another direct
+induction from (1) gives
+(12)                T k−1+s (wn,k ) = 0d+1 12 · · · (s − 1)s2 (s + 1)2 · · · (k − 1)2 01 · · · (s − 1).
+The terminal k positions first become a permutation at s = k − 1. Therefore (10) has tail n − 2 in the
+sparse range and 2k − 2 in the dense range.
+   For n ≥ 3, choosing k = n − 1 gives the global value n − 2. At n = 2 both available strata are fixed and
+the same formula is zero. This completes the proof.                                                       □
+
+                             4. An explicit five-state target-fibre trace
+   The load factor discards the label comparisons needed to invert one step. Fix a target C = (C0 , . . . , Ck−1 )
+in canonical minimum order, initially with k ≥ 2. If source block Bi donated, write xi = max Bi ; then
+xi ∈ Ci+1 . If it was a singleton, write xi = ⊥. Any predecessor is forced to satisfy
+                                                           
+(13)                                      Bi = Ci \ {xi−1 } ∪ {xi },
+

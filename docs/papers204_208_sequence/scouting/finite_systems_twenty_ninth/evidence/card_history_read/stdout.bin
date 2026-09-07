@@ -1,0 +1,240 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\T}{\mathcal T}
+\newcommand{\PiNK}{\Pi_{n,k}}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\tail}{\operatorname{tail}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\botstate}{\bot}
+\newcommand{\Stirling}[2]{\genfrac\{\}{0pt}{}{#1}{#2}}
+
+\title[Successor transfer on set partitions]{Successor Transfer on Canonically Ordered Set Partitions}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Order the blocks of a set partition by their minima.  In one successor-
+transfer step, every nonsingleton block simultaneously sends its maximum to
+the next block around a directed cycle.  We determine the finite dynamics of
+this literal rule.  On partitions of $[n]$ into $k$ blocks, the maximum tail
+is $\min\{n-2,2k-2\}$ for $1<k<n$; the one-block and all-singleton states are
+fixed, and the global maximum is $n-2$.  Recurrent states have explicit dense
+and sparse prefix--suffix forms, giving their exact counts, and every
+nontrivial recurrent $k$-block state has period $k$.  Independently, the
+one-step fibre of every target is the trace of a product of explicit
+$5\times5$ matrices.  Its states record whether an incoming label is absent,
+the sole element, the minimum, the maximum, or an interior element of a
+target block.  This trace is sensitive to labelled interlacing: the targets
+$025\mid134$ and $035\mid124$ have identical block size/minimum/maximum data
+but fibres two and one.  Classical carrier and load mechanisms are treated as
+background.  External circulation remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{The literal rule and the theorem package}
+
+Let $[n]=\{0,1,\ldots,n-1\}$, and let $\Pi_{n,k}$ be the set of its set
+partitions into $k$ nonempty blocks.  We always write
+\[
+ \pi=(B_0,B_1,\ldots,B_{k-1}),\qquad
+ \min B_0<\min B_1<\cdots<\min B_{k-1}.
+\]
+Define $\T:\Pi_{n,k}\to\Pi_{n,k}$ as follows.  Every block with at least two
+elements removes its maximum and sends that element to $B_{i+1}$, with
+subscripts modulo $k$; singleton blocks send nothing.  All removals and
+additions occur simultaneously.  For $k=1$, removal and return occur in the
+same block and $\T$ is the identity.
+
+The canonical ordering in this definition is not an update-dependent
+relabeling.  Indeed, each block retains its minimum.  Every element of the
+new block $i+1$ is either from $B_{i+1}$ or is $\max B_i$, hence is strictly
+larger than $\min B_i$, whereas the new block $i$ has minimum at most
+$\min B_i$.  Thus adjacent output minima remain strictly increasing.  This
+argument includes the donation $B_{k-1}\to B_0$: it affects the first block
+but creates no last-to-first order comparison.
+
+The restricted-growth word of $\pi$ is $w=w_0\cdots w_{n-1}$, where
+$w_j=i$ exactly when $j\in B_i$.  Its first occurrences appear in the order
+$0,1,\ldots,k-1$ \,\cite{Wachs1994}.  The literal rule becomes
+\begin{equation}\label{eq:rgf-rule}
+ \boxed{\quad\text{for every repeated letter $i$, replace its final
+ occurrence by $i+1\pmod{k}$, simultaneously.}\quad}
+\end{equation}
+Every donating letter retains its original first occurrence.  If replacing
+the last $i$ by $i+1$ creates an earlier first occurrence of $i+1$, that
+position is still after the first $i$; the wrap to zero is harmless.  Hence
+\eqref{eq:rgf-rule} remains a restricted-growth word on the same $k$ letters.
+
+Restricted-growth encodings and their Stirling enumeration are background
+\cite{Wachs1994}.  Whirling already supplies sequential local actions on
+restricted-growth functions \cite{JosephProppRoby2025}; it is not
+\eqref{eq:rgf-rule}.  The excess-load projection below is exactly a
+threshold-one parallel chip-firing rule on a directed cycle and is likewise
+background \cite{JiLiWang2025}.  We also distinguish the literal rule from
+Bulgarian solitaire \cite{Brandt1982}, jeu-de-taquin promotion and rowmotion
+\cite{Schutzenberger1972,StrikerWilliams2012}, box-ball dynamics
+\cite{TakahashiSatsuma1990}, and set-partition stack sorting
+\cite{ChoiEtAl2024}.  None of these carrier, load, sorting, counting, or
+generic matrix mechanisms is counted as part of the residual theorem package.
+
+For a point in a finite self-map, let $\tail(\pi)$ be its least entrance time
+into a cycle.  Put $m=n-k$, let $\Stirling{m}{k}$ denote a Stirling number of
+the second kind, and write $(k)_m=k!/(k-m)!$.
+
+\begin{theorem}[sharp clocks and recurrent strata]\label{thm:temporal}
+The successor-transfer map has the following complete temporal behavior.
+\begin{enumerate}[(i)]
+\item If $1<k<n$, then
+\begin{equation}\label{eq:clock}
+ \max_{\pi\in\Pi_{n,k}}\tail(\pi)=\min\{n-2,\,2k-2\}.
+\end{equation}
+For $k=1$ and $k=n$, the unique state is fixed.  Consequently, for every
+$n\ge2$, the maximum over all set partitions of $[n]$ is $n-2$.
+
+\item In the dense range $n\ge2k$, a $k$-block state is recurrent precisely
+when its first $n-k$ letters form a surjective restricted-growth word on all
+$k$ letters and its final $k$ letters are a permutation of them.  In the
+sparse range $n\le2k$, it is recurrent precisely when its first $k$ letters
+are $01\cdots(k-1)$ and its final $n-k$ letters are distinct.
+
+\item The number $R_{n,k}$ of recurrent $k$-block states is
+\begin{equation}\label{eq:recurrent-count}
+ R_{n,k}=
+ \begin{cases}
+ k!\,\Stirling{n-k}{k},&n\ge2k,\\[2mm]
+ (k)_{n-k},&n\le2k.
+ \end{cases}
+\end{equation}
+At $n=2k$, both descriptions read $01\cdots(k-1)$ followed by a
+permutation, and both counts equal $k!$.  Every recurrent state with
+$1<k<n$ has exact period $k$.  The cases $k=1$ and $k=n$ have period one.
+Thus for $n\ge2$ the possible periods over all strata are exactly
+$1,2,\ldots,n-1$; at $n=1$ the unique state is fixed.
+\end{enumerate}
+\end{theorem}
+
+\section{The directed-cycle load factor}
+
+Let $c_i$ be the multiplicity of letter $i$ and set
+\[
+ z_i=c_i-1\ge0,\qquad \sum_{i=0}^{k-1}z_i=m.
+\]
+Writing $b_i=\ind_{\{z_i>0\}}$, \eqref{eq:rgf-rule} gives
+\begin{equation}\label{eq:queue}
+ z_i(t+1)=z_i(t)-b_i(t)+b_{i-1}(t),
+ \qquad i\pmod{k}.
+\end{equation}
+This entire factor is the directed-cycle chip-firing mechanism already
+subtracted above.  We record its finite-time lemma because the labelled lift
+needs an exact entrance bound.
+
+\begin{lemma}[queue smoothing]\label{lem:smoothing}
+Assume $m>0$.  If $m\le k$, then every $z_i$ is in $\{0,1\}$ after at most
+$m-1$ steps.  If $m\ge k$, then every $z_i$ is positive after at most $k-1$
+steps.  The resulting sparse and dense regimes are forward invariant.
+\end{lemma}
+
+\begin{proof}
+Lift indices periodically to $\mathbb Z$.  Choose integers $H_i(0)$ with
+\[
+ H_i(0)-H_{i-1}(0)=z_i(0),\qquad H_{i+k}(0)=H_i(0)+m.
+\]
+Since $z_i$ is a nonnegative integer, \eqref{eq:queue} is equivalent to
+\begin{equation}\label{eq:maxplus-step}
+ H_i(t+1)=\max\{H_i(t)-1,H_{i-1}(t)\}.
+\end{equation}
+Induction on $t$ yields the explicit solution
+\begin{equation}\label{eq:maxplus-solution}
+ H_i(t)=\max_{0\le r\le t}
+       \bigl(H_{i-r}(0)-(t-r)\bigr).
+\end{equation}
+Fix $i,t$ and put $X_r=H_{i-r}(0)+r$.  Taking the difference at adjacent
+indices in \eqref{eq:maxplus-solution} gives
+\begin{equation}\label{eq:two-maxima}
+ z_i(t)=1+\max_{0\le r\le t}X_r-
+             \max_{1\le r\le t+1}X_r.
+\end{equation}
+The two maxima share $X_1,\ldots,X_t$.  If $z_i(t)=0$, the second maximum
+must be the endpoint $X_{t+1}$ and exceed the first by one; hence
+\[
+ \sum_{r=0}^{t}z_{i-r}(0)=H_i(0)-H_{i-t-1}(0)\le t.
+\]
+If $z_i(t)\ge2$, the first maximum must instead be $X_0$ and exceed the
+second by at least one; hence
+\begin{equation}\label{eq:cones}
+ \sum_{r=0}^{t}z_{i-r}(0)\ge t+2.
+\end{equation}
+
+For $m\le k$, take $t=m-1$.  A surviving value $z_i(t)\ge2$ would force at
+least $m+1$ units in a cone although the total mass is $m$.  For $m\ge k$,
+take $t=k-1$.  An empty $z_i(t)$ would bound the mass in one complete cycle
+by $k-1$, contradicting $m\ge k$.  Finally, a binary load obeys
+$z_i(t+1)=z_{i-1}(t)$, while an everywhere-positive load is fixed under
+\eqref{eq:queue}; both regimes are invariant.
+\end{proof}
+
+\section{Labelled windows, recurrence, and sharpness}
+
+Load smoothing does not yet make the labelled partition recurrent.  A second
+phase orders a distinguished word window.
+
+\begin{lemma}[canonical windows]\label{lem:windows}
+After Lemma~\ref{lem:smoothing}, at most $k-1$ further steps put the state in
+one of the following invariant forms.
+\begin{enumerate}[(a)]
+\item If $m\ge k$, the final $k$ word positions form a permutation of all
+$k$ letters.
+\item If $m\le k$, the first $k$ word positions are $01\cdots(k-1)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+In the dense regime every letter remains repeated.  Reverse the word and
+inspect its first $k$ positions, equivalently the original final $k$
+positions.  For every colour present in this window, exactly its first
+reversed occurrence moves one site clockwise under \eqref{eq:rgf-rule}; an
+absent colour contributes no moving window token.  The occupancy vector
+therefore follows \eqref{eq:queue}, now with mass exactly $k$.  The dense
+case of Lemma~\ref{lem:smoothing} makes all $k$ occupancies positive by time
+$k-1$, hence each is one.
+
+In the sparse regime every full-word multiplicity is one or two.  Let $q_i$
+count letter $i$ in the first $k$ positions.  Then
+$q_i\in\{0,1,2\}$ and $\sum_iq_i=k$.  A value two has both copies in the
+prefix and moves its later copy clockwise; a value at most one does not move
+a prefix token.  Thus
+\begin{equation}\label{eq:prefix-particles}
+ q_i'=q_i-\ind_{\{q_i=2\}}+\ind_{\{q_{i-1}=2\}}.
+\end{equation}
+Regard each $2$ as one excess particle and each $0$ as a hole.  Particles
+move one site per step through occupied sites, preserve cyclic order, and
+annihilate on the first unmatched hole.  Pairing particles with holes in
+cyclic order on the universal cover shows that every pair meets within
+$k-1$ steps.  Then all $q_i=1$.  A restricted-growth word whose first $k$
+letters are a permutation of $0,\ldots,k-1$ must have those letters in the
+order $01\cdots(k-1)$.

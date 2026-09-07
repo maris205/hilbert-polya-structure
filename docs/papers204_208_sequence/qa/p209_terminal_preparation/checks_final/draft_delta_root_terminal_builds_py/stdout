@@ -1,0 +1,27 @@
+--- history/draft_01/root_terminal_builds.py
++++ root_terminal_builds.py
+@@ -233,6 +233,11 @@
+     return pins(p for root in roots if root.is_dir() for p in root.rglob('*') if p.is_file())
+ 
+ 
++def is_elf(path):
++    with Path(path).open('rb') as stream:
++        return stream.read(4) == b'\x7fELF'
++
++
+ def runtime_inventory():
+     std = []
+     for directory, folders, files in os.walk(STDLIB):
+@@ -385,8 +390,10 @@
+                    (OUT / (label + '.stdout')).read_bytes(), (OUT / (label + '.stderr')).read_bytes())
+ 
+     def library_capture(label):
+-        objects = sorted({str(p.resolve()) for p in TOOLS if p.name != 'ldd'} |
+-                         {p for p in runtime_before if p.endswith('.so')})
++        candidates = {str(p.resolve()) for p in TOOLS if p.name != 'ldd'}
++        candidates.update(p for p in runtime_before if Path(p).is_relative_to(STDLIB) and p.endswith('.so'))
++        objects = sorted(p for p in candidates if is_elf(p))
++        assert objects, 'no ELF linkage targets'
+         raw = command(label, ['/usr/bin/ldd', *objects], OUT).stdout.decode()
+         assert 'not found' not in raw
+         paths = [Path(p).resolve() for p in re.findall(r'/[^\s():]+', raw) if Path(p).is_file()]

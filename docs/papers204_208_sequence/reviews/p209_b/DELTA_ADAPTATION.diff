@@ -1,0 +1,62 @@
+--- docs/papers204_208_sequence/reviews/p209_b/check_delta.py	2026-09-07 14:29:53.378871308 +0800
++++ docs/papers204_208_sequence/reviews/p209_b/check_delta_v2.py	2026-09-07 14:35:11.903298974 +0800
+@@ -166,10 +166,10 @@
+ 
+ 
+ def main():
+-    out=Path(sys.argv[1]);assert out==B/'delta_check_01'
++    out=Path(sys.argv[1]);assert out==B/'delta_check_02'
+     assert sys.flags.isolated and sys.flags.no_site and sys.flags.optimize==0 and sys.dont_write_bytecode
+     assert dict(os.environ)==ENV and not Path(sys.pycache_prefix).exists()
+-    for name in ('check_delta.py','launch_delta.py','record_review.py'):current(B/name)
++    for name in ('check_delta_v2.py','launch_delta_v2.py','record_review.py'):current(B/name)
+     prior_aliases=js(B/'artifact_audit_03/EXACT_HISTORICAL_RESOLUTION.json');assert len(prior_aliases)==13
+     for key,target in prior_aliases.items():
+         origin,digest=key.rsplit(' @ ',1);alias(origin,digest,target)
+@@ -180,6 +180,13 @@
+     assert not intake['acceptance_performed'] and intake['initial_payloads_checked']==1298
+     for item in intake['copies']:
+         alias(item['original'],item['sha256'],item['physical'])
++        if item['original'] not in {str(W/'SYMBOLIC_DYNAMICS_STATE.md'),str(W/'docs/papers204_208_sequence/PIPELINE_STATE.md')}:
++            assert current(item['original'])['sha256']==item['sha256']
++    manifest(B/'delta_check_01/SHA256SUMS',complete=True)
++    prior_failure=js(B/'delta_check_01/CLOSURE_AFTER_FAILURE.json')
++    assert prior_failure['status']=='FAIL_PRESERVED_OUTER_WRAPPER_FILENAME_COLLISION'
++    assert prior_failure['actual_outer_exit']==1 and prior_failure['actual_child_exit']==0
++    COUNTS['preserved_failed_delta_wrappers']=1
+     # Preserve current response-bound lifecycle/rollup bytes for later changes.
+     anchors=out/'response_anchors';anchors.mkdir()
+     for name,digest in [('PAPER_MANIFEST.sha256','3e94a72637733ca46f7950f4feb8508fdf14b5ff6386c971821932ae9231e5a9'),
+--- docs/papers204_208_sequence/reviews/p209_b/launch_delta.py	2026-09-07 14:21:42.989276928 +0800
++++ docs/papers204_208_sequence/reviews/p209_b/launch_delta_v2.py	2026-09-07 14:35:11.903298974 +0800
+@@ -14,8 +14,8 @@
+ 
+ def main():
+     mode,label=sys.argv[1:]
+-    assert (mode,label) in [('intake','delta_intake_01'),('check','delta_check_01')]
+-    script='delta_intake.py' if mode=='intake' else 'check_delta.py'
++    assert (mode,label) in [('intake','delta_intake_01'),('check','delta_check_02')]
++    script='delta_intake.py' if mode=='intake' else 'check_delta_v2.py'
+     out=B/label;assert not out.exists()
+     assert sys.flags.isolated and sys.flags.no_site and sys.flags.optimize==0 and sys.dont_write_bytecode
+     assert dict(os.environ)==ENV and Path.cwd()==W
+@@ -24,8 +24,8 @@
+     spec=importlib.util.spec_from_file_location('unchanged_recording_only',B/'record_review.py')
+     rec=importlib.util.module_from_spec(spec);spec.loader.exec_module(rec)
+     files=[Path(p) for p in json.loads((B/'review_pair_01/ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json').read_bytes())]
+-    files += [B/'review_pair_01/ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json',B/'record_review.py',B/'launch_delta.py',B/script]
+-    for name in ['record_review.py','launch_delta.py',script]:
++    files += [B/'review_pair_01/ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json',B/'record_review.py',B/'launch_delta_v2.py',B/script]
++    for name in ['record_review.py','launch_delta_v2.py',script]:
+         shutil.copyfile(B/name,out/name);files.append(out/name)
+     before=rec.pins(files);assert all('error' not in v for v in before.values())
+     rec.save(out/'INPUTS_BEFORE.json',before);rec.save(out/'ATTEMPT.json',rec.observation('DELTA_DOCUMENTARY_ENTRY'))
+@@ -37,7 +37,7 @@
+     except BaseException:
+         problem=traceback.format_exc()
+     after=rec.pins(before);rec.save(out/'INPUTS_AFTER.json',after)
+-    rec.save(out/'ALL_COMMAND_RECORDS.json',rec.COMMAND_RECORDS)
++    rec.save(out/'WRAPPER_COMMAND_RECORDS.json',rec.COMMAND_RECORDS)
+     result={'status':'PASS' if problem is None and before==after else 'FAIL_PRESERVED','failure':problem,
+             'inputs':len(before),'inputs_unchanged':before==after,'commands':len(rec.COMMAND_RECORDS),
+             'scope':'Documentary assessment only; no mathematical producer/build/render/view; no continuous/startup/grandchild trace or OS-hermeticity.'}

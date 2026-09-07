@@ -1,0 +1,17 @@
+{
+  "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport json,pathlib,re,runpy,urllib.parse\nr=pathlib.Path('/root/autodl-tmp/symbolic_dynamics');q=r/'docs/papers204_208_sequence/qa';d=runpy.run_path(str(q/'inspect_p209_a_initial.py'));m=d['manifest'];pin=d['pin'];p=r/'papers/209-ordered-fibre-threading'\nfiles=[r/'SYMBOLIC_DYNAMICS_STATE.md',q.parent/'PIPELINE_STATE.md',q/'P209_B_ROOT_DELTA_INSPECTION.md',q.parent/'scouting/THIRTY_FIRST_ROOT_INSPECTION.md',q/'central_lifecycle_p209_b_delta/README.md'];links=0\nfor f in files:\n pin(f)\n for raw in re.findall(r'\\[[^\\]]*\\]\\(([^)]+)\\)',f.read_text()):\n  target=raw.strip().strip('<>')\n  if target.startswith(('http:','https:','mailto:','#')):continue\n  target=urllib.parse.unquote(target.split('#',1)[0]);t=(f.parent/target).resolve();assert t.exists(),(f,target);links+=1\nassert len(m(q/'central_lifecycle_p209_b_delta/SHA256SUMS',complete=True))==5\nassert len(m(p/'AUTHOR_MANIFEST.sha256'))==1985\nassert len(m(p/'frozen_round1/SHA256SUMS',complete=True))==2003\nassert len(m(p/'frozen_round2/SHA256SUMS',complete=True))==2021\nfor f in list(d['READS']):pin(f,fresh=True)\nprint(json.dumps({'status':'PASS_CHANGED_LIFECYCLE_LINKS_AND_UNCHANGED_SEALS','documents':len(files),'local_links':links,'author_payloads':1985,'round1_payloads':2003,'round2_payloads':2021,'current_paths_twice':len(d['READS']),'boundary':'Basic complete-seal/link check, not complete Round2 provenance acceptance or any new science/build/view.'},indent=2))\nPY",
+  "result": {
+    "chunk_id": "89e14d",
+    "wall_time_seconds": 1.00071597,
+    "session_id": 16857,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "completion": {
+    "chunk_id": "f06f3b",
+    "wall_time_seconds": 0.00000308,
+    "exit_code": 0,
+    "original_token_count": 86,
+    "output": "{\n  \"status\": \"PASS_CHANGED_LIFECYCLE_LINKS_AND_UNCHANGED_SEALS\",\n  \"documents\": 5,\n  \"local_links\": 188,\n  \"author_payloads\": 1985,\n  \"round1_payloads\": 2003,\n  \"round2_payloads\": 2021,\n  \"current_paths_twice\": 6022,\n  \"boundary\": \"Basic complete-seal/link check, not complete Round2 provenance acceptance or any new science/build/view.\"\n}\n"
+  }
+}

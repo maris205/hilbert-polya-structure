@@ -1,0 +1,161 @@
+See Figure 1 for an example of space-time diagram.
+
+   This automaton was introduced by [Fis90b]. In this paper, the author shows that for all Bernoulli
+measure µ, the set [i]0 (for i ∈ A) is a µ-attractor iff n ≥ 5: that is, µ({x ∈ AZ : ∃T ∈ N, ∀t ≥
+T, F t x ∈ [i]}) > 0 for all i. Simulations starting from a random configuration suggest the following:
+for n = 3 or 4, monochromatic regions keep increasing in size; for n ≥ 5, we observe the convergence
+to a fixed point where small regions are delimited by vertical lines. We use the main result to
+explain this observation.
+Proposition 3. Define:
+                           u+ = {ab ∈ A2 : (b − a)     mod n = +1};
+                                         2
+                           u− = {ab ∈ A : (b − a)      mod n = −1};
+                           u0 = {ab ∈ A2 : (b − a)     mod n ∈
+                                                             / {−1, 0, 1}}.
+Then, for any measure µ ∈ Mσ−erg ((Z/nZ)Z ), only one of those three sets may intersect the language
+of Λµ (Cn ).
+
+  If furthermore µ is a Bernoulli measure, then the persisting set can only be u0 .
+                                                                                  F
+Proof. We consider the interface defects relatively to the decomposition Σ = i∈A Σi , where Σi =
+{∞ i∞ }. Σ is a Cn -invariant SFT of radius r = 2, and defects are exactly transitions between colours.
+Thus we define P = {pab : ab ∈ A2 , a 6= b}. One cell is enough to distinguish the domains (α = 1)
+and we obtain a morphism π of radius 2 defined by the local rule:
+                                A2 → P ∪ {0}
+                               a · a 7→  0               for all a, b ∈ A.
+                               a · b 7→ pab
+Simulations suggest that pab evolves at constant speed +1 if ab ∈ u+ , −1 if ab ∈ u− and 0 if
+ab ∈ u0 . Particles progress at their assigned speed unless they meet another particle, in which case
+they interact according to the following chemistry:
+      • pab + pba → ∅ (if pab has speed +1);
+      • pab + pbc → pac (if pab and pbc have speeds (+1, 0) or (0, −1), only when n ≥ 4), or
+      • pab + pbc + pcd → pad . (if pab , pbc and pcd have speeds +1, 0, −1 respectively, which is only
+        possible for n = 4).
+   We group together the particles of same speed, writing p+ = {pab : ab ∈ u+ } and p− and p0
+similarly. Formally, for x ∈ AZ and k ∈ Z the update function is defined as:
+                                                       
+                                                                  π(x)k+1 ∈ p+ , or
+                        {k + 1} if π(x)k ∈ p+ and                                            ;
+                     
+                     
+                                                          π(x) k+1 ∈/ P and π(x)k+2 ∈ / p−
+                     
+                     
+                     
+                                                       
+                                                                  π(x)k−1 ∈ p− , or
+                     
+           φ(x, k) =    {k − 1} if π(x)k ∈ p− and
+                     
+                                                         π(x) k−1  ∈
+                                                                    / P and π(x)k−2 ∈ / p+ ;
+                          {k}     if π(x)    ∈ p   and π(x)    ∈/ p   and π(x)     ∈
+                                                                                   / p
+                     
+                                           k     0         k+1     −           k−1     +
+                     
+                     
+                     
+                            ∅     otherwise (and in particular if π(x)k = 0).
+                     
+                                                  15
+As previously, we can check that the update function actually describes the dynamics of the particles.
+For all x ∈ Z, we check that:
+π(F (x))1 ∈ p+ ⇔ F (x){1,2} = ab with a = b + 1
+                          
+                           abbc where c 6= a
+               ⇔ x[0,3] ∈   abc_ where b = c + 1
+                            dacb where d 6= a + 1 and c = b − 1
+                          
+                 
+                    π(x)0 ∈ p+ and π(x)1 ∈
+                                         / P and π(x)2 ∈/ p− , or
+               ⇔
+                    π(x)1 ∈ p0 and π(x)2 ∈ p− with good chemistry (pa,a−2 + pa−2,a−1 → pa,a−1 )
+   and so on for other particle types, from which we deduce the hypotheses of Corollary 1. Since
+[p+ ] = π([u+ ]) and so on, we obtain the result.
+
+   If µ is a Bernoulli measure: Consider the “mirror” map γ((ak )k∈Z ) = (a−k )k∈Z . γ is continu-
+ous, and thus measurable. We have µ(γ([u])) = µ([u−1 ]) = µ([u]), where (u1 · · · un )−1 = un · · · u1 .
+But π(x)k ∈ p+ ⇔ π(γ(x))−k ∈ p− , and conversely; since F ◦ γ = γ ◦ F , all measures F∗t µ are
+γ-invariant, and thus no particle in p+ or p− can persist in L(π(Λµ (F ))) (since otherwise, the
+symmetrical particle would persist too).                                                             
+   For small values of n or particular initial measures, this proposition can be refined in the following
+manner:
+      n = 3: p0 is empty. Given the combinatorics of collisions, where a particle in p+ can only
+        disappear by colliding with a particle in p− , we see that particles in p+ persist if and only
+        if π∗ µ([p+ ]) > π∗ µ([p− ]), and symmetrically. In the equality case (in particular, for any
+        Bernoulli measure), no defect can persist in the µ-limit set, which means that Λµ (F ) is a
+        set of monochromatic configurations.
+      n = 4: If µ is a Bernoulli measure, the result of [Fis90b] shows that [i]0 cannot be a µ-attractor
+        for any i. In other words, for µ-almost all x, F t (x) does not converge, which means that
+        particles in p+ or p− cross the central column infinitely often (even though their probability
+        to appear tends to 0). This could not happen if particles in p0 were persisting in π(Λµ (F )),
+        and thus Λµ (F ) is a set of monochromatic configurations.
+      n ≥ 5: If µ is a nondegenerate Bernoulli measure, the result of [Fis90b] shows that [i]0 is a
+        µ-attractor for all i. This means that some particles in p0 persist in π(Λµ (F )), and any
+        configuration of Λµ (F ) contains only homogeneous regions separated by vertical lines.
+   For n = 3 or 4, since Λµ (F ) is a set of monochromatic configurations we deduce that the sequence
+(F n µ)n∈N converges to a convex combination of Dirac measures. However this method does not
+give any insight as to the coefficient of each component. As shown in [HdM14], if µ is a Bernoulli
+measure then
+                                   t
+                                C3∗  µ −→ µ([2])δb0 + µ([0])δb1 + µ([1])δb2 .
+                                     t→∞
+  The problem is open for the 4-cyclic cellular automaton.
+2.6.3. One-sided captive cellular automata
+We consider the family of captive cellular automata F : AZ → AZ of neighbourhood {0, 1}, which
+means that the local rule f : A{0,1} → A satisfies f (a0 a1 ) ∈ {a0 , a1 }. See Figure 1 for an example
+of space-time diagram.
+Proposition 4. Let F be a one-sided captive automaton and µ ∈ Mσ−erg (AZ ). Define:
+                                u+ = {ab ∈ A2 : a 6= b, f (a, b) = a}
+                                u− = {ab ∈ A2 : a 6= b, f (a, b) = b}
+                                                   16
+Then either u+ ∩ L(Λµ (F )) = ∅ or u− ∩ L(Λµ (F )) = ∅.
+
+   If moreover, for all a, b ∈ A, the local rule satisfies f (ab) = f (ba) and µ is a Bernoulli measure,
+then Λµ (F ) ⊆ {∞ a∞ : a ∈ A} (no particle remains).
+                                                                                    F
+Proof. We consider the interface defects relative to the decomposition Σ = i∈A Σi where Σi =
+{∞ i∞ } and obtain the same particles P and morphism π as the n-state cyclic automata. pab evolve
+at speed −1 if f (a, b) = b and 0 if f (a, b) = a, and we define p−1 and p0 accordingly. The update
+function is defined as follows:
+                                            
+                                             {k}         if π(x)k ∈ p0 and π(x)k+1 ∈ / p−1
+                    Z
+             ∀x ∈ A , ∀k ∈ Z, φ(x, k) =        {k − 1} if π(x)k ∈ p−1 and π(x)k−1 ∈    / p0
+                                                  ∅       otherwise
+                                            
+
+As in the two previous examples, we check by enumeration of cases that the update function describes
+the particle dynamics on all words of length 3:
+            ∀x ∈ AZ , ∀k ∈ Z, F (x)k ∈ p0 ⇔ F (x)[k,k+1] = ab where a 6= b and f (a, b) = a
+                                                 ⇔ x[k,k+1] = abc where b = c or f (b, c) = b
+                                                 ⇔ π(x)k ∈ p0 and π(x)k+1 ∈
+                                                                          / p−1
+  and deduce the properties of locality, redistribution, disjunction, coalescence and speed from
+there. The main result implies the theorem.
+  If µ is a Bernoulli measure: Then µ is invariant under the mirror map γ and F ◦ γ = γ ◦ F
+by hypothesis. As in the previous example, we conclude that no particle can persist in Λµ (F ). 
+2.6.4. An automaton performing random walks
+Let F be defined on the alphabet A = (Z/2Z)2 on the neighbourhood {−2, . . . , 2} by the local rule
+f defined as follows:
+                                                                    1 if (a−1 , b−1 ) = (1, 1) or (a0 , b0 ) = (0, 1);
+ f : (a−2 , b−2 ), . . . , (a2 , b2 ) 7→ (a−2 + a2 , c) where c =
+                                                                    0 otherwise.
+Intuitively, the first layer performs addition mod 2 at distance 2, while the ones on the second layer
+behave as particles, moving right if the first layer contains a 1 and not moving if it contains a 0.
+Two colliding particles simply merge.
+
+
+
+
+        Figure 6. Automaton performing random walks iterated on the uniform measure.
+         is a particle, while the second layer is represented by  (0) or  (1).
+
+
+Proposition 5. Let ν ∈ Mσ−erg ((Z/2Z)Z ) and µ = λ × ν, where λ is the uniform measure on
+(Z/2Z)Z . Then F∗t µ −→ λ × δb0 .
+                        t→∞
+                                                           17
+Proof. Pivato’s formalism is not necessary here. Consider the set of particles P = {1} and the

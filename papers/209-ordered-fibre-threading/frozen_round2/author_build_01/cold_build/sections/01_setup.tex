@@ -1,0 +1,58 @@
+\section{The operation and its scope}
+
+Let $[n]=\{0,\ldots,n-1\}$ and $\X_n=[n]^{[n]}$, with $n\ge0$.
+For each nonempty fibre $f^{-1}(v)=\{i_1<\cdots<i_k\}$, set
+\begin{equation}\label{eq:rule}
+ (Tf)(i_j)=i_{j+1}\quad(1\le j<k),
+ \qquad (Tf)(i_k)=v.
+\end{equation}
+Every fibre and its order are computed from the old function. Since the
+fibres partition $[n]$, this simultaneous prescription defines
+$T:\X_n\to\X_n$. The empty function is fixed. We retain all labels;
+there is no quotient by rotation or graph isomorphism.
+
+The functional digraph of $f$ has arrows $i\to f(i)$. Its directed
+cycles, including loops, are called \emph{vertex cycles}. In contrast,
+$f$ is \emph{recurrent} when $T^p(f)=f$ for some $p\ge1$, and
+$\per(f)$ is the least such $p$. These refer to the update on whole
+functions. Every permutation is fixed by \eqref{eq:rule}, whatever its
+vertex-cycle lengths, but nonpermutations can have nontrivial periods:
+\begin{equation}\label{eq:two-cycle}
+ (1,2,1)\ \longmapsto\ (2,2,1)\ \longmapsto\ (1,2,1).
+\end{equation}
+Here $1\leftrightarrow2$ is unchanged and the arrow from vertex $0$
+alternates between its two attachments.
+
+Our results answer two separate questions. Section~\ref{sec:recurrence}
+classifies exactly the labelled graphs supporting recurrent motion and
+determines their periods. Section~\ref{sec:inverse} reconstructs every
+one-step predecessor directly from the target and proves that the cyclic
+successor permutation uniquely maximizes the fibre, with value $2^{n-1}$
+for $n\ge1$. All proofs are given here; finite checks are supplementary.
+
+\paragraph{Known rewiring primitives.}
+Replacing ordered stars by chains is established graph linearization.
+Onus, Richa and Scheideler's pure linearization algorithm operates on
+connected undirected graphs, separates smaller and larger neighbours, and
+uses an add-wins convention when updates conflict
+\citep[Algorithm~1 and Section~2]{onus2007linearization}.
+Connectivity by replacing old edges with paths is also a shared primitive.
+Those operations and their proofs are not claimed as new here.
+
+The successor-repair protocols of Cramer and Fuhrmann
+\citep[Sections~4 and 5.1--5.3]{cramer2005ring} and Shaker and Reeves
+\citep[Figure~3 and Section~5.1]{shaker2005ring} provide a closer directed
+comparison. Their successor changes shorten clockwise successor distance.
+In \eqref{eq:two-cycle}, the successor of $0$ instead moves from $1$ to
+$2$ before returning. Thus this loop-free transition is neither a literal
+successor repair nor a batch consisting only of such shortening repairs.
+This witness does not exclude every abstract conjugacy or enlarged-state
+construction. Aradhya and Scheideler's tree-to-path construction
+\citep[Section~3.4, Algorithm~10 and Appendix~B]{aradhya2025tree}
+also rewires ordered siblings, but takes a rooted tree with depth-parity
+labels; its distributed version additionally has supervisor and message
+state. It is not repeated \eqref{eq:rule} on arbitrary endofunctions with
+vertex cycles. We credit these primitives, ordinary path covers and
+rotation/LCM calculations. The contribution here is the exact recurrent
+and inverse/extremal conjunction for \eqref{eq:rule}, not a general
+rewiring method or a global priority claim.
