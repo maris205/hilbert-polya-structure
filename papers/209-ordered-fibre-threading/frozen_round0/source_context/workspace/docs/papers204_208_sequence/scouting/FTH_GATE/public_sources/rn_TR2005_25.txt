@@ -1,0 +1,550 @@
+                        Self-Stabilizing Structured Ring Topology P2P Systems
+
+                                      Ayman Shaker and Douglas S. Reeves
+                    Departments of Electrical and Computer Engineering and Computer Science
+                                               N. C. State University
+                                           {ashaker,reeves}@ncsu.edu
+
+
+                           Abstract                                  work, in the sense that peers arrive and depart continuously,
+                                                                     can become partitioned. If this happens, the construction and
+   We propose a self-stabilizing and modeless peer-to-               maintenance protocols generally have no way to bring the net-
+peer(P2P) network construction and maintenance protocol,             work back to the desired topology. One result of these limita-
+called the Ring Network(RN) protocol. The RN protocol, when          tions is the difficulty of merging two structured P2P networks
+started on a network of peers that are in an arbitrary state, will   efficiently and smoothly. Existing construction and mainte-
+cause the network to converge to a structured P2P system with        nance protocols generally do not allow such merging, even if
+a directed ring topology, where peers are ordered according to       each network individually has the desired structure.
+their identifiers. Furthermore, the RN protocol maintains this           In this paper we propose the Ring Network(RN) protocol;
+structure in the face of peer joins and departures.                  a distributed construction and maintenance protocol that gives
+   The RN protocol is a distributed and asynchronous                 rise to a sorted Ring Network, starting from an arbitrary topol-
+message-passing protocol, which fits well the autonomous be-         ogy. This protocol is able to correctly merge two P2P networks
+havior of peers in a P2P system. The RN protocol requires            into a single ring, or fix a network that is somehow partitioned.
+only the existence of a bootstrapping system which is weakly         Furthermore, the protocol does not require the manual creation
+connected. Peers do not need to be informed of any global            of a “seed” network, unlike most structured P2P systems. The
+network state, nor do they need to assist in repairing the net-      protocol also does not require peers to be informed of or mon-
+work topology when they leave. We provide a proof of the self-       itor the global state of the network, before deciding what up-
+stabilizing nature of the protocol, and experimentally measure       dates to perform. Each peer simply runs the proposed con-
+the average cost (in time and number of messages) to achieve         struction and maintenance protocols, without specific knowl-
+convergence.                                                         edge of the current state of the network topology, and indepen-
+                                                                     dently of other peers.
+                                                                         Existing methods of constructing structured P2P overlay
+                                                                     networks generally adopt a top-down view of topology con-
+1 Introduction
+                                                                     struction and maintenance. These methods may require cen-
+                                                                     tral coordination, may have difficulty keeping up with the rate
+   P2P systems are decentralized and have several attrac-            of change of typical P2P systems, and/or may not tolerate or
+tive properties like fault tolerance, load-balancing and self-       recover from errors or failures. Efforts to contain or eliminate
+scaling[3]. P2P systems construct and maintain overlay net-          these problems sometimes lead to complex protocol “fixes”.
+works with different network topologies, depending on appli-         Our method, in contrast, may be thought of as a bottom-up
+cation requirements. Structured P2P systems impose specific          approach to constructing structured networks, in a way that is
+local relationships between the peers, which gives rise to a         simple, robust, and fully distributed.
+global structure. The advantage of this structure is that it can         The next section presents the network model and a formal
+then be used by the P2P system for efficient data placement,         definition of the problem. Section 3 is a review of related work.
+search, and retrieval.                                               Section 4 describes the proposed protocol. Section 5 evaluates
+   Current protocols for the construction and maintenance of         the correctness and the performance of the protocol. The paper
+specific structures generally rely on simplifying assumptions        is concluded in section 6.
+that are either undesirable or unrealistic. First, most such sys-
+tems require or assume a specific initial configuration of the
+peers. Second, the construction and maintenance protocols as-        2 Problem Statement
+sume that the network remains in an ideal or close to ideal
+topology at all times. If the topology of the network deviates          A P2P network is a logical overlay network formed on top
+from this ideal, then these construction and maintenance pro-        of a fixed infrastructure network, such as the Internet. There-
+tocols may cease to function correctly. Third, a dynamic net-        fore, any peer u in the network can communicate or send a
+message to any other peer v directly, if u knows the network                    only queries the bootstrapping system once it is necessary for
+address of v. In such a case, v is said to be a neighbor of u.                  the bootstrapping system to be weakly connected.
+    A P2P network topology is defined by the set of peers in a
+network, and the neighbor relationships between those peers.                    Proof. If the bootstrapping system is not weakly connected,
+This topology can be represented by a graph, with vertexes                      there there will be at least two peers u and v for which there
+representing peers, and a directed edge from vertex u to vertex                 is neither a path from u to v, nor a path from v to u. It is
+v if v is a neighbor of u. Let the neighbors of peer u be denoted               therefore impossible for u and v to communicate with each
+as u.Γ. 1 We further denote the ith neighbor of peer u by u.Γ i .               other through any sequence of neighbors.
+The 0th neighbor, u.Γ 0 , is a special neighbor of u and is also                Proposition 2.2. For all peers to be able to communicate by
+called the successor of u. If v is the successor of u, then u is a              means of the topology created by a P2P system, it is a sufficient
+predecessor of v. If v is the ith neighbor of u, v = u.Γ i , then               condition for the bootstrapping system to be weakly connected.
+let u.index(v) = i.
+    Each peer has a unique identifier or ID, in the form of a                   Proof. Assume that the every peer is connected to at least one
+nonnegative integer. Let the largest possible ID assignable to                  bootstrapping peer, and the bootstrapping peers are weakly
+a peer be m − 1. We assume each peer knows the value of m.                      connected. If every peer u then notifies each of its neighbors v
+The distance from a peer u to a peer v is defined by a distance                 of its address, and v forms a connection to u, the resulting net-
+function, dm (u, v) = v − u, where subtraction is performed                     work will be strongly connected. Therefore, every peer will be
+modulo m. 2 For simplicity of presentation, we omit the sub-                    able to communicate with every other peer through some set
+script m from the distance function in this paper. The smaller                  of peers.
+the value of d(u, v) the closer v is said to be to u. For the
+                                                                                    Therefore, a weakly connected bootstrapping system is the
+purposes of this paper we define a P2P network as being a ring
+                                                                                simplest and most general form of bootstrapping. We call such
+network if for each peer u in the network, u’s successor, v, is
+                                                                                a bootstrapping system a minimal bootstrapping system. En-
+the peer closest to u from the set of all peers and v = u (unless
+                                                                                suring the bootstrapping system is weakly connected in gen-
+the system consists of a single peer, in which case the succes-
+                                                                                eral is not difficult. For instance, connecting the bootstrapping
+sor of u will be itself). Note that the ring network is directed.
+                                                                                peers together in an unordered chain will make them weakly
+If v is the neighbor of u, then the opposite is not necessarily
+                                                                                connected. In some previous works, the bootstrapping system
+true.
+                                                                                is replaced by a seed network. Most seed networks are required
+    We refer to a peer v as being between a peer u and a peer
+                                                                                to have a minimum size and/or a specific structure, and this
+w if v is closer to u than w is, or if v = w. As an alternative
+                                                                                structure may be highly constrained. In fact, the seed network
+representation, we will write u < v ≤ w when v is between
+                                                                                may need to be an instance of the target topology which the
+u and w. This definition is not dependent on the topology of
+                                                                                construction protocol seeks to create and maintain. In contrast,
+the network; it is simply the relative ordering of three peers,
+                                                                                a minimal bootstrapping system imposes no such requirement,
+according to their identifiers.
+                                                                                and is appropriate for constructing arbitrary topologies.
+    To fully define a P2P system, one has to take into consider-
+                                                                                    We next give the definition of a self-stabilizing P2P sys-
+ation bootstrapping, which is the method by which peers are
+                                                                                tem. We define a self-stabilizing P2P protocol as one which
+initially made aware of other peers in the system. Let the peers
+                                                                                can give rise to a desired topology starting from the simplest
+known to the bootstrapping system, and whose addresses are
+                                                                                of necessary and sufficient assumptions.
+returned by the bootstrapping system in response to queries, be
+termed the bootstrapping peers. The bootstrapping peers and                     Definition 2.3 (Self-Stabilizing P2P system). A P2P system
+the neighbor connections between them must form a weakly                        that constructs a desired topology, starting with each non-
+connected graph. A weakly connected graph is a directed                         bootstrapping peer having an arbitrary set of neighbors (in-
+graph in which there is a path between any two vertexes, ig-                    cluding no neighbors). To achieve this, the P2P system relies
+noring the directionality of the edges. In a strongly connected                 only on the existence of a minimal bootstrapping system.
+graph, there is a path between any two vertexes, considering
+directionality of the edges. All strongly connected graphs are                     Some P2P systems may function when the bootstrapping
+also weakly connected, but the reverse is not true. We now                      system is minimal, but impose requirements on the initial
+prove that weakly connected bootstrapping systems are nec-                      neighbor relationships of non-bootstrapping peers. Such P2P
+essary and sufficient to ensure that all peers will be able to                  systems will not be self-stabilizing, because they depend on
+communicate once they join together in a P2P network topol-                     a specific initial topology. In addition, a P2P system that as-
+ogy.                                                                            sumes the bootstrapping system is strongly connected is not a
+                                                                                self-stabilizing P2P system.
+Proposition 2.1. For all peers to be able to communicate by                        In this paper, we assume an asynchronous, reliable
+means of the topology created by a P2P system, if each peer                     message-passing model. This means a message sent from peer
+   1 When referencing a variable v stored by peer u, we will write u.v.         u to peer v is eventually delivered in a finite but unbounded
+   2 The distance function is unidirectional. The distance from v to u is not   time. Furthermore, we assume that messages sent between
+necessarily the same as the distance from u to v.                               two peers in the same direction follow the FIFO rule, as would
+be the case over a single TCP connection. We allow peers                  In [1], Angluin et al. solve the problem identified in this
+to execute steps of the protocol in an asynchronous fashion.          paper, i.e., starting from a weakly connected network, build
+A synchronous protocol would assume protocol execution oc-            an ordered ring network. Though the protocols give rise to
+curs at the same rate (or even at the same time) on all peers,        a structured P2P network with low complexity, their solution
+and that message transmission time is bounded. In many cases,         does not address failures or joins of peers. Furthermore, all
+this simplifies the analysis of the protocol. On the other hand,      peers are required to start execution of the protocols at the
+asynchronous protocols assume only that transmission time is          same time. Therefore, although the protocol presented in this
+finite, and do not make any assumption about the relative speed       work is self-stabilizing, it is neither asynchronous nor mode-
+of protocol execution on different peers. This leads to the fol-      less.
+lowing definition:                                                        Topology construction using gossip-based protocols has
+                                                                      been introduced in the T-Man protocol [7]. In this work, peers
+Definition 2.4 (Distributed Asynchronous P2P system). A
+                                                                      are organized according to a ranking function to produce a de-
+P2P system in which the form of communication between peers
+                                                                      sired network topology, such as ring or torus topologies. T-
+is message-passing, where message transmission time is finite
+                                                                      man assumes that the network starts out with a topology close
+but unbounded. Furthermore, there is no shared memory or
+                                                                      to a random graph, which is a stronger requirement than a
+shared clock(s) between peers. All peers execute the same pro-
+                                                                      weakly connected bootstrapping system. In addition, global
+tocol.
+                                                                      knowledge of the system size and loose synchronization are
+   In our network model peer failures and departures follow           required.
+the fail-stop model as specified in [14]: peers are able to per-          Li et al. propose Ranch [13], a set of protocols for the con-
+fectly detect the failure or departure of other peers in the P2P      struction of P2P systems with ring topologies. The main con-
+network. We define a modeless P2P system as follows:                  tribution of this paper is the introduction of a provably correct,
+                                                                      asynchronous protocol that can handle concurrent arrivals and
+Definition 2.5 (Modeless P2P protocol). A modeless P2P                departures of peers. However, the method assumes that de-
+protocol is one in which it is not required for every peer to         parting peers always perform clean-up protocols prior to their
+be notified of each peer arrival or departure, or to be aware of      departure. Furthermore, Ranch is not able to guarantee the cor-
+the total number of peers.                                            rect topology will be constructed if the network is started from
+   Modeless P2P protocols are highly desirable. They avoid            an arbitrary state.
+the need for global communication among peers, or the need                Other structured P2P systems (CAN [5], Pastry [16],
+for periodic protocol synchronization, and are therefore faster       Tapestry [19], and others [15, 8, 2, 10]) likewise cannot con-
+and have lower overhead.                                              struct the desired network topology starting from an arbitrary
+   We now define our problem with reference to above proper-          initial state, and/or are synchronous rather than asynchronous.
+ties: Given are n peers, each with an arbitrary set of neighbors          Another related field is resource discovery. One ap-
+(or no neighbors), and a minimal bootstrapping process. De-           proach [12] is a distributed protocol that will construct a star
+sign a modeless and distributed asynchronous P2P protocol             topology, given an initial weakly connected network. This
+that is self-stabilizing, and that results in the construction of a   method requires one node to have special capacities, and is
+ring network.                                                         completely dependent on the correct and timely functioning
+                                                                      of this central node. Kutten and Peleg [11] later introduced
+                                                                      an asynchronous protocol with the same goal. Their method
+3 Related Work                                                        is self-stabilizing but is not modeless, and still targets the star
+                                                                      topology, with the drawbacks mentioned above.
+   The problem of organizing nodes in a distributed system
+into a desired topology has been approached in many ways.
+This review of related work focuses on two properties: (i)            4 The Ring Network(RN) Protocol
+whether the methods are self-stabilizing, and (ii) whether the
+protocols are modeless or not.                                           This section presents the RN protocol, which constructs a
+   P2P research has addressed the organization of peers into          ring network starting from an arbitrary state. We start with
+a desired topological structure. Many structured P2P systems          an overview, followed by a description of the protocol, and
+are based on distributed hash tables (DHTs) [9]. One of the           conclude with detailed pseudocode.
+most widely-cited such P2P system is Chord [17]. In [14],                The RN protocol is a distributed protocol in which ev-
+Liben-Nowell et al. describe maintenance protocols for Chord          ery peer independently and asynchronously executes the same
+that may be run by each peer in order to keep the topology            procedure, and peers communicate by asynchronous message
+from deviating substantially from a chordal ring. The Chord           passing. In this protocol, each peer periodically initiates a
+protocols, however, always assume that the topology has some          search for a successor candidate. Peers that assist in this
+partial structure. In the absence of such minimal structure, the      search will make note of the information contained in any mes-
+Chord protocols cease to guarantee convergence to the correct         sage they propagate. Using information returned by succes-
+topology. Therefore, they do not qualify as self-stabilizing.         sor searches, the bootstrapping process, or gleaned from mes-
+sage propagation, each peer will independently select a (clos-
+est) successor node. This process repeats indefinitely, allowing
+rapid adaptation to changes in the set of peers.                                                           10               30
+   Local information stored by each peer includes:
+
+  • Γ: the set of current neighbors of the peer.                                                                           40
+                                                                                        9                 50
+  • W : the set of peers returned by Closer-Peer Searches.
+  • B: the set of peers learned by the Search Monitor proto-                                    23
+                                                                                                                          60
+
+    col.
+  • s: a peer selected randomly from the current successor,
+    and peers returned by the bootstrapping system.                                                  (a) A P2P network
+
+The three steps of the protocol are now described in more de-
+tail.
+                                                                                                                10               30
+4.1 The Closer-Peer Search
+
+                                                                                                                                40
+   Each peer x will periodically initiate a search for a peer                               9                  50
+that is closer to it than its current successor. x contacts for this
+purpose a peer s that is randomly chosen from its current suc-
+                                                                                                                               60
+cessor x.Γ0 , or a peer returned by the bootstrapping service.                                       23
+
+The peer s receiving this request forwards it to that neighbor
+of s to which x is closest. The receiver of this request message
+propagates this request in a similar manner, in an attempt to
+get closer and closer to x. When a peer u receiving such a re-                                   (b) Closer-Peer Search
+quest finds that the initiator x of the request is closer to u than
+any of u’s neighbors, the search terminates. u then sends to the          Figure 1. Examples of a P2P network in the process
+initiator x the address and identity of its own successor u.Γ 0 ,         of converging into a ring network. Circles represent
+which x adds to its set W . The frequency of this search affects          peers; numbers inside circles are peer IDs. Edges
+only the performance of the protocol, not its correctness. The            represent successor connections. (a) A topology
+evaluation of performance factors is addressed in section 5.2             consisting of 7 peers. (b) A possible result of the
+   The result of this search will depend on the current topology          execution of the Closer-Peer Search by peer 50, start-
+of the network. If the network is already a ring network, a               ing from peer 30.
+Closer-Peer Search will terminate at the peer that initiated the
+search, and no change will occur. Otherwise, the search may
+terminate at a peer u to which x is close. In such a case, x will      4.3 Neighbor Update
+be between u and u.Γ 0 , and u.Γ0 will be a promising candidate
+to be x’s successor. As an example, in figure 1(a) peer 50 starts
+a Closer-Peer Search starting at peer 30. The search terminates            Each peer u will frequently check whether it has learned of
+at peer 40, which notifies peer 50 about its successor 60. Peer        a closer peer than its current successor u.Γ 0 . It examines for
+50 then adds the new successor candidate 60 to peer 50’s set           this purpose its current list of neighbors, a bootstrapping peer
+W.                                                                     returned by the bootstrapping process, the set W of candidates
+                                                                       returned by completed Closer-Peer Searches, and the set B of
+                                                                       candidates it compiled while propagating search request mes-
+4.2 The Search Monitor                                                 sages on behalf of other peers. The peer closest to u from
+                                                                       among the union of these is chosen to be the new successor,
+    A peer u will monitor each Closer-Peer Search request that         u.Γ0 . In figure 1(a), after W and B have been updated, peer
+it receives. A search request initiated by x (x = u) and ter-         40 and peer 50 update their successors as shown in figure 1(b).
+minating at u means that x is closer to u than u’s current suc-            In parallel with successor updating, each peer u will update
+cessor u.Γ0 . u as a result adds the address and identity of x to      its list of other neighbors, starting from u.Γ 1 , proceeding to
+its set B. In the previous example, peer 40 in figure 1(a) adds        u.Γ2 , and so forth. u sends a message to neighbor u.Γ i asking
+50 to its set B, because the Closer-Peer Search initiated by 50        it to return the identity of u.Γ i ’s ith neighbor. When u.Γ i re-
+terminated at 40.                                                      sponds with the identity of such a peer v, u will use this as the
+                                                                     for that action evaluates to true. An execution step for the pro-
+                                                   30                tocol is as follows. All guards of all actions of all peers are
+                                               1
+                                                        0            evaluated, after which only one statement of an action whose
+                                                                     guard evaluated to true is executed. The choice of statement
+                                                        40           to execute, if there is more than one whose guard evaluates
+                     70                                     0        to true, is random. This ensures that each enabled action will
+                                      1
+                                                                     eventually be executed, but the order of execution is arbitrary.
+                          0
+                              60
+                                              50                         We choose this notation for describing the RN protocol
+                                          0
+                                                                     because it facilitates an analysis of correctness, for an arbi-
+                                                                     trary interleaving of actions by the peers. This analysis model
+                      (a) Before neighbor update.
+                                                                     has been widely adopted by the distributed processing com-
+                                                                     munity [4]. Since the protocol is asynchronous, the need for
+                                                                     interrupts is eliminated when using this notation, making the
+                                                30
+                                                                     protocol presentation clearer. In section 5.2, we assume a spe-
+                                          2
+                                               1
+                                                        0            cific execution rate by the peers, and measure experimentally
+                                                                     the resulting convergence time of the algorithm.
+                                                        40
+                                                                         Using this notation, the pseudocode for the RN protocol is
+                                                         0
+                                                                     shown in figure 3.
+                     70
+
+                                      1
+                          0                   50
+                              60                                        peer u
+                                          0
+                                                                        const
+                                                                           T : set of bootstrapping peers
+                     (b) After the neighbor update.                     input
+                                                                           w : a peer (successor candidate)
+                                                                           x : peer being searched for
+                                                                           c : index of received neighbor
+   Figure 2. A possible outcome of a neighbor update per-                  z : new neighbor
+   formed by peer 30. Edges represent neighbor con-                        s : a bootstrapping peer
+                                                                        var
+   nections. An edge labeled with the number i at its                      S : Set of peers
+   tail, points to the ith neighbor.                                       B : Set of successor candidates
+                                                                           W : Set of successor candidates
+                                                                           Γi : ith neighbor
+
+                                                                        (a1)    true →
+new value of u.Γ i+1 . However, if v is not between u.Γ i and u,                  S := {s} ∪ W ∪ B ∪ Γ
+the value of u.Γ i+1 will not be updated. This update process is                  Γ0 := arg mink∈S d(u, k)
+                                                                                  B := W := ∅
+a form of pointer jumping, as proposed in [6]. The purpose of              []
+these neighbor connections is to improve the speed of search-           (a2)    true →
+                                                                                  s:= Get random peer from {T ∪ Γ0 }
+ing, by reducing the number of hops that must be traversed.                       send closer-peer search(u) to s
+They are similar, but not identical, to the fingers employed by            []
+                                                                        (a3)    receive closer-peer search(x) from q →
+Chord[17].                                                                        if x is closer to u than any neighbor ∈ Γ
+    An example is demonstrated in figure 2. Peer 30 would like                    then B := B ∪ {x}
+                                                                                           send successorCandidate(Γ0 ) to x
+to update its 2nd neighbor in figure 2(a). For that, it will query                else
+its 1st neighbor, peer 50, for the 1st neighbor of peer 50. When                           send closer-peer search(x) to arg mink∈Γ d(k, x)
+                                                                           []
+peer 50 responds, peer 30 will set as its 2nd neighbor peer 70,         (a4)    receive successorCandidate(w) from q →
+as shown in figure 2(b). This is because peer 70 is between                       W := W ∪ {w}
+                                                                           []
+peer 50 and peer 30, i.e., 50 < 70 < 30. Peer 30 is therefore           (a5)    true →
+able to discover a peer that is 4 hops away from it, using two                    for each h in Γ do
+                                                                                  send getN eighbor(index(h)) to h
+messages.
+                                                                           []
+                                                                        (a6)    receive getN eighbor(j) from q →
+4.4 Detailed Pseudocode                                                           if Γj exists
+                                                                                  then send neighbor(Γj , j) to q
+                                                                           []
+                                                                        (a7)    receive neighbor(z, c) from q →
+    We now present the pseudocode for the RN protocol. An                         if Γc ≤ z < u
+asynchronous, message-passing model is assumed. The pseu-                         then Γc+1 := z
+                                                                                else Γc+1 := NIL
+docode is written in the AP notation introduced in [4]. In this
+notation, a peer p is specified by its const, input and var vari-
+ables, and its actions. An action is of the form guard →              Figure 3. Pseudocode of the RN protocol for a peer
+statement. Actions are delimited by two square brackets,              u.
+[]. The statement of an action can be executed only if the guard
+5 Evaluation                                                          1. All the peers are part of a single cycle. In this case, since
+                                                                      the network is not in a ring network topology, there exists at
+   In this section, we will first analyze the RN protocols with       least one peer u that does not have as its successor the closest
+respect to self-stabilization. After that, we present the results     possible peer. Therefore, if u performs a Closer-Peer Search
+of experiments measuring message and time complexity, and             starting at u’s successor, then it is guaranteed that the search
+show the behavior under dynamic conditions.                           will find a closer peer to u, and the P2P system continues to
+                                                                      converge.
+5.1 Analysis                                                          2. The graph is acyclic. This means the graph is a tree. The
+                                                                      leaves of the tree have an in-degree of zero. This implies that
+   Without loss of generality, assume there are n peers, whose        if a leaf performs a Closer-Peer Search starting with its suc-
+identities are restricted to the range {0 . . . (n − 1)}. Also, as-   cessor then it will find a different peer than itself. According
+sume that no peer arrivals or departures occur while the net-         to lemma 5.1 the P2P system will keep converging.
+work is converging into a ring network. Proof of convergence          3. There is a single cycle in the graph that does not contain
+of any distributed protocol is generally only possible if the set     all the peers. Since the out-degree for the graph is 1, then it
+of inputs does not change during convergence, since in most           is impossible to have more than one cycle in the graph. Fur-
+cases a different set of inputs will lead to a different solution.    thermore, the peers that are not part of the cycle will induce a
+Given a proof of correctness when starting from an arbitrary          tree graph. As stated in subcase 2 above, the P2P system will
+state, it is clear that correctness will be recovered following       continue to converge.
+any change (peers joining or leaving), as long as sufficient time     Theorem 5.3. (Correctness) Once the P2P system is a ring
+for convergence to the new solution is allowed.                       network, it will remain so (assuming there are no changes in
+   The goal of this section is to prove convergence in the static     the set of peers).
+case. In the following section, we provide experimental results
+showing how long the convergence time is, and the effect of           Proof. As can be seen from the pseudocode, the only location
+dynamic joins and leaves.                                             where a peer u might change its successor is in action (a1). A
+                                                                      successor is replaced with another peer if, and only if, a closer
+Lemma 5.1. If the result of a peer x initiating a Closer-Peer
+                                                                      peer to u is found. Once the network is a ring network, by
+Search is the return of a peer v = x, then v’s predecessor must      definition every peer’s successor is the closest peer to it in the
+update its successor to be a closer peer.
+                                                                      system. Therefore, u will never encounter a peer that is closer
+Proof. According to the action (a3) in the pseudocode, a value        to it than its current successor.
+is returned to x when a node x is between a node u and u’s
+                                                                      Theorem 5.4. (Convergence) Starting from any state, the P2P
+successor v. Also in action (a3), it may be seen that u stores
+                                                                      system will converge to a ring network.
+a reference to x. Therefore, when u next runs action (a1), it is
+guaranteed to change its successor.                                   Proof. As can be seen from the pseudocode, the only loca-
+                                                                      tion where a peer u might change its successor is in action
+Lemma 5.2. If the P2P system is not in a ring network topol-
+                                                                      (a1). A successor is replaced with another peer if, and only
+ogy, then at least one peer will find a closer peer than its cur-
+                                                                      if, a closer peer to u is found. Otherwise, u will keep its cur-
+rent successor when it performs a Closer-Peer Search.
+                                                                      rent successor. Therefore, the convergence function will never
+Proof. Let Gs be the graph induced by the successor neigh-            increase the sum of the distances from all peers to their suc-
+bors, so that the outdegree of every vertex is 1. Therefore,          cessors. From lemma 5.2 we also see that as long as the net-
+Gs = (V, Es ), where V is the set of all peers and there is an        work is not in a ring network topology, then at least one peer
+edge (u, v) ∈ Es if, and only if, v = u.Γ 0 . Gs can be either        will find a successor candidate that is closer than its current
+disconnected or weakly connected. By disconnected we mean             successor. Since distances are finite, as long as at least one
+that there exist a pair of peers, u and v, such that no path exists   distance to a successor decreases, convergence is eventually
+between them in either direction.                                     guaranteed.
+    For the first case, if Gs is disconnected, then there exist
+at least two disjoint graph components. Since, the bootstrap-         5.2 Experiments
+ping system is guaranteed to be weakly connected, then, by
+extension, it is guaranteed that at least one peer u in one com-         We used simulation to evaluate the overhead and scalabil-
+ponent will have another peer, v, in another component as its         ity of the RN protocol. In the first set of experiments, the set
+bootstrapping peer. Therefore, if a Closer-Peer Search is per-        of peers was static. The second set of experiments allowed
+formed by u starting at v then u will find a peer in another          peers to join and leave dynamically. Assumptions were as
+component. According to lemma 5.1 this will cause one peer            described in section 2. We simulated the P2P network using
+to change its successor to a closer peer.                             Netlogo, an agent-based simulator [18]. The simulation model
+    For the case when Gs is weakly connected, there are 3 sub-        was identical in implementation to the pseudocode in figure 3,
+cases:                                                                with one exception. Action a5 was modified so that only one
+send occurs. Neighbors are contacted in order, as shown in
+a5, but only one per execution of the statement, rather than all                                        1       0.5       0.25   0.125
+neighbors in one execution. This change reduces the number                            600
+of messages that are sent, but does not affect the correctness of
+
+
+
+
+                                                                      # of messages
+the protocol.                                                                         500
+
+    The configuration of the bootstrapping system can poten-
+                                                                                      400
+tially affect performance. In our experiments, a random peer
+from the bootstrapping set was returned for each request. The                         300
+size of the set of bootstrapping peers was varied to measure the
+impact of this parameter, from 12.5% up to 100% of the peers                          200
+
+in the system. Bootstrapping peers were initially connected in
+                                                                                      100
+an unordered chain, which is a simple form of a weakly con-
+nected graph.                                                                           0
+    The unit of time measured in the first two experiments was                              4       5       6         7     8    9       10        11
+
+the maximum time to deliver a message. We fixed this time for
+                                                                                                                  log(n)
+purposes of illustration; our protocol is asynchronous and does
+not depend on this assumption for correctness. Communica-
+tion was non-blocking and peers did not wait for a response                                             (a) Message Complexity
+to any message they sent. The simulation proceeded by ran-
+domly interleaving the actions of all peers for which the guard
+evaluated to true.                                                                                      1       0.5       0.25   0.125
+    The first experiment measured the average number of mes-                          140
+sages sent per peer during construction of the ring network,
+                                                                                      120
+starting with peers having no neighbors. Figure 4(a) shows
+the result for P2P networks of size 2 i , for i ∈ {5, . . . , 10}.                    100
+
+For each point, the 95% confidence interval was less than 5%
+                                                                      Time
+
+
+                                                                                      80
+of the measured value. The second experiment measured the
+time to converge on a ring network topology, under the same                           60
+
+conditions, and with similar confidence intervals. Both num-                          40
+ber of messages and time to convergence grow logarithmically
+                                                                                      20
+with the number of peers in these experiments, which indicates
+the protocol should scale well to large networks.                                      0
+                                                                                                5       6         7         8        9        10
+    The third experiment investigated the effect of concurrent
+peer arrivals and departures in the P2P system. The simu-                                                        log(n)
+lation was started with a P2P system of 1024 peers already
+configured in a ring network. Peer arrival and departure rates
+                                                                                                         (b) Time Complexity
+were varied from 2 per unit time to 12 per unit time, where
+the unit of time was taken as the time to execute one state-
+ment at each peer. This reflects then a very high peer churn                  Figure 4. Time and number of messages exchanged
+rate. Peer lookups were performed concurrently with peer ar-                  per peer for a network of size n to converge into a
+rivals and departures. For each lookup, a randomly-selected                   ring. The label for each line represents the fraction
+peer searched for another randomly-selected peer in the net-                  of peers that serve as bootstrapping peers.
+work. A search could fail if the two peers were not connected,
+or if the set of peer successors had not converged to the correct    tain multiple successors per peer, as in Chord [17], the fail-
+configuration.                                                       ure rate would be substantially lower and path lengths shorter,
+    The results of this experiment are presented in figure 5. For    at the expense of greater complexity and higher maintainence
+searches which succeeded, the hop-count for the search was           overhead.
+measured. Without dynamic updates, for a converged system
+the failure rate should be zero, and the average search hop-            We also measured the time for the RN protocol to restore a
+count should be (1/2) log(n), where n is the size of the net-        system of 1024 peers to a ring topology, after a varying number
+work. From the results, the hop-count for successful searches        of peer arrivals and departures. Starting from a converged ring
+grows slowly as the number of peers leaving or arriving per          network, the arrivals and departures were modeled as occuring
+unit of time grows to a very high level. The search failure rate     instantaneously and simultaneously, followed by normal exe-
+is moderately high under these conditions, but with no attempt       cution of the RN protocol. The results (not shown due to space
+to exploit redundancy. If the RN protocol is modified to main-       constraints) indicate that convergence time is logarithmic in
+                         % of Failures       Hop Count                           [3] Y. Chawathe, S. Ratnasamy, L. Breslau, N. Lanham, and
+                                                                                     S. Shenker. Making gnutella-like p2p systems scalable. In SIG-
+              14                                              5.6                    COMM, 2003.
+              12                                              5.5                [4] M. G. Gouda. Elements of Network Protocol Design. John
+                                                              5.4                    Wiley and Sons, 1998.
+              10                                                                 [5] M. Handley, P. Francis, R. Karp, S. Shenker, and S. Ratnasamy.
+
+
+
+
+                                                                    Hop Count
+ % Failures
+
+
+
+
+                                                              5.3                    A scalable content-addressable network, 18 2001.
+               8
+                                                              5.2                [6] W. D. Hillis and J. Guy L. Steele. Data parallel algorithms.
+               6                                                                     Commun. ACM, 30(1):78–78, 1987.
+                                                              5.1
+               4
+                                                                                 [7] M. Jelasity and O. Babaoglu. T-Man: Fast gossip-based con-
+                                                              5                      struction of large-scale overlay topologies. Technical Report
+               2                                              4.9                    UBLCS-2004-7, University of Bologna, Department of Com-
+               0                                              4.8                    puter Science, Bologna, Italy, May 2004.
+                                                                                 [8] F. Kaashoek and D. R. Karger. Koorde: A simple degree-
+                   2     4       6       8        10     12
+                                                                                     optimal hash table. In Proceedings of the 2nd International
+                       Arrivals/Depart. per Unit Time                                Workshop on Peer-to-Peer Systems (IPTPS03), Berkeley, CA,
+                                                                                     2003.
+                                                                                 [9] D. Karger, E. Lehman, T. Leighton, M. Levine, D. Lewin, and
+      Figure 5. Failure lookup rate and hop count for                                R. Panigrahy. Consistent hashing and random trees: Distributed
+      searches for random peers in a dynamic P2P network.                            caching protocols for relieving hot spots on the world wide web.
+                                                                                     In ACM Symposium on Theory of Computing, pages 654–663,
+the number of peers arriving / departing, varying from 25 time                       May 1997.
+units to recover from one arrival/departure, to 80 time units to                [10] F. Kuhn, S. Schmid, and R. Wattenhofer. A self-repairing peer-
+                                                                                     to-peer system resilient to dynamic adversarial churn. In Pro-
+recover from 1000 arrivals/departures. This is in constrast to
+                                                                                     ceedings of the 4th International Workshop on Peer-to-Peer
+other P2P protocols that either cannot recover from such a high                      Systems (IPTPS05), 2005.
+number of peer changes, or which must reconstruct the entire                    [11] S. Kutten and D. Peleg. Asynchronous resource discovery in
+topology from scratch, regardless of the number of changes                           peer to peer networks. In SRDS ’02: Proceedings of the 21st
+that occur. To emphasize, no modification of the RN proto-                           IEEE Symposium on Reliable Distributed Systems (SRDS’02),
+col is required in the case of dynamic arrivals and departures,                      page 224, Washington, DC, USA, 2002. IEEE Computer Soci-
+which justifies our assertion that the RN protocol is modeless.                      ety.
+                                                                                [12] S. Kutten, D. Peleg, and U. Vishkin. Deterministic resource
+                                                                                     discovery in distributed networks. In SPAA ’01: Proceedings of
+6 Conclusion                                                                         the thirteenth annual ACM symposium on Parallel algorithms
+                                                                                     and architectures, pages 77–83, New York, NY, USA, 2001.
+                                                                                     ACM Press.
+   This paper investigated the problem of organizing a set of                   [13] X. Li, J. Misra, and G. Plaxton. Active and concurrent topol-
+peers into a structured P2P network, in a self-stabilizing way,                      ogy maintenance. In R. Guerraoui, editor, Distributed Algo-
+starting from an arbitrary state. The RN protocol was intro-                         rithms, volume 3274/2004 of Lecture Nodes in Computer Sci-
+duced for this purpose to construct a ring network. The RN                           ence, pages 320–334, Oct 2004.
+protocol is simple and self-contained. There is only a sin-                     [14] D. Liben-Nowell, H. Balakrishnan, and D. R. Karger. Analy-
+gle procedure which all peers run, regardless of the state of                        sis of the evolution of peer-to-peer systems. In Proceedings of
+the network, and regardless of changes to the set of peers. In                       the twenty-first Annual Symposium on Principles of Distributed
+                                                                                     Computing (PODC-02), pages 233–242, New York, 21–24
+particular, the peers do not have to estimate the size of the
+                                                                                     2002. ACM Press.
+network, or exchange other information globally, unlike most                    [15] G. S. Manku, M. Bawa, and P. Raghavan. Symphony: Dis-
+other P2P protocols. The protocol is asynchronous, and rep-                          tributed Hashing in a Small World. In USITS, 2003.
+resents a practical means for creating structured P2P networks                  [16] A. Rowstron and P. Druschel. Pastry: Scalable, distributed ob-
+in a robust, highly adaptable way.                                                   ject location and routing for large-scale peer-to-peer systems.
+   In future work, we would like to establish non-trivial                            In IFIP/ACM International Conference on Distributed Systems
+bounds for the convergence rate of the protocol.                                     Platforms (Middleware), 329-350 2001.
+                                                                                [17] I. Stoica, R. Morris, D. Liben-Nowell, D. Karger, M. F.
+                                                                                     Kaashoek, F. Dabek, and H. Balakrishnan. Chord: A scal-
+References                                                                           able peer-to-peer lookup service for internet applications. IEEE
+                                                                                     Transactions on Networking, 11, 2003.
+                                                                                [18] U. Wilensky. NetLogo: Center for connected learning and
+ [1] D. Angluin, J. Aspnes, J. Chen, Y. Wu, and Y. Yin. Fast con-                    computer-based modeling, Northwestern University., 1999.
+     struction of overlay networks. In 17th ACM Symposium on                    [19] B. Y. Zhao, J. Kubiatowicz, and J. Joseph. Tapestry: an in-
+     Parallelism in Algorithms and Architectures(SPAA 2005), Las                     frastructure for fault-resilient wide-area location and routing.
+     Vegas, NV, USA, 2005.                                                           Technical Report UCB//CSD-01-1141, University of California
+ [2] J. Aspnes, Z. Diamadi, and G. Shah. Fault-tolerant routing in                   at Berkeley, 2001.
+     peer-to-peer systems. In ACM PODC, 2002.
+

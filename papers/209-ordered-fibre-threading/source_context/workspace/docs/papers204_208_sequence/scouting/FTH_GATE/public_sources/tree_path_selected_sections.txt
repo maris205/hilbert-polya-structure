@@ -1,0 +1,259 @@
+1.3 Network Model & Problem Definition
+Entities. The system has two entities: nodes and a supervisor.
+Nodes are computing entities that aim to distributively form a target topology, denoted by $G^{*}$ , through their connections, where we say that two nodes are “connected” if they can communicate (i.e., send/receive messages) with each other. We colloquially use the word “network” (formally defined soon) to capture the set of nodes and their connections. The number of nodes is denoted by $n$ . Furthermore, the nodes do not have any global knowledge (e.g., network size, shared clock, etc). The nodes always execute the algorithms prescribed to them.
+A supervisor is a single computing entity, designed to help the nodes form the target topology $G^{*}$ through communication with the nodes to learn the (current) network, compute over it, and propose connections between nodes. If the supervisor follows its algorithm, we say that the supervisor is honest; otherwise, it is said to be malicious. There is no restriction on the messages sent by a malicious supervisor, which may even include suggestions for connecting to non-existing nodes.
+Node ids. Each node has a unique identifier (id). Each node’s memory consists of two types of variables: address and non-address variables. The address variables are exclusively used to store the ids of other nodes (referred to as neighbors), whereas the non-address variables cannot be used to store node ids.
+Communication Rounds. The system proceeds in synchronous rounds, i.e., a message sent by a node in any round is received by its recipient at the beginning of the next round. In every round, each node runs the given algorithms, given its variables’ assignments (and messages in the channel), resulting in changes to its memory and new messages being sent.
+Comm. among Nodes. Each node $u$ can send a message to another node $v$ if the node $u$ has node $v$ ’s id in its memory. If a message is sent to any node $u$ , then it is added to node $u$ ’s channel $u.\mathit{Ch}$ . Once a message is added to any node’s channel, the node is able to read the contents of the message, after which the message is removed from the channel. In general, a node is not informed about the (id of the) sender of a message, unless the sender explicitly adds its own id to the message.
+States and Configurations. Consider the standard state model for self-stabilization [21]. The variables and channel of a node are stored in its register (aka, mutable memory) and each node has read/write access to its register. Each node also has a non-mutable memory that contains its id and the code of our algorithms. The set of values assigned to the variables and channel of a node is called the state of a node. Moreover, the tuple of states of all nodes is called the configuration, and the (simultaneous) execution of the code by all the nodes, over consecutive rounds, forms a sequence of configurations.
+As we consider a distributed message-passing system where the communication links can themselves change over time, each node needs to explicitly communicate some information about its own state to (some of) node ids stored in its register, for the network to reach the target topology (see, [44, 30]), unlike in the standard model [21], where every node reads its own register and the registers of all its neighbors, executes the algorithms and updates its register, in any given step.
+Communication Graph and Network. Let $G_{C}=(V,\mathcal{E}_{C}=E_{C}\cup I_{C})$ be the communication graph over the set of nodes $V$ in configuration $C$ , where there exists an explicit edge $(u,v)\in E_{C}$ if a node $v$ ’s id is stored in any address variable of node $u$ ’s memory, or an implicit edge $(u,v)\in I_{C}$ if a node $v$ ’s id is in node $u$ ’s channel. The network is simply the communication graph restricted to explicit edges.
+Comm. between Supervisor and Nodes. The supervisor is aware of the node membership in the system, i.e., ids of all the nodes. It can send a request to any node to learn the (current) communication graph. Moreover, the supervisor can send advice messages to help nodes quickly converge to the desired target topology. As is typical, we assume that the supervisor cannot forge messages sent by nodes.
+Functions, Rules and Actions. Each node runs a sequence of algorithms, and each algorithm consists of a sequence of functions. A function has the form, $\langle\text{Label}\rangle\text{: }\langle\text{Guard}\rangle\rightarrow\langle\text{Rule 1};\text{Rule 2};\dots\rangle$ , where label is the function name, guard is a Boolean predicate over the node’s variables, and rules define the actions by the node, where an action (typically) refers to either updating a local variable or sending a new message. Each rule is itself of the form $\langle\text{Guard}\rangle\rightarrow\langle\text{Action 1};\text{Action 2};\dots\rangle$ .
+Pseudocodes. Each line in a function is typically dedicated to a single rule, but if there are multiple rules in a line, then the last set of actions in that line belongs to the last rule. Moreover, a function may call another function in any of its rules. (In the standard state model [21], the algorithms are directly defined by a set of rules; we extend it for better readability.)
+Local Computation. In each round, each node checks the guard of every function in the specified order; if the guard is satisfied, the node executes the rules in the function. Similarly, a node checks the guard of a rule; if it is satisfied, the node proceeds to execute the actions in it. Whereas, if no guard is specified, the function or rule is always executed.
+3.4 Tree-to-Path Algorithm
+Let $T=(l(\cdot),r,V,E)$ be a labelled rooted undirected tree, where $V$ is the set of vertices, $r\in V$ is the root, $l(\cdot)\text{: }V\rightarrow\{0,1\}$ is a label function on vertices where $l(v)=(l(r)+\mathrm{dist}(r,v))\mod 2$ , and $E$ is the set of edges. Let $C_{T}(v)=\{u\mid\mathrm{dist}(u,v)=1\wedge\mathrm{dist}(v,r)<\mathrm{dist}(u,r)\}$ be the children of $v\in V$ in the tree $T$ , and there is a total order (for e.g., based on ids) on $C_{T}(v)=\{u_{1},\dots,u_{q}\}$ such that $u_{1}<\dots<u_{q}$ for any $q\geq 1$ . Let $\mathrm{Beg}(P)$ and $\mathrm{End}(P)$ of a directed path $P$ of size at least 2, denote the vertex with no incoming edge and the vertex with no outgoing edge, respectively.
+We briefly describe the Tree-to-Path algorithm that takes a labelled rooted tree as input, and outputs a directed path. See Figure 5 for the pictorial description. Specifically, the algorithm takes in a tree $T=(l(\cdot),r,V,E)$ as input, and outputs a directed path $P$ where $\mathrm{Beg}(P)=r$ and $\mathrm{End}(P)=\min(C_{T}(r))$ if $l(r)=0$ , whereas it outputs a directed path $P$ where $\mathrm{Beg}(P)=\max(C_{T}(r))$ and $\mathrm{End}(P)=r$ if $l(r)=1$ . We incorporate this alternation based on labels for maintaining the invariant that $\mathrm{Beg}(P)$ and $\mathrm{End}(P)$ are at a distance of 1. Such a simple, fast and local algorithm is amenable to be made self-stabilizing. In Section A.2.2, we give the self-stabilizing version of the algorithm that converts any (connected) overlay to a path overlay, using the given advice, in $O(1)$ rounds.
+Figure 5: Cases in Tree-to-Path Algorithm for any node $v_{i}$ where $i$ is its order (e.g., via total order on ids) in set $C(P(v_{i}))$ , i.e., $\mathrm{LeftSib}(v_{i})=\{v_{j}\mid j<i\}$ and $\mathrm{RightSib}(v_{i})=\{v_{j}\mid j>i\}$ . $L(v),P(v)$ and $C(v)$ are label, parent and children of a node $v$ (resp.). Dashed arrow depicts an edge in the final path.
+A.2 Tree-to-Path Pseudocode
+In this subsection, we first provide the pseudocode of the (centralized) Tree-to-Path algorithm described in Section 3.4. Then, we give the pseudocode for the distributed implementation of the same algorithm, which also includes the interaction with the supervisor.
+A.2.1 Sequential Tree-to-Path
+Algorithm 10 Tree-to-Path
+0:
+Let the input to the algorithm be a (labelled) rooted tree $T=(l(\cdot),r,V,E)$ where $l(r)=0$ and $|V|\geq 2$ . For any $v\in V$ , let $C(v)=\{u\mid\mathrm{dist}(u,v)=1\wedge\mathrm{dist}(v,r)<\mathrm{dist}(u,r)\}$ .
+0:
+Output of the algorithm is a directed path graph $P$ where $\mathrm{Beg}(P)=r$ .
+1:
+for $v\in V$ and $C(v)\neq\emptyset$ do
+2:
+Assign a total ordering on $C(v)=\{u_{1},\dots,u_{q}\}$ such that $u_{1}<\dots<u_{q}$ for $q\geq 1$ ;
+3:
+end for
+4:
+Let $E^{\prime}\leftarrow\emptyset$ ;
+5:
+for $v\in V$ and $v\neq r$ and $l(v)=1$ do
+6:
+Let $p_{v}\in V$ such that $v\in C(p_{v})$ ; /​​/ Parent of $v$
+7:
+Let $\mathit{RSib}=\{w\mid w>v\wedge w\in C(p_{v})\}$ ; /​​/ Right siblings (via the total ordering)
+8:
+if $\mathit{RSib}=\emptyset$ and $C(v)=\emptyset$ then
+9:
+Add (directed) edge $(p_{v},v)$ to $E^{\prime}$ ;
+10:
+else if $\mathit{RSib}=\emptyset$ and $C(v)\neq\emptyset$ then
+11:
+Add (directed) edge $(p_{v},\max(C(v)))$ to $E^{\prime}$ ;
+12:
+else if $\mathit{RSib}\neq\emptyset$ and $C(v)=\emptyset$ then
+13:
+Add (directed) edge $(\min(\mathit{RSib}),v)$ to $E^{\prime}$ ;
+14:
+else
+15:
+Add (directed) edge $(\min(\mathit{RSib}),\max(C(v)))$ to $E^{\prime}$ ;
+16:
+end if
+17:
+end for
+18:
+for $v\in V$ and $v\neq r$ and $l(v)=0$ do
+19:
+Let $p_{v}\in V$ such that $v\in C(p_{v})$ ; /​​/ Parent of $v$
+20:
+Let $\mathit{LSib}=\{w\mid w<v\wedge w\in C(u)\}$ ; /​​/ Left siblings (via the total ordering)
+21:
+if $\mathit{LSib}=\emptyset$ and $C(v)=\emptyset$ then
+22:
+Add (directed) edge $(u,p_{v})$ to $E^{\prime}$ ;
+23:
+else if $\mathit{LSib}=\emptyset$ and $C(v)\neq\emptyset$ then
+24:
+Add (directed) edge $(\min(C(v)),p_{v})$ to $E^{\prime}$ ;
+25:
+else if $\mathit{LSib}\neq\emptyset$ and $C(v)=\emptyset$ then
+26:
+Add (directed) edge $(v,\max(\mathit{LSib}))$ to $E^{\prime}$ ;
+27:
+else
+28:
+Add (directed) edge $(\min(C(v)),\max(\mathit{LSib}))$ to $E^{\prime}$ ;
+29:
+end if
+30:
+end for
+31:
+Output $P=(V,E^{\prime})$ ;
+A.2.2 Distributed Tree-to-Path
+Here, we describe the self-stabilizing algorithms for receiving and processing the advice message. We explicitly address the interaction between the supervisor and the nodes, and also show that it can be combined with the rest of the algorithms.
+From the (honest) supervisor’s perceptive, if there is any node that is not part of any flyover, and has its exit variable set to 1, that node would request for advice. Once the supervisor receives the first request, it waits for $O(\log n)$ rounds until all the nodes are not part of any flyover, and have their exit variables set to 1. (Note that by design, if the advice or flyover is not correct, every node executes $\mathbf{RejectFlyover}$ function of Algorithm 2 in $O(\log n)$ rounds; see Section C.8 in the analysis.) At this point, the supervisor learns the “network snapshot,” by requesting each node to send its neighborhood, that is, the ids stored in its memory or channel.
+From the perspective of any node $u$ , to avoid being unnecessarily contacted by the supervisor, it should not be part of any flyover (that is, $u.S\neq\emptyset$ ), nor should its $u.\mathit{exit}$ variable be set to 1, while processing an advice message (i.e., during the interaction with the supervisor). After being requested for the neighborhood by the supervisor, every node can store and maintain its current neighborhood for $O(1)$ rounds to process the advice given by the supervisor. This is achieved by setting and tracking a “timer” variable that indicates that the advice is being processed.
+We explain the additional variables of a node $u$ that are used in the following algorithms.
+1.
+$u.t$ is used as a timer variable which is set to $5$ when the supervisor requests for its current neighborhood; $u.t$ is decremented by 1 in every round, until it becomes 0 again.
+2.
+$u.\mathit{dist}$ is used for storing the distance from the root, in a rooted spanning tree of the current snapshot, given by the supervisor; see Algorithm 1 for the details. This distance is primarily used by nodes for calculating the label in the Tree-to-Path algorithm (cf. Section 3.4), and is also used for quickly checking that any subset of “parent” ids (in the advice) do not form a cycle, using the distance-checks in local certification (cf. Section 3).
+Algorithm 11 Init2
+1:
+$\mathbf{BasicChecks2}$
+2:
+$u.t>5\rightarrow u.t\coloneqq 5$ ; $u.t<0\rightarrow u.t\coloneqq 0$ ;
+3:
+$u.t>0\rightarrow u.t\coloneqq u.t-1$ ; /​​/ Decrement $u.r$ (until 0)
+4:
+$u.t\leq 1\land(u.S=\emptyset\lor u.\mathit{exit}=1)\rightarrow u.\mathit{vID}\coloneqq 0$ ; /​​/ Reset vID if flyover is not formed
+5:
+6:
+$\mathbf{SnapshotReq}\text{: }u.S=\emptyset\land u.\mathit{exit}=0\land u.t=0\rightarrow$
+7:
+if there exists a message $\langle\text{RequestSnapshot}\rangle$ then
+8:
+$u.t\coloneqq 5$ ; $\mathit{snap}\coloneqq$ Set of all ids in $\mathrm{M}_{u}(\mathcal{A}_{0})$ ; /​​/ Set up timer and neighborhood
+9:
+SEND( $\langle\text{Intro},u.\mathit{id}\rangle$ ) to all nodes in $\mathit{snap}$ ; $\forall v\in\mathit{snap},$ SEND( $\langle\text{Intro},v\rangle$ ) to thyself;
+10:
+SEND( $\langle\text{Neighborhood},\mathit{snap}\rangle$ ) to supervisor;
+11:
+end if
+Algorithm 12 Local Advice Verification
+1:
+$\mathbf{GetAdvice}$
+2:
+$busy\coloneqq\neg(u.S=\emptyset\land u.\mathit{exit}=0\land u.t>1)$ ;
+3:
+$\mathit{snap}\coloneqq\emptyset;(\forall\langle\text{Intro},v\rangle\in u.\mathit{Ch})\rightarrow\mathit{snap}\coloneqq\mathit{snap}\cup\{v\}$ ;
+4:
+if $(\langle\text{Advice},\cdots\rangle\in u.\mathit{Ch})\land(\neg\mathit{busy})\land(u.t=4)$ then
+5:
+if $\langle\text{Advice},\cdots\rangle$ is well-formed (e.g., $\mathit{Adv}(u).\mathit{par}\in\mathit{snap}$ , etc) then
+6:
+Update relevant variables (e.g., $u.\mathit{vID},u.\textit{c-dist},u.\mathit{dist}$ );
+7:
+SEND( $\langle\text{TestAdvice},u.\mathit{dist},u.\mathit{id}\rangle$ ) to $\mathit{Adv}(u).\mathit{par}$ ;
+8:
+end if
+9:
+end if
+10:
+$\mathbf{Flush}(\mathit{snap})$ ;
+11:
+12:
+$\mathbf{CertifyTree}$
+13:
+$\mathit{ignore\_msg}\coloneqq\neg(u.S=\emptyset\land u.\mathit{exit}=0\land u.t>1);\mathit{children}\coloneqq\emptyset$ ;
+14:
+for each received message $\langle\text{TestAdvice},\mathit{dist},v\rangle$ do
+15:
+$\mathit{children}\coloneqq v\cup\mathit{children}$ ; $(u.\mathit{dist}\neq\mathit{dist}-1)\rightarrow\mathit{ignore\_msg}\coloneqq 1$ ;
+16:
+end for
+17:
+$(\neg\mathit{ignore\_msg}\land\mathit{children}\neq\emptyset)\rightarrow\mathbf{SetupLocalTransform}(\mathit{children})$ ;
+18:
+$\mathbf{Flush}(\mathit{children})$ ;
+Algorithm 13 Distributed Tree-to-Path
+1:
+$\mathbf{LocalTransform}$
+2:
+$\mathit{ignore\_msg}\coloneqq\neg(u.S=\emptyset\land u.\mathit{exit}=0\land u.t>1);$
+3:
+$\mathit{children}\coloneqq\emptyset;\mathit{parent}\coloneqq\bot;\textit{r-sib}\coloneqq\bot;\textit{l-sib}\coloneqq\bot$ ;
+4:
+for each received message $\langle\text{Verified},\mathit{msg},v\rangle$ where $\mathit{msg}\in\{\text{parent},\text{sib+},\text{sib-},\text{child}\}$ do
+5:
+$(\mathit{msg}=\text{parent}\land\mathit{parent}\neq\bot)\rightarrow\mathit{ignore\_msg}\coloneqq 1$ ;
+6:
+$(\mathit{msg}=\text{sib-}\land\textit{l-sib}\neq\bot)\rightarrow\mathit{ignore\_msg}\coloneqq 1$ ;
+7:
+$(\mathit{msg}=\text{sib+}\land\textit{r-sib}\neq\bot)\rightarrow\mathit{ignore\_msg}\coloneqq 1$ ;
+8:
+$(\mathit{msg}=\text{parent}\land\neg\mathit{ignore\_msg})\rightarrow\mathit{parent}\coloneqq v$ ;
+9:
+$(\mathit{msg}=\text{sib-}\land\neg\mathit{ignore\_msg})\rightarrow\textit{l-sib}\coloneqq v$ ;
+10:
+$(\mathit{msg}=\text{sib+}\land\neg\mathit{ignore\_msg})\rightarrow\textit{r-sib}\coloneqq v$ ;
+11:
+$(\mathit{msg}=\text{child}\lor\mathit{ignore\_msg}=1)\rightarrow\mathit{children}\coloneqq v\cup\mathit{children};$
+12:
+end for
+13:
+$(\mathit{parent}=\bot\land u.\mathit{dist}\neq 0)\lor(\mathit{parent}\neq\bot\land u.\mathit{dist}<1)\rightarrow\mathit{ignore\_msg}\coloneqq 1;$
+14:
+$(\mathit{ignore\_msg}=0\land\mathit{parent}\neq\bot)\rightarrow\mathbf{ExecuteTransform}(\mathit{parent},\textit{r-sib},\textit{l-sib},\mathit{children})$ ;
+15:
+$\mathbf{Flush}(\{\mathit{parent},\textit{r-sib},\textit{l-sib}\}\cup\mathit{children})$ ;
+16:
+17:
+$\mathbf{JoinPath}$
+18:
+$\mathit{ignore\_msg}\coloneqq\neg(u.S=\emptyset\land u.\mathit{exit}=0\land u.t>1);\mathit{flyL}\coloneqq\bot;\mathit{flyR}\coloneqq\bot;$
+19:
+for each received message $\langle\mathit{msg},v\rangle$ where $\mathit{msg}\in\{\text{Path+},\text{Path-}\}$ do
+20:
+$(\mathit{msg}=\text{Path-}\land(u.\mathit{vID}=1\lor\mathit{flyL}\neq\bot))\rightarrow\mathit{ignore\_msg}\coloneqq 1$ ;
+21:
+$(\mathit{msg}=\text{Path+}\land\mathit{flyR}\neq\bot)\rightarrow\mathit{ignore\_msg}\coloneqq 1$ ;
+22:
+$(\mathit{msg}=\text{Path-}\land\neg\mathit{ignore\_msg})\rightarrow\mathit{flyL}\coloneqq v$ ;
+23:
+$(\mathit{msg}=\text{Path+}\land\neg\mathit{ignore\_msg})\rightarrow\mathit{flyR}\coloneqq v$ ;
+24:
+$\mathit{ignore\_msg}=1\rightarrow\mathbf{Flush}(\{v\})$ ;
+25:
+end for
+26:
+/​​/ First left and right shortcuts in the flyover
+27:
+$\mathit{ignore\_msg}=0\rightarrow u.S_{l}(1)\coloneqq\mathit{flyL};u.S_{r}(1)\coloneqq\mathit{flyR};$
+28:
+$\mathbf{Flush}(\{\mathit{flyL},\mathit{flyR}\})$ ;
+Appendix B Tree-to-Path Analysis
+Theorem B.1.
+Algorithm 10 takes a (labelled) rooted tree $T=(l(\cdot),r,V,E)$ where $l(r)=0$ as input, and outputs a directed path graph $P=(V,E^{\prime})$ , where $\mathrm{Beg}(P)=r$ and $\mathrm{End}(P)=\min(C_{T}(r))$ .
+Proof.
+The height of a rooted tree $T$ , denoted by $H(T)$ , is equal to $\max_{v\in V}(\mathrm{dist}(r,v))$ . For each node $v$ , let $C(v)=\{u\mid\mathrm{dist}(u,v)=1\wedge\mathrm{dist}(v,r)<\mathrm{dist}(u,r)\}$ . For each node $v\in V$ where $C(v)\neq\emptyset$ , there is a total ordering (e.g., based on ids) on $C(v)=\{u_{1},\dots,u_{k}\}$ such that $u_{1}<\dots<u_{k}$ .
+We inductively prove the following statements over the height of a tree, with the base cases as the set of trees of height 1 (and the label of root can either be 0 or 1).
+1.
+Algorithm 10 takes in any rooted tree $T_{b}=(l(\cdot),p,V,E)$ where $l(p)=0$ , and outputs a (directed) path graph $P=(V,E^{\prime})$ where $\mathrm{Beg}(P)=p$ and $\mathrm{End}(P)$ is $\min(C(p))$ for $|V|\geq 2$ .
+2.
+Algorithm 10 takes in any rooted tree $T_{b}=(l(\cdot),p,V,E)$ where $l(p)=1$ , and outputs a (directed) path graph $P=(V,E^{\prime})$ where $\mathrm{Beg}(P)$ is $\max(C(p))$ and $\mathrm{End}(P)=p$ for $|V|\geq 2$ .
+Consider the base case of any rooted tree $T_{b}=(l(\cdot),p,V,E)$ where $l(p)=0$ and $|V|\geq 2$ and $H(T_{b})=1$ . Let $C(p)=\{p_{1},\dots,p_{q}\}$ such that $p_{1}<\dots<p_{q}$ for any $q\geq 1$ . Algorithm 10 adds the following edges, resulting in a path $P$ , where $\mathrm{Beg}(P)=p$ and $\mathrm{End}(P)$ is $\min(C(p))$ .
+1.
+The (directed) edge $(p,p_{q})$ is added.
+2.
+For $1\leq r<q$ , the (directed) edge $(p_{r+1},p_{r})$ is added.
+Similarly, consider the base case of any rooted tree $T_{b}=(l(\cdot),p,V,E)$ where $l(p)=1$ and $|V|\geq 2$ and $H(T_{b})=1$ . Let $C(p)=\{p_{1},\dots,p_{q}\}$ such that $p_{1}<\dots<p_{q}$ for any $q\geq 1$ . Algorithm 10 adds the following edges, resulting in a path $P$ , where $\mathrm{Beg}(P)=\max(C(p))$ and $\mathrm{End}(P)$ is $p$ .
+1.
+The (directed) edge $(p_{1},p)$ is added.
+2.
+For $1\leq r<q$ , the (directed) edge $(p_{r+1},p_{r})$ is added.
+We introduce some notation for the inductive cases, where $T=(l(\cdot),p,V,E)$ is any rooted tree of $H(T)=h+1$ for any $h\geq 1$ . For any node $p$ , let $C^{\prime}(p)=\{u\mid u\in C(p)\wedge C(u)\neq\emptyset\}$ . Let $T_{w}=(l(\cdot),w,V_{d}(w),E_{d}(w))$ be the subtree rooted at $w$ and $l(w)=l(p)+\mathrm{dist}(p,w)\mod 2$ , where $V_{d}(w)=\{u\mid\mathrm{dist}(u,w)<\mathrm{dist}(u,p)\}$ and $E_{d}(w)=\{(u,v)\mid(u,v)\in E\wedge\{u,v\}\in V_{d}(w)\}$ . By induction, Algorithm 10 outputs a path, denoted by $\mathcal{A}(T_{v})$ , for each subtree $T_{v}$ rooted at $v\in C^{\prime}(p)$ .
+Consider any rooted tree $T$ where $l(p)=0$ . Algorithm 10 adds the following (directed) edges, resulting in a (directed) path $P=(V,E^{\prime})$ where $\mathrm{Beg}(P)=p$ and $\mathrm{End}(P)$ is $\min(C(p))$ .
+1.
+Either $(p,\mathrm{Beg}(\mathcal{A}(T_{p_{q}}))$ or $(p,p_{q})$ is added based on whether $p_{q}\in C^{\prime}(p)$ or $p_{q}\notin C^{\prime}(p)$ . By induction, $\mathrm{Beg}(\mathcal{A}(T_{p_{q}}))$ is $\max(C(p_{q}))$ and $\mathrm{End}(\mathcal{A}(T_{p_{q}}))$ is $p_{q}$ , if $p_{q}\in C^{\prime}(p)$ , as $l(p_{q})=1$ .
+2.
+Similarly, if there exists an $r$ such that, $1\leq r<q$ , we consider these exhaustive set of cases.
+(a)
+If $p_{r},p_{r+1}\in C^{\prime}(p)$ , then the edge $(\mathrm{End}(\mathcal{A}(T_{p_{r+1}}),\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is added. By induction, $\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is $\max(C(p_{r}))$ and $\mathrm{End}(\mathcal{A}(T_{p_{r+1}}))$ is $p_{r+1}$ , if $p_{r},p_{r+1}\in C^{\prime}(p)$ , as $l(p_{r})=1$ and $l(p_{r+1})=1$ .
+(b)
+If $p_{r+1}\in C^{\prime}(p)$ and $p_{r}\notin C^{\prime}(p)$ , then the edge $(\mathrm{End}(\mathcal{A}(T_{p_{r+1}}),p_{r})$ is added. By induction, $\mathrm{End}(\mathcal{A}(T_{p_{r+1}}))$ is $p_{r+1}$ , if $p_{r+1}\in C^{\prime}(p)$ , as $l(p_{r+1})=1$ .
+(c)
+If $p_{r+1}\notin C^{\prime}(p)$ and $p_{r}\in C^{\prime}(p)$ , then edge $(p_{r+1},\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is added. By induction, $\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is $\max(C(p_{r}))$ , if $p_{r}\in C^{\prime}(p)$ , as $l(p_{r})=1$ .
+(d)
+If $p_{r},p_{r+1}\notin C^{\prime}(p)$ , then edge $(p_{r+1},p_{r})$ is added. (Same as base case where $l(p)=0$ .)
+Similarly, consider any rooted tree $T$ where $l(p)=1$ . Algorithm 10 adds the following (directed) edges, resulting in a (directed) path $P=(V,E^{\prime})$ where $\mathrm{Beg}(P)=\max(C(p))$ and $\mathrm{End}(P)$ is $p$ .
+1.
+Either $(\mathrm{End}(\mathcal{A}(T_{p_{1}}),p)$ or $(p_{1},p)$ is added based on whether $p_{1}\in C^{\prime}(p)$ or $p_{1}\notin C^{\prime}(p)$ . By induction, $\mathrm{End}(\mathcal{A}(T_{p_{1}}))$ is $\min(C(p_{1}))$ and $\mathrm{Beg}(\mathcal{A}(T_{p_{1}}))$ is $p_{1}$ , if $p_{1}\in C^{\prime}(p)$ , as $l(p_{1})=0$ .
+2.
+Similarly, if there exists an $r$ such that, $1\leq r<q$ , we consider these exhaustive set of cases.
+(a)
+If $p_{r},p_{r+1}\in C^{\prime}(p)$ , then the edge $(\mathrm{End}(\mathcal{A}(T_{p_{r+1}}),\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is added. By induction, $\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is $p_{r}$ and $\mathrm{End}(\mathcal{A}(T_{p_{r+1}}))$ is $\min(C(p_{r+1}))$ , if $p_{r},p_{r+1}\in C^{\prime}(p)$ , as $l(p_{r})=0$ and $l(p_{r+1})=0$ .
+(b)
+If $p_{r+1}\in C^{\prime}(p)$ and $p_{r}\notin C^{\prime}(p)$ , then the edge $(\mathrm{End}(\mathcal{A}(T_{p_{r+1}}),p_{r})$ is added. By induction, $\mathrm{End}(\mathcal{A}(T_{p_{r+1}}))$ is $\min(C(p_{r+1}))$ , if $p_{r+1}\in C^{\prime}(p)$ , as $l(p_{r+1})=0$ .
+(c)
+If $p_{r+1}\notin C^{\prime}(p)$ and $p_{r}\in C^{\prime}(p)$ , then edge $(p_{r+1},\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is added. By induction, $\mathrm{Beg}(\mathcal{A}(T_{p_{r}}))$ is $p_{r}$ , if $p_{r}\in C^{\prime}(p)$ , as $l(p_{r})=0$ .
+(d)
+If $p_{r},p_{r+1}\notin C^{\prime}(p)$ , then edge $(p_{r+1},p_{r})$ is added. (Same as base case where $l(p)=1$ .)
+∎

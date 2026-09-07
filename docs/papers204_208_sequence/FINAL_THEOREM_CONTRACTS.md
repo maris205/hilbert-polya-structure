@@ -294,7 +294,7 @@ for the accepted audit's original path/hash key; see its
 [scope and change record](qa/central_lifecycle_p209_20260907/README.md).
 At P208 completion: three retained, three complete, two unfilled. P209 follows.
 
-## P209 — ordered fibre threading — ADMITTED, WRITING
+## P209 — ordered fibre threading — ROUND0 COMPLETE, A ACTIVE
 
 Proof contributors: root and `/root/nineteenth_finite_scout`; manuscript and
 paper-local verifier author: `/root/p208_b_reviewer`. None can serve as
@@ -346,7 +346,12 @@ inverse, recurrent EGF, global-priority or arbitrary-conjugacy exclusion is
 admitted. A complete applicable owner adapter reopens the affected gate.
 
 Paper path: `papers/209-ordered-fibre-threading/`.
-Status: `ADMITTED_WRITING / OWNER_AMBER / HOLD_EXTERNAL`.
-Paper-local author evidence, Round0, two actual nonauthor manuscript reviews,
-accepted deltas and terminal obligations remain pending.
+Status: `ROUND0_COMPLETE / MANUSCRIPT_A_ACTIVE / OWNER_AMBER / HOLD_EXTERNAL`.
+The author package, root original checks, actual strict author-code pair,
+two author builds/all-page views and physical 1,989-payload Round0 are
+complete. A fresh nonauthor manuscript A is assigned, with no verdict or
+accepted delta yet; B and terminal obligations remain pending. See
+[root physical closure](qa/P209_ROUND0_ROOT_INSPECTION.md). This lifecycle
+edit changes no theorem, manuscript, author seal or review evidence; the
+exact previous index is [preserved](qa/central_lifecycle_p209_round0/README.md).
 Current census: four retained, three complete, one unfilled; next number P210.

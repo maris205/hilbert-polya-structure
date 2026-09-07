@@ -1,0 +1,210 @@
+--- original_snapshot/record_author.py
++++ root_record_pair.py
+@@ -1,11 +1,11 @@
+ #!/usr/bin/env python3
+-"""P209-only strict author pair or source-only build recorder.
++"""Root-only P209 author replay pair; existing canonical is read-only.
+ 
+-Fresh infrastructure informed by the inspected root FTH/P208 recorders. No
+-old scientific implementation is imported or executed. Immutable attempts,
+-complete logs, sampled maps and conservative inventories are evidence, not
+-a continuous trace or an OS-hermetic reconstruction. Each invocation owns
+-one previously nonexistent direct child of this paper directory.
++Disclosed path/role/canonical adaptation of the physically saved author
++recorder. No author recorder is imported; the unchanged paper verifier is
++copied as code only. All original recording/closure machinery is retained.
++Build helpers remain unchanged but are unreachable through this pair-only
++entry point. Preparation is not execution or independent manuscript review.
+ """
+ import hashlib
+ import json
+@@ -21,8 +21,10 @@
+ import traceback
+ 
+ SCRIPT = Path(__file__).resolve()
+-PAPER = SCRIPT.parent
+-ROOT = PAPER.parents[1]
++ROOT = Path("/root/autodl-tmp/symbolic_dynamics")
++PAPER = ROOT / "papers/209-ordered-fibre-threading"
++OUTPUT_ROOT = ROOT / "docs/papers204_208_sequence/qa/root_replays/p209_author_strict"
++ROOT_LAUNCHER = SCRIPT.with_name("root_launch_pair.py")
+ PYTHON = Path(sys.executable).resolve()
+ STDLIB = Path(sysconfig.get_path("stdlib")).resolve()
+ ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
+@@ -185,10 +187,10 @@
+     require(sorted(p.relative_to(PAPER).as_posix() for p in (PAPER / "sections").glob("*.tex"))
+             == sorted(SOURCES[3:]), "SECTION_SET")
+     check_manifest(PAPER / "source_context")
+-    files = [PAPER / n for n in SCIENCE]
++    files = [PAPER / n for n in SCIENCE] + [SCRIPT, ROOT_LAUNCHER]
+     files += [p for p in (PAPER / "source_context").rglob("*") if p.is_file()]
+-    if (PAPER / "CANONICAL.json").is_file():
+-        files.append(PAPER / "CANONICAL.json")
++    require((PAPER / "CANONICAL.json").is_file(), "ROOT_CANONICAL_REQUIRED_NO_ADOPTION")
++    files.append(PAPER / "CANONICAL.json")
+     value = pins(files)
+     REGISTERED_INPUTS.update(value)
+     require(all("error" not in p for p in value.values()), "MISSING_SCIENTIFIC_INPUT")
+@@ -458,8 +460,8 @@
+     comparison.mkdir()
+     raw1, raw2 = out / "replay_01/producer.stdout", out / "replay_02/producer.stdout"
+     canonical = PAPER / "CANONICAL.json"
+-    adopted = str(canonical) not in all_before
+-    require(canonical.exists() != adopted, "CANONICAL_PRESENCE_CHANGED_BEFORE_COMPARISON")
++    adopted = False
++    require(str(canonical) in all_before and canonical.is_file(), "ROOT_CANONICAL_MUST_PREEXIST")
+     before = pins([raw1, raw2, "/usr/bin/cmp"] + ([canonical] if canonical.exists() else []))
+     REGISTERED_INPUTS.update(before)
+     save(comparison / "INPUTS_BEFORE.json", before)
+@@ -467,11 +469,6 @@
+     row, used = command(["/usr/bin/cmp", "--", str(raw1), str(raw2)], comparison, comparison, "pair", ENV)
+     comparisons.append(row)
+     observed |= used
+-    if adopted:
+-        bytesave(canonical, raw1.read_bytes())
+-        REGISTERED_INPUTS[str(canonical)] = info(canonical)
+-        save(comparison / "CANONICAL_ADOPTION.json", {"action": "ADOPT_ACTUAL_FIRST_STDOUT_AFTER_PAIR_CMP",
+-             "source": str(raw1), "source_pin": byteinfo(raw1), "canonical": str(canonical), "canonical_pin": byteinfo(canonical)})
+     for label, raw in (("canonical_01", raw1), ("canonical_02", raw2)):
+         row, used = command(["/usr/bin/cmp", "--", str(raw), str(canonical)], comparison, comparison, label, ENV)
+         comparisons.append(row)
+@@ -481,10 +478,7 @@
+     require(after == before, "RAW_COMPARISON_INPUT_CHANGED")
+     require(byteinfo(canonical) == byteinfo(raw1) == byteinfo(raw2), "ADOPTED_CANONICAL_BYTES")
+     canonical_pin = info(canonical)
+-    if adopted:
+-        added[str(canonical)] = canonical_pin
+-    else:
+-        require(canonical_pin == all_before[str(canonical)], "EXISTING_CANONICAL_INITIAL_PIN_CHANGED")
++    require(canonical_pin == all_before[str(canonical)], "EXISTING_CANONICAL_INITIAL_PIN_CHANGED")
+     REGISTERED_INPUTS.update(added)
+     save(comparison / "CANONICAL_PIN.json", canonical_pin)
+     manifest(comparison)
+@@ -585,10 +579,12 @@
+ 
+ 
+ def main():
+-    require(len(sys.argv) == 3 and sys.argv[1] in {"pair", "build"}, "USAGE", "record_author.py pair|build new_label")
++    require(len(sys.argv) == 3 and sys.argv[1] == "pair", "USAGE", "root_record_pair.py pair root_author_pair_N")
+     mode, label = sys.argv[1:]
+-    require(re.fullmatch(r"author_(?:pair|build)_[0-9]+", label), "INVALID_OUTPUT_LABEL")
+-    out = PAPER / label
++    require(re.fullmatch(r"root_author_pair_[0-9]+", label), "INVALID_OUTPUT_LABEL")
++    require(OUTPUT_ROOT.resolve() == OUTPUT_ROOT, "ROOT_OUTPUT_PATH_ALIAS")
++    OUTPUT_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
++    out = OUTPUT_ROOT / label
+     require(not out.exists() and not out.is_symlink(), "REFUSE_EXISTING_OUTPUT")
+     out.mkdir(mode=0o700)
+     failures, scientific, runtime_before, all_before, added = [], {}, {}, {}, {}
+@@ -670,14 +666,14 @@
+             require(not closed["uncovered"] and not closed["bytecode"] and not late["cache_exists"], "OBSERVED_RUNTIME_CLOSURE", closed)
+         except BaseException:
+             failures.append({"stage": "observed_closure", "traceback": traceback.format_exc()})
+-        value = {"status": "PASS_AUTHOR_" + mode.upper() if not failures else "FAIL_PRESERVED",
++        value = {"status": "PASS_ROOT_AUTHOR_" + mode.upper() if not failures else "FAIL_PRESERVED",
+                  "mode": mode, "failures": failures, "result": result,
+                  "science_inputs": len(scientific), "runtime_files": len(runtime_before),
+                  "known_all_inputs_including_capsules": len(complete_before),
+                  "ldd_commands": sum(r["tag"].startswith("ldd_") for r in COMMAND_RECORDS),
+                  "ldd_commands_completed_exit_zero": sum(r["tag"].startswith("ldd_") and r["command"]["exit"] == 0 for r in COMMAND_RECORDS),
+                  "linkage_returned_complete": bool(link_rows), "tex_resources": len(tex_before.get("files", {})),
+-                 "scope": "P209 author evidence only. No manuscript review, freeze or terminal acceptance.",
++                 "scope": "Root executions of unchanged P209 author verifier. No independent manuscript review, freeze or terminal acceptance.",
+                  "observations": "Early/late parent and scientific-child modules/maps; sampled direct-child maps; conservative stdlib, OS libraries, loader/locale/gconv/config inventories; TeX per-pass .fls. No continuous or grandchild tracing, no OS-hermetic claim.",
+                  "external": "HOLD_EXTERNAL"}
+         save(out / "RECEIPT.json", value)
+--- original_snapshot/launch_author.py
++++ root_launch_pair.py
+@@ -1,10 +1,10 @@
+ #!/usr/bin/env python3
+-"""Outer full-stream receipt for one new P209 author recorder invocation.
++"""Outer full-stream receipt for one new root P209 author replay pair.
+ 
+-This wrapper does not import the recorder or any scientific implementation.
+-The recorder is separately pinned before this wrapper starts its process;
+-the recorder inventories every known producer/build input before children.
+-No claim of tracing this wrapper's own OS startup is made.
++Disclosed path/role/canonical adaptation of the saved author launcher.
++Neither recorder nor scientific implementation is imported. An already
++existing paper canonical is required and never adopted or overwritten.
++The unchanged bounded observation and UNCLOSED_NO_SEAL policy is retained.
+ """
+ import hashlib
+ import json
+@@ -16,8 +16,11 @@
+ import time
+ import traceback
+ 
+-PAPER = Path(__file__).resolve().parent
+-ROOT = PAPER.parents[1]
++SCRIPT = Path(__file__).resolve()
++ROOT = Path("/root/autodl-tmp/symbolic_dynamics")
++PAPER = ROOT / "papers/209-ordered-fibre-threading"
++OUTPUT_ROOT = ROOT / "docs/papers204_208_sequence/qa/root_replays/p209_author_strict"
++RECORDER = SCRIPT.with_name("root_record_pair.py")
+ ENV = {"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
+ 
+ 
+@@ -53,7 +56,7 @@
+     if seen != {p.relative_to(base).as_posix() for p in base.rglob("*") if p.is_file() and p != manifest}:
+         raise RuntimeError("Recorder manifest is not complete")
+     receipt = json.loads((base / "RECEIPT.json").read_bytes())
+-    if receipt["mode"] != mode or (exit_code == 0 and receipt["status"] != "PASS_AUTHOR_" + mode.upper()):
++    if receipt["mode"] != mode or (exit_code == 0 and receipt["status"] != "PASS_ROOT_AUTHOR_" + mode.upper()):
+         raise RuntimeError("Recorder receipt disagrees with actual normal exit")
+     if exit_code != 0 and receipt["status"] != "FAIL_PRESERVED":
+         raise RuntimeError("Nonzero recorder exit lacks a closed failure receipt")
+@@ -61,13 +64,15 @@
+ 
+ 
+ def main():
+-    if len(sys.argv) != 3 or sys.argv[1] not in {"pair", "build"}:
+-        raise RuntimeError("launch_author.py pair|build author_pair_N|author_build_N")
++    if len(sys.argv) != 3 or sys.argv[1] != "pair":
++        raise RuntimeError("root_launch_pair.py pair root_author_pair_N")
+     mode, label = sys.argv[1:]
+-    prefix = "author_" + mode + "_"
++    prefix = "root_author_pair_"
+     if not label.startswith(prefix) or not label[len(prefix):].isdigit():
+         raise RuntimeError("Invalid direct-child output label")
+-    out, recorder_out = PAPER / ("launcher_" + label), PAPER / label
++    if OUTPUT_ROOT.resolve() != OUTPUT_ROOT:
++        raise RuntimeError("Root output path aliases another directory")
++    out, recorder_out = OUTPUT_ROOT / ("launcher_" + label), OUTPUT_ROOT / label
+     if out.exists() or out.is_symlink() or recorder_out.exists() or recorder_out.is_symlink():
+         raise RuntimeError("Refuse existing launcher or recorder output")
+     if dict(os.environ) != ENV or Path.cwd() != ROOT or not (
+@@ -78,16 +83,20 @@
+         not Path(sys.pycache_prefix).exists()
+     ):
+         raise RuntimeError("Launcher settings differ from declared isolated minimal environment")
++    if not (PAPER / "CANONICAL.json").is_file():
++        raise RuntimeError("ROOT_CANONICAL_REQUIRED_NO_ADOPTION")
++    OUTPUT_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+     out.mkdir(mode=0o700)
+-    for name in ("launch_author.py", "record_author.py", "bootstrap.py", "verify.py"):
+-        shutil.copyfile(PAPER / name, out / name)
+-    inputs = [PAPER / name for name in ("launch_author.py", "record_author.py", "bootstrap.py", "verify.py", "PARAMETERS.json")]
++    for source in (SCRIPT, RECORDER, PAPER / "bootstrap.py", PAPER / "verify.py"):
++        shutil.copyfile(source, out / source.name)
++    inputs = [SCRIPT, RECORDER] + [PAPER / name for name in
++              ("launch_author.py", "record_author.py", "bootstrap.py", "verify.py", "PARAMETERS.json", "CANONICAL.json")]
+     inputs += [Path("/usr/bin/python3.10"), Path("/usr/bin/env")]
+     before = {str(p): pin(p) for p in inputs}
+     save(out / "INPUTS_BEFORE.json", before)
+     argv = ["/usr/bin/python3.10", "-I", "-S", "-B", "-X",
+             "pycache_prefix=" + str(recorder_out / "never_created_parent_cache"),
+-            str(PAPER / "record_author.py"), mode, label]
++            str(RECORDER), mode, label]
+     row = {"argv": argv, "cwd": str(ROOT), "env": ENV,
+            "started_epoch": time.time(), "exit": None, "outcome": "NOT_STARTED",
+            "launcher_orig_argv": sys.orig_argv, "launcher_flags": str(sys.flags),
+@@ -129,7 +138,7 @@
+     row["recorder_closure"] = closed
+     row["recorder_seal"] = closed["manifest"]
+     okay = failure is None and row["exit"] == 0 and before == after and row["cache_absent"]
+-    row["status"] = "PASS_LAUNCH" if okay else "FAIL_PRESERVED"
++    row["status"] = "PASS_ROOT_LAUNCH" if okay else "FAIL_PRESERVED"
+     save(out / "RECEIPT.json", row)
+     paths = sorted(p for p in out.rglob("*") if p.is_file())
+     with (out / "SHA256SUMS").open("x") as stream:

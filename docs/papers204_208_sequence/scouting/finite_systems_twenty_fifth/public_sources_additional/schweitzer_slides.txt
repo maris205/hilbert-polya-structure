@@ -1,0 +1,1866 @@
+         AN INTRODUCTION TO THE
+     WEISFEILER–LEMAN ALGORITHM AND
+          RECENT DEVELOPMENTS
+                                                21.11.2025 Vienna
+                                                  LOGALG 2025
+                                                    Pascal Schweitzer
+
+
+
+
+            1                  1                1                1                1                1                1
+                    2 ;                2                2                2                2                2                2
+          1x              3x               2x               1x               1x               1x               1x
+EngageS         3                  3                3                3                3                3                3
+      Y
+      M
+      M
+      E
+      T
+      R
+      Y
+                                                                                                                                1
+The Graph Isomorphism Problem
+
+                                                           isomorphic graphs
+
+  Two graphs are isomorphic if there is a bijection of
+  vertices that preserves adjacency and non-adjacency.
+
+
+                  The Graph Isomorphism Problem (GI):
+                  Algorithmic task to decide whether two
+                  given graphs are isomorphic.
+
+
+  ▶ One of the most important open problems in
+  theoretical computer science
+  ▶ GI is equivalent to computing graph automorphisms
+
+
+
+                                                                               2
+1. WL Algorithm
+
+
+
+
+                  3
+Degrees and degrees in the neighborhood
+
+
+  We want to explore the automorphisms of a graph combinatorially.
+
+   The 1-dimensional Weisfeiler Leman algorithm is a procedure to distinguish graphs according to
+   combinatorial properties.
+
+   Observations:
+   ▶ Vertices must map to vertices of the same degree.
+   ▶ The neighborhood of a vertex must map the neighborhood of its image.
+   ▶ Thus, degrees that appear in the neighborhood must appear in the neighborhood of the
+   image.
+   ▶ This argument can be iterated.
+
+
+
+
+                                                                                                    4
+Color refinement (aka. 1-WL)
+
+
+
+
+                               5
+Color refinement (aka. 1-WL)
+
+                   2                       1
+
+    1       3             3    2   2   3
+
+                   2                       1
+
+
+
+
+                   2                       1
+                          2
+    1       3                  3   2   3
+
+                   2                       1
+
+
+
+
+                                               5
+Color refinement (aka. 1-WL)
+
+                   2                       1
+
+    1       3             3    2   2   3
+
+                   2                       1
+
+
+
+
+                   2                       1
+                          2
+    1       3                  3   2   3
+
+                   2                       1
+
+
+
+
+                                               5
+Color refinement (aka. 1-WL)
+
+                   2                         1
+                         3;222
+    1       3             3      2   2   3
+
+                   2                         1
+
+
+
+
+                   2                         1
+                          2
+    1       3                    3   2   3
+
+                   2                         1
+
+
+
+
+                                                 5
+Color refinement (aka. 1-WL)
+
+                   2                             1
+                         3;222
+    1       3             3      2   2    3
+
+                   2                             1
+
+
+
+
+                   2                             1
+                          2              3;112
+    1       3                    3   2    3
+
+                   2                             1
+
+
+
+
+                                                     5
+Color refinement (aka. 1-WL)
+                  2;33                                  1;3
+                   2                                    1
+    1;3   3;122          3;222   2;23    2;23   3;112
+    1       3             3       2       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                  2;23                                  1;3
+                   2     2;23                           1
+    1;3   3;122           2      3;222   2;33   3;112
+    1       3                     3       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                                                              5
+Color refinement (aka. 1-WL)
+                  2;33                                                1;3
+                   2                                                  1
+    1;3   3;122          3;222   2;23         2;23            3;112
+    1       3             3        2            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+                                 (3;222);(2;23)(2;33)(2;33)
+
+                  2;23                                                1;3
+                   2     2;23                                         1
+    1;3   3;122           2      3;222         2;33           3;112
+    1       3                      3            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+
+
+
+                                                                            5
+Color refinement (aka. 1-WL)
+                  2;33                                                1;3
+                   2                                                  1
+    1;3   3;122          3;222   2;23         2;23            3;112
+    1       3             3        2            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+                                 (3;222);(2;23)(2;33)(2;33)
+
+                  2;23                                                1;3
+                   2     2;23                                         1
+    1;3   3;122           2      3;222         2;33           3;112
+    1       3                      3            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+
+
+
+                                                                            5
+Color refinement (aka. 1-WL)
+                  2;33                                                1;3
+                   2                                                  1
+    1;3   3;122          3;222   2;23         2;23            3;112
+    1       3             3        2            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+                                 (3;222);(2;23)(2;33)(2;33)
+
+                  2;23                                                1;3
+                   2     2;23                                         1
+    1;3   3;122           2      3;222         2;33           3;112
+    1       3                      3            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+
+
+
+                                                                            5
+Color refinement (aka. 1-WL)
+                  2;33                                                1;3
+                   2                                                  1
+    1;3   3;122          3;222   2;23         2;23            3;112
+    1       3             3        2            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+                                 (3;222);(2;23)(2;33)(2;33)
+
+                  2;23                                                1;3
+                   2     2;23                                         1
+    1;3   3;122           2      3;222         2;33           3;112
+    1       3                      3            2              3
+                  2;33                                                1;3
+                   2                                                  1
+
+
+
+
+                                                                            5
+Color refinement (aka. 1-WL)
+                  2;33                                  1;3
+                   2                                    1
+    1;3   3;122          3;222   2;23    2;23   3;112
+    1       3             3       2       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                  2;23                                  1;3
+                   2     2;23                           1
+    1;3   3;122           2      3;222   2;33   3;112
+    1       3                     3       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                                                              5
+Color refinement (aka. 1-WL)
+                  2;33                                  1;3
+                   2                                    1
+    1;3   3;122          3;222   2;23    2;23   3;112
+    1       3             3       2       2      3
+                  2;33                                  1;3
+                   2                                    1
+                                                              4 :=1;3
+                                                              5 :=2;23
+                                                              6 :=2;33
+                  2;23                                  1;3   7 :=3;112
+                   2     2;23                           1     8 :=3;122
+    1;3   3;122           2      3;222   2;33   3;112         9 :=3;222
+    1       3                     3       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                                                                          5
+Color refinement (aka. 1-WL)
+                  2;33                                  1;3
+                   2                                    1
+    1;3   3;122          3;222   2;23    2;23   3;112
+    1       3             3       2       2      3
+                  2;33                                  1;3
+                   2                                    1
+                                                              4 :=1;3
+                                                              5 :=2;23
+                                                              6 :=2;33
+                  2;23                                  1;3   7 :=3;112
+                   2     2;23                           1     8 :=3;122
+    1;3   3;122           2      3;222   2;33   3;112         9 :=3;222
+    1       3                     3       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                                                                          5
+Color refinement (aka. 1-WL)
+                  2;33                                  1;3
+                   2                                    1
+    1;3   3;122          3;222   2;23    2;23   3;112
+    1       3             3       2       2      3
+                  2;33                                  1;3
+                   2                                    1
+                                                              4 :=1;3
+                                                              5 :=2;23
+                                                              6 :=2;33
+                  2;23                                  1;3   7 :=3;112
+                   2     2;23                           1     8 :=3;122
+    1;3   3;122           2      3;222   2;33   3;112         9 :=3;222
+    1       3                     3       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                                                                          5
+Color refinement (aka. 1-WL)
+                  2;33                                  1;3
+                   2                                    1
+    1;3   3;122          3;222   2;23    2;23   3;112
+    1       3             3       2       2      3
+                  2;33                                  1;3
+                   2                                    1
+                                                              4 :=1;3
+                                                              5 :=2;23
+                                                              6 :=2;33
+                  2;23                                  1;3   7 :=3;112
+                   2     2;23                           1     8 :=3;122
+    1;3   3;122           2      3;222   2;33   3;112         9 :=3;222
+    1       3                     3       2      3
+                  2;33                                  1;3
+                   2                                    1
+
+
+
+
+                                                                          5
+Color refinement (aka. 1-WL)
+                  2;33                                  1;3
+                   2                                    1
+    1;3   3;122    6     3;222   2;23    2;23   3;112   4
+    1       3             3       2       2      3
+    4       8     2;33    9       5       5      7      1;3
+                   2                                    1
+                   6                                    4     4 :=1;3
+                                                              5 :=2;23
+                                                              6 :=2;33
+                  2;23                                  1;3   7 :=3;112
+                   2     2;23                           1     8 :=3;122
+    1;3   3;122    5      2      3;222   2;33   3;112   4     9 :=3;222
+    1       3             5       3       2      3
+    4       8     2;33            9       6      7      1;3
+                   2                                    1
+                   6                                    4
+
+
+
+                                                                          5
+Color refinement (aka. 1-WL)
+
+                   2                       1
+                   6                       4
+    1       3             3    2   2   3
+    4       8             9    5   5   7
+                   2                       1
+                   6                       4
+
+
+
+
+                   2                       1
+                   5      2                4
+    1       3             5    3   2   3
+    4       8                  9   6   7
+                   2                       1
+                   6                       4
+
+
+
+                                               5
+Color refinement (aka. 1-WL)
+
+                   6                       4
+
+    4       8             9    5   5   7
+
+                   6                       4
+
+
+
+
+                   5                       4
+                          5
+    4       8                  9   6   7
+
+                   6                       4
+
+
+
+
+                                               5
+Color refinement (aka. 1-WL)
+                  6;89                                  4;7
+                   6                                    4
+    4;8   8;466          9;566   5;59    5;57   7;445
+    4       8             9       5       5      7
+                  6;89                                  4;7
+                   6                                    4
+
+
+
+
+                  5;58                                  4;7
+                   5     5;59                           4
+    4;8   8;466           5      9;566   6;79   7;446
+    4       8                     9       6      7
+                  6;89                                  4;7
+                   6                                    4
+
+
+
+
+                                                              5
+Color refinement (aka. 1-WL)
+                  6;89                                  4;7
+                   6                                     4
+    4;8   8;466   16     9;566   5;59    5;57   7;445   10
+    4       8              9       5      5       7
+    11     20     6;89    21      14     12      17     4;7
+                   6                                     4
+                  16                                    10
+
+
+                  5;58                                  4;7
+                   5     5;59                           4
+    4;8   8;466    13     5      9;566   6;79   7;446   10
+    4       8             14      9       6      7
+    11     19     6;89            21     15      18     4;7
+                   6                                    4
+                   16                                   10
+
+
+
+                                                              5
+Color refinement (aka. 1-WL)
+
+                  16                          10
+
+    11     20             21   14   12   17
+
+                  16                          10
+
+
+
+
+                   13                         10
+                          14
+    11     19                  21   15   18
+
+                   16                         10
+
+
+
+
+                                                   5
+Color refinement (aka. 1-WL)
+
+                  16                          10
+                  32                          22
+    11     20             21   14   12   17
+    25     35             36   28   26   32
+                  16                          10
+                  32                          22
+
+
+
+
+                   13                         10
+                   27     14                  23
+    11     19             29   21   15   18
+    24     34                  35   30   33
+                   16                         10
+                   31                         23
+
+
+
+                                                   5
+Color refinement (aka. 1-WL)
+
+                  32                          22
+
+    25     35             36   28   26   32
+
+                  32                          22
+
+
+
+
+                   27                         23
+                          29
+    24     34                  35   30   33
+
+                   31                         23
+
+
+
+
+                                                   5
+Color refinement (illustration with colors)
+
+
+
+
+                                              6
+Color refinement on a random graph
+
+
+
+
+                                     7
+Color refinement on a random graph
+
+
+
+
+                                     7
+Color refinement on a random graph
+
+
+
+
+                                     7
+Color refinement on a random graph
+
+
+
+
+                                     7
+Color refinement on a path
+
+
+
+
+                             8
+Color refinement on a path
+
+
+
+
+                             8
+Color refinement on a path
+
+
+
+
+                             8
+Color refinement on a path
+
+
+
+
+                             8
+Color refinement on a path
+
+
+
+
+                             8
+Color refinement on a path
+
+
+
+
+                             8
+Color refinement on a grid
+
+
+
+
+                             9
+Color refinement on a grid
+
+
+
+
+                             9
+Color refinement on a grid
+
+
+
+
+                             9
+Color refinement on a grid
+
+
+
+
+                             9
+Color refinement on a grid
+
+
+
+
+                             9
+Color refinement on a grid
+
+
+
+
+                             9
+Some facts about 1-WL
+
+
+
+  Facts about 1-WL:
+   ▶ distinguishes almost all pairs of non-isomorphic graphs     [Babai, Erdős, Selkow] (1980)
+   ▶ cannot distinguish non-isomorphic regular graphs of same degree
+   ▶ a precise characterization for which graphs it always works is known
+                                [Arvind, Köbler, Rattan, Verbitsky] [Kiefer, S., Selman] (2015)
+   ▶ result computable in O((m + n) log n)                    [Cardon and Crochemore] (1982)
+   ▶ used heavily in practice
+
+
+
+
+                                                                                                   10
+Applications of 1-WL in machine learning on graphs
+   Two general graph isomorphism techniques for machine learning on graphs:
+
+   WL-kernels                                                                 Universal graph neural networks
+                                                                                                             input layer
+                                                          feature space H
+           objects
+                                                         (high dimensional)
+
+
+                                     φ
+       x             x′
+                                                           scalar product
+                                                                ⟨·, ·⟩                                      hidden layers
+              x ′′
+
+                                   interpret
+                                ⟨φ(x), φ(x ′ )⟩
+                          as similarity of x and x ′ .
+
+
+
+                                                                                                            output layers
+
+
+                                                                              message passing neural networks ⇔ 1-WL
+   [Shervashidze,S.,van
+                                                                                          [XHLJ] (2019) [MRFHLRG] (2019)
+   Leeuwen,Mehlhorn,Borgwardt] (2011)
+                                                                              see also [Franks,Anders,Kloft,S.] (2023)
+                                                                                                                            11
+Limits of color refinement
+
+   Example
+
+
+
+
+                                          C4 ∪˙ C3
+   Consequence: To explore automorphisms we need to consider more than one vertex at a time.
+
+
+
+                                                                                               12
+The classical (2-dim) WL-algorithm
+    ▶ The 2-dimensional WL-algorithm colors pairs of vertices.
+    ▶ The initial coloring is into edges, non-edges and loops.
+    ▶ Each iteration recolors each pair (u, v ) according to colored triangles containing (u, v ).
+
+
+
+                                         1            2
+
+
+
+
+                                 3       4        5            6   7            8        9
+
+                  1   2          1   2        1       2        1   2        1       2        1   2        1   2
+             1x           ; 3x           2x               1x           1x               1x           1x
+
+
+
+                                                                                                                  13
+2-dim WL and distances (Illustration)
+   The 2-dim WL can “measure” distances in a graph.
+
+
+
+
+                                                      14
+2-dim WL on paths
+
+
+
+
+                    15
+Non-isomorphic strongly regular graphs
+
+
+
+
+                          Shrikhande graph                 Line graph L(K4,4 )
+
+
+   The smallest pair of non-isomorphic graphs not distinguished by 2-WL (16 vertices).
+
+
+                                                                                         16
+3-dim WL (Illustration)
+
+
+
+
+     1                  1                1                1                1                1                1
+             2 ;                2                2                2                2                2                2
+   1x              3x               2x               1x               1x               1x               1x
+         3                  3                3                3                3                3                3
+
+
+
+
+                                                                                                                         17
+1. WL Algorithm
+
+
+
+
+                  18
+Outline                             1. WL Algorithm
+
+          2. Logics & Games
+
+
+             ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                      ⇒
+                   G1 ≇ G2
+
+
+
+
+                                                      18
+Correspondence
+
+
+  There are three views with a well established close correspondence between parameters.
+                                                                [Cai,Fürer,Immerman] (1992)
+
+
+                WL-refinement          dimension              iterations
+                      ↕                    ↕                      ↕
+                     logic              variables          quantifier depth
+                      ↕                    ↕                      ↕
+                 pebble game         no. of pebbles     length of optimal plays
+
+
+
+
+                                                                                               19
+Logics and Sentences
+   Example
+
+                       ∃x      (∀y x = y ∨ x ∼ y ) ∨ (∀y x = y ∨ x ̸∼ y )
+  In words:
+  There is a vertex x that is adjacent to every other vertex or that is adjacent to no other vertex.
+
+
+
+
+                          ✗                                            ✓
+   Observation
+   It is “somewhat easy” to decide whether a given graph satisfies the sentence.
+
+                                                                                                       20
+Logic for isomorphism
+
+
+
+   Question: How can we use logic formulas for isomorphism tests?
+   Answer:
+   Fact
+    ▶ If G1 and G2 are non-isomorphic graphs, there is a logical    ϕ |= G1 and ϕ ̸|= G2
+        formula ϕ which is true for G1 but false for G2 .
+
+
+
+
+                                                                             ⇒
+    ▶ We can use ϕ to observe G1 and G2 are not isomorphic.
+                                                                          G1 ≇ G2
+
+
+
+
+                                                                                           21
+Weisfeiler-Leman in terms of logic
+
+
+
+   The k-dimensional Weisfeiler-Leman algorithm is an algorithm that
+    ▶ given graphs G1 and G2
+    ▶ checks simultaneously for certain formulas ϕ whether
+    ▶ ϕ distinguishes G1 and G2 .
+
+   Running time:
+    ▶ It runs in polynomial time O(nk log(n)).
+
+
+
+
+                                                                       22
+The counting logic
+   k-variable counting logic for graphs uses
+    ▶ k variables
+    ▶ counting quantifiers
+
+   Example: ∃≥1 x.   ∃≥3 y .   x ∼ y ∧ ∃≥5 x.   x ∼ y.
+   Read: there is a vertex with at least 3 neighbors of
+   degree at least 5.
+
+
+   Fact:
+   k-WL checks all invariants expressible in the logic using
+   only k + 1-variables simultaneously.
+
+
+   Conclusion:
+   k-WL is thus a complete check for invariants in a natural, large class
+
+                                                                            23
+Homomorphism counts
+
+
+
+  graph homomorphism: map between graphs preserving adjacency
+
+  hom(G , H):            the set of homomorphisms from G to H.
+
+
+  Theorem ([Lovász] (1967))
+  Two finite graphs G1 , G2 are isomorphic if and only if their homomorphism counts from all
+  finite graphs agree, i.e., | hom(H, G1 )| = | hom(H, G2 )| for all finite graphs H.
+
+
+
+
+                                                                                               24
+Similarity measures through homomorphism counts
+  Question: What happens if H comes from a restricted graph class?
+
+
+        count homs from                  equivalence measure
+
+            all graphs                        isomorphism                            [Lovász] (1967)
+               trees                 fractional isom./1-WL equiv.
+         tree width ≤ k                    k-WL equivalence                         [Dvořák] (2010)
+                                                                         [Dell,Grohe,Rattan] (2018)
+             cycles                         cospectrality
+         planar graphs                  quantum isomorphism           [Manǒinska,Roberson] (2020)
+           tree depth                    FO+C bounded qr                            [Grohe] (2020)
+   width/depth restr. tree dec.          res. requant./conj.                    [Schindling] (2025)
+
+
+  Many related recent results: [Seppelt] [Neuen] [Dawar,Jakl,Reggio] [Böker] [Atserias] . . .
+                                                                                                        25
+Outline                             1. WL Algorithm
+
+          2. Logics & Games
+
+
+             ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                      ⇒
+                   G1 ≇ G2
+
+
+
+
+                                                      26
+Outline                             1. WL Algorithm
+
+          2. Logics & Games                           3. Recent developments
+
+
+             ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                      ⇒
+                   G1 ≇ G2
+
+
+
+
+                                                                               26
+Research questions
+
+
+   General question:
+    ▶ How complicated does the logical formula have to be to distinguish graphs?
+
+   Specifications:
+    ▶ How many variables do we need?
+    ▶ How many iterations (requantifications) do we need? (quantifier depth)
+    ▶ Can we restrict requantification?
+    ▶ What are the computational complexities that arise?
+    ▶ What if we consider structures other than graphs?
+
+
+
+
+                                                                                   27
+The Weisfeiler-Leman Dimension
+
+
+
+  Definition
+  The Weisfeiler-Leman dimension of a graph G is the smallest k such that k-dimensional WL
+  “always works” for G .
+
+  Isomorphism for graphs of bounded WL-dimension can be checked in polynomial time.
+    ▶ Graphs with an excluded minor have bounded WL-dimension.             [Grohe] (2012)
+    ▶ For all orders n, there are graphs of WL-dimension Ω(n).   [Cai,Fürer,Immerman] (1992)
+  Side remark: O(log(n))-dimensional WL used in Babai’s quasipolynomial time algorithm.
+
+
+
+
+                                                                                                28
+Upper bounds on the WL dimension for graph classes
+
+
+
+     graph class          dimension bound        reference                       date
+     Kt -minor-free       f (t)                  [Grohe]                         (2012)
+     planar               3                      [Kiefer, Ponomarekno, S.]       (2017)
+     genus g              4g + 3                 [Kiefer, Grohe]                 (2019)
+     tree width k         k                      [Kiefer, Neuen]                 (2019)
+     rank width k         3k+4                   [Grohe, Neuen]                  (2019)
+     permutation graphs   18                     [Guo, Gavrilyuk, Ponomarenko]   (2023)
+     circulant graph      #prime-div(|G |) + 3   [Wu, Ponomarenko]               (2024)
+
+
+
+
+                                                                                          29
+Unbounded WL-dimension
+
+  Theorem ([Cai, Fürer, Immerman] (1992))
+  There are graphs of arbitrarily large Weisfeiler-Leman dimension.
+
+                                                                       v1                        v2                              v3
+
+
+
+
+                                                           w1                   w2              w3              w4              w5              w6
+
+
+
+
+                                                       a(w1 ) b(w1 )        a(w2 ) b(w2 )   a(w3 ) b(w3 )   a(w4 ) b(w4 )   a(w5 ) b(w5 )   a(w6 ) b(w6 )
+
+
+
+
+                 CFI Graphs                                                                  Multipedes
+
+
+                                                                                                                                                            30
+Bounds for WL iteration Number (i.e., quantifier depth)
+   dimension                 bound            reference    year
+
+               upper bound   n−1              (by def.)
+
+     1-dim
+                             n − o(n)           [VK]      (2014)
+               lower bound
+                             n−1                [KM]      (2020)
+
+                             O(n2 / log(n))     [KS]      (2016)
+               upper bound
+                             O(n log n)        [LPS]      (2019)
+     2-dim
+
+               lower bound   Ω(n)                [F]      (2001)
+
+               upper bound   O(nk−1 log n)     [GLN]      (2023)
+
+     k-dim
+                             Ω(n)                [F]      (2001)
+               lower bound
+                             Ω(nk/2 )          [GLNS]     (2023)
+                                                                   31
+Iterated neighborhood graphs
+   Definition
+   The neighborhood graph N(G ) of G
+    ▶ has the same vertex set as G and                                 ⇝
+    ▶ two vertices are adjacent if they have a
+      common neighbor if G .
+
+
+   Observations:
+     ▶ Bipartite graphs become disconnected.
+     ▶ Odd cycles become an isomorphic non-identical graph.
+   Iterated neighborhood graphs: N i (G ) = N(N i−1 (G ))   [Sonntag, Teichert] (KolKom09)
+   Theorem ([S.] (2013))
+   For every finite connected non-bipartite graph G that is not an odd cycle we have tight bounds
+
+                      ⌈log 2(Diam(G ))⌉ ≤ Stab(G ) ≤ ⌈log 2(Diam(G ))⌉ + 2.
+
+                                                                                                    32
+Generalized neighborhood graph
+
+   H a graph with two distinguished vertices.
+                                                          H
+   Definition
+  The generalized neighborhood graph NH (G )
+   ▶ has the same vertex set as G and
+    ▶ two vertices are adjacent if they are the
+      distinguished vertices in a copy of H in G .                   ⇝
+   Observation and Results: (see [ S.] (2013))
+
+    ▶ H=          recovers neighborhood graphs.
+
+    ▶ For H =            (diamond) the process is monotone but stabilization can take Ω(n2 ).
+
+    ▶ We can construct H to simulate the game of life (and get almost anything we like).
+
+                                                                                                33
+The lower bound construction
+  A figure explaining the Ω(n2 ) lower bound for H =   (diamond).
+
+
+
+
+                                                                    34
+The compressed CFI-construction
+
+
+
+
+    ▶ The lower bound for k-WL is obtained using a compressed CFI-construction.
+                                                                       [Grohe, Lichter, Neuen, S.]
+    ▶ used for supercritical, robust trade-offs (e.g., depth vs width) for proof systems
+                                                 [de Rezende, Fleming, Janett, Nordström, Pang]
+                                                                [Berkholz, Lichter, Vinall-Smeeth]
+
+
+
+                                                                                                     35
+Complexity
+
+
+  Theorem (Lichter, Raßmann, S. (paraphrased) (2025))
+  For determining the WL-dimension of a graph we have the following results:
+   ▶ It is NP-hard even on graphs of color class size 4.
+    ▶ For fixed k and color class size at most 5 it is solvable in polynomial time.
+    ▶ It is P-hard for fixed k.
+    ▶ For Abelian color classes and fixed k, we can solve the problem in polynomial time.
+
+
+  Open Problem:
+  Can we decide for each fixed k in polynomial time whether the WL-dimension is at most k?
+
+
+
+
+                                                                                             36
+Requantification
+
+   Question
+   What happens if we disallow certain variables to be nested within themselves (i.e.,
+   requantified)?
+
+   This question is related to individualization-refinement algorithms used in practice to
+   compute isomorphism and automorphism.
+
+
+   Theorem (Raßmann, Schindling, S. (paraphrased) (2025))
+    ▶ We know how the expressiveness changes if we restrict requantification.
+    ▶ We have a corresponding restricted logic and bijective pebble game.
+    ▶ There are no succinct normal forms for restricted requantification.
+    ▶ We know how the space consumptions changes when requantification is restricted.
+
+
+
+                                                                                             37
+WL for groups
+
+
+   ▶ There are several natural ways to define WL for groups, they all agree up to constants.
+   ▶ There are “very similar” groups distinguished by 3-WL.
+                                                                        [Brachter, S.] (2020)
+
+  Beyond that there are
+   ▶ other ways of incorporating WL into group isomorphism algorithms and
+   ▶ various complexity results
+                                                     [Brooksbank, Grochow, Li, Qiao, Wilson]
+
+  Open Problem: It is unknown whether the WL-dimension of groups is unbounded.
+
+
+
+
+                                                                                                38
+WL and isomorphism invariants of groups
+  Theorem
+   If groups are not distinguished by k-WL then k-WL does not distinguish their
+    ▶ centers (k ≥ 2),
+                                                  ▶ solvable radicals (k ≥ 2),
+    ▶ inner automorphism groups (k ≥ 4)
+                                                  ▶ Fitting groups (k ≥ 3), and
+    ▶ derived series (k ≥ 3),
+                                                   ▶ π-radicals (k ≥ 3)
+    ▶ Abelian radicals (k ≥ 3),
+  They also have isomorphic socles (k ≥ 5), stepwise isomorphic factors in the derived series
+  (k ≥ 4), upper central series (k ≥ 4), and lower central series (k ≥ 4).
+
+  Theorem
+   If two groups are not distinguished by k-WL then
+     ▶ they have the same composition factors (as a multiset, k ≥ 5) and
+    ▶ their indecomposable direct factors are not distinguished by (k − 1)-WL (k ≥ 5).
+
+                                                                           [Brachter, S.] (2022)
+
+                                                                                                   39
+Outline                             1. WL Algorithm
+
+          2. Logics & Games                           3. Recent developments
+
+
+             ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                      ⇒
+                   G1 ≇ G2
+
+
+
+
+                                                                               40
+Outline                                                                                                                                         1. WL Algorithm
+
+          2. Logics & Games                                                                                                                                                     3. Recent developments
+
+
+             ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                      ⇒
+                   G1 ≇ G2
+
+
+
+
+                                4. Dimension bound
+
+                                                                                                                    L           L
+                                                        L                                   S
+                                            L                   L               S                           L                               S
+                                                                                        L                                                               S
+                                                                                                                                                                    S
+                                        L                           L                               L
+
+                                            L                   L                                                                                           S
+                                                                                                                                                S                           S
+                                                        L
+                                                                                                                                    S                           S
+                                                                                                S
+                                                                            S                                   S                                                       S
+                                                        S                                                                                                   S
+                                                                                                            S                           S
+                                                                                                                        S
+                                                    S                                   S
+                                                                                                                                                                    S
+                                                                                                        S
+                                                                                                                                            L
+                                            L                                                                                   S                   L
+                                                        L                   L                                                           L
+                                    L                                                               S                       S                   L
+                                                            L                       L                                                       L
+                                                S
+                                                                        L
+
+
+
+
+                                                                                                                                                                                                         40
+Bounds for the dimension
+
+
+  Theorem (Schneider, S. (2025))
+   The maximum Weisfeiler-Leman dimension among all graphs on n nodes is
+              3
+    ▶ at most 20 n + o(n),
+    ▶ at least 0.0105n.
+
+
+   Related work
+    ▶ ≤ n+32                                            [Pikhurko, Veith, Verbitsky] (2006)
+    ▶ ≤ n3                                                                   [Lutz] (2020)
+    ▶ ≤ n4 + o(n) and ≥ 96
+                        1
+                           n − o(n).                 independently [Kiefer & Neuen] (2024)
+
+
+
+
+                                                                                              41
+Proof outline:
+
+   In a nutshell:
+    1. reduction to coherent configurations (i.e., objects stable under 2WL)
+    2. bounds for configurations with small fibers (size at most 7)
+    3. classification of small interspaces
+    4. new concept of restorability
+    5. local reductions
+    6. a global structure analysis
+
+   Theorem (Schneider, S. (2025))
+   The maximum Weisfeiler-Leman dimension among all graphs on n nodes and color class size at
+                     1
+   most 7 is at most 20 n + o(n).
+
+
+
+
+                                                                                                42
+Local Reductions
+   Goal: avoid certain substructures
+
+  Approach:
+   ▶ individualize x vertices and apply 2-WL
+    ▶ charge cost of individualization to “progress” measured as
+      splits of vertex color classes                                          fixed    WL2
+
+   Potential function: τ (G ) := 3nL −8k
+                                      20
+                                         L +nS
+                                               where
+    ▶ nL number of vertices in large color classes
+    ▶ kL number of large color classes
+    ▶ nS number of vertices in small color classes
+
+   Local reductions blueprint:
+   If G has [certain substructure], then dimWL G ≤ x + f˜(τ (G ) − x̂) where x̂ ≥ x.
+
+                                                                                             43
+Local Reductions: Example
+
+                            For arbitrary s ∈ S, progress in Gs
+
+                               τ (Gs ) − τ (G )
+                                   3∆nL − 8∆kL + ∆nS
+                                ≤
+                                             20
+             s                     (3 · −24) − (8 · −3) + (24 − 4)
+                                ≤
+                                                 20
+                                ≤ −1.4
+
+                    S
+                                  dimWL G ≤ 1 + e
+                                                f (τ (G ) − 1.4).
+
+
+
+
+                                                                     44
+Restorability
+
+                                  V′
+
+
+
+
+                                                            V
+
+
+
+   We call a color class C restorable if every automorphism of G [N(C )] that extends to an
+   automorphism of G [V − C ] also extends to an automorphism of G [C ∪ N(C )].
+   Insight: Removing a restorable class does not change the WL-dimension.
+                                                                                              45
+Global Argument
+                                                                                        L           L
+                            L                                   S
+                L                   L               S                           L                               S
+                                                            L                                                               S
+                                                                                                                                        S
+            L                           L                               L
+
+                L                   L                                                                                           S
+                                                                                                                    S                           S
+                            L
+                                                                                                        S                           S
+                                                                    S
+                                                S                                   S                                                       S
+                            S                                                                                                   S
+                                                                                S                           S
+                                                                                            S
+                        S                                   S
+                                                                                                                                        S
+                                                                            S
+                                                                                                                L
+                L                                                                                   S                   L
+                            L                   L                                                           L
+        L                                                               S                       S                   L
+                                L                       L                                                       L
+                    S
+                                            L
+
+
+                                                                                                                                                    46
+Small Color Classes
+                    large   if     |R| ≥ 8,
+   Color class R is small   if 7 ≥ |R| ≥ 4, and
+                    tiny    if 3 ≥ |R|.
+
+   Enumeration of all homogeneous coherent configurations of order at most 34 (up to
+   isomorphism)                                       [Miyamoto, Hanaki] (00), [Hanaki] (03)
+
+
+
+
+                                                                                               47
+Interspace between small fibers
+
+
+
+    |R|   |B|   T (X[R, B])
+     4    4     (C8 , C8 ), (2K2,2 , 2K2,2 )
+     4    6     (Sp4,6 , Sp4,6 ), (2K2,3 , 2K2,3 )
+     6    6     (C12 , C12 , 3K2,2 ), (2K3,3 , 2K3,3 ), (3K2,2 , 3K2,2 , 3K2,2 ), (3K2,2 , R × B − 3K2,2 )
+     7    7     (L(FP) , R × B − L(FP))
+
+
+
+
+                                                                                                             48
+Outline                                                                                                                                         1. WL Algorithm
+
+          2. Logics & Games                                                                                                                                                     3. Recent developments
+
+
+             ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                      ⇒
+                   G1 ≇ G2
+
+
+
+
+                                4. Dimension bound
+
+                                                                                                                    L           L
+                                                        L                                   S
+                                            L                   L               S                           L                               S
+                                                                                        L                                                               S
+                                                                                                                                                                    S
+                                        L                           L                               L
+
+                                            L                   L                                                                                           S
+                                                                                                                                                S                           S
+                                                        L
+                                                                                                                                    S                           S
+                                                                                                S
+                                                                            S                                   S                                                       S
+                                                        S                                                                                                   S
+                                                                                                            S                           S
+                                                                                                                        S
+                                                    S                                   S
+                                                                                                                                                                    S
+                                                                                                        S
+                                                                                                                                            L
+                                            L                                                                                   S                   L
+                                                        L                   L                                                           L
+                                    L                                                               S                       S                   L
+                                                            L                       L                                                       L
+                                                S
+                                                                        L
+
+
+
+
+                                                                                                                                                                                                         49
+Outline                                                                                                                                         1. WL Algorithm
+
+          2. Logics & Games                                                                                                                                                                           3. Recent developments
+
+
+             ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                      ⇒
+                   G1 ≇ G2
+
+
+
+
+                                4. Dimension bound                                                                                                                              5. Deep WL
+
+                                                        L
+                                                                                S
+                                                                                            S
+                                                                                                            L
+                                                                                                                    L           L
+                                                                                                                                            S
+                                                                                                                                                                                           1↔2
+                                            L                   L
+                                                                                        L                                                               S
+                                                                                                                                                                    S
+                                        L                           L                               L
+
+                                            L                   L                                                                                           S
+                                                                                                                                                S                           S
+                                                        L
+
+                                                                            S
+                                                                                                S
+                                                                                                                S
+                                                                                                                                    S                           S
+                                                                                                                                                                        S       2 3         1    1            2
+                                                        S                                                                                                   S                                             3
+                                                                                                            S                           S
+                                                                                                                        S
+                                                    S                                   S
+                                                                                                                                                                    S
+                                                                                                        S
+                                                                                                                                            L
+                                            L                                                                                   S                   L
+                                                        L                   L                                                           L                                       v1    v2   v3        v4       v5
+                                    L                                                               S                       S                   L
+                                                            L                       L                                                       L
+                                                S
+                                                                        L
+
+
+
+
+                                                                                                                                                                                                                               49
+Locally difficult graphs
+
+
+
+
+                                                          Kn (clique)
+
+
+
+                      CFI-Graph
+                                            ∪˙
+
+               order log(log(n))   (tiny)               order n   (huge)
+
+
+   Idea: We should run k-WL for high k only on the small CFI-Graph.
+                                                                           50
+Globally difficult graphs
+
+   Consider CFI-Graph in which every vertex is blown up:
+
+
+
+
+                                             Kn (clique)
+
+
+
+   Idea: Treat the clique vertices like one object
+
+
+
+                                                           51
+k-dim WL (alternative View)
+  Alternative view for k-WL: We extend the structure by points representing k-tuples.
+
+                     (v5 , v1 , v2 )                1↔2                      (v3 , v5 , v3 )
+                    χ0 (v5 , v1 , v2 )                                      χ0 (v3 , v5 , v3 )
+
+                                         2 3         1    1            2
+                                                                   3
+
+
+                                         v1    v2   v3        v4       v5
+
+
+
+  Facts:
+  (k − 1)-WL ⪯ (1-WL on k-tuple extended structure) ⪯ k-WL                                (see [Otto] (1997))
+  We can omit vertical connections and vertex colors by always using 2-dim WL.
+
+                                                                                                                52
+Essential operations
+
+                                                                                                      1
+     2-tuples sufficient to simulate k-tuples:                    1 2 3                                    2
+     (v1 , v2 , v3 ) ⇝ (v1 , (v2 , v3 ))
+                                                                                                 1 2
+                                                            v1     v2        v3             v1        v2       v3
+
+
+
+
+                                                                                  1 1 1 1
+     To handle blow ups, we can contract
+     several vertices to one.                                           v1        v2   v3        v4
+
+
+
+   We need to make sure everything is isomorphism invariant.
+    ▶ 2-tuples are inserted for entire color classes at a time.
+    ▶ Contractions are only applied to strongly connected components (of constituent graphs).
+
+
+                                                                                                                    53
+Deep Weisfeiler Leman
+                                                                                     DFA
+                                                  work tape
+
+   ▶ addPair(X ): add vertices for    ... □   1      0        0     1      0     □    □    ...
+     all pairs (u, v ) of color X .
+   ▶ contract(X ): add a vertex
+     for each strongly connected          addPair(E )             interaction tape    ({R}, {Cg , Cr , Cb , Co }, Cg ⊆ R, q)}
+     component of X .
+                                                                                               q(Cg , Cg , Cg ) = 0
+   ▶ create(π): create new                                                                     q(Cg , Cg , Cr ) = 1
+                                                                                               q(Cg , Cg , Cb ) = 0
+     relation that is union of all                                                             q(Cb , Cb , Co ) = 0
+     colors in π.                                                                                      ..
+   ▶ forget(X ): delete                                                                                 .
+                                                                                                  algebraic sketch
+     relation X .
+
+
+
+
+                                                                                                                                54
+Deep-WL and canonization
+
+
+
+  Theorem ([Grohe, S., Wiebking] (2020))
+  Let G be a graph class with polynomial-time Deep-WL-algorithm isomorphism algorithm. Then
+  there is a polynomial-time Deep-WL-algorithm that computes a complete invariant for G.
+
+  Corollary
+  Let G be a class of colored graphs closed under recoloring and with polynomial time Deep-WL
+  isomorphism test. Then there is a polynomial time canonization algorithm for G.
+
+
+
+
+                                                                                                55
+The power of Deep-WL
+
+
+  Theorem ([Grohe, S., Wiebking] (2020))
+  A property of graphs is decidable by a polynomial time Deep-WL-algorithm if and only if it is
+  expressible in Choiceless Polynomial Time.
+
+
+  Fact: Isomorphism of CFI-graphs is expressible in Choiceless Polynomial Time.
+                                                            [Dawar, Richerby, Rossman] (2008)
+
+
+  Corollary
+  There is a polynomial time Deep-WL-algorithm that decides isomorphism of the CFI graphs.
+
+
+
+
+                                                                                                  56
+Abelian and Dihedral color classes
+   Theorem ([Abu Zaid, Grädel, Grohe, Pakusa] (2014))
+   Deep-WL decides isomorphism for structures with abelian color classes of bounded size.
+
+
+
+
+   Theorem ([Lichter, S.] (2021))
+   Deep-WL decides isomorphism for graphs with dihedral color classes of bounded size.
+
+
+
+
+                                                                                            57
+CFI with DeepWL (an intuition)
+                                 super symmetric
+
+
+
+
+                                                   58
+Capturing by canonization
+                                 known for:
+                           tw, genus, Kt -minor-free [Grohe]            [Immerman-Vardi] (1982)
+                           rw [Grohe, Neuen]
+                                       ..
+                                        .
+
+                                                            definable                             ?
+                                                         canonization
+                                                     (totally ordered copy)
+
+
+   For CPT [GSW]
+                                                                        For extension of CPT automatic
+
+
+
+
+            complete invariant                           canonization
+
+
+
+                                 [Gurevich] (1997)
+
+
+
+                                                                                                         59
+Isomorphism to P-time logic
+
+
+
+   Theorem (Lichter, S. (2022))
+   Let C be a class of structures (closed under individualization).
+
+   If isomorphism in C is definable in CPT+WSC then CPT+WSC captures P-time on C.
+
+
+
+
+   (We also have some CFI-query decidable in CPT+WSC not known to be decidable in CPT).
+
+
+
+
+                                                                                          60
+Summary                                                                                                                                      1. WL Algorithm
+
+      2. Logics & Games                                                                                                                                                                            3. Recent developments
+
+
+          ϕ |= G1 and ϕ ̸|= G2
+
+
+
+
+                   ⇒
+                G1 ≇ G2
+
+
+
+
+                             4. Dimension bound                                                                                                                              5. Deep WL
+
+                                                     L
+                                                                             S
+                                                                                         S
+                                                                                                         L
+                                                                                                                 L           L
+                                                                                                                                         S
+                                                                                                                                                                                        1↔2
+                                         L                   L
+                                                                                     L                                                               S
+                                                                                                                                                                 S
+                                     L                           L                               L
+
+                                         L                   L                                                                                           S
+                                                                                                                                             S                           S
+                                                     L
+
+                                                                         S
+                                                                                             S
+                                                                                                             S
+                                                                                                                                 S                           S
+                                                                                                                                                                     S       2 3         1    1            2
+                                                     S                                                                                                   S                                             3
+                                                                                                         S                           S
+                                                                                                                     S
+                                                 S                                   S
+                                                                                                                                                                 S
+                                                                                                     S
+                                                                                                                                         L
+                                         L                                                                                   S                   L
+                                                     L                   L                                                           L                                       v1    v2   v3        v4       v5
+                                 L                                                               S                       S                   L
+                                                         L                       L                                                       L
+                                             S
+                                                                     L
+
+
+
+
+                                                                                                                                                                                                                            61
+Cumulative prize money
+  Prize for a proof that GI ∈ P or that GI ∈
+                                           / P!
+
+
+
+
+                   805Euro
+
+
+                                                  62
+Cumulative prize money
+  Prize for a proof that GI ∈ P or that GI ∈
+                                           / P!
+
+
+
+
+                                                  1e
+                                                       2e
+                                                  2e
+                   805Euro + 5
+
+
+                                                            62
+Cumulative prize money
+  Prize for a proof that GI ∈ P or that GI ∈
+                                           / P!
+
+
+
+
+                                                  1e
+                                                       2e
+                                                  2e
+                   805Euro + 5
+
+
+                                                            62
+Cumulative prize money
+  Prize for a proof that GI ∈ P or that GI ∈
+                                           / P!
+
+
+
+
+                   810Euro
+
+
+                                                  62
+Cumulative prize money
+  Prize for a proof that GI ∈ P or that GI ∈
+                                           / P!
+
+
+
+
+                   810Euro
+
+
+                                                  62
+                                                                                                                                                                                                                                         63
+             Questions?
+
+
+
+                                                           L
+                                               L
+                                                                           L S
+                                           L                                                                         S                           L
+                                                                                                                                     L                    L
+                                                                                    L                            L
+                                                   L
+                                                                                                                                 L                                             S
+                                                                                L
+                                                               L
+                                                                                                                                                                                                            S
+                                                                                            S                                                                                                                           S
+                                                                       S                                                         S
+                                                                                                                                                  S                       S                        S S
+                                                                   S
+                                                                                                                                                                                                                                    S
+                                                                                                                                             S                                                                          S
+                                                                                                                             S
+                                                                                                                                                          S                                                                     S
+                                                           L                                                                                                                       S                                S
+                                                                                                                                             S
+                                                                            L
+                                                       L
+                                                                                                        L
+                                                                                                                                                                          S                L                                S
+                                                                       S L
+                                                                                                                     L                       S
+                                                                                                    L                                                                 S                L                        L
+                                                                                                                                                                                                            L
+                                                                                                                                                                                                   L
+                          2       3
+                              1       1x
+                                                   2               3
+                                                               1           1x
+                                                                                        2           3
+                                                                                                1           1x
+                                                                                                                         2               3
+                                                                                                                                     1       1x
+                                                                                                                                                      2           3
+                                                                                                                                                              1           2x
+                                                                                                                                                                               2               3
+                                                                                                                                                                                           1           3x
+                                                                                                                                                                                                                ;
+                                                                                                                                                                                                                    2       3
+                                                                                                                                                                                                                                    1x
+                                                                                                                                                                                                                                1
+Questions?
+

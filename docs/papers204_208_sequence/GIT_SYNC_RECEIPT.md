@@ -3,7 +3,37 @@
 This is a work-in-progress backup, not five-paper completion or admission.
 All research remains `HOLD_EXTERNAL`.
 
-## Latest: P208 accepted B / Round2 / terminal builds and views
+## Latest: P208 internally complete / P209 narrow admission
+
+On 2026-09-07 UTC, the scoped 2,280-file checkpoint was actually committed
+and pushed as `2ebe9f4e712007ddf57260800c9ebda94f5d2a9d`. It includes
+P208's completed artifact/lifecycle gates and root acceptance, preserving
+both accepted reviews, all freezes, terminal builds/views and initial audit
+payloads. It also includes the sealed FTH candidate gate, root's actual
+strict pair and P209 admission, the exact archived old central contract,
+and root-closed twenty-first/twenty-second evidence. No active P209 paper
+files or twenty-third scout were copied; the twenty-fourth assignment
+occurred after the checkpoint copy. These are explicit exclusions.
+
+The mirror was clean at b8bf6c52. Fetch found four remote commits through
+`682a3c99a7aa15cbc7286a4e87fd90fb6320194a`, all 299 changed paths under
+`henon_dynamics/`, with zero overlap. A normal fast-forward preserved them.
+Every staged path matched workspace bytes, there were no deletions or
+out-of-scope paths, and 180 links in seven current documents passed.
+
+The actual object check passed **17 manifests / 11,022 referents** on
+tree `1a51d3be4dd0d0ab6746183b77f5f61c965c957f`. Postcommit inspection
+returned that identical tree, not a second purported audit. Commit and
+push exited zero; actual ls-remote returned the exact 2ebe9f4e ref,
+ahead/behind was 0/0 and mirror status was empty. See the
+[actual object and push record](qa/GIT_OBJECT_P208_COMPLETE_2EBE9F4E.json).
+
+The batch has three internally complete papers, P209 admitted and writing,
+and one empty seat. This private backup is not five-paper completion or
+public release. This later receipt/object result and updated indexes are
+outside their own named commit. HOLD_EXTERNAL remains.
+
+## Previous: P208 accepted B / Round2 / terminal builds and views
 
 On 2026-09-06 UTC, the scoped 4,475-file checkpoint was actually committed
 and pushed as `b8bf6c52f0a1a7c2075e86fd3bd950222acf5be1`.

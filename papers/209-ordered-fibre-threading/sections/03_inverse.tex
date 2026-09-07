@@ -1,0 +1,81 @@
+\section{Every inverse fibre and its unique maximum}\label{sec:inverse}
+
+This inverse argument does not use the recurrent classification. Given
+$g\in\X_n$, put $E_+(g)=\{i\in[n]:i<g(i)\}$. For
+$S\subseteq E_+(g)$ select precisely the arrows $i\to g(i)$ with
+$i\in S$. Call $S$ \emph{admissible} when
+\begin{equation}\label{eq:admissible}
+ \begin{split}
+ &(g(i))_{i\in S}\text{ are pairwise distinct},\\
+ &(g(j))_{j\notin S}\text{ are pairwise distinct}.
+ \end{split}
+\end{equation}
+The first condition gives selected indegree at most one. Since every
+selected arrow strictly increases its label, the selected graph consists
+of disjoint increasing paths and singleton vertices. Its endpoints are
+exactly the vertices outside $S$. Let $e_S(i)$ be the endpoint of the
+path containing $i$.
+
+\begin{theorem}[All-target decoder]\label{thm:inverse}
+For every target $g\in\X_n$, the assignment $S\mapsto f_S$ defined by
+\begin{equation}\label{eq:decoder}
+ f_S(i)=g(e_S(i))
+\end{equation}
+is a bijection from admissible subsets $S\subseteq E_+(g)$ to $T^{-1}(g)$.
+Consequently
+\begin{equation}\label{eq:fibre}
+ |T^{-1}(g)|=\#\{S\subseteq E_+(g):S\text{ satisfies }\eqref{eq:admissible}\},
+\end{equation}
+including zero fibres and the unique empty target.
+\end{theorem}
+
+\begin{proof}
+Suppose $T(f)=g$ and select every nonmaximal member of every old fibre.
+The selected arrows are the consecutive increasing links of these fibres,
+so their heads are distinct. Each path endpoint is a fibre maximum, where
+$g$ retains the old fibre value. Distinct old fibres have distinct values,
+proving the second condition in \eqref{eq:admissible}. Every coordinate
+of a fibre has its endpoint's value in $f$, yielding \eqref{eq:decoder}.
+
+Conversely take an admissible $S$. The selected paths are disjoint and
+increasing. Assigning to each path its endpoint's $g$-value gives $f_S$.
+By the second condition of \eqref{eq:admissible}, its fibres are exactly
+the path vertex sets, with no unintended merger. Threading them restores
+the selected arrows and retains $g$ at each endpoint, so $T(f_S)=g$.
+Recovering all nonmaximal members of these fibres recovers $S$, proving
+injectivity as well as surjectivity. For the empty target the empty
+selection reconstructs the empty function.
+\end{proof}
+
+The selection is not the set of coordinates that change numerically.
+For example $T(1,1)=(1,1)$, but its predecessor code selects coordinate
+$0$. Nor are these increasing inverse-code paths the arbitrary-labelled
+feeding paths of Theorem~\ref{thm:recurrent}.
+
+\begin{theorem}[Unique extremizer]\label{thm:maximum}
+For $n\ge1$, the maximum one-step fibre has size $2^{n-1}$, attained
+only at
+\begin{equation}\label{eq:successor}
+ g_*(i)=i+1\quad(0\le i<n-1),\qquad g_*(n-1)=0.
+\end{equation}
+At $n=0$ the unique target has fibre one.
+\end{theorem}
+
+\begin{proof}
+For $n\ge1$, the largest label is not eligible. Theorem~\ref{thm:inverse}
+therefore gives
+\begin{equation}\label{eq:boolean-bound}
+ |T^{-1}(g)|\le2^{|E_+(g)|}\le2^{n-1}.
+\end{equation}
+For $g_*$ the eligible arrows form $0\to1\to\cdots\to n-1$.
+Every subset has distinct heads, and every set of endpoints has distinct
+values because $g_*$ is a permutation. Thus all $2^{n-1}$ subsets work.
+
+If equality holds in \eqref{eq:boolean-bound}, then all $n-1$ lower
+labels are eligible and every subset is admissible. Taking $S=\varnothing$
+shows that $g$ is a permutation. Since $g(i)>i$ for every $i<n-1$,
+downward elimination forces $g(n-2)=n-1$, then $g(n-3)=n-2$, and
+eventually $g(0)=1$. The remaining value is $g(n-1)=0$. At $n=1$ the
+only permutation is already $(0)$ and its fibre is one. The empty case
+follows directly from the definition.
+\end{proof}

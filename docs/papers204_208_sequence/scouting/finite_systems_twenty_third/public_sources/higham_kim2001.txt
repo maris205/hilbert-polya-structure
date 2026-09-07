@@ -1,0 +1,828 @@
+ Solving a quadratic matrix equation by Newton’s
+         method with exact line searches
+
+          Higham, Nicholas J and Kim, Hyun-Min
+
+                                   2001
+
+
+
+
+                    MIMS EPrint: 2006.143
+
+
+
+
+      Manchester Institute for Mathematical Sciences
+                     School of Mathematics
+
+
+                  The University of Manchester
+
+
+
+Reports available from:   http://eprints.maths.manchester.ac.uk/
+    And by contacting:    The MIMS Secretary
+                          School of Mathematics
+                          The University of Manchester
+                          Manchester, M13 9PL, UK
+
+
+
+                                                             ISSN 1749-9097
+SIAM J. MATRIX ANAL. APPL.                         c 2001 Society for Industrial and Applied Mathematics
+                                                   
+Vol. 23, No. 2, pp. 303–316
+
+
+
+
+          SOLVING A QUADRATIC MATRIX EQUATION BY
+         NEWTON’S METHOD WITH EXACT LINE SEARCHES∗
+                        NICHOLAS J. HIGHAM† AND HYUN-MIN KIM†
+    Abstract. We show how to incorporate exact line searches into Newton’s method for solving
+the quadratic matrix equation AX 2 + BX + C = 0, where A, B and C are square matrices. The
+line searches are relatively inexpensive and improve the global convergence properties of Newton’s
+method in theory and in practice. We also derive a condition number for the problem and show how
+to compute the backward error of an approximate solution.
+
+    Key words. quadratic matrix equation, solvent, Newton’s method, generalized Sylvester equa-
+tion, exact line searches, quadratic eigenvalue problem, condition number, backward error
+
+   AMS subject classiﬁcations. 65F30, 65H10
+
+   PII. S0895479899350976
+
+
+    1. Introduction. Nonlinear matrix equations occur in a variety of applications.
+An important class of examples, arising in control theory, is algebraic Riccati equa-
+tions, such as XBX + XA + A∗ X + C = 0, where A, B, and C are given coeﬃcient
+matrices. Theory of Riccati equations and numerical methods for their solution are
+well developed [1], [4], [31]. Our interest here is in the quadratic matrix equation
+
+(1.1)               Q(X) = AX 2 + BX + C = 0,                 A, B, C ∈ Cn×n .
+
+Although some Riccati equations are quadratic matrix equations, and vice versa,
+the two classes of equations require diﬀerent techniques for analysis and solution in
+general.
+    Motivation for studying the quadratic matrix equation comes from the quadratic
+eigenvalue problem
+
+(1.2)             Q(λ)x = λ2 Ax + λBx + Cx = 0,                A, B, C ∈ Cn×n ,
+
+which arises in the analysis of structural systems and vibration problems [30], [36],
+[37]. The standard approach is to reduce (1.2) to a generalized eigenproblem (GEP)
+Gx = λHx of twice the dimension, 2n. However, as is well known [7], [10], [30], if we
+can ﬁnd a solution X of the associated quadratic matrix equation (1.1) then we can
+write
+
+(1.3)                   λ2 A + λB + C = −(B + AX + λA)(X − λI)
+
+and so the eigenvalues of (1.2) are those of X together with those of the GEP (B +
+AX)x = −λAx, both of which are n × n problems. Bridges and Morris [5] employ
+this approach in the solution of diﬀerential eigenproblems.
+     A solution X of (1.1) is called a solvent [10]. More precisely, X is called a right
+solvent to distinguish it from a left solvent, which is a solution of X 2 A + XB + C = 0.
+   ∗ Received by the editors February 2, 1999; accepted for publication (in revised form) by A. Bunse-
+
+Gerstner June 9, 2000; published electronically August 8, 2001.
+     http://www.siam.org/journals/simax/23-2/35097.html
+   † Department of Mathematics, University of Manchester, Manchester, M13 9PL, England
+
+(higham@ma.man.ac.uk, http://www.ma.man.ac.uk/˜higham/, kim@ma.man.ac.uk, http://www.
+ma.man.ac.uk/˜kim/). The work of the ﬁrst author was supported by Engineering and Physical
+Sciences Research Council grant GR/L76532.
+                                                 303
+304                   NICHOLAS J. HIGHAM AND HYUN-MIN KIM
+
+
+Transposing the latter equation yields one of the form (1.1), so we concentrate on
+(1.1) here.
+     A dominant (minimal) solvent X is one for which every eigenvalue is greater (less
+than) in modulus than all the eigenvalues of the quotient B + AX + λA in (1.3). In
+earlier work, Dennis, Traub, and Weber gave two linearly convergent algorithms for
+computing a dominant solvent of an arbitrary degree matrix polynomial [11]. One
+of these is a generalization of Bernoulli’s method for scalar polynomials and is also
+described by Gohberg, Lancaster, and Rodman [20, sec. 4.2]. These algorithms have
+the drawbacks that it is diﬃcult to check in advance whether a dominant solvent exists
+and the convergence can be extremely slow (see [27] for more details). Davis [7], [8]
+applied Newton’s method to the quadratic matrix equation, giving supporting theory
+and implementation details. Kratz and Stickel [29] investigated Newton’s method for
+the general matrix polynomial.
+     This work has two main contributions. First, following an idea of Benner and
+Byers [2] (and, much earlier, of Man [33]) in the context of the algebraic Riccati equa-
+tion, we incorporate exact line searches into Newton’s method for the quadratic matrix
+equation in order to improve the global convergence properties. We show experimen-
+tally that exact line searches improve the reliability of Newton’s method, leading to
+more frequent convergence and, often, faster convergence. Our second contribution is
+to derive the true condition number for the quadratic matrix equation, thus obtaining
+a sharper perturbation bound than Davis [7], and to obtain the backward error of an
+approximate solution.
+     Solving even the scalar quadratic equation reliably in ﬂoating point arithmetic is
+a diﬃcult problem, as pointed out by Forsythe [15], principally due to the diﬃculty of
+handling underﬂow and overﬂow. We do not consider here the eﬀects of underﬂow and
+overﬂow, but rather concentrate on the diﬃculties present with exact computation.
+    2. Theory. Before considering numerical solution of the quadratic matrix equa-
+tion we examine the existence and enumeration of solvents. The fundamental theorem
+of algebra does not hold for matrix polynomials, as is shown by the special case of
+the matrix square root problem X 2 = A, which does not always have a solution when
+A is singular [28, sec. 6.4].
+    The quadratic matrix equation can be solved explicitly when A = I, B commutes
+with C, and B 2 − 4C has a square root. We can complete the square in the usual way
+to obtain the solution
+                             X = − 12 B + 12 (B 2 − 4C)1/2 ,
+
+where A1/2 denotes any square root that is a polynomial in A. This case pertains,
+for example, when A and B are scalar multiples of the identity and B 2 − 4AC is
+nonsingular, after scaling though by A−1 . However, no generalization of the formula
+for the solution of a scalar quadratic is available for general A, B, and C.
+     Various suﬃcient conditions for the existence of a solvent are given by Eisen-
+feld [12] and Lancaster and Rokne [32]. In the former paper the results are obtained
+using the contraction mapping principle and in the latter paper using the Newton–
+Kantorovich theorem. Roughly speaking, all these results require that B or B −1 be
+small in norm compared with A and C, so they are of limited practical applicability.
+     The existence of dominant and minimal solvents is guaranteed for problems com-
+ing from overdamped quadratic eigenvalue problems (1.2): those for which A, B, and
+C are all symmetric positive deﬁnite and (xT Bx)2 > 4(xTAx)(xT Cx) for all nonzero
+x; see Lancaster [30, sec. 7.6].
+                     SOLVING A QUADRATIC MATRIX EQUATION                           305
+
+     General information about existence of solvents comes from the connection be-
+tween the quadratic matrix equation and the quadratic eigenvalue problem (1.2).
+Note, ﬁrst, that if A is nonsingular then det(Q(λ)) = det(A) det(λ2 I + A−1 Bλ +
+A−1 C), so det(Q(λ)) has degree exactly 2n and hence Q(λ) has 2n eigenvalues, all of
+which are ﬁnite. If A is singular then det(Q(λ)) has degree less than 2n and hence
+Q(λ) has either less than 2n ﬁnite eigenvalues or inﬁnitely many if det(Q(λ)) ≡ 0.
+     The next result gives information on the number of solvents of Q(X); it general-
+izes [10, Cor. 4.1].
+     Theorem 2.1. Suppose Q(λ) has p distinct eigenvalues {λi }pi=1 , with n ≤ p ≤ 2n,
+and that the corresponding set of p eigenvectors {vi }pi=1 satisﬁes the Haar condition
+(that
+ p  is, every subset of n of them is linearly independent). Then there are at least
+ n diﬀerent solvents of Q(X), and exactly this many if p = 2n, which are given by
+
+(2.1)             X = W diag(µi )W −1 ,         W = [ w1 ,    ...   , wn ] ,
+
+where the eigenpairs (µi , wi )ni=1 are chosen from among the eigenpairs (λi , vi )pi=1
+of Q.                         
+    Proof. There are clearly np choices of X in (2.1). Since µ2i Awi +µi Bwi +Cwi = 0,
+we have AW diag(µi )2 + BW   diag(µi ) + CW = 0 and thence, on postmultiplying by
+W −1 , Q(X) = 0. That the np solvents are diﬀerent follows from the fact that no two
+have the same eigenvalues. Now suppose that p = 2n. From (1.3), every eigenpair of
+X is also an eigenpair of Q, and it follows that X is diagonalizable and of the form
+(2.1).
+    When p = n in Theorem 2.1 the distinctness of the eigenvalues is not needed in
+the proof, and we obtain a suﬃcient condition for the existence of a solvent.
+    Corollary 2.2. If Q(λ) has n linearly independent eigenvectors v1 , . . . , vn then
+Q(X) has a solvent.
+    An example helps to clarify the theory. Consider the quadratic [10]
+                                                              
+                                  2     −1 −6            0 12
+                     Q(X) = X +                  X+                .
+                                         2 −9           −2 14
+
+Q(λ) has four distinct eigenvalues, with eigenpairs (λi , vi ) given by
+
+                              i     1      2       3     4
+                              λi   1    2     3   4
+                                     1     0       1     1
+                              vi     0     1       1     1
+
+To apply Theorem 2.1 we can take p no bigger than 3, in view of the Haar condition. If
+we take eigenvalues 1, 2, 3, then the theorem gives three solvents, having eigenvalues
+1 and 2, 1 and 3, and 2 and 3. But the eigenvectors corresponding to eigenvalues
+1, 2, 4 also satisfy the Haar condition and this gives us another two solvents, having
+eigenvalues 1 and 4, and 2 and 4. Note that there is no dominant solvent, which
+would have to have eigenvalues 3 and 4. The complete set of solvents is
+                                                                
+              1 0           1 2          3 0           1 3           4 0
+                     ,            ,            ,              ,            .
+              0 2           0 3          1 2           0 4           2 2
+We were able to ﬁnd all these solvents using the solve command of Matlab’s Sym-
+bolic Math Toolbox [34], but symbolic solution is clearly impractical for large n.
+    For a characterization of solvents via the generalized Schur decomposition of an
+associated matrix pencil, see [27].
+306                  NICHOLAS J. HIGHAM AND HYUN-MIN KIM
+
+
+    3. Newton’s method. Newton’s method for solving the quadratic matrix equa-
+tion (1.1) is readily obtained from the expansion
+                                                     
+                  Q(X + E) = Q(X) + AEX + (AX + B)E + AE 2
+(3.1)                      = Q(X) + DX (E) + AE 2 ,
+
+where DX (E) : Cn×n → Cn×n is the Fréchet derivative of Q at X in the direction E.
+Newton’s method drops the second order term, deﬁnes E as the solution of Q(X) +
+DX (E) = 0, and replaces X by X +E. Each step of Newton’s method involves ﬁnding
+the solution E of
+
+(3.2)                     AEX + (AX + B)E = −Q(X),
+
+which is a special case of the generalized Sylvester equation “AXB + CXD = E.”
+    We would like to know when the Fréchet derivative DX is nonsingular, both at
+a solvent and at an iterate X, so that (3.2) has a solution. From a result of Chu [6]
+on the generalized Sylvester equation it follows that DX is nonsingular if and only if
+the pair (−A, AX + B) is regular (that is, det(−A − λ(AX + B)) is not identically
+zero in λ) and the eigenvalues of the pair are distinct from the eigenvalues of X. If
+A is nonsingular, the regularity condition holds. When X is a solvent, we see from
+(1.3) that the second condition is equivalent to the eigenvalues of X being distinct
+from the remaining n eigenvalues of Q(λ). We can therefore identify some suﬃcient
+conditions for nonsingularity of DX at a solvent.
+    Lemma 3.1. If A is nonsingular then DX is nonsingular at
+      1. a dominant or minimal solvent X,
+      2. all solvents X if the eigenvalues of Q(λ) are distinct.
+    For eﬃciency, Q(X) should be calculated by nested multiplication as (AX+B)X+
+C, which requires two matrix multiplications instead of the three if X 2 is explicitly
+formed and provides the coeﬃcient matrix AX + B in (3.2) as a byproduct.
+    To solve (3.2) we can adapt methods for solving the generalized Sylvester equation
+described by Golub, Nash, and Van Loan [21] and Epton [13] (see also Chu [6] and
+Gardiner et al. [17], [18]). First we consider a Schur algorithm.
+    Compute the generalized Schur decomposition of A and AX + B [22, Thm. 7.7.1],
+
+(3.3)                  W ∗ AZ = T,            W ∗ (AX + B)Z = S,
+
+where W and Z are unitary and T and S are upper triangular, and the Schur decom-
+position of X, U ∗ XU = R, where U is unitary and R is upper triangular. Then, pre-
+and postmultiplying (3.2) by W ∗ and U , respectively, transforms the system to
+
+(3.4)          T Y R + SY = F,         F = −W ∗ Q(X)U,            Y = Z ∗ EU.
+
+Equating kth columns and rearranging leads to
+                                      k−1
+                                      
+(3.5)         (S + rkk T )yk = fk −         rik T yi ,   Y = [y1 , y2 , . . . , yn ].
+                                      i=1
+
+By solving these upper triangular systems in the order k = 1: n, Y can be computed
+a column at a time. The cost of this algorithm is as follows, where a ﬂop denotes
+a ﬂoating point operation. The generalized Schur decomposition requires 66n3 ﬂops
+[22, sec. 7.7.6] and the Schur decomposition 25n3 ﬂops [22, sec. 7.5.6]. Forming F
+                     SOLVING A QUADRATIC MATRIX EQUATION                           307
+
+and transforming from Y to E in (3.4) costs 8n3 ﬂops, and solving (3.5) requires 3n3
+ﬂops. The total is therefore 102n3 ﬂops.
+    The Schur algorithm is used by Davis [7]. However, as noted by Golub, Nash, and
+Van Loan [21], Epton [13], and Gardiner et al. [17], one of the Schur decompositions
+can be replaced by a Hessenberg-triangular decomposition with a potentially sub-
+stantial computational saving. Suppose we replace (3.3) by the Hessenberg-triangular
+decomposition [22, sec. 7.7.4]
+
+                       W ∗ AZ = T,       W ∗ (AX + B)Z = H,
+
+where the only diﬀerence from (3.3) is that H is upper Hessenberg (this decomposition
+is a preliminary step to computing (3.3) by the QZ algorithm). The analogue of (3.5)
+is
+                                                  k−1
+                                                  
+(3.6)                     (H + rkk T )yk = fk −         rik T yi ,
+                                                  i=1
+
+which is an upper Hessenberg system. The Hessenberg-triangular decomposition re-
+quires 15n3 ﬂops [22, sec. 7.7.6] and the systems (3.6) can be solved in 4n3 ﬂops.
+Hence the total cost of the Hessenberg–Schur algorithm is 52n3 ﬂops, which is a 51
+percent saving compared with the Schur algorithm.
+     Versions of the Schur and Hessenberg–Schur algorithms that employ real Schur
+decompositions and so use only real arithmetic can be developed; see [17] for details.
+     Standard convergence results for Newton’s method apply [9, Thm. 5.2.1], as de-
+tailed in [29, Thm. 1]. In particular, if Newton’s method is started suﬃciently close
+to a solvent for which the Fréchet derivative is nonsingular, the iteration converges
+and at a quadratic rate. The Kantorovich theorem can also be applied to provide
+suﬃcient conditions for existence of a solvent and convergence of Newton’s method
+to that solvent [9, Thm. 5.3.1].
+     4. Incorporating line searches. In the solution of unconstrained optimization
+problems by Newton or quasi-Newton methods it is common to use the Newton direc-
+tion as a search direction and to deﬁne the next iterate by (approximately or exactly)
+minimizing the objective function along this direction [35, Chap. 3]; the minimization
+is called a line search. Line searches can also be used on nonlinear equation problems,
+given a suitable function for the line search to minimize. Benner and Byers [2] (see
+also [3]) investigate the use of exact line searches in Newton’s method for solving
+the algebraic Riccati equation. (Man [33] had earlier used exact line searches in a
+quasi-Newton method for the same problem, but did not give any details.) Here, we
+apply exact line searches with Newton’s method for the quadratic matrix equation.
+     The motivation for line searches is that, far from a solution, the linear model of
+Q(X) on which Newton’s method is based may be inaccurate, and so the Newton step
+E may not be a good one. Line searches are expected to give better global convergence
+(that is, convergence from arbitrary starting points). An example adapted from [2]
+illustrates the point. Consider the quadratic matrix equation
+                                         
+                            2     1    0
+                          X −               = 0,     0<δ      1,
+                                  0 δ 1/2
+
+which has solutions X = diag(±1, ±δ 1/4 ). With X0 = diag(1, δ), Newton’s method
+gives E = diag(0, (δ −1/2 − δ)/2), so that X1 = X0 + E is a much worse approximate
+308                   NICHOLAS J. HIGHAM AND HYUN-MIN KIM
+
+
+solvent than X0 . However, it is clear that X0 + tE is a solvent for suitable choice of
+the scalar t.
+    In our Newton method with line searches we take a multiple of the Newton step
+that minimizes the merit function
+
+(4.1)                           p(t) = Q(X + tE) 2F ,
+
+where the Frobenius norm A F = (trace(A∗ A))1/2 . Other choices of merit function
+could be tried (for example, based on other norms of Q), but this one is convenient
+to work with and has some theoretical backing, as explained below. Recalling that
+Newton’s method deﬁnes E by Q(X) + DX (E) = 0, from (3.1) we have, for this E,
+
+                       Q(X + tE) = Q(X) + tDX (E) + t2 AE 2
+(4.2)                            = (1 − t)Q(X) + t2 AE 2 .
+
+Thus
+
+                  p(t) = (1 − t)2 Q(X) 2F + t4 AE 2 2F
+                                                                   
+                          + (1 − t)t2 trace Q(X)∗ AE 2 (AE 2 )∗ Q(X)
+                      ≡ α(1 − t)2 + γt4 + β(1 − t)t2
+(4.3)                 = γt4 − βt3 + (α + β)t2 − 2αt + α.
+
+    If γ = AE 2 F = 0 then p(t) = α(1 − t)2 , which attains its global minimum at
+t = 1, yielding the standard Newton step. If α = 0 then X is a solvent. We can
+therefore assume that γ > 0 and α > 0.
+    We have a quartic polynomial p of which we wish to ﬁnd the global minimum. A
+quartic has at most two minima, of which one is the global minimum. We have
+
+                        p (t) = 2α(t − 1) + β(2t − 3t2 ) + 4γt3 .
+
+Hence
+
+(4.4)                              p (0) = −2α < 0,
+
+and
+
+   p (2) = 2(α − 4β + 16γ)
+                                                                                
+          = 2 trace Q(X)∗ Q(X) − 4(Q(X)∗ AE 2 + (AE 2 )∗ Q(X)) + 16(AE 2 )∗ AE 2
+                                                   
+          = 2 trace (Q(X) − 4AE 2 )∗ (Q(X) − 4AE 2 )
+          ≥ 0.
+
+Since p (0) < 0 and p (2) ≥ 0, p has a real zero in the interval (0, 2], and this zero
+corresponds to a minimum or a point of inﬂection of p. Since t = 1 corresponds to a
+pure Newton step, it is therefore reasonable to restrict our attention to the interval
+[0, 2], although there is no guarantee that there is a minimum of p in this interval
+when we are far from a solution. Thus we deﬁne t by
+
+(4.5)                              p(t) = min p(x).
+                                          x∈[0,2]
+
+There are two cases to consider.
+                     SOLVING A QUADRATIC MATRIX EQUATION                             309
+
+    (1) If p has one real zero and a (nonreal) complex conjugate pair of roots then
+the real zero, which must lie in (0, 2], is the desired global minimum.
+    (2) If p has three real zeros then at most two are minima of p. If the global
+minimum lies outside (0, 2] then t = 2 needs to be checked, as it may yield a smaller
+value of p than the zero of p in (0, 2].
+    Knowing these cases, it is easy to implement the choice of t in (4.5), since the
+zeros of the cubic p and the values of p at these zeros are easily computed.
+    The question arises of whether the exact line searches interfere with the quadratic
+convergence of Newton’s method, necessitating the explicit setting of t = 1 once
+convergence is approached. The answer is no, under a mild assumption, as we now
+show. Assume that Xj is within a region where quadratic convergence to X occurs,
+and let Xj+1 = Xj + Ej and X    j+1 = Xj + tEj be the standard Newton update and
+the update with exact line search, respectively. Deﬁning ∆j = X − Xj , we have
+                                                      
+                                   ∆j+1 = O ∆j 2 .
+
+The deﬁnition of t ensures that, using (4.2),
+
+              (1 − t)Q(Xj ) + t2 AEj2 = Q(Xj + tEj ) ≤ Q(Xj + Ej )
+                                      = Q(Xj+1 ) = Q(X − ∆j+1 )
+                                        = Q(X) + O( ∆j+1 )
+                                               
+(4.6)                                   = O ∆j 2 .
+
+Now Ej = −∆j+1 + ∆j , so Ej = O( ∆j ) and, by (3.1),
+
+                   Q(Xj ) = Q(X − ∆j ) = −DX (∆j ) + O( ∆j 2 ).
+
+Hence, as long as the Fréchet derivative is nonsingular at X, (4.6) implies that |1−t| =
+O( ∆j ). Thus
+                                                                                 
+   X −X j+1 = X − Xj+1 + Xj+1 − X      j+1 = O ∆j 2 + (1 − t)Ej = O ∆j 2 ,
+
+as required.
+     The global convergence properties of Newton’s method with exact line searches
+can be obtained from standard theory. We are eﬀectively solving a nonlinear system
+                                               2       2
+f (x) = 0 by Newton’s method, where f : Rn → Rn , doing line searches on the
+function F (x) = f (x)T f (x), as advocated by Dennis and Schnabel [9, sec. 6.5] and
+Fletcher [14, sec. 6.2]. The global convergence results of [9, sec. 6.3], [14, sec. 2.5]
+apply provided that certain restrictions known as the Armijo–Goldstein conditions
+are imposed on the line search. In our notation these conditions may be written as
+
+(4.7a)                           p(t) ≤ p(0) + c1 tp (0),
+(4.7b)                          p (t) ≥ c2 p (0),
+
+where c1 and c2 are parameters with 0 < c1 < c2 < 1. The ﬁrst condition ensures that
+the reduction in p is at least as big as that predicted by a ﬁrst order model, while the
+second ensures that the step is not too small, by requiring that the derivative at t be
+at least some fraction of the derivative at 0. It is easy to see using (4.4) that (4.7a)
+is equivalent to
+
+                         Q(X + tE) 2F ≤ (1 − 2c1 t) Q(X) 2F ,
+310                   NICHOLAS J. HIGHAM AND HYUN-MIN KIM
+
+
+which requires a suﬃcient decrease in the merit function. The use of exact line searches
+does not necessarily imply that the conditions (4.7) are satisﬁed. However, (4.7b)
+certainly holds in the usual case when the optimal t is a zero of p (t), since p (0) < 0.
+Both conditions have been checked and found to be satisﬁed in all our numerical tests
+(with c1 = 1/4, c2 = 1/2), so we have not considered any modiﬁcations to the exact
+line search.
+     The line search requires three matrix multiplications to compute the coeﬃcients
+of p in (4.3) (Q(X) is already available), the remaining computations being scalar
+ones. The total cost of the line search is 5n3 ﬂops, which is negligible compared with
+the cost of computing the Newton direction E (at least 56n3 ﬂops).
+     5. Conditioning. We now derive a condition number for a solvent of the quadratic
+matrix equation (1.1). The analyses in this section and the next have close connec-
+tions with analyses for Sylvester and algebraic Riccati equations in [19], [23], [25],
+[26].
+     Consider the perturbed equation
+
+(5.1)       (A + ∆A)(X + ∆X)2 + (B + ∆B)(X + ∆X) + C + ∆C = 0.
+
+We will measure the perturbations normwise by
+
+                        , = [ α−1 ∆A,     β −1 ∆B,   γ −1 ∆C ] F ,
+
+where α, β, and γ are nonnegative parameters. A zero value of α, say, simply forces
+the corresponding perturbation ∆A to be zero. Expanding (5.1) we obtain
+
+(5.2)      AX∆X + A∆XX + B∆X = −∆AX 2 − ∆BX − ∆C + O(,2 ).
+
+We now use the vec operator, which stacks the columns of a matrix into one long vec-
+tor, and the Kronecker product A⊗B = (aij B), and we use the property vec(AXB) =
+(B T ⊗ A) vec(X) [28, Chap. 4]. Applying the vec operator to (5.2) we obtain
+
+  P vec(∆X) = −((X 2 )T ⊗ In ) vec(∆A) − (X T ⊗ In ) vec(∆B) − vec(∆C) + O(,2 )
+                                                                
+                                                       vec(∆A)/α
+            = − [ α(X 2 )T ⊗ In , βX T ⊗ In , γIn2 ]  vec(∆B)/β  + O(,2 ),
+                                                       vec(∆C)/γ
+
+where
+
+                          P = In ⊗ AX + X T ⊗ A + In ⊗ B.
+
+Multiplying by P −1 , taking 2-norms, and using       vec(X) 2 = X F , we obtain the
+bound
+                                ∆X F
+(5.3)                                ≤ Ψ (X), + O(,2 ),
+                                 X F
+where
+
+             Ψ (X) = P −1 [ α(X 2 )T ⊗ In ,   βX T ⊗ In , γIn2 ] 2 / X F .
+
+This is a sharp bound, to ﬁrst order in ,, so Ψ (X) is the condition number of X. Note
+that P is nonsingular, and hence Ψ (X) ﬁnite, precisely when the Fréchet derivative
+DX in (3.1) is nonsingular.
+                     SOLVING A QUADRATIC MATRIX EQUATION                        311
+
+    An upper bound for Ψ (X) involving P −1 2 can of course be obtained by bound-
+ing the norm of the product by the product of the norms, but this bound can be
+arbitrarily weaker than (5.3). A perturbation bound for (1.1) that contains a factor
+   −1                                                           −1       −1
+ DX    F is derived by Davis [7], and it is easy to show that P    2 = DX F .
+    For the special case of the matrix square root we have A = I, B = 0, α = β = 0,
+and the condition number Ψ simpliﬁes to
+
+                               P −1 2 γ
+                   Ψ (X) =              ,     P = In ⊗ X + X T ⊗ In ,
+                                X F
+
+which is the matrix square root condition number identiﬁed in [25].
+    We give an illustrative example from [20, Ex. 4.4], with
+                                                          
+                                      0 0              −1 0
+                      A = I2 , B =           , C=              .
+                                      1 0              −1 0
+
+The eigenvalues of Q(λ) are −1, 0, 0, 1 and there are three solvents:
+                                                              
+                       1 −1                1 0              −1 0
+               X1 =            , X2 =            , X3 =              .
+                       0 −1                0 0              −2 0
+
+The solvent X1 is dominant and so Theorem 3.1 implies it has a ﬁnite condition
+number; in fact Ψ (X1 ) = 3.64. The other two solvents are both easily seen to have
+singular P and hence inﬁnite condition numbers.
+    6. Backward error. We deﬁne the backward error of an approximate solution
+Y to (1.1) by
+
+            η(Y ) = min , : (A + ∆A)Y 2 + (B + ∆B)Y + C + ∆C = 0,
+                                                                
+(6.1)                         [ α−1 ∆A, β −1 ∆B, γ −1 ∆C ] F ≤ , .
+
+Deﬁning
+
+                                  R = AY 2 + BY + C,
+
+the constraint equation in (6.1) can be written as
+
+                   −R = ∆AY 2 + ∆BY + ∆C
+                                                                      
+                                                                  αY 2
+(6.2)                   = [ α−1 ∆A,     β −1 ∆B,       γ −1 ∆C ]  βY  .
+                                                                   γIn
+
+Taking Frobenius norms leads to the lower bound for the backward error
+
+                                               R F
+                       η(Y ) ≥                                     .
+                                 (α2 Y 2 2F + β 2 Y 2F + nγ 2 )1/2
+
+Applying the vec operator to (6.2) gives
+                                                               
+                                                     vec(∆A)/α,
+(6.3)     [ α(Y 2 )T ⊗ In ,   βY T ⊗ In ,   γIn2 ]  vec(∆B)/β,  = − vec(R),
+                                                     vec(∆C)/γ
+312                   NICHOLAS J. HIGHAM AND HYUN-MIN KIM
+
+
+which we write as
+                                                       2     2
+                               Hz = r,         H ∈ Rn ×3n .
+
+We assume that H is of full rank, which guarantees that (6.3) has a solution, that is,
+that the backward error is ﬁnite. The backward error is the minimum 2-norm solution
+to this underdetermined system:
+
+                                       η(Y ) = H + r 2 ,
+
+where a superscript “+” denotes the pseudoinverse. To obtain an upper bound for
+η(Y ) we use
+
+                                                          r 2
+                            η(Y ) ≤ H + 2 r 2 =                 ,
+                                                       σmin (H)
+where σmin denotes the smallest singular value, which is nonzero by assumption. Now
+
+             σmin (H)2 = λmin (HH ∗ )
+                       = λmin (α2 (Y 2 )T Y 2 ⊗ In + β 2 Y T Y ⊗ In + γ 2 In2 )
+                        = λmin (α2 (Y 2 )∗ Y 2 ⊗ In + β 2 Y ∗ Y ⊗ In + γ 2 In2 )
+                        ≥ α2 σmin (Y 2 )2 + β 2 σmin (Y )2 + γ 2 .
+
+Thus
+                                                 R F
+                    η(Y ) ≤                                           .
+                              (α2 σ         2 2   2         2   2 1/2
+                                      min (Y ) + β σmin (Y ) + γ )
+
+    We conclude from this analysis that a small relative residual does not necessarily
+imply a small backward error for the quadratic matrix equation. The same is true for
+the Sylvester equation [26] and, more generally, the algebraic Riccati equation [19].
+     7. Numerical experiments. Davis [7], [8] demonstrated the usefulness of New-
+ton’s method for solving the quadratic matrix equation. Our purpose in this section
+is to show experimentally the beneﬁts of exact line searches in Newton’s method. Our
+experiments were done in Matlab, which has unit roundoﬀ u = 2−53 ≈ 1.1 × 10−16 .
+     First, we give a few details about our Newton implementation. The default start-
+ing matrix is, as in [7],
+                                                            
+                                B F+       B 2F + 4 A F C F
+                       X0 =                                     I,
+                                           2 A F
+
+which is designed to have norm roughly of the same order of magnitude as a solvent.
+We terminate the iteration when the residual Q(Xk ) is of the same order of magni-
+tude as the rounding error in computing it, namely, when the relative residual ρ(Xk )
+satisﬁes
+                                       f l(Q(Xk )) F
+(7.1)            ρ(Xk ) =                                ≤ nu.
+                              A F Xk 2F + B F Xk F + C F
+
+    Our Matlab code has an option to choose whether to use line searches. When line
+searches are being used, they are turned oﬀ (t is set to 1) once ρ(Xk ) ≤ 10−7 ; this is
+not necessary in theory (see section 4), but is done to save work and as a precaution to
+                     SOLVING A QUADRATIC MATRIX EQUATION                            313
+
+avoid rounding errors destroying the quadratic convergence. In evaluating backward
+errors and condition numbers we took α = A F , β = B F , γ = C F .
+    The potential beneﬁts of exact line searches are easily demonstrated. Consider
+the quadratic matrix equation with
+                                                             
+                                    −1 −1                  0 1
+(7.2)            A = I2 ,    B=               ,    C=             .
+                                     1 −1                 −1 0
+                                               0 1
+As noted in [8] there are real solvents I2 and −1  0 and an inﬁnite number of complex
+solvents. Applying Newton’s method with and without line searches for the default X0
+and X0 = 10j I, j = 1, 5, 10, gave the results in Table 7.1, which show the substantial
+reduction in iterations that exact line searches can bring. In each case the computed
+         was within roundoﬀ of I2 , with condition number Ψ (X)
+solvent X                                                         = 1.4 and backward
+         
+error η(X) ≈ u.
+    Our next example is the quadratic matrix equation with
+                                                            
+                                                   −8 −12
+(7.3)                    A = B = I2 ,       C=                 ,
+                                                   −18 −26
+
+again from [8], which has four solvents, all real and well conditioned. With the default
+starting matrix, convergence was obtained in 6 iterations with line searches and 10
+without line searches, to the same matrix. We chose starting matrices
+                                  
+                              1 x
+                      X0 =           ,      −1000 ≤ x, y ≤ 1000,
+                              y 1
+
+with an equally spaced grid of 100 points (x, y). Table 7.2 shows how many times
+a solvent was produced within 30, 50, and 100 iterations, respectively. Convergence
+was obtained to all four solvents, depending on the starting matrix, and a diﬀerent
+solvent was sometimes obtained with exact line searches than without. Exact line
+searches result in more frequent convergence, though in 10 of the cases convergence
+was obtained without line searches but not with them, and in another 22 cases where
+both gave convergence faster convergence was obtained without line searches. Thus
+exact line searches do not lead to uniformly better convergence than when no line
+searches are used. An interesting phenomenon is that in 48 cases when line searches
+were not used the test (7.1) was satisﬁed within 100 iterations, but with X F  u−1 ,
+so that X was far from a solvent (these cases were counted as failure to converge for
+the statistics). This behavior did not happen with line searches: the line searches
+force Q(Xk ) F to be a decreasing sequence, which tends to keep Xk from becoming
+large if there is no large solvent.
+     Our ﬁnal example is based on a quadratic eigenvalue problem (1.2) from [16,
+sec. 10.11], with numerical values modiﬁed as in [30, sec. 5.3], modelling oscillations
+in an airplane wing:
+                                                                      
+                    17.6 1.28       2.89              7.66 2.45      2.1
+            A =  1.28 0.824 0.413  ,          B =  0.23 1.04 0.223  ,
+                    2.89 0.413 0.725                   0.6 0.756 0.658
+(7.4)                                                   
+                                       121 18.9 15.9
+                               C= 0         2.7 0.145  .
+                                       11.9 3.64 15.5
+314                                              NICHOLAS J. HIGHAM AND HYUN-MIN KIM
+
+                                                                   Table 7.1
+                                             Number of iterations for convergence for problem (7.2).
+
+                                          X0         Without line searches     With exact line searches
+                                        Default                6                          5
+                                          10I                  9                          6
+                                         105 I                22                          6
+                                         1010 I               39                          7
+
+                                         Table 7.2
+  Number of times convergence obtained for problem (7.3) with 100 diﬀerent starting matrices.
+
+           No. iterations allowed                           Without line searches        With exact line searches
+                     30                                              46                            54
+                     50                                              52                            73
+                    100                                              53                            88
+
+
+
+The 6 eigenvalues are distinct and come in 3 complex conjugate pairs; since any
+solvent must have 3 eigenvalues chosen from the 6, it follows that there are no real
+solvents. Starting Newton’s method with X0 = iI we obtained the results displayed
+in Figure 7.1. Convergence was obtained to the same solvent with and without line
+searches, with condition number Ψ (X) = 50 and backward error η(X)    ≈ u. The
+eigenvalues of the computed solvent are
+
+                                                     -8.8483e-001 + 8.4415e+000i,
+                                                      9.4722e-002 + 2.5229e+000i,
+                                                     -9.1800e-001 + 1.7606e+000i,
+
+and these and their conjugates are the eigenvalues of the quadratic eigenvalue problem.
+     Finally, we note that in all our tests the global minimum of the merit function p
+in (4.1) was in (0, 2] and never to the right of 2.
+
+                                        5
+                                       10
+                                                                                     Without line searches
+                                                                                     With exact line searches
+
+
+                                        0
+                                       10
+              Frobenius norm of Q(X)
+
+
+
+
+                                        −5
+                                       10
+
+
+
+
+                                        −10
+                                       10
+
+
+
+
+                                        −15
+                                       10
+                                             1       2       3       4          5          6        7           8
+                                                                  Number of iterations
+
+
+                                                    Fig. 7.1. Convergence for problem (7.4).
+                       SOLVING A QUADRATIC MATRIX EQUATION                                     315
+
+     8. Concluding remarks. Newton’s method is a useful tool in our stock of
+methods for solving quadratic matrix equations. In its favor is its applicability to
+the whole class of problems and its quadratic convergence, the latter making it a
+useful way to reﬁne approximate solvents obtained with other methods. On the other
+hand each iteration is relatively expensive. The exact line searches introduced here
+frequently reduce the number of iterations and make standard global convergence
+results from optimization applicable.
+     A number of open problems remain, including guaranteeing convergence for par-
+ticular starting matrices, determining to which solvent Newton’s method will converge,
+and improving the convergence to solvents at which the Fréchet derivative is singu-
+lar. These questions have been answered for certain types of Riccati equations, by
+exploiting their structure [2], [24], but the lack of structure in the quadratic matrix
+equation has so far precluded any useful results.
+     Acknowledgments. We thank Françoise Tisseur and the referees for their help-
+ful suggestions.
+
+                                         REFERENCES
+
+ [1] P. Benner, Computational methods for linear-quadratic optimization, Rend. Circ. Mat.
+         Palermo (2) Suppl., 58 (1999), pp. 21–56. Extended version available as Berichte
+         aus der Technomathematik, Report 98–04, Universität Bremen, August 1998, from
+         http://www.math.uni-bremen.de/zetem/berichte.html.
+ [2] P. Benner and R. Byers, An exact line search method for solving generalized continuous-time
+         algebraic Riccati equations, IEEE Trans. Automat. Control, 43 (1998), pp. 101–107.
+ [3] P. Benner, R. Byers, E. S. Quintana-Ortı́, and G. Quintana-Ortı́, Solving algebraic Ric-
+         cati equations on parallel computers using Newton’s method with exact line search, Parallel
+         Comput., 26 (2000), pp. 1345–1368.
+ [4] S. Bittanti, A. J. Laub, and J. C. Willems, eds., The Riccati Equation, Springer-Verlag,
+         Berlin, 1991.
+ [5] T. J. Bridges and P. J. Morris, Diﬀerential eigenvalue problems in which the parameter
+         appears nonlinearly, J. Comput. Phys., 55 (1984), pp. 437–460.
+ [6] K.-w. E. Chu, The solution of the matrix equations AXB − CXD = E and (Y A − DZ, Y C −
+         BZ) = (E, F ), Linear Algebra Appl., 93 (1987), pp. 93–105.
+ [7] G. J. Davis, Numerical solution of a quadratic matrix equation, SIAM J. Sci. Statist. Comput.,
+         2 (1981), pp. 164–175.
+ [8] G. J. Davis, Algorithm 598: An algorithm to compute solvents of the matrix equation AX 2 +
+         BX + C = 0, ACM Trans. Math. Software, 9 (1983), pp. 246–254.
+ [9] J. E. Dennis, Jr. and R. B. Schnabel, Numerical Methods for Unconstrained Optimization
+         and Nonlinear Equations, Prentice-Hall, Englewood Cliﬀs, NJ, 1983.
+[10] J. E. Dennis, Jr., J. F. Traub, and R. P. Weber, The algebraic theory of matrix polynomials,
+         SIAM J. Numer. Anal., 13 (1976), pp. 831–845.
+[11] J. E. Dennis, Jr., J. F. Traub, and R. P. Weber, Algorithms for solvents of matrix polyno-
+         mials, SIAM J. Numer. Anal., 15 (1978), pp. 523–533.
+[12] J. Eisenfeld, Operator equations and nonlinear eigenparameter problems, J. Funct. Anal., 12
+         (1973), pp. 475–490.
+[13] M. A. Epton, Methods for the solution of AXD − BXC = E and its application in the
+         numerical solution of implicit ordinary diﬀerential equations, BIT, 20 (1980), pp. 341–
+         345.
+[14] R. Fletcher, Practical Methods of Optimization, 2nd ed., Wiley, Chichester, UK, 1987.
+[15] G. E. Forsythe, What is a satisfactory quadratic equation solver?, in Constructive Aspects of
+         the Fundamental Theorem of Algebra, B. Dejon and P. Henrici, eds., Wiley-Interscience,
+         London, 1969, pp. 53–61.
+[16] R. A. Frazer, W. J. Duncan, and A. R. Collar, Elementary Matrices and Some Applica-
+         tions to Dynamics and Diﬀerential Equations, 10th ed., Cambridge University Press, New
+         York, 1963. Reprint of 1938 edition.
+[17] J. D. Gardiner, A. J. Laub, J. J. Amato, and C. B. Moler, Solution of the Sylvester matrix
+         equation AXB T + CXDT = E, ACM Trans. Math. Software, 18 (1992), pp. 223–231.
+316                     NICHOLAS J. HIGHAM AND HYUN-MIN KIM
+
+
+[18] J. D. Gardiner, M. R. Wette, A. J. Laub, J. J. Amato, and C. B. Moler, Algorithm 705:
+         A FORTRAN-77 software package for solving the Sylvester matrix equation AXB T +
+         CXDT = E, ACM Trans. Math. Software, 18 (1992), pp. 232–238.
+[19] A. R. Ghavimi and A. J. Laub, Backward error, sensitivity, and reﬁnement of computed
+         solutions of algebraic Riccati equations, Numer. Linear Algebra Appl., 2 (1995), pp. 29–49.
+[20] I. Gohberg, P. Lancaster, and L. Rodman, Matrix Polynomials, Academic Press, New York,
+         1982.
+[21] G. H. Golub, S. Nash, and C. F. Van Loan, A Hessenberg–Schur method for the problem
+         AX + XB = C, IEEE Trans. Automat. Control, AC-24 (1979), pp. 909–913.
+[22] G. H. Golub and C. F. Van Loan, Matrix Computations, third ed., Johns Hopkins University
+         Press, Baltimore, MD, 1996.
+[23] T. Gudmundsson, C. S. Kenney, and A. J. Laub, Scaling of the discrete-time algebraic
+         Riccati equation to enhance stability of the Schur solution method, IEEE Trans. Automat.
+         Control, 37 (1992), pp. 513–518.
+[24] C.-H. Guo and P. Lancaster, Analysis and modiﬁcation of Newton’s method for algebraic
+         Riccati equations, Math. Comp., 67 (1998), pp. 1089–1105.
+[25] N. J. Higham, Computing real square roots of a real matrix, Linear Algebra Appl., 88/89
+         (1987), pp. 405–430.
+[26] N. J. Higham, Perturbation theory and backward error for AX − XB = C, BIT, 33 (1993),
+         pp. 124–136.
+[27] N. J. Higham and H.-M. Kim, Numerical analysis of a quadratic matrix equation, IMA J.
+         Numer. Anal., 20 (2000), pp. 499–519.
+[28] R. A. Horn and C. R. Johnson, Topics in Matrix Analysis, Cambridge University Press,
+         Cambridge, UK, 1991.
+[29] W. Kratz and E. Stickel, Numerical solution of matrix polynomial equations by Newton’s
+         method, IMA J. Numer. Anal., 7 (1987), pp. 355–369.
+[30] P. Lancaster, Lambda-Matrices and Vibrating Systems, Pergamon Press, Oxford, UK, 1966.
+[31] P. Lancaster and L. Rodman, Algebraic Riccati Equations, The Clarendon Press, Oxford
+         University Press, New York, 1995.
+[32] P. Lancaster and J. G. Rokne, Solutions of nonlinear operator equations, SIAM J. Math.
+         Anal., 8 (1977), pp. 448–457.
+[33] F. T. Man, The Davidon method of solution of the algebraic matrix Riccati equation, Internat.
+         J. Control, 10 (1969), pp. 713–719.
+[34] C. Moler and P. J. Costa, Symbolic Math Toolbox Version 2.0: User’s Guide, The Math-
+         Works, Inc., Natick, MA, 1997.
+[35] J. Nocedal and S. J. Wright, Numerical Optimization, Springer-Verlag, New York, 1999.
+[36] H. A. Smith, R. K. Singh, and D. C. Sorensen, Formulation and solution of the non-linear,
+         damped eigenvalue problem for skeletal systems, Internat. J. Numer. Methods Engrg., 38
+         (1995), pp. 3071–3085.
+[37] Z. C. Zheng, G. X. Ren, and W. J. Wang, A reduction method for large scale unsymmetric
+         eigenvalue problems in structural dynamics, J. Sound Vibration, 199 (1997), pp. 253–268.
+
