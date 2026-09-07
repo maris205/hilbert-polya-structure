@@ -1,0 +1,33 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/draft_history/unexecuted_02/lifecycle_audit.py	2026-09-07 15:27:02.216056671 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/lifecycle_audit.py	2026-09-07 15:27:02.512053474 +0800
+@@ -468,6 +468,14 @@
+     return result
+ 
+ 
++def original_runtime_coverage(sample, ledger):
++    for path, value in sample['mapped_files'].items():
++        ck(ledger.get(path) == value, 'own_map_covered_by_original_ledger', path)
++    for value in sample['modules'].values():
++        wanted = {k: value[k] for k in ('sha256', 'bytes')}
++        ck(ledger.get(value['path']) == wanted, 'own_module_covered_by_original_ledger', value['path'])
++
++
+ def audit():
+     began = datetime.now(timezone.utc).isoformat()
+     manifest(PREPARATION); manifest(WORK)
+@@ -487,6 +495,7 @@
+             pin(original_path, row)
+     ledger = original['all_consumed_inputs_rechecked']
+     early = actual_auditor_runtime()
++    original_runtime_coverage(early, ledger)
+     for name, value in ledger.items(): pin(exact.get(name, Path(name)), value)
+     change = changed_paper(original)
+     for record in original['complete_manifests_validated']:
+@@ -502,6 +511,7 @@
+         ck(path.exists(), 'original_link_still_exists', str(path))
+     links = new_links()
+     late = actual_auditor_runtime()
++    original_runtime_coverage(late, ledger)
+     for name, value in ledger.items(): pin(exact.get(name, Path(name)), value)
+     for name, resolution in original['host_path_resolutions_rechecked'].items():
+         ck(str(Path(name).resolve(strict=True)) == resolution, 'all_original_host_resolutions_after', name)

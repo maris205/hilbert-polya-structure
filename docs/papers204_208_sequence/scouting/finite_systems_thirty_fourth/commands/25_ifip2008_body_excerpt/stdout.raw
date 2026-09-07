@@ -1,0 +1,160 @@
+ Reconstructing words from a fixed palindromic
+               length sequence∗
+
+Alexandre Blondin Massé1, Srečko Brlek1 , Andrea Frosini2 , Sébastien Labbé1 ,
+                            and Simone Rinaldi2
+             1 Laboratoire de Combinatoire et d’Informatique Mathématique,
+                            Université du Québec à Montréal,
+        C. P. 8888 Succursale “Centre-Ville”, Montréal (QC), CANADA H3C 3P8,
+      Brlek.Srecko@uqam.ca, [blondin masse.alexandre, Labbe.Sebastien]@courrier.uqam.ca
+              2   Dip. di Scienze Matematiche ed Informatiche Roberto Magari,
+                                 Università degli Studi di Siena
+                           Pian dei Mantellini 44, 53100 Siena, Italy
+                                 [frosini, rinaldi]@unisi.it
+
+
+
+       Abstract. To every word w is associated a sequence Gw built by computing
+       at each position i the length of its longest palindromic suﬃx. This sequence
+       is then used to compute the palindromic defect of a finite word w defined by
+       D(w) = |w| + 1 − |Pal(w)| where Pal(w) is the set of its palindromic factors.
+       In this paper we exhibit some properties of this sequence and introduce the
+       problem of reconstructing a word from Gw . In particular we show that up to
+       a relabelling the solution is unique for 2-letter alphabets.
+
+       Key words: Palindromic complexity, defect, lacunas, reconstruction.
+
+
+
+
+1 Introduction
+
+Among the many ways of measuring the information content of a finite word,
+counting the number of its distinct factors or subwords of given length has
+been widely used and known as its complexity. A refinement of this notion
+amounts to restrict the factors to palindromes. The motivations for the study
+of palindromic complexity comes from many areas ranging from the study of
+Schrödinger operators in physics [4, 7, 20] to number theory [6] and combina-
+torics on words where it appears as a powerful tool for understanding the local
+structure of words. It has been recently studied in various classes of infinite
+words, an account of which may be found in the survey provided by Allouche
+et al. [5].
+   In particular, the palindromic factors give an insight on the intrinsic struc-
+ture, due to its connection with the usual complexity, of many classes of words.
+For instance, they completely characterize Sturmian words [23], and for the
+class of smooth words they provide a connection with the notion of recurrence
+[12, 13].
+∗   with the support of NSERC (Canada)
+
+
+
+                                                                                          101
+102                     A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+The problem of reconstructing words from partial information arise naturally.
+We mention a few of them that have been solved for a fixed alphabet Σ:
+Some set A of factors is fixed. Find the shortest words containing the set A of
+all factors of given length k. This leads to the De Bruijn sequences [15, 17, 19]
+whose construction uses a graph Gk where vertices are the given words of length
+k, and where edges model the scanning of the word by a window of size k. The
+solution is then obtained by computing all Eulerian cycles in the graph. It
+is worth noting that finding the lexicographically smallest such word is much
+easier: it is given by the lexicographic concatenation of Lyndon words on Σ
+whose lengths are divisible by k (See Fredericksen et al. [18]).
+Some set A is fixed along with some suitable hypothesis. Construct all words w
+such that the set of its factors A = F (w). The technique used for this problem is
+based on constructing a set of minimal forbidden words, that is the extensions
+of words in A that do not belong to A [9]. That technique was also used in [11]
+to construct words whose language of palindromes is a fixed set P . It turns out
+that it is a rational language. Concerning multisets of subsequences, instead
+of factors we mention a general result. If the set A contains suﬃciently many
+subsequences of length k, then the solution is unique [26]: indeed, for a word
+w of lengh n > 7 and k ≥ [n/2] the subsequences uniquely determine w, and
+for k < log2 n they do not. See also an interesting combinatorial approach
+depending on the Burrows-Wheeler transform (See Mantaci et al. [25]).
+Fixed complexity. The most famous example is that of Sturmian words (see
+Lothaire [22] for a substantial review) which are characterized by the complexity
+P (n) = n + 1 established by M. Morse [28]. Sturmian words are the discretiza-
+tion of lines with irrational slopes, and they are easily constructed from the
+continued fraction expansion corresponding to the irrational slope. The com-
+plexity is therefore not enough to characterize completely a word. However, in
+the case of the Thue-Morse complexity [10, 24], there are essentially only two
+such words [1, 2].
+In this paper we introduce the problem of reconstructing a word from sequences
+describing its palindromic complexity. Droubay, Justin and Pirillo [16] noted
+that the palindrome complexity |Pal(w)| of a word w is bounded by |w| + 1,
+and observed that it is computed by a sequential algorithm listing the first
+occurrences of longest palindromic suﬃxes, called unioccurrent in [16]. For our
+study we need the following two auxiliary functions on words. Given a word of
+length n, w : [0..(n − 1)] −→ Σ, we define two functions Gw , Hw : N −→ N by
+Gw (i) = |LPS(w[0..i])| and
+                   !
+                     Gw (i) if it is the first occurrence of LPS(w[0..i])
+         Hw (i) =                                                           (1)
+                     0       otherwise
+
+We first exhibit some combinatorial properties of the palindromic factors in
+words (Section 3) and use them in order to obtain properties of the sequences
+Reconstructing words from a fixed palindromic length sequence                     103
+
+G and H (Section 4). Finally we study the problem of reconstructing words
+from given sequences, and establish conditions for unicity on 2-letter alphabets.
+
+
+
+2 Preliminaries
+
+In what follows, Σ is a finite alphabet whose elements are called letters. By word
+we mean a finite sequence of letters w : [0..(n − 1)] −→ Σ, where n ∈ N. The
+length of w is |w| = n and w[i] or wi denote its i-th letter. The set of n-length
+words over Σ is denoted Σ n . By convention, the empty word is denoted  ! ε and
+its length is 0. The free monoid generated by Σ is defined by Σ ∗ = n≥0 Σ n .
+   The set of right infinite words is denoted by Σ ω and we set Σ ∞ = Σ ∗ ∪ Σ ω .
+Given a word w ∈ Σ ∞ , a factor f of w is a word f ∈ Σ ∗ satisfying
+
+                            ∃x ∈ Σ ∗ , ∃y ∈ Σ ∞ , w = xf y.
+
+If x = ε (resp. y = ε ) then f is called prefix (resp. suﬃx). The set of all factors
+of w is denoted by Fact(w), those of length n is Factn (w) = Fact(w) ∩ Σ n , and
+Pref(w) is the set of all prefixes of w. The number of occurrences of a factor
+f in w is denoted |w|f . A period of a word w is an integer p < |w| such that
+w[i] = w[i + p], for all i < |w| − p. If w = pu, with |w| = n and |p| = k, then
+p−1 w = w[k..(n−1)] = u is the word obtained by erasing p. A word is said to be
+primitive if it is not a power of another word. Two words u and v are conjugate
+when there are words x, y such that u = xy and v = yx. The conjugacy class of
+a word w is denoted by [w]; note that the length is invariant under conjugacy.
+For a given word w of length n, any of its conjugates is obtained by cyclic
+permutation, that is σ i (w) = w[i..(n − 1)]w[0..(i − 1)].
+   The reversal of u = u0 u1 · · · un−1 ∈ Σ n is the word "   u = un−1 un−2 · · · u0 ,
+and a palindrome is a word p such that p = "         p . Since every word contains
+palindromes, the letters and ε being necessarily part of them, the set of its
+palindromic factors is Pal(w), and its palindromic complexity is denoted by
+|Pal(w)|. Conjugacy is an equivalence relation having numerous properties and
+for our purpose we need the following one easily obtained by induction: let p
+and q be two palindromes, then σ i (pq) = p′ q ′ , for some palindromes p′ and q ′ .
+We start by quoting Lemma 1 of [8] in order to establish a useful combinatorial
+property.
+Lemma 1 (Blondin Massé et al. [8]) Assume that w = xy = yz. Then for
+some u, v, and some i ≥ 0 we have from [21]
+
+                             x = uv, y = (uv)i u, z = vu;                         (2)
+
+and the following conditions are equivalent :
+  (i) x = z" ;
+ (ii) u and v are palindromes;
+104                                A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+(iii) w is a palindrome;
+(iv) xyz is a palindrome.
+Moreover, if one of the equivalent conditions above holds then
+ (v)    y is a palindrome.
+As a consequence we have the following proposition.
+Proposition 1 Assume that w = xp = qz where p and q are palindromes
+such that |q| > |x|. Then w has period |x| + |z|, and x!
+                                                       z is a product of two
+palindromes.
+Proof. Since |q| > |x|, there exists a non-empty word y such that q = xy and
+p = yz. It follows that
+
+         !=q z x
+        wx     !=x y z x

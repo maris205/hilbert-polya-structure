@@ -1,0 +1,1763 @@
+K.U.Leuven
+Department of Electrical Engineering (ESAT)                                                      SISTA
+
+
+
+
+                                           Technical report 97-67
+
+
+   On the Sequence of Consecutive Powers of
+        a Matrix in a Boolean Algebra∗
+                                    B. De Schutter and B. De Moor
+
+
+                                To cite this work, please refer to the published version:
+             B. De Schutter and B. De Moor, “On the sequence of consecutive powers of a matrix
+             in a Boolean algebra,” SIAM Journal on Matrix Analysis and Applications, vol. 21,
+             no. 1, pp. 328–354, 1999. doi:10.1137/S0895479897326079
+
+
+
+
+ESAT-SISTA
+K.U.Leuven
+Leuven, Belgium
+Current URL: https://www.esat.kuleuven.be/stadius
+∗ This report can also be downloaded via https://dspub.eu/97-67
+ ON THE SEQUENCE OF CONSECUTIVE POWERS OF A MATRIX
+               IN A BOOLEAN ALGEBRA
+                       BART DE SCHUTTER∗ AND BART DE MOOR†
+
+    Abstract. In this paper we consider the sequence of consecutive powers of a matrix in a Boolean
+algebra. We characterize the ultimate behavior of this sequence, we study the transient part of the
+sequence and we derive upper bounds for the length of this transient part. We also indicate how
+these results can be used in the analysis of Markov chains and in max-plus-algebraic system theory
+for discrete event systems.
+
+    Key words. Boolean algebra, Boolean matrices, transient behavior, Markov chains, max-plus
+algebra
+
+   AMS subject classiﬁcations. 06E99, 15A99, 16Y99
+
+
+     1. Introduction. In this paper we consider the sequence of consecutive pow-
+ers of a matrix in a Boolean algebra. This sequence reaches a “cyclic” behavior
+after a ﬁnite number of terms. Even for more complex algebraic structures, such as
+the max-plus algebra (which has maximization and addition as its basic operations)
+this ultimate behavior has already been studied extensively by several authors (See,
+e.g., [1, 9, 13, 26] and the references therein). In this paper we completely charac-
+terize the ultimate behavior of the sequence of the consecutive powers of a matrix in
+a Boolean algebra. Furthermore, we also study the transient part of this sequence.
+More speciﬁcally, we give upper bounds for the length of the transient part of the
+sequence as a function of structural parameters of the matrix.
+     Our main motivation for studying this problem lies in the max-plus-algebraic
+system theory for discrete event systems. Furthermore, our results can also be used
+in the analysis of the transient behavior of Markov chains.
+     This paper is organized as follows. In §2 we introduce some of the notations and
+concepts from number theory, Boolean algebra, matrix algebra and graph theory that
+will be used in the paper. In §3 we characterize the ultimate behavior of the sequence
+of consecutive powers of a given matrix in a Boolean algebra, and we derive upper
+bounds for the length of the transient part of this sequence. In §4 we brieﬂy sketch
+how our results can be used in the analysis of Markov chains and in the max-plus-
+algebraic system theory for discrete event systems. In this section we also explain
+why we have restricted ourselves to Boolean algebras in this paper and we indicate
+some of the phenomena that should be taken into account when extending our results
+to more general algebraic structures. Finally we present some conclusions in §5.
+    2. Preliminaries.
+     2.1. Notation, deﬁnitions and some lemmas from number theory. In
+this paper we use “vector” as a synonym for “column matrix”. If a is a vector, then
+ai is the ith component of a. If A is a matrix, then aij or (A)ij is the entry on the
+ith row and the jth column, and Aαβ is the submatrix of A obtained by removing all
+rows that are not indexed by the set α and all columns that are not indexed by the
+set β.
+   ∗ Control Laboratory, Faculty of Information Technology and Systems, Delft University of Tech-
+
+nology, P.O. Box 5031, 2600 GA Delft, The Netherlands (b.deschutter@its.tudelft.nl).
+   † ESAT/SISTA, K.U.Leuven, Kardinaal Mercierlaan 94, B-3001 Heverlee (Leuven), Belgium
+
+(bart.demoor@esat.kuleuven.ac.be).
+                                                1
+2                              B. DE SCHUTTER AND B. DE MOOR
+
+                                           Table 2.1
+                  The operations ⊕ and ⊗ for the Boolean algebra ({0, 1}, ⊕, ⊗).
+
+                                    ⊕    0 1            ⊗     0 1
+                                    0    0 1            0     0 0
+                                    1    1 1            1     0 1
+
+     The set of the real numbers is denoted by R, the set of the nonnegative integers
+by N, and the set of the positive integers by N0 .
+     If S is a set, then the number of elements of S is denoted by #S. If γ is a set of
+positive integers then the least common multiple of the elements of γ is denoted by
+lcm γ and the greatest common divisor of the elements of γ is denoted by gcd γ.
+     If x ∈ R then ⌈x⌉ is the smallest integer that is larger than or equal to x, and ⌊x⌋
+is the largest integer that is less than or equal to x.
+     Lemma 2.1. Let p, q ∈ N0 be coprime. The smallest integer n such that for any
+integer m ≥ n, there exist two nonnegative integers α and β such that m = αp + βq,
+is given by n = (p − 1)(q − 1).
+     Proof. See, e.g., the proof of Lemma 3.5.5 of [5].
+Let a1 , a2 , . . . , an ∈ N0 with gcd(a1 , a2 , . . . , an ) = 1. We deﬁne g(a1 , a2 , . . . , an ) to
+be the largest positive integer N for which the equation a1 x1 + a2 x2 + . . . + an xn = N
+subject to x1 , x2 , . . . , xn ∈ N, has no solution. From Lemma 2.1 it follows that
+g(a, b) = (a − 1)(b − 1) − 1 = ab − a − b. Although a formula exists for the case where
+n = 3, no general formulas are known for n ≥ 4. However, some upper bounds have
+been proved [4, 11]:
+     Lemma 2.2. If a1 , a2 , . . . , an ∈ N0 with a1 < a2 < . . . < an and gcd(a1 , . . . , an ) =
+1, then g(a1 , . . . , an ) ≤ (a1 − 1)(an − 1) − 1.
+     Lemma 2.3. If a1 , a2 , . . . , an ∈ N0 with a1 < a2 < . . . < an and gcd(a1 , . . . , an ) =
+1, then we have g(a1 , . . . , an ) ≤ 2an−1 ann − an .
+     2.2. Boolean algebra. A Boolean algebra is an algebraic structure of the form
+(B, ⊕, ⊗) with B = {0, 1} such that the operations ⊕ and ⊗ applied on 0 and 1 yield
+the results of Table 2.1, where ⊕ and ⊗ are associative, and where ⊗ is distributive
+with respect to ⊕. The element 0 is called the Boolean zero element, 1 is called the
+Boolean identity element, ⊕ is called the Boolean addition and ⊗ is called the Boolean
+multiplication.
+     Some examples of Boolean algebras are: ({false, true}, or, and), ({0, ∞}, min, +),
+({0, 1},max, ·), ({∅, N}, ∪, ∩), ({0, 1}, max, min), ({−∞, ∞}, max, min), and so on (see
+[1, 15]). In this paper we shall use the following examples of Boolean algebra in order to
+transform known results from max-plus algebra and from nonnegative matrix algebra
+to Boolean algebra:
+       1. The Boolean algebra ({−∞, 0}, max, +) is a subalgebra of the max-plus al-
+gebra ( R ∪ {−∞}, max, +).
+       2. The Boolean algebra ({0, p}, +, ·) where p stands for an arbitrary positive
+number1 can be considered as a Boolean restriction of nonnegative algebra.
+     A matrix with entries in B is called a Boolean matrix. The operations ⊕ and ⊗
+are extended to matrices as follows. If A, B ∈ Bm×n then we have
+
+                                        (A ⊕ B)ij = aij ⊕ bij
+    1 So p + p = p and p · p = p.
+                     CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                   3
+
+for all i, j. If A ∈ Bm×p and B ∈ Bp×n then
+                                                      p
+                                                      M
+                               (A ⊗ B)ij =                  aik ⊗ bkj
+                                                      k=1
+
+for all i, j. Note that these deﬁnitions resemble the deﬁnitions of the sum and the
+product of matrices in linear algebra but with ⊕ instead of + and ⊗ instead of ·.
+    The n by n Boolean identity matrix is denoted by In , the m by n Boolean zero
+matrix is denoted by Om×n , and the m by n matrix all the entries of which are equal
+to 1 is denoted by Em×n . If the dimensions of these matrices are not indicated they
+should be clear from the context.
+    The Boolean matrix power of the matrix A ∈ Bn×n is deﬁned as follows:
+                 0                         k                    k−1
+             A⊗ = In ,       and      A⊗ = A ⊗ A⊗                       for k = 1, 2, . . .
+
+If we permute the rows or the columns of the Boolean identity matrix, we obtain a
+Boolean permutation matrix. If P ∈ Bn×n is a Boolean permutation matrix, then we
+have P ⊗ P T = P T ⊗ P = In . A matrix R ∈ Bm×n is a Boolean upper triangular
+matrix if rij = 0 for all i, j with i > j.
+      2.3. Boolean algebra and graph theory. We assume that the reader is fa-
+miliar with basic concepts of graph theory such as directed graph, path, (elementary)
+circuit, and so on (see, e.g., [1, 18, 27]). In this paper we shall use the deﬁnitions of [1]
+since they are well suited for our proofs. Sometimes these deﬁnitions diﬀer slightly
+from the deﬁnitions adopted by other schools in the literature. The most important
+diﬀerences are:
+        • In this paper we also consider empty paths, i.e., paths that consist of only
+one vertex and have length 0. However, unless it is explicitly speciﬁed, we always
+assume that paths have a nonzero length.
+        • The precedence graph of the matrix A ∈ Bn×n , by denoted by G(A), is a
+directed graph with vertices 1, 2, . . . , n and an arc j → i for each aij 6= 0. Note that
+vertex i is the end point of this arc.
+        • A directed graph is called strongly connected if for any two diﬀerent vertices
+vi , vj there exists a path from vi to vj . Note that this implies that a graph consisting
+of one vertex (with or without a loop) is always strongly connected.
+        • A matrix is irreducible if its precedence graph is strongly connected. Since
+according to the deﬁnition we use a graph with only one vertex is always strongly
+connected, the 1 by 1 Boolean zero matrix [ 0 ] is irreducible. However, the 1 by 1
+Boolean zero matrix [ 0 ] is the only Boolean zero matrix that is irreducible.
+      Let us now give a graph-theoretic interpretation of the Boolean matrix power.
+Let A ∈ Bn×n and let k ∈ N0 . Recall that there is an arc j → i in G(A) if and only if
+aij = 1. Since
+                         k            M
+                     (A⊗ )ij =                      aii1 ⊗ ai1 i2 ⊗ . . . ⊗ aik−1 j
+                                 i1 ,i2 ,...,ik−1
+
+                                                            k
+for all i, j and since 0 is absorbing for ⊗, (A⊗ )ij is equal to 1 if and only if there
+exists a path of length k from vertex j to vertex i in G(A).
+    A maximal strongly connected subgraph (m.s.c.s.) Gsub of a directed graph G is
+a strongly connected subgraph that is maximal, i.e., if we add an extra vertex (and
+some extra arcs) of G to Gsub then Gsub is no longer strongly connected.
+4                            B. DE SCHUTTER AND B. DE MOOR
+
+
+     A well-known result from matrix algebra states that any square matrix can be
+transformed into a block upper diagonal matrix with irreducible blocks by simulta-
+neously reordering the rows and columns of the matrix (see, e.g., [1, 2, 5, 12, 17, 22]
+for the proof of this theorem and for its interpretation in terms of graph theory and
+Markov chains):
+     Theorem 2.4. If A ∈ Bn×n then there exists a permutation matrix P ∈ Bn×n
+such that the matrix Â = P ⊗ A ⊗ P T is a block upper triangular matrix of the form
+                                                                 
+                                       Â11    Â12   ...    Â1l
+                                      O       Â22   ...    Â2l 
+(1)                             Â =  .
+                                                                 
+                                                 ..   ..       .. 
+                                      ..         .      .      . 
+                                         O      O     ...    Âll
+
+with l ≥ 1 and where the matrices Â11 , Â22 , . . . , Âll are square and irreducible. The
+matrices Â11 , Â22 , . . . , Âll are uniquely determined to within simultaneous permuta-
+tion of their rows and columns, but their ordering in (1) is not necessarily unique.
+The form in (1) is called the Frobenius normal form of the matrix A. If A is irreducible
+then there is only one block in (1) and then A is a Frobenius normal form of itself.
+Each diagonal block of Â corresponds to an m.s.c.s. of the precedence graph of Â.
+    Theorem 2.5. If A ∈ Bn×n is irreducible, then
+                                                                    k+c      c        k
+(2)           ∃k0 ∈ N, ∃c ∈ N0 , such that ∀k ≥ k0 : A⊗                   = λ⊗ ⊗ A⊗
+
+where λ is equal to 1 if there exists a circuit in G(A), and equal to 0 otherwise.
+     Proof. See, e.g., [1, 7, 13].
+The smallest c for which (2) holds is called the cyclicity [1], index of cyclicity [2] or
+index of imprimitivity2 [5, 12] of the matrix A. The cyclicity c(A) of a matrix A is
+equal to the cyclicity of the precedence graph G(A) of A and can be computed as
+follows. The cyclicity of a strongly connected graph or of an m.s.c.s. is the greatest
+common divisor of the lengths of all the circuits of the given graph or m.s.c.s. If an
+m.s.c.s. or a graph contains no circuits then its cyclicity is equal to 0 by deﬁnition.
+The cyclicity of general graph is the least common multiple of the nonzero cyclicities
+of the m.s.c.s.’s of the given graph.
+     Lemma 2.6. If A ∈ Bn×n is irreducible then c(A) ≤ n.
+     Proof. Let c = c(A). Since A is irreducible, G(A) contains only one m.s.c.s.
+If A = [ 0 ] then we have c = 0 ≤ 1 = n.
+From now on we assume that A 6= O. Since c is the greatest common divisor of the
+lengths of the (elementary) circuits in G(A), c is maximal if there is only one circuit
+and if this circuit has length n. In that case we have c = n. In the other cases, c will
+be less than n.
+So c(A) ≤ n.
+     Lemma 2.7. Let A ∈ Bn×n be irreducible and let c be the cyclicity of A. Consider
+i, j ∈ {1, 2, . . . , n}. If c > 0 and if there exists a (non-empty) path of length l1 from
+j to i and a (non-empty) path of length l2 from j to i then there exists a (possibly
+negative) integer z such that l2 = l1 + zc.
+
+    2 We prefer to use the word “cyclicity” or “index of cyclicity” in this paper in order to avoid
+
+confusion with the concept “index of primitivity” [2, 25] of a nonnegative matrix A, which is deﬁned
+to be the least positive integer γ(A) such that all the entries of Aγ(A) are positive.
+                   CONSECUTIVE POWERS OF A BOOLEAN MATRIX                              5
+
+     Proof. This lemma is a reformulation of Lemma 3.4.1 of [5] that states that if G
+is a strongly connected directed graph with cyclicity c then for each pair of vertices j
+and i of G, the lengths of the paths from j to i are congruent modulo c.
+Remark 2.8. Consider A ∈ Bn×n and i, j ∈ {1, 2, . . . , n}. Let lij be the length of
+the shortest path from vertex j to vertex i in G(A). Note that Lemma 2.7 does not
+imply that there exists a path of length lij + kc from j to i for every k ∈ N.       ✸
+In the next section we discuss upper bounds for the integer k0 that appears in Theo-
+rem 2.5. We also extend this theorem to Boolean matrices that are not irreducible.
+     3. Consecutive powers of a Boolean matrix. In this section we consider
+                 k ∞
+the sequence A⊗ k=1 where A is a Boolean matrix. First we consider matrices
+with a cyclicity that is equal to 0. Next we consider matrices with a cyclicity that
+is larger than or equal to 1. Here we shall make a distinction between four diﬀerent
+cases depending on whether the given matrix is irreducible or not, and on whether its
+cyclicity is equal to 1, or larger than or equal to 1. Of course the last case that will
+be considered is the most general one, but for the other cases we can provide tighter
+                                                                    k ∞
+upper bounds on the length of the transient part of the sequence A⊗ k=1 and that
+is why we consider four diﬀerent cases.
+     If possible we also give examples of matrices for which the sequence of the con-
+secutive matrix powers exhibits the longest possible transient behavior.
+    3.1. Boolean matrices with a cyclicity that is equal to 0. Lemma 3.1.
+                                                k
+Let A ∈ Bn×n . If c(A) = 0 then we have A⊗ = On×n for all k ≥ n.
+    Proof. If the cyclicity of A is equal to 0, then there are no circuits in G(A), which
+means that there do not exist paths in G(A) with a length that is larger than or equal
+to n since in such paths at least one vertex would appear twice, which implies that
+                                                       k
+such paths contain a circuit. Therefore, we have A⊗ = O for all k ≥ n.
+Example 3.2. If there exists a permutation matrix P such that A ∈ Bn×n can be
+written as
+                                                                
+                                              0 1 0 ... 0
+                                            0 0 1 ... 0 
+                    Â = P ⊗ A ⊗ P =  ... ... ... . . . ...  ,
+                                                                
+                                      T                         
+                                                                
+                                            0 0 0 ... 1 
+                                              0 0 0 ... 0
+                                                                      k
+then the upper bound of Lemma 3.1 is tight, i.e., we have A⊗ 6= O for k =
+                          k
+1, 2, . . . , n − 1 and A⊗ = O for all k ≥ n. The graph of the matrix Â is repre-
+sented in Figure 3.1. Note that c(A) = c(Â) = 0 since G(Â) contains no circuits and
+since the transformation from A to Â corresponds to a simultaneous reordering of the
+rows and the columns of A (or of the vertices of G(A)).      ✸
+From now on we only consider matrices with a cyclicity that is larger than or equal
+to 1.
+     3.2. Boolean matrices with cyclicity 1. Theorem 3.3. Let A ∈ Bn×n . If
+                                                                          k+1      k
+the cyclicity of A is equal to 1 and if A is irreducible, then we have A⊗     = A⊗ =
+                         2
+En×n for all k ≥ (n − 1) + 1.
+     Proof. This theorem can be considered as the Boolean equivalent of Theorem 4.14
+of [2] or of Theorem 3.5.6 of [5]. Note that A cannot be equal to [ 0 ] since c(A) = 1.
+6                            B. DE SCHUTTER AND B. DE MOOR
+
+                                                1
+
+
+                                n                               2
+
+
+
+
+                             n −1                               3
+
+
+
+                                              n −2
+
+                Fig. 3.1. The precedence graph of the matrix Â of Example 3.2.
+
+
+If more information about the structure of A is known (such as the number of diagonal
+entries that are equal to 1, the length of the shortest elementary circuit of G(A), or
+whether A is symmetrically nonnegative) other upper bounds for the length of the
+                                k ∞
+transient part of the sequence A⊗ k=1 where A is a Boolean matrix with cyclicity
+1 can be found in §2.4 of [2].
+Example 3.4. If there exists a permutation matrix P such A ∈ Bn×n can be written
+as
+                                                             
+                                            0 1 0 ... 0
+                                          0 0 1 ... 0 
+                     Â = P ⊗ A ⊗ P =  ... ... 0 . . . ...  ,
+                                                             
+                                    T
+(3)
+                                                             
+                                                             
+                                          1 0 0 ... 1 
+                                            1 0 0 ... 0
+                                                          k
+then the bound in Theorem 3.3 is tight: we have A⊗ = E for all k ≥ (n − 1)2 + 1 but
+            2
+    (n−1)
+A⊗        6= 1. Let us now show that the latter part of this statement indeed holds.
+Since the transformation from A to Â = P ⊗ A ⊗ P T corresponds to a simultaneous
+reordering of the rows and the columns of A, we may assume without loss of generality
+that P is the identity matrix. So A = Â. If n = 2 then we have (n − 1)2 + 1 = 2.
+Since
+                                 
+                            1 1              2      3
+                     A=             and A⊗ = A⊗ = . . . = E ,
+                              1 0
+                    (n−1)2
+we indeed have A⊗          6= E if n = 2.
+From now on we assume that n > 2. In Figure 3.2 we have drawn G(A). There are
+two elementary circuits in G(A): circuit C1 : n → n − 1 → . . . → 1 → n of length
+n and circuit C2 : n − 1 → n − 2 → 1 → n − 1 of length n − 1. Note that only the
+longest circuit passes through vertex n. Furthermore, if n > 2 then gcd(n − 1, n) = 1.
+Any circuit that passes through vertex n can be considered as a concatenation of α
+times C1 , a path from vertex n to a vertex t in C2 , β times C2 , and a path from t
+to n for some nonnegative integers α and β. The length of this circuit is equal to
+n + αn + β(n − 1). By Lemma 2.1 the smallest integer N such that for any integer
+                        CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                            7
+
+                                                       1
+
+
+                                       n                                  2
+
+
+
+
+                                    n −1                                 3
+
+
+                                                      n −2
+
+                    Fig. 3.2. The precedence graph of the matrix Â of Example 3.4.
+
+
+p ≥ N there exist nonnegative integers α and β such that p = αn + β(n − 1) is
+given by N = (n − 1)(n − 2). This implies that (n − 1)(n − 2) − 1 cannot be written
+as γn + δ(n − 1) with γ, δ ∈ N. This implies that there does not exist a circuit
+of length n + (n − 1)(n − 2) − 1 = (n − 1)2 that passes through vertex n. Hence,
+ (n−1)2                     (n−1)2
+ A⊗           = 0 and thus A⊗        6= E.     ✸
+               nn
+Let A ∈ Bn×n . If Â = P ⊗ A ⊗ P T is the Frobenius normal form of A, then we have
+A = P T ⊗ Â ⊗ P . Hence,
+                                k                      ⊗
+                                                        k                 k
+                            A⊗ = (P T ⊗ Â ⊗ P )             = P T ⊗ Â⊗ ⊗ P
+for all k ∈ N. Therefore, we may consider without loss of generality the sequence
+ ⊗k ∞                                       k ∞
+  Â     k=1
+               instead of the sequence A⊗ k=1 . Furthermore, since the transformation
+from A to Â corresponds to a simultaneous reordering of the rows and columns of A
+(or to a reordering of the vertices of G(A)), we have c(A) = c(Â).
+      Theorem 3.5. Let Â ∈ Bn×n be a matrix of the form (1) where the matrices
+Â11 , Â22 , . . . , Âll are irreducible and such that c(Â) = 1. Deﬁne sets α1 , α2 , . . . , αl
+such that Âαi αj = Âij for all i, j with i ≤ j. Let ni = #αi for all i. Deﬁne:
+                                            (
+                                              0    if Âii = [ 0 ]
+                                       λi =
+                                              1    otherwise
+
+for i = 1, 2, . . . , l. Deﬁne
+        
+  Sij = {i0 , i1 , . . . , is } ⊆ {1, 2, . . . , l}        i = i0 < i1 < . . . < is = j and
+                                                             Âir ir+1 6= O for r = 0, 1, . . . , s − 1
+for all i, j with i < j.
+Let λii = λi and kii = (ni − 1)2 + 1 for i = 1, 2, . . . , n. Deﬁne
+                   
+        Γij =        t ∃γ ∈ Sij such that t ∈ γ
+                    M
+                   
+                           λt                                if Γij 6= ∅
+        λij =         t∈Γij
+                   
+                      0                                       otherwise
+                   
+8                                   B. DE SCHUTTER AND B. DE MOOR
+                       (
+                         arg min {nt | t ∈ Γij and λtt 6= 0}        if λij 6= 0
+         tij   =
+                         0                                          otherwise
+                        X
+                       
+                       
+                       
+                              nt + ktij tij                       if λij 6= 0
+                        t∈Γij
+                       
+        kij    =           t6=tij
+                         #Γij                                      if Γij 6= ∅ and λij = 0
+                       
+                       
+                       
+                       
+                       
+                       1                                          if Γij = ∅
+
+for all i, j with i < j. Then we have for all i, j with i ≤ j:
+                             (
+               k             Eni ×nj    if λij 6= 0
+(4)            Â⊗
+                           =                                 for all k ≥ kij .
+                     αi αj     Oni ×nj    if λij = 0
+
+For all i, j with i > j we have
+                         k
+(5)                      Â⊗                   = Oni ×nj   for all k ∈ N .
+                                       αi αj
+
+
+Remark 3.6. Note that Âij is an ni by nj matrix for all i, j.
+Let us now give a graphical interpretation of the sets Sij and Γij .
+Let Ci be the m.s.c.s. of G(Â) that corresponds to Âii for i = 1, 2 . . . , l. So αi is the
+set of vertices of Ci .
+If {i0 = i, i1 , . . . , is−1 , is = j} ∈ Sij then there exists a path from a vertex in Cir
+to a vertex in Cir−1 for each r = 1, 2, . . . , s. Since each m.s.c.s. Ci of G(Â) either is
+strongly connected or consists of only one vertex, this implies that there exists a path
+from a vertex in Cj to a vertex in Ci that passes through Cis−1 , Cis−2 , . . . , Ci1 .
+If Sij = ∅ then there does not exist any path from a vertex in Cj to a vertex in Ci .
+The set Γij is the set of indices of the m.s.c.s.’s of G(Â) through which some path
+from a vertex of Cj to a vertex of Ci passes.
+If Sij 6= ∅ then Ctij is the smallest m.s.c.s. of G(A) that contains a circuit and through
+which some path from a vertex of Cj to a vertex of Ci passes3 .                  ✸
+     Proof. Proof of Theorem 3.5.
+Let Ci be the m.s.c.s. of G(Â) that corresponds to Âii for i = 1, 2 . . . , l. Since Âαi αj =
+O if i > j, there are no arcs from any vertex of Cj to a vertex in Ci . As a consequence,
+(5) holds if i > j.
+Note that c(Âii ) = 1 for all i ∈ {1, 2, . . . , l} with Âii 6= [ 0 ] since c(Â) = 1 and since
+each Âii corresponds to an m.s.c.s. of G(Â).
+If l = 1 then Â is irreducible and then (4) holds by Theorem 3.3. It is easy to verify
+that (4) holds if i = j.
+From now on we assume that l > 1 and i < j.
+If Γij = ∅ then there does not exist a path from a vertex in Cj to a vertex in Ci .
+             k
+Hence, Â⊗ α α = O for all k ∈ N.
+                   i   j
+
+If Γij 6= ∅ and λij = 0 then we have Âtt = [ 0 ] for all t ∈ Γij . So there exist paths
+from a vertex in Cj to a vertex in Ci , but each path passes only through m.s.c.s.’s
+that consist of one vertex and contain no loop. Such a path passes through at most
+#Γij of such m.s.c.s.’s (Cj and Ci included). This implies that there does not exist
+   3 Or more precisely: if S 6= ∅ then C
+                            ij           tij belongs to the set of the smallest m.s.c.s.’s of G(A) that
+contain a circuit and through which some path from a vertex of Cj to a vertex of Ci passes.
+                          CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                              9
+
+                          Ci = Ci
+                                    0
+                  v0
+                            u0
+
+
+
+                                                        Cir                     Cir+1
+                          Cir −1
+                  vr −1                                                     vr+1
+                                                              ur
+                          ur −1
+                                                   vr                           ur+1
+
+
+
+                                                                                        Cj = Cis
+                                                                           vs
+
+                                                                                   us
+
+    Fig. 3.3. Illustration of the proof of Theorem 3.5. There exists a path from vertex us of m.s.c.s.
+Cj to vertex v0 of m.s.c.s. Ci that passes through the m.s.c.s.’s Cis−1 , Cis−2 , . . . , Ci1 .
+
+
+
+a path with a length that is larger than or equal to #Γij from a vertex in Cj to a
+                                                k
+vertex in Ci . Hence, we have A⊗ α α = O for all k ≥ #Γij .
+                                                   i j
+From now on we assume that l > 1, i < j, Γij 6= ∅ and λij 6= 0. Then there exists
+a set {i0 , i1 , . . . , is } ⊆ {1, 2, . . . , l} with tij ∈ {i0 , i1 , . . . , is } and there exist indices
+ur ∈ αir , vr+1 ∈ αir+1 for r = 0, 1, . . . , s − 1 such that i = i0 < i1 < . . . < is = j and
+Âur vr+1 6= 0 for each r. So there exists an arc from vertex vr+1 of Cir+1 to vertex ur
+of Cir for each r ∈ {0, 1, . . . , s − 1}. Select an arbitrary vertex us of Cis = Cj and an
+arbitrary vertex v0 of Ci0 = Ci . Note that s ∈ {1, 2, . . . , j − i}. Let r ∈ {0, 1, . . . , s}.
+Recall that the only Boolean zero matrix that is irreducible is the 1 by 1 Boolean zero
+matrix [ 0 ]. Now we distinguish between two cases:
+           • If Âir ir = [ 0 ] then we have nir = 1 and ur = vr . So in this case we could
+say that there exists an empty path of length lr = 0 from vertex ur to vertex vr of
+Cir .
+           • On the other hand, if Âir ir 6= [ 0 ], then there exists a (possibly empty) path
+of length lr ≤ nir − 1 from vertex ur to vertex vr of Cir since G(Âir ir ) is strongly
+connected. If ur = vr then this path is empty and has length 0.
+So for each r ∈ {0, 1, . . . , s} there exists a (possible empty) path of length lr ≤ nir − 1
+from vertex ur to vertex vr of Cir .
+Let t̃ = ir̃ = tij . Clearly, we have Âir̃ ir̃ 6= [ 0 ]. Since Âir̃ ir̃ is irreducible and since
+c(Âir̃ ir̃ ) = 1, it follows from Theorem 3.3 that there exists a path of length k from
+vertex ur̃ to vertex vr̃ of Cir̃ for any k ≥ kir̃ ir̃ = kt̃t̃ . Note that #Γij ≥ s + 1. Hence,
+
+              X                         X                                          s
+                                                                                   X
+     kij =             nt + kt̃t̃ =              (nt − 1) + (#Γij − 1) + kt̃t̃ ≥           lr + s + kt̃t̃ .
+              t∈Γij                     t∈Γij                                      r=0
+               t6=t̃                     t6=t̃                                     r6=r̃
+10                           B. DE SCHUTTER AND B. DE MOOR
+
+
+So if we have an integer k ≥ kij then we can decompose it as
+
+                  k = l0 + l1 + . . . + lr̃−1 + lr̃+1 + . . . + ls + s + kt̃t̃ + k̃
+
+with k̃ ∈ N. By Theorem 3.3 there exists a path of length kt̃t̃ + k̃ from ur̃ to vr̃ in
+Cir̃ for each k̃ ∈ N. This implies that there exists a path from vertex us to vertex
+v0 of length k in G(Â). This path consists of the concatenation of paths of length lr
+from vertex ur to vertex vr of Cir for r = 0, 1, . . . , r̃ − 1, r̃ + 1, . . . , s, paths of length
+1 from vertex vr+1 of Cir+1 to vertex ur of Cir for r = 0, 1, . . . , s − 1 and a path of
+length kt̃t̃ + k̃ from vertex ur̃ to vertex vr̃ of Cir̃ (See Figure 3.3). This implies that
+     k
+ Â⊗ v0 us = 1 for all k ≥ kij . Since us is an arbitrary vertex of Cj and since v0 is an
+                                                 k
+arbitrary vertex of Ci , this implies that Â⊗ αi αj = E for all k ≥ kij .
+So (4) also holds if λij 6= 0.
+Example 3.7. Consider the following matrix:
+                                                            
+                                          0      1   0    0
+                                         1      0   1    0 
+                                   Â = 
+                                                          1  .
+                                                            
+                                         1      0   0
+                                          0      0   0    0
+
+This matrix is in Frobenius normal form and its block structure is indicated by the
+vertical and horizontal lines. The precedence graph of Â is represented in Figure 3.4.
+Using the notations and deﬁnitions of Theorem 3.5, we have l = 2,
+                                                         
+                          0 1 0              0
+                 Â11 =  1 0 1  , Â12 =  0  and Â22 = [ 0 ] .
+                          1 0 0              1
+
+Furthermore,
+            α1 = {1, 2, 3}, α2 = {4}, n1 = 3, n2 = 1, λ1 = λ11 = 1, λ2 = λ22 = 0,
+S12 = {1, 2} , Γ12 = {1, 2}, λ12 = 1, t12 = 1, k11 = 5, k22 = 1 and k12 = 1 + 5 = 6.
+We have
+                                                                                              
+             1 0 1 0                1 1 0 1               1 1                             1       0
+        2   1 1 0 1         3    1  1 1 0       4
+                                                        1 1
+                                                                                         1       1 
+     Â⊗ = 
+               1 0 0  , Â =  1 0 1 0  , Â =  1 1
+                           ⊗                   ⊗                                                 
+            0                                                                            0       1 
+             0 0 0 0                0 0 0 0               0 0                             0       0
+                                             
+                1 1 1 1                 1 1 1 1
+           5   1 1 1   1        6
+                                       1 1 1 1 
+                                                      7
+               1 1 1 0  , Â =  1 1 1 1  = A = . . .
+        Â⊗ =                 ⊗                     ⊗
+
+
+
+                0 0 0 0                 0 0 0 0
+
+                                                                                      k
+                                                                            11 = E for all
+Note that Â11 is a matrix of the form (3). So the smallest K11 for which Â⊗
+                                                                              k
+k ≥ K11 is equal to k11 = 5. Furthermore, the smallest K12 such that Â⊗ α α = E
+                                                                                          1   2
+
+for all k ≥ K12 is equal to k12 = 6. So for the matrix Â of this example all the bounds
+kij that appear in Theorem 3.5 are tight.
+                   CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                     11
+
+                                                   1
+
+
+
+
+                                 4                                2
+
+
+
+
+                                                    3
+
+               Fig. 3.4. The precedence graph of the matrix Â of Example 3.7.
+
+
+It is easy to verify that for a matrix of the form
+                                                                 
+                                  0 1 0 ... 0                 0
+                                 0 0 1 ... 0                 0 
+                                 .. .. .. . .     .           .. 
+                                                               
+                                 . . .
+                                               . ..            . 
+                                                                  
+                                 1 0 0 ... 1                 0 
+                                                                 
+                                 1 0 0 ... 0                 1 
+                                  0 0 0 ... 0                 0
+all the bounds kij that appear in Theorem 3.5 are tight.                  ✸
+                                                                              k+1       k
+    Lemma 3.8. Let A ∈ Bn×n with c(A) = 1. Then we have A⊗                          = A⊗ for all
+k ≥ (n − 1)2 + 1.
+                                                        k+1           k
+     Proof. If A is irreducible, then we have A⊗    = A⊗ for all k ≥ (n − 1)2 + 1 by
+Theorem 3.3.
+So from now on we assume that A is not irreducible. Let Â = P ⊗ A ⊗ P T be the
+Frobenius normal form of A. Assume that Â is of the form (1) where the Âii ’s are
+square and irreducible. Let the numbers λij , ni , tij , kij and the sets αi and Γij be
+deﬁned as in Theorem 3.5.
+We have kii = (ni − 1)2 + 1 ≤ (n − 1)2 + 1 for all i.
+Let us now prove that kij ≤ (n − 1)2 + 1 for all i, j with i < j. Consider indices
+i, j ∈ {1, 2, . . . , l} with i < j.
+        • If Γij = ∅ then we have kij = 1 ≤ (n − 1)2 + 1 for all n ∈ N0 .
+        • We have n ≤ (n − 1)2 + 1 for all n ∈ N0 . So if Γij 6= ∅ and λij = 0 then we
+have
+                    kij = #Γij ≤ j − i + 1 ≤ n ≤ (n − 1)2 + 1 .
+      • Since nt ≥ 1 for each t ∈ {1, 2, . . . , l} and since l ≥ 1, we have
+                        l
+                        X                  l
+                                           X
+                                nt ns ≥            1 ≥ l2 − l ≥ l − 1 .
+                        t,s=1              t,s=1
+                         t6=s               t6=s
+
+Hence,
+                                            l
+                                            X
+(6)                                  l ≤           nt ns + 1 .
+                                           t,s=1
+                                            t6=s
+12                                  B. DE SCHUTTER AND B. DE MOOR
+
+
+So if λij 6= 0 then we have
+                      X
+         kij    =             nt + ktij tij
+                     t∈Γij
+                     t6=tij
+                     l
+                     X
+                ≤          ktt                        (since kii = (ni − 1)2 + 1 ≥ ni for each i)
+                     t=1
+                     l
+                     X
+                              (nt − 1)2 + 1
+                                           
+                ≤
+                     t=1
+                     l
+                     X
+                ≤          (n2t − 2nt + 2)
+                     t=1
+                     l
+                     X            Xl
+                ≤          n2t − 2   nt + 2l
+                     t=1                 t=1
+                     l
+                     X
+                ≤          n2t − 2n + 2l
+                     t=1
+                                                                          
+                     l
+                     X                                    l
+                                                          X
+                           n2t − 2n + 2 
+                                                                           
+                ≤                                                nt ns + 1 
+                                                                               (by (6))
+                     t=1                                  t,s=1
+                                                           t6=s
+                                                            
+                         l
+                         X                       l
+                                                 X
+                                n2t + 2
+                                                           
+                ≤    
+                                                            − 2n + 2
+                                                      nt ns 
+                         t=1                 t,s=1
+                                              t6=s
+
+                       l
+                                    !2
+                       X
+                ≤              nt        − 2n + 1 + 1
+                        t=1
+                       2
+                ≤    n − 2n + 1 + 1
+                ≤    (n − 1)2 + 1 .
+
+Hence, kij ≤ (n − 1)2 + 1 for all i, j with i ≤ j. As a consequence, it follows from
+                     k+1              k
+Theorem 3.5 that Â⊗       α α
+                               = Â⊗ α α for all k ≥ (n − 1)2 + 1 and for all i, j ∈
+                                         i   j                    i   j
+                                k+1               k                                    k            k
+{1, 2, . . . , l}. Hence, Â⊗            = Â⊗ for all k ≥ (n−1)2 +1. Since A⊗ = P T ⊗ Â⊗ ⊗P ,
+                        k+1                k
+this implies that A    ⊗
+                                 =A      ⊗
+                                                 for all k ≥ (n − 1)2 + 1.
+     3.3. Boolean matrices with a cyclicity that is larger than or equal to
+1. Lemma 3.9. Let A ∈ Bn×n be an irreducible matrix with c(A) ≥ 2 and let
+i, j ∈ {1, 2, . . . , n}. Then there exists a (possibly empty) path Pij from j to i in G(A)
+that passes through at least one vertex of each (elementary) circuit of G(A) and that
+                                                 2
+has a length that is less than or equal to n 2−1 .
+     Proof. Since the cyclicity of A is larger than or equal to 2, there are no loops in
+G(A). Hence, A contains at least one circuit. Since A is irreducible, this implies that
+j has to belong to an elementary circuit of G(A). Since the length of any elementary
+circuit of G(A) is larger than or equal to 2, there exists a set S = {i1 = j, i2 , . . . , im } ⊆
+                          CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                    13
+
+{1, 2, . . . , n} with m ≤ n2 such that any (elementary) circuit of G(A) contains at
+                              
+
+least one vertex that belongs to S. Deﬁne im+1 = i. Since G(A) is strongly connected
+there exists a (possibly empty) path Pk with length lk ≤ n−1 from vertex ik to vertex
+ik+1 for each k ∈ {1, 2, . . . , m}. Let lk be the length of Pk . There exists a path Pij
+from j to i that contains at least one vertex of each (elementary) circuit of G(A): this
+path consists of the concatenation of P1 , P2 , . . . , Pm . If lij is the length of Pij , then
+we have
+                                                                         n2 − 1
+                                                       
+                                                n+1
+        lij = l1 + . . . + lm ≤ m(n − 1) ≤                (n − 1) ≤              .
+                                                  2                         2
+
+Remark 3.10. Note that we could have derived an upper bound that is more tight in
+Lemma 3.9. The upper bound of Lemma 3.9 will be used in the proof of Theorem 3.11.
+However, in that proof we shall also use Lemmas 2.2 and 2.3 which also yield upper
+bounds, and therefore we do not reﬁne the upper bound of Lemma 3.9.        ✸
+    Theorem 3.11. Let A ∈ Bn×n be irreducible and let c = c(A) > 0. If we deﬁne
+                  
+                   (n − 1)2 + 1                             if c = 1
+(7)        kn,c =                n2
+                                     − 1   n 2           
+                   max n − 1,           +     − 3n + 2c     if c > 1 ,
+                                     2      c
+then we have
+         k+c          k          k       k+1                  k+c−1
+(8) A⊗         = A⊗        and A⊗ ⊕ A⊗         ⊕ . . . ⊕ A⊗           = En×n   for all k ≥ kn,c .
+
+     Proof. From Theorem 3.3 it follows that (8) holds if c is equal to 1. Furthermore,
+if the ﬁrst part of (8) holds, then the second part also holds since A is irreducible.
+From now on we assume that c > 1. Let i, j ∈ {1, 2, . . . , n}.
+Let C1 , C2 , . . . , Cm be the elementary circuits of G(A). Let li be the length of Ci for
+i = 1, 2, . . . , m. Since A is irreducible, we have c = gcd(l1 , l2 , . . . , lm ). Hence, there
+exist positive integers w1 , w2 , . . . , wm such that wi c = li for each i and such that
+gcd(w1 , w2 , . . . , wm ) = 1.
+First we consider the case where there is only one elementary circuit or where all the
+elementary circuits have the same length. Hence, c = l1 . Since A is irreducible, both
+i and j have to belong to some elementary circuit. We may assume without loss of
+generality that j belongs to C1 . Since A is irreducible there exist paths from vertex
+j to vertex i of G(A). Let Pij be the shortest (possibly empty) path from j to i and
+let lij be the length of this path. We have lij ≤ n − 1 (Note that lij = 0 if i is equal
+to j.). For any integer k ∈ N there exists a path of length lij + kc from j to i: this
+                                                           lij +kc 
+path consists of k times C1 followed by Pij . Hence A⊗               ij
+                                                                        = 1 for all k ≥ 0. Let
+l ∈ N with l ≥ n − 1. Now there are two possibilities. If l can be written as l = lij + kc
+                                         l
+for some k ∈ N, then we have A⊗ ij = 1. If l cannot be written as l = lij + kc for
+any k ∈ N, then it follows from Lemma 2.7 that there does not exist a path from j to
+                              l
+i and then we have A⊗ ij = 0.
+This implies that (8) holds if all the elementary circuits of G(A) have the same length.
+From now on we assume that there exist at least two elementary circuits in G(A) that
+have diﬀerent lengths.
+Since A is irreducible it follows from Lemma 3.9 that there exists a (possibly empty)
+                                                              2
+path Pij from vertex j to vertex i of G(A) with length lij ≤ n 2−1 that passes through
+14                              B. DE SCHUTTER AND B. DE MOOR
+
+
+at least one vertex of each elementary circuit of G(A). For each circuit Ck we select
+one vertex vk that belongs to the path Pij . Let l be an integer that can be written
+as l = lij + pc with p ≥ g(w1 , w2 , . . . , wm ) + 1. Since gcd(w1 , w2 , . . . , wm ) = 1, there
+exist nonnegative integers α1 , α2 , . . . , αm such that p = α1 w1 + α2 w2 + . . . + αm wm .
+As a consequence, we have
+
+      l = lij + α1 w1 c + α2 w2 c + . . . + αm wm c = lij + α1 l1 + α2 l2 + . . . + αm lm .
+
+So there exists a path of length l from j to i: this path consists of the concatenation
+of Pij and αk times the circuit Ck (vk → . . . → vk ) for k = 1, 2, . . . , m. Hence,
+     lij +pc 
+ A⊗            ij
+                  = 1 for all p ≥ g(w1 , w2 , . . . , wm ) + 1.
+Let us now determine an upper bound for g(w1 , w2 , . . . , wm ). If ws = wt for some s, t ∈
+{1, 2, . . . , m} with s 6= t, then g(w1 , w2 , . . . , wm ) = g(w1 , w2 , . . . , ws−1 , ws+1 , . . . , wm ).
+Therefore, we may assume without loss of generality that all the wi ’s are diﬀerent and
+thus also that w1 < w2 < . . . < wm .
+Since there are at least two elementary circuits in G(A) that have diﬀerent lengths, we
+have m ≥ 2. We have wk = lck ≤ nc for all k. Hence, wm ≤ nc and w1 ≤ nc − (m − 1) ≤
+n
+c − 1 since w1 < w2 . . . < wm and m ≥ 2. As a consequence, we have
+
+          g(w1 , w2 , . . . , wm )   ≤   (w1 − 1) (wm − 1) − 1                (by Lemma 2.2)
+                                                        
+                                           n          n
+                                     ≤        −2        −1 −1
+                                           c          c
+                                          n 2    n
+(9)                                  ≤          −3 +1 .
+                                           c        c
+If we deﬁne
+                                 n2 − 1
+                                                                
+                                                 n 2       n
+                               K=           +            −3 +2 c
+                                      2           c         c
+                                                
+then we have lij + g(w1 , w2 , . . . , wm ) + 1 c ≤ K. So if we have an integer l that is
+larger than K then it can either be written as l = lij +pc with p ≥ g(w1 , w2 , . . . , wm )+1
+              l
+and then A⊗ ij = 1, or l cannot be written as l = lij + pc for any p ∈ N and then it
+follows from Lemma 2.7 that there does not exist a path of length l from j to i, i.e.,
+     l
+ A⊗ ij = 0. Note that K ≤ kn,c .
+Hence, (8) also holds in this case.
+Remark 3.12. In the proof of Theorem 3.11 we could also have used Lemma 2.3
+to determine an upper bound for g(w1 , w2 , . . . , wm ). We have m ≥ 2 and thus also
+wm ≥ 2. Furthermore, wm−1 ≤ nc − 1. Hence,
+                                                           jw k
+                                                               m
+                     g(w1 , w2 , . . . , wm ) ≤ 2wm−1               − wm
+                                                             m
+                                                              
+                                                        n       n
+                                              ≤ 2         −1        −2
+                                                        c       2c
+                                                     n 2 n
+(10)                                          ≤            −     −2 .
+                                                      c       c
+In the second part of the proof of Theorem 3.11 we have c ≥ 2. Since A is irreducible,
+it follows from Lemma 2.6 that c ≤ n. Hence, 1 ≤ nc ≤ n2 . It is easy to verify that
+the upper bound of (10) is less than the upper bound of (9) if nc < 32 . However, if
+                      CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                       15
+
+n   3                             1
+c < 2 , then we would have wm−1 ≤ 2 , which is not possible.             This implies that for
+combinations of n and c for which there are at least two elementary circuits in G(A)
+with diﬀerent lengths, the upper bound of (9) is less than or equal to the upper bound
+of (10).        ✸
+The Boolean sum of sequences is deﬁned as follows. Consider sequences gi = {(gi )k }∞            k=1
+for i = 1, 2, . . . , m with (gi )k ∈ B for all i, k. The sequence g = g1 ⊕ g2 ⊕ . . . ⊕ gm
+is deﬁned by gk = (g1 )k ⊕ (g2 )k ⊕ . . . ⊕ (gm )k for all k ∈ N0 .
+     Lemma 3.13. Consider sequences gi = {(gi )k }∞        k=1 for i = 1, 2, . . . , m with (gi )k ∈
+B for all i, k. Suppose that for each i ∈ {1, 2, . . . , m} there exist integers Ki , ci ∈ N0
+such that
+
+(11)                           (gi )k+ci = (gi )k          for all k ≥ Ki .
+
+If K = max Ki and
+           i
+      (
+       1                                if ci = 1 and (gi )Ki = 1 for some i ∈ {1, 2, . . . , m}
+   c=
+       lcm(c1 , c2 , . . . , cm )       otherwise,
+
+then the sequence g = g1 ⊕ g2 ⊕ . . . ⊕ gm satisﬁes gk+c = gk for all k ≥ K.
+    Proof. Note that (11) implies that
+
+(12)           (gi )k+pci = (gi )k          for all k ≥ K ≥ Ki and for all p ∈ N .
+
+First we assume that there exists an index i ∈ {1, 2, . . . , m} such that ci = 1 and
+(gi )Ki = 1. Then we have (gi )k = 1 for all k ≥ Ki and thus also gk = 1 for all
+k ≥ K ≥ Ki .
+From now on we assume that there does not exist any index i ∈ {1, 2, . . . , m} such
+that ci = 1 and (gi )Ki = 1.
+     Since c = lcm(c1 , c2 , . . . , cm ) there exist positive integers w1 , w2 , . . . , wm such that
+c = wi ci for i = 1, 2, . . . , m. Consider an integer k ≥ K. We have
+                                         m
+                                         M
+                          gk+c      =           (gi )k+c
+                                         i=1
+                                         Mm
+                                    =           (gi )k+wi ci
+                                         i=1
+                                         Mm
+                                    =           (gi )k                  (by (12))
+                                         i=1
+                                    =    gk .
+
+Example 3.14. Consider the sequences
+
+                     g1    = 1, 0, 1 , 0 , 1, 0 , 1, 0 , 1, 0 , 1, 0 , 1 , 0, 1 , 0, . . .
+                     g2    = 1, 0, 0 , 1 , 0, 0 , 1, 0 , 0, 1 , 0, 0 , 1 , 0, 0 , 1, . . .
+
+If we use the notation of Lemma 3.13 then we have c1 = 2, c2 = 3 and K1 = K2 = 1.
+Hence, c = lcm(2, 3) = 6 and K = max(K1 , K2 ) = 1. We have
+
+                 g = g 1 ⊕ g 2 = 1, 0, 1 , 1, 1 , 0 , 1, 0 , 1, 1 , 1, 0 , 1, 0 , 1 , 1, . . .
+
+It is easy to verify that gk+6 = gk for all k ≥ 1.                    ✸
+16                                    B. DE SCHUTTER AND B. DE MOOR
+
+
+      Theorem 3.15. Let Â ∈ Bn×n be a matrix of the form (1) where the matrices
+Â11 , Â22 , . . . , Âll are irreducible. Deﬁne sets α1 , α2 , . . . , αl such that Âαi αj = Âij
+for all i, j with i ≤ j. Let ni = #αi and cii = ci = c(Âii ) for all i. Deﬁne:
+                                           (
+                                             0     if Âii = [ 0 ]
+                                     λi =
+                                             1     otherwise
+for i = 1, 2, . . . , l. Deﬁne
+         
+  Sij = {i0 , i1 , . . . , is } ⊆ {1, 2, . . . , l}          i = i0 < i1 < . . . < is = j and
+                                                               Âir ir+1 6= O for r = 0, 1, . . . , s − 1
+for all i, j with i < j.
+Let λii = λi and kii = ki = kni ,ci for i = 1, 2, . . . , n where kni ,ci is deﬁned as in (7)
+with kni ,0 = 0 by deﬁnition.
+For each i, j with i < j we deﬁne for each γ ∈ Sij :
+                                 δγ     =   {t ∈ γ | λt 6= 0}
+                                            (
+                                              gcd{ct | t ∈ δγ }            if δγ 6= ∅
+                                 cγ     =
+                                              1                            otherwise.
+Deﬁne
+             
+Γij    =          t ∃γ ∈ Sij such that t ∈ γ
+             
+∆ij    =      t t ∈ Γij and λt 6= 0
+             (
+                  1                              if ∆ij 6= ∅
+λij    =
+                  0                              otherwise
+             (
+                  lcm{cγ |γ ∈ Sij }              if λij 6= 0 and cγ 6= 1 for each γ ∈ Sij with δγ 6= ∅
+ cij   =
+                  1                              otherwise
+             (
+               arg max{nt | t ∈ ∆ij }        if λij 6= 0
+ rij   =
+               1                             otherwise
+              X
+             
+             
+             
+                     knt ,ct + #Γij − 1 +
+               t∈∆ij
+             
+             
+             
+                                                           
+                                     (                    )
+                                          2
+             
+             
+                                       nrij
+                   max 0, max                − 3nrij + 2cγ                         if λij 6= 0
+                                                            
+kij    =
+                              γ∈Sij     c γ
+                               δγ 6=∅
+             
+             
+             
+             
+               #Γ                                                                    if Γij 6= ∅ and λij = 0
+             
+                   ij
+             
+             
+             
+             
+             
+             1                                                                      if Γij = ∅
+for all i, j with i < j.
+Then we have for all i, j with i ≤ j:
+                      k+cij          k
+(13)                  Â⊗         = Â⊗                                     for all k ≥ kij
+                                         αi αj             αi αj
+
+and
+                                                                               (
+                     k          k+1                   k+cij −1                    Eni ×nj    if λij 6= 0
+(14)         Â  ⊗
+                         ⊕ Â
+                            ⊗
+                                      ⊕ . . . ⊕ Â⊗
+                                                                   αi αj
+                                                                           =
+                                                                                   Oni ×nj    if λij = 0
+                      CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                           17
+
+for all k ≥ kij .
+For all i, j with i > j we have
+                         k
+(15)                     Â⊗               = Oni ×nj        for all k ∈ N .
+                                   αi αj
+
+
+      Proof. Let Ci be the m.s.c.s. of G(Â) that corresponds to Âii for i = 1, 2, . . . , l.
+Let i, j ∈ {1, 2, . . . , l}. In the proof of Theorem 3.15 is has already been proved that
+(15) holds if i > j, and that (13) and (14) hold if i ≤ j and Γij = ∅, or if i ≤ j,
+Γij 6= ∅ and λij = 0. Furthermore, (13) and (14) hold by Theorem 3.11 if i = j.
+So from now on we assume that i < j, Γij 6= ∅ and λij 6= 0. Note that i < j implies
+that l > 1.
+Select an arbitrary vertex u of Ci and an arbitrary vertex v of Cj .
+Since λij 6= 0 there exists at least one set γ ∈ Sij for which δγ 6= ∅. So ∆ij 6= ∅ and
+kij is well deﬁned. Note that kij ≥ #Γij . If γδ = ∅ for some set γ ∈ Sij then there
+do not exist paths from v to u of length n ≥ #Γij that correspond to γ. So from now
+on we only consider sets γ ∈ Sij for which δγ 6= ∅.
+Let γ = {i0 , i1 , . . . , is } ∈ Sij with i = i0 < i1 < . . . < is = j. Since we assume that
+δγ 6= ∅, we have Âir ir 6= [ 0 ] for at least one index ir ∈ γ. Assume that δγ is given by
+{j0 , j1 , . . . , jŝ }. Deﬁne
+        
+ S = (U, V )                 U = {u0 , u1 , . . . , us }, V = {v0 , v1 , . . . , vs }, us = v, v0 = u, and
+                           ur ∈ αir , vr+1 ∈ αir+1 and (Â)ur vr+1 6= 0 for r = 0, 1, . . . , s        .
+
+Let (U, V ) ∈ S with U = {u0 , u1 , . . . , us } and V = {v0 , v1 , . . . , vs }. Let P(γ, U, V )
+be the set of paths from v to u that pass through m.s.c.s. Cir for r = 0, 1, . . . , s and
+that enter Cir at vertex ur for r = 0, 1, . . . , s − 1 and that exit from Cir through
+vertex vr for r = 1, 2, . . . , s (See also Figure 3.3). Let the sequences {(gγ,U,V )k }∞   k=1
+and {(gγ )k }∞
+             k=1 be deﬁned by
+                 (
+                   1 if there exists a path of length k that belongs to P(γ, U, V )
+ (gγ,U,V )k =
+                   0 otherwise
+                 
+                 1
+                          if there exists a path of length k that belongs to P(γ, U, V )
+     (gγ )k =              for some pair (U, V ) ∈ S
+                 
+                 
+                   0 otherwise.
+Deﬁne cγ = gcd{ct |t ∈ δγ }. Let us now show that the sequences {(gγ,U,V )k }∞
+                                                                             k=1 and
+{(gγ )k }∞
+         k=1 satisfy
+
+(16)                                       (gγ,U,V )k+cγ = (gγ,U,V )k            for all k ≥ kij
+(17)(gγ,U,V )k ⊕ (gγ,U,V )k+1 ⊕ . . . ⊕ (gγ,U,V )k+cγ −1 = 1                     for all k ≥ kij
+(18)                                       (gγ )k+cγ = (gγ )k                    for all k ≥ kij
+(19)            (gγ )k ⊕ (gγ )k+1 ⊕ . . . ⊕ (gγ )k+cγ −1 = 1                     for all k ≥ kij .
+
+Note that if (16) and (17) hold for each pair (U, V ) ∈ S then (18) and (19) also hold.
+Therefore, we now show that (16) and (17) hold. Deﬁne ũr = us and ṽr = vs if jr = is
+for r = 0, 1, . . . , ŝ. We consider three cases:
+Case A: cjr̃ = 1 for some r̃ ∈ {0, 1, . . . , ŝ}.
+         In this case we have cγ = 1.
+18                           B. DE SCHUTTER AND B. DE MOOR
+
+
+         Let lr be the length of the shortest (possibly empty) path from vertex ũr to
+         vertex ṽr of Cjr for each r ∈ {0, 1, . . . , ŝ}. We have lr ≤ njr − 1 for each r.
+         Since Âjr̃ jr̃ is irreducible and since cjr̃ = 1, it follows from Theorem 3.3 that
+         for any integer p ≥ (njr̃ − 1)2 + 1 there exists a path of length p from vertex
+         ũr̃ to vertex ṽr̃ of Cjr̃ . If we also take into account that there are s arcs of
+         the form vr+1 → ur for r = 0, 1, . . . , s − 1 then it follows that for any
+                                 ŝ
+                                                                                def
+                                 X
+                            k≥           (njr − 1) + s + (njr̃ − 1)2 + 1 = KA
+                                 r=0
+                                 r6=r̃
+
+      there exists a path of length k that belongs to P(γ, U, V ). Let us now show
+      that KA ≤ kij . Let r ∈ {0, 1, . . . , ŝ}. If cjr > 1 then it follows from the
+      deﬁnition of knjr ,cjr that njr − 1 ≤ knjr ,cjr . Furthermore, if cjr = 1, then we
+      have njr −1 ≤ (njr −1)2 +1 = knjr ,cjr . Since cjr̃ = 1, we have (njr̃ −1)2 +1 =
+      knjr̃ ,cjr̃ . Furthermore, δγ ⊆ ∆ij and s ≤ #Γij − 1. Hence, KA ≤ kij , which
+      implies that (16) and (17) hold in this case.
+Case B: ct = cγ and ct 6= 1 for all t ∈ δγ .
+      Assume that cjr̃ = cγ with r̃ ∈ {0, 1, . . . , ŝ}.
+      Let lr be the length of the shortest (possibly empty) path from vertex ũr to
+      vertex ṽr of Cjr for each r ∈ {0, 1, . . . , r̃ − 1, r̃ + 1, . . . , ŝ}. So lr ≤ njr − 1 for
+      each r 6= r̃. From Lemma 2.7 and from the proof of Theorem 3.11 it follows
+      that there exists an integer Kr̃ with knjr̃ ,cjr̃ ≤ Kr̃ ≤ knjr̃ ,cjr̃ + cjr̃ − 1 such
+      that there exist paths of length Kr̃ + p cjr̃ from vertex ũr̃ to vertex ṽr̃ of Cjr̃
+      for any p ∈ N, while there do not exist paths of length Kr̃ + pcjr̃ + q from ũr̃
+      to ṽr̃ for any p ∈ N and any q ∈ {1, 2, . . . , cjr̃ − 1}. So if we deﬁne
+                                                 ŝ
+                                                 X
+                                          KB =           lr + s + knjr̃ ,cjr̃
+                                                 r=0
+                                                 r6=r̃
+
+      then it follows from Lemma 2.7 that for any k ≥ KB either there exists a
+      path of length k + p cγ that belongs to P(γ, U, V ) for each p ∈ N, or there do
+      not exist paths of length k + p cγ that belong to P(γ, U, V ) for any p ∈ N. It
+      is easy to verify that KB ≤ kij . Hence, (16) and (17) also hold in this case.
+Case C: cjr 6= 1 for all r ∈ {0, 1, . . . , ŝ} and cja 6= cjb for some a, b ∈ {0, 1, . . . , ŝ}.
+      From Lemma 2.7 and from the proof of Theorem 3.11 it follows that for each
+      r ∈ {0, 1, . . . , ŝ} there exists an integer Kr with knjr ,cjr ≤ Kr ≤ knjr ,cjr +
+      cjr − 1 such that there exist paths of length Kr + p cjr from ũr to ṽr for each
+      p ∈ N, while there do not exist paths of length Kr + p cjr + q from ũr to ṽr for
+      any p ∈ N and for any q ∈ {1, 2, . . . , cjr − 1}. This implies that there exist
+      paths of length K0 +K1 +. . .+Kŝ +s+p0 cj0 +p1 cj1 +. . .+pŝ cjŝ that belong to
+      P(γ, U, V ) for each choice of p0 , p1 , . . . , pŝ such that pr ≥ 0 for each r. Deﬁne
+              Xŝ
+      Kγ =         Kr + s. Since cγ = gcd{ct | t ∈ δγ } there exist positive integers
+                 r=0
+         w0 , w1 , . . . , wŝ such that cjr = wr cγ for each r ∈ {0, 1, . . . , ŝ} and such that
+         gcd(w0 , w1 , . . . , wŝ ) = 1. So for any integer q ≥ g(w0 , w1 , . . . , wŝ ) + 1 there
+         exist nonnegative integers α0 , α1 , . . . , αŝ such that q = α0 w0 + α1 w1 + . . . +
+         αŝ wŝ .
+         Since cja 6= cjb we have wa 6= wb . Therefore, we may assume without loss
+                      CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                        19
+                                                                                                c
+         of generality that w0 < w1 < . . . < wŝ with ŝ ≥ 2. We have wŝ = cjγŝ ≤
+         njŝ     nr                 nr
+         cγ     ≤ cγij . Hence, w0 ≤ cγij      − 1 since w0 < wŝ . Furthermore, w0 ≥ 1 and
+         thus wŝ ≥ 2. Using a reasoning that is similar to the one used in the proof
+         of Theorem 3.11 and Remark 3.12 we can show that
+                                                         nrij 2
+                                                            
+                                                                     nr
+                       g(w0 , w1 , . . . , wŝ ) + 1 ≤          − 3 ij + 2 .
+                                                          cγ          cγ
+
+         So if we deﬁne
+                                                                 2             !
+                                                         nrij             nrij
+                               KC = Kγ + c γ                           −3      +2 ,
+                                                          cγ               cγ
+                                                                
+         then we have KC ≥ Kγ + cγ g(w0 , w1 , . . . , wŝ ) + 1 . Let k ∈ N with k ≥ KC .
+         Now there are two possibilities:
+               • If k can be written as Kγ + q cγ with q ≥ g(w0 , w1 , . . . , wŝ ) + 1 then
+         we have
+
+         k = Kγ + (α0 w0 + α1 w1 + . . . + αŝ wŝ )cγ = Kγ + α0 cj0 + α1 cj1 + . . . + αŝ cjŝ ,
+
+       which implies that there exists a path of length k that belongs to P(γ, U, V ).
+              • On the other hand, if k cannot be written as Kγ + q cγ for any q ∈ N
+       then it follows from Lemma 2.7 that there does not exist a path of length k
+       that belongs to P(γ, U, V ).
+       Since kij ≥ KC this implies that (16) and (17) also hold in this case.
+   If we consider all possible paths from vertex v to vertex u of length k ∈ N with
+k ≥ #Γij , then each of these paths corresponds to some set γ ∈ Sij with δγ 6= ∅.
+           k
+Since (Â⊗ )uv is equal to 1 if and only if there exists a path of length k from v to u,
+we have
+                                  k         M
+                                  Â⊗      =       (gγ )k
+                                              uv
+                                                       γ∈Sij
+                                                       δγ 6=∅
+
+
+if k ≥ #Γij . Note that if cγ = 1 and δγ 6= ∅ then we have (gγ )kij = 1. Since each
+sequence {(gγ )k }∞
+                  k=1 satisﬁes (18), it follows from Lemma 3.13 that
+                     k+cij          k
+                      Â⊗         = Â⊗             for all k ≥ kij .
+                                      uv              uv
+
+Furthermore, since each sequence {(gγ )k }∞
+                                          k=1 satisﬁes (19), we have
+
+                 k           k+1                   k+cij −1
+                                                             
+              Â⊗    ⊕ Â⊗         ⊕ . . . ⊕ Â⊗                       =1   for all k ≥ kij .
+                                                                  uv
+
+So (13) and (14) also hold if λij 6= 0.
+Remark 3.16. Note that if γ1 , γ2 ∈ Sij and γ1 ⊆ γ2 then we do not have to consider
+γ1 when we are determining Sij . Hence, we could have deﬁned Sij as the set of
+maximal subsets {i0 , i1 , . . . , is } of {1, 2, . . . , l} with i = i0 < i1 < . . . < is = j and
+Âir ir+1 6= O for r = 0, 1, . . . , s − 1.      ✸
+Let us now give an example in which the various sets and indices that appear in the
+formulation of Theorem 3.15 are illustrated.
+20                       B. DE SCHUTTER AND B. DE MOOR
+
+
+Example 3.17. Consider the matrix
+                                                         
+                              0      1   0   1   0   0   0
+                             0      0   1   0   0   0   0 
+                                                          
+                             0      1   0   0   0   0   1 
+                                                          
+                          A=
+                             0      0   0   0   0   1   0 
+                                                           
+                             0      0   0   1   0   0   0 
+                                                          
+                             0      0   0   0   1   0   1 
+                              0      0   0   0   0   0   0
+This matrix is in Frobenius normal form and its block structure is indicated by the
+horizontal and vertical lines. The precedence graph of A is represented in Figure 3.5.
+We have
+                                                                            
+            0 0      1   0
+                         0 1 0              0 1                0   0   1   0   1
+           0 1      0   0
+                         0 0 1            0 0                1   0   0   0   0 
+                                                                              
+           0 0      1   0
+                         0 0 0            0 1                0   0   0   0   1 
+        2                           3                                         
+     A =
+      ⊗
+           0 0      0   1 0 1 , A = 
+                         0         ⊗
+                                           0 0                0   1   0   0     ,
+                                                                               0 
+           0 0      0   0
+                         0 1 0            0 0                0   0   1   0   1 
+                                                                              
+           0 0      0   1
+                         0 0 0            0 0                0   0   0   1   0 
+            0 0      0   0
+                         0 0 0              0 0                0   0   0   0   0
+                                                                              
+            0 0      1   1
+                         0 0 0              0 1                0   0   0   1   1
+           0 1      0   0
+                         0 0 1            0 0                1   0   0   0   0 
+                                                                              
+           0 0      1   0
+                         0 0 0            0 1                0   0   0   0   1 
+        4                           5                                         
+     A =
+      ⊗
+           0 0      0   0 1 0 , A = 
+                         0         ⊗
+                                           0 0                0   0   1   0     ,
+                                                                               1 
+           0 0      0   1
+                         0 0 0            0 0                0   0   0   1   0 
+                                                                              
+           0 0      0   0
+                         1 0 1            0 0                0   1   0   0   0 
+            0 0      0   0
+                         0 0 0              0 0                0   0   0   0   0
+                                                                              
+            0 0      1   0
+                         1 0 1              0 1                0   1   0   0   1
+           0 1      0   0
+                         0 0 1            0 0                1   0   0   0   0 
+                                                                              
+           0 0      1   0
+                         0 0 0            0 1                0   0   0   0   1 
+        6                           7                                         
+     A =
+      ⊗
+           0 0      0   0 0 0 , A = 
+                         1         ⊗
+                                           0 0                0   0   0   1     ,
+                                                                               0 
+           0 0      0   0
+                         1 0 1            0 0                0   1   0   0   0 
+                                                                              
+           0 0      0   0
+                         0 1 0            0 0                0   0   1   0   1 
+            0 0      0   0
+                         0 0 0              0 0                0   0   0   0   0
+                                                                              
+            0 0      1   0
+                         0 1 0              0 1                0   0   1   0   1
+           0 1      0   0
+                         0 0 1            0 0                1   0   0   0   0 
+                                                                              
+           0 0      1   0
+                         0 0 0            0 1                0   0   0   0   1 
+        8                           9                                         
+     A⊗ = 
+           0 0      0   0
+                         1 0 1 
+                                , A⊗
+                                        =  0 0
+                                                              0   1   0   0     ,
+                                                                               0 
+           0 0      0   0
+                         0 1 0            0 0                0   0   1   0   1 
+                                                                              
+           0 0      0   1
+                         0 0 0            0 0                0   0   0   1   0 
+            0 0      0   0
+                         0 0 0              0 0                0   0   0   0   0
+                                          
+                        0 0 1 1 0 0 0
+                       0 1 0 0 0 0 1 
+                                          
+                       0 0 1 0 0 0 0 
+                   10                     
+                 A⊗ = 
+                       0 0 0 0 0 1 0 ,...
+                                           
+                       0 0 0 1 0 0 0 
+                                          
+                       0 0 0 0 1 0 1 
+                        0 0 0 0 0 0 0
+                       CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                          21
+
+                                         C1
+                                              1
+
+
+                                                       4                C3
+                              C2     2                              5
+
+
+
+
+                                     3                       6
+
+
+                                                   7
+                                              C4
+
+    Fig. 3.5. The precedence graph G(A) of the matrix A of Example 3.17. The subgraphs C1 , C2 ,
+C3 and C4 are the m.s.c.s.’s of G(A).
+
+
+       k+6         k
+So A⊗      = A⊗ for all k ≥ 2.
+We have α1 = {1}, α2 = {2, 3}, α3 = {4, 5, 6} and α4 = {7}. Furthermore, λ1 =
+                                                                  k        ∞
+λ4 = 0 and λ2 = λ3 = 1. Let us now look at the sequence A⊗ α α k=1 . We have
+                                                                         1 4
+S14 = {γ1 , γ2 } with γ1 = {1, 2, 4} and γ2 = {1, 3, 4}. So δγ1 = {2}, cγ1 = 2, δγ2 = {3}
+and cγ2 = 3. We have Γ14 = {1, 2, 3, 4}, ∆14 = {2, 3}, λ14 = 1, c14 = lcm(2, 3) = 6
+and r14 = 3. Hence,
+
+                                                n2                  n2
+                                                                                     
+ k14 = k2,2 + k3,3 + #Γ14 − 1 + max 0, 3 − 3n3 + 2 cγ1 , 3 − 3n3 + 2 cγ2
+                                               c γ1                 c γ2
+                                                             
+            3                           9           9               17
+      =         + 4 + 4 − 1 + max 0,      − 9 + 4,     −9+6 =              .
+            2                           2           3                2
+                                            k+6            k
+Note that we indeed have A⊗                       α1 α4
+                                                        = A⊗ α α for all k ≥ 9.        ✸
+                                                                1 4
+     Lemma 3.18. Consider m positive integers c1 , c2 , . . . , cm . Let c = lcm(c1 , c2 , . . . ,
+cm ). Consider r non-empty subsets α1 , α2 , . . . , αr of {1, 2, . . . , m}. Deﬁne di =
+gcd{ck | k ∈ αi } for each i. If d = lcm(d1 , d2 , . . . , dr ), then d is a divisor of c.
+     Proof. We may assume without loss of generality that ci 6= cj for all i, j with i 6= j.
+If d is a divisor of lcm(c1 , c2 , . . . , cm−1 ) then it also is a divisor of lcm(c1 , c2 , . . . , cm ).
+Therefore, we may assume without loss of generality that α1 ∪ α2 ∪ . . . ∪ αr =
+{1, 2, . . . , m}. If αi ⊆ αj then dj is a divisor of di and then lcm(d1 , d2 , . . . , dr ) =
+lcm(d1 , d2 , . . . , dj−1 , dj+1 , . . . , dr ), which implies that αj is redundant and may be
+removed. If di = dj then αj is also redundant and may be removed. It is easy to
+verify that if we remove all redundant sets, then the resulting number of sets αi is
+less than or equal to m (The worst cases being when αi = {1, 2, . . . , m} \ {i} for
+i = 1, 2, . . . , m or when αi = {i} for i = 1, 2, . . . , m.) Hence, we may assume without
+loss of generality that r ≤ m and that di 6= dj for all i, j with i 6= j.
+Since r ≤ m, α1 ∪ α2 ∪ . . . ∪ αr = {1, 2, . . . , m} and αi 6⊆ αj for all i, j with i 6= j, we
+can select indices l1 , l2 , . . . , lr such that li ∈ αi for i = 1, 2, . . . , r and li 6= lj for all
+i, j with i 6= j.
+Since di = gcd{ck | k ∈ αi }, di is a divisor of cli for each i.
+22                             B. DE SCHUTTER AND B. DE MOOR
+
+
+Since all ci ’s are diﬀerent we have
+                                                              c1 c2 . . . cm
+                        c = lcm(c1 , c2 , . . . , cm ) =                              .
+                                                           gcd(c1 , c2 , . . . , cm )
+We also have
+                                              d1 d2 . . . dr
+                                     d=                               .
+                                           gcd(d1 , d2 , . . . , dr )
+Since α1 ∪α2 ∪. . .∪αr = {1, 2, . . . , m} we have gcd(c1 , c2 , . . . , cm ) = gcd(d1 , d2 , . . . , dr ).
+So
+                                           c1 c2 . . . cm
+                                       c=                 d .
+                                           d1 d2 . . . dr
+Since di is a divisor of cli for i = 1, 2, . . . , r there exist integers wi ∈ N such that
+cli = wi di for i = 1, 2, . . . , r. If we deﬁne β = {1, 2, . . . , m} \ {l1 , l2 , . . . , lr }, then we
+have
+                                                             !
+                                                      Y
+                                   c = w1 w2 . . . wr    ci d
+                                                              i∈β
+
+          Y
+where           ci is equal to 1 by deﬁnition. So c = wd for some integer w ∈ N, which
+          i∈∅
+implies that d is a divisor of c.
+     Lemma 3.19. Let n ∈ N and let c ∈ {0, 1, . . . , n}. If kn,c is deﬁned by (7) if
+c > 0 and if kn,c = 0 if c = 0, then we have kn,c ≤ (n − 1)2 + 1.
+     Proof. It is obvious that the lemma holds if c = 0 or if c = 1. So from now on we
+assume that c > 1.
+                   2      2
+Deﬁne f (c) = n 2−1 + nc − 3n + 2c. Let us now show that f (c) ≤ (n − 1)2 + 1.
+          df         2
+We have dc   = − nc2 + 2. So f reaches a local minimum in c = √n2 and is decreasing if
+1 < c < √n2 and increasing if c > √n2 .
+Let us ﬁrst consider the cases where n is equal to 2 or to 3. If n = 2 then we have
+c = 2 and f (c) = 4−1                    3                2
+                       2 + 2 − 6 + 4 = 2 ≤ 2 = (2 − 1) + 1. If n = 3 then
+                                                                                n
+                                                                                √
+                                                                                  2
+                                                                                    does
+not belong to the interval [2, 3] and then the maximal value of f in [2, 3] is equal to
+f (3) = 9−1      9           9               2
+          2 + 3 − 9 + 6 = 2 ≤ 5 = (3 − 1) + 1.
+From now on we assume that n is larger than or equal to 4. If n ≥ 4, then √n2 belongs
+to the interval [2, n] and then the maximal value of f in [2, n] is equal to
+                                 2
+                                             n2             n2 − 1
+                                                                                    
+                                  n −1
+    max(f (2), f (n)) = max                +      − 3n + 4,          + n − 3n + 2n
+                                     2        2                2
+                                             7 n2
+                                                         
+                                                        1
+                        = max n2 − 3n + ,            −
+                                             2 2        2
+                                       7
+                        = n2 − 3n +             (since n ≥ 4)
+                                       2
+                                  2
+                        ≤ (n − 1) + 1           (since n ≥ 2).
+
+Hence, kn,c ≤ (n − 1)2 + 1.
+                                                                                                   k+c
+        Theorem 3.20. Let A ∈ Bn×n and let c be the cyclicity of A. We have A⊗                           =
+    k
+A ⊗
+        for all k ≥ 2n2 − 3n + 2.
+                        CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                       23
+
+     Proof. Let Â = P ⊗ A ⊗ P T be the Frobenius normal from of A where P is a
+permutation matrix. Assume that Â is a matrix of the form (1) with Âii irreducible
+for i = 1, 2, . . . , l. Consider i, j ∈ {1, 2, . . . , l} with i ≤ j. Let Sij , Γij , ∆ij , λij , cij ,
+rij and kij be deﬁned as in Theorem 3.15. Let us now show that kij ≤ 2(n − 1)2 + n.
+It is easy to verify that this holds if i = j, or if i < j and λij = 0. So from now on
+we assume that λij 6= 0. Hence,
+                                                                                       
+                                                                  2
+                                                                  n
+                                                                                       
+                                                                    rij
+                X
+        kij =           knt ,ct + #Γij − 1 + max 0, max                − 3nrij + 2cγ  .
+                                                                                       
+                                                           γ∈Sij   cγ
+               t∈∆ij
+                                                          δγ 6=∅
+
+
+Since we have kni ,ci ≤ (ni − 1)2 + 1 for each i ∈ {1, 2, . . . , l} by Lemma 3.19, it follows
+from the proof of Lemma 3.8 that
+                                     X
+                                            knt ,ct ≤ (n − 1)2 + 1 .
+                                    t∈∆ij
+
+Furthermore, #Γij ≤ j − i + 1 ≤ n.
+Let us now show that
+                                   n2rij
+                                           − 3nrij + 2cγ ≤ (n − 1)2
+                                    cγ
+
+for each γ ∈ Sij with δγ 6= ∅. Let γ ∈ Sij with δγ 6= ∅. From Lemma 2.6 it follows that
+ct ≤ nt for each t ∈ δγ . Hence, 1 ≤ cγ = gcd{nt | t ∈ δγ } ≤ max{nt | t ∈ δγ } ≤ nrij .
+                  n2r
+Deﬁne f (c) = cij − 3nrij + 2c. From the proof of Lemma 3.19 it follows that f is
+                  nr                         nr
+decreasing if c < √ij2
+                       and increasing if c > √ij2
+                                                  .
+If nrij = 1 then we have cγ = 1 and f (cγ ) = 1 − 3 + 2 = 0 ≤ 0 = (1 − 1)2 .
+If nrij > 1 then the maximum value of f in the interval [1, nrij ] is equal to
+
+         max(f (1), f (nrij )) = max n2rij − 3nrij + 2, nrij − 3nrij + 2nrij
+                                                                               
+
+                               = max (nrij − 1)2 + 1 − nrij , 0
+                                                                
+
+                                     ≤      (nrij − 1)2            (since nrij ≥ 1)
+                                                   2
+                                     ≤      (n − 1) .
+
+Hence, kij ≤ 2(n − 1)2 + n = 2n2 − 3n + 2. Furthermore, cij is a divisor of c by
+                             k+c           k                                      k              k
+Lemma 3.18. Hence, Â⊗        = Â⊗ for all k ≥ 2n2 −3n+2. Since, A⊗ = P T ⊗Â⊗ ⊗P
+                                    k+c       k
+for all k ∈ N, this implies that A⊗     = A⊗ for all k ≥ 2n2 − 3n + 2.
+     4. Applications and extensions.
+     4.1. Markov chains. It is often possible to represent the behavior of a physical
+system by describing all the diﬀerent states the system can occupy and by specifying
+how the system moves from one state to another at each time step. If the state space
+of the system is discrete and if the future evolution of the system only depends on the
+current state of the system and not on past history, the system may be represented by
+a Markov chain. Markov chains can be used to describe a wide variety of systems and
+phenomena in domains such as diﬀusion processes, genetics, learning theory, sociology,
+economics, and so on [22].
+24                           B. DE SCHUTTER AND B. DE MOOR
+
+
+    A ﬁnite homogeneous Markov chain is a stochastic process with a ﬁnite number of
+states s1 , s2 , . . . , sn where the transition probability to go from one state to another
+state only depends on the current state and is independent of the time step. We
+deﬁne an n by n matrix P such that pij is equal to the probability that the next
+state is si given that the    current  state is sj . Note that pij ≥ 0 for
+                                                                          all i, j. We deﬁne
+                                    ∞
+a sequence of vectors θ(k) k=0 with θ(k) ∈ [0, 1]n where θ(k) i is the probability
+that the system is in state si at time step k. If the initial probability vector θ(0) is
+given, the evolution of the system is described by
+
+                             θ(k + 1) = P θ(k)          for k ∈ N .
+
+Hence,
+
+                               θ(k) = P k θ(0)        for k ∈ N .
+
+So if we consider the Boolean algebra ({0, p}, +, ·) where p stands for an arbitrary
+positive number and if we deﬁne a matrix P̃ ∈ {0, p}n×n such that p̃ij = 0 if pij = 0
+and p̃ij = p if pij > 0, then we can give the following interpretation to the Boolean
+                    k
+matrix power P̃ ⊗ . We can go from state sj to state si in k steps if and only if
+                                    k
+ P k ij > 0 or equivalently if P̃ ⊗ ij = p. As a consequence, the results of this paper
+    
+
+can also be used to obtain upper bounds for the length of the transient behavior of a
+ﬁnite homogeneous Markov chain.
+    For more information on Markov chains and their applications the interested
+reader is referred to [2, 12, 20, 22] and the references therein.
+     4.2. Max-plus algebra. Our main motivation for studying sequences of con-
+secutive powers of a matrix in a Boolean algebra lies in the max-plus-algebraic system
+theory for discrete event systems. Typical examples of discrete event systems are ﬂexi-
+ble manufacturing systems, telecommunication networks, parallel processing systems,
+traﬃc control systems and logistic systems. The class of the discrete event systems
+essentially consists of man-made systems that contain a ﬁnite number of resources
+(e.g., machines, communications channels or processors) that are shared by several
+users (e.g., product types, information packets or jobs) all of which contribute to the
+achievement of some common goal (e.g., the assembly of products, the end-to-end
+transmission of a set of information packets, or a parallel computation).
+     There are many modeling and analysis techniques for discrete event systems, such
+as queuing theory, (extended) state machines, max-plus algebra, formal languages,
+automata, temporal logic, generalized semi-Markov processes, Petri nets, perturbation
+analysis, computer simulation and so on (See [1, 6, 19, 23, 24] and the references cited
+therein). In general models that describe the behavior of a discrete event system are
+nonlinear in conventional algebra. However, there is a class of discrete event systems
+– the max-linear discrete event systems – that can be described by a model that is
+“linear” in the max-plus algebra [1, 7, 8]. The model of a max-linear discrete event
+system can be characterized by a triple of matrices (A, B, C), which are called the
+system matrices of the model.
+     One of the open problems in the max-plus-algebraic system theory is the min-
+imal realization problem, which consists in determining the system matrices of the
+model of a max-linear discrete event system starting from its “impulse response4 ”
+    4 This is the output of the system when a certain standardized input sequence is applied to the
+
+system.
+                   CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                 25
+
+such that the dimensions of the system matrices are as small as possible (See [1] for
+more information). In order to tackle the general minimal realization problem it is
+useful to ﬁrst study a simpliﬁed version: the Boolean minimal realization problem, in
+which only models with Boolean system matrices are considered. The results of this
+paper on the length of the transient part of the sequence of consecutive powers of a
+matrix in a Boolean algebra can be used to obtain some results for the Boolean min-
+imal realization problem in the max-plus-algebraic system theory for discrete event
+systems [10]: they can be used to obtain a lower bound for the minimal system order
+(i.e., the smallest possible size of the system matrix A) and to prove that the Boolean
+minimal realization problem in the max-plus algebra is decidable (and can be solved
+in a time that is bounded from above by a function that is exponential in the minimal
+system order).
+      Both Boolean algebras and the max-plus algebra are special cases of a dioid (i.e.,
+an idempotent semiring) [1, 16]. For applications of dioids in graph theory, generating
+languages and automata theory the interested reader is referred to [14, 15, 16].
+    4.3. Extensions. In this paper we have restricted ourselves to Boolean algebras.
+In this section we give some examples that illustrate some of the phenomena that could
+occur when we want to extend our results to more general algebraic structures. In
+our examples we shall use the max-plus algebra (R ∪ {−∞}, max, +), but for other
+extensions of Boolean algebras similar examples can be constructed.
+    In contrast to Boolean algebra (cf. Theorem 3.20) the sequence of consecutive
+powers of a matrix in a more general algebraic structure does not always reach a
+stationary or cyclic regime after a ﬁnite number of terms as is shown by the following
+example.
+Example 4.1. Consider the matrix
+                                                   
+                                           0 −∞
+                                 A=                     .
+                                        −∞ −1
+Since the kth max-plus-algebraic power of A is given by
+                                                       
+                                     k         0 −∞
+                                  A⊗ =
+                                            −∞ −k
+                             ⊗k ∞
+for k ∈ N0 , the sequence A        k=1
+                                       does not reach a stationary or cyclic regime in a
+ﬁnite number of steps.         ✸
+Note that the matrix A of Example 4.1 is not irreducible. However, if a matrix is
+irreducible then it can be shown [1, 7, 13] that the sequence of consecutive max-plus-
+algebraic powers of the given matrix always reaches a cyclic regime of the form (2)
+after a ﬁnite number of terms. However, even if the sequence of consecutive powers
+reaches a stationary regime then in general the length of the transient part will not
+only depend on the size and the cyclicity of the matrix but also on the range and the
+resolution (i.e., on the size of the representation) of the ﬁnite elements of the matrix
+as is shown by the following examples.
+Example 4.2. Let N ∈ N and consider
+                                                      
+                                            −1 −N
+                                 A(N ) =                  .
+                                              0     0
+The matrix A(N ) is irreducible and has cyclicity 1 and its λ-value5 is equal to 0. The
+   5 For methods to compute the number λ that appears in Theorem 2.5 for a max-plus-algebraic
+
+matrix the reader is referred to [1, 3, 7, 21].
+26                         B. DE SCHUTTER AND B. DE MOOR
+
+
+kth max-plus-algebraic power of A(N ) is given by
+                                                                   
+                               ⊗k     max(−k, −N )           −N
+                        A(N )      =
+                                                  0             0
+
+for each k ∈ N0 . This implies that the smallest integer k0 for which (2) holds, is given
+by k0 = N , i.e., k0 depends on the range of the ﬁnite entries of A(N ).       ✸
+Example 4.3. Let ε > 0 and consider the matrix
+                                                    
+                                            0     0
+                                A(ε) =                 .
+                                          −1 −ε
+
+This matrix is irreducible, has cyclicity 1 and its λ-value is equal to 0. Since the kth
+max-plus-algebraic power of A(ε) is given by
+                                                            
+                                ⊗k      0                0
+                          A(ε)      =                           ,
+                                        −1 max(−1, −kε)
+
+the smallest integer k0 for which (2) holds, is k0 = 1ε . So this example — which has
+                                                      
+
+been inspired by the example on p. 152 of [1] — shows that in general the length of
+                                       k ∞
+the transient part of the sequence A⊗ k=1 depends on the resolution of the ﬁnite
+entries of A.     ✸
+    5. Conclusions. In this paper we have studied the ultimate behavior of the
+sequence of consecutive powers of a matrix in a Boolean algebra, and we have derived
+some upper bounds for the length of the transient part of this sequence. The results
+that have been derived in this paper can be used in the analysis of the transient
+behavior of Markov chains and in the max-plus-algebraic system theory for discrete
+event systems.
+    Topics for future research are the derivation of tighter upper bounds for the length
+of the transient part of the sequence of consecutive power of a matrix in a Boolean
+algebra, and extension of our results to more general algebraic structures such as the
+max-plus algebra.
+    Acknowledgments. The authors want to thank the anonymous reviewers for
+their useful comments and remarks, and for pointing out the connection with Markov
+chains.
+Bart De Moor is a research associate with the F.W.O. (Fund for Scientiﬁc Research
+– Flanders). This research was sponsored by the Concerted Action Project of the
+Flemish Community, entitled “Model-based Information Processing Systems” (GOA-
+MIPS), by the Belgian program on interuniversity attraction poles (IUAP P4-02 and
+IUAP P4-24), by the ALAPEDES project of the European Community Training and
+Mobility of Researchers Program.
+
+                                        REFERENCES
+
+ [1] F. Baccelli, G. Cohen, G. Olsder, and J. Quadrat, Synchronization and Linearity, John
+         Wiley & Sons, New York, 1992.
+ [2] A. Berman and R. Plemmons, Nonnegative Matrices in the Mathematical Sciences, Academic
+         Press, New York, 1979.
+ [3] J. Braker and G. Olsder, The power algorithm in max algebra, Linear Algebra and Its
+         Applications, 182 (1993), pp. 67–89.
+ [4] A. Brauer, On a problem of partitions, American Journal of Mathematics, 64 (1942), pp. 299–
+         312.
+                    CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                     27
+
+ [5] R. Brualdi and H. Ryser, Combinatorial Matrix Theory, vol. 39 of Encyclopedia of Mathe-
+         matics and Its Applications, Cambridge University Press, Cambridge, UK, 1991.
+ [6] C. Cassandras, S. Lafortune, and G. Olsder, Introduction to the modelling, control and
+         optimization of discrete event systems, in Trends in Control: A European Perspective,
+         A. Isidori, ed., Springer-Verlag, Berlin, Germany, 1995, pp. 217–291.
+ [7] G. Cohen, D. Dubois, J. Quadrat, and M. Viot, A linear-system-theoretic view of discrete-
+         event processes and its use for performance evaluation in manufacturing, IEEE Transac-
+         tions on Automatic Control, 30 (1985), pp. 210–220.
+ [8] R. Cuninghame-Green, Minimax Algebra, vol. 166 of Lecture Notes in Economics and Math-
+         ematical Systems, Springer-Verlag, Berlin, Germany, 1979.
+ [9] B. De Schutter, Max-Algebraic System Theory for Discrete Event Systems, PhD thesis,
+         Faculty of Applied Sciences, K.U.Leuven, Leuven, Belgium, Feb. 1996.
+[10] B. De Schutter, V. Blondel, R. de Vries, and B. De Moor, On the boolean minimal
+         realization problem in the max-plus algebra, Tech. Rep. 97-68, ESAT-SISTA, K.U.Leuven,
+         Leuven, Belgium, Dec. 1997. Accepted for publication in Systems & Control Letters.
+[11] P. Erdös and R. Graham, On a linear Diophantine problem of Frobenius, Acta Arithmetica,
+         21 (1972), pp. 399–408.
+[12] F. Gantmacher, The Theory of Matrices, vol. 2, Chelsea Publishing Company, New York,
+         1959.
+[13] S. Gaubert, On rational series in one variable over certain dioids, Tech. Rep. 2162, INRIA,
+         Le Chesnay, France, Jan. 1994.
+[14] M. Gondran and M. Minoux, Eigenvalues and eigenvectors in semimodules and their inter-
+         pretation in graph theory, in Proceedings of the 9th International Mathematical Program-
+         ming Symposium, Budapest, Hungary, Aug. 1976, pp. 333–348.
+[15]       , Graphs and Algorithms, John Wiley & Sons, Chichester, 1984.
+[16]       , Linear algebra in dioids: A survey of recent results, Annals of Discrete Mathematics,
+         19 (1984), pp. 147–163.
+[17] F. Harary, A graph theoretic approach to matrix inversion by partitioning, Numerische Math-
+         ematik, 4 (1962), pp. 128–135.
+[18]       , Graph Theory, Addison-Wesley, Reading, Massachusetts, 1969.
+[19] Y. Ho, ed., Discrete Event Dynamic Systems: Analyzing Complexity and Performance in the
+         Modern World, IEEE Press, Piscataway, New Jersey, 1992.
+[20] D. Isaacson and R. Madsen, Markov Chains, Theory and Applications, John Wiley & Sons,
+         New York, 1976.
+[21] R. Karp, A characterization of the minimum cycle mean in a digraph, Discrete Mathematics,
+         23 (1978), pp. 309–311.
+[22] J. Kemeny, J. Snell, and A. Knapp, Denumerable Markov Chains, Springer-Verlag, New
+         York, 1976. Reprint of the 1960 edition published by Van Nostrand, Princeton, New
+         Jersey, in the University Series in Undergraduate Mathematics.
+[23] J. Peterson, Petri Net Theory and the Modeling of Systems, Prentice-Hall, Englewood Cliﬀs,
+         New Jersey, 1981.
+[24] Proceedings of the IEEE, 77 (1989). Special issue on Dynamics of Discrete Event Systems.
+[25] R. Varga, Matrix Iterative Analysis, Prentice-Hall, Englewood Cliﬀs, New Jersey, 1962.
+[26] M. Wang, Y. Li, and H. Liu, On periodicity analysis and eigen-problem of matrix in max-
+         algebra, in Proceedings of the 1991 IFAC Workshop on Discrete Event System Theory
+         and Applications in Manufacturing and Social Phenomena, Shenyang, China, June 1991,
+         pp. 44–48.
+[27] R. Wilson, Introduction to graph theory, Longman Group, London, 2nd ed., 1979.
+

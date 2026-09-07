@@ -1,0 +1,195 @@
+                                 CHAPTER 3
+
+
+                             Digraph Roots
+
+            1. Matrices and Digraphs, Powers and Roots
+     Consider a directed graph D (or digraph, for short) on n vertices to-
+gether with its adjacency matrix, i.e., the n × n matrix A = (aij ) with
+aij = 1 iff there is an arc j → i in D and aij = 0 otherwise. We can use
+iterated multiplications of the adjacency matrix with itself to find paths in
+the digraph. Precisely, the (i, j)-entry of the kth power Ak of A is positive
+iff there is a walk of length exactly k from vertex i to vertex j in D. By
+walk of length k we mean a sequence (v0 , v1 , . . . , vk ) of k + 1 vertices with
+an arc from vi−1 to vi for 1 ≤ i ≤ k, where vertices may appear several
+times; in contrast to a path, which is a walk with all vertices distinct. We
+are only interested in the existence of such walks, not their number—which
+is counted by the respective entry of Ak —so we interpret A as a Boolean
+0/1-matrix with the product C = A · B defined in the usual way:
+                                   _n
+                             cij =       aih ∧ bhj .
+                                      h=1
+    Identifying a digraph with its adjacency matrix, we define the kth power,
+k ∈ N, of a digraph D to be the digraph Dk on the same vertex set and with
+an arc from a to b if and only if there is a directed walk of length exactly
+k from a to b in D (possibly visiting some vertices several times). Figure 1
+shows an example.
+
+
+
+
+                      D                 D2                D3
+
+                       Figure 1. Powers of a digraph.
+
+    Note that the interpretation of digraphs as Boolean matrices implies
+that our digraphs may have loops but no multiple arcs. It is easy to see
+that the adjacency matrix of Dk is in fact the kth Boolean power of the
+adjacency matrix of D (see, for example, [38]).
+    Boolean matrix algebra serves as a fundamental tool in algorithmic graph
+theory. The correspondence between graphs and matrices lies at the heart
+of many fundamental algorithms for transitive-closure or shortest-path com-
+putations [35, 1, 12] (where usually powers of the matrix A + I, with I
+the identity matrix, are considered to account for all paths up to a certain
+length k).
+                                        71
+72                            3. DIGRAPH ROOTS
+
+    We are interested in the inverse operation to exponentiation: root find-
+ing. The complexity of the following problem was open until now.
+    The Boolean-Matrix-Root Problem. Given a Boolean n × n ma-
+trix A and an integer k ≥ 2, does there exist a kth root B of A, that is, an
+n × n matrix B with B k = A.
+     Or equivalenty, stated in terms of digraphs:
+    The Digraph-Root Problem. Given a digraph D and an integer
+k ≥ 2, does there exist a kth root R of D, that is, a digraph R on the same
+vertex set, with Rk = D.
+    Twenty years ago, in the open-problems section of his book [26], Kim in-
+quired for the special case k = 2, whether the Boolean-matrix-root problem
+might perhaps be NP-complete. We answer this question in the affirmative.
+    1. Theorem. Deciding whether a square Boolean matrix or, equiva-
+lently, a digraph has a kth root is NP-complete for each single parameter
+k ≥ 2.
+     With the right computational problem for the reduction, the proof of
+this result turns out surprisingly simple. This is quite remarkable since it
+thus relates digraph roots very closely to a well-known NP-complete prob-
+lem. It allows to identify quite accurately “the reason” for the hardness of
+the problem. In an attempt to isolate and inhibit these computationally
+difficult aspects, we shall discover a close connection between digraph roots
+and graph isomorphism, which eventually leads to a further complexity re-
+sult (Theorem 3). But let us postpone these issues till after the proof and
+discussion of Theorem 1.
+     Related work—related questions. Over the field of complex num-
+bers or the reals, matrix roots are a well-studied and still up-to-date topic
+of linear algebra [29, 24, 36]. But results from that field of research do
+generally not apply to Boolean matrices. While it is known, for example,
+that every regular matrix over the complex numbers has a kth root for any
+k ≥2 [36], this is not true for Boolean matrices, as the invertible matrix
+  01
+  1 0 shows. Further, complex or real matrices are amenable to numerical
+methods like Newton iteration [22], whereas such techniques clearly do not
+apply to Boolean matrices. When it comes to roots, Boolean matrices don’t
+seem to have much in common with matrices over C since the former behave
+much more rigidly than the latter.
+     The situation is, however, different if we ask for powers of a matrix
+instead of roots. There are theoretical results on Boolean matrix powers
+[13] and in practice we can, of course, compute the kth power of a Boolean
+matrix A by treating it as a matrix over the reals. We calculate Ak over
+R and afterwards replace each positive entry with 1. This simple reformu-
+lation allows us, for example, to apply fast matrix multiplication methods
+such as Strassen’s to path problems in graphs [35, 1]. But this simula-
+tion through matrices over the reals clearly only works because there cannot
+happen cancellation between positive and negative entries. For root finding,
+such simulation over R or C would lead into major problems.
+              1. MATRICES AND DIGRAPHS, POWERS AND ROOTS                        73
+
+
+
+
+        Figure 2. A directed square root (left) of a symmetric di-
+        graph (right) which does not have a symmetric square root.
+
+     Alternative notions of graph powers. A problem similar to the one
+at hand has been discussed by Motwani and Sudan. In [34] they showed
+that computing square roots of undirected graphs is NP-hard. But their
+notion of graph powers differs from ours in two important points.
+     They consider undirected graphs only, which in our setting would cor-
+respond to symmetric digraphs, i.e., all edges are bidirectional. This not
+only restricts the set of possible inputs but also—and this is the decisive
+difference—the solutions. For example, the symmetric digraph on the right
+of Figure 2 has the digraph to its left as a square root, but it is not the
+square of any symmetric digraph. To see this, observe that any square root
+of an undirected graph with maximum degree strictly greater than 2 must
+also have a vertex of degree at least 3. Such a vertex would in turn induce
+a triangle in the square. The digraph in the figure has maximum degree 3
+but it does not contain a triangle.
+     Further, Motwani and Sudan define squaring to maintain existing edges,
+which in our setting would correspond to attaching loops to all vertices.
+This monotonicity ensures that much information of the underlying graph
+can be read off from its square and the hardness proof of [34] makes essential
+use of this property. In contrast to this, squaring a digraph under the rules
+derived from Boolean matrix multiplication can almost completely destroy
+the neighborhood information and may even decompose the digraph. Ac-
+tually, most of our arguments depend crucially on such vanishing edges. So
+apparently, the squares in [34] and our notion of powers are fundamentally
+different concepts.
+     Nomenclature. In the light of the preceding discussion, Boolean ma-
+trices form the right framework to ask questions about roots in the sense
+we defined them. They do not leave the ambiguities that the expression
+“graph root” obviously has and locate the problem correctly in the context
+of semigroups. However, for the actual work, the proof of Theorem 1, we
+will resort to the language of graph theory since our arguments will exten-
+sively use respective notions like paths, cycles, and vertex neighborhoods.
+Moreover, after the NP-completeness proof we shall emphasize the link to
+graph theory even more by relating our roots to graph-isomorphism.
+     So let us agree on the precise meanings of some common graph theoretic
+notions whose exact distinction will be crucial in certain situations. A walk
+is simply a sequence (a0 , a1 , . . . , ar ) of vertices with an arc ai → ai+1 for
+0 ≤ i < r, whereas a path is a walk of pairwise distinct vertices. The
+parameter r is the length of the walk respectively path. A cycle is a closed
+walk, that means, a0 = ar and vertices may be traversed several times. By
+74                            3. DIGRAPH ROOTS
+
+isolated cycle we mean a strongly connected component of a digraph where
+each vertex has indegree and outdegree 1, i.e., a single non-self-touching
+cycle without further arcs.
+    For a digraph R on vertex set V we let
+                                           R
+                        R(v) := w ∈ V v −→ w
+denote the set of outneighbors of v in R. Defining R̄ to be the digraph
+obtained from R by inverting all arcs, we write R̄(v) for the inneighbors
+of v. Note that our generalization
+                                      [
+                             R(U ) :=   R(u)
+                                       u∈U
+
+to subsets U ⊆ V diverts from standard notation (as for example in [3, sec.
+1.2]) as R(U ) need not be disjoint from U . In other words, we let a digraph
+act on vertex sets just like its adjacency matrix acts on the characteristic
+vectors of such sets.
+    These definitions help simplify our notation. For example, we write
+x ∈ R̄j (Y ) to state that there is a walk of length j from x to some vertex in
+Y ⊆ V and expressions like R3 R̄8 R make perfect sense, encoding some kind
+of zig-zag walk through the digraph R.
+
+                          2. NP-Completeness
+    This section comprises the proof of Theorem 1; but before turning to
+the details, presenting a suitable NP-complete problem which we can reduce
+to digraph roots, let us collect some motivating observations about digraph
+square roots.
+    Consider some set X of vertices of a digraph D and let Z denote all
+outneighbors of vertices in X. Assume for simplicity that X and Z are
+disjoint, so in particular, there are no loops or cycles on these vertices. In
+a square root of the digraph D, any of the arcs from X to Z must be
+realized as paths of length two. Hence, the root must provide a set Y of
+intermediate vertices through which all these paths can pass. If now—for
+whatever reason—there is only a small number of such intermediate vertices
+available, |Y | ≤ r, say, with r a little smaller than |X| and |Z|, these paths
+must intersect in order to ship all their information from X to Z. This
+situation is almost exactly captured by the following decision problem, which
+is already listed in Garey and Johnson’s classic [18] (p. 222).
+     The Set-Basis Problem. Let C be a collection of subsets of some
+finite set S. A set basis for C is another collection B of subsets of S such
+that each C ∈ C can be written as a union of sets from B. Given a finite
+set S, a collection C of subsets of S, and an integer r ≤ |S|, the set-basis
+problem asks whether there exists a set basis B for C consisting of at most
+r sets. This problem is known to be NP-complete [40].
+    We claim that the local configuration of the above square-root problem
+is nothing but a set-basis instance. The sets X and Z correspond to the
+given collection C and the ground set S, respectively, while the intermediate
+vertex set Y takes the place of the sought-after collection B.
+                                       2. NP-COMPLETENESS                                    75
+
+                S       ...
+                                            b11     ...        b1r     bk−1
+                                                                        1     ...     bk−1

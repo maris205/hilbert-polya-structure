@@ -1,0 +1,151 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/original_snapshot/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01/audit_p209.py	2026-09-07 16:35:23.284242254 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/audit_p209.py	2026-09-07 16:43:36.828051303 +0800
+@@ -23,7 +23,7 @@
+ PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ A, B = [BATCH / ('reviews/p209_' + x) for x in ('a', 'b')]
+ FINAL = PAPER / 'qa_final'
+-PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_01'
++PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'
+ ORIGINAL_PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'
+ OUT = BATCH / 'qa/p209_terminal_artifact'
+ TERMINAL_PREP = BATCH / 'qa/p209_terminal_preparation'
+@@ -278,7 +278,45 @@
+     ck(outer['completion']['exit_code'] == 1 and
+        read(failed / 'audit.stderr').decode() in outer['completion']['output'],
+        'initial_failed_root_wrapper_remains_failure', 'traceback does not print round or expected hash')
+-    return {'revision': 'p209_terminal_artifact_revision_01', 'original_preparation_payloads': 347,
++    # Revision 01 and its real initial_02 failure are an additional immutable
++    # historical layer. They are not replaced by this new prepared attempt.
++    previous = BATCH / 'qa/p209_terminal_artifact_revision_01'
++    pin(previous / 'SHA256SUMS',
++        '855aba017f5a369c09696272579897324bbd906892b353d17f0c9eb6d7fcbcc5')
++    manifest(previous, count=418)
++    second = OUT / 'initial_02'
++    pin(second / 'SHA256SUMS', '89ab791251744f3aa96911f871f108268c2ebb7e5e1da55329eea45eb70bbc96')
++    manifest(second, count=8)
++    for snapshot, source in [('executed_auditor_snapshot.py', 'audit_p209.py'),
++                             ('executed_recorder_snapshot.py', 'record_audit.py')]:
++        ck(read(second / snapshot) == read(previous / source),
++           'second_failed_exact_executed_sources', snapshot)
++    row, attempt = j(second / 'COMMAND.json'), j(second / 'ATTEMPT.json')
++    expected = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++                'pycache_prefix=' + str(second / 'unused_pycache'),
++                str(previous / 'audit_p209.py'), 'terminal-artifact-after-actual-views']
++    ck(row['exit_code'] == 1 and row['status'] == 'COMPLETED' and row['failure'] is None
++       and row['inputs_unchanged'] and row['unused_cache_absent'] and not (second / 'unused_pycache').exists()
++       and row['argv'] == expected and row['cwd'] == str(ROOT) and row['environment'] == ENV,
++       'second_failed_child_remains_failure', 'real initial_02 exit one; not a gate PASS')
++    ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and
++       all(attempt[k] == row[k] for k in ('argv', 'cwd', 'environment', 'started_utc')),
++       'second_failed_prespawn_record', 'original fields')
++    exact_pair(second, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 10, historical=True)
++    for stream in ('stdout', 'stderr'):
++        pin(second / ('audit.' + stream), row[stream])
++    ck(read(second / 'audit.stdout') == b'' and
++       h(second / 'audit.stderr') == '87df565befc65ce9d96c25cf6e28f470521bea9207750c17ee1123ed6384c09b',
++       'second_failed_full_raw_streams', 'unchanged 871-byte initial census A traceback')
++    execution = BATCH / 'qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json'
++    pin(execution, 'cb4872647ea63e9e2e9253dcb7d11d090947f8399c497a358239223241f9e602')
++    outer = j(execution)
++    ck(outer['completion']['exit_code'] == 1 and
++       read(second / 'audit.stderr').decode() in outer['completion']['output'],
++       'second_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')
++    return {'revision': 'p209_terminal_artifact_revision_02', 'original_preparation_payloads': 347,
++            'previous_revision_payloads': 418, 'preserved_initial_02_payloads': 8,
++            'second_child_exit': 1, 'second_wrapper_exit': 1,
+             'preserved_initial_01_payloads': 8, 'original_child_exit': 1, 'original_wrapper_exit': 1,
+             'explicit_git_history_roles': 2, 'round1_role': 'REAFFIRMED', 'round2_role': 'REGISTERED',
+             'not_a_new_scientific_review_or_execution': True}
+@@ -497,7 +535,8 @@
+             ck(census['schema'] == 'p209-manuscript-review-findings-v1' and
+                census['reviewer'] == '/root/p209_' + letter + '_reviewer' and census['input_round'] == input_round,
+                'distinct_original_review_census', letter)
+-        ck(initial['delta_status'] == 'UNASSESSED', 'initial_census_remains_initial', letter)
++        expected_initial = {'a': 'NOT_YET_SUBMITTED_OR_ASSESSED', 'b': 'UNASSESSED'}
++        ck(initial['delta_status'] == expected_initial[letter], 'initial_census_remains_initial', letter)
+         ck(current['delta_status'] == 'ACCEPTED_EXACT_NOCHANGE_DELTA' and
+            current['current_open_counts'] == {'critical': 0, 'major': 0, 'minor': 0} and
+            current['findings'] == [] and current['scientific_inputs_changed'] is False,
+@@ -885,7 +924,41 @@
+         if preserved.suffix == '.md' and (preserved.is_relative_to(A) or preserved.is_relative_to(B)):
+             pin(preserved, digest)
+             origins.setdefault(str(preserved), Path(original))
+-    for original, row in j(A / 'delta_check_02/RESPONSE_ORIGINALS_AND_COPIES.json').items(): origins[row['copy']] = Path(original)
++    # Semantic document origins are not historical input-hash aliases. Keep
++    # both real A attempts, including the failed one, at their named origins.
++    for attempt0 in ('delta_check_01', 'delta_check_02'):
++        for original, row in j(A / (attempt0 + '/RESPONSE_ORIGINALS_AND_COPIES.json')).items():
++            source, copied = Path(original), Path(row['copy'])
++            ck(source.is_relative_to(ROOT) and copied == A / attempt0 / 'exact_response_inputs' / source.name,
++               'exact_A_response_copy_origin_path', (attempt0, original))
++            pin(copied, row['sha256'])
++            ck(str(copied) not in origins or origins[str(copied)] == source,
++               'same_explicit_document_origin', str(copied))
++            origins[str(copied)] = source
++    # The author collector recorded an additional literal workspace/ layer.
++    # Use its sealed table, not path-existence or matching-digest search.
++    source_mapping = PAPER / 'source_context/MAPPING.json'
++    pin(source_mapping, 'cc642a35e810b072e9cd4dcc8a9353e6fe0afc9f3c68eb2ff5546f876089245f')
++    for original, row in j(source_mapping).items():
++        if not row['snapshot'].startswith('source_context/workspace/'): continue
++        source = Path(original)
++        ck(source.is_relative_to(ROOT) and row['snapshot'] ==
++           'source_context/workspace/' + source.relative_to(ROOT).as_posix(),
++           'exact_author_workspace_snapshot_origin_path', original)
++        copied = safe(PAPER, row['snapshot']); pin(copied, row)
++        ck(str(copied) not in origins or origins[str(copied)] == source,
++           'same_explicit_document_origin', str(copied))
++        origins[str(copied)] = source
++    failed_b_roles = j(B / 'delta_check_01/EXACT_HISTORY_ALIASES.json')
++    for name, digest in [('PAPER_STATUS.md', '304c24e871a27bd02bcd6db231abc37870fb263a01d4c081289bdd53e8718a73'),
++                         ('ROOT_ADOPTION.md', '8f82ae0af7156131f14e9e6e849198f8b1c98564760c30d4bc121b50cf34f82e')]:
++        source = PAPER / name; copied = B / 'delta_check_01/response_anchors' / name
++        ck(failed_b_roles[str(source) + ' @ ' + digest] == str(copied),
++           'exact_failed_B_anchor_origin_path', name)
++        pin(copied, digest)
++        ck(str(copied) not in origins or origins[str(copied)] == source,
++           'same_explicit_document_origin', str(copied))
++        origins[str(copied)] = source
+     for row in j(B / 'assignment_context/ROLES.json'): origins[row['preserved']] = Path(row['original'])
+     for row in j(B / 'delta_intake_01/INTAKE_RESULT.json')['copies']: origins[row['physical']] = Path(row['original'])
+     docs = [p for base in (PAPER, A, B) for p in base.rglob('*.md')]
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/original_snapshot/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01/lifecycle_audit.py	2026-09-07 16:35:23.288242209 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/lifecycle_audit.py	2026-09-07 16:38:12.614520867 +0800
+@@ -21,7 +21,7 @@
+ PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ A, B = [BATCH / ('reviews/p209_' + x) for x in ('a', 'b')]
+ FINAL = PAPER / 'qa_final'
+-PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_01'
++PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'
+ OUT = BATCH / 'qa/p209_terminal_artifact'
+ TERMINAL_PREP = BATCH / 'qa/p209_terminal_preparation'
+ TERMINAL_LAUNCH = BATCH / 'qa/root_replays/p209_terminal_strict/launcher_terminal_pair_01'
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/original_snapshot/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01/record_audit.py	2026-09-07 16:35:23.288242209 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/record_audit.py	2026-09-07 16:38:12.598521013 +0800
+@@ -29,11 +29,11 @@
+     save(path,(json.dumps(value,sort_keys=True,indent=2)+'\n').encode())
+ 
+ def main():
+-    if sys.argv[1:] != ['initial_02']:
+-        raise RuntimeError('Require the new revision_01 initial_02 attempt')
++    if sys.argv[1:] != ['initial_03']:
++        raise RuntimeError('Require the new revision_02 initial_03 attempt')
+     if not(sys.flags.optimize==0 and sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode
+            and dict(os.environ)==ENV and Path.cwd()==ROOT and Path(sys.executable).resolve()==Path('/usr/bin/python3.10')
+-           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01'
++           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02'
+            and Path(__file__).resolve()==PREP/'record_audit.py'):
+         raise RuntimeError('Require exact prepared path, system interpreter, -I -S -B, clean ENV and workspace cwd')
+     required=[ROOT/'papers/209-ordered-fibre-threading/PAPER_MANIFEST.sha256',
+@@ -42,7 +42,10 @@
+               PREP/'SHA256SUMS',SOURCE,Path(__file__),Path(sys.executable).resolve(),
+               ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/SHA256SUMS',
+               BASE/'initial_01/SHA256SUMS',
+-              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json']
++              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json',
++              ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01/SHA256SUMS',
++              BASE/'initial_02/SHA256SUMS',
++              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json']
+     before={str(p):info(p) for p in required}
+     BASE.mkdir(exist_ok=True)
+     target=BASE/sys.argv[1];target.mkdir(exist_ok=False)

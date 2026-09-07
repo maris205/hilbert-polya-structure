@@ -1,0 +1,466 @@
+#!/usr/bin/env python3
+"""Read-only documentary checker. No imports/runs of audited scripts or science.
+
+All input bytes are cached on first read, checked again at finish, and emitted
+with a complete consumed ledger to stdout. Only the separate own recorder
+creates generated run artifacts. Historical aliases are exact named roles,
+never a hash search and never a replacement for original recorded pins.
+"""
+import hashlib
+import json
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path('/root/autodl-tmp/symbolic_dynamics')
+BASE = ROOT / 'docs/papers204_208_sequence'
+OWN = pathlib.Path(__file__).absolute().parent
+PACKAGES = [
+    ('scouting/LNR_SOURCE_RECHECK', 'MANIFEST.sha256', 202, '9137cb3fbccf56a077932d64c35509b3fe0ea918827f92a8de05849a3a709d07'),
+    ('scouting/LAST_SEAT_PROOF_TRIAGE', 'SHA256SUMS', 163, '186a6f0463aec4e02a12e6bccef78f9bb700c0dd569704a2f84c8819fb370231'),
+    ('scouting/ORR_FULL_BRANCH_DIAGNOSTIC', 'SHA256SUMS', 38, 'b0b23a0ba5396035251085a7a007c151623ad17013944fdd4dfe17783bd16024'),
+    ('scouting/NED_SOURCE_RECHECK', 'SHA256SUMS', 62, '70f1528f75d05272eba6a5a56038564554a18c05baeef3611b07e6e628313103'),
+    ('qa/last_seat_triage_erratum', 'SHA256SUMS', 7, 'b2698568cc0670501b07c862c5b7d7c51493fd4d037ae97e501c173afd0ed1ad'),
+    ('qa/orr_full_branch_arithmetic_erratum', 'SHA256SUMS', 7, '66b3d4d213a815d82f5690859934c17543588019a072daecb99e9ab0d514895f'),
+    ('qa/central_lifecycle_p209_terminal_push', 'SHA256SUMS', 5, 'e5b02d4594deba8e6bec8a5d31dac9b20dd2f40f8245be57dbf56bc5a39fad80'),
+]
+LNR, TRI, ORR, NED, ETR, EOR, CENTRAL = [BASE / row[0] for row in PACKAGES]
+CONTROL_SPEC = [
+    ('SYMBOLIC_DYNAMICS_STATE.md', 'SYMBOLIC_DYNAMICS_STATE.before.md', 'ca5725e4c8951faacfb470d85ca3638474adc28665eab3b1dd4b1a83b6145b73'),
+    ('docs/papers204_208_sequence/PIPELINE_STATE.md', 'PIPELINE_STATE.before.md', '4bfbefb703efad57e4ed24276066c35983ba3f40ab105b015b806bbb5729aeae'),
+    ('docs/papers204_208_sequence/GIT_SYNC_RECEIPT.md', 'GIT_SYNC_RECEIPT.before.md', 'a67457d5fe6e860040ad5f72a51b839e0220b7b83af22188008c8a74850b1865'),
+]
+CACHE, CENSUS, ALIASES, COMMANDS, HTTP, COPY_COUNTS = {}, {}, {}, [], [], {}
+EXTERNAL = set()
+ENV = {'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'PATH': '/usr/bin:/bin', 'TZ': 'UTC'}
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def raw(path):
+    p = pathlib.Path(path)
+    assert p.is_absolute() and '..' not in p.parts, str(p)
+    assert p.is_file() and not p.is_symlink() and p.resolve() == p, str(p)
+    if p not in CACHE:
+        CACHE[p] = p.read_bytes()
+    return CACHE[p]
+
+
+def data(path):
+    return json.loads(raw(path))
+
+
+def digest(path):
+    return sha(raw(path))
+
+
+def meta(path):
+    return dict(sha256=digest(path), bytes=len(raw(path)), resolved=str(pathlib.Path(path)), symlink=None)
+
+
+def scoped(path):
+    p = pathlib.Path(path)
+    assert p in EXTERNAL or any(p.is_relative_to(BASE / row[0]) for row in PACKAGES), str(p)
+    return p
+
+
+def pin(path, expected):
+    p = scoped(path)
+    wanted = expected if isinstance(expected, str) else expected['sha256']
+    effective = ALIASES.get((str(p), wanted), p)
+    assert digest(effective) == wanted, (str(p), str(effective), wanted, digest(effective))
+    if isinstance(expected, dict):
+        assert expected['bytes'] == len(raw(effective))
+        assert expected['resolved'] == str(p) and expected['symlink'] is None
+
+
+def pinmaps(folder, before_name, after_name, relative=False):
+    before, after = data(folder / before_name), data(folder / after_name)
+    assert isinstance(before, dict) and before == after, str(folder)
+    for name, expected in before.items():
+        pin(LNR / name if relative else name, expected)
+    return before
+
+
+def census(folder):
+    paths = []
+    for p in folder.rglob('*'):
+        assert not p.is_symlink() and '__pycache__' not in p.parts and p.suffix != '.pyc', str(p)
+        assert p.is_dir() or p.is_file(), str(p)
+        if p.is_file():
+            paths.append(p)
+    return set(paths)
+
+
+def sealed_packages():
+    rows = []
+    for name, seal, count, expected in PACKAGES:
+        folder = BASE / name
+        assert digest(folder / seal) == expected
+        entries = {}
+        for line in raw(folder / seal).decode().splitlines():
+            h, rel = line.split('  ', 1)
+            assert re.fullmatch('[0-9a-f]{64}', h)
+            p = folder / rel
+            assert not pathlib.Path(rel).is_absolute() and '..' not in pathlib.Path(rel).parts
+            assert p not in entries and p != folder / seal
+            entries[p] = h
+        physical = census(folder)
+        assert len(entries) == count and physical == set(entries) | {folder / seal}, name
+        for p, h in entries.items():
+            assert digest(p) == h, str(p)
+            if p.suffix == '.json':
+                data(p)
+        CENSUS[folder] = physical
+        rows.append(dict(package=name, payloads=count, physical_files=len(physical), seal_sha256=expected))
+    return rows
+
+
+def controls():
+    capture = data(CENTRAL / 'CAPTURE.actual.json')
+    assert capture['status'] == 'ACTUAL_EXACT_PRE_UPDATE_CONTROL_COPIES'
+    assert len(capture['copies']) == 3
+    for (source, copy, expected), observed in zip(CONTROL_SPEC, capture['copies']):
+        p, q = ROOT / source, CENTRAL / copy
+        assert observed['source'] == source and observed['copy'] == str(q.relative_to(ROOT))
+        assert observed['actual_comparison']['exit_code'] == 0 and observed['actual_comparison']['output'] == ''
+        assert digest(q) == expected
+        assert expected + '  ' + source + '\n' in capture['original_sha256_command']['output']
+        EXTERNAL.add(p)
+        ALIASES[str(p), expected] = q
+        raw(p)  # Current control observation; never substituted into old pin maps.
+    assert capture['original_sha256_command']['exit_code'] == 0
+    rows = data(TRI / 'CONTROL_ROLES.json')
+    assert len(rows) == 3
+    for row in rows:
+        assert row['role'] == 'exact_physical_copy_before_body_read'
+        source, copy = pathlib.Path(row['original_path']), pathlib.Path(row['copy_path'])
+        assert copy == TRI / 'controls' / source.name
+        assert digest(copy) == row['sha256']
+        assert raw(copy) == raw(ALIASES[str(source), row['sha256']])
+    COPY_COUNTS['triage_control_copies'] = 3
+
+
+def original_roles():
+    lnr = data(LNR / 'ORIGINAL_INPUTS.json')
+    assert len(lnr) == 21
+    intake = data(LNR / 'INTAKE_RESULT.json')
+    assert intake['copies'] == lnr and intake['actual_raw_copy_comparisons'] == intake['inputs'] == 21
+    assert intake['unchanged_during_copy'] is True and intake['scientific_executions'] == 0
+    for source, row in lnr.items():
+        EXTERNAL.add(pathlib.Path(source))
+        q = LNR / row['relative_copy']
+        assert str(q) == row['physical'] and q.is_relative_to(LNR / 'originals')
+        assert row['role'] == 'Exact at-assignment historical input; a later central index revision is not this original.'
+        assert digest(q) == row['sha256'] and len(raw(q)) == row['bytes']
+        pin(source, row)
+        assert raw(q) == raw(ALIASES.get((source, row['sha256']), pathlib.Path(source)))
+    COPY_COUNTS['LNR_historical_intake'] = 21
+    for folder, count, role in [(ORR, 7, 'exact_copy_before_new_body_read'), (NED, 3, 'copy_before_new_body_read')]:
+        rows = data(folder / 'ORIGINAL_ROLES.json')
+        assert len(rows) == count
+        for row in rows:
+            p, q = pathlib.Path(row['original_path']), pathlib.Path(row['copy_path'])
+            EXTERNAL.add(p)
+            assert row['role'] == role
+            assert q == folder / 'inputs' / (p.relative_to(ROOT) if folder == ORR else p.name)
+            assert raw(p) == raw(q) and digest(q) == row['sha256']
+        COPY_COUNTS[folder.name] = count
+    tri_pins = data(TRI / 'ORIGINAL_INPUT_PINS.json')
+    assert len(tri_pins) == 25
+    for name, expected in tri_pins.items():
+        p = pathlib.Path(name)
+        assert p.is_relative_to(BASE / 'scouting') and p.suffix == '.md'
+        assert not any(x.lower() in {'qa', 'reviews', 'review', 'freeze', 'build'} or 'gate' in x.lower() for x in p.parts)
+        EXTERNAL.add(p)
+        pin(p, expected)
+
+
+def lower_native(folder, role=None, count_key='input_count', pathset=False):
+    receipt = data(folder / 'receipt.json')
+    before = pinmaps(folder, 'inputs_before.json', 'inputs_after.json')
+    assert receipt['exit'] == 0 and receipt['unchanged'] is True
+    assert receipt[count_key] == len(before)
+    if role is not None:
+        assert receipt['role'] == role
+    if pathset:
+        names = data(folder / 'pathset.json')
+        assert len(names) == len(set(names)) == len(before) and set(names) == set(before)
+    for stream in ('stdout', 'stderr'):
+        assert digest(folder / (stream + '.raw')) == receipt[stream + '_sha256']
+    assert not raw(folder / 'stderr.raw')
+    if 'finished_epoch' in receipt:
+        assert receipt['started_epoch'] <= receipt['finished_epoch']
+    if 'timed_out' in receipt:
+        assert receipt['timed_out'] is False and receipt['elapsed_seconds'] >= 0
+    argv = receipt['argv']
+    assert isinstance(argv, list) and argv and all(isinstance(a, str) for a in argv)
+    assert pathlib.Path(receipt['cwd']).is_absolute()
+    stdout = raw(folder / 'stdout.raw')
+    read_type = 'raw_stream_hash_and_declared_argv'
+    if argv[0] == 'sed':
+        assert argv[1] == '-n' and re.fullmatch(r'\d+,\d+p', argv[2])
+        start, stop = map(int, argv[2][:-1].split(','))
+        bodies = [raw(scoped(p)) for p in argv[3:]]
+        joined = b''.join(bodies)
+        # sed uses one cumulative line number across multiple input files.
+        expected = b''.join(joined.splitlines(keepends=True)[start - 1:stop])
+        assert stdout == expected, str(folder)
+        if start == 1 and stop == 4000:
+            assert len(joined.splitlines()) <= 4000 and stdout == joined
+            read_type = 'full_read_stdout_byte_equality'
+        else:
+            read_type = 'exact_declared_excerpt_stdout_byte_equality'
+    elif argv[0] == 'cp':
+        assert stdout == b'' and argv[1] in ('-p', '--parents')
+    elif argv[0] == 'rg':
+        if argv[1] == '--files':
+            assert argv[:3] == ['rg', '--files', '-g'] and len(argv) == 4
+            lines = stdout.decode().splitlines()
+            assert len(lines) == len(set(lines)) and all(pathlib.Path(s).name == s and s.endswith('.md') for s in lines)
+            read_type = 'filename_only_original_raw_output_not_current_discovery_replay'
+        else:
+            assert argv[1] == '-n' and argv[3] == '--'
+            matches = {}
+            for p in argv[4:]:
+                matches[p] = []
+                for n, line in enumerate(raw(scoped(p)).decode().splitlines(), 1):
+                    if re.search(argv[2], line):
+                        matches[p].append((p + ':' if len(argv[4:]) > 1 else '') + str(n) + ':' + line + '\n')
+            if len(argv[4:]) > 1:
+                # rg's unsorted parallel file groups need not follow argv order.
+                order = list(dict.fromkeys(line.split(':', 1)[0] for line in stdout.decode().splitlines()))
+                assert set(order) == {p for p, lines in matches.items() if lines}
+            else:
+                order = argv[4:]
+            assert stdout == ''.join(line for p in order for line in matches[p]).encode(), str(folder)
+            read_type = 'declared_simple_regex_per_file_byte_equality_native_group_order'
+    elif argv[0] == 'sha256sum':
+        assert stdout == ''.join(digest(scoped(p)) + '  ' + p + '\n' for p in argv[1:]).encode()
+    elif argv[0] == 'python3':
+        assert argv[1:3] == ['-I', '-B'] and len(argv) == 4
+        assert scoped(argv[3]).name in ('check.py', 'audit.py')
+        result = data(folder / 'stdout.raw')
+        assert isinstance(result, dict)
+    else:
+        assert argv[0] == 'curl' and folder.is_relative_to(NED / 'commands')
+    COMMANDS.append(dict(path=str(folder.relative_to(BASE)), schema='lowercase_native', input_count=len(before), exit=0,
+                         argv=argv, stdout_bytes=len(stdout), stdout_check=read_type))
+    return receipt
+
+
+def upper_native(folder, relative=False, expected_exit=0):
+    receipt, attempt = data(folder / 'RECEIPT.json'), data(folder / 'ATTEMPT.json')
+    before = pinmaps(folder, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', relative)
+    assert attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None
+    assert receipt['status'] == 'COMPLETED' and receipt['exit_code'] == expected_exit
+    assert receipt['inputs_unchanged'] is True and receipt['started_utc'] <= receipt['ended_utc']
+    for k in ('argv', 'cwd', 'environment', 'started_utc'):
+        assert attempt[k] == receipt[k]
+    assert receipt['environment'] == ENV and receipt['cwd'] == str(ROOT)
+    for stream in ('stdout', 'stderr'):
+        assert receipt[stream] == meta(folder / stream)
+    if 'result' in receipt:
+        assert receipt['result'] == meta(LNR / 'AUDIT_RESULT.json')
+    COMMANDS.append(dict(path=str(folder.relative_to(BASE)), schema='uppercase_native', input_count=len(before),
+                         exit=expected_exit, argv=receipt['argv'], stdout_bytes=len(raw(folder / 'stdout')),
+                         stdout_check='full_raw_stream_metadata_equality'))
+    return receipt
+
+
+def native_groups():
+    tri = sorted((TRI / 'commands').iterdir())
+    assert len(tri) == 25 and [int(p.name[:2]) for p in tri] == list(range(1, 26))
+    for folder in tri:
+        lower_native(folder, 'new_native_documentary_command_not_scientific_execution', pathset=True)
+    for folder in sorted((ORR / 'commands').iterdir()):
+        lower_native(folder, 'documentary_execution_not_scientific_run', 'inputs', True)
+    assert len(list((ORR / 'commands').iterdir())) == 4
+    for folder in sorted((NED / 'commands').iterdir()):
+        lower_native(folder, 'documentary_source_command_not_scientific_execution')
+    assert len(list((NED / 'commands').iterdir())) == 7
+    lower_native(ETR / 'check')
+    lower_native(EOR / 'check', 'documentary_hash_check_only_not_mathematical_execution')
+    for folder, copy_name, reads in [(TRI, '01_control_copy', ['02_control_key_search']),
+                                   (ORR, '01_original_copy', ['02_original_read', '03_second_attempt_read']),
+                                   (NED, '01_old_context_copy', ['02_old_context_read'])]:
+        cp = data(folder / 'commands' / copy_name / 'receipt.json')
+        end = cp.get('finished_epoch', cp['started_epoch'] + cp.get('elapsed_seconds', 0))
+        assert all(end <= data(folder / 'commands' / name / 'receipt.json')['started_epoch'] for name in reads)
+    cmpdirs = sorted((LNR / 'commands').iterdir())
+    assert [p.name for p in cmpdirs] == ['intake_cmp_%02d' % n for n in range(21)]
+    originals = data(LNR / 'ORIGINAL_INPUTS.json')
+    seen = set()
+    for folder in cmpdirs:
+        receipt = upper_native(folder)
+        argv = receipt['argv']
+        assert argv[:2] == ['/usr/bin/cmp', '--'] and len(argv) == 4
+        assert argv[2] in originals and argv[3] == originals[argv[2]]['physical']
+        assert not raw(folder / 'stdout') and not raw(folder / 'stderr')
+        seen.add(argv[2])
+    assert seen == set(originals)
+    receipt = upper_native(LNR / 'audit_run', relative=True)
+    assert receipt['argv'] == ['/usr/bin/python3.10', '-I', '-S', '-B', str(LNR / 'finish_source_recheck.py'), 'audit']
+    old = data(LNR / 'AUDIT_RESULT.json')
+    assert old['full_pre_audit_inputs_before'] == old['full_pre_audit_inputs_after']
+    for name, expected in old['full_pre_audit_inputs_before'].items():
+        pin(LNR / name, expected)
+    assert data(LNR / 'audit_run/stdout') == {k: v for k, v in old.items() if not k.startswith('full_') and k != 'live_inputs_observed'}
+    assert set(old['live_inputs_observed']) == set(originals)
+    for name, expected in old['live_inputs_observed'].items():
+        pin(name, expected)
+    for name, row in old['live_control_changes_since_intake'].items():
+        assert row['at_assignment'] == originals[name] and row['at_audit'] == old['live_inputs_observed'][name]
+        assert (name, row['at_assignment']['sha256']) in ALIASES
+    assert len(old['live_control_changes_since_intake']) == 2
+    for folder, output, resultfile in [(TRI, '25_documentary_audit', 'DOCUMENTARY_AUDIT.json'),
+                                       (ORR, '04_documentary_check', 'DOCUMENTARY_CHECK.json'),
+                                       (NED, '03_documentary_audit', 'DOCUMENTARY_AUDIT.json')]:
+        assert data(folder / 'commands' / output / 'stdout.raw') == data(folder / resultfile)
+
+
+def source_records():
+    for name, code, status, size in [('01/publisher_pdf', 0, 403, 832805), ('02/author_journals', 28, 0, None),
+                                     ('04/doi_openalex', 0, 200, 8234), ('06/dblp_exact', 28, 0, None)]:
+        folder = LNR / 'routes' / name
+        receipt = upper_native(folder, expected_exit=code)
+        response = data(folder / 'HTTP_RESULT.json')
+        transport = data(folder / 'stdout')
+        assert response['transport_result'] == transport and response['actual_curl_exit'] == code
+        assert transport['exitcode'] == code and transport['http_code'] == transport['response_code'] == status
+        argv = receipt['argv']
+        assert argv[0] == '/usr/bin/curl' and argv[-1] == response['request_url']
+        assert '--fail' not in argv and '--location' in argv
+        assert argv[argv.index('--max-time') + 1] == '45' and argv[argv.index('--connect-timeout') + 1] == '15'
+        assert response['full_text_status'] == 'UNASSESSED_UNTIL_BODY_READ' and response['no_authentication_or_paywall_bypass'] is True
+        for n, expected in response['retained_responses'].items():
+            assert n in ('response.body', 'response.headers') and expected == meta(folder / n)
+        if size is None:
+            assert not (folder / 'response.body').exists() and not raw(folder / 'response.headers')
+            assert b'Connection timeout after 15000 ms' in raw(folder / 'stderr')
+            kind = 'timeout_no_body_no_headers'
+        else:
+            body = raw(folder / 'response.body')
+            assert len(body) == size == transport['size_download'] and not body.lstrip().startswith(b'%PDF-')
+            assert int(re.findall(rb'HTTP/\S+ (\d{3})', raw(folder / 'response.headers'))[-1]) == status
+            if status == 403:
+                assert b'<html' in body[:400].lower() and 'text/html' in transport['content_type']
+                kind = 'http403_denial_html_not_primary_body'
+            else:
+                oa = json.loads(body)
+                assert oa['doi'] == 'https://doi.org/10.1016/j.patrec.2011.02.005'
+                assert oa['best_oa_location'] is None and oa['open_access']['oa_url'] is None
+                assert len(oa['locations']) == 1 and oa['locations'][0]['pdf_url'] is None and oa['has_content']['pdf'] is False
+                kind = 'http200_openalex_metadata_not_primary_body'
+        HTTP.append(dict(package='LNR', route=name, curl_exit=code, http_status=status, body_bytes=size, classification=kind))
+    webs = ['routes/01/web_publisher_open.json', 'routes/02/web_author_pages.json', 'routes/03_05_exact_discovery.json',
+            'routes/06_exact_pdf_discovery.json', 'routes/06/web_dblp_exact_open.json']
+    for name in webs:
+        item = data(LNR / name)
+        assert item['request'] and isinstance(item.get('result', item.get('response_full_text')), str)
+        assert item.get('result', item.get('response_full_text'))
+    ledger, finding = data(LNR / 'ROUTE_LEDGER.json'), data(LNR / 'FINDINGS.json')
+    assert ledger['routes_limit'] == ledger['routes_attempted'] == 6
+    assert [r['route'] for r in ledger['routes']] == ['01', '02', '03', '04', '05', '06']
+    assert ledger['actual_web_tool_calls'] == 5 and ledger['actual_curl_commands'] == 4
+    assert ledger['primary_body_obtained'] is False and finding['primary_body_obtained'] is False
+    assert finding['candidate_status'] == 'HOLD_SOURCE' and finding['admission_status'] == 'NO_ADMISSION'
+    assert finding['findings'][0]['id'] == 'LNR-S1' and finding['findings'][0]['state'] == 'OPEN'
+    assert finding['source_findings_closed'] == finding['new_scientific_executions'] == finding['new_candidate_admissions'] == 0
+    for name in ['02', '03', '04', '05']:
+        folder, command = NED / 'routes' / name, NED / 'commands' / ('route_' + name)
+        receipt, request = data(command / 'receipt.json'), data(folder / 'request.json')
+        fields = raw(command / 'stdout.raw').decode().splitlines()
+        assert len(fields) == 4 and receipt['elapsed_seconds'] <= 45
+        argv = receipt['argv']
+        assert argv[-1] == request['url'] and '--fail' not in argv
+        assert argv[argv.index('--max-time') + 1] == '40' and argv[argv.index('--connect-timeout') + 1] == '12'
+        body, headers = raw(folder / 'response.body'), raw(folder / 'response.headers')
+        assert len(body) == int(fields[3]) and not body.lstrip().startswith(b'%PDF-')
+        assert int(re.findall(rb'HTTP/\S+ (\d{3})', headers)[-1]) == int(fields[0])
+        HTTP.append(dict(package='NED', route=name, curl_exit=0, http_status=int(fields[0]), body_bytes=len(body),
+                         content_type=fields[2], classification='metadata_or_HTML_not_primary_body'))
+    assert '<title>Redirecting</title>' in raw(NED / 'routes/02/response.body').decode()
+    alex, s2 = data(NED / 'routes/03/response.body'), data(NED / 'routes/04/response.body')
+    assert alex['open_access']['oa_status'] == 'closed' and alex['primary_location']['pdf_url'] is None
+    assert s2['openAccessPdf']['status'] == 'BRONZE' and s2['openAccessPdf']['url'].lower() == 'https://doi.org/10.1016/0097-3165(92)90037-u'
+    assert raw(NED / 'commands/route_05/stdout.raw').startswith(b'403\n')
+    for name in ['01', '06']:
+        folder = NED / 'routes' / name
+        receipt = data(folder / 'receipt.json')
+        assert receipt['role'] == 'actual_complete_tool_return_serialized_not_native_network_response'
+        assert receipt['within45'] is True and receipt['elapsed_seconds'] <= 45
+        result = data(folder / 'tool_return.json')
+        assert isinstance(result, str) and result and data(folder / 'request.json')['request']
+        if name == '06':
+            assert '(403) Forbidden' in result
+    outcome = data(NED / 'DOCUMENTARY_AUDIT.json')
+    assert outcome['source_disposition'] == 'HOLD_SOURCE' and outcome['primary_body_obtained'] is False
+    assert outcome['metadata_access_labels_conflict'] is True and outcome['metadata_not_body_completion'] is True
+
+
+def errata_and_limits():
+    refusal = raw(TRI / 'SCOPE_REFUSAL_TRANSCRIPTION.md').decode()
+    assert 'exit1' in refusal and 'exit2' in refusal and 'not a native receipt' in refusal
+    assert 'no complete native outer trace' in refusal and 'PRECODE_PROOFS.md' in refusal
+    failures = data(LNR / 'ORIENTATION_FAILURES.json')
+    assert len(failures['events']) == 3 and failures['scientific_executions'] == 0
+    result = data(ETR / 'check/stdout.raw')
+    assert result['verdict'] == 'NO_ERRATUM_TO_SEALED_BYTES_NEEDED' and result['ned_sealed_name'] == 'SOURCE_SUPPLEMENT.md'
+    assert result['candidate_body_reads'] == result['scientific_executions'] == 0
+    report = raw(TRI / 'TRIAGE_REPORT.md').decode()
+    groups = dict(HVD=['10_hvd_full'], NCC=['11_ncc_full'], ORR=['13_orr_deduction_full', '14_orr_precode', '15_orr_primary_boundary', '16_orr_intake'],
+                  NED=['17_ned_full'], CTM=['18_ctm_full'], **{'GCF+': ['20_gcf_intake', '21_gcf_preproof', '22_gcf_finalproof', '23_gcf_primary_initial', '24_gcf_primary_final']})
+    assert len(result['checked_rows']) == 6
+    for row in result['checked_rows']:
+        names = [pathlib.Path(p).name for name in groups[row['subject']] for p in data(TRI / 'commands' / name / 'receipt.json')['argv'][3:]]
+        assert names == row['actual_argv_basenames'] and row['match'] is True
+        assert all(n in names and n in report for n in row['explicitly_named_basenames'])
+    correction = raw(EOR / 'CORRECTION.md').decode()
+    assert 'NOT CURRENTLY JUSTIFIED' in correction and 'NO_PROMOTION' in correction
+    assert data(ORR / 'DOCUMENTARY_CHECK.json')['mathematical_proof_checked_by_program'] is False
+
+
+def main():
+    assert sys.flags.isolated and sys.dont_write_bytecode and not sys.flags.optimize
+    raw(pathlib.Path(__file__).absolute())
+    raw(OWN / 'record.py')
+    raw(OWN / 'SCOPE.md')
+    raw(OWN / 'failed_run_01_checker.py.txt')
+    raw(OWN / 'CHECKER_CORRECTION.md')
+    for name in ('receipt.json', 'stdout.raw', 'stderr.raw'):
+        raw(OWN / 'run_01' / name)
+    packages = sealed_packages()
+    controls()
+    original_roles()
+    native_groups()
+    source_records()
+    errata_and_limits()
+    assert len(COMMANDS) == 64
+    before = {str(p): dict(sha256=sha(v), bytes=len(v), physical_path=str(p), symlink=False) for p, v in sorted(CACHE.items())}
+    after = {}
+    for p in sorted(CACHE):
+        assert p.is_file() and not p.is_symlink() and p.resolve() == p
+        second = p.read_bytes()
+        after[str(p)] = dict(sha256=sha(second), bytes=len(second), physical_path=str(p), symlink=False)
+    assert before == after, 'current consumed path changed during audit'
+    for folder, physical in CENSUS.items():
+        assert census(folder) == physical, str(folder)
+    canonical = (json.dumps(before, sort_keys=True, separators=(',', ':')) + '\n').encode()
+    summary = dict(verdict='PASS_DOCUMENTARY_ONLY_NOT_MATHEMATICAL_REVIEW', packages=packages,
+                   native_command_packages=len(COMMANDS), copy_roles=COPY_COUNTS, native_http_transactions=len(HTTP),
+                   serialized_web_returns=7, consumed_before_count=len(before), consumed_after_count=len(after),
+                   current_all_consumed_paths_read_twice_unchanged=True, pinmap_canonical_sha256=sha(canonical),
+                   historical_control_aliases=3, historical_original_pins_not_refreshed=True,
+                   real_http_timeouts=2, nonnative_failure_transcriptions_preserved=True,
+                   source_clearance=False, independent_mathematical_review=False, scientific_executions=0,
+                   source_queries=0, old_scripts_executed=0, candidate_admissions=0)
+    print(json.dumps(dict(summary=summary, commands=COMMANDS, http=HTTP,
+                          historical_control_aliases=[dict(original=p, historical_sha256=h, exact_physical_alias=str(q)) for (p, h), q in ALIASES.items()],
+                          consumed_before=before, consumed_after=after), sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

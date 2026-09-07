@@ -1,0 +1,48 @@
+{
+  "audit_p209.py": [
+    {
+      "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'",
+      "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_01'",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "    # Revision 01 and its real initial_02 failure are an additional immutable\n    # historical layer. They are not replaced by this new prepared attempt.\n    previous = BATCH / 'qa/p209_terminal_artifact_revision_01'\n    pin(previous / 'SHA256SUMS',\n        '855aba017f5a369c09696272579897324bbd906892b353d17f0c9eb6d7fcbcc5')\n    manifest(previous, count=418)\n    second = OUT / 'initial_02'\n    pin(second / 'SHA256SUMS', '89ab791251744f3aa96911f871f108268c2ebb7e5e1da55329eea45eb70bbc96')\n    manifest(second, count=8)\n    for snapshot, source in [('executed_auditor_snapshot.py', 'audit_p209.py'),\n                             ('executed_recorder_snapshot.py', 'record_audit.py')]:\n        ck(read(second / snapshot) == read(previous / source),\n           'second_failed_exact_executed_sources', snapshot)\n    row, attempt = j(second / 'COMMAND.json'), j(second / 'ATTEMPT.json')\n    expected = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',\n                'pycache_prefix=' + str(second / 'unused_pycache'),\n                str(previous / 'audit_p209.py'), 'terminal-artifact-after-actual-views']\n    ck(row['exit_code'] == 1 and row['status'] == 'COMPLETED' and row['failure'] is None\n       and row['inputs_unchanged'] and row['unused_cache_absent'] and not (second / 'unused_pycache').exists()\n       and row['argv'] == expected and row['cwd'] == str(ROOT) and row['environment'] == ENV,\n       'second_failed_child_remains_failure', 'real initial_02 exit one; not a gate PASS')\n    ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and\n       all(attempt[k] == row[k] for k in ('argv', 'cwd', 'environment', 'started_utc')),\n       'second_failed_prespawn_record', 'original fields')\n    exact_pair(second, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 10, historical=True)\n    for stream in ('stdout', 'stderr'):\n        pin(second / ('audit.' + stream), row[stream])\n    ck(read(second / 'audit.stdout') == b'' and\n       h(second / 'audit.stderr') == '87df565befc65ce9d96c25cf6e28f470521bea9207750c17ee1123ed6384c09b',\n       'second_failed_full_raw_streams', 'unchanged 871-byte initial census A traceback')\n    execution = BATCH / 'qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json'\n    pin(execution, 'cb4872647ea63e9e2e9253dcb7d11d090947f8399c497a358239223241f9e602')\n    outer = j(execution)\n    ck(outer['completion']['exit_code'] == 1 and\n       read(second / 'audit.stderr').decode() in outer['completion']['output'],\n       'second_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')\n    return {'revision': 'p209_terminal_artifact_revision_02', 'original_preparation_payloads': 347,\n            'previous_revision_payloads': 418, 'preserved_initial_02_payloads': 8,\n            'second_child_exit': 1, 'second_wrapper_exit': 1,\n",
+      "old": "    return {'revision': 'p209_terminal_artifact_revision_01', 'original_preparation_payloads': 347,\n",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "        expected_initial = {'a': 'NOT_YET_SUBMITTED_OR_ASSESSED', 'b': 'UNASSESSED'}\n        ck(initial['delta_status'] == expected_initial[letter], 'initial_census_remains_initial', letter)",
+      "old": "        ck(initial['delta_status'] == 'UNASSESSED', 'initial_census_remains_initial', letter)",
+      "required_old_occurrences": 1
+    }
+  ],
+  "lifecycle_audit.py": [
+    {
+      "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'",
+      "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_01'",
+      "required_old_occurrences": 1
+    }
+  ],
+  "record_audit.py": [
+    {
+      "new": "if sys.argv[1:] != ['initial_03']:",
+      "old": "if sys.argv[1:] != ['initial_02']:",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "Require the new revision_02 initial_03 attempt",
+      "old": "Require the new revision_01 initial_02 attempt",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02'",
+      "old": "and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01'",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json',\n              ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01/SHA256SUMS',\n              BASE/'initial_02/SHA256SUMS',\n              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json']",
+      "old": "              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json']",
+      "required_old_occurrences": 1
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/draft_history/unexecuted_01/audit_p209.py	2026-09-07 15:15:37.817322592 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/audit_p209.py	2026-09-07 15:27:02.488053733 +0800
+@@ -389,7 +389,8 @@
+     # The failures stay failures. Their original streams are sealed by their
+     # accepted review manifests; successful later evidence cannot rewrite them.
+     failed_a = j(A / 'delta_check_01/EXECUTION.actual.json')
+-    ck(failed_a['exit_code'] == 1, 'preserved_A_delta_failure', 'real first documentary failure')
++    ck(failed_a['completion_result']['exit_code'] == 1,
++       'preserved_A_delta_failure', 'real first documentary failure; original nested execution schema')
+     bad = j(B / 'delta_check_01/CLOSURE_AFTER_FAILURE.json')
+     ck(bad['actual_outer_exit'] == 1 and bad['actual_child_exit'] == 0 and
+        bad['status'] == 'FAIL_PRESERVED_OUTER_WRAPPER_FILENAME_COLLISION',
+@@ -629,6 +630,8 @@
+     bylabel = {}
+     for row in rec['commands']:
+         argv = command(FINAL, row, BUILD_ENV)
++        expected_cwd = FINAL / row['label'][:12] if row['label'].startswith(('cold_build_1_', 'cold_build_2_')) else FINAL
++        ck(row['cwd'] == str(expected_cwd), 'terminal_exact_actual_command_cwd', row['label'])
+         ck(row['status'] == 'COMPLETED' and row['cleanup'] == [] and row['start_new_session'],
+            'terminal_actual_closed_child', row['label'])
+         attempt = j(FINAL / (row['label'] + '.attempt.json'))
+@@ -719,6 +722,10 @@
+        'terminal_exact_consumed_and_generated_union', 'every per-pass record retained')
+     launch = TERMINAL_LAUNCH; manifest(launch)
+     outer = j(launch / 'RECEIPT.json')
++    ck(outer['argv'] == ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++       'pycache_prefix=' + str(FINAL / 'never_created_parent_cache'),
++       str(TERMINAL_PREP / 'root_terminal_builds.py'), 'terminal-pair-after-round2']
++       and outer['cwd'] == str(ROOT), 'terminal_actual_exact_parent_launch', 'unchanged prepared builder')
+     ck(outer['status'] == 'PASS_ROOT_TERMINAL_LAUNCH_NOT_VIEWED' and outer['exit'] == 0 and outer['outcome'] == 'COMPLETED'
+        and outer['failure'] is None and outer['inputs_unchanged'] and outer['cache_absent']
+        and outer['launcher_observed_input_closure'] and outer['env'] == BUILD_ENV,
+@@ -735,6 +742,9 @@
+         obs = j(launch / ('LAUNCHER_RUNTIME_' + phase + '.json'))
+         ck(obs['environment'] == BUILD_ENV and not obs['cache_exists'] and not Path(obs['cache_prefix']).exists(),
+            'terminal_launcher_actual_settings', phase)
++        ck(obs['cwd'] == str(ROOT) and obs['cache_prefix'] == str(launch / 'never_created_launcher_cache')
++           and all(s in obs['flags'] for s in ('optimize=0', 'isolated=1', 'no_site=1', 'dont_write_bytecode=1')),
++           'terminal_launcher_exact_flags_cwd_cache', phase)
+         for path, value in obs['mapped_files'].items(): ck(outer_coverage.get(path) == value, 'terminal_launcher_map_coverage', path)
+         for value in obs['modules'].values():
+             ck(outer_coverage.get(value['path']) == {k: value[k] for k in ('sha256', 'bytes', 'resolved')},
+@@ -792,6 +802,10 @@
+             rich_pin(row['physical_target'], row['sha256'], True)
+             mapped[key] = row
+     origins = {}
++    for (original, digest), preserved in ALIASES.items():
++        if preserved.suffix == '.md' and (preserved.is_relative_to(A) or preserved.is_relative_to(B)):
++            pin(preserved, digest)
++            origins.setdefault(str(preserved), Path(original))
+     for original, row in j(A / 'delta_check_02/RESPONSE_ORIGINALS_AND_COPIES.json').items(): origins[row['copy']] = Path(original)
+     for row in j(B / 'assignment_context/ROLES.json'): origins[row['preserved']] = Path(row['original'])
+     for row in j(B / 'delta_intake_01/INTAKE_RESULT.json')['copies']: origins[row['physical']] = Path(row['original'])

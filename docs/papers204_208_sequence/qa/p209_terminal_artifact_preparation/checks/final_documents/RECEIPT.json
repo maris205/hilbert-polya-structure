@@ -1,0 +1,34 @@
+{
+  "actual_exit": 0,
+  "argv": [
+    "/usr/bin/python3.10",
+    "-I",
+    "-S",
+    "-B",
+    "-c",
+    "import ast,hashlib,json,re\nfrom pathlib import Path\nB=Path('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation')\ncontract=json.loads((B/'INPUT_CONTRACT.json').read_bytes())\nassert contract['status']=='PREPARED_ONLY_NOT_EXECUTED_OR_ACCEPTED'\ncode={}\nfor p in sorted(B.rglob('*.py')):\n text=p.read_text();compile(ast.parse(text),str(p),'exec');code[str(p.relative_to(B))]=hashlib.sha256(p.read_bytes()).hexdigest()\nreadme=(B/'README.md').read_text();links=[]\nreadme=re.sub(r'(?ms)^```.*?^```\\s*$', '', readme)\nfor target in re.findall(r'\\[[^\\]]*\\]\\(([^)]+)\\)',readme):\n assert (B/target).exists(),target;links.append(target)\nfinal=json.loads((B/'FINAL_STATIC_CHECK_v2.json').read_bytes())\nfor name in ('audit_p209.py','record_audit.py','lifecycle_audit.py'):\n assert code[name]==final['syntax'][name]['sha256']\nprevious=json.loads((B/'checks/final_static/INPUTS_BEFORE.json').read_bytes())\nfor name in ('audit_p209.py','lifecycle_audit.py','p209_specific.py.fragment'):\n assert hashlib.sha256((B/'draft_history/unexecuted_02'/name).read_bytes()).hexdigest()==previous[str(B/name)]['sha256']\nprint(json.dumps({'status':'PASS_PREPARATION_DOCUMENTS_AND_ALL_SOURCE_SYNTAX_ONLY',\n 'contract_schema':contract['schema'],'python_sources':code,'readme_local_links':links,\n 'final_target_source_pins_unchanged':True,'exact_unexecuted_draft02_bytes_retained':True,\n 'auditor_build_view_executions':0},indent=2,sort_keys=True))\n"
+  ],
+  "cwd": "/root/autodl-tmp/symbolic_dynamics",
+  "env": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "TZ": "UTC"
+  },
+  "expected_exit": 0,
+  "inputs_unchanged": true,
+  "scope": "Actual documentary copy/diff/syntax command only; no target auditor/build/science/view invocation.",
+  "started_utc": "2026-09-07T07:31:22.404955+00:00",
+  "stderr": {
+    "bytes": 0,
+    "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/checks/final_documents/stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "symlink": null
+  },
+  "stdout": {
+    "bytes": 2555,
+    "resolved": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/checks/final_documents/stdout",
+    "sha256": "14e18784c883f5e9a5439cc5450137ab3407eda3e1f2d86a59ee121c677b0da0",
+    "symlink": null
+  }
+}

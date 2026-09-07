@@ -1,0 +1,686 @@
+Palindromic Length in Linear Time
+Kirill Borozdin1 , Dmitry Kosolobov2 , Mikhail Rubinchik3 , and
+Arseny M. Shur4
+
+1    Ural Federal University, Ekaterinburg, Russia
+     borozdin.kirill,@gmail.com
+2    University of Helsinki, Helsinki, Finland
+     dkosolobov@mail.ru
+3    Ural Federal University, Ekaterinburg, Russia
+     mikhail.rubinchik@gmail.com
+4    Ural Federal University, Ekaterinburg, Russia
+     arseny.shur@urfu.ru
+
+
+      Abstract
+Palindromic length of a string is the minimum number of palindromes whose concatenation is
+equal to this string. The problem of finding the palindromic length drew some attention, and a
+few O(n log n) time online algorithms were recently designed for it. In this paper we present the
+first linear time online algorithm for this problem.
+
+1998 ACM Subject Classification F.2.2 Nonnumerical Algorithms and Problems, G.2.1 Com-
+binatorics
+
+Keywords and phrases palindrome, palindromic length, palindromic factorization, online
+
+Digital Object Identifier 10.4230/LIPIcs.CPM.2017.23
+
+
+ 1      Introduction
+Algorithmic and combinatorial problems involving palindromes attracted the attention of
+researchers since the first days of stringology. Recall that a string w = a0 a1 · · · an−1 is
+                                             ←
+a palindrome if it is equal to the string w = an−1 · · · a1 a0 . The early works [4, 6, 8, 11]
+considered palindromes as structures that might provide examples of (context-free) languages
+that are impossible to recognize in linear time, thus provably restricting the computational
+power of some models (RAM, in particular). Subsequently, it was shown that many of such
+languages are, in fact, linear recognizable. Recently it was proved [7] that the language P k ,
+where P is the set of all palindromes on a given alphabet, is recognizable online in O(kn)
+time, where n is the length of the input string. Roughly at the same time, a closely related
+notion of palindromic length of a string was introduced: this is the minimal number k such
+that the string belongs to P k . In 2014–2015 three different algorithms that compute the
+palindromic length of a string of length n in O(n log n) time were presented in [3, 5, 10]
+(however, they all are based on similar principles). In this paper we present the first linear
+algorithm computing the palindromic length. Moreover, our algorithm is online, i.e., it reads
+the input string sequentially from left to right and computes the palindromic length for each
+prefix after reading the rightmost letter of that prefix. Thus, we prove the following theorem.
+
+I Theorem 1. Palindromic length of a string is computable online in linear time.
+
+    The implementation of our algorithm and tests for it can be found in [9]. Due to a large
+constant under the big-O, it is slower in practice (for 32/64 bit machine words) than the
+existing O(n log n) solutions; the fastest algorithm is the one of [10].
+            © Kirill Borozdin, Dmitry Kosolobov, Mikhail Rubinchik, and Arseny M. Shur;
+            licensed under Creative Commons License CC-BY
+28th Annual Symposium on Combinatorial Pattern Matching (CPM 2017).
+Editors: Juha Kärkkäinen, Jakub Radoszewski, and Wojciech Rytter; Article No. 23; pp. 23:1–23:12
+                   Leibniz International Proceedings in Informatics
+                   Schloss Dagstuhl – Leibniz-Zentrum für Informatik, Dagstuhl Publishing, Germany
+23:2   Palindromic Length in Linear Time
+
+
+           The paper is organized as follows. Section 2 contains a high-level description of the
+       algorithm: it starts with a naive O(n2 ) algorithm, then improves the time to O(n log n), and,
+       finally, describes on a high level a modified O(n)-time version of the O(n log n) algorithm.
+       In Section 3 we discuss the main components of the linear algorithm in details.
+
+       1.1     Preliminaries
+       Let w be a string of length n = |w|. We write w[i] for the ith letter of w (i = 0, . . . , n−1) and
+       w[i..j] for w[i]w[i+1] · · · w[j]. A string u is a substring of w if u = w[i..j] for some i, j. Such
+       pair (i, j) is not necessarily unique; i specifies an occurrence of u at position i. A substring
+       w[0..j] (resp., w[i..n−1]) is a prefix (resp. suffix) of w. The empty string is denoted by ε. For
+       any i, j, [i..j] denotes the set {k ∈ Z : i ≤ k ≤ j}; let (i..j] = [i..j] \ {i}, [i..j) = [i..j] \ {j},
+       (i..j) = [i..j) ∩ (i..j]. Our notation for arrays is the same as for strings.
+            A substring (resp. suffix, prefix) that is a palindrome is called a subpalindrome (resp.
+       suffix-palindrome, prefix-palindrome). If w[i..j] is a subpalindrome of w, then the number
+       (j + i)/2 is the center of w[i..j] and the number b(j − i + 1)/2c is the radius of w[i..j]. The
+       following remarkable property of palindromic lengths is crucial for our algorithm.
+
+       I Lemma 2 (see [10, Lemma 11]). Denote by `0 , `1 , . . . , `n−1 , resp., the palindromic lengths of
+       the prefixes w[0..0], w[0..1], . . . , w[0..n−1] of a string w. Then, for any i ∈ (0..n), |`i −`i−1 |≤1.
+
+          An integer p is a period of w if w[i] = w[i+p] for any i ∈ [0..n−p). As the previous
+       results [3, 5, 10], our approach relies on a number of periodic properties of palindromes.
+
+       I Lemma 3 (see [7, Lemmas 2, 3]). For any palindrome w and any p ∈ (0..|w|], the following
+       conditions are equivalent: (1) p is a period of w, (2) there are palindromes u, v such that
+       |uv| = p and w = (uv)k u for some k ≥ 1, (3) w[p..|w|−1] (w[0..|w|−p−1]) is a palindrome.
+
+       I Lemma 4 (see [7, Lemma 7]). Suppose that w = (uv)k u for k ≥ 1 and for palindromes u
+       and v such that |uv| is the minimal period of w; then, the center of any subpalindrome x of
+       w such that |x| ≥ |uv|−1 coincides with the center of some u or v from the decomposition.
+
+           Henceforth, let s denote the input string of length n. We assume that the algorithm
+       works in the unit-cost word-RAM model with Θ(log n)-bit machine words (an assumption
+       justified in, e.g., [2]) and standard operations like in the C programming language.
+
+        2     High-Level Description of the Algorithm
+       Our aim is to maintain an array ans[0..n−1] in which each element ans[i] is the palindromic
+       length of s[0..i]. We always assume n to be the length of the string s processed so far (i.e.,
+       s = s[0..n−1]). Processing the next letter s[n], we compute ans[n] and then increment n.
+
+       2.1     Naive approach
+       An easy quadratic-time approach is to maintain the list of all non-empty suffix-palindromes
+       u1 , . . . , uk of the string s and calculate ans[n] = 1 + mini∈[1..k] ans[n−|ui |]. The list can be
+       updated in linear time: the suffix-palindromes of wa have the form aua, where u is a suffix
+       palindrome of w, plus the palindrome a and, optionally, aa. As a first speedup to this basic
+       approach, we utilize the (palindromic) iterator, introduced in [7]; this data structure contains
+       a string s and supports the following operations:
+K. Borozdin, D. Kosolobov, M. Rubinchik, and A. M. Shur                                                23:3
+
+
+1.   add(a) appends the letter a to the end of s;
+2.   maxPal returns the center of the longest suffix-palindrome of s;
+3.   rad(x) returns the radius of the longest subpalindrome of s with the center x;
+4.   nextPal(x) returns the center of the longest proper suffix-palindrome of the suffix-
+     palindrome of s with the center x; undefined if x is not the center of a suffix-palindrome.
+
+    The iterator can be implemented so that all its operations work in O(1) time (amortized,
+for add) [7, Prop. 1]. The same time bound applies to computing length of the longest
+subpalindrome centered at x: len(x) = 2 · rad(x) + bxc − bx− 21 c. Still, the iterator alone
+cannot lower the asymptotic time of the naive algorithm; its improved version looks as follows:
+ 1: add(s[n]); ans[n] ← +∞
+ 2: for (x ← maxPal; x 6= n + 12 ; x ← nextPal(x)) do ans[n] ← min{ans[n], 1 + ans[n − len(x)]}
+
+
+2.2       Algorithm working in O(n log n) time
+All subquadratic algorithms for palindromic length heavily use grouping of suffix-palindromes
+into series. Let u1 , . . . , uk be all non-empty suffix-palindromes of a string s in the order of
+decreasing length. Since uj is a suffix of ui for any i < j, any period of ui is a period of
+uj ; hence the sequence of minimal periods of u1 , . . . , uk is non-increasing. The groups of
+suffix-palindromes with the same minimal period are series of palindromes (of s):
+
+     u1 , . . . , ui1 , ui1 +1 , . . . , ui2 , . . . , uit−1 +1 , . . . , uk .
+     | {z } |                   {z         }           |      {z           }
+           p1                   p2                             pt
+
+We refer to the longest and the shortest palindrome in a series as its head and baby respectively
+(they coincide in the case of a 1-element series); we enumerate the elements of a series from
+the head to the baby. Given an integer p, the p-series is the series with period p. A very
+useful observation [3, 5, 7] is that the length of a head is multiplicatively smaller than the
+length of the baby from the previous series, and thus every string of length n has O(log n)
+series. (As it was shown in [3], strings with Ω(log n) series for Ω(n) prefixes do exist.)
+    The idea of the O(n log n) solution is to use the dynamic programming rule ans[n] =
+1 + minU minu∈U ans[n−|u|], where U runs through the series of s, and compute the internal
+minimum in O(1) time using precalculations based on the structure of series. The structure
+of any series is described in the following lemma, which is easily implied by Lemmas 3, 4.
+
+I Lemma 5. For a string s and p ≥ 1, let U be a p-series of palindromes. There exist k ≥ 1
+and unique palindromes u, v with |uv| = p, v 6= ε such that one of three conditions hold:
+   U = {(uv)k+1 u, (uv)k u, . . . , (uv)2 u} and the next series begins with uvu,
+   U = {(uv)k u, (uv)k−1 u, . . . , uvu} and the next series begins with u,
+   U = {v k , v k−1 , . . . , v}, p = 1, |v| = 1, u = ε, and U is the last series for s.
+
+    Let U be a p-series for s[0..n] with k > 1 palindromes (w.l.o.g., U = {(uv)k u, . . . , uvu}).
+Updating ans[n] using this series, we compute m = min{ans[n−kp−|u|], . . . , ans[n−p−|u|]}.
+Now note that s[0..n] ends with (uv)k u but not with (uv)k+1 u: otherwise, the latter
+string would belong to U . Then s[0..n−p] ends with (uv)k−1 u but not with (uv)k u and
+thus has the p-series U 0 = {(uv)k−1 u, . . . , uvu}. Thus, at that iteration we computed
+m0 = min{ans[n−kp−|u|], . . . , ans[n−2p−|u|]} for updating ans[n−p]. If we save m0 into
+an auxiliary array, then m = min{m0 , ans[n − p − |u|]} is computable in constant time, as
+required. Let us implement this construction using the iterator.
+    We start an iteration calling add(s[n]). Let x be the center of a suffix-palindrome u. By
+Lemma 3, the minimal period p of u equals len(x) − len(nextPal(x)). Let cntr(d) denote
+
+
+
+                                                                                                     CPM 2017
+23:4   Palindromic Length in Linear Time
+
+
+       the center of the length d suffix-palindrome of s[0..n] (i.e., cntr(d) = n − (d − 1)/2). Let
+       x0 = cntr(p + (len(x) mod p)). By Lemma 5, x0 is the center either of the baby of the p-series
+       or of the head of the next series, depending on the period len(x0 ) − len(nextPal(x0 )) of this
+       suffix-palindrome. All these computations take O(1) amortized time using the iterator.
+           Our algorithm maintains an array left[1..n]: for p ∈ [1..n], if there is a p-series, then
+       s[left[p]+1..n] is the longest suffix (which is not necessarily a palindrome) of s[0..n] with
+       period p; otherwise, left[p] is undefined. E.g., if s[0..n] = · · · aaabaaba and p = 3, then the
+       mentioned suffix is s[n−6..n] = aabaaba and left[3] = n − 7. Computing left[p] in O(1) time is
+       done as follows. Let w = (uv)k u be the head of the p-series (see Lemma 5), x be the center of
+       w, and z(uv)k u be the longest suffix of s[0..n] with period p (in our example, u = ε, v = aba,
+       x = n − 5/2, z = a). Then z is a proper suffix of uv. Hence len(x1 ) = 2|z| + |u|, where x1 is
+       the center of the prefix-palindrome u of w (in the example, x1 = n − 11/2, len(x1 ) = |aa|).
+       Note that |u| = len(x) mod p and x1 = 2x − x2 , where x2 = cntr(len(x) mod p) is the center
+       of the suffix u of w. Thus, |z| and left[p] = n−len(x)−|z| are computed in O(1) time.
+           All precalculated minimums are stored in an array pre[1..n], where each pre[p] is, in
+       turn, an array pre[p][0..p−1] (we discuss in the next subsection why only O(n) of possible
+       O(n2 ) elements of pre are actually stored). For each j such that n − j > left[p], the string
+       s[0..n−j] usually has a suffix-palindrome with period p and thus can have a p-series; the
+       array pre[p][0..p−1] contains the precalculations made for all these series. Formally,
+
+          pre[p][i] = min{ans[t] :
+              (t − left[p]) mod p = i and s[t+1..n] has a prefix-palindrome of minimal period p};
+
+       pre[p][i] is undefined if there is no such t (i.e., no p-series for the corresponding string). So if
+       u1 , . . . , uk is a p-series for s[0..n], then pre[p][n−|u1 |−left[p]] = min{ans[n−|ui |] : i ∈ [1..k]}.
+       Hence, given a new letter s[n], we compute ans[n] as follows:
+        1: add(s[n]); ans[n] ← +∞;
+        2: for (x ← maxPal; x 6= n + 12 ; x ← nextPal(cntr(d))) do           . goes to next head each time
+        3:    p ← len(x) − len(nextPal(x));                     . min. period of the suf.-pal. centered at x
+        4:    d ← p + (len(x) mod p);                                   . length of the baby in the p-series
+        5:    if len(cntr(d)) − len(nextPal(cntr(d))) 6= p then d ← d + p;                . corrected length
+        6:    compute left[p];                                                    . in O(1) time, see above
+        7:    if len(x) = d then pre[p][n−len(x)−left[p]] ← ans[n−d];
+        8:    pre[p][n−len(x)−left[p]] ← min{pre[p][n−len(x)−left[p]], ans[n−d]};
+        9:    ans[n] ← min{ans[n], 1 + pre[p][n−len(x)−left[p]]};
+
+       Let u1 , . . . , uk be a p-series, i = n−|u1 |−left[p]. If k = 1, there was no p-series p iterations
+       ago, so we set the undefined value pre[p][i] to ans[n−|uk |] in line 7. Otherwise, by the
+       definition of pre, we have pre[p][i] = min{ans[n−|u1 |], . . . , ans[n−|uk−1 |]}. We update this
+       value using ans[n−|uk |] in line 8. So pre is correctly maintained, and the above algorithm
+       computes the array ans in O(n log n) time due to logarithmic number of series.
+
+       2.3    Sketch of the linear algorithm
+       The idea of the linear solution is to perform the above log-time processing of all series of the
+       current string not n times, but only O( logn n ) times during the run of the algorithm. (However,
+       we are able to make Θ(n) calls to the iterator.) To achieve this, during the processing of
+       a series we replace each computation of the minimum ans[n] ← min{ans[n], 1 + z}, for a
+       precomputed value z from pre, with the simultaneous computation (“prediction”) for the range
+       of values ans[n..n+b], where b = b log8 n c: we compute in advance ans[j] ← min{ans[j], 1 + zj }
+K. Borozdin, D. Kosolobov, M. Rubinchik, and A. M. Shur                                                   23:5
+
+                            z          }|       {
+                    aabaaacecaabacabaacec aaab
+                         z }| {              z}|{
+                    0     ` = live(x)         xn
+                                                  `
+                       b              maxPal        b
+   Figure 1 Predictable extensions.
+
+
+for all j ∈ [n..n+b] and corresponding precomputed zj from pre. It is proved below that
+the arrays ans and pre can be organized so that, after a linear time preprocessing, such
+range operations on O(b) elements of ans will take O(1) time (this type of bit compression
+techniques is referred to as the four Russians’ trick [1]).
+     Let us extend s[0..n−1] with s[n] = a. We say that a suffix-palindrome u of s[0..n−1],
+centered at x, survives if s[0..n] has the suffix aua (i.e, x remains the center of a suffix-
+palindrome), and dies otherwise. We say that an extension of s[0..n−1] by s[n] is predictable
+if it retains maxPal, i.e., if the longest suffix-palindrome survives. From maxPal it can be
+calculated which of the other suffix-palindromes survive. If a suffix-palindrome of s centered
+at x survives d ≥ 0 consecutive predictable extensions but dies after the (d+1)th such
+extension (or the (d+1)th predictable extension is not possible), we write live(x) = d. We
+have live(maxPal) = n − len(maxPal) and live(x) = rad(refl(x)) − rad(x) for x 6= maxPal;
+here refl(x) = 2 · maxPal − x is the position symmetric to x w.r.t. maxPal. (See Fig. 1 for
+clarification; e.g., in Fig. 1 live(x) = 2 and live(maxPal) = 6.)
+     Suppose that ans[n+j] = +∞ for j ∈ [0..b]. Having performed add(s[n]), we get access to
+the suffix-palindromes of s[0..n]. If, for the center x of each such palindrome, we perform
+
+   ans[n+j] ← min{ans[n+j], 1 + ans[n−len(x)−j]} for all j ∈ [0.. min{b, live(x)}],              (1)
+
+then we accumulate all information we can obtain from these palindromes during the next b
+predictable extensions. Thus we get an approximation of ans[n..n+b], which later will be
+updated using suffix-palindromes with the centers x ≥ n+ 12 . One phase of our algorithm is
+roughly as follows:
+   append s[n] to the iterator, update precalculations, and “predict” ans[n..n+b] with the
+   assignments (1), using operations on blocks of bits (ans[n] is computed exactly);
+   append subsequent letters, each time updating the predictions with either one or two
+   new palindromes (after processing s[n+j], ans[n..n+j] contains correct values);
+   stop after b iterations or at the moment when an unpredicted letter is encountered;
+   discard unused predictions and start a new phase with the first unpredicted letter.
+                                                                     min
+    For arrays α, β and numbers i, j, ` ≥ 0, denote by α[i..i+`] ← β[j..j+`] the sequence of
+assignments α[i+k] ← min{α[i+k], β[j+k]} for all k ∈ [0..`]. Let increv(i, j) be the function
+returning an array a[0..j−i] such that a[k] = 1 + ans[j−k] for k ∈ [0..j−i] (“increment &
+reverse”). The predictions are made by the function predict that uses precalculations stored
+                                                             min
+in pre to perform in a fast way the assignments ans[n..n+c] ← increv(n−len(x)−c, n−len(x)),
+where c = min{b, live(x)}, for all centers x of suffix-palindromes. (Hence predict computes
+the value ans[n] correctly even if c = 0 for some x.) Let precalc be a function that updates
+(possibly once in several iterations) the array pre to the actual state. The implementations
+of predict and precalc are discussed in Section 3. Our algorithm is as follows:
+ 1: for (n ← 0, end ← 0; not(end_of _input); n ← n + 1) do
+ 2:    if n = end or len(maxPal) = n or s[n] 6= s[n−len(maxPal)−1] then                  . new phase
+ 3:        add(s[n]); precalc; predict; end ← n + b
+ 4:    else add(s[n])                                      . old phase continues, s[n] is predictable
+                                         min
+ 5:    c ← min{b, live(n)}; ans[n..n+c] ← increv(n−1−c, n−1)
+                                                                   min
+ 6:    if s[n] = s[n−1] then c ← min{b, live(n− 21 )}; ans[n..n+c] ← increv(n−2−c, n−2)
+
+
+
+                                                                                                        CPM 2017
+23:6   Palindromic Length in Linear Time
+
+
+
+
+           This algorithm computes the same values ans[n] as the O(n log n) algorithm above,
+       because finally all suffix-palindromes of s[0..n] are used. So, the algorithm is correct.
+           Let t be the number of series in the current string s[0..n] and q is the time required to
+       perform all the calls add(s[n]), add(s[n−1]), . . . , add(s[n0 +1]), where s[0..n0 ] is the string for
+       which precalc was called last time. Below we show that predict and precalc work in O(t) and
+       O(t + q) time respectively, and the array ans can be organized so that the range operations
+       in lines 5–6 can be performed in O(1) time using the four Russians’ trick. Let us estimate
+       the running time of the algorithm under these assumptions.
+           During predictable extensions, line 3 is reached iff n = end, i.e., at most O( nb ) times. Since
+       add works in O(1) amortized time (see [7, Prop. 1]), the sum of all q’s in the working time of
+       precalc is O(n). Since O(t) = O(log n), all predictable extensions take O(n + nb log n) = O(n)
+       overall time. To estimate the running time of unpredictable extensions, consider the value
+       γi = live[maxPal] = i − len(maxPal) after processing s[0..i]. If s[i+1] is predictable, one has
+       γi+1 = (i + 1) − (len(maxPal) + 2) = γi − 1. If s[i+1] is unpredictable, γi+1 ≥ (i + 1) −
+       (len(nextPal(maxPal)) + 2); by Lemma 5, γi+1 − γi ≥ p − 1, where p is the minimal period
+       of the longest suffix-palindrome of s[0..i]. By Lemmas 4 and 5, the length of the longest
+       suffix-palindrome whose minimal period differs from p is less than 2p. Therefore, predict and
+       precalc take O(p + q) time during this unpredictable extension (actually, O(log p + q)). Since
+       γn − γ1 < n, the sum of the working times of all calls to predict and precalc is O(n).
+
+
+       2.4     Organization of the arrays ans and pre
+       Informally, the four Russians’ trick allows us to compute any operation on structures
+       of size ≤ε log n bits in O(1) time using a precomputed table of size O(nε logO(1) n) bits.
+       For example, let a b log2 n c-bit integer x encode a sequence x1 , . . . , xblog n/4c so that xj =
+       1 − (bx/22j−2 c mod 4), i.e., (2j−1)th and (2j−2)th bits of x encode xj . We can compute,
+                                                                                              √
+       for j ∈ [1.. log n/4], the sum x1 + · · · + xj in O(1) time using a table T [0..b nc][1..blog n/4c]
+                                                                             √
+       such that T [x][j] = x1 + · · · + xj for any x ∈ [0..2log n/2 ] = [0.. n] and j ∈ [1.. log n/4]. The
+                                              √
+       table T can be precomputed in O( n logO(1) n) time.
+           In our case, we split ans into blocks of length b. By Lemma 2, adjacent elements of
+       ans differ by at most one. This allows us to encode each block ans[ib+1..(i+1)b] as the
+       number ans[ib+1] and the sequence x1 , x2 , . . . , xb such that xj ∈ {−1, 0, 1} and ans[ib+j] =
+       ans[ib+1] + x1 + · · · + xj for any j ∈ [1..b]. This sequence x1 , x2 , . . . , xb is encoded in a 2b-bit
+       integer exactly as in the example above (note that 2b ≤ b log4 n c). Using a precomputed table
+                  √
+       of size O( 4 nb), we can extract any element ans[j] in O(1) time. It is shown in Sect. 3 that
+       arrays in pre can be encoded in a similar way (with some additional complications).
+           Applying a similar trick, one can perform many other operations. Let c[0..`] be an
+       array of integers such that ` ∈ [0..b], |c[i−1] − c[i]| ≤ 1, and c is encoded, like a block of
+       ans, by c[0] and a 2b-bit integer. Let us show how to perform in O(1) time the operation
+                     min
+       ans[n..n+`] ← c[0..`] as in lines 5–6 of the algorithm (similar operations are also performed
+       in predict). We first check whether c[0] > ans[n] + 2`: if so, then ans remains unchanged.
+       It is guaranteed by the algorithm that c[0] ≥ ans[n−1] − 1. Then, we concatenate bit
+       representations of all required components: the (at most) two blocks ans[ib+1..(i+1)b] and
+       ans[(i+1)b+1..(i+2)b] encoding the subarray ans[n..n+`] are stored as two 2b-bit sequences
+       (encoding the differences ans[i] − ans[i−1] for i ∈ [ib+2..(i+2)b] as above), c[0..`] is also
+       stored as a 2b-bit sequence, the offset (n−ib) and the difference c[0] − ans[n−1] are stored as
+       O(log b)-bit integers; 6b + O(log b) bits in total. We precompute a table T that, for a given
+K. Borozdin, D. Kosolobov, M. Rubinchik, and A. M. Shur                                                   23:7
+
+
+combined bit representation, stores two 2b-bit sequences encoding two blocks that represent
+the resulting modified ans[n..n+`] array. It should be noted that the information provided
+in the given representation suffices to compute the result and, since the resulting array ans
+satisfies Lemma 2, we may put ans[n+`+j] = min{ans[n+`+j], ans[n+`] + j} for j ≥ 1 so
+that the structure of the last block is preserved. Since 6b≤ 34 log n, the size of the table T
+is O(b · 26b+O(log b) ) = O(n3/4 logk n) for some k = O(1). Obviously, T can be precomputed
+in O(n3/4 logk+O(1) n) time. Analogously, we precompute tables that allow us to calculate
+increv(i, j) in O(1) time if j − i ≤ b; the resulting array of increv is encoded, like the array
+c, by the first element and a 2b-bit integer. Thus, all range operations in lines 5–6 of the
+algorithm can be performed in O(1) time.
+    We use a number of different range operations on the arrays ans and pre in Section 3 but
+all of them are similar to the discussed ones, so we omit detailed descriptions.
+
+ 3     Implementation of the Main Functions
+Now it remains to describe the functions predict and precalc and prove their time complexity.
+
+3.1    Function predict
+At the beginning, the function predict sets ans[n+j] ← ans[n−1]+j+1 for j ∈ [0..b]. By
+Lemma 2, the assigned values are upper bounds for the elements of ans[n..n+b]. The
+assignments are performed in O(1) time using range operations. Then predict processes each
+of the t series; let us describe precisely how we process a p-series u1 , . . . , uk .
+     Let u, v be the palindromes described in Lemma 5, xi be the center of ui for i ∈ [1..k]. If
+len(xi ) < n − left[p] (i.e., either i > 1 or i = 1 and u1 is not the longest suffix of s with period
+p), then xi will remain the center of a new suffix-palindrome after the appending of s[n] iff
+s[n] = s[n−p] = v[0]. In this case, the period p “extends” and xi remains the center of a
+suffix-palindrome with the minimal period p. In the remaining case len(x1 ) = n − left[p] (u1
+is the longest suffix with period p) x1 will remain the center of a suffix-palindrome iff s[n] =
+s[left[p]]; the period p breaks and the palindrome s[n]u1 s[n] will belong to a different series.
+     Suppose that d upcoming predictable extensions extend the period p of the suffix
+s[left[p]+1..n−1] and the (d+1)st predictable extension breaks this period. It follows from
+the previous paragraph that the only suffix-palindrome ui that can survive the (d+1)st
+extension (in other words, for which live(xi ) > d) must have length n − left[p] − d (see Fig. 2).
+So if d is known, we check whether x = cntr(n−left[p]−d) is the center of a suffix-palindrome
+                                                                 min
+(i.e., cntr(len(x)) = x) and, if so, we compute ans[n..n+c] ← increv(n−len(x)−c, n−len(x)),
+where c = min{b, live(x)}, in O(1) time using range operations.
+     Now it remains to find d and change ans[n..n+ min{b, d}] taking u1 , . . . , uk into account.
+Since predictable extensions append the letters s[n−len(maxPal)], s[n−len(maxPal)−1], . . .
+to the right of s, we can approximately find d looking at the string s[0..n−len(maxPal)−1].
+Put d0 = min{live(cntr(|u|)), live(cntr(|uvu|))} (see Fig. 2). Let us show that we can use d0
+instead of d. If d0 < n − left[p] − |uvu|, then the longest suffix-palindrome is preceded by
+the reversed prefix of (vu)∞ of length d0 . In turn, this prefix either is preceded by a letter
+that breaks the period p of this prefix (the letter e in Fig. 2) or is a prefix of the whole
+string. In either case, d0 = d. If d0 ≥ n − left[p] − |uvu|, then the longest suffix-palindrome is
+also preceded by the reversed prefix of (vu)∞ of length d0 but d ≥ d0 in general. However,
+even in this case, we can use d0 in the sequel since none of the suffix-palindromes from our
+series survives after n − left[p] − |uvu| predictable extensions; therefore, also, the possible
+processing of a suffix-palindrome of length n − left[p] − d0 mentioned above is not required.
+
+
+
+                                                                                                        CPM 2017
+23:8   Palindromic Length in Linear Time
+
+
+                                  z                        maxPal
+                                                             }|                            {
+                     zz           }|}|           {   {
+                  e a b a b0 a b a b a b a b a b a b a c c c a b a b a b a b a b a b a b a b a c
+                          d                                 p=2       x1x2x3x4x5 p p p
+         refl(cntr(|a|)) = refl(n) refl(cntr(|aba|))                             n    d=6
+                                                           left[p]
+           Figure 2 A series x1 , . . . , x5 : live(x4 ) > d, the shaded region corresponds to ans[n..n+d].
+
+                            left[p] u       v    u      v    u
+                                   z }| { z}|{ z }| { z}|{ z }| {
+                            xba ababa aba ababa aba ababa
+                                                              n
+                            0 k1 k2 k3 φ0 = φ1 = 0, φ2 = φ3 = 1,
+                               p=8     φ4 = φ5 = φ6 = 0, φ7 = −1.
+           Figure 3 Partition of [0..p) in Lemma 6.
+
+
+            Let us track the set S = {`1 = n−len(x1 )+1, . . . , `k = n−len(xk )+1} of the leftmost
+       positions of the suffix-palindromes centered at x1 , x2 , . . . , xk in the d0 predictable extensions:
+       all these positions shift to the left by one after each extension; if a position reaches left[p], the
+       corresponding palindrome dies and this position is excluded from S. By Lemma 3, for any
+       i ∈ [1..k], if `i is in the set after f ∈ [0..d0 ] predictable extensions, then the suffixes s[`i +jp..n]
+       (here n is increased by f ) are palindromes for all integers j ≥ 0 such that `i +jp ≤ n; therefore,
+                                                 min
+       along with the assignments ans[n] ← 1 + ans[`i −1] (here n is increased by f ) that we are
+                                                                         min
+       intended to perform, we can occasionally perform ans[n] ← 1 + ans[`i +jp−1] for any such j.
+            Obviously, |u1 | + p > n − left[p] since otherwise uvu1 would be a longer suffix-palindrome
+       with the minimal period p. Based on the above observation, we perform the assignments
+                  min
+       ans[n+j] ← 1+pre[p][r(j)] for all j ∈ [0.. min{b, d0 }], where r(j) = (n−|uk |−left[p]−j) mod p
+       (see Fig. 3; r(j) cyclically runs through the range [0..p) from right to left when j increases).
+       Recall that, immediately before the execution of predict, the function precalc recalculates
+       the array pre. After this recalculation pre[p] stores an array pre[p][0..p−1] for each p ∈ [1..n]
+       such that p is the minimal period of a suffix-palindrome of s[0..n]. For i ∈ [0..p) we have
+       pre[p][i] = min{ans[left[p]+i+jp] : j ∈ [0..φi ]}, where φi ≥ 0 is the maximal integer such that
+       the string s[left[p]+i+φi p+1..n] has a prefix-palindrome with the minimal period p; if there
+       is no such φi , we put pre[p][i] = +∞ and φi := −1.
+                                       min
+            We perform ans[n+j] ← 1 + pre[p][r(j)], for all j ∈ [0.. min{b, d0 }], in O(1) time using
+       range operations on the arrays pre and ans. (These operations are discussed below.) It follows
+       from Lemma 5 that, after f ∈ [0..d0 ] predictable extensions, the strings s[`i ..n0 ] (here n0
+       denotes the value of n before the extensions), for i ∈ [1..k) such that `i is still in the set S, have
+       prefix-palindromes with the minimal period p. Therefore, the above assignments will really
+       process the palindromes u1 , . . . , uk−1 for the upcoming d0 predictable extensions (see Fig. 2)
+       but will, probably, perform some additional unnecessary assignments for suffix-palindromes
+       with period p that will appear only after a number of predictable extensions; but this does
+       not harm since such assignments will be performed anyway in the future. For the baby
+                                                    min
+       uk , we compute explicitly ans[n..n+c] ← increv(n−len(xk )−c, n−len(xk )), where c = min{b,
+       live(xk )}, in O(1) time using range operations. It remains to describe the structure of the
+       array pre that allows us to perform constant time range operations on subarrays of length ≤b.
+
+       I Lemma 6. For each i ∈ [0..p), let φi be the minimal integer such that the string
+       s[left[p]+i+(φi +1)p+1..n] has no prefix-palindromes with the minimal period p. Then, the
+       segment [0..p) can be split into subsegments [k0 ..k1 ), . . . , [k6 ..k7 ), for 0 = k0 ≤ · · · ≤ k7 = p,
+       such that, for i ∈ (0..p), we have φi = φi−1 whenever i and i−1 belong to the same subsegment
+       (see Fig. 3).
+K. Borozdin, D. Kosolobov, M. Rubinchik, and A. M. Shur                                                       23:9
+
+
+Proof. For i ∈ [0..p) and j ≥ 0, denote i(j) = left[p]+i+jp. Let k be an integer such that,
+for i = p − 1, we have i(k) < n and i(k) + p ≥ n. So, for i ∈ [0..p), we obtain φi = ji0 − 1,
+where ji0 is the minimal integer such that ji0 ∈ [0..k] and the string s[i(ji0 )+1..n] has no
+prefix-palindromes with the minimal period p. While i descends from p−1 to 0 with step one,
+some of the suffixes s[i(j)+1..n] may acquire prefix-palindromes with the minimal period p
+and some may lose such prefix-palindromes thus changing the value of φi (see Fig. 3).
+    Let us choose i ∈ [0..p) that maximizes the value of φi . Denote j 0 = φi for this i. If
+j ≥ 0, then s[i(j 0 )+1..n] has a prefix-palindrome w with the minimal period p; by Lemma 3,
+ 0
+
+there are palindromes u and v such that |uv| = p and w = (uv)r u for r ≥ 1. Thus, for
+any j 00 ∈ [0..j 0 −2], the suffix s[i(j 00 )+1..n] has prefix-palindromes (uv)3 u and (uv)2 u both
+having the minimal period p. When i further decreases to 0, the prefix-palindrome (uv)2 u
+“grows” together with s[i(j 00 )+1..n] and, when i increases, (uv)3 u “shrinks”; in both cases
+s[i(j 00 )+1..n] retains a prefix-palindrome with the minimal period p while i ∈ [0..p). Hence,
+only suffixes s[i(j 0 −1)+1..n] and s[i(j 0 )+1..n] may lose or acquire a prefix-palindrome with
+the minimal period p while i changes from p−1 to 0, i.e., φi varies in the range [j 0 −2..j 0 ].
+    Let us prove that any suffix s[i(j)+1..n] can lose a prefix-palindrome with the minimal
+period p at most once during the descending of i from p−1 to 0. Then, the existence of the
+desired numbers k0 , k1 , . . . , k7 follows from a simple analysis of possible cases.
+    Suppose that s[i(j)+1..n] has a prefix-palindrome centered at x with the minimal period
+p. When i decreases, s[i(j)+1..n] grows and the prefix-palindrome “grows” simultaneously.
+Then, before s[i(j)+1..n] loses the prefix-palindrome, we have |s[i(j)+1..n]| = len(x) for
+some i ∈ [0..p). By Lemma 4, there are palindromes u0 and v 0 such that |u0 v 0 | = p and
+                                0
+s[n−len(x)+1..n] = (u0 v 0 )r u0 for r0 ≥ 1. If, for some smaller i ∈ [0..p), s[i(j)+1..n] again
+acquires a prefix-palindrome with the minimal period p, then, by Lemma 4, the center x0
+of this prefix-palindrome must coincide with the center of u0 or v 0 from the decomposition.
+Hence x0 ≤ x − p/2. Then, this prefix-palindrome can be lost only after p decrements of i
+once we have had |s[i(j)+1..n]| = len(x). This proves the claim.                                 J
+
+      We partition pre[p][0..p−1] into subarrays pre[p][k0 ..k1 −1], . . . , pre[p][k6 ..k7 −1] according
+to Lemma 6. Consider a segment [a..b] ⊂ [0..p) such that φi1 = φi2 and φi1 6= −1 whenever
+i1 , i2 ∈ [a..b]. Since pre[p][i] = min{ans[left[p]+i+jp] : j ∈ [0..φi ]} and, by Lemma 2, |ans[j] −
+ans[j−1]| ≤ 1 for any j ∈ (0..n), we easily obtain |pre[p][i] − pre[p][i−1]| ≤ 1 for any i ∈ (a..b].
+Therefore, by Lemma 6, each of the subarrays of pre either contains only +∞ or has a
+structure similar to the structure of ans described in Lemma 2. We do not store the subarrays
+that contain +∞ and encode all other subarrays in a way described for ans in Sect. 2.4: we
+split them into blocks of length b and encode each block as its starting element and a 2b-bit
+integer encoding the differences between adjacent elements (the last block may contain less
+than b elements). The linear size of pre measured in machine words (but not in the number
+of elements) follows from the overall linear running time of the function precalc maintaining
+pre; this analysis is given below.
+                               min
+      To perform ans[n+j] ← pre[p][r(j)] for all j ∈ [0.. min{b, d0 }], we concatenate 2b-bit
+integers from the blocks covering the subarray ans[n..n+ min{b, d0 }], 2b-bit integers from a
+constant number of blocks covering the subarrays of pre[p][0..p−1] containing positions r(j)
+for j ∈ [0.. min{b, d0 }], and some other lightweight auxiliary data similar to the data used in
+                  min
+the operation ← considered above; then we compute the resulting array ans[n..n+ min{b, d0 }]
+using the obtained bit string and a precomputed table of size o(n). This might require
+to duplicate the content of pre[p] if p < min{b, d0 } (see the shaded region in Fig. 2); these
+duplications must be already precalculated in the tables. Note that thus defined changes of
+ans may affect the whole subarray ans[n..n+b] and not only ans[n..n+ min{b, d0 }]: e.g., if we
+
+
+
+                                                                                                            CPM 2017
+23:10   Palindromic Length in Linear Time
+
+                                                         w
+                                    left[p] z ũ         }|
+                                                          ṽ      ũ
+                                                                       {
+                                            z }| { z}|{      z }|      {
+                              . . . e a b a a b a b| a a {z
+                                                         b a a b} a b| a a {z
+                                                                           b a a b} a
+                                                          v       u         v       u
+                                             n0 −|w|−left[p]          n0            n
+           Figure 4 Palindrome w with the center x, the minimal period p = 8; for i = 1, 2, 3, j = 0.
+
+
+                        min
+        perform ans[n] ← x, then, to maintain the property of ans described in Lemma 2, we must also
+                            min
+        perform ans[n+j] ← x + j for j ∈ [1..b] (it is guaranteed by the algorithm that the elements
+        of ans[0..n−1] cannot be affected analogously since always |ans[n−1] − ans[n]| ≤ 1). Similar
+                                                                                      min
+        “normalizations” must be included in the precomputed assignments ans[n+j] ← pre[p][r(j)]
+        for all j ∈ [0.. min{b, d0 }]. Thus, the structure of ans is preserved.
+            The computations seem to be quite sophisticated but, nevertheless, since all involved
+        structures occupy ε log n bits, for ε < 1, all required precalculations can be performed in
+        O(nε logO(1) n) time at the beginning of our algorithm. The tedious details are omitted here
+        and can be retrieved from the implementation [9].
+
+        3.2    Function precalc
+        Denote by n0 the value of n at the moment of the last call of precalc. (The first call of precalc
+        for n = 0 is trivial.) Our goal is to compute the array pre[p][0..p−1] for each p for which
+        there exists a p-series in s[0..n]. Note that since, as described above, pre[p][0..p−1] is stored
+        as a constant number of pointers to subarrays containing non-infinite values, we can fill
+        pre[p][0..p−1] with +∞ in O(1) time simply removing all these pointers.
+            The function precalc loops through all series in s[0..n] and processes each p-series as
+        follows: precalc computes the new value of left[p] in O(1) time and, if left[p] has changed since
+        s[0..n0 ] (this is where we really use the array left), then fills pre[p][0..p−1] with +∞ in O(1)
+        time; otherwise, precalc uses the array pre[p][0..p−1] calculated for s[0..n0 ]. In either case, for
+        each i ∈ [0..p), if there is an integer j ≥ 0 such that s[left[p]+i+jp..n0 ] does not have a prefix-
+        palindrome with the minimal period p and s[left[p]+i+jp..n] has such a prefix-palindrome,
+                                                              min
+        then pre[p][i] is updated by performing pre[p][i] ← ans[left[p]+i+jp−1]. The methods by
+        which we find such i ∈ [0..p) and really perform the later assignments are described below. It
+        follows from the definition of pre that thus defined precalc computes the arrays pre[p][0..p−1]
+        for s[0..n].
+            Let us process all centers x for which there are i ∈ [0..p) and j ≥ 0 such that x is the center
+        of a prefix-palindrome of s[left[p]+i+jp..n] with the minimal period p but s[left[p]+i+jp..n0 ]
+        does not have a prefix-palindrome with the minimal period p. We consider two cases.
+
+        Case 1. Suppose that such x is less than n0 +1 and the longest subpalindrome w in s[0..n0 ]
+        centered at x has the minimal period p. Clearly, the leftmost position of w is greater than
+        left[p] + i + jp and w must be a suffix-palindrome of s[0..n0 ]. Let us describe all positions
+        hm = n0 −|w|−m such that x is the center of a prefix-palindrome of s[hm +1..n] and is not
+        the center of a prefix-palindrome of s[hm +1..n0 ]. Obviously m > 0. After n0 −|w|−left[p]+1
+        extensions of s[0..n0 ], the suffix-palindrome centered at x dies because it reaches left[p]
+        by its leftmost position (see Fig. 4). So, since w grows at most n − n0 times, we obtain
+        m ∈ [1.. min{n−n0 , n0 −|w|−left[p]}]. For each such m, the prefix-palindrome of s[hm +1..n]
+        centered at x has length |w| + 2m and the minimal period p since the minimal period
+        of w, centered at x, is p and the palindrome with the length |w| + 2m and the center x,
+        for the given m, is a substring of the suffix of s with period p. Hence, we can perform
+K. Borozdin, D. Kosolobov, M. Rubinchik, and A. M. Shur                                                         23:11
+
+
+                        min
+pre[p][(r−m) mod p] ← ans[n0 −|w|−m], where r = n0 − |w| − left[p], for all such m. Among
+                                                     min
+these assignments there is the required pre[p][i] ← ans[left[p]+i+jp−1] (see Fig. 4). Since
+n − n0 ≤ b, once x is known, we can perform all these assignments in O(1) time using range
+operations and precomputed tables; the boundaries of subarrays of pre can be adjusted
+appropriately after these calculations. Now it remains to find all such centers x.
+     By Lemma 3, there are palindromes ũ and ṽ such that p = |ũṽ| and w = (ũṽ)r ũ for
+r ≥ 1 (see Fig. 4). If the minimal period of (ũṽ)r−1 ũ is p, then all strings s[h..n0 ], for
+                                                                         ←
+h ∈ (left[p]..n0 −|w|], have prefix-palindromes of the form α(ũṽ)r−1 ũ α, where α is a suffix of
+ũṽ, with the minimal period p. But, by our assumption, s[left[p]+i+jp..n0 ] cannot have such
+a prefix-palindrome. Therefore, w is the baby in the p-series of the string s[0..n0 ], i.e., either
+w = ũṽũ or w = ũṽũṽũ. We find the baby in O(1) time by the techniques described above
+using an instance of the iterator and the list of all series of suffix-palindromes for the string
+s[0..n0 ]; these iterator and list are further discussed below.
+
+Case 2. It remains to detect all x such that x is the center of a prefix-palindrome of
+s[left[p]+i+jp..n] with the minimal period p, for some i ∈ [0..p) and j ≥ 0, and either x > n0
+or the minimal period of any subpalindrome in s[0..n0 ] centered at x is not p. Hence, a
+subpalindrome with the minimal period p and the center x appeared after several extensions
+of s[0..n0 ] and, thus, was a suffix-palindrome at that moment. To catch the moments when
+growing suffix-palindromes acquire new minimal periods, we need a device tracking changes
+of periods in all suffix-palindromes after extensions. The iterator can serve as such a device.
+    Let w be a suffix-palindrome of s[0..n0 ] with the minimal period p0 . By Lemma 3, we have
+p = |w| − |u|, where u is the longest proper suffix-palindrome of w. Suppose that s[0..n0 ]
+  0
+
+is extended by the letter a = s[n0 +1] and awa is a suffix-palindrome of the new string. By
+Lemma 3, awa has period p0 iff aua is a suffix-palindrome of s[0..n0 +1]. Thus, to detect new
+suffix-palindromes with a given period p, we can track, during the extensions of s, changes
+in the list of the centers of all suffix-palindromes. The iterator maintains such list. The
+following lemma is a straightforward corollary of the proof of [7, Prop. 1].
+
+I Lemma 7. The iterator maintains a linked list of the centers of all suffix-palindromes of
+s[0..n]. The function add(a) removes a number of centers from the list, adds the centers
+n+ 21 (if a = s[n]) and n+1 to the end of the list, and thus obtains a new list for the string
+s[0..n]a; all in Ω(1 + c) time, where c is the number of removed centers.
+
+     We maintain an instance of the iterator for the previously processed string s[0..n0 ] and
+store the list of the centers of all suffix-palindromes of s[0..n0 ] since the last call of precalc.
+The function precalc performs add(s[n0 +1]), . . . , add(s[n]) and thus consecutively obtains the
+lists of the centers of all suffix-palindromes of s[0..n0 +1], . . . , s[0..n].
+     Consider, for n00 ∈ (n0 ..n], such list x1 , . . . , xk for s[0..n00 −1] so that x1 < · · · < xk . By
+Lemma 7, the call to add(s[n00 ]) gives us a sublist xi1 , . . . , xic of the centers removed from
+x1 , . . . , xk . By Lemma 3, for xi ∈    / {xi1 , . . . , xic } the minimal period of the suffix-palindrome
+with the center xi has changed iff xi+1 ∈ {xi1 , . . . , xic }. We easily find all such xi parsing the
+list xi1 , . . . , xic from left to right and compute the new period as p = len(xi )−len(nextPal(xi )).
+Denote by ` the number that is equal to len(xi ) for s[0..n00 ]. By the definition of pre, we
+                               min
+must perform pre[p][r] ← ans[n00 −`], where r = (n00 − ` − left[p]) mod p, if the string s[0..n]
+                                                                                          min
+has a p-series. In this case, we must also perform pre[p][(r−m) mod p] ← ans[n00 −`−m]
+for all m ∈ [0.. min{n − n00 , n00 − ` − left[p]}] because the strings s[n00 −`−m..n] have prefix-
+palindromes of length ` + 2m centered at xi with the minimal period p; after n00 − ` − left[p] + 1
+extensions, such palindrome dies since it reaches left[p] by its leftmost position and thus its
+period breaks. Since n − n00 ≤ b, these assignments, for all such m, can be performed by
+
+
+                                                                                                               CPM 2017
+23:12   Palindromic Length in Linear Time
+
+
+        range operations on pre and ans in O(1) time using precomputed tables like those described
+        in Sect. 2.4 (subarrays of pre[p] can be also adjusted appropriately).
+            Thus, precalc works in O(t + q) time as required, where t is the number of series in s[0..n]
+        and q is the time required to perform the sequence of calls add(s[n0 +1]), . . . , add(s[n]). This
+        finishes the proof of the linear time complexity of main algorithm.
+
+             References
+         1   Vladimir Arlazarov, Efim Dinic, Mikhail Kronrod, and Igor Faradzev. On economical
+             construction of the transitive closure of a directed graph. Dokl. Akad. Nauk SSSR,
+             194(11):1209–1210, 1970.
+         2   Stefan Burkhardt and Juha Kärkkäinen. Fast lightweight suffix array construction and
+             checking. In Ricardo A. Baeza-Yates, Edgar Chávez, and Maxime Crochemore, editors,
+             Proc. of the 14th Annual Symposium on Combinatorial Pattern Matching (CPM 2003),
+             volume 2676 of LNCS, pages 55–69. Springer, 2003. doi:10.1007/3-540-44888-8_5.
+         3   Gabriele Fici, Travis Gagie, Juha Kärkkäinen, and Dominik Kempa. A subquadratic al-
+             gorithm for minimum palindromic factorization. J. Discrete Algorithms, 28:41–48, 2014.
+             doi:10.1016/j.jda.2014.08.001.
+         4   Zvi Galil and Joel I. Seiferas. A linear-time on-line recognition algorithm for “palstar”. J.
+             ACM, 25(1):102–111, 1978. doi:10.1145/322047.322056.
+         5   Tomohiro I, Shiho Sugimoto, Shunsuke Inenaga, Hideo Bannai, and Masayuki Takeda.
+             Computing palindromic factorizations and palindromic covers on-line. In Alexander S.
+             Kulikov, Sergei O. Kuznetsov, and Pavel A. Pevzner, editors, Proceedings of the 25th Annual
+             Symposium on Combinatorial Pattern Matching (CPM 2014), volume 8486 of LNCS, pages
+             150–161. Springer, 2014. doi:10.1007/978-3-319-07566-2_16.
+         6   Donald E. Knuth, James H. Morris Jr., and Vaughan R. Pratt. Fast pattern matching in
+             strings. SIAM J. Comput., 6(2):323–350, 1977. doi:10.1137/0206024.
+         7   Dmitry Kosolobov, Mikhail Rubinchik, and Arseny M. Shur. Palk is linear recognizable
+             online. In Giuseppe F. Italiano, Tiziana Margaria-Steffen, Jaroslav Pokorný, Jean-Jacques
+             Quisquater, and Roger Wattenhofer, editors, Proceedings of the 41st International Con-
+             ference on Current Trends in Theory and Practice of Computer Science (SOFSEM 2015),
+             volume 8939 of LNCS, pages 289–301. Springer, 2015. doi:10.1007/978-3-662-46078-8_
+             24.
+         8   Glenn K. Manacher. A new linear-time "on-line" algorithm for finding the smallest initial
+             palindrome of a string. J. ACM, 22(3):346–351, 1975. doi:10.1145/321892.321896.
+         9   Palindromic Length. Sources and tests for linear palindromic length problem, 2017. URL:
+             https://github.com/kborozdin/palindromic-length.
+        10   Mikhail Rubinchik and Arseny M. Shur. EERTREE: an efficient data structure for pro-
+             cessing palindromes in strings. In Zsuzsanna Lipták and William F. Smyth, editors, Proc.
+             of the 26th International Workshop on Combinatorial Algorithms (IWOCA 2015), volume
+             9538 of LNCS, pages 321–333. Springer, 2015. doi:10.1007/978-3-319-29516-9_27.
+        11   Anatol O. Slisenko. A simplified proof of the real-time recognizability of palindromes on
+             turing machines. J. Soviet. Math., 15(1):68–77, 1977. doi:10.1007/BF01404109.
+

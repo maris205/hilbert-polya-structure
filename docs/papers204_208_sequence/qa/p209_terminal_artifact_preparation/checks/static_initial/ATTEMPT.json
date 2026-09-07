@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/usr/bin/python3.10",
+    "-I",
+    "-S",
+    "-B",
+    "-c",
+    "import ast,json\nfrom pathlib import Path\nR=Path('/root/autodl-tmp/symbolic_dynamics')\nB=R/'docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation'\npaths=[p for p in B.glob('*.py')]\nsyntax={}\nfor p in paths:\n t=ast.parse(p.read_text(),filename=str(p));compile(t,str(p),'exec')\n syntax[p.name]={'lines':len(p.read_text().splitlines()),'functions':[n.name for n in t.body if isinstance(n,ast.FunctionDef)]}\ndef shape(x):\n if isinstance(x,dict):return {k:('dict:'+str(len(v)) if isinstance(v,dict) else 'list:'+str(len(v)) if isinstance(v,list) else v) for k,v in x.items()}\n return type(x).__name__\npaths={\n 'round1':R/'papers/209-ordered-fibre-threading/frozen_round1/ROUND1_PROVENANCE.json',\n 'A_failed':R/'docs/papers204_208_sequence/reviews/p209_a/delta_check_01/EXECUTION.actual.json',\n 'A_original':R/'docs/papers204_208_sequence/reviews/p209_a/initial_audit_01/CURRENT_INPUT_CLOSURE.json',\n 'A_delta_before':R/'docs/papers204_208_sequence/reviews/p209_a/delta_check_02/INPUTS_BEFORE.json',\n 'B_intake':R/'docs/papers204_208_sequence/reviews/p209_b/delta_intake_01/INTAKE_RESULT.json',\n 'author_pair':R/'docs/papers204_208_sequence/qa/root_replays/p209_author_strict/root_author_pair_01/RECEIPT.json',\n 'B_pair':R/'docs/papers204_208_sequence/qa/root_replays/p209_b_strict/root_b_pair_01/RECEIPT.json'}\nfacts={}\nfor name,p in paths.items():\n x=json.loads(p.read_bytes())\n if name=='round1':facts[name]={'schema':x['schema'],'prior_whole':x['prior_whole_paper_manifest'],'anchor_keys':list(x['anchor_mapping'])};facts[name]['prior_whole']=shape(facts[name]['prior_whole'])\n elif name in ('A_original','A_delta_before'):facts[name]={'count':len(x),'first_key':next(iter(x)),'first_value':next(iter(x.values()))}\n elif name=='B_intake':facts[name]={'shape':shape(x),'first_copy':x['copies'][0]}\n elif name.endswith('pair'):facts[name]={'shape':shape(x),'result':shape(x['result']),'replay':shape(x['result']['replays'][0])}\n else:facts[name]=shape(x)\nprint(json.dumps({'status':'PASS_STATIC_SYNTAX_AND_ORIGINAL_SCHEMA_INSPECTION','syntax':syntax,'facts':facts,'target_auditor_executions':0},indent=2,sort_keys=True))\n"
+  ],
+  "cwd": "/root/autodl-tmp/symbolic_dynamics",
+  "env": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "TZ": "UTC"
+  },
+  "started_utc": "2026-09-07T07:11:06.708419+00:00"
+}

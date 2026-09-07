@@ -1,0 +1,2469 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/original_snapshot/audit_p208.py	2026-09-07 14:58:57.627121067 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/audit_p209.py	2026-09-07 15:27:02.488053733 +0800
+@@ -1,10 +1,11 @@
+ #!/usr/bin/env python3
+-"""Read-only, P208-specific terminal artifact closure auditor.
++"""Read-only P209 terminal artifact auditor, prepared but never pre-accepted.
+ 
+-Infrastructure adaptation informed by audit_p207.py and the P208 recorders.
+-No scientific producer/reviewer module is imported or executed. No TeX,
+-renderer, source search, acceptance decision or filesystem write occurs.
+-Historical evidence is selected only through explicit original-path/hash maps.
++Disclosed adaptation of the actual accepted P208 artifact infrastructure.
++P208 generic integrity functions remain exact; P209-specific roles replace
++the old paper/review/runtime/build/link sections. No scientific producer,
++old auditor, root recorder or builder is imported or executed. No TeX,
++renderer, page-view call, acceptance synthesis or filesystem write occurs.
+ """
+ from collections import Counter
+ from datetime import datetime, timezone
+@@ -14,32 +15,39 @@
+ from pathlib import Path
+ import re
+ import sys
++import sysconfig
++from urllib.parse import unquote
+ 
+-ROOT = Path(__file__).resolve().parents[3]
++ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ BATCH = ROOT / 'docs/papers204_208_sequence'
+-PAPER = ROOT / 'papers/208-original-snapshot-triangulation-sweeps'
+-A, B = [BATCH / ('reviews/p208_' + x) for x in ('a', 'b')]
++PAPER = ROOT / 'papers/209-ordered-fibre-threading'
++A, B = [BATCH / ('reviews/p209_' + x) for x in ('a', 'b')]
+ FINAL = PAPER / 'qa_final'
+-OUT = BATCH / 'qa/p208_terminal_artifact'
++PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'
++OUT = BATCH / 'qa/p209_terminal_artifact'
++TERMINAL_PREP = BATCH / 'qa/p209_terminal_preparation'
++TERMINAL_LAUNCH = BATCH / 'qa/root_replays/p209_terminal_strict/launcher_terminal_pair_01'
+ CHECKS, READS, ALIASES, USED_ALIASES, HOST_RESOLUTIONS = Counter(), {}, {}, {}, {}
+ MANIFESTS, LINKS = [], []
+-ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C', 'TZ': 'UTC'}
+-BUILD_ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8',
+-             'TZ': 'UTC', 'SOURCE_DATE_EPOCH': '1788652800', 'FORCE_SOURCE_DATE': '1',
++ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
++BUILD_ENV = {**ENV, 'SOURCE_DATE_EPOCH': '1788652800', 'FORCE_SOURCE_DATE': '1',
+              'openin_any': 'p', 'openout_any': 'p'}
+-TEX_ROOTS = tuple(map(Path, ('/usr/share/texlive/texmf-dist/tex',
+-    '/usr/share/texlive/texmf-dist/fonts', '/usr/share/texlive/texmf-dist/web2c',
+-    '/usr/share/texlive/texmf-dist/bibtex', '/usr/share/texmf', '/var/lib/texmf',
+-    '/etc/texmf', '/usr/local/share/texmf', '/root/texmf',
+-    '/root/.texlive2021/texmf-config', '/root/.texlive2021/texmf-var')))
+-CONFIG_ROOTS = tuple(map(Path, ('/etc/ld.so.conf.d', '/usr/share/fonts',
+-    '/etc/fonts', '/var/cache/fontconfig', '/usr/share/fontconfig', '/usr/lib/locale/C.utf8',
+-    '/usr/lib/x86_64-linux-gnu/gconv', '/usr/share/poppler')))
++TEX_ROOTS = tuple(Path(p) for p in ('/usr/share/texlive/texmf-dist', '/usr/share/texmf',
++    '/var/lib/texmf', '/etc/texmf', '/usr/local/share/texmf', '/root/texmf',
++    '/root/.texlive2021/texmf-config', '/root/.texlive2021/texmf-var'))
++LIB_ROOTS = tuple(Path(p) for p in ('/usr/lib/x86_64-linux-gnu', '/usr/lib64', '/usr/local/lib'))
++CONFIG_ROOTS = tuple(Path(p) for p in ('/etc/ld.so.conf.d', '/usr/share/fonts', '/etc/fonts',
++    '/var/cache/fontconfig', '/usr/share/fontconfig', '/usr/lib/locale/C.utf8',
++    '/usr/lib/x86_64-linux-gnu/gconv', '/usr/lib/gconv', '/usr/share/poppler',
++    '/usr/local/share/fonts', '/etc/xdg/fontconfig', '/etc/profile.d', '/root/.fonts',
++    '/root/.fontconfig', '/root/.fonts.conf.d', '/root/.config/fontconfig',
++    '/root/.cache/fontconfig', '/root/.local/share/fonts'))
++TERMINAL_TOOLS = tuple(Path('/usr/bin') / n for n in ('pdflatex', 'bibtex', 'kpsewhich',
++    'pdfinfo', 'pdffonts', 'pdftotext', 'pdftoppm', 'ldd', 'cmp')) + tuple(
++    Path(p) for p in ('/bin/bash', '/bin/sh', '/usr/bin/env', '/usr/bin/python3.10'))
+ SOURCE_NAMES = ('main.tex', 'math_commands.tex', 'references.bib',
+-    'sections/00_abstract.tex', 'sections/01_setup.tex', 'sections/02_cells.tex',
+-    'sections/03_sources.tex', 'sections/04_extremum.tex', 'sections/05_kmap.tex',
+-    'sections/06_clock.tex', 'sections/07_scope.tex')
+-
++    'sections/00_abstract.tex', 'sections/01_setup.tex', 'sections/02_recurrence.tex',
++    'sections/03_inverse.tex', 'sections/04_scope.tex')
+ 
+ def ck(test, section, detail):
+     CHECKS[section] += 1
+@@ -143,33 +151,6 @@
+         ALIASES[key] = preserved
+ 
+ 
+-def load_aliases():
+-    for review in (A, B):
+-        for name in ('FINDINGS.json', 'SHA256SUMS'):
+-            preserved = review / 'delta/initial_snapshot' / name
+-            alias(review / name, preserved, h(preserved))
+-    history = j(B / 'delta/HISTORY_INPUT_MAPPING.json')
+-    original = j(B / 'history_context/SEARCH_INPUTS_BEFORE.json')
+-    ck(original == j(B / 'history_context/SEARCH_INPUTS_AFTER.json') and len(history) == 1917,
+-       'history_scope', 'complete before/after initial search')
+-    ck(set(history) == {str(ROOT / n) for n in original}, 'history_scope', 'all original names')
+-    for name, row in history.items():
+-        rel = Path(name).relative_to(ROOT).as_posix()
+-        ck(row['historical_path'] == 'delta/history_inputs/' + rel and row['sha256'] == original[rel],
+-           'history_exact_mapping', name)
+-        alias(name, safe(B, row['historical_path']), row['sha256'])
+-    # Original admission contexts and B assignment snapshots have explicit
+-    # originals in their own before-pin records; they are never guessed by hash.
+-    base = BATCH / 'qa/p208_round0_input_inspection_v2/historical_workspace_origins'
+-    for rel, value in manifest_rows(base / 'SHA256SUMS').items():
+-        alias(ROOT / rel, base / rel, value)
+-    initial = j(B / 'INITIAL_PIN_RECORD.json')
+-    ck(len(initial['assignment_context']) == 10, 'initial_assignment_context', 'ten exact original paths')
+-    for original_name, row in initial['assignment_context'].items():
+-        alias(ROOT / original_name, B / row['snapshot'], row['before_sha256'])
+-    return history
+-
+-
+ def maps(record, historical=False):
+     for name, value in record.items():
+         pin(Path(name) if Path(name).is_absolute() else ROOT / name, value, historical)
+@@ -213,469 +194,702 @@
+     return argv
+ 
+ 
++def actual_auditor_runtime():
++    modules, mapped = {}, {}
++    for name, module in sorted(sys.modules.items()):
++        original = getattr(module, '__file__', None)
++        if original and Path(original).is_file():
++            path = Path(original).resolve()
++            ck(path.suffix != '.pyc', 'auditor_source_module_not_bytecode', name)
++            modules[name] = {'path': str(path), 'sha256': h(path), 'bytes': len(read(path))}
++    for line in Path('/proc/self/maps').read_text().splitlines():
++        fields = line.split(None, 5)
++        if len(fields) == 6 and fields[5].startswith('/'):
++            path = Path(fields[5]).resolve()
++            mapped[str(path)] = {'sha256': h(path), 'bytes': len(read(path))}
++    ck(dict(os.environ) == ENV and not Path(sys.pycache_prefix).exists(),
++       'auditor_exact_actual_environment_cache', 'controlled actual artifact audit')
++    return {'modules': modules, 'mapped_files': mapped, 'flags': repr(sys.flags),
++            'executable': str(Path(sys.executable).resolve()), 'sys_path': sys.path,
++            'environment': dict(os.environ), 'pycache_prefix': sys.pycache_prefix,
++            'scope': 'Current artifact-auditor file-backed maps; samples, not continuous tracing.'}
++
++# P209-specific replacement sections for the complete disclosed P208 adapter.
++# This is assembly input, not an imported or executed module.
++
++def rich_pin(path, value, historical=False):
++    selected = pin(path, value, historical)
++    if isinstance(value, dict) and selected == Path(path):
++        if 'resolved' in value:
++            ck(str(selected.resolve()) == value['resolved'], 'recorded_path_resolution', str(path))
++        if 'symlink' in value:
++            ck((os.readlink(selected) if selected.is_symlink() else None) == value['symlink'],
++               'recorded_symlink_value', str(path))
++    return selected
++
++
++def exact_map(record, historical=True):
++    for name, value in record.items():
++        rich_pin(Path(name) if Path(name).is_absolute() else ROOT / name, value, historical)
++
++
++def exact_pair(base, before, after, count=None, historical=True):
++    first = j(base / before)
++    ck(first == j(base / after), 'entire_recorded_before_after_equal', (label(base), before, after))
++    if count is not None:
++        ck(len(first) == count, 'exact_recorded_input_count', (label(base), count))
++    exact_map(first, historical)
++    return first
++
++
++def load_aliases():
++    roles = j(B / 'delta_check_02/EXACT_HISTORY_ALIASES.json')
++    ck(len(roles) == 32, 'exact_B_alias_scope', 'all 32 declared roles, not a count of drifted files')
++    for key, target in roles.items():
++        original, digest = key.rsplit(' @ ', 1)
++        alias(original, target, digest)
++    aroles = j(A / 'delta_check_02/HISTORICAL_PIN_ROLE_MAP.json')
++    for original, row in aroles['exact_documentary_aliases'].items():
++        alias(original, row['preserved_exact_path'], row['original_sha256'])
++    row = aroles['initial_manifest_role']
++    alias(row['original_path'], row['preserved_exact_path'], row['original_sha256'])
++    for number in (1, 2):
++        freeze = PAPER / ('frozen_round' + str(number))
++        meta = j(freeze / ('ROUND' + str(number) + '_PROVENANCE.json'))
++        for row in meta['anchor_mapping'].values():
++            alias(row['original_path'], safe(freeze, row['physical_path']), row['sha256'])
++        if number == 1:
++            for row in meta['historical_external_resolution'].values():
++                alias(row['original_path'], row['round1_physical_path'], row['sha256'])
++        else:
++            for row in meta['historical_input_resolution']:
++                alias(row['original_path'], row['round2_physical_path'], row['sha256'])
++    for letter in ('A', 'B'):
++        root = j(BATCH / ('qa/P209_' + letter + '_ROOT_DELTA_INSPECTION.actual.json'))
++        for row in root['historical_input_aliases']:
++            ck(set(row) == {'original_path', 'sha256', 'physical_path'}, 'root_exact_alias_schema', letter)
++            alias(row['original_path'], row['physical_path'], row['sha256'])
++    return {'declared_exact_roles': len(ALIASES), 'no_omitted_historical_pins': True}
++
++
++def historical_manifest(path, base, count=None, delta_alias=False):
++    rows = manifest_rows(path)
++    if count is not None:
++        ck(len(rows) == count, 'historical_manifest_count', (label(path), count))
++    for name, digest in rows.items():
++        target = base / ('INITIAL_DELTA.md' if delta_alias and name == 'DELTA.md' else name)
++        rich_pin(target, digest, True)
++    return rows
++
++
+ def frozen_and_author():
+-    author = manifest(PAPER, 'AUTHOR_MANIFEST.sha256', complete=False, count=483)
+-    frozen = [manifest(PAPER / ('frozen_round' + str(k)), count=487) for k in range(3)]
+-    ck(frozen[0] == frozen[1] == frozen[2], 'frozen_full_identical', 'three full 487-entry closures')
+-    for rel, wanted in frozen[2].items():
+-        pin(PAPER / rel, wanted)
+-    ck(all(frozen[2].get(n) == d for n, d in author.items()), 'author_subset', 'all 483 exact author entries')
+-    for name, status in [('P208_ROUND1_FREEZE.actual.json', None),
+-                         ('P208_ROUND2_FREEZE.actual.json', 'ROOT_ROUND2_PHYSICAL_FREEZE_PASS')]:
+-        value = j(BATCH / 'qa' / name)
+-        if status:
+-            ck(value['status'] == status and value['copied_inputs'] == 487,
+-               'actual_round2', 'actual physical copy receipt')
+-            ck(value['manifest_sha256'] == h(PAPER / 'frozen_round2/SHA256SUMS'),
+-               'actual_round2', 'exact manifest receipt')
+-    for name in ('FINAL_THEOREM_CONTRACTS.md', 'P208_A_RESPONSE.md', 'P208_B_RESPONSE.md'):
+-        content = read(BATCH / name).decode()
+-        ck('P208' in content or '208' in content, 'contracts_responses', name)
+-    return {'author_entries': len(author), 'each_frozen_round': len(frozen[0]), 'live_exact': True}
++    ck(h(PAPER / 'SHA256SUMS') == h(PAPER / 'AUTHOR_MANIFEST.sha256') ==
++       '9fd20cd746f1ae03c22a87283313248ad79ffcfb9a0f1ea45458937dd5901a0e',
++       'immutable_author_seal_roles', 'historical SHA256SUMS is NOT current whole-paper rollup')
++    author = manifest(PAPER, 'AUTHOR_MANIFEST.sha256', complete=False, count=1985)
++    frozen = [manifest(PAPER / ('frozen_round' + str(k)), count=(1989, 2003, None)[k]) for k in range(3)]
++    ck(h(PAPER / 'frozen_round0/SHA256SUMS') == '0f77871539b374027ab42910471cc74cefcd570e214a8242ac0a30c7a83e70ba',
++       'exact_round0', 'original physical seal')
++    ck(h(PAPER / 'frozen_round1/SHA256SUMS') == 'c93e16cf20d2eb87f3b454fbdb3576e52c6c79fb74c8712a277efeab7e60ce57',
++       'exact_round1', 'original physical seal')
++    ck(all(frozen[1].get(n) == d for n, d in frozen[0].items()) and
++       all(frozen[2].get(n) == d for n, d in frozen[1].items()),
++       'nested_immutable_frozen_cores', '1989 to 2003 to measured Round2, not identical whole manifests')
++    for n, digest in author.items():
++        ck(all(rows.get(n) == digest for rows in frozen), 'author_in_every_round', n)
++    ck(author['PAPER_STATUS.md'] == '304c24e871a27bd02bcd6db231abc37870fb263a01d4c081289bdd53e8718a73',
++       'immutable_author_status', 'use separate ROOT_LIFECYCLE.md')
++    pin(PAPER / 'ROOT_ADOPTION.md', '8f82ae0af7156131f14e9e6e849198f8b1c98564760c30d4bc121b50cf34f82e')
++    fixed = j(TERMINAL_PREP / 'SOURCE_PINS.json')
++    ck(set(fixed) == set(SOURCE_NAMES), 'exact_eight_source_contract', 'no extra source/bibliography inputs')
++    for n, value in fixed.items():
++        for base in (PAPER, PAPER / 'frozen_round0', PAPER / 'frozen_round1', PAPER / 'frozen_round2'):
++            pin(base / n, value)
++    root = j(BATCH / 'qa/P209_ROUND2_ROOT_INSPECTION.actual.json')
++    ck(root['schema'] == 'p209-round2-root-physical-closure-v1' and
++       root['status'] == 'PASS_ROOT_ROUND2_COMPLETE_PHYSICAL_CLOSURE' and root['paper'] == 'P209'
++       and type(root['round']) is int and root['round'] == 2 and root['current_open_findings'] == 0,
++       'actual_root_round2_gate', 'measured physical closure, not a preparation result')
++    ck(root['round2_manifest_sha256'] == h(PAPER / 'frozen_round2/SHA256SUMS') and
++       root['round2_payloads'] == len(frozen[2]), 'actual_root_round2_count_hash', 'actual exact seal')
++    ck(set(root['source_pins']) == {str(PAPER / n) for n in SOURCE_NAMES}, 'round2_exact_source_keys', 'absolute live paths')
++    for n, value in fixed.items():
++        ck(all(root['source_pins'][str(PAPER / n)][k] == value[k] for k in ('sha256', 'bytes')),
++           'round2_source_values', n)
++    for letter in ('A', 'B'):
++        ck(root['accepted_' + letter + '_root_gate_sha256'] ==
++           h(BATCH / ('qa/P209_' + letter + '_ROOT_DELTA_INSPECTION.actual.json')),
++           'round2_actual_acceptance_hashes', letter)
++    read(BATCH / 'qa/P209_ROUND2_ROOT_INSPECTION.md')
++    metadata = []
++    for number, previous in ((1, frozen[0]), (2, frozen[1])):
++        base = PAPER / ('frozen_round' + str(number))
++        meta = j(base / ('ROUND' + str(number) + '_PROVENANCE.json'))
++        ck(meta['schema'] == ('p209-round1-provenance-v2' if number == 1 else 'p209-round2-provenance-v1'),
++           'exact_physical_provenance_schema', number)
++        ck(meta['core_payload_pins'] == previous, 'exact_physical_core_provenance', number)
++        for role in ('all_source_inputs_before_and_rechecked_after', 'accepted_review_and_root_manifest_referents'):
++            exact_map(meta[role], historical=True)
++        for name, row in meta['anchor_mapping'].items():
++            pin(safe(base, row['physical_path']), row['sha256'])
++            rich_pin(row['original_path'], row['sha256'], True)
++        prior = meta['prior_whole_paper_manifest']
++        ck(prior['original_referent_base'] == str(PAPER), 'old_whole_manifest_original_base', number)
++        old = historical_manifest(Path(prior['physical_path']), PAPER, prior['payloads'])
++        ck(old == prior['original_referent_pins'], 'old_whole_manifest_full_roles', number)
++        pin(prior['physical_path'], prior['sha256'])
++        links = (meta['round1_core_link_map'] if number == 1 else meta['round2_historical_link_map'])
++        links += meta['acceptance_and_historical_anchor_link_map']
++        for row in links:
++            rich_pin(row['physical_target'], row['sha256'], True)
++        metadata.append(meta)
++    r2 = metadata[-1]
++    ck(r2['author_payloads_preserved'] == 1985 and r2['round1_core_payloads_copied'] == 2003,
++       'round2_exact_preservation_counts', 'author and Round1')
++    ck(r2['accepted_root_assertions'] == j(BATCH / 'qa/P209_B_ROOT_DELTA_INSPECTION.actual.json'),
++       'round2_exact_B_root_snapshot', 'full root JSON')
++    aliases = {row['copy_relative']: row['sha256'] for row in r2['historical_input_resolution'] if row['copy_relative'] is not None}
++    expected = set(frozen[1]) | {'ROUND2_ACCEPTANCE/' + n for n in r2['anchor_mapping']} | set(aliases)
++    expected |= {'ROUND2_PROVENANCE.json', 'ROUND2_FREEZE_ADAPTER.py'}
++    ck(len(r2['anchor_mapping']) == 15 and set(frozen[2]) == expected and len(frozen[2]) == 2020 + len(aliases),
++       'round2_full_exact_physical_layout', '2003 core +15 anchors +2 metadata +actual aliases')
++    pin(PAPER / 'frozen_round2/ROUND2_FREEZE_ADAPTER.py', '787357029ae3d4f50c1a9998a3b1e4fe9377786cc06cb024e3a7a96ef95b46c7')
++    for row in r2['historical_input_resolution']:
++        pin(row['round2_physical_path'], row['sha256'])
++    return {'author_entries': len(author), 'round0_payloads': 1989, 'round1_payloads': 2003,
++            'round2_payloads': len(frozen[2]), 'actual_new_round2_aliases': len(aliases),
++            'source_files': len(fixed), 'immutable_author_status': True}
++
++
++def modern_commands(base, filename='ALL_COMMAND_RECORDS.json', expected=85, env=ENV):
++    entries = j(base / filename)
++    ck(len(entries) == expected, 'actual_modern_command_count', (label(base), expected))
++    for entry in entries:
++        folder, tag, row = Path(entry['folder']), entry['tag'], entry['command']
++        ck(folder.is_relative_to(base) and j(folder / (tag + '.command.json')) == row,
++           'exact_embedded_command', (label(base), tag))
++        attempt = j(folder / (tag + '.attempt.json'))
++        ck(all(attempt[k] == row[k] for k in ('argv', 'cwd', 'env', 'stdout', 'stderr')),
++           'exact_modern_attempt_fields', tag)
++        ck(row['exit'] == 0 and row['process_outcome'] == 'COMPLETED' and row['spawn_error'] is None
++           and row['cleanup'] == [] and row['env'] == env, 'actual_modern_command_pass', tag)
++        for stream in ('stdout', 'stderr'):
++            rich_pin(folder / row[stream], row[stream + '_info'])
++        samples = j(folder / (tag + '.maps.json'))
++        observed = sorted({p for sample in samples['samples'] for p in sample['mapped_files']})
++        ck(observed == entry['mapped_files'], 'exact_recorded_map_union', tag)
++    return entries
++
++
++def review_dependency_keys():
++    a = exact_pair(A / 'delta_check_02', 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 124214)
++    b = exact_pair(B / 'delta_check_02', 'INPUTS_FULL_BEFORE.json', 'INPUTS_FULL_AFTER.json', 128227)
++    exact_map(j(A / 'initial_audit_01/CURRENT_INPUT_CLOSURE.json'))
++    exact_pair(B / 'artifact_audit_03', 'DOCUMENTARY_INPUTS_BEFORE.json', 'DOCUMENTARY_INPUTS_AFTER.json', 127544)
++    # The failures stay failures. Their original streams are sealed by their
++    # accepted review manifests; successful later evidence cannot rewrite them.
++    failed_a = j(A / 'delta_check_01/EXECUTION.actual.json')
++    ck(failed_a['completion_result']['exit_code'] == 1,
++       'preserved_A_delta_failure', 'real first documentary failure; original nested execution schema')
++    bad = j(B / 'delta_check_01/CLOSURE_AFTER_FAILURE.json')
++    ck(bad['actual_outer_exit'] == 1 and bad['actual_child_exit'] == 0 and
++       bad['status'] == 'FAIL_PRESERVED_OUTER_WRAPPER_FILENAME_COLLISION',
++       'preserved_B_wrapper_failure', 'not a successful wrapper')
++    good = j(B / 'delta_check_02/DELTA_EVIDENCE_RESULT.json')
++    ck(good['status'] == 'PASS_EXACT_NOCHANGE_DELTA_EVIDENCE' and good['all_inputs_unchanged']
++       and good['accepted_decision_not_written_by_checker'] and good['delta_full_input_paths'] == len(b),
++       'actual_B_documentary_result', 'no acceptance fabricated by an integrity program')
++    wrapper = j(B / 'delta_check_02/RECEIPT.json')
++    ck(wrapper['status'] == 'PASS' and wrapper['failure'] is None and wrapper['inputs_unchanged'],
++       'actual_B_documentary_wrapper', 'corrected separate attempt')
++    modern_commands(B / 'delta_check_02', 'WRAPPER_COMMAND_RECORDS.json', 1)
++    modern_commands(B / 'delta_check_02', expected=8)
++    exact_pair(B / 'delta_check_02', 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 5166)
++    return {'a_complete_delta_inputs': len(a), 'b_complete_delta_inputs': len(b),
++            'a_original_documentary_pins': 120491, 'b_original_documentary_pins': 127544}
+ 
+ 
+ def reviews(history):
+     result = {}
+-    for letter, base, count, initial_count in [('a', A, 764, 743), ('b', B, 3545, 1546)]:
++    for letter, base, input_round, count, old_count in [('a', A, 0, 1342, 1227), ('b', B, 1, 1472, 1298)]:
+         sealed = manifest(base, count=count)
+-        findings = j(base / 'FINDINGS.json')
+-        ck(findings['reviewer'] == '/root/p208_' + letter + '_reviewer' and findings['delta_accepted'] is True,
+-           'distinct_review_acceptance', letter)
+-        ck(findings['census']['open'] == {'critical': 0, 'major': 0, 'minor': 0}
+-           and all(f['status'] == 'resolved' for f in findings['findings']),
+-           'zero_open_findings', letter)
+-        ck(findings['mathematical_verdict'] == 'MATH_VALID' and
+-           findings['value_verdict'] == 'GO_NARROW_TWO_AXIS' and not findings['manuscript_change_requested'],
+-           'accepted_narrow_verdict', letter)
+-        delta = read(base / 'DELTA.md').decode()
+-        ck('HOLD_EXTERNAL' in delta, 'external_hold', letter)
+-        root = j(BATCH / ('qa/P208_' + letter.upper() + '_ROOT_DELTA_INSPECTION.actual.json'))
+-        ck(root['status'] == 'ROOT_ACCEPTED_' + letter.upper() + '_DELTA_ORIGINAL_CLOSURE_PASS'
+-           and root['current_open_findings'] == 0 and root['review_manifest_entries'] == count,
+-           'actual_root_delta', letter)
+-        ck(root['review_manifest_sha256'] == h(base / 'SHA256SUMS') and
+-           root['delta_sha256'] == h(base / 'DELTA.md'), 'actual_root_delta_hashes', letter)
+-        initial = manifest_rows(base / 'delta/initial_snapshot/SHA256SUMS')
+-        ck(len(initial) == initial_count, 'initial_review_scope', letter)
+-        mapping = j(base / 'delta/INITIAL_PAYLOAD_MAPPING.json')
+-        if letter == 'a':
+-            ck(len(mapping) == initial_count and {r['original'] for r in mapping} == set(initial),
+-               'initial_review_mapping', letter)
+-            mapping = {r['original']: {'historical_path': r['preserved'], 'sha256': r['sha256']} for r in mapping}
+-        ck(set(mapping) == set(initial), 'initial_review_mapping', letter)
+-        for rel, row in mapping.items():
+-            expected = 'delta/initial_snapshot/FINDINGS.json' if rel == 'FINDINGS.json' else rel
+-            ck(row['historical_path'] == expected and row['sha256'] == initial[rel],
+-               'initial_review_exact_path', (letter, rel))
+-            pin(base / expected, initial[rel])
+-        baseline = j(base / 'delta/INPUTS_BEFORE.json')
+-        ck(len(baseline) == root['baseline_referents'], 'delta_full_dependency_count', letter)
+-        if letter == 'a':
+-            maps(baseline, historical=True)
+-            after = j(base / 'delta/INPUTS_AFTER.json')
+-            ck(set(after) == set(baseline), 'delta_full_before_after_names', letter)
+-            for name, value in baseline.items():
+-                selected = (base / 'delta/initial_snapshot' / Path(name).name
+-                            if name in (str(base / 'FINDINGS.json'), str(base / 'SHA256SUMS')) else Path(name))
+-                expected = {**value, 'pin_path': str(selected),
+-                            'historical_document_relocated': str(selected) != name}
+-                ck(after[name] == expected, 'delta_exact_enriched_after_schema', name)
+-                pin(selected, value)
+-            responses = pair_map(base / 'delta', 'ROOT_RESPONSE_PINS')
+-        else:
+-            for name, row in baseline.items():
+-                expected = (base / 'delta/initial_snapshot' / Path(name).name
+-                            if name in (str(base / 'SHA256SUMS'), str(base / 'FINDINGS.json'))
+-                            else base / history[name]['historical_path'] if name in history else Path(name))
+-                ck(str(expected) == row['validated_path'], 'delta_exact_dependency_mapping', name)
+-                pin(expected, row['sha256'])
+-            responses = j(base / 'delta/ROOT_RESPONSE_PINS_BEFORE.json')
+-            for name, row in responses.items():
+-                expected = 'delta/root_context/' + Path(name).relative_to(ROOT).as_posix()
+-                ck(row['snapshot'] == expected, 'root_response_snapshot_mapping', name)
+-                pin(name, row['sha256']); pin(base / expected, row['sha256'])
+-            for phase in ('audit01', 'audit02'):
+-                ck(j(base / 'delta' / phase / 'INPUTS_AFTER.json') == baseline,
+-                   'delta_full_before_after', (letter, phase))
+-                ck(j(base / 'delta' / phase / 'ROOT_RESPONSE_PINS_AFTER.json') == responses,
+-                   'delta_response_before_after', phase)
+-            for group in j(base / 'delta/CONFIGURATION_BEFORE.json').values():
+-                config(group)
+-        for phase, expected_checks in zip(('audit01', 'audit02'),
+-                                         (9083, 9091) if letter == 'a' else (120677, 120678)):
+-            d = base / 'delta' / phase
+-            cmd, rec = j(d / 'COMMAND.json'), j(d / 'audit.stdout')
+-            ck(cmd['exit_code'] == 0 and cmd['argv'][1:4] == ['-I', '-S', '-B'],
+-               'actual_documentary_delta_command', (letter, phase))
+-            for stream in ('stdout', 'stderr'):
+-                pin(d / ('audit.' + stream), cmd[stream] if letter == 'a' else cmd[stream + '_sha256'])
+-            ck(read(d / 'audit.stderr') == b'', 'actual_delta_empty_stderr', (letter, phase))
+-            ck(rec['assertions' if letter == 'a' else 'checks'] == expected_checks,
+-               'actual_delta_result', (letter, phase))
+-        # Preserve and read every resolved issue's actual original evidence.
+-        for issue in findings['findings']:
+-            for name in issue['preserved_evidence']:
+-                p = base / name
+-                ck(p.exists(), 'failed_history_preserved', (letter, issue['id'], name))
+-                if p.is_file():
+-                    read(p)
+-        result[letter] = {'accepted_manifest': h(base / 'SHA256SUMS'), 'payloads': len(sealed),
+-                          'initial_payloads_preserved': initial_count, 'dependency_referents': len(baseline),
+-                          'current_open': findings['census']['open']}
++        initial, current = j(base / 'FINDINGS.json'), j(base / 'CURRENT_FINDINGS.json')
++        for census in (initial, current):
++            ck(census['schema'] == 'p209-manuscript-review-findings-v1' and
++               census['reviewer'] == '/root/p209_' + letter + '_reviewer' and census['input_round'] == input_round,
++               'distinct_original_review_census', letter)
++        ck(initial['delta_status'] == 'UNASSESSED', 'initial_census_remains_initial', letter)
++        ck(current['delta_status'] == 'ACCEPTED_EXACT_NOCHANGE_DELTA' and
++           current['current_open_counts'] == {'critical': 0, 'major': 0, 'minor': 0} and
++           current['findings'] == [] and current['scientific_inputs_changed'] is False,
++           'actual_current_accepted_census', letter)
++        root = j(BATCH / ('qa/P209_' + letter.upper() + '_ROOT_DELTA_INSPECTION.actual.json'))
++        ck(root['schema'] == 'p209-' + letter + '-root-delta-closure-v1' and
++           root['status'] == 'ROOT_ACCEPTED_' + letter.upper() + '_DELTA_ORIGINAL_CLOSURE_PASS' and
++           root['paper'] == 'P209' and root['input_round'] == input_round and root['current_open_findings'] == 0,
++           'actual_accepted_root_delta', letter)
++        ck(all(root[k] is True for k in ('reviewer_delta_accepted', 'root_original_inspection_complete', 'root_replay_closure_complete')),
++           'actual_original_and_replay_root_closure', letter)
++        ck(root['review_manifest_entries'] == count, 'actual_review_payload_count', letter)
++        for key, path in [('review_manifest_sha256', base / 'SHA256SUMS'), ('delta_sha256', base / 'DELTA.md'),
++                          ('current_findings_sha256', base / 'CURRENT_FINDINGS.json'),
++                          ('response_sha256', BATCH / ('P209_' + letter.upper() + '_RESPONSE.md')),
++                          ('findings_sha256' if letter == 'a' else 'initial_findings_sha256', base / 'FINDINGS.json')]:
++            pin(path, root[key])
++        ck(current['response_sha256'] == root['response_sha256'], 'same_reviewer_exact_response', letter)
++        pin(base / 'INITIAL_REVIEW_SEAL.sha256', current['initial_complete_manifest_sha256'])
++        original = historical_manifest(base / 'INITIAL_REVIEW_SEAL.sha256', base, old_count, letter == 'b')
++        ck(original['REPORT.md'] == sealed['REPORT.md'] and original['FINDINGS.json'] == sealed['FINDINGS.json'],
++           'initial_report_census_unchanged_in_place', letter)
++        for name in ('REPORT.md', 'DELTA.md', 'SOURCE_AND_PROOF.md', 'REPLAY_LOG.md', 'BUILD_REPORT.md'):
++            ck('HOLD_EXTERNAL' in read(base / name).decode(), 'review_scope_hold', (letter, name))
++        frozen = PAPER / ('frozen_round' + str(input_round))
++        expected = {str((frozen / n).relative_to(ROOT)): d for n, d in manifest_rows(frozen / 'SHA256SUMS').items()}
++        expected[str((frozen / 'SHA256SUMS').relative_to(ROOT))] = h(frozen / 'SHA256SUMS')
++        ck(historical_manifest(base / 'INPUT_PINS.sha256', ROOT) == expected,
++           'review_exact_whole_freeze_inputs', letter)
++        read(BATCH / ('qa/P209_' + letter.upper() + '_ROOT_DELTA_INSPECTION.md'))
++        for path in sorted(base.rglob('SHA256SUMS')):
++            if path != base / 'SHA256SUMS': manifest(path.parent)
++        result[letter] = {'accepted_manifest': h(base / 'SHA256SUMS'), 'payloads': count,
++                          'initial_payloads_preserved': old_count, 'initial_same_paths': old_count - (letter == 'b'),
++                          'initial_delta_aliases': int(letter == 'b'), 'current_open': current['current_open_counts']}
++    result['complete_dependency_reuse'] = review_dependency_keys()
+     return result
+ 
+ 
++def modern_presence(base):
++    before = j(base / 'CONFIGURATION_BEFORE.json')
++    ck(before == j(base / 'CONFIGURATION_AFTER.json'), 'strict_configuration_interval', label(base))
++    config(before['optional'])
++    for name, names in before['directories'].items():
++        p = Path(name)
++        actual = sorted(str(q) for q in p.rglob('*') if q.is_file()) if p.is_dir() else None
++        ck(actual == names, 'strict_config_directory_membership', name)
++        for value in names or []: read(value)
++    return before
++
++
++def declared_runtime_names(build=False):
++    stdlib = Path('/usr/lib/python3.10')
++    paths = set()
++    for directory, folders, files in os.walk(stdlib):
++        folders[:] = [f for f in folders if f not in {'site-packages', 'dist-packages', '__pycache__'}]
++        paths.update(str(Path(directory) / n) for n in files if not n.endswith(('.pyc', '.pyo')))
++    for root in LIB_ROOTS:
++        if root.is_dir():
++            iterator = root.glob('*') if root == Path('/usr/local/lib') else root.rglob('*')
++            paths.update(str(p) for p in iterator if p.is_file() and (p.name.endswith('.so') or '.so.' in p.name))
++    tools = ['/usr/bin/env', '/usr/bin/cmp', '/usr/bin/ldd', '/bin/bash', '/bin/sh', '/usr/bin/python3.10']
++    if build: tools += ['/usr/bin/' + n for n in ('pdflatex', 'bibtex', 'kpsewhich', 'pdfinfo', 'pdffonts', 'pdftotext', 'pdftoppm')]
++    paths.update(tools)
++    return paths
++
++
+ def strict_replays():
+     summaries = {}
+-    for role, base, count in [('author', PAPER, 62101), ('a', A, 130961), ('b', B, 3144418)]:
+-        rr = BATCH / ('qa/root_replays/p208_' + role + '_strict')
+-        manifest(rr, count=38)
++    for role, base, count, input_count, status in [
++        ('author', PAPER, 98278, 3211, 'PASS_ROOT_AUTHOR_PAIR'),
++        ('a', A, 135605, 5147, 'PASS_ROOT_REVIEW_A_PAIR'),
++        ('b', B, 54794, 5164, 'PASS_ROOT_REVIEW_B_PAIR')]:
++        rr = BATCH / ('qa/root_replays/p209_' + role + '_strict/root_' + role + '_pair_01')
++        launcher = rr.parent / ('launcher_root_' + role + '_pair_01')
++        manifest(rr, count=462); manifest(launcher, count=10)
+         rec = j(rr / 'RECEIPT.json')
+-        ck(rec['status'] in ('PASS_ROOT_P208_STRICT_PAIR', 'PASS_ROOT_P208_B_STRICT_PAIR')
+-           and rec['mode'] == role and rec['kind'] == 'ROOT_REPRODUCTION_NOT_AN_INDEPENDENT_REVIEW'
+-           and not rec['failures'] and len(rec['runs']) == 2, 'strict_pair_actual_result', role)
+-        inputs = pair_map(rr, 'INPUTS', historical=True)
+-        runtime = pair_map(rr, 'RUNTIME_INVENTORY')
+-        libraries = pair_map(rr, 'LIBRARIES')
+-        conf = j(rr / 'CONFIGURATION_BEFORE.json')
+-        ck(conf == j(rr / 'CONFIGURATION_AFTER.json'), 'strict_config_before_after', role); config(conf)
+-        ck((len(inputs), len(runtime), len(libraries), len(conf)) ==
+-           (rec['inputs'], rec['runtime_inventory'], rec['library_files'], rec['configuration_entries']),
+-           'strict_inventory_counts', role)
+-        covered = {str(Path(n).resolve()): (v if isinstance(v, str) else v['sha256'])
+-                   for group in (inputs, runtime, libraries) for n, v in group.items()}
+-        covered.update({v['resolved']: v['sha256'] for v in conf.values() if 'sha256' in v})
+-        ck(len(rec['commands']) == 7, 'strict_all_commands', role)
+-        for row in rec['commands']:
+-            argv = command(rr, row, ENV)
+-            if row['label'].startswith('run') and row['label'] in ('run1', 'run2'):
+-                ck(argv[1:4] == ['-I', '-S', '-B'] and argv[6] == '-c', 'strict_source_execution', role)
+-                ck(argv[7].encode() == read(rr / 'executed_wrapper_snapshot.py'),
+-                   'strict_literal_wrapper', role)
+-            if '_cmp' in row['label']:
+-                ck(argv[0] == '/usr/bin/cmp' and read(rr / row['stdout']['path']) == b'',
+-                   'actual_raw_cmp', row['label'])
+-                ck(read(Path(argv[1])) == read(Path(argv[2])), 'current_raw_cmp_reuse', row['label'])
+-        for run in rec['runs']:
+-            name = run['label']; source = rr / name / 'verify.py'
+-            initial = j(rr / (name + '_SOURCE_ONLY_INITIAL.json'))
+-            ck(set(initial) == {'verify.py'} and initial == run['initial_files'] == run['final_files'],
+-               'strict_source_only_exact', (role, name))
+-            pin(source, initial['verify.py']); ck(read(source) == read(base / 'verify.py'), 'strict_exact_producer', role)
+-            ck(physical(rr / name) == {'verify.py'}, 'strict_no_generated_file', (role, name))
+-            payload = j(rr / (name + '.stdout'))
+-            key = 'checks' if role == 'b' else 'assertions'
+-            ck(run[key] == payload[key] == count, 'strict_exact_science_count', (role, name))
+-            ck(read(rr / (name + '.stdout')) == read(base / 'CANONICAL.json'), 'strict_complete_canonical', (role, name))
+-            consumed = j(rr / (name + '_CONSUMED_RUNTIME.json'))
+-            ck(consumed['optimize'] == 0 and consumed['isolated'] == consumed['no_site'] == 1
+-               and consumed['dont_write_bytecode'] and consumed['cache_absent']
+-               and consumed['environment'] == ENV and not Path(consumed['pycache_prefix']).exists(),
+-               'strict_consumed_flags_environment', (role, name))
+-            observed = dict(consumed['mapped_files'])
+-            observed.update({v['path']: v['sha256'] for v in consumed['modules'].values() if 'path' in v})
+-            for path, wanted in observed.items():
+-                ck(covered.get(path) == wanted and not path.endswith('.pyc'), 'strict_consumed_full_coverage', path)
+-                pin(path, wanted)
+-        for when in ('before', 'after'):
+-            raw = read(rr / ('ldd_' + when + '.stdout')).decode()
+-            paths = {str(Path(p).resolve()) for p in re.findall(r'/[^\s():]+', raw) if Path(p).is_file()}
+-            ck('not found' not in raw and paths == set(libraries), 'strict_full_ldd_closure', (role, when))
+-        summaries[role] = {'runs': 2, 'checks_each': count, 'commands_exit_zero': 7,
+-                           'science_inputs': len(inputs), 'runtime': len(runtime),
+-                           'link_inventory_files_not_distinct_libraries': len(libraries), 'configuration': len(conf)}
+-    compare = j(BATCH / 'qa/P208_B_ROOT_PAYLOAD_INSPECTION.actual.json')
+-    ck(compare['status'] == 'PASS' and compare['checks'] == 266834 and compare['before'] == compare['after'],
+-       'complete_payload_comparison_receipt', 'actual root full scientific-field comparison reused')
+-    for row in compare['before'].values():
+-        pin(row['path'], row['sha256'])
+-    ck([r['n'] for r in compare['boxes']] == list(range(3, 11)) and
+-       sum(r['states'] for r in compare['boxes']) == 2055 and
+-       all(r['all_author_and_A_scientific_fields_equal'] for r in compare['boxes']),
+-       'complete_payload_comparison_scope', 'every labelled state in original fixed boxes')
+-    read(B / 'compare_payloads.py')
++        ck(rec['status'] == status and rec['mode'] == 'pair' and not rec['failures']
++           and rec['result']['canonical_adopted'] is False, 'strict_pair_actual_result', role)
++        inputs = exact_pair(rr, 'ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json', 'ALL_INPUTS_AFTER.json', input_count)
++        runtime = exact_pair(rr, 'RUNTIME_BEFORE.json', 'RUNTIME_AFTER.json')
++        conf = modern_presence(rr)
++        ck(declared_runtime_names() <= set(runtime), 'strict_full_fixed_runtime_names', role)
++        known = {v['resolved'] for v in inputs.values()}
++        ck(all(inputs[n] == v for n, v in runtime.items()), 'strict_runtime_entirely_prepinned', role)
++        for phase in ('BEFORE', 'AFTER'):
++            parent = j(rr / ('PARENT_' + phase + '.json'))
++            ck(parent['env'] == ENV and parent['cwd'] == str(ROOT) and parent['optimization'] == 0
++               and not parent['cache_exists'] and not Path(parent['pycache_prefix']).exists(),
++               'strict_parent_actual_settings', (role, phase))
++            ck(all(s in parent['flags'] for s in ('optimize=0', 'isolated=1', 'no_site=1', 'dont_write_bytecode=1')),
++               'strict_parent_actual_flags', (role, phase))
++        entries = modern_commands(rr)
++        ck(all(set(e['mapped_files']) <= known for e in entries), 'strict_all_command_samples_covered', role)
++        linkage = j(rr / 'LINKAGE.json')
++        ck(not linkage['pending_targets'] and len(linkage['entries']) == 80 and
++           all(e['status'] == 'VALIDATED' for e in linkage['entries']), 'strict_actual_linkage_closure', role)
++        closure = j(rr / 'OBSERVED_CLOSURE.json')
++        ck(closure['uncovered'] == closure['bytecode'] == [], 'strict_observed_closure', role)
++        for label0 in ('replay_01', 'replay_02'):
++            folder = rr / label0; child = j(folder / 'RECEIPT.json')
++            ck(child['status'] == 'PASS' and child['failure'] is None and child['inputs_unchanged']
++               and child['checks'] == count and child['total_states'] == 3414,
++               'strict_actual_complete_child', (role, label0))
++            ck(child['source_only_initial_names'] == ['bootstrap.py', 'verify.py'], 'strict_child_source_only_names', role)
++            for name in ('bootstrap.py', 'verify.py'):
++                ck(read(folder / 'source_inputs' / name) == read(base / name), 'strict_unchanged_child_source', (role, name))
++            ck(physical(folder / 'source_inputs') == {'bootstrap.py', 'verify.py'}, 'strict_source_capsule_no_products', role)
++            exact_pair(folder, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json')
++            ck(read(folder / 'producer.stdout') == read(base / 'CANONICAL.json'), 'strict_full_raw_canonical_reuse', (role, label0))
++            payload = j(folder / 'producer.stdout')
++            ck(payload['status'] == 'PASS' and payload['checks'] == count, 'strict_actual_canonical_count', role)
++            ck(child['closure']['uncovered'] == child['closure']['bytecode'] == [], 'strict_child_recorded_closure', role)
++            for when in ('before', 'after'):
++                obs = j(folder / ('child.' + when + '.json'))
++                ck(obs['env'] == ENV and obs['optimize'] == 0 and obs['isolated'] == obs['no_site'] == 1
++                   and obs['dont_write_bytecode'] and not obs['cache_exists'] and not Path(obs['pycache_prefix']).exists(),
++                   'strict_child_runtime_settings', (role, label0, when))
++        launch = j(launcher / 'RECEIPT.json')
++        ck(launch['status'] == 'PASS_ROOT_LAUNCH' and launch['exit'] == 0 and launch['outcome'] == 'COMPLETED'
++           and launch['failure'] is None and launch['inputs_unchanged'] and launch['cache_absent']
++           and launch['env'] == ENV and launch['cwd'] == str(ROOT), 'strict_actual_outer_pass', role)
++        ck(launch['recorder_closure']['payloads'] == 462 and launch['recorder_closure']['status'] == status,
++           'strict_exact_outer_inner_agreement', role)
++        rich_pin(rr / 'SHA256SUMS', launch['recorder_seal'])
++        exact_pair(launcher, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json')
++        for name in ('recorder.stdout', 'recorder.stderr'): rich_pin(launcher / name, launch[name + '_pin'])
++        ck(j(launcher / 'recorder.stdout')['status'] == status, 'strict_outer_full_actual_stdout', role)
++        summaries[role] = {'runs': 2, 'checks_each': count, 'states_each': 3414,
++                           'actual_commands': 85, 'inputs': input_count, 'runtime': len(runtime),
++                           'config_directory_count': len(conf['directories']), 'new_executions': 0}
++    reconciliation = j(B / 'auxiliary_01/reconcile.stdout')
++    ck(reconciliation['status'] == 'PASS_FULL_MATHEMATICAL_PAYLOAD_RECONCILIATION'
++       and reconciliation['row_count'] == 3414 and reconciliation['checks'] == 78548
++       and len(reconciliation['rows']) == 3414 and all(row['status'] == 'ALL_EQUAL' for row in reconciliation['rows']),
++       'complete_prior_normalized_reconciliation', 'all rows retained; unlike canonicals are not raw-equal')
++    modern_commands(B / 'auxiliary_01', expected=4)
++    exact_pair(B / 'auxiliary_01', 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 5168)
+     return summaries
+ 
+ 
+-def tree_inventory(roots):
+-    return {str(p.resolve()): {'sha256': h(p.resolve()), 'bytes': len(read(p.resolve()))}
+-            for root in roots if root.is_dir() for p in root.rglob('*') if p.is_file()}
++def terminal_resource_key():
++    runtime = exact_pair(FINAL, 'RUNTIME_BEFORE.json', 'RUNTIME_AFTER.json')
++    names = {str(Path(p).resolve()) for p in declared_runtime_names(build=True)}
++    ck(names == set(runtime), 'terminal_full_runtime_membership', 'complete declared stdlib/potential OS libraries/fixed tools')
++    tex = exact_pair(FINAL, 'TEX_INVENTORY_BEFORE.json', 'TEX_INVENTORY_AFTER.json')
++    names = {str(p.resolve()) for root in TEX_ROOTS if root.is_dir() for p in root.rglob('*') if p.is_file()}
++    ck(names == set(tex), 'terminal_full_tex_membership', 'all known resource names, not old hashes alone')
++    conf = j(FINAL / 'CONFIGURATION_BEFORE.json')
++    ck(conf == j(FINAL / 'CONFIGURATION_AFTER.json'), 'terminal_configuration_interval', 'exact')
++    config(conf)
++    # Exact configuration membership is copied structurally from the fixed
++    # terminal builder, using this same system interpreter/sysconfig only.
++    candidates = set(CONFIG_ROOTS + TEX_ROOTS + TERMINAL_TOOLS)
++    candidates.update(Path(p) for p in ('/etc/ld.so.cache', '/etc/ld.so.conf', '/etc/ld.so.preload',
++        '/lib/ld-linux.so.2', '/lib64/ld-linux-x86-64.so.2', '/libx32/ld-linux-x32.so.2'))
++    stdlib = Path(sysconfig.get_path('stdlib')).resolve(); python = Path('/usr/bin/python3.10')
++    candidates.add(stdlib.parent / ('python%d%d.zip' % sys.version_info[:2]))
++    candidates.update([python.parent / 'pyvenv.cfg', python.parent.parent / 'pyvenv.cfg',
++        python.with_name(python.name + '._pth'), python.with_name('python._pth'),
++        Path('/etc/locale.conf'), Path('/etc/default/locale'), Path('/etc/nsswitch.conf'), Path('/etc/localtime'),
++        Path('/etc/bash.bashrc'), Path('/etc/profile'), Path('/usr/lib/locale/locale-archive'), Path('/etc/passwd'), Path('/etc/group'),
++        Path('/root/.fonts.conf'), Path('/root/.config/fontconfig/fonts.conf'), Path('/etc/fonts/local.conf'),
++        Path(sysconfig.get_makefile_filename()), Path(sysconfig.get_config_h_filename())])
++    pth = {'python._pth', 'python3._pth', 'python%d%d._pth' % sys.version_info[:2],
++           'python%d.%d._pth' % sys.version_info[:2], python.name + '._pth'}
++    for directory in {python.parent, Path(sys.executable).parent, stdlib.parent}:
++        candidates.update(directory / n for n in pth)
++    for name in ('LDLIBRARY', 'INSTSONAME'):
++        value = sysconfig.get_config_var(name)
++        if value: candidates.add(stdlib.parent / (value + '._pth'))
++    ldd = read(Path('/usr/bin/ldd')).decode(); match = re.search(r'^RTLDLIST="([^"]+)"', ldd, re.M)
++    ck(ldd.splitlines()[0] == '#!/bin/bash' and match is not None, 'terminal_ldd_loader_source', 'known shell/script')
++    candidates.update(Path(p) for p in match.group(1).split())
++    candidates.update(p for root in CONFIG_ROOTS if root.is_dir() for p in root.rglob('*') if p.is_file())
++    ck(set(map(str, candidates)) == set(conf), 'terminal_complete_configuration_membership', 'exact declared candidates')
++    return runtime, tex, conf
+ 
+ 
+ def terminal():
+-    manifest(FINAL, count=225)
++    whole = manifest(FINAL)
++    pin(TERMINAL_PREP / 'SHA256SUMS', '983dba0c90f72a8ef7580f455780d5c2363d675c84e2e19f0c507c1f2ca7e616')
++    manifest(TERMINAL_PREP, count=190)
++    pin(TERMINAL_PREP / 'root_terminal_builds.py', 'b2489d74647e72ccecbce9906a3f790e94712a724337271f0c99aa77a945dae1')
++    pin(TERMINAL_PREP / 'root_launch_terminal.py', '773ffba4850783614366732d47ae54aa9ad73c947048e6e9013ba4d0d90ec462')
++    ck(read(FINAL / 'executed_recorder_snapshot.py') == read(TERMINAL_PREP / 'root_terminal_builds.py'),
++       'terminal_exact_builder_source', 'actual source-only P209 builder, not P208 outputs')
+     rec = j(FINAL / 'BUILD_EXECUTION.json')
+-    ck(rec['status'] == 'PASS_P208_TERMINAL_BUILD_PAIR_NOT_VIEWED' and not rec['failures']
++    ck(rec['status'] == 'PASS_P209_TERMINAL_BUILD_PAIR_NOT_VIEWED' and not rec['failures']
++       and rec['command_census_complete'] and rec['visual_review'] == 'PENDING_NOT_INFERRED_FROM_HASH_OR_RENDER'
+        and len(rec['builds']) == 2 and len(rec['commands']) == 32,
+-       'terminal_actual_pair', 'actual two source-only builds, all commands retained')
+-    ck(rec['visual_review'] == 'PENDING_NOT_INFERRED_FROM_HASH_OR_RENDER',
+-       'terminal_build_not_view', 'immutable builder record does not counterfeit actual viewing')
+-    ck(read(FINAL / 'executed_recorder_snapshot.py') == read(BATCH / 'qa/run_p208_terminal_builds_v2.py'),
+-       'terminal_exact_recorder', 'literal executed v2 source')
+-    inventories = {}
+-    for stem in ('INPUTS', 'RUNTIME', 'LIBRARIES', 'TEX_INVENTORY', 'CONSUMED_TEX', 'RECORDER_INPUTS'):
+-        inventories[stem] = pair_map(FINAL, stem)
+-    conf = j(FINAL / 'CONFIGURATION_BEFORE.json')
+-    ck(conf == j(FINAL / 'CONFIGURATION_AFTER.json'), 'terminal_config_before_after', 'all known configuration'); config(conf)
+-    ck(tree_inventory(TEX_ROOTS) == inventories['TEX_INVENTORY'], 'terminal_tex_recapture', 'complete current tree names and bytes')
+-    candidates = set(CONFIG_ROOTS + TEX_ROOTS)
+-    tools = [Path('/usr/bin') / n for n in ('pdflatex', 'bibtex', 'kpsewhich', 'pdfinfo',
+-             'pdffonts', 'pdftotext', 'pdftoppm', 'ldd', 'cmp')] + [Path('/bin/bash'), Path(sys.executable).resolve()]
+-    candidates.update(tools)
+-    stdlib = Path('/root/miniconda3/lib/python3.12')
+-    python = Path('/root/miniconda3/bin/python3.12')
+-    candidates.update(map(Path, ('/etc/ld.so.cache', '/etc/ld.so.conf', '/etc/ld.so.preload',
+-        '/lib/ld-linux.so.2', '/lib64/ld-linux-x86-64.so.2', '/libx32/ld-linux-x32.so.2',
+-        '/root/miniconda3/lib/python312.zip', '/etc/locale.conf', '/etc/default/locale')))
+-    candidates.update([python.parent / 'pyvenv.cfg', python.parent.parent / 'pyvenv.cfg',
+-                       python.with_name(python.name + '._pth'), python.with_name('python._pth')])
+-    candidates.update(p for root in CONFIG_ROOTS if root.is_dir() for p in root.rglob('*') if p.is_file())
+-    ck(set(map(str, candidates)) == set(conf), 'terminal_complete_configuration_set', 'recaptured roots/explicit candidates')
+-    runtime_names = {str(p.resolve()) for p in stdlib.rglob('*') if p.is_file()
+-                     and 'site-packages' not in p.parts and '__pycache__' not in p.parts} | {str(p.resolve()) for p in tools}
+-    ck(runtime_names == set(inventories['RUNTIME']), 'terminal_complete_runtime_set', 'entire non-site non-bytecode stdlib and fixed tools')
+-    normalized = {v['resolved']: {'sha256': v['sha256'], 'bytes': v['bytes']} for v in conf.values() if v['is_file']}
+-    coverage = {**inventories['INPUTS'], **inventories['RUNTIME'], **inventories['LIBRARIES'],
+-                **normalized, **inventories['RECORDER_INPUTS']}
+-    for when in ('BEFORE', 'AFTER'):
+-        rt = j(FINAL / ('RECORDER_RUNTIME_' + when + '.json'))
+-        ck(all(t in rt['flags'] for t in ('optimize=0', 'isolated=1', 'no_site=1', 'dont_write_bytecode=1'))
+-           and rt['environment'] == BUILD_ENV and not Path(rt['pycache_prefix']).exists(),
+-           'terminal_parent_runtime', when)
+-        for name, value in rt['mapped_files'].items():
+-            ck(coverage.get(name) == value, 'terminal_parent_map_coverage', name); pin(name, value)
+-        for value in rt['modules'].values():
+-            small = {k: value[k] for k in ('bytes', 'sha256')}
+-            ck(coverage.get(value['path']) == small and not value['path'].endswith('.pyc'),
+-               'terminal_parent_module_coverage', value['path']); pin(value['path'], small)
++       'terminal_actual_complete_pair', 'real builder remains NOT_VIEWED')
++    inputs = exact_pair(FINAL, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json')
++    runtime, tex, conf = terminal_resource_key()
++    libraries = exact_pair(FINAL, 'LIBRARIES_BEFORE.json', 'LIBRARIES_AFTER.json')
++    consumed = exact_pair(FINAL, 'CONSUMED_TEX_BEFORE.json', 'CONSUMED_TEX_AFTER.json')
++    parent_inputs = exact_pair(FINAL, 'RECORDER_INPUTS_BEFORE.json', 'RECORDER_INPUTS_AFTER.json')
++    ck((len(inputs), len(runtime), len(tex), len(conf), len(libraries), len(consumed)) ==
++       (rec['input_count'], rec['runtime_count'], rec['tex_inventory_count'], rec['configuration_count'],
++        rec['resolved_link_file_count'], rec['consumed_tex_count']), 'terminal_recorded_exact_inventory_counts', 'measured not prefilled')
++    expected = ['ldd_before', 'pdflatex_version', 'bibtex_version', 'texmf_roots']
++    for k in (1, 2):
++        label0 = 'cold_build_' + str(k)
++        expected.extend(label0 + '_' + v for v in ('TEXMFHOME', 'TEXMFCONFIG', 'TEXMFVAR'))
++        expected.extend(label0 + '_' + v for v in ('tex1', 'bst', 'bibtex', 'tex2', 'tex3', 'pdfinfo', 'pdffonts', 'pdftotext', 'render', 'frozen_pdf_cmp'))
++    expected += ['pair_pdf_cmp', 'ldd_after']
++    ck([row['label'] for row in rec['commands']] == rec['expected_command_labels'] == expected,
++       'terminal_exact_command_order', 'all 32 actual commands')
+     bylabel = {}
+     for row in rec['commands']:
+         argv = command(FINAL, row, BUILD_ENV)
+-        ck(row['status'] == 'COMPLETED' and row['label'] not in bylabel, 'terminal_actual_command_unique', row['label'])
+-        bylabel[row['label']] = row
++        expected_cwd = FINAL / row['label'][:12] if row['label'].startswith(('cold_build_1_', 'cold_build_2_')) else FINAL
++        ck(row['cwd'] == str(expected_cwd), 'terminal_exact_actual_command_cwd', row['label'])
++        ck(row['status'] == 'COMPLETED' and row['cleanup'] == [] and row['start_new_session'],
++           'terminal_actual_closed_child', row['label'])
+         attempt = j(FINAL / (row['label'] + '.attempt.json'))
+-        ck(attempt['status'] == 'ATTEMPTED' and attempt['argv'] == argv and attempt['cwd'] == row['cwd']
+-           and attempt['environment'] == BUILD_ENV and attempt['started_utc'] == row['started_utc'],
+-           'terminal_attempt_chronology', row['label'])
++        ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and
++           all(attempt[key] == row[key] for key in ('argv', 'cwd', 'environment', 'started_utc')),
++           'terminal_actual_prespawn_chronology', row['label'])
+         if row['label'].endswith('_cmp'):
+-            ck(argv[0] == '/usr/bin/cmp' and read(Path(argv[1])) == read(Path(argv[2]))
+-               and read(FINAL / row['stdout']['path']) == b'', 'terminal_actual_raw_cmp', row['label'])
++            ck(argv[:2] == ['/usr/bin/cmp', '--'] and len(argv) == 4 and
++               read(Path(argv[2])) == read(Path(argv[3])), 'terminal_actual_raw_comparison_reuse', row['label'])
++        bylabel[row['label']] = row
+     for when in ('before', 'after'):
+         raw = read(FINAL / ('ldd_' + when + '.stdout')).decode()
+         found = {str(Path(p).resolve()) for p in re.findall(r'/[^\s():]+', raw) if Path(p).is_file()}
+-        ck('not found' not in raw and found == set(inventories['LIBRARIES']), 'terminal_full_ldd_closure', when)
+-    external_consumed = set()
++        ck('not found' not in raw and found == set(libraries), 'terminal_full_recorded_ldd_closure', when)
++    covered = {**inputs, **runtime, **libraries, **parent_inputs,
++               **{v['resolved']: {k: v[k] for k in ('sha256', 'bytes')} for v in conf.values() if v['is_file']}}
++    for phase in ('BEFORE', 'AFTER'):
++        obs = j(FINAL / ('RECORDER_RUNTIME_' + phase + '.json'))
++        ck(obs['environment'] == BUILD_ENV and obs['cwd'] == str(ROOT) and obs['executable'] == '/usr/bin/python3.10'
++           and obs['pycache_prefix'] == str(FINAL / 'never_created_parent_cache') and not Path(obs['pycache_prefix']).exists(),
++           'terminal_actual_parent_settings', phase)
++        ck(all(s in obs['flags'] for s in ('optimize=0', 'isolated=1', 'no_site=1', 'dont_write_bytecode=1')),
++           'terminal_actual_parent_flags', phase)
++        for path, value in obs['mapped_files'].items():
++            ck(covered.get(path) == value, 'terminal_parent_mapped_input_coverage', path); pin(path, value)
++        for value in obs['modules'].values():
++            wanted = {k: value[k] for k in ('sha256', 'bytes')}
++            ck(covered.get(value['path']) == wanted and not value['path'].endswith(('.pyc', '.pyo')),
++               'terminal_parent_source_module_coverage', value['path']); pin(value['path'], wanted)
++    external_union, generated_union = set(), {}
++    pages, diagnostic_rows = [], []
+     for k, row in enumerate(rec['builds'], 1):
+-        name = 'cold_build_' + str(k); cold = FINAL / name
+-        initial = j(FINAL / (name + '_SOURCE_ONLY_INITIAL.json'))
+-        ck(row['directory'] == name and initial == row['source_only_initial'] and set(initial) == set(SOURCE_NAMES),
+-           'terminal_source_only_set', k)
+-        for n, value in initial.items():
+-            pin(cold / n, value); pin(PAPER / 'frozen_round2' / n, value)
++        label0 = 'cold_build_' + str(k); cold = FINAL / label0
++        initial = j(FINAL / (label0 + '_SOURCE_ONLY_INITIAL.json'))
++        ck(row['directory'] == label0 and initial == row['source_only_initial'] and set(initial) == set(SOURCE_NAMES),
++           'terminal_exact_eight_source_only_inputs', label0)
++        for name, value in initial.items():
++            pin(cold / name, value); pin(PAPER / 'frozen_round2' / name, value); pin(PAPER / name, value)
+         for variable in ('TEXMFHOME', 'TEXMFCONFIG', 'TEXMFVAR'):
+-            raw = read(FINAL / (name + '_' + variable + '.stdout')).decode().strip()
+-            p = Path(raw); p = (p if p.is_absolute() else cold / p).resolve()
+-            expected = {'query_value': raw, 'resolved': str(p), 'exists': False}
+-            key = name + ':' + variable
+-            ck(j(FINAL / (name + '_USER_ROOTS_BEFORE.json'))[key] == expected
+-               and j(FINAL / 'USER_ROOTS_AFTER.json')[key] == expected and not p.exists(),
+-               'terminal_effective_cwd_user_roots', key)
++            raw = read(FINAL / (label0 + '_' + variable + '.stdout')).decode().strip()
++            path = Path(raw); path = (path if path.is_absolute() else cold / path).resolve()
++            expected_root = {'query_value': raw, 'resolved': str(path), 'exists': False}; key = label0 + ':' + variable
++            ck(j(FINAL / (label0 + '_USER_ROOTS_BEFORE.json'))[key] == j(FINAL / 'USER_ROOTS_AFTER.json')[key] == expected_root
++               and not path.exists(), 'terminal_effective_user_roots_absent', key)
+         for passno in (1, 2, 3):
+-            tex = bylabel[name + '_tex' + str(passno)]
+-            ck(tex['argv'] == ['/usr/bin/pdflatex', '-no-shell-escape', '-recorder',
+-               '-interaction=nonstopmode', '-halt-on-error', 'main.tex'] and tex['cwd'] == str(cold),
+-               'terminal_exact_tex_command', (k, passno))
+-            for line in read(FINAL / (name + '_pass' + str(passno) + '.fls')).decode().splitlines():
+-                if line.startswith('INPUT '):
+-                    p = Path(line[6:]); p = (p if p.is_absolute() else cold / p).resolve()
+-                    if not p.is_relative_to(cold):
+-                        ck(str(p) in inventories['CONSUMED_TEX'] and
+-                           inventories['CONSUMED_TEX'][str(p)] == inventories['TEX_INVENTORY'][str(p)],
+-                           'terminal_all_fls_consumed_coverage', str(p))
+-                        external_consumed.add(str(p))
+-        bst = read(FINAL / (name + '_bst.stdout')).decode().strip()
+-        ck(str(Path(bst).resolve()) in inventories['CONSUMED_TEX'], 'terminal_bibtex_style', bst)
+-        external_consumed.add(str(Path(bst).resolve()))
+-        ck(read(FINAL / (name + '_generated.bbl')) == read(cold / 'main.bbl'), 'terminal_actual_generated_bibliography', k)
++            ck(bylabel[label0 + '_tex' + str(passno)]['argv'] == ['/usr/bin/pdflatex', '-no-shell-escape', '-recorder',
++               '-interaction=nonstopmode', '-halt-on-error', 'main.tex'], 'terminal_exact_tex_command', (label0, passno))
++            for line in read(FINAL / (label0 + '_pass' + str(passno) + '.fls')).decode().splitlines():
++                if not line.startswith('INPUT '): continue
++                path = Path(line[6:]); path = (path if path.is_absolute() else cold / path).resolve()
++                if not path.is_relative_to(cold):
++                    ck(str(path) in consumed and consumed[str(path)] == tex[str(path)], 'terminal_every_external_fls_input', str(path))
++                    external_union.add(str(path))
++                else:
++                    name = path.relative_to(cold).as_posix()
++                    if name in initial: pin(path, initial[name])
++                    else:
++                        ck(path.suffix in {'.aux', '.bbl', '.out', '.toc'}, 'terminal_only_generated_local_inputs', name)
++            perpass = j(FINAL / (label0 + '_pass' + str(passno) + '_TEX_INPUTS.json'))
++            ck(all(consumed.get(p) == v for p, v in perpass['consumed_external'].items()), 'terminal_perpass_external_inventory', (label0, passno))
++            generated_union.update(perpass['generated_local'])
++        bst = read(FINAL / (label0 + '_bst.stdout')).decode().strip()
++        external_union.add(str(Path(bst).resolve()))
++        ck(str(Path(bst).resolve()) in consumed, 'terminal_bibtex_style_pinned', bst)
++        ck(read(FINAL / (label0 + '_generated.bbl')) == read(cold / 'main.bbl'), 'terminal_actual_bibliography_output', k)
++        measured = j(FINAL / (label0 + '_MEASURED_PDF.json'))
++        info_text = read(FINAL / (label0 + '_pdfinfo.stdout')).decode()
++        page_count = int(re.search(r'^Pages:\s+(\d+)$', info_text, re.M).group(1))
++        ck(measured['pages'] == measured['rendered_pages'] == row['pages'] == page_count == 4 and measured['expected_pages'] == 4,
++           'terminal_measured_four_pages', k)
++        pin(cold / 'main.pdf', measured['pdf']); pin(cold / 'main.pdf', row['pdf'])
++        ck(read(cold / 'main.pdf') == read(PAPER / 'main.pdf'), 'terminal_final_pdf_unchanged', k)
++        font_text = read(FINAL / (label0 + '_pdffonts.stdout')).decode()
++        fonts = [s.split()[-5:] for s in font_text.splitlines()[2:] if s.strip()]
++        ck(fonts and len(fonts) == row['embedded_fonts'] and all(v[0] == 'yes' for v in fonts), 'terminal_all_fonts_embedded', k)
+         log = read(cold / 'main.log').decode()
+         diagnostics = {key: re.findall(r'^.*' + pattern + r'.*$', log, re.M) for key, pattern in
+                        [('undefined', 'undefined'), ('overfull', 'Overfull'), ('underfull', 'Underfull'), ('warnings', 'Warning')]}
+         diagnostics['rerun'] = re.findall(r'^.*(?:Rerun to|Please .*rerun|Label\(s\) may have changed).*$', log, re.M)
+-        ck(diagnostics == row['actual_diagnostics'] and diagnostics['underfull'] ==
+-           ['Underfull \\hbox (badness 5681) in paragraph at lines 9--13'] and
+-           all(not diagnostics[n] for n in ('undefined', 'overfull', 'warnings', 'rerun')),
+-           'terminal_exact_final_diagnostics', k)
+-        font = read(FINAL / (name + '_pdffonts.stdout')).decode()
+-        fonts = [s.split()[-5:] for s in font.splitlines()[2:] if s.strip()]
+-        ck(len(fonts) == row['embedded_fonts'] == 27 and all(v[0] == 'yes' for v in fonts),
+-           'terminal_all_fonts_embedded', k)
+-        pdfinfo = read(FINAL / (name + '_pdfinfo.stdout')).decode()
+-        ck(int(re.search(r'^Pages:\s+(\d+)$', pdfinfo, re.M).group(1)) == row['pages'] == 7,
+-           'terminal_page_count', k)
+-        text = read(FINAL / (name + '_main.txt')).decode()
+-        ck(not any(marker in text for marker in ('[VERIFY]', '??', '[?]')), 'terminal_resolved_text', k)
+-        pin(cold / 'main.pdf', row['pdf'])
+-        ck(read(cold / 'main.pdf') == read(PAPER / 'main.pdf'), 'terminal_exact_final_pdf', k)
+-        ck(physical(cold / 'pages') == {'page-' + str(i) + '.png' for i in range(1, 8)},
+-           'terminal_complete_render_set', k)
+-    ck(external_consumed == set(inventories['CONSUMED_TEX']), 'terminal_consumed_exact_union', 'all pass inputs plus located bibliography style')
+-    return {'payloads': 225, 'commands_actual_exit_zero': 32, 'source_files_per_build': 11,
+-            'inventories': {k: len(v) for k, v in inventories.items()}, 'configuration': len(conf),
+-            'pages': 7, 'fonts_embedded': 27, 'retained_underfull_badness': 5681,
+-            'boundary': rec['boundary']}
+-
+-
+-def pages_and_links():
+-    record = j(BATCH / 'qa/P208_TERMINAL_ROOT_VIEWS.actual.json')
+-    ck(record['status'] == 'ROOT_ACTUALLY_VIEWED_ALL_SEVEN_FINAL_PAGES_PASS' and record['reviewer'] == '/root'
+-       and record['open_visual_findings'] == 0 and [p['page'] for p in record['pages']] == list(range(1, 8)),
+-       'actual_root_page_view_receipt', 'seven actual attestations')
++        ck(diagnostics == row['actual_diagnostics'] == j(FINAL / (label0 + '_DIAGNOSTICS.json'))['diagnostics'],
++           'terminal_exact_measured_diagnostics', k)
++        ck(all(not diagnostics[n] for n in ('undefined', 'overfull', 'rerun')), 'terminal_no_blocking_diagnostic', k)
++        ck(not any(marker in read(FINAL / (label0 + '_main.txt')).decode() for marker in ('[VERIFY]', '??', '[?]')),
++           'terminal_resolved_extracted_text', k)
++        ck(physical(cold / 'pages') == {'page-' + str(n) + '.png' for n in range(1, 5)}, 'terminal_complete_render_set', k)
++        pages.append(page_count); diagnostic_rows.append(diagnostics)
++    ck(external_union == set(consumed) and generated_union == j(FINAL / 'GENERATED_LOCAL_TEX_INPUTS.json'),
++       'terminal_exact_consumed_and_generated_union', 'every per-pass record retained')
++    launch = TERMINAL_LAUNCH; manifest(launch)
++    outer = j(launch / 'RECEIPT.json')
++    ck(outer['argv'] == ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++       'pycache_prefix=' + str(FINAL / 'never_created_parent_cache'),
++       str(TERMINAL_PREP / 'root_terminal_builds.py'), 'terminal-pair-after-round2']
++       and outer['cwd'] == str(ROOT), 'terminal_actual_exact_parent_launch', 'unchanged prepared builder')
++    ck(outer['status'] == 'PASS_ROOT_TERMINAL_LAUNCH_NOT_VIEWED' and outer['exit'] == 0 and outer['outcome'] == 'COMPLETED'
++       and outer['failure'] is None and outer['inputs_unchanged'] and outer['cache_absent']
++       and outer['launcher_observed_input_closure'] and outer['env'] == BUILD_ENV,
++       'actual_terminal_outer_pass', 'full actual outer stream closure remains NOT_VIEWED')
++    ck(outer['recorder_closure']['payloads'] == len(whole) and outer['recorder_closure']['status'] == rec['status'],
++       'terminal_outer_exact_inner_seal_count', 'no prefilled future count')
++    rich_pin(FINAL / 'SHA256SUMS', outer['recorder_seal'])
++    outer_inputs = exact_pair(launch, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json')
++    for name in ('recorder.stdout', 'recorder.stderr'): rich_pin(launch / name, outer[name + '_pin'])
++    actual_stdout = j(launch / 'recorder.stdout')
++    ck(all(actual_stdout[k] == rec[k] for k in actual_stdout), 'terminal_full_outer_stdout_consistency', 'actual builder result')
++    outer_coverage = {v['resolved']: {k: v[k] for k in ('sha256', 'bytes', 'resolved')} for v in outer_inputs.values()}
++    for phase in ('BEFORE', 'AFTER'):
++        obs = j(launch / ('LAUNCHER_RUNTIME_' + phase + '.json'))
++        ck(obs['environment'] == BUILD_ENV and not obs['cache_exists'] and not Path(obs['cache_prefix']).exists(),
++           'terminal_launcher_actual_settings', phase)
++        ck(obs['cwd'] == str(ROOT) and obs['cache_prefix'] == str(launch / 'never_created_launcher_cache')
++           and all(s in obs['flags'] for s in ('optimize=0', 'isolated=1', 'no_site=1', 'dont_write_bytecode=1')),
++           'terminal_launcher_exact_flags_cwd_cache', phase)
++        for path, value in obs['mapped_files'].items(): ck(outer_coverage.get(path) == value, 'terminal_launcher_map_coverage', path)
++        for value in obs['modules'].values():
++            ck(outer_coverage.get(value['path']) == {k: value[k] for k in ('sha256', 'bytes', 'resolved')},
++               'terminal_launcher_module_coverage', value['path'])
++    return {'payloads': len(whole), 'actual_commands': 32, 'sources_per_build': 8, 'pages': pages,
++            'runtime': len(runtime), 'tex': len(tex), 'configuration': len(conf), 'diagnostics': diagnostic_rows,
++            'builder_visual_state': rec['visual_review'], 'new_builds_or_views_by_this_auditor': 0}
++
++
++def root_page_views(builds):
++    record = j(BATCH / 'qa/P209_TERMINAL_ROOT_VIEWS.actual.json')
++    ck(record['schema'] == 'p209-terminal-root-every-page-view-v1' and record['paper'] == 'P209'
++       and record['status'] == 'ROOT_ACTUALLY_VIEWED_ALL_FOUR_FINAL_PAGES_PASS' and record['reviewer'] == '/root'
++       and record['page_count'] == 4 and record['open_visual_findings'] == 0
++       and [row['page'] for row in record['pages']] == list(range(1, 5)),
++       'actual_root_every_page_attestation', 'four actual individual observations, not hashes inferred as views')
+     ck(record['terminal_manifest_sha256'] == h(FINAL / 'SHA256SUMS') and
+-       record['pdf_sha256'] == h(FINAL / 'cold_build_1/main.pdf'), 'actual_root_page_view_exact_artifact', 'exact new terminal pair')
++       record['pdf_sha256'] == h(FINAL / 'cold_build_1/main.pdf'), 'root_view_exact_artifact', 'actual new terminal output')
+     for page in record['pages']:
+         ck(page['path'] == str(FINAL / ('cold_build_1/pages/page-' + str(page['page']) + '.png'))
+-           and page['actually_displayed_and_viewed'] and bool(page['observation'].strip()),
+-           'actual_root_page_view_individual', page['page'])
++           and page['actually_displayed_and_viewed'] is True and bool(page['observation'].strip()),
++           'actual_root_individual_view', page['page'])
+         pin(page['path'], page['sha256'])
+-    ck('underfull' in record['pages'][-1]['observation'].lower() and '5681' in record['retained_nonblocking_diagnostic'],
+-       'actual_warning_page_inspected', 'bibliography page seven')
+-    report = read(BATCH / 'qa/P208_TERMINAL_ROOT_VIEWS.md').decode()
+-    ck('HOLD_EXTERNAL' in report and '5681' in report, 'actual_view_report_boundary', 'honest warning/external hold')
+-    # Frozen and source snapshots retain their semantic original directory for
+-    # relative documentation links. The rules below are structural, not an
+-    # existence-based fallback that could hide a broken live link.
+-    docs = [p for folder in (PAPER, A, B) for p in folder.rglob('*.md')]
+-    docs += [BATCH / n for n in ('P208_A_RESPONSE.md', 'P208_B_RESPONSE.md')]
+-    docs += list((BATCH / 'qa').glob('P208_*.md'))
++    nonblocking = [line for row in builds['diagnostics'] for kind in ('underfull', 'warnings') for line in row[kind]]
++    if nonblocking:
++        ck(isinstance(record['retained_nonblocking_diagnostic'], str) and record['retained_nonblocking_diagnostic'].strip(),
++           'actual_nonblocking_diagnostic_disclosed', nonblocking)
++    else:
++        ck(record['retained_nonblocking_diagnostic'] is None, 'no_fabricated_build_diagnostic', 'actual lists empty')
++    report = read(BATCH / 'qa/P209_TERMINAL_ROOT_VIEWS.md').decode()
++    ck('HOLD_EXTERNAL' in report, 'actual_view_report_external_hold', 'root report')
++    return {'actually_attested_pages': 4, 'auditor_views': 0, 'root_record_sha256': h(BATCH / 'qa/P209_TERMINAL_ROOT_VIEWS.actual.json')}
++
++
++def stripped_links(content):
++    content = re.sub(r'(?ms)^[ ]{0,3}(`{3,}|~{3,})[^\n]*\n.*?^[ ]{0,3}\1[ \t]*$', '\n\n', content)
++    content = re.sub(r'(?:\A|\n\n)(?:(?: {4}|\t)[^\n]*(?:\n|$))+', '\n\n', content)
++    content = re.sub(r'(`+)(?:(?!\1)[\s\S])*?\1', ' ', content)
++    return re.findall(r'\[[^\]]*\]\(([^)]+)\)', content)
++
++
++def pages_and_links():
++    # Explicit frozen link tables preserve historical destinations and hashes.
++    mapped = {}
++    for number in (0, 1, 2):
++        base = PAPER / ('frozen_round' + str(number))
++        if number == 0:
++            rows = j(base / 'FROZEN_LINK_MAP.json')['links']
++        else:
++            meta = j(base / ('ROUND' + str(number) + '_PROVENANCE.json'))
++            rows = (meta['round1_core_link_map'] if number == 1 else meta['round2_historical_link_map'])
++            rows += meta['acceptance_and_historical_anchor_link_map']
++        for row in rows:
++            key = (str(base / row['document']), row['href'])
++            rich_pin(row['physical_target'], row['sha256'], True)
++            mapped[key] = row
++    origins = {}
++    for (original, digest), preserved in ALIASES.items():
++        if preserved.suffix == '.md' and (preserved.is_relative_to(A) or preserved.is_relative_to(B)):
++            pin(preserved, digest)
++            origins.setdefault(str(preserved), Path(original))
++    for original, row in j(A / 'delta_check_02/RESPONSE_ORIGINALS_AND_COPIES.json').items(): origins[row['copy']] = Path(original)
++    for row in j(B / 'assignment_context/ROLES.json'): origins[row['preserved']] = Path(row['original'])
++    for row in j(B / 'delta_intake_01/INTAKE_RESULT.json')['copies']: origins[row['physical']] = Path(row['original'])
++    docs = [p for base in (PAPER, A, B) for p in base.rglob('*.md')]
++    docs += [BATCH / n for n in ('P209_A_RESPONSE.md', 'P209_B_RESPONSE.md')]
++    docs += list((BATCH / 'qa').glob('P209_*.md'))
+     for doc in sorted(set(docs)):
+-        origin = Path(re.sub(r'/frozen_round[012]/', '/', str(doc)))
+-        # A searched historical document may itself be an older snapshot;
+-        # iterate these documented prefix maps until its original is reached.
+-        for unused in range(10):
++        origin = origins.get(str(doc), doc)
++        for unused in range(12):
+             previous = origin
+-            for token in ('/delta/history_inputs/', '/delta/root_context/', '/history_context/snapshots/',
+-                          '/source_context/', '/assignment_context/', '/assignment_context_recovery/historical/',
+-                          '/source_inputs/', '/historical_workspace_origins/'):
++            # Physical frozen top-level links use their exact tables above.
++            # For nested historical snapshots, retained workspace tails state
++            # the original document directory; never search for a matching hash.
++            for token in ('/source_context/', '/assignment_context/', '/exact_response_inputs/', '/original_snapshot/'):
+                 if token in str(origin):
+                     tail = str(origin).split(token, 1)[1]
+                     if tail.startswith(('docs/', 'papers/', '.agents/')) or tail in ('AGENTS.md', 'SYMBOLIC_DYNAMICS_STATE.md'):
+-                        origin = ROOT / tail
+-                        break
+-            if previous == origin:
+-                break
+-        ck(unused < 9, 'finite_nested_snapshot_origins', label(doc))
+-        # These two older extrema-audit source-only directories use *local*
+-        # source names, not workspace-relative ones. Their own actual receipt
+-        # binds the copied documentary bytes to the parent scout original.
+-        for number in ('01', '02'):
+-            audit = BATCH / ('scouting/finite_systems_thirteenth/extrema_audit_' + number)
+-            if origin == audit / 'source_inputs/PROOF_AND_DISPOSITION.md':
+-                receipt = j(audit / 'RECEIPT.json')
+-                source = audit.parent / 'PROOF_AND_DISPOSITION.md'
+-                ck(receipt['all_inputs_before'] == receipt['all_inputs_after'] and
+-                   receipt['all_inputs_before'][str(source)] == receipt['all_inputs_before'][str(origin)],
+-                   'historical_local_snapshot_origin', str(origin))
+-                pin(origin, receipt['all_inputs_before'][str(origin)])
+-                origin = source
+-        if '/input_snapshot/' in str(origin):
+-            origin = PAPER / str(origin).split('/input_snapshot/', 1)[1]
+-        if origin.parent == A / 'delta/initial_snapshot': origin = A / origin.name
+-        if origin.parent == B / 'delta/initial_snapshot': origin = B / origin.name
+-        provisional = BATCH / 'scouting/word_local/UGR_GATE/provisional_hold_01'
+-        if origin.parent == provisional and origin.name in (
+-                'CANDIDATE_GATE.md', 'SOURCE_AUDIT.md', 'EXECUTION_RECEIPT.md', 'PROVENANCE.md'):
+-            archive_note = read(provisional / 'README.md').decode()
+-            ck('These four working reports preceded manifest closure' in archive_note
+-               and 'current parent-directory' in archive_note,
+-               'exact_ugr_four_report_archival_origin', origin.name)
+-            origin = provisional.parent / origin.name
+-        content = read(doc).decode()
+-        # CommonMark code spans/fences do not contain Markdown links. This
+-        # removes code syntax before link extraction, not missing destinations.
+-        content = re.sub(r'(?ms)^[ ]{0,3}(`{3,}|~{3,})[^\n]*\n.*?^[ ]{0,3}\1[ \t]*$', '\n\n', content)
+-        # An indented continuation of a preceding inline-code paragraph is
+-        # not a new indented code block: require document start or a blank.
+-        content = re.sub(r'(?:\A|\n\n)(?:(?: {4}|\t)[^\n]*(?:\n|$))+', '\n\n', content)
+-        content = re.sub(r'(`+)(?:(?!\1)[\s\S])*?\1', ' ', content)
+-        for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', content):
+-            target = target.strip().strip('<>').split('#', 1)[0]
+-            if not target or re.match(r'[a-zA-Z][a-zA-Z0-9+.-]*:', target): continue
+-            destination = (origin.parent / target).resolve()
+-            ck(destination.exists(), 'local_link_closure', (label(doc), target, label(origin)))
+-            LINKS.append({'document': label(doc), 'semantic_origin': label(origin), 'target': target,
+-                          'resolved_target': label(destination)})
+-    return {'actual_root_attested_pages': 7, 'auditor_views': 0, 'documents': len(set(docs)),
+-            'local_links': len(LINKS)}
+-
+-
+-def actual_auditor_runtime():
+-    modules, mapped = {}, {}
+-    for name, module in sorted(sys.modules.items()):
+-        original = getattr(module, '__file__', None)
+-        if original and Path(original).is_file():
+-            path = Path(original).resolve()
+-            ck(path.suffix != '.pyc', 'auditor_source_module_not_bytecode', name)
+-            modules[name] = {'path': str(path), 'sha256': h(path), 'bytes': len(read(path))}
+-    for line in Path('/proc/self/maps').read_text().splitlines():
+-        fields = line.split(None, 5)
+-        if len(fields) == 6 and fields[5].startswith('/'):
+-            path = Path(fields[5]).resolve()
+-            mapped[str(path)] = {'sha256': h(path), 'bytes': len(read(path))}
+-    ck(dict(os.environ) == ENV and not Path(sys.pycache_prefix).exists(),
+-       'auditor_exact_actual_environment_cache', 'controlled actual artifact audit')
+-    return {'modules': modules, 'mapped_files': mapped, 'flags': repr(sys.flags),
+-            'executable': str(Path(sys.executable).resolve()), 'sys_path': sys.path,
+-            'environment': dict(os.environ), 'pycache_prefix': sys.pycache_prefix,
+-            'scope': 'Current artifact-auditor file-backed maps; samples, not continuous tracing.'}
++                        origin = ROOT / tail; break
++            if origin == previous: break
++        ck(unused < 11, 'finite_explicit_snapshot_origin', str(doc))
++        for href in stripped_links(read(doc).decode()):
++            target = href.strip().strip('<>').split('#', 1)[0]
++            if not target or re.match(r'[A-Za-z][A-Za-z0-9+.-]*:', target): continue
++            if (str(doc), href) in mapped:
++                row = mapped[(str(doc), href)]
++                selected = rich_pin(row['physical_target'], row['sha256'], True)
++                LINKS.append({'document': label(doc), 'semantic_origin': 'explicit-frozen-link-map', 'target': href,
++                              'resolved_target': label(selected), 'sha256': row['sha256']})
++            else:
++                destination = (origin.parent / unquote(target)).resolve()
++                ck(destination.exists(), 'local_link_closure', (label(doc), target, label(origin)))
++                LINKS.append({'document': label(doc), 'semantic_origin': label(origin), 'target': target,
++                              'resolved_target': label(destination)})
++    return {'documents': len(set(docs)), 'local_links': len(LINKS), 'explicit_frozen_link_rows': len(mapped)}
+ 
+ 
+ def main():
+-    ck(len(sys.argv) == 1 and sys.flags.optimize == 0 and sys.flags.isolated == 1
+-       and sys.flags.no_site == 1 and sys.dont_write_bytecode,
+-       'auditor_invocation', 'no arguments, -I -S -B and optimize zero')
++    if sys.argv[1:] != ['terminal-artifact-after-actual-views'] or Path(__file__).resolve() != PREPARATION / 'audit_p209.py':
++        raise RuntimeError('Require exact P209 prepared auditor and terminal-artifact-after-actual-views')
++    if not (sys.flags.optimize == 0 and sys.flags.isolated == sys.flags.no_site == 1 and sys.dont_write_bytecode
++            and Path(sys.executable).resolve() == Path('/usr/bin/python3.10') and dict(os.environ) == ENV
++            and sys.pycache_prefix and not Path(sys.pycache_prefix).exists() and Path.cwd() == ROOT):
++        raise RuntimeError('Require exact isolated system interpreter, minimal ENV, absent cache and workspace cwd')
+     began = datetime.now(timezone.utc).isoformat()
+-    read(Path(__file__).resolve())
++    manifest(PREPARATION)
+     runtime_before = actual_auditor_runtime()
+     history = load_aliases()
+-    whole = manifest(PAPER, count=2178)
++    whole = manifest(PAPER, 'PAPER_MANIFEST.sha256')
+     frozen = frozen_and_author()
+     accepted = reviews(history)
+     replays = strict_replays()
+     builds = terminal()
+-    views = pages_and_links()
+-    status = read(PAPER / 'PAPER_STATUS.md').decode()
+-    ck('P208' in status and 'HOLD_EXTERNAL' in status and 'ARTIFACT' in status,
+-       'lifecycle_boundary', 'P208 artifact-stage held lifecycle')
++    views = root_page_views(builds)
++    links = pages_and_links()
++    lifecycle = read(PAPER / 'ROOT_LIFECYCLE.md').decode()
++    ck(all(word in lifecycle for word in ('P209', 'HOLD_EXTERNAL', 'ARTIFACT_GATE_PENDING')) and
++       'P209_INTERNALLY_COMPLETE' not in lifecycle, 'separate_pending_root_lifecycle', 'not historical PAPER_STATUS')
+     runtime_after = actual_auditor_runtime()
+     before = dict(READS)
+     for path, wanted in before.items():
+         raw = Path(path).read_bytes()
+-        ck(wanted == {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw)},
+-           'final_every_read_input_recheck', path)
++        ck(wanted == {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw)}, 'final_every_read_input_recheck', path)
+     for path, resolved in HOST_RESOLUTIONS.items():
+         ck(str(Path(path).resolve(strict=True)) == resolved, 'final_host_resolution_recheck', path)
+-    print(json.dumps({'paper': 'P208', 'status': 'PASS_P208_TERMINAL_ARTIFACT_GATE',
+-        'started_utc': began, 'ended_utc': datetime.now(timezone.utc).isoformat(),
+-        'auditor_sha256': h(Path(__file__).resolve()), 'checks': sum(CHECKS.values()),
+-        'checks_by_section': dict(CHECKS), 'whole_paper_manifest_entries': len(whole),
+-        'frozen_and_author': frozen, 'accepted_reviews': accepted, 'root_strict_replays_reused': replays,
+-        'terminal_builds': builds, 'actual_root_views_and_links': views,
++    print(json.dumps({'schema': 'p209-terminal-artifact-audit-v1', 'paper': 'P209',
++        'status': 'PASS_P209_TERMINAL_ARTIFACT_GATE', 'started_utc': began,
++        'ended_utc': datetime.now(timezone.utc).isoformat(), 'auditor_sha256': h(Path(__file__).resolve()),
++        'checks': sum(CHECKS.values()), 'checks_by_section': dict(CHECKS),
++        'whole_paper_manifest_entries': len(whole), 'frozen_and_author': frozen, 'accepted_reviews': accepted,
++        'root_strict_replays_reused': replays, 'terminal_builds': builds, 'actual_root_views': views, 'link_summary': links,
+         'complete_manifests_validated': MANIFESTS, 'explicit_historical_aliases_used': USED_ALIASES,
+         'actual_auditor_runtime_before': runtime_before, 'actual_auditor_runtime_after': runtime_after,
+-        'host_path_resolutions_rechecked': HOST_RESOLUTIONS,
+-        'all_local_links_checked': LINKS, 'all_consumed_input_count': len(before),
+-        'all_consumed_inputs_rechecked': before,
++        'host_path_resolutions_rechecked': HOST_RESOLUTIONS, 'all_local_links_checked': LINKS,
++        'all_consumed_input_count': len(before), 'all_consumed_inputs_rechecked': before,
++        'lifecycle_role': 'ROOT_LIFECYCLE.md; original PAPER_STATUS.md and ROOT_ADOPTION.md immutable',
+         'fresh_mathematical_executions': 0, 'fresh_builds': 0, 'fresh_page_views': 0,
+-        'role': 'Read-only artifact infrastructure; not a third manuscript review or reviewer delta acceptance.',
+-        'limits': ['Root proof/source judgment remains controlling; this audit proves no all-size theorem.',
+-                   'Prior actual author/A/B strict pairs are reused only under the entire unchanged recorded input/runtime key.',
+-                   'Original failures, reviewer development qualifications and accepted documentary deltas remain original evidence.',
+-                   'Terminal known-resource inventories and sampled parent maps do not reconstruct a hermetic OS or unobserved child/transient loads.',
+-                   'Actual root final-page attestations are checked, not replaced by hash-based viewing.',
+-                   'Only P208 is audited; no five-paper batch completion, specialist review or external clearance is asserted.',
+-                   'Future lifecycle-only edits require a separately preserved follow-up audit, not replacement of this initial result.'],
++        'role': 'Read-only scoped artifact infrastructure, not a third review or an acceptance decision.',
++        'limits': ['Original proof/source judgment remains controlling; no new all-size theorem or novelty claim.',
++                   'Existing author/A/B pairs are reused with complete unchanged recorded inputs and settings.',
++                   'Actual root every-page attestations are checked, never synthesized from PNG existence.',
++                   'Known inventories and sampled process observations are not OS-hermetic or continuous/startup/grandchild tracing.',
++                   'Later lifecycle-only changes require exact old-byte preservation and a separate follow-up.',
++                   'This P209 paper-level gate is not the five-paper final gate or external clearance.'],
+         'owner': 'OWNER_AMBER', 'external_status': 'HOLD_EXTERNAL'}, sort_keys=True, indent=2))
+ 
+ 
+-if __name__ == '__main__':
+-    main()
++if __name__ == '__main__': main()
+
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/original_snapshot/record_p208_audit.py	2026-09-07 14:58:57.631121073 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/record_audit.py	2026-09-07 15:16:45.615233248 +0800
+@@ -1,4 +1,9 @@
+-"""Exclusive artifact-auditor execution records; no scientific code is run."""
++"""Future root-only documentary auditor recorder; adaptation of P208 recorder.
++
++No execution occurs during preparation. Each invocation creates one new
++P209 artifact attempt, preserves full streams even on a failed child, then
++seals only that attempt. Initial package reports/outer seals are root-owned.
++"""
+ from datetime import datetime, timezone
+ from hashlib import sha256
+ import json
+@@ -7,71 +12,68 @@
+ import subprocess
+ import sys
+ 
+-BASE = Path(__file__).resolve().parent
+-ROOT = BASE.parents[3]
+-SOURCE = BASE.parent / 'audit_p208.py'
+-ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C', 'TZ': 'UTC'}
+-
++PREP=Path(__file__).resolve().parent
++ROOT=Path('/root/autodl-tmp/symbolic_dynamics')
++BASE=ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact'
++SOURCE=PREP/'audit_p209.py'
++ENV={'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC'}
+ 
+ def info(path):
+-    raw = Path(path).read_bytes()
+-    return {'bytes': len(raw), 'sha256': sha256(raw).hexdigest()}
+-
++    raw=Path(path).read_bytes()
++    return {'bytes':len(raw),'sha256':sha256(raw).hexdigest()}
+ 
+-def save(path, raw):
+-    with Path(path).open('xb') as stream:
+-        stream.write(raw)
+-
+-
+-def dump(path, value):
+-    save(path, (json.dumps(value, sort_keys=True, indent=2) + '\n').encode())
++def save(path,raw):
++    with Path(path).open('xb') as stream:stream.write(raw)
+ 
++def dump(path,value):
++    save(path,(json.dumps(value,sort_keys=True,indent=2)+'\n').encode())
+ 
+ def main():
+-    if len(sys.argv) != 2 or not sys.argv[1].replace('_', '').isalnum():
+-        raise RuntimeError('Require one safe new attempt label')
+-    if sys.flags.optimize or not (sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode):
+-        raise RuntimeError('Require -I -S -B and optimization zero')
+-    target = BASE / sys.argv[1]
+-    target.mkdir(exist_ok=False)
+-    save(target / 'executed_auditor_snapshot.py', SOURCE.read_bytes())
+-    save(target / 'executed_recorder_snapshot.py', Path(__file__).read_bytes())
+-    before = {'auditor': info(SOURCE), 'recorder': info(__file__),
+-              'python': info(Path(sys.executable).resolve()),
+-              'paper_manifest': info(ROOT / 'papers/208-original-snapshot-triangulation-sweeps/SHA256SUMS')}
+-    dump(target / 'INPUTS_BEFORE.json', before)
+-    cache = target / 'unused_pycache'
+-    argv = [str(Path(sys.executable).resolve()), '-I', '-S', '-B', '-X',
+-            'pycache_prefix=' + str(cache), str(SOURCE)]
+-    started = datetime.now(timezone.utc).isoformat()
+-    dump(target / 'ATTEMPT.json', {'argv': argv, 'cwd': str(ROOT), 'environment': ENV,
+-                                 'started_utc': started, 'status': 'ATTEMPTED'})
+-    child = subprocess.run(argv, cwd=ROOT, env=ENV, capture_output=True, check=False)
+-    for name, raw in [('audit.stdout', child.stdout), ('audit.stderr', child.stderr)]:
+-        save(target / name, raw)
+-    after = {'auditor': info(SOURCE), 'recorder': info(__file__),
+-             'python': info(Path(sys.executable).resolve()),
+-             'paper_manifest': info(ROOT / 'papers/208-original-snapshot-triangulation-sweeps/SHA256SUMS')}
+-    dump(target / 'INPUTS_AFTER.json', after)
+-    row = {'argv': argv, 'cwd': str(ROOT), 'environment': ENV, 'started_utc': started,
+-           'ended_utc': datetime.now(timezone.utc).isoformat(), 'exit_code': child.returncode,
+-           'unused_cache_absent': not cache.exists(), 'inputs_unchanged': before == after,
+-           'stdout': info(target / 'audit.stdout'), 'stderr': info(target / 'audit.stderr'),
+-           'role': 'Actual documentary artifact audit execution; no new science, build or views.'}
+-    dump(target / 'COMMAND.json', row)
+-    rows = [(info(p)['sha256'], p.relative_to(target).as_posix())
+-            for p in sorted(target.rglob('*')) if p.is_file()]
+-    save(target / 'SHA256SUMS', ''.join(d + '  ' + n + '\n' for d, n in rows).encode())
+-    print(json.dumps(row, indent=2, sort_keys=True))
+-    if child.returncode:
+-        print(child.stderr.decode(), file=sys.stderr)
+-    elif before != after or cache.exists():
+-        raise RuntimeError('Post-audit recorder input/cache check failed')
++    if len(sys.argv)!=2 or not sys.argv[1].startswith('initial_') or not sys.argv[1][8:].isdigit():
++        raise RuntimeError('Require one new initial_N label')
++    if not(sys.flags.optimize==0 and sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode
++           and dict(os.environ)==ENV and Path.cwd()==ROOT and Path(sys.executable).resolve()==Path('/usr/bin/python3.10')
++           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation'):
++        raise RuntimeError('Require exact prepared path, system interpreter, -I -S -B, clean ENV and workspace cwd')
++    required=[ROOT/'papers/209-ordered-fibre-threading/PAPER_MANIFEST.sha256',
++              ROOT/'papers/209-ordered-fibre-threading/ROOT_LIFECYCLE.md',
++              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ROOT_VIEWS.actual.json',
++              PREP/'SHA256SUMS',SOURCE,Path(__file__),Path(sys.executable).resolve()]
++    before={str(p):info(p) for p in required}
++    BASE.mkdir(exist_ok=True)
++    target=BASE/sys.argv[1];target.mkdir(exist_ok=False)
++    save(target/'executed_auditor_snapshot.py',SOURCE.read_bytes())
++    save(target/'executed_recorder_snapshot.py',Path(__file__).read_bytes())
++    dump(target/'INPUTS_BEFORE.json',before)
++    cache=target/'unused_pycache'
++    argv=['/usr/bin/python3.10','-I','-S','-B','-X','pycache_prefix='+str(cache),str(SOURCE),
++          'terminal-artifact-after-actual-views']
++    attempt={'argv':argv,'cwd':str(ROOT),'environment':ENV,'started_utc':datetime.now(timezone.utc).isoformat(),
++             'status':'ATTEMPTED','exit_code':None}
++    dump(target/'ATTEMPT.json',attempt)
++    failure=None
++    try:
++        child=subprocess.run(argv,cwd=ROOT,env=ENV,capture_output=True,check=False)
++        exit_code,stdout,stderr=child.returncode,child.stdout,child.stderr
++    except OSError as exc:
++        failure=repr(exc);exit_code=127;stdout=b'';stderr=str(exc).encode()
++    save(target/'audit.stdout',stdout);save(target/'audit.stderr',stderr)
++    after={str(p):info(p) for p in required};dump(target/'INPUTS_AFTER.json',after)
++    row={**attempt,'status':'COMPLETED' if failure is None else 'SPAWN_FAILED','failure':failure,
++         'ended_utc':datetime.now(timezone.utc).isoformat(),'exit_code':exit_code,
++         'unused_cache_absent':not cache.exists(),'inputs_unchanged':before==after,
++         'stdout':info(target/'audit.stdout'),'stderr':info(target/'audit.stderr'),
++         'role':'Actual documentary auditor attempt only; no new mathematical/build/view execution.'}
++    dump(target/'COMMAND.json',row)
++    files=[p for p in sorted(target.rglob('*')) if p.is_file()]
++    save(target/'SHA256SUMS',''.join(info(p)['sha256']+'  '+p.relative_to(target).as_posix()+'\n' for p in files).encode())
++    print(json.dumps(row,indent=2,sort_keys=True))
++    if exit_code: print(stderr.decode(errors='replace'),file=sys.stderr)
++    elif before!=after or cache.exists():raise RuntimeError('Recorder inputs/cache changed; attempt retained')
+     else:
+-        result = json.loads(child.stdout)
+-        print(json.dumps({k: result[k] for k in ('status', 'checks', 'all_consumed_input_count')}, sort_keys=True))
+-    raise SystemExit(child.returncode)
+-
++        result=json.loads(stdout)
++        assert result['status']=='PASS_P209_TERMINAL_ARTIFACT_GATE'
++        print(json.dumps({k:result[k] for k in ('status','checks','all_consumed_input_count')},sort_keys=True))
++    raise SystemExit(exit_code)
+ 
+-if __name__ == '__main__':
+-    main()
++if __name__=='__main__':main()
+
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/original_snapshot/p208_lifecycle_audit.py	2026-09-07 14:58:57.631121073 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/lifecycle_audit.py	2026-09-07 15:27:02.512053474 +0800
+@@ -1,10 +1,8 @@
+ #!/usr/bin/env python3
+-"""P208 lifecycle-only follow-up; original terminal auditor is never executed.
+-
+-The two original paper-path/hash aliases are exact and fixed. Initial report,
+-all attempted executions, accepted reviews, scientific inputs and builds stay
+-unchanged. Only this package's own evolving outer seal is replaced at closure,
+-after its exact initial bytes have been preserved.
++"""P209 lifecycle-only adaptation of P208's accepted follow-up infrastructure.
++Prepared source is not execution or acceptance. Actual future root acceptance
++and exact pre-update physical preservation are required; no old auditor,
++scientific producer or builder is imported or executed.
+ """
+ from collections import Counter
+ from datetime import datetime, timezone
+@@ -13,443 +11,617 @@
+ import os
+ from pathlib import Path
+ import re
+-import subprocess
+ import sys
++import sysconfig
++import subprocess
++from urllib.parse import unquote
+ 
+-BASE = Path(__file__).resolve().parent
+-ROOT = BASE.parents[3]
++ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ BATCH = ROOT / 'docs/papers204_208_sequence'
+-PAPER = ROOT / 'papers/208-original-snapshot-triangulation-sweeps'
+-WORK = BASE / 'lifecycle_01'
+-SOURCE = Path(__file__).resolve()
+-ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C', 'TZ': 'UTC'}
+-INITIAL_SEAL = 'e3b64033ca95f890e87f1ca7fa669077212fd924277febfa9bc97d71cd74c1b1'
+-INITIAL_STDOUT = '394f79aa4a5f100430014a1fcc290b2e30523708ec5a2db396d1b6a176cfd72c'
+-INITIAL_AUDITOR = '086170c8a4784ed3dc560a7fc19ff0de0fbfd22f6afc0ea7ec18fd0fa53c36d8'
+-OLD_STATUS = '1baa2adda556eba4acc1edeb9b9d4bf3974214b507333db93c33f9a18be58f05'
+-OLD_PAPER_SEAL = '926afeafef8eb2e2d5d642fb1b5f9b48d81fa7d7f1dc9bdabd42e155031a93dc'
+-NEW_STATUS = '31b404fa539c5b67c02395d30f5a4aa677bd82f77d8d7df76a85d82ac0d07e01'
+-NEW_PAPER_SEAL = '0cb42abfb9e639920a973d412ffc7ab2e418df4c26819c6a0d4719007a273e46'
+-ALIASES = {
+-    str(PAPER / 'PAPER_STATUS.md'): (OLD_STATUS, BASE / 'lifecycle_before/PAPER_STATUS.md'),
+-    str(PAPER / 'SHA256SUMS'): (OLD_PAPER_SEAL, BASE / 'lifecycle_before/PAPER_SHA256SUMS'),
+-}
+-NEW_DOCUMENTS = (PAPER / 'PAPER_STATUS.md', PAPER / 'SHA256SUMS',
+-    BATCH / 'P208_FINAL_QA.md', BATCH / 'qa/P208_TERMINAL_ROOT_INSPECTION.md',
+-    BATCH / 'qa/P208_TERMINAL_ROOT_INSPECTION.actual.json')
+-TEX_ROOTS = tuple(map(Path, ('/usr/share/texlive/texmf-dist/tex', '/usr/share/texlive/texmf-dist/fonts',
+-    '/usr/share/texlive/texmf-dist/web2c', '/usr/share/texlive/texmf-dist/bibtex', '/usr/share/texmf',
++PAPER = ROOT / 'papers/209-ordered-fibre-threading'
++A, B = [BATCH / ('reviews/p209_' + x) for x in ('a', 'b')]
++FINAL = PAPER / 'qa_final'
++PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'
++OUT = BATCH / 'qa/p209_terminal_artifact'
++TERMINAL_PREP = BATCH / 'qa/p209_terminal_preparation'
++TERMINAL_LAUNCH = BATCH / 'qa/root_replays/p209_terminal_strict/launcher_terminal_pair_01'
++CHECKS, READS, ALIASES, USED_ALIASES, HOST_RESOLUTIONS = Counter(), {}, {}, {}, {}
++MANIFESTS, LINKS = [], []
++ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
++BUILD_ENV = {**ENV, 'SOURCE_DATE_EPOCH': '1788652800', 'FORCE_SOURCE_DATE': '1',
++             'openin_any': 'p', 'openout_any': 'p'}
++TEX_ROOTS = tuple(Path(p) for p in ('/usr/share/texlive/texmf-dist', '/usr/share/texmf',
+     '/var/lib/texmf', '/etc/texmf', '/usr/local/share/texmf', '/root/texmf',
+-    '/root/.texlive2021/texmf-config', '/root/.texlive2021/texmf-var')))
+-CONFIG_ROOTS = tuple(map(Path, ('/etc/ld.so.conf.d', '/usr/share/fonts', '/etc/fonts',
++    '/root/.texlive2021/texmf-config', '/root/.texlive2021/texmf-var'))
++LIB_ROOTS = tuple(Path(p) for p in ('/usr/lib/x86_64-linux-gnu', '/usr/lib64', '/usr/local/lib'))
++CONFIG_ROOTS = tuple(Path(p) for p in ('/etc/ld.so.conf.d', '/usr/share/fonts', '/etc/fonts',
+     '/var/cache/fontconfig', '/usr/share/fontconfig', '/usr/lib/locale/C.utf8',
+-    '/usr/lib/x86_64-linux-gnu/gconv', '/usr/share/poppler')))
+-CHECKS, READS, RESOLUTIONS = Counter(), {}, {}
++    '/usr/lib/x86_64-linux-gnu/gconv', '/usr/lib/gconv', '/usr/share/poppler',
++    '/usr/local/share/fonts', '/etc/xdg/fontconfig', '/etc/profile.d', '/root/.fonts',
++    '/root/.fontconfig', '/root/.fonts.conf.d', '/root/.config/fontconfig',
++    '/root/.cache/fontconfig', '/root/.local/share/fonts'))
++TERMINAL_TOOLS = tuple(Path('/usr/bin') / n for n in ('pdflatex', 'bibtex', 'kpsewhich',
++    'pdfinfo', 'pdffonts', 'pdftotext', 'pdftoppm', 'ldd', 'cmp')) + tuple(
++    Path(p) for p in ('/bin/bash', '/bin/sh', '/usr/bin/env', '/usr/bin/python3.10'))
++SOURCE_NAMES = ('main.tex', 'math_commands.tex', 'references.bib',
++    'sections/00_abstract.tex', 'sections/01_setup.tex', 'sections/02_recurrence.tex',
++    'sections/03_inverse.tex', 'sections/04_scope.tex')
++
++def ck(test, section, detail):
++    CHECKS[section] += 1
++    if not test:
++        raise AssertionError((section, detail))
+ 
+ 
+-def ck(ok, kind, detail):
+-    CHECKS[kind] += 1
+-    if not ok:
+-        raise AssertionError((kind, detail))
++def label(path):
++    return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
+ 
+ 
+ def read(path):
+     path = Path(path)
+     ck(path.is_file(), 'regular_file', str(path))
+     if path.is_relative_to(ROOT):
+-        ck(not path.is_symlink(), 'workspace_not_symlink', str(path))
++        ck(not path.is_symlink(), 'regular_workspace_file', label(path))
+     else:
+         resolved = str(path.resolve(strict=True))
+-        ck(str(path) not in RESOLUTIONS or RESOLUTIONS[str(path)] == resolved,
++        ck(str(path) not in HOST_RESOLUTIONS or HOST_RESOLUTIONS[str(path)] == resolved,
+            'host_resolution_stability', str(path))
+-        RESOLUTIONS[str(path)] = resolved
++        HOST_RESOLUTIONS[str(path)] = resolved
+     raw = path.read_bytes()
+     value = {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw)}
+-    ck(str(path) not in READS or READS[str(path)] == value, 'read_stability', str(path))
+-    READS[str(path)] = value
++    key = str(path)
++    ck(key not in READS or READS[key] == value, 'read_stability', key)
++    READS[key] = value
+     return raw
+ 
+ 
+-def info(path):
+-    raw = read(path)
+-    return {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw)}
+-
+-
+ def j(path):
+     return json.loads(read(path))
+ 
+ 
+-def pin(path, wanted):
+-    got = info(path)
+-    if isinstance(wanted, str):
+-        ck(got['sha256'] == wanted, 'exact_hash', str(path))
+-    else:
+-        ck(got['sha256'] == wanted['sha256'], 'exact_hash', str(path))
+-        if 'bytes' in wanted:
+-            ck(got['bytes'] == wanted['bytes'], 'exact_recorded_size', str(path))
++def h(path):
++    return sha256(read(path)).hexdigest()
+ 
+ 
+-def save(path, raw):
+-    with Path(path).open('xb') as stream:
+-        stream.write(raw)
++def safe(base, rel):
++    p = Path(rel)
++    ck(bool(p.parts) and not p.is_absolute() and '..' not in p.parts,
++       'safe_relative_reference', (str(base), rel))
++    return base / p
+ 
+ 
+-def dump(path, value):
+-    save(path, (json.dumps(value, sort_keys=True, indent=2) + '\n').encode())
++def pin(path, value, historical=False):
++    path = Path(path)
++    wanted = value if isinstance(value, str) else value['sha256']
++    selected = ALIASES.get((str(path), wanted), path) if historical else path
++    if selected != path:
++        USED_ALIASES[str(path) + ' @ ' + wanted] = str(selected)
++    raw = read(selected)
++    ck(sha256(raw).hexdigest() == wanted, 'referent_hash', (str(path), str(selected)))
++    if isinstance(value, dict) and 'bytes' in value:
++        ck(len(raw) == value['bytes'], 'referent_size', str(path))
++    return selected
+ 
+ 
+-def rows(path):
+-    result = {}
++def manifest_rows(path):
++    rows = {}
+     for line in read(path).decode().splitlines():
+         match = re.fullmatch(r'([0-9a-f]{64})  (.+)', line)
+         ck(match is not None, 'manifest_syntax', str(path))
+-        digest, name = match.groups(); rel = Path(name)
+-        ck(rel.parts and not rel.is_absolute() and '..' not in rel.parts and name not in result,
+-           'manifest_safe_unique', (str(path), name))
+-        result[name] = digest
+-    return result
++        digest, rel = match.groups()
++        safe(path.parent, rel)
++        ck(rel not in rows, 'manifest_duplicate', (str(path), rel))
++        rows[rel] = digest
++    return rows
+ 
+ 
+ def physical(base):
+-    result = set()
+-    for path in base.rglob('*'):
+-        ck(not path.is_symlink(), 'owned_no_symlink', str(path))
+-        if path.is_file(): result.add(path.relative_to(base).as_posix())
+-    return result
++    files = set()
++    for p in base.rglob('*'):
++        ck(not p.is_symlink(), 'package_no_symlink', label(p))
++        if p.is_file():
++            files.add(p.relative_to(base).as_posix())
++    return files
+ 
+ 
+ def manifest(base, name='SHA256SUMS', complete=True, count=None):
+-    declared = rows(base / name)
+-    ck(name not in declared, 'manifest_nonself', str(base))
+-    if count is not None: ck(len(declared) == count, 'manifest_count', (str(base), count))
+-    if complete: ck(set(declared) == physical(base) - {name}, 'manifest_complete', str(base))
+-    for rel, digest in declared.items(): pin(base / rel, digest)
+-    return declared
+-
+-
+-def initial_payloads():
+-    pin(WORK / 'INITIAL_PACKAGE_SHA256SUMS', INITIAL_SEAL)
+-    declared = rows(WORK / 'INITIAL_PACKAGE_SHA256SUMS')
+-    ck(len(declared) == 54 and 'SHA256SUMS' not in declared, 'initial_package_count', '54 nonself payloads')
+-    for name, digest in declared.items(): pin(BASE / name, digest)
+-    ck(read(WORK / 'INITIAL_REPORT.md') == read(BASE / 'REPORT.md'), 'initial_report_unchanged', 'exact archived bytes')
+-    pin(BASE / 'initial_05/audit.stdout', INITIAL_STDOUT)
+-    pin(BASE.parent / 'audit_p208.py', INITIAL_AUDITOR)
+-    result = j(BASE / 'initial_05/audit.stdout')
+-    ck(result['status'] == 'PASS_P208_TERMINAL_ARTIFACT_GATE' and result['checks'] == 2232943
+-       and result['all_consumed_input_count'] == 115334, 'original_actual_initial_pass', 'exact record')
+-    return result
++    rows = manifest_rows(base / name)
++    ck(name not in rows, 'manifest_nonself', label(base))
++    if count is not None:
++        ck(len(rows) == count, 'manifest_exact_count', (label(base), len(rows), count))
++    if complete:
++        ck(set(rows) == physical(base) - {name}, 'manifest_full_coverage', label(base))
++    for rel, digest in rows.items():
++        pin(safe(base, rel), digest)
++    MANIFESTS.append({'base': label(base), 'name': name, 'entries': len(rows),
++                      'complete_nonself': complete, 'sha256': h(base / name)})
++    return rows
++
++
++def alias(original, preserved, value):
++    original, preserved = Path(original), Path(preserved)
++    wanted = value if isinstance(value, str) else value['sha256']
++    pin(preserved, value)
++    key = (str(original), wanted)
++    if key in ALIASES:
++        ck(read(ALIASES[key]) == read(preserved), 'alias_duplicate_exact_bytes', key)
++    else:
++        ALIASES[key] = preserved
+ 
+ 
+-def paper_change():
+-    pin(PAPER / 'PAPER_STATUS.md', NEW_STATUS); pin(PAPER / 'SHA256SUMS', NEW_PAPER_SEAL)
+-    pin(BASE / 'lifecycle_before/PAPER_STATUS.md', OLD_STATUS)
+-    pin(BASE / 'lifecycle_before/PAPER_SHA256SUMS', OLD_PAPER_SEAL)
+-    old = rows(BASE / 'lifecycle_before/PAPER_SHA256SUMS')
+-    current = manifest(PAPER, count=2178)
+-    ck(set(old) == set(current) and len(old) == 2178, 'unchanged_full_paper_directory_set', '2178 original paths')
+-    changed = [name for name in old if old[name] != current[name]]
+-    ck(changed == ['PAPER_STATUS.md'] and old['PAPER_STATUS.md'] == OLD_STATUS
+-       and current['PAPER_STATUS.md'] == NEW_STATUS, 'exact_one_payload_change', changed)
+-    old_raw = read(BASE / 'lifecycle_before/PAPER_SHA256SUMS')
+-    expected = old_raw.replace((OLD_STATUS + '  PAPER_STATUS.md\n').encode(),
+-                               (NEW_STATUS + '  PAPER_STATUS.md\n').encode())
+-    ck(expected != old_raw and read(PAPER / 'SHA256SUMS') == expected,
+-       'literal_single_manifest_line_change', 'same order/names/all other bytes')
+-    return {'payload_count': 2178, 'changed_payloads': changed,
+-            'old_status_sha256': OLD_STATUS, 'new_status_sha256': NEW_STATUS,
+-            'old_manifest_sha256': OLD_PAPER_SEAL, 'new_manifest_sha256': NEW_PAPER_SEAL}
++def maps(record, historical=False):
++    for name, value in record.items():
++        pin(Path(name) if Path(name).is_absolute() else ROOT / name, value, historical)
+ 
+ 
+-def prepare():
+-    # Exactly one new implementation file can precede initial preservation.
+-    pin(BASE / 'SHA256SUMS', INITIAL_SEAL)
+-    initial = rows(BASE / 'SHA256SUMS')
+-    ck(len(initial) == 54, 'initial_preservation_count', 'initial complete set')
+-    ck(physical(BASE) == set(initial) | {'SHA256SUMS', SOURCE.name},
+-       'initial_preservation_exact_scope', 'only this new scoped helper precedes snapshots')
+-    for name, value in initial.items(): pin(BASE / name, value)
+-    WORK.mkdir(exist_ok=False)
+-    save(WORK / 'INITIAL_PACKAGE_SHA256SUMS', read(BASE / 'SHA256SUMS'))
+-    save(WORK / 'INITIAL_REPORT.md', read(BASE / 'REPORT.md'))
+-    save(WORK / 'prepared_source_snapshot.py', read(SOURCE))
+-    before = {}
+-    for path in NEW_DOCUMENTS:
+-        value = info(path)
+-        target = WORK / 'root_context' / path.relative_to(ROOT)
+-        target.parent.mkdir(parents=True, exist_ok=True)
+-        save(target, read(path)); pin(target, value)
+-        before[str(path)] = {'snapshot': str(target.relative_to(BASE)), **value}
+-    original = initial_payloads()
+-    change = paper_change()
+-    root = j(BATCH / 'qa/P208_TERMINAL_ROOT_INSPECTION.actual.json')
+-    ck(root['actual_exit_code'] == 0 and root['result']['status'] ==
+-       'ROOT_P208_INITIAL_TERMINAL_ARTIFACT_ORIGINAL_INSPECTION_PASS', 'actual_root_acceptance', 'original receipt')
+-    ck(root['result']['initial_package_seal']['sha256'] == INITIAL_SEAL and
+-       root['result']['actual_stdout']['sha256'] == INITIAL_STDOUT, 'root_acceptance_exact_initial', 'same package/result')
+-    ledger = original['all_consumed_inputs_rechecked']
+-    for path, (old_hash, target) in ALIASES.items():
+-        ck(ledger[path]['sha256'] == old_hash, 'fixed_alias_old_key', path)
+-        pin(target, ledger[path])
+-    dump(WORK / 'ROOT_DOCUMENTS_BEFORE.json', before)
+-    receipt = {'status': 'PASS_LIFECYCLE_PREPARATION_NOT_FINAL_AUDIT',
+-               'utc': datetime.now(timezone.utc).isoformat(), 'initial_payloads_preserved': 54,
+-               'initial_seal_sha256': INITIAL_SEAL, 'initial_report': info(BASE / 'REPORT.md'),
+-               'source': info(SOURCE), 'paper_change': change, 'new_document_count': len(before),
+-               'exact_aliases': {p: {'old_sha256': v[0], 'preserved_path': str(v[1])} for p, v in ALIASES.items()}}
+-    dump(WORK / 'PREPARATION.json', receipt)
+-    print(json.dumps(receipt, sort_keys=True, indent=2))
++def config(record):
++    for name, row in record.items():
++        p = Path(name)
++        ck(p.exists() == row['exists'], 'configuration_existence', name)
++        if 'resolved' in row:
++            ck(str(p.resolve()) == row['resolved'], 'configuration_resolution', name)
++        if 'is_file' in row:
++            ck(p.is_file() == row['is_file'], 'configuration_file_kind', name)
++        if 'sha256' in row and row['sha256'] is not None:
++            pin(p, row)
++        elif 'sha256' in row:
++            ck(not p.is_file(), 'configuration_explicit_absent_hash', name)
++
++
++def pair_map(base, stem, historical=False):
++    before = j(base / (stem + '_BEFORE.json'))
++    ck(before == j(base / (stem + '_AFTER.json')), 'exact_before_after_map', (label(base), stem))
++    maps(before, historical)
++    return before
++
++
++def command(base, row, expected_env, allow_stderr=False):
++    ck(row['exit_code'] == 0 and row['environment'] == expected_env,
++       'actual_command_exit_environment', (label(base), row.get('label', row.get('argv'))))
++    argv = row['argv']
++    ck(isinstance(argv, list) and argv and '-O' not in argv and '-OO' not in argv,
++       'actual_command_argv', label(base))
++    for stream in ('stdout', 'stderr'):
++        entry = row[stream]
++        pin(safe(base, entry['path']), entry)
++    if not allow_stderr:
++        ck(read(base / row['stderr']['path']) == b'', 'actual_empty_stderr', argv[0])
++    if row.get('label'):
++        ck(j(base / (row['label'] + '.command.json')) == row,
++           'actual_embedded_command_equality', row['label'])
++    return argv
+ 
+ 
+-def validate_config(record):
++def actual_auditor_runtime():
++    modules, mapped = {}, {}
++    for name, module in sorted(sys.modules.items()):
++        original = getattr(module, '__file__', None)
++        if original and Path(original).is_file():
++            path = Path(original).resolve()
++            ck(path.suffix != '.pyc', 'auditor_source_module_not_bytecode', name)
++            modules[name] = {'path': str(path), 'sha256': h(path), 'bytes': len(read(path))}
++    for line in Path('/proc/self/maps').read_text().splitlines():
++        fields = line.split(None, 5)
++        if len(fields) == 6 and fields[5].startswith('/'):
++            path = Path(fields[5]).resolve()
++            mapped[str(path)] = {'sha256': h(path), 'bytes': len(read(path))}
++    ck(dict(os.environ) == ENV and not Path(sys.pycache_prefix).exists(),
++       'auditor_exact_actual_environment_cache', 'controlled actual artifact audit')
++    return {'modules': modules, 'mapped_files': mapped, 'flags': repr(sys.flags),
++            'executable': str(Path(sys.executable).resolve()), 'sys_path': sys.path,
++            'environment': dict(os.environ), 'pycache_prefix': sys.pycache_prefix,
++            'scope': 'Current artifact-auditor file-backed maps; samples, not continuous tracing.'}
++
++def rich_pin(path, value, historical=False):
++    selected = pin(path, value, historical)
++    if isinstance(value, dict) and selected == Path(path):
++        if 'resolved' in value:
++            ck(str(selected.resolve()) == value['resolved'], 'recorded_path_resolution', str(path))
++        if 'symlink' in value:
++            ck((os.readlink(selected) if selected.is_symlink() else None) == value['symlink'],
++               'recorded_symlink_value', str(path))
++    return selected
++
++
++def exact_map(record, historical=True):
+     for name, value in record.items():
+-        path = Path(name)
+-        ck(path.exists() == value['exists'], 'config_existence', name)
+-        if 'resolved' in value: ck(str(path.resolve()) == value['resolved'], 'config_resolution', name)
+-        if 'is_file' in value: ck(path.is_file() == value['is_file'], 'config_kind', name)
+-        if value.get('sha256') is not None: pin(path, value)
+-        elif 'sha256' in value: ck(not path.is_file(), 'config_null_hash_absence', name)
++        rich_pin(Path(name) if Path(name).is_absolute() else ROOT / name, value, historical)
+ 
+ 
+-def runtime_and_resource_key(original):
+-    for role in ('author', 'a', 'b'):
+-        base = BATCH / ('qa/root_replays/p208_' + role + '_strict')
+-        conf = j(base / 'CONFIGURATION_BEFORE.json')
+-        ck(conf == j(base / 'CONFIGURATION_AFTER.json'), 'strict_recorded_config_pair', role)
+-        validate_config(conf)
+-    final = PAPER / 'qa_final'
+-    conf = j(final / 'CONFIGURATION_BEFORE.json')
+-    ck(conf == j(final / 'CONFIGURATION_AFTER.json'), 'terminal_recorded_config_pair', 'exact')
+-    validate_config(conf)
+-    for group in j(BATCH / 'reviews/p208_b/delta/CONFIGURATION_BEFORE.json').values(): validate_config(group)
+-    tex = j(final / 'TEX_INVENTORY_BEFORE.json')
+-    ck(tex == j(final / 'TEX_INVENTORY_AFTER.json'), 'terminal_recorded_tex_pair', 'exact')
+-    current_tex = {str(p.resolve()) for root in TEX_ROOTS if root.is_dir() for p in root.rglob('*') if p.is_file()}
+-    ck(current_tex == set(tex), 'complete_current_tex_names', 'no newly added/removed resource path')
+-    stdlib = Path('/root/miniconda3/lib/python3.12'); python = Path('/root/miniconda3/bin/python3.12')
+-    toolpaths = [Path('/usr/bin') / n for n in ('pdflatex', 'bibtex', 'kpsewhich', 'pdfinfo',
+-        'pdffonts', 'pdftotext', 'pdftoppm', 'ldd', 'cmp')] + [Path('/bin/bash'), python]
+-    current_runtime = {str(p.resolve()) for p in stdlib.rglob('*') if p.is_file()
+-                       and 'site-packages' not in p.parts and '__pycache__' not in p.parts} | {str(p.resolve()) for p in toolpaths}
+-    runtime = j(final / 'RUNTIME_BEFORE.json')
+-    ck(runtime == j(final / 'RUNTIME_AFTER.json') and current_runtime == set(runtime),
+-       'complete_current_runtime_names', 'full non-site/non-bytecode stdlib and exact tools')
+-    candidates = set(CONFIG_ROOTS + TEX_ROOTS) | set(toolpaths)
+-    candidates.update(map(Path, ('/etc/ld.so.cache', '/etc/ld.so.conf', '/etc/ld.so.preload',
+-        '/lib/ld-linux.so.2', '/lib64/ld-linux-x86-64.so.2', '/libx32/ld-linux-x32.so.2',
+-        '/root/miniconda3/lib/python312.zip', '/etc/locale.conf', '/etc/default/locale')))
++def exact_pair(base, before, after, count=None, historical=True):
++    first = j(base / before)
++    ck(first == j(base / after), 'entire_recorded_before_after_equal', (label(base), before, after))
++    if count is not None:
++        ck(len(first) == count, 'exact_recorded_input_count', (label(base), count))
++    exact_map(first, historical)
++    return first
++
++
++def declared_runtime_names(build=False):
++    stdlib = Path('/usr/lib/python3.10')
++    paths = set()
++    for directory, folders, files in os.walk(stdlib):
++        folders[:] = [f for f in folders if f not in {'site-packages', 'dist-packages', '__pycache__'}]
++        paths.update(str(Path(directory) / n) for n in files if not n.endswith(('.pyc', '.pyo')))
++    for root in LIB_ROOTS:
++        if root.is_dir():
++            iterator = root.glob('*') if root == Path('/usr/local/lib') else root.rglob('*')
++            paths.update(str(p) for p in iterator if p.is_file() and (p.name.endswith('.so') or '.so.' in p.name))
++    tools = ['/usr/bin/env', '/usr/bin/cmp', '/usr/bin/ldd', '/bin/bash', '/bin/sh', '/usr/bin/python3.10']
++    if build: tools += ['/usr/bin/' + n for n in ('pdflatex', 'bibtex', 'kpsewhich', 'pdfinfo', 'pdffonts', 'pdftotext', 'pdftoppm')]
++    paths.update(tools)
++    return paths
++
++
++def terminal_resource_key():
++    runtime = exact_pair(FINAL, 'RUNTIME_BEFORE.json', 'RUNTIME_AFTER.json')
++    names = {str(Path(p).resolve()) for p in declared_runtime_names(build=True)}
++    ck(names == set(runtime), 'terminal_full_runtime_membership', 'complete declared stdlib/potential OS libraries/fixed tools')
++    tex = exact_pair(FINAL, 'TEX_INVENTORY_BEFORE.json', 'TEX_INVENTORY_AFTER.json')
++    names = {str(p.resolve()) for root in TEX_ROOTS if root.is_dir() for p in root.rglob('*') if p.is_file()}
++    ck(names == set(tex), 'terminal_full_tex_membership', 'all known resource names, not old hashes alone')
++    conf = j(FINAL / 'CONFIGURATION_BEFORE.json')
++    ck(conf == j(FINAL / 'CONFIGURATION_AFTER.json'), 'terminal_configuration_interval', 'exact')
++    config(conf)
++    # Exact configuration membership is copied structurally from the fixed
++    # terminal builder, using this same system interpreter/sysconfig only.
++    candidates = set(CONFIG_ROOTS + TEX_ROOTS + TERMINAL_TOOLS)
++    candidates.update(Path(p) for p in ('/etc/ld.so.cache', '/etc/ld.so.conf', '/etc/ld.so.preload',
++        '/lib/ld-linux.so.2', '/lib64/ld-linux-x86-64.so.2', '/libx32/ld-linux-x32.so.2'))
++    stdlib = Path(sysconfig.get_path('stdlib')).resolve(); python = Path('/usr/bin/python3.10')
++    candidates.add(stdlib.parent / ('python%d%d.zip' % sys.version_info[:2]))
+     candidates.update([python.parent / 'pyvenv.cfg', python.parent.parent / 'pyvenv.cfg',
+-                       python.with_name(python.name + '._pth'), python.with_name('python._pth')])
++        python.with_name(python.name + '._pth'), python.with_name('python._pth'),
++        Path('/etc/locale.conf'), Path('/etc/default/locale'), Path('/etc/nsswitch.conf'), Path('/etc/localtime'),
++        Path('/etc/bash.bashrc'), Path('/etc/profile'), Path('/usr/lib/locale/locale-archive'), Path('/etc/passwd'), Path('/etc/group'),
++        Path('/root/.fonts.conf'), Path('/root/.config/fontconfig/fonts.conf'), Path('/etc/fonts/local.conf'),
++        Path(sysconfig.get_makefile_filename()), Path(sysconfig.get_config_h_filename())])
++    pth = {'python._pth', 'python3._pth', 'python%d%d._pth' % sys.version_info[:2],
++           'python%d.%d._pth' % sys.version_info[:2], python.name + '._pth'}
++    for directory in {python.parent, Path(sys.executable).parent, stdlib.parent}:
++        candidates.update(directory / n for n in pth)
++    for name in ('LDLIBRARY', 'INSTSONAME'):
++        value = sysconfig.get_config_var(name)
++        if value: candidates.add(stdlib.parent / (value + '._pth'))
++    ldd = read(Path('/usr/bin/ldd')).decode(); match = re.search(r'^RTLDLIST="([^"]+)"', ldd, re.M)
++    ck(ldd.splitlines()[0] == '#!/bin/bash' and match is not None, 'terminal_ldd_loader_source', 'known shell/script')
++    candidates.update(Path(p) for p in match.group(1).split())
+     candidates.update(p for root in CONFIG_ROOTS if root.is_dir() for p in root.rglob('*') if p.is_file())
+-    ck(set(map(str, candidates)) == set(conf), 'complete_current_config_names', 'full declared roots/candidates')
++    ck(set(map(str, candidates)) == set(conf), 'terminal_complete_configuration_membership', 'exact declared candidates')
++    return runtime, tex, conf
++
++
++def modern_presence(base):
++    before = j(base / 'CONFIGURATION_BEFORE.json')
++    ck(before == j(base / 'CONFIGURATION_AFTER.json'), 'strict_configuration_interval', label(base))
++    config(before['optional'])
++    for name, names in before['directories'].items():
++        p = Path(name)
++        actual = sorted(str(q) for q in p.rglob('*') if q.is_file()) if p.is_dir() else None
++        ck(actual == names, 'strict_config_directory_membership', name)
++        for value in names or []: read(value)
++    return before
++
++
++def stripped_links(content):
++    content = re.sub(r'(?ms)^[ ]{0,3}(`{3,}|~{3,})[^\n]*\n.*?^[ ]{0,3}\1[ \t]*$', '\n\n', content)
++    content = re.sub(r'(?:\A|\n\n)(?:(?: {4}|\t)[^\n]*(?:\n|$))+', '\n\n', content)
++    content = re.sub(r'(`+)(?:(?!\1)[\s\S])*?\1', ' ', content)
++    return re.findall(r'\[[^\]]*\]\(([^)]+)\)', content)
++
++
++WORK = OUT / 'lifecycle_before'
++SOURCE = Path(__file__).resolve()
++ROOT_GATE = BATCH / 'qa/P209_TERMINAL_ARTIFACT_ROOT_INSPECTION.actual.json'
++ROOT_REPORT = BATCH / 'qa/P209_TERMINAL_ARTIFACT_ROOT_INSPECTION.md'
++
++
++def save(path, raw):
++    with Path(path).open('xb') as stream: stream.write(raw)
++
++
++def dump(path, value):
++    save(path, (json.dumps(value, sort_keys=True, indent=2) + '\n').encode())
++
++
++def info(path):
++    raw = read(path)
++    return {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw)}
++
++
++def actual_initial_gate():
++    gate = j(ROOT_GATE)
++    ck(gate['schema'] == 'p209-terminal-artifact-root-original-closure-v1'
++       and gate['status'] == 'PASS_ROOT_P209_TERMINAL_ARTIFACT_COMPLETE_ORIGINAL_CLOSURE'
++       and gate['paper'] == 'P209' and gate['actual_exit_code'] == 0
++       and gate['current_open_findings'] == 0, 'actual_root_initial_acceptance', 'not a prepared template')
++    stdout = Path(gate['audit_stdout']['path'])
++    ck(stdout.is_relative_to(OUT) and stdout.name == 'audit.stdout' and
++       stdout.parent.parent == OUT and re.fullmatch(r'initial_\d+', stdout.parent.name),
++       'actual_stdout_exact_scoped_attempt', str(stdout))
++    pin(stdout, gate['audit_stdout'])
++    pin(PREPARATION / 'audit_p209.py', gate['auditor_sha256'])
++    original = j(stdout)
++    ck(original['schema'] == 'p209-terminal-artifact-audit-v1' and
++       original['status'] == 'PASS_P209_TERMINAL_ARTIFACT_GATE'
++       and original['paper'] == 'P209' and
++       original['auditor_sha256'] == gate['auditor_sha256'] and
++       original['all_consumed_input_count'] == len(original['all_consumed_inputs_rechecked']) ==
++       gate['all_consumed_input_count'], 'actual_initial_full_audit_result', 'exact dynamically measured fields')
++    manifest(stdout.parent)
++    command0 = j(stdout.parent / 'COMMAND.json')
++    ck(command0['exit_code'] == 0 and command0['inputs_unchanged'] and command0['unused_cache_absent'],
++       'actual_initial_auditor_process', 'retained exact successful child')
++    for stream in ('stdout', 'stderr'): pin(stdout.parent / ('audit.' + stream), command0[stream])
++    ck(read(stdout.parent / 'audit.stderr') == b'', 'actual_initial_empty_stderr', str(stdout))
++    report = read(ROOT_REPORT).decode()
++    ck('HOLD_EXTERNAL' in report, 'actual_root_initial_hold', str(ROOT_REPORT))
++    return gate, original
++
++
++def old_package(gate):
++    preserved = WORK / 'INITIAL_PACKAGE_SHA256SUMS'
++    pin(preserved, gate['audit_package_manifest_sha256'])
++    old = manifest_rows(preserved)
++    ck('SHA256SUMS' not in old and len(old) == gate['audit_package_payloads'],
++       'initial_entire_nonself_package', 'actual measured count')
++    for name, digest in old.items(): pin(safe(OUT, name), digest)
++    ck(read(WORK / 'INITIAL_REPORT.md') == read(OUT / 'REPORT.md'),
++       'original_report_exact_unchanged', 'initial report is never rewritten')
++    return old
++
++
++def prepare():
++    # Invoked only by root AFTER actual original acceptance, BEFORE status edit.
++    gate, original = actual_initial_gate()
++    ck(not WORK.exists(), 'exclusive_initial_preservation', str(WORK))
++    pin(OUT / 'SHA256SUMS', gate['audit_package_manifest_sha256'])
++    old = manifest(OUT, count=gate['audit_package_payloads'])
++    lifecycle, paperseal = PAPER / 'ROOT_LIFECYCLE.md', PAPER / 'PAPER_MANIFEST.sha256'
++    body = read(lifecycle).decode()
++    ck('ARTIFACT_GATE_PENDING' in body and 'P209_INTERNALLY_COMPLETE' not in body and
++       'HOLD_EXTERNAL' in body, 'preserve_pending_status_before_edit', 'distinct author status immutable')
++    manifest(PAPER, 'PAPER_MANIFEST.sha256')
+     ledger = original['all_consumed_inputs_rechecked']
+-    for group in (tex, runtime):
+-        for name, value in group.items():
+-            ck(ledger.get(name) == value, 'current_named_resource_in_original_ledger', name)
+-    return {'runtime_files': len(runtime), 'tex_files': len(tex), 'configuration_records': len(conf)}
++    for path in (lifecycle, paperseal):
++        ck(str(path) in ledger, 'exact_initial_paper_alias_input', str(path)); pin(path, ledger[str(path)])
++    WORK.mkdir(exist_ok=False)
++    sources = {
++        'INITIAL_PACKAGE_SHA256SUMS': OUT / 'SHA256SUMS',
++        'INITIAL_REPORT.md': OUT / 'REPORT.md',
++        'ROOT_LIFECYCLE.md': lifecycle,
++        'PAPER_MANIFEST.sha256': paperseal,
++        'ROOT_GATE.actual.json': ROOT_GATE,
++        'ROOT_GATE.md': ROOT_REPORT,
++    }
++    copied = {}
++    for name, origin in sources.items():
++        raw = read(origin); save(WORK / name, raw)
++        ck(read(WORK / name) == raw, 'physical_exact_preupdate_copy', name)
++        copied[str(origin)] = {'copy': str(WORK / name), **info(origin)}
++    record = {'status': 'PASS_EXACT_PREUPDATE_PRESERVATION_NOT_LIFECYCLE_ACCEPTANCE',
++        'utc': datetime.now(timezone.utc).isoformat(), 'initial_package_payloads': len(old),
++        'initial_package_sha256': gate['audit_package_manifest_sha256'],
++        'initial_audit_stdout': gate['audit_stdout'], 'root_gate': info(ROOT_GATE), 'copies': copied,
++        'exact_two_paper_alias_paths': [str(lifecycle), str(paperseal)], 'source': info(SOURCE),
++        'new_scientific_executions': 0, 'new_builds': 0, 'new_views': 0}
++    dump(WORK / 'PRESERVATION.json', record)
++    files = sorted(p for p in WORK.rglob('*') if p.is_file())
++    save(WORK / 'SHA256SUMS', ''.join(info(p)['sha256'] + '  ' + p.relative_to(WORK).as_posix() + '\n' for p in files).encode())
++    manifest(WORK)
++    print(json.dumps(record, sort_keys=True, indent=2))
++
++
++def changed_paper(original):
++    previous = manifest_rows(WORK / 'PAPER_MANIFEST.sha256')
++    current = manifest(PAPER, 'PAPER_MANIFEST.sha256')
++    ck(set(current) == set(previous), 'unchanged_whole_paper_names', 'no added or removed payload')
++    changed = [name for name in previous if previous[name] != current[name]]
++    ck(changed == ['ROOT_LIFECYCLE.md'], 'only_new_root_lifecycle_payload_changed', changed)
++    for path, saved in [(PAPER / 'ROOT_LIFECYCLE.md', WORK / 'ROOT_LIFECYCLE.md'),
++                        (PAPER / 'PAPER_MANIFEST.sha256', WORK / 'PAPER_MANIFEST.sha256')]:
++        pin(saved, original['all_consumed_inputs_rechecked'][str(path)])
++    oldraw = read(WORK / 'PAPER_MANIFEST.sha256')
++    needle = (previous['ROOT_LIFECYCLE.md'] + '  ROOT_LIFECYCLE.md\n').encode()
++    replacement = (current['ROOT_LIFECYCLE.md'] + '  ROOT_LIFECYCLE.md\n').encode()
++    ck(oldraw.count(needle) == 1 and read(PAPER / 'PAPER_MANIFEST.sha256') ==
++       oldraw.replace(needle, replacement), 'literal_single_rollup_line_change', 'all other bytes identical')
++    content = read(PAPER / 'ROOT_LIFECYCLE.md').decode()
++    ck('P209_INTERNALLY_COMPLETE' in content and 'HOLD_EXTERNAL' in content and
++       'ARTIFACT_GATE_PENDING' not in content, 'actual_root_completion_body', 'P209 only; external hold unchanged')
++    pin(PAPER / 'PAPER_STATUS.md', '304c24e871a27bd02bcd6db231abc37870fb263a01d4c081289bdd53e8718a73')
++    pin(PAPER / 'ROOT_ADOPTION.md', '8f82ae0af7156131f14e9e6e849198f8b1c98564760c30d4bc121b50cf34f82e')
++    return {'whole_payloads': len(current), 'changed_payloads': changed,
++        'old_lifecycle_sha256': previous['ROOT_LIFECYCLE.md'], 'new_lifecycle_sha256': current['ROOT_LIFECYCLE.md'],
++        'old_whole_manifest_sha256': h(WORK / 'PAPER_MANIFEST.sha256'),
++        'new_whole_manifest_sha256': h(PAPER / 'PAPER_MANIFEST.sha256')}
+ 
+ 
+-def own_runtime(coverage):
+-    modules, mapped = {}, {}
+-    for name, module in sorted(sys.modules.items()):
+-        origin = getattr(module, '__file__', None)
+-        if origin and Path(origin).is_file():
+-            path = Path(origin).resolve()
+-            ck(path.suffix != '.pyc', 'own_no_bytecode_source', name)
+-            value = info(path)
+-            ck(coverage.get(str(path)) == value, 'own_runtime_covered', str(path))
+-            modules[name] = {'path': str(path), **value}
+-    for line in Path('/proc/self/maps').read_text().splitlines():
+-        fields = line.split(None, 5)
+-        if len(fields) == 6 and fields[5].startswith('/'):
+-            path = Path(fields[5]).resolve(); value = info(path)
+-            ck(coverage.get(str(path)) == value, 'own_maps_covered', str(path))
+-            mapped[str(path)] = value
+-    return {'modules': modules, 'mapped_files': mapped, 'flags': repr(sys.flags),
+-            'environment': dict(os.environ), 'sys_path': sys.path,
+-            'pycache_prefix': sys.pycache_prefix, 'maps_scope': 'This lifecycle-auditor process only; samples, not a syscall trace.'}
++def recheck_resources(original):
++    for role in ('author', 'a', 'b'):
++        base = BATCH / ('qa/root_replays/p209_' + role + '_strict/root_' + role + '_pair_01')
++        modern_presence(base)
++        runtime = exact_pair(base, 'RUNTIME_BEFORE.json', 'RUNTIME_AFTER.json')
++        ck(declared_runtime_names() <= set(runtime), 'unchanged_strict_declared_runtime_membership', role)
++    runtime, tex, conf = terminal_resource_key()
++    ledger = original['all_consumed_inputs_rechecked']
++    for group in (runtime, tex):
++        for path, value in group.items():
++            ck(ledger.get(path) == {key: value[key] for key in ('sha256', 'bytes')},
++               'entire_resource_retained_in_original_ledger', path)
++    return {'runtime': len(runtime), 'tex': len(tex), 'configuration': len(conf)}
+ 
+ 
+ def new_links():
+-    all_links = []
+-    for path in (PAPER / 'PAPER_STATUS.md', BATCH / 'P208_FINAL_QA.md', BATCH / 'qa/P208_TERMINAL_ROOT_INSPECTION.md'):
++    result = []
++    for path in (PAPER / 'ROOT_LIFECYCLE.md', BATCH / 'P209_FINAL_QA.md', ROOT_REPORT):
+         content = read(path).decode()
+         ck('HOLD_EXTERNAL' in content, 'new_document_external_hold', str(path))
+-        if path.name != 'P208_TERMINAL_ROOT_INSPECTION.md':
+-            ck('P208_INTERNALLY_COMPLETE' in content, 'new_document_internal_complete', str(path))
+-        # These three inspected lifecycle documents have no code fences or
+-        # indented code blocks. Code spans cannot create artificial links.
+-        content = re.sub(r'(`+)(?:(?!\1)[\s\S])*?\1', ' ', content)
+-        for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', content):
+-            target = target.strip('<>').split('#', 1)[0]
+-            if not target or re.match(r'[A-Za-z][A-Za-z0-9+.-]*:', target): continue
+-            destination = (path.parent / target).resolve()
+-            ck(destination.exists(), 'new_document_link', (str(path), target))
+-            all_links.append({'document': str(path), 'target': target, 'resolved': str(destination)})
+-    return all_links
++        if path != ROOT_REPORT:
++            ck('P209_INTERNALLY_COMPLETE' in content, 'new_document_p209_only_completion', str(path))
++        for target in stripped_links(content):
++            href = target.strip().strip('<>').split('#', 1)[0]
++            if not href or re.match(r'[A-Za-z][A-Za-z0-9+.-]*:', href): continue
++            resolved = (path.parent / unquote(href)).resolve()
++            ck(resolved.exists(), 'new_lifecycle_link_closure', (str(path), href))
++            result.append({'document': str(path), 'target': href, 'resolved_target': str(resolved)})
++    return result
++
++
++def original_runtime_coverage(sample, ledger):
++    for path, value in sample['mapped_files'].items():
++        ck(ledger.get(path) == value, 'own_map_covered_by_original_ledger', path)
++    for value in sample['modules'].values():
++        wanted = {k: value[k] for k in ('sha256', 'bytes')}
++        ck(ledger.get(value['path']) == wanted, 'own_module_covered_by_original_ledger', value['path'])
+ 
+ 
+ def audit():
+-    ck(sys.flags.optimize == 0 and sys.flags.isolated == sys.flags.no_site == 1 and sys.dont_write_bytecode
+-       and sys.pycache_prefix and not Path(sys.pycache_prefix).exists() and dict(os.environ) == ENV,
+-       'actual_child_controls', '-I -S -B exact environment, optimization zero, absent cache')
+-    started = datetime.now(timezone.utc).isoformat()
+-    prepared = j(WORK / 'PREPARATION.json')
+-    revision = j(WORK / 'SOURCE_REVISION.json')
+-    ck(revision['originally_prepared_source'] == prepared['source'] and
+-       revision['kind'] == 'PRE_CHILD_EXECUTION_CONFIGURATION_SCHEMA_REPAIR',
+-       'explicit_preexecution_source_revision', 'original preparation remains unchanged')
+-    pin(WORK / 'prepared_source_snapshot.py', prepared['source'])
+-    pin(SOURCE, revision['revised_source'])
+-    original = initial_payloads()
++    began = datetime.now(timezone.utc).isoformat()
++    manifest(PREPARATION); manifest(WORK)
++    prepared = j(WORK / 'PRESERVATION.json')
++    ck(prepared['status'] == 'PASS_EXACT_PREUPDATE_PRESERVATION_NOT_LIFECYCLE_ACCEPTANCE',
++       'actual_preupdate_preservation', 'not acceptance')
++    pin(SOURCE, prepared['source'])
++    gate, original = actual_initial_gate()
++    pin(ROOT_GATE, prepared['root_gate'])
++    initial = old_package(gate)
++    lifecycle = PAPER / 'ROOT_LIFECYCLE.md'; paperseal = PAPER / 'PAPER_MANIFEST.sha256'
++    exact = {str(lifecycle): WORK / 'ROOT_LIFECYCLE.md', str(paperseal): WORK / 'PAPER_MANIFEST.sha256'}
++    ck(prepared['exact_two_paper_alias_paths'] == list(exact), 'exact_two_alias_scope', 'no other drift accepted')
++    for original_path, row in prepared['copies'].items():
++        pin(row['copy'], row)
++        if original_path not in exact and original_path != str(OUT / 'SHA256SUMS'):
++            pin(original_path, row)
+     ledger = original['all_consumed_inputs_rechecked']
+-    ck(len(ledger) == 115334 and set(ALIASES) <= set(ledger), 'entire_original_ledger', 'exact names/count')
+-    coverage = dict(ledger); coverage[str(SOURCE)] = revision['revised_source']
+-    early = own_runtime(coverage)
+-    for when in ('before', 'after'):
+-        if when == 'after': break
+-        for name, value in ledger.items():
+-            selected = Path(name)
+-            if name in ALIASES:
+-                old_hash, selected = ALIASES[name]
+-                ck(value['sha256'] == old_hash, 'exact_two_old_hash_aliases', name)
+-            pin(selected, value)
+-    changes = paper_change()
++    early = actual_auditor_runtime()
++    original_runtime_coverage(early, ledger)
++    for name, value in ledger.items(): pin(exact.get(name, Path(name)), value)
++    change = changed_paper(original)
+     for record in original['complete_manifests_validated']:
+-        base = ROOT / record['base']; name = record['name']
+-        if base == PAPER and name == 'SHA256SUMS': continue
+-        pin(base / name, record['sha256'])
+-        manifest(base, name, record['complete_nonself'], record['entries'])
+-    key = runtime_and_resource_key(original)
+-    for path, resolved in original['host_path_resolutions_rechecked'].items():
+-        ck(str(Path(path).resolve(strict=True)) == resolved, 'all_original_host_resolutions', path)
++        base = Path(record['base']); base = base if base.is_absolute() else ROOT / base
++        if base == PAPER and record['name'] == 'PAPER_MANIFEST.sha256': continue
++        pin(base / record['name'], record['sha256'])
++        manifest(base, record['name'], record['complete_nonself'], record['entries'])
++    resources = recheck_resources(original)
++    for name, resolution in original['host_path_resolutions_rechecked'].items():
++        ck(str(Path(name).resolve(strict=True)) == resolution, 'all_original_host_resolutions', name)
+     for row in original['all_local_links_checked']:
+-        target = Path(row['resolved_target']); target = target if target.is_absolute() else ROOT / target
+-        ck(target.exists(), 'all_original_links_still_exist', str(target))
+-    root_before = j(WORK / 'ROOT_DOCUMENTS_BEFORE.json')
+-    ck(set(root_before) == set(map(str, NEW_DOCUMENTS)), 'exact_new_document_set', 'five original current files')
+-    for path, value in root_before.items():
+-        wanted = {k: value[k] for k in ('sha256', 'bytes')}
+-        pin(path, wanted); pin(BASE / value['snapshot'], wanted)
+-    root = j(BATCH / 'qa/P208_TERMINAL_ROOT_INSPECTION.actual.json')
+-    ck(root['actual_exit_code'] == 0 and root['result']['status'] ==
+-       'ROOT_P208_INITIAL_TERMINAL_ARTIFACT_ORIGINAL_INSPECTION_PASS'
+-       and root['result']['initial_package_seal']['sha256'] == INITIAL_SEAL,
+-       'root_accepted_initial_original', 'actual exact acceptance')
++        path = Path(row['resolved_target']); path = path if path.is_absolute() else ROOT / path
++        ck(path.exists(), 'original_link_still_exists', str(path))
+     links = new_links()
+-    late = own_runtime(coverage)
+-    for name, value in ledger.items():
+-        selected = ALIASES[name][1] if name in ALIASES else Path(name)
+-        pin(selected, value)
+-    for path, resolved in original['host_path_resolutions_rechecked'].items():
+-        ck(str(Path(path).resolve(strict=True)) == resolved, 'all_original_host_resolutions_after', path)
+-    initial_payloads()
+-    ck(changes == paper_change(), 'new_paper_closure_after', 'exact same lifecycle-only change')
+-    for path, value in root_before.items(): pin(path, {k: value[k] for k in ('bytes', 'sha256')})
++    late = actual_auditor_runtime()
++    original_runtime_coverage(late, ledger)
++    for name, value in ledger.items(): pin(exact.get(name, Path(name)), value)
++    for name, resolution in original['host_path_resolutions_rechecked'].items():
++        ck(str(Path(name).resolve(strict=True)) == resolution, 'all_original_host_resolutions_after', name)
++    ck(change == changed_paper(original), 'same_exact_change_after', 'one lifecycle payload')
++    old_package(gate)
+     consumed = dict(READS)
+-    for path, value in consumed.items():
+-        raw = Path(path).read_bytes()
+-        ck({'bytes': len(raw), 'sha256': sha256(raw).hexdigest()} == value,
+-           'all_current_read_inputs_after', path)
+-    ck(not Path(sys.pycache_prefix).exists(), 'unused_cache_after', 'absent')
+-    print(json.dumps({'status': 'PASS_P208_LIFECYCLE_ONLY_FOLLOWUP', 'started_utc': started,
++    for name, wanted in consumed.items():
++        raw = Path(name).read_bytes()
++        ck(wanted == {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw)}, 'all_current_inputs_rechecked_after', name)
++    print(json.dumps({'schema': 'p209-lifecycle-only-followup-v1', 'paper': 'P209',
++        'status': 'PASS_P209_LIFECYCLE_ONLY_FOLLOWUP', 'started_utc': began,
+         'ended_utc': datetime.now(timezone.utc).isoformat(), 'checks': sum(CHECKS.values()),
+-        'checks_by_section': dict(CHECKS), 'original_ledger_paths_checked_twice': len(ledger),
+-        'original_host_resolutions_checked_twice': len(original['host_path_resolutions_rechecked']),
+-        'unchanged_original_package_payloads': 54, 'initial_audit_stdout_sha256': INITIAL_STDOUT,
+-        'exact_aliases': prepared['exact_aliases'], 'paper_change': changes,
+-        'current_resource_key': key, 'original_links_rechecked': len(original['all_local_links_checked']),
+-        'new_links_checked': links, 'new_document_pins': root_before,
+-        'runtime_before': early, 'runtime_after': late,
++        'checks_by_section': dict(CHECKS), 'initial_package_payloads_preserved': len(initial),
++        'initial_package_sha256': gate['audit_package_manifest_sha256'],
++        'initial_audit_stdout': gate['audit_stdout'], 'initial_root_gate': info(ROOT_GATE),
++        'original_ledger_paths_checked_twice': len(ledger), 'exact_two_old_paper_aliases': {k: str(v) for k, v in exact.items()},
++        'paper_change': change, 'current_resource_key': resources,
++        'original_links_rechecked': len(original['all_local_links_checked']), 'new_links_checked': links,
++        'actual_runtime_before': early, 'actual_runtime_after': late,
+         'all_current_read_input_count': len(consumed), 'all_current_read_inputs_rechecked': consumed,
+         'new_scientific_executions': 0, 'new_builds': 0, 'new_page_views': 0,
+-        'role': 'Lifecycle-only artifact follow-up after actual root acceptance; not a new scientific gate, review or delta.',
+-        'limits': ['The exact two aliases preserve historical paper lifecycle bytes; no other original ledger change is permitted.',
+-                   'Accepted all-size claims and original actual science/build/view evidence are reused unchanged.',
+-                   'Runtime/resource recapture and sampled own maps are not continuous tracing or a hermetic historical OS.',
+-                   'Only P208 is checked; five-paper completion, Git synchronization and external clearance are not asserted.'],
+-        'external': 'OWNER_AMBER / HOLD_EXTERNAL'}, sort_keys=True, indent=2))
++        'role': 'Lifecycle-only reuse after actual accepted initial artifact gate; no third review or new science/build/view.',
++        'limits': ['Exactly two preserved old-paper aliases; historical author status/adoption and all initial evidence immutable.',
++                   'Complete known input and resource sets with sampled own runtime, not OS-hermetic or continuous tracing.',
++                   'Paper P209 only; no five-paper completion, Git or external clearance.'],
++        'owner': 'OWNER_AMBER', 'external_status': 'HOLD_EXTERNAL'}, sort_keys=True, indent=2))
+ 
+ 
+-def run(label):
+-    ck(label.replace('_', '').isalnum(), 'safe_attempt_label', label)
+-    target = WORK / label; target.mkdir(exist_ok=False)
++def run(label0):
++    ck(re.fullmatch(r'lifecycle_\d+', label0) is not None, 'safe_exclusive_attempt_label', label0)
++    target = OUT / label0; target.mkdir(exist_ok=False)
+     save(target / 'executed_source_snapshot.py', read(SOURCE))
+     source_before = info(SOURCE)
+-    argv = [str(Path(sys.executable).resolve()), '-I', '-S', '-B', '-X',
++    argv = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
+             'pycache_prefix=' + str(target / 'unused_pycache'), str(SOURCE), 'child']
+-    started = datetime.now(timezone.utc).isoformat()
+-    attempt = {'argv': argv, 'cwd': str(ROOT), 'environment': ENV, 'started_utc': started, 'status': 'ATTEMPTED'}
++    attempt = {'argv': argv, 'cwd': str(ROOT), 'environment': ENV,
++        'started_utc': datetime.now(timezone.utc).isoformat(), 'status': 'ATTEMPTED', 'exit_code': None}
+     dump(target / 'ATTEMPT.json', attempt)
+-    child = subprocess.run(argv, cwd=ROOT, env=ENV, capture_output=True, check=False)
+-    save(target / 'audit.stdout', child.stdout); save(target / 'audit.stderr', child.stderr)
+-    # Do not reuse read-stability checks as a substitute for recording change.
+-    source_after_raw = SOURCE.read_bytes()
+-    source_after = {'bytes': len(source_after_raw), 'sha256': sha256(source_after_raw).hexdigest()}
+-    command = {k: attempt[k] for k in ('argv', 'cwd', 'environment', 'started_utc')}
+-    command.update(ended_utc=datetime.now(timezone.utc).isoformat(), exit_code=child.returncode,
+-                   source_before=source_before, source_after=source_after,
+-                   source_unchanged=source_before == source_after,
+-                   unused_cache_absent=not (target / 'unused_pycache').exists(),
+-                   stdout=info(target / 'audit.stdout'), stderr=info(target / 'audit.stderr'))
+-    dump(target / 'COMMAND.json', command)
+-    values = [(info(p)['sha256'], p.relative_to(target).as_posix()) for p in sorted(target.rglob('*')) if p.is_file()]
+-    save(target / 'SHA256SUMS', ''.join(d + '  ' + n + '\n' for d, n in values).encode())
++    failure = None
++    try:
++        child = subprocess.run(argv, cwd=ROOT, env=ENV, capture_output=True, check=False)
++        code, stdout, stderr = child.returncode, child.stdout, child.stderr
++    except OSError as exc:
++        failure = repr(exc); code, stdout, stderr = 127, b'', str(exc).encode()
++    save(target / 'audit.stdout', stdout); save(target / 'audit.stderr', stderr)
++    raw = SOURCE.read_bytes(); source_after = {'sha256': sha256(raw).hexdigest(), 'bytes': len(raw)}
++    command0 = {**attempt, 'status': 'COMPLETED' if failure is None else 'SPAWN_FAILED', 'failure': failure,
++        'ended_utc': datetime.now(timezone.utc).isoformat(), 'exit_code': code,
++        'source_before': source_before, 'source_after': source_after, 'source_unchanged': source_before == source_after,
++        'unused_cache_absent': not (target / 'unused_pycache').exists(),
++        'stdout': info(target / 'audit.stdout'), 'stderr': info(target / 'audit.stderr')}
++    dump(target / 'COMMAND.json', command0)
++    files = sorted(p for p in target.rglob('*') if p.is_file())
++    save(target / 'SHA256SUMS', ''.join(info(p)['sha256'] + '  ' + p.relative_to(target).as_posix() + '\n' for p in files).encode())
+     manifest(target)
+-    print(json.dumps(command, sort_keys=True, indent=2))
+-    if child.returncode:
+-        print(child.stderr.decode(), file=sys.stderr)
++    print(json.dumps(command0, sort_keys=True, indent=2))
++    if code: print(stderr.decode(errors='replace'), file=sys.stderr)
+     else:
+-        result = json.loads(child.stdout)
++        result = json.loads(stdout)
+         print(json.dumps({k: result[k] for k in ('status', 'checks', 'all_current_read_input_count')}, sort_keys=True))
+-    ck(source_before == source_after and command['unused_cache_absent'], 'recorder_after_controls', label)
+-    raise SystemExit(child.returncode)
++    ck(command0['source_unchanged'] and command0['unused_cache_absent'], 'actual_outer_controls_after', label0)
++    raise SystemExit(code)
+ 
+ 
+-def seal(label):
+-    # Initial outer seal remains available at its historical copy. This final
+-    # operation updates only the current own-scope outer SHA256SUMS.
+-    pin(BASE / 'SHA256SUMS', INITIAL_SEAL)
+-    original = initial_payloads()
+-    target = WORK / label; manifest(target)
+-    command, result = j(target / 'COMMAND.json'), j(target / 'audit.stdout')
+-    ck(command['exit_code'] == 0 and command['source_unchanged'] and command['unused_cache_absent']
+-       and result['status'] == 'PASS_P208_LIFECYCLE_ONLY_FOLLOWUP', 'final_actual_lifecycle_pass', label)
+-    for stream in ('stdout', 'stderr'): pin(target / ('audit.' + stream), command[stream])
+-    pin(SOURCE, command['source_before'])
+-    for path, value in result['all_current_read_inputs_rechecked'].items(): pin(path, value)
+-    report = info(BASE / 'LIFECYCLE_REPORT.md')
+-    receipt = {'status': 'PASS_COMPLETE_P208_INITIAL_AND_LIFECYCLE_PACKAGE_SEAL',
+-               'utc': datetime.now(timezone.utc).isoformat(), 'initial_package_sha256': INITIAL_SEAL,
+-               'initial_package_archived': 'lifecycle_01/INITIAL_PACKAGE_SHA256SUMS',
+-               'initial_report_archived': 'lifecycle_01/INITIAL_REPORT.md',
+-               'accepted_followup': label, 'followup_command': info(target / 'COMMAND.json'),
+-               'followup_stdout': info(target / 'audit.stdout'), 'followup_source': info(SOURCE),
+-               'followup_checks': result['checks'], 'followup_report': report,
+-               'payload_count': len([p for p in BASE.rglob('*') if p.is_file() and p != BASE / 'SHA256SUMS']) + 1,
+-               'boundary': 'The sole replaced own-package original is the evolving outer seal; its initial bytes and all 54 initial payloads remain preserved.'}
+-    dump(WORK / 'FINAL_SEAL_RECEIPT.json', receipt)
+-    values = [(info(p)['sha256'], p.relative_to(BASE).as_posix()) for p in sorted(BASE.rglob('*'))
+-              if p.is_file() and p != BASE / 'SHA256SUMS']
+-    # This generated manifest replacement is the explicitly scoped lifecycle
+-    # sealing output, not an edit to an initial report, command or source.
+-    with (BASE / 'SHA256SUMS').open('wb') as stream:
+-        stream.write(''.join(d + '  ' + n + '\n' for d, n in values).encode())
+-    # Clear only that deliberately superseded read record, retaining its old
+-    # bytes in the already pinned INITIAL_PACKAGE_SHA256SUMS.
+-    READS.pop(str(BASE / 'SHA256SUMS'))
+-    final = manifest(BASE)
+-    ck(len(final) == receipt['payload_count'], 'final_complete_payload_count', len(final))
+-    print(json.dumps({'status': receipt['status'], 'payloads': len(final),
+-                      'manifest_sha256': info(BASE / 'SHA256SUMS')['sha256'],
+-                      'followup_stdout_sha256': command['stdout']['sha256']}, sort_keys=True, indent=2))
++def seal(label0):
++    ck(re.fullmatch(r'lifecycle_\d+', label0) is not None, 'safe_seal_attempt_label', label0)
++    gate, original = actual_initial_gate()
++    initial = old_package(gate)
++    pin(OUT / 'SHA256SUMS', gate['audit_package_manifest_sha256'])
++    target = OUT / label0; manifest(target)
++    row, result = j(target / 'COMMAND.json'), j(target / 'audit.stdout')
++    ck(row['exit_code'] == 0 and row['source_unchanged'] and row['unused_cache_absent']
++       and row['failure'] is None and result['status'] == 'PASS_P209_LIFECYCLE_ONLY_FOLLOWUP',
++       'actual_lifecycle_pass_before_seal', label0)
++    for stream in ('stdout', 'stderr'): pin(target / ('audit.' + stream), row[stream])
++    ck(read(target / 'audit.stderr') == b'', 'actual_lifecycle_empty_stderr', label0)
++    pin(SOURCE, row['source_before'])
++    for name, value in result['all_current_read_inputs_rechecked'].items(): pin(name, value)
++    report = info(OUT / 'LIFECYCLE_REPORT.md')
++    receipt = {'status': 'PASS_COMPLETE_P209_INITIAL_AND_LIFECYCLE_PACKAGE_SEAL',
++        'utc': datetime.now(timezone.utc).isoformat(), 'initial_payloads_preserved': len(initial),
++        'initial_package_sha256': gate['audit_package_manifest_sha256'],
++        'initial_package_archived': str(WORK / 'INITIAL_PACKAGE_SHA256SUMS'),
++        'followup_command': info(target / 'COMMAND.json'), 'followup_stdout': info(target / 'audit.stdout'),
++        'followup_source': info(SOURCE), 'followup_report': report,
++        'boundary': 'Only the own artifact package outer seal is replaced after preserving its old bytes; no paper edit.'}
++    dump(OUT / 'LIFECYCLE_SEAL_RECEIPT.json', receipt)
++    values = [(info(p)['sha256'], p.relative_to(OUT).as_posix()) for p in sorted(OUT.rglob('*'))
++              if p.is_file() and p != OUT / 'SHA256SUMS']
++    temporary = OUT / 'SHA256SUMS.next'
++    save(temporary, ''.join(d + '  ' + n + '\n' for d, n in values).encode())
++    pin(OUT / 'SHA256SUMS', gate['audit_package_manifest_sha256'])
++    temporary.replace(OUT / 'SHA256SUMS')
++    READS.pop(str(OUT / 'SHA256SUMS'))
++    complete = manifest(OUT)
++    old_package(gate)
++    print(json.dumps({'status': receipt['status'], 'payloads': len(complete),
++        'manifest_sha256': h(OUT / 'SHA256SUMS'), 'followup_stdout_sha256': row['stdout']['sha256']},
++        sort_keys=True, indent=2))
+ 
+ 
+ if __name__ == '__main__':
+-    ck(sys.flags.optimize == 0 and sys.flags.isolated == sys.flags.no_site == 1 and sys.dont_write_bytecode,
+-       'invocation_flags', '-I -S -B and optimization zero')
+-    if len(sys.argv) == 2 and sys.argv[1] == 'prepare': prepare()
+-    elif len(sys.argv) == 2 and sys.argv[1] == 'child': audit()
++    if not(sys.flags.optimize == 0 and sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode
++           and dict(os.environ) == ENV and Path.cwd() == ROOT and Path(sys.executable).resolve() == Path('/usr/bin/python3.10')
++           and SOURCE == PREPARATION / 'lifecycle_audit.py'):
++        raise RuntimeError('Require prepared P209 helper, isolated system interpreter, minimal ENV and workspace cwd')
++    if sys.argv[1:] == ['prepare']: prepare()
++    elif sys.argv[1:] == ['child']:
++        ck(sys.pycache_prefix and not Path(sys.pycache_prefix).exists(), 'absent_child_cache_prefix', sys.pycache_prefix)
++        audit()
+     elif len(sys.argv) == 3 and sys.argv[1] == 'run': run(sys.argv[2])
+     elif len(sys.argv) == 3 and sys.argv[1] == 'seal': seal(sys.argv[2])
+-    else: raise RuntimeError('Require prepare, run NEW_LABEL, child or seal PASSED_LABEL')
++    else: raise RuntimeError('Require prepare, run lifecycle_N, child or seal lifecycle_N')
+
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/draft_history/unexecuted_01/audit_p209.py	2026-09-07 15:15:37.817322592 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/audit_p209.py	2026-09-07 15:27:02.488053733 +0800
+@@ -389,7 +389,8 @@
+     # The failures stay failures. Their original streams are sealed by their
+     # accepted review manifests; successful later evidence cannot rewrite them.
+     failed_a = j(A / 'delta_check_01/EXECUTION.actual.json')
+-    ck(failed_a['exit_code'] == 1, 'preserved_A_delta_failure', 'real first documentary failure')
++    ck(failed_a['completion_result']['exit_code'] == 1,
++       'preserved_A_delta_failure', 'real first documentary failure; original nested execution schema')
+     bad = j(B / 'delta_check_01/CLOSURE_AFTER_FAILURE.json')
+     ck(bad['actual_outer_exit'] == 1 and bad['actual_child_exit'] == 0 and
+        bad['status'] == 'FAIL_PRESERVED_OUTER_WRAPPER_FILENAME_COLLISION',
+@@ -629,6 +630,8 @@
+     bylabel = {}
+     for row in rec['commands']:
+         argv = command(FINAL, row, BUILD_ENV)
++        expected_cwd = FINAL / row['label'][:12] if row['label'].startswith(('cold_build_1_', 'cold_build_2_')) else FINAL
++        ck(row['cwd'] == str(expected_cwd), 'terminal_exact_actual_command_cwd', row['label'])
+         ck(row['status'] == 'COMPLETED' and row['cleanup'] == [] and row['start_new_session'],
+            'terminal_actual_closed_child', row['label'])
+         attempt = j(FINAL / (row['label'] + '.attempt.json'))
+@@ -719,6 +722,10 @@
+        'terminal_exact_consumed_and_generated_union', 'every per-pass record retained')
+     launch = TERMINAL_LAUNCH; manifest(launch)
+     outer = j(launch / 'RECEIPT.json')
++    ck(outer['argv'] == ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++       'pycache_prefix=' + str(FINAL / 'never_created_parent_cache'),
++       str(TERMINAL_PREP / 'root_terminal_builds.py'), 'terminal-pair-after-round2']
++       and outer['cwd'] == str(ROOT), 'terminal_actual_exact_parent_launch', 'unchanged prepared builder')
+     ck(outer['status'] == 'PASS_ROOT_TERMINAL_LAUNCH_NOT_VIEWED' and outer['exit'] == 0 and outer['outcome'] == 'COMPLETED'
+        and outer['failure'] is None and outer['inputs_unchanged'] and outer['cache_absent']
+        and outer['launcher_observed_input_closure'] and outer['env'] == BUILD_ENV,
+@@ -735,6 +742,9 @@
+         obs = j(launch / ('LAUNCHER_RUNTIME_' + phase + '.json'))
+         ck(obs['environment'] == BUILD_ENV and not obs['cache_exists'] and not Path(obs['cache_prefix']).exists(),
+            'terminal_launcher_actual_settings', phase)
++        ck(obs['cwd'] == str(ROOT) and obs['cache_prefix'] == str(launch / 'never_created_launcher_cache')
++           and all(s in obs['flags'] for s in ('optimize=0', 'isolated=1', 'no_site=1', 'dont_write_bytecode=1')),
++           'terminal_launcher_exact_flags_cwd_cache', phase)
+         for path, value in obs['mapped_files'].items(): ck(outer_coverage.get(path) == value, 'terminal_launcher_map_coverage', path)
+         for value in obs['modules'].values():
+             ck(outer_coverage.get(value['path']) == {k: value[k] for k in ('sha256', 'bytes', 'resolved')},
+@@ -792,6 +802,10 @@
+             rich_pin(row['physical_target'], row['sha256'], True)
+             mapped[key] = row
+     origins = {}
++    for (original, digest), preserved in ALIASES.items():
++        if preserved.suffix == '.md' and (preserved.is_relative_to(A) or preserved.is_relative_to(B)):
++            pin(preserved, digest)
++            origins.setdefault(str(preserved), Path(original))
+     for original, row in j(A / 'delta_check_02/RESPONSE_ORIGINALS_AND_COPIES.json').items(): origins[row['copy']] = Path(original)
+     for row in j(B / 'assignment_context/ROLES.json'): origins[row['preserved']] = Path(row['original'])
+     for row in j(B / 'delta_intake_01/INTAKE_RESULT.json')['copies']: origins[row['physical']] = Path(row['original'])
+
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/draft_history/unexecuted_02/audit_p209.py	2026-09-07 15:27:01.968059352 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/audit_p209.py	2026-09-07 15:27:02.488053733 +0800
+@@ -630,6 +630,8 @@
+     bylabel = {}
+     for row in rec['commands']:
+         argv = command(FINAL, row, BUILD_ENV)
++        expected_cwd = FINAL / row['label'][:12] if row['label'].startswith(('cold_build_1_', 'cold_build_2_')) else FINAL
++        ck(row['cwd'] == str(expected_cwd), 'terminal_exact_actual_command_cwd', row['label'])
+         ck(row['status'] == 'COMPLETED' and row['cleanup'] == [] and row['start_new_session'],
+            'terminal_actual_closed_child', row['label'])
+         attempt = j(FINAL / (row['label'] + '.attempt.json'))
+@@ -720,6 +722,10 @@
+        'terminal_exact_consumed_and_generated_union', 'every per-pass record retained')
+     launch = TERMINAL_LAUNCH; manifest(launch)
+     outer = j(launch / 'RECEIPT.json')
++    ck(outer['argv'] == ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++       'pycache_prefix=' + str(FINAL / 'never_created_parent_cache'),
++       str(TERMINAL_PREP / 'root_terminal_builds.py'), 'terminal-pair-after-round2']
++       and outer['cwd'] == str(ROOT), 'terminal_actual_exact_parent_launch', 'unchanged prepared builder')
+     ck(outer['status'] == 'PASS_ROOT_TERMINAL_LAUNCH_NOT_VIEWED' and outer['exit'] == 0 and outer['outcome'] == 'COMPLETED'
+        and outer['failure'] is None and outer['inputs_unchanged'] and outer['cache_absent']
+        and outer['launcher_observed_input_closure'] and outer['env'] == BUILD_ENV,
+@@ -736,6 +742,9 @@
+         obs = j(launch / ('LAUNCHER_RUNTIME_' + phase + '.json'))
+         ck(obs['environment'] == BUILD_ENV and not obs['cache_exists'] and not Path(obs['cache_prefix']).exists(),
+            'terminal_launcher_actual_settings', phase)
++        ck(obs['cwd'] == str(ROOT) and obs['cache_prefix'] == str(launch / 'never_created_launcher_cache')
++           and all(s in obs['flags'] for s in ('optimize=0', 'isolated=1', 'no_site=1', 'dont_write_bytecode=1')),
++           'terminal_launcher_exact_flags_cwd_cache', phase)
+         for path, value in obs['mapped_files'].items(): ck(outer_coverage.get(path) == value, 'terminal_launcher_map_coverage', path)
+         for value in obs['modules'].values():
+             ck(outer_coverage.get(value['path']) == {k: value[k] for k in ('sha256', 'bytes', 'resolved')},
+
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/draft_history/unexecuted_02/lifecycle_audit.py	2026-09-07 15:27:02.216056671 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/lifecycle_audit.py	2026-09-07 15:27:02.512053474 +0800
+@@ -468,6 +468,14 @@
+     return result
+ 
+ 
++def original_runtime_coverage(sample, ledger):
++    for path, value in sample['mapped_files'].items():
++        ck(ledger.get(path) == value, 'own_map_covered_by_original_ledger', path)
++    for value in sample['modules'].values():
++        wanted = {k: value[k] for k in ('sha256', 'bytes')}
++        ck(ledger.get(value['path']) == wanted, 'own_module_covered_by_original_ledger', value['path'])
++
++
+ def audit():
+     began = datetime.now(timezone.utc).isoformat()
+     manifest(PREPARATION); manifest(WORK)
+@@ -487,6 +495,7 @@
+             pin(original_path, row)
+     ledger = original['all_consumed_inputs_rechecked']
+     early = actual_auditor_runtime()
++    original_runtime_coverage(early, ledger)
+     for name, value in ledger.items(): pin(exact.get(name, Path(name)), value)
+     change = changed_paper(original)
+     for record in original['complete_manifests_validated']:
+@@ -502,6 +511,7 @@
+         ck(path.exists(), 'original_link_still_exists', str(path))
+     links = new_links()
+     late = actual_auditor_runtime()
++    original_runtime_coverage(late, ledger)
+     for name, value in ledger.items(): pin(exact.get(name, Path(name)), value)
+     for name, resolution in original['host_path_resolutions_rechecked'].items():
+         ck(str(Path(name).resolve(strict=True)) == resolution, 'all_original_host_resolutions_after', name)

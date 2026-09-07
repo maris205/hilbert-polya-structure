@@ -1,0 +1,1402 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\En}{\mathcal E_n}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\BA}{\boldsymbol\beta}
+
+\title[Whole-array recomputation of border arrays]{Whole-Array Recomputation of Border Arrays:\\
+Exact Two-Cycles, Sharp Transients, and Factorial Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P25, 68R15, 05A05}
+\keywords{border array, prefix function, whole-array recomputation,
+finite dynamical system, inversion sequence, fibre}
+
+\begin{document}
+
+\begin{abstract}
+Let $\BA(w)$ be the ordinary border array of a finite word.  We treat the
+entire integer array $\BA(w)$ as the next word, recompute all of its borders,
+and repeat on the inversion-sequence carrier
+$\En=\{(e_0,\ldots,e_{n-1}):0\le e_i\le i\}$.  This whole-array
+recomputation differs from following failure links inside one fixed table.
+We prove that its one-step image is exactly the valid border arrays.  At
+length $n\ge2$, the recurrent set consists of $n-1$ explicit cycles of exact
+period two; length one has one fixed point.  An indexed three-state mismatch
+amplifier gives the sharp maximum transient
+$0,0,1,2n-4$ for $n=1,2,3,n\ge4$.  We also prove, for every target, the
+one-step bound $(n-1)!$ and show that equality occurs only at the all-zero
+table and $(0,1,0,\ldots,0)$ when $n\ge2$.  Border computation, validation,
+construction, realization, and census are credited background.  The owner
+search is bounded; no novelty, priority, or external-release claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{Whole-array recomputation and the subtraction boundary}
+
+For a word $w=w_0\cdots w_{n-1}$ over any alphabet, let
+\begin{equation}
+ \beta_i(w)=\max\{k:0\le k\le i,\ 
+ w_0\cdots w_{k-1}=w_{i-k+1}\cdots w_i\}.             \label{eq:border}
+\end{equation}
+Thus $\beta_i(w)$ is the longest proper-border length of the prefix ending at
+$i$, and $\beta_0(w)=0$.  Write
+$\BA(w)=(\beta_0(w),\ldots,\beta_{n-1}(w))$.
+The Morris--Pratt and Knuth--Morris--Pratt mechanisms compute these data in
+linear time \cite{KnuthMorrisPratt1977}.  Validation and realization of
+border or failure arrays, their generation, and their enumeration have
+dedicated algorithms and structural theories
+\cite{FranekEtAl2002,DuvalLecroqLefebvre2009,GawrychowskiJezJez2014}.
+All of that one-step machinery is background here.
+
+The carrier in this paper is
+\begin{equation}
+ \En=\{e=(e_0,\ldots,e_{n-1}):0\le e_i\le i\}.        \label{eq:carrier}
+\end{equation}
+Regarding $e$ as an integer word, define the self-map
+\begin{equation}
+                    \Pi_n(e)=\BA(e).                  \label{eq:update}
+\end{equation}
+It is closed on $\En$ because every proper border of an $(i+1)$-letter
+prefix has length at most $i$.
+
+The term \emph{whole-array recomputation} prevents a semantic collision.
+For a fixed word $w$, the usual failure map sends a positive border length
+$k$ to $\beta_{k-1}(w)$; iterating that scalar map follows the nested borders
+of the same fixed word.  In \eqref{eq:update}, by contrast, the complete table
+$\BA(e)$ becomes a new word:
+\[
+        e\longmapsto\BA(e)\longmapsto\BA(\BA(e))\longmapsto\cdots.
+\]
+No unqualified ``iteration of the prefix function'' is meant below.
+
+A state is \emph{recurrent} if it belongs to a directed cycle of $\Pi_n$.
+Its depth is
+\[
+ \depth(e)=\min\{t\ge0:\Pi_n^t(e)\text{ is recurrent}\}.
+\]
+
+\section{The one-step image and canonical two-cycles}
+
+Call an integer array \emph{valid} if it is the border array of some word.
+
+\begin{proposition}[exact image]\label{prop:image}
+The image $\im\Pi_n$ is exactly the valid border arrays of length $n$.
+\end{proposition}
+
+\begin{proof}
+Every output of $\Pi_n$ is valid by definition.  Conversely, let $p=\BA(w)$
+be valid.  Replace the first distinct letter of $w$ by zero, the next
+previously unseen letter by one, and so on.  The standardized letter at
+position $i$ is at most $i$, so the standardized word $\widehat w$ belongs
+to $\En$.  Standardization preserves every equality and inequality between
+positions.  Borders depend only on this equality pattern; hence
+$\BA(\widehat w)=\BA(w)=p$.
+\end{proof}
+
+For $1\le r<n$, define
+\begin{align}
+ A_r&=(0,1,\ldots,r,0,\ldots,0),\label{eq:A}\\
+ B_{r+1}&=(\underbrace{0,\ldots,0}_{r+1},1,\ldots,1).\label{eq:B}
+\end{align}
+
+\begin{proposition}[canonical pairs]\label{prop:pairs}
+For $1\le r<n$,
+\begin{equation}
+                  \Pi_n(A_r)=B_{r+1},\qquad
+                  \Pi_n(B_{r+1})=A_r.                 \label{eq:pairs}
+\end{equation}
+In particular, these states form $n-1$ distinct cycles of exact period two.
+\end{proposition}
+
+\begin{proof}
+Along the distinct initial slope of $A_r$, no nonempty border exists, so the
+first $r+1$ entries of $\BA(A_r)$ are zero.  Every later prefix ends in zero
+and has the one-letter border $0$.  If a proper suffix of length at least two
+were also a prefix, its first letter would force it to start at a tail zero;
+its second letter would then be zero, contradicting the second prefix letter
+$1$.  Thus $\BA(A_r)=B_{r+1}$.
+
+Inside the initial zero run of $B_{r+1}$, the longest proper border is one
+shorter than the prefix, producing $0,1,\ldots,r$.  Consider a prefix that
+ends in the one run.  A nonempty border must have length greater than $r+1$
+so that its prefix copy also ends in one.  Its suffix copy must start at a
+zero, but any proper such start lies inside the initial zero run and gives
+strictly fewer leading zeros than the prefix copy.  Hence no nonempty border
+exists after the zero run, $\BA(B_{r+1})=A_r$, and the templates are distinct.
+\end{proof}
+
+The remaining task is to prove that no other recurrent state exists and to
+measure how quickly every state enters one of these pairs.
+
+\section{The indexed mismatch amplifier}
+
+Every border array $p$ satisfies the unit-growth inequality
+\begin{equation}
+                         p_i\le p_{i-1}+1.             \label{eq:growth}
+\end{equation}
+For a valid $p$ of length at least two, choose its canonical template as
+follows.  If $p_1=1$, let $r$ be maximal such that
+$p_0p_1\cdots p_r=01\cdots r$ and put $Q(p)=A_r$.  If the slope stops, a
+realizing word has begun with $r+1$ equal letters.  Its next letter either
+continues that equality and the slope, or differs and destroys every
+positive border; maximality therefore forces $p_{r+1}=0$.
+
+If $p_1=0$, let $k$ be the length of its maximal initial zero run and put
+$Q(p)=B_k$.  If the run stops, \eqref{eq:growth} forces $p_k=1$.  Therefore
+every noncanonical valid table agrees with its template through at least
+three coordinates.  Define its first mismatch index by
+\begin{equation}
+ L(p)=\min\{i:p_i\ne Q(p)_i\},                         \label{eq:L}
+\end{equation}
+and put $L(p)=n$ when $p=Q(p)$.  The number $L(p)$ is also the length of the
+agreement prefix.
+
+\begin{lemma}[indexed mismatch transitions]\label{lem:mismatch}
+Let $p$ be valid, $q=\Pi_n(p)$, and $L=L(p)<n$.
+\begin{enumerate}[label=(\roman*)]
+\item If $Q(p)=A_r$, then $p_L=1$, $Q(q)=B_{r+1}$,
+      $L(q)=L$, and $q_L=2$.
+\item If $Q(p)=B_k$, then $p_L\in\{0,2\}$ and $Q(q)=A_{k-1}$.
+      For $p_L=0$, one has $L(q)=L$ and $q_L=1$; for $p_L=2$,
+      one has $L(q)>L$.
+\item After the extension in (ii), if another mismatch exists, it is an
+      $A$-type mismatch whose actual value is one.
+\end{enumerate}
+Equivalently, the first-mismatch states obey
+\begin{equation}
+ A1\longrightarrow B2\longrightarrow\text{extension},\qquad
+ B0\longrightarrow A1\longrightarrow B2\longrightarrow\text{extension}.
+                                                               \label{eq:automaton}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The border array of a prefix depends only on that prefix.  Thus $q$ agrees
+with $\Pi_n(Q(p))$, the partner in \eqref{eq:pairs}, before index $L$.
+If $Q(p)=A_r$, then $L$ lies after the first template-tail zero, so this
+agreement contains the $r+1$ initial zeros of $B_{r+1}$ and its first
+following one; hence $Q(q)=B_{r+1}$.  If $Q(p)=B_k$, then $L$ lies after the
+first one following the zero run, so the shared prefix contains the complete
+initial slope of $A_{k-1}$ and its first following zero; hence
+$Q(q)=A_{k-1}$.  It is this complete shared prefix, not the second coordinate
+alone, that fixes the partner parameter.
+
+Suppose first that $Q(p)=A_r$.  The mismatch occurs after the first zero
+following the slope, so $p_{L-1}=0$.  Its template value is zero; validity,
+\eqref{eq:growth}, and mismatch force $p_L=1$.  As an integer word, the
+prefix $p_0\cdots p_{L-1}$ has border length one.  The new letter $p_L=1$
+matches $p_1=1$, so the border extends to length two.  Hence $q_L=2$ while
+the $B_{r+1}$ template has value one, proving (i).
+
+Now suppose $Q(p)=B_k$.  Here $p_{L-1}=1$ and the template value at $L$ is
+one.  Inequality \eqref{eq:growth} leaves precisely $p_L=0$ or $p_L=2$.
+The integer-word prefix $p_0\cdots p_{L-1}$ has border length zero.  If
+$p_L=0$, it matches $p_0=0$ and creates border one, which is the $A1$ state.
+If $p_L=2$, it does not match $p_0$, so $q_L=0$, the required $A_{k-1}$
+value; agreement strictly extends.  Any later mismatch is now in an
+$A$-template tail after a zero.  The preceding $A_r$-case argument forces its
+actual value to be one.  This proves (ii), (iii), and \eqref{eq:automaton}.
+\end{proof}
+
+\begin{theorem}[recurrent atlas and upper clock]\label{thm:upper}
+At length one, $(0)$ is the unique recurrent state and is fixed.  For
+$n\ge2$, the recurrent set is exactly
+\[
+                    \{A_r,B_{r+1}:1\le r<n\},
+\]
+so it consists of the $n-1$ exact two-cycles in \cref{prop:pairs}.  For
+$n\ge4$,
+\begin{equation}
+ \max_{p\in\im\Pi_n}\depth(p)\le2n-5,\qquad
+ \max_{e\in\En}\depth(e)\le2n-4.                    \label{eq:upper}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+A noncanonical valid table has $L\ge3$.  By
+\cref{lem:mismatch}, its first mismatch is passed in at most three updates.
+After that extension, each later mismatch is passed in at most two updates.
+Since every extension increases $L$ by at least one, the number of updates
+before $L=n$ is at most
+\[
+              3+2(n-L-1)\le3+2(n-4)=2n-5.            \label{eq:count}
+\]
+At $L=n$ the table is one of the canonical templates and is recurrent.
+Strict growth of $L$ excludes recurrence before that time.  Every state of
+$\En$ enters the valid image after one update by \cref{prop:image}, giving
+the second bound.  The length-one statement and \cref{prop:pairs} finish the
+recurrent classification.
+\end{proof}
+
+\section{Sharp trajectories and the small boundaries}
+
+For $n\ge4$, put
+\begin{align}
+ p_n&=(0,0,1,0^{n-3}),& e_n&=(0,1,0,2,1^{n-4}),       \label{eq:witness}\\
+ X_j&=(0,0,1^j,2,0^{n-j-3}) &&(1\le j\le n-3),       \label{eq:X}\\
+ Y_j&=(0,1,0^{j+1},1,2^{n-j-4}) &&(0\le j\le n-4). \label{eq:Y}
+\end{align}
+
+\begin{proposition}[sharp witness trajectory]\label{prop:witness}
+The following identities hold:
+\begin{align}
+ \Pi_n(e_n)&=p_n,& \Pi_n(p_n)&=Y_0,\label{eq:first}\\
+ \Pi_n(Y_j)&=X_{j+1} &&(0\le j\le n-4),\label{eq:YtoX}\\
+ \Pi_n(X_j)&=Y_j &&(1\le j\le n-4),\label{eq:XtoY}\\
+ \Pi_n(X_{n-3})&=A_1.                                \label{eq:endpoint}
+\end{align}
+Consequently $\depth(p_n)=2n-5$ and $\depth(e_n)=2n-4$.
+\end{proposition}
+
+\begin{proof}
+All identities follow from equality blocks, which we spell out to fix the
+endpoints.  In $X_j$, the initial $00$ creates border values $0,1$; the
+following $j$ ones and the letter $2$ have border zero.  If a zero tail is
+present, its first letter has border one and every later zero has border two.
+This is $Y_j$.  When $j=n-3$, there is no zero tail, and the output is
+$A_1=(0,1,0^{n-2})$.
+
+In $Y_j$, the second letter differs from the initial zero, giving border
+zero.  Each of the next $j+1$ zeros has the one-letter border $0$ and no
+longer border.  The following one completes the border $01$ of length two.
+For a prefix ending in the trailing $2$-run, a proper border would contain
+fewer terminal twos in the initial copy than in the suffix; equality of those
+counts occurs only for the full, nonproper prefix.  Thus every trailing $2$
+has border zero.  The result is $X_{j+1}$.  The same inspection gives the two
+initial identities in \eqref{eq:first}.
+
+Thus the orbit of $p_n$ visits
+$Y_0,X_1,Y_1,X_2,\ldots,X_{n-3},A_1$ at successive times and first reaches
+the canonical two-cycle after $2n-5$ updates.  None of the preceding states
+is canonical.  Since $e_n$ maps to $p_n$, it has one additional transient
+step.
+\end{proof}
+
+\begin{theorem}[piecewise sharp maximum]\label{thm:sharp}
+For every $n\ge1$,
+\begin{equation}
+ \max_{e\in\En}\depth(e)=
+ \begin{cases}
+ 0,&n=1,\\
+ 0,&n=2,\\
+ 1,&n=3,\\
+ 2n-4,&n\ge4.
+ \end{cases}                                           \label{eq:sharp}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $n\ge4$, \cref{thm:upper,prop:witness} give matching bounds.  At length
+one there is only the fixed state.  At length two the two carrier states are
+$A_1$ and $B_2$, hence both are recurrent.  At length three, the four
+templates are recurrent, while the remaining two states $(0,0,2)$ and
+$(0,1,1)$ enter a template in one update.  This proves every boundary in
+\eqref{eq:sharp}.
+\end{proof}
+
+\section{Every target fibre and its two unique maxima}
+
+The next theorem applies to every target $p\in\En$, whether or not $p$ is a
+valid border array.
+
+\begin{theorem}[factorial fibre extremum]\label{thm:fibre}
+For every $p\in\En$,
+\begin{equation}
+                         |\Pi_n^{-1}(p)|\le(n-1)!.     \label{eq:fibre}
+\end{equation}
+When $n\ge2$, equality holds exactly for
+\begin{equation}
+                     p=0^n\quad\text{and}\quad
+                     p=A_1=(0,1,0^{n-2}).             \label{eq:max-targets}
+\end{equation}
+At $n=1$, the sole fibre has size one.
+\end{theorem}
+
+\begin{proof}
+Expose a source $e\in\En$ from left to right.  Its first letter is
+$e_0=0$.  The prescribed value $p_1$ uniquely determines $e_1$: value one
+requires $e_1=0$, and value zero requires $e_1=1$.  At position $i\ge2$, a
+positive prescribed border $p_i=k$ forces the last source letter to match
+the last letter of the corresponding prefix, namely $e_i=e_{k-1}$; it leaves
+at most one choice.  If $p_i=0$, then at least $e_i\ne e_0=0$, leaving at
+most the $i$ choices $1,\ldots,i$.  Multiplication proves \eqref{eq:fibre};
+an invalid target simply has no sources.
+
+Equality in the product requires $p_i=0$ at every $i\ge2$, because replacing
+the factor $i\ge2$ by at most one is strict.  Since $p_1\in\{0,1\}$, only the
+two targets in \eqref{eq:max-targets} remain.  We now prove that both attain
+the bound without using the false general shortcut that a nonzero final
+letter alone forbids every longer border.
+
+When $n=2$, the product over $i=2,\ldots,n-1$ is empty and equals one: the
+sources $(0,1)$ and $(0,0)$ map respectively to $0^2$ and $A_1$.  Hence
+assume $n\ge3$ in the suffix arguments that follow.
+
+For target $0^n$, choose $e_1=1$ and choose each later $e_i$ arbitrarily in
+$\{1,\ldots,i\}$.  Position zero is the only zero.  Every proper suffix of a
+prefix therefore starts with a nonzero letter and cannot equal a prefix,
+which starts with zero.  All border values are zero, and there are
+$\prod_{i=2}^{n-1}i=(n-1)!$ sources.
+
+For target $A_1$, choose $e_1=0$ and again choose
+$e_i\in\{1,\ldots,i\}$ for $i\ge2$.  The prefix of length two has border one.
+For any longer prefix, a proper suffix starting at position at least two
+fails in its first letter.  The only other possible proper suffix starts at
+position one; its second letter is $e_2\ne0=e_1$, so it also fails.  Hence all
+later border values are zero, giving another $(n-1)!$ sources.  These are the
+only equality cases.  For $n=1$, both the carrier and its image consist of
+$(0)$.
+\end{proof}
+
+\section{Exact control, scope, and limitations}
+
+The paper-local verifier is deterministic, dependency-free, and uses exact
+Python integers.  It exhausts all
+\[
+                  \sum_{n=1}^{9}n!=409{,}113
+\]
+carrier states and the same number of target cells.  Through length eight it
+compares the linear border routine with literal longest-prefix and
+longest-suffix comparison.  It checks every recurrent state and period, every
+instance of \cref{lem:mismatch}, both depth bounds, the displayed sharp
+trajectory, every target fibre, and both unique maximizers.  An independent
+standardization check covers $3{,}279$ words, and the sharp witnesses are
+continued through every length $4\le n\le32$.  The frozen run makes
+$1{,}694{,}506$ exact assertions.  These computations search for
+counterexamples; they do not prove the all-length statements.
+
+The subexceedant carrier, ordinary longest-border convention, and synchronous
+whole-array recomputation are essential.  Strict border arrays, optimized
+failure functions, a bounded alphabet, or scalar failure-link descent define
+other systems.  The carrier is an inversion-sequence encoding, so generic
+permutation or factorial language receives no credit; likewise, a sharp
+clock plus a fibre maximum is only a presentation silhouette.  The internal
+collision controls P105, P112-C6, P122, and the owner-killed same-batch PR1
+are therefore excluded from the claimed residual.
+
+The literature search can establish a source hit but cannot certify an
+absence.  The bounded search performed for this project did not locate the
+whole-array recomputation system or the theorem package above; this non-hit
+is not novelty or priority evidence.  Authorship, posting, submission,
+specialist contact, and all external-release actions remain on hold.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{pdfauthor={},pdftitle={},pdfsubject={},pdfkeywords={}}
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Bn}{\{0,1\}^n}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\pal}{\operatorname{pal}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\zero}{\mathbf 0}
+\newcommand{\one}{\mathbf 1}
+
+\title[Palindromic-prefix XOR feedback]{Palindromic-Prefix XOR Feedback:\
+One Two-Cycle, a Sharp Linear Clock, and Exact Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P25, 68R15, 05A15}
+\keywords{finite dynamical system, palindrome, binary word, synchronization,
+fibre}
+
+\begin{document}
+
+\begin{abstract}
+For a binary word, form the complete indicator vector of its palindromic
+prefixes and XOR that vector with the word.  We iterate this synchronous
+self-map.  Global complement removes a phase bit and produces a normalized
+system in which one update zeros the first three coordinates and every later
+update extends a leading zero prefix.  We prove that the original system has
+the single strict two-cycle $0^n\leftrightarrow1^n$ and that its maximum
+transient depth is $0$ at length one, $1$ at length two, and sharply $n-2$
+thereafter.  A periodic source whose ones occur at positions congruent to
+$3$ modulo $4$ attains the bound.  We also give a complete left-to-right
+decoder for every one-step fibre; it is simultaneously an exact image test.
+Palindrome recognition and static palindrome data structures are credited
+background.  Computation is used only for exact finite checks.  External
+release remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{The feedback map and the subtraction boundary}
+
+For a word $x=x_1\cdots x_n\in\Bn$, put
+\[
+ p_i(x)=\ind\{x_1\cdots x_i=x_i\cdots x_1\},\qquad 1\le i\le n.
+\]
+All arithmetic on bits is in $\mathbb F_2$, written $\oplus$.  We study the
+self-map
+\begin{equation}\label{eq:T}
+ T_n(x)_i=x_i\oplus p_i(x).
+\end{equation}
+The entire prefix-indicator vector is recomputed after every update.
+
+Initial-palindrome recognition has real-time algorithms
+\cite{Galil1978}; palindromic trees support access to all palindromic factors
+\cite{RubinchikShur2018}, and recent work compresses families of
+palindromic prefixes \cite{BathieEllertStarikovskaya2025}.  Static
+palindromic generation of binary words has a separate structural theory
+\cite{HarjuHuovaZamboni2015}.  These results, ordinary border algorithms, and
+generic XOR-network terminology are background here.  Our object is only the
+repeated full-vector feedback in \eqref{eq:T}, its temporal dynamics, and its
+inverse fibres.
+
+A state is \emph{recurrent} if it belongs to a directed cycle.  Its depth is
+the least number of updates needed to reach a recurrent state.  Write
+$\bar x=x\oplus1^n$ for global complement and normalize a word by
+\begin{equation}\label{eq:normalize}
+ N(x)_i=x_i\oplus x_1.
+\end{equation}
+Thus $N(x)_1=0$, and the two words in a complement pair have the same
+normalization.
+
+\section{Complement quotient and the recurrent class}
+
+\begin{proposition}[exact quotient]\label{prop:quotient}
+For every $x\in\Bn$,
+\[
+ T_n(\bar x)=\overline{T_n(x)}.
+\]
+On the normalized carrier
+$\mathcal Q_n=\{y\in\Bn:y_1=0\}$, the induced map is
+\begin{equation}\label{eq:Q}
+ Q_n(y)_i=y_i\oplus1\oplus p_i(y),
+\end{equation}
+and $N(T_n(x))=Q_n(N(x))$.
+\end{proposition}
+
+\begin{proof}
+Complementing every letter preserves every equality between two positions,
+so $p_i(\bar x)=p_i(x)$.  Equation \eqref{eq:T} then gives the first identity.
+Normalization also preserves all equality tests, hence
+$p_i(N(x))=p_i(x)$.  Since $p_1(x)=1$,
+\[
+ N(T_n(x))_i
+ =(x_i\oplus p_i(x))\oplus(x_1\oplus1)
+ =N(x)_i\oplus1\oplus p_i(N(x)),
+\]
+which is \eqref{eq:Q}.  At $i=1$ its value is zero, so $Q_n$ is closed on
+$\mathcal Q_n$.
+\end{proof}
+
+For $y\in\mathcal Q_n$, let $\ell(y)$ be the length of its leading zero run.
+
+\begin{lemma}[reset and amplifier]\label{lem:amplifier}
+For every $y\in\mathcal Q_n$, the first $\min(3,n)$ coordinates of $Q_n(y)$
+are zero.  More generally, if $y$ begins with $0^k$ and $1\le k<n$, then
+$Q_n(y)$ begins with $0^{k+1}$.
+\end{lemma}
+
+\begin{proof}
+The first coordinate is zero by \eqref{eq:Q}.  Write the first three source
+bits as $0ab$ when they exist.  The length-two prefix is palindromic exactly
+when $a=0$, and the length-three prefix is palindromic exactly when $b=0$.
+Thus at each of coordinates two and three, the last two terms in
+\eqref{eq:Q} cancel the source bit.
+
+Now suppose that $y_1\cdots y_k=0^k$.  Every prefix ending at or before $k$
+is palindromic, so its image bit is zero.  If $y_{k+1}=0$, the next prefix is
+also all zero.  If $y_{k+1}=1$, its first and last bits differ, so it is not
+palindromic.  In either case \eqref{eq:Q} gives $Q_n(y)_{k+1}=0$.
+\end{proof}
+
+\begin{theorem}[complete recurrence and upper clock]\label{thm:recurrence}
+The only recurrent class of $T_n$ is the strict two-cycle
+\[
+ 0^n\longleftrightarrow1^n.
+\]
+The maximum depth is at most $0$ for $n=1$, at most $1$ for $n=2$, and at
+most $n-2$ for $n\ge3$.
+\end{theorem}
+
+\begin{proof}
+The normalized word $0^n$ is fixed by $Q_n$.  If a normalized word is not
+zero, then after one update it has at least $\min(3,n)$ leading zeros by
+\cref{lem:amplifier}; every subsequent nonzero state has a strictly longer
+leading zero prefix.  Hence $0^n$ is the only recurrent quotient state.  The
+number of required updates is zero at $n=1$, at most one at $n=2$, and at
+most $1+(n-3)=n-2$ for $n\ge3$.
+
+In the original system the first bit flips at every update because
+$p_1(x)=1$.  Once the normalization is zero, the word is constant, and every
+prefix of a constant word is palindromic.  Therefore $T_n(0^n)=1^n$ and
+$T_n(1^n)=0^n$.  Each recurrent original state must project to the unique
+recurrent quotient state, and the phase flip then forces exactly this strict
+two-cycle.
+\end{proof}
+
+\section{A sharp periodic source}
+
+For $n\ge3$, define $u^{(n)}\in\mathcal Q_n$ by
+\begin{equation}\label{eq:witness}
+ u^{(n)}_i=1\quad\Longleftrightarrow\quad i\equiv3\pmod4.
+\end{equation}
+For $3\le k\le n$, let $v^{(n)}_k$ be the length-$n$ prefix of
+$0^k1010\cdots$; in particular $v^{(n)}_n=0^n$.
+
+\begin{lemma}[exact sharp trajectory]\label{lem:sharp}
+For $n\ge3$,
+\[
+ Q_n(u^{(n)})=v^{(n)}_3,
+ \qquad
+ Q_n(v^{(n)}_k)=v^{(n)}_{k+1}\quad(3\le k<n).
+\]
+Consequently $u^{(n)}$ reaches $0^n$ for the first time after $n-2$ updates.
+\end{lemma}
+
+\begin{proof}
+The palindromic prefixes of $u^{(n)}$ have lengths $1$, $2$, and the lengths
+$i\ge5$ satisfying $i\equiv1\pmod4$.  To verify this, for $i\ge3$ note that
+the one-positions in the prefix are $3,7,\ldots$.  Reflection in a word of
+length $i$ sends position $3+4j$ to $i-2-4j$.  This preserves that set exactly
+when $i\equiv1\pmod4$; in every other residue class the reflection of position
+$3$ is not a one-position.  Substitution in \eqref{eq:Q}, one residue class
+at a time, gives zeros at positions one through three and thereafter a one
+exactly at each even position.  This is $v^{(n)}_3$.
+
+Fix $k\ge3$.  The prefixes of $v^{(n)}_k$ of length at most $k$ are all zero
+and hence palindromic.  No longer prefix is palindromic.  Indeed, such a
+palindrome would have to end in $0^k$.  If its length is less than $2k$, its
+last $k$ positions include position $k+1$, whose bit is one.  If its length is
+at least $2k$, its last $k$ positions lie in an alternating tail and again
+contain a one.  Thus beyond position $k$ the palindrome indicator vanishes,
+and \eqref{eq:Q} complements the alternating tail.  Its first one is thereby
+absorbed into the zero prefix, giving exactly $v^{(n)}_{k+1}$.
+
+The displayed chain contains $n-2$ arrows from $u^{(n)}$ to $v^{(n)}_n$.
+Every preceding member is nonzero, so this is the first hitting time.
+\end{proof}
+
+\begin{corollary}[sharp clock]\label{cor:clock}
+The maximum depth of $T_n$ is
+\[
+\begin{array}{c|ccc}
+n&1&2&n\ge3\\ \midrule
+\max\depth&0&1&n-2.
+\end{array}
+\]
+\end{corollary}
+
+\begin{proof}
+The upper bounds are \cref{thm:recurrence}.  At length two either nonconstant
+word has nonzero normalization and reaches the recurrent class in one step.
+For $n\ge3$, choose either original phase above the normalized word
+$u^{(n)}$; \cref{lem:sharp} gives depth $n-2$.
+\end{proof}
+
+\section{The complete one-step fibre decoder}
+
+We now count the fibre of an arbitrary original target $t\in\Bn$.  Put
+$z=N(t)$.  Define sets $\mathcal D_i(z)$ of normalized source prefixes
+recursively.  Start with $\mathcal D_1(z)=\{0\}$.  Given
+$y_1\cdots y_{i-1}\in\mathcal D_{i-1}(z)$, let
+$m=y_2\cdots y_{i-1}$, where the empty word is palindromic.  Extend by the
+following rule:
+\begin{equation}\label{eq:decoder}
+\begin{array}{c|c|c}
+m&z_i&\text{allowed }y_i\\ \midrule
+\text{nonpalindromic}&0\text{ or }1&1\oplus z_i\\
+\text{palindromic}&0&0,1\\
+\text{palindromic}&1&\text{none}.
+\end{array}
+\end{equation}
+
+\begin{theorem}[every-target fibres]\label{thm:fibres}
+For every $t\in\Bn$,
+\[
+ |T_n^{-1}(t)|=|\mathcal D_n(N(t))|.
+\]
+In particular, $t$ belongs to the image exactly when the decoder leaves at
+least one branch.  The original complement phase contributes no additional
+multiplicity.
+\end{theorem}
+
+\begin{proof}
+Consider a normalized source prefix $y_1\cdots y_i$, with $y_1=0$.  Its full
+length-$i$ prefix is palindromic exactly when $y_i=0$ and the middle word
+$m=y_2\cdots y_{i-1}$ is palindromic.  If $m$ is nonpalindromic, the indicator
+in \eqref{eq:Q} is zero for either $y_i$, so the target equation
+$Q_n(y)_i=z_i$ forces $y_i=1\oplus z_i$.  If $m$ is palindromic, then
+$y_i=0$ turns the indicator on and $y_i=1$ turns it off; both choices give
+target bit zero, and neither gives target bit one.  These are precisely the
+three cases in \eqref{eq:decoder}.
+
+The $i$th quotient output depends only on the first $i$ source bits.
+Induction on $i$ therefore shows that $\mathcal D_i(z)$ is exactly the set of
+normalized length-$i$ prefixes whose quotient image agrees with $z$ through
+position $i$.  At $i=n$ it is the complete normalized fibre.
+
+Finally, if $x$ is an original source of $t$, then its first bit is forced by
+$t_1=x_1\oplus1$, namely $x_1=1\oplus t_1$.  Every normalized branch $y$
+therefore lifts to the unique source $x_i=y_i\oplus(1\oplus t_1)$, and
+\cref{prop:quotient} shows that this source maps to $t$.  Hence there is no
+factor of two.
+\end{proof}
+
+\begin{remark}
+The decoder is target-wise, including targets outside the image.  It is not
+merely a recurrence for the largest fibre: it returns the exact cardinality of
+every fibre using only palindrome tests on prefixes already constructed.
+\end{remark}
+
+\section{Exact control and limitations}
+
+The dependency-free paper-local verifier constructs every functional graph
+for $1\le n\le18$, totaling $524{,}286$ states.  It checks complement
+equivariance, the literal quotient, all cycles and depths, and both amplifier
+statements.  For every target through $n=15$, it independently compares
+\eqref{eq:decoder} with the literal fibre.  It also checks the closed sharp
+family through $n=64$.  The canonical run executes $3{,}870{,}590$ exact
+assertions.
+
+These finite checks are counterexample pressure and do not prove statements
+at untested lengths.  Conversely, no observed image or maximum-fibre sequence
+is promoted to an all-length claim.  The owner search is bounded, and a
+non-hit is not a novelty or priority certificate.  This anonymous artifact is
+therefore marked \texttt{HOLD\_EXTERNAL}: posting, submission, and release are
+outside the present result.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage{booktabs,array}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,
+  citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},
+  pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\W}{\mathcal W}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\mathrm{id}}
+
+\title[Prefix-diversity delay]{Pointwise Clocks and All-Time Fibres for\\
+Prefix-Diversity Delay}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37E15, 05A15, 68R15}
+\keywords{finite dynamical system, word, prefix diversity, restricted growth,
+fibre, transient depth}
+
+\begin{document}
+
+\begin{abstract}
+Replace every coordinate of a length-$n$ word over an $n$-letter alphabet by
+the number of distinct letters in its strict prefix, and feed the entire
+output word back into the same rule.  We prove a pointwise iterate formula:
+after the first epoch, each further epoch inserts one forced identity
+coordinate and shifts the original prefix-diversity path.  It follows that
+the identity word is the unique recurrent point and that a word's exact
+entrance time is determined by its longest all-distinct prefix.  For
+$1\le t\le n-1$, the image consists of $2^{n-t-1}$ binary-rise paths with
+an identity prefix, and the depth CDF is $(n)_{n-t}n^t$.  Every transient
+target fibre is a local product of fresh-letter and old-letter choices, with
+the identity and stabilized cases stated separately.  For $n\ge3$ the global height
+is $n-1$, with exactly $n^{n-1}$ deepest words; the two-letter boundary is
+explicit.  Restricted-growth encodings and prefix statistics receive no
+contribution credit.  The retained iterative
+conjunction is \textsc{owner\_amber}; circulation remains
+\textsc{hold\_external}.
+\end{abstract}
+
+\maketitle
+
+\section{Literal rule and contribution boundary}
+
+Write $[n]_0=\{0,\ldots,n-1\}$ and $\W_n=[n]_0^n$ for $n\ge1$.  Define the
+prefix-diversity self-map $P_n:\W_n\to\W_n$ by
+\begin{equation}\label{eq:map}
+ (P_nw)_i=|\{w_0,\ldots,w_{i-1}\}|,
+ \qquad 0\le i<n,
+\end{equation}
+where the empty prefix has size zero.  Since $(P_nw)_i\le i<n$, no
+totalisation is needed.
+
+Restricted-growth functions and their set-partition encodings are classical
+\cite{Wachs1994}.  More closely, Mansour and Vajnovszki define restricted
+growth words through general prefix statistics and give efficient Gray-code
+generation \cite{MansourVajnovszki2013}.  We therefore assign
+restricted-growth vocabulary, first-occurrence patterns, prefix-statistic
+evaluation, falling factorials, and generic finite-map bookkeeping no
+contribution credit.  The scoped residual is only the autonomous iteration
+of the literal vector \eqref{eq:map}, its pointwise delay law, and the joint
+all-time clock/image/every-target inverse atlas.  A bounded search found no
+source stating that conjunction.  This non-hit is neither novelty nor
+priority evidence.
+
+Internally, P132 thresholds binary prefix sums; P134 recomputes border arrays;
+P138 and P139 use palindromic and Lyndon prefix structure; P164 passes a
+cyclic equality mask into a linear cellular automaton; and P176 rotates by a
+first-symbol frequency.  None yields \eqref{eq:map} or the delay identity
+below, but all generic prefix and word-feedback language is subtracted.
+
+For a word $w$, put $d=P_nw$.  Its increments record novelty:
+\begin{equation}\label{eq:novelty}
+ d_0=0,\qquad d_i-d_{i-1}=\mathbf1\{w_{i-1}\notin
+ \{w_0,\ldots,w_{i-2}\}\}\quad(1\le i<n).
+\end{equation}
+In particular $d_1=1$ when $n\ge2$.
+
+\section{The delay normal form}
+
+\begin{theorem}[pointwise all-time iterate]\label{thm:iterate}
+Let $w\in\W_n$, $d=P_nw$, and $t\ge1$.  With $r=t-1$,
+\begin{equation}\label{eq:iterate}
+ (P_n^tw)_i=
+ \begin{cases}
+ i,&i<r,\\
+ r+d_{i-r},&i\ge r.
+ \end{cases}
+\end{equation}
+For $r\ge n$, the first branch applies at every coordinate.
+\end{theorem}
+
+\begin{proof}
+Every prefix-diversity word $d$ starts at zero and rises at each step by zero
+or one.  Hence its prefix $d_0,\ldots,d_{i-1}$ contains every integer from
+zero through $d_{i-1}$.  Applying \eqref{eq:map} to such a path gives
+\begin{equation}\label{eq:shift}
+ (P_nd)_0=0,\qquad (P_nd)_i=d_{i-1}+1\quad(i\ge1).
+\end{equation}
+The right-hand side is again a zero-one-rise path.  Iterating
+\eqref{eq:shift} inserts one more forced identity coordinate on the left and
+shifts the old path one place right.  Starting from $P_nw=d$ proves
+\eqref{eq:iterate} by induction.
+\end{proof}
+
+Thus the entire future of $w$ is already coded by the novelty decisions in
+its first image; no orbit search is needed.
+
+\section{Images, recurrence, and pointwise clocks}
+
+Let $e=(0,1,\ldots,n-1)$.  For $w\in\W_n$, let $\rho(w)$ be the length of
+its longest all-distinct prefix.
+
+\begin{theorem}[complete forward atlas]\label{thm:forward}
+For $1\le t\le n-1$, the time-$t$ image is exactly the set of words $y$ with
+\begin{equation}\label{eq:image}
+ y_i=i\ (0\le i\le t),\qquad
+ y_i-y_{i-1}\in\{0,1\}\ (t<i<n).
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:image-size}
+                 |\im P_n^t|=2^{n-t-1}.
+\end{equation}
+The word $e$ is the unique fixed and recurrent state, and $P_n^{n-1}$ is
+constant with value $e$.  The exact entrance time $\tau(w)$ is
+\begin{equation}\label{eq:clock}
+ \tau(w)=
+ \begin{cases}
+ 0,&w=e,\\
+ \max\{1,n-\rho(w)\},&w\ne e.
+ \end{cases}
+\end{equation}
+For $n\ge3$, the sharp height is $n-1$; its complete deepest set is
+$\{w:w_0=w_1\}$ and has size $n^{n-1}$.  At $n=2$, the height is one and
+all three nonidentity words are deepest.  At $n=1$, the height is zero.
+\end{theorem}
+
+\begin{proof}
+Formula \eqref{eq:iterate} forces \eqref{eq:image}.  Conversely, a target of
+that form recovers the prefix
+\begin{equation}\label{eq:recover-d}
+ d_j=y_{j+t-1}-(t-1),\qquad 0\le j\le n-t.
+\end{equation}
+It begins $0,1$ and has zero-one rises, so choose a fresh source letter at
+each rise and a previously seen letter at each flat.  There are always
+enough letters, and the last $t$ source coordinates are arbitrary.  Thus
+every target in \eqref{eq:image} occurs.  Its final $n-t-1$ increments are
+free bits, proving \eqref{eq:image-size}.
+
+For $n=1$ the claim is immediate.  For $n\ge2$, taking $t=n-1$ gives the
+constant image $e$.  If $P_nw=w$, then $w_0=0,w_1=1$ and induction in
+\eqref{eq:map} forces $w_i=i$; hence $e$ is the only fixed point and, because
+every orbit reaches it, the only recurrent point.
+
+For $t\ge1$, \eqref{eq:iterate} equals $e$ exactly when
+$d_j=j$ through $j=n-t$, equivalently when the first $n-t$ letters of $w$
+are distinct.  Taking the least such positive $t$ and separating the already
+fixed word proves \eqref{eq:clock}.  For $n\ge3$, depth $n-1\ge2$ means
+$\rho(w)=1$, which is exactly $w_0=w_1$; choose this repeated letter in $n$
+ways and the remaining $n-2$ coordinates arbitrarily.  Directly, $\W_2$
+consists of the fixed word $01$ and three depth-one words, while
+$\W_1=\{0\}$.
+\end{proof}
+
+\begin{corollary}[exact depth CDF]\label{cor:depth}
+For $1\le t\le n-1$,
+\begin{equation}\label{eq:depth-cdf}
+ |\{w:\tau(w)\le t\}|=(n)_{n-t}n^t,
+\end{equation}
+where $(n)_k=n(n-1)\cdots(n-k+1)$.  Thus every positive depth population is
+the difference of consecutive values in \eqref{eq:depth-cdf}, with the
+depth-zero value equal to one.
+\end{corollary}
+
+\begin{proof}
+The proof of Theorem~\ref{thm:forward} says that $\tau(w)\le t$ precisely
+when the first $n-t$ letters are distinct.  There are $(n)_{n-t}$ choices for
+that prefix and $n^t$ choices for the invisible suffix.
+\end{proof}
+
+\section{All-time every-target fibres}
+
+\begin{theorem}[local inverse product]\label{thm:fibre}
+Let $1\le t\le n-1$ and let $y$ satisfy \eqref{eq:image}.  Recover
+$d_0,\ldots,d_{n-t}$ by \eqref{eq:recover-d}.  Then
+\begin{equation}\label{eq:fibre}
+ |(P_n^t)^{-1}(y)|=
+ n^{t+1}\prod_{q=1}^{n-t-1}
+ \begin{cases}
+ n-d_q,&d_{q+1}-d_q=1,\\
+ d_q,&d_{q+1}-d_q=0.
+ \end{cases}
+\end{equation}
+Targets outside \eqref{eq:image} have fibre zero.  In particular, the fibre
+of $e$ is $(n)_{n-t}n^t$, exactly the depth CDF.
+The product in \eqref{eq:fibre} is empty when $t=n-1$.  At time $t=0$,
+$P_n^0$ is the identity, so every target has fibre one.  For every
+$t\ge n-1$, the image is the singleton $\{e\}$, the fibre of $e$ has size
+$n^n$, and every other fibre is zero.
+\end{theorem}
+
+\begin{proof}
+The target exposes whether source position $q$ is a new letter for every
+$1\le q\le n-t-1$.  Before that position, exactly $d_q$ letters have
+appeared.  A rise therefore has $n-d_q$ choices and a flat has $d_q$
+choices.  The first source letter has $n$ choices, while the last $t$ source
+letters are invisible and contribute $n^t$.  These choices are independent
+conditional on the displayed novelty path, proving \eqref{eq:fibre} and also
+proving fibre-mass conservation without division by the image size.  For
+$y=e$, every visible decision is a rise, yielding the falling factorial in
+\eqref{eq:depth-cdf}.
+\end{proof}
+
+For orientation, at $n=4$ the word $0013$ follows
+\begin{equation*}
+ 0013\longmapsto0112\longmapsto0122\longmapsto0123=e,
+\end{equation*}
+and its initial repetition witnesses the sharp depth three.  At $n=7$, the
+exact depth histogram is
+\begin{equation*}
+ 1,\ 35279,\ 88200,\ 164640,\ 216090,\ 201684,\ 117649.
+\end{equation*}
+
+\section{Exact control, limitations, and declarations}
+
+The paper-local standard-library verifier exhausts all $n^n$ words through
+$n=7$.  For every source and all relevant times it compares literal
+iteration with \eqref{eq:iterate}; it rebuilds the image language and every
+target fibre, checks the least pointwise clock and every depth CDF, and
+verifies the complete deepest population.  Finite computation is
+falsification pressure, not proof.
+
+The alphabet size is tied to the word length, and the update retains counts
+rather than the equality partition alone.  We do not classify rectangular
+alphabet/length variants, random updates, or asymptotic laws.  The closest
+restricted-growth literature is structurally adjacent, and the bounded
+owner search leaves a live terminology risk.  The status is therefore
+\textsc{owner\_amber / hold\_external}; no circulation or priority claim is
+authorized.
+
+\paragraph{Data availability.}
+No external data were used.  The exact verifier and canonical transcript
+accompany the source.
+\paragraph{Ethics statement.}
+The work uses no human participants, animals, personal data, or experiments
+requiring ethics approval.
+\paragraph{CRediT author statement.}
+The anonymous author performed conceptualization, formal analysis, software,
+validation, and writing.
+\paragraph{Competing interests.}
+The author declares no competing interests.
+\paragraph{Funding.}
+No external funding is declared.
+\paragraph{AI-use statement.}
+Generative AI assisted drafting and code generation.  All mathematical,
+bibliographic, and artifact claims require human verification before any
+external use.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
+\documentclass[a4paper,10pt]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\calX}{\mathcal X}
+\newcommand{\calL}{\mathcal L}
+\newcommand{\zero}{\boldsymbol 0}
+\title[Eventual-period feedback]{Sharp Rank Thresholds, Critical Extremizers,\newline and Fibres of Eventual-Period Feedback}
+\author{Anonymous}
+\date{}
+\keywords{finite dynamical system, endofunction, cycle length, rank, transient, rooted forest}
+\begin{document}
+\begin{abstract}
+For a function on the labels $0,\ldots,n-1$, replace its value at each
+vertex by the length of the eventual cycle reached from that vertex,
+minus one. Iterating this operator, rather than repeatedly composing a
+fixed function, always reaches the constant-zero function. We determine
+the sharp rank needed to have height at least $h$: the thresholds satisfy
+$N_2=2$ and $N_{h+1}=N_h(N_h+1)/2$. Every threshold is attained by an
+explicit permutation, and the resulting bound is sharp at every rank on
+every larger carrier. At a critical size $N_h$ we classify all deepest
+states and count them by a factorial recursion. Independently, a target's
+fibre factors over its level sets into functions with a prescribed cycle
+length. This gives every empty and nonempty fibre, the first image, and
+a unique largest fibre at zero of size $(n+1)^{n-1}$. The triangular
+sequence and all static cycle/forest enumeration are classical and fully
+subtracted. Complete checks through seven labels and larger critical
+witnesses provide bounded verification; external status remains
+\texttt{HOLD\_EXTERNAL}.
+\end{abstract}
+\maketitle
+
+\section{The labelled operator and its scope}
+Fix $n\ge1$ and put
+$\calX_n=\{f:\{0,\ldots,n-1\}\to\{0,\ldots,n-1\}\}$.
+For a vertex $i$, let $\ell_f(i)$ be the length of the unique directed
+cycle eventually reached by iterating $f$ from $i$. Loops have length
+one. Define the simultaneous update
+\begin{equation}\label{eq:update}
+ (P_nf)(i)=\ell_f(i)-1.
+\end{equation}
+Since $1\le\ell_f(i)\le n$, this is an autonomous self-map of
+$\calX_n$. Numerical labels are retained at every epoch; the output is
+used as the next function, not as an unlabelled statistic. Write
+$r(f)=|\im f|$ and denote the constant-zero function by $\zero$.
+The identity function is not $\zero$ unless $n=1$.
+
+Functional-graph decomposition into cycles with rooted trees is classical,
+as are labelled SET/CYC enumeration and Cayley forest counts
+\cite{FlajoletSedgewick2009}. Functional-graph reconstruction by direct
+products is a neighboring question: Dor\'e et al.\ use the word
+``feedback'' for a cyclic vertex's return period but study graph equations
+up to isomorphism \cite{DoreEtAl2022v2}. Equation~\eqref{eq:update}
+instead changes the numerical pointers and then recomputes their cycles.
+The distinction specifies the object; it does not establish priority.
+
+The threshold sequence $2,3,6,21,231,26796,\ldots$ is already known.
+Wagner explicitly gives the triangular recurrence in the enumeration of
+balanced trees and identifies the sequence A007501
+\cite[Section~4]{Wagner2014}. The sequence itself, generic rank descent,
+cycle finding and all static inverse counts receive zero contribution
+credit. The temporal content here is the sequence's sharp minimum-rank
+interpretation, its attained all-rank bound, and the full equality
+classification at critical sizes. The independent inverse mechanism is
+the invariant-block decomposition with strict maximal-fibre comparison.
+
+The internal comparison includes P137 rank feedback and P167 least-
+preimage feedback. A prior word/poset scouting lane excluded canonical
+statistics written back as states; that lane rule remains unchanged.
+The present note was separately selected under the central two-axis
+contract, not by silently waiving that rule. The source record preserves
+this scope decision and the missing P51--P56 manuscript caveat. No bounded
+search non-hit or computational success certifies novelty or ownership.
+
+\section{Cycle-size cost and the zero attractor}
+Let $\calL(f)$ be the set of distinct cycle lengths in the functional
+graph of $f$, and put $Q(s)=s(s+1)/2$.
+\begin{lemma}[rank packing]\label{lem:rank}
+For every $f\in\calX_n$,
+\begin{equation}\label{eq:rank}
+ r(P_nf)=|\calL(f)|,\qquad
+ r(f)\ge\sum_{d\in\calL(f)}d\ge Q(r(P_nf)).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Every cycle has a nonempty basin, so the distinct output values are
+exactly $d-1$ for $d\in\calL(f)$. Choose one cycle for each different
+length. Their vertices are disjoint and all belong to $\im f$, giving
+the first inequality. Distinct positive integers with $s$ elements sum
+to at least $1+\cdots+s=Q(s)$.
+\end{proof}
+
+\begin{proposition}\label{prop:zero}
+Every orbit of $P_n$ reaches $\zero$. It is the sole fixed and sole
+recurrent state, and every eventual period is one.
+\end{proposition}
+\begin{proof}
+If $r(P_nf)\ge2$, then $Q(r(P_nf))>r(P_nf)$, so
+Lemma~\ref{lem:rank} strictly decreases rank. If the output has rank one,
+it is constant. A constant function has only a loop as its cycle, and
+its next output is $\zero$. Strict decreases cannot continue indefinitely,
+and $P_n\zero=\zero$. No other recurrent state is possible.
+\end{proof}
+Define $h(f)=\min\{t\ge0:P_n^tf=\zero\}$, now finite by
+Proposition~\ref{prop:zero}.
+
+\begin{lemma}[core extension]\label{lem:core}
+Suppose $1\le k\le n$, $g:\{0,\ldots,n-1\}\to\{0,\ldots,k-1\}$,
+and $u=g|_{\{0,\ldots,k-1\}}$. For all $t\ge0$,
+\begin{equation}\label{eq:restriction}
+ (P_n^t g)|_{\{0,\ldots,k-1\}}=P_k^t u.
+\end{equation}
+For $t\ge1$, $P_n^t g=\zero$ if and only if $P_k^t u=\zero$.
+Thus $h(g)=h(u)$ if $h(u)\ge1$; if $u=\zero$, then $h(g)$ is zero or
+one according as $g=\zero$ or not.
+\end{lemma}
+\begin{proof}
+Every cycle of $g$ lies in the first $k$ labels, and every outside vertex
+enters that core in one arrow. All periods are at most $k$, so $P_ng$
+again maps into the core and restricts there to $P_ku$. Induction gives
+\eqref{eq:restriction} and preserves this core-mapping property at every
+epoch. A period-feedback vector is zero exactly when every cycle of its
+input is a loop. At every epoch the extension and its core restriction
+have precisely the same cycles. This proves the equivalence for $t\ge1$.
+If $u=\zero$, the equivalence says that $P_ng=\zero$; time zero must be
+checked separately, yielding the stated boundary.
+\end{proof}
+
+\section{Sharp height at every size and rank}
+Define
+\begin{equation}\label{eq:threshold}
+ N_2=2,\qquad N_{h+1}=Q(N_h)\quad(h\ge2).
+\end{equation}
+These are strictly increasing integers.
+\begin{theorem}[sharp rank hierarchy]\label{thm:height}
+For every $h\ge2$ and every $f$ on any finite carrier,
+\begin{equation}\label{eq:rankheight}
+ h(f)\ge h\quad\Longrightarrow\quad r(f)\ge N_h.
+\end{equation}
+There is a height-$h$ permutation on $N_h$ labels. Consequently the
+maximum height on $n$ labels is
+\begin{equation}\label{eq:maxheight}
+ H(1)=0,\qquad H(n)=\max\{h\ge2:N_h\le n\}\quad(n\ge2).
+\end{equation}
+More generally, for every $2\le r\le n$, the maximum among rank-$r$
+functions on $n$ labels is $H(r)$. At rank one, the maximum is one if
+$n\ge2$ and zero if $n=1$.
+\end{theorem}
+\begin{proof}
+A rank-one function is constant and has height at most one, which proves
+\eqref{eq:rankheight} at $h=2$. If $h(f)\ge h+1$, then
+$h(P_nf)\ge h$, so induction and \eqref{eq:rank} give
+$r(f)\ge Q(r(P_nf))\ge Q(N_h)=N_{h+1}$.
+
+To attain the bound, start with $f_2=(1,0)$. Its successive outputs are
+$(1,1)$ and $(0,0)$, so its height is two. Suppose $f_h$ is a height-$h$
+permutation on $k=N_h$ labels. For every $j=0,\ldots,k-1$, make a block
+$B_j$ containing the unique old label $f_h^{-1}(j)$ and exactly $j$
+fresh labels. These blocks partition $Q(k)=N_{h+1}$ labels. On each
+$B_j$ choose any single cycle and let $f_{h+1}$ be their disjoint union.
+Then $P f_{h+1}$ is constant $j$ on $B_j$, maps into the first $k$
+labels, and restricts there to $f_h$. Lemma~\ref{lem:core} shows that
+$h(P f_{h+1})=h$, so $h(f_{h+1})=h+1$.
+
+For an arbitrary $r\ge2$, let $h=H(r)$ and take this critical
+permutation on $k=N_h\le r$ labels. Extend it to a permutation on $r$
+labels by fixing the added labels. Its first period-feedback vector
+equals $P_k f_h$ on the core and zero outside. It maps into that core.
+Since $h(P_k f_h)=h-1\ge1$, Lemma~\ref{lem:core} gives height $h-1$
+for this vector, and height $h$ for the enlarged permutation. Extend
+further to $n\ge r$ by mapping all new vertices to zero. The new function
+has rank exactly $r$ and retains height $h$ by the same lemma.
+This proves the all-rank and all-size attainment statements. Finally,
+nonzero constant functions exist exactly when $n\ge2$ and have height
+one; the only state at $n=1$ is zero.
+\end{proof}
+
+\section{All deepest states at critical sizes}
+The equality statement in this section concerns $n=N_h$, not arbitrary
+sizes between two thresholds.
+\begin{theorem}[critical equality and census]\label{thm:critical}
+At size $N_h$, every height-$h$ function is a permutation. For $h\ge3$
+and $k=N_{h-1}$, these are exactly the permutations $f$ satisfying:
+\begin{enumerate}
+\item there is precisely one cycle of each length $1,2,\ldots,k$;
+\item $u=(P f)|_{\{0,\ldots,k-1\}}$ is a height-$(h-1)$ permutation
+      of those $k$ labels.
+\end{enumerate}
+If $D_h$ is their number, then
+\begin{equation}\label{eq:criticalcount}
+ D_2=1,\qquad D_h=D_{h-1}(N_h-N_{h-1})!\quad(h\ge3).
+\end{equation}
+In particular, $D_3=1$, $D_4=6$, and $D_5=6\cdot15!$.
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:height} forces $r(f)=N_h$, hence $f$ is a permutation.
+For $h\ge3$, $h(Pf)=h-1$ and the entire chain
+\begin{equation}\label{eq:equalitychain}
+ N_h=r(f)\ge\sum_{d\in\calL(f)}d
+ \ge Q(r(Pf))\ge Q(N_{h-1})=N_h
+\end{equation}
+consists of equalities. The strictly increasing $Q$ forces $r(Pf)=k$.
+Equality in the distinct-positive-integer sum forces
+$\calL(f)=\{1,\ldots,k\}$. Equality in the first inequality says that
+the selected cycle of each length already exhausts all vertices.
+There are thus no additional cycles, so condition (1) holds and
+$\im(Pf)=\{0,\ldots,k-1\}$.
+
+By Lemma~\ref{lem:core}, the restriction $u$ has height $h-1$.
+Applying \eqref{eq:rankheight} on its $k=N_{h-1}$ labels forces full
+rank, so it is a permutation and condition (2) holds. Conversely,
+conditions (1) and (2) make $Pf$ a core extension of a height-$(h-1)$
+function. The same lemma gives $h(Pf)=h-1$, hence $h(f)=h$. This proves
+necessity and sufficiency, not just an extremal construction.
+
+Fix an eligible $u$. Its inverse image of $j$ prescribes one old label
+in the cycle block $B_j$ of length $j+1$. Allocate the $N_h-k$ fresh
+labels among these blocks in
+$(N_h-k)!/\prod_{j=0}^{k-1}j!$ ways. Each block has $j!$ cyclic orders.
+Their product cancels the denominator. Different allocations or cyclic
+orders give different permutations, while the equality characterization
+shows that every extremizer is obtained. The count per $u$ is therefore
+$(N_h-k)!$. At $N_2=2$ only the transposition has height two, establishing
+the initial condition and \eqref{eq:criticalcount}.
+\end{proof}
+
+\section{The full one-step inverse and its maximum}
+We isolate the classical enumerative input. Let $R(k,s)$ count forests
+on a fixed $k$-element label set directed toward a prescribed set of
+$s\ge1$ roots, with exactly one root per component. Then
+\begin{equation}\label{eq:forest}
+ R(k,s)=\begin{cases}1,&s=k,\\s k^{k-s-1},&s<k.\end{cases}
+\end{equation}
+A root-preserving Pr\"ufer code proves this formula directly. Repeatedly
+remove the least nonroot leaf and record its parent until only roots
+remain. There are $k-s$ recorded labels and the last is a root. Conversely,
+given any such sequence, remove the least remaining nonroot absent from
+the remaining sequence and join it to the next recorded parent. At each
+stage such a nonroot exists: the sequence has as many entries as remaining
+nonroots and at least one root entry, so it cannot contain all remaining
+nonroots. A deleted label cannot occur later in the sequence, and edges
+always lead to a still-present label. The reconstruction therefore yields
+a forest directed to the specified roots and reverses the encoding.
+There are $s k^{k-s-1}$ codes when $s<k$. This is standard labelled
+forest enumeration \cite{FlajoletSedgewick2009}, not a new count.
+
+For $d\ge1$, let $a_d(k)$ count functions on a prescribed $k$-element
+set whose every cycle has length $d$, with $a_d(0)=1$. For $k>0$,
+\begin{equation}\label{eq:ad}
+ a_d(k)=\sum_{c=1}^{\lfloor k/d\rfloor}
+ \frac{k!}{(k-dc)!\,d^c c!}\,R(k,dc).
+\end{equation}
+Indeed, choose the $dc$ cyclic labels, put $c$ disjoint $d$-cycles on
+them, and attach a forest with those prescribed roots. A nonempty such
+class exists exactly when $k\ge d$: use one $d$-cycle and attach all
+remaining vertices to a cyclic vertex. In EGF notation the same
+classical decomposition reads
+\begin{equation}\label{eq:egf}
+ \sum_{k\ge0}a_d(k)\frac{z^k}{k!}
+ =\exp\!\left(\frac{\mathcal T(z)^d}{d}\right),
+ \qquad\mathcal T(z)=z\exp(\mathcal T(z)).
+\end{equation}
+
+\begin{theorem}[every target fibre and image]\label{thm:inverse}
+For $g\in\calX_n$, write $B_j=g^{-1}(j)$ and $k_j=|B_j|$. Then
+\begin{equation}\label{eq:fibre}
+ |P_n^{-1}(g)|=\prod_{j=0}^{n-1}a_{j+1}(k_j).
+\end{equation}
+The target lies in $\im P_n$ exactly when each nonempty $B_j$ satisfies
+$k_j\ge j+1$. Consequently
+\begin{equation}\label{eq:imagecount}
+ |\im P_n|=\sum_{\substack{\sum_{j=0}^{n-1}k_j=n\\
+                   k_j=0\ \mathrm{or}\ k_j\ge j+1}}
+                \frac{n!}{\prod_{j=0}^{n-1}k_j!}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+An arrow $i\mapsto f(i)$ does not change the eventual cycle reached.
+Thus $P_nf=g$ implies that $f$ preserves every $B_j$ and all cycles of
+$f|_{B_j}$ have length $j+1$. Conversely these conditions force the
+period of every vertex in $B_j$ to be $j+1$, so they imply $P_nf=g$.
+The restrictions on distinct labelled blocks are independent, proving
+\eqref{eq:fibre}. The nonemptiness criterion for $a_d(k)$ gives the
+image condition. Each admissible vector of block sizes has
+$n!/\prod_j k_j!$ target words, proving \eqref{eq:imagecount}.
+\end{proof}
+
+\begin{theorem}[strict fibre extremality]\label{thm:maxfibre}
+For every $n\ge1$, the unique largest fibre is at $g=\zero$, with size
+\begin{equation}\label{eq:maxfibre}
+ |P_n^{-1}(\zero)|=(n+1)^{n-1}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Let $c_d(k)$ count connected functions on $k$ labels with sole cycle
+length $d$. For $k\ge d$, selecting the cyclic vertices and attaching
+their rooted forest gives
+\begin{equation}\label{eq:connected}
+ c_d(k)=(k)_d k^{k-d-1},\qquad c_1(k)=k^{k-1},
+\end{equation}
+where $(k)_d=k(k-1)\cdots(k-d+1)$ and the first expression at $k=d$
+is $(d-1)!$. Their ratio is $(k)_d/k^d\le1$, strictly less than one
+when $d\ge2$. For $k<d$, $c_d(k)=0$. Hence the EGF of connected
+$d$-cycle components is coefficientwise bounded by the rooted-tree EGF.
+Taking SET exponentials preserves this inequality: all coefficients are
+nonnegative and every product term is bounded term by term. Moreover,
+the coefficient at every $k\ge d\ge2$ is strictly smaller, already in
+the single-component term. Thus
+\begin{equation}\label{eq:comparison}
+ a_d(k)\le a_1(k),
+\end{equation}
+with strict inequality for every nonempty admissible block with $d\ge2$.
+
+A product of rooted-forest counts on two or more prescribed nonempty
+blocks is strictly smaller than the rooted-forest count on their union.
+Disjoint union is an injection, while a forest with one edge between two
+different blocks is excluded. Applying this fact and
+\eqref{eq:comparison} to \eqref{eq:fibre}, equality with the full
+rooted-forest count requires a single block and $d=1$. This is exactly
+$g=\zero$. Its fibre is the set of functions having only loops as
+cycles, equivalently rooted forests with a loop at each root. Adjoining
+one extra vertex joined to every root gives a bijection with trees on
+$n+1$ labels rooted at that extra vertex. Cayley's formula gives
+$(n+1)^{n-1}$. At $n=1$ this is one and the zero target is the only target.
+Unsupported targets have fibre zero and cannot be maximizers.
+\end{proof}
+
+\section{Exact controls and claim ceilings}
+\begin{table}[ht]
+\centering
+\caption{Complete endofunction boxes for the paper-local verifier.}
+\begin{tabular}{rrrrr}
+\toprule
+$n$ & States & First image & Maximum height & Maximum fibre\\
+\midrule
+1 & 1 & 1 & 0 & 1\\
+2 & 4 & 2 & 2 & 3\\
+3 & 27 & 6 & 3 & 16\\
+4 & 256 & 18 & 3 & 125\\
+5 & 3125 & 60 & 3 & 1296\\
+6 & 46656 & 240 & 4 & 16807\\
+7 & 823543 & 1085 & 4 & 262144\\
+\bottomrule
+\end{tabular}
+\end{table}
+The standard-library verifier computes the update by peeling noncyclic
+vertices and then propagating cycle periods backwards. Per-vertex orbit
+tracing supplies a second implementation on all inputs through six
+labels and a stated prefix of the seven-label box. The full source boxes
+check rank packing, all-rank maxima, actual target fibres and the image.
+Every target, including absent targets, is checked through six labels.
+Critical-size height counts are checked at sizes two, three and six.
+Recursive witnesses on $2,3,6,21,231,26796$ labels attain heights two
+through seven, with further leaf extensions. Two fresh processes are
+compared with the paper-local canonical transcript. All-size validity
+rests on the proofs, not on extrapolation from these boxes.
+
+No scalar rank evolution law is asserted: \eqref{eq:rank} is an
+inequality. Nor is there a closed formula for each individual height or
+an all-time target inverse atlas. The equality classification is complete
+only at the critical sizes $N_h$. For instance, the two functions
+$(0,1,1)$ and $(1,0,1)$ have the same value histogram, but their period
+feedback vectors are $(0,0,0)$ and $(1,1,1)$. This refutes a histogram
+factor only; it does not waive the earlier lane's statistic-writeback
+filter or establish novelty. Static formulas \eqref{eq:forest}--\eqref{eq:egf}
+are classical inputs, not separate discoveries. External status remains
+\texttt{OWNER\_AMBER / HOLD\_EXTERNAL}.
+
+\subsection*{Reproducibility and disclosure}
+The anonymous source, verifier, fixed transcript, source-scope audit and
+deterministic build instructions are provided with this internal note.
+No empirical or human-subject data are used. AI-assisted proof exploration,
+drafting and exact verification were used; author checks are not human
+expert review. Authorship, funding and conflicts are not inferred for
+this internal draft. The known triangular sequence and classical
+functional-graph counts remain attributed throughout.
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

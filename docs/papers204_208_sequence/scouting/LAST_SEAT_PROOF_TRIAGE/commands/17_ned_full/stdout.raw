@@ -1,0 +1,310 @@
+# Twenty-first bounded finite-system scout intake
+
+Status: author scout only; no admission, numbering, review or manuscript. This
+file precedes the first scientific program and every execution in this lane.
+Owner: nineteenth_finite_scout. Root assigned this directory on 2026-09-06;
+nineteenth/FTH inputs and every P208 scientific input are outside edit scope.
+No children, next lane, cutoff expansion or central/Git changes are authorized.
+
+## Exact proposed system: NED, nearest old-empty dispatch
+
+For integers $n\ge1$, $M\ge0$, the finite state set is
+$X_{n,M}=\{x\in\mathbb Z_{\ge0}^n:\sum_i x_i=M\}$, with labelled cyclic indices.
+If every coordinate is positive, hold the state. Otherwise each old positive
+coordinate sends exactly one chip to the first old zero clockwise. All sends
+are simultaneous. Equivalently, old positive coordinates decrement by one,
+and every old zero receives the length of the positive run just before it.
+The zero state holds. Conservation and nonnegativity make this a total map.
+No sink, clock phase, schedule or variable-length trimming is included.
+
+## Pre-code triage and target
+
+The source discovery points to Cannings--Haigh, *Montreal Solitaire* (1992),
+DOI 10.1016/0097-3165(92)90037-U. The survey description has the same positive-run
+dispatch primitive on a trimmed line, not this labelled finite ring. Original
+publisher body is not yet obtained. This is a source risk, not a novelty claim.
+
+An author deduction predicts an exact all-target predecessor decoder by
+directed cycles whose positive integer gaps sum to one circumference. It
+implies bijectivity and entrance time zero when $M<n$. For $M\ge n$ no complete
+recurrent-core or entrance-clock theorem is proposed. The dense-only-positive
+core idea is already false: $(2,1,0)\mapsto(1,0,2)\mapsto(0,2,1)\mapsto(2,1,0)$
+at $(n,M)=(3,3)$. The proof file must preserve that counterexample.
+
+Only this candidate receives a pilot. Exactly 33 full original boxes:
+$n=1,M=0,1,2$; $n=2,M=0,\ldots,5$; $n=3,M=0,\ldots,6$;
+$n=4,M=0,\ldots,7$; $n=5,M=0,\ldots,8$. These contain 1725 states in total.
+Enumerate every state and every target; check direct simultaneous dispatch,
+mass, functional-graph entrance/period/recurrent data, exact decoded inverse,
+all-target fibre census and attained maximum fibres. Output every state's
+literal successor, entrance/period, complete actual and decoded fibre, and
+every box's extrema and witnesses. Check the low-mass recurrence assertion.
+Two actual same-parameter executions and raw-byte comparison; no extension.
+Observed cycles/fibre maxima are finite facts, not all-size formulas.
+
+## Desk deductions, not extra candidates/pilots
+
+1. Word recolouring $x_i\mapsto\tau_{x_{i-1},x_{i+1}}(x_i)$, where $\tau_{a,b}$
+   swaps distinct colours $a,b$ and is identity for $a=b$. On two colours it is
+   exactly $x_{i-1}\oplus x_i\oplus x_{i+1}$, so the binary case is elementary
+   rule 150, an excluded finite-linear carrier. The larger alphabet has no
+   complete temporal/inverse proof here. No pilot and no renamed admission.
+2. Directed-relation unique-two-walk update is exactly the prior UWS/R01 rule
+   in `replacement_matchings_incidence/SCOUT.md`: ordered pairs with exactly
+   one old length-two walk, allowing loops. The identity adapter on adjacency
+   matrices identifies the full total map, not merely an example. No pilot.
+
+The lane has one fresh literal finite-ring definition, not a six-rule slate.
+Failure to find three eligible carriers is disclosed and not filled with old
+comparison rows. Unresolved temporal/source obligations mean NO_PROMOTION.
+# NED partial proof package and non-promotion boundary
+
+## Claim
+
+For the map and state space in `INTAKE.md`, every target has an exact,
+nonredundant predecessor decoder below. If $M<n$, the map is a permutation
+and every state is recurrent (entrance time zero). These two mathematical
+claims are `PROVABLE AS STATED`. A complete recurrent-core/clock theorem for
+all $M\ge n$ is `NOT CURRENTLY JUSTIFIED` and is not claimed.
+
+## Assumptions and notation
+
+Let $n\ge1$, $M\ge0$, and identify indices with $\mathbb Z/n\mathbb Z$ in the
+clockwise increasing order. A target is $y\in X_{n,M}$. Put
+$E_y=\{j:y_j<n\}$, $d_y(j)=y_j+1$ for $j\in E_y$, and
+$p_y(j)=j-d_y(j)\pmod n$. Consider the directed graph on $E_y$ retaining an
+edge $j\to p_y(j)$ only when its endpoint also lies in $E_y$.
+A code is a directed simple cycle $Z$ of this graph satisfying
+$\sum_{j\in Z}d_y(j)=n$. Cycles are identified by vertex set, not choice of
+starting vertex. A self-loop is allowed. A code is nonempty by definition.
+
+For a code define $x^Z_j=0$ for $j\in Z$ and $x^Z_i=y_i+1$ otherwise.
+If all coordinates of $y$ are positive, also allow the separate predecessor
+$x=y$. This fixed predecessor is not a cycle code.
+
+## Proof strategy and dependency map
+
+1. The previous old zero before each old zero determines its integer gap.
+2. Winding exactly once forces a proposed cycle to traverse consecutive
+   zeros in the actual ring order, with no skipped or overlapping gaps.
+3. Reconstruction gives a bijection between codes and zero-containing
+   predecessors, separately from the all-positive hold case.
+4. Disjointness of cycles of a partial functional map bounds their number;
+   the bound gives at most one predecessor when $M<n$.
+5. A finite injective self-map is surjective and all its orbits are periodic.
+
+## Proof
+
+### 1. Necessity of a code
+
+Suppose $x$ has zero set $Z\ne\varnothing$ and maps to $y$. For $i\notin Z$,
+$y_i=x_i-1$. For $j\in Z$, let $r$ be the previous zero counterclockwise,
+where $r=j$ when $Z=\{j\}$. The clockwise integer distance from $r$ to $j$
+is one plus the number of intervening positive coordinates; use distance $n$
+when there is only one zero. The update rule gives this distance as $y_j+1$.
+Thus $1\le y_j+1\le n$, $j\in E_y$, and $p_y(j)=r$. These edges form one
+directed simple cycle on $Z$. Its gap sum is the circumference $n$, as the
+consecutive zero-to-zero intervals partition the ring. Reconstruction gives
+exactly $x^Z$.
+
+### 2. Sufficiency of a code and absence of interleaving
+
+Take a code and list its vertices in the directed order
+$j_0,j_1,\ldots,j_{k-1}$ with $j_{r+1}=p_y(j_r)$, indices modulo $k$.
+Lift $j_0$ to an integer $a_0$ and set
+$a_{r+1}=a_r-d_y(j_r)$. Positivity of every gap makes
+$a_0>a_1>\cdots>a_k=a_0-n$. Therefore these lifts list all code vertices
+strictly in counterclockwise order within one turn. No additional code
+vertex is inside an interval $(a_{r+1},a_r)$: every code vertex appears in
+this single strictly descending list, and consecutive entries have none
+between them. Thus the integer interval immediately before zero $j_r$
+contains exactly $d_y(j_r)-1=y_{j_r}$ other coordinates, all outside $Z$.
+
+All coordinates outside $Z$ of $x^Z$ are positive, so the positive-run
+dispatch sends exactly $y_{j_r}$ chips into zero $j_r$. Positive coordinates
+decrement to $y_i$. The mass of $x^Z$ is
+$$\sum_{i\notin Z}(y_i+1)=M-\sum_{j\in Z}y_j+n-|Z|=M,$$
+where the code condition says $\sum_{j\in Z}y_j=n-|Z|$. Hence $x^Z$ is a
+valid predecessor in the same finite state space.
+
+### 3. Completeness, nonredundancy and the hold case
+
+Steps 1 and 2 give all zero-containing predecessors and no others. Different
+codes have different zero sets and hence different reconstructed states.
+An all-positive source is held by definition, so it is a predecessor of $y$
+if and only if $y$ itself is all positive. It is distinct from every decoded
+zero-containing state. Consequently
+$$|T^{-1}(y)|=\#\{\text{winding-one codes for }y\}+
+\mathbf1_{\{y_i>0\text{ for every }i\}}.$$
+The formula is an evaluated cycle decoder, not a sum over candidate source
+states or an inclusion--exclusion tautology.
+
+### 4. A general bound and the low-mass permutation theorem
+
+Distinct directed cycles in a partial functional graph have disjoint vertex
+sets: if they shared a vertex, uniqueness of its successor would make their
+entire forward cycles agree. If there are $k$ codes with union size $L$, then
+$L\le n$ and summing their winding conditions gives
+$$kn-L=\sum_{j\text{ in the union}}y_j\le M.$$
+Therefore $k\le\min\{n,\lfloor M/n\rfloor+1\}$. This is only an upper
+bound, not a claimed sharp extremum. If $M<n$, all-positive states are
+impossible and $k\le1$. Step 3 then shows that every target has at most one
+predecessor: $T$ is injective on $X_{n,M}$. This set is nonempty and finite,
+so its image has its full cardinality; $T$ is also surjective. In a finite
+permutation every orbit is a cycle, proving entrance time zero for every
+state. The statement includes $M=0$, whose unique state is fixed, and $n=1$,
+where the low-mass case is only $M=0$.
+
+## Corrections and missing claims
+
+The dense-only-positive-core hypothesis is false. At $n=M=3$,
+$(2,1,0)\to(1,0,2)\to(0,2,1)\to(2,1,0)$ is a nonconstant cycle containing
+zeros. Also $(3,0,0)\to(2,1,0)$ shows at least one nonrecurrent state in this
+box, so the low-mass conclusion cannot simply be extended to all mass.
+No complete dense recurrent classification, sharp entrance bound,
+all-parameter cycle enumeration, or sharp all-parameter fibre maximum is
+proved. Finite-pilot cycle/extremum tables do not supply those missing steps.
+
+## Source and open risks
+
+The fixed-ring local primitive coincides with the Montréal-solitaire run
+update described by a secondary survey; the primary 1992 body remains
+unread. Neither low-mass recurrence nor the inverse formula is certified as
+a literature advance. The exact labelled-ring boundary is not itself an
+adequate novelty certificate. The author proofs above are useful negative/
+partial evidence only. Without full source clearance and a substantive
+complete temporal mechanism beyond a likely known primitive, disposition
+is NO_PROMOTION, not an admissible paper contract.
+# Source and historical boundaries, before pilot
+
+The project skill, workflow, current state and linked batch/probem anchor,
+proof-writer and research-lit instructions were read. Zotero/Obsidian tools
+were absent in discovery; the research-lit arXiv helper path was absent.
+Fallback is direct primary web/publisher retrieval and repository text search.
+No external contact or manuscript upload occurred.
+
+## Public-source owner checks
+
+Cannings and Haigh, *Montreal Solitaire*, JCTA 60(1), 50--66 (1992), DOI
+[10.1016/0097-3165(92)90037-U](https://doi.org/10.1016/0097-3165(92)90037-U).
+Crossref metadata was actually retrieved before this intake. Direct web opens
+of linkinghub and Elsevier article API were blocked; a publisher PDF HEAD
+returned HTTP 403. These are access failures, not body reads. The reproducible
+retrieval capsule will preserve additional actual requests and raw responses.
+
+Discovery-only secondary pointer: Drensky's 2015 survey, arXiv 1503.00885,
+[institutional PDF](https://www.math.bas.bg/smb/2015_PK/tom_2015/pdf/079-091.pdf),
+section 3.4. Search extracts describe decrementing positive runs and placing
+their lengths in the immediately following old zero, on an unbounded line
+modulo exterior zero trimming. This is a source lead only; the primary
+Cannings--Haigh theorem/proof text is NOT READ. The line/ring primitive
+comparison is author inference from the explicit formulas, not an established
+global conjugacy or a verified statement about the complete 1992 scope.
+Primary-source coverage remains HOLD. Do not promote the low-mass result as
+an advance over Montréal solitaire on the strength of this secondary lead.
+
+The binary recolouring deduction is verified algebraically: equal neighbours
+leave the centre, and unequal binary neighbours complement it, hence XOR of
+all three cells. Wolfram's primary authored rule-150 notes were actually
+opened at https://www.wolframscience.com/nks/notes-3-2--rule-150/ (rule formula
+read). This eliminates that slice; it does not prove a ternary rule theorem.
+
+## Historical comparisons
+
+Read relevant original portions of
+`docs/papers162_166_sequence/scouting/replacement_matchings_incidence/SCOUT.md`,
+including R01/R02 literal relation rules, and
+`docs/papers197_201_sequence/scouting/replacement_after_cmm_20260905/SCOUT_DISPOSITIONS.md`
+(lines 1--115 were actually read). Recent bounded intake exclusions for lanes
+12,16,18,20 were read. Unique-two-walk is identity-equivalent to old R01.
+Resource/multiset discussions of candy sharing, zero-range/rotor, solitaire,
+parking and majority are discovery exclusions, not proof that all resource
+rules are exhausted. NED is not claimed novel from a keyword nonhit.
+
+An initial exploratory broad search included archived P208 review-path text
+in its output before exclusions were tightened; no P208 science kernel was
+opened or imported. Final recorded inventory excludes P208/OFS/tenth-scout,
+reviews, frozen/capsule/runtime paths and this lane. Searches are bounded
+discovery with complete raw output and input pins, not exhaustive novelty.
+
+## Authorship and reuse
+
+NED definition, inverse proof, pilot and this lane's disposition are authored
+by nineteenth_finite_scout. Root received preliminary mathematical summaries;
+no independent review is claimed. The execution recorder is disclosed
+infrastructure adapted from this same author's nineteenth lane; no old
+scientific kernel, canonical output or sampled states are imported.
+# Final source, history and exposure supplement
+
+This post-pilot document supplements the frozen pre-code
+`SOURCE_AND_HISTORY.md`; it does not alter any NED scientific dependency.
+
+## Actual source-access result
+
+`public_sources/RETRIEVAL.json` and the command/stdout/stderr/header/body files
+record fresh actual requests. Crossref succeeded (2857 bytes). Elsevier's
+article API returned HTTP 400, exit 22, 159 bytes; the publisher PDF URL
+returned HTTP 403, exit 22, 832805 bytes of error body, not a PDF. The earlier
+web-tool opens were blocked. No original Cannings--Haigh theorem/proof body
+was read, and no primary-source theorem credit is claimed.
+
+Drensky's institutional survey PDF was retrieved successfully (307191 bytes,
+SHA256 `509500937de935e655bb6c812f43c5f0958f9d45337f5f0ed52a85eb8fc6d023`),
+and `pdftotext -layout` exited zero. The author actually read extracted
+lines 340--390 (complete section 3.4, with its adjacent context) and 480--490
+(bibliographic entry 11). This remains a secondary discovery reference and
+does not satisfy the missing primary-body gate. No full-survey read is claimed.
+
+The explicit run rule there subtracts one from each positive entry and puts
+the run length into its following old zero, creating an end position on an
+unbounded line when needed. NED uses that primitive on a fixed labelled
+ring and holds a fully occupied ring. These boundary differences are literal;
+they do not prove that no known conjugacy/factor or published ring theorem
+exists. The source describes reversibility for its own line model, so the
+low-mass NED permutation result is particularly unsafe to market as novelty.
+
+## Old-map adapters and limitations
+
+The unique-two-walk relation proposal is precisely old R01/UWS: identify both
+states with their Boolean adjacency matrices, including diagonal entries;
+both output $(i,j)$ exactly when $\sum_k A_{ik}A_{kj}=1$. Identity intertwines
+the total maps for every finite size. This is an exact collision and was not
+piloted again.
+
+For the recolouring proposal, the two-colour restriction is exactly the
+three-cell XOR map, by the equal/unequal-neighbour cases. This is a full
+binary-slice adapter to rule 150, not evidence for a larger-colour theorem.
+No ternary carrier pilot or complete ternary proof was produced.
+
+The old CBB carrier in `papers157_161_sequence/scouting/combinatorial/SCOUT.md`
+is cyclic binary nearest-empty box--ball matching (the original ledger
+lines 25--65 were actually read). NED is not identical on binary words:
+$(1,1,0,0)$ maps to $(0,0,2,0)$, outside that binary carrier. Likewise, the
+immediate-neighbour unit-service zero-range rule from the old CMM replacement
+ledger sends this state clockwise to $(0,1,1,0)$, not the NED result. These
+counterexamples rule out only those literal identity identifications; they
+do not establish nonconjugacy, independence of proof mechanisms or novelty.
+No additional pilot is justified by these distinctions.
+
+## History evidence and precise scope failure
+
+The first captured search read 4079 selected files and had stable before/
+after hashes, but its P208/tenth filter omitted actual filename forms.
+`evidence_capture/EXACT_ADDITIONAL_EXPOSURE.json` lists exactly 180 additional
+excluded scientific paths scanned by that process. The author did not open
+their complete bodies or import scientific kernels; nevertheless no blindness
+or P208 independent-review eligibility is claimed. Root was informed. This
+does not alter the already completed distinct P208 A/B review processes.
+
+The original raw capture and misleading scope-status receipt remain intact
+with `evidence_capture/SCOPE_FAILURE.md` as the controlling correction.
+The repaired scan is `evidence_capture_02/HISTORY_SEARCH.json`: 3544 files
+across all six declared roots, complete raw outputs for all three query
+families, all command exits zero and all selected input hashes unchanged.
+An exact filename audit found zero remaining P208/tenth/OFS/FTH-gate/review
+paths in the corrected selection. This is bounded discovery only.
+
+Both captures performed actual raw-byte `cmp` on the existing NED pair and
+exited zero. The scope correction changes no mathematical program, parameter,
+source capsule or runtime dependency. No fresh scientific run is claimed or
+needed for this documentary correction; the original pair remains frozen.

@@ -1,0 +1,653 @@
+ Reconstructing words from a fixed palindromic
+               length sequence∗
+
+Alexandre Blondin Massé1, Srečko Brlek1 , Andrea Frosini2 , Sébastien Labbé1 ,
+                            and Simone Rinaldi2
+             1 Laboratoire de Combinatoire et d’Informatique Mathématique,
+                            Université du Québec à Montréal,
+        C. P. 8888 Succursale “Centre-Ville”, Montréal (QC), CANADA H3C 3P8,
+      Brlek.Srecko@uqam.ca, [blondin masse.alexandre, Labbe.Sebastien]@courrier.uqam.ca
+              2   Dip. di Scienze Matematiche ed Informatiche Roberto Magari,
+                                 Università degli Studi di Siena
+                           Pian dei Mantellini 44, 53100 Siena, Italy
+                                 [frosini, rinaldi]@unisi.it
+
+
+
+       Abstract. To every word w is associated a sequence Gw built by computing
+       at each position i the length of its longest palindromic suﬃx. This sequence
+       is then used to compute the palindromic defect of a finite word w defined by
+       D(w) = |w| + 1 − |Pal(w)| where Pal(w) is the set of its palindromic factors.
+       In this paper we exhibit some properties of this sequence and introduce the
+       problem of reconstructing a word from Gw . In particular we show that up to
+       a relabelling the solution is unique for 2-letter alphabets.
+
+       Key words: Palindromic complexity, defect, lacunas, reconstruction.
+
+
+
+
+1 Introduction
+
+Among the many ways of measuring the information content of a finite word,
+counting the number of its distinct factors or subwords of given length has
+been widely used and known as its complexity. A refinement of this notion
+amounts to restrict the factors to palindromes. The motivations for the study
+of palindromic complexity comes from many areas ranging from the study of
+Schrödinger operators in physics [4, 7, 20] to number theory [6] and combina-
+torics on words where it appears as a powerful tool for understanding the local
+structure of words. It has been recently studied in various classes of infinite
+words, an account of which may be found in the survey provided by Allouche
+et al. [5].
+   In particular, the palindromic factors give an insight on the intrinsic struc-
+ture, due to its connection with the usual complexity, of many classes of words.
+For instance, they completely characterize Sturmian words [23], and for the
+class of smooth words they provide a connection with the notion of recurrence
+[12, 13].
+∗   with the support of NSERC (Canada)
+
+
+
+                                                                                          101
+102                     A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+The problem of reconstructing words from partial information arise naturally.
+We mention a few of them that have been solved for a fixed alphabet Σ:
+Some set A of factors is fixed. Find the shortest words containing the set A of
+all factors of given length k. This leads to the De Bruijn sequences [15, 17, 19]
+whose construction uses a graph Gk where vertices are the given words of length
+k, and where edges model the scanning of the word by a window of size k. The
+solution is then obtained by computing all Eulerian cycles in the graph. It
+is worth noting that finding the lexicographically smallest such word is much
+easier: it is given by the lexicographic concatenation of Lyndon words on Σ
+whose lengths are divisible by k (See Fredericksen et al. [18]).
+Some set A is fixed along with some suitable hypothesis. Construct all words w
+such that the set of its factors A = F (w). The technique used for this problem is
+based on constructing a set of minimal forbidden words, that is the extensions
+of words in A that do not belong to A [9]. That technique was also used in [11]
+to construct words whose language of palindromes is a fixed set P . It turns out
+that it is a rational language. Concerning multisets of subsequences, instead
+of factors we mention a general result. If the set A contains suﬃciently many
+subsequences of length k, then the solution is unique [26]: indeed, for a word
+w of lengh n > 7 and k ≥ [n/2] the subsequences uniquely determine w, and
+for k < log2 n they do not. See also an interesting combinatorial approach
+depending on the Burrows-Wheeler transform (See Mantaci et al. [25]).
+Fixed complexity. The most famous example is that of Sturmian words (see
+Lothaire [22] for a substantial review) which are characterized by the complexity
+P (n) = n + 1 established by M. Morse [28]. Sturmian words are the discretiza-
+tion of lines with irrational slopes, and they are easily constructed from the
+continued fraction expansion corresponding to the irrational slope. The com-
+plexity is therefore not enough to characterize completely a word. However, in
+the case of the Thue-Morse complexity [10, 24], there are essentially only two
+such words [1, 2].
+In this paper we introduce the problem of reconstructing a word from sequences
+describing its palindromic complexity. Droubay, Justin and Pirillo [16] noted
+that the palindrome complexity |Pal(w)| of a word w is bounded by |w| + 1,
+and observed that it is computed by a sequential algorithm listing the first
+occurrences of longest palindromic suﬃxes, called unioccurrent in [16]. For our
+study we need the following two auxiliary functions on words. Given a word of
+length n, w : [0..(n − 1)] −→ Σ, we define two functions Gw , Hw : N −→ N by
+Gw (i) = |LPS(w[0..i])| and
+                   !
+                     Gw (i) if it is the first occurrence of LPS(w[0..i])
+         Hw (i) =                                                           (1)
+                     0       otherwise
+
+We first exhibit some combinatorial properties of the palindromic factors in
+words (Section 3) and use them in order to obtain properties of the sequences
+Reconstructing words from a fixed palindromic length sequence                     103
+
+G and H (Section 4). Finally we study the problem of reconstructing words
+from given sequences, and establish conditions for unicity on 2-letter alphabets.
+
+
+
+2 Preliminaries
+
+In what follows, Σ is a finite alphabet whose elements are called letters. By word
+we mean a finite sequence of letters w : [0..(n − 1)] −→ Σ, where n ∈ N. The
+length of w is |w| = n and w[i] or wi denote its i-th letter. The set of n-length
+words over Σ is denoted Σ n . By convention, the empty word is denoted  ! ε and
+its length is 0. The free monoid generated by Σ is defined by Σ ∗ = n≥0 Σ n .
+   The set of right infinite words is denoted by Σ ω and we set Σ ∞ = Σ ∗ ∪ Σ ω .
+Given a word w ∈ Σ ∞ , a factor f of w is a word f ∈ Σ ∗ satisfying
+
+                            ∃x ∈ Σ ∗ , ∃y ∈ Σ ∞ , w = xf y.
+
+If x = ε (resp. y = ε ) then f is called prefix (resp. suﬃx). The set of all factors
+of w is denoted by Fact(w), those of length n is Factn (w) = Fact(w) ∩ Σ n , and
+Pref(w) is the set of all prefixes of w. The number of occurrences of a factor
+f in w is denoted |w|f . A period of a word w is an integer p < |w| such that
+w[i] = w[i + p], for all i < |w| − p. If w = pu, with |w| = n and |p| = k, then
+p−1 w = w[k..(n−1)] = u is the word obtained by erasing p. A word is said to be
+primitive if it is not a power of another word. Two words u and v are conjugate
+when there are words x, y such that u = xy and v = yx. The conjugacy class of
+a word w is denoted by [w]; note that the length is invariant under conjugacy.
+For a given word w of length n, any of its conjugates is obtained by cyclic
+permutation, that is σ i (w) = w[i..(n − 1)]w[0..(i − 1)].
+   The reversal of u = u0 u1 · · · un−1 ∈ Σ n is the word "   u = un−1 un−2 · · · u0 ,
+and a palindrome is a word p such that p = "         p . Since every word contains
+palindromes, the letters and ε being necessarily part of them, the set of its
+palindromic factors is Pal(w), and its palindromic complexity is denoted by
+|Pal(w)|. Conjugacy is an equivalence relation having numerous properties and
+for our purpose we need the following one easily obtained by induction: let p
+and q be two palindromes, then σ i (pq) = p′ q ′ , for some palindromes p′ and q ′ .
+We start by quoting Lemma 1 of [8] in order to establish a useful combinatorial
+property.
+Lemma 1 (Blondin Massé et al. [8]) Assume that w = xy = yz. Then for
+some u, v, and some i ≥ 0 we have from [21]
+
+                             x = uv, y = (uv)i u, z = vu;                         (2)
+
+and the following conditions are equivalent :
+  (i) x = z" ;
+ (ii) u and v are palindromes;
+104                                A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+(iii) w is a palindrome;
+(iv) xyz is a palindrome.
+Moreover, if one of the equivalent conditions above holds then
+ (v)    y is a palindrome.
+As a consequence we have the following proposition.
+Proposition 1 Assume that w = xp = qz where p and q are palindromes
+such that |q| > |x|. Then w has period |x| + |z|, and x!
+                                                       z is a product of two
+palindromes.
+Proof. Since |q| > |x|, there exists a non-empty word y such that q = xy and
+p = yz. It follows that
+
+         !=q z x
+        wx     !=x y z x
+                       !=x p x
+                             ! = x p! x           ! = x z! q! = x z! q.
+                                      ! = x z! y! x
+
+Considering qz! x = x!
+                     z q, we obtain from Equation (2) that |x!z | is a period of
+w!x. From Lemma 1 (iii), there exist palindromes u, v such that x! z = uv. ⊓"
+   In order to compute the palindromic complexity we need the function
+LPS : Σ ∗ −→ Σ ∗ which associates to any word w its longest palindromic
+suﬃx LPS(w).
+   Droubay, Justin and Pirillo [16] noted that the palindrome complexity
+|Pal(w)| of a word w is bounded by |w| + 1, and that finite Sturmian (and
+even episturmian) words realize the upper bound. Moreover they implicitly
+show that the palindrome complexity is computed by an algorithm listing the
+longest palindromic suﬃxes which amounts to compute for a word w the func-
+tions Gw , Hw : N −→ N defined by
+
+            Gw (i) = |LPS(w[0..i])|;
+                         "
+                             Gw (i)     if it is the first occurrence of LPS(w[0..i]);
+            Hw (i) =
+                             0          otherwise.
+
+We often omit the subscript w in Gw and Hw when the context is clear. As an
+example let w = aababbaababaaabaab. Then we have the following table :
+
+      i 0    1   2   3   4     5   6   7   8   9 10 11 12 13 14 15 16 17
+      w a    a   b   a   b     b   a   a   b   a b a a a b a a b
+      G 1    2   1   3   3     2   4   2   4   3 3 5 7 3 5 7 5 4
+      H 1    2   1   3   3     2   4   0   4   0 0 5 7 3 5 7 5 0
+A position in the word w where H vanishes is called a lacuna in [8]. For instance
+the set of lacunas for w in the example above is {7, 9, 10, 17}. Equivalent words,
+that is words obtained by relabelling of the alphabet, have obviously the same
+functions G and H. For instance, on the 2-letter alphabet {a, b}, we have Gw =
+Gw and Hw = Hw , where ( ) is the morphism defined by a = b, b = a.
+Reconstructing words from a fixed palindromic length sequence                 105
+
+   The palindromic defect of a finite word w is defined in Brlek et al. [11] by
+D(w) = |w| + 1 − |Pal(w)|, and words for which D(w) = 0, that is, such that H
+does not vanish for any index are called full. In that paper it is also shown that
+there exist periodic full words, and an optimal algorithm is provided to check if
+an infinite periodic word is full or not. Moreover, a characterization by means
+of a rational language is given for the language LP of words whose palindromic
+factors belong to a fixed and finite set P of palindromes.
+
+
+
+3 Properties of the functions G and H
+
+First observe that a word w is full if and only if Gw = Hw . Now we describe
+the shortest words having a fixed defect value d. For instance, on a 2-letter
+alphabet, the shortest words having one lacuna, i.e. when d = 1, are
+
+       w1 = aababbaa, w2 = aabbabaa, w3 = bbabaabb and w4 = bbaababb.
+
+Observe that this set is closed under reversal (w1 = w
+                                                     !2 ; w3 = w
+                                                               !4 ) and comple-
+mentation (w1 = w3 ; w2 = w4 ). On the other hand, one of the shortest words
+having two lacunas is the following.
+
+   i   0   1   2   3   4   5   6   7   8   9
+   w   b   a   a   b   a   b   b   a   a   b
+   G   1   1   2   4   3   3   2   4   2   4
+   H   1   1   2   4   3   3   2   4   0   0
+The example above extends to the infinite periodic word W = (baab.ab)ω
+
+   i 0     1   2   3   4   5   6   7   8   9 10 11 12 13 14 15 16 17 . . .
+   W b     a   a   b   a   b   b   a   a   b a b b a a b a b ...
+   G 1     1   2   4   3   3   2   4   2   4 3 3 2 4 2 4 3 3 ...
+   H 1     1   2   4   3   3   2   4   0   0 0 0 0 0 0 0 0 0 ...
+
+where baab.ab is not the product of two palindromes, so that |Pal(W )| is finite
+by virtue of a previous result (see Theorems 4 and 6 in [11]). More generally,
+we have the following result.
+Proposition 2 Let M (k, d) be the length of a shortest word on a k-letter al-
+phabet Σ having defect d, we have :
+                             ⎧
+                             ⎨8          if k = 2, d = 1,
+                  M (k, d) = d + 8       if k = 2, d ≥ 2,
+                             ⎩
+                                d+k      if k ≥ 3.
+
+Proof. The first two cases follow from the observations above. For k ≥ 3, let
+w be a word such that |w| = M (k, d). Since every letter occurs in w and w
+106                               A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+has defect value d, we have M (k, d) ≥ d + k. Now, consider the infinite periodic
+word w = (α1 α2 · · · αk )ω , where αi is a letter. Observe that Pal(w) = Σ, so that
+each prefix of length n ≥ k + 1 has defect value n − k. Hence M (k, d) = d + k
+for k ≥ 3. ⊓$
+Lemma 2 Let w be a nonempty word, and let W = wω . Then we have
+  (i) Gw (0) = 1, and if Hw (i) = 1 then w[i] is the first occurrence of a letter;
+ (ii) if w = pq is primitive with p, q ∈ Pal(Σ ∗ ) then limn−→∞ GW (n) = ∞;
+(iii) if w is not the product of two palindromes then GW is eventually periodic.
+Proof. (i) Obvious. (ii) In this case by Theorem 4 of [11] the palindromic lan-
+guage of W is infinite. Since for all k ≥ 0, (pq)k p is a palindromic prefix of
+W , there are infinitely many palindromic prefixes of W . Moreover, we have
+GW (i) = GW (i − |w|) + |w| for i ≥ 2|w|.
+   (iii) Here again by Theorem 4 of [11], the palindromic language of W is
+finite. Therefore, let u be the shortest prefix of W containing all the palin-
+dromes, and let k be the smallest integer such that u ∈ Pref(wk ) then we have
+GW (i) = GW (i + k|w|). ⊓  $
+
+Examples. Let W = (abc)ω , whose palindromic language is P = {a, b, c} taken
+from [11] (Section 3). Then we have the following values for G and H:
+
+      i   0   1   2   3   4   5     6   7   8
+      W   a   b   c   a   b   c     a   b   c ...
+      G   1   1   1   1   1   1     1   1   1 ...
+      H   1   1   1   0   0   0     0   0   0 ...
+
+Here are some typical periodic words with their characteristic functions:
+
+         W    GW
+         an   [1, 2, 3, 4, 5, · · · ]
+       a.bn   [1, 1, 2, 3, 4, 5, · · · ]
+      (ab)n   [1, 1, 3, 3, 5, 5, 7, 7, 9, 9, · · · , (2n + 1), (2n + 1), · · · ]
+
+Moreover they are all full, since G and H coincide.
+
+   Another periodic example illustrating Lemma 2 (ii) is W = (aba.cbc)ω . Its
+palindromic language is infinite and W has infinitely many palindromic pre-
+fixes, and we have
+
+      i 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+      W a b a c b c a b a a b a c b c a b a c b c ...
+      H 1 1 3 1 0 3 5 7 9 5 7 9 11 13 15 11 13 15 17 19 21 . . .
+
+Observe also that there are non periodic words U such that GU is periodic.
+Indeed, take any nonperiodic word, for instance the Fibonacci word defined as
+Reconstructing words from a fixed palindromic length sequence                     107
+
+       F = ϕω (a) = abaababaabaabab · · · ,      where     ϕ(a) = ab; ϕ(b) = a.
+
+Define the morphism θ : {a, b} −→ {a, b, c, d}∗ by a #→ abcd; b #→ acbd. Then
+the word W = θ(F ) is nonperiodic, but GW = (1111)ω . Nevertheless we have
+the following result showing a local periodical behaviour.
+Lemma 3 Let w ∈ Σ ∗ . If there exists i such that G(i) = G(i + k) = l, with
+l ≥ k, then the factor f = w[(i − l + 1)..(i + k)] has period 2k, and any factor
+of length 2k of f is the product of two palindromes.
+Proof. Assume that q and p are the longest palindromic suﬃxes of length l at
+positions respectively i and i + k. Then there exist x and z such that f = qz =
+xp. In the case l = k, we have f = qp and the claim is true. If l > k there exists
+a non-empty word y such that q = xy and p = yz. It follows from Proposition
+1 that 2|x| is a period of f , and x!
+                                    z is a product of two palindromes. Therefore,
+any factor of length 2k is the product of two palindromes since it is a conjugate
+of x!
+    z. ⊓'
+   The function G satisfies the following properties
+Proposition 3 For any finite word w ∈ Σ ∗ , the following properties hold :
+  (i) G(i) ≤ max{|p| : p ∈ Pal(w[0..i])} ≤ i + 1
+ (ii) G(j) ≤ G(i) + 2(j − i), for all j ≥ i;
+(iii) G(i+1) = G(i) =⇒ G(i) and G(i+1) are odd, and G(i+2) ∈ {G(i)+2, 2};
+(iv) G(i + 1) = G(i) + 1 =⇒ LPS(w[0..i]) = αG(i)+1 , for some α ∈ Σ;
+Proof. (i) is obvious. (ii) First, note that G(i + 1) ≤ G(i) + 2 since the longest
+palindromic suﬃx at position i + 1 contains a palindrome of length G(i + 1) − 2
+ending at position i. The result follows by induction.
+   (iii) Follows from Lemma 3. (iv) Let p and q be the respective palindromes at
+positions i and (i + 1). Then we have q = pα for some α ∈ Σ, and we conclude
+by using Proposition 1. ⊓   '
+Lemma 4 Let i ≤ k. If G(k) = G(i) + 2(k − i), then G(j) = G(i) + 2(j − i)
+for all i ≤ j ≤ k.
+Proof. G(k) − 2(k − j) ≤ G(j) ≤ G(i) + 2(j − i) and the left term is equal to
+
+                 G(i) + 2(k − i) − 2(k − j) = G(i) + 2(j − i). ⊓
+                                                               '
+
+The next proposition is obtained by adapting the proof of Proposition 3.
+Proposition 4 For any finite word w ∈ {a, b}∗ , the function H satisfies
+  (i) H(i + 1) − H(i) ≤ 2 ;
+ (ii) H(i + 1) = H(i) =⇒ H(i + 1) and H(i) are both odd;
+(iii) H(i) ≤ max{|p| : p ∈ Pal(w)};
+(iv) if H([i..(i + k + 2)]) = [n, 0, · · · , 0, m] for some i, then m < n + 2k.
+108                            A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+4 Reverse engineering the functions G and H
+
+Here we tackle the following problems. Given a (finite or infinite) sequence s
+of integers, does there exist a word w such that Hw = s or Gw = s ? If such
+a word w exists, under which conditions is it unique up to permutation of the
+letters ?
+   We say that a finite/infinite sequence s is G-consistent (resp. H-consistent) on
+Σ if there is at least one nonempty word w ∈ Σ ∞ such that for all i, Gw (i) = s[i]
+(resp. Hw (i) = s[i]). If there is only one such word (up to permutation of the
+letters) then s is said to be unambiguous. A first simple result follows:
+Proposition 5 Let Σ be an alphabet of at most 3 letters. Then any G-
+consistent sequence on Σ is unambiguous.
+Proof. Let s be a G-consistent sequence. We proceed by induction on the length
+of s. Then s[0] = 1 so that the base of the induction is trivially satisfied by
+choosing one letter in Σ. Assume that s[0..i] is unambiguous. Then there exist
+a word w, such that Gw [0..i] = s[0..i]. Two cases arise:
+(a) s[i + 1] > 1: we set w[i + 1] = w[i + 2 − s[i + 1]].
+(b) s[i + 1] = 1: if |s|1 = 2 then |Σ| = 2, so that w[i + 1] ∈ Σ \ {w[0]}.
+    If |s|1 > 2 then |Σ| = 3 and we have to consider two cases:
+    - if |s[0..i]|1 = 2, then we set w[i + 1] to the remaining letter;
+    - if |s[0..i]|1 > 2, then w[0..i] = pγβ k αl where Σ = {α, β, γ}, p ∈ Σ ∗ , and
+    k, l ≥ 1, and we set w[i + 1] = γ. ⊓   %
+  Observe that for larger alphabets, that is when |Σ| > 3, G-consistent se-
+quences are not necessarily unambiguous, as shown in the following examples.
+
+Example. Let Σ = {a, b, c, d} and consider the sequence s = [1, 1, 1, 3, 2, 1, 3, 5].
+There is a unique word w[0..4] which is G-consistent with s[0..4] :
+      i    0   1   2   3   4   5   6   7
+      s    1   1   1   3   2   1   3   5
+      w    a   b   c   b   b   a   b   b
+      w′   a   b   c   b   b   d   b   b
+
+while two diﬀerent words are consistent with s[0..5], a fact that follows from
+Lemma 2(i).
+One can easily see that the previous ambiguity is related with the presence of
+more than three 1’s in the sequence s. However here is a word w having four
+occurrences of 1, but uniquely determined by G as well.
+Example. Let Σ = {a, b, c, d} and let s = [1, 1, 1, 3, 1, 3, 5, 7, 9]. There is a
+unique word which is G-consistent with s:
+Reconstructing words from a fixed palindromic length sequence                 109
+
+    i 0 1 2 3 4 5 6 7 8
+    s 1 1 1 3 1 3 5 7 9
+    w a b c b d b c b a
+
+The situation is clearly explained by the following statement
+
+Proposition 6 Let s be a G-consistent sequence. If there exist two distinct
+words w, w′ consistent with s, then there exists i such that Gw (i) = Gw′ (i) = 1
+and Hw (i) = 0 or Hw′ (i) = 0.
+Proof. Indeed, if s[i] = 1, then w[i] is either a new letter or, a previously
+encountered letter such that the longest palindromic LPS(w[0..i]) is the letter
+itself. ⊓
+        "
+
+Consider now the same problem for the function H. Since the functions G and
+H coincide for full words, we have immediately the next result.
+Corollary 1 Any full word (thus any Sturmian word) is uniquely determined
+by the function H.
+
+   So, the function Gw encodes all the information on w, but this is no longer
+true for the function Hw . Indeed, there exist H-consistent sequences that are
+not unambiguous as shown in the following example: consider the word w =
+abbabbbabaabb. Then, we have
+
+                     Hwa = Hwb = (1, 1, 2, 4, 3, 5, 3, 5, 7, 3, 2, 4, 0, 0)   (3)
+
+but wa ̸= wb.
+Observe that the counterpart of Proposition 6 does not hold for the function H.
+Indeed, every 1 in the sequence s = Hw corresponds necessarily to a new letter
+in w. Consequently the presence of 1’s does not cause ambiguity, and |s|1 = |Σ|,
+as shown below for a 5-letter alphabet {a, b, c, d, e}.
+    i    0   1   2   3   4   5   6   7   8
+    s    1   1   2   1   3   5   1   3   5
+    w    a   b   b   c   b   b   e   b   b
+    w′   a   b   b   d   b   b   c   b   b
+
+We point out that w and w′ are the same word up to a relabelling of the letters.
+  For words which are not full, the study of the H function is more complex.
+However, there are some special conditions ensuring that an H-consistent se-
+quence s on a given Σ is also unambiguous.
+Proposition 7 Let s be an H-consistent sequence such that s = s1 0k m s2
+with m ̸= 0, and s1 does not contain any 0. If m > 2k + 1 then there is a unique
+word w[ 0..(|s1 | + k) ] such that Hw = s[ 0..(|s1 | + k) ].
+110                       A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+The proof is similar to that of proof of Proposition 5. As an example, consider
+the following H-consistent sequence on Σ = {a, b}
+      i 0 1 2 3 4 5 6 7 8 9 10 11
+      s 1 2 1 2 4 6 4 3 3 0 0 6
+      w a a b b a a b a b x y z
+
+where s1 = [ 1, 2, 1, 2, 4, 6, 4, 3, 3] , m = 6, and k = 2. The last three elements of
+w can be uniquely determined since the factor b a b x y z has to be a palindrome,
+that is x = z = b, and y = a.
+   Note that the bound k on the length of a subsequence of 0’s in s given in
+Proposition 5 does not depend on the cardinality of Σ. On the other hand,
+observe that if | Σ | = 2 and k = 1 the sequence s is still uniquely determined.
+For instance, consider the sequence s[0..12] = [1, 2, 1, 3, 3, 2, 4, 6, 5, 3, 5, 0, 3],
+with Σ = {a, b}, and therefore m = 3:
+      i 0 1 2 3 4 5 6 7 8 9 10 11 12
+      s 1 2 1 3 3 2 4 6 5 3 5 0 3
+      w a a b a b b a b b b a a a
+
+Here the cardinality of the alphabet allows only one possible choice of the letter
+consistent with Hw (11) = 0, consequently m ̸> 2k + 1 = 3, but the word w is
+uniquely determined as well.
+
+
+
+4.1 Infinite words
+
+In the case of infinite words, the situation is similar and ambiguous H can
+also occur. We start by recalling some facts. From [8, 11], we know that, when
+analyzing the defect and the lacunas of an infinite word, it can present
+   (a) an infinite palindromic complexity with a finite number of lacunas;
+   (b) a finite palindromic complexity with an infinite number of lacunas;
+   (c) both infinite palindromic complexity and number of lacunas.
+   In general, in none of the three cases the function H is unambiguous, as it
+is shown in the following examples.
+   Case (a): consider two words U and V having the same prefix of length 23
+
+                      u1 = a b b a a b b a b a b a a a a b a b b b b a a,
+
+   and such that U = u1 a ( a b )ω and V = u1 b ( b a )ω . The two sequences
+   HU ([0..22]) and HV ([0..22]) are equal since they share a common prefix. Now,
+   since the suﬃx parts of U and V starting at position 23 satisfy U [≥ 23] =
+   V [≥ 23], we have HU = HV . Since, both u and v are eventually periodic,
+Reconstructing words from a fixed palindromic length sequence                                    111
+
+   and since their period is the product of two palindromes, the palindromic
+   complexity of both u and v is infinite. Finally, an easy check reveals that the
+   suﬃx sequence of the function H, for n > 2, is
+
+    HU ([≥ 23]) = (0, 0, 0, 0, 0, 0, 0, 7, 7, 9, 9, 11, 11, . . ., (2n + 3), (2n + 3), . . .).
+
+   Case (b): let w = abbabbbabaabb, already used in Equation (3), and consider
+   the words U and V defined as follows, by means of the word w:
+
+                             U = w · ab · bbaaa · (baabba)ω ,
+
+                             V = w · ba · bbaaa · (baabba)ω .
+   The sequences HU and HV coincide and are
+
+      HU = HV = (1, 1, 2, 4, 3, 5, 3, 5, 7, 3, 2, 4, 0, 0, 0, 0, 0, 0, 0, 3, 5, 0, 5, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, · · ·)
+
+   All the terms after position 22 are equal to 0 since the words U and V are
+   eventually periodic, with a period which is not the product of two palin-
+   dromes.
+   Case (c): finally, consider the words U and V defined as follows (using again
+   w = abbabbbabaabb):
+
+   U = w · ab · bbaaa · baab · baabba · (baab)2 · baabba . . . (baab)n · baabba . . .
+
+   V = w · ba · bbaaa · baab · baabba · (baab)2 · baabba . . . (baab)n · baabba . . . .
+   The sequences HU and HV coincide and their first terms are
+
+      HU = HV = (1, 1, 2, 4, 3, 5, 3, 5, 7, 3, 2, 4, 0, 0, 0, 0, 0, 0, 0, 3, 5, 0, 5, 0, 0, 0,
+                6, 8, 6, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 12, 10, 12, 0, 0, 0, 0, 0, 0,
+                      0, 0, 0, 0, 0, 0, 0, 0, 14, 16, 14, 16, 0, 0, . . .).
+
+   The two sequences have an infinite number of new palindromes since the
+   palindromic factor baab is repeated an increasing number of times at each
+   step. At the same time the set of lacunas is infinite since the factor baabba,
+   which is not the product of two palindromes, occurs infinitely many times.
+
+
+
+5 Further work
+
+The problem of reconstructing words from the functions G and H leads to many
+interesting developments, some of them requiring a deeper analysis in order to
+produce eﬃcient decision algorithms.
+112                      A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+   Consistency. Deciding if a given finite sequence s of numbers is G-consistent
+(resp. H-consistent) may be easily achieved. Indeed, let k = |s|1 . This implies
+that the smallest alphabet Σ we have to consider contains at most k letters
+(exactly k for H-consistency, by virtue of Lemma 2 (i)). Taking an order on the
+letters of Σ permits to restrict the study to classes of words equivalent under
+permutations of letters. A close look to the proof of Proposition 5 reveals all
+the information in order to construct sequentially all words consistent with s:
+indeed, it suﬃces to check at each position i, if LPS(w[0..i]) = s[i].
+   Random and exhaustive generation. The algorithms described above may be
+used for constructing trees of words. Indeed, at each step i one constructs a trie
+of words having height i + 1 and satisfying G[i] = s[i + 1] (resp. H[i] = s[i + 1]).
+The process stops if either it is impossible to construct the next step, or ends
+successfully if i = |s|. In case of a successful termination it is easy to check if
+every non leaf node has a unique son, solving the unambiguity problem of the
+sequence s. These are the basic tools for constructing randomly or exhaustively
+many classes of words, for instance all full words of length n.
+   Enumeration. Counting classes of G-consistent or H-consistent sequences
+follows naturally. For instance, given a fixed length n, it amounts to count for
+a fixed alphabet Σ the set { Hw : w ∈ Σ n }. Indeed, a greedy algorithm can be
+implemented to obtain the first values: it suﬃces to generate all words in Σ n ,
+and to compute H for each such word.
+   The enumeration formula of the finite Sturmian words is known [27]. Since
+they are full, a closely related counting problem is that of determining a formula
+for the number of non-Sturmian full words on the alphabet {a, b}∗. Determining
+the number of words having a fixed number of lacunas is also challenging.
+   Characterization of special classes of G or H functions. For instance, given
+a 2-letter alphabet Σ = {a, b} one might look for a description of the following
+sets of functions:
+
+      G = {Gw : w ∈ {a, b}∗}      H = {Hw : w ∈ {a, b}∗ such that w is full}.
+
+In another direction it would be interesting to describe infinite words on fixed
+alphabets whose G (or H) sequence is automatic.
+    Constrained reconstruction. Given a finite set of palindromes P , how can
+we determine the shortest full word containing all the palindromes of P and
+only those palindromes? The answer is based on Theorem 1 of [11]. Indeed, the
+language of words having exactly P as palindromic factors is rational. Therefore
+there exists a deterministic minimal automaton recognizing all these words. For
+each palindrome q in P , there is a unique path starting from the initial state
+whose trace is q. Collecting the target states T(P ) of all paths computing P ,
+it suﬃces then to compute the shortest path starting from the initial state and
+containing all states in T(P ). It may or may not exist, and if it does not, one
+might relax the conditions by allowing some extra palindromes in order to find
+a solution.
+Reconstructing words from a fixed palindromic length sequence                               113
+
+    Structure of full words. Let w be a finite full word on a 2-letter alphabet Σ.
+One can easily prove that Hw and Hw! have the same elements, while Hw = Hw!
+if and only if w
+               ! = w or w! = w. The two sets of longest unioccurrent palindromic
+suﬃxes of w and w    ! naturally define a permutation on the set {1, 2, . . . , |w|}.
+More precisely, let p1 , p2 , . . ., p|w| be the longest palindromic suﬃxes of w
+in order of their first occurrence in w and let xi be the position of the last
+occurrence of pi in w. We define the permutation πw on {1, 2, . . . , |w|} by
+
+                                πw (i) = |w| + |pi | − |xi |.
+
+Now, let q1 , q2 , . . ., q|w| be the longest palindromic suﬃxes of w          ! in order of
+their first occurrence in w.  ! Then pi = qπw (i) , for i = 1, 2, . . . , |w|. We illustrate
+this fact by an example: let w = ababbabab, so that w        ! = bababbaba. Then we
+have the following table showing that Hw ̸= Hw! ,
+      i    1 2 3 4      5   6    7       8       9
+   LPSU(w) a b aba bab bb abba babbab ababbaba babab
+   LPSU(w)
+        ! b a bab aba babab bb abba babbab ababbaba
+
+and the permutation πw is (2, 1, 4, 3, 6, 7, 8, 9, 5).
+We would like to study the combinatorial properties of πw in relation with
+those of the word w. In particular we are interested in characterizing the per-
+mutations πw associated with full words. A similar study can also be performed
+on arbitrary alphabets provide one replaces the ( ) operation by an arbitrary
+permutation of the alphabet Σ.
+
+
+
+Acknowledgements
+
+We are grateful to the anonymous referees for their careful reading and useful
+comments.
+
+
+
+References
+
+ 1. Aberkane, A. and Brlek, S. (2002) Suites de même complexité que celle de Thue-Morse,
+    Actes des Journées Montoises d’informatique théorique (9-11 septembre 2002, Mont-
+    pellier, France) 85–89.
+ 2. Aberkane, A., Brlek, S. and Glen, A. (2007) Sequences having the Thue-Morse complex-
+    ity, Disc. Math. 15p. (submitted)
+ 3. Allouche, J.-P. (1994) Sur la complexité des suites infinies, Bull. Belg. Math. Soc. 1:133–
+    143.
+ 4. Allouche, J.P. (1997) Schrödinger operators with Rudin-Shapiro potentials are not palin-
+    dromic, J. Math. Phys. 38:1843–1848.
+ 5. Allouche, J.P., Baake, M., Cassaigne, J., and Damanik, D. (2003) Palindrome complexity,
+    Theoret. Comput. Sci. 292:9–31.
+114                        A. Blondin Massé, S. Brlek , A. Frosini, S. Labbé and S. Rinaldi
+
+ 6. Allouche, J.P., and Shallit, J. (2000) Sums of digits, overlaps, and palindromes, Disc.
+    Math. and Theoret. Comput. Sci. 4:1–10.
+ 7. Baake, M. (1999) A note on palindromicity, Lett. Math. Phys. 49:217–227.
+ 8. Blondin Massé, A., Brlek, S., and Labbé, S. (2008) Palindromic lacunas of the Thue-
+    Morse word, GASCOM 2008 (To appear)
+ 9. Fici, G., Mignosi, F., Restivo, A. and Sciortino, M. (2006) Word assembly through min-
+    imal forbidden words,Theoret. Comput. Sci., 359/1-3: 214–230.
+10. Brlek, S. (1989) Enumeration of factors in the Thue-Morse word, Disc. Appl. Math.
+    24:83–96.
+11. Brlek, S., Hamel, S., Nivat, M., and Reutenauer, C. (2004) On the Palindromic Com-
+    plexity of Infinite Words, in J. Berstel, J. Karhumäki, D. Perrin, Eds, Combinatorics on
+    Words with Applications, Int. J. of Found. of Comput. Sci., 15/2:293–306
+12. Brlek, S., and Ladouceur, A. (2003) A note on diﬀerentiable palindromes, Theoret. Com-
+    put. Sci. 302:167–178.
+13. Brlek, S., Jamet, D., and Paquin, G., (2008) Smooth Words on 2-letter alphabets having
+    same parity, Theoret. Comput. Sci. 393/1-3:166181.
+14. Brlek, S., Dulucq, S., Ladouceur, A. and Vuillon L. (2006) Combinatorial properties of
+    smooth infinite words, Theoret. Comput. Sci. 352/1-3:306–317.
+15. de Bruijn N. G. (1946) A Combinatorial Problem, Koninklijke Nederlandse Akademie
+    v. Wetenschappen 49: 758764.
+16. Droubay, X., Justin, J., and Pirillo, G. (2001) Episturmian words and some constructions
+    of de Luca and Rauzy, Theoret. Comput. Sci. 255:539–553.
+17. Flye Sainte-Marie, C. (1894). Question 48, L’Intermdiaire Math. 1: 107110.
+18. Fredericksen, H. and Maiorana, J. (1978) Necklaces of beads in k colors and k-ary de
+    Bruijn sequences Disc. Math. 23/3, 207–210
+19. Good, I. J. (1946) Normal recurring decimals, J. London Math. Soc. 21 (3): 167–169.
+20. Hof, A., Knill, O., and Simon, B. (1995) Singular continuous spectrum for palindromic
+    Schrödinger operators, Commun. Math. Phys. 174:149–159.
+21. Lothaire M. (1983) Combinatorics on words, Addison-Wesley.
+22. Lothaire, M. (2002) Algebraic Combinatorics on words, Cambridge University Press.
+23. de Luca, A. (1997) Sturmian words: structure, combinatorics, and their arithmetics,
+    Theoret. Comput. Sci. 183:45–82.
+24. de Luca, A. , and Varricchio, S. (1989) Some combinatorial properties of the Thue-Morse
+    sequence, Theoret. Comput. Sci. 63:333–348.
+25. Mantaci, S., Restivo, A., Rosone, G. and Sciortino, M. (2008) A New Combinatorial
+    Approach to Sequence ComparisonTheory Comput. Syst. 42/3:411–429.
+26. Manvel, B., Meyerowitz, A., Schwenk*, A., Smith, K. and Stockmeyer, P. (1991) Recon-
+    struction of sequences, Disc. Math. 94/3: 209–219.
+27. Mignosi, F. (1991) On the number of factors of Sturmian words, Theoret. Comput. Sci.
+    82/1: 71–84.
+28. Morse, M. and Hedlund, G. (1940) Symbolic Dynamics II. Sturmian trajectories, Amer.
+    J. Math. 62:1–42.
+

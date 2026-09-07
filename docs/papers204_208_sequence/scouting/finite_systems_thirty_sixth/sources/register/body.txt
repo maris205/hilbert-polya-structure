@@ -1,0 +1,608 @@
+                                           Proceedings of the 27th International Conference on Probabilistic, Combinatorial
+                                           and Asymptotic Methods for the Analysis of Algorithms
+                                           Kraków, Poland, 4-8 July 2016
+
+
+                                           The Register Function and Reductions of
+                                           Binary Trees and Lattice Paths
+arXiv:1602.06200v2 [math.CO] 11 May 2016
+
+
+
+
+                                           Benjamin Hackl1† , Clemens Heuberger1†, Helmut Prodinger2‡
+                                           1
+                                               Institut für Mathematik, Alpen-Adria-Universität Klagenfurt, Austria, {benjamin.hackl, clemens.heuberger}@aau.at
+                                           2
+                                               Department of Mathematical Sciences, Stellenbosch University, South Africa, hproding@sun.ac.za
+
+
+
+                                           Abstract. The register function (or Horton-Strahler number) of a binary tree is a well-known combinatorial parameter.
+                                           We study a reduction procedure for binary trees which offers a new interpretation for the register function as the
+                                           maximal number of reductions that can be applied to a given tree. In particular, the precise asymptotic behavior of
+                                           the number of certain substructures (“branches”) that occur when reducing a tree repeatedly is determined.
+                                           In the same manner we introduce a reduction for simple two-dimensional lattice paths from which a complexity
+                                           measure similar to the register function can be derived. We analyze this quantity, as well as the (cumulative) size of
+                                           an (iteratively) reduced lattice path asymptotically.
+
+                                           Keywords: Register function; binary tree; lattice path; asymptotics
+
+
+
+                                           1       Introduction
+                                           Binary trees are either a leaf or a root together with a left and a right subtree which are binary trees. It is
+                                           well-known that the generating function counting these objects with respect to the number of inner nodes
+                                           is given by                                  √
+                                                                                    1 − 1 − 4z       X 1 2n
+                                                                          B(z) =                  =                     zn.
+                                                                                         2z               n+1 n
+                                                                                                     n≥0
+                                                                                     1  2n
+                                                                                           
+                                           Thus, the nth Catalan number Cn = n+1 n counts the number of binary trees with n inner nodes.
+                                              By simple algebraic manipulations, it is easy to verify that B(z) fulfills the identity
+                                                                                                z           z2     
+                                                                                B(z) = 1 +           B                .
+                                                                                             1 − 2z      (1 − 2z)2
+                                           However, as we will see in Section 2, we can justify this identity from a combinatorial point of view as
+                                           well, and the most important part of this combinatorial interpretation is a reduction procedure for binary
+                                           trees.
+                                              † B. Hackl and C. Heuberger are supported by the Austrian Science Fund (FWF): P 24644-N26 and by the Karl Popper Kolleg
+
+                                           “Modeling-Simulation-Optimization” funded by the Alpen-Adria-Universität Klagenfurt and by the Carinthian Economic Promotion
+                                           Fund (KWF).
+                                              ‡ H. Prodinger is supported by an incentive grant of the National Research Foundation of South Africa.
+2                                                                    B. Hackl, C. Heuberger, H. Prodinger
+
+   The aim of this paper is to analyze the binary tree reduction with a focus on the structures that emerge
+when repeatedly reducing a given tree. After the aforementioned introduction of the reduction in Sec-
+tion 2, we discover an inherent connection to a very well-known branching complexity measure of binary
+trees: the register function.
+   Sections 2.1 and 2.2 deal with the analysis of the number of r-branches and the number of all branches
+within trees of given size, where an r-branch can be thought of a local structure in a binary tree that
+survives exactly r reductions.
+   In Section 3, we switch our attention from binary trees to two-dimensional lattice paths. As we will see,
+the generating function of these objects fulfills a similar functional equation as the generating function
+for binary trees—and its combinatorial interpretation strongly depends on a reduction process as well.
+The remainder of Section 3 is devoted to analyzing the lattice path reduction. In particular, Section 3.1
+investigates fringes of lattice paths, which play a similar role as branches with respect to binary trees.
+   On a general note, we used the open-source mathematics software system SageMath [16] in order to
+perform the computationally intensive parts of the asymptotic analysis for each of the quantities investi-
+gated in this paper. Furthermore, the proofs and many details are omitted in this extended abstract; they
+can be found in the full version.
+
+2    Tree Reductions and the Register Function
+As mentioned in the introduction, we want to find a combinatorial proof for the following proposition.
+Proposition
+  √
+              2.1. The generating function counting binary trees by the number of inner nodes, B(z) =
+1− 1−4z
+   2z    , fulfills the identity
+
+                                                   z         z2     
+                                   B(z) = 1 +          B           2
+                                                                       .                                 (1)
+                                                1 − 2z     (1 − 2z)
+
+Proof (Sketch): The central idea of this proof is to consider a reduction of a binary tree t, which we write
+as Φ(t):
+   First, all leaves of t are erased. Then, if a node has only one child, these two nodes are merged; this
+operation will be repeated as long as there are such nodes. Finally, the nodes without children are declared
+to be leaves.
+   Observe that this reduction is only defined for trees t that have at least one inner node. The various
+steps of this operation (which was introduced in [19]) are depicted in Figure 1. The number attached to
+the nodes will be explained later.
+   It can be shown that the generating function
+
+                                            z          z2    
+                                                 B         2
+                                          1 − 2z   (1 − 2z)
+
+counts all binary trees that can be reduced at least once. Thus, the functional equation (1) can be inter-
+preted combinatorially as follows: a binary tree is either just , or it can be reduced at least once.
+
+Remark. Note that (1) can be used to find a very simple proof for a well-known identity for Catalan
+numbers:
+Reductions of Binary Trees and Lattice Paths                                                                                  3
+
+
+
+
+                                                              3
+
+                          2                                                                               2
+
+           0                                      2                               2                                   1
+
+                                  2                       0       1                               1           0           0
+
+                          1               1                   0           1               1               0
+
+                      0       0       0       0                       0       0       0       0
+
+                                                                  3
+
+                                              2                                                       2
+
+                              1                       1                               2                           1
+
+                                                                              1                   1
+
+                                                                  2
+
+                                              1                                                       1
+
+                              0                       0                               1                           0
+
+                                                                              0                   0
+
+Fig. 1: Illustration of the compactification Φ: in the first tree, the leaves are deleted (dashed nodes) and nodes with
+exactly one child are merged (gray overlay). The second tree shows the result of these operations. Finally, in the last
+tree all nodes without children are marked as leaves.
+4                                                                    B. Hackl, C. Heuberger, H. Prodinger
+
+    Comparing the coefficients of z n+1 , (1) leads to
+                                   X      z 2k+1     X                 X 2k + j 
+                 Cn+1 = [z n+1 ]       Ck          =     C k [z n−2k
+                                                                     ]     2j      zj
+                                      (1 − 2z)2k+1                            j
+                               k≥0                   k≥0               j≥0
+                                           
+                             X               n
+                       =         Ck 2n−2k        ,
+                                             2k
+                           0≤k≤n/2
+
+which is known as Touchard’s identity [14, 17].
+  With this interpretation in mind, (1) can also be seen as a recursive process to generate binary trees by
+repeated substitution of chains. This process can be modeled by the generating functions
+                                                     z             z2      
+                    B0 (z) = 1, Br (z) = 1 +             Br−1             2
+                                                                              , r ≥ 1.                  (2)
+                                                  1 − 2z         (1 − 2z)
+By construction, Br (z) is the generating function of all binary trees that can be constructed from  with
+up to r expansions—or, equivalently—all binary trees that can be reduced to  by applying Φ up to r
+times.
+   As it turns out, these generating functions are inherently linked with the register function (also known
+as the Horton-Strahler number) of binary trees. In order to understand this connection, we introduce the
+register function and prove a simple property regarding the compactification Φ.
+   The register function is recursively defined: for the binary tree consisting of only a leaf we have
+Reg() = 0, and if a binary tree t has subtrees t1 and t2 , then the register function is defined to be
+                                (
+                                  max{Reg(t1 ), Reg(t2 )} for Reg(t1 ) 6= Reg(t2 ),
+                      Reg(t) =
+                                  Reg(t1 ) + 1                 otherwise.
+In particular, the numbers attached to the nodes in Figures 1 and 2 represent the register function of the
+subtree rooted at the respective node.
+   Historically, the idea of the register function originated (as the Horton-Strahler numbers) in [8, 15]
+in the study of the complexity of river networks. However, the very same concept also occurs within
+a computer science context: arithmetic expressions with binary operators can be expressed as a binary
+tree with data in the leaves and operators in the internal nodes. Then, the register function of this binary
+expression tree corresponds to the minimal number of registers needed to evaluate the expression.
+   There are several publications in which the register function and related concepts are investigated
+in great detail, for example Flajolet, Raoult, and Vuillemin [5], Kemp [9], Flajolet and Prodinger [4],
+Louchard and Prodinger [10], Drmota and Prodinger [1], and Viennot [18]. For a detailed survey on the
+register function and related topics see [13].
+   We continue by observing that the compactification Φ is a very natural operation regarding the register
+function:
+Proposition 2.2. Let t be a binary tree with Reg(t) = r ≥ 1. Then Φ(t) is well-defined and the register
+function of the compactified tree is Reg(Φ(t)) = r − 1.
+  As an immediate consequence of Proposition 2.2 we find that Φ can be applied r times repeatedly to
+some binary tree t if and only if Reg(t) ≥ r holds. In particular, we obtain
+                                       Φr (t) =     ⇐⇒    Reg(t) = r.                                   (3)
+Reductions of Binary Trees and Lattice Paths                                                                         5
+
+With (3), the link between the generating functions Br (z) from above and the register function becomes
+clear: Br (z) is exactly the generating function of binary trees with register function ≤ r.
+   In order to analyze these recursively defined generating functions an explicit representation is conve-
+                                               u
+nient. As it turns out, the substitution z = (1+u)2 =: Z(u) is a helpful tool in this context.
+                                                                       2
+                                                      z                           2
+  In particular, it can be shown that applying z 7→ (1−2z) 2 corresponds to u 7→ u , which helps to find
+
+the explicit representation
+                                                      r         j
+                                              1 − u2 X        u2
+                                     Br (z) =                       .
+                                                 u j=0 1 − u2j+1
+   Note that at this point, we could obtain the generating function for binary trees with register function
+equal to r simply by computing the difference Br (z) − Br−1 (z) for r ≥ 1. These functions can be used
+to study the asymptotic behavior of the average register function value.
+   However, as these results are well-known (cf. [5]), we will continue in a different direction by studying
+the number of so-called r-branches.
+
+2.1 r-branches
+The register function associates a value to each node (internal nodes as well as leaves), and the value at
+the root is the value of the register function of the tree. An r-branch is a maximal chain of nodes labeled
+r. This must be a chain, since the merging of two such chains would already result in the higher value
+r + 1. The nodes of the tree are partitioned into such chains, from r = 0, 1, . . .. The goal of this section is
+the study of the parameter “number of r-branches”, in particular, the average number of them, assuming
+that all binary trees of size n are equally likely.
+
+                                                           3
+
+
+                               2                                                                 2
+
+
+               0                               2                                2                            1
+
+
+                                   2                 0             1                         1           0       0
+
+
+                           1           1                       0           1         1               0
+
+
+                       0       0 0         0                           0       0 0       0
+
+                                           Fig. 2: Binary tree with colored r-branches
+
+  This parameter was the main object of the paper [19], and some partial results were given that we are
+now going to extend. In contrast to this paper, our approach relies heavily on generating functions which,
+besides allowing us to verify the results in a relatively straightforward way, also enables us to extract
+explicit formulæ for the expectation (and, in principle, also for higher moments).
+6                                                                    B. Hackl, C. Heuberger, H. Prodinger
+
+   A parameter that was not investigated in [19] is the total number of r-branches, for any r, i.e., the sum
+over r ≥ 0. Here, asymptotics are trickier, and the basic approach from [19] cannot be applied. However,
+in this paper we use the Mellin transform, combined with singularity analysis of generating functions, a
+multi-layer approach that also allowed one of us several years ago to solve a problem by Yekutieli and
+Mandelbrot, cf. [11]. The origins of singularity analysis can be found in [6], and for a detailed survey see
+[7].
+   For reasons of comparisons, let us mention that the value of register function in [19] are one higher than
+here, and that n generally refers there to the number of leaves, not nodes as here.
+   According to our previous considerations, after r iterations of Φ, the r-branches become leaves (or,
+equivalently, 0-branches). The bivariate generating function allowing us to count the leaves of the binary
+trees is vB(zv).
+   The proofs of the statements in this section, together with SageMath worksheets containing the corre-
+sponding computations, can be found in the full version of this paper.
+Theorem 1. Let r ∈ N0 be fixed. The expected number of r-branches in binary trees of size n and the
+corresponding variance have the following asymptotic expansions:
+          n     1       5       1  r     1     1  5 · 16r    7 · 4r      97 
+  En;r = r +        1+ r +             4 − r +                 −         +          + O(n−3 ), (4)
+          4     6       4       20n        4    12n2      21        10     210 · 4r
+          4r − 1      2 · 16r − 25 · 4r + 23 13 · 64r − 14 · 16r + 7 · 4r − 6
+   Vn;r =         n −                        −                                + O(n−2 ).        (5)
+          3 · 16r             90 · 16r                  420 · 16r n
+   Of course, the expected number of r-branches can also be computed explicitly by using Cauchy’s
+integral formula. This yields the following result:
+Proposition 2.3. The expected number of r-branches in binary trees of size n is given by the explicit
+formula                                                                     
+                     n+1 X              2n               2n                2n
+             En;r = 2n        λ                  − 2            +                   .           (6)
+                       n
+                                    n + 1 − λ2r        n − λ2r       n − 1 − λ2r
+                                λ≥1
+
+2.2    The total number of branches
+So far, we were dealing with fixed r, and the number of r-branches in trees of size n, for large n. Now we
+consider the total number of such branches, i.e., the sum over r ≥ 0, which was not considered in [19].
+First, to get an explicit formula, the results from Proposition 2.3 can be summed.
+Corollary 2.4. The expected number of branches in binary trees of size n, denoted as En , is given by the
+explicit formula
+                        n+1                                                      
+                 n+1 X             −v2 (k)        2n              2n             2n
+             En = 2n       (2 − 2         )k             −2             +                  ,
+                    n
+                                                n+1−k           n−k          n−1−k
+                          k=1
+
+where v2 (k) is the dyadic valuation of k, i.e., the highest exponent ν such that 2ν divides k.
+  While it is absolutely possible to work out the asymptotic growth from this explicit formula, at it was
+done in earlier papers [5, 9], we choose a faster method, like in [4]. It works on the level of generating
+functions and uses the Mellin transform together with singularity analysis of generating functions [7, 12].
+  The following theorem describes the asymptotic behavior for the expected number of branches in a
+binary tree.
+Reductions of Binary Trees and Lattice Paths                                                             7
+
+Theorem 2. The expected value of the total number of branches in a random binary tree of size n admits
+the asymptotic expansion
+
+               4n 1          2ζ 0 (−1)      γ        1     43                  log n 
+        En =      + log4 n −           −         −       +    + δ(log4 n) + O           ,
+                3  6          log 2      12 log 2 6 log 2 36                      n
+
+where
+                                      1 X  χk 
+                          δ(x) :=         Γ      ζ(χk − 1)(χk − 1)e2πikx
+                                    log 2   2
+                                         k6=0
+
+is a 1-periodic function of mean zero, given by its Fourier series expansion.
+Remark. Note that the value of the derivative of the zeta function is given by ζ 0 (−1) = − 12
+                                                                                             1
+                                                                                               − log A ≈
+−0.1654211437, where A is the Glaisher-Kinkelin constant (cf. [2, Section 2.15]).
+Remark. The occurrence of the periodic fluctuation δ where the argument is logarithmic in n is actually
+not surprising: while this phenomenon is already very common in the context of the register function,
+fluctuations appear very often in the asymptotic analysis of sums.
+   While this multi-layer approach enabled us to analyze the expected value of the number of branches
+in binary trees of size n, the same strategy fails for computing the variance. This is because the random
+variables modeling the number of r-branches are correlated for different values of r—and thus, the sum
+of the variances (which we compute by our approach) differs from the variance of the sum.
+   This concludes our study of the number of branches per binary tree. In the next section, we analyze
+a quantity that has similar properties as the register function, but is defined on simple two-dimensional
+lattice paths.
+
+
+3    A Similar Recursive Scheme Involving Lattice Paths
+Recall that the register function describes the number of compactifications of a binary tree required in
+order to reduce the tree to a leaf. By defining a similar process for simple two-dimensional lattice paths,
+a function that plays a similar role as the register function is obtained.
+   Simple two-dimensional lattice paths are sequences of the symbols {↑, →, ↓, ←}. It is easy to see that
+the generating function counting these paths (without the path of length 0) is
+
+                               4z
+                    L(z) =          = 4z + 16z 2 + 64z 3 + 256z 4 + 1024z 5 + · · · .
+                             1 − 4z
+                                                 4z
+Proposition 3.1. The generating function L(z) = 1−4z fulfills the functional equation
+
+                                                       z2     
+                                     L(z) = 4L                   + 4z.                                  (7)
+                                                     (1 − 2z)2
+
+Remark. It is easy to verify this result by means of substitution and expansion. However, we want to give
+a combinatorial proof—this approach also motivates the definition of a recursive generation process for
+lattice paths, similar to the process for binary trees from above.
+8                                                                       B. Hackl, C. Heuberger, H. Prodinger
+
+
+
+
+                                   =⇒                                 =⇒              =⇒
+
+
+
+
+                                          =⇒              =⇒          =⇒
+
+
+            Fig. 3: Repeated application of the reduction ΦL on a path with compactification degree 2
+
+Proof (Sketch): While we leave the detailed proof to the full version of this paper, we still want to
+introduce a lattice path reduction which plays an analogous role as the binary tree reduction in the proof
+of Proposition 2.1.
+   We consider the reduction ΦL , which acts on any given lattice path ` with length ≥ 2 as follows:
+   First, the path needs to be modified such that it starts horizontally and ends vertically. This is done by
+rotation to the right of the entire path and/or the very last step, respectively.
+   Then, the horizontally starting and vertically ending path is reduced by replacing each pair of successive
+horizontal-vertical path segments in the following way:
+
+    • If a segment starts with → and the first vertical step is ↑, replace it by %,
+
+    • if a segment starts with → and the first vertical step is ↓, replace it by &,
+
+    • if a segment starts with ← and the first vertical step is ↓, replace it by .,
+
+    • and if a segment starts with ← and the first vertical step is ↑, replace it by -.
+
+Rotating the resulting path by 45◦ in order to obtain a path with horizontal and vertical steps then yields
+ΦL (`). It can be shown that this reduction corresponds to the right-hand side of (7).
+  The process described in the proof of Proposition 3.1 allows us to assign a unique number to each lattice
+path:
+Definition. Let ` be a simple two-dimensional lattice path consisting of at least one step. We define the
+compactification degree of `, denoted as cdeg(`) as
+
+                             cdeg(`) = n        ⇐⇒       ΦnL (`) ∈ {↑, →, ↓, ←}.
+
+Remark. The parallels between the compactification degree and the register function are obvious: both
+count the number of times some given mathematical object can be reduced according to some rules until
+an atomic form of the respective object is obtained. Therefore, both functions describe, in some sense, the
+complexity of a given structure.
+Reductions of Binary Trees and Lattice Paths                                                                9
+
+  In the remainder of this section we want to derive some asymptotic results for the compactification
+degree, namely the expected degree of a lattice path of given length as well as the corresponding variance.
+  Analogously to our strategy for (1), we want to interpret (7) as a recursive generation process as well
+and therefore set                                              z2     
+                       L=0 (z) =  4z,   L =
+                                          r (z)  = 4L =
+                                                      r−1                , r ≥ 1.
+                                                             (1 − 2z)2
+With the help of the substitution z = Z(u) the generating function can be written explicitly as
+                                                               r
+                                                           u2
+                                        L=
+                                         r (z) = 4
+                                                  r+1
+                                                                    .                                     (8)
+                                                        (1 + u2r )2
+  The coefficients of this function can be extracted explicitly by applying Cauchy’s integral formula.
+Proposition 3.2. The number of two-dimensional simple lattice paths of length n that have compactifica-
+tion degree r is given by
+                                                                              
+                     n =         r+1
+                                     X
+                                             λ−1    2n − 1              2n − 1
+                   [z ]Lr (z) = 4      λ(−1)                   −                     .
+                                                    n − λ2r         n − λ2r − 1
+                                       λ≥0
+
+   In fact, by studying the substitution z = Z(u) closely, the asymptotic behavior of the coefficients of
+L=r (z) can be extracted as well.
+   We turn to the investigation of the expected compactification degree. Let Ln denote the set of simple
+two-dimensional lattice paths of size n. Consider the family of random variables Xn : Ln → N0 modeling
+the compactification degree of the lattice paths of length n under the assumption that all paths are equally
+likely. The following results are immediate consequences of Proposition 3.2.
+Corollary 3.3. The probability that a lattice path of length n has compactification degree r is given by
+the explicit formula
+                      [z n ]L=
+                                                                                       
+                             r (z)     r+1−n
+                                              X
+                                                         λ−1    2n − 1            2n − 1
+          P(Xn = r) =              =4             λ(−1)                  −                    ,
+                            4n                                  n − λ2r       n − λ2r − 1
+                                                λ≥0
+
+and the expected compactification degree for paths of length n is given by
+                                                                         
+                               X
+                                        v2 (k)        2n − 1          2n − 1
+                     EXn =         8k(2        − 1)            −               .                          (9)
+                                                       n−k          n−k−1
+                                 k≥1
+
+Remark. The formula for P(Xn = r) is very similar to the results for the classical register function
+obtained by Flajolet (cf. [3]). It is likely that applying the techniques that were used in [10] could be used
+to determine expansions for arbitrary moments.
+   The following theorem characterizes the asymptotic behavior of the expected compactification degree
+and the corresponding variance.
+Theorem 3. The expected compactification degree of simple two-dimensional lattice paths of length n
+admits the asymptotic expansion
+                                          γ + 2 − 3 log 2
+                        EXn = log4 n +                    + δ1 (log4 n) + O(n−1 ),                       (10)
+                                              2 log 2
+10                                                                     B. Hackl, C. Heuberger, H. Prodinger
+
+and for the corresponding variance we have
+
+            π 2 − 24 log2 π − 48ζ 00 (0) − 24 2 log π 11
+  VXn =                                      −          −     + δ2 (log4 n)
+                        24 log2 2               log 2     12
+                                              γ + 2 − 3 log 2                                 1 
+                                            −                 δ1 (log4 n) + δ12 (log4 n) + O              (11)
+                                                   log 2                                      log n
+where δ1 (x) and δ2 (x) are 1-periodic fluctuations of mean zero whose Fourier coefficients can be given
+explicitly.
+
+3.1    Fringes
+We define the rth fringe of a given lattice path ` of length ≥ 1 to be ΦrL (`), i.e. the rth fringe is given by
+the rth reduction of the path. In particular, if ` can be reduced r times, we call the length of ΦrL (`) the
+size of the rth fringe. Otherwise, we say that this size is 0.
+   The rth fringes of positive size can then be enumerated by the bivariate generating function
+                                                     X           r
+                                      Hr (z, v) =            v |ΦL (`)| z |`|
+                                                     ` path
+                                                   cdeg(`)≥r
+
+where |`| denotes the length of a lattice path.
+  It can be shown that Hr (z, v) fulfills the recursion
+                                 4zv                         z 2 
+                   H0 (z, v) =          , Hr (z, v) = 4Hr−1          , v , r ≥ 1,
+                               1 − 4zv                        1 − 2z
+which can be used to find the explicit representation
+                                                                r
+                                                        4r+1 u2 v
+                                     Hr (z, v) =                        .
+                                                   (1 + u2r )2 − 4u2r v
+  The generating function Hr (z, v) can now be used to derive the asymptotic behavior of the expectation
+  L                     L
+En;r and the variance Vn;r of the size of the rth fringe, where all paths of length n arise with the same
+probability.
+Theorem 4. Let r ∈ N0 be fixed. The expectation and variance of the rth fringe size of a random path of
+length n have the asymptotic expansions
+                                             n    1 − 4−r
+                                     L
+                                    En;r =      +         + O(n3 θr−n )                                   (12)
+                                             4r      3
+and
+                                    4r − 1      −2 · 16r − 5 · 4r + 7
+                          L
+                         Vn;r =             n +                       + O(n5 θr−n ),                  (13)
+                                    3 · 16r            45 · 16r
+                     4
+where θr = 2+2 cos(2π/2    r ) > 1. If additionally r > 0, then for the random variables Yn;r modeling the
+
+rth fringe size of lattice paths of length n we have
+                                                       Z x
+                            Yn;r − En;r              1            2
+                        P      p          ≤x = √               e−w /2 dw + O(n−1/2 ),
+                                 Vn;r                2π −∞
+i.e. the random variables Yn;r are asymptotically normally distributed.
+Reductions of Binary Trees and Lattice Paths                                                             11
+
+   As we have the generating function Hr (z, v) in an explicit form, the expected value can also be ex-
+tracted explicitly by means of Cauchy’s integral formula.
+Proposition 3.4. For given r ∈ N0 , the rth expected fringe size of a random path of length n is given by
+the explicit formula
+                                    X 2λ3 + λ  2n − 1   2n − 1 
+                      L      r+1−n
+                     En;r = 4                                   −                  .
+                                            3       n − 2r λ         n − 2r λ − 1
+                                     λ≥1
+
+  Analogously to our investigations concerning branches in binary trees, we also study the asymptotic
+behavior of the expected fringe size, i.e. the sum over the size of the rth fringes for r ≥ 0. Like the
+compactification degree, this parameter can also be interpreted as a complexity measure for lattice paths.
+Corollary 3.5. The expected fringe size EnL of a random path of length n can be computed as
+                        n                                                               
+                   1 X                                                   2n − 1      2n − 1
+        EnL =           2k 3 (2 − 2−v2 (k) ) + k(2v2 (k)+1 − 1)
+                                                                
+                                                                                 −             .
+                12 · 4n                                                  n−k        n−k−1
+                       k=1
+
+  The following theorem quantifies the asymptotic behavior of EnL :=               L
+                                                                          P
+                                                                              r≥0 En;r .
+
+Theorem 5. Asymptotically, the behavior of the expected fringe size EnL for a random path of length n is
+given by
+                     4       1          5 + 3γ − 11 log 2                      log n 
+              EnL = n + log4 n +                            + δ(log4 n) + O             ,          (14)
+                     3       3               18 log 2                             n
+where δ(x) is a 1-periodic fluctuation of mean zero with Fourier series expansion
+                         X         2       3 + χ 
+                                                  k
+                                                      2ζ(χk − 1) + ζ(χk + 1) e2kπix .
+                                                                               
+                  δ(x) =        √        Γ
+                              3 π log 2        2
+                            k6=0
+
+
+References
+ [1] M. Drmota and H. Prodinger, The register function for t-ary trees, ACM Trans. Algorithms 2 (2006),
+     no. 3, 318–334.
+ [2] S. R. Finch, Mathematical constants, Encyclopedia of Mathematics and its Applications, vol. 94,
+     Cambridge University Press, Cambridge, 2003. 2003519 (2004i:00001)
+ [3] P. Flajolet, Analyse d’algorithmes de manipulation d’arbres et de fichiers, Cahiers du Bureau Uni-
+     versitaire de Recherche Oprationnelle 34/35 (1981), 1–209.
+ [4] P. Flajolet and H. Prodinger, Register allocation for unary-binary trees, SIAM J. Comput. 15 (1986),
+     629–640.
+ [5] P. Flajolet, J.-C. Raoult, and J. Vuillemin, The number of registers required for evaluating arithmetic
+     expressions, Theoret. Comput. Sci. 9 (1979), no. 1, 99–125.
+ [6] P. Flajolet and A. Odlyzko, Singularity analysis of generating functions, SIAM J. Discrete Math. 3
+     (1990), 216–240.
+12                                                                     B. Hackl, C. Heuberger, H. Prodinger
+
+ [7] P. Flajolet and R. Sedgewick, Analytic combinatorics, Cambridge University Press, Cambridge,
+     2009.
+
+ [8] R. E. Horton, Erosioned development of systems and their drainage basins, Geol. Soc. Am. Bull. 56
+     (1945), 275–370.
+ [9] R. Kemp, The average number of registers needed to evaluate a binary tree optimally, Acta Inform.
+     11 (1978/79), no. 4, 363–372.
+
+[10] G. Louchard and H. Prodinger, The register function for lattice paths, Fifth Colloquium on Mathe-
+     matics and Computer Science, Discrete Math. Theor. Comput. Sci. Proc., AI, Assoc. Discrete Math.
+     Theor. Comput. Sci., Nancy, 2008, pp. 135–148. 2508783
+[11] H. Prodinger, On a problem of Yekutieli and Mandelbrot about the bifurcation ratio of binary trees,
+     Theoret. Comput. Sci. 181 (1997), no. 1, 181–194.
+
+[12] H. Prodinger, Analytic methods, Handbook of Enumerative Combinatorics (M. Bóna, ed.), CRC
+     Press Series on Discrete Mathematics and its Applications, Chapman & Hall/CRC, Boca Raton, FL,
+     2015, pp. 173–252.
+[13]           , Introduction to Philippe Flajolet’s work on the register function and related topics, Philippe
+       Flajolet’s Collected Papers (M. D. Ward, ed.), vol. V, to appear.
+
+[14] L. W. Shapiro, A short proof of an identity of Touchard’s concerning Catalan numbers, J. Combina-
+     torial Theory Ser. A 20 (1976), no. 3, 375–376. 0406819 (53 #10605)
+[15] A. N. Strahler, Hypsomic analysis of erosional topography, Geol. Soc. Am. Bull. 63 (1952), 1117–
+     1142.
+
+[16] The  Sage  Developers, Sage                   Mathematics      Software      (Version     7.0),     2016,
+     http://www.sagemath.org.
+[17] J. Touchard, Sur certaines équations fonctionnelles, Proc. Internat. Math. Congress, vol. I (1928),
+     1924, pp. 465–472.
+[18] X. G. Viennot, A Strahler bijection between Dyck paths and planar trees, Discrete Math. 246 (2002),
+     no. 1-3, 317–329, Formal power series and algebraic combinatorics (Barcelona, 1999). 1887493
+[19] K. Yamamoto and Y. Yamazaki, Topological self-similarity on the random binary-tree model, J. Stat.
+     Phys. 139 (2010), no. 1, 62–71.
+

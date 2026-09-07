@@ -71,6 +71,31 @@ artifact closure and the lifecycle follow-up are still pending. See
 [actual Round1/root physical closure](qa/P209_ROUND1_ROOT_INSPECTION.md).
 The requested five-paper batch is not complete.
 
+Latest documentary milestone (2026-09-07 UTC): P209's actual terminal
+artifact attempts `initial_01`, `initial_02` and `initial_03` all remain
+genuine failures. They exposed adapter assumptions about historical Git
+receipt roles, A's original initial-census literal, and A's canonical JSON
+without a `status` key. All accepted author/A/B proof and strict-pair bytes,
+both actual terminal builds and four actual root page views are unchanged.
+Revision02 also registers three exact omitted historical Markdown origins;
+its full root static preflight passed, but that is not an artifact PASS.
+The third native failure is [preserved in full](qa/P209_TERMINAL_ARTIFACT_INITIAL_03.failed.actual.json).
+Root assigned a fresh documentary preparer only `qa/p209_terminal_artifact_revision_03/`
+for the exact role-dependent canonical schema and preservation of every old
+attempt. No `initial_04`, artifact acceptance or lifecycle edit is claimed.
+
+Root original closures of scouts [33](scouting/THIRTY_THIRD_ROOT_INSPECTION.md),
+[34](scouting/THIRTY_FOURTH_ROOT_INSPECTION.md),
+[35](scouting/THIRTY_FIFTH_ROOT_INSPECTION.md) and
+[36](scouting/THIRTY_SIXTH_ROOT_INSPECTION.md) are complete, all NO_PROMOTION.
+The [six last-seat supplements](scouting/LAST_SEAT_SUPPLEMENTS_ROOT_INSPECTION.md)
+also have complete original documentary closure: LNR/NED did not obtain
+their missing primary bodies; ORR's full-branch support identity does not
+prove the missing global slack inequality. Every hold and real failure
+remains. Lanes37/38 have distinct new bounded scopes for this same open
+fifth seat; neither is an admission or new batch. The pre-update central
+controls are [physically preserved](qa/central_lifecycle_p209_artifact_corrections/README.md).
+
 Follow [the project workflow](../research_state/WORKFLOW.md) and
 [this batch's scope](PROBLEM_ANCHOR.md). Prior completed science remains in
 [P197/P199/P200/P202/P203 final QA](../papers197_201_sequence/FINAL_QA_REPORT.md).
@@ -81,7 +106,7 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | central integration, original checks and scoped Git | P205/P207/P208 complete; P209 Round2 root accepted, actual terminal pair/four-page views done, full artifact pending; one seat open; private checkpoint remains 2974f8ea |
+| Words / local maps | root | central integration, original checks and scoped Git | P205/P207/P208 complete; P209 actual terminal pair/four-page views done, full artifact pending; one seat open; private checkpoint2edce904 remotely confirmed |
 | Combinatorial objects | batch197_fosp_gate | closed scouting/finite_systems_eleventh/; now idle | eleventh root inspection and 32/7 pins complete, no promotion |
 | Algebra / finite geometry | batch197_lzk_gate | sealed scouting/finite_systems_seventeenth/; now idle | root accepted bounded NO_FRESH_SLATE desk, zero scientific executions |
 | Graphs / relations | batch197_fifth_scout | sealed scouting/finite_systems_fourteenth/; now idle | fourteenth root-verified NO_PROMOTION, OFS/P208 proof/code unread and B eligibility preserved |
@@ -107,15 +132,22 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 | Thirtieth fresh finite scout | thirtieth_finite_scout | sealed scouting/finite_systems_thirtieth/ | root full170-payload/8122-path closure; MRT complete old signed-power adapter, one literal/zero science, NO_PROMOTION |
 | Thirty-first fresh finite scout | thirty_first_finite_scout | sealed scouting/finite_systems_thirty_first/ | root full143/1849-path closure accepted TCF temporal-wrapper NO_PROMOTION; one literal/zero science; original P209 access failure retained |
 | Thirty-second bounded finite scout | thirty_first_finite_scout | sealed scouting/finite_systems_thirty_second/ | root full153/1411-path closure accepted ONI NO_PROMOTION; original n0..5 pilot only; no new admission |
-| Thirty-third bounded finite scout | thirty_third_finite_scout | sealed scouting/finite_systems_thirty_third/ | author-negative OTC; initial wrong-cwd checksum and separate supplement retained; root originals pending |
-| Thirty-fourth bounded finite scout | thirty_third_finite_scout | scouting/finite_systems_thirty_fourth/ only | explicitly assigned different non-graph final-seat scope, not a new batch; no admitted theorem contract |
-| Thirty-fifth bounded finite scout | twenty_seventh_finite_scout | scouting/finite_systems_thirty_fifth/ only | separately assigned bounded non-graph/algebraic final-seat lane; no admitted theorem contract |
+| Thirty-third bounded finite scout | thirty_third_finite_scout | sealed scouting/finite_systems_thirty_third/ | root complete208-final/192-initial payload and1462-path union closure; OTC NO_PROMOTION, all real failures retained |
+| Thirty-fourth bounded finite scout | thirty_third_finite_scout | sealed scouting/finite_systems_thirty_fourth/ | root complete original closure, NO_PROMOTION; no admitted theorem contract |
+| Thirty-fifth bounded finite scout | twenty_seventh_finite_scout | sealed scouting/finite_systems_thirty_fifth/ | root complete31-final payload/604-path closure; two exact old documents later reconstructed from matching history, not falsely called original physical copies; NO_PROMOTION |
+| Thirty-sixth bounded finite scout | thirty_third_finite_scout | sealed scouting/finite_systems_thirty_sixth/ | root complete152-payload/268-path closure; WCR sharp clock proved but inverse reduces to elementary path colouring, NO_PROMOTION/zero pilots |
+| Thirty-seventh bounded finite scout | twenty_seventh_finite_scout | scouting/finite_systems_thirty_seventh/ only | same fifth seat, at most three finite algebra/geometry/matrix literals; source-first, no admission |
+| Thirty-eighth bounded finite scout | thirty_third_finite_scout | scouting/finite_systems_thirty_eighth/ only | same fifth seat, at most three graph/relation/allocation literals; source-first, no admission |
+| LNR direct-source recheck | p209_b_reviewer | sealed scouting/LNR_SOURCE_RECHECK/ | six routes, no primary body; root original closure complete, LNR-S1 OPEN/HOLD_SOURCE/NO_ADMISSION |
+| Last-seat proof triage and supplements | thirty_third_finite_scout; twenty_seventh_finite_scout documentary audit | sealed triage/ORR/NED/two-errata and qa/last_seat_supplements_documentary_audit/ | root479-payload six-bundle/561-path full original closure; source/proof holds unchanged, no independent mathematical review or admission |
 | P209 author | p208_b_reviewer | sealed paper author set and qa/scout25_documentary_audit/; now idle | P209 author package adopted; ineligible to review P209; separate scout-25 documentary audit complete and root-inspected |
 | P209 manuscript A | p209_a_reviewer | sealed reviews/p209_a/; now idle | exact no-change delta actually accepted; root final 1,342-payload/124,281-path closure passed, original 1,227 preserved |
 | P209 manuscript B | p209_b_reviewer | sealed reviews/p209_b/ | actual accepted exact delta; root final1472/128298-path complete closure passed; all original bytes/failures preserved |
 | P209 Round2 preparation | thirtieth_finite_scout | sealed qa/p209_round2_preparation/ | root actual preflight passed; physical2021-payload Round2 and full root physical closure passed; failed first root expectation preserved |
 | P209 terminal preparation | twenty_seventh_finite_scout | sealed qa/p209_terminal_preparation/ | root fully read final code/diff and actual11732-path preflight; root real terminal pair/all-four views now passed, full artifact pending |
-| P209 terminal artifact preparation | p209_b_reviewer | qa/p209_terminal_artifact_preparation/ only | separately assigned infrastructure-only adaptation; no execution or terminal verdict |
+| P209 terminal artifact preparation | p209_b_reviewer | sealed qa/p209_terminal_artifact_preparation/ | root complete347-payload/33-original/47-command static closure; original actual initial01 failure preserved, later exact revisions separate |
+| P209 artifact revisions01/02 | p209_b_reviewer | sealed qa/p209_terminal_artifact_revision_01/ and revision_02/ | root complete static preflights; all three actual initial artifact failures preserved, no artifact PASS |
+| P209 exact canonical-schema revision03 | thirty_third_finite_scout/orientation_source_desk | qa/p209_terminal_artifact_revision_03/ only | root-assigned documentary source correction after initial03; no target/lifecycle/scientific execution authorized |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -1048,3 +1080,35 @@ The previous STATEb3e9…/PIPE9dd4…/GITa674… were physically copied and
 Private checkpoint planning is done, but no new push beyond2974f8ea has yet
 occurred. Active artifact preparation and scouts34/35 are excluded from a
 checkpoint until separately selected at actual completed boundaries.
+
+## Confirmed private terminal checkpoint and prepared artifact gate
+
+The actual private push [2edce904](qa/GIT_OBJECT_P209_TERMINAL_2EDCE904.json)
+preserves accepted B, root strict/original/delta closure, physical Round2,
+actual terminal pair/all-four views, pending whole-paper lifecycle and closed
+scouts28–32. All28 named manifests/36,972 rows/12,849 Git blob keys matched
+the committed tree. The exact11,506-path selection produced5,524 staged
+changes, zero deletions and no out-of-scope entry. The first remote query's
+SSH timeout is preserved; the separate bounded retry actually confirmed
+the pushed ref, with final0/0 and a clean mirror. No force-push occurred.
+
+The [artifact preparation root inspection](qa/P209_ARTIFACT_PREPARATION_ROOT_INSPECTION.actual.json)
+passed347 payloads,33 physical originals,47 historical documentary commands,
+167 original input rows,33 fresh comparisons and six full raw diff matches.
+Root read all895 auditor lines,79 recorder lines,627 lifecycle lines and
+the entire2,469-line final adaptation diff. All18 Python sources were parsed
+without execution;16 old integrity helpers and23 shared lifecycle blocks
+match exactly. All390 current read paths were rechecked. The two old control
+snapshots and preserved unexecuted drafts retain exact path/hash roles.
+This is static/original closure, not actual artifact acceptance.
+
+Scouts33/34/35 are author-sealed negative handoffs awaiting root originals;
+they and the artifact preparation were excluded from2edce904. A bounded
+LNR source-body recheck and proof-gap triage continue the same last seat,
+without automatic rescue, new candidate counts or another batch.
+Current P209 remains ARTIFACT_GATE_PENDING; three complete, one pending,
+one open and next numberP210. The initial terminal audit is the next gate.
+The [previous central controls](qa/central_lifecycle_p209_terminal_push/README.md)
+were physically preserved and actually raw-byte checked before this update.
+These later receipts/index edits are outside their own named commit.
+OWNER_AMBER / HOLD_EXTERNAL remain.

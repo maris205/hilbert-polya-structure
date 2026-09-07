@@ -1,0 +1,45 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/unexecuted_draft_before_link_registration/audit_p209.py	2026-09-07 16:42:44.636394394 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/audit_p209.py	2026-09-07 16:43:36.828051303 +0800
+@@ -924,7 +924,41 @@
+         if preserved.suffix == '.md' and (preserved.is_relative_to(A) or preserved.is_relative_to(B)):
+             pin(preserved, digest)
+             origins.setdefault(str(preserved), Path(original))
+-    for original, row in j(A / 'delta_check_02/RESPONSE_ORIGINALS_AND_COPIES.json').items(): origins[row['copy']] = Path(original)
++    # Semantic document origins are not historical input-hash aliases. Keep
++    # both real A attempts, including the failed one, at their named origins.
++    for attempt0 in ('delta_check_01', 'delta_check_02'):
++        for original, row in j(A / (attempt0 + '/RESPONSE_ORIGINALS_AND_COPIES.json')).items():
++            source, copied = Path(original), Path(row['copy'])
++            ck(source.is_relative_to(ROOT) and copied == A / attempt0 / 'exact_response_inputs' / source.name,
++               'exact_A_response_copy_origin_path', (attempt0, original))
++            pin(copied, row['sha256'])
++            ck(str(copied) not in origins or origins[str(copied)] == source,
++               'same_explicit_document_origin', str(copied))
++            origins[str(copied)] = source
++    # The author collector recorded an additional literal workspace/ layer.
++    # Use its sealed table, not path-existence or matching-digest search.
++    source_mapping = PAPER / 'source_context/MAPPING.json'
++    pin(source_mapping, 'cc642a35e810b072e9cd4dcc8a9353e6fe0afc9f3c68eb2ff5546f876089245f')
++    for original, row in j(source_mapping).items():
++        if not row['snapshot'].startswith('source_context/workspace/'): continue
++        source = Path(original)
++        ck(source.is_relative_to(ROOT) and row['snapshot'] ==
++           'source_context/workspace/' + source.relative_to(ROOT).as_posix(),
++           'exact_author_workspace_snapshot_origin_path', original)
++        copied = safe(PAPER, row['snapshot']); pin(copied, row)
++        ck(str(copied) not in origins or origins[str(copied)] == source,
++           'same_explicit_document_origin', str(copied))
++        origins[str(copied)] = source
++    failed_b_roles = j(B / 'delta_check_01/EXACT_HISTORY_ALIASES.json')
++    for name, digest in [('PAPER_STATUS.md', '304c24e871a27bd02bcd6db231abc37870fb263a01d4c081289bdd53e8718a73'),
++                         ('ROOT_ADOPTION.md', '8f82ae0af7156131f14e9e6e849198f8b1c98564760c30d4bc121b50cf34f82e')]:
++        source = PAPER / name; copied = B / 'delta_check_01/response_anchors' / name
++        ck(failed_b_roles[str(source) + ' @ ' + digest] == str(copied),
++           'exact_failed_B_anchor_origin_path', name)
++        pin(copied, digest)
++        ck(str(copied) not in origins or origins[str(copied)] == source,
++           'same_explicit_document_origin', str(copied))
++        origins[str(copied)] = source
+     for row in j(B / 'assignment_context/ROLES.json'): origins[row['preserved']] = Path(row['original'])
+     for row in j(B / 'delta_intake_01/INTAKE_RESULT.json')['copies']: origins[row['physical']] = Path(row['original'])
+     docs = [p for base in (PAPER, A, B) for p in base.rglob('*.md')]

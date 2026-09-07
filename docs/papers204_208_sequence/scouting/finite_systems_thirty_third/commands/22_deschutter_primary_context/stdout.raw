@@ -1,0 +1,280 @@
+K.U.Leuven
+Department of Electrical Engineering (ESAT)                                                      SISTA
+
+
+
+
+                                           Technical report 97-67
+
+
+   On the Sequence of Consecutive Powers of
+        a Matrix in a Boolean Algebra∗
+                                    B. De Schutter and B. De Moor
+
+
+                                To cite this work, please refer to the published version:
+             B. De Schutter and B. De Moor, “On the sequence of consecutive powers of a matrix
+             in a Boolean algebra,” SIAM Journal on Matrix Analysis and Applications, vol. 21,
+             no. 1, pp. 328–354, 1999. doi:10.1137/S0895479897326079
+
+
+
+
+ESAT-SISTA
+K.U.Leuven
+Leuven, Belgium
+Current URL: https://www.esat.kuleuven.be/stadius
+∗ This report can also be downloaded via https://dspub.eu/97-67
+ ON THE SEQUENCE OF CONSECUTIVE POWERS OF A MATRIX
+               IN A BOOLEAN ALGEBRA
+                       BART DE SCHUTTER∗ AND BART DE MOOR†
+
+    Abstract. In this paper we consider the sequence of consecutive powers of a matrix in a Boolean
+algebra. We characterize the ultimate behavior of this sequence, we study the transient part of the
+sequence and we derive upper bounds for the length of this transient part. We also indicate how
+these results can be used in the analysis of Markov chains and in max-plus-algebraic system theory
+for discrete event systems.
+
+    Key words. Boolean algebra, Boolean matrices, transient behavior, Markov chains, max-plus
+algebra
+
+   AMS subject classiﬁcations. 06E99, 15A99, 16Y99
+
+
+     1. Introduction. In this paper we consider the sequence of consecutive pow-
+ers of a matrix in a Boolean algebra. This sequence reaches a “cyclic” behavior
+after a ﬁnite number of terms. Even for more complex algebraic structures, such as
+the max-plus algebra (which has maximization and addition as its basic operations)
+this ultimate behavior has already been studied extensively by several authors (See,
+e.g., [1, 9, 13, 26] and the references therein). In this paper we completely charac-
+terize the ultimate behavior of the sequence of the consecutive powers of a matrix in
+a Boolean algebra. Furthermore, we also study the transient part of this sequence.
+More speciﬁcally, we give upper bounds for the length of the transient part of the
+sequence as a function of structural parameters of the matrix.
+     Our main motivation for studying this problem lies in the max-plus-algebraic
+system theory for discrete event systems. Furthermore, our results can also be used
+in the analysis of the transient behavior of Markov chains.
+     This paper is organized as follows. In §2 we introduce some of the notations and
+concepts from number theory, Boolean algebra, matrix algebra and graph theory that
+will be used in the paper. In §3 we characterize the ultimate behavior of the sequence
+of consecutive powers of a given matrix in a Boolean algebra, and we derive upper
+bounds for the length of the transient part of this sequence. In §4 we brieﬂy sketch
+how our results can be used in the analysis of Markov chains and in the max-plus-
+algebraic system theory for discrete event systems. In this section we also explain
+why we have restricted ourselves to Boolean algebras in this paper and we indicate
+some of the phenomena that should be taken into account when extending our results
+to more general algebraic structures. Finally we present some conclusions in §5.
+    2. Preliminaries.
+     2.1. Notation, deﬁnitions and some lemmas from number theory. In
+this paper we use “vector” as a synonym for “column matrix”. If a is a vector, then
+ai is the ith component of a. If A is a matrix, then aij or (A)ij is the entry on the
+ith row and the jth column, and Aαβ is the submatrix of A obtained by removing all
+rows that are not indexed by the set α and all columns that are not indexed by the
+set β.
+   ∗ Control Laboratory, Faculty of Information Technology and Systems, Delft University of Tech-
+
+nology, P.O. Box 5031, 2600 GA Delft, The Netherlands (b.deschutter@its.tudelft.nl).
+   † ESAT/SISTA, K.U.Leuven, Kardinaal Mercierlaan 94, B-3001 Heverlee (Leuven), Belgium
+
+(bart.demoor@esat.kuleuven.ac.be).
+                                                1
+2                              B. DE SCHUTTER AND B. DE MOOR
+
+                                           Table 2.1
+                  The operations ⊕ and ⊗ for the Boolean algebra ({0, 1}, ⊕, ⊗).
+
+                                    ⊕    0 1            ⊗     0 1
+                                    0    0 1            0     0 0
+                                    1    1 1            1     0 1
+
+     The set of the real numbers is denoted by R, the set of the nonnegative integers
+by N, and the set of the positive integers by N0 .
+     If S is a set, then the number of elements of S is denoted by #S. If γ is a set of
+positive integers then the least common multiple of the elements of γ is denoted by
+lcm γ and the greatest common divisor of the elements of γ is denoted by gcd γ.
+     If x ∈ R then ⌈x⌉ is the smallest integer that is larger than or equal to x, and ⌊x⌋
+is the largest integer that is less than or equal to x.
+     Lemma 2.1. Let p, q ∈ N0 be coprime. The smallest integer n such that for any
+integer m ≥ n, there exist two nonnegative integers α and β such that m = αp + βq,
+is given by n = (p − 1)(q − 1).
+     Proof. See, e.g., the proof of Lemma 3.5.5 of [5].
+Let a1 , a2 , . . . , an ∈ N0 with gcd(a1 , a2 , . . . , an ) = 1. We deﬁne g(a1 , a2 , . . . , an ) to
+be the largest positive integer N for which the equation a1 x1 + a2 x2 + . . . + an xn = N
+subject to x1 , x2 , . . . , xn ∈ N, has no solution. From Lemma 2.1 it follows that
+g(a, b) = (a − 1)(b − 1) − 1 = ab − a − b. Although a formula exists for the case where
+n = 3, no general formulas are known for n ≥ 4. However, some upper bounds have
+been proved [4, 11]:
+     Lemma 2.2. If a1 , a2 , . . . , an ∈ N0 with a1 < a2 < . . . < an and gcd(a1 , . . . , an ) =
+1, then g(a1 , . . . , an ) ≤ (a1 − 1)(an − 1) − 1.
+     Lemma 2.3. If a1 , a2 , . . . , an ∈ N0 with a1 < a2 < . . . < an and gcd(a1 , . . . , an ) =
+1, then we have g(a1 , . . . , an ) ≤ 2an−1 ann − an .
+     2.2. Boolean algebra. A Boolean algebra is an algebraic structure of the form
+(B, ⊕, ⊗) with B = {0, 1} such that the operations ⊕ and ⊗ applied on 0 and 1 yield
+the results of Table 2.1, where ⊕ and ⊗ are associative, and where ⊗ is distributive
+with respect to ⊕. The element 0 is called the Boolean zero element, 1 is called the
+Boolean identity element, ⊕ is called the Boolean addition and ⊗ is called the Boolean
+multiplication.
+     Some examples of Boolean algebras are: ({false, true}, or, and), ({0, ∞}, min, +),
+({0, 1},max, ·), ({∅, N}, ∪, ∩), ({0, 1}, max, min), ({−∞, ∞}, max, min), and so on (see
+[1, 15]). In this paper we shall use the following examples of Boolean algebra in order to
+transform known results from max-plus algebra and from nonnegative matrix algebra
+to Boolean algebra:
+       1. The Boolean algebra ({−∞, 0}, max, +) is a subalgebra of the max-plus al-
+gebra ( R ∪ {−∞}, max, +).
+       2. The Boolean algebra ({0, p}, +, ·) where p stands for an arbitrary positive
+number1 can be considered as a Boolean restriction of nonnegative algebra.
+     A matrix with entries in B is called a Boolean matrix. The operations ⊕ and ⊗
+are extended to matrices as follows. If A, B ∈ Bm×n then we have
+
+                                        (A ⊕ B)ij = aij ⊕ bij
+    1 So p + p = p and p · p = p.
+                     CONSECUTIVE POWERS OF A BOOLEAN MATRIX                                   3
+
+for all i, j. If A ∈ Bm×p and B ∈ Bp×n then
+                                                      p
+                                                      M
+                               (A ⊗ B)ij =                  aik ⊗ bkj
+                                                      k=1
+
+for all i, j. Note that these deﬁnitions resemble the deﬁnitions of the sum and the
+product of matrices in linear algebra but with ⊕ instead of + and ⊗ instead of ·.
+    The n by n Boolean identity matrix is denoted by In , the m by n Boolean zero
+matrix is denoted by Om×n , and the m by n matrix all the entries of which are equal
+to 1 is denoted by Em×n . If the dimensions of these matrices are not indicated they
+should be clear from the context.
+    The Boolean matrix power of the matrix A ∈ Bn×n is deﬁned as follows:
+                 0                         k                    k−1
+             A⊗ = In ,       and      A⊗ = A ⊗ A⊗                       for k = 1, 2, . . .
+
+If we permute the rows or the columns of the Boolean identity matrix, we obtain a
+Boolean permutation matrix. If P ∈ Bn×n is a Boolean permutation matrix, then we
+have P ⊗ P T = P T ⊗ P = In . A matrix R ∈ Bm×n is a Boolean upper triangular
+matrix if rij = 0 for all i, j with i > j.
+      2.3. Boolean algebra and graph theory. We assume that the reader is fa-
+miliar with basic concepts of graph theory such as directed graph, path, (elementary)
+circuit, and so on (see, e.g., [1, 18, 27]). In this paper we shall use the deﬁnitions of [1]
+since they are well suited for our proofs. Sometimes these deﬁnitions diﬀer slightly
+from the deﬁnitions adopted by other schools in the literature. The most important
+diﬀerences are:
+        • In this paper we also consider empty paths, i.e., paths that consist of only
+one vertex and have length 0. However, unless it is explicitly speciﬁed, we always
+assume that paths have a nonzero length.
+        • The precedence graph of the matrix A ∈ Bn×n , by denoted by G(A), is a
+directed graph with vertices 1, 2, . . . , n and an arc j → i for each aij 6= 0. Note that
+vertex i is the end point of this arc.
+        • A directed graph is called strongly connected if for any two diﬀerent vertices
+vi , vj there exists a path from vi to vj . Note that this implies that a graph consisting
+of one vertex (with or without a loop) is always strongly connected.
+        • A matrix is irreducible if its precedence graph is strongly connected. Since
+according to the deﬁnition we use a graph with only one vertex is always strongly
+connected, the 1 by 1 Boolean zero matrix [ 0 ] is irreducible. However, the 1 by 1
+Boolean zero matrix [ 0 ] is the only Boolean zero matrix that is irreducible.
+      Let us now give a graph-theoretic interpretation of the Boolean matrix power.
+Let A ∈ Bn×n and let k ∈ N0 . Recall that there is an arc j → i in G(A) if and only if
+aij = 1. Since
+                         k            M
+                     (A⊗ )ij =                      aii1 ⊗ ai1 i2 ⊗ . . . ⊗ aik−1 j
+                                 i1 ,i2 ,...,ik−1
+
+                                                            k
+for all i, j and since 0 is absorbing for ⊗, (A⊗ )ij is equal to 1 if and only if there
+exists a path of length k from vertex j to vertex i in G(A).
+    A maximal strongly connected subgraph (m.s.c.s.) Gsub of a directed graph G is
+a strongly connected subgraph that is maximal, i.e., if we add an extra vertex (and
+some extra arcs) of G to Gsub then Gsub is no longer strongly connected.
+4                            B. DE SCHUTTER AND B. DE MOOR
+
+
+     A well-known result from matrix algebra states that any square matrix can be
+transformed into a block upper diagonal matrix with irreducible blocks by simulta-
+neously reordering the rows and columns of the matrix (see, e.g., [1, 2, 5, 12, 17, 22]
+for the proof of this theorem and for its interpretation in terms of graph theory and
+Markov chains):
+     Theorem 2.4. If A ∈ Bn×n then there exists a permutation matrix P ∈ Bn×n
+such that the matrix Â = P ⊗ A ⊗ P T is a block upper triangular matrix of the form
+                                                                 
+                                       Â11    Â12   ...    Â1l
+                                      O       Â22   ...    Â2l 
+(1)                             Â =  .
+                                                                 
+                                                 ..   ..       .. 
+                                      ..         .      .      . 
+                                         O      O     ...    Âll
+
+with l ≥ 1 and where the matrices Â11 , Â22 , . . . , Âll are square and irreducible. The
+matrices Â11 , Â22 , . . . , Âll are uniquely determined to within simultaneous permuta-
+tion of their rows and columns, but their ordering in (1) is not necessarily unique.
+The form in (1) is called the Frobenius normal form of the matrix A. If A is irreducible
+then there is only one block in (1) and then A is a Frobenius normal form of itself.
+Each diagonal block of Â corresponds to an m.s.c.s. of the precedence graph of Â.
+    Theorem 2.5. If A ∈ Bn×n is irreducible, then
+                                                                    k+c      c        k
+(2)           ∃k0 ∈ N, ∃c ∈ N0 , such that ∀k ≥ k0 : A⊗                   = λ⊗ ⊗ A⊗
+
+where λ is equal to 1 if there exists a circuit in G(A), and equal to 0 otherwise.
+     Proof. See, e.g., [1, 7, 13].
+The smallest c for which (2) holds is called the cyclicity [1], index of cyclicity [2] or
+index of imprimitivity2 [5, 12] of the matrix A. The cyclicity c(A) of a matrix A is
+equal to the cyclicity of the precedence graph G(A) of A and can be computed as
+follows. The cyclicity of a strongly connected graph or of an m.s.c.s. is the greatest
+common divisor of the lengths of all the circuits of the given graph or m.s.c.s. If an
+m.s.c.s. or a graph contains no circuits then its cyclicity is equal to 0 by deﬁnition.
+The cyclicity of general graph is the least common multiple of the nonzero cyclicities
+of the m.s.c.s.’s of the given graph.
+     Lemma 2.6. If A ∈ Bn×n is irreducible then c(A) ≤ n.
+     Proof. Let c = c(A). Since A is irreducible, G(A) contains only one m.s.c.s.
+If A = [ 0 ] then we have c = 0 ≤ 1 = n.
+From now on we assume that A 6= O. Since c is the greatest common divisor of the
+lengths of the (elementary) circuits in G(A), c is maximal if there is only one circuit
+and if this circuit has length n. In that case we have c = n. In the other cases, c will
+be less than n.
+So c(A) ≤ n.
+     Lemma 2.7. Let A ∈ Bn×n be irreducible and let c be the cyclicity of A. Consider
+i, j ∈ {1, 2, . . . , n}. If c > 0 and if there exists a (non-empty) path of length l1 from
+j to i and a (non-empty) path of length l2 from j to i then there exists a (possibly
+negative) integer z such that l2 = l1 + zc.
+
+    2 We prefer to use the word “cyclicity” or “index of cyclicity” in this paper in order to avoid
+
+confusion with the concept “index of primitivity” [2, 25] of a nonnegative matrix A, which is deﬁned
+to be the least positive integer γ(A) such that all the entries of Aγ(A) are positive.
+                   CONSECUTIVE POWERS OF A BOOLEAN MATRIX                              5
+
+     Proof. This lemma is a reformulation of Lemma 3.4.1 of [5] that states that if G
+is a strongly connected directed graph with cyclicity c then for each pair of vertices j
+and i of G, the lengths of the paths from j to i are congruent modulo c.
+Remark 2.8. Consider A ∈ Bn×n and i, j ∈ {1, 2, . . . , n}. Let lij be the length of
+the shortest path from vertex j to vertex i in G(A). Note that Lemma 2.7 does not
+imply that there exists a path of length lij + kc from j to i for every k ∈ N.       ✸
+In the next section we discuss upper bounds for the integer k0 that appears in Theo-
+rem 2.5. We also extend this theorem to Boolean matrices that are not irreducible.
+     3. Consecutive powers of a Boolean matrix. In this section we consider
+                 k ∞
+the sequence A⊗ k=1 where A is a Boolean matrix. First we consider matrices
+with a cyclicity that is equal to 0. Next we consider matrices with a cyclicity that
+is larger than or equal to 1. Here we shall make a distinction between four diﬀerent
+cases depending on whether the given matrix is irreducible or not, and on whether its
+cyclicity is equal to 1, or larger than or equal to 1. Of course the last case that will
+be considered is the most general one, but for the other cases we can provide tighter
+                                                                    k ∞
+upper bounds on the length of the transient part of the sequence A⊗ k=1 and that
+is why we consider four diﬀerent cases.
+     If possible we also give examples of matrices for which the sequence of the con-
+secutive matrix powers exhibits the longest possible transient behavior.
+    3.1. Boolean matrices with a cyclicity that is equal to 0. Lemma 3.1.
+                                                k
+Let A ∈ Bn×n . If c(A) = 0 then we have A⊗ = On×n for all k ≥ n.
+    Proof. If the cyclicity of A is equal to 0, then there are no circuits in G(A), which
+means that there do not exist paths in G(A) with a length that is larger than or equal
+to n since in such paths at least one vertex would appear twice, which implies that
+                                                       k
+such paths contain a circuit. Therefore, we have A⊗ = O for all k ≥ n.
+Example 3.2. If there exists a permutation matrix P such that A ∈ Bn×n can be
+written as
+                                                                
+                                              0 1 0 ... 0
+                                            0 0 1 ... 0 
+                    Â = P ⊗ A ⊗ P =  ... ... ... . . . ...  ,
+                                                                
+                                      T                         
+                                                                

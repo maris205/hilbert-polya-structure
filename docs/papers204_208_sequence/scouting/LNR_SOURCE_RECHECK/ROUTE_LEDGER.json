@@ -1,0 +1,84 @@
+{
+  "scope": "Six predeclared targeted primary-body retrieval routes, with directly identified links followed within a route; no repeated broad scouting.",
+  "routes_limit": 6,
+  "routes_attempted": 6,
+  "actual_web_tool_calls": 5,
+  "actual_curl_commands": 4,
+  "primary_body_obtained": false,
+  "scientific_executions": 0,
+  "auth_contact_upload_purchase_bypass": false,
+  "web_records_are": "Full tool request and available full returned text, not raw HTTP or hidden engine requests.",
+  "curl_records_are": "Actual argv, clean environment, cwd, timestamps, exit, full stdout/stderr, available full headers/body and before/after inputs; HTTP errors are not silently converted to curl failures.",
+  "routes": [
+    {
+      "route": "01",
+      "name": "Official publisher",
+      "web_record": "routes/01/web_publisher_open.json",
+      "curl_record": "routes/01/publisher_pdf/HTTP_RESULT.json",
+      "actual_curl_exit": 0,
+      "http_code": 403,
+      "content_type": "text/html; charset=UTF-8",
+      "body_read_scope": "All 834 header bytes and first 400 of 832805 body bytes inspected; all returned bytes retained. HTML document prefix and HTTP 403 are not a paper PDF. The rest of the denial HTML was not read as science.",
+      "web_read_scope": "Complete one-line returned 403 error.",
+      "outcome": "DENIED_NO_PRIMARY_BODY"
+    },
+    {
+      "route": "02",
+      "name": "Official author pages",
+      "web_record": "routes/02/web_author_pages.json",
+      "curl_record": "routes/02/author_journals/HTTP_RESULT.json",
+      "actual_curl_exit": 28,
+      "http_code": 0,
+      "body_read_scope": "No response body; zero-byte header file. Complete error/progress stream and transport metadata read.",
+      "web_read_scope": "Full journal-page error and complete returned 23-line official LRT README; names paper and links MATLAB software. No downloaded or executed ZIP.",
+      "outcome": "AUTHOR_DOWNLOAD_PAGE_SOFTWARE_ONLY_AND_JOURNAL_TIMEOUT_NO_PRIMARY_BODY"
+    },
+    {
+      "route": "03",
+      "name": "Institution-restricted exact discovery",
+      "web_record": "routes/03_05_exact_discovery.json",
+      "query_index": 0,
+      "query": "site:iitkgp.ac.in \"Local rank transform\" \"Properties and applications\"",
+      "web_read_scope": "Complete combined empty search return. No deposit was located through this query; no repository absence theorem.",
+      "outcome": "INDEXED_NONHIT_NO_PRIMARY_BODY"
+    },
+    {
+      "route": "04",
+      "name": "Exact-DOI OA location metadata",
+      "curl_record": "routes/04/doi_openalex/HTTP_RESULT.json",
+      "actual_curl_exit": 0,
+      "http_code": 200,
+      "content_type": "application/json",
+      "body_read_scope": "All 8234 JSON bytes and all 1539 header bytes read. Metadata has one publisher-only location; pdf_url, oa_url and best_oa_location are null; has_content.pdf false. No primary-body URL to follow.",
+      "outcome": "DOI_METADATA_ONLY_NO_PRIMARY_BODY_LINK"
+    },
+    {
+      "route": "05",
+      "name": "Exact owner/title arXiv discovery",
+      "web_record": "routes/03_05_exact_discovery.json",
+      "query_index": 1,
+      "query": "site:arxiv.org \"Local rank transform\" \"Mukherjee\" \"2011\"",
+      "web_read_scope": "Complete combined empty search return. No arXiv body or theorem read; no global nonexistence claim.",
+      "outcome": "INDEXED_NONHIT_NO_PRIMARY_BODY"
+    },
+    {
+      "route": "06",
+      "name": "One exact-title PDF-location search",
+      "web_records": ["routes/06_exact_pdf_discovery.json", "routes/06/web_dblp_exact_open.json"],
+      "query": "\"Local rank transform: Properties and applications\" filetype:pdf",
+      "curl_record": "routes/06/dblp_exact/HTTP_RESULT.json",
+      "actual_curl_exit": 28,
+      "http_code": 0,
+      "body_read_scope": "Exact DBLP GET returned no body and zero header bytes; complete error/progress stream and metadata read.",
+      "web_read_scope": "Full available search response read: publisher preview, secondary/request-only records and citing works. Publisher preview covers abstract, section extracts including partial Definition 2.1 and conclusion, not the convergence theorem. Exact discovered DBLP record open returned a complete one-line error. Adjacent unpaywalled label not attributed to target. No full-text request or author contact sent.",
+      "outcome": "PREVIEW_AND_SECONDARY_LOCATIONS_ONLY_NO_PRIMARY_BODY"
+    }
+  ],
+  "retrieval_time_http_status_note": "Original HTTP_RESULT full_text_status stays UNASSESSED_UNTIL_BODY_READ. This final ledger provides the later actual read classifications without altering historical raw receipts.",
+  "other_read_scopes": {
+    "local_originals": "All selected instruction and scientific prose originals read completely; old source XML read fully. Historical SHA lists inspected as attribution only. No author verifier read, imported or executed.",
+    "new_source_convergence_body": "NOT_OBTAINED_NOT_READ",
+    "tc_sd_summed_fibre_admission_comparison": "Conditional on obtaining body; not performed or cleared. Known literal disjoint-union obligation is retained."
+  },
+  "stop_rule": "Six-route cap reached. Preserve LNR-S1 OPEN / HOLD_SOURCE / NO_ADMISSION; no seventh retrieval route."
+}

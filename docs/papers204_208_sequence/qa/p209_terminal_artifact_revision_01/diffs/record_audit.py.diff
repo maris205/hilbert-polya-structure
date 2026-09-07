@@ -1,0 +1,27 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/record_audit.py	2026-09-07 15:16:45.615233248 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01/record_audit.py	2026-09-07 16:07:37.181592056 +0800
+@@ -29,16 +29,20 @@
+     save(path,(json.dumps(value,sort_keys=True,indent=2)+'\n').encode())
+ 
+ def main():
+-    if len(sys.argv)!=2 or not sys.argv[1].startswith('initial_') or not sys.argv[1][8:].isdigit():
+-        raise RuntimeError('Require one new initial_N label')
++    if sys.argv[1:] != ['initial_02']:
++        raise RuntimeError('Require the new revision_01 initial_02 attempt')
+     if not(sys.flags.optimize==0 and sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode
+            and dict(os.environ)==ENV and Path.cwd()==ROOT and Path(sys.executable).resolve()==Path('/usr/bin/python3.10')
+-           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation'):
++           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01'
++           and Path(__file__).resolve()==PREP/'record_audit.py'):
+         raise RuntimeError('Require exact prepared path, system interpreter, -I -S -B, clean ENV and workspace cwd')
+     required=[ROOT/'papers/209-ordered-fibre-threading/PAPER_MANIFEST.sha256',
+               ROOT/'papers/209-ordered-fibre-threading/ROOT_LIFECYCLE.md',
+               ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ROOT_VIEWS.actual.json',
+-              PREP/'SHA256SUMS',SOURCE,Path(__file__),Path(sys.executable).resolve()]
++              PREP/'SHA256SUMS',SOURCE,Path(__file__),Path(sys.executable).resolve(),
++              ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/SHA256SUMS',
++              BASE/'initial_01/SHA256SUMS',
++              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json']
+     before={str(p):info(p) for p in required}
+     BASE.mkdir(exist_ok=True)
+     target=BASE/sys.argv[1];target.mkdir(exist_ok=False)

@@ -1,0 +1,56 @@
+{
+  "role": "Exact replace-once source delta recipe; reconstructable without importing or executing any target code.",
+  "files": {
+    "audit_p209.py": {
+      "original": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/audit_p209.py",
+      "edits": [
+        {
+          "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'",
+          "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_01'\nORIGINAL_PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'"
+        },
+        {
+          "old": "def load_aliases():\n",
+          "new": "def revision_originals_and_failure():\n    # Original preparation and real initial_01 remain exact historical evidence.\n    pin(ORIGINAL_PREPARATION / 'SHA256SUMS',\n        '3250ea718e5b0f358a8a54ba2365a53732d637a2f9686c017e1767e4cdcc7e51')\n    manifest(ORIGINAL_PREPARATION, count=347)\n    failed = OUT / 'initial_01'\n    pin(failed / 'SHA256SUMS', 'deb48a3ed612ad9e292436e2037a879df37a0a5e2204594702f436c73bbe4b04')\n    manifest(failed, count=8)\n    for snapshot, source in [('executed_auditor_snapshot.py', 'audit_p209.py'),\n                             ('executed_recorder_snapshot.py', 'record_audit.py')]:\n        ck(read(failed / snapshot) == read(ORIGINAL_PREPARATION / source),\n           'initial_failed_exact_executed_sources', snapshot)\n    row, attempt = j(failed / 'COMMAND.json'), j(failed / 'ATTEMPT.json')\n    expected = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',\n                'pycache_prefix=' + str(failed / 'unused_pycache'),\n                str(ORIGINAL_PREPARATION / 'audit_p209.py'), 'terminal-artifact-after-actual-views']\n    ck(row['exit_code'] == 1 and row['status'] == 'COMPLETED' and row['failure'] is None\n       and row['inputs_unchanged'] and row['unused_cache_absent'] and not (failed / 'unused_pycache').exists()\n       and row['argv'] == expected and row['cwd'] == str(ROOT) and row['environment'] == ENV,\n       'initial_failed_child_remains_failure', 'real exit one; not an unexecuted draft')\n    ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and\n       all(attempt[k] == row[k] for k in ('argv', 'cwd', 'environment', 'started_utc')),\n       'initial_failed_prespawn_record', 'original fields')\n    exact_pair(failed, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 7, historical=True)\n    for stream in ('stdout', 'stderr'):\n        pin(failed / ('audit.' + stream), row[stream])\n    ck(read(failed / 'audit.stdout') == b'' and\n       h(failed / 'audit.stderr') == '6c070f981a6b6f6ae05363e32f8047efda4f2a0e8c458f22dd9152990ccfb7cf',\n       'initial_failed_full_raw_streams', 'unchanged full historical traceback')\n    execution = BATCH / 'qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json'\n    pin(execution, '9e7efd7bbc5555269037f17021d2c61cbee7870d133622442f4a1d99fbe262c4')\n    outer = j(execution)\n    ck(outer['completion']['exit_code'] == 1 and\n       read(failed / 'audit.stderr').decode() in outer['completion']['output'],\n       'initial_failed_root_wrapper_remains_failure', 'traceback does not print round or expected hash')\n    return {'revision': 'p209_terminal_artifact_revision_01', 'original_preparation_payloads': 347,\n            'preserved_initial_01_payloads': 8, 'original_child_exit': 1, 'original_wrapper_exit': 1,\n            'explicit_git_history_roles': 2, 'round1_role': 'REAFFIRMED', 'round2_role': 'REGISTERED',\n            'not_a_new_scientific_review_or_execution': True}\n\n\ndef load_aliases():\n"
+        },
+        {
+          "old": "    return {'declared_exact_roles': len(ALIASES), 'no_omitted_historical_pins': True}\n",
+          "new": "    # Two named at-freezer-current roles; Round1 already exists in B's map.\n    # Reaffirming it still checks exact duplicate bytes through alias().\n    receipt = BATCH / 'GIT_SYNC_RECEIPT.md'\n    for number, directory, digest, seal in [\n        (1, 'qa/central_lifecycle_p209_round1',\n         '2f6998d2986831fa8776e31e9d336497e6ab37b114d1b13ef94879f3e2271c24',\n         '2ecf22568096dffbf49213869d82e58f1a43d6506968f0753e6197b451558c22'),\n        (2, 'qa/central_lifecycle_p209_terminal_push',\n         'a67457d5fe6e860040ad5f72a51b839e0220b7b83af22188008c8a74850b1865',\n         'e5b02d4594deba8e6bec8a5d31dac9b20dd2f40f8245be57dbf56bc5a39fad80')]:\n        holder = BATCH / directory\n        pin(holder / 'SHA256SUMS', seal); manifest(holder, count=5)\n        capture = j(holder / 'CAPTURE.actual.json')\n        if number == 1:\n            rows = [row for row in capture['copies'] if row['original_path'] == str(receipt)]\n            ck(len(rows) == 1 and rows[0]['physical_path'] == str(holder / 'GIT_SYNC_RECEIPT.before.md')\n               and rows[0]['sha256'] == digest and rows[0]['actual_cmp']['exit_code'] == 0\n               and rows[0]['actual_cmp']['output'] == '',\n               'named_round1_current_receipt_capture', 'distinct from af175 historical receipt')\n            for field in ('actual_before_hash_command', 'actual_after_hash_command'):\n                ck(capture[field]['exit_code'] == 0 and\n                   digest + '  ' + str(receipt) in capture[field]['output'].splitlines(),\n                   'named_round1_current_receipt_original_hashes', field)\n        else:\n            rel = receipt.relative_to(ROOT).as_posix()\n            rows = [row for row in capture['copies'] if row['source'] == rel]\n            ck(capture['status'] == 'ACTUAL_EXACT_PRE_UPDATE_CONTROL_COPIES' and len(rows) == 1\n               and rows[0]['copy'] == (holder / 'GIT_SYNC_RECEIPT.before.md').relative_to(ROOT).as_posix()\n               and rows[0]['actual_comparison']['exit_code'] == 0 and rows[0]['actual_comparison']['output'] == ''\n               and capture['original_sha256_command']['exit_code'] == 0 and\n               digest + '  ' + rel in capture['original_sha256_command']['output'].splitlines(),\n               'named_round2_current_receipt_capture', 'actual pre-terminal-push snapshot')\n        read(holder / 'README.md')\n        meta = j(PAPER / ('frozen_round' + str(number)) / ('ROUND' + str(number) + '_PROVENANCE.json'))\n        ck(meta['all_source_inputs_before_and_rechecked_after'][str(receipt)] == digest,\n           'named_current_receipt_exact_frozen_observation', number)\n        alias(receipt, holder / 'GIT_SYNC_RECEIPT.before.md', digest)\n    return {'declared_exact_roles': len(ALIASES), 'no_omitted_historical_pins': True}\n"
+        },
+        {
+          "old": "    history = load_aliases()\n",
+          "new": "    history = load_aliases()\n    revision = revision_originals_and_failure()\n"
+        },
+        {
+          "old": "        'whole_paper_manifest_entries': len(whole), 'frozen_and_author': frozen, 'accepted_reviews': accepted,\n",
+          "new": "        'infrastructure_revision': revision,\n        'whole_paper_manifest_entries': len(whole), 'frozen_and_author': frozen, 'accepted_reviews': accepted,\n"
+        }
+      ]
+    },
+    "record_audit.py": {
+      "original": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/record_audit.py",
+      "edits": [
+        {
+          "old": "    if len(sys.argv)!=2 or not sys.argv[1].startswith('initial_') or not sys.argv[1][8:].isdigit():\n        raise RuntimeError('Require one new initial_N label')",
+          "new": "    if sys.argv[1:] != ['initial_02']:\n        raise RuntimeError('Require the new revision_01 initial_02 attempt')"
+        },
+        {
+          "old": "           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation'):",
+          "new": "           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01'\n           and Path(__file__).resolve()==PREP/'record_audit.py'):"
+        },
+        {
+          "old": "              PREP/'SHA256SUMS',SOURCE,Path(__file__),Path(sys.executable).resolve()]",
+          "new": "              PREP/'SHA256SUMS',SOURCE,Path(__file__),Path(sys.executable).resolve(),\n              ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/SHA256SUMS',\n              BASE/'initial_01/SHA256SUMS',\n              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json']"
+        }
+      ]
+    },
+    "lifecycle_audit.py": {
+      "original": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/lifecycle_audit.py",
+      "edits": [
+        {
+          "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'",
+          "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_01'"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/draft_history/unexecuted_01/audit_p209.py	2026-09-07 15:15:37.817322592 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_preparation/audit_p209.py	2026-09-07 15:16:45.599233712 +0800
+@@ -389,7 +389,8 @@
+     # The failures stay failures. Their original streams are sealed by their
+     # accepted review manifests; successful later evidence cannot rewrite them.
+     failed_a = j(A / 'delta_check_01/EXECUTION.actual.json')
+-    ck(failed_a['exit_code'] == 1, 'preserved_A_delta_failure', 'real first documentary failure')
++    ck(failed_a['completion_result']['exit_code'] == 1,
++       'preserved_A_delta_failure', 'real first documentary failure; original nested execution schema')
+     bad = j(B / 'delta_check_01/CLOSURE_AFTER_FAILURE.json')
+     ck(bad['actual_outer_exit'] == 1 and bad['actual_child_exit'] == 0 and
+        bad['status'] == 'FAIL_PRESERVED_OUTER_WRAPPER_FILENAME_COLLISION',
+@@ -792,6 +793,10 @@
+             rich_pin(row['physical_target'], row['sha256'], True)
+             mapped[key] = row
+     origins = {}
++    for (original, digest), preserved in ALIASES.items():
++        if preserved.suffix == '.md' and (preserved.is_relative_to(A) or preserved.is_relative_to(B)):
++            pin(preserved, digest)
++            origins.setdefault(str(preserved), Path(original))
+     for original, row in j(A / 'delta_check_02/RESPONSE_ORIGINALS_AND_COPIES.json').items(): origins[row['copy']] = Path(original)
+     for row in j(B / 'assignment_context/ROLES.json'): origins[row['preserved']] = Path(row['original'])
+     for row in j(B / 'delta_intake_01/INTAKE_RESULT.json')['copies']: origins[row['physical']] = Path(row['original'])
