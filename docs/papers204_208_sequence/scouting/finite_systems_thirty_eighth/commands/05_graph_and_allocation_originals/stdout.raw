@@ -1,0 +1,355 @@
+# Graph / relation lane: eight bounded probes, no admission
+
+2026-09-05 UTC. STAGE1_SCOUTING / NO_ADMISSION / HOLD_EXTERNAL.
+Owner: batch197_fifth_scout. No formal paper numbers are assigned here.
+
+## Literal definitions fixed before the pilot
+
+The first four carriers are every family H of subsets of [n], including the
+empty family and the empty member; repetitions of a subset are not allowed.
+The next three carriers are every binary relation on [n], with loops allowed.
+The last carrier is every labelled simple undirected graph on [n]. All
+updates read the entire old state before producing the next one.
+
+| ID | Exact update | Precommitted full carrier bound |
+|---|---|---|
+| DI | H -> {A intersection B: A,B in H, A != B}. No diagonal pair is admitted. | n=0,...,4 |
+| DR | H -> {A minus B: A,B in H, A != B}, using ordered pairs. | n=0,...,4 |
+| SX | H -> {A symmetric-difference B: distinct A,B in H}. | n=0,...,4 |
+| M3 | H -> {(A intersection B) union (A intersection C) union (B intersection C): A,B,C distinct members of H}. | n=0,...,4 |
+| BRC | R -> R composed with complement(R); ij is present iff some k has ik in R and kj not in R. Complement is in [n] squared. | n=0,...,4 |
+| ECP | R -> R symmetric-difference (R composed with R), with ordinary Boolean relation composition, not GF(2) multiplication. | n=0,...,4 |
+| DCR | R -> (R composed with complement(R)) minus (complement(R) composed with R). | n=0,...,4 |
+| SND | uv is an output edge iff the old open neighborhoods N(u),N(v) are distinct and comparable by inclusion. | n=0,...,6 |
+
+All eight are bounded probes, not claims of separated accepted mechanisms.
+In particular, set operations and Boolean products are classical inputs.
+SX must face the occupied sumset/span engine; DI must face meet closure and
+finite semilattice normalization; a canonical-statistic collapse would kill
+SND. No candidate is promoted on a short-cycle histogram alone.
+
+## Historical desk exclusions (not eight extra current attempts)
+
+- Source/sink reversal: docs/papers107_111_sequence/scouting/COMBINATORIAL_SCOUT.md,
+  Section9 C6, explicitly owns parallel source-to-sink via clicks/Coxeter
+  dynamics; docs/papers187_191_sequence/scouting/graph_lane/replacement/
+  HISTORICAL_COLLISION_SEARCH.md also desk-kills RX04. No new pilot here.
+- Biconnected-block complementation: docs/papers122_126_sequence/scouting/
+  combinatorial/SCOUT.md C06 already reserves the odd-order block version.
+  Replacing connected blocks by 2-connected blocks is not an automatic new
+  mechanism; no proposed replacement is credited or enlarged here.
+- Clutter blocker: exact old S02/H01/HBN controls in P142--146, P167--171 and
+  P182--186. Classical blocker duality is not reopened.
+- Chord uncrossing: old P130 and P147--151 M01 occupy the local and component
+  engines. No uncrossing variant is counted here.
+- Exact-distance-two graph: old P187--191 G07 and previous batch D2G; the
+  metamour operator has a direct external owner. No new attempt here.
+- MCT / least-triangle, Ryser switch, Gram/ordinary closure, erasure and old
+  component-collapse mechanisms are excluded by the current assignment.
+
+## Actual bounded results and decisions
+
+Here H denotes maximum transient depth, not a set family. Entries list all
+precommitted sizes in ascending order; no larger full carrier was added.
+
+| ID | H profile | Largest-box image / maximum fibre | Current decision |
+|---|---|---|---|
+| DI | 1,2,3,4,5 | 2941 / 2606 | KILL_GENERIC_EROSION_AND_NO_SECOND_AXIS |
+| DR | 1,1,1,3,4 | 1671 / 3846 | KILL_GENERIC_DIFFERENCE_CLOSURE |
+| SX | 1,2,2,2,2 | 880 / 41341 | KILL_OCCUPIED_SUMSET_SPAN_ENGINE |
+| M3 | 1,1,2,2,3 | 4146 / 15159 | KILL_NO_ALL_PARAMETER_TWO_AXIS_PACKAGE |
+| BRC | 0,1,2,3,5 | 8043 / 782 | KILL_NO_ALL_PARAMETER_TWO_AXIS_PACKAGE |
+| ECP | 0,1,2,4,10 | 17784 / 2360 | KILL_NO_RIGID_SPINE |
+| DCR | 0,1,1,3,5 | 3003 / 1099 | KILL_NO_ALL_PARAMETER_TWO_AXIS_PACKAGE |
+| SND | 0,0,1,2,3,4,5 | 4832 / 2100 | KILL_NO_SECOND_AXIS_AND_RESIDUAL_OWNER_EXPOSURE |
+
+These are gate decisions for this round, not impossibility theorems about
+future research. In particular, growing H in a small box is not evidence
+that a sharp global clock or a nontransferable inverse theorem exists.
+
+DI has a proved sharp all-parameter bound H=n+1, but its proof is finite
+maximal-layer erosion (PROOF_PACKAGE.md), a zero-credit mechanism already
+exposed by the old maximal-element/facet peeling lanes. The interesting
+largest-fibre targets at n=3,4 are respectively all subsets of sizes at most
+1,2. No general extremal theorem has been proved. A generic meet-coloured
+clique or inclusion--exclusion encoding would not supply the missing axis.
+
+DR is inflationary after one step, by the elementary reverse-difference
+witness in SOURCE_AND_COLLISION.md; SX becomes punctured additive closure
+after one step except for the explicitly degenerate small families. These
+facts explain fixed-only recurrence without giving a new dynamical engine.
+
+M3 has a strict two-cycle already at n=3 and twenty strict two-cycles at n=4.
+BRC and DCR have only periods one and two in their bounded boxes, but neither
+has a proved global recurrence classification or target-resolved inverse.
+ECP has periods one, two and four at n=4, and depth ten. We do not infer a
+global period restriction from these observations.
+
+SND has only the empty graph recurrent through n=6. Its largest fibre is
+uniquely the empty target for 2<=n<=6. Neither statement is promoted to an
+all-n theorem. Its exact one-step factor through P143 is recorded separately;
+the altered update is not conjugate to the old cubic map merely by changing
+notation, but this difference does not itself meet the second-axis gate.
+
+## Evidence state and handoff
+
+The original paper-independent pilot is pilot.py. It computes every target's
+indegree and every source's orbit depth/period on the complete carriers, then
+prints a compact functional-graph profile. Two actual fresh subprocesses
+returned code zero, with empty stderr and byte-identical raw stdout. Each run
+made 1,981,384 consistency assertions. CANONICAL.txt is the saved raw output:
+9981 bytes, SHA-256
+`bd75769c64bb40a24aea633b5a14dbcf540273e10bd6b8eb0cac86642d3b163d`.
+See REPLAY_LOG.md for the actual receipt and commands.
+
+The pilot's frozen final line says no theorem was claimed at pilot time;
+the later zero-credit DI proof is separate and does not retroactively alter
+that transcript. No independent manuscript review, source-owner clearance,
+formal paper number or admitted survivor is claimed.
+
+Lane outcome: **NO_ADMISSION / 8 CURRENT PROBES CLOSED / HOLD_EXTERNAL**.
+Proof authorship for the zero-credit notes: batch197_fifth_scout only.
+# Graph/resource lane, second bounded intake
+
+2026-09-05 UTC. Owner: `/root/batch197_fifth_scout`.
+**Seven probes / six closed / one author theorem candidate awaiting gate /
+zero papers admitted by this lane / HOLD_EXTERNAL.**
+
+## Literal finite systems and fixed pilot bounds
+
+The graph $G$ is finite, labelled, simple and undirected. It is a parameter
+that never changes during any orbit. Every update below is synchronous.
+The graph bitmask lists possible edges $(0,1),(0,2),\ldots$ lexicographically.
+State count totals in the results table are disjoint sums over all graph
+parameters and, for resources, all mass parameters in the stated box.
+
+| ID | Literal rule | Complete initial pilot box |
+|---|---|---|
+| ECD | $x'_v=|\{u\sim v:x_u=x_v\}|$, equal-colour degree. | All graphs, $0\le n\le4$; all $q^n$ words with $q=\max(2,n)$. |
+| LRC | $x'_v=|\{u\sim v:x_u<x_v\}|$, lower-neighbour count with multiplicity. | Same graph/word box as ECD. |
+| CCI | $x'_v=x_v+1\pmod3$ if any neighbour has its old colour, otherwise $x'_v=x_v$. | All graphs, $0\le n\le4$; all ternary words. |
+| MGE | Each vertex chooses its incident edge maximizing $(|x_u-x_v|,-\min(u,v),-\max(u,v))$. On mutually chosen pairs whose load gap is at least two, transfer one unit from richer to poorer. Other loads hold. | All graphs, $0\le n\le4$; all weak compositions of each total mass $0\le M\le6$. At $n=0$ only $M=0$. |
+| RMA | Every vertex sends its whole old pile to the maximum of its closed neighbourhood under $(x_u,-u)$; all incoming piles are summed. | Same resource box as MGE. |
+| GLD | Every vertex with a strictly less loaded neighbour sends one unit to the neighbour minimizing $(x_u,u)$ among those strictly lower neighbours. | Same resource box as MGE. |
+| DGO | On orientations of a fixed graph, reverse $u\to v$ exactly when its old outdegree satisfies $d^+(u)>d^+(v)$; retain ties. | All graphs through $n=5$ and all orientations of every such graph. |
+
+These differ from the first graph lane's DI/DR/SX/M3 set-family maps,
+BRC/ECP/DCR relation products, and SND neighbourhood-comparability graph.
+There is no mex, Galois/closure operation, triangle toggle, or graph-power
+update in this intake. This does not certify seven independent new engines.
+Minimum-preimage feedback was desk-excluded as exactly occupied by P167;
+source/sink clicks, standard chip firing and ordinary cyclic predator automata
+were not counted as new probes.
+
+## Initial exact results and dispositions
+
+The height lists cover all initial box sizes, beginning at $n=0$. Image,
+recurrent, and fixed counts are totals over the largest-size parameter box.
+The maximum fibre is the largest over a single fixed parameter component,
+not an indegree after identifying distinct graphs or masses.
+
+| ID | Heights | Largest-box states / image / recurrent / fixed | Periods in largest box | Max fibre | Decision |
+|---|---|---|---|---|---|
+| ECD | 0,1,2,2,4 | 16,384 / 459 / 204 / 136 | 1,2,3 | 256 | KILL_NO_UNIFORM_SPINE_OR_SECOND_AXIS |
+| LRC | 0,1,1,3,5 | 16,384 / 1,468 / 800 / 800 | 1 | 256 | KILL_UNPROVED_CLOCK_AND_NO_INVERSE |
+| CCI | 0,0,0,2,4 | 5,184 / 3,606 / 2,460 / 1,635 | 1,3 | 7 | AUTHOR_THEOREM_CANDIDATE_PENDING_INDEPENDENT_GATE |
+| MGE | 0,0,3,4,6 | 13,440 / 6,794 / 3,448 / 3,448 | 1 | 15 | KILL_DIRECT_MATCH_AND_BALANCE_ENGINE |
+| RMA | 0,0,1,2,3 | 13,440 / 5,714 / 5,135 / 5,135 | 1 | 26 | KILL_SUPPORT_EROSION_AND_STATIC_CENSUS |
+| GLD | 0,0,3,4,11 | 13,440 / 7,600 / 3,004 / 808 | 1,2,3,4,6,8,9 | 10 | KILL_IRREGULAR_NO_TWO_AXIS_CONTRACT |
+| DGO | 0,0,0,1,2,5 | 59,049 / 21,319 / 8,469 / 639 | 1,2 | 32 | KILL_SYMMETRIC_THRESHOLD_ADAPTER |
+
+The ECD/LRC maximum 256 includes the edgeless graph's constant map and is
+not an interesting extremal signal. LRC's fixed-only bounded recurrence
+does not establish convergence for arbitrary graphs. ECD already has a
+strict three-cycle on four vertices; GLD has unrelated periods even at
+three vertices. Their bounds were not increased to repair weak signals.
+MGE, RMA and DGO's deductions are in [GENERIC_PROOFS.md](GENERIC_PROOFS.md)
+and receive zero promotion credit. DGO reverses the opposite score
+inequality from P112; no false literal P112 collision is asserted.
+
+## CCI: one bounded theorem follow-up
+
+[CCI_PROOF_PACKAGE.md](CCI_PROOF_PACKAGE.md) supplies complete author proofs
+for every finite graph and every $q\ge3$ of: the weighted first-activation
+formula and every-time coordinates; exact recurrent component types and
+periods $1,q$; global sharp entrance $(q-1)(n-2)$ for $n\ge3$; a complete
+one-step source-mask decoder; and the uniform sharp maximum fibre
+$2^{n-1}-1$ for $n\ge4$, attained only by a star with a constant target.
+At $n=3$ the maximum is four, attained only by a triangle and a constant
+target. Small sizes are explicit. There is no all-time fibre formula claim.
+
+This is the only probe taken to a new two-axis proof package. Static total
+vertex covers and shortest-path/activation methods are owned background,
+not new primitives. The narrow conjunction needs an independent correctness,
+source and value gate before any paper number. The author of this proof
+cannot review a resulting manuscript. Its existence does not promote it.
+
+The follow-up checker compares literal orbits with independently computed
+Floyd--Warshall arrival times, compares every exact source set with the
+total-cover/predecessor mask conditions, exhausts all graphs through six
+vertices for the static extremum, and checks explicit sharp paths for
+$2\le n\le20$, $3\le q\le9$. Full dynamical carriers stay at $n\le4$ with
+$q=3,4,5$; this changes palette boundary checks for new proofs, not a weak
+candidate's size cutoff. Its 1,029,769 assertions are author proof pressure,
+not an independent review. See [CCI_CANONICAL.json](CCI_CANONICAL.json).
+
+## Evidence and handoff
+
+The initial pilot exhausts 140,982 states across 2,906 parameter components,
+with 243,120 assertions. Both the pilot and CCI follow-up have actual fresh
+two-process, raw-byte comparison receipts and saved complete stdout in
+[REPLAY_LOG.md](REPLAY_LOG.md). Input code, proofs, source boundaries and
+outputs are covered by a nonself directory-relative manifest.
+No historical evidence, author NS file, central state, manuscript, Git ref,
+or external service was modified. P204 manuscript review remains a separate
+future assignment and was not started during this scout.
+# Proof package and subtraction boundary
+
+Author: `/root/twenty_sixth_finite_scout`. No independent review claimed.
+All literal assumptions and carriers are in INTAKE.md.
+
+## Claim and status
+
+**PROVABLE AS STATED:** ASC's exact full-carrier linearization and consequent
+generic temporal/inverse formulas; EMD's closure, fixed states, two-pile
+doubling factor and full one-step inverse decoder; UTR's literal identity
+with the old rule. **NOT CURRENTLY JUSTIFIED:** a fresh two-axis admission
+contract for any of the three. ASC's temporal mechanism is consumed, EMD's
+full recurrent/temporal classification is missing, and UTR is an exact
+historical duplicate with no new theorem.
+
+Dependency map: transpose decomposition -> fixed linear strata -> stable
+image and affine-kernel fibres; extremal mass transfer -> two-entry multiset
+cancellation -> fixed criterion and inverse decoder. No finite census is a
+premise of any argument.
+
+## 1. ASC: the entire dynamics is fixed-stratum linear
+
+Write $A=S+K$, where $S=(A+A^{\mathsf T})/2$ is symmetric and
+$K=(A-A^{\mathsf T})/2$ is skew-symmetric. This is a bijection from the
+entire matrix carrier to $\operatorname{Sym}_n\times\operatorname{Skew}_n$,
+with inverse $(S,K)\mapsto S+K$. Odd characteristic is essential here.
+Expansion gives
+
+$$[A,A^{\mathsf T}]=[S+K,S-K]=2[K,S].$$
+
+Since $[K,S]^{\mathsf T}=[K,S]$, the skew part is unchanged. Define the
+linear endomorphism $L_K(S)=S+2[K,S]$ of $\operatorname{Sym}_n$.
+Thus the displayed bijection is a genuine one-step dynamical conjugacy to
+
+$$(S,K)\longmapsto(L_KS,K),\qquad T^t(S+K)=L_K^tS+K.$$
+
+This is not a claimed conjugacy to one universal matrix independent of
+$K$, nor merely a first-image factor. Every initial state is covered.
+
+Put $d=n(n+1)/2$. For any linear map $L$ on a $d$-dimensional space,
+the descending image chain stabilizes by step $d$. Hence $L$ maps
+$W=\operatorname{im}L^d$ bijectively to itself. Every point of $W$ is
+periodic because the field is finite. Conversely, a periodic point belongs
+to every image and therefore to $W$. Applied to $L_K$, this proves
+
+$$\operatorname{Rec}(T)=\{S+K:S\in\operatorname{im}L_K^d\},\qquad
+\tau(S+K)=\min\{t\ge0:L_K^tS\in\operatorname{im}L_K^d\}\le d.$$
+
+No sharpness of $d$ is claimed. Periods on each stable image are the usual
+periods of its invertible linear restriction; fixed points of its $r$th
+power are $\ker(L_K^r-I)$. Summing their cardinalities over $K$ is a
+standard linear-system expression, not an evaluated new all-$q,n$ census.
+
+For arbitrary target $Y=H+K$, $H$ symmetric, and $t\ge0$, all sources
+must have that exact skew part $K$. The source set is precisely
+
+$$\{S+K:L_K^tS=H\}.$$
+
+It is empty unless $H\in\operatorname{im}L_K^t$, and otherwise an affine
+coset of $\ker L_K^t$, of size $q^{\dim\ker L_K^t}$. Indeed subtracting
+two solutions gives the kernel, and adding any kernel element preserves a
+solution. At $t=0$ the formula gives the unique target itself. At $n=1$
+the skew space is zero and $L=I$, so every state is fixed with unit fibres.
+
+These are complete structural formulas but the whole temporal mechanism
+and affine-kernel decoder are generic finite linear dynamics. No new sharp
+global inverse extremum is evaluated. Even such an extremum would not undo
+the consumed temporal axis. ASC is **KILL_FIXED_STRATUM_LINEARIZATION**.
+
+## 2. EMD: real coupling, partial temporal result, full local inverse
+
+### 2.1 Closure, fixed points and energy obstruction
+
+For at least two parts, $m\ge1$, $M\ge m$, and
+$2m+(M-m)=M+m$, proving mass preservation and carrier closure.
+If $M=m$, exactly one positive part disappears, so such a state is not
+fixed. If $M>m$, cancellation of all untouched multiplicities in a proposed
+fixed state gives $\{m,M\}=\{2m,M-m\}$. Since $2m\ne m$, this holds
+exactly when $M=2m$. Thus, in addition to the empty and one-part states,
+the fixed states are exactly those whose largest part is twice the smallest.
+
+The sum of squares changes by $2m(2m-M)$, which can have either sign.
+This is not old unit majorization with its stopping condition. For example,
+
+$$\{1,4\}\mapsto\{2,3\}\mapsto\{1,4\},\qquad
+\{1,2,4\}\mapsto\{2,2,3\}\mapsto\{1,2,4\}.$$
+
+All four arrows follow by substituting the displayed extrema. They are
+deductive witnesses, not an enumerated small box. In particular a proof
+that every state becomes fixed would be false, including beyond two piles.
+
+### 2.2 Exact two-pile subtraction
+
+Let $X_N$ be partitions of $N$ into at most two parts, with a zero allowed
+only as notation for the singleton. The map from $\mathbb Z/N\mathbb Z$
+to $X_N$ taking the representative $0\le a<N$ to the unordered pair
+$\{a,N-a\}$, omitting any zero, identifies residues exactly up to sign.
+For the representative $0\le a\le N/2$, the next pair is
+$\{2a,N-2a\}$. Thus on this entire invariant subcarrier EMD is exactly
+residue doubling modulo the sign quotient. $N=0$ is separately the empty
+fixed state. This is a deduced elementary doubling/tent mechanism, not a
+classification of partitions with three or more parts.
+
+### 2.3 Full one-step inverse decoder
+
+Fix a target multiset $\mu$ of positive parts. For each distinct even value
+$v$ occurring in $\mu$, put $a=v/2$. Choose a numerical value $u\ge0$:
+either $u=0$, or $u$ occurs in $\mu$. For $u>0$, require that the multiset
+contains the two occurrences $u,v$ (two copies if $u=v$). Remove those
+occurrences; for $u=0$ remove only $v$. Call the residual multiset $R$.
+The pair $(u,v)$ is admissible exactly when every part of $R$ lies in
+$[a,u+a]$. It produces the source
+
+$$R\uplus\{a,u+a\}.$$
+
+Also include $\mu$ itself when it has zero or one part. These and only
+these are the predecessors. Necessity: an updated source has $v=2m$,
+$u=M-m$, and every untouched part lies between $m$ and $M$.
+Sufficiency: in the reconstructed source the extrema are exactly $a$ and
+$u+a$, so the literal rule recovers $\mu$. If $u=0$, the condition forces
+all remaining parts to equal $a$, handling all-equal sources and lost zeros.
+If two admissible numerical pairs produced the same source, its minimum
+and maximum would recover $v=2m$ and $u=M-m$, so the pairs would coincide.
+Indistinguishable equal occurrences are not counted several times.
+The additional zero/one-part fixed source has smaller length than every
+updated source producing it, so there is no overlap.
+
+This gives a finite target-local cardinality by counting admissible
+numerical pairs. It is elementary inversion of the two updated entries and
+the extremal scheduler, not a solved sharp all-target maximum. The fixed
+classification and two-pile factor do not close the missing all-$N$
+recurrent structure. Status: **HOLD_PROOF_SOURCE / NO_PROMOTION**.
+
+## 3. UTR exact duplicate
+
+The original T01_UTR row in the P172–P176 combinatorial cross-domain ledger
+uses exactly the same labelled tournaments, old-snapshot unique-directed-
+triangle predicate and simultaneous reversal. The identity on every
+labelled carrier intertwines the maps. No parameter extension, new cycle
+claim or source-body interpretation is needed to establish this collision.
+Its old pilot observations are not rerun or promoted into all-size facts.
+Status: **KILL_LITERAL_INTERNAL**.
+
+## Open risks and final disposition
+
+No full EMD temporal/recurrent theorem or direct-owner clearance has been
+obtained. ASC is not rescued by an unevaluated rank formula, and UTR is not
+new. Consequently none is proposed for a candidate gate. These are author
+deductions with disclosed classical subtraction, not proof of global
+novelty, independent acceptance or the impossibility of future research.

@@ -1,0 +1,17 @@
+{
+  "command": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B -c 'import hashlib,json,pathlib; p=pathlib.Path(\"docs/papers204_208_sequence/qa/scout40_documentary_audit\"); b=(p/\"SHA256SUMS\").read_bytes(); assert hashlib.sha256(b).hexdigest()==\"c060ff52ba492c64490adc1a11e8c049e52c7b8d280d327053ff0dd5b16135eb\"; rows={line[66:]:line[:64] for line in b.decode().splitlines()}; assert len(rows)==11 and set(rows)=={str(q.relative_to(p)) for q in p.rglob(\"*\") if q.is_file()}-{\"SHA256SUMS\"}; assert all(hashlib.sha256((p/n).read_bytes()).hexdigest()==h for n,h in rows.items()); print(json.dumps({\"status\":\"PASS_FULL_ELEVEN_PAYLOAD_QA_SEAL\",\"payloads\":len(rows),\"manifest_sha256\":hashlib.sha256(b).hexdigest()}))'",
+  "result": {
+    "chunk_id": "58ebae",
+    "wall_time_seconds": 0.00000334,
+    "exit_code": 0,
+    "original_token_count": 38,
+    "output": "{\"status\": \"PASS_FULL_ELEVEN_PAYLOAD_QA_SEAL\", \"payloads\": 11, \"manifest_sha256\": \"c060ff52ba492c64490adc1a11e8c049e52c7b8d280d327053ff0dd5b16135eb\"}\n"
+  },
+  "native_full_checksum": {
+    "chunk_id": "18dc2f",
+    "wall_time_seconds": 0.00000322,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  }
+}

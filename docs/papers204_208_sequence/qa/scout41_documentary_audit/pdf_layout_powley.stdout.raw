@@ -1,0 +1,1302 @@
+      Counting preimages of homogeneous
+configurations in 1-dimensional cellular automata
+
+                  E DWARD J. P OWLEY?, S USAN S TEPNEY
+
+             Department of Computer Science, University of York, UK
+
+
+
+
+       A cellular automaton (CA) is in a homogeneous configuration if
+       every cell has the same state. The preimages of a configuration
+       s are those configurations which evolve to s within a single time
+       step.
+       We present two methods of finding the total number of preimages
+       for a given homogeneous configuration. The first is more intu-
+       itive, and gives a clear picture of how the number of preimages
+       varies with the number of cells on which the CA operates, but it
+       is only workable for elementary CAs (1-dimensional binary state
+       CAs with neighbourhood size 3). The second method, based on
+       de Bruijn matrices, is more abstract, but more readily extends to
+       general 1-dimensional CAs.
+
+       Key words: Homogeneity, preimages, de Bruijn graphs, de Bruijn ma-
+       trices, spectral graph theory
+
+
+
+1    INTRODUCTION
+
+A cellular automaton (CA) is a dynamical system, discrete and uniform in
+space and time. A CA is composed of a number of sites (cells), each of which
+is assigned one of a finite set of states. An assignment of states to cells is a
+configuration of the CA, and is analogous to what is usually called the “state”
+of a dynamical system. The dynamics of the CA is defined by the local update
+rule, a function mapping the “current” state of a cell and its neighbours to the
+    ? email: ed@cs.york.ac.uk
+
+
+
+
+                                       1
+“next” state of that cell. The local update rule extends to the global map, a
+function mapping the “current” configuration to the “next” configuration, in
+the natural way.
+    In general, the global map is not bijective, so strictly speaking it has no
+inverse. However, it is often useful to find the preimages of a given configu-
+ration; that is, those configurations which the global map sends to the given
+configuration. Intuitively, if the configuration at time t is known, then the
+preimages of that configuration are the possible configurations at time t − 1.
+Wuensche and Lesser [13] give an efficient algorithm for finding preimages.
+    One way of visualising the dynamics of a CA is by drawing a transition
+graph (or transition diagram). This is a directed graph whose vertices repre-
+sent the configurations of the CA, and whose edges represent the transitions
+between configurations according to the global map. The in-degree of a ver-
+tex in the transition graph is precisely the number of preimages for the cor-
+responding configuration, and so numbers of preimages are a measure of the
+“branchiness” of the graph.
+    In [7], we study symmetries (formally, automorphisms or self-isomorphisms)
+of transition graphs. By studying how the number of symmetries varies with
+the number of cells, we obtain a partial classification of the elementary CAs
+(1-dimensional, binary state CAs with neighbourhood size 3).
+    In [8], we specialise our results to linear CAs: CAs whose local rules
+(and thus global maps) are linear functions. We derive an expression for the
+number of automorphisms of the transition graph for a linear CA, and one of
+the terms in this expression is the number of preimages for the homogeneous
+configuration of zeroes.
+    In this paper, we discuss how to find the numbers of preimages of homo-
+geneous configurations. Even though linear CAs motivate us to carry out this
+work, the results are equally applicable to nonlinear CAs. After introducing
+the necessary definitions in Section 2, we describe two different approaches
+to counting preimages.
+    The first approach (Section 3) works by considering the possible lengths
+of sequences of consecutive cells in the same state. When the number of
+preimages is considered as a function of the number of cells, we see three
+distinct types of behaviour: constancy, periodicity, and exponential growth.
+The string length approach gives an intuitive understanding of when and why
+these behaviours arise.
+    The second approach (Section 4) applies results from spectral graph theory
+to the de Bruijn graphs of the CA. Specifically, we consider the eigenvalues
+of the adjacency matrices of the de Bruijn graphs (these adjacency matrices
+
+
+                                     2
+are known as de Bruijn matrices). While this method is not quite as intuitive
+as considering string lengths, it is far more useful for producing numerical
+results. In Section 4.3, we show that this approach can also be applied to
+configurations which are heterogeneous but periodic.
+
+
+2   DEFINITIONS AND NOTATION
+
+Consider a 1-dimensional CA with state set Σ, neighbourhood radius r and
+local rule f : Σ2r+1 → Σ, operating on a lattice of N cells. In this paper we
+consider lattices with periodic boundary condition, where the leftmost cell is
+considered to be adjacent to the rightmost, so that the cells are indexed by
+the elements of ZN (the integers modulo N ). This is not the only choice of
+boundary condition, but the alternatives (treating the boundary cells differ-
+ently to the rest, or allowing the lattice to be unbounded so that the effective
+number of cells is infinite) present obvious practical problems.
+    A configuration of this CA is a mapping from ZN to Σ. We will write such
+a configuration as a string over Σ of length N , and write ΣN for the set of all
+configurations. A homogeneous configuration in which each cell has state q
+is denoted q N .
+    The local rule f extends to the global map F : ΣN → ΣN . The preim-
+ages of a configuration u are those configurations v such that F (v) = u. The
+successor of u is the configuration F (u). Note that CAs are deterministic
+(every configuration has precisely one successor), but not necessarily surjec-
+tive or injective (a configuration may have zero, one, or many preimages). If
+a configuration has at least one preimage, it is said to be reachable; an un-
+reachable configuration (one with no preimages) is often called a Garden of
+Eden configuration.
+    A cyclic shift is a transformation which shifts the entire configuration by
+a certain number of cells, respecting the periodic boundary condition of the
+lattice. For example, applying a cyclic shift to the right by one cell to the
+configuration
+                               x0 x1 . . . xN −2 xN −1                       (1)
+yields the configuration
+
+                           xN −1 x0 . . . xN −3 xN −2 .                     (2)
+
+Cyclic shifts are “symmetries” of any CA, in the sense that shifting a con-
+figuration cyclically and then applying the CA’s global map to the result is
+equivalent to applying the global map first and shifting the result.
+
+
+                                        3
+   An elementary CA (ECA) has neighbourhood radius r = 1 and state set
+                                  3
+Σ = Z2 = {0, 1}. There are 22 = 256 possible local rules for an ECA.
+Following Wolfram [10], we assign each of these rules a number between 0
+and 255 inclusive, by considering the string
+
+                        f (1, 1, 1)f (1, 1, 0) . . . f (0, 0, 0)               (3)
+
+as an 8-bit binary number and converting to decimal notation.
+   Consider two ECA rules to be “equivalent” if one can be obtained from the
+other by exchanging states 0 and 1, or by reflecting (reversing) the neighbour-
+hood, or by performing one of these transformations after the other. Then the
+space of local rules is partitioned into 88 equivalence classes [12, 13]. From
+each of these classes we choose the rule whose number is smallest, thus ob-
+taining the 88 essentially different ECA rules.
+   ECAs have the advantage that they can be studied exhaustively: compare
+the total number of ECA rules (256) to the number of r = 2, Σ = Z2 rules
+   5                                               3
+(22 ≈ 4.3 × 109 ) or r = 1, Σ = Z3 rules (33 ≈ 7.6 × 1012 ). Applying
+the types of equivalence classifications described above does not significantly
+change the relative magnitudes of these numbers. ECAs also exhibit a wide
+range of dynamical behaviours: in particular, at least one (rule 110) is Turing
+complete [1].
+
+
+3   STRING LENGTHS
+
+In this section, we determine numbers of preimages by considering the pos-
+sible lengths of sequences of consecutive cells in the same state.
+
+3.1 For ECAs
+Every heterogeneous configuration of an ECA is a cyclic shift of a configura-
+tion of the form
+                         0l0,1 1l1,1 . . . 0l0,k 1l1,k ,                  (4)
+for some positive integers k, l0,1 , . . . , l1,k . In other words, every heteroge-
+neous configuration can be written, modulo cyclic shift, as strings of zeroes
+alternated with strings of ones. Since the state set has only two elements, het-
+erogeneity is sufficient to ensure that the configuration contains at least one
+string of each state.
+    Consider the homogeneous configuration q N . Let x be a state, and let
+x = 1 − x be the “other state”, i.e. the member of the state set {0, 1} which
+is not x. Assume that there exist preimages of q N which contain the state
+
+
+                                           4
+x, and consider the permitted lengths lx,i of strings composed of x in such
+preimages. The assumption that the preimage contains x guarantees that these
+strings do not cover the entire lattice, so each string has a beginning and an
+end. By considering the action of the CA rule, we can write down necessary
+conditions for various string lengths in terms of the entries of f ’s rule table:
+
+   a. lx,i = 1 can occur only if f (x, x, x) = q;
+
+   b. lx,i = 2 can occur only if f (x, x, x) = f (x, x, x) = q;
+
+   c. lx,i ≥ 3 can occur only if f (x, x, x) = f (x, x, x) = f (x, x, x) = q.
+
+Note that condition c implies condition b; that is, if lx,i ≥ 3 is permitted then
+lx,i = 2 is also permitted. Also note that these conditions are not sufficient:
+for example, if condition a holds but f (x, x, x) 6= q and f (x, x, x) 6= q, then
+lx,i = 1 cannot occur.
+    We have the following three cases:
+
+   1. If none of these conditions are met then our initial assumption, that
+      there are preimages containing both states x and x, is contradicted.
+      Thus q N has no heterogeneous preimages.
+
+   2. Suppose that, for each choice of x, there is precisely one possibility for
+      lx,i ; say l0,i = l0 and l1,i = l1 . This means that, for each x, either
+      condition a or condition b (but not both, and not condition c) is met.
+      Thus l0 , l1 ∈ {1, 2}. Then a heterogeneous preimage of q N , modulo
+      cyclic shift, has the form
+
+                                  0l0 1l1 . . . 0l0 1l1 .                     (5)
+
+      This defines a valid configuration if and only if N is divisible by l0 +l1 .
+      This configuration is unique up to cyclic shifts, and there are precisely
+      l0 + l1 distinct configurations which are cyclic shifts of this configura-
+      tion. Thus the number of heterogeneous preimages of q N in this case
+      is                       (
+                                 l0 + l1 if l0 + l1 |N
+                                                                              (6)
+                                 0         otherwise.
+      Note that, since l0 , l1 ∈ {1, 2}, we have l0 + l1 ∈ {2, 3, 4}.
+
+   3. Suppose that there is more than one possibility for lx,i , for either value
+      of x (or indeed for both). Each time a string of x appears, there are
+      several choices for its length. As N increases, so does the number of
+
+
+                                        5
+      strings of x and thus the number of choices. A “combinatorial explo-
+      sion” takes place as N grows larger, and so the number of preimages
+      grows exponentially with respect to N .
+    These three cases account for the heterogeneous preimages. In addition,
+there may be zero, one or two homogeneous preimages: specifically, xN is a
+preimage of q N if and only if f (x, x, x) = q. The number of homogeneous
+preimages is thus independent of N .
+    Note that if we have case 2 with lx = 2 (so that condition b holds for
+this choice of x), then xN cannot be a preimage, since f (x, x, x) = q would
+imply condition c. Thus, in case 2 with lx = 2 for one of the choices of x,
+there is at most one homogeneous preimage; if lx = 2 for both choices of x,
+then there are no homogeneous preimages.
+    In summary, when the number of preimages of the homogeneous configu-
+ration q N is considered as a function of N , there are three possible classes of
+behaviour:
+   1. The number of preimages is constant. Indeed, the preimages are them-
+      selves homogeneous, and their number can be determined by consider-
+      ing f (0, 0, 0) and f (1, 1, 1) as described above.
+
+   2. The number of preimages is periodic, with period 2, 3 or 4.
+
+   3. The number of preimages grows exponentially with respect to N .
+Furthermore, these three possibilities can easily be distinguished by examin-
+ing the rule table. The results of this for the 88 essentially different ECAs are
+presented in Table 1 (Appendix A).
+Example 3.1. Period 4 behaviour is relatively rare among the ECAs. Indeed,
+we can show that only ECA rule 90 exhibits period 4 behaviour for preimages
+of the configuration 1N .
+   For period 4 behaviour, the only permitted string length for both states
+must be 2. For strings of 0s of length 2 to be permitted, we must have
+
+                         f (1, 0, 0) = f (0, 0, 1) = 1 .                     (7)
+
+For strings of lengths other than 2 to be forbidden, we must have
+
+                         f (1, 0, 1) = f (0, 0, 0) = 0 .                     (8)
+
+A similar argument for strings of 1s shows that
+
+                          f (1, 1, 0) = f (0, 1, 1) = 1                      (9)
+
+
+                                       6
+and
+                         f (0, 1, 0) = f (1, 1, 1) = 0 .                   (10)
+But these conditions completely determine the ECA’s rule table, and we find
+that the rule thus defined is rule 90.
+   By the same method, we can show that the only ECA exhibiting period 4
+behaviour for preimages of 0N is rule 165. This is the rule obtained from rule
+90 by exchanging states 0 and 1. By the convention that each equivalence
+class is represented by its member with the smallest rule number, rule 165 is
+not among the 88 essentially different ECA rules.                           ♦
+
+3.2 Beyond ECAs
+The situation becomes considerably more complicated when we enlarge the
+CA’s radius. For example, consider the binary state, radius 3 CA whose local
+rule f is defined by
+
+                     f (0, 1, 0, 1, 0, 1, 0) = 0                           (11)
+                     f (1, 0, 1, 0, 1, 0, 1) = 0                           (12)
+                     f (0, 0, 0, 1, 1, 1, 0) = 0                           (13)
+                     f (1, 0, 0, 0, 1, 1, 1) = 0                           (14)
+                                            ..
+                                             .
+                     f (0, 0, 1, 1, 1, 0, 0) = 0                           (15)
+                        f (x−3 , . . . , x3 ) = 1 otherwise.               (16)
+
+Here the preimages of configuration 0N are those configurations consisting
+of repetition of the string 01, or repetition of the string 000111. In terms
+of string lengths, there are two distinct cases: either both string lengths are
+1, or both string lengths are 3. Thus the possible lengths of strings of 0s
+depend on the possible lengths of strings of 1s, and vice versa. This kind of
+interdependence never occurs among the ECAs.
+   The situation also becomes more complicated if we enlarge the CA’s state
+set. Central to the results for ECAs is the fact that every heterogeneous con-
+figuration of a binary state CA can be written, modulo cyclic shift, as strings
+of 0s alternated with strings of 1s, as in Equation 4. A string of 0s must
+always be followed by a string of 1s, and vice versa. Furthermore, a hetero-
+geneous configuration must contain, but not consist entirely of, a string of 0s.
+However, in a ternary state CA, a string of 0s may be followed by a string
+of 1s or a string of 2s, and indeed there is no guarantee that a heterogeneous
+configuration must contain a string of 0s at all.
+
+
+                                         7
+4     DE BRUIJN MATRICES
+
+The approach to counting preimages described in the previous section gives
+us an intuition for why the number of preimages is sometimes periodic with
+respect to N : if the possible string lengths are suitably constrained, then they
+can form a complete configuration only when N is a multiple of the appro-
+priate value. However, the string length approach is somewhat laborious for
+producing numerical results, and becomes extremely complicated when ap-
+plied to CAs beyond the ECAs.
+    McIntosh [6] describes a method of counting preimages for general CA
+configurations, by means of graphs (or more specifically, adjacency matrices
+of graphs) first introduced by de Bruijn [3]; see also [9]. Jeras and Dobnikar
+[5] describe the method more fully. What follows (up to, but not including,
+Theorem 4.2) is a summary of this.
+    The de Bruijn diagram for state x has vertex set Σ2r (so the vertices are the
+strings of length 2r over Σ), and an edge from vertex a1 . . . a2r to b1 . . . b2r
+if and only if
+                            a2 . . . a2r = b1 . . . b2r−1                    (17)
+
+and
+                         f (a1 , a2 , . . . , a2r , b2r ) = x .              (18)
+
+In other words, there is an edge between two vertices if and only if their
+corresponding strings overlap to form a string of length 2r + 1, and the local
+rule maps that string to state x. A de Bruijn matrix is the adjacency matrix
+for a de Bruijn diagram, with the vertices ordered lexicographically.
+
+Example 4.1. The de Bruijn diagrams for an ECA have vertex set {00, 01, 10, 11}.
+By Equation 17, the edge set is a subset of
+
+                            {00 → 00,          00 → 01
+                             01 → 10,          01 → 11
+                                                                             (19)
+                             10 → 00,          10 → 01
+                             11 → 10,          11 → 11}
+
+or more succinctly,
+                          {ab → bc : a, b, c ∈ Z2 } .                        (20)
+
+By Equation 18, the edge set of the de Bruijn diagram for state x is
+
+                  {ab → bc : a, b, c ∈ Z2 , f (a, b, c) = x} .               (21)
+
+
+                                           8
+                00                   01                 00               01
+
+
+                10                   11                 10               11
+
+
+FIGURE 1
+De Bruijn diagrams for ECA rule 18, for states 0 (left) and 1 (right).
+
+
+
+
+   ECA rule 18 is defined by the following table:
+
+          abc            111   110    101   100   011   010       001    000
+                                                                                (22)
+       f (a, b, c)        0     0      0     1     0     0         1      0
+
+The de Bruijn diagrams for rule 18 are shown in Figure 1. The corresponding
+de Bruijn matrices are the adjacency matrices of these graphs, namely
+
+                  1        0   0     0                  0     1    0     0
+                                                                        
+                0         0   1     1                0     0    0     0
+           D0 = 
+                0
+                                           and   D1 =                    .   (23)
+                           1   0     0                1     0    0     0
+                  0        0   1     1                  0     0    0     0
+
+                                                                                  ♦
+
+    De Bruijn matrices are defined in terms of the local rule, but they can
+be extended to describe entire configurations. In particular, the number of
+preimages of a given configuration is the trace (sum of diagonal entries) of the
+matrix obtained by multiplying together the de Bruijn matrices corresponding
+to the cell states. In other words, the configuration x0 . . . xN −1 has
+                                                   
+                              Tr Dx0 . . . DxN −1                          (24)
+
+preimages. A proof of this result appears in [5], but we can prove it easily for
+the special case of a homogeneous configuration.
+   The following is a well-known property of adjacency matrices: if A is the
+adjacency matrix of a graph, then the entry in row u, column v of the matrix
+An is the number of distinct paths of length n from vertex u to vertex v.
+
+
+                                             9
+   Let v1 , . . . , vN be a cycle in the de Bruijn diagram for state q. By definition
+of the de Bruijn diagram, we have
+
+                                v1 = a1 a2 . . . a2r                               (25)
+                                v2 = a2 a3 . . . a2r+1                             (26)
+                                   ..
+                                    .
+                               vN = aN a1 . . . a2r−1                              (27)
+
+and
+                             f (ai−2r , . . . , ai+2r ) = q                        (28)
+for all i, where the arithmetic in the subscripts takes place modulo N . Thus
+the configuration a1 . . . aN is mapped to the homogeneous configuration q N
+by the ECA’s global map. In other words, there is a one-one correspondence
+between cycles of length N in the de Bruijn diagram for state q, and preim-
+ages of the homogeneous configuration q N .
+   Let Dq be the de Bruijn matrix for state q. The number of cycles of length
+N which begin and end at vertex u is given by the entry in row u, column u
+of DqN ; the total number of cycles is the sum of these diagonal entries, i.e.
+Tr DqN .
+   Results from spectral graph theory [2] can now be applied to the de Bruijn
+graphs:
+Theorem 4.2. Let q be a CA state, and let Dq be the corresponding de Bruijn
+matrix. Suppose that the eigenvalues of Dq are λ1 , . . . , λk . Then the homo-
+geneous configuration q N has exactly
+
+                                   λN            N
+                                    1 + · · · + λk                                 (29)
+
+preimages.
+   The proof of this result uses the following lemmas:
+Lemma 4.3. Suppose that matrices A and B share the eigenvectors v1 , . . . , vn ,
+with corresponding eigenvalues a1 , . . . , an and b1 , . . . , bn respectively. Then
+AB has eigenvectors v1 , . . . , vn , with corresponding eigenvalues a1 b1 , . . . , an bn .
+Proof. Follows immediately from the definition of eigenvalues and eigenvec-
+tors.
+
+Lemma 4.4. Let A be a square matrix with eigenvectors v1 , . . . , vn and cor-
+responding eigenvalues a1 , . . . , an . Then, for any positive integer k, the ma-
+trix Ak has eigenvectors v1 , . . . , vn with corresponding eigenvalues ak1 , . . . , akn .
+
+
+                                          10
+Proof. By induction on k, using Lemma 4.3.
+
+Proof of Theorem 4.2. We have already established that q N has Tr DqN preim-
+ages.
+   It is a well-known result that the trace of a matrix is the sum of its eigen-
+values [4, Chapter IV, Section 5]. Thus the number of preimages of q N is the
+sum of the eigenvalues of the matrix DqN . By Lemma 4.4, the eigenvalues
+of DqN are the N th powers of the eigenvalues of Dq , namely λN                   N
+                                                                    1 , . . . , λk .
+            N
+Therefore q has
+                               λN             N
+                                 1 + · · · + λk                                 (30)
+preimages.
+
+   This result means that, once the eigenvalues of Dq are known, finding the
+number of preimages of q N for any value of N is as simple as raising the
+eigenvalues to the N th power and summing the results.
+
+4.1 For ECAs
+The de Bruijn matrices for an ECA with local rule f are
+
+                  f (0, 0, 0) f (0, 0, 1)      0           0
+                                                                
+                      0           0      f (0, 1, 0) f (0, 1, 1)
+         D1 = f (1, 0, 0) f (1, 0, 1)
+                                                                              (31)
+                                               0           0     
+                       0           0      f (1, 1, 0) f (1, 1, 1)
+
+and
+                               1      1    0   0
+                                                
+                              0      0    1   1
+                         D0 =                    − D1 .                      (32)
+                              1      1    0   0
+                               0      0    1   1
+   We can apply Theorem 4.2 to find numbers of preimages for homogeneous
+configurations of ECAs.
+
+Example 4.5. In Example 4.1, we gave the de Bruijn matrices D0 and D1 for
+ECA rule 18. The eigenvalues of D1 are all zero, so 1N has no preimages.
+   Now consider the homogeneous configuration 0N . The eigenvalues of D0
+are                               √         √
+                               1+ 5 1− 5
+                         0, 1,       ,           ,                    (33)
+                                 2         2
+and so there are
+                                √ N             √ N
+                                                      
+                      1 
+                 1+ N        1+ 5       + 1− 5                        (34)
+                     2
+
+                                          11
+preimages.
+   These results are consistent with those given in Table 1: the number of
+preimages of 1N is indeed constant (in fact it is zero); for large N , Equa-
+tion 34 is dominated by
+                                √ !N
+                             1+ 5
+                                     ≈ 1.618N                              (35)
+                               2
+
+and so the number of preimages of 0N grows exponentially with N .             ♦
+
+   Recall that the eigenvalues of a matrix A are the solutions for λ in the
+equation
+                              det(A − λI) = 0 ,                            (36)
+
+where I is the identity matrix. The expression det(A − λI) is a polynomial
+in λ, called the characteristic polynomial. If the entries of A are real (as the
+entries of de Bruijn matrices always are), then the characteristic polynomial
+has real coefficients, and thus its roots (the eigenvalues of A) must be real or
+occur in complex conjugate pairs.
+   If two matrices have the same characteristic polynomial, they have the
+same eigenvalues. Among the de Bruijn matrices for all 88 essentially dif-
+ferent ECAs, there are 23 distinct characteristic polynomials. These are enu-
+merated in Table 2 (Appendix A), their roots are given in Table 3, and the
+correspondence between characteristic polynomials and ECA rules is given
+in Table 4. From these tables and Theorem 4.2 we can determine the number
+of preimages as a function of N .
+   Figure 2 plots the number of preimages of 1N against N , for ECA rule
+94 (corresponding to characteristic polynomial c10 ). The overall trend is ex-
+ponential, but some fluctuation is also apparent. What is the source of this
+fluctuation?
+   As N grows large, the expression
+
+                               λN            N
+                                1 + · · · + λk                             (37)
+
+is dominated by the terms corresponding to those λi whose modulus is max-
+imal. More explicitly, let
+
+                |λ|max = max {|λi | : i = 1, . . . , k}                    (38)
+                     Λ = {λi : i = 1, . . . , k, |λi | = |λ|max }          (39)
+
+
+                                      12
+  Preimages
+
+
+   104
+
+
+
+
+  1000
+
+
+
+
+  100
+
+
+
+
+   10
+
+
+
+
+                                                                               N
+         0        10            20            30            40            50
+
+
+
+
+FIGURE 2
+Plot of number of preimages in ECA rule 94 for the homogeneous configuration 1N ,
+against number of cells N . Note that the y-axis scale is logarithmic.
+
+
+
+
+                                       13
+so that |λ|max is the maximal modulus, and Λ is the set of λi on which this
+maximum is attained. Then, for large N ,
+
+                             k
+                             X            X
+                                   λN
+                                    i ≈           λN
+                                                   i .                      (40)
+                             i=1          λi ∈Λ
+
+   There are several possibilities:
+
+   1. If Λ = {x} for some real x > 1, then the sum grows exponentially
+      with N in the manner of xN .
+
+   2. If Λ = {x} for some real 0 < x < 1, then the sum decays exponentially
+      with N in the manner of xN .
+
+   3. If Λ = {1}, then the sum approaches 1 as N grows large (the sum over
+      Λ being 1 for all N ).
+
+   4. If Λ = {0}, then all of the λi must be zero and so the sum is zero.
+
+   5. If Λ = {x} for some real x < 0, the behaviour is analogous to the first
+      three cases, but the sum oscillates between positive and negative. In
+      other words, the behaviour for Λ = {x} is the behaviour for Λ = {−x}
+      multiplied by (−1)N .
+
+   6. If Λ = {z, z̄} for some conjugate pair of complex numbers z, z̄, then
+      the sum has the form
+                                  2rN cos N θ .                        (41)
+
+      This follows immediately from writing z N + z̄ N in polar form, where
+      r and θ are the modulus and argument of z.
+      Ignoring the rN term (which gives exponential growth or decay de-
+      pending on whether r is greater or less than 1), this is almost periodic
+      with respect to N ; whether it is actually periodic depends on whether
+      2π
+       θ (the ratio of the oscillation period to the “sampling” period corre-
+      sponding to the integer values of N ) is rational or irrational.
+
+   7. If Λ is a union of two or more of these possibilities, then the overall
+      behaviour is the sum of the corresponding individual behaviours.
+
+  For our sum λN              N
+                 1 + · · · + λk , we can only have cases 1 to 4. This is because
+ N            N
+λ1 + · · · + λk is a number of preimages, and so it cannot be negative.
+
+
+                                      14
+  sinh HΛ2 +Λ3 +Λ4 L
+      -1
+
+
+
+
+           6
+
+
+           4
+
+
+           2
+
+
+                                                                                        N
+                       20            40            60             80             100
+
+       -2
+
+
+       -4
+
+
+       -6
+
+
+
+
+FIGURE 3
+As Figure 2, but with the dominant exponential term subtracted. For this plot, we take
+the inverse hyperbolic sine of the data, to give the y-axis a “signed logarithmic” scale.
+
+
+
+
+   In each of the exponential cases (c10 to c23 inclusive) enumerated in Ta-
+ble 3 (Appendix A), we have case 1. Let λ1 be the eigenvalue with largest
+magnitude, and omit it to consider the sum
+
+                                  λN            N
+                                   2 + · · · + λk .                                    (42)
+
+An example of this is plotted in Figure 3. It is now apparent that the “fluctu-
+ations” noted in Figure 2 are in fact oscillations.
+    The sum without λ1 can be negative, and so all of the cases enumerated
+above are possible. In many of the cases listed in Table 3, we have case 6:
+a conjugate pair of complex numbers dominate, so the overall behaviour is
+sinusoidal oscillation.
+    From Equation 41, the magnitude of the oscillation is 2rN , so the oscil-
+lation decays as N tends to infinity if and only if r < 1. This is the case
+for all but three of the cases in Table 2, the exceptions being c10 , c18 and
+c19 . Of these, the latter two have r = 1 (so the magnitude of the oscillation
+is constant with respect to N ), so only c10 gives rise to oscillations whose
+magnitude grows with N . Thus, among the 88 essentially different ECAs,
+such growing oscillations only occur with ECA rules 94 and 122 for homo-
+
+
+                                           15
+geneous configuration 1N (they also occur for those rules, not among the 88
+essentially different rules, that are equivalent to rule 94 or rule 122).
+   We can continue to examine the sums in this way until no more terms
+remain, thus decomposing the overall behaviour into a sum of exponential
+growths, decays, and sinusoidal oscillations.
+
+4.2 Beyond ECAs
+De Bruijn matrices are equally applicable to more general 1-D CAs. In gen-
+eral, for a k-state CA with neighbourhood radius r, the de Bruijn matrices
+are square matrices with k 2r rows and columns. Furthermore, Theorem 4.2
+applies to general 1-D CAs, the matrix in question having k 2r eigenvalues.
+When the number of preimages is written as a sum of N th powers of eigenval-
+ues, the cases enumerated in the previous section still apply, so the qualitative
+types of behaviour are the same as for ECAs.
+
+4.3 Preimages of heterogeneous periodic configurations
+This method is applicable whenever the matrix product
+
+                                    Dx0 . . . DxN −1                         (43)
+
+can be expressed as a power of a matrix. For example, consider a spatially
+periodic configuration of the form
+
+                    a0 . . . ap−1 a0 . . . ap−1 . . . a0 . . . ap−1 .        (44)
+
+The spatial period p must be a factor of the number of cells N , so N/p is an
+integer (in fact N/p is the number of repetitions of the sequence a0 . . . ap−1 ).
+The corresponding product of de Bruijn matrices is
+                                                  N/p
+                               Da0 . . . Dap−1               .               (45)
+
+By a similar argument to the proof of Theorem 4.2, if the eigenvalues of
+Da0 . . . Dap−1 are λ1 , . . . , λk , then the number of preimages is
+
+                                 N/p               N/p
+                               λ1      + · · · + λk      .                   (46)
+
+As before, the λi are either real or occur in complex conjugate pairs, so the
+types of qualitative behaviour exhibited by this expression as a function of N
+are the same as those described above for preimages of homogeneous config-
+urations for ECAs.
+
+
+                                          16
+FIGURE 4
+A typical space-time diagram for ECA rule 110. Each row of pixels represents a
+configuration of the CA, with the initial configuration at the top and successive con-
+figurations below it. Each column represents a cell. Pixels coloured white and black
+represent cell states 0 and 1 respectively.
+
+
+
+
+Example 4.6. Figure 4 shows a space-time diagram typical of ECA rule 110.
+We observe a number of propagating structures (“gliders”), with the rest of the
+lattice filled by a simple repeating pattern (the “ether”). We may ask whether
+there is any configuration in which the gliders or other structures present are
+annihilated, leaving only ether. In other words, does an ether configuration
+have any preimages which are not themselves ether configurations?
+    Modulo cyclic shift, an ether configuration is composed of repetitions of
+the string e = 00010011011111. So an ether configuration can only exist
+when the number of cells N is a multiple of 14. Let
+
+                           De = D03 D1 D02 D12 D0 D15 ,                          (47)
+
+where D0 and D1 are the de Bruijn matrices for rule 110. Thus an ether
+configuration has
+
+                                     Tr DeN/14                                   (48)
+
+preimages (N/14 is the number of repeats of the ether pattern). Direct calcu-
+
+
+                                         17
+lation shows that
+                                 0      0   0    0
+                                                  
+                                0      0   0    0
+                           De = 
+                                0
+                                                   ,                       (49)
+                                        0   0    0
+                                 0      2   3    2
+and that the eigenvalues of De are 0, 0, 0, 2. Therefore the number of preim-
+ages is 2N/14 .
+   In the N = 14 case, the preimages of e are
+
+                            p = 11110001001101                              (50)
+
+and
+                            q = 11110001110101 .                            (51)
+Configuration p is simply e shifted cyclically by four cells to the right, and is
+thus also an ether configuration. Configuration q is not an ether configuration.
+    For larger N , the preimages are all possible sequences composed of repe-
+titions of p and q. For example, for N = 14 × 3, the eight preimages of eee
+are
+                     ppp, ppq, pqp, pqq, qpp, qpq, qqp, qqq .               (52)
+Precisely one of the preimages (namely pp . . . p) is an ether configuration,
+leaving 2N/14 − 1 non-ether preimages.
+   The de Bruijn matrices corresponding to p and q are
+
+                  0 1 1 0                          0 1 0 0
+                                                            
+                0 1 1 0                        0 1 0 0
+          Dp = 0 1 1 0 and Dq = 0 1 0 0 .
+                                                                      (53)
+                  0 0 0 0                          0 0 0 0
+These matrices do not have the same eigenvectors, so Lemma 4.3 does not
+apply. However, direct calculation shows that
+
+                                    Dp2 = 2Dp                               (54)
+                                 Dq Dp = Dp                                 (55)
+                                 Dp Dq = 2Dq                                (56)
+                                    Dq2 = Dq ,                              (57)
+
+and so any product involving Dp and Dq can be reduced to a scalar multiple
+of Dp or Dq , whichever appears last in the product. Furthermore, Tr Dp = 2
+and Tr Dq = 1, so the trace of a product involving Dp and Dq is 2c , where c
+is the number of times Dp occurs. For example, for N = 14 × 3:
+
+
+                                       18
+    1. Tr(Dp3 ) = 23 = 8, so ppp has eight preimages;
+
+    2. Tr(Dp2 Dq ) = 22 = 4, so ppq has four preimages;
+
+    3. Similarly, pqp and qpp each have four preimages;
+
+    4. pqq, qpq and qqp each have two preimages;
+
+    5. qqq has one preimage.
+
+The configuration q has one preimage, namely
+
+                            s = 11011111011100 .                             (58)
+
+Thus the preimages of a configuration composed of p and q are precisely
+those configurations obtained by replacing each q with s, and each p with the
+cyclic shift by four cells to the right of either p or q. These configurations are
+“pre-preimages” of an ether configuration, or configurations from which an
+ether configuration is reached after two time steps.
+   Configuration s has five preimages, so this kind of analysis becomes rather
+more difficult at this point. In terms of transition graphs, we have reached a
+particularly “branchy” vertex in the tree. Further investigation of these tran-
+sients is a subject for future work.                                            ♦
+
+
+5   CONCLUSION
+
+We have given two different methods of counting preimages of homogeneous
+configurations. The second method is more useful in terms of producing nu-
+merical data; the first gives more insight into the causes of the data’s qual-
+itative relationship with N , and into what the preimages actually are, but is
+rather cumbersome as a tool for calculation.
+    Both methods can explain why the number of preimages sometimes oscil-
+lates with respect to N . The first method shows that oscillations occur when
+the preimages have spatial periodicity, which can only occur when the number
+of cells is a multiple of the spatial period. The second method’s explanation
+is less illuminating but more general: as a sum of powers of complex num-
+bers occurring in conjugate pairs, the expression for the number of preimages
+often contains terms of the form 2rN cos N θ, and cos N θ is periodic with
+respect to N (or “nearly periodic” if θ is not a rational multiple of π).
+    In studying the subset of initial configurations that eventually lead to a ho-
+mogeneous configuration, we are effectively identifying the subspace of the
+
+
+                                       19
+CA’s global state space in which the qualitative behaviour is what Wolfram
+[11] calls class 1 behaviour. Numbers of preimages for homogeneous con-
+figurations do not directly tell us the size of this region (as we do not count
+those initial configurations that yield homogeneous configurations after more
+than one time step), but they serve as an indication.
+
+
+ACKNOWLEDGEMENT
+
+We thank the anonymous referees for their helpful comments. This work is
+funded by an EPSRC DTA award.
+
+
+
+
+                                      20
+     A TABLES OF RESULTS
+
+
+                                    TABLE 1: String lengths for ECAs (see Section 3.1)
+
+                                        q=0                                          q=1
+              Rule   Permitted l0    Permitted l1   Behaviour      Permitted l0   Permitted l1   Behaviour
+                     1 2 ≥3          1 2 ≥3                        1 2 ≥3         1 2 ≥3
+                0    • •      •      • •      •     Exponential                                  Constant
+                1    • •             • •      •     Exponential                                  Constant
+                2    •               • •      •     Exponential                                  Constant
+                3    •               • •      •     Exponential                                  Constant
+
+
+
+
+21
+                4    • •      •          •    •     Exponential                   •              Constant
+                5    • •                 •    •     Exponential                   •              Constant
+                6    •                   •    •     Exponential                   •              Constant
+                7    •                   •    •     Exponential                   •              Constant
+                8    • •      •      •              Exponential                                  Constant
+                9    • •             •              Exponential                                  Constant
+               10    •               •               Period 2                                    Constant
+               11    •               •               Period 2                                    Constant
+               12    • •      •                      Constant                     •              Constant
+               13    • •                             Constant                     •              Constant
+               14    •                               Constant                     •              Constant
+               15    •                               Constant                     •              Constant
+                            TABLE 1: String lengths for ECAs (continued)
+
+                              q=0                                         q=1
+     Rule   Permitted l0   Permitted l1   Behaviour     Permitted l0   Permitted l1   Behaviour
+            1 2 ≥3         1 2 ≥3                       1 2 ≥3         1 2 ≥3
+     18     •              • •      •     Exponential      •                           Constant
+     19     •              • •      •     Exponential      •     •                     Constant
+     22     •                  •    •     Exponential      •           •               Period 3
+     23     •                  •    •     Exponential      •     •     •              Exponential
+     24     •              •               Period 2                                    Constant
+     25     •              •               Period 2                                    Constant
+     26     •              •               Period 2         •                          Constant
+
+
+
+
+22
+     27     •              •               Period 2         •    •                     Constant
+     28     •                              Constant                    •               Constant
+     29     •                              Constant                    •               Constant
+     30     •                              Constant         •          •               Period 3
+     32        •     •     •   •    •     Exponential   •                              Constant
+     33        •           •   •    •     Exponential   •                              Constant
+     34                    •   •    •      Constant     •                              Constant
+     35                    •   •    •      Constant     •                              Constant
+     36         •    •         •    •     Exponential   •              •               Period 2
+     37         •              •    •     Exponential   •              •               Period 2
+     38                        •    •      Constant     •              •               Period 2
+                            TABLE 1: String lengths for ECAs (continued)
+
+                              q=0                                         q=1
+     Rule   Permitted l0   Permitted l1   Behaviour     Permitted l0   Permitted l1   Behaviour
+            1 2 ≥3         1 2 ≥3                       1 2 ≥3         1 2 ≥3
+     40        •     •     •              Exponential   •                              Constant
+     41        •           •               Period 3     •                              Constant
+     42                    •               Constant     •                              Constant
+     43                    •               Constant     •                              Constant
+     44         •    •                     Constant     •              •               Period 2
+     45         •                          Constant     •              •               Period 2
+     46                                    Constant     •              •               Period 2
+
+
+
+
+23
+     50                    •   •    •      Constant     • •                            Constant
+     51                    •   •    •      Constant     • •      •                     Constant
+     54                        •    •      Constant     • •            •              Exponential
+     56                    •               Constant     •                              Constant
+     57                    •               Constant     •                              Constant
+     58                    •               Constant     • •                            Constant
+     60                                    Constant     •              •               Period 2
+     62                                    Constant     • •            •              Exponential
+     72     •   •    •     •              Exponential                      •           Constant
+     73     •   •          •              Exponential                      •           Constant
+     74     •              •               Period 2                        •           Constant
+                            TABLE 1: String lengths for ECAs (continued)
+
+                              q=0                                         q=1
+     Rule   Permitted l0   Permitted l1   Behaviour     Permitted l0   Permitted l1   Behaviour
+            1 2 ≥3         1 2 ≥3                       1 2 ≥3         1 2 ≥3
+      76    • •      •                     Constant                    • •             Constant
+      77    • •                            Constant                    • •             Constant
+      78    •                              Constant                    • •             Constant
+      90    •              •               Period 2         •              •           Period 4
+      94    •                              Constant         •          • •            Exponential
+     104       •     •     •              Exponential   •                  •           Period 3
+     105       •           •               Period 3     •                  •           Period 3
+
+
+
+
+24
+     106                   •               Constant     •                  •           Period 3
+     108        •    •                     Constant     •              • •            Exponential
+     110                                   Constant     •              • •            Exponential
+     122                   •               Constant     •   •              •          Exponential
+     126                                   Constant     •   •          • •            Exponential
+     128    •   •    •     •   •          Exponential                                  Constant
+     130    •              •   •          Exponential                                  Constant
+     132    •   •    •         •          Exponential                  •               Constant
+     134    •                  •           Period 3                    •               Constant
+     136    •   •    •     •              Exponential                                  Constant
+     138    •              •               Period 2                                    Constant
+                            TABLE 1: String lengths for ECAs (continued)
+
+                              q=0                                         q=1
+     Rule   Permitted l0   Permitted l1   Behaviour     Permitted l0   Permitted l1   Behaviour
+            1 2 ≥3         1 2 ≥3                       1 2 ≥3         1 2 ≥3
+     140    • •      •                     Constant                    •               Constant
+     142    •                              Constant                    •               Constant
+     146    •              •   •          Exponential       •                          Constant
+     150    •                  •           Period 3         •          •               Period 3
+     152    •              •               Period 2                                    Constant
+     154    •              •               Period 2         •                          Constant
+     156    •                              Constant                    •               Constant
+
+
+
+
+25
+     160       •     •     •   •          Exponential   •                              Constant
+     162                   •   •           Constant     •                              Constant
+     164        •    •         •          Exponential   •              •               Period 2
+     168        •    •     •              Exponential   •                              Constant
+     170                   •               Constant     •                              Constant
+     172        •    •                     Constant     •              •               Period 2
+     178                   •   •           Constant     •   •                          Constant
+     184                   •               Constant     •                              Constant
+     200    •   •    •     •              Exponential                      •    •      Constant
+     204    •   •    •                     Constant                    •   •    •      Constant
+     232        •    •     •              Exponential   •                  •    •     Exponential
+TABLE 2: Characteristic polynomials for ECAs. The polynomials are
+ordered by their roots of largest magnitude (see Table 3), and so that the
+polynomials are grouped by the classes of behaviour given in Table 3,
+but other than that the ordering (and thus the numbering) is arbitrary.
+
+                      ci    Polynomial
+                     c1     λ4
+                     c2     λ4 − λ3
+                     c3     λ4 − 2λ3 + λ2
+                     c4     λ4 − λ2
+                     c5     λ4 − λ3 − λ2 + λ
+                     c6     λ4 − 2λ3 + 2λ − 1
+                     c7     λ4 − λ
+                     c8     λ4 − λ3 − λ + 1
+                     c9     λ4 − 1
+                     c10    λ4 − λ − 1
+                     c11    λ4 − λ2 − λ
+                     c12    λ4 − λ3 − λ2 + 1
+                     c13    λ4 − λ3 − 1
+                     c14    λ4 − λ3 − λ
+                     c15    λ4 − 2λ3 + λ2 − λ + 1
+                     c16    λ4 − λ3 − λ2
+                     c17    λ4 − 2λ3 + λ
+                     c18    λ4 − λ3 − λ − 1
+                     c19    λ4 − 2λ3 + λ2 − 1
+                     c20    λ4 − λ2 − 2λ − 1
+                     c21    λ4 − 2λ3 + λ2 − λ
+                     c22    λ4 − λ3 − λ2 − λ
+                     c23    λ4 − 2λ3
+
+
+
+
+                                    26
+     TABLE 3: Roots of characteristic polynomials for ECAs
+
+ci    Cartesian form         Modulus     Argument/π     Behaviour
+             0                 0             0
+             0                 0             0
+c1                                                       Constant
+             0                 0             0
+             0                 0             0
+             1                 1             0
+             0                 0             0
+c2                                                       Constant
+             0                 0             0
+             0                 0             0
+             1                 1             0
+             1                 1             0
+c3                                                       Constant
+             0                 0             0
+             0                 0             0
+             1                 1             0
+            −1                 1             1
+c4                                                       Period 2
+             0                 0             0
+             0                 0             0
+             1                 1             0
+             1                 1             0
+c5                                                       Period 2
+            −1                 1             1
+             0                 0             0
+             1                 1             0
+             1                 1             0
+c6                                                       Period 2
+             1                 1             0
+            −1                 1             1
+               √
+       − 12 + √23 i            1              2
+                                              3
+       − 12 − 23 i             1             − 23
+c7                                                       Period 3
+             1                 1              0
+             0                 0              0
+               √
+       − 2 + √23 i
+          1
+                                  1           2
+                                              3
+       − 12 − 23 i                1          − 23
+c8                                                       Period 3
+             1                    1           0
+             1                    1           0
+
+
+
+
+                             27
+     TABLE 3: Roots of characteristic polynomials for ECAs (continued)
+
+ci          Cartesian form         Modulus     Argument/π     Behaviour
+                   1                  1            0
+                                                    1
+                   i                  1             2
+c9                                                             Period 4
+                  −i                  1            − 21
+                 −1                   1             1
+               1.22074             1.22074          0
+         −0.24813 + 1.03398i       1.06334       0.57497
+c10                                                           Exponential
+         −0.24813 − 1.03398i       1.06334      −0.57497
+              −0.72449             0.72449          1
+               1.32472             1.32472          0
+         −0.66236 − 0.56228i       0.86884      −0.77596
+c11                                                           Exponential
+         −0.66236 + 0.56228i       0.86884       0.77596
+                   0                  0             0
+               1.32472             1.32472          0
+                   1                  1             0
+c12                                                           Exponential
+         −0.66236 − 0.56228i       0.86884      −0.77596
+         −0.66236 + 0.56228i       0.86884       0.77596
+               1.38028             1.38028          0
+         0.21945 + 0.91447i        0.94044       0.42503
+c13                                                           Exponential
+         0.21945 − 0.91447i        0.94044      −0.42503
+              −0.81917             0.81917          1
+               1.46557             1.46557          0
+         −0.23279 − 0.79255i       0.82603      −0.59094
+c14                                                           Exponential
+         −0.23279 + 0.79255i       0.82603       0.59094
+                   0                  0             0
+               1.46557             1.46557          0
+                   1                  1             0
+c15                                                           Exponential
+         −0.23279 − 0.79255i       0.82603      −0.59094
+         −0.23279 + 0.79255i       0.82603       0.59094
+                    √                  √
+                 1+ 5               1+ 5
+                   2√               √ 2             0
+                 1− 5                 5−1           1
+c16                2                  2                       Exponential
+                   0                    0           0
+                   0                    0           0
+
+
+
+
+                                   28
+     TABLE 3: Roots of characteristic polynomials for ECAs (continued)
+
+ci          Cartesian form         Modulus     Argument/π     Behaviour
+                   √                  √
+                 1+ 5               1+ 5
+                   2                  2            0
+                   1
+                   √                √
+                                        1          0
+c17              1− 5                   5−1
+                                                              Exponential
+                   2                    2
+                                                   1
+                   0                    0          0
+                   √                  √
+                 1+ 5               1+ 5
+                   2                  2             0
+                                                    1
+                   i                  1             2
+c18                                                           Exponential
+                  −i
+                   √                √
+                                      1            − 12
+                  1− 5               5−1            1
+                    2√                2√
+                  1+ 5              1+ 5
+                    2√                2             0
+               1        3
+               2  −   √2
+                          i           1            − 13
+c19            1        3                           1         Exponential
+               2 + √2 i             √
+                                      1             3
+                  1− 5               5−1            1
+                    2√                2
+                                      √
+                  1+ 5              1+ 5
+                    2 √               2             0
+              − 21 + √23 i            1             2
+                                                    3
+c20                                                           Exponential
+              − 12 −√ 23 i          √
+                                      1            − 23
+                  1− 5                  5−1         1
+                    2                   2
+               1.75488             1.75488          0
+         0.12256 − 0.74486i        0.75488      −0.44809
+c21                                                           Exponential
+         0.12256 + 0.74486i        0.75488       0.44809
+                  0                   0             0
+               1.83929             1.83929          0
+         −0.41964 − 0.60629i       0.73735      −0.69272
+c22                                                           Exponential
+         −0.41964 + 0.60629i       0.73735       0.69272
+                  0                   0             0
+                  2                   2             0
+                  0                   0             0
+c23                                                           Exponential
+                  0                   0             0
+                  0                   0             0
+
+
+
+
+                                   29
+TABLE 4: Characteristic polynomials of de Bruijn matrices for ECAs
+
+      Rule   char D0    char D1        Rule   char D0   char D1
+       0       c23        c1            56      c3        c1
+       1       c22        c2            57      c2        c2
+       2       c17        c1            58      c3        c1
+       3       c16        c2            60      c3        c4
+       4       c21        c1            62      c3        c11
+       5       c18        c2            72      c17       c1
+       6       c15        c1            73      c12       c2
+       7       c14        c2            74      c6        c1
+       8       c17        c1            76      c3        c1
+       9       c12        c2            77      c2        c2
+       10      c6         c1            78      c3        c1
+       11      c5         c2            90      c6        c9
+       12      c3         c1            94      c3        c10
+       13      c2         c2           104      c15       c7
+       14      c3         c1           105      c8        c8
+       15      c2         c2           106      c3        c7
+       18      c17        c1           108      c3        c11
+       19      c16        c2           110      c3        c11
+       22      c15        c7           122      c3        c10
+       23      c14        c14          126      c3        c20
+       24      c6         c1           128      c22       c2
+       25      c5         c2           130      c12       c2
+       26      c6         c1           132      c14       c2
+       27      c5         c2           134      c8        c2
+       28      c3         c1           136      c16       c2
+       29      c2         c2           138      c5        c2
+       30      c3         c7           140      c2        c2
+       32      c21        c1           142      c2        c2
+       33      c14        c2           146      c12       c2
+       34      c3         c1           150      c8        c8
+       35      c2         c2           152      c5        c2
+       36      c19        c4           154      c5        c2
+       37      c13        c5           156      c2        c2
+       38      c3         c4           160      c18       c2
+       40      c15        c1           162      c2        c2
+       41      c8         c2           164      c13       c5
+
+
+                                  30
+  TABLE 4: Characteristic polynomials of de Bruijn matrices for ECAs
+  (continued)
+
+           Rule     char D0       char D1        Rule    char D0      char D1
+            42        c3            c1           168       c14          c2
+            43        c2            c2           170       c2           c2
+            44        c3            c4           172       c2           c5
+            45        c2            c5           178       c2           c2
+            46        c3            c4           184       c2           c2
+            50        c3            c1           200       c16          c2
+            51        c2            c2           204       c2           c2
+            54        c3            c11          232       c14          c14
+
+
+REFERENCES
+ [1] Matthew Cook. (2004). Universality in elementary cellular automata. Complex Systems,
+     15(1):1–40.
+ [2] Dragoš M. Cvetković, Michael Doob, and Horst Sachs. (1995). Spectra of Graphs. Johann
+     Ambrosius Barth, third edition.
+ [3] Nicolaas Govert de Bruijn. (1946). A combinatorial problem. Nederl. Akad. Wetensch.
+     Proceedings, 49:758–764.
+ [4] Felix R. Gantmacher. (1960). Matrix Theory, volume I. Chelsea.
+ [5] Iztok Jeras and Andrej Dobnikar, (2006). Algorithms for computing preimages of cellular
+     automata configurations. http://www.rattus.info/al/files/preimages.
+     pdf.
+ [6] Harold V. McIntosh, (1990). Linear cellular automata via de Bruijn diagrams. http:
+     //delta.cs.cinvestav.mx/˜mcintosh/comun/cf/debruijn.pdf.
+ [7] Edward J. Powley and Susan Stepney. (2009). Automorphisms of transition graphs for
+     elementary cellular automata. Journal of Cellular Automata, 4(2):125–136.
+ [8] Edward J. Powley and Susan Stepney, (2009). Automorphisms of transition graphs for
+     linear cellular automata. To appear in Journal of Cellular Automata.
+ [9] Anthony Ralston. (1982). De Bruijn sequences — a model example of the interaction of
+     discrete mathematics and computer science. Mathematics Magazine, 55(3):131–143.
+[10] Stephen Wolfram. (1983). Statistical mechanics of cellular automata. Reviews of Modern
+     Physics, 55(3):601–644.
+[11] Stephen Wolfram. (1984). Universality and complexity in cellular automata. Physica D,
+     10:1–35.
+[12] Stephen Wolfram. (1986). Tables of cellular automaton properties.       In Theory and
+     Applications of Cellular Automata, pages 485–557. World Scientific.
+[13] Andrew Wuensche and Mike Lesser. (1992). The Global Dynamics of Cellular Automata:
+     An Atlas of Basin of Attraction Fields of One-Dimensional Cellular Automata. Addison
+     Wesley.
+
+
+
+                                            31
+

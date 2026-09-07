@@ -1,0 +1,16 @@
+{
+  "command": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json,pathlib; p=pathlib.Path(\"docs/papers204_208_sequence/qa/p209_lifecycle_root_preparation\"); h=lambda b:hashlib.sha256(b).hexdigest(); s=(p/\"SHA256SUMS\").read_bytes(); assert h(s)==\"f7cec01c62e57ef15e620901dd24fbcfab103264073b7b03965c604f7b1473b3\"; rows={r[66:]:r[:64] for r in s.decode().splitlines()}; assert len(rows)==4 and set(rows)=={str(q.relative_to(p)) for q in p.rglob(\"*\") if q.is_file()}-{\"SHA256SUMS\"}; pins=json.loads((p/\"INPUT_PINS.json\").read_bytes())[\"inputs\"]; source=(p/\"inspect.py\").read_bytes(); tree=ast.parse(source); compile(tree,str(p/\"inspect.py\"),\"exec\"); assert h(source)==\"e3abd6a5aae93729f8b9d08637cc9314568342651eb18eaed9da923c3c8cf1bf\"; [(None if h((p/n).read_bytes())==d else (_ for _ in ()).throw(AssertionError(n))) for n,d in rows.items()]; [None if {\"bytes\":len(b:=pathlib.Path(n).read_bytes()),\"sha256\":h(b)}==v else (_ for _ in ()).throw(AssertionError(n)) for _ in range(2) for n,v in pins.items()]; print(json.dumps({\"status\":\"PASS_ROOT_STATIC_NOT_EXECUTION\",\"payloads\":len(rows),\"pins_checked_twice\":len(pins),\"source_sha256\":h(source),\"subprocess_sites\":[n.lineno for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and isinstance(n.func.value,ast.Name) and n.func.value.id==\"subprocess\"],\"manifest_sha256\":h(s)},sort_keys=True))'",
+  "start_utc": {
+    "current_time": "2026-09-07 11:04:29 UTC"
+  },
+  "result": {
+    "chunk_id": "d13dba",
+    "wall_time_seconds": 0.00000622,
+    "exit_code": 0,
+    "original_token_count": 72,
+    "output": "{\"manifest_sha256\": \"f7cec01c62e57ef15e620901dd24fbcfab103264073b7b03965c604f7b1473b3\", \"payloads\": 4, \"pins_checked_twice\": 14, \"source_sha256\": \"e3abd6a5aae93729f8b9d08637cc9314568342651eb18eaed9da923c3c8cf1bf\", \"status\": \"PASS_ROOT_STATIC_NOT_EXECUTION\", \"subprocess_sites\": [157]}\n"
+  },
+  "observed_utc": {
+    "current_time": "2026-09-07 11:04:30 UTC"
+  }
+}

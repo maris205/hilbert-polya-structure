@@ -1,0 +1,10 @@
+{
+  "cmd": "python3 -I -S -B -c 'import hashlib,json,pathlib; p=pathlib.Path(\"docs/papers204_208_sequence/qa/scout40_documentary_audit\"); names=[(\"ATTEMPT_02.actual.json\",\"run_1.stdout.raw\"),(\"ATTEMPT_03.actual.json\",\"run_2.stdout.raw\")]; rows=[]\nfor native,raw in names:\n o=json.loads((p/native).read_text()); b=(p/raw).read_bytes(); assert o[\"native_return\"][\"exit_code\"]==0 and o[\"native_return\"][\"output\"].encode()==b; r=json.loads(b); assert r[\"status\"]==\"PASS\" and r[\"physical_inputs_before\"]==r[\"physical_inputs_after\"]; rows.append({\"raw\":raw,\"bytes\":len(b),\"sha256\":hashlib.sha256(b).hexdigest(),\"checks\":r[\"checks\"],\"physical_inputs\":r[\"physical_input_count\"]})\nassert (p/\"run_1.stdout.raw\").read_bytes()==(p/\"run_2.stdout.raw\").read_bytes(); print(json.dumps({\"status\":\"PASS\",\"actual_raw_extractions\":rows,\"pair_raw_equal\":True,\"all_payload_names\":sorted(x.name for x in p.iterdir())},sort_keys=True,indent=2))'",
+  "native_return": {
+    "chunk_id": "cc22fd",
+    "wall_time_seconds": 0.00000232,
+    "exit_code": 0,
+    "original_token_count": 197,
+    "output": "{\n  \"actual_raw_extractions\": [\n    {\n      \"bytes\": 152627,\n      \"checks\": 70081,\n      \"physical_inputs\": 212,\n      \"raw\": \"run_1.stdout.raw\",\n      \"sha256\": \"f738f292b0c829c89d4bbc400d8fde660b8b9ef99164232deede0ba239307999\"\n    },\n    {\n      \"bytes\": 152627,\n      \"checks\": 70081,\n      \"physical_inputs\": 212,\n      \"raw\": \"run_2.stdout.raw\",\n      \"sha256\": \"f738f292b0c829c89d4bbc400d8fde660b8b9ef99164232deede0ba239307999\"\n    }\n  ],\n  \"all_payload_names\": [\n    \"ATTEMPT_01.actual.json\",\n    \"ATTEMPT_02.actual.json\",\n    \"ATTEMPT_03.actual.json\",\n    \"INITIAL_CMP.actual.json\",\n    \"PAIR_CMP.actual.json\",\n    \"REPORT.md\",\n    \"check.py\",\n    \"check_attempt_01.failed.py\",\n    \"run_1.stdout.raw\",\n    \"run_2.stdout.raw\"\n  ],\n  \"pair_raw_equal\": true,\n  \"status\": \"PASS\"\n}\n"
+  }
+}

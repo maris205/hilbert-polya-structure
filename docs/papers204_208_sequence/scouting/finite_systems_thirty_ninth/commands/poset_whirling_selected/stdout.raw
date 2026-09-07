@@ -1,0 +1,367 @@
+                                              ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING
+                                                                 DYNAMICS
+
+                                                                          MATTHEW PLANTE AND TOM ROBY
+
+                                                 Abstract. Given a finite poset P , we study the whirling action on vertex-labelings of P
+                                                 with the elements {0, 1, 2, . . . , k}. When such labelings are (weakly) order-reversing, we call
+                                                 them k-bounded P -partitions. We give a general equivariant bijection between k-bounded
+                                                 P -partitions and order ideals of the poset P × [k] which conveys whirling to the well-studied
+arXiv:2405.07984v2 [math.CO] 3 Oct 2025
+
+
+
+
+                                                 rowmotion operator. As an application, we derive periodicity and homomesy results for
+                                                 rowmotion acting on the chain of V’s poset V × [k]. We are able to generalize some of these
+                                                 results to the more complicated dynamics of rowmotion on Cn × [k], where Cn is the claw
+                                                 poset with n unrelated elements each covering b     0.
+                                                 Keywords: chain of V’s, claw posets, dynamical algebraic combinatorics, equivariant
+                                                 bijections, homomesy, posets, P -partitions, rowmotion, whirling.
+
+
+                                                                                          Contents
+                                            1. Introduction                                                                                           1
+                                            1.1. Basic definitions and background in combinatorial dynamics                                           2
+                                            1.2. Organization of this paper                                                                           3
+                                            1.3. Rowmotion as a product of toggles                                                                    3
+                                            2. The whirling map                                                                                       4
+                                            2.1. Whirling functions between finite sets                                                               4
+                                            2.2. Whirling k-bounded P -partitions and rowmotion                                                       5
+                                            3. Dynamics for rowmotion on V × [k]                                                                      8
+                                            3.1. The chain of V’s poset                                                                               8
+                                            3.2. Periodicity and homomesy via center-seeking whorms                                                  11
+                                            4. Dynamics for rowmotion on Cn × [k]                                                                    18
+                                            4.1. The chain of claws poset                                                                            18
+                                            4.2. Periodicity and homomesy via edge-seeking whorms                                                    20
+                                            4.3. Acknowledgments                                                                                     24
+                                            References                                                                                               25
+
+
+                                                                                     1. Introduction
+                                             We connect the well-studied operation of rowmotion on the order ideals of a finite poset
+                                          with the less familiar whirling action on P -partitions with bounded labels. One of our main
+                                          results is an equivariant bijection that carries one to the other for any finite poset P . Here
+                                          we are following in the footsteps of Haddadan [6], who noticed this connection when P itself
+                                          is a chain. We then leverage this to study the rowmotion action on the “chain of V’s”
+                                          poset Vk := V × [k] (a 3-element V-shaped poset cross a finite chain, see Figure 3), which
+                                          has surprisingly good dynamical properties. We also generalize this to the case where we
+
+                                            Date: October 6, 2025.
+                                                                                                1
+2                                     PLANTE AND ROBY
+
+replace V with a n-claw, Cn , a poset with a single minimal element covered by exactly n
+incomparable elements. In both cases we obtain both periodicity results and homomesy.
+1.1. Basic definitions and background in combinatorial dynamics. Let P be a finite
+poset, and J (P ) be the set of order ideals of P . (For basic poset definitions, we refer the
+reader to Stanley [15, Ch. 3].) Combinatorial rowmotion is an invertible map ρ : J (P ) →
+J (P ) which takes each ideal I ∈ J (P ) to the order ideal generated by the minimal elements
+of the complement of I in P . The periodicity of this map on products of chains was first
+studied by Brouwer and Schrijver [3], and Cameron and Fon-der-Flaass [4]. Later Striker and
+Williams [17] considered it as one element of the “toggle group” of a poset and related it to a
+kind of “promotion” operator on order ideals. Around the same time, Armstrong, Stump, and
+Thomas [2] studied rowmotion on root posets, relating it to “Kreweras complementation” on
+noncrossing partitions, and used this to prove a conjecture of Panyushev about the equality
+of the average cardinality of antichains for each rowmotion orbit.
+   Propp and Roby [11] noticed that this conjecture was merely one instance of a much
+broader phenomenon which they dubbed homomesy. Given a finite set S, a “statistic”
+f : S → C, and an invertible map φ on S, we call f homomesic if the average value of f is
+                                       1 X
+the same for every φ-orbit R, i.e.,            f (x) = c, where c is a constant not dependent on
+                                     #R x∈R
+the choice of orbit R. Over the past decade, many authors have proved homomesy results
+as one tool to understand various combinatorial dynamical systems.
+   Along with the work initiated by Reiner, Stanton, and White on the Cyclic Sieving Phe-
+nomenon [12, 13], the confluence of all this work was the beginning of dynamical algebraic
+combinatorics as a distinct area within algebraic combinatorics (with antecedents going back
+to the Robinson–Schensted–Knuth correspondence and related operations on Young tableaux
+such as promotion, evacuation, and cyclage). In the past decade, the subfield has grown in a
+number of directions, and the study of rowmotion has been of continuing interest. For more
+background information, see the survey articles of Hopkins [7], Roby [14], and Striker [16].
+   Cameron and Fon-der-Flaass [4] were the first to describe rowmotion as a product of
+involutions called toggles, as detailed in Section 1.3. A natural generalization of toggling at
+a poset element x is “whirling at x,” which cycles the label at x among j possible values.
+(Toggles are the case when j = 2.) Joseph, Propp, and Roby defined these and the operation
+of whirling on sets of functions between finite sets, obtaining various homomesy results for
+different classes of functions (injective, surjective, etc.) [9]. This is described in Section 2.
+   A bijective function f : P → [p] (with #P = p) such that f (x) < f (y) whenever x <P y
+is called a linear extension. We denote by L(P ) the set of all linear extensions of P ; its
+cardinality, e(P ), is an important numerical invariant of a poset. Its refinement, the order
+polynomial ΩP (k), counts the number of k-bounded P -partitions. For some special posets P ,
+mainly ones connected with Lie theory (root and minuscule posets) and those of partition
+or shifted shapes, product formulae for ΩP (k) are known. Hopkins surveys these posets,
+the formulae, and gives the heuristic: Posets with order-polynomial product formulae are the
+same as the posets with good dynamical behavior. The one poset in his list whose rowmotion
+dynamics were relatively unexplored is V × [k], a gap this paper fills. In separate work
+Hopkins and Rubey study the dynamics of Schützenberger promotion on linear extensions of
+V×[k], which also exhibits unusually good behavior [8]. In his doctoral thesis, Ben Adenbaum
+provides a combinatorial approach (along with a density argument) to proving that this same
+periodicity extends to piecewise-linear rowmotion on the order polytope O(P ) [1, Prop. 3.23].
+            ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                           3
+
+Since most dynamical results in the piecewise-linear realm have been proven first at the
+(higher) birational level, then tropicalized to the PL realm, this is a notable methodology.
+The authors are unaware of any successful attempts to lift periodicity of the rowmotion
+action on V × [k] (even conjecturally) to the birational realm.
+
+1.2. Organization of this paper. In Section 1 after the introduction, we review the tog-
+gling definition of rowmotion. Section 2 describes whirling, and includes the equivariant
+bijection which allows us to study rowmotion on Vk as whirling on k-bounded P -partitions.
+Section 3 contains our main periodicity and homomesy results for rowmotion on Vk , which
+use decompositions of the “orbit board” of the corresponding whirling action into “whorms”.
+Finally, Section 4 contains the periodicity and homomesy results which generalize to row-
+motion on the “chain of claws” graph, Cn × [k], and extends our proofs to this situation.
+
+1.3. Rowmotion as a product of toggles. Writing rowmotion as a product of toggles
+has been quite useful for understanding its properties and generalizing it to other situations,
+e.g., lifting to the piece-wise linear and birational level [5]. Thomas and Williams call this
+“Rowmotion in Slowmotion” [18].
+Definition 1.1. We define the (order-ideal) rowmotion map, ρ : J (P ) → J (P ) as fol-
+lows: For any I ∈ J (P ), ρ(I) is the order ideal generated by the minimal elements of the
+complement of I, as in the example below.
+Example 1.2. Here is one iteration of ρ on an order ideal with the action broken down into
+its three steps: (1) complement, (2) take minimal elements, (3) saturate down.
+
+                      (1)                      (2)                     (3)
+                      −→                      −→                       −→
+
+
+  Cameron and Fon-der-Flaass [4] showed that for any finite poset P , rowmotion can be
+realized as “toggling once at each element of P along any linear extension (from top to
+bottom)”. Other toggling orders also lead to interesting maps, such as Striker–Williams
+“promotion” (of order ideals) of a poset, which is toggling from left-to-right along “files” of
+a poset [17]. To toggle an order ideal I at a poset element x, means to add x to I if it is not
+included, or delete x if it is, but only if the result would also be an order ideal. Formally:
+Definition 1.3. For each fixed x ∈ P define the (order-ideal) toggle τx : J (P ) → J (P ) by
+                            
+                            I ∖ {x} if x ∈ I and I ∖ {x} ∈ J (P )
+                            
+                    τx (I) = I ∪ {x} if x ̸∈ I and I ∪ {x} ∈ J (P )
+                            
+                            I         otherwise.
+It is an easy exercise to show that order-ideal toggles [4, §2] are involutions, and that toggles
+at incomparable elements commute (a special case of Prop 2.7).
+Example 1.4. We will toggle node-by-node down the following fixed linear extension: at
+                                                                         7   6
+each step we consider whether or not to toggle the red node in or out. 5   4    3.
+                                                                         2   1
+4                                      PLANTE AND ROBY
+
+   For this linear extension we toggle the elements row-by-row from top-to-bottom, left-to-
+right within each row (although the order within rows is irrelevant, since toggles at incom-
+parable elements commute, hence the name “rowmotion”).
+
+
+                          τ
+                          7                       τ
+                                                  6                       τ5
+                         −
+                         →                       −
+                                                 →                        −
+                                                                          →
+
+
+
+    τ4                    τ
+                          3                       τ
+                                                  2                       τ1
+    −
+    →                    −
+                         →                       −
+                                                 →                        −
+                                                                          →
+
+
+Proposition 1.5 ([4, Lemma 1]). Let x1 , x2 , . . . , xp be any linear extension (i.e., any order-
+preserving listing of the elements) of a finite poset P with p elements. Then the composite
+map τx1 τx2 · · · τxp coincides with the rowmotion operation ρ.
+
+                                    2. The whirling map
+   An order ideal in any poset can be considered as a binary labeling of the poset with 0
+(indicating elements outside the order ideal) and 1 (indicating those inside of it). Equiva-
+lently, this represents an order-reversing map f : P → {0, 1}. Then toggling at an element,
+simply switches the labels at that element (or leaves them alone if the result would not
+be order-reversing). Similarly, we can define whirling at a poset element to cycle through
+a larger set of possible labels until it arrives at one that gives a legitimate order-reversing
+map. To whirl the entire labeling, one whirls once at each element along a linear extension.
+   A notion equivalent to whirling in this context was first defined by James Propp (dubbed
+winching by Peter Winkler) and was used by S. Haddadan[6], as an aid to proving certain
+homomesies for rowmotion on order ideals of type A root and minuscule posets (triangles and
+rectangles). Joseph, Propp, and Roby [9] later defined whirling in the context of functions
+between finite sets. We review this first, before defining whirling of “k-bounded P -partitions”
+in Section 2.2. We prove a general equivariant bijection between rowmotion on P ×[k], where
+P is any finite poset, which is similar to the equivariant bijections Haddadan used in her
+work with triangular and rectangular posets.
+2.1. Whirling functions between finite sets. Let F ⊆ [k][n] be a family of functions
+f : [n] → [k]. For the rest of section 2.1, we use {1, . . . , k} = [k] to represent the congruence
+classes of Z/kZ, as opposed to the usual {0, 1, . . . , k − 1}. For fixed values of k and n,
+we represent such functions in one-line notation, e.g., f = 21344 represents the function
+f ∈ [4][5] with f (1) = 2, f (2) = 1, f (3) = 3, f (4) = 4, and f (5) = 4.
+Definition 2.1 ([9, Definition 2.3]). For f ∈ F we define the whirl wi : F → F at index i
+as follows: repeatedly add 1 (modulo k) to the value of f (i) until we get a function in F.
+Example 2.2. Let F = {f ∈ [4][5] : f (1) ̸= f (2)}. If we apply w2 to f = 21344, adding 1 in
+the second position gives 22344, but this is not in F. Adding 1 again in this position gives
+the result: w2 (f ) = 23344.
+We will now highlight some specific results from the paper where whirling was first intro-
+duced. Let Injm (n, k) be the set of m-injective functions, that is, functions f : [n] → [k]
+              ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                                 5
+
+                                                4 1 5
+                                                6 2 1
+                                                3 4 2
+                                                5 6 3
+                                                1 2 4
+                                                3 5 6
+                                                4 1 2
+                                                5 3 4
+                                                6 5 1
+                                                2 6 3
+        Figure 1. The orbit board of w on Inj1 (3, 6) containing f = 415, partitioned
+        into “chunks”.
+
+such that #f −1 (t) ≤ m for all t ∈ [k]. Similarly, let Surm (n, k) be the set of m-surjective
+functions, that is, f : [n] → [k] such that #f −1 (t) ≥ m for all t ∈ [k]. Note that injec-
+tive functions are 1-injections and surjective functions are 1-surjections. We also define the
+statistic ηj (f ) = #f −1 ({j}).
+Theorem 2.3 ([9, Theorem 2.11]). Fix F to be either Injm (n, k) or Sur1 (n, k) for given
+n, k, m ∈ P. Then under the action of w = wn ◦ wn−1 ◦ · · · ◦ w1 on F, ηj is nk -mesic for any
+j ∈ [k].
+This result is conjectured to hold for Surm (n, k), but is still open for m > 1. Proof details
+can be found in Sections 2.2–2.4 of [9].
+Example 2.4. Here is the orbit of w on Inj1 (3, 6) containing f = 415.
+               w       w        w       w        w        w       w        w       w         w
+         415 −
+             → 621 −
+                   → 342 −
+                         → 563 −
+                               → 124 −
+                                     → 356 −
+                                           → 412 −
+                                                 → 534 −
+                                                       → 651 −
+                                                             → 263
+   Figure 1 shows the corresponding orbit board (a matrix whose rows are the successive
+orbit elements) partitioned into “chunks,” each of which contains exactly the set of numbers
+{1, 2, . . . , k}. Notice that each value 1, 2, . . . , 6 appear exactly 5 times in this orbit of size 10,
+in accordance with the 1/2-mesy of Theorem 2.3. See [9, Section 2] for precise definitions.
+
+2.2. Whirling k-bounded P -partitions and rowmotion. Now we extend the definition
+of whirling to k-bounded P -partitions, and prove our main general result relating whirling
+and rowmotion. Throughout the rest of the paper, P will denote a finite poset. Define
+[0, k] := {0, 1, 2, . . . , k}. A P -partition is a map σ from P to N such that if x <P y, then
+σ(x) ≥ σ(y) [15, Ch. 3].
+Definition 2.5. A k-bounded P -partition is a function f : P → [0, k] such that if x ≤P y,
+then f (x) ≥ f (y). Let Fk (P ) be the set of all such functions.
+Throughout the rest of the paper we use {0, 1, . . . , k} to represent the congruence classes of
+Z/(k + 1)Z, as usual.
+Definition 2.6. For f ∈ Fk (P ) and x ∈ P , define wx : Fk (P ) → Fk (P ), called the whirl at
+x, as follows: repeatedly add 1 (mod k + 1) to the value of f (x) until we get a function in
+Fk (P ). This new function is wx (f ).
+6                                         PLANTE AND ROBY
+
+The case k = 1 of the above definition recovers toggling of order ideals (Def. 1.3).
+Proposition 2.7. If x, y ∈ P are incomparable, then wx wy (f ) = wy wx (f ).
+Proof. Since x and y are incomparable, there are no inequalities constraining the relationship
+between f (x) and f (y). So wx wy = wy wx .                                                 □
+Definition 2.8. Let (x1 , x2 , . . . , xp ) be a linear extension of P . Define w : Fk (P ) → Fk (P )
+by w := wx1 wx2 . . . wxp . The above proposition shows that this is well-defined, since one can
+get from any linear extension to any other by a sequence of interchanges of incomparable
+elements.
+                                                                ℓ       r
+Example 2.9. Let P be the V poset with labels                               , k = 2, and w = wc wr wℓ .
+                                                                    c
+              0           2         1              2        1               0        1         0
+                              wℓ                       wr                       wc
+                              −→                       −→                       −→
+                    2                    2                          2                    1
+   There is a natural bijection between order ideals of a poset P and 1-bounded P -partitions
+in F1 (P ). Specifically, a 1-bounded P -partition in F1 (P ) is simply the indicator function of
+an order ideal I ∈ J(P ). We extend this to an equivariant bijection Fk (P ) → J (P × [k])
+which sends w to ρ, meaning the following diagram commutes.
+
+                                                       w
+                                     Fk (P )                        Fk (P )
+
+
+
+                                                       ρ
+                                   J (P × [k])                  J (P × [k])
+   We will call the chains {(x, 1), (x, 2), . . . , (x, k)} ⊆ P × [k], for x ∈ P , the fibers of P × [k],
+and construct an equivariant bijection that first sends wx to order-ideal toggling down the
+fiber {(x, 1), (x, 2), . . . , (x, k)}.
+Example 2.10. Here is an example of the equivariant bijection between rowmotion on order
+ideals of [3] × [4] and whirling on F4 ([3]).
+
+
+
+                                                       ρ
+                                                       →
+                                                       −
+
+
+
+                                               ↕                ↕
+                                          0            w    1
+                                                       −
+                                                       →
+                                               1                2
+                                                   4                2
+Lemma 2.11. There is an equivariant bijection between Fk (P ) and J (P × [k]) which sends
+wx to the toggle product τ(x,1) τ(x,2) . . . τ(x,k) .
+             ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                                 7
+
+                                                                        8             12
+
+                                                                        7       4     11
+                       2             3
+                                                                        6       3     10
+                             1
+                                                                        5       2     9
+                             V
+                                                                                1
+
+                                                                            V × [4]
+
+        Figure 2. A linear extension of V on the left and the linear extension for
+        V × [4] constructed from it on the right, as in the proof of Theorem 2.12.
+
+Proof. The bijection ϕ between Fk (P ) and J (P × [k]) will be a natural one, where ϕ(f ) = I
+implies f (x) counts the number of elements in the intersection of I and the fiber at x in
+P × [k]. That is, the intersection of the fiber at x in P × [k], {(x, 1), (x, 2), . . . , (x, k)}, and an
+order ideal I is {(x, 1), (x, 2), . . . , (x, d)} for some d ∈ [k], if and only if f (x) = d. Otherwise,
+the intersection is empty if and only if f (x) = 0.
+  We will now complete the proof by fixing f and x and showing that
+                                 ϕ(wx (f )) = τ(x,1) τ(x,2) . . . τ(x,k) (ϕ(f )).
+   Let m = max({f (y) : y ⋖ x, for y ∈ P } ∪ {0}) and M = min({f (y) : x ⋖ y, for y ∈
+P } ∪ {k}), so m ≤ f (x) ≤ M . There are two cases:
+       • Case 1. If f (x) < M , then (wx (f ))(x) = f (x) + 1.
+       • Case 2. If f (x) = M , then f (x) + 1 is greater than M so we increment through
+         values modulo k + 1 until we get to (wx (f ))(x) = m.
+   On the other hand, we consider the action of τ = τ(x,1) τ(x,2) . . . τ(x,k) on ϕ(f ). Recall that
+τ(x,i) does not change the order ideal whenever (x, i) is not maximal in the order ideal or
+minimal in the complement of the order ideal. Because of this, there are only two outcomes
+of τ (S(f )), either one element was added to order ideal, or elements were removed until
+removing anymore would not result in an order ideal. This reflects the two cases above,
+which completes the proof.                                                                        □
+   The following general theorem is extremely useful for studying the dynamics of rowmo-
+tion for certain kinds of posets. Such an equivariant bijection was used by Haddadan [6,
+Lemma 3.1] in the specific situation she studied of rowmotion and promotion on triangular
+and rectangular posets, but has not been stated in anything like this generality in literature
+we have seen.
+Theorem 2.12. Fix any linear extension (x1 , x2 , . . . , xp ) ∈ L(P ). There is an equivariant
+bijection between Fk (P ) and J (P × [k]) which sends whirling, w = wx1 wx2 · · · wxp on Fk (P )
+to rowmotion on J (P × [k]).
+Proof. The bijection is based on the one from Lemma 2.11. We will construct the linear
+extension that traverses P × [k] fiber by fiber, i.e., (xi , j) → xk(i−1)+j . Then the composite
+map τx1 τx2 · · · τxkp on P × [k] coincides with rowmotion by Proposition 1.5. By Lemma 2.11,
+8                                          PLANTE AND ROBY
+
+the toggles τxk(i−1)+1 τxk(i−1)+2 · · · τxk(i−1)+k coincide with wxi . Together these give us that w =
+wx1 wx2 · · · wxp , is exactly rowmotion.                                                            □
+Example 2.13. Figure 2 shows a linear extension of the poset, V and the corresponding
+linear extension for V × [4] on the right, as in the proof of Theorem 2.12, of V × [4].
+   The following definitions will allow us to partition orbit boards of whirling into subsets
+called whorms. The partitioning of orbit boards of combinatorial actions into some special
+class of disjoint subsets is a useful tool, used by several authors, including different kinds of
+“snakes” [6, 10], and “chunks” [9].

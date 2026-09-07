@@ -3,7 +3,29 @@
 This is a work-in-progress backup, not five-paper completion or admission.
 All research remains `HOLD_EXTERNAL`.
 
-## Latest: P209 accepted B / physical Round2 / actual terminal pair and views
+## Latest confirmed: artifact corrections and closed scouts33–36
+
+The actual scoped private push on 2026-09-07 UTC is
+`4bc38b63e7e0bbfd5365c08e5635ebc7ac9af953`, tree
+`97ba076a187703d76197c310cd8f6caeb07db8ec`. The
+[complete native copy/object/commit/push/remote record](qa/GIT_OBJECT_P209_ARTIFACT_CORRECTIONS_4BC38B63.json)
+confirms 2,052 exact selected/copied/staged paths, twenty-four named
+manifests, 13,033 manifest rows and 13,100 Git blob keys. No ignored file,
+deletion or out-of-scope entry occurred; actual remote ref matched and
+the final mirror was 0/0 and clean.
+
+That commit archives artifact preparations/revisions01–02 and genuine
+initial01–03 failures, root-closed scouts33–36 and six final-seat supplements.
+It explicitly excluded active scouts37/38 and revision03. Subsequent P209
+initial04/05, actual lifecycle/root completion, scouts37–41 and MNA candidate
+evidence are not silently included. Four papers are now internally complete
+in the workspace, but the next scoped completion checkpoint has not yet
+been pushed. This later receipt is outside its own named historical ref.
+The previous receipt bytes were physically preserved with the other
+[pre-completion controls](qa/central_lifecycle_p209_complete/README.md).
+OWNER_AMBER / HOLD_EXTERNAL remain.
+
+## Previous: P209 accepted B / physical Round2 / actual terminal pair and views
 
 On 2026-09-07 UTC, the exact scoped checkpoint was actually committed and
 pushed as `2edce9044d3eea3d6574193e15dba658e1d7b11d`, with inspected and

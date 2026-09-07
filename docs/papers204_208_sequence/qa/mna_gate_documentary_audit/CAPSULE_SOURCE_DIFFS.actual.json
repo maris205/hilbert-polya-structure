@@ -1,0 +1,22 @@
+[
+  {
+    "cmd": "diff -u docs/papers204_208_sequence/scouting/MNA_GATE/run_pair.py docs/papers204_208_sequence/scouting/MNA_GATE/run_pair_v2.py",
+    "native_return": {
+      "chunk_id": "a2dc86",
+      "wall_time_seconds": 0.00000429,
+      "exit_code": 1,
+      "original_token_count": 513,
+      "output": "--- docs/papers204_208_sequence/scouting/MNA_GATE/run_pair.py\t2026-09-07 19:00:42.041397378 +0800\n+++ docs/papers204_208_sequence/scouting/MNA_GATE/run_pair_v2.py\t2026-09-07 19:02:22.858653477 +0800\n@@ -46,7 +46,7 @@\n     return {str(p):pin(p) for p in sorted(set(map(Path,paths)),key=str)}\n \n def main():\n-    pair=GATE/'evidence/pair01'\n+    pair=GATE/'evidence/pair02'\n     pair.mkdir()\n     executable=str(Path(sys.executable).resolve())\n     cache=pair/'cache_must_remain_absent'\n@@ -64,7 +64,9 @@\n                   if Path(os.fsdecode(x)).is_file()})\n     # Re-resolve bytes explicitly rather than treating textual symlink aliases as files.\n     runtime.extend(Path(x) for x in links)\n-    science=[GATE/name for name in ('verify.py','run_observed.py','run_pair.py','INPUT_PINS.sha256','INPUT_ROLES.json')]\n+    runtime.extend(p for p in Path('/usr/lib/locale/C.utf8').rglob('*') if p.is_file())\n+    runtime.extend([Path('/etc/ld.so.cache'),Path('/etc/localtime').resolve()])\n+    science=[GATE/name for name in ('verify.py','run_observed.py','run_pair.py','run_pair_v2.py','record_outer.py','INPUT_PINS.sha256','INPUT_ROLES.json','CANONICAL.json')]\n     frozen=[]\n     for line in (GATE/'INPUT_PINS.sha256').read_text().splitlines():\n         sha,rel=line.split('  ',1)\n@@ -84,9 +86,8 @@\n     out1=command(pair/'01_verify',argv+[str(pair/'runtime01.json')])\n     out2=command(pair/'02_verify',argv+[str(pair/'runtime02.json')])\n     canonical=GATE/'CANONICAL.json'\n-    if canonical.exists():\n-        raise RuntimeError('refuse overwriting any earlier canonical')\n-    canonical.write_bytes(out1)\n+    if not canonical.exists():\n+        raise RuntimeError('v2 requires preserved actual v1 mathematical canonical')\n     command(pair/'03_cmp_canonical_1',['/usr/bin/cmp',str(pair/'01_verify/stdout.raw'),str(canonical)])\n     command(pair/'04_cmp_canonical_2',['/usr/bin/cmp',str(pair/'02_verify/stdout.raw'),str(canonical)])\n     command(pair/'05_cmp_pair',['/usr/bin/cmp',str(pair/'01_verify/stdout.raw'),str(pair/'02_verify/stdout.raw')])\n"
+    }
+  },
+  {
+    "cmd": "diff -u docs/papers204_208_sequence/scouting/MNA_GATE/run_pair_v2.py docs/papers204_208_sequence/scouting/MNA_GATE/run_pair_v3.py",
+    "native_return": {
+      "chunk_id": "2c6306",
+      "wall_time_seconds": 0.00000162,
+      "exit_code": 1,
+      "original_token_count": 370,
+      "output": "--- docs/papers204_208_sequence/scouting/MNA_GATE/run_pair_v2.py\t2026-09-07 19:02:22.858653477 +0800\n+++ docs/papers204_208_sequence/scouting/MNA_GATE/run_pair_v3.py\t2026-09-07 19:04:13.251911420 +0800\n@@ -46,7 +46,7 @@\n     return {str(p):pin(p) for p in sorted(set(map(Path,paths)),key=str)}\n \n def main():\n-    pair=GATE/'evidence/pair02'\n+    pair=GATE/'evidence/pair03'\n     pair.mkdir()\n     executable=str(Path(sys.executable).resolve())\n     cache=pair/'cache_must_remain_absent'\n@@ -65,8 +65,9 @@\n     # Re-resolve bytes explicitly rather than treating textual symlink aliases as files.\n     runtime.extend(Path(x) for x in links)\n     runtime.extend(p for p in Path('/usr/lib/locale/C.utf8').rglob('*') if p.is_file())\n-    runtime.extend([Path('/etc/ld.so.cache'),Path('/etc/localtime').resolve()])\n-    science=[GATE/name for name in ('verify.py','run_observed.py','run_pair.py','run_pair_v2.py','record_outer.py','INPUT_PINS.sha256','INPUT_ROLES.json','CANONICAL.json')]\n+    runtime.extend([Path('/etc/ld.so.cache'),Path('/etc/localtime').resolve(),\n+                    Path('/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache')])\n+    science=[GATE/name for name in ('verify.py','run_observed.py','run_pair.py','run_pair_v2.py','run_pair_v3.py','record_outer.py','record_outer_v3.py','INPUT_PINS.sha256','INPUT_ROLES.json','CANONICAL.json')]\n     frozen=[]\n     for line in (GATE/'INPUT_PINS.sha256').read_text().splitlines():\n         sha,rel=line.split('  ',1)\n"
+    }
+  }
+]

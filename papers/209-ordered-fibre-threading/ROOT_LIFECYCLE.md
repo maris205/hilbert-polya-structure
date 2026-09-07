@@ -1,7 +1,7 @@
-# P209 root lifecycle after accepted reviews and terminal viewing
+# P209 root lifecycle after complete terminal artifact acceptance
 
 Paper: P209, Recurrent Functions and Inverse Fibres of Ordered Fibre Threading.
-Status: `ARTIFACT_GATE_PENDING / OWNER_AMBER / HOLD_EXTERNAL`.
+Status: `P209_INTERNALLY_COMPLETE / ARTIFACT_GATE_PASS / OWNER_AMBER / HOLD_EXTERNAL`.
 
 Both distinct nonauthor manuscript reviewers have actually accepted the
 exact unchanged manuscript delta with zero current open findings. Root
@@ -21,9 +21,15 @@ with zero visual findings. Rendering or matching hashes was not substituted
 for viewing. The original build records retain their truthful NOT_VIEWED
 status at build time; the later root view record supplies the viewing fact.
 
-Complete terminal artifact/input closure and the final lifecycle follow-up
-are still pending. This status is not paper completion and is not completion
-of the five-paper batch. The narrow three-theorem contract is unchanged:
+The [complete terminal artifact gate](../../docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_ROOT_INSPECTION.md)
+has passed after actual root original closure: 4,608,965 auditor checks,
+132,356 consumed inputs and 132,366 root current paths. Both reviews have
+zero current findings. This records root's internal-completion decision;
+the status-only transition receives its separate actual lifecycle check
+and is not pre-certified by this text. The exact pending predecessor of
+this document and its whole-paper manifest were physically preserved before
+this edit. See the [paper QA](../../docs/papers204_208_sequence/P209_FINAL_QA.md).
+This is not completion of the five-paper batch. The narrow contract is unchanged:
 exact labelled recurrence/period, full one-step inverse decoder, and unique
 maximum-fibre target. No sharp entrance clock or general-time inverse is claimed.
 

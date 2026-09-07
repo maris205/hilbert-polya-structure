@@ -1,0 +1,53 @@
+{
+  "audit_p209.py": [
+    {
+      "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_04'",
+      "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "    # Preserve revision03 and the real initial04 root-view schema failure.\n    # This appended documentary layer does not alter any older failure branch.\n    revision03 = BATCH / 'qa/p209_terminal_artifact_revision_03'\n    pin(revision03 / 'SHA256SUMS',\n        '4863c739ce8189f19e484f33fd5b42ce8f69f3b292f42768ba638108c105a743')\n    manifest(revision03, count=47)\n    fourth = OUT / 'initial_04'\n    pin(fourth / 'SHA256SUMS', 'bf5d128c27762025552fc730ba363e05a44874e28b2b2857d02db3fa2c8c4c7d')\n    manifest(fourth, count=8)\n    for snapshot, source in [('executed_auditor_snapshot.py', 'audit_p209.py'),\n                             ('executed_recorder_snapshot.py', 'record_audit.py')]:\n        ck(read(fourth / snapshot) == read(revision03 / source),\n           'fourth_failed_exact_executed_sources', snapshot)\n    row, attempt = j(fourth / 'COMMAND.json'), j(fourth / 'ATTEMPT.json')\n    expected = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',\n                'pycache_prefix=' + str(fourth / 'unused_pycache'),\n                str(revision03 / 'audit_p209.py'), 'terminal-artifact-after-actual-views']\n    ck(row['exit_code'] == 1 and row['status'] == 'COMPLETED' and row['failure'] is None\n       and row['inputs_unchanged'] and row['unused_cache_absent'] and not (fourth / 'unused_pycache').exists()\n       and row['argv'] == expected and row['cwd'] == str(ROOT) and row['environment'] == ENV,\n       'fourth_failed_child_remains_failure', 'real initial_04 exit one; no reconstructed page view')\n    ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and\n       all(attempt[k] == row[k] for k in ('argv', 'cwd', 'environment', 'started_utc')),\n       'fourth_failed_prespawn_record', 'original fields')\n    exact_pair(fourth, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 16, historical=True)\n    for stream in ('stdout', 'stderr'):\n        pin(fourth / ('audit.' + stream), row[stream])\n    ck(read(fourth / 'audit.stdout') == b'' and len(read(fourth / 'audit.stderr')) == 652 and\n       h(fourth / 'audit.stderr') == 'cffcade469b9bc33938a9102303db6a4fb7dd675943b58abe77645469a45881f',\n       'fourth_failed_full_raw_streams', 'unchanged complete KeyError page_count traceback')\n    execution = BATCH / 'qa/P209_TERMINAL_ARTIFACT_INITIAL_04.failed.actual.json'\n    pin(execution, '483bac2c8955b9958ed02eb3741ed8bbeda6c48f36ad1ae9f1996fe26d32a340')\n    outer = j(execution)\n    ck(outer['completion']['exit_code'] == 1 and\n       read(fourth / 'audit.stderr').decode() in outer['completion']['output'],\n       'fourth_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')\n    return {'revision': 'p209_terminal_artifact_revision_04', 'original_preparation_payloads': 347,\n            'preserved_revision_03_payloads': 47, 'preserved_initial_04_payloads': 8,\n            'fourth_child_exit': 1, 'fourth_wrapper_exit': 1,\n",
+      "old": "    return {'revision': 'p209_terminal_artifact_revision_03', 'original_preparation_payloads': 347,\n",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "and record['measured_page_count'] == 4 and record['open_visual_findings'] == 0",
+      "old": "and record['page_count'] == 4 and record['open_visual_findings'] == 0",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "            pin(copied, row['sha256'])\n            # Four named Round2 identity-input pins are not document origins.\n            # Their exact A source/copy rows supply the semantic origin; no\n            # other conflict, path or hash is exempted from the original check.\n            exact_self_origin_roles = {\n                ('delta_check_01', 'P209_A_RESPONSE.md'):\n                    (BATCH / 'P209_A_RESPONSE.md', '3b84c6c6a39b890562a63fbcb76a1a1fdf683886b9f6670b4bdd05544c6e9459'),\n                ('delta_check_02', 'P209_A_RESPONSE.md'):\n                    (BATCH / 'P209_A_RESPONSE.md', '3b84c6c6a39b890562a63fbcb76a1a1fdf683886b9f6670b4bdd05544c6e9459'),\n                ('delta_check_01', 'P209_A_ROOT_INITIAL_INSPECTION.md'):\n                    (BATCH / 'qa/P209_A_ROOT_INITIAL_INSPECTION.md', 'c095b7365d9083b83f6cd802ea6a3c9fa372a8b670ba9b28ae11e29d562fe690'),\n                ('delta_check_02', 'P209_A_ROOT_INITIAL_INSPECTION.md'):\n                    (BATCH / 'qa/P209_A_ROOT_INITIAL_INSPECTION.md', 'c095b7365d9083b83f6cd802ea6a3c9fa372a8b670ba9b28ae11e29d562fe690')}\n            role_key = (attempt0, copied.name)\n            if role_key in exact_self_origin_roles:\n                named_source, named_digest = exact_self_origin_roles[role_key]\n                ck(source == named_source and row['sha256'] == named_digest and origins.get(str(copied)) == copied,\n                   'exact_four_A_identity_pin_semantic_origin_roles', role_key)\n                origins[str(copied)] = source\n            ck(str(copied) not in origins or origins[str(copied)] == source,\n",
+      "old": "            pin(copied, row['sha256'])\n            ck(str(copied) not in origins or origins[str(copied)] == source,\n",
+      "required_old_occurrences": 1
+    }
+  ],
+  "lifecycle_audit.py": [
+    {
+      "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_04'",
+      "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'",
+      "required_old_occurrences": 1
+    }
+  ],
+  "record_audit.py": [
+    {
+      "new": "if sys.argv[1:] != ['initial_05']:",
+      "old": "if sys.argv[1:] != ['initial_04']:",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "Require the new revision_04 initial_05 attempt",
+      "old": "Require the new revision_03 initial_04 attempt",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_04'",
+      "old": "and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03'",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_03.failed.actual.json',\n              ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/SHA256SUMS',\n              BASE/'initial_04/SHA256SUMS',\n              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_04.failed.actual.json']",
+      "old": "              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_03.failed.actual.json']",
+      "required_old_occurrences": 1
+    }
+  ]
+}

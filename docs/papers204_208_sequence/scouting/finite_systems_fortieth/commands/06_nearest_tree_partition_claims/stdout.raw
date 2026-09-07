@@ -1,0 +1,415 @@
+# P114 — Rooted-forest leaf peeling
+
+Anonymous internal short paper on the finite dynamical system obtained by
+deleting every non-root leaf of a labelled rooted forest in parallel.
+
+The paper determines, for every ambient label size `n`:
+
+- the endpoint and exact pointwise clock;
+- every root-set basin and every bounded-depth shell;
+- every one-step fibre from only the target's vertex and non-root-leaf counts;
+- the phase size, fixed/periodic census, zeta function, and, for `n>=2`, the
+  sharp maximum depth and all deepest states (with `n=0,1` stated separately).
+
+Classical Cayley/all-minors and labelled-height formulas, parallel `RAKE`,
+height-driven dynamical pruning, parallel leaf stripping,
+inclusion–exclusion, absorption/zeta conversion, and Hamilton-path extremality
+are explicitly subtracted.  The residual internal result is only the
+endpoint-indexed finite-map assembly and `(m,s)` fibre calculation; a bounded
+search is not evidence of priority for either.
+External posting, submission, novelty, and priority remain `HOLD_EXTERNAL`.
+
+## Reproduce
+
+```bash
+python3 code/verify.py
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+```
+
+The canonical verifier reports `400,105 exact assertions; PASS` through
+`n=6`.  The compiled manuscript is `main.pdf`.
+# P120 — Odd-fringe mirror dynamics on plane rooted trees
+
+Status: **ANONYMOUS AUTHOR DRAFT / INTERNAL FREEZE / EXTERNAL HOLD**.
+
+For a plane rooted tree, the map reads every old fringe-subtree order and
+simultaneously reverses exactly the child lists with odd order.  The paper
+proves the following map-specific exact conjunction:
+
+1. every fringe order and the underlying rooted tree are preserved, and the
+   map is an involution;
+2. even roots have pointwise-fixed children, while odd roots have an exact
+   `M`-twisted-palindrome child list;
+3. the fixed-tree series satisfy the coupled `E/O` equations;
+4. `F=E+O` is the zero-constant branch of the displayed explicit degree-six
+   polynomial;
+5. fixed counts determine all one-/two-cycles, iterate-fixed counts, and the
+   fixed-order zeta function.
+
+The empty lane is a separately adjoined singleton identity.  The manuscript
+does **not** claim an asymptotic, irreducibility or minimality of the
+polynomial, a general Catalan involution theorem, priority, or owner
+clearance.
+
+Plane-tree mirror symmetry, Catalan enumeration, existing plane-tree
+involutions, symbolic algebraic enumeration, resultants, involution cycle
+bookkeeping, and Artin--Mazur zeta functions all receive zero contribution
+credit.  P114 is separated objectwise: it deletes leaves and has
+height-governed transients and Cayley basins; P120 preserves every vertex and
+edge and has only one- and two-cycles.
+
+## Reproduce the exact controls
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 code/verify.py
+```
+
+The canonical run makes **1,155,278** exact assertions over **82,501** plane
+rooted trees, namely the empty state and every nonempty tree through order
+twelve.  It checks the induced pointwise vertex transport, the coupled and
+degree-six series identities through degree thirty, and the exact resultant
+identity by sparse integer arithmetic.  Canonical stdout is stored in
+`code/verification_output.txt`; `code/coefficient_table.csv` records the
+carrier, fixed, and two-cycle counts through order thirty.
+
+## Build the draft
+
+See `BUILD.md` for the exact four-stage LaTeX commands and settled mechanical
+checks.  The current `main.pdf` and its byte-identical round-two snapshot are
+retained alongside the distinct pre-repair `main_round0_original.pdf`.  The
+current bibliography renders the arXiv identifiers of both closest preprint
+owners.  Public release, submission, and specialist contact remain **HOLD**.
+# P148 — even-level contraction of plane rooted trees
+
+**Status: ROUND-2 INTERNAL REVIEW ACCEPTED / HOLD_EXTERNAL.**
+
+The paper studies a literal finite self-map on `PT_{<=N}`: delete every
+odd-depth vertex, promote its ordered grandchild blocks, reset parity, and
+repeat.  The unordered one-step shadow is exactly the outward-contraction of
+Soo--Khoussainov--Linz, arXiv:2111.13238v4, Definition 6.6.
+
+## Review-frozen credit boundary
+
+The direct-owned unordered one-step rule, its partition-tree interpretation,
+and all cheap unordered all-rank consequences obtained by iteration—including
+depth divisibility and the binary height/absorption clock—receive **zero
+contribution credit**.  They remain in the paper as correct supporting
+analysis.  The only residual retained for internal scoring is the conjunction
+
+```text
+ordered every-target size-refined inverse
++ exact-layer image criterion
++ algebraic image series.
+```
+
+Hostile Review A found **1 Critical / 0 Major / 2 Minor**.  After the direct
+owner gate was reopened and the source, proof, and metadata repairs were
+made, independent Hostile Review B returned **0 / 0 / 0, ACCEPT**.
+
+## Frozen artifacts
+
+- `main.pdf`: round-2 artifact, 5 A4 pages, 357,397 bytes, SHA-256
+  `5c681793e5e97abb0ad718f876a2e0af11bd2d41585d860dc0c5b8c3992ed957`.
+- Exact verifier: 216,905 assertions, canonical transcript PASS.
+- Bibliography and visual checks: 5/5 references resolved; 5/5 pages accepted.
+- A source-only isolated build is byte-identical to `main.pdf`.
+
+## Reproduce
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 verify_p148.py
+PYTHONDONTWRITEBYTECODE=1 python3 verify_p148.py | cmp - verification_output.txt
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+```
+
+`main_round0_original.pdf` preserves the pre-review baseline;
+`main_round1.pdf` is byte-identical to the accepted round-2 `main.pdf`.
+Enumeration is a falsifier, not a proof or novelty certificate.  No external
+release, posting, submission, specialist contact, or Git action is
+authorized.
+# P159 — parallel odd-vertex pruning
+
+**Status:** `ROUND-2 INTERNAL ACCEPT / HOLD_EXTERNAL`.
+
+This anonymous short note studies the deterministic map that simultaneously
+deletes every currently odd-degree vertex from a simple labelled graph.  Its
+narrow claim-bearing package is:
+
+- a target-uniform strict predecessor count from one connected binary
+  incidence system;
+- correctly oriented rank-transfer powers for every target and time;
+- the even/non-even split between a strict power and a geometric sum; and
+- exact image layers, image counts, fixed counts, depth CDFs, and shells.
+
+The handshaking lemma, incidence rank, cycle-space enumeration, parity
+deletion games, Eulerian/parity editing, generic parallel peeling, matrix
+powers, absorption language, and the sharp path clock receive zero
+contribution credit.
+
+## Exact control
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 verify_p159.py
+PYTHONDONTWRITEBYTECODE=1 python3 verify_p159.py > /tmp/p159_replay.txt
+cmp -s /tmp/p159_replay.txt verification_output.txt
+```
+
+The frozen transcript contains **3,167,525** exact assertions and ends in
+`PASS`.  It covers all 41,658 labelled graph states through ambient order six,
+511 independently row-reduced parity systems through total order nine, all
+target/source-rank fibres at every audited time, image sets and counts, CDFs
+and shells, matrix orientation, nilpotence, and every mandatory boundary.
+Enumeration is counterexample pressure, not proof or owner clearance.
+
+## Rebuild
+
+```bash
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+```
+
+`main_round0_original.pdf` remains the immutable pre-review freeze.  The
+current `main.pdf`, `main_round1.pdf`, and `main_round2.pdf` freeze the
+post-review manuscript and are byte-identical; exact hashes and sizes are
+recorded in `BUILD.md`.  The settled build
+has no citation/reference warning, rerun request, build error, overfull box,
+or underfull box.  All font rows are embedded, subsetted, and Unicode mapped.
+
+## Package map
+
+- `main.tex`, `references.bib`: anonymous amsart manuscript and six verified,
+  cited sources.
+- `main_round0_original.pdf`, `main_round1.pdf`: immutable review rounds.
+- `NARRATIVE_REPORT.md`, `PAPER_PLAN.md`, `PROOF_PACKAGE.md`: readable story,
+  claim architecture, and expanded proof spine.
+- `CLAIMS_EVIDENCE.md`, `CONTROL_RESULTS.md`: evidence ledger and exact-control
+  boundary.
+- `SOURCE_VERIFICATION.md`: source metadata, subtraction, and bounded owner
+  search ledger.
+- `verify_p159.py`, `verification_output.txt`: paper-local exact falsifier and
+  frozen transcript.
+- `HOSTILE_REVIEW_A.md`, `IMPROVEMENT_LOG.md`: zero-finding independent
+  review and explicit no-mathematics-change disposition.
+- `BUILD.md` and retained build logs: reproducible review artifact record.
+
+The phase-one `PRE_PAPER_HOSTILE_GATE.md` constrained the theorem before
+drafting; formal Review A subsequently returned zero findings.  Review B
+found and closed one stale lifecycle sentence only.  Posting, submission,
+circulation, author contact,
+and other external action remain prohibited.
+# P195 — Odd-side least-neighbour tree walks
+
+**Round:** `ROUND0_COMPLETE / AWAITING_DUAL_REVIEW`  
+**Owner gate:** `OWNER_AMBER`  
+**External lifecycle:** `HOLD_EXTERNAL`
+
+The carrier is a labelled tree with a distinguished root. The root moves to
+the least-labelled neighbour whose side of the cut edge has odd cardinality.
+The paper proves the complete recurrent classification, the sharp
+`floor((n-1)/2)` tail, parity-separated recurrent EGFs, an every-target local
+fibre formula, and sharp fibre maxima.
+
+## Exact replay
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 code/verify.py
+PYTHONDONTWRITEBYTECODE=1 python3 code/verify.py | cmp - code/CANONICAL.txt
+```
+
+The exhaustive run covers every Prüfer tree and root through `n=8`, checking
+2,223,278 transitions and 4,328,312 assertions.
+
+## Deterministic build
+
+```bash
+export SOURCE_DATE_EPOCH=1704067200
+export TZ=UTC
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+```
+
+The anonymous A4 manuscript is three pages. Posting and submission are not
+authorized.
+# P110 — Cyclic shift–join partition dynamics
+
+Status: **FINAL MECHANICAL QA PASS / GO INTERNAL / EXTERNAL HOLD**.
+
+For each `n >= 1`, the phase space is the partition lattice `Pi_n` of the
+cyclic group `C_n = Z/nZ`.  If `rho(i)=i+1`, the update is
+
+```text
+J_n(pi) = pi join rho(pi).
+```
+
+The draft proves the following exact package.
+
+1. `J_n^t(pi)` is the join of the consecutive translates
+   `pi,rho(pi),...,rho^t(pi)`.
+2. The endpoint is the coset partition of the subgroup generated by all
+   differences of elements initially lying in one block.
+3. Recurrent points are precisely the `tau(n)` cyclic coset partitions, and
+   `zeta=(1-z)^(-tau(n))`.
+4. The basin whose endpoint subgroup has order `h|n` has size
+   `sum_{d|h} mu(h/d) Bell(d)^(n/d)`.
+5. For `n>=3`, the exact maximum depth is `n-2`.  Its deepest states are
+   exactly the atoms with one block `{a,a+d}`, `gcd(d,n)=1`, so the deepest
+   shell has size `n*phi(n)/2`.
+
+The deepest-shell classification is proved by a binary cut-defect argument;
+it is not inferred from the exact probe.  The manuscript presents two
+separate analytic routes: lattice automorphisms plus cyclic subgroups for the
+endpoint/basin package, and translated chord graphs plus cut defects for the
+sharp-time package.
+
+Run the deterministic exact control with:
+
+```bash
+python3 code/verify.py
+```
+
+The fresh output is stored in `CONTROL_OUTPUT.txt`.  It records **1,916,206**
+exact assertions over all **142,417** partitions through `n=10`, every
+nonconstant binary cut through `n=12`, closed basin identities through
+`n=50`, and temporal Möbius/zeta checks through period 60.
+
+Build the PDF with the four-stage commands in [BUILD.md](BUILD.md).
+
+## Owner-subtracted boundary
+
+- Stanley owns standard partition-lattice, Bell-number, and enumerative
+  background.
+- Anagnostopoulou-Merkouri–Bailey–Cameron own current structural work on
+  invariant partition lattices and permutation block systems.
+- Britnell–Wildon own orbit-coherence questions for joins and meets of orbit
+  partitions.
+- Artin–Mazur own the periodic-point zeta construction.
+
+The least invariant coarsening obtained by joining group translates, the
+cyclic subgroup/coset description of invariant partitions, and the
+join/generated-subgroup correspondence are treated as background mechanisms,
+not standalone contributions.  The residual scope is only the conjunction of
+this temporal update with the displayed Möbius–Bell basin profile and the
+sharp transient/deepest-shell theorem.
+
+A bounded search did not locate the same package, but search absence is not a
+novelty or priority certificate.  Public release, submission, and specialist
+contact remain **HOLD**.
+
+## Internal collision firewall
+
+P97 iterates nonlinear sumset squaring `A -> A+A` on nonempty subsets of a
+prime cyclic group, while P105 prunes the least label from every nontrivial
+cycle of a permutation.  Within P107--P111, the other four systems act on
+residue-ring ideals, a capped integer square, finite-field subspaces, and
+random Heisenberg products.  P110 instead acts on the full set-partition
+lattice by joining a partition with its cyclic relabelling.  Shared cyclic
+labels, Bell numbers, Möbius inversion, transient clocks, or zeta bookkeeping
+receive no contribution credit; the phase spaces and update rules are not
+parameter variants.
+
+The two independent team-internal reviews are recorded in
+[`HOSTILE_REVIEW_A.md`](HOSTILE_REVIEW_A.md) and
+[`HOSTILE_REVIEW_B.md`](HOSTILE_REVIEW_B.md).  They are not external referee
+reports.  Their consolidated decision is in
+[`HOSTILE_REVIEW.md`](HOSTILE_REVIEW.md); the deterministic artifact freeze
+is recorded in [`FINAL_QA.md`](FINAL_QA.md) and `SHA256SUMS`.  No external
+posting, submission, specialist contact, novelty, or priority action is
+authorized.
+# P169 — Successor Transfer on Canonically Ordered Set Partitions
+
+**Status:** `ROUND2 DUAL-REVIEW FREEZE / GREEN_OWNER_THIN / HOLD_EXTERNAL`  
+**Format:** anonymous `amsart` 10pt short theory note  
+**Final repaired PDF:** 5 A4 pages, 392,380 bytes
+
+## Result
+
+On a canonically ordered set partition, every nonsingleton block
+simultaneously sends its maximum to the cyclic successor block.  The frozen
+theorem package gives:
+
+- the exact restricted-growth update: increment the final occurrence of each
+  repeated letter modulo the block count;
+- sharp stratum clock `min(n-2,2k-2)` for `1<k<n`, and global clock `n-2`;
+- complete dense/sparse recurrent forms, counts, and exact nontrivial period
+  `k`;
+- an explicit five-state matrix product for the fibre of every target and an
+  exact image test;
+- the interlacing witness `025|134` versus `035|124`, with equal ordered
+  size/minimum/maximum data but fibres two and one;
+- explicit handling of `n=1`, `k=1`, `k=n`, `n=2k`, singleton blocks, and the
+  cyclic wrap.
+
+The theorem is deliberately owner-thin.  Restricted-growth encodings and
+whirling, directed-cycle chip firing, Bulgarian solitaire, promotion/jeu de
+taquin/rowmotion, box-ball systems, set-partition stack sorting, Stirling
+counts, and generic transfer matrices are background.  The bounded source
+search grants no external lifecycle permission.
+
+## Core artifacts
+
+- `main.tex` — complete anonymous manuscript with explicit matrix entries.
+- `main.pdf` — settled canonical Round-2 PDF after both hostile reviews.
+- `main_round0_original.pdf` — immutable author Round-0 freeze.
+- `main_round1.pdf` — immutable post-Review-A source-repair freeze.
+- `main_round2.pdf` — byte-identical final dual-review freeze.
+- `references.bib` — exactly eight cited, primary-source-verified records.
+- `verify_p169.py` — standalone standard-library verifier.
+- `verification_output.txt` — frozen verifier stdout.
+- `PAPER_PLAN.md` — claim-aligned short-note plan.
+- `NARRATIVE_REPORT.md` — temporal/inverse narrative and owner boundary.
+- `CLAIMS_EVIDENCE.md` — frozen claim/evidence and edge-case ledger.
+- `SOURCE_VERIFICATION.md` — primary-source metadata and subtraction record.
+- `BUILD.md` — replay, build, cold-build, PDF, and hash ledger.
+- `SELF_QA.md` — author-side mathematical, source, anonymity, and visual QA.
+- `HOSTILE_REVIEW_A.md`, `HOSTILE_REVIEW_B.md` — two independent hostile
+  review records.
+- `IMPROVEMENT_LOG.md` — exact source and packaging repair record.
+- `SHA256SUMS` — paper-local integrity manifest.
+
+The independent pre-paper gate froze the contract before drafting and is not
+relabelled as either manuscript review.  Review A found one formal-source
+currency repair; Review B accepted every theorem and found one packaging
+inconsistency, now closed.  Neither review changed a theorem, formula, proof,
+example, verifier, claim ceiling, or lifecycle decision.
+
+## Reproduce the verifier
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 verify_p169.py > replay.txt
+cmp replay.txt verification_output.txt
+sha256sum verify_p169.py verification_output.txt
+```
+
+Expected result:
+
+```text
+decision: AUTHOR_ROUND0_PASS
+assertions: 1,217,025
+verifier SHA-256: e4566e997ec656f3eaa41fa4f23953773222293cf23189ebd6c7d9a64aab950b
+transcript SHA-256: e59891873e682c0a271a28197e681f6ba813f394f4104140b02d5eb4e5ce258f
+```
+
+## Rebuild the PDF
+
+```bash
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+```
+
+The final settled PDF SHA-256 is
+`419e91685b4a663fb8ab711abca28517436a2477a92184add424575d8bac77d3`.
+Two Review-B source-only directories reproduced this artifact byte for byte.
+The immutable Round-0 PDF retains SHA-256
+`df03b864b47ae963c467831ba7f5b47231663f1e369facf21eee1d468b17c9c2`.

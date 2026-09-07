@@ -1,0 +1,982 @@
+                                                A Full Computation-relevant Topological
+                                              Dynamics Classification of Elementary Cellular
+                                                                Automata
+arXiv:1107.2080v7 [nlin.CG] 22 Jun 2012
+
+
+
+
+                                                                  Martin Schüle, Ruedi Stoop
+                                                                     Institute of Neuroinformatics,
+                                                        ETH and University of Zurich, 8057 Zurich, Switzerland
+                                                                 Email: schuelem@ini.phys.ethz.ch
+
+
+
+                                                                               Abstract
+                                                    Cellular automata are both computational and dynamical systems.
+                                                We give a complete classification of the dynamic behaviour of elemen-
+                                                tary cellular automata in terms of fundamental dynamic system notions
+                                                such as sensitivity and chaoticity. We conjecture that elementary cellu-
+                                                lar automata capable of carrying out ”complex” computational tasks are
+                                                sensitive but not chaotic, i.e. at the ”edge of chaos”.
+
+
+                                          1     Introduction
+                                          The theory of computation has an exceedingly rich and successful history. Its
+                                          models of computation, typically based on the Turing machine model, allow
+                                          to study the capacities of computational systems in great detail [1, 2]. It is
+                                          however not quite clear how ”computations” that occur in nature can be cast
+                                          in terms of the conventional theory of computation. One would like to ascribe
+                                          in some sense ”computational” capacities to the intricate dynamics of systems
+                                          found in nature, especially to the dynamics of biological systems. To describe
+                                          the dynamic behaviour of physical and biological systems, dynamical system
+                                          theory seems a more appropriate framework. Hence, it is a promising approach
+                                          to study classes of systems or models that comprise in a generic manner both
+                                          computational and dynamical system aspects. A paradigmatic class of such
+                                          models are the cellular automata (CA).
+                                              By definition, CA are discrete dynamical systems acting in a discrete space-
+                                          time. The state of a CA is specified by the states of the individual cells of the
+                                          CA, that is by the values taken from a finite set of states associated with the
+                                          sites of a regular, uniform, infinite lattice. The state of a CA then evolves in
+                                          discrete time steps according to a rule acting synchronously on the states in
+                                          a finite neighbourhood of each cell. Despite the simplicity of these rules, CA
+                                          can exhibit strikingly complex dynamical behaviour. A well-known example
+
+
+                                                                                   1
+of a CA with intricate dynamics is the so-called Game of Life. CA have also
+been extensively applied as models for a wide variety of physical and biological
+processes.
+    While being a class of discrete dynamical systems, CA are, evidently, also
+a mathematical model of massively parallel computation. Remarkably, already
+very simple rules can make a CA computationally universal, i.e. capable of
+carrying out arbitrary computational tasks. It is thus a natural and impor-
+tant question in what regard the computational capacities of CA relate to the
+dynamical system properties of CA.
+    We will contribute to a more profound understanding of CA as both compu-
+tational and dynamical systems by clarifying the dynamical system properties of
+the most popular and best-studied class of CA, the so-called elementary cellular
+automata (ECA). Our approach is based on the symbolic dynamics treatment
+of CA initiated by the seminal paper of Hedlund [3]. The symbolic dynamics
+theory of CA allows to study the dynamical properties of CA by topological
+dynamics methods.
+    Obtaining a dynamical system classification of ECA is part of the long-
+standing problem in CA theory to characterise the ”complexity” seen inherent
+in CA behaviour. In a series of influential papers, Wolfram studied the dynam-
+ical system and statistical properties of CA and devised a classification scheme
+[4, 5, 6]. According to this scheme, CA behaviour can be divided into the fol-
+lowing classes:
+  (W1) almost all initial configurations lead to the same fixed point configuration,
+  (W2) almost all initial configurations lead to a periodic configuration,
+  (W3) almost all initial configurations lead to random looking behaviour,
+  (W4) localized structures with complex behaviour emerge.
+Wolfram’s classification attempt was largely based on simulations of ECA. Since
+his pioneering work many more classification schemes have been proposed, e.g.
+by Li et al. [7] or Culik et al. [8]. It is however still an open problem of CA
+theory to obtain a completely satisfying, formal classification of CA behaviour.
+    We put forward a complete topological dynamics classification of ECA. Such
+a classification uses the fundamental notions of dynamics system theory as e.g.
+sensitivity, chaos, etc. More specifically, it is based on a scheme introduced by
+Gilman [9] and modified by Kurka [10] which proposes four classes: Equicon-
+tinuous CA, CA with some equicontinuous points, sensitive but not positively
+expansive CA and positively expansive CA. Each one-dimensional CA belongs
+to exactly one class, but class membership is generally not decidable [10]. We
+determine for every ECA, as far as we know for the first time, to which class it
+belongs. We also (re-)derive further properties such as surjectivity and chaotic-
+ity of ECA. Taken together this gives a fairly complete picture of the dynamical
+system properties of ECA.
+    The paper is organised as follows. In section 2 we introduce one-dimensional
+CA and ECA formally. In section 3 we give basic notations and definitions of the
+topological dynamics approach to CA. In section 4 we introduce a scheme that
+allows to express ECA rules algebraically. This will prove helpful in sections 5
+and 6, where we will classify ECA in the topologically dynamics sense of Kurka.
+
+
+                                      2
+In section 7 we discuss our results.
+
+
+2     Definition of Elementary Cellular Automata
+We start with the definitions of the basic concepts underlying the theory of
+one-dimensional CA. The configuration of a one-dimensional CA is given by
+the double-infinite sequence x = (xi )i∈Z with xi ∈ S being elements of the
+finite set of states S = {0, 1, ...}. The configuration space X is the set of all
+sequences x, i.e. X = S Z . The CA map F , simply called the CA F , is a map
+F : X → X where the local function is the map f : S 2r+1 → S, r ≥ 1, with
+F (x)i = f (xi−r , ..., xi , ..., xi+r ). The integer r is called the radius of the CA.
+The iteration of the map F acting on an initial configuration x generates the
+orbit x, F (x), F 2 (x), ... of x. The orbits of all configurations x are a discrete
+space-time dynamical system also referred to as CA F . Instances of the system
+can be visualised in so-called space-time patterns.
+    A spatially periodic configuration is a configuration which is invariant under
+translation in space, that is x is periodic if there is q > 1 such that σ q (x) = x
+where σ : X → X is the shift map σ(x)i = xi+1 . A temporally periodic or
+simply periodic configuration x for some CA F is given if F n (x) = x for some
+n > 0. If F (x) = x, x is called a fixed point. A configuration x is called
+eventually periodic, if it evolves into a temporally periodic configuration, i.e. if
+F k+n (x) = F k (x) for some k ≥ 0 and n > 0. If this holds for any configuration
+x, the corresponding CA is called eventually periodic.
+    An elementary cellular automaton (ECA) is an one-dimensional CA with
+two states and “nearest neighbourhood coupling”, that is S = {0, 1} and r = 1.
+There are then 256 different possible local functions f : S 3 → S with F (x)i =
+f (xi−1 , xi , xi+1 ). Local functions are also called rules and usually given in form
+of a rule table. An example is:
+                 111    110    101     100       011   010   001   000
+                  0      1      1       0         1     1     1     0
+
+Every ECA rule is, following Wolfram [4], referred to by the sequence of the
+values of the local function, as given in the rule table, written as a decimal
+number. In the example above one speaks of ECA rule 110, because 01101110
+written as a decimal number equals 110.
+
+
+3     Topological and Symbolic Dynamics Defini-
+      tions and Concepts
+The framework we use to study the dynamical properties of ECA is given by the
+symbolic dynamics approach that views the state space S Z of one-dimensional
+CA as the Cantor space of symbolic sequences. The topology of the Cantor
+
+
+
+
+                                             3
+space is induced by the metric
+                                           +∞
+                                           X   δ(xi , yi )
+                            dC (x, y) =                    ,
+                                          i=−∞
+                                                 2|i|
+                                                       (
+                                                        1, xi 6= yi
+where δ(xi , yi ) is the discrete metric δ(xi , yi ) =              .
+                                                        0, xi = yi
+Under this metric the configuration space S Z is compact, perfect and totally
+disconnected, i.e. a Cantor space [11]. From now on, the configuration space
+S Z endowed with this metric will be referred to as X. The ECA functions F
+are continuous in X, hence (X, F ) is a (discrete) dynamical system.
+    Now we introduce some key concepts of the topological dynamics treatment
+of CA. A configuration x is an equicontinuity point of CA F if
+
+       ∀ > 0, ∃δ > 0, ∀y ∈ X : d(x, y) < δ, ∀n ≥ 0 : d(F n (x), F n (y)) < .   (1)
+
+If all configurations x ∈ X are equicontinuity points then the CA is called
+equicontinuous. If there is at least one equicontinuity point, the CA is almost
+equicontinuous.
+    A CA is sensitive (to initial conditions) if
+
+ ∃ > 0, ∀x ∈ X, ∀δ > 0, ∃y ∈ X : d(x, y) < δ, ∃n ≥ 0 : d(F n (x), F n (y)) ≥ . (2)
+
+    A CA is positively expansive if
+
+               ∃ > 0, ∀x 6= y ∈ X, ∃n ≥ 0 : d(F n (x), F n (y)) ≥ .            (3)
+
+Positively expansive CA are sensitive [11].
+    CA as dynamical systems can be classified according to a classification in-
+troduced by Gilman [9] and modified by Kurka [10]. Every one-dimensional CA
+falls exactly in one of the following classes [10]:
+  (K1) equicontinuous CA,
+  (K2) almost equicontinuous but not equicontinuous CA,
+  (K3) sensitive but not positively expansive CA,
+  (K4) positively expansive CA.
+    It has been shown that for one-dimensional CA it is not decidable if a given
+CA belongs to class (K1), (K2) or (K3)∪(K4), whereas it is open whether the
+class (K4) is decidable [12]. We will show that, in the case of ECA, it can be
+determined of each given ECA in which class it belongs.
+
+
+4     Algebraic Expressions of Elementary Cellular
+      Automata Rules
+Here, we devise an algebraic expression scheme for ECA. The main idea is to
+derive in a consistent way algebraic expressions for the local ECA rules from a
+
+
+                                           4
+Boolean function form of ECA rules. The algebraic expressions of ECA rules
+are of use in the next sections. Algebraic expressions of specific ECA rules have
+been given before, usually of additive ECA rules (e.g. [13]), for example rule 90
+is usually given as F (x)i = xi−1 + xi+1 mod 2 [11]. Other approaches, e.g. by
+Chua [14], do not yield the same simple polynomial forms as proposed below.
+The approach taken here was first proposed by the authors in [15]. As far as
+we know, it was the first time that simple, algebraic expressions for all ECA
+rules were given. Note that Betel and Flocchini used a similar approach in their
+study on the relationship between Boolean and “fuzzy” cellular automata [16].
+    The rule tables which define the ECA rules can be regarded as truth tables
+familiar from propositional logic. Any ECA rule hence corresponds to a Boolean
+function, which can always be expressed as a disjunctive normal form (DNF) (or
+a conjunctive normal form respectively) [17]. The DNF of a Boolean function
+is a disjunction of clauses, where a clause is a conjunction of Boolean variables.
+Any ECA rule can thus be expressed as
+                                      1
+                                    _ ^
+                                                 m
+                                             (¬)Xi+j                                   (4)
+                                    m j=−1
+
+where Xi+j are Boolean variables associated with the states of the cells in the
+neighbourhood of an ECA. For example the DNF expression of ECA rule 110
+reads to:
+(Xi−1 ∧ Xi ∧ ¬Xi+1 ) ∨ (Xi−1 ∧ ¬Xi ∧ Xi+1 ) ∨ (¬Xi−1 ∧ Xi ∧ Xi+1 ) ∨ (¬Xi−1 ∧
+Xi ∧ ¬Xi+1 ) ∨ (¬Xi−1 ∧ ¬Xi ∧ Xi+1 ).
+The representation of ECA rules in DNF is well known and has e.g. be studied
+by Wolfram [18].
+    We however proceed now further by expressing the Boolean operations (∧, ∨, ¬)
+arithmetically as
+                                  x ∧ y = xy                                           (5)
+                                  x ∨ y = x + y − xy
+                                    ¬x = 1 − x.
+By these operations we attain from the Boolean algebra (A, ∧, ∨, ¬, 1, 0) the
+Boolean ring (R, +, −, ·, 1, 0). We found it convenient to express the Boolean
+operations as defined above instead of using the usual (mod 2) operations.
+    Replacing the Boolean operations in the DNF expressions of ECA rules with
+their arithmetic counterparts, we obtain for all ECA algebraic expressions, that
+is Boolean polynomials
+
+                                       X
+                                             pα xα
+                                         α
+
+of the form
+α0 + α1 xi−1 + α2 xi + α3 xi+1 + α4 xi−1 xi + α5 xi xi+1 + α6 xi−1 xi+1 + α7 xi−1 xi xi+1 .
+                                                                                        (6)
+
+
+                                             5
+ The coefficients αi ∈ Z in (6) completely determine the ECA rules.
+    As examples we list here a few algebraic expressions of some interesting ECA
+rules.
+
+Rule 30: F (x)i = xi−1 + xi + xi+1 − 2xi−1 xi − xi xi+1 − 2xi−1 xi+1 + 2xi−1 xi xi+1
+Rule 90: F (x)i = xi−1 + xi+1 − 2xi−1 xi+1
+Rule 108: F (x)i = xi + xi−1 xi+1 − 2xi−1 xi xi+1
+Rule 110: F (x)i = xi + xi+1 − xi xi+1 − xi−1 xi xi+1
+Rule 184: F (x)i = xi−1 − xi−1 xi + xi xi+1
+Rule 232: F (x)i = xi−1 xi + xi xi+1 + xi−1 xi+1 − 2xi−1 xi xi+1
+
+    Note how simple for example the algebraic expression of the ”complex” ECA
+rule 110 is.
+    As is well known the ECA rule space can be partitioned into 88 equivalence
+classes, because ECA rules are equivalent under the symmetry operations of
+exchanging left/right and 0/1 complementation. For the local function f (x)i =
+f (xi−1 , xi , xi+1 ) these symmetry operations are given by T lef t/right (f (x)i ) =
+f (xi+1 , xi , xi−1 ) and T 0/1 (f (x)i ) = 1 − f (1 − xi−1 , 1 − xi , 1 − xi+1 ).
+    For example, for ECA rule 110 the equivalent rules are:
+
+Rule 110: F (x)i = xi + xi+1 − xi xi+1 − xi−1 xi xi+1
+Rule 137: F (x)i = 1−xi−1 −xi −xi+1 +xi−1 xi +2xi xi+1 +xi−1 xi+1 −xi−1 xi xi+1
+Rule 124: F (x)i = xi−1 + xi − xi−1 xi − xi−1 xi xi+1
+Rule 193: F (x)i = 1−xi−1 −xi −xi+1 +2xi−1 xi +xi xi+1 +xi−1 xi+1 −xi−1 xi xi+1
+
+   From now on we will refer to such a group of equivalent ECA rules solely by
+their lowest decimal ECA number. For example, by referring to ECA rule 110
+we actually refer to the four rules {110, 137, 124, 193}.
+   Note that the approach developed here can be extended in various ways, for
+example to one-dimensional CA with state space {0, 1} but larger neighbour-
+hood or to two-dimensional CA with state space {0, 1}, etc.
+
+
+5     Classification of Elementary Cellular Automata
+We will now classify ECA in regard to their topological dynamics properties,
+that is according to the scheme introduced by Gilman [9] and modified by Kurka
+[10].
+    First, we need some more symbolic dynamics definitions and notions. A
+word u is a finite symbolic sequence u = u0 ...ul−1 , with ui ∈ S, where S is a
+finite alphabet, e.g. in the case of ECA the state set {0, 1}. The length of u is
+denoted by l = |u|. The set of words of S of length l is denoted by S l , the set of
+all words of S with l > 0 is S + . The cylinder set [u]0 of u consists of all points
+x ∈ S Z whose initial part is u, i.e. [u]0 = {x ∈ S Z : x[0,l) = u}.
+    A word u ∈ S + with |u| ≥ m, m > 0, is m-blocking for an one-dimensional
+CA F , if there exists an offset q ∈ [0, |u| − m] such that
+
+
+                                          6
+               ∀x, y ∈ [u]0 , ∀n ≥ 0, F n (x)[q,q+m) = F n (y)[q,q+m) .
+See Figure 1. It has been shown that one-dimensional CA, and therefore ECA,
+are either sensitive or almost equicontinuous, the latter being equivalent to
+having a blocking word.
+
+
+
+
+                              Figure 1: Blocking word.
+
+
+
+Proposition 1 (Kurka [11]). For any one-dimensional CA F with radius r > 0
+the following conditions are equivalent.
+ (1) F is not sensitive.
+ (2) F has an r-blocking word.
+ (3) F is almost equicontinuous.
+
+    If a configuration x contains a m-blocking word u, then the sequence x[q,q+m) ,
+i.e. the states of the cells in the segment [q, q + m), are at all times indepen-
+dent of the initial states outside of the blocking word u. Hence, the following
+corollary holds.
+Corollary 2. For any one-dimensional CA F with radius r > 0 the following
+conditions are equivalent.
+ (1) F has a m-blocking word with m ≥ r.
+ (2) F has a word u ∈ S + with |u| ≥ m, m > 0 and an offset q ∈ [0, |u| − m]
+     such that ∀x ∈ [u]0 the sequence x[q,q+m) is eventually temporally periodic.
+
+Proof. (1) ⇒ (2): Denote the sequence x[q,q+m) of a blocking word u that is at all
+times independent of the initial states outside of u by v. The configuration x =
+(u)∞ is spatially periodic and hence eventually temporally periodic. Because
+the sequence v is independent of the states of the cells outside of u, the sequence
+v is also eventually temporally periodic.
+(2) ⇒ (1): The condition (2) says that for all x ∈ [u]0 there is t ≥ 0 and p > 0
+
+
+                                          7
+such that F t+p (x)[q,q+m) = F t (y)[q,q+m) . Thus, for all x, y ∈ [u]0 and all n ≥ 0
+the sequence F n (x)[q,q+m) = F n (y)[q,q+m) must be independent of the initial
+states outside of u, hence the word u is m-blocking.
+   Now, we will look systematically for blocking words for ECA. We know by
+proposition 1 that whenever a blocking word can be found, the corresponding
+ECA is almost equicontinuous. By corollary 2, we know that this corresponds
+to finding a word u that contains a sequence that is eventually temporally
+periodic, independent of the initial states outside of u. As it turns out, we
+can thereby effectively determine all almost equicontinuous ECA, because any
+almost equicontinuous ECA corresponds to a blocking word u for which the
+length l = |u| is bounded.
+
+Proposition 3. Each almost equicontinuous ECA has at least one blocking
+word of length l ≤ 4.
+Proof. In the following, we look for blocking words, starting with the small-
+est possible length l = 1 and then successively for words of greater length (for
+a visualisation of the definition of a blocking word see again Figure 1). If a
+blocking word can be found, one or several almost equicontinuous ECA cor-
+respond to it. The ECA rules are specified by a rule table which we denote
+by (t0 , t1 , t2 , t3 , t4 , t5 , t6 , t7 ). For example, ECA rule 110 is given by the table
+(0, 1, 1, 0, 1, 1, 1, 0). If an entry in the rule table is left unspecified, the entry
+can take on either of the two values 0 or 1, e.g. the table (0, 1, 1, 0, 1, 1, 1, t7 )
+refers to the two ECA rules 110 and 111. If a blocking word can be found, we
+put the corresponding ECA rule table in a list. A blocking word u and the
+corresponding rule table is denoted by tu,p = (t0 , t1 , t2 , t3 , t4 , t5 , t6 , t7 ), where p
+is the period with which the eventually periodic sequence in the word u (i.e.
+the sequence x[q,q+m) referred to in corollary 2) is repeated. For example,
+t00,1 = (t0 , t1 , t2 , 0, t4 , t5 , 0, 0) refers to the blocking word 00 of period p = 1
+that generates 25 ECA rules, as denoted by the corresponding rule table. If a
+blocking word is found that corresponds to ECA rules which are generated by
+a rule table obtained by a blocking word already in the list (hence of smaller
+length), the word and its corresponding rule table is not listed. We also do not
+list blocking words and their corresponding rule tables if they generate ECA
+rules that are equivalent to ECA rules generated by a blocking word already in
+the list.
+     Let us further assume the following notation: The variable ci always denotes
+the states of cells i of a blocking word u that are at all times independent of
+the initial states of the cells outside of the blocking word u. The variable xi on
+the other hand denotes the states of cells i that are in principle influenceable
+by the initial states of the cells outside of u. The state xi of such a cell i
+is left undetermined, i.e. the value can either be 0 or 1. If it is known for
+configurations x, y ∈ [u]0 that the states xi and yi of some cell i differ, we write
+                                                   x̄−1 c0 x̄1
+x̄i . For example, the “scenario”                               refers to two configurations
+                                                   x−1 c0 x1
+x, y ∈ [u]0 that share the blocking word u = c0 of length l = 1 that is repeated
+
+
+                                              8
+with period p = 1. At the boundaries of the blocking word u, here at the cells
+i = −1 and i = 1, we can assume that the configurations x and y differ, which is
+denoted by x̄−i and x̄i , whereas in the next time step this may not necessarily
+be the case anymore (at the cells i = −1 and i = 1).
+     The proof has two parts. In part A, we determine all blocking words of
+length l ≤ 4. In part B, we show that for any blocking word u of length l > 4
+there is a corresponding blocking word of length l ≤ 4.
+     Part A: Let us look at the cases (a) l = 1, (b) l = 2, (c) l = 3 and (d) l = 4,
+where l, as said, denotes the length of a blocking word u.
+                                                                                      x̄      c x̄1
+     (a) With l = 1, the following scenarios are possible: (1) −1 0                                      ,
+                                                                                      x−1 c0 x1
+       x̄        c x̄1                x̄     c x̄1               x̄        c x̄1           x̄      c x̄1
+(2) −1 0                     , (3) −1 0                , (4) −1 0                  , (5) −1 00                 ,
+         c0 c0 x1                     x−1 c0 c0                   c0 c0 c0                 x−1 c0 x1
+       x̄         c x̄1                x̄     c x̄1                      x̄     c x̄1
+(6) 0−1 00                    , (7) −1 00                and (8) 0−1 00                  , where at least
+        c−1 c0 x1                      x−1 c0 c01                        c−1 c0 c01
+                   0
+for one i, ci 6= ci . Note that there are further scenarios possible that how-
+ever do not yield further valid rule tables and are not listed here. Scenario
+(1) yields the rule table t1,1 = (1, 1, t2 , t3 , 1, 1, t6 , t7 ) (and the table t0,1 =
+(t0 , t1 , 0, 0, t4 , t5 , 0, 0), but as said, tables that generate ECA rules equivalent
+to already generated rules are not listed). Scenarios (2), (3) and (4) do not
+yield rule tables that generate ECA rules not already listed. For scenario (5),
+                                                                x̄−1 c0 x̄1                x̄−1 c0 x̄1
+two cases have to be further distinguished: x−1 c00 x1 and x−1 c00 x1 ,
+                                                                           c00                     c0
+            0
+where c0 6= c0 . The first case generates no new ECA rules. The second case
+yields the rule table t1,2 = (0, 0, 1, 1, 0, 0, 1, 1). Scenarios (6) and (7) yield rule
+tables already listed. Scenario (8) yields t1,2 = (0, 0, 0, 0, 0, 0, 0, 1).
+     (b) For l = 2, there are basically the same scenarios possible, in analogy to
+case (a). However, for reasons of space, we cannot discuss them here in detail
+and, from now on, only list the scenarios that effectively yield blocking words
+                                                                                      x̄      c c x̄2
+that generate rule tables not yet obtained. These are: (1) −1 0 1
+                                                                                      x−1 c0 c1 x2
+               x̄−1 c0 c1 x̄2
+and (2)                                   , where c0i 6= ci . Scenarios (1) and (2) yield the
+               x−1 c00 c01 x2
+following blocking words and rule tables: t00,1 = (t0 , t1 , t2 , 0, t4 , t5 , 0, 0), t01,1 =
+(t0 , t1 , 0, t3 , 1, 1, 0, t7 ), t10,1 = (t0 , 1, 0, 0, t4 , 1, t6 , t7 ) and t00,2 = (0, 0, t2 , 1, 0, t5 , 1, 1),
+t10,2 = (t0 , 0, 1, 1, 0, 0, 1, t7 ).
+     (c) For l = 3, there are basically again scenarios in analogy to the cases
+(a) and (b) possible. The scenarios that effectively generate rule tables not
+                                                                               x̄−1 c0 c1 c2 x̄3
+                                   x̄      c c c x̄3
+listed before are: (1) −1 0 1 2                                     and (2) x−1 x̄0 c01 x̄2 x3 ,
+                                   x−1 c0 c1 c2 x3
+                                                                                       c0 c1 c2
+            0
+where c1 6= c1 . Scenario (1) yields the blocking words and rule tables t010,1 =
+(t0 , t1 , 0, 0, t4 , 1, 0, t7 ) and t101,1 = (t0 , 1, 0, t3 , 1, 1, t6 , t7 ). Scenario (2) yields
+
+
+
+
+                                                      9
+                                                                 x̄−1    c0    c1   c2    x̄3
+t000,2 = (0, 0, t2 , 0, 0, 0, 0, 1). Note that e.g. the scenario x−1     x̄0   c1   x̄2   x3
+                                                                         c0    c1   c2
+does not generate new rule tables.
+    (d) For l = 4, there are basically again scenarios in analogy to the cases (a),
+(b) and (c) possible. Effectively, the only scenario that leads to a blocking word
+                                                     x̄−1 c0 c1 c2 c3 x̄4
+generating a rule table not yet listed is                                       , yielding
+                                                     x−1 c0 c1 c2 c3 x4
+the rule table t0110,1 = (t0 , 1, 0, 0, 1, t5 , 0, t7 ). Note again that e.g. the scenario
+ x̄−1 c0 c1 c2 c3 x̄4
+ x−1 x̄0 c01 c02 x̄3 x4 , where at least for one i c0i 6= ci , does not lead to
+        c0 c1 c2 c3
+new rule tables.
+    With this we conclude Part A. Let us summarise the blocking words and the
+corresponding rule tables found so far:
+                              t0,1 = (t0 , t1 , 0, 0, t4 , t5 , 0, 0)
+                                t1,2 = (0, 0, 1, 1, 0, 0, 1, 1)
+                                t1,2 = (0, 0, 0, 0, 0, 0, 0, 1)
+                            t00,1 = (t0 , t1 , t2 , 0, t4 , t5 , 0, 0)
+                             t01,1 = (t0 , t1 , 0, t3 , 1, 1, 0, t7 )
+                             t10,1 = (t0 , 1, 0, 0, t4 , 1, t6 , t7 )
+                              t00,2 = (0, 0, t2 , 1, 0, t5 , 1, 1)
+                              t01,2 = (t0 , 0, 1, 1, 0, 0, 1, t7 )
+                            t010,1 = (t0 , t1 , 0, 0, t4 , 1, 0, t7 )
+                            t101,1 = (t0 , 1, 0, t3 , 1, 1, t6 , t7 )
+                              t000,2 = (0, 0, t2 , 0, 0, 0, 0, 1)
+                            t0110,1 = (t0 , 1, 0, 0, 1, t5 , 0, t7 )
+    Part B: In the general case, i.e. for l > 4, we can conclude in analogy to the
+cases already considered, i.e. the cases with l ≤ 4, that the following scenarios
+could
+     possibly lead to new blocking words:                                                          
+      x̄−1 c0 c1 ... cl−2 cl−1 x̄l                      x̄−1 c0 c1 ... cl−2 cl−1                x̄l
+(1)                                           , (2)                                                       ,
+      x−1 c0 c1 ... cl−2 cl−1 xl                         c−1 c0 c1 ... cl−2 cl−1                cl
+                                                                           
+       x̄−1 c0 c1       ...                          ...     cl−2 cl−1 x̄l
+                                  ...                                      
+(3)                                                                        ,
+                     x̄q−1 cq ... cq+m−1 x̄q+m                             
+                     x q−1   c q  ...  cq+m−1     x q+m
+                                                                            
+       x̄−1 c0 c1       ...                          ...     cl−2 cl−1 x̄l
+                                  ...                                      
+(4)                                                                        ,
+                     x̄q−1 cq ... cq+m−1 x̄q+m                             
+                      cq−1 cq ... cq+m−1 cq+m
+                                                                                                   
+      x̄−1 c0 c1 ... cl−2 cl−1 x̄l                      x̄−1 c0 c1 ... cl−2 cl−1                x̄l
+(5)                                           , (6)                                                       ,
+      x−1 c00 c01 ... c0l−2 c0l−1 xl                     c0−1 c00 c01 ... c0l−2 c0l−1           c0l
+
+
+
+
+                                               10
+                                                                                             
+        x̄−1    c0   c1     ...                              ...          cl−2   cl−1   x̄l
+                                        ...                                                  
+(7)                                                                                          ,
+                         x̄q−1 cq       ... cq+m−1         x̄q+m                             
+                          xq−1 c0q       ... c0q+m−1        xq+m
+                                                                                                        
+        x̄−1    c0     c1    ...                                    ...          cl−2   cl−1       x̄l
+    
+                                          ...                                                 
+                                                                                               
+(8)                    x̄q−1 cq cq+1 ... cq+m−2 cq+m−1 x̄q+m                                  ,
+                                     0         0
+                                                                                              
+                               x̄q cq+1 ... cq+m−2 x̄q+m−1                                    
+                                cq cq+1 ... cq+m−2 cq+m−1
+with m ≥ 1 and where at least for one i, c0i 6= ci .
+    Case (1) yields blocking words already listed, because for l > 4 the conditions
+to be satisfied in order to obtain a blocking word u are entailed in the conditions
+to obtain a blocking word u with l ≤ 4. The same reasoning applies to cases (2),
+(3) and (4). The basic reason that such a reduction is possible is due to the fact
+that the conditions to be satisfied in order to obtain a blocking word depend on
+the values of the boundary cells, here the values x̄−1 and x̄l (respectively the
+values x̄q−1 and x̄q+m in cases (3) and (4)), but not on the values of the cells to
+the left (of i = −1) and right (of i = l) of the boundary cells, as can be checked
+with the scenarios treated in Part A.
+    Let us then look closer at case (5). We will show that if there is a blocking
+word c1 c2 ...cl−2 cl−1 , the word is repeated with period p = 2, because if the word
+is blocking, the word at the next time step (in case (5)) must be c̄1 c̄2 ...c̄l−2 c̄l−1 .
+The bar signifies that the state ci of the cell i must change, i.e. c̄i = (1 − ci ).
+Without loss of generality, we can consider only the 24 boundary conditions for
+blocking words at successive time steps. That is, given the word c1 c2 ...cl−2 cl−1 ,
+we consider at the next time-step all the (24 − 2) possible cases: c1 c2 ...cl−2 c̄l−1 ,
+c1 c2 ...c̄l−2 cl−1 , etc., excluding the two cases c1 c2 ...cl−2 cl−1 and c̄1 c̄2 ...c̄l−2 c̄l−1 .
+It suffices to consider the case c1 c2 ...cl−2 c̄l−1 . The other cases can be dealt
+with analogously. The temporal evolution of the ECA generates in this case the
+following scheme:
+                           x̄−1   c0     c1     ... cl−2      cl−1         x̄l
+                           x−1    c0     c1     ... cl−2      c̄l−1        xl
+                           x−1    c0     c1     ... c̄l−2     c2l−1        xl
+                                                ...
+                           x−1    c0     c̄1    ... cl−2
+                                                      l−2     cl−2
+                                                               l−1         xl
+                           x−1    c̄0   cl−1
+                                         1      ... cl−1
+                                                      l−2     cl−1
+                                                               l−1         xl
+The superscript denotes the time-step n. The third, fifth and sixth line are due
+to the fact that if the state of e.g. the cell l − 2 at time step n = 2 would not
+change, one would obtain a blocking word of shorter length (l − 1). By checking
+all 24 possible values for the boundary states of the initial word c1 c2 ...cl−2 cl−1 it
+can be shown that the above scheme cannot be satisfied. Thus, any initial word
+c1 c2 ...cl−2 cl−1 evolves in the next time step into either the word c1 c2 ...cl−2 cl−1
+or the word c̄1 c̄2 ...c̄l−2 c̄l−1 . In the first case, a blocking word of period p = 1
+is generated, in the second case, i.e. for p = 2, one can find a blocking word of
+
+
+
+                                                11
+length l = 2, as can easily be shown.
+    The case (6) can be reduced to the case already treated under (a (8)) in Part
+A, the case (7) to the case (5) and the case (8) again to the case treated under
+(c (2)) (or the example in (d) respectively) in Part A.
+    With this we conclude our analysis. In Part A, we have identified all blocking
+words of length l ≤ 4. For l ≥ 2, we omitted, for reasons of space, the presenta-
+tion of the cases that do not lead to blocking words or to blocking words already
+identified. In Part B, we have concluded from the cases for l ≤ 4 on the general
+form of the scenarios that could possibly lead to blocking words for l > 4. These
+general scenarios could then be reduced to the scenarios obtained for l ≤ 4. One
+case (case (5)) required a separate treatment and was analysed by means of an
+example.
+    To arrive at a complete list of blocking words for l ≤ 4 and to exclude
+additional blocking words for l > 4, great care and efforts have been invested.
+Moreover, the completeness of the list was corroborated by extensively sampling
+the space of initial configurations, which yielded no additional blocking words.
+An explicit check of the completeness of the cases considered in our analysis
+would require the help of a computer, performing the analysis presented above
+on a case-by-case basis. Alternatively, to demonstrate the impossibility of addi-
+tional blocking words, the systems of equations generated from the conditions
+for blocking words and the algebraic expressions of ECA rules could be used,
+systematically evaluated for each single case.
+
+
+    The proof of proposition 3 allows to give, for ECA, a stronger version of
+proposition 1. Let us call a word u of length l invariant for an ECA F , if for
+all x ∈ [u]0 , there is a p > 0 such that F p (x)[0,l) = x[0,l) .
+Corollary 4. An ECA F is almost equicontinuous if and only if F has an
+invariant word.
+Proof. See the proof of proposition 3.
+    Proposition 3 (or corollary 4 respectively) allows to determine the almost
+equicontinuity of all ECA rules. The following list gives the invariant words
+of shortest length and the almost equicontinuous ECA rules corresponding to
+them.
+Corollary 5. Invariant words of period p = 1 and corresponding ECA rules:
+0: 0, 4, 8, 12, 72, 76, 128, 132, 136, 140, 200, 204.
+00: 32, 36, 40, 44, 104, 108, 160, 164, 168, 172, 232.
+01: 13, 28, 29, 77, 156.
+10: 78.
+010: 5.
+101: 94.
+0110: 73.
+Invariant words of period p = 2 and corresponding ECA rules:
+1: 1.
+
+
+                                         12
+0: 51.
+00: 19, 23.
+01: 50, 178.
+000: 33.
+   Conversely, we now also know the sensitive ECA rules.
+
+Proposition 6. The following rules are sensitive:
+2, 3, 6, 7, 9, 10, 11, 14, 15, 18, 22, 24, 25, 26, 27, 30, 34, 35, 37, 38, 41, 42,
+43, 45, 46, 54, 56, 57, 58, 60, 62, 74, 90, 105, 106, 110, 122, 126, 130, 134,
+138, 142, 146, 150, 152, 154, 162, 170, 184.
+
+Proof. Follows from Proposition 1, 3 and corollary 5.
+    The class of sensitive ECA is large, because in the Cantor space left- or
+right-shifting rules are sensitive. We return to this point later.
+    From the almost equicontinuous ECA rules, we can further specify the
+equicontinuous ones. We use the following lemma.
+
+Lemma 7 (Kurka [11]). A one-dimensional almost equicontinuous CA F is
+either equicontinuous or almost equicontinuous but not equicontinuous.
+It is equicontinuous if and only if:
+ (1) There exists a preperiod m ≥ 0 and a period p > 0, such that F m+p = F m .
+It is almost equicontinuous but not equicontinuous if and only if:
+
+ (2) There is at least one point x ∈ X for which the almost equicontinuous CA
+     F is not equicontinuous.
+
+Proposition 8. The following rules are equicontinuous:
+0, 1, 4, 5, 8, 12, 19, 29, 36, 51, 72, 76, 108, 200, 204.
+Proof. The proof is by showing that condition (1) of Lemma 7 holds. We only
+give an example for a specific ECA rule.
+     Rule 72 is equicontinuous with preperiod m = 2 and period p = 1, because,
+by using the algebraic expression for the local function, we obtain
+F (x)i = xi−1 xi + xi xi+1 − 2xi−1 xi xi+1
+F 2 (x)i = xi−1 xi −xi−2 xi−1 xi +xi xi+1 −2xi−1 xi xi+1 +xi−2 xi−1 xi xi+1 −xi xi+1 xi+2 +
+xi−1 xi xi+1 xi+2
+F 3 (x)i = xi−1 xi −xi−2 xi−1 xi +xi xi+1 −2xi−1 xi xi+1 +xi−2 xi−1 xi xi+1 −xi xi+1 xi+2 +
+xi−1 xi xi+1 xi+2 .
+Hence, F 3 (x)i = F 2 (x)i , ∀i ∈ Z. Thus, F 3 = F 2 .
+
+Proposition 9. The following rules are almost equicontinuous but not equicon-
+tinuous:
+13, 23, 28, 32, 33, 40, 44, 50, 73, 77, 78, 94, 104, 128, 132, 136, 140, 156,
+160, 164, 168, 172, 178, 232.
+
+
+
+                                          13
+Proof. The proof is by showing that condition (2) of Lemma 7 holds. We only
+give an example for a specific ECA rule.
+    ECA rule 104 is almost equicontinuous but not equicontinuous, because
+(10)∞ is not an equicontinuous point.
+Assume the configuration x = (10)∞ and an integer q > 0 such that
+                  ∀y ∈ X, (x[−q,q] = y[−q,q] ) ⇒ (d(x, y) < 2−q ).
+Assume that y differs from x at cells (−q − 1) and (q + 1), that is y−q−1 =
+1 − x−q−1 and yq+1 = 1 − xq+1 . Then, as can easily be shown by using the
+algebraic expression of ECA rule 104,
+                            d(F n (x), F n (y)) < 2−(q−n)
+for all n ≥ 0. Hence, ECA 104 is not equicontinuous at the point x = (10)∞ .
+    From the sensitive ECA, we can distinguish further the positively expansive
+ECA.
+    First, we need the definition of permutivity for ECA [19]. An ECA F is
+left-permutive if (∀u ∈ S 2 ), (∀b ∈ S), (∃!a ∈ S): f (au) = b. It is right-permutive
+if (∀u ∈ S 2 ), (∀b ∈ S), (∃!a ∈ S): f (ua) = b. The ECA F is permutive if it is
+either left-permutive or right-permutive.
+    Then, we need the following lemma.
+Lemma 10 (Kurka [11]). A one-dimensional CA F is positively expansive if
+the following condition holds.
+ (1) The CA is both left- and right-permutive.
+A one-dimensional sensitive CA F is not positively expansive if and only if the
+following condition holds.
+ (2) There is no  > 0 such that for all x 6= y ∈ X there is n ≥ 0 with
+     d(F n (x), F n (y)) ≥ .
+
+Proposition 11. The following ECA rules are sensitive but not positively ex-
+pansive:
+2, 3, 6, 7, 9, 10, 11, 14, 15, 18, 22, 24, 25, 26, 27, 30, 34, 35, 37, 38, 41, 42,
+43, 45, 46, 54, 56, 57, 58, 60, 62, 74, 106, 110, 122, 126, 130, 134, 138, 142,
+146, 152, 154, 162, 170, 184.
+Proof. The proof is by showing that condition (2) of Lemma 10 holds. We only
+give an example for a specific ECA rule.
+ECA rule 110 is sensitive but not positively expansive. Assume the expansivity
+constant  = 2−m , then
+               ∀x 6= y ∈ X ⇒ ∃n ≥ 0, F n (x)[−m,m] 6= F n (y)[−m,m]              (7)
+must hold. Assume the configuration x = (00110111110001)∞ and an integer
+q > 0 such that 14q > m. Then, for a configuration y ∈ X that differs from x
+at the cells 14q, 14q + 1, 14q + 2, (7) does not hold.
+
+
+                                         14
+Proposition 12. The following ECA rules are positively expansive:
+90, 105, 150.
+Proof. For ECA rules 90, 105 and 150 condition (1) of Lemma 10 holds.
+    For ECA left- and right-permutivity is equivalent to positive expansivity.
+
+Proposition 13. ECA are positively expansive if and only if they are both left-
+and right-permutive.
+Proof. Follows from Proposition 6, 11 and 12.
+    Note that Proposition 13 does not hold generally for one-dimensional CA
+[11].
+    We summarize the findings of this section in the following table, which shows
+all ECA rules according to whether they have the property of equicontinuity,
+almost equicontinuity, sensitivity or positively expansivity.
+
+         almost equicontinuous                                   sensitive
+ equicontinuous                                                       positively expansive
+   0, 1, 4, 5, 8,     13, 23, 28, 32,             2, 3, 6, 7, 9,           90, 105, 150
+  12, 19, 29, 36,   33, 40, 44, 50, 73,          10, 11, 14, 15,
+ 51, 72, 76, 108,    77, 78, 94, 104,            18, 22, 24, 25,
+     200, 204      128, 132, 136, 140,             26, 27, 30,
+                   156, 160, 164, 168,           34, 35, 37, 38,
+                      172, 178, 232              41, 42, 43, 45,
+                                                 46, 54, 56, 57,
+                                                 58, 60, 62, 74,
+                                               106, 110, 126, 130,
+                                               134, 138, 142, 152,
+                                               154, 162, 170, 184
+
+
+6     Classification of Sensitive Elementary Cellu-
+      lar Automata
+The classification of the degree of ”complexity” manifest in the space-time pat-
+terns generated by ECA rules has been in the center of CA research for many
+years. It is intuitively clear that the sensitivity property is a source of the ap-
+parent ”complexity” of ECA behaviour. It would therefore be beneficial to have
+a finer classification of the sensitive ECA rules.
+    We classify sensitive rules further according to whether they are eventually
+weakly periodic and/or surjective. The surjectivity property is actually sufficient
+to determine which ECA are chaotic (in the sense of Devaney [20]). This fact has
+already been demonstrated by Cattaneo et al. [21]. For the sake of completeness,
+we rederive the result here and propose the further subclass of the “eventually
+weakly periodic” and sensitive ECA.
+
+
+                                          15
+    A configuration x is called weakly periodic, if there is q ∈ Z and p > 0 such
+that F p σ q (x) = x [19]. We define a configuration x as eventually weakly periodic
+if there is q ∈ Z and n, p > 0 such that F n+p σ q (x) = F n (x). We call an ECA
+eventually weakly periodic, if the ECA is not eventually periodic, but for all
+configurations x eventually weakly periodic.
+
+Proposition 14. The following sensitive ECA rules are eventually weakly pe-
+riodic:
+2, 3, 10, 11, 15, 24, 34, 38, 42, 46, 138, 170.
+Proof. We demonstrate the proof by an example for a specific ECA rule.
+   Employing the algebraic expression for ECA rule 10, it can easily be shown
+that F 2 σ −1 (x) = F (x) for all configurations x.
+Hence, ECA rule 10 is eventually weakly periodic with n = 1, p = 1 and q =
+−1.
+    The classification of eventually weakly periodic ECA maps is not complete.
+There might be ECA which are eventually weakly periodic, but with such large
+n or p that prevents calculating the forward orbits as easily as in the proof of
+Proposition 14.
+    We now look at the chaoticity of ECA maps. According to the often used
+definition of (topological) chaos by Devaney [20], a map F : X → X is chaotic
+if F is sensitive, transitive and if the set of periodic points of F is dense in X.
+    First, we study the surjectivity of ECA maps. This is actually sufficient to
+establish transitivity of F and the density of periodic points in X under F .
+    A CA is surjective if and only if it has no Garden-of-Eden configurations,
+that is configurations which have no pre-image. A necessary (but not sufficient)
+condition for surjectivity is that the local rule is balanced [11]. For ECA rules
+this means that the local rule table contains 4 zeros and 4 ones. Further, any
+permutive CA is surjective [11].
+
+Proposition 15. The following ECA rules are surjective:
+15, 30, 45, 51, 60, 90, 105, 106, 150, 154, 170, 204.
+Proof. Apart from rule 51 and rule 204, the above listed rules are permutive,
+hence surjective. Rule 51 and rule 204 are surjective, because they are, trivially,
+bijective.
+For the ECA rules that are not listed, but satisfy the balance condition, it can
+be shown that they possess Garden-of-Eden configurations. For example, ECA
+rule 184 satisfies the balance condition, nevertheless it is not surjective, because
+any configuration containing pattern (1100) is a Garden-of-Eden as can easily
+be shown.
+
+   Next, we show that for ECA transitivity is equivalent to permutivity. An
+one-dimensional CA F is transitive if for any nonempty open sets, U, V ⊆ X
+there exists n > 0 with F n (U ) ∩ V 6= ∅.
+Proposition 16. A ECA is transitive if and only if it is permutive.
+
+
+                                        16
+Proof. Transitivity of one-dimensional CA implies its surjectivity and sensitiv-
+ity [11]. From Proposition 6 and 15 we gain that ECA that are surjective and
+sensitive are permutive. For permutive ECA either of the following two condi-
+tion holds:
+(1) for all open sets U ∈ X there is n > 0 such that F n (U ) covers all of X,
+(2) the value of the local function f (xi−1 , xi , xi+1 ) is determined by either the
+value xi−1 or xi+1 .
+If (2) does not hold, there is n > 0 such that F n (U ) covers, due to the permutiv-
+ity of F , all of X. Hence, F is in this case transitive. If (2) does hold, the local
+function f is given by the rule tables (1, 0, 1, 0, 1, 0, 1, 0) or (0, 0, 0, 0, 1, 1, 1, 1),
+i.e. the rules 170 or 15 (equivalent rules included). Rule 170 (15) is the shift-map
+F (x)i = xi+1 (for ECA rule 15: F (x)i = 1 − xi−1 ), hence transitive.
+Corollary 17. A ECA map is transitive if and only if it is surjective and
+sensitive.
+Proof. Follows from Proposition 6, 15 and 16.
+   Next, we show that for ECA surjectivity implies that the set of periodic
+points of F is dense in X.
+Proposition 18. Surjective ECA have a dense set of periodic points in X.
+Proof. Surjective ECA are either almost equicontinuous or sensitive. Almost
+equicontinuous one-dimensional CA that are surjective have a dense set of pe-
+riodic points [22]. The sensitive ECA that are surjective are permutive and
+permutive one-dimensional CA are known to have a dense set of periodic points
+(through the property of closingness [11]).
+    A central open question of CA theory is the conjecture that for one-dimensional
+CA surjectivity implies a dense set of periodic points. For ECA the conjecture
+is answered in the positive.
+    Hence, for ECA transitivity, or permutivity, implies chaos.
+Corollary 19. The following ECA rules are chaotic in the sense of Devaney:
+15, 30, 45, 60, 90, 105, 106, 150, 154, 170.
+    Figure 2 summarises these results.
+
+
+7     Discussion
+The results of this paper show that one can classify the dynamic behaviour of
+every elementary cellular automata (ECA) in terms of the standard notions of
+dynamical system theory, that is according to the classification proposed by
+Gilman [9] and Kurka [10]. We also determined which ECA are chaotic in the
+sense of Devaney, rederiving a result by Cattaneo et al. [21]. This gives a fairly
+complete picture of the dynamical system properties of ECA in the standard
+topology, as summarised in Fig. 2. The topological dynamics approach to CA
+
+
+                                            17
+Figure 2: Classification diagram for the elementary cellular automata (ECA). The chaotic
+ECA are inside the double-framed box.
+
+
+
+
+thus delivers a relevant and coherent account of the dynamical behaviour of
+ECA.
+    In the light of our results, the class of ”complex” ECA can be characterised as
+the class of ECA that are sensitive, but not surjective and not eventually weakly
+periodic. This class corresponds well to what one would intuitively regard as
+”complex” given the space-time patterns of ECA. In particular, the ECA rules
+of Wolfram’s class (W4) seem to fall into this class.
+    Among the ECA rules, a few deserve special interest from a computational
+point of view. The most prominent example is ECA rule 110 which has been
+shown to be computationally universal [23]. Based on our results we conjec-
+ture that sensitivity is a necessary condition of computational universality. In
+contrast, Wolfram conjectured that, for example, ECA rule 73, which is not sen-
+sitive, may be computationally universal [18]. This difference is due to the fact
+that our results hold generally for ECA without any restrictions on the initial
+conditions, whereas Wolfram considers specific sets of initial configurations on
+which the rule acts. On such a restricted set of configurations, ECA rule 73
+might indeed be sensitive.
+    If a CA is sensitive, then its dynamics defies numerical computation for
+practical purposes, because a finite precision computation of an orbit may result
+in a completely different orbit than the real orbit. Hence, while sensitivity seems
+inherent to the in principle computationally most powerful rules, as e.g. rule
+110, their limited robustness to small changes in the initial conditions may
+
+
+
+                                          18
+impair their practical usage in a physical or biological system: Even a single
+bit-flip in the input of a sensitive ECA may completely change the computed
+output.
+    Among the many questions left open, a natural extension of our study would
+consist in giving a complete characterisations in the topological dynamics sense
+for more general CA than ECA. Examples by Cattaneo et al. [21], however, show
+that the approach taken here to establish chaoticity can already fail in slightly
+more general settings. In the general case, long-term properties of CA and hence
+classification schemes based on these properties are typically undecidable. It
+would therefore be useful to pinpoint where exactly undecidability enters.
+    Establishing a verifiable notion of computational universality in the Turing-
+machine sense in terms of necessary and sufficient conditions related to the
+dynamic behaviour of the underlying system would greatly advance our un-
+derstanding of the relation between computational and dynamic properties of
+physical and biological systems. Part of the problem to clarify this relation is
+that there is no unanimous accepted definition of computational universality
+for computational systems such as CA (See e.g. the discussion by Ollinger [24]
+and Delvenne et al. [25]. Delvenne et al. also prove necessary conditions for
+a symbolic system to be universal, according to their definition of universality,
+and demonstrate the existence of an universal and chaotic system on the Can-
+tor space.). To different definitions of universality, there might thus correspond
+different topological dynamics properties. Despite this fact, we conjecture that
+for ECA sensitivity and non-surjectivity are necessary conditions of universal-
+ity. This conjecture is in accordance with the intuitive idea that systems at the
+”edge of chaos”, i.e. systems with neither too simple nor chaotic dynamical be-
+haviour, are the computationally relevant systems for biology. Such intermittent
+systems have, moreover, been characterised as having the largest complexity in
+the sense that their behaviour is the hardest to predict [27]. If computation is
+measured as a reduction of complexity [26], the intermittent systems may then
+be said to provide the complexity needed for efficient computations.
+    The extension of the results and observations from ECA to general one-
+dimensional CA or higher-dimensional CA is thus not without problems. Being
+much more tractable, ECA provide an important benchmark to test ideas on
+universality, the ”edge of chaos” hypothesis and, generally, on how ”computa-
+tion” occurs in nature.
+
+
+Acknowledgments
+The authors wish to thank Jarkko Kari for helpful comments.
+
+
+References
+     [1] M. Sipser. Introduction to the Theory of Computation. International
+         Thompson Publishing, 1996.
+
+
+
+                                       19
+ [2] C.H. Papadimitriou. Computational Complexity. John Wiley and Sons
+     Ltd., 2003.
+ [3] G.A. Hedlund. Endomorphisms and automorphisms of the shift dynam-
+     ical system. Theory of Computing Systems, 3(4):320–375, 1969.
+
+ [4] S. Wolfram. Cellular automata. Los Alamos Science, 9(2-21):42, 1983.
+ [5] S. Wolfram. Statistical mechanics of cellular automata. Reviews of
+     Modern Physics, 55(3):601–644, 1983.
+ [6] S. Wolfram. Universality and complexity in cellular automata. Physica
+     D: Nonlinear Phenomena, 10(1-2):1–35, 1984.
+
+ [7] W. Li and N. Packard. The structure of the elementary cellular au-
+     tomata rule space. Complex Systems, 4(3):281–297, 1990.
+ [8] K. Culik and S. Yu. Undecidability of CA classification schemes. Com-
+     plex Systems, 2(2):177–190, 1988.
+
+ [9] R.H. Gilman. Classes of linear cellular automata. Ergodic Theory &
+     Dynamical Systems, 7:105–118, 1987.
+[10] P. Kurka. Languages, equicontinuity and attractors in cellular au-
+     tomata. Ergodic theory and dynamical systems, 17(02):417–433, 2001.
+
+[11] P. Kurka. Topological and symbolic dynamics. Société Mathématique
+     de France, Paris, 2003.
+[12] B. Durand, E. Formenti, and G. Varouchas. On undecidability of
+     equicontinuity classification for cellular automata. Discrete Mathemat-
+     ics and Theoretical Computer Science, AB(DMCS):117–128, 2003.
+
+[13] O. Martin, A.M. Odlyzko, and S. Wolfram. Algebraic properties of cel-
+     lular automata. Communications in mathematical physics, 93(2):219–
+     258, 1984.
+[14] L.O. Chua, S. Yoon, and R. Dogaru. A nonlinear dynamics perspective
+     of Wolframs new kind of science. Part I: Threshold of complexity. Int.
+     J. Bifurcation and Chaos, 12(12):2655–2766, 2002.
+[15] M. Schüle, T. Ott, and R. Stoop. Global dynamics of finite cellular
+     automata. Artificial Neural Networks-ICANN 2008, 71–78, 2008.
+[16] H. Betel and P. Flocchini. On the relationship between boolean and
+     fuzzy cellular automata. Electronic Notes in Theoretical Computer Sci-
+     ence, 252: 5-21, 2009.
+[17] E. Mendelson. Introduction to mathematical logic. Chapman &
+     Hall/CRC, 1997.
+
+
+
+                                  20
+[18] S. Wolfram. A new kind of science. Wolfram Media, 2002.
+[19] P. Kurka. Topological dynamics of one-dimensional cellular automata.
+     Mathematical basis of cellular automata, Encyclopedia of Complexity
+     and System Science. Springer Verlag, 2008.
+
+[20] R.L. Devaney. An introduction to chaotic dynamical systems. Westview
+     Press, 2003.
+[21] G. Cattaneo, M. Finelli, and L. Margara. Investigating topological
+     chaos by elementary cellular automata dynamics. Theoretical computer
+     science, 244(1-2):219–241, 2000.
+
+[22] F. Blanchard and P. Tisseur. Some properties of cellular automata with
+     equicontinuity points. Annales de l’Institut Henri Poincare (B) Proba-
+     bility and Statistics, 36(5):569582, 2000.
+[23] M. Cook. Universality in elementary cellular automata. Complex Sys-
+     tems, 15(1):140, 2004.
+
+[24] N. Ollinger. Universalities in cellular automata; a (short) survey. 2008.
+[25] J.C. Delvenne, Kurka, P. and Blondel, V. Decidability and universality
+     in symbolic dynamical systems. Fundamenta Informaticae, 74(4):463–
+     490, 2006.
+
+[26] R. Stoop, N. Stoop, and L. Bunimovich. Complexity of dynamics as
+     variability of predictability. Journal of statistical physics, 114(3):1127–
+     1137, 2004.
+[27] R. Stoop and N. Stoop. Natural computation measured as a reduction of
+     complexity. Chaos: An Interdisciplinary Journal of Nonlinear Science,
+     14:675, 2004.
+
+
+
+
+                                    21
+

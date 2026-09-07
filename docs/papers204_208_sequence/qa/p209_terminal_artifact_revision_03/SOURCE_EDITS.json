@@ -1,0 +1,48 @@
+{
+  "audit_p209.py": [
+    {
+      "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'",
+      "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "    # Revision 02 and the real initial_03 schema failure remain immutable in\n    # place; this correction does not replace either earlier preparation.\n    revision02 = BATCH / 'qa/p209_terminal_artifact_revision_02'\n    pin(revision02 / 'SHA256SUMS',\n        '6e9c86fad5802ed82df5ffa78e3f7d7bc9c3bec00a04892c96e002db121ed6ed')\n    manifest(revision02, count=79)\n    third = OUT / 'initial_03'\n    pin(third / 'SHA256SUMS', '45f4751ce36bfdfd432b2b5193ef23c8c7b91fa109b88cc4e305fd59234af921')\n    manifest(third, count=8)\n    for snapshot, source in [('executed_auditor_snapshot.py', 'audit_p209.py'),\n                             ('executed_recorder_snapshot.py', 'record_audit.py')]:\n        ck(read(third / snapshot) == read(revision02 / source),\n           'third_failed_exact_executed_sources', snapshot)\n    row, attempt = j(third / 'COMMAND.json'), j(third / 'ATTEMPT.json')\n    expected = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',\n                'pycache_prefix=' + str(third / 'unused_pycache'),\n                str(revision02 / 'audit_p209.py'), 'terminal-artifact-after-actual-views']\n    ck(row['exit_code'] == 1 and row['status'] == 'COMPLETED' and row['failure'] is None\n       and row['inputs_unchanged'] and row['unused_cache_absent'] and not (third / 'unused_pycache').exists()\n       and row['argv'] == expected and row['cwd'] == str(ROOT) and row['environment'] == ENV,\n       'third_failed_child_remains_failure', 'real initial_03 exit one; no default canonical PASS')\n    ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and\n       all(attempt[k] == row[k] for k in ('argv', 'cwd', 'environment', 'started_utc')),\n       'third_failed_prespawn_record', 'original fields')\n    exact_pair(third, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 13, historical=True)\n    for stream in ('stdout', 'stderr'):\n        pin(third / ('audit.' + stream), row[stream])\n    ck(read(third / 'audit.stdout') == b'' and len(read(third / 'audit.stderr')) == 674 and\n       h(third / 'audit.stderr') == '33820efd46d6cc2adf5c8c1ad27c6f4eb25f054e4607c0306f8409fe352c4077',\n       'third_failed_full_raw_streams', 'unchanged complete KeyError status traceback')\n    execution = BATCH / 'qa/P209_TERMINAL_ARTIFACT_INITIAL_03.failed.actual.json'\n    pin(execution, '816cb77c887baca09e28a6a71b9c25fafadd2942bca587e20bd4a8ca4cf0581e')\n    outer = j(execution)\n    ck(outer['completion']['exit_code'] == 1 and\n       read(third / 'audit.stderr').decode() in outer['completion']['output'],\n       'third_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')\n    return {'revision': 'p209_terminal_artifact_revision_03', 'original_preparation_payloads': 347,\n            'preserved_revision_02_payloads': 79, 'preserved_initial_03_payloads': 8,\n            'third_child_exit': 1, 'third_wrapper_exit': 1,\n",
+      "old": "    return {'revision': 'p209_terminal_artifact_revision_02', 'original_preparation_payloads': 347,\n",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "            # Exact original emitter contracts differ by role. Reviewer A has\n            # no top-level status field; success is independently required in\n            # the real child receipt above, and full raw equality is unchanged.\n            canonical_fields = {\n                'author': {'schema': 'p209-author-v1', 'status': 'PASS', 'checks': 98278,\n                           'total_states': 3414,\n                           'scope': 'Exhaustive n=0,...,5 only; finite pressure, not all-size proof.',\n                           'entrance_field_scope': 'Observed orbit index only; no all-size clock claim.'},\n                'a': {'schema': 'p209-review-a-independent-v1', 'checks': 135605},\n                'b': {'schema': 'p209-b-ports-constructive-carrier-v1', 'status': 'PASS',\n                      'checks': 54794, 'states': 3414, 'max_n': 5}}[role]\n            ck(type(payload) is dict and set(payload) == set(canonical_fields) | {'boxes'}\n               and all(payload[key] == value for key, value in canonical_fields.items())\n               and payload['checks'] == count,\n               'strict_exact_role_canonical_schema_and_scalars', role)\n            state_field = 'states' if role == 'b' else 'state_count'\n            boxes = payload['boxes']\n            ck(type(boxes) is list and [box['n'] for box in boxes] == list(range(6))\n               and [box[state_field] for box in boxes] == [1, 1, 4, 27, 256, 3125]\n               and sum(box[state_field] for box in boxes) == 3414,\n               'strict_exact_original_canonical_census', role)",
+      "old": "            ck(payload['status'] == 'PASS' and payload['checks'] == count, 'strict_actual_canonical_count', role)",
+      "required_old_occurrences": 1
+    }
+  ],
+  "lifecycle_audit.py": [
+    {
+      "new": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'",
+      "old": "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'",
+      "required_old_occurrences": 1
+    }
+  ],
+  "record_audit.py": [
+    {
+      "new": "if sys.argv[1:] != ['initial_04']:",
+      "old": "if sys.argv[1:] != ['initial_03']:",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "Require the new revision_03 initial_04 attempt",
+      "old": "Require the new revision_02 initial_03 attempt",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03'",
+      "old": "and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02'",
+      "required_old_occurrences": 1
+    },
+    {
+      "new": "              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json',\n              ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/SHA256SUMS',\n              BASE/'initial_03/SHA256SUMS',\n              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_03.failed.actual.json']",
+      "old": "              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json']",
+      "required_old_occurrences": 1
+    }
+  ]
+}

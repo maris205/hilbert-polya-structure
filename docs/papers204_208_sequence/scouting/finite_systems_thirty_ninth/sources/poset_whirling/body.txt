@@ -1,0 +1,1298 @@
+                                              ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING
+                                                                 DYNAMICS
+
+                                                                          MATTHEW PLANTE AND TOM ROBY
+
+                                                 Abstract. Given a finite poset P , we study the whirling action on vertex-labelings of P
+                                                 with the elements {0, 1, 2, . . . , k}. When such labelings are (weakly) order-reversing, we call
+                                                 them k-bounded P -partitions. We give a general equivariant bijection between k-bounded
+                                                 P -partitions and order ideals of the poset P × [k] which conveys whirling to the well-studied
+arXiv:2405.07984v2 [math.CO] 3 Oct 2025
+
+
+
+
+                                                 rowmotion operator. As an application, we derive periodicity and homomesy results for
+                                                 rowmotion acting on the chain of V’s poset V × [k]. We are able to generalize some of these
+                                                 results to the more complicated dynamics of rowmotion on Cn × [k], where Cn is the claw
+                                                 poset with n unrelated elements each covering b     0.
+                                                 Keywords: chain of V’s, claw posets, dynamical algebraic combinatorics, equivariant
+                                                 bijections, homomesy, posets, P -partitions, rowmotion, whirling.
+
+
+                                                                                          Contents
+                                            1. Introduction                                                                                           1
+                                            1.1. Basic definitions and background in combinatorial dynamics                                           2
+                                            1.2. Organization of this paper                                                                           3
+                                            1.3. Rowmotion as a product of toggles                                                                    3
+                                            2. The whirling map                                                                                       4
+                                            2.1. Whirling functions between finite sets                                                               4
+                                            2.2. Whirling k-bounded P -partitions and rowmotion                                                       5
+                                            3. Dynamics for rowmotion on V × [k]                                                                      8
+                                            3.1. The chain of V’s poset                                                                               8
+                                            3.2. Periodicity and homomesy via center-seeking whorms                                                  11
+                                            4. Dynamics for rowmotion on Cn × [k]                                                                    18
+                                            4.1. The chain of claws poset                                                                            18
+                                            4.2. Periodicity and homomesy via edge-seeking whorms                                                    20
+                                            4.3. Acknowledgments                                                                                     24
+                                            References                                                                                               25
+
+
+                                                                                     1. Introduction
+                                             We connect the well-studied operation of rowmotion on the order ideals of a finite poset
+                                          with the less familiar whirling action on P -partitions with bounded labels. One of our main
+                                          results is an equivariant bijection that carries one to the other for any finite poset P . Here
+                                          we are following in the footsteps of Haddadan [6], who noticed this connection when P itself
+                                          is a chain. We then leverage this to study the rowmotion action on the “chain of V’s”
+                                          poset Vk := V × [k] (a 3-element V-shaped poset cross a finite chain, see Figure 3), which
+                                          has surprisingly good dynamical properties. We also generalize this to the case where we
+
+                                            Date: October 6, 2025.
+                                                                                                1
+2                                     PLANTE AND ROBY
+
+replace V with a n-claw, Cn , a poset with a single minimal element covered by exactly n
+incomparable elements. In both cases we obtain both periodicity results and homomesy.
+1.1. Basic definitions and background in combinatorial dynamics. Let P be a finite
+poset, and J (P ) be the set of order ideals of P . (For basic poset definitions, we refer the
+reader to Stanley [15, Ch. 3].) Combinatorial rowmotion is an invertible map ρ : J (P ) →
+J (P ) which takes each ideal I ∈ J (P ) to the order ideal generated by the minimal elements
+of the complement of I in P . The periodicity of this map on products of chains was first
+studied by Brouwer and Schrijver [3], and Cameron and Fon-der-Flaass [4]. Later Striker and
+Williams [17] considered it as one element of the “toggle group” of a poset and related it to a
+kind of “promotion” operator on order ideals. Around the same time, Armstrong, Stump, and
+Thomas [2] studied rowmotion on root posets, relating it to “Kreweras complementation” on
+noncrossing partitions, and used this to prove a conjecture of Panyushev about the equality
+of the average cardinality of antichains for each rowmotion orbit.
+   Propp and Roby [11] noticed that this conjecture was merely one instance of a much
+broader phenomenon which they dubbed homomesy. Given a finite set S, a “statistic”
+f : S → C, and an invertible map φ on S, we call f homomesic if the average value of f is
+                                       1 X
+the same for every φ-orbit R, i.e.,            f (x) = c, where c is a constant not dependent on
+                                     #R x∈R
+the choice of orbit R. Over the past decade, many authors have proved homomesy results
+as one tool to understand various combinatorial dynamical systems.
+   Along with the work initiated by Reiner, Stanton, and White on the Cyclic Sieving Phe-
+nomenon [12, 13], the confluence of all this work was the beginning of dynamical algebraic
+combinatorics as a distinct area within algebraic combinatorics (with antecedents going back
+to the Robinson–Schensted–Knuth correspondence and related operations on Young tableaux
+such as promotion, evacuation, and cyclage). In the past decade, the subfield has grown in a
+number of directions, and the study of rowmotion has been of continuing interest. For more
+background information, see the survey articles of Hopkins [7], Roby [14], and Striker [16].
+   Cameron and Fon-der-Flaass [4] were the first to describe rowmotion as a product of
+involutions called toggles, as detailed in Section 1.3. A natural generalization of toggling at
+a poset element x is “whirling at x,” which cycles the label at x among j possible values.
+(Toggles are the case when j = 2.) Joseph, Propp, and Roby defined these and the operation
+of whirling on sets of functions between finite sets, obtaining various homomesy results for
+different classes of functions (injective, surjective, etc.) [9]. This is described in Section 2.
+   A bijective function f : P → [p] (with #P = p) such that f (x) < f (y) whenever x <P y
+is called a linear extension. We denote by L(P ) the set of all linear extensions of P ; its
+cardinality, e(P ), is an important numerical invariant of a poset. Its refinement, the order
+polynomial ΩP (k), counts the number of k-bounded P -partitions. For some special posets P ,
+mainly ones connected with Lie theory (root and minuscule posets) and those of partition
+or shifted shapes, product formulae for ΩP (k) are known. Hopkins surveys these posets,
+the formulae, and gives the heuristic: Posets with order-polynomial product formulae are the
+same as the posets with good dynamical behavior. The one poset in his list whose rowmotion
+dynamics were relatively unexplored is V × [k], a gap this paper fills. In separate work
+Hopkins and Rubey study the dynamics of Schützenberger promotion on linear extensions of
+V×[k], which also exhibits unusually good behavior [8]. In his doctoral thesis, Ben Adenbaum
+provides a combinatorial approach (along with a density argument) to proving that this same
+periodicity extends to piecewise-linear rowmotion on the order polytope O(P ) [1, Prop. 3.23].
+            ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                           3
+
+Since most dynamical results in the piecewise-linear realm have been proven first at the
+(higher) birational level, then tropicalized to the PL realm, this is a notable methodology.
+The authors are unaware of any successful attempts to lift periodicity of the rowmotion
+action on V × [k] (even conjecturally) to the birational realm.
+
+1.2. Organization of this paper. In Section 1 after the introduction, we review the tog-
+gling definition of rowmotion. Section 2 describes whirling, and includes the equivariant
+bijection which allows us to study rowmotion on Vk as whirling on k-bounded P -partitions.
+Section 3 contains our main periodicity and homomesy results for rowmotion on Vk , which
+use decompositions of the “orbit board” of the corresponding whirling action into “whorms”.
+Finally, Section 4 contains the periodicity and homomesy results which generalize to row-
+motion on the “chain of claws” graph, Cn × [k], and extends our proofs to this situation.
+
+1.3. Rowmotion as a product of toggles. Writing rowmotion as a product of toggles
+has been quite useful for understanding its properties and generalizing it to other situations,
+e.g., lifting to the piece-wise linear and birational level [5]. Thomas and Williams call this
+“Rowmotion in Slowmotion” [18].
+Definition 1.1. We define the (order-ideal) rowmotion map, ρ : J (P ) → J (P ) as fol-
+lows: For any I ∈ J (P ), ρ(I) is the order ideal generated by the minimal elements of the
+complement of I, as in the example below.
+Example 1.2. Here is one iteration of ρ on an order ideal with the action broken down into
+its three steps: (1) complement, (2) take minimal elements, (3) saturate down.
+
+                      (1)                      (2)                     (3)
+                      −→                      −→                       −→
+
+
+  Cameron and Fon-der-Flaass [4] showed that for any finite poset P , rowmotion can be
+realized as “toggling once at each element of P along any linear extension (from top to
+bottom)”. Other toggling orders also lead to interesting maps, such as Striker–Williams
+“promotion” (of order ideals) of a poset, which is toggling from left-to-right along “files” of
+a poset [17]. To toggle an order ideal I at a poset element x, means to add x to I if it is not
+included, or delete x if it is, but only if the result would also be an order ideal. Formally:
+Definition 1.3. For each fixed x ∈ P define the (order-ideal) toggle τx : J (P ) → J (P ) by
+                            
+                            I ∖ {x} if x ∈ I and I ∖ {x} ∈ J (P )
+                            
+                    τx (I) = I ∪ {x} if x ̸∈ I and I ∪ {x} ∈ J (P )
+                            
+                            I         otherwise.
+It is an easy exercise to show that order-ideal toggles [4, §2] are involutions, and that toggles
+at incomparable elements commute (a special case of Prop 2.7).
+Example 1.4. We will toggle node-by-node down the following fixed linear extension: at
+                                                                         7   6
+each step we consider whether or not to toggle the red node in or out. 5   4    3.
+                                                                         2   1
+4                                      PLANTE AND ROBY
+
+   For this linear extension we toggle the elements row-by-row from top-to-bottom, left-to-
+right within each row (although the order within rows is irrelevant, since toggles at incom-
+parable elements commute, hence the name “rowmotion”).
+
+
+                          τ
+                          7                       τ
+                                                  6                       τ5
+                         −
+                         →                       −
+                                                 →                        −
+                                                                          →
+
+
+
+    τ4                    τ
+                          3                       τ
+                                                  2                       τ1
+    −
+    →                    −
+                         →                       −
+                                                 →                        −
+                                                                          →
+
+
+Proposition 1.5 ([4, Lemma 1]). Let x1 , x2 , . . . , xp be any linear extension (i.e., any order-
+preserving listing of the elements) of a finite poset P with p elements. Then the composite
+map τx1 τx2 · · · τxp coincides with the rowmotion operation ρ.
+
+                                    2. The whirling map
+   An order ideal in any poset can be considered as a binary labeling of the poset with 0
+(indicating elements outside the order ideal) and 1 (indicating those inside of it). Equiva-
+lently, this represents an order-reversing map f : P → {0, 1}. Then toggling at an element,
+simply switches the labels at that element (or leaves them alone if the result would not
+be order-reversing). Similarly, we can define whirling at a poset element to cycle through
+a larger set of possible labels until it arrives at one that gives a legitimate order-reversing
+map. To whirl the entire labeling, one whirls once at each element along a linear extension.
+   A notion equivalent to whirling in this context was first defined by James Propp (dubbed
+winching by Peter Winkler) and was used by S. Haddadan[6], as an aid to proving certain
+homomesies for rowmotion on order ideals of type A root and minuscule posets (triangles and
+rectangles). Joseph, Propp, and Roby [9] later defined whirling in the context of functions
+between finite sets. We review this first, before defining whirling of “k-bounded P -partitions”
+in Section 2.2. We prove a general equivariant bijection between rowmotion on P ×[k], where
+P is any finite poset, which is similar to the equivariant bijections Haddadan used in her
+work with triangular and rectangular posets.
+2.1. Whirling functions between finite sets. Let F ⊆ [k][n] be a family of functions
+f : [n] → [k]. For the rest of section 2.1, we use {1, . . . , k} = [k] to represent the congruence
+classes of Z/kZ, as opposed to the usual {0, 1, . . . , k − 1}. For fixed values of k and n,
+we represent such functions in one-line notation, e.g., f = 21344 represents the function
+f ∈ [4][5] with f (1) = 2, f (2) = 1, f (3) = 3, f (4) = 4, and f (5) = 4.
+Definition 2.1 ([9, Definition 2.3]). For f ∈ F we define the whirl wi : F → F at index i
+as follows: repeatedly add 1 (modulo k) to the value of f (i) until we get a function in F.
+Example 2.2. Let F = {f ∈ [4][5] : f (1) ̸= f (2)}. If we apply w2 to f = 21344, adding 1 in
+the second position gives 22344, but this is not in F. Adding 1 again in this position gives
+the result: w2 (f ) = 23344.
+We will now highlight some specific results from the paper where whirling was first intro-
+duced. Let Injm (n, k) be the set of m-injective functions, that is, functions f : [n] → [k]
+              ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                                 5
+
+                                                4 1 5
+                                                6 2 1
+                                                3 4 2
+                                                5 6 3
+                                                1 2 4
+                                                3 5 6
+                                                4 1 2
+                                                5 3 4
+                                                6 5 1
+                                                2 6 3
+        Figure 1. The orbit board of w on Inj1 (3, 6) containing f = 415, partitioned
+        into “chunks”.
+
+such that #f −1 (t) ≤ m for all t ∈ [k]. Similarly, let Surm (n, k) be the set of m-surjective
+functions, that is, f : [n] → [k] such that #f −1 (t) ≥ m for all t ∈ [k]. Note that injec-
+tive functions are 1-injections and surjective functions are 1-surjections. We also define the
+statistic ηj (f ) = #f −1 ({j}).
+Theorem 2.3 ([9, Theorem 2.11]). Fix F to be either Injm (n, k) or Sur1 (n, k) for given
+n, k, m ∈ P. Then under the action of w = wn ◦ wn−1 ◦ · · · ◦ w1 on F, ηj is nk -mesic for any
+j ∈ [k].
+This result is conjectured to hold for Surm (n, k), but is still open for m > 1. Proof details
+can be found in Sections 2.2–2.4 of [9].
+Example 2.4. Here is the orbit of w on Inj1 (3, 6) containing f = 415.
+               w       w        w       w        w        w       w        w       w         w
+         415 −
+             → 621 −
+                   → 342 −
+                         → 563 −
+                               → 124 −
+                                     → 356 −
+                                           → 412 −
+                                                 → 534 −
+                                                       → 651 −
+                                                             → 263
+   Figure 1 shows the corresponding orbit board (a matrix whose rows are the successive
+orbit elements) partitioned into “chunks,” each of which contains exactly the set of numbers
+{1, 2, . . . , k}. Notice that each value 1, 2, . . . , 6 appear exactly 5 times in this orbit of size 10,
+in accordance with the 1/2-mesy of Theorem 2.3. See [9, Section 2] for precise definitions.
+
+2.2. Whirling k-bounded P -partitions and rowmotion. Now we extend the definition
+of whirling to k-bounded P -partitions, and prove our main general result relating whirling
+and rowmotion. Throughout the rest of the paper, P will denote a finite poset. Define
+[0, k] := {0, 1, 2, . . . , k}. A P -partition is a map σ from P to N such that if x <P y, then
+σ(x) ≥ σ(y) [15, Ch. 3].
+Definition 2.5. A k-bounded P -partition is a function f : P → [0, k] such that if x ≤P y,
+then f (x) ≥ f (y). Let Fk (P ) be the set of all such functions.
+Throughout the rest of the paper we use {0, 1, . . . , k} to represent the congruence classes of
+Z/(k + 1)Z, as usual.
+Definition 2.6. For f ∈ Fk (P ) and x ∈ P , define wx : Fk (P ) → Fk (P ), called the whirl at
+x, as follows: repeatedly add 1 (mod k + 1) to the value of f (x) until we get a function in
+Fk (P ). This new function is wx (f ).
+6                                         PLANTE AND ROBY
+
+The case k = 1 of the above definition recovers toggling of order ideals (Def. 1.3).
+Proposition 2.7. If x, y ∈ P are incomparable, then wx wy (f ) = wy wx (f ).
+Proof. Since x and y are incomparable, there are no inequalities constraining the relationship
+between f (x) and f (y). So wx wy = wy wx .                                                 □
+Definition 2.8. Let (x1 , x2 , . . . , xp ) be a linear extension of P . Define w : Fk (P ) → Fk (P )
+by w := wx1 wx2 . . . wxp . The above proposition shows that this is well-defined, since one can
+get from any linear extension to any other by a sequence of interchanges of incomparable
+elements.
+                                                                ℓ       r
+Example 2.9. Let P be the V poset with labels                               , k = 2, and w = wc wr wℓ .
+                                                                    c
+              0           2         1              2        1               0        1         0
+                              wℓ                       wr                       wc
+                              −→                       −→                       −→
+                    2                    2                          2                    1
+   There is a natural bijection between order ideals of a poset P and 1-bounded P -partitions
+in F1 (P ). Specifically, a 1-bounded P -partition in F1 (P ) is simply the indicator function of
+an order ideal I ∈ J(P ). We extend this to an equivariant bijection Fk (P ) → J (P × [k])
+which sends w to ρ, meaning the following diagram commutes.
+
+                                                       w
+                                     Fk (P )                        Fk (P )
+
+
+
+                                                       ρ
+                                   J (P × [k])                  J (P × [k])
+   We will call the chains {(x, 1), (x, 2), . . . , (x, k)} ⊆ P × [k], for x ∈ P , the fibers of P × [k],
+and construct an equivariant bijection that first sends wx to order-ideal toggling down the
+fiber {(x, 1), (x, 2), . . . , (x, k)}.
+Example 2.10. Here is an example of the equivariant bijection between rowmotion on order
+ideals of [3] × [4] and whirling on F4 ([3]).
+
+
+
+                                                       ρ
+                                                       →
+                                                       −
+
+
+
+                                               ↕                ↕
+                                          0            w    1
+                                                       −
+                                                       →
+                                               1                2
+                                                   4                2
+Lemma 2.11. There is an equivariant bijection between Fk (P ) and J (P × [k]) which sends
+wx to the toggle product τ(x,1) τ(x,2) . . . τ(x,k) .
+             ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                                 7
+
+                                                                        8             12
+
+                                                                        7       4     11
+                       2             3
+                                                                        6       3     10
+                             1
+                                                                        5       2     9
+                             V
+                                                                                1
+
+                                                                            V × [4]
+
+        Figure 2. A linear extension of V on the left and the linear extension for
+        V × [4] constructed from it on the right, as in the proof of Theorem 2.12.
+
+Proof. The bijection ϕ between Fk (P ) and J (P × [k]) will be a natural one, where ϕ(f ) = I
+implies f (x) counts the number of elements in the intersection of I and the fiber at x in
+P × [k]. That is, the intersection of the fiber at x in P × [k], {(x, 1), (x, 2), . . . , (x, k)}, and an
+order ideal I is {(x, 1), (x, 2), . . . , (x, d)} for some d ∈ [k], if and only if f (x) = d. Otherwise,
+the intersection is empty if and only if f (x) = 0.
+  We will now complete the proof by fixing f and x and showing that
+                                 ϕ(wx (f )) = τ(x,1) τ(x,2) . . . τ(x,k) (ϕ(f )).
+   Let m = max({f (y) : y ⋖ x, for y ∈ P } ∪ {0}) and M = min({f (y) : x ⋖ y, for y ∈
+P } ∪ {k}), so m ≤ f (x) ≤ M . There are two cases:
+       • Case 1. If f (x) < M , then (wx (f ))(x) = f (x) + 1.
+       • Case 2. If f (x) = M , then f (x) + 1 is greater than M so we increment through
+         values modulo k + 1 until we get to (wx (f ))(x) = m.
+   On the other hand, we consider the action of τ = τ(x,1) τ(x,2) . . . τ(x,k) on ϕ(f ). Recall that
+τ(x,i) does not change the order ideal whenever (x, i) is not maximal in the order ideal or
+minimal in the complement of the order ideal. Because of this, there are only two outcomes
+of τ (S(f )), either one element was added to order ideal, or elements were removed until
+removing anymore would not result in an order ideal. This reflects the two cases above,
+which completes the proof.                                                                        □
+   The following general theorem is extremely useful for studying the dynamics of rowmo-
+tion for certain kinds of posets. Such an equivariant bijection was used by Haddadan [6,
+Lemma 3.1] in the specific situation she studied of rowmotion and promotion on triangular
+and rectangular posets, but has not been stated in anything like this generality in literature
+we have seen.
+Theorem 2.12. Fix any linear extension (x1 , x2 , . . . , xp ) ∈ L(P ). There is an equivariant
+bijection between Fk (P ) and J (P × [k]) which sends whirling, w = wx1 wx2 · · · wxp on Fk (P )
+to rowmotion on J (P × [k]).
+Proof. The bijection is based on the one from Lemma 2.11. We will construct the linear
+extension that traverses P × [k] fiber by fiber, i.e., (xi , j) → xk(i−1)+j . Then the composite
+map τx1 τx2 · · · τxkp on P × [k] coincides with rowmotion by Proposition 1.5. By Lemma 2.11,
+8                                          PLANTE AND ROBY
+
+the toggles τxk(i−1)+1 τxk(i−1)+2 · · · τxk(i−1)+k coincide with wxi . Together these give us that w =
+wx1 wx2 · · · wxp , is exactly rowmotion.                                                            □
+Example 2.13. Figure 2 shows a linear extension of the poset, V and the corresponding
+linear extension for V × [4] on the right, as in the proof of Theorem 2.12, of V × [4].
+   The following definitions will allow us to partition orbit boards of whirling into subsets
+called whorms. The partitioning of orbit boards of combinatorial actions into some special
+class of disjoint subsets is a useful tool, used by several authors, including different kinds of
+“snakes” [6, 10], and “chunks” [9].
+Definition 2.14. For any x ∈ P and f ∈ Fk (P ), define (x, f ) to be a whirl element. The
+whirl element (y, g) is whirl successive to (x, f ) if either:
+   (1) y = x and g(y) = w(f )(x) = f (x) + 1, or
+   (2) x covers y, f = g, and f (x) = g(y).
+We consider whirl-successive elements to be whirl elements which are one step away from each
+other, either by moving one covering relation down the poset or by whirling the function at
+the element, and ending one label greater. While we must consider the entire P -partitions f
+and g to check whether two whirl elements are whorm-connected, we think of whirl elements
+as being simply (x, f (x)), the location and its label, and indicate them in this way in the
+examples that follow.
+Definition 2.15. Two whirl elements (x, f ) and (y, g) are whorm-connected if there exists
+a sequence of whirl-successive elements {(x, f ) = (x0 , f0 ), (x1 , f1 ), . . . , (xp , fp ) = (y, g)}. A
+whorm is a maximal set of whorm-connected whirl elements, that is, if (x, f ) is in a whorm
+and (x, f ) is whorm-connected to (y, g), then (y, g) is in the whorm.
+Example 2.16. An orbit of whirling P -partitions (for P = [2] × [2]) with its four whorms
+indicated by the same color and (redundantly) node-shape.
+        0                    1                   0                    0                    0
+                  w                    w                    w                    w                    w
+    2         1 −
+                → 1                2 −
+                                     → 2                0 −
+                                                          → 0                1 −
+                                                                               → 1                0
+
+        2                    2                   2                    1                    2
+
+                           3. Dynamics for rowmotion on V × [k]
+  In this section we consider the dynamics of rowmotion acting on the order ideals of the
+chain of V’s poset Vk , establishing its periodicity and finding interesting examples of homo-
+mesy.
+
+3.1. The chain of V’s poset. While most posets currently known to enjoy nice dynamical
+properties under rowmotion seem to be the root and minuscule posets associated with various
+types of Lie algebras, the current poset seems to be sui generis.
+
+Definition 3.1. Let V be the 3-element poset with Hasse diagram          , and define Vk =
+V × [k], where [k] is the chain poset. We call Vk the chain of V’s poset. We will use the
+labeling convention of Figure 3 throughout this section.
+            ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                           9
+
+                                         ℓk            rk
+
+                                         ..       ck   ..
+                                          .             .
+
+                                         ℓ3       ..   r3
+                                                   .
+
+                                         ℓ2       c3   r2
+
+                                         ℓ1       c2   r1
+
+                                                  c1
+
+           Figure 3. Hasse diagram of Vk with our vertex-labeling convention.
+
+   Our main goals for this section are the following theorems. We will leverage the equivariant
+bijection (Theorem 2.12) and the notion of whorms from Section 2.2.
+Theorem 3.2. The order of rowmotion on J (Vk ) is 2(k + 2).
+Theorem 3.3. Let χs be the indicator function for s ∈ Vk . We have the following homo-
+mesies for the action of ρ on J (Vk )
+  (1) The statistic χℓi − χri is 0-mesic for all i ∈ [k].
+  (2) The statistic χℓ1 + χr1 − χck is 2(k−1)
+                                        k+2
+                                              -mesic.
+Example 3.4. Figure 4 shows the two ρ-orbits, of sizes 5 and 10, on J (V4 ), confirming
+Theorem 3.2. It is also easy to check the homomesies of Theorem 3.3.
+Example 3.5. Here is ρ-orbit on J (V4 ) of length 4, which divides the order 2(4 + 2) = 12.
+Across the orbit the total number of elements at rank 1 in the side fibers is 6, minus the two at
+the top of the center fiber, for an average of 6−2
+                                                4
+                                                   = 1 = 2(4−1)
+                                                          4+2
+                                                                , agreeing with Theorem 3.3(2).
+
+
+
+
+                            ρ                 ρ                 ρ               ρ
+                            →
+                            −                 →
+                                              −                 →
+                                                                −
+
+
+
+
+   To prove these theorems we utilize our equivariant bijection (Theorem 2.12) from J (Vk )
+to Fk (V), then represent the latter by triples f = (ℓ, c, r) with ℓ ≤ c and r ≤ c.
+   This bijection ϕ sends an order ideal I to a triple (ℓ, c, r), counting the number of elements
+of the order ideal in the left, center, and right fibers respectively.
+Example 3.6. Here is the orbit of F4 (V) corresponding to Example 3.5.
+                                 w            w             w           w
+                        (1, 3, 3) −
+                                  → (2, 4, 0) −
+                                              → (3, 3, 1) −
+                                                          → (0, 4, 2)
+10                                         PLANTE AND ROBY
+
+
+
+
+                       ρ                   ρ                   ρ                   ρ                       ρ
+                       →
+                       −                   →
+                                           −                   →
+                                                               −                   →
+                                                                                   −
+
+
+
+
+                       ρ                   ρ                   ρ                       ρ                   ρ
+                       →
+                       −                   →
+                                           −                   →
+                                                               −                   →
+                                                                                   −                       →
+                                                                                                           −
+
+
+
+
+                       ρ                   ρ                   ρ                   ρ                       ρ
+                       →
+                       −                   →
+                                           −                   →
+                                                               −                   →
+                                                                                   −
+
+
+
+
+         Figure 4. The two orbits of rowmotion on order ideals of V × [3]
+
+
+
+
+                       ρ               ρ               ρ               ρ                   ρ
+                       →
+                       −               →
+                                       −               →
+                                                       −               →
+                                                                       −                   →
+                                                                                           −
+
+           0       3       1       4       2       0       0       1       1       2           2       3
+               4               4               2               4               4                   3
+
+
+
+                       ρ               ρ               ρ               ρ                   ρ
+                       →
+                       −               →
+                                       −               →
+                                                       −               →
+                                                                       −                   →
+                                                                                           −
+
+           3       0       4       1       0       2       1       0       2       1           3       2
+               4               4               2               3               4                   3
+
+     Figure 5. An orbit of rowmotion on P = V × [4], with corresponding P -
+     partitions (which are being whirled), as in Theorem 2.12.
+              ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                                        11
+
+                               1 2 0
+                               2 3 1
+                               3 4 2
+                               4 4 3                                      0 2 0
+                               0 4 4                                      1 3 1
+                               1 1 0                                      2 4 2
+                               0 2 1                                      3 3 3
+                               1 3 2                                      0 4 0
+                               2 4 3                                      1 14 1
+                               3 4 4
+                               4 4 0
+                               0 1 1
+
+ Figure 6. Two orbit boards of F4 (V), one with six whorms and one with two whorms.
+
+  Figure 5 shows an orbit of rowmotion on order ideals of P = V × [4]. Below each ideal is
+the corresponding P -partition in F4 (P ), and these are being whirled equivariantly with ρ.
+                                                                              k+1
+                                                                              X            (k + 1)(k + 2)(2k + 3)
+Proposition 3.7. The number of order ideals of Vk is given by                       i2 =                          .
+                                                                              i=1
+                                                                                                     6
+Proof. Every order ideal of Vk is associated with a triple of labels of the elements of V. Let
+j ∈ [0, k] denote the label of c. The possible labels for ℓ and r are precisely the elements of
+[0, j], yielding a total of (j + 1)2 labelings. Summing over all possible values of j produces
+the desired result.                                                                          □
+
+3.2. Periodicity and homomesy via center-seeking whorms. To show that the order
+of ρ on J (Vk ) is 2(k + 2) we end up proving something stronger, namely that ρk+2 (I) is the
+reflection of I across the center chain. Our method is to investigate the whorms that arise
+from repeatedly whirling a k-bounded P -partition.
+   Recall from Definition 2.15 that, given a whirling orbit board, R = {f, w(f ), w2 (f ), . . . }
+of w on Fk (V), a whorm ξ is a maximal set of whorm-connected elements. Figure 6 shows
+two orbit boards of F4 (V), one with six whorms and one with two whorms. Notice that each
+whorm in the second orbit has two “starting” positions.
+   Each whorm in an orbit board of V × [k] starts on the left, or the right, or both left
+and right; we call the former one-tailed (specifically right-tailed or left-tailed ) and the latter
+two-tailed. We will also use the terms left-whorm and right-whorm for short in the one-tailed
+case.
+   Since these whorms move down the orbit board at every step, except for one move to the
+center, we consider them as a sequence of function values in the orbit board which start at 0
+and end at k, where one value is repeated when moving into the center. We call these center-
+seeking whorms. (Since an orbit board is actually a cylinder, we have a “can of whorms” to
+deal with.)
+   In the left orbit of Figure 7 we isolate one example of a left whorm:
+       ξ = {(ℓ, (0, 3, 3)), (ℓ, (1, 4, 0)), (ℓ, (2, 2, 1)), (c, (2, 2, 1)), (c, (0, 3, 2)), (c, (1, 4, 3))},
+visualized within an orbit board of F4 (V).
+12                                     PLANTE AND ROBY
+
+                           1 2 2                              1 2 2
+                           2 3 0                              2 3 0
+                           3 4 1                              3 4 1
+                           4 4 2                              4 4 2
+                           0 3 3                              0 3 3
+                           1 4 0                              1 4 0
+                           2 2 1                              2 2 1
+                           0 3 2                              0 3 2
+                           1 4 3                              1 4 3
+                           2 4 4                              2 4 4
+                           3 3 0                              3 3 0
+                           0 4 1                              0 4 1
+
+       Figure 7. The same orbit board twice, the one on the left highlights a single
+       whorm, the one on the right highlights all whorms.
+
+   It is easy to see that an orbit board is tiled either entirely by one-tailed whorms or entirely
+by two-tailed whorms. In fact, if f (ℓ) = f (r) in any row, then wd f (ℓ) = wd f (r) for all d ∈ N
+and all f ∈ Fk (V). This is because the labels of ℓ and r represent the result of whirling
+at incomporable elements of the poset V. Furthermore, this forces the whorms to go to the
+middle from both sides in the same row, which makes the elements of the two-tails whirl-
+connected, so happens exactly when we have a two-tailed whorms. In the situation where
+f (ℓ) ̸= f (r) in any row, this also persists, so none of the whorms can be two-tailed.
+   We first observe that all one-tailed whorms have k+2 elements, since each contains the k+1
+elements 0, ..., k, exactly one of which is doubled. Define t(ξ) := 1 + min{f (c) : (c, f ) ∈ ξ},
+the number of elements in an outer column (the “tail length”) and h(ξ) := k + 2 − t(ξ), the
+number of elements in the center column (the “head length”). For the red whorm in the
+orbit on the left of Figure 7, t(ξ) = 3 and h(ξ) = 3. For the blue two-tailed worm on the
+right of Figure 6, t(ξ) = 4 and h(ξ) = 2. Note that in a one-tailed orbit board, each whorm
+has the same cardinality, namely k + 2; but in a two-tailed orbit board, the whorms can have
+different cardinalities (e.g., 10 and 8 in Figure 6).
+Example 3.8. The right orbit board in Figure 7 is the previous example with all the whorms
+colored. The number of elements in the left column of the yellow, red, and orange whorms
+are 5, 3, 4 respectively, and the orbit board is of length 12.
+  It follows that the order of whirling divides the sum of t(ξ) over all whorms ξ ∈ S. In the
+setting of Fk (V), as long as we know t(ξ) and whether f (ℓ) = 0, f (r) = 0, or both, then we
+can recover the entire whorm.
+  The center of any row intersects with eactly one whorm. A natural cyclic ordering on
+whorms in an orbit board arises from scanning down its center fiber.
+Definition 3.9. We will place a circular order on the whorms. Let ξ1 and ξ2 be whorms in
+an orbit board of Fk (V). If there exists (c, f ) ∈ ξ1 with f (c) = k such that (c, w(f )) ∈ ξ2 ,
+then we say ξ2 is in front of ξ1 . We call a sequence of whorms consecutive if each is in front
+of the next.
+Example 3.10. In Figure 7 the blue (horizontal lines) whorm is in front of the red (crosshatch)
+whorm, which is in front of the green (northwest lines) whorm.
+            ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                           13
+
+   It is not hard to show that a within a one-tailed orbit board, consecutive whorms alternate
+starting from the left and from the right. For when a whorm goes into the center from one
+side, say the left without loss of generality, then the next value in the left column will be 0,
+while in the right column it will be greater than 0. This persists until the next whorm moves
+to the center (possibly during the same step). At that point, by definition of whirling, the
+value in the center column will change from k to 1+max{f (ℓ), f (r)} = 1+f (r), meaning that
+the values in the right column and in the center will be equal. See the one-tailed examples
+in Figures 6 and 7. We use this in the next lemma, which is key to proving our main results.
+Lemma 3.11. Given an orbit board R of w on Fk (V), let ξ1 , ξ2 , and ξ3 be three consecutive
+whorms (not necessarily all distinct), that is, ξ3 is in front of ξ2 which is in front of ξ1 in R.
+   (1) If R is tiled entirely by one-tailed whorms, then
+                                t(ξ1 ) + t(ξ2 ) + t(ξ3 ) = 2(k + 2).
+   (2) Otherwise, if R is tiled entirely by two-tailed whorms, then
+                                     t(ξ1 ) + t(ξ2 ) = k + 2.
+Proof. (1) For the case of one-tailed whorms the key observation is that t(ξ3 ) = h(ξ1 ) + h(ξ2 )
+for consecutive whorms. This holds because the tail of ξ3 begins one row below where the
+head of ξ1 starts, and ends one row below where ξ2 ends. But since t(ξ) = k + 2 − h(ξ) for
+any ξ we get
+                   t(ξ3 ) = h(ξ1 ) + h(ξ2 ) = (k + 2 − t(ξ1 )) + (k + 2 − t(ξ2 )),
+which implies the result. See Figure 6 for examples.
+   (2) For the case of two-tailed whorms a similar argument shows that t(ξ2 ) = h(ξ1 ) for two
+consecutive whorms. The result then follows as before.                                        □
+In fact, the entire orbit board can be reconstructed simply from knowing the values of t(ξ1 )
+and t(ξ2 ) for two consecutive whorms in the one-tailed case, and from a single t(ξ1 ) in the
+two-tailed case.
+Example 3.12. In Figure 7 we have k = 4, t(green) = 4, t(red) = 3, and t(blue) = 5, which
+sum to 12 = 2(4 + 2).
+Lemma 3.13. Given an orbit board with one-tailed whorms, let ξ1 , ξ2 , ξ3 , and ξ4 be consec-
+utive, then
+                                        t(ξ4 ) = t(ξ1 ).
+Otherwise, if the orbit board contains two-tailed whorms, then t(ξ1 ) = t(ξ3 ).
+Proof. First assume the orbit board is one-tailed. By Lemma 3.11, the difference of the
+equations,
+                          t(ξ1 ) + t(ξ2 ) + t(ξ3 ) = 2(k + 2), and,
+                                t(ξ2 ) + t(ξ3 ) + t(ξ4 ) = 2(k + 2),
+give the result. The proof follows similarly when the orbit board has two-tailed whorms. □
+Lemma 3.14. Let R be an orbit board of w on Fk (V).
+  (1) If R is tiled entirely by one-tailed whorms, then there are at most six distinct whorms.
+  (2) Otherwise, if R is tiled entirely by two-tailed whorms, then there are at most two
+      distinct whorms.
+14                                      PLANTE AND ROBY
+
+                                                                 0 2 2
+                            0 1 1                                1 3 0
+                            1 2 0                                2 2 1
+                            2 2 1                                0 3 2
+                            0 2 2                                1 3 3
+                            1 1 0                                2 2 0
+                            0 2 1                                0 3 1
+                            1 2 2                                1 2 2
+                            2 2 0                                2 3 0
+                                                                 3 3 1
+
+         Figure 8. Two orbits of whirling, the left one of length 8 for k = 2 and the
+         right one of length 10 for k = 3, each, confirming the whirling order in these
+         cases.
+
+                            0 0 0
+                                                                 0 1 1
+                            0 1 0
+                                                                 1 1 0
+                            1 1 1
+
+     Figure 9. Both orbits of whirling when k = 1, confirming the order is 6 in this case.
+
+Proof. For orbit boards with one-tailed whorms, we are not claiming the board starts to
+repeat after three steps, since ξ4 will start on the opposite side from ξ1 . If we keep applying
+the previous Lemma to even more consecutive whorms, we see t(ξ5 ) = t(ξ2 ) and t(ξ6 ) = t(ξ3 ).
+Finally we get t(ξk ) = t(ξk−6 ) for k ≥ 7. Since a whorm is completely characterized by its
+tail length and sidedness, this means that the orbit board must repeat by the row in which
+ξ7 begins. The proof in the two-tailed case is similar.                                       □
+
+Theorem 3.15. Let (x, y, z) ∈ Fk (V), then wk+2 (x, y, z) = (z, y, x).
+Proof. Let R be an orbit board of w. The proof involves a careful analysis of when whorms
+move into the center of the orbit board. For the one-tailed case, we use Lemma 3.11 and
+that t(ξ) = k + 2 − h(ξ) for any ξ to conclude that
+                                 h(ξ1 ) + h(ξ2 ) + h(ξ3 ) = (k + 2).
+At this point, ξ4 arrives from the side opposite ξ1 , but with the same tail length. Therefore
+these two whorms must be reflections of one another (around the vertical middle of the R,
+though translated vertically as well). This forces the values in row k + 2 + 1 to be the mirror
+reflection of those in row 1 (where ξ1 starts).
+   In the two-tailed case, that is, when x = z, by Lemma 3.13 we know t(ξ1 ) = t(ξ3 ). This
+implies ξ1 and ξ3 are the same whorm, since they are two-tailed whorms. Therefore, the
+orbit board repeats after t(ξ1 ) + t(ξ2 ) = k + 2 steps, by Lemma 3.11.                      □
+Corollary 3.16. The order of w on Fk (V) divides 2(k + 2).
+     We are now ready to finish off the proofs of our main results for this section.
+
+Proof of Theorem 3.2. Easy computations shows that order of w is exactly 2(k + 2) for k =
+1, 2, or 3. (See Figures 8–9.) Now for k ≥ 4 we can pick any three distinct values b1 , b2 , b3
+             ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                               15
+
+
+                             ..          ..
+                              .           .
+                                   ..
+                                    .
+
+
+
+                             ..          ..
+                              .           .
+                                   ..
+                                    .
+
+       Figure 10. On the left, a section of Vk with elements of a flux capacitor
+       configuration, ℓi , ri and ci−1 , shaded black. On the right, a section of V7 with
+       elements counted by F3 − F5 , shaded black.
+
+that sum to k + 2 and construct an orbit board from six consecutive whorms with three
+distinct tail lengths and t(ξi ) = bi = t(ξi+3 ) for i ∈ [3]. These whorms will all be distinct, so
+we get no repeats until after 2(k + 2) steps. It is also straightforward to directly construct
+an order ideal in V × [k] whose orbit is of this size. Hence, The order of w on Fk (V) is exactly
+2(k + 2).                                                                                        □
+
+  In our proofs the following definition will be handy.
+Definition 3.17. A super orbit of an action is an orbit repeated one or more times. The
+length of a super orbit is always a multiple of the orbit size. Similarly a super orbit board
+will be the array representing a super orbit.
+Proof of Theorem 3.3. The symmetry homomesy (1) is immediate from Theorem 3.15.
+   For (2) if I is an order ideal of V × [k], then there is a P -partition f = (x, y, z) ∈ F in
+bijection with I given by Theorem 2.12. We know that
+     • ℓ1 ∈ I ⇐⇒ x > 0,
+     • r1 ∈ I ⇐⇒ z > 0, and
+     • ck ∈ I ⇐⇒ y = k.
+   In the one-tailed case, let ξ1 , ξ2 , . . . , ξ6 be six consecutive whorms partitioning the (possibly
+super) orbit board by Lemma 3.14. This gives a total of 4(k + 2) entries in the left and right
+columns, six of which are 0, leaving 4(k + 2) − 6 nonzero entries, each of which contributes to
+either χr1 or χℓ1 . The number of entries equal to k in the center column is 6 because there
+are 6 whorms that end at k in the center. Thus, we get the average
+                 P
+                    f ∈R χℓ1 (f ) + χr1 (f ) − χck (f )       4(k + 2) − 12   2(k − 1)
+                                                            =               =          .
+                                  #R                             2(k + 2)       k+2
+The two-tailed case follows analogously.                                                             □
+
+   Using the whorm decomposition of the orbit board also gives a very clean proof of the
+following “flux capacitor” homomesy for rowmotion on J (Vk ). Let Fi = χℓi + χri + χci−1 , as
+shown in Figure 10.
+16                                    PLANTE AND ROBY
+
+                                            6 6 6
+                                            0 7 0
+                                            1 8 1
+                                            2 9 2
+                                            3 3 3
+                                            0 4 0
+                                            1 5 1
+                                            2 6 2
+                                            3 7 3
+                                            4 8 4
+                                            5 9 5
+
+       Figure 11. An orbit board of whirling in F9 (V), tiled by 2 two-tailed worms
+
+
+Lemma 3.18. Let R be a one-tailed orbit board for the action of rowmotion on order
+ideals of J (Vk ). The the average value of the difference of successive flux-capacitor indicator
+                           3
+functions, Fi − Fi+1 , is k+2 for i ∈ [2, k − 1].
+
+Proof. From the whirling orbit-board point of view, the statistic Fi − Fi+1 is nonzero exactly
+when i appears in the left or right column or i − 1 appears in the center column. (Otherwise,
+e.g., both left-column indicator functions are zero, or both are one, canceling out when we
+take the difference Fi − Fi+1 .)
+   In the one-tailed case, if i appears in the tail of a given whorm then i − 1 will not appear
+in the head, and vice versa. So each of the six whorms in a super orbit board (Lemma 3.14)
+will contribute exactly 1 to the statistic Fi − Fi+1 , depending on whether i appears in a side
+column or i − 1 appears in the center column. This gives a total contribution of 6 to the
+statistic. Divide this by the size of the super orbit, 2(k + 2), to get the result.          □
+
+  Unfortunately in the two-tailed (symmetric) case, this lemma fails to hold, as the following
+counterexample shows. Earlier versions of this work incorrectly asserted that the above
+lemma held in all cases, which would have led to a stronger version of Theorem 3.20 which
+omitted the “symmetrically placed” hypothesis.
+
+Example 3.19. Consider the orbit board from whirling F9 (V) starting at 666, as shown in
+                                            4
+Figure 11. we see that F2 − F3 has average k+2 (since there are four 2s in outer column and
+                                                               2
+no 1s in the center column). Meanwhile, F7 − F8 has average k+2   (since there are zero 7s in
+outer column and two 6s in the middle).
+
+Theorem 3.20. For k > 1. Let Fi = χℓi + χri + χci−1 be the indicator function of the flux
+capacitor at height i. Under the action of rowmotion on order ideals of J (Vk ), the difference
+of symmetrically-placed flux-capacitor statistics, Fi − Fk+2−i , is 3(k+2−2i)
+                                                                        k+2
+                                                                              -mesic.
+
+Proof. For the one-tailed case, we can use a simple telescoping sum to get a more general
+result. For any i < j we may write
+
+                 Fi − Fj = (Fi − Fi+1 ) + (Fi+1 − Fi+2 ) + · · · + (Fj−1 − Fj ).
+             ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                             17
+
+                                                                                            3(j − i)
+Grouping consecutive pairs and using Lemma 3.18, we get the average of Fi − Fj is                    .
+                                                                                             k+2
+This specializes to the stated homomesy when j = k + 2 − i for symmetrically-placed flux-
+capacitor statistics. A similar argument works for j > i, when the homomesic average will
+be non-positive.
+  For the two-tailed case we need a separate argument, since Lemma 3.18 no longer applies.
+Fix j = k + 2 − i, and assume again for now that i < j. Within any two-tailed whorm,
+the multiset of labels is the set of all integers in [0, k] with integers in [0, t(ξ) − 2] appearing
+twice, and t(ξ) − 1 appearing thrice (where the whorm moves to the center). Call the two
+whorms tiling the length k + 2 (super) orbit board ξ1 and ξ2 . By Lemma 3.11 we have
+
+                                   (t(ξ1 ) − 1) + (t(ξ2 ) − 1) = k.
+
+For example, in the length 11 orbit board in Figure 11, the labels on the red and blue whorms
+are 6 and 3, which sum to k = 9.
+   Now assume that t(ξ1 ) − 1 = m, so t(ξ2 ) − 1 = k − m. From the whirling whorms point
+of view, the contribution of a given label λ in the tiling to the statistic Fi − Fk+2−i is given
+as follows:
+     • If λ lies in a side column and i ≤ λ ≤ k + 1 − i, then that label contributes +1 to
+       the statistic.
+     • If λ lies in the center column and i − 1 ≤ λ ≤ k − i, then that label contributes +1
+       to the statistic.
+Outside of the stated intervals, the statistics cancel each other out, so λ contributes zero.
+This all follows directly from the definition of Fi .
+
+Example 3.21. Here are the two whorms from the orbit shown in Figure 11 written hor-
+izontally in one line. The tails are highlighted in blue and the heads highlighted in green.
+The labels that contribute to F2 − F9 are circled. Here m = 6 and k − m = 3, both of which
+lie between i = 2 and k + 2 − i = 9.
+
+                                 ξ1 0 1 ○
+                                        2○3○
+                                           4○5○
+                                              6○6○
+                                                 7 8 9
+
+                                 ξ2 0 1 ○
+                                        2○3○
+                                           3○4○
+                                              5○6○
+                                                 7 8 9
+
+The number of circled labels in the whorms will give us the total value of the statistic F2 −F9
+provided the circled labels in the tail section (blue part) of the whorm are counted twice since
+the whorm is two-tailed. Divide by the length of the orbit board, 11 to get 21  11
+                                                                                   = 3(k+2−2i)
+                                                                                        k+2
+                                                                                               .
+
+   In general for i ≤ m ≤ k + 2 − i the “symmetrically-placed” condition forces the number of
+contributing labels in the head of ξ1 to equal the number of contributing labels in the tail of ξ2 .
+Hence, the total number of +1’s in the orbit will be thrice the number of contributing labels
+in the tail of ξ1 plus thrice the number of contributing labels in the tail of ξ2 . But this is just
+thrice the total number of contributing labels, since the number in the tail of ξ2 equals the
+number in the head of ξ1 . Hence, we get a total contribution of 3((k+2−i)−i) = 3(k+2−2i).
+The homomesy follows by dividing by the length, k + 2, of the orbit board. A symmetrical
+argument, where we count contributing −1’s, handles the case where i > j = k + 2 − i. □
+18                                        PLANTE AND ROBY
+
+
+                                     columns: b1 b2 b3 b4 b5 b
+                                                             0
+                                              1 1 0 1 2 3
+                                              2 2 1 2 3 3
+                                              3 3 2 3 0 3
+                                              0 0 3 0 1 3
+                                              1 1 0 1 2 2
+                                              2 2 1 2 0 3
+                                              3 3 2 3 1 3
+                                              0 0 3 0 2 3
+                                              1 1 0 1 3 3
+                                              2 2 1 2 0 2
+                                              0 0 2 0 1 3
+                                              1 1 3 1 2 3
+                                              2 2 0 2 3 3
+                                              3 3 1 3 0 3
+                                              0 0 2 0 1 2
+
+                      Figure 12. An orbit board of whirling on C5 × [3].
+
+                          4. Dynamics for rowmotion on Cn × [k]
+  In this section we extend our results for the chain of V’s poset to a “chain of claws” poset,
+defined below. The equivariant bijection (Theorem 2.12) and techniques from Section 3
+extend with only limited difficulty to this new setting.
+
+4.1. The chain of claws poset.
+Definition 4.1. We define the claw poset Cn = {b1 , . . . , bn , b
+                                                                 0} where each bi covers b
+                                                                                         0. For
+example, the Hasse diagram of C4 would be                     . The chain of claws poset is defined
+to be Cn × [k].
+   Using the established equivariant bijection (Theorem 2.12) between J (Cn × [k]) and k-
+bounded P -partitions Fk (Cn ) that sends rowmotion to whirling, we can prove homomesy
+and periodicity results similar to those for C2 = V. Now instead of triples of numbers,             we
+will consider orbit boards of (n + 1)-tuples on [0, k], f (b1 ), f (b2 ), . . . , f (bn ), f (b
+                                                                                              0) , satis-
+fying f (bi ) ≤ f (b
+                   0) for each i ∈ [n]. Notice that for the case n = 2, we have moved the
+column formerly in the middle (corresponding to b 0) to be the rightmost one. The following
+proposition is an analogue of Proposition 3.7.
+                                                                                k+1
+                                                                                X
+Proposition 4.2. The number of order ideals of Cn × [k] is given by                   in .
+                                                                                i=1
+
+Proof. Every order ideal of Cn × [k] is associated with a tuple of labels of the elements of Cn .
+Let j ∈ [0, k] denote the label of b0. The possible labels for b1 , . . . , bn−1 , and bn are precisely
+the elements of [0, j], yielding a total of (j + 1)n labelings. Summing over all possible values
+of j produces the desired result.                                                                    □
+             ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                             19
+
+   The orbit board in Figure 12 has been decomposed (canonically) into a mixture of one-
+tailed and multi-tailed whorms. Since now we list the labels at b        0 in the rightmost column,
+the whorms are “(right) edge-seeking” rather than “center-seeking”. So each whorm starts
+with one or more tails lying within the first k columns, and then jumps to the rightmost
+column at some point.
+   Note that the first, second, and fourth columns in Figure 12 are identical. This is no
+accident. If two (or more) entries among the first n in a given row are the same, then those
+positions (columns) remain the same throughout the entire orbit board. This is because the
+entries b1 , . . . , bn represent the result of whirling at incomporable elements of the poset Cn , so
+the whirls at those elements commute with one another. Furthermore, these two entries must
+belong to the same whorm, because each will be whorm-connected via b            0 exactly when their
+value matches the value of the last entry. So orbit boards for whirling on Cn can decompose
+into multi-tailed whorms with up to n tails. (The n-tails case entails near-constant rows and
+exactly two whorms decomposing the super-orbit board.)
+   These observations will allow us to generalize our periodicity and homomesy results from V
+to Cn . First we define a map that will be equivalent to whirling k + 2 times. This generalizes
+the “reflection” (x, y, z) 7→ (z, y, x), which is the result of whirling k + 2 times in the Vk case.
+Definition 4.3. For any A ⊆ [0, k], define the family of order-reversing maps FkA (Cn ) =
+{f : f ∈ Fk (Cn ) and f (bj ) ∈ A for all j ∈ [n]}. Then set wA : FkA (Cn ) to be the map which
+whirls (cyclically increments within the subset A) each label on the non-b        0 elements of Cn .
+By definition of whirling (repeatedly incrementing until a valid labeling is reached), this
+preserves the condition that f (bi ) ≤ f (b 0) for all i ∈ [n], so is well-defined. Since there are
+no relations between the leaves of Cn , one can update the labels in any order.
+  This definition becomes particularly useful, when A is precisely the set of current labels
+at nonzero elements of f .
+Definition 4.4. Given f ∈ Fk (Cn ), set A(f ) = {a : f (bj ) = a for some j ∈ [n]}, i.e., A(f )
+is the set of values that the P -partition f attains on the non-b 0 elements of Cn . Set α = #A
+and α(f ) = #A(f ). For any f, g ∈ Fk (Cn ), if g = wj (f ) for some j ∈ N, then α(f ) = α(g).
+(Whirling preserves the number of distinct labels.) So we may sometimes write just α when
+an orbit is fixed. For the rest of this section, we will consider the map wA(f ) , where whirling
+takes place within the set of possible labels given by the current function. (This set remains
+constant throughout an orbit of wA(f ) .)
+Example 4.5. Consider f = (1, 3, 3, 0, 4, 1, 6) ∈ F9 (C6 ). We see A(f ) = {0, 1, 3, 4} so
+                            wA(f ) (1, 3, 3, 0, 4, 1, 6) = (3, 4, 4, 1, 0, 3, 6).
+The last entry remains unchanged, and the earlier entries are increasing cyclically within the
+set A(f ) = {0, 1, 3, 4}, with α = 4. As another example, the reader can compare rows five
+apart in the orbit board of Figure 12.
+   In the special case of V (= C2 ) our set A = A(f ) within any orbit will have at most two
+elements, hence wA(f ) will just toggle between those two values at the left and the right.
+This means that wA(f ) is the same as reflecting values across the center of the orbit board,
+which we already saw was the effect of wk+2 . Our next theorem will generalize this to the
+case of Cn , except now the center column has moved to be the rightmost one.
+20                                       PLANTE AND ROBY
+
+4.2. Periodicity and homomesy via edge-seeking whorms. Our goal now is to gener-
+alize the periodicity and homomesy results for V × [k] to Cn × [k]. Our first result shows that
+the sum of the tail-lengths of the first α(f ) + 1 whorms (counting the length only once for
+multi-tailed whorms) is constant. If f ∈ F k (Cn ) satisfies f (b  0) ̸∈ A(f ), then f will contain
+entries from α + 1 distinct whorms. Otherwise, f will intersect exactly α whorms.
+   Define t(ξ) = 1 + min{f (0̂) : (0̂, f ) ∈ ξ} and h(ξ) := k + 2 − t(ξ). If there exists (0̂, f ) ∈ ξ1
+with f (0̂) = k such that (0̂, w(f )) ∈ ξ2 , then we say ξ2 is in front of ξ1 . (In other words, if
+their heads are consecutive in the rightmost column of the orbit board.) In Figure 12, the
+yellow whorm is in front of the red whorm. We call a sequence of whorms consecutive if each
+is in front of the next. The next result generalizes Lemma 3.11.
+Lemma 4.6. Fix a whirling orbit of Fk (Cn ), decomposed into whorms, with α = α(f ) for
+any f in the orbit. If ξ1 , . . . , ξα+1 are α + 1 consecutive whorms, then
+                                 t(ξ1 ) + · · · + t(ξα+1 ) = α(k + 2).                             (1)
+Using h(ξ) + t(ξ) = k + 2, this can be written equivalently as
+
+                                   h(ξ1 ) + · · · + h(ξα+1 ) = k + 2.                              (2)
+or as
+                                   t(ξα+1 ) = h(ξ1 ) + · · · + h(ξα ).                             (3)
+Proof. The proof follows similarly to that of Lemma 3.11. The key observation is that
+t(ξα+1 ) = h(ξ1 ) + · · · + h(ξα ) for consecutive whorms. This holds because the tail of ξα+1
+begins one row below where the head of ξ1 starts, and ends one row below where ξα ends.
+But since t(ξ) = k + 2 − h(ξ) for any ξ we get
+            t(ξα+1 ) = h(ξ1 ) + · · · + h(ξα ) = (k + 2 − t(ξ1 )) + · · · + (k + 2 − t(ξα )),
+which implies the result. See Figure 12 for examples.                                               □
+Corollary 4.7. Fix a whirling orbit of Fk (Cn ), decomposed into whorms, with α = α(f ) for
+any f in the orbit. If ξ1 , . . . , ξα+2 are consecutive whorms, then t(ξ1 ) = t(ξα+2 ).
+Proof. Applying Lemma 4.6 to two consecutive consecutive collections of whorms, we obtain
+                    t(ξ1 ) + · · · + t(ξα+1 ) = α(k + 2) = t(ξ2 ) + · · · + t(ξα+2 ),
+which reduces to t(ξ1 ) = t(ξα+2 ).                                                                 □
+   The next theorem, which generalizes Theorem 3.15, gives a simple way of describing the
+(k + 2)nd iteration of whirling as the much simpler action of whirling (in any order) at each
+leaf of Cn within the set of allowable labels A(f ).
+Theorem 4.8. Let w be the whirling action on k-bounded P -partitions in Fk (Cn ). For any
+f ∈ Fk (Cn ) with A = A(f ) and α = α(f ) = #A(f ), we have wk+2 f = wA(f ) f . Thus,
+wα(k+2) f = f .
+Proof. Let R be an orbit board of w, decomposed into whorms, with A = A(f ) for some
+(row) f in the orbit. Let ξ1 , . . . , ξα be the consecutive whorms whose tails intersect f .
+Because the whorms are consecutive, in row f the largest value in A belong to ξ1 , the next
+largest to ξ2 , and so on. In this proof we will show that the labels in the tail(s) of ξ1 will
+appear in the tail(s) of ξα+2 exactly k + 2 rows laters. This process can be iterated to include
+all the whorms, proving that the labels change as described by wA(f ) f .
+             ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                            21
+
+
+                              columns: b1 . . . bi . . . bj . . . b
+                                                                  0
+
+
+
+
+                                                             ξ1
+                                                 ξ2
+                                                             t1     t1
+
+
+
+
+                                                             ξα+1
+                                                                         k+2
+
+
+
+
+                                                 ξα+2
+                                                        ..
+                                                         .
+
+
+                                                  t1                t1
+
+       Figure 13. Sketch for the proof of Theorem 4.8. Consecutive whorms are
+       denoted by ξ1 , . . . , ξα+2 . The last label in the tail of ξ1 is t1 . Note that the
+       tail lengths of ξα+2 and ξ1 , are the same, so the labels in column bj reproduce
+       those in column bi exactly k + 2 rows further along the orbit.
+
+   By Lemma 4.6 (3), the sum of the head lengths of the whorms ξ1 , ξ2 , . . . , ξα+1 is exactly
+k + 2. Thus, the head of ξα+2 begins exactly k + 2 rows below the row where the head of ξ1
+begins. Equivalently, the tail of ξα+2 ends in the row exactly k + 2 below where the tail of ξ1
+ends. Since these two whorms have the same tail length by Corollary 4.7, we get that each
+entry within each tail of ξα+2 is the same as each entry within each tail of ξ1 , cyclically shifted
+down k + 2 rows and appearing in different column(s). Note also that the tail column(s)
+of ξα+2 are the same as the tail column(s) of ξ2 . So in any of these (ξ2 ) columns, the label
+k + 2 rows later has become the label from the previous whorm ξ1 in row f , which is the
+cyclically next larger value within A(f ). Thus, wk+2 f = wA(f ) f , proving the theorem.         □
+Example 4.9. Here is the orbit board generated by (0, 0, 2, 5, 0, 6) ∈ F6 (C5 ), with α = 3
+and divided into three sections of length k + 2. In each section one of the whorms ξ1 , ξ5 , and
+ξ9 is highlighted. Each whorm starts in the first row and ends in the penultimate row of its
+section. The tail-lengths of ξ1 and ξα+2 are the same, just as in Corollary 4.7. Reading across
+from one section to the next (cyclically) in each row, illustrates Theorem 4.8: wk+2 = wA .
+                    0 0 2 5 0 6             2 2 5 0 2 6                  5 5 0 2 5 6
+                    1 1 3 6 1 6             3 3 6 1 3 6                  6 6 1 3 6 6
+                    2 2 4 0 2 4             4 4 0 2 4 4                  0 0 2 4 0 4
+                    3 3 0 1 3 5             0 0 1 3 0 5                  1 1 3 0 1 5
+                    4 4 1 2 4 6             1 1 2 4 1 6                  2 2 4 1 2 6
+                    5 5 2 3 5 5             2 2 3 5 2 5                  3 3 5 2 3 5
+                    0 0 3 4 0 6             3 3 4 0 3 6                  4 4 0 3 4 6
+                    1 1 4 5 1 5             4 4 5 1 4 5                  5 5 1 4 5 5
+Porism 4.10. In the above situation, each column of the super-orbit board of length α(k+2)
+intersects exactly α + 1 whorms.
+Proof. Let R be the super-orbit board of w with α(k +2) rows. Decompose this into whorms,
+with A = A(f ) for some f in the orbit. Let ξ1 , . . . , ξα be the consecutive whorms whose
+22                                         PLANTE AND ROBY
+
+                                                3 1 3 3
+                                                0 2 0 4
+                                                1 3 1 3
+                                                2 0 2 4
+
+     Figure 14. A short orbit board of whirling on C3 × [4]. In this example α = 2.
+
+tails intersect f . By definition of consecutive, the whorms ξi and ξα+i occupy the same
+columns, so the whorms ξ1 , ξα+1 , ξ2α+1 , . . . intersect this column. By Corollary 4.7, we have
+the equalities
+                        t(ξ2α+1 ) = t(ξα ),
+                        t(ξ3α+1 ) = t(ξ2α ) = t(ξα−1 ),
+                        t(ξ4α+1 ) = t(ξ3α ) = t(ξ2α−1 ) = t(ξα−2 ),
+                                 ..
+                                  .
+                       t(ξαα+1 ) = t(ξ(α−1)α ) = t(ξ(α−2)α−1 ) = · · · = t(ξ2 ).
+This gives the sum
+          t(ξ1 ) + t(ξα+1 ) + · · · + t(ξαα+1 ) = t(ξ1 ) + t(ξ2 ) + · · · + t(ξα+1 ) = α(k + 2)
+by Lemma 4.6. This is also the length of the super-orbit board; hence, the total number of
+whorms intersecting any given column is α + 1, since the sum of tail lengths of α + 1 worms
+is the total number of rows in the super-orbit board.                                     □
+
+  By Porism 4.10, we will have at most α(α + 1) total distinct whorms in an orbit board.
+(Indeed for equality to be achieved, the orbit board has to have maximal length α(k + 2)
+before repeating.) On the other hand, consider the orbit board of F4 (C3 ) in Figure 14 with
+α = 2. Here w4 (f ) = f so the orbit is only 4 rows long with 2 distinct whorms. We can
+extend this to a super orbit board with 12 rows and 6 whorms (in general with α(k + 2) rows
+and α(α + 1) whorms).
+Theorem 4.11. Let m = min(k + 1, n). The order of rowmotion on the chain of claws poset
+J (Cn × [k]) is (k + 2) LCM(1, 2, . . . , m).
+Earlier versions of this work reported the weaker statement that the order divides m!(k + 2).
+
+Proof. By Theorem 4.8, the whirling order of any f ∈ Fk (Cn ) (i.e., the size of the orbit
+containing f ) divides α(f )(k + 2), where α(f ) ≤ m = min(k + 1, n). Thus the order of the
+entire map divides the LCM of these values.
+   To prove that this order is exact, we claim that for every p ∈ [m], there exists an (actual)
+orbit of length p(k + 2), except when p = k + 1, in which case the orbit has length k + 1. Our
+strategy is similar to the construction used to prove Theorem 3.2. However, here we make
+use of Theorem 4.8, that wk+2 f = wA(f ) f , i.e., that after k + 2 steps, w simply cyclically
+rotates the possible values of A(f ).
+   Set f1 := (0, 0, 0, . . . , 0), and for each integer p ∈ [2, m], set
+                       fp = (0, 1, . . . , p − 2, p − 1, p − 1, . . . , p − 1, p − 1).
+             ROWMOTION ON THE CHAIN OF V’S POSET AND WHIRLING DYNAMICS                              23
+
+Let Rp be the orbit board of w containing fp . Here α(fp ) = p, and the action wA(fp ) partitions
+Rp into cycles of length p. Thus p divides the length of Rp . See Figure 15 for an example of
+this construction.
+   We will now show the following:
+      • If p < k + 1, then the length of Rp is p(k + 2).
+      • If p = k + 1, then the length of Rp is k + 1.
+In the first case, it suffices to show there is no positive integer q < k + 2 such that wq (fp ) =
+wA(fp ) fp . We demonstrate this by showing that wq (fp )(b    0) ̸= fp (b
+                                                                         0) for all positive q < k + 2,
+noting that wA(fp ) leaves the rightmost label unchanged.
+   By definition, the rightmost label of fp is p − 1, which is less than k by assumption. Since
+0 is the minimal element of the poset, by definition of whirling its (rightmost) label will
+b
+increase by one at each step until it reaches the maximum value k at step k − (p − 1). At this
+step, the other values in the row (in some order) are k − 1, k − 2, . . . , k − p, which have all
+increased from their initial values of 0, 1, . . . , p as the constraining label at b 0 has increased.
+   From this point onward, each step will involve exactly one (possibly multi-tailed) whorm
+moving to the rightmost column with value k. There are p whorms, so the rightmost label
+remains k for p additional steps, and thus cannot reset to p − 1 for a total of k − (p − 1) + p =
+k + 1 steps. Thus, wq (fp ) ̸= wA(fp ) fp for all q < k + 2, and length of Rp is p(k + 2), finishing
+this case.
+   In the second case, we get a collapsing of the suborbit, and it only takes a single whirl
+to get us to the P -partition with permuted labels. That is, from the definition of whirling
+when p = k + 1, we get
+                      w(fp ) = (1, 2, . . . , p − 1, 0, . . . , 0, p − 1) = wA(fp ) (fp ).
+Therefore, the length of Rp is exactly the order of wA(f ) , which is p = k + 1.
+  The orbit lengths of R1 , . . . , Rm depend on the value of m. If m = n, the orbit lengths
+are k + 2, 2(k + 2), . . . , (n − 1)(k + 2), n(k + 2). If m = k + 1, the orbit lengths are k + 2, 2(k +
+2), . . . , k(k + 2), k + 1. In either case, the LCM is (k + 2)LCM(1, . . . , m).                     □
+  The following theorem is the analogue of the first homomesy in Theorem 3.3; it follows
+directly from Theorem 4.8 just as in the proof of Theorem 3.3(1) for the case n = 2.
+Theorem 4.12. Let χ(i,a) denote the indicator function for (bi , a) ∈ Cn × [k]. Then for the
+action of rowmotion on J (Cn × [k]), the statistic χ(i,a) − χ(j,a) is 0-mesic for all i, j ∈ [n]
+and a ∈ [k].
+Remark 4.13. The second P       homomesy in Theorem 3.3 fails to hold in general for n > 2.
+                                   n
+The average of the statistic       i=1 χ(i,1) − χ(b
+                                                  0,k) (analogous to Theorem 3.3(2)) turns out to
+be dependent on α(f ) (for any f ∈ R) and can be computed as
+                                  n(α)(k + 2) − (n + α)(α + 1)
+                                                                  .                           (4)
+                                              α(k + 2)
+To see this consider the super orbit of length α(k + 2) for some f ∈ Fk (Cn ) with nα(k + 2)
+entries in the first n columns. We know χ(i,1) (I) = 0 if and only if the f corresponding to
+I satisfies f (bi ) = 0. (See the proof of Lemma 2.11.) But this is counted by the number of
+whorm beginnings (considering each tail to be separate); by Porism 4.10 this is n(α + 1).
+Furthermore, χ(b0,k) (I) = 1 if and only if the f corresponding to I satisfies f (b
+                                                                                  0) = k, which is
+counted by the number of whorm endings, that is α(α + 1). Thus, the numerator counts 1
+24                                    PLANTE AND ROBY
+
+                                                  0 1 2 2 2
+                                                  1 2 0 0 3
+                                                  2 3 1 1 3
+                               0 1 1 1 1
+                                                  3 0 2 2 3
+                               1 0 0 0 2
+                                                  0 1 3 3 3
+                               2 1 1 1 3
+             0 0 0 0 0                            1 2 0 0 2
+                               3 2 2 2 3                            0 1 2 3 3
+             0 0 0 0 1                            2 0 1 1 3
+                               0 3 3 3 3                            1 2 3 0 3
+             1 1 1 1 2                            3 1 2 2 3
+                               1 0 0 0 1                            2 3 0 1 3
+             2 2 2 2 3                            0 2 3 3 3
+                               0 1 1 1 2                            3 0 1 2 3
+             3 3 3 3 3                            1 3 0 0 3
+                               1 2 2 2 3
+                                                  2 0 1 1 2
+                               2 3 3 3 3
+                                                  0 1 2 2 3
+                               3 0 0 0 3
+                                                  1 2 3 3 3
+                                                  2 3 0 0 3
+                                                  3 0 1 1 3
+
+       Figure 15. Four orbit boards of whirling on C4 × [3] with α = 1, 2, 3, and 4
+       respectively. The order of whirling here is 60 = LCM(1, 2, 3, 4) · 5.
+
+                                         1 3 5 5 5
+                                         2 4 0 0 6
+                                         3 5 1 1 5
+                                         4 0 2 2 6
+                                         5 1 3 3 5
+                                         0 2 4 4 6
+
+       Figure 16. An orbit board of whirling on C4 ×[6]. The average of the statistic
+       B3 − B2 is 2/3 which does not agree with the statement of the generalized flux
+       capacitor in Remark 4.14. Notice if the labels in repeated column are ignored,
+       then the average of the statistic B3 − B2 is 1/2 which agrees with the gener-
+       alization.
+
+for each of the nα(k + 2) − n(α + 1) entries that are not at the start of a tail, and −1 for the
+α(α + 1) whorm heads in the rightmost column. Divide by the size of the super-orbit board
+to get the average. In the n = 2 case the only possibilities are α = 1 or α = n, for both of
+which (4) reduces to nk−2
+                      k+2
+                           = 2k−2
+                              k+2
+                                  ; this explains why we get the homomesy Theorem 3.3(2)
+for V × [k].
+
+Remark 4.14. The “flux-capacitor” homomesy of Theorem 3.20 also fails to generalize
+to the claw-graph setting. Earlier versions of this work incorrectly asserted the following
+analogous “flux-capacitor” homomesy: “Let Bi = χ(i−1,b0) + nℓ=1 χ(i,ℓ) . Then for the action
+                                                           P
+
+of rowmotion on J (Cn × [k]), Bi − Bj is (j−i)(n+1)
+                                            k+2
+                                                    -mesic for all i, j ∈ [n].”
+Unfortunately we only obtain this average in general for the subset of orbit boards which
+are tiled entirely by one-tailed whorms. See Figure 16 for a counterexample.
+4.3. Acknowledgments. We are grateful to Banff International Research Station for host-
+ing online and hybrid workshops on dynamical algebraic combinatorics in October 2020
+                                       REFERENCES                                         25
+
+and November 2021. Discussions with the following colleagues were particularly helpful:
+Ben Adenbaum, Chinmay Dharmendra, Sam Hopkins, Michael Joseph, James Propp, Bruce
+Sagan, and Jessica Striker. We also thank two anonymous reviewers of an earlier (extended
+abstract) version of this work.
+                                       References
+ [1] B. Adenbaum. “On pattern avoidance and dynamical algebraic Combinatorics”. Ph.D.
+     thesis. Dartmouth College, 2024.
+ [2] D. Armstrong, C. Stump, and H. Thomas. “A uniform bijection between nonnesting and
+     noncrossing partitions”. In: Trans. Amer. Math. Soc. 365.8 (Mar. 2013), pp. 4121–4151.
+     doi: 10.1090/s0002-9947-2013-05729-7. url: https://doi.org/10.1090/s0002-
+     9947-2013-05729-7.
+ [3] A. Brouwer and A. Schrijver. “On the period of an operator, defined on antichains”.
+     In: Stichting Mathematisch Centrum. Zuivere Wiskunde no. ZW 24/74 (1974).
+ [4] P. Cameron and D. Fon-Der-Flaass. “Orbits of antichains revisited”. In: Eur. J. Com-
+     bin. 16 (1995), pp. 545–554.
+ [5] D. Einstein and J. Propp. “Combinatorial, piecewise-linear, and birational homomesy
+     for products of two chains”. en. In: Algebraic Combinatorics 4.2 (2021), pp. 201–224.
+     doi: 10.5802/alco.139. url: https://alco.centre-mersenne.org/articles/10.
+     5802/alco.139/.
+ [6] S. Haddadan. “Some instances of homomesy among ideals of posets”. In: Electron J.
+     Combin. 28.1 (2021).
+ [7] S. Hopkins. Order polynomial product formulas and poset dynamics. 2020. doi: 10.
+     48550/ARXIV.2006.01568. url: https://arxiv.org/abs/2006.01568.
+ [8] S. Hopkins and M. Rubey. “Promotion of Kreweras words”. In: Sém. Lothar. Combin.
+     86B (2022), Art. 77, 12.
+ [9] M. Joseph, J. Propp, and T. Roby. Whirling injections, surjections, and other functions
+     between finite sets. 2018. arXiv: 1711.02411 [math.CO].
+[10] M. Joseph and T. Roby. “Toggling Independent Sets of a Path Graph”. In: Electron.
+     J. Combin. 25 (2018), P1.18.
+[11] J. Propp and T. Roby. “Homomesy in Products of Two Chains”. In: Electron. J.
+     Combin. 22 (2015), P3.4.
+[12] V. Reiner, D. Stanton, and D. White. “The cyclic sieving phenomenon”. In: Journal
+     of Combinatorial Theory, Series A 108.1 (2004), pp. 17–50.
+[13] V. Reiner, D. Stanton, and D. White. “What is... cyclic sieving”. In: Notices Amer.
+     Math. Soc 61.2 (2014), pp. 169–171.
+[14] T. Roby. “Dynamical algebraic combinatorics and the homomesy phenomenon”. In:
+     Recent Trends in Combinatorics. Springer, 2016, pp. 619–652.
+[15] R. Stanley. Enumerative Combinatorics: Volume 1, 2nd Edition. no. 49 in Cambridge
+     Studies in Advanced Mathematics, Cambridge University Press, 2011.
+[16] J. Striker. “Dynamical algebraic combinatorics: promotion, rowmotion, and resonance”.
+     In: Notices Amer. Math. Soc. 64.6 (2017), pp. 543–549. issn: 0002-9920. doi: 10.1090/
+     noti1539. url: https://doi-org.ezproxy.lib.uconn.edu/10.1090/noti1539.
+[17] J. Striker and N. Williams. “Promotion and rowmotion”. In: Eur. J. Combin. 33 (2012),
+     pp. 1919–1942.
+26                                     REFERENCES
+
+[18] H. Thomas and N. Williams. “Rowmotion in slow motion”. In: Proceedings of the
+     London Mathematical Society 119.5 (May 2019), 1149–1178. issn: 1460-244X. doi:
+     10.1112/plms.12251. url: http://dx.doi.org/10.1112/plms.12251.
+     Department of Mathematics, University of Connecticut, Storrs, CT 06269-1009, USA
+     Email address: matthew.plante@uconn.edu
+
+     Department of Mathematics, University of Connecticut, Storrs, CT 06269-1009, USA
+     Email address: tom.roby@uconn.edu
+

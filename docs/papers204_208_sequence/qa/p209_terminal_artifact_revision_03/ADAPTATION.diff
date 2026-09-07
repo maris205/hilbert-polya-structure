@@ -1,0 +1,127 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/original_snapshot/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/audit_p209.py	2026-09-07 17:22:34.558519564 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/audit_p209.py	2026-09-07 17:26:36.192116776 +0800
+@@ -23,7 +23,7 @@
+ PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ A, B = [BATCH / ('reviews/p209_' + x) for x in ('a', 'b')]
+ FINAL = PAPER / 'qa_final'
+-PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'
++PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'
+ ORIGINAL_PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'
+ OUT = BATCH / 'qa/p209_terminal_artifact'
+ TERMINAL_PREP = BATCH / 'qa/p209_terminal_preparation'
+@@ -314,7 +314,45 @@
+     ck(outer['completion']['exit_code'] == 1 and
+        read(second / 'audit.stderr').decode() in outer['completion']['output'],
+        'second_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')
+-    return {'revision': 'p209_terminal_artifact_revision_02', 'original_preparation_payloads': 347,
++    # Revision 02 and the real initial_03 schema failure remain immutable in
++    # place; this correction does not replace either earlier preparation.
++    revision02 = BATCH / 'qa/p209_terminal_artifact_revision_02'
++    pin(revision02 / 'SHA256SUMS',
++        '6e9c86fad5802ed82df5ffa78e3f7d7bc9c3bec00a04892c96e002db121ed6ed')
++    manifest(revision02, count=79)
++    third = OUT / 'initial_03'
++    pin(third / 'SHA256SUMS', '45f4751ce36bfdfd432b2b5193ef23c8c7b91fa109b88cc4e305fd59234af921')
++    manifest(third, count=8)
++    for snapshot, source in [('executed_auditor_snapshot.py', 'audit_p209.py'),
++                             ('executed_recorder_snapshot.py', 'record_audit.py')]:
++        ck(read(third / snapshot) == read(revision02 / source),
++           'third_failed_exact_executed_sources', snapshot)
++    row, attempt = j(third / 'COMMAND.json'), j(third / 'ATTEMPT.json')
++    expected = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++                'pycache_prefix=' + str(third / 'unused_pycache'),
++                str(revision02 / 'audit_p209.py'), 'terminal-artifact-after-actual-views']
++    ck(row['exit_code'] == 1 and row['status'] == 'COMPLETED' and row['failure'] is None
++       and row['inputs_unchanged'] and row['unused_cache_absent'] and not (third / 'unused_pycache').exists()
++       and row['argv'] == expected and row['cwd'] == str(ROOT) and row['environment'] == ENV,
++       'third_failed_child_remains_failure', 'real initial_03 exit one; no default canonical PASS')
++    ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and
++       all(attempt[k] == row[k] for k in ('argv', 'cwd', 'environment', 'started_utc')),
++       'third_failed_prespawn_record', 'original fields')
++    exact_pair(third, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 13, historical=True)
++    for stream in ('stdout', 'stderr'):
++        pin(third / ('audit.' + stream), row[stream])
++    ck(read(third / 'audit.stdout') == b'' and len(read(third / 'audit.stderr')) == 674 and
++       h(third / 'audit.stderr') == '33820efd46d6cc2adf5c8c1ad27c6f4eb25f054e4607c0306f8409fe352c4077',
++       'third_failed_full_raw_streams', 'unchanged complete KeyError status traceback')
++    execution = BATCH / 'qa/P209_TERMINAL_ARTIFACT_INITIAL_03.failed.actual.json'
++    pin(execution, '816cb77c887baca09e28a6a71b9c25fafadd2942bca587e20bd4a8ca4cf0581e')
++    outer = j(execution)
++    ck(outer['completion']['exit_code'] == 1 and
++       read(third / 'audit.stderr').decode() in outer['completion']['output'],
++       'third_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')
++    return {'revision': 'p209_terminal_artifact_revision_03', 'original_preparation_payloads': 347,
++            'preserved_revision_02_payloads': 79, 'preserved_initial_03_payloads': 8,
++            'third_child_exit': 1, 'third_wrapper_exit': 1,
+             'previous_revision_payloads': 418, 'preserved_initial_02_payloads': 8,
+             'second_child_exit': 1, 'second_wrapper_exit': 1,
+             'preserved_initial_01_payloads': 8, 'original_child_exit': 1, 'original_wrapper_exit': 1,
+@@ -648,7 +686,27 @@
+             exact_pair(folder, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json')
+             ck(read(folder / 'producer.stdout') == read(base / 'CANONICAL.json'), 'strict_full_raw_canonical_reuse', (role, label0))
+             payload = j(folder / 'producer.stdout')
+-            ck(payload['status'] == 'PASS' and payload['checks'] == count, 'strict_actual_canonical_count', role)
++            # Exact original emitter contracts differ by role. Reviewer A has
++            # no top-level status field; success is independently required in
++            # the real child receipt above, and full raw equality is unchanged.
++            canonical_fields = {
++                'author': {'schema': 'p209-author-v1', 'status': 'PASS', 'checks': 98278,
++                           'total_states': 3414,
++                           'scope': 'Exhaustive n=0,...,5 only; finite pressure, not all-size proof.',
++                           'entrance_field_scope': 'Observed orbit index only; no all-size clock claim.'},
++                'a': {'schema': 'p209-review-a-independent-v1', 'checks': 135605},
++                'b': {'schema': 'p209-b-ports-constructive-carrier-v1', 'status': 'PASS',
++                      'checks': 54794, 'states': 3414, 'max_n': 5}}[role]
++            ck(type(payload) is dict and set(payload) == set(canonical_fields) | {'boxes'}
++               and all(payload[key] == value for key, value in canonical_fields.items())
++               and payload['checks'] == count,
++               'strict_exact_role_canonical_schema_and_scalars', role)
++            state_field = 'states' if role == 'b' else 'state_count'
++            boxes = payload['boxes']
++            ck(type(boxes) is list and [box['n'] for box in boxes] == list(range(6))
++               and [box[state_field] for box in boxes] == [1, 1, 4, 27, 256, 3125]
++               and sum(box[state_field] for box in boxes) == 3414,
++               'strict_exact_original_canonical_census', role)
+             ck(child['closure']['uncovered'] == child['closure']['bytecode'] == [], 'strict_child_recorded_closure', role)
+             for when in ('before', 'after'):
+                 obs = j(folder / ('child.' + when + '.json'))
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/original_snapshot/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/record_audit.py	2026-09-07 17:22:34.562519593 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/record_audit.py	2026-09-07 17:26:37.412124337 +0800
+@@ -29,11 +29,11 @@
+     save(path,(json.dumps(value,sort_keys=True,indent=2)+'\n').encode())
+ 
+ def main():
+-    if sys.argv[1:] != ['initial_03']:
+-        raise RuntimeError('Require the new revision_02 initial_03 attempt')
++    if sys.argv[1:] != ['initial_04']:
++        raise RuntimeError('Require the new revision_03 initial_04 attempt')
+     if not(sys.flags.optimize==0 and sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode
+            and dict(os.environ)==ENV and Path.cwd()==ROOT and Path(sys.executable).resolve()==Path('/usr/bin/python3.10')
+-           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02'
++           and PREP==ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03'
+            and Path(__file__).resolve()==PREP/'record_audit.py'):
+         raise RuntimeError('Require exact prepared path, system interpreter, -I -S -B, clean ENV and workspace cwd')
+     required=[ROOT/'papers/209-ordered-fibre-threading/PAPER_MANIFEST.sha256',
+@@ -45,7 +45,10 @@
+               ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_01.failed.actual.json',
+               ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_01/SHA256SUMS',
+               BASE/'initial_02/SHA256SUMS',
+-              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json']
++              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_02.failed.actual.json',
++              ROOT/'docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/SHA256SUMS',
++              BASE/'initial_03/SHA256SUMS',
++              ROOT/'docs/papers204_208_sequence/qa/P209_TERMINAL_ARTIFACT_INITIAL_03.failed.actual.json']
+     before={str(p):info(p) for p in required}
+     BASE.mkdir(exist_ok=True)
+     target=BASE/sys.argv[1];target.mkdir(exist_ok=False)
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/original_snapshot/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_02/lifecycle_audit.py	2026-09-07 17:22:34.562519593 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/lifecycle_audit.py	2026-09-07 17:26:37.428124436 +0800
+@@ -21,7 +21,7 @@
+ PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ A, B = [BATCH / ('reviews/p209_' + x) for x in ('a', 'b')]
+ FINAL = PAPER / 'qa_final'
+-PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_02'
++PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'
+ OUT = BATCH / 'qa/p209_terminal_artifact'
+ TERMINAL_PREP = BATCH / 'qa/p209_terminal_preparation'
+ TERMINAL_LAUNCH = BATCH / 'qa/root_replays/p209_terminal_strict/launcher_terminal_pair_01'

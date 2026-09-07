@@ -1,0 +1,1121 @@
+                                                                          A GREEDY CHIP-FIRING GAME
+
+                                                                                  RUPERT LI AND JAMES PROPP
+arXiv:2102.00346v4 [math.PR] 9 Jul 2022
+
+
+
+
+                                                  Abstract. We introduce a deterministic analogue of Markov chains that we call the hunger game.
+                                                  Like rotor-routing, the hunger game deterministically mimics the behavior of both recurrent Markov
+                                                  chains and absorbing Markov chains. In the case of recurrent Markov chains with finitely many
+                                                  states, hunger game simulation concentrates around the stationary distribution with discrepancy
+                                                  falling off like N −1 , where N is the number of simulation steps; in the case of absorbing Markov
+                                                  chains with finitely many states, hunger game simulation also exhibits concentration for hitting
+                                                  measures and expected hitting times with discrepancy falling off like N −1 rather than N −1/2 .
+                                                  When transition probabilities in a finite Markov chain are rational, the game is eventually periodic;
+                                                  the period seems to be the same for all initial configurations and the basin of attraction appears to
+                                                  tile the configuration space (the set of hunger vectors) by translation, but we have not proved this.
+
+
+
+
+                                                                                         1. Introduction
+                                             In the 1970s, Arthur Engel [5, 6] introduced a “stochastic abacus” that deterministically mimics
+                                          many aspects of the behavior of finite-state Markov chains with rational probabilities. Unaware
+                                          of Engel’s work, various mathematicians and physicists invented and studied the abelian sandpile
+                                          model [4] and the chip-firing game [1] which in many respects embody the same core idea as Engel’s
+                                          abacus but with different motivations. For books surveying chip-firing we refer readers to [11, 2].
+                                             In the 2010s, inspired by Engel’s work, the second author of this paper in collaboration with
+                                          Ander Holroyd [8] introduced a different way to deterministically mimic Markov chains via “rotor-
+                                          routing” (unaware that physicists were already studying the process under the name “the Eulerian
+                                          walkers model” [13]). The emphasis of much of this work on the rotor-router model, inspired by
+                                          discrepancy theory and quasi-Monte Carlo methods, was on the fidelity of the deterministic process
+                                          to the associated Markov chain. Specifically, it was shown that for certain asymptotically-defined
+                                          quantities associated with Markov chains (e.g., the proportion of the time that the chain spends in a
+                                          specific state), rotor-router simulation has the same limiting behavior as the Markov chain, typically
+                                          with faster convergence than the Markov chain itself would typically exhibit. For a comprehensive
+                                          background on chip-firing and rotor-routing and the relationship between them, we refer readers
+                                          to [7].
+                                             Here we discuss another way to derandomize Markov chains which we call the hunger game.
+                                          It can be applied to any discrete-state discrete-time Markov chain, whether or not the transition
+                                          probabilities are rational. (Rotor-routing can be extended to this regime — see the discussion of
+                                          stack walks in [8] — though we know of no way to extend chip-firing in this direction.) A key
+                                          difference between rotor-routing and the hunger game is that the frequency with which state i
+
+                                            Date: July 12, 2022.
+                                            Key words and phrases. chip-firing, recurrence, stationary distribution.
+                                                                                                   1
+2                                    RUPERT LI AND JAMES PROPP
+
+is followed by j in rotor-router simulation converges to the transition probability Pij ; this is not
+the case for the hunger game. That is, the hunger game does not exhibit fidelity with regard to
+transition-frequencies. However, we believe this may be a virtue rather than a vice, as we will
+explain in the concluding section.
+   In Section 2 we define the hunger game and the chip addition operators associated with it. In
+Section 3 we prove fundamental results on the boundedness of hunger, and in Section 4 we prove
+basic results on the behavior of chip addition operators. In Section 5 we prove the main result of this
+paper, demonstrating that the normalized firing vector of a hunger game process converges to the
+unique stationary distribution of an irreducible Markov chain with a discrepancy bound inversely
+proportional to the number of time steps. We apply this result to show how the hunger game
+process can calculate hitting probability distributions, escape probabilities, expected absorption
+times, and expected return times in Section 6 . In Section 7 we focus on finite Markov chains with
+rational transition probabilities. We introduce the notion of a recurrent hunger vector (a vector
+that returns to itself under the hunger game) and study the properties of the basin of attraction
+(the set of recurrent vectors). In the case where all transition probabilities are rational, we prove
+the zero vector is always recurrent and determine its period, and conjecture that all the periods for
+a given Markov chain are the same. We conclude with Section 8 , comparing the discrepancies of
+the rotor-router model and the hunger game.
+
+                                          2. Preliminaries
+   See [9] or [12] for basic facts about Markov chains. Throughout this paper, except where otherwise
+noted, Markov chains are assumed to have a finite state space indexed by positive integers 1, . . . , n
+for some n; when we consider Markov chains with countably infinite state spaces, we will assume
+that for each state i there are only finitely many states j such that the transition probability Pij
+from state i to state j is positive. We can represent a Markov chain by a weighted directed graph
+G = (V, E) whose vertices vi ∈ V are the allowed states and the weight of the directed edge
+(vi , vj ) ∈ E is Pij . For brevity, we will use the words state and vertex to refer to both the state in
+the Markov chain and the corresponding vertex in G, passing back and forth between the abstract
+Markov chain and its concrete embodiment as a random walk on G. We say that state i is an
+absorbing state if Pii = 1 (equivalently if G has a loop at vi with weight 1). Notice that for every
+vertex v ∈ G, the sum of the weights of all edges (v, w) is 1.
+   Let H = P − I, where I is the n-by-n identity matrix. Let Hi , Pi , and Ii denote the ith rows of
+the matrices H, P , and I respectively. Observe that Ii = ei (the ith unit vector) and that −H is the
+Laplacian of the graph. The Markov chain admits at least one stationary measure π for which
+the vector v = [π(1), . . . , π(n)] satisfies vP = v (this follows from the assumption that the Markov
+chain is finite; see, e.g., [12]), so 1 is an eigenvalue of P and 0 is an eigenvalue of H. All eigenvalues
+of P have magnitude at most 1. When the Markov chain is irreducible (that is, when every state
+can be reached from every other state in some finite number of steps), 1 is a simple eigenvalue of P
+and 0 is a simple eigenvalue of H, so that H has rank n − 1, and the rows of H, taken with integer
+coefficients, generate an n − 1-dimensional sublattice of the space of vectors with entries summing
+to zero; in this case, there is a unique stationary measure π satisfying π(1) + · · · + π(n) = 1.
+   We now informally introduce the hunger game on the weighted directed graph G by comparing
+it to the chip-firing model and the rotor-router model before offering a more technical definition.
+                                     A GREEDY CHIP-FIRING GAME                                           3
+
+    The “goodness” of a deterministic analogue of a random process can be assessed by the notion
+of discrepancy. If some numerical characteristic of the deterministic process converges to a corre-
+sponding numerical characteristic of the random process as simulation time goes to infinity, one
+can try to determine the rate of convergence.
+    The simplest deterministic analogues of Markov chains were invented by Engel [5, 6], under the
+name the stochastic abacus (though the term chip-firing is more common nowadays). Suppose
+that all the transition probabilities Pij are rational, and that we have positive integers d1 , . . . , dn
+such that di Pij is an integer for all i, j. Assume that the Markov chain is irreducible. Define a chip-
+configuration as an n-tuple c = (c1 , . . . , cn ); say that a chip-configuration is stable if ci < di
+whenever i is a non-absorbing state. If ci ≥ di , then we obtain another chip-configuration by firing
+at i, replacing c by c0 = c+di Hi ; if we represent the Markov chain by drawing a graph with vertices
+v1 , . . . , vn and we represent the chip-configuration c by putting cj chips at vj for all j, then firing
+means sending di Pij chips from i to j for each j 6= i. Chip-firing can be used to find the stationary
+probability measure of an irreducible Markov chain as follows. Put sufficiently many chips on the
+state-graph so that stabilization is impossible no matter how many firings are performed, and start
+performing firings however one wishes; when we encounter a chip-configuration we have seen before
+(as must happen eventually), the vector that records the number of times each state has fired will
+be a stationary vector.
+Example 2.1. Suppose we have the Markov chain given by the Markov matrix
+                                     1 1       
+                                       2  2 0
+                                     1 0 1 ,
+                                       2      2
+                                      0 12 12
+representing a doubly-reflecting random walk. Its corresponding graph is shown in Fig. 1 . If we
+
+                                           0.5             0.5
+                            0.5     v1             v2              v3     0.5
+                                           0.5             0.5
+
+             Figure 1. A graph G corresponding to a doubly-reflecting random walk.
+
+place 1 chip at state 1, 2 chips at state 2, and 1 chip at state 3, then state 2 is unstable, so we may
+fire at 2, turning the chip-configuration (1,2,1) into the chip-configuration (2,0,2). Then firing at 1
+and at 3 brings us back to (1,2,1). The vector that records the number of times each state fired is
+(1,1,1), which is indeed a stationary vector for this Markov chain.
+   The rotor-router model [8] is a different scheme for imitating Markov chains deterministically.
+Assume as above that the Markov chain has rational transition probabilities, with di as above.
+Represent the Markov chain using a directed graph with di Pij parallel edges from vi to vj , so
+that vi has outdegree di . Each vertex distributes arriving chips along its outgoing edges in a cyclic
+manner, not sending a chip along any edge for a second time until it has sent a chip along every edge
+at least once, and thereafter always sending the next chip along the edge along which it has sent a
+chip least recently. Inasmuch as the vertex with the chip gets to decide where the chip goes next,
+4                                     RUPERT LI AND JAMES PROPP
+
+we call this “supply-side” management of the chip’s movement. Assume that the Markov chain is
+irreducible. It can be shown that once the chip enters an infinite loop (as must happen eventually),
+the fraction of the time that the chip spends at vertex vi is proportional to the steady-state π(i).
+Example 2.2. We use the same Markov chain as Example 2.1. Suppose we start with the chip at
+v1 and begin the game by sending the chip to v2 , then v3 , then v3 again. Since at this point the
+chip has already traveled along the edge sending v3 to v3 , it now travels along the edge from v3 to
+v2 . As the chip has already gone from v2 to v3 , the rotor-router protocol dictates that it must now
+travel along the other edge from v2 and go to v1 . Similarly, as it has already gone from v1 to v2 ,
+now it must travel from v1 to v1 . Thereafter the process cycles forever. Since within each cycle the
+chip spends 2 steps at each vertex, (2,2,2) is a stationary vector.
+    The hunger game introduced in this article can be seen as a “demand-side” management
+system: each vertex has a “hunger” for chips, determined by its expectation of receiving chips
+from neighboring vertices that have been previously visited. When a vertex v receives a chip, the
+neighboring vertices’ hunger increases in accordance to the transition probabilities from v to those
+vertices, and v sends its chip to the vertex with highest hunger (regardless of whether that chip is
+a neighbor of v).
+    Now we give a more formal definition of the hunger game. It is simplest to start with the
+situation in which the chain runs forever without restarts (in contrast to chains that will be restarted
+when they enter an absorbing state). We also start with the case in which the state space is finite,
+with |V | = n, deferring discussion of infinite-state spaces until later. The hunger vector h ∈ Rn
+represents the hunger at each vertex in V ; we will sometimes call it the hunger state to emphasize
+its interpretation as a state of the hunger game system. At each step, whichever vertex has the
+highest hunger receives the chip; if vertex vi receives the chip, then the hunger vector h is updated
+by adding Hi = Pi − Ii to it, corresponding to the increase in vertices’ hunger from the presence of
+this chip at vi but also the satiation of vi after receiving a chip. If multiple states are tied for the
+highest hunger, we break the tie by choosing the lowest-indexed such vertex. Since each row of H
+has entries summing to 0, total hunger never changes.
+    Each relocation of the chip is referred to as firing the chip; specifically, when the chip is relocated
+at i, we say the chip fires to i. Unlike rotor-router or chip-firing, under the hunger game rules a chip
+does not necessarily have to be fired to a vertex adjacent to its current location; see Example 2.3 .
+In fact, the determination of the chip’s next location depends only on the hunger state h and not
+the current location of the chip. The step can be described purely in terms of the matrix H and the
+vector h without any reference to chips, via the rule “Replace h by h0 = h + Hi where i maximizes
+hi , choosing the smallest such i in the event of a tie.”
+Example 2.3. We use the same Markov chain as Example 2.1. Starting with h = 0, as shown in
+Fig. 2a , regardless of the initial location of the chip, we fire the chip to v1 under the tie-breaking
+rule, yielding h = − 21 , 21 , 0 as shown in Fig. 2b . After this, we fire to v2 , as shown in Fig. 2c ,
+                                
+and then fire to v3 , as shown in Fig. 2d . Notice that we have returned back to the initial hunger
+state h = 0, so this process repeats, visiting states 1, 2, 3, then back to 1, and so on. Notice that
+we fire the chip from 3 to 1 even though P31 = 0.
+   If one ignores the chip and focuses on the entries of the hunger vector, the hunger game can be
+viewed as a greedy variant of chip-firing. Specifically, if all entries of h and P are rational, we can
+                                     A GREEDY CHIP-FIRING GAME                                         5
+
+
+                                           0.5             0.5
+                           0.5      0               0               0     0.5
+                                           0.5             0.5
+                                   (a) The initial hunger state h = 0.
+                                           0.5             0.5
+                           0.5     -0.5            0.5              0     0.5
+                                           0.5             0.5
+        (b) h after firing to v1 , shown in blue. States with updated hungers are shown in yellow.
+                                           0.5             0.5
+                           0.5      0             -0.5             0.5    0.5
+                                           0.5             0.5
+        (c) h after firing to v2 , shown in blue. States with updated hungers are shown in yellow.
+                                           0.5             0.5
+                           0.5      0               0               0     0.5
+                                           0.5             0.5
+        (d) h after firing to v3 , shown in blue. States with updated hungers are shown in yellow.
+
+                Figure 2. The hunger game on a doubly-reflecting random walk.
+
+
+without loss of generality assume they are all non-negative integers (since the firing rule is invariant
+under affine transformation of the hunger vector) and create a chip-configuration of the customary
+kind in which the number of chips at i is hi . Then the firing rule, translated to the new context,
+tells us to fire the vertex i that has the most chips, with ties resolved as before.
+   When the state space is (countably) infinite, our hunger vectors are infinite sequences. We restrict
+ourselves to sequences that are bounded and take on only finitely many distinct values; this ensures
+that there exists at least one i for which hi equals supi hi , from which it follows that a smallest
+such i exists. As each vertex has only finitely many outgoing edges, this assumption ensures that
+after any finite number of steps in the hunger game there are only finitely many distinct values of
+hunger, so a vertex of highest hunger can be found and the lowest-indexed one can be chosen, ad
+infinitum.
+   For Markov chains with absorbing states we vary the procedure slightly. We start with a graph
+devoid of chips, add a chip at an initial vertex, and then follow the rule for moving the chip described
+above, with the extra stipulation that when the chip reaches an absorbing vertex, it gets removed
+from the graph. In more detail, we define chip addition operators Ei as follows: Given an initial
+hunger vector h, we place a chip at vi (increasing the hunger of the neighbors of vi ) and add Pi to
+h, and we then repeatedly move the chip to the currently hungriest vertex (the lowest-indexed one,
+in the event of a tie), simultaneously incrementing the hunger vector by the row of H corresponding
+to the chip’s new location, until we arrive at an absorbing vertex vk , at which point we subtract
+6                                    RUPERT LI AND JAMES PROPP
+
+Pk = Ik from the current hunger vector and remove the chip from vk . We define Ei (h) to be the
+final hunger vector, and call Ei the chip addition operator at i. It is possible for Ei (h) to be
+undefined, in the event that the process never arrives at an absorbing state, but we will show in
+Lemma 4.1 that for finite absorbing chains the process must terminate so that Ei is well-defined;
+moreover, each chip addition operator preserves total hunger, since the sum of the entries increases
+by 1 when Pi is added, stays the same each time a row of H is added, and decreases by 1 when Pk
+is subtracted.
+   As in the previous situation, the process can be described purely in terms of vector and matrix
+operations without reference to G or a chip. Given a vector h ∈ Rn , add row Pi to h. Thereafter,
+if j is the unique value such that hj 0 < hj for all j 0 < j and hj ≥ hj 0 for all j 0 > j, add Hj to
+h, unless j is an absorbing state (call it k), in which case subtract Pk from the hunger vector and
+stop, calling the result Ei (h).
+Example 2.4. Suppose we have the Markov chain represented by the graph in Fig. 3 . It has
+absorbing states v1 and v5 . Let us compute E3 (0). Starting with h = 0, for our first step we add a
+
+                                   0.6
+                                           0.6            0.2
+              1     v1      0.2     v2             v3             v4             v5      1
+                                                                         0.8
+                                           0.2            0.4
+
+               Figure 3. A graph G corresponding to an absorbing Markov chain.
+
+chip to v3 to yield h = [0, 0.6, 0, 0.4, 0], as shown in Fig. 4a . After this, we follow additional steps
+of the hunger game process, firing the chip successively to v2 , v4 , and v5 , as shown in Fig. 4b .
+Having reached an absorbing state, the final step is to remove the chip from v5 , resulting in
+E3 (0) = [0.2, 0.2, 0.4, −0.6, −0.2], as shown in Fig. 4c .
+   Notice that the total hunger is 0 at the start, increases to 1 when the chip is added at v3 , stays
+1 as the chip moves through G, and decreases to 0 when the chip is removed at the end.
+   Since increasing the hunger at every vertex by the same amount has no effect on the dynamics
+of the hunger game, when our Markov chain is finite we will often assume that total hunger is 0.
+
+                                    3. Boundedness of hunger
+  The following lemmas will be useful in our discussion of the hunger game. The first lemma shows
+that on a countable Markov chain, hunger stays uniformly bounded from below under the hunger
+game process, including the removal and reinsertion of the chip if it reaches an absorbing state.
+Lemma 3.1. Suppose we play the hunger game for a countable Markov chain, with an initial
+                                                                       (0)
+hunger vector h(0) that is bounded below by hmin ∈ R, meaning hi ≥ hmin for all i. Then hunger
+remains uniformly bounded below by hmin − 1 under iteration of the hunger game process. That is,
+suppose we have a sequence of hunger states h(1) , h(2) , . . . such that for each k ≥ 1, h(k) is reached
+from h(k−1) by either firing the chip if it is not at an absorbing state or removing and reinserting
+                         (k)
+the chip if it is. Then hi ≥ hmin − 1 holds for all i and k.
+                                      A GREEDY CHIP-FIRING GAME                                              7
+
+
+                                     0.6
+                                             0.6             0.2
+              1       0      0.2      0               0               0                   0     1
+                                                                             0.8
+                                             0.2             0.4
+                                     0.6
+                                             0.6             0.2
+              1       0      0.2     0.6              0              0.4                  0     1
+                                                                             0.8
+                                             0.2             0.4
+(a) The effect of inserting a chip at v3 , shown in blue. States with updated hungers are shown in yellow.
+                                     0.6
+                                             0.6             0.2
+              1      0.2     0.2     0.2             0.2             0.4                  0     1
+                                                                             0.8
+                                             0.2             0.4
+                                     0.6
+                                             0.6             0.2
+              1      0.2     0.2     0.2             0.4             -0.6                0.8    1
+                                                                             0.8
+                                             0.2             0.4
+                                     0.6
+                                             0.6             0.2
+              1      0.2     0.2     0.2             0.4             -0.6                0.8    1
+                                                                             0.8
+                                             0.2             0.4
+(b) h as the chip fires successively to v2 , v4 , and v5 , shown in blue. Updated hungers are shown in yellow.
+                                     0.6
+                                             0.6             0.2
+              1      0.2     0.2     0.2             0.4             -0.6                -0.2   1
+                                                                             0.8
+                                             0.2             0.4
+                            (c) h after removing chip from v5 , shown in yellow.
+
+            Figure 4. The hunger game on G from Fig. 3 after inserting a chip at v3 .
+
+                                                                                   (0)
+Proof. Without loss of generality, we may take hmin to be 0, so that hi ≥ 0 for all i. Suppose
+                                                                                        (k)
+our claim is false, and let k be the smallest index for which the claim fails, so that hi < −1 for
+some i. Consider the set S of states whose hunger changed during the hunger game process from
+h(0) to h(k) ; this set must be finite, for each of the k steps can only change the hunger of finitely
+many states, and must contain i. The total hunger of this set must be constant during this hunger
+game process if we combine the process of removing a chip and inserting the next chip into a single
+operation. Let h be the total hunger of S throughout the process. As the hunger of all states was
+8                                     RUPERT LI AND JAMES PROPP
+
+originally bounded below by 0, we have h ≥ 0. Since in going from h(k−1) to h(k) we fired the
+chip to i, vi must have been one of the hungriest vertices. But in h(k−1) , vi must have had hunger
+< 0 (otherwise it could not have reached hunger < −1 in a single firing). Since the hungers of the
+vertices in S have nonnegative sum, at least one of them must be nonnegative, and hence vi could
+not have been one of the hungriest vertices. This contradiction shows that hunger is bounded from
+below, and more specifically that hmin − 1 is a lower bound.                                     
+    The lemma remains true if one replaces ≥ by > in both the hypothesis and the conclusion.
+
+   Lemma 3.1 only provides a uniform lower bound on hunger; a uniform upper bound on hunger
+does not exist in general for countable Markov chains. One may construct Markov chains where
+depending on the location of chip insertion, hunger can grow arbitrarily large at a certain state. As
+a specific example, consider the countably infinite Markov chain shown in Fig. 5 . We have states
+vi,j for all integers i ≥ j ≥ 0, where v0,0 is an absorbing state. A walker at vertex vi,j for i > j
+                                                                                                 1
+moves with equal probability to any vertex vi,k with k > j, in other words with probability i−j      to
+vi,k for all j + 1 ≤ k ≤ i, and a walker at vi,i moves with probability 1 to the absorbing vertex
+v0,0 . Starting with h = 0, inserting a chip at vn,0 for n > 0 causes the chip to move from vn,0 to
+vn,n , increasing the second coordinate by 1 each step (i.e. moving one position to the right at each
+step). When the chip fires to vn,n−1 , state vn,n has hunger 1 + 21 + 13 + · · · + n1 , the nth partial
+sum of the harmonic series. As the harmonic series diverges, by picking sufficiently large n, hunger
+can become arbitrarily large at vn,n , and is thus not uniformly bounded under the hunger game
+process, when chip removal and insertion are allowed.
+   This example used a countably infinite state space, which is necessary for this unbounded behav-
+ior to occur. As shown in the following lemma, for a finite Markov chain, hunger stays uniformly
+bounded from both sides under the hunger game process, including the removal and reinsertion of
+the chip if it reaches an absorbing state.
+Lemma 3.2. For a given hunger state h(0) on a finite Markov chain, hunger remains uniformly
+bounded under the hunger game process. In other words, there exist a, b ∈ R such that for any
+sequence of hunger states h(1) , h(2) , . . . , where for each k ≥ 1, h(k) is reached from h(k−1) by either
+firing the chip if it is not at an absorbing state or removing and reinserting the chip if it is, the
+                 (k)
+inequality a ≤ hi ≤ b holds for all i and k.
+Proof. The existence of a lower bound a follows directly from Lemma 3.1 , as any hunger state on
+a finite Markov chain must be bounded.
+   As hunger is bounded from below by a and total hunger h is constant during the hunger game
+process, when we conceive of removing a chip and inserting the next chip as occurring simultane-
+ously, the hunger of any single vertex cannot exceed h − (n − 1)a, and thus hunger is bounded from
+above and b exists.                                                                              
+Remark 3.3. When all transition probabilities are rational and the Markov chain has no absorbing
+states, so that we never remove and reinsert the chip—which introduces choice into the hunger
+game—we claim Lemma 3.2 implies that the hunger game is eventually periodic. Let d be the
+least common multiple of the denominators of all the transition probabilities. For any h(0) , as each
+entry is uniformly bounded and may only change by a multiple of d1 , there are only finitely many
+                                         A GREEDY CHIP-FIRING GAME                                   9
+
+
+                      1
+
+                     v0,0
+
+                              1
+                                           1
+                     v1,0     1    v1,1              1
+                                                                1
+
+
+
+                     v2,0    1/2   v2,1        1   v2,2
+                                   1/2
+
+
+                     v3,0    1/3   v3,1    1/2     v3,2    1    v3,3
+                                   1/3             1/2
+                                           1/3
+                     v4,0    1/4   v4,1    1/3     v4,2   1/2   v4,3     1   v4,4
+                                   1/4             1/3          1/2
+                                                                                    ..
+                                           1/4            1/3                            .
+                                                   1/4
+                      ..            ..              ..              ..        ..
+                       .             .               .               .         .
+
+       Figure 5. A countably infinite absorbing Markov chain where hunger is not uni-
+       formly bounded under chip addition operators.
+
+values that h(k) may take on as k varies. This implies that eventually we must have h(j) = h(i)
+with j > i, so that the hunger game has become periodic with period dividing j − i. If we define v
+as the vector that counts the number of visits to each state of the chain from time i + 1 to time j,
+                                                                     1
+we have vH = 0, implying that v is a stationary vector and that j−i    v is the stationary probability
+measure for the Markov chain. Theorem 5.1 extends this claim, in a suitable asymptotic sense, to
+situations in which the transition probabilities are not all rational.
+
+                            4. Termination of stabilization processes
+  An absorbing Markov chain is a (not necessarily finite) Markov chain where each vertex has
+a path of finite length to an absorbing state. For example, the infinite Markov chain shown in
+Fig. 5 is absorbing, as a walker at any vertex vi,j can move to absorbing vertex v0,0 within 2 moves.
+We claim that in a finite absorbing Markov chain, the chip addition process at any vertex v in the
+corresponding graph G is guaranteed to terminate, regardless of the initial hunger state, and thus
+10                                  RUPERT LI AND JAMES PROPP
+
+the chip addition operators Ei are well-defined for finite absorbing Markov chains. This follows
+immediately from the finiteness of G and the following lemma:
+Lemma 4.1. For a finite absorbing Markov chain, each vertex v gets visited only finitely often in
+the hunger game before the chip reaches an absorbing vertex.
+Proof. The assumption that the Markov chain is absorbing guarantees that for each v there is a finite
+path w0 , w1 , . . . , wm such that w0 is v, wm is an absorbing vertex, and the transition probability
+from wi to wi+1 is positive for all 0 ≤ i ≤ m − 1. We prove the claim by induction on m. The
+case m = 0 is trivial, as once the chip visits an absorbing vertex it is removed. For a less trivial
+case, consider m = 1. For sake of contradiction, suppose v = w0 is visited infinitely often. Each
+time w0 is visited, the hunger of w1 increases by a fixed amount. As w1 is an absorbing vertex,
+we cannot visit it, as otherwise we would only visit w0 finitely often before reaching an absorbing
+vertex. This implies the hunger of w1 increases unboundedly due to w0 being visited infinitely often,
+contradicting the existence of an upper bound on hunger demonstrated in Lemma 3.2. Hence w0
+is visited finitely often, proving the case m = 1.
+   The inductive step follows similar reasoning to the m = 1 argument. Suppose now that the claim
+is true for m − 1, so that w1 is visited only finitely often. Assume for sake of contradiction that w0
+is visited infinitely often, where each visit increases the hunger of w1 by a fixed amount. After w1
+is visited for the last time, its hunger must grow without bound due to w0 being visited infinitely
+often; this contradicts Lemma 3.2 . Hence the claim holds for all vertices.                          
+  Since G has only finitely many vertices, each of which can fire only finitely many times before
+the chip is absorbed, the chip must eventually be absorbed, as claimed.
+  A weakened version of this lemma applies to countable absorbing Markov chains.
+Proposition 4.2. On a countable absorbing Markov chain, if we add a chip and then perform
+repeated firing, then either the chip eventually gets absorbed or the chip is not confined within any
+finite subset of the state space.
+Proof. If the Markov chain is finite, the result immediately follows from Lemma 4.1 , so assume the
+state space is countably infinite. Suppose there is a finite subset U of the state space V such that
+the chip is always in U . Consider the set S given by
+                                S = U ∪ {v ∈ V | ∃ i ∈ U : Pij > 0}.
+Because U is finite and each vertex has finitely many outgoing edges, S is also finite. Crucially, as
+the chip is bounded within U , the only states whose hunger can change during the chip addition
+process are the states in S. Hence, we may equivalently view the hunger game as acting upon
+the induced subgraph of G formed from using S as the vertex set, and from Lemma 4.1 the result
+follows.                                                                                           
+Remark 4.3. For infinite absorbing Markov chains, it is possible for the chip to wander off without
+being confined to any finite subset of the state space. As a simple example, based on the goldbug
+system introduced by the second author of this article as described in Kleber [10], take N ∪ {−1}
+as the state space where states −1 and 0 are absorbing, and for i ≥ 1, a walker at vertex i moves
+to vertex i − 2 and i + 1 each with probability 12 , as shown in Fig. 6 . Using the hunger state h
+where h−1 = h0 = h1 = − 12 and hi = 0 for i > 1, as shown in Fig. 7a , a chip inserted at state 1,
+                                    A GREEDY CHIP-FIRING GAME                                       11
+
+as shown in Fig. 7b , will move rightwards one state at a time to infinity; the first few steps of the
+process are shown in Fig. 7c .
+
+                 1          1
+
+                v−1         v0         v1   1/2   v2    1/2   v3    1/2   v4   1/2 · · ·
+
+                           1/2        1/2         1/2         1/2
+
+                                 Figure 6. The goldbug system.
+
+
+                                  5. Stationary distributions
+  We now consider the hunger game process for nonabsorbing Markov chains, so that chips are
+never inserted or removed.
+  Say that a vector v is stationary under P if vP = v, or equivalently vH = v(P − I) = 0.
+Let E be the space of vectors that are stationary under P , or equivalently the nullspace of H.
+When the Markov chain is irreducible, so that there is a unique stationary distribution π, E is the
+1-dimensional subspace of Rn consisting of multiples of [π(1), . . . , π(n)].
+  Define the firing vector v after N steps of a hunger game process to be the vector whose ith
+component vi is the number of times Hi was added to h, i.e. the number of times the chip fired
+                                                                                        v
+to vertex vi . The following theorem demonstrates that the normalized firing vector N      approxi-
+mates the unique stationary distribution π of an irreducible finite Markov chain within a distance
+proportional to N −1 .
+Theorem 5.1. Given a hunger game process on an irreducible finite Markov chain, let v(N ) be
+the firing vector after N steps. Then the sequence of normalized firing vectors N1 v(N ) converges
+to the unique stationary distribution π, where there exists a constant C such that for all N , the
+                                            C
+normalized firing vector is within distance N of π in the L1 metric.
+Proof. Since the Markov chain is irreducible, 0 is a simple eigenvalue of H. Let c be the maximum of
+1/|λ| where λ ranges over the nonzero eigenvalues of H. For d ∈ R, let Ud = {x | x1 + · · · + xn = d},
+where there are n states in the Markov chain. The fact that 0 is a simple eigenvalue of H and that
+every other eigenvalue has norm at least 1/c implies that the restriction of H to an affine map from
+U1 to U0 is invertible, and that if two points p(1) , p(2) ∈ U0 are within distance ε, then their two
+preimages x(1) , x(2) ∈ U1 are within distance cε of each other.
+   It follows that if we have a point p ∈ U0 within distance ε of 0, the preimages v, π ∈ U1 of p
+and 0, respectively, are within distance cε of each other. As a result, v is within distance cε of the
+stationary distribution π.
+   By Lemma 3.2 , during any hunger game process hunger remains bounded, so the change in
+hunger after N steps, given by v(N ) H, is within a bounded distance, say b, of 0. This implies
+  1 (N )
+ Nv        H is within distance Nb of 0, which implies the normalized firing vector N1 v(N ) is within
+           bc
+distance N    of a stationary distribution π. Setting C = bc yields our desired result.             
+12                                     RUPERT LI AND JAMES PROPP
+
+
+                   1           1
+
+                  − 12        − 12        − 12   1/2         1/2         1/2       1/2 · · ·
+                                                        0           0          0
+
+                              1/2         1/2          1/2         1/2
+                                       (a) The initial hunger state h.
+                   1           1
+
+                              − 12        − 12   1/2    1    1/2         1/2       1/2 · · ·
+                   0                                    2           0          0
+
+                              1/2         1/2          1/2         1/2
+     (b) h after inserting a chip at v1 , shown in blue. States with updated hungers are shown in yellow.
+                   1           1
+
+                                          − 12   1/2 − 1     1/2    1    1/2       1/2 · · ·
+                   0           0                       2            2          0
+
+                              1/2         1/2          1/2         1/2
+                   1           1
+
+                                                 1/2 − 1     1/2 − 1     1/2   1   1/2 · · ·
+                   0           0           0           2           2           2
+
+                              1/2         1/2          1/2         1/2
+                   1           1
+
+                                                 1/2         1/2 − 1     1/2 − 1   1/2 · · ·
+                   0           0           0            0          2           2
+
+                              1/2         1/2          1/2         1/2
+(c) h as the chip fires successively to v2 , v3 , and v4 , shown in blue. Updated hungers are shown in yellow.
+
+         Figure 7. A hunger state on the goldbug system where a chip inserted at v1 goes
+         to infinity.
+
+Remark 5.2. As the only time irreducibility was assumed in Theorem 5.1 was when we claimed the
+Markov chain had a unique stationary distribution π, the result holds for any finite Markov chain
+with a unique stationary distribution. Namely, it also works for absorbing Markov chains with a
+single absorbing state vk , where π is the vector with a 1 corresponding to state vk and 0s elsewhere.
+   When a unique stationary distribution exists, the stationary distribution represents, in the long
+run, the probability distribution of the chain being at each particular state, or the occupation
+frequency distribution. As a result, Theorem 5.1 illustrates that the normalized firing vector,
+                                     A GREEDY CHIP-FIRING GAME                                         13
+
+which counts how many times the chip arrives at each state in the hunger game, approximates
+the occupation frequency distribution within a discrepancy proportional to N −1 , better than the
+N −1/2 discrepancy expected from repeated samplings of the corresponding random process.
+Example 5.3. The Markov      chain described in Example 2.3 is irreducible, and has unique stationary
+distribution π = 13 , 31 , 13 , as shown in Fig. 8 . From Example 2.3 we know that the states are visited
+
+                                            0.5            0.5
+                                    1               1               1
+                            0.5     3               3               3     0.5
+                                            0.5            0.5
+
+        Figure 8. The unique stationary distribution π of a doubly-reflecting random walk
+
+periodically in the order 1, 2, and 3, so the firing vector starting at h = 0 is given by
+                                                           
+                                  (N )      N +2      N +1        N
+                                v      =            ,          ,       ,
+                                              3          3        3
+or equivalently
+                                        v(3M ) = [M, M, M ]
+                                    v(3M +1) = [M + 1, M, M ]
+                                    v(3M +2) = [M + 1, M + 1, M ] .
+Theorem 5.1 guarantees the existence of some constant C such that the normalized firing vector
+1 (N )           C
+Nv     is within N of π for all N . In fact, we will show
+                                                     1 1 C    = 43 is the minimal such constant.
+Then for N = 3M , the normalized firing vector his 3 , 3 , 13 , so there
+                                                             
+                                                                        i is no discrepancy, while
+                                                       M +1     M       M
+for N = 3M + 1 the normalized firing vector is 3M         +1 , 3M +1 , 3M +1 , whose discrepancy from
+                     4/3
+π = 31 , 31 , 13 is 3M      C
+               
+                       +1 = N . Similarly for N = 3M + 2.
+   In general, however, unlike in this example, the sequence of states visited need not be periodic,
+as the transition probabilities can be irrational.
+
+                       6. Hitting Probabilities and Absorption Times
+   Let X0 , X1 , . . . be a Markov chain on a finite state space V , and let Pv denote the law of the
+Markov chain initialized at state v, or in other words X0 = v. Define Tu to be the hitting time
+of vertex u by the Markov chain, given by
+                                        Tu = min{t ≥ 0 : Xt = u},
+where if no such t exists then Tu = ∞.
+  For an absorbing Markov chain, let the set of absorbing states be U ⊆ V . If our starting vertex
+v belongs to U , then the behavior of the chain is trivial, so we will assume henceforth that v 6∈ U .
+We define the hitting probability of u ∈ U by
+                            hu (v) = Pv (Xt = u for all t sufficiently large),
+14                                      RUPERT LI AND JAMES PROPP
+
+where Pv denotes the law of the Markov chain initiated at v. The hitting probability is equivalently
+                                    hu (v) = Pv (∀u0 ∈ U, Tu ≤ Tu0 ),
+which will give us the flexibility later on to modify the Markov chain so that the states in U are
+no longer absorbing. As an absorbing Markov chain reaches an absorbing state with probability 1,
+for any v we have
+                                            X
+                                                hu (v) = 1.
+                                              u∈U
+   In order to measure hitting probabilities hu (v) through the hunger game process, we consider a
+modification of the Markov chain in which all absorbing states go to v with probability 1. In other
+words, for each u ∈ U we replace Pu , the row of P corresponding to state u, with ev , the unit vector
+corresponding to v. Crucially, this modification does not change the hitting probabilities hu (v) as
+given by our second definition. Additionally, we remove any states in V that cannot be reached
+from v with positive probability; this does not alter the hitting probabilities. We will refer to this
+modified Markov chain as the rerouted Markov chain associated with v. Due to the removal of
+unreachable states, a rerouted Markov chain of an absorbing Markov chain is always irreducible.
+Example 6.1. Consider the absorbing Markov chain given in Fig. 9a , which has absorbing states
+v1 and v4 . The rerouted Markov chain associated with non-absorbing state v2 is shown in Fig. 9b ,
+
+                                                                  1
+                                            0.5
+              1     v1     0.5     v2               v3    0.5    v4     0.5     v5   0.5
+                                            0.5
+                                    (a) An absorbing Markov chain.
+
+                                    1                      1
+
+                            v1     0.5       v2     0.5    v3     0.5    v4
+                                                    0.5
+                           (b) The rerouted Markov chain associated with v2 .
+
+                                 Figure 9. A rerouted Markov chain.
+
+where since v5 cannot reach v2 with positive probability, it is removed from the system; this ensures
+that the Markov chain is irreducible. Hence, it has a unique stationary distribution; this applies
+for all rerouted Markov chains of any finite absorbing Markov chain.
+     The following lemma will be useful for the upcoming result, Theorem 6.3.
+Lemma 6.2. Let a and b be positive real numbers and let a0 and b0 be nonnegative real numbers.
+For a given ε satisfying 0 ≤ ε < a+b       0               0
+                                  2 , if |a − a| ≤ ε and |b − b| ≤ ε, then
+                                         a−ε     a0     a+ε
+                                             ≤ 0    0
+                                                      ≤     .
+                                         a+b  a +b      a+b
+                                     A GREEDY CHIP-FIRING GAME                                           15
+
+                                                                                       0
+Proof. Let a0 = a + δ1 and b0 = b + δ2 , where |δ1 |, |δ2 | ≤ ε. First, notice that a0a+b0 is well-defined,
+                                                                      0
+as a0 + b0 = a + b + δ1 + δ2 ≥ a + b − 2ε > 0. Since a0 ≥ 0, a0a+b0 ≥ 0. Holding a and b fixed, we
+                          0             0             b+δ2
+see that the quantity a0a+b0 = 1/(1 + ab 0 ) = 1/(1 + a+δ 1
+                                                            ) is weakly increasing with respect to δ1 and
+weakly decreasing with respect to δ2 . (Technically this argument requires a + δ1 > 0 and therefore
+does not handle the case a0 = 0 but this case is easily dealt with separately.) Hence, within the
+                           0
+bounds for δ1 and δ2 , a0a+b0 is minimized when δ1 = −ε and δ2 = ε, yielding
+                             a0         a + δ1          a−ε     a−ε
+                           0    0
+                                  =                 ≥         =     ,
+                          a +b      a + b + δ1 + δ2   a+b−ε+ε   a+b
+       0
+and a0a+b0 is maximized when δ1 = ε and δ2 = −ε, yielding
+                          a0         a + δ1          a+ε     a+ε
+                        0    0
+                               =                 ≤         =     ,
+                       a +b      a + b + δ1 + δ2   a+b+ε−ε   a+b
+which completes the proof.                                                                               
+  The following theorem demonstrates how the hitting probabilities of a finite absorbing Markov
+chain are approximated by the firing vector of the rerouted Markov chain.
+Theorem 6.3. Given a finite absorbing Markov chain, let v(N ) be the firing vector after N steps
+of a hunger game process on the rerouted Markov chain associated with state v. Then the sequence
+{aN } defined by
+                                                       (N )
+                                                  vu
+                                            aN = X (N ) ,
+                                                    vu0
+                                                   u0 ∈U
+
+where we define aN to be 0 when the denominator equals 0, converges to the hitting probability hu (v)
+with discrepancy O(1/N ); that is, there exists a constant C such that aN differs from hu (v) by at
+      C
+most N   for all N .
+Proof. In the rerouted Markov chain, v can reach every state in V , and every state in V can reach
+an absorbing state (as the original Markov chain was absorbing), which in the rerouted Markov
+chain moves back to v with probability 1; as a result, the rerouted Markov chain is irreducible. By
+Theorem 5.1 , the normalized firing vector N1 v(N ) converges to the unique stationary distribution
+π of the rerouted Markov chain within distance Nc for some constant c.
+   It is a standard fact that the expected number of visits to state w before returning to v is given by
+πw                                                                         0
+π v ; see, for example, [12, Theorem 1.7.6]. But, as after visiting some u ∈ U the next state visited
+must be v, meaning u0 can be visited at most once before returning to v, the expected number of
+visits to any such u0 equals the probability of visiting u0 before returning to v. As a result, for all
+u ∈ U , the hitting probability hu (v) is proportional to π u , and given that an absorbing Markov
+chain reaches an absorbing state with probability 1, we have
+                                                      πu
+                                           hu (v) = X        .
+                                                        π u0
+                                                     u0 ∈U
+16                                            RUPERT LI AND JAMES PROPP
+          P
+     As       u0 ∈U π u0 is a positive constant, there exists a finite M such that for all N > M we have
+                                                        c   1 X
+                                                          <     π u0
+                                                        N   2 0
+                                                              u ∈U
+
+with c as above. As aN ∈ [0, 1] is bounded, there exists a constant C1 such that aN is within CN1 of
+hu (v) ∈ [0, 1] for all N ≤ M ; in particular, C1 = M suffices.
+   For N > M , notice that
+                                                (N )     1                  (N )
+                                        vu              N vu
+                                  aN = X (N ) =                                                 .
+                                                1 (N )                                1 (N )
+                                                           X
+                                          vu0   N vu   +                              N vu0
+                                            u0 ∈U                        u0 ∈U \{u}
+
+                                                                                                1 (N )
+As N1 v(N ) is within distance Nc of π in the L1 metric, we know both                           N vu   − πu        ≤ Nc and
+
+                                            X        1 (N )    X                       c
+                                                       vu0 −               π u0 ≤        .
+                                                     N                                 N
+                                        u0 ∈U \{u}           0u ∈U \{u}
+
+Due to the rerouted Markov chain being irreducible, we also know that π v > 0 for all states v ∈ V ;
+in addition, each component of the visit vector v(N ) is a nonnegative integer. Lastly, by definition
+of M , we have
+                                                                 
+                                    c     1            X
+                               0≤      <      πu +           π u0  .
+                                    N     2           0             u ∈U \{u}
+
+Letting ε = Nc , we apply Lemma 6.2 with the values
+                                 X                                    1 (N )                                 X          1 (N )
+ a = π u > 0,             b=                π u0 > 0,        a0 =      v     ≥ 0,                   b0 =                 v 0 ≥0
+                                                                      N u                                               N u
+                               u0 ∈U \{u}                                                                  u0 ∈U \{u}
+
+to find
+                                                              (N )
+                          π u − Nc                 1
+                                                  N vu                                    π u + Nc
+                                        ≤                                       ≤                       ,
+                                          1 (N )                           (N )
+                              X                      X                                        X
+                                                                        1
+                      πu +         π u0   N vu   +                      N vu0
+                                                                                      πu +         π u0
+                           u0 ∈U \{u}                      u0 ∈U \{u}                        u0 ∈U \{u}
+
+or equivalently
+                                         1    c                      1    c
+                             hu (v) −      · X       ≤ aN ≤ hu (v) +   · X       .
+                                         N      π u0                 N      π u0
+                                               u0 ∈U                                    u0 ∈U
+
+     Thus, the deviation of aN from hu (v) is at most
+                                                        1    c
+                                                          · X       .
+                                                        N      π u0
+                                                            u0 ∈U
+                                    A GREEDY CHIP-FIRING GAME                                        17
+
+The second factor is a constant, which we will denote C2 , and thus taking C = max(C1 , C2 ) we
+                                                        C
+find that for all N , aN differs from hu (v) by at most N .                                   
+Remark 6.4. We can apply Theorem 6.3 to deterministically approximate the escape probability of
+u from v on an irreducible Markov chain, or the probability that a chain starting at state v reaches
+state u before returning to v. We do this by splitting vertex v into vertices v0 and v1 where all
+outgoing edges of v now emanate from v0 and all inbound edges of v now end at v1 . Furthermore,
+we may remove all outgoing edges from vertex u. The resulting Markov chain is absorbing with the
+set of absorbing states U = {u, v}, and thus one may use Theorem 6.3 on the rerouted Markov chain
+associated with state v0 to approximate the hitting probability hv1 (v0 ). Notice that hv1 (v0 ) equals
+the escape probability of u from v in the original irreducible Markov chain, and thus Theorem 6.3
+enables us to calculate escape probabilities.
+   We now consider the absorption time of an absorbing Markov chain whose set of absorbing
+states is U ⊆ V , given by
+                                     TU = min{t ≥ 0 : Xt ∈ U }.
+At the absorption time, the chain enters an absorbing state, where it remains forever.
+   For example, starting at state v2 in the absorbing Markov chain given in Fig. 9a, with probability
+1
+2  we enter absorbing state v1 in the first step, and otherwise move to state v3 , which has the same
+50-50 split between moving to an absorbing state (v4 ) or not (v2 ). Thus TU in this case is a
+geometric random variable with success probability 21 , which has expected value 2.
+   The expected absorption time is Ev TU , where Ev denotes the expected value for the law of the
+Markov chain initialized at state v. Then, when using the rerouted Markov chain, a chain can
+naturally be divided into epochs each of which ends with an occurrence of a state in U , which
+is then rerouted in the next time step to v. Hence, the expected absorption time Ev TU can be
+calculated from the stationary distribution π of the rerouted Markov chain associated with v to be
+                                                     1
+                                         Ev TU = X        − 1.
+                                                       πu
+                                                 u∈U
+
+Notice that if v ∈ U , then Ev TU = 0 = 11 − 1; the −1 term corresponds to the extra time step
+needed to reroute from an absorbing state to v for each epoch.
+  The following theorem shows how the expected absorption time of an absorbing Markov chain
+can be approximated using the normalized firing vector of the rerouted Markov chain.
+Theorem 6.5. Given an absorbing Markov chain, let v(N ) be the firing vector after N steps of
+the hunger game process on the rerouted Markov chain associated with state v. Then the sequence
+{bN } defined by
+                                               N
+                                         bN = X        − 1,
+                                                vu(N )
+                                               u∈U
+where we define bN to be 0 when the denominator equals 0, converges to the expected absorption
+                                                                             C
+time Ev TU , where there exists a constant C such that bN is within distance N of Ev TU for all N .
+18                                  RUPERT LI AND JAMES PROPP
+
+Proof. From the proof of Theorem 6.3 , we see that the rerouted Markov chain has a unique sta-
+tionary distribution π, and thus the normalized firing vector N1 v(N ) converges to π within distance
+ c
+N for P
+      some constant c.
+   As u∈U π u is a positive constant, there exists a finite M such that for all N > M we have
+                                              c   1X
+                                                <    πu.
+                                              N   2
+                                                        u∈U
+
+As bN is finite, there exists a constant C1 such that bN is within CN1 of Ev TU for all N ≤ M . For
+N > M , it suffices to show the existence of a constant C2 such that for all N > M ,
+
+
+                                      1                  1                   C2
+                                    X 1                −X                <      .
+                                                               πu            N
+                                              vu(N )
+                                          N              u∈U
+                                    u∈U
+
+The furthest away bN can be from Ev TU results in the left hand side becoming
+                      1        1      1                                             c
+                    c       −X      =   ·                                               !              !.
+                                      N
+                       X
+                   − +   πu      πu                            c  X                         X
+                    N                                         − +   πu                            πu
+                          u∈Uu∈U                               N
+                                                                         u∈U                u∈U
+
+As N > M , we have
+                                      c   X      1X
+                                  −     +   πu >    π u > 0,
+                                      N          2
+                                          u∈U                 u∈U
+
+so in the worst case the deviation from Ev TU is less than
+                                          1              2c
+                                            ·                     !2 .
+                                          N            X
+                                                             πu
+                                                       u∈U
+
+The second factor is a constant, which we will denote C2 , and thus taking C = max(C1 , C2 ) yields
+                   C
+that bN is at most N  away from Ev TU for all N .                                                
+
+Remark 6.6. We can apply Theorem 6.5 to calculate the expected return time for state v in an
+irreducible Markov chain. We do this in a similar method to Remark 6.4 by splitting vertex v into
+vertices v0 and v1 where all outgoing edges of v now emanate from v0 and all inbound edges of v
+now end at v1 . The resulting Markov chain is absorbing with unique absorbing state v1 , and thus
+one may use Theorem 6.5 on the rerouted Markov chain associated with state v0 to approximate
+the expected absorption time. As v1 is the only absorbing state, this calculates the expected hitting
+time from v0 to v1 , which is the expected return time from v in the original irreducible Markov
+chain.
+                                     A GREEDY CHIP-FIRING GAME                                          19
+
+                     7. Recurrent states and the basin of attraction
+   In this section we restrict our attention to irreducible finite Markov chains with no absorbing
+state. Additionally we assume that all transition probabilities are rational.
+   From the argument in Remark 3.3, all hunger vectors h ∈ Rn are pre-periodic (i.e., eventually
+enter a cycle). We say that a vector that is part a cycle (i.e., returns to itself after a finite number
+of steps) is recurrent, and we define the basin of attraction to be the set of recurrent vectors
+on the hyperplane Z = {h | h · 1 = 0} (the hyperplane of hunger vectors with total hunger 0).
+The basin of attraction, being the set of recurrent vectors, is thus in some sense analogous to the
+critical group Zn /Zn ∆ in the context of chip-firing.
+Example 7.1. Consider the finite rational irreducible Markov chain with hunger matrix
+                                                                 
+                                              −0.2 0.2         0
+                                      H =  0.2 −0.6 0.4 ,
+                                               0.6      0.4 −1
+                                            11 5 2
+                                                       
+whose unique stationary distribution is 18    , 18 , 18 . Its basin of attraction is given in Fig. 10. The
+basin is partitioned into four colors based on the firing order, up to cyclic shift. Red corresponds
+to the cyclic firing order 231121121311211211, i.e., firing state 2, then state 3, then state 1, and
+so on. Green corresponds to 312112112311211211, cyan corresponds to 231112112311211211, and
+violet corresponds to 312112112311121121. As the visit vector for each of these 18-step cycles must
+satisfy vH = 0, i.e., be a multiple of the stationary distribution, we find each cyclic firing order
+consists of state 1 firing eleven times, state 2 firing five times, and state 3 firing two times.
+Remark 7.2. Numerous observations can be made from Example 7.1 and Fig. 10. Firstly, the
+partitioning based on cyclic firing order appears to yield discrete congruent pieces; in Fig. 10, the
+red and violet colors are split into congruent parallelograms, and the cyan and green colors are
+each split into congruent triangles. Each color corresponds to a cyclic firing order, and if this cycle
+has period p, then the set of vectors of this particular color can be partitioned into p sets based on
+the firing order of their cycle, no longer up to cyclic shift. Each of these sub-pieces are mapped to
+each other in a cycle under the hunger game process, so clearly the sub-pieces of a given color are
+all congruent.
+   While evidently the entire basin of attraction need not be convex, each sub-piece of the basin
+of attraction, e.g., the parallelograms and triangles of Fig. 10, is convex; this holds for all finite
+rational Markov chains. To see why this is the case, notice that each sub-piece corresponds to a
+unique firing order that returns a hunger vector to itself. The set of vectors that will fire to a given
+state next under the hunger game process is given by the intersection of various linear inequalities,
+namely the inequalities that ensure this state had the highest hunger. Hence, the set of vectors
+that follow the firing order corresponding to a given sub-piece is given by the intersection of various
+linear inequalities, one set of inequalities for each firing step of the hunger game process. As the
+intersection of linear inequalities is convex, we find each sub-piece is convex.
+   Intuitively, the basin of attraction should be near the origin, for the hunger game naturally
+attempts to equilibrate the hunger vector so that each state has approximately the same hunger.
+The following result supports this intuition by demonstrating that the origin is always in the basin
+of attraction for any finite rational irreducible Markov chain.
+20                                   RUPERT LI AND JAMES PROPP
+
+
+
+
+        Figure 10. The basin of attraction for a finite rational irreducible Markov chain
+        with three states. The basin lies in the hyperplane x + y + z = 0, so the third
+        coordinate is omitted in order to plot it on the x, y-plane. For example, the point
+        (0.8, −0.1) in the rightmost violet region corresponds to h = (0.8, −0.1, −0.7). The
+        basin is partitioned into four colors based on the order of firings; for example, the
+        vectors in the violet portions of the basin all follow the same sequence of firings, up
+        to cyclic shift, i.e., choosing a starting index for the periodic firing sequence. So,
+        the four colors correspond to four distinct cyclic firing orders.
+
+Proposition 7.3. For any finite rational irreducible Markov chain, the zero vector 0 is a recurrent
+hunger state. Moreover, the number of steps needed to return to 0 is the least common denominator
+of the stationary probabilities of the Markov chain.
+Proof. Let d be the least common denominator of the transition probabilities of the Markov chain.
+Viewing the Markov chain as a weighted digraph G with each vertex having outgoing weights
+summing to 1, we can multiply all weights by d so that all weights are now positive integers, and
+convert weighted edges into multiedges to obtain a directed multigraph G0 in which every vertex
+has outdegree d.
+   A finite irreducible Markov chain with rational transition probabilities has a unique stationary
+distribution π, all of whose entries are rational. Let n be the least common denominator of π, so
+that nπ is the unique multiple of π that has nonnegative, mutually coprime integer entries, and
+let p = nπ. Since the sum of the entries of π is 1, the sum of the entries of p is n. As πH = 0, we
+have pH = 0.
+   Starting at 0, consider the first vertex v that fires more than pv times, and consider the hunger
+state just before this vertex fires for the (pv + 1)-th time. Let the firing vector at this step be x, so
+that xu is the number of times state u received the chip, and thus xH is the current hunger state.
+                                    A GREEDY CHIP-FIRING GAME                                        21
+
+Because xv = pv and because for all u 6= v state u has fired at most pu times, w := p − x satisfies
+wv = 0 and wu ≥ 0 for all u 6= v. Firing vertices u 6= v can only (weakly) increase the hunger of
+v, so (wH)v ≥ 0. To prove that last assertion more formally, recall that wv = 0, so we can write
+w = u6=v cu e(u) with cu ≥ 0 for all u, where e(u) is the elementary basis vector with a 1 at index
+     P
+u and 0 otherwise. Then we have
+                               X                  X            X
+                     (wH)v =       cu (e(u) H)v =     cu Huv =    cu Puv ≥ 0,
+                                 u6=v              u6=v          u6=v
+
+as claimed. This yields that
+                               (xH)v = (pH − wH)v = −(wH)v ≤ 0.
+Yet with a hunger state of xH, vertex v received the chip, meaning it has the highest hunger. This
+means every state has hunger at most (xH)v ≤ 0, so total hunger is at most 0. However, total
+hunger is invariant under the hunger game process; since the initial hunger vector was 0 with total
+hunger 0, total hunger must still be equal to 0. This equality case requires that xH = 0, implying
+x is a multiple of π. Since xv = pv and p = nπ, we deduce x = p.
+   Thus the hunger state is xH = 0, so 0 is recurrent. Moreover, the number of steps needed to
+return to 0 is the sum of the entries of x = p = nπ, which is n, as claimed.                     
+   From empirical observations, we conjecture that the periods of all cycles in the hunger game for
+a given chain are equal, and specifically are equal to the n that was shown in Proposition 7.3 to be
+the period of the hunger vector 0.
+Conjecture 7.4. The period of every cycle in the hunger game for a given finite rational irreducible
+Markov chain is the least common denominator of the stationary probabilities of the Markov chain.
+   Visually, Conjecture 7.4 applied to the Markov chain from Example 7.1 corresponds to the
+observation that each color in Fig. 10 consists of the same number of congruent pieces, namely 18.
+   The basin of attraction in Fig. 10 tiles the hyperplane Z, as illustrated in Fig. 11; in particular,
+one can observe that its concave boundaries fit complementarily with the opposite side of the basin
+of attraction. The following conjecture formalizes this observation and poses it for general Markov
+chains.
+Conjecture 7.5. For a finite rational irreducible Markov chain, the basin of attraction tiles the
+hyperplane Z by translation, and the translation vectors that relate each tile with each other forms
+an (n − 1)-dimensional sublattice in Z of Rn with basis vectors H1 − H2 , H2 − H3 , . . . , Hn−1 − Hn .
+  In fact, Conjecture 7.5 implies Conjecture 7.4, as seen in the following proposition.
+Proposition 7.6. For a finite rational irreducible Markov chain, if the basin of attraction tiles
+the hyperplane Z with lattice of translation vectors generated by H1 − H2 , . . . , Hn−1 − Hn , then
+the period of any cycle under the hunger game process is the least common denominator of the
+stationary probabilities of the Markov chain.
+Proof. By using Proposition 7.3, it suffices to show that the tiling condition implies that all periods
+in the basin of attraction are the same. Suppose the lattice in the statement of the proposition is L.
+We say that two points in Z are equivalent mod L if they differ by an element of L, and we write
+22                                   RUPERT LI AND JAMES PROPP
+
+
+
+
+         Figure 11. The basin of attraction from Example 7.1 tiles the (hyper)plane Z.
+
+the set of equivalence classes as Z/L. Now view the hunger game process, which naturally acts
+upon Z, as acting instead on Z/L, where the tiling condition implies that the basin of attraction
+can serve as a set of coset representatives for Z/L. Initially this might seem like nonsense since the
+choice of which state to fire depends on inequalities relating the elements of the hunger vector and
+these inequalities get washed out when we mod out by L, but all rows of H are equivalent mod
+L, i.e., each row of H has the same image under the projection map Z → Z/L, so the choice of
+which state gets fired is moot; we may as well suppose that the H1 coset is added at each stage,
+as if state 1 were firing repeatedly. Using the basin of attraction as a set of coset representatives
+and observing that a vector inside the basin must stay within the basin under the hunger game
+process, we find the hunger game process on Z/L is equivalent to the original hunger game on Z
+for any vector in the basin. If the zero vector 0 has period p, then pH1 = 0 in Z/L. Then let q
+be the minimum of the set of positive integers q 0 such that q 0 H1 = 0 in Z/L. After q steps of the
+hunger game process, every vector in the basin thus returns to itself, so we find p = q and every
+vector in the basin of attraction must have period p, which completes the proof.                    
+   We provide a partial result towards Conjecture 7.5, proving that the basin of attraction translated
+under the stated lattice covers the hyperplane Z; to prove Conjecture 7.5 and thus Conjecture 7.4,
+it remains to show this covering has no overlap.
+Proposition 7.7. For a finite rational irreducible Markov chain, let L ⊂ Z be the sublattice in Z
+of Rn with basis vectors H1 − H2 , . . . , Hn−1 − Hn . Then for any vector h ∈ Z, there exists a u ∈ L
+such that h − u lies in the basin of attraction.
+Proof. As h is pre-periodic, after some finite number of steps it will reach some vector in the basin,
+say after t0 steps. Additionally, every vector in the basin stays in the basin under the hunger game
+process, so for all integers t ≥ t0 , applying the hunger game process t times to h yields a vector
+in the basin. Let p be the least common denominator of the stationary probabilities of the unique
+stationary distribution π of our Markov chain, and fix t to be the minimum nonnegative integer
+≥ t0 such that t is a multiple of p, say kp for positive integer k. Then applying the hunger game
+process t times to h yields a vector x ∈ Z in the basin of attraction, say after firing state i a total of
+                                    A GREEDY CHIP-FIRING GAME                                        23
+
+vi times for each i. Constructing vector v from these values, as x was reached after firing h a total
+of t times, we have x = h + vH and v · 1 = t = kp. Notice that pπ is the primitive integer vector
+in the direction of the stationary distribution, so we have pπH = 0. Hence x = h + (v − kpπ)H,
+where (v − kpπ) · 1 = 0. As L = {wH | w · 1 = 0}, letting u = (kpπ − v)H ∈ L yields x = h − u,
+as desired.                                                                                        
+
+
+
+                                           8. Comments
+   The hunger game achieves high fidelity (that is, low discrepancy) for the frequency with which a
+specified state occurs, but not for the frequency with which two specified states occur in succession;
+the rotor-router game achieves fidelity for the frequency with which two specified states occur in
+succession, but not for the frequency with which three specified states occur in succession. One could
+use a block-encoding trick (with new states encoding pairs of old states) to construct a simulation
+scheme that ensures fidelity for the frequency with which three specified (old) states occur in
+succession, but at a price: the resulting rotor-router network will have more rotors, and hence the
+quantities that upper-bound discrepancy in [8] will be larger. Indeed, consider derandomization of
+a fair coin process. De Bruijn [3] showed that for each k, there is a cyclic word of length 2k that
+contains each possible bit-string of length k exactly once; it follows that if we let W be the infinite
+word associated with this cyclic word, then for each bit-string w of length k, the unnormalized
+discrepancy D(w, n), defined as n/2k minus the number of apperances of w in the first n + k − 1
+positions of W , is bounded. On the other hand, one cannot find a single infinite word W that
+accomplishes this task simultaneously for all k, since for example if w is a string containing one or
+more 1s, the boundedness of D(w, n) is inconsistent with the occurrence of arbitrarily long strings
+of 0’s.
+   We propose that a sort of trade-off principle is at work here: the more numerical characteristics of
+a random process that we attempt to mimic in a deterministic simulation, the worse our mimicry will
+be, if our criterion of merit is the rate at which the simulation’s numerical characteristics converge
+to the limiting values of the corresponding numerical characteristics of the random process. In this
+context, one sometimes sees the words “psuedorandom” and “quasirandom”, where a pseudorandom
+simulation is expected to pass “all” tests of randomness while a quasirandom simulation is expected
+only to pass certain specified tests. It is reasonable to expect that the more asymptotic tests of
+randomness a quasirandom simulation is required to pass, the worse the convergence will be. Indeed,
+for certain tests of randomness, the previous assertion is almost a tautology; for if (say) a random
+                                                                                                  √
+sequence of 0s and 1s had its running average approach 1/2 with discrepancy smaller than ± N ,
+that rapidity of convergence would ipso facto demonstrate negative correlation between the bits,
+constituting failure of a correlational test of randomness.
+   Applying this trade-off principle in the reverse direction, it seems reasonable to hope that by
+relaxing our stringency, and requiring a quasirandom simulation scheme to pass fewer tests for
+randomness, we enable it to do a better job with the tests that it is required to pass; that is, we
+make faster convergence possible. Hence, the delocalized firing mechanism of the hunger game, by
+no longer preserving the frequency with which two specified states occur in succession, may allow
+the hunger game to outperform the rotor-router in convergence.
+24                                       RUPERT LI AND JAMES PROPP
+
+     For example, consider the Markov chain with transition matrix
+                                                       
+                                           1−q      q
+                                             q     1−q
+with q small, as shown in Fig. 12 . Then under rotor-routing the itinerary of the chip will be
+
+                                                         q
+                                    1−q         v1               v2      1−q
+                                                         q
+
+         Figure 12. A Markov chain where the hunger game outperforms the rotor-router
+         in convergence
+
+periodic with repeating pattern 1, 1, . . . , 1, 2, 2, . . . , 2, while under the hunger game the itinerary
+will simply alternate between 1 and 2, yielding lower discrepancy for the visit-frequencies of the
+two states.
+
+
+                                             Acknowledgments
+  The authors thank Grant Barkley, Darij Grinberg, Sam Hopkins, Lionel Levine, Alex Postnikov,
+and Tom Roby for various helpful suggestions made during the course of this research. We are
+grateful to the anonymous referees who made many suggestions that improved this article.
+
+
+                                                  References
+ [1] Anders Björner, László Lovász, and Peter W. Shor. Chip-firing games on graphs. European Journal of Combi-
+     natorics, 12(4):283–291, 1991.
+ [2] Scott Corry and David Perkinson. Divisors and sandpiles. American Mathematical Society, Providence, RI, 2018.
+ [3] Nicolaas Govert de Bruijn. A combinatorial problem. Proc. Koninklijke Nederlandse Akademie V. Wetenschap-
+     pen, 49:758–764, 1946.
+ [4] Deepak Dhar. Self-organized critical state of sandpile automation models. Physical Review Letters, 64(23):2837,
+     1990.
+ [5] Arthur Engel. The probabilistic abacus. Educational Studies in Mathematics, 6(1):1–22, 1975.
+ [6] Arthur Engel. Why does the probabilistic abacus work? Educational Studies in Mathematics, 7(1-2):59–69, 1976.
+ [7] Alexander E. Holroyd, Lionel Levine, Karola Mészáros, Yuyal Peres, James Propp, and David B. Wilson. Chip-
+     firing and rotor-routing on directed graphs. In In and out of equilibrium 2, pages 331–364. Springer, 2008.
+ [8] Alexander E. Holroyd and James Propp. Rotor walks and Markov chains. Algorithmic Probability and Combi-
+     natorics, 520:105–126, 2010.
+ [9] John G. Kemeny and J. Laurie Snell. Finite Markov chains (1983 Edition). Springer-Verlag, 1960.
+[10] Michael Kleber. Goldbug variations. The Mathematical Intelligencer, 27(1):55–63, 2005.
+[11] Caroline J. Klivans. The Mathematics of Chip-firing. Chapman and Hall/CRC, 2018.
+[12] James R. Norris. Markov chains, volume 2 of Cambridge Series in Statistical and Probabilistic Mathematics.
+     Cambridge University Press, 1998.
+[13] Vyatcheslav B. Priezzhev, Deepak Dhar, Abhishek Dhar, and Supriya Krishnamurthy. Eulerian walkers as a
+     model of self-organized criticality. Physical Review Letters, 77(25):5079, 1996.
+                              A GREEDY CHIP-FIRING GAME                   25
+
+Massachusetts Institute of Technology
+Email address: rupertli@mit.edu
+
+University of Massachusetts Lowell, Department of Mathematical Sciences
+Email address: jamespropp@gmail.com
+

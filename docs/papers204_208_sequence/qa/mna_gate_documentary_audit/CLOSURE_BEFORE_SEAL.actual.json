@@ -1,0 +1,10 @@
+{
+  "cmd": "python3 -I -S -B -c 'import hashlib,json,pathlib; p=pathlib.Path(\"docs/papers204_208_sequence/qa/mna_gate_documentary_audit\"); n=json.loads((p/\"ATTEMPT_01.actual_tool_return.json\").read_text()); r=json.loads((p/\"attempt_01/receipt.json\").read_text()); assert n[\"native_return\"][\"exit_code\"]==r[\"exit\"]==0 and n[\"native_return\"][\"output\"].encode()==(p/\"attempt_01/receipt.json\").read_bytes(); out=(p/\"attempt_01/stdout.raw\").read_bytes(); err=(p/\"attempt_01/stderr.raw\").read_bytes(); assert {\"bytes\":len(out),\"sha256\":hashlib.sha256(out).hexdigest()}==r[\"stdout\"]; assert {\"bytes\":len(err),\"sha256\":hashlib.sha256(err).hexdigest()}==r[\"stderr\"]; d=json.loads(out); assert d[\"status\"]==\"PASS_DOCUMENTARY_ONLY\" and d[\"physical_inputs_before\"]==d[\"physical_inputs_after\"]; assert not any(x.is_symlink() for x in p.rglob(\"*\")); print(json.dumps({\"status\":\"PASS\",\"native_return_matches_actual_capture_receipt_bytes\":True,\"complete_child_stdout\":r[\"stdout\"],\"complete_child_stderr\":r[\"stderr\"],\"checks\":d[\"checks\"],\"physical_inputs\":d[\"physical_input_count\"],\"actual_fresh_comparisons\":len(d[\"fresh_raw_comparisons\"]),\"producer_pins_unchanged\":r[\"producer_unchanged\"]},sort_keys=True,indent=2))'",
+  "native_return": {
+    "chunk_id": "f3cb14",
+    "wall_time_seconds": 0.00000325,
+    "exit_code": 0,
+    "original_token_count": 117,
+    "output": "{\n  \"actual_fresh_comparisons\": 15,\n  \"checks\": 38755,\n  \"complete_child_stderr\": {\n    \"bytes\": 0,\n    \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n  },\n  \"complete_child_stdout\": {\n    \"bytes\": 642551,\n    \"sha256\": \"f60578edb6dfc3d328dd32c27266dd11273ce889a3efae4ea5ca93c7c23ec553\"\n  },\n  \"native_return_matches_actual_capture_receipt_bytes\": true,\n  \"physical_inputs\": 1294,\n  \"producer_pins_unchanged\": true,\n  \"status\": \"PASS\"\n}\n"
+  }
+}

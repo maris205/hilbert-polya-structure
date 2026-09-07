@@ -1,0 +1,458 @@
+                                         Highlights
+                                         Impact of (a)synchronism on ECA: towards a new classification1
+                                         Isabel Donoso-Leiva, Eric Goles, Martı́n Rı́os-Wilson, Sylvain Sené
+arXiv:2505.10645v1 [cs.DM] 15 May 2025
+
+
+
+
+                                                • A new formal approach to analyze the impact on elementary cellular
+                                                  automata (ECA) of asynchronism/synchronism is presented.
+
+                                                • Concepts of asyncronism/synchronism are considered through funda-
+                                                  mental families of periodic update modes.
+
+                                                • A new classification of ECA based on computational complexity is of-
+                                                  fered, measured through the length of their longest reached limit cycle
+                                                  is proposed.
+
+                                                • Numerical experiments are analyzed for specific and well known chaotic
+                                                  and complex ECA, namely 54, 90, 110 and 150, through measures of
+                                                  density and energy.
+
+
+                                            1
+                                             Partial results of this work were presented at the international conference LATIN 2024
+                                         (Latin American Theoretical Informatics) [1]
+       Impact of (a)synchronism on ECA: towards a new
+                         classification1
+ Isabel Donoso-Leivaa,c , Eric Golesa , Martı́n Rı́os-Wilsona , Sylvain Senéb,c
+         a
+             Facultad de Ingenierı́a y Ciencias, Universidad Adolfo Ibáñez , Chile
+                            b
+                              Université publique, Marseille, France
+                     c
+                       Aix Marseille Univ, CNRS, LIS, Marseille, France
+
+
+
+
+Abstract
+In this paper, we study the effect of (a)synchronism on the dynamics of el-
+ementary cellular automata. Within the framework of our study, we choose
+five distinct update schemes, selected from the family of periodic update
+modes: parallel, sequential, block sequential, block parallel, and local clocks.
+Our main measure of complexity is the maximum period of the limit cycles in
+the dynamics of each rule. In this context, we present a classification of the
+ECA rule landscape. We classified most elementary rules into three distinct
+regimes: constant, linear, and superpolynomial. Surprisingly, while some
+rules exhibit more complex behavior under a broader class of update schemes,
+others show similar behavior across all the considered update schemes. Al-
+though we are able to derive upper and lower bounds for the maximum period
+of the limit cycles in most cases, the analysis of some rules remains open.
+To complement the study of the 88 elementary rules, we introduce a numeri-
+cal simulation framework based on two main measurements: the energy and
+density of the configurations. In this context, we observe that some rules
+exhibit significant variability depending on the update scheme, while others
+remain stable, confirming what was observed as a result of the classification
+obtained in the theoretical analysis.
+Keywords: Elementary Cellular Automata, Asynchronism, Classification,
+Asymptotic Complexity
+
+
+   1
+    Partial results of this work were presented at the international conference LATIN 2024
+(Latin American Theoretical Informatics) [1]
+
+
+
+Preprint submitted to ArXiv                                                    May 19, 2025
+1. Introduction
+    Cellular automata are collections of discrete state entities (the cells) ar-
+ranged over a grid that interact with each other according to a local rule over
+discrete time. They were first introduced by Ulam and Von Neumann in the
+1940s [2] following from automata networks which were defined by McCulloch
+and Pitts in the same decade [3]. From there, fundamental results have been
+obtained such as the introduction of the retroaction cycle theorem [4], the self
+organizing behavior [5], the Turing universality of the model itself [6, 7], the
+structure of the space of elementary cellular automata [8], the undecidability
+of all nontrivial properties of limit sets of cellular automata [9], hierarchy of
+certain cellular automata [10]. While CA are simple models, they are able
+to exhibit great complexity which ranges from biology and health sciences,
+as a representational model of disease spreading [11] and its impact[12], to
+social models [13, 14], to parallel and distributed computation [15, 16], to
+physics [17].
+    Despite significant theoretical contributions since the 1980s that have
+improved our understanding of these objects from both computational and
+behavioral perspectives [18, 7], the sensitivity of cellular automata (CA)
+to (a)synchronism remains an open question. Any progress in this area
+could have profound implications in computer science—particularly concern-
+ing synchronous versus asynchronous computation and processing [19, 20]—as
+well as in systems biology, especially regarding the temporal organization of
+gene expression [21, 22].
+
+Related Work
+    Although synchronism, where all cells update simultaneously, can be an
+interesting case study (transforming the CA model into a massively par-
+allel computing environment [23]) this assumption is often unrealistic for
+many applications. This issue arises from two key perspectives: first, from a
+mathematical modeling standpoint (based for example on the observation of
+biological phenomena), perfectly simultaneous interactions between cells are
+rare [24]; second, from a computational perspective, a synchronous update
+scheme requires an internal clock to synchronize each processor computing
+cell states. In hardware design, this requirement increases complexity and
+reduces the efficiency of simulating the model.
+    Consequently, alternative approaches to the synchronous update scheme,
+collectively referred to as asynchronous update schemes, have been proposed.
+
+                                       2
+Some of the most well-known types include:
+  1. Fully asynchronous update scheme [25]: at each time step, the local
+     rule of the CA is applied to a single cell that is uniformly randomly
+     chosen.
+
+  2. α-Asynchronous update scheme [26]: at each time step, each cell has a
+     probability α to update its state and a probability 1 − α to stay in the
+     same state. The parameter α is called the synchronization rate.
+
+  3. Fixed random sweep [27, 28]: A randomly chosen permutation of the
+     cells is determined at initialization, and at each time step, cells are
+     updated according to this fixed order.
+
+  4. Random new sweep [27, 28]: At each time step, a new random permu-
+     tation of the cells is selected for updating.
+
+  5. Non-random update schemes [18, 29, 30, 31]: This category includes
+     sequential update schemes, where cells are updated one by one in a pre-
+     determined order. When the context is clear, we refer to these simply
+     as update schemes or update modes. Additionally, updates can occur
+     in groups rather than individually, forming a block sequential update
+     scheme. Other periodic update schemes exist, all characterized by a
+     fixed cycle in which the sequence of updated nodes (whether individu-
+     ally or in groups) repeats after a defined number of time steps.
+
+    Beyond these variants, which differ based on deterministic or probabilis-
+tic updating schemes, some cellular automata rules exhibit intrinsically asyn-
+chronous dynamics, such as probabilistic CA. In these models, the local up-
+date rule itself is probabilistic. As noted by Fatès [32], this line of research
+has yielded significant recent developments concerning asynchronism.
+    Fatès identifies two primary approaches to studying asynchronism in CA.
+The first, an experimental approach, relies on numerical simulations, while
+the second is based on mathematical analysis. In this work, we adopt both
+approaches. As explained in [32], the experimental approach facilitates the
+detection and classification of changes induced by asynchornism in global
+dynamical properties, both qualitative and quantitative. In the same review,
+it is state that various observed properties for different elementary rules,
+including the Game of Life model (or more generally life-like rules) can be
+capture by this approach (see for example [33, 34, 26, 35, 36]). Notably, as
+
+                                       3
+highlighted in [32], while intuition might suggest that asynchronism increases
+dynamical complexity, certain cases reveal that it can instead simplify system
+behavior. Interestingly, our findings confirm this phenomenon, showing that
+highly complex rules can exhibit remarkably simple behavior under specific
+update schemes.
+    An important question explored in [32], is related to the definition of
+efficient and correct numerical simulation protocols to capture the changes
+induce changes induced by asynchronism in CA dynamics. In this context,
+the choice of relevant order parameters is a key factor. In this work, we
+propose an approach based on the maximum period of limit cycles as a
+measure of the complexity of the dynamics of an ECA rule .
+    On the other hand, the analytical approach employs mathematical tech-
+niques to study the effect of asynchronism in CA models. For probabilistic
+CA, a primary method involves analyzing these systems as Markov chains
+[37, 38]. Additional approaches include computing asymptotic densities (for
+instance, exact density calculations in specific cases [39]), use of techniques
+aming to approximate the stationary measures of probabilistic CA such as
+block approximation [40], extensions of mean field approximations such as
+[41] the study of the impact of asynchronism on dynamical properties such
+as reversibility [42, 43, 44]. A key advantage of our work is that, by focus-
+ing exclusively on the deterministic case (where both local rules and update
+schemes are deterministic), we primarily employ tools from discrete math-
+ematics and combinatorics. While one might assume that analytical de-
+scriptions remain impractical even in deterministic settings, we show that in
+certain cases it is possible to completely characterize an elementary rule com-
+plexity from an analytic standpoint. Moreover, from our results is derived
+the fact that asynchronism can have widely varying effects in deterministic
+CA, implying that deterministic models are not necessarily simpler than their
+probabilistic counterparts.
+
+Our Contribution
+    Since the aim of this paper is to increase the knowledge on asynchro-
+nism sensitivity, elementary cellular automata were chosen because they are
+a family of restricted and “simple” cellular automata, which has been well
+studied [45, 46, 47]. By studying ECA we can put the focus on the periodic
+update modes (from the classical parallel update mode to a family of more
+general ones known as local clocks [48]) and their impact over the dynamics.
+
+
+                                      4
+Here, we approach the subject with ideas derived from [49, 31] and pay atten-
+tion to the influence of update modes on the resulting asymptotic dynamical
+behavior, in particular in terms of the maximal period of limit cycles. Addi-
+tionally, for rules whose behavior is too complex to analyze directly, we have
+ran computational experiments that used measures of density and energy to
+study their asymptotic dynamical behavior. For these experiments we have
+implemented a number of update modes per family, for three different orders
+of magnitude of ring sizes.
+    In this paper, we highlight formally that the choice of the update mode
+can have a deep influence on the dynamics of systems. In particular, two
+specific elementary cellular automata rules, namely rules 2 and 184 (known
+as the traffic rule) as defined by Wolfram’s codification, are studied here.
+These rules were chosen because the results obtained require proofs which
+serve as example of how to obtain similar results for other rules that are
+mentioned in their respective section. In particular, the traffic rule also
+emphasizes sensitivity to (a)synchronism.
+    Note that both rules belong to the Wolfram’s class II [45], which means
+that, according to computational observations, these cellular automata evolve
+asymptotically towards a “set of separated simple stable or periodic struc-
+tures”. Since our (a)synchronism sensitivity measure consists in limit cycles
+maximal periods, Wolfram’s class II is naturally the most pertinent one in
+this context.
+    Secondly, we have run computational experiments over rules 90 and 150
+(of Wolfram’s class III) and rules 54 and 110 (of Wolfram’s class IV) to discuss
+the influence of different update modes over rules whose dynamics is already
+known to be too chaotic (class III) or too complex (class IV) to show jumps
+in asymptotic complexity as a result of the influence of the different update
+modes. Instead, we show the changes (or lack thereof) in their dynamics by
+way of showing whether there are changes in the evolution of density and
+energy.
+
+Structure of the Paper
+    In Section 2, the main definitions and notations are formalized. The
+emphasizing of elementary cellular automata (a)synchronism sensitivity is
+presented in the first part of Section 3 through demonstrations that set an
+upper-bound for the limit cycle periods of rules 2 and 184 depending on dis-
+tinct families of periodic update modes. In the second part, experimental
+
+                                       5
+results for rules 90, 150, 54 and 110 under different update modes are pre-
+sented, using measures of density and energy. The paper ends with Section 4
+in which we discuss some perspectives of this work.
+
+2. Preliminaries
+General notations. Let JnK = {0, . . . , n − 1}, let B = {0, 1}, and let xi denote
+the i-th component of vector x ∈ Bn . Given a vector x ∈ Bn , we can denote it
+Rule 108
+
+                   Rule
+                   Rule 111
+                        111 110
+                            110 101
+                                101 100
+                                    100 011
+                                        011 010
+                                            010 001
+                                                001 000
+                                                    000
+                   108
+                   108   0
+                         0   1
+                             1   1
+                                 1   0
+                                     0   1
+                                         1   1
+                                             1   00  00
+
+
+
+
+                                                    Block           Block           Local
+  Rule         Parallel         Bipartite
+                                                  Sequential       Parallel         Clocks
+                                 √               √              √             √            
+   108           Θ(1)          Ω 2(( nn log(n))
+                                        log(n)) Ω 2(( nn log(n))
+                                                         log(n)) Ω 2(( n
+                                                                       n log(n))
+                                                                         log(n)) Ω 2(( nn log(n))
+                                                                                          log(n))
+
+
+
+
+           Table 7: Longest limit cycle for Rule 108, according to update schedule.
+
+
+
+
+         (a)                     (b)                      (c)                     (d)                     (e)
+Figure
+Figure 6:  6: Space-time
+               Space-time diagrams
+                               diagrams (time(time going
+                                                     going downward)
+                                                            downward) of    of configuration
+                                                                               configuration 0010111111001101
+                                                                                                  0010111111001101
+following       rule     108
+following rule 108 depending on:  depending       on:      (a)
+                                                           (a) the parallel update
+                                                                  the    parallel      update mode  mode µ     µpar    =
+                                                                                                                       =
+                                                                                                                par
+(J16K),
+(J16K), (b) the bipartite update mode µbip = ({i ∈ J16K | i ≡ 00
+             (b)     the    bipartite      update      mode      µ bip     =     ({i     ∈     J16K      |    i    ≡
+mod
+mod 2}, 2}, {i
+            {i ∈  ∈ J16K J16K || ii ≡      ≡ 11 mod mod 2}),
+                                                          2}), (c)(c) the
+                                                                        the block-sequential
+                                                                               block-sequential update  update modemode
+µ bs                4, 8, 12},   {1, 3, 5, 7, 9, 11, 13, 15},  {2,
+µbs = ({0, 4, 8, 12}, {1, 3, 5, 7, 9, 11, 13, 15}, {2, 6, 10, 14}), (d) the block-parallel up-
+        =     ({0,                                                  6, 10, 14}),    (d)    the   block-parallel      up-
+date
+date modemode µ    µbp      =
+                            =    {(0,
+                                  {(0, 1),
+                                       1), (10,
+                                           (10,  11),
+                                                 11), (2,
+                                                      (2, 3,
+                                                          3, 4,
+                                                             4, 5),
+                                                                5), (6,
+                                                                    (6, 7,
+                                                                        7, 8,
+                                                                           8, 9),
+                                                                              9), (12,
+                                                                                  (12,  13,
+                                                                                        13,  14,
+                                                                                             14, 15)},
+                                                                                                 15)},     (e)
+                                                                                                           (e)  the
+                                                                                                                 the lo-
+                                                                                                                      lo-
+                      bp
+cal
+cal clocks update mode µlc = (P = (3, 3, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 3, 3, 2), ∆ =
+      clocks     update        mode     µ lc    =    (P    =     (3, 3, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 3, 3, 2), ∆   =
+(0,
+(0, 1,
+     1, 0,
+        0, 1,
+           1, 0,
+              0, 1,
+                 1, 0,
+                    0, 1,
+                        1, 0,
+                           0, 1,
+                              1, 0,
+                                 0, 1,
+                                    1, 0,
+                                       0, 1,
+                                          1, 2,
+                                             2, 1)).
+                                                1)).
+
+
+Lemma 21. ECA rule 108 admits two walls, 001 and 100.
+
+Proof. By definition of the rule, f108
+                                    108(a00) = 0, f108
+                                                    108(001) = 0 and f108
+                                                                        108(01b) =
+1, for all a, b ∈ {0, 1}, which means that ω11 = 001 is a wall. Also by definition,
+f108
+ 108(a10) = 1, f108 108(100) = 0 and f108
+                                       108(00b) = 0, meaning that ω22 = 100 is
+also a wall.
+   We will now show that there
+                             √exists35one sequential update mode for which
+                              ( n log(n))
+there are cycles of length Ω 2
+
+                                                          34
+Theorem 22. Rule (108,   seq)
+                           √ applied   over a grid of size n can reach largest
+                          ( n log(n))
+limit cycles of length Ω 2
+
+Proof. Let µseq = (0, 1, 2, 3, . . . , n) a sequential update schedule. Let x be
+an initial configuration such that x = ω1 1k ω2 = (001)1k (100), with k an even
+number. We need to calculate the state for the configuration f (x).
+Since f108 (111) = 0, and f108 (011) = 1, we have that
+
+                         x      =   001      1k             100
+                                                k
+                      f (x)     =   001    (01) 2           100
+                      f 2 (x)   =   001 1k−2 (10)           100
+                                            k−2
+                      f 3 (x)   =   001 (01) 2 (1)2         100
+                      f 4 (x)   =   001 1k−4 (10)2          100
+
+It is easy to see that on odd iterations there is a number of words (01) that
+appears in the configuration, but that amount goes down as the numbers
+of 1’s to the right side increases. And for the even iterations, we can see
+the number of ones going down to the left, while the number of words (10)
+increases. This can be written as
+                                              k−(t−1)
+                    f t (x) = 001 (01) 2 (1)t−1 100
+                                                t
+                   f t+1 (x) = 001  (1)k−t (10) 2 100
+
+when t is odd. Which means that the (k − 1)-th iteration is
+                                         k−((k−1)−1)
+               f k−1 (x) = 001 (01)   2     (1)(k−1)−1 100
+                         = 001      (01)1 (1)k−2       100
+
+And then k−th
+                                                        k
+                      f k (x) = 001 (1)k−k (10) 2 100
+                                            k
+                              = 001    (10) 2     100
+And finally, the (k + 1)-th iteration:
+
+                          f k+1 (x) = 001 1k 100
+
+Which brings us back to the original configuration, meaning that between
+two walls we can find cycles of length k when k is even.
+
+
+
+                                         35
+   If k is odd, x = ω1 1k ω2 results in cycles of length 2. We will instead focus
+on an initial configuration x such that x = ω1 1k−1 0ω2 = (001)(1)k−1 0(100).
+                                                k−1
+                      f (x)      =   001   (01) 2 12        100
+                      f 2 (x)    =   001    (1)k−2 01       100
+                                               k−3
+                      f 3 (x)    =   001 (01) 2 1(10)       100
+                      f 4 (x)    =   001 (1)k−4 0(1)3       100
+                                              k−5
+                      f 5 (x)    =   001 (01) 2 1(10)2      100
+                      f 6 (x)    =   001 (1)k−6 0(1)5       100
+
+From where we can deduce that after t iterations (with t odd) we will have
+                                              k−t     t−1
+                     f t (x) = 001 (01) 2 1(10) 2            100
+                    f t+1 (x) = 001 (1)k−t 0(1)t−1           100
+
+Which means that after k − 1 iterations we will have
+
+                     f k−1 (x)   =   001 (1)0(1)(k−1)−1      100
+                                                  k−1
+                      f k (x)    =   001    1(10) 2          100
+                     f k+1 (x)   =   001     0(1)k−1         100
+                                                 k−1
+                     f k+2 (x)   =   001    (10) 2 1         100
+                     f k+3 (x)   =   001     (1)k−1 0        100
+
+Which brings us back to the starting configuration, meaning that between
+two walls we can find cycles of length k + 2 when k is odd.
+Using the same argument used for Theorem 16, we conclude that the largest
+limit
+   √cyclesof the family (108, seq) when applied over a ring of length n is
+Ω 2 n log n .
+
+Corollary
+  √         9. (108, bs), (108, bp), (108, lc) have largest limit cycles of length
+     n log n
+Ω 2           .
+
+Proof. The family of sequential update schedules are a subset of block parallel
+and block sequential, which themselves are a subset of local clocks, so they
+inherit the result.
+

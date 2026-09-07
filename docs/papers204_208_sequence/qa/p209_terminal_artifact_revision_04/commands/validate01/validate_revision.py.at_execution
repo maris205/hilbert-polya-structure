@@ -1,0 +1,223 @@
+"""Final static source/actual-input binding. No prepared target code executes."""
+import ast
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+
+ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+BATCH = ROOT / 'docs/papers204_208_sequence'
+HERE = BATCH / 'qa/p209_terminal_artifact_revision_04'
+OLD = BATCH / 'qa/p209_terminal_artifact_revision_03'
+PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
+
+
+def info(path):
+    data = Path(path).read_bytes()
+    return {'sha256': sha256(data).hexdigest(), 'bytes': len(data)}
+
+
+def obj(path):
+    return json.loads(Path(path).read_bytes())
+
+
+def save(name, data):
+    with (HERE / name).open('xb') as f:
+        f.write(data)
+
+
+def dump(name, value):
+    save(name, (json.dumps(value, sort_keys=True, indent=2) + '\n').encode())
+
+
+def functions(source):
+    tree = ast.parse(source)
+    return {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+
+
+def literal_source(source, fn):
+    return ast.get_source_segment(source, fn)
+
+
+def initial_labels(node):
+    return [n.value for n in ast.walk(node) if isinstance(n, ast.Constant) and isinstance(n.value, str) and n.value.startswith('initial_')]
+
+
+def native(argv, stem):
+    run = subprocess.run(argv, cwd=ROOT, env=ENV, capture_output=True, check=False)
+    save(stem + '.stdout', run.stdout)
+    save(stem + '.stderr', run.stderr)
+    return {'argv': argv, 'cwd': str(ROOT), 'environment': ENV, 'exit_code': run.returncode,
+            'stdout': {'path': stem + '.stdout', **info(HERE / (stem + '.stdout'))},
+            'stderr': {'path': stem + '.stderr', **info(HERE / (stem + '.stderr'))}}
+
+
+def main():
+    began = datetime.now(timezone.utc).isoformat()
+    assert Path(__file__).resolve() == HERE / 'validate_revision.py' and Path.cwd() == ROOT and dict(os.environ) == ENV
+    assert sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode and not sys.flags.optimize
+    inspected = obj(HERE / 'ORIGINAL_PREDICATE_INSPECTION.json')
+    scope = obj(HERE / 'SCOPE.json')
+    original_before = {k: v for k, v in inspected['input_pins'].items() if not Path(k).is_relative_to(HERE)}
+    assert {k: info(k) for k in original_before} == original_before
+    assert inspected['input_pins'] == inspected['inputs_after'] and inspected['inputs_unchanged']
+    assert len(inspected['unmatched_predicates']) == 4 and inspected['unmatched_predicates'] == scope['unmatched_predicates']
+    assert len(inspected['links']['resolved_links']) == 1534
+    assert inspected['corrected_links']['resolved_links'] == inspected['links']['resolved_links']
+    recipes, recorded = obj(HERE / 'SOURCE_EDITS.json'), obj(HERE / 'SOURCE_FUNCTION_CHECKS.json')
+    expected_changes = {'audit_p209.py': {'revision_originals_and_failure', 'root_page_views', 'pages_and_links'},
+                        'record_audit.py': {'main'}, 'lifecycle_audit.py': set()}
+    source_checks, native_diffs, parsed = {}, [], []
+    for name, changes in recipes.items():
+        before, after = (OLD / name).read_text(), (HERE / name).read_text()
+        reconstructed = before
+        for row in changes:
+            assert reconstructed.count(row['old']) == row['required_old_occurrences'] == 1
+            reconstructed = reconstructed.replace(row['old'], row['new'], 1)
+        assert reconstructed == after
+        first, second = functions(before), functions(after)
+        assert set(first) == set(second)
+        changed = {key for key in first if literal_source(before, first[key]) != literal_source(after, second[key])}
+        assert changed == expected_changes[name]
+        comparisons = {}
+        for key in first:
+            a, b = literal_source(before, first[key]), literal_source(after, second[key])
+            comparisons[key] = {'equal': a == b, 'original_sha256': sha256(a.encode()).hexdigest(), 'prepared_sha256': sha256(b.encode()).hexdigest()}
+        assert comparisons == recorded[name]['literal_function_comparisons']
+        assert info(OLD / name)['sha256'] == recorded[name]['original_sha256']
+        assert info(HERE / name)['sha256'] == recorded[name]['prepared_sha256']
+        source_checks[name] = {'changed_functions': sorted(changed), 'unchanged_functions': len(first) - len(changed),
+                               'prepared_pin': info(HERE / name), 'original_pin': info(OLD / name)}
+        original_copy = HERE / 'original_snapshot' / (OLD / name).relative_to(ROOT)
+        result = native(['/usr/bin/diff', '-u', '--', str(original_copy), str(HERE / name)], 'final_diff_' + name)
+        assert result['exit_code'] == 1 and (HERE / result['stdout']['path']).read_bytes() == (HERE / (name + '.diff')).read_bytes()
+        assert result['stderr']['bytes'] == 0
+        native_diffs.append(result)
+    old_audit, new_audit = (OLD / 'audit_p209.py').read_text(), (HERE / 'audit_p209.py').read_text()
+    oldf, newf = functions(old_audit), functions(new_audit)
+    a, b = oldf['root_page_views'], newf['root_page_views']
+    assert literal_source(new_audit, b) == literal_source(old_audit, a).replace("record['page_count']", "record['measured_page_count']", 1)
+    subscripts = [n.slice.value for n in ast.walk(b) if isinstance(n, ast.Subscript) and isinstance(n.value, ast.Name)
+                  and n.value.id == 'record' and isinstance(n.slice, ast.Constant)]
+    actual_view = obj(BATCH / 'qa/P209_TERMINAL_ROOT_VIEWS.actual.json')
+    assert set(subscripts) <= set(actual_view) and 'page_count' not in subscripts
+    assert actual_view == inspected['views']['actual_original_record']
+    assert actual_view['measured_page_count'] == 4 and actual_view['retained_nonblocking_diagnostic'] is None
+    for page in actual_view['pages']:
+        assert info(page['path'])['sha256'] == page['sha256'] and page['actually_displayed_and_viewed'] is True and page['observation'].strip()
+    named = next(n.value for n in ast.walk(newf['pages_and_links']) if isinstance(n, ast.Assign)
+                 and any(isinstance(t, ast.Name) and t.id == 'exact_self_origin_roles' for t in n.targets))
+    assert isinstance(named, ast.Dict) and len(named.keys) == 4
+    extracted = {}
+    for key_node, value_node in zip(named.keys, named.values):
+        key = ast.literal_eval(key_node)
+        assert isinstance(value_node, ast.Tuple) and len(value_node.elts) == 2
+        path_node, hash_node = value_node.elts
+        assert isinstance(path_node, ast.BinOp) and isinstance(path_node.op, ast.Div) and isinstance(path_node.left, ast.Name) and path_node.left.id == 'BATCH'
+        extracted[key] = (str(BATCH / ast.literal_eval(path_node.right)), ast.literal_eval(hash_node))
+    actual_roles = obj(HERE / 'EXACT_FOUR_A_ORIGIN_ROLES.json')
+    assert actual_roles == inspected['corrected_links']['named_four_role_corrections'] and len(actual_roles) == 4
+    role_bindings = []
+    for row in actual_roles:
+        source, copied = Path(row['original_path']), Path(row['copy_path'])
+        key = (row['attempt'], copied.name)
+        assert extracted[key] == (str(source), row['sha256'])
+        assert row['previous_alias_derived_origin'] == str(copied) and row['correct_source_origin'] == str(source)
+        table = obj(row['source_copy_table'])
+        assert table[str(source)] == {'copy': str(copied), 'sha256': row['sha256']}
+        assert copied == BATCH / 'reviews/p209_a' / row['attempt'] / 'exact_response_inputs' / source.name
+        identity = row['round2_identity_role']
+        assert identity['original_path'] == identity['round2_physical_path'] == str(copied)
+        assert identity['sha256'] == row['sha256'] and identity['mode'] == 'unchanged-original' and identity['copy_relative'] is None
+        assert info(copied)['sha256'] == row['sha256']
+        role_bindings.append(row)
+    origin_code = literal_source(new_audit, newf['pages_and_links'])
+    assert "source == named_source and row['sha256'] == named_digest and origins.get(str(copied)) == copied" in origin_code
+    assert literal_source(old_audit, oldf['pages_and_links']) == origin_code.replace(recipes['audit_p209.py'][3]['new'], recipes['audit_p209.py'][3]['old'], 1)
+    old_failure, new_failure = oldf['revision_originals_and_failure'], newf['revision_originals_and_failure']
+    assert [ast.dump(n, include_attributes=False) for n in old_failure.body[:-1]] == [ast.dump(n, include_attributes=False) for n in new_failure.body[:len(old_failure.body) - 1]]
+    old_return, new_return = ast.literal_eval(old_failure.body[-1].value), ast.literal_eval(new_failure.body[-1].value)
+    expected_return = {**old_return, 'revision': 'p209_terminal_artifact_revision_04', 'preserved_revision_03_payloads': 47,
+                       'preserved_initial_04_payloads': 8, 'fourth_child_exit': 1, 'fourth_wrapper_exit': 1}
+    assert new_return == expected_return
+    failure = inspected['failure04']
+    assert failure['command']['exit_code'] == failure['wrapper']['completion']['exit_code'] == 1
+    assert failure['inputs_before'] == failure['inputs_after'] and len(failure['inputs_before']) == 16
+    recorder_tree = ast.parse((HERE / 'record_audit.py').read_bytes())
+    required = next(n.value for n in ast.walk(recorder_tree) if isinstance(n, ast.Assign)
+                    and any(isinstance(t, ast.Name) and t.id == 'required' for t in n.targets))
+    assert isinstance(required, ast.List) and len(required.elts) == 19
+    labels = initial_labels(recorder_tree)
+    assert 'initial_05' in labels and all('initial_' + f'{n:02d}' in labels for n in range(1, 5))
+    guard = literal_source((HERE / 'record_audit.py').read_text(), functions((HERE / 'record_audit.py').read_text())['main'])
+    assert "if sys.argv[1:] != ['initial_05']:" in guard
+    assert "target=BASE/sys.argv[1];target.mkdir(exist_ok=False)" in guard
+    life_old, life_new = (OLD / 'lifecycle_audit.py').read_text(), (HERE / 'lifecycle_audit.py').read_text()
+    assert life_new == life_old.replace("PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'", "PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_04'", 1)
+    future = inspected['lifecycle_and_final_flow']['future_input_presence']
+    assert all(not Path(name).exists() and state == {'exists': False, 'is_file': False, 'is_dir': False} for name, state in future.items())
+    lifecycle_inputs = {
+        'current_files': {str(p): {'pin': info(p), 'content': p.read_text()} for p in [PAPER / 'ROOT_LIFECYCLE.md']},
+        'current_whole_paper_manifest': {'path': str(PAPER / 'PAPER_MANIFEST.sha256'), 'pin': info(PAPER / 'PAPER_MANIFEST.sha256'),
+                                       'declared_payloads': len((PAPER / 'PAPER_MANIFEST.sha256').read_text().splitlines())},
+        'prepared_helper': {'path': str(HERE / 'lifecycle_audit.py'), 'pin': info(HERE / 'lifecycle_audit.py'), 'only_PREPARATION_path_changed': True},
+        'actual_current_attempt': {'path': str(BATCH / 'qa/p209_terminal_artifact/initial_04'), 'child_exit': 1,
+                                   'stdout_bytes': 0, 'not_a_successful_json_audit_ledger': True},
+        'absent_future_inputs': future,
+        'root_gate_required_exact_scalars': {'schema': 'p209-terminal-artifact-root-original-closure-v1',
+            'status': 'PASS_ROOT_P209_TERMINAL_ARTIFACT_COMPLETE_ORIGINAL_CLOSURE', 'paper': 'P209', 'actual_exit_code': 0, 'current_open_findings': 0},
+        'successful_audit_required_exact_scalars': {'schema': 'p209-terminal-artifact-audit-v1', 'status': 'PASS_P209_TERMINAL_ARTIFACT_GATE', 'paper': 'P209'},
+        'preservation_required_status': 'PASS_EXACT_PREUPDATE_PRESERVATION_NOT_LIFECYCLE_ACCEPTANCE',
+        'followup_required_status': 'PASS_P209_LIFECYCLE_ONLY_FOLLOWUP',
+        'complete_source_predicates': inspected['lifecycle_and_final_flow']['complete_source_predicates'],
+        'future_only_constraints': inspected['lifecycle_and_final_flow']['future_only_constraints'],
+        'verdict': 'CURRENT_PENDING_INPUTS_MATCH; FUTURE_ACCEPTANCE_AND_LIFECYCLE_PREDICATES_NOT_YET_EVALUABLE; NO_EXECUTION'}
+    assert lifecycle_inputs['current_whole_paper_manifest']['declared_payloads'] == 8231
+    native_copies = []
+    for n, row in enumerate(inspected['selected_native_copy_comparisons'], 1):
+        assert info(row['original']) == info(row['copy']) == row['pin']
+        result = native(row['argv'], 'final_copy_' + f'{n:02d}')
+        assert result['exit_code'] == 0 and result['stdout']['bytes'] == result['stderr']['bytes'] == 0
+        native_copies.append(result)
+    for path in sorted(HERE.rglob('*.py')):
+        compile(ast.parse(path.read_bytes(), filename=str(path)), str(path), 'exec', dont_inherit=True, optimize=0)
+        parsed.append(str(path.relative_to(HERE)))
+    scope_receipt = obj(HERE / 'commands/scope01/COMMAND.json')
+    assert scope_receipt['exit_code'] == 1 and scope_receipt['inputs_unchanged']
+    assert info(HERE / 'commands/scope01/documentary.py.at_execution') == scope['input_pins'][str(HERE / 'documentary.py')]
+    assert info(HERE / 'commands/scope01/record_documentary.py.at_execution') == scope['input_pins'][str(HERE / 'record_documentary.py')]
+    after = {k: info(k) for k in original_before}
+    assert after == original_before
+    dump('LIFECYCLE_INPUT_CONTRACT.json', lifecycle_inputs)
+    result = {'schema': 'p209-revision04-static-preparation-v1', 'status': 'PASS_STATIC_PREPARATION_ONLY_NOT_ARTIFACT_GATE',
+              'started_utc': began, 'ended_utc': datetime.now(timezone.utc).isoformat(),
+              'original_input_paths': len(original_before), 'original_inputs_before': original_before, 'original_inputs_after': after,
+              'all_original_inputs_unchanged': True, 'prepared_sources': source_checks, 'fresh_native_diffs': native_diffs,
+              'fresh_native_copy_comparisons': native_copies, 'source_copies': len(native_copies),
+              'root_view_field_binding': {'prepared_record_keys': sorted(set(subscripts)), 'actual_original_values': actual_view,
+                                          'only_page_count_to_measured_page_count_changed': True, 'new_views': 0},
+              'exact_four_A_origin_roles': role_bindings, 'all_1534_resolved_links_unchanged_by_named_origin_correction': True,
+              'preserved_failure_return_fields': new_return, 'earlier_failure_function_AST_statements_unchanged': True,
+              'recorder_preserved_prior_attempts': [1, 2, 3, 4], 'future_recorder_required_inputs': 19,
+              'lifecycle_only_path_change_and_all_36_functions_unchanged': True,
+              'current_lifecycle_future_inputs_absent_not_synthesized': future, 'parsed_compiled_only': parsed,
+              'preserved_native_scope01_exit': 1, 'revision03_missed_predicate_disclosed': True,
+              'target_audit_recorder_lifecycle_executions': 0, 'science_build_render_views': 0, 'initial05_created': False,
+              'limits': ['Static source/data preparation, not actual initial05 or root acceptance.',
+                         'Previous revision03 read only the view JSON shape and missed the precise page_count predicate.',
+                         'scope01 genuinely found four additional named semantic-origin conflicts; its full failed evidence stays immutable.',
+                         'Future root-gate, success-ledger and lifecycle records do not exist and are not simulated as passing.',
+                         'New lifecycle execution and complete current runtime/resource traversal remain root-owned after actual initial acceptance.'],
+              'external': 'OWNER_AMBER / HOLD_EXTERNAL'}
+    dump('STATIC_RESULT.json', result)
+    print(json.dumps({k: result[k] for k in ('status', 'original_input_paths', 'source_copies', 'prepared_sources',
+                                            'future_recorder_required_inputs', 'target_audit_recorder_lifecycle_executions', 'initial05_created')}, sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

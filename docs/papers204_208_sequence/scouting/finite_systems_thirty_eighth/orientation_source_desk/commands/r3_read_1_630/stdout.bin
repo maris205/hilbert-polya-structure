@@ -1,0 +1,630 @@
+                                                            A Dynamic View of Circular Colorings
+
+                                                                                      Hong-Gwa Yeh∗
+arXiv:math/0604226v1 [math.CO] 10 Apr 2006
+
+
+
+
+                                                                                Department of Mathematics
+                                                                                National Central University
+                                                                         Jhongli City, Taoyuan 32001, Taiwan
+                                                                    National Center for Theoretical Sciences, Taiwan
+
+                                                                                          April 2006
+
+
+
+
+                                                                                           Abstract
+                                                           The main contributions of this paper are three-fold. First, we use a dynamic
+                                                       approach based on Reiter’s pioneering work on Karp-Miller computation graphs
+                                                       [19] to give a new and short proof of Mohar’s Minty-type Theorem [15]. Second,
+                                                       we bridge circular colorings and discrete event dynamic systems to show that
+                                                       the Barbosa and Gafni’s results on circular chromatic number [5, 21] can be
+                                                       generalized to edge-weighted symmetric directed graphs. Third, we use the
+                                                       above-mentioned dynamic view of circular colorings to construct new improved
+                                                       lower bounds on the circular chromatic number of a graph. We show as an
+                                                       example that the circular chromatic number of the line graph of the Petersen
+                                                       graph can be determined very easily by using these bounds.
+
+
+                                             1         Introduction
+                                             In this paper we discuss the possibilities to use dynamic techniques to investigate
+                                             circular coloring problems. From these approaches we will see an intimate connection
+                                             between circular colorings and discrete event dynamic systems. To explain our ap-
+                                             proaches, we first give some definitions from graph theory and scheduling that will be
+                                             used in this paper. Throughout this paper all graphs are connected. An edge-weighted
+                                                                                                                  ~ together with
+                                             directed graph (or simply edge-weighted digraph) is a directed graph G
+                                             an assignment c of positive real weights to each directed edges and is denoted as
+                                              ~ c). We use V (G)
+                                             (G,               ~ to denote the set of vertices and E(G) ~ to denote the set of
+                                             directed edges. For simplicity of notation, the directed edge (u, v) is written as uv
+                                                 ∗
+                                                     Partially supported by National Science Council of R.O.C. under grant NSC94-2115-M-008-015.
+
+
+                                                                                               1
+                                                   ~ c) is written as cuv . The arc uv
+and is called an arc, the weight of the arc uv in (G,
+is called the in-arc of v and out-arc of u. An edge-weighted digraph (G,~ c) is said to
+be symmetric if arcs uv, vu both exist and do not exist for all vertices u, v in G.~ A
+                                         ~ c) is a closed directed walk with no repeated
+directed cycle (or simply dicycle) C of (G,
+vertices except that the beginning vertex and ending vertex.
+                          ~ c) we may assign a number Tuv of tokens (a nonnegative
+      To each arc uv in (G,
+                                                          ~ c) (or G).
+integer). The function T is called an initial marking of (G,       ~   An edge-
+                  ~ c) equipped with an initial marking T is denoted by (G,
+weighted digraph (G,                                                     ~ c, T )
+and is called a timed marked graph. The token count (resp., weight) of a dicycle C in
+ ~ c, T ) is defined as the value Puv∈E(C) Tuv (resp., Puv∈E(C) cuv ) and is denoted by
+(G,
+|C|T (resp., |C|c ).
+                           ~ c, T ) can be used to dynamically model the data
+      A time marked graph (G,
+movement in parallel computations. To model the dynamic behavior of data in the
+parallel computation environment, a vertex of a timed marked graph represents a
+task, an arc uv represents a data channel with communication cost cuv , and tokens
+on arc uv represent input data of the task vertex v. The edge weight cuv represents
+the time required by task vertex u to place the result of its operation on arc uv (all
+the tokens on uv are available as input data to the task node v). Dynamically, if task
+vertex u operates at time t, then at time t + cuv , u places one token on arc uv.
+      A vertex u is said to be fireable at time t if each in-arc of u contains at least
+one token at time t. A vertex can start its operation only when it is fireable. When
+a vertex u starts its operation we say that the vertex u fires. Upon firing of vertex u,
+say at time t, u removes one token from each of its in-arcs; if uv is an out-arc of u,
+then at time t + cuv , u places one token on arc uv. Let Tuv (t) denote the number of
+tokens on arc uv at time t. With this notation, we have that T (0) ≡ T is the initial
+                                   ~ c, T ) (i.e., the distribution of tokens before the
+marking of the time marked graph (G,
+firings of vertices). During firings of vertices the distribution of tokens may change.
+A distribution of tokens in G ~ is called a marking. Given a timed marked graph, in
+parallel computation we are interested in, for each vertex, determining a sequence of
+times called schedule at which the vertex starts its firing (operation) independently of
+what the other vertices are doing. These times must be such that each vertex, upon
+firing, is assured to be fireable.
+
+
+
+                                           2
+                                 ~ c, T ) is a set of functions {fu }
+      Formally, a schedule f of (G,                                        ~ , where function
+                                                                      u∈V (G)
+
+fu : {1, 2, 3, · · ·} → R having fu (k1 ) < fu (k2 ) for k1 < k2 , where fu (k) = t means that
+vertex u starts its kth firing at time t under the schedule f . A schedule f of (G,    ~ c, T )
+                                     ~ c, T ) “runs properly” according to the schedule
+is called an admissible schedule if (G,
+f , i.e., for every vertex u and integer k, fu (k) = t implies Tef (t) > 0 for all in-arc e
+of u, where Tef (t) is the number of tokens on arc e at time t under the schedule f .
+Computer scientists are particularly interested in regular schedules. To that end, we
+make the following definition: An admissible schedule f is periodic with period p if
+there exist real numbers xu such that
+
+                                   fu (k) = xu + p(k − 1)
+
+for any vertex u and positive integer k.
+      Suppose k ≥ 2d are positive integers. A (k, d)-coloring of an undirected graph
+G is a mapping f : V (G) → {0, 1, . . . , k − 1} such that for any edge xy of G,
+d ≤ |f (x) − f (y)| ≤ k − d. If G has a (k, d)-coloring then we say G is (k, d)-colorable.
+The circular chromatic number χc (G) of G is defined as
+
+                        χc (G) = inf{k/d : G is (k, d)-colorable }.
+
+In fact, to determine the circular chromatic number of G, it suffices to check finitely
+many k, d whether G is (k, d)-colorable. In [22, 23, 24] we see that
+
+             χc (G) ∈ { kd : k ≤ |V (G)|, d ≤ α(G) and |Vα(G)
+                                                          (G)|
+                                                               ≤ kd ≤ χ(G)},
+
+where α(G) is the maximum size of an independent set in G.
+      For a positive real p, let S p denote a circle with perimeter p centered at the
+origin of R2 . In the obvious way, we can identify the circle S p with the interval [0, p).
+For x, y ∈ S p , let d(x, y) denote the length of the arc on S p from x to y in the clockwise
+direction if x 6= y, and let d(x, y) = 0 if x = y. A circular p-coloring of an edge-
+weighted digraph (G, ~ c) is a function ϕ : V (G)
+                                               ~ → S p such that d(ϕ(u), ϕ(v)) ≥ cuv
+                    ~ The circular chromatic number χc (G,
+for each arc uv in G.                                       ~ c) of an edge-weighted
+         ~ c), recently introduced by Mohar [15], is defined as
+digraph (G,
+
+                      ~ c) = inf{p : (G,
+                  χc (G,              ~ c) has a circular p-coloring }.
+
+
+
+                                              3
+                                            ~ c) generalizes several well-known opti-
+It was shown in [15] that the notion of χc (G,
+mization problems, such as the usual circular chromatic number [23], the weighted
+circular colorings [9], the linear arboricity of a graph and the metric traveling salesman
+problem.
+
+
+2     Circular coloring and periodic admissible sched-
+      ule
+                                                                                 ~ c)
+In this section, we will use a dynamic view of the circular chromatic number χc (G,
+(which is defined below) to give a new and short proof of Mohar’s Minty-type Theorem
+[15]. The key techniques we use here are Theorems 1 and 2. Theorem 1 shows
+a relationship between circular colorings and periodic schedules of timed marked
+graphs. Theorem 2 is the Reiter’s theorem on the period of a periodic admissible
+                                                                      ~ c) is said
+schedule. An initial marking T of an edge-weighted symmetric digraph (G,
+                                                    ~
+to be good if for each dicycle C and each arc uv in G,
+
+                              |C|T > 0 and Tuv + Tvu = 1.
+
+We remark that a good initial marking T of (G,~ c) is said to be live and safe in
+                                       ~ is called live (see [8]) if every vertex of
+the terminology of [8]. A marking T of G
+~ is fireable upon this token distribution T , or can be made fireable through some
+G
+sequence of firings. A marking T is said to be safe (see [8]) if the token count of an
+arc never exceeds 1.
+
+Theorem 1 An edge-weighted symmetric digraph (G,    ~ c) has a circular p-coloring if
+                                                   ~ c) for which the timed marked
+and only if there is a good initial marking T for (G,
+       ~ c, T ) admits a periodic admissible schedule with period p.
+graph (G,
+
+                                              ~ c). Define an initial marking T for
+Proof. (⇒) Let ϕ be a circular p-coloring of (G,
+ ~ c) as follows: for each arc uv of G,
+(G,                                  ~
+                       (
+                           Tuv = 0 and Tvu = 1, if ϕ(v) > ϕ(u);
+                           Tuv = 1 and Tvu = 0, otherwise.
+
+                                                                           ~ c).
+We claim that T is a good initial marking T for the edge-weighted digraph (G,
+Indeed, by the choice of T , any zero token count dicycle C = u1 u2 · · · uk u1 would lead
+
+                                            4
+to a contradiction ϕ(u1 ) < ϕ(u1 ). Next, let us construct a schedule f for the timed
+marked graph (G,~ c, T ) as follows: for each vertex u and positive integer k, define
+
+                               fu (k) = ϕ(u) + p(k − 1).
+
+The fact that d(ϕ(u), ϕ(v)) ≥ cuv for each arc uv of G   ~ immediately implies that
+f = {fu }                                    ~
+            ~ is an admissible schedule for (G, c, T ). Here we note that T is a live
+         u∈V (G)
+
+and safe marking.
+                       ~ c, T ) has a periodic admissible schedule ϕ having ϕu (k) =
+     (⇐) Suppose that (G,
+xu + p(k − 1) for each vertex u and positive integer k, where xu ≥ 0. For any arc uv,
+                                                                 ~ c, T ), it must be
+say Tuv = 1 and Tvu = 0, since ϕ is an admissible schedule for (G,
+           (                                         (
+               ϕu (1) ≥ ϕv (1) + cvu ;                    xu     ≥ xv + cvu ;
+                                       and hence
+               ϕv (2) ≥ ϕu (1) + cuv ,                    xv + p ≥ xu + cuv .
+That is cvu ≤ xu − xv ≤ p − cuv . It turns out that there is an obvious way to define
+                             ~ c).
+a circular p-coloring ϕ for (G,
+     Theorem 2 below, due to Reiter’s pioneering work [19] on Karp-Miller compu-
+tation graphs [13], gives a necessary and sufficient condition for the existence of a
+periodic admissible schedule with specific period. We note that similar results had
+                                                                                   ~
+been presented in [16, 17, 18]. We say that vertex u can reach vertex v in digraph G
+if there is a directed path from u to v.
+
+Theorem 2 Suppose (G,   ~ c, T ) is a timed marked graph with the following two prop-
+erties: There is a vertex s in G~ which can reach every other vertex; Each dicycle C
+   ~ has |C|T > 0. Then (G,
+of G                     ~ c, T ) has a periodic admissible schedule with period p if
+and only if
+                                               |C|c
+                                    p ≥ max         ,
+                                           C   |C|T
+                                                  ~
+where the maximum is taken over all dicycles C in G.
+
+     By using Hoffman’s circulation theorem, in [15] Mohar proved Theorem 3 stated
+below. This result is a Minty-type theorem for circular chromatic number of an edge-
+weighted digraph and generalizes the corresponding results in [10, 14].
+
+               ~ c) be an edge-weighted symmetric digraph. Then
+Theorem 3 Let (G,
+
+                                  ~ c) = min max        |C|c
+                              χc (G,                         ,
+                                           T     C      |C|T
+
+                                           5
+                                                                ~ c) and the maxi-
+where the minimum is taken over all good initial markings T of (G,
+                                    ~
+mum is taken over all dicycles C of G.
+
+       It is easy to see that Mohar’s Minty-type theorem follows from Theorems 1 and
+2 immediately. Our approach here provides a new insight into the circular chromatic
+numbers. It connects several different research fields, timed Petri nets [18], marked
+graphs [8], scheduling, and coloring. It reveals that there are strong coherent and
+coordinated relationships between these topics. We feel sure that the results in this
+paper can shed insight on these areas.
+     In the rest part of this section, we turn our attention to edge-weighted symmetric
+          ~ c) with weights c : E(G)
+digraphs (G,                         ~ → R+ ∪ {0} such that cuv + cvu 6= 0 for each arc
+      ~ A weak circular p-coloring of an edge-weighted (not necessarily symmetric)
+uv in G.
+         ~ c) is defined to be a function ϕ : V (G)
+digraph (G,                                      ~ → S p which satisfies the following
+two conditions: (1) For each arc uv in G, ~ either ϕ(u) = ϕ(v) or d(ϕ(u), ϕ(v)) ≥ cuv .
+                                               ~ induced by ϕ−1 (x) contains no dicycles
+(2) For any point x of S p , the subdigraph of G
+                                    ~
+C having cuv > 0 for each arc uv in G.
+       The weak circular coloring of an edge-weighted digraph defined here generalizes
+the earlier definition of weak circular coloring of digraphs in [3], and it is easy to see
+that
+        ~ c) = inf{p ≥ max (cuv + cvu ) : (G,
+    χc (G,                                 ~ c) has a weak circular p-coloring}.
+                             ~
+                        uv∈E(G)
+
+                                                                  ~ c) is said to
+A weak circular coloring ϕ of an edge-weighted symmetric digraph (G,
+have a tight dicycle C if for each arc uv of C, d(ϕ(u), ϕ(v)) = cuv . The following theo-
+rem strengthens and generalizes Theorem 3.3 of [24], and thus is both a generalization
+and a strengthening of the corresponding results in [11, 15].
+
+Theorem 4 Let (G, ~ c) be an edge-weighted symmetric digraph with c : E(G)    ~ →
+                                                     ~ Suppose r is greater than but
+R+ ∪ {0} such that cuv + cvu 6= 0 for each arc uv in G.
+not equal to maxuv∈E(G)                         ~
+                       ~ (cuv + cvu ). Then χc (G, c) = r if and only if there is a weak
+                        ~ c), and every weak circular r-coloring of (G,
+circular r-coloring of (G,                                              ~ c) has a tight
+dicycle.
+                            ~ c) = r. By Theorem 3 there is a good initial marking
+Proof. (⇒) Suppose that χc (G,
+      ~ c) such that
+T of (G,
+                                          |C|c
+                                 r = max       ,
+                                      C |C|T
+
+
+                                            6
+                                                  ~ Define a mapping w : E(G)
+where the maximum is taken over all dicycles C of G.                         ~ →R
+such that w(uv) = cuv − rTuv for each arc uv in (G,  ~ c). We’ll abbreviate w(uv) to
+wuv from now on. Next, for each vertex u in G, ~ let ϕ(u) denote the maximum weight
+                                                             ~ ending at u. Our aim is
+(with respect to the arc weights wuv ) of a directed walk of G
+                                            ~ c) can be obtained from ϕ.
+to show that a weak circular r-coloring of (G,
+                                  ~
+      Since for each dicycle C of G
+                                                               !
+                                                      |C|c
+                      |C|w = |C|c − r|C|T = |C|T           − r ≤ 0,
+                                                      |C|T
+
+ϕ(u) is well-defined for each vertex u. From the definition of ϕ it is easy to see that
+                   ~ then we have
+if uv is an arc of G,
+
+                               wuv ≤ ϕ(v) − ϕ(u) ≤ −wvu .
+
+                                       ~ : ϕ(x) ≡ ϕ(u) (mod r)}. We make the
+Denote by Vu the vertex subset {x ∈ V (G)
+following claim.
+                          ~ the subgraph of (G,
+Claim For any vertex u in G,                 ~ c) induced by Vu contains no dicycles
+C having cxy > 0 for each arc xy in C.
+     To prove this claim by contradiction, suppose that the claim is false, and let C
+                 ~ c) such that ϕ(x) = ϕ(y) (mod r) for any two vertices x, y in C,
+be a dicycle of (G,
+and cuv > 0 for each arc uv in C. Without loss of generality, let C = (1, 2, 3, . . . , t, 1)
+and ϕ(1) = min1≤i≤t ϕ(i). If ϕ(t) > ϕ(1) then for some positive integer k we have
+ϕ(t) = ϕ(1) + kr, and hence
+
+                      ϕ(1) ≥ ϕ(t) + wt1 = ϕ(1) + kr + ct1 − rTt1 .
+
+It follows that 0 ≥ ct1 + (k − Tt1 )r ≥ ct1 > 0, a contradiction. Hence it must be
+ϕ(t) = ϕ(1). Similar arguments yield that ϕ(1) = ϕ(2) = ϕ(3) = · · · = ϕ(t). Because
+ϕ(2) ≥ ϕ(1) + w12 , we see that 0 ≥ c12 − rT12 And so T12 = 1, since c12 > 0 and
+T12 ∈ {0, 1}. By the same argument, we have
+
+                       T12 = T23 = T34 = · · · = T(t−1)t = Tt1 = 1,
+
+                                                                                 ~ that is
+and thus |Ĉ|T = 0 where Ĉ is the dicycle (t, t − 1, t − 2, . . . , 2, 1, t) of G,
+                                                  ~ c). This completes the proof of
+impossible, since T is a good initial marking of (G,
+the claim.
+
+                                             7
+      We then define a mapping ϕ̂ from V (G) ~ to S r such that ϕ̂(v) = ϕ(v)(mod r)
+                        ~ It is easy to verify that ϕ̂ is a weak circular r-coloring of
+for each vertex v of V (G).
+ ~ c).
+(G,
+                                                               ~ c). We are going to
+      Next, let g be an arbitrary weak circular r-coloring of (G,
+show that g has a tight dicycle. Assume that g has no tight dicycles. We construct
+             ~ c, g) as follows: It has vertex set V (G),
+a digraph D(G,                                        ~ and there is an arc from x to
+       ~ c, g) if and only if xy is an arc of G
+y in D(G,                                     ~ that satisfies one of the two conditions
+below,
+      (1) g(x) = g(y) and cxy = 0;
+      (2) g(x) 6= g(y) and d(g(x), g(y)) = cxy .
+      Since g has no tight dicycles, D(G,~ c, g) contains no dicycles. Suppose s is a
+sink (that is a vertex of outdegree 0) with indegree at least 1 in the acyclic digraph
+   ~ c, g). Clearly, there exists sufficiently small ǫ > 0 such that the mapping g ′ :
+D(G,
+    ~ → S r defined below is a weak circular r-coloring of (G,
+V (G)                                                       ~ c), and E(D(G,
+                                                                          ~ c, g ′))
+                          ~ c, g)).
+is a proper subset of E(D(G,
+                                       (
+                              ′            g(v) + ǫ if v = s;
+                             g (v) =
+                                           g(v)     if v 6= s.
+
+We may repeat this process many times to obtain a weak circular r-coloring ĝ of
+ ~ c) such that D(G,
+(G,               ~ c, ĝ) contains no arcs. Let g ′ be the mapping from V (G)
+                                                                            ~ to
+S r−δ defined by g ′(v) = (1 − δ/r)ĝ(v) for any v ∈ V (G). ~ It is easy to see that for
+                                                                      ~ c), and we arrive
+sufficiently small δ > 0, g ′ is a weak circular (r − δ)-coloring of (G,
+at a contradiction. Hence g must have a tight dicycle.
+                                                                ~ c) ≥ r. Assume
+      (⇐) To prove this direction it is enough to show that χc (G,
+χc (G,~ c) = r ′ < r. From the first part of the proof, we see that there is a weak circular
+                     ~ c). Let ϕ be a mapping from V (G)
+r ′ -coloring ϕ′ of (G,                                  ~ to S r such that ϕ(v) = r′ ϕ′ (v).
+                                                                                     r
+                                                     ~ c), and ϕ has no tight dicycles.
+It is clear that ϕ is a weak circular r-coloring of (G,
+That is a contradiction, and hence χc (G,~ c) = r.
+
+
+3     Circular coloring and discrete event dynamic sys-
+      tem
+In this section all edge weights are assumed to be positive integers. It is not hard to
+see that all results in this section are also true for positive rational edge weights.
+
+                                               8
+     Suppose we are playing a token game in a connected edge-weighted symmetric
+         ~ c) which has a good initial marking T . We assume that the time pulse
+digraph (G,
+Tpulse is discrete, say Tpulse ∈ {1, 2, 3, · · ·}. Starting from Tpulse = 1, at each time
+pulse we fire all fireable vertices simultaneously. A set of functions g = {gu }u∈V (G)
+                                                                                     ~
+
+is defined to record the changes of token distributions in G   ~ such that gu (k) = t
+means that vertex u starts its kth firing at Tpulse = t during the game. This set
+                                                        ~ c, T ). Define a mapping
+of functions g can serve as an admissible schedule of (G,
+                          ~
+h : {1, 2, 3, · · ·} → 2V (G) such that h(t) consists of the vertices that are fireable at
+time pulse Tpulse = t. Here h(t) may be an empty set due to the positive edge weights
+(time delays). As time goes on, the pigeon-hole principle and the fact that all edge
+weights are integral ensure that the dynamic system will converge to the following
+steady state: There exist positive integers p and M such that
+
+                                            h(t + p) = h(t)
+
+as t ≥ M. The value of such p at its minimum is denoted by p(G,c,T
+                                                             ~     ) and is called the
+           ~ c, T ). Let mu
+period of (G,                   denote the number of times that vertex u becomes
+                               ~
+                              (G,c,T )
+fireable in the time interval [M, M + p). By [4, 5, 6], it can be shown that
+
+                                          mu(G,c,T
+                                             ~     )
+                                                     = mv(G,c,T
+                                                          ~     )
+
+
+for any two vertices u and v, and hence we can omit the superindex u from mu(G,c,T
+                                                                                ~   )
+                                                                                      .
+The integer m ~                                     ~ c, T ). With these notations we
+                     is called the multiplicity of (G,
+               (G,c,T )
+
+prove the following characterization of steady state of the above token game on
+ ~ c, T ).
+(G,
+
+Lemma 5
+                                         p(G,c,T
+                                           ~     )            |C|c
+                                                     = max         ,
+                                         m(G,c,T
+                                           ~     )
+                                                          C   |C|T
+                                                  ~
+where the maximum is taken over all dicycles C of G.
+
+                    |C|c
+Proof. Let p = maxC |C|                          ~ c, T ) has a periodic admissible
+                          . Theorem 2 says that (G,
+                        T
+
+schedule f of the form fu (k) = xu + p(k − 1), where xu ’s are non-negative real num-
+bers. Let feu (t) (resp. geu (t)) denote the number of fires of vertex u during the time
+interval [0, t] under the schedule f (resp. g). The following intuitive result can be
+
+
+                                                      9
+proved by induction on the time pulse t.
+
+
+     Claim: geu (t) ≥ feu (t) for any vertex u and any time pulse t.
+
+
+                       ~ with |C|
+Let Cb be a dicycle of G         b /|C|
+                                   c
+                                     b                                b
+                                        T = p. Let u be a vertex on C. Since the
+                                                                        ~ c, T ) and
+token distribution changes over time during playing the token game on (G,
+eventually converges to a steady state with period p(G,c,T
+                                                     ~     ) and multiplicity m(G,c,T
+                                                                                ~     ),
+
+we have
+                          p(G,c,T
+                            ~     )                   t
+                                        =   lim
+                          m(G,c,T
+                            ~     )
+                                            t→∞ g
+                                                eu (t)
+                                                    t
+                                        ≤ lim sup e
+                                            t→∞ fu (t)
+
+                                                  fu (k)
+                                        = lim sup
+                                            k→∞     k
+                                                  xu + p(k − 1)
+                                        = lim sup
+                                            k→∞          k
+                                        = p.
+
+On the other hand,
+                            p(G,c,T
+                              ~     )                     t
+                                         = lim
+                           m(G,c,T
+                             ~     )
+                                             t→∞ g
+                                                 eu (t)
+                                                                 b
+                                                              t|C| c
+                                         ≥ lim inf                b
+                                              t→∞          geu (t|C|c )
+                                                                 b
+                                                              t|C| c
+                                         ≥ lim inf                   b
+                                              k→∞          (t + 1)|C|  T
+                                         = p.
+
+
+
+     By Theorem 3 and Lemma 5 we have the following “dynamic” characterization
+of circular chromatic number.
+
+               ~ c) be an integral edge-weighted symmetric digraph. Then
+Theorem 6 Let (G,
+                                                          p(G,c,T
+                                                            ~     )
+                                    ~ c) = min
+                                χc (G,                                ,
+                                                  T   m(G,c,T
+                                                        ~     )
+
+                                                                ~ c).
+where the minimum is taken over all good initial markings T of (G,
+
+
+                                              10
+      Let ω be an acyclic orientation of a connected undirected simple graph G. We
+denote by (G, ω) the corresponding oriented graph. Sometimes, by abuse of notation,
+we will simply write ω instead of (G, ω). A vertex in (G, ω) with zero outdegree (resp.,
+indegree) is called a sink (resp., source). Let sink(ω) (resp., source(ω)) denote the set
+of sinks (resp., sources) in (G, ω). One can obtain a sequence of acyclic orientations
+ω0 , ω1 , ω2 , · · · from ω in such a way that ω0 = ω, and ωi (i ≥ 1) is obtained from ωi−1
+by reversing the orientations of the edges incident to the sinks of wi−1 . We say that
+{ωi }∞
+     i=0 is generated by ω. In Figure 1 we depict a sequence of acyclic orientations
+
+{ωi }∞
+     i=0 on C5 which is generated by ω0 . Note that this sequence has the periodic
+
+property: ωi = ωi+5 for any i ≥ 0.
+
+
+
+                                                w  1
+
+
+                         w0                                               w2
+
+
+                                    w4                     w3
+
+
+        Figure 1: A sequence of acyclic orientations {ωi }∞
+                                                          i=0 generated by ω0
+
+
+      Obviously the sequence {ωi }∞
+                                  i=0 generated by an acyclic orientation ω has the
+
+following periodic behavior: There exist positive integers p and M such that ωi = ωi+p
+for every i ≥ M. The value p at its minimum is denoted by pω and is called the period
+of ω. The pω acyclic orientations ωM , ωM +1 , · · · , ωM +pω −1 is called a period generated
+by ω. For any k ≥ M and ℓ ≤ pω − 1, the sequence
+
+                        h|sink(ωk )|,|sink(ωk+1 )|,· · ·,|sink(ωk+ℓ )|i
+
+is called a sub-pattern of a period generated by ω, sometimes we call it a sub-pattern of
+ω for short. Let muω denote the number of times that the vertex u becomes a sink in
+the period generated by ω. It was shown in [5] that muω = mvω for any two vertices u
+and v. So we write mω instead of muω , and mω is called the multiplicity of ω. Clearly,
+the following result, shown in [5, 21], is a special case of Theorem 6.
+
+                                              11
+Corollary 7 Let G be a connected simple graph. Then
+                                                         pω
+                                       χc (G) = min         ,
+                                                     ω   mω
+where the minimum is taken over all acyclic orientations ω of G.
+
+
+4     Lower bounds for χc
+In this section, new lower bounds on the circular chromatic number of an undirected
+graph are derived by using the above-mentioned dynamic view of χc . With the aid
+of these lower bounds, we show that circular chromatic numbers of some specific
+graphs can be determined by using a unified methodology. Note that these chromatic
+numbers were determined by using different ad hoc methods. In this section, for an
+acyclic orientation ω of a graph G, we are going to study the pattern of the sequence
+
+                     |sink(ω1 )|,|sink(ω2 )|, |sink(ω3 )|,. . . ,|sink(ωpω )|,
+
+where ω1 , ω2 , · · · , ωpω is the period generated by ω. The study aims to provide inter-
+esting lower bounds for χc (G). The results in this section will show that the dynamic
+approaches in the previous sections do provide interesting insight into circular chro-
+matic numbers.
+      To simplify our expressions, throughout this section we assume that if the se-
+quence of acyclic orientations ω1 , ω2 , · · · , ωpω is a period generated by ω, then we auto-
+matically have ωi = ωi+pω for any integer i ≥ 1. For a vertex u of a graph G, let Nk (u)
+denote all vertices of distance k from u in G, i.e. Nk (u) = {v ∈ V (G) : dG (u, v) = k}.
+For a set S ⊆ V (G), we define N1 (S) = {u ∈ V (G) \ S : uv ∈ E(G) for some v ∈ S}.
+We write N1 (u) (resp. N1 (u, v)) instead of N1 ({u}) (resp. N1 ({u, v})) for short. We
+say that a graph G is k-colorable if V (G) can be colored by at most k colors so that
+adjacent vertices are colored by different colors. The chromatic number of G, denoted
+by χ(G), is the smallest k such that G is k-colorable. Let αk (G) (or simply αk if
+it cause no confusion) denote the maximum number of vertices in a vertex-induced
+k-colorable subgraph of G. Notice that α1 (G) = α(G). For a set S ⊆ V (G), by abuse
+of notation, we also use S for the subgraph of G induced by S.
+      The following two theorems reveal the connection between the circular chromatic
+number of a graph and the chromatic number of its vertex’s distance-1 neighborhood.
+
+                                                12
+Theorem 8 For any vertex u of a graph G, χc (G) ≥ χ(N1 (u)) + 1.
+
+Proof. Let ξ = χ(N1 (u)). By Corollary 7, there is an acyclic orientation ω of G such
+that pω /mω = χc (G). Let ω1 , ω2 , · · · , ωpω be the period generated by ω. For a vertex

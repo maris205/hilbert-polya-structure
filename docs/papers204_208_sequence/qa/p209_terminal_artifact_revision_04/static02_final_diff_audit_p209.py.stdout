@@ -1,0 +1,92 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_04/original_snapshot/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_03/audit_p209.py	2026-09-07 18:05:20.607840078 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p209_terminal_artifact_revision_04/audit_p209.py	2026-09-07 18:07:25.590523152 +0800
+@@ -23,7 +23,7 @@
+ PAPER = ROOT / 'papers/209-ordered-fibre-threading'
+ A, B = [BATCH / ('reviews/p209_' + x) for x in ('a', 'b')]
+ FINAL = PAPER / 'qa_final'
+-PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_03'
++PREPARATION = BATCH / 'qa/p209_terminal_artifact_revision_04'
+ ORIGINAL_PREPARATION = BATCH / 'qa/p209_terminal_artifact_preparation'
+ OUT = BATCH / 'qa/p209_terminal_artifact'
+ TERMINAL_PREP = BATCH / 'qa/p209_terminal_preparation'
+@@ -350,7 +350,45 @@
+     ck(outer['completion']['exit_code'] == 1 and
+        read(third / 'audit.stderr').decode() in outer['completion']['output'],
+        'third_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')
+-    return {'revision': 'p209_terminal_artifact_revision_03', 'original_preparation_payloads': 347,
++    # Preserve revision03 and the real initial04 root-view schema failure.
++    # This appended documentary layer does not alter any older failure branch.
++    revision03 = BATCH / 'qa/p209_terminal_artifact_revision_03'
++    pin(revision03 / 'SHA256SUMS',
++        '4863c739ce8189f19e484f33fd5b42ce8f69f3b292f42768ba638108c105a743')
++    manifest(revision03, count=47)
++    fourth = OUT / 'initial_04'
++    pin(fourth / 'SHA256SUMS', 'bf5d128c27762025552fc730ba363e05a44874e28b2b2857d02db3fa2c8c4c7d')
++    manifest(fourth, count=8)
++    for snapshot, source in [('executed_auditor_snapshot.py', 'audit_p209.py'),
++                             ('executed_recorder_snapshot.py', 'record_audit.py')]:
++        ck(read(fourth / snapshot) == read(revision03 / source),
++           'fourth_failed_exact_executed_sources', snapshot)
++    row, attempt = j(fourth / 'COMMAND.json'), j(fourth / 'ATTEMPT.json')
++    expected = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++                'pycache_prefix=' + str(fourth / 'unused_pycache'),
++                str(revision03 / 'audit_p209.py'), 'terminal-artifact-after-actual-views']
++    ck(row['exit_code'] == 1 and row['status'] == 'COMPLETED' and row['failure'] is None
++       and row['inputs_unchanged'] and row['unused_cache_absent'] and not (fourth / 'unused_pycache').exists()
++       and row['argv'] == expected and row['cwd'] == str(ROOT) and row['environment'] == ENV,
++       'fourth_failed_child_remains_failure', 'real initial_04 exit one; no reconstructed page view')
++    ck(attempt['status'] == 'ATTEMPTED' and attempt['exit_code'] is None and
++       all(attempt[k] == row[k] for k in ('argv', 'cwd', 'environment', 'started_utc')),
++       'fourth_failed_prespawn_record', 'original fields')
++    exact_pair(fourth, 'INPUTS_BEFORE.json', 'INPUTS_AFTER.json', 16, historical=True)
++    for stream in ('stdout', 'stderr'):
++        pin(fourth / ('audit.' + stream), row[stream])
++    ck(read(fourth / 'audit.stdout') == b'' and len(read(fourth / 'audit.stderr')) == 652 and
++       h(fourth / 'audit.stderr') == 'cffcade469b9bc33938a9102303db6a4fb7dd675943b58abe77645469a45881f',
++       'fourth_failed_full_raw_streams', 'unchanged complete KeyError page_count traceback')
++    execution = BATCH / 'qa/P209_TERMINAL_ARTIFACT_INITIAL_04.failed.actual.json'
++    pin(execution, '483bac2c8955b9958ed02eb3741ed8bbeda6c48f36ad1ae9f1996fe26d32a340')
++    outer = j(execution)
++    ck(outer['completion']['exit_code'] == 1 and
++       read(fourth / 'audit.stderr').decode() in outer['completion']['output'],
++       'fourth_failed_root_wrapper_remains_failure', 'both original child and root wrapper remain exit one')
++    return {'revision': 'p209_terminal_artifact_revision_04', 'original_preparation_payloads': 347,
++            'preserved_revision_03_payloads': 47, 'preserved_initial_04_payloads': 8,
++            'fourth_child_exit': 1, 'fourth_wrapper_exit': 1,
+             'preserved_revision_02_payloads': 79, 'preserved_initial_03_payloads': 8,
+             'third_child_exit': 1, 'third_wrapper_exit': 1,
+             'previous_revision_payloads': 418, 'preserved_initial_02_payloads': 8,
+@@ -934,7 +972,7 @@
+     record = j(BATCH / 'qa/P209_TERMINAL_ROOT_VIEWS.actual.json')
+     ck(record['schema'] == 'p209-terminal-root-every-page-view-v1' and record['paper'] == 'P209'
+        and record['status'] == 'ROOT_ACTUALLY_VIEWED_ALL_FOUR_FINAL_PAGES_PASS' and record['reviewer'] == '/root'
+-       and record['page_count'] == 4 and record['open_visual_findings'] == 0
++       and record['measured_page_count'] == 4 and record['open_visual_findings'] == 0
+        and [row['page'] for row in record['pages']] == list(range(1, 5)),
+        'actual_root_every_page_attestation', 'four actual individual observations, not hashes inferred as views')
+     ck(record['terminal_manifest_sha256'] == h(FINAL / 'SHA256SUMS') and
+@@ -990,6 +1028,24 @@
+             ck(source.is_relative_to(ROOT) and copied == A / attempt0 / 'exact_response_inputs' / source.name,
+                'exact_A_response_copy_origin_path', (attempt0, original))
+             pin(copied, row['sha256'])
++            # Four named Round2 identity-input pins are not document origins.
++            # Their exact A source/copy rows supply the semantic origin; no
++            # other conflict, path or hash is exempted from the original check.
++            exact_self_origin_roles = {
++                ('delta_check_01', 'P209_A_RESPONSE.md'):
++                    (BATCH / 'P209_A_RESPONSE.md', '3b84c6c6a39b890562a63fbcb76a1a1fdf683886b9f6670b4bdd05544c6e9459'),
++                ('delta_check_02', 'P209_A_RESPONSE.md'):
++                    (BATCH / 'P209_A_RESPONSE.md', '3b84c6c6a39b890562a63fbcb76a1a1fdf683886b9f6670b4bdd05544c6e9459'),
++                ('delta_check_01', 'P209_A_ROOT_INITIAL_INSPECTION.md'):
++                    (BATCH / 'qa/P209_A_ROOT_INITIAL_INSPECTION.md', 'c095b7365d9083b83f6cd802ea6a3c9fa372a8b670ba9b28ae11e29d562fe690'),
++                ('delta_check_02', 'P209_A_ROOT_INITIAL_INSPECTION.md'):
++                    (BATCH / 'qa/P209_A_ROOT_INITIAL_INSPECTION.md', 'c095b7365d9083b83f6cd802ea6a3c9fa372a8b670ba9b28ae11e29d562fe690')}
++            role_key = (attempt0, copied.name)
++            if role_key in exact_self_origin_roles:
++                named_source, named_digest = exact_self_origin_roles[role_key]
++                ck(source == named_source and row['sha256'] == named_digest and origins.get(str(copied)) == copied,
++                   'exact_four_A_identity_pin_semantic_origin_roles', role_key)
++                origins[str(copied)] = source
+             ck(str(copied) not in origins or origins[str(copied)] == source,
+                'same_explicit_document_origin', str(copied))
+             origins[str(copied)] = source

@@ -1,0 +1,317 @@
+      Counting preimages of homogeneous
+configurations in 1-dimensional cellular automata
+
+                  E DWARD J. P OWLEY?, S USAN S TEPNEY
+
+             Department of Computer Science, University of York, UK
+
+
+
+
+       A cellular automaton (CA) is in a homogeneous configuration if
+       every cell has the same state. The preimages of a configuration
+       s are those configurations which evolve to s within a single time
+       step.
+       We present two methods of finding the total number of preimages
+       for a given homogeneous configuration. The first is more intu-
+       itive, and gives a clear picture of how the number of preimages
+       varies with the number of cells on which the CA operates, but it
+       is only workable for elementary CAs (1-dimensional binary state
+       CAs with neighbourhood size 3). The second method, based on
+       de Bruijn matrices, is more abstract, but more readily extends to
+       general 1-dimensional CAs.
+
+       Key words: Homogeneity, preimages, de Bruijn graphs, de Bruijn ma-
+       trices, spectral graph theory
+
+
+
+1    INTRODUCTION
+
+A cellular automaton (CA) is a dynamical system, discrete and uniform in
+space and time. A CA is composed of a number of sites (cells), each of which
+is assigned one of a finite set of states. An assignment of states to cells is a
+configuration of the CA, and is analogous to what is usually called the “state”
+of a dynamical system. The dynamics of the CA is defined by the local update
+rule, a function mapping the “current” state of a cell and its neighbours to the
+    ? email: ed@cs.york.ac.uk
+
+
+
+
+                                       1
+“next” state of that cell. The local update rule extends to the global map, a
+function mapping the “current” configuration to the “next” configuration, in
+the natural way.
+    In general, the global map is not bijective, so strictly speaking it has no
+inverse. However, it is often useful to find the preimages of a given configu-
+ration; that is, those configurations which the global map sends to the given
+configuration. Intuitively, if the configuration at time t is known, then the
+preimages of that configuration are the possible configurations at time t − 1.
+Wuensche and Lesser [13] give an efficient algorithm for finding preimages.
+    One way of visualising the dynamics of a CA is by drawing a transition
+graph (or transition diagram). This is a directed graph whose vertices repre-
+sent the configurations of the CA, and whose edges represent the transitions
+between configurations according to the global map. The in-degree of a ver-
+tex in the transition graph is precisely the number of preimages for the cor-
+responding configuration, and so numbers of preimages are a measure of the
+“branchiness” of the graph.
+    In [7], we study symmetries (formally, automorphisms or self-isomorphisms)
+of transition graphs. By studying how the number of symmetries varies with
+the number of cells, we obtain a partial classification of the elementary CAs
+(1-dimensional, binary state CAs with neighbourhood size 3).
+    In [8], we specialise our results to linear CAs: CAs whose local rules
+(and thus global maps) are linear functions. We derive an expression for the
+number of automorphisms of the transition graph for a linear CA, and one of
+the terms in this expression is the number of preimages for the homogeneous
+configuration of zeroes.
+    In this paper, we discuss how to find the numbers of preimages of homo-
+geneous configurations. Even though linear CAs motivate us to carry out this
+work, the results are equally applicable to nonlinear CAs. After introducing
+the necessary definitions in Section 2, we describe two different approaches
+to counting preimages.
+    The first approach (Section 3) works by considering the possible lengths
+of sequences of consecutive cells in the same state. When the number of
+preimages is considered as a function of the number of cells, we see three
+distinct types of behaviour: constancy, periodicity, and exponential growth.
+The string length approach gives an intuitive understanding of when and why
+these behaviours arise.
+    The second approach (Section 4) applies results from spectral graph theory
+to the de Bruijn graphs of the CA. Specifically, we consider the eigenvalues
+of the adjacency matrices of the de Bruijn graphs (these adjacency matrices
+
+
+                                     2
+are known as de Bruijn matrices). While this method is not quite as intuitive
+as considering string lengths, it is far more useful for producing numerical
+results. In Section 4.3, we show that this approach can also be applied to
+configurations which are heterogeneous but periodic.
+
+
+2   DEFINITIONS AND NOTATION
+
+Consider a 1-dimensional CA with state set Σ, neighbourhood radius r and
+local rule f : Σ2r+1 → Σ, operating on a lattice of N cells. In this paper we
+consider lattices with periodic boundary condition, where the leftmost cell is
+considered to be adjacent to the rightmost, so that the cells are indexed by
+the elements of ZN (the integers modulo N ). This is not the only choice of
+boundary condition, but the alternatives (treating the boundary cells differ-
+ently to the rest, or allowing the lattice to be unbounded so that the effective
+number of cells is infinite) present obvious practical problems.
+    A configuration of this CA is a mapping from ZN to Σ. We will write such
+a configuration as a string over Σ of length N , and write ΣN for the set of all
+configurations. A homogeneous configuration in which each cell has state q
+is denoted q N .
+    The local rule f extends to the global map F : ΣN → ΣN . The preim-
+ages of a configuration u are those configurations v such that F (v) = u. The
+successor of u is the configuration F (u). Note that CAs are deterministic
+(every configuration has precisely one successor), but not necessarily surjec-
+tive or injective (a configuration may have zero, one, or many preimages). If
+a configuration has at least one preimage, it is said to be reachable; an un-
+reachable configuration (one with no preimages) is often called a Garden of
+Eden configuration.
+    A cyclic shift is a transformation which shifts the entire configuration by
+a certain number of cells, respecting the periodic boundary condition of the
+lattice. For example, applying a cyclic shift to the right by one cell to the
+configuration
+                               x0 x1 . . . xN −2 xN −1                       (1)
+yields the configuration
+
+                           xN −1 x0 . . . xN −3 xN −2 .                     (2)
+
+Cyclic shifts are “symmetries” of any CA, in the sense that shifting a con-
+priate value. However, the string length approach is somewhat laborious for
+producing numerical results, and becomes extremely complicated when ap-
+plied to CAs beyond the ECAs.
+    McIntosh [6] describes a method of counting preimages for general CA
+configurations, by means of graphs (or more specifically, adjacency matrices
+of graphs) first introduced by de Bruijn [3]; see also [9]. Jeras and Dobnikar
+[5] describe the method more fully. What follows (up to, but not including,
+Theorem 4.2) is a summary of this.
+    The de Bruijn diagram for state x has vertex set Σ2r (so the vertices are the
+strings of length 2r over Σ), and an edge from vertex a1 . . . a2r to b1 . . . b2r
+if and only if
+                            a2 . . . a2r = b1 . . . b2r−1                    (17)
+
+and
+                         f (a1 , a2 , . . . , a2r , b2r ) = x .              (18)
+
+In other words, there is an edge between two vertices if and only if their
+corresponding strings overlap to form a string of length 2r + 1, and the local
+rule maps that string to state x. A de Bruijn matrix is the adjacency matrix
+for a de Bruijn diagram, with the vertices ordered lexicographically.
+
+Example 4.1. The de Bruijn diagrams for an ECA have vertex set {00, 01, 10, 11}.
+By Equation 17, the edge set is a subset of
+
+                            {00 → 00,          00 → 01
+                             01 → 10,          01 → 11
+                                                                             (19)
+                             10 → 00,          10 → 01
+                             11 → 10,          11 → 11}
+
+or more succinctly,
+                          {ab → bc : a, b, c ∈ Z2 } .                        (20)
+
+By Equation 18, the edge set of the de Bruijn diagram for state x is
+
+                  {ab → bc : a, b, c ∈ Z2 , f (a, b, c) = x} .               (21)
+
+
+                                           8
+                00                   01                 00               01
+
+
+                10                   11                 10               11
+
+
+FIGURE 1
+De Bruijn diagrams for ECA rule 18, for states 0 (left) and 1 (right).
+
+
+
+
+   ECA rule 18 is defined by the following table:
+
+          abc            111   110    101   100   011   010       001    000
+                                                                                (22)
+       f (a, b, c)        0     0      0     1     0     0         1      0
+
+The de Bruijn diagrams for rule 18 are shown in Figure 1. The corresponding
+de Bruijn matrices are the adjacency matrices of these graphs, namely
+
+                  1        0   0     0                  0     1    0     0
+                                                                        
+                0         0   1     1                0     0    0     0
+           D0 = 
+                0
+                                           and   D1 =                    .   (23)
+                           1   0     0                1     0    0     0
+                  0        0   1     1                  0     0    0     0
+
+                                                                                  ♦
+
+    De Bruijn matrices are defined in terms of the local rule, but they can
+be extended to describe entire configurations. In particular, the number of
+preimages of a given configuration is the trace (sum of diagonal entries) of the
+matrix obtained by multiplying together the de Bruijn matrices corresponding
+to the cell states. In other words, the configuration x0 . . . xN −1 has
+                                                   
+                              Tr Dx0 . . . DxN −1                          (24)
+
+preimages. A proof of this result appears in [5], but we can prove it easily for
+the special case of a homogeneous configuration.
+   The following is a well-known property of adjacency matrices: if A is the
+adjacency matrix of a graph, then the entry in row u, column v of the matrix
+An is the number of distinct paths of length n from vertex u to vertex v.
+
+
+                                             9
+   Let v1 , . . . , vN be a cycle in the de Bruijn diagram for state q. By definition
+of the de Bruijn diagram, we have
+
+                                v1 = a1 a2 . . . a2r                               (25)
+                                v2 = a2 a3 . . . a2r+1                             (26)
+                                   ..
+                                    .
+                               vN = aN a1 . . . a2r−1                              (27)
+
+and
+                             f (ai−2r , . . . , ai+2r ) = q                        (28)
+for all i, where the arithmetic in the subscripts takes place modulo N . Thus
+the configuration a1 . . . aN is mapped to the homogeneous configuration q N
+by the ECA’s global map. In other words, there is a one-one correspondence
+between cycles of length N in the de Bruijn diagram for state q, and preim-
+ages of the homogeneous configuration q N .
+   Let Dq be the de Bruijn matrix for state q. The number of cycles of length
+N which begin and end at vertex u is given by the entry in row u, column u
+of DqN ; the total number of cycles is the sum of these diagonal entries, i.e.
+Tr DqN .
+   Results from spectral graph theory [2] can now be applied to the de Bruijn
+graphs:
+Theorem 4.2. Let q be a CA state, and let Dq be the corresponding de Bruijn
+matrix. Suppose that the eigenvalues of Dq are λ1 , . . . , λk . Then the homo-
+geneous configuration q N has exactly
+
+                                   λN            N
+                                    1 + · · · + λk                                 (29)
+
+preimages.
+   The proof of this result uses the following lemmas:
+Lemma 4.3. Suppose that matrices A and B share the eigenvectors v1 , . . . , vn ,
+with corresponding eigenvalues a1 , . . . , an and b1 , . . . , bn respectively. Then
+AB has eigenvectors v1 , . . . , vn , with corresponding eigenvalues a1 b1 , . . . , an bn .
+Proof. Follows immediately from the definition of eigenvalues and eigenvec-
+tors.
+
+Lemma 4.4. Let A be a square matrix with eigenvectors v1 , . . . , vn and cor-
+responding eigenvalues a1 , . . . , an . Then, for any positive integer k, the ma-
+trix Ak has eigenvectors v1 , . . . , vn with corresponding eigenvalues ak1 , . . . , akn .
+
+
+                                          10
+Proof. By induction on k, using Lemma 4.3.
+
+Proof of Theorem 4.2. We have already established that q N has Tr DqN preim-
+ages.
+   It is a well-known result that the trace of a matrix is the sum of its eigen-
+values [4, Chapter IV, Section 5]. Thus the number of preimages of q N is the
+sum of the eigenvalues of the matrix DqN . By Lemma 4.4, the eigenvalues
+of DqN are the N th powers of the eigenvalues of Dq , namely λN                   N
+                                                                    1 , . . . , λk .
+            N
+Therefore q has
+                               λN             N
+                                 1 + · · · + λk                                 (30)
+preimages.
+
+   This result means that, once the eigenvalues of Dq are known, finding the
+number of preimages of q N for any value of N is as simple as raising the
+eigenvalues to the N th power and summing the results.
+
+4.1 For ECAs
+The de Bruijn matrices for an ECA with local rule f are
+
+                  f (0, 0, 0) f (0, 0, 1)      0           0
+                                                                
+                      0           0      f (0, 1, 0) f (0, 1, 1)
+         D1 = f (1, 0, 0) f (1, 0, 1)
+                                                                              (31)
+                                               0           0     
+                       0           0      f (1, 1, 0) f (1, 1, 1)
+
+and
+
+REFERENCES
+ [1] Matthew Cook. (2004). Universality in elementary cellular automata. Complex Systems,
+     15(1):1–40.
+ [2] Dragoš M. Cvetković, Michael Doob, and Horst Sachs. (1995). Spectra of Graphs. Johann
+     Ambrosius Barth, third edition.
+ [3] Nicolaas Govert de Bruijn. (1946). A combinatorial problem. Nederl. Akad. Wetensch.
+     Proceedings, 49:758–764.
+ [4] Felix R. Gantmacher. (1960). Matrix Theory, volume I. Chelsea.
+ [5] Iztok Jeras and Andrej Dobnikar, (2006). Algorithms for computing preimages of cellular
+     automata configurations. http://www.rattus.info/al/files/preimages.
+     pdf.
+ [6] Harold V. McIntosh, (1990). Linear cellular automata via de Bruijn diagrams. http:
+     //delta.cs.cinvestav.mx/˜mcintosh/comun/cf/debruijn.pdf.
+ [7] Edward J. Powley and Susan Stepney. (2009). Automorphisms of transition graphs for
+     elementary cellular automata. Journal of Cellular Automata, 4(2):125–136.
+ [8] Edward J. Powley and Susan Stepney, (2009). Automorphisms of transition graphs for
+     linear cellular automata. To appear in Journal of Cellular Automata.
+ [9] Anthony Ralston. (1982). De Bruijn sequences — a model example of the interaction of
+     discrete mathematics and computer science. Mathematics Magazine, 55(3):131–143.
+[10] Stephen Wolfram. (1983). Statistical mechanics of cellular automata. Reviews of Modern
+     Physics, 55(3):601–644.
+[11] Stephen Wolfram. (1984). Universality and complexity in cellular automata. Physica D,
+     10:1–35.
+[12] Stephen Wolfram. (1986). Tables of cellular automaton properties.       In Theory and
+     Applications of Cellular Automata, pages 485–557. World Scientific.
+[13] Andrew Wuensche and Mike Lesser. (1992). The Global Dynamics of Cellular Automata:
+     An Atlas of Basin of Attraction Fields of One-Dimensional Cellular Automata. Addison
+     Wesley.
+
+
+
+                                            31
+

@@ -1,0 +1,273 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,microtype,xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Comp}{\mathop{\mathrm{Comp}}}
+\newcommand{\Fix}{\mathop{\mathrm{Fix}}}
+
+\title[Adjacent-run consolidation]{Adjacent-Run Consolidation of Integer Compositions:\
+A Sharp Logarithmic Clock and Divisor-Path Fibres}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Fix a positive integer $n$.  In a composition of $n$, replace every maximal
+run of $r$ equal parts $s$ simultaneously by the single part $rs$, and
+iterate.  This weight-preserving map is absorbed at the adjacent-unequal
+(Carlitz) compositions.  We prove that its largest absorption time is exactly
+$\lfloor\log_2 n\rfloor$ for every $n$, and give an explicit equality witness
+for every carrier size.  We also determine every one-step fibre, refined by
+source length: for a target $\beta=(b_1,\ldots,b_k)$, its fibre polynomial is
+the sum of $u^{\sum_i b_i/s_i}$ over divisor choices $s_i\mid b_i$ satisfying
+$s_i\ne s_{i+1}$.  Thus the inverse is a weighted path problem on adjacent
+divisor sets.  An exhaustive exact-arithmetic falsifier checks all $262{,}143$
+compositions of total at most $18$ and performs $2{,}690{,}869$ assertions.
+Classical Carlitz enumeration and static run statistics are treated as
+background, not as contributions.  The note is anonymous and remains under
+\texttt{HOLD\_EXTERNAL}.
+\end{abstract}
+
+\maketitle
+
+\section{The finite map and the theorem}
+
+Let $\Comp(n)$ be the set of ordered tuples of positive integers summing to
+$n$.  Every $\alpha\in\Comp(n)$ has a unique maximal-run factorisation
+\[
+  \alpha=s_1^{r_1}s_2^{r_2}\cdots s_k^{r_k},
+  \qquad s_i\ne s_{i+1},
+\]
+where $s^r$ means $r$ adjacent copies of $s$.  Define
+\begin{equation}\label{eq:map}
+  A_n(\alpha)=(r_1s_1,r_2s_2,\ldots,r_ks_k).
+\end{equation}
+The update is simultaneous.  For example,
+\[
+ (1,1,2,4)\longmapsto(2,2,4)\longmapsto(4,4)
+ \longmapsto(8).
+\]
+Write $\tau(\alpha)$ for the first time at which the orbit becomes fixed.
+
+For a target $\beta=(b_1,\ldots,b_k)\in\Comp(n)$, introduce the polynomial
+\begin{equation}\label{eq:fibrepoly}
+ \Phi_\beta(u)=
+ \sum_{\substack{s_i\in\mathbb Z_{>0},\ s_i\mid b_i\ (1\le i\le k)\\
+                  s_i\ne s_{i+1}\ (1\le i<k)}}
+ u^{\sum_{i=1}^k b_i/s_i}.
+\end{equation}
+The empty sum is zero.
+
+\begin{theorem}[clock and complete one-step inverse]\label{thm:main}
+For every $n\ge1$, the following statements hold.
+\begin{enumerate}
+\item The fixed points of $A_n$ are exactly the compositions with adjacent
+parts unequal.  Every orbit is absorbed at one of them.
+\item The sharp absorption clock is
+\begin{equation}\label{eq:clock}
+ \max_{\alpha\in\Comp(n)}\tau(\alpha)=\lfloor\log_2 n\rfloor.
+\end{equation}
+An explicit equality witness exists for every $n$.
+\item For every target $\beta\in\Comp(n)$ and every $\ell\ge1$,
+\begin{equation}\label{eq:coefficient}
+ [u^\ell]\Phi_\beta(u)
+ =\#\{\alpha\in A_n^{-1}(\beta):\text{$\alpha$ has $\ell$ parts}\}.
+\end{equation}
+In particular, $|A_n^{-1}(\beta)|=\Phi_\beta(1)$, and $\beta$ lies in the
+image precisely when $\Phi_\beta$ is nonzero.
+\end{enumerate}
+\end{theorem}
+
+The fixed class in part (1) is the classical class of Carlitz compositions
+\cite{KnopfmacherProdinger1998}.  Runs of equal parts, their bounded lengths,
+and their asymptotics have been studied in considerably greater generality
+\cite{Wilf2011,Gafni2015,BenderCanfield2009}.  None of those static results is
+claimed here.  The object of the note is the iterated, weight-preserving map
+\eqref{eq:map}, its sharp all-size clock, and its target-resolved inverse.
+
+\section{Termination and the sharp clock}
+
+The total weight is visibly invariant under $A_n$.  If a state is not fixed,
+at least one run has length at least two, and replacing all runs decreases the
+number of parts strictly.  Thus every orbit terminates.  A sharper argument
+uses a backwards chain of newly created equalities.
+
+\begin{lemma}[doubling ancestry]\label{lem:doubling}
+If an orbit performs $t$ nonfixed updates, then its total weight is at least
+$2^t$.
+\end{lemma}
+
+\begin{proof}
+Put $\alpha^{(j)}=A_n^j(\alpha)$ for $0\le j\le t$.  There is nothing to
+prove when $t=0$, so suppose $t\ge1$.  We first isolate the one-step ancestry
+claim used below.  If a nontrivial maximal run in $\alpha^{(j)}$, with
+$j\ge1$, is collapsed at the next update, choose two adjacent parts of that
+run.  They are adjacent outputs of two consecutive maximal runs of
+$\alpha^{(j-1)}$.  Those two preceding runs cannot both be singletons: if
+they were, their unchanged output values would be equal and the two runs
+would instead form one maximal run.  Thus at least one chosen input part was
+itself produced by a nontrivial collapse in the preceding update.
+
+Choose a nontrivial run in $\alpha^{(t-1)}$ and call its output in
+$\alpha^{(t)}$ the part $w_t$.  When $t\ge2$, apply the ancestry claim to
+choose among its equal inputs a part $w_{t-1}$ that was produced
+nontrivially from $\alpha^{(t-2)}$; repeat down to a nontrivially produced
+part $w_1$ of $\alpha^{(1)}$.  For $2\le j\le t$, the run producing $w_j$
+has at least two inputs, all equal to the selected input $w_{j-1}$, and hence
+$w_j\ge2w_{j-1}$.  The first selected output satisfies $w_1\ge2$ because it
+combines at least two positive original parts.  Therefore
+\[
+                     2^t\le w_t\le n,
+\]
+the last inequality holding because $w_t$ is one part of a composition of
+total weight $n$.
+\end{proof}
+
+Lemma~\ref{lem:doubling} gives
+$\tau(\alpha)\le\lfloor\log_2 n\rfloor$.  It remains to attain the bound for
+every $n$, including values between powers of two.
+
+For $t\ge1$ put
+\begin{equation}\label{eq:cascade}
+ C_t=(1,1,2,4,\ldots,2^{t-1}),
+\end{equation}
+which has weight $2^t$.  After $j<t$ updates, its active prefix is
+$(2^j,2^j)$, followed by $2^{j+1},\ldots,2^{t-1}$; hence it takes exactly
+$t$ updates to reach $(2^t)$.
+
+Now let $t=\lfloor\log_2n\rfloor$ and $r=n-2^t$.  For $n=1$ use $(1)$.  For
+$n>1$, define
+\begin{equation}\label{eq:witness}
+ W_n=
+ \begin{cases}
+ C_t,&r=0,\\
+ (r,C_t),&r=2^{t-1},\\
+ (C_t,r),&0<r<2^t,\ r\ne2^{t-1}.
+ \end{cases}
+\end{equation}
+If $0<r<2^t$ and $r\ne2^{t-1}$, then for $0\le j<t$ the orbit is
+\[
+ A_n^j(W_n)=(2^j,2^j,2^{j+1},\ldots,2^{t-1},r),
+\]
+where the power string after the repeated pair is empty when $j=t-1$.
+Indeed, the appended $r$ never equals its unchanged left neighbour
+$2^{t-1}$.  The $t$th state is $(2^t,r)$, which is fixed.
+
+If $r=2^{t-1}$ and $t\ge2$, then for $0\le j<t-1$,
+\[
+ A_n^j(W_n)=(r,2^j,2^j,2^{j+1},\ldots,2^{t-1}),
+\]
+and $A_n^{t-1}(W_n)=(r,r,r)$, followed by the fixed state $(3r)$.
+The remaining bases are explicit: $W_1=(1)$ has depth zero,
+$W_2=C_1=(1,1)$ has depth one, and the half-remainder case
+$W_3=(1,1,1)$ also has depth one.  Thus $W_n$ has depth $t$ in every case.
+This proves \eqref{eq:clock} and the equality statement.
+
+\section{The divisor-path inverse}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(3)]
+Let $\alpha$ map to $\beta=(b_1,\ldots,b_k)$.  The unique maximal run of
+$\alpha$ producing $b_i$ has some common value $s_i$ and length $b_i/s_i$;
+therefore $s_i\mid b_i$.  Consecutive runs are maximal, so
+$s_i\ne s_{i+1}$.  The source length is $\sum_i b_i/s_i$.
+
+Conversely, choose a divisor $s_i\mid b_i$ for every $i$, with adjacent
+choices unequal, and expand $b_i$ into $b_i/s_i$ copies of $s_i$.  The
+adjacent inequality makes these expanded blocks precisely the maximal runs,
+so the expansion maps to $\beta$.  The two constructions are inverse.  Sorting
+the choices by total expanded length proves \eqref{eq:coefficient} and all its
+consequences.
+\end{proof}
+
+Formula \eqref{eq:fibrepoly} is also an efficient exact atlas.  At layer $i$
+one keeps the last divisor $s_i$ and a polynomial in the accumulated source
+length; transitions are allowed between unequal divisors.  Thus every target
+fibre can be computed by a weighted path dynamic program over its divisor
+sets, without enumerating all $2^{n-1}$ source compositions.
+
+For completeness, if $C(x)$ includes the empty fixed composition, the
+classical fixed-class generating function follows from a one-line last-part
+decomposition.  If $C_j(x)$ counts nonempty fixed compositions ending in
+$j$, then $C_j=x^j(C-C_j)$, whence
+\begin{equation}\label{eq:carlitz}
+ C(x)=\frac{1}{1-\displaystyle\sum_{j\ge1}\frac{x^j}{1+x^j}}.
+\end{equation}
+Equation \eqref{eq:carlitz} is included only to identify the recurrent class;
+it receives no contribution credit.
+
+\section{Exact falsification and boundary}
+
+The accompanying standard-library program enumerates every positive
+composition of every total $1\le n\le18$.  In a fresh process it checks total
+preservation, strict descent, absence of nontrivial cycles, every endpoint,
+the pointwise logarithmic bound, the witness \eqref{eq:witness}, the classical
+fixed census, and \eqref{eq:fibrepoly} for every possible target, including
+empty fibres.  The computation covers $262{,}143$ states and executes
+$2{,}690{,}869$ exact assertions.  For $n=18$ the depth profile is
+\[
+ 10843+60946z+47626z^2+11415z^3+242z^4.
+\]
+These finite checks are counterexample pressure and reproducibility evidence,
+not proofs of the all-parameter statements.
+
+The closest occupied internal carrier is a composition-refinement system, but
+that map splits balanced blocks and uses a suffix decoder.  Here the operation
+coarsens maximal equal runs, the clock is forced by weight-doubling ancestry,
+and the inverse is arithmetic on adjacent divisor sets.  Ordinary run-length
+encoding likewise records a value/count pair and changes representation;
+$A_n$ multiplies the pair, preserves total weight, and iterates inside the same
+finite carrier.  Recent work on random weak-composition growth studies the
+evolution and disappearance of adjacent equalities~\cite{BevanThrelfall2025},
+while recent Arndt--Carlitz work remains a static adjacent-restriction
+study~\cite{HopkinsTangboonduangjit2026}; both receive zero contribution
+credit and use different objects.  A bounded source search found no direct
+owner for this exact conjunction, but a search non-hit is not a novelty or
+priority certificate.
+
+\section*{Data availability}
+No external data were used.  The exact verifier, frozen transcript, and claim
+ledger are included with this manuscript.
+
+\section*{Ethics declaration}
+This mathematical study involved no human participants, animals, personal
+data, or field intervention; ethics approval was not applicable.
+
+\section*{Author contributions}
+For anonymous internal review, a single anonymous author is recorded as
+responsible for conceptualization, formal analysis, software, validation,
+writing, and reproducibility curation.
+
+\section*{Conflict of interest}
+No conflict of interest is declared.
+
+\section*{Funding}
+No external funding is declared for this anonymous internal note.
+
+\section*{Limitations and external status}
+The owner search was bounded and terminology dependent.  The paper does not
+claim novelty for Carlitz compositions or run statistics, and it does not
+analyze random initial states, asymptotic depth distributions, or fibres of
+higher iterates.  All public posting, submission, priority, authorship, and
+release actions remain under \texttt{HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

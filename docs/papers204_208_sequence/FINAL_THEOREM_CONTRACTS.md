@@ -3,7 +3,7 @@
 Date: 2026-09-07 UTC. A candidate is numbered only after its deductive and
 collision/source gate. Manuscript review can subsequently retire that
 contract without reusing the number. There are currently **four retained
-papers, three completed papers and one unfilled seat**. P204 and P206 are
+papers, four completed papers and one unfilled seat**. P204 and P206 are
 historically admitted, subsequently rejected numbered drafts.
 
 ## P204 — previous-smaller distance feedback — REJECTED IN REVIEW A
@@ -294,7 +294,7 @@ for the accepted audit's original path/hash key; see its
 [scope and change record](qa/central_lifecycle_p209_20260907/README.md).
 At P208 completion: three retained, three complete, two unfilled. P209 follows.
 
-## P209 — ordered fibre threading — ROUND0 COMPLETE, A ACTIVE
+## P209 — ordered fibre threading — INTERNALLY COMPLETE
 
 Proof contributors: root and `/root/nineteenth_finite_scout`; manuscript and
 paper-local verifier author: `/root/p208_b_reviewer`. None can serve as
@@ -346,12 +346,19 @@ inverse, recurrent EGF, global-priority or arbitrary-conjugacy exclusion is
 admitted. A complete applicable owner adapter reopens the affected gate.
 
 Paper path: `papers/209-ordered-fibre-threading/`.
-Status: `ROUND0_COMPLETE / MANUSCRIPT_A_ACTIVE / OWNER_AMBER / HOLD_EXTERNAL`.
-The author package, root original checks, actual strict author-code pair,
-two author builds/all-page views and physical 1,989-payload Round0 are
-complete. A fresh nonauthor manuscript A is assigned, with no verdict or
-accepted delta yet; B and terminal obligations remain pending. See
-[root physical closure](qa/P209_ROUND0_ROOT_INSPECTION.md). This lifecycle
-edit changes no theorem, manuscript, author seal or review evidence; the
-exact previous index is [preserved](qa/central_lifecycle_p209_round0/README.md).
-Current census: four retained, three complete, one unfilled; next number P210.
+Status: `P209_INTERNALLY_COMPLETE / ARTIFACT_GATE_PASS / OWNER_AMBER / HOLD_EXTERNAL`.
+Both distinct nonauthor manuscript rounds actually accepted their exact
+no-change deltas, with zero current findings. Physical Round0/1/2 contain
+1,989/2,003/2,021 payloads. Root's required strict author/A/B pairs, two
+terminal source-only builds and actual all-four-page views passed. The full
+initial artifact gate and separate lifecycle follow-up have passed actual
+root original closure; all four artifact failures and the first root
+lifecycle-inspector failure remain. See [final QA](P209_FINAL_QA.md) and
+[final root acceptance](qa/P209_LIFECYCLE_ROOT_INSPECTION.md).
+This status-only index update changes no theorem, manuscript, author seal,
+accepted review or frozen evidence. The exact previous contract bytes are
+[physically preserved](qa/central_lifecycle_p209_complete/README.md) for
+all original audit path/hash roles.
+Current census: four retained, four complete, one unfilled; next number P210.
+MNA's actual candidate GO still requires root originals and fresh replays;
+it is not an admitted contract in this index.
