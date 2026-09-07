@@ -1,0 +1,119 @@
+\section{The native zeta product and its natural boundary}\label{sec:zeta}
+
+Define the dynamical zeta function for the same map and clock by
+\begin{equation}\label{eq:zeta-def}
+ Z_S(t)=\exp\left(\sum_{n\ge1}\frac{N_n}{n}t^n\right).
+\end{equation}
+No Euler factors from another object enter this definition.
+For the applicable support class put
+\begin{equation}\label{eq:ABtheta}
+ (A,B_0,\theta)=
+ \begin{cases}
+ \displaystyle\left(\frac{\ell-1}{q-1},
+       \frac{q(h+1)-2p}{q-1},\frac1q\right),&\text{high support},\\[8pt]
+ \displaystyle\left(\frac{p}{q-p},
+       \frac{q-2p}{q-p},\frac pq\right),&\text{low support}.
+ \end{cases}
+\end{equation}
+We use $B_0$ here to distinguish this real constant from the
+coefficient $B=\sigma(b)$ in the perfected-ring proof.
+Theorem~\ref{thm:main} is equivalent to
+\begin{equation}\label{eq:normalized-count}
+ \frac{N_n}{q^{2n}}=A+B_0\theta^{p^{v_p(n)}}.
+\end{equation}
+In either class,
+\begin{equation}\label{eq:positive-parameters}
+ A,B_0>0,\qquad 0<\theta<1,\qquad A+B_0\theta=\frac{2p}{q}.
+\end{equation}
+In particular the normalization used below is $A+B_0\theta$,
+not an assumed identity $A+B_0=1$.
+
+\begin{theorem}[Product and meromorphic natural boundary]\label{thm:zeta}
+For $|u|<1$,
+\begin{equation}\label{eq:zeta-product}
+ Z_S(u/q^2)=(1-u)^{-2p/q}
+       \prod_{k\ge1}(1-u^{p^k})^{e_k},\qquad
+ e_k=\frac{B_0}{p^k}
+       \left(\theta^{p^{k-1}}-\theta^{p^k}\right)>0.
+\end{equation}
+The product is defined by logarithms equal to zero at $u=0$ and
+converges locally uniformly in the unit disk. For every positive
+integer $m$, the circle $|t|=q^{-2}$ is a meromorphic natural
+boundary for $Z_S(t)^m$: no arc admits meromorphic continuation.
+In particular $Z_S$ has radius of convergence exactly $q^{-2}$
+and is transcendental over $\C(t)$.
+\end{theorem}
+
+\begin{proof}
+For $w=p^{v_p(n)}$ the finite telescoping identity is
+\begin{equation}\label{eq:telescoping}
+ \theta^w=\theta+
+ \sum_{k\ge1}\left(\theta^{p^k}-\theta^{p^{k-1}}\right)
+               \mathbf1_{p^k\mid n}.
+\end{equation}
+For each fixed $n$ only finitely many summands occur. Interchanging
+this sum with $\sum u^n/n$ is valid uniformly on $|u|\le r<1$:
+the sum of the absolute coefficient differences over $k$ is $\theta$,
+so an upper bound for the resulting double absolute sum is
+$\theta\sum_{n\ge1}r^n/n<\infty$. Also
+\[
+ \sum_{\substack{n\ge1\\p^k\mid n}}\frac{u^n}{n}
+ =-\frac1{p^k}\log(1-u^{p^k}).
+\]
+Substitution of \eqref{eq:telescoping} into
+\eqref{eq:normalized-count} and \eqref{eq:zeta-def} proves
+\eqref{eq:zeta-product}, with locally uniform logarithmic
+convergence. The resulting holomorphic function has no zeros
+in the unit disk, as is also immediate from \eqref{eq:zeta-def}.
+
+Let $\xi$ be a primitive $p^r$th root of unity, where $r\ge1$.
+The restriction $r\ge1$ ensures $\xi\ne1$, so the initial
+factor $1-u$ does not vanish along $u=\rho\xi$ as
+$\rho\uparrow1$. The finitely many factors with $k<r$ likewise
+have nonzero limits. For $k\ge r$, $\xi^{p^k}=1$, and
+\[
+ \log|1-(\rho\xi)^{p^k}|=\log(1-\rho^{p^k}).
+\]
+For $0<\rho<1$,
+\[
+ 0\le\frac{\log(1-\rho^{p^k})}{\log(1-\rho)}\le1,
+ \qquad
+ \lim_{\rho\uparrow1}
+ \frac{\log(1-\rho^{p^k})}{\log(1-\rho)}=1.
+\]
+The bound $\sum e_k<\infty$ permits dominated convergence.
+Writing $F(u)=Z_S(u/q^2)$ gives the radial logarithmic order
+\begin{equation}\label{eq:radial-order}
+ \lim_{\rho\uparrow1}
+ \frac{\log|F(\rho\xi)|}{\log(1-\rho)}
+ =\eta_r:=\sum_{k\ge r}e_k>0.
+\end{equation}
+These positive tails tend to zero; more explicitly,
+\begin{equation}\label{eq:eta-bound}
+ 0<\eta_r\le
+ \frac{B_0}{p^r}\sum_{k\ge r}
+       (\theta^{p^{k-1}}-\theta^{p^k})
+ =\frac{B_0}{p^r}\theta^{p^{r-1}}.
+\end{equation}
+
+Fix a positive integer $m$. For all sufficiently large $r$,
+$0<m\eta_r<1$. A nonzero meromorphic germ at $\xi$ has the
+form $(u-\xi)^j G(u)$ with $j\in\Z$ and $G$ holomorphic and
+nonzero at $\xi$. Its radial logarithmic order is the integer
+$j$. Equation~\eqref{eq:radial-order} makes that impossible
+for $F^m$ at every primitive $p^r$th root with $r$ sufficiently
+large. Such roots are dense on the unit circle, so no open arc
+can admit meromorphic continuation of $F^m$.
+
+The defining series is holomorphic in $|u|<1$ by
+\eqref{eq:normalized-count}; the boundary just established
+precludes a larger disk. An algebraic function has only finitely
+many singular or branch points in the finite plane and therefore
+has continuation across some arc of this circle. Thus $F$, and
+equivalently $Z_S$, is not algebraic over $\C(t)$.
+\end{proof}
+
+This proof is the positive-tail mechanism already used in
+C404~\cite{C404}. The contribution of the present degree calculation
+is to determine which of the two exact triples in
+\eqref{eq:ABtheta} governs every coefficient choice.

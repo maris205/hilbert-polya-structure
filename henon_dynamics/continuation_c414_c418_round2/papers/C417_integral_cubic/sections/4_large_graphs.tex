@@ -1,0 +1,198 @@
+\section{Uniform graphs for large diameter}
+\label{sec:large}
+
+\begin{lemma}[The five endpoint alphabets]
+\label{lem:alphabet}
+Suppose $D\ge10$ and $E'\not\subseteq\{0,D,r\}$.
+After the reflection $t\mapsto D-t$ if necessary,
+$r\in\{-1,0,1,2,3\}$ and
+$E'\subseteq S_r=T_r\cup\{D\}$, where the sets $T_r$ are
+listed in Table~\ref{tab:large}.
+\end{lemma}
+\begin{proof}
+For an extra symbol $t\notin\{0,D,r\}$, integrality gives
+$|t-r|\ge1$. If $3\le t\le D-3$, then
+\[
+ |t(t-D)(t-r)|\ge t(D-t)\ge3(D-3)>2D,
+\]
+contrary to \eqref{eq:secant-bound}. Thus the only possible extra
+symbols are $1,2,D-2,D-1$. A lower extra at $1$ or $2$ satisfies
+respectively
+\[
+ |1-r|\le\left\lfloor\frac{2D}{D-1}\right\rfloor=2,
+ \qquad
+ |2-r|\le\left\lfloor\frac{D}{D-2}\right\rfloor=1.
+\]
+Their union forces $r\in\{-1,0,1,2,3\}$. Upper extras force
+$D-r$ to lie in the same set. These two ranges are disjoint for
+$D\ge10$.
+
+Reflection in both coordinates conjugates $H_g$ to $H_{\widetilde g}$,
+where a direct expansion yields
+\begin{align*}
+ \widetilde g(z)&=2D-g(D-z)
+   =\widetilde A+qz+z(z-D)(z-\widetilde r),\\
+ \widetilde r&=D-r,\qquad \widetilde A=(2-q)D-A.
+\end{align*}
+It preserves the monic integral family, the ordinary clock and all
+point counts. We may therefore use the lower range. Retaining its
+roots inside $[0,D]$ and its allowed extras gives
+$T_{-1}=T_0=\{0,1\}$,
+$T_1=T_2=\{0,1,2\}$ and $T_3=\{0,1,2,3\}$.
+If neither endpoint range occurs, there were no extra symbols and
+Lemma~\ref{lem:affine} already applies.
+\end{proof}
+
+Write $T_r=\{0,\ldots,m_r\}$, so $m_r$ is $1$, $2$ or $3$.
+For $D\ge16$, every sum of two symbols in $S_r$ has a unique
+representation $kD+s$. Its coefficient pair belongs to
+\begin{equation}
+ \Sigma_r=\{(0,s):0\le s\le2m_r\}
+ \cup\{(1,s):0\le s\le m_r\}\cup\{(2,0)\}.
+ \label{eq:sigma}
+\end{equation}
+Since $0,D$ both occur in the actual coordinate set, the endpoint
+images are sums of two symbols. Thus
+\begin{equation}
+ A=kD+s,\qquad (k,s)\in\Sigma_r,\qquad
+ (k+q,s)\in\Sigma_r.
+ \label{eq:symbolic-cases}
+\end{equation}
+To justify the last expression, representations with constant terms
+between $0$ and $2m_r\le6$ cannot differ by a nonzero multiple of
+$D$. The same no-cancellation argument will justify every graph edge.
+
+\begin{lemma}[No cancellation between the two coefficients]
+\label{lem:no-carry}
+For each case in \eqref{eq:symbolic-cases} and every $D\ge16$,
+the partial graph of $H_g$ on $S_r^2$ is independent of $D$ when
+symbols are represented by their coefficient pairs in $\Z[D]$.
+\end{lemma}
+\begin{proof}
+For $t\in T_r$, expansion of \eqref{eq:secant} gives
+\begin{equation}
+ g(t)=[k-t(t-r)]D+[s+qt+t^2(t-r)],
+ \label{eq:symbolic-value}
+\end{equation}
+whereas $g(D)=(k+q)D+s$. An edge $(x,t)\mapsto(t,z)$ is
+present precisely when $g(t)=x+z$. The constant coefficient of
+$x+z$ belongs to $[0,2m_r]$. Allowing
+$s,u\in[0,2m_r]$, $q\in[-2,2]$ and $t\in T_r$, the absolute
+constant discrepancy
+\[
+ |s+qt+t^2(t-r)-u|
+\]
+is at most $6,5,12,8,14$ for $r=-1,0,1,2,3$, respectively.
+These bounds follow by substituting the two, three or four listed
+values of $t$ and the endpoints of the ranges for $s,u,q$.
+For $t=D$ the bound is at most six. Every bound is less than $D$.
+If the coefficient of $D$ in an edge discrepancy were a nonzero
+integer, its magnitude at this $D$ would be at least $D$, which
+the constant discrepancy cannot cancel. Hence numeric equality is
+equivalent to equality of both coefficients, as claimed.
+\end{proof}
+
+This lemma concerns literal affine polynomials, not empirical stability
+at one chosen diameter. It leaves only ninety finite graphs. Indeed,
+for $s=0$ there are nine pairs of allowed values of $k$ and $k+q$;
+for each $1\le s\le m_r$ there are four; and for each
+$m_r<s\le2m_r$ there is one. The count is $9+5m_r$, giving the
+Cases column of Table~\ref{tab:large}.
+
+\begin{proposition}[The complete large graph computation]
+\label{prop:large-computation}
+The graphs in \eqref{eq:symbolic-cases} have the data in
+Table~\ref{tab:large}. Every cycle uses at most three symbols and
+has least period in $\{1,2,3,4\}$. Each graph has at most eight
+periodic vertices. Including the affine-root cases, every map whose
+global diameter is at least sixteen has at most nine periodic points.
+\end{proposition}
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}c c r r r c r@{}}
+\toprule
+$r$ & $T_r$ & Cases & Both ends & Max. points & Periods & Max. symbols\\
+\midrule
+$-1$ & $\{0,1\}$ & $14$ & $5$ & $4$ & $1,2,3,4$ & $2$\\
+$0$ & $\{0,1\}$ & $14$ & $5$ & $4$ & $1,2,3,4$ & $2$\\
+$1$ & $\{0,1,2\}$ & $19$ & $6$ & $6$ & $1,2,3,4$ & $3$\\
+$2$ & $\{0,1,2\}$ & $19$ & $7$ & $8$ & $1,2,3,4$ & $3$\\
+$3$ & $\{0,1,2,3\}$ & $24$ & $6$ & $6$ & $1,2,3,4$ & $3$\\
+\bottomrule
+\end{tabular}
+\caption{All ninety symbolic graphs. ``Both ends'' counts cases in
+which the union of graph cycles uses $0$ and $D$. The maxima and
+period lists include all cases, even those not using both ends.
+``Max. symbols'' is per cycle, not for the union.}
+\label{tab:large}
+\end{table}
+
+\begin{proof}
+Use the coefficient pairs $(0,t)$ for $t\in T_r$ and $(1,0)$ for
+$D$. Enumerate \eqref{eq:symbolic-cases}, evaluate
+\eqref{eq:symbolic-value}, and extract all cycles of
+$(x,y)\mapsto(y,g(y)-x)$ by coefficientwise arithmetic.
+Appendix~\ref{app:certificate} specifies every loop and the complete
+cycle-extraction algorithm, and proves its correctness.
+Its exact evaluation gives Table~\ref{tab:large}.
+
+For a compact explicit enumeration of every endpoint-using graph,
+Table~\ref{tab:large-patterns} lists all its cycles. There are five
+baseline cases for each of the five $r$ values, together with four
+additional cases, giving $25+4=29$ endpoint-using cases. Direct
+substitution into \eqref{eq:secant} verifies their displayed words;
+the full graph procedure also excludes any omitted cycles. Cases
+without both ends are included in the first table and its algorithm.
+Lemma~\ref{lem:alphabet} covers every non-affine actual map, and
+Lemma~\ref{lem:no-carry} identifies its graph uniformly in $D$.
+Lemma~\ref{lem:affine} supplies the remaining nine-point bound.
+\end{proof}
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}c c r p{8.4cm}@{}}
+\toprule
+$r$ & $A$ & $q$ & All graph cycles\\
+\midrule
+All five & $0$ & $2$ & $(0),(D)$; also $(r)$ for $r=1,2,3$\\
+All five & $D$ & $-1$ & $(0,0,D)$\\
+All five & $D$ & $0$ & $(0,0,D,D)$\\
+All five & $2D$ & $-2$ & $(0,D)$\\
+All five & $2D$ & $-1$ & $(0,D,D)$\\
+\midrule
+$1$ & $D+1$ & $-1$ & $(0,1,D),(0,D,1)$\\
+$2$ & $2$ & $0$ & $(1,1,D),(0,0,2,2)$\\
+$2$ & $D+2$ & $-1$ & $(1,D),(0,2,D),(0,D,2)$\\
+$3$ & $D+3$ & $-1$ & $(0,3,D),(0,D,3)$\\
+\bottomrule
+\end{tabular}
+\caption{Every symbolic case whose graph cycles use both endpoints.
+``All five'' means each $r\in\{-1,0,1,2,3\}$. These are cycles
+inside the indicated alphabet; the table does not by itself exclude
+periodic coordinates outside $[0,D]$ for a polynomial chosen from
+one of its rows.}
+\label{tab:large-patterns}
+\end{table}
+
+\begin{remark}[Four global symbols coexist]
+\label{rem:four-symbols}
+For any integer $D\ge16$, the polynomial
+\[
+ g_D(t)=2+t(t-D)(t-2)
+\]
+has the disjoint cycles $(1,1,D)$ and $(0,0,2,2)$, of least
+periods three and four. Indeed $g_D(0)=g_D(2)=2$ and
+$g_D(1)=D+1$, $g_D(D)=2$. Their seven points already use the
+four distinct values $0,1,2,D$. Thus the full coordinate set need
+not have at most three elements. No assertion about the absence of
+additional cycles is needed for this counterexample.
+\end{remark}
+
+The endpoint condition in the graph tables is only a necessary
+filter for a global-extrema tuple. It does not certify that a
+polynomial has no cycles outside the displayed interval. For example,
+the baseline $r=-1,A=0,q=2$ also has the fixed coordinate $-1$,
+which lies outside its chosen graph. When the tables are applied to
+our original map, this issue cannot hide a cycle: $0,D$ were chosen
+from the entire finite periodic set in \eqref{eq:normalization}.

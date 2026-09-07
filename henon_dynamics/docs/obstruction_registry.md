@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C414--HCS-C418 source-boundary register (2026-09-07)
+
+| ID | Candidate / exact scope | Boundary or counterexample | Surviving result and limitation |
+|---|---|---|---|
+| HEN-O398 | HCS-C414 polynomial-point height distribution as a periodic or target divisor | The complete height distribution is independent of all allowed coefficients; nonconstant polynomial points escape both ways. At equal positive coordinate degree m the canonical height is 2m while naive height is m, so a bounded additive discrepancy on the whole domain is false. The real-height main term retains q^(1-{B}), not a constant normalized coefficient. | The full distribution, combined poles and meromorphic boundary survive. This is F_q[t]^2 height counting, not all rational-function points or a periodic determinant; no target divisor follows. [PDF](../continuation_c414_c418_round2/papers/C414_height_distribution/main.pdf) |
+| HEN-O399 | HCS-C415 correction degree alone as a resonant count invariant | At p=3,q=27,a=1, g=y^6 and g=y^6+y^5 have the same degree but N_3=48,892,572 and 59,639,490. Deleting the support distinction loses the first surviving degree state. The perfected ring is infinite although each expression and denominator level is finite. | The complete high/low degree-2p formulas and native positive-power natural boundary survive for odd p,e>=3. Excluded characteristics/exponents, other correction degrees and non-F_q coefficients are not classified. [PDF](../continuation_c414_c418_round2/papers/C415_degree_2p/main.pdf) |
+| HEN-O400 | HCS-C416 normalized sign returns or positive core labels as ordinary physical cycles | A sign-negative return circuit of time T lifts to one ordinary 2T-cycle, not T. The actual negative-phase map is C(Sg)C; its 17 central points split as 1:1,3:2,10:1 rather than the positive phase's 1:1,5:2,6:1. | Full exact clipping and the exhaustive boundary graph hold at every odd degree for the printed factorial-product family. A changed phase, shift, sign quotient or clock is a different object. [PDF](../continuation_c414_c418_round2/papers/C416_discrete_sine/main.pdf) |
+| HEN-O401 | HCS-C417 per-cycle alphabet or endpoint filters as a global coexistence proof | For D>=16, g_D(t)=2+t(t-D)(t-2) has disjoint coordinate words (1,1,D) and (0,0,2,2), using four global symbols although each cycle uses at most three. Retained endpoint-compatible auxiliary graphs need not exclude periodic coordinates outside the chosen interval. | Global extrema of the entire periodic set, not one orbit, justify the seven templates and sharp eleven-point bound for monic Z[t] conservative cubics. No bound for all rational-coefficient or integer-valued cubics is inferred. [PDF](../continuation_c414_c418_round2/papers/C417_integral_cubic/main.pdf) |
+| HEN-O402 | HCS-C418 characteristic-blind bound or sign-quotient cycle count | In characteristic three, a=-1 and c=-P^2-1 give fourteen rational points (one 4-cycle and two 5-cycles), exceeding the sharp eight/six maxima outside characteristics two and three. All simultaneously applicable atlas rows must be added with ordinary signed lifts and one common P. | The complete nonconstant-parameter atlas holds over every allowed k itself. Characteristic two, a=0, constant c, a changed constant field or a Frobenius-variety zeta are not included. [PDF](../continuation_c414_c418_round2/papers/C418_function_field/main.pdf) |
+
+These are exact named-source counterexamples and applicability boundaries,
+not universal no-go theorems for new arithmetic constructions. Actual
+conjugacies preserve a conclusion only with its domain, observable and
+clock transported. All five target A2/A3/A4 verdicts fail to qualify with
+missing target tests explicit; no Euler-factor/root-number claim or Route-B
+entry is licensed. See [the five complete papers](../continuation_c414_c418_round2/README.md).
+The mapping-class reserve is unnumbered, and this batch stops at C418.
+
 ## HCS-C409--HCS-C413 source-boundary register (2026-09-06)
 
 | ID | Candidate / fixed scope | Exact boundary | Surviving result and limitation |

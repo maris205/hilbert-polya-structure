@@ -1,0 +1,154 @@
+\section{The low-support invariant and its descent}\label{sec:low}
+
+The perfected operator lowers the first degree from $2p$ to $2$.
+We retain the next possible exponent as well, because its denominator
+changes the first surviving binomial index.
+
+\begin{lemma}[Integral and exceptional fractional exponents]\label{lem:fractional}
+Let $E\ge2$ be an integer with $E\equiv2\pmod p$, and set
+$E'=Q(E-1)+2$. Then
+\begin{equation}\label{eq:integer-image}
+ \DD(y^E)=2B y^{E'}+2C y^{E'-\varepsilon}+P_E,
+ \qquad \deg P_E\le E'-1,
+\end{equation}
+whereas
+\begin{equation}\label{eq:fractional-image}
+ \deg\DD(y^{E-\varepsilon})
+ =Q(E-1)+2/p<E'-1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For the integral exponent, use the finite expansion
+$(y^Q+v_0)^E-y^{QE}$. Its index-one term is
+$2y^{Q(E-1)}v_0$, because $E\equiv2\pmod p$.
+Formula~\eqref{eq:v0} gives the two terms displayed in
+\eqref{eq:integer-image}; the remainder of that index-one term
+has degree at most $E'-1$. A term with index $i\ge2$ has degree
+at most
+\[
+ Q(E-i)+2i=E'-(i-1)(Q-2)\le E'-1.
+\]
+Here $Q\ge p^2\ge9$, and $2$ is nonzero in the odd characteristic.
+
+For the fractional exponent write
+\[
+ E-\varepsilon=\frac{M}{p},\qquad M=p(E-1)+1.
+\]
+The ring-homomorphism property and uniqueness of roots give the
+exact finite identity
+\begin{equation}\label{eq:fractional-finite}
+ \DD(y^{E-\varepsilon})
+ =\bigl((y^Q+v_0)^M-y^{QM}\bigr)^{1/p}.
+\end{equation}
+Although $v_0$ itself may have fractional exponents, the expression
+inside the root is a finite binomial expansion in $\Rperf$.
+Since $M\equiv1\pmod p$, its index-one term has degree
+$Q(M-1)+2$, with nonzero leading coefficient $B$.
+Every larger index has strictly smaller degree, as $Q>2$.
+Taking the root divides this degree by $p$, so
+\[
+ \deg\DD(y^{E-\varepsilon})
+ =\frac{Q(M-1)+2}{p}
+ =Q(E-1)+\frac2p
+ =E'-\left(2-\frac2p\right).
+\]
+For every odd $p$, including $p=3$, one has $2-2/p>1$.
+This proves \eqref{eq:fractional-image}.
+\end{proof}
+
+\begin{proposition}[Low-support state]\label{prop:low-state}
+For every $j\ge1$ there are $\alpha_j,\beta_j\in\F_q$,
+$\alpha_j\ne0$, and $P_j\in\Rperf$ such that
+\begin{equation}\label{eq:low-invariant}
+ \DD^j y=\alpha_jy^{E_j}
+       +\beta_jy^{E_j-\varepsilon}+P_j,
+ \qquad \deg P_j\le E_j-1.
+\end{equation}
+They satisfy
+\begin{align}
+ E_1&=2,& E_{j+1}&=Q(E_j-1)+2,\label{eq:E-recurrence}\\
+ \alpha_1&=B,& \alpha_{j+1}&=2B\sigma(\alpha_j),\label{eq:alpha-recurrence}\\
+ \beta_1&=C,& \beta_{j+1}&=2C\sigma(\alpha_j).\label{eq:beta-recurrence}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+At $j=1$ the invariant is \eqref{eq:v0}, since
+$2-\varepsilon=1+1/p$. The recurrence for $E_j$ makes it an
+integer at least two with $E_j\equiv2\pmod p$, because $p\mid Q$.
+Assume the invariant at $j$. Apply semilinearity
+\eqref{eq:semi-identities} and Lemma~\ref{lem:fractional} to the
+first two terms. The leading term supplies exactly the two
+coefficients in \eqref{eq:alpha-recurrence}--\eqref{eq:beta-recurrence}.
+The exceptional fractional term has degree strictly below
+$E_{j+1}-1$ after applying $\DD$. For the entire remaining tail,
+Lemma~\ref{lem:mixed} gives
+\[
+ \deg\DD P_j\le Q(E_j-1)=E_{j+1}-2.
+\]
+Thus no omitted term can enter either retained position, and
+\eqref{eq:low-invariant} follows at $j+1$. Since $B\ne0$,
+$2\ne0$, and $\sigma$ is an automorphism, $\alpha_j$ never
+vanishes. If $C=0$, all $\beta_j$ vanish; no division by $C$
+has been made and every bound remains valid.
+\end{proof}
+
+\begin{proposition}[Ordinary polynomial descent]\label{prop:descent}
+For the low-support class, $\delta^j y$ has the unique top term
+in \eqref{eq:leading-claim}, with the low-support degree in
+\eqref{eq:degree-formulas}. In particular $0<D_j<q^j$.
+\end{proposition}
+
+\begin{proof}
+Solving \eqref{eq:E-recurrence} gives
+\begin{equation}\label{eq:E-solution}
+ E_j=\frac{Q^j+Q-2}{Q-1}.
+\end{equation}
+Each application of $\DD=L^{-1}\delta$ raises the denominator
+level by at most one, since $T,U$ preserve each level of
+\eqref{eq:perfect-ring}. Hence $\DD^j y$ is at level at most $j$.
+Taking its $p^j$th power gives, by \eqref{eq:semi-identities},
+the ordinary polynomial $\delta^j y$.
+
+This descent can also be seen term by term in the retained state.
+The top exponent becomes $D_j=p^jE_j$; the second becomes
+\[
+ p^j(E_j-\varepsilon)=D_j-(p-1)p^{j-1},
+\]
+an integer strictly below it. The descended tail has degree at
+most $D_j-p^j$. Thus the top term remains unique; neither a
+fractional exponent nor a possible mixed remainder has been
+left unresolved. Substituting $Q=q/p$ into \eqref{eq:E-solution}
+gives
+\[
+ D_j=p^jE_j=\frac{p q^j+(q-2p)p^j}{q-p}.
+\]
+This is a positive integer by the recurrence. Moreover $E_1=2<Q$
+and $E_{j+1}=QE_j-(Q-2)<QE_j$, so $E_j<Q^j$ and $D_j<q^j$.
+
+Finally the top coefficient is $c_j=\alpha_j^{p^j}$. From
+\eqref{eq:alpha-recurrence}, using $\sigma(\alpha_j)^p=\alpha_j$
+and $B^p=b$, we obtain
+\[
+ c_1=b,\qquad c_{j+1}=2b^{p^j}c_j.
+\]
+Therefore
+\[
+ c_j=2^{j-1}b^{1+p+\cdots+p^{j-1}}
+     =2^{j-1}b^{(p^j-1)/(p-1)}.
+\]
+This accounts for all coefficient Frobenius twists, without
+requiring any coefficient to lie in $\F_p$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Proposition~\ref{prop:high} proves the needed leading terms and
+degree inequalities in the high-support class; Proposition~\ref{prop:descent}
+proves them in the low-support class. These alternatives exhaust
+every degree-$2p$ polynomial in \eqref{eq:parameters}.
+Proposition~\ref{prop:conversion}, together with the fixed-scheme
+identification \eqref{eq:equalizer}, proves the ordinary count and
+reducedness. At $j=1$ both degree formulas equal $2p$, giving the
+nonresonant statement when $w=1$.
+\end{proof}

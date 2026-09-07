@@ -1,0 +1,197 @@
+\section{Complete finite-graph specification}
+\label{app:certificate}
+
+This appendix gives the full finite arithmetic specification for
+Propositions~\ref{prop:large-computation} and \ref{prop:finite}.
+The pseudocode uses exact integers, finite sets, dictionaries and
+lexicographic order. Its half-open \texttt{range(a,b)} contains
+$a,a+1,\ldots,b-1$; \texttt{product} is Cartesian product.
+There is no imposed orbit-length bound. A word is canonicalized by
+rotation only.
+
+\subsection{Cycle extraction and its correctness}
+
+For an ordered finite symbol set $S$ and values $V[y]$, the graph
+has the edge $(x,y)\mapsto(y,V[y]-x)$ when the last coordinate
+belongs to $S$. The symbols and values are either integers or pairs
+of integer coefficients. Subtraction is ordinary subtraction in the
+first case and componentwise subtraction in the second.
+
+\begin{Verbatim}[fontsize=\footnotesize]
+from itertools import product
+
+def minus(u, v):
+    if isinstance(u, tuple):
+        return (u[0] - v[0], u[1] - v[1])
+    return u - v
+
+def cycles(S, V):
+    S = tuple(sorted(S))
+    allowed = set(S)
+    seen = set()
+    answer = []
+    for start in product(S, repeat=2):
+        if start in seen:
+            continue
+        point = start
+        path = []
+        position = {}
+        while point not in seen:
+            if point in position:
+                orbit = path[position[point]:]
+                word = tuple(x for (x, y) in orbit)
+                word = min(word[i:] + word[:i]
+                           for i in range(len(word)))
+                answer.append(word)
+                break
+            position[point] = len(path)
+            path.append(point)
+            x, y = point
+            z = minus(V[y], x)
+            if z not in allowed:
+                break
+            point = (y, z)
+        seen.update(path)
+    return sorted(answer, key=lambda w: (len(w), w))
+\end{Verbatim}
+
+\begin{lemma}[Exact extraction]
+\label{lem:extraction}
+The procedure \texttt{cycles} terminates and returns every directed
+cycle of the partial graph once, and no other words. Each returned
+word has length equal to its least ordinary period.
+\end{lemma}
+\begin{proof}
+The graph has finitely many vertices. Within one traversal, either
+an image leaves the graph, the path reaches an already completed
+traversal, or a vertex repeats on the current path; one of these
+events occurs after finitely many steps. A repeat on the current
+path closes exactly its segment from the first occurrence to the
+repeat. Its vertices are distinct before closure, so it is one
+whole cycle with its least period.
+
+Consider any cycle and the first traversal that reaches it.
+No vertex of that cycle is yet in a completed traversal.
+Following the deterministic edges therefore closes and records it.
+A subsequent path reaching that cycle stops at a completed vertex
+and cannot record it again. Distinct cycles cannot intersect in a
+functional graph. Marking every traversed vertex completed thus
+loses no unrecorded cycle and creates no duplicate. The outer loop
+visits every vertex, so every cycle is eventually reached.
+Canonical rotation changes only its chosen starting coordinate,
+not its orientation or its length.
+\end{proof}
+
+\subsection{Small-diameter enumeration}
+
+The following code computes the input counts, the endpoint-filtered
+point maxima, period sets, per-cycle symbol maxima, and every global
+maximizer. The value eleven is not supplied as an input or assertion.
+
+\begin{Verbatim}[fontsize=\footnotesize]
+def small_certificate():
+    rows = []
+    global_maximum = -1
+    equality = []
+    all_periods = set()
+    for D in range(2, 16):
+        cases = kept = 0
+        maximum = 0
+        max_symbols = 0
+        periods = set()
+        for r, A, q in product(range(-3, D + 4),
+                               range(2 * D + 1),
+                               range(-2, 3)):
+            if not (0 <= A + q * D <= 2 * D):
+                continue
+            cases += 1
+            S = [t for t in range(D + 1)
+                 if abs(t * (t-D) * (t-r)) <= 2 * D]
+            V = {t: A + q*t + t*(t-D)*(t-r) for t in S}
+            C = cycles(S, V)
+            used = {t for w in C for t in w}
+            if not (0 in used and D in used):
+                continue
+            kept += 1
+            count = sum(len(w) for w in C)
+            maximum = max(maximum, count)
+            for w in C:
+                periods.add(len(w))
+                all_periods.add(len(w))
+                max_symbols = max(max_symbols, len(set(w)))
+            if count > global_maximum:
+                global_maximum = count
+                equality = []
+            if count == global_maximum:
+                equality.append((D, r, A, q, C))
+        rows.append((D, cases, kept, maximum,
+                     sorted(periods), max_symbols))
+    return rows, global_maximum, equality, sorted(all_periods)
+\end{Verbatim}
+
+The ranges are exactly \eqref{eq:finite-ranges}; the symbol filter
+is \eqref{eq:small-symbols}. A retained case has at least one cycle,
+so every per-cycle maximum is defined. The output rows are
+Table~\ref{tab:small}; the global maximizer and its words are
+\eqref{eq:max-tuple}--\eqref{eq:max-words}. The period union is
+$\{1,2,3,4,6\}$ and every row has symbol maximum three.
+
+\subsection{Symbolic large-diameter enumeration}
+
+Represent $kD+s$ by $(k,s)$. The symbol $D$ is $(1,0)$ and an
+integer symbol $t\in T_r$ is $(0,t)$. Formula
+\eqref{eq:symbolic-value} defines its image coefficients.
+The extra statistic \texttt{error} measures the maximum absolute
+constant discrepancy among all edge tests. This statistic checks
+the arithmetic bound, but the independent proof of uniformity
+remains Lemma~\ref{lem:no-carry}.
+
+\begin{Verbatim}[fontsize=\footnotesize]
+def symbolic_certificate():
+    rows = []
+    endpoint_patterns = []
+    for r in (-1, 0, 1, 2, 3):
+        T = [t for t in range(4)
+             if t == 0 or abs(t * (t-r)) <= 2]
+        S = [(0, t) for t in T] + [(1, 0)]
+        Sigma = {(u[0] + v[0], u[1] + v[1])
+                 for u, v in product(S, repeat=2)}
+        cases = kept = maximum = max_symbols = error = 0
+        periods = set()
+        for (k, s), q in product(sorted(Sigma), range(-2, 3)):
+            if (k + q, s) not in Sigma:
+                continue
+            cases += 1
+            V = {(0, t): (k - t*(t-r),
+                          s + q*t + t*t*(t-r)) for t in T}
+            V[(1, 0)] = (k + q, s)
+            for y, u, v in product(S, repeat=3):
+                error = max(error, abs(V[y][1]-u[1]-v[1]))
+            C = cycles(S, V)
+            count = sum(len(w) for w in C)
+            maximum = max(maximum, count)
+            for w in C:
+                periods.add(len(w))
+                max_symbols = max(max_symbols, len(set(w)))
+            used = {t for w in C for t in w}
+            if (0, 0) in used and (1, 0) in used:
+                kept += 1
+                endpoint_patterns.append((r, (k, s), q, C))
+        rows.append((r, T, cases, kept, maximum,
+                     sorted(periods), max_symbols, error))
+    return rows, endpoint_patterns
+\end{Verbatim}
+
+The five values of \texttt{error} are $4,3,8,8,14$, all less than
+sixteen. They are no larger than the deliberately looser analytic
+bounds $6,5,12,8,14$. The other row entries give
+Table~\ref{tab:large}. Decoding $(0,t)$ as $t$ and $(1,0)$ as
+$D$, and changing only cyclic starting positions, gives exactly
+the 29 cases summarized in Table~\ref{tab:large-patterns}.
+
+Both enumeration procedures call the same completely specified
+cycle routine. Every vertex, parameter tuple and comparison is
+finite and explicit. Sections~\ref{sec:secant}--\ref{sec:finite}
+prove why no original polynomial escapes their ranges or the
+separate affine cases. This is the required distinction between
+an exhaustive finite certificate and a coefficient experiment.

@@ -1,0 +1,162 @@
+\section{Exhaustion of the seven templates}
+\label{sec:templates}
+
+A least-period-$n$ orbit has $n$ distinct ordered coordinate pairs.
+This elementary observation restricts the possible words before
+interpolation is applied.
+
+\subsection{One and two coordinate values}
+
+A one-symbol word is fixed, and its condition is $f(u)=2u$.
+With two symbols there are only four ordered pairs, so there is
+no least-period-six cycle. Period two has the word $(u,v)$,
+where $u\ne v$; choose $u<v$ to avoid duplicate rotations.
+The equations $f(u)=2v$ and $f(v)=2u$ say that the monic cubic
+$f(t)+2t-2(u+v)$ vanishes at $u$ and $v$. Dividing by
+$(t-u)(t-v)$ leaves a monic linear factor. Comparing its quadratic
+coefficient with $b$ forces that factor to be $t+u+v+b$.
+This proves the second row of Table~\ref{tab:templates}.
+
+A two-symbol three-cycle has a uniquely repeated symbol, so its
+word can be written $(u,u,v)$ with $u\ne v$.
+The recurrence gives $f(u)=u+v$ and $f(v)=2u$.
+Consequently $f(t)+t-(2u+v)$ vanishes at both $u,v$ and has the
+same forced third factor, proving the third row.
+
+A two-symbol four-cycle must have two occurrences of each letter.
+Indeed a word $(u,u,u,v)$ would force both $f(u)=2u$ and
+$f(u)=u+v$, and the analogous assertion holds when the other
+symbol is repeated three times. With two occurrences of each,
+the alternating word has period two. The remaining word is
+$(u,u,v,v)$ up to rotation, and reversal is already a rotation
+of this word. Its equations are $f(u)=f(v)=u+v$. Factoring
+$f(t)-(u+v)$ proves the fifth row.
+
+\subsection{Three coordinate values and an integer interpolation lemma}
+
+If a three-cycle uses distinct symbols $u<v<w$, the neighbors of
+each are the other two. With $S=u+v+w$, the monic polynomial
+$f(t)+t-S$ vanishes at all three symbols. It is therefore exactly
+$(t-u)(t-v)(t-w)$. Both words $(u,v,w)$ and $(u,w,v)$ satisfy
+the recurrence, and no rotation identifies them. This proves
+the fourth row, including $b=-S$.
+
+\begin{lemma}[Integral reciprocal sum]
+\label{lem:reciprocal}
+If $p,q$ are distinct nonzero integers and $1/p+1/q$ is an
+integer, then $p+q=0$.
+\end{lemma}
+\begin{proof}
+For opposite signs the absolute value of the sum is strictly less
+than one. If it is an integer it must be zero.
+For the same sign, change both signs if necessary and arrange
+$0<p<q$. When $p=1$, the sum is strictly between one and two.
+When $p\ge2$, it is strictly between zero and one.
+Neither alternative is integral.
+\end{proof}
+
+Consider a three-symbol four-cycle. The repeated symbol cannot occur
+adjacently: in $(h,h,u,v)$, the two equations for $h$ would give
+$h+v=h+u$, contrary to $u\ne v$. The word is therefore
+$(h,u,h,v)$, with three distinct integers, and its conditions are
+\[
+ f(h)=u+v,\qquad f(u)=f(v)=2h.
+\]
+Let $Q(t)$ be the quadratic interpolant at $h,u,v$.
+Since the difference between the monic cubic and this interpolant is
+\[
+ f(t)-Q(t)=(t-h)(t-u)(t-v),
+\]
+the quadratic coefficient of $Q$ is an integer. Subtracting the
+constant $2h$ in its interpolation data shows that this coefficient is
+\[
+ \frac{u+v-2h}{(h-u)(h-v)}
+ =\frac{1}{u-h}+\frac{1}{v-h}.
+\]
+Lemma~\ref{lem:reciprocal} gives $u+v=2h$. Thus the two endpoints
+are $h-k,h+k$ with $k\ge1$, and $Q(t)=2h$. The resulting monic
+identity is exactly the centered four-cycle row in the table.
+Swapping the two endpoints only rotates the displayed word.
+
+\subsection{The three-symbol six-cycle}
+
+First suppose that a three-symbol six-cycle has no equal adjacent
+letters. Its six distinct ordered pairs must be all six off-diagonal
+pairs on the alphabet. Hence each symbol occurs twice, with the other
+two symbols each occurring once as predecessor and once as successor.
+At a symbol $u$, equality of the two neighbor sums has two possible
+pairings of predecessors and successors. Pairing each predecessor
+with itself would require $2v=2w$ for the other distinct symbols,
+which is impossible over $\Z$. Both occurrences must therefore
+have the unordered neighbor pair $\{v,w\}$. At every step, after
+two distinct symbols the next symbol is the third one. The word
+repeats the same order of three symbols and has period three,
+a contradiction.
+
+There must be adjacent equal letters $p,p$. The equations at the
+two occurrences force the predecessor and successor of this pair
+to be the same symbol, say $h$. They cannot be $p$: a triple
+$p,p,p$ gives $f(p)=2p$ and forces its neighbors successively to
+equal $p$, making the entire cycle constant. Rotate the word to
+$(h,p,p,h,*,*)$ with $h\ne p$.
+The third symbol $q$ must occur in one or both of the remaining
+positions. The possibilities involving $q$ are
+\[
+ (p,q),\ (q,p),\ (h,q),\ (q,h),\ (q,q).
+\]
+In the first two, comparing the additional occurrence of $p$ with
+an occurrence in the double forces $q=p$. In the next two, the
+equations at the additional $h$ force $q=h$. These contradict
+the distinctness of the third symbol. The last two positions
+are therefore $(q,q)$, giving the word
+\[
+ (p,p,h,q,q,h).
+\]
+Its recurrence equations are
+\[
+ f(p)=p+h,\qquad f(q)=q+h,\qquad f(h)=p+q.
+\]
+Apply interpolation to the monic cubic $f(t)-(t+h)$. It has
+values zero at $p,q$ and value $p+q-2h$ at $h$.
+As in the four-cycle argument, the quadratic coefficient of its
+quadratic interpolant is an integer and equals
+\[
+ \frac{p+q-2h}{(h-p)(h-q)}
+ =\frac1{p-h}+\frac1{q-h}.
+\]
+Lemma~\ref{lem:reciprocal} forces $p+q=2h$.
+Writing the endpoints as $h-k,h+k$ now gives
+\[
+ f(t)=t+h+(t-h)((t-h)^2-k^2),
+\]
+and the displayed period-six word in Table~\ref{tab:templates}.
+Swapping endpoints rotates this word by three places.
+
+\subsection{Converses and exact least periods}
+
+The previously proved period and symbol restrictions exhaust all
+cases considered above. Conversely, substituting each of the seven
+conditions into \eqref{eq:recurrence} verifies its word.
+The ranges make the ordered pairs distinct. The two-cycle and the
+three-distinct-symbol three-cycle have distinct successive first
+coordinates. The word $(u,u,v)$ uses $(u,u),(u,v),(v,u)$,
+which are distinct for $u\ne v$. The two-symbol four-cycle uses
+$(u,u),(u,v),(v,v),(v,u)$; and the centered four-cycle uses
+$(h-k,h),(h,h+k),(h+k,h),(h,h-k)$.
+For the six-cycle, subtracting $h$ from both coordinates gives
+the pairs
+\[
+ (-k,-k),\ (-k,0),\ (0,k),\
+ (k,k),\ (k,0),\ (0,-k),
+\]
+which are distinct for $k\ge1$. Their asserted lengths are therefore
+their least periods. Rows with the same period but different numbers
+of symbols cannot describe the same orbit.
+
+All five least periods occur. The polynomial $t^3$ has a fixed
+point and the centered six-cycle with $h=0,k=1$.
+The polynomial $t^3-3t$ has the two-cycle $(-1,1)$;
+$t^3-2t$ has the three-cycle $(-1,0,1)$;
+and $t^3-t$ has the four-cycle $(-1,0,1,0)$.
+This completes the template and period parts of
+Theorem~\ref{thm:main}.

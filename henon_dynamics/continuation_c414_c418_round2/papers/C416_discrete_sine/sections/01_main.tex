@@ -1,0 +1,122 @@
+\section{The family and its complete cycle census}\label{sec:main}
+
+An explicit H\'enon map can have a large rational periodic set while
+leaving its exact cycle structure undetermined. For the discrete-sine
+family, the essential distinction is between the small-amplitude core
+and a narrow boundary on which new periods occur. We determine both
+pieces, with their actual point labels and ordinary iteration times.
+
+For an odd integer $d=2k+1\ge3$, define
+\begin{equation}\label{eq:family}
+ s_d(Y)=\sum_{j=0}^{k}(-1)^{k-j}
+ \frac{Y\prod_{i=1}^{j}(Y^2-i^2)}{(2j+1)!},
+ \qquad h_d(x,y)=(y,-x+s_d(y)).
+\end{equation}
+The empty product is $1$. The degree of $s_d$ is exactly $d$, and
+$h_d^{-1}(x,y)=(s_d(x)-y,x)$; thus $h_d$ is a polynomial automorphism
+of $\Q^2$ with Jacobian determinant $1$. Throughout, a primitive cycle
+means an orbit of least positive period, counted once under cyclic
+rotation. We do not identify a cycle with its negative or its reversal.
+
+Put
+\begin{equation}\label{eq:radius}
+ R=\frac{d+1}{2}=3q+s,\qquad s\in\{0,1,2\}.
+\end{equation}
+Here $q$ is an integer quotient, not a finite-field cardinality. The
+allowed ranges are $q\ge1$ when $s=0,1$, and $q\ge0$ when $s=2$.
+Let $C_n(d)$ count primitive rational cycles of length $n$.
+
+\begin{theorem}[Complete rational cycle classification]\label{thm:main}
+For the map \eqref{eq:family}, every rational periodic point is integral
+and lies in $[-R-2,R+2]^2$. All primitive rational cycles are given by
+the following three additive tables. An omitted period has multiplicity
+zero; entries of the same period in different tables are added.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\begin{tabular}{ll}
+\toprule
+Condition & Central cycles, written as period: multiplicity\\
+\midrule
+$R$ odd & $1:1,\quad 5:2,\quad 6:1$\\
+$R$ even & $1:1,\quad 3:2,\quad 10:1$\\
+\bottomrule
+\end{tabular}
+\captionof{table}{The central part, containing $17$ points in either phase.}
+\label{tab:central}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\begin{tabular}{cccc}
+\toprule
+$s$ & Bulk $C_4$ & Bulk $C_{12}$ & Bulk $C_{20}$\\
+\midrule
+$0$ & $q(q+1)$ & $q(q-1)$ & $q(q-1)$\\
+$1$ & $q(q+1)$ & $q(q+1)$ & $q(q-1)$\\
+$2$ & $q(q+1)$ & $q(q+1)$ & $q(q+1)$\\
+\bottomrule
+\end{tabular}
+\captionof{table}{Generic core cycles, excluding the central part.}
+\label{tab:bulk-main}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\begin{tabular}{cl}
+\toprule
+$s$ & Boundary cycles, written as period: multiplicity\\
+\midrule
+$0$ & $4:2q+2,\quad 14:2$\\
+$1$ & $6:2,\quad 16:2,\quad 36:q-1,\quad (16q+6):1$\\
+$2$ & $4:2,\quad 6:1,\quad 8:2q$\\
+\bottomrule
+\end{tabular}
+\captionof{table}{All cycles meeting the boundary section.}
+\label{tab:boundary-main}
+\end{minipage}
+\end{center}
+
+The tables specify an explicit point classification, not only
+multiplicities. The positive-phase core consists exactly of the clipped
+residue rectangles in Table~\ref{tab:affine}, including its central
+exceptions. The negative-phase point labels are obtained by the
+conjugacy of Proposition~\ref{prop:phase}. The boundary cycles are the
+complete first-return families of Section~\ref{sec:closure}; their
+intermediate points are recovered by iterating \eqref{eq:family}.
+\end{theorem}
+
+The word ``bulk'' below always refers to the generic core cycles in
+Table~\ref{tab:bulk-main}; it does not include the $17$ central points.
+The word ``boundary'' refers to an orbit that meets the section, not to
+the assertion that all its points lie on the boundary of a square.
+
+\begin{corollary}[Point totals and ordinary return law]\label{cor:counts}
+The total number $P(d)=\#\Per(h_d,\Q)$ is
+\begin{equation}\label{eq:total}
+P(d)=
+\begin{cases}
+36q^2-20q+53=(3d^2-4d+152)/3,& R=3q,\quad d\equiv5\pmod6,\\
+36q^2+48q+31=d^2+6d+24,& R=3q+1,\quad d\equiv1\pmod6,\\
+36q^2+52q+31=d^2+8d/3+14,& R=3q+2,\quad d\equiv3\pmod6.
+\end{cases}
+\end{equation}
+For each $n\ge1$, let $N_n(d)=\#\Fix(h_d^n,\Q)$. Then
+\begin{equation}\label{eq:zeta}
+ N_n(d)=\sum_{\ell\mid n}\ell C_\ell(d),\qquad
+ Z_d(u)=\exp\left(\sum_{n\ge1}\frac{N_n(d)}n u^n\right)
+       =\prod_{\ell\ge1}(1-u^\ell)^{-C_\ell(d)}.
+\end{equation}
+The product is finite, and the exponential identity is an identity of
+formal power series, as well as an analytic identity for $|u|<1$.
+\end{corollary}
+
+The proof proceeds by integrality and escape, exact clipping of all
+affine core cells, and a signed first-return calculation on two boundary
+layers. Keeping the return signs is essential: a sign-negative return
+cycle of total time $T$ produces ordinary period $2T$, not $T$.

@@ -3,7 +3,111 @@
 核对日期：2026-09-07。主线：`henon_dynamics`，C 系列。
 长期规则见 [AGENTS.md](AGENTS.md)；本文件只保存当前状态和证据入口。
 
-## 最新授权与恢复动作
+## 最新授权与五篇完成状态
+
+用户在三项准入研究检查点后明确 **“继续”**，续接同一 **C414–C418**
+批次。现已完成 **5/5 项独立合同、五篇完整论文及最终发布门槛**，
+状态 `FIVE_PAPERS_SEALED; RELEASE_COMMIT_PENDING`。
+[五篇交付入口](continuation_c414_c418_round2/README.md) 提供真实 PDF、
+可编辑源码、各篇独立增量和完整证据；最终页数依次为 **9、11、15、
+17、9 页，共 61 页**。不把储备札记、提纲或推论另计论文。
+
+[五篇计划](continuation_c414_c418_round2/BATCH_PLAN.md)、
+[准入裁决](continuation_c414_c418_round2/ADMISSION_DECISIONS.md) 与
+[稿件审查裁决](continuation_c414_c418_round2/REVIEW_ADJUDICATION.md)
+已闭合。五份非作者实际全文／来源审查全部 PASS，无剩余必改项；
+C415 将“有限环”的歧义修正为“每次计算为有限表达式”，原审者
+核对修改源码和更新 PDF 后闭环。当前团队审查是 AI 辅助内部审查，
+不是人类同行评审、全球优先权证明或投稿承诺。
+
+[最终构建总报告](continuation_c414_c418_round2/FINAL_BUILD_REPORT.md)
+记录十次全新构建，各篇两个目录得到相同字节 PDF。C417 的一份
+构建另经同环境排版稳定化，PDF 字节未变，原警告日志保留。
+两位委派代理已实际逐页查看全部 61 页；协调者完整阅读收据，
+独立核对 55 个最终 TeX/Bib 输入、110 份构建副本及五组 PDF 字节。
+原 39 文件研究快照及旧封存树未改，不重跑已通过检查以重复 PASS。
+
+[正式评估口径](continuation_c414_c418_round2/EVALUATION_SCOPE.md) 与
+[独立评价审查](continuation_c414_c418_round2/REVIEW_EVALUATION.md)
+均已完成。严格 v0.2.0 结论仍为五篇 `ROUTE_A_EXPLORATORY`：
+C414 是 `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`；
+C415–C418 是 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`。
+全部 45 项 A2 指标为 `NOT_TESTABLE`，A0 必需对照面板仍
+`INCOMPLETE`，所有目标／Route-B 标志为 false。来源系统的高度
+分布、周期分类或自然边界不是目标 Euler 因子、根数、零点匹配或
+Hilbert–Pólya 实现；`NO_BAD_EULER_OR_ROOT_NUMBER` 持续有效。
+
+授权止于本批 **C418**。正字映射类等仅保留未编号研究储备，
+不加第六篇、不开始 C419、不进入 Route B、不外部投稿／上传／公告。
+下一批等待用户确认；以下历史研究检查点保留当时的真实状态。
+
+### 本批实际精确封存收据（2026-09-07 UTC）
+
+[非作者发布代码审查](continuation_c414_c418_round2/release/REVIEW_CODE.md)
+与[文档／链接审查](continuation_c414_c418_round2/release/REVIEW_DOCUMENTATION.md)
+均 PASS/CLOSED，协调者已完整读完；代码审查的一处纯排版加号在
+清单生成前修正，四份已测试工具输入未变。文档实际扫描覆盖
+49 份 Markdown、163 处本地目标及 79 处跳过的 HTTPS 目标，
+零意外断链；其中当时预留的两清单现已真实生成并核验。
+该审查的状态前缀摘要固定其当时快照，本节是之后的协调者执行收据。
+
+全部写入者停写后，协调者逐项批准真实清单 **256 个 payload 文件、
+12,683,784 字节**，含忽略的编译辅助文件、日志及历史作者 PDF／PNG，
+没有删除或过滤。通过 `apply_patch` 安装批准候选原字节并逐字节
+比对；在封存前于本包外状态文件固定以下账本 SHA256 字面值，
+不从待验证活账本重新选择批准值。
+
+- [PAYLOAD_LEDGER.json](continuation_c414_c418_round2/PAYLOAD_LEDGER.json)：
+  46,433 字节；SHA256
+  `8a6883b1628a7fe577493a4dfdafb5a316e6b6d8679bbedaf0f9de04847264d7`。
+- [MANIFEST.sha256](continuation_c414_c418_round2/MANIFEST.sha256)：
+  28,869 字节、257 项；SHA256
+  `bdeca2261a137dee8754d0ccf55a36695fd83caae1256cdb1b1bf5594d6daa48`。
+- 连同两清单为 **258 个实际文件、12,759,086 字节**。账本排除自身
+  和 manifest；manifest 包含账本而排除自身。封存后不再修改本树。
+
+协调者以 Python 3.12.3、`python3 -B` 实际依次执行
+`release/exact_payload.py check`、`seal`、`verify`，根目录均为
+`/root/autodl-tmp/hilbert-polya-structure/henon_dynamics/continuation_c414_c418_round2`，
+每次 `--ledger-sha256` 均传入上述预先批准字面值；三次退出码均为 0。
+随后在该根目录实际执行 `sha256sum -c MANIFEST.sha256`，
+退出 0，257 项全部 OK。工具先完整双重预检、再禁止覆盖地创建清单；
+它的[测试收据](continuation_c414_c418_round2/release/TEST_REPORT.md)
+保留作者实际正常／优化模式各 21 项测试，协调者没有冒称重新运行。
+
+另一非作者代理以独立标准库 stdin 程序 `python -B -`
+（Python 3.12.3）重建目录遍历、严格 JSON 与 manifest 解析，
+未导入或运行发布程序，实际退出 0。它核对精确成员、文件类型、
+大小、SHA256、规范字节、原固定批准值，以及 34 个子目录和
+6 个根／祖先目录：无空目录、符号链接、特殊／硬链接文件、重复、
+遗漏或额外项；所有计数、总字节及两清单摘要一致，扫描前后成员
+元数据稳定。协调者完整检查了其实际程序与输出；没有生成新文件。
+以上是静止文件树的成员／字节一致性证据，不是数学正确性、
+数字签名、真实性证明或敌对并发写入下的文件系统快照保证。
+
+### Git 整合与提交边界
+
+研究／评价基线为 `682a3c99a7aa15cbc7286a4e87fd90fb6320194a`；
+冻结评价保留这一真实历史基线。最终 fetch 发现另一个流的新提交
+`2ebe9f4e712007ddf57260800c9ebda94f5d2a9d`：
+2,280 个变更路径全部限于符号动力学状态、P204–P208 文档和 P208
+包，与本批及本地改动零交集；已实际 `git merge --ff-only --no-stat`
+成功接入，无冲突。科研提交执行前 HEAD 与 origin/main 均为该值。
+
+已按明确路径暂存 258 文件封存树，包括 Git 默认忽略的证据文件；
+协调者通过 `git ls-files --stage` 和 `git cat-file --batch` 实际
+读取全部 258 个暂存 blob，逐字节等于磁盘；精确集合无额外路径，
+全部为 stage 0 普通文件。最终另纳入本状态和两个 Hénon 注册表，
+不纳入八个继承的未跟踪目录，不改旧封存树或其他流。
+
+全包 `git diff --cached --check` 实际退出 2：189 项纯空白提示中，
+182 项来自保留的原始构建输出，另 7 项为末尾空行
+（终构建总报告及 C416 两份作者记录、四个 TeX 章节）。
+它们不影响已核 PDF／数学／程序；为保留冻结字节不作格式化，
+不将这次全包检查写成 PASS。发布代码／评价子树的同项检查退出 0。
+科研提交及真实远端同步仍待下一个 Git 动作，不预填自指提交号。
+
+## C414–C418 三项研究检查点（已封存，以下保留原记录）
 
 用户在 C409–C413 五篇封存交付及实际同步确认后，再次明确
 **“确认，下一轮”**。当前新授权为 **C414–C418**，从

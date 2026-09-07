@@ -1,0 +1,126 @@
+\section{Clipped affine cells in the core}\label{sec:core}
+
+Let
+\[
+ B_0=[-R,R]^2\cap\Z^2,\qquad
+ g_p(x,y)=(y,-x+p\sine(y)),\qquad g=g_+.
+\]
+By Lemma~\ref{lem:values}, $h_d$ and $g_p$ agree as long as their
+second coordinate remains in $[-R,R]$. We first study $g$ on the
+whole lattice and then identify exactly which of its orbits stay in
+$B_0$. This separates periodicity from the radius-dependent clipping.
+
+\begin{proposition}[Exact positive-phase cells]\label{prop:core}
+Fix $(e,f)\in\{0,\ldots,5\}^2$. The corresponding row of
+Table~\ref{tab:affine} gives a generic period
+$\ell\in\{4,12,20\}$, four offsets, and all points of smaller period
+in that residue cell. The entire $g$-orbit of $(x,y)\equiv(e,f)\pmod6$
+lies in $B_0$ if and only if
+\begin{equation}\label{eq:rectangle}
+ -R+L_x\le x\le R+U_x,\qquad
+ -R+L_y\le y\le R+U_y.
+\end{equation}
+Except at the indicated exceptional points, its least period is
+exactly $\ell$. The central exceptions form the origin, two
+$5$-cycles and one $6$-cycle.
+\end{proposition}
+\begin{proof}
+Within a fixed residue cell, write each coordinate as an affine
+expression in the free variables $x,y$. The residue of $ax+by+c$ is
+$ae+bf+c\bmod6$, so the exact affine iteration is
+\begin{equation}\label{eq:affine}
+ (X,Y)\longmapsto\bigl(Y,-X+\sine(Y\bmod6)\bigr).
+\end{equation}
+Table~\ref{tab:affine} gives all $36$ resulting identities
+$g^\ell(x,y)=(x,y)$. Every intermediate coordinate is of the form
+$\pm x+c$ or $\pm y+c$. Intersecting the inequalities
+$-R\le\pm x+c\le R$ and their $y$ analogues gives precisely
+\eqref{eq:rectangle}. This is an intersection of affine inequalities,
+not a test at a chosen radius.
+
+For clarity, the verification of any row consists of the following
+finite exact operations:
+\begin{enumerate}[label=(\roman*)]
+ \item Start at the affine pair $(X_0,Y_0)=(x,y)$ and apply
+       \eqref{eq:affine} through the listed value of $\ell$.
+ \item Check $(X_\ell,Y_\ell)=(x,y)$ as an affine identity and
+       intersect all coordinate bounds through time $\ell-1$.
+ \item For each proper divisor $t$ of $\ell$, solve
+       $X_t=x$, $Y_t=y$. Retain precisely the integral solutions
+       with residues $(e,f)$.
+\end{enumerate}
+Every consistent proper-divisor system in these rows has rank two;
+there is no consistent rank-one family to discard. The resulting
+solutions are exactly the points in the last column of the table.
+These operations, with \eqref{eq:sigma}, also give a direct
+reproducible verification of the table without external code.
+For example, in cell $(0,0)$ the affine orbit is
+$(x,y),(y,-x),(-x,-y),(-y,x)$, giving period $4$, zero clipping
+offsets, and only $(0,0)$ as a proper-period point.
+
+In actual point notation the exceptional cycles are the fixed point
+$(0,0)$, the cycle
+\begin{equation}\label{eq:five-cycle}
+ (0,2)\to(2,1)\to(1,-1)\to(-1,-2)\to(-2,0)\to(0,2)
+\end{equation}
+and its negative, and
+\begin{equation}\label{eq:six-cycle}
+ (0,1)\to(1,1)\to(1,0)\to(0,-1)\to(-1,-1)\to(-1,0)\to(0,1).
+\end{equation}
+All $17$ points lie in $[-2,2]^2$, and thus occur for every $R\ge2$.
+The proper-divisor equations exclude every other exceptional point.
+\end{proof}
+
+We next count the clipped rectangles exactly. Put $R=6m+r$ with
+$0\le r\le5$. For a single coordinate of residue $e$ and offsets
+$(L,U)$, write the coordinate as $e+6j$. The number of allowed
+integers is
+\begin{align}
+ A_{r,e}^{L,U}(m)
+ &=\left\lfloor\frac{R+U-e}{6}\right\rfloor
+   -\left\lceil\frac{-R+L-e}{6}\right\rceil+1 \notag\\
+ &=2m+\left\lfloor\frac{r+U-e}{6}\right\rfloor
+   -\left\lceil\frac{-r+L-e}{6}\right\rceil+1.
+ \label{eq:ap-count}
+\end{align}
+For the rows in Table~\ref{tab:affine}, these values are nonnegative
+already at the least permitted $m$: it is $1$ for $r=0,1$ and $0$
+for the other residues. No positive-part correction is omitted.
+
+Let $\eta_{e,f}$ be $1$ if the last column of that row contains a
+point, and $0$ otherwise. All such points satisfy the clipping
+inequalities at every $R\ge2$. Thus the number of generic cycles
+of a given period $\ell$ is exactly
+\begin{equation}\label{eq:bulk-sum}
+ \frac1\ell
+ \sum_{\substack{(e,f)\\\text{row period }\,\ell}}
+ \left(A_{r,e}^{L_x,U_x}(m)A_{r,f}^{L_y,U_y}(m)-\eta_{e,f}\right).
+\end{equation}
+Each generic orbit is counted at each of its $\ell$ points,
+possibly in different residue cells; division by $\ell$ is therefore
+necessary. Expanding the products gives Table~\ref{tab:bulk-six}.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\begin{tabular}{cccc}
+\toprule
+$r$ & Bulk $C_4$ & Bulk $C_{12}$ & Bulk $C_{20}$\\
+\midrule
+$0$ & $4m^2+2m$ & $4m^2-2m$ & $4m^2-2m$\\
+$1$ & $4m^2+2m$ & $4m^2+2m$ & $4m^2-2m$\\
+$2$ & $4m^2+2m$ & $4m^2+2m$ & $4m^2+2m$\\
+$3$ & $4m^2+6m+2$ & $4m^2+2m$ & $4m^2+2m$\\
+$4$ & $4m^2+6m+2$ & $4m^2+6m+2$ & $4m^2+2m$\\
+$5$ & $4m^2+6m+2$ & $4m^2+6m+2$ & $4m^2+6m+2$\\
+\bottomrule
+\end{tabular}
+\captionof{table}{Exact rectangle counts in the six radius classes.}
+\label{tab:bulk-six}
+\end{minipage}
+\end{center}
+
+Since $q=2m+\lfloor r/3\rfloor$, substitution gives exactly
+Table~\ref{tab:bulk-main}. This derivation uses the affine cells and
+arithmetic progressions for arbitrary $m$, not polynomial fitting
+to finite degree samples.

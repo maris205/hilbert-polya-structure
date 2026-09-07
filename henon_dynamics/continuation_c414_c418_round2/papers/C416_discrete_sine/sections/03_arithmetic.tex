@@ -1,0 +1,122 @@
+\section{Integer values, rational integrality and escape}\label{sec:arithmetic}
+
+Define the six-periodic function $\sine:\Z\to\{0,1,-1\}$ by
+\begin{equation}\label{eq:sigma}
+ (\sine(0),\sine(1),\ldots,\sine(5))=(0,1,1,0,-1,-1),
+ \qquad p=(-1)^{R-1}.
+\end{equation}
+The polynomial $s_d$ is odd. The following identities isolate all its
+values needed inside the eventual escape box.
+
+\begin{lemma}[Exact core and boundary values]\label{lem:values}
+The polynomial $s_d$ takes integer values on $\Z$. With
+$a\in\{0,1,2\}$ the residue $-R\bmod3$ and $s=R\bmod3$, one has
+\begin{equation}\label{eq:values}
+ s_d(n)=p\sine(n)\quad(|n|\le R),\qquad
+ s_d(R+1)=a,\qquad s_d(R+2)=2R+s.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Write
+\[
+ c_j(Y)=\frac{Y\prod_{i=1}^{j}(Y^2-i^2)}{(2j+1)!}.
+\]
+For an integer $n\ge0$,
+$c_j(n)=\binom{n+j}{2j+1}$, with value zero when $j\ge n$.
+This proves integrality for $n\ge0$; oddness proves it for $n<0$.
+The following calculation takes place in formal power series, so
+each coefficient involves only finitely many summands:
+\begin{align*}
+ \sum_{n\ge0}\left(\sum_{j\ge0}(-1)^j
+       \binom{n+j}{2j+1}\right)z^n
+ &=\sum_{j\ge0}\frac{(-1)^jz^{j+1}}{(1-z)^{2j+2}}\\
+ &=\frac{z}{1-z+z^2}.
+\end{align*}
+The coefficient sequence on the right is $\sine(n)$.
+Since $k=R-1$, truncation gives $s_d(n)=p\sine(n)$ for $0\le n\le R$.
+At $n=R+1$ the omitted tail is the single binomial coefficient $1$;
+at $n=R+2$ its two binomial coefficients are $2R+2$ and $1$.
+After their signs are included, the two truncated values are
+$1+p\sine(R+1)$ and $2R+1+p\sine(R+2)$.
+Evaluating the six residues of $R$ gives $a$ and $2R+s$ respectively.
+Oddness supplies all negative values.
+\end{proof}
+
+\begin{lemma}[Uniform integer escape estimate]\label{lem:escape-estimate}
+For every odd $d\ge3$,
+\begin{equation}\label{eq:escape-estimate}
+ s_d(n)\ge3n\qquad(n\in\Z,\ n\ge R+3).
+\end{equation}
+Consequently $|s_d(n)|\ge3|n|$ for $|n|\ge R+3$.
+\end{lemma}
+\begin{proof}
+Two applications of Pascal's identity give
+\[
+ c_j(n+1)-2c_j(n)+c_j(n-1)=c_{j-1}(n)\qquad(j\ge1),
+\]
+and $c_0(n)=n$ has zero second difference. Therefore
+\begin{equation}\label{eq:second-difference}
+ s_d(n+1)-2s_d(n)+s_d(n-1)=s_{d-2}(n).
+\end{equation}
+For $d=3$ one has $R=2$ and
+$s_3(n)=(n^3-7n)/6\ge3n$ for $n\ge5$.
+Assume the assertion at degree $d-2$, whose core radius is $R-1$,
+and take $R\ge3$. Put $D(n)=s_d(n)-s_d(n-1)$. By
+Lemma~\ref{lem:values},
+\[
+ D(R+2)=2R+s-a\ge2R-2\ge4.
+\]
+For $n\ge R+2$, the induction hypothesis applies to
+$s_{d-2}(n)$; hence \eqref{eq:second-difference} gives
+$D(n+1)-D(n)=s_{d-2}(n)\ge3n>0$. Moreover,
+\begin{align*}
+ s_d(R+3)
+ &=2s_d(R+2)-s_d(R+1)+s_{d-2}(R+2)\\
+ &\ge4R-2+3(R+2)=7R+4\ge3(R+3).
+\end{align*}
+All subsequent increments exceed $3$, proving
+\eqref{eq:escape-estimate} by induction on $n$, and then on the odd
+degree. The absolute-value assertion follows by oddness.
+\end{proof}
+
+\begin{proposition}[Rational periodic points lie in the integer box]
+\label{prop:integer-box}
+Every rational periodic point of $h_d$ belongs to
+\begin{equation}\label{eq:boxes}
+ B=[-R-2,R+2]^2\cap\Z^2.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Write a periodic orbit as $(y_{i-1},y_i)$, with indices taken cyclically.
+The coordinate recurrence is
+\begin{equation}\label{eq:recurrence}
+ y_{i-1}+y_{i+1}=s_d(y_i).
+\end{equation}
+Fix a prime $v$ and its usual nonarchimedean absolute value.
+If $|y|_v>1$, then $|y^2-i^2|_v=|y|_v^2$ for every integer $i$.
+The absolute values of the summands in $s_d(y)$ are therefore
+\[
+ |y|_v^{2j+1}|(2j+1)!|_v^{-1}\qquad(0\le j\le k).
+\]
+They strictly increase with $j$: the quotient of consecutive values is
+$|y|_v^2|(2j+2)(2j+3)|_v^{-1}>1$.
+The ultrametric inequality with a unique largest summand yields
+\[
+ |s_d(y)|_v=|y|_v^d|d!|_v^{-1}>|y|_v.
+\]
+If some orbit coordinate had norm larger than $1$, choose one of
+maximal norm. Equation~\eqref{eq:recurrence} would have right-hand
+norm larger than either term on the left, a contradiction.
+Every orbit coordinate is integral at every prime, hence lies in $\Z$.
+
+Now let $M$ be the maximal ordinary absolute value of the orbit
+coordinates. If $M\ge R+3$, Lemma~\ref{lem:escape-estimate} makes the
+right side of \eqref{eq:recurrence}, at a maximizing coordinate, have
+absolute value at least $3M$; the left side has absolute value at most
+$2M$. Thus $M\le R+2$.
+\end{proof}
+
+In particular, a trajectory that leaves $B$ cannot be periodic.
+This is the only meaning of ``escape'' required below: no assertion
+about two-sided divergence of every nonperiodic orbit is needed.
+

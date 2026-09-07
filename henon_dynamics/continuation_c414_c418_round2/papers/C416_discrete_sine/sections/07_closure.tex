@@ -1,0 +1,175 @@
+\section{Closing and exhausting the boundary graph}\label{sec:closure}
+
+We now use the return rules to assign every normalized section state
+to a cycle or an escape path. In the strings below, $[x,1]$ is
+occasionally abbreviated by its coordinate $x$ when the layer is
+unambiguous. Ordinary cycle multiplicities always come from
+Lemma~\ref{lem:lift}, not from counting normalized cycles.
+
+\subsection{Radius \texorpdfstring{\(R=3q\)}{R=3q}}
+
+The $e=0,3$ strip consists precisely of the multiples of $3$
+in $[-R,R]$. There are $2q+1$ such coordinates. Each is a
+normalized fixed point of time $2$ and negative sign, hence gives
+one ordinary $4$-cycle.
+
+The endpoint cycle
+\[
+ L_{-1}\ \xto{1,+}\ U_1\ \xto{1,-}\ L_{-1}
+\]
+has total time $2$ and negative sign, giving one more $4$-cycle.
+The other periodic endpoint string is
+\begin{equation}\label{eq:fourteen}
+ L_2\ \xto{9,+}\ U_{-2}\ \xto{2,-}\ V_{-2}
+ \ \xto{1,+}\ V_2\ \xto{2,-}\ L_2.
+\end{equation}
+The $U_{-2}$ edge is the $e=4$ strip rule. Its total time is
+$14$ and its sign is positive, giving two $14$-cycles.
+The normalized nodes in these cycles are distinct: the inner
+endpoints are separated by Lemma~\ref{lem:noalias}, the outer
+layer is different, and its two offsets differ by $4$.
+
+To prove exhaustion, consider each other strip residue. A generic
+$e=1$ state first goes to $e=5$ by $x\mapsto x-2$, then to
+the outer layer. Its outer coordinate is at most $R-7<R-2$.
+A generic $e=2$ state goes to $e=4$ by $x\mapsto x-4$,
+then to an outer coordinate at most $R-8<R-2$.
+Both paths escape by \eqref{eq:outer-threshold}.
+Of the generic $e=4,5$ states that go directly to the outer
+layer, only $U_{-2}$ and $U_{-1}$ reach an outer coordinate
+at least $R-2$. The first is in \eqref{eq:fourteen}, while
+the second follows
+\[
+ U_{-1}\longrightarrow V_{-1}\longrightarrow U_2\longrightarrow E.
+\]
+The unused left endpoint path is
+$L_{-2}\to V_1\to L_1\to U_{-1}$, and $V_0$ escapes.
+This accounts for every start in Tables~\ref{tab:strips}
+and~\ref{tab:endpoints}. Thus the boundary multiplicities are
+\[
+ 4:2q+2,\qquad 14:2.
+\]
+
+\subsection{Radius \texorpdfstring{\(R=3q+1\)}{R=3q+1}}
+
+The stationary $e=1$ strip contains exactly $q-1$ coordinates.
+They are congruent to $R$ modulo $6$ and run from $-R+8$ to
+$R-6$ in increments of $6$. At $q=1$ there is no such
+coordinate. Each stationary state has return time $18$ and
+negative sign, giving one ordinary $36$-cycle.
+
+The two normalized cycles
+\[
+ L_0\ \xto{1,+}\ V_1\ \xto{2,-}\ L_0,
+ \qquad
+ V_0\ \xto{1,+}\ U_2\ \xto{2,-}\ V_0
+\]
+each have total time $3$ and negative sign, and give two ordinary
+$6$-cycles in total. The $U_2$ edge here is a generic strip edge,
+not an omitted exceptional start. The endpoint cycle
+\[
+ L_2\ \xto{3,-}\ U_0\ \xto{13,-}\ L_2
+\]
+has time $16$ and positive sign, hence gives two $16$-cycles.
+All these nodes are separated by their layer, offsets and
+Lemma~\ref{lem:noalias}.
+
+\begin{proposition}[The full growing-cycle string]\label{prop:growing}
+For $R=3q+1$, there is exactly one ordinary boundary cycle of
+length $16q+6$. Its normalized section cycle consists of the
+initial edge $L_1\xto{1,+}U_1$ and the interleaved strings
+defined below. No generic $e=0$ or $e=2$ state lies outside
+this cycle.
+\end{proposition}
+\begin{proof}
+For $0\le j\le q$, put
+\[
+ a_j=R+1-6j.
+\]
+These are exactly the generic $e=2$ coordinates, with
+$a_0=R+1$ and $a_q=-R+3$. Their time-$2$ negative edges
+go to $a_j-2$. For $j<q$, this is a generic $e=0$
+coordinate; its time-$6$ negative edge goes to $a_{j+1}$.
+For $j=q$, the target is $a_q-2=-R+1$, namely $L_1$.
+Thus the normalized cycle is
+\begin{align*}
+ L_1&\xto{1,+}[a_0,1]\xto{2,-}[a_0-2,1]
+       \xto{6,-}[a_1,1]\xto{2,-}\cdots\\
+    &\hspace{25mm}\cdots\xto{6,-}[a_q,1]
+       \xto{2,-}L_1.
+\end{align*}
+It has $q+1$ time-$2$ edges, $q$ time-$6$ edges, and
+one time-$1$ edge. Its total time and sign are
+\[
+ T=1+2(q+1)+6q=8q+3,\qquad
+ \eps=(-1)^{2q+1}=-1.
+\]
+Lemma~\ref{lem:lift} gives one ordinary cycle of length $2T=16q+6$.
+The strict decrease by $6$ prevents repetition within either
+string; their different residues separate the two strings.
+The endpoint $L_1$ is outside the generic strip by
+\eqref{eq:complement}. This proves primitivity.
+
+Finally, the entire generic $e=0$ progression runs from
+$-R+7$ to $R-1$, and the entire generic $e=2$ progression
+runs from $-R+3$ to $R+1$, each in steps of $6$.
+They are precisely the nodes just listed. This proves the
+asserted coverage; exhaustion of the other residues below
+then proves uniqueness in the full graph.
+\end{proof}
+
+Every generic $e=5$ state goes to $e=3$, then to an outer
+coordinate at most $R-6<R-1$, and escapes. Among generic
+$e=3,4$ states that go directly to the outer layer, only
+$U_2$ reaches an outer coordinate at least $R-1$; it was
+already assigned to the second $6$-cycle. The remaining endpoint
+path is $V_{-1}\to V_2\to E$, and $L_{-2},L_{-1}$ escape
+immediately. The stationary strip, the growing string, these
+escape paths, and the displayed endpoint cycles exhaust every
+section state. The boundary multiplicities are therefore
+\[
+ 6:2,\qquad 16:2,\qquad 36:q-1,\qquad (16q+6):1.
+\]
+
+\subsection{Radius \texorpdfstring{\(R=3q+2\)}{R=3q+2}}
+
+For a generic $e=3$ coordinate $x$, the target $x+1$ is
+generic of residue $e=4$ and returns to $x$. The two edges
+have times $6,2$ and signs $-,-$. Hence each pair gives
+two ordinary $8$-cycles. The allowed $e=3$ coordinates are
+\[
+ -R+5,\ -R+11,\ \ldots,\ R-5,
+\]
+giving $q$ pairs; at $q=0$ the list is empty. Their partners
+account for all generic $e=4$ coordinates. The residues are
+distinct, so these normalized cycles are primitive.
+
+The endpoint cycles are
+\[
+ L_{-1}\ \xto{1,+}\ V_1\ \xto{1,+}\ U_2\
+ \xto{1,-}\ L_{-1},
+ \qquad
+ L_0\ \xto{1,+}\ U_1\ \xto{3,+}\ L_0.
+\]
+Their total times and signs are $(3,-)$ and $(4,+)$,
+giving one ordinary $6$-cycle and two ordinary $4$-cycles.
+Their nodes are distinct even at $R=2$, by
+Lemma~\ref{lem:noalias} and their different layers.
+
+For exhaustion, a generic $e=1$ state goes to $e=0$ and
+then to an outer coordinate at most $R-3<R$. A generic
+$e=2$ state goes to $e=5$ and then to an outer coordinate
+at most $R-4<R$. Direct outer returns from generic $e=0,5$
+also have outer coordinate below $R$. All these paths escape
+by \eqref{eq:outer-threshold}. The unused endpoint paths are
+\[
+ U_0\longrightarrow L_1\longrightarrow E,\qquad
+ V_0\longrightarrow V_2\longrightarrow E,\qquad
+ L_{-2}\longrightarrow E.
+\]
+Here $L_1$ is a generic $e=5$ state; the arrow from it to $E$
+allows its transient outer return before escape. Every section
+state is assigned, yielding precisely
+\[
+ 4:2,\qquad 6:1,\qquad 8:2q.
+\]

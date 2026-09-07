@@ -3,6 +3,40 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C414--HCS-C418 complete source-manuscript register (2026-09-07)
+
+Five independent substantial contracts now have complete manuscripts and
+61 final PDF pages (9/11/15/17/9), closed nonauthor internal full-manuscript
+reviews, two fresh byte-identical builds each and every-page visual QA.
+See [the five-paper delivery](../continuation_c414_c418_round2/README.md),
+[review adjudication](../continuation_c414_c418_round2/REVIEW_ADJUDICATION.md)
+and [final build report](../continuation_c414_c418_round2/FINAL_BUILD_REPORT.md).
+Actual sealing and Git synchronization are recorded separately in the
+current-state entry; this register does not prefill an uncreated commit.
+Baseline `682a3c99a7aa15cbc7286a4e87fd90fb6320194a`; evaluator v0.2.0,
+SHA256 `6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| Candidate | Complete admitted source increment | Strict tuple | Evidence |
+|---|---|---|---|
+| HCS-C414 | Exact coefficient-independent all-point height distribution, combined pole orders/residues, meromorphic boundary and real-B floor-sensitive count. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c414_c418_round2/papers/C414_height_distribution/main.pdf) · [evaluation](../continuation_c414_c418_round2/evaluations/route_a/HCS-C414/2026-09-07.yaml) |
+| HCS-C415 | Exact all-period reduced ordinary counts for every degree-2p coefficient choice via high-support and semilinear perfected-tail branches. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c414_c418_round2/papers/C415_degree_2p/main.pdf) · [evaluation](../continuation_c414_c418_round2/evaluations/route_a/HCS-C415/2026-09-07.yaml) |
+| HCS-C416 | All clipped core multiplicities, both central phases and exhaustive signed boundary graph, with the unique growing cycle and least radii. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c414_c418_round2/papers/C416_discrete_sine/main.pdf) · [evaluation](../continuation_c414_c418_round2/evaluations/route_a/HCS-C416/2026-09-07.yaml) |
+| HCS-C417 | Seven complete cycle templates, only periods 1,2,3,4,6, sharp eleven-point bound and the full integer-translation equality family. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c414_c418_round2/papers/C417_integral_cubic/main.pdf) · [evaluation](../continuation_c414_c418_round2/evaluations/route_a/HCS-C417/2026-09-07.yaml) |
+| HCS-C418 | Complete seven-row rational cycle atlas, every characteristic collision, sharp fourteen-point locus and the eight/six bounds outside characteristics two and three. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [PDF](../continuation_c414_c418_round2/papers/C418_function_field/main.pdf) · [evaluation](../continuation_c414_c418_round2/evaluations/route_a/HCS-C418/2026-09-07.yaml) |
+
+All five remain source-limited `ROUTE_A_EXPLORATORY`, not target A1/A2
+successes. C414's height observable is not a primitive periodic-orbit
+classification; the other four exact native cycle/count results do not
+provide target prime ownership. A0 controls remain INCOMPLETE, all 45 A2
+metrics are NOT_TESTABLE, every target/Route-B flag is false, and
+`NO_BAD_EULER_OR_ROOT_NUMBER` holds. See [the pinned scope](../continuation_c414_c418_round2/EVALUATION_SCOPE.md)
+and [its independent consistency review](../continuation_c414_c418_round2/REVIEW_EVALUATION.md).
+Closest-source deductions and unavailable final-version limitations remain
+explicit; no worldwide priority certificate is implied. Mapping-class and
+other scouting records are unnumbered, not a sixth paper. The original
+39-file research snapshot and all older sealed batches are unchanged.
+This authorized batch stops at C418; no C419 or Route B begins here.
+
 ## HCS-C409--HCS-C413 complete source-manuscript register (2026-09-06)
 
 Five substantial independent contracts now have complete manuscripts and

@@ -1,0 +1,109 @@
+\section{The exact signed rationality graph}\label{sec:graph}
+Assume $c=-P^2+C$ and fix $P$. Substituting
+$y_i=\sigma_iP+b_i$ into \eqref{eq:recurrence} and comparing the
+coefficients of the linearly independent polynomials $P$ and $1$ gives
+\begin{equation}\label{eq:offsets}
+ 2\sigma_i b_i=\sigma_{i+1}+a\sigma_{i-1},\qquad
+ b_i^2+C=b_{i+1}+a b_{i-1}.
+\end{equation}
+Define transition bits by $\sigma_{i+1}=\sigma_i(-1)^{\delta_i}$.
+The first equation is exactly the offset formula in
+\eqref{eq:word-reconstruction}; equivalently,
+\begin{equation}\label{eq:offset-bits}
+ b_i=(a+1)/2-\delta_i-a\delta_{i-1}.
+\end{equation}
+Put $\Lambda=K_a-C$. Expanding the second equation of
+\eqref{eq:offsets}, using $\delta_j^2=\delta_j$, gives
+\begin{equation}\label{eq:bit-constraint}
+ \Lambda=a^2\delta_{i-1}+2a\delta_i\delta_{i+1}+\delta_{i+2}.
+\end{equation}
+For clarity, the unshifted expansion is
+\[
+ K_a-C=a^2\delta_{i-2}+2a\delta_{i-1}\delta_i+\delta_{i+1}.
+\]
+Thus \eqref{eq:bit-constraint} is an identity over
+$\mathbb Z[1/2]$ before specialization, not a characteristic-zero
+argument applied without checking its denominators.
+
+Take the eight states $V=\{0,1\}^3$. A state $uvw$ has an edge
+to $vwz$ if and only if
+\begin{equation}\label{eq:edge}
+ \Lambda=a^2u+2avw+z.
+\end{equation}
+Table~\ref{tab:edges} lists all sixteen potential edges. The two
+outgoing labels at a state differ by one, and the two incoming labels
+at a prescribed successor differ by $a^2$. Both differences are
+nonzero. Thus indegree and outdegree are at most one, and the recurrent
+part is a disjoint union of simple directed cycles.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+State & Successor for $z=0$: required $\Lambda$
+      & Successor for $z=1$: required $\Lambda$\\
+\midrule
+$000$ & $000$: $0$ & $001$: $1$\\
+$001$ & $010$: $0$ & $011$: $1$\\
+$010$ & $100$: $0$ & $101$: $1$\\
+$011$ & $110$: $2a$ & $111$: $2a+1$\\
+$100$ & $000$: $a^2$ & $001$: $a^2+1$\\
+$101$ & $010$: $a^2$ & $011$: $a^2+1$\\
+$110$ & $100$: $a^2$ & $101$: $a^2+1$\\
+$111$ & $110$: $a^2+2a$ & $111$: $(a+1)^2$\\
+\bottomrule
+\end{tabular}
+\caption{The full rationality edge table. For fixed $a$ and
+$\Lambda=K_a-C$, retain exactly the edges with the displayed value
+of $\Lambda$. The resulting graph is a partial permutation over
+every field allowed by the theorem.}
+\label{tab:edges}
+\end{table}
+
+The bit graph has forgotten a global sign. Restore it by defining
+\begin{equation}\label{eq:label}
+ E(\varepsilon;u,v,w)=
+ \left(\varepsilon P+\frac{(-1)^v+a(-1)^u}{2},\quad
+ \varepsilon(-1)^vP+\frac{(-1)^w+a(-1)^v}{2}\right),
+ \qquad \varepsilon\in\{1,-1\}.
+\end{equation}
+
+\begin{proposition}[Exact restriction and injectivity]\label{prop:exact}
+The sixteen labels in \eqref{eq:label} are distinct points of
+$k[t]^2$. Every rational periodic point is among them. Their exact
+transition rule is
+\begin{equation}\label{eq:lift}
+ H_{a,c}E(\varepsilon;u,v,w)
+ =E(\varepsilon(-1)^v;v,w,z)
+ \quad\Longleftrightarrow\quad
+ \Lambda=a^2u+2avw+z.
+\end{equation}
+More generally, an image of a signed label can be another signed
+label only in the shifted form on the right of \eqref{eq:lift}.
+Consequently the directed signed cycles are exactly the ordinary
+rational cycles of $H_{a,c}$.
+\end{proposition}
+\begin{proof}
+The leading coefficient of the first coordinate of $E$ determines
+$\varepsilon$ relative to the fixed nonconstant $P$. The leading
+coefficient ratio of the two coordinates determines $v$. The first
+constant offset then determines $u$, since $a\ne0$ and $1\ne-1$;
+the second offset determines $w$. This proves injectivity, including
+the cases $a=\pm1$ and characteristic three.
+
+For an edge satisfying \eqref{eq:edge}, direct substitution of
+\eqref{eq:label}, or equations \eqref{eq:offsets}--\eqref{eq:edge},
+gives the equality in \eqref{eq:lift}. Conversely, suppose the image
+is $E(\varepsilon';u',v',w')$. The two leading coefficients first
+give $\varepsilon'=\varepsilon(-1)^v$ and $v'=w$. Comparing the
+first constant offset then gives $u'=v$, using $a\ne0$. Set $z=w'$.
+The remaining constant equation is precisely \eqref{eq:edge}.
+The order of this recovery matters: one constant offset alone need
+not determine two bits.
+
+Proposition~\ref{prop:branches} and equations \eqref{eq:offsets}
+show that every rational periodic point is one of these signed labels.
+An actual cycle therefore follows the exact signed edges. In the
+other direction, following a closed signed path proves the recurrence
+at every point and constructs an actual cycle of the original map.
+\end{proof}

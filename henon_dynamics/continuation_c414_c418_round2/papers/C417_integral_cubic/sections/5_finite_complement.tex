@@ -1,0 +1,122 @@
+\section{The exact finite complement}
+\label{sec:finite}
+
+Only diameters $2\le D\le15$ remain. If there is no interior
+coordinate, Lemma~\ref{lem:affine} already gives the two-symbol bound.
+Otherwise some $t\in E'\cap\{1,\ldots,D-1\}$ exists, and
+\eqref{eq:secant-bound} implies
+\[
+ |t-r|\le\frac{2D}{t(D-t)}
+ \le\frac{2D}{D-1}\le4.
+\]
+Consequently $-3\le r\le D+3$. Combining this with the endpoint
+conditions gives the complete finite ranges
+\begin{equation}
+ \begin{gathered}
+ 2\le D\le15,\qquad -3\le r\le D+3,\qquad 0\le A\le2D,\\
+ q\in\{-2,-1,0,1,2\},\qquad 0\le A+qD\le2D.
+ \end{gathered}
+ \label{eq:finite-ranges}
+\end{equation}
+This bounds the normalized secant parameters after the global
+reduction; it does not impose a cutoff on $a,b,c$.
+
+For each tuple define
+\begin{equation}
+ S=\{t\in\Z:0\le t\le D,\ |t(t-D)(t-r)|\le2D\}
+ \label{eq:small-symbols}
+\end{equation}
+and the partial map on $S^2$
+\begin{equation}
+ F(x,y)=(y,A+qy+y(y-D)(y-r)-x).
+ \label{eq:small-graph}
+\end{equation}
+An image leaving $S^2$ has no outgoing graph edge. Every actual
+periodic point of a global-extrema tuple lies on a cycle of this
+graph. Conversely, every graph cycle is an actual polynomial orbit.
+Retain a tuple only if the union of its graph cycles uses both $0$
+and $D$. This is a necessary condition for an actual global-extrema
+tuple, and hence cannot discard the periodic set of any map under
+consideration.
+
+\begin{proposition}[Finite arithmetic certificate]
+\label{prop:finite}
+The complete computation for \eqref{eq:finite-ranges} gives
+Table~\ref{tab:small}. Every retained graph cycle uses at most
+three symbols. Its least period belongs to $\{1,2,3,4,6\}$.
+The largest total number of graph-periodic vertices is eleven,
+attained at the single tuple
+\begin{equation}
+ (D,r,A,q)=(4,2,6,-1).
+ \label{eq:max-tuple}
+\end{equation}
+The cycles of this tuple are
+\begin{equation}
+ (2),\quad (0,3),\quad (1,4),\quad (0,2,4),\quad (0,4,2).
+ \label{eq:max-words}
+\end{equation}
+\end{proposition}
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}r r r r c@{}}
+\toprule
+$D$ & Compatible tuples & Both graph ends & Maximum points & Periods\\
+\midrule
+$2$  & $117$  & $51$  & $9$  & $1,2,3,4,6$\\
+$3$  & $170$  & $56$  & $9$  & $1,2,3,4$\\
+$4$  & $231$  & $63$  & $11$ & $1,2,3,4,6$\\
+$5$  & $300$  & $68$  & $8$  & $1,2,3,4$\\
+$6$  & $377$  & $75$  & $9$  & $1,2,3,4,6$\\
+$7$  & $462$  & $78$  & $8$  & $1,2,3,4$\\
+$8$  & $555$  & $85$  & $9$  & $1,2,3,4,6$\\
+$9$  & $656$  & $90$  & $8$  & $1,2,3,4$\\
+$10$ & $765$  & $97$  & $9$  & $1,2,3,4,6$\\
+$11$ & $882$  & $102$ & $8$  & $1,2,3,4$\\
+$12$ & $1007$ & $109$ & $9$  & $1,2,3,4,6$\\
+$13$ & $1140$ & $114$ & $8$  & $1,2,3,4$\\
+$14$ & $1281$ & $121$ & $9$  & $1,2,3,4,6$\\
+$15$ & $1430$ & $126$ & $8$  & $1,2,3,4$\\
+\bottomrule
+\end{tabular}
+\caption{The full small-diameter complement: 9,373 tuples satisfy the
+endpoint value inequalities and 1,235 use both endpoints among graph
+cycles. Point maxima and period lists are taken after this necessary
+filter. In every row the maximum number of symbols per cycle is three.}
+\label{tab:small}
+\end{table}
+
+\begin{proof}
+For each tuple in \eqref{eq:finite-ranges}, form \eqref{eq:small-symbols},
+evaluate \eqref{eq:small-graph} exactly, and extract every directed
+cycle. Retain precisely those tuples passing the endpoint filter.
+Sum the lengths of the distinct cycles to count periodic vertices.
+Appendix~\ref{app:certificate} supplies the complete integer
+pseudocode, including the extraction algorithm, the filter, the
+maximizer update and the period and symbol statistics. Its exact
+evaluation is Table~\ref{tab:small}, \eqref{eq:max-tuple} and
+\eqref{eq:max-words}.
+
+The first count in each row can also be checked directly. There are
+$D+7$ choices for $r$. At $q=-2,-1,0,1,2$, the numbers of allowed
+$A$ values are respectively $1,D+1,2D+1,D+1,1$. Their sum is
+$4D+5$, giving $(D+7)(4D+5)$ tuples. The graph algorithm, rather
+than this input count, establishes every cycle statistic.
+
+All arithmetic decisions are integer equalities or inequalities.
+The graph is finite, and the extraction lemma in the appendix proves
+that it records every cycle exactly once and records its least period.
+No assumed upper bound eleven enters the computation of the maximum;
+the maximum and all tuples attaining it are accumulated from the graphs.
+The reduction preceding \eqref{eq:finite-ranges} proves that this
+finite computation covers the entire remaining family.
+\end{proof}
+
+Together, Lemmas~\ref{lem:integrality}--\ref{lem:affine} and
+Propositions~\ref{prop:large-computation}--\ref{prop:finite} prove
+the eleven-point bound, the possible period list and the per-cycle
+three-symbol restriction. Their roles are different: the analytic
+arguments prove the finite reduction, while the exact certificate
+evaluates its explicitly bounded graphs. The next section uses
+these established restrictions to derive the full coefficient
+conditions without any bound on the original coefficients.

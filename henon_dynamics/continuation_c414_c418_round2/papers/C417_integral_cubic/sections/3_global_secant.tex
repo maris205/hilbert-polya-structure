@@ -1,0 +1,118 @@
+\section{Integrality and the global secant}
+\label{sec:secant}
+
+The normalization in this section uses the coordinate set of all
+periodic points of one map. Choosing the extrema separately for
+individual cycles would not control their total number.
+
+\begin{lemma}[Integral points and a common finite box]
+\label{lem:integrality}
+Every point in $\cP_f$ is integral, and
+\[
+ \cP_f\subseteq ([-R,R]\cap\Z)^2,
+ \qquad R=|a|+|b|+|c|+2.
+\]
+In particular, $\cP_f$ is finite.
+\end{lemma}
+\begin{proof}
+Take any periodic coordinate sequence $(x_i)$ satisfying
+\eqref{eq:recurrence}. For a prime $p$, suppose
+$T=\max_i|x_i|_p>1$. At an index attaining $T$, the leading term
+$x_i^3$ has $p$-adic absolute value $T^3$. The lower terms have
+absolute values at most $T^2$, $T$ and $1$, since the coefficients
+are integral. The ultrametric inequality with a unique largest term
+therefore gives $|f(x_i)|_p=T^3$. But
+$|x_{i-1}+x_{i+1}|_p\le T$, a contradiction. This holds at every
+prime, so all rational coordinates are integers.
+
+At the real place let $M=\max_i|x_i|$. From the recurrence at an
+index attaining $M$,
+\[
+ M^3\le |b|M^2+(|c|+2)M+|a|.
+\]
+If $M\ge1$, the right side is at most $RM^2$, so $M\le R$.
+If $M<1$, the same bound holds since $R\ge2$. The bound is common
+to every orbit of this polynomial. Thus the entire periodic set lies
+in the stated finite lattice square.
+\end{proof}
+
+If $\cP_f$ is empty, the bounds in Theorem~\ref{thm:main} hold
+without further work. If the union $E$ of all its coordinate values
+has one element $u$, the periodic set is just the diagonal fixed point
+$(u,u)$. Assume from now on that $E$ has at least two elements, and set
+\begin{equation}
+ m=\min E,\qquad D=\max E-m\ge1,\qquad
+ g(t)=f(t+m)-2m.
+ \label{eq:normalization}
+\end{equation}
+Writing $T_m(x,y)=(x+m,y+m)$, we have
+$H_g=T_{-m}H_fT_m$. The translated global coordinate set
+$E'=E-m$ lies in $\{0,\ldots,D\}$ and contains both endpoints.
+The polynomial $g$ remains monic and integral. This is an internal
+conjugacy, not a restriction on the original quadratic coefficient.
+
+\begin{lemma}[Integral secant root]
+\label{lem:secant}
+There are integers $A,q,r$ such that
+\begin{align}
+ g(t)&=A+qt+t(t-D)(t-r),\label{eq:secant}\\
+ -2\le q\le2,\qquad 0&\le A\le2D,\qquad
+ 0\le A+qD\le2D.\label{eq:endpoint-conditions}
+\end{align}
+Every $t\in E'$ satisfies
+\begin{equation}
+ |t(t-D)(t-r)|\le2D.
+ \label{eq:secant-bound}
+\end{equation}
+\end{lemma}
+\begin{proof}
+When $t$ occurs in a cycle, $g(t)$ is the sum of its two neighbors,
+both in $[0,D]$. Hence $0\le g(t)\le2D$ for every $t\in E'$.
+Set $A=g(0)$ and $q=(g(D)-g(0))/D$. Since $g$ has integer
+coefficients, $D$ divides $g(D)-g(0)$; the endpoint bounds give
+\eqref{eq:endpoint-conditions}. The monic cubic $g(t)-A-qt$
+vanishes at $0$ and $D$. If its quadratic coefficient is $B$, its
+third root is $r=-B-D\in\Z$, proving \eqref{eq:secant}.
+
+The line $A+qt$ interpolates the endpoint values $g(0)$ and $g(D)$.
+It belongs to $[0,2D]$ throughout $[0,D]$. For an actual coordinate
+$t\in E'$, both $g(t)$ and this line value are in that interval.
+Their difference is the cubic product in \eqref{eq:secant}, giving
+\eqref{eq:secant-bound}.
+\end{proof}
+
+\begin{lemma}[The affine-root case]
+\label{lem:affine}
+If $E'\subseteq\{0,D,r\}$, there are at most nine periodic points.
+Every least period is in $\{1,2,3,4,6\}$, and each cycle uses at
+most three symbols. If $E'\subseteq\{0,D\}$, the point bound is
+four, irrespective of $r$.
+\end{lemma}
+\begin{proof}
+At a root of the cubic remainder the recurrence becomes
+\begin{equation}
+ x_{i+1}=A+qx_i-x_{i-1}.
+ \label{eq:affine-recurrence}
+\end{equation}
+At most three coordinate values give at most nine ordered pairs.
+For $q\ne2$, subtract the stationary value $A/(2-q)$; the resulting
+homogeneous pair recurrence has matrix
+\[
+ L_q=\begin{pmatrix}0&1\\-1&q\end{pmatrix}.
+\]
+Multiplication gives $L_{-1}^3=I$, $L_0^4=I$ and $L_1^6=I$.
+The least periods divide the indicated orders. For $q=-2$ the
+homogeneous coordinate solutions are
+$(\alpha+\beta i)(-1)^i$; a periodic solution must have
+$\beta=0$, so its period divides two. For $q=2$, summing
+\eqref{eq:affine-recurrence} around a cycle gives $nA=0$ and hence
+$A=0$. Consecutive differences are then constant; summing them over
+one period makes that constant zero. The sequence is fixed.
+The union of all these possible divisors is $\{1,2,3,4,6\}$.
+With only two symbols there are at most four ordered pairs, and the
+same recurrence applies.
+\end{proof}
+
+The last assertion includes $D=1$. The one-symbol and empty cases
+already cover $D=0$ and absence of extrema. These cases are not sent
+to a computation that assumes an interior symbol.

@@ -1,0 +1,130 @@
+\section{Unique degree valleys and their multiplicities}\label{sec:valleys}
+Write the entire orbit as $H^jP=(x_j,x_{j+1})$ and set
+$b_j=\max(0,\deg x_j)$. Then
+\begin{equation}\label{eq:recurrence}
+ x_{j+1}+a x_{j-1}=f(x_j),\qquad j\in\Z.
+\end{equation}
+If $b_j\ge1$ and $b_j\ge b_{j+1}$, the right side has degree
+$db_j>b_{j+1}$, so $b_{j-1}=db_j$. Repetition forces geometric
+growth in the backward direction. If $b_j\le b_{j+1}$ and
+$b_{j+1}\ge1$, the same comparison gives $b_{j+2}=db_{j+1}$
+and geometric forward growth. Two consecutive zeros would put the
+point in $\F_q^2$, which is invariant under both maps in
+\eqref{eq:map}; the entire orbit would consist of constant points.
+
+Every nonconstant orbit therefore escapes in both directions.
+Indeed, if one direction has not yet been covered by a nondecreasing
+adjacent pair in that orientation, failure to find such a pair would
+give an infinite strictly decreasing sequence of nonnegative integers.
+A positive plateau instead forces escape, and a zero plateau implies
+constant coordinates. The global minimum of $(b_j)$ is attained.
+Both-sided escape also excludes periodicity, so all integer iterates
+on a nonconstant orbit are distinct.
+
+\begin{proposition}[Disjoint orbit representatives]\label{prop:valleys}
+Every nonconstant orbit contains exactly one representative of one
+of the following two types, and never representatives of both types.
+\begin{enumerate}
+\item An \emph{edge}: $(x,y)$ with $m=\deg x\ge1$,
+$n=\deg y\ge1$, $m<dn$ and $n<dm$.
+\item A \emph{turn}: $(x,y)$ with $M=\deg x\ge1$,
+$d\max(0,\deg y)\le M$ and $\deg(f(y)-a x)=M$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+At a strict minimum $b_j=n$, let the neighboring degrees be $b,c>n$.
+For $n\ge1$ and $b\ne c$, the recurrence forces
+$\max(b,c)=dn$. The pair formed from $x_j$ and its smaller
+neighbor has positive degrees satisfying both strict edge
+inequalities. If $b=c=M$, cancellation in the recurrence forces
+$M\ge dn$ for $n\ge1$. For $n=0$ the same inequality holds
+and the equal-neighbor case is forced, since unequal positive
+neighbors could not have a constant sum. The ordered pair
+$(x_{j-1},x_j)$ is then a turn. If a minimum occurs at two
+consecutive equal degrees, those degrees are positive and the
+adjacent pair is an edge. Three consecutive equal positive
+degrees contradict the escape comparison. These cases exhaust
+the minima and establish existence.
+
+For uniqueness, an edge of degrees $(m,n)$ has exterior degrees
+$dm$ on the left and $dn$ on the right, and all farther degrees
+grow by $d$. No other adjacent pair satisfies the edge inequalities,
+and no turn occurs. A turn has the pattern
+\begin{equation}\label{eq:turn-pattern}
+ \ldots,d^2M,dM,M,n,M,dM,d^2M,\ldots,
+ \qquad 0\le n\le M/d.
+\end{equation}
+The falling-to-rising orientation selects a unique ordered pair.
+The reversed adjacent pair is not another turn, and the pattern
+has no edge. This proves disjointness and uniqueness.
+\end{proof}
+
+\begin{lemma}[Heights at all shifts]\label{lem:heights}
+For an edge representative of degrees $(m,n)$,
+\begin{equation}\label{eq:edge-height}
+ (\hh^-(P),\hh^+(P))=(m,n),\qquad
+ \hh(H^kP)=d^{-k}m+d^kn.
+\end{equation}
+For a turn representative of degree $M$,
+\begin{equation}\label{eq:turn-height}
+ (\hh^-(P),\hh^+(P))=(M,M/d),\qquad
+ \hh(H^kP)=M(d^{-k}+d^{k-1}).
+\end{equation}
+Constants have height zero. For every polynomial point,
+$h(P)\le\hh(P)$. An edge uniquely minimizes its total height
+on its orbit; a turn has exactly two adjacent minima, at $k=0,1$.
+\end{lemma}
+\begin{proof}
+The geometric degree patterns prove both limits directly.
+For a turn, forward geometric growth begins one step later,
+accounting for the factor $1/d$. Shifting either limit gives
+the displayed formulas for every $k\in\Z$. In those patterns,
+the largest coordinate degree away from the center is one of
+the two positive height summands. At the center it is at most
+their sum, proving $h\le\hh$. This also gives finiteness of
+bounded-height sets, contained in the degree box
+$h(P)\le\lfloor B\rfloor$.
+
+For an edge, $1/d<n/m<d$. The first height difference in
+each direction from $k=0$ is strictly positive, and subsequent
+differences increase. For a turn the formula is invariant
+under $k\mapsto1-k$ and increases away from $k=0,1$.
+\end{proof}
+
+There are $(q-1)q^m$ polynomials of degree $m\ge1$ and $q$
+constants. Every pair in the open edge cone is admissible, so
+its exact multiplicity is $(q-1)^2q^{m+n}$. To count turns
+of degree $M$, first impose $d\deg y<M$. The second turn
+condition is automatic and the number of pairs is
+\begin{equation}\label{eq:strict-turn-count}
+ (q-1)q^M q^{\lfloor(M-1)/d\rfloor+1}.
+\end{equation}
+If $M=dr$ and $\deg y=r\ge1$, exactly one nonzero leading
+coefficient of $x$ would cancel that of $f(y)$. For each $y$
+there are therefore $(q-2)q^M$ choices of $x$, giving
+$(q-1)(q-2)q^{(d+1)r}$ boundary pairs. At $q=2$ this
+boundary portion is zero; the strict portion is still present.
+Adding the two disjoint portions proves \eqref{eq:turn-weights}.
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Representative & Multiplicity & Height at integer shift $k$\\
+\midrule
+Edge $(m,n)$ & $(q-1)^2q^{m+n}$ & $d^{-k}m+d^kn$\\
+Turn $M$ & $D_M$ of \eqref{eq:turn-weights} & $M(d^{-k}+d^{k-1})$\\
+Constant point & $q^2$ in total & $0$\\
+\bottomrule
+\end{tabular}
+\caption{A disjoint census of all polynomial points. Edge and turn
+representatives satisfy Proposition~\ref{prop:valleys}; each of
+their integer shifts is a distinct point. The two equal minimum
+heights of a turn are two points, not two representatives.}
+\label{tab:valleys}
+\end{table}
+
+Only degrees and nonvanishing of the specified coefficients entered
+these counts. They hold over every prime power, including when
+$f$ is inseparable. Summing all shifts and the $q^2$ constant
+points proves Theorem~\ref{thm:distribution}.

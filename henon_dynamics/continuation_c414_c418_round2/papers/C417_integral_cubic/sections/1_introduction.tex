@@ -1,0 +1,104 @@
+\section{The full cubic classification}
+\label{sec:introduction}
+
+The rational periodic points of an individual polynomial automorphism
+can be finite even when a direct search depends strongly on its
+coefficients. For the full monic integral conservative cubic family,
+that dependence can be removed: every cycle has one of seven explicit
+forms, and the largest possible union of cycles has eleven points.
+The sharp bound concerns all cycles of the same map, not merely a
+bound on their individual lengths.
+
+Throughout the paper, fix
+\begin{equation}
+ f(t)=t^3+bt^2+ct+a,\qquad a,b,c\in\Z,\qquad
+ H_f(x,y)=(y,f(y)-x).
+ \label{eq:family}
+\end{equation}
+Its Jacobian determinant is $+1$ and its inverse is
+$(x,y)\mapsto(f(x)-y,x)$. The domain is all of $\Q^2$.
+Let $\cP_f=\Per(H_f,\Q^2)$ be the union of its periodic orbits.
+All periods below are least periods for ordinary iteration by $H_f$.
+An orbit with coordinate word $(v_0,\ldots,v_{n-1})$ consists of
+the points $(v_i,v_{i+1})$, with indices taken modulo $n$.
+The word is identified under cyclic rotation, never under reversal.
+Its recurrence is
+\begin{equation}
+ v_{i-1}+v_{i+1}=f(v_i).
+ \label{eq:recurrence}
+\end{equation}
+
+\begin{theorem}[All coefficients, all rational periodic points]
+\label{thm:main}
+For every polynomial in \eqref{eq:family}, the following statements hold.
+\begin{enumerate}
+\item Every rational periodic point is integral. Each cycle uses at
+most three distinct coordinate values, and all its possibilities are
+the seven rows of Table~\ref{tab:templates}.
+\item Every least period belongs to $\{1,2,3,4,6\}$; each of these
+five periods occurs for a member of the family.
+\item The entire periodic set satisfies $\#\cP_f\le11$. Equality
+holds if and only if there is $h\in\Z$ such that
+\begin{equation}
+ f(t)=(t-h)^3-5(t-h)+2h.
+ \label{eq:equality-family}
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+In the template table, the parameters are integers and every displayed
+condition is an identity of polynomials, except the fixed-point
+condition $f(u)=2u$. For compactness set
+\begin{equation}
+ R_{u,v}(t)=(t-u)(t-v)(t+u+v+b).
+ \label{eq:Ruv}
+\end{equation}
+The $b$ in this expression is the original quadratic coefficient of
+$f$. To obtain the cycles of one given polynomial, take the union of
+all rows whose conditions hold. For the three-distinct-symbol
+three-cycle, the identity forces $b=-(u+v+w)$; it leaves no extra
+quadratic coefficient free.
+
+\begin{table}[htbp]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c p{5.2cm} p{9.0cm}@{}}
+\toprule
+Period & Coordinate word and ranges & Exact condition on $f(t)$\\
+\midrule
+$1$ & $(u)$, $u\in\Z$ & $f(u)=2u$\\[3pt]
+$2$ & $(u,v)$, $u<v$ & $-2t+2(u+v)+R_{u,v}(t)$\\[3pt]
+$3$ & $(u,u,v)$, $u\ne v$ & $-t+(2u+v)+R_{u,v}(t)$\\[3pt]
+$3$ & $(u,v,w)$ and $(u,w,v)$, $u<v<w$
+ & $-t+(u+v+w)+(t-u)(t-v)(t-w)$\\[3pt]
+$4$ & $(u,u,v,v)$, $u<v$ & $(u+v)+R_{u,v}(t)$\\[3pt]
+$4$ & $(h-k,h,h+k,h)$, $h\in\Z$, $k\ge1$
+ & $2h+(t-h)((t-h)^2-k^2)$\\[3pt]
+$6$ & $(h-k,h-k,h,h+k,h+k,h)$,\newline $h\in\Z$, $k\ge1$
+ & $t+h+(t-h)((t-h)^2-k^2)$\\
+\bottomrule
+\end{tabular}
+\caption{The complete template list. In each nonfixed row, the last
+column equals $f(t)$. The two orientations in the fourth row are
+different ordinary cycles. The ranges exclude lower-period
+degeneracies.}
+\label{tab:templates}
+\end{table}
+
+The proof has three parts. First, integrality and a real escape bound
+make the whole periodic set finite. Its two global coordinate extrema
+then give an integral secant slope and an integral third root of the
+cubic remainder. Second, the secant inequality forces either an affine
+recurrence on three roots or one of finitely many endpoint graphs.
+For large diameters these are exact graphs over $\Z[D]$, not graphs
+sampled at one large integer. The remaining diameters have proved
+finite parameter ranges. Third, short-word interpolation gives all
+templates, and the unique maximizing graph gives
+\eqref{eq:equality-family}.
+
+The finite arithmetic tables are part of the proof. Their complete
+enumeration is specified in Appendix~\ref{app:certificate}; every
+input range is justified before it is used. They involve no floating-point
+decision, guessed period cutoff, or bounded scan through the
+original coefficients. The manuscript separates the analytic
+reduction from the exact finite computation.
