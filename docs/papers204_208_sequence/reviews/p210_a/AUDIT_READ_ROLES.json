@@ -1,0 +1,20 @@
+{
+  "schema": "p210-a-audit-read-roles-v1",
+  "read_ledger": "AUDIT_READS.json.gz",
+  "ledger_sha256": "5592833bcd0dde7c2c995ac908446459af44320703e6c8bb195e865acc9de696",
+  "default_role": "actual observed file bytes; retained as recorded; known scientific/build input dictionaries checked before and after separately",
+  "exact_exceptions": [
+    {
+      "path": "execution/audit01/stdout",
+      "role": "auditor own open output before final result emission; NOT an input dependency",
+      "observed_size": 0,
+      "observed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final_sha256": "5438c5abf2b66c97b472fa7be09c26f3717a0d6c2ce98efa5808f878d877c7d3",
+      "final_native_result": "execution/audit01/RESULT.json",
+      "explanation": "The auditor's final recursive output inventory observed its own still-empty stdout file, then printed the final summary. Its stdout was not read to validate mathematics or produce a PASS. The immutable historical read ledger is not rewritten to pretend the final output already existed."
+    }
+  ],
+  "actual_scope_check": "execution/audit_roles01/stdout",
+  "scope_check_result": "exactly one owned-path difference: the above self-output role; no scientific/build input change",
+  "prohibition": "No wildcard role exemptions or changed-input relaxation. Root may reread all other paths and inspect every native command independently."
+}

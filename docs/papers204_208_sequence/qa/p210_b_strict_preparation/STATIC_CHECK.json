@@ -1,0 +1,163 @@
+{
+  "role": "ACTUAL_STATIC_SOURCE_ADAPTATION_CHECK_NOT_EXECUTION",
+  "command": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast\nfrom datetime import datetime, timezone\nfrom hashlib import sha256\nimport json\nimport os\nfrom pathlib import Path\nimport re\nr = Path('/root/autodl-tmp/symbolic_dynamics')\nqa = r / 'docs/papers204_208_sequence/qa'\nnew = qa / 'p210_b_strict_preparation/run_pair.py'\nold = qa / 'p210_a_strict_preparation/run_pair.py'\nhelper = qa / 'p210_checkpoint_stage_revision_01/process_support.py'\nb = r / 'docs/papers204_208_sequence/reviews/p210_b'\ndef pin(p):\n    data = p.read_bytes()\n    return {'sha256': sha256(data).hexdigest(), 'bytes': len(data)}\ndef functions(p):\n    tree = ast.parse(p.read_bytes())\n    return tree, {n.name: ast.dump(n, include_attributes=False) for n in tree.body if isinstance(n, ast.FunctionDef)}\ntree, fn = functions(new)\n_, fo = functions(old)\n_, fh = functions(helper)\nchanged = {'select_role', 'preflight', 'check_original_output', 'child', 'command', 'seal', 'run'}\nadded = {'group_members', 'settle_group'}\nassert set(fn) == set(fo) | added\nassert added.isdisjoint(fo)\nassert {name for name in fo if fo[name] != fn[name]} == changed\nassert all(fn[name] == fh[name] for name in added)\nassert len(set(fo) - changed) == 18\ncompile(tree, str(new), 'exec')\nspec = next(ast.literal_eval(n.value) for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'SPECS' for t in n.targets))\nassert set(spec) == {'p210_b'}\nspec = spec['p210_b']\nassert spec['payloads'] == 407\nassert spec['manifest_sha'] == '81b5f97a6b25d6f9e82db87001da1a54668c01268038694d4b8a3b61006b02c3'\nassert pin(b / 'SHA256SUMS')['sha256'] == spec['manifest_sha']\nrows = {}\nmanifest_bytes = (b / 'SHA256SUMS').read_bytes()\nassert manifest_bytes.endswith(b'\\n')\nfor line in manifest_bytes.decode().split('\\n')[:-1]:\n    match = re.fullmatch(r'([0-9a-f]{64})  (.+)', line)\n    assert match\n    digest, name = match.groups()\n    p = Path(name)\n    assert not p.is_absolute() and '..' not in p.parts and name != 'SHA256SUMS' and name not in rows\n    rows[name] = digest\nactual_files = set()\nfor p in b.rglob('*'):\n    assert not p.is_symlink()\n    if p.is_file():\n        actual_files.add(p.relative_to(b).as_posix())\nassert len(rows) == 407 and actual_files == set(rows) | {'SHA256SUMS'}\nnames = ['SHA256SUMS', 'verify.py', 'verify.committed.py', 'PARAMETERS.json', 'CANONICAL.json',\n         'COMPLETE_SOURCE_COMMITMENT.actual.json', 'PRE_COMPARISON_PROOF_CODE_COMMITMENT.actual.json',\n         'INDEPENDENCE_COMMITMENT.md', 'INPUT_PINS.sha256', 'REPORT.md', 'FINDINGS.json', 'REPLAY_KEYS.json',\n         'produce01/commands/run_1/stdout']\npaths = [b / name for name in names] + [old, helper, r / 'docs/research_state/WORKFLOW.md', r / 'docs/papers204_208_sequence/ARTIFACT_CONTRACT.md']\ninputs = {str(p): pin(p) for p in paths}\nfor name in names:\n    if name != 'SHA256SUMS':\n        assert inputs[str(b / name)]['sha256'] == rows[name]\nfor name, key in [('verify.py', 'verifier_sha'), ('verify.committed.py', 'verifier_sha'), ('PARAMETERS.json', 'parameters_sha'), ('CANONICAL.json', 'canonical_sha')]:\n    assert inputs[str(b / name)]['sha256'] == spec[key]\nassert inputs[str(b / 'CANONICAL.json')]['bytes'] == spec['canonical_bytes'] == 6475161\nassert inputs[str(b / 'produce01/commands/run_1/stdout')] == inputs[str(b / 'CANONICAL.json')]\nscientific_tree = ast.parse((b / 'verify.py').read_bytes())\nscientific_imports = sorted({alias.name for n in ast.walk(scientific_tree) if isinstance(n, ast.Import) for alias in n.names} | {n.module for n in ast.walk(scientific_tree) if isinstance(n, ast.ImportFrom)})\nassert scientific_imports == ['collections', 'functools', 'json', 'pathlib', 'sys']\ncompile(scientific_tree, str(b / 'verify.py'), 'exec')\ndata = json.loads((b / 'CANONICAL.json').read_bytes())\nassert data['checks'] == spec['checks'] == 51129 and data['states'] == 4095\nassert [row['mass'] for row in data['census']] == list(range(1, 13))\nassert sum(len(row['states']) for row in data['census']) == 4095\nassert sum(len(row['triangular_codes']) for row in data['census']) == 265\ncommitted = json.loads((b / 'COMPLETE_SOURCE_COMMITMENT.actual.json').read_bytes())\nassert committed['author_A_code_or_canonical_semantics_read'] is False\nassert committed['files']['verify.py'] == spec['verifier_sha']\nassert committed['files']['PARAMETERS.json'] == spec['parameters_sha']\ncomparison = json.loads((b / 'PRE_COMPARISON_PROOF_CODE_COMMITMENT.actual.json').read_bytes())\nassert comparison['author_A_verifier_or_canonical_body_semantics_read'] is False\nassert comparison['pins']['CANONICAL.json'] == spec['canonical_sha']\nfindings = json.loads((b / 'FINDINGS.json').read_bytes())\nassert findings['current_open_counts'] == {'Critical': 0, 'Major': 0, 'Minor': 0}\nassert findings['accepted_delta'] is False and findings['root_response_reviewed'] is False\nassert 'PASS_NARROW_INITIAL_PENDING_ROOT_RESPONSE' in (b / 'REPORT.md').read_text()\ntarget = qa / 'root_replays/p210_b_strict_pair_01'\nassert not os.path.lexists(target)\nassert {p.name for p in new.parent.iterdir()} == {'run_pair.py', 'README.md'}\nresult = {'status': 'PASS_STATIC_ONLY_NOT_EXECUTED', 'observed_utc': datetime.now(timezone.utc).isoformat(),\n          'scope': 'AST comparison and compile-only; sealed B manifest syntax/inventory and selected original byte pins; original canonical parsed as data only. No harness import/preflight/run, scientific execution, native comparison pair or runtime inventory.',\n          'inputs': inputs, 'source': pin(new), 'source_lines': len(new.read_bytes().splitlines()),\n          'unchanged_functions': sorted(set(fo) - changed), 'changed_functions': sorted(changed),\n          'added_helpers_ast_identical_to_accepted_source': sorted(added),\n          'scientific_imports': scientific_imports, 'initial_B_payloads': len(rows), 'initial_B_physical_files': len(actual_files),\n          'B_manifest_payload_hashes_checked_here': len(names) - 1,\n          'whole_B_payload_hash_closure_deferred_to_root_preflight': True,\n          'original_canonical_metadata': {'checks': data['checks'], 'states': data['states'], 'masses': [row['mass'] for row in data['census']], 'triangular_objects': 265, 'same_sha256_and_size_as_actual_original_producer_stdout': True},\n          'expected_native_commands': 10, 'expected_output_payloads': 59,\n          'target_absent': str(target), 'fresh_scientific_executions': 0, 'preparation_preflight_executed': False,\n          'owner_status': 'OWNER_AMBER', 'external_status': 'HOLD_EXTERNAL'}\nprint(json.dumps(result, sort_keys=True))\nPY",
+  "cwd": "/root/autodl-tmp/symbolic_dynamics",
+  "result": {
+    "chunk_id": "d31cb7",
+    "wall_time_seconds": 0.117376184,
+    "exit_code": 0,
+    "original_token_count": 1264,
+    "output": "{\"B_manifest_payload_hashes_checked_here\": 12, \"added_helpers_ast_identical_to_accepted_source\": [\"group_members\", \"settle_group\"], \"changed_functions\": [\"check_original_output\", \"child\", \"command\", \"preflight\", \"run\", \"seal\", \"select_role\"], \"expected_native_commands\": 10, \"expected_output_payloads\": 59, \"external_status\": \"HOLD_EXTERNAL\", \"fresh_scientific_executions\": 0, \"initial_B_payloads\": 407, \"initial_B_physical_files\": 408, \"inputs\": {\"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/ARTIFACT_CONTRACT.md\": {\"bytes\": 4142, \"sha256\": \"de1e46fe57ef42199232fa1ec1a18a25c0188fcb34aa02fb721ad2d576f52b73\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_a_strict_preparation/run_pair.py\": {\"bytes\": 30138, \"sha256\": \"a10ec7f79e9c948d64ce9eecd095bea21a4374c9510889448a09b1b3143687cc\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_stage_revision_01/process_support.py\": {\"bytes\": 6818, \"sha256\": \"8ce99e3b7684123c5a04d99d8fa5cee98bd4e8e8b9bca7f7a4dd5dc93b5dde7c\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/CANONICAL.json\": {\"bytes\": 6475161, \"sha256\": \"fbddce4cc05761bd0eed959d57b6de32b9cde38f23128872189a7e64349cfab2\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/COMPLETE_SOURCE_COMMITMENT.actual.json\": {\"bytes\": 765, \"sha256\": \"b35e200a595778c382eb060c3efa9ba0a39780e62fcd2fe79cc50a9d12eb4ad9\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/FINDINGS.json\": {\"bytes\": 2311, \"sha256\": \"0db9eea2a59a6bfb01b5ce3dbd57c84aa2cb84ab4ac952e2a72829a3f56f5bbb\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/INDEPENDENCE_COMMITMENT.md\": {\"bytes\": 2240, \"sha256\": \"7142ddd82dc3c01982ef8ce7163b4829a0c9aa677f5f6b35105c6dd0a910c53a\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/INPUT_PINS.sha256\": {\"bytes\": 83085, \"sha256\": \"c166030721b74b211c79e529db610c2e1c48221b355f4cc79f7aa71c62950b21\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/PARAMETERS.json\": {\"bytes\": 333, \"sha256\": \"be1e8b447c39e8d27eb7942c934502e3ce76bd07cb5103a06092917b307d02c0\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/PRE_COMPARISON_PROOF_CODE_COMMITMENT.actual.json\": {\"bytes\": 851, \"sha256\": \"6d7d5f214a1cc9b20769d11c6e7fd9ce38eec12b5d3571d4a0d94f746b6013eb\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/REPLAY_KEYS.json\": {\"bytes\": 9446, \"sha256\": \"4c4aeaba277c4d8d7c2be2ca084063cd4fc3a583c0535aa8315abdc273b270a4\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/REPORT.md\": {\"bytes\": 8377, \"sha256\": \"d2d42801e61ef278affc16af6659ba708bf5dec0ca7585b3cb1cf5d738877dfb\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/SHA256SUMS\": {\"bytes\": 40262, \"sha256\": \"81b5f97a6b25d6f9e82db87001da1a54668c01268038694d4b8a3b61006b02c3\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/produce01/commands/run_1/stdout\": {\"bytes\": 6475161, \"sha256\": \"fbddce4cc05761bd0eed959d57b6de32b9cde38f23128872189a7e64349cfab2\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/verify.committed.py\": {\"bytes\": 9858, \"sha256\": \"aa5598ab9932219cc336bef051cef71b531bc2885b905232b1ec4064d5672bbd\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/verify.py\": {\"bytes\": 9858, \"sha256\": \"aa5598ab9932219cc336bef051cef71b531bc2885b905232b1ec4064d5672bbd\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md\": {\"bytes\": 6861, \"sha256\": \"dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324\"}}, \"observed_utc\": \"2026-09-07T16:13:32.861291+00:00\", \"original_canonical_metadata\": {\"checks\": 51129, \"masses\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], \"same_sha256_and_size_as_actual_original_producer_stdout\": true, \"states\": 4095, \"triangular_objects\": 265}, \"owner_status\": \"OWNER_AMBER\", \"preparation_preflight_executed\": false, \"scientific_imports\": [\"collections\", \"functools\", \"json\", \"pathlib\", \"sys\"], \"scope\": \"AST comparison and compile-only; sealed B manifest syntax/inventory and selected original byte pins; original canonical parsed as data only. No harness import/preflight/run, scientific execution, native comparison pair or runtime inventory.\", \"source\": {\"bytes\": 36645, \"sha256\": \"bacc8bf0351bdfbcc2bc671cd61131d6382fe5caccd00f02e3988afbf1d066d1\"}, \"source_lines\": 623, \"status\": \"PASS_STATIC_ONLY_NOT_EXECUTED\", \"target_absent\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p210_b_strict_pair_01\", \"unchanged_functions\": [\"configuration\", \"covered_sample\", \"inventory\", \"ldd_closure\", \"lexists\", \"main\", \"manifest\", \"need\", \"now\", \"ordinary_sample\", \"pin\", \"read_json\", \"resource_names\", \"rich\", \"settings\", \"value\", \"write_bytes\", \"write_json\"], \"whole_B_payload_hash_closure_deferred_to_root_preflight\": true}\n"
+  },
+  "parsed_result": {
+    "B_manifest_payload_hashes_checked_here": 12,
+    "added_helpers_ast_identical_to_accepted_source": [
+      "group_members",
+      "settle_group"
+    ],
+    "changed_functions": [
+      "check_original_output",
+      "child",
+      "command",
+      "preflight",
+      "run",
+      "seal",
+      "select_role"
+    ],
+    "expected_native_commands": 10,
+    "expected_output_payloads": 59,
+    "external_status": "HOLD_EXTERNAL",
+    "fresh_scientific_executions": 0,
+    "initial_B_payloads": 407,
+    "initial_B_physical_files": 408,
+    "inputs": {
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/ARTIFACT_CONTRACT.md": {
+        "bytes": 4142,
+        "sha256": "de1e46fe57ef42199232fa1ec1a18a25c0188fcb34aa02fb721ad2d576f52b73"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_a_strict_preparation/run_pair.py": {
+        "bytes": 30138,
+        "sha256": "a10ec7f79e9c948d64ce9eecd095bea21a4374c9510889448a09b1b3143687cc"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_stage_revision_01/process_support.py": {
+        "bytes": 6818,
+        "sha256": "8ce99e3b7684123c5a04d99d8fa5cee98bd4e8e8b9bca7f7a4dd5dc93b5dde7c"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/CANONICAL.json": {
+        "bytes": 6475161,
+        "sha256": "fbddce4cc05761bd0eed959d57b6de32b9cde38f23128872189a7e64349cfab2"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/COMPLETE_SOURCE_COMMITMENT.actual.json": {
+        "bytes": 765,
+        "sha256": "b35e200a595778c382eb060c3efa9ba0a39780e62fcd2fe79cc50a9d12eb4ad9"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/FINDINGS.json": {
+        "bytes": 2311,
+        "sha256": "0db9eea2a59a6bfb01b5ce3dbd57c84aa2cb84ab4ac952e2a72829a3f56f5bbb"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/INDEPENDENCE_COMMITMENT.md": {
+        "bytes": 2240,
+        "sha256": "7142ddd82dc3c01982ef8ce7163b4829a0c9aa677f5f6b35105c6dd0a910c53a"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/INPUT_PINS.sha256": {
+        "bytes": 83085,
+        "sha256": "c166030721b74b211c79e529db610c2e1c48221b355f4cc79f7aa71c62950b21"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/PARAMETERS.json": {
+        "bytes": 333,
+        "sha256": "be1e8b447c39e8d27eb7942c934502e3ce76bd07cb5103a06092917b307d02c0"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/PRE_COMPARISON_PROOF_CODE_COMMITMENT.actual.json": {
+        "bytes": 851,
+        "sha256": "6d7d5f214a1cc9b20769d11c6e7fd9ce38eec12b5d3571d4a0d94f746b6013eb"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/REPLAY_KEYS.json": {
+        "bytes": 9446,
+        "sha256": "4c4aeaba277c4d8d7c2be2ca084063cd4fc3a583c0535aa8315abdc273b270a4"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/REPORT.md": {
+        "bytes": 8377,
+        "sha256": "d2d42801e61ef278affc16af6659ba708bf5dec0ca7585b3cb1cf5d738877dfb"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/SHA256SUMS": {
+        "bytes": 40262,
+        "sha256": "81b5f97a6b25d6f9e82db87001da1a54668c01268038694d4b8a3b61006b02c3"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/produce01/commands/run_1/stdout": {
+        "bytes": 6475161,
+        "sha256": "fbddce4cc05761bd0eed959d57b6de32b9cde38f23128872189a7e64349cfab2"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/verify.committed.py": {
+        "bytes": 9858,
+        "sha256": "aa5598ab9932219cc336bef051cef71b531bc2885b905232b1ec4064d5672bbd"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_b/verify.py": {
+        "bytes": 9858,
+        "sha256": "aa5598ab9932219cc336bef051cef71b531bc2885b905232b1ec4064d5672bbd"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md": {
+        "bytes": 6861,
+        "sha256": "dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324"
+      }
+    },
+    "observed_utc": "2026-09-07T16:13:32.861291+00:00",
+    "original_canonical_metadata": {
+      "checks": 51129,
+      "masses": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "same_sha256_and_size_as_actual_original_producer_stdout": true,
+      "states": 4095,
+      "triangular_objects": 265
+    },
+    "owner_status": "OWNER_AMBER",
+    "preparation_preflight_executed": false,
+    "scientific_imports": [
+      "collections",
+      "functools",
+      "json",
+      "pathlib",
+      "sys"
+    ],
+    "scope": "AST comparison and compile-only; sealed B manifest syntax/inventory and selected original byte pins; original canonical parsed as data only. No harness import/preflight/run, scientific execution, native comparison pair or runtime inventory.",
+    "source": {
+      "bytes": 36645,
+      "sha256": "bacc8bf0351bdfbcc2bc671cd61131d6382fe5caccd00f02e3988afbf1d066d1"
+    },
+    "source_lines": 623,
+    "status": "PASS_STATIC_ONLY_NOT_EXECUTED",
+    "target_absent": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p210_b_strict_pair_01",
+    "unchanged_functions": [
+      "configuration",
+      "covered_sample",
+      "inventory",
+      "ldd_closure",
+      "lexists",
+      "main",
+      "manifest",
+      "need",
+      "now",
+      "ordinary_sample",
+      "pin",
+      "read_json",
+      "resource_names",
+      "rich",
+      "settings",
+      "value",
+      "write_bytes",
+      "write_json"
+    ],
+    "whole_B_payload_hash_closure_deferred_to_root_preflight": true
+  }
+}

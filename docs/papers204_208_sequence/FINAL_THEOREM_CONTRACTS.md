@@ -1,11 +1,11 @@
 # Admitted and retired theorem contracts
 
-Date: 2026-09-07 UTC. A candidate is numbered only after its deductive and
+Date: 2026-09-08 UTC. A candidate is numbered only after its deductive and
 collision/source gate. Manuscript review can subsequently retire that
 contract without reusing the number. There are currently **five retained
-papers, four completed papers and no unfilled seat**. P210's physical Round0
-is complete and actual independent A is in progress; it is not accepted or
-complete. P204 and P206 are
+papers, five completed papers and no unfilled seat**. The first exact-five
+gate and independent root reception have actually passed; see [final QA](FINAL_QA_REPORT.md).
+All five mathematical bodies and exclusions below are unchanged. P204 and P206 are
 historically admitted, subsequently rejected numbered drafts.
 
 ## P204 — previous-smaller distance feedback — REJECTED IN REVIEW A
@@ -364,7 +364,7 @@ all original audit path/hash roles.
 At P209 completion the census was four retained, four complete, one unfilled;
 P210 admission and its still-pending manuscript gates follow below.
 
-## P210 — weakly increasing run aggregation — ROUND0 COMPLETE, A IN PROGRESS
+## P210 — weakly increasing run aggregation — INTERNALLY COMPLETE
 
 Proof contributors: root and `/root/twenty_seventh_finite_scout`. The
 manuscript/verifier author `/root/p210_author` and author-evidence helper
@@ -422,7 +422,7 @@ failures remain disclosed. A complete applicable owner adapter reopens the
 affected scope. OWNER_AMBER / HOLD_EXTERNAL remain.
 
 Paper path: `papers/210-weakly-increasing-run-aggregation/`.
-Status: `P210_ROUND0_COMPLETE / MANUSCRIPT_A_IN_PROGRESS / NOT_COMPLETE`.
+Status: `P210_INTERNALLY_COMPLETE / EXACT_FIVE_GATE_PASS / OWNER_AMBER / HOLD_EXTERNAL`.
 Root adopted the unchanged anonymous six-page author package and physically
 froze 493 payloads after actual original reception, strict author pair and
 all-six-page viewing. Root's two new runs each passed 197,471 checks on the
@@ -432,10 +432,42 @@ The complete author-original reception checked all 489 handoff payloads,
 `e8446cd17b1a283c74f9a6b4ced413b9e30810396c3d30f936ac2986ce790e26`;
 its separate root closure passed all 1,022 paths, 57 links and six complete
 native manifest/raw checks. See [root physical milestone](qa/P210_ROUND0_ROOT_INSPECTION.md).
-Fresh nonauthor `/root/p210_a_reviewer` is actually assigned; no A verdict or
-accepted delta yet. Physical Round1/2, two actual accepted nonauthor rounds,
-root A/B replays, terminal builds/views and final artifact/batch gate remain.
-Current census is five retained, four complete, no unfilled seat; the requested
-five-paper batch has NOT completed. Previous index bytes are
-[physically preserved](qa/central_round0_p210/README.md); P204–P209's
-scientific contracts and accepted evidence were not changed.
+The same nonauthor `/root/p210_a_reviewer` actually accepted the exact
+no-change response. Its final 552-payload package preserves all 484 initial
+payloads, zero current open findings and one resolved Major. Root's strict
+A pair each passed 133,978 checks on the original 4,095 states; the final
+original/delta closure passed 621,735 checks and 119,932 current paths.
+Old authenticated recorder/prehash and three old parent start times remain
+unavailable, not retrospectively cleared. See [accepted A closure](qa/P210_A_ROOT_DELTA_INSPECTION.md).
+Root physically froze Round1 with 508 payloads/509 files, seal
+`be54b79806d90f22037cee877f92074e744b2ef27bcc0b6b2e4f8dfa658446e0`.
+All 493 core and 489 author bytes are unchanged. Its separate root reception
+passed 29,273 checks/2,164 paths and 507 full physical-copy comparisons;
+see [Round1 closure](qa/P210_ROUND1_ROOT_INSPECTION.md).
+Distinct nonauthor `/root/p210_b_reviewer` completed the materially different
+review from the pinned509 inputs and actually accepted the exact no-change
+response. Final441-payload B preserves all407 initial payloads, zero current
+findings, two resolved infrastructure Minors and inherited A's resolved Major.
+Root's strict B pair each passed51,129 checks; [final original/delta closure](qa/P210_B_ROOT_DELTA_INSPECTION.md)
+passed2,338,172 checks/121,057 actual input paths fully read twice.
+Physical524-payload/525-file Round2 is now complete, preserving all508
+Round1 core/all489 author bytes. [Independent physical reception](qa/P210_ROUND2_ROOT_INSPECTION.md)
+passed38,968 checks/2,603 paths,523 full copy comparisons,86 link roles
+and six native commands. Source/ownership/runtime limits and failed records
+remain; none of the mathematical ceiling above changed.
+Two physical source-only terminal builds and all-six actual final-page
+views now pass; the222-payload terminal package preserves the accepted PDF.
+The initial artifact gate passed5,838,453 checks/122,149 current file keys,
+followed by root's734,743-check complete original-map reception. The distinct
+lifecycle follow-up passed28,659 checks/2,319 documentary keys and35,643 root
+checks; its2,244-payload whole manifest changed only the lifecycle row.
+See [P210 final QA](P210_FINAL_QA.md). All failures and historical limits remain.
+The [exact-five gate/root original reception](qa/FIVE_EXACT_ROOT_INSPECTION.md)
+now also actually pass:19,182,767 gate checks/146,710 current file keys and
+2,110,077 root checks. Fifteen prior strict pairs, ten prior terminal builds
+and27 prior actual page views are explicitly reused, not newly executed.
+Current census is five retained, five complete, no unfilled seat.
+The requested round is internally complete; private synchronization remains
+a separate actual action and all external scope stays held. Previous index
+bytes are [physically preserved](qa/central_five_completion_01/README.md).
+P204–P209's scientific contracts and accepted evidence were not changed.

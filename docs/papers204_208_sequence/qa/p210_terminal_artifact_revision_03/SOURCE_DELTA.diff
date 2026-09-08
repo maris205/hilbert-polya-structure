@@ -1,0 +1,45 @@
+--- sealed-revision-02/inspect_p210_artifact.py
++++ revision-03/inspect_p210_artifact.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""P210 terminal artifact reader revision 02, preparation source only.
++"""P210 terminal artifact reader revision 03, preparation source only.
+ 
+ No scientific code, old writer/reader, builder, view tool or child command
+ is imported/executed. Preparation does not execute this reader. The final
+@@ -22,7 +22,7 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-PREP = QA / 'p210_terminal_artifact_revision_02'
++PREP = QA / 'p210_terminal_artifact_revision_03'
+ PRIOR = QA / 'p210_terminal_artifact_preparation'
+ PAPER = ROOT / 'papers/210-weakly-increasing-run-aggregation'
+ A, B = QA.parent / 'reviews/p210_a', QA.parent / 'reviews/p210_b'
+@@ -1137,6 +1137,8 @@
+         ck(obj(anchors['FINAL_B_BINDING.json']) == binding and prov['actual_final_b_binding_sha256'] ==
+            pin(anchors['FINAL_B_BINDING.json'])['sha256'] and prov['round1_external_aliases'] == [],
+            'actual final B binding source identity and no generic alias')
++        # Preserve original freezer traversal order, lost in sorted embedded JSON.
++        binding = obj(anchors['FINAL_B_BINDING.json'])
+     ck(set(anchors) == set(prov['anchors']), 'only named original acceptance anchors')
+     expected = dict(core)
+     for name, digest in core.items():
+@@ -1847,7 +1849,7 @@
+        sys.path == PY_PATH and sys.flags.isolated == sys.flags.no_site == 1 and
+        sys.flags.optimize == 0 and sys.flags.dont_write_bytecode == 1,
+        'current artifact reader exact isolated source-only interpreter ENV4 cwd')
+-    cache = str(QA / 'p210_terminal_artifact_02/never_created_reader_cache')
++    cache = str(QA / 'p210_terminal_artifact_03/never_created_reader_cache')
+     ck(sys.pycache_prefix == cache and not os.path.lexists(cache), 'current artifact reader exact absent bytecode prefix')
+     modules = {}
+     for name, module in sorted(sys.modules.items()):
+@@ -2308,7 +2310,7 @@
+         selector=['current_key_reconstruction'], original_map=actual_receiver['current_key_reconstruction']['complete_map'])
+     # All underlying original recipes/maps and every new extra are emitted or
+     # exactly referenced. No reconstructed full host ledger is copied to disk.
+-    report = dict(schema='p210-terminal-artifact-reader-revision-02',
++    report = dict(schema='p210-terminal-artifact-reader-revision-03',
+         status='PASS_P210_TERMINAL_ARTIFACT_INITIAL_LIFECYCLE_FOLLOWUP_PENDING', paper='P210',
+         checks=sum(CHECKS.values()), checks_by_kind=dict(CHECKS),
+         complete_current_key_reconstruction=complete,

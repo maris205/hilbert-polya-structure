@@ -1,0 +1,70 @@
+{
+  "role": "ACTUAL_PREPARATION_ONLY_STATIC_COMMAND_NATIVE_RETURN",
+  "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast,datetime,difflib,hashlib,json\nfrom pathlib import Path\nR=Path('/root/autodl-tmp/symbolic_dynamics');Q=R/'docs/papers204_208_sequence/qa';O=Q/'five_paper_terminal_component_launch_preparation';N=Q/'five_paper_terminal_component_launch_revision_01';C=Q/'five_paper_terminal_gate_revision_01'\ndef pin(p):\n b=p.read_bytes();return {'sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b)}\nv=json.loads((N/'PROVENANCE.json').read_bytes());assert len(v['inputs'])==75\nfor name,value in v['inputs'].items():assert pin(Path(name))==value,name\na=(O/'launcher.py').read_text();b=(N/'launcher.py').read_text();ta=ast.parse(a);tb=ast.parse(b);compile(b,str(N/'launcher.py'),'exec')\nassert len(a.splitlines())==len(b.splitlines())==463\nfunctions=lambda tree:{n.name:ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,ast.FunctionDef)}\nfa,fb=functions(ta),functions(tb);assert fa==fb and len(fa)==19 and sorted(fa)==v['actual_AST_unchanged_functions']\ndef assignments(tree):\n return {n.targets[0].id:ast.dump(n,include_attributes=False) for n in tree.body if isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name)}\nx,y=assignments(ta),assignments(tb);changed=sorted(k for k in x if x[k]!=y.get(k));assert changed==['CHECKER_PREP','CHECKER_SEAL','CHECKER_SOURCE','OUT','PREP'] and set(x)==set(y)\nfor tree in (ta,tb):tree.body=[n for n in tree.body if not (isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name) and n.targets[0].id in changed)]\nassert ast.dump(ta,include_attributes=False)==ast.dump(tb,include_attributes=False)\ndelta=''.join(difflib.unified_diff(a.splitlines(True),b.splitlines(True),fromfile=str(O/'launcher.py'),tofile=str(N/'launcher.py')));assert (N/'SOURCE_DELTA.diff').read_text()==delta\nassert (O/'launcher.py').read_bytes()==(Q/'five_paper_terminal_component_run_01/executed_launcher.py').read_bytes()\nfor base,count,expected in ((C,14,v['component']['seal']),(O,5,'a0212daf50345b202da47e74dcb29ef4f03f0ae6edaf95f8da96d8d552d1ca74'),(Q/'five_paper_terminal_gate_preparation',14,'b984a1d494d0304a39704da1773782e1f6b10902fa4d8b0dbae77bad86c84e20'),(Q/'five_paper_terminal_component_run_01',20,'7500e71709616871e75e004d87ac0ebbbd66b112246c3fbe5bc649131aa0c724')):\n seal=base/'SHA256SUMS';assert pin(seal)['sha256']==expected;rows={line[66:]:line[:64] for line in seal.read_text().splitlines()}\n assert len(rows)==count and all(pin(base/name)['sha256']==digest for name,digest in rows.items())\n assert set(rows)=={p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file() and p!=seal} and all(not p.is_symlink() for p in base.rglob('*'))\nfixed=json.loads((C/'FOUR_INPUTS.json').read_bytes())['fixed_inputs'];assert len(fixed)==54\nfor name,value in fixed.items():assert all(pin(Path(name))[k]==value[k] for k in ('sha256','bytes')),name\nbinding=json.loads((C/'ROOT_REUSE_BINDING.json').read_bytes());assert pin(C/'ROOT_REUSE_BINDING.json')['sha256']==v['actual_root_binding_sha256']\nreceipt=json.loads(Path(binding['native']).read_bytes());assert receipt['result']['exit_code']==0 and binding['accepted_status'] in Path(binding['report']).read_text()\nfor p in C.glob('*.py'):compile(p.read_bytes(),str(p),'exec')\nassert not (Q/'five_paper_terminal_component_run_02').exists() and not (N/'SHA256SUMS').exists()\nassert pin(N/'launcher.py')=={k:v['prepared_source'][k] for k in ('sha256','bytes')}\nassert sum(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='Popen' for n in ast.walk(ast.parse(b)))==1\nassert not any(isinstance(n,(ast.Import,ast.ImportFrom)) and 'four_completed' in ast.unparse(n) for n in ast.walk(ast.parse(b)))\nassert 'launch-four-completed-component LAUNCHER_PREPARATION_SHA256' in (N/'README.md').read_text()\nprint(json.dumps({'status':'PASS_STATIC_FIVE_CONSTANT_LAUNCHER_ADAPTATION_NOT_EXECUTED','observed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':pin(N/'launcher.py'),'source_lines':463,'AST_identical_functions':sorted(fa),'changed_top_level_assignments':changed,'all_other_AST_unchanged':True,'exact_delta_lines':len(delta.splitlines()),'adaptation_inputs_rehashed':75,'fixed_component_inputs_rehashed':54,'complete_package_payloads_rehashed':[14,5,14,20],'new_component_seal':pin(C/'SHA256SUMS'),'root_reuse_binding_still_actual':True,'actual_failed_wrapper_source_copy_equal':True,'future_output_absent':True,'native_child_calls_in_source':1,'project_imports_or_executions':0,'science_build_view_executions':0,'scope':'Source parse and compile only; exact AST/diff, fixed original bytes and physical manifests checked. No launcher or component execution.'},sort_keys=True))\nPY",
+  "cwd": "/root/autodl-tmp/symbolic_dynamics",
+  "result": {
+    "chunk_id": "88d85d",
+    "wall_time_seconds": 0.788295469,
+    "exit_code": 0,
+    "original_token_count": 329,
+    "output": "{\"AST_identical_functions\": [\"compressed_ledger\", \"configuration\", \"consumed\", \"group_state\", \"interrupted\", \"main\", \"map_paths\", \"native_child\", \"package\", \"parent_observation\", \"pin\", \"pins\", \"raw_save\", \"require\", \"runtime_names\", \"save\", \"scoped_inputs\", \"seal_output\", \"settle\"], \"actual_failed_wrapper_source_copy_equal\": true, \"adaptation_inputs_rehashed\": 75, \"all_other_AST_unchanged\": true, \"changed_top_level_assignments\": [\"CHECKER_PREP\", \"CHECKER_SEAL\", \"CHECKER_SOURCE\", \"OUT\", \"PREP\"], \"complete_package_payloads_rehashed\": [14, 5, 14, 20], \"exact_delta_lines\": 22, \"fixed_component_inputs_rehashed\": 54, \"future_output_absent\": true, \"native_child_calls_in_source\": 1, \"new_component_seal\": {\"bytes\": 1240, \"sha256\": \"3863616519c14cc2f70d92deced93d745978a34f7e90f78aed5f00dd12ca8238\"}, \"observed_utc\": \"2026-09-07T16:53:06.024962+00:00\", \"project_imports_or_executions\": 0, \"root_reuse_binding_still_actual\": true, \"science_build_view_executions\": 0, \"scope\": \"Source parse and compile only; exact AST/diff, fixed original bytes and physical manifests checked. No launcher or component execution.\", \"source\": {\"bytes\": 28808, \"sha256\": \"a78aa9d3c9ec1badb1c77c775d99d7b1f52689f65832e000f938acbd12036558\"}, \"source_lines\": 463, \"status\": \"PASS_STATIC_FIVE_CONSTANT_LAUNCHER_ADAPTATION_NOT_EXECUTED\"}\n"
+  },
+  "parsed_result": {
+    "AST_identical_functions": [
+      "compressed_ledger",
+      "configuration",
+      "consumed",
+      "group_state",
+      "interrupted",
+      "main",
+      "map_paths",
+      "native_child",
+      "package",
+      "parent_observation",
+      "pin",
+      "pins",
+      "raw_save",
+      "require",
+      "runtime_names",
+      "save",
+      "scoped_inputs",
+      "seal_output",
+      "settle"
+    ],
+    "actual_failed_wrapper_source_copy_equal": true,
+    "adaptation_inputs_rehashed": 75,
+    "all_other_AST_unchanged": true,
+    "changed_top_level_assignments": [
+      "CHECKER_PREP",
+      "CHECKER_SEAL",
+      "CHECKER_SOURCE",
+      "OUT",
+      "PREP"
+    ],
+    "complete_package_payloads_rehashed": [
+      14,
+      5,
+      14,
+      20
+    ],
+    "exact_delta_lines": 22,
+    "fixed_component_inputs_rehashed": 54,
+    "future_output_absent": true,
+    "native_child_calls_in_source": 1,
+    "new_component_seal": {
+      "bytes": 1240,
+      "sha256": "3863616519c14cc2f70d92deced93d745978a34f7e90f78aed5f00dd12ca8238"
+    },
+    "observed_utc": "2026-09-07T16:53:06.024962+00:00",
+    "project_imports_or_executions": 0,
+    "root_reuse_binding_still_actual": true,
+    "science_build_view_executions": 0,
+    "scope": "Source parse and compile only; exact AST/diff, fixed original bytes and physical manifests checked. No launcher or component execution.",
+    "source": {
+      "bytes": 28808,
+      "sha256": "a78aa9d3c9ec1badb1c77c775d99d7b1f52689f65832e000f938acbd12036558"
+    },
+    "source_lines": 463,
+    "status": "PASS_STATIC_FIVE_CONSTANT_LAUNCHER_ADAPTATION_NOT_EXECUTED"
+  }
+}

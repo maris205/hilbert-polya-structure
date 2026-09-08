@@ -1,0 +1,96 @@
+{
+  "role": "ACTUAL_STATIC_SOURCE_ADAPTATION_CHECK_NOT_EXECUTION",
+  "command": "/usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json,pathlib; r=pathlib.Path(\"/root/autodl-tmp/symbolic_dynamics\"); p=r/\"docs/papers204_208_sequence/qa\"; old=p/\"p210_author_strict_preparation/run_pair.py\"; new=p/\"p210_a_strict_preparation/run_pair.py\"; a=ast.parse(old.read_bytes()); b=ast.parse(new.read_bytes()); changed={\"select_role\",\"preflight\",\"check_original_output\",\"child\",\"run\"}; fa={n.name:ast.dump(n,include_attributes=False) for n in a.body if isinstance(n,ast.FunctionDef)}; fb={n.name:ast.dump(n,include_attributes=False) for n in b.body if isinstance(n,ast.FunctionDef)}; assert set(fa)==set(fb); assert all(fa[n]==fb[n] for n in fa.keys()-changed); spec=next(ast.literal_eval(n.value) for n in b.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id==\"SPECS\" for t in n.targets)); assert set(spec)=={\"p210_a\"}; assert spec[\"p210_a\"][\"payloads\"]==484; compile(b,str(new),\"exec\"); d=r/\"docs/papers204_208_sequence/reviews/p210_a\"; names=[d/n for n in (\"SHA256SUMS\",\"verify.py\",\"PARAMETERS.json\",\"CANONICAL.json\",\"DESIGN_COMMITMENT.md\",\"COMMITMENT_PINS.sha256\",\"INPUT_PINS.sha256\",\"REPLAY_KEYS.json\")]+[old,r/\"docs/research_state/WORKFLOW.md\",r/\"docs/papers204_208_sequence/ARTIFACT_CONTRACT.md\"]; pin=lambda p:{\"sha256\":hashlib.sha256(p.read_bytes()).hexdigest(),\"bytes\":p.stat().st_size}; result={\"inputs\":{str(p):pin(p) for p in names},\"source\":pin(new),\"unchanged_functions\":sorted(fa.keys()-changed),\"changed_functions\":sorted(changed),\"status\":\"PASS_STATIC_ONLY_NOT_EXECUTED\",\"expected_native_commands\":10,\"expected_output_payloads\":59}; print(json.dumps(result,sort_keys=True))'",
+  "cwd": "/root/autodl-tmp/symbolic_dynamics",
+  "result": {
+    "chunk_id": "b8cc3e",
+    "wall_time_seconds": 0.0000059,
+    "exit_code": 0,
+    "original_token_count": 671,
+    "output": "{\"changed_functions\": [\"check_original_output\", \"child\", \"preflight\", \"run\", \"select_role\"], \"expected_native_commands\": 10, \"expected_output_payloads\": 59, \"inputs\": {\"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/ARTIFACT_CONTRACT.md\": {\"bytes\": 4142, \"sha256\": \"de1e46fe57ef42199232fa1ec1a18a25c0188fcb34aa02fb721ad2d576f52b73\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_author_strict_preparation/run_pair.py\": {\"bytes\": 28891, \"sha256\": \"0cf26266094fb20b33be2e897141691ffb7c7e932656d1b263767ca930e113a3\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/CANONICAL.json\": {\"bytes\": 703850, \"sha256\": \"d96ed0240dec421d78cdbfb013869680c91685c1848ea2ee030a71f86ab7aa74\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/COMMITMENT_PINS.sha256\": {\"bytes\": 245, \"sha256\": \"872dc0169cce0b60739f4b88611bb8df68645efa87bc44cb3499c89801c83492\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/DESIGN_COMMITMENT.md\": {\"bytes\": 3071, \"sha256\": \"a7aadeafecde7c56c15158b0be265e38112c43add54bbe46591a816a7af56b1e\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/INPUT_PINS.sha256\": {\"bytes\": 80608, \"sha256\": \"7d6a9bb78d17fa3a76abc897dae9ef416377e2ee95a5e2fff46b49403fe7fb89\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/PARAMETERS.json\": {\"bytes\": 116, \"sha256\": \"854c270325ec270875863ed1110106ea397b1587f3da7f67876e4ce1d84e6de0\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/REPLAY_KEYS.json\": {\"bytes\": 4239, \"sha256\": \"aa89b23392879f9880c1c53ce54a10e71eca830d8fb6eb7996c60ee178181079\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/SHA256SUMS\": {\"bytes\": 47696, \"sha256\": \"e60d352a6520dd5f56b01035912ce753bb1a669c7368ce0a999ff56a72ff966d\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/verify.py\": {\"bytes\": 8196, \"sha256\": \"4d152ceb7eebb8f1b4bf7632ad1a91f8be7e373520682022843fa6e81dd2de9b\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md\": {\"bytes\": 6861, \"sha256\": \"dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324\"}}, \"source\": {\"bytes\": 30138, \"sha256\": \"a10ec7f79e9c948d64ce9eecd095bea21a4374c9510889448a09b1b3143687cc\"}, \"status\": \"PASS_STATIC_ONLY_NOT_EXECUTED\", \"unchanged_functions\": [\"command\", \"configuration\", \"covered_sample\", \"inventory\", \"ldd_closure\", \"lexists\", \"main\", \"manifest\", \"need\", \"now\", \"ordinary_sample\", \"pin\", \"read_json\", \"resource_names\", \"rich\", \"seal\", \"settings\", \"value\", \"write_bytes\", \"write_json\"]}\n"
+  },
+  "parsed_result": {
+    "changed_functions": [
+      "check_original_output",
+      "child",
+      "preflight",
+      "run",
+      "select_role"
+    ],
+    "expected_native_commands": 10,
+    "expected_output_payloads": 59,
+    "inputs": {
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/ARTIFACT_CONTRACT.md": {
+        "bytes": 4142,
+        "sha256": "de1e46fe57ef42199232fa1ec1a18a25c0188fcb34aa02fb721ad2d576f52b73"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_author_strict_preparation/run_pair.py": {
+        "bytes": 28891,
+        "sha256": "0cf26266094fb20b33be2e897141691ffb7c7e932656d1b263767ca930e113a3"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/CANONICAL.json": {
+        "bytes": 703850,
+        "sha256": "d96ed0240dec421d78cdbfb013869680c91685c1848ea2ee030a71f86ab7aa74"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/COMMITMENT_PINS.sha256": {
+        "bytes": 245,
+        "sha256": "872dc0169cce0b60739f4b88611bb8df68645efa87bc44cb3499c89801c83492"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/DESIGN_COMMITMENT.md": {
+        "bytes": 3071,
+        "sha256": "a7aadeafecde7c56c15158b0be265e38112c43add54bbe46591a816a7af56b1e"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/INPUT_PINS.sha256": {
+        "bytes": 80608,
+        "sha256": "7d6a9bb78d17fa3a76abc897dae9ef416377e2ee95a5e2fff46b49403fe7fb89"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/PARAMETERS.json": {
+        "bytes": 116,
+        "sha256": "854c270325ec270875863ed1110106ea397b1587f3da7f67876e4ce1d84e6de0"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/REPLAY_KEYS.json": {
+        "bytes": 4239,
+        "sha256": "aa89b23392879f9880c1c53ce54a10e71eca830d8fb6eb7996c60ee178181079"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/SHA256SUMS": {
+        "bytes": 47696,
+        "sha256": "e60d352a6520dd5f56b01035912ce753bb1a669c7368ce0a999ff56a72ff966d"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p210_a/verify.py": {
+        "bytes": 8196,
+        "sha256": "4d152ceb7eebb8f1b4bf7632ad1a91f8be7e373520682022843fa6e81dd2de9b"
+      },
+      "/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md": {
+        "bytes": 6861,
+        "sha256": "dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324"
+      }
+    },
+    "source": {
+      "bytes": 30138,
+      "sha256": "a10ec7f79e9c948d64ce9eecd095bea21a4374c9510889448a09b1b3143687cc"
+    },
+    "status": "PASS_STATIC_ONLY_NOT_EXECUTED",
+    "unchanged_functions": [
+      "command",
+      "configuration",
+      "covered_sample",
+      "inventory",
+      "ldd_closure",
+      "lexists",
+      "main",
+      "manifest",
+      "need",
+      "now",
+      "ordinary_sample",
+      "pin",
+      "read_json",
+      "resource_names",
+      "rich",
+      "seal",
+      "settings",
+      "value",
+      "write_bytes",
+      "write_json"
+    ]
+  }
+}

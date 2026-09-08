@@ -1,0 +1,69 @@
+{
+  "role": "ACTUAL_PREPARATION_ONLY_STATIC_COMMAND_NATIVE_RETURN",
+  "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast, datetime, difflib, hashlib, json\nfrom pathlib import Path\nR=Path('/root/autodl-tmp/symbolic_dynamics'); Q=R/'docs/papers204_208_sequence/qa'; O=Q/'five_paper_terminal_gate_preparation'; N=Q/'five_paper_terminal_gate_revision_01'\ndef pin(p):\n b=p.read_bytes(); return {'sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b)}\nv=json.loads((N/'REVISION_PROVENANCE.json').read_bytes())\nfor name,expected in v['inputs'].items(): assert pin(Path(name))==expected, name\na=(O/'four_completed.py').read_text(); b=(N/'four_completed.py').read_text(); ta=ast.parse(a); tb=ast.parse(b); compile(b,str(N/'four_completed.py'),'exec')\ndef funcs(t): return {n.name:ast.dump(n,include_attributes=False) for n in t.body if isinstance(n,ast.FunctionDef)}\nfa,fb=funcs(ta),funcs(tb); same=sorted(k for k in fa if fa[k]==fb.get(k)); changed=sorted(k for k in fa if fa[k]!=fb.get(k)); added=sorted(set(fb)-set(fa))\nassert same==v['actual_AST_unchanged_functions'] and len(same)==27\nassert changed==['lifecycle_keys_and_links','links_from_document','main'] and added==['p209_frozen_link_roles'] and not set(fa)-set(fb)\nassert len(a.splitlines())==652 and len(b.splitlines())==715\nfor tree in (ta,tb):\n tree.body=[n for n in tree.body if not isinstance(n,ast.FunctionDef) and not (isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='HERE' for t in n.targets))]\nassert ast.dump(ta,include_attributes=False)==ast.dump(tb,include_attributes=False)\nassert (N/'SOURCE_DELTA.diff').read_text()==''.join(difflib.unified_diff(a.splitlines(True),b.splitlines(True),fromfile=str(O/'four_completed.py'),tofile=str(N/'four_completed.py')))\nfor name,expected in v['unchanged_byte_copies'].items():\n assert (N/name).read_bytes()==(O/name).read_bytes() and pin(N/name)==expected\n if name.endswith('.py'): compile((N/name).read_bytes(),str(N/name),'exec')\nfor base,count in ((O,14),(Q/'five_paper_terminal_component_launch_preparation',5),(Q/'five_paper_terminal_component_run_01',20)):\n seal=base/'SHA256SUMS'; rows={line[66:]:line[:64] for line in seal.read_text().splitlines()}\n assert len(rows)==count and all(pin(base/name)['sha256']==digest for name,digest in rows.items())\n assert set(rows)=={p.relative_to(base).as_posix() for p in base.rglob('*') if p.is_file() and p!=seal}\n assert all(not p.is_symlink() for p in base.rglob('*'))\nassert (Q/'five_paper_terminal_component_run_01/executed_four_completed.py').read_bytes()==(O/'four_completed.py').read_bytes()\nassert pin(N/'four_completed.py')=={k:v['prepared_component'][k] for k in ('sha256','bytes')}\nassert json.loads((N/'DIAGNOSIS.actual.json').read_bytes())['result']['exit_code']==0\nfor p in N.glob('*.json'): json.loads(p.read_bytes())\nassert not (Q/'five_paper_terminal_component_run_02').exists()\nfor node in ast.walk(ast.parse(b)):\n if isinstance(node,ast.Import): assert not any(x.name in {'subprocess','shutil','signal'} for x in node.names)\n if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute): assert node.func.attr not in {'write_text','write_bytes','mkdir','unlink','rmdir','rename','replace','Popen','run','system'}\nprint(json.dumps({'status':'PASS_STATIC_EXACT_TYPED_LINK_ADAPTER_NOT_COMPONENT_EXECUTION','observed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source':pin(N/'four_completed.py'),'source_lines':715,'old_source_lines':652,'actual_unchanged_functions':same,'actual_changed_functions':changed,'actual_added_functions':added,'nonfunction_AST_except_HERE_unchanged':True,'identical_copy_files':len(v['unchanged_byte_copies']),'revision_inputs_rehashed':len(v['inputs']),'historical_payloads_rehashed':39,'historical_seals_rehashed':3,'complete_failed_payloads_preserved':20,'delta_lines':len((N/'SOURCE_DELTA.diff').read_text().splitlines()),'project_modules_imported_or_executed':0,'new_component_science_build_view_executions':0,'scope':'Complete source parsed/compiled only; exact AST/diff and input bytes/membership checked. Prior targeted data diagnostic remains a distinct actual command, not a component run.'},sort_keys=True))\nPY",
+  "cwd": "/root/autodl-tmp/symbolic_dynamics",
+  "result": {
+    "chunk_id": "ad3c36",
+    "wall_time_seconds": 0.118778424,
+    "exit_code": 0,
+    "original_token_count": 337,
+    "output": "{\"actual_added_functions\": [\"p209_frozen_link_roles\"], \"actual_changed_functions\": [\"lifecycle_keys_and_links\", \"links_from_document\", \"main\"], \"actual_unchanged_functions\": [\"absent\", \"absolute\", \"bind_alias\", \"census\", \"completion_artifacts\", \"current_state\", \"decode\", \"equal\", \"interval\", \"local_targets\", \"manifest\", \"measured\", \"membership\", \"need\", \"obj\", \"old_pair_memberships\", \"package\", \"physical\", \"pin\", \"raw\", \"read_selector\", \"reuse_208_209\", \"selected\", \"supplemental_builds\", \"supplemental_pairs\", \"theorem_ceilings\", \"verify_four\"], \"complete_failed_payloads_preserved\": 20, \"delta_lines\": 104, \"historical_payloads_rehashed\": 39, \"historical_seals_rehashed\": 3, \"identical_copy_files\": 8, \"new_component_science_build_view_executions\": 0, \"nonfunction_AST_except_HERE_unchanged\": true, \"observed_utc\": \"2026-09-07T16:49:36.079174+00:00\", \"old_source_lines\": 652, \"project_modules_imported_or_executed\": 0, \"revision_inputs_rehashed\": 53, \"scope\": \"Complete source parsed/compiled only; exact AST/diff and input bytes/membership checked. Prior targeted data diagnostic remains a distinct actual command, not a component run.\", \"source\": {\"bytes\": 40576, \"sha256\": \"0d84acf3034af513bd57227d626e227c3f3d7d8462859c8678943d2da517f399\"}, \"source_lines\": 715, \"status\": \"PASS_STATIC_EXACT_TYPED_LINK_ADAPTER_NOT_COMPONENT_EXECUTION\"}\n"
+  },
+  "parsed_result": {
+    "actual_added_functions": [
+      "p209_frozen_link_roles"
+    ],
+    "actual_changed_functions": [
+      "lifecycle_keys_and_links",
+      "links_from_document",
+      "main"
+    ],
+    "actual_unchanged_functions": [
+      "absent",
+      "absolute",
+      "bind_alias",
+      "census",
+      "completion_artifacts",
+      "current_state",
+      "decode",
+      "equal",
+      "interval",
+      "local_targets",
+      "manifest",
+      "measured",
+      "membership",
+      "need",
+      "obj",
+      "old_pair_memberships",
+      "package",
+      "physical",
+      "pin",
+      "raw",
+      "read_selector",
+      "reuse_208_209",
+      "selected",
+      "supplemental_builds",
+      "supplemental_pairs",
+      "theorem_ceilings",
+      "verify_four"
+    ],
+    "complete_failed_payloads_preserved": 20,
+    "delta_lines": 104,
+    "historical_payloads_rehashed": 39,
+    "historical_seals_rehashed": 3,
+    "identical_copy_files": 8,
+    "new_component_science_build_view_executions": 0,
+    "nonfunction_AST_except_HERE_unchanged": true,
+    "observed_utc": "2026-09-07T16:49:36.079174+00:00",
+    "old_source_lines": 652,
+    "project_modules_imported_or_executed": 0,
+    "revision_inputs_rehashed": 53,
+    "scope": "Complete source parsed/compiled only; exact AST/diff and input bytes/membership checked. Prior targeted data diagnostic remains a distinct actual command, not a component run.",
+    "source": {
+      "bytes": 40576,
+      "sha256": "0d84acf3034af513bd57227d626e227c3f3d7d8462859c8678943d2da517f399"
+    },
+    "source_lines": 715,
+    "status": "PASS_STATIC_EXACT_TYPED_LINK_ADAPTER_NOT_COMPONENT_EXECUTION"
+  }
+}

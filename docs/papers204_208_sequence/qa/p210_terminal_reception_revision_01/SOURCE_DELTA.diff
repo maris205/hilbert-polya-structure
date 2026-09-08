@@ -1,0 +1,268 @@
+--- docs/papers204_208_sequence/qa/p210_terminal_reception_preparation/inspect_p210_terminal.py	2026-09-08 01:54:46.451904414 +0800
++++ docs/papers204_208_sequence/qa/p210_terminal_reception_revision_01/inspect_p210_terminal.py	2026-09-08 03:05:48.804194173 +0800
+@@ -1,10 +1,10 @@
+ #!/usr/bin/env python3
+-"""UNBOUND source-only P210 terminal original-evidence receiver preparation.
++"""Actual-bound source-only P210 terminal original-evidence receiver revision 01.
+ 
+ Prepared by P210's manuscript/verifier author, not a manuscript reviewer.
+ No original program is imported or executed. No new build/view is performed.
+-Actual terminal seals and native evidence require a later exact-schema revision.
+-The preparation hard-refuses before original/host inspection or PASS output.
++Binds actual outer02 normal native completion and closed build02 originals.
++Root owns inspection, execution, six separate actual page views and acceptance.
+ """
+ import gzip
+ import hashlib
+@@ -21,7 +21,7 @@
+ ROOT = QA.parents[2]
+ PAPER = ROOT / "papers/210-weakly-increasing-run-aggregation"
+ OUT = PAPER / "qa_final"
+-PREP = QA / "p210_terminal_build_revision_01"
++PREP = QA / "p210_terminal_build_revision_02"
+ SOURCE_NAMES = ("main.tex", "math_commands.tex", "references.bib",
+     "sections/0_abstract.tex", "sections/1_introduction.tex", "sections/2_clock.tex",
+     "sections/3_image.tex", "sections/4_coding.tex", "sections/5_fibres.tex", "sections/6_scope.tex")
+@@ -181,25 +181,215 @@
+ 
+ 
+ def final_schema_binding():
+-    """Hard unbound prerequisite; this preparation has no success branch.
++    """Bind the actual settled outer02/build02 originals, not caller success flags."""
++    reception = read(HERE / "INPUT_CONTRACT.json")
++    require(reception["schema"] == "p210-terminal-reception-actual-bound-contract-v1" and
++            reception["stage"] == "ACTUAL_OUTER02_BUILD02_BOUND_RECEIVER_NOT_EXECUTED" and
++            reception["physical_output"] == str(OUT), "actual receiver contract and fixed terminal role")
++    actual = reception["final_schema_binding"]
++    require(set(actual) == {"launcher_preparation", "launcher_output", "builder_preparation", "build", "root_native"},
++            "entire actual terminal binding role set")
++    fixed = {
++        "launcher_preparation": (QA / "p210_terminal_launch_revision_02", "6adbded08080db7be5ec261c59c18adf298464f6012e3e266b20e51d56b29bc2", 8, 706),
++        "launcher_output": (QA / "p210_terminal_launch_02", "42fed5ca10fc44fb36159f955f9193342d0775ec0f2886efd09237293e96e773", 11, 940),
++        "builder_preparation": (PREP, "2e99af39ab35bfb9e3fec7c9944927c574fe459b56a1b764a5948dde0266e31a", 9, 793),
++        "build": (OUT, "659b493dbc4e84137cf873643c1673b725294455d057c62b41e82572ffd31fd1", 222, 22762)}
++    for name, (path, sha, payloads, size) in fixed.items():
++        require(actual[name] == dict(path=str(path), sha256=sha, payloads=payloads, bytes=size),
++                "exact actually observed fixed package role")
++    native_roles = actual["root_native"]
++    require(set(native_roles) == {"launch", "completion"}, "exact two actual root native roles")
++    for label, name in (("launch", "P210_TERMINAL_OUTER02_ROOT_LAUNCH.actual.json"),
++                        ("completion", "P210_TERMINAL_OUTER02_ROOT_COMPLETION.actual.json")):
++        row = native_roles[label]
++        require(row["path"] == str(QA / name) and set(row) == {"path", "sha256", "bytes"} and
++                pin(row["path"]) == {k: row[k] for k in ("sha256", "bytes")}, "actual root native original identity")
++    launch, completion = (read(native_roles[k]["path"]) for k in ("launch", "completion"))
++    require(launch["cwd"] == str(ROOT) and launch["result"]["session_id"] == 91983 and
++            launch["result"]["chunk_id"] == "d356b7" and launch["result"]["output"] == "" and
++            "exit_code" not in launch["result"] and completion["session_id"] == 91983 and
++            completion["launch_record"] == Path(native_roles["launch"]["path"]).name and
++            completion["result"]["chunk_id"] == "81fe42" and completion["result"]["exit_code"] == 0 and
++            "session_id" not in completion["result"], "actual root native started-session-to-normal-completion chain")
++    root_output = completion["result"]["output"]
++    root_report = json.loads(root_output)
++    require(root_report["status"] == "PASS_P210_OUTER_CAPTURE_NOT_VIEWED" and
++            root_report["builder_exit_code"] == 0 and root_report["output"] == actual["launcher_output"]["path"],
++            "actual complete native output reports settled outer success")
++    launch_prep = Path(actual["launcher_preparation"]["path"])
++    launch_out = Path(actual["launcher_output"]["path"])
++    require(launch_prep == QA / "p210_terminal_launch_revision_02" and
++            launch_out == QA / "p210_terminal_launch_02", "actual fixed outer preparation/output roles")
++    launcher_originals = manifest(launch_prep, actual["launcher_preparation"]["sha256"],
++                                 actual["launcher_preparation"]["payloads"])
++    builder_originals = manifest(PREP, actual["builder_preparation"]["sha256"], 9)
++    require(actual["builder_preparation"]["sha256"] ==
++            "2e99af39ab35bfb9e3fec7c9944927c574fe459b56a1b764a5948dde0266e31a",
++            "actual final root-read builder preparation")
++    launch_receipt = read(launch_out / "RECEIPT.json")
++    require(launch_receipt["status"] == "PASS_P210_OUTER_CAPTURE_NOT_VIEWED" and
++            launch_receipt["original_wait_outcome"] == "COMPLETED" and
++            launch_receipt["original_wait_exit_code"] == 0 and launch_receipt["original_wait_exception"] is None and
++            launch_receipt["cleanup_events"] == [] and launch_receipt["cleanup_exit_code"] == 0 and
++            launch_receipt["builder_reaped"] is True and launch_receipt["builder_group_absent"] is True and
++            launch_receipt["streams_hashed"] is True and launch_receipt["inputs_unchanged"] is True and
++            launch_receipt["observed_runtime_closed"] is True and launch_receipt["failures"] == [] and
++            launch_receipt["cache_absent"] is True and launch_receipt["visual_review"] == "NOT_VIEWED" and
++            launch_receipt["outer_native_exit"] is None,
++            "actual successful settled outer receipt; its own native exit is externally bound, not retrofilled")
++    require(launch_receipt["env"] == ENV and launch_receipt["cwd"] == str(ROOT) and
++            launch_receipt["start_new_session"] is True and launch_receipt["timeout_seconds"] == 21600 and
++            isinstance(launch_receipt["pid"], int) and launch_receipt["pid"] > 0 and
++            launch_receipt["finished_epoch"] >= launch_receipt["started_epoch"],
++            "actual full outer builder command context")
++    try:
++        os.killpg(launch_receipt["pid"], 0)
++    except ProcessLookupError:
++        pass
++    else:
++        raise AssertionError("Actual owned builder group is present at documentary reception")
++    require(not os.path.lexists(launch_out / "UNCLOSED.json") and not os.path.lexists(OUT / "UNCLOSED.json"),
++            "no unsettled or failed outer/build evidence")
++    require(read(launch_out / "SPAWNED.json") == dict(pid=launch_receipt["pid"],
++            owned_pgid=launch_receipt["pid"], start_new_session=True), "complete pre-pinned owned builder spawn")
++    attempted = read(launch_out / "PRE_SPAWN_ATTEMPT.json")
++    require({k: v for k, v in attempted.items() if k not in
++            {"original_wait_outcome", "original_wait_exit_code", "original_wait_exception"}} ==
++            {k: launch_receipt[k] for k in attempted if k not in
++            {"original_wait_outcome", "original_wait_exit_code", "original_wait_exception"}} and
++            attempted["original_wait_outcome"] == "NOT_STARTED" and attempted["original_wait_exit_code"] is None and
++            attempted["original_wait_exception"] is None, "entire actual pre-spawn attempt-to-receipt chain")
++    outer_payloads = manifest(launch_out, actual["launcher_output"]["sha256"],
++                              actual["launcher_output"]["payloads"])
++    require(set(launch_receipt["streams"]) == {"builder.stdout", "builder.stderr"} and
++            all(pin(launch_out / name) == value for name, value in launch_receipt["streams"].items()) and
++            raw(launch_out / "builder.stderr") == b"", "two real separately captured builder streams")
++    before, after = read(launch_out / "INPUTS_BEFORE.json"), read(launch_out / "INPUTS_AFTER.json")
++    require(before == after, "entire actual outer input key equality")
++    for name, value in before.items():
++        require(pin(name) == value, "every actual outer input current key")
++    preflight_dir = QA / "p210_terminal_preflight_02"
++    preflight_keys = manifest(preflight_dir, "d6adc396a8562e8683f66df348aa420ce3f97997b4bf73c0c674f621aac7fb1c", 6)
++    preflight_result, preflight_data = read(preflight_dir / "RESULT.json"), read(preflight_dir / "stdout")
++    require(preflight_result["original_wait_exit_code"] == 0 and preflight_result["inputs_unchanged"] is True and
++            preflight_result["inputs_before"] == preflight_result["inputs_after"] and
++            preflight_data["status"] == "PASS_P210_FINAL_SCHEMA_PREFLIGHT_ONLY" and
++            preflight_data["source"] == pin(PREP / "build_p210.py") and
++            preflight_data["preparation_seal"] == pin(PREP / "SHA256SUMS") and
++            preflight_data["original_input_count"] == len(preflight_data["original_input_pins"]) == 1619 and
++            raw(preflight_dir / "stderr") == b"", "actual complete preflight originals retained by outer")
++    expected_before = {}
++    extra_paths = [QA / name for name in ("record_p210_terminal_preflight_02.py",
++        "P210_TERMINAL_PREFLIGHT02_ROOT_LAUNCH.actual.json", "P210_TERMINAL_PREFLIGHT02_ROOT_COMPLETION.actual.json",
++        "P210_TERMINAL_PREFLIGHT02_ROOT_RECEPTION.actual.json")]
++    for group in (launcher_originals, builder_originals, preflight_keys, {str(p): pin(p) for p in extra_paths},
++                  preflight_result["inputs_before"], preflight_data["original_input_pins"]):
++        for name, value in group.items():
++            require(name not in expected_before or expected_before[name] == value, "exact consistent outer prerequisite union")
++            expected_before[name] = value
++    outer_argv = ["/usr/bin/python3.10", "-I", "-S", "-B", "-X",
++        "pycache_prefix=" + str(launch_out / "unused_outer_cache"), str(launch_prep / "launch_p210_terminal.py"),
++        "--expected-preparation-sha256", actual["launcher_preparation"]["sha256"]]
++    require(shlex.split(launch["command"]) == ["/usr/bin/env", "-i",
++            *[k + "=" + v for k, v in ENV.items()], *outer_argv],
++            "entire actual root launch command is exact clean-environment outer invocation")
++    for phase, label in (("BEFORE", "BEFORE_BUILDER_AND_OUTPUT_CREATION"),
++                         ("AFTER", "AFTER_CLOSED_BUILDER_AND_INPUT_REREAD")):
++        observed_outer = read(launch_out / ("LAUNCHER_RUNTIME_" + phase + ".json"))
++        require(observed_outer["phase"] == label and observed_outer["orig_argv"] == outer_argv and
++                observed_outer["cwd"] == str(ROOT) and observed_outer["environment"] == ENV and
++                observed_outer["executable"] == "/usr/bin/python3.10" and observed_outer["sys_path"] ==
++                ["/usr/lib/python310.zip", "/usr/lib/python3.10", "/usr/lib/python3.10/lib-dynload"] and
++                observed_outer["cache_prefix"] == str(launch_out / "unused_outer_cache") and
++                observed_outer["cache_absent"] is True and not os.path.lexists(observed_outer["cache_prefix"]),
++                "entire actual outer runtime context and cache absence")
++        current(observed_outer["cache_prefix"])
++        for flag in ("dont_write_bytecode", "no_user_site", "no_site", "ignore_environment", "isolated"):
++            require(re.search(r"(?:\(|, )" + flag + r"=1(?:,|\))", observed_outer["flags"]),
++                    "actual outer isolated source-only flag")
++        require("optimize=0" in observed_outer["flags"], "actual outer optimization zero")
++        mapped = {str(Path(line.split(None, 5)[5]).resolve()) for line in observed_outer["maps_raw"].splitlines()
++                  if len(line.split(None, 5)) == 6 and line.split(None, 5)[5].startswith("/")}
++        require(mapped == set(observed_outer["mapped_files"]), "entire raw outer maps correspondence")
++        observations = list(observed_outer["mapped_files"].items())
++        for value in observed_outer["modules"].values():
++            require(Path(value["path"]).suffix not in {".pyc", ".pyo"}, "outer actual source module not bytecode")
++            observations.append((value["path"], {k: value[k] for k in ("sha256", "bytes")}))
++        for name, value in observations:
++            require(pin(name) == value == before.get(name), "complete actual outer observed current file")
++            if phase == "BEFORE":
++                require(name not in expected_before or expected_before[name] == value, "consistent early outer observation")
++                expected_before[name] = value
++    expected_before["/usr/bin/python3.10"] = pin("/usr/bin/python3.10")
++    require(before == expected_before, "entire actual outer preflight/preparation/early-runtime input union")
++    exact_pair(launch_out / "executed_launcher.py", launch_prep / "launch_p210_terminal.py")
++    exact_pair(launch_out / "executed_builder.py", PREP / "build_p210.py")
++    exact_pair(OUT / "executed_source.py", PREP / "build_p210.py")
++    # The actual native outer has already succeeded and attested owned-group
++    # closure before these immutable builder payload hashes are inspected.
++    build_members = manifest(OUT, actual["build"]["sha256"], actual["build"]["payloads"])
++    result = read(OUT / "RESULT.json")
++    require(launch_receipt["builder_closure"] == {
++            "manifest": pin(OUT / "SHA256SUMS"), "payloads": actual["build"]["payloads"],
++            "result": pin(OUT / "RESULT.json"), "status": "PASS_P210_SOURCE_ONLY_BUILD_PAIR_NOT_VIEWED"},
++            "actual outer closure binds complete physical builder result and seal")
++    expected_root_report = dict(status=launch_receipt["status"], output=str(launch_out), builder_exit_code=0,
++        launcher_seal=pin(launch_out / "SHA256SUMS"), builder_closure=launch_receipt["builder_closure"])
++    require(root_report == expected_root_report and root_output == json.dumps(expected_root_report, sort_keys=True) + "\n",
++            "entire actual root native output binds this exact closed outer/build pair; outer stderr not separately claimed")
++    recipe = read(PREP / "INPUT_CONTRACT.json")
++    require(recipe["schema"] == "p210-terminal-build-actual-bound-contract-v1" and
++            recipe["stage"] == "ACTUAL_B_ROOT_DELTA_PHYSICAL_ROUND2_BOUND_NOT_EXECUTED",
++            "actual final builder contract schema")
++    actual_final = read(OUT / "FINAL_SCHEMA_BINDING_RETURN.json")
++    bound = recipe["final_schema_binding"]
++    require(actual_final == preflight_data["final_schema_binding_return"] and
++            read(OUT / "ORIGINALS_BEFORE.json") == read(OUT / "ORIGINALS_AFTER.json") ==
++            preflight_data["original_input_pins"], "entire actual successful preflight/build original identity")
++    expected_prerequisites = {}
++    require(len(bound["manifests"]) == 8 and len(bound["roles"]) == 41, "complete actual builder role census")
++    for row in bound["manifests"].values():
++        expected_prerequisites.update(manifest(Path(row["path"]), row["seal"]["sha256"], row["payloads"]))
++    for row in bound["roles"].values():
++        value = {k: row[k] for k in ("sha256", "bytes")}
++        require(pin(row["path"]) == value and
++                (row["path"] not in expected_prerequisites or expected_prerequisites[row["path"]] == value),
++                "all actual named prerequisite keys and duplicate consistency")
++        expected_prerequisites[row["path"]] = value
++    require(len(expected_prerequisites) == 1594 and actual_final["required_input_pins"] == expected_prerequisites and
++            actual_final["papers"] == bound["papers"] and
++            actual_final["status"] == "BOUND_ACTUAL_P210_B_ROOT_ROUND2_PRETERMINAL_ORIGINALS",
++            "complete actually executed final schema return; no omitted dependency roles")
++    root_b = read(bound["roles"]["root_b"]["path"])
++    current_b = read(bound["roles"]["b_current"]["path"])
++    round2 = read(bound["roles"]["round2_reception"]["path"])
++    require(root_b["schema"] == "p210-b-root-delta-closure-v1" and
++            root_b["status"] == "ROOT_ACCEPTED_B_DELTA_ORIGINAL_CLOSURE_PASS" and
++            root_b["reviewer_delta_accepted"] is True and root_b["root_original_inspection_complete"] is True and
++            root_b["root_replay_closure_complete"] is True and root_b["current_open_findings"] == 0 and
++            current_b["accepted_delta"] is True and current_b["reviewer"] == root_b["reviewer"] == "/root/p210_b_reviewer" and
++            current_b["current_open_counts"] == dict(Critical=0, Major=0, Minor=0) and
++            round2["status"] == "PASS_ROOT_PHYSICAL_P210_ROUND2_RECEPTION" and round2["payloads"] == 524 and
++            round2["round2_manifest_sha256"] == actual_final["papers"]["P210"]["freeze_manifest"]["sha256"],
++            "actual same-B/root/physical-Round2 prerequisites; not a new manuscript verdict")
++    argv = ["/usr/bin/python3.10", "-I", "-S", "-B", "-X", "pycache_prefix=" + str(OUT / "unused_parent_cache"),
++            str(PREP / "build_p210.py"), "--output", str(OUT), "--expected-preparation-sha256",
++            actual["builder_preparation"]["sha256"]]
++    require(launch_receipt["argv"] == argv and launch_receipt["stdout"] == "builder.stdout" and
++            launch_receipt["stderr"] == "builder.stderr", "actual argv and physical separate stream roles")
++    builder_stdout = text(launch_out / "builder.stdout")
++    reported = json.loads(builder_stdout)
++    require(reported == dict(status=result["status"], output=str(OUT), commands=len(result["commands"]),
++            builds=result["builds"], failures=result["failures"], seal=pin(OUT / "SHA256SUMS"),
++            payloads=actual["build"]["payloads"]) and len(result["commands"]) == 33,
++            "complete actual builder raw stdout matches its immutable RESULT")
++    return dict(preparation_sha256=actual["builder_preparation"]["sha256"], preparation_payloads=9,
++        build_sha256=actual["build"]["sha256"], build_payloads=actual["build"]["payloads"],
++        final_schema_binding_return=actual_final,
++        actual_native=dict(argv=["/usr/bin/env", "-i", *[k + "=" + v for k, v in ENV.items()], *argv],
++                           cwd=str(ROOT), exit_code=launch_receipt["original_wait_exit_code"],
++                           stdout=builder_stdout, stderr=text(launch_out / "builder.stderr")))
+ 
+-    A later separately sealed revision must fully read the actual builder
+-    preparation/output manifests, FINAL_SCHEMA_BINDING_RETURN, accepted
+-    B/root/Round2 prerequisites and actual outer native launch/completion
+-    plus complete raw streams. It must use their actual schemas, pin every
+-    consumed path through current/raw, and derive this adapter's own binding
+-    interface: preparation/build sha256 and payload counts, the full final
+-    schema-binding return, and actual_native normalized argv/cwd/native exit
+-    plus stdout/stderr bytes. Those interface names are not claims about
+-    future artifact filenames or schema. A caller-provided bool, dictionary,
+-    output RESULT or proposed manifest cannot attest native completion.
+-    """
+-    recipe = read(HERE / "INPUT_CONTRACT.json")
+-    require(recipe["schema"] == "p210-terminal-reception-unbound-contract-v1" and
+-            recipe["stage"] == "PRELIMINARY_UNBOUND_NO_EXECUTION" and
+-            recipe["final_schema_binding"] is None, "unchanged unbound preparation contract")
+-    raise RuntimeError("UNBOUND_ACTUAL_P210_TERMINAL_SEALS_ROOT_NATIVE_AND_FINAL_SCHEMA: "
+-                       "new exact-schema source review and separate seal required")
+ 
+ 
+ def originals(recipe, binding):
+@@ -553,7 +743,7 @@
+             "Six root page views are explicitly outside this inspector; rendered PNGs are not visual review.",
+             "Historical first-pass .out files have complete native before/after chain roles, not separate physical old-byte snapshots.",
+             "Original bounded known-path/FLS/link-time/parent-map scope is not child-map, transient dlopen, non-FLS or continuous OS/startup tracing.",
+-            "The actual outer native schema and raw-stream provenance must be bound in a later sealed exact-schema revision; this preparation is unbound."]
++            "The actual outer02 native command/completion and separate builder streams are bound; the root tool envelope does not supply a separate outer-stderr file."]
+     ), sort_keys=True))
+ 
+ 

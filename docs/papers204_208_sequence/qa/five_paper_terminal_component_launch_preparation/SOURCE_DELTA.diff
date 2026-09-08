@@ -1,0 +1,203 @@
+--- accepted/p208_p209_reuse_launcher_revision_01/launcher.py
++++ prepared/five_paper_terminal_component_launch_preparation/launcher.py
+@@ -1,10 +1,10 @@
+ #!/usr/bin/env python3
+-"""One direct native launch of the sealed, read-only P208/P209 reuse checker.
+-
+-Prepared adaptation of the pinned P209 terminal launcher and four-build
+-recorder's input/receipt ideas. Neither original nor checker is imported.
+-Actual process-group settling, complete raw streams and sampled maps are
+-recorded here; no science, compilation, rendering or visual review is run.
++"""One bounded native launch of the sealed four-completed-paper component.
++
++Adapted from the actually accepted P208/P209 read-only reuse launcher.
++The component and its three selectors remain at their exact sealed source
++paths; no old auditor, writer, scientific producer or build is executed.
++This wrapper can only accept a FOUR-paper component, never five-paper PASS.
+ """
+ import gzip
+ import hashlib
+@@ -21,12 +21,14 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-PREP = QA / 'p208_p209_reuse_launcher_revision_01'
+-CHECKER_PREP = QA / 'p208_p209_reuse_revision_01'
+-CHECKER = CHECKER_PREP / 'inspect.py'
+-CHECKER_SEAL = 'ac8fe8834360fdb35e70860416a3c7bb2283b8e32f738251ffc5a1acdfc52a46'
+-CHECKER_SOURCE = '8b38768261afe5bd6db8d769a8209b4aa3daec40119189c953e69c9b20e60ea0'
+-OUT = QA / 'p208_p209_reuse_02'
++PREP = QA / 'five_paper_terminal_component_launch_preparation'
++CHECKER_PREP = QA / 'five_paper_terminal_gate_preparation'
++CHECKER = CHECKER_PREP / 'four_completed.py'
++CHECKER_SEAL = 'b984a1d494d0304a39704da1773782e1f6b10902fa4d8b0dbae77bad86c84e20'
++CHECKER_SOURCE = '0f762c56781041094a0650abcd5b706360722a2afe72aff812485beaa46738bc'
++ROOT_BINDING = CHECKER_PREP / 'ROOT_REUSE_BINDING.json'
++ROOT_BINDING_SHA = 'b722f61ae2abcc4220a99473b6d9bb104962b52ea509c258f976c0136d08affd'
++OUT = QA / 'five_paper_terminal_component_run_01'
+ PYTHON = Path('/usr/bin/python3.10')
+ STDLIB = Path('/usr/lib/python3.10')
+ ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
+@@ -35,6 +37,7 @@
+     '/usr/lib/x86_64-linux-gnu/gconv', '/usr/lib/gconv')))
+ TIMEOUT_SECONDS = 600
+ SAMPLE_INTERVAL_SECONDS = 0.25
++HEARTBEAT_SECONDS = 30
+ PROC = None
+ SPAWN_ATTEMPTED = False
+ SPAWNING, DEFERRED_SIGNAL = False, None
+@@ -79,7 +82,10 @@
+ 
+ 
+ def raw_save(path, data):
+-    with Path(path).open('xb') as stream:
++    path = Path(path)
++    require(path.is_relative_to(OUT) and path.parent.resolve(strict=True) == path.parent,
++            'Write outside the exclusive physical component output')
++    with path.open('xb') as stream:
+         stream.write(data)
+ 
+ 
+@@ -121,15 +127,39 @@
+ 
+ def scoped_inputs(own_seal):
+     own = package(PREP, own_seal, 5)
+-    checker = package(CHECKER_PREP, CHECKER_SEAL, 7)
+-    require(checker[str(CHECKER)]['sha256'] == CHECKER_SOURCE, 'Checker source identity changed')
+-    contract = json.loads((CHECKER_PREP / 'INPUT_PINS.json').read_bytes())
+-    expected = contract['fixed_inputs']; require(len(expected) == 128, 'Fixed input count changed')
++    checker = package(CHECKER_PREP, CHECKER_SEAL, 14)
++    require(checker[str(CHECKER)]['sha256'] == CHECKER_SOURCE, 'Component source identity changed')
++    require(checker[str(ROOT_BINDING)]['sha256'] == ROOT_BINDING_SHA, 'Actual root reuse binding changed')
++    contract = json.loads((CHECKER_PREP / 'FOUR_INPUTS.json').read_bytes())
++    expected = contract['fixed_inputs']; require(len(expected) == 54, 'Four-component fixed input count changed')
+     actual = pins(expected)
+     require(all(all(actual[p][k] == v[k] for k in ('sha256', 'bytes')) for p, v in expected.items()),
+-            'One of 128 fixed checker inputs changed')
+-    return {'launcher_preparation': own, 'checker_preparation': checker, 'fixed_inputs': actual}
+-
++            'One of 54 fixed four-component inputs changed')
++    binding = json.loads(ROOT_BINDING.read_bytes())
++    require(binding['schema'] == 'actual-p208-p209-root-reuse-reception-binding-v1' and
++            binding['not_a_placeholder'] is True and binding['native_exit_selector'] == ['result', 'exit_code'],
++            'Actual accepted root binding schema, not a future placeholder')
++    anchors = pins((binding['native'], binding['report']))
++    for role in ('native', 'report'):
++        require(all(anchors[binding[role]][k] == binding[role + '_pin'][k] for k in ('sha256', 'bytes')),
++                'Bound actual root reception input changed')
++    receipt = json.loads(Path(binding['native']).read_bytes())
++    require(receipt['result']['exit_code'] == 0 and
++            binding['accepted_status'] in Path(binding['report']).read_text(),
++            'Bound root reuse reception is not actually accepted')
++    # Lifecycle text may change before launch. The component checks the five
++    # fixed theorem-block hashes; this wrapper fences the whole live index
++    # only over this actual launch interval, never an invented historical pin.
++    index = Path(contract['current_index'])
++    index = index if index.is_absolute() else ROOT / index
++    require(index.is_relative_to(ROOT), 'Current theorem index outside workspace')
++    anchors.update(pins((index,)))
++    provenance = json.loads((PREP / 'PROVENANCE.json').read_bytes())['inputs']
++    adaptation = pins(provenance)
++    require(all(all(adaptation[p][k] == v[k] for k in ('sha256', 'bytes')) for p, v in provenance.items()),
++            'Pinned accepted launcher/contract adaptation input changed')
++    return {'launcher_preparation': own, 'component_preparation': checker, 'fixed_inputs': actual,
++            'actual_root_binding_and_live_ceiling_index': anchors, 'adaptation_inputs': adaptation}
+ 
+ def configuration():
+     optional = set(map(Path, ('/etc/ld.so.cache', '/etc/ld.so.conf', '/etc/ld.so.preload',
+@@ -256,6 +286,7 @@
+             SPAWNING = False
+         if DEFERRED_SIGNAL is not None: interrupted(DEFERRED_SIGNAL, None)
+         deadline = time.monotonic() + TIMEOUT_SECONDS
++        next_heartbeat = time.monotonic() + HEARTBEAT_SECONDS
+         while PROC.poll() is None:
+             try:
+                 raw_maps = Path('/proc/' + str(PROC.pid) + '/maps').read_text()
+@@ -264,7 +295,13 @@
+                 samples['last'] = item; samples['successful_samples'] += 1
+             except Exception:
+                 samples['sample_errors'].append({'epoch': time.time(), 'error': traceback.format_exc()})
+-            if time.monotonic() >= deadline:
++            current = time.monotonic()
++            if current >= next_heartbeat:
++                event = {'epoch': time.time(), 'pid': PROC.pid, 'status': 'FOUR_COMPONENT_NATIVE_RUNNING'}
++                row['heartbeats'].append(event)
++                print(json.dumps(event, sort_keys=True), flush=True)
++                next_heartbeat = current + HEARTBEAT_SECONDS
++            if current >= deadline:
+                 row['outcome'] = 'TIMED_OUT'; break
+             time.sleep(SAMPLE_INTERVAL_SECONDS)
+         if row['outcome'] == 'RUNNING': row['outcome'] = 'COMPLETED'
+@@ -282,13 +319,15 @@
+ 
+ def main():
+     global PHASE
+-    require(len(sys.argv) == 3 and sys.argv[1] == 'launch-current-p208-p209' and
++    require(len(sys.argv) == 3 and sys.argv[1] == 'launch-four-completed-component' and
+             re.fullmatch(r'[0-9a-f]{64}', sys.argv[2]), 'Require exact launcher mode and own preparation digest')
+     require(Path(__file__) == PREP / 'launcher.py' and Path.cwd() == ROOT and Path(sys.executable).resolve() == PYTHON and
+             dict(os.environ) == ENV and sys.flags.isolated == sys.flags.no_site == 1 and
+             sys.flags.optimize == 0 and sys.dont_write_bytecode and sysconfig.get_path('stdlib') == str(STDLIB),
+             'Require exact prepared source, cwd, ENV4 and system Python -I -S -B; inherited environment is not recorded')
+     require(sys.path == ['/usr/lib/python310.zip', str(STDLIB), str(STDLIB / 'lib-dynload')], 'Unexpected isolated source-only search path')
++    require(not os.path.lexists('/usr/lib/python310.zip') and not os.path.lexists('/etc/ld.so.preload'),
++            'Unexpected interpreter zip or loader preload injection')
+     require(sys.pycache_prefix == str(OUT / 'unused_launcher_cache') and not os.path.lexists(sys.pycache_prefix) and
+             not os.path.lexists(OUT / 'unused_checker_cache'), 'Require separate exact absent cache roles')
+     require(OUT.parent.resolve() == OUT.parent and not os.path.lexists(OUT), 'Refuse existing or aliased output')
+@@ -297,15 +336,19 @@
+         'env': ENV, 'flags': str(sys.flags), 'pycache_prefix': sys.pycache_prefix, 'output': str(OUT),
+         'expected_launcher_preparation_sha256': own_seal, 'checker_preparation_sha256': CHECKER_SEAL})
+     row = {'argv': [str(PYTHON), '-I', '-S', '-B', '-X', 'pycache_prefix=' + str(OUT / 'unused_checker_cache'),
+-        str(CHECKER), '--expected-preparation-sha256', CHECKER_SEAL], 'cwd': str(ROOT), 'env': ENV,
++        str(CHECKER), '--expected-preparation-sha256', CHECKER_SEAL,
++        '--reuse-root-binding', str(ROOT_BINDING), '--reuse-root-binding-sha256', ROOT_BINDING_SHA], 'cwd': str(ROOT), 'env': ENV,
+         'stdin': 'DEVNULL', 'stdout': 'checker.stdout', 'stderr': 'checker.stderr', 'start_new_session': True,
+-        'timeout_seconds': TIMEOUT_SECONDS, 'started_epoch': None, 'exit': None, 'outcome': 'NOT_STARTED', 'cleanup': []}
++        'timeout_seconds': TIMEOUT_SECONDS, 'heartbeat_seconds': HEARTBEAT_SECONDS, 'heartbeats': [],
++        'started_epoch': None, 'exit': None, 'outcome': 'NOT_STARTED', 'cleanup': []}
+     failures, before, scoped_before, config_before, names_before, extra = [], None, None, None, None, set()
+     parent_before, child_samples = None, None
+     try:
+         PHASE = 'baseline'
+         scoped_before = scoped_inputs(own_seal); save(OUT / 'SCOPED_INPUTS_BEFORE.json', scoped_before)
+         config_before = configuration(); save(OUT / 'CONFIGURATION_BEFORE.json', config_before)
++        require(all(not row['exists'] and row['symlink'] is None for name, row in config_before['presence'].items()
++                    if name.endswith(('._pth', '/pyvenv.cfg'))), 'Unexpected interpreter path-injection file')
+         parent_before = parent_observation('BEFORE_KNOWN_KEY_AND_CHILD'); save(OUT / 'PARENT_BEFORE.json', parent_before)
+         names_before = runtime_names(config_before); extra = consumed(parent_before)
+         require(not any(p.endswith(('.pyc', '.pyo')) for p in extra), 'Parent bytecode observation')
+@@ -377,19 +420,27 @@
+         parsed = json.loads((OUT / 'checker.stdout').read_bytes())
+         require(row['exit'] == 0 and row['outcome'] == 'COMPLETED' and streams['checker.stderr']['bytes'] == 0 and
+                 not any('signal' in item for item in row['cleanup']) and
+-                parsed['status'] == 'PASS_CURRENT_KEYS_REUSED_NOT_NEW_EXECUTIONS_OR_BATCH_ACCEPTANCE' and
+-                all(parsed[key] == 0 for key in ('mathematical_executions', 'builds', 'page_views')),
+-                'Checker native exit/result does not establish successful read-only reuse')
++                parsed['status'] == 'FOUR_COMPLETED_COMPONENT_PASS_P210_NOT_ASSESSED_NOT_FIVE_PAPER_PASS' and
++                parsed['papers_checked'] == ['P205', 'P207', 'P208', 'P209'] and
++                parsed['prior_completed_papers'] == 4 and parsed['p210_accepted_by_this_component'] is False and
++                parsed['required_final_five'] == ['P205', 'P207', 'P208', 'P209', 'P210'] and
++                parsed['current_valid_author_A_B_pairs'] == 12 and parsed['current_valid_source_only_builds'] == 8 and
++                parsed['actual_prior_page_attestations_bound'] == 21 and parsed['five_contract_ceilings_checked'] == 5 and
++                all(parsed[key] == 0 for key in ('new_scientific_executions', 'new_builds', 'new_page_views',
++                    'new_reviews', 'old_auditors_or_writers_executed', 'files_written')) and
++                parsed['owner'] == 'OWNER_AMBER' and parsed['external'] == 'HOLD_EXTERNAL',
++                'Native result does not establish the exact read-only FOUR-paper component boundary')
+     except BaseException: failures.append({'phase': 'final_closure', 'error': traceback.format_exc()})
+-    status = 'PASS_NATIVE_READ_ONLY_REUSE_LAUNCH_NOT_BATCH_ACCEPTANCE' if not failures else 'FAIL_PRESERVED'
++    status = 'PASS_NATIVE_FOUR_COMPLETED_COMPONENT_NOT_FIVE_PAPER_ACCEPTANCE' if not failures else 'FAIL_PRESERVED'
+     receipt = {'status': status, 'native': row, 'streams': streams, 'failures': failures,
+         'known_inputs_unchanged': before is not None and before == after, 'runtime_membership_unchanged': names_before is not None and names_before == names_after,
+         'scoped_inputs_unchanged': scoped_before is not None and scoped_before == scoped_after,
+         'configuration_unchanged': config_before is not None and config_before == config_after,
+         'checker_json_status': parsed.get('status') if isinstance(parsed, dict) else None,
+         'complete_checker_json': 'checker.stdout' if 'checker.stdout' in streams else None,
+-        'scientific_executions': 0, 'builds': 0, 'page_views': 0, 'external': 'HOLD_EXTERNAL',
+-        'boundary': 'One actual direct read-only checker. Known source/runtime/configuration before/after keys and retained parent/child samples only; no OS reconstruction or continuous trace.'}
++        'scientific_executions': 0, 'builds': 0, 'page_views': 0, 'new_reviews': 0,
++        'p210_accepted': False, 'five_paper_acceptance': False, 'owner': 'OWNER_AMBER', 'external': 'HOLD_EXTERNAL',
++        'boundary': 'One actual direct read-only FOUR-completed-paper component. Known source/runtime/configuration before/after keys and retained parent/child samples only; no OS reconstruction or continuous trace. P210 and full five-paper acceptance remain separate.'}
+     save(OUT / 'RECEIPT.json', receipt); closure = seal_output()
+     print(json.dumps({'status': status, 'output': str(OUT), 'checker_exit': row['exit'],
+         'checker_json_status': receipt['checker_json_status'], 'output_seal': closure}, sort_keys=True))

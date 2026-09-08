@@ -1,0 +1,97 @@
+{
+  "schema": "p208-p209-reuse-launcher-static-v1",
+  "status": "PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED",
+  "native_static": {
+    "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast,hashlib,json,os\nfrom pathlib import Path\nbase=Path('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_p209_reuse_launcher_preparation')\nchecker=base.parent/'p208_p209_reuse_preparation'\ndef pin(p):\n data=Path(p).read_bytes();return {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}\nsource=(base/'launcher.py').read_bytes();tree=ast.parse(source,filename=str(base/'launcher.py'));compile(tree,str(base/'launcher.py'),'exec')\nimports=sorted({n.name for node in ast.walk(tree) if isinstance(node,ast.Import) for n in node.names}|{node.module for node in ast.walk(tree) if isinstance(node,ast.ImportFrom)})\nassert imports==['gzip','hashlib','json','os','pathlib','re','signal','subprocess','sys','sysconfig','time','traceback'],imports\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in {'eval','exec','__import__'} for n in ast.walk(tree))\npopen=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and isinstance(n.func.value,ast.Name) and n.func.value.id=='subprocess' and n.func.attr=='Popen'];assert len(popen)==1\nassert {k.arg for k in popen[0].keywords}=={'cwd','env','stdin','stdout','stderr','start_new_session'}\nassert next(k.value.value for k in popen[0].keywords if k.arg=='start_new_session') is True\nassignments={t.id:n.value for n in tree.body if isinstance(n,ast.Assign) for t in n.targets if isinstance(t,ast.Name)}\nassert ast.literal_eval(assignments['ENV'])=={'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC'}\nassert ast.literal_eval(assignments['TIMEOUT_SECONDS'])==600 and ast.literal_eval(assignments['SAMPLE_INTERVAL_SECONDS'])==0.25\nassert pin(checker/'SHA256SUMS')['sha256']==ast.literal_eval(assignments['CHECKER_SEAL'])\nassert pin(checker/'inspect.py')['sha256']==ast.literal_eval(assignments['CHECKER_SOURCE'])\nmanifest={}\nfor line in (checker/'SHA256SUMS').read_text().splitlines():\n digest,name=line.split('  ',1);assert pin(checker/name)['sha256']==digest;manifest[name]=digest\nassert len(manifest)==5\nfixed=json.loads((checker/'INPUT_PINS.json').read_text())['fixed_inputs'];assert len(fixed)==128\nprovenance=json.loads((base/'PROVENANCE.json').read_text()); references={row['path']:row['sha256'] for row in provenance['source_patterns_read_as_text']}\nassert all(pin(p)['sha256']==digest for p,digest in references.items())\nbefore={p:pin(p) for p in fixed};assert before==fixed\nafter={p:pin(p) for p in fixed};assert before==after and source==(base/'launcher.py').read_bytes()\nassert not os.path.lexists(base.parent/'p208_p209_reuse_01')\nprint(json.dumps({'status':'PASS_LAUNCHER_PREPARATION_STATIC_ONLY_NOT_EXECUTED','source':pin(base/'launcher.py'),'source_lines':len(source.splitlines()),'ast_parse_compile_without_execution':True,'single_native_Popen_site':1,'checked_Popen_start_new_session':True,'exact_ENV4_literal':True,'timeout_seconds':600,'sample_interval_seconds':0.25,'checker_preparation_payloads_checked':5,'fixed_local_inputs_checked_twice':128,'provenance_source_pins_checked':len(references),'future_output_absent':True,'imports':imports,'launcher_executions':0,'checker_executions':0,'host_runtime_enumerations':0,'science_runs':0,'builds':0,'views':0,'external':'HOLD_EXTERNAL'},sort_keys=True))\nPY",
+    "tool_return": {
+      "chunk_id": "2fe18b",
+      "wall_time_seconds": 0.000005849,
+      "exit_code": 0,
+      "original_token_count": 208,
+      "output": "{\"ast_parse_compile_without_execution\": true, \"builds\": 0, \"checked_Popen_start_new_session\": true, \"checker_executions\": 0, \"checker_preparation_payloads_checked\": 5, \"exact_ENV4_literal\": true, \"external\": \"HOLD_EXTERNAL\", \"fixed_local_inputs_checked_twice\": 128, \"future_output_absent\": true, \"host_runtime_enumerations\": 0, \"imports\": [\"gzip\", \"hashlib\", \"json\", \"os\", \"pathlib\", \"re\", \"signal\", \"subprocess\", \"sys\", \"sysconfig\", \"time\", \"traceback\"], \"launcher_executions\": 0, \"provenance_source_pins_checked\": 3, \"sample_interval_seconds\": 0.25, \"science_runs\": 0, \"single_native_Popen_site\": 1, \"source\": {\"bytes\": 24671, \"sha256\": \"5465a86c89a73454e52bf6e2b7a689cee48eba612cf0fbe5de3d0fa5a65d9fb1\"}, \"source_lines\": 412, \"status\": \"PASS_LAUNCHER_PREPARATION_STATIC_ONLY_NOT_EXECUTED\", \"timeout_seconds\": 600, \"views\": 0}\n"
+    },
+    "parsed_stdout": {
+      "ast_parse_compile_without_execution": true,
+      "builds": 0,
+      "checked_Popen_start_new_session": true,
+      "checker_executions": 0,
+      "checker_preparation_payloads_checked": 5,
+      "exact_ENV4_literal": true,
+      "external": "HOLD_EXTERNAL",
+      "fixed_local_inputs_checked_twice": 128,
+      "future_output_absent": true,
+      "host_runtime_enumerations": 0,
+      "imports": [
+        "gzip",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "signal",
+        "subprocess",
+        "sys",
+        "sysconfig",
+        "time",
+        "traceback"
+      ],
+      "launcher_executions": 0,
+      "provenance_source_pins_checked": 3,
+      "sample_interval_seconds": 0.25,
+      "science_runs": 0,
+      "single_native_Popen_site": 1,
+      "source": {
+        "bytes": 24671,
+        "sha256": "5465a86c89a73454e52bf6e2b7a689cee48eba612cf0fbe5de3d0fa5a65d9fb1"
+      },
+      "source_lines": 412,
+      "status": "PASS_LAUNCHER_PREPARATION_STATIC_ONLY_NOT_EXECUTED",
+      "timeout_seconds": 600,
+      "views": 0
+    }
+  },
+  "independent_static_review": {
+    "reviewer": "/root/thirty_third_finite_scout/orientation_source_desk/reuse_launcher_static",
+    "reviewed_source_sha256": "5a8a7383e238f5bbd172ef6e40db5a9529fbb97af7cde158263ab05747de6001",
+    "reviewed_source_lines": 378,
+    "scope": "Complete original four-build recorder and complete initial launcher draft, read as text only. No execution, import, host inventory or writes. Reviewer released its slot after this bounded check.",
+    "findings": [
+      {
+        "issue": "Initial observation stored constant ENV and did not compare late isolation settings.",
+        "implemented": "Actual parent environment is validated against ENV4 before safe recording; exact parent system search-path guard and early/late environment/flags/cwd/executable/path/cache comparisons added."
+      },
+      {
+        "issue": "Default SIGTERM could bypass cleanup of the separate-session checker.",
+        "implemented": "SIGTERM/SIGINT become recorded interruptions; delivery during the narrow Popen/PID publication interval is deferred until a returned owned handle is available. Original handlers restored on exit. SIGKILL/machine-loss and unreturned handles remain explicitly unclosed."
+      },
+      {
+        "issue": "Initial configuration recursive census omitted nested directory and broken-link states.",
+        "implemented": "Full recursive configuration entry presence, file/directory kind, resolution and symlink text added; bytes of all file entries remain in known input keys."
+      },
+      {
+        "issue": "An exit-zero child requiring termination of a surviving group could still pass.",
+        "implemented": "Any actual cleanup signal entry prohibits PASS, even when group settling succeeds."
+      }
+    ],
+    "review_boundary": "The reviewer did not review the final revised bytes; root must read all final source before execution."
+  },
+  "main_static_review": {
+    "final_source": {
+      "bytes": 24671,
+      "sha256": "5465a86c89a73454e52bf6e2b7a689cee48eba612cf0fbe5de3d0fa5a65d9fb1"
+    },
+    "read_only_checker_imported": false,
+    "launcher_or_checker_executed": false,
+    "host_tree_inventory_executed": false,
+    "additional_corrections": [
+      "Exception-preserved mutable child-sample buffer; KeyboardInterrupt/SystemExit are not swallowed as sampling read errors.",
+      "Durable SPAWNED.json and NATIVE_RESULT.json before settled stream hashing.",
+      "Every actual owned-group existence/absence/unknown probe is recorded; unknown signal/probe/reap handling prevents seal.",
+      "Per-path settled stream and scoped-input after-read errors preserved without replacing before evidence.",
+      "Complete after preparation validation remains separate from tolerant after capture; physical membership changes cannot pass.",
+      "Only one direct subprocess.Popen site; no old-code imports, bootstrap, exec/eval, science, build or render calls."
+    ],
+    "boundary": "Static parsing/compilation and bounded local input/source pin checks only. Actual native behavior, system runtime membership and current complete checker reuse result remain untested."
+  },
+  "external": "HOLD_EXTERNAL"
+}

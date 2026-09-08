@@ -1,0 +1,36 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_terminal_build_preparation/build_p210.py
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_terminal_build_revision_01/build_p210.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Preliminary P210 terminal source-only build pair; HARD UNBOUND, never executed.
++"""P210 terminal source-only build revision 01; STILL UNBOUND, never executed.
+ 
+ Disclosed reduction of the fully read accepted four-build infrastructure.
+ No old program is imported or executed. A new root-reviewed final revision
+@@ -22,7 +22,7 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-PREP = QA / 'p210_terminal_build_preparation'
++PREP = QA / 'p210_terminal_build_revision_01'
+ SCRIPT = PREP / 'build_p210.py'
+ PAPER = ROOT / 'papers/210-weakly-increasing-run-aggregation'
+ SOURCE_NAMES = ('main.tex', 'math_commands.tex', 'references.bib',
+@@ -356,7 +356,7 @@
+             require(round2_pages == paper['pages'] == 6, 'Measure actual Round2 six-page baseline before builds')
+             for number in (1, 2):
+                 label = ident + '_cold_build_' + str(number)
+-                cold = out / label
++                cold = out / ('cold_build_' + str(number))
+                 cold.mkdir()
+                 for name in paper['source_names']:
+                     target = cold / name
+@@ -445,7 +445,7 @@
+                           'venue_page_limit': None, 'bibtex_warnings_or_errors': []}
+                 save(out / (label + '_MEASURED.json'), result)
+                 builds.append(result)
+-            pair = [out / (ident + '_cold_build_' + str(n)) / 'main.pdf' for n in (1, 2)]
++            pair = [out / ('cold_build_' + str(n)) / 'main.pdf' for n in (1, 2)]
+             command(ident + '_pair_cmp', ['/usr/bin/cmp', '--', *map(str, pair)], out, pair)
+     except BaseException:
+         failures.append({'phase': 'build', 'traceback': traceback.format_exc()})

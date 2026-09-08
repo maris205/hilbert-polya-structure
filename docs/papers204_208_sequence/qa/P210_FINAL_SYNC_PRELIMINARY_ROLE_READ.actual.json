@@ -1,0 +1,74 @@
+{
+  "scope": "Read-only preliminary repository-role check during unfinished terminal work. No Git write, fetch, stage, commit or push.",
+  "original_failure": {
+    "command": "git --git-dir=/root/symbolic-dynamics-private-sync-accepted-20260907.git ls-remote origin refs/heads/main",
+    "result": {
+      "chunk_id": "da13c4",
+      "wall_time_seconds": 0.00000675,
+      "exit_code": 128,
+      "original_token_count": 46,
+      "output": "fatal: 'origin' does not appear to be a git repository\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n"
+    }
+  },
+  "omitted_remote_config_probe": {
+    "command": "git --git-dir=/root/symbolic-dynamics-private-sync-accepted-20260907.git config --get-regexp '^remote\\.'",
+    "result": {
+      "chunk_id": "c4317b",
+      "wall_time_seconds": 0.00000535,
+      "exit_code": 1,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "diagnosis": "The bare destination uses the documented per-command include of the original mirror config; its own local config has no origin. Original failed query omitted that include. No credential/configuration change was made.",
+  "actual_corrected_launch": {
+    "cmd": "GIT_OPTIONAL_LOCKS=0 GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=20 -o ConnectionAttempts=1' git -C /root/symbolic-dynamics-private-sync-accepted-20260907.git -c include.path=/root/autodl-tmp/hilbert-polya-structure/.git/config -c core.bare=true -c core.fsmonitor=false -c gc.auto=0 ls-remote --exit-code origin refs/heads/main",
+    "result": {
+      "chunk_id": "4bfd77",
+      "wall_time_seconds": 1.001508618,
+      "session_id": 32791,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "actual_corrected_completion": {
+    "chunk_id": "5bc57f",
+    "wall_time_seconds": 0.00000304,
+    "exit_code": 0,
+    "original_token_count": 15,
+    "output": "36e7b365b35f454d6fa94d6674746eafde314872\trefs/heads/main\n"
+  },
+  "documented_command_source": "docs/papers204_208_sequence/qa/p210_checkpoint_remote_size_root_preparation/receive.py:347",
+  "current_local_role_results": [
+    {
+      "command": "git --git-dir=/root/symbolic-dynamics-private-sync-accepted-20260907.git rev-parse --is-bare-repository HEAD HEAD^{tree}",
+      "result": {
+        "chunk_id": "c30922",
+        "wall_time_seconds": 0.051146081,
+        "exit_code": 0,
+        "original_token_count": 22,
+        "output": "true\n36e7b365b35f454d6fa94d6674746eafde314872\n57efe318eda9575fa785463358cacf9efc2dd3cd\n"
+      }
+    },
+    {
+      "command": "git --git-dir=/root/symbolic-dynamics-private-sync-accepted-20260907.git rev-list --left-right --count refs/remotes/origin/main...HEAD",
+      "result": {
+        "chunk_id": "153741",
+        "wall_time_seconds": 0.000041489,
+        "exit_code": 0,
+        "original_token_count": 1,
+        "output": "0\t0\n"
+      }
+    },
+    {
+      "command": "git -C /root/autodl-tmp/hilbert-polya-structure rev-parse HEAD",
+      "result": {
+        "chunk_id": "84ae99",
+        "wall_time_seconds": 0.00000329,
+        "exit_code": 0,
+        "original_token_count": 11,
+        "output": "a380d24718fec4ef27365f44e96fb7ffa2b0fd10\n"
+      }
+    }
+  ]
+}

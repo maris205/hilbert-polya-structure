@@ -1,0 +1,52 @@
+--- docs/papers204_208_sequence/qa/p210_b_final_reception_preparation/history/ROOT_READ_UNBOUND_750.py
++++ docs/papers204_208_sequence/qa/p210_b_final_reception_preparation/receive_p210_b_final.py
+@@ -2,8 +2,8 @@
+ """Prepared root read-only P210 B final reception; preparer MUST NOT execute.
+ 
+ No original writer, receiver, science, build or native command is imported or
+-executed. Final bindings are unavailable until the same reviewer's real final
+-decision, phase results, completed native receipts and non-self seal exist.
++executed. The actual same-B decision, phase results, completed native receipts
++and 441-payload final seal are pinned in INPUT_BINDINGS.json. Root must execute.
+ """
+ from collections import Counter
+ from datetime import datetime, timezone
+@@ -679,6 +679,15 @@
+     ck(LINKS == closure['links'], 'all_actual_genuine_Markdown_links_accepted_code_stripping_parser')
+     external = obj(binding['external_final_seal']['path'])
+     ck(external == binding['external_final_seal']['record'], 'exact_complete_external_final_seal_native_record')
++    ck(external['role'] == 'ACTUAL_B_FINAL_SEAL_EXTERNAL_NATIVE_RETURN' and external['reviewer'] == '/root/p210_b_reviewer'
++       and external['cwd'] == str(ROOT) and 'workdir' not in external['execution_call_options']
++       and external['launch_result']['session_id'] == external['completion_call']['session_id'] == 31532
++       and external['launch_result']['output'] == '' and external['result']['chunk_id'] == 'b8b01c',
++       'actual_external_sealer_identity_default_cwd_and_session_not_reconstructed_group')
++    expected_argv = ['env','-i','PATH=/usr/bin:/bin','LANG=C.UTF-8','LC_ALL=C.UTF-8','TZ=UTC',
++        '/usr/bin/python3.10','-I','-S','-B','-X','pycache_prefix=' + str(B / 'absent_final_delta_seal_cache'),str(B / 'seal_delta.py')]
++    ck(shlex.split(external['command']) == expected_argv and not os.path.lexists(B / 'absent_final_delta_seal_cache'),
++       'exact_actual_external_sealer_argv_and_absent_cache')
+     ret = external['result']
+     ck(type(ret['exit_code']) is int and ret['exit_code'] == 0 and 'Warning: truncated' not in ret['output'],
+        'actual_external_final_seal_native_zero_complete_stdout')
+@@ -723,6 +732,11 @@
+     reads = dict(SEEN)
+     for name, wanted in reads.items():
+         pin(name, wanted, force=True)
++    common = obj(B / 'DELTA_INPUTS_BEFORE.json.gz')
++    projected_common = {name: rich(row) for name,row in common.items()}
++    extra_keys = {name: row for name,row in reads.items() if name not in common}
++    ck(projected_common | extra_keys == reads and not set(projected_common) & set(extra_keys),
++       'entire_actual_current_read_map_reconstructed_from_common_plus_exact_extra')
+     ck(physical(B) == set(final) | {'SHA256SUMS'} and USED == set(ALIASES)
+        and not os.path.lexists(sys.pycache_prefix), 'final_complete_membership_exact_aliases_and_absent_cache')
+     print(json.dumps({'schema':'p210-B-final-root-original-receiver-v1',
+@@ -731,6 +745,10 @@
+         'source':val(Path(__file__).resolve()),'preparation_seal':val(PREP / 'SHA256SUMS'),
+         'checks':sum(CHECKS.values()),'checks_by_kind':dict(CHECKS),
+         'physical_paths_fully_reread_twice':len(reads),'complete_current_read_map_canonical_sha256':canonical_digest(reads),
++        'current_read_keys_outside_B_common':extra_keys,'current_extra_key_count':len(extra_keys),
++        'B_common_input_ledger':val(B / 'DELTA_INPUTS_BEFORE.json.gz'),
++        'common_key_schema_conversion':{'real':'resolved','size':'bytes','sha256':'sha256','symlink':'symlink'},
++        'canonical_read_map_encoding':'json.dumps(common_converted_to_real_size | exact_extra, sort_keys=True, separators=(comma,colon), ensure_ascii=True).encode()',
+         'B_final_payloads':len(final),'B_final_manifest':val(B / 'SHA256SUMS'),
+         'initial_payloads_preserved':407,'initial_unchanged_in_place':406,'initial_roles_including_seal':408,
+         'original_B_keys':len(audit),'original_initial_root_extra_keys':55,'strict_rich_known_keys':len(known),

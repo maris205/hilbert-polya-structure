@@ -1,10 +1,50 @@
 # Batch after P203 — recovery state
 
 Started 2026-09-05 UTC on the user's “确认，下一轮”, reaffirmed by “继续”.
-Status: **P205_P207_P208_P209_COMPLETE / P210_ROUND0_COMPLETE_MANUSCRIPT_A_IN_PROGRESS / FIVE_RETAINED_FOUR_COMPLETE / HOLD_EXTERNAL**.
+Status: **EXACT_FIVE_COMPLETE / P205_P207_P208_P209_P210 / PRIVATE_SYNC_PENDING / HOLD_EXTERNAL**.
 The folder name reserves a five-seat working label, not five accepted paper IDs.
 
-## Scope and next obligation
+## Current completion and remaining synchronization
+
+2026-09-08 UTC: the requested round is internally complete with exactly
+P205, P207, P208, P209 and P210. Five retained, five completed, no unfilled
+seat, zero current open findings in the retained set. P204/P206's rejected
+numbered drafts and adverse reviews remain. No42nd scout or new batch starts.
+The only remaining handoff action is separately verified scoped private Git
+synchronization; external publication/upload/submission/contact stays held.
+
+The [final QA report](FINAL_QA_REPORT.md) gives each paper's theorem-level
+advance and explicit exclusions. P210 now has two physical source-only
+terminal builds, all-six actual final-page views, accepted initial artifact
+closure and the separate lifecycle follow-up; see [P210 final QA](P210_FINAL_QA.md).
+The latter passed28,659 gate checks/2,319 documentary keys and35,643 root
+reception checks. Its2,244-payload whole manifest changed only the lifecycle
+row; all scientific, frozen, review and terminal bytes are unchanged.
+
+The [first actual exact-five gate and independent root reception](qa/FIVE_EXACT_ROOT_INSPECTION.md)
+now pass:19,182,767 checks and146,710 current file keys fully read twice,
+then2,110,077 independent reception checks/1,863 direct paths. Original Four
+has all142,784 rich keys and its unchanged087b90… complete LF digest; all
+122,149 original P210 rows and2,319 lifecycle rows are reconstructed before
+the full current union. All89 disjoint extras and all directly read overlap
+rows were checked. Fifteen prior actual strict pairs, ten prior actual
+source-only builds and27 prior actual root page views are reused under their
+full dependencies, not newly executed science/builds/views/reviews.
+All five theorem bodies, exclusions, accepted A/B deltas, freezes, complete
+packages, findings, links and source-defined memberships remain mandatory.
+
+The original exact-five failure and its source are retained. Only a second
+precise old pipeline-index role was added beside the old theorem-index role;
+the unchanged entire original digest now actually passes before both rebases.
+The [pre-final central originals](qa/central_five_completion_01/README.md)
+were physically preserved before this update. The latest private ref below
+still predates completion; this state refresh does not claim a new push.
+
+## Historical scope and earlier obligations
+
+Everything below retains its dated prior milestone/ownership context,
+including old pending statements. The completed current obligation is the
+section above; no historical paragraph reopens accepted unchanged work.
 
 Produce five distinct short theorem papers within finite autonomous
 deterministic dynamics. Admission requires completed deductive proof of a
@@ -32,9 +72,11 @@ MNA then passed its separate nonauthor gate and root's full proof/source/
 original reception plus actual strict independent-code pair. It is admitted
 as P210 under the exact two-axis ceiling in [root's decision](P210_ROOT_ADMISSION.md).
 Five papers are retained, four complete and no seat unfilled. P210's anonymous
-six-page author package and physical Round0 are now complete; its actual
-fresh nonauthor manuscript A is in progress. It still requires the accepted
-manuscript rounds and terminal gates; five retained is not
+six-page author package and physical Round0 are complete. Its same nonauthor
+A and distinct nonauthor B have both actually accepted their exact no-change
+responses, root has closed their originals/deltas, and physical Round1/2
+are complete. P210 still requires terminal builds/all-page views and full
+artifact/lifecycle closure; five retained is not
 five completed. No further scout lane or another batch is authorized here.
 P205 manuscript A's exact no-change delta is accepted and Round1 is frozen;
 its B actual no-change delta is now accepted with zero findings. Round2,
@@ -80,7 +122,99 @@ failure remain preserved. See
 [actual Round1/root physical closure](qa/P209_ROUND1_ROOT_INSPECTION.md).
 The requested five-paper batch is not complete.
 
-Latest milestone (2026-09-07 UTC): **P210 physical Round0 complete; actual A assigned**.
+Previous milestone (2026-09-07 UTC): **P210 accepted B and physical Round2 complete; terminal pending**.
+
+The same actual independent B accepted the exact unchanged response.
+Root's [final B original/delta reception](qa/P210_B_ROOT_DELTA_INSPECTION.md)
+passed2,338,172 checks/121,057 actual input paths fully read twice.
+The final441-payload review preserves all407 initial payloads,406 in place,
+zero current open findings, two resolved B infrastructure Minors and one
+inherited resolved A Major. Root's unchanged strict B pair remains two
+51,129-check runs on the original4,095 states. Missing historical evidence,
+source/runtime limits and all failed records remain; no theorem changed.
+
+Root then physically created524-payload/525-file Round2, seal
+`a46fb6688ce56fbf62f69b8c652fff88923e3778c81647294bae544f5e86a703`,
+preserving all508 Round1 core and489 author bytes with14 small acceptance/
+history/binding anchors. The [separate physical reception](qa/P210_ROUND2_ROOT_INSPECTION.md)
+passed38,968 checks/2,603 paths,523 full copy comparisons,71+15 link roles,
+33 external originals and six complete native manifest/raw checks.
+The old1,496-payload whole seal/lifecycle are physically retained in Round2.
+The [actual mechanical refresh](qa/P210_ROUND2_LIFECYCLE_REFRESH_ROOT_COMPLETION.actual.json)
+adds only525 Round2 files and changes only the old ROOT_LIFECYCLE row,
+giving2,021 current payloads. All scientific/frozen/review inputs are unchanged.
+
+The [completed-four component and root original reception](qa/FIVE_FOUR_COMPONENT_ROOT_INSPECTION.md)
+also passed:10,270,582 checks/142,784 current keys, followed by73,267
+original-reception checks/3,305 paths. It explicitly reuses12 pairs,
+eight builds and21 old actual page views for P205/P207/P208/P209,
+not P210 or new science/builds/views. The first actual failed component
+and corrected source remain. No five-paper PASS is inferred.
+
+Two physical terminal builds, all-six actual terminal page views, full
+P210 artifact/lifecycle and the exact-five gate remain. The new terminal
+programs are being prepared, not yet executed. No42nd scout or new batch.
+The [four preceding central controls](qa/central_round2_p210/README.md)
+were physically preserved before this update. The latest private ref below
+still predates accepted A/Round1/B/Round2 and this update; no new push is
+claimed by refreshing this index.
+
+Previous milestone: **P210 accepted A and physical Round1 complete; actual B assigned**.
+The following paragraphs retain their historical pending scope; the accepted
+B/physical Round2 milestone above controls current obligations.
+
+The same `/root/p210_a_reviewer` actually accepted the exact unchanged
+response. Root's final closure passed621,735 checks/119,932 actual reread
+paths, preserving all484 initial payloads in the final552-payload review,
+with zero current open findings and one resolved Major. The old authenticated
+recorder/prehash and three old parent start times remain unavailable; no
+failure or source limit was erased. See [accepted A/root closure](qa/P210_A_ROOT_DELTA_INSPECTION.md).
+Root's previously completed strict A pair each passed133,978 checks on the
+same4,095 states and3,634 known inputs with full raw-canonical equality.
+
+Root actually created508-payload/509-file Round1, seal
+`be54b79806d90f22037cee877f92074e744b2ef27bcc0b6b2e4f8dfa658446e0`.
+All493 core/all489 author bytes are unchanged;13 physical anchors retain
+accepted A and exact prior lifecycle/whole-manifest roles. The separate
+root physical reception passed29,273 checks/2,164 current paths,507 full
+copy comparisons,57+14 links,33 original external roles and six native
+checks. See [physical Round1/root acceptance](qa/P210_ROUND1_ROOT_INSPECTION.md).
+Fresh distinct `/root/p210_b_reviewer` has actually been assigned from the
+pinned509 inputs with a materially different representation/proof-route
+requirement and a pre-author-code commitment. No B verdict or accepted delta
+exists yet. Root, proof contributors and author/helper processes cannot
+review P210. B/delta/Round2, terminal builds/views, complete paper artifact
+closure and the first five-paper gate remain; no42nd scout or new batch.
+
+The P205/P207 four fresh terminal builds and ten root views now have
+[complete original root reception](qa/BATCH_FOUR_BUILDS_ROOT_INSPECTION.md).
+P208/P209's current full-key reuse also actually passed3,988,646 checks/
+136,582 paths, with six pairs/four builds/eleven prior views explicitly
+REUSED, not newly executed. Its separate root wrapper-original reception
+passed72,588 checks/3,340 paths, including all3,276 parent keys and all34
+failed-attempt pins. See [root reuse acceptance](qa/P208_P209_REUSE_ROOT_INSPECTION.md).
+All prior scientific contracts remain unchanged. The full five-paper
+terminal adapter is being prepared, not executed or accepted.
+
+The corrected private checkpoint was actually pushed as
+`36e7b365b35f454d6fa94d6674746eafde314872`, sole parent a380d247, after
+the earlier local1f028072 commit was rejected for an oversized prior
+execution archive. Root's [separate original acceptance](qa/P210_CHECKPOINT_ROOT_INSPECTION.md)
+checked228 archived native records,940 pins, all2,318 captured source files
+twice,1,096 fully decoded old objects and26 new read-only Git queries.
+Remote/tracking refs agree at0/0. Exactly2,013 changes retain24 package
+manifests/1,924 rows; the306-file prior P209 execution package remains
+physically local and is explicitly excluded from this scoped remote tree.
+The rejected commit, original mirror and all failed evidence are unchanged.
+This ref uses the immutable earlier Round0 capture, not current accepted A,
+Round1/B or moving controls. The new destination is bare: worktree status
+N/A, with actual complete index/tree/ref checks, not a false clean assertion.
+The [pre-Git-success controls and root documentary closure](qa/P210_ROUND1_CENTRAL_ROOT_INSPECTION.md)
+preserve the exact preceding status bytes and unchanged scientific ceilings.
+
+Previous milestone: **P210 physical Round0 complete; actual A assigned**.
+The following paragraph preserves its former pending scope; accepted A,
+physical Round1 and current B assignment above control the next obligation.
 Root adopted the unchanged 489-payload anonymous author handoff, retaining
 exactly the triangular clock and image-threshold/bijection ceiling below.
 Root's actual strict author pair passed two 197,471-check runs on the unchanged

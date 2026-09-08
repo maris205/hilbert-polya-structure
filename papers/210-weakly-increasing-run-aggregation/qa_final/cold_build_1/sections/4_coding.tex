@@ -1,0 +1,68 @@
+\section{A bijection with triangular-part compositions}\label{sec:coding}
+Put $T_k=k(k+1)/2$ for $k\ge1$, and let $\Tri_N$ consist of the nonempty
+compositions of $N$ whose parts belong to $\{T_1,T_2,\ldots\}$. This
+class, its count and its reset/increment representations are known
+\citep{wilson1998triangular,robbins2014polygonal}. We identify it with
+the image of $F$; the test, identification and counting consequence form
+one structural result.
+
+\begin{theorem}[Explicit image coding]\label{thm:coding}
+There is a weight-preserving bijection $\Phi:\Img_N\to\Tri_N$ given by
+the following scan and inverse parsing.
+\end{theorem}
+\begin{proof}
+Read a successful target from right to left. Its rightmost part $b\ge1$
+initializes threshold $1$. From threshold $r$, a part $r+1$ increments the
+threshold and a part at least $r+2$ resets it to $1$. Consequently, after
+the rightmost part, there is a unique sequence of complete reset cycles
+\begin{equation}\label{eq:cycle}
+ 2,3,\ldots,k,\;k+2+u\qquad(k\ge1,\ u\ge0)
+\end{equation}
+followed by a unique terminal increment string $2,3,\ldots,k$ with
+$k\ge1$. A string is empty when $k=1$.
+
+Start the encoded list with $b-1$ copies of $1$. For each complete cycle
+\eqref{eq:cycle}, in \emph{scan order}, append $T_{k+1}$ followed by $u$
+copies of $1$. Finally append $T_k$ for the terminal increment string.
+The list is nonempty and has triangular parts. A complete cycle has mass
+$(T_k-1)+(k+2+u)=T_{k+1}+u$, and the rightmost part together with the
+terminal string has mass $b+T_k-1=(b-1)+T_k$. Thus total mass is preserved.
+
+For the inverse, reserve the last triangular part, uniquely $T_k$, for
+the terminal increment string. Parse the preceding list as an initial
+string of ones and then parts at least $3$, each followed by its maximal
+string of ones. This parse is unique since $1$ is the only positive
+triangular number smaller than $3$. If there are $b-1$ initial ones,
+begin a target read-list with $b$. Each subsequent triangular part is
+uniquely $T_{j+1}$, $j\ge1$; when followed by $u$ ones, append
+$2,3,\ldots,j,j+2+u$ to the read-list. Append $2,3,\ldots,k$ at the end,
+then reverse the read-list to obtain the target.
+
+Every reconstructed cycle and terminal string passes
+\eqref{eq:scan}, so the inverse target belongs to $\Img_N$.
+Its unique scan recovers the parsed pieces. Conversely, reserving the
+last triangular part recovers the terminal string, even if that part is
+$T_1=1$. These operations are mutually inverse, proving the bijection.
+\end{proof}
+
+For instance, $(2,3,2)$ encodes as $(1,3,3)$: the rightmost $2$ supplies
+one initial $1$, the next $3$ is a reset, and the last $2$ is a terminal
+increment. A one-part target $(N)$ encodes as $N$ ones.
+
+\begin{corollary}[Known count, new image identification]\label{cor:series}
+For $i_N=\lvert\Img_N\rvert$ and
+$\Theta(z)=\sum_{k\ge1}z^{T_k}$, one has
+\[
+ \sum_{N\ge1}i_Nz^N=\frac{\Theta(z)}{1-\Theta(z)}.
+\]
+With the auxiliary convention $i_0=1$, this gives
+$i_N=\sum_{T_k\le N}i_{N-T_k}$ for $N\ge1$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:coding} identifies each coefficient with the known
+triangular-part count. A list of exactly $q\ge1$ triangular parts has
+series $\Theta^q$, so summing gives the displayed identity. Taking off
+the first part gives the recurrence. These are formal series: every
+part has positive weight, hence every coefficient is finite and
+$\Theta(0)=0$. The auxiliary empty list does not enlarge the carrier.
+\end{proof}

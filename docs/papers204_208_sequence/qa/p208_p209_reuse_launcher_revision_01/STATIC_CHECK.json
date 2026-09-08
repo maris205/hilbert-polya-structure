@@ -1,0 +1,58 @@
+{
+  "schema": "p208-p209-reuse-launcher-revision01-static-v1",
+  "status": "PASS_PREPARATION_ONLY_NOT_EXECUTED",
+  "exact_change": "Seven administrative path/hash/count substitutions only. All native process, signal/cleanup, sampling, runtime/configuration and main-function ASTs remain unchanged.",
+  "static_check": {
+    "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast,hashlib,json,os\nfrom pathlib import Path\nqa=Path('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa');old=qa/'p208_p209_reuse_launcher_preparation';new=qa/'p208_p209_reuse_launcher_revision_01';checker=qa/'p208_p209_reuse_revision_01'\ndef pin(p):\n data=p.read_bytes();return {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}\na=(old/'launcher.py').read_text();b=(new/'launcher.py').read_text();assert pin(old/'launcher.py')['sha256']=='5465a86c89a73454e52bf6e2b7a689cee48eba612cf0fbe5de3d0fa5a65d9fb1'\nchanges=[[\"PREP = QA / 'p208_p209_reuse_launcher_preparation'\",\"PREP = QA / 'p208_p209_reuse_launcher_revision_01'\"],[\"CHECKER_PREP = QA / 'p208_p209_reuse_preparation'\",\"CHECKER_PREP = QA / 'p208_p209_reuse_revision_01'\"],[\"CHECKER_SEAL = '8fc25ed0775c40e38ec8e006eae53f5d762f92a3496bda6349872a46c6adacfc'\",\"CHECKER_SEAL = 'ac8fe8834360fdb35e70860416a3c7bb2283b8e32f738251ffc5a1acdfc52a46'\"],[\"CHECKER_SOURCE = '2790f4ef028bd3f02323c30889fcc0b7e709e7d76b81d62da06f4b85e5d03f4d'\",\"CHECKER_SOURCE = '8b38768261afe5bd6db8d769a8209b4aa3daec40119189c953e69c9b20e60ea0'\"],[\"OUT = QA / 'p208_p209_reuse_01'\",\"OUT = QA / 'p208_p209_reuse_02'\"],[\"own = package(PREP, own_seal, 4)\",\"own = package(PREP, own_seal, 5)\"],[\"checker = package(CHECKER_PREP, CHECKER_SEAL, 5)\",\"checker = package(CHECKER_PREP, CHECKER_SEAL, 7)\"]]\nexpected=a\nfor x,y in changes:assert expected.count(x)==1;expected=expected.replace(x,y)\nassert expected==b\nta=ast.parse(a);tb=ast.parse(b);compile(tb,str(new/'launcher.py'),'exec')\nfa={n.name:ast.dump(n,include_attributes=False) for n in ta.body if isinstance(n,ast.FunctionDef)};fb={n.name:ast.dump(n,include_attributes=False) for n in tb.body if isinstance(n,ast.FunctionDef)}\nassert set(fa)==set(fb);changed=sorted(k for k in fa if fa[k]!=fb[k]);assert changed==['scoped_inputs']\nassignments={t.id:n.value for n in tb.body if isinstance(n,ast.Assign) for t in n.targets if isinstance(t,ast.Name)}\nassert pin(checker/'SHA256SUMS')['sha256']==ast.literal_eval(assignments['CHECKER_SEAL']);assert pin(checker/'inspect.py')['sha256']==ast.literal_eval(assignments['CHECKER_SOURCE'])\nmanifest={}\nfor line in (checker/'SHA256SUMS').read_text().splitlines():\n digest,name=line.split('  ',1);assert pin(checker/name)['sha256']==digest;manifest[name]=digest\nassert len(manifest)==7 and set(manifest)|{'SHA256SUMS'}=={p.name for p in checker.iterdir() if p.is_file()}\npreserved=json.loads((checker/'FAILURE_PINS.json').read_text());assert len(preserved)==34 and all(pin(Path(p))==v for p,v in preserved.items())\nfixed=json.loads((checker/'INPUT_PINS.json').read_text())['fixed_inputs'];assert len(fixed)==128 and all(pin(Path(p))==v for p,v in fixed.items())\nassert all(pin(Path(p))==v for p,v in preserved.items()) and not os.path.lexists(qa/'p208_p209_reuse_02')\nprint(json.dumps({'status':'PASS_LAUNCHER_REVISION_STATIC_ONLY_NOT_EXECUTED','source':pin(new/'launcher.py'),'source_lines':len(b.splitlines()),'exact_allowed_source_replacements':len(changes),'changed_AST_functions':changed,'unchanged_AST_functions':sorted(k for k in fa if fa[k]==fb[k]),'checker_payloads_verified':7,'preserved_old_files_checked_twice':34,'unchanged_fixed_pins_checked':128,'future_output_absent':True,'compile_without_execution':True,'checker_executions':0,'launcher_executions':0,'host_inventory':0,'mathematical_executions':0,'builds':0,'views':0},sort_keys=True))\nPY",
+    "actual_native_tool_return": {
+      "chunk_id": "5f1fc3",
+      "wall_time_seconds": 0.0000066,
+      "exit_code": 0,
+      "original_token_count": 211,
+      "output": "{\"builds\": 0, \"changed_AST_functions\": [\"scoped_inputs\"], \"checker_executions\": 0, \"checker_payloads_verified\": 7, \"compile_without_execution\": true, \"exact_allowed_source_replacements\": 7, \"future_output_absent\": true, \"host_inventory\": 0, \"launcher_executions\": 0, \"mathematical_executions\": 0, \"preserved_old_files_checked_twice\": 34, \"source\": {\"bytes\": 24671, \"sha256\": \"a3c818292a05eee0023e0f891f798cd9e7488eb08d2f762bdced94a557d9b742\"}, \"source_lines\": 412, \"status\": \"PASS_LAUNCHER_REVISION_STATIC_ONLY_NOT_EXECUTED\", \"unchanged_AST_functions\": [\"compressed_ledger\", \"configuration\", \"consumed\", \"group_state\", \"interrupted\", \"main\", \"map_paths\", \"native_child\", \"package\", \"parent_observation\", \"pin\", \"pins\", \"raw_save\", \"require\", \"runtime_names\", \"save\", \"seal_output\", \"settle\"], \"unchanged_fixed_pins_checked\": 128, \"views\": 0}\n"
+    }
+  },
+  "native_source_diff": {
+    "command": "diff -u --label qa/p208_p209_reuse_launcher_preparation/launcher.py --label qa/p208_p209_reuse_launcher_revision_01/launcher.py qa/p208_p209_reuse_launcher_preparation/launcher.py qa/p208_p209_reuse_launcher_revision_01/launcher.py",
+    "actual_native_tool_return": {
+      "chunk_id": "738c09",
+      "wall_time_seconds": 0.051184966,
+      "exit_code": 1,
+      "original_token_count": 389,
+      "output": "--- qa/p208_p209_reuse_launcher_preparation/launcher.py\n+++ qa/p208_p209_reuse_launcher_revision_01/launcher.py\n@@ -21,12 +21,12 @@\n \n ROOT = Path('/root/autodl-tmp/symbolic_dynamics')\n QA = ROOT / 'docs/papers204_208_sequence/qa'\n-PREP = QA / 'p208_p209_reuse_launcher_preparation'\n-CHECKER_PREP = QA / 'p208_p209_reuse_preparation'\n+PREP = QA / 'p208_p209_reuse_launcher_revision_01'\n+CHECKER_PREP = QA / 'p208_p209_reuse_revision_01'\n CHECKER = CHECKER_PREP / 'inspect.py'\n-CHECKER_SEAL = '8fc25ed0775c40e38ec8e006eae53f5d762f92a3496bda6349872a46c6adacfc'\n-CHECKER_SOURCE = '2790f4ef028bd3f02323c30889fcc0b7e709e7d76b81d62da06f4b85e5d03f4d'\n-OUT = QA / 'p208_p209_reuse_01'\n+CHECKER_SEAL = 'ac8fe8834360fdb35e70860416a3c7bb2283b8e32f738251ffc5a1acdfc52a46'\n+CHECKER_SOURCE = '8b38768261afe5bd6db8d769a8209b4aa3daec40119189c953e69c9b20e60ea0'\n+OUT = QA / 'p208_p209_reuse_02'\n PYTHON = Path('/usr/bin/python3.10')\n STDLIB = Path('/usr/lib/python3.10')\n ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}\n@@ -120,8 +120,8 @@\n \n \n def scoped_inputs(own_seal):\n-    own = package(PREP, own_seal, 4)\n-    checker = package(CHECKER_PREP, CHECKER_SEAL, 5)\n+    own = package(PREP, own_seal, 5)\n+    checker = package(CHECKER_PREP, CHECKER_SEAL, 7)\n     require(checker[str(CHECKER)]['sha256'] == CHECKER_SOURCE, 'Checker source identity changed')\n     contract = json.loads((CHECKER_PREP / 'INPUT_PINS.json').read_bytes())\n     expected = contract['fixed_inputs']; require(len(expected) == 128, 'Fixed input count changed')\n"
+    },
+    "interpretation": "Native exit1 is expected for different files; full output retained in SOURCE_DELTA.diff."
+  },
+  "preparation_error_preserved": {
+    "kind": "Orchestration parse error before tool execution",
+    "message": "SyntaxError: Missing initializer in destructuring declaration",
+    "cause": "Missing token-separating space in the preparer's JavaScript for-of loop.",
+    "resolution": "Corrected the orchestration loop and repeated it. The rejected script did not invoke nested tools, create files, execute either Python helper or change an original."
+  },
+  "checker_revision": {
+    "source_sha256": "8b38768261afe5bd6db8d769a8209b4aa3daec40119189c953e69c9b20e60ea0",
+    "manifest_sha256": "ac8fe8834360fdb35e70860416a3c7bb2283b8e32f738251ffc5a1acdfc52a46",
+    "payloads": 7,
+    "original_argv_schema_matches": 52,
+    "embedded_bindings_matches": 52,
+    "original_record_pins": 85
+  },
+  "preservation": {
+    "file": "../p208_p209_reuse_revision_01/FAILURE_PINS.json",
+    "physical_old_files": 34,
+    "all_checked_unchanged_twice": true,
+    "old_actual_failed_output_manifest_sha256": "88d504f5a04a74c0e03f313946180899ba3259f4d9d554e8fa59068bee0314a3",
+    "old_outputs_modified": false
+  },
+  "execution_boundary": {
+    "checker_executions": 0,
+    "launcher_executions": 0,
+    "host_inventory": 0,
+    "mathematical_executions": 0,
+    "builds": 0,
+    "views": 0,
+    "git_operations": 0,
+    "central_edits": 0,
+    "external": "HOLD_EXTERNAL"
+  }
+}

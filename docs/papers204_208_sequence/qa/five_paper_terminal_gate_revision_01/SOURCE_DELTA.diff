@@ -1,0 +1,104 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/five_paper_terminal_gate_preparation/four_completed.py
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/five_paper_terminal_gate_revision_01/four_completed.py
+@@ -23,7 +23,7 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-HERE = QA / 'five_paper_terminal_gate_preparation'
++HERE = QA / 'five_paper_terminal_gate_revision_01'
+ ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
+ IDS = ('P205', 'P207', 'P208', 'P209')
+ ZERO = {'critical': 0, 'major': 0, 'minor': 0}
+@@ -511,10 +511,67 @@
+     return result
+ 
+ 
++def p209_frozen_link_roles(base, result):
++    """Receive the exact typed link map, not a document-origin pathname.
++
++    The accepted P209 auditor first selected a frozen (document, href) row,
++    then applied its recorded exact (absolute path, digest) alias. These are
++    per-link physical roles only: no global input/runtime alias is added.
++    """
++    need(base == ROOT / 'papers/209-ordered-fibre-threading' and
++         result['paper'] == 'P209' and result['status'] == 'PASS_P209_TERMINAL_ARTIFACT_GATE',
++         'Typed frozen links only from the accepted P209 initial artifact')
++    aliases = result['explicit_historical_aliases_used']
++    need(len(aliases) == 94, 'Exact original P209 recorded alias-table census')
++    census, roles = Counter(), {}
++    for number, count in ((0, 243), (1, 259), (2, 298)):
++        frozen = base / ('frozen_round' + str(number))
++        meta = obj(frozen / ('FROZEN_LINK_MAP.json' if number == 0 else
++                             'ROUND' + str(number) + '_PROVENANCE.json'))
++        rows = meta['links'] if number == 0 else (
++            meta['round1_core_link_map' if number == 1 else 'round2_historical_link_map'] +
++            meta['acceptance_and_historical_anchor_link_map'])
++        need(len(rows) == count, 'All original frozen link-map occurrences', number)
++        for row in rows:
++            relative, href = Path(row['document']), row['href']
++            need(relative.parts and not relative.is_absolute() and '..' not in relative.parts and
++                 relative.as_posix() == row['document'] and
++                 href == href.strip().strip('<>').split('#', 1)[0],
++                 'Exact P209 frozen document/href grammar', row['document'])
++            document, digest = str(frozen / relative), row['sha256']
++            original = str(absolute(row['physical_target']))
++            target = str(absolute(aliases.get(original + ' @ ' + digest, original)))
++            need(Path(target).is_relative_to(ROOT), 'Recorded frozen physical target remains in workspace', target)
++            role = roles.setdefault(document, {'kind': 'p209-explicit-frozen-link-map',
++                                                'links': {}, 'occurrences': Counter()})
++            value = {'physical_target': target, 'sha256': digest}
++            need(href not in role['links'] or role['links'][href] == value,
++                 'Duplicate frozen href must retain identical physical role', (document, href))
++            role['links'][href] = value
++            role['occurrences'][href] += 1
++            census[(document, href, target, digest)] += 1
++    recorded = Counter((str(absolute(row['document'])), row['target'],
++                        str(absolute(row['resolved_target'])), row['sha256'])
++                       for row in result['all_local_links_checked']
++                       if row.get('semantic_origin') == 'explicit-frozen-link-map')
++    need(recorded == census and sum(census.values()) == 800 and len(census) == 779 and len(roles) == 71,
++         'All exact map/recorded-alias/accepted-link-row occurrences agree')
++    return roles
++
++
+ def links_from_document(document, origin, expected=None, historical=False, modern=False):
+     global LINK_COUNT
+     data = raw(document, expected, historical)
+-    for target in local_targets(data, modern):
++    targets = local_targets(data, modern)
++    if isinstance(origin, dict):
++        need(modern and origin['kind'] == 'p209-explicit-frozen-link-map' and
++             Counter(targets) == origin['occurrences'], 'Entire explicit frozen document link census', str(document))
++        for target in targets:
++            row = origin['links'][target]
++            pin(row['physical_target'], row['sha256'])
++            LINK_COUNT += 1
++        return
++    for target in targets:
+         destination = (absolute(origin).parent / target).resolve()
+         need(destination.exists(), 'Unclosed exact-origin local link', (str(document), str(origin), target))
+         if destination.is_file(): pin(destination)
+@@ -562,9 +619,14 @@
+             rows = result
+             for key in role.get('links_selector', []): rows = rows[key]
+             if not role.get('links_selector'): rows = []
++            frozen_roles = p209_frozen_link_roles(base, result) if ident == 'P209' and role['case'] == 'artifact_p209_initial' else {}
+             for row in rows:
+                 document = absolute(row['document'])
+-                origin = absolute(row.get('semantic_origin', row['document']))
++                if row.get('semantic_origin') == 'explicit-frozen-link-map':
++                    need(str(document) in frozen_roles, 'No unbound or cross-paper typed frozen-link role', str(document))
++                    origin = frozen_roles[str(document)]
++                else:
++                    origin = absolute(row.get('semantic_origin', row['document']))
+                 need(str(document) not in origins or origins[str(document)] == origin, 'Unambiguous exact logical Markdown origin', str(document))
+                 origins[str(document)] = origin
+             # Inspect every distinct original linked document at its original
+@@ -635,6 +697,7 @@
+     absent(sys.pycache_prefix)
+     files = physical(HERE)
+     manifest({'path': str(HERE / 'SHA256SUMS'), 'sha256': args.expected_preparation_sha256, 'payload_rows': len(files) - 1})
++    for path, expected in obj(HERE / 'REVISION_PROVENANCE.json')['inputs'].items(): pin(path, expected)
+     pin(args.reuse_root_binding, args.reuse_root_binding_sha256)
+     binding = obj(args.reuse_root_binding)
+     need(binding['schema'] == 'actual-p208-p209-root-reuse-reception-binding-v1' and

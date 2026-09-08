@@ -1,0 +1,288 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_terminal_build_preparation/build_p210.py
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_terminal_build_revision_01/build_p210.py
+@@ -1,10 +1,10 @@
+ #!/usr/bin/env python3
+-"""Preliminary P210 terminal source-only build pair; HARD UNBOUND, never executed.
++"""P210 terminal source-only build revision 01; actual-bound, not yet executed.
+ 
+ Disclosed reduction of the fully read accepted four-build infrastructure.
+-No old program is imported or executed. A new root-reviewed final revision
+-must implement exact actual B/root-pair/delta/physical-Round2 schema checks.
+-This preliminary source raises before creating qa_final or any child command.
++No old program is imported or executed. Exact actual B/root-pair/delta and
++physical-Round2 originals are checked before qa_final or any child command.
++Only the separately sealed, root-read final preparation may be launched.
+ """
+ import argparse
+ import gzip
+@@ -22,7 +22,7 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-PREP = QA / 'p210_terminal_build_preparation'
++PREP = QA / 'p210_terminal_build_revision_01'
+ SCRIPT = PREP / 'build_p210.py'
+ PAPER = ROOT / 'papers/210-weakly-increasing-run-aggregation'
+ SOURCE_NAMES = ('main.tex', 'math_commands.tex', 'references.bib',
+@@ -101,27 +101,226 @@
+ 
+ 
+ def final_schema_binding(recipe):
+-    """The only deliberately incomplete prerequisite; never a generic bool gate.
+-
+-    Actual accepted B, its root strict pair/delta and physical Round2 do not
+-    yet exist in this preparation. No paths, hashes, native exits, verdicts
+-    or schema field names for those future facts are invented. Root must
+-    produce a new sealed revision after reading the real originals, replace
+-    this function with schema-specific checks and bind every consumed role.
+-    The rest of this source expects that future function to return a mapping
+-    containing exactly P210 in papers plus the complete required_input_pins.
+-    That is a prospective adapter interface, not an assertion about B's schema.
++    """Bind actual accepted originals only; no old code or host-ledger execution.
++
++    Root's B and physical-Round2 gates are semantic inputs, not replacements
++    for the later full terminal artifact inspector. All bytes consumed here
++    enter required_input_pins. Prior lifecycle/whole roles have exactly two
++    physical Round2 anchors; current preterminal controls are pinned separately.
+     """
+-    require(recipe['stage'] == 'PRELIMINARY_UNBOUND_NO_EXECUTION' and
+-            recipe['final_schema_binding'] is None, 'Preliminary recipe changed')
+-    raise RuntimeError('UNBOUND_ACTUAL_ACCEPTED_B_ROOT_PAIR_DELTA_PHYSICAL_ROUND2: '
+-                       'a separately root-reviewed and sealed final revision is required')
+-
++    require(recipe['schema'] == 'p210-terminal-build-actual-bound-contract-v1' and
++            recipe['stage'] == 'ACTUAL_B_ROOT_DELTA_PHYSICAL_ROUND2_BOUND_NOT_EXECUTED',
++            'Exact actual-bound contract, not an unbound or caller boolean gate')
++    binding = recipe['final_schema_binding']
++    specs, roles, required = binding['manifests'], binding['roles'], {}
++    expected_packages = {
++        'b_review': (QA.parent / 'reviews/p210_b', 441),
++        'b_pair': (QA / 'root_replays/p210_b_strict_pair_01', 59),
++        'round1': (PAPER / 'frozen_round1', 508),
++        'round2': (PAPER / 'frozen_round2', 524),
++        'round2_preparation': (QA / 'p210_round2_preparation', 11),
++        'round2_reception': (QA / 'p210_round2_root_reception', 1),
++        'b_final_preparation': (QA / 'p210_b_final_reception_preparation', 12),
++        'b_strict_preparation': (QA / 'p210_b_strict_preparation', 4)}
++    require(set(specs) == set(expected_packages), 'Exact eight actual package roles')
++    for role, (base, count) in expected_packages.items():
++        spec = specs[role]
++        require(spec['path'] == str(base) and spec['payloads'] == count and
++                pin(base / 'SHA256SUMS') == spec['seal'], 'Actual package role identity')
++        required.update(manifest(base, spec['seal']['sha256'], count))
++    for role, value in roles.items():
++        path = Path(value['path'])
++        expected = {k: value[k] for k in ('sha256', 'bytes')}
++        require(path.is_absolute() and path.resolve() == path and not path.is_symlink() and
++                pin(path) == expected, 'Actual named original changed: ' + role)
++        require(str(path) not in required or required[str(path)] == expected, 'Conflicting original roles')
++        required[str(path)] = expected
++
++    def raw(role):
++        return Path(roles[role]['path']).read_bytes()
++
++    def data(role):
++        return json.loads(raw(role))
++
++    def digest(role):
++        return roles[role]['sha256']
++
++    def native(role, expected_status):
++        launch, completion = data(role + '_launch'), data(role + '_completion')
++        require(completion['launch_record'] == Path(roles[role + '_launch']['path']).name and
++                completion['session_id'] == launch['result']['session_id'] and
++                launch['result']['output'] == '' and type(completion['result']['exit_code']) is int and
++                completion['result']['exit_code'] == 0, 'Actual native session/exit chain: ' + role)
++        output = json.loads(completion['result']['output'])
++        require(output['status'] == expected_status, 'Actual native result status: ' + role)
++        # Outer tool output is not a separately captured stderr field.
++        # Missing old cwd/start/stderr/group fields are never retrospectively filled.
++        return output
++
++    root_b, current = data('root_b'), data('b_current')
++    require(root_b['schema'] == 'p210-b-root-delta-closure-v1' and
++            root_b['status'] == 'ROOT_ACCEPTED_B_DELTA_ORIGINAL_CLOSURE_PASS' and
++            root_b['paper'] == 'P210' and root_b['input_round'] == 1 and
++            root_b['reviewer'] == current['reviewer'] == '/root/p210_b_reviewer' and
++            root_b['reviewer_delta_accepted'] is True and root_b['root_original_inspection_complete'] is True and
++            root_b['root_replay_closure_complete'] is True and root_b['current_open_findings'] == 0,
++            'Actual same-B accepted root delta closure')
++    require(current['phase'] == 'ACCEPTED_EXACT_NOCHANGE_DELTA' and current['verdict'] == 'PASS_NARROW' and
++            current['accepted_delta'] is True and current['same_actual_initial_reviewer'] is True and
++            current['current_open_counts'] == {'Critical': 0, 'Major': 0, 'Minor': 0} and
++            current['current_manuscript_findings'] == [] and current['initial_findings_unchanged'] is True and
++            current['reviewer_infrastructure_resolved_counts'] == {'Critical': 0, 'Major': 0, 'Minor': 2} and
++            current['inherited_A_findings']['resolved_Major'] == 1 and
++            len(current['reviewer_infrastructure_findings']) == 2 and
++            all(v['status'] == 'RESOLVED_BEFORE_INITIAL_SEAL' and v['failed_evidence_preserved'] is True
++                for v in current['reviewer_infrastructure_findings']), 'Zero-open narrow decision; retain failures')
++    for field, role in (('delta_sha256', 'b_delta'), ('current_findings_sha256', 'b_current'),
++                        ('findings_sha256', 'b_findings'), ('response_sha256', 'b_response'),
++                        ('author_manifest_sha256', 'author_manifest'),
++                        ('prior_lifecycle_sha256', 'prior_lifecycle'), ('prior_whole_manifest_sha256', 'prior_whole')):
++        require(root_b[field] == digest(role), 'Root B exact documentary binding: ' + field)
++    for field, role in (('review_manifest_sha256', 'b_review'), ('root_pair_manifest_sha256', 'b_pair'),
++                        ('round1_manifest_sha256', 'round1')):
++        require(root_b[field] == specs[role]['seal']['sha256'], 'Root B package binding')
++    require(root_b['review_manifest_entries'] == 441 and root_b['initial_review_payloads_preserved'] == 407 and
++            root_b['unchanged_in_place_initial_payloads'] == 406 and root_b['unchanged_author_payloads'] == 489 and
++            root_b['unchanged_round1_payloads'] == 508 and root_b['resolved_B_infrastructure_minor'] == 2 and
++            root_b['resolved_inherited_A_major'] == 1 and current['initial_payloads_preserved'] == 407 and
++            current['accepted_response_sha256'] == digest('b_response') and
++            current['initial_findings_sha256'] == digest('b_findings'), 'Preserved exact initial/history census')
++    for name, expected in root_b['evidence'].items():
++        require(name in required and required[name]['sha256'] == expected, 'Complete actual root B evidence keys')
++    review = Path(specs['b_review']['path'])
++    aliases = {str(review / name): {'physical': roles[role]['path'], 'sha256': digest(role)}
++               for name, role in (('DELTA.md', 'b_initial_delta'), ('SHA256SUMS', 'b_initial_manifest'))}
++    require(root_b['initial_review_aliases'] == aliases, 'Only exact two historical B roles')
++    initial_rows = raw('b_initial_manifest').decode().splitlines()
++    require(len(initial_rows) == 407, 'Actual initial 407 manifest')
++    for row in initial_rows:
++        expected, name = row.split('  ', 1)
++        path = Path(roles['b_initial_delta']['path']) if name == 'DELTA.md' else review / name
++        require(str(path) in required and required[str(path)]['sha256'] == expected, 'Preserved initial B bytes')
++    strict = native('b_strict', 'PASS_ROOT_P210_B_STRICT_PAIR')
++    require(strict['role'] == 'p210_b' and strict['checks_each'] == [51129, 51129] and
++            strict['command_count'] == 10 and strict['known_inputs'] == 3558 and strict['errors'] == [] and
++            strict['closure'] == {'manifest': specs['b_pair']['seal'], 'payloads': 59}, 'Actual strict pair closure')
++    strict_receive = native('b_strict_reception', 'PASS_ROOT_P210_B_STRICT_PAIR_ORIGINAL_RECEPTION_REVISION_01')
++    require(strict_receive['schema'] == 'p210-B-strict-actual-root-receiver-revision-01' and
++            strict_receive['pair_manifest'] == specs['b_pair']['seal'] and strict_receive['pair_payloads'] == 59 and
++            strict_receive['full_recorded_native_commands'] == 10 and strict_receive['known_inputs'] == 3558 and
++            strict_receive['physical_read_paths_rechecked'] == 3633 and
++            strict_receive['all_3558_actual_rich_keys_rechecked'] is True and
++            strict_receive['all_native_argv_and_timeout_reconstructed'] is True, 'Actual root strict original reception')
++    final_b = native('b_final', 'PASS_ROOT_P210_B_FINAL_SAME_REVIEWER_DELTA_AND_ORIGINAL_RECEPTION')
++    require(final_b['schema'] == 'p210-B-final-root-original-receiver-v1' and
++            final_b['B_final_manifest'] == specs['b_review']['seal'] and final_b['B_final_payloads'] == 441 and
++            final_b['accepted_same_reviewer_delta'] is True and final_b['current_open'] == current['current_open_counts'] and
++            final_b['exact_two_historical_aliases'] == aliases and final_b['initial_payloads_preserved'] == 407 and
++            final_b['initial_unchanged_in_place'] == 406 and final_b['phase_reception']['common_keys'] == 121013 and
++            final_b['current_extra_key_count'] == 44 and final_b['physical_paths_fully_reread_twice'] == 121057 and
++            final_b['complete_current_read_map_canonical_sha256'] ==
++            root_b['actual_final_root_inspection']['complete_current_map_sha256'],
++            'Exact actual final B reception, not a new full host-key pass')
++
++    actual_binding, provenance = data('round2_binding'), data('round2_provenance')
++    r2 = PAPER / 'frozen_round2'
++    require(actual_binding['schema'] == 'p210-round2-actual-final-b-binding-v1' and
++            actual_binding['status'] == 'BOUND_AFTER_ACTUAL_B_ACCEPTANCE_AND_ROOT_FINAL_CLOSURE' and
++            actual_binding['bound_by'] == '/root' and actual_binding['paper'] == 'P210' and
++            len(actual_binding['roles']) == 13 and len(actual_binding['selectors']) == 26 and
++            provenance['schema'] == 'p210-round2-provenance-v1' and
++            provenance['actual_final_b_binding'] == actual_binding and
++            provenance['actual_final_b_binding_sha256'] == digest('round2_binding') and
++            provenance['accepted_root_closure_sha256'] == digest('root_b') and
++            provenance['round1_core_payloads_copied'] == 508 and len(provenance['core_payload_pins']) == 508 and
++            provenance['acceptance_anchor_payloads'] == 14 and len(provenance['anchors']) == 14 and
++            provenance['raw_byte_comparisons'] == 1016, 'Actual Round2 accepted binding and provenance')
++    prior = {str(PAPER / 'ROOT_LIFECYCLE.md'): Path(roles['prior_lifecycle']['path']),
++             str(PAPER / 'PAPER_MANIFEST.sha256'): Path(roles['prior_whole']['path'])}
++    require(prior[str(PAPER / 'ROOT_LIFECYCLE.md')] == r2 / 'ROUND2_ACCEPTANCE/PRE_ROUND2_ROOT_LIFECYCLE.md' and
++            prior[str(PAPER / 'PAPER_MANIFEST.sha256')] == r2 / 'ROUND2_ACCEPTANCE/PRE_ROUND2_PAPER_MANIFEST.sha256',
++            'Exact physical historical pre-Round2 roles; never compare old keys to refreshed live documents')
++    for name, anchor in provenance['anchors'].items():
++        physical = r2 / anchor['physical_path']
++        original = prior.get(anchor['original_path'], Path(anchor['original_path']))
++        require(physical == r2 / 'ROUND2_ACCEPTANCE' / name and str(physical) in required and str(original) in required and
++                required[str(physical)] == required[str(original)] and
++                required[str(physical)]['sha256'] == anchor['sha256'], 'Exact physical acceptance anchor')
++    freeze = native('round2_freeze', 'PASS_PHYSICAL_P210_ROUND2')
++    require(freeze['manifest_sha256'] == specs['round2']['seal']['sha256'] and freeze['payloads'] == 524 and
++            freeze['physical_files'] == 525 and freeze['core_payloads'] == 508 and
++            freeze['acceptance_anchor_payloads'] == 14 and freeze['complete_raw_byte_comparisons'] == 1016 and
++            freeze['actual_final_b_binding_sha256'] == digest('round2_binding'), 'Actual physical freeze native')
++    received = native('round2_inspection', 'PASS_ROOT_PHYSICAL_P210_ROUND2_RECEPTION')
++    receipt = data('round2_reception')
++    require(receipt['status'] == received['status'] and receipt['checks'] == received['checks'] == 38968 and
++            receipt['round2_manifest_sha256'] == received['round2_manifest_sha256'] == specs['round2']['seal']['sha256'] and
++            receipt['current_input_count'] == received['current_input_count'] == 2603 and
++            len(receipt['complete_input_pins']) == 2603 and receipt['full_raw_copy_comparisons'] == 523 and
++            receipt['current_open_findings'] == 0 and receipt['payloads'] == 524 and receipt['physical_files'] == 525 and
++            received['actual_freeze_completion_sha256'] == digest('round2_freeze_completion') and
++            received['root_reception_manifest_sha256'] == specs['round2_reception']['seal']['sha256'],
++            'Actual complete Round2 original reception')
++    actual_commands = receipt['actual_native_commands']
++    require(len(actual_commands) == received['native_commands_all_zero'] == 6, 'Six complete actual native receipts')
++    bases = [PAPER / 'frozen_round1', r2, review, Path(specs['b_pair']['path']), Path(specs['round2_preparation']['path'])]
++    for index, command in enumerate(actual_commands):
++        require(command['exit'] == 0 and command['stderr_utf8'] == '' and command['environment'] ==
++                {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'},
++                'Actual Round2 native exit/environment/separate stderr')
++        for stream in ('stdout', 'stderr'):
++            require(hashlib.sha256(command[stream + '_utf8'].encode()).hexdigest() == command[stream + '_sha256'],
++                    'Actual complete native stream bytes')
++        if index < 5:
++            base = bases[index]
++            require(command['argv'] == ['/usr/bin/sha256sum', '--check', 'SHA256SUMS'] and
++                    command['cwd'] == str(base) and command['stdout_utf8'] ==
++                    ''.join(row.split('  ', 1)[1] + ': OK\n' for row in (base / 'SHA256SUMS').read_text().splitlines()),
++                    'Exact complete manifest native return')
++        else:
++            require(command['argv'] == ['/usr/bin/cmp', str(r2 / 'AUTHOR_MANIFEST.sha256'), str(PAPER / 'AUTHOR_MANIFEST.sha256')] and
++                    command['cwd'] == str(ROOT) and command['stdout_utf8'] == '' and
++                    required[str(r2 / 'AUTHOR_MANIFEST.sha256')] == required[str(PAPER / 'AUTHOR_MANIFEST.sha256')],
++                    'Actual original author-seal native comparison')
++    metadata = data('round2_metadata')
++    require(metadata['result']['exit_code'] == 0, 'Actual root full-key metadata native exit')
++    measured = json.loads(metadata['result']['output'])
++    require(measured['status'] == 'PASS_ROOT_ROUND2_NATIVE_ORIGINAL_FULL_INPUT_AND_SIX_RAW_RETURNS' and
++            measured['actual_receiver_inputs_rehashed'] == 2603 and measured['actual_native_commands_checked'] == 6 and
++            measured['actual_full_copy_comparisons'] == 523, 'Accepted actual root full-input gate')
++    for name, value in measured['evidence'].items():
++        require(required.get(name) == value, 'Exact root metadata evidence')
++
++    refresh = native('lifecycle_refresh', 'PASS_P210_ROUND2_LIFECYCLE_AND_WHOLE_MANIFEST_REFRESH')
++    refresh_full = data('lifecycle_refresh')
++    require({k: v for k, v in refresh_full.items() if k != 'native'} == refresh and
++            refresh['current_payloads'] == 2021 and refresh['physical_files'] == 2022 and
++            refresh['added_round2_files'] == 525 and refresh['old_payloads'] == 1496 and
++            refresh['sole_changed_old_payload'] == 'ROOT_LIFECYCLE.md' and
++            refresh['new_lifecycle_sha256'] == digest('lifecycle') and refresh['new_whole_sha256'] == digest('whole') and
++            refresh['old_lifecycle_sha256'] == digest('prior_lifecycle') and
++            refresh['old_whole_sha256'] == digest('prior_whole') and
++            refresh['round2_sha256'] == specs['round2']['seal']['sha256'], 'Actual preterminal lifecycle refresh')
++    rows, native_refresh = raw('whole').decode().splitlines(), refresh_full['native']
++    require(len(rows) == 2021 and native_refresh['exit'] == 0 and native_refresh['stderr'] == '' and
++            native_refresh['argv'] == ['/usr/bin/sha256sum', '--check', 'PAPER_MANIFEST.sha256'] and
++            native_refresh['cwd'] == str(PAPER) and native_refresh['stdout'] ==
++            ''.join(row.split('  ', 1)[1] + ': OK\n' for row in rows), 'Actual complete prior rolling-manifest return')
++    # Do not assert whole-tree completeness after qa_final is created. The live
++    # preterminal document and manifest remain exact byte anchors throughout.
++    paper = binding['papers']['P210']
++    require(set(binding['papers']) == {'P210'} and paper['freeze'] == str(r2) and paper['round'] == 2 and
++            paper['freeze_manifest'] == specs['round2']['seal'] and paper['freeze_payloads'] == 524,
++            'Final actual physical Round2 source role')
++    require(all(pin(Path(name)) == value for name, value in required.items()), 'Full consumed-key preflight reread')
++    return {'status': 'BOUND_ACTUAL_P210_B_ROOT_ROUND2_PRETERMINAL_ORIGINALS',
++            'papers': binding['papers'], 'required_input_pins': required,
++            'scope': 'Actual B/root/Round2 semantic originals and eight complete packages; no new B host-key expansion. Preterminal lifecycle/whole byte anchors only; terminal views/artifact/paper/five gates remain.'}
+ 
+ def originals(recipe, preparation_sha):
+     result = manifest(PREP, preparation_sha)
+-    # This hard prerequisite executes before out.mkdir, host inventory and
+-    # all child processes. No caller argument can bypass the unbound stub.
++    # This exact actual-schema prerequisite executes before out.mkdir, host
++    # inventory and all child processes; it is not a caller boolean gate.
+     final = final_schema_binding(recipe)
+     require(set(final['papers']) == {'P210'}, 'Only P210 belongs to this builder')
+     require(all(name not in recipe['infrastructure_pins'] or recipe['infrastructure_pins'][name] == expected
+@@ -356,7 +555,7 @@
+             require(round2_pages == paper['pages'] == 6, 'Measure actual Round2 six-page baseline before builds')
+             for number in (1, 2):
+                 label = ident + '_cold_build_' + str(number)
+-                cold = out / label
++                cold = out / ('cold_build_' + str(number))
+                 cold.mkdir()
+                 for name in paper['source_names']:
+                     target = cold / name
+@@ -445,7 +644,7 @@
+                           'venue_page_limit': None, 'bibtex_warnings_or_errors': []}
+                 save(out / (label + '_MEASURED.json'), result)
+                 builds.append(result)
+-            pair = [out / (ident + '_cold_build_' + str(n)) / 'main.pdf' for n in (1, 2)]
++            pair = [out / ('cold_build_' + str(n)) / 'main.pdf' for n in (1, 2)]
+             command(ident + '_pair_cmp', ['/usr/bin/cmp', '--', *map(str, pair)], out, pair)
+     except BaseException:
+         failures.append({'phase': 'build', 'traceback': traceback.format_exc()})

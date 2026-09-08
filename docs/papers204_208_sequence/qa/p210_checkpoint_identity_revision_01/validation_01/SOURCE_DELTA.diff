@@ -1,0 +1,192 @@
+diff --git a/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_stage_revision_01/execute.py b/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_identity_revision_01/execute.py
+index 340e050..2758e17 100644
+--- a/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_stage_revision_01/execute.py
++++ b/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_identity_revision_01/execute.py
+@@ -1,9 +1,8 @@
+ #!/usr/bin/env python3
+-"""UNEXECUTED stage/commit/push continuation after the preserved 60s failure.
++"""UNEXECUTED identity-only commit/push continuation from accepted staged tree.
+ 
+-The original preparation/execution evidence remains immutable. Only new
+-*_revision_01 phase directories and the exact previously approved overlay
+-Git scope may change after root approval. No clone, copy or lock cleanup.
++Existing configured user identity is reused command-locally; no config write.
++Both failed attempts and accepted stage_revision_01 remain immutable.
+ """
+ from pathlib import Path
+ import argparse
+@@ -19,13 +18,14 @@ import traceback
+ 
+ HERE = Path(__file__).resolve().parent
+ ORIGINAL = HERE.parent / 'p210_checkpoint_preparation'
++STAGE_REVISION = HERE.parent / 'p210_checkpoint_stage_revision_01'
+ PREP = ORIGINAL / 'preparation_01'
+ SOURCE = Path('/root/autodl-tmp/symbolic_dynamics')
+ MIRROR = Path('/root/autodl-tmp/hilbert-polya-structure')
+ DEST = Path('/root/symbolic-dynamics-private-sync-20260907')
+ EVIDENCE = Path('/root/symbolic-dynamics-private-sync-evidence-20260907')
+ BASE = 'a380d24718fec4ef27365f44e96fb7ffa2b0fd10'
+-PHASES = ('stage', 'commit', 'push')
++PHASES = ('commit', 'push')
+ ENV = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_TERMINAL_PROMPT='0',
+            GIT_SSH_COMMAND='ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=20 -o ConnectionAttempts=1',
+            GIT_LITERAL_PATHSPECS='0')
+@@ -78,16 +78,22 @@ def main():
+     # Only variable names are mentioned on refusal, never their values.
+     redirect_keys = ('GIT_DIR','GIT_WORK_TREE','GIT_COMMON_DIR','GIT_INDEX_FILE',
+                      'GIT_OBJECT_DIRECTORY','GIT_ALTERNATE_OBJECT_DIRECTORIES',
+-                     'GIT_CONFIG','GIT_CONFIG_COUNT','GIT_CONFIG_PARAMETERS','GIT_NAMESPACE')
++                     'GIT_CONFIG','GIT_CONFIG_COUNT','GIT_CONFIG_PARAMETERS','GIT_NAMESPACE',
++                     'GIT_AUTHOR_NAME','GIT_AUTHOR_EMAIL','GIT_COMMITTER_NAME','GIT_COMMITTER_EMAIL')
+     assert not [k for k in redirect_keys if os.environ.get(k)], 'inherited Git redirection requires root inspection'
+     # A placeholder/template never authorizes execution; root must supply exact pins.
+     approval = json.loads(args.approval.read_text())
+     scope = json.loads((PREP / 'SCOPE.json').read_text())
+-    assert approval['status'] == 'ROOT_APPROVED_P210_STAGE_REVISION_01_CONTINUATION'
++    assert approval['status'] == 'ROOT_APPROVED_P210_IDENTITY_REVISION_01_CONTINUATION'
++    assert approval['commit_identity'] == {'user.name':'mariswang','user.email':'wangliang.f@gmail.com'}
++    assert approval['identity_read_sha256'] == digest(HERE.parent / 'P210_CHECKPOINT_EXISTING_IDENTITY_ROOT_READ.actual.json')
++    assert approval['identity_input_pins_sha256'] == digest(HERE / 'IDENTITY_INPUT_PINS.json')
++    assert approval['accepted_stage_executor_sha256'] == digest(STAGE_REVISION / 'execute.py') == '497db8a936d1080523f9407799d3f9e094275ec18557c30f4307cf4c0babc1f8'
++    assert approval['accepted_stage_tree'] == 'a26e19ee04c7a25fd0b0d00c67df784206baba4c'
+     assert approval['process_support_sha256'] == digest(HERE / 'process_support.py')
+     from process_support import run_files, TimedReader, settle_group, existing_overlay_writers
+-    assert approval['inspection_sha256'] == digest(HERE / 'inspection_01/RESULT.actual.json')
+-    assert approval['residue_pins_sha256'] == digest(HERE / 'FAILED_RESIDUE_PINS.actual.json')
++    assert approval['inspection_sha256'] == digest(STAGE_REVISION / 'inspection_01/RESULT.actual.json')
++    assert approval['residue_pins_sha256'] == digest(STAGE_REVISION / 'FAILED_RESIDUE_PINS.actual.json')
+     assert approval['prior_executor_sha256'] == digest(ORIGINAL / 'execute.py') == '8d42285eeebcfc23c145da9b0bf6bb8b82b2db1f04533f5d73c145665f4cdcba'
+     assert approval['allow_owned_new_session_timeout_settlement'] is True
+     assert approval['scope_sha256'] == digest(PREP / 'SCOPE.json')
+@@ -119,7 +125,7 @@ def main():
+     assert digest(lock_receipt_path) == approval['lock_preservation_receipt_sha256']
+     assert approval['lock_preservation_receipt_sha256'] == '208b59678887f7741403dc3110d0585f10b730ceca94788203d3bc92403fa00e'
+     lock_receipt = json.loads(lock_receipt_path.read_text())
+-    residues = json.loads((HERE / 'FAILED_RESIDUE_PINS.actual.json').read_text())
++    residues = json.loads((STAGE_REVISION / 'FAILED_RESIDUE_PINS.actual.json').read_text())
+     assert lock_receipt['status'] == 'ROOT_CONFIRMED_EXACT_ORPHAN_LOCK_PRESERVATION'
+     assert lock_receipt['source'] == residues['pins'][0]['path']
+     assert lock_receipt['preserved_path'] == residues['proposed_lock_archive']
+@@ -134,16 +140,16 @@ def main():
+     assert preserved_lock.stat().st_size == residues['pins'][0]['bytes']
+     assert preserved_lock.stat().st_mtime_ns == residues['pins'][0]['mtime_ns']
+     assert preserved_lock.stat().st_mode == residues['pins'][0]['mode']
+-    if args.phase == 'stage':
+-        prev = json.loads((EVIDENCE / 'copy/RESULT.actual.json').read_text())
+-        assert prev['executor_sha256'] == approval['prior_executor_sha256']
+-        assert not (EVIDENCE / 'commit').exists() and not (EVIDENCE / 'push').exists()
++    if args.phase == 'commit':
++        prev = json.loads((EVIDENCE / 'stage_revision_01/RESULT.actual.json').read_text())
++        assert prev['executor_sha256'] == approval['accepted_stage_executor_sha256']
++        assert prev['tree'] == approval['accepted_stage_tree']
++        assert not (EVIDENCE / 'push_revision_01').exists()
+     else:
+-        previous = PHASES[PHASES.index(args.phase) - 1] + '_revision_01'
+-        prev = json.loads((EVIDENCE / previous / 'RESULT.actual.json').read_text())
++        prev = json.loads((EVIDENCE / 'commit_revision_02/RESULT.actual.json').read_text())
+         assert prev['executor_sha256'] == approval['executor_sha256']
+     assert prev['status'] == 'PASS' and prev['scope_sha256'] == approval['scope_sha256']
+-    phase = EVIDENCE / (args.phase + '_revision_01')
++    phase = EVIDENCE / (args.phase + '_revision_02')
+     phase.mkdir()
+     commands = []
+     dump(phase / 'APPROVAL_BINDING.actual.json', {'approval_path': str(args.approval.resolve()),
+@@ -184,7 +190,8 @@ def main():
+                        '-c', 'core.worktree=' + str(DEST), '-c', 'core.bare=false',
+                        '-c', 'core.hooksPath=' + str(EVIDENCE / 'empty_hooks'),
+                        '-c', 'core.fsmonitor=false', '-c', 'gc.auto=0',
+-                       '-c', 'commit.gpgSign=false', '-c', 'core.autocrlf=false']
++                       '-c', 'commit.gpgSign=false', '-c', 'core.autocrlf=false',
++                       '-c', 'user.name=mariswang', '-c', 'user.email=wangliang.f@gmail.com']
+         return command(['git', '-C', str(repo), *options, *argv], **kwargs)
+ 
+     def remote(repo, ref=BASE):
+@@ -217,7 +224,9 @@ def main():
+         assert physical == selected_names, 'only explicit selected worktree paths may be materialized'
+ 
+     def historical_failure_preserved():
+-        for row in json.loads((HERE / 'inspection_01/ORIGINAL_INPUT_PINS.json').read_text()):
++        for row in json.loads((HERE / 'IDENTITY_INPUT_PINS.json').read_text()):
++            assert digest(Path(row['path'])) == row['sha256'], row['path']
++        for row in json.loads((STAGE_REVISION / 'inspection_01/ORIGINAL_INPUT_PINS.json').read_text()):
+             assert digest(Path(row['path'])) == row['sha256'], row['path']
+         for row in residues['pins'][1:]:
+             p = Path(row['path'])
+@@ -226,25 +235,6 @@ def main():
+         assert digest(preserved_lock) == residues['pins'][0]['sha256']
+         assert not (DEST / '.git/index.lock').exists()
+ 
+-    def partial_index_preflight():
+-        assert git(DEST, 'rev-parse', 'HEAD').decode().strip() == BASE
+-        changed = git(DEST, 'diff', '--cached', '--name-status', '-z', '--no-renames', BASE, '--').split(b'\0')[:-1]
+-        assert len(changed) % 2 == 0
+-        intended = {r['path']:r for r in selected}
+-        actual = {changed[i+1].decode():changed[i].decode() for i in range(0,len(changed),2)}
+-        assert set(actual) <= selected_names and all(actual[p] == intended[p]['change'] for p in actual)
+-        staged = git(DEST, 'ls-files', '--stage', '-z', '--', *sorted(actual)).split(b'\0')[:-1] if actual else []
+-        seen = {}
+-        for raw in staged:
+-            attrs, name = raw.split(b'\t', 1)
+-            mode, oid, number = attrs.decode().split()
+-            assert number == '0'
+-            seen[name.decode()] = (mode, oid)
+-        assert seen == {p:(intended[p]['mode'],intended[p]['git_blob_sha1']) for p in actual}
+-        dump(phase / 'PARTIAL_INDEX_PREFLIGHT.actual.json', {'changed_count':len(actual),
+-             'exact_intended_subset':True, 'unrelated_changes':0, 'unmerged_entries':0})
+-
+-
+     def tree_check(tree):
+         prefixes = [p['base'] for p in scope['packages']] + scope['exact_extra_paths']
+         data = git(DEST, '--literal-pathspecs', 'ls-tree', '-r', '-z', '--full-tree', tree, '--', *prefixes)
+@@ -349,31 +339,18 @@ def main():
+         historical_failure_preserved()
+         free = shutil.disk_usage('/root').free
+         assert free > 3 * 658584369 + 1024**3, ('remaining overlay reservation', free)
+-        if args.phase == 'stage':
+-            partial_index_preflight()
+-            overlay_files()
+-            data = b''.join(p.encode() + b'\0' for p in sorted(selected_names))
+-            attrs = git(DEST, 'check-attr', '--cached', '-z', '--stdin', 'filter','text','eol','working-tree-encoding','ident', stdin=data)
+-            fields = attrs.split(b'\0')[:-1]
+-            assert len(fields) == 15 * len(selected) and all(fields[i] in (b'unspecified', b'unset') for i in range(2,len(fields),3))
+-            ignored = set(scope['ignored_selected_paths'])
+-            ordinary = b''.join(p.encode()+b'\0' for p in sorted(selected_names-ignored))
+-            exact_ignored = b''.join(p.encode()+b'\0' for p in sorted(ignored))
+-            git(DEST, '--literal-pathspecs', 'add', '--pathspec-from-file=-', '--pathspec-file-nul', stdin=ordinary)
+-            git(DEST, '--literal-pathspecs', 'add', '-f', '--pathspec-from-file=-', '--pathspec-file-nul', stdin=exact_ignored)
+-            changed = git(DEST, 'diff', '--cached', '--name-status', '-z', '--no-renames', BASE, '--').split(b'\0')[:-1]
+-            assert len(changed) == 2 * len(selected)
+-            assert {changed[i+1].decode(): changed[i].decode() for i in range(0,len(changed),2)} == {r['path']:r['change'] for r in selected}
+-            tree = git(DEST, 'write-tree').decode().strip()
+-            tree_check(tree)
+-            result.update(tree=tree, object_stream=blob_stream_check())
+-        elif args.phase == 'commit':
++        if args.phase == 'commit':
+             overlay_files()
+             stage = json.loads((EVIDENCE / 'stage_revision_01/RESULT.actual.json').read_text())
++            assert stage['tree'] == approval['accepted_stage_tree']
++            assert not git(DEST, 'diff', '--cached', '--name-status', '-z', stage['tree'], '--')
+             assert git(DEST, 'write-tree').decode().strip() == stage['tree']
+             tree_check(stage['tree'])
+             git(DEST, 'commit', '-m', 'Private checkpoint: P210 Round0 and accepted batch evidence; HOLD_EXTERNAL', timeout=300)
+             commit = git(DEST, 'rev-parse', 'HEAD').decode().strip()
++            identity = git(DEST, 'show', '-s', '--format=%an%x00%ae%x00%cn%x00%ce', 'HEAD').decode().rstrip('\n').split('\0')
++            assert identity == ['mariswang','wangliang.f@gmail.com','mariswang','wangliang.f@gmail.com']
++            result['commit_identity'] = approval['commit_identity']
+             assert git(DEST, 'rev-list', '--parents', '-n', '1', 'HEAD').decode().split() == [commit, BASE]
+             assert git(DEST, 'rev-parse', 'HEAD^{tree}').decode().strip() == stage['tree']
+             tree_check(commit)
+@@ -381,7 +358,7 @@ def main():
+             assert not git(DEST, 'status', '--porcelain=v1', '-z', '--untracked-files=all')
+         elif args.phase == 'push':
+             overlay_files()
+-            committed = json.loads((EVIDENCE / 'commit_revision_01/RESULT.actual.json').read_text())
++            committed = json.loads((EVIDENCE / 'commit_revision_02/RESULT.actual.json').read_text())
+             commit = committed['commit']
+             assert git(DEST, 'rev-parse', 'HEAD').decode().strip() == commit
+             assert not git(DEST, 'status', '--porcelain=v1', '-z', '--untracked-files=all')
+@@ -408,3 +385,4 @@ def main():
+ 
+ if __name__ == '__main__':
+     main()
++

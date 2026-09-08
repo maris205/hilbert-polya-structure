@@ -1,0 +1,137 @@
+{
+  "schema": "p208-p209-reuse-preparation-static-v1",
+  "status": "PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED",
+  "scope": {
+    "checker_executions": 0,
+    "old_program_imports_or_executions": 0,
+    "host_tree_inventories": 0,
+    "science_runs": 0,
+    "builds": 0,
+    "views": 0,
+    "git_operations": 0,
+    "central_edits": 0,
+    "external": "HOLD_EXTERNAL"
+  },
+  "final_static_summary": {
+    "accepted_current_packages": 6,
+    "alias_rows_bound_to_exact_original_direct_ledger": 6,
+    "ast_parse_and_compile_without_execution": true,
+    "builds": 0,
+    "checker_executions": 0,
+    "external": "HOLD_EXTERNAL",
+    "fixed_physical_pins_checked_twice": 128,
+    "host_tree_inventories": 0,
+    "imports": [
+      "argparse",
+      "datetime",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "re",
+      "sys",
+      "sysconfig",
+      "traceback"
+    ],
+    "old_program_imports_or_executions": 0,
+    "original_build_pair_manifests": 2,
+    "original_outer_manifests": 4,
+    "original_strict_pair_manifests": 6,
+    "science_runs": 0,
+    "source": {
+      "bytes": 45850,
+      "sha256": "2790f4ef028bd3f02323c30889fcc0b7e709e7d76b81d62da06f4b85e5d03f4d"
+    },
+    "source_lines": 604,
+    "status": "PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED",
+    "views": 0
+  },
+  "actual_static_attempts": [
+    {
+      "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast,hashlib,json\nfrom pathlib import Path\nbase=Path('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_p209_reuse_preparation')\ndef pin(p):\n raw=Path(p).read_bytes();return {'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}\nsource=(base/'inspect.py').read_bytes();tree=ast.parse(source,filename=str(base/'inspect.py'));compile(tree,str(base/'inspect.py'),'exec')\nimports=sorted({n.name for node in ast.walk(tree) if isinstance(node,ast.Import) for n in node.names}|{node.module for node in ast.walk(tree) if isinstance(node,ast.ImportFrom)})\nassert imports==['argparse','datetime','hashlib','json','os','pathlib','re','sys','sysconfig','traceback'],imports\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in {'eval','exec','__import__'} for n in ast.walk(tree))\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in {'write_bytes','write_text','mkdir','unlink','rename','replace','rmdir','system','popen','fork','spawnv','Popen','run'} for n in ast.walk(tree))\ncontract=json.loads((base/'INPUT_PINS.json').read_text()); aliases=json.loads((base/'ALIASES.json').read_text()); assert len(contract['fixed_inputs'])==128 and len(aliases)==6\nassert set(contract['pairs'])=={'p208_author','p208_a','p208_b','p209_author','p209_a','p209_b'}\nassert set(contract['builds'])=={'p208_builds','p209_builds'} and len(contract['accepted_packages'])==6\nbefore={p:pin(p) for p in contract['fixed_inputs']}; assert before==contract['fixed_inputs']\nfor row in aliases:\n spec=contract['pairs'][row['cases'][0]]; folder=Path(spec['package']['root'])\n ledger=json.loads((folder/('INPUTS_BEFORE.json' if spec['paper_number']==208 else 'ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json')).read_text())\n assert ledger[row['original']]['sha256']==row['sha256'] and before[row['physical']]['sha256']==row['sha256']\n assert Path(row['physical']).is_file() and Path(row['physical']).resolve()==Path(row['physical'])\nfor spec in list(contract['pairs'].values())+list(contract['builds'].values()):\n base_original=Path(spec['package']['root']); assert len((base_original/'SHA256SUMS').read_text().splitlines())==spec['package']['payloads']\n if 'launcher' in spec: assert len((Path(spec['launcher']['root'])/'SHA256SUMS').read_text().splitlines())==10\nfor number,spec in ((208,contract['builds']['p208_builds']),(209,contract['builds']['p209_builds'])):\n folder=Path(spec['package']['root']); receipt=json.loads((folder/'BUILD_EXECUTION.json').read_text()); assert len(receipt['commands'])==32\n for row in receipt['commands']:\n  attempt=json.loads((folder/(row['label']+'.attempt.json')).read_text()); assert attempt['status']=='ATTEMPTED' and attempt['exit_code'] is None\n for i in (1,2):\n  for j in (1,2,3):\n   for suffix in ('fls','aux','log'): assert (folder/('cold_build_'+str(i)+'_pass'+str(j)+'.'+suffix)).is_file()\n assert (folder/'GENERATED_LOCAL_TEX_INPUTS.json').is_file()==(number==209)\nafter={p:pin(p) for p in contract['fixed_inputs']};assert before==after and source==(base/'inspect.py').read_bytes()\nprint(json.dumps({'status':'PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED','source':pin(base/'inspect.py'),'source_lines':len(source.splitlines()),'imports':imports,'fixed_physical_pins_checked_twice':len(before),'alias_rows_bound_to_exact_original_direct_ledger':len(aliases),'original_strict_pair_manifests':6,'original_build_pair_manifests':2,'original_outer_manifests':4,'accepted_current_packages':len(contract['accepted_packages']),'ast_parse_and_compile_without_execution':True,'old_program_imports_or_executions':0,'checker_executions':0,'host_tree_inventories':0,'science_runs':0,'builds':0,'views':0,'external':'HOLD_EXTERNAL'},sort_keys=True))\nPY",
+      "native": {
+        "chunk_id": "ba4dfb",
+        "wall_time_seconds": 0.00000562,
+        "exit_code": 1,
+        "original_token_count": 23,
+        "output": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in <module>\nAssertionError\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast,hashlib,json\nfrom pathlib import Path\nbase=Path('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_p209_reuse_preparation')\ndef pin(p):\n raw=Path(p).read_bytes();return {'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}\nsource=(base/'inspect.py').read_bytes();tree=ast.parse(source,filename=str(base/'inspect.py'));compile(tree,str(base/'inspect.py'),'exec')\nimports=sorted({n.name for node in ast.walk(tree) if isinstance(node,ast.Import) for n in node.names}|{node.module for node in ast.walk(tree) if isinstance(node,ast.ImportFrom)})\nassert imports==['argparse','datetime','hashlib','json','os','pathlib','re','sys','sysconfig','traceback'],imports\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in {'eval','exec','__import__'} for n in ast.walk(tree))\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in {'write_bytes','write_text','mkdir','unlink','rename','rmdir','system','popen','fork','spawnv','Popen','run'} for n in ast.walk(tree))\ncontract=json.loads((base/'INPUT_PINS.json').read_text()); aliases=json.loads((base/'ALIASES.json').read_text()); assert len(contract['fixed_inputs'])==128 and len(aliases)==6\nassert set(contract['pairs'])=={'p208_author','p208_a','p208_b','p209_author','p209_a','p209_b'}\nassert set(contract['builds'])=={'p208_builds','p209_builds'} and len(contract['accepted_packages'])==6\nbefore={p:pin(p) for p in contract['fixed_inputs']}; assert before==contract['fixed_inputs']\nfor row in aliases:\n spec=contract['pairs'][row['cases'][0]]; folder=Path(spec['package']['root'])\n ledger=json.loads((folder/('INPUTS_BEFORE.json' if spec['paper_number']==208 else 'ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json')).read_text())\n assert ledger[row['original']]['sha256']==row['sha256'] and before[row['physical']]['sha256']==row['sha256']\n assert Path(row['physical']).is_file() and Path(row['physical']).resolve()==Path(row['physical'])\nfor spec in list(contract['pairs'].values())+list(contract['builds'].values()):\n base_original=Path(spec['package']['root']); assert len((base_original/'SHA256SUMS').read_text().splitlines())==spec['package']['payloads']\n if 'launcher' in spec: assert len((Path(spec['launcher']['root'])/'SHA256SUMS').read_text().splitlines())==10\nfor number,spec in ((208,contract['builds']['p208_builds']),(209,contract['builds']['p209_builds'])):\n folder=Path(spec['package']['root']); receipt=json.loads((folder/'BUILD_EXECUTION.json').read_text()); assert len(receipt['commands'])==32\n for row in receipt['commands']:\n  attempt=json.loads((folder/(row['label']+'.attempt.json')).read_text()); assert attempt['status']=='ATTEMPTED' and attempt['exit_code'] is None\n for i in (1,2):\n  for j in (1,2,3):\n   for suffix in ('fls','aux','log'): assert (folder/('cold_build_'+str(i)+'_pass'+str(j)+'.'+suffix)).is_file()\n assert (folder/'GENERATED_LOCAL_TEX_INPUTS.json').is_file()==(number==209)\nafter={p:pin(p) for p in contract['fixed_inputs']};assert before==after and source==(base/'inspect.py').read_bytes()\nprint(json.dumps({'status':'PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED','source':pin(base/'inspect.py'),'source_lines':len(source.splitlines()),'imports':imports,'fixed_physical_pins_checked_twice':len(before),'alias_rows_bound_to_exact_original_direct_ledger':len(aliases),'original_strict_pair_manifests':6,'original_build_pair_manifests':2,'original_outer_manifests':4,'accepted_current_packages':len(contract['accepted_packages']),'ast_parse_and_compile_without_execution':True,'old_program_imports_or_executions':0,'checker_executions':0,'host_tree_inventories':0,'science_runs':0,'builds':0,'views':0,'external':'HOLD_EXTERNAL'},sort_keys=True))\nPY",
+      "native": {
+        "chunk_id": "7ca91e",
+        "wall_time_seconds": 0.018050847,
+        "exit_code": 1,
+        "original_token_count": 24,
+        "output": "Traceback (most recent call last):\n  File \"<stdin>\", line 26, in <module>\nKeyError: 'exit_code'\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast,hashlib,json\nfrom pathlib import Path\nbase=Path('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_p209_reuse_preparation')\ndef pin(p):\n raw=Path(p).read_bytes();return {'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}\nsource=(base/'inspect.py').read_bytes();tree=ast.parse(source,filename=str(base/'inspect.py'));compile(tree,str(base/'inspect.py'),'exec')\nimports=sorted({n.name for node in ast.walk(tree) if isinstance(node,ast.Import) for n in node.names}|{node.module for node in ast.walk(tree) if isinstance(node,ast.ImportFrom)})\nassert imports==['argparse','datetime','hashlib','json','os','pathlib','re','sys','sysconfig','traceback'],imports\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in {'eval','exec','__import__'} for n in ast.walk(tree))\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in {'write_bytes','write_text','mkdir','unlink','rename','rmdir','system','popen','fork','spawnv','Popen','run'} for n in ast.walk(tree))\ncontract=json.loads((base/'INPUT_PINS.json').read_text()); aliases=json.loads((base/'ALIASES.json').read_text()); assert len(contract['fixed_inputs'])==128 and len(aliases)==6\nassert set(contract['pairs'])=={'p208_author','p208_a','p208_b','p209_author','p209_a','p209_b'}\nassert set(contract['builds'])=={'p208_builds','p209_builds'} and len(contract['accepted_packages'])==6\nbefore={p:pin(p) for p in contract['fixed_inputs']}; assert before==contract['fixed_inputs']\nfor row in aliases:\n spec=contract['pairs'][row['cases'][0]]; folder=Path(spec['package']['root'])\n ledger=json.loads((folder/('INPUTS_BEFORE.json' if spec['paper_number']==208 else 'ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json')).read_text())\n assert ledger[row['original']]['sha256']==row['sha256'] and before[row['physical']]['sha256']==row['sha256']\n assert Path(row['physical']).is_file() and Path(row['physical']).resolve()==Path(row['physical'])\nfor spec in list(contract['pairs'].values())+list(contract['builds'].values()):\n base_original=Path(spec['package']['root']); assert len((base_original/'SHA256SUMS').read_text().splitlines())==spec['package']['payloads']\n if 'launcher' in spec: assert len((Path(spec['launcher']['root'])/'SHA256SUMS').read_text().splitlines())==10\nfor number,spec in ((208,contract['builds']['p208_builds']),(209,contract['builds']['p209_builds'])):\n folder=Path(spec['package']['root']); receipt=json.loads((folder/'BUILD_EXECUTION.json').read_text()); assert len(receipt['commands'])==32\n for row in receipt['commands']:\n  attempt=json.loads((folder/(row['label']+'.attempt.json')).read_text()); assert attempt['status']=='ATTEMPTED' and ('exit_code' not in attempt if number==208 else attempt['exit_code'] is None)\n for i in (1,2):\n  for j in (1,2,3):\n   for suffix in ('fls','aux','log'): assert (folder/('cold_build_'+str(i)+'_pass'+str(j)+'.'+suffix)).is_file()\n assert (folder/'GENERATED_LOCAL_TEX_INPUTS.json').is_file()==(number==209)\nafter={p:pin(p) for p in contract['fixed_inputs']};assert before==after and source==(base/'inspect.py').read_bytes()\nprint(json.dumps({'status':'PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED','source':pin(base/'inspect.py'),'source_lines':len(source.splitlines()),'imports':imports,'fixed_physical_pins_checked_twice':len(before),'alias_rows_bound_to_exact_original_direct_ledger':len(aliases),'original_strict_pair_manifests':6,'original_build_pair_manifests':2,'original_outer_manifests':4,'accepted_current_packages':len(contract['accepted_packages']),'ast_parse_and_compile_without_execution':True,'old_program_imports_or_executions':0,'checker_executions':0,'host_tree_inventories':0,'science_runs':0,'builds':0,'views':0,'external':'HOLD_EXTERNAL'},sort_keys=True))\nPY",
+      "native": {
+        "chunk_id": "ac26f4",
+        "wall_time_seconds": 0.036557853,
+        "exit_code": 0,
+        "original_token_count": 186,
+        "output": "{\"accepted_current_packages\": 6, \"alias_rows_bound_to_exact_original_direct_ledger\": 6, \"ast_parse_and_compile_without_execution\": true, \"builds\": 0, \"checker_executions\": 0, \"external\": \"HOLD_EXTERNAL\", \"fixed_physical_pins_checked_twice\": 128, \"host_tree_inventories\": 0, \"imports\": [\"argparse\", \"datetime\", \"hashlib\", \"json\", \"os\", \"pathlib\", \"re\", \"sys\", \"sysconfig\", \"traceback\"], \"old_program_imports_or_executions\": 0, \"original_build_pair_manifests\": 2, \"original_outer_manifests\": 4, \"original_strict_pair_manifests\": 6, \"science_runs\": 0, \"source\": {\"bytes\": 45387, \"sha256\": \"4a2dcfef8e5ee8a8c0e11a66e41647047ad726365bfb6b3dc1e2d91058f2ffe6\"}, \"source_lines\": 597, \"status\": \"PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED\", \"views\": 0}\n"
+      }
+    },
+    {
+      "command": "/usr/bin/python3.10 -I -S -B - <<'PY'\nimport ast,hashlib,json\nfrom pathlib import Path\nbase=Path('/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p208_p209_reuse_preparation')\ndef pin(p):\n raw=Path(p).read_bytes();return {'sha256':hashlib.sha256(raw).hexdigest(),'bytes':len(raw)}\nsource=(base/'inspect.py').read_bytes();tree=ast.parse(source,filename=str(base/'inspect.py'));compile(tree,str(base/'inspect.py'),'exec')\nimports=sorted({n.name for node in ast.walk(tree) if isinstance(node,ast.Import) for n in node.names}|{node.module for node in ast.walk(tree) if isinstance(node,ast.ImportFrom)})\nassert imports==['argparse','datetime','hashlib','json','os','pathlib','re','sys','sysconfig','traceback'],imports\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in {'eval','exec','__import__'} for n in ast.walk(tree))\nassert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in {'write_bytes','write_text','mkdir','unlink','rename','rmdir','system','popen','fork','spawnv','Popen','run'} for n in ast.walk(tree))\ncontract=json.loads((base/'INPUT_PINS.json').read_text()); aliases=json.loads((base/'ALIASES.json').read_text()); assert len(contract['fixed_inputs'])==128 and len(aliases)==6\nassert set(contract['pairs'])=={'p208_author','p208_a','p208_b','p209_author','p209_a','p209_b'}\nassert set(contract['builds'])=={'p208_builds','p209_builds'} and len(contract['accepted_packages'])==6\nbefore={p:pin(p) for p in contract['fixed_inputs']}; assert before==contract['fixed_inputs']\nfor row in aliases:\n spec=contract['pairs'][row['cases'][0]]; folder=Path(spec['package']['root'])\n ledger=json.loads((folder/('INPUTS_BEFORE.json' if spec['paper_number']==208 else 'ALL_INPUTS_INCLUDING_CAPSULES_BEFORE.json')).read_text())\n assert ledger[row['original']]['sha256']==row['sha256'] and before[row['physical']]['sha256']==row['sha256']\n assert Path(row['physical']).is_file() and Path(row['physical']).resolve()==Path(row['physical'])\nfor spec in list(contract['pairs'].values())+list(contract['builds'].values()):\n base_original=Path(spec['package']['root']); assert len((base_original/'SHA256SUMS').read_text().splitlines())==spec['package']['payloads']\n if 'launcher' in spec: assert len((Path(spec['launcher']['root'])/'SHA256SUMS').read_text().splitlines())==10\nfor number,spec in ((208,contract['builds']['p208_builds']),(209,contract['builds']['p209_builds'])):\n folder=Path(spec['package']['root']); receipt=json.loads((folder/'BUILD_EXECUTION.json').read_text()); assert len(receipt['commands'])==32\n for row in receipt['commands']:\n  attempt=json.loads((folder/(row['label']+'.attempt.json')).read_text()); assert attempt['status']=='ATTEMPTED' and ('exit_code' not in attempt if number==208 else attempt['exit_code'] is None)\n for i in (1,2):\n  for j in (1,2,3):\n   for suffix in ('fls','aux','log'): assert (folder/('cold_build_'+str(i)+'_pass'+str(j)+'.'+suffix)).is_file()\n assert (folder/'GENERATED_LOCAL_TEX_INPUTS.json').is_file()==(number==209)\nafter={p:pin(p) for p in contract['fixed_inputs']};assert before==after and source==(base/'inspect.py').read_bytes()\nprint(json.dumps({'status':'PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED','source':pin(base/'inspect.py'),'source_lines':len(source.splitlines()),'imports':imports,'fixed_physical_pins_checked_twice':len(before),'alias_rows_bound_to_exact_original_direct_ledger':len(aliases),'original_strict_pair_manifests':6,'original_build_pair_manifests':2,'original_outer_manifests':4,'accepted_current_packages':len(contract['accepted_packages']),'ast_parse_and_compile_without_execution':True,'old_program_imports_or_executions':0,'checker_executions':0,'host_tree_inventories':0,'science_runs':0,'builds':0,'views':0,'external':'HOLD_EXTERNAL'},sort_keys=True))\nPY",
+      "native": {
+        "chunk_id": "c0754c",
+        "wall_time_seconds": 0.038720212,
+        "exit_code": 0,
+        "original_token_count": 186,
+        "output": "{\"accepted_current_packages\": 6, \"alias_rows_bound_to_exact_original_direct_ledger\": 6, \"ast_parse_and_compile_without_execution\": true, \"builds\": 0, \"checker_executions\": 0, \"external\": \"HOLD_EXTERNAL\", \"fixed_physical_pins_checked_twice\": 128, \"host_tree_inventories\": 0, \"imports\": [\"argparse\", \"datetime\", \"hashlib\", \"json\", \"os\", \"pathlib\", \"re\", \"sys\", \"sysconfig\", \"traceback\"], \"old_program_imports_or_executions\": 0, \"original_build_pair_manifests\": 2, \"original_outer_manifests\": 4, \"original_strict_pair_manifests\": 6, \"science_runs\": 0, \"source\": {\"bytes\": 45850, \"sha256\": \"2790f4ef028bd3f02323c30889fcc0b7e709e7d76b81d62da06f4b85e5d03f4d\"}, \"source_lines\": 604, \"status\": \"PASS_PREPARATION_STATIC_ONLY_NOT_EXECUTED\", \"views\": 0}\n"
+      }
+    }
+  ],
+  "retained_corrections": [
+    {
+      "attempt": 1,
+      "result": "Native static check exit 1 (AssertionError).",
+      "cause": "The static forbidden-method list also caught harmless str.replace used to derive AFTER ledger filenames.",
+      "resolution": "Removed generic replace from the static method-name prohibition; manually inspected the sole string replacement. The checker was not executed."
+    },
+    {
+      "attempt": 2,
+      "result": "Native static check exit 1 (KeyError: exit_code).",
+      "cause": "The original P208 terminal pre-spawn attempt records omit exit_code; P209 includes a null exit_code.",
+      "resolution": "Adapted the checker and static schema check explicitly by original paper version. No original file was changed."
+    },
+    {
+      "navigation": "P208 terminal generated-input schema",
+      "result": "Two read-only documentary navigation commands exited 1 for absent GENERATED_LOCAL_TEX_INPUTS.json and cold_build_1_pass1_TEX_INPUTS.json.",
+      "resolution": "Read actual P208 original builder lines 215–379; retained its full per-pass FLS/aux/log schema and checked P209-only generated JSON conditionally. No checker execution or host inventory occurred."
+    },
+    {
+      "navigation": "Original contract extraction",
+      "result": "A native fixed-input extraction exited 0, but the tool output token limit truncated JSON; in-memory JSON parsing failed.",
+      "resolution": "Repeated the same bounded extraction with adequate output, obtained complete native exit-0 JSON, and parsed it. The final 128 fixed pins were measured twice by each successful static check."
+    },
+    {
+      "navigation": "Read-only source/metadata filenames",
+      "result": "A few initial guessed filenames were absent (old auditor filename, lifecycle capture metadata, P208 B delta receipt names).",
+      "resolution": "Located the exact original filenames with rg and read them; no missing file was substituted, fabricated or executed."
+    }
+  ],
+  "additional_ast_schema_check": {
+    "native_exit_code": 0,
+    "kind": "STATIC_AST_STRUCTURAL_COMPARISON_NO_IMPORT_OR_EXECUTION",
+    "roles": ["author", "a", "b"],
+    "source_paths": "The three pinned qa/p209_{role}_root_preparation/root_record_pair.py files",
+    "method": "ast.parse source bytes, select named FunctionDef nodes, SHA-256 of ast.dump(include_attributes=False), compare all three roles",
+    "functions": ["runtime", "presence", "observation", "consumed", "coverage", "info", "pins"],
+    "all_selected_functions_identical": true,
+    "execution_boundary": "No function imported, called or executed; no runtime tree enumeration."
+  },
+  "manual_review": {
+    "source_complete": true,
+    "old_schema_sources": "Exact recorder/launcher source paths are pinned in INPUT_PINS.json; originals were read as text, never imported or invoked.",
+    "original_scalar_and_schema_reads": "Parsed original native receipts, source-only records, manifest row counts, configuration/map field shapes, aliases and actual root view metadata only.",
+    "aliases": "All 6 declared roles are bound to the exact original direct strict-pair input ledger and existing physical historical bytes.",
+    "limitations": "This static result is not a current full-key check. Host runtime/TeX enumeration and all full original-ledger current-byte rereads occur only in the future root-controlled checker execution. No independent static reviewer was available for this preparation; root must read the complete source."
+  }
+}

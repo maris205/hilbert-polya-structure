@@ -1,0 +1,31 @@
+--- qa/p208_p209_reuse_launcher_preparation/launcher.py
++++ qa/p208_p209_reuse_launcher_revision_01/launcher.py
+@@ -21,12 +21,12 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-PREP = QA / 'p208_p209_reuse_launcher_preparation'
+-CHECKER_PREP = QA / 'p208_p209_reuse_preparation'
++PREP = QA / 'p208_p209_reuse_launcher_revision_01'
++CHECKER_PREP = QA / 'p208_p209_reuse_revision_01'
+ CHECKER = CHECKER_PREP / 'inspect.py'
+-CHECKER_SEAL = '8fc25ed0775c40e38ec8e006eae53f5d762f92a3496bda6349872a46c6adacfc'
+-CHECKER_SOURCE = '2790f4ef028bd3f02323c30889fcc0b7e709e7d76b81d62da06f4b85e5d03f4d'
+-OUT = QA / 'p208_p209_reuse_01'
++CHECKER_SEAL = 'ac8fe8834360fdb35e70860416a3c7bb2283b8e32f738251ffc5a1acdfc52a46'
++CHECKER_SOURCE = '8b38768261afe5bd6db8d769a8209b4aa3daec40119189c953e69c9b20e60ea0'
++OUT = QA / 'p208_p209_reuse_02'
+ PYTHON = Path('/usr/bin/python3.10')
+ STDLIB = Path('/usr/lib/python3.10')
+ ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
+@@ -120,8 +120,8 @@
+ 
+ 
+ def scoped_inputs(own_seal):
+-    own = package(PREP, own_seal, 4)
+-    checker = package(CHECKER_PREP, CHECKER_SEAL, 5)
++    own = package(PREP, own_seal, 5)
++    checker = package(CHECKER_PREP, CHECKER_SEAL, 7)
+     require(checker[str(CHECKER)]['sha256'] == CHECKER_SOURCE, 'Checker source identity changed')
+     contract = json.loads((CHECKER_PREP / 'INPUT_PINS.json').read_bytes())
+     expected = contract['fixed_inputs']; require(len(expected) == 128, 'Fixed input count changed')

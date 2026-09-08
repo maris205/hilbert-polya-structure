@@ -1,0 +1,66 @@
+\section{The sharp triangular clock}
+View a composition as consecutive intervals partitioning $N$ labelled unit
+cells. Mass means interval length. Every update coarsens this interval
+partition, so a deleted cut never returns. A block is \emph{born in round
+$t$} if it combines at least two blocks when time $t-1$ becomes time $t$;
+an unchanged block retains its earlier identity.
+
+The fixed points are exactly the strictly decreasing compositions. Indeed,
+all runs are singletons precisely in that case. Otherwise an update
+strictly decreases the number of parts, proving termination. To sharpen
+this generic bound, we first control the left side of a delayed cut.
+
+\begin{lemma}[Left mass and right birth]\label{lem:leftmass}
+If a cut disappears in round $t\ge1$, its old left block has mass at least
+$t$. If $t\ge2$, its old right block was born in round $t-1$.
+\end{lemma}
+\begin{proof}
+Positivity gives the mass bound for $t=1$. For $t\ge2$, let $A,B$ be the
+adjacent time-$(t-1)$ blocks at the disappearing cut, so
+$\wt A\le\wt B$. At time $t-2$, let $a$ be the rightmost parent of $A$
+and $c$ the leftmost parent of $B$. Their boundary survived round $t-1$,
+hence $\wt a>\wt c$. If $B$ had not been born then, it would equal $c$,
+and $\wt A\ge\wt a>\wt c=\wt B$, a contradiction. Thus $B$ was born in
+round $t-1$. Its first internal cut had left block $c$ and disappeared in
+that round. Induction gives $\wt c\ge t-1$; integrality now yields
+$\wt A\ge\wt a\ge\wt c+1\ge t$. This proves both assertions.
+\end{proof}
+
+\begin{lemma}[New-block mass]\label{lem:birthmass}
+Every block born in round $t\ge1$ has mass at least
+$M_t=1+t(t+1)/2$.
+\end{lemma}
+\begin{proof}
+A block born in round $1$ has at least two positive parents, so its mass is
+at least $2=M_1$. For $t\ge2$, take the first two parents $A_1,A_2$ of a
+new block. Their cut disappears in round $t$. Lemma~\ref{lem:leftmass}
+gives $\wt{A_1}\ge t$ and says that $A_2$ was born in round $t-1$.
+The induction hypothesis gives $\wt{A_2}\ge M_{t-1}$. The parents are
+disjoint, so the new mass is at least $t+M_{t-1}=M_t$. Additional parents
+only increase it.
+\end{proof}
+
+\begin{theorem}[Sharp clock]\label{thm:clock}
+For every $N\ge1$,
+\[
+ \max_{a\in\Comp_N}\tau(a)
+ = H(N):=\max\{h\in\mathbb Z_{\ge0}:1+h(h+1)/2\le N\}.
+\]
+More generally, for every $h\ge1$ and $r\ge0$, the composition
+$(h,h-1,\ldots,1,1+r)$ has stabilization time exactly $h$.
+\end{theorem}
+\begin{proof}
+If $\tau(a)=t\ge1$, its last nonfixed round creates a block, so
+Lemma~\ref{lem:birthmass} gives $N\ge M_t$. This proves the upper bound.
+For the witness, after $j$ updates, $1\le j\le h$, the state is
+\begin{equation}\label{eq:witness}
+ \bigl(h,h-1,\ldots,j+1,\;r+1+j(j+1)/2\bigr),
+\end{equation}
+where the prefix is empty for $j=h$. At the first update only the final
+pair $(1,1+r)$ merges. If \eqref{eq:witness} holds with $j<h$, its suffix
+mass is at least $j+1$, and every earlier old prefix pair is a strict
+descent. Exactly the last prefix block joins the suffix, giving the formula
+for $j+1$. Thus exactly $h$ nonfixed updates lead to a single part. This
+argument permits every surplus $r$, however large. For $N\ge2$ choose
+$h=H(N)$ and $r=N-M_h$; for $N=1$, the unique state $(1)$ has time zero.
+\end{proof}

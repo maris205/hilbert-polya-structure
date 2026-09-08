@@ -1,0 +1,181 @@
+--- p210_terminal_launch_revision_01/launch_p210_terminal.py
++++ p210_terminal_launch_revision_02/launch_p210_terminal.py
+@@ -1,8 +1,8 @@
+ #!/usr/bin/env python3
+-"""P210 outer capture revision 01; actual builder/root-preparation binding.
++"""P210 outer capture revision 02; actual whole-gate preflight binding.
+ 
+-Minimal correction of the sealed first source's manifest ordering defect.
+-No task program import, execution or page view occurs during preparation.
++Only paths/documentation and final_builder_binding change from revision 01.
++Preparation never imports or executes task source or views a paper page.
+ Root must read this complete source and actual preparation before launch.
+ """
+ import hashlib
+@@ -17,13 +17,13 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-PREP = QA / 'p210_terminal_launch_revision_01'
++PREP = QA / 'p210_terminal_launch_revision_02'
+ SCRIPT = PREP / 'launch_p210_terminal.py'
+-BUILDER_PREP = QA / 'p210_terminal_build_revision_01'
++BUILDER_PREP = QA / 'p210_terminal_build_revision_02'
+ BUILDER = BUILDER_PREP / 'build_p210.py'
+ PAPER = ROOT / 'papers/210-weakly-increasing-run-aggregation'
+ BUILD_OUT = PAPER / 'qa_final'
+-OUT = QA / 'p210_terminal_launch_01'
++OUT = QA / 'p210_terminal_launch_02'
+ CACHE = OUT / 'unused_outer_cache'
+ PYTHON = '/usr/bin/python3.10'
+ ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C', 'TZ': 'UTC',
+@@ -77,63 +77,95 @@
+ 
+ 
+ def final_builder_binding():
+-    """Exact real builder preparation/root gate; never import or call its code.
++    """Bind actual whole-gate preflight, raw capture and root native originals.
+ 
+-    The builder owns its eight-package B/root/Round2 preflight. This outer
+-    binds its entire sealed preparation and actual root/static originals,
+-    without repeating that gate or expanding any B/host dependency map.
++    The builder alone owns its B/root/Round2 semantic gate. No task source is
++    imported or invoked here; the complete actual input map is reread by main.
+     """
+-    seal = '37c6e8f996dc693ebd8280faf4705d35db8d04fbc19bb306de264ca56af972e7'
+-    required = manifest(BUILDER_PREP, seal, 19)
+-    gate_path = QA / 'P210_TERMINAL_BUILD_PREPARATION_ROOT.actual.json'
+-    required[str(gate_path)] = pin(gate_path)
+-    require(required[str(gate_path)] == {
+-        'sha256': '396f81291143cf2d047767bca23823d04917692923b0033b028c2d227ff2d5ad', 'bytes': 7564},
+-        'Exact actual root preparation original')
+-    gate = json.loads(gate_path.read_bytes())
+-    require(gate['cwd'] == str(ROOT) and gate['launch']['session_id'] == 26258 and
+-            gate['launch']['output'] == '' and gate['completion']['chunk_id'] == '52c454' and
+-            type(gate['completion']['exit_code']) is int and gate['completion']['exit_code'] == 0,
+-            'Actual root preparation native session/completion')
+-    accepted = json.loads(gate['completion']['output'])
+-    require(accepted['status'] == 'PASS_ROOT_P210_FINAL_BUILDER_SOURCE_AND_ACTUAL_BINDING_STATIC' and
+-            accepted['source'] == required[str(BUILDER)] and accepted['source_lines'] == 711 and
+-            accepted['static_input_keys_rehashed'] == 1610 and accepted['complete_package_count'] == 8 and
+-            accepted['package_payloads'] == 1560 and accepted['named_roles'] == 41 and
+-            accepted['exact_original_input_union'] == 1594 and accepted['actual_round2_anchors_raw_compared'] == 14 and
+-            accepted['actual_static_native_data_equal'] is True and accepted['actual_capture_native_data_equal'] is True and
+-            accepted['full_source_delta_bytes_equal'] is True and
+-            accepted['new_builds'] == accepted['views'] == accepted['task_gate_invocations'] == 0,
+-            'Exact root-read source and bounded actual binding reception')
+-    names = {'README.md', 'INPUT_CONTRACT.json', 'static_check.py', 'STATIC_CHECK.actual.json',
+-             'STATIC_NATIVE_RETURN.actual.json', 'ACTUAL_BINDING_BASELINE.actual.json',
+-             'ACTUAL_BINDING_NATIVE.actual.json', 'SOURCE_DELTA.diff'}
+-    require(set(accepted['preparation_documents']) == names and
+-            all(required[str(BUILDER_PREP / name)] == value for name, value in accepted['preparation_documents'].items()),
+-            'All eight actual root-read preparation document keys')
++    seal = '2e99af39ab35bfb9e3fec7c9944927c574fe459b56a1b764a5948dde0266e31a'
++    required = manifest(BUILDER_PREP, seal, 9)
++    capture = QA / 'p210_terminal_preflight_02'
++    raw_result = (capture / 'RESULT.json').read_bytes()
++    result = json.loads(raw_result)
++    require(type(result['pid']) is int and result['pid'] == 777535 and
++            type(result['original_wait_exit_code']) is int and result['original_wait_exit_code'] == 0 and
++            result['cleanup_wait_exit_code'] == 0 and result['timed_out'] is False and
++            result['wait_error'] is None and result['cleanup_events'] == [] and
++            result['child_reaped'] is True and result['process_group_absent'] is True and
++            group_absent(result['pid']) and not os.path.lexists(capture / 'UNCLOSED.json'),
++            'Actual preflight normal-zero/reaped/absent before capture hashing')
++    required.update(manifest(capture, 'd6adc396a8562e8683f66df348aa420ce3f97997b4bf73c0c674f621aac7fb1c', 6))
++    require(required[str(capture / 'RESULT.json')] == {
++        'sha256': hashlib.sha256(raw_result).hexdigest(), 'bytes': len(raw_result)}, 'Same checked preflight RESULT')
++    extras = {
++        'record_p210_terminal_preflight_02.py': ('275be1480ee7dedb67abae5215c47189f70beb4cb50ec8f0dfbc3c33e767ba26', 6228),
++        'P210_TERMINAL_PREFLIGHT02_ROOT_LAUNCH.actual.json': ('2359f6160563c5e7c4cbed780ea52274fc7cdc3881029cbf866b858aa338ab33', 457),
++        'P210_TERMINAL_PREFLIGHT02_ROOT_COMPLETION.actual.json': ('74d231e8fe72bc58427a2a88896af7e405291f918beeed214cdbb85cfe149673', 958),
++        'P210_TERMINAL_PREFLIGHT02_ROOT_RECEPTION.actual.json': ('3c0d42a85bf09fe6b42dcd06cad13193b748f31d069cb4a92cffe11460d1c422', 4624)}
++    for name, (digest, size) in extras.items():
++        required[str(QA / name)] = pin(QA / name)
++        require(required[str(QA / name)] == {'sha256': digest, 'bytes': size}, 'Exact actual preflight original: ' + name)
++    recorder = QA / 'record_p210_terminal_preflight_02.py'
++    launch = json.loads((QA / 'P210_TERMINAL_PREFLIGHT02_ROOT_LAUNCH.actual.json').read_bytes())
++    completion = json.loads((QA / 'P210_TERMINAL_PREFLIGHT02_ROOT_COMPLETION.actual.json').read_bytes())
++    reception = json.loads((QA / 'P210_TERMINAL_PREFLIGHT02_ROOT_RECEPTION.actual.json').read_bytes())
++    require(launch['command'] == PYTHON + ' -I -S -B ' + str(recorder) +
++            ' --expected-builder-preparation-sha256 ' + seal and launch['cwd'] == str(ROOT) and
++            launch['result']['chunk_id'] == '25035d' and launch['result']['session_id'] == 78288 and
++            launch['result']['output'] == '' and completion['session_id'] == 78288 and
++            completion['launch_record'] == 'P210_TERMINAL_PREFLIGHT02_ROOT_LAUNCH.actual.json' and
++            completion['result']['chunk_id'] == '11728b' and completion['result']['exit_code'] == 0,
++            'Actual root recorder launch/completion chain')
++    attempt = json.loads((capture / 'ATTEMPT.json').read_bytes())
++    spawn = json.loads((capture / 'SPAWN.json').read_bytes())
++    argv = [PYTHON, '-I', '-S', '-B', '-X', 'pycache_prefix=' + str(BUILD_OUT / 'unused_parent_cache'),
++            str(BUILDER), '--output', str(BUILD_OUT), '--expected-preparation-sha256', seal, '--preflight-only']
++    require(result['argv'] == attempt['argv'] == argv and result['cwd'] == attempt['cwd'] == str(ROOT) and
++            result['environment'] == attempt['environment'] == ENV and attempt['timeout_seconds'] == 600 and
++            attempt['start_new_session'] is True and attempt['paper_terminal_absent_before'] is True and
++            result['paper_terminal_absent_after'] is True and result['inputs_unchanged'] is True and
++            spawn['pid'] == spawn['process_group_id'] == result['pid'] and
++            attempt['started_epoch'] <= spawn['spawned_epoch'] <= result['finished_epoch'] and
++            result['inputs_before'] == result['inputs_after'] == attempt['inputs_before'],
++            'Actual complete preflight invocation and stable recorder inputs')
++    recorder_inputs = result['inputs_before']
++    require(set(recorder_inputs) == {str(recorder), str(BUILDER), str(BUILDER_PREP / 'INPUT_CONTRACT.json'),
++            str(BUILDER_PREP / 'SHA256SUMS'), PYTHON} and
++            (capture / 'executed_source.py').read_bytes() == recorder.read_bytes(), 'Exact executed recorder/source roles')
++    data = json.loads((capture / 'stdout').read_bytes())
++    require(all(result[name] == required[str(capture / name)] for name in ('stdout', 'stderr')) and
++            (capture / 'stderr').read_bytes() == b'' and data['status'] == 'PASS_P210_FINAL_SCHEMA_PREFLIGHT_ONLY' and
++            data['source'] == required[str(BUILDER)] and data['preparation_seal'] == required[str(BUILDER_PREP / 'SHA256SUMS')] and
++            data['output'] == str(BUILD_OUT) and data['output_created'] is False and
++            data['child_commands'] == data['host_inventory_collections'] == data['new_science_build_view_executions'] == 0 and
++            data['terminal_acceptance'] is False and data['original_input_count'] == len(data['original_input_pins']) == 1619,
++            'Full actual raw preflight source/seal/map and zero-execution scope')
++    final = data['final_schema_binding_return']
+     recipe = json.loads((BUILDER_PREP / 'INPUT_CONTRACT.json').read_bytes())
+-    baseline = json.loads((BUILDER_PREP / 'ACTUAL_BINDING_BASELINE.actual.json').read_bytes())
+-    capture = json.loads((BUILDER_PREP / 'ACTUAL_BINDING_NATIVE.actual.json').read_bytes())
+-    static = json.loads((BUILDER_PREP / 'STATIC_CHECK.actual.json').read_bytes())
+-    native = json.loads((BUILDER_PREP / 'STATIC_NATIVE_RETURN.actual.json').read_bytes())
+-    require(recipe['schema'] == 'p210-terminal-build-actual-bound-contract-v1' and
+-            recipe['stage'] == 'ACTUAL_B_ROOT_DELTA_PHYSICAL_ROUND2_BOUND_NOT_EXECUTED' and
+-            set(recipe['final_schema_binding']['papers']) == {'P210'} and
+-            recipe == baseline['contract'] and baseline['status'] == 'PASS_READ_ONLY_ACTUAL_BINDING_CAPTURE' and
+-            baseline['checks'] == 8137 and baseline['named_paths_reread_twice'] == 1606 and
+-            capture['cwd'] == str(ROOT) and capture['launch']['session_id'] == 60603 and
+-            capture['launch']['output'] == '' and capture['completion']['exit_code'] == 0 and
+-            json.loads(capture['completion']['output']) == baseline,
+-            'Actual full baseline/native bytes and bound recipe, not a caller gate')
+-    require(native['cwd'] == str(ROOT) and native['result']['exit_code'] == 0 and
+-            json.loads(native['result']['output']) == static and
+-            static['status'] == 'PASS_P210_ACTUAL_BINDING_AST_AND_DATA_ONLY' and static['checks'] == 6707 and
+-            static['named_current_inputs_rechecked_twice'] == 1610 and static['source'] == required[str(BUILDER)] and
+-            static['source_lines'] == 711 and static['builder_gate_old_programs_science_build_view_executions'] == 0 and
+-            static['host_ledger_entries_expanded'] == 0 and
+-            static['complete_current_input_pins'][str(BUILDER_PREP / 'INPUT_CONTRACT.json')] ==
+-            required[str(BUILDER_PREP / 'INPUT_CONTRACT.json')], 'Actual full static/native source and contract binding')
+-    return {'preparation_sha256': seal, 'preparation_payloads': 19, 'required_input_pins': required}
++    require(final['status'] == 'BOUND_ACTUAL_P210_B_ROOT_ROUND2_PRETERMINAL_ORIGINALS' and
++            set(final['papers']) == {'P210'} and final['papers'] == recipe['final_schema_binding']['papers'] and
++            len(final['required_input_pins']) == 1594 and
++            all(data['original_input_pins'].get(path) == value for path, value in final['required_input_pins'].items()),
++            'Actual complete final-schema return and required-map subset, not repeated semantic gate')
++    require(json.loads(completion['result']['output']) == {
++        'status': 'PASS_ACTUAL_P210_PREFLIGHT_CAPTURE', 'output': str(capture), 'original_wait_exit_code': 0,
++        'stdout': result['stdout'], 'stderr': result['stderr'], 'result': required[str(capture / 'RESULT.json')],
++        'seal': required[str(capture / 'SHA256SUMS')], 'original_input_count': 1619, 'terminal_acceptance': False},
++        'Exact reconstructed native recorder summary from full raw originals')
++    require(reception['cwd'] == str(ROOT) and reception['result']['chunk_id'] == 'dd97dc' and
++            reception['result']['exit_code'] == 0 and json.loads(reception['result']['output']) == {
++        'status': 'PASS_ROOT_ACTUAL_PREFLIGHT02_FULL_RAW_ORIGINAL_RECEPTION', 'actual_parent_session': 78288,
++        'original_wait_exit_code': 0, 'builder_pid': result['pid'], 'owned_group_currently_absent': True,
++        'all_actual_input_pins_rehashed': 1619, 'full_final_binding_required_pins': 1594,
++        'complete_raw_stdout': result['stdout'], 'complete_raw_stderr': result['stderr'],
++        'complete_capture_payloads': 6, 'capture_seal': required[str(capture / 'SHA256SUMS')],
++        'qa_final_absent': True, 'new_scientific_build_or_visual_executions': 0, 'terminal_acceptance': False},
++        'Exact actual root full-raw reception, not another confirmation layer')
++    for mapping in (recorder_inputs, data['original_input_pins']):
++        for path, value in mapping.items():
++            require(path not in required or required[path] == value, 'Conflicting actual preflight input pin')
++            required[path] = value
++    return {'preparation_sha256': seal, 'preparation_payloads': 9, 'required_input_pins': required}
+ 
+ 
+ def runtime(phase):

@@ -1,0 +1,319 @@
+                   Weakly Increasing Run Aggregation:
+               A Sharp Triangular Clock and the Full Image
+                                             Anonymous
+
+
+                                               Abstract
+          We determine the sharp stabilization time and the full one-step image of a map on
+      positive integer compositions. One update replaces every maximal weakly increasing run of
+      old parts by its sum, with all runs chosen simultaneously. For total mass N ≥ 1, the largest
+      number of nonfixed updates is max{h ∈ Z≥0 : 1 + h(h + 1)/2 ≤ N }. Two linked inductions
+      force triangular mass in a delayed merger, and a descending-prefix construction attains the
+      bound for every mass, including all surplus values. For the inverse problem, the attained
+      minimum first part of a feasible suffix gives a three-branch right-to-left image test. We use
+      this test to construct an explicit weight-preserving bijection from the image to nonempty
+      compositions into positive triangular numbers. The resulting counting sequence and its
+      generating function are known; the contribution is the identification of this particular image
+      class. A standard endpoint-partition formula records every one-step fibre as supporting
+      bookkeeping. All proofs are self-contained. An exact verifier checks the complete 4,095-state
+      box of masses 1 through 12, as finite counterexample pressure only.
+
+
+1    The map and its boundary
+Let CN be the set of ordered tuples a = (a1 , . . . , aℓ ) of positive integers with sum N ≥ 1. All
+mass parameters and indices below are integers. Split a at every strict descent aj > aj+1 , and
+replace each resulting segment by its total. The output F (a) belongs to CN . Every comparison
+uses the old parts: a newly formed sum is not compared again during that update. For example,
+
+                              (3, 2, 1, 1) 7−→ (3, 2, 2) 7−→ (3, 4) 7−→ (7).
+
+Write τ (a) = min{t ≥ 0 : F t+1 (a) = F t (a)} and IN = F (CN ). We prove two results: the
+sharp uniform bound τ (a) ≤ H(N ) = max{h ≥ 0 : 1 + h(h + 1)/2 ≤ N }, and a complete
+suffix criterion for IN with an explicit bijection to triangular-part compositions. The first proof
+follows mergers across time; the second depends on the order of target parts, not just total
+mass.
+    Run detection and run aggregation are established constructions. Wiseman’s equality-run
+sum and weakly increasing run-leader transformations [5, 6] illustrate the distinction:
+
+          Operation              Segment rule                                  Output on (1, 2)
+          Equality-run sum       Equal adjacent parts                          (1, 2)
+          Weak-run leader        Weakly increasing parts; retain first         (1)
+          F                      Weakly increasing parts; sum                  (3)
+
+Nonidentity of these rules is not a novelty argument. In particular, coarsening, decreasing
+length and merger ancestry receive no contribution credit here. An earlier internal equality-run
+analysis proves a doubling mass clock; its generic ancestry mechanism is background. The
+oriented left-mass induction below is the additional step needed for a triangular clock. At mass
+7 the displayed orbit lasts three rounds, whereas the equality-run clock is two. This excludes
+
+
+                                                    1
+only a same-total clock-preserving conjugacy, not arbitrary changes of carrier or adapters. The
+accompanying source audit identifies the frozen internal comparison and its proof.
+    Ribbon functions enumerate positive words by weakly increasing run lengths, and weighted
+run networks provide general transfer machinery [1, 2, 7]. Run lengths are not the vector of
+run masses used here: substituting letter weights to record the total does not preserve the
+separate masses. Endpoint-refined transfers recover the usual inverse bookkeeping, to which we
+assign no separate novelty. Likewise, triangular-part composition counts and reset/increment
+descriptions are prior knowledge [3, 4]. Our structural claim is their exact connection to IN ,
+proved in Sections 3 and 4; it is not a new sequence or counting method.
+
+
+2    The sharp triangular clock
+View a composition as consecutive intervals partitioning N labelled unit cells. Mass means
+interval length. Every update coarsens this interval partition, so a deleted cut never returns. A
+block is born in round t if it combines at least two blocks when time t − 1 becomes time t; an
+unchanged block retains its earlier identity.
+    The fixed points are exactly the strictly decreasing compositions. Indeed, all runs are
+singletons precisely in that case. Otherwise an update strictly decreases the number of parts,
+proving termination. To sharpen this generic bound, we first control the left side of a delayed
+cut.
+
+Lemma 2.1 (Left mass and right birth). If a cut disappears in round t ≥ 1, its old left block
+has mass at least t. If t ≥ 2, its old right block was born in round t − 1.
+
+Proof. Positivity gives the mass bound for t = 1. For t ≥ 2, let A, B be the adjacent time-(t − 1)
+blocks at the disappearing cut, so |A| ≤ |B|. At time t − 2, let a be the rightmost parent of
+A and c the leftmost parent of B. Their boundary survived round t − 1, hence |a| > |c|. If B
+had not been born then, it would equal c, and |A| ≥ |a| > |c| = |B|, a contradiction. Thus B
+was born in round t − 1. Its first internal cut had left block c and disappeared in that round.
+Induction gives |c| ≥ t − 1; integrality now yields |A| ≥ |a| ≥ |c| + 1 ≥ t. This proves both
+assertions.
+
+Lemma 2.2 (New-block mass). Every block born in round t ≥ 1 has mass at least Mt =
+1 + t(t + 1)/2.
+
+Proof. A block born in round 1 has at least two positive parents, so its mass is at least 2 = M1 .
+For t ≥ 2, take the first two parents A1 , A2 of a new block. Their cut disappears in round t.
+Lemma 2.1 gives |A1 | ≥ t and says that A2 was born in round t − 1. The induction hypothesis
+gives |A2 | ≥ Mt−1 . The parents are disjoint, so the new mass is at least t + Mt−1 = Mt .
+Additional parents only increase it.
+
+Theorem 2.3 (Sharp clock). For every N ≥ 1,
+
+                   max τ (a) = H(N ) := max{h ∈ Z≥0 : 1 + h(h + 1)/2 ≤ N }.
+                   a∈CN
+
+More generally, for every h ≥ 1 and r ≥ 0, the composition (h, h−1, . . . , 1, 1+r) has stabilization
+time exactly h.
+
+Proof. If τ (a) = t ≥ 1, its last nonfixed round creates a block, so Lemma 2.2 gives N ≥ Mt .
+This proves the upper bound. For the witness, after j updates, 1 ≤ j ≤ h, the state is
+                                                                         
+                              h, h − 1, . . . , j + 1, r + 1 + j(j + 1)/2 ,                       (1)
+
+
+
+                                                   2
+where the prefix is empty for j = h. At the first update only the final pair (1, 1 + r) merges.
+If (1) holds with j < h, its suffix mass is at least j + 1, and every earlier old prefix pair is
+a strict descent. Exactly the last prefix block joins the suffix, giving the formula for j + 1.
+Thus exactly h nonfixed updates lead to a single part. This argument permits every surplus r,
+however large. For N ≥ 2 choose h = H(N ) and r = N − Mh ; for N = 1, the unique state (1)
+has time zero.
+
+
+3    The complete image from an attained minimum
+A weakly increasing refinement of s is a positive weakly increasing sequence with total s. The
+following decomposition supplies the inverse language; its ordinary segmentation argument is
+supporting infrastructure.
+
+Lemma 3.1 (Unique refinement). A composition maps to s = (s1 , . . . , sm ) if and only if
+it is a concatenation of weakly increasing refinements λ1 , . . . , λm of the target parts, with
+last(λi ) > first(λi+1 ) for i < m. This segmentation is unique.
+
+Proof. An output cut is an input cut at the same cumulative mass. The target therefore
+uniquely specifies every input segment. Under F these segments are maximal weakly increasing
+runs, so the stated conditions are necessary. Conversely, those conditions make the segments
+exactly the maximal runs; their sums are the target parts.
+
+      Call a tuple of refinements of a target suffix feasible if its internal boundary descents hold.
+When it exists, let ri be the minimum first part among feasible refinements of the entire suffix
+(si , . . . , sm ). The finite minimum is attained; we make no interval claim about the set of possible
+first parts.
+
+Theorem 3.2 (Three-branch image test). Set rm = 1 and scan right to left. Given r = ri+1 ,
+use                           
+                              fail,
+                              
+                                         si ≤ r,
+                                ri = si , si = r + 1,                                 (2)
+                                       
+                                                   si ≥ r + 2.
+                                       
+                                       r = 1,
+                                          i
+
+Then s ∈ IN if and only if the scan never fails. Every successful ri is the attained suffix
+minimum just defined. The test takes O(m) integer comparisons.
+
+Proof. The last part has an all-one refinement, so its minimum is 1. Suppose the suffix to the
+right has attained minimum r. A new refinement must end at b > c for some attainable right
+first part c ≥ r. Necessarily b ≥ r + 1. Conversely, a refinement ending at least r + 1 can be
+attached to a suffix attaining r.
+    If si ≤ r, no ending part can suffice. If si = r + 1, a sufficient ending part uses the entire
+mass, forcing the singleton (si ) and minimum si . If si ≥ r + 2, the refinement (1, si − 1) is
+weakly increasing and has a sufficient ending part; it attains the absolute minimum 1. These
+exhaustive cases prove the induction and construct a feasible preimage whenever the scan
+succeeds. Selecting a larger right first part cannot avoid failure. Lemma 3.1 completes the
+equivalence.
+
+   For example, (2, 3, 2) passes and is the image of (2, 1, 2, 1, 1), whereas (2, 2, 3) fails with
+backward thresholds 1, 2. Equal total mass and equal multisets of target parts thus do not
+determine image membership. The complexity assertion counts integer comparisons, not bit
+operations independent of the sizes of the integers.
+
+
+
+
+                                                  3
+4    A bijection with triangular-part compositions
+Put Tk = k(k + 1)/2 for k ≥ 1, and let TN consist of the nonempty compositions of N whose
+parts belong to {T1 , T2 , . . .}. This class, its count and its reset/increment representations
+are known [3, 4]. We identify it with the image of F ; the test, identification and counting
+consequence form one structural result.
+Theorem 4.1 (Explicit image coding). There is a weight-preserving bijection Φ : IN → TN
+given by the following scan and inverse parsing.
+Proof. Read a successful target from right to left. Its rightmost part b ≥ 1 initializes threshold
+1. From threshold r, a part r + 1 increments the threshold and a part at least r + 2 resets it to
+1. Consequently, after the rightmost part, there is a unique sequence of complete reset cycles
+                              2, 3, . . . , k, k + 2 + u     (k ≥ 1, u ≥ 0)                        (3)
+followed by a unique terminal increment string 2, 3, . . . , k with k ≥ 1. A string is empty when
+k = 1.
+    Start the encoded list with b−1 copies of 1. For each complete cycle (3), in scan order, append
+Tk+1 followed by u copies of 1. Finally append Tk for the terminal increment string. The list is
+nonempty and has triangular parts. A complete cycle has mass (Tk − 1) + (k + 2 + u) = Tk+1 + u,
+and the rightmost part together with the terminal string has mass b + Tk − 1 = (b − 1) + Tk .
+Thus total mass is preserved.
+    For the inverse, reserve the last triangular part, uniquely Tk , for the terminal increment
+string. Parse the preceding list as an initial string of ones and then parts at least 3, each followed
+by its maximal string of ones. This parse is unique since 1 is the only positive triangular number
+smaller than 3. If there are b − 1 initial ones, begin a target read-list with b. Each subsequent
+triangular part is uniquely Tj+1 , j ≥ 1; when followed by u ones, append 2, 3, . . . , j, j + 2 + u to
+the read-list. Append 2, 3, . . . , k at the end, then reverse the read-list to obtain the target.
+    Every reconstructed cycle and terminal string passes (2), so the inverse target belongs to
+IN . Its unique scan recovers the parsed pieces. Conversely, reserving the last triangular part
+recovers the terminal string, even if that part is T1 = 1. These operations are mutually inverse,
+proving the bijection.
+    For instance, (2, 3, 2) encodes as (1, 3, 3): the rightmost 2 supplies one initial 1, the next 3
+is a reset, and the last 2 is a terminal increment. A one-part target (N ) encodes as N ones.
+Corollary 4.2 (Known count, new image identification). For iN = |IN | and Θ(z) =
+                                                                                              P       Tk ,
+                                                                                              k≥1 z
+one has
+                                 X              Θ(z)
+                                     iN z N =          .
+                                N ≥1
+                                              1 − Θ(z)
+
+                                                                    Tk ≤N iN −Tk for N ≥ 1.
+                                                              P
+With the auxiliary convention i0 = 1, this gives iN =
+Proof. Theorem 4.1 identifies each coefficient with the known triangular-part count. A list of
+exactly q ≥ 1 triangular parts has series Θq , so summing gives the displayed identity. Taking
+off the first part gives the recurrence. These are formal series: every part has positive weight,
+hence every coefficient is finite and Θ(0) = 0. The auxiliary empty list does not enlarge the
+carrier.
+
+
+5    Supporting one-step fibre bookkeeping
+For positive s, a, b, let Ps (a, b) count weakly increasing refinements of s with first part a and
+last part b. It is zero outside 1 ≤ a ≤ b ≤ s. Inside that range,
+                                                                  z a+b
+                    Ps (a, a) = 1a|s ,      Ps (a, b) = [z s ] Qb               (a < b).           (4)
+                                                                          j
+                                                                j=a (1 − z )
+
+
+                                                      4
+The first formula counts an all-a refinement. For the second, reserve one a and one b, then
+choose arbitrary additional multiplicities of sizes a through b. Their weakly increasing order is
+unique.
+Proposition 5.1 (Every-target fibre). For every positive target s = (s1 , . . . , sm ),
+                                                          m
+                                                                             ! m−1               !
+                          −1
+                                            X             Y                    Y
+                     |F        (s)| =                           Psi (ai , bi )         1bi >ai+1 .
+                                        1≤ai ≤bi ≤si      i=1                    i=1
+                                          1≤i≤m
+
+Proof. For fixed endpoints the first product counts the independent refinements; the second
+imposes exactly the boundary descents of Lemma 3.1. Its unique segmentation prevents
+overcounting, and its converse gives every preimage. Empty fibres are included.
+                                                P
+    For finite evaluation, set vm (a) =             b Psm (a, b) and then
+
+                                                                            |F −1 (s)| =
+                                 X                 X                                       X
+                    vi (a) =          Psi (a, b)         vi+1 (c),                             v1 (a).
+                                  b                c<b                                     a
+
+This ordinary endpoint-partition transfer is included for reproducibility, with zero separate
+contribution credit. It does not assert a largest fibre or a formula for higher iterates.
+
+
+6    Exact checks and limitations
+The paper-local standard-library verifier enumerates every positive composition of every mass
+1 ≤ N ≤ 12, exactly 4,095 states. It records the full graph, depths, fixed points, all target fibres
+and their source sets, both birth inequalities on every orbit, all in-box surplus witnesses, every
+suffix minimum, and both coding directions on all image and triangular objects. Direct old-part
+run sums and a suffix endpoint-partition calculation are implemented without importing earlier
+pilot or reviewer code. The actual canonical image counts are
+
+                                        1, 1, 2, 3, 4, 7, 11, 16, 25, 40, 61, 94.
+
+Finite checks pressure the proofs; they neither prove all-size statements nor enlarge the original
+experimental box.
+    The source audit deducts the occupied sum-coarsening carrier, equality-run ancestry, random
+pair genealogy, leftmost unit transfer and prefix-divisibility cut machinery. The paper remains
+in an existing run-coarsening family. The bounded inspected sources do not supply a complete
+adapter for the two retained results; this is not global priority or an exclusion of all possible
+adapters. The archived primary extraction of Robbins was read, including its recurrence proof;
+its extracted table reports 93 at mass 12, while the recurrence gives 94. A failed screenshot
+does not certify printed typography. We use neither that table nor its asymptotic claims as
+validation, and preserve earlier retrieval failures in the source record.
+    No pointwise closed time formula, complete deepest-state classification, maximum-fibre
+theorem, all-time inverse or asymptotic theorem is claimed. The verifier uses no external
+data. This anonymous author draft has not passed the two manuscript reviews or terminal
+acceptance. Ownership remains OWNER_AMBER; posting, submission and specialist contact remain
+HOLD_EXTERNAL.
+
+
+References
+[1] Ira M. Gessel. Reciprocals of exponential polynomials and permutation enumeration.
+    Australasian Journal of Combinatorics, 74(2):364–370, 2019. URL https://ajc.maths.uq.
+    edu.au/pdf/74/ajc_v74_p364.pdf.
+
+                                                                5
+[2] Ira M. Gessel and Yan Zhuang. Homomorphisms on noncommutative symmetric functions
+    and permutation enumeration. Séminaire Lotharingien de Combinatoire, 82B:Art. 6, 12 pp.,
+    2019. URL https://www.mat.univie.ac.at/~slc/wpapers/FPSAC2019/6.html.
+
+[3] Neville Robbins. On compositions whose parts are polygonal numbers. Annales Univ. Sci.
+    Budapest., Sect. Comp., 43:239–243, 2014. URL https://ac.inf.elte.hu/Vol_043_2014/
+    239_43.pdf.
+
+[4] David W. Wilson. A023361: Number of compositions of n into positive triangular numbers.
+    The On-Line Encyclopedia of Integer Sequences, 1998. URL https://oeis.org/A023361.
+    Includes Joerg Arndt’s March 25, 2014 reset/increment comment; archived primary entry
+    inspected September 7, 2026.
+
+[5] Gus Wiseman. A353847: Composition run-sum transformation in terms of standard
+    composition numbers. The On-Line Encyclopedia of Integer Sequences, 2022. URL https://
+    oeis.org/A353847. Entry dated May 30, 2022; archived primary entry inspected September
+    7, 2026.
+
+[6] Gus Wiseman. A375123: Weakly increasing run-leader transformation for standard
+    compositions. The On-Line Encyclopedia of Integer Sequences, 2024. URL https:
+    //oeis.org/A375123. Entry dated August 2, 2024; archived primary entry inspected
+    September 7, 2026.
+
+[7] Yan Zhuang. Counting permutations by runs. Journal of Combinatorial Theory, Series A,
+    142:147–176, 2016. URL https://arxiv.org/abs/1505.02308.
+
+
+
+
+                                             6
+

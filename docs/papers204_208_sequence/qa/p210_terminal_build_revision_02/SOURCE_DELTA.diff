@@ -1,0 +1,56 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_terminal_build_revision_01/build_p210.py
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_terminal_build_revision_02/build_p210.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""P210 terminal source-only build revision 01; actual-bound, not yet executed.
++"""P210 terminal source-only build revision 02; corrected actual list schema.
+ 
+ Disclosed reduction of the fully read accepted four-build infrastructure.
+ No old program is imported or executed. Exact actual B/root-pair/delta and
+@@ -22,7 +22,7 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers204_208_sequence/qa'
+-PREP = QA / 'p210_terminal_build_revision_01'
++PREP = QA / 'p210_terminal_build_revision_02'
+ SCRIPT = PREP / 'build_p210.py'
+ PAPER = ROOT / 'papers/210-weakly-increasing-run-aggregation'
+ SOURCE_NAMES = ('main.tex', 'math_commands.tex', 'references.bib',
+@@ -234,7 +234,12 @@
+             provenance['accepted_root_closure_sha256'] == digest('root_b') and
+             provenance['round1_core_payloads_copied'] == 508 and len(provenance['core_payload_pins']) == 508 and
+             provenance['acceptance_anchor_payloads'] == 14 and len(provenance['anchors']) == 14 and
+-            provenance['raw_byte_comparisons'] == 1016, 'Actual Round2 accepted binding and provenance')
++            isinstance(provenance['raw_byte_comparisons'], list) and len(provenance['raw_byte_comparisons']) == 1016 and
++            all(set(row) == {'bytes', 'equal', 'left', 'method', 'right', 'role'} and row['equal'] is True and
++                type(row['bytes']) is int and row['bytes'] >= 0 and Path(row['left']).is_absolute() and
++                Path(row['right']).is_absolute() and isinstance(row['role'], str) and
++                row['method'] == 'complete Python bytes comparison; not a native cmp command'
++                for row in provenance['raw_byte_comparisons']), 'Actual Round2 accepted binding and provenance')
+     prior = {str(PAPER / 'ROOT_LIFECYCLE.md'): Path(roles['prior_lifecycle']['path']),
+              str(PAPER / 'PAPER_MANIFEST.sha256'): Path(roles['prior_whole']['path'])}
+     require(prior[str(PAPER / 'ROOT_LIFECYCLE.md')] == r2 / 'ROUND2_ACCEPTANCE/PRE_ROUND2_ROOT_LIFECYCLE.md' and
+@@ -431,6 +436,7 @@
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--output', required=True, type=Path)
+     parser.add_argument('--expected-preparation-sha256', required=True)
++    parser.add_argument('--preflight-only', action='store_true')
+     args = parser.parse_args()
+     out = args.output
+     require(out == PAPER / 'qa_final' and out.resolve() == out and not os.path.lexists(out),
+@@ -445,6 +451,15 @@
+             'Unexpected isolated import search path')
+     recipe = json.loads((PREP / 'INPUT_CONTRACT.json').read_bytes())
+     before_originals, final = originals(recipe, args.expected_preparation_sha256)
++    if args.preflight_only:
++        require(not os.path.lexists(out) and not os.path.lexists(sys.pycache_prefix), 'Read-only preflight created no output/cache')
++        print(json.dumps({'status': 'PASS_P210_FINAL_SCHEMA_PREFLIGHT_ONLY', 'source': pin(SCRIPT),
++            'preparation_seal': pin(PREP / 'SHA256SUMS'), 'original_input_count': len(before_originals),
++            'original_input_pins': before_originals, 'final_schema_binding_return': final,
++            'output': str(out), 'output_created': False, 'child_commands': 0, 'host_inventory_collections': 0,
++            'new_science_build_view_executions': 0, 'terminal_acceptance': False,
++            'scope': 'Actual originals/schema gate only; return before mkdir, host inventory and every child command.'}, sort_keys=True))
++        return 0
+     out.mkdir(mode=0o700)
+     save(out / 'executed_source.py', SCRIPT.read_bytes())
+     require(pin(out / 'executed_source.py') == before_originals[str(SCRIPT)], 'Executed source snapshot mismatch')

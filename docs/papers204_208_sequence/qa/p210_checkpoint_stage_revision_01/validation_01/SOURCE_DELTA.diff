@@ -1,0 +1,360 @@
+diff --git a/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_preparation/execute.py b/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_stage_revision_01/execute.py
+index d863333..340e050 100644
+--- a/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_preparation/execute.py
++++ b/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/p210_checkpoint_stage_revision_01/execute.py
+@@ -1,9 +1,9 @@
+ #!/usr/bin/env python3
+-"""UNEXECUTED proposal. Every phase needs an exact, externally authored approval.
++"""UNEXECUTED stage/commit/push continuation after the preserved 60s failure.
+ 
+-Only the overlay clone and overlay evidence directory are mutation targets.
+-The original mirror and source tree are read-only. Failures are single-use
+-receipts; there is no retry, delete, reset, force push or automatic merge.
++The original preparation/execution evidence remains immutable. Only new
++*_revision_01 phase directories and the exact previously approved overlay
++Git scope may change after root approval. No clone, copy or lock cleanup.
+ """
+ from pathlib import Path
+ import argparse
+@@ -18,13 +18,14 @@ import time
+ import traceback
+ 
+ HERE = Path(__file__).resolve().parent
+-PREP = HERE / 'preparation_01'
++ORIGINAL = HERE.parent / 'p210_checkpoint_preparation'
++PREP = ORIGINAL / 'preparation_01'
+ SOURCE = Path('/root/autodl-tmp/symbolic_dynamics')
+ MIRROR = Path('/root/autodl-tmp/hilbert-polya-structure')
+ DEST = Path('/root/symbolic-dynamics-private-sync-20260907')
+ EVIDENCE = Path('/root/symbolic-dynamics-private-sync-evidence-20260907')
+ BASE = 'a380d24718fec4ef27365f44e96fb7ffa2b0fd10'
+-PHASES = ('preflight', 'clone', 'copy', 'stage', 'commit', 'push')
++PHASES = ('stage', 'commit', 'push')
+ ENV = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_TERMINAL_PROMPT='0',
+            GIT_SSH_COMMAND='ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=20 -o ConnectionAttempts=1',
+            GIT_LITERAL_PATHSPECS='0')
+@@ -82,7 +83,13 @@ def main():
+     # A placeholder/template never authorizes execution; root must supply exact pins.
+     approval = json.loads(args.approval.read_text())
+     scope = json.loads((PREP / 'SCOPE.json').read_text())
+-    assert approval['status'] == 'ROOT_APPROVED_EXACT_P210_ROUND0_OVERLAY_CHECKPOINT'
++    assert approval['status'] == 'ROOT_APPROVED_P210_STAGE_REVISION_01_CONTINUATION'
++    assert approval['process_support_sha256'] == digest(HERE / 'process_support.py')
++    from process_support import run_files, TimedReader, settle_group, existing_overlay_writers
++    assert approval['inspection_sha256'] == digest(HERE / 'inspection_01/RESULT.actual.json')
++    assert approval['residue_pins_sha256'] == digest(HERE / 'FAILED_RESIDUE_PINS.actual.json')
++    assert approval['prior_executor_sha256'] == digest(ORIGINAL / 'execute.py') == '8d42285eeebcfc23c145da9b0bf6bb8b82b2db1f04533f5d73c145665f4cdcba'
++    assert approval['allow_owned_new_session_timeout_settlement'] is True
+     assert approval['scope_sha256'] == digest(PREP / 'SCOPE.json')
+     assert approval['executor_sha256'] == digest(Path(__file__))
+     assert approval['supplementary_clone'] == str(DEST)
+@@ -104,41 +111,69 @@ def main():
+     assert EVIDENCE.parent == DEST.parent == Path('/root')
+     assert SOURCE.stat().st_dev != Path('/root').stat().st_dev
+     assert not DEST.is_symlink() and not EVIDENCE.is_symlink()
+-    if args.phase == 'preflight':
+-        assert not DEST.exists() and not EVIDENCE.exists()
+-        EVIDENCE.mkdir()
+-        (EVIDENCE / 'empty_hooks').mkdir()
+-        (EVIDENCE / 'empty_template').mkdir()
++    assert DEST.is_dir() and EVIDENCE.is_dir()
++    assert not existing_overlay_writers(DEST), 'existing overlay Git writer requires root inspection'
++    assert not (DEST / '.git/index.lock').exists(), 'root must separately preserve the exact stale lock; no cleanup here'
++    lock_receipt_path = Path(approval['lock_preservation_receipt'])
++    assert lock_receipt_path == EVIDENCE / 'stage_revision_01_lock_preservation/ROOT_PRESERVATION.actual.json'
++    assert digest(lock_receipt_path) == approval['lock_preservation_receipt_sha256']
++    assert approval['lock_preservation_receipt_sha256'] == '208b59678887f7741403dc3110d0585f10b730ceca94788203d3bc92403fa00e'
++    lock_receipt = json.loads(lock_receipt_path.read_text())
++    residues = json.loads((HERE / 'FAILED_RESIDUE_PINS.actual.json').read_text())
++    assert lock_receipt['status'] == 'ROOT_CONFIRMED_EXACT_ORPHAN_LOCK_PRESERVATION'
++    assert lock_receipt['source'] == residues['pins'][0]['path']
++    assert lock_receipt['preserved_path'] == residues['proposed_lock_archive']
++    assert lock_receipt['source_pin'] == residues['pins'][0]
++    assert lock_receipt['no_live_holders_immediately_before_move'] is True
++    assert lock_receipt['actual_native_exit'] == 0 and lock_receipt['no_deleted_bytes'] is True
++    preserved_lock = Path(lock_receipt['preserved_path'])
++    assert preserved_lock.is_file() and not preserved_lock.is_symlink()
++    assert digest(preserved_lock) == residues['pins'][0]['sha256']
++    assert preserved_lock.stat().st_ino == residues['pins'][0]['inode']
++    assert preserved_lock.stat().st_dev == residues['pins'][0]['device']
++    assert preserved_lock.stat().st_size == residues['pins'][0]['bytes']
++    assert preserved_lock.stat().st_mtime_ns == residues['pins'][0]['mtime_ns']
++    assert preserved_lock.stat().st_mode == residues['pins'][0]['mode']
++    if args.phase == 'stage':
++        prev = json.loads((EVIDENCE / 'copy/RESULT.actual.json').read_text())
++        assert prev['executor_sha256'] == approval['prior_executor_sha256']
++        assert not (EVIDENCE / 'commit').exists() and not (EVIDENCE / 'push').exists()
+     else:
+-        previous = PHASES[PHASES.index(args.phase) - 1]
++        previous = PHASES[PHASES.index(args.phase) - 1] + '_revision_01'
+         prev = json.loads((EVIDENCE / previous / 'RESULT.actual.json').read_text())
+-        assert prev['status'] == 'PASS' and prev['scope_sha256'] == approval['scope_sha256']
+         assert prev['executor_sha256'] == approval['executor_sha256']
+-    phase = EVIDENCE / args.phase
++    assert prev['status'] == 'PASS' and prev['scope_sha256'] == approval['scope_sha256']
++    phase = EVIDENCE / (args.phase + '_revision_01')
+     phase.mkdir()
+     commands = []
+     dump(phase / 'APPROVAL_BINDING.actual.json', {'approval_path': str(args.approval.resolve()),
+           'approval_sha256': digest(args.approval), 'approval': approval})
+ 
+-    def command(argv, stdin=None, allowed=(0,), timeout=60):
++    def command(argv, stdin=None, allowed=(0,), timeout=300):
+         stem = phase / ('command_%03d' % (len(commands) + 1))
+-        if stdin is not None:
+-            stem.with_suffix('.stdin.raw').write_bytes(stdin)
+-        start = time.time()
+-        with stem.with_suffix('.stdout.raw').open('xb') as out, stem.with_suffix('.stderr.raw').open('xb') as err:
+-            try:
+-                p = subprocess.run(argv, input=stdin, stdout=out, stderr=err, env=ENV, timeout=timeout)
+-                code = p.returncode
+-            except subprocess.TimeoutExpired:
+-                code = 'TIMEOUT'
+-        rec = {'argv': argv, 'cwd': str(SOURCE), 'started_epoch': start, 'ended_epoch': time.time(),
+-               'exit': code, 'environment_overrides_only': {k: ENV[k] for k in ('GIT_OPTIONAL_LOCKS','GIT_TERMINAL_PROMPT','GIT_SSH_COMMAND','GIT_LITERAL_PATHSPECS')},
+-               'stdout': {'path': stem.with_suffix('.stdout.raw').name, 'sha256': digest(stem.with_suffix('.stdout.raw'))},
+-               'stderr': {'path': stem.with_suffix('.stderr.raw').name, 'sha256': digest(stem.with_suffix('.stderr.raw'))}}
++        # A physical stdin file avoids a blocked write-before-read pipe.
++        inp = stem.with_suffix('.stdin.raw')
++        inp.write_bytes(b'' if stdin is None else stdin)
++        out, err = stem.with_suffix('.stdout.raw'), stem.with_suffix('.stderr.raw')
++        try:
++            native = run_files(argv, inp, out, err, ENV, timeout=timeout)
++        except BaseException:
++            rec = {'argv': argv, 'exit': 'RECORDER_FAILED_UNFINALIZED', 'stdout_path': out.name,
++                   'stderr_path': err.name, 'output_hashes_not_finalized': True,
++                   'exception': traceback.format_exc()}
++            dump(stem.with_suffix('.actual.json'), rec)
++            commands.append(rec)
++            raise
++        rec = {'argv': argv, 'cwd': str(SOURCE), **native,
++               'environment_overrides_only': {k: ENV[k] for k in ('GIT_OPTIONAL_LOCKS','GIT_TERMINAL_PROMPT','GIT_SSH_COMMAND','GIT_LITERAL_PATHSPECS')},
++               'stdin': {'path': inp.name, 'sha256': digest(inp)},
++               'stdout': {'path': out.name, 'sha256': digest(out)},
++               'stderr': {'path': err.name, 'sha256': digest(err)}}
++        assert native['process_group_settlement']['quiescent']
+         dump(stem.with_suffix('.actual.json'), rec)
+         commands.append(rec)
+-        assert code in allowed, (stem.name, code)
+-        return stem.with_suffix('.stdout.raw').read_bytes()
++        assert native['exit'] in allowed, (stem.name, native['exit'])
++        return out.read_bytes()
+ 
+     def git(repo, *argv, **kwargs):
+         # The private origin is resolved in memory by Git from the unchanged
+@@ -164,10 +199,7 @@ def main():
+         current = {'config': digest(MIRROR / '.git/config'),
+                    'refs': hashlib.sha256(git(MIRROR, 'show-ref')).hexdigest()}
+         binding = EVIDENCE / 'preflight/ORIGINAL_MIRROR_BINDING.json'
+-        if args.phase == 'preflight' and not binding.exists():
+-            dump(binding, current)
+-        else:
+-            assert current == json.loads(binding.read_text())
++        assert current == json.loads(binding.read_text())
+ 
+     def all_source_pins():
+         for row in expected:
+@@ -184,6 +216,35 @@ def main():
+         physical = {p.relative_to(DEST).as_posix() for p in DEST.rglob('*') if p.is_file() and '.git' not in p.relative_to(DEST).parts}
+         assert physical == selected_names, 'only explicit selected worktree paths may be materialized'
+ 
++    def historical_failure_preserved():
++        for row in json.loads((HERE / 'inspection_01/ORIGINAL_INPUT_PINS.json').read_text()):
++            assert digest(Path(row['path'])) == row['sha256'], row['path']
++        for row in residues['pins'][1:]:
++            p = Path(row['path'])
++            assert p.is_file() and not p.is_symlink()
++            assert p.stat().st_size == row['bytes'] and digest(p) == row['sha256'], row['path']
++        assert digest(preserved_lock) == residues['pins'][0]['sha256']
++        assert not (DEST / '.git/index.lock').exists()
++
++    def partial_index_preflight():
++        assert git(DEST, 'rev-parse', 'HEAD').decode().strip() == BASE
++        changed = git(DEST, 'diff', '--cached', '--name-status', '-z', '--no-renames', BASE, '--').split(b'\0')[:-1]
++        assert len(changed) % 2 == 0
++        intended = {r['path']:r for r in selected}
++        actual = {changed[i+1].decode():changed[i].decode() for i in range(0,len(changed),2)}
++        assert set(actual) <= selected_names and all(actual[p] == intended[p]['change'] for p in actual)
++        staged = git(DEST, 'ls-files', '--stage', '-z', '--', *sorted(actual)).split(b'\0')[:-1] if actual else []
++        seen = {}
++        for raw in staged:
++            attrs, name = raw.split(b'\t', 1)
++            mode, oid, number = attrs.decode().split()
++            assert number == '0'
++            seen[name.decode()] = (mode, oid)
++        assert seen == {p:(intended[p]['mode'],intended[p]['git_blob_sha1']) for p in actual}
++        dump(phase / 'PARTIAL_INDEX_PREFLIGHT.actual.json', {'changed_count':len(actual),
++             'exact_intended_subset':True, 'unrelated_changes':0, 'unmerged_entries':0})
++
++
+     def tree_check(tree):
+         prefixes = [p['base'] for p in scope['packages']] + scope['exact_extra_paths']
+         data = git(DEST, '--literal-pathspecs', 'ls-tree', '-r', '-z', '--full-tree', tree, '--', *prefixes)
+@@ -214,10 +275,12 @@ def main():
+         stream_sha = hashlib.sha256()
+         result_rows = []
+         native_code = None
++        settlement = None
+         try:
+             with stem.with_suffix('.stdin.raw').open('rb') as inp, stem.with_suffix('.stderr.raw').open('xb') as err, stem.with_suffix('.stdout.raw.gz').open('xb') as raw:
+                 with gzip.GzipFile(filename='', mode='wb', fileobj=raw, compresslevel=1, mtime=0) as zipped:
+-                    p = subprocess.Popen(argv, stdin=inp, stdout=subprocess.PIPE, stderr=err, env=ENV)
++                    p = subprocess.Popen(argv, stdin=inp, stdout=subprocess.PIPE, stderr=err, env=ENV, start_new_session=True)
++                    reader = TimedReader(p.stdout, p.pid, timeout=300)
+                     def capture(b):
+                         nonlocal stream_size
+                         stream_size += len(b)
+@@ -226,36 +289,38 @@ def main():
+                     try:
+                         for oid in sorted(unique):
+                             row = unique[oid]
+-                            header = p.stdout.readline()
++                            header = reader.readline()
+                             capture(header)
+                             assert header == (oid + ' blob ' + str(row['bytes']) + '\n').encode(), oid
+                             h = hashlib.sha256()
+                             g = hashlib.sha1(b'blob ' + str(row['bytes']).encode() + b'\0')
+                             remaining = row['bytes']
+                             while remaining:
+-                                block = p.stdout.read(min(remaining, 1024 * 1024))
++                                block = reader.read(min(remaining, 1024 * 1024))
+                                 assert block, ('short object', oid)
+                                 capture(block)
+                                 h.update(block)
+                                 g.update(block)
+                                 remaining -= len(block)
+-                            end = p.stdout.read(1)
++                            end = reader.read(1)
+                             capture(end)
+                             assert end == b'\n' and h.hexdigest() == row['sha256'] and g.hexdigest() == oid
+                             payload_size += row['bytes']
+                             result_rows.append({'git_blob_sha1': oid, 'bytes': row['bytes'], 'sha256': h.hexdigest()})
+-                        extra = p.stdout.read()
++                        extra = reader.read()
+                         capture(extra)
+                         assert not extra
+                         native_code = p.wait(timeout=30)
+                     finally:
+-                        if p.poll() is None:
+-                            p.terminate()
+-                            p.wait(timeout=30)
++                        settlement = settle_group(p, terminate=native_code is None)
++                        reader.close()
++                        assert settlement['quiescent'], 'unfinished native writer: no final output hashing'
+                         if native_code is None:
+                             native_code = p.returncode
+         finally:
++            assert settlement is not None and settlement['quiescent'], 'native blob streams not quiescent; preserve raw files without final hashes'
+             rec = {'argv': argv, 'started_epoch': start, 'ended_epoch': time.time(), 'exit': native_code,
++                   'process_group_settlement': settlement, 'timeout_seconds': 300,
+                    'stdin_sha256': hashlib.sha256(stdin).hexdigest(),
+                    'stdout_lossless_gzip': stem.with_suffix('.stdout.raw.gz').name,
+                    'raw_stream_bytes': stream_size, 'raw_stream_sha256': stream_sha.hexdigest(),
+@@ -265,7 +330,7 @@ def main():
+                    'unique_blob_count': len(result_rows), 'verified_payload_bytes': payload_size}
+             dump(stem.with_suffix('.actual.json'), rec)
+             commands.append(rec)
+-        assert native_code == 0 and not stem.with_suffix('.stderr.raw').read_bytes()
++        assert native_code == 0 and not settlement['signals'] and not stem.with_suffix('.stderr.raw').read_bytes()
+         # Prove the retained gzip is lossless by a separate streaming reread.
+         h, n = hashlib.sha256(), 0
+         with gzip.open(stem.with_suffix('.stdout.raw.gz'), 'rb') as f:
+@@ -281,56 +346,11 @@ def main():
+     try:
+         baseline_unchanged()
+         all_source_pins()
++        historical_failure_preserved()
+         free = shutil.disk_usage('/root').free
+-        if args.phase in ('preflight', 'clone'):
+-            assert free > scope['conservative_overlay_storage_budget_bytes'], ('overlay capacity', free)
+-        if args.phase == 'preflight':
+-            remote(MIRROR)
+-            # Strict read-only remote configuration checks output only names,
+-            # never URL/token values. The actual private origin stays in Git config.
+-            run_config = git(MIRROR, 'config', '--name-only', '--get-regexp', r'^remote\.origin\.(url|pushurl)$')
+-            assert run_config.splitlines() == [b'remote.origin.url'], 'explicit root review required for multiple/pushurl origins'
+-            result.update(selected_count=len(selected), selected_bytes=scope['selected_source_bytes'], overlay_free_bytes=free)
+-        elif args.phase == 'clone':
+-            assert not DEST.exists()
+-            git(MIRROR, 'clone', '--shared', '--no-checkout', '--origin', 'source-mirror',
+-                '--template=' + str(EVIDENCE / 'empty_template'), str(MIRROR), str(DEST))
+-            alternate = DEST / '.git/objects/info/alternates'
+-            assert alternate.read_text().strip() == str(MIRROR / '.git/objects')
+-            assert git(DEST, 'rev-parse', 'HEAD').decode().strip() == BASE
+-            git(DEST, 'read-tree', BASE)
+-            tracked = git(DEST, 'ls-files', '-z')
+-            git(DEST, 'update-index', '--skip-worktree', '-z', '--stdin', stdin=tracked)
+-            present = b''.join(r['path'].encode() + b'\0' for r in selected if r['baseline'] is not None)
+-            git(DEST, 'update-index', '--no-skip-worktree', '-z', '--stdin', stdin=present)
+-            git(DEST, 'fetch', '--no-tags', 'origin', 'refs/heads/main:refs/remotes/origin/main', timeout=60)
+-            assert git(DEST, 'rev-parse', 'origin/main').decode().strip() == BASE
+-            remote(DEST)
+-            result['sparse_mechanism'] = 'no checkout; full base index, skip-worktree on every unselected baseline path'
+-        elif args.phase == 'copy':
+-            # Before any selected materialization, freeze exact pinned controls
+-            # on overlay. No current control is edited or read by a moving name.
+-            snapshots = phase / 'source_control_snapshot'
+-            snapshots.mkdir()
+-            for row in scope['mutable_controls_pinned_but_not_physically_copied']:
+-                target = snapshots / row['path']
+-                target.parent.mkdir(parents=True, exist_ok=True)
+-                with (SOURCE / row['path']).open('rb') as src, target.open('xb') as dst:
+-                    shutil.copyfileobj(src, dst, 1024 * 1024)
+-                target.chmod(0o755 if row['mode'] == '100755' else 0o644)
+-                check_file(snapshots, row)
+-            for row in selected:
+-                target = DEST / row['path']
+-                assert not target.exists() and not target.is_symlink(), ('no overwrite', str(target))
+-                target.parent.mkdir(parents=True, exist_ok=True)
+-                from_base = snapshots if row['path'] in {c['path'] for c in scope['mutable_controls_pinned_but_not_physically_copied']} else SOURCE
+-                with (from_base / row['path']).open('rb') as src, target.open('xb') as dst:
+-                    shutil.copyfileobj(src, dst, 1024 * 1024)
+-                target.chmod(0o755 if row['mode'] == '100755' else 0o644)
+-            all_source_pins()
+-            overlay_files()
+-            result['copied_count'] = len(selected)
+-        elif args.phase == 'stage':
++        assert free > 3 * 658584369 + 1024**3, ('remaining overlay reservation', free)
++        if args.phase == 'stage':
++            partial_index_preflight()
+             overlay_files()
+             data = b''.join(p.encode() + b'\0' for p in sorted(selected_names))
+             attrs = git(DEST, 'check-attr', '--cached', '-z', '--stdin', 'filter','text','eol','working-tree-encoding','ident', stdin=data)
+@@ -349,10 +369,10 @@ def main():
+             result.update(tree=tree, object_stream=blob_stream_check())
+         elif args.phase == 'commit':
+             overlay_files()
+-            stage = json.loads((EVIDENCE / 'stage/RESULT.actual.json').read_text())
++            stage = json.loads((EVIDENCE / 'stage_revision_01/RESULT.actual.json').read_text())
+             assert git(DEST, 'write-tree').decode().strip() == stage['tree']
+             tree_check(stage['tree'])
+-            git(DEST, 'commit', '-m', 'Private checkpoint: P210 Round0 and accepted batch evidence; HOLD_EXTERNAL', timeout=60)
++            git(DEST, 'commit', '-m', 'Private checkpoint: P210 Round0 and accepted batch evidence; HOLD_EXTERNAL', timeout=300)
+             commit = git(DEST, 'rev-parse', 'HEAD').decode().strip()
+             assert git(DEST, 'rev-list', '--parents', '-n', '1', 'HEAD').decode().split() == [commit, BASE]
+             assert git(DEST, 'rev-parse', 'HEAD^{tree}').decode().strip() == stage['tree']
+@@ -361,20 +381,21 @@ def main():
+             assert not git(DEST, 'status', '--porcelain=v1', '-z', '--untracked-files=all')
+         elif args.phase == 'push':
+             overlay_files()
+-            committed = json.loads((EVIDENCE / 'commit/RESULT.actual.json').read_text())
++            committed = json.loads((EVIDENCE / 'commit_revision_01/RESULT.actual.json').read_text())
+             commit = committed['commit']
+             assert git(DEST, 'rev-parse', 'HEAD').decode().strip() == commit
+             assert not git(DEST, 'status', '--porcelain=v1', '-z', '--untracked-files=all')
+             tree_check(commit)
+             remote(DEST)
+-            git(DEST, 'push', 'origin', commit + ':refs/heads/main', timeout=60)
++            git(DEST, 'push', 'origin', commit + ':refs/heads/main', timeout=300)
+             remote(DEST, commit)
+-            git(DEST, 'fetch', '--no-tags', 'origin', 'refs/heads/main:refs/remotes/origin/main', timeout=60)
++            git(DEST, 'fetch', '--no-tags', 'origin', 'refs/heads/main:refs/remotes/origin/main', timeout=300)
+             assert git(DEST, 'rev-list', '--left-right', '--count', 'HEAD...origin/main').split() == [b'0',b'0']
+             assert not git(DEST, 'status', '--porcelain=v1', '-z', '--untracked-files=all')
+             result.update(commit=commit, tree=committed['tree'], actual_remote_confirmed=True,
+                           divergence=[0,0], original_mirror_intentionally_still_at=BASE)
+         baseline_unchanged()
++        historical_failure_preserved()
+         result['commands'] = len(commands)
+         dump(phase / 'RESULT.actual.json', result)
+         print(json.dumps({k:v for k,v in result.items() if k != 'object_stream'}, sort_keys=True))

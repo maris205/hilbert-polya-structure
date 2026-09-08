@@ -1,0 +1,55 @@
+{
+  "changed_functions": [
+    "main",
+    "original_native"
+  ],
+  "check_labels": [
+    "exact_original_snapshot",
+    "exact_current_root_corrected_snapshot",
+    "only_two_literal_double_backslash_n_source_occurrences",
+    "one_exact_receipt_boundary_block",
+    "complete_raw_source_equals_only_stated_three_hunk_changes",
+    "actual_LF_constants_no_literal_slash_n_remaining",
+    "only_main_and_original_native_AST_modified",
+    "corrected_native_20_seal_predicate_matches_actual_full_stdout",
+    "corrected_receipt_boundary_matches_actual_data",
+    "unchanged_full_prior_static_data_findings_bound"
+  ],
+  "checks": 10,
+  "current_source_lines": 425,
+  "full_source_diff": "--- /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/four_component02_receiver_static_review/receive_four_component02.before_root_corrections.py\n+++ /root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/four_component02_receiver_static_review/receive_four_component02.after_root_corrections.py\n@@ -230,8 +230,9 @@\n          receipt['external'] == 'HOLD_EXTERNAL', 'complete original native result and parsed receipt')\n     for field in ('known_inputs_unchanged', 'runtime_membership_unchanged', 'scoped_inputs_unchanged', 'configuration_unchanged'):\n         need(receipt[field] is True, 'actual completed parent closure field: ' + field)\n-    need(all(type(receipt[field]) is int and receipt[field] == 0 for field in ('scientific_executions', 'builds', 'page_views')),\n-         'parent claims zero new science/build/view')\n+    need(all(type(receipt[field]) is int and receipt[field] == 0 for field in ('scientific_executions', 'builds', 'page_views', 'new_reviews')) and\n+         receipt['p210_accepted'] is False and receipt['five_paper_acceptance'] is False and receipt['owner'] == 'OWNER_AMBER',\n+         'parent claims zero new science/build/view/review and no P210 or five-paper acceptance')\n     expected = {'argv': child_argv, 'cwd': str(ROOT), 'env': ENV, 'stdin': 'DEVNULL', 'stdout': 'checker.stdout',\n         'stderr': 'checker.stderr', 'start_new_session': True, 'timeout_seconds': 600, 'heartbeat_seconds': 30}\n     attempt, spawned = obj(OUT / 'PRE_SPAWN_ATTEMPT.json'), obj(OUT / 'SPAWNED.json')\n@@ -380,7 +381,7 @@\n     seal_native = obj(QA / 'FIVE_FOUR_COMPONENT_RUN02_ROOT_SEAL.actual.json')\n     need(seal_native['command'] == '/usr/bin/sha256sum -c SHA256SUMS' and seal_native['cwd'] == str(OUT) and\n          seal_native['result']['exit_code'] == 0 and seal_native['result']['chunk_id'] == '1c8942' and\n-         seal_native['result']['output'] == ''.join(line[66:] + ': OK\\\\n' for line in raw(OUT / 'SHA256SUMS').decode().splitlines()),\n+         seal_native['result']['output'] == ''.join(line[66:] + ': OK\\n' for line in raw(OUT / 'SHA256SUMS').decode().splitlines()),\n          'complete actual native all20 output seal check')\n     need(not os.path.lexists('/usr/lib/python310.zip') and not os.path.lexists('/etc/ld.so.preload') and\n          all(not row['exists'] and row['symlink'] is None for name, row in config['presence'].items()\n@@ -403,7 +404,7 @@\n         'actual_output_manifest_sha256': OUTPUT_SEAL, 'actual_outer_session': 21492, 'actual_outer_exit': 0,\n         'actual_child_exit': 0, 'parent_known_keys_rechecked': len(before),\n         'current_receiver_read_paths': len(final_before),\n-        'current_receiver_key_sha256': sha256((json.dumps(final_before, sort_keys=True, separators=(',', ':')) + '\\\\n').encode()).hexdigest(),\n+        'current_receiver_key_sha256': sha256((json.dumps(final_before, sort_keys=True, separators=(',', ':')) + '\\n').encode()).hexdigest(),\n         'extra_read_keys_not_in_parent_ledger': {n: v for n, v in final_before.items() if n not in before},\n         'scoped_group_counts': {k: len(v) for k, v in expected_scoped.items()},\n         'failed01_preservation_input_pins': failures_preserved, 'all_actual_raw_comparisons': COMPARISONS,\n",
+  "input_pins": {
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/FIVE_FOUR_COMPONENT_RUN02_ROOT_SEAL.actual.json": {
+      "bytes": 864,
+      "sha256": "496ba7c6eee87098a6b27d1002be0267b75bd3e7c3b5ebc1da4ea60ddc89285f"
+    },
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/five_paper_terminal_component_run_02/RECEIPT.json": {
+      "bytes": 3810,
+      "sha256": "df12056c9f9708d8c3075c7a43c5d51758bddafc79edf33c0286537a5159699b"
+    },
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/five_paper_terminal_component_run_02/SHA256SUMS": {
+      "bytes": 1764,
+      "sha256": "7eda9f4c4452d3d1dc0656ca592cef8e7783a120ccada3fd671cc2238aaf6ebe"
+    },
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/four_component02_receiver_static_review/STATIC_REVIEW_BEFORE.actual.json": {
+      "bytes": 18645,
+      "sha256": "4b6dfe3002b471c88b60b1674c8e9b3fcb139ab2e3870c4e1ae35ed30b3caa29"
+    },
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/four_component02_receiver_static_review/receive_four_component02.after_root_corrections.py": {
+      "bytes": 29214,
+      "sha256": "a8070d6ff76e5fe6de148d53b279fbea7d8ee5580b1a57208c7e66c1a6434df8"
+    },
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/four_component02_receiver_static_review/receive_four_component02.before_root_corrections.py": {
+      "bytes": 29026,
+      "sha256": "68f656ddb94532224b85531f4b7a626f3169c8253cc37b0ddce82da48bbdbf7b"
+    },
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/receive_four_component02.py": {
+      "bytes": 29214,
+      "sha256": "a8070d6ff76e5fe6de148d53b279fbea7d8ee5580b1a57208c7e66c1a6434df8"
+    }
+  },
+  "new_host_hash_passes_or_membership_regeneration": 0,
+  "new_receiver_launcher_or_science_imports_or_executions": 0,
+  "root_source_edits_by_this_agent": 0,
+  "status": "PASS_EXACT_CURRENT_SOURCE_DELTA_AST_AND_DATA_ONLY_NOT_RECEIVER_EXECUTION"
+}

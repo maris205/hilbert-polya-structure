@@ -1,0 +1,202 @@
+--- root-read-2180-source-04a256596eed566148534ed5732faed886f5dfec33e222db108488a86f79ffd6
++++ inspect_p210_artifact.py
+@@ -3,7 +3,7 @@
+ 
+ No scientific code, old writer/reader, builder, view tool or child command
+ is imported/executed. Preparation does not execute this reader. The final
+-terminal/root-view contract remains separately bindable after actual originals.
++contract binds actual terminal/root-view acceptance and first pending lifecycle.
+ """
+ import ast
+ from collections import Counter
+@@ -1942,10 +1942,27 @@
+         links.append(dict(document=str(PAPER / 'ROOT_LIFECYCLE.md'), href=href, path=str(path), pin=pin(path)))
+     ck(links and set(roles['required_actual_link_targets']) <= {row['path'] for row in links},
+        'pending lifecycle links include exact actual accepted terminal/view evidence')
++    source = QA / 'refresh_p210_terminal_whole_manifest.py'
++    pin(source, '4f89eef8a28e6bc697c17b6f22e1032885521095f85ee3de4e9b98ca998248fb')
++    refresh = obj(QA / 'P210_TERMINAL_LIFECYCLE_REFRESH.actual.json')
++    expected_native = dict(argv=['/usr/bin/sha256sum', '--check', 'PAPER_MANIFEST.sha256'], cwd=str(PAPER),
++        environment=ENV, exit=0, stdout=''.join(name + ': OK\n' for name in sorted(rows)), stderr='')
++    ck(refresh == dict(status='PASS_P210_TERMINAL_LIFECYCLE_AND_WHOLE_MANIFEST_REFRESH', old_payloads=2021,
++       current_payloads=2244, physical_files=2245, added_terminal_files=223,
++       sole_changed_old_payload='ROOT_LIFECYCLE.md',
++       old_whole_sha256=val(QA / 'p210_preterminal_controls_01/PAPER_MANIFEST.sha256')['sha256'],
++       old_lifecycle_sha256=before['ROOT_LIFECYCLE.md'], new_lifecycle_sha256=roles['lifecycle_pin']['sha256'],
++       new_whole_sha256=roles['whole_manifest_pin']['sha256'], terminal_sha256=val(PAPER / 'qa_final/SHA256SUMS')['sha256'],
++       native=expected_native, source_sha256=val(source)['sha256'],
++       scope='Mechanical rolling manifest plus documentary lifecycle only; all original/frozen science bytes unchanged.'),
++       'entire actual first pending refresh receipt and complete original2244-line native stdout')
++    NATIVE_RECORDS.append(dict(kind='actual_first_pending_whole_refresh', **expected_native))
+     return dict(status='ACTUAL_TERMINAL_BUILDS_VIEWS_COMPLETE_ARTIFACT_GATE_PENDING',
+         current_whole_payloads=len(rows), old_whole_payloads=2021, added_terminal_files=len(expected_added),
+         sole_changed_old_payload='ROOT_LIFECYCLE.md', lifecycle=val(PAPER / 'ROOT_LIFECYCLE.md'),
+         whole_manifest=val(PAPER / 'PAPER_MANIFEST.sha256'), genuine_local_links=links,
++        actual_refresh_receipt=val(QA / 'P210_TERMINAL_LIFECYCLE_REFRESH.actual.json'),
++        complete_original_native_whole_lines=len(rows),
+         current_paper_complete=False, required_distinct_after_artifact_lifecycle_followup=True)
+ 
+ 
+@@ -2084,12 +2101,157 @@
+                 historical_author_pending_text_retained=view['historical_author_text'])
+ 
+ 
++def actual_terminal_receiver_capture(contract):
++    directory = QA / 'p210_terminal_root_reception_01'
++    prep = QA / 'p210_terminal_reception_revision_01'
++    source = QA / 'record_p210_terminal_reception_01.py'
++    spec = contract['terminal']
++    complete_package(prep, '9a4b0d50cb8e70cd1aaddf6d1ab0c9351778a604e45395bf86af52cf3807ae88', 9)
++    complete_package(directory, spec['root_receiver_capture_seal']['sha256'], 6)
++    ck(val(directory / 'SHA256SUMS') == spec['root_receiver_capture_seal'] and
++       spec['root_receiver_result_path'] == str(directory / 'ROOT_RECEPTION.json'),
++       'exact actual receiver full raw stdout path and physical six-payload capture')
++    full_compare(source, directory / 'executed_source.py', 'actual_terminal_receiver_recorder_source')
++    attempt, spawn, result = (obj(directory / name) for name in ('ATTEMPT.json', 'SPAWN.json', 'RESULT.json'))
++    argv = ['/usr/bin/python3.10', '-I', '-S', '-B', '-X',
++            'pycache_prefix=' + str(directory / 'unused_receiver_cache'), str(prep / 'inspect_p210_terminal.py')]
++    paths = (source, prep / 'inspect_p210_terminal.py', prep / 'INPUT_CONTRACT.json', prep / 'SHA256SUMS',
++             PAPER / 'qa_final/SHA256SUMS', QA / 'p210_terminal_launch_02/SHA256SUMS',
++             QA / 'P210_TERMINAL_OUTER02_ROOT_COMPLETION.actual.json', Path('/usr/bin/python3.10'))
++    inputs = {str(path): val(path) for path in paths}
++    ck(attempt == dict(argv=argv, cwd=str(ROOT), environment=TERM_ENV, inputs_before=inputs,
++       timeout_seconds=600, start_new_session=True, started_epoch=attempt['started_epoch'],
++       paper_terminal_present_before=True), 'entire actual documentary receiver pre-spawn attempt')
++    ck(set(result) == {'argv', 'cwd', 'environment', 'pid', 'original_wait_exit_code', 'cleanup_wait_exit_code',
++       'timed_out', 'wait_error', 'cleanup_events', 'child_reaped', 'process_group_absent', 'inputs_before',
++       'inputs_after', 'inputs_unchanged', 'stdout', 'stderr', 'paper_terminal_present_after', 'finished_epoch'} and
++       result['argv'] == argv and result['cwd'] == str(ROOT) and result['environment'] == TERM_ENV and
++       result['inputs_before'] == result['inputs_after'] == inputs and result['inputs_unchanged'] is True and
++       result['original_wait_exit_code'] == result['cleanup_wait_exit_code'] == 0 and
++       result['timed_out'] is False and result['wait_error'] is None and result['cleanup_events'] == [] and
++       result['child_reaped'] is result['process_group_absent'] is result['paper_terminal_present_after'] is True and
++       type(result['pid']) is int and result['pid'] > 0 and
++       attempt['started_epoch'] <= spawn['spawned_epoch'] <= result['finished_epoch'] and
++       spawn == dict(pid=result['pid'], process_group_id=result['pid'], spawned_epoch=spawn['spawned_epoch']) and
++       not os.path.lexists(directory / 'unused_receiver_cache'),
++       'entire actual documentary native wait-zero settled process/time and exact input interval')
++    ck(result['stdout'] == val(directory / 'ROOT_RECEPTION.json') and
++       result['stderr'] == val(directory / 'stderr') and raw(directory / 'stderr') == b'',
++       'entire actual independent receiver captured stdout and empty stderr')
++    data = obj(directory / 'ROOT_RECEPTION.json')
++    ck(data['status'] == 'PASS_P210_TERMINAL_BUILD_ORIGINAL_DOCUMENTS_ONLY' and data['root_acceptance'] is False and
++       data['new_science_executions'] == data['new_builds'] == data['new_views'] == data['manuscript_reviews'] == 0 and
++       data['checks'] == 533864 and data['current_path_keys'] == 125499 and
++       data['original_payloads'] == 222 and data['original_commands'] == 33 and data['original_inputs'] == 1619 and
++       data['raw_documentary_pairs'] == 17, 'actual full original receiver report documentary-only scope')
++    launch = obj(QA / 'P210_TERMINAL_RECEIVER01_ROOT_LAUNCH.actual.json')
++    completion = obj(QA / 'P210_TERMINAL_RECEIVER01_ROOT_COMPLETION.actual.json')
++    ck(shlex.split(launch['command']) == ['/usr/bin/python3.10', '-I', '-S', '-B', str(source),
++       '--expected-receiver-preparation-sha256', val(prep / 'SHA256SUMS')['sha256']] and launch['cwd'] == str(ROOT) and
++       launch['result']['session_id'] == completion['session_id'] == 91772 and launch['result']['output'] == '' and
++       completion['launch_record'] == 'P210_TERMINAL_RECEIVER01_ROOT_LAUNCH.actual.json' and
++       completion['result']['exit_code'] == 0,
++       'actual parent recorder command/session and normal native completion, no invented environment or stderr')
++    expected_return = dict(status='PASS_ACTUAL_P210_TERMINAL_RECEPTION_CAPTURE', output=str(directory),
++        original_wait_exit_code=0, stdout=result['stdout'], stderr=result['stderr'], result=val(directory / 'RESULT.json'),
++        seal=val(directory / 'SHA256SUMS'), original_input_count=data['original_inputs'],
++        current_path_keys=data['current_path_keys'], terminal_acceptance=False)
++    ck(completion['result']['output'] == json.dumps(expected_return, sort_keys=True) + '\n',
++       'entire actual parent native raw receiver capture return')
++    return data, dict(parent_session=91772, original_native_exit=0, captured_receiver_input_keys=8,
++        captured_payloads=6, original_documentary_checks=data['checks'], raw_stdout=val(directory / 'ROOT_RECEPTION.json'),
++        own_root_acceptance=False, full_map_independently_reconstructed_later=True)
++
++
+ def bind_actual_terminal_documents(contract):
+-    # Final source delta is intentionally confined to actual role binding.
+-    # This hard refusal remains until the real completed native captures,
+-    # root acceptance, six actual page views and first pending refresh exist.
+-    # There is no caller boolean or fabricated return capable of passing it.
+-    raise RuntimeError('UNBOUND_ACTUAL_TERMINAL_ROOT_NATIVE_SIX_VIEWS_AND_PENDING_REFRESH')
++    # Read real normal parent closures BEFORE hashing their output packages.
++    # Neither a caller boolean nor a stored author PASS grants acceptance.
++    for stem, session in (('OUTER02', 91983), ('RECEIVER01', 91772),
++                          ('CAPTURE_ROOT_READ', 88422), ('LIFECYCLE_REFRESH', 94702)):
++        name = 'P210_TERMINAL_' + stem + ('_' if stem == 'CAPTURE_ROOT_READ' else '_ROOT_')
++        launch = obj(QA / (name + 'LAUNCH.actual.json'))
++        completed = obj(QA / (name + 'COMPLETION.actual.json'))
++        ck(launch['result']['session_id'] == completed['session_id'] == session and
++           launch['result']['output'] == '' and 'exit_code' not in launch['result'] and
++           completed['launch_record'] == name + 'LAUNCH.actual.json' and
++           completed['result']['exit_code'] == 0 and 'session_id' not in completed['result'] and
++           launch['cwd'] == str(ROOT), 'actual normal parent closure before any corresponding capture-stream hash')
++    spec = contract['terminal']
++    ck(spec == dict(output=str(PAPER / 'qa_final'), preparation=str(QA / 'p210_terminal_build_revision_02'),
++       preparation_seal={'sha256': '2e99af39ab35bfb9e3fec7c9944927c574fe459b56a1b764a5948dde0266e31a', 'bytes': 793},
++       preparation_payloads=9,
++       output_seal={'sha256': '659b493dbc4e84137cf873643c1673b725294455d057c62b41e82572ffd31fd1', 'bytes': 22762},
++       output_payloads=222, root_receiver_result_path=str(QA / 'p210_terminal_root_reception_01/ROOT_RECEPTION.json'),
++       root_receiver_capture_seal={'sha256': '1037dc53ebff5fdd4ebfec909ce408c9c401589b9ac6a9e1993b6faacbf215e2', 'bytes': 478}),
++       'entire actual final terminal role contract, no future schema or prefix fallback')
++    actual_native, outer = actual_terminal_outer()
++    receiver, captured = actual_terminal_receiver_capture(contract)
++    views = actual_six_root_views()
++    accepted = obj(QA / 'P210_TERMINAL_ROOT_ACCEPTANCE.actual.json')
++    ck(accepted['schema'] == 'p210-root-terminal-build-view-acceptance-v1' and
++       accepted['status'] == 'ROOT_ACCEPTED_P210_TERMINAL_BUILDS_AND_ALL_SIX_VIEWS' and
++       accepted['paper'] == 'P210' and accepted['root'] == '/root' and
++       accepted['receiver_source_fully_read'] is accepted['receiver_original_capture_accepted'] is
++       accepted['root_original_inspection_complete'] is True and
++       accepted['receiver_native_session'] == 91772 and accepted['receiver_native_exit'] == 0 and
++       accepted['receiver_documentary_checks'] == receiver['checks'] and
++       accepted['root_reception_native_session'] == 88422 and accepted['root_reception_native_exit'] == 0 and
++       accepted['root_reception_checks'] == 250068 and
++       accepted['current_path_keys'] == receiver['current_path_keys'] and
++       accepted['known_original_paths'] == receiver['current_key_reconstruction']['known_original_paths'] and
++       accepted['disjoint_current_extras'] == receiver['current_key_reconstruction']['extra_count'] and
++       accepted['complete_current_map'] == receiver['current_key_reconstruction']['complete_map'] and
++       accepted['terminal_manifest_sha256'] == spec['output_seal']['sha256'] and accepted['terminal_payloads'] == 222 and
++       accepted['terminal_native_commands'] == 33 and accepted['terminal_builds'] == 2 and
++       accepted['actual_root_viewed_pages'] == views['pages_actually_viewed_by_root'] == 6 and
++       accepted['open_visual_findings'] == 0 and accepted['pdf'] == val(PAPER / 'qa_final/cold_build_1/main.pdf') and
++       accepted['raw_both_pdfs_equal_accepted_round2'] is True and
++       accepted['new_scientific_runs'] == accepted['new_manuscript_reviews'] == 0 and
++       accepted['paper_completion'] is accepted['five_paper_completion'] is False and
++       accepted['external'] == 'OWNER_AMBER / HOLD_EXTERNAL' and 'ARTIFACT_GATE_PENDING' in accepted['next'],
++       'entire actual root terminal and six-view acceptance retains paper/five pending scope')
++    ck(len(accepted['input_pins']) == 13, 'all actual formal root terminal acceptance inputs')
++    for path, value in accepted['input_pins'].items():
++        ck(contract['named_input_pins'][path] == value, 'actual acceptance input pin explicitly bound by final contract')
++        pin(path, sha_record(value))
++    root_source = QA / 'receive_p210_terminal_root_capture.py'
++    pin(root_source, '753a6f22edfc3869f93243f69a2b88902129bad4276f8006ab3a0a9c800e588d')
++    root_launch = obj(QA / 'P210_TERMINAL_CAPTURE_ROOT_READ_LAUNCH.actual.json')
++    root_completed = obj(QA / 'P210_TERMINAL_CAPTURE_ROOT_READ_COMPLETION.actual.json')
++    expected_root = dict(status='PASS_ROOT_P210_TERMINAL_CAPTURE_ORIGINAL_RECEPTION', checks=250068,
++        current_path_keys=receiver['current_path_keys'], known_original_paths=accepted['known_original_paths'],
++        disjoint_extras=accepted['disjoint_current_extras'], reconstructed_current_map=accepted['complete_current_map'],
++        receiver_raw=val(spec['root_receiver_result_path']), receiver_seal=spec['root_receiver_capture_seal'],
++        native_session=91772, native_completion_chunk='0317d6', terminal_seal=spec['output_seal'],
++        original_terminal_builds=2, original_actual_root_views=6, new_science_executions=0, new_builds=0, new_views=0,
++        paper_completion=False, five_paper_completion=False)
++    ck(shlex.split(root_launch['command']) == ['/usr/bin/python3.10', '-I', '-S', '-B', str(root_source)] and
++       root_completed['result']['output'] == json.dumps(expected_root, sort_keys=True) + '\n',
++       'entire actual separately source-read root original reception command and native stdout')
++    refresh_source = QA / 'refresh_p210_terminal_whole_manifest.py'
++    refresh_launch = obj(QA / 'P210_TERMINAL_LIFECYCLE_REFRESH_ROOT_LAUNCH.actual.json')
++    refresh_completed = obj(QA / 'P210_TERMINAL_LIFECYCLE_REFRESH_ROOT_COMPLETION.actual.json')
++    refresh = obj(QA / 'P210_TERMINAL_LIFECYCLE_REFRESH.actual.json')
++    ck(shlex.split(refresh_launch['command']) == ['/usr/bin/python3.10', '-I', '-S', '-B', str(refresh_source)] and
++       refresh_completed['result']['output'] == json.dumps({key: value for key, value in refresh.items()
++          if key != 'native'}, sort_keys=True, indent=2) + '\n' and
++       refresh['new_lifecycle_sha256'] == contract['pending_lifecycle']['lifecycle_pin']['sha256'] and
++       refresh['new_whole_sha256'] == contract['pending_lifecycle']['whole_manifest_pin']['sha256'],
++       'entire actual first pending refresh parent command and native stdout, not future complete lifecycle')
++    # Genuine link targets are separately consumed by the pending whole branch.
++    for name in ('P210_TERMINAL_BUILD_ROOT_INSPECTION.md', 'P210_TERMINAL_ROOT_VIEWS.md'):
++        body = raw(QA / name).decode()
++        ck('HOLD_EXTERNAL' in body, 'actual bounded root documentary report external hold')
++        for href in stripped_links(body):
++            relative = href.strip().strip('<>').split('#', 1)[0]
++            if relative and not re.match(r'[A-Za-z][A-Za-z0-9+.-]*:', relative):
++                target = (QA / unquote(relative)).resolve()
++                ck(target.is_relative_to(ROOT) and target.is_file(), 'genuine actual root report local link')
++                pin(target)
++    return receiver, dict(actual_native=actual_native, original_outer=outer, original_receiver_capture=captured,
++        actual_six_root_views=views, root_acceptance_record=val(QA / 'P210_TERMINAL_ROOT_ACCEPTANCE.actual.json'),
++        root_original_reception=expected_root, first_pending_refresh_parent_session=94702,
++        terminal_builds_and_views_accepted=True, paper_completion=False, five_paper_completion=False)
+ 
+ 
+ def main():
