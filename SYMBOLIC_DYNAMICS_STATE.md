@@ -10,6 +10,16 @@
 
 最新补记：[树／非线性原件接收](docs/papers211_215_sequence/scouting/root_reception/TREE_NONLINEAR_RECEPTION.md)也已闭合，LAR一项NO_PROMOTION、非线性零新literal，累计关闭18项、零reserve。root全读实质原件并完成19/10/8和15/10清单与实际raw比较；LAR后加尖锐fibre界未在唯一pilot中作为判据实测，限制不改。算术SPR作者已给出全参数双轴证明且唯一35盒／34,636状态小检验通过，正交新的非贡献者准入desk判定旧机制扣除和来源边界；尚未准入。保留0、完成0、空缺5。正在准备只含已闭合证据的限定私有检查点，算术及其gate在进行部分不纳入；尚未发生新轮Git写入。
 
+最新完成节点：[MPR/SPR及独立gate原件接收](docs/papers211_215_sequence/scouting/spr_root_reception/RECEPTION.md)与[UUC/CGM原件接收](docs/papers211_215_sequence/scouting/root_reception/TRANSPORT_GEOMETRY_RECEPTION.md)均已闭合，累计关闭22次literal尝试、零reserve。SPR时间定理有效，但逆像剩余不足第二独立轴，Critical价值及Major原始来源finding仍open；UUC仅通用势函数/隐式逆像，CGM精确重复旧MG带标签提升。root实际核完作者52/10、gate19/74、UUC13/17、CGM59/10清单与原始比较，未新增科学运行。当前保留0、完成0、空缺5；继续新序列／有限函数侦察，不重开这些负结果。
+
+新轮首个[限定私有检查点及root接受](docs/papers211_215_sequence/qa/root_checkpoint_inspection/RECEPTION.md)已完成：`f6f3560875f75025624367305b8a9328cbce712e`正常推送并实际远端确认，117文件／3,926,033字节、116新增／1修改／0删除、无未选定变化；82原生命令、四阶段完整清单及六条新只读查询闭合。该ref只含先前18项已关闭时点，明确排除算术、SPR gate、UUC/CGM及后续新线，本回执与22项新索引亦不在自身所指提交。18项旧中央原件已有执行包物理冻结；原镜像和全部旧失败不改，无论文完成或外部开放。
+
+最新完成节点：[序列／有限函数／谷值吸收原件接收](docs/papers211_215_sequence/scouting/root_reception/SEQUENCE_FUNCTION_VALLEY_RECEPTION.md)已闭合，再关闭6次literal尝试，累计28、零reserve。SIF/MCB为完整共轭，CEP0/CEP1仅正规化及绕环，HDA虽有精确深度与尖锐时钟但缺一般目标逆像轴；谷值吸收的修正像集定理有效，尚无尖锐资源时钟或独立极值。root核完11/35/41完整payload、12/9/8历史／副本及实际原生记录，不是新科学运行或稿审；root是谷值证明贡献者，旧假像集判据及HTTP406等失败保留。当前仍保留0、完成0、空缺5，另探资源分配和关联改写。f6f35608仍只覆盖18项旧时点，本段与这些新接收均未声称在该提交内。
+
+最新完成节点：[SDS与root两条重复规则接收](docs/papers211_215_sequence/scouting/root_reception/INCIDENCE_PROFILE_RECEPTION.md)已闭合，累计关闭31次literal尝试、零reserve。SDS周期分类成立但缺全目标逆像轴；C4/PMT及CP为精确旧规则。root核完38/10、4/4清单／输入及六原生命令、四raw切片，未新增科学运行。旧PMT固定总质量像集措辞被(2)／质量3的符号反例否定，新限制单列保留，旧负结果原件不改，不据此重开无已知依赖的接受论文。保留0、完成0、空缺5；继续资源分配、有理耦合及离散几何gap desk。私有ref仍为旧18项f6f35608，当前31项不倒填进旧提交。
+
+最新完成节点：[资源分配／有理耦合及几何gap原件接收](docs/papers211_215_sequence/scouting/root_reception/ALLOCATION_RATIONAL_GEOMETRY_RECEPTION.md)已闭合，MCA/QSC/CAC再关闭三次literal，几何desk零新增，累计34、零reserve。MCA缺残余尖锐极值，QSC缺回注后的完整时序，CAC四步归零有效但逆像机制已耗尽；几何台球周长猜想已有直接来源解决。root核完60/47/41 payload及8/12/8历史集合和实际native/raw绑定；MCA唯一5704状态pilot仍是作者证据，不是root新科学运行。首次root错误要求渲染stderr为空的失败及真实49字节glyph警告完整保留，修正后通过，旧原件不改。root是MCA证明贡献者。当前仍保留0、完成0、空缺5，另查公和gcd与明确重复的cluster规则；私有ref仍为18项旧时点f6f35608。
+
 ### 上一轮完成结论（原件与同步均闭合）
 
 - 当前批次已经实际完成并完成限定私有同步：**P205 / P207 / P208 / P209 / P210，恰好五篇内部完成**，保留5、完成5、空缺0，保留论文当前零open finding。状态为 `EXACT_FIVE_COMPLETE / PRIVATE_SYNC_CONFIRMED / OWNER_AMBER / HOLD_EXTERNAL`。逐篇定理进展和边界见[最终 QA](docs/papers204_208_sequence/FINAL_QA_REPORT.md)，当前交接见[批次索引](docs/papers204_208_sequence/PIPELINE_STATE.md)。P204/P206 的淘汰稿和不利审查原件不动；本轮无剩余义务，没有第42线或另一批，不因旧 pending 段重开已接受任务。
@@ -63,7 +73,7 @@ P200 的窄/方阵 sharp 时钟仍未证明。P203 的历史 Stage1 中间代码
 
 工作区 `/root/autodl-tmp/symbolic_dynamics` 本身没有 Git；镜像是 `/root/autodl-tmp/hilbert-polya-structure`。新论文 P187 起在镜像根 `papers/`，较早已跟踪材料多在 `symbolic_dynamics/` 下。实际完成提交与远端同步分别记录，不能把 WIP 备份当验收。
 
-本次隔离同步使用 `/root/symbolic-dynamics-private-sync-accepted-20260907.git` 的bare库，最新已接受ref为cd6066f4（父36e7b365）；原镜像仍保留a380d247，首个捕获overlay仍保留被拒1f028072。三者不可互换，bare不能运行工作树状态检查；后续Git动作须以[最新实际同步角色记录](docs/papers204_208_sequence/qa/FIVE_PRIVATE_SYNC_ROOT_INSPECTION.md)及其历史原件解析精确目的库和选定范围。
+本次隔离同步使用 `/root/symbolic-dynamics-private-sync-accepted-20260907.git` 的bare库，最新已接受ref为f6f35608（父cd6066f4）；原镜像仍保留a380d247，首个捕获overlay仍保留被拒1f028072。三者不可互换，bare不能运行工作树状态检查；后续Git动作须以[最新实际同步角色记录](docs/papers211_215_sequence/qa/root_checkpoint_inspection/RECEPTION.md)及其历史原件解析精确目的库和选定范围。
 
 编号异常、P51–P56 缺失、P57–P66 历史同步缺口、双 96 和完整路径映射见 [历史与边界](docs/research_state/HISTORY_AND_CAVEATS.md)。该文及 [整理前快照](docs/research_state/ARTIFACT_SNAPSHOT_2026-09-05.json) 保持原基线，190 个不同编号材料包不是实时完成总数。
 

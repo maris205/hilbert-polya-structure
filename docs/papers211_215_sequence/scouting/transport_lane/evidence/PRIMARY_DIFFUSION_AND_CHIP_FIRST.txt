@@ -1,0 +1,372 @@
+ (https://dmtcs.episciences.org/4214/pdf)
+citeturn9920view0 [wordlim: 200] Crawled: last month; Content type: application/pdf; Number of pages: 18; Source: open({"ref_id":"https://dmtcs.episciences.org/4214/pdf","lineno":null}); Total lines: 894
+L0@P0: Discrete Mathematics and Theoretical Computer Science DMTCS vol. 20:1, 2018, #4
+L1@P0: A Variation on Chip-Firing: the diffusion game∗
+L2@P0: C.Duffy1† T.F Lidbetter2 ‡ M.E. Messinger2 § R.J. Nowakowski3 ¶
+L3@P0: 1 Department of Mathematics and Statistics, University of Saskatchewan
+L4@P0: 2 Department of Mathematics and Computer Science, Mount Allison University
+L5@P0: 3 Department of Mathematics and Statistics, Dalhousie University
+L6@P0: received 20th Sep. 2016, revised 19thApr. 2017, 15th Dec. 2017, accepted 19th Dec. 2017.
+L7@P0: We introduce a natural variant of the parallel chip-firing game, called the diffusion game. Chips are initially assigned
+L8@P0: to vertices of a graph. At every step, all vertices simultaneously send one chip to each neighbour with fewer chips.
+L9@P0: As the dynamics of the parallel chip-firing game occur on a finite set the process is inherently periodic. However the
+L10@P0: diffusion game is not obviously periodic: even if 2|E(G)| chips are assigned to vertices of graph G, there may exist
+L11@P0: time steps where some vertices have a negative number of chips. We investigate the process, prove periodicity for a
+L12@P0: number of graph classes, and pose some questions for future research.
+L13@P0: Keywords: chip-firing, discrete-time graph processes
+L14@P0: 1 Introduction
+L15@P0: Each vertex of a graph is assigned a finite integral number of chips. The chips are then redistributed via a
+L16@P0: stepwise parallel process where at each step all vertices simultaneously send one chip to each neighbour
+L17@P0: with fewer chips. If the chips are thought of as molecules, then this process models diffusion: the movement of molecules from regions of high concentration to regions of low concentration. As a result, the
+L18@P0: process described above is termed the diffusion game(i). A natural first question is whether the process is
+L19@P0: necessarily periodic.
+L20@P0: The diffusion game is akin to the Discharging Method, wherein a set of charges, rather than chips,
+L21@P0: are assigned to vertices and then moved around the graph according to a set of rules. The Discharging
+L22@P0: Method is a technique best known for its use in the proof of the famous Four Colour Theorem, but has
+L23@P0: been used in graph theoretic proofs for over a century. An overview of this technique is given by Cranston
+L24@P0: and West (2016). The diffusion game is also a natural variation of the well-studied Chip-Firing Game.
+L25@P0: Chip-firing games on graphs provide a curious area of study for both their mathematical connections
+L26@P0: ∗The authors wish to acknowledge the referees for their corrections and suggestions. The clarity of the exposition herein is much
+L27@P0: improved as a result of the review process.
+L28@P0: †Support from AARMS
+L29@P0: ‡Support from NSERC (USRA 2015)
+L30@P0: §Support from NSERC (356119-2011)
+L31@P0: ¶Support from NSERC (4139-2014)
+L32@P0: (i) We invite the reader to think of the chips as e 1 coins and consider if the rich always stay rich in this model.
+L33@P0: ISSN 1365–8050
+L34@P0: c 2018 by the author(s) Distributed under a Creative Commons Attribution 4.0 International License
+L35@P0-1: arXiv:1609.05792v5 [cs.DM] 15 Jan 20182 C.Duffy, T.F Lidbetter , M.E. Messinger , R.J. Nowakowski
+L36@P1: and their applications in modeling physical phenomena. Applications include modeling traffic patterns,
+L37@P1: the Tutte polynomial, critical groups of graphs, stochastic processes and graph cleaning (see Gaspers
+L38@P1: et al. (2009, 2010); Kayll and Perkins (2013) and Messinger et al. (2008)). In the (sequential) chip-firing
+L39@P1: game (see Bjorner et al. (1991)), every vertex in a graph is initially assigned a non-negative integral ¨
+L40@P1: number of chips. At each step, one vertex with at least degree-many chips is “fired”; whereupon it
+L41@P1: sends one chip to each of its neighbours. This firing of vertices continues as long as there is a vertex
+L42@P1: with at least degree-many chips. The parallel chip-firing game has been studied by Bitar and Goles
+L43@P1: (1992); Kiwi et al. (1994) and Levine (2011): at each step, every vertex with at least degree-many
+L44@P1: chips is fired simultaneously. It is easy to see that in both the parallel chip-firing game and the diffusion
+L45@P1: game, the process is completely determined by the initial distribution of chips. Hence, the term “game”
+L46@P1: is a misnomer; however we refer to this new variation as the diffusion “game” because of this close
+L47@P1: relationship to the parallel chip-firing game. Since the total number of chips C remains constant and it
+L48@P1: is not possible for a vertex to have a negative number of chips, the dynamics for parallel chip-firing on
+L49@P1: a graph G occur in the finite set {0, 1, . . . , C}|V (G)|and so parallel chip-firing games eventually exhibit
+L50@P1: periodic behaviour. A number of papers have studied the periodicity in parallel chip-firing and results
+L51@P1: are known about the periods of trees, cycles, complete graphs, and complete bipartite graphs (see Bitar
+L52@P1: and Goles (1992); Dall’Asta (2006); Kiwi et al. (1994); Kominers and Kominers (2010); Jiang (2010) and
+L53@P1: Levine (2011)). It is important to note that although Bitar and Goles (1992) conjectured that on a graph G
+L54@P1: any chip configuration is eventually periodic with period at most |V (G)|, Kiwi et al. (1994) provided an
+L55@P1: example of a graph with period exponential in |V (G)|.
+L56@P1: We now formally define the diffusion game. Let G be a graph with V (G) = {v1, v2, . . . , vn}. A chip
+L57@P1: configuration on G is a vector ct = (ct(v1), ct(v2), . . . , ct(vn)) ∈ Z
+L58@P1: n, where c0(vi) denotes the number
+L59@P1: of chips at vertex viin the initial configuration and ct(vi) ∈ Z is the number of chips on vertex vi at step t.
+L60@P1: We define the parallel dynamics as
+L61@P1: ct+1(vi) = ct(vi) −
+L62@P1: 
+L63@P1: 
+L64@P1: 
+L65@P1: 
+L66@P1: 
+L67@P1: {vj ∈ N(vi) : ct(vi) > ct(vj )}
+L68@P1: 
+L69@P1: 
+L70@P1: 
+L71@P1: 
+L72@P1: 
+L73@P1:  +
+L74@P1: 
+L75@P1: 
+L76@P1: 
+L77@P1: 
+L78@P1: 
+L79@P1: {vj ∈ N(vi) : ct(vi) < ct(vj )}
+L80@P1: 
+L81@P1: 
+L82@P1: 
+L83@P1: 
+L84@P1: 
+L85@P1: . (1)
+L86@P1: We refer to this dynamic as firing. We note that Equation (1) is applied synchronously on V (G). It is
+L87@P1: important to observe that P
+L88@P1: v∈V (G)
+L89@P1: c0(v) = P
+L90@P1: v∈V (G)
+L91@P1: ci(v) for all i ≥ 0. We further observe that the
+L92@P1: dynamics are unchanged if an additional constant number of chips is added to each vertex. As such we
+L93@P1: may assume without loss of generality that P
+L94@P1: v∈V (G)
+L95@P1: ci(v) = C ≥ 0 for all i ≥ 0.
+L96@P1: For neighbours u, v ∈ V (G) such that ck−1(u) > ck−1(v) we say that in the k
+L97@P1: th firing u sends a
+L98@P1: chip to v and v receives a chip from u. When a chip configuration has negative entries the analogy of
+L99@P1: the process as a redistribution of chips on a graph no longer holds. In this case we may consider a chip
+L100@P1: configuration to be a function that assigns an integer value to each vertex. Alternatively we may consider
+L101@P1: entries of the chip configuration to model charge as in Cranston and West (2016). The application of
+L102@P1: the parallel dynamics in Equation (1) does not depend on the interpretation of chips as physical objects.
+L103@P1: However, if the parallel dynamics necessarily lead to a periodic sequence of chip configurations, we may
+L104@P1: add a constant so that all ci(v) ≥ 0 for all v ∈ V and all i ≥ 0 to restore the analogy. It is unknown,
+L105@P1: however, if the parallel dynamics always lead to a periodic process.
+L106@P1: Let c0 be an initial chip configuration on some graph G. We observe that if for some p ∈ N, ct = ct+p,
+L107@P1: then the dynamics imply ct+q = ct+p+q for any q ∈ N. We call the minimum such p the period length
+L108@P1: and given p, we call the minimum such t the length of the pre-period. In this case, we say that c0 exhibits
+L109@P1-2: eventual periodic behaviour with period length p and pre-period length t.A Variation on Chip-Firing: the diffusion game 3
+L110@P2: v1
+L111@P2: v4
+L112@P2: v3
+L113@P2: v5
+L114@P2: v2
+L115@P2: v6
+L116@P2: t ct(v1) ct(v2) ct(v3) ct(v4) ct(v5) ct(v6)
+L117@P2: 0 6 10 5 0 4 8
+L118@P2: 1 555369
+L119@P2: 2 665628
+L120@P2: 3 457467
+L121@P2: 4 763746
+L122@P2: 5 467466
+L123@P2: 6 753756
+L124@P2: 7 477465
+L125@P2: 8 734766
+L126@P2: 9 486465
+L127@P2: 10 735756
+L128@P2: 11 486465
+L129@P2: 1
+L130@P2: Fig. 1: An example of the diffusion game.
+L131@P2: We observe that if ct−1 = ct for any t ≥ 1, then all vertices have the same number of chips (and no chips
+L132@P2: moved during the t
+L133@P2: th firing). Such situations can be thought of as steady-state configurations or stable
+L134@P2: configurations. We refer to such configurations as fixed. If a graph G with an initial configuration c0
+L135@P2: eventually proceeds to a configuration ct that is fixed, we say that G with initial configuration c0 is
+L136@P2: eventually fixed.
+L137@P2: As an example, consider the graph shown in Figure 1 with initial configuration of chips c0 = (6, 10, 5, 0, 4, 8)
+L138@P2: is given in the top row of Figure 1. In the first firing, v1 sends a chip to each of v3 and v5; v2 sends a chip
+L139@P2: to each of its neighbours; v3 sends a chip to v4 and v5; and v5 sends a chip to v4. Observe that since v6
+L140@P2: and v4 each are the vertices with least value in their closed neighbourhoods, in the first firing they only
+L141@P2: receive chips. The resulting configuration is (5, 5, 5, 3, 6, 9). Observe that c9 = c11. Thus with initial
+L142@P2: configuration c0 = (6, 10, 5, 0, 4, 8), the chip configurations on this graph exhibit periodic behaviour with
+L143@P2: period length 2 and pre-period length 9.
+L144@P2: As a second example, consider the graph shown in Figure 2. For the initial chip configuration, each
+L145@P2: vertex is assigned degree-many chips. In the first firing, the vertices of degree 7 send one chip to each
+L146@P2: neighbouring leaf. So at the end of step 1, the vertices of degree 7 each have 3 chips and the leaves each
+L147@P2: have 2 chips. In the second firing, the vertices of degree 7 each send one chip to each neighbouring leaf.
+L148@P2: Then at the end of step 2, the vertices of degree 7 each have −1 chips and the leaves each have 3 chips.
+L149@P2: (In the third firing, the leaves each send a chip to the degree 7 vertices we find the chip configurations
+L150@P2: exhibit periodic behaviour with pre-period length 1 and period length 2). Thus, even with using a total
+L151@P2: of 2|E(G)| chips in the initial configuration, vertices may have a negative number of chips in some steps.
+L152@P2: This is very different behaviour from the parallel chip-firing game, where at each step, every vertex has at
+L153@P2: least 0 chips and thus, the dynamics occur on a finite set and ensure periodicity. These observations lead
+L154@P2: to a fundamental question.
+L155@P2: Question 1 Let G be a finite graph with an initial configuration. Do the chip configurations on G eventually exhibit periodic behaviour?
+L156@P2: Simulation of the process on a 50 × 100 Cartesian grid where each vertex had a random initial value
+L157@P2-3: of between 1 and 200 chips gave a process that was eventually periodic with period 2 in each of 2004 C.Duffy, T.F Lidbetter , M.E. Messinger , R.J. Nowakowski
+L158@P3: Fig. 2: An example of a graph that has a chip configuration leading to vertices with negative chips.
+L159@P3: simulations. In fact, every configuration and graph the authors considered was fixed or has period length 2
+L160@P3: after some pre-period. With this in mind, we say that a graph, together with an initial configuration is tight
+L161@P3: if the resulting process is eventually (i.e., after some pre-period) fixed or periodic with period length 2.
+L162@P3: Conjecture 1 Every finite graph and initial configuration is tight.
+L163@P3: In Section 2, we partially answer Question 1 affirmatively for particular families of graphs. As evidence
+L164@P3: for Conjecture 1, in Section 3, we consider some natural initial distributions of chips and show that some
+L165@P3: families of graphs do eventually exhibit periodic behaviour with period length 2. Finally, in Section 4, we
+L166@P3: conclude with a brief exploration of some of the open questions that remain.
+L167@P3: Given any finite graph and fixed number C of chips, we can consider an auxiliary directed graph A(G, C)
+L168@P3: that encodes the chip configurations. Each vertex of A(G, C) is a chip configuration where the total
+L169@P3: number of chips is C. For a pair of vertices u, v ∈ V (A(G, C)), there is an arc from u to v if applying the
+L170@P3: dynamics of the chip configuration corresponding to u yields the configuration at v. Observe that since the
+L171@P3: process is deterministic, the out-degree of any vertex is 1, but the in-degree can be arbitrary. Consider P3,
+L172@P3: for example, and let ct = (ct(x), ct(y), ct(z)) where deg(y) = 2. If ct = (1, 1, 2) then ct−1 could
+L173@P3: have been (0, 1, 3), (0, 2, 2), or (0, 3, 1); thus in the auxiliary graph A(P3, 4), the vertex corresponding
+L174@P3: to configuration (1, 1, 2) has three parent vertices. Note that Question 1 is equivalent to asking if every
+L175@P3: directed path in A(G, C) is finite. Conjecture 1 is equivalent to saying that each strongly connected
+L176@P3: component of A(G, C) has cardinality 1 or 2.
+L177@P3: 2 General Periodicity Results
+L178@P3: In this section, we affirm Question 1 for some well-known classes of graphs. To do this, we show that
+L179@P3: the values for ct = (ct(v1), ct(v2), . . . , ct(vn)) are in a finite set. In other words, we show for every
+L180@P3: integer t ≥ 0, the number of chips on any vertex in such graphs is always in a finite interval. As there
+L181@P3: will be a finite number of distinct configurations in the process and ct+1 is determined by ct, and as the
+L182@P3: diffusion game continues indefinitely, the configurations must eventually exhibit periodic behaviour. This
+L183@P3: approach will be used for paths, cycles, wheels, complete graphs, and complete bipartite graphs. We begin
+L184@P3: with a few definitions and preliminary results in Section 2.1.
+L185@P3: 2.1 Definitions and Preliminary Results
+L186@P3: Let G be a graph with initial configuration c0. With respect to c0, we say that v ∈ V (G) is bounded
+L187@P3-4: above if there exists M ∈ Z such that for every integer t ≥ 0, we have ct(v) ≤ M. Similarly, withA Variation on Chip-Firing: the diffusion game 5
+L188@P4: respect to c0, we say that v is bounded below if there exists m ∈ Z such that for every integer t ≥ 0, we
+L189@P4: have ct(v) ≥ m. If v is bounded both above and below, then v is bounded; otherwise v is unbounded.
+L190@P4: Lemma 2.1 Let G be a graph with an initial configuration. Every vertex in G is bounded if and only if
+L191@P4: the chip configurations eventually exhibit periodic behaviour.
+L192@P4: Proof: Let G be a graph with initial configuration c0. If every vertex is bounded, there exists M ∈ Z
+L193@P4: +
+L194@P4: such that −M ≤ ct(v) ≤ M for all v ∈ V (G). Thus, the values for ct are in a finite set and so the chip
+L195@P4: configurations must eventually exhibit periodic behaviour.
+L196@P4: For the other direction, suppose vertex v is not bounded above. Then for each M ∈ Z, there exists t ≥
+L197@P4: 0 such that ct(v) > M. Since v takes on an infinite number of positive values, the chip configurations
+L198@P4: will never be periodic. ✷
+L199@P4: In fact, the chip configurations will eventually be periodic if there is a bound on the chip difference
+L200@P4: between every pair of adjacent vertices. We use the notation u ∼ v to indicate that vertices u and v are
+L201@P4: adjacent.
+L202@P4: Lemma 2.2 Let G be a graph with an initial configuration. If there exists a constant M such that
+L203@P4: |ct(u) − ct(v)| ≤ M
+L204@P4: for all u ∼ v and all t ≥ 0, then the chip configurations will eventually exhibit periodic behaviour.
+L205@P4: Proof: Let G = (V, E) be a graph with an initial chip configuration and let |V (G)| = n. Assume,
+L206@P4: without loss of generality, that P
+L207@P4: v∈V (G)
+L208@P4: c0(v) = C ≥ 0 and recall that the total number of chips, C, does
+L209@P4: not change when the parallel dynamics are applied. Clearly for all t ≥ 0,
+L210@P4: minv∈V ct(v) ≤ C/n ≤ max
+L211@P4: v∈V
+L212@P4: ct(v) ≤ min
+L213@P4: v∈V
+L214@P4: ct(v) + diam(G) · M, (2)
+L215@P4: where diam(G) is the diameter of G and M is a constant such that |ct(u) − ct(v)| ≤ M for all neighbours u, v and t ≥ 0. It follows that
+L216@P4: ct(v)| ≤ max 
+L217@P4: 
+L218@P4: 
+L219@P4: 
+L220@P4: 
+L221@P4: 
+L222@P4: 
+L223@P4: 
+L224@P4: diam(G) · M +
+L225@P4: C
+L226@P4: n
+L227@P4: 
+L228@P4: 
+L229@P4: 
+L230@P4: 
+L231@P4: 
+L232@P4: 
+L233@P4: 
+L234@P4: 
+L235@P4: ,
+L236@P4: 
+L237@P4: 
+L238@P4: 
+L239@P4: 
+L240@P4: 
+L241@P4: 
+L242@P4: 
+L243@P4: 
+L244@P4: C
+L245@P4: n
+L246@P4: − diam(G) · M
+L247@P4: 
+L248@P4: 
+L249@P4: 
+L250@P4: 
+L251@P4: 
+L252@P4: 
+L253@P4: 
+L254@P4: 
+L255@P4: 
+L256@P4: (3)
+L257@P4: for all t ≥ 0 and for all v. The result now follows from Lemma 2.1.
+L258@P4: ✷
+L259@P4: We next prove a useful implication of having an unbounded vertex.
+L260@P4: Lemma 2.3 Let G be a graph with an initial chip configuration. If v is unbounded, then there exists u ∈
+L261@P4: N(v) that is also unbounded.
+L262@P4: Proof: Let G be a graph with an initial chip configuration. Suppose v ∈ V (G) is unbounded above
+L263@P4: and, for a contradiction, assume all vertices in N(v) = {v1, v2, . . . , vdeg(v)} are bounded. Then for
+L264@P4: every i ∈ {1, 2, . . . , deg(v)}, there exists a constant Ci such that viis bounded above by Ci.
+L265@P4: Let Cm = max{C1, C2, . . . , Cdeg(v)}. If ct(v) > Cm for some t ≥ 0, then
+L266@P4-5: ct+1(v) = ct(v) − deg(v) < ct(v).6 C.Duffy, T.F Lidbetter , M.E. Messinger , R.J. Nowakowski
+L267@P5: If ct(v) ≤ Cm for some t ≥ 0, then
+L268@P5: ct+1(v) ≤ Cm − 1 + deg(v).
+L269@P5: Thus, the number of chips at v cannot exceed max{c1(v), Cm−1+deg(v)}. Therefore if v is unbounded, v
+L270@P5: must have an unbounded neighbour. ✷
+L271@P5: 2.2 Cycles, Paths, and Wheels
+L272@P5: In this section, we first show that for any finite initial chip configuration on Cn or Pn with n ≥ 3, every
+L273@P5: vertex is bounded, and hence the chip configurations will eventually be periodic (i.e., will be periodic after
+L274@P5: some pre-period of steps).
+L275@P5: Lemma 2.4 Let G be a graph with an initial chip configuration and u, v be adjacent vertices in G
+L276@P5: with deg(u) = 2, deg(v) ∈ {1, 2}. For any integer t ≥ 0,
+L277@P5: |ct+1(u) − ct+1(v)| ≤ max n3, |ct(u) − ct(v)|
+L278@P5: o
+L279@P5: .
+L280@P5: Proof: Let u, v be adjacent vertices in graph G where deg(u) = 2 and deg(v) ∈ {1, 2}. If |ct(u) − ct(v)| < 2,
+L281@P5: then it is easy to see that | ct+1 (u) − ct+1 (v) | ≤ 3. Suppose ct(u) − ct(v) ≥ 2. As ct(u) > ct(v),
+L282@P5: vertex u will send a chip to v and since deg(u) = 2, vertex u sends or receives at most one additional
+L283@P5: chip. Since deg(v) ∈ {1, 2}, vertex v sends or receives at most one additional chip. Then ct+1(u) will
+L284@P5: equal one of: ct(u), ct(u) − 1, ct(u) − 2; and ct+1(v) will equal one of ct(v), ct(v) + 1, ct(v) + 2. By
+L285@P5: considering the possible combinations, the result follows. If ct(v) − ct(u) ≥ 2, a similar argument yields
+L286@P5: the result. ✷
+L287@P5: Theorem 2.5 For any finite initial chip configuration on Pn or Cn with n ≥ 3, the chip configurations
+L288@P5: will eventually exhibit periodic behaviour.
+L289@P5: Proof: Let M0 = | maxv∈V (G){c0(v)}| and N0 = | minv∈V (G){c0(v)}|. By Lemma 2.4, for any adjacent
+L290@P5: vertices u and v,
+L291@P5: |ct+1(u)−ct+1(v)| ≤ max n3, |ct(u)−ct(v)|
+L292@P5: o
+L293@P5: ≤ max n3, |c0(u)−c0(v)|
+L294@P5: o
+L295@P5: ≤ max n3, N0+M0
+L296@P5: o
+L297@P5: (4)
+L298@P5: for all integers t ≥ 0. The result now follows from Lemma 2.2. ✷
+L299@P5: We next show that for any finite initial chip configuration on a wheel graph, the configurations will
+L300@P5: eventually be periodic. Let Wn denote the wheel graph on n vertices.
+L301@P5: Lemma 2.6 For any finite initial chip configuration on Wn with n ≥ 4, let u, v be adjacent vertices of
+L302@P5: degree 3. For any integer t ≥ 0,
+L303@P5: (a) if |ct(u) − ct(v)| < 3, then |ct+1(u) − ct+1(v)| ≤ 6 and
+L304@P5-6: (b) if |ct(u) − ct(v)| ≥ 3, then |ct+1(u) − ct+1(v)| ≤ |ct(u) − ct(v)|.A Variation on Chip-Firing: the diffusion game 7
+L305@P6: Proof: Let u, v be adjacent vertices of degree 3 and let w be the universal vertex in Wn. We claim
+L306@P6: the difference between |ct(u) − ct(v)| and |ct+1(u) − ct+1(v)| is at most 4. Without loss of generality,
+L307@P6: assume ct(u) > ct(v). Let ct(v) = ct(u) + `. Since u necessarily sends one chip to v in this round, we
+L308@P6: have ct+1(u) ≤ ct(u) + 2 and ct+1(v) ≥ ct(v) − 2. Therefore ct+1(u) − ct+1(v) ≤ ` + 4. From this it
+L309@P6: follows that the difference between |ct(u) − ct(v)| and |ct+1(u) − ct+1(v)| is at most 4. Thus, (a) holds.
+L310@P6: For some t ≥ 0, suppose without loss of generality that ct(u) − ct(v) ≥ 3. During the t + 1th firing, a
+L311@P6: chip is sent from u to v and we have
+L312@P6: ct+1(u) ∈
+L313@P6: n
+L314@P6: ct(u) − 3, ct(u) − 2, ct(u) − 1, ct(u), ct(u) + 1o, and
+L315@P6: ct+1(v) ∈
+L316@P6: n
+L317@P6: ct(v) − 1, ct(v), ct(v) + 1, ct(v) + 2, ct(v) + 3o.
+L318@P6: Then ct+1(u) = ct(u) + x and ct+1(v) = ct(v) + y, where x ∈ {−3, −2, −1, 0, 1} and y ∈
+L319@P6: {−1, 0, 1, 2, 3}. We observe that y − x ≤ 6. If |ct+1(u) − ct+1(v)| = ct+1(v) − ct+1(u), we have
+L320@P6: y − x ≤ 6 ≤ 2
+L321@P6: 
+L322@P6: ct(u) − ct(v)
+L323@P6: 
+L324@P6: ⇐⇒ ct(v) + y
+L325@P6: 
+L326@P6: −
+L327@P6: 
+L328@P6: ct(u) + x
+L329@P6: 
+L330@P6: ≤ ct(u) − ct(v)
+L331@P6: ⇐⇒
+L332@P6: 
+L333@P6: 
+L334@P6: 
+L335@P6: 
+L336@P6: 
+L337@P6: 
+L338@P6: ct+1(u) − ct+1(v)
+L339@P6: 
+L340@P6: 
+L341@P6: 
+L342@P6: 
+L343@P6: 
+L344@P6:  ≤
+L345@P6: 
+L346@P6: 
+L347@P6: 
+L348@P6: 
+L349@P6: 
+L350@P6: 
+L351@P6: ct(u) − ct(v)
+L352@P6: 
+L353@P6: 
+L354@P6: 
+L355@P6: 
+L356@P6: 
+L357@P6: .
+L358@P6: Otherwise,
+L359@P6: |ct+1(u) − ct+1(v)| = ct+1(u) − ct+1(v) = ct(u) − ct(v) + x − y ≤ |ct(u) − ct(v)|.
+L360@P6: The last inequality results from the fact that x − y ≤ 0. To see this, suppose x > y. Then x ∈ {0, 1}
+L361@P6: and ct(w) ≥ ct(u) ≥ ct(v), which implies ct+1(v) ≥ ct(v) + 1 and y ∈ {1, 2, 3}. This contradicts the
+L362@P6: assumption x > y. ✷
+L363@P6: Theorem 2.7 For any finite initial chip distribution on Wn with n ≥ 4, the chip configurations will
+L364@P6: eventually exhibit periodic behaviour.
+L365@P6: Proof: We show the number of chips on neighbouring vertices is bounded at each step. Label the vertices
+L366@P6: of Wn as w, v0, v1, . . . , vn−2 where w ∼ vi for 0 ≤ i ≤ n − 2 and vi ∼ vi+1 mod n−1.
+--------------------------------------------------------------------------------
+Periods and Atomic Firing Sequences of Parallel Chip-Firing Games on Directed Graphs (https://arxiv.org/html/2407.15889)
+citeturn9920view1 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://arxiv.org/html/2407.15889","lineno":null}); Total lines: 474

@@ -1,0 +1,15 @@
+def midpoint(n):
+    states = list(product(range(2), repeat=n))
+    def update(a):
+        support = [i for i in range(n) if a[i]]
+        output = [0] * n
+        for j, vertex in enumerate(support):
+            following = support[(j+1) % len(support)]
+            gap = (following-vertex) % n or n
+            target = (vertex+gap//2) % n
+            assert output[target] == 0
+            output[target] = 1
+        return tuple(output)
+    def check(states, successor, fibres, lookup, depth):
+        assert all(sum(states[i]) == sum(states[j]) for i, j in enumerate(successor))
+    report("MG", {"circle_size": n}, states, update, check)

@@ -1,0 +1,632 @@
+                                     Analysis of the Brun Gcd Algorithm
+
+                      Valérie Berthé                                                  Loïck Lhote                        Brigitte Vallée
+              IRIF (CNRS and Université                                   GREYC (CNRS, ENSICAEN,                  GREYC (CNRS, ENSICAEN,
+                Paris Diderot), France                                     and Université of Caen),                and Université of Caen),
+            berthe@liafa.univ-paris-                                               France                                  France
+                  diderot.fr                                               loick.lhote@ensicaen.fr               brigitte.vallee@unicaen.fr
+
+
+ABSTRACT                                                                                      in [12], which produce simultaneous diophantine approxima-
+We introduce and study a multiple gcd algorithm that is                                       tions of a real vector. Then, the literature, for instance in
+a natural extension of the usual Euclid algorithm, and co-                                    [9, 5], mainly focuses on the convergence of these approxi-
+incides with it for two entries; it performs Euclidean divi-                                  mations, closely related to the Lyapunov exponents of the
+sions, between the largest entry and the second largest en-                                   underlying dynamical systems. These algorithms have also
+try, and then re-orderings. This is the discrete version of a                                 important applications to discrete geometry [3].
+multidimensional continued fraction algorithm due to Brun.                                    With each multidimensional continued fraction algorithm, a
+We perform the average-case analysis of this algorithm, and                                   gcd algorithm may be of course associated. However, the
+prove that the mean number of steps is linear with respect                                    analysis of such a class of gcd algorithms has not been yet
+to the size of the entry. The method relies on dynamical                                      considered. This is our general project, and we begin by the
+analysis, and is based on the study of the underlying Brun                                    BrunGcd Algorithm, as it is one of the most “natural” algo-
+dynamical system. The dominant constant of the analysis                                       rithms of this class, and shares many important properties
+is related to the entropy of the system. We also compare                                      with the Euclid dynamical system based on the Gauss map.
+this algorithm to another extension of the Euclid algorithm,                                  Main results. We perform the probabilistic analysis of the
+proposed by Knuth, and already analyzed by the authors.                                       BrunGcd algorithm. We first focus on the total number of
+                                                                                              steps and prove that it is on average linear in the size of the
+                                                                                              entries. The dominant constant equals (d + 1)/Ed where Ed
+Keywords                                                                                      is the entropy of the Brun dynamical system. This entropy
+GCD algorithms; Brun continued fractions; average-case ana-                                   is not precisely studied in the literature, but there exists
+lysis; analytic combinatorics; Dirichlet generating functions;                                a conjecture in [7] that states that Ed is Θ(1) for d → ∞.
+dynamical analysis; transfer operators; Tauberian theorems                                    However, we show that Ed is ∼ log d for d → ∞, so that the
+Acknowledgments. Thanks to the ANR DynA3S (ANR-                                               dominant constant for the number of steps grows as d/ log d.
+13-BS02-0003) and AleaEnAmSud AmSud-STIC Projects.                                            We then compare the BrunGcd with another multiple gcd al-
+                                                                                              gorithm, the PlainGcd algorithm, described in Knuth’s book
+                                                                                              [8], which deals with the classical one-dimensional Euclid
+1.     INTRODUCTION.                                                                          dynamical system. The authors have already analyzed this
+General Context. We study a multiple gcd algorithm                                            algorithm in [4], and prove that the mean number of steps is
+that is a natural extension of the usual Euclid algorithm                                     also linear in the size of the entries. However, the dominant
+for (d + 1) integers, and coincides with it for d = 1. This is                                constant is independent of the dimension d and equals 2/E1 ,
+a discrete version of a multidimensional continued fraction                                   where E1 is the entropy of the Euclid dynamical system. We
+algorithm, that is itself based on a dynamical system, the                                    conclude that the PlainGcd algorithm is much more efficient
+Brun dynamical system, described for instance in [6, 12].                                     than the BrunGcd algorithm, in particular for large d.
+The Brun continued fraction algorithm admits various de-
+                                                                                              We finally explain the inefficiency of the BrunGcd algorithm
+scriptions and appears under various names; it is closely re-
+                                                                                              when d is large: almost all divisions deal with a quotient
+lated to the Podsypanin modified Jacobi–Perron algorithm,
+                                                                                              equal to 1. Then the main operation performed is not a di-
+it is also called the d-dimensional Gauss transformation or
+                                                                                              vision but... a plain subtraction. This is reinforced by the
+the ordered Jacobi–Perron algorithm [7].
+                                                                                              comparison with the subtractive version of the algorithm,
+This dynamical system belongs to the class of multidimen-
+                                                                                              whose number of steps is proven to be also of linear complex-
+sional unimodular continued fraction algorithms, described
+                                                                                              ity. This exhibits two strong differences with the classical
+                                                                                              Gcd algorithm (case d = 1).
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed         Methods. We use here the methods of dynamical anal-
+for profit or commercial advantage and that copies bear this notice and the full cita-        ysis such as developed in [2, 10, 13]: a gcd algorithm is
+tion on the first page. Copyrights for components of this work owned by others than           viewed as a dynamical system, with each iterative step be-
+ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or re-
+publish, to post on servers or to redistribute to lists, requires prior specific permission   ing a linear fractional transformation. Costs of interest are
+and/or a fee. Request permissions from permissions@acm.org.                                   then described with Dirichlet generating functions that are
+ISSAC ’16, July 19–22, 2016, Waterloo, ON, Canada.                                            algebraically related to transfer operators of the system. The
+c 2016 ACM. ISBN 978-1-4503-4380-0/16/07. . . $15.00                                          main analytical property of these series is the existence of a
+DOI: http://dx.doi.org/10.1145/2930889.2930899                                                dominant pole, which is itself closely related to the existence
+of a spectral gap for the corresponding transfer operators.               The algorithm stops at the end of the (d − 1)-th phase with
+The asymptotic extraction of coefficients is then achieved by             an element of Ω(0) which equals the gcd.
+means of Tauberian theorems.
+Plan of the paper. We first introduce the algorithm in                                 BrunGcd(d)
+Section 2 and state the main results. Then, we study in Sec-                           Input : u ∈ Ω(d)
+tion 3 the underlying dynamical system, closely related to                             Ouput: u ∈ N
+the Brun dynamical system, and we provide a characteriza-                              For ` = 0 to d − 1 do u := Gcd(d,`) (u);
+tion of its rational trajectories. The following two sections
+perform the dynamical analysis of the algorithm, with its                              BrunGcd(d,`)
+two steps, the combinatorial step (Section 4) and the ana-                             Input : u ∈ Ω(d−`)
+lytic step (Section 5). The paper ends with open problems.                             Repeat u := U(d) (u) until u ∈ Ω(d−`−1) .
+
+2.      THE BRUN GCD ALGORITHM.                                           2.2      Worst-case behavior.
+We describe the BrunGcd algorithm, state the main complex-                As will be shown in the long version paper, the worst-case
+ity results, and compare it with the PlainGcd algorithm.                  of the BrunGcd algorithm arises when the quotients are the
+                                                                          smallest possible (all equal to 1, except the last one, equal
+2.1      General description.                                             to 2), and the insertion positions the largest possible. Then,
+The algorithm BrunGcd(d) computes the gcd of (d + 1) posi-                the best worst-case bound involves an algebraic number τd
+tive integers. It deals with the input set Ω(d) which gathers             which extends to general dimensions the inverse of the Golden
+the ordered (d + 1)-uples u formed with positive and distinct             ratio.
+integer numbers
+Ω(d) := {u = (u0 , u1 , . . . , ud ) | u0 > u1 > u2 > . . . > ud > 0} .      Proposition 1. For any fixed positive integer d, consider
+                                                                          the smallest real root τd ∈]0, 1[ of the polynomial z d+1 +z−1,
+During the execution of the algorithm, some components                    and, for any integer N, the set of inputs
+“disappear” and the algorithm deals with the disjoint union
+                                 d−1
+                                                                                           Ω(d,N ) := {u ∈ Ω(d) | u0 ≤ N } .              (2)
+                                 M
+                        Γ(d) =         Ω(d−`) .                           Then the maximum number Q(d,N ) of steps of the BrunGcd
+                                 `=0                                      Algorithm on Ω(d,N ) satisfies
+The algorithm BrunGcd(d) performs a sequence of steps, and
+                                                                                                    1
+each step deals with the pair (u0 , u1 ) (that contains the two                     Q(d,N ) ∼              log N   (N → ∞).
+largest entries of u) and the list End u which gathers all the                                  | log τd |
+components of u except u0 ; it divides the first component                When d → ∞, the real τd satisfies 1/| log τd | ∼ (d+1)/ log d.
+u0 by the second component u1 , and creates a remainder v0
+                                           
+                                            u0                            2.3      Probabilistic behavior.
+               v0 := u0 − mu1 , m :=            .
+                                            u1                            We now describe the precise probabilistic behavior of the
+                                                                          algorithm BrunGcd(d) on the set Ω(d,N ) defined in (2).
+Then, the procedure InsDis (v0 , End u) inserts v0 ≥ 0 at a
+suitable position inside the list End u, so that the result re-
+mains an ordered uple of distinct positive values: the second               Theorem 1. When the algorithm BrunGcd acts on the set
+component u1 becomes the largest one, and there are three                 Ω(d,N ) endowed with the uniform distribution, the following
+possible cases for the insertion (or not) of v0 :                         holds when d is fixed and N tends to ∞:
+
+ (G) (Generic case) if v0 is not present in the list End u, this              (a) The total number Ld of steps and the number Md of
+     is a usual insertion;                                                        steps performed during the first phase satisfies
+ (Z) (Zero case) if v0 = 0, we do not insert v0 ;                                                                    d+1
+                                                                                             EN [Ld ] ∼ EN [Md ] ∼       · log N
+                                                                                                                      Ed
+ (E) (Equality case) if v0 6= 0 is already present in the list
+     End u at position i, we do not insert v0 .                                   and involves the entropy Ed of the underlying Brun dy-
+                                                                                  namical system in dimension d.
+In each of the cases (Z) or (E), we do not insert v0 , but
+                                                                                  When d → ∞, the entropy Ed satisfies Ed ∼ log d.
+we memorize the potential insertion position (in case (E),
+                                                                                  The number Rd of steps performed during the remain-
+we would have inserted v0 “in front of” ui ). Finally, each
+                                                                                  der of the execution (after the first phase) has a mean
+step of the algorithm BrunGcd(d) is described by the map
+                                                                                  value that is asymptotic to a constant rd .
+U(d) : Γ(d) → Γ(d) which associates with u
+              U(d) (u) = InsDis (u0 mod u1 , End u) .            (1)          (b) Let Od be the number of quotients equal to 1 during the
+                                                                                  first phase. The ratio between the means EN [Od ] and
+The algorithm BrunGcd(d) described in the following figure                        EN [Md ] is asymptotic to a constant ρd < 1, that tends
+decomposes into d phases, labelled from ` = 0 to ` = d − 1.
+                                                                                  to 1 for d → ∞ with a speed O(2−d/ log d ).
+During each phase, a component is “lost”, and the `-th phase,
+                                                                                  Let Σd be the number of steps of the subtractive version
+denoted by BrunGcd(d,`) , transforms an element of Ω(d−`)
+                                                                                  of BrunGcd during the first phase. The ratio between
+into an element of Ω(d−`−1) . The phase ends as soon as it
+                                                                                  EN [Σd ] and EN [Md ] is asymptotic to a constant σd 2 .
+meets case (Z), or1 case (E), where it looses a component.
+1                                                                         2
+    The (d − 1)-th phase always ends with the case (Z).                       We conjecture the asymptotics σd ∼ ζ(d/ log d) for d → ∞.
+In (a), the total number of steps Ld is proven to remain                                                  process. We use the projection π defined on Γ(d) \ {0} as
+on average linear in the size log N . Moreover, (a) exhibits
+a strong difference between the first phase, where most of                                                                                 1
+                                                                                                                                  π(u) =      End u ,
+the work is done, and the remainder of the execution, where                                                                                u0
+the total number of steps Rd is on average asymptotically                                                 and the closure of the image π(Γd ) is exactly the disjoint
+constant. The PlainGcd algorithm exhibits exactly the same                                                union I(d) of simplexes J(d−`) , defined as
+phenomena, as it is shown in [4].
+                                                                                                           J(d−`) := {x = (x1 , . . . , xd−` ) | 1 ≥ x1 ≥ . . . ≥ xd−` ≥ 0} ,
+The following figure compares the number of steps of the                                                                                 Ld−1
+BrunGcd and the PlainGcd algorithms, as a function of di-                                                 and is written as I(d) := `=0          J(d−`) . Now, the map V(d) :
+mension d, when the binary size is fixed to log2 N = 5000.                                                I(d) → I(d) is defined on each J(d−`) by V(d) (0d−` ) = 0d−` ,
+The complexity of BrunGcd algorithm appears to be sublin-                                                                                              
+                                                                                                                                          1       1
+ear with respect to d (see Section 5), whereas the complexity                                             and V(d) (x) = InsDis                 , End x         for x 6= 0d−` ,
+of the PlainGcd algorithm appears to be independent of d.                                                                                 x1      x1
+                                Comparison PlainGcd/BrunGcd in function of the dimension (N is fixed)     where InsDis(y0 , y) is now extended to I(d) . The map V(d)
+                  160000                                                                                  provides the extension of the conjugate with the projection
+                                  BrunGcd
+                  140000          PlainGcd                                                                π of the map U(d) defined in (1) and used in the BrunGcd(d)
+                  120000                                                                                  algorithm. Indeed, the equality V(d) ◦ π(u) = π ◦ U(d) (u)
+Number of steps
+
+
+
+
+                  100000                                                                                  leads to the definition of V(d) on the set π(Γd ) which is fur-
+                   80000
+                                                                                                          ther extended to I(d) “by continuity”.
+                   60000                                                                                  The dynamical system (Vd , I(d) ) is closely related to the
+                   40000
+                                                                                                          usual Brun dynamical system defined on the simplex J(d)
+                   20000
+                                                                                                          with the transformation T(d) defined by T(d) (0d ) = 0d , and
+                            0
+                                                                                                                                           
+                                              50         100           150           200            250                         1     1
+                                                                                                              T(d) (x) = Ins        , End x       for x 6= 0d ,      (3)
+                                                          dimension (d+1)                                                      x1     x1
+The two dominant constants, the ratio (d + 1)/Ed which in-
+volves the entropy and intervenes in the average case, and                                                where now the map Ins(y0 , y) is the usual insertion “in front
+the ratio 1/| log τd | which arises in the worst-case, both be-                                           of”: it performs as InsDis, without removing zeroes and
+have as d/ log d for d → ∞. This indicates the same behavior                                              equal components, and the cases (Z) and (E) may be gath-
+for the algorithm in the average-case and in the worst-case.                                              ered into a unique case (ZE). There are now only two cases:
+As the worst-case is reached when the quotients are all equal
+                                                                                                           (G) if y0 is not present in the list y, this is an usual inser-
+to 1, this seems to indicate that the BrunGcd Algorithm deals
+                                                                                                               tion;
+with quotients which are very often equal to 1.
+This is indeed the case, described in (b), and also illustrated                                           (ZE) if y0 is already present in the list y, we insert y0 in
+in the following figure, that exhibits the proportion of quo-                                                  front of the block of components equal to y0 .
+tients equal to 1 during the first phase as a function of the
+dimension d. This proportion tends quickly to 1: when                                                     It is clear that V(d) (x) = T(d) (x) except in case (ZE). Then,
+d = 16, more than 99% of the Euclidean divisions are in                                                   the two dynamical systems coincide “almost everywhere”
+fact subtractions and for d = 50, the proportion is 99.99%.                                               and the trajectories which do not meet case (ZE) will be the
+                   ratio Number of subtractions/Number of euclidean divisions during the first phase
+                                                                                                          same for the two systems. But we are mainly interested in
+                   1                                                                                      rational trajectories, and the rational trajectories may meet
+                                                                                       ratio
+                                                                                                          case (ZE) and differ in the two systems. For instance, the
+                  0.9
+                                                                                                          two trajectories of the input π(4, 3, 2, 1) = (3/4, 2/4, 1/4)
+                  0.8
+                                                                                                          are (the inserted component is in bold):
+ratio
+
+
+
+
+                  0.7                                                                                      for V(d) : (3/4, 2/4, 1/4) → (2/3, 1/3) → (1/2, 1/3) →
+                  0.6                                                                                                 (1/3) → (0)
+                  0.5
+                                                                                                           for T(d) : (3/4, 2/4, 1/4) → (2/3, 1/3, 1/3) →
+                                                                                                                      (1/2, 1/2, 1/2) → (1, 1, 0) → (1, 0, 0) → (0, 0, 0) .
+                  0.4
+                        0         10     20        30   40     50      60     70     80        90   100
+                                                        dimension (d+1)                                   However, we will prove in Section 3.3 that a rational tra-
+                                                                                                          jectory under V(d) –which exactly describes an execution of
+3.                  THE UNDERLYING DYNAMICAL SYS-                                                         the BrunGcd(d) algorithm– mainly decomposes into rational
+                                                                                                          trajectories under T(d−`) . Indeed, except possibly at the end
+                    TEM.                                                                                  of each phase, it uses Ins and not InsDis. This is why the
+We first describe a continuous extension of the algorithm,                                                BrunGcd algorithm will use, except at the end of each phase,
+relate it with the Brun dynamical system, and provide an                                                  the Brun dynamical system, which we now describe.
+exact characterization of the trajectories that are related to
+the execution of the algorithm.                                                                           3.2    The Brun dynamical system.
+                                                                                                          The pair (T(d) , J(d) ) defines a dynamical system denoted
+3.1                     Continuous extension of the Gcd algorithm.                                        as D(d) . For any x ∈ J(d) , the map T(d) defined in (3)
+We now extend the BrunGcd(d) algorithm into a continuous                                                  uses digit (m, j) formed with a quotient m(x) ≥ 1 and
+an insertion index j(x) ∈ [1..d]. The set of digits is thus         V(d) (x) = m · End x holds and the inverse branch associates
+A(d) := N∗ × [1..d]. We associate with (m, j) the subset            with the (d − ` − 1)-uple y the (d − `)-uple
+       K(d,m,j) := {x ∈ J(d) | m(x) = m,      j(x) = j} .                                                  1
+                                                                                         z(d−`,m) (y) =      (1, y) .              (7)
+                                                                                                           m
+When (m, j) varies in A(d) , the subsets K(d,m,j) form a topo-
+logical partition of J(d) , and the restriction T(d,m,j) of T(d)    The set Z(d−`) of inverse branches used in case (Z) is thus
+to K(d,m,j) is a bijection from K(d,m,j) onto J(d) , written as                    Z(d−`) = {z(d−`,m) | m ≥ 2} .
+   T(d,m,j) (x1 , x2 , . . . , xd ) =                               Case (E). An equality of the form (1/x1 )−m = xi /x1 holds
+                                                                  with a quotient m ≥ 1 and a potential insertion position3
+                  x2           xj−1 1       xj+1       xd           j = i − 1 < d − `. Then, Case (E) cannot occur for ` = d − 1.
+                     ,...,           , − m,      ,...,      .
+                  x1            x1 x1        x1        x1           The equality V(d) (x) = (End x)/(1−xi ) holds and the inverse
+Its inverse is a bijection from J(d) onto K(d,m,j) written as       branch associates with the (d − ` − 1)-uple y the (d − `)-uple
+      h(d,m,j) (y1 , . . . , yd ) =                                                                         1
+                                                                                    s(d−`,m,j) (y) =           (1, y) .          (8)
+     1        y1                 yj−1   yj+1         yd                                                   m + yj
+          ,           ,...,           ,      ,...,          . (4)
+  m + yj m + yj                m + yj m + yj       m + yj           The set of inverse branches S(d−`) used in case (E) is thus
+Any inverse branch of the map T(d) is called an elementary          the empty set for ` = d − 1 and
+inverse branch (or an inverse branch of depth one) and the            S(d−`) = {s(d−`,m,j) | m ≥ 1, j < d − `} (for ` < d − 1).
+set of the elementary inverse branches is then
+                                                                   In summary, the set of possible inverse branches used during
+              H(d) := h(d,m,j) | (m, j) ∈ A(d) ,       (5)          the last step of the `-th phase is F(d−`) = S(d−`) ∪ Z(d−`) .
+                                           k                        Finally, we have proven the following.
+whereas the inverse branches of the map T(d)  are said to be
+                                  k
+of depth k and belong to the set H(d) . We thus define
+                                                                       Proposition 2. The BrunGcd(d) algorithm builds a bi-
+                                                                    jection between the set Ω(d) of coprime inputs of Ω(d) and
+                    ?
+                             M k
+                   H(d−`) :=     H(d−`) .
+                                k≥0
+                                                                    the set B(d) of inverse branches possibly used by the rational
+                                                                    trajectories of the shift V(d) . This set is written as
+3.3    Return to the Gcd Algorithm                                           B(d) = P(d) ◦ P(d−1) ◦ . . . ◦ P(1) = P(d) ◦ B(d−1)
+On an input u ∈ Ω(d) , the execution of the BrunGcd(d) algo-
+rithm is described by the trajectory of u under the map U(d)        and involves the sets P(d−`) of inverse branches used by the
+which ends at gcd(u). It proves useful to consider one more         BrunGcd(d,`) , characterized as
+step, and now, the trajectory of u under the map U(d) ends                                         ?
+                                                                                         P(d−`) = H(d−`) ◦ F(d−`) .
+at 0. It gives rise to the rational trajectory of the vector
+x := π(u) under V(d) , that also ends at 0. This trajectory
+uses at each step a branch of the map V(d) . And we wish
+                                                                    3.4       Why InsDis rather than Ins ?
+to precisely describe the set B(d) of compositions of inverse       We have decided to deal with the set Γ(d) . We are then led
+branches of the map V(d) which are possibly used by such            to use InsDis to stay inside Γ(d) . But there is a natural
+particular trajectories. Then the equality π(u) = h(0) (for         question: why not dealing with the set Γ(=,d) with possible
+h ∈ B(d) ) gives rise to a bijection between π(Ω(d) ) and B(d) .    blocks of equal non-zero components? Then, we could use
+Moreover, there is also a bijection between π(Ω(d) ) and the        Ins and stay inside Γ(=,d) . This defines another algorithm,
+set of coprime inputs                                               the BrunGcd= (d) algorithm, whose continuous extension di-
+                                                                    rectly leads to the Brun dynamical system. Even though
+               Ω(d) := {u ∈ Ω(d) | gcd(u) = 1} ,             (6)    the whole path seems more natural, we have to memorize
+and thus a bijection between B(d) and Ω(d) .                        the position of each block of equal components, and this
+                                                                    leads to a quite involved analogue set B(=,d) that describes
+We now describe B(d) , and first focus, for each ` ∈ [0..d − 1],    the rational trajectories of the BrunGcd= (d) algorithm.
+on the set P(d−`) used by the part of the trajectory associ-
+ated with the `-th phase, when the iterates of u under U(d)
+belong to Ω(d−`) . Then, the iterates of x under V(d) belong        4.      DYNAMICAL ANALYSIS (I).
+to the simplex J(d−`) . We study in a separate way                  We now begin the analysis of the algorithm, and introduce
+  (a) the steps of the `-phase, which are not the last one,         the main objects: the class of costs of interest, the (Dirichlet)
+  (b) and the last step of the `-phase.                             generating functions, the generating operators. The main re-
+Consider first (a). In this case, such a step does not loose a      sult of this section (Theorem 2) relates generating functions
+component, and only involves a step of type (G). Then, the          and generating operators.
+trajectory uses branches of the map T(d−`) , and each step
+uses possibly any inverse branch in the set H(d−`) defined in
+                                                                    4.1       Additive costs
+(5). Hence, the set of the inverse branches used during the         We consider here costs that are said to be additive. One
+                                                ?
+`-phase, except in the final step, is the set H(d−`) .              begins with a nonnegative elementary cost c defined on each
+                                                                    inverse branch in B(d) of depth one. Such a cost is then
+Consider (b). Now, a component is lost since the insertion          extended in an additive way on B(d) , namely
+is not done, and there are two possible cases.
+                                                                                 c(h1 ◦ h2 ◦ · · · ◦ hp ) := pi=1 c(hi ).
+                                                                                                            P
+Case (Z). The quotient 1/x1 is equal to an integer m ≥ 2,
+                                                                    3
+the position of potential insertion is j = d − `. The equality          We recall that we would have inserted “in front of”.
+Now, a cost C defined on Ω(d) is said to be additive if it is              As its “dominant” series is (1/d!)ζ(s − d), the series S(d) (s)
+associated with such a cost c, and satisfies                               has a dominant simple pole at s = d + 1 with residue 1/d!.
+               C(u) := c(h)       when π(u) = h(0).                        However, such a “dominant” behavior is not known for the
+                                                                           other Dirichlet series. The remaining of the paper is devoted
+Then C(u) equals the total cost of c of the trajectory of                  to this task and is based on the dynamical analysis approach
+π(u) and satisfies C(u) = C(λu) for any integer λ 6= 0.                    where generating functions are expressed with generating
+There are three main additive costs of interest here.                      transfer operators. For this aim, we introduce an interme-
+                                                                           diate tool, the Dirichlet (bivariate) generating function,
+    (i) The total number Cd,` of steps during the `-th phase
+        (except the final step), associated with the character-                                                X wC(u)
+        istic function c of the set H(d−`) ; with the family Cd,` ,                         S(d,C) (s, w) :=                   .         (14)
+                                                                                                               u∈Ωd
+                                                                                                                      ||u||s
+        we return to the number of steps mentioned in Theo-
+        rem 1, as the following relations hold: Ld = Md + Rd               whose derivative is related to the cumulative generating func-
+                                                     d−1
+                                                     X                     tion: the relation Sb(d,C) = ∆[S(d,C) ] holds and involves the
+            Md = 1 + Cd,0 ,      Rd = (d − 1) +            Cd,` .    (9)   functional ∆ defined as
+                                                     `=1
+                                                                                                         ∂
+                                                                                            ∆[A](s) :=      A(s, w)     .            (15)
+    (ii) The number Od of steps of the first phase with a quo-                                          ∂w          w=1
+
+         tient equal to 1, associated with the characteristic func-        As we wish to use the bijection described in Proposition 2,
+                                 (1)
+         tion c of the subset H(d) with quotients equal to 1.              we also introduce the three underlined series that are the
+                                                                           exact counterparts of series defined in (10), (11), (14), now
+(iii) The number Σd of steps of the subtractive algorithm                  with respect to the set Ω(d) of coprime inputs. As C is an
+      during the first phase, associated with the cost c which             additive cost, the non-underlined series are related to their
+      associates with an inverse branch h of the first phase               underlined conterparts as
+      its quotient m.
+                                                                                  S(d) (s)    S(d,C) (s, w)    Sb(d,C) (s)
+The associated elementary costs deal with a specific phase4 :                               =                =             = ζ(s) .      (16)
+                                                                                  S (d) (s)   S (d,C) (s, w)   S (d,C) (s)
+the `-phase for Cd,` and the first phase ` = 0 for Md , Od , Rd .
+                                                                                                               b
+The cost C is said to be concentrated on this phase.
+inverse,                                                                   4.3    Generating operators
+                                                                           Let G be a set of inverse branches; we say that h is a factor
+4.2       Dirichlet generating functions.                                  of G if h is a factor of an element of G, and we denote this
+The (basic) Dirichlet generating function S(d) (s), of the in-             situation as h ∝ G. In the same vein, a set H is said to be a
+put set Ω(d) relative to the length kuk := u0 , is defined as              factor of G if each element of H is a factor of G, and this will
+                                                                           be denoted as H ∝ G. We will consider in the sequel factors
+                                 X    1                                    of B(d) . The following easy result is central in this work.
+                    S(d) (s) :=             .             (10)
+                                u∈Ω
+                                    ||u|| s
+                                      d
+                                                                              Lemma 1. Any inverse branch h ∝ B(d) is a linear frac-
+In the same vein, with a cost C : Ω(d) → N, we associate the               tional transformation (LFT), and any factor of P(d−`) can
+cumulative generating function of the cost                                                         1                                  
+                                                                           be written as    h=         N1 [h], N2 [h], . . . , Nd−` [h] ,
+                     X C(u)      X −s X                                                          D[h]
+     Sb(d,C) (s) :=            =   n         C(u) .     (11)
+                    u∈Ω
+                        ||u||s
+                                                                           where the denominator D[h] and the numerators Ni [h] are
+                          d        n≥1       kuk=n
+                                                                           co-prime affine functions. When h ∈ H(d−`) , its Jacobian
+When Ω(d,N ) is endowed with the uniform distribution, the                 J[h] is related to the denominator D[h] as
+mean EN [C] of cost C on Ω(d,N ) is expressed with the coef-
+ficients of the cumulative generating function, as                                             J[h] = |D[h]|−(d−`+1) .                   (17)
+                            1        h       i
+               EN [C] =         ΦN Sb(d,C) ,          (12)               The proof (by recurrence on the depth of h) begins with the
+                        ΦN S(d)                                            expression of the branches of depth 1 given in (4),(7),(8).
+where ΦN [f ] is defined as                                                Transfer operators are central tools for studying probabilis-
+                    X                               X an                   tic properties of trajectories in dynamical systems; see e.g.
+        ΦN [f ] =       an when           f (s) =              .    (13)   [2, 10, 13]. Here, we adapt these tools to our needs, strongly
+                                                          ns
+                       n≤N                          n≥1                    use the fact that inverse branches are LFT, and also con-
+Here, singularity analysis uses the Delange Tauberian The-                 sider an additive cost c. It proves useful to deal with two
+orem (stated in Section 5) which relates the asymptotics of                parameters s and w, and we define the generating operator
+the coefficients of a generating function to the nature and                Gs,w,[c],hhi of the inverse branch h ∝ B(d) as
+the position of its dominant singularity. Then, we need an
+                                                                                  Gs,w,[c],hhi [f ](x) := |D[h](x)|−s wc(h) f ◦ h(x) .
+alternative expression of the series which highlights the sin-
+gularities. Such an expression exists for the series S(d) (s),             Then, the operator may be extended for a subset G ∝ B(d) ,
+                  1 X 1                                                                                     X
+      S(d) (s) =             (n − 1)(n − 2) . . . (n − d).                 via the equality Gs,w,[c],hGi :=   Gs,w,[c],hhi ,
+                 d!       ns                                                                                    h∈G
+                        n≥d+1
+4
+    except with its final step                                             and the following relation is valid for disjoint factors of B(d) :
+        Gs,w,[c],hG1 +G2 i = Gs,w,[c],hG1 i + Gs,w,[c],hG2 i .               Theorem 2. Consider the BrunGcd(d) algorithm acting
+If now G1 and G2 may be composed and satisfy (G1 ◦ G2 ) ∝                  on the set Ω(d) , together with an additive cost C, related to
+B(d) , multiplicative properties of the denominator, together              some elementary cost c. Then, the three following relations
+with additive properties of the cost, entail the equality                  hold between
+         Gs,w,[c],hG1 ◦G2 i = Gs,w,[c],hG2 i ◦ Gs,w,[c],hG1 i .                (i) the three generating functions relative to cost C, de-
+Then, there exists a “dynamical” dictionary similar to the                         fined in (10),(11),(14),
+analytic combinatorics dictionary. In particular, when G ? ∝
+B(d) , the generating operator of G ? is the quasi-inverse                     (ii) the three analogous generating operators of the set Bd ,
+                                                  −1                               i.e., the bivariate one defined in Proposition 3 and the
+              Gs,w,[c],hG ? i = I − Gs,w,[c],hGi        .                           other two defined in (20)
+
+When G coincides with the set H(d−`) ∝ B(d) of inverse                                         S(d,C) (s, w) = ζ(s) · Bs,w,[c],(d) [1](0) ,
+branches of the Brun dynamical system D(d−`) , then the                                             S(d) (s) = ζ(s) · Bs,1,[c],(d) [1](0) ,
+generating operator Gs,w,[c],hH(d−`) i is closely related to the
+                                                                                                  Sb(d,C) (s) = ζ(s) · B
+                                                                                                                       b s,[c],(d) [1](0) .
+(usual) weighted transfer operator Hs,w,[c],(d−`) of the Brun
+dynamical system D(d−`) defined by                                         The proof is indeed quite short. Let h ∈ B(d) . The equalitiy
+                           X
+ Hs,w,[c],(d−`) [f ](x) :=       J[h](x)s wc(h) f ◦h(x) , (18)                                  
+                                                                                                  u1 u2       ud
+                                                                                                                 
+                            h∈H(d−`)                                                    π(u) =       , ,...,       = h(0)
+                                                                                                  u0 u0       u0
+and, with the scale change of (17), we will obtain (19).                   together with gcd(u) = 1 proves that the denominator of the
+With Proposition 2, this yields the following characteriza-                LFT h satisfies |D[h](0)| = u0 . Moreover, as C is an additive
+tion of the generating operator of the set B(d) used by the                cost associated with cost c, the equality C(u) = c(h) holds.
+BrunGcd(d) algorithm.                                                      Now, the bijection between Ω(d) and the set B(d) , together
+                                                                           with Eq. (16), entail the relations
+  Proposition 3. Let c be an additive cost on the set B(d) .
+(a) The generating operator Bs,w,[c],(d) of the set B(d) used                                                                        X wC(u)
+by the BrunGcd(d) algorithm decomposes as                                  S(d,C) (s, w) = ζ(s) · S (d,C) (s) = ζ(s) ·
+                                                                                                                                    u∈Ω
+                                                                                                                                        us0
+                                                                                                                                        (d)
+   Bs,w,[c],(d) = Ps,w,[c],(1) ◦ Ps,w,[c],(2) ◦ · · · ◦ Ps,w,[c],(d) ,                         X           c(h)               −s
+                                                                                   = ζ(s) ·            w          |D[h](0)|        = ζ(s) · Bs,w,[c],d [1](0) .
+and involves the sequence of generating operators Ps,w,[c],(d−`)                              h∈B(d)
+of the set P(d−`) used by the BrunGcd(d,`) algorithm. It then
+satisfies the recurrence relation                                          4.5       Derivatives of quasi-inverses.
+            Bs,w,[c],(d) = Bs,w,[c],(d−1) ◦ Ps,w,[c],(d) .                 When the cost C is concentrated on the phase `, the func-
+(b) Each operator Ps,w,[c],(d−`) involves the quasi-inverse of             tional ∆ defined in (15) is applied to the quasi-inverse (I −
+the generating operator Gs,w,[c],(d−`) of the set H(d−`) and               Gs,w,[c],(k) )−1 with k = d − `. This produces two (plain)
+the generating operator Fs,w,[c],(d−`) associated with the final           quasi-inverses and a middle operator (which depends on the
+set F(d−`) of the `-th phase, and is equal to                              cost c). Now, via (19), we return to the operator H defined
+                                                                           in (18), with the scale-change t = s/(k + 1), and obtain
+      Ps,w,[c],(d−`) = Fs,w,[c],(d−`) ◦ (I − Gs,w,[c],(d−`) )−1 .
+                                                                                      ∆[w 7→ (I − Gs,w,[c],(k) )−1 ]
+(c) The generating operator Gs,w,[c],(d−`) of the set H(d−`) is
+                                                                                       = (I − Ht,(k) )−1 ◦ Ht,(k) ◦ (I − Ht,(k) )−1 ,
+                                                                                                                       (c)
+closely related to the (weighted) transfer operator Hs,w,[c],(d−`)
+of the dynamical system D(d−`) defined in (18) via the change
+                                                                           where the “middle” operator is a weighted operator
+of scale s 7→ s/(d − ` + 1), namely                                                                  X
+                                                                                       (c)
+                                                                                      Ht,(k) [f ] :=    c(h) · J[h]t · f ◦ h .
+              Gs,w,[c],(d−`) = Hs/(d−`+1),w,[c],(d−`) .             (19)
+                                                                                                             h∈H(k)
+
+Remark. It proves also useful to deal with the plain (un-                  The (plain) quasi-inverses will play a central role in the anal-
+weighted) operator Gs,hGi , and the cumulative operator G
+                                                        b s,hGi
+                                                                           ysis, whereas the middle operators5 and the end-of-phase
+defined in an analogue way as for series as                                operators will only play a secondary role. We will now focus
+             X                         X                                   on the quasi-inverses of the transfer operators and denote
+    Gs,hGi =     Gs,hhi      G
+                             b s,hGi =   c(h)Gs,hhi ,   (20)
+                h∈G                          h∈G                                                  Q(k) (t) := (I − Ht,(k) )−1 .                          (21)
+                                                −s
+          with Gs,hhi [f ](x) := |D[h](x)| f ◦ h(x) .                      The plain Dirichlet series involves one quasi-inverse for each
+These two operators are related to the weighted operator                   phase, whereas the cumulative Dirichlet series relative to a
+relative to any cost c via the equality                                    cost C concentrated on the `-th phase involves two quasi-
+  Gs,hGi = Gs,1,[c],hGi ,     b s,[c],hGi = ∆[w 7→ Gs,w,[c],hGi ] .
+                              G                                            inverses for the `-th phase, and only one for each other phase.
+                                                                           This is now precisely stated:
+4.4      Useful expressions for generating functions.
+                                                                             Proposition 4. Associate with ` ∈ [0..d − 1] the scale
+The following result is one of the key ingredients of the pa-              change t` : s 7→ s/(d − ` + 1). Then the following holds:
+per. It is typical in dynamical analysis as it relates generat-
+                                                                           5
+ing functions and generating operators.                                        except for d = 1
+(a) The plain Dirichlet series S(d) (s) involves a unique quasi-         relative to the `-th phase is analytic on the punctured half-
+inverse Q(d−`) (t` ) for each phase of index ` ∈ [0..d − 1].             plane {<s ≥ d − ` + 1, s 6= d − ` + 1} and admits a simple
+                                                                         pole at s = d − ` + 1, with a residue T(d−`) defined as
+(b) If C is `-concentrated, the cumulative series Sb(d,C) of cost
+C involves one quasi-inverse Q(d−k) (td−k ) for each phase of                                         d−`+1           ψd−`
+                                                                                      T(d−`) [f ] =         Id−` [f ]      ,            (23)
+index k 6= ` and a “double” quasi-inverse Q2(d−`) (td−` ) for                                          Ed−`           κd−`
+the `-th phase.
+                                                                         which involves the entropy Ek , the integral Ik on the simplex
+                                                                         J(k) and the constant κk := I[ψk ].
+This ends the first part of our analysis, of a combinatorial
+nature. We now begin the second part of our analysis, of an
+analytic nature.                                                         5.2    Analytic properties of Dirichlet series.
+                                                                         We now return to the number of steps that the BrunGcd al-
+                                                                         gorithm performs during its various phases. With Theorem
+5.    DYNAMICAL ANALYSIS (II)                                            2, Propositions 4, 5, and Eq. (9), we describe the analytic
+We now return to the proof of Theorem 1. With (12) and                   properties of the Dirichlet series of interest.
+(13), we know that the mean values of interest are related
+to coefficients of Dirichlet series, plain or cumulative ones.              Proposition 6. Consider the BrunGcd algorithm when
+With the Delange Tauberian theorem, stated in Section 5.3,               acting on Ω(d) , together with the total number Ld of steps,
+we know how to relate the asymptotic behavior of coeffi-                 the number Md of steps in the first phase, the number Od of
+cients with singularities of the Dirichlet series. We then have          quotients equal to 1 during the first phase, the number Σd of
+now to study the Dirichlet series, from an analytic point of             subtractive steps during the first phase and the number Rd
+view, and discover their singularities. With Proposition 4,              of steps in the following phases. Associate the six Dirich-
+their singularities are brought by quasi-inverses. This is why           let generating functions of interest, namely, the plain series
+we begin by studying the quasi-inverse in Section 5.1, and               and the five cumulative series relative with number of steps
+then apply this study to the Dirichlet series in Section 5.2.            Ld , Md , Od , Σd , Rd . The following holds:
+
+5.1    Properties of quasi-inverses.                                      (a) The six series are analytic in the punctured half-plane
+Consider an index k ∈ [1..d]. The transfer operator Ht,(k)                    {<s ≥ d + 1, s 6= d + 1}.
+acts on the space C 1 (J(k) ). It is quasi-compact and the dom-           (b) The plain series and the cumulative series relative to
+inant part of its spectrum is discrete. Furthermore, as the                   Rd admit a simple pole at s = d + 1. Their residues
+operator Ht,(k) is the density transformer of the system for                  are denoted as Td and rd Td , with Td = T(d) [1](0).
+t = 1, the value 1 belongs to the spectrum, and as the sys-
+tem is ergodic [12], this is its unique dominant eigenvalue.              (c) The cumulative series relative to Md , Od , Σd and Ld
+The dominant eigenfunction is explicitly known (see [1])                      admit a pole of order 2 at s = d+1, and their dominant
+                  k
+                                                                              constants Dom are expressed with the residue Td and
+                X Y                    1                                      three other constants ad , ρd , σd . One has:
+     ψk (x) =                                              ;      (22)
+                σ∈S i=1
+                        1 + x σ(1) + xσ(2) + . . . + xσ(i)                            Dom[Ld ] = Dom[Md ] = ad Td ,
+                    k
+
+                                                                                      Dom[Od ] = ad ρd Td ,     Dom[Σd ] = ad σd Td .
+and involves the set Sk of permutations on [1..k]. The quasi-
+compacity of the operator together with perturbation theory                    The constants ad , ρd and σd involve the entropy Ed
+entails the existence of a spectral decomposition                              and the constant κd (y), defined in (24),
+                                                                                                                              
+                 Ht,(k) = λ(k) (t)At,(k) + Kt,(k) ,                                 d+1              κd (1/2)         1 X      1
+                                                                               ad =       , ρd = 1−           , σd =      κd       .
+on a neighborhood of t = 1 that involves the dominant                                 Ed                κd            κd      m
+                                                                                                                             m≥1
+eigenvalue λ(k) (t), the projection At,(k) on the dominant
+eigenspace, and a “remainder” operator Ks,(k) whose spec-                5.3    Extraction of coefficients.
+tral radius is strictly smaller than |λ(k) (t)|. Then, the rela-         It remains to relate the asymptotics of the coefficients of the
+tion At,(k) ◦ Kt,(k) = Kt,(k) ◦ At,(k) = 0 leads to the spectral         Dirichlet series and their dominant singularities, and this is
+decomposition for the quasi-inverse                                      done via the Delange Tauberian Theorem.
+                          λ(k) (t)
+        Q(k) (t) =                   At,(k) + (I − Kt,(k) )−1 .             Theorem 3 (Delange). For σ > 0, consider a Dirich-
+                        1 − λ(k) (t)
+                                                                         let series S(s) with non-negative coefficients which converges
+Thus, the quasi-inverse has a pole at t = 1, with a residue              for <s > σ. Assume that the following holds:
+which involves in particular the entropy Ek = −λ0(k) (1). Fur-           (i) S(s) is analytic on <s = σ, s 6= σ;
+thermore, as the inverse branches are LFT’s, there is an ape-            (ii) near σ, S(s) satisfies S(s) = A(s)/(s − σ)γ+1 where A
+riodicity property that entails that t 7→ Q(k) (t) is analytic           is analytic in σ, A(σ) 6= 0 and γ ≥ 0.
+on the punctured vertical line {<t = 1, t 6= 1}.                         Then as N → ∞, the following asymptotics holds
+Letting now k := d − `, and using for each phase of index `                           A(σ)
+the scale change t` = s/(d − ` + 1), we describe the behavior            ΦN [S] ∼             N σ (log N )γ ,     for ΦN defined in (13).
+                                                                                    σΓ(γ + 1)
+of the quasi inverse s 7→ Q(d−`) (t` ).
+                                                                         With Proposition 6, all the Dirichlet series of interest sat-
+   Proposition 5. Consider for ` ∈ [0..d−1] the scale change             isfy the hypotheses of the Delange Tauberian Theorem with
+s 7→ s/(d − ` + 1). Then, the quasi-inverse s 7→ Q(d−`) (t` )            σ = d + 1, the series of (b) with γ = 0 and the series of (c)
+with γ = 1. With Eq. (12), the mean value of any cost C                                               6.   CONCLUSION AND OPEN PROBLEMS
+of interest equals a ratio whose numerator and denomina-                                              We have precisely used the Brun underlying dynamical sys-
+tor can be estimated with the Delange Tauberian Theorem.                                              tem to describe the probabilistic behaviour of the BrunGcd
+This concludes the proof of Theorem 1, and the main con-                                              algorithm. We have studied the asymptotics (for d → ∞) of
+stants involved are constants rd , ad , ρd , σd . We do not know                                      the main constants that intervene in the analysis and also
+much about the asymptotics of rd , but we now focus on the                                            confirmed with experiments the main results of the analy-
+asymptotics of the other constants ad , ρd , σd for d → ∞.                                            sis. We conclude that the BrunGcd algorithm is not efficient.
+                                                                                                      This is probably the case for all the gcd algorithms which are
+5.4               The main constants of the analysis.                                                 based on multidimensional continued fraction algorithms.
+Except for d = 1 and d = 2, the values of the volume con-                                             Nevertheless, it would be interesting to study other costs
+stant κd and the entropy Ed are not known, as well as their                                           such as the bit-complexity as in [10] or perform a distri-
+dependency with respect to dimension d. We deal with the                                              butional analysis; in this case, we need to extend to higher
+simplex yJ(d) , for y ∈ [0, 1], and introduce the function                                            dimensions the approach that was conducted in [2] for d = 1.
+                                                                                                      We also wish to use our good knowledge of the Brun rational
+                   Z                   Z
+         κd (y) :=        ψd (x)dx =         ϕd (x)dx      (24)                                       trajectories obtained through dynamical analysis, in order to
+                                      yJ(d)                        [0,y]d
+                                                                                                      study simultaneous approximations associated with rational
+                                       1                 1                                            vectors, which corresponds to the real algorithmic situation.
+              with         ϕd (x) =        ...                          .
+                                    1 + x1     1 + x1 + x2 + · · · + xd
+                                                                                                      Finally, it would be interesting to analyze the extended gcd
+Note that κd = κd (1). The ratio κd (y)/κd is central, because                                        algorithm based on the LLL algorithm and described in [11],
+it coincides with the limit probability that a quotient m of                                          even if its underlying system is quite complex to deal with.
+the Brun system in dimension d be larger than 1/y.
+The following result provides two new (and important) es-                                             7.   REFERENCES
+timates: the first one contradicts a conjecture of Hardcastle                                          [1] P. Arnoux and A. Nogueira. Mesures de Gauss pour
+and Khanin [7] which states that the entropy is asymptot-                                                  des algorithmes de fractions continues
+ically constant. The second one describes (for d → ∞) the                                                  multidimensionnelles. Ann. Sci. Ecole Norm. Sup.,
+limit distribution of the quotients in the Brun system.                                                    26:645–664, 1993.
+                                                                                                       [2] V. Baladi and B. Vallée. Euclidean algorithms are
+  Proposition 7. The constant κd (y) and the entropy Ed                                                    Gaussian. Journal Number Theory, 110:331–386, 2006.
+are expressed as one-dimensional integrals:                                                            [3] V. Berthé, J. Bourdon, T. Jolivet, and A. Siegel.
+           1 ∞ −u
+             Z                              Z u
+                                                 1 − e−v                                                   Generating discrete planes with substitutions. In
+ κd (y) =         e β(uy)d du, β(u) :=                   dv,                                               Combinatorics on words, volume 8079 of LNCS, pages
+          d! 0                                0     v
+                  Z 1                      Z ∞ −u                                                          58–70. Springer, 2013.
+                      1 κd (y)      d+1         e                                                      [4] V. Berthé, L. Lhote, and B. Vallée. Probabilistic
+     Ed = (d + 1)              dy =                 β(u)d du.
+                   0  y  κ d        d! κ d  0     u                                                        analyses of the plain multiple gcd algorithm. Journal
+                                                                                                           of Symbolic Computation, 74:425–474, 2016.
+The following estimates hold for d → ∞ and y ∈]0, 1] fixed:
+                                                                                                       [5] A. Broise-Alamichel and Y. Guivarc’h. Exposants
+                                     κd (y)                                                                caractéristiques de l’algorithme de Jacobi-Perron et de
+          Ed ∼ log d,                       = y (1−)d/ log d              for d > d .        (25)        la transformation associée. Annales de l’Institut
+                                      κd
+                                                                                                           Fourier, 51(3):565–686, 2001.
+The complete proof will be given in the long version paper.                                            [6] V. Brun. Algorithmes euclidiens pour trois et quatre
+We describe here the main ideas. The integral expression for                                               nombres. In 13e congrès des mathématiciens
+κd (y) is obtained via the Laplace transform. The expression                                               scandinaves, Helsinki 1957, pages 45–64.
+of the entropy is obtained via the Rohlin formula. As each                                             [7] D. M. Hardcastle and K. Khanin. On almost
+integral expression involves a large power of the function β,                                              everywhere strong convergence of multi-dimensional
+a method of Laplace type asymptotically compares such an                                                   continued fraction algorithms. Ergodic Theory Dynam.
+integral to the maximum value of the integrand.                                                            Systems, 20(6):1711–1733, 2000.
+The following figure compares the theoretical curve Ed =                                               [8] D. E. Knuth. Seminumerical Algorithms, volume 2 of
+log d with experimental values of Ed which are obtained via                                                The Art of Computer Programming. Addison-Wesley,
+the number of steps during the first phase.                                                                3rd edition, 1998.
+                                   Entropy in function of the dimension
+                                                                                                       [9] J. Lagarias. The quality of the diophantine
+          9                                                                                                approximations found by the Jacobi-Perron algorithm,
+                  experiment
+          8             ln(d)                                                                              and related algorithms. Mh. Math, 115:299–328, 1993.
+          7                                                                                           [10] L. Lhote and B. Vallée. Gaussian laws for the main
+          6                                                                                                parameters of the Euclid algorithms. Algorithmica,
+                                                                                                           50(4):497–554, 2008.
+entropy
+
+
+
+
+          5
+
+          4                                                                                           [11] B. S. Majewski and G. Havas. A solution to the
+          3                                                                                                extended GCD problem. In ISSAC95, pages 248–253.
+          2                                                                                           [12] F. Schweiger. Multidimensional continued fractions.
+          1                                                                                                Oxford University Press, 2000.
+          0
+              0      500    1000   1500    2000   2500    3000    3500    4000   4500   5000          [13] B. Vallée. Euclidean dynamics. Discrete and
+                                            dimension (d+1)                                                Continuous Dynamical Systems, 1(15):281–352, 2006.
+

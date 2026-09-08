@@ -1,0 +1,39 @@
+135:Observation 2 In a single pointer dereference we can travel at least halfway
+136-from u to LA(u, d), for any d. Finding the appropriate pointer takes O(1) time.
+137-
+138-Proof. We let δ = depth(u) − d. We can travel up by δ, which is at least δ/2.
+139-The pointer to follow is simply Jumpu [log δ].
+140-   (Note that since the ﬂoor and log operations are word computations, the
+141-algorithm is a RAM algorithm.)
+142-
+143:      As a consequence of Observation 2, we obtain the following lemma:
+144-
+145-Lemma 3. The Jump-Pointers Algorithm solves the Level Ancestor Problem in
+146-time O(n log n), O(log n).
+147-
+148-Proof. To achieve O(n log n) preprocessing, we apply a trivial dynamic program.
+149-To answer query LevelAncestorT (u, d) in O(log n) time, we repeatedly follow
+150-the pointers that will get us halfway to LAT (u, d). Therefore after at most log n
+151-jumps, we locate LAT (u, d).
+152-                                      The Level Ancestor Problem Simplified      511
+153-
+154-3.3    The Ladder Algorithm: An O(n), O(log n) Solution
+155-In the Ladder Algorithm, we decompose the tree T into (nondisjoint) paths,
+156-which we call ladders because they help us climb up the tree. Our choice of how
+157-we do the decomposition may seem peculiar at ﬁrst, but it is an integral part of
+158-the fast algorithms.
+159-   To understand why it is advantageous to break the tree into paths, observe
+160-that solving the level ancestor problem on a single path of length n is trivial.
+161-Observation 4 On a path of length n, the Level-Ancestor Problem can trivially
+162-be solved with (optimal) complexity O(n), O(1).
+163-Proof. We maintain a Ladder array Ladder[0 . . . n − 1], where the i-th
+164-array position corresponds to the depth-i node on the path. To answer
+165-LevelAncestorT (u, d), we return Ladder[d], which takes O(1) time.
+166-    We now describe the ladder decomposition of the tree T , which proceeds in
+167-two stages: The ﬁrst stage requires us to ﬁnd a long-path decomposition of the
+168-tree T , which greedily decomposes the tree into disjoint paths.
+169-
+170-Stage 1: Long-Path Decomposition. We greedily break T into long disjoint paths
+171-as follows. We ﬁnd a longest root-leaf path in T , breaking ties arbitrarily, and
+172-remove it from the tree. This removal breaks the remaining tree into subtrees
+173-T1 , T2 , . . .. We recursively split these subtrees by removing their longest paths.

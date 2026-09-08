@@ -1,0 +1,315 @@
+                                A note on a candy sharing game
+                                 Deepak Bal ∗            Joseph DeGaetani †
+                                    Department of Mathematical Sciences
+                                         Montclair State University
+                                           Montclair, NJ; USA
+
+
+
+                                                      Abstract
+              Suppose k students sit in a circle and are each distributed some initial amount of candy.
+          Each student begins with an even amount of candy, but their individual amounts may vary.
+          Upon the teacher’s signal, each student passes half of their candy to their left and keeps half.
+          After this step, any student with an odd amount of candy receives an extra piece. The game
+          ends if all the students are holding the same amount of candy. We prove, in a generalized
+          setting, that for any initial distribution of n pieces of candy, the game terminates after O(log n)
+          many iterations and each student ends with nk + O(log n) many pieces. Moreover, there exist
+          initial distributions for which the O(log n) term cannot be improved.
+
+
+1        Introduction
+In this note, we analyze a game referred to as the candy sharing game. Suppose a fixed number k
+many students sit in a circle and are each distributed some initial amount of candy. Each student
+begins with an even amount of candy, but their individual amounts may vary. Upon the teacher’s
+signal, each student passes half of their candy to their left and keeps half of their candy. After this
+step, any student with an odd amount of candy receives an extra piece. The game ends if all the
+students are holding the same amount of candy. Does the game end after finitely many steps for
+any initial distribution?
+    This question originated as a problem in the Beijing Math Olympiad [2]. A web search shows
+it remains popular as a fun activity for budding mathematicians as well as a challenge in computer
+coding competitions. The answer to the question is “yes” and it boils down to the following three
+observations: (1) The maximum amount of candy held by any player can never increase. (2) The
+number of players holding the currently minimum amount of candy will decrease by at least one
+each step. Thus the minimum amount will increase after at most k steps. (3) Once the maximum
+and minimum are equal, the game terminates.
+    In [4], Iba and Tanton consider a generalized version of the game in which each player fixes
+an integer and at each step shares portions of their candy to some subset of the other players.
+After receipt of candy from the other players, they round up to the nearest multiple of their chosen
+integer. They prove that under certain conditions, such games are also bounded, i.e., reach a stable
+state after some finite number of moves. In [1], Cairns considers a version of the game where at
+each step, each player with more than one piece of candy passes one piece to their left and one
+to their right. The game is played until it settles into a fixed state or an oscillatory pattern. He
+    ∗
+        deepak.bal@montclair.edu
+    †
+        degaetanij2@montclair.edu
+
+
+
+                                                          1
+completely characterizes the long term behavior given any initial distribution in the case then the
+number of students and candies are both k.
+    For the original candy sharing game, given an initial distribution of candy, predicting the length
+of the game and the final stabilizing amount is an intriguing open question. The main purpose of
+this note is to provide an upper bound on each of the above parameters which is tight infinitely
+often (at least in the case when the number of players k = 3).
+    We will consider the candy sharing game played in a generalized setting. We say a directed
+graph G is d-regular if every vertex has in- and out- degree equal to d. The candy sharing game can
+be played on any d-regular graph G as follows. Each vertex (player) is distributed some amount
+of candy which is divisible by d. At each step, each player hands 1/d proportion of their candy to
+each of their out-neighbors and is handed candy from each of their in-neighbors. After this, each
+student is handed 0, 1, . . . , or d − 1 pieces of candy to ensure they are holding a multiple of d. Thus
+the original candy sharing game is one played on the directed cycle of length k with a directed loop
+at each vertex. A directed graph G is strongly connected if between any two vertices u and v, there
+exists a directed u, v-path. G is aperiodic if the greatest common divisor of the lengths of its cycles
+is 1. Our main theorem is as follows.
+
+Theorem 1.1. Let k ≥ d ≥ 2 be fixed. For any d = (a1 , . . . , ak ) such that ki=1 ai = n the candy
+                                                                                  P
+sharing game, played with initial candy distribution d, on a strongly connected, aperiodic, d-regular
+directed graph G ends in O(log n) turns, and every player will be holding nk + O(log n) pieces of
+candy.
+
+   The next proposition shows that, at least in some specific cases, the order of the log n term in
+the final distribution cannot be improved.
+
+Proposition 1.2. There exist infinitely many values of n such that the candy sharing game with
+initial distribution d = (n, 0, 0) played on a directed cycle of length 3 with a directed loop on each
+vertex terminates with after Ω(log n) turns with every player holding n3 + Ω(log n) pieces of candy.
+
+   In the next section we introduce the definitions and results from the theory of Markov chains
+necessary for the proof. In Section 3 we prove Theorem 1.1.
+
+
+2    Notation and Background
+Throughout the paper, we consider k and d to be fixed, so O(·) and Ω(·) notation is suppressing
+constants which may depend on k and d. All logarithms are natural unless otherwise stated.
+Vectors will be denoted by boldface characters and for a vector v, we use the notation v(i) to
+denote the ith entry of v. Suppose the game is played on a directed graph G with vertex set
+V (G) = {1, . . . , k} and edge set E(G). For t = 0, 1, 2, . . ., let dt = (a1,t , a2,t , . . . , ak,t ) where ai,t
+represents the amount of candy held by player i after t steps of the game. One can check that for
+any t ≥ 1, if dt−1 = (b1 , . . . , bk ), then we have the ith entry of dt is given by
+                                                                    
+                                                          1 X     bj 
+                                           dt (i) = d · 
+                                                        d             .
+                                                                  d
+                                                         j:ji∈E(G)  
+
+At each step of the game, if a player has an amount of candy not divisible by d, then they receive
+extra pieces. Each piece of candy introduced in this way is referred to as a draw. Note that if the
+game terminates with each player holding s pieces of candy, then the total amount of candy at
+
+
+                                                        2
+termination is sk. So the total number of draws in a candy game with n pieces initially distributed
+is sk − n. The number of draws up to and including turn t is denoted ∆t .
+     To continue we need some definitions and results regarding Markov chains. All notation and
+definitions follow those in [5]. A Markov chain with state space Ω and transition matrix P is a
+sequence of random variables (X0 , X1 , . . .) on Ω such that for all i ≥ 0, if Xi has distribution µ,
+then Xi+1 has distribution µP . We represent distributions on Ω as row vectors and P as an |Ω|×|Ω|
+matrix where entry Pij represents the probability of transitioning from state i to state j.
+     We say a chain is irreducible if, for any two states, there is a finite number of steps in which
+it is possible to transition from one state to the other with positive probability. This number of
+steps may be dependent on the chosen states. A chain is aperiodic if, for each state, the greatest
+common divisor of the set of times that it is possible to transition from the state back to itself is 1.
+     Further, a distribution π is stationary for P if πP = π. Any irreducible chain has a unique sta-
+tionary distribution, and each starting state will converge to the stationary. The total variation dis-
+tance between two probability distributions, µ and ν is given by ||µ−ν||T V = maxA⊂Ω |µ(A) − ν(A)|.
+There is a convenient formula for calculating the total variation distance, given by
+                                                     1X
+                                    ||µ − ν||T V =      |µ(x) − ν(x)| .                                   (1)
+                                                     2
+                                                      x∈Ω
+
+As we are concerned with how quickly the game stabilizes, we will make use of the following theorem
+(Thm 4.9 in [5]) which gives a bound on the rate of convergence of an irreducible aperiodic Markov
+chain.
+
+Theorem 2.1 (Convergence Theorem). If P is the transition matrix of an irreducible and aperiodic
+chain, with stationary distribution π, then for any initial probability distribution x on state space
+Ω, there exist constants α ∈ (0, 1) and C > 0 such that for all t ≥ 0, ||xP t − π||T V ≤ Cαt .
+
+
+3    Proof of Theorem 1.1
+Proof of Theorem 1.1. Given a d-regular directed graph G on vertex set {1, 2, . . . , k}, we may form
+a k × k transition matrix P whose ij entry is 1/d if ij is an edge, and 0 otherwise. We can view
+the Markov chain with transition matrix P as a randomized candy sharing game where at each
+stage, vertices no longer draw, but instead individually distribute each piece of candy uniformly at
+random to one of its out-neighbors. As an example, the transition matrix for the original candy
+sharing game is given by
+                                                                    
+                                   1/2 1/2 0          0 ...      0   
+                                  0 1/2 1/2 0 . . .             0   
+                                                                      
+                                                                    
+                                                                      
+                                  0      0 1/2 1/2 . . .        0  k.
+                            P =
+                                                                     
+                                  ..     ..    ..    ..  ..     .. 
+                                  .       .     .     .     .    . 
+                                                                      
+                                                                      
+                                                                      
+                                   1/2 0        0     0 . . . 1/2
+                                                                      
+                                   |               {z              }
+                                                       k
+                                     ai , c̃0 = d0 , and for t ≥ 1, let c̃t = c̃t−1 P = c̃0 P t . Then c̃t (i)
+                                    P
+Let d0 = (a1 , . . . , ak ) with n =
+represents the expected amount of candy held by vertex i after t turns of the randomized candy
+sharing game. Let ct = n1 c̃t .
+
+
+
+
+                                                      3
+   Note that since the randomized candy sharing game has no draws, we have the following in-
+equalities:
+                                         min(dt ) ≥ min(c̃t )
+                                                                                                          (2)
+                                         max(dt ) ≤ max(c̃t ) + ∆t .
+Lemma 3.1. If a candy sharing game is played on a strongly connected, aperiodic, d-regular directed
+graph G with k vertices, then in at most k 2 − 2k + 2 turns either the game will terminate or the
+minimum amount of candy held by any player will increase.
+
+Proof. Let t represent the current turn of the game, with t = 0 being the initial distribution. Let
+c̃t = dt = (a1 , a2 , . . . , ak ) with ai ∈ Z+ for i = 1, . . . k, and further assume that not all entries of
+this vector are equal (meaning the game has not terminated). In particular, some entry of c̃t is
+larger than min(c̃t ). Given that G is d-regular the transition matrix, P , for this chain is doubly
+stochastic, that is, all of its row and column sums are 1. It is easily verifiable that the product of
+doubly stochastic matrices is also doubly stochastic.
+    A theorem of Wielandt (see [6]) says that for a k × k, irreducible, non-negative matrix P , there
+exists an integer r ≤ k 2 − 2k + 2 such that Pijr > 0 for all i, j. (In fact, a theorem of Dulmage
+and Mendelsohn [3] says that if P additionally has a non-zero diagonal entry, we have P r has all
+positive entries for some r ≤ 2k − 2.)
+    Advancing the randomized game, c̃, by r turns and letting A1 , . . . Ak represent the columns of
+matrix P r , we have
+                                    c̃t+r = c̃t P r = (c̃t · A1 , c̃t · A2 , . . . , c̃t · Ak ) .
+Since P r is doubly stochastic, each entry of c̃t+r is a weighted average of the entries of c̃t . Since
+there exist entries of c̃t that are larger than min(c̃t ), each weighted average is larger than min(c̃t ).
+Thus, using (2), we have
+
+                               min(dt+r ) ≥ min(c̃t+r ) > min(c̃t ) = min(dt ).
+
+    We can clearly see       that if max(dt ) − min(dt ) < 1 for some t, then the discrete game has ended.
+Let π = k1 , k1 , . . . , k1 . Then one can check that πP = π, that is, π is the stationary distribution
+for P . Let α and C be given by Theorem 2.1l for matrix       m P and initial distribution c0 . Then after t
+                                        t            log(2Cn)
+steps we have ||ct − π||T V < Cα . Let t0 = log( 1 ) . Then
+                                                         α
+
+                                                                 1
+                                            ||ct0 − π||T V <       .                                      (3)
+                                                                2n
+    Using the inequalities from (2), followed by normalizing the randomized game and utilizing the
+triangle inequality we have
+                  |max(dt ) − min(dt )| ≤ |max(c̃t ) − min(c̃t )| + ∆t
+                                          ≤ n |max (ct ) − min (ct )| + ∆t
+                                                                               
+                                                            1                 1
+                                          ≤ n max (ct ) −       + min (ct ) −     + ∆t .
+                                                            k                 k
+    In the above sum, we compare the distance between two entries of ct and two entries of π.
+Including the remaining distances leads to the next inequality as k ≥ 2.
+                                                                       k
+                                     1               1                   X                1
+                 n       max (ct ) −   + min (ct ) −          + ∆t ≤ n         ct (i) −     + ∆t .
+                                     k               k                                    k
+                                                                         i=1
+
+
+                                                      4
+By (1), we have
+                                k
+                                X                1
+                            n         ct (i) −     + ∆t = 2n ||ct − π||T V + ∆t .
+                                                 k
+                                i=1
+Now, ∆t is bounded above by (d − 1)kt, since at most every player will have to draw (d − 1) pieces
+every turn. Therefore, after t0 turns, we have
+                           |max(dt0 ) − min(dt0 )| ≤ 2n ||ct0 − π||T V + ∆t0
+                                                         
+                                                            1
+                                                   ≤ 2n         + (d − 1)kt0
+                                                           2n
+                                                                     log(2Cn)
+                                                   = 1 + (d − 1)k ·
+                                                                       log( α1 )
+where in the second inequality we have used (3). Thus we have that there exists a constant
+C 0 = C 0 (k, d) such that after t0 turns, |max(dt0 ) − min(dt0 )| < C 0 log n.
+    Recall that max(dt ) cannot increase and by Lemma 3.1, min(dt ) is guaranteed to increase every
+k 2 − 2k + 2 ≤ k 2 turns. Therefore, after at most k 2 C 0 log n more turns, |max(dt ) − min(dt )| will
+be less than 1, and thus the game will have ended. From this we know the total number of turns
+the game took is at most t0 + k 2 C 0 log n = log(2Cn)
+                                                    log( 1 )
+                                                             + k 2 C 0 log n < C 00 log n for some constant
+                                                             α
+C 00 = C 00 (k, d). At worst, each player draws (d − 1) pieces of candy every turn. So the total amount
+of candy at the end of the game is at most n + (d − 1)kC 00 log n implying that each player has nk
+plus at most O(log n) pieces.
+
+
+4    Proof of Proposition 1.2
+Proof of Proposition 1.2. Consider the sequence (ri )∞i=1 defined recursively by r` = 4r`−1 + 2 and
+r1 = 2. We examine the game played on a directed cycle of length 3 with loops at each vertex.
+With initial distribution d = (r` , 0, 0), the sequence of states is as follows. An arrow indicates
+advancing a turn, and a number over the arrow represents how many pieces were drawn that turn.
+For ` ≥ 2,
+                                      +2                             +2
+    (r` , 0, 0) = (4r`−1 + 2, 0, 0) −→ (2r`−1 + 2, 2r`−1 + 2, 0) −→ (r`−1 + 2, 2r`−1 + 2, r`−1 + 2).
+Notice that each player is holding at least r`−1 + 2 pieces of candy. We can imagine that they each
+divide their current piles into two: an inner pile consisting of the r`−1 + 2 pieces, and an outer
+pile containing the remainder. The players would then continue by playing two concurrent games,
+following the game procedure on the inner pile and outer pile simultaneously. Since the inner pile
+is the same amount for each player, that game has already terminated and will no longer draw
+extra pieces. The only draws will then come from the outer game which, after invoking symmetry,
+is equivalent to the game played with initial distribution d0 = (r`−1 , 0, 0).
+    Further, note that the r` sequence has binary representation
+                                       10, 1010, 101010, 10101010, . . .
+where the `th element is the digits (10) repeated ` times. Each time the above recursion is applied
+to a game of the form (r` , 0, 0), two turns elapse, four pieces of candy are drawn and two digits are
+removed from the binary representation of the initial candy amount. We finally see that we need to
+draw 4 times the length of a base 2 expansion of r` , which is logarithmic. Therefore, letting n = r` ,
+the sequence of games played with initial distribution d = (n, 0, 0) will terminate after Θ(log n)
+turns with each player holding n3 + Θ(log n) many pieces of candy.
+
+                                                         5
+5    Conclusion
+In this note, we have proved a relationship between the candy sharing game with rounding and a
+Markov chain without rounding and used the convergence theorem to find a bound on the length
+of the candy sharing game. The main open problem in candy sharing is to find a closed form
+expression for the number of rounds and ending amount of candy in terms of the initial candy
+distribution. It seems this may be quite difficult. Another interesting problem may be to try and
+prove a result similar to ours for the general games considered in [4].
+
+
+Acknowledgement
+The authors would like to thank the referees for their careful reading and numerous suggestions
+which helped improve the presentation of the paper. Also, for pointing out an error in an earlier
+version.
+
+
+References
+[1] G. Cairns, Equitable candy sharing. Amer. Math. Monthly 124 (2017), no. 6, 518 - 526.
+
+[2] G. Chang, T.W. Sederberg, Over and Over Again. Mathematical Association of America, 1997.
+
+[3] A.L. Dulmage, N.S. Mendelsohn, Gaps in the exponent set of primitive matrices. Illinois J.
+    Math. (1964), no. 8, 642 - 656.
+
+[4] G. Iba, J. Tanton, Candy sharing. Amer. Math. Monthly 110 (2003), no. 1, 25 - 35.
+
+[5] D. A. Levin, Y. Peres, E.L. Wilmer, Markov chains and mixing times. With a chapter by James
+    G. Propp and David B. Wilson. American Mathematical Society, Providence, RI, 2009.
+
+[6] H. Schneider, Wielandt’s proof of the exponent inequality for primitive nonnegative matrices.
+    Linear Algebra Appl. 353 (2002), 5 - 10.
+
+
+
+
+                                               6
+

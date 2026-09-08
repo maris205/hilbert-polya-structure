@@ -1,0 +1,111 @@
+\section{The exact recurrent geometry}\label{sec:recurrence}
+
+A \emph{feeding path} has at least one noncycle vertex and is directed
+towards a vertex cycle. Its \emph{final vertex} $a$ is the noncycle vertex
+whose image lies on that cycle. Internal path labels are unrestricted.
+
+\begin{theorem}[Recurrent carrier and period]\label{thm:recurrent}
+A function $f\in\X_n$ is recurrent under $T$ if and only if each weak
+component of its functional digraph consists of a directed cycle $C$ and
+pairwise disjoint unbranched feeding paths, at most one at each cycle
+vertex, with every final path vertex $a$ satisfying
+\begin{equation}\label{eq:label-bound}
+ a<\min C.
+\end{equation}
+On this set, all cycle and internal-path arrows are unchanged. Each path
+attachment moves one cycle predecessor backwards, and
+\begin{equation}\label{eq:period}
+ \per(f)=\lcmop\{|C|:C\text{ carries a nonempty feeding path}\}.
+\end{equation}
+The empty least common multiple is one; a pure vertex cycle is fixed.
+\end{theorem}
+
+Write $I_r(f)=f^r([n])$, where $f^r$ denotes composition on vertices,
+not iteration of $T$. The backward height at $v$ is
+\begin{equation}\label{eq:height}
+ h_f(v)=\sup\{r\ge0:v\in I_r(f)\}
+ \in\{0,\ldots,n-1\}\cup\{\infty\}.
+\end{equation}
+It is infinite exactly on vertex cycles. Off a cycle it is the largest
+length of a directed path ending at $v$. Indeed, an arbitrarily long
+backward walk repeats a vertex; the resulting cycle cannot have a forward
+exit, so its terminal vertex also lies on that cycle. We order $\infty$
+above every finite height.
+
+\begin{proof}[Proof of Theorem~\ref{thm:recurrent}]
+\emph{Image inclusions.}
+An old arrow $i_j\to v$ in a fibre is replaced by the new directed walk
+\[
+ i_j\to i_{j+1}\to\cdots\to i_k\to v.
+\]
+The walk has positive length even when its final destination is a fibre
+member. Replacing and concatenating all arrows of an old length-$r$ walk
+ending at $v$ gives a new walk of length at least $r$ ending there. Its
+last $r$ arrows witness
+\begin{equation}\label{eq:image-monotone}
+ I_r(f)\subseteq I_r(Tf)\qquad(r\ge0).
+\end{equation}
+Every new arrow stays inside one old weak component, while each old arrow
+has the displayed replacement joining its endpoints. Hence the component
+vertex sets are preserved.
+
+\emph{Frozen heights.}
+Suppose $T^p(f)=f$. For every $r$, inclusion \eqref{eq:image-monotone}
+around the periodic orbit forces equality at each epoch. Thus every
+labelled vertex has an epoch-independent height, denoted $h(v)$, and the
+vertex-cycle set is fixed. For any old arrow $j\to v$, a finite height
+at $v$ satisfies $h(v)\ge h(j)+1$. If its height is infinite, then
+$h(j)\le h(v)$ still holds. Consequently
+\begin{equation}\label{eq:arrow-height}
+ h(j)\le h(v),\qquad
+ h(j)=h(v)\ \Longrightarrow\ h(j)=h(v)=\infty.
+\end{equation}
+
+Fix a source coordinate $i$. If it is maximal in its fibre, its head is
+retained. Otherwise its new head is the next sibling $j$, where
+$f(j)=f(i)=v$. Equation~\eqref{eq:arrow-height} gives
+\begin{equation}\label{eq:head-height}
+ h((Tf)(i))\le h(f(i)).
+\end{equation}
+Because heights were already proved fixed at the vertices, this is a
+nonincreasing sequence of head heights around a periodic whole-function
+orbit. It must be constant. In the next-sibling case,
+\eqref{eq:arrow-height} therefore forces $j$ onto a vertex cycle. This
+also covers $j=v$: a selected sibling arrow may numerically equal the
+retained old arrow, and is not discarded from the argument.
+
+\emph{Necessary geometry.}
+Each fibre contains at most one cycle vertex, since a cycle target has
+exactly one cycle predecessor and an off-cycle target has none. Every
+member after the first in an ordered fibre is a next-sibling head, hence
+is on a cycle. Therefore a fibre has at most two members, and a two-member
+fibre is a smaller noncycle vertex followed by a cycle vertex. In
+particular, off-cycle indegree is at most one, while a cycle vertex has
+at most one noncycle predecessor. Following arrows towards cycles now
+partitions the noncycle vertices into unbranched paths, at most one per
+cycle target. A cycle arrow is retained because its source is maximal
+in the corresponding fibre; an internal-path arrow is retained because
+its target has a singleton fibre.
+
+Let $a$ be a final path vertex with $f(a)=v\in C$, and let $u$ be the
+cycle predecessor of $v$. The fibre is $(a,u)$, so the new attachment is
+$T(f)(a)=u$. Cycle arrows remain unchanged at every epoch. Repeated
+predecessor motion visits every label of $C$. At each epoch $a$ must
+remain smaller than the relevant cycle predecessor, giving
+\eqref{eq:label-bound}.
+
+\emph{Sufficiency and exactness.}
+Conversely assume the stated geometry and label bound. At every cycle
+target with an attached path, its cycle predecessor exceeds the path-final
+vertex. The rule therefore retains cycle and internal-path arrows and
+moves all attachments one predecessor backwards. Distinct attachments
+remain distinct because the predecessor map is bijective, and the label
+bound is preserved. After $|C|$ updates, all attachments on $C$ return.
+
+A component without a path is fixed. In a component with a path, choose
+one final labelled vertex $a$. Its head visits all $|C|$ distinct cycle
+labels, so its first return is exactly at time $|C|$. Labels are not
+identified by an unlabelled symmetry. Components update independently,
+and their return times synchronize precisely at the least common multiple
+in \eqref{eq:period}. The empty function obeys the same convention.
+\end{proof}

@@ -1,0 +1,314 @@
+       COHEN LENSTRA PARTITIONS AND MUTUALLY
+      ANNIHILATING MATRICES OVER A FINITE FIELD
+
+                   JASON FULMAN AND ROBERT GURALNICK
+
+
+        Abstract. Motivated by questions in algebraic geometry, Yifeng Huang
+        recently derived generating functions for counting mutually annihilating
+        matrices and mutually annihilating nilpotent matrices over a finite field.
+        We give a different derivation of his results using statistical properties
+        of random partitions chosen from the Cohen-Lenstra measure.
+
+
+
+
+                                 1. Introduction
+  Motivated by questions in algebraic geometry, Yifeng Huang [8] derived
+the following two generating functions.
+
+(1)
+   X |{A, B ∈ M atn (Fq ) : AB = BA = 0}|                   1 X      ua
+                                                    un =                      .
+                       |GL(n, q)|                          1−u  (1/q)a (u/q)a
+  n≥0                                                             a≥0
+
+(2)
+ X |{A, B ∈ N iln (Fq ) : AB = BA = 0}|                    1   X        u2c
+                                                 un =               2              .
+                    |GL(n, q)|                          (u/q)∞   q c (1/q)c (u/q)c
+n≥0                                                               c≥0
+
+   Here M atn (Fq ) is the set of n × n matrices over the finite field Fq , and
+N iln (Fq ) is the set of n × n nilpotent matrices over the finite field Fq . Also,
+we have used the (standard) notation
+              (x)i = (1 − x)(1 − x/q)(1 − x/q 2 ) · · · (1 − x/q i−1 ).
+  Our main purpose here is to show that these two generating functions
+can be rederived using statistical properties of a Cohen-Lenstra measure
+on partitions. Huang’s lovely paper used analytic ideas related to Cohen-
+Lenstra heuristics, but our approach is probabilistic and different.
+
+                  2. Cohen-Lenstra random partitions
+  To begin we give some notation. We let λ be a partition of some non-
+negative integer |λ| into parts λ1 ≥ λ2 ≥ · · · . We let mi (λ) denote the
+number of parts of size i, and we define
+                           λ0i = mi (λ) + mi+1 (λ) + · · · .
+So λ01 is the number of parts of λ, and for convenience we also denote this by
+l(λ). Moreover, if one represents λ by a diagram with row lengths λ1 , λ2 , · · · ,
+then λ0i is the size of the ith column of the diagram of λ.
+  Date: November 14, 2021.
+                                            1
+2                     JASON FULMAN AND ROBERT GURALNICK
+
+
+  In a very influential paper [1], the number theorists Cohen and Lenstra
+defined a probability measure P on the set of all partitions λ of all natural
+numbers. The definition of the measure P is given by the formula
+                                                           1
+                                 P (λ) = (1/q)∞                  ,
+                                                        |Aut(λ)|
+where Aut(λ) is the automorphism group of a finite abelian group of type
+λ. Although we won’t use it, we mention the explicit formula
+                                P 0 2Y
+                    |Aut(λ)| = q i (λi )  (1/q)mi (λ) .
+                                                             i
+
+    In later work, Fulman [3] studied a more general probability measure
+
+                                                           u|λ|
+                                Pu (λ) = (u/q)∞                   .
+                                                         |Aut(λ)|
+  We will use the following result from [4], which gives a way to generate
+random partitions from the measure Pu .
+Theorem 2.1. Starting with λ00 = ∞, define in succession λ01 ≥ λ02 ≥ · · ·
+according to the rule that if λ0i = a, then λ0i+1 = b with probability
+
+                                               ub (1/q)a (u/q)a
+                        K(a, b) =                                   .
+                                        q b2 (1/q)a−b (1/q)b (u/q)b
+  This gives the following corollary, the first part of which will be used in
+proving equation (1) and the second part of which will be used in proving
+equation (2).
+Corollary 2.2.          (1) For a non-negative integer a,
+                           X                       (u/q)∞      ua
+                                    Pu (λ) =                          .
+                                                   (u/q)a q a2 (1/q)a
+                         λ:λ01 =a
+
+     (2) For non-negative integers a ≥ b,
+                 X                                           u2a−b (u/q)∞
+                               Pu (λ) =         a2 +(a−b)2
+                                                                                      .
+                                            q                (1/q)b (1/q)a−b (u/q)a−b
+           λ:λ01 =a,m1 (λ)=b
+
+Proof. For the first result, Theorem 2.1 implies that
+                             X
+                                 Pu (λ) = K(∞, a).
+                                 λ:λ01 =a
+
+  For the second result, note that m1 (λ) = λ01 − λ02 . So Theorem 2.1 implies
+that
+                     X
+                               Pu (λ) = K(∞, a)K(a, a − b)
+                    λ:λ01 =a,m1 (λ)=b
+
+and the result follows.                                                                   
+                        COHEN LENSTRA PARTITIONS                              3
+
+
+                  3. Mutually annihilating matrices
+   The purpose of this section is to rederive (1) and (2).
+   To begin, we recall the Jordan form of an element of M atn (Fq ). This
+associates to each monic, irreducible polynomial φ over Fq a partition λφ
+such that                     X
+                                  d(φ)|λφ | = n,
+                                φ
+
+where d(φ) is the degree of φ. For further background on Jordan forms over
+finite fields, one can consult Chapter 6 of [7].
+   Lemma 3.1 is proved in Stong [9] and calculates the number of elements
+of M atn (Fq ) with given Jordan form.
+Lemma 3.1. Suppose that
+                              X
+                                    d(φ)|λφ | = n,
+                                φ
+
+so that {λφ } is a possible Jordan form of an element of M atn (Fq ). Then the
+number of elements of M atn (Fq ) with Jordan form {λφ } is equal to
+                                   |GL(n, q)|
+                            Q                         .
+                                φ |Aut(λ φ )|q→q d(φ)
+
+   Here the notation |Aut(λφ )|q→qd(φ) means that we place q by q d(φ) in the
+formula for |Aut(λφ )|.
+
+3.1. Proof of (1). The following lemma is crucial to deriving (1).
+Lemma 3.2. Let A be an element of M atn (Fq ). Then the number of B
+                                     2
+such that AB = BA = 0 is equal to q m , where m is the number of Jordan
+blocks of A with eigenvalue 0.
+Proof. Clearly the number we are computing is a similarity invariant: if A
+is replaced by U AU −1 , the set of B such that AB = BA = 0 is replaced
+by U BU −1 . Now write A = diag(C, N ) where C is invertible and N is
+nilpotent (in Jordan form). If AB = BA = 0, then B commutes with A and
+so B = diag(0, L) with N L = LN = 0.
+   So it reduces to looking at the nilpotent part of A. So assume that A is
+nilpotent with Jordan blocks corresponding to a given partition and consider
+its centralizer.
+   If B is in the centralizer, then we can write B = (Bij ) blocking it up with
+respect to the Jordan blocks. Then AB = 0 if and only if the image of B
+is in the kernel of A. Note that if we write A = diag(J1 , ..., Jm ) with the
+Ji Jordan blocks then AB = (Ji Bij ) and there is a one dimensional space
+of possible Bij with this property (with the B in the centralizer). Thus the
+set of B with AB = BA = 0 has dimension m2 where m is the number of
+Jordan blocks.                                                               
+
+  Now we proceed to the main result of this subsection.
+4                   JASON FULMAN AND ROBERT GURALNICK
+
+
+Proof. (Of (1)) It follows from Lemmas 3.1 and 3.2 that the number of pairs
+A, B in M atn (Fq ) such that AB = BA = 0 is equal to |GL(n, q)| multiplied
+by
+                                               2
+                           X          q l(λz )
+                               Q                      ,
+                           {λφ } φ |Aut(λφ )|q→q d(φ)
+
+where the sum is over all Jordan forms of M atn (Fq ) and l(λz ) is the number
+of parts of λz .
+   Separating out the contribution from the polynomial φ(z) = z, we obtain
+|GL(n, q)| multiplied by the coefficient of un in
+                 X 0 2 u|λ|            YX         ud(φ)|λ|
+                    q (λ1 )          ·                       .
+                            |Aut(λ)|         |Aut(λ)|q→qd(φ)
+                   λ                     φ6=z λ
+
+   Now for any finite group, the sum over conjugacy classes of the reciprocal
+of centralizers sizes is equal to 1. Applying this to GL(n, q) gives that
+                         YX          ud(φ)|λ|        1
+                                                =      .
+                                |Aut(λ)|q→qd(φ)   1−u
+                        φ6=z λ
+
+    We conclude that
+                X |{A, B ∈ M atn (Fq ) : AB = BA = 0}|
+                                                       un
+                               |GL(n, q)|
+                  n≥0
+
+is equal to
+                             1 X (λ01 )2 u|λ|
+                                q                .
+                            1−u         |Aut(λ)|
+                                   λ
+This is exactly
+                          1      1   X 2 X
+                                      qa   Pu (λ).
+                        1 − u (u/q)∞     0
+                                       a≥0        λ:λ1 =a
+By part 1 of Corollary 2.2, this is equal to
+                             1 X           ua
+                                                    ,
+                          1−u         (1/q)a (u/q)a
+                                   a≥0
+
+as claimed.                                                                 
+3.2. Proof of (2). The following lemma is crucial to deriving (2).
+Lemma 3.3. Let A be a nilpotent element of M atn (Fq ). Then the number
+                                                     2
+of nilpotent B such that AB = BA = 0 is equal to q m −d , where m is the
+number of Jordan blocks of A and d is the number of Jordan blocks of A of
+size 1.
+Proof. We argue as in the proof of Lemma 3.2. So let B = (Bij ) commute
+with and annihilate A. We saw there is a one dimensional choice for each
+Bij independently. It is well known that the centralizer of A modulo the
+Jacobson radical is a direct product Md1 (q) × . . . × Mdr (q) where di is the
+number of Jordan blocks of size i. Thus, our computation reduces to the case
+where all Jordan blocks have the same size d. If i > 1, we see that BA = 0
+                                  COHEN LENSTRA PARTITIONS                                      5
+
+
+implies that the image of B is contained in the kernel of A and so B is in the
+Jacobson radical. In this case any B with AB = BA = 0 is nilpotent (and
+indeed B 2 = 0). If i = 1 and d = d1 , then the centralizer is the full matrix
+ring Md (q) and it is well known (see [2] or [6]) that the number of nilpotent
+                         2
+matrices of size d is q d −d . This completes the proof.                    
+  Now we proceed to the main result of this subsection.
+Proof. (Of (2)) From Lemma 3.1, the number n × n of nilpotent matrices
+over Fq with Jordan type λ is equal to
+                                             |GL(n, q)|
+                                                        .
+                                              |Aut(λ)|
+So Lemma 3.3 implies that
+              X |{A, B ∈ N iln (Fq ) : AB = BA = 0}|
+                                                                              un
+                                                 |GL(n, q)|
+                         n≥0
+
+is equal to
+                                   X        u|λ|       0 2
+                                                   q (λ1 ) −m1 (λ) ,
+                                          |Aut(λ)|
+                                     λ
+where the sum is over all partitions of all natural numbers.
+  This is equal to
+                          1    X             0 2
+                                   Pu (λ)q (λ1 ) −m1 (λ) .
+                      (u/q)∞
+                                             λ
+  By part 2 of Corollary 2.2, this is equal to
+                  X                    u2a−b
+                                                                              .
+                            a≥b≥0
+                                  q (a−b)2 +b (1/q)b (1/q)a−b (u/q)a−b
+
+Letting c = a − b, this becomes
+     X             u2c+b                              X        ub        X         u2c
+                c2 +b
+                                                  =                           c2
+            q           (1/q)b (1/q)c (u/q)c                q b (1/q)   b c≥0 q (1/q)c (u/q)c
+    b,c≥0                                             b≥0
+
+                                                         1   X        u2c
+                                                  =               2              ,
+                                                      (u/q)∞   q c (1/q)c (u/q)c
+                                                                 c≥0
+
+where the last step used the well known identity
+                          X      ub         1
+                               b
+                                       =         .
+                              q (1/q)b   (u/q)∞
+                                    b≥0
+
+                                                                                                
+
+                                    4. Acknowledgments
+  Fulman was supported by Simons Foundation Grant 400528. Guralnick
+was supported by NSF Grant DMS-1901595 and Simons Fellowship 609771.
+We thank Yifeng Huang for useful discussions.
+6                 JASON FULMAN AND ROBERT GURALNICK
+
+
+                               References
+[1] Cohen, H. and Lenstra, H.W., Heuristics on class groups of number
+    fields, in Number theory, Noordwijkerhout 1983, Springer Lecture Notes
+    in Math, pages 33-62, Berlin, 1984.
+[2] Fine, N. and Herstein, I., The probability that a matrix be nilpotent,
+    Illinois J. Math. 2 (1958), 499-504.
+[3] Fulman, J., A probabilistic approach toward conjugacy classes in the
+    finite general linear and unitary groups, J. Algebra 212, (1999), 557-
+    590.
+[4] Fulman, J., A probabilistic proof of the Rogers-Ramanujan identities,
+    Bull. London Math. Soc. 33 (2001), 397-407.
+[5] Fulman, J. and Guralnick, R., Enumeration of commuting pairs in Lie
+    algebras over finite fields, Annals Combin. 22 (2018), 295-316.
+[6] Gerstenhaber, M., On the number of nilpotent matrices with coefficients
+    in a finite field, Illinois J. Math. 5 (1961), 330-333.
+[7] Herstein, I.N., Topics in algebra, Second edition, Xerox College Publish-
+    ing, 1975.
+[8] Huang, Y., A generating function for counting mutually annihilating
+    matrices over a finite field, arXiv:2110.15566 (2021).
+[9] Stong, R., Some asymptotic results on finite vector spaces, Adv. in Appl.
+    Math. 9 (1988), 167-199.
+   Department of Mathematics, University of Southern California, Los Ange-
+les, CA, 90089, USA
+   Email address: fulman@usc.edu
+
+   Department of Mathematics, University of Southern California, Los Ange-
+les, CA, 90089, USA
+   Email address: guralnic@usc.edu
+

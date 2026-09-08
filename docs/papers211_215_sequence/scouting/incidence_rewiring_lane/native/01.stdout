@@ -1,0 +1,82 @@
+## 4. Candidate GR1: graph-square dynamics
+
+### 4.1 Literal map and complete theorem contract
+
+For a labelled simple graph `G` on `[n]`, let `Phi(G)=G^2`: distinct vertices
+are adjacent in `G^2` exactly when their distance in `G` is at most two.
+Let `D(G)` be the maximum diameter of a connected component, with isolated
+components assigned diameter zero.
+
+1. **Exact iterates.**  Graph distances give
+   `(G^a)^b=G^(ab)`, hence `Phi^t(G)=G^(2^t)`.
+2. **Endpoint and clock.**  The endpoint `K(G)` completes each connected
+   component to a clique, and
+
+   ```text
+   depth(G) = 0                         if D(G)<=1,
+              ceil(log_2 D(G))          otherwise.
+   ```
+
+   The sharp maximum on `[n]` is `ceil(log_2(n-1))`, attained by the path
+   for `n>=3`.
+3. **Recurrence.**  Fixed points are exactly cluster graphs, one for each set
+   partition of `[n]`; there are `B_n`, no other cycles, and the zeta function
+   is `(1-z)^(-B_n)`.
+4. **Every endpoint basin.**  If a fixed target has clique blocks
+   `B_1,...,B_r`, then
+
+   ```text
+   |K^(-1)(target)| = product_i c_|B_i|,
+   ```
+
+   where `c_m` is the classical number of connected labelled graphs on a
+   prescribed `m`-set.
+5. **Every fixed-target one-step fibre.**  The one-step fibre is
+
+   ```text
+   |Phi^(-1)(target)| = product_i q_|B_i|,
+   ```
+
+   where `q_m` counts connected labelled graphs of diameter at most two on a
+   prescribed `m`-set.  This follows because squaring preserves components
+   and turns a connected component into a clique in one round exactly at
+   diameter at most two.
+6. **All depth-prefix counts.**  If `c_m^(<=R)` counts connected labelled
+   graphs of diameter at most `R`, then the number of states of depth at most
+   `t` has exponential generating function
+
+   ```text
+   exp(sum_{m>=1} c_m^(<=2^t) z^m/m!).
+   ```
+
+   Exact layers are consecutive differences.
+
+The focused pilot exhausts **33,867 graphs through `n=6`** and verifies the
+iterate identity, endpoint, pointwise clock, Bell fixed count, every endpoint
+basin product, every fixed-target one-step fibre product, and the sharp global
+clock: **102,169 assertions**.
+
+### 4.2 Owner subtraction and value ceiling
+
+Owner risk is much higher than for PM1.
+
+- Ross and Harary,
+  [*The Square of a Tree*](https://doi.org/10.1002/j.1538-7305.1960.tb03936.x),
+  explicitly define `G^2` through Boolean adjacency-matrix squaring and study
+  graph square roots.  Graph powers, distance contraction, and completion at
+  the diameter are classical and receive zero credit.
+- Gilbert,
+  [*Enumeration of Labelled Graphs*](https://doi.org/10.4153/CJM-1956-046-2),
+  owns the connected-labelled-graph counts and their component decomposition.
+  Consequently the factors `c_m`, their recurrence, and the exponential
+  formula are zero-credit.
+- Square-root recognition and graph-power structure are large mature
+  literatures.  The bounded current search found no paper presenting this
+  exact finite-functional-graph package, but that absence is weak evidence.
+
+The only residual is the conjunction of the fixed operator with its exact
+temporal stratification, pointwise endpoint basins, and pointwise fixed-target
+fibres.  Each individual ingredient is elementary once graph powers are
+accepted.  Internally, GR1 is not P097 sumset squaring, P106 MIS polarity,
+P123 component complementation, or P127 binary-matrix transpose dynamics:
+its invariant is graph distance and its endpoint is the component clique

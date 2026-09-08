@@ -1,0 +1,698 @@
+                                                        TRIANGULAR-GRID BILLIARDS AND PLABIC GRAPHS
+
+                                                                           COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+
+
+                                                  Abstract. Given a polygon P in the triangular grid, we obtain a permutation πP via a natural
+arXiv:2202.06943v2 [math.CO] 3 Mar 2023
+
+
+
+
+                                                  billiards system in which beams of light bounce around inside of P . The different cycles in πP
+                                                  correspond to the different trajectories of light beams. We prove that
+                                                                                                                      7          3
+                                                                        area(P ) ≥ 6 cyc(P ) − 6 and perim(P ) ≥ cyc(P ) − ,
+                                                                                                                      2          2
+                                                  where area(P ) and perim(P ) are the (appropriately normalized) area and perimeter of P , respec-
+                                                  tively, and cyc(P ) is the number of cycles in πP . The inequality concerning area(P ) is tight, and we
+                                                  characterize the polygons P satisfying area(P ) = 6 cyc(P ) − 6. These results can be reformulated
+                                                  in the language of Postnikov’s plabic graphs as follows. Let G be a connected reduced plabic graph
+                                                  with essential dimension 2. Suppose G has n marked boundary points and v (internal) vertices,
+                                                  and let c be the number of cycles in the trip permutation of G. Then we have
+                                                                                                              7     3
+                                                                                      v ≥ 6c − 6 and n ≥ c − .
+                                                                                                              2     2
+
+
+
+                                                                                          1. Introduction
+                                          1.1. Triangular-Grid Billiards. Consider the infinite triangular grid in the plane, scaled so that
+                                          each equilateral triangular grid cell has side length 1 and oriented so that some of the grid lines
+                                          are horizontal. We refer to the sides of these grid cells as panes because we will imagine that each
+                                          pane either allows light to pass through it (like a window pane) or reflect off of it (like a mirror
+                                          pane). Define a grid polygon to be a (not necessarily convex) polygon whose boundary is a union of
+                                          panes. We assume that the boundary of a grid polygon (viewed as a closed curve) does not intersect
+                                          itself. Suppose P is a grid polygon whose boundary panes are b1 , . . . , bn , listed clockwise. Pick
+                                          some boundary pane bi , and emit a colored beam of light from the midpoint of bi into the interior
+                                          of P so that the light beam forms a 60◦ angle with bi and travels either northeast, southeast, or
+                                          west (depending on the orientation of bi ). The light beam will travel through the interior of P until
+                                          reaching the midpoint of a different boundary pane bπ(i) , which it will meet at a 60◦ angle. This
+                                          defines a permutation π = πP : [n] → [n] (where [n] := {1, . . . , n}) called the billiards permutation
+                                          of P . For example, if P is the grid polygon in Figure 1, then the cycle decomposition of πP is
+
+                                              πP = (1 3 32 26 6 30 2 33 25 12 14 9 21 19 29 28 4 31)(5 24 13 10 20 27)(7 22 23 15 17)(8 11 18 16).
+
+                                            One can interpret this definition of π as a certain billiards process. Let us imagine that the
+                                          boundary panes of P are mirrors (and all other panes are transparent windows). When the light
+                                          beam emitted from bi reaches bπ(i) , it will bounce off in such a way that the reflected beam forms a
+                                          60◦ angle with bπ(i) . This reflected beam will then travel to bπ2 (i) , where it will bounce off at a 60◦
+                                          angle and continue on to bπ3 (i) , and so on. We will be interested in the cycles of π. Given points
+                                          p and p0 in the plane, let us write [p, p0 ] for the line segment whose endpoints are p and p0 . Let
+                                          mid(s) denote the midpoint of a line segment s. If c = (i1 i2 · · · ir ) is a cycle of π, then we define
+                                          the trajectory of c to be
+                                                                                       [r
+                                                                             traj(c) =    [mid(bij ), mid(bπ(ij ) )].
+                                                                                            j=1
+                                                                                                    1
+2                                  COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+
+
+         Figure 1. A grid polygon P with 33 boundary panes. The billiards permutation
+         πP has 4 cycles. We have colored the 4 different trajectories with different colors.
+
+The description of π in terms of light beam billiards is convenient because we can imagine that
+the beams of light corresponding to different cycles have different colors; thus, we will use different
+colors to draw different trajectories (see Figure 1).
+   The investigation of billiards in planar regions is a classical and much-beloved topic in both
+dynamical systems and recreational mathematics [2–6, 9–11, 18]. However, the typical questions
+considered in previous works concern systems where the beams of light can have arbitrary initial
+positions and arbitrary initial directions. In contrast, our setup—which surprisingly appears to be
+new—imposes a great deal of rigidity by requiring each beam of light to start at the midpoint of
+a boundary pane and begin its journey in a direction that forms a 60◦ angle with that boundary
+pane. Although several traditional dynamically-flavored billiards problems (such as determining
+the existence of periodic trajectories) become trivial or meaningless under our rigid conditions, our
+setting affords some fascinating combinatorial/geometric questions.
+   The major players in our story are the following quantities associated with a grid polygon P .
+The perimeter of P , denoted perim(P ), is simply the number of boundary panes of P . We define
+the area of P , denoted area(P ), to be the number of triangular grid cells in P .1 We write cyc(P )
+for the number of cycles in the associated permutation πP , which is the same as the number of
+different light beam trajectories in the associated billiards system. Our main theorems address the
+following extremal question concerning the possible relationships between these quantities: How
+big must area(P ) and perim(P ) be in comparison with cyc(P )?
+Theorem 1.1. If P is a grid polygon, then
+                                            area(P ) ≥ 6 cyc(P ) − 6.
+Theorem 1.2. If P is a grid polygon, then
+                                                  7          3
+                                                    cyc(P ) − .
+                                          perim(P ) ≥
+                                                  2          2
+   The inequality in Theorem 1.1 is tight, and we will characterize the grid polygons that achieve
+equality. Define a unit hexagon to be a grid polygon that is a regular hexagon of side length 1. Let
+us construct a sequence of grid polygons (Pk )k≥1 as follows. First, let P1 be a unit hexagon. For
+k ≥ 2, let Pk = Pk−1 ∪ Qk , where Qk is a unit hexagon such that Pk−1 ∩ Qk is a single pane. We call
+a grid polygon Pk obtained in this manner a tree of unit hexagons; see Figure 2 for an example with
+    1Thus, our area measure is just the Euclidean area multiplied by the normalization factor 4/√3.
+                                                                                                           3
+
+
+k = 9. Since cyc(Qk ) = 2 for all k ≥ 2, one can combine Corollary 3.2 from below with an easy
+inductive argument to see that cyc(Pk ) = k + 1 for all k ≥ 1. Thus, area(Pk ) = 6k = 6 cyc(Pk ) − 6.
+
+
+
+
+        Figure 2. A tree of unit hexagons P9 with cyc(P9 ) = 10, area(P9 ) = 54, and
+        perim(P9 ) = 38.
+
+Theorem 1.3. If P is a grid polygon, then area(P ) = 6 cyc(P ) − 6 if and only if P is a tree of
+unit hexagons.
+   On the other hand, we believe that Theorem 1.2 is not tight. After drawing several examples of
+grid polygons, we have arrived at the following conjecture.
+Conjecture 1.4. If P is a grid polygon, then
+                                        perim(P ) ≥ 4 cyc(P ) − 2.
+   If Conjecture 1.4 is true, then it is tight. Indeed, if Pk is a tree of unit hexagons as described
+above, then perim(Pk ) = 4k + 2 = 4 cyc(Pk ) − 2.
+   Of fundamental importance in our analysis of the billiards system of a grid polygon P are the
+triangular trajectories of P , which are just the trajectories of the 3-cycles in πP . One of the
+crucial ingredients in the proofs of Theorems 1.1–1.3 is the following result, which we deem to be
+noteworthy on its own.
+Theorem 1.5. Let P be a grid polygon, and let c be a cycle of size m in πP . Then the trajectory
+traj(c) intersects at most m − 2 triangular trajectories of P (excluding traj(c) itself if m = 3).
+1.2. Plabic Graphs. A plabic graph is a planar graph G embedded in a disc such that each vertex
+is colored either black or white. We assume that the boundary of the disc has n marked points
+labeled clockwise as b∗1 , . . . , b∗n so that each b∗i is connected via an edge to exactly one vertex of G.
+Following [13], we will also assume that every vertex of G is incident to exactly 3 edges, including
+edges connected to the boundary of the disc (the study of general plabic graphs can be reduced
+to this case). In his seminal article [16], Postnikov introduced plabic graphs—along with several
+other families of combinatorial objects—in order to parameterize cells in the totally nonnegative
+Grassmannian. These graphs have now found remarkable applications in a variety of fields such as
+cluster algebras, knot theory, polyhedral geometry, scattering amplitudes, and shallow water waves
+[1, 7, 8, 12–15, 17].
+    Imagine starting at a marked boundary point b∗i and traveling along the unique edge connected
+to b∗i . Each time we reach a vertex, we follow the rules of the road by turning right if the vertex
+is black and turning left if the vertex is white. Eventually, we will reach a marked boundary point
+b∗π(i) . The path traveled is called the trip starting at b∗i . Considering the trips starting at all of
+the different marked boundary points yields a permutation π = πG : [n] → [n] called the trip
+4                              COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+permutation of G. We say G is reduced if it has the minimum number of faces among all plabic
+graphs with the same trip permutation. Figure 3 shows a reduced plabic graph G whose trip
+permutation is the cycle πG = (1 3 5 2 4).
+
+
+
+
+       Figure 3. A reduced plabic graph whose trip permutation is the cycle (1 3 5 2 4).
+       The fact that πG (1) = 3 is illustrated by the red trip starting at b∗1 and ending at
+       b∗3 . Similarly, πG (5) = 2 because the green trip starting at b∗5 ends at b∗2 .
+
+   Given a grid polygon P , one can obtain a reduced plabic graph G(P ) via a planar dual construc-
+tion. Let us say an equilateral triangle with a horizontal side is right-side up (respectively, upside
+down) if its horizontal side is on its bottom (respectively, top). We refer to this property of a
+triangle (right-side up or upside down) as its orientation. Place a black (respectively, white) vertex
+at the center of each right-side up (respectively, upside down) equilateral triangular grid cell inside
+of P . Whenever two such grid cells share a side, draw an edge between the corresponding vertices.
+Finally, encompass P in a disc, draw a marked point b∗i on the boundary of the disc corresponding
+to each boundary pane bi of P , and draw an edge from b∗i to the vertex drawn inside the unique
+grid cell that has bi as a side. See Figure 4.
+
+
+
+
+       Figure 4. On the left is a grid polygon P overlaid with the corresponding plabic
+       graph G(P ). The middle image shows the trajectories in the billiards system of
+       P to illustrate that its billiards permutation is πP = (1 7 4 3 5 9)(2 6 8). The right
+       image shows the trips of G(P ) to illustrate that its trip permutation is πG(P ) =
+       (1 7 4 3 5 9)(2 6 8).
+                                                                                                            5
+
+
+   It is immediate from the relevant definitions that the trip permutation πG(P ) is equal to the
+billiards permutation πP . For example, if P and G(P ) are as in Figure 4, then πP = πG(P ) is the
+permutation with cycle decomposition (1 7 4 3 5 9)(2 6 8).
+
+1.3. Membranes. In the recent paper [13], Lam and Postnikov introduced membranes, which
+are certain triangulated 2-dimensional surfaces embedded in a Euclidean space. The definition of
+a membrane relies on a choice of an irreducible root system, and most of the discussion in [13]
+centers around membranes of type A. They discussed how type A membranes are in a sense dual
+to plabic graphs, and they further related type A membranes to the theory of cluster algebras.
+A membrane is minimal if it has the minimum possible surface area among all membranes with
+the same boundary; Lam and Postnikov showed how to associate a reduced plabic graph G(M )
+to each minimal type A membrane M . They then defined the essential dimension of a reduced
+plabic graph G0 to be the smallest positive integer d such that there exists a minimal membrane
+M of type Ad with G(M ) = G0 . They proved that if G0 has n marked boundary points, then the
+essential dimension of G0 is at most n−1, with equality holding if and only if there exists k ∈ [n−1]
+such that πG0 (i) = i + k (mod n) for all i ∈ [n] (this is equivalent to saying that G0 corresponds
+to the top cell in the totally nonnegative Grassmannian Gr≥0         k,n ). Other than this result, there is
+essentially nothing known about essential dimensions of plabic graphs. Our original motivation for
+this project was to initiate the investigation of essential dimensions by studying plabic graphs of
+essential dimension 2 in detail.
+   Consider the class of triangulated surfaces in the triangular grid that can be obtained by itera-
+tively wedging grid polygons. In other words, Q is in this class if there are grid polygons P1 , . . . , Pk
+such that Pi+1 ∩ (P1 ∪ · · · ∪ Pi ) is a single point for all i ∈ [k − 1] and such that Q = P1 ∪ · · · ∪ Pk .
+In this case, we call the grid polygons P1 , . . . , Pk the components of Q. See Figure 5. As mentioned
+in [13], the class we have just described is the same as the class of membranes of type A2 . Such a
+membrane M is automatically minimal (since it is determined by its boundary). In order to under-
+stand these membranes and their associated reduced plabic graphs, it suffices to understand grid
+polygons and their associated reduced plabic graphs. Indeed, the reduced plabic graphs associated
+to the components of M are basically the same as the connected components of the reduced plabic
+graph associated to M ; thus, restricting our focus to grid polygons is the same as restricting our
+focus to connected plabic graphs. Furthermore, if M = P is a grid polygon, then the definition
+that Lam and Postnikov gave for the reduced plabic graph G(M ) associated to M (viewed as a
+membrane) is exactly the same as the definition that we gave in Section 1.2 for the reduced plabic
+graph G(P ) associated to P (viewed as a grid polygon). In other words, understanding plabic
+graphs of essential dimension 2 and their trip permutations is equivalent to understanding grid
+polygons and their billiards permutations.
+
+
+
+
+                       Figure 5. A membrane of type A2 with 5 components.
+
+   As a consequence of the preceding discussion, we can reformulate Theorems 1.1 and 1.2 in the
+language of plabic graphs.
+6                                COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+Corollary 1.6. Let G be a connected reduced plabic graph with essential dimension 2. Suppose
+G has n marked boundary points and v vertices, and let c be the number of cycles in the trip
+permutation πG . Then
+                                                            7     3
+                                  v ≥ 6c − 6 and n ≥ c − .
+                                                            2     2
+Proof. By the preceding discussion, there is a grid polygon P such that G = G(P ). We have
+perim(P ) = n, area(P ) = v, and cyc(P ) = c, so the corollary follows from Theorems 1.1 and 1.2. 
+1.4. Outline. Section 2 is devoted to the proof of Theorem 1.5. In Section 3, we apply Theorem 1.5
+to prove Theorems 1.1, 1.2, and 1.3. We believe that our work opens the door to several new
+combinatorial and geometric questions; we have collected many ideas for future work in Section 4.
+
+                            2. Triangles Intersecting a Trajectory
+  Our goal in this section is to prove Theorem 1.5. We begin with a lemma that establishes this
+theorem in the special case when m = 3.
+Lemma 2.1. Suppose ∆ is a triangular trajectory in the billiards system of a grid polygon P .
+There is at most one triangular trajectory ∆0 in P that intersects ∆ and is not equal to ∆. If such
+a trajectory ∆0 exists, then its orientation must be opposite to that of ∆.
+Proof. If two triangular trajectories intersect, then neither one can have a vertex in the interior
+of the region bounded by the other. This forces the two triangular trajectories to have opposite
+orientations. It also implies that every side of the first trajectory intersects the second trajectory
+and vice versa (i.e., the trajectories intersect in 6 points). It follows from these observations that
+a triangular trajectory cannot intersect two other triangular trajectories.                         
+   Let us fix some additional notation and terminology concerning trajectories. When we refer to a
+line segment, we assume by default that it contains its endpoints and that it is not a single point.
+Let P be a grid polygon, and let c be an m-cycle in πP . Since Lemma 2.1 tells us that Theorem 1.5
+is true when m = 3, we will assume that m ≥ 4. Let z1 , . . . , zm be the points where the trajectory
+traj(c) intersects the boundary of P , listed clockwise around the boundary. For convenience, let
+zm+1 = z1 . Imagine traversing the boundary of P clockwise, and let Bi be the part of the boundary
+traversed between zi and zi+1 , including zi and zi+1 . We call each Bi a shoreline of traj(c). Note
+that traj(c) is the union of m line segments, each of which has its endpoints in {z1 , . . . , zm }. Let
+C be the set of points where two of these line segments intersect each other (including z1 , . . . , zm ).
+If we “cut” traj(c) at each point in C, we will break each of the m line segments into smaller line
+segments that we call the fragments of traj(c). More precisely, we say a line segment f ⊆ traj(c)
+is a fragment of traj(c) if the endpoints of f belong to C and if the relative interior of f does not
+contain any points from C. We say a fragment f sees a shoreline B if there exist a point p in the
+relative interior of f and a point p0 in B that is not an endpoint of B such that the relative interior
+of the line segment [p, p0 ] lies inside of P and does not contain any points from traj(c). If f is a
+fragment of traj(c) that sees the shoreline B, then we write E(f, B) for the equilateral triangle that
+has f as one of its sides and that lies on the side of f opposite to B. See Figure 6.
+   Fix a shoreline B, and let f1 , . . . , fk be the fragments of traj(c) that see B. Then f1 ∪ · · · ∪ fk ∪ B
+is a piecewise-linear curve that bounds a polygonal region R. Let us assume that f1 , . . . , fk are
+listed in clockwise order around R so that f1 and fk touch B. For each j ∈ [k − 1], let θj be the
+interior angle of R at the point of intersection of fj and fj+1 . It is straightforward to see that θj
+is either 60◦ or 120◦ . Let K = K(B) = 1 + k−1                                            ◦
+                                                       P
+                                                         j=1 βj , where βj = 2 if θj = 60 and βj = 1 if
+θj = 120◦ . A schematic illustration of this situation is shown in Figure 8. In that figure, we have
+θ1 = θ3 = 120◦ and θ2 = 60◦ , so β1 = β3 = 1, β2 = 2, and K(B) = 1 + (1 + 2 + 1) = 5.
+   Imagine standing at the point B ∩ fk and facing toward B. Walk along the shoreline B to reach
+B ∩ f1 ; you should now be facing toward the shoreline that comes immediately after B in clockwise
+                                                                                                                7
+
+
+
+
+        Figure 6. In red is the trajectory of a 6-cycle in the billiards system of a grid
+        polygon. This trajectory has 12 fragments. The 6 shorelines are represented with
+        different colors. Each of B1 , B3 , B5 is seen by exactly 2 of the fragments, while each
+        of B2 , B4 , B6 is seen by exactly 1 of the fragments. We have labeled one of the
+        fragments f that sees B5 , and we have shaded the triangle E(f, B5 ) in blue.
+
+
+order. The net change in your direction during this walk is (180 − 60K)◦ clockwise.2 To see this,
+consider instead walking from B ∩ fk to B ∩ f1 by traversing the fragments fk , . . . , f1 ; this will
+result in the same net change in direction. You first turn 60◦ clockwise to get onto the fragment
+fk . Whenever you transfer from fj+1 to fj , you turn (180◦ − θj ) = (60βj )◦ counterclockwise, which
+is the same as (−60βj )◦ clockwise. At the end, you turn another 60◦ clockwise to get off of f1 and
+                                                                               Pk−1
+face toward the next shoreline. Overall, your net change in direction is 60◦ + j=1  (−60βj )◦ +60◦ =
+             ◦
+(180 − 60K) clockwise. In the example shown in Figure 8, the net change of direction would be
+60◦ − 60◦ − 120◦ − 60◦ + 60◦ = −120◦ = (180 − 60K)◦ clockwise (i.e., 120◦ counterclockwise).
+   We are going to prove that the number of triangular trajectories that intersect traj(c) and touch
+B is at most K. First, we need the following lemmas.
+Lemma 2.2. Preserve the notation from above. For each i ∈ [k], the boundary of the grid polygon
+P does not intersect the interior of E(fi , B).
+Proof. Without loss of generality, we may assume that E(fi , B) is right-side up and has fi as its
+(horizontal) bottom side. Let W denote the intersection of the boundary of P and the interior of
+E(fi , B). Suppose for the sake of contradiction that W is nonempty. It is not hard to see that
+there is a point w∗ ∈ W whose distance to fi is the minimum among all points in W. Let Tw∗ be
+the unique equilateral triangle that contains w∗ as a vertex and has one of its sides contained in
+fi . By the minimality of the distance from w∗ to fi , we observe that Tw∗ does not contain other
+points from the boundary of P besides w∗ . See Figure 7.
+    Note that the space P \ (R ∪ Tw∗ ) has two connected components: a left region whose closure
+contains the left endpoint of fi and a right region whose closure contains the right endpoint of fi .
+Imagine following the trajectory traj(c) starting at the right endpoint of fi and continuing through
+the left endpoint of fi . You will land in the left region. If you continue following the trajectory,
+you will eventually come back to the right endpoint of fi , which is in the right region. Since traj(c)
+does not intersect the interior of R, it must travel from the left region to the right region through
+Tw∗ . However, this means that there exists a horizontal boundary pane of P inside Tw∗ , which is
+a contradiction.                                                                                     
+
+Lemma 2.3. Preserve the notation from above. If a triangular trajectory intersects traj(c) and
+touches B, then it touches B at exactly 1 point.
+  2A net change of, say, 120◦ clockwise is different from a net change of −240◦ clockwise. In the former case, you
+spun 120◦ clockwise; in the latter case, you spun 240◦ counterclockwise.
+8                                COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+
+
+        Figure 7. In this schematic drawing, the boundary of P passes through the interior
+        of E(fi , B), where B is the shoreline indicated by a thin yellow strip and fi is a
+        fragment that sees B. The proof of Lemma 2.2 derives a contradiction from this
+        setup.
+
+Proof. Let ∆ be a triangular trajectory that intersects traj(c) and touches B. Let f be a fragment
+of traj(c) that intersects ∆. Let a1 , a2 , a3 be the vertices of ∆. It is easy to see that ∆ cannot have
+all 3 of its vertices on B. Now suppose ∆ has exactly 2 of its vertices, say a1 and a2 , on B. By
+rotating P if necessary, we may assume [a1 , a2 ] is a horizontal line segment. The boundary of P
+does not pass through the interior of the region bounded by ∆; combining this with the observation
+that traj(c) does not intersect [a1 , a2 ]; we find that every fragment of traj(c) passing through the
+interior of the region bounded by ∆ must be horizontal. It follows that f is a horizontal line
+segment that intersects [a1 , a3 ] and [a2 , a3 ]. However, this forces a3 to be in the interior of E(f, B),
+contradicting Lemma 2.2.                                                                                  
+Lemma 2.4. Preserve the notation from above. There are at most K(B) triangular trajectories in
+the billiards system of P that intersect traj(c) and touch B.
+Proof. We illustrate the proof in Figure 8. For each i ∈ [k] and each side s of the triangle E(fi , B),
+it follows from Lemma 2.2 that there is a unique line segment L(s) containing s that does not pass
+through the exterior of P and whose endpoints are on the boundary of P . Let
+                                                 k
+                                                 [      [
+                                           X=                     L(s).
+                                                 i=1 s a side
+                                                    of E(fi ,B)
+
+Define an X-region to be the closure of a connected component of P \ X; let RX be the set of
+X-regions. Say an X-region V is hospitable if it contains at least one side of at least one of the
+triangles E(f1 , B), . . . , E(fk , B); otherwise, say V is inhospitable. Note that E(f1 , B), . . . , E(fk , B)
+are k different hospitable X-regions. It is straightforward to see that an X-region is of the form
+E(fi , B) for some i ∈ [k] if and only if it does not contain a line segment in the boundary of P .
+Let R be the X-region whose boundary is f1 ∪ · · · ∪ fk ∪ B. Let R0 (respectively, R00 ) be the unique
+X-region other than R that contains the point f1 ∩ B (respectively, fk ∩ B). Note that R, R0 , and
+R00 are hospitable. One can readily check that there are exactly K(B) − 1 hospitable X-regions
+in RX \ {E(f1 , B), . . . , E(fk , B), R, R0 , R00 }; let U1 , . . . , UK(B)−1 be these X-regions. Finally, let
+I1 , . . . , I` be the inhospitable X-regions.
+                                                                                                           9
+
+
+   Let t be the number of triangular trajectories that intersect traj(c) and touch B. Let p1 , . . . , p3t
+be the points where these triangular trajectories touch the boundary of P . For each X-region V ,
+P g(V ) = |V ∩ {p1 , . . . , p3t }|. Each of the points p1 , . . . , p3t belongs to exactly one X-region, so
+let
+   V ∈RX g(V ) = 3t. It follows from Lemma 2.3 that g(R) = t. Lemma 2.2 immediately implies
+that g(E(fi , B)) = 0 for all i ∈ [k]. Furthermore, using Lemma 2.2, one can readily check that
+g(R0 ) ≤ 1, g(R00 ) ≤ 1, g(Uj ) ≤ 2 for all j ∈ [K(B) − 1], and g(Ih ) = 0 for all h ∈ [`]. Thus,
+                                                     k          K(B)−1        `
+                        X                            X           X            X
+                3t =           g(V ) ≤ t + 1 + 1 +         0+            2+         0 = t + 2K(B).
+                       V ∈RX                         i=1         j=1          h=1
+
+Hence, t ≤ K(B).                                                                                          
+
+
+
+
+        Figure 8. A schematic illustration of the proof of Lemma 2.4. The curvy black
+        curve is meant to represent the boundary of P . The red line segments are the
+        fragments f1 , f2 , f3 , f4 , and the shoreline B is marked with a thin yellow strip. The
+        set X is the union of the red and green line segments. In this example, K(B) = 5.
+
+  We are now in a position to complete the proof of Theorem 1.5.
+Proof of Theorem 1.5. Let P be a grid polygon, and let c be an m-cycle in πP . If m = 3, then
+Theorem 1.5 follows from Lemma 2.1, so we may assume m ≥ 4. Let B1 , . . . , Bm be the shorelines
+of traj(c). For each shoreline Bi , we define the integer K(Bi ) as above. Lemma 2.4 tells us that
+there are at most K(Bi ) triangular trajectories that intersect traj(c) and touch Bi , and Lemma 2.3
+tells us that each such triangular trajectory touches Bi in exactly 1 point. Therefore, the total
+number of points    where the triangular trajectories that intersect traj(c) touch the boundary of P
+is at most m
+            P
+               i=1 K(B i ). Since each triangular trajectory touches the boundary of P in exactly 3
+points,  we deduce  that   the total number of triangular trajectories that intersect traj(c) is at most
+1 Pm                                                                       1 Pm
+3    i=1 K(Bi ). Hence, the proof will be complete if we can show that 3       i=1 K(Bi ) = m − 2.
+   Preserve the notation from above. Imagine traversing the boundary of P clockwise, starting
+and ending at z1 . We saw in our discussion above that the net change in your direction when you
+traverse the shoreline Bi is (180−60K(BP       ◦
+                                           i )) clockwise. Thus, the net change in your direction when
+                                               m
+you traverse the entire boundary of P is i=1 (180−60K(Bi ))◦ clockwise. But this net change must
+10                             COLIN DEFANT AND PAKAWUT JIRADILOK
+               Pm                                                             1 Pm
+be 360◦ , so    i=1 (180 − 60K(Bi )) = 360. Manipulating this equation yields 3  i=1 K(Bi ) = m − 2,
+as desired.                                                                                           
+
+                                    3. Areas and Perimeters
+   We will find it useful to break grid polygons into smaller grid polygons; the following lemma
+allows us to understand the effect that this has on the enumeration of the cycles in the associated
+billiards systems.
+Lemma 3.1. Let P be a grid polygon, and suppose P = P1 ∪ P2 , where P1 and P2 are grid polygons
+such that P1 ∩ P2 is a union of η different panes. Let δi be the number of different trajectories in
+the billiards system of Pi that touch P1 ∩ P2 . Then cyc(P ) ≤ cyc(P1 ) + cyc(P2 ) − δ1 − δ2 + η.
+Proof. For each i ∈ {1, 2}, the billiards system of Pi contains cyc(Pi ) − δi trajectories that do not
+touch P1 ∩ P2 , and these are also trajectories in the billiards system of P . It is straightforward to
+see that the billiards system of P has at most η trajectories that intersect P1 ∩ P2 .               
+  If η = 1 in the preceding lemma, then δ1 = δ2 = 1, and there must be exactly one trajectory in
+the billiards system of P that intersects P1 ∩ P2 . Hence, we have the following useful corollary.
+Corollary 3.2. Let P = P1 ∪ P2 , where P1 and P2 are grid polygons such that P1 ∩ P2 is a single
+pane. Then cyc(P ) = cyc(P1 ) + cyc(P2 ) − 1.
+   Let us say a grid polygon P is primitive if there do not exist grid polygons P1 and P2 such that
+P = P1 ∪ P2 and such that P1 ∩ P2 is a single pane. Corollary 3.2 will allow us to restrict our
+attention to primitive grid polygons. We will often need to handle the grid polygons in Figure 9
+(and their rotations) separately. The proof of the next lemma is the main place where we apply
+Theorem 1.5, which we proved in Section 2.
+
+
+
+
+                             Figure 9. Three primitive grid polygons.
+
+
+Lemma 3.3. Let P be a primitive grid polygon that is not a rotation of
+                                                                    Pone of the grid polygons
+in Figure 9. Let αm be the number of m-cycles in πP . Then α3 ≤ α4 + m≥5 (m − 2)αm .
+Proof. For each 3-cycle c in πP , let F (c) be the set of cycles in πP whose trajectories intersect
+traj(c). Let Y be the set of 3-cycles c in πP such that F (c) contains only 3-cycles and 4-cycles.
+Using the hypothesis that P is primitive and not a rotation of one of the polygons in Figure 9, it
+is straightforward (though somewhat tedious) to verify if c ∈ Y , then F (c) contains at least two
+4-cycles. On the other hand, Theorem 1.5 tells us that if d is a 4-cycle in πP , then there are at
+most two 3-cycles c in Y with d ∈ F (c). Therefore, |Y | ≤ α4 .
+   If c is a 3-cycle in πP that is not in Y , then F (c) contains at least one cycle of size at least 5.
+                                                       P there are at most m − 2 different 3-cycles
+Theorem 1.5 tells us that if d is an m-cycle in πP , then
+c such that d ∈ F (c). This implies that α3 − |Y | ≤ m≥5 (m − 2)αm .                                  
+     We can now prove our main theorem concerning perimeters of grid polygons.
+Proof of Theorem 1.2. The result is trivial if area(P ) = 1, so we may assume area(P ) ≥ 2 and
+proceed by induction on area(P ). If P is not primitive, then we can write P = P1 ∪ P2 , where
+                                                                                                      11
+
+
+P1 and P2 are smaller grid polygons such that P1 ∩ P2 is a single pane. By induction, we have
+perim(Pi ) ≥ 72 cyc(Pi ) − 32 for each i ∈ {1, 2}. Combining this with Corollary 3.2 yields
+
+                                             7                           3 7         3
+    perim(P ) = perim(P1 ) + perim(P2 ) − 2 ≥ (cyc(P1 ) + cyc(P2 ) − 1) − = cyc(P ) − ,
+                                             2                           2 2         2
+
+as desired. Hence, we may assume P is primitive. We easily verify that the desired inequality holds
+if P is a rotation of one of the grid polygons in Figure 9; hence, let us assume that this is not the
+case. Let αm be the number of m-cycles in πP . We have
+                                                    P
+                                   perim(P )   3α3 + m≥4 mαm
+                                             =      P        .
+                                    cyc(P )     α3 + m≥4 αm
+                                                           P
+                                                       3x + m≥4 mαm
+For fixed values of α4 , α5 , . . ., the function x 7→     P        is decreasing in x whenever x ≥ 0.
+                                                        x + m≥4 αm
+Therefore, we can apply Lemma 3.3 to find that
+                          P                 P               P
+        perim(P )   3(α4 + m≥5 (m − 2)αm ) + m≥4 mαm   7α4 + m≥5 (4m − 6)αm
+                  ≥       P                 P        =      P               .
+         cyc(P )     (α4 + m≥5 (m − 2)αm ) + m≥4 αm    2α4 + m≥5 (m − 1)αm
+
+Since 4m − 6 ≥ 72 (m − 1) for all m ≥ 5, we conclude that perim(P ) ≥ 27 cyc(P ) > 72 cyc(P ) − 32 . 
+
+   We now proceed to prove Theorems 1.1 and 1.3. Recall that we have scaled the triangular grid
+so that each pane has length 1. Given a cycle c in πP , we write length(traj(c)) for the length
+of traj(c), which
+             P is just the total length of the line segments in traj(c). It is easy to check that
+area(P ) = 32 c length(traj(c)), where the sum is over all cycles in πP .
+
+Proposition 3.4. If P is a primitive grid polygon that is not a rotation of one of the grid polygons
+in Figure 9, then area(P ) ≥ 6 cyc(P ).
+
+Proof. The proof is by induction on area(P ). Because P is primitive, all of the triangular trajectories
+in the billiards system of P have length at least 15/2. Let us first assume that every triangular
+trajectory in the billiards system of P has length strictly greater than 15/2. This forces every
+triangular trajectory to have length at least 21/2. Because P is primitive, every line segment in a
+trajectory in the billiards system of P has length at least 3/2. Therefore, length(traj(c)) ≥ 3m/2 for
+every m-cycle c in πP . It is also straightforward to check that every 4-cycle in πP has a trajectory
+of length at least 9 and that every 5-cycle in πP has a trajectory  P of length at least 21/2. Let
+αm denote the number of m-cycles in πP . Because area(P ) = 23 c length(traj(c)) (with the sum
+ranging over all cycles in πP ), we have
+                                                                
+                2                                X                                        X
+   area(P ) ≥     (21/2)α3 + 9α4 + (21/2)α5 +           (3m/2)αm  = 7α3 + 6α4 + 7α5 +          mαm
+                3
+                                                  m≥6                                     m≥6
+
+
+
+                                             ≥ 6 cyc(P ).
+
+  Now assume that the billiards system of P contains at least one triangular trajectory ∆ of length
+15/2. Then up to rotation, P must have the following shape, where curvy curves are schematic
+12                                COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+illustrations of parts of the boundary of P :
+
+
+
+
+The polygon P consists of pieces Q1 , Q2 , Q3 , Q4 as shown: the boundaries of Q1 , Q2 , Q3 are indicated
+by thin orange, pink, and teal strips, respectively, and Q4 is the closure of P \ (Q1 ∪ Q2 ∪ Q3 ).
+We also allow for each of Q1 , Q2 , Q3 to be a single line segment with area 0 (a degenerate grid
+polygon). Because P is primitive, none of Q1 , Q2 , Q3 can have area 1 or 2. If area(Qi ) ≤ 3 for all
+i ∈ {1, 2, 3}, then (because it is not a rotation of a polygon in Figure 9) P must be a rotation of
+one of the polygons
+
+
+
+
+                                                                                                 ,
+so we can check directly that area(P ) ≥ 6 cyc(P ). Hence, we may suppose that area(Qi ) ≥ 4 for
+some i ∈ {1, 2, 3}; without loss of generality, assume area(Q1 ) ≥ 4. Let Q0 = Q2 ∪ Q3 ∪ Q4 . Our
+strategy is to invoke Lemma 3.1 with P1 = Q1 and P2 = Q0 . With these choices of P1 and P2 , let
+δ1 and δ2 be as defined in Lemma 3.1.
+   Let t1 and t2 be the unique panes in the boundary of Q1 that touch the boundary of Q0 but are
+not contained in Q0 . Because P is primitive and Q1 has area at least 4, there are eight possibilities
+for the orientations of t1 and t2 ; these possibilities are depicted in Figure 10.
+   Suppose first that the orientations of t1 and t2 are as shown in one of the four images on the top
+of Figure 10. Then Q1 is primitive. If Q1 is not a rotation of one of the grid polygons in Figure 9,
+then we may apply induction to see that area(Q1 ) ≥ 6 cyc(Q1 ) ≥ 6(cyc(Q1 ) − δ1 + 1). On the
+other hand, if Q1 is a rotation of one of the polygons in Figure 9, then it must be a rotation of
+the rightmost polygon in that figure. In this case, area(Q1 ) = 16, cyc(Q1 ) = 3, and δ1 = 2, so
+area(Q1 ) ≥ 6(cyc(Q1 ) − δ1 + 1) again.
+   Now suppose the orientations of t1 and t2 are as shown in one of the four images on the bottom of
+Figure 10. In this case, we have Q1 = Q      e 1 ∪ T , where T is a grid polygon that is a triangle of area 1
+and Q e 1 ∩ T is a single pane. In the two left (respectively, right) images on the bottom of Figure 10,
+the triangle T has t1 (respectively, t2 ) as one of its sides. Note that Q      e 1 is primitive. It follows from
+Corollary 3.2 that cyc(Q   e 1 ) = cyc(Q1 ). If Qe 1 is not a rotation of one of the grid polygons in Figure 9,
+then we can use induction to see that area(Q        e 1 ) ≥ 6 cyc(Q
+                                                                  e 1 ) = 6 cyc(Q1 ) ≥ 6(cyc(Q1 ) − δ1 + 1). On
+the other hand, if Q1 is a rotation of one of the polygons in Figure 9, then (because area(Q
+                      e                                                                                   e 1 ) ≥ 3)
+it is straightforward to check that δ1 = 2 and that area(Q1 ) ≥ 6(cyc(Q1 ) − 1). Thus, area(Q1 ) ≥
+6(cyc(Q1 ) − δ1 + 1) in this case as well.
+   We have shown that in each of the eight possible cases illustrated in Figure 10, we have
+(1)                                    area(Q1 ) ≥ 6(cyc(Q1 ) − δ1 + 1).
+                                                                                                        13
+
+
+
+
+                Figure 10. The eight possible orientations of the panes t1 and t2 .
+
+
+   Now, Q0 is primitive, and it is clearly not a single triangle of area 1 or a unit hexagon. Invoking
+Lemma 3.1 with P1 = Q1 , P2 = Q0 , and η = 2, we find that cyc(P ) ≤ cyc(Q1 ) + cyc(Q0 ) −
+δ1 − δ2 + 2 ≤ (cyc(Q1 ) − δ1 + 1) + cyc(Q0 ). If Q0 is not a rotation of one of the polygons in
+Figure 9, then we can use induction to see that area(Q0 ) ≥ 6 cyc(Q0 ). In this case, we can apply
+(1) to see that area(P ) = area(Q1 ) + area(Q0 ) ≥ 6((cyc(Q1 ) − δ1 + 1) + cyc(Q0 )) ≥ 6 cyc(P ),
+as desired. On the other hand, if Q0 is a rotation of one of the polygons in Figure 9, then it
+is a rotation of the rightmost such polygon, so area(Q0 ) = 16, cyc(Q0 ) = 3, and δ2 = 2. In
+this case, cyc(P ) ≤ cyc(Q1 ) + cyc(Q0 ) − δ1 − δ2 + 2 = cyc(Q1 ) + 3 − δ1 , so invoking (1) yields
+area(P ) = area(Q1 )+16 ≥ 6(cyc(Q1 )−δ1 +1)+16 > 6(cyc(Q1 )+3−δ1 ) ≥ 6 cyc(P ), as desired. 
+
+   With the previous proposition out of the way, we can painlessly finish proving Theorems 1.1
+and 1.3. Let us first establish one additional piece of terminology. Let P be a grid polygon. It
+is possible to find a sequence (Pk )rk=1 of grid polygons and a sequence (Qk )rk=1 of primitive grid
+polygons with P1 = Q1 and P = Pr such that Pk = Pk−1 ∪ Qk and such that Pk−1 ∩ Qk is a
+single pane for all k ∈ {2, . . . , r}. Moreover, the primitive grid polygons Q1 , . . . , Qr are uniquely
+determined up to reordering. We call Q1 , . . . , Qr the primitive pieces of P .
+
+Proof of Theorems 1.1 and 1.3. Let Q1 , . . . , Qr be the primitive pieces of P . For each i ∈ [r],
+Proposition 3.4 tells us that area(Qi ) ≥ 6 cyc(Qi ) if Qi is not a rotation of one of the grid polygons
+in Figure 9; if Qi is a rotation of one of the grid polygons in Figure 9, then   Pwe can check directly
+that area(Qi ) ≥ 6 cyc(Qi ) − 6. It follows from Corollary 3.2 that cyc(P ) = ri=1 cyc(Qi ) − (r − 1).
+Thus,
+                r               r                         r
+                                                                                !
+              X               X                          X
+   area(P ) =     area(Qi ) ≥     (6 cyc(Qi ) − 6) = 6       cyc(Qi ) − (r − 1) − 6 = 6 cyc(P ) − 6.
+              i=1              i=1                       i=1
+
+This completes the proof of Theorem 1.1. This argument shows that area(P ) = 6 cyc(P ) − 6 if and
+only if area(Qi ) = 6 cyc(Qi ) − 6 for all i ∈ [r]. By invoking Proposition 3.4 and inspecting the grid
+polygons in Figure 9, we see that this occurs if and only if the primitive pieces Q1 , . . . , Qr are all
+unit hexagons. This proves Theorem 1.3.                                                                
+14                            COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+                             4. Reflections and Next Directions
+  We believe that this article just scratches the surface of rigid combinatorial billiards systems and
+their connections with plabic graphs and membranes. In this section, we discuss several variations
+and potential avenues for future research.
+4.1. Perimeter vs. Cycles. Recall Conjecture 1.4, which says that perim(P ) ≥ 4 cyc(P ) − 2 for
+every grid polygon P . The grid polygons P satisfying perim(P ) = 4 cyc(P ) − 2 seem more sporadic
+and unpredictable than the equality cases of Theorem 1.1, which are just the trees of unit hexagons
+by Theorem 1.3. This gives a heuristic hint as to why Conjecture 1.4 is more difficult to prove than
+Theorem 1.1.
+
+
+
+
+       Figure 11. Two grid polygons with perimeter 18, each of which has 5 cycles in its
+       billiards system.
+
+
+4.2. Other Families of Plabic Graphs. Let G be a connected reduced plabic graph with n
+marked boundary points and v vertices, and let c be the number of cycles in the trip permutation
+πG . Corollary 1.6 provides inequalities that say how large n and v must be relative to c in the
+case when G has essential dimension 2. One can ask for similar inequalities when G is taken from
+some other interesting family of plabic graphs. One natural candidate for such a family is the
+collection of plabic graphs of essential dimension 3; we refer to [13] for further details concerning
+the definition. It is also natural to consider plabic graphs that can be obtained from polygons in
+other planar grids besides the triangular grid; Figure 12 shows some examples (in these examples,
+we dismiss our earlier assumption that all vertices in a plabic graph are trivalent).
+
+
+
+
+           Figure 12. Plabic graphs obtained from polygons in different planar grids.
+
+  If G is a plabic graph obtained from the square grid (as on the left of Figure 12), then it is not
+too difficult to prove that v ≥ 3c − 2 and that n ≥ 4c; moreover, these bounds are tight. We omit
+the details.
+                                                                                                                 15
+
+
+4.3. Regions with Holes. Suppose Q is a region in the triangular grid obtained from a grid
+polygon by cutting out some number of polygonal holes. We can define the billiards system for Q
+in the same way that we defined it for a grid polygon. It would be interesting to obtain analogues of
+Theorems 1.1, 1.2, 1.3, and 1.5 in this more general setting. The resulting analogues of Theorems 1.1
+and 1.2 might need to incorporate the genus of Q. Indeed, Figure 13 shows a region Q with genus
+1 for which the inequalities in Theorems 1.1 and 1.2 are false as written.
+
+
+
+
+                    Figure 13. Trajectories in a triangular grid region of genus 1.
+
+
+                                            Acknowledgements
+   The first author was supported by the National Science Foundation under Award No. DGE–
+1656466 and Award No. 2201907, by a Fannie and John Hertz Foundation Fellowship, and by a
+Benjamin Peirce Fellowship at Harvard University. The second author was supported by Elchanan
+Mossel’s Vannevar Bush Faculty Fellowship ONR-N00014-20-1-2826 and Elchanan Mossel’s Simons
+Investigator award (622132). We are grateful to Alex Postnikov for helpful conversations. We thank
+Noah Kravitz for suggesting that we consider billiards systems in square grids and in triangular
+grid regions with holes cut out, as discussed in Section 4. We thank the anonymous referee for
+helpful suggestions.
+
+                                                  References
+ [1] N. Arkani-Hamed, J. Bourjaily, F. Cachazo, A. Goncharov, A. Postnikov, and J. Trnka, Grassmannian Geometry
+     of Scattering Amplitudes. Cambridge University Press, Cambridge, 2016.
+ [2] C. Boldrighini, M. Keane, and F. Marchetti, Billiards in polygons. Ann. Probab., 6 (1978), 532–540.
+ [3] H. T. Croft, K. J. Falconer, and R. K. Guy, Billiard ball trajectories in convex regions. In: Unsolved Problems
+     in Geometry. New York: Springer–Verlag, 1991.
+ [4] H. T. Croft and H. P. F. Swinnerton, On the Steinhaus billiard table problem. Proc. Cambridge Philos. Soc., 59
+     (1963), 37–41.
+ [5] D. E. DeTemple and J. M. Robertson, Convex curves with periodic billiard polygons. Math. Mag., 58 (1985),
+     40–42.
+ [6] D. DeTemple and J. Robertson, Permutations associated with billiard paths. Discrete Math., 47 (1983), 211–219.
+ [7] S. Fomin, P. Pylyavskyy, E. Shustin, and D. Thurston, Morsifications and mutations. J. Lond. Math. Soc., 105
+     (2022), 2478–2554.
+ [8] P. Galashin, A. Postnikov, and L. Williams, Higher secondary polytopes and regular plabic graphs. Adv. Math.,
+     407 (2022).
+ [9] M. Gardner, Bouncing balls in polygons and polyhedrons. In: The Sixth Book of Mathematical Games from
+     Scientific American. Chicago, IL: University of Chicago Press, 1984.
+[10] E. Gutkin, Billiards in polygons. Physica D 19 (1986), 311–333.
+[11] B. Halpern, Strange billiard tables. Trans. Amer. Math. Soc., 232 (1977), 297–305.
+[12] Y. Kodama and L. Williams. KP solitons and total positivity for the Grassmannian. Invent. Math., 198 (2014),
+     637–699.
+[13] T. Lam and A. Postnikov, Polypositroids. arXiv:2010.07120 (2020).
+[14] T. Lukowski, M. Parisi, and L. K. Williams, The positive tropical Grassmannian, the hypersimplex, and the
+     m = 2 amplituhedron. arXiv:2002.06164, (2020).
+[15] M. Parisi, M. Sherman-Bennett, and L. K. Williams, The m = 2 amplituhedron and the hypersimplex: signs,
+     clusters, triangulations, Eulerian numbers. arXiv:2104.08254, (2021).
+[16] A. Postnikov, Total positivity, Grassmannians, and networks. arXiv:math/0609764 (2006).
+16                               COLIN DEFANT AND PAKAWUT JIRADILOK
+
+
+[17] V. Shende, D. Treumann, H. Williams, and E. Zaslow, Cluster varieties from Legendrian knots. Duke Math. J.,
+     168 (2019), 2801–2871.
+[18] R. Sine and V. Kreı̌novič, Remarks on billiards. Amer. Math. Monthly, 86 (1979), 204–206.
+
+     Department of Mathematics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
+     Email address: colindefant@gmail.com
+
+     Department of Mathematics, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
+     Email address: pakawut@mit.edu
+

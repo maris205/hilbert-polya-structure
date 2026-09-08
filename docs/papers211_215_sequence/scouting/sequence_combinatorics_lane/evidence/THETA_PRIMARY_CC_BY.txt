@@ -1,0 +1,209 @@
+Iterating the Lehmer code on inversion sequences: Catalan fixed points and finite stabilization (https://arxiv.org/html/2608.24476v1)
+citeturn9941view0 [wordlim: 200] Crawled: today; Content type: text/html; Source: open({"ref_id":"https://arxiv.org/html/2608.24476v1","lineno":null}); Total lines: 406
+L0: ##### Report GitHub Issue
+L1: 
+L2: [Button: ×]
+L3: 
+L4: Title: [Input: Enter title]
+L5: 
+L6: Content selection saved. Describe the issue below:
+L7: 
+L8: Description:
+L9: 
+L10: [Button: Submit without GitHub] [Button: Submit in GitHub]
+L11: 
+L12: cite0†Back to arXiv L13: 
+L14: cite1†Why HTML?†info.arxiv.org cite2†Report Issue cite3†Back to Abstract cite4†Download PDF L15:   1. cite5†Abstract L16:   2. cite6†1 Introduction L17:   3. cite7†2 Preliminaries L18:   4. cite8†3 Basic properties of $\Theta$ on inversion sequences L19:   5. cite9†4 Fixed points L20:   6. cite10†5 One-step stabilization L21:   7. cite11†6 Stabilization dynamics L22:     1. cite12†6.1 Exact-round data L23:     2. cite13†6.2 Upper bound for $|S_{n,k}|$ L24:   8. cite14†7 Conclusion and open problems L25:   9. cite15†References L26: 
+L27: cite16†License: CC BY 4.0†info.arxiv.org L28: 
+L29: arXiv:2608.24476v1 [math.CO] 25 Aug 2026
+L30: # Iterating the Lehmer code on inversion sequences: Catalan fixed points and finite stabilization
+L31: 
+L32: Julian Allagan    Shanzhen Gao    Benjamin Testart
+L33: ###### Abstract
+L34: We study an operator $\Theta$ on finite integer sequences, where $\Theta(\sigma)_{i}$ counts the entries to the left of $\sigma_{i}$ that are strictly smaller than $\sigma_{i}$. This operator is a variant of the so-called Lehmer code. For every sequence $\sigma$, the image $\Theta(\sigma)$ is an inversion sequence, and the restriction of $\Theta$ to permutations of $[0,n-1]$ is a bijection onto inversion sequences of length $n$.
+L35: We characterize the fixed points of $\Theta$ by avoidance of the pattern $101$ together with a saturation condition, prove that they are counted by the Catalan numbers, and give an explicit recursive bijection with Dyck paths. We also show that the sequences whose first $\Theta$-image is fixed are precisely those avoiding both $101$ and $201$.
+L36: Finally, we prove finite stabilization for all inversion sequences, exhibit a family attaining the maximal stabilization time, and show that the second stabilization level is not closed under classical patterns.
+L37: ^{1}Department of Mathematics,
+L38: University of Maryland Eastern Shore, Princess Anne, MD 21853, USA
+L39: jallagan@umes.edu
+L40: 
+L41: ^{2}Department of Computer Information Systems,
+L42: Virginia State University, Petersburg, VA 23806, USA
+L43: sgao@vsu.edu
+L44: 
+L45: ^{3}Université de Lorraine, CNRS, Inria, LORIA,
+L46: F-54000 Nancy, France
+L47: benjamin.testart@loria.fr
+L48: 
+L49: ^{∗}Corresponding author
+L50: 
+L51: Keywords. inversion sequence, Lehmer code, permutation, pattern avoidance, Catalan numbers, semi-Baxter numbers, fixed point, stabilization
+L52: 2020 MSC. 05A05, 05A15, 05A19
+L53: ## 1 Introduction
+L54: Permutation patterns and their avoidance form a central part of enumerative combinatorics, with well-established connections to Catalan classes, sorting operators, lattice paths, logical descriptions of permutation classes, and related discrete structures [cite17†1 , cite18†3 , cite19†8 , cite20†11 ]. An inversion sequence of length $n$ is a sequence $\sigma=(\sigma_{1},\ldots,\sigma_{n})$ such that $0\leq\sigma_{i}<i$ for every $i\in[1,n]$.
+L55: Inversion sequences are a well-known coding of permutations; a classical bijection from permutations onto inversion sequences is the Lehmer code [cite21†5 ], which records the number of smaller entries on the right of each entry of a permutation.
+L56: This paper studies the increasing left-to-right counterpart of that coding, and applies it to arbitrary integer sequences rather than restricting it to permutations. For a finite integer sequence ${\sigma=(\sigma_{1},\ldots,\sigma_{n})}$, define $\Theta(\sigma)_{i}=\#\{j<i:\sigma_{j}<\sigma_{i}\}$. Thus $\Theta(\sigma)_{i}$ counts earlier smaller entries, equivalently the occurrences of the classical permutation pattern $01$ ending at position $i$.
+L57: For every finite integer sequence $\sigma$, the image $\Theta(\sigma)$ is an inversion sequence, since $0\leq\Theta(\sigma)_{i}<i$ for each $i$. When $\Theta$ is restricted to permutations of $[0,n-1]$, it gives a classical bijection onto inversion sequences of length $n$.
+L58: We analyze the dynamics of iterating $\Theta$ on permutations and inversion sequences. In this respect, $\Theta$ may be viewed as a stabilization operator analogous in spirit to classical sorting operators studied in permutation-pattern theory, such as the stack-sorting map [cite17†1 , cite22†12 ], although the dynamics and fixed points considered here are fundamentally different.
+L59: The first result characterizes the fixed points of $\Theta$ by two explicit conditions: avoidance of the pattern $101$ and a saturation condition on every value that appears. This characterization yields an enumeration of the fixed points of $\Theta$ according to their length by the Catalan numbers. We give an explicit recursive bijection between fixed points of length $n$ and Dyck paths of semilength $n$.
+L60: We next prove that a sequence maps to a fixed point after one application of $\Theta$ precisely when it avoids both $101$ and $201$. Inversion sequences avoiding these two patterns are known to be enumerated by the semi-Baxter numbers [cite23†2 , cite24†6 ]. Since permutations cannot contain the pattern $101$, the permutations whose first $\Theta$-image is fixed are the $201$-avoiding permutations, known to be counted by the Catalan numbers [cite25†4 , cite19†8 ].
+L61: We prove finite stabilization under $\Theta$ for all inversion sequences with a sharp bound of $n-2$ iterations, show that the second stabilization level is not closed under classical patterns, and provide an upper bound for the number of permutations which stabilize within $k$ iterations.
+L62: ## 2 Preliminaries
+L63: 
+L64: For integers $a\leq b$, write $[a,b]=\{i\in\mathbb{Z}:a\leq i\leq b\}$. For a finite sequence $\sigma=(\sigma_{1},\ldots,\sigma_{n})$, write $|\sigma|=n$. The empty sequence is allowed and has length $0$.
+L65: ###### Definition 2.1.
+L66: 
+L67: Let $S_{n}$ denote the set of permutations of $[0,n-1]$, written as sequences of length $n$. Let $I_{n}$ denote the set of inversion sequences of length $n$, that is, sequences $\sigma=(\sigma_{1},\ldots,\sigma_{n})$ satisfying $0\leq\sigma_{i}<i$ for every $i\in[1,n]$.
+L68: ###### Definition 2.2.
+L69: 
+L70: Let $\sigma$ be a finite integer sequence. An occurrence of the pattern $101$ is a triple of indices $a<b<c$ such that $\sigma_{a}=\sigma_{c}>\sigma_{b}$. An occurrence of the pattern $201$ is a triple of indices $a<b<c$ such that $\sigma_{a}>\sigma_{c}>\sigma_{b}$. A sequence avoids a pattern if it has no occurrence of that pattern.
+L71: ###### Definition 2.3.
+L72: 
+L73: For a finite integer sequence $\sigma$, define $\Theta(\sigma)$ by $\Theta(\sigma)_{i}=\#\{j<i:\sigma_{j}<\sigma_{i}\}$ for each $i\in[1,|\sigma|]$.
+L74: 
+L75: ###### Example 2.4.
+L76: 
+L77: For $\sigma=(4,8,1,3,5,4)$, we have $\Theta(\sigma)=(0,1,0,1,3,2)$.
+L78: 
+L79: The following proposition describes well-known properties of $\Theta$; a proof is provided for the sake of completeness.
+L80: ###### Proposition 2.5.
+L81: 
+L82: For every finite integer sequence $\sigma$, one has $\Theta(\sigma)\in I_{|\sigma|}$. Moreover, for every $n\geq 0$, the restriction $\Theta:S_{n}\to I_{n}$ is a bijection.
+L83: ###### Proof.
+L84: For each $i$, the value $\Theta(\sigma)_{i}$ counts a subset of $[1,i-1]$, so $0\leq\Theta(\sigma)_{i}<i$. Hence $\Theta(\sigma)\in I_{|\sigma|}$. It remains to prove the bijection on $S_{n}$. The case $n=0$ is immediate. Let $\tau\in I_{n}$. We reconstruct a unique permutation $\sigma\in S_{n}$ with $\Theta(\sigma)=\tau$ from right to left. Suppose $\sigma_{i+1},\ldots,\sigma_{n}$ have already been chosen, and let $A_{i}$ be the set of unused values.
+L85: Since the values in $A_{i}$ are exactly the values that must occupy positions $1,\ldots,i$, the entry $\sigma_{i}$ must have precisely $\tau_{i}$ smaller values in $A_{i}$. Because $0\leq\tau_{i}<i=|A_{i}|$, there is a unique such choice, namely the $(\tau_{i}+1)$-st smallest element of $A_{i}$. This determines $\sigma_{i}$ uniquely at every step.
+L86: The constructed sequence is a permutation of $[0,n-1]$, and by construction exactly $\tau_{i}$ entries among positions $1,\ldots,i-1$ are smaller than $\sigma_{i}$ for each $i$. Thus $\Theta(\sigma)=\tau$. Existence and uniqueness follow, so $\Theta:S_{n}\to I_{n}$ is bijective. ∎
+L87: ###### Definition 2.6.
+L88: 
+L89: For $n,k\geq 0$, define:
+L90: 
+L91:   1. (i)
+L92: 
+L93: $FP_{n}=\{\sigma\in I_{n}:\Theta(\sigma)=\sigma\}$, the set of fixed points of $\Theta$ of length $n$;
+L94: 
+L95:   2. (ii)
+L96: 
+L97: $S_{n,k}=\{\sigma\in S_{n}:\Theta^{k}(\sigma)\in FP_{n}\}$, the set of permutations in $S_{n}$ whose $k$-th $\Theta$-image is fixed;
+L98: 
+L99:   3. (iii)
+L100: 
+L101: $I_{n,k}=\{\sigma\in I_{n}:\Theta^{k}(\sigma)\in FP_{n}\}$, the set of inversion sequences in $I_{n}$ whose $k$-th $\Theta$-image is fixed.
+L102: Since every element of $FP_{n}$ is fixed by $\Theta$, we have $S_{n,k}\subseteq S_{n,k+1}$ and $I_{n,k}\subseteq I_{n,k+1}$ for all $n,k\geq 0$. Proposition cite26†2.5 also gives $\Theta(S_{n,k})=I_{n,k-1}$ for every $k\geq 1$: the inclusion $\Theta(S_{n,k})\subseteq I_{n,k-1}$ follows directly from the definitions, and the reverse inclusion follows by taking the unique preimage in $S_{n}$ under the bijection $\Theta:S_{n}\to I_{n}$.
+L103: ###### Proposition 2.7.
+L104: 
+L105: Let $\sigma$ be an integer sequence of length $n$, and let $\tau=\Theta(\sigma)$. For all $p<q\in[1,n]$, the following hold: if $\sigma_{p}\leq\sigma_{q}$, then $\tau_{p}\leq\tau_{q}$; if $\sigma_{p}<\sigma_{q}$, then $\tau_{p}<\tau_{q}$.
+L106: ###### Proof.
+L107: 
+L108: If $\sigma_{p}\leq\sigma_{q}$, then every index $i<p$ with $\sigma_{i}<\sigma_{p}$ also satisfies $i<q$ and $\sigma_{i}<\sigma_{q}$. Hence the set counted by $\tau_{p}$ is contained in the set counted by $\tau_{q}$, so $\tau_{p}\leq\tau_{q}$. If $\sigma_{p}<\sigma_{q}$, the same containment holds, and the index $p$ gives an additional contribution to $\tau_{q}$ that is not counted in $\tau_{p}$. Therefore $\tau_{q}\geq\tau_{p}+1$, so $\tau_{p}<\tau_{q}$. ∎
+L109: Proposition cite27†2.7 above shows that $\Theta$ preserves the relations $\leq$ and $<$ between two entries read from left to right. Note however this does not hold for the relations $=$, $\geq$, or $>$. For instance, if $\sigma=(2,0,1,2)$, then $\tau=\Theta(\sigma)=(0,0,1,2)$; we have $\sigma_{1}>\sigma_{3}$ and $\sigma_{1}=\sigma_{4}$, yet $\tau_{1}<\tau_{3}$ and $\tau_{1}<\tau_{4}$.
+L110: ## 3 Basic properties of $\Theta$ on inversion sequences
+L111: 
+L112: Throughout this section, let $n\geq 0$, let $\sigma\in I_{n}$, and $\tau=\Theta(\sigma)$. All statements involving a position $p$ are understood with $p\in[1,n]$.
+L113: 
+L114: ###### Proposition 3.1.
+L115: 
+L116: If $\sigma_{p}=0$, then $\tau_{p}=0$.
+L117: 
+L118: ###### Proof.
+L119: 
+L120: By definition, $\tau_{p}=\#\{i<p:\sigma_{i}<\sigma_{p}\}$. Since $\sigma_{p}=0$ and every entry of an inversion sequence is nonnegative, the set being counted is empty. ∎
+L121: ###### Proposition 3.2.
+L122: 
+L123: For every $p\in[1,n]$, one has $\sigma_{p}\leq\tau_{p}$.
+L124: 
+L125: ###### Proof.
+L126: 
+L127: Since $\sigma\in I_{n}$, we have $\sigma_{p}<p$. For each $i\in[1,\sigma_{p}]$, the inversion-sequence condition gives $\sigma_{i}<i\leq\sigma_{p}$, and hence $\sigma_{i}<\sigma_{p}$. Thus the $\sigma_{p}$ indices $1,\ldots,\sigma_{p}$ all contribute to $\tau_{p}$, so $\tau_{p}\geq\sigma_{p}$. ∎
+L128: 
+L129: ###### Proposition 3.3.
+L130: 
+L131: If $\sigma_{p}=\tau_{p}$, then $\Theta(\tau)_{p}=\tau_{p}$.
+L132: ###### Proof.
+L133: 
+L134: Let $i<p$. If $\sigma_{i}<\sigma_{p}$, then Proposition cite27†2.7 gives $\tau_{i}<\tau_{p}$. If $\sigma_{i}\geq\sigma_{p}$, then Proposition cite28†3.2 gives $\tau_{i}\geq\sigma_{i}\geq\sigma_{p}=\tau_{p}$. Hence $\{i<p:\sigma_{i}<\sigma_{p}\}=\{i<p:\tau_{i}<\tau_{p}\}$. The two sets have the same cardinality, so $\Theta(\tau)_{p}=\tau_{p}$. ∎
+L135: 
+L136: ###### Proposition 3.4.
+L137: 
+L138: Let $p\in[1,n]$ and $k\geq 1$. If $\Theta^{k}(\sigma)_{p}\leq k$, then $\Theta^{k-1}(\sigma)_{p}=\Theta^{k}(\sigma)_{p}$.
+L139: ###### Proof.
+L140: 
+L141: Set $\sigma^{(r)}=\Theta^{r}(\sigma)$. We prove the claim by induction on $k$. For $k=1$, Proposition cite28†3.2 gives $\sigma_{p}\leq\sigma^{(1)}_{p}\leq 1$. If $\sigma_{p}=0$, then Proposition cite29†3.1 gives $\sigma^{(1)}_{p}=0$. If $\sigma_{p}=1$, then the preceding inequality forces $\sigma^{(1)}_{p}=1$. Thus $\sigma_{p}=\sigma^{(1)}_{p}$.
+L142: Assume now that $k\geq 2$ and that the result has been proved for $k-1$. Proposition cite28†3.2 , applied to $\sigma^{(k-1)}$, gives $\sigma^{(k-1)}_{p}\leq\sigma^{(k)}_{p}$. If the inequality were strict, then $\sigma^{(k-1)}_{p}<\sigma^{(k)}_{p}\leq k$, so $\sigma^{(k-1)}_{p}\leq k-1$. By the induction hypothesis, $\sigma^{(k-2)}_{p}=\sigma^{(k-1)}_{p}$. Proposition cite30†3.3 , applied to $\sigma^{(k-2)}$ in place of $\sigma$, then gives $\sigma^{(k)}_{p}=\sigma^{(k-1)}_{p}$, a contradiction.
+L143: Hence $\sigma^{(k-1)}_{p}=\sigma^{(k)}_{p}$. ∎
+L144: ###### Proposition 3.5.
+L145: 
+L146: For every $n\geq 2$ and every $\sigma\in I_{n}$, the sequence $\Theta^{n-2}(\sigma)$ is fixed by $\Theta$.
+L147: ###### Proof.
+L148: 
+L149: For each $p\in[1,n]$, the entry $\Theta^{n-1}(\sigma)_{p}$ belongs to $[0,p-1]$, and hence is at most $n-1$. Applying Proposition cite31†3.4 with $k=n-1$ gives $\Theta^{n-2}(\sigma)_{p}=\Theta^{n-1}(\sigma)_{p}$. Since this holds for every position $p$, we have $\Theta^{n-2}(\sigma)=\Theta^{n-1}(\sigma)$, so $\Theta^{n-2}(\sigma)$ is fixed by $\Theta$. ∎
+L150: Two immediate consequences follow: $I_{n,k}=I_{n}$ for every $k\geq n-2$ and $n\geq 2$, and, by the bijectivity of $\Theta:S_{n}\to I_{n}$, one also has $S_{n,k}=S_{n}$ for every $k\geq n-1$ and $n\geq 2$; moreover, Proposition cite32†3.7 shows this is sharp, since $S_{n,n-2}\neq S_{n}$ for every $n\geq 3$.
+L151: 
+L152: Example cite33†3.6 works out a representative member of an extremal family; Proposition cite32†3.7 shows that $\sigma=(0,1,2,\ldots,n-3,0,1)$ attains the bound of Proposition cite34†3.5 for every $n\geq 3$.
+L153: ###### Example 3.6.
+L154: 
+L155: Take $n=5$ and $\sigma=(0,1,2,0,1)$. The first four entries form the fixed point $(0,1,2,0)$, so under iteration only the final coordinate moves:
+L156: 
+L157:  | $$(0,1,2,0,1)\ \xrightarrow{\ \Theta\ }\ (0,1,2,0,2)\ \xrightarrow{\ \Theta\ }\ (0,1,2,0,3)\ \xrightarrow{\ \Theta\ }\ (0,1,2,0,4),$$  |
+L158: and $(0,1,2,0,4)$ is fixed. At each step the final entry $v$ is replaced by the number of earlier entries smaller than $v$; because the value $0$ occurs twice among the first four entries, this count equals $v+1$ rather than $v$, so the final coordinate strictly increases until it reaches $n-1$. Stabilization therefore occurs after $n-2=3$ iterations, the maximum permitted by Proposition cite34†3.5 .
+L159: 
+L160: We now show that the stabilization bound from Proposition cite34†3.5 is attained.
+L161: ###### Proposition 3.7.
+L162: 
+L163: For every $n\geq 3$, the inversion sequence $\sigma=(0,1,2,\ldots,n-3,0,1)$ satisfies $\Theta^{\,n-3}(\sigma)\neq\Theta^{\,n-2}(\sigma)$. Consequently, the bound of Proposition cite34†3.5 is sharp.
+L164: ###### Proof.
+L165: 
+L166: We prove by induction on $k$ that $\Theta^{k}(\sigma)=(0,1,2,\ldots,n-3,0,k+1)$ for every $0\leq k\leq n-2$.
+L167: The assertion is immediate for $k=0$. Assume it holds for some $k<n-2$. The first $n-1$ entries of $\Theta^{k}(\sigma)$ form the fixed point $(0,1,2,\ldots,n-3,0)$, so only the final coordinate can change under another application of $\Theta$. The last entry of $\Theta^{k}(\sigma)$ is $k+1$. Among the preceding entries, exactly $k+2$ positions have values smaller than $k+1$: the positions $1,\ldots,k+1$, whose values are $0,1,\ldots,k$, together with the additional occurrence of $0$ at position $n-1$.
+L168: Hence the final coordinate of $\Theta^{k+1}(\sigma)$ is $k+2$. Therefore $\Theta^{k+1}(\sigma)=(0,1,2,\ldots,n-3,0,k+2)$, completing the induction.
+L169: Taking $k=n-3$ gives $\Theta^{\,n-3}(\sigma)=(0,1,2,\ldots,n-3,0,n-2)$, whereas $\Theta^{\,n-2}(\sigma)=(0,1,2,\ldots,n-3,0,n-1)$. These sequences are distinct. Since Proposition cite34†3.5 gives stabilization by step $n-2$, this example attains the maximal possible stabilization time. ∎
+L170: ## 4 Fixed points
+L171: 
+L172: ###### Definition 4.1.
+L173: 
+L174: Let $\sigma\in I_{n}$. An entry $\sigma_{i}$ is called saturated if $\sigma_{i}=i-1$.
+L175: 
+L176: ###### Proposition 4.2.
+L177: 
+L178: Let $\sigma$ be a nonempty integer sequence, let $p$ be the position of the leftmost maximum of $\sigma$, and let $\tau=\Theta(\sigma)$. Then $p$ is the position of the rightmost saturated entry of $\tau$.
+L179: ###### Proof.
+L180: 
+L181: Since $p$ is the position of the leftmost maximum of $\sigma$, every entry to the left of $p$ is strictly smaller than $\sigma_{p}$. Hence every index $1,\ldots,p-1$ contributes to $\tau_{p}$, and therefore $\tau_{p}=p-1$. Thus the entry at position $p$ is saturated.
+L182: Now let $j>p$. Since $\sigma_{p}\geq\sigma_{j}$, the index $p$ does not contribute to $\tau_{j}$. Hence at most the $j-2$ indices in $[1,j-1]\setminus\{p\}$ can contribute to $\tau_{j}$, so $\tau_{j}\leq j-2<j-1$. Therefore no saturated entry of $\tau$ occurs to the right of $p$, proving that $p$ is the rightmost saturated position of $\tau$. ∎
+L183: ###### Proposition 4.3.
+L184: 
+L185: Let $\sigma$ and $\sigma^{\prime}$ be two integer sequences of length $n\geq 0$. Then $\Theta(\sigma)=\Theta(\sigma^{\prime})$ if and only if, for every pair $p<q$, one has $\sigma_{p}<\sigma_{q}$ if and only if $\sigma^{\prime}_{p}<\sigma^{\prime}_{q}$.
+L186: ###### Proof.
+L187: 
+L188: Suppose first that $\sigma$ and $\sigma^{\prime}$ have the same increasing pairs. Then, for each position $q$, the subsets $\{p<q:\sigma_{p}<\sigma_{q}\}$ and $\{p<q:\sigma^{\prime}_{p}<\sigma^{\prime}_{q}\}$ of $[1,q-1]$ are equal. Hence they have the same cardinality, and therefore $\Theta(\sigma)=\Theta(\sigma^{\prime})$.
+L189: Conversely, assume $\Theta(\sigma)=\Theta(\sigma^{\prime})=\tau$. We prove by induction on $n$ that $\sigma$ and $\sigma^{\prime}$ have the same increasing pairs. The assertion is immediate for $n\leq 1$, so let $n\geq 2$.
+L190: Let $p$ be the position of the leftmost maximum of $\sigma$. By Proposition cite35†4.2 , $p$ is the rightmost saturated position of $\tau$. Applying the same proposition to $\sigma^{\prime}$ shows that $p$ is also the position of the leftmost maximum of $\sigma^{\prime}$. We first compare all pairs involving position $p$. If $i<p$, then $\sigma_{i}<\sigma_{p}$ and $\sigma^{\prime}_{i}<\sigma^{\prime}_{p}$, since $p$ is the leftmost maximum in both sequences.
+L191: If $j>p$, then $\sigma_{j}\leq\sigma_{p}$ and $\sigma^{\prime}_{j}\leq\sigma^{\prime}_{p}$, since $p$ is a maximum in both sequences. Thus, for every $r\neq p$, the comparison between positions $p$ and $r$ has the same truth value in $\sigma$ as in $\sigma^{\prime}$. Delete position $p$ from $\sigma,\sigma^{\prime}$, and $\tau$, and denote the resulting sequences by $\widehat{\sigma},\widehat{\sigma}^{\prime}$, and $\widehat{\tau}$, respectively.
+L192: We claim that $\Theta(\widehat{\sigma})=\widehat{\tau}=\Theta(\widehat{\sigma}^{\prime})$.
+L193: We verify the $\Theta$-relations after deletion. For a position originally to the left of $p$, neither the entry nor any earlier entry is affected by the deletion, so the corresponding $\Theta$-coordinate is unchanged. For a position $q>p$, the deleted entry $\sigma_{p}$ satisfies $\sigma_{p}\geq\sigma_{q}$ and hence does not contribute to $\Theta(\sigma)_{q}$; removing it therefore deletes no index from the set counted by $\Theta(\sigma)_{q}$.
+L194: After reindexing, the corresponding coordinate of $\Theta(\widehat{\sigma})$ equals $\tau_{q}$. Hence $\Theta(\widehat{\sigma})=\widehat{\tau}$, and in particular $\widehat{\tau}\in I_{n-1}$ by Proposition cite26†2.5 . The identical argument applied to $\sigma^{\prime}$ gives $\Theta(\widehat{\sigma}^{\prime})=\widehat{\tau}$.
+L195: By the induction hypothesis, $\widehat{\sigma}$ and $\widehat{\sigma}^{\prime}$ have the same increasing pairs. Together with the comparisons involving position $p$ verified above, this shows that $\sigma_{a}<\sigma_{b}$ if and only if $\sigma^{\prime}_{a}<\sigma^{\prime}_{b}$ for every pair $a<b$ of original positions. Hence $\sigma$ and $\sigma^{\prime}$ have the same increasing pairs, completing the proof. ∎
+L196: ###### Corollary 4.4.
+L197: 
+L198: Let $\sigma$ be an integer sequence, and let $\tau=\Theta(\sigma)$. Then $\tau$ is fixed by $\Theta$ if and only if, for every $p<q$, one has $\sigma_{p}<\sigma_{q}$ if and only if $\tau_{p}<\tau_{q}$.
+L199: 
+L200: ###### Proof.
+L201: 
+L202: Since $\Theta(\sigma)=\tau$, Proposition cite36†4.3 gives $\Theta(\tau)=\tau$ if and only if $\sigma$ and $\tau$ have exactly the same increasing pairs. ∎
+L203: ###### Theorem 4.5.
+L204: 
+L205: Let $\sigma\in I_{n}$. Then $\sigma$ is fixed by $\Theta$ if and only if the following two conditions hold: (i) $\sigma$ avoids $101$; (ii) whenever a value $v$ appears in $\sigma$, one has $\sigma_{v+1}=v$.
+L206: ###### Proof.
+L207: 
+L208: Let $\tau=\Theta(\sigma)$.
+L209: 
+L210: Assume first that $\sigma$ is fixed. If $\sigma$ contained an occurrence of $101$ at positions $a<b<c$, then $\sigma_{a}=\sigma_{c}>\sigma_{b}$. Every index contributing to $\tau_{a}$ would also contribute to $\tau_{c}$, and the index $b$ would contribute to $\tau_{c}$ but not to $\tau_{a}$. Hence $\tau_{c}>\tau_{a}$, contradicting $\tau=\sigma$ and $\sigma_{a}=\sigma_{c}$. Thus $\sigma$ avoids $101$.
+L211: Now let $v$ be a value appearing in $\sigma$, and choose $p$ with $\sigma_{p}=v$. By Proposition cite28†3.2 , $\tau_{p}\geq v$. Since $\tau_{p}=\sigma_{p}=v$, equality holds. Note that the indices $1,\ldots,v$ already contribute $v$ units to $\tau_{p}$, hence no index $r$ with $v<r<p$ can satisfy $\sigma_{r}<v$. If $p=v+1$, then $\sigma_{v+1}=v$. Otherwise, $v+1<p$, so taking $r=v+1$ in the preceding sentence gives $\sigma_{v+1}\geq v$.
+L212: Since $\sigma\in I_{n}$, one also has $\sigma_{v+1}<v+1$, and therefore $\sigma_{v+1}=v$.
+L213: Conversely, assume that $\sigma$ satisfies (i) and (ii). Fix $p$ and write $v=\sigma_{p}$. By Proposition cite28†3.2 , $\tau_{p}\geq v$. Condition (ii) gives $\sigma_{v+1}=v$. If $r$ satisfies $v+1<r<p$ and $\sigma_{r}<v$, then the indices $v+1<r<p$ form an occurrence of $101$, since $\sigma_{v+1}=\sigma_{p}=v>\sigma_{r}$, contradicting (i). Hence every index between $v+1$ and $p$ has value at least $v$. However, the indices $1,\ldots,v$ all have values smaller than $v$, by the inversion-sequence condition.
+L214: We conclude that exactly $v$ entries of $\sigma$ contribute to $\tau_{p}$, therefore $\tau_{p}=v=\sigma_{p}$. Since $p$ was arbitrary, $\Theta(\sigma)=\sigma$. ∎
+L215: ###### Lemma 4.6.
+L216: 
+L217: For $n\geq 1$, every $\sigma\in FP_{n}$ has a unique decomposition determined by $v=\sigma_{n}$ of the form $\sigma=(\alpha,\beta_{1}+v,\ldots,\beta_{n-v}+v)$, where $\alpha\in FP_{v}$, $\beta\in FP_{n-v}$, and $\beta_{n-v}=0$. Conversely, every such pair $(\alpha,\beta)$ produces an element of $FP_{n}$.
+L218: ###### Proof.
+L219: 
+L220: Let $\sigma\in FP_{n}$ and set $v=\sigma_{n}$. By Theorem cite37†4.5 , $\sigma_{v+1}=v$. Since $\sigma$ avoids $101$, no index $r$ with $v+1<r<n$ can satisfy $\sigma_{r}<v$. Thus every entry in positions $v+1,\ldots,n$ is at least $v$. Define $\alpha=(\sigma_{1},\ldots,\sigma_{v})$ and $\beta=(\sigma_{v+1}-v,\ldots,\sigma_{n}-v)$. Then $\beta_{n-v}=0$.

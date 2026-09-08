@@ -1,0 +1,611 @@
+             Special issue dedicated to Norm Levenberg on the occasion of his 60th birthday, Volume 11 · 2018 · Pages 122–129
+
+
+
+
+     The Secant Method for Root Finding, Viewed as a Dynamical
+                              System
+                                                       Eric Bedford · Paul Frigge
+
+
+
+
+                                                        Communicated by F. Piazzon
+
+
+
+
+                                                                    Abstract
+                   The secant method is a procedure for approximating the zeros of a function. We will explore the behavior
+                   of this procedure in the case of univariate rational functions for arbitrary starting points, whether or not
+                   there is convergence to a zero.
+
+
+
+
+Introduction
+Let a function f : C → C be given. The secant method for finding a root α, f (α) = 0, is as follows. Given two initial points
+z1 , z2 ∈ C, we determine a third point z3 ∈ C by the condition that (z3 , 0) is the point where the (secant) line between (z1 , f (z1 ))
+and (z2 , f (z2 )) crosses the horizontal coordinate axis. Inductively, we determine zn+1 starting with zn−1 and zn . This procedure
+may be written (zn , zn+1 ) = S f (zn−1 , zn ) where
+
+                                             S f (x, y) = ( y, R(x, y)) : C2 ¹¹Ë C2 ,    with                                          (1)
+                                                       y f (x) − x f ( y)     (x − y) f (x)
+                                             R(x, y) =                    =x−                .                                         (2)
+                                                         f (x) − f ( y)       f (x) − f ( y)
+If the initial points for the secant method are the same, z1 = z2 , then the first step of the Secant Method essentially coincides with
+Newton’s method, but after the first step, the two methods are different.
+     If f (z) is a rational function, then S f is a rational mapping. A point α is a simple zero of f if and only if α̂ := (α, α) is a
+regular fixed point of S f . The secant map S f may be considered to be a root-finding algorithm: If α is a simple root of f , then if
+the starting points z1 and z2 are sufficiently close to α, then the iterates of S f (z1 , z2 ) converge to α̂ at the super-exponential rate
+φ ∼ 1.61803, where φ is the golden ratio (see Theorem 4.2).
+     On the other hand, if α is a root of f with multiplicity greater than one, then α̂ is a point of indeterminacy for S f . We show
+(Theorem ??) that in this indeterminate case there is a nonempty basin B(α̂) of points which are attracted to α̂ in forward time,
+although the rate of convergence is merely geometric.
+     Since we consider S f in its capacity as a root-finding algorithm, we must ask about the size of B̃ := B(α̂ j ), where α j ranges
+                                                                                                                  S
+
+over all roots of f . A root-finding method can hope that B̃ might have full measure, or at least be dense in C2 . However, we show
+that this is “almost never” the case. Namely, by Corollary 3.3, we have: For a generic polynomial f , there is an open set of points
+which do not converge to a root.
+     There are two cases in which the secant map takes an especially attractive form: when f is a quadratic polynomial, and when
+ f is a rational fraction of degree 1. In Section 4, we describe the dynamics of S f in these cases.
+     Finally we discuss S f as a global dynamical system of the complex plane C2 . If f = p/q is rational, S f is a dominant rational
+map and has topological degree d t := max(deg(p) − 1, deg(q)) (see Proposition 1.1). We show that in most cases the dynamical
+degree δ = δ(S f ) is greater than d t (Theorem 5.1), and thus S f is a map of “small topological degree”. We then record a few
+conclusions that follow from the general theory.
+     Another root finder, Newton’s method, has been intensively studied as a global dynamical system on Ĉ. In complex dimension
+2, the Newton method for the roots of a pair of quadratics was studied by Hubbard and Papadopol [7]. The resulting rational
+map has algebraic degree 3 and topological degree 4. This is a map of “large topological degree” and will be expected to have
+dynamical behavior that is qualitatively different from that of S f .
+     After our work was completed, we learned of independent work by Garijo and Jarque [6], who discuss related questions
+about the secant map, as applied in the real domain. One of their results is that there is a polynomial p for which S p has an
+attracting cycle of period 4; and thus S p is not “generally convergent” in this case.
+                                                                 Bedford · Frigge                                                     123
+
+
+
+Acknowledgement. We thank the referee for reading this paper carefully, catching mistakes, and making helpful suggestions.
+
+1    Basic properties
+The general theory of iteration of rational maps has been studied intensively in recent years (see [8], [5], [3]). Everything
+we will do in Section 1 has been done in [2] for the case where f is a polynomial with distinct (simple) zeros. Here we
+will deal with the case that f may have poles and, most importantly, multiple zeros. Following [2], we start by extending
+                                                                                                     p(z)
+S f to a rational map S f : P1 × P1 ¹¹Ë P1 × P1 . Throughout this paper, we will assume that f (z) = q(z) is a rational function
+which is not linear. (Otherwise, S f is constant.) Further, we may and will assume that p and q are monic, and we write
+S(x, y) = S f (x, y) = ( y, R f (x, y)), where
+                                                         y q( y) p(x) − x q(x) p( y)       (x − y)p(x)q( y)
+                           R f (x, y) = R f ( y, x) =                                =x−                                               (3)
+                                                           q( y) p(x) − q(x) p( y)       p(x)q( y) − p( y)q(x)
+We record here how the Secant Map changes as we perform scaling, translation and inversion on the map f :
+                                  Sλ f = S f
+                                  σ̃−1 ◦ S f ◦ σ̃ = S f ◦σ    with σ(x) = λx, σ̃(x, y) = (λx, λ y)
+                                  τ̃
+                                   −1
+                                        ◦ S f ◦ τ̃ = S f ◦τ   with τ(x) = x + a, τ̃(x, y) = (x + a, y + a)                             (4)
+                                  R1/ f − x = (x − R f ) ◦ ρ with ρ(x, y) = ( y, x)
+                                  Sg = j ◦ S f ◦ j      with g(t) = t f (1/t),      j(x, y) = (1/x, 1/ y).
+By the first equation, we may and will assume that both p and q are monic.
+Proposition 1.1. . Let us set d t := max{deg(p) − 1, deg(q)}. It follows that for y fixed, the degree of R(x, y) in x is d t , and S f has
+topological degree d t , i.e., if (x 0 , y0 ) is a generic point, then S −1 (x 0 , y0 ) consists of d t points.
+
+Proof. Let us write the expression for R(x, y) in the center of (3) as Ñ (x, y)/ D̃(x, y). It is clear that Ñ (x, y) and D̃(x, y) both
+vanish along the line {x = y}, and thus the GCD of Ñ and D̃ will have the form ( y − x)h(x, y). We show that h(x, y) is constant
+by observing that Ñ − y D̃ = ( y − x)q(x)p( y) and x D̃ − Ñ = (x − y)q( y)p(x). Thus if ( y − x)h divides both Ñ and D̃, then h
+divides both q(x)p( y) and q( y)p(x). But then h must be constant since p and q have no common factors.
+     Now we claim that the numerator Ñ (x, y) has degree d t + 1 in x. The most difficult case is where deg(p(x)) = deg(x q(x)) =
+d t + 1. In this case, the highest degree term in x in the expression Ñ , is x d t +1 ( y q( y) − p( y)). The coefficient y q( y) − p( y)
+cannot be the zero polynomial because p and q are relatively prime. Thus the degree of N (x, y) := Ñ (x, y)/( y − x) in x is d t .
+     Now we claim that D̃ has degree d̄ := max(deg(p), deg(q)) in x. The hardest case is when d̄ = deg(p) = deg(q). In this case
+the term of highest degree in D̃ is x d̄ (q( y) − p( y)). Thus for generic y, the degree of D̃ is d̄, and so the degree of D := D̃/( y − x)
+in x is d̄ − 1 ≤ d t . It follows that the degree in x of N − cD is d t for all but finitely many c ∈ C.
+     The number of solutions {(x, y) : S(x, y) = ( y, R(x, y)) = (x 0 , y0 )} is the same as the number of solutions of {x : R(x, x 0 ) =
+y0 } = {x : N (x, x 0 ) = y0 D(x, x 0 )}. It follows that or generic (x 0 , y0 ), the number of solutions is d t .
+
+    Let us observe that the cohomology group H 1,1 (P1 × P1 ; Z) is generated by the (Poincaré dual) class H = { y = c} of a
+horizontal line and V = {x = c} of a vertical line. The intersection product is given by H · H = V · V = 0, and H · V = V · H = 1. If
+C ⊂ P1 is a curve, then its Poincaré dual is the cohomology class defined by
+                                                      {C} = mH + nV ∈ H 1,1 (P1 × P1 ; Z)
+where m (resp. n) is the number of times C intersects a general vertical (resp. horizontal) line.
+   The indeterminacy set I (S) is the finite (possibly empty) set of points where S fails to be continuous.
+Proposition 1.2. S f has 2d t (max(deg(p), deg(q)) − 1) points of indeterminacy, counted with multiplicity.
+
+Proof. As in the proof of Proposition 1.1, we write R(x, y) = N /D where N and D are obtained by dividing the numerator and
+denominator of the central expression in (3) by ( y − x). By Proposition 1.1, N and D have no common factor, and the degrees in
+x are d t and max(deg(p), deg(q)) − 1, respectively. We will compute the cardinality of
+                                           I (S f ) = {(x, y) ∈ P1 × P1 : N (x, y) = D(x, y) = 0}.
+
+By the symmetry of N and D, we see that the degrees in y are the same as the degrees in x. Thus, as elements of H 1,1 (P1 × P1 ; Z),
+we have that the class of {N = 0} is given by d t (H + V ), and the class of {D = 0} is (max(deg(p), deg(q)) − 1)(H + V ). Taking the
+intersection product, then, we have #{N (x, y) = D(x, y) = 0} = 2d t (max(deg(p), deg(q)) − 1).
+
+     If C is a curve, we define its strict transform S(C ) to be the closure of S(C − I (S)). A curve is said to be exceptional if S(C )
+is a point. It is clear that any exceptional curve is of the form { y = c}, for some constant c ∈ C ∪ {∞}. In order to work with
+points at infinity, we will use the coordinate system (u, v) = j(x, y) = (1/x, 1/ y). We define a∞ = deg(q) − deg(p) so that
+f (1/t) = t a∞ h(t), where h(t) is holomorphic at t = 0, and h(0) 6= 0. Thus a∞ gives the order of zero or pole of f at ∞.
+Proposition 1.3. If c ∈ C, f (c) = 0, then S({ y = c}) = (c, c). If f (∞) ∈ C (i.e., if infinity is not a pole of f ), then S({ y = ∞}) =
+(∞, ∞). For all other cases, { y = c} is not exceptional and is mapped to the vertical line {x = c}. If c = ∞, then we have the
+following: If a∞ < 0, then P1 × {∞} is not exceptional; if a∞ ≥ 0, then P1 × {∞} is exceptional and maps to (∞, ∞) x, y .
+
+
+
+Dolomites Research Notes on Approximation                                                                               ISSN 2035-6803
+                                                                      Bedford · Frigge                                                                  124
+
+
+
+Proof. A horizontal line { y = c}, c ∈ C, is exceptional if and only if x 7→ R(x, c) is constant. If c ∈ C is not a pole of f , then
+                                                                              c f (x) − x f (c)
+                                                                 R(x, c) =
+                                                                                f (x) − f (c)
+If this expression is constant, and if f (c) 6= 0, then f (x) must be linear, which case we have excluded. Thus if c ∈ C is not a pole,
+then { y = c} is exceptional if and only if f (c) = 0.
+                                                                                                   y f (x)−αx
+     If c = ∞ is not a pole, then lim x→∞ f (x) = α ∈ C exists. Thus lim y→∞ R(x, y) = lim y→∞ f (x)−α = ∞ for generic x, so we
+conclude that S({ y = ∞}) = (∞, ∞), and so { y = ∞} is exceptional.
+     Now suppose that c ∈ C is a pole of f = p/q. Then q(c) = 0 and p(c) = α 6= 0. Using the expression for R(x, y) in (3), we
+                                 −xq(x)α
+have lim y→c R(x, y) = lim y→c −q(x)α = x, so { y = c} is not exceptional. Finally, if c = ∞ is a pole, i.e., if a∞ ≤ −1, then the
+degree of p is greater than the degree of q. If deg(p) > deg(q) + 1, then the previous argument shows that lim y→∞ R(x, y) = x.
+If deg(p) = deg(q) + 1, then since p and q are monic, the previous argument shows that lim y→∞ R(x, y) = x − f (x), which is
+nonconstant since f is nonlinear.
+
+    Let x 0 be a point which is not a pole of f . Then we say that x 0 is a critical point if f 0 (x 0 ) = 0. We say that the critical point is
+simple if f 00 (x 0 ) 6= 0. If x 0 is a pole, then we consider the coordinate X = 1/x at x = ∞. The condition of f having a pole at x 0
+is equivalent to F := 1/ f having a zero at x 0 . We say that x 0 is a critical point for f at a pole x 0 if F 0 (x 0 ) = 0.
+    Let us record a computation which will be useful in the sequel. Suppose
+                                                               f (x) = (x − α)a (1 + x h(x))
+where h(x) is analytic in a neighborhood of x = α. By (4) there is no loss of generality if we assume α = 0. Then for a ≥ 1, we
+have
+                         f (x) − f ( y) = x a (1 + xh(x)) − y a (1 + yh( y))
+                                              = (x a − y a )(1 + xh(x)) + y a (xh(x) − yh( y))
+                                                                                                                   .                                  (5)
+                                                                                                    xh(x) − yh( y)
+                                                                                                 
+                                              = (x − y) (x a−1 + · · · + y a−1 )(1 + xh(x)) + y a
+                                                                                                        x−y
+Using a similar expansion for y f (x) − x f ( y) in the case a ≥ 2, we find
+                                                                                                                     
+                                                                                                        xh(x)− yh( y)
+                                          N1 (x, y)    x(x a−2 + · · · + y a−2 )(1 + xh(x)) + x y a−1        x− y
+                              R(x, y) = y           =y                                                                                                  (6)
+                                          D1 (x, y)
+                                                                                                                  
+                                                                                                     xh(x)− yh( y)
+                                                         (x a−1 + · · · + y a−1 )(1 + xh(x)) + y a                   x− y
+
+Proposition 1.4. The behavior of S f on the diagonal inside C2 is as follows:
+a) If x 0 is a non-critical point for f , then (x 0 , x 0 ) is not indeterminate for S f , and S f (x 0 , x 0 ) = (x 0 , x 0 − f (x 0 )/ f 0 (x 0 )).
+b) If x 0 is a critical point for f with f (x 0 ) 6= 0, then (x 0 , x 0 ) is not indeterminate for S f , and S f (x 0 , x 0 ) = (x 0 , ∞).
+c) If f has a multiple zero or multiple pole at x 0 , then (x 0 , x 0 ) is indeterminate for S f .
+Finally, for the behavior at the diagonal point at infinity:
+d) S f is indeterminate at (∞, ∞) if and only if |1 + a∞ | ≥ 2.
+
+Proof. The first two statements follow from the expression on the right hand side of (1). For the third statement, we note that
+the indeterminacy locus of S f is the same as the set where the fraction R is indeterminate. By (4), it is sufficient to consider
+the case where x 0 is a multiple zero of f . Now we have a ≥ 2 and may write R(x, y) as in (6), so that the numerator is
+ y x(x a−2 + · · · + y a−2 ) plus terms of order > a, while the denominator is (x a−1 + · · · + y a−1 ) plus terms of order > a − 1. The
+expression y x(x a−2 + · · · + y a−2 ) vanishes on a lines passing through the origin, and these are distinct from the a − 1 lines where
+(x a−1 + · · · + y a−1 ) vanishes, which means that the numerator and denominator have no common factors. Thus the polar locus of
+R intersects the zero locus of R at the origin. Thus R is indeterminate there.
+     To discuss the point (∞, ∞) we use the involution j(x, y) = (1/x, 1/ y) which is a biregular map taking (x, y) = (∞, ∞) to
+(0, 0). Conjugating S f with j, we obtain a new map S g (last line of (4)) which is the secant method for the function g(t) := t f (1/t).
+The function g is meromorphic at t = 0 and vanishes to order 1 + a∞ . It follows from (c) in Proposition 1.4 that if g has a
+multiple zero or pole at t = 0, then S g is indeterminate; otherwise it is regular. This corresponds to |1 + a∞ | ≥ 2.
+
+    A direct calculation shows the following two results.
+Proposition 1.5. If α ∈ C is a simple zero for f , then (α, α) is a fixed point of S f , and the differential is
+                                                         f 00 (α)
+                                                                                  
+                                            0 1                        0       0
+                           DS f (α, α) =              +                                 + O2 (x − α, y − α).
+                                            0 0         2 f 0 (α)   y −α x −α
+In particular, the eigenvalues of DS f (α, α) are 0 and 0.
+    This also says something about the behavior at (∞, ∞). If f is regular at infinity, and f (∞) 6= 0, then g(t) = t f (1/t) has a
+simple zero at t = 0. By (4), S f in a neighborhood of (∞, ∞) is locally conjugate to the map S g at (0, 0), and DS g has the form
+given by Proposition 1.5.
+                                                                                                                 
+                                                                                                              0 1
+Proposition 1.6. If α ∈ C is a simple pole for f , then (α, α) is a fixed point for S f , and DS f (α, α) =        , so (α, α) is of
+                                                                                                              0 0
+saddle type.
+
+
+
+Dolomites Research Notes on Approximation                                                                                                   ISSN 2035-6803
+                                                                 Bedford · Frigge                                                               125
+
+
+
+2    Convergence at multiple roots
+We have seen in Proposition 1.4 that if α is a zero of f with multiplicity a ≥ 2, then α̂ = (α, α) is a point of indeterminacy for S f .
+By (4) we will suppose that α = 0. The local behavior of S f at α̂ will be more clear if we work in the blowup π : M → C2 at
+(0, 0) ∈ C2 . By blow up, we mean that M is a complex manifold, and π is a holomorphic map such that if we let E := π−1 (0, 0)
+denote the exceptional divisor of the blowup, then E ∼  = P1 , and π : M − E → C2 − {(0, 0)} is biholomorphic. We now work with
+the induced map Ŝ := π−1 ◦ S f ◦ π : M ¹¹Ë M .
+     We can represent the manifold M explicitly in a neighborhood of E by using two coordinate charts. One of them is the
+coordinate system (s, t) such that π(s, t) = (s, st) = (x, y) on an affine neighborhood in M in which we have E = {s = 0}. Since
+π−1 (x, y) = (x, y/x) = (s, t), it follows from (6) that the induced map is given by
+
+                                                                                                1 + t + · · · + t a−2
+                                 Ŝ : (s, t) → (s t, ψ(t)(1 + sg(s, t))) , ψ(t) =                                          .                    (7)
+                                                                                             1 + t + · · · + t a−2 + t a−1
+where g(s, t) is analytic in a neighborhood of (0, 0). Thus the behavior of Ŝ near E is modeled by the map
+
+                                                          (s, t) → (s1 , t 1 ) = (s t, ψ(t))                                                    (8)
+
+whose iterates have the form
+                                                         (sn , t n ) = (st 0 · · · t n−1 , ψn (t))                                              (9)
+with t j = ψ (t 0 ). The fixed points of ψ are defined by the condition ψ(t) = t, which is equivalent to
+             j
+
+
+                                                                    1 = t a−1 + t a
+
+The following is elementary:
+Proposition 2.1. If a ≥ 2, then ψ has a fixed point 0 < t a < 1, and −1 < ψ0 (t a ) < 0.
+    Now we observe that the differential of Ŝ at E = {s = 0} is
+                                                                                                    
+                                                                 t                          0
+                                              DŜ(0, t) =                                                .
+                                                            ψ(t)g(0, t)                    ψ (t)
+                                                                                             0
+
+
+Thus the eigenvalues of DŜ(0, t a ) are strictly less than one in modulus. We say that a point p0 has a basin B for f if for every
+q ∈ B, the iterates f n (q) converge to p0 uniformly in a neighborhood of q. In general, p0 need not belong to B. It follows that
+(0, t a ) ∈ E has a basin of attraction for Ŝ, which in fact contains a neighborhood of (0, t a ). Pushing down by π to a neighborhood
+of (0, 0) ∈ C2 , we have:
+Theorem 2.2. Let t a be as in Proposition 2.1. For sufficiently small r > 0, the set {(x, y) ∈ C2 : |x| < r, |t a − y/x| < r} is contained
+in the basin of (0, 0) for S f . Thus for a multiple zero α of f , there is a conical neighborhood of α̂ in which the iterates of S f converge
+to α̂ at the asymptotic rate O(|ψ0 (t a )|n ).
+
+3    Critical 3-cycles
+Let f be a polynomial of degree at least 3, and let x 0 be a critical point: f 0 (x 0 ) = 0. If f (x 0 ) 6= 0 then
+
+                                                 (x 0 , x 0 ) → (x 0 , ∞) → (∞, x 0 ) → (x 0 , x 0 ),                                          (10)
+
+where the first map is given by (b) of Proposition 1.4, and the other two maps follow directly from the formula (3). Using
+(4), we may perform a translation and assume that x 0 = 0. Further, we introduce coordinate changes j1 (x, y) = (1/x, y) and
+j2 (x, y) = (x, 1/ y) and define
+                                          S1 := j2 ◦ S, S2 := j1 ◦ S ◦ j2 , S3 := S ◦ j1
+so that each S j is a holomorphic map from a neighborhood of the origin to another neighborhood of the origin. Since j12 and j22
+are identity maps, we have the decomposition S 3f = S3 ◦ S2 ◦ S1 , which we may use to give the local behavior at (x 0 , x 0 ) = (0, 0).
+Theorem 3.1. Let f be a polynomial of degree d ≥ 3, and let x 0 be a simple critical point which is not a zero: f (x 0 ) 6= 0, f 0 (x 0 ) = 0,
+and f 00 (x) 6= 0. Then the 3-cycle (x 0 , x 0 ) is both semi-parabolic and semi-superattracting, in the sense that DS 3 (x 0 , x 0 ) has eigenvalues
+0 and 1. Further, if x 0 = 0, then the local behavior at (0, 0) is conjugate to
+
+                                                                   (−a2 )d−1
+                                           S 3 (x, y) = (x, 0) +             (2x + y)d−1 (−2, 1) + Od                                          (11)
+                                                                      ad
+
+where Od indicates terms bounded by (|x| + | y|)d .
+
+Proof. As observed above, we may use (4) to assume that x 0 = 0. Further, by (4) we may assume that f (0) = 1. Thus
+
+                                                          f (z) = 1 + a2 z 2 + · · · + ad z d ,
+
+where a2 , ad 6= 0. We have
+                                                     S1 (x, y) = ( y, −a2 x − a2 y + G) + Od
+
+
+
+
+Dolomites Research Notes on Approximation                                                                                        ISSN 2035-6803
+                                                                     Bedford · Frigge                                                      126
+
+
+                                                                                                                
+                                                             y d−1                                         x d−1
+                                  S2 (x, y) =       y, x −               + Od , S3 (x, y) =       y, y −               + Od
+                                                              ad                                            ad
+where G = G(x, y) is a polynomial in which all the terms have degree at least 2. To see the computation for S2 , observe that the
+second coordinate of S2 is
+                                                            f (x)/ y − x f (1/ y))
+                                               R(x, 1/ y) =
+                                                               f (x) − f (1/ y)
+We define fˇ(t) = t d f (1/t) = ad + ad−1 t + · · · + t d . If we multiply the numerator and denominator by y d we find
+
+                                            y d−1 f (x) − x fˇ( y)   y d−1 − x fˇ( y)      y d−1     y d−1
+                             R(x, 1/ y) =                          ≡                  =x−        ≡x−
+                                              y d f (x) − fˇ( y)         − fˇ( y)         fˇ( y)      ad
+
+where the ‘≡’ indicates that we are working modulo Od , i.e., homogeneous terms of degree d and higher. The computation of S3
+is similar.
+     Now
+                                                                         −(−a2 )d−1
+                                                                                                
+                               S2 (S1 (x, y)) = −a2 (x + y) + G, y +                 (x + y) d−1
+                                                                                                   + Od
+                                                                              ad
+so
+                                                                      −(−a2 )d−1
+                                S 3 (x, y) = S3 ◦ S2 ◦ S1 = ( y, y) +            (x + y)d−1 (1, 2) + Od
+                                                                         ad
+                              
+                         1 1
+Finally, if we set M =           , then M −1 ◦ S 3 ◦ M will have the desired form.
+                         1 0
+
+Remark 1. The expressions for S2 and S3 that are given in the proof are not valid for rational maps that are not polynomials.
+    Now we want to show the existence of a basin for the map (11). By (4) we may scale coordinates so that (−a2 )d−1 /ad = 1, so
+if we drop the Od terms from S 3 , we have the map
+                                                                                      
+                                         F0 : (x, y) → x − 2(2x + y)d−1 , (2x + y)d−1                                      (12)
+
+Theorem 3.2. If f is a polynomial of degree at least 3, and if x 0 is a simple critical point for f with f (x 0 ) 6= 0, then the 3-cycle
+(x 0 , x 0 ) has a nonempty basin.
+
+Proof. For notational convenience, we will use (4) to move the point (x 0 , x 0 ) to the origin (0, 0). For small c, r > 0 we define
+
+                                 Dc,r := {(x, y) ∈ C2 : ℜ(x) < r, |ℑ(x)| < c ℜ(x), | y| < 2d ℜ(x)d−1 }
+
+So Dc,r is a thin neighborhood of the real interval (0, r) × {0}. If |ℑ(x)| < c ℜ(x), we have
+
+                                                        ℜ(x) ≤ |x| ≤ ℜ(x)(1 + c 2 /2)
+
+                                                                             
+                                                    d −1                                              
+             ℜ(x d−1 ) = ℜ(x)d−1 − ℑ(x)2                         ℜ(x)d−3 + · · · = ℜ(x)d−1 1 + O(c 2 )
+                                                      2
+                                                                                              
+                                                                      d −1
+             ℑ(x d−1 ) = (d − 1)ℑ(x) ℜ(x)d−2 − ℑ(x)3                              ℜ(x)d−4 + · · · = (d − 1)ℑ(x) ℜ(x)d−2 (1 + O(c 2 )).
+                                                                        3
+
+Let us first show that Dc,r is invariant under the map F0 given in (12). For this we write (x 1 , y1 ) = F0 (x, y). Thus x 1 =
+x − 2(2x + y)d−1 , so if (x, y) ∈ Dc,r ,
+                                                                                                                  
+                 ℜ(x 1 ) = ℜ(x) − 2d ℜ(x d−1 ) + O(|x|d−2 | y|) = ℜ(x) 1 − 2d ℜ(x)d−2 (1 + O(c 2 )) + O(ℜ(x)2d−3 )
+
+and
+              ℑ(x 1 ) = ℑ(x) − 2d ℑ(x d−1 ) + O(|x|d−2 | y|) = ℑ(x) − (d − 1)2d ℑ(x)ℜ(x)d−2 (1 + O(c 2 )) + O(ℜ(x)2d−3 ).
+Thus
+                            ℑ(x 1 )   ℑ(x)     1 − (d − 1)2d (1 + O(c 2 )) ℜ(x)d−2       O(ℜ(x)2d−3 )
+                                    =                                                  +
+                            ℜ(x 1 )   ℜ(x) 1 − 2 (1 + O(c ))ℜ(x)
+                                                d         2       d−2  + O(ℜ(x)  2d−3 ) ℜ(x)(1 + o(1))
+                                            1 − (d − 1)2d (1 + O(c 2 ))ℜ(x)d−2      O(ℜ(x)2d−3 )
+                                   <c                                             +               .
+                                        1 − 2d (1 + O(c 2 ))ℜ(x)d−2 + O(ℜ(x)2d−3 ) ℜ(x)(1 + o(1))
+Let us choose c sufficiently small that the two (independent) expressions of O(c 2 ) satisfy
+
+                                                        (d − 1)(1 + O(c 2 )) > 1 + O(c 2 )
+
+Now as r → 0, the right hand side approaches
+                                            |ℑ(x 1 )|    1 − (d − 1)2d ℜ(x)d−2 (1 + O(c 2 ))
+                                                      <c                                     <c
+                                             ℜ(x 1 )        1 − 2d ℜ(x)d−2 (1 + O(c 2 ))
+
+
+
+Dolomites Research Notes on Approximation                                                                                        ISSN 2035-6803
+                                                             Bedford · Frigge                                                           127
+
+
+
+so that for r and c small, we have |ℑ(x 1 )|/ℜ(x 1 ) < c. Since y1 = (2x + y)d−1 , it follows (after possibly further shrinking r) that
+(x 1 , y1 ) ∈ Dc,r .
+      Since the dominant behavior of the first coordinate at the origin is parabolic: x 7→ x − 2d x d−1 , it follows that Dc,r is in the
+basin of (0, 0) for F0 .
+      Finally, it is clear that the arguments above remain valid if we add terms O((|x| + | y|)d ) to F0 . Thus Dc,r is in the basin of
+(0, 0) for S 3f .
+
+    None of the coordinates in the 3-cycle (10) is a root of f , so we have:
+Corollary 3.3. If f has degree at least 3 and has a simple critical point which is not a zero, then there is an open set of points whose
+orbits are not attracted to roots of f .
+
+4    Special cases: the Fibonacci monomial map
+Given a 2 × 2 integer matrix A, we define the monomial map
+                                                                        a   a     a    a
+                                               MA(z1 , z2 ) = z A = (z1 1,1 z2 1,2 , z1 2,1 z2 2,2 )
+                                                                 
+                                                         0 1
+This iterates easily: (MA)n = MAn . We define AFib =               , which satisfies
+                                                         1 1
+                                                                                     
+                                                                   Fn−1       Fn
+                                                     AFib n =
+                                                                    Fn       Fn+1
+                                                                                          p              p
+where Fn is the nth Fibonacci number. The eigenvalues of AFib are φ = (1 + 5)/2 ∼ 1.61803 and −1/φ = (1 − 5)/2. Taking
+the trace of AFib n , we have
+                                                    Fn−1 + Fn+1 = φ n + (−φ)−n
+We refer to
+                                                   MFib (x, y) := MAFib (x, y) = ( y, x y)
+as the Fibonacci monomial map.
+     The set T2 = {|x| = | y| = 1} is invariant under MFib , and the restriction of MFib to T2 is a hyperbolic toral automorphism
+of entropy log(φ). The set {|x| | y|φ = 1} is foliated by the curves {x y φ = e iθ }, where y φ is defined locally, which are the
+complexifications of the stable manifolds of this toral automorphism. Similarly, the complexifications of the unstable manifolds
+give a foliation of {| y| = |x|φ }.
+     Every monomial map commutes with the Cremona involution j(x, y) = (1/x, 1/ y), so it follows that the behavior of the
+Fibonacci monomial map at (0,0) is the same as the behavior at (∞, ∞) ∈ P1 × P1 . Thus j gives a symmetry between the basins
+B MFib (0, 0) and B MFib (∞, ∞).
+Theorem 4.1. The set {|x| | y|φ < 1} is the attracting basin of (0, 0) of MFib , and {|x| | y|φ > 1} is the basin for (∞, ∞) ∈ P1 × P1 .
+                                                                                                   n
+In fact, the rate of convergence of the nth iterate to (0, 0) is at the superexponential rate O(r φ ) with r < 1.
+
+Proof. If (x, y) is on one of the coordinate axes, i.e., if x y = 0, then MFib
+                                                                             2
+                                                                               (x, y) = (0, 0). Thus to discuss the basin of (0, 0), we
+may assume x y =  6 0, and let ξ = (log |x|, log | y|) denote logarithmic coordinates. Let v+ := (1, φ) (resp. v− := (1, −1/φ)) denote
+the φ (resp. (−1/φ)) eigenvector for AFib . For ξ = (ξ1 , ξ2 ) ∈ R2 , there are c+ , c− ∈ R such that ξ = c+ v+ + c− v− . In logarithmic
+coordinates, the map z 7→ MFib n
+                                 (z) corresponds to
+
+                                                  ξ 7→ AnFib ξ = c+ φ n v+ + c− (−φ)−n v− .                                            (13)
+
+Thus {ξ : c+ < 0} is the basin of (−∞, −∞) as n → +∞, and {ξ : c+ > 0} is the basin of (∞, ∞) as n → −∞. Exponentiating,
+we see that if c+ < 0, then MFib
+                              n
+                                 (z) → (0, 0), and the exponential of {c+ < 0} is {0 < |x| | y|φ < 1}. The rate of convergence also is
+clear from (13) when we exponentiate.
+
+    The following is well known, at least from the point of view of numerical computation.
+Theorem 4.2. If α is a simple zero of f , then for (x, y) near (α, α), the iterates S nf (x, y) converge to (α, α) at the superexponential
+          n
+rate O(r φ ) with r < 1.
+
+Proof. Using (4) we may assume that α = 0, so f (x) = x + a2 x 2 + O(x 3 ), and up to conjugation, we may assume that a2 = 1.
+Thus S f is regular at (0, 0), and S f (x, y) − a2 MFib (x, y) is bounded by a multiple of (|x| + | y|)3 , so this result is a consequence of
+the rate of convergence seen in Theorem 4.1.
+
+Example 4.1 (Möbius transformation.). If f (x) is a Möbius transformation, we may assume it is of the form x−β        x−α
+                                                                                                                          , and we
+introduce an affine change of coordinate in x to make α = 0 and β = 1. Thus f (x) = x/(x − 1). It follows that S f (x, y) = ( y, x y)
+is the Fibonacci monomial map. The basin of (0, 0) for S f corresponds to the basin of the unique root of f (x). The other basin of
+S f corresponds to the (degenerate) critical point x = ∞ for f .
+
+
+
+
+Dolomites Research Notes on Approximation                                                                                 ISSN 2035-6803
+                                                                       Bedford · Frigge                                                                   128
+
+
+
+Example 4.2 (Quadratic polynomial.). If f (x) is a quadratic polynomial with a double root, we may replace f by λ f and
+conjugate with a translation so that f (x) = x 2 . In this case, S f (x, y) = ( y, x y/(x + y)). If we now conjugate with the Cremona
+involution j(x, y) = (1/x, 1/ y), we find that S f (x, y) is conjugate to the linear map
+
+                                                                             z 7→ AFib z
+
+    Similarly, if f (x) is a quadratic polynomial with distinct roots, we may replace f by λ f and compose with an affine
+                                                                                           1+x y
+transformation in the x-coordinate so that f (x) = x 2 − 1. Thus we have S f (x, y) = ( y, x+ y ). We now move the roots of f to 0
+                                           z−1 , and the map ϕ̃(x, y) = (ϕ(x), ϕ( y)) conjugates S f (x, y) to the Fibonacci
+and ∞ via the Möbius transformation ϕ(z) = z+1
+monomial map.
+
+5       Dynamical degree
+A rational map F = (F1 , F2 ) : C2 ¹¹Ë C2 is defined by a pair of rational functions F j = P j /Q j , j = 1, 2, where (P j , Q j ) = 1, i.e., they
+have no common factor. We can define the degree of F to be the maximum of the degrees of each of the polynomials P j and Q j .
+However, this is not a conjugacy invariant and does not behave well under composition because the cancellation of factors is
+“unpredictable”, meaning that the degree can increase or decrease. Thus we define the dynamical degree δ(F ) to be
+
+                                                               δ(F ) := lim (degree(F n ))1/n
+                                                                         n→∞
+
+This limit exists and is an invariant of birational conjugacy (see [5]), and is an important characteristic of F as a dynamical
+system.
+     We will compute the dynamical degree δ(S f ), following the outline given in [5]. The reader who is not familiar with this
+approach might look at the expository article [1].
+     Let us start with the case a∞ < 0, so by Proposition 1.3, all the exceptional curves are of the form { y = α} with α ∈ C, and
+{ y = α} is mapped to (α, α), where α is a root of f . If (α, α) is a point of indeterminacy, then by Proposition 1.4, it must be a
+root with multiplicity ≥ 2. By (4) we may suppose that α = 0.
+     Let π(s, t) = (s, s t) = (x, y), π : M → C2 be the blowup of the point (0, 0), as was discussed in Section 2. We assume that 0
+is a root of f with multiplicity a ≥ 2, so we use (7) to obtain
+
+                                                                                1 + t + · · · t a−2
+                                                            Ŝ| E (0, t) =
+                                                                             1 + t + · · · t a−2 + t a−1
+and thus Ŝ is regular on E in the (s, t) coordinate system.1 We let X = {t = 0} ⊂ M denote the strict transform of the x-axis
+under π−1 . The x-axis is exceptional for S f , and Ŝ(X ) = (0, 1) ∈ E, so that X is exceptional and is mapped to a regular point for
+Ŝ. By (8) and (9), we see that the further iterates Ŝ n (0, 1) all lie in the interval {(0, t) : 0 ≤ t ≤ 1} and thus the forward orbit of
+X under Ŝ never encounters a point of I (Ŝ).
+     Now let us proceed to blow up all the points (α j , α j ) ∈ C2 , 1 ≤ j ≤ s, where f has a zero of order a j ≥ 2. Again we will refer
+to the resulting space as M . Every dominant rational map has a well-defined pullback on cohomology (see, for instance [5] or
+[2]). Thus we have a well-defined linear map Ŝ ∗ : H 1,1 (M ; Z) → H 1,1 (M ; Z). In the previous paragraph, we showed that for every
+exceptional curve C ⊂ M , the iterates Ŝ n (C), n ≥ 0, are disjoint from the indeterminacy locus of Ŝ. It follows that the pullback
+operation satisfies
+                                                               (Ŝ n )∗ = (Ŝ ∗ )n
+(see, for instance [5] or [2]), and thus the dynamical degree of δ(S f ) = δ(Ŝ) is equal to the spectral radius of Ŝ ∗ .
+     The cohomology group H 1,1 (M ; Z) is generated by the classes V = {x = const}, H = { y = const}, and E1 , . . . , Es , where E j
+denotes the blowup divisor over (α j , α j ). To find the dynamical degree, we will find the matrix that represents Ŝ ∗ with respect to
+this ordered basis. We have seen in Proposition 1.3 that a vertical line {x = c} is pulled back to a horizontal line { y = c}. This gives
+us the first column in the matrix (14) below. Now look at the preimage of a general horizontal line { y = c}. This is pulled back
+to the curve {R(x, y) = c}. By Proposition (1.1), we see that R(x, y) has degree d t in x when y is fixed, and vice versa. Further,
+R(x, y) vanishes at all the centers of blowup (α j , α j ). Looking at (6) we see that {R(x, y) = c} = {c D1 (x,Py) = y N1 (x, y)}. Thus
+we see that (0, 0) is a point of multiplicity a j − 1. It follows that the class of {R(x, y) = c} is d t H + d t V + (1 − a j )E j . Finally, we
+have Ŝ(s, t) = (st, ?), so the pullback of E = {s = 0} is {st = 0} which is the class of a horizontal line, so we obtain:
+
+                                                              0            0 ... 0
+                                                                                       
+                                                                    dt
+                                                           1       dt     1 ... 1 
+                                                           0 1−a          0 ... 0 
+                                                    Ŝ = 
+                                                      ∗               1                                                                   (14)
+                                                           .  .     .
+                                                                     .
+                                                                                        
+                                                               .     .
+                                                                                        
+                                                              0 1 − as 0 . . . 0
+
+The characteristic polynomial of Ŝ ∗ is
+
+                                                     x s (x 2 + d t x + ((a1 − 1) + · · · + (as − 1) − d t ))
+1
+    We comment that the other coordinate chart at E is π0 (u, v) = (u v, v), and in this chart we have E = {v = 0}. The induced map Ŝ : M ¹¹Ë M has a point of
+    indeterminacy at (u, v) = (0, 0) ∈ E, which corresponds to the point (s, t) = (0, ∞) ∈ E, which is outside of the (s, t) coordinate system.
+
+
+
+
+Dolomites Research Notes on Approximation                                                                                                 ISSN 2035-6803
+                                                               Bedford · Frigge                                                            129
+
+
+                                                     q                         
+The largest root of this polynomial is δ = (d t + d t2 + 4 d t + (1 − a j ) )/2. Since a∞ < 0, we have deg(p) > deg(q), so
+                                                                     P
+
+d t = deg(p) − 1. Since deg(p) = a j , it follows that δ > d t unless p has exactly one zero, in which case p(t) = c(t − a)d .
+                                  P
+
+     There remains the case a∞ ≥ 0 to consider. By Proposition 1.3, P1 × {∞} is exceptional and maps to (∞, ∞), which by
+Proposition 1.4 is indeterminate exactly when a∞ ≥ 1. Thus if a∞ = 0, then δ is given by the formula above. If a∞ ≥ 1, then we
+must look at the exceptional curve P1 × {∞}. The auxiliary function g(t) = t f (1/t) vanishes to order a∞ + 1 at t = 0, so by (4)
+it suffices to determine the dynamical degree of S g . For this, we apply the previous argument. For the new exceptional curve, we
+augment Ŝ ∗ with an extra column as before, and in the extra row, we have the coefficient 1 − (a∞ + 1) = −a∞ which gives:
+                                                                                    
+                                                        0      dt    0 ... 0 0
+                                                    1         d     1 ... 1 1 
+                                                    0 1 −ta         0 ... 0 0 
+                                                                  1                 
+                                              Ŝ = 
+                                                ∗              ..                                                            (15)
+                                                                 .
+                                                                                     
+                                                                                    
+                                                    0 1−a           0 ... 0 0 
+                                                                     s
+                                                           0    −a∞      0    ...   0   0
+
+The largest root of the characteristic polynomial of (15) is
+                                                  r                  X          
+                                         δ = d t + d t2 + 4 d t − a∞ +  (1 − a j ) /2.
+
+In the case where a∞ ≥ 0, we have d t = a∞ + deg(p) = deg(q). Thus a∞ +                     a j = d t , from which we conclude that δ > d t .
+                                                                                        P
+
+Combining the cases a∞ < 0 and a∞ ≥ 0, we have:
+Theorem 5.1. If p(t) = c(t − a)d , and deg(p) > deg(q), then δ = d t = d − 1. Otherwise, S f is of small topological degree, meaning
+that the dynamical degree is larger than the topological degree.
+    If δ > d t , there are invariant currents T ± with the properties S ∗ T + = δ T + and S∗ T − = δ T − (see [2]). In our argument
+discussing the forward iterates of the exceptional curves, we in fact showed that the forward orbits of exceptional curves remain
+at bounded distance from the indeterminacy locus. Thus by [4], it follows that there is an invariant measure µ = T + ∧ T − . A
+number of the dynamical properties of T ± and µ are presented in [3]. It will be interesting to apply them to the Secant Method.
+
+References
+[1] E. Bedford. On the dynamics of birational mappings of the plane. J. Korean Math. Soc., 40(3):373–390, 2003.
+[2] J. Diller, R. Dujardin, and V. Guedj. Dynamics of meromorphic maps with small topological degree I: from cohomology to currents. Indiana
+    Univ. Math. J., 59(2):521–561, 2010.
+[3] J. Diller, R. Dujardin, and V. Guedj. Dynamics of meromorphic maps with small topological degree III: geometric currents and ergodic theory.
+    Ann. Sci. Éc. Norm. Supér. (4), 43(2):235–278, 2010.
+[4] J. Diller, R. Dujardin, and V. Guedj. Dynamics of meromorphic mappings with small topological degree II: Energy and invariant measure.
+    Comment. Math. Helv., 86(2):277–316, 2011.
+[5] J. Diller and C. Favre. Dynamics of bimeromorphic maps of surfaces. Amer. J. Math., 123(6):1135–1169, 2001.
+[6] A. Garijo and X. Jarque. Global dynamics of the real secant method. Preprint.
+[7] J. H. Hubbard and P. Papadopol. Newton’s method applied to two quadratic equations in C2 viewed as a global dynamical system. Mem.
+    Amer. Math. Soc., 191(891):vi+146, 2008.
+[8] N. Sibony. Dynamique des applications rationnelles de Pk . In Dynamique et géométrie complexes (Lyon, 1997), volume 8 of Panor. Synthèses,
+    pages ix–x, xi–xii, 97–185. Soc. Math. France, Paris, 1999.
+
+
+
+
+Dolomites Research Notes on Approximation                                                                                   ISSN 2035-6803
+

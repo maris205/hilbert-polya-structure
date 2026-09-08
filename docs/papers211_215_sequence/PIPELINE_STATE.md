@@ -43,13 +43,58 @@ negative evidence after scheduler/diameter/surgery subtraction. Its later
 sharp fibre refinement was not a predicate in the sole pilot. Closed
 literal attempts now total 18, zero reserves.
 
-Current slate: arithmetic MPR/SPR author closure and a fresh noncontributor
-SPR candidate gate. SPR has an author all-parameter sharp joint size/value
-clock and full-target inverse theorem, and its sole predeclared 35-box,
-34,636-state pilot passed. It is not admitted: the exact residual over
-Euclidean worst-case mechanisms and primary-source limits remain for
-independent judgment. Root is integrating further source/subtraction leads
-and preparing a closed-evidence-only private checkpoint. Each new lane
+The [MPR/SPR pair and fresh SPR gate](scouting/spr_root_reception/RECEPTION.md)
+have now completed root original reception and both close NO_PROMOTION.
+SPR's all-parameter joint clock is accepted as a valid deductive result,
+but its direct rank-two occupancy inverse fails the separate-axis value
+gate; SPR-GATE-V1 Critical/open and unread-original SPR-GATE-S1 Major/open
+remain. Root actually checked author 52/10 pins, all 34,636 archived records,
+and gate 19/74 pins/native bindings; no new science. The sole author pilot
+and all source/provenance failures remain unchanged.
+
+The [UUC/CGM root reception](scouting/root_reception/TRANSPORT_GEOMETRY_RECEPTION.md)
+also closes both attempts. UUC has only generic energy/current-word
+deductions; CGM is the exact already-described old MG tagged lift. Root
+read the substantive originals and checked UUC 13/17 pins and CGM 59
+payloads/10 raw snapshot pairs/11 native records/three raw literal slices.
+Both had zero scientific runs. Closed literal attempts now total **22**,
+zero reserves, not 22 fresh pairwise independent systems.
+
+The [sequence/function/valley reception](scouting/root_reception/SEQUENCE_FUNCTION_VALLEY_RECEPTION.md)
+has now closed six further literal attempts: SIF/MCB exact conjugacies,
+CEP0/CEP1 normalizer/rotation, HDA missing all-target inverse axis, and strict
+valley absorption missing a sharp resource clock/independent extremum.
+Root read the substantive originals and checked complete 11/35/41 payload
+inventories, 12/9/8 historical or snapshot sets and the actual native bindings.
+Zero new scientific runs. The corrected valley image theorem and HDA clock
+remain valid negative evidence; the false valley claim and source failures
+remain preserved. Root is a valley proof contributor, not its reviewer.
+Closed literal attempts now total **28**, zero reserves.
+
+The [incidence/profile root reception](scouting/root_reception/INCIDENCE_PROFILE_RECEPTION.md)
+closes SDS and two root repeated literals (C4/PMT and CP). SDS has a complete
+recurrent classification and nonsharp full-graph bound, but no independent
+inverse/extremum. Root checked 38/10 and 4/4 complete payload/input sets,
+six native command records and four raw slice pairs; zero scientific runs.
+A symbolic counterexample to the old PMT fixed-mass image wording is
+preserved separately without changing the old negative document. Closed
+attempts now total **31**, zero reserves, not 31 fresh systems.
+
+The [allocation/rational/geometry root reception](scouting/root_reception/ALLOCATION_RATIONAL_GEOMETRY_RECEPTION.md)
+closes MCA, QSC and CAC, plus the zero-literal geometry gap desk. MCA's
+recurrence and inverse decoder are valid but lack a residual sharp extremum;
+QSC lacks full reset time; CAC's sharp fourth iterate cannot restore its
+fully consumed inverse axis. Root read the complete substantive packages,
+checked 60/47/41 payloads and 8/12/8 historical sets with actual native/raw
+bindings, and preserved the root warning-assumption failure before the
+successful correction. The sole MCA pilot remains author evidence, not a
+new root scientific run. Geometry's purported perimeter gap is already
+resolved in the directly checked primary source. Closed attempts now
+total **34**, zero reserves. Root is an MCA proof contributor.
+
+Current work is a common-sum gcd arithmetic desk and an explicitly repeated
+quadratic-cluster collision screen, not an assumed fresh slate.
+Each new lane
 first defines literal maps and checks actual old originals/primary sources,
 then uses at most one tiny exact CPU pilot at a time, at most three
 simultaneously across the batch. Weak or duplicate maps are closed promptly.
@@ -59,10 +104,29 @@ paper. No initial candidate is assumed to deserve a seat.
 Only root edits this index and SYMBOLIC_DYNAMICS_STATE.md. Lane writers own
 their explicitly assigned new scouting subdirectories. All older papers,
 reviews, failed evidence and snapshots remain read-only. There is no new
-Git mutation or paper completion claim at this checkpoint. The exact
+paper completion claim. The exact
 pre-refresh central controls are physically preserved in the desk's
 [historical input snapshots](scouting/residual_desk/snapshots/README.md),
 with actual raw comparisons and an explicit path mapping.
+
+## Confirmed private checkpoint and temporal boundary
+
+The separately frozen **18-closed** checkpoint has been normally pushed and
+[accepted by root](qa/root_checkpoint_inspection/RECEPTION.md): commit
+`f6f3560875f75025624367305b8a9328cbce712e`, parent cd6066f4, tree
+30df2d2b012b6e1567bdd2afa61c50e00a547d16. Exact scope 117 files / 3,926,033
+bytes, actual delta 116 additions / one modification / zero deletions and
+no nonselected change. All 82 commands/four phase seals and six fresh
+read-only ref queries pass. The accepted bare main and actual remote match;
+the original mirror, its index/config/refs and the bare default index are
+unchanged. Bare worktree status is N/A. No force push or external release.
+
+Arithmetic, SPR gate/root reception, UUC/CGM and later sequence/function
+work were not in that frozen selection. This new receipt and current
+22-closed index text are not inside the commit they describe. Exact prior
+18-closed central bytes survive physically at the execution run's frozen
+identity paths, as documented in the root reception. Earlier failed evidence
+and all old manuscripts/reviews/snapshots remain intact.
 
 ## Counts and next gate
 
