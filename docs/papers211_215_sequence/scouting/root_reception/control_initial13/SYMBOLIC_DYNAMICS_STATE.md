@@ -6,9 +6,7 @@
 
 - 新一轮已由用户在前轮最终交接后再次“继续”启动：[P211 起的五席研究](docs/papers211_215_sequence/PIPELINE_STATE.md)。当前 `SCOUTING / ZERO_RETAINED / FIVE_OPEN_SEATS`：保留0、完成0、空缺5，尚未准入或编号；当前实物最高编号P210，首个可用编号P211。按[新批次范围](docs/papers211_215_sequence/PROBLEM_ANCHOR.md)广泛侦察有限自主确定性系统，旧机制扣除边界扩展至P210及全部已淘汰候选。只继续这个新请求；下方已完成前轮不重开，外部行动仍HOLD。
 
-当前新轮补记：首批[13个明确候选已完成root原件接收并全部NO_PROMOTION](docs/papers211_215_sequence/scouting/root_reception/INITIAL13_RECEPTION.md)，随后[集合／编码4项案头探针也完成原件接收并关闭](docs/papers211_215_sequence/scouting/root_reception/SET_CODE_RECEPTION.md)，累计17次literal尝试、零reserve，不是假称17个全新独立系统。FRI/ZGR的新非贡献者价值desk均KILL_VALUE，两项Critical及ZGR后加判据未实测的Major限制原样保留。新23/11代数、30/12 desk、17/8集合清单核验及旧FRI/图线接受不等于新增科学运行或论文PASS。正在另查有限算术／资源、树／序和非线性代数，当前仍保留0、完成0、空缺5。两阶段旧中央索引均有完整物理历史映射；尚无新轮Git同步。
-
-最新补记：[树／非线性原件接收](docs/papers211_215_sequence/scouting/root_reception/TREE_NONLINEAR_RECEPTION.md)也已闭合，LAR一项NO_PROMOTION、非线性零新literal，累计关闭18项、零reserve。root全读实质原件并完成19/10/8和15/10清单与实际raw比较；LAR后加尖锐fibre界未在唯一pilot中作为判据实测，限制不改。算术SPR作者已给出全参数双轴证明且唯一35盒／34,636状态小检验通过，正交新的非贡献者准入desk判定旧机制扣除和来源边界；尚未准入。保留0、完成0、空缺5。正在准备只含已闭合证据的限定私有检查点，算术及其gate在进行部分不纳入；尚未发生新轮Git写入。
+当前新轮补记：首批[13个明确候选已完成root原件接收并全部NO_PROMOTION](docs/papers211_215_sequence/scouting/root_reception/INITIAL13_RECEPTION.md)，零reserve；三条四候选线及root ZGR均不编号。FRI/ZGR的新非贡献者价值desk均KILL_VALUE，两项Critical及ZGR后加判据未实测的Major限制原样保留。新23/11代数、30/12 desk清单核验及旧FRI/图线接受不等于新增科学运行或论文PASS。正在另查集合／编码和有限算术／资源系统，当前仍保留0、完成0、空缺5。旧中央索引有完整物理历史映射；尚无新轮Git同步。
 
 ### 上一轮完成结论（原件与同步均闭合）
 
