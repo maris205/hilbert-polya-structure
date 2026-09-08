@@ -1,0 +1,95 @@
+\section{The exact ordinary-cycle classifier}\label{sec:classifier}
+
+Fix $k$ and an admissible chronological word $w=\ell_1\cdots\ell_s$.
+Index the finite set $X_k$ once. For $L\in\{A,B\}$ define
+\begin{equation}\label{eq:partial}
+ (T_L)_{P,Q}=
+ \begin{cases}
+ 1,&L(P)=Q\in X_k,\\
+ 0,&\text{otherwise},
+ \end{cases}
+ \qquad P,Q\in X_k.
+\end{equation}
+Each row and column has at most one nonzero entry, since each
+letter is a bijection on the full lattice. These are
+partial-permutation matrices, not stochastic matrices with an
+absorbing state. With row actions the chronological matrix
+product is
+\begin{equation}\label{eq:Tw}
+ T_w=T_{\ell_1}\cdots T_{\ell_s}.
+\end{equation}
+The order differs from \eqref{eq:matrices} because
+\eqref{eq:Tw} acts on point-indexed rows, whereas
+\eqref{eq:matrices} acts on exponent-coordinate columns.
+
+\begin{proposition}\label{prop:classifier}
+The directed cycles of $T_w$ are exactly the ordinary integer
+cycles of $W$ on $\{K=k\}$, with their actual least periods.
+\end{proposition}
+
+\begin{proof}
+A nonzero entry in \eqref{eq:Tw} is precisely a word
+transition all of whose intermediate letter phases stay
+in $X_k$. By the proved periodic cover, every genuine
+periodic point and all its phases do so. Its whole cycle
+is therefore retained. Conversely each directed matrix
+cycle is an actual sequence of the original letter
+applications and returns under the indicated powers
+of $W$. The bijection between its distinct vertices
+and actual triples preserves the least period.
+\end{proof}
+
+An explicit implementation need not form matrices. Construct
+$X_k$ by \eqref{eq:root}. Starting from each $P\in X_k$, apply
+the $s$ letters in order; declare its partial successor
+undefined immediately if an intermediate image leaves $X_k$.
+Otherwise record the final image. Traverse this finite
+partial map to obtain its directed cycles, retaining distinct
+coordinate triples and identifying cycles only by cyclic
+rotation. Reversal is not an additional quotient.
+
+This prescription terminates after finitely many root tests
+and walks on at most 40 vertices. It has no guessed coordinate
+radius and no trial-period cutoff. A component of a finite
+partial injection is either a directed chain or a directed
+cycle; a tail cannot enter a cycle, since the joining vertex
+would then have two predecessors. Hence a traversal cannot
+lose a cycle by discarding a previously examined chain.
+The exact pointwise construction also handles intersections
+between different lines at small integer parameters.
+
+Let $c_d(w,k)$ be the number of directed cycles of length $d$.
+Proposition~\ref{prop:classifier} gives, for every $n\ge1$,
+\begin{equation}\label{eq:counts}
+ \#\Fix(W^n;\{K=k\}(\Z))
+   =\tr(T_w^n)=\sum_{d\mid n}d\,c_d(w,k).
+\end{equation}
+There are no cycles longer than $|X_k|\le40$.
+The ordinary dynamical zeta function on this fixed level is
+\begin{equation}\label{eq:zeta}
+ \begin{aligned}
+ \zeta_{w,k}(u)
+  &=\exp\left(\sum_{n\ge1}
+       \#\Fix(W^n;\{K=k\}(\Z))\frac{u^n}{n}\right)\\
+  &=\prod_{d=1}^{40}(1-u^d)^{-c_d(w,k)}
+    =\det(I-uT_w)^{-1}.
+ \end{aligned}
+\end{equation}
+These are identities of formal power series, hence of the
+resulting rational functions. To see the last equality
+directly, order vertices componentwise: each directed chain
+has nilpotent adjacency matrix and determinant contribution
+one, while each $d$-cycle contributes $1-u^d$.
+For an empty $X_k$, the determinant and zeta are both one.
+This finite-permutation identity is a classical consequence
+of the new arithmetic reduction, not an additional
+independent theorem about Euler factors.
+
+\begin{remark}
+Merely checking that a word returns the starting triple to
+$X_k$ is not the partial matrix construction above: every
+intermediate phase is part of its definition. Likewise,
+a generic affine-line automaton need not detect whether a
+line return fixes its integer parameter. Neither shortcut
+replaces the exact pointwise classifier.
+\end{remark}

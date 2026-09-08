@@ -1,0 +1,190 @@
+\section{Fixed cusp coordinates and exact character blocks}\label{sec:fixed}
+
+Write \(\Gamma=\Gamma_0(N)\). For each cusp \(\mathfrak a\), choose
+a scaling matrix \(\sigma_{\mathfrak a}\in\mathrm{SL}_2(\R)\) with
+\(\sigma_{\mathfrak a}\infty=\mathfrak a\) and
+\[
+ \sigma_{\mathfrak a}^{-1}\Gamma_{\mathfrak a}\sigma_{\mathfrak a}
+ =\left\{\pm\begin{pmatrix}1&n\\0&1\end{pmatrix}:n\in\Z\right\}.
+\]
+The standard incoming Eisenstein series, initially for \(\Re s>1\), is
+\[
+ E_{\mathfrak a}(z,s)=
+ \sum_{\gamma\in\Gamma_{\mathfrak a}\backslash\Gamma}
+       \bigl(\Im(\sigma_{\mathfrak a}^{-1}\gamma z)\bigr)^s .
+\]
+Its constant term at \(\mathfrak b\) is
+\[
+ E_{\mathfrak a}(\sigma_{\mathfrak b}(x+iY),s)
+ =\delta_{\mathfrak a\mathfrak b}Y^s+
+   \Phi_N(s)_{\mathfrak a\mathfrak b}Y^{1-s}
+   +\text{nonconstant Fourier terms}.
+\]
+This defines the row convention used throughout. Changing the order of
+cusps or applying another fixed similarity preserves pairwise
+commutativity. Transposing the convention does too. An \(s\)-dependent
+renormalization is not part of the problem.
+
+\subsection{The full finite Fourier transform}
+
+For \(f\mid N\), put \(g_f=(f,N/f)\). The cusps with denominator
+label \(f\) can be represented as \(1/(uf)\), where
+\(u\in(\Z/g_f\Z)^\times\) is chosen coprime to \(N\)
+\citep[Section 5.2]{Young2019}. Fix a primitive character \(\chi\)
+of conductor \(q\), with \(q^2\mid N\), and put
+\[
+ L=N/q^2,\qquad d=\#\{B:B\mid L\}.
+\]
+For \(f=qg\), \(g\mid L\), define
+\begin{equation}\label{eq:Fourier}
+ D_{\chi,f}(z,s)=
+ \sum_{u\in(\Z/g_f\Z)^\times}\chi(-u)E_{1/(uf)}(z,s).
+\end{equation}
+The character in this sum is the pullback of the primitive character to
+the indicated unit group.
+
+\begin{lemma}\label{lem:full-Fourier}
+The rows in \eqref{eq:Fourier}, over all \(q,\chi,f\) as above, form
+an invertible fixed coordinate change \(T\) on the entire cusp space.
+\end{lemma}
+\begin{proof}
+For a fixed \(f\), each character of \((\Z/g_f\Z)^\times\) is induced
+by one and only one primitive character of conductor \(q\mid g_f\).
+The condition \(q\mid g_f\) is equivalent to \(f=qg\) with
+\(g\mid N/q^2\). Finite character orthogonality therefore says that
+the rows at this \(f\) are exactly a full Fourier basis. Taking their
+direct sum over every divisor \(f\) gives \(T\). Its entries are
+character values, independent of \(s\). Multiplication by the
+nonzero constants \(\chi(-1)\) changes no invertibility statement.
+\end{proof}
+
+\subsection{The incoming coefficient matrices}
+
+In Young's notation set \(E_\chi=E_{\chi,\chi}\). This is the trivial
+nebentypus choice: the nebentypus of \(E_{\chi_1,\chi_2}\) is
+\(\chi_1\bar\chi_2\), while its completion contains
+\(L(2s,\chi_1\chi_2)\). Define column vectors
+\[
+ \mathcal E_\chi(s)=(E_\chi(Bz,s))_{B\mid L},\qquad
+ D_\chi(s)=(D_{\chi,qg}(z,s))_{g\mid L}.
+\]
+The classical inversion formula gives
+\begin{equation}\label{eq:incoming}
+ \mathcal E_\chi(s)=C_\chi(s)D_\chi(s).
+\end{equation}
+For precision, the specialization of
+\citet[equation (7.3)]{Young2019} used here writes \(L=AB\)
+and sums over \(d_0\mid A,\ e_0\mid B,\ (d_0,e_0)=1\).
+Its term has denominator and coefficient
+\begin{equation}\label{eq:Young-summand}
+ f=qBd_0/e_0,\qquad
+ \frac{\chi(d_0)\chi(e_0)}{(d_0e_0)^s}
+ \left(\frac{N}{(qBd_0/e_0,qAe_0/d_0)}\right)^s .
+\end{equation}
+This explicitly imported formula, with its functional equation below,
+is the only scattering reconstruction needed for the argument.
+
+\begin{lemma}[Local incoming factors]\label{lem:local-incoming}
+Order the divisor labels multiplicatively. For \(p\mid N\), set
+\(a=v_p(q)\), \(e=v_p(L)\), and let \(0\le b,k\le e\) index
+\(v_p(B)\) and \(v_p(f/q)\). Then
+\begin{equation}\label{eq:tensor-C}
+ C_\chi(s)=\bigotimes_{p\mid N}C_{\chi,p}(s),
+\end{equation}
+where the ramified factor is
+\begin{equation}\label{eq:ramified-C}
+ C_{\chi,p}(s)=
+ \diag_{0\le b\le e}p^{s(a+\max(b,e-b))}
+ \quad (a>0),
+\end{equation}
+and, when \(a=0\), the factor is
+\begin{equation}\label{eq:unramified-C}
+ C_{\chi,p}(s)_{b,k}
+ =c^{|b-k|}p^{s(\max(k,e-k)-|b-k|)},\qquad c=\chi(p).
+\end{equation}
+Every factor is generically invertible.
+\end{lemma}
+\begin{proof}
+All parts of \eqref{eq:Young-summand} factor prime by prime. For the
+fixed pair \(b,k\), coprimality forces
+\[
+ v_p(d_0)=\max(k-b,0),\qquad
+ v_p(e_0)=\max(b-k,0).
+\]
+The gcd in \eqref{eq:Young-summand} has valuation
+\(a+\min(k,e-k)\). Since \(v_p(N)=2a+e\), its quotient contributes
+\(p^{s(a+\max(k,e-k))}\). The denominator
+\((d_0e_0)^s\) contributes \(p^{-s|b-k|}\).
+
+If \(a>0\), the character vanishes at \(p\), so the term is zero
+unless \(b=k\). This gives \eqref{eq:ramified-C}. If \(a=0\), its
+character factor is \(c^{|b-k|}\), giving \eqref{eq:unramified-C}.
+The prime choices are independent, which proves \eqref{eq:tensor-C}.
+Writing \(T_e(z)_{b,k}=z^{|b-k|}\), the last matrix is
+\[
+ T_e(cp^{-s})\diag_k p^{s\max(k,e-k)}.
+\]
+Subtracting \(z\) times row \(j-1\) from row \(j\), in descending
+order \(j=e,\ldots,1\), gives
+\(\det T_e(z)=(1-z^2)^e\). Its determinant is not identically zero.
+The diagonal factors in \eqref{eq:ramified-C} are everywhere nonzero.
+\end{proof}
+
+The conductor powers in \eqref{eq:ramified-C} are retained. In
+particular, no \(q^s\) factor is removed without being accounted for.
+For \(N=1\), the empty tensor product is the one-by-one identity.
+
+\subsection{Functional equations and actual scattering}
+
+Write \(\tau(\chi)\) for the primitive Gauss sum; it is nonzero.
+The completion and functional equation in
+\citet[completion before Proposition 4.1 and Proposition 4.2]{Young2019}
+specialize to
+\begin{align}
+ A_\chi(s)&=\frac{(q/\pi)^s\Gamma(s)L(2s,\chi^2)}{\tau(\chi)},
+ \label{eq:completion}\\
+ A_\chi(s)\mathcal E_\chi(s)
+ &=A_{\bar\chi}(1-s)\mathcal E_{\bar\chi}(1-s).
+ \label{eq:FE}
+\end{align}
+All identities are meromorphic. Set
+\[
+ a_\chi(s)=\frac{A_{\bar\chi}(1-s)}{A_\chi(s)},\qquad
+ U_\chi(s)=C_\chi(s)^{-1}C_{\bar\chi}(1-s).
+\]
+Equations \eqref{eq:incoming} and \eqref{eq:FE} give
+\begin{equation}\label{eq:fixed-FE}
+ D_\chi(s)=a_\chi(s)U_\chi(s)D_{\bar\chi}(1-s).
+\end{equation}
+
+\begin{proposition}\label{prop:paired-blocks}
+In the fixed coordinates \(T\), each nonreal conjugate pair contributes
+the block
+\begin{equation}\label{eq:paired-block}
+ \mathcal B_\chi(s)=
+ \begin{pmatrix}
+ 0&a_\chi(s)U_\chi(s)\\
+ a_{\bar\chi}(s)U_{\bar\chi}(s)&0
+ \end{pmatrix}.
+\end{equation}
+A real character contributes the single block
+\[
+ a_\chi(s)C_\chi(s)^{-1}C_\chi(1-s).
+\]
+These are all blocks of \(T\Phi_N(s)T^{-1}\).
+\end{proposition}
+\begin{proof}
+At every width-one cusp, compare the \(Y^{1-s}\) coefficients in
+\eqref{eq:fixed-FE}. On the left they form the corresponding rows of
+\(T\Phi_N(s)\). On the right the incoming coefficients of
+\(D_{\bar\chi}(1-s)\) are precisely the corresponding fixed rows of
+\(T\). Therefore the coefficient matrix in \eqref{eq:fixed-FE} is
+the indicated block of \(T\Phi_N(s)T^{-1}\), not a redefined
+scattering object. Combining the conjugate equations gives
+\eqref{eq:paired-block}. If \(\chi=\bar\chi\), there is one sector
+and no second copy. Completeness follows from \cref{lem:full-Fourier}.
+\end{proof}
+
+The matrices \(C_\chi(s)\) in this proof depend on \(s\). They compare
+incoming data in a functional equation and are never used as fixed
+similarities. The actual coordinate change throughout is \(T\).

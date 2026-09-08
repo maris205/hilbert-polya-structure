@@ -1,0 +1,76 @@
+\section{Exact implementation and preserved evidence}
+\label{app:certificate}
+
+\subsection{Computational contract and provenance}
+The primary script below is the unchanged implementation used
+for the accepted positive-extremum run. It uses Python integers,
+not floating-point approximations, and its only maximum is the
+proved amplitude constant $100$. The infinite-looking orbit
+loop terminates by Lemma~\ref{lem:certificate}. The script
+contains assertions: reproducing its historical validation
+requires ordinary Python execution, \emph{without} the
+optimization flag \texttt{-O}. The independent implementation
+uses explicit exceptions and a separately implemented seed and
+state-set algorithm as specified completely in
+Section~\ref{sec:finite}.
+
+The accompanying \texttt{supplement/} tree preserves the
+relative layout needed by the independent script: its primary
+input directory is \path{integral_return/}, and its own
+directory is \path{integral_return_review/finite_core/}.
+The source proof, both certifiers, both complete cycle JSONL
+files, both execution summaries, the separate symbolic checker,
+and the internal proof-review reports are retained unchanged.
+Running the scripts writes their outputs beside their sources;
+to reproduce without replacing the accepted receipts, first
+copy the supplement to a fresh scratch directory and run there.
+The raw $25\,851$ records are machine-readable witnesses; their
+seed generation, stopping criterion, matching and semantic
+comparison have all been specified in the article.
+
+The independent run used Python 3.12.3. Its recorded runtime
+was $3.37218$ seconds; the primary recorded runtime was
+$0.834775$ seconds. These are historical provenance, not
+benchmark claims or complexity bounds. The separate symbolic
+receipt used Python 3.12.3 and SymPy 1.14.0 and checked the
+ten rows at all $55$ wraparound phases for each recurrence
+and level identity, the invariant identity and four algebraic
+count-reduction identities. None of these accepted mathematical
+programs was rerun during manuscript preparation.
+
+The full primary and independent summaries retain the exact
+seed dispositions, per-amplitude independent counts and all
+observed bounds. In the primary JSONL, each record contains
+\texttt{a}, \texttt{least\_period}, \texttt{word}, and
+\texttt{family}; the word is the least cyclic rotation and
+the records are sorted by parameter and word. The independent
+output instead reconstructs native words from least triples.
+Different byte encodings therefore need not share a hash;
+agreement was checked on the full oriented mathematical data.
+
+\subsection{Accepted byte identifiers}
+The following SHA-256 values identify the historical evidence.
+They are not substitutes for the reduction proof or the
+complete finite comparison.
+\begin{description}
+\item[Primary certifier]
+\mbox{}\\\nolinkurl{750b4dbb54cacd1df11cc3929ed436cf8de9877048545f212cecc9bc03b75330}
+\item[Primary cycle JSONL]
+\mbox{}\\\nolinkurl{352ffd5b5b188e32c347a4083559680e5d1bad12c8e6c6d7cd3dad6324935805}
+\item[Primary summary]
+\mbox{}\\\nolinkurl{7000a021df6d38d82e14f6a22b3b764026e9545881aa4b7247cd041e5cf4af0b}
+\item[Independent certifier]
+\mbox{}\\\nolinkurl{8bd343b599f9ed6c605b255dfe60b544a81375975083fd5d7ffb2b18a1d6c7c3}
+\item[Independent cycle JSONL]
+\mbox{}\\\nolinkurl{0432cd5d8c35fe3cf9fdc0027451bf2e85d04eb880da6da1c03457571fffe35b}
+\item[Separate symbolic checker]
+\mbox{}\\\nolinkurl{be9ca47f3b7c8f94b43b25d6857f823f35f004407eff71807770dadf6dac40bd}
+\end{description}
+
+\subsection{Complete primary certifier}
+The following listing includes the full source, including
+family subtraction, primitive-word checks, both orientation
+restoration and summary generation. The inverse-time script
+is supplied in machine-readable form; its exact mathematical
+specification is in Section~\ref{sec:finite}.
+\lstinputlisting{supplement/integral_return/certify_ir1_core.py}

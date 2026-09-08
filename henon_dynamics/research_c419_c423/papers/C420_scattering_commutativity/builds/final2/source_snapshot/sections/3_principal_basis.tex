@@ -1,0 +1,218 @@
+\section{A fixed basis for every principal oldform chain}\label{sec:principal}
+
+We now prove the local algebra needed in the real-square sectors.
+Let \(p>1\) be a prime, \(e\ge0\), and \(X\in\C^\times\).
+Put \(Y=p/X\), \(R=Y/X=p/X^2\), and
+\begin{equation}\label{eq:principal-C}
+ C_e(X)_{j,a}=X^{r_a-|j-a|},\qquad
+ r_a=\max(a,e-a),\qquad 0\le j,a\le e.
+\end{equation}
+Define the rational matrix family
+\[
+ P_{p,e}(X)=C_e(X)^{-1}C_e(Y)
+\]
+generically and then meromorphically. The variables \(X,Y\) in this
+section may be arbitrary nonzero complex numbers with product \(p\).
+This freedom will allow \(X=p^s/\chi(p)\) in the phase calculation.
+
+\begin{proposition}[Principal fixed basis]\label{prop:principal-basis}
+For every \(p,e\), the family \(P_{p,e}(X)\) has a full basis
+independent of \(X\) that diagonalizes it at every regular value.
+The basis and its eigenvalues are given in the proof below.
+\end{proposition}
+
+\subsection{Invertibility, reversal and the difference channels}
+
+Let \(\ee_0,\ldots,\ee_e\) be the coordinate vectors and let
+\(J\ee_a=\ee_{e-a}\). Factoring \eqref{eq:principal-C} as
+\[
+ C_e(X)=(X^{-|j-a|})_{j,a}\diag_a X^{r_a}
+\]
+and using the row elimination of \cref{lem:local-incoming} gives
+\begin{equation}\label{eq:principal-det}
+ \det C_e(X)=X^{\sum_a r_a}(1-X^{-2})^e .
+\end{equation}
+Also \(C_e(X)J=JC_e(X)\) because both \(r_a\) and the distance
+\(|j-a|\) are preserved by simultaneous reversal.
+
+Put \(m=\lfloor e/2\rfloor\) and \(d_a=\ee_a-\ee_{a+1}\).
+For \(0\le b\le m-1\), define the fixed vectors
+\begin{equation}\label{eq:difference-vectors}
+ v_b^L=\sum_{a=0}^b p^a d_a,\qquad v_b^R=Jv_b^L.
+\end{equation}
+Direct subtraction of columns, for \(0\le a<m\), gives
+\[
+ (C_e(X)d_a)_j=
+ \begin{cases}
+ (X^2-1)X^{e-2a+j-2},&0\le j\le a,\\
+ 0,&j>a.
+ \end{cases}
+\]
+Consequently
+\begin{equation}\label{eq:difference-images}
+ (C_e(X)v_b^L)_j=
+ \begin{cases}
+ (X^2-1)X^{e+j-2}\displaystyle\sum_{a=j}^b R^a,&0\le j\le b,\\
+ 0,&j>b.
+ \end{cases}
+\end{equation}
+Replacing \(X\) by \(Y\) replaces \(R\) by \(R^{-1}\), while
+\[
+ \sum_{a=j}^b R^{-a}=R^{-(j+b)}\sum_{a=j}^b R^a .
+\]
+Substitution in \eqref{eq:difference-images}, without division by
+any possibly vanishing finite sum, proves
+\begin{equation}\label{eq:difference-eigenvalue}
+ C_e(Y)v_b^L=\lambda_b(X)C_e(X)v_b^L,\qquad
+ \lambda_b(X)=\frac{Y^2-1}{X^2-1}R^{e-2-b}.
+\end{equation}
+The same identity holds for \(v_b^R\) by reversal. These are the
+left and right difference eigenchannels of \(P_{p,e}\).
+
+\subsection{The even central channel}
+
+Suppose \(e=2m\), \(m\ge1\). Set
+\[
+ \mu_a=\varphi(p^{\min(a,e-a)}),\qquad
+ v^{\mathrm{cen}}=\sum_{a=0}^{2m}\mu_a\ee_a,
+\]
+where \(\varphi(1)=1\).
+For \(0\le j\le m\), the telescoping totient sum is
+\(\sum_{a=0}^j\mu_a=p^j\).
+Summing the three ranges \(a\le j\), \(j<a\le m\), and \(a>m\)
+in \eqref{eq:principal-C} therefore gives, for \(0\le j<m\),
+\begin{equation}\label{eq:even-Q}
+ (C_e(X)v^{\mathrm{cen}})_j=p^jX^jQ_{m-j}(X),\qquad
+ Q_h(X)=X^{2h}+(p-1)\sum_{b=1}^{h-1}p^{b-1}X^{2h-2b}+p^h.
+\end{equation}
+At \(j=m\), the image is \(p^{m-1}(p+1)X^m\).
+The coefficients in \eqref{eq:even-Q} give the reciprocal identity
+\[
+ Q_h(p/X)=p^hX^{-2h}Q_h(X).
+\]
+Indeed the endpoint coefficients pair \(1\) with \(p^h\), and the
+interior coefficients pair by
+\((p-1)p^{h-b-1}=p^{h-2b}(p-1)p^{b-1}\).
+For every row \(j\le m\), it follows that
+\[
+ (C_e(Y)v^{\mathrm{cen}})_j
+ =R^m(C_e(X)v^{\mathrm{cen}})_j .
+\]
+Reversal gives the other rows. Thus the central eigenvalue is \(R^m\).
+When \(e=0\), the matrix is \((1)\) and the same conclusion holds
+with \(m=0\) and \(v^{\mathrm{cen}}=\ee_0\).
+
+\subsection{The two odd central channels}
+
+Now let \(e=2m+1\), including \(m=0\), and put
+\begin{equation}\label{eq:odd-vectors}
+ u_L=\sum_{a=0}^m\varphi(p^a)\ee_a,\qquad
+ u_R=Ju_L,\qquad v_\varepsilon=u_L+\varepsilon u_R
+ \quad(\varepsilon=\pm1).
+\end{equation}
+For \(0\le j\le m\), set \(h=m-j\). Range summation as above gives
+\begin{align}
+ (C_e(X)v_\varepsilon)_j&=p^jX^jT_h^\varepsilon(X),
+ \label{eq:odd-T}\\
+ T_h^\varepsilon(X)&=
+ X^{2h+1}+(p-1)\sum_{b=1}^h p^{b-1}X^{2h+1-2b}
+       +\varepsilon p^h. \nonumber
+\end{align}
+The sum is empty if \(h=0\). Its value at \(X=-\varepsilon\) is
+zero: the first two terms sum to \(-\varepsilon p^h\). Hence
+\(U_h^\varepsilon(X)=T_h^\varepsilon(X)/(X+\varepsilon)\)
+is a polynomial. Finite geometric summation also gives
+\begin{equation}\label{eq:odd-U}
+ U_h^\varepsilon(X)=
+ \frac{X^{2h+2}-\varepsilon X^{2h+1}
+       +\varepsilon p^hX-p^{h+1}}{X^2-p}.
+\end{equation}
+Let the numerator be \(Q(X)\). Directly,
+\[
+ Q(p/X)=-p^{h+1}X^{-2h-2}Q(X),\qquad
+ (p/X)^2-p=-pX^{-2}(X^2-p).
+\]
+It follows that
+\[
+ U_h^\varepsilon(p/X)=p^hX^{-2h}U_h^\varepsilon(X).
+\]
+This is a polynomial identity after clearing powers of \(X\);
+\eqref{eq:odd-U} does not introduce an exclusion at \(X^2=p\).
+Restoring the factor \(X+\varepsilon\) in
+\eqref{eq:odd-T} gives, first on the left half and then by reversal,
+\begin{equation}\label{eq:central-eigenvalues}
+ C_e(Y)v_\varepsilon
+ =\lambda_\varepsilon(X)C_e(X)v_\varepsilon,\qquad
+ \lambda_\varepsilon(X)=R^m\frac{Y+\varepsilon}{X+\varepsilon}.
+\end{equation}
+
+\subsection{Completeness and fixed cusp normalization}
+
+We finish the proof of \cref{prop:principal-basis}.
+The vectors \(v_b^L\) span the same space as
+\(d_0,\ldots,d_{m-1}\): their coefficient matrix is triangular with
+nonzero diagonal entries \(p^b\). The right-hand statement follows
+by reversal.
+
+For \(e=2m\), the left difference space consists of vectors supported
+on \([0,m]\) with coordinate sum zero. The right difference space
+has the analogous support \([m,2m]\). A vector in their intersection
+would be supported only at \(m\) and have sum zero, so their
+intersection is trivial. Their sum has dimension \(2m\), and
+\(v^{\mathrm{cen}}\), whose coordinate sum is positive, lies outside
+it. These \(e+1\) vectors form a fixed basis.
+
+For \(e=2m+1\), the support intervals \([0,m]\) and
+\([m+1,2m+1]\) are disjoint. Each difference space has codimension
+one on its interval. The respective vectors \(u_L,u_R\), both of
+coordinate sum \(p^m\), give the missing complements; their sum
+and difference are independent. Again there are \(e+1\) fixed basis
+vectors. Equations \eqref{eq:difference-eigenvalue} and
+\eqref{eq:central-eigenvalues}, and the even central calculation,
+give all eigenvalues. Inverting \(C_e(X)\) generically proves the
+diagonalization. Meromorphic continuation proves it at every regular
+value. Coincident eigenvalues do not affect independence of the
+explicit basis. This proves the proposition. \(\square\)
+
+For clarity, this principal matrix has exactly the width-one
+normalization already present in \cref{lem:local-incoming}.
+A direct cusp calculation gives the same answer. At the cusp
+\(u/p^a\), put \(w_a=p^{e-\min(2a,e)}\) and choose
+\(\gamma\in\mathrm{SL}_2(\Z)\) with first column \((u,p^a)^T\).
+Then
+\(\sigma=\gamma\diag(\sqrt{w_a},1/\sqrt{w_a})\) is width-one.
+The dilation \(z\mapsto p^jz\) has determinant-one matrix
+\(\alpha_j=\diag(p^{j/2},p^{-j/2})\). With
+\(g=p^{\min(a,j)}\), the first column of \(\alpha_j\sigma\)
+is \(g\sqrt{w_a/p^j}\) times the primitive column
+\((p^ju/g,p^a/g)^T\). Reducing that column by a matrix in
+\(\mathrm{SL}_2(\Z)\) leaves an upper triangular matrix whose
+height multiplier is
+\[
+ p^{e-\min(2a,e)+2\min(a,j)-j}
+ =p^{r_a-|j-a|}.
+\]
+Thus the incoming coefficient of the level-one oldform \(E(p^jz,s)\)
+is \(C_e(p^s)_{j,a}\); its outgoing coefficient is
+\(\phi_1(s)C_e(p^{1-s})_{j,a}\), where \(\phi_1\) is the
+level-one scattering scalar. This is also the principal specialization
+of \citet[Lemma 2.19]{BookerLeeStrombergsson2020}; the different
+normalization of the primitive-pair series there is a common factor
+two that cancels.
+
+The number of cusps in class \(a\) is \(\mu_a\). If the class sum
+of cusp series is divided by \(\sqrt{\mu_a}\), then the reduced
+row scattering matrix becomes
+\[
+ \phi_1(s)D_\mu^{-1/2}P_{p,e}(p^s)D_\mu^{1/2},
+ \qquad D_\mu=\diag(\mu_0,\ldots,\mu_e).
+\]
+Both normalizing matrices are fixed. At a composite principal level,
+\[
+ C_N(s)_{d,c}
+ =\left(\frac{N\gcd(d,c)^2}{d\gcd(c^2,N)}\right)^s
+ =\bigotimes_{p\mid N} C_{v_p(N)}(p^s),
+\]
+so the principal sector has the tensor product of the bases just
+proved. This statement concerns only that sector; it does not
+discard the nonprincipal blocks in \cref{prop:paired-blocks}.

@@ -1,0 +1,105 @@
+\section{Rational points and the original least period}\label{sec:periods}
+
+The fibre theorem turns the orbit question into a point-count problem
+for a projective geometrically integral curve. Singular fibres require
+a separate argument, but arithmetic genus one makes that argument short
+and uniform in the characteristic.
+
+\begin{lemma}\label{lem:point-bound}
+Let \(C\) be a projective geometrically integral curve of arithmetic
+genus one over \(k=\F_q\), and suppose \(C(k)\ne\varnothing\).
+Then
+\[
+\#C(k)\le q+1+2\sqrt q.
+\]
+If \(C\) is singular, the stronger estimate \(\#C(k)\le q+2\)
+suffices.
+\end{lemma}
+
+\begin{proof}
+If \(C\) is smooth, its rational point makes it an elliptic curve
+over \(k\). Hasse's theorem gives the stated upper bound; a proof
+for arbitrary finite fields is \citet[Theorem 7.3]{Sutherland2021}.
+No odd-characteristic hypothesis is part of that theorem.
+
+Suppose instead that \(C\) is singular, and let
+\(\nu:\widetilde C\to C\) be its normalization. The field
+\(k\) is perfect, so \(\widetilde C\) is a smooth projective
+geometrically integral curve. Over \(\kkbar\), the normalization
+exact sequence is
+\begin{equation}\label{eq:normalization-sequence}
+0\longrightarrow\OO_{C_{\kkbar}}
+\longrightarrow\nu_*\OO_{\widetilde C_{\kkbar}}
+\longrightarrow\mathcal Q\longrightarrow0,
+\end{equation}
+where \(\mathcal Q\) has finite support at the singular points.
+Its local length at a geometric singular point \(Q\) is the
+positive integer \(\delta_Q\). These normalization and
+delta-invariant facts are recorded in
+\citet[\href{https://stacks.math.columbia.edu/tag/0C3Q}{Tag 0C3Q},
+Lemma 33.39.2, Definition 33.39.3 and Lemma 33.39.4]{stacks-project}; the genus comparison is
+also discussed in
+\citet[\href{https://stacks.math.columbia.edu/tag/0CE0}{Tag 0CE0}]{stacks-project}.
+Taking Euler characteristics in \eqref{eq:normalization-sequence}
+gives
+\begin{equation}\label{eq:delta-genus}
+1=\pa(C)=g(\widetilde C)+
+\sum_{Q\in\Sing(C_{\kkbar})}\delta_Q.
+\end{equation}
+The curve is singular, so the sum is positive. Hence
+\(g(\widetilde C)=0\), and there is exactly one geometric
+singular point, with \(\delta=1\).
+
+We always have \(\#\widetilde C(k)\le q+1\). If
+\(\widetilde C(k)\) is empty, this is immediate. Otherwise,
+genus-zero Riemann--Roch applied to a rational point supplies a
+degree-one map to \(\PP^1_k\), so
+\(\widetilde C\simeq\PP^1_k\) and the count is \(q+1\).
+Normalization is an isomorphism over the smooth locus. Thus every
+smooth rational point of \(C\) has a unique rational lift, and
+at most one remaining rational point can be singular. It follows that
+\begin{equation}\label{eq:singular-bound}
+\#C(k)\le\#\widetilde C(k)+1\le q+2
+\le q+1+2\sqrt q,
+\end{equation}
+where the last inequality holds for every finite field, \(q\ge2\).
+\end{proof}
+
+The singular argument does not assume that the given rational point
+is smooth. It also makes no assumption about split nodes or cusps.
+These distinctions therefore cause no missing cases in small
+characteristic.
+
+\begin{proof}[Proof of Theorem~\ref{thm:period}]
+Proposition~\ref{prop:permutation} makes every state periodic on
+the finite phase union. Let \(\ell\) be its least native period,
+and let \(t\) be its starting phase. A return after \(n\) steps
+requires \(s^nt=t\). Since \(t\ne0\) and \(s\) has exact
+order \(r\), every return time is divisible by \(r\); in
+particular \(r\mid\ell\).
+
+The fixed-phase return map is
+\[
+G=F_{s^{r-1}t}\circ\cdots\circ F_{st}\circ F_t.
+\]
+For \(r=1\) this means \(G=F_t\). It is a bijection of
+\(U_{t,s}(k)\), and \eqref{eq:invariance}, extended to every
+ordinary point, shows that it preserves \(I_{r,t}\).
+The starting state has a finite invariant value \(c\in k\) by
+\eqref{eq:integral-regular}. Its \(G\)-orbit is contained in the
+finite fibre \(C_c(k)\).
+
+The least period under \(G\) is exactly \(\ell/r\): a return
+under \(G^m\) is a native return after \(rm\) steps, and the
+least positive native return is \(\ell\), itself a multiple of
+\(r\). Consequently the \(\ell/r\) points of this return
+orbit are distinct ordinary rational points of \(C_c\).
+By Theorem~\ref{thm:fibres-intro}, this is a projective
+geometrically integral curve of arithmetic genus one. Applying
+Lemma~\ref{lem:point-bound} gives
+\[
+\frac{\ell}{r}\le\#C_c(k)\le q+1+2\sqrt q.
+\]
+This proves the theorem for every phase and every state in the
+seven-branch domain.
+\end{proof}

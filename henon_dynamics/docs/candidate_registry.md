@@ -3,6 +3,41 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C419--HCS-C423 complete source-manuscript register (2026-09-08)
+
+Five independent admitted questions now have complete final manuscripts,
+67 PDF pages (11/18/18/14/6), two actual nonauthor full-manuscript review
+passes per article, genuine revisions, two fresh byte-identical final
+builds per paper and actual all-page visual inspection. See
+[the five-paper entry](../research_c419_c423/README.md),
+[manuscript adjudication](../research_c419_c423/REVIEW_ADJUDICATION.md),
+[final builds](../research_c419_c423/FINAL_BUILD_REPORT.md) and
+[evaluation closure](../research_c419_c423/EVALUATION_ADJUDICATION.md).
+Exact sealing/synchronization are recorded separately in the current
+state and external release receipt, not prefilled here.
+Baseline: 2974f8ea5f9e7cb0f8146cae017add38a6939da0. Evaluator v0.2.0 SHA256:
+6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c.
+
+| Candidate | Complete admitted source increment | Strict tuple | Final evidence |
+| --- | --- | --- | --- |
+| HCS-C419 | Every positive trace-map word using both letters: exact universal 39-line-plus-four-point integer locus, at-most-40-state level classifier, and proper two-sided escape outside the periodic set. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c419_c423/papers/C419_positive_trace_words/main.pdf) · [evaluation](../research_c419_c423/evaluations/route_a/HCS-C419/2026-09-08.yaml) |
+| HCS-C420 | Necessary-and-sufficient all-level commutativity classification for the complete fixed-width-one cusp scattering family, retaining imprimitive factors, odd/even phase obstruction and tensor noncancellation. | (A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT) | [PDF](../research_c419_c423/papers/C420_scattering_commutativity/main.pdf) · [evaluation](../research_c419_c423/evaluations/route_a/HCS-C420/2026-09-08.yaml) |
+| HCS-C421 | All integer parameters and points of T_a(x,y,z)=(y,z,yz+a-x): eight parametric and two sporadic rows, exact least periods and directed per-level cycle counts after a proved finite-core reduction. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c419_c423/papers/C421_integral_return/main.pdf) · [evaluation](../research_c419_c423/evaluations/route_a/HCS-C421/2026-09-08.yaml) |
+| HCS-C422 | Every allowed native finite-field q-Painleve I state has r dividing ell and ell/r at most q+1+2sqrt(q); all finite geometric fibres are integral and reduced, including exceptional states and characteristics two/three. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c419_c423/papers/C422_painleve_bound/main.pdf) · [evaluation](../research_c419_c423/evaluations/route_a/HCS-C422/2026-09-08.yaml) |
+| HCS-C423 | For x^4+x^6 over every characteristic-three field and marked pair, infinitely many simultaneous-preperiodicity parameters exist exactly for two constants or equal f-values; a uniform two-cycle/escape witness closes both residual signs. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c419_c423/papers/C423_two_cycle_preperiodicity/main.pdf) · [evaluation](../research_c419_c423/evaluations/route_a/HCS-C423/2026-09-08.yaml) |
+
+All five remain ROUTE_A_EXPLORATORY. Every one of 45 A2 metrics is
+NOT_TESTABLE; the A0 control gate is INCOMPLETE and all target/Route-B
+flags are false. C420's revised A4 credit acknowledges an actual classical
+scattering definition, not an autonomous clock, full operator/lift panel,
+new quantization or target success. Original pre-review evaluation bytes
+and the adverse initial finding remain preserved. Source comparisons
+retain their actual access limits; internal AI review is not human peer
+review or worldwide-priority certification. Unadmitted AY/AS1/helper
+results are not a sixth paper. This batch stops at C423, with no C424,
+Route B or external publication authorized by this entry. Earlier
+register sections retain their own historical stop-number boundaries.
+
 ## HCS-C414--HCS-C418 complete source-manuscript register (2026-09-07)
 
 Five independent substantial contracts now have complete manuscripts and

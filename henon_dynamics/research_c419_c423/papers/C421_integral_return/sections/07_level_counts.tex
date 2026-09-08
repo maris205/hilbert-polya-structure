@@ -1,0 +1,136 @@
+\section{Exact level counts and the native dynamical zeta function}
+\label{sec:counts}
+
+Fix integers $a,k$. Let $c_\ell(a,k)$ be the number of
+oriented cycles of least period $\ell$ on the ordinary integer
+level set
+\[
+ X_{a,k}(\Z)=\{(x,y,z)\in\Z^3:K_a(x,y,z)=k\}.
+\]
+All lengths outside \eqref{eq:periodset} have count zero.
+The following explicit tests remove every remaining orbit search.
+Here a positive square means $h^2$ for an integer $h>0$;
+zero is excluded whenever positivity is specified.
+
+\begin{proposition}[Finite arithmetic tests]
+\label{prop:counts}
+The counts $c_\ell(a,k)$ are given by the following rules.
+\begin{enumerate}
+\item $c_1$ is the number of distinct integers
+$r=1\pm\sqrt{1-a}$ satisfying $k=r^2(2r-3)$.
+If $1-a$ is not a nonnegative integer square, the count is
+zero; if the square root is zero, count the common root once.
+\item Let $P$ run over the distinct integer roots of
+\begin{equation}
+ P^2+(a-3)P-k=0.
+ \label{eq:period2quadratic}
+\end{equation}
+Put $S=P+a$. Each root contributes one to $c_2$ exactly
+when $S^2-4P=h^2>0$ with $h\equiv S\pmod2$.
+Otherwise it contributes zero.
+\item $c_3=1$ exactly when $a$ is even,
+$t=(a+4)/2\ne-2$, and $k=8-(t-4)^2$; otherwise $c_3=0$.
+\item $c_4=1$ exactly when
+\begin{equation}
+ (a+1)(a-7)+4k=h^2>0,\qquad h\equiv a+1\pmod2;
+ \label{eq:period4square}
+\end{equation}
+otherwise $c_4=0$.
+\item At $a=-1$, the $F_5$ contribution is one if $k=0$,
+two if $k>0$ and $4k+1$ is an integer square, and zero
+otherwise. Add one precisely for $(a,k)=(-13,-64)$.
+There is no other contribution to $c_5$.
+\item $c_6=1$ exactly when $a=0$ and $k$ is a positive
+integer square.
+\item $c_8=1$ exactly when $a=-1$ and $k-1$ is a
+positive integer square.
+\item $c_9=1$ exactly when $(a,k)=(-2,-1)$.
+\item $c_{12}=1$ exactly when $a=0$ and $4k-7$ is a
+positive integer square.
+\end{enumerate}
+In the last four rules the count is zero when the stated
+condition fails.
+\end{proposition}
+
+\begin{proof}
+The fixed-point relation is $(r-1)^2=1-a$, giving the
+first test. For an alternating pair put $S=u+v$ and
+$P=uv$. The parameter and level equations become
+\[
+ a=S-P,\qquad k=P(S-3)=P(P+a-3).
+\]
+This proves \eqref{eq:period2quadratic}. A distinct integral
+unordered pair exists exactly when its discriminant is a
+positive square with the required parity; then
+\[
+ u=(S-h)/2<v=(S+h)/2.
+\]
+Distinct values of $P$ give distinct pairs, since $S=P+a$.
+This formulation remains valid at $a=1$ and does not divide
+by $u-1$ or lose a factor-zero case.
+
+The $F_3$ relation uniquely fixes $t$ when $a$ is even.
+For $F_4$, solving
+$k=t^2-(a+1)t+2a+2$ gives discriminant
+$(a+1)(a-7)+4k$. Its smaller root is
+$(a+1-h)/2$; it is integral and satisfies $2t<a+1$
+exactly under \eqref{eq:period4square}. Thus there is
+one cycle, not two, when that test succeeds.
+
+For $F_5$, $k=t(t+1)\ge0$ for integral $t$.
+At $k=0$ the two roots $0,-1$ give the same cyclic
+word and the specified range retains only $0$. At $k>0$
+the square test $4k+1=(2t+1)^2$ gives two distinct
+integer parameters, neither excluded; they give the two
+distinct reversed oriented cycles and must both be counted.
+The additional exceptional contribution is read at its
+separate parameter and level.
+
+The formulas $k=t^2$ with $t\ge1$ and
+$k-1=(t+1)^2$ with $t\ge0$ give the sixth and
+seventh tests. The eighth is the unique $E_9$ row.
+Finally $k=m^2-m+2$ is equivalent to
+$4k-7=(2m-1)^2$. A positive square congruent to $1$
+modulo $4$ has odd positive root $h$, yielding the unique
+$m=(1+h)/2\ge1$. The disjointness already proved means
+that no further identifications enter these tests.
+\end{proof}
+
+\begin{corollary}[Ordinary fixed points and zeta]
+\label{cor:zeta}
+For all integers $a,k$ and $n\ge1$,
+\begin{equation}
+ \#\Fix\bigl(T_a^n\vert X_{a,k}(\Z)\bigr)
+ =\sum_{\substack{\ell\in\cL\\\ell\mid n}}
+   \ell c_\ell(a,k).
+ \label{eq:fixedcounts}
+\end{equation}
+The Artin--Mazur dynamical zeta series in the ordinary time
+variable $\tau$ is the finite rational product
+\begin{equation}
+ \zeta_{a,k}(\tau)
+ :=\exp\!\left(\sum_{n\ge1}
+ \frac{\#\Fix(T_a^n\vert X_{a,k}(\Z))}{n}\tau^n\right)
+ =\prod_{\ell\in\cL}(1-\tau^\ell)^{-c_\ell(a,k)}.
+ \label{eq:zeta}
+\end{equation}
+\end{corollary}
+\begin{proof}
+Each arithmetic test admits at most finitely many parameters,
+so $X_{a,k}(\Z)$ has finitely many periodic points.
+An oriented cycle of length $\ell$ contributes its
+$\ell$ distinct points to $\Fix(T_a^n)$ exactly when
+$\ell\mid n$, proving \eqref{eq:fixedcounts}.
+For each such cycle its contribution to the logarithm of
+the zeta series is
+$\sum_{j\ge1}\tau^{j\ell}/j=-\log(1-\tau^\ell)$.
+Summing over the finitely many cycles proves
+\eqref{eq:zeta} as a formal power-series identity.
+\end{proof}
+
+There is no analogous unrestricted all-level finite-count
+assertion here. For every fixed $a$, the infinitely many
+integers $t$ with $2t<a+1$ give distinct four-cycles.
+In particular the all-level fixed set of $T_a^4$ is
+infinite. Fixing the invariant level is indispensable for
+the finite counts in \eqref{eq:fixedcounts}.

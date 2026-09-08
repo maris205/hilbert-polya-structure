@@ -1,0 +1,95 @@
+\section{The elementary level conditions}\label{sec:arithmetic}
+
+We convert \cref{thm:characters} to \cref{thm:levels}.
+Put
+\[
+ M=\prod_p p^{\lfloor v_p(N)/2\rfloor},\qquad
+ M^{(p)}=M/p^{v_p(M)},\qquad U_d=(\Z/d\Z)^\times,
+\]
+with \(U_1\) trivial. A conductor square divides \(N\)
+exactly when its conductor divides \(M\).
+
+\begin{lemma}\label{lem:unit-exponent}
+Every primitive character of conductor dividing \(M\) has
+fourth power one if and only if
+\[
+ M=2^a3^b5^c,\qquad 0\le a\le4,\qquad b,c\in\{0,1\}.
+\]
+\end{lemma}
+\begin{proof}
+Every character of \(U_M\) has a unique primitive inducing
+character, and pullback preserves its image and order.
+The stated fourth-power condition is therefore that the dual
+of \(U_M\) has exponent dividing four. A finite abelian group
+and its character dual have the same exponent: decompose the
+group into cyclic factors, on each of which the full group of
+roots-of-unity characters has the same order. Thus the condition
+is \(\expnt(U_M)\mid4\).
+
+The Chinese remainder theorem decomposes \(U_M\) into its
+prime-power unit groups. For odd \(p\), the classical cyclic
+group \(U_{p^a}\) has order \((p-1)p^{a-1}\). For \(a\ge1\),
+this order divides four exactly when \(a=1\) and \(p=3\) or \(5\).
+For powers of two, the groups for exponents \(0,1\) are trivial,
+\(U_4\) has order two, and
+\(U_{2^a}\simeq C_2\times C_{2^{a-2}}\) for \(a\ge3\).
+Their exponents divide four exactly for \(a\le4\).
+Combining the factors proves the assertion.
+\end{proof}
+
+Taking floors in the definition of \(M\) gives exactly the
+prime-exponent bounds in \cref{thm:levels}; they are also recorded
+in \cref{tab:levels}. These familiar unit-group facts are
+arithmetic tools, not separate contributions.
+\LevelTable
+
+\begin{lemma}\label{lem:extra-prime}
+Fix a prime \(p\) with odd \(v_p(N)\).
+Condition \eqref{eq:phase-condition} for every permitted
+primitive character of conductor prime to \(p\) is equivalent to
+\begin{equation}\label{eq:p-square}
+ p^2\equiv1\pmod{M^{(p)}}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The primitive characters whose conductors divide \(M\) and are
+coprime to \(p\) correspond precisely to the full character
+dual of \(U_{M^{(p)}}\). The prime \(p\) is a unit in this group.
+All these characters have square value one at \(p\) exactly
+when every character is one on \(p^2\). Characters of a finite
+abelian group separate its elements, as can again be seen on
+each cyclic factor. This is exactly \eqref{eq:p-square}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:levels}]
+By \cref{thm:characters,lem:unit-exponent}, the conductor-square
+condition is equivalent to the displayed exponent bounds.
+Under these bounds, it remains to resolve
+\eqref{eq:p-square} only for primes with odd \(v_p(N)\).
+
+Every unit has square one modulo \(3\), and every odd unit has
+square one modulo \(2^a\) for \(a\le3\). These factors impose no
+extra restrictions. If \(5\mid M\), then for \(p\ne5\),
+\[
+ p^2\equiv1\pmod5
+ \quad\Longleftrightarrow\quad p\equiv\pm1\pmod5.
+\]
+Here \(5\mid M\) is equivalent to \(v_5(N)\ge2\). If
+\(16\mid M\), the four odd classes modulo eight have square
+one modulo sixteen precisely for the classes \(1\) and \(7\).
+Thus, for odd \(p\),
+\[
+ p^2\equiv1\pmod{16}
+ \quad\Longleftrightarrow\quad p\equiv\pm1\pmod8.
+\]
+The hypothesis \(16\mid M\) is equivalent to \(v_2(N)\ge8\).
+These are exactly the two congruence clauses of the theorem.
+Conversely, those clauses settle every prime-power factor
+of \(M^{(p)}\); the Chinese remainder theorem then gives
+\eqref{eq:p-square}. This proves both directions.
+
+There is no condition at an even exponent, because such a
+prime was never selected in \cref{lem:extra-prime}.
+Nor does the argument ask for a nonzero value \(\chi(p)\)
+at a prime dividing the conductor.
+\end{proof}

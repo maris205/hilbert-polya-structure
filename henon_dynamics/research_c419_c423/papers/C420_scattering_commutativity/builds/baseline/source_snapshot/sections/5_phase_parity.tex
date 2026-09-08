@@ -1,0 +1,226 @@
+\section{Real squares, local phases and tensor assembly}\label{sec:parity}
+
+After \cref{prop:nonreal-obstruction}, every remaining character is
+real or has order four. We first isolate a tensor fact that prevents
+several noncommuting local factors from cancelling each other.
+
+\begin{lemma}[Tensor commutation]\label{lem:tensor}
+Let \(A_1(s),\ldots,A_h(s)\) be meromorphic matrix families over
+\(\C\), all generically invertible, and set
+\(A(s)=\bigotimes_{j=1}^h A_j(s)\). Then \(A(s)\) is pairwise
+commuting as a meromorphic family if and only if every \(A_j(s)\)
+is pairwise commuting.
+\end{lemma}
+\begin{proof}
+Sufficiency follows from multiplication of tensor products.
+For necessity, choose \(s_0\) where all matrices are holomorphic
+and invertible, and work in a small connected neighborhood of
+\((s_0,s_0)\). Tensor commutativity gives
+\[
+ \bigotimes_j R_j(s,t)=I,\qquad
+ R_j(s,t)=A_j(s)A_j(t)\bigl(A_j(t)A_j(s)\bigr)^{-1}.
+\]
+Taking the trace shows that each \(\tr R_j\) is nonzero:
+their product is the positive dimension of the tensor space.
+Taking the partial trace over all factors except \(j\) then makes
+\(R_j\) scalar. Since \(\det R_j=1\), that scalar belongs to the
+finite set of roots of unity of order dividing \(\dim A_j\).
+It is continuous, so is constant on the chosen neighborhood.
+Its value at \((s_0,s_0)\) is one. Thus the local commutators vanish
+on an open set and therefore identically by meromorphic
+continuation.
+\end{proof}
+
+\subsection{Real characters}
+
+If \(\chi=\bar\chi\), each unramified value is \(c=\pm1\).
+With \(D_c=\diag(1,c,\ldots,c^e)\), the incoming factor satisfies
+\[
+ C_{\chi,p}(s)=D_c C_e(p^s)D_c,
+ \qquad D_c^2=I.
+\]
+This follows from \(c^{|j-a|}=c^{j+a}\).
+Hence the local scattering factor is a fixed conjugate of
+\(P_{p,e}(p^s)\), and it commutes by \cref{prop:principal-basis}.
+Every ramified factor is diagonal by \eqref{eq:ramified-C}.
+The single character sector in \cref{prop:paired-blocks} is thus
+a scalar multiple of a commuting tensor product for every \(L\).
+No restriction on the oldform exponents has been introduced.
+
+\subsection{A constant reduction of the quartic paired sector}
+
+Suppose \(\chi\ne\bar\chi\) but \(\chi^2=\bar\chi^2\).
+Then \(\chi\) has order four. The factors \(a_\chi\) and
+\(a_{\bar\chi}\) have a common meromorphic factor \(k_\chi(s)\)
+and the reciprocal constants
+\[
+ a_\chi(s)=k_\chi(s)\frac{\tau(\chi)}{\tau(\bar\chi)},\qquad
+ a_{\bar\chi}(s)=k_\chi(s)\frac{\tau(\bar\chi)}{\tau(\chi)}.
+\]
+This is immediate from \eqref{eq:completion} because the two
+square \(L\)-functions coincide. The common factor is not
+identically zero. Conjugation by the fixed block diagonal matrix
+\(\diag(\tau(\chi)/\tau(\bar\chi)\,I_d,I_d)\) removes the two
+constant ratios from \eqref{eq:paired-block}.
+
+For \(p\nmid q\), put
+\[
+ J_p=\diag_{0\le b\le e_p}(\chi(p)^2)^b,\qquad e_p=v_p(L);
+\]
+for \(p\mid q\), set \(J_p=I\).
+Equations \eqref{eq:ramified-C} and \eqref{eq:unramified-C} give
+\[
+ C_{\bar\chi,p}(s)=J_pC_{\chi,p}(s)J_p.
+\]
+Here the parameter \(s\) is not conjugated.
+With \(J=\bigotimes_{p\mid N}J_p\), we have
+\(U_{\bar\chi}(s)=JU_\chi(s)J\).
+The further fixed similarity \(\diag(I_d,J)\) changes the paired
+block, after division by \(k_\chi\), into
+\[
+ \begin{pmatrix}0&\mathcal A_\chi(s)\\
+                 \mathcal A_\chi(s)&0\end{pmatrix},
+\]
+where
+\begin{equation}\label{eq:global-A}
+ \mathcal A_\chi(s)=U_\chi(s)J
+ =C_\chi(s)^{-1}JC_\chi(1-s)
+ =\bigotimes_{p\mid N}
+       \bigl(C_{\chi,p}(s)^{-1}J_pC_{\chi,p}(1-s)\bigr).
+\end{equation}
+A fixed two-block Walsh transform gives
+\(\mathcal A_\chi(s)\oplus(-\mathcal A_\chi(s))\).
+Thus the quartic paired sector commutes exactly when
+\(\mathcal A_\chi(s)\) does. Every factor in \eqref{eq:global-A}
+is generically invertible. All coordinate transformations used
+in this reduction are constant.
+
+\subsection{The phase identity and its parity boundary}
+
+Fix an unramified prime. Write \(e=v_p(L)\), \(c=\chi(p)\),
+\(x=p^s\), \(y=p^{1-s}\), \(r_a=\max(a,e-a)\), and
+\[
+ C_c(x)_{j,a}=c^{|j-a|}x^{r_a-|j-a|}.
+\]
+Since the square is real, \(c\in\{1,-1,i,-i\}\).
+Define the constant diagonal matrices
+\[
+ \kappa=c^2,\qquad
+ D=\diag_j\kappa^j,\qquad
+ H=\diag_a c^{r_a},\qquad
+ F=\diag_a\kappa^{r_a+a}.
+\]
+The local factor of \eqref{eq:global-A} is
+\(A_c(s)=C_c(x)^{-1}DC_c(y)\).
+
+\begin{lemma}[Fixed phase identity]\label{lem:phase-identity}
+With \(X=x/c\), one has
+\begin{equation}\label{eq:phase-identity}
+ A_c(s)=H^{-1}P_{p,e}(X)F H.
+\end{equation}
+If \(c=\pm1\), or if \(c=\pm i\) and \(e\) is even, then \(F=I\).
+If \(c=\pm i\) and \(e=2m+1\), then \(F\) is minus the identity
+on coordinates \(0,\ldots,m\) and the identity on
+\(m+1,\ldots,2m+1\).
+\end{lemma}
+\begin{proof}
+Put \(V=y/c\). The entries give
+\[
+ C_c(x)=C_e(X)H,\qquad C_c(y)=C_e(V)H.
+\]
+Because \(|j-a|\equiv j+a\pmod2\) and \(\kappa=\pm1\),
+\[
+ DC_e(V)=C_e(\kappa V)F.
+\]
+Also \(X\kappa V=p\). Substitution yields
+\eqref{eq:phase-identity}.
+If \(\kappa=1\), \(F=I\). If \(\kappa=-1\), the exponent
+\(r_a+a\) equals \(e\) on the left half of the index interval
+and \(2a\) on the right half. This gives the asserted even
+and odd cases.
+\end{proof}
+
+\begin{proposition}[Exact local obstruction]\label{prop:local-parity}
+For real-square data, the local factor \(A_c(s)\) is pairwise
+commuting except precisely when \(c=\pm i\) and \(e\) is odd.
+\end{proposition}
+\begin{proof}
+When \(F=I\), \cref{lem:phase-identity,prop:principal-basis}
+give a fixed diagonalizing basis, hence commutativity.
+
+Let \(c=\pm i\), \(e=2m+1\). On the left and right difference
+eigenlines of \eqref{eq:difference-vectors}, \(F\) acts by
+\(-1\) and \(+1\), respectively. On the central space
+\eqref{eq:odd-vectors}, it satisfies
+\[
+ Fv_+=-v_-,\qquad Fv_-=-v_+.
+\]
+Consequently the matrix of \(P_{p,e}(X)F\) in the fixed central
+basis \((v_+,v_-)\) is
+\begin{equation}\label{eq:odd-obstruction-block}
+ \begin{pmatrix}0&-\lambda_+(X)\\
+                 -\lambda_-(X)&0\end{pmatrix},\qquad
+ \lambda_\pm(X)=\left(\frac{p}{X^2}\right)^m
+                    \frac{p/X\pm1}{X\pm1}.
+\end{equation}
+Neither off-diagonal entry is identically zero. Their ratio is
+\begin{equation}\label{eq:rho}
+ \rho_p(X)=\frac{(p+X)(X-1)}{(p-X)(X+1)}.
+\end{equation}
+If this rational function were a constant \(k\), comparison
+of quadratic coefficients would give \(k=-1\), whereas comparison
+of linear coefficients would give \(p-1=-(p-1)\).
+This is impossible for \(p>1\). Since \(X=p^s/c\) has nonzero
+derivative and takes values in an open set locally, the composed
+meromorphic ratio is nonconstant.
+
+For an off-diagonal family
+\(\left(\begin{smallmatrix}0&a(s)\\b(s)&0\end{smallmatrix}\right)\)
+with neither entry identically zero, pairwise commutativity is
+equivalent to
+\(a(s)b(t)=a(t)b(s)\), or equivalently to constancy of \(a/b\).
+Equation \eqref{eq:rho} therefore proves noncommutativity on a
+fixed invariant two-dimensional subspace. The whole local
+factor cannot commute.
+\end{proof}
+\ParityTable
+
+\subsection{The full character criterion}
+
+\begin{proof}[Proof of \cref{thm:characters}]
+If the full scattering family commutes, then
+\cref{prop:nonreal-obstruction} gives real squares for every
+primitive conductor. Real characters satisfy
+\eqref{eq:phase-condition} automatically. In a quartic sector,
+the constant reductions leading to \eqref{eq:global-A} preserve
+commutator vanishing; division by the common nonzero meromorphic
+scalar also preserves its being an identity. By \cref{lem:tensor},
+each local factor must commute. Ramified factors are diagonal,
+while \cref{prop:local-parity} excludes exactly the imaginary
+unramified values at odd \(e_p\). For \(p\nmid q\),
+\(e_p=v_p(N)\). This proves \eqref{eq:phase-condition}.
+
+Conversely, assume \eqref{eq:real-square-condition} and
+\eqref{eq:phase-condition} for all primitive conductors.
+Each real sector commutes by the first part of this section.
+In a quartic sector, every local factor of
+\eqref{eq:global-A} commutes by \cref{prop:local-parity}, so
+their tensor product commutes. Reversing the constant similarities
+shows that the actual paired block commutes. The Fourier
+decomposition in \cref{prop:paired-blocks} exhausts the cusp
+space, proving commutativity of the whole family.
+
+All arguments with inverses and quotients were made first on
+generic open sets. The resulting commutator is a meromorphic
+matrix identity in \((s,t)\). It therefore holds at every pair
+of regular values of the actual \(\Phi_N\), including values at
+which an intermediate formula has a removable singularity.
+In the necessity direction, an assumed identity at all regular
+pairs is a meromorphic identity, so the same generic arguments
+apply. No exceptional regular parameter is excluded.
+\end{proof}
+
+The tensor argument also explains why two odd-exponent imaginary
+phases cannot repair one another. It does not require independence
+of logarithms of distinct primes: generic invertibility, partial
+traces and the finite set of scalar roots of unity suffice.

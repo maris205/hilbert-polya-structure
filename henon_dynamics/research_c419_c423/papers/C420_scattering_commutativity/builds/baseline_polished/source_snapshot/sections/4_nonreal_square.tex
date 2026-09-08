@@ -1,0 +1,189 @@
+\section{Why a nonreal square obstructs every larger level}\label{sec:nonreal}
+
+We prove \eqref{eq:real-square-condition} is necessary. The main issue
+is that a primitive character can have an imprimitive square, and
+that extra oldform determinants can appear at primes dividing \(N\).
+Neither effect can be omitted.
+
+\subsection{The scalar ratio, including all missing Euler factors}
+
+Let \(\chi\) be primitive of conductor \(q\), with nonreal square
+\(\eta=\chi^2\). Let \(\xi\), of conductor \(r\), be the primitive
+character inducing \(\eta\), and set
+\[
+ \mathcal P=\{p:p\mid q,\ p\nmid r\},\qquad
+ d_0=\prod_{p\in\mathcal P}p.
+\]
+The character \(\xi\) is nonprincipal and even, since \(\eta(-1)=1\).
+Define
+\begin{equation}\label{eq:H-xi}
+ H_\xi(s)=
+ \prod_{p\nmid q}\frac{1-\xi(p)p^{-2s}}{1-\xi(p)p^{1-2s}}
+ \prod_{p\in\mathcal P}
+       \frac{1-\xi(p)p^{2-2s}}{1-\xi(p)p^{1-2s}}.
+\end{equation}
+
+\begin{lemma}\label{lem:scalar-ratio}
+There is a nonzero constant \(K_\chi\) such that
+\begin{equation}\label{eq:scalar-ratio}
+ \frac{a_\chi(s)}{a_{\bar\chi}(s)}
+ =K_\chi\frac{H_\xi(s)}{H_{\bar\xi}(s)}.
+\end{equation}
+Both products in \eqref{eq:H-xi} have absolutely convergent
+Dirichlet expansions in \(n^{-2s}\) for \(\Re s>1\), with
+constant coefficient one.
+\end{lemma}
+\begin{proof}
+For a character induced from \(\xi\), the missing-Euler-factor identity
+and primitive functional equation are the classical formulas in
+\citet[equations 25.15.4--25.15.6]{DLMF2026}. Here they give
+\[
+ L(u,\eta)=L(u,\xi)\prod_{p\in\mathcal P}(1-\xi(p)p^{-u}),
+\]
+and, for the primitive even character,
+\[
+ \left(\frac r\pi\right)^{u/2}\Gamma(u/2)L(u,\bar\xi)
+ =\epsilon_{\bar\xi}
+   \left(\frac r\pi\right)^{(1-u)/2}
+   \Gamma((1-u)/2)L(1-u,\xi).
+\]
+The constant \(\epsilon_{\bar\xi}\ne0\) is its usual
+Dirichlet functional-equation constant.
+
+From \eqref{eq:completion}, it is convenient to multiply the
+off-diagonal scalar by \(q^{1-2s}\) and write
+\begin{align}
+ h_\chi(s):=q^{1-2s}a_\chi(s)
+ &=q^{1-2s}\frac{\tau(\chi)}{\tau(\bar\chi)}
+   \left(\frac q\pi\right)^{1-2s}
+   \frac{\Gamma(1-s)}{\Gamma(s)}
+   \frac{L(2-2s,\bar\eta)}{L(2s,\eta)}.
+ \label{eq:h-chi}
+\end{align}
+Apply the primitive equation with \(u=2-2s\).
+For each missing prime use the exact identity
+\[
+ 1-\bar\xi(p)p^{2s-2}
+ =-\bar\xi(p)p^{2s-2}(1-\xi(p)p^{2-2s}).
+\]
+The primitive quotient \(L(2s-1,\xi)/L(2s,\xi)\), together with
+these factors, is precisely \(H_\xi(s)\). All remaining
+\(s\)-dependent factors are independent of the choice of \(\chi\)
+or \(\bar\chi\). Explicitly,
+\begin{align}
+ h_\chi(s)&=c_\chi V(s)H_\xi(s),\label{eq:h-factor}\\
+ V(s)&=
+ q^{1-2s}(q/\pi)^{1-2s}(r/\pi)^{2s-3/2}
+ d_0^{\,2s-2}\frac{\Gamma(s-\tfrac12)}{\Gamma(s)},\nonumber\\
+ c_\chi&=
+ \frac{\tau(\chi)}{\tau(\bar\chi)}
+ \epsilon_{\bar\xi}\prod_{p\in\mathcal P}(-\bar\xi(p)).
+ \nonumber
+\end{align}
+All constants in the last line are nonzero. Dividing the two
+identities \eqref{eq:h-factor} gives \eqref{eq:scalar-ratio},
+since \(q^{1-2s}\) cancels.
+
+For \(\Re s>1\), the infinite product over \(p\nmid q\)
+is absolutely convergent: its first-order sizes are
+\(O(p^{1-2\Re s})\). The remaining product is finite, and the
+geometric expansions of its denominators converge in the same
+half-plane. Their products therefore have absolutely convergent
+Dirichlet expansions, with constant coefficient one.
+\end{proof}
+
+This computation retains every missing factor when \(\eta\) is
+imprimitive. It does not apply a primitive functional equation
+directly to an imprimitive \(L\)-function. All separated gamma and
+\(L\)-factors are meromorphic identities, not instructions to
+evaluate a zero times a pole separately.
+
+\subsection{The determinant obstruction}
+
+\begin{proposition}\label{prop:nonreal-obstruction}
+If \(\Phi_N(s)\) is pairwise commuting, every primitive \(\chi\)
+with \(q^2\mid N\) has real square.
+\end{proposition}
+\begin{proof}
+Suppose instead that such a \(\chi\) has nonreal square. Put
+\(L=N/q^2\) and \(d=\#\{B:B\mid L\}\), as in
+\cref{sec:fixed}. The upper-left block of the commutator in
+\eqref{eq:paired-block} must vanish:
+\[
+ (a_\chi(s)U_\chi(s))(a_{\bar\chi}(t)U_{\bar\chi}(t))
+ =
+ (a_\chi(t)U_\chi(t))(a_{\bar\chi}(s)U_{\bar\chi}(s)).
+\]
+Taking determinants and fixing a generic \(t\) makes
+\begin{equation}\label{eq:Delta}
+ \Delta_\chi(s)=
+ \left(\frac{a_\chi(s)}{a_{\bar\chi}(s)}\right)^d
+ \frac{\det C_{\bar\chi}(s)\det C_{\bar\chi}(1-s)}
+      {\det C_\chi(s)\det C_\chi(1-s)}
+\end{equation}
+constant. Generic invertibility justifies the divisions; the
+result is a meromorphic identity.
+
+For \(p\mid L\), let \(e_p=v_p(L)\). The determinant of the
+local factor in \eqref{eq:tensor-C} appears to the power
+\(d/(e_p+1)\). Ramified factors \eqref{eq:ramified-C} cancel
+between conjugate characters. For \(p\nmid q\), put
+\[
+ c_p=\chi(p),\qquad n_p=\frac{e_pd}{e_p+1}\in\Z_{\ge0}.
+\]
+The phase-sensitive part of its determinant contribution is
+\[
+ \left[
+ \frac{(1-\bar c_p^2p^{-2s})(1-\bar c_p^2p^{2s-2})}
+      {(1-c_p^2p^{-2s})(1-c_p^2p^{2s-2})}
+ \right]^{n_p}.
+\]
+All powers from the diagonal coefficient factors cancel. Since
+\(|c_p|=1\), removing a nonzero constant and setting \(z=p^{-2s}\)
+changes this expression to
+\begin{equation}\label{eq:finite-Euler}
+ \left[
+ \frac{(1-\bar c_p^2z)(1-c_p^2p^2z)}
+      {(1-c_p^2z)(1-\bar c_p^2p^2z)}
+ \right]^{n_p}.
+\end{equation}
+Let \(F_\chi(s)\) be their finite product. It is supported at primes
+dividing \(N\) and has constant coefficient one.
+By \cref{lem:scalar-ratio}, \(\Delta_\chi(s)\) is a nonzero
+constant times
+\begin{equation}\label{eq:normalized-Delta}
+ \left(\frac{H_\xi(s)}{H_{\bar\xi}(s)}\right)^d F_\chi(s).
+\end{equation}
+For \(\Re s>1\), this too has an absolutely convergent Dirichlet
+expansion in \(n^{-2s}\), including the denominator expansions
+in \eqref{eq:finite-Euler}. It tends to one as real \(s\to+\infty\).
+Its constancy forces it to equal one identically.
+
+At a prime \(\ell\nmid N\), the coefficient of \(\ell^{-2s}\)
+in \eqref{eq:normalized-Delta} is
+\begin{equation}\label{eq:outside-coefficient}
+ d(\ell-1)\bigl(\xi(\ell)-\bar\xi(\ell)\bigr).
+\end{equation}
+Indeed the factor at \(\ell\) in \(H_\xi\) begins
+\(1+(\ell-1)\xi(\ell)\ell^{-2s}+\cdots\), and none of the finite
+level factors can contribute to this prime coefficient.
+Uniqueness of absolutely convergent Dirichlet series forces
+\eqref{eq:outside-coefficient} to vanish for every \(\ell\nmid N\).
+For completeness, uniqueness follows by taking the least index with
+a nonzero coefficient in the difference of two series, multiplying
+by that index to the power \(2s\), and letting real \(s\to+\infty\).
+Absolute convergence in a fixed right half-plane controls the tail.
+
+Choose a unit residue \(a\bmod q\) with \(\eta(a)\) nonreal.
+The Chinese remainder theorem supplies a positive integer \(n\) with
+\[
+ n\equiv a\pmod q,\qquad
+ n\equiv1\pmod{\prod_{p\mid N,\ p\nmid q}p}.
+\]
+It is coprime to \(N\) and has \(\eta(n)\) nonreal. At least one
+prime factor \(\ell\) of \(n\) has \(\eta(\ell)=\xi(\ell)\)
+nonreal, since a product of real character values is real.
+That prime is outside \(N\), contradicting
+\eqref{eq:outside-coefficient}. No theorem on the density of primes
+in residue classes is required.
+\end{proof}

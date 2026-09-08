@@ -1,0 +1,197 @@
+\section{A terminating finite certificate}
+\label{sec:finite}
+
+The bound $D\le100$ is now a theorem, not a search parameter.
+This section specifies the complete finite task and records its
+accepted exact evaluation. The two enumerations were performed in
+the proof stage; they were not rerun merely to prepare this article.
+Appendix~\ref{app:certificate} prints the primary implementation
+and identifies the preserved source and output files.
+
+\subsection{The forward, positive-extremum algorithm}
+For each integer $D\in[1,100]$ put
+\[
+ b_-=-3D-1,\qquad b_+=3D-1.
+\]
+Perform the following finite loops and exact orbit walks.
+\begin{enumerate}
+\item For every integer $u\in[b_-,b_+-D]$ and every
+$s\in\{-3,-2,-1,0,1\}\cap[b_-,b_+]$, put $v=u+D$.
+For every integer $p\in[-D,D]$, put $q=(s+1)D-p$.
+Retain the seed precisely when
+\begin{equation}
+ |q|\le D,\qquad |(u+1)p|\le2D,\qquad
+ |(v+1)q|\le2D.
+ \label{eq:seedbounds}
+\end{equation}
+Set $a=v-su+s-p$ and the starting triple $P=(u,s,v)$.
+The code intersects the corresponding integer $p$ intervals
+before entering their innermost loop; this is exactly the same
+finite set.
+\item Keep this $a,D$ fixed. At the current state $(x,y,z)$,
+test first whether a coordinate is outside $[b_-,b_+]$,
+then whether $|z-x|>D$. If either test holds, record the
+corresponding exit and stop this walk.
+\item Otherwise append $x$ to the scalar word and replace the
+state by $(y,z,yz+a-x)$. If it equals $P$, record the first
+return and stop; otherwise repeat the preceding step.
+\item For each returned word, check the recurrence at every
+wraparound phase and absence of any smaller scalar period.
+Insert both the word and its reverse, identifying words only
+by cyclic rotation. Store the pair consisting of $a$ and the
+lexicographically least rotation.
+\item Compare each resulting word, at every cyclic phase, with
+the explicit family formulas in Table~\ref{tab:classification}.
+For this subtraction allow their degenerate parameter values;
+classify by the actual word length. Output every unmatched word
+with its parameter and first-return length.
+\end{enumerate}
+
+\begin{lemma}[Coverage and termination]
+\label{lem:certificate}
+The algorithm covers every orbit satisfying \eqref{eq:core},
+including its original time orientation. Every orbit walk stops,
+without any imposed bound on $a$ or on the number of iterates.
+An exit excludes the seed from a periodic orbit having the
+specified maximum difference and height bounds.
+\end{lemma}
+\begin{proof}
+Every residual periodic word has a phase with $|d_0|=D$;
+reverse if necessary to obtain $d_0=D$. Equation~\eqref{eq:key}
+gives precisely the five choices of $s$, the relation defining
+$q$, and the two neighboring bounds \eqref{eq:seedbounds}.
+The height bounds place $u,v$ in the enumerated intervals.
+The equation defining $p$ in \eqref{eq:extremal} uniquely
+recovers $a$. Thus an extremal seed of this word occurs.
+The reversed word is also a valid word for the same $a$ by
+\eqref{eq:reversor}; explicitly restoring both reverses
+recovers whichever orientation was used originally.
+
+For fixed $a,D$, all nonexiting states belong to the finite
+set $[b_-,b_+]^3\cap\Z^3$. If a walk never exited, it
+would repeat a state. Under an injective map the first repeat
+must be the initial state: if $P_j=P_i$ with $j>i>0$,
+apply the inverse $i$ times to obtain $P_{j-i}=P_0$, an
+earlier return. This proves termination at a first return or
+exit. A genuine bounded periodic word could violate neither
+necessary bound, so an exit is a valid exclusion. The
+existence of this finite-state argument is not an operational
+period cutoff in the code.
+\end{proof}
+
+\subsection{Independent interval seeds and inverse traversal}
+The independent implementation changes the seed order, treats
+both extremum signs directly, walks the inverse map, and compares
+complete triple-state sets. It neither imports nor executes the
+primary implementation. Its complete mathematical algorithm is
+as follows.
+
+For $D=1,\ldots,100$, $\delta\in\{-D,D\}$,
+$s=-3,-2,-1,0,1$, and $q=-D,\ldots,D$, set
+$p=(s+1)\delta-q$ and discard $|p|>D$.
+Start with the integer interval
+\begin{equation}
+ I=[b_-,b_+]\cap[b_--\delta,b_+-\delta].
+ \label{eq:interval0}
+\end{equation}
+If $p\ne0$, intersect $I$ with
+\begin{equation}
+ [-1-\lfloor2D/|p|\rfloor,-1+\lfloor2D/|p|\rfloor];
+ \label{eq:intervalp}
+\end{equation}
+if $q\ne0$, intersect it with
+\begin{equation}
+ [-1-\delta-\lfloor2D/|q|\rfloor,
+  -1-\delta+\lfloor2D/|q|\rfloor].
+ \label{eq:intervalq}
+\end{equation}
+Zero $p$ or $q$ imposes no corresponding interval constraint.
+For each integer $u\in I$, put
+\begin{equation}
+ v=u+\delta,\qquad a=q-sv+u+s,
+ \qquad P=(u,s,v).
+ \label{eq:independentseed}
+\end{equation}
+Check the reconstruction of both $p$ and $q$ and their bounds.
+All five centers already lie in $[b_-,b_+]$ for $D\ge1$.
+These interval intersections are exactly the integer solutions
+of the same neighboring inequalities, now with both signs.
+
+At each inverse-time state, test height first, then the difference
+bound, and then membership in a visited set. A repeated state
+must equal $P$; a noninitial first repeat raises an explicit
+error. Otherwise insert the state and apply
+$(x,y,z)\mapsto(xy+a-z,x,y)$, checking that a forward step
+recovers the previous state. The proof of
+Lemma~\ref{lem:certificate}, applied to the inverse bijection,
+proves termination here too.
+
+Upon return, choose the lexicographically least visited triple
+and reconstruct its native \emph{forward} word. Check every
+forward state belongs to the inverse visited set, that the first
+repeat is the chosen triple, that all visited states are used,
+and that the word has as many distinct triples as entries.
+Represent this cycle by $(a,\min\{\text{visited triples}\})$,
+while retaining the complete triple set. For fixed $a$ that set
+determines the forward transitions uniquely, so this representation
+does not quotient by reversal.
+
+For independent family matching, generate candidate words rather
+than use the primary rotation predicates. Generate $F_3$ with
+$t=(a+4)/2$ when $a$ is even. For every value $t$ occurring
+in the reconstructed word, generate $F_4$ and, at their required
+parameters, $F_5,F_6,F_8$. At $a=0$ also generate $F_{12}$
+with $m=\max_i|x_i|\ge1$. For a word of length at most
+two, generate its alternating candidate. Verify candidate
+recurrences and compare their complete triple-state sets.
+Assign the first matching label in the order
+$F_2,F_3,F_4,F_5,F_6,F_8,F_{12}$; this resolves the
+degenerate family overlaps. An unmatched word is an exception.
+These candidate rules cover every family match: its parameter
+is either fixed by $a$, appears in the word, or equals its
+maximum absolute coordinate in $F_{12}$.
+
+Only after discovery is complete does the independent algorithm
+parse the primary cycle output. It validates every recorded
+integer word, recurrence, first-return length and family label,
+rejects duplicate keys, compares the complete key sets in both
+directions, and compares every full triple-state set. Reading
+the input bytes earlier to hash them does not influence discovery.
+Both implementations use exact unbounded integers.
+
+\subsection{The complete finite outcome}
+The preserved executions give Table~\ref{tab:certificate}.
+Both implementations produce exactly $25\,851$ oriented cycles,
+with the identical family partition
+\begin{equation}
+ (F_3,F_4,F_5,F_6,F_8,F_{12},\text{unmatched})
+ =(200,25350,99,100,50,50,2).
+ \label{eq:familypartition}
+\end{equation}
+These counts refer only to the finite certificate, not to the
+infinite global families. There are $25\,753$ self-reversing
+cycles and $49$ pairs of distinct reversed cycles in this output;
+the latter all lie in $F_5$.
+\input{figures/TABLE_certificate}
+
+The two unmatched words are
+\begin{align*}
+ a=-13 &: \quad (-4,-2,-3,-3,-2),\\
+ a=-2 &: \quad (-2,-1,0,0,-1,-2,0,-1,0).
+\end{align*}
+Their first-return lengths are five and nine. The independently
+reconstructed output agrees with every one of the primary
+$25\,851$ records, not only its aggregate counts. The nine-seed
+exchange between inverse exit types in
+Table~\ref{tab:certificate} is not a mismatch: opposite
+directions can first cross different rejecting boundaries.
+The longest observed walks were $12$ forward and $18$ backward;
+neither number was an input. Likewise the observed seed forcing
+range $[-503,497]$ was an output, not a prescribed parameter
+interval.
+
+Corollary~\ref{cor:core}, Lemma~\ref{lem:certificate}, and
+this complete exact residual outcome prove exhaustion of the
+table. The remaining sections verify its existence, least-period,
+disjointness and level-count assertions without relying on a
+finite sample of its unbounded parameters.

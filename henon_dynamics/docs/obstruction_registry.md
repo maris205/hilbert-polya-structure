@@ -17,6 +17,26 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C419--HCS-C423 source-boundary register (2026-09-08)
+
+| ID | Candidate / exact scope | Boundary or separating example | Surviving result and limitation |
+| --- | --- | --- | --- |
+| HEN-O403 | HCS-C419 whole-group finiteness or a generic-line automaton as a specified word's integer cycles | A point (1,1,m) is fixed by a positive word but escapes under A composed with B for m at least three. An endpoint-only word test can lose intermediate phases; a generic line return can still move its parameter. | The full all-positive-word integer cover, phase-preserving pointwise classifier and two-sided escape survive. Forty is an upper candidate/period bound, not an attained 40-cycle. [PDF](../research_c419_c423/papers/C419_positive_trace_words/main.pdf) |
+| HEN-O404 | HCS-C420 dropping nonreal squares or exponent parity in full fixed-cusp scattering | N=50 refutes the character-fourth-power-only criterion; N=100 refutes the parity-blind repair. Only odd unramified exponents carry the residual imaginary-phase obstruction, and tensor factors cannot cancel it. | The complete all-level necessity/sufficiency theorem survives. Real source scattering earns only A4_FORMAL_HINT; noncommutativity does not make s a native clock or produce target prime weights. [PDF](../research_c419_c423/papers/C420_scattering_commutativity/main.pdf) |
+| HEN-O405 | HCS-C421 a bounded search or sign/reversal quotient as full ordinary integer classification | The residual finite core is exhaustive only after the signed analytic reduction and removal of the parametric families. The primary 74866 and independent 149732 seed conventions differ, while their 25851 directed cycles agree. Reversal is not the same quotient as cyclic rotation. | The all-integer-parameter atlas, least periods and fixed-level counts survive; no unrestricted all-level finite-count zeta, rational nonintegral atlas or target determinant follows. [PDF](../research_c419_c423/papers/C421_integral_return/main.pdf) |
+| HEN-O406 | HCS-C422 a smooth generic-fibre count or phase-return time as the complete native-period result | Generic smoothness alone would leave singular fibres, every accessible exceptional-line point and small characteristics uncontrolled. The return clock is ell/r, not ell; singular integral fibres require their own q+2 bound. | Boundary-lattice/minimal-pole arguments prove all finite fibres integral/reduced and the bound for every specified native state. No full orbit census, bin-distribution theorem or target Euler data follows. [PDF](../research_c419_c423/papers/C422_painleve_bound/main.pdf) |
+| HEN-O407 | HCS-C423 prime integer periods in a parameter-infinitude proof as intrinsic prime owners | A different parameter is selected for each prime integer period. These are not primitive orbits of one fixed map, and period ell is not log(ell). The two-cycle witness addresses the fixed polynomial x^4+x^6, not every equal-weight binomial. | The arbitrary-field/all-pair infinitude classification survives with the cited universal local-height bridge. No quantitative exceptional-parameter bound, all-prime repetition weights or target zero correspondence follows. [PDF](../research_c419_c423/papers/C423_two_cycle_preperiodicity/main.pdf) |
+
+These are named-source scope boundaries and exact separation arguments,
+not five universal impossibility theorems. An actual recoding/conjugacy
+preserves a result only when its entire domain, parameters, clock and
+observable are transported. See [the five final papers](../research_c419_c423/README.md)
+and [evaluation calibration](../research_c419_c423/EVALUATION_ADJUDICATION.md).
+All target A2/A3 judgments fail to qualify with missing tests explicit;
+C420's lowest source-scattering hint is not a passed lift panel or Route-B
+entry. NO_BAD_EULER_OR_ROOT_NUMBER remains unconditional. The batch stops
+at C423; unadmitted research helpers are not additional papers.
+
 ## HCS-C414--HCS-C418 source-boundary register (2026-09-07)
 
 | ID | Candidate / exact scope | Boundary or counterexample | Surviving result and limitation |
