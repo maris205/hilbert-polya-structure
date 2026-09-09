@@ -796,3 +796,84 @@ local HEAD and tracking-ref reads, and actual `ls-remote` all agreed.
 Tracked state was clean; only R6 and the eight inherited untracked
 directories remained. This receipt is written afterward outside the
 frozen R5 payload; no accepted proof, review or old batch is changed.
+
+### R6 accepted auxiliary closures and fresh exact bridges
+
+The [round-6 checkpoint](continuation_round6/ROUND6_DECISION.md) now records
+root's complete reads of E2's 407-line direction classification, C2's
+378-line report, separate E6 reviews of 354 and 201 lines, and X2's
+340-line two-candidate scout. The affine-coordinate reflection and
+arbitrary-degree single vertical triangular conjugator propositions are
+accepted at their full strict-subclass scopes, with zero open must-fixes.
+C2's quadratic-shear Section 5 is separately under E4 review; neither E6
+report certifies it. The original point set, group, all intermediate-set
+domains, no-nine conclusions and actual hashes are pinned in the checkpoint.
+
+X2's elementary multiplicative obstruction is auxiliary, not a fifth paper.
+The ordinary-count zeta question has no all-level bridge here; root checked
+Bridy's actual Conjecture 1.6 and the dynamically-affine source boundaries.
+There is no novelty assertion based on an unsuccessful source search.
+
+New actual bounded assignments are B1's wandering-singleton LG4 bridge,
+A4's primitive branch crossing with mod-three survival still required,
+A2's cofinite multiplicative MS6 saturation feasibility test, and X2's
+independent targeted MS6 source check. The exact new MS6 question is frozen
+before proof work and is not presented as a repair to the already refuted
+literal M6 theorem. Each owner has a disjoint new directory; no mathematical
+program or enlarged word/coordinate census is allocated. R6 synchronization
+is not yet claimed. Counts stay four admitted contracts and zero papers.
+
+E4's separate 203-line quadratic-shear review has now been read in full
+and accepted, with actual hash
+`79038f967ef14a7f398950e6c438a60ca7b2e42caa32f024dd7abe82a2a16c70`.
+Its full parameter/fiber, coordinate-complement and determinant-sign
+checks have zero open must-fixes. Root also recomputed the 155- and
+290-line C2 prefix hashes in read-only streams; both match the review
+bindings. All three specific nine-point construction subclasses are now
+closed at auxiliary scope; the full tame stabilizer and spectrum are not.
+
+### R6 branch and singleton dispositions; bounded R7 continuation
+
+Root has read the complete 219-line B1 report, 171-line A4 report,
+94-line E4 primitive-branch review and 207-line X2 MS6 source audit,
+and verified their actual final hashes. B1's common irreducible rational
+time equation remains an unproved reformulation, not LG4 closure.
+A4's specified characteristic-zero primitive edge crosses the R4 pair;
+the unit isolation or native-period/unit-fold conditions are sufficient
+and independently reviewed, but not proved for the actual branch label.
+Full SB and PC424-D remain open. Exact decisions and scope are recorded
+in ROUND6_DECISION.md. A2's conditional MS6 saturation write-up is active;
+the existence of finite torsion from cofinite products is not assumed.
+
+Two new disjoint R7 allocations reuse existing threads: C2 owns
+`continuation_round7/c2_nine_reflection_lifting/REPORT.md`, a hand proof
+of the proposed finite restriction interface followed by one genuine
+integral-coordinate lifting test; X2 owns
+`continuation_round7/x2_pointwise_periodic_fibers/REPORT.md`, a maximum
+two-query-batch check of the exact native-base-period pointwise-fiber
+existence bridge. Old R6 bytes are frozen for both agents. No mathematical
+program, new thread, external model, shared Git or PDF work is allocated.
+These next-round tasks do not supply a fifth contract or completed paper.
+
+R6's last mathematical review is now closed. Root read A2's entire
+441-line report and E8's entire 340-line review; their final actual hashes
+are pinned in ROUND6_DECISION.md. The full conditional saturation theorem
+is accepted with zero open mathematical/source/textual must-fixes. Under
+cofinite products, an existing integer-power relation loses every
+prime-to-p factor. The finite algebraic-transfer equivalences also hold,
+including inseparability. The argument does not construct torsion from
+the periodic condition. All five R6 mathematical reviews, 1,192 lines,
+are now fully read and closed. Counts remain four contracts, zero papers,
+and zero R6 mathematical executions. X1's separate final integration
+audit and root's exact-path Git synchronization are pending.
+
+The additional actual R7 allocations are A2's
+`continuation_round7/a2_multiplicative_existence/REPORT.md`, focusing on
+one finite divisor criterion for that unchanged torsion-existence gap;
+C4's `continuation_round7/c4_specific_nine_lift/REPORT.md`, testing the
+specific candidate reflection that would yield the native word KIA,
+within a stated two-alternating-shear conjugator class; and E6's
+`continuation_round7/reviews/e6_nine_reflection_lifting/REVIEW.md`,
+independently checking C2's new 245-line finite lemmas. General polynomial
+interpolation is not a global tame lift. No R7 result is preadmitted,
+no mathematical program is allocated, and old R6 inputs stay frozen.

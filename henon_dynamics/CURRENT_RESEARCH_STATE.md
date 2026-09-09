@@ -11,8 +11,23 @@
 仍不包括 Route B、投稿、外部模型上传、模型配置或其他研究流。
 按 [连续运行记录](research_c429_c433/CONTINUOUS_RUN.md)恢复。
 当前为 `CONTINUOUS_RESEARCH_ACTIVE; ROUND5_ELEVEN_REVIEWS_CLOSED;
-PC_L_UL4_OM4_RLG5_FOUR_CONTRACTS_ADMITTED; ROUND6_BRIDGES_ACTIVE;
+PC_L_UL4_OM4_RLG5_FOUR_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
+ROUND7_EXACT_BRIDGES_ACTIVE;
 ZERO_COMPLETED_PAPERS`。
+第六轮阶段裁决已保存于
+[ROUND6_DECISION.md](research_c429_c433/continuation_round6/ROUND6_DECISION.md)。
+九点集的全部整仿射坐标三角反射分类，以及任意次数单竖直三角
+共轭的限制，均已全文核读并通过各自非作者审查；它们不能扩大
+现有 S3×C3 限制群，但不排除完整 tame 九周期。二次剪切子类的
+203 行 E4 审查现也已全文核读采纳、零必改。B1 的 219 行全模分离
+缺口报告已核读，未得原生整数时间下降；A4 的特定原始分支及
+94 行 E4 审查已全文核读采纳，但模三存活条件未证。X2 的 207 行
+乘法来源报告未提供存在桥；A2 的 441 行条件饱和证明及 E8 的
+340 行完整非作者审查现已全文核读采纳，零必改。R6 五份数学审查
+共 1,192 行均已关闭，但周期条件推出有限 torsion 的箭头仍未证。
+R7 的有限除子判据、具体九点反射提升及独立审查已在新目录接续，
+不扩大有限遍历。R6 数学运行仍为
+零、尚未同步；当前仍合同 4/5、完整论文 0/5。
 最新准入：反向共轭的全处局部—整体问题 RLG5 已正式负向闭合，
 491 行作者证明、404 行非作者全数学审查及 378 行来源／实质审查
 均已全文核读，零开放必改。四因子例在 Q(sqrt(7)) 的每个完备域
