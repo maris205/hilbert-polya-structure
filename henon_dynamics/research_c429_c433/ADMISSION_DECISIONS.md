@@ -5,9 +5,12 @@ batch workflow. Admission means a complete, source-subtracted mathematical
 contract qualifies for one paper; it does not mean a manuscript/PDF,
 evaluation or release has been completed.
 
-**Current count: 4/5 admitted contracts; 0/5 completed papers.**
-One independent qualifying contract remains missing. No draft C-number
-has yet been assigned and no mathematical program is run to fill a quota.
+**Current count: 5/5 admitted contracts; 0/5 completed papers.**
+The complete FCP10 finite-effectivity question is admitted in Section 6,
+after full mathematical and source/substance review. Earlier count
+statements below are historical checkpoints, not the current total.
+The five-contract manuscript outline and numbering gate is next; no
+mathematical program is run to fill a quota.
 Five completed papers is a continuous-run checkpoint, not a stop rule.
 
 ## 1. PC424-L — ADMIT ONE INTEGRATED CONTRACT
@@ -634,3 +637,142 @@ One independent contract and all downstream manuscript/evaluation/release
 gates remain. This source-arithmetic counterexample grants no target
 Euler factors, root numbers, automorphy, zero correspondence or
 Hilbert–Pólya realization. Route B remains closed.
+
+## 6. FCP10 — ADMIT ONE COMPLETE FINITE-CP DECISION CONTRACT
+
+Decision: **ADMITTED**, on 2026-09-09 UTC after the actual complete
+author proof, nonauthor mathematical review, separate bounded primary-
+source/substantiality assessment and coordinator full readback.
+This is one integrated finite-effectivity question. It is not admission
+of full MS6, a rational-transfer classification or separate papers for
+the matrix construction and its consequences.
+
+### Complete object, native observable and decision theorem
+
+For every prime $p$, let $k=\overline{\mathbb F}_p$. Take every
+$f\in k[x]$ with degree $d\ge2$ and $f'=0$, and every
+$g=A/B\in k(x)^\times$ with $A,B$ nonzero and coprime. Put
+$m=\max(\deg A,\deg B)$. All scalar coefficients, support
+multiplicities and finite coefficient-field degrees are unrestricted.
+This is the entire derivative-zero polynomial class, not just powers
+of Frobenius, monomials, unicritical maps or a bounded parameter sample.
+
+One application of the original $f$ is the native tick. An ordinary
+primitive affine cycle consists of its distinct points, counted once;
+it is admissible if it avoids the zeros and poles of $g$. Its observable
+is $W_O=\prod_{x\in O}g(x)$. Equivalently, the rational skew map
+$(x,y)\mapsto(f(x),g(x)y)$ on its domain in
+$\mathbb A^1\times\mathbb G_m$ returns over an admissible base
+cycle by $(x,y)\mapsto(x,W_Oy)$. No global automorphism or
+extension across the pole locus is asserted.
+
+The complete question is whether the condition (CP), that all but
+finitely many ordinary primitive cycles are admissible and have
+$W_O=1$, has a coefficient-independent finite-return decision in
+terms of $d,m$. Every native period, including multiples of $p$,
+is retained. The finitely many support cycles are actual exceptions,
+not a change of clock or a scheme-weighted count.
+
+The answer is **yes**. Define
+
+$$b=\left\lceil\frac{m}{d-1}\right\rceil+1,\qquad
+D=2b^2,\qquad N=6b^2+1=3D+1,$$
+
+$$F_n=f^{\circ n}-x,\qquad
+H_n=\prod_{i=0}^{n-1}A(f^{\circ i}(x))-
+    \prod_{i=0}^{n-1}B(f^{\circ i}(x)),\qquad
+S_* =\prod_{r=1}^{D}F_r.$$
+
+Then the complete admitted theorem is
+
+$$\mathrm{(CP)}\quad\Longleftrightarrow\quad
+F_n\mid S_*H_n\quad\text{for every integer }1\le n\le N.$$
+
+It is also equivalent to existence of a nonzero $S\in k[x]$
+annihilating every return product, and to $S_*$ being such an
+annihilator. If (CP) holds, every cycle visible in some cleared
+product $H_n$ has native period at most $D$. This does not bound
+the total number of exceptional points by $D$ or the periods of
+support cycles meeting both a numerator zero and a denominator zero.
+
+All tests are finite polynomial operations over a finite field
+containing the input coefficients. The theorem is a return-horizon/
+decidability result, not a practical or field-size-independent
+running-time claim: iterate degrees can reach $d^N$. No optimized
+constant or mathematical test execution is claimed by admission.
+
+### Proof and completed independent gates
+
+The coordinator fully read the 708-line author proof and the exact
+five-line provenance addition in the final
+[713-line report](continuation_round10/a3_inseparable_finite_cp/REPORT.md),
+SHA256 `34a773edfce1e02e3dbe39f967888d4e49ba50d1384040f07d350c1e79779f1c`.
+Root also read all 429 lines of the
+[E8 complete mathematical review](continuation_round10/reviews/e8_inseparable_finite_cp/REVIEW.md),
+SHA256 `6074afa280e6ac735074b1da70532b2d9adc38e0d6a56d16a209b920117c0951`,
+and all 293 lines of the
+[X2 source/substance assessment](continuation_round10/x2_finite_cp_sources/REPORT.md),
+SHA256 `340c85b45f11c5a5fec8c18b4490a70c7c313f39cad2b8309a55414aa7628a85`.
+All three final hashes were actually recomputed. Zero mathematical,
+source-applicability or provenance must-fixes remain. The sole author
+repair discloses the coordinator's preproof sketch and constants;
+the original mathematical body is unchanged.
+
+The proof uses actual scaling conjugacy, $F_n'=-1$, a general-
+polynomial cyclic Laurent extractor, the complete base-$d$ polynomial
+basis, and two finite blocks with a logarithmically contracting
+distinguished site. For fixed $S$, the word bound is $k_S+4b^2$.
+Balanced orbit-evaluation ranks and arbitrarily long nonzero returns
+then bound every visible exceptional native period. This supplies
+$S_*$ before the fixed-$S$ theorem is invoked, removing rather than
+assuming the unknown-exception bound. Both zero/pole support patterns,
+$m=0$, characteristic two, nonmonic maps and all return lengths pass.
+
+### Source subtraction and independent substance
+
+Finite-word reachability and Hankel rank factorization are classical;
+Kiefer et al.'s actual arbitrary-field statement and rational-only
+Gram proof were inspected. Cattani--Dickenstein--Sturmfels's residue,
+normal-form and quotient-trace machinery is also credited with its
+actual field/access limits. Root directly read the relevant complete
+primary proof passages. R9 fixed-$S$ certificates, R10 A1's shared
+rank/persistence development, PC424-L's additive unicritical theorem,
+and R7's pure-Frobenius multiplicative result are explicitly deducted.
+
+The surviving output is the complete ordinary multiplicative decision
+over the full canonical derivative-zero class, with unknown finite
+exceptions and unbounded coefficient fields. A finite set of exceptional
+native cycles is not a finite-support word series: even one cycle recurs
+at infinitely many returns. The classical finite-word theorem therefore
+does not supply the missing native-period bound. Nor is this just the
+pure-Frobenius case: $(x^s+x)^p$ has $s$ generic inverse branches
+for $s\ge2$, $p\nmid s$.
+
+X2 weighed these exact dependencies after reading the full final proof
+and recommends one independently substantive integrated question.
+Root agrees after the mathematical gate closed. The complete finite
+criterion is not a necessary-condition substitute for MS6; it answers
+a different full question at its originally frozen scope. Its proof
+steps and derivative-filtered auxiliary variants are not extra slots.
+
+Two targeted source batches with eight formulations located no primary
+theorem already giving this exact implication. This is bounded evidence,
+not a worldwide novelty/priority certificate or an assurance of
+publication acceptance. A verified exact antecedent would reopen
+substantive admission; the count would not be preserved by relabeling.
+
+### Remaining paper gates and route boundary
+
+There are now **5/5 admitted contracts and 0/5 completed papers**.
+The next gate is the integrated five-paper outline and independent
+outline review, followed by readable complete LaTeX, actual PDFs,
+manuscript reviews, the pinned applicable Route-A evaluation and exact
+deterministic release verification. Continuous work proceeds through
+those gates; five completed papers will be a checkpoint, not a stop.
+
+No rational or algebraic transfer existence, $p$-power saturation
+classification, general separable-map theorem or full MS6 conclusion
+is proved by FCP10. The source-system finite decision does not establish
+target Euler factors, root numbers, automorphy, zero correspondence
+or a Hilbert--Polya realization. `NO_BAD_EULER_OR_ROOT_NUMBER` and
+the exclusion of Route B remain unconditional.

@@ -11,11 +11,22 @@
 仍不包括 Route B、投稿、外部模型上传、模型配置或其他研究流。
 按 [连续运行记录](research_c429_c433/CONTINUOUS_RUN.md)恢复。
 当前为 `CONTINUOUS_RESEARCH_ACTIVE; ROUND5_ELEVEN_REVIEWS_CLOSED;
-PC_L_UL4_OM4_RLG5_FOUR_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
+PC_L_UL4_OM4_RLG5_FCP10_FIVE_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
 ROUND7_FOUR_REVIEWS_CLOSED; ROUND8_TWO_REVIEWS_CLOSED;
 FULL_SINGLE_QUADRATIC_ATOM_ACCEPTED_AUXILIARY; ROUND9_THREE_REVIEWS_CLOSED;
-MS6_EXISTENCE_AND_INTEGRAL_NINE_LIFT_OPEN; ROUND10_FINITE_EFFECTIVITY_ACTIVE;
+MS6_EXISTENCE_AND_INTEGRAL_NINE_LIFT_OPEN; ROUND10_THREE_REVIEWS_CLOSED;
+INSEPARABLE_FINITE_CP_ADMITTED_FIVE_PAPER_OUTLINE_NEXT;
 ZERO_COMPLETED_PAPERS`。
+最新准入：FCP10 的完整有限 CP 判据已采纳为第五个独立整合合同。
+协调者全文核读 713 行作者终稿、429 行 E8 完整数学审查和 293 行
+X2 来源／实质报告，实际复核最终哈希；全部量词和原定界保留，
+零开放数学、来源适用或披露必改。R10 三份数学审查共 1,452 行
+均已全文核读关闭。见 [正式准入 §6](research_c429_c433/ADMISSION_DECISIONS.md#6-fcp10--admit-one-complete-finite-cp-decision-contract)
+及 [R10 最终裁决](research_c429_c433/continuation_round10/ROUND10_DECISION.md)。
+当前为 **合同 5/5、完整论文 0/5**。A1 矩阵／次数界和 A2 可见性
+不另计论文，原 MS6 与普通 CP 逆向未证。接下来是 R10 精确集成
+与五篇整体大纲／独立审查，尚未声称稿件、PDF、正式评估或发布。
+下列 4/5、待审等文字是各历史检查点，不覆盖本段最新结论。
 第九轮已完成三份作者报告和三份非作者完整内部审查，协调者
 全文核读所有最终稿、三份审查共 1,059 行，实际复核六个哈希。
 见 [ROUND9_DECISION.md](research_c429_c433/continuation_round9/ROUND9_DECISION.md)。
@@ -41,6 +52,16 @@ R10 已实际续接三项互补证明：未知 annihilator 的统一次数界，
 原生层持续失明例，但没有全部测试通过而违反普通 CP 的有理权重。
 第三项为新完整问题的证明尝试，X2 另做有界来源／实质核查，
 不以猜测的可推广性或辅助定理补第五合同。R10 数学运行零次。
+R10 现已有两份完整审查关闭：E2 的 590 行和 E5 的 433 行均已
+由协调者全文核读、实际复核最终哈希，合计 1,023 行、零开放必改。
+未知湮灭理想的有限判据与原生可见周期的精确等价现按辅助结论
+采纳，普通 CP 逆向及一般 MS6 仍未证。A3 的任意导数零多项式／
+任意有理权重有限 CP 定理已有完整 713 行终稿：原 708 行数学体
+和五行共享构思披露均已全文／定点核读，公式与全部量词未变。
+X2 的 293 行来源／实质审查已全文核读，建议将其保留为一个独立
+整合候选，但以 E8 完整数学审查零必改为条件；E8 尚在完成最终
+报告，未提前采纳或准入。当前仍 4/5、0/5，数学运行零次。见
+[R10 进行中裁决](research_c429_c433/continuation_round10/ROUND10_DECISION.md)。
 第八轮进展现保存于
 [ROUND8_DECISION.md](research_c429_c433/continuation_round8/ROUND8_DECISION.md)。
 临界二周期 atom 的全部奇特征证明已写成最终 526 行报告，协调者

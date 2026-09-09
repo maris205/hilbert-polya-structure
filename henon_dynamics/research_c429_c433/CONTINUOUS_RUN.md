@@ -1208,3 +1208,87 @@ parameter census, new agent, external model/API, GPU, old/shared-file,
 Git or PDF action by lanes. The source caps are one batch for A1/A3,
 two for A2/X2; no batch is claimed used by allocation alone. The four
 existing contracts and zero completed papers remain the actual count.
+
+### R10 two accepted auxiliary reviews and the full finite-CP proof
+
+Root has now actually read all 590 lines of E2's final A1 review and
+all 433 lines of E5's final A2 review, 1,023 lines total. The final
+author/reviewer hashes were recomputed and match the
+[in-progress decision](continuation_round10/ROUND10_DECISION.md).
+Both complete auxiliary reviews are accepted with zero open mathematical
+or source/provenance must-fixes and no author formula repairs. A1's
+unknown-annihilator degree/ideal conclusion and A2's native-visible CP
+equivalence combine at exactly the visible scope. The unfiltered ordinary
+CP converse, arbitrary norm-one separation and full MS6 remain open.
+
+A3's new full author proof now covers every prime, every polynomial
+with derivative zero and degree at least two, and every rational weight.
+Root fully read its original 708-line proof, hand-checked the general
+Laurent construction, closed-range contraction, split evaluation rank,
+support exceptions, native persistence and final bound. One requested
+five-line provenance-only insertion credits root's preproof shared
+adaptation/constants. The exact added passage was read back; no formula
+or scope changed. The final 713-line report has SHA256
+`34a773edfce1e02e3dbe39f967888d4e49ba50d1384040f07d350c1e79779f1c`.
+
+An actual new existing-thread allocation reuses E8 for the complete
+nonauthor mathematical review in
+`continuation_round10/reviews/e8_inseparable_finite_cp/REVIEW.md`.
+It must cover the entire general-polynomial theorem and original
+constants, not import an unaccepted A1 extension. No mathematical
+execution, extra agent, external model/API, GPU, Git, author/shared/old
+edit or PDF action is allocated. Its final report remains pending.
+
+Root also fully read X2's final 293-line source/substance assessment,
+SHA256 `340c85b45f11c5a5fec8c18b4490a70c7c313f39cad2b8309a55414aa7628a85`.
+X2 read the actual final A3 proof and its disclosure. Two real source
+batches, eight query formulations, are exhausted; the exact primary
+automata/residue passages and their limitations are recorded. Root
+separately read the relevant original Kiefer and Cattani--Dickenstein--
+Sturmfels passages, including complete relevant proofs. Classical
+finite-word/rank/trace infrastructure and local PC424-L/R7/R9/A1
+ownership are subtracted. The independent recommendation is one
+integrated finite-effectivity candidate, conditional on E8's zero
+open mathematical must-fixes, not a fifth admission or priority guarantee.
+
+This checkpoint still has four contracts and zero completed papers,
+R10 mathematical executions zero. No R10 integration audit, staging,
+commit, push, manuscript/PDF or formal evaluation is yet claimed.
+Routine R9 coordinator-receipt synchronization was separately verified
+at actual HEAD/origin/live remote `8dc9bfba2ba5834a15804e9e608a5a16fffe68b4`.
+The continuing user rule does not turn pending reviews into completed work.
+
+### R10 final full review and fifth independent contract admitted
+
+Root now read all 429 final E8 review lines, recomputed its SHA256
+`6074afa280e6ac735074b1da70532b2d9adc38e0d6a56d16a209b920117c0951`,
+and rechecked the unchanged final A3 author hash. The three full R10
+mathematical reviews total 1,452 lines, all actually read. Every
+original equivalence, characteristic, coefficient, support and native-
+period quantifier passes, with zero open mathematical, source-
+applicability or provenance must-fixes. The original N is unchanged.
+The source/substance conditional gate is therefore now satisfied.
+
+The coordinator formally admits one integrated FCP10 contract in
+[ADMISSION_DECISIONS Section 6](ADMISSION_DECISIONS.md#6-fcp10--admit-one-complete-finite-cp-decision-contract),
+with complete object, rational skew-domain interpretation, observable,
+native clock, theorem, evidence, source subtraction and remaining
+limitations. Together with PC424-L, UL4, OM4 and RLG5 this makes
+five independent admitted questions and zero completed papers.
+No separate matrix/rank/visibility paper is counted, and MS6 or
+rational-transfer existence is not asserted even in the derivative-
+zero class. The complete finite CP question is not relabeled MS6.
+
+The [final R10 mathematical decision](continuation_round10/ROUND10_DECISION.md)
+binds all three authors, three full reviews and X2's source report.
+No additional mathematical execution, agent, external model/API,
+GPU, manuscript/PDF or formal evaluation occurred. All mathematical
+and source inputs are frozen. The next checkpoint is an independent
+exact-path integration audit and synchronization, while the next
+paper gate is the integrated five-contract outline and its review.
+No R10 Git synchronization or completed manuscript is claimed here.
+
+Root has inspected the applicable paper-writing/paper-plan instructions
+and completely read the required writing-principles reference in
+preparation for that next gate. This inspection produced no manuscript,
+figure or PDF and does not constitute a completed writing phase.
