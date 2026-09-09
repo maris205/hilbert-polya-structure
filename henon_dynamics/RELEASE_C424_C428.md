@@ -3,8 +3,9 @@
 2026-09-09 UTC. This record is outside the exact payload root so later
 approval, seal and Git results can be recorded without editing sealed
 bytes. Current stage: scientific/manuscript/evaluation/final-build,
-final-documentation, exact seal and independent member-verification gates
-complete; Git synchronization pending.
+final-documentation, exact seal, independent member-verification and
+paper-package commit/synchronization gates complete. This completion
+receipt is a subsequent package-external metadata update.
 
 ## Scientific and final-document gates already completed
 
@@ -228,3 +229,45 @@ its own outside file, so the coordinator must re-stage it and perform
 the final complete index/blob comparison before committing. The totals
 above describe the audited prior receipt version; no self-referential
 final index hash or future commit/push result is preclaimed here.
+
+## Completed package commit and synchronization
+
+After appending the first-index receipt, only that outside receipt was
+re-staged. The coordinator then actually repeated the full 1,164-blob
+comparison on the final index at 2026-09-09 11:11:41 UTC; exit 0, PASS.
+The complete changed set, all file bytes/lengths/SHA256, stage 0 and mode
+100644 still matched, with zero unexpected or unstaged tracked changes.
+This final pre-commit snapshot contains 83,127,200 bytes and has the
+same-format path/mode/OID fingerprint
+`f7c222b0573222ee5fbcd2cf4226bad322413a580ea5d32d03831693849657a7`.
+The 2,157-byte difference from the first audit is exactly the preceding
+outside-receipt append; no sealed member changed.
+
+The actual command `git commit --quiet -m "Complete and seal C424-C428
+five-paper research batch"` exited 0, creating:
+
+```text
+dfccfaa097bcf221ea179d002ad9e0c9d3f428bd
+```
+
+The sealed-package Git subtree is
+`05b88231bffb4381f29ddafb3e85c66101811986`.
+The actual `git push origin main` exited 0 and advanced the configured
+remote from `2895b072` to `dfccfaa0`; no force push, remote reconfiguration
+or external manuscript-submission action was used.
+
+At 2026-09-09 11:12:36 UTC, `git ls-remote origin refs/heads/main`, HEAD
+and origin/main all returned the full package commit above, with
+left/right count `0 0`; `git diff --quiet HEAD` exited 0. The eight
+inherited unrelated directories remained untracked and outside the
+commit. All five papers, scientific/review/build gates, exact seal and
+independent object checks are delivered at that commit.
+
+This section and the current-state completion notice are deliberately
+outside the sealed subtree and follow its already successful push.
+They will be committed/synchronized as a separate receipt-only update;
+the final handoff will verify the resulting refs and unchanged package
+subtree, rather than invent this receipt's own future commit hash.
+This batch stops at C428: no C429, Route B, new mathematical run,
+rebuild, old-test rerun, journal submission or third-party manuscript
+upload follows completion.
