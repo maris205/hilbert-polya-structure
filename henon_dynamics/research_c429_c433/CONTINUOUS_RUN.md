@@ -452,3 +452,324 @@ A1 measure proof, and no other diagnostic. This cosmetic exception is retained
 to preserve the exact reviewed proof bytes/hash; the check is not reported as
 PASS and no mathematical defect is inferred from it. Independent read-only
 membership/content checking was assigned to E7. Commit/push remain pending.
+
+### R4 synchronization receipt and continued R5 work
+
+R4 was actually committed and pushed as
+`c8bba68f7445469b1357641586c03ef36bc91acd`, exactly 35 paths. E7 independently
+checked every staged path, regular-file mode and blob against working bytes,
+and rechecked the proof/review/source bindings. The stale PC424-L four-missing
+sentence was qualified as historical before its final readback. Root also
+inspected the exact cached member list and verified no unstaged tracked delta.
+Both commit and push exited 0. By 15:49:41 UTC HEAD, origin/main and live
+remote main agreed, with left/right count 0/0 and zero R4 working diff.
+The eight inherited unrelated directories and all R5 files stayed outside.
+This is synchronization of research records, not a PDF release. The one
+documented frozen-proof whitespace exception was preserved explicitly.
+
+E6's new R5 eventual-quotient review is final (348 lines). Root read it,
+the complete 264-line author proof and report, and the general-field Conrad
+completion/Galois primary statements. The canonical native character and
+all-fixed-depth eventual field tower are accepted, with zero mathematical
+repairs, as one UL4 continuation using the independently accepted OM4 input.
+No original full-field nesting or quantitative threshold is asserted.
+X1 has received the separate source comparison in
+`continuation_round5/x1_eventual_tower_sources/REPORT.md`; Keating's
+characteristic-p Proposition 5.1 must be compared as well as mixed-characteristic
+§6, including its possible base automorphism rather than fixed-base equality.
+
+B3 continues the frozen full all-affine/local-global Hénon-composition
+good-model proof. Its reported order-three ideal example and proposed finite
+centre test remain author work pending complete proof and independent review.
+X2 remains source/substantiality scout, not another author of an identical
+whole-proof task. C2 has now separately received
+`continuation_round5/c2_composition_exact_spectrum/REPORT.md`: a bounded
+source-first screen of the exact universal integer least-period spectrum of
+all finite integral Hénon words. Pezda's upper bound is already owned; this
+new explicit question asks attainability/exclusion only if that has not also
+been settled in the same automorphism class. No computation or fifth-slot
+admission is pre-authorized. Counts remain three admitted, zero complete.
+
+### R5 source closure, composition review, and bounded continuation
+
+Root fully read X1's 95-line eventual-tower source report and personally
+checked the relevant Keating 2009 definitions/Theorem 1.1/full
+essential-surjectivity proof through (3.7), Debaisieux 2026 v2
+Propositions 2.1–2.3 with all proofs, and Stacks 0BMI's complete infinite
+Galois correspondence proof. Earlier Keating 2006 equal-characteristic
+subtraction is retained. The bounded comparison finds no inspected exact
+fixed-base, all-late-level character-stabilization antecedent; it is not
+a priority certificate. The result remains inside UL4 and changes no count.
+X1 pinned its three declared v2 comparison links and reread the changes;
+root checked the final file hash
+`aa34f7a393bfc69b7366653af49b131a16a3649aaca8f2d14c7e49a63419b027`.
+
+The B3 full-word affine good-model proof (618 lines) and final report
+(259 lines) have been fully read by root. Final hashes are respectively
+`3f810fa619ee61805ffd236514300844372d1dc5fca5215d8ff0049db31fcc4c`
+and `9508495d93d76839777efb2ac028afbb1557588d98db0b18df91653586870b92`.
+The report's earlier hash was superseded by a rendering-only repair.
+E1 is assigned the complete independent mathematical review at
+`continuation_round5/reviews/e1_composition_good_models/REVIEW.md`.
+B1 separately audits closest-source ownership and substantiality relative
+to actual GR5/C426, at `reviews/b1_composition_admission/REVIEW.md`.
+Root also read X2's full 410-line source scout and checked Kawaguchi's
+Definition 4.1/Propositions 4.2–4.3 proofs, Bruin–Molnar's relevant
+affine/minimal-model propositions, and Petsche–Stout's main theorem and
+global-patching proof. A genuine unequal-ideal repair is not automatically
+an independent paper: the strongest mechanical-extension case remains live.
+
+C2's exact-spectrum report and complete 117-line elementary padding proof
+were read. The equality with the integral tame group's finite-cycle
+spectrum is auxiliary only; none of 9, 12, 16, 18, 24 is yet classified.
+Root approved code preparation for exactly 300 factors, 90,000 ordered
+two-factor words and the 81-state/intermediate-state box [-4,4]^2, with
+one CPU and a 120-second cap. Execution still requires actual code read
+and a separate release from root. No probe has run at this record.
+No-hit will not imply exclusion, and any witness needs direct independent
+substitution before acceptance.
+
+Two additional bounded scopes were allocated using existing agents:
+A2 attempts the full d-congruent-to-1-mod-p unicritical ordinary-sum
+problem as a same-PC424-L extension in `a2_excluded_congruence/`;
+X2 screens at most two genuinely different arithmetic subtype questions,
+choosing at most one in `x2_second_replacement/REPORT.md`. No mathematical
+programs, extra/nested agents, external model uploads, manuscript/PDF,
+formal evaluations or old/shared-file writes are allocated to these scopes.
+The round continues with **three admitted contracts and zero papers**.
+
+The C2 probe subsequently passed root's full actual-code reading and was
+released for precisely one run. The exact marked code was streamed from
+the report without rewriting; its source SHA256 is
+`a2b9349d48fcfc97ea57d4d396abd0e06598e68d79402eacc4f1a4a807a5dca4`.
+The actual command exited 0 and completed all 90,000 pairs, with 40,098
+word-cycle occurrences and exactly the six inherited lengths. Its internal
+elapsed field is 3.008390285 seconds; the tool's separate wall field is
+2.897282805 seconds. Both are preserved rather than reconciled by invention.
+Root read the exact invocation, full JSON and scope statement. No missing
+length witness was produced, so no witness-check run is needed. This is
+R5's **one mathematical execution**, not an exclusion theorem or completed
+paper. The earlier zero-run paragraph records the pre-release allocation.
+The padding proof's actual read-only line count is 117; the earlier message
+count 138 was not used as mathematical evidence and has been corrected.
+
+### R5 CGR5 final adjudication: correct extension, no extra admission
+
+Root fully read the final E1 mathematical review and B1's admission audit,
+including its separate E1 readback. Final actual line counts are 370 and
+345, and hashes are respectively
+`3e24744c7650931ed2348d5f2871258355027ca95e6dce0ce1bae8fe6e479f5f`
+and `340d9394918acf038b4c1c1fffcb025e7d0a1ee5ffc7d75c465beaaaadfd087b`.
+The earlier provisional E1 count 356 is superseded by the final direct
+line count and numbered final line 370; hashes remain the reviewed pins.
+The author proof and report are unchanged. E1 finds PROVABLE AS STATED,
+zero mathematical/source-applicability must-fixes, at all original
+quantifiers. B1 recommends AUXILIARY EXTENSION OF GR5 after the strongest
+affirmative case and complete proof-template subtraction. Root agrees
+with both: accept the mathematics, reject an extra independent contract.
+The formal decision is appended to ADMISSION_DECISIONS.md. No old paper
+is reopened or altered, and no cosmetic repair or bigger example is
+requested to manufacture independence. Counts remain **3/5, 0/5**.
+
+C2's proposed universal period-16 exclusion is being written as an
+auxiliary proof, using a mod-two derivative-sign character and constant
+Jacobian local growth. It is not yet accepted on an outline. A2's
+excluded-congruence work has monomial and higher-Hasse-certificate leads,
+not a full all-c theorem. X2's second scout currently has a short
+intersective-polynomial construction (likely only auxiliary) and a
+distinct local/global reversor question whose arithmetic descent remains
+unproved. These live leads do not change the three admitted contracts.
+
+### R5 next proof/review allocations
+
+C2 has now frozen the complete uniform period-16 exclusion, with proof
+SHA256 `16ed4ea2b81d7a6b6c029b2c6fcd463716a0af9bd925bfb54d4747ee1ea35edb`
+and report SHA256
+`1e3d2e82de52341e686ebbf2bd48ee5c4b854c0b451dbbd7422495ee05308a0c`.
+Root fully read the new proof and allocated E4 the independent full review
+at `reviews/e4_composition_period16/REVIEW.md`. Its preliminary zero-issue
+message is not yet the root adjudication. This is one exclusion inside
+the unchanged exact-spectrum question, not a fourth contract. Source
+checks and any broader automorphism corollary are kept distinct from
+the frozen proof. Exclusions of 9 and 12 would exclude 18 and 24 by
+taking iterates, but smaller positive attainments do not settle the
+larger lengths; no expanded computation is authorized.
+
+X2's second scout selected the all-place/original-field polynomial
+reversibility question. C4 owns the full author proof attempt in
+`c4_reversor_local_global/REPORT.md` and `PROOF_PACKAGE.md`. The proposed
+counterexample uses the original field Q(sqrt(7)), the four-factor word
+with degrees (7,15,15,7), and the classical Wang fact that 16 is an eighth
+power at every completion but not over that field. All polynomial
+reversors, of any degree or order, must be excluded globally. A diagonal
+ansatz or an included centralizer subgroup does not suffice. Root read
+the relevant actual Gómez–Meiss conjugacy theorem/full proof and
+Theorem 7/Proposition 8 proofs, and Conrad's explicit Wang credit. The
+full-axis centralizer argument is still being written and must receive
+independent mathematical and substantiality review before admission.
+
+A2 reports an all-c Hasse-certificate route for the formerly excluded
+congruence class and is writing the complete carry argument. It remains
+an unaccepted same-PC424-L extension until the actual file and independent
+review close every wrap and insertion case. These allocations use
+existing threads, add no mathematical execution, and preserve **3/5
+admitted contracts, 0/5 complete papers**.
+
+Root subsequently fully read E4's final 179-line review, SHA256
+`0e866dbba4d2431fcb621c406195570aa4b8139d3614c91f44822b75d43e6572`,
+and accepted the unchanged proof's class reduction and universal
+Z_2^2 period-16 exclusion with zero open mathematical must-fixes. The
+formal auxiliary decision is in ADMISSION_DECISIONS.md; exact spectrum
+and priority remain unclosed. C1 now owns the disjoint native 12/24
+integer tame-witness attempt in `c1_native12_tame_witness/`, while C2
+works on 9. Both are proof-first, no-program allocations within the
+same spectrum question. B1 separately owns
+`reviews/b1_reversor_admission/REVIEW.md` for the all-polynomial reversor
+candidate's independent source/substantiality gate, beginning with X2's
+484-line second scout (fully read by root; SHA256
+`beb67df1de2e156ff4e4feaa36946c13d2d7d705011bba1139137bc155e6605b`).
+Root also personally read Cantat–Dujardin 2024 Section 2.2's final example
+and full explanation: root-twisting and exhaustive centralizer descent
+for arbitrary conjugacy are already prior work. The special inverse-map
+constraint must supply the actual new reversibility increment; absence
+of an exact retrieved title does not establish independence.
+
+The period-16 ambient-class corollary for Aut over Z_2 has now also
+passed directed E4 review and root's full readback; the final 220-line
+review hash and 367-line report hash are pinned in the admission record.
+This uses tame factorization only over the residue field F_2, not over
+the integral coefficient ring. The original frozen proof is unchanged.
+
+A2 has completed its all-c Hasse-carry proof (517 lines), SHA256
+`b703fde520e5405b6ab28833a40dcce324925bebbbeaefea6b9ca22de57445e3`;
+its report SHA256 is
+`2d99b82dc75d50d18b8e74eb20a12a97d9a1117e50a13f950c5dfb087b7f99a5`.
+Root has read both complete files, and E8 owns the full independent
+review in `reviews/e8_excluded_congruence/REVIEW.md`. The two-return
+certificate uses n=7 floor(log_d(PM))+22 and n+1, and no periodic-root
+multiplicity bound is assumed. A read-only characteristic-two check
+looks promising but is neither in the frozen claim nor accepted yet.
+
+C2 has permission to prepare, but not yet execute, one separate exact
+staircase interpolation diagnostic: the 14,400 pairs of permutations of
+0,...,4, one CPU, ten seconds. Its complete code must first be read and
+released by root. No-hit will exclude only that finite template. The
+previous 90,000-word diagnostic remains the sole actual R5 mathematical
+execution at this entry.
+
+On resuming C1, an old reviewer message was mistakenly treated as
+current permission to clarify one sentence of its frozen first-pass
+proof. Root inspected that sole diff and restored exactly the prior
+sentence with apply_patch; `git diff --exit-code` for that file returned
+0. C1's new R5 report now records the incident and keeps the suggested
+wording only as a future-use note. Frozen proof bytes are unchanged;
+this does not call for an old mathematical rerun or further old-file edit.
+
+Root has now fully read E8's final 411-line review and accepted A2's
+unchanged R5 all-c Hasse proof with zero open required repairs. Combined
+with R4, the same PC424-L contract covers all d>=2 for every odd p.
+The formal statement, certificate and exact hashes are added to the
+admission record. A2 may now write a separate CHARACTERISTIC_TWO.md
+appendix for a directed domain-extension check; no frozen file is to be
+changed and characteristic two is not yet counted as reviewed.
+
+C2's staircase code passed root's full read and separate release, with
+extracted source SHA256
+`ab61d5dbe05fdd9495fe711227671c6e429f7d7ba6c9c0a092bf765ddad0401d`.
+Its one actual run exited 0 and completed all 14,400 pairs. Each single
+interpolation condition held for 24 pairs, but both held for zero;
+there is no native-nine witness and no witness-verification run to add.
+Root read the complete command/JSON receipt. The internal elapsed
+0.06650795 seconds and distinct tool wall-time 0.00000553 seconds are
+preserved as observed, not benchmark-calibrated. R5's actual mathematical
+execution count is now **two**. No automatic search expansion follows.
+
+C4's full 491-line proof and final 184-line report have also been fully
+read by root, with hashes
+`99bf7efa1486df5a685347aac3bfa6d2c79ab45f241dc1b94c6a5a69b181143e`
+and `2710692dc3c30c5a58a5d448c36ed900ba6aa93b0bc62bbaa8f5ffc958a019de`.
+E5 owns the complete independent mathematical review in
+`reviews/e5_reversor_local_global/REVIEW.md`; B1 separately reads the
+whole author package for substantiality. Root explicitly clarified
+that new methods are not a mandatory admission criterion: the gate is
+a meaningful independent complete question after actual source
+subtraction. Neither use of classical methods nor lack of an exact
+search hit alone decides this. Final reviews and root adjudication
+remain pending; counts are still **3/5, 0/5**.
+
+### R5 fourth independent contract admitted
+
+Root has now read all 404 lines of E5's final mathematical review and
+all 378 lines of B1's final source/substantiality review, including its
+E5 readback. Actual author and review hashes match the versions pinned
+in ADMISSION_DECISIONS.md Section 5. The author proof required no repair;
+zero mathematical/source-applicability must-fixes remain. Root admits
+**RLG5**, the complete negative all-place reversibility implication,
+as one independent contract. The classical Wang obstruction and
+root-twist/full-centralizer mechanism are subtracted; the constrained
+inverse-pair realization and exhaustive original-field exclusion supply
+the independent answer. No absence-of-search-hit novelty claim is used.
+
+Current state is **4/5 admitted contracts, 0/5 completed papers**.
+One independent question remains missing. This is not a five-paper
+plan freeze, numbering, formal evaluation, PDF completion or Route-A
+target promotion. Continuous in-scope research proceeds; five complete
+papers remains a checkpoint, not a stopping condition.
+
+Root has also fully read A2's final 322-line characteristic-two addendum
+and E8's separate 254-line targeted review, checked their actual hashes,
+and accepted the new domain with zero required repairs. PC424-L now
+covers every prime and every d>=2, still one contract. The original
+odd-characteristic files are not rewritten. The separate review checks
+P=2 composition, every coincident anchor, overflow, all weights and
+marks, constants, and the even-degree squarefree branch directly.
+
+C1's complete 268-line report and embedded dual-quadratic diagnostic
+were actually read by root. Exactly one execution is now released for
+all 10,201 ordered A,B in 0,...,100, including diagonal pairs, with
+the proved complete 625-state box, one CPU and a 30-second hard cap.
+The extracted source SHA256 is
+`acaa8a811a329dec8206f33a0e920bf4b644871b01cd3a782f29d63130a38608`.
+No coefficient enlargement or repeat is authorized. This release is
+not yet an execution result; a witness would need independent checking.
+
+C1's released source was now actually executed exactly once, exit 0,
+all 10,201 ordered pairs complete. Its 869 integer-cycle occurrences
+have periods 1,2,3 only (286,546,37); no 12/24 witness was found. Root
+fully read the command and raw JSON receipt. The R5 mathematical-run
+count is exactly **three**, with no independent witness run or expansion.
+The full producer receipt and three hand-proof mechanism exclusions
+are separately assigned to E1 for a source/code/scope audit without
+execution in `reviews/e1_native12_mechanisms/REVIEW.md`.
+
+Root has accepted E2's complete true dyadic-nine construction after
+reading all 383 author lines and E4's final 205-line independent
+review. The result refutes only the universal dyadic-nine exclusion
+approach, not C428 or the integer-spectrum upper list. C2's new
+Section 12 and E6's 342-line review have likewise been read in full;
+the mod-three local-nine lemma, invariant-involution residue constraint
+and arbitrary five-term-AP staircase exclusion are accepted only at
+their stated scopes. Exact pins are in the
+[round-5 decision](continuation_round5/ROUND5_DECISION.md).
+
+Three actual R6 proof-first assignments now continue in disjoint new
+directories: X2's at-most-two independent replacement scout, C2's
+specific nine-point tame-stabilizer mechanism, and E2's complementary
+affine-conjugate triangular-reflection direction subclass. No new
+mathematical execution is allocated. R5 completion and synchronization
+do not wait for those new research questions to be settled.
+
+The last R5 mathematical-review gate is now closed. Root read all
+370 lines of E1's final native-12 review, including its actual repair
+readback; all eleven R5 nonauthor review files are fully read. There
+were zero mathematical repairs and one provenance sentence repair,
+which now explicitly preserves C428's historical certificate dependency.
+Root and E1 separately checked that reverting only that sentence in a
+read-only stream restores the original proof digest. No code/receipt,
+formula or old frozen file changed and no mathematics was rerun.
+Final pins and every auxiliary boundary are in ROUND5_DECISION.md.
+
+X1 has the separate read-only integration-audit assignment in
+`continuation_round5/INTEGRATION_AUDIT.md`, covering new local links,
+actual version bindings, counts and scope, not mathematical correctness
+or an unperformed push. Root alone owns exact staging and synchronization.

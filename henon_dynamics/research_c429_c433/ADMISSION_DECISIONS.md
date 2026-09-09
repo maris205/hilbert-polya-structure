@@ -5,8 +5,8 @@ batch workflow. Admission means a complete, source-subtracted mathematical
 contract qualifies for one paper; it does not mean a manuscript/PDF,
 evaluation or release has been completed.
 
-**Current count: 3/5 admitted contracts; 0/5 completed papers.**
-Two independent qualifying contracts remain missing. No draft C-number
+**Current count: 4/5 admitted contracts; 0/5 completed papers.**
+One independent qualifying contract remains missing. No draft C-number
 has yet been assigned and no mathematical program is run to fill a quota.
 Five completed papers is a continuous-run checkpoint, not a stop rule.
 
@@ -107,8 +107,8 @@ identified; do not preserve a count by relabeling a corollary.
 ### Remaining paper gates and route boundary
 
 No completed paper is claimed. At the original PC424-L admission, the
-five-contract gate lacked four items; Sections 2–3 record later admissions,
-and the current count is three admitted and two missing. The integrated
+five-contract gate lacked four items; Sections 2–3 and 5 record later admissions,
+and the current count is four admitted and one missing. The integrated
 batch manuscript plan and C-number allocation have not been performed.
 Readable LaTeX, actual PDF,
 manuscript/source review, the pinned applicable evaluation, final fresh
@@ -151,6 +151,68 @@ test but fail an ordinary fixed-point sum. This is a method-blindness
 control, not a counterexample to the ordinary-cycle theorem in the
 excluded range. That range remains unproved here. All these results
 remain inside **the same one PC424-L contract**.
+
+### R5 accepted same-paper completion of all odd-characteristic degrees
+
+The formerly excluded range is now proved and accepted: for every odd
+prime p, every d>=2 with d congruent to 1 modulo p, every c in the
+algebraic closure of F_p and every polynomial h, ordinary primitive-cycle
+sums vanish exactly for polynomial coboundaries. Together with R4 this
+covers **every degree d>=2 in every odd characteristic**, without changing
+the native clock or replacing ordinary cycles by scheme lengths.
+
+Put P=p^v_p(d-1). At degree cap M>=1 the equivalent two-return Hasse
+certificate tests F_j | D^[P]F_j H_j(h)^P at
+j=7 floor(log_d(PM))+22 and its successor. It is equivalent to ordinary
+root return-sum vanishing at those two levels. A detecting ordinary
+primitive period is at most 7 floor(log_d(PM))+23; the two fixed
+polynomials have degree at most d^23(PM)^7. Zero and constant inputs
+are included; no root-multiplicity growth bound is assumed.
+
+Root fully read the complete [517-line proof](continuation_round5/a2_excluded_congruence/PROOF_PACKAGE.md),
+the 203-line report, and the complete
+[411-line E8 independent review](continuation_round5/reviews/e8_excluded_congruence/REVIEW.md).
+Their hashes are respectively
+`b703fde520e5405b6ab28833a40dcce324925bebbbeaefea6b9ca22de57445e3`,
+`2d99b82dc75d50d18b8e74eb20a12a97d9a1117e50a13f950c5dfb087b7f99a5`,
+and `a88ab98256491744ff2d29a90685142720be552f4cf6a3dc8428c75a89b961e2`.
+Zero mathematical, source-applicability or required wording repairs
+remain. The adaptive cut excludes every overflowing branch; the
+all-mark insertion pairs every old path and isolates the nonzero
+leading contribution alpha*a_D^P. Hasse differentiation and the
+earlier normal-form/carry framework remain explicitly credited.
+
+This is **the same PC424-L contract**, not another paper. The R4
+Jacobian-blindness control remains correct for its old test; it is not
+a counterexample to this new ordinary-cycle theorem. Characteristic
+two is not accepted by this paragraph and has a separate pending
+parameter-domain check. No mathematical execution or earlier proof
+edit was required, and no new worldwide priority claim is made.
+
+### R5 accepted characteristic-two addendum: every prime now covered
+
+The coordinator now accepts the separately proved characteristic-two
+domain after reading all 322 lines of the
+[author addendum](continuation_round5/a2_excluded_congruence/CHARACTERISTIC_TWO.md)
+and all 254 lines of the
+[targeted E8 review](continuation_round5/reviews/e8_excluded_congruence/CHARACTERISTIC_TWO_REVIEW.md).
+Their actual SHA256 identities are
+`0e7d600e2b35455aa5b93ffefef34c357d8a71e9fb3c20aa76dcf6f1be13d18a`
+and `5f5b713595c480f65b2a06a06acdaa1f79f671a405deb05f01cb300b34fb4c44`.
+Zero mathematical, imported-source or necessary wording repairs remain.
+The original odd-characteristic proof/review bytes and scopes are unchanged.
+
+Consequently the same complete ordinary-cycle kernel equality holds for
+**every prime p, every integer d>=2 and every c in the algebraic closure
+of F_p** for f=x^d+c. No ordinary wild period is omitted. For p=2 and
+odd d the Hasse certificate above applies with P=2^v_2(d-1), the same
+levels and bounds; every P=2 anchor coincidence and overflow inequality
+is checked. For even d, F_j'=1 gives squarefreeness, and a direct
+leading-digit proof gives the tests F_j | H_j(h) at
+n=3 floor(log_d M)+4 and n+1, with period bound n+1 and degree bound
+d^5 M^3. Zero, constants and coefficients outside the prime field are
+included. This is a parameter completion of **the same one PC424-L
+contract**, not a new paper, optimized bound or priority certificate.
 
 ## 2. UL4 — ADMIT ONE COMPLETE LOCAL PERIODIC-FIELD CONTRACT
 
@@ -247,6 +309,47 @@ planning gate lacked three independent contracts; §3 now admits one of
 them. All target-arithmetic flags
 remain unchanged; `NO_BAD_EULER_OR_ROOT_NUMBER` and Route-B exclusion
 remain unconditional. No new mathematical program was needed.
+
+### R5 same-UL4 bridge: eventual native quotient tower
+
+The coordinator has now fully read the complete 264-line
+[R5 proof](continuation_round5/a3_eventual_quotient_tower/PROOF_PACKAGE.md),
+its report, and the separate 348-line
+[E6 review](continuation_round5/reviews/e6_eventual_quotient_tower/REVIEW.md),
+SHA256 `c490afb92c790405d60a36ee31ecb49087c77696b9c991df4ed3c31a319a9a8b`.
+Zero mathematical/source-applicability repairs remain. Using the now
+accepted OM4 contact/compact-limit inputs, the new bridge proves a unique
+canonical continuous surjection χ∞:G_K→Z_p such that for every fixed j
+there is E_j≥j and for every e≥E_j the native characters ρ_e mod p^j
+equal χ∞ mod p^j on the whole Galois group simultaneously. Their kernels
+give nested fields K_j of degree p^j; K_j is the unique degree-p^j
+subfield of every sufficiently late L_e, and their union is a Z_p extension.
+
+This quantifier order does not imply E_j=j, K_j=L_j, containment of a
+prescribed full L_j in all late L_e, or nesting of all original L_e.
+The tower is defined inside K's separable closure via open kernels, not
+by treating a completed limit coordinate as algebraic. Conrad's general
+completion theorem and classical Galois correspondence were checked;
+the characteristic-zero fixed-field theorem is not used.
+
+This is a same-UL4 consequence of the later, independently proved OM4
+theorem, not a premise of UL4's original admission and not a fourth
+paper. The coordinator has fully read X1's completed
+[exact fixed-base source comparison](continuation_round5/x1_eventual_tower_sources/REPORT.md).
+Keating's equal-characteristic Proposition 5.1 and norm-field machinery
+remain credited, including their possible base automorphism. His 2009
+essential-surjectivity construction produces a compatible tower, not the
+prescribed sequence's eventual fixed-base quotient identities. The
+coordinator directly read the definitions, Theorem 1.1 and that complete
+construction through (3.7) in [the primary preprint](https://arxiv.org/pdf/0805.2932).
+The dynamical-torsor character extraction in Debaisieux's 2026 preprint
+is also explicitly subtracted; its mixed-characteristic commuting-pair
+hypotheses and finite base extension differ here. The coordinator read
+the full relevant Propositions 2.1–2.3 and proofs in
+[version 2](https://arxiv.org/pdf/2603.03873v2).
+No inspected exact antecedent was found. This bounded source result is
+not a worldwide priority guarantee, and the classical character-extraction
+step itself is not claimed as new. The source update changes no count.
 
 ## 3. OM4 — ADMIT ONE COMPLETE OPTIMAL-CYCLE MEASURE CONTRACT
 
@@ -349,5 +452,185 @@ Fricke SF2/all-period tower, LG4, and the retained rational-period
 questions remain unresolved at their recorded scopes. Correct auxiliary
 boundaries and rejected construction methods do not fill the missing
 two contracts. The prior Pezda source collision remains rejected.
-The R5 eventual higher-quotient proposal is under separate mathematical
-review as an UL4 continuation, not another paper or full-field nesting.
+The R5 eventual higher-quotient bridge is mathematically accepted as an
+UL4 continuation above, not another paper or full-field nesting. The
+composition good-model and exact-period-spectrum screens remain unadmitted.
+
+### R5 CGR5 — proved GR5 extension, NOT a fourth independent contract
+
+The full [composition classification](continuation_round5/b3_composition_good_models/PROOF_PACKAGE.md)
+is accepted mathematically at its original quantifiers: every number field,
+every finite Hénon word, all affine charts over the original completions
+and field, both integral maps and inverse maps, retained degrees and
+geometric regularity. It gives exhaustive wild centre tests, the unique
+native two-sided filled rectangle, all models, patched centres, and the
+exact global product-ideal obstruction. Neither factorwise goodness nor
+individual-unit Jacobians are assumed. The distinct-ideal repair and
+obstruction examples are valid.
+
+The coordinator read the entire 618-line proof and final 259-line report,
+the full [E1 mathematical review](continuation_round5/reviews/e1_composition_good_models/REVIEW.md)
+(final actual count 370), and the full
+[B1 independent-contract audit](continuation_round5/reviews/b1_composition_admission/REVIEW.md)
+including its final E1 readback (345 lines). Final review hashes are
+`3e24744c7650931ed2348d5f2871258355027ca95e6dce0ce1bae8fe6e479f5f`
+and `340d9394918acf038b4c1c1fffcb025e7d0a1ee5ffc7d75c465beaaaadfd087b`.
+The unchanged author proof/report hashes are recorded in both reviews.
+There are zero mathematical/source-applicability required repairs.
+
+The coordinator agrees with B1's **AUXILIARY EXTENSION OF GR5** disposition.
+Subtracting the actual old proof, not only its final single-factor theorem,
+leaves elementary verification of the same pure-leading-form interface,
+two copies of the existing centre search, classical filled-set rigidity,
+and the same determinant-module obstruction for distinct rather than equal
+summands. The order-three mixed repair shows a genuine enlargement, but
+does not on its own establish a separately substantial classification
+mechanism. This is a reasoned independence judgment, not a mathematical
+counterexample or an exact external-source collision.
+
+No cosmetic rewrite, larger example table or repeat favorable correctness
+review supplies the missing independence. Preserve the accepted new proof
+in its continuation directory; the sealed C426/GR5 package is not edited.
+The separate C2 spectrum problem is not part of this contract. The count
+remains **3/5 admitted contracts, 0/5 completed papers**. No Route-A target
+arithmetic grade or Route-B authority follows from this source result.
+
+### R5 native period 16 — auxiliary exclusion accepted, full spectrum open
+
+The coordinator accepts the complete
+[C2 class-reduction and exclusion proof](continuation_round5/c2_composition_exact_spectrum/PROOF_SUPPLEMENT.md)
+and the full 179-line
+[E4 independent review](continuation_round5/reviews/e4_composition_period16/REVIEW.md),
+both read in full. Their SHA256 hashes are respectively
+`16ed4ea2b81d7a6b6c029b2c6fcd463716a0af9bd925bfb54d4747ee1ea35edb`
+and `0e866dbba4d2431fcb621c406195570aa4b8139d3614c91f44822b75d43e6572`.
+There are zero open mathematical must-fixes. Any later report-only source
+appendix does not supersede the review's explicitly pinned report version.
+
+For every nonempty finite word of integral Hénon factors with both
+Jacobian signs allowed, no point in Z_2^2 has native least period 16.
+The proof combines the four-residue derivative-sign character with the
+constant-Jacobian local four-cycle obstruction. It covers all word
+lengths, degrees and integer coefficients, without the diagnostic or
+Pezda's local eight-cycle lemma as premises. The finite-cycle padding
+equivalence with the integral tame subgroup is also accepted; it does
+not assert that every integral polynomial automorphism is tame.
+
+This is not the complete exact-spectrum answer and not a fourth
+contract. The lengths 9, 12, 18 and 24 remain unclassified. Excluding 9
+or 12 would exclude 18 or 24; attaining 18 or 24 would attain 9 or 12,
+but attaining a smaller length alone does not settle the larger one.
+Pezda's upper list and normalization, and C428's single-factor spectrum,
+remain credited. Source priority and separate-paper substantiality of
+the eventual full-spectrum result remain open. The finite no-hit probe
+is only finite evidence and is not rerun. Counts remain **3/5, 0/5**.
+
+The subsequent directed E4 addendum (41 added lines, 220 total) was
+also read in full and accepted, with zero mathematical/source-applicability
+must-fixes. It binds the 367-line report SHA256
+`0b61d292915d2ab54c6047fea37a4908df9ffbdf07598a8766d5c6c530764e36`;
+the full review SHA256 is
+`9003d5b80f6c40187ab9620e65f56d429675ab3ee5c2324151e8a44e8b3b5a59`.
+The old report/review prefixes and proof retain their historical hashes.
+The same exclusion holds for every polynomial automorphism with both
+map and polynomial inverse over Z_2: factorization is used only after
+reduction over F_2, and the local lemma needs only the constant unit
+Jacobian delta^4 of the fourth iterate, not determinant one. This
+ambient-class corollary does not assert integral tameness or add a paper.
+
+## 5. RLG5 — ADMIT ONE ALL-PLACE REVERSIBILITY CONTRACT
+
+Decision: **ADMITTED**, after full independent mathematical review,
+bounded primary-source subtraction, separate nonauthor substantiality
+review, and the coordinator's own complete proof/readback checks.
+This is one negative resolution of the original universal question;
+it is not a classification of every reversible word or a completed paper.
+
+### Complete question and counterexample
+
+For every number field K and every nonempty finite word F of generalized
+Hénon maps H_i(x,y)=(y,P_i(y)-a_i x), with deg P_i>=2 and a_i nonzero,
+does reversibility by a polynomial automorphism over every completion
+K_v imply reversibility by a polynomial automorphism over K?
+Every finite and infinite place is retained. Hypothetical reversors
+have arbitrary polynomial degree and order; neither affineness nor
+involutivity is imposed. One application of the whole F is the native
+clock. The observable is reversor existence, not an Euler determinant.
+
+The answer is **no**. Set K=Q(sqrt(7)), H_{c,d}(x,y)=(y,c y^d-x), and
+
+    F = H_{4,7} H_{1/16,15} H_{16,15} H_{1/4,7},
+
+with rightmost factor applied first. All factors are polynomial
+automorphisms of determinant one. For the same four-factor family
+F_a=H_{a,7}H_{a^-2,15}H_{a^2,15}H_{a^-1,7}, the complete polynomial
+reversor set over any number field L containing a is
+
+    { F_a^j R_t : j in Z, t in L*, t^8=a^2 },
+    R_t(x,y) = (t^-1 y, t x).
+
+In the witness a=4, the classical Wang class 16 is an eighth power in
+every actual K_v and is not an eighth power in K. The local identity
+is proved directly over each completion, without embedding it into C
+or extending that completion. The exhaustive global reversor equality
+excludes all alternative polynomial witnesses, not only the displayed
+affine ansatz. The family criterion belongs to this same one contract.
+
+### Evidence and whole-group closure
+
+Root fully read the [491-line proof](continuation_round5/c4_reversor_local_global/PROOF_PACKAGE.md)
+and [184-line report](continuation_round5/c4_reversor_local_global/REPORT.md),
+the complete [404-line E5 mathematical review](continuation_round5/reviews/e5_reversor_local_global/REVIEW.md),
+and the complete [378-line B1 substantiality review](continuation_round5/reviews/b1_reversor_admission/REVIEW.md),
+including its final independent mathematical-review readback.
+Their final SHA256 identities are, respectively:
+
+- `99bf7efa1486df5a685347aac3bfa6d2c79ab45f241dc1b94c6a5a69b181143e`
+- `2710692dc3c30c5a58a5d448c36ed900ba6aa93b0bc62bbaa8f5ffc958a019de`
+- `bb369ff50bac71a548207466c5b89e9fa93b2944d06a6fe767863e64792b81a2`
+- `5cafc9a0f0e315e1959fb4db2a5ebf49a0379ca5fd31a5495010c8eb9dd5631b`
+
+Zero required mathematical or source-applicability repairs remain.
+The full plane automorphism amalgam, intrinsic degree turn labels and
+primitive (7,15,15,7) label cycle force every commuting map's axis
+translation to be a native integral power. The remaining pointwise-axis
+centralizer is proved exactly mu_8, with translations eliminated rather
+than ignored. The reversor coset includes all eight roots t^8=a^2;
+removing a field-defined native power establishes the original-field
+descent. All odd, dyadic and real places are separately proved.
+The rejected two-factor analogue really has a global nonlinear reversor
+and is retained as a control. No mathematical execution was needed.
+
+### Source subtraction and independent substance
+
+Wang's eighth-power obstruction, Jung–van der Kulk's full-group
+structure, polynomial symmetry/reversor normal forms, the axis method,
+and scalar twisting with exhaustive centralizer descent are classical.
+In particular, Cantat–Dujardin's 2024 Section 2.2 already contains the
+last mechanism for two independently chosen conjugate maps; combining
+it with Wang gives an analogous arbitrary-pair all-place obstruction.
+Root and the independent reviews actually read the relevant primary
+statements/proof passages. No ownership of those mechanisms is claimed.
+
+The remaining increment is realization for the constrained inverse pair
+(F,F^-1), with the whole polynomial reversing coset controlled over the
+original field. The naive two-factor realization fails precisely by an
+alternative polynomial reversor. The four-factor realization and its
+complete exclusion settle a meaningful original all-place implication
+without weakening any quantifier. A new proof method is not mandatory
+for an independent substantial answer. This distinguishes the admission
+from the same-template CGR5 extension rejected in Section 4.
+
+The strong auxiliary-only counterargument is preserved in B1's review;
+the coordinator accepts its final one-contract recommendation for the
+specific reason above, not because a fourth slot is needed. No exact
+prior inverse-pair implication was established in the bounded search.
+This is not a worldwide-priority certificate, a minimal-degree claim,
+or an assertion that no earlier source can imply the result. A verified
+exact antecedent would reopen substantive admission.
+
+The current count is **4/5 admitted contracts, 0/5 completed papers**.
+One independent contract and all downstream manuscript/evaluation/release
+gates remain. This source-arithmetic counterexample grants no target
+Euler factors, root numbers, automorphy, zero correspondence or
+Hilbert–Pólya realization. Route B remains closed.
