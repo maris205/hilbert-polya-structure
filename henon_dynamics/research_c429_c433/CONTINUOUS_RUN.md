@@ -293,3 +293,162 @@ paper contracts. All new output stays in round-4 exclusive directories.
 Round-3 integration is limited to its frozen research files, the admission
 decision and coordinator state. It is not a final paper seal. Round-4
 active files and all inherited unrelated directories are excluded.
+
+### Round-3 synchronization and continued round-4 work
+
+The round-3 research checkpoint was actually committed and pushed as
+`4cd9d1a602c6be24eff105ad26e2c416760bd161`: exactly 32 paths, comprising
+29 round-3 Markdown records, `ADMISSION_DECISIONS.md`, this continuous
+record and the current-state entry. Staged membership, file modes and
+content were checked before commit. After push, HEAD, origin/main and
+live remote main agreed; the exact committed scope had zero working-tree
+diff. Round-4 and the eight inherited unrelated directories were excluded.
+This is research-record synchronization, not a manuscript release.
+
+Four additional round-4 author/source directories have now been actually
+allocated, reusing existing threads:
+
+| Thread | New exclusive directory | Exact task |
+| --- | --- | --- |
+| A2 | `a2_unicritical_carry_extension/` | Extend the proved carry argument to `x^d+c`, including the separate derivative-zero case; same PC424-L paper, not a second contract. |
+| A1 | `a1_optimal_cycle_measures/` | Prove or delimit uniform cross-level contact estimates sufficient for the weak convergence asked in Lindahl--Rivera-Letelier Problem 1.3. |
+| D1 | `d1_isometric_cycle_limit/` | Independently prove the precise isometric coupling/compactness criterion needed by that measure question; no assumed type-I compactness. |
+| X1 | `x1_optimal_measure_sources/` | Check primary follow-up literature and exact priority/scope for the selected optimal-cycle measure question. |
+
+These make eleven actual author/source directory allocations. A3 has also
+received one separately bounded proof-only corollary allocation, in
+`a3_first_quotient_ramification/SECOND_LAYER_BREAKS.md`, to deduce the
+complete second-layer ramification breaks from its new first-quotient
+argument. Its first-quotient premise is still under nonauthor review;
+neither consequence is a separate paper.
+
+Seven round-4 nonauthor audit scopes have actually been dispatched so far:
+E3 slice quadratic inventory; E5 fold/cusp transversality; E4 Chebyshev
+quotient blocks; E6 the first-quotient conductor; B1 standalone local-contract
+substantiality; E8 the unicritical carry extension; and E2 the optimal-cycle
+contact proof. E3 and E5 have returned final reports; the coordinator has
+not yet completed their full readback at this entry. Author completion and
+favorable review messages are not coordinator acceptance.
+
+The new conductor formula `b(F_e/K)=2(p-1)` has two author-side derivations.
+The coordinator has read A3's complete 322-line argument; E6's separately
+allocated whole-proof review remains active. X2's 372-line final local-source
+report recommends one integrated, separately identified local contract;
+B1's admission audit and the coordinator's primary-source synthesis are
+pending. The original global PC424-D remains unchanged and open. Counts
+remain **1/5 admitted contracts, 0/5 completed papers**.
+
+The source-worker provenance is corrected explicitly: although X2 only
+received permission to reuse its existing child, that child added a new
+bounded `local_galois_sources` worker at 14:52 UTC. Its read-only
+Doyle--Poonen check completed; the coordinator allowed that bounded work
+to finish and prohibited further nesting. This is one additional actual
+current-team thread, not an external-model review. No mathematical execution,
+new credentials, external model call, manuscript/PDF or formal evaluation
+has been allocated in round four. Research continues at the new proof and
+source gates without reopening the frozen round-three proofs.
+
+### Fourth-round second contract and same-paper extensions
+
+The coordinator now admits **UL4**, one separately frozen complete local
+periodic-field contract, after fully reading B1's final 373-line audit
+and source-synthesis readback. All primes, levels, fixed-base and native
+orientation quantifiers are retained. The full local theorem, stable
+oriented first quotient and prime-level disjointness count together;
+original GLOBAL PC424-D is not closed. See the updated
+[admission decision](ADMISSION_DECISIONS.md). Current counts are
+**2/5 admitted contracts, 0/5 completed papers**.
+
+The coordinator also accepts the all-d-not-congruent-to-1-mod-p
+unicritical carry extension within the SAME PC424-L paper, after reading
+the entire 487-line proof, 344-line E8 mathematical review and source
+report. The additional primary Li--Zhang theorem/proof was checked and
+its different real Holder/sphere setting is subtracted. No new count
+comes from this extension or its two-return certificate.
+
+A3's complete 322-line first-quotient proof and E6's 351-line final
+review have both been fully read by the coordinator; the exact common
+break 2(p-1) is accepted. A separately allocated E6 review of A3's new
+202-line second-layer corollary has returned a final report; coordinator
+readback remains pending. It is another same-local-contract consequence.
+
+The A1 optimal-measure proof (470 lines) and D1 general isometric-limit
+proof (286 lines, including direct aperiodicity) have also been fully
+read by the coordinator with no defect found. Their independent E2/E1
+reviews are still closing, so they are not admitted on author agreement.
+The additional E1 topology audit and E6 second-layer audit make nine
+actual round-four review scopes across eight existing reviewer threads.
+The X1 measure-source report is complete and has been fully read; the
+coordinator's exact-claim primary synthesis and independent substantiality
+gate are separate pending work. No mathematical execution or manuscript
+has been allocated, and continuous research remains active.
+
+### Fourth-round completed reviews, third contract, and actual R5 handoff
+
+All ten R4 nonauthor scopes are now final: B1 local admission; E1 topology;
+E2 optimal contacts; E3 slice inventory; E4 Chebyshev blocks; E5 cusp/fold;
+E6 first quotient and separately second-layer breaks; E7 measure admission;
+E8 unicritical carry. These are ten scopes across nine existing reviewer
+threads, not ten new agents. The coordinator read all ten complete final
+reports (3,236 lines), together with their actual proofs and relevant source
+records. Zero open mathematical/source-applicability required repairs remain
+within the stated accepted scopes. C4's three conditional-scope repairs were
+independently closed and read back. No unresolved global claim is promoted.
+
+The complete A1/D1 measure theorem is now admitted as **OM4**, one independent
+integrated contract after E7's 332-line final actual-file admission review
+and source-synthesis readback. Current count: **3/5 admitted, 0/5 complete**.
+The unbounded-anchor contact estimate closes LRL's full-parameter selected
+cycle convergence question and gives compact classical nonatomic Z_p limit
+dynamics. Classical cycle geometry, contact tools and generic topology are
+subtracted; bounded searches do not certify firstness. OM4 neither uses nor
+duplicates UL4's fixed-base full-inertia conclusion as its main theorem.
+
+The full second-layer ramification proof and separate E6 review are accepted
+as same-UL4 auxiliary consequences. B4's complementary conductor writeup was
+also read; it records exchange of the cancellation idea with A3 and is not
+called an independent blind whole-proof review. The admitted conductor's
+formal nonauthor evidence is the separate E6 audit of A3's argument.
+A4 and C4/D2's newly reviewed local/conditional interfaces remain auxiliary;
+global PC424-D, SF2/FGT and LG4 stay unresolved. See
+[R4 final decision](continuation_round4/ROUND4_DECISION.md).
+
+The following R5 allocations actually occurred before R4 integration:
+
+- A3, `continuation_round5/a3_eventual_quotient_tower/`: for every fixed j,
+  eventual equality of all native oriented mod-p^j characters with one
+  continuous surjective Z_p character. Its complete author proof is now
+  frozen; this does not assert full L_e nesting or threshold e=j.
+- E6, `continuation_round5/reviews/e6_eventual_quotient_tower/`: separately
+  allocated actual-file review of the 264-line A3 proof, including completion,
+  Galois continuity, all-group simultaneous stabilization and orientation.
+  The A1/D1 mathematical premises are now coordinator-accepted; this new
+  tower conclusion still requires its own final review and readback.
+- X2, `continuation_round5/x2_arithmetic_replacement/`: at most two source-first
+  candidate formulations outside the admitted contracts, choosing at most
+  one. The live screen tests polynomial-versus-affine good-model rigidity and
+  full local/global affine good models for finite Hénon compositions. No
+  existence, novelty or admission is assumed. X2 received permission to reuse
+  its existing `lsy_primary_access` child for the first formulation's primary
+  antecedents only, explicitly with no further nested spawning.
+- B3, `continuation_round5/b3_composition_good_models/`: the complete
+  all-number-field/all-finite-word affine good-model classification, using
+  X2's proposed rectangular leading-form interface only as a conjectural
+  starting point. The precise local regular-good definition, all affine
+  charts and simultaneous global obstruction are frozen as unproved;
+  no factorwise-good restriction or fourth admission is introduced.
+
+R4 and R5 mathematical executions remain zero. No manuscript/PDF, formal
+evaluation, model configuration, external upload or target promotion occurred.
+R4 research records are ready for exact-scope synchronization; R5 and the eight
+inherited unrelated directories will be excluded. Continuous work proceeds
+without requiring the user to request the next round.
+
+R4 integration preparation: the index was initially empty and the live remote
+still matched the R3 baseline. Exactly 35 intended paths were staged: 32 R4
+Markdown files and the three coordinator records. The staged whitespace check
+returned exit 2 for one pre-existing trailing space at line 273 of the frozen
+A1 measure proof, and no other diagnostic. This cosmetic exception is retained
+to preserve the exact reviewed proof bytes/hash; the check is not reported as
+PASS and no mathematical defect is inferred from it. Independent read-only
+membership/content checking was assigned to E7. Commit/push remain pending.
