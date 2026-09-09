@@ -970,3 +970,36 @@ changes. This applies idea-creator's generation/filtering within the
 project's current-team, pure-theory boundary; it does not run an old
 external-model example or manufacture a fifth contract. Four contracts,
 zero papers, and `NO_BAD_EULER_OR_ROOT_NUMBER` remain unchanged.
+
+### Actual R7 synchronization receipt and R8 coefficient correction
+
+Root read X1's complete 117-line integration audit, actual SHA256
+`2589f325ea03bebd004af1d85ec7ef1e6aa0881b62406b1f3923806626d128f2`.
+Its exact set is eleven R7 files and the two coordinator records,
+thirteen paths in total. The nine mathematical input bindings, four
+reviews/1,168 lines, modes and checked links agree. Root independently
+checked exact membership, captured all thirteen working Git blobs,
+staged only those paths, and matched every stage-zero mode-100644
+index entry byte-for-byte. Ordinary cached whitespace and unstaged
+tracked checks both returned exit zero. The committed member set
+also matched the exact allowlist.
+
+The actual research commit is
+`4773182d6a4c7a08e8f2a8d0ebe8fdbf31d3fcbc`, pushed to the existing
+configured origin/main. At 2026-09-09 18:32:54 UTC, a fresh fetch,
+local HEAD/tracking-ref reads and actual ls-remote all agreed. The
+tracked tree was clean; only R8 and the eight inherited untracked
+directories remained. This post-push receipt does not rewrite R7's
+frozen decision, proof or audit bytes.
+
+R8 now also reuses E2 for an independent squarefree normal-coefficient
+reconstruction in
+`continuation_round8/reviews/e2_critical_atom_coefficient/REVIEW.md`.
+A2's preliminary full-odd-characteristic coefficient claim was
+explicitly withdrawn after its self-check found a missing term in
+squaring the cyclic product. Root had not accepted that claim; E2
+was immediately notified, and the author is recomputing within the
+same bounded mechanism. The separate characteristic-three formula
+does not use the faulty equality but remains subject to independent
+checking and full-proof review. No R8 theorem or fifth contract is
+preadmitted, and no mathematical program was run for the correction.
