@@ -173,3 +173,123 @@ Author-side exchanges do not count as independent whole-proof acceptance.
 No round-3 mathematical execution has been allocated or performed at this
 checkpoint. In particular, a theoretical new proof from an existing certificate
 is not another run, and an unproved infinite-pattern proposal is not a result.
+
+### Round-2 synchronization and round-3 theorem checkpoint
+
+The complete round-2 checkpoint was actually committed and pushed as
+`9623efe900df6003664315099440fa0683930d9b`. The commit contains exactly
+35 approved paths, including the three actual mathematical-run logs; it
+excludes bytecode, round-3 work and the eight inherited unrelated directories.
+After the push, `HEAD`, `origin/main` and live remote `refs/heads/main`
+agreed at that commit, and the exact committed scope had no working-tree diff.
+This is synchronization of research records, not a paper release or new count.
+
+As of 2026-09-09 14:44 UTC, A1 has supplied a complete proof of the original
+PC424-L equality, retaining every odd prime, every parameter, unrestricted
+degree, ordinary primitive cycles including wild periods, and the native map.
+E2 independently derived the core carry stabilization without reading A1's
+new proof or E8's review; E8 separately checked the entire author proof,
+including the degree-dependent two-level detection corollary. Both report
+zero mathematical must-fixes. The coordinator has fully read the author
+proof and both final reviews. This is mathematical closure, not yet paper
+admission: primary-source subtraction and independent substantiality review
+are active. The finite-detection corollary belongs to the same candidate.
+
+The novelty-check skill is used for three explicit claims and primary-source
+collision checking. Its historical external GPT-5.4 cross-model step is not
+run: the user's current-session/no-upload boundary takes precedence. X2's
+bounded primary-source audit and B1's separately dispatched nonauthor
+admission audit provide current-team review only, not cross-model evidence.
+Classical global-residue/normal-form/trace formulas and finite binomial
+matrices relating adjacent weighted traces are explicitly subtracted.
+The proposed increment is the specific short-support coefficient
+stabilization and its ordinary-cycle polynomial-regularity consequence.
+
+A3's new computation-free interlevel proof has passed E6's full review:
+for every odd prime, the second small-cycle layer has full degree p^2,
+and every higher layer has degree at least p^2 and a common exact p-step
+displacement. The coordinator has read the entire proof and final review.
+A separate 199-line full-local-inertia extension is now under a separately
+allocated E6 review; the coordinator has read it and found no defect.
+It compares the p top clusters with level two. It is not a proof of global
+cycle-quotient transitivity, and no all-level result is inferred from the
+old single-pair AS computation. Its final review is pending at this entry.
+
+E1, E3, E4, E5 and E7 have also completed their round-3 final auxiliary
+reviews with zero open repairs. The coordinator has read all five in full.
+C4's only requested column-order clarification was repaired and independently
+read back. SF2 is reduced to normalized ramification at finite genuine
+higher-period points: finiteness and complete period-two isolation do not
+settle that gap. A4's collision-budget theorem excludes an arbitrary-deletion
+method, not actual surviving graph connectivity. B4's scalar-bound obstruction
+does not exclude A3's interlevel mechanism. None supplies another paper count.
+
+No round-3 mathematical execution, manuscript/PDF or formal evaluation has
+been allocated or performed. Frozen reviews retain the state they actually
+reviewed; later theorem closure is recorded here rather than rewriting those
+historical scopes. Round-3 files are not yet committed at this checkpoint.
+
+### Actual round-4 bridge allocations
+
+Four concrete follow-up tasks have now been sent to existing threads, with
+new exclusive paths and no mathematical-run allocation:
+
+| Thread | New directory under `continuation_round4/` | Exact remaining task |
+| --- | --- | --- |
+| A4 | `a4_global_quotient_after_full_inertia/` | Actual primitive-collision incidence/global quotient connectivity after the local theorem; do not repeat the refuted scalar deletion-budget route. |
+| C4 | `c4_remote_parabolic_divisors/` | Uniform noncontainment of the two-cycle fold in normalized higher-period finite branch loci, through actual transversality or a valid specialization. |
+| D2 | `d2_slice_quadratic_exclusion/` | Exclusion of the restricted sign quadratic from every finite higher-layer compositum, retaining complete-cover and specialization hypotheses. |
+| X1 | `x1_fricke_parabolic_sources/` | Primary-source test for an applicable single-parabolic-orbit/higher-cycle nonresonance theorem, complementary to C4's local proof work. |
+
+A3 has additionally received a bounded same-result corollary task in a
+separate round-3 file: identify the oriented first quotient torsors under
+the cluster matching, with AS sign/convention and level-one boundaries.
+It is not yet a reviewed corollary and is not another independent contract.
+Research continues automatically; five complete papers remains a checkpoint,
+not a reason to stop, and the current completed-paper count remains 0/5.
+
+### Round-3 final adjudication and first contract admission
+
+All eleven final mathematical/admission review records are now complete:
+E1; E2's independent carry proof and separate oriented-quotient check;
+E3; E4; E5; E6's separate interlevel and all-level reviews; E7; E8;
+and B1's admission/source readback. They use nine existing nonauthor
+threads. X2's primary-source audit is separately complete. The coordinator
+fully read all eleven final records, both major new proof chains,
+the source report and final source synthesis. Zero required repairs remain
+inside those reviewed scopes. No claim of cross-model or human review is made.
+
+The coordinator has now formally
+[admitted PC424-L as one complete contract](ADMISSION_DECISIONS.md),
+after B1 read back and accepted the final bounded source synthesis.
+The exact kernel theorem and two-level finite certificate count together.
+Current totals are **1/5 admitted contracts and 0/5 completed papers**;
+four independent substantial contracts and all manuscript/release gates
+remain. The source search has explicit full-text/database limitations,
+not a worldwide priority guarantee. Its heuristic score does not determine
+admission. No new mathematical program or formal evaluation was needed.
+
+A3's all-odd-prime/all-level local full-inertia theorem is now fully
+accepted after E6's separate final review and the coordinator's complete
+readback. E2 also accepts the separate oriented first-AS stabilization
+and uniform L1/higher-field nonintersection corollary. These are not a
+global cycle-component classification and are not automatically another
+admitted contract. A3's frozen earlier report keeps its earlier proof
+boundary; the final status and dependencies are resolved in
+[ROUND3_DECISION.md](continuation_round3/ROUND3_DECISION.md).
+
+Three further round-4 allocations were actually dispatched after the
+four above: A3's `a3_first_quotient_ramification/` for the exact general-p
+first quotient conductor; B4's independent
+`b4_first_quotient_break/` ramification/compositum approach to that same
+invariant; and X2's `x2_uniform_local_source_admission/` primary-source
+and standalone-substantiality assessment of the complete local theorem.
+X2 was allowed to reuse its existing idle child for a disjoint read-only
+antecedent search; that does not add a new child or external model.
+These are **seven actual round-4 allocations**, with zero mathematical
+execution allocations. Same-result conductor consequences are not new
+paper contracts. All new output stays in round-4 exclusive directories.
+
+Round-3 integration is limited to its frozen research files, the admission
+decision and coordinator state. It is not a final paper seal. Round-4
+active files and all inherited unrelated directories are excluded.
