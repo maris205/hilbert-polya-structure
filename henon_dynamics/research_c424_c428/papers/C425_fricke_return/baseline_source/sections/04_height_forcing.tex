@@ -1,0 +1,89 @@
+\section{Uniform forcing above the residual radius}\label{sec:forcing}
+
+\begin{lemma}[Forced transition]\label{lem:forcing}
+Let a lifted periodic orbit have global scalar maximum
+\(M>100B_0\). Suppose it visits \(L_{i,u,v}(t)\) with
+\begin{equation}\label{eq:parameter_lower}
+ |t|\ge M-jB_0,\qquad 0\le j\le27.
+\end{equation}
+Then the outgoing edge from \((i,u,v)\) in \(\stategraph\) exists.
+The parameter at its terminal state has absolute value at least
+\(M-(j+1)B_0\).
+\end{lemma}
+
+\begin{proof}
+All scalar coordinates on the orbit are bounded by the same \(M\).
+We check each way in which Table~\ref{tab:edges} could omit an edge.
+
+If \(v=\pm1\), put \(b=a_i-u\), \(t'=vt+b\) and
+\(c=vb+a_{i+1}\). The two-step identity in Lemma~\ref{lem:edges}
+still holds without assuming \(c\in S\), and
+\[
+ |t'|\ge |t|-B_0\ge M-28B_0.
+\]
+If \(|c|\ge2\), the next scalar coordinate, following
+\((v,t',c)\), is \(t'c+a_{i+2}-v\). Its magnitude is at least
+\begin{equation}\label{eq:typeI_bound}
+ 2(M-28B_0)-H-1=2M-57B_0>M.
+\end{equation}
+This contradicts the global maximum. Hence \(c\in S\), and a
+Type I edge exists.
+
+Now suppose \(v=0\). Write
+\(b=a_i-u\) and \(t'=-t+a_{i+1}\), so once more
+\(|t'|\ge M-28B_0\). Starting with \((u,t,0)\), the next scalar
+coordinates are exactly
+\begin{equation}\label{eq:zero_successors}
+ b,\qquad t',\qquad bt'+a_{i+2},\qquad
+ t'(bt'+a_{i+2})-b+a_i.
+\end{equation}
+There are three exhaustive possibilities for \(b\).
+
+If \(|b|\ge2\), the third coordinate in
+\eqref{eq:zero_successors} has magnitude at least
+\[
+ 2(M-28B_0)-H=2M-56B_0-H>M,
+\]
+which is impossible. If \(|b|=1\), that coordinate has magnitude
+at least \(M-29B_0\). Since \(a_i-b=u\) and \(|u|\le1\le B_0\),
+the fourth coordinate has magnitude at least
+\begin{equation}\label{eq:quadratic_bound}
+ (M-28B_0)(M-29B_0)-B_0>M.
+\end{equation}
+To verify the strict inequality, both factors exceed \(M/2\), and
+\(M>100B_0\ge100\) implies
+\(M^2/4-B_0>M^2/4-M/100>M\).
+Thus \(|b|=1\) is also impossible.
+
+It follows that \(b=0\), or \(a_i=u\). If
+\(|a_{i+2}|\ge2\), the fourth coordinate in
+\eqref{eq:zero_successors} has magnitude at least
+\[
+ 2(M-28B_0)-H>M,
+\]
+another contradiction. Therefore \(a_{i+2}\in S\), exactly the
+remaining Type II condition. For either edge type the new parameter
+is \(\epsilon t+\delta\), with \(|\delta|\le B_0\), and hence is
+bounded below by \(M-(j+1)B_0\) in absolute value.
+\end{proof}
+
+\begin{proposition}[Entry into a graph cycle]\label{prop:graph_cycle_entry}
+Every native periodic orbit of height greater than \(R\) has a lift
+that reaches a directed cycle of \(\stategraph\).
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:max_native}, its global scalar maximum satisfies
+\(M>R=100B_0>H+2\). Lemma~\ref{lem:entry} supplies a state-line
+point with parameter of absolute value \(M\). Apply
+Lemma~\ref{lem:forcing} successively for \(j=0,1,\ldots,26\).
+This produces 27 exact transitions and 28 visited states. The state
+set has size 27, so a state repeats. Since each state has at most one
+outgoing edge, the segment between its first two appearances is a
+directed cycle, and the path has entered that cycle.
+\end{proof}
+
+This is a finite propagation argument, not an indefinitely iterated
+height estimate. It uses the lower bound only until a state repeats.
+After the repetition, the exact whole-line identities control all
+subsequent returns.

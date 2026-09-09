@@ -1,0 +1,133 @@
+\section{The complete finite residual certificate}
+\label{sec:finite}
+
+We now describe the exact finite dependency, including why its graph
+contains every periodic point and why its terminal set contains
+only periodic points. The original producer, output, independent
+checker, and independent output are retained as byte-identical
+evidence copies~\cite{am1certificate}. Appendix~\ref{app:certificate}
+prints the mathematical producer code and every parameter's cycle
+histogram. No mathematical certificate was rerun to prepare this
+manuscript.
+
+\subsection{A proved finite alphabet}
+
+Use the odd coordinates $z_i=2x_i+1$. Equation
+\eqref{eq:recurrence} becomes
+\begin{equation}
+ z_i^2+8a+7=4(z_{i-1}+z_{i+1}),\qquad
+ \mathcal G_a(z,w)=\left(w,\frac{w^2+8a+7}{4}-z\right).
+ \label{eq:odd_map}
+\end{equation}
+For odd $w$, $w^2+8a+7$ is divisible by eight. Consequently
+$\mathcal G_a$ and its inverse preserve the odd lattice; the
+displayed quotient is an even integer and its difference with
+odd $z$ is odd.
+
+For every $-145\le a\le1$ set
+\begin{equation}
+ \begin{split}
+ B_a&=4+\lfloor\sqrt{9-8a}\rfloor,\\
+ S_a&=\{z\in\Z:z\text{ odd},\ |z|\le B_a,
+                   \ |z^2+8a+7|\le8B_a\}.
+ \end{split}
+ \label{eq:alphabet}
+\end{equation}
+The maximum estimate \eqref{eq:center_bounds} applies here as
+well: $c=-2a-7/4$ has $c+4>0$ for this entire range.
+Since $z_i=2v_i$, it gives
+$|z_i|\le4+\sqrt{9-8a}$ and hence $|z_i|\le B_a$.
+Equation~\eqref{eq:odd_map} gives the second restriction in
+\eqref{eq:alphabet}. Every rational periodic point therefore
+corresponds to a state of the finite set $V_0=S_a^2$.
+All operations defining it are integer comparisons and an integer
+square root; no floating-point bound is used.
+
+\begin{lemma}[Finite partial permutation, inherited]
+\label{lem:pruning}
+Let $G$ be an injective map on a set $X$, and let $V_0\subset X$
+be finite and contain every periodic point of $G$.
+Define
+\begin{equation}
+ V_{j+1}=\{p\in V_j:G(p)\in V_j\}.
+ \label{eq:prune}
+\end{equation}
+The sets stabilize after finitely many strict decreases, and the
+stable set is exactly the periodic locus of $G$.
+\end{lemma}
+\begin{proof}
+This is the finite-graph mechanism used in
+\cite[Section 5]{c412}. The descending sequence of finite sets
+must stabilize. Every periodic orbit lies in $V_0$ and, by induction,
+in every $V_j$. At stabilization, $G$ restricts to an injective
+self-map of a finite set, so that restriction is a permutation.
+Every surviving point is consequently periodic. The two inclusions
+give the conclusion.
+\end{proof}
+
+The inverse in \eqref{eq:odd_map} verifies injectivity, so the lemma
+applies. It places no independent upper cutoff on the length of a
+cycle. Iterating each survivor until its first return yields every
+oriented cycle, and distinct adjacent states certify its least period.
+
+\subsection{What the finite execution certifies}
+
+The author certificate ran once on precisely the 147 integers
+$a=-145,-144,\ldots,1$. For each $a$ it records $B_a$, the complete
+alphabet $S_a$, every strictly decreasing pruning cardinality,
+and all canonically rotated primitive coordinate words.
+The program verifies the recurrence for each word, the distinctness
+of its states, disjointness of different cycles, and equality between
+the union of the expanded words and the entire stable set.
+It also verifies inclusion of every valid parametric family from
+Table~\ref{tab:families} and records all unmatched cycles.
+The unmatched cycles are exactly Table~\ref{tab:exceptions}.
+
+The output has 306 periodic states and 113 oriented cycles
+\emph{across 147 different maps}. Its largest alphabet has sixteen
+coordinates; its largest initial graph has 256 states; and no
+parameter needs more than sixteen strict pruning decreases.
+These totals are bookkeeping for the proved residual family, not
+a claim that one map has 306 periodic points.
+Every row of the result is summarized in
+Table~\ref{tab:residual}; the complete alphabets, trajectories,
+and words remain in the accompanying exact output.
+
+\subsection{Independent reconstruction in original coordinates}
+
+The nonauthor check used the same fixed square
+\begin{equation}
+ W=\{-19,-18,\ldots,19\}^2
+ \label{eq:independent_box}
+\end{equation}
+for every residual parameter. This is a proved complete box:
+by Lemma~\ref{lem:height}, $M^2-5M-290\le0$ when $|a|\le145$.
+At the integer $M=20$ the left side is $10>0$, and it increases
+thereafter. Therefore $M\le19$.
+
+For each $a$, the independent checker forms the successor of every
+state in $W$ under the original map $F_a$. An edge leaving $W$
+terminates a path. It visits each uncompleted state, following a
+path until escape, a previously completed vertex, or a repeated
+vertex on the present path. In the last case, precisely the
+suffix beginning at that repeat is a cycle. Marking the whole
+path completed and continuing processes every vertex exactly once.
+Every cycle is found because a walk entering a finite cycle cannot
+escape, and a previously completed walk already contains its cycle.
+The retained suffixes are genuine cycles, so there are no false positives.
+
+All 147 graphs were computed before the author output was loaded.
+The check then compared every full oriented word and expanded
+periodic-state set, not merely their total cardinalities.
+All 223,587 vertices were processed once, and all 147 cycle and
+state sets matched. The checker uses neither doubled coordinates,
+the filtered alphabet, nor iterative pruning. Its finite
+completeness thus has a different implementation from the producer.
+
+The author run and independent run both completed successfully on
+8 September 2026, with exact outputs retained. These are current-team
+computer-assisted checks, not a claim of human peer review.
+The finite results, Lemma~\ref{lem:upper}, and
+Proposition~\ref{prop:large_classification} exhaust every integer
+parameter and hence establish the cycle-list part of
+Theorem~\ref{thm:half_classification}.

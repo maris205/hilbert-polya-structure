@@ -1,0 +1,79 @@
+\section{The phase lift and entry at a global maximum}\label{sec:phase}
+
+Set \(a_0=A\), \(a_1=B\), \(a_2=C\), with all forcing subscripts
+interpreted modulo three. Introduce the auxiliary map
+\begin{equation}\label{eq:lift}
+ F(i;x,y,z)=(i+1;y,z,yz+a_i-x),
+ \qquad i\in\Z/3\Z.
+\end{equation}
+It is a bijection, with inverse
+\begin{equation}\label{eq:lift_inverse}
+ F^{-1}(i;x,y,z)=(i-1;xy+a_{i-1}-z,x,y).
+\end{equation}
+Three lifted steps from phase zero update the first coordinate using
+\(A\), then the second using \(B\), then the third using \(C\).
+Consequently
+\begin{equation}\label{eq:clock}
+ F^3(0;P)=(0;T(P)).
+\end{equation}
+The phase label is part of the auxiliary state and is never discarded
+while taking returns.
+
+If \(T^nP=P\), write \(P=(x_0,x_1,x_2)\) and read successive
+coordinates along the lifted orbit. They form a two-sided periodic
+scalar sequence satisfying
+\begin{equation}\label{eq:recurrence}
+ x_{j+3}+x_j=x_{j+1}x_{j+2}+a_j,\qquad j\in\Z.
+\end{equation}
+Its period divides \(3n\). Define
+\begin{equation}\label{eq:global_max}
+ M=\max_{j\in\Z}|x_j|.
+\end{equation}
+This maximum exists because the scalar sequence is periodic. Moreover,
+\(T^kP=(x_{3k},x_{3k+1},x_{3k+2})\), so these native triples partition
+the scalar positions and
+\begin{equation}\label{eq:max_native}
+ M=\max_{0\le k<n}\height(T^kP),\qquad
+ \height(x,y,z)=\max(|x|,|y|,|z|).
+\end{equation}
+Thus no intermediate factor update can hide a larger maximum than the
+one present among the native orbit's coordinates.
+
+\begin{lemma}[Maximum-height entry]\label{lem:entry}
+Suppose \(M>H+2\) and \(|x_j|=M\) in a periodic scalar sequence
+satisfying \eqref{eq:recurrence}. Then
+\(x_{j-1},x_{j+1}\in\{-1,0,1\}\).
+\end{lemma}
+
+\begin{proof}
+The recurrences at \(j-2\) and \(j-1\) give
+\[
+ x_{j-1}x_j=x_{j+1}+x_{j-2}-a_{j-2},\qquad
+ x_jx_{j+1}=x_{j+2}+x_{j-1}-a_{j-1}.
+\]
+Every coordinate has absolute value at most \(M\), whence
+\[
+ |x_{j-1}|,|x_{j+1}|\le 2+H/M<3.
+\]
+Integrality first bounds both neighbors by two. If
+\(|x_{j+1}|=2\), the second recurrence yields
+\[
+ |x_{j+2}|\ge2M-|x_{j-1}|-H
+             \ge2M-2-H>M,
+\]
+a contradiction. If \(|x_{j-1}|=2\), use the first recurrence in the
+form \(x_{j-2}=x_{j-1}x_j+a_{j-2}-x_{j+1}\) to obtain the same
+contradiction on the left. Both neighbors therefore have absolute
+value at most one.
+\end{proof}
+
+Put \(S=\{-1,0,1\}\). The lemma places the lifted orbit on one of
+the 27 labelled state lines
+\begin{equation}\label{eq:state_line}
+ L_{i,u,v}(t)=(i;u,t,v),\qquad
+ (i,u,v)\in(\Z/3\Z)\times S^2,\quad t\in\Z,
+\end{equation}
+with \(|t|=M\). Entry is justified by a genuine global maximum.
+We will not apply Lemma~\ref{lem:entry} again to a merely large,
+possibly nonmaximal coordinate; the next section's identities and
+Section~\ref{sec:forcing}'s estimates supply the needed propagation.

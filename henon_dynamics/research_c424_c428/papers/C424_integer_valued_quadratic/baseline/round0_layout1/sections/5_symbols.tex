@@ -1,0 +1,116 @@
+\section{The inherited local-word classification and its application}
+\label{sec:symbols}
+
+\begin{lemma}[C412 local-word lemma, reproduced]
+\label{lem:local_words}
+Every cyclic solution of \eqref{eq:local} has
+$t\in\{-1,0,1,3\}$. Up to rotation its signs and offsets are
+exactly the following patterns and their repetitions:
+\begin{equation}
+\begin{array}{c|c|c}
+t&\text{offset word }(d_i)&\text{sign word }(\varepsilon_i)\\ \hline
+-1&(1)&(\varepsilon)\\
+0&(0,0,0,0)&(-1,-1,1,1)\\
+1&(-1,0,0)&(\varepsilon,-\varepsilon,-\varepsilon)\\
+3&(-1,-1)&(-1,1)
+\end{array}
+\qquad \varepsilon\in\{-1,1\}.
+\label{eq:patterns}
+\end{equation}
+\end{lemma}
+\begin{proof}
+This is the local argument of \cite[Section 4]{c412}.
+If $d_i=1$, the two neighboring signs equal $\varepsilon_i$;
+if $d_i=-1$, both equal $-\varepsilon_i$; and if $d_i=0$,
+the two neighboring signs are opposite. Adjacent offsets $1,-1$
+are therefore impossible: the first rule would make their signs
+equal, and the second would make them opposite.
+The offset equation gives
+$t=d_i^2-d_{i-1}-d_{i+1}\in\{-2,-1,0,1,2,3\}$.
+We exhaust these six possibilities.
+
+For $t=-2$, each neighbor sum is $d_i^2+2\le2$, so every
+$d_i=0$; the offset equation would then read $0=2$.
+
+For $t=-1$, an offset $-1$ would have two neighbors $1$,
+which is forbidden. A zero would need a neighboring $1$, but
+that $1$ needs two neighbors $1$, contradicting the zero.
+All offsets are $1$, and their signs are constant.
+
+For $t=0$, an offset $-1$ would need a neighbor $1$, which is
+forbidden. A zero then has two zero neighbors. An offset $1$
+would require one neighbor $1$ and one zero, contradicting the
+rule at the zero. Thus every offset vanishes.
+The sign equation is $\varepsilon_{i+1}=-\varepsilon_{i-1}$,
+whose solutions are precisely the rotations of the four-period
+word in \eqref{eq:patterns}.
+
+For $t=1$, an offset $1$ can have no neighbor $-1$, so its
+two neighbors would have to be zero. Such a zero, adjacent to
+$1$, would require its other neighbor to be $-2$.
+This is impossible. With only offsets $-1,0$ remaining, each
+$-1$ has two zero neighbors and each zero has one zero neighbor
+and one $-1$ neighbor. The offset word is therefore a repetition
+of $(-1,0,0)$. The sign rule at $-1$ gives
+$(\varepsilon,-\varepsilon,-\varepsilon)$, and the rules at
+the two zeros make this triple repeat with the same $\varepsilon$.
+
+For $t=2$, an offset $1$ would need a neighbor $-1$, forbidden.
+A zero would need two $-1$ neighbors. Both those neighbors
+would have sign opposite to that of the zero, hence equal to
+each other, contradicting the sign rule at zero. All offsets
+would consequently be $-1$, giving $-2=-1$ in the offset equation.
+
+For $t=3$, a zero would need neighbors summing to $-3$,
+impossible. Every nonzero offset needs two $-1$ neighbors, so
+$1$ is forbidden. The offsets are all $-1$ and the signs alternate.
+These arguments are cyclic and impose no upper bound on the period.
+\end{proof}
+
+\begin{proposition}[Uniform exhaustion and all-index existence]
+\label{prop:large_classification}
+For every $a\le-146$, Table~\ref{tab:families} gives the entire
+rational periodic locus. For every $k\ge0$, all words in that
+table are valid at their displayed parameters and have their
+stated exact periods, even outside the large-parameter region.
+\end{proposition}
+\begin{proof}
+In the large-parameter region, Lemmas~\ref{lem:annulus} and
+\ref{lem:separation} reduce every rational cycle to
+\eqref{eq:local}. Lemma~\ref{lem:local_words} exhausts its cyclic
+solutions. Recovering
+$x_i=\varepsilon_i\rho+2d_i-1/2$ and using
+\eqref{eq:rho_s} gives
+\begin{equation}
+ a=-\frac{k(k+1)}2-2t-1.
+ \label{eq:t_parameter}
+\end{equation}
+The four values $t=-1,3,1,0$ give respectively the fixed,
+two-, three-, and four-period rows of Table~\ref{tab:families}.
+For a fixed $a\le-146$, the integer $k$ chosen from $N$ is unique
+and $s=4t$ is fixed. Thus at most one of these four rows occurs
+in this large-parameter derivation, and there are at most six
+periodic points at such a parameter.
+
+For existence at every $k\ge0$, take each symbol pattern in
+\eqref{eq:patterns}, set $\rho=k+1/2$ and $s=4t$, and use
+\eqref{eq:t_parameter}. Both sides of \eqref{eq:separation}
+vanish, so \eqref{eq:center_recurrence} and then
+\eqref{eq:recurrence} hold algebraically. No annulus inequality
+is needed for this direction.
+
+The two fixed coordinates differ by $2k+1>0$. The two entries
+of the two-cycle also differ by $2k+1$.
+In the four-cycle the two values are distinct; its doubled-pair
+pattern is not of period two. Each three-cycle has two distinct
+values, hence least period three. The value repeated in the
+first three-cycle is $k\ge0$, while the value repeated in the
+second is $-k-1<0$, so these cycles never coincide. Thus there
+are no small-index degeneracies in Table~\ref{tab:families}.
+\end{proof}
+
+In particular, the only unresolved parameters after the analytic
+argument are $-145\le a\le0$. The separate boundary value
+$a=1$ will be included as a control in the exact certificate.
+The finite range is deduced before the computation, not selected
+by observing when exceptional cycles disappear.

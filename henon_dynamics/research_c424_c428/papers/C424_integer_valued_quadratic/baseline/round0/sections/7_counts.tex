@@ -1,0 +1,113 @@
+\section{Coexistence, sharp bounds, and ordinary return counts}
+\label{sec:counts}
+
+The parameter rows in Table~\ref{tab:families} are not disjoint
+sets of parameters. We first account for all cycles without
+overlap subtractions.
+
+For $b\in\Z$, define the triangular-number indicator
+\begin{equation}
+ \tau(b)=
+ \begin{cases}
+ 1,& b=k(k+1)/2\text{ for an integer }k\ge0,\\
+ 0,&\text{otherwise}.
+ \end{cases}
+ \label{eq:tau}
+\end{equation}
+Equivalently, $b\ge0$ and $8b+1$ is an odd square.
+The triangular values are strictly increasing in $k\ge0$,
+so a fixed row of Table~\ref{tab:families} has at most one
+index at each parameter.
+
+\begin{proposition}[All cycle counts]
+\label{prop:counts}
+Let $C_d(a)$ be the number of oriented rational cycles of exact
+period $d$ under $F_a$. Then
+\begin{align}
+ C_1(a)&=2\tau(1-a),& C_2(a)&=\tau(-7-a),\notag\\
+ C_3(a)&=2\tau(-3-a),&
+ C_4(a)&=\tau(-1-a)+\ind{a\in\{-11,-1\}},\notag\\
+ C_5(a)&=\ind{a\in\{-12,-6,0\}},&
+ C_6(a)&=\ind{a\in\{-5,0\}},\notag\\
+ C_7(a)&=\ind{a\in\{-8,-2\}},&
+ C_9(a)&=\ind{a=-1},\notag\\
+ C_{10}(a)&=\ind{a=-3},&&
+ \label{eq:counts}
+\end{align}
+and $C_d(a)=0$ for every other positive integer $d$.
+\end{proposition}
+\begin{proof}
+Different period rows cannot describe the same cycle.
+The two fixed points and two three-cycles within their rows are
+distinct by Proposition~\ref{prop:large_classification}.
+The exceptional four-cycle at $a=-11$ is
+$(-5,-2,-5,1)$, while its parametric four-cycle is
+$(-5,-5,4,4)$, obtained with $k=4$.
+At $a=-1$ the corresponding words are $(-2,0,1,0)$ and
+$(-1,-1,0,0)$, with $k=0$.
+These pairs are not rotations of one another.
+All other exceptional periods are absent from the parametric table.
+Thus no listed cycles coincide, including at overlapping parameters.
+Reading the complete tables gives \eqref{eq:counts}.
+\end{proof}
+
+\begin{proposition}[Sharp normal-form bound]
+\label{prop:sharp}
+For all $a\in\Z$, $\#\Per(F_a,\Q)\le17$, with equality
+exactly at $a=-1$. Every period in \eqref{eq:periodset} occurs.
+\end{proposition}
+\begin{proof}
+For $a\le-146$, Proposition~\ref{prop:large_classification}
+shows that there are at most six points. For $a\ge2$ there
+are none. The complete finite certificate, whose per-parameter
+counts are displayed in Table~\ref{tab:residual}, has maximum
+seventeen only at $a=-1$. At that parameter the disjoint cycles
+are
+\[
+ (-1,-1,0,0),\quad (-2,0,1,0),\quad
+ (-2,-1,1,1,-1,-2,1,2,1),
+\]
+of lengths four, four, and nine.
+This proves the bound and its exact equality locus.
+Tables~\ref{tab:families} and~\ref{tab:exceptions} exhibit
+every period in \eqref{eq:periodset}, and the exhaustive
+classification excludes all others.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:whole_class}]
+Proposition~\ref{prop:normalization} reduces every polynomial
+in \eqref{eq:class} to one of the stated branches by a bijection
+of $\Q^2$. The half-integral branch is now completely classified
+by Theorem~\ref{thm:half_classification}. The even branch is
+Theorem~\ref{thm:imported}, with at most eight points and
+periods in $\{1,2,3,4\}$. Counts and exact periods are preserved
+by the affine changes, and their inverse formulas give all
+original rational coordinates. Equality at seventeen is
+therefore possible exactly in the odd branch with $A=-1$.
+Every map $F_a$ belongs to \eqref{eq:class}, so all nine periods
+already occur within the full coefficient class.
+\end{proof}
+
+\begin{corollary}[Native return counts and finite-orbit zeta]
+\label{cor:returns}
+For every $a\in\Z$ and $N\ge1$,
+\begin{equation}
+ \#\Fix(F_a^N,\Q)=\sum_{d\mid N}dC_d(a),\qquad
+ \zeta_{F_a,\Q}(z)=\prod_{d\ge1}(1-z^d)^{-C_d(a)}.
+ \label{eq:returns}
+\end{equation}
+The product is finite. For $G_P$ in the odd branch use $a=A$;
+for its even branch use the cycles of Theorem~\ref{thm:imported}.
+\end{corollary}
+\begin{proof}
+A cycle of exact length $d$ contributes all its $d$ points to
+$\Fix(F_a^N,\Q)$ exactly when $d$ divides $N$.
+For the formal power series
+\[
+ \zeta_{F_a,\Q}(z)
+ =\exp\left(\sum_{N\ge1}\frac{\#\Fix(F_a^N,\Q)}{N}z^N\right),
+\]
+substitute the first formula and use
+$\sum_{j\ge1}z^{dj}/j=-\log(1-z^d)$.
+Conjugacy preserves the same return counts for $G_P$.
+\end{proof}

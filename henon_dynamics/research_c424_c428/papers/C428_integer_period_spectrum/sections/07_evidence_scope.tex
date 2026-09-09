@@ -1,0 +1,88 @@
+\section{Execution evidence and limitations}\label{sec:evidence}
+
+The proof has two distinct layers. The analytic lemmas cover every
+degree and diameter and reduce the question to explicit finite
+objects. The finite outputs are computational dependencies, not
+illustrative experiments. Their implementation correctness relies
+on the stated exact algorithms and ordinary Python integer and
+rational arithmetic; no proof-assistant formalization is claimed.
+
+\subsection{Recorded mathematical executions}
+The author record \cite{IH6Working} contains exactly two executions:
+\begin{enumerate}
+\item \texttt{python check\_integer\_periods.py -{}-diameter 10},
+exit code $0$, recorded monotonic time $33.877$ seconds. It examined
+$71068$ restrictions through $D=10$; the proof uses the $35778$
+restrictions through $D=9$. The extra layer is not a substitute
+for the all-diameter reduction.
+\item \texttt{python check\_large\_diameter.py}, exit code $0$,
+recorded monotonic time $0.094$ seconds. It checked the complete
+symbolic endpoint models with the necessary-output pruning.
+\end{enumerate}
+Those times are historical author records, not independently
+reproduced benchmark measurements. The immutable author ledger
+records their output summaries; it does not contain a separate full
+captured transcript for each execution.
+
+The nonauthor reconstruction \cite{IH6Review} executed once with
+the command
+\begin{quote}\texttt{python3 -B independent\_check.py}\end{quote}
+It imported no author implementation and did not execute the
+author scripts. It exited $0$, recorded $1.470911$ seconds, and
+preserved all $611$ output lines, including ten progress records
+and a final JSON object with status \texttt{PASS}. The environment
+was Python $3.12.3$ packaged by Anaconda, GCC $11.2.0$, on Linux
+$5.15.0$ x86-64 with glibc $2.35$. Its changed interpolation order,
+Lagrange congruences, indegree peeling and unpruned identity graphs
+provide an algorithmically different reconstruction. The checker
+had read the expected results, so it was not blind.
+
+It verified all eleven witnesses, four interpolation controls and
+three graph controls. All ten small-diameter counts matched; the
+unpruned large-diameter results were $9020$ generic and $512$
+exceptional graphs. No mathematical execution was added or repeated
+while preparing this manuscript. All three historical runs were
+CPU-only, used no floating-point tolerance or external mathematical
+library, and were separate from PDF builds.
+
+\subsection{Exact artifacts}
+The author files reside in \path{continuation_round6/arithmetic/}
+relative to the accompanying batch root: the frozen contract, full
+proof, source audit, \path{RUN_LOG.md}, and the two named scripts.
+The independent contract, code, full output, run receipt and source
+spot-check are in \path{continuation_round6/IH6_REVIEW/}.
+The executable identities used by the accepted proof are
+\begin{quote}\footnotesize
+Author small-diameter script:\par
+\path{58fae6478013c34dcbca9a2b28bcacf675dfbcc28a84ac813197ecc7f1a5f2ef}\par
+Author large-diameter script:\par
+\path{d28a7f77e02b5d336ef790d6eeedfd809da4e139fb0d80eca53373911c2c69d4}\par
+Independent checker:\par
+\path{babc84a2424ca6e45453e794a7bb9d7670c0c739c477c90f0b292d71ed40a5ba}\par
+Independent full output:\par
+\path{9a3767996763dbff0ef049384af06f33bca14c271e71902a4311fc0be419f85a}
+\end{quote}
+These SHA-256 values identify bytes; they do not by themselves
+establish mathematical correctness. The complete argument and
+reconstruction pseudocode are typeset here so that a local Markdown
+link is not substituted for the central proof.
+
+\subsection{Boundaries}
+The theorem concerns one factor, integer coefficients, integer
+points and $a=\pm1$. It does not classify rational nonintegral
+integer-valued coefficients, arbitrary rational points, nonunit
+Jacobian, number-field points or compositions of factors. It does
+not give a per-polynomial atlas, a simultaneous-period statement,
+a sharp total-point bound or an Euler interpretation of the
+ordinary periods. No bad Euler factor, root number, spectral
+determinant or Hilbert--P\'olya conclusion is obtained.
+
+This manuscript was prepared with AI assistance. The originating
+proof and reconstruction received current-team internal nonauthor
+review, not human peer review or a global priority certification.
+The bibliography audit distinguishes original statements, accessed
+versions and unpublished working sources; unperformed retraction,
+venue and competing-interest checks are not silently certified.
+The mathematical increment is the complete arbitrary-degree
+extension of an existing endpoint framework, with the two signs
+handled together.

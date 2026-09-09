@@ -1,0 +1,75 @@
+\section{Why the independent reconstruction is equivalent}\label{app:independent}
+
+\subsection{Different interpolation order and criterion}
+The independent checker orders an alphabet by alternating its
+smallest and largest remaining elements. For any such ordering
+$e_0,\ldots,e_{k-1}$, the highest coefficient of the interpolant
+on the first $j+1$ nodes is the Lagrange expression
+\begin{equation}\label{eq:lagrange}
+ c_j=\sum_{i=0}^j
+ \frac{v(e_i)}{\prod_{\substack{0\le l\le j\\l\ne i}}(e_i-e_l)}.
+\end{equation}
+The weights are computed as exact fractions, cleared to a common
+denominator, and tested by an integer congruence while enumerating
+the next value from $E+aE$. No Newton-basis polynomial is expanded.
+
+To justify this different test, let $r_j$ interpolate the first
+$j+1$ values and let $r_{j-1}$ interpolate the preceding prefix.
+The difference vanishes at the first $j$ nodes and has degree at
+most $j$, so
+\[
+ r_j-r_{j-1}=c_j\prod_{i<j}(t-e_i).
+\]
+Starting with the constant prefix, induction proves that all
+$c_j\in\ZZ$ imply $r_j\in\ZZ[t]$. Conversely, an integral realizing
+polynomial has an integral monic-division remainder at each prefix,
+so every $c_j$ is integral. This proves equivalence to
+Lemma~\ref{lem:newton} without requiring increasing node order.
+
+\subsection{Indegree-zero peeling instead of path traversal}
+For a finite partial-function graph, the checker calculates
+indegrees and repeatedly removes an indegree-zero vertex, reducing
+the indegree of its successor if it has one. After this process,
+every remaining vertex has indegree at least one and outdegree
+at most one. No remaining edge points to a removed vertex: that
+vertex could not have been removed while such a predecessor remained.
+Counting edges now forces every remaining vertex to have exactly
+one incoming and one outgoing edge. The remaining graph is
+therefore a disjoint union of directed cycles. Reading them from
+their smallest unread state and retaining full coordinate support
+gives exactly the same cycle objects as Lemma~\ref{lem:graph}.
+
+The actual interpolation controls were $(0,1,2)\mapsto(0,1,4)$
+and $(4,0,2)\mapsto(8,0,4)$, which pass, together with
+$(0,2)\mapsto(0,1)$ and $(0,2,4)\mapsto(0,0,4)$, which fail.
+For the graph controls, encode the four states of a two-letter
+alphabet by $0,1,2,3$. The arrow lists
+\[
+ (\mathrm{EXIT},2,1,3),\qquad
+ (1,2,3,\mathrm{EXIT}),\qquad (1,2,1,0)
+\]
+produce, respectively, the full-support two-cycle $(1,2)$, no
+cycle, and the same two-cycle with incoming tails. The fixed state
+$3$ in the first control is excluded by the full-support condition.
+These checks test a distinction that simple orbit-return assertions
+would not catch.
+
+\subsection{Unpruned roots and interpretation of the output}
+The independent symbolic implementation builds identity arrows
+directly from coefficient-pair equality, then solves every
+nonidentity edge equation for its integer root. It does not import
+the author graph function, apply the author output pruning or use
+a numerical representative for the generic graph. Left and right
+templates are both explicitly enumerated rather than removed by
+an assumed symmetry. This explains why it checks $512$ extra
+exceptional graphs while agreeing with the author's exclusion.
+
+The independent code and complete output identify this actual
+reconstruction. The full-support cycle counts refer to instances
+in restriction graphs, not distinct cycles after identifying all
+polynomials with overlapping restrictions. In particular, these
+counts cannot be converted into a total-point bound for the
+original infinite family. The reconstruction validates the finite
+certificates conditional on the analytic reduction proved above;
+it does not replace that reduction or constitute a formal proof
+assistant certificate.

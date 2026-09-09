@@ -1,0 +1,615 @@
+          Integral periodic orbits of a general Fricke return word
+                                                Anonymous
+
+                                            9 September 2026
+
+
+                                                  Abstract
+          We give an effective classification of the integral periodic points of the ordered return map
+      obtained by applying the three Vieta involutions of a Fricke cubic once each. For every ordered
+      integer coefficient triple (A, B, C), the classification holds on the entire integer lattice and si-
+      multaneously on every invariant level, including singular levels. Put H = max(|A|, |B|, |C|) and
+      R = 100(H + 1). The periodic locus is the union of at most 27 explicitly constructed affine
+      integer lines and the cyclic vertices of an exact partial map on [−R, R]3 ∩ Z3 . Every line has a
+      certified return time at most 54 in the original three-involution clock. A global maximum on a
+      periodic scalar sequence forces two neighboring coordinates into {−1, 0, 1}; above the threshold,
+      successive transitions in a 27-state phase-labelled graph are forced. Bijective affine parameter
+      maps then identify every large periodic orbit with a whole periodic line. Polynomial greatest
+      common divisors determine the least periods and all exceptional line parameters, while a termi-
+      nating finite rule determines the residual cycles. Each invariant level meets each line in at most
+      two points, giving at most 54 + (2R + 1)3 periodic integer points per level and effective ordinary
+      cycle counts. The bounds are not claimed sharp, and the residual procedure is proved rather
+      than reported as an executed census.
+
+
+1    The classification and its scope
+An integral periodic orbit of one polynomial automorphism is a different object from a finite orbit of
+the group containing that automorphism. For Fricke cubics this distinction matters: the geometry
+of the Vieta group provides reduction methods, but the periodic points of one prescribed word
+must still be exhausted in that word’s own time. We study the word containing the three Vieta
+involutions in a fixed order. The result separates its unbounded integral periodic families from a
+bounded, effectively decidable remainder, with one bound for all levels.
+    Fix an arbitrary ordered triple (A, B, C) ∈ Z3 , and define
+                           K(x, y, z) = x2 + y 2 + z 2 − xyz − Ax − By − Cz.                                 (1.1)
+The Vieta involutions are
+                                      sx (x, y, z) = (A + yz − x, y, z),
+                                      sy (x, y, z) = (x, B + xz − y, z),                                     (1.2)
+                                      sz (x, y, z) = (x, y, C + xy − z).
+Our native map is
+                                              T = sz ◦ sy ◦ sx ,                                             (1.3)
+so the rightmost factor acts first. One application of T , not one individual involution, is one unit of
+time. Each factor preserves K, and each is a polynomial involution of Z3 . In particular, no point
+is removed when a level K = D is singular.
+
+                                                       1
+   Write PerZ (T ) = {P ∈ Z3 : T n P = P for some n ≥ 1}, and set
+
+                      H = max(|A|, |B|, |C|),       B0 = H + 1,        R = 100B0 ,
+                                                                                                    (1.4)
+                              QR = [−R, R]3 ∩ Z3 ,       NR = (2R + 1)3 .
+
+For a periodic point, its least period is its first positive return time. A certified return time need
+not be the least period.
+
+Theorem 1.1 (All-coefficient, all-level integral classification). For every ordered (A, B, C) ∈ Z3 ,
+there is an explicit construction of a union L of at most 27 affine integer lines such that:
+
+  1. Each line has a parametrization P (t) = p + tv, with p, v ∈ Z3 , containing a coordinate of slope
+     1 or −1. It consists entirely of periodic points and has a certified native return time r ≤ 54:
+     T r P (t) = P (t) for all t ∈ Z.
+
+  2. If CR denotes the cyclic vertices of the exact partial map T : QR 99K QR , then
+
+                                              PerZ (T ) = L ∪ CR .                                  (1.5)
+
+      Every periodic orbit not contained in L lies entirely in QR .
+
+  3. A finite parameterwise procedure determines coincident lines, all integral intersections, the
+     generic least period and every exceptional parameter on each line, and all remaining finite
+     cycles. Thus all least periods and their coexistence are effective. Every native least period is
+     at most max(54, NR ).
+
+  4. For every D ∈ Z, the level K = D contains at most 54 + NR periodic integer points. Their
+     exact least periods and their ordinary primitive-cycle counts are effectively determined.
+
+The construction uses the 27-state graph of Section 3 and its affine-return test. Neither the numer-
+ical bounds nor the resulting algorithmic complexity are asserted optimal.
+
+    The line part is a finite list of free integer parametrizations. The core part is a proved terminating
+rule for the given coefficients, not a table that has been computed for every coefficient triple. There
+is no empirical parameter window or period cutoff in Theorem 1.1. Its proof is given completely
+below.
+
+1.1   Related results and the contribution retained here
+Shin’s reduction theory uses height graphs and low-coordinate Vieta identities to study integral
+group orbits [5, Theorems 1.1–1.3 and §2]. In particular, the orbit-equivalence algorithms con-
+cern the full Vieta group and the mapping class group. Remark 3.1 in the accepted manuscript
+explicitly removes the boundary-trace relations between the coefficients. Independent coefficients
+and the height-graph and low-coordinate mechanisms are therefore prior work, not an extension
+claimed here. The integral change (x, y, z) 7→ (−x, y, z) identifies our sign convention with Shin’s,
+with parameters (α1 , α2 , α3 , β) = (−A, B, C, D), and conjugates the respective ordered involutions.
+The additional assertion proved here is the fixed-word, level-uniform line/core exhaustion, not
+decidability of whole-group orbit equivalence.
+    Cantat studies positive-entropy automorphisms on the same cubic family [3, Proposition 2.2 and
+§3]. The fixed-fibre escape neighborhoods in that analysis imply compact containment of periodic
+points, and hence integral finiteness on a fixed fibre. This consequence is already available and is
+
+
+                                                    2
+Input or comparison    Scope already available                        Scope proved here
+Shin [5]               Independent coefficients; height and           Exhaustion for the prescribed
+                       low-coordinate group-orbit reduction           three-factor word, uniformly in the level
+Cantat [3]             Fixed-fibre dynamics and the resulting         An explicit residual radius depending
+                       integral finiteness                            only on A, B, C
+C421 [2]               The complete equal-forcing scalar              Phase-dependent forcing, including
+                       classification                                 unequal ordered coefficients
+Elementary             Affine returns, finite graphs, polynomial      Their applicability to every remaining
+algorithms             gcds and cycle products                        point, by the global exhaustion proof
+
+Table 1: Scope comparison. The last column is one integrated classification, not a list of indepen-
+dently new algorithmic ingredients.
+
+
+not our novelty claim. It does not furnish the particular level-independent radius or integer line
+construction used here. Our periodic lines cross invariant levels; they are not invariant curves inside
+a fixed cubic surface, so they do not conflict with Cantat’s Corollary 3.4.
+    The equal-forcing slice is also prior work. The local working manuscript C421 classifies all
+integer periodic orbits of Fa (x, y, z) = (y, z, yz + a − x), including its exceptional families and
+computer-assisted finite core [2]. When A = B = C = a, our map is exactly Fa3 . That slice
+is not counted as a new classification here, and its finite certificate is not an input to our proof.
+The phase-dependent argument below handles every ordered coefficient triple without importing a
+homogeneous difference identity or assuming a reversal symmetry of its forcing sequence.
+    Other nearby questions have different observables. Vishkautsan studies strong residual periodic-
+ity for products of two reflections on the unforced Markoff surface, with periodic conics explaining
+the local–global phenomenon [6]. Abboud proves rigidity statements comparing periodic sets of
+loxodromic affine-surface automorphisms [1, Theorem A]. Planat, Chester and Irwin discuss se-
+lected algebraic Painlevé VI solutions in their study of Fricke surfaces [4]. These are contextual
+comparisons, not dependencies of the present exhaustion proof.
+    The mathematical step is the implication that every periodic orbit above R belongs to a finite
+union of whole periodic lines. We prove it by a global-maximum entry, forced finite-state propa-
+gation and backward exhaustion using bijective line maps. The source comparisons above concern
+the inspected statements and are not a worldwide priority certificate. Section 2 fixes the clock
+and maximum; Sections 3–5 prove the line exhaustion; Sections 6–7 give the exact residual and
+level-count procedures.
+
+
+2    The phase lift and entry at a global maximum
+Set a0 = A, a1 = B, a2 = C, with all forcing subscripts interpreted modulo three. Introduce the
+auxiliary map
+                     F (i; x, y, z) = (i + 1; y, z, yz + ai − x), i ∈ Z/3Z.               (2.1)
+It is a bijection, with inverse
+
+                             F −1 (i; x, y, z) = (i − 1; xy + ai−1 − z, x, y).                           (2.2)
+
+Three lifted steps from phase zero update the first coordinate using A, then the second using B,
+then the third using C. Consequently
+
+                                         F 3 (0; P ) = (0; T (P )).                                      (2.3)
+
+                                                     3
+The phase label is part of the auxiliary state and is never discarded while taking returns.
+   If T n P = P , write P = (x0 , x1 , x2 ) and read successive coordinates along the lifted orbit. They
+form a two-sided periodic scalar sequence satisfying
+
+                                xj+3 + xj = xj+1 xj+2 + aj ,            j ∈ Z.                     (2.4)
+
+Its period divides 3n. Define
+                                                  M = max |xj |.                                   (2.5)
+                                                        j∈Z
+
+This maximum exists because the scalar sequence is periodic. Moreover, T k P = (x3k , x3k+1 , x3k+2 ),
+so these native triples partition the scalar positions and
+
+                       M = max ht(T k P ),             ht(x, y, z) = max(|x|, |y|, |z|).           (2.6)
+                             0≤k<n
+
+Thus no intermediate factor update can hide a larger maximum than the one present among the
+native orbit’s coordinates.
+
+Lemma 2.1 (Maximum-height entry). Suppose M > H + 2 and |xj | = M in a periodic scalar
+sequence satisfying (2.4). Then xj−1 , xj+1 ∈ {−1, 0, 1}.
+
+Proof. The recurrences at j − 2 and j − 1 give
+
+                  xj−1 xj = xj+1 + xj−2 − aj−2 ,              xj xj+1 = xj+2 + xj−1 − aj−1 .
+
+Every coordinate has absolute value at most M , whence
+
+                                      |xj−1 |, |xj+1 | ≤ 2 + H/M < 3.
+
+Integrality first bounds both neighbors by two. If |xj+1 | = 2, the second recurrence yields
+
+                          |xj+2 | ≥ 2M − |xj−1 | − H ≥ 2M − 2 − H > M,
+
+a contradiction. If |xj−1 | = 2, use the first recurrence in the form xj−2 = xj−1 xj + aj−2 − xj+1 to
+obtain the same contradiction on the left. Both neighbors therefore have absolute value at most
+one.
+
+    Put S = {−1, 0, 1}. The lemma places the lifted orbit on one of the 27 labelled state lines
+
+                     Li,u,v (t) = (i; u, t, v),       (i, u, v) ∈ (Z/3Z) × S 2 ,   t ∈ Z,          (2.7)
+
+with |t| = M . Entry is justified by a genuine global maximum. We will not apply Lemma 2.1 again
+to a merely large, possibly nonmaximal coordinate; the next section’s identities and Section 4’s
+estimates supply the needed propagation.
+
+
+3    The exact 27-state graph
+The graph GA,B,C has state set (Z/3Z) × S 2 . Each state s = (i, u, v) has at most one outgoing edge.
+An edge carries a lifted length hs and an affine integer parameter map ϕs . The edge identity is
+
+                                   F hs Ls (t) = Ls′ (ϕs (t))       (t ∈ Z),                       (3.1)
+
+where s′ is its terminal state. Table 2 defines all edges; the conditions are part of the definition.
+
+                                                        4
+Type        Existence condition                              Terminal state s′        hs   ϕs (t)
+I           v = ±1, b = ai − u, c = vb + ai+1 ∈ S            (i + 2, v, c)            2    vt + b
+II          v = 0, ai = u, ai+2 ∈ S                          (i, 0, ai+2 )            3    −t + ai+1
+
+Table 2: The complete transition rule. Phases and forcing subscripts are taken modulo three. No
+edge is assigned in any other case.
+
+
+Lemma 3.1 (Exact edge maps). Every edge in Table 2 satisfies (3.1) for all integer parameters.
+Its map ϕs (t) = ϵs t + δs has ϵs ∈ {1, −1} and |δs | ≤ B0 . Every intermediate image F r Ls (Z),
+0 ≤ r < hs , is an affine integer line with an injective parametrization containing a coordinate of
+slope 1 or −1.
+
+Proof. For Type I, direct substitution gives
+
+                         F (i; u, t, v) = (i + 1; t, v, vt + b),
+                        F 2 (i; u, t, v) = (i + 2; v, vt + b, v(vt + b) + ai+1 − t)
+                                        = (i + 2; v, vt + b, c).
+
+The last equality uses v 2 = 1. If c ∈ S, this is precisely the required terminal line. The additional
+intermediate line has triple (t, v, vt + b).
+    For Type II, the assumptions v = 0 and ai = u give
+
+                                   F (i; u, t, 0) = (i + 1; t, 0, 0),
+                                  F 2 (i; u, t, 0) = (i + 2; 0, 0, −t + ai+1 ),
+                                  F 3 (i; u, t, 0) = (i; 0, −t + ai+1 , ai+2 ).
+
+The final triple is the stated terminal line exactly when ai+2 ∈ S. The displayed intermediate
+triples prove all the line assertions. Finally, |ai − u| ≤ H + 1 = B0 and |ai+1 | ≤ H ≤ B0 , proving
+the translation bounds.
+
+    The edge identities concern whole lines, not asymptotic expansions. In particular the affine
+parameter maps are bijections of Z. An omitted edge need not rule out a small periodic parameter
+at its state. The uniform height argument below rules it out only for a periodic orbit whose current
+parameter remains sufficiently close to the global maximum.
+
+
+4      Uniform forcing above the residual radius
+Lemma 4.1 (Forced transition). Let a lifted periodic orbit have global scalar maximum M > 100B0 .
+Suppose it visits Li,u,v (t) with
+
+                                     |t| ≥ M − jB0 ,          0 ≤ j ≤ 27.                              (4.1)
+
+Then the outgoing edge from (i, u, v) in GA,B,C exists. The parameter at its terminal state has
+absolute value at least M − (j + 1)B0 .
+
+Proof. All scalar coordinates on the orbit are bounded by the same M . We check each way in
+which Table 2 could omit an edge.
+
+
+
+                                                        5
+     If v = ±1, put b = ai − u, t′ = vt + b and c = vb + ai+1 . The two-step identity in Lemma 3.1
+still holds without assuming c ∈ S, and
+
+                                        |t′ | ≥ |t| − B0 ≥ M − 28B0 .
+
+If |c| ≥ 2, the next scalar coordinate, following (v, t′ , c), is t′ c + ai+2 − v. Its magnitude is at least
+
+                               2(M − 28B0 ) − H − 1 = 2M − 57B0 > M.                                   (4.2)
+
+This contradicts the global maximum. Hence c ∈ S, and a Type I edge exists.
+   Now suppose v = 0. Write b = ai − u and t′ = −t + ai+1 , so once more |t′ | ≥ M − 28B0 . Starting
+with (u, t, 0), the next scalar coordinates are exactly
+
+                          b,     t′ ,     bt′ + ai+2 ,       t′ (bt′ + ai+2 ) − b + ai .               (4.3)
+
+There are three exhaustive possibilities for b.
+   If |b| ≥ 2, the third coordinate in (4.3) has magnitude at least
+
+                               2(M − 28B0 ) − H = 2M − 56B0 − H > M,
+
+which is impossible. If |b| = 1, that coordinate has magnitude at least M − 29B0 . Since ai − b = u
+and |u| ≤ 1 ≤ B0 , the fourth coordinate has magnitude at least
+
+                                  (M − 28B0 )(M − 29B0 ) − B0 > M.                                     (4.4)
+
+To verify the strict inequality, both factors exceed M/2, and M > 100B0 ≥ 100 implies M 2 /4−B0 >
+M 2 /4 − M/100 > M . Thus |b| = 1 is also impossible.
+    It follows that b = 0, or ai = u. If |ai+2 | ≥ 2, the fourth coordinate in (4.3) has magnitude at
+least
+                                        2(M − 28B0 ) − H > M,
+another contradiction. Therefore ai+2 ∈ S, exactly the remaining Type II condition. For either
+edge type the new parameter is ϵt + δ, with |δ| ≤ B0 , and hence is bounded below by M − (j + 1)B0
+in absolute value.
+
+Proposition 4.2 (Entry into a graph cycle). Every native periodic orbit of height greater than R
+has a lift that reaches a directed cycle of GA,B,C .
+
+Proof. By (2.6), its global scalar maximum satisfies M > R = 100B0 > H + 2. Lemma 2.1
+supplies a state-line point with parameter of absolute value M . Apply Lemma 4.1 successively for
+j = 0, 1, . . . , 26. This produces 27 exact transitions and 28 visited states. The state set has size 27,
+so a state repeats. Since each state has at most one outgoing edge, the segment between its first
+two appearances is a directed cycle, and the path has entered that cycle.
+
+    This is a finite propagation argument, not an indefinitely iterated height estimate. It uses the
+lower bound only until a state repeats. After the repetition, the exact whole-line identities control
+all subsequent returns.
+
+
+
+
+                                                         6
+5     Affine returns and exhaustion by whole lines
+Let C be a directed cycle of GA,B,C . Write
+                                                         X
+                                                 ℓC =          hs .                                          (5.1)
+                                                         s∈C
+
+The edge phase changes are their lifted lengths modulo three. Returning to the same state therefore
+forces 3 | ℓC . At any chosen base state s ∈ C, composing the edge maps gives
+
+                        F ℓC Ls (t) = Ls (ϵC t + βC ),           ϵC ∈ {1, −1},   βC ∈ Z.                     (5.2)
+
+Call C retained if ϵC = −1, or if ϵC = 1 and βC = 0. Moving the base state conjugates the return
+map by a bijective affine parameter map, so retention is independent of the chosen base state.
+
+Parameter return             Decision and reason                                   Certified native return
+t 7→ t                       Retain: identity on the entire line                   rC = ℓC /3
+t 7→ −t + βC                 Retain: the square is the identity                    rC = 2ℓC /3
+t 7→ t + βC , βC ̸= 0        Do not retain: no integer parameter is                None
+                             periodic under translation
+
+Table 3: The affine-return test used in the construction. The listed returns are not assertions about
+generic or exceptional least periods.
+
+
+Lemma 5.1 (Periodic cycle lines). A nonretained cycle contains no F -periodic point on its state
+lines. Every integer point on a retained cycle’s state lines and all their intermediate images is
+F -periodic, with a return time ℓC or 2ℓC as in Table 3.
+
+Proof. For a nonretained cycle the iterates of the parameter at the base state are t + kβC , with
+βC ̸= 0. They are unbounded, whereas every subsequence of a periodic orbit is bounded. For
+a retained cycle the affine return has order at most two, so (5.2) fixes every parameter after the
+stated number of lifted steps. The same return fixes every intermediate image because powers of
+F commute. The edge identities transport the assertion around the cycle.
+
+    For all retained cycles form the union
+                                                [            [
+                                      Le =                         F r Ls (Z).                               (5.3)
+                                             C retained 0≤r<hs
+                                                s∈C
+
+Let L ⊂ Z3 be the phase-zero part of this union, with the phase label omitted. The use of every
+intermediate image in (5.3) is necessary: state lines alone need not form an invariant set for one
+lifted step.
+
+Lemma 5.2 (Backward exhaustion). The union Le satisfies F (L) e = F −1 (L).
+                                                           e =L         e Any point whose
+forward orbit reaches Le already belongs to L.
+                                            e
+
+Proof. Along an edge, F takes each intermediate image onto the next. At its last image, (3.1) and
+ϕs (Z) = Z show that the image is the entire next state line, not a proper subset. As the edges run
+around cycles, every line image in the union has a predecessor there. Thus F (L) e = L.
+                                                                                      e Bijectivity
+of F on the ambient phase-labelled lattice gives the inverse-image equality. Repeatedly applying it
+proves the final assertion.
+
+                                                         7
+Proposition 5.3 (Uniform line exhaustion). Every native periodic orbit of height M > R is
+contained in L. The set L is a union of at most 27 affine integer lines, each having a certified
+native return time at most 54.
+
+Proof. By Proposition 4.2, the lifted orbit reaches a directed graph cycle. Since the orbit is periodic,
+Lemma 5.1 excludes a nonretained cycle. It therefore reaches L.      e Lemma 5.2 puts the entire
+preceding orbit in the same union, including any graph path before entry into the cycle. Its native
+phase-zero points lie in L.
+    Distinct directed cycles of a graph with outdegree at most one have disjoint state sets. A cycle
+of lifted length ℓC has exactly ℓC /3 phase-zero positions among its intermediate images, because
+the phase advances by one at each lifted step. Every such position is an affine line by Lemma 3.1.
+Consequently the number of phase-zero lines, before coincidences, is at most
+                                     X       ℓC      X
+                                                ≤            |C| ≤ 27.
+                                  C retained
+                                              3   C retained
+
+Also ℓC ≤ 3|C| ≤ 81. Dividing the lifted returns in Lemma 5.1 by three, using (2.3), gives rC = ℓC /3
+or rC = 2ℓC /3 ≤ 54.
+
+   The assertion concerns pointwise periodicity along each line, not setwise invariance of each
+separate line under T . The union L is T -invariant, and its points can pass between different lines
+before returning. Line coincidences only lower the bound of 27; they create no missing family.
+
+
+6     The finite core, least periods and disjoint output
+6.1   An exhaustive finite residual rule
+Define a directed graph on QR by assigning an arrow P → T (P ) exactly when T (P ) ∈ QR . Let
+CR be its cyclic vertices. All operations use the integer polynomial map (1.2)–(1.3); no reduction
+modulo a prime or approximate orbit is involved.
+
+Lemma 6.1 (Finite-core termination). The directed cycles in this graph are exactly the native
+periodic orbits contained in QR . From any seed in QR , exact iteration either exits the box or
+repeats within NR + 1 visited vertices. If a first repetition occurs before exit, the repeated vertex is
+the initial seed.
+
+Proof. A directed cycle in the partial graph is a cycle of the actual map, and a native periodic orbit
+contained in the box supplies the converse. There are NR vertices, so a nonexiting path repeats
+among its first NR + 1 vertices. Write it as P0 , P1 , . . ., with Pj = T (Pj−1 ), and suppose its first
+repetition is Pk = Pj , where 0 ≤ j < k. If j > 0, then T (Pk−1 ) = T (Pj−1 ); injectivity of T forces
+Pk−1 = Pj−1 , an earlier repetition. Hence j = 0.
+
+   An exit only rejects the seed as a member of a cycle entirely contained in the box. A periodic
+point on a retained line can leave the box and later return. That point is already accounted for by
+L; no claim of nonperiodicity is inferred from its box exit.
+
+Proof of the exhaustive union in Theorem 1.1. Every point on L is periodic by Lemma 5.1, and
+every point of CR is periodic by Lemma 6.1. Conversely, a periodic orbit not contained in L cannot
+have height greater than R, by Proposition 5.3. All its points are therefore in QR , and the orbit is
+one of the finite graph’s directed cycles. This proves (1.5).
+
+
+                                                   8
+6.2   Integral lines and their intersections
+Every phase-zero line supplied by (5.3) has an integer affine parametrization P (t) = p+tv containing
+a coordinate of slope 1 or −1. If a rational point P (q), q ∈ Q, has all integer coordinates, that
+coordinate implies q ∈ Z. Thus P (Z) is precisely the set of integer points on the corresponding
+rational affine line, and P is injective.
+    Coincidence of two rational affine lines is decided by linear equations over Q. Coincident lines
+have the same full integer point set, so one parametrization may be discarded. Two distinct lines
+have at most one intersection. Solving P (t) = P ′ (t′ ) and checking t, t′ ∈ Z therefore finds all
+integral intersections. The same linear membership test decides which finite-core points are on the
+retained lines.
+
+6.3   Exact least-period labels
+Proposition 6.2 (Generic periods and every exception). For a constructed line P (t) with certified
+return r ≤ 54, the least native period is effectively determined for every integer parameter. It is
+constant outside an effectively computable finite set, and all exceptional parameters are determined
+exactly.
+
+Proof. Every point on the line is fixed by T r , so its least period divides r. For each positive divisor
+d | r, form the three integer polynomials
+
+                             ∆d,k (t) = T d P (t) − P (t) k ,
+                                                         
+                                                                k = 1, 2, 3.                       (6.1)
+
+The integer parameters of period dividing d are exactly their common zeros. If all three polynomials
+vanish identically, every integer parameter qualifies. Otherwise, take the gcd over Q[t] of the
+nonzero polynomials. Its common integer roots form a finite set. This set can be found by exact
+rational polynomial arithmetic and the rational-root theorem: remove any power of t, record zero if
+applicable, clear denominators, and test the finitely many integer divisors of the remaining nonzero
+constant term. A nonzero constant gcd gives the empty set.
+    Let E be the union of the finite root sets from those divisors whose polynomial vector is not
+identically zero. At least the divisor r has identically zero vector. The smallest divisor with this
+property is the least period for every t ∈
+                                         / E. For t ∈ E, choose the smallest divisor for which (6.1)
+vanishes at that parameter. This determines the exact least period, including every exception.
+
+    For a completely disjoint presentation, order the distinct lines and assign each integral intersec-
+tion to the first line containing it. Omit its parameter from later lines; there are only finitely many
+such omissions. Apply Proposition 6.2 to the retained parameters and delete all line points from CR .
+The latter deletion removes entire cycles because L is invariant. The remaining finite-graph cycles
+have least period equal to their number of distinct vertices. In particular, their periods are at most
+NR , proving the least-period bound in Theorem 1.1. Intersections cannot receive contradictory
+periods: each label is the first return of the same actual point.
+
+Procedure 6.3 (Complete output for fixed coefficients). Given (A, B, C) ∈ Z3 , the following finite
+procedure describes the entire periodic locus and its least periods.
+
+  1. Construct the 27 states and every edge in Table 2. Find the directed cycles; compose their
+     parameter maps and apply Table 3.
+
+  2. For each retained cycle, list its phase-zero intermediate line images. Attach the certified
+     return rC , and discard coincident lines using exact linear algebra.
+
+                                                     9
+    3. Apply (6.1) for every divisor of each attached return. Record the generic least-period label and
+       the finite exceptional parameter list. Resolve line intersections by the preceding disjointness
+       convention.
+
+    4. Set R = 100(1 + max(|A|, |B|, |C|)). For each seed of QR , follow T until exit or first return.
+       Record a returning cycle only once, for example from its lexicographically smallest vertex.
+       Remove every cycle contained in L.
+
+    5. Output the line parametrizations with their exact labels and finite exclusions, and the remain-
+       ing finite cycles with their exact lengths. For a specified level, apply the quadratic filtering
+       in Section 7 before the final point count.
+
+    Steps 1–3 involve a fixed finite graph and finitely many polynomial calculations; Step 4 ter-
+minates by Lemma 6.1. The procedure therefore decides more than whether a proposed point is
+periodic: it outputs the complete locus for the given coefficients, including simultaneously occurring
+periods. Its box can be large, and we make no practical running-time guarantee. No execution of
+this procedure is needed to establish its termination or exhaustive character.
+
+
+7     All invariant levels and ordinary cycle counts
+Define a phase-dependent polynomial
+
+                       Ki (x, y, z) = x2 + y 2 + z 2 − xyz − ai x − ai+1 y − ai+2 z.              (7.1)
+
+If Fi (x, y, z) = (y, z, yz + ai − x), direct expansion gives
+
+                                             Ki+1 ◦ Fi = Ki .                                     (7.2)
+
+One way to check it is to put w = yz + ai − x. The part of Ki+1 (y, z, w) involving w is
+
+                    w2 − yzw − ai w = w(w − yz − ai ) = −xw = x2 − xyz − ai x.
+
+Adding the remaining terms gives (7.1). Since K0 = K, three applications also verify K ◦ T = K.
+  On a state line the restriction is
+
+                       Ki (u, t, v) = t2 − (uv + ai+1 )t + u2 + v 2 − ai u − ai+2 v.              (7.3)
+
+It is monic quadratic in the integer parameter. By (7.2), every intermediate line image has
+the same invariant polynomial when parametrized by its originating state parameter. An affine
+reparametrization of slope 1 or −1 also leaves the leading coefficient equal to one.
+
+Corollary 7.1 (Uniform finite counts on a level). For every (A, B, C, D) ∈ Z4 ,
+                                                           
+                                  # PerZ (T ) ∩ {K = D} ≤ 54 + NR .
+
+The points in this set and their least native periods are effective.
+
+Proof. For each retained line, set its monic quadratic restriction equal to D. There are at most
+two integer solutions, each giving a single point because the parametrization is injective. Thus at
+most 27 lines contribute at most 54 points before deduplication. There are at most NR finite-core
+vertices. Solving the quadratic equations and filtering the finite core by K(P ) = D, with the
+disjointness and least-period rules of Section 6, proves both claims.
+
+                                                    10
+    This finishes the proof of Theorem 1.1. The level bound includes every affine singular point;
+the proof never uses smoothness, positivity, nonzero coordinates or a genericity restriction on the
+coefficients.
+    For completeness, let cd (A, B, C, D) be the number of primitive native cycles of length d on the
+integral level K = D. Here a primitive cycle means one orbit of least period d, counted once rather
+than once per vertex. All these integers are effective, nonnegative, and zero for all but finitely many
+d. The ordinary fixed-point counts are
+                                                                     X
+                     #{P ∈ Z3 : K(P ) = D, T n P = P } =                    d cd (A, B, C, D).     (7.4)
+                                                                     d|n
+
+Consequently the ordinary dynamical zeta function on this integral level is the finite product
+                                                                                        
+                                                    X                              zn
+                          ζA,B,C,D (z) = exp             # Fix T n |{K=D}∩Z3            
+                                                    n≥1
+                                                                                    n
+                                                                                                   (7.5)
+                                                          d −cd (A,B,C,D)
+                                          Y
+                                      =       (1 − z )                      .
+                                          d≥1
+
+Indeed, a primitive d-cycle contributes d fixed points exactly for iterates divisible by d, and its
+contribution to the exponent is m≥1 z dm /m = − log(1 − z d ).
+                                  P
+
+    Equation (7.5) is a fibrewise ordinary counting identity. If a retained line is present, some iterate
+fixes infinitely many integer points on the whole lattice. In that case the usual finite-fixed-count
+definition does not give an ordinary all-lattice zeta function. No weighting, intersection multiplicity
+or change of time is used to replace those infinite counts.
+
+
+8    Limitations and evidence statement
+The classification is exact for the specified ordered word and integer domain. It gives a finite
+construction for every coefficient triple, not a sharp universal table of periods or a complexity-
+efficient implementation. The constants 27, 54 and 100(H + 1) are certified bounds from the
+argument; no optimality is asserted. The equal-forcing case, general Fricke geometry, group-orbit
+reduction and routine finite-graph or zeta identities are not independent contributions of this article.
+     The new ingredient is the all-level implication in Proposition 5.3. It is proved by inequalities,
+exact polynomial identities and bijectivity. No mathematical program, finite-core enumeration
+or numerical experiment was executed for this proof-only result. The pseudocode-style Proce-
+dure 6.3 states a terminating algorithm; it is not an execution receipt. The previous equal-forcing
+manuscript’s computer-assisted certificate is credited but is neither imported as a proof dependency
+nor rerun. There is no experimental dataset underlying the theorem.
+     The article was prepared with AI assistance. The underlying argument received internal review
+within the current research team; this does not represent external human peer review. Source
+comparisons are bounded by the cited versions and inspected statements. The accompanying source
+audit records access limits and bibliographic provenance; unperformed retraction, venue-policy and
+conflict-of-interest checks are not represented as completed checks.
+     Finally, the ordinary counts in (7.4) and (7.5) concern this source dynamical system only.
+They do not identify target Euler factors, root numbers, an automorphic object, or a Hilbert–
+Pólya realization. No such arithmetic interpretation is inferred from the existence of a finite cycle
+product.
+
+
+                                                          11
+References
+[1] Marc Abboud. Rigidity of periodic points for loxodromic automorphisms of affine surfaces.
+    arXiv:2406.11510v3, 2025. URL https://arxiv.org/html/2406.11510v3. Preprint, version
+    of 23 April 2025.
+
+[2] C421. Integral periodic orbits of a cubic three-term recurrence. Anonymous local working
+    manuscript, C421, 8 September 2026, 2026. URL ../../../research_c419_c423/papers/
+    C421_integral_return/main.pdf. Unpublished project source; equal-forcing classification
+    with a computer-assisted finite core. No DOI or public archival identifier.
+
+[3] Serge Cantat. Bers and Hénon, Painlevé and Schrödinger. Duke Mathematical Journal, 149(3):
+    411–460, 2009. doi: 10.1215/00127094-2009-042. URL https://arxiv.org/pdf/0711.1727v2.
+    Consulted version: arXiv:0711.1727v2, 5 December 2007.
+
+[4] Michel Planat, David Chester, and Klee Irwin. Dynamics of Fricke–Painlevé VI surfaces. Dy-
+    namics, 4(1):1–13, 2024. doi: 10.3390/dynamics4010001. URL https://doi.org/10.3390/
+    dynamics4010001.
+
+[5] Eunju Shin. Character varieties on a four-holed sphere. Proceedings of the American Math-
+    ematical Society, 154(10):4091–4106, 2026. doi: 10.1090/proc/17770. URL https://arxiv.
+    org/html/2308.16614v3. Accepted manuscript consulted: arXiv:2308.16614v3, 1 June 2026.
+
+[6] Solomon Vishkautsan. Residual periodicity on the Markoff surface. Atti Accademia Nazionale
+    dei Lincei. Rendiconti Lincei. Matematica e Applicazioni, 27:25–35, 2016. doi: 10.4171/RLM/
+    720. URL https://arxiv.org/pdf/1504.07099v2. Consulted version: arXiv:1504.07099v2, 8
+    July 2015.
+
+
+
+
+                                              12
+

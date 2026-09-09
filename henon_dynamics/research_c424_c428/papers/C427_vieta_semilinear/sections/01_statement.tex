@@ -1,0 +1,119 @@
+\section{The complete integral periodic set}
+\label{sec:statement}
+
+Fix $n\ge3$ and $a\in\Z$, and set
+\begin{equation}
+ F(x_1,\ldots,x_n)
+ =(x_2,\ldots,x_n,x_2\cdots x_n+a-x_1).
+ \label{eq:map}
+\end{equation}
+One application of $F$ is one time step throughout. We keep every
+integer point, including zero coordinates and points on singular levels.
+The inverse and invariant are
+\begin{align}
+ F^{-1}(y_1,\ldots,y_n)
+   &=(y_1\cdots y_{n-1}+a-y_n,y_1,\ldots,y_{n-1}),\label{eq:inverse}\\
+ K(x)&=\sum_{j=1}^n x_j^2-\prod_{j=1}^n x_j-a\sum_{j=1}^n x_j.
+ \label{eq:invariant}
+\end{align}
+Indeed, with the other coordinates fixed, the part depending on a
+coordinate $t$ is $t^2-(Q+a)t$, where $Q$ is their product.
+Replacing $t$ by $Q+a-t$ preserves it, and $K$ is invariant under
+cyclic permutations.
+
+Write $\N=\{0,1,2,\ldots\}$. An \emph{integer linear set} in $\Z^n$
+means a set
+\begin{equation}
+ \mathcal L(v;w_1,\ldots,w_s)
+   =\left\{v+\sum_{j=1}^s m_jw_j:m_1,\ldots,m_s\in\N\right\},
+ \qquad v,w_j\in\Z^n.\label{eq:linear-set}
+\end{equation}
+A finite union of such sets is \emph{semilinear}. The parameters are
+free: no further polynomial equation is imposed on them. We do not
+require linearly independent directions, an injective parametrization,
+or disjoint output sets. An empty direction list gives a singleton;
+after zero directions are deleted, a nonempty list gives an unbounded
+set, called a \emph{channel} here. This is a parametrization convention,
+not a claim of maximality or irreducible decomposition.
+
+\begin{theorem}[Effective semilinear atlas]
+\label{thm:main}
+There is an exact algorithm which terminates for every input $(n,a)$
+and outputs finitely many sets of the form \eqref{eq:linear-set}, each
+labelled by a positive integer, with the following properties.
+\begin{enumerate}
+\item Their union is exactly $\Per(F,\Z^n)$, and every point in an
+output set has the labelled native least period.
+\item The sets with nonzero directions, together with a finite explicit
+set $E_{n,a}$, give the entire periodic set. Both the channels and
+$E_{n,a}$ are determined independently of the invariant level $D$.
+\item The algorithm gives the complete semilinear locus of every
+possible least period. For any $D\in\Z$, the periodic points and
+oriented native cycles on $K=D$ are finite and effectively countable.
+\end{enumerate}
+The new proof in dimensions $n\ge4$ is entirely analytic and algebraic.
+The case $n=3$ uses the previously established, computer-assisted
+classification in C421~\cite{c421}.
+\end{theorem}
+
+The construction is finite but may be very large. It does not assert
+that an atlas has been computed for every input, that its directions
+are minimal, or that its complexity is practical. Describing the
+periodic set merely as $F^L(x)=x$ would leave nonlinear integer equations
+unsolved. The theorem instead outputs unrestricted generators and base
+points as in \eqref{eq:linear-set}.
+
+\subsection{Classical inputs and the additional argument}
+
+The unforced map belongs to the Markoff--Hurwitz setting studied by
+Hu, Tan and Zhang~\cite{huTanZhang2015}. Their object is the full group
+preserving the unforced polynomial, not this one forced native map.
+Uniform integral-period mechanisms are classical; Whang~\cite{whang2023}
+proves effective bounds and decidability in considerably greater
+generality than needed here. Effective semilinear descriptions and
+their logical closure properties belong to the classical theory of
+Ginsburg and Spanier~\cite{ginsburgSpanier1966}. We give explicit
+proofs of the particular period and integer-cone facts we use, without
+claiming them as new results.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}p{0.23\textwidth}p{0.69\textwidth}@{}}
+\toprule
+Input or contribution & Exact role and ownership boundary\\
+\midrule
+Uniform integral periods & Classical input; an explicit coarse
+divisibility bound is proved in Section~\ref{sec:period}.\\
+Semilinear machinery & Classical input; Section~\ref{sec:cone} gives
+a finite integer-cone construction.\\
+$n=3$ cycles & The complete C421 classification,
+including its finite computational dependency, is inherited.\\
+Nonzero-block rigidity & The new $n\ge4$ step controls every mixed-zero
+window and makes the entire periodic recurrence linear after tagging.\\
+\bottomrule
+\end{tabular}
+\caption{The single integrated contribution is the full nonlinear
+periodic-set reduction and atlas, not its separate classical inputs.}
+\label{tab:ownership}
+\end{table}
+
+A uniform period bound by itself is not enough. Consider the
+polynomial automorphism
+\[
+ H(x,y,z)=(x,y,z+y-x^2).
+\]
+Every periodic point is fixed and satisfies $y=x^2$. Its projection
+to $(x,y)$ is not semilinear:
+an integer ray $(x_0,y_0)+m(u,v)$ contained in this parabola for every
+$m\in\N$ must have $u=0$ by the quadratic coefficient and then $v=0$.
+A finite union of such projected linear sets is finite, whereas the
+parabola has infinitely many integer points. Thus even a uniform
+least-period bound of one does not supply a semilinear atlas.
+
+For \eqref{eq:map}, the additional mechanism is local to each maximal
+nonzero block. It handles the mixed-zero domain without assuming that
+all unbounded cycles belong to a single previously exhibited family.
+Section~\ref{sec:blocks} proves this mechanism;
+Sections~\ref{sec:period}--\ref{sec:atlas} complete the atlas.
+The ordinary zeta functions at the end concern only this source
+dynamical system, not target Euler factors or spectral zero data.

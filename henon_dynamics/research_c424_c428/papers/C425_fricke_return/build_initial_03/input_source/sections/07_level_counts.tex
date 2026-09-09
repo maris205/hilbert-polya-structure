@@ -1,0 +1,83 @@
+\section{All invariant levels and ordinary cycle counts}\label{sec:levels}
+
+Define a phase-dependent polynomial
+\begin{equation}\label{eq:phase_invariant}
+ K_i(x,y,z)=x^2+y^2+z^2-xyz-a_ix-a_{i+1}y-a_{i+2}z.
+\end{equation}
+If \(F_i(x,y,z)=(y,z,yz+a_i-x)\), direct expansion gives
+\begin{equation}\label{eq:invariant_transport}
+ K_{i+1}\circ F_i=K_i.
+\end{equation}
+One way to check it is to put \(w=yz+a_i-x\). The part of
+\(K_{i+1}(y,z,w)\) involving \(w\) is
+\[
+ w^2-yzw-a_iw=w(w-yz-a_i)=-xw
+                =x^2-xyz-a_ix.
+\]
+Adding the remaining terms gives \eqref{eq:phase_invariant}.
+Since \(K_0=K\), three applications also verify \(K\circ T=K\).
+
+On a state line the restriction is
+\begin{equation}\label{eq:quadratic_level}
+ K_i(u,t,v)
+ =t^2-(uv+a_{i+1})t+u^2+v^2-a_iu-a_{i+2}v.
+\end{equation}
+It is monic quadratic in the integer parameter. By
+\eqref{eq:invariant_transport}, every intermediate line image has the
+same invariant polynomial when parametrized by its originating state
+parameter. An affine reparametrization of slope \(1\) or \(-1\)
+also leaves the leading coefficient equal to one.
+
+\begin{corollary}[Uniform finite counts on a level]\label{cor:level}
+For every \((A,B,C,D)\in\Z^4\),
+\[
+ \#\bigl(\Per_\Z(T)\cap\{K=D\}\bigr)\le54+N_R.
+\]
+The points in this set and their least native periods are effective.
+\end{corollary}
+
+\begin{proof}
+For each retained line, set its monic quadratic restriction equal to
+\(D\). There are at most two integer solutions, each giving a single
+point because the parametrization is injective. Thus at most 27 lines
+contribute at most 54 points before deduplication. There are at most
+\(N_R\) finite-core vertices. Solving the quadratic equations and
+filtering the finite core by \(K(P)=D\), with the disjointness and
+least-period rules of Section~\ref{sec:effective}, proves both claims.
+\end{proof}
+
+This finishes the proof of Theorem~\ref{thm:main}. The level bound
+includes every affine singular point; the proof never uses smoothness,
+positivity, nonzero coordinates or a genericity restriction on the
+coefficients.
+
+For completeness, let \(c_d(A,B,C,D)\) be the number of primitive
+native cycles of length \(d\) on the integral level \(K=D\).
+Here a primitive cycle means one orbit of least period \(d\), counted
+once rather than once per vertex. All these integers are effective,
+nonnegative, and zero for all but finitely many \(d\). The ordinary
+fixed-point counts are
+\begin{equation}\label{eq:fixed_counts}
+ \#\{P\in\Z^3:K(P)=D,\ T^nP=P\}
+    =\sum_{d\mid n}d\,c_d(A,B,C,D).
+\end{equation}
+Consequently the ordinary dynamical zeta function on this integral
+level is the finite product
+\begin{equation}\label{eq:zeta}
+ \begin{aligned}
+ \zeta_{A,B,C,D}(z)
+ &=\exp\left(\sum_{n\ge1}
+   \#\Fix\bigl(T^n|_{\{K=D\}\cap\Z^3}\bigr)\frac{z^n}{n}\right)\\
+ &=\prod_{d\ge1}(1-z^d)^{-c_d(A,B,C,D)}.
+ \end{aligned}
+\end{equation}
+Indeed, a primitive \(d\)-cycle contributes \(d\) fixed points
+exactly for iterates divisible by \(d\), and its contribution to the
+exponent is \(\sum_{m\ge1}z^{dm}/m=-\log(1-z^d)\).
+
+Equation~\eqref{eq:zeta} is a fibrewise ordinary counting identity.
+If a retained line is present, some iterate fixes infinitely many
+integer points on the whole lattice. In that case the usual
+finite-fixed-count definition does not give an ordinary all-lattice
+zeta function. No weighting, intersection multiplicity or change of
+time is used to replace those infinite counts.

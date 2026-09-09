@@ -1,0 +1,142 @@
+\section{The finite core, least periods and disjoint output}\label{sec:effective}
+
+\subsection{An exhaustive finite residual rule}
+
+Define a directed graph on \(Q_R\) by assigning an arrow
+\(P\to T(P)\) exactly when \(T(P)\in Q_R\). Let \(\core\) be its
+cyclic vertices. All operations use the integer polynomial map
+\eqref{eq:involutions}--\eqref{eq:native}; no reduction modulo a prime
+or approximate orbit is involved.
+
+\begin{lemma}[Finite-core termination]\label{lem:core}
+The directed cycles in this graph are exactly the native periodic
+orbits contained in \(Q_R\). From any seed in \(Q_R\), exact iteration
+either exits the box or repeats within \(N_R+1\) visited vertices.
+If a first repetition occurs before exit, the repeated vertex is the
+initial seed.
+\end{lemma}
+
+\begin{proof}
+A directed cycle in the partial graph is a cycle of the actual map,
+and a native periodic orbit contained in the box supplies the converse.
+There are \(N_R\) vertices, so a nonexiting path repeats among its
+first \(N_R+1\) vertices. Write it as \(P_0,P_1,\ldots\), with
+\(P_j=T(P_{j-1})\), and suppose its first repetition is
+\(P_k=P_j\), where \(0\le j<k\). If \(j>0\), then
+\(T(P_{k-1})=T(P_{j-1})\); injectivity of \(T\) forces
+\(P_{k-1}=P_{j-1}\), an earlier repetition. Hence \(j=0\).
+\end{proof}
+
+An exit only rejects the seed as a member of a cycle \emph{entirely
+contained in the box}. A periodic point on a retained line can leave
+the box and later return. That point is already accounted for by
+\(\lineset\); no claim of nonperiodicity is inferred from its box exit.
+
+\begin{proof}[Proof of the exhaustive union in Theorem~\ref{thm:main}]
+Every point on \(\lineset\) is periodic by
+Lemma~\ref{lem:cycle_lines}, and every point of \(\core\) is periodic
+by Lemma~\ref{lem:core}. Conversely, a periodic orbit not contained
+in \(\lineset\) cannot have height greater than \(R\), by
+Proposition~\ref{prop:exhaustion}. All its points are therefore in
+\(Q_R\), and the orbit is one of the finite graph's directed cycles.
+This proves \eqref{eq:exhaustive_union}.
+\end{proof}
+
+\subsection{Integral lines and their intersections}
+
+Every phase-zero line supplied by
+\eqref{eq:lift_line_union} has an integer affine parametrization
+\(P(t)=p+tv\) containing a coordinate of slope \(1\) or \(-1\).
+If a rational point \(P(q)\), \(q\in\Q\), has all integer
+coordinates, that coordinate implies \(q\in\Z\). Thus \(P(\Z)\)
+is precisely the set of integer points on the corresponding rational
+affine line, and \(P\) is injective.
+
+Coincidence of two rational affine lines is decided by linear equations
+over \(\Q\). Coincident lines have the same full integer point set,
+so one parametrization may be discarded. Two distinct lines have at
+most one intersection. Solving
+\(P(t)=P'(t')\) and checking \(t,t'\in\Z\) therefore finds all
+integral intersections. The same linear membership test decides which
+finite-core points are on the retained lines.
+
+\subsection{Exact least-period labels}
+
+\begin{proposition}[Generic periods and every exception]\label{prop:periods}
+For a constructed line \(P(t)\) with certified return \(r\le54\),
+the least native period is effectively determined for every integer
+parameter. It is constant outside an effectively computable finite
+set, and all exceptional parameters are determined exactly.
+\end{proposition}
+
+\begin{proof}
+Every point on the line is fixed by \(T^r\), so its least period
+divides \(r\). For each positive divisor \(d\mid r\), form the
+three integer polynomials
+\begin{equation}\label{eq:period_polynomials}
+ \Delta_{d,k}(t)=\bigl(T^dP(t)-P(t)\bigr)_k,
+ \qquad k=1,2,3.
+\end{equation}
+The integer parameters of period dividing \(d\) are exactly their
+common zeros. If all three polynomials vanish identically, every
+integer parameter qualifies. Otherwise, take the gcd over \(\Q[t]\)
+of the nonzero polynomials. Its common integer roots form a finite
+set. This set can be found by exact rational polynomial arithmetic
+and the rational-root theorem: remove any power of \(t\), record
+zero if applicable, clear denominators, and test the finitely many
+integer divisors of the remaining nonzero constant term. A nonzero
+constant gcd gives the empty set.
+
+Let \(E\) be the union of the finite root sets from those divisors
+whose polynomial vector is not identically zero. At least the divisor
+\(r\) has identically zero vector. The smallest divisor with this
+property is the least period for every \(t\notin E\). For
+\(t\in E\), choose the smallest divisor for which
+\eqref{eq:period_polynomials} vanishes at that parameter. This
+determines the exact least period, including every exception.
+\end{proof}
+
+For a completely disjoint presentation, order the distinct lines and
+assign each integral intersection to the first line containing it.
+Omit its parameter from later lines; there are only finitely many such
+omissions. Apply Proposition~\ref{prop:periods} to the retained
+parameters and delete all line points from \(\core\). The latter
+deletion removes entire cycles because \(\lineset\) is invariant.
+The remaining finite-graph cycles have least period equal to their
+number of distinct vertices. In particular, their periods are at most
+\(N_R\), proving the least-period bound in
+Theorem~\ref{thm:main}. Intersections cannot receive contradictory
+periods: each label is the first return of the same actual point.
+
+\begin{procedure}[Complete output for fixed coefficients]\label{proc:atlas}
+Given \((A,B,C)\in\Z^3\), the following finite procedure describes
+the entire periodic locus and its least periods.
+\begin{enumerate}
+ \item Construct the 27 states and every edge in Table~\ref{tab:edges}.
+ Find the directed cycles; compose their parameter maps and apply
+ Table~\ref{tab:returns}.
+ \item For each retained cycle, list its phase-zero intermediate
+ line images. Attach the certified return \(r_C\), and discard
+ coincident lines using exact linear algebra.
+ \item Apply \eqref{eq:period_polynomials} for every divisor of each
+ attached return. Record the generic least-period label and the
+ finite exceptional parameter list. Resolve line intersections by
+ the preceding disjointness convention.
+ \item Set \(R=100(1+\max(|A|,|B|,|C|))\). For each seed of \(Q_R\),
+ follow \(T\) until exit or first return. Record a returning cycle
+ only once, for example from its lexicographically smallest vertex.
+ Remove every cycle contained in \(\lineset\).
+ \item Output the line parametrizations with their exact labels and
+ finite exclusions, and the remaining finite cycles with their
+ exact lengths. For a specified level, apply the quadratic filtering
+ in Section~\ref{sec:levels} before the final point count.
+\end{enumerate}
+\end{procedure}
+
+Steps 1--3 involve a fixed finite graph and finitely many polynomial
+calculations; Step 4 terminates by Lemma~\ref{lem:core}. The procedure
+therefore decides more than whether a proposed point is periodic: it
+outputs the complete locus for the given coefficients, including
+simultaneously occurring periods. Its box can be large, and we make
+no practical running-time guarantee. No execution of this procedure
+is needed to establish its termination or exhaustive character.

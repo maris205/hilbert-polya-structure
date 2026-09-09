@@ -17,6 +17,26 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C424--HCS-C428 source-boundary register (2026-09-09)
+
+| ID | Candidate / exact scope | Boundary or separating example | Surviving result and limitation |
+| --- | --- | --- | --- |
+| HEN-O408 | HCS-C424 normalized integrality as original rational-coordinate integrality, or Int(Z) as all Q[t] | The rational affine normalization preserves cycles but need not preserve the integer lattice. The Newton coefficients are integral; arbitrary rational quadratic coefficients need not meet that hypothesis. The 147-map sums count different maps, not one 306-point map. | The full quadratic integer-valued coefficient class, rational periodic atlas and sharp 17-point maximum survive, with imported C412 and exact residual dependency. Ordinary finite-cycle products are not target prime factors. [PDF](../research_c424_c428/papers/C424_integer_valued_quadratic/main.pdf) |
+| HEN-O409 | HCS-C425 finite periodic orbit as an entire affine line or a finite-box exit as global nonperiodicity | A finite periodic orbit meeting the complement of the proved core box is contained in the finite periodic-line union; it is not itself a whole line and may move between lines. Three auxiliary phase steps equal one native fixed-word return. A retained line can contain points outside the core box. | Complete all-forcing line/core exhaustion and divisor/gcd least-period tests survive. At most 27 lines and return bound 54 are not a universal attained-period list or an executed all-input census. [PDF](../research_c424_c428/papers/C425_fricke_return/main.pdf) |
+| HEN-O410 | HCS-C426 all local good models as one global scalar model or target Euler data | After local existence, the global two-dimensional lattice is free exactly when I^2 is principal. A nonprincipal order-two ideal can be repaired by a nonscalar basis; an order-three class cannot. Prime ideals label source valuations, not native primitive trajectories. | Complete original-field all-affine model classification and wild-centre tests survive. The model-set observable and determinant ideal are not a periodic ledger/Fredholm determinant; A1_FAIL is scoped, not no periodic points. [PDF](../research_c424_c428/papers/C426_affine_good_models/main.pdf) |
+| HEN-O411 | HCS-C427 a uniform period bound or one unbounded family as a complete semilinear atlas | The polynomial automorphism H(x,y,z)=(x,y,z+y-x^2) has only fixed periodic points on y=x^2, a nonsemilinear projected locus. Bounded periods alone are insufficient; mixed-zero products need the proved nonzero-block rigidity. | Complete free channel parametrization and level-independent finite remainder survive; n=3 uses C421. Fixed-level height bounds and counting are separate, and overlapping parameter representations must not be counted repeatedly. [PDF](../research_c424_c428/papers/C427_vieta_semilinear/main.pdf) |
+| HEN-O412 | HCS-C428 family-union spectra as every polynomial's cycle atlas or a rational/integer-valued extension | The result ranges over p in Z[t]. Kim's integer-valued odd-degree examples have leading coefficient 1/d! and lie outside that ring for d>=3. The revised coordinate-keyed pseudocode corrects an interface, while frozen exact programs were already correct. | The all-degree double-sign integer spectra and all-diameter exclusion survive. No per-polynomial coexistence/point bound or rational quadratic conjecture is settled; C417's positive list is deducted. [PDF](../research_c424_c428/papers/C428_integer_period_spectrum/main.pdf) |
+
+These are named-source quantifier, representation and target-bridge
+boundaries, not five universal impossibility theorems. Actual recoding
+or conjugacy preserves a result only when all parameters, domain,
+observable and native clock are transported. The positive source
+theorems do not supply Euler factors, root numbers, automorphy or a
+Hilbert–Pólya realization. All target A2/A3 metrics remain unavailable,
+A4 has no submitted candidate-specific lift, and Route B is not entered.
+See [evaluation calibration](../research_c424_c428/EVALUATION_ADJUDICATION.md).
+The five-paper checkpoint is C428; auxiliary proofs do not enlarge it.
+
 ## HCS-C419--HCS-C423 source-boundary register (2026-09-08)
 
 | ID | Candidate / exact scope | Boundary or separating example | Surviving result and limitation |

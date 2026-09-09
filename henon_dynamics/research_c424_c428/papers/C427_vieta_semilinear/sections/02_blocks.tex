@@ -1,0 +1,131 @@
+\section{Rigidity of each nonzero block}
+\label{sec:blocks}
+
+A periodic orbit of $F$ is encoded by a bi-infinite periodic integer
+sequence satisfying
+\begin{equation}
+ x_{i+n}+x_i=\prod_{j=1}^{n-1}x_{i+j}+a.
+ \label{eq:recurrence}
+\end{equation}
+Its consecutive length-$n$ blocks are the native states. In this
+section $n\ge4$, $A=|a|$, and $B=A+4$.
+
+\begin{lemma}[Internal maxima]
+\label{lem:internal}
+If a periodic sequence has no zero, all its coordinates have absolute
+value at most $B$. If it has zeros, let
+$x_1,\ldots,x_r$ be a maximal nonzero block, with
+$x_0=x_{r+1}=0$, and put $M=\max_{1\le j\le r}|x_j|$.
+When $r\ge n-1$ and $M>B$, every occurrence of absolute value $M$
+in this block is an endpoint.
+\end{lemma}
+\begin{proof}
+For a nonzero window of length $n-1$ contained in this block,
+its two external neighbours belong either to the block or to its
+adjacent zeros. Therefore
+\begin{equation}
+ \left|\prod_{j=1}^{n-1}x_{i+j}\right|\le2M+A.
+ \label{eq:local-product-bound}
+\end{equation}
+This is a block-local estimate, independent of the heights in other
+blocks beyond the zeros.
+
+Suppose an internal position has absolute value $M>A$. Because
+$n-1\ge3$, choose a length-$(n-1)$ window within the block which
+contains that position strictly internally. Write its external
+neighbours as $z_-,z_+$. Moving the window one place left preserves
+the maximum factor and all nonzero internal factors. If the new
+factor $z_-$ is zero, the inequality $M|z_-|\le2M+A$ is immediate;
+otherwise the shifted window is in the same block and
+\eqref{eq:local-product-bound} proves it. The right shift similarly
+gives $M|z_+|\le2M+A$.
+Since $M>A$, both neighbours have absolute value less than three,
+and thus at most two. The unshifted recurrence now gives
+\[
+ M\le\left|\prod x_j\right|=|z_-+z_+-a|\le A+4=B.
+\]
+This contradicts $M>B$. If the whole sequence is nonzero, use its
+global maximum in an internal window; the identical argument proves
+the first assertion. The all-zero sequence needs no block analysis.
+\end{proof}
+
+\begin{lemma}[Large blocks]
+\label{lem:large-block}
+Every maximal nonzero block of length at least $n-1$ containing a
+coordinate of absolute value greater than $B$ has length exactly $n$.
+Its $n-2$ internal coordinates are units. After possibly reversing
+indices in the proof, its endpoints satisfy
+\begin{equation}
+ x_n=\varepsilon x_1+a,\qquad
+ \varepsilon=\prod_{j=2}^{n-1}x_j\in\{1,-1\},\qquad
+ (1+\varepsilon)a=0.
+ \label{eq:block-relations}
+\end{equation}
+\end{lemma}
+\begin{proof}
+If the block length is $n-1$, the recurrence across its two zeros
+gives $\prod_{j=1}^{n-1}x_j=-a$. The product is a nonzero integer,
+so $a\ne0$ and every factor has absolute value at most $A$.
+It cannot be a large block.
+
+Suppose the length is at least $n$ and its maximum is $M>B$.
+Lemma~\ref{lem:internal} places a maximum at an endpoint.
+The recurrence is preserved by index reversal with the same $a$,
+so assume $|x_1|=M$. This reversal is a proof device, not an
+identification of oriented native orbits. Put
+$C=\prod_{j=2}^{n-1}x_j$. The recurrence at the left zero gives
+$x_n=Cx_1+a$, whence
+\[
+ M|C|\le M+A<2M.
+\]
+The nonzero integer $C$ is therefore a sign $\varepsilon$, and each
+of its factors is a unit. If the length equals $n$, the next
+recurrence gives $x_1=\varepsilon x_n+a$, proving
+\eqref{eq:block-relations}. The second endpoint need not also
+exceed $B$; no such assumption is used.
+
+It remains to exclude a length at least $n+1$. The next coordinate is
+\[
+ x_{n+1}=\varepsilon x_n+a-x_1=(1+\varepsilon)a.
+\]
+It is nonzero, so $a\ne0$, $\varepsilon=1$, and $x_{n+1}=2a$.
+The window $x_3,\ldots,x_{n+1}$ has unit factors up to $x_{n-1}$
+and remaining factors $x_n,2a$. Its external neighbours are the
+unit $x_2$ and a coordinate $x_{n+2}$ of absolute value at most $M$
+(possibly the right zero). Consequently
+\[
+ 2A|x_n|\le M+A+1,\qquad
+ (2A-1)M\le2A^2+A+1.
+\]
+Here $|x_n|=|x_1+a|\ge M-A$ and $A\ge1$. But
+\[
+ (2A-1)(A+4)-(2A^2+A+1)=6A-5>0,
+\]
+contradicting $M>A+4$. A right-end maximum is covered by the same
+reversal argument.
+\end{proof}
+
+\begin{corollary}[Every update is linear after finite tagging]
+\label{cor:window}
+In any periodic sequence, each nonzero update product in
+\eqref{eq:recurrence} either has all factors of absolute value at
+most $B$, or has exactly one factor exceeding $B$ in absolute value,
+with all its other factors in $\{1,-1\}$.
+\end{corollary}
+\begin{proof}
+The zero-free case follows from Lemma~\ref{lem:internal}. Otherwise
+a nonzero window lies in one maximal nonzero block. Blocks shorter
+than $n-1$ cannot contain such a window; blocks of length $n-1$ are
+bounded. A block with a large factor has exactly $n$ entries by
+Lemma~\ref{lem:large-block}. Its two possible nonzero windows of
+length $n-1$ each omit one endpoint. Thus a window with a large
+factor has only one large endpoint, and all companions are units.
+If neither endpoint in that window is large, it is the first case.
+\end{proof}
+
+The corollary includes arbitrarily many large coordinates separated
+by zeros: an update product containing a zero is zero regardless of
+the other factors. It imposes no independence assumption on distinct
+blocks, no bound on their number, and no guess about the dimension
+of a channel. These are the cases which a zero-free height bound
+alone leaves untreated.

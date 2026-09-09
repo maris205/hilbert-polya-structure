@@ -3,6 +3,42 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C424--HCS-C428 complete source-manuscript register (2026-09-09)
+
+Five independently admitted contracts have five final PDFs, 72 pages
+(21/12/10/13/16), two actual nonauthor manuscript passes per article,
+review-driven revisions, two fresh byte-identical final builds per
+paper and all-final-page visual inspection. See
+[delivery](../research_c424_c428/README.md),
+[manuscript adjudication](../research_c424_c428/REVIEW_ADJUDICATION.md),
+[final builds](../research_c424_c428/FINAL_BUILD_REPORT.md) and
+[evaluation closure](../research_c424_c428/EVALUATION_ADJUDICATION.md).
+Exact sealing and Git synchronization are later facts in the current
+state/external receipt, not preclaimed here.
+Research baseline: 2895b07238d4cef2ed35faaad251e4cfceb08ec1.
+Evaluator v0.2.0 SHA256:
+6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c.
+
+| Candidate | Complete admitted source increment | Strict tuple | Final evidence |
+| --- | --- | --- | --- |
+| HCS-C424 | Entire quadratic Int(Z) family on Q^2: complete rational periodic atlas, exact possible periods 1,2,3,4,5,6,7,9,10 and sharp 17-point equality locus. C412 methods/import and the finite residual certificate remain explicit. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c424_c428/papers/C424_integer_valued_quadratic/main.pdf) · [active evaluation](../research_c424_c428/evaluations/route_a/HCS-C424/2026-09-09-corrected.yaml) |
+| HCS-C425 | Every ordered integer Fricke forcing and every ordinary integer point under the specified three-involution return: complete periodic-line/finite-core classification, exact native periods and level counts. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c424_c428/papers/C425_fricke_return/main.pdf) · [active evaluation](../research_c424_c428/evaluations/route_a/HCS-C425/2026-09-09-corrected.yaml) |
+| HCS-C426 | Every number field and single-factor Hénon map: complete local/global all-affine good-model classification, all wild-centre tests, and precise ideal-square principalization obstruction with all models. | (A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c424_c428/papers/C426_affine_good_models/main.pdf) · [evaluation](../research_c424_c428/evaluations/route_a/HCS-C426/2026-09-09.yaml) |
+| HCS-C427 | All dimensions n>=3 and integer forcing: terminating free semilinear parametrization of the entire integral periodic set with exact least-period labels, all mixed-zero channels and a level-independent finite remainder. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c424_c428/papers/C427_vieta_semilinear/main.pdf) · [evaluation](../research_c424_c428/evaluations/route_a/HCS-C427/2026-09-09.yaml) |
+| HCS-C428 | All integral-coefficient degrees >=2 and both unit Jacobian signs: exact family-union integer least-period spectra {1,2,3,4,6} and {1,2,3,4,6,8}, with all-diameter analytic reduction, independent exact certificates and realizations. | (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) | [PDF](../research_c424_c428/papers/C428_integer_period_spectrum/main.pdf) · [evaluation](../research_c424_c428/evaluations/route_a/HCS-C428/2026-09-09.yaml) |
+
+All remain ROUTE_A_EXPLORATORY: 45 A2 metrics NOT_TESTABLE, mandatory
+arithmetic controls INCOMPLETE, every target/Route-B flag false.
+C426's real prime-ideal arithmetic is not rational-prime primitive
+ownership; its A1_FAIL concerns a static observable, not absence of
+periodic points. No candidate-specific lift was submitted for A4.
+Classical ownership, internal-reference alerts, exact computational
+dependencies and source-access limits remain visible; internal AI
+review is not human peer review or worldwide-priority certification.
+Original superseded evaluation bytes remain preserved. WM6, PC424-L
+descent and other auxiliary results do not make a sixth paper.
+This batch stops at C428. Earlier sections are historical snapshots.
+
 ## HCS-C419--HCS-C423 complete source-manuscript register (2026-09-08)
 
 Five independent admitted questions now have complete final manuscripts,

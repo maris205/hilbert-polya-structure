@@ -1,0 +1,69 @@
+\section{The exact 27-state graph}\label{sec:graph}
+
+The graph \(\stategraph\) has state set
+\((\Z/3\Z)\times S^2\). Each state \(s=(i,u,v)\) has at most one
+outgoing edge. An edge carries a lifted length \(h_s\) and an affine
+integer parameter map \(\phi_s\). The edge identity is
+\begin{equation}\label{eq:edge_identity}
+ F^{h_s}L_s(t)=L_{s'}(\phi_s(t))\qquad(t\in\Z),
+\end{equation}
+where \(s'\) is its terminal state. Table~\ref{tab:edges} defines all
+edges; the conditions are part of the definition.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.10\textwidth}Yp{0.21\textwidth}cp{0.18\textwidth}@{}}
+\toprule
+Type & Existence condition & Terminal state \(s'\) & \(h_s\) & \(\phi_s(t)\) \\
+\midrule
+I & \(v=\pm1\), \(b=a_i-u\), \(c=vb+a_{i+1}\in S\)
+  & \((i+2,v,c)\) & 2 & \(vt+b\) \\
+II & \(v=0\), \(a_i=u\), \(a_{i+2}\in S\)
+   & \((i,0,a_{i+2})\) & 3 & \(-t+a_{i+1}\) \\
+\bottomrule
+\end{tabularx}
+\caption{The complete transition rule. Phases and forcing subscripts
+are taken modulo three. No edge is assigned in any other case.}
+\label{tab:edges}
+\end{table}
+
+\begin{lemma}[Exact edge maps]\label{lem:edges}
+Every edge in Table~\ref{tab:edges} satisfies
+\eqref{eq:edge_identity} for all integer parameters. Its map
+\(\phi_s(t)=\epsilon_s t+\delta_s\) has
+\(\epsilon_s\in\{1,-1\}\) and \(|\delta_s|\le B_0\).
+Every intermediate image \(F^rL_s(\Z)\), \(0\le r<h_s\), is an
+affine integer line with an injective parametrization containing a
+coordinate of slope \(1\) or \(-1\).
+\end{lemma}
+
+\begin{proof}
+For Type I, direct substitution gives
+\begin{align*}
+ F(i;u,t,v)&=(i+1;t,v,vt+b),\\
+ F^2(i;u,t,v)&=(i+2;v,vt+b,v(vt+b)+a_{i+1}-t)\\
+             &=(i+2;v,vt+b,c).
+\end{align*}
+The last equality uses \(v^2=1\). If \(c\in S\), this is precisely
+the required terminal line. The additional intermediate line has
+triple \((t,v,vt+b)\).
+
+For Type II, the assumptions \(v=0\) and \(a_i=u\) give
+\begin{align*}
+ F(i;u,t,0)&=(i+1;t,0,0),\\
+ F^2(i;u,t,0)&=(i+2;0,0,-t+a_{i+1}),\\
+ F^3(i;u,t,0)&=(i;0,-t+a_{i+1},a_{i+2}).
+\end{align*}
+The final triple is the stated terminal line exactly when
+\(a_{i+2}\in S\). The displayed intermediate triples prove all the
+line assertions. Finally, \(|a_i-u|\le H+1=B_0\) and
+\(|a_{i+1}|\le H\le B_0\), proving the translation bounds.
+\end{proof}
+
+The edge identities concern whole lines, not asymptotic expansions.
+In particular the affine parameter maps are bijections of \(\Z\).
+An omitted edge need not rule out a small periodic parameter at its
+state. The uniform height argument below rules it out only for a
+periodic orbit whose current parameter remains sufficiently close to
+the global maximum.

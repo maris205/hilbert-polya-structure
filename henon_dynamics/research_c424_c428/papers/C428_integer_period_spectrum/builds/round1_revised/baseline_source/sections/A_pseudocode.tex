@@ -1,0 +1,131 @@
+\section{Complete finite-reduction pseudocode}\label{app:pseudocode}
+
+The following pseudocode specifies exact integer arithmetic; sets
+deduplicate identical values or affine coefficient pairs. It is a
+typeset description of the frozen algorithms, not a newly executed
+implementation. A missing arrow is denoted by \texttt{EXIT}.
+
+\subsection{Complete partial-function cycle extraction}
+\begin{Verbatim}[fontsize=\small]
+FULL_CYCLES(E, v, a):
+    done := empty set; answers := empty list
+    for each state s in E x E:
+        if s in done: continue
+        path := empty list; position := empty dictionary; t := s
+        while t != EXIT and t not in done and t not in position:
+            position[t] := length(path); append t to path
+            (x,y) := t; z := v[y] - a*x
+            t := (y,z) if z in E else EXIT
+        if t != EXIT and t in position:
+            C := path[position[t]:]
+            if union of both coordinates of states in C equals E:
+                append C to answers
+        add every state in path to done
+    return answers
+\end{Verbatim}
+Every loop either exits the finite state space, joins a previously
+completed path, or repeats on the current path. In the last case
+the suffix is exactly one cycle; in the second case any accessible
+cycle has already been processed. Starting from every unmarked
+state proves that no cycle is lost, and no orbit-length cutoff
+is imposed.
+
+\subsection{All small-diameter restrictions}
+Polynomial arithmetic below uses ascending integral coefficients
+or any equivalent exact representation. The empty Newton product
+is the constant polynomial one.
+\begin{Verbatim}[fontsize=\small]
+EXTEND(E=(e[0],...,e[k-1]), W, j, r, B, values):
+    if j == k: emit values; return
+    old := r(e[j]); step := B(e[j])
+    for each z in W:
+        if step divides z-old:
+            c := (z-old)/step
+            EXTEND(E,W,j+1,r+c*B,B*(t-e[j]),values+[z])
+
+SMALL_CERTIFICATE:
+    for D = 0,...,9:
+        alphabets := {(0)} if D == 0
+                     else all {0,D} union S, S subset {1,...,D-1}
+        for each increasing alphabet E:
+            for a in {1,-1}:
+                W := {x+a*y: x,y in E}
+                for each values emitted by EXTEND(E,W,0,0,1,[]):
+                    count this restriction
+                    record lengths of FULL_CYCLES(E,values,a)
+\end{Verbatim}
+The positive basis value at each increasing node is $B_j$ in
+\eqref{eq:extension}. The recursion is exactly the necessary and
+sufficient test in Lemma~\ref{lem:newton}. Counts are cumulative
+across both signs only where explicitly stated in Table~\ref{tab:small}.
+
+\subsection{Generating all endpoint templates}
+Affine coordinates are stored as pairs $(\alpha,\beta)$ for
+$\alpha D+\beta$. Componentwise addition and multiplication by an
+integer are exact. Set $H(1)=\{-2,-1,0,1,2\}$,
+$H(2)=\{-1,0,1\}$ and $H(3)=\{0\}$.
+\begin{Verbatim}[fontsize=\small]
+TEMPLATES:
+    for side in {left,right}:
+        for each nonempty S subset {1,2,3}:
+            for each tuple (h[b]: b in S) in product H(b):
+                if every h[b] == 0: continue
+                if some distinct b,c have b-c not dividing h[b]-h[c]:
+                    continue
+                U := [0] + [b if left else D-b for b in S] + [D]
+                emit U with interior values h and endpoint values 0
+    for nonempty L subset {1,2}:
+        for nonempty R subset {1,2}:
+            bound := 1 if 2 in L union R else 2
+            for integer c with 0 < abs(c) <= bound:
+                U := [0] + [b for b in L] + [D-b for b in R] + [D]
+                emit U with every interior value c, endpoints 0
+\end{Verbatim}
+The zeros at the endpoints multiply the identically zero remainder
+factor. They impose no condition on the original $h$ there.
+
+\subsection{All large diameters without a preset upper bound}
+For affine forms $u,w$, let \texttt{ROOT(u,w)} return the exact
+integer root at least ten of $u(D)=w(D)$ when its slope difference
+is nonzero and divides the negative constant difference. Otherwise
+it returns the empty set. Identities are handled separately.
+\begin{Verbatim}[fontsize=\small]
+LARGE_CERTIFICATE:
+    for each (U,h) emitted by TEMPLATES:
+        for a in {1,-1}:
+            W := distinct affine forms {u+a*v: u,v in U}
+            for A in W:
+                for q in {-2,-1,0,1,2}:
+                    for each u=(alpha,beta) in U:
+                        b := abs(beta)
+                        V[u] := A + q*u + h[u]*(-b*D+b*b)
+                    roots := empty set; identity_arrows := empty
+                    for x,y in U:
+                        w := V[y] - a*x
+                        insert arrow (x,y)->(y,z) if w == z in Z[D]
+                        for z in U: add ROOT(w,z) to roots
+                    extract all full-support identity-graph cycles
+                    for D in roots:
+                        E := evaluations of U at D
+                        v := evaluations of V at D
+                        record FULL_CYCLES(E,v,a)
+\end{Verbatim}
+At an endpoint $D=(1,0)$ the formula sets $b=0$, again giving the
+correct zero remainder factor. The unpruned algorithm is the
+independent reconstruction's scope. The author first prunes as
+follows; this can be inserted immediately after constructing $V$:
+\begin{Verbatim}[fontsize=\small]
+allowed := ALL
+for v in V:
+    if v is identical to some member of W: continue
+    hits := union of ROOT(v,w) over w in W
+    allowed := hits if allowed == ALL else intersection(allowed,hits)
+if allowed is empty: discard model
+if allowed != ALL: check only graphs at D in allowed
+else: check generic graph and all exceptional edge roots
+\end{Verbatim}
+The correctness of this pruning was proved in
+Section~\ref{sec:symbolic}. In the last branch the author evaluates
+at $D=1+\max(\{9\}\cup\mathrm{roots})$ for the generic graph;
+the unpruned algorithm builds it from identities. Neither procedure
+replaces an infinite range by an unproved finite sample.

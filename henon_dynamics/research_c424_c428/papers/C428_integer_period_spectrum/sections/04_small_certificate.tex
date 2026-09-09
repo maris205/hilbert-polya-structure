@@ -1,0 +1,103 @@
+\section{Small diameters: all integral-polynomial restrictions}\label{sec:small}
+
+For $0\le D\le9$ we enumerate every nonempty
+$E\subseteq\{0,\ldots,D\}$ with endpoints $0,D$, and every
+restriction $v:E\to E+aE$ realizable by an integral polynomial.
+The word ``restriction'' removes the unbounded degree from this
+finite step without restricting the original family.
+
+\begin{lemma}[Integral Newton interpolation]\label{lem:newton}
+Write $E=\{e_0<\cdots<e_{k-1}\}$. The values $v(e_j)$ are the
+restriction of a polynomial in $\ZZ[t]$ if and only if the unique
+degree-less-than-$k$ interpolating polynomial has integer Newton
+coefficients:
+\begin{equation}\label{eq:newton}
+ r(t)=\sum_{j=0}^{k-1}b_j\prod_{i<j}(t-e_i),\qquad b_j\in\ZZ.
+\end{equation}
+Every such restriction can be realized by a polynomial of degree
+at least two.
+\end{lemma}
+\begin{proof}
+Starting with an integral realizing polynomial $p$, subtract
+$p(e_0)$ and divide by the monic factor $t-e_0$. The quotient is
+integral. Repeating at the remaining nodes gives the integer Newton
+coefficients; any remaining term is divisible by
+$W_E(t)=\prod_{e\in E}(t-e)$. Equivalently, monic division by
+$W_E$ leaves the unique interpolant as an integral remainder.
+Conversely, \eqref{eq:newton} is itself an integral polynomial
+with the prescribed values. If its degree is below two, add $W_E$
+when $|E|\ge2$, or $(t-e_0)^2$ when $|E|=1$. The added polynomial
+vanishes on $E$ and makes the degree at least two.
+\end{proof}
+
+For an already chosen prefix $r_{<j}$ of \eqref{eq:newton}, put
+$B_j=\prod_{i<j}(e_j-e_i)>0$ (the empty product is one).
+The finite extension rule is
+\begin{equation}\label{eq:extension}
+ v(e_j)\in E+aE,\qquad
+ v(e_j)\equiv r_{<j}(e_j)\pmod{B_j},\qquad
+ b_j=\frac{v(e_j)-r_{<j}(e_j)}{B_j}.
+\end{equation}
+Every admissible value is considered, and the coefficient is then
+forced. Hence the recursive rule enumerates every realizable
+restriction exactly once for the fixed ordered alphabet.
+
+\begin{lemma}[Graph completeness]\label{lem:graph}
+For a completed restriction $v$, put a directed edge
+\begin{equation}\label{eq:edge}
+ (x,y)\longrightarrow(y,v(y)-ax)
+ \quad\text{on }E^2\text{ whenever }v(y)-ax\in E.
+\end{equation}
+Its directed cycles whose coordinate support is exactly $E$ are
+precisely the periodic orbits of the restriction with full support.
+Their graph lengths are their native least periods. Enumerating
+all alphabets and retaining only full-support cycles misses no
+integer periodic orbit.
+\end{lemma}
+\begin{proof}
+The edge equation is exactly one native application of the map.
+A directed cycle consists of distinct ordered states, so its first
+return has length equal to that cycle's length. Conversely, any
+native orbit yields such a cycle in the graph of its restriction.
+It is checked at its own complete alphabet, whether or not it is
+also contained in a larger alphabet. Traversing a finite partial
+function graph until exit or a repeated state extracts all cycles;
+there is no bound on the allowed period. The explicit traversal
+and its stopping conditions are given in Appendix~\ref{app:pseudocode}.
+\end{proof}
+
+\begin{lemma}[Exact small-diameter certificate]\label{lem:smallcertificate}
+The complete enumeration \eqref{eq:extension}--\eqref{eq:edge}
+for $0\le D\le9$ has the counts in Table~\ref{tab:small}.
+It yields no period outside $\Sp$ for $a=1$, or outside $\Sm$
+for $a=-1$.
+\end{lemma}
+\begin{proof}[Computer-assisted verification]
+The author implementation is
+\texttt{check\_integer\_periods.py} in the frozen package
+\cite{IH6Working}. It uses arbitrary-precision integers, exact
+divisibility, all endpoint-containing alphabets and the complete
+partial-graph traversal of Lemma~\ref{lem:graph}. Its recorded
+execution reached $D=10$; only the $D\le9$ prefix is needed here.
+The independent implementation in \cite{IH6Review} reconstructed
+that prefix using alternating-extreme node order, exact Lagrange
+coefficient congruences and indegree-zero peeling rather than the
+author's Newton expansion and path traversal. It matched all ten
+cumulative counts, totaling $35778$ restrictions, and both period
+spectra. Appendix~\ref{app:independent} proves the equivalence of
+its different interpolation criterion and cycle extraction. The
+execution receipts and exact-code identities are recorded in
+Section~\ref{sec:evidence}; no certificate was rerun for typesetting.
+\end{proof}
+
+\input{tables/small_diameter.tex}
+
+Pairwise divisibility alone is not a sufficient replacement for
+Lemma~\ref{lem:newton}. For instance the data
+$E=(0,2,4)$ and $v=(0,0,4)$ satisfy every pairwise value-difference
+congruence, but their interpolating polynomial is
+$t(t-2)/2$, not an element of $\ZZ[t]$. The independent checker
+correctly rejected these data. In the large-diameter templates we
+will deliberately use only necessary congruences, but there the
+logic is an overapproximation for exclusion, not an exact
+realizability test.

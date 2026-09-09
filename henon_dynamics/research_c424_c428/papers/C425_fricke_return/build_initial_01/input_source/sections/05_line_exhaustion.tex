@@ -1,0 +1,121 @@
+\section{Affine returns and exhaustion by whole lines}\label{sec:lines}
+
+Let \(C\) be a directed cycle of \(\stategraph\). Write
+\begin{equation}\label{eq:cycle_length}
+ \ell_C=\sum_{s\in C}h_s.
+\end{equation}
+The edge phase changes are their lifted lengths modulo three.
+Returning to the same state therefore forces \(3\mid\ell_C\).
+At any chosen base state \(s\in C\), composing the edge maps gives
+\begin{equation}\label{eq:cycle_return}
+ F^{\ell_C}L_s(t)=L_s(\epsilon_Ct+\beta_C),\qquad
+ \epsilon_C\in\{1,-1\},\quad\beta_C\in\Z.
+\end{equation}
+Call \(C\) \emph{retained} if \(\epsilon_C=-1\), or if
+\(\epsilon_C=1\) and \(\beta_C=0\). Moving the base state conjugates
+the return map by a bijective affine parameter map, so retention is
+independent of the chosen base state.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth}Yp{0.27\textwidth}@{}}
+\toprule
+Parameter return & Decision and reason & Certified native return \\
+\midrule
+\(t\mapsto t\) & Retain: identity on the entire line
+ & \(r_C=\ell_C/3\) \\
+\(t\mapsto-t+\beta_C\) & Retain: the square is the identity
+ & \(r_C=2\ell_C/3\) \\
+\(t\mapsto t+\beta_C\), \(\beta_C\ne0\)
+ & Do not retain: no integer parameter is periodic under translation
+ & None \\
+\bottomrule
+\end{tabularx}
+\caption{The affine-return test used in the construction. The listed
+returns are not assertions about generic or exceptional least periods.}
+\label{tab:returns}
+\end{table}
+
+\begin{lemma}[Periodic cycle lines]\label{lem:cycle_lines}
+A nonretained cycle contains no \(F\)-periodic point on its state
+lines. Every integer point on a retained cycle's state lines and all
+their intermediate images is \(F\)-periodic, with a return time
+\(\ell_C\) or \(2\ell_C\) as in Table~\ref{tab:returns}.
+\end{lemma}
+
+\begin{proof}
+For a nonretained cycle the iterates of the parameter at the base
+state are \(t+k\beta_C\), with \(\beta_C\ne0\). They are unbounded,
+whereas every subsequence of a periodic orbit is bounded. For a
+retained cycle the affine return has order at most two, so
+\eqref{eq:cycle_return} fixes every parameter after the stated number
+of lifted steps. The same return fixes every intermediate image
+because powers of \(F\) commute. The edge identities transport the
+assertion around the cycle.
+\end{proof}
+
+For all retained cycles form the union
+\begin{equation}\label{eq:lift_line_union}
+ \liftlines=
+ \bigcup_{\substack{C\text{ retained}\\s\in C}}
+ \ \bigcup_{0\le r<h_s}F^rL_s(\Z).
+\end{equation}
+Let \(\lineset\subset\Z^3\) be the phase-zero part of this union,
+with the phase label omitted. The use of every intermediate image in
+\eqref{eq:lift_line_union} is necessary: state lines alone need not
+form an invariant set for one lifted step.
+
+\begin{lemma}[Backward exhaustion]\label{lem:backward}
+The union \(\liftlines\) satisfies
+\(F(\liftlines)=\liftlines=F^{-1}(\liftlines)\).
+Any point whose forward orbit reaches \(\liftlines\) already belongs
+to \(\liftlines\).
+\end{lemma}
+
+\begin{proof}
+Along an edge, \(F\) takes each intermediate image onto the next.
+At its last image, \eqref{eq:edge_identity} and
+\(\phi_s(\Z)=\Z\) show that the image is the entire next state line,
+not a proper subset. As the edges run around cycles, every line image
+in the union has a predecessor there. Thus
+\(F(\liftlines)=\liftlines\). Bijectivity of \(F\) on the ambient
+phase-labelled lattice gives the inverse-image equality. Repeatedly
+applying it proves the final assertion.
+\end{proof}
+
+\begin{proposition}[Uniform line exhaustion]\label{prop:exhaustion}
+Every native periodic orbit of height \(M>R\) is contained in
+\(\lineset\). The set \(\lineset\) is a union of at most 27 affine
+integer lines, each having a certified native return time at most 54.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:graph_cycle_entry}, the lifted orbit reaches
+a directed graph cycle. Since the orbit is periodic,
+Lemma~\ref{lem:cycle_lines} excludes a nonretained cycle. It therefore
+reaches \(\liftlines\). Lemma~\ref{lem:backward} puts the entire
+preceding orbit in the same union, including any graph path before
+entry into the cycle. Its native phase-zero points lie in
+\(\lineset\).
+
+Distinct directed cycles of a graph with outdegree at most one have
+disjoint state sets. A cycle of lifted length \(\ell_C\) has exactly
+\(\ell_C/3\) phase-zero positions among its intermediate images,
+because the phase advances by one at each lifted step. Every such
+position is an affine line by Lemma~\ref{lem:edges}. Consequently the
+number of phase-zero lines, before coincidences, is at most
+\[
+ \sum_{C\text{ retained}}\frac{\ell_C}{3}
+ \le \sum_{C\text{ retained}}|C|\le27.
+\]
+Also \(\ell_C\le3|C|\le81\). Dividing the lifted returns in
+Lemma~\ref{lem:cycle_lines} by three, using \eqref{eq:clock}, gives
+\(r_C=\ell_C/3\) or \(r_C=2\ell_C/3\le54\).
+\end{proof}
+
+The assertion concerns pointwise periodicity along each line, not
+setwise invariance of each separate line under \(T\). The union
+\(\lineset\) is \(T\)-invariant, and its points can pass between
+different lines before returning. Line coincidences only lower the
+bound of 27; they create no missing family.

@@ -1,0 +1,147 @@
+\section{An explicit complete height bound on each level}
+\label{app:height}
+
+We reproduce the previously completed V4-H auxiliary argument so
+that the finite-level assertion has a typeset proof. Its starting
+fork inequality has classical antecedents in the unforced
+Markoff--Hurwitz setting~\cite{huTanZhang2015} and in the forced
+three-variable inequalities of Maloni, Palesi and
+Tan~\cite{maloniPalesiTan2015}. The following case analysis is for
+the specified native cyclic map; it does not substitute a full-group
+fundamental domain such as that of Shin~\cite{shin2023} for a
+native periodic orbit.
+
+\begin{proposition}
+\label{prop:height}
+For every $n\ge3$ and $a,D\in\Z$, each periodic orbit of $F$ on
+$K=D$ is contained in the box of radius
+$2n^2(|a|+|D|+n+2)$ in the maximum norm.
+\end{proposition}
+\begin{proof}
+Put $A=|a|$ and choose a point of the finite orbit maximizing
+$h(P)=\sum_j|P_j|$. Write it as
+\[
+ P=(y,z_1,\ldots,z_{n-2},x),\qquad
+ u=|x|,\quad v=|y|,\quad Q=\prod_{j=1}^{n-2}z_j,
+\]
+and set $S=u+v$, $M=\max(u,v,|z_1|,\ldots,|z_{n-2}|)$.
+The preceding native state updates $x$ before a cyclic permutation;
+the following state updates $y$. The maximality of $h$ gives both
+\begin{equation}
+ |Qy+a-x|\le u,\qquad |Qx+a-y|\le v.
+ \label{eq:fork-two}
+\end{equation}
+Adding the resulting triangle inequalities yields
+\begin{equation}
+ (|Q|-2)S\le2A.
+ \label{eq:fork-sum}
+\end{equation}
+If $|Q|=2$, the two inequalities also give
+\begin{equation}
+ |u-v|\le A/2.
+ \label{eq:fork-difference}
+\end{equation}
+We show in every case that
+\begin{equation}
+ M\le B_0:=2n(A+|D|+n+2).
+ \label{eq:local-height-target}
+\end{equation}
+Any coordinate of any orbit point is then at most its $h$-value,
+which is at most $h(P)\le nB_0$. This gives the claimed radius;
+the extra factor $n$ is retained because we maximized $h$, not
+one coordinate.
+
+\emph{Case $Q=0$.}
+The complete coordinate product is zero, and
+\[
+ D=\sum_jP_j^2-a\sum_jP_j\ge M^2-nAM.
+\]
+If $M>nA+|D|+1$, the last quantity exceeds $|D|$, a
+contradiction. This proves \eqref{eq:local-height-target} without
+requiring later update products to remain zero.
+
+\emph{Case $|Q|\ge3$.}
+If $S=0$, \eqref{eq:fork-two} forces $a=0$, and
+$D=\sum_jz_j^2\ge M^2$. If $S>0$, integrality gives $S\ge1$,
+and \eqref{eq:fork-sum} implies $S\le2A$ and $|Q|\le2+2A$.
+Every $z_j$ is a nonzero integer, so $|z_j|\le|Q|$, and hence
+$M\le2+2A$. Both branches satisfy \eqref{eq:local-height-target}.
+
+\emph{Case $|Q|=1$.}
+Every $|z_j|=1$. The inequality $|xy|\le(x^2+y^2)/2$ gives
+\[
+ D=x^2+y^2-Qxy+\sum_jz_j^2-a\left(x+y+\sum_jz_j\right)
+   \ge M^2/2-nAM.
+\]
+If $M>2nA+2|D|+2$, this exceeds $|D|$, again a contradiction.
+The resulting bound is smaller than $B_0$.
+
+\emph{Case $|Q|=2$, with a small endpoint.}
+Each $|z_j|\le2$. If $\min(u,v)\le A+1$, then
+\eqref{eq:fork-difference} gives
+$M\le\max(2,3A/2+1)<B_0$.
+
+\emph{Case $Q=2$, with $u,v>A+1$.}
+For real numbers, $|b-x|\le|x|$ says that $b$ lies between
+$0$ and $2x$. In \eqref{eq:fork-two}, $Qy+a$ and $Qx+a$
+are nonzero and have the signs of $Qy$ and $Qx$, respectively,
+because $2u,2v>A$. Therefore $Qxy>0$. When $Q=2$, write
+$x=\sigma u$, $y=\sigma v$ with $\sigma\in\{1,-1\}$.
+The two inequalities become
+\[
+ 0\le2v+\sigma a\le2u,\qquad
+ 0\le2u+\sigma a\le2v.
+\]
+Thus $\sigma a\le-2|u-v|$. If $a\ne0$, then $\sigma a=-A$,
+and
+\[
+ D=(u-v)^2+A(u+v)+\sum_j(z_j^2-a z_j)
+   \ge A(u+v)-2A(n-2).
+\]
+Since $A\ge1$, this gives $u+v\le|D|+2(n-2)$ and the
+desired bound. If $a=0$, the two inequalities force $u=v$;
+in that residual case the individual updates of both $x$ and $y$
+are fixed.
+
+\emph{Case $Q=-2$, with $u,v>A+1$.}
+The same sign argument gives $x=\sigma u$, $y=-\sigma v$.
+Now \eqref{eq:fork-two} becomes
+\[
+ 0\le2v+\sigma a\le2u,\qquad
+ 0\le2u-\sigma a\le2v.
+\]
+Hence $\sigma a=2(u-v)$, or $x+y=a/2$. Direct substitution
+shows that the individual updates of $x$ and $y$ are again fixed.
+For odd $a$, this integer subcase is empty.
+
+\emph{The remaining fixed-endpoint directions.}
+Both residual cases just obtained have fixed updates at $x,y$,
+nonzero $Q$ with $|Q|=2$, and \eqref{eq:fork-difference}.
+After the next native update of $y$, only a cyclic permutation
+has occurred. The following native step updates $z_1$ to
+\[
+ z_1'=(Q/z_1)xy+a-z_1.
+\]
+Here $Q/z_1$ is a nonzero integer. Both new states remain in the
+same orbit, so
+\[
+ uv-A-2\le|z_1'|\le h(P)\le u+v+2(n-2),
+\]
+and therefore
+\begin{equation}
+ (u-1)(v-1)\le A+2n-1.
+ \label{eq:degenerate-product}
+\end{equation}
+If $\max(u,v)>A+2n+3$, the two factors on the left, by
+\eqref{eq:fork-difference}, are respectively greater than
+$A+2n+2$ and $A/2+2n+2$. Their product exceeds $A+2n-1$,
+contradicting \eqref{eq:degenerate-product}. Thus
+$M\le A+2n+3<B_0$ in the final cases as well. All cases
+are exhausted, proving \eqref{eq:local-height-target} and the result.
+\end{proof}
+
+The argument includes zero coordinates, both signs, $a=0$, singular
+levels and the degenerate $Q=\pm2$ directions. It does not assume
+that every Vieta generator decreases height. Only the two adjacent
+native updates at a maximum and, in the residual case, the next
+native update are used.

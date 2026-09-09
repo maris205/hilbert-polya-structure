@@ -1,0 +1,144 @@
+\section{Classical finite constructions}
+
+\subsection{A uniform native-period divisor}
+\label{sec:period}
+
+For later use define the explicitly computable integers
+\begin{equation}
+ E_n=|\AGL_n(\F_2)|
+     =2^n\prod_{j=0}^{n-1}(2^n-2^j),\qquad
+ L_n=2E_n\lcm(1,2,\ldots,2^n).
+ \label{eq:period-divisor}
+\end{equation}
+The following coarse bound is a classical local integral-period
+argument. Its role is only to make the subsequent construction finite;
+neither the bound nor general decidability is a new contribution.
+For broader results see Whang~\cite{whang2023}.
+
+\begin{lemma}[Near-identity torsion obstruction]
+\label{lem:near-identity}
+Let $g(z)=z+4U(z)$ with $U\in\Z_2[z_1,\ldots,z_n]^n$.
+Every finite-period point of $g$ in $\Z_2^n$ is fixed.
+\end{lemma}
+\begin{proof}
+Use the vector valuation $v_2(w)=\min_jv_2(w_j)$, with value
+$+\infty$ at zero. Suppose $\delta=g(z)-z\ne0$ and
+$m=v_2(\delta)\ge2$. Integer polynomials are $1$-Lipschitz, so
+\[
+ g^2(z)-z=2\delta+4\bigl(U(z+\delta)-U(z)\bigr)
+          \equiv2\delta\pmod{2^{m+2}}.
+\]
+Its valuation is exactly $m+1$. The polynomial $g^2$ again has
+the form $\mathrm{id}+4V$. Repeating gives
+\[
+ v_2\bigl(g^{2^j}(z)-z\bigr)=m+j\qquad(j\ge0).
+\]
+Put $h=g^{2^j}=\mathrm{id}+4V$ and $m'=m+j$. Each intermediate
+$h^i(z)$ is congruent to $z$ modulo $2^{m'}$, by induction. Hence
+each displacement $h^{i+1}(z)-h^i(z)$ is congruent to $h(z)-z$
+modulo $2^{m'+2}$. For odd $q$, summing the $q$ displacements
+shows that $h^q(z)-z$ has valuation $m'$, not infinity.
+Every positive integer is $2^jq$ with $q$ odd, so $z$ never returns.
+\end{proof}
+
+\begin{proposition}[Integral period divisibility]
+\label{prop:period-divisor}
+For any integer polynomial automorphism $G$ of $\mathbb A^n$, with
+integer polynomial inverse, the least period of every point in
+$\Per(G,\Z^n)$ divides $L_n$.
+\end{proposition}
+\begin{proof}
+Let $P$ be periodic, and let $r$ be its period modulo two.
+Reduction of $G$ is a permutation of $\F_2^n$, so $1\le r\le2^n$.
+On the returning residue ball introduce
+\[
+ g(z)=\frac{G^r(P+2z)-P}{2}.
+\]
+This map and its inverse have integer coefficients. Its terms of
+degree at least two have even coefficients, so its coefficientwise
+reduction is an element of $\AGL_n(\F_2)$. Let that element have
+order $e$, which divides $E_n$. Then $h=g^e=\mathrm{id}+2V$
+with integer polynomial $V$, and
+\[
+ h^2(z)=z+2V(z)+2V(z+2V(z))=z+4W(z)
+\]
+for an integer polynomial $W$. The point zero is periodic under
+$g$ and hence under $h^2$. Lemma~\ref{lem:near-identity} implies
+$g^{2e}(0)=0$, or $G^{2re}(P)=P$. The least period therefore
+divides $2re$, which divides $L_n$.
+\end{proof}
+
+The inverse \eqref{eq:inverse} shows that the proposition applies
+to $F$ for all $a$ and all ordinary points, without a smoothness or
+nonzero-coordinate qualification. Iterates in this proof provide a
+divisibility bound; they do not replace the native time unit.
+
+\subsection{A constructive integer-cone lemma}
+\label{sec:cone}
+
+The next elementary construction lies within classical semilinear
+theory~\cite{ginsburgSpanier1966}. It records all finite enumeration
+steps so that the atlas does not hide an unknown truncation.
+
+\begin{lemma}[Nonnegative integer linear systems]
+\label{lem:cone}
+Given an integer matrix $M$ and an integer vector $b$, the set
+\begin{equation}
+ S=\{u\in\N^k:Mu=b\}
+ \label{eq:integer-system}
+\end{equation}
+can be effectively expressed as a finite union of integer linear
+sets. The same holds with finitely many integer linear inequalities,
+and after any integer affine projection.
+\end{lemma}
+\begin{proof}
+Form the rational pointed cone
+\[
+ C=\{(q,u)\in\R_{\ge0}^{k+1}:Mu=qb\}.
+\]
+If $C\ne\{0\}$, its intersection with $q+\sum_j u_j=1$ is a
+compact rational polytope. Enumerating finite subsets of the coordinate
+hyperplanes and solving the corresponding rational linear systems
+gives its vertices, including lower-dimensional and degenerate-rank
+cases. The polytope is the convex hull of these vertices. Clearing
+denominators gives finitely many integer ray generators
+$w_1,\ldots,w_t$ of $C$. If $C=\{0\}$, take no ray generators.
+
+Set $R_\ell=\sum_{j=1}^t(w_j)_\ell$ and enumerate the finite set
+\[
+ H=\{z\in C\cap\Z^{k+1}:0\le z_\ell\le R_\ell
+                          \text{ for all }\ell\}.
+\]
+It generates the additive monoid $C\cap\Z^{k+1}$. Indeed, write
+$z=\sum_j\lambda_jw_j$ with $\lambda_j\ge0$. Then
+\[
+ z=\sum_j\lfloor\lambda_j\rfloor w_j+
+       \sum_j(\lambda_j-\lfloor\lambda_j\rfloor)w_j.
+\]
+The remainder is an integer point of $C$, and each of its coordinates
+is bounded by $R_\ell$. Thus it belongs to $H$, as does each $w_j$.
+The case $C=\{0\}$ has $H=\{0\}$ and satisfies the same assertion.
+
+An element of this monoid with first coordinate one has exactly one
+generator of first coordinate one in any such decomposition, and
+all other used generators have first coordinate zero. Generators
+with first coordinate at least two cannot occur. It follows that
+\begin{equation}
+ S=\bigcup_{(1,v)\in H}
+       \left(v+\sum_{(0,h)\in H}\N h\right).
+ \label{eq:cone-output}
+\end{equation}
+An empty union means no solutions. Zero directions can be removed;
+the construction also covers $k=0$.
+
+Replace an integer inequality $c\cdot u\ge d$ by
+$c\cdot u-t=d$ with a new variable $t\in\N$. This reduces finitely
+many inequalities to \eqref{eq:integer-system}. Finally an integer
+affine map sends a base point and each generator to another integer
+base point and generator, preserving a representation of the form
+\eqref{eq:linear-set}.
+\end{proof}
+
+No minimal Hilbert basis, optimal ray list or efficient integer
+programming method is needed. Every enumeration has an explicit
+finite range obtained by rational linear algebra from its input.

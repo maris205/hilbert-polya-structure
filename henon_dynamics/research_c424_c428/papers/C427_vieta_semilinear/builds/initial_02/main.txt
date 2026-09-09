@@ -1,0 +1,642 @@
+          A semilinear atlas for integral Vieta recurrence cycles
+                                                         Anonymous
+
+                                                   9 September 2026
+
+
+                                                           Abstract
+         For every integer n ≥ 3 and a ∈ Z, consider the polynomial automorphism F (x1 , . . . , xn ) =
+     (x2 , . . . , xn , x2 · · · xn + a − x1 ). We give a terminating exact construction of its entire integral
+     periodic set as a finite union of integer linear sets with free nonnegative parameters and exact
+     least-period labels. The unbounded output sets account for every unbounded family; the remain-
+     ing finite set is uniform across all invariant levels. The new argument, for n ≥ 4, is a local rigidity
+     statement for maximal nonzero blocks of a periodic coordinate sequence. Every nonzero update
+     product containing a coordinate larger than |a| + 4 has exactly one large factor, with all other
+     factors units. The full periodic recurrence consequently becomes a finite collection of integer
+     linear systems. Classical integral-period bounds and a constructive integer-cone argument com-
+     plete the parametrization, including all least-period degeneracies. The three-dimensional case
+     uses a previously established computer-assisted classification. We also give finite-level counting
+     rules, while making no claim of efficient complexity or of an executed all-input atlas.
+
+Keywords: integral dynamics; Vieta recurrence; semilinear set; least period; polynomial automor-
+phism; integer cone.
+
+
+1    The complete integral periodic set
+Fix n ≥ 3 and a ∈ Z, and set
+
+                             F (x1 , . . . , xn ) = (x2 , . . . , xn , x2 · · · xn + a − x1 ).                    (1.1)
+
+One application of F is one time step throughout. We keep every integer point, including zero
+coordinates and points on singular levels. The inverse and invariant are
+
+                          F −1 (y1 , . . . , yn ) = (y1 · · · yn−1 + a − yn , y1 , . . . , yn−1 ),                (1.2)
+                                                     n
+                                                     X             n
+                                                                   Y              n
+                                                                                  X
+                                          K(x) =           x2j −         xj − a         xj .                      (1.3)
+                                                     j=1           j=1            j=1
+
+Indeed, with the other coordinates fixed, the part depending on a coordinate t is t2 − (Q + a)t,
+where Q is their product. Replacing t by Q + a − t preserves it, and K is invariant under cyclic
+permutations.
+   Write N = {0, 1, 2, . . .}. An integer linear set in Zn means a set
+                                                                                         
+                                                  s
+                                                   X                                      
+               L(v; w1 , . . . , ws ) =       v+         mj wj : m1 , . . . , ms ∈ N ,           v, wj ∈ Zn .     (1.4)
+                                                                                         
+                                                   j=1
+
+A finite union of such sets is semilinear. The parameters are free: no further polynomial equation is
+imposed on them. We do not require linearly independent directions, an injective parametrization,
+
+                                                               1
+or disjoint output sets. An empty direction list gives a singleton; after zero directions are deleted, a
+nonempty list gives an unbounded set, called a channel here. This is a parametrization convention,
+not a claim of maximality or irreducible decomposition.
+Theorem 1.1 (Effective semilinear atlas). There is an exact algorithm which terminates for every
+input (n, a) and outputs finitely many sets of the form (1.4), each labelled by a positive integer, with
+the following properties.
+  1. Their union is exactly Per(F, Zn ), and every point in an output set has the labelled native
+     least period.
+
+  2. The sets with nonzero directions, together with a finite explicit set En,a , give the entire periodic
+     set. Both the channels and En,a are determined independently of the invariant level D.
+
+  3. The algorithm gives the complete semilinear locus of every possible least period. For any
+     D ∈ Z, the periodic points and oriented native cycles on K = D are finite and effectively
+     countable.
+The new proof in dimensions n ≥ 4 is entirely analytic and algebraic. The case n = 3 uses the
+previously established, computer-assisted classification in C421 [1].
+   The construction is finite but may be very large. It does not assert that an atlas has been
+computed for every input, that its directions are minimal, or that its complexity is practical.
+Describing the periodic set merely as F L (x) = x would leave nonlinear integer equations unsolved.
+The theorem instead outputs unrestricted generators and base points as in (1.4).
+
+1.1   Classical inputs and the additional argument
+The unforced map belongs to the Markoff–Hurwitz setting studied by Hu, Tan and Zhang [3]. Their
+object is the full group preserving the unforced polynomial, not this one forced native map. Uniform
+integral-period mechanisms are classical; Whang [6] proves effective bounds and decidability in
+considerably greater generality than needed here. Effective semilinear descriptions and their logical
+closure properties belong to the classical theory of Ginsburg and Spanier [2]. We give explicit proofs
+of the particular period and integer-cone facts we use, without claiming them as new results.
+
+  Input or contribution      Exact role and ownership boundary
+  Uniform integral periods   Classical input; an explicit coarse divisibility bound is proved in Section 3.1.
+  Semilinear machinery       Classical input; Section 3.2 gives a finite integer-cone construction.
+  n = 3 cycles               The complete C421 classification, including its finite computational depen-
+                             dency, is inherited.
+  Nonzero-block rigidity     The new n ≥ 4 step controls every mixed-zero window and makes the entire
+                             periodic recurrence linear after tagging.
+
+Table 1: The single integrated contribution is the full nonlinear periodic-set reduction and atlas,
+not its separate classical inputs.
+
+   A uniform period bound by itself is not enough. Consider the polynomial automorphism
+
+                                    H(x, y, z) = (x, y, z + y − x2 ).
+
+Every periodic point is fixed and satisfies y = x2 . Its projection to (x, y) is not semilinear: an
+integer ray (x0 , y0 ) + m(u, v) contained in this parabola for every m ∈ N must have u = 0 by the
+
+                                                     2
+quadratic coefficient and then v = 0. A finite union of such projected linear sets is finite, whereas
+the parabola has infinitely many integer points. Thus even a uniform least-period bound of one
+does not supply a semilinear atlas.
+    For (1.1), the additional mechanism is local to each maximal nonzero block. It handles the
+mixed-zero domain without assuming that all unbounded cycles belong to a single previously ex-
+hibited family. Section 2 proves this mechanism; Sections 3.1–4 complete the atlas. The ordinary
+zeta functions at the end concern only this source dynamical system, not target Euler factors or
+spectral zero data.
+
+
+2    Rigidity of each nonzero block
+A periodic orbit of F is encoded by a bi-infinite periodic integer sequence satisfying
+                                                        n−1
+                                                        Y
+                                     xi+n + xi =              xi+j + a.                         (2.1)
+                                                        j=1
+
+Its consecutive length-n blocks are the native states. In this section n ≥ 4, A = |a|, and B = A + 4.
+Lemma 2.1 (Internal maxima). If a periodic sequence has no zero, all its coordinates have absolute
+value at most B. If it has zeros, let x1 , . . . , xr be a maximal nonzero block, with x0 = xr+1 = 0,
+and put M = max1≤j≤r |xj |. When r ≥ n − 1 and M > B, every occurrence of absolute value M
+in this block is an endpoint.
+Proof. For a nonzero window of length n − 1 contained in this block, its two external neighbours
+belong either to the block or to its adjacent zeros. Therefore
+                                          n−1
+                                          Y
+                                                xi+j ≤ 2M + A.                                  (2.2)
+                                          j=1
+
+This is a block-local estimate, independent of the heights in other blocks beyond the zeros.
+    Suppose an internal position has absolute value M > A. Because n − 1 ≥ 3, choose a length-
+(n − 1) window within the block which contains that position strictly internally. Write its external
+neighbours as z− , z+ . Moving the window one place left preserves the maximum factor and all
+nonzero internal factors. If the new factor z− is zero, the inequality M |z− | ≤ 2M + A is immediate;
+otherwise the shifted window is in the same block and (2.2) proves it. The right shift similarly
+gives M |z+ | ≤ 2M + A. Since M > A, both neighbours have absolute value less than three, and
+thus at most two. The unshifted recurrence now gives
+                                    Y
+                            M≤          xj = |z− + z+ − a| ≤ A + 4 = B.
+
+This contradicts M > B. If the whole sequence is nonzero, use its global maximum in an internal
+window; the identical argument proves the first assertion. The all-zero sequence needs no block
+analysis.
+
+Lemma 2.2 (Large blocks). Every maximal nonzero block of length at least n − 1 containing a
+coordinate of absolute value greater than B has length exactly n. Its n − 2 internal coordinates are
+units. After possibly reversing indices in the proof, its endpoints satisfy
+                                                n−1
+                                                Y
+                    xn = εx1 + a,        ε=           xj ∈ {1, −1},       (1 + ε)a = 0.         (2.3)
+                                                j=2
+
+
+                                                       3
+                                                                                  n−1
+Proof. If the block length is n − 1, the recurrence across its two zeros gives j=1    xj = −a. The
+                                                                                      Q
+
+product is a nonzero integer, so a ̸= 0 and every factor has absolute value at most A. It cannot be
+a large block.
+    Suppose the length is at least n and its maximum is M > B. Lemma 2.1 places a maximum at
+an endpoint. The recurrence is preserved by index reversal with the same a, so assume |x1 | = M .
+This reversal is a proof device, not an identification of oriented native orbits. Put C = n−1
+                                                                                           Q
+                                                                                             j=2 xj .
+The recurrence at the left zero gives xn = Cx1 + a, whence
+                                       M |C| ≤ M + A < 2M.
+The nonzero integer C is therefore a sign ε, and each of its factors is a unit. If the length equals n,
+the next recurrence gives x1 = εxn + a, proving (2.3). The second endpoint need not also exceed
+B; no such assumption is used.
+   It remains to exclude a length at least n + 1. The next coordinate is
+                                  xn+1 = εxn + a − x1 = (1 + ε)a.
+It is nonzero, so a ̸= 0, ε = 1, and xn+1 = 2a. The window x3 , . . . , xn+1 has unit factors up to
+xn−1 and remaining factors xn , 2a. Its external neighbours are the unit x2 and a coordinate xn+2
+of absolute value at most M (possibly the right zero). Consequently
+                       2A|xn | ≤ M + A + 1,           (2A − 1)M ≤ 2A2 + A + 1.
+Here |xn | = |x1 + a| ≥ M − A and A ≥ 1. But
+                          (2A − 1)(A + 4) − (2A2 + A + 1) = 6A − 5 > 0,
+contradicting M > A + 4. A right-end maximum is covered by the same reversal argument.
+
+Corollary 2.3 (Every update is linear after finite tagging). In any periodic sequence, each nonzero
+update product in (2.1) either has all factors of absolute value at most B, or has exactly one factor
+exceeding B in absolute value, with all its other factors in {1, −1}.
+Proof. The zero-free case follows from Lemma 2.1. Otherwise a nonzero window lies in one maximal
+nonzero block. Blocks shorter than n − 1 cannot contain such a window; blocks of length n − 1 are
+bounded. A block with a large factor has exactly n entries by Lemma 2.2. Its two possible nonzero
+windows of length n − 1 each omit one endpoint. Thus a window with a large factor has only one
+large endpoint, and all companions are units. If neither endpoint in that window is large, it is the
+first case.
+
+    The corollary includes arbitrarily many large coordinates separated by zeros: an update product
+containing a zero is zero regardless of the other factors. It imposes no independence assumption on
+distinct blocks, no bound on their number, and no guess about the dimension of a channel. These
+are the cases which a zero-free height bound alone leaves untreated.
+
+
+3     Classical finite constructions
+3.1   A uniform native-period divisor
+For later use define the explicitly computable integers
+                                         n−1
+                                         Y
+               En = | AGLn (F2 )| = 2n         (2n − 2j ),   Ln = 2En lcm(1, 2, . . . , 2n ).     (3.1)
+                                         j=0
+
+
+                                                      4
+The following coarse bound is a classical local integral-period argument. Its role is only to make the
+subsequent construction finite; neither the bound nor general decidability is a new contribution.
+For broader results see Whang [6].
+Lemma 3.1 (Near-identity torsion obstruction). Let g(z) = z + 4U (z) with U ∈ Z2 [z1 , . . . , zn ]n .
+Every finite-period point of g in Zn2 is fixed.
+Proof. Use the vector valuation v2 (w) = minj v2 (wj ), with value +∞ at zero. Suppose δ = g(z) −
+z ̸= 0 and m = v2 (δ) ≥ 2. Integer polynomials are 1-Lipschitz, so
+
+                     g 2 (z) − z = 2δ + 4 U (z + δ) − U (z) ≡ 2δ    (mod 2m+2 ).
+                                                          
+
+
+Its valuation is exactly m + 1. The polynomial g 2 again has the form id + 4V . Repeating gives
+                                      j
+                                 v2 g 2 (z) − z = m + j
+                                               
+                                                              (j ≥ 0).
+           j                                                                                         ′
+Put h = g 2 = id + 4V and m′ = m + j. Each intermediate hi (z) is congruent to z modulo 2m ,
+                                                                                          ′
+by induction. Hence each displacement hi+1 (z) − hi (z) is congruent to h(z) − z modulo 2m +2 . For
+odd q, summing the q displacements shows that hq (z) − z has valuation m′ , not infinity. Every
+positive integer is 2j q with q odd, so z never returns.
+
+Proposition 3.2 (Integral period divisibility). For any integer polynomial automorphism G of An ,
+with integer polynomial inverse, the least period of every point in Per(G, Zn ) divides Ln .
+Proof. Let P be periodic, and let r be its period modulo two. Reduction of G is a permutation of
+Fn2 , so 1 ≤ r ≤ 2n . On the returning residue ball introduce
+                                               Gr (P + 2z) − P
+                                      g(z) =                   .
+                                                      2
+This map and its inverse have integer coefficients. Its terms of degree at least two have even
+coefficients, so its coefficientwise reduction is an element of AGLn (F2 ). Let that element have order
+e, which divides En . Then h = g e = id + 2V with integer polynomial V , and
+
+                         h2 (z) = z + 2V (z) + 2V (z + 2V (z)) = z + 4W (z)
+
+for an integer polynomial W . The point zero is periodic under g and hence under h2 . Lemma 3.1
+implies g 2e (0) = 0, or G2re (P ) = P . The least period therefore divides 2re, which divides Ln .
+
+   The inverse (1.2) shows that the proposition applies to F for all a and all ordinary points, with-
+out a smoothness or nonzero-coordinate qualification. Iterates in this proof provide a divisibility
+bound; they do not replace the native time unit.
+
+3.2   A constructive integer-cone lemma
+The next elementary construction lies within classical semilinear theory [2]. It records all finite
+enumeration steps so that the atlas does not hide an unknown truncation.
+Lemma 3.3 (Nonnegative integer linear systems). Given an integer matrix M and an integer
+vector b, the set
+                                S = {u ∈ Nk : M u = b}                             (3.2)
+can be effectively expressed as a finite union of integer linear sets. The same holds with finitely
+many integer linear inequalities, and after any integer affine projection.
+
+                                                   5
+Proof. Form the rational pointed cone
+
+                                   C = {(q, u) ∈ Rk+1
+                                                  ≥0 : M u = qb}.
+
+If C ̸= {0}, its intersection with q + j uj = 1 is a compact rational polytope. Enumerating finite
+                                      P
+
+subsets of the coordinate hyperplanes and solving the corresponding rational linear systems gives
+its vertices, including lower-dimensional and degenerate-rank cases. The polytope is the convex
+hull of these vertices. Clearing denominators gives finitely many integer ray generators w1 , . . . , wt
+of C. If C = {0}, take no ray generators.
+    Set Rℓ = tj=1 (wj )ℓ and enumerate the finite set
+               P
+
+
+                             H = {z ∈ C ∩ Zk+1 : 0 ≤ zℓ ≤ Rℓ for all ℓ}.
+
+It generates the additive monoid C ∩ Zk+1 . Indeed, write z =                      j λj wj with λj ≥ 0. Then
+                                                                              P
+
+                                      X                  X
+                                 z=        ⌊λj ⌋wj +             (λj − ⌊λj ⌋)wj .
+                                       j                     j
+
+The remainder is an integer point of C, and each of its coordinates is bounded by Rℓ . Thus it
+belongs to H, as does each wj . The case C = {0} has H = {0} and satisfies the same assertion.
+   An element of this monoid with first coordinate one has exactly one generator of first coordinate
+one in any such decomposition, and all other used generators have first coordinate zero. Generators
+with first coordinate at least two cannot occur. It follows that
+                                                                            
+                                             [                    X
+                                    S=               v +                  Nh .                               (3.3)
+                                           (1,v)∈H               (0,h)∈H
+
+An empty union means no solutions. Zero directions can be removed; the construction also covers
+k = 0.
+    Replace an integer inequality c · u ≥ d by c · u − t = d with a new variable t ∈ N. This
+reduces finitely many inequalities to (3.2). Finally an integer affine map sends a base point and
+each generator to another integer base point and generator, preserving a representation of the form
+(1.4).
+
+   No minimal Hilbert basis, optimal ray list or efficient integer programming method is needed.
+Every enumeration has an explicit finite range obtained by rational linear algebra from its input.
+
+
+4     The exact finite construction
+Fix n ≥ 4 and a, and use B = |a| + 4 and L = Ln from (3.1). All indices in this section are
+read modulo L. Proposition 3.2 implies that any periodic point has a coordinate word of length L,
+possibly with a smaller least period.
+
+4.1   Finite tags and actual products
+Enumerate every length-L array in the finite alphabet
+
+                               AB = {−B, −B + 1, . . . , B} ∪ {⋆+ , ⋆− }.
+
+
+
+                                                         6
+Arrays are not identified under cyclic rotation: every initial phase is retained. A constant label c
+imposes Xi = c. For each large label introduce its own nonnegative integer variable ui and impose
+
+                        Xi = B + 1 + ui      (⋆+ ),        Xi = −B − 1 − ui    (⋆− ).                   (4.1)
+
+These substitutions make the label semantics exact, including the threshold and the sign. Zero
+occurs only as the constant label zero.
+    For each window i + 1, . . . , i + n − 1, apply the exhaustive rule in Table 2. If any window is
+rejected, discard its entire array. For every retained array, let Pi be the expression in the table and
+impose all L equations
+                                  Xi+n + Xi = Pi + a      (0 ≤ i < L).                             (4.2)
+
+
+  Labels in a length-(n − 1) window                                   Product expression or action
+  At least one constant zero                                          Pi = 0, with any number of large la-
+                                                                      bels.
+  No zero and no large label                                          Pi is the product of all constant la-
+                                                                      bels.
+  No zero; exactly one large label; all others units                  Pi = εXj , where j is the large posi-
+                                                                      tion and ε is the product of the unit
+                                                                      labels.
+  Every other case                                                    Reject the array.
+
+Table 2: Exact product cases. The rejection is necessary for a periodic word by Corollary 2.3; the
+retained cases are actual integer products, not approximations.
+
+   After (4.1), equations (4.2) form an integer linear system M u = b, u ∈ Nk . In particular, no
+two undetermined variables are multiplied. Lemma 3.3 supplies all solutions with free nonnegative
+parameters. Project them to (X0 , . . . , Xn−1 ).
+
+Proposition 4.1 (Exactness of tagging). The union of these projected solution sets is exactly
+Per(F, Zn ).
+
+Proof. For necessity, take any periodic point and its actual length-L coordinate word. Label small
+coordinates by their values and large coordinates by their signs. Corollary 2.3 shows that none of
+its windows is rejected. Its actual large offsets are nonnegative integers, and the recurrence gives
+every equation (4.2).
+    Conversely, take a solution from any retained array. The substitutions (4.1) ensure that the
+labels are true statements about the resulting integer coordinates. In each retained case the expres-
+sion Pi is therefore the actual product of the coordinates in that window. All equations (4.2) are
+exactly the original recurrence. Starting from its first n coordinates, F moves along this word one
+native step at a time and returns at time L. Thus every projected solution is a genuine periodic
+point.
+
+4.2   Exact least-period labels
+For each positive divisor r | L, add to each retained system the linear equations
+
+                                       Xi+r = Xi           (0 ≤ i < L).                                 (4.3)
+
+
+
+
+                                                       7
+For every proper divisor d | r, exclude period d by requiring some index id with Xid +d ̸= Xid . This
+is a finite union of linear cases: choose id ∈ {0, . . . , L − 1} and ηd ∈ {1, −1}, and impose
+
+                                         ηd (Xid +d − Xid ) ≥ 1.                                   (4.4)
+
+Enumerate all such choices for all proper divisors. If r = 1, there are no exclusion inequalities. Add
+nonnegative slack variables and apply Lemma 3.3 once more.
+     These systems have exactly least scalar period r: (4.3) makes the least period divide r, and (4.4)
+excludes every proper divisor. Conversely a word with least period r supplies at least one index
+and sign for every excluded divisor, so is included in the finite union. Integer strict inequalities are
+encoded without losing equality or sign boundary cases.
+     The least scalar shift period equals the least native state period. A repeated state determines
+all subsequent entries by the recurrence and all preceding entries by its inverse; hence it repeats the
+entire word. The converse follows immediately by taking consecutive length-n states. Thus each
+projected linear set can be labelled by r without a change of clock or an orbit quotient.
+
+4.3   Channels, finite remainder and termination
+In every projected linear set remove zero direction vectors. If a nonzero direction remains, taking
+its nonnegative multiples already gives an unbounded sequence of points. The whole set has the
+exact least-period label just established. If no direction remains, the output is one explicit point.
+Collect all such points in En,a . We obtain the complete equality
+                                       J
+                                       [
+                        n
+                Per(F, Z ) = En,a ∪          L(vj ; wj1 , . . . , wjsj ),   sj ≥ 1,   wjk ̸= 0.    (4.5)
+                                       j=1
+
+The lists may overlap, but no periodic point is missing. Every output labelled by one period consists
+solely of points with that period, so different period strata cannot overlap.
+    All numbers L, B, all tag arrays, all divisors and exclusion choices, all cone vertices, and all
+boxes used in Lemma 3.3 are computable and finite. This proves termination for every (n, a),
+without an empirical stopping rule. Once the list is produced,
+                                                                              
+                               Rn,a = max {0} ∪ {∥P ∥∞ : P ∈ En,a }
+
+is an explicit finite remainder bound. It depends on n, a, not on an invariant level. If desired,
+singleton entries lying in a channel can be removed by a nonnegative linear-system membership
+test. Such removal is optional and does not affect (4.5) or the finiteness of the remainder.
+    This completes the new n ≥ 4 part of Theorem 1.1. No step assumes that each channel is a
+line, that zero-separated blocks can be chosen independently, or that all large cycles arise from a
+single special family.
+
+
+5     Three dimensions, level counts and scope
+5.1   The inherited three-dimensional case
+The preceding internal-window argument needs n − 1 ≥ 3 and is not applied when n = 3. In that
+dimension, Theorem 2.1 and its complete table in C421 [1] classify every integral periodic orbit of
+(x, y, z) 7→ (y, z, yz + a − x), with exact native least periods
+
+                                        {1, 2, 3, 4, 5, 6, 8, 9, 12}.
+
+                                                        8
+That theorem is an explicitly inherited computer-assisted result, not a new computation-free con-
+clusion of this paper.
+    For clarity, its table gives precisely the structure needed here. For fixed a, the constant words
+satisfy a = 2r − r2 and form a finite set. The two-periodic alternating words satisfy
+                                       (u − 1)(v − 1) = 1 − a.
+If a ̸= 1, finite divisor enumeration gives all integer pairs; if a = 1, the solutions lie on u = 1 or
+v = 1. The exact-period and orientation exclusions in that table are linear inequalities or removal of
+finitely many parameters. Every other parametric word is affine in its integer parameter, with linear
+range conditions, and the two sporadic words give finitely many points. Taking every consecutive
+triple of these words preserves this description. An unrestricted integer parameter splits into its
+nonnegative and negative rays, and a finite exclusion splits a ray into finitely many rays or points.
+Thus all these sets are effectively of the form (1.4), with the exact least-period labels supplied by
+the table. This proves the n = 3 part of Theorem 1.1 using exactly the stated prior theorem.
+    The C421 proof reduces its residual to a finite exact certificate, with independently rebuilt
+cycles, and retains all unbounded families symbolically. Its source, actual certificate and review are
+available with that manuscript. None was rerun for the present paper. In particular, our hand proof
+for n ≥ 4 must not be used to relabel the three-dimensional imported theorem as computation-free.
+
+5.2   Finite levels and ordinary cycle counts
+Appendix A reproduces a previously completed auxiliary height argument, including its degenerate
+branches. For any n ≥ 3 and a, D ∈ Z, it gives
+                           ∥P ∥∞ ≤ R(n, a, D) := 2n2 |a| + |D| + n + 2
+                                                                                
+                                                                                                 (5.1)
+for every periodic point on K = D. This is a level-dependent bound, not a common bound over all
+levels.
+    Enumerate all integer points of K = D in the box [−R(n, a, D), R(n, a, D)]n . Put an arrow
+P → F (P ) when both ends are in this finite set. Its directed cycles are exactly the periodic points
+on the level: every genuine periodic orbit is inside the box by (5.1), and every graph cycle is an
+actual native orbit. The cycle length is its least period. This gives an exact terminating counting
+rule using only finite integer arithmetic. The graph is a proved algorithm, not a reported execution
+over all inputs.
+    Alternatively, use the atlas membership tests on this finite set. Always count distinct coordinate
+points, not their possibly repeated semilinear parameter representations. If Nr (a, D) is the number
+of points of least period r, then cr (a, D) = Nr (a, D)/r is the number of oriented native cycles.
+Consequently
+                                                         X
+                           # Fix(F m | K = D, Zn ) =           r cr (a, D),                      (5.2)
+                                                         r|m
+
+                                                             (1 − z r )−cr (a,D) .
+                                                         Y
+                                            ζa,D (z) =                                           (5.3)
+                                                         r
+
+There are only finitely many nonzero factors. These are ordinary source-dynamical counts with no
+multiplicity weighting, prime relabeling or altered clock. A finite-count zeta on the entire integer
+lattice is not asserted.
+    For example, when n = 4 and a ̸= 0, the previously observed zero-product family P = (0, a, 0, t),
+t ∈ Z, follows the word
+                                       (0, a, 0, t, a, 0, a, a − t).
+
+                                                  9
+Every cyclic window of length three contains a zero, so this is an actual F -word with period dividing
+eight. Four steps send its first coordinate from 0 to a, excluding all proper divisors of eight; its
+least period is eight for every t. Its invariant is t(t − a), illustrating why an unbounded channel
+can meet each fixed level in only finitely many points. This family is an illustration, not the basis
+of the exhaustive atlas or an additional contribution counted separately.
+
+5.3   Limitations and reproducibility
+The result concerns the specified single native map over the ordinary integer lattice. It does
+not classify rational or complex periodic schemes, arbitrary words in all Vieta involutions, or
+unrelated additive forcing in each coordinate. The output is not a canonical or minimal channel
+decomposition. The elementary constant Ln is large, and no useful complexity bound is claimed.
+    All new n ≥ 4 arguments, the classical finite constructions, and the level-height proof are
+included here. The research-stage bounded exploratory program is not a proof dependency; it
+neither generated the full atlas nor replaces any infinite-parameter argument. The inherited n = 3
+computation is identified above. Source ownership and actual access limits are recorded in the
+accompanying source audit. These bounded checks do not certify worldwide priority or journal
+acceptance.
+    The ordinary factors in (5.3) do not establish target arithmetic Euler factors, root numbers,
+automorphy, a spectral zero correspondence or a Hilbert–Pólya realization. The result is a source-
+system classification.
+
+Availability and preparation. The LaTeX source, proof notes, source audit and internal review
+records accompany this manuscript; the cited C421 package contains its own exact computational
+evidence. Preparation and internal checking used AI assistance; no human peer review is claimed.
+No human participants or sensitive personal data are involved. Named-author contribution, funding
+and competing-interest information was not supplied, and no such declaration is inferred from the
+anonymous working-paper format.
+
+
+References
+[1] Anonymous. Integral periodic orbits of a cubic three-term recurrence. Hénon dynamics research
+    manuscript C421, 2026. 8 September 2026. Theorem 2.1 and its complete classification table;
+    internally reviewed computer-assisted result, no journal publication asserted.
+
+[2] Seymour Ginsburg and Edwin H. Spanier. Semigroups, Presburger formulas, and languages.
+    Pacific Journal of Mathematics, 16(2):285–296, 1966. doi: 10.2140/pjm.1966.16.285. URL
+    https://msp.org/pjm/1966/16-2/pjm-v16-n2-p09-p.pdf.
+
+[3] Hengnan Hu, Ser Peow Tan, and Ying Zhang. Polynomial automorphisms of Cn preserving
+    the Markoff–Hurwitz polynomial. Geometriae Dedicata, 192:207–243, 2018. doi: 10.1007/
+    s10711-017-0235-z. URL https://arxiv.org/abs/1501.06955v2. Proof version consulted:
+    arXiv:1501.06955v2, 6 May 2015.
+
+[4] Sara Maloni, Frédéric Palesi, and Ser Peow Tan. On the character variety of the four-
+    holed sphere. Groups, Geometry, and Dynamics, 9(3):737–782, 2015. doi: 10.4171/GGD/
+    326. URL https://ems.press/journals/ggd/articles/13338. Fork proof consulted in
+    arXiv:1304.5770v1, Lemma 3.3.
+
+
+                                                 10
+[5] Eunju Shin. Fundamental domain for the Markoff–Hurwitz equation. arXiv:2312.07890v2, 2023.
+    URL https://arxiv.org/abs/2312.07890v2. Version 2, 17 December 2023.
+
+[6] Junho Peter Whang. On periodic orbits of polynomial maps. arXiv:2305.13529v3, 2023. URL
+    https://arxiv.org/abs/2305.13529v3. Version 3, 8 September 2023.
+
+
+
+A     An explicit complete height bound on each level
+We reproduce the previously completed V4-H auxiliary argument so that the finite-level assertion
+has a typeset proof. Its starting fork inequality has classical antecedents in the unforced Markoff–
+Hurwitz setting [3] and in the forced three-variable inequalities of Maloni, Palesi and Tan [4]. The
+following case analysis is for the specified native cyclic map; it does not substitute a full-group
+fundamental domain such as that of Shin [5] for a native periodic orbit.
+
+Proposition A.1. For every n ≥ 3 and a, D ∈ Z, each periodic orbit of F on K = D is contained
+in the box of radius 2n2 (|a| + |D| + n + 2) in the maximum norm.
+
+Proof. Put A = |a| and choose a point of the finite orbit maximizing h(P ) =                     j |Pj |. Write it as
+                                                                                           P
+
+
+                                                                                    n−2
+                                                                                    Y
+                    P = (y, z1 , . . . , zn−2 , x),      u = |x|,   v = |y|,   Q=         zj ,
+                                                                                    j=1
+
+and set S = u + v, M = max(u, v, |z1 |, . . . , |zn−2 |). The preceding native state updates x before a
+cyclic permutation; the following state updates y. The maximality of h gives both
+
+                                 |Qy + a − x| ≤ u,            |Qx + a − y| ≤ v.                                 (A.1)
+
+Adding the resulting triangle inequalities yields
+
+                                                (|Q| − 2)S ≤ 2A.                                                (A.2)
+
+If |Q| = 2, the two inequalities also give
+
+                                                  |u − v| ≤ A/2.                                                (A.3)
+
+We show in every case that
+                                     M ≤ B0 := 2n(A + |D| + n + 2).                                             (A.4)
+Any coordinate of any orbit point is then at most its h-value, which is at most h(P ) ≤ nB0 . This
+gives the claimed radius; the extra factor n is retained because we maximized h, not one coordinate.
+    Case Q = 0. The complete coordinate product is zero, and
+                                         X               X
+                                   D=          Pj2 − a       Pj ≥ M 2 − nAM.
+                                           j             j
+
+If M > nA + |D| + 1, the last quantity exceeds |D|, a contradiction. This proves (A.4) without
+requiring later update products to remain zero.
+    Case |Q| ≥ 3. If S = 0, (A.1) forces a = 0, and D = j zj2 ≥ M 2 . If S > 0, integrality gives
+                                                        P
+
+S ≥ 1, and (A.2) implies S ≤ 2A and |Q| ≤ 2 + 2A. Every zj is a nonzero integer, so |zj | ≤ |Q|,
+and hence M ≤ 2 + 2A. Both branches satisfy (A.4).
+
+                                                         11
+   Case |Q| = 1. Every |zj | = 1. The inequality |xy| ≤ (x2 + y 2 )/2 gives
+                                                                   
+                                       X                       X
+                D = x2 + y 2 − Qxy +        zj2 − a x + y +       zj  ≥ M 2 /2 − nAM.
+                                        j                      j
+
+If M > 2nA + 2|D| + 2, this exceeds |D|, again a contradiction. The resulting bound is smaller
+than B0 .
+    Case |Q| = 2, with a small endpoint. Each |zj | ≤ 2. If min(u, v) ≤ A + 1, then (A.3) gives
+M ≤ max(2, 3A/2 + 1) < B0 .
+    Case Q = 2, with u, v > A + 1. For real numbers, |b − x| ≤ |x| says that b lies between 0 and 2x.
+In (A.1), Qy + a and Qx + a are nonzero and have the signs of Qy and Qx, respectively, because
+2u, 2v > A. Therefore Qxy > 0. When Q = 2, write x = σu, y = σv with σ ∈ {1, −1}. The two
+inequalities become
+                            0 ≤ 2v + σa ≤ 2u,      0 ≤ 2u + σa ≤ 2v.
+Thus σa ≤ −2|u − v|. If a ̸= 0, then σa = −A, and
+                                              X
+                D = (u − v)2 + A(u + v) +          (zj2 − azj ) ≥ A(u + v) − 2A(n − 2).
+                                               j
+
+Since A ≥ 1, this gives u + v ≤ |D| + 2(n − 2) and the desired bound. If a = 0, the two inequalities
+force u = v; in that residual case the individual updates of both x and y are fixed.
+    Case Q = −2, with u, v > A + 1. The same sign argument gives x = σu, y = −σv. Now (A.1)
+becomes
+                              0 ≤ 2v + σa ≤ 2u,      0 ≤ 2u − σa ≤ 2v.
+Hence σa = 2(u − v), or x + y = a/2. Direct substitution shows that the individual updates of x
+and y are again fixed. For odd a, this integer subcase is empty.
+   The remaining fixed-endpoint directions. Both residual cases just obtained have fixed updates
+at x, y, nonzero Q with |Q| = 2, and (A.3). After the next native update of y, only a cyclic
+permutation has occurred. The following native step updates z1 to
+
+                                      z1′ = (Q/z1 )xy + a − z1 .
+
+Here Q/z1 is a nonzero integer. Both new states remain in the same orbit, so
+
+                           uv − A − 2 ≤ |z1′ | ≤ h(P ) ≤ u + v + 2(n − 2),
+
+and therefore
+                                   (u − 1)(v − 1) ≤ A + 2n − 1.                                (A.5)
+If max(u, v) > A + 2n + 3, the two factors on the left, by (A.3), are respectively greater than
+A + 2n + 2 and A/2 + 2n + 2. Their product exceeds A + 2n − 1, contradicting (A.5). Thus
+M ≤ A + 2n + 3 < B0 in the final cases as well. All cases are exhausted, proving (A.4) and the
+result.
+
+   The argument includes zero coordinates, both signs, a = 0, singular levels and the degenerate
+Q = ±2 directions. It does not assume that every Vieta generator decreases height. Only the two
+adjacent native updates at a maximum and, in the residual case, the next native update are used.
+
+
+
+
+                                                    12
+

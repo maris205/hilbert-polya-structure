@@ -1,0 +1,120 @@
+\section{The finite certificate in reproducible form}
+\label{app:certificate}
+
+\subsection{Executed mathematical producer}
+
+The following listing is included directly from the byte-identical
+executed producer, rather than rewritten as a new implementation.
+It contains canonical rotation, the exact transition, word
+verification, parametric-family generation, exhaustive pruning,
+cycle extraction, and the complete per-parameter output construction.
+The omitted outer wrapper calls \texttt{certificate(a)} for
+\texttt{a in range(-145, 2)} and serializes those records with
+metadata and the aggregate summary; the entire wrapper remains
+in \path{evidence/certify_am1_core.py}.
+
+\lstinputlisting[firstline=4,lastline=132]{evidence/certify_am1_core.py}
+
+The code divides only quantities already proved to be integral.
+The predicate
+\[
+ \texttt{len(states\_z(word)) == length}
+\]
+establishes
+that all states before the first return are distinct; coupled
+with the verified recurrence, it certifies exact period.
+The union equality \texttt{covered == current} certifies that
+no stable state is omitted from the reported cycles.
+The family generator is bounded by the largest possible
+triangular argument $1-a$; its role is comparison to proved
+families, not the exhaustion of the state graph.
+
+\subsection{Independent mathematical checker}
+
+The second listing is the mathematical core of the separately
+implemented checker. Its box completeness and functional-graph
+logic were proved in Section~\ref{sec:finite}.
+The full source subsequently computes all 147 graphs, loads the
+author result only after that computation, and compares every
+oriented word and expanded state set, with individual period
+labels and aggregate fields checked as well.
+
+\lstinputlisting[firstline=4,lastline=86]{evidence/check_original_square.py}
+
+\subsection{The complete per-parameter receipt}
+
+Table~\ref{tab:residual} is a direct formatting of stored fields
+of \path{evidence/FINITE_CORE_RESULTS.json}; it does not execute
+either mathematical program. The columns are the parameter $a$,
+bound $B_a$, alphabet size $|S_a|$, number $j$ of strict pruning
+decreases, number $p_a$ of periodic points, and multiset of
+cycle lengths. The notation $d^{[c]}$ means $c$ distinct cycles
+of length $d$, not a point count; a dash means no cycle.
+Every row has an independent full cycle-and-state match.
+Complete alphabets, every pruning cardinality, and actual words
+are present in the unabridged exact output. The four universal
+families and all unmatched words are printed in
+Tables~\ref{tab:families} and~\ref{tab:exceptions}.
+
+\begingroup
+\small
+\setlength{\tabcolsep}{10pt}
+\begin{longtable}{@{}rrrrrl@{}}
+\caption{All 147 residual/control parameter records, with no
+period cutoff. The unique maximum $p_a=17$ occurs at $a=-1$.}
+\label{tab:residual}\\
+\toprule
+$a$ & $B_a$ & $|S_a|$ & $j$ & $p_a$ & Cycle lengths \\
+\midrule
+\endfirsthead
+\multicolumn{6}{c}{Table~\thetable\ (continued)}\\
+\toprule
+$a$ & $B_a$ & $|S_a|$ & $j$ & $p_a$ & Cycle lengths \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{Continued on the next page}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\input{tables/residual_rows}
+\end{longtable}
+\endgroup
+
+\subsection{Artifact identity and actual execution history}
+
+The author program executed once on
+2026-09-08 at 14:25:24 UTC, using Python 3.12.3 and the standard
+library only. The independent program executed once on the same
+date at 14:32:39 UTC. Both runs succeeded; the original records
+report no failed attempt or retry. Typesetting and read-only
+hash checks are not additional mathematical executions.
+
+The following SHA-256 values identify the exact finite proof
+inputs supplied with the manuscript. Line breaks inside hashes
+are for display only.
+
+\begin{description}
+\item[Author producer.]
+\path{evidence/certify_am1_core.py}\\
+\texttt{f80ffcf177fd7a8e98b8ea4d3112b7cca5e}\\
+\texttt{f986b5725025e70c836aa088132a0}.
+\item[Author output.]
+\path{evidence/FINITE_CORE_RESULTS.json}\\
+\texttt{44ccf0f5d062587eb07d2837c455a9c3843}\\
+\texttt{c3ce0b9e0c8df033d2223d227196a}.
+\item[Independent checker.]
+\path{evidence/check_original_square.py}\\
+\texttt{b5953b44db6042a81cff542972566499f02a}\\
+\texttt{ff698ffc1048966e25e0b43cb29b}.
+\item[Independent output.]
+\path{evidence/INDEPENDENT_RESULTS.json}\\
+\texttt{17561a62401766018f68baf75e3439d33f0}\\
+\texttt{4e6cba7c5c6f5c398e5263618e842}.
+\end{description}
+
+The full input inventory, source locations, and current file hashes
+are retained in \path{INPUT_MANIFEST.sha256} and
+\path{CITATION_AUDIT.md}. These establish provenance and permit
+byte verification; hashes are not a substitute for the mathematical
+arguments or for examining the code and results.

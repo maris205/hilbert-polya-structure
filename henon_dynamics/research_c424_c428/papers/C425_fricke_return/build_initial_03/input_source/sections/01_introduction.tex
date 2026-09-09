@@ -1,0 +1,161 @@
+\section{The classification and its scope}\label{sec:introduction}
+
+An integral periodic orbit of one polynomial automorphism is a different
+object from a finite orbit of the group containing that automorphism.
+For Fricke cubics this distinction matters: the geometry of the Vieta
+group provides reduction methods, but the periodic points of one
+prescribed word must still be exhausted in that word's own time.
+We study the word containing the three Vieta involutions in a fixed order.
+The result separates its unbounded integral periodic families from a
+bounded, effectively decidable remainder, with one bound for all levels.
+
+Fix an arbitrary ordered triple \((A,B,C)\in\Z^3\), and define
+\begin{equation}\label{eq:invariant}
+ K(x,y,z)=x^2+y^2+z^2-xyz-Ax-By-Cz.
+\end{equation}
+The Vieta involutions are
+\begin{align}
+ s_x(x,y,z)&=(A+yz-x,y,z),\notag\\
+ s_y(x,y,z)&=(x,B+xz-y,z),\label{eq:involutions}\\
+ s_z(x,y,z)&=(x,y,C+xy-z).\notag
+\end{align}
+Our native map is
+\begin{equation}\label{eq:native}
+ T=s_z\circ s_y\circ s_x,
+\end{equation}
+so the rightmost factor acts first. One application of \(T\), not one
+individual involution, is one unit of time. Each factor preserves
+\(K\), and each is a polynomial involution of \(\Z^3\). In particular,
+no point is removed when a level \(K=D\) is singular.
+
+Write \(\Per_\Z(T)=\{P\in\Z^3:T^nP=P\text{ for some }n\ge1\}\), and set
+\begin{equation}\label{eq:bounds}
+ \begin{gathered}
+ H=\max(|A|,|B|,|C|),\qquad B_0=H+1,\qquad R=100B_0,\\
+ Q_R=[-R,R]^3\cap\Z^3,\qquad N_R=(2R+1)^3.
+ \end{gathered}
+\end{equation}
+For a periodic point, its \emph{least period} is its first positive
+return time. A \emph{certified return time} need not be the least period.
+
+\begin{theorem}[All-coefficient, all-level integral classification]
+\label{thm:main}
+For every ordered \((A,B,C)\in\Z^3\), there is an explicit construction
+of a union \(\lineset\) of at most 27 affine integer lines such that:
+\begin{enumerate}
+ \item Each line has a parametrization \(P(t)=p+tv\), with
+ \(p,v\in\Z^3\), containing a coordinate of slope \(1\) or \(-1\).
+ It consists entirely of periodic points and has a certified native
+ return time \(r\le54\): \(T^rP(t)=P(t)\) for all \(t\in\Z\).
+ \item If \(\core\) denotes the cyclic vertices of the exact partial
+ map \(T:Q_R\dashrightarrow Q_R\), then
+ \begin{equation}\label{eq:exhaustive_union}
+    \Per_\Z(T)=\lineset\cup\core.
+ \end{equation}
+ Every periodic orbit not contained in \(\lineset\) lies entirely in
+ \(Q_R\).
+ \item A finite parameterwise procedure determines coincident lines,
+ all integral intersections, the generic least period and every
+ exceptional parameter on each line, and all remaining finite cycles.
+ Thus all least periods and their coexistence are effective. Every
+ native least period is at most \(\max(54,N_R)\).
+ \item For every \(D\in\Z\), the level \(K=D\) contains at most
+ \(54+N_R\) periodic integer points. Their exact least periods and
+ their ordinary primitive-cycle counts are effectively determined.
+\end{enumerate}
+The construction uses the 27-state graph of Section~\ref{sec:graph}
+and its affine-return test. Neither the numerical bounds nor the
+resulting algorithmic complexity are asserted optimal.
+\end{theorem}
+
+The line part is a finite list of free integer parametrizations. The
+core part is a proved terminating rule for the given coefficients, not
+a table that has been computed for every coefficient triple. There is
+no empirical parameter window or period cutoff in
+Theorem~\ref{thm:main}. Its proof is given completely below.
+
+\subsection{Related results and the contribution retained here}
+\label{subsec:ownership}
+
+Shin's reduction theory uses height graphs and low-coordinate Vieta
+identities to study integral group orbits
+\citep[Theorems 1.1--1.3 and \S2]{shin2026character}.
+In particular, the orbit-equivalence algorithms concern the full
+Vieta group and the mapping class group. Remark~3.1 in the accepted
+manuscript explicitly removes the boundary-trace relations between
+the coefficients. Independent coefficients and the height-graph and
+low-coordinate mechanisms are therefore prior work, not an extension
+claimed here. The integral change \((x,y,z)\mapsto(-x,y,z)\) identifies
+our sign convention with Shin's, with parameters
+\((\alpha_1,\alpha_2,\alpha_3,\beta)=(-A,B,C,D)\), and conjugates
+the respective ordered involutions. The additional assertion proved
+here is the fixed-word, level-uniform line/core exhaustion, not
+decidability of whole-group orbit equivalence.
+
+Cantat studies positive-entropy automorphisms on the same cubic family
+\citep[Proposition 2.2 and \S3]{cantat2009bers}.
+The fixed-fibre escape neighborhoods in that analysis imply compact
+containment of periodic points, and hence integral finiteness on a fixed
+fibre. This consequence is already available and is not our novelty
+claim. It does not furnish the particular level-independent radius or
+integer line construction used here. Our periodic lines cross invariant
+levels; they are not invariant curves inside a fixed cubic surface, so
+they do not conflict with Cantat's Corollary~3.4.
+
+The equal-forcing slice is also prior work. The local working manuscript
+C421 classifies all integer periodic orbits of
+\(F_a(x,y,z)=(y,z,yz+a-x)\), including its exceptional families and
+computer-assisted finite core \citep{c4212026integral}.
+When \(A=B=C=a\), our map is exactly \(F_a^3\). That slice is not counted
+as a new classification here, and its finite certificate is not an
+input to our proof. The phase-dependent argument below handles every
+ordered coefficient triple without importing a homogeneous difference
+identity or assuming a reversal symmetry of its forcing sequence.
+
+Other nearby questions have different observables. Vishkautsan studies
+strong residual periodicity for products of two reflections on the
+unforced Markoff surface, with periodic conics explaining the
+local--global phenomenon \citep{vishkautsan2016residual}.
+Abboud proves rigidity statements comparing periodic sets of
+loxodromic affine-surface automorphisms
+\citep[Theorem A]{abboud2025rigidity}.
+Planat, Chester and Irwin discuss selected algebraic Painlev\'e VI
+solutions in their study of Fricke surfaces
+\citep{planat2024dynamics}. These are contextual comparisons, not
+dependencies of the present exhaustion proof.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}YY@{}}
+\toprule
+Input or comparison & Scope already available & Scope proved here \\
+\midrule
+Shin \citep{shin2026character}
+& Independent coefficients; height and low-coordinate group-orbit reduction
+& Exhaustion for the prescribed three-factor word, uniformly in the level \\
+Cantat \citep{cantat2009bers}
+& Fixed-fibre dynamics and the resulting integral finiteness
+& An explicit residual radius depending only on \(A,B,C\) \\
+C421 \citep{c4212026integral}
+& The complete equal-forcing scalar classification
+& Phase-dependent forcing, including unequal ordered coefficients \\
+Elementary algorithms
+& Affine returns, finite graphs, polynomial gcds and cycle products
+& Their applicability to every remaining point, by the global exhaustion proof \\
+\bottomrule
+\end{tabularx}
+\caption{Scope comparison. The last column is one integrated classification,
+not a list of independently new algorithmic ingredients.}
+\label{tab:ownership}
+\end{table}
+
+The mathematical step is the implication that every periodic orbit
+above \(R\) belongs to a finite union of whole periodic lines. We prove
+it by a global-maximum entry, forced finite-state propagation and
+backward exhaustion using bijective line maps. The source comparisons
+above concern the inspected statements and are not a worldwide priority
+certificate. Section~\ref{sec:phase} fixes the clock and maximum;
+Sections~\ref{sec:graph}--\ref{sec:lines} prove the line exhaustion;
+Sections~\ref{sec:effective}--\ref{sec:levels} give the exact residual
+and level-count procedures.

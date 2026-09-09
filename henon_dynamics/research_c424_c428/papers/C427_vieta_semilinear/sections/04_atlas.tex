@@ -1,0 +1,158 @@
+\section{The exact finite construction}
+\label{sec:atlas}
+
+Fix $n\ge4$ and $a$, and use $B=|a|+4$ and $L=L_n$ from
+\eqref{eq:period-divisor}. All indices in this section are read
+modulo $L$. Proposition~\ref{prop:period-divisor} implies that any
+periodic point has a coordinate word of length $L$, possibly with
+a smaller least period.
+
+\subsection{Finite tags and actual products}
+
+Enumerate every length-$L$ array in the finite alphabet
+\[
+ \mathcal A_B=\{-B,-B+1,\ldots,B\}\cup\{\star_+,\star_-\}.
+\]
+Arrays are not identified under cyclic rotation: every initial
+phase is retained. A constant label $c$ imposes $X_i=c$. For each
+large label introduce its own nonnegative integer variable $u_i$
+and impose
+\begin{equation}
+ X_i=B+1+u_i\quad(\star_+),\qquad
+ X_i=-B-1-u_i\quad(\star_-).
+ \label{eq:large-tags}
+\end{equation}
+These substitutions make the label semantics exact, including the
+threshold and the sign. Zero occurs only as the constant label zero.
+
+For each window $i+1,\ldots,i+n-1$, apply the exhaustive rule in
+Table~\ref{tab:tags}. If any window is rejected, discard its entire
+array. For every retained array, let $P_i$ be the expression in the
+table and impose all $L$ equations
+\begin{equation}
+ X_{i+n}+X_i=P_i+a\qquad(0\le i<L).
+ \label{eq:linear-recurrence}
+\end{equation}
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{@{}p{0.58\textwidth}p{0.34\textwidth}@{}}
+\toprule
+Labels in a length-$(n-1)$ window & Product expression or action\\
+\midrule
+At least one constant zero & $P_i=0$, with any number of large labels.\\
+No zero and no large label & $P_i$ is the product of all constant labels.\\
+No zero; exactly one large label; all others units &
+$P_i=\varepsilon X_j$, where $j$ is the large position and
+$\varepsilon$ is the product of the unit labels.\\
+Every other case & Reject the array.\\
+\bottomrule
+\end{tabular}
+\caption{Exact product cases. The rejection is necessary for a
+periodic word by Corollary~\ref{cor:window}; the retained cases are
+actual integer products, not approximations.}
+\label{tab:tags}
+\end{table}
+
+After \eqref{eq:large-tags}, equations
+\eqref{eq:linear-recurrence} form an integer linear system $Mu=b$,
+$u\in\N^k$. In particular, no two undetermined variables are
+multiplied. Lemma~\ref{lem:cone} supplies all solutions with free
+nonnegative parameters. Project them to
+$(X_0,\ldots,X_{n-1})$.
+
+\begin{proposition}[Exactness of tagging]
+\label{prop:tag-exact}
+The union of these projected solution sets is exactly
+$\Per(F,\Z^n)$.
+\end{proposition}
+\begin{proof}
+For necessity, take any periodic point and its actual length-$L$
+coordinate word. Label small coordinates by their values and large
+coordinates by their signs. Corollary~\ref{cor:window} shows that
+none of its windows is rejected. Its actual large offsets are
+nonnegative integers, and the recurrence gives every equation
+\eqref{eq:linear-recurrence}.
+
+Conversely, take a solution from any retained array. The substitutions
+\eqref{eq:large-tags} ensure that the labels are true statements about
+the resulting integer coordinates. In each retained case the expression
+$P_i$ is therefore the actual product of the coordinates in that window.
+All equations \eqref{eq:linear-recurrence} are exactly the original
+recurrence. Starting from its first $n$ coordinates, $F$ moves along
+this word one native step at a time and returns at time $L$. Thus
+every projected solution is a genuine periodic point.
+\end{proof}
+
+\subsection{Exact least-period labels}
+
+For each positive divisor $r\mid L$, add to each retained system
+the linear equations
+\begin{equation}
+ X_{i+r}=X_i\qquad(0\le i<L).
+ \label{eq:r-periodic}
+\end{equation}
+For every proper divisor $d\mid r$, exclude period $d$ by requiring
+some index $i_d$ with $X_{i_d+d}\ne X_{i_d}$. This is a finite
+union of linear cases: choose $i_d\in\{0,\ldots,L-1\}$ and
+$\eta_d\in\{1,-1\}$, and impose
+\begin{equation}
+ \eta_d(X_{i_d+d}-X_{i_d})\ge1.
+ \label{eq:exclude-period}
+\end{equation}
+Enumerate all such choices for all proper divisors. If $r=1$,
+there are no exclusion inequalities. Add nonnegative slack variables
+and apply Lemma~\ref{lem:cone} once more.
+
+These systems have exactly least scalar period $r$:
+\eqref{eq:r-periodic} makes the least period divide $r$, and
+\eqref{eq:exclude-period} excludes every proper divisor. Conversely
+a word with least period $r$ supplies at least one index and sign
+for every excluded divisor, so is included in the finite union.
+Integer strict inequalities are encoded without losing equality
+or sign boundary cases.
+
+The least scalar shift period equals the least native state period.
+A repeated state determines all subsequent entries by the recurrence
+and all preceding entries by its inverse; hence it repeats the
+entire word. The converse follows immediately by taking consecutive
+length-$n$ states. Thus each projected linear set can be labelled
+by $r$ without a change of clock or an orbit quotient.
+
+\subsection{Channels, finite remainder and termination}
+
+In every projected linear set remove zero direction vectors.
+If a nonzero direction remains, taking its nonnegative multiples
+already gives an unbounded sequence of points. The whole set has
+the exact least-period label just established. If no direction
+remains, the output is one explicit point. Collect all such points
+in $E_{n,a}$. We obtain the complete equality
+\begin{equation}
+ \Per(F,\Z^n)=E_{n,a}\ \cup\
+ \bigcup_{j=1}^{J}
+    \mathcal L(v_j;w_{j1},\ldots,w_{js_j}),
+ \qquad s_j\ge1,\quad w_{jk}\ne0.
+ \label{eq:atlas}
+\end{equation}
+The lists may overlap, but no periodic point is missing. Every
+output labelled by one period consists solely of points with that
+period, so different period strata cannot overlap.
+
+All numbers $L,B$, all tag arrays, all divisors and exclusion choices,
+all cone vertices, and all boxes used in Lemma~\ref{lem:cone} are
+computable and finite. This proves termination for every $(n,a)$,
+without an empirical stopping rule. Once the list is produced,
+\[
+ R_{n,a}=\max\bigl(\{0\}\cup
+          \{\|P\|_\infty:P\in E_{n,a}\}\bigr)
+\]
+is an explicit finite remainder bound. It depends on $n,a$, not on
+an invariant level. If desired, singleton entries lying in a
+channel can be removed by a nonnegative linear-system membership
+test. Such removal is optional and does not affect
+\eqref{eq:atlas} or the finiteness of the remainder.
+
+This completes the new $n\ge4$ part of Theorem~\ref{thm:main}.
+No step assumes that each channel is a line, that zero-separated
+blocks can be chosen independently, or that all large cycles arise
+from a single special family.
