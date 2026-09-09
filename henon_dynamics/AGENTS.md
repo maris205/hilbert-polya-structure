@@ -6,10 +6,14 @@ batch and Git baseline. The active repository is `hilbert-polya-structure`;
 
 ## Research contract
 
-- The user's standing cadence is five complete papers per authorized batch,
-  then a checkpoint. Each paper must close a substantial independent question.
-  Do not split one result into five papers, count a scaffold as a paper, or
-  advance to a sixth without further authorization.
+- On 2026-09-09 the user explicitly confirmed continuous main/subagent work:
+  five complete papers form a saved checkpoint, not a stopping condition.
+  Continue within this Hénon/Route-A stream across rounds and batches until the
+  user stops the work, a necessary new authorization is missing, or a platform
+  limitation prevents continuation. Save recoverable progress throughout; do not
+  promise exact quota visibility, uninterrupted execution, or automatic recovery
+  after a hard interruption. Each paper must close a substantial independent
+  question. Do not split one result into five papers or count a scaffold as one.
 - Prioritize Route A and meaningful A1/A2 progress. Explore different subtypes;
   replace unproductive or duplicate candidates with a recorded reason. A broad
   hypothesis is welcome; a theorem requires proof. Classical reconstruction,
