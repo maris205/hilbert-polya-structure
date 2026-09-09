@@ -1074,3 +1074,39 @@ One mechanism, at most two targeted source batches, no mathematical execution
 or additional agent, and disjoint new-path writing are allocated. R8 final
 proof/review files remain frozen. The next R8 gate is an independent exact-path
 integration audit and normal repository synchronization, not paper release.
+
+### Actual R8 synchronization receipt and third R9 allocation
+
+Root read all 127 lines of X1's final integration audit, actual SHA256
+`196b908b2c5beea8ffe45286acfb5a32997dfdfb561aee4302d3ca95040226a9`.
+Its exact seven-R8-file plus two-coordinator-record list matches the nine
+actual regular files. The five frozen input hashes/line counts, 877 mathematical
+review lines, scope/exposure and checked local links agree. Root independently
+captured all nine working Git blobs and verified the stage-zero mode-100644
+index entries, exact staged paths and actual committed members/blobs against
+that snapshot. Ordinary whitespace and unstaged tracked checks exited zero.
+
+The research checkpoint was committed and pushed as
+`a79dd0c0e06d988dcfd0bb00519f42446e16a53c`. At
+2026-09-09 19:02:04 UTC, the completed fresh fetch, local HEAD/tracking-ref
+reads and actual ls-remote all agreed. Tracked state was clean. Only R9 and
+the eight inherited untracked directories remained; no R9 or unrelated path
+was staged. This later receipt is outside the frozen R8 payload and does not
+rewrite its mathematical decision, proofs, reviews or audit.
+
+After the R8 mathematical checkpoint, a third actual R9 follow-up reused C2
+in `continuation_round9/c2_integral_tame_flexibility/REPORT.md`. It freezes
+the existence of an arbitrary integral tame conjugate reflection inducing
+the same specified kappa on the nine-point set. The single new mechanism is
+exact finite-set/coordinate flexibility over Z, with at most two targeted
+primary-source batches. The accepted two-shear obstruction and ordinary
+polynomial evaluation image are read-only inputs; no third/fourth-shear
+class ladder, parameter census, field-to-Z transfer or constant-Jacobian
+inverse claim is allowed. A real lift would supply a native nine-cycle;
+failure of this source/mechanism test is not a proof that no lift exists.
+
+A1's cyclic-coefficient and A2's actual-Frobenius-incidence tasks continue
+in parallel. All three reuse current threads, retain no-mathematics-execution
+allocations, and are separate from this synchronized R8 checkpoint. Four
+contracts, zero completed papers, all-degree MS6 open and the Route-A/target
+arithmetic boundaries remain unchanged.
