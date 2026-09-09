@@ -13,8 +13,20 @@
 当前为 `CONTINUOUS_RESEARCH_ACTIVE; ROUND5_ELEVEN_REVIEWS_CLOSED;
 PC_L_UL4_OM4_RLG5_FOUR_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
 ROUND7_FOUR_REVIEWS_CLOSED; ROUND8_TWO_REVIEWS_CLOSED;
-FULL_SINGLE_QUADRATIC_ATOM_ACCEPTED_AUXILIARY; ROUND9_MS6_BRIDGES_ACTIVE;
+FULL_SINGLE_QUADRATIC_ATOM_ACCEPTED_AUXILIARY; ROUND9_THREE_REVIEWS_CLOSED;
+MS6_EXISTENCE_AND_INTEGRAL_NINE_LIFT_OPEN;
 ZERO_COMPLETED_PAPERS`。
+第九轮已完成三份作者报告和三份非作者完整内部审查，协调者
+全文核读所有最终稿、三份审查共 1,059 行，实际复核六个哈希。
+见 [ROUND9_DECISION.md](research_c429_c433/continuation_round9/ROUND9_DECISION.md)。
+已采纳固定非零 S 的有限词湮灭证书、全次数实际 Frobenius
+关联点的范数／插值／统一次数等价、未饱和有理次数增长下界，
+以及任意整 tame 词的真实坐标对充要接口。两项审查归属措辞
+已定点修复，公式未变；全部辅助结论零开放数学／来源必改。
+有限证书没有给未知 S 的次数界，插值未推出固定饱和后的统一
+次数界，真实坐标对仍未构造；三项原问题均未闭合。合同仍为
+4/5，完整论文 0/5；R9 数学程序零次。当前待 R9 独立集成审计
+和精确路径同步，未将任何下一轮工作或继承目录混入。
 第八轮进展现保存于
 [ROUND8_DECISION.md](research_c429_c433/continuation_round8/ROUND8_DECISION.md)。
 临界二周期 atom 的全部奇特征证明已写成最终 526 行报告，协调者

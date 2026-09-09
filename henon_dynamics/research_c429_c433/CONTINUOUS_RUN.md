@@ -1110,3 +1110,39 @@ in parallel. All three reuse current threads, retain no-mathematics-execution
 allocations, and are separate from this synchronized R8 checkpoint. Four
 contracts, zero completed papers, all-degree MS6 open and the Route-A/target
 arithmetic boundaries remain unchanged.
+
+### R9 three complete mathematical reviews and coordinator acceptance
+
+All three R9 authors and their separately assigned nonauthor reviewers
+have now finished. Root read the complete 437-line A1, 421-line A2 and
+212-line C2 reports, and all 527 E2, 425 E5 and 107 E4 review lines.
+The three reviews total 1,059 lines. Their final six hashes were actually
+recomputed and match the [R9 decision](continuation_round9/ROUND9_DECISION.md).
+Zero open mathematical or source/provenance must-fixes remain in the
+accepted auxiliary statements. A1's two review-identity clarifications
+were read back; neither changed a formula or reopened frozen R8 files.
+
+A1's finite-word theorem is accepted only for each fixed nonzero S.
+It gives no degree bound for an unknown exceptional annihilator and no
+reverse implication to CP or separation of general norm-one products.
+A2's exact incidence, finite-field interpolation and fixed-bound
+equivalence are accepted in every characteristic and degree. Its new
+rational-denominator lower bound defeats only unsaturated uniform degree;
+the old example still has a fixed p-power rational transfer and a genuine
+purely inseparable stable curve. CP-to-saturated-uniform-degree is open.
+C2's actual-coordinate iff and noncoordinate control pass; neither a
+global integral tame lift nor an all-word obstruction has been obtained.
+
+Root directly verified Papanikolas's full operator/admissibility setup
+and the relevant full proofs, and Berson--Dubouloz--Furter--Maubach's
+actual common-map local-tameness theorem and proof. These source checks
+preserve the missing existence and quantifier boundaries. Abstract-only
+or inaccessible leads are not treated as imported theorems.
+
+There are still four admitted contracts and zero completed papers.
+R9 mathematical executions, new agents, external-model calls, GPU jobs,
+manuscripts/PDFs and formal evaluations are all zero. The six mathematical
+inputs are frozen. A separate exact-path integration audit and ordinary
+repository synchronization are the next checkpoint gates; neither is
+claimed complete here. Continuous authorized research does not stop at
+this auxiliary checkpoint, and no fifth contract is manufactured.
