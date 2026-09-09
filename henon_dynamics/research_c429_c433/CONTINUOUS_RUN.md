@@ -773,3 +773,26 @@ X1 has the separate read-only integration-audit assignment in
 `continuation_round5/INTEGRATION_AUDIT.md`, covering new local links,
 actual version bindings, counts and scope, not mathematical correctness
 or an unperformed push. Root alone owns exact staging and synchronization.
+
+### Actual R5 synchronization receipt
+
+X1's final 141-line integration audit was read in full, SHA256
+`bd82cba41fdbaf7536918f6ab0c5ed67a001d535f1544a534f79da7c45c413b0`.
+It finds 30 exact R5 files, 11 review files totaling 3,647 lines,
+31 matching distinct pins, and no missing local link/checked anchor or
+open scope repair. This is an integration result, not another proof review.
+
+Root independently compared the exact disk set to its 30-member list,
+excluded nonregular files, added only those files and the three coordinator
+records, and checked all 33 staged blob identities against the saved
+working-file snapshot. The committed member set also matches exactly.
+The ordinary whitespace check reported just the audit's final blank line;
+allowing only blank-at-EOF gave exit 0. Frozen audit bytes were retained.
+
+The 33-path research commit is
+`6d37f9fad2ff75a23b491690c44719dcd60ad620`, actually pushed to the
+configured origin/main. At 2026-09-09 17:15:21 UTC, a fresh fetch,
+local HEAD and tracking-ref reads, and actual `ls-remote` all agreed.
+Tracked state was clean; only R6 and the eight inherited untracked
+directories remained. This receipt is written afterward outside the
+frozen R5 payload; no accepted proof, review or old batch is changed.
