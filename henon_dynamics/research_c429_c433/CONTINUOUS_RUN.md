@@ -1003,3 +1003,74 @@ same bounded mechanism. The separate characteristic-three formula
 does not use the faulty equality but remains subject to independent
 checking and full-proof review. No R8 theorem or fifth contract is
 preadmitted, and no mathematical program was run for the correction.
+
+### R8 corrected proof, independent coefficient acceptance, and R9 bridge
+
+A2's complete final 526-line critical-atom report is now frozen at
+`e3fcd6eef80df88ed1d0b5b4633e6d6e1003582bf0b4022c86303df166f278c3`.
+Root read every line and checked the ordinary-root annihilator, cyclic
+coefficient functional, both finite traces, characteristic-three control,
+and elementary infinite-prime lemma. E5 has an actual separate whole-proof
+assignment in `continuation_round8/reviews/e5_critical_atom_full/REVIEW.md`;
+that gate remains pending, with no preacceptance of the full theorem.
+
+E2's 448-line independent coefficient reconstruction is complete, fully read
+and accepted at SHA256
+`ea470518379cd1ed8e66f5b7f46150d7e520f4b4d3c2cd303dab91b93d70563d`.
+It proves the corrected quartic coefficient `2^(n-1)-3` by exhaustive
+integer carry counting, independently of A2's new body. The original
+constant-one claim is false already at n=4 and stays withdrawn. E2's
+actual exposure to later coordinator organization hints is disclosed, and
+its scope does not include CP or prime infinitude. No coefficient repair
+remains; the full theorem still awaits E5.
+
+Root also fully read X2's 204-line multiplier-source report and D1's 141-line
+fresh-scout report. The exact Huguin, Ji–Xie–Zhang and BIJL primary passages
+do not give a positive-characteristic bounded-spectrum bridge. The HP8
+counterexample was checked in every completion and at all real periods,
+with the precise Berend–Bilu Example 2 ownership verified. It is accepted
+as a short auxiliary Hénon realization, not a fifth contract or a minimal-
+degree claim for variable local periods. D1 recommends none.
+
+A real follow-up now reuses A1 in
+`continuation_round9/a1_general_quadratic_normone/REPORT.md`: all odd
+characteristics, all c and arbitrary rational norm-one w, testing whether
+cofinite native products force w=1. It must address cancellation between
+several balanced atoms; factorwise CP is not inferred. The all-degree MS6
+contract remains unchanged. One mechanism, at most two targeted search
+batches, no mathematical execution or census, and disjoint new-path ownership
+are allocated. R8 reviews and frozen R7 bytes are separate from this task.
+
+The in-progress [R8 decision](continuation_round8/ROUND8_DECISION.md) records
+actual proofs, scope, sources and hashes. Contracts remain four, papers zero,
+R8 mathematical executions zero. No new agent, external-model call, GPU job,
+manuscript/PDF, formal evaluation or target-arithmetic promotion occurred.
+R8 integration audit and synchronization have not yet been performed.
+
+### R8 full mathematical acceptance and second R9 mechanism
+
+Root has now read all 429 lines of E5's final whole-proof review at
+SHA256 `5175b39734069cada021febb86d30d8733938d9104f2921e8fd3564c4d1a41b2`,
+and rechecked A2's unchanged final hash. E5 independently covers every
+coefficient/trace, ordinary-root multiplicity, prime lemma, characteristic-three
+boundary and R7 interface, without reading E2. The two final reviews total
+877 lines; both are fully read, accepted, and have zero open must-fixes.
+
+The residual critical-two-cycle theorem and its full single-quadratic-atom
+corollary with R7 are now accepted as auxiliary results. This does not assert
+prime-length bad cycles for every R7 parameter, rule out arbitrary atom powers,
+or infer factorwise CP from CP of a product. General MS6 remains open; four
+contracts and zero completed papers remain the actual count. The false earlier
+quartic shortcut remains withdrawn, not retroactively relabeled a theorem.
+
+An actual second R9 follow-up now reuses A2 in
+`continuation_round9/a2_frobenius_twisted_bridge/REPORT.md`. Its distinct
+mechanism uses the actual incidence f(x)=x^q, where native iteration agrees
+with the specified Frobenius, and asks for a uniform rational/finite algebraic
+transfer from its finite-field Hilbert-90 solutions. The full all-degree MS6
+conclusion allows a fixed p-power from the outset; existence of uniformly
+bounded rational solutions for g itself is not silently substituted for it.
+One mechanism, at most two targeted source batches, no mathematical execution
+or additional agent, and disjoint new-path writing are allocated. R8 final
+proof/review files remain frozen. The next R8 gate is an independent exact-path
+integration audit and normal repository synchronization, not paper release.

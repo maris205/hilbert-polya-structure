@@ -12,8 +12,20 @@
 按 [连续运行记录](research_c429_c433/CONTINUOUS_RUN.md)恢复。
 当前为 `CONTINUOUS_RESEARCH_ACTIVE; ROUND5_ELEVEN_REVIEWS_CLOSED;
 PC_L_UL4_OM4_RLG5_FOUR_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
-ROUND7_FOUR_REVIEWS_CLOSED; ROUND8_EXACT_GAP_AND_SCOUT_ACTIVE;
+ROUND7_FOUR_REVIEWS_CLOSED; ROUND8_TWO_REVIEWS_CLOSED;
+FULL_SINGLE_QUADRATIC_ATOM_ACCEPTED_AUXILIARY; ROUND9_MS6_BRIDGES_ACTIVE;
 ZERO_COMPLETED_PAPERS`。
+第八轮进展现保存于
+[ROUND8_DECISION.md](research_c429_c433/continuation_round8/ROUND8_DECISION.md)。
+临界二周期 atom 的全部奇特征证明已写成最终 526 行报告，协调者
+全文核读并手核；448 行独立系数重构和 429 行完整证明审查现均
+全文核读采纳，零开放必改，旧漏项公式明确撤回。与 R7 参数
+归约合并后，全奇特征二次单 atom 问题已辅助闭合，不推广到
+任意幂或多因子乘积。文献路线只保留准确适用边界；HP8 全处周期点
+反例已手核，但扣除经典五次多项式后仅作辅助，不计第五项。
+R9 已在新目录并行接续一般二次 norm-one 的多因子抵消、以及
+实际 Frobenius 关联点的全次数转移存在桥；原 MS6 保留全部量词。
+当前仍合同 4/5、论文 0/5，R8 数学程序零次，待集成审计及同步。
 第七轮数学裁决现已保存于
 [ROUND7_DECISION.md](research_c429_c433/continuation_round7/ROUND7_DECISION.md)。
 C2 的 27 候选必要条件及 E6 的 301 行审查、C4 的指定两剪切
