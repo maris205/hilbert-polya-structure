@@ -1292,3 +1292,35 @@ Root has inspected the applicable paper-writing/paper-plan instructions
 and completely read the required writing-principles reference in
 preparation for that next gate. This inspection produced no manuscript,
 figure or PDF and does not constitute a completed writing phase.
+
+### R10 exact synchronization and five-author preparation checkpoint
+
+Actual clock: 2026-09-09 20:18:29 UTC. The nine R10 files and three
+coordinator records, exactly twelve paths, were committed as
+`7e134881a277a4bf1f27d76760779a4fdd5e141c`. Push and subsequent fetch
+completed successfully; root then actually checked HEAD, origin/main
+and the live remote main, all equal to that commit. The tracked tree
+was clean. BATCH_PLAN and all eight inherited untracked directories
+were excluded; no other stream or historical frozen file was changed.
+
+Root read the complete 168-line independent integration audit and
+recomputed its hash
+`29b8e92120258ea48dcbfd721361dc0117eca2fb49dfbf813133b386708b9e9e`.
+All seven bound input hashes and the decision/shared snapshot hashes
+matched. All twelve filesystem paths were regular 0644; every staged
+and committed blob matched its inspected working bytes and both
+member sets matched the exact allowlist. Both working and staged
+ordinary whitespace checks passed. These are actual integration
+checks, not mathematical executions or completed-paper certificates.
+
+The five proposed authors have now each completed read-only input
+preparation and reported no missing proof dependency. Root read the
+entire 328-line BATCH_PLAN; its independent review is still running.
+C430's core arithmetic is independent of C431; only the eventual
+quotient-tower consequence uses the full compact/Hausdorff/adding-
+machine interface, not measure convergence alone. Two editorial
+clarifications were sent to the outline reviewer: native-oriented
+AS-class stabilization rather than a general coefficient formula;
+and product-visible versus Jacobian-visible data, with the rational
+skew domain not assumed invariant. No manuscript has been activated.
+This receipt is outside the frozen R10 research checkpoint.
