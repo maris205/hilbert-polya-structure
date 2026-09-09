@@ -913,3 +913,60 @@ discriminator. At most two primary-source query batches, no mathematical
 execution or model/API/Git/old-file changes, and no automatic admission
 are authorized. This runs alongside A2's general divisor criterion and
 C4's exact tame-lifting attempt, not as an additional completed result.
+
+### R7 actual finite-interface decisions
+
+Root has saved the in-progress ROUND7_DECISION.md after reading C2's
+245-line report and E6's 301-line review, C4's 342-line report and
+E4's 143-line review, A2's 434-line report and E5's current 426-line
+review, and X2's 240-line source/interface audit in full. The C2 and
+C4 auxiliary statements are accepted with zero open must-fixes. E5's
+final freeze confirmation remains requested; A1's bounded atom proof
+attempt is active and no result from it is preaccepted.
+
+The general multiplicative existence gap is exactly norm-one plus
+cofinite native products implies the function is one. The full
+pure-Frobenius subtype is proved, retaining all constants and rational
+functions; neither sibling Hilbert 90 nor a later pointwise fiber
+return supplies the general bridge. Root's actual BMT and Mahler
+source passage checks preserve their stated applicability limits.
+
+The new nine-point result excludes the specified reflection for every
+degree and coefficient in one two-alternating-shear conjugator class.
+It does not exclude arbitrary tame words or solve the integer period
+spectrum. No fifth contract, paper, mathematical execution or R7 Git
+synchronization is claimed. All old reviewed bytes remain frozen.
+
+E5's actual final 428-line review has now been read in full at
+SHA256 `69dcce664646b4555d5f98d4460aef90ab82e08535b6d285faff6df4b379dd7f`.
+Root accepts A2's complete auxiliary package with zero open must-fixes.
+A1's final 379-line report was also fully read and hand-checked; E8
+now owns a distinct full mathematical review in the R7 reviews directory.
+Its reduction leaves precisely $f=x^2-1$, $a=\pm1$, all odd primes.
+Neither finite exceptional cycles nor the non-torsion proof settles
+the cofinite condition for that remaining family.
+
+Two actual bounded R8 assignments reuse existing A2 and X2 threads:
+`continuation_round8/a2_critical_atom/REPORT.md` tests the exact
+remaining family, and `continuation_round8/x2_bounded_multiplier_sources/REPORT.md`
+checks a possible uniform-finite-multiplier-set theorem for one map.
+Each has at most two new source batches, no mathematical execution,
+no automatic parameter expansion, and no old/shared-file or Git writes.
+The new tasks do not presuppose E8 acceptance or provide a fifth contract.
+
+R7's last mathematical gate has now closed. Root read all 296 final
+E8 review lines and verified the actual SHA256
+`3c60b9996a18c3f46a3711d6a5533316a6e21cb9c0a6bfda5f622b70d6b84cd3`.
+The exact A1 parameter reduction and uniform non-torsion theorem are
+accepted at auxiliary scope, with zero mathematical/source/minor repairs.
+All four R7 mathematical reviews total 1,168 lines and are fully read.
+The critical two-cycle family and full MS6 remain unproved. The final
+R7 integration audit and exact-path synchronization are the next gate.
+
+D1 separately owns `continuation_round8/d1_fresh_contract_scout/REPORT.md`:
+at most two independent complete candidate questions, at most three
+targeted source batches, no mathematics execution or old/shared-file
+changes. This applies idea-creator's generation/filtering within the
+project's current-team, pure-theory boundary; it does not run an old
+external-model example or manufacture a fifth contract. Four contracts,
+zero papers, and `NO_BAD_EULER_OR_ROOT_NUMBER` remain unchanged.

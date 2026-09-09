@@ -12,8 +12,20 @@
 按 [连续运行记录](research_c429_c433/CONTINUOUS_RUN.md)恢复。
 当前为 `CONTINUOUS_RESEARCH_ACTIVE; ROUND5_ELEVEN_REVIEWS_CLOSED;
 PC_L_UL4_OM4_RLG5_FOUR_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
-ROUND7_EXACT_BRIDGES_ACTIVE;
+ROUND7_FOUR_REVIEWS_CLOSED; ROUND8_EXACT_GAP_AND_SCOUT_ACTIVE;
 ZERO_COMPLETED_PAPERS`。
+第七轮数学裁决现已保存于
+[ROUND7_DECISION.md](research_c429_c433/continuation_round7/ROUND7_DECISION.md)。
+C2 的 27 候选必要条件及 E6 的 301 行审查、C4 的指定两剪切
+共轭阻碍及 E4 的 143 行审查均已全文核读采纳，零必改；完整
+整数九周期仍未解决。A2 的 434 行有限除子／norm-one 归约及
+E5 的最终 428 行审查已全文核读采纳，零必改；纯 Frobenius
+子型已有完整证明，一般 MS6 仍开放。A1 的最终 379 行 atom
+归约及 E8 的最终 296 行独立审查均已全文核读采纳，零必改：
+只剩 x²−1、a=±1 的临界二周期族未解决。R7 四份数学审查共
+1,168 行均已关闭，待独立集成核查及精确路径同步。R8 已另
+目录接续该精确缺口、来源核查及最多两个不同完整问题的筛选，
+不改 R7 冻结稿。当前仍合同 4/5、论文 0/5、R7 数学运行零次。
 第六轮阶段裁决已保存于
 [ROUND6_DECISION.md](research_c429_c433/continuation_round6/ROUND6_DECISION.md)。
 九点集的全部整仿射坐标三角反射分类，以及任意次数单竖直三角
