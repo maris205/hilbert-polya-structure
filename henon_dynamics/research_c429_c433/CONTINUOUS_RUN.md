@@ -877,3 +877,39 @@ within a stated two-alternating-shear conjugator class; and E6's
 independently checking C2's new 245-line finite lemmas. General polynomial
 interpolation is not a global tame lift. No R7 result is preadmitted,
 no mathematical program is allocated, and old R6 inputs stay frozen.
+
+### Actual R6 synchronization receipt
+
+Root read the complete 111-line X1 integration audit, final SHA256
+`4cb8290f12b1c5ee83609fe80517f25d0c3d0d84e7ea37ee364f7d7271560ca6`.
+Its exact list matches all 14 actual R6 files; the two coordinator
+records make 16 paths. The 14 decision pins and two additionally cited
+R4 byte bindings match, all checked local links resolve, and the five
+mathematical review files total 1,192 lines. This is an integrity/scope
+audit, not another mathematical proof review.
+
+Root independently checked exact regular-file membership, captured all
+16 working Git blob identities, staged only those paths and verified
+every index entry against that snapshot, with mode 100644 and stage 0.
+The ordinary cached whitespace check and unstaged tracked diff both
+returned exit 0; no cosmetic exception was needed. The actual committed
+member set also matches the 16-path allowlist exactly.
+
+The research commit is
+`a9793f56636e3471356408a5304b646fd08a7766`, pushed to the existing
+configured origin/main. At 2026-09-09 18:02:58 UTC, a fresh fetch,
+local HEAD/tracking-ref reads and actual ls-remote all agreed on this
+commit. Tracked state was clean; only R7 and the eight inherited
+untracked directories remained. No R7 or unrelated path was staged.
+This receipt is written afterward outside the frozen R6 payload.
+
+One further bounded R7 assignment now reuses A1 in
+`continuation_round7/a1_balanced_divisor_detection/REPORT.md`: for odd
+characteristic, $f=x^2+c$ and the smallest nonzero balanced divisor
+atom $g=(x-a)/(x+a)$ with $a\ne0$, test whether cofinite exact primitive
+products can hold. A genuine positive example would refute full MS6;
+a proof of infinitely many bad cycles would settle only this declared
+discriminator. At most two primary-source query batches, no mathematical
+execution or model/API/Git/old-file changes, and no automatic admission
+are authorized. This runs alongside A2's general divisor criterion and
+C4's exact tame-lifting attempt, not as an additional completed result.
