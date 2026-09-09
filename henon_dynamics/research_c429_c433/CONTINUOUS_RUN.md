@@ -1146,3 +1146,65 @@ inputs are frozen. A separate exact-path integration audit and ordinary
 repository synchronization are the next checkpoint gates; neither is
 claimed complete here. Continuous authorized research does not stop at
 this auxiliary checkpoint, and no fifth contract is manufactured.
+
+### Actual R9 synchronization and R10 finite-effectivity allocations
+
+Root read all 144 final lines of X1's independent integration audit,
+SHA256 `e6bea0e62e8eb8203f1eb7f77fd40e650dcd48dfa075f16ef5bef65bfe5376a2`.
+The exact set is eight R9 files and two coordinator records, ten paths.
+Root separately matched actual membership and regular 0644 modes,
+captured all ten working Git blobs, and matched every stage-zero 100644
+index entry and committed blob/member to that snapshot. Cached whitespace
+and unstaged tracked checks both exited zero. The final coordinator-only
+formula-spacing correction had been read back by X1; no mathematical
+input was changed. All R9 files are now frozen.
+
+The research checkpoint was committed and pushed as
+`af22f7184a4d2fe3f32228777cd1b5c6c59ba771`. At
+2026-09-09 19:35:17 UTC, the completed fresh fetch, actual local refs and
+live ls-remote all agreed. The tracked tree was clean; only R10 and the
+eight inherited untracked directories remained. This receipt is outside
+the frozen R9 payload and does not claim another paper release.
+
+The following are actual existing-thread follow-up allocations, not
+prospective utilization or accepted mathematics. New files belong only
+to their named directories under `continuation_round10/`:
+
+| Existing thread | Exclusive directory | Bounded next question |
+| --- | --- | --- |
+| A1 | `a1_annihilator_ideal/` | Eliminate unknown S using one finite-state/rank mechanism; an explicit bound or exact failure, not Noetherian descent by assertion. |
+| A2 | `a2_native_jacobian_visibility/` | Exact least-period/all-multiple visibility and whether the all-level annihilator condition implies CP; actual rational counterexample required to refute that converse. |
+| A3 | `a3_inseparable_finite_cp/` | Complete finite-effectivity question for all derivative-zero polynomial maps and arbitrary rational weights, with original native cycles and finite exceptions. |
+| X2 | `x2_finite_cp_sources/` | Separate two-batch primary-source/ownership/substantiality test for this finite-effectivity question; no generic skew-fiber source rerun. |
+| E2 | `reviews/e2_annihilator_ideal/` | Full independent review of the actual new A1 proof and every rank/persistence/finite-ideal step. |
+| E5 | `reviews/e5_native_jacobian_visibility/` | Full independent review of the actual A2 local congruence, exact detector equivalence and native blind controls. |
+
+A1's 455-line author proof, SHA256
+`3e53c02f8315cfd957be1c235609b3f2fd3292103b7bd8b31aa98b81f69b835e`,
+has been fully read and hand-checked by root. Its new candidate bound is
+$D=4(m+2)^2$: a nonzero all-level ideal forces each visible bad cycle's
+native length to be at most D, hence supplies the explicit annihilator
+$\prod_{r=1}^D(f^{\circ r}-x)$ and an exact finite gcd/lcm decision.
+It does not bound the total exceptional-point count by D or prove general
+norm-one separation. E2 review is active, so no acceptance is claimed yet.
+
+A2's final 411-line report is now frozen at SHA256
+`46a8d605900a3145134a0074371ea170c6ed8d2ba54aa8c046ed6e59c7c2dd0b`.
+Root read it in full, including the complete self-contained weak Sen proof,
+both directions of the visible-CP equivalence, and the monomial/Chebyshev
+infinite native-blind controls. E5's independent review is active, not
+complete. Root supplied the Chebyshev control; the report discloses that
+exposure. No rational-observable all-level counterexample is obtained.
+The ramification congruence and classical semiconjugacies are subtracted.
+Root read Berger's complete Section 3 proof and Sen's metadata page;
+the original Sen proof was not read and the worksheet reopen failed.
+The derivative-zero question
+uses the different fact $(f^{\circ n}-x)'=-1$; the proposed general-polynomial
+transfer/rank adaptation is a new proof obligation, not an imported result
+or a fifth contract. Root's suggested adaptation is disclosed to A3.
+
+All R10 allocations are theorem-first, with no mathematical execution,
+parameter census, new agent, external model/API, GPU, old/shared-file,
+Git or PDF action by lanes. The source caps are one batch for A1/A3,
+two for A2/X2; no batch is claimed used by allocation alone. The four
+existing contracts and zero completed papers remain the actual count.

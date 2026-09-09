@@ -14,7 +14,7 @@
 PC_L_UL4_OM4_RLG5_FOUR_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
 ROUND7_FOUR_REVIEWS_CLOSED; ROUND8_TWO_REVIEWS_CLOSED;
 FULL_SINGLE_QUADRATIC_ATOM_ACCEPTED_AUXILIARY; ROUND9_THREE_REVIEWS_CLOSED;
-MS6_EXISTENCE_AND_INTEGRAL_NINE_LIFT_OPEN;
+MS6_EXISTENCE_AND_INTEGRAL_NINE_LIFT_OPEN; ROUND10_FINITE_EFFECTIVITY_ACTIVE;
 ZERO_COMPLETED_PAPERS`。
 第九轮已完成三份作者报告和三份非作者完整内部审查，协调者
 全文核读所有最终稿、三份审查共 1,059 行，实际复核六个哈希。
@@ -27,6 +27,20 @@ ZERO_COMPLETED_PAPERS`。
 次数界，真实坐标对仍未构造；三项原问题均未闭合。合同仍为
 4/5，完整论文 0/5；R9 数学程序零次。当前待 R9 独立集成审计
 和精确路径同步，未将任何下一轮工作或继承目录混入。
+R9 现已精确同步：八个 R9 文件和两个协调记录共十路径提交为
+`af22f7184a4d2fe3f32228777cd1b5c6c59ba771`，2026-09-09 19:35:17 UTC
+已实际核对 HEAD、origin/main 与远端 main 一致，已跟踪树清洁。
+144 行独立集成审计、暂存／提交成员与逐 blob 核对、普通空白
+检查均通过；R10 与八个继承目录未混入。本段为推送后回执，
+不回写已冻结的 R9 输入或裁决。
+R10 已实际续接三项互补证明：未知 annihilator 的统一次数界，
+原生周期的全返回导数可见性，以及任意导数零多项式／有理权重
+的普通 CP 有限判定。第一项已有完整 455 行作者证明，协调者
+全文核读、E2 独立审查中，尚未采纳；第二项完整 411 行证明也已
+全文核读并分配 E5 审查，精确刻画可见周期的 CP 及无限真正
+原生层持续失明例，但没有全部测试通过而违反普通 CP 的有理权重。
+第三项为新完整问题的证明尝试，X2 另做有界来源／实质核查，
+不以猜测的可推广性或辅助定理补第五合同。R10 数学运行零次。
 第八轮进展现保存于
 [ROUND8_DECISION.md](research_c429_c433/continuation_round8/ROUND8_DECISION.md)。
 临界二周期 atom 的全部奇特征证明已写成最终 526 行报告，协调者
