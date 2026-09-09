@@ -57,3 +57,31 @@ A standalone `git diff --check` on that tracked change also exited 0.
 These are scoped documentation/integrity checks, not a Markdown conformance
 test, validation of remote URLs, or additional mathematical runs. The final
 index audit must still check all 42 batch files plus the one state file.
+
+## Actual index audit and first-pass synchronization
+
+The exact scoped `git add` and standalone `git diff --cached --check` both
+completed with exit status 0. The subsequent full index audit exited 0:
+exactly 43 changed paths, comprising all 42 batch Markdown files and the one
+current-state file; every entry stage 0 and mode `100644`; every Git blob
+read through `git cat-file --batch`, its native SHA-1 identity checked, and
+its contents compared byte-for-byte with the corresponding regular disk file.
+No other path was staged. The audited snapshot contained 678,853 blob bytes;
+the ordered path/mode/object-id summary SHA256 was
+`0159eae229ff0add57bce21c9b4a3917ea7f25d2f8c69625cac81d0cf31422f5`.
+Those numbers describe the snapshot before this final receipt append.
+
+Actual commit and push both completed with exit status 0:
+`2f7d2ad3f06b40939142498c5da06653c86826ab`
+(`Record C429-C433 coordinated first-pass proofs and eight reviews`).
+By 12:21:38 UTC the explicit remote `refs/heads/main`, origin/main and HEAD
+were all that commit, left/right `0 0`. A standalone `git diff HEAD --quiet`
+exited 0. Only the same eight inherited unrelated directories remained
+untracked. The old sealed C424–C428 subtree object was unchanged at
+`05b88231bffb4381f29ddafb3e85c66101811986`.
+
+This receipt append and the state-file synchronization notice are a separate
+documentation follow-up; no reviewed proof or review file is changed by them.
+The final notice commit's own identifier is reported in the user handoff,
+not recursively embedded in itself. First-pass synchronization does not
+complete the five-paper batch: new paper admission remains **0/5**.
