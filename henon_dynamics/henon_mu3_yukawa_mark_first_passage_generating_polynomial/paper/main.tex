@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C99GeneratingPolynomial20260822}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{theorem}{Theorem}
+\title{Exact Generating Polynomials for Finite First Passage}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We encode the twenty frozen first-passage laws of C88 as exact integer
+generating polynomials. Every polynomial has all seventeen coefficients,
+support spectrum, and derivatives at one through order six. Stirling inversion
+recovers the C89 ordinary moments exactly. The certificate is finite
+combinatorics under the stated scope firewall.
+\end{abstract}
+\section{Polynomial certificate}
+For target $H_i$ let $N_i(t)=\#\{\pi:T_i(\pi)=t\}$ and
+\[
+G_i(z)=\sum_{t=0}^{16}N_i(t)z^t,\qquad P_i(z)=G_i(z)/16!.
+\]
+Then $P_i^{(m)}(1)=\mathbb E[(T_i)_m]$. With $S(r,m)$ denoting a
+Stirling number of the second kind,
+\[
+\mathbb E[T_i^r]=\sum_{m=0}^r S(r,m)P_i^{(m)}(1).
+\]
+\begin{theorem}
+All 20 polynomials have normalized nonnegative integer coefficients and the
+identity above recovers every C89 raw moment of orders $0$ through $6$.
+\end{theorem}
+\begin{proof}
+The coefficients are the exact C88 first-passage counts. Differentiating a
+finite polynomial gives falling-factorial moments, and Stirling inversion is
+the standard finite change of basis from falling factorials to powers.
+\end{proof}
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+certified object & count\\
+\midrule
+target polynomials & 20\\
+coefficient cells & 340\\
+support/degree/gcd rows & 20\\
+derivative orders per target & 7\\
+raw-moment recoveries & 140\\
+\bottomrule
+\end{tabular}
+\end{center}
+\section{Scope}
+No arithmetic/local data, Euler factors, root numbers, automorphy, full
+Burnside/table-of-marks, or Hilbert--Pólya operator is claimed.
+\end{document}

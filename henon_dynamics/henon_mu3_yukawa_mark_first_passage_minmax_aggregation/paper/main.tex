@@ -1,0 +1,69 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C103MinMaxAggregation20260822}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{theorem}{Theorem}
+\title{Exact Minimum and Maximum Aggregation for Finite First Passage}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We derive the exact distributions of the minimum and maximum of every ordered
+pair of twenty frozen first-passage variables on uniform permutations of
+sixteen labels. Two-dimensional finite differences of the C90 joint survival
+arrays produce 400 joint laws, from which 13600 minimum/maximum coefficient
+cells and 13600 tail/CDF identities are certified. The pointwise sum identity
+and diagonal reductions are checked exactly. The result is finite
+combinatorics under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{abstract}
+\section{Aggregation identities}
+Let $T_i\in\{0,\ldots,16\}$ and
+$S_{ij}(k,\ell)=\#\{T_i>k,T_j>\ell\}$. Finite Mobius inversion gives
+\[
+N_{ij}(a,b)=S_{ij}(a-1,b-1)-S_{ij}(a,b-1)-S_{ij}(a-1,b)+S_{ij}(a,b).
+\]
+Define $U_{ij}=\min(T_i,T_j)$ and $V_{ij}=\max(T_i,T_j)$. Then
+\[
+\#\{U_{ij}>k\}=S_{ij}(k,k),\qquad
+\#\{V_{ij}\le k\}=16!-S_i(k)-S_j(k)+S_{ij}(k,k).
+\]
+\begin{theorem}
+For all 400 ordered pairs the derived minimum and maximum laws are
+nonnegative, normalized, transpose-compatible, and satisfy
+\[
+\mathbb E U_{ij}+\mathbb E V_{ij}=\mathbb E T_i+\mathbb E T_j.
+\]
+On the diagonal, $U_{ii}=V_{ii}=T_i$ exactly.
+\end{theorem}
+\begin{proof}
+The coefficient laws are pushforwards of the exact joint PMF. The two tail
+identities follow from the definitions and inclusion--exclusion. The
+expectation equality is the pointwise identity
+$\min(x,y)+\max(x,y)=x+y$. Diagonal and transpose assertions follow from
+$T_i=T_i$ and $N_{ij}(a,b)=N_{ji}(b,a)$.
+\end{proof}
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+certified object & count\\
+\midrule
+ordered target pairs & 400\\
+minimum and maximum coefficient cells & 13600\\
+joint PMF cells independently checked & 115600\\
+minimum-tail / maximum-CDF identities & 6800 / 6800\\
+sum and diagonal identities & 400 / 20\\
+\bottomrule
+\end{tabular}
+\end{center}
+\section{Scope}
+The package is a finite probability certificate. It makes no arithmetic/local
+data, Euler-factor, root-number, automorphy, full Burnside/table-of-marks, or
+Hilbert--Pólya operator claim.
+\end{document}

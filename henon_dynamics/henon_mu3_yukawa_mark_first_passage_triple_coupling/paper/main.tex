@@ -1,0 +1,72 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C101TripleCoupling20260822}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{theorem}{Theorem}
+\title{Exact Three-Target First-Passage Coupling}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We compute the exact joint first-passage-time law for every unordered triple
+of twenty frozen targets on uniform permutations of sixteen labels.  A
+nested-chain closure dynamic program and three-dimensional finite differences
+certify 1,140 arrays with $17^3$ cells, together 5,600,820 permutation-count
+cells.  Pair and single marginals, exact moments through order three,
+covariances, and third interaction cumulants are independently checked.  The
+result is finite combinatorics under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{abstract}
+\section{Joint survival and inversion}
+Let $T_i\in\{0,\ldots,16\}$ and
+\[
+ S_{ijk}(a,b,c)=\#\{\pi:T_i>a,\ T_j>b,\ T_k>c\}.
+\]
+After sorting thresholds, the relevant supports form a nested chain
+$A\subseteq B\subseteq C$.  Closure states are propagated label by label and
+contracted with the target inclusion matrix.  Boundary planes are supplied by
+the C88 single-target and C90 pair receipts.  Three-dimensional Mobius
+inversion gives
+\[
+ N_{ijk}(a,b,c)=\Delta_a\Delta_b\Delta_c S_{ijk}(a,b,c).
+\]
+\begin{theorem}
+For all 1,140 unordered target triples, $N_{ijk}$ is nonnegative and sums to
+$16!$.  Every pair and single marginal agrees with the frozen lower-order
+receipt, coordinate permutations agree, and all raw moments with exponents at
+most three are exact.  The covariance matrix and third interaction cumulant
+computed from those moments are exact rational values.
+\end{theorem}
+\begin{proof}
+The closure dynamic program partitions the $4^{16}$ nested-support chains,
+and factorial weights count all permutations with each chain of support sizes.
+The boundary substitutions are the defining C88/C90 survival counts.  Finite
+Mobius inversion is therefore the exact pushforward PMF.  Marginalization and
+coordinate permutation are identities of the same finite count; moments and
+cumulants are finite sums of integer counts divided by $16!$.
+\end{proof}
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+certified object & count\\
+\midrule
+unordered target triples & 1,140\\
+joint PMF cells & 5,600,820\\
+pair / single marginal recoveries & 400 / 20\\
+mixed-moment cells & 72,960\\
+covariance and interaction records & 1,140\\
+\bottomrule
+\end{tabular}
+\end{center}
+\section{Scope}
+This package is a finite probability certificate.  It makes no arithmetic or
+local-data, Euler-factor, root-number, automorphy, full Burnside/table-of-
+marks, or Hilbert--P\'olya operator claim.
+\end{document}
