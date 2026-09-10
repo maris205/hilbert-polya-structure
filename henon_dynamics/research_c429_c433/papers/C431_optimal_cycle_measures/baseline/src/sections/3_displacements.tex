@@ -1,0 +1,95 @@
+\section{Native isometry and displacement bounds}
+\label{sec:displacements}
+
+Set $\mathcal D=\{x\in K:v(x)\ge r\}$, a complete closed disk.
+It contains every $\Pi_e$. Since $|1+s|=1$ and $|x|<1$ on this
+disk, $P(\mathcal D)\subseteq\mathcal D$. The identity
+\begin{equation}\label{eq:difference}
+ P(x)-P(y)=(x-y)(1+s+x+y)
+\end{equation}
+contains slightly more information than isometry: the unit factor
+has residue one.
+
+\begin{lemma}[Residue-one difference quotients]\label{lem:isometry}
+For $x,y\in\mathcal D$ and every integer $a\ge0$,
+\[
+ |P^{\circ a}(x)-P^{\circ a}(y)|=|x-y|.
+\]
+If $x\ne y$, then
+\begin{equation}\label{eq:residue-one}
+ \frac{P^{\circ a}(x)-P^{\circ a}(y)}{x-y}
+ \in 1+\{u\in K:v(u)\ge r\}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+In \eqref{eq:difference}, $v(s)=1>r$ and $v(x),v(y)\ge r$.
+Thus the second factor lies in the set on the right of
+\eqref{eq:residue-one} and has norm one. Products of elements of
+that set remain in the set. Iteration proves both assertions.
+\end{proof}
+
+Fix $d\ge1$ and $\beta\in\Pi_d$. For $0\le j<d$, define the
+finite quantities
+\begin{equation}\label{eq:deltas}
+ \delta_j= v(P^{\circ p^j}(\beta)-\beta).
+\end{equation}
+
+\begin{lemma}[Displacements indexed by native time]\label{lem:index}
+For $1\le a<p^d$,
+\begin{equation}\label{eq:index}
+ v(P^{\circ a}(\beta)-\beta)=\delta_{v_p(a)}.
+\end{equation}
+There are $(p-1)p^{d-j-1}$ indices contributing the value
+$\delta_j$ in this formula. Distinct $j$ need not give distinct
+valuation values.
+\end{lemma}
+\begin{proof}
+Write $a=kp^j$ with $p\nmid k$ and set $G=P^{\circ p^j}$.
+The telescoping identity
+\[
+ G^{\circ k}(\beta)-\beta
+ =\sum_{i=0}^{k-1}
+   \bigl(G^{\circ(i+1)}(\beta)-G^{\circ i}(\beta)\bigr)
+\]
+may be divided by $G(\beta)-\beta\ne0$. By
+\eqref{eq:residue-one}, each resulting summand has residue one.
+Their sum has residue $k\ne0$, so it has valuation zero. This
+proves \eqref{eq:index}. The count is the number of integers in
+$\{1,\ldots,p^d-1\}$ divisible by $p^j$ but not by $p^{j+1}$.
+\end{proof}
+
+\begin{lemma}[Exponential displacement bound]\label{lem:displacement}
+For all $d\ge1$, $\beta\in\Pi_d$, and $0\le j<d$,
+\begin{equation}\label{eq:displacement}
+ \delta_j\ge(p^j+1)r.
+\end{equation}
+\end{lemma}
+\begin{proof}
+For $H(z)=\sum_i h_i z^i\in K[z]$, define the weighted Gauss
+valuation
+\[
+ w_r(H)=\min_{h_i\ne0}\{v(h_i)+ir\},\qquad w_r(0)=+\infty.
+\]
+Let $U$ be the $K$-linear operator $UH=H\circ P$, and put
+$\Delta=U-I$. For every integer $i\ge1$,
+\[
+ \Delta(z^i)=z^i\bigl((1+s+z)^i-1\bigr).
+\]
+The constant coefficient in the bracket has valuation at least one
+if nonzero. Every positive-degree term has weighted valuation at
+least $r$, since its coefficient is integral. Because $1>r$, the
+bracket has weight at least $r$. Constants have zero image under
+$\Delta$, and the ultrametric inequality gives
+\begin{equation}\label{eq:delta-weight}
+ w_r(\Delta H)\ge w_r(H)+r.
+\end{equation}
+It follows by induction that $w_r(\Delta^N z)\ge(N+1)r$ for all
+positive integers $N$. The operators $U$ and $I$ commute, and their
+coefficient field has characteristic $p$. Thus
+\[
+ \Delta^{p^j}=U^{p^j}-I.
+\]
+Evaluation at $\beta$, whose valuation is $r$, cannot decrease
+the weighted lower bound. This gives \eqref{eq:displacement}.
+The argument applies to real, possibly nondiscrete valuations.
+\end{proof}

@@ -1,0 +1,254 @@
+\section{A marked Hasse detector}
+\label{sec:hasse}
+
+Assume now that $p\mid d-1$. The scalars $d^n$ and $d^{n+1}$
+coincide in $k$, so \eqref{eq:two-leading-jacobians} cannot give
+the required contradiction. We replace the ordinary derivative by
+the first nonlinear Hasse derivative and compare a different
+target digit string. Write
+\begin{equation}
+ P=p^{v_p(d-1)},\qquad A=(d-1)/P,\qquad
+ \alpha=A\bmod p\in k^\times.
+ \label{eq:hasse-parameters}
+\end{equation}
+The integer inequalities used below are
+$2\le P<d$ and $d-1\ge2$. They include $p=2$.
+
+\subsection{The exact marked backgrounds}
+
+Since $d=PA+1$ and $P$ is a characteristic power,
+\[
+ f(x+z)=(x+z)(x^P+z^P)^A+c.
+\]
+There are no Taylor terms of orders $2,\ldots,P-1$, and
+\begin{equation}
+ f'(x)=x^{d-1},\qquad D^{[P]}f(x)=\alpha x^{d-P}.
+ \label{eq:hasse-first-term}
+\end{equation}
+The absence of those intermediate orders is preserved by
+composition. If
+$g(x+z)=g(x)+a(x)z+b(x)z^P+O(z^{P+1})$, the coefficient
+of $z^P$ in $f(g(x+z))$ is
+\[
+ f'(g(x))b(x)+D^{[P]}f(g(x))a(x)^P.
+\]
+For $P=2$ the interval of absent intermediate orders is empty,
+but this coefficient formula is unchanged.
+
+Induction gives, in $\cA_n$,
+\begin{equation}
+ J_n:=[D^{[P]}F_n]=\alpha\sum_{j=0}^{n-1}B_{n,j},
+ \label{eq:marked-formula}
+\end{equation}
+where
+\begin{equation}
+ B_{n,j}=
+ \left(\prod_{a<j}X_a^{P(d-1)}\right)X_j^{d-P}
+ \left(\prod_{a>j}X_a^{d-1}\right).
+ \label{eq:marked-background}
+\end{equation}
+The term $-x$ has zero $P$th Hasse derivative because $P>1$.
+We call $j$ the \emph{mark}. Its background exponents are
+\begin{equation}
+ b_a(j)=
+ \begin{cases}
+  P(d-1),&a<j,\\
+  d-P,&a=j,\\
+  d-1,&a>j.
+ \end{cases}
+ \label{eq:background-digits}
+\end{equation}
+
+Normal exponents remain normal after multiplication by $P$,
+since $\gcd(d,P)=1$. Moreover,
+\begin{equation}
+ \cH_n(v)^P=\cH_n(v^P).
+ \label{eq:frobenius-trace}
+\end{equation}
+All coefficients of $v$ are raised to their $P$th powers in
+this identity; none is assumed to lie in the prime field.
+By \cref{lem:root-certificates}, ordinary-root vanishing of
+$H_n(h)$ implies
+$F_n\mid D^{[P]}F_nH_n(h)^P$ without any root-multiplicity bound.
+
+\subsection{The target digit string and reduction paths}
+
+Fix a cap $M\ge1$ and a normal polynomial $v$ with positive
+leading degree $D\le M$ and leading coefficient $a_D\ne0$.
+For this argument put
+\begin{equation}
+ m=\lfloor\log_d(PM)\rfloor,\qquad L=m+2,
+ \qquad s\ge4L+4,\qquad n\ge s+3L+4.
+ \label{eq:hasse-spacing}
+\end{equation}
+Define a digit-basis monomial $T_{n,s,D}$ by the following digits:
+\begin{enumerate}[label=\textup{(\alph*)}]
+ \item $d-P+1$ at site $0$;
+ \item $d-1$ at sites $1,\ldots,s-1$;
+ \item the base-$d$ digits of $PD-1$, padded to $m+1$ digits,
+       at sites $s,\ldots,s+m$;
+ \item zero at all later sites.
+\end{enumerate}
+These are legal digits. Because $d\nmid PD$, the first digit
+after the long block satisfies
+\begin{equation}
+ e_s=(PD-1)\bmod d\le d-2.
+ \label{eq:first-small-digit}
+\end{equation}
+Equivalently, this is the digit string of the integer
+$PDd^s-P+1$. This description does not identify its univariate
+representative with a pure power when $c\ne0$.
+
+Expand a term $B_{n,j}X_i^{Pr}$, where $1\le r\le D$ is
+a normal exponent of $v$ and $i$ is its \emph{source}. At a
+processed site with incoming carry $t_a$, divide the exponent
+$b_a+t_a+Pr\one_{a=i}$ by $d$:
+\[
+ q_a=\left\lfloor\frac{b_a+t_a+Pr\one_{a=i}}d\right\rfloor,
+ \qquad e_a=(b_a+t_a+Pr\one_{a=i})\bmod d.
+\]
+The choice of an outgoing carry $0\le t_{a+1}\le q_a$ has weight
+\begin{equation}
+ \binom{q_a}{t_{a+1}}(-c)^{q_a-t_{a+1}}.
+ \label{eq:marked-weight}
+\end{equation}
+Writing $\kappa_a=q_a-t_{a+1}\ge0$, a legal closed-circuit
+path satisfies the integer identity
+\begin{equation}
+ e_a=b_a+t_a+Pr\one_{a=i}-dt_{a+1}-d\kappa_a.
+ \label{eq:marked-conservation}
+\end{equation}
+We must first justify this closed-circuit description at the cut;
+an unchecked wraparound could change both its digit and its weight.
+
+\subsection{Adaptive cuts and exclusion of overflow}
+
+Choose a nonsource cut $a\in[1,s-1]$ whose forward cyclic
+distance from the source is at least $L$. Such a choice exists:
+only $L$ consecutive positions are forbidden by the source and
+this distance requirement, whereas the long block has more than
+$L$ positions. Start a one-circuit expansion at $a$ with no
+incoming carry. The carry produced by the last site will be
+added to its retained digit at the end.
+
+Before the source is processed, every incoming carry is at most
+$P-1$, since $b_u\le P(d-1)$ and the initial carry is zero.
+After $h\ge1$ steps from the source, the carry satisfies
+\begin{equation}
+ t\le P+\frac{Pr-1}{d^h}.
+ \label{eq:marked-carry-bound}
+\end{equation}
+At the source its incoming carry is at most $P-1$, giving the
+bound for $h=1$. Each subsequent nonsource step obeys
+$t_{\mathrm{next}}\le(P(d-1)+t)/d$, proving the induction.
+Since $d^{L-1}=d^{m+1}>PM-1$, the carry is at most $P$
+after $L-1$ steps and stays at most $P$ thereafter.
+
+The cut initially retains digit $d-P$ if it is before or at
+the mark, and digit $d-1$ if it is after the mark. Its final
+incoming carry is at most $P$. In the latter case, the preceding
+site is after the mark or is the mark itself; it is not the source,
+and its incoming carry is at most $P$. Its outgoing carry is
+therefore at most one. Thus the final exponent at the cut is
+at most $d$ in all cases.
+
+If that exponent is below $d$, one circuit already gives a
+digit monomial. If it equals $d$, reduce the cut once more.
+Its digit becomes zero, and a carry zero or one is sent forward.
+All other sites already have digits below $d$. A carry one
+continues only through a digit $d-1$, leaving zero there. It
+either stops or completes a further circuit; on returning to
+the cut, it raises its zero digit to at most one and stops.
+Every overflowing branch consequently has final cut digit at
+most one. The target cut digit is $d-1\ge2$, so no such
+branch can contribute.
+
+For a contributing branch, the retained cut digit plus its final
+incoming carry is still below $d$. Including that final carry
+does not change the quotient used at the cut initially.
+Thus its binomial weight is exactly \eqref{eq:marked-weight}
+with this incoming carry included, and
+\eqref{eq:marked-conservation} holds cyclically at every site.
+Conversely, the legal paths with this cut quotient reconstruct
+the same nonoverflow branches of the one-circuit expansion.
+No contributing branch or weight has been discarded except for
+the explicitly excluded overflow. This argument is termwise and
+does not require nonzero or cancellation-free weights.
+
+\subsection{Localization of all sources}
+
+For a fixed mark $j$, define a baseline carry
+\[
+ \ell_a=\begin{cases}P-1,&a\le j,\\0,&a>j.
+ \end{cases}
+\]
+For $a<n-1$, it satisfies
+\begin{equation}
+ b_a+\ell_a=d-1+d\ell_{a+1}.
+ \label{eq:baseline}
+\end{equation}
+Put $u_a=t_a-\ell_a$. The conservation identity becomes
+\begin{equation}
+ e_a=d-1+u_a+Pr\one_{a=i}-du_{a+1}-d\kappa_a
+                  \qquad(a<n-1).
+ \label{eq:excess}
+\end{equation}
+At a nonsource site, $u_a\le0$ implies
+$du_{a+1}\le d-1$, hence the integer $u_{a+1}\le0$.
+Nonpositive excess cannot become positive without passing the source.
+
+At a nonsource site with incoming carry between zero and $P$,
+a target digit $d-1$ forces $t_a=\ell_a$, while a zero digit
+requires $t_a=\ell_a+1$. To verify this, reduce each of the
+three backgrounds in \eqref{eq:background-digits} modulo $d$
+and use $P<d$. In particular a zero digit is impossible when
+$u_a\le0$.
+
+Let $b=s+m+1$, a zero target site. Every contributing source lies in
+\begin{equation}
+ I_{n,s}=\{s-L,s-L+1,\ldots,b\}.
+ \label{eq:hasse-source-interval}
+\end{equation}
+Indeed, if $i\le s-L-1$, choose the adaptive cut $a=i+L$.
+It lies in $[1,s-1]$ at the required distance from the source.
+Its carry is at most $P$, and its target digit is $d-1$,
+so $u_a=0$. The ordinary index interval $[a,b]$ contains
+no source. Equation \eqref{eq:excess} keeps the excess nonpositive
+until the zero site $b$, a contradiction. If $i\ge b+1$,
+choose $a=L$. Its forward distance from the source is
+$n-i+L\ge L+1$. Starting again with $u_a=0$, the same
+argument reaches $b$ before the source and gives the contradiction.
+
+There is also no target contribution from a background $B_{n,j}$
+without a source. Use the cut $a=L$. The carry bounds and
+overflow exclusion remain valid; the excess starts at zero and
+cannot become positive before $b$. Thus constants in $v^P$
+contribute zero to the coefficient under consideration, regardless
+of the scalar $n$ in their return sum.
+
+\subsection{A common cut after localization}
+
+All sources in \eqref{eq:hasse-source-interval} are positive, and
+\[
+ n-i\ge n-b\ge2L+5.
+\]
+We can now process every contributing term in the common order
+$0,1,\ldots,n-1$. Site zero is not a source. Its retained
+initial digit is $d-P$, whether it is the mark or precedes the
+mark. By \eqref{eq:marked-carry-bound}, the incoming carry at
+the last site is at most $P$. That site is the mark or follows
+it, so its outgoing carry is at most one. The final digit at
+zero is at most $d-P+1<d$, and no second circuit occurs.
+
+To produce the specified anchor digit it must be exactly
+$d-P+1$. Every contributing path therefore has the convention
+\begin{equation}
+ t_0=t_n=1.
+ \label{eq:common-cut}
+\end{equation}
+At site zero this fictitious initial carry leaves the initial
+quotient and weight unchanged, because $d-P+1<d$. Hence
+\eqref{eq:marked-weight}--\eqref{eq:marked-conservation}, with
+\eqref{eq:common-cut}, describe all contributing branches in
+one fixed order. Before the source, all carries after site zero
+are at most $P-1$.

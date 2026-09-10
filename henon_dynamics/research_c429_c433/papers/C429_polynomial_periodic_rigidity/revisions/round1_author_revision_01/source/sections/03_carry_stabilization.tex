@@ -1,0 +1,175 @@
+\section{Stable full-background coefficients}
+\label{sec:carry}
+
+Multiplication by $\Pi_n$ changes the leading-digit problem: a
+reduction can now pass around the whole cycle. The next proposition
+controls that passage and compares all contributing paths at
+consecutive levels. It is valid in every characteristic; the
+restriction on $d$ enters only when it is applied to the Jacobian.
+
+\begin{proposition}[Short-support stabilization]
+\label{prop:stabilization}
+Let $M\ge1$, $m=\lfloor\log_dM\rfloor$, and
+$v\in\Vd$ have degree at most $M$. Fix digits
+$e_0,\ldots,e_m\in\{0,\ldots,d-1\}$, not all zero, and
+let $M_{\mathbf e}=\prod_{j=0}^mX_j^{e_j}$. For $n\ge3m+4$,
+\begin{equation}
+ [M_{\mathbf e}](\Pi_{n+1}\cH_{n+1}(v))
+       =[M_{\mathbf e}](\Pi_n\cH_n(v)).
+ \label{eq:stabilization}
+\end{equation}
+The coefficients are taken in their respective full periodic algebras.
+\end{proposition}
+
+\subsection{A complete one-circuit expansion}
+
+It suffices first to treat a positive exponent $r\le M$ with
+$d\nmid r$. Put $L=m+1$ and suppose $n\ge L$. For a source
+$i\in\mathbb Z/n\mathbb Z$, process the sites of
+$\Pi_nX_i^r$ in the order $i,i+1,\ldots,i+n-1$. Set $t_0=r$.
+At step $s$ the current exponent is $d-1+t_s$; define
+\begin{equation}
+ b_s=(d-1+t_s)\bmod d,\qquad
+ q_s=\left\lfloor\frac{d-1+t_s}{d}\right\rfloor.
+ \label{eq:carry-quotient}
+\end{equation}
+The exact local expansion is
+\begin{equation}
+ X_{i+s}^{d-1+t_s}
+   =\sum_{t_{s+1}=0}^{q_s}
+      \binom{q_s}{t_{s+1}}(-c)^{q_s-t_{s+1}}
+      X_{i+s}^{b_s}X_{i+s+1}^{t_{s+1}}.
+ \label{eq:carry-expansion}
+\end{equation}
+A path is a finite sequence $(t_0,\ldots,t_n)$ obeying these
+transitions, with weight
+\begin{equation}
+ w(t)=\prod_{s=0}^{n-1}
+      \binom{q_s}{t_{s+1}}(-c)^{q_s-t_{s+1}}\in k.
+ \label{eq:carry-weight}
+\end{equation}
+We retain zero-weight paths, and a factor with exponent zero is
+one also when $c=0$.
+
+Induction from $t_{s+1}\le(d-1+t_s)/d$ yields
+\begin{equation}
+ t_s\le1+\frac{r-1}{d^s}.
+ \label{eq:carry-bound}
+\end{equation}
+Since $d^L>M-1$, the carry at step $L$ is at most one.
+The states zero and one cannot return to a larger state, so
+$t_n\le1$. At the source the first output digit satisfies
+\[
+ b_0=(r-1)\bmod d\le d-2,
+\]
+because $d\nmid r$. The final carry therefore lands legally:
+$b_0+t_n\le d-1$. No second circuit is necessary.
+
+Let $\mathbf e(t,i)$ have digit $b_0+t_n$ at the source and
+digit $b_s$ at site $i+s$ for $1\le s<n$. Repeated use of
+\eqref{eq:carry-expansion} now proves an equality in the digit basis,
+\begin{equation}
+ \Pi_nX_i^r=\sum_t w(t)X^{\mathbf e(t,i)}.
+ \label{eq:whole-circuit}
+\end{equation}
+This is a finite polynomial expansion with a legal final digit
+at every site. Its validity does not rely on coefficients avoiding
+cancellation. The eventual-state transitions will be used explicitly:
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Incoming carry & Output digit & Outgoing carry & Weight\\
+\midrule
+$0$ & $d-1$ & $0$ & $1$\\
+$1$ & $0$ & $1$ & $1$\\
+$1$ & $0$ & $0$ & $-c$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Here $d-1$ is a positive integer digit, not a scalar reduced modulo $p$.
+
+\subsection{Localization of every source}
+
+Let $E=\{j\in[0,m]:e_j>0\}$ be the nonempty support of the
+target. If a path in \eqref{eq:whole-circuit} produces this target
+and $n\ge L+1$, its source satisfies
+\begin{equation}
+ i\in\left(\bigcup_{s=0}^{L-1}(E-s)\right)\cup(E+1)
+       \subseteq[-m,m+1]\pmod n.
+ \label{eq:source-localization}
+\end{equation}
+To prove this, consider a source outside $E$ for which none of the
+next $L-1$ sites lies in $E$. Its final source digit is zero, so
+$b_0+t_n=0$ as an equality of nonnegative integers. In particular
+$t_n=0$, and the first $L-1$ nonsource outputs are zero.
+
+If $t_L=0$, all subsequent carries are zero. Since $n-1\ge L$,
+the last output is $d-1>0$, and hence $i-1\in E$. If $t_L=1$,
+there must be a first drop from one to zero before the circuit
+ends. Were it at the last step, there would be no subsequent
+nonzero outputs, and the entire target would be empty. It occurs
+no later than step $n-2$, after which the last output is again
+$d-1>0$. Thus $i-1\in E$ in either case, proving
+\eqref{eq:source-localization}.
+
+For $n\ge3m+4$, every contributing source lies in the two
+disjoint blocks
+\begin{equation}
+ I_n=\{0,\ldots,m+1\}\cup\{n-m,\ldots,n-1\}.
+ \label{eq:source-blocks}
+\end{equation}
+The second block is empty if $m=0$. The argument is uniform in
+the normal exponent $r\le M$ and preserves all target digits,
+including digits greater than one.
+
+\subsection{Insertion and deletion of one forced transition}
+
+Set $a=2m+2$. At level $n\ge3m+4$, neither $a$ nor $a+1$
+is a source or a nonzero target site: the lower source block ends
+at $m+1<a$, and the upper block begins at $n-m\ge2m+4>a+1$.
+The forward distance from a source to $a$ is at least $L$.
+Indeed it is $a-i\ge m+1$ for $0\le i\le m+1$, and
+$a+n-i\ge a+1$ for $n-m\le i<n$.
+
+By \eqref{eq:carry-bound}, the incoming carry at $a$ is at most
+one. Its zero output forces it to be one. The zero output at the
+following nonsource site forces the outgoing carry at $a$ also
+to be one. The transition at $a$ is therefore $1\to1$ with
+weight exactly one.
+
+Insert a new site just after $a$, with output zero and transition
+$1\to1$, and relabel old indices by
+\begin{equation}
+ \iota_n(u)=
+ \begin{cases}u,&0\le u\le a,\\u+1,&a+1\le u<n.
+ \end{cases}
+ \label{eq:ordinary-insertion}
+\end{equation}
+The target supported in $[0,m]$ is unchanged. The source becomes
+$\iota_n(i)$; every old transition occurs in the same cyclic
+order, and the initial carry, final carry, and source digit are
+preserved. The inserted transition has weight one.
+
+Conversely, a target-producing path at level $n+1$ has its source
+in $I_{n+1}$. It is neither $a+1$ nor $a+2$, and those sites
+have zero target digits. The forward distance to $a+1$ is at
+least $L$. The same two-output argument forces the transition
+at $a+1$ to be $1\to1$ of weight one. Delete it and relabel
+later indices down by one. This recovers a legal path at level $n$
+with the same weight and full target vector. The blocks in
+\eqref{eq:source-blocks} correspond under \eqref{eq:ordinary-insertion},
+so no new source at the inserted site is missed.
+
+Insertion and deletion are mutual inverses on \emph{all pairs}
+of a source and a target-producing path. Summing
+\eqref{eq:whole-circuit} therefore proves
+\eqref{eq:stabilization} for $v=x^r$. If $v=a_0$ is constant,
+$\Pi_n\cH_n(a_0)=na_0\Pi_n$ has zero target coefficient,
+since $n>m+1$ and the target has short support. Taking the
+linear combination over all normal monomials of $v$ proves
+\cref{prop:stabilization}.
+
+For $d=2$ the digit basis is squarefree, and this is precisely
+the binary full-product stabilization. The proof above retains
+the source digit and all higher base-$d$ digits, so the general
+degree statement requires no unverified analogy with that case.

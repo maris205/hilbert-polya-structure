@@ -1324,3 +1324,111 @@ AS-class stabilization rather than a general coefficient formula;
 and product-visible versus Jacobian-visible data, with the rational
 skew domain not assumed invariant. No manuscript has been activated.
 This receipt is outside the frozen R10 research checkpoint.
+
+### Five-paper outline gate closed; five actual drafting tasks activated
+
+Actual root clock: 2026-09-09 20:24 UTC. Root read the entire 268-line
+initial nonauthor outline review and all 45 lines of its targeted
+verification. The final 313-line REVIEW_OUTLINE hash is
+`a72c00c0463ded15c36367fc9d57699b19a967aa0d3282ffde13d32c3048c613`.
+The original CHANGES REQUESTED finding and its 328-line input binding
+are preserved. Root accepted M1–M3, patched and read back the exact
+interfaces, and the reviewer independently closed all three on the
+374-line repaired mathematical plan, SHA256
+`7cbf39601ccc3ae0677b45ce1a8ac8cc3321ddc3277f09769b5c6382b6e2946e`.
+No admitted theorem, bound or proof input changed. The final plan's
+later status-only activation and common build settings are root-owned.
+
+Root then actually reactivated the five existing author threads into
+their disjoint manuscript directories: A2/C429 polynomial rigidity,
+D1/C430 native Galois fields, A1/C431 optimal-cycle measures,
+C4/C432 local/global reversibility, and A3/C433 inseparable finite
+products. Each will typeset all central proofs, verify used citations,
+self-audit and make a real baseline PDF. The common deterministic
+epoch is 1788912000, not the actual execution date. No PDF or complete
+manuscript has yet been delivered. The outline review does not count
+as either required nonauthor full-manuscript review.
+
+The final model/field/observable boundaries include all three C429
+finite-test regimes, odd p in C430, noncircular C431-to-eventual-tower
+dependence only, all polynomial reversors in C432, and the precise
+ordinary/product-visible/filtered-visible/native-visible distinctions
+in C433. C433's one-step rational domain need not be invariant.
+Existing frozen rounds, original source packages and unrelated work
+remain untouched. Math executions remain zero at this writing checkpoint;
+compilation is separately recorded when actually performed.
+
+The R10 coordinator receipt was separately committed/pushed as
+`6f1ab3a9854f68bed33ae47db11166a00a4d3bd5`; actual subsequent fetch and
+HEAD/origin/main/live-remote checks agreed before these new writing
+state edits. That synchronization does not include the new outline
+or manuscripts and is not a claim that their future release is sealed.
+
+### Two frozen manuscripts and actual review/evaluation activation
+
+Actual root clock: 2026-09-09 20:49:43 UTC. C431 and C433 have
+delivered real 12-page and 11-page first-draft baselines with exact
+source/PDF snapshots, author visual checks and recorded build attempts.
+Root activated E7/C431 and E8/C433 for actual complete manuscript
+round 1, and X1/C431 and X2/C433 for bounded independent citation
+checks. No review report is yet accepted. The other three author
+tasks continue; no additional mathematical run was allocated.
+
+Root completely read C431's main, seven sections, bibliography and
+160-line source/build record, and actually verified its handoff hashes.
+C433's build/source records have been read; its whole-main-source
+integration read remains next. Root also wrote and fully read five
+v0.2.0 evaluations after the actual authority/reference routing. A
+read-only structural check found no duplicate YAML keys and verified
+all tuples, paths, 45 NOT_TESTABLE A2 metrics and 45 false target flags.
+E6's independent semantic review found two metadata fixes concerning
+parameter provenance and the proof-commit versus working-tree boundary;
+root accepted, patched and read them back. Final review, revalidation
+and acceptance remain pending, with no scientific grade change.
+
+The [manuscript coordination record](MANUSCRIPT_COORDINATION.md)
+contains exact baseline bindings, disjoint ownership, actual skill
+interpretation and pending release gates. Five contracts remain admitted,
+zero completed papers are counted, and this writing checkpoint has
+not been committed or synchronized. No authoring build substitutes
+for the two required final clean builds or the two manuscript passes.
+
+### All five first manuscript reviews adjudicated; actual revisions dispatched
+
+Actual root checkpoint: 2026-09-09 21:18 UTC. All five baseline PDFs
+are real and frozen: C429 16 pages, C430 18, C431 12, C432 8, C433 11.
+Root completed every manuscript source/bibliography and source/build
+record read, and actually checked the baseline handoff hashes. The
+full C430 cancellation/ramification and eventual quotient-tower proof
+read is now complete; the C431 dependency remains one-way and confined
+to the tower consequence.
+
+All five actual first manuscript reviews have been fully read and
+adjudicated, 1,670 lines total. All five separate citation reports
+have likewise been fully read, 1,190 lines total, with actual final
+hashes recorded in MANUSCRIPT_COORDINATION.md. No required main-proof
+change was found. Seven required minor manuscript precision/notation/
+disclosure fixes and the separate reference repairs were accepted.
+Four authors received actual aggregate revision/rebuild/snapshot tasks;
+C432's author received honest no-change snapshot/log work. The current
+original sources and PDFs stay immutable in their baselines, and the
+original complete reports stay unchanged. A first-pass finding is not
+closed merely because its repair was assigned. No second manuscript
+pass, final clean build or release seal has yet been claimed.
+
+The bounded citation audits retain their unavailable original full texts,
+publisher-status checks, Retraction Watch screening and PDF structural
+preflight, rather than converting these into PASS. C430's Elder–Keating
+publication metadata and Debaisieux v2/arXiv identifier were freshly
+checked by root at adjudication; the author will preserve the exact
+consulted preprint locators. Mathematical scope and all proof constants
+remain unchanged. No new mathematical execution was allocated.
+
+Evaluation acceptance also closed: root fully read the final 477-line
+E6 report and actually verified its hash, all 27 input bindings and
+the authority, followed by unique-key parsing of all five repaired
+YAML records. All 45 A2 target metrics remain NOT_TESTABLE, all 45
+target flags and all five Route-B permissions false. The records are
+not a target-arithmetic achievement. This five-contract/zero-completed-
+paper writing checkpoint remains uncommitted; HEAD still identifies
+the earlier 6f1ab3a9854f68bed33ae47db11166a00a4d3bd5 receipt.

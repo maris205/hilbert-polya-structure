@@ -1,0 +1,192 @@
+\section{Marked insertion and the remaining congruence class}
+\label{sec:insertion}
+
+Retain the parameters, target, and normal polynomial from
+\cref{sec:hasse}. Define
+\begin{equation}
+ C(n,s)=[T_{n,s,D}]\bigl(J_n\cH_n(v^P)\bigr).
+ \label{eq:marked-coefficient}
+\end{equation}
+The needed comparison is not stabilization. Instead, one new
+marked position contributes a nonzero leading term.
+
+\begin{proposition}[Marked coefficient difference]
+\label{prop:marked-difference}
+Under \eqref{eq:hasse-spacing},
+\begin{equation}
+ C(n+1,s+1)-C(n,s)=\alpha a_D^P\ne0.
+ \label{eq:marked-difference}
+\end{equation}
+This holds for every prime $p$ in the regime $p\mid d-1$.
+\end{proposition}
+
+\subsection{Every old marked path is paired}
+
+Insert a site at index $a=2L$ and map old indices by
+\begin{equation}
+ \iota(u)=\begin{cases}u,&u<a,\\u+1,&u\ge a.
+ \end{cases}
+ \label{eq:marked-insertion}
+\end{equation}
+The new parameters are $(n+1,s+1)$ with $m,L,D$ unchanged.
+The target inserts a digit $d-1$ at $a$ and preserves all old
+digits. The spacing conditions still hold. The source intervals
+in \eqref{eq:hasse-source-interval} correspond under $\iota$;
+their lower endpoint $s-L\ge3L+4$ is larger than $a+1$.
+No source can occur at the inserted site or its immediate neighbors.
+
+Take an old mark $j$, now located at $\iota(j)$. At the
+insertion position the source is still ahead, the target digit
+is $d-1$, and the incoming carry is at most $P-1$. It is
+therefore the low baseline: $P-1$ if the mark is ahead and
+zero if the mark is behind. Insert an unmarked nonsource site
+with the same incoming and outgoing baseline. In the first case
+its background is $P(d-1)$, quotient $P-1$, and digit $d-1$;
+in the second its background is $d-1$, quotient zero, and
+digit $d-1$. In both cases its weight is one.
+All old transitions and the fixed-cut convention
+\eqref{eq:common-cut} are preserved.
+
+Conversely, take a new target-producing path whose mark is not
+the inserted site. That site and its successor are nonsources
+with digit $d-1$ and with the source ahead. Their incoming
+carries are their low baselines. Since the mark is not at the
+inserted site, these baselines are equal, including when the
+mark is immediately before it or is its successor. The inserted
+transition has weight one and can be deleted. The remaining
+path is legal with the old target and the same cut convention.
+
+These operations are inverse for all old marks, all sources,
+and all target-producing branches. Constants contribute no
+target paths by \cref{sec:hasse}. Consequently the difference
+in \eqref{eq:marked-difference} consists exactly of the paths
+whose mark is at the newly inserted site $a$.
+
+\subsection{The new mark isolates the leading source}
+
+For this subsection put $N=n+1$ and $S=s+1$, with the mark
+at $a=2L$. Every source lies after $a+1$. The mark has
+incoming carry $P-1$, so its exponent is
+$(d-P)+(P-1)=d-1$. Its quotient and outgoing carry are zero,
+and its weight is one.
+
+After the mark and before the source, the background is $d-1$.
+Starting with carry zero, each such site has output $d-1$ and
+outgoing carry zero. The smaller target digit at $S$ in
+\eqref{eq:first-small-digit} therefore forces the source index
+to satisfy $i\le S$.
+
+The source term is $X_i^{Pr}$ with $1\le r\le D$ and
+incoming carry zero. Multiply \eqref{eq:marked-conservation}
+by $d^{u-i}$ and sum over the suffix $u=i,\ldots,N-1$.
+Every background in this interval is $d-1$, and the final
+carry is one. The telescoping identity is
+\begin{equation}
+ \sum_{u=i}^{N-1}e_ud^{u-i}
+       =Pr-1-\sum_{u=i}^{N-1}\kappa_ud^{u-i+1}.
+ \label{eq:suffix-weight}
+\end{equation}
+For the target and $i\le S$, the left side equals
+$PDd^{S-i}-1$. Thus
+\begin{equation}
+ Pr=PDd^{S-i}+\sum_{u=i}^{N-1}\kappa_ud^{u-i+1}.
+ \label{eq:loss-identity}
+\end{equation}
+This is an equality of nonnegative integers. Since $r\le D$
+and $i\le S$, it forces
+\begin{equation}
+ i=S,\qquad r=D,\qquad \kappa_u=0\quad(i\le u<N).
+ \label{eq:unique-source}
+\end{equation}
+
+The remaining path exists and is unique. Before the mark, the
+long-block digits force the baseline transitions. At site zero,
+the outgoing carry is $P-1$, equal to its quotient, and the
+anchor is $d-P+1$. The mark resets the carry to zero.
+At the source $S$, ordinary base-$d$ division of $PD-1$ gives
+exactly the target digits at $S,\ldots,S+m$. After those digits,
+the suffix carry is one, producing all later zeros and the
+final carry in \eqref{eq:common-cut}. At every step the outgoing
+carry equals the quotient; every binomial weight is one.
+
+Including $\alpha$ from \eqref{eq:marked-formula} and $a_D^P$
+from the leading term of $v^P$, this unique path contributes
+$\alpha a_D^P$. All old paths were paired, so
+\eqref{eq:marked-difference} follows. This proves
+\cref{prop:marked-difference} with all marks, source positions,
+constant terms, and wraparound branches accounted for.
+
+\subsection{Completion of both main theorems}
+
+Fix $M\ge1$ and set
+\[
+ m=\lfloor\log_d(PM)\rfloor,\quad L=m+2,\quad
+ s=4L+4,\quad n=s+3L+4=7m+22=n_H.
+\]
+Suppose the two Hasse tests in \cref{tab:tests} hold. Normalize
+$h=\Deltaf Q+v$. By \eqref{eq:telescoping-jacobian} and
+\eqref{eq:frobenius-trace}, the tests become
+\begin{equation}
+ J_j\cH_j(v^P)=0\quad\text{in }\cA_j,
+                    \qquad j=n,n+1.
+ \label{eq:two-hasse-tests}
+\end{equation}
+If $v$ has positive leading degree $D$, both coefficients
+in \eqref{eq:marked-difference} are zero by
+\eqref{eq:two-hasse-tests}. This contradicts
+$\alpha a_D^P\ne0$. Hence $v=a_0$ is constant.
+
+At least one of $n,n+1$, say $j$, is not divisible by $p$.
+Every univariate term in the marked formula
+\eqref{eq:marked-formula} has degree $d^j-P$ and leading
+coefficient one before multiplication by $\alpha$. For a mark
+at $t$, the degree calculation is
+\[
+ P(d^t-1)+(d-P)d^t+(d^j-d^{t+1})=d^j-P.
+\]
+Thus the leading term of $D^{[P]}F_j$ is
+$j\alpha x^{d^j-P}$, nonzero and of degree below $\deg F_j$.
+Since $(ja_0)^P=ja_0^P$, the remaining divisibility is
+\[
+ F_j\mid ja_0^PD^{[P]}F_j.
+\]
+It forces $a_0=0$. Therefore the two Hasse tests imply
+$h\in\Bf$.
+
+Conversely, a polynomial coboundary satisfies
+\eqref{eq:polynomial-telescoping}, so it satisfies both the
+ordinary-root tests and the Hasse tests. Ordinary-root vanishing
+implies the Hasse tests by \cref{lem:root-certificates}.
+This proves the three-way finite equivalence in the last regime.
+For $h\in\Kf$, formula \eqref{eq:ordinary-repetition} supplies
+those tests, proving $\Kf=\Bf$. The zero polynomial is covered
+by $Q=v=0$ throughout.
+
+If a finite ordinary-root test fails at return $j=n$ or $n+1$,
+then \eqref{eq:ordinary-repetition} gives a primitive cycle
+with nonzero sum and period dividing $j$. Finally,
+\[
+ \deg F_j\le d^{n+1}=d^{7m+23}\le d^{23}(PM)^7.
+\]
+Together with \cref{sec:jacobian}, this proves
+\cref{thm:rigidity,thm:finite} for every prime and every degree.
+
+\subsection{The characteristic-two boundary}
+
+The proof has used $P\ge2$, $P<d$, and $d-1>1$, not oddness
+of $p$. When $p=2$ and $d$ is odd, $\alpha=1$ and these
+inequalities hold. In the smallest case $d=3$, $P=2$, the
+anchor digit $d-P+1=2$ equals the long-block digit $d-1=2$.
+No argument required these digits to be different. The adaptive
+cut target two still exceeds every overflow outcome, which is
+at most one. The fixed-cut digit remains below $d$, and
+$(2D-1)\bmod3\le1$ for a normal leading degree retains the
+strict comparison at the first post-block site. The coefficient
+identity remains $C(n+1,s+1)-C(n,s)=a_D^P\ne0$.
+
+For even $d$ in characteristic two, \eqref{eq:derivative-zero}
+reads $F_j'=1$, and the direct proof in \cref{sec:jacobian}
+applies. The range $p\nmid d(d-1)$ has no characteristic-two
+instance. These observations verify that the three rows of
+\cref{tab:tests} are disjoint and exhaustive without losing
+constants, non-prime-field coefficients, or ordinary wild periods.

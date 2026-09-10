@@ -1,0 +1,146 @@
+\section{Transfer states and a fixed-annihilator cutoff}\label{sec:transfer}
+
+For $h\in k[X]$ and nonnegative integers $r,s$, set
+\begin{equation}\label{eq:transfer}
+ T_h(r,s)=[X^{-1}]\frac{X^r h(X)}{f(X)^{s+1}}.
+\end{equation}
+The expansion is the one in Section~\ref{sec:extractor}. For
+$h\ne0$, a nonzero entry requires
+\begin{equation}\label{eq:generalstate}
+ ds\le r+\deg h-d+1,
+\end{equation}
+because the largest exponent of the fraction is
+$r+\deg h-d(s+1)$, which must be at least $-1$. The zero
+polynomial gives a zero matrix and needs no degree convention.
+Factoring the input of~\eqref{eq:extractor} gives
+\begin{equation}\label{eq:cyclicsum}
+ L_n\left(\prod_i h_i(X_i)\right)=
+ \sum_{r_0,\ldots,r_{n-1}\ge0}
+        \prod_iT_{h_i}(r_{i-1},r_i),\qquad r_{-1}=r_{n-1}.
+\end{equation}
+Here $r_i=q_i$ is the outgoing power of $X_{i+1}$ in the
+extractor; the incoming power at $X_i$ is $r_{i-1}$. Finiteness
+of this cyclic sum was proved in~\eqref{eq:finiteindices}.
+
+Fix a nonzero polynomial $S$ and write $\ell=\deg S$. Define
+\begin{equation}\label{eq:ks}
+ k_S=\begin{cases}
+       0,&\ell=0,\\
+       \lfloor\log_d\ell\rfloor+1,&\ell\ge1.
+      \end{cases}
+\end{equation}
+We regard the factor containing $S$ as the distinguished site and
+the remaining factors as bulk sites. For a digit $0\le\epsilon<d$,
+the degrees of $X^\epsilon A$ and $X^\epsilon B$ are at most
+$m+d-1$. At the distinguished site the additional degree is
+$\ell$. Thus~\eqref{eq:generalstate} gives
+\begin{equation}\label{eq:statebounds}
+ ds\le r+m\quad\text{at a bulk site},\qquad
+ ds\le r+m+\ell\quad\text{at the distinguished site}.
+\end{equation}
+At a maximal index of a nonzero cyclic contribution, the incoming
+index is no larger. Every index is consequently at most
+$\lfloor(m+\ell)/(d-1)\rfloor$, and hence at most
+\begin{equation}\label{eq:R}
+ R=a+\ell.
+\end{equation}
+Indeed $(d-1)a\ge m$ and $d-1\ge1$. Restricting all rows and
+columns to $0,\ldots,R$ therefore loses no cyclic contribution.
+
+On this finite state range let
+\begin{equation}\label{eq:blocks}
+ \mathsf M_\epsilon=diag(T_{X^\epsilon A},T_{X^\epsilon B}),
+ \qquad
+ \mathsf B_\epsilon=diag(T_{SX^\epsilon A},-T_{SX^\epsilon B}).
+\end{equation}
+Applying~\eqref{eq:cyclicsum} to the two whole products yields
+\begin{equation}\label{eq:tracerepresentation}
+ L_n(S(X_0)X^\epsilon H_n)=
+ \tr\bigl(\mathsf B_{\epsilon_0}\mathsf M_{\epsilon_1}
+                    \cdots\mathsf M_{\epsilon_{n-1}}\bigr),
+\end{equation}
+with $H_n$ understood via~\eqref{eq:quotientiso}. At $n=1$, the
+product after $\mathsf B$ is the identity. All scalar factors of
+$g$ remain in $A$ and occur at every site; no period-dependent
+phase is removed. The minus sign occurs once, also in
+characteristic two.
+
+\begin{lemma}[Closed low states and exceptional-site contraction]
+\label{lem:contraction}
+The bulk state range $0,\ldots,a$ is closed. Starting anywhere in
+$0,\ldots,R$, after $k_S$ bulk transitions every surviving state
+is at most $a$.
+\end{lemma}
+\begin{proof}
+From~\eqref{eq:statebounds} and $m\le(d-1)a$,
+\[
+ s-a\le\frac{r-a}{d}.
+\]
+Thus an incoming state at most $a$ cannot leave the low range.
+Starting at a state at most $a+\ell$, after $j$ bulk transitions
+the bound is $a+\ell/d^j$. For $\ell>0$,
+$d^{k_S}>\ell$, so integrality places every state at most $a$
+after $k_S$ transitions. If $\ell=0$, it is low already. These
+are bounds on paths, not assertions that nonzero terms cannot
+cancel in a sum.
+\end{proof}
+
+Let $\mathsf M^0_\epsilon$ be the restrictions to the two closed
+low ranges. Their common size is $v=2b$. Suppose $n\ge k_S+1$.
+The input index of the distinguished site in a cyclic contribution
+is low: its preceding $n-1$ bulk sites include at least $k_S$
+transitions. After the distinguished site and the next $k_S$
+bulk transitions, the output is low again. Define
+$\mathsf E_{\epsilon_0\ldots\epsilon_{k_S}}$ to be the low-row,
+low-column block of
+\[
+ \mathsf B_{\epsilon_0}\mathsf M_{\epsilon_1}
+                    \cdots\mathsf M_{\epsilon_{k_S}}.
+\]
+All high intermediate states in this prefix remain in the sum.
+Every subsequent bulk path stays low, so~\eqref{eq:tracerepresentation}
+becomes
+\begin{equation}\label{eq:prefixtrace}
+ \tr\bigl(\mathsf E_{\epsilon_0\ldots\epsilon_{k_S}}
+       \mathsf M^0_{\epsilon_{k_S+1}}\cdots
+       \mathsf M^0_{\epsilon_{n-1}}\bigr).
+\end{equation}
+
+\begin{theorem}[Fixed-$S$ finite return test]\label{thm:fixed}
+For every nonzero $S\in k[x]$,
+\begin{equation}\label{eq:fixed}
+ \bigl[F_n\mid SH_n\text{ for every }n\ge1\bigr]
+ \quad\Longleftrightarrow\quad
+ \bigl[F_n\mid SH_n\text{ for every }1\le n\le k_S+4b^2\bigr].
+\end{equation}
+\end{theorem}
+\begin{proof}
+Let $W_j$ be the span of products of the $d$ matrices
+$\mathsf M^0_\epsilon$ of length at most $j$, including the empty
+product. Then
+\[
+ W_{j+1}=W_j+\sum_{\epsilon=0}^{d-1}W_j\mathsf M^0_\epsilon.
+\]
+Equality at one step makes the space stable under every letter and
+therefore under all words. Otherwise its dimension grows strictly.
+The initial dimension is one, and the ambient matrix space has
+dimension $v^2=4b^2$. Hence words of length at most $4b^2-1$
+span every word product. This is the elementary finite-word
+principle underlying arbitrary-field weighted representations
+such as~\cite[Proposition~3.1]{Kiefer2013}.
+
+For each fixed prefix in~\eqref{eq:prefixtrace}, its trace
+functional vanishes on all tail words if it vanishes at those
+lengths. A prefix has length $k_S+1$, so the largest required
+total length is $k_S+4b^2$. Include also the short returns
+$1\le n\le k_S$, before compression applies. By the
+nondegenerate digit tests~\eqref{eq:alltests}, vanishing of all
+these coefficients is exactly the required polynomial
+divisibility, proving the nontrivial implication. The converse
+is immediate.
+\end{proof}
+
+No bound on the degree of an unknown exceptional polynomial has
+been assumed. Theorem~\ref{thm:fixed} controls a polynomial that
+is already specified; eliminating the unknown one requires the
+next section.

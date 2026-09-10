@@ -1,0 +1,115 @@
+\section{Split coefficient rank and persistent visible cycles}\label{sec:rank}
+
+Take $S=1$. The low state range suffices throughout. Write
+$M_\epsilon$ for the two-block matrices on this range and
+$E=\diag(I_b,-I_b)$. Define the coefficient array
+\begin{equation}\label{eq:tensor}
+ \Tcal_n(\epsilon)=L_n(H_nX^\epsilon)
+   =\tr(E M_{\epsilon_0}\cdots M_{\epsilon_{n-1}}).
+\end{equation}
+All word products lie in
+\begin{equation}\label{eq:blockalgebra}
+ \Dcal=\Mat_b(k)\oplus\Mat_b(k),\qquad \dim_k\Dcal=2b^2=D.
+\end{equation}
+For a cut $1\le h<n$, form the matrix $\Fcal_{n,h}$ whose rows
+are digit words $u$ of length $h$, whose columns are digit words
+$v$ of length $n-h$, and whose entry is $\Tcal_n(uv)$.
+The expression $\tr(E M_uM_v)$ is a bilinear pairing on two
+elements of $\Dcal$. Factoring through a vector-space basis gives
+\begin{equation}\label{eq:rankupper}
+ \rank\Fcal_{n,h}\le D.
+\end{equation}
+No nondegeneracy of the trace pairing is needed.
+
+\begin{lemma}[The point-evaluation rank]\label{lem:evalrank}
+Put $t_n=|\Bcal_n|$. If $d^h\ge t_n$ and $d^{n-h}\ge t_n$,
+then $\rank\Fcal_{n,h}=t_n$, and in particular $t_n\le D$.
+\end{lemma}
+\begin{proof}
+For the monic squarefree polynomial $F_n$ of degree $d^n$,
+Lagrange interpolation gives, for every polynomial $R$,
+\begin{equation}\label{eq:lagrange}
+ L_n(R)=\sum_{F_n(x)=0}\frac{R(x)}{F_n'(x)}
+       =-\sum_{F_n(x)=0}R(x).
+\end{equation}
+Indeed the interpolation polynomial
+$F_n(X)/((X-x)F_n'(x))$ has top coefficient $1/F_n'(x)$.
+The identity first applies to the remainder of $R$ and then to
+$R$, since their values at roots agree. Equation~\eqref{eq:simple}
+gives the last equality.
+
+Set $\gamma_n(x)=-H_n(x)\ne0$ for $x\in\Bcal_n$. Then
+\begin{equation}\label{eq:evaluationfactor}
+ \Fcal_{n,h}=V\diag(\gamma_n(x):x\in\Bcal_n)W^{\mathsf T},
+\end{equation}
+where
+\begin{align*}
+ V_{u,x}&=\prod_{i=0}^{h-1}f^{\circ i}(x)^{u_i},\\
+ W_{v,x}&=\prod_{i=0}^{n-h-1}
+                       f^{\circ i}(f^{\circ h}(x))^{v_i}.
+\end{align*}
+The left digit polynomials form a monic triangular basis in every
+degree below $d^h$, by the degree argument in
+Lemma~\ref{lem:basis}. If $d^h\ge t_n$, evaluation at the
+$t_n$ distinct points of $\Bcal_n$ has rank $t_n$: Lagrange
+polynomials of degree below $t_n$ realize every value vector.
+Thus $V$ has full column rank. The same argument applies to $W$
+when $d^{n-h}\ge t_n$, because $f^{\circ h}$ permutes
+$\Bcal_n$ and hence its evaluation points are also distinct.
+
+The diagonal matrix in~\eqref{eq:evaluationfactor} is invertible.
+A left inverse of $V$ and a right inverse of $W^{\mathsf T}$
+show that the rank of the product is at least $t_n$; the
+factorization gives the reverse inequality. For $t_n=0$, both
+sides have rank zero. This is an ordinary full-rank evaluation
+argument, not a Gram-matrix or positivity argument.
+Together with~\eqref{eq:rankupper}, it proves the lemma.
+\end{proof}
+
+\begin{proposition}[Visible native-period bound]\label{prop:period}
+If $I_g\ne(0)$, every product-visible cycle has native period at
+most $D$.
+\end{proposition}
+\begin{proof}
+By Proposition~\ref{prop:ideal}, $\Bcal$ is finite. Fix
+$x\in\Bcal_{n_0}$ and let $r$ be its ordinary least period.
+Put
+\[
+ \alpha=\prod_{i=0}^{n_0-1}A(f^{\circ i}(x)),\qquad
+ \beta=\prod_{i=0}^{n_0-1}B(f^{\circ i}(x)).
+\]
+Since $\alpha-\beta=H_{n_0}(x)\ne0$ and $x$ returns after
+$n_0$ steps, for every positive integer $q$,
+\begin{equation}\label{eq:persistence}
+ H_{qn_0}(x)=\alpha^q-\beta^q.
+\end{equation}
+Every nonzero element of $k$ has finite multiplicative order: it
+belongs to a finite subfield. Choose a positive integer $M$
+divisible by the orders of every nonzero element among $\alpha$
+and $\beta$. For arbitrarily large $q=1+jM$, their nonzero
+values are fixed by the $q$th power, while a zero value remains
+zero. Thus~\eqref{eq:persistence} equals $\alpha-\beta\ne0$.
+This includes a one-sided zero product; both products cannot be
+zero at a point of $\Bcal_{n_0}$.
+
+Consequently $x\in\Bcal_{qn_0}$ at arbitrarily large returns,
+and each of these sets contains its full $r$-cycle. Write
+$t=|\Bcal|$. If $\Bcal\ne\varnothing$, choose one such return
+$n$ so large that, with $h=\lfloor n/2\rfloor$,
+\[
+ h\ge1,\qquad d^h\ge t,\qquad d^{n-h}\ge t.
+\]
+Then $t_n\le t$, so Lemma~\ref{lem:evalrank} gives
+\begin{equation}\label{eq:periodbound}
+ r\le|\Bcal_n|\le D.
+\end{equation}
+Apply this argument separately to each already visible cycle.
+There is no assumption that all of $\Bcal$ is visible at one
+return, and no coefficient-independent multiplicative-order bound
+is needed. If $\Bcal$ is empty, the conclusion is vacuous.
+\end{proof}
+
+The order of the quantifiers matters: finiteness of $\Bcal$ makes
+both evaluation halves long enough for a chosen cycle, and that
+cycle is then bounded by the fixed rank $D$. The proof does not
+deduce $|\Bcal|\le D$.

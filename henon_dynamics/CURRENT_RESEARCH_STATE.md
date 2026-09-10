@@ -15,7 +15,7 @@ PC_L_UL4_OM4_RLG5_FCP10_FIVE_CONTRACTS_ADMITTED; ROUND6_FIVE_REVIEWS_CLOSED;
 ROUND7_FOUR_REVIEWS_CLOSED; ROUND8_TWO_REVIEWS_CLOSED;
 FULL_SINGLE_QUADRATIC_ATOM_ACCEPTED_AUXILIARY; ROUND9_THREE_REVIEWS_CLOSED;
 MS6_EXISTENCE_AND_INTEGRAL_NINE_LIFT_OPEN; ROUND10_THREE_REVIEWS_CLOSED;
-INSEPARABLE_FINITE_CP_ADMITTED_FIVE_PAPER_OUTLINE_NEXT;
+INSEPARABLE_FINITE_CP_ADMITTED_FIVE_PAPER_DRAFTING_ACTIVE;
 ZERO_COMPLETED_PAPERS`。
 最新准入：FCP10 的完整有限 CP 判据已采纳为第五个独立整合合同。
 协调者全文核读 713 行作者终稿、429 行 E8 完整数学审查和 293 行
@@ -24,14 +24,33 @@ X2 来源／实质报告，实际复核最终哈希；全部量词和原定界�
 均已全文核读关闭。见 [正式准入 §6](research_c429_c433/ADMISSION_DECISIONS.md#6-fcp10--admit-one-complete-finite-cp-decision-contract)
 及 [R10 最终裁决](research_c429_c433/continuation_round10/ROUND10_DECISION.md)。
 当前为 **合同 5/5、完整论文 0/5**。A1 矩阵／次数界和 A2 可见性
-不另计论文，原 MS6 与普通 CP 逆向未证。接下来是 R10 精确集成
-与五篇整体大纲／独立审查，尚未声称稿件、PDF、正式评估或发布。
+不另计论文，原 MS6 与普通 CP 逆向未证。R10 精确集成已完成；
+五篇整体大纲的三项定义／假设修复均经独立定点复核关闭。协调者
+全文核读 313 行最终大纲审查，2026-09-09 20:24 UTC 批准总纲，
+随后实际激活 A2/C429、D1/C430、A1/C431、C4/C432、A3/C433 五个
+互不重叠的起草任务。见 [总纲](research_c429_c433/BATCH_PLAN.md)及
+[审查与修复](research_c429_c433/REVIEW_OUTLINE.md)。截至实际时钟
+21:18 UTC，五篇真实首稿全部冻结，依次为 16、18、12、8、11 页。
+协调者已全文核读五篇全部源码／参考文献和构建记录，实际复核
+首稿哈希；五份第 1 轮非作者正文审查共 1,670 行、五份独立
+引文审计共 1,190 行均已全文核读并裁决。无主定理／证明必改；
+七项正文精确性小修与另列引文元数据／标识符修复已实际交作者
+合并实施，C432 零必改并按未修改稿记录本轮，不虚构改稿。
+尚未将这些作者修订记为已关闭，也尚未激活第 2 轮正文审查。
+五份 Route-A 评估及 477 行独立一致性审查已完成采纳，两项
+元数据修复经定点复核，实际重验 27 项绑定及五份唯一键 YAML。
+全部 45 项目标指标仍为 NOT_TESTABLE、45 个范围标志为 false。
+出版方全文、撤稿数据库和 PDF 结构预检不可用之处明确保留，
+不作全面清零。详见 [稿件协调记录](research_c429_c433/MANUSCRIPT_COORDINATION.md)。
+仍为完整论文 0/5；修订后复核、最终双目录可复现构建、逐页
+视觉检查、封存及本次写作包同步均未完成。
 R10 十二个精确路径现已提交并同步为
 `7e134881a277a4bf1f27d76760779a4fdd5e141c`；2026-09-09 20:18:29 UTC
 实际核对 HEAD、origin/main 与远端 main 一致。168 行独立集成审计、
 全部暂存／提交 blob 与成员核对及普通空白检查通过；已跟踪树清洁。
 五篇总纲与八个继承目录没有混入。此为推送后回执，不回写 R10
-冻结文件；五位拟任作者已完成输入准备，仍待独立总纲门关闭。
+冻结文件；五位作者的输入准备均已完成。该同步回执时总纲门尚待
+关闭，之后的实际激活状态以本段最新记录为准。
 下列 4/5、待审等文字是各历史检查点，不覆盖本段最新结论。
 第九轮已完成三份作者报告和三份非作者完整内部审查，协调者
 全文核读所有最终稿、三份审查共 1,059 行，实际复核六个哈希。

@@ -1,0 +1,101 @@
+\section{Small factors over an arbitrary complete field}
+\label{sec:coefficients}
+
+We first construct the factorization used in the contact calculation
+without assuming irreducibility or local inertia. Write
+\begin{equation}\label{eq:returns}
+ F_e(z)=P^{\circ p^e}(z)-z\quad(e\ge0),\qquad
+ Q_e(z)=F_e(z)/F_{e-1}(z)\quad(e\ge1).
+\end{equation}
+These indices label $p$-power returns; the superscript $\circ$ always
+denotes ordinary iteration. The minimal ramification of $g(z)=z+z^2$
+gives the source input
+\begin{equation}\label{eq:minimal-ramification}
+ \ord_z\bigl(g^{\circ p^e}(z)-z\bigr)
+ =1+\frac{p^{e+1}-1}{p-1}\qquad(e\ge0).
+\end{equation}
+This is the $q=1$ reduction underlying the optimal-cycle
+theorem~\cite[Theorem C and the $q=1$ discussion]{lindahl2016optimal}.
+The other input is the already established set of $p^e$ distinct
+points $\Pi_e$, each of valuation $r$. We will use degree to identify
+the whole small factor, so no further separability premise is needed.
+
+\begin{lemma}[Coefficient-field realization]\label{lem:coefficient-field}
+Let $k_0\subset K$ be the subfield of elements algebraic over $\Fp$.
+There is an isometric embedding
+\[
+ \iota:k_0((t))\longrightarrow K,\qquad t\longmapsto s,
+\]
+where $k_0((t))$ has norm $|s|^{\ord_t}$.
+\end{lemma}
+\begin{proof}
+Algebraic closedness of $K$ makes $k_0$ an algebraic closure of
+$\Fp$. Every nonzero element of $k_0$ lies in a finite field and
+has norm one, since it is a root of unity. For a Laurent series
+$a(t)=\sum_{n\ge n_0}a_nt^n$, set
+\[
+ \iota(a)=\sum_{n\ge n_0}a_ns^n.
+\]
+Its terms tend to zero, so the ultrametric inequality and completeness
+of $K$ give convergence. If $n_*$ is its first nonzero coefficient
+index, the leading term has norm $|s|^{n_*}$ and the remaining tail
+has norm at most $|s|^{n_*+1}$. Thus
+\begin{equation}\label{eq:embedding-norm}
+ |\iota(a)|=|s|^{n_*}\qquad(a\ne0).
+\end{equation}
+Addition and multiplication are preserved on finite Laurent
+polynomials. Approximating arbitrary series by finite truncations
+and using continuity of both operations proves the same for series.
+Equation~\eqref{eq:embedding-norm} gives injectivity, and preservation
+of $1$ and multiplication gives preservation of inverses. The norm
+identity proves the isometry. No equality between the residue field
+of $K$ and $k_0$ is assumed.
+\end{proof}
+
+\begin{lemma}[Canonical small factor]\label{lem:small-factor}
+For every $e\ge1$ there are monic $M_e,V_e\in K[z]$ with integral
+coefficients such that
+\begin{equation}\label{eq:small-factor}
+ F_e=F_{e-1}M_eV_e,\qquad
+ M_e(z)=\prod_{\alpha\in\Pi_e}(z-\alpha),\qquad
+ v(V_e(x))=0\quad\text{if }v(x)>0.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Work first over the complete discrete valuation ring $R=k_0[[t]]$
+with $P_t(z)=(1+t)z+z^2$, and attach a subscript $t$ to the returns
+in \eqref{eq:returns}. For a polynomial $h$, the relation $h(z)=z$
+in the quotient by $h(z)-z$ implies $h^{\circ p}(z)=z$ there.
+Taking $h=P_t^{\circ p^{e-1}}$ proves divisibility of $F_{e,t}$ by
+$F_{e-1,t}$. Monic division gives a monic quotient $Q_{e,t}$ in
+$R[z]$, and reduction commutes with this division.
+
+Successive orders in \eqref{eq:minimal-ramification} differ by
+$p^e$. Consequently
+\[
+ \overline Q_{e,t}(z)=z^{p^e}\overline V_e(z),
+ \qquad \overline V_e(0)\ne0.
+\]
+The displayed monic factors are coprime. Coprime Hensel factorization
+over $R$ gives monic polynomials $M_{e,t},V_{e,t}\in R[z]$ with
+\[
+ Q_{e,t}=M_{e,t}V_{e,t},\qquad
+ \deg M_{e,t}=p^e,\qquad
+ \overline M_{e,t}=z^{p^e},\qquad
+ \overline V_{e,t}(0)\ne0.
+\]
+Apply Lemma~\ref{lem:coefficient-field} coefficientwise. The resulting
+$M_e,V_e$ have integral coefficients, and $V_e(0)$ is a unit.
+At an input of positive valuation, every positive-degree term of
+$V_e$ has positive valuation. Hence $v(V_e(x))=0$ there.
+
+For $\alpha\in\Pi_e$, its least period implies
+$F_{e-1}(\alpha)\ne0$. The transported factorization therefore
+forces $M_e(\alpha)=0$. There are $p^e$ distinct such points and
+$M_e$ is monic of degree $p^e$. This proves its exact root product
+in \eqref{eq:small-factor} and completes the argument.
+\end{proof}
+
+The construction takes place over one coefficient field that embeds
+in every allowed $K$. It uses neither a generic-specialization
+argument nor any conclusion about the Galois group of $M_e$.

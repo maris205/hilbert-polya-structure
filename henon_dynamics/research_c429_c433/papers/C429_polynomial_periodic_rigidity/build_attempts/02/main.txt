@@ -1,0 +1,824 @@
+     Polynomial periodic-data rigidity for unicritical maps in finite
+                            characteristic
+                                           Anonymous Authors
+
+
+                                                    Abstract
+          For every prime p, every integer d ≥ 2, and every c ∈ Fp , we characterize polynomial
+      coboundaries for f (x) = xd + c by their ordinary periodic data. A polynomial h has zero
+      sum on every primitive affine cycle if and only if h = Q ◦ f − Q for a polynomial Q. Each
+      cycle point is counted once, including when the period is divisible by p. The proof works in
+      full, possibly nonreduced periodic algebras. A weighted base-d reduction gives a coefficient
+      that stabilizes between consecutive returns. When d ≡ 1 (mod p), a marked Hasse-derivative
+      expansion replaces this stabilization by a nonzero coefficient difference. Both mechanisms give
+      exact finite certificates: for deg h ≤ M , two consecutive returns suffice, starting at 3⌊logd M ⌋ + 4
+      outside the latter congruence class and at 7⌊logd (P M )⌋ + 22 within it, where P = pvp (d−1) .
+      The result includes characteristic two, derivative-zero maps, arbitrary coefficients, and constant
+      observables. The bounds concern return levels and iterate degrees, not optimized running time.
+
+
+1    Introduction and main results
+Periodic orbit sums are the immediate obstruction to solving a cohomological equation. In finite
+characteristic, their relationship with polynomial regularity is complicated by two elementary facts:
+an ordinary period may vanish as a scalar, and a polynomial defining periodic points may have
+multiple roots. We prove that neither phenomenon creates a polynomial defect for the entire family
+xd + c. The proof also identifies two explicit return levels at which the periodic data already decides
+the equation.
+   Throughout, p is a prime, k = Fp , d ≥ 2 is an integer, c ∈ k, and
+
+                                  f (x) = xd + c,        ∆f Q = Q ◦ f − Q.                                     (1.1)
+
+An ordinary primitive cycle is a finite orbit O = {a, f (a), . . . , f ◦(r−1) (a)} of least period r. Its points
+are distinct, and we define
+                X
+     Sh (O) =         h(a),     Kf = {h ∈ k[x] : Sh (O) = 0 for every such O},              Bf = ∆f k[x].
+                a∈O
+
+All cycles here are affine and geometric over k. In particular, cycles whose least period is divisible
+by p are included with each point counted once. One application of f is always the time step.
+Theorem 1.1 (Polynomial periodic-data rigidity). For every prime p, every integer d ≥ 2, and
+every c ∈ k, one has Kf = Bf . Thus a polynomial has zero ordinary sum on every primitive f -cycle
+if and only if it equals Q ◦ f − Q for some Q ∈ k[x].
+    The conclusion is polynomial, with no genericity restriction on c. It is not a statement for
+rational observables or for arbitrary polynomial base maps. The constant Q(0) is immaterial, and
+the transfer is otherwise unique, as follows from the degree argument in Lemma 2.1.
+
+                                                        1
+   Here is the finite form of the theorem. For every integer j ≥ 1 set
+                                                                           j−1
+                                                ◦j
+                                                                                 h ◦ f ◦i .
+                                                                           X
+                                       Fj = f        − x,       Hj (h) =                                      (1.2)
+                                                                           i=0
+
+The Hasse derivative D[E] u(x) is the coefficient of z E in u(x + z). Fix an integer degree cap M ≥ 1,
+and put
+
+                 nJ = 3⌊logd M ⌋ + 4,                                                                         (1.3)
+                        vp (d−1)
+                 P =p              ,      nH = 7⌊logd (P M )⌋ + 22                            if p | d − 1.   (1.4)
+
+The symbol P in (1.4) is used only in that last regime.
+
+                            Regime               Test at each return j       Returns tested
+                            p ∤ d(d − 1)         Fj | Fj′ Hj (h)             nJ , nJ + 1
+                            p|d                  Fj | Hj (h)                 nJ , nJ + 1
+                            p|d−1                Fj | D[P ] Fj Hj (h)P       nH , nH + 1
+
+Table 1: Three disjoint and exhaustive finite certificates. The second row uses Fj′ = −1, and the
+third uses P = pvp (d−1) . Each row requires both displayed returns.
+
+
+Theorem 1.2 (Two-return certificates). Let M ≥ 1 be an integer and h ∈ k[x] have degree at most
+M , including h = 0. Let n be nJ or nH as prescribed by table 1. The following are equivalent:
+  (i) h ∈ Bf ;
+ (ii) both polynomial divisibilities in the applicable row of table 1 hold;
+ (iii) Hj (h)(a) = 0 for every ordinary root a of Fj , for both j = n, n + 1.
+If h ∈
+     / Bf , some primitive cycle with nonzero sum has period dividing n or n + 1, and hence period
+at most n + 1. The two iterate polynomials have degrees bounded by
+                                                            (
+                                                             d5 M 3 ,            p ∤ d − 1,
+                                       max      deg Fj ≤                                                      (1.5)
+                                   j∈{n,n+1}                 d23 (P M )7 ,       p | d − 1.
+
+   Condition (iii) concerns full j-step return sums on all roots of Fj , not just cycles of exact period
+j. The zero polynomial is included without taking a logarithm of its degree; all logarithms use
+the positive cap M . The bounds in (1.5) concern the iterates. They are neither bounds on every
+unreduced product in a divisibility test nor optimized running-time or optimal-cutoff assertions.
+
+1.1   Prior work and the precise contribution
+The periodic obstruction criterion belongs to the classical Livšic problem. For example, Kalinin’s
+matrix-cocycle theorem assumes a transitive homeomorphism of a compact metric space with
+the closing property and obtains a Hölder transfer [3, Theorem 1.1]. Those hypotheses and that
+regularity class differ from the present polynomial equation over k. Li and Zhang prove a real Hölder
+Livšic theorem for expanding Thurston maps and for postcritically finite rational maps without
+periodic critical points on the Riemann sphere [5, Theorem 1.1]. These are genuine antecedents for
+the question, not specialization results supplying Theorem 1.1.
+
+                                                                2
+    Finite periodic information also has an established role. Zou and Wei obtain approximate Hölder
+coboundaries from finite small periodic data for transitive Anosov diffeomorphisms [6, Theorem 1.1].
+Here the conclusion is exact, and the cutoff depends on the polynomial degree rather than an
+approximation tolerance. We make no claim to have introduced the finite Livšic problem.
+    The algebraic infrastructure is likewise classical. Cattani–Dickenstein–Sturmfels relate normal-
+form coefficients, global residues, and Jacobian traces in zero-dimensional complete intersections [1,
+Section 4]. Cvitanović–Hansen–Rolf–Vattay derive finite binomial matrices and successive multiplier-
+weighted trace relations for quadratic maps [2, Section 4]. They credit the earlier finite-matrix
+construction to Levin–Sodin–Yuditskii [4]. We use the directly inspected 1998 formulas for this
+comparison; only the publisher abstract of the 1994 article was accessible in the source check. No
+unread theorem from that article is invoked below.
+    The additional step is a specific coefficient comparison as the number of cyclic variables changes.
+In the first derivative regime, insertion of a forced weight-one carry transition stabilizes a short-
+support coefficient. In the congruence class d ≡ 1 modulo p, an inserted marked transition produces
+instead a nonzero difference equal to the leading normal coefficient raised to a characteristic power.
+The necessary derivative certificates at two adjacent levels then eliminate every normal-form defect.
+All algebraic ingredients needed for this argument are proved below; complex residue formulas
+are not transplanted into finite characteristic. The source comparison is bounded and carries no
+worldwide-priority guarantee.
+
+1.2   Proof organization
+Section 2 gives the normal form, cyclic digit basis, leading-digit detector, and multiplicity-safe
+certificates. Section 3 proves the stable coefficient by a full weight-preserving path bijection, and
+section 4 handles p ∤ d−1. The Hasse proof occupies sections 5 and 6; it is written with P ≥ 2 so that
+characteristic two is included in the argument itself. Section 7 records the skew-map interpretation
+and the boundary of the derivative tests.
+
+
+2     Normal forms and full periodic algebras
+We first separate two statements that need not coincide at a multiple return root: a polynomial can
+vanish at every ordinary root of Fn without being zero in k[x]/(Fn ). The coefficient arguments will
+take place in the latter, full algebra.
+Lemma 2.1 (Polynomial normal form). For
+                                                      M
+                                          Vd = k ⊕           kxr
+                                                      r≥1
+                                                       d∤r
+
+one has the direct sum of k-vector spaces k[x] = Bf ⊕ Vd . Thus every polynomial has a unique
+normal part v in a decomposition h = ∆f Q + v. The elimination does not increase degree, and Q is
+unique up to a constant.
+Proof. For t ≥ 1, the polynomial ∆f xt = (xd + c)t − xt is monic of degree dt. Eliminate the largest
+positive exponent divisible by d using the corresponding multiple of this polynomial, and continue.
+Each subtraction introduces only smaller exponents, so the process terminates without increasing
+degree. This proves existence. If Q is nonconstant, then deg ∆f Q = d deg Q, whereas a nonzero
+element of Vd has degree zero or a positive degree not divisible by d. Their intersection is therefore
+zero. The same degree argument shows that the kernel of ∆f on k[x] is the constants. For h = 0,
+take Q = v = 0.
+
+                                                  3
+   Telescoping gives Bf ⊆ Kf . It also shows that on a root a of Fn of native period r,
+
+                                      Hn (h)(a) = (n/r)Sh (Oa ),                                 (2.1)
+
+where n/r is an integer counting repetitions. This formula is not division in k. In particular, h ∈ Kf
+implies ordinary-root vanishing of every Hn (h).
+
+Lemma 2.2 (Cyclic digit basis). For n ≥ 1, with indices taken modulo n, set
+
+                        An = k[X0 , . . . , Xn−1 ]/(Xid + c − Xi+1 : 0 ≤ i < n).
+
+The substitutions Xi 7→ f ◦i (x) and x 7→ X0 identify An with k[x]/(Fn ). The monomials
+                                          n−1
+                                   Xe =          Xiei ,
+                                          Y
+                                                                 0 ≤ ei < d,                     (2.2)
+                                          i=0
+
+are a basis, including when Fn is not squarefree.
+
+Proof. The first n − 1 relations eliminate all variables except X0 ; the last becomes Fn (X0 ) = 0.
+The substitutions are inverse, and the dimension is dn . Replacing a factor Xid by Xi+1 − c strictly
+lowers total degree in each resulting term, including at wraparound. These replacements terminate
+at the dn monomials in (2.2). They span and their number equals the dimension, proving linear
+independence.
+
+   Write [M ]U for the coefficient of a digit-basis monomial M in U ∈ An . We use the notation
+                                         n−1                            n−1
+                                                                              Xid−1 .
+                                         X                              Y
+                              Hn (v) =         v(Xi ),           Πn =                            (2.3)
+                                         i=0                            i=0
+
+The first is the class of Hn (v). Telescoping and the chain rule give, respectively,
+
+                                Hn (∆f Q) = 0,                [Fn′ ] = dn Πn − 1.                (2.4)
+
+Integer coefficients such as dn are interpreted in k; digits and reduction exponents remain integers.
+
+Lemma 2.3 (Leading-digit detection). Let v ∈ Vd have positive leading degree D and leading
+coefficient aD ̸= 0. Put m = ⌊logd D⌋, and write D = m          j
+                                                      P
+                                                        j=0 ej d in base d. For n > 2m, the digit
+                   Qm    ej
+monomial MD = j=0 Xj satisfies
+                                        [MD ]Hn (v) = aD .                                  (2.5)
+
+Proof. Reduce a term Xir , where r ≤ D < dm+1 , in the forward window Xi , . . . , Xi+m , with local
+weights 1, d, . . . , dm . Choosing the next variable in Xi+j
+                                                          d =X
+                                                              i+j+1 − c preserves weight; choosing the
+                                                       d
+constant strictly lowers it. No term can reach Xi+m , whose weight would exceed r. The reduction
+stays inside a window of distinct variables. For a fixed reduction order, the unique branch choosing
+no constants produces the base-d digits of r with coefficient one and weight r. Every other branch
+has smaller weight.
+    Normality gives e0 > 0, and positivity gives em > 0. For m ≥ 1, only the circular window
+starting at zero can contain both endpoints 0, m: the other directed distance n − m exceeds m. If
+m = 0, the same assertion holds for singleton windows. Thus only source zero can reach MD . Its
+target weight is D, so only aD X0D contributes, and it contributes exactly aD . Constants have empty
+support. This proves (2.5), regardless of any cancellation among smaller-weight terms.
+
+                                                          4
+Lemma 2.4 (Multiplicity-safe certificates). Let G ̸= 0 and U belong to k[x]. If U vanishes at every
+ordinary root of G, then for every integer E ≥ 1,
+
+                                                  G | D[E] G U E .                                    (2.6)
+
+In particular G | G′ U .
+
+Proof. At a root a of multiplicity e, write G = (x − a)e V with V (a) ̸= 0. The coefficient-of-z E
+product rule gives
+                                   orda D[E] G ≥ max(e − E, 0).
+The factor U E has order at least E, so the product has order at least e. Check this at each root of
+G to obtain the divisibility. Vanishing Hasse coefficients only increase the relevant order and cause
+no exception.
+
+   Neither this lemma nor Lemma 2.3 assumes reducedness. The first gives a necessary passage
+from ordinary roots to the full algebra. Its converse at one level is not required; the two-level
+arguments below supply the stronger finite equivalence.
+
+
+3     Stable full-background coefficients
+Multiplication by Πn changes the leading-digit problem: a reduction can now pass around the whole
+cycle. The next proposition controls that passage and compares all contributing paths at consecutive
+levels. It is valid in every characteristic; the restriction on d enters only when it is applied to the
+Jacobian.
+
+Proposition 3.1 (Short-support stabilization). Let M ≥ 1, m = ⌊logd M ⌋, and v ∈ Vd have
+                                                                                                    ej
+degree at most M . Fix digits e0 , . . . , em ∈ {0, . . . , d − 1}, not all zero, and let Me = m
+                                                                                              Q
+                                                                                               j=0 Xj . For
+n ≥ 3m + 4,
+                               [Me ](Πn+1 Hn+1 (v)) = [Me ](Πn Hn (v)).                                (3.1)
+The coefficients are taken in their respective full periodic algebras.
+
+3.1    A complete one-circuit expansion
+It suffices first to treat a positive exponent r ≤ M with d ∤ r. Put L = m + 1 and suppose n ≥ L.
+For a source i ∈ Z/nZ, process the sites of Πn Xir in the order i, i + 1, . . . , i + n − 1. Set t0 = r. At
+step s the current exponent is d − 1 + ts ; define
+                                                                         d − 1 + ts
+                                                                                       
+                            bs = (d − 1 + ts ) mod d,               qs =            .                 (3.2)
+                                                                             d
+The exact local expansion is
+                                         qs                !
+                                                     qs                             t
+                            d−1+ts
+                                                            (−c)qs −ts+1 Xi+s
+                                                                          bs
+                                         X
+                                                                                s+1
+                           Xi+s    =                                          Xi+s+1 .                (3.3)
+                                        ts+1 =0
+                                                    ts+1
+
+A path is a finite sequence (t0 , . . . , tn ) obeying these transitions, with weight
+                                            n−1
+                                                            !
+                                                      qs
+                                                                (−c)qs −ts+1 ∈ k.
+                                            Y
+                                   w(t) =                                                             (3.4)
+                                            s=0
+                                                     ts+1
+
+
+                                                           5
+We retain zero-weight paths, and a factor with exponent zero is one also when c = 0.
+   Induction from ts+1 ≤ (d − 1 + ts )/d yields
+                                                            r−1
+                                             ts ≤ 1 +           .                                  (3.5)
+                                                             ds
+Since dL > M − 1, the carry at step L is at most one. The states zero and one cannot return to a
+larger state, so tn ≤ 1. At the source the first output digit satisfies
+
+                                       b0 = (r − 1) mod d ≤ d − 2,
+
+because d ∤ r. The final carry therefore lands legally: b0 + tn ≤ d − 1. No second circuit is necessary.
+    Let e(t, i) have digit b0 + tn at the source and digit bs at site i + s for 1 ≤ s < n. Repeated use
+of (3.3) now proves an equality in the digit basis,
+
+                                                           w(t)X e(t,i) .
+                                                   X
+                                        Πn Xir =                                                   (3.6)
+                                                   t
+
+This is a finite polynomial expansion with a legal final digit at every site. Its validity does not rely
+on coefficients avoiding cancellation. The eventual-state transitions will be used explicitly:
+
+                     Incoming carry      Output digit          Outgoing carry    Weight
+                            0                d−1                        0         1
+                            1                 0                         1         1
+                            1                 0                         0         −c
+
+Here d − 1 is a positive integer digit, not a scalar reduced modulo p.
+
+3.2   Localization of every source
+Let E = {j ∈ [0, m] : ej > 0} be the nonempty support of the target. If a path in (3.6) produces
+this target and n ≥ L + 1, its source satisfies
+                            L−1
+                                         !
+                            [
+                       i∈          (E − s) ∪ (E + 1) ⊆ [−m, m + 1]          (mod n).               (3.7)
+                             s=0
+
+To prove this, consider a source outside E for which none of the next L − 1 sites lies in E. Its final
+source digit is zero, so b0 + tn = 0 as an equality of nonnegative integers. In particular tn = 0, and
+the first L − 1 nonsource outputs are zero.
+    If tL = 0, all subsequent carries are zero. Since n − 1 ≥ L, the last output is d − 1 > 0, and
+hence i − 1 ∈ E. If tL = 1, there must be a first drop from one to zero before the circuit ends. Were
+it at the last step, there would be no subsequent nonzero outputs, and the entire target would be
+empty. It occurs no later than step n − 2, after which the last output is again d − 1 > 0. Thus
+i − 1 ∈ E in either case, proving (3.7).
+    For n ≥ 3m + 4, every contributing source lies in the two disjoint blocks
+
+                             In = {0, . . . , m + 1} ∪ {n − m, . . . , n − 1}.                     (3.8)
+
+The second block is empty if m = 0. The argument is uniform in the normal exponent r ≤ M and
+preserves all target digits, including digits greater than one.
+
+
+                                                       6
+3.3   Insertion and deletion of one forced transition
+Set a = 2m + 2. At level n ≥ 3m + 4, neither a nor a + 1 is a source or a nonzero target site: the
+lower source block ends at m + 1 < a, and the upper block begins at n − m ≥ 2m + 4 > a + 1. The
+forward distance from a source to a is at least L. Indeed it is a − i ≥ m + 1 for 0 ≤ i ≤ m + 1, and
+a + n − i ≥ a + 1 for n − m ≤ i < n.
+    By (3.5), the incoming carry at a is at most one. Its zero output forces it to be one. The zero
+output at the following nonsource site forces the outgoing carry at a also to be one. The transition
+at a is therefore 1 → 1 with weight exactly one.
+    Insert a new site just after a, with output zero and transition 1 → 1, and relabel old indices by
+                                             (
+                                             u,           0 ≤ u ≤ a,
+                                  ιn (u) =                                                         (3.9)
+                                             u + 1,       a + 1 ≤ u < n.
+
+The target supported in [0, m] is unchanged. The source becomes ιn (i); every old transition occurs
+in the same cyclic order, and the initial carry, final carry, and source digit are preserved. The
+inserted transition has weight one.
+    Conversely, a target-producing path at level n + 1 has its source in In+1 . It is neither a + 1 nor
+a + 2, and those sites have zero target digits. The forward distance to a + 1 is at least L. The same
+two-output argument forces the transition at a + 1 to be 1 → 1 of weight one. Delete it and relabel
+later indices down by one. This recovers a legal path at level n with the same weight and full target
+vector. The blocks in (3.8) correspond under (3.9), so no new source at the inserted site is missed.
+    Insertion and deletion are mutual inverses on all pairs of a source and a target-producing path.
+Summing (3.6) therefore proves (3.1) for v = xr . If v = a0 is constant, Πn Hn (a0 ) = na0 Πn has zero
+target coefficient, since n > m + 1 and the target has short support. Taking the linear combination
+over all normal monomials of v proves Proposition 3.1.
+    For d = 2 the digit basis is squarefree, and this is precisely the binary full-product stabilization.
+The proof above retains the source digit and all higher base-d digits, so the general degree statement
+requires no unverified analogy with that case.
+
+
+4     The first two derivative regimes
+We prove both main theorems when p ∤ d − 1. The common normalization and coefficient lemmas
+hold in every characteristic. We first treat the nonzero Jacobian scalar, then the derivative-zero
+branch separately.
+
+4.1   Adjacent Jacobians when p ∤ d(d − 1)
+Fix M ≥ 1, deg h ≤ M , and n = nJ . Suppose
+
+                                   Fj | Fj′ Hj (h),        j = n, n + 1.                           (4.1)
+
+Write h = ∆f Q + v by Lemma 2.1. Telescoping in (2.4) shows that (4.1) is unchanged upon replacing
+h by v, and deg v ≤ M .
+   Suppose v has positive leading degree D and leading coefficient aD = ̸ 0. For the target MD of
+Lemma 2.3, put
+                                     Cj = [MD ](Πj Hj (v)).
+
+
+
+
+                                                      7
+Both selected levels exceed 2⌊logd D⌋ and meet the stabilization bound for the cap M . Equations
+(2.5), (2.4), and (4.1) yield
+                                 dn Cn = aD ,   dn+1 Cn+1 = aD .                           (4.2)
+By Proposition 3.1, Cn+1 = Cn . Subtract d times the first equality from the second to get
+(1 − d)aD = 0. The hypothesis p ∤ d − 1 contradicts aD ̸= 0.
+    Thus v = a0 is constant. At return j the remaining condition is Fj | ja0 Fj′ . Here Fj′ has nonzero
+leading coefficient dj and degree dj − 1 < deg Fj , so ja0 = 0. Applying this at j = n, n + 1 and
+subtracting gives a0 = 0. The two Jacobian tests therefore imply h ∈ Bf .
+
+4.2   Squarefree returns when p | d
+In this case f ′ = 0, and hence
+                                         Fj′ = −1       (j ≥ 1).                                   (4.3)
+Every Fj is squarefree. The tests in the second row of table 1 give Hn (v) = Hn+1 (v) = 0 after
+normalization. A positive normal degree D ≤ M is excluded at either level by Lemma 2.3. For a
+constant normal part, the two equations are na0 = 0 and (n + 1)a0 = 0, and again a0 = 0. This
+argument includes p = 2, for which −1 = 1; it does not replace the iteration of f by another clock.
+
+4.3   Finite equivalence and ordinary detection
+If h = ∆f Q, then
+                           Hj (h) = Q(f ◦j (x)) − Q(x) is divisible by Fj                          (4.4)
+for every j. It satisfies both the applicable divisibilities and the ordinary-root tests. In the
+first regime, ordinary-root vanishing implies the Jacobian test by Lemma 2.4; in the second it is
+equivalent to divisibility because of (4.3). Together with the two preceding subsections, this proves
+the three-way equivalence in Theorem 1.2 whenever p ∤ d − 1.
+    If h ∈ Kf , formula (2.1) supplies the two ordinary-root tests, so h ∈ Bf . The reverse inclusion is
+telescoping. This proves Theorem 1.1 in these regimes. Alternatively, after excluding every positive
+normal part, an ordinary fixed point of f directly excludes a nonzero constant: the polynomial
+f (x) − x has a root in the algebraically closed field k.
+    For a noncoboundary, one ordinary-root test fails at a point a of period r | j, where j = n or
+n + 1. Then
+                                     Hj (h)(a) = (j/r)Sh (Oa ) ̸= 0
+implies Sh (Oa ) ̸= 0, without division in k. In particular the detecting primitive period is at most
+n + 1. With m = ⌊logd M ⌋,
+                                   deg Fj ≤ dn+1 = d3m+5 ≤ d5 M 3 .
+This is the first bound in (1.5), including zero and constant inputs in the equivalence proved above.
+
+
+5     A marked Hasse detector
+Assume now that p | d − 1. The scalars dn and dn+1 coincide in k, so (4.2) cannot give the required
+contradiction. We replace the ordinary derivative by the first nonlinear Hasse derivative and compare
+a different target digit string. Write
+
+                     P = pvp (d−1) ,    A = (d − 1)/P,         α = A mod p ∈ k × .                 (5.1)
+
+The integer inequalities used below are 2 ≤ P < d and d − 1 ≥ 2. They include p = 2.
+
+                                                    8
+5.1     The exact marked backgrounds
+Since d = P A + 1 and P is a characteristic power,
+
+                                        f (x + z) = (x + z)(xP + z P )A + c.
+
+There are no Taylor terms of orders 2, . . . , P − 1, and
+
+                                   f ′ (x) = xd−1 ,            D[P ] f (x) = αxd−P .                         (5.2)
+
+The absence of those intermediate orders is preserved by composition. If g(x + z) = g(x) + a(x)z +
+b(x)z P + O(z P +1 ), the coefficient of z P in f (g(x + z)) is
+
+                                        f ′ (g(x))b(x) + D[P ] f (g(x))a(x)P .
+
+For P = 2 the interval of absent intermediate orders is empty, but this coefficient formula is
+unchanged.
+   Induction gives, in An ,
+                                                                        n−1
+                                                                        X
+                                                      [P ]
+                                           Jn := [D          Fn ] = α         Bn,j ,                         (5.3)
+                                                                        j=0
+
+where                                                                                 
+
+                                                   XaP (d−1)  Xjd−P 
+                                               Y                              Y
+                                Bn,j =                                             Xad−1  .                (5.4)
+                                             a<j                              a>j
+
+The term −x has zero P th Hasse derivative because P > 1. We call j the mark. Its background
+exponents are                            
+                                         P (d − 1), a < j,
+                                         
+                                         
+                                 ba (j) = d − P,     a = j,                              (5.5)
+                                                      
+                                                      d − 1,
+                                                      
+                                                                          a > j.
+   Normal exponents remain normal after multiplication by P , since gcd(d, P ) = 1. Moreover,
+
+                                                Hn (v)P = Hn (v P ).                                         (5.6)
+
+All coefficients of v are raised to their P th powers in this identity; none is assumed to lie in the
+prime field. By Lemma 2.4, ordinary-root vanishing of Hn (h) implies Fn | D[P ] Fn Hn (h)P without
+any root-multiplicity bound.
+
+5.2     The target digit string and reduction paths
+Fix a cap M ≥ 1 and a normal polynomial v with positive leading degree D ≤ M and leading
+coefficient aD ̸= 0. For this argument put
+
+               m = ⌊logd (P M )⌋,           L = m + 2,             s ≥ 4L + 4,             n ≥ s + 3L + 4.   (5.7)
+
+Define a digit-basis monomial Tn,s,D by the following digits:
+ (a) d − P + 1 at site 0;
+ (b) d − 1 at sites 1, . . . , s − 1;
+ (c) the base-d digits of P D − 1, padded to m + 1 digits, at sites s, . . . , s + m;
+
+                                                               9
+ (d) zero at all later sites.
+These are legal digits. Because d ∤ P D, the first digit after the long block satisfies
+
+                                     es = (P D − 1) mod d ≤ d − 2.                                    (5.8)
+
+Equivalently, this is the digit string of the integer P Dds − P + 1. This description does not identify
+its univariate representative with a pure power when c ̸= 0.
+    Expand a term Bn,j XiP r , where 1 ≤ r ≤ D is a normal exponent of v and i is its source. At a
+processed site with incoming carry ta , divide the exponent ba + ta + P r1a=i by d:
+                        ba + ta + P r1a=i
+                                            
+                   qa =                   ,             ea = (ba + ta + P r1a=i ) mod d.
+                                d
+The choice of an outgoing carry 0 ≤ ta+1 ≤ qa has weight
+                                                    !
+                                              qa
+                                                    (−c)qa −ta+1 .                                    (5.9)
+                                             ta+1
+
+Writing κa = qa − ta+1 ≥ 0, a legal closed-circuit path satisfies the integer identity
+
+                                 ea = ba + ta + P r1a=i − dta+1 − dκa .                              (5.10)
+
+We must first justify this closed-circuit description at the cut; an unchecked wraparound could
+change both its digit and its weight.
+
+5.3    Adaptive cuts and exclusion of overflow
+Choose a nonsource cut a ∈ [1, s − 1] whose forward cyclic distance from the source is at least L.
+Such a choice exists: only L consecutive positions are forbidden by the source and this distance
+requirement, whereas the long block has more than L positions. Start a one-circuit expansion at a
+with no incoming carry. The carry produced by the last site will be added to its retained digit at
+the end.
+   Before the source is processed, every incoming carry is at most P − 1, since bu ≤ P (d − 1) and
+the initial carry is zero. After h ≥ 1 steps from the source, the carry satisfies
+                                                         Pr − 1
+                                            t≤P +               .                                    (5.11)
+                                                          dh
+At the source its incoming carry is at most P − 1, giving the bound for h = 1. Each subsequent
+nonsource step obeys tnext ≤ (P (d − 1) + t)/d, proving the induction. Since dL−1 = dm+1 > P M − 1,
+the carry is at most P after L − 1 steps and stays at most P thereafter.
+    The cut initially retains digit d − P if it is before or at the mark, and digit d − 1 if it is after the
+mark. Its final incoming carry is at most P . In the latter case, the preceding site is after the mark
+or is the mark itself; it is not the source, and its incoming carry is at most P . Its outgoing carry is
+therefore at most one. Thus the final exponent at the cut is at most d in all cases.
+    If that exponent is below d, one circuit already gives a digit monomial. If it equals d, reduce
+the cut once more. Its digit becomes zero, and a carry zero or one is sent forward. All other sites
+already have digits below d. A carry one continues only through a digit d − 1, leaving zero there. It
+either stops or completes a further circuit; on returning to the cut, it raises its zero digit to at most
+one and stops. Every overflowing branch consequently has final cut digit at most one. The target
+cut digit is d − 1 ≥ 2, so no such branch can contribute.
+
+                                                        10
+    For a contributing branch, the retained cut digit plus its final incoming carry is still below d.
+Including that final carry does not change the quotient used at the cut initially. Thus its binomial
+weight is exactly (5.9) with this incoming carry included, and (5.10) holds cyclically at every site.
+Conversely, the legal paths with this cut quotient reconstruct the same nonoverflow branches of the
+one-circuit expansion. No contributing branch or weight has been discarded except for the explicitly
+excluded overflow. This argument is termwise and does not require nonzero or cancellation-free
+weights.
+
+5.4   Localization of all sources
+For a fixed mark j, define a baseline carry
+                                                 (
+                                                 P − 1, a ≤ j,
+                                          ℓa =
+                                                 0,     a > j.
+
+For a < n − 1, it satisfies
+                                      ba + ℓa = d − 1 + dℓa+1 .                                 (5.12)
+Put ua = ta − ℓa . The conservation identity becomes
+
+                      ea = d − 1 + ua + P r1a=i − dua+1 − dκa             (a < n − 1).          (5.13)
+
+At a nonsource site, ua ≤ 0 implies dua+1 ≤ d − 1, hence the integer ua+1 ≤ 0. Nonpositive excess
+cannot become positive without passing the source.
+   At a nonsource site with incoming carry between zero and P , a target digit d − 1 forces ta = ℓa ,
+while a zero digit requires ta = ℓa + 1. To verify this, reduce each of the three backgrounds in (5.5)
+modulo d and use P < d. In particular a zero digit is impossible when ua ≤ 0.
+   Let b = s + m + 1, a zero target site. Every contributing source lies in
+
+                                  In,s = {s − L, s − L + 1, . . . , b}.                         (5.14)
+
+Indeed, if i ≤ s − L − 1, choose the adaptive cut a = i + L. It lies in [1, s − 1] at the required
+distance from the source. Its carry is at most P , and its target digit is d − 1, so ua = 0. The
+ordinary index interval [a, b] contains no source. Equation (5.13) keeps the excess nonpositive until
+the zero site b, a contradiction. If i ≥ b + 1, choose a = L. Its forward distance from the source is
+n − i + L ≥ L + 1. Starting again with ua = 0, the same argument reaches b before the source and
+gives the contradiction.
+    There is also no target contribution from a background Bn,j without a source. Use the cut
+a = L. The carry bounds and overflow exclusion remain valid; the excess starts at zero and cannot
+become positive before b. Thus constants in v P contribute zero to the coefficient under consideration,
+regardless of the scalar n in their return sum.
+
+5.5   A common cut after localization
+All sources in (5.14) are positive, and
+
+                                       n − i ≥ n − b ≥ 2L + 5.
+
+We can now process every contributing term in the common order 0, 1, . . . , n − 1. Site zero is not a
+source. Its retained initial digit is d − P , whether it is the mark or precedes the mark. By (5.11),
+
+
+                                                     11
+the incoming carry at the last site is at most P . That site is the mark or follows it, so its outgoing
+carry is at most one. The final digit at zero is at most d − P + 1 < d, and no second circuit occurs.
+    To produce the specified anchor digit it must be exactly d − P + 1. Every contributing path
+therefore has the convention
+                                             t0 = tn = 1.                                         (5.15)
+At site zero this fictitious initial carry leaves the initial quotient and weight unchanged, because
+d − P + 1 < d. Hence (5.9)–(5.10), with (5.15), describe all contributing branches in one fixed order.
+Before the source, all carries after site zero are at most P − 1.
+
+
+6     Marked insertion and the remaining congruence class
+Retain the parameters, target, and normal polynomial from section 5. Define
+
+                                    C(n, s) = [Tn,s,D ] Jn Hn (v P ) .
+                                                                    
+                                                                                                  (6.1)
+
+The needed comparison is not stabilization. Instead, one new marked position contributes a nonzero
+leading term.
+
+Proposition 6.1 (Marked coefficient difference). Under (5.7),
+
+                                C(n + 1, s + 1) − C(n, s) = αaPD ̸= 0.                            (6.2)
+
+This holds for every prime p in the regime p | d − 1.
+
+6.1   Every old marked path is paired
+Insert a site at index a = 2L and map old indices by
+                                                (
+                                                    u,     u < a,
+                                       ι(u) =                                                     (6.3)
+                                                    u + 1, u ≥ a.
+
+The new parameters are (n + 1, s + 1) with m, L, D unchanged. The target inserts a digit d − 1
+at a and preserves all old digits. The spacing conditions still hold. The source intervals in (5.14)
+correspond under ι; their lower endpoint s − L ≥ 3L + 4 is larger than a + 1. No source can occur
+at the inserted site or its immediate neighbors.
+    Take an old mark j, now located at ι(j). At the insertion position the source is still ahead, the
+target digit is d − 1, and the incoming carry is at most P − 1. It is therefore the low baseline: P − 1
+if the mark is ahead and zero if the mark is behind. Insert an unmarked nonsource site with the
+same incoming and outgoing baseline. In the first case its background is P (d − 1), quotient P − 1,
+and digit d − 1; in the second its background is d − 1, quotient zero, and digit d − 1. In both cases
+its weight is one. All old transitions and the fixed-cut convention (5.15) are preserved.
+    Conversely, take a new target-producing path whose mark is not the inserted site. That site and
+its successor are nonsources with digit d − 1 and with the source ahead. Their incoming carries are
+their low baselines. Since the mark is not at the inserted site, these baselines are equal, including
+when the mark is immediately before it or is its successor. The inserted transition has weight one
+and can be deleted. The remaining path is legal with the old target and the same cut convention.
+    These operations are inverse for all old marks, all sources, and all target-producing branches.
+Constants contribute no target paths by section 5. Consequently the difference in (6.2) consists
+exactly of the paths whose mark is at the newly inserted site a.
+
+                                                     12
+6.2    The new mark isolates the leading source
+For this subsection put N = n + 1 and S = s + 1, with the mark at a = 2L. Every source lies after
+a + 1. The mark has incoming carry P − 1, so its exponent is (d − P ) + (P − 1) = d − 1. Its quotient
+and outgoing carry are zero, and its weight is one.
+    After the mark and before the source, the background is d − 1. Starting with carry zero, each
+such site has output d − 1 and outgoing carry zero. The smaller target digit at S in (5.8) therefore
+forces the source index to satisfy i ≤ S.
+    The source term is XiP r with 1 ≤ r ≤ D and incoming carry zero. Multiply (5.10) by du−i and
+sum over the suffix u = i, . . . , N − 1. Every background in this interval is d − 1, and the final carry
+is one. The telescoping identity is
+                                 N
+                                 X −1                         N
+                                                              X −1
+                                        eu du−i = P r − 1 −           κu du−i+1 .                    (6.4)
+                                 u=i                            u=i
+
+For the target and i ≤ S, the left side equals P DdS−i − 1. Thus
+                                                          N
+                                                          X −1
+                                       P r = P DdS−i +           κu du−i+1 .                         (6.5)
+                                                          u=i
+
+This is an equality of nonnegative integers. Since r ≤ D and i ≤ S, it forces
+
+                              i = S,       r = D,      κu = 0         (i ≤ u < N ).                  (6.6)
+
+     The remaining path exists and is unique. Before the mark, the long-block digits force the
+baseline transitions. At site zero, the outgoing carry is P − 1, equal to its quotient, and the anchor
+is d − P + 1. The mark resets the carry to zero. At the source S, ordinary base-d division of P D − 1
+gives exactly the target digits at S, . . . , S + m. After those digits, the suffix carry is one, producing
+all later zeros and the final carry in (5.15). At every step the outgoing carry equals the quotient;
+every binomial weight is one.
+     Including α from (5.3) and aPD from the leading term of v P , this unique path contributes αaPD .
+All old paths were paired, so (6.2) follows. This proves Proposition 6.1 with all marks, source
+positions, constant terms, and wraparound branches accounted for.
+
+6.3    Completion of both main theorems
+Fix M ≥ 1 and set
+
+         m = ⌊logd (P M )⌋,    L = m + 2,       s = 4L + 4,        n = s + 3L + 4 = 7m + 22 = nH .
+
+Suppose the two Hasse tests in table 1 hold. Normalize h = ∆f Q + v. By (2.4) and (5.6), the tests
+become
+                             Jj Hj (v P ) = 0 in Aj ,   j = n, n + 1.                        (6.7)
+If v has positive leading degree D, both coefficients in (6.2) are zero by (6.7). This contradicts
+αaPD ̸= 0. Hence v = a0 is constant.
+    At least one of n, n + 1, say j, is not divisible by p. Every univariate term in the marked formula
+(5.3) has degree dj − P and leading coefficient one before multiplication by α. For a mark at t, the
+degree calculation is
+                             P (dt − 1) + (d − P )dt + (dj − dt+1 ) = dj − P.
+
+
+                                                     13
+                                         j
+Thus the leading term of D[P ] Fj is jαxd −P , nonzero and of degree below deg Fj . Since (ja0 )P = jaP0 ,
+the remaining divisibility is
+                                            Fj | jaP0 D[P ] Fj .
+It forces a0 = 0. Therefore the two Hasse tests imply h ∈ Bf .
+    Conversely, a polynomial coboundary satisfies (4.4), so it satisfies both the ordinary-root tests
+and the Hasse tests. Ordinary-root vanishing implies the Hasse tests by Lemma 2.4. This proves
+the three-way finite equivalence in the last regime. For h ∈ Kf , formula (2.1) supplies those tests,
+proving Kf = Bf . The zero polynomial is covered by Q = v = 0 throughout.
+    If a finite ordinary-root test fails at return j = n or n + 1, then (2.1) gives a primitive cycle
+with nonzero sum and period dividing j. Finally,
+
+                                deg Fj ≤ dn+1 = d7m+23 ≤ d23 (P M )7 .
+
+Together with section 4, this proves Theorems 1.1 and 1.2 for every prime and every degree.
+
+6.4   The characteristic-two boundary
+The proof has used P ≥ 2, P < d, and d − 1 > 1, not oddness of p. When p = 2 and d is odd, α = 1
+and these inequalities hold. In the smallest case d = 3, P = 2, the anchor digit d − P + 1 = 2 equals
+the long-block digit d − 1 = 2. No argument required these digits to be different. The adaptive cut
+target two still exceeds every overflow outcome, which is at most one. The fixed-cut digit remains
+below d, and (2D − 1) mod 3 ≤ 1 for a normal leading degree retains the strict comparison at the
+first post-block site. The coefficient identity remains C(n + 1, s + 1) − C(n, s) = aPD ̸= 0.
+     For even d in characteristic two, (4.3) reads Fj′ = 1, and the direct proof in section 4 applies.
+The range p ∤ d(d − 1) has no characteristic-two instance. These observations verify that the three
+rows of table 1 are disjoint and exhaustive without losing constants, non-prime-field coefficients, or
+ordinary wild periods.
+
+
+7     Consequences and limits of the certificates
+7.1   Polynomial shears and native additive returns
+The cohomological equation has a direct interpretation for the polynomial map of the full affine
+plane
+                                 Th (x, y) = (f (x), y + h(x)).
+If h = ∆f Q, the polynomial automorphism ΦQ (x, y) = (x, y − Q(x)) satisfies
+
+                                   ΦQ ◦ Th ◦ Φ−1
+                                              Q (x, y) = (f (x), y).
+
+Conversely, this identity for such a shear forces h = Q ◦ f − Q. Thus Theorem 1.1 identifies the
+complete ordinary additive obstruction to removing the vertical increment by a polynomial shear.
+It does not assert that the noninvertible base map or the skew map has a global inverse.
+    For a primitive base cycle O of length r and a ∈ O, direct iteration gives
+
+                                      Th◦r (a, y) = (a, y + Sh (O)).
+
+Every return above that cycle has length divisible by r. Translation by a nonzero scalar has additive
+order p in k, so the lifted primitive period is r when Sh (O) = 0 and pr otherwise. No division by a
+period is involved, even when p | r. These return formulas explain the observable in the theorem;
+the polynomial regularity conclusion is the content of the preceding coefficient proof.
+
+                                                   14
+7.2   Why the derivative regimes cannot be merged
+Example 7.1 (An all-level ordinary-Jacobian blind test). Suppose d ≡ 1 (mod p), take c = 0, and
+let h = x. For every n ≥ 1,
+                                                   n
+                          Fn = xRn ,      Rn = xd −1 − 1,       Fn′ = Rn .
+
+The last equality uses the scalar identity dn = 1 in k. Since x | Hn (x), every ordinary-Jacobian
+test Fn | Fn′ Hn (x) holds. Nevertheless 1 is a fixed point with ordinary sum 1 ̸= 0, and x ∈
+                                                                                            / Bf by
+Lemma 2.1. Thus even all those Jacobian tests cannot replace the Hasse row of table 1.
+    This is a failure of a proposed test, not a counterexample to Theorem 1.1. More generally,
+at a root of multiplicity e divisible by p, the derivative of (x − a)e V (x) has order at least e and
+may annihilate a nonvanishing value in the full quotient. Our proofs use only the valid necessary
+root-to-derivative implication, followed by a comparison at two carefully chosen levels. They do not
+claim a single-level converse in the possibly nonreduced regime.
+
+7.3   Scope and further questions
+The result is an exact equality for polynomial observables over Fp and the full family xd + c. The
+two-return certificate and the shear interpretation are consequences of that same equality. We have
+not extended the observable class to rational functions, the base family to arbitrary polynomials, or
+the assertion to a different clock. The proof also gives no optimized period cutoff or running-time
+bound. In particular, a smaller iterate-degree bound would require a separate argument; it does not
+follow by replacing the three derivative regimes with one cost estimate.
+    The algebraic mechanism isolates what must be controlled for such extensions: a normal
+representative must be detected in a full periodic algebra, ordinary roots must supply a valid
+annihilation condition there, and an exact relation between different return levels must eliminate
+the possible defect. The stable carry and marked-insertion identities accomplish these steps here
+without a bound on periodic-root multiplicities.
+
+Preparation and review disclosure. This article was prepared with AI assistance. Its underlying
+proof packages received current-team internal mathematical and source checks. This version is the
+author draft for separate manuscript review; those internal checks are not external peer review
+or publication acceptance. The argument is proof-only, and no empirical computation is used as
+evidence for its infinite or all-parameter assertions.
+
+
+References
+[1] Eduardo Cattani, Alicia Dickenstein, and Bernd Sturmfels. Computing multidimensional
+    residues. In Laureano González-Vega and Tomás Recio, editors, Algorithms in Algebraic
+    Geometry and Applications, volume 143 of Progress in Mathematics, pages 135–164. Birkhäuser,
+    Basel, 1996. https://doi.org/10.1007/978-3-0348-9104-2_8; accessible preprint: https:
+    //arxiv.org/abs/alg-geom/9404011.
+
+[2] Predrag Cvitanović, Kim Hansen, Juri Rolf, and Gábor Vattay. Beyond the periodic orbit theory.
+    Nonlinearity, 11(5):1209–1232, 1998. https://doi.org/10.1088/0951-7715/11/5/003; author
+    text: https://cns.gatech.edu/~predrag/papers/contourNonl.pdf.
+
+
+
+                                                 15
+[3] Boris Kalinin. Livšic theorem for matrix cocycles. Annals of Mathematics, 173(2):1025–1042,
+    2011. https://doi.org/10.4007/annals.2011.173.2.11; accessible version: https://arxiv.
+    org/abs/0808.0350v2.
+
+[4] G. Levin, M. Sodin, and P. Yuditskii. Ruelle operators with rational weights for Julia sets.
+    Journal d’Analyse Mathématique, 63:303–331, 1994. https://doi.org/10.1007/BF03008428.
+
+[5] Zhiqiang Li and Yiwei Zhang.         Ground states and periodic orbits for expanding
+    Thurston maps. Mathematische Annalen, 391:3913–3985, 2025. https://doi.org/10.1007/
+    s00208-024-03018-0; accessible version: https://arxiv.org/abs/2303.00514v2.
+
+[6] Rui Zou and Hua Wei. A finite approximate Livšic theorem for Anosov diffeomorphisms.
+    Journal of Applied Analysis and Computation, 15(4):2185–2194, 2025. https://doi.org/
+    10.11948/20240420; publisher text: https://www.jaac-online.com/data/article/jaac/
+    preview/pdf/jaac-15-4-2185.pdf.
+
+
+
+
+                                              16
+

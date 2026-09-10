@@ -1,0 +1,149 @@
+\section{Normal forms and full periodic algebras}
+\label{sec:algebra}
+
+We first separate two statements that need not coincide at a
+multiple return root: a polynomial can vanish at every ordinary
+root of $F_n$ without being zero in $k[x]/(F_n)$. The coefficient
+arguments will take place in the latter, full algebra.
+
+\begin{lemma}[Polynomial normal form]
+\label{lem:normal}
+For
+\[
+ \Vd=k\oplus\bigoplus_{\substack{r\ge1\\d\nmid r}}kx^r
+\]
+one has the direct sum of $k$-vector spaces
+$k[x]=\Bf\oplus\Vd$. Thus every polynomial has a unique normal
+part $v$ in a decomposition $h=\Deltaf Q+v$. The elimination
+does not increase degree, and $Q$ is unique up to a constant.
+\end{lemma}
+
+\begin{proof}
+For $t\ge1$, the polynomial
+$\Deltaf x^t=(x^d+c)^t-x^t$ is monic of degree $dt$.
+Eliminate the largest positive exponent divisible by $d$ using
+the corresponding multiple of this polynomial, and continue.
+Each subtraction introduces only smaller exponents, so the
+process terminates without increasing degree. This proves existence.
+If $Q$ is nonconstant, then $\deg\Deltaf Q=d\deg Q$,
+whereas a nonzero element of $\Vd$ has degree zero or a positive
+degree not divisible by $d$. Their intersection is therefore zero.
+The same degree argument shows that the kernel of $\Deltaf$ on
+$k[x]$ is the constants. For $h=0$, take $Q=v=0$.
+\end{proof}
+
+Telescoping gives $\Bf\subseteq\Kf$. It also shows that on a
+root $a$ of $F_n$ of native period $r$,
+\begin{equation}
+ H_n(h)(a)=(n/r)S_h(O_a),
+ \label{eq:ordinary-repetition}
+\end{equation}
+where $n/r$ is an integer counting repetitions. This formula is
+not division in $k$. In particular, $h\in\Kf$ implies ordinary-root
+vanishing of every $H_n(h)$.
+
+\begin{lemma}[Cyclic digit basis]
+\label{lem:basis}
+For $n\ge1$, with indices taken modulo $n$, set
+\[
+ \cA_n=k[X_0,\ldots,X_{n-1}]/
+       (X_i^d+c-X_{i+1}:0\le i<n).
+\]
+The substitutions $X_i\mapsto f^{\circ i}(x)$ and
+$x\mapsto X_0$ identify $\cA_n$ with $k[x]/(F_n)$. The
+monomials
+\begin{equation}
+ X^{\mathbf e}=\prod_{i=0}^{n-1}X_i^{e_i},\qquad
+                  0\le e_i<d,
+ \label{eq:digit-basis}
+\end{equation}
+are a basis, including when $F_n$ is not squarefree.
+\end{lemma}
+
+\begin{proof}
+The first $n-1$ relations eliminate all variables except $X_0$;
+the last becomes $F_n(X_0)=0$. The substitutions are inverse,
+and the dimension is $d^n$. Replacing a factor $X_i^d$ by
+$X_{i+1}-c$ strictly lowers total degree in each resulting term,
+including at wraparound. These replacements terminate at the
+$d^n$ monomials in \eqref{eq:digit-basis}. They span and their
+number equals the dimension, proving linear independence.
+\end{proof}
+
+Write $[M]U$ for the coefficient of a digit-basis monomial $M$
+in $U\in\cA_n$. We use the notation
+\begin{equation}
+ \cH_n(v)=\sum_{i=0}^{n-1}v(X_i),\qquad
+ \Pi_n=\prod_{i=0}^{n-1}X_i^{d-1}.
+ \label{eq:class-notation}
+\end{equation}
+The first is the class of $H_n(v)$. Telescoping and the chain
+rule give, respectively,
+\begin{equation}
+ \cH_n(\Deltaf Q)=0,\qquad [F_n']=d^n\Pi_n-1.
+ \label{eq:telescoping-jacobian}
+\end{equation}
+Integer coefficients such as $d^n$ are interpreted in $k$;
+digits and reduction exponents remain integers.
+
+\begin{lemma}[Leading-digit detection]
+\label{lem:leading}
+Let $v\in\Vd$ have positive leading degree $D$ and leading
+coefficient $a_D\ne0$. Put $m=\lfloor\log_dD\rfloor$, and
+write $D=\sum_{j=0}^m e_jd^j$ in base $d$. For $n>2m$,
+the digit monomial $M_D=\prod_{j=0}^mX_j^{e_j}$ satisfies
+\begin{equation}
+ [M_D]\cH_n(v)=a_D.
+ \label{eq:leading-coefficient}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Reduce a term $X_i^r$, where $r\le D<d^{m+1}$, in the forward
+window $X_i,\ldots,X_{i+m}$, with local weights
+$1,d,\ldots,d^m$. Choosing the next variable in
+$X_{i+j}^d=X_{i+j+1}-c$ preserves weight; choosing the constant
+strictly lowers it. No term can reach $X_{i+m}^d$, whose weight
+would exceed $r$. The reduction stays inside a window of distinct
+variables. For a fixed reduction order, the unique branch choosing
+no constants produces the base-$d$ digits of $r$ with coefficient
+one and weight $r$. Every other branch has smaller weight.
+
+Normality gives $e_0>0$, and positivity gives $e_m>0$.
+For $m\ge1$, only the circular window starting at zero can
+contain both endpoints $0,m$: the other directed distance
+$n-m$ exceeds $m$. If $m=0$, the same assertion holds for
+singleton windows. Thus only source zero can reach $M_D$.
+Its target weight is $D$, so only $a_DX_0^D$ contributes,
+and it contributes exactly $a_D$. Constants have empty support.
+This proves \eqref{eq:leading-coefficient}, regardless of any
+cancellation among smaller-weight terms.
+\end{proof}
+
+\begin{lemma}[Multiplicity-safe certificates]
+\label{lem:root-certificates}
+Let $G\ne0$ and $U$ belong to $k[x]$. If $U$ vanishes at
+every ordinary root of $G$, then for every integer $E\ge1$,
+\begin{equation}
+ G\mid D^{[E]}G\,U^E.
+ \label{eq:hasse-necessary}
+\end{equation}
+In particular $G\mid G'U$.
+\end{lemma}
+
+\begin{proof}
+At a root $a$ of multiplicity $e$, write $G=(x-a)^eV$ with
+$V(a)\ne0$. The coefficient-of-$z^E$ product rule gives
+\[
+ \ord_a D^{[E]}G\ge\max(e-E,0).
+\]
+The factor $U^E$ has order at least $E$, so the product has
+order at least $e$. Check this at each root of $G$ to obtain
+the divisibility. Vanishing Hasse coefficients only increase
+the relevant order and cause no exception.
+\end{proof}
+
+Neither this lemma nor \cref{lem:leading} assumes reducedness.
+The first gives a necessary passage from ordinary roots to the
+full algebra. Its converse at one level is not required; the
+two-level arguments below supply the stronger finite equivalence.

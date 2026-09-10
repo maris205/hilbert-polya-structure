@@ -1,0 +1,95 @@
+\section{The cyclic digit algebra and coefficient extractor}\label{sec:extractor}
+
+For $n\ge1$, with indices read modulo $n$, define
+\begin{equation}\label{eq:cyclicalgebra}
+ \Acal_n=k[X_0,\ldots,X_{n-1}]/
+       (f(X_i)-X_{i+1}:i\bmod n).
+\end{equation}
+The relations determine $X_i=f^{\circ i}(X_0)$ and then impose
+$F_n(X_0)=0$, yielding
+\begin{equation}\label{eq:quotientiso}
+ \Acal_n\simeq k[x]/(F_n),\qquad X_i\longmapsto f^{\circ i}(x).
+\end{equation}
+
+\begin{lemma}[Digit basis and pairing]\label{lem:basis}
+The monomials
+\begin{equation}\label{eq:digits}
+ X^\epsilon=\prod_{i=0}^{n-1}X_i^{\epsilon_i},\qquad
+        0\le\epsilon_i\le d-1,
+\end{equation}
+form a basis of $\Acal_n$. Let $L_n$ select the coefficient of
+$\prod_iX_i^{d-1}$ in that basis. Under~\eqref{eq:quotientiso},
+$L_n$ selects the coefficient of $x^{d^n-1}$ in the remainder of
+degree below $d^n$. The pairing $(u,v)\mapsto L_n(uv)$ is
+nondegenerate. In particular, for $U\in\Acal_n$,
+\begin{equation}\label{eq:alltests}
+ U=0\quad\Longleftrightarrow\quad
+ L_n(X^\epsilon U)=0\text{ for every digit word }\epsilon.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Replacing $X_i^d$ by $X_{i+1}$ minus the lower-degree terms of
+$f(X_i)$ strictly lowers total degree, so the digit monomials span.
+Their images in~\eqref{eq:quotientiso} are monic of distinct degrees
+$\sum_i\epsilon_i d^i$, covering every integer from zero to
+$d^n-1$. They are independent. The unique top degree corresponds
+to the top digit monomial, proving the coefficient assertion.
+For a nonzero remainder $u$ of degree $q$ and leading coefficient
+$u_q\ne0$, the product $u x^{d^n-1-q}$ has top coefficient $u_q$
+without reduction. This proves nondegeneracy, and testing against
+the basis proves~\eqref{eq:alltests}.
+\end{proof}
+
+For a polynomial $J$ in the variables $X_i$, define the formal
+coefficient expression
+\begin{equation}\label{eq:extractor}
+ \mathcal R_n(J)=
+ [X_0^{-1}\cdots X_{n-1}^{-1}]
+ J\prod_{i=0}^{n-1}
+ \left(\sum_{q_i\ge0}\frac{X_{i+1}^{q_i}}{f(X_i)^{q_i+1}}\right),
+\end{equation}
+where every inverse power of $f(X_i)$ is expanded at infinity.
+
+\begin{proposition}[Locally finite extractor]\label{prop:extractor}
+The expression~\eqref{eq:extractor} is a finite algebraic sum for
+each polynomial $J$. It annihilates the ideal defining $\Acal_n$
+and equals $L_n$ on the quotient, including when $n=1$.
+\end{proposition}
+\begin{proof}
+Consider one input monomial $\prod_iX_i^{j_i}$ of total degree
+$J_0$. A term of the inverse power of $f(X_i)$ has exponent
+$-d(q_i+1)-u_i$, with $u_i\ge0$. A contribution to the required
+coefficient must satisfy
+\[
+ j_i+q_{i-1}-d(q_i+1)-u_i=-1
+ \quad\text{for every }i.
+\]
+Summing gives
+\begin{equation}\label{eq:finiteindices}
+ J_0-n(d-1)=(d-1)\sum_iq_i+\sum_i u_i.
+\end{equation}
+All indices are nonnegative and therefore bounded. Each
+inverse-power coefficient is finite as well. Consequently all
+coefficient rearrangements here are algebraic; no analytic
+convergence or division by an integer is required.
+
+Multiplying the integrand in~\eqref{eq:extractor} by
+$f(X_j)-X_{j+1}$ cancels its geometric series. In the remaining
+factors there are no negative powers of $X_j$, so the coefficient
+with $X_j^{-1}$ vanishes, even after multiplication by a
+polynomial. Successive geometric terms telescope, and the
+unbounded remainder contributes nothing to a fixed coefficient by
+the same finiteness bound. This justifies the cancellation inside
+these coefficient expansions. For $n=1$, cancellation simply
+leaves a polynomial. Thus the defining ideal is annihilated.
+
+For the top digit monomial,~\eqref{eq:finiteindices} forces every
+$q_i$ and $u_i$ to be zero, and monicity gives coefficient one.
+For any other digit monomial, $J_0<n(d-1)$, so no contribution is
+possible. The resulting quotient functional is exactly $L_n$.
+\end{proof}
+
+This proof is the characteristic-independent algebraic ingredient
+needed below. The classical relation between normal forms and
+residue functionals in~\cite[Section~4 of the preprint version]{CDS1996} provides context,
+not an additional positive-characteristic hypothesis.

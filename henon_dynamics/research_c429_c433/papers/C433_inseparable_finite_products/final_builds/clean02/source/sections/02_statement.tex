@@ -1,0 +1,107 @@
+\section{Ordinary cycles and the finite criterion}\label{sec:statement}
+
+Fix a prime $p$ and write $k=\overline{\mathbb F}_p$. Throughout,
+$f\in k[x]$ has degree $d\ge2$ and satisfies $f'=0$. Write
+$g=A/B\in k(x)^\times$ with nonzero coprime $A,B\in k[x]$, and set
+\begin{equation}\label{eq:constants}
+ m=\max(\deg A,\deg B),\quad
+ a=\left\lceil\frac{m}{d-1}\right\rceil,\quad b=a+1,\quad
+ D=2b^2,\quad N=3D+1=6b^2+1.
+\end{equation}
+There is no norm-one hypothesis, restriction on support
+multiplicities, or requirement that the numerator and denominator
+have the same degree. Although $p\mid d$, the degree need not be a
+power of $p$.
+
+An \emph{ordinary primitive cycle} is the set
+$O=\{x,f(x),\ldots,f^{\circ(r-1)}(x)\}$ of a point of least
+positive period $r$. Each distinct point is counted once; one step
+means one application of the original $f$. A cycle is
+\emph{admissible} if it avoids $V(AB)$, and its native product is
+\begin{equation}\label{eq:product}
+ W_O=\prod_{x\in O}g(x)\in k^\times.
+\end{equation}
+Condition $\CP$ means that all but finitely many ordinary primitive
+affine cycles are admissible and satisfy $W_O=1$. The single fixed
+point at infinity would not change this cofinite condition.
+
+The associated rational skew map has the precise one-step domain
+\begin{equation}\label{eq:skew}
+ T:U\times\mathbb G_m\longrightarrow\mathbb A^1\times\mathbb G_m,
+ \qquad (x,y)\longmapsto(f(x),g(x)y),\qquad
+ U=\mathbb A^1\setminus V(AB).
+\end{equation}
+The set $U$ need not be forward invariant. Further steps require
+the corresponding iterates of $x$ to remain in $U$. Along an
+admissible $r$-cycle they are defined and
+$T^{\circ r}(x,y)=(x,W_Oy)$. No global inverse or extension across
+the excluded support is being asserted.
+
+For every integer $n\ge1$, put
+\begin{align}
+ F_n(x)&=f^{\circ n}(x)-x,\label{eq:F}\\
+ H_n(x)&=\prod_{i=0}^{n-1}A(f^{\circ i}(x))
+          -\prod_{i=0}^{n-1}B(f^{\circ i}(x)),\label{eq:H}\\
+ S_*(x)&=\prod_{r=1}^{D}F_r(x),\qquad
+ I_g=\{S\in k[x]: F_n\mid SH_n\text{ for all }n\ge1\}.
+ \label{eq:ideal}
+\end{align}
+A point is \emph{product-visible at return $n$} if
+$F_n(x)=0$ and $H_n(x)\ne0$. A product-visible cycle is one
+containing a point visible at some return.
+
+\begin{samepage}
+\begin{theorem}[Finite ordinary-product detection]\label{thm:main}
+For the data above, the following conditions are equivalent:
+\begin{enumerate}
+\item The ordinary cofinite cycle-product condition $\CP$ holds.
+\item $I_g\ne(0)$.
+\item $S_*\in I_g$.
+\item $F_n\mid S_*H_n$ for every integer $1\le n\le N$.
+\end{enumerate}
+If these conditions hold, every product-visible cycle has ordinary
+least period at most $D$. This is not a bound of $D$ on the number
+of all product-visible points. Nor does it bound the period of a
+support cycle containing both a numerator zero and a denominator
+zero: both whole products vanish at every return on such a cycle,
+which remains a legitimate finite support exception.
+\end{theorem}
+\end{samepage}
+
+The statement includes $m=0$, $p=2$, and all native periods divisible
+by $p$. Its tests use the original map, whether monic or not. They
+are finite polynomial operations over a finite field containing the
+input coefficients. The bound is a bound on the return index, not
+a claim of efficient complexity: the tested polynomial degrees can
+reach $d^N$.
+
+\begin{lemma}[Nonmonic normalization]\label{lem:monic}
+It suffices to prove Theorem~\ref{thm:main} for monic $f$.
+The same reduction preserves every fixed-$S$ divisibility problem
+and the degree of $S$.
+\end{lemma}
+\begin{proof}
+Let $c_d\ne0$ be the leading coefficient of $f$. Choose
+$t\in k^\times$ with $c_dt^{d-1}=1$ and use the actual conjugacy
+$\phi(y)=ty$. Define
+\[
+ \widetilde f(y)=t^{-1}f(ty),\qquad
+ \widetilde A(y)=A(ty),\qquad \widetilde B(y)=B(ty).
+\]
+The new map is monic of degree $d$ and derivative zero; the new
+coprime pair has height $m$. The conjugacy bijects ordinary cycles,
+preserves least periods and products, and transports the zero/pole
+exceptions. Iterating the conjugacy gives
+\begin{equation}\label{eq:conjugacy}
+ \widetilde F_n(y)=t^{-1}F_n(ty),\qquad
+ \widetilde H_n(y)=H_n(ty),\qquad
+ \widetilde S_*(y)=t^{-D}S_*(ty).
+\end{equation}
+Consequently all displayed divisibilities are unchanged by
+substitution and nonzero scalar factors. A fixed $S$ becomes
+$S(ty)$, of the same degree. This proves the reduction without
+rescaling the dynamics or changing its clock. The decision rule
+itself does not require a choice of $t$.
+\end{proof}
+
+We assume $f$ monic in the proof below.

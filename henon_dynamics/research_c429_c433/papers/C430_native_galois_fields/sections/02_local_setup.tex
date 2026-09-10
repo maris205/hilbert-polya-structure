@@ -1,0 +1,175 @@
+\section{Canonical factors and local ramification tools}\label{sec:setup}
+
+Fix an odd prime \(p\), and retain \(R,K,P\) from the introduction.
+The valuation \(v\) extends uniquely to an algebraic closure of the
+complete field \(K\). Write \(r=(p-1)/p\).
+
+\begin{lemma}[Small-cycle factor]\label{lem:small}
+For each \(e\ge1\), there is a unique coprime Hensel factorization
+\[
+ Q_e=M_eV_e,\qquad \overline M_e=z^{p^e},\qquad
+ \overline V_e(0)\ne0,
+\]
+with both factors monic in \(R[z]\).
+The roots \(S_e\subset K^\sep\) of \(M_e\) are \(p^e\) distinct
+points, form one ordinary native \(p^e\)-cycle, and all have
+valuation \(r\). If \(v(x)>0\), then \(v(V_e(x))=0\).
+\end{lemma}
+
+\begin{proof}
+We specify the geometric input from
+\cite[Theorem C, its \(q=1\) case, and Proposition 4.4]{lindahl2016optimal}.
+For \(g(z)=z+z^2\) in odd characteristic it gives
+\[
+ \ord_z(g^{\circ p^j}(z)-z)
+ =1+\frac{p^{j+1}-1}{p-1}\qquad(j\ge0),
+\]
+and for \(P\) it gives the unique cycle of \(p^e\) distinct points
+in the open unit disk, with ordinary least period \(p^e\).
+It applies after passing to a complete algebraic closure; the roots
+below are already separable algebraic over \(K\).
+
+For any polynomial \(h\), \(h(z)-z\) divides \(h^{\circ p}(z)-z\):
+in the quotient by \(h(z)-z\), every iterate of \(h\) equals \(z\).
+Monic division over \(R\) thus proves \(Q_e\in R[z]\).
+Reducing and subtracting the two displayed orders gives
+\(\overline Q_e=z^{p^e}\overline V_e\), where
+\(\overline V_e(0)\ne0\). Coprime Hensel factorization gives the
+unique factors. Their coefficients are integral, so \(V_e\)
+evaluates to a unit at every point of positive valuation.
+Every point of the cited cycle is therefore a root of \(M_e\);
+there are exactly \(\deg M_e=p^e\) such distinct points.
+This proves both separability and identification of its roots.
+
+For completeness, their common valuation can be recovered from
+the factor. On points of positive valuation,
+\(P(x)=x(1+s+x)\) has the same valuation as \(x\).
+Since the roots form one cycle, their valuations coincide.
+Differentiating the numerator and denominator of
+\eqref{eq:quotient} at the common root \(0\), or cancelling their
+simple factors \(z\), gives
+\[
+ Q_e(0)=
+ \frac{(1+s)^{p^e}-1}{(1+s)^{p^{e-1}}-1}
+ =s^{p^e-p^{e-1}}.
+\]
+The denominator is nonzero. Since \(V_e(0)\) is a unit, the
+product of all \(p^e\) roots has valuation \(p^e-p^{e-1}\).
+Their common valuation is \(r\).
+\end{proof}
+
+\begin{lemma}[Rotation subgroup]\label{lem:rotation}
+For \(\alpha\in S_e\), \(K(\alpha)\) is the splitting field of
+\(M_e\), with Galois group a subgroup \(H_e\le\Z/p^e\Z\) of native
+rotations. Its degree is \(p^{h_e}\), where \(1\le h_e\le e\),
+and it is totally ramified. If \(h_e<e\), every nonidentity
+automorphism has native rotation index divisible by \(p\).
+At \(e=1\) the degree is \(p\).
+\end{lemma}
+
+\begin{proof}
+Every root is an iterate of \(\alpha\), so lies in \(K(\alpha)\).
+The factor is separable by Lemma~\ref{lem:small}, hence this root
+field is Galois. Galois commutes with \(P\). A permutation
+commuting with a single cycle is determined by the image of one
+point and is a rotation of that cycle. Thus the splitting group
+is a subgroup of the cyclic group of order \(p^e\).
+The valuation \(v(\alpha)=r\) forces its ramification degree,
+and hence its degree, to be divisible by \(p\). Every finite
+extension of \(K\) has trivial residue extension because \(k\)
+is algebraically closed; the degree--ramification identity for
+complete discretely valued fields makes it totally ramified.
+A proper subgroup of \(\Z/p^e\Z\) lies in \(p\Z/p^e\Z\).
+At \(e=1\) the lower and upper degree bounds agree.
+\end{proof}
+
+\begin{lemma}[Native displacement]\label{lem:displacement}
+For points \(x,y\) with \(v(x),v(y)\ge r\), the map \(P\) is an
+isometry and, for \(a\ge0\) and \(x\ne y\),
+\begin{equation}\label{eq:isometry}
+ \frac{P^{\circ a}(x)-P^{\circ a}(y)}{x-y}
+ \in 1+\{u:v(u)\ge r\}.
+\end{equation}
+For \(x\in S_e\), a step of index prime to \(p\) has displacement
+valuation \(2r\); every step of index divisible by \(p\) has
+displacement valuation at least \(3r\), with \(v(0)=+\infty\).
+\end{lemma}
+
+\begin{proof}
+The disk \(v(z)\ge r\) is \(P\)-invariant, and
+\[
+ P(x)-P(y)=(x-y)(1+s+x+y).
+\]
+The second factor belongs to the set in \eqref{eq:isometry};
+products of such factors remain in that set. This proves the
+first assertion by iteration.
+For \(x\in S_e\),
+\[
+ v(P(x)-x)=v(sx+x^2)=2r
+\]
+because \(1+r>2r\). In the telescoping sum of \(a\) one-step
+displacements, each summand divided by the first has residue
+\(1\), by \eqref{eq:isometry}. If \(p\nmid a\), their sum has
+nonzero residue \(a\), giving valuation \(2r\).
+For \(a=p\), the residues cancel in characteristic \(p\), and
+every remaining term gains at least \(r\). Thus the \(p\)-step
+displacement has valuation at least \(3r\). Telescoping in
+blocks of \(p\) proves the last assertion.
+\end{proof}
+
+We use lower and upper ramification groups \(G_t,G^u\) with the
+following convention. For a totally ramified finite Galois
+extension \(D/K\), put \(v_D=[D:K]v\), and for \(g\ne1\) set
+\[
+ \ell_D(g)=v_D(g\pi-\pi)-1,
+ \qquad
+ \psi_D(u)=\int_0^u[G:G^t]\,dt ,
+\]
+where \(\pi\) is a uniformizer and \(G=\Gal(D/K)\).
+The first lower and upper breaks coincide. Upper numbering
+commutes with Galois quotients. Abelian upper breaks are integral;
+in a cyclic degree-\(p^2\) extension,
+\begin{equation}\label{eq:herbrand-two}
+ b_2-b_1=p(u_2-u_1),\qquad u_2\ge p u_1.
+\end{equation}
+A nontrivial degree-\(p\) character over \(K\) has a reduced
+Artin--Schreier polar representative whose largest pole is prime
+to \(p\) and equals its break. These classical facts hold for the
+arbitrary perfect residue field \(k\), not just finite residue
+fields \cite[Section 2]{elder2025artin}.
+
+\begin{lemma}[Prime-to-\(p\) leading value]\label{lem:prime-value}
+Let \(D/K\) be a finite totally ramified Galois \(p\)-extension.
+If \(x\in D\), \(a=v_D(x)>0\), and \(p\nmid a\), then for every
+\(g\ne1\),
+\begin{equation}\label{eq:prime-value}
+ v_D(gx-x)=a+\ell_D(g).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The given coefficient field \(k\) is fixed by \(g\), and
+\(\mathcal O_D=k[[\pi]]\). The leading multiplier of \(g\pi\)
+is a \(p\)-power root of unity in \(k^\times\), hence equals \(1\).
+Write \(g\pi=\pi(1+u)\), with \(v_D(u)=b=\ell_D(g)\ge1\).
+For each positive integer \(j\), characteristic \(p\) binomial
+expansion gives
+\begin{equation}\label{eq:monomial-displacement}
+ v_D(g(\pi^j)-\pi^j)=j+p^{v_p(j)}b.
+\end{equation}
+Indeed, writing \(j=p^qj_0\), \(p\nmid j_0\), reduces the bracket
+to \((1+u^{p^q})^{j_0}-1\), whose linear term is nonzero.
+In \(x=c_a\pi^a+\sum_{j>a}c_j\pi^j\), the leading term has
+displacement order \(a+b\), whereas every later term has order
+at least \(j+b>a+b\). These orders tend to infinity, so the
+complete tail cannot cancel the leading term.
+\end{proof}
+
+Applying this lemma to \(L_1/K\), with
+\(v_{L_1}(\alpha_1)=p-1\), and using
+Lemma~\ref{lem:displacement}, proves that its unique break is
+\(2(p-1)-(p-1)=p-1\).
+More generally, \eqref{eq:prime-value} computes the first break
+of \(D/K\) as the minimum nonidentity \(x\)-displacement minus
+\(v_D(x)\). Any nontrivial Galois quotient has first upper break
+at least this value, by upper quotient compatibility.

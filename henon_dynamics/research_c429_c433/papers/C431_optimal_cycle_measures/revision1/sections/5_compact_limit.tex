@@ -1,0 +1,150 @@
+\section{Compact supports and convergence of measures}
+\label{sec:compact}
+
+We record the metric argument at the generality used here. It does
+not require local compactness of the ambient space, and it separates
+the closure containing every old cycle from the limiting support.
+
+\begin{lemma}[Exact finite-cycle distances]\label{lem:exact-distances}
+Let $T$ be an isometry of a metric space. For finite single $T$-cycles
+$E,F$ with uniform probabilities $\sigma_E,\sigma_F$, put
+$a=\min_{x\in E,y\in F}d(x,y)$. Then
+\begin{equation}\label{eq:exact-distances}
+ d_H(E,F)=W_1(\sigma_E,\sigma_F)
+        =W_\infty(\sigma_E,\sigma_F)=a.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Choose a nearest pair $x,y$, let the cycle lengths be $m,n$, and put
+$L=\lcm(m,n)$. The probability
+\[
+ \pi=\frac1L\sum_{j=0}^{L-1}\delta_{(T^jx,T^jy)}
+\]
+has the required marginals, since each coordinate point occurs
+$L/m$ or $L/n$ times. Isometry makes every paired distance equal
+to $a$. Every pair in $E\times F$ has distance at least $a$, so no
+coupling has smaller mean or essential-supremum cost. The iterates
+also cover both finite sets, proving both directed Hausdorff
+distances equal to $a$.
+\end{proof}
+
+\begin{proposition}[Compact limit of uniformly close cycles]
+\label{prop:compact-limit}
+Let $(X,d)$ be a complete ultrametric space, let $T:X\to X$ be an
+isometry, and let $C_e$ be a nonempty finite single $T$-cycle for
+each $e\ge1$. Let $\sigma_e$ be its uniform probability, and suppose
+\begin{equation}\label{eq:contact-criterion}
+ a_{d,e}=\min_{x\in C_d,y\in C_e}d(x,y),\qquad
+ \varepsilon_d=\sup_{e>d}a_{d,e}\longrightarrow0.
+\end{equation}
+Then $B=\cl_X\bigl(\bigcup_e C_e\bigr)$ is compact and $T(B)=B$.
+There is a nonempty compact set $A\subset B$ with $T(A)=A$ such that
+$C_e\to A$ in Hausdorff distance. The probabilities $\sigma_e$
+converge weakly on $B$ to an invariant probability $\sigma$ with
+$\supp\sigma\subset A$. For every $d\ge1$,
+\begin{equation}\label{eq:general-limit-bound}
+ d_H(C_d,A)\le\varepsilon_d,\qquad
+ W_1(\sigma_d,\sigma)\le W_\infty(\sigma_d,\sigma)
+ \le\varepsilon_d.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Fix $\eta>0$ and choose $d$ with $\varepsilon_d<\eta$.
+Lemma~\ref{lem:exact-distances} makes $C_d$ a finite $\eta$-net
+for every later cycle. Adding all earlier cycle points gives a finite
+net for the entire union. That union is totally bounded, as is its
+closure $B$. The latter is complete because it is closed in $X$.
+A complete totally bounded metric space is compact: successive finite
+covers of radii tending to zero provide a Cauchy subsequence of any
+sequence, and completeness supplies its limit. Thus $B$ is compact.
+
+The map $T$ sends the union of cycles onto itself. By continuity it
+maps $B$ into $B$, and its compact image is closed and contains the
+dense union. Hence $T(B)=B$. No surjectivity on $X$ was assumed.
+
+By \eqref{eq:exact-distances}, the cycle sets are Hausdorff-Cauchy.
+Define their nonempty compact tail intersection by
+\begin{equation}\label{eq:tail-set}
+ A=\bigcap_{N\ge1}\cl_B\!\left(\bigcup_{e\ge N}C_e\right).
+\end{equation}
+We verify Hausdorff convergence directly. Given $\eta>0$, choose
+$N$ so that $d_H(C_e,C_f)<\eta/2$ whenever $e,f\ge N$. Fix
+$e\ge N$ and $x\in C_e$. Points in arbitrarily late $C_f$ can be
+chosen within $\eta/2$ of $x$; a subsequence converges in $B$ to
+a point of $A$ at distance at most $\eta/2$ from $x$.
+Conversely, each $y\in A$ is the limit of points in cycles with
+indices tending to infinity. Choose nearby points of the fixed
+compact set $C_e$ and pass to a convergent subsequence there. This
+gives a point of $C_e$ within $\eta/2$ of $y$. Both bounds are
+uniform, proving $d_H(C_e,A)\to0$. The same argument with $d$
+fixed and $d_H(C_d,C_e)\le\varepsilon_d$ for all $e>d$ gives
+the first inequality in \eqref{eq:general-limit-bound}.
+
+Continuity implies $T(A)\subset A$. For the reverse inclusion,
+write $y\in A$ as a limit of $y_j\in C_{e_j}$, $e_j\to\infty$.
+Choose a predecessor $x_j\in C_{e_j}$ with $T(x_j)=y_j$.
+A convergent subsequence of $x_j$ has limit $x\in A$, and
+$T(x)=y$. Therefore $T(A)=A$.
+
+For $\varphi\in C(B,\R)$ let
+\[
+ \omega_\varphi(t)=\sup\{|\varphi(x)-\varphi(y)|:
+                      x,y\in B,\ d(x,y)\le t\}.
+\]
+Compactness gives uniform continuity, so $\omega_\varphi(t)\to0$
+as $t\downarrow0$. The coupling in Lemma~\ref{lem:exact-distances}
+yields
+\begin{equation}\label{eq:modulus-bound}
+ \left|\int\varphi\,d\sigma_e-\int\varphi\,d\sigma_d\right|
+ \le\omega_\varphi(\varepsilon_d)\qquad(e>d).
+\end{equation}
+Thus the integrals converge for every such $\varphi$. Their limits
+define a positive norm-one linear functional taking the constant
+one to one. The Riesz representation theorem on the compact
+Hausdorff space $B$ gives a regular Borel probability $\sigma$.
+This is convergence of the full sequence. Applying it to
+$\varphi\circ T$ proves invariance. The continuous nonnegative
+function $x\mapsto d(x,A)$ has integrals tending to zero by
+Hausdorff convergence; hence $\supp\sigma\subset A$.
+
+For the transport bound, fix $d$ and consider the finite-cycle
+couplings with $\sigma_e$ for $e>d$. Probabilities on the compact
+metric space $B\times B$ admit a weakly convergent subsequence.
+One proof takes a countable uniformly dense subset of continuous
+functions, extracts a diagonal subsequence of their integrals, and
+uses Riesz representation for the resulting positive functional.
+The limiting coupling has marginals $\sigma_d,\sigma$. The
+nonnegative continuous function $(x,y)\mapsto
+\max\{d(x,y)-\varepsilon_d,0\}$ has integral zero along these
+couplings and in their limit. The limit is therefore supported on
+$d(x,y)\le\varepsilon_d$. This proves the remaining inequalities
+in \eqref{eq:general-limit-bound}.
+\end{proof}
+
+\subsection{Application to the optimal cycles}
+Apply Proposition~\ref{prop:compact-limit} to the complete disk
+$\mathcal D$, the isometry $P$, and the cycles $\Pi_e$.
+Corollary~\ref{cor:coupling} gives
+\[
+ \varepsilon_d\le |s|^{c_d}
+ \le |s|^{d r^3+r^2(1+1/p)}\longrightarrow0.
+\]
+It follows that $C=\cl_K\bigl(\bigcup_e\Pi_e\bigr)$ is compact,
+that the full sequence has Hausdorff limit $\A$, and that
+$\mu_e$ has an invariant weak limit $\mu$ on $C$ with
+$\supp\mu\subset\A$. The norm is continuous, so $C$ and $\A$
+remain on $|z|=|s|^r$. The inequalities
+\eqref{eq:main-rate} have also been proved.
+
+To interpret the limit on $\Ber$, send $a\in K$ to the evaluation
+seminorm at $a$. This map is continuous: each defining coordinate
+$a\mapsto|H(a)|$, $H\in K[z]$, is continuous. The Berkovich
+projective line is Hausdorff; see the seminorm and analytification
+background in~\cite[Sections 2.3--2.4]{baker2007berkovich}.
+The restriction to compact $C$ is therefore a homeomorphism onto
+a closed compact image. Pushing $\mu$ forward gives a Radon
+probability on $\Ber$. Every continuous real test function on
+$\Ber$ restricts to one on $C$, so convergence on $C$ proves
+the required weak convergence on $\Ber$. Neither compactness of
+an ambient classical disk nor metrizability of the entire Berkovich
+line has been used.

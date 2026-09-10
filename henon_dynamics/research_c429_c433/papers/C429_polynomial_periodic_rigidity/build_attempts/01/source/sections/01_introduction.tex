@@ -1,0 +1,171 @@
+\section{Introduction and main results}
+\label{sec:introduction}
+
+Periodic orbit sums are the immediate obstruction to solving a
+cohomological equation. In finite characteristic, their relationship
+with polynomial regularity is complicated by two elementary facts:
+an ordinary period may vanish as a scalar, and a polynomial defining
+periodic points may have multiple roots. We prove that neither
+phenomenon creates a polynomial defect for the entire family
+$x^d+c$. The proof also identifies two explicit return levels at
+which the periodic data already decides the equation.
+
+Throughout, $p$ is a prime, $k=\kk$, $d\ge2$ is an integer,
+$c\in k$, and
+\begin{equation}
+ f(x)=x^d+c,\qquad \Deltaf Q=Q\circ f-Q.
+ \label{eq:setup}
+\end{equation}
+An \emph{ordinary primitive cycle} is a finite orbit
+$O=\{a,f(a),\ldots,f^{\circ(r-1)}(a)\}$ of least period $r$.
+Its points are distinct, and we define
+\[
+ S_h(O)=\sum_{a\in O}h(a),\qquad
+ \Kf=\{h\in k[x]:S_h(O)=0\text{ for every such }O\},
+ \qquad \Bf=\Deltaf k[x].
+\]
+All cycles here are affine and geometric over $k$. In particular,
+cycles whose least period is divisible by $p$ are included with
+each point counted once. One application of $f$ is always the
+time step.
+
+\begin{theorem}[Polynomial periodic-data rigidity]
+\label{thm:rigidity}
+For every prime $p$, every integer $d\ge2$, and every $c\in k$,
+one has $\Kf=\Bf$. Thus a polynomial has zero ordinary sum on
+every primitive $f$-cycle if and only if it equals $Q\circ f-Q$
+for some $Q\in k[x]$.
+\end{theorem}
+
+The conclusion is polynomial, with no genericity restriction on $c$.
+It is not a statement for rational observables or for arbitrary
+polynomial base maps. The constant $Q(0)$ is immaterial, and the
+transfer is otherwise unique, as follows from the degree argument
+in \cref{lem:normal}.
+
+Here is the finite form of the theorem. For every integer $j\ge1$ set
+\begin{equation}
+ F_j=f^{\circ j}-x,\qquad
+ H_j(h)=\sum_{i=0}^{j-1}h\circ f^{\circ i}.
+ \label{eq:returns}
+\end{equation}
+The Hasse derivative $D^{[E]}u(x)$ is the coefficient of $z^E$
+in $u(x+z)$. Fix an integer degree cap $M\ge1$, and put
+\begin{align}
+ n_J&=3\lfloor\log_dM\rfloor+4,\label{eq:nj}\\
+ P&=p^{v_p(d-1)},\qquad
+ n_H=7\lfloor\log_d(PM)\rfloor+22
+       &&\text{if }p\mid d-1.\label{eq:nh}
+\end{align}
+The symbol $P$ in \eqref{eq:nh} is used only in that last regime.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Regime & Test at each return $j$ & Returns tested\\
+\midrule
+$p\nmid d(d-1)$ & $F_j\mid F_j'H_j(h)$ & $n_J,n_J+1$\\[2pt]
+$p\mid d$ & $F_j\mid H_j(h)$ & $n_J,n_J+1$\\[2pt]
+$p\mid d-1$ & $F_j\mid D^{[P]}F_j\,H_j(h)^P$ & $n_H,n_H+1$\\
+\bottomrule
+\end{tabular}
+\caption{Three disjoint and exhaustive finite certificates.
+The second row uses $F_j'=-1$, and the third uses
+$P=p^{v_p(d-1)}$. Each row requires both displayed returns.}
+\label{tab:tests}
+\end{table}
+
+\begin{theorem}[Two-return certificates]
+\label{thm:finite}
+Let $M\ge1$ be an integer and $h\in k[x]$ have degree at most
+$M$, including $h=0$. Let $n$ be $n_J$ or $n_H$ as prescribed
+by \cref{tab:tests}. The following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item $h\in\Bf$;
+ \item both polynomial divisibilities in the applicable row of
+       \cref{tab:tests} hold;
+ \item $H_j(h)(a)=0$ for every ordinary root $a$ of $F_j$,
+       for both $j=n,n+1$.
+\end{enumerate}
+If $h\notin\Bf$, some primitive cycle with nonzero sum has
+period dividing $n$ or $n+1$, and hence period at most $n+1$.
+The two iterate polynomials have degrees bounded by
+\begin{equation}
+ \max_{j\in\{n,n+1\}}\deg F_j\le
+ \begin{cases}
+  d^5M^3,&p\nmid d-1,\\
+  d^{23}(PM)^7,&p\mid d-1.
+ \end{cases}
+ \label{eq:degree-bounds}
+\end{equation}
+\end{theorem}
+
+Condition (iii) concerns full $j$-step return sums on \emph{all}
+roots of $F_j$, not just cycles of exact period $j$. The zero
+polynomial is included without taking a logarithm of its degree;
+all logarithms use the positive cap $M$. The bounds in
+\eqref{eq:degree-bounds} concern the iterates. They are neither
+bounds on every unreduced product in a divisibility test nor
+optimized running-time or optimal-cutoff assertions.
+
+\subsection{Prior work and the precise contribution}
+
+The periodic obstruction criterion belongs to the classical
+Liv\v{s}ic problem. For example, Kalinin's matrix-cocycle theorem
+assumes a transitive homeomorphism of a compact metric space with
+the closing property and obtains a H\"older transfer
+\cite[Theorem~1.1]{kalinin2011livsic}. Those hypotheses and that
+regularity class differ from the present polynomial equation over
+$k$. Li and Zhang prove a real H\"older Liv\v{s}ic theorem for
+expanding Thurston maps and for postcritically finite rational maps
+without periodic critical points on the Riemann sphere
+\cite[Theorem~1.1]{li2025ground}. These are genuine antecedents for
+the question, not specialization results supplying \cref{thm:rigidity}.
+
+Finite periodic information also has an established role. Zou and
+Wei obtain approximate H\"older coboundaries from finite small
+periodic data for transitive Anosov diffeomorphisms
+\cite[Theorem~1.1]{zou2025finite}. Here the conclusion is exact,
+and the cutoff depends on the polynomial degree rather than an
+approximation tolerance. We make no claim to have introduced the
+finite Liv\v{s}ic problem.
+
+The algebraic infrastructure is likewise classical.
+Cattani--Dickenstein--Sturmfels relate normal-form coefficients,
+global residues, and Jacobian traces in zero-dimensional complete
+intersections \cite[Section~4]{cattani1996residues}.
+Cvitanovi\'c--Hansen--Rolf--Vattay derive finite binomial matrices
+and successive multiplier-weighted trace relations for quadratic
+maps \cite[Section~4]{cvitanovic1998beyond}. They credit the earlier
+finite-matrix construction to Levin--Sodin--Yuditskii
+\cite{levin1994ruelle}. We use the directly inspected 1998 formulas
+for this comparison; only the publisher abstract of the 1994
+article was accessible in the source check. No unread theorem
+from that article is invoked below.
+
+The additional step is a specific coefficient comparison as the
+number of cyclic variables changes. In the first derivative regime,
+insertion of a forced weight-one carry transition stabilizes a
+short-support coefficient. In the congruence class $d\equiv1$
+modulo $p$, an inserted marked transition produces instead a
+nonzero difference equal to the leading normal coefficient raised
+to a characteristic power. The necessary derivative certificates
+at two adjacent levels then eliminate every normal-form defect.
+All algebraic ingredients needed for this argument are proved
+below; complex residue formulas are not transplanted into finite
+characteristic. The source comparison is bounded and carries no
+worldwide-priority guarantee.
+
+\subsection{Proof organization}
+
+\Cref{sec:algebra} gives the normal form, cyclic digit basis,
+leading-digit detector, and multiplicity-safe certificates.
+\Cref{sec:carry} proves the stable coefficient by a full
+weight-preserving path bijection, and \cref{sec:jacobian} handles
+$p\nmid d-1$. The Hasse proof occupies
+\cref{sec:hasse,sec:insertion}; it is written with $P\ge2$ so that
+characteristic two is included in the argument itself.
+\Cref{sec:consequences} records the skew-map interpretation and
+the boundary of the derivative tests.
