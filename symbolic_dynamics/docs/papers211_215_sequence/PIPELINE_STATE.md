@@ -1,5 +1,10 @@
 # Batch after P210 — current recovery state
 
+Current Git mapping (2026-09-11): all stream research paths belong under
+`symbolic_dynamics/` in GitHub, not repository root. See
+[path correction and preservation evidence](qa/GIT_PATH_CORRECTION.md).
+P211--P215 are complete; the batch remains paused and `HOLD_EXTERNAL`.
+
 Latest 2026-09-11 UTC: [scoped private Git synchronization accepted](qa/FIVE_PRIVATE_SYNC_ROOT_INSPECTION.md).
 The complete P211--P215 scope was normally fast-forwarded to private GitHub
 `main` as `06c2c90ba119fb657762e56b43368ba7d578d014`: 18,627 changed files,

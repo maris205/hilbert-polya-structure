@@ -1,5 +1,7 @@
 # Symbolic Dynamics — 当前研究状态
 
+当前 Git 路径更正（2026-09-11）：本流论文、结果和恢复资料统一放在仓库的 `symbolic_dynamics/` 下；下方根路径同步段落仅为历史记录。P211–P215 已完成并暂停。迁移及遗漏构建日志补录见[路径更正回执](docs/papers211_215_sequence/qa/GIT_PATH_CORRECTION.md)，`HOLD_EXTERNAL` 不变。
+
 最新进展（2026-09-11UTC）：[P211--P215限定私有Git同步已接受](docs/papers211_215_sequence/qa/FIVE_PRIVATE_SYNC_ROOT_INSPECTION.md)。完整七组授权路径以普通fast-forward推送至private GitHub `main`，科学批次提交为`06c2c90ba119fb657762e56b43368ba7d578d014`：18627个变更文件、零越界路径、零删除；推送后只读查询与实际远端ref一致。回执及本生命周期文字由紧随其后的小型限定提交承载，不作循环自身哈希声明。**保留5／完成5／空缺0／关闭61／零reserve**；更新前中央字节由`docs/papers211_215_sequence/qa/control_before_private_sync_complete01`中的SHA-256及Git blob pin保留。当前批次已关闭并暂停，不开新轮，`HOLD_EXTERNAL`。
 
 最新进展（2026-09-11UTC）：[exact-five终验已接受](docs/papers211_215_sequence/FINAL_QA_REPORT.md)。未放宽的preparation05审计器确认恰好P211--P215、15组replay pair、15个Round manifest、10次terminal、十份A/B零finding和五份实际页面视读；完整输出338038字节/b1a5359e，含1687个input pin及246份保留失败/HOLD/淘汰文件，stderr空。前三次运行只暴露P211/P213旧命名不兼容，采用有原件pin的文档身份adapter，审计逻辑不变。**保留5／完成5／空缺0／关闭61／零reserve**。中央原件在docs/papers211_215_sequence/qa/control_before_exact_five_private_sync01物理保存且RAW一致；先批次后入口。仅余限定私有Git同步，随后暂停；不开新轮，`HOLD_EXTERNAL`。
