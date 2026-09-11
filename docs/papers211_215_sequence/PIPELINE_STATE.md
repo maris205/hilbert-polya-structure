@@ -1,5 +1,16 @@
 # Batch after P210 — current recovery state
 
+Latest 2026-09-11 UTC: [scoped private Git synchronization accepted](qa/FIVE_PRIVATE_SYNC_ROOT_INSPECTION.md).
+The complete P211--P215 scope was normally fast-forwarded to private GitHub
+`main` as `06c2c90ba119fb657762e56b43368ba7d578d014`: 18,627 changed files,
+zero paths outside the seven approved roots, and no deletions. A post-push
+read-only query matched the actual remote ref; the receipt and this lifecycle
+refresh are carried by one subsequent scoped commit without a circular
+self-hash claim. Counts remain **5 retained / 5 complete / 0 open / 61 closed /
+zero reserve**. Pre-refresh central bytes are pinned in
+qa/control_before_private_sync_complete01. This batch is closed and paused;
+no next round is open, and `HOLD_EXTERNAL` remains.
+
 Latest 2026-09-11 UTC: [exact-five terminal gate accepted](FINAL_QA_REPORT.md).
 Preparation05's unchanged auditor accepts exactly P211--P215, 15 replay pairs,
 15 Round manifests, 10 terminal builds, ten zero A/B finding records and five
