@@ -1,0 +1,136 @@
+\section{Every one-step source}\label{sec:inverse}
+For $n\le2$, the identity rule gives one source for each target. Assume
+$n\ge3$ and fix $y\in X_{n,N}$. A source $a$ has the unique comparison word
+\begin{equation}\label{eq:word}
+ s_i=1\ \Longleftrightarrow\ a_i\le a_{i+1};
+ \qquad s_i=0\ \Longleftrightarrow\ a_i>a_{i+1}.
+\end{equation}
+Equality belongs only to 1. The all-zero word is impossible on a cycle.
+The all-one word forces a uniform source, contributing one source if
+$y$ is uniform and none otherwise.
+
+For a mixed word, a valley $v$ has $s_{v-1}=0,s_v=1$.
+Let $p$ be the next peak, where $s_{p-1}=1,s_p=0$, and $w$ the next
+valley. Unwrap the indices along $v,\ldots,p,\ldots,w$, and put
+$r=p-v\ge1$, $d=w-p\ge1$. Apply the construction to every such block
+once around the labelled cycle. This convention does not quotient by
+rotation and is independent of the valley used to start reading.
+
+Substitution in \eqref{eq:rule} gives all four local equations:
+\begin{equation}\label{eq:local-table}
+\begin{array}{c|c|c}
+s_{i-1}&s_i&F(a)_i\\ \hline
+0&1&a_i\\
+1&1&a_{i-1}\\
+0&0&2a_i-a_{i+1}\\
+1&0&a_i+a_{i-1}-a_{i+1}
+\end{array}.
+\end{equation}
+For example, the $0,0$ case has incoming current $a_i$ and outgoing
+current $a_{i+1}$. Ties satisfy the table with convention \eqref{eq:word}.
+
+\paragraph{Valleys and strict descent interiors.}
+First set $A_v=y_v$ at every valley. In each zero-run, work backwards:
+\begin{equation}\label{eq:descent}
+ A_j=\frac{y_j+A_{j+1}}2,\qquad j=w-1,w-2,\ldots,p+1.
+\end{equation}
+Reject the word if any forced value is nonintegral or negative, or if
+$A_j\le A_{j+1}$. When $d=1$, there is no interior to force and
+$A_{p+1}=A_w$ is already assigned. These tests enforce every strict
+descent edge except the one leaving the peak.
+
+\paragraph{A one-edge ascent.}
+If $r=1$, force
+\begin{equation}\label{eq:short-peak}
+ A_p=y_p-A_v+A_{p+1},
+ \qquad A_v\le A_p>A_{p+1}.
+\end{equation}
+Failure of either comparison rejects the word. The comparisons also
+ensure nonnegativity. This block leaves no choice.
+
+\paragraph{A longer ascent.}
+For $r\ge2$, require
+\begin{equation}\label{eq:ascent-tests}
+ y_{v+1}=y_v,\qquad
+ y_{v+1}\le y_{v+2}\le\cdots\le y_{p-1},
+\end{equation}
+and assign $A_j=y_{j+1}$ for $v\le j\le p-2$. The equality makes the
+valley assignment consistent. For $r=2$, the order chain has one term
+and is vacuous; the displayed equality still applies.
+The remaining coordinates are the prepeak and peak. Define
+\begin{equation}\label{eq:interval}
+ S_p=y_p+A_{p+1},\quad L_p=y_{p-1},\quad
+ U_p=\min\left(\left\lfloor\frac{S_p}{2}\right\rfloor,\ y_p-1\right).
+\end{equation}
+The expression $y_p-1$ subtracts the integer one; it is not $y_{p-1}$.
+Choose any integer $t_p\in[L_p,U_p]$ and put
+\begin{equation}\label{eq:pair}
+ a_{p-1}=t_p,\qquad a_p=S_p-t_p.
+\end{equation}
+The last two weak ascent comparisons give $L_p\le t_p$ and
+$2t_p\le S_p$. Strict descent from the peak gives
+$S_p-t_p>A_{p+1}$, equivalently $t_p\le y_p-1$. Thus
+\eqref{eq:interval} gives exactly all the comparisons at these coordinates,
+including the permitted tie $t_p=a_p$. All coordinates are nonnegative,
+since $L_p\ge0$ and $a_p>A_{p+1}\ge0$.
+
+Let $W_s(y)=0$ if any forced test fails. Otherwise set
+\begin{equation}\label{eq:weight}
+ W_s(y)=\prod_{\substack{\text{one-runs of }s\\ r\ge2}}
+             \max(0,U_p-L_p+1),
+\end{equation}
+with empty product one. An empty interval makes the weight zero.
+
+\begin{theorem}\label{thm:atlas}
+For every target $y\in X_{n,N}$ with $n\ge3$,
+\begin{equation}\label{eq:atlas}
+ |F^{-1}(y)|=
+ \one_{\{y\text{ uniform}\}}+
+ \sum_{\substack{s\in\{0,1\}^n\\s\ne0^n,\ s\ne1^n}}W_s(y).
+\end{equation}
+Each positive summand supplies all its sources explicitly through
+\eqref{eq:descent}--\eqref{eq:pair}. Within a word the interval choices are
+independent; between words the source sets are disjoint.
+\end{theorem}
+\begin{proof}
+For necessity, take an actual source and its unique word
+\eqref{eq:word}. The constant cases were handled above. In a mixed word,
+the valley line of \eqref{eq:local-table} forces $A_v=y_v$. The
+descent-interior line forces \eqref{eq:descent}, with all tests satisfied
+by the actual source. A one-edge ascent forces \eqref{eq:short-peak}.
+For a longer ascent, each ascent-interior line forces the shifted target
+assignments and \eqref{eq:ascent-tests}. The peak line forces the sum
+$a_{p-1}+a_p=S_p$. The actual comparisons then force precisely the
+interval \eqref{eq:interval}. Thus every source provides an admitted word
+and one integer from each of its intervals.
+
+For sufficiency, take an admitted word and independent integers from its
+nonempty intervals. Valleys, descent interiors, ascent interiors, prepeaks
+and peaks cover the cycle. Their coordinate roles are disjoint, except
+for the explicitly consistent valley assignment in a longer ascent.
+The case $r=1$ uses its valley directly and has no free prepeak; $d=1$
+uses the next valley directly and has no descent interior.
+Thus every coordinate is assigned, including blocks crossing index zero.
+
+The tests give exactly weak ascent on the 1-edges and strict descent on
+the 0-edges, with all entries nonnegative. The resulting vector therefore
+has precisely the specified word, not merely a word compatible with some
+ties. Every line of \eqref{eq:local-table} has target value $y_i$, so
+$F(a)=y$. Conservation in \eqref{eq:rule} then implies
+$\sum_i a_i=\sum_i y_i=N$: no additional mass condition is missing.
+Hence the vector belongs to $X_{n,N}$.
+
+Different interval choices differ at a prepeak coordinate. Different
+words cannot describe the same source because \eqref{eq:word} is unique.
+These facts prove the bijection, independence and multiplicities
+in \eqref{eq:atlas}.
+\end{proof}
+
+There are at most $2^n-2$ mixed words and $O(n)$ arithmetic operations per
+word. Consequently \eqref{eq:atlas} evaluates the fibre cardinality using
+$O(n2^n)$ arithmetic operations; this is not a bit-cost bound independent
+of $N$, nor the cost of printing every source. No search over mass
+compositions or unbounded currents remains inside a weight.
+In particular a target is in the image exactly when \eqref{eq:atlas}
+is positive; no linear-time image test is asserted.
+

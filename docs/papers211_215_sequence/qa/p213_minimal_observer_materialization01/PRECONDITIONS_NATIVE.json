@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "node <<'NODE'\nconst fs=require('fs');const parent='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa',dest=parent+'/p213_minimal_observer_enabled01';const s=fs.lstatSync(parent,{bigint:true}),v=fs.statfsSync(parent,{bigint:true});if(!s.isDirectory()||s.isSymbolicLink()||s.uid!==0n)throw Error('ordinary qa parent mismatch');const available=v.bsize*v.bavail;if(available<67108864n)throw Error('less than 64 MiB available');let absent=false;try{fs.lstatSync(dest,{bigint:true});}catch(e){if(e.code!=='ENOENT')throw e;absent=true;}if(!absent)throw Error('exact enabled destination already exists');console.log(JSON.stringify({scope:'AUTHORIZED_SOURCE_MATERIALIZATION_PRECONDITIONS_ONLY_NOT_PROBE',parent,metadata:Object.fromEntries(['dev','ino','mode','nlink','uid','gid','rdev','size','mtimeNs','ctimeNs','birthtimeNs'].map(k=>[k,s[k].toString()])),filesystem:Object.fromEntries(['type','bsize','blocks','bfree','bavail','files','ffree'].map(k=>[k,v[k].toString()])),availableBytes:available.toString(),minimumBytes:'67108864',destination:dest,absence:{operation:'lstat',code:'ENOENT'},probePathQueried:false},null,2));\nNODE",
+    "max_output_tokens": 4500
+  },
+  "result": {
+    "chunk_id": "a5f562",
+    "wall_time_seconds": 0.00000372,
+    "exit_code": 0,
+    "original_token_count": 233,
+    "output": "{\n  \"scope\": \"AUTHORIZED_SOURCE_MATERIALIZATION_PRECONDITIONS_ONLY_NOT_PROBE\",\n  \"parent\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa\",\n  \"metadata\": {\n    \"dev\": \"2304\",\n    \"ino\": \"12908328370\",\n    \"mode\": \"16877\",\n    \"nlink\": \"258\",\n    \"uid\": \"0\",\n    \"gid\": \"0\",\n    \"rdev\": \"0\",\n    \"size\": \"16384\",\n    \"mtimeNs\": \"1789050853858193440\",\n    \"ctimeNs\": \"1789050853858193440\",\n    \"birthtimeNs\": \"1788847188103517385\"\n  },\n  \"filesystem\": {\n    \"type\": \"1481003842\",\n    \"bsize\": \"4096\",\n    \"blocks\": \"13107200\",\n    \"bfree\": \"3819978\",\n    \"bavail\": \"3819978\",\n    \"files\": \"750133376\",\n    \"ffree\": \"739031125\"\n  },\n  \"availableBytes\": \"15646629888\",\n  \"minimumBytes\": \"67108864\",\n  \"destination\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_minimal_observer_enabled01\",\n  \"absence\": {\n    \"operation\": \"lstat\",\n    \"code\": \"ENOENT\"\n  },\n  \"probePathQueried\": false\n}\n"
+  }
+}

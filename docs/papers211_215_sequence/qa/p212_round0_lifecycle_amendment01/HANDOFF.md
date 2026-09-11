@@ -1,0 +1,7 @@
+# P212 lifecycle amendment — SOURCE ONLY
+
+Before files are exact copies of the sealed lifecycle_source01/proposed three files. Proposed files only advance initial artifact/PDF status and add the actual root artifact receipt link; physical Round0, nonauthor A/B and terminal gates remain pending. The original source01 seal is untouched. Root must receive/apply this exact delta; no live lifecycle file is edited here.
+
+Actual source evidence read completely: ../p212_plain_initial_artifact_root01/RECEPTION.md, root accepted initial artifact with zero unresolved artifact findings, six-page 191504-byte PDF SHA256 bff4ca3a777782091f5f5595d5152df57d148af6140d9394f7f2ee3ae71e7e87. Root separately reports actual adoption cec42d after absence and full raw comparison. This preparation additionally checked current live main.pdf's whole hash (88a40e), equal to the received identity; that hash is not claimed as the original adoption event. Root should attach its actual adoption original in the later freeze/lifecycle reception.
+
+The companion fixed physical freeze SOURCE remains separate at ../p212_round0_freeze_source01/PLAN.md: 25 payload mappings, no execution. Its pending preconditions describe sequencing, not a denial of later accepted facts. No mathematics, TeX, verifier, parameter, canonical, live/central/frozen file, historical evidence or Git state changed. No science/build/freeze execution. HOLD_EXTERNAL.

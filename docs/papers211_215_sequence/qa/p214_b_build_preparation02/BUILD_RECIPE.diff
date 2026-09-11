@@ -1,0 +1,33 @@
+--- p214_b_build_preparation01/BUILD_REQUEST.sh
++++ p214_b_build_preparation02/BUILD_REQUEST.sh
+@@ -6,10 +6,10 @@
+   printf '%s\n' 'P214_B_BUILD_NOT_AUTHORIZED_BY_THIS_SOURCE' >&2
+   exit 78
+ fi
+-P214_PREP='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p214_b_build_preparation01'
++P214_PREP='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p214_b_build_preparation02'
+ P214_SRC='/root/autodl-tmp/symbolic_dynamics/papers/214-nilpotent-bilinear-clock/frozen_round1'
+ P214_RUNTIME='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p214_a_build_binding02/RUNTIME_INPUTS.sha256'
+-P214_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p214_b/build01'
++P214_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p214_b/build02'
+ P214_COLD="$P214_OUT/source_only"
+ [[ -f "$P214_PREP/SOURCE_EXPECTED.sha256" && ! -L "$P214_PREP/SOURCE_EXPECTED.sha256" ]]
+ [[ -f "$P214_PREP/SCIENCE_AND_HISTORY_INPUTS.sha256" && ! -L "$P214_PREP/SCIENCE_AND_HISTORY_INPUTS.sha256" ]]
+@@ -36,7 +36,7 @@
+ cp --no-clobber -- "$P214_PREP/SCIENCE_AND_HISTORY_INPUTS.sha256" "$P214_OUT/SCIENCE_AND_HISTORY_INPUTS.sha256"
+ sha256sum -- "$P214_PREP/BUILD_REQUEST.sh" "$P214_PREP/NATIVE_REQUEST.proposed.json" "$P214_RUNTIME" > "$P214_OUT/REQUEST_AND_BINDING.sha256"
+ sha256sum -c --strict "$P214_OUT/RUNTIME_EXPECTED.sha256" > "$P214_OUT/runtime.before.stdout" 2> "$P214_OUT/runtime.before.stderr"
+-sha256sum -c --strict "$P214_OUT/SCIENCE_AND_HISTORY_INPUTS.sha256" > "$P214_OUT/science.before.stdout" 2> "$P214_OUT/science.before.stderr"
++(cd /root/autodl-tmp/symbolic_dynamics && sha256sum -c --strict "$P214_OUT/SCIENCE_AND_HISTORY_INPUTS.sha256") > "$P214_OUT/science.before.stdout" 2> "$P214_OUT/science.before.stderr"
+ (cd "$P214_SRC" && sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256") > "$P214_OUT/source.before.stdout" 2> "$P214_OUT/source.before.stderr"
+ for p214_name in "${P214_SOURCES[@]}"; do
+   [[ -f "$P214_SRC/$p214_name" && ! -L "$P214_SRC/$p214_name" ]]
+@@ -136,7 +136,7 @@
+   sha256sum -- "$P214_OUT/pages/$p214_label.png" >> "$P214_OUT/PAGES.sha256"
+ done
+ sha256sum -c --strict "$P214_OUT/RUNTIME_EXPECTED.sha256" > "$P214_OUT/runtime.after.stdout" 2> "$P214_OUT/runtime.after.stderr"
+-sha256sum -c --strict "$P214_OUT/SCIENCE_AND_HISTORY_INPUTS.sha256" > "$P214_OUT/science.after.stdout" 2> "$P214_OUT/science.after.stderr"
++(cd /root/autodl-tmp/symbolic_dynamics && sha256sum -c --strict "$P214_OUT/SCIENCE_AND_HISTORY_INPUTS.sha256") > "$P214_OUT/science.after.stdout" 2> "$P214_OUT/science.after.stderr"
+ (cd "$P214_SRC" && sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256") > "$P214_OUT/source.after.stdout" 2> "$P214_OUT/source.after.stderr"
+ sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256" > "$P214_OUT/cold_source.final.stdout" 2> "$P214_OUT/cold_source.final.stderr"
+ sha256sum -- main.pdf main.log main.fls main.aux main.bbl main.blg > "$P214_OUT/FINAL_PRODUCTS.sha256"

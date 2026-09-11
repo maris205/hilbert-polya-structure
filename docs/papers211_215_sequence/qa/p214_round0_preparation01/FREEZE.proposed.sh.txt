@@ -1,0 +1,33 @@
+#!/bin/bash
+# SOURCE ONLY; requires separate root acceptance and one freeze grant.
+set -euo pipefail
+umask 077
+[[ "$#" == 1 && "$1" == "--execute-under-separate-root-grant" ]] || exit 78
+cd /root/autodl-tmp/symbolic_dynamics
+P214_PREP=docs/papers211_215_sequence/qa/p214_round0_preparation01
+P214_BIND=docs/papers211_215_sequence/qa/p214_round0_binding01
+P214_FREEZE=papers/214-nilpotent-bilinear-clock/frozen_round0
+# Root independently binds every FILES.tsv source at this exact later milestone.
+[[ -f "$P214_BIND/INPUTS.sha256" && ! -L "$P214_BIND/INPUTS.sha256" ]]
+sha256sum -c --strict "$P214_BIND/INPUTS.sha256"
+[[ ! -e "$P214_FREEZE" && ! -L "$P214_FREEZE" ]]
+mkdir -- "$P214_FREEZE"
+mkdir -- "$P214_FREEZE/sections" "$P214_FREEZE/sources" "$P214_FREEZE/evidence"
+while IFS=$'\t' read -r p214_source p214_dest; do
+  [[ -n "$p214_source" && -n "$p214_dest" ]]
+  [[ -f "$p214_source" && ! -L "$p214_source" ]]
+  [[ ! -e "$P214_FREEZE/$p214_dest" && ! -L "$P214_FREEZE/$p214_dest" ]]
+  cp --no-clobber -- "$p214_source" "$P214_FREEZE/$p214_dest"
+  cmp -- "$p214_source" "$P214_FREEZE/$p214_dest"
+done < "$P214_PREP/FILES.tsv"
+set -C
+(
+  cd "$P214_FREEZE"
+  while IFS=$'\t' read -r p214_source p214_dest; do
+    sha256sum -- "$p214_dest"
+  done < "/root/autodl-tmp/symbolic_dynamics/$P214_PREP/FILES.tsv"
+) > "$P214_FREEZE/SHA256SUMS"
+(cd "$P214_FREEZE" && sha256sum -c --strict SHA256SUMS)
+sha256sum -c --strict "$P214_BIND/INPUTS.sha256"
+printf '%s\n' 'COPIED_AND_COMPARED_PENDING_ROOT_PHYSICAL_ROUND0_RECEPTION'
+# No cleanup, overwrite, re-execution, science, TeX, review or completion.

@@ -1,0 +1,21 @@
+{
+  "catch_source": "except BaseException:\n        reason, error = 'SPAWN_OR_RECORDER_EXCEPTION', traceback.format_exc()",
+  "finding": "BLD-I1",
+  "impact": "Not a false successful-build status; unsupported finalized raw/failed-artifact immutability claim.",
+  "method": "Static control-flow witness only; no submitted function or mock of it was executed.",
+  "path": [
+    "build_core.py:211-212: proc=None and settled=True",
+    "build_core.py:220-230: BaseException handler assigns only reason/error; proc remains None",
+    "build_core.py:231: no-handle branch skips session inspection and settlement",
+    "build_core.py:258-272: streams_settled=True, raw stream hashes and RECEIPT are written despite unknown outcome",
+    "build_core.py:276-289: receipt exists and UNCLOSED is absent, so enclosing FAIL_PRESERVED seal is not blocked"
+  ],
+  "premise": "A non-OSError interruption/exception occurs during Popen before assignment returns; proc remains None. No returned handle does not establish absence of a native writer.",
+  "required_delta": "Preserve an unknown/unclosed no-handle outcome with no final stream hashes or native receipt, prevent every enclosing seal, and add a focused non-scientific regression before a new candidate/binding.",
+  "severity": "Major",
+  "status": "OPEN_BLOCKS_CURRENT_BINDING",
+  "submitted_function_lines": [
+    201,
+    273
+  ]
+}

@@ -1,0 +1,41 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const ROOT='/root/autodl-tmp/symbolic_dynamics';
+const BASE='docs/papers211_215_sequence/qa/p212_dependency_query_outer_source_audit01';
+const AUTHOR='docs/papers211_215_sequence/qa/p212_dependency_query_outer_preparation01';
+const FIELDS=['dev','ino','mode','nlink','uid','gid','rdev','size','blksize','blocks','atimeNs','mtimeNs','ctimeNs','birthtimeNs'];
+const need=(v,m)=>{if(!v)throw Error(m);};
+const absolute=r=>{need(typeof r==='string'&&!r.startsWith('/')&&!r.split('/').some(x=>!x||x==='.'||x==='..'),'literal workspace path');return path.join(ROOT,r);};
+const read=r=>fs.readFileSync(absolute(r));
+const pin=b=>({bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')});
+const parse=r=>JSON.parse(read(r).toString('utf8'));
+const shape=s=>need(Object.keys(s).sort().join('|')===[...FIELDS].sort().join('|')&&Object.values(s).every(x=>typeof x==='string'&&/^-?[0-9]+$/.test(x)),'fourteen decimal stat fields');
+function manifest(r,base,expected,expectedCount){
+ const raw=read(r),key=pin(raw);need(key.sha256===expected,'exact manifest '+r);
+ need(raw.toString().endsWith('\n'),'complete LF manifest');
+ const rows=raw.toString().trimEnd().split('\n').map(line=>{const m=/^([0-9a-f]{64})  (.+)$/.exec(line);need(m,'manifest line');const rel=base?base+'/'+m[2]:m[2];const key=pin(read(rel));need(key.sha256===m[1],'whole listed pin '+rel);return {path:rel,...key};});
+ need(rows.length===expectedCount,'exact list count');need(new Set(rows.map(x=>x.path)).size===rows.length,'unique entries');
+ return {path:r,...key,entries:rows.length,rows};
+}
+const author=manifest(AUTHOR+'/SHA256SUMS',AUTHOR,'2c886f9fb07053c5ca6dcf46b5eba397a9e92e2d4949a9ca0598bb05b9779138',23);
+const review=manifest(AUTHOR+'/REVIEW_INPUTS.sha256','', 'b3e9164a37e641db38a6a4e77cd03f66a90e205b19be5cdd7bfe59247a1166ef',14);
+const sourceRaw=read(AUTHOR+'/SOURCE_INPUTS.sha256');
+const source=manifest(AUTHOR+'/SOURCE_INPUTS.sha256','',pin(sourceRaw).sha256,46);
+const members=fs.readdirSync(absolute(AUTHOR)).sort();
+need(members.every(m=>fs.lstatSync(absolute(AUTHOR+'/'+m)).isFile()),'flat regular author package');
+need(JSON.stringify(members)===JSON.stringify(['SHA256SUMS',...author.rows.map(x=>x.path.slice(AUTHOR.length+1))].sort()),'complete author nonself membership');
+const before=parse(BASE+'/INPUTS_BEFORE.json'),after=parse(BASE+'/INPUTS_AFTER.json');
+need(before.inputs.length===72&&after.inputs.length===72,'exact independent finite input count');
+need(JSON.stringify(before.inputs.map(x=>x.path))===JSON.stringify(after.inputs.map(x=>x.path)),'same ordered finite paths');
+const compared=before.inputs.map((b,i)=>{const a=after.inputs[i];need(a.path===b.path&&a.resolved===b.resolved&&a.bytes===b.bytes&&a.sha256===b.sha256,'whole stable documentary pin '+b.path);
+ for(const field of ['lstat','stat']){shape(b[field]);shape(a[field]);for(const k of FIELDS)if(k!=='atimeNs')need(a[field][k]===b[field][k],'declared stable metadata '+b.path+' '+field+' '+k);}
+ return{path:b.path,bytes:b.bytes,sha256:b.sha256,stable_non_atime_fields:true};});
+const sourceFiles=['outer_contract.py','node_preload.js','product_capture.js','python_runtime_probe.py','node_runtime_probe.js'];
+const sourceKeys=sourceFiles.map(name=>{const raw=read(AUTHOR+'/'+name);return {path:AUTHOR+'/'+name,...pin(raw),lines:raw.toString('utf8').split('\n').length-(raw.at(-1)===10?1:0)};});
+const readRecords=['CONTRACT_READS_NATIVE.json','SUPERVISOR_SOURCE_READS_NATIVE.json','OTHER_SOURCE_READS_NATIVE.json'].flatMap(n=>parse(BASE+'/'+n));
+need(readRecords.length===13&&readRecords.every(r=>r.result.exit_code===0),'thirteen successful core read records');
+const contractNames=['SOURCE_CONTRACT.md','RUNTIME_PREPARATION.md','READ_ENTRY_COVERAGE.md','SOURCE_ORIGIN.json','PRIMARY_SOURCE_NOTES.md','INTERFACE.disabled.json'];
+contractNames.forEach((name,i)=>need(Buffer.from(readRecords[i].result.output).equals(read(AUTHOR+'/'+name)),'whole contract native output '+name));
+need(Buffer.from(readRecords.slice(6,9).map(r=>r.result.output).join('')).equals(read(AUTHOR+'/outer_contract.py')),'all three supervisor reads reconstruct exact whole source');
+sourceFiles.slice(1).forEach((name,i)=>need(Buffer.from(readRecords[9+i].result.output).equals(read(AUTHOR+'/'+name)),'whole native source output '+name));
+process.stdout.write(JSON.stringify({schema:'p212-outer-source-audit-documentary-integrity-v1',status:'DOCUMENTARY_CHECKS_PASS_NOT_SOURCE_EXECUTION',author,review,source,author_members:members,author_total_files:members.length,author_total_bytes:author.bytes+author.rows.reduce((s,r)=>s+r.bytes,0),input_count:compared.length,compared,source_keys:sourceKeys,complete_core_native_reads:readRecords.length,reviewed_code_executed_or_imported:false,syntax_AST_test:false,runtime_probe:false,host_dependency_path_followed:false,scope:'Finite named workspace byte/metadata/JSON checks only. No claim about selected host runtime ABI, runtime closure, future source operation, live05 or manuscript review.'},null,2)+'\n');

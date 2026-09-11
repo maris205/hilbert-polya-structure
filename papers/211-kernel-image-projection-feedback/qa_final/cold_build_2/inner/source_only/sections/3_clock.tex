@@ -1,0 +1,105 @@
+\section{Exact entrance times and a sharp clock}\label{sec:clock}
+
+Let $g=f_{Z,W}\in T(\On)$. Call an equal pair $(c,c)$ in its ordered
+endpoint/value list an \emph{anchor}. The last pair $(n,n)$ is an
+anchor. Before the first anchor and between consecutive anchors, the
+strict pairs have the form
+\begin{equation}\label{eq:strictlist}
+ w_1<z_1<w_2<z_2<\cdots<w_r<z_r<c,
+\end{equation}
+where $c$ is the following anchor and the indices are local to this
+interval. Define $R(g)$ as the maximum number $r$ of strict pairs in
+one such list, allowing empty lists and setting $R(g)=0$ if there are
+no strict pairs.
+
+\begin{lemma}\label{lem:peeling}
+Under one update of $T$, the anchors of $g$ persist exactly. The list
+\eqref{eq:strictlist} becomes
+\begin{equation}\label{eq:peeling}
+ (z_1,w_2),\ (z_2,w_3),\ldots,(z_{r-1},w_r),\ (c,c),
+\end{equation}
+where only the final anchor remains if $r=0$ or $r=1$.
+The lists in different anchor intervals evolve independently.
+\end{lemma}
+
+\begin{proof}
+For the source $g=f_{Z,W}$, the next support pair is $X=W$, $A=Z$,
+because $n\in Z$. Lemma~\ref{lem:product} preserves their intersection.
+For $i<r$, the least member of $W$ not below $z_i$ is $w_{i+1}$.
+The two final labels $z_r$ and $c$ both have ceiling $c$ in $W$.
+Recomputing the rightmost kernel endpoints therefore gives precisely
+\eqref{eq:peeling}. If the list is empty, $c$ remains its own ceiling.
+Each anchor belongs to both supports and separates their ceiling
+intervals, so no selected label crosses an anchor. This proves the
+independence of the intervals as well as the update formula.
+\end{proof}
+
+\begin{theorem}\label{thm:time}
+The fixed states and recurrent states of $T$ are exactly
+$e_C$ with $n\in C\subseteq[n]$. Every source $f=f_{Y,X}$ terminates at
+\begin{equation}\label{eq:terminal}
+ e_{X\cap(Y\cup\{n\})}.
+\end{equation}
+For an image state $g$, its entrance time is $\tau(g)=R(g)$. For a
+general source,
+\begin{equation}\label{eq:time}
+ \tau(f)=
+ \begin{cases}
+ 0,& f=e_C\text{ for some }n\in C\subseteq[n],\\
+ 1+R(T(f)),&\text{otherwise}.
+ \end{cases}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:peeling}, each nonempty list loses its first and last
+endpoints. After $t$ updates, a list initially containing $2r$ labels
+retains exactly its middle $2\max\{r-t,0\}$ labels, with their two
+endpoint roles alternating. Thus it disappears at exactly time $r$.
+At every earlier step a strict pair remains; that list changes because
+its two distinct outside endpoints are removed. Hence $g$ reaches an
+anchor-only state at exactly time $R(g)$.
+
+An anchor-only state has $W=Z=C$ and is $e_C$, which is fixed by
+\eqref{eq:update}. Every source reaches the image after one step, so
+all orbits stabilize and no nontrivial cycle exists. The anchors in that
+first image are $X\cap(Y\cup\{n\})$ by~\eqref{eq:anchors}; they
+never change. This proves~\eqref{eq:terminal}. A fixed initial source
+has entrance time zero. Every other source needs its initial step and
+then the exact remaining image-state time, proving~\eqref{eq:time}.
+\end{proof}
+
+\begin{theorem}\label{thm:sharp}
+For $H_n=\max_{f\in\On}\tau(f)$,
+\[
+ H_1=0,\qquad H_n=\left\lceil\frac n2\right\rceil\quad(n\ge2).
+\]
+\end{theorem}
+
+\begin{proof}
+A strict list of $r$ pairs uses $2r$ distinct labels below its following
+anchor. Therefore $R(g)\le\lfloor(n-1)/2\rfloor$ for every image
+state. Theorem~\ref{thm:time} gives
+$H_n\le1+\lfloor(n-1)/2\rfloor=\lceil n/2\rceil$ for $n\ge2$.
+
+For $n=2m+1\ge3$, take
+\[
+ X=\{2,4,\ldots,2m,n\},\qquad
+ Y=\{1,3,\ldots,2m-1,n\}.
+\]
+The first image of $f_{Y,X}$ consists of the $m$ strict pairs
+$(1,2),(3,4),\ldots,(2m-1,2m)$ followed by $(n,n)$.
+The source is not fixed: its value at $1$ is $1$, whereas its successor's
+value there is $2$. Thus its entrance time is $1+m$.
+
+For $n=2m\ge2$, take
+\[
+ X=\{2,4,\ldots,2m\},\qquad Y=\{1,3,\ldots,2m-1\}.
+\]
+Completing $Y$ by $n$ makes the last two second-projection values merge
+under $e_X$. The first image has $m-1$ strict pairs
+$(1,2),\ldots,(2m-3,2m-2)$ and the anchor $(n,n)$.
+Again the value at $1$ changes from $1$ to $2$, so the entrance time is
+$m$. This includes $m=1$: the first image is already the constant-2
+projection. Finally, at $n=1$ the sole map is fixed.
+\end{proof}

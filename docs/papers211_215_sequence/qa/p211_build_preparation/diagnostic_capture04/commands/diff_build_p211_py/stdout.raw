@@ -1,0 +1,74 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/history/diagnostic01_source/build_p211.py	2026-09-08 17:50:31.659556459 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/build_p211.py	2026-09-08 17:55:51.392395964 +0800
+@@ -18,6 +18,28 @@
+               'launch_build.py', 'static_checks.py')
+ 
+ 
++def configuration_key(binding, lock):
++    """Bind unset-HOME relative TeX roots to the actual future cold cwd."""
++    cold = Path(binding['output']) / 'inner/source_only'
++    roles = lock['cwd_relative_absence_roles']
++    expected_paths = set()
++    for role, record in roles.items():
++        relative = Path(record['relative'])
++        require(relative.parts and not relative.is_absolute() and '..' not in relative.parts and
++                record['required_state'] == 'ABSENT', 'Unsupported relative configuration role')
++        expected_paths.add(str(cold / relative))
++    bound = binding['cwd_relative_configuration']
++    require(set(bound) == expected_paths, 'Root must bind every future cwd-relative configuration spelling')
++    for path, expected in bound.items():
++        require(expected == entry(path) and expected['present'] is False and
++                expected['symlink'] is False and expected['resolved'] == path,
++                'Future source-only user search root must be pinned physically absent')
++    require(not (set(bound) & set(lock['selector_specs'])), 'Conflicting configuration roles')
++    specs = {**lock['selector_specs'], **{p: {'members': False} for p in bound}}
++    expected = {**lock['entries'], **bound}
++    return specs, expected
++
++
+ def binding_inputs(binding_path, role='inner', outer_started=False):
+     """No creation, process or source copy before exact root binding checks."""
+     require(binding_path.is_absolute() and binding_path.resolve() == binding_path,
+@@ -60,8 +82,9 @@
+     receipt = Path(binding['root_read_receipt']['path'])
+     require(receipt.is_absolute() and receipt.resolve() == receipt and
+             pin(receipt) == binding['root_read_receipt']['pin'], 'Pinned actual root-read receipt')
+-    before = snapshot(lock['selector_specs'])
+-    require(before == lock['entries'], 'Prelocked candidate/configuration key changed')
++    configuration_specs, expected_configuration = configuration_key(binding, lock)
++    before = snapshot(configuration_specs)
++    require(before == expected_configuration, 'Prelocked candidate/configuration key changed')
+     require(dict(os.environ) == ENV8 and Path(sys.executable).resolve() == PYTHON and
+             sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode and
+             not sys.flags.optimize and sys.pycache_prefix == str(out / ('unused_' + role + '_cache')) and
+@@ -231,13 +254,18 @@
+         actual_queries = {}
+         for key, value in lock['queries'].items():
+             if key.startswith('var_'):
+-                argv = ['/usr/bin/kpsewhich', '-var-value=' + key[4:]]
++                variable = key[4:]
++                program = 'bibtex' if variable in ('BIBINPUTS', 'BSTINPUTS') else 'pdflatex'
++                argv = ['/usr/bin/kpsewhich', '--progname=' + program, '--engine=pdftex',
++                        '-var-value=' + variable]
+             elif key == 'expanded_TEXMF':
+-                argv = ['/usr/bin/kpsewhich', '-expand-path=$TEXMF']
++                argv = ['/usr/bin/kpsewhich', '--progname=pdflatex', '--engine=pdftex', '-expand-path=$TEXMF']
+             else:
+                 continue
++            require(lock['query_commands'][key] == argv, 'Exact effective configuration query binding')
+             row, raw = command('config_' + key, argv, cold, expected=(0, 1))
+-            require(row['successful'] and raw.decode().strip() == value, 'Effective TeX configuration changed')
++            require(row['successful'] and raw.decode().strip().replace(str(cold), '{COMMAND_CWD}') == value,
++                    'Effective TeX configuration changed')
+             actual_queries[key] = raw.decode().strip()
+         write_new(out / 'EFFECTIVE_CONFIGURATION.json', actual_queries)
+         for label, argv in FOUR_COMMANDS:
+@@ -331,7 +359,7 @@
+         ('SOURCES_AFTER', physical_sources, binding['source_pins']),
+         ('COPIED_SOURCES_AFTER', lambda: physical_sources(cold), initial),
+         ('ORIGINALS_AFTER', lambda: {p: pin(p) for p in originals}, originals),
+-        ('CONFIGURATION_AFTER', lambda: snapshot(lock['selector_specs']), before_config)):
++        ('CONFIGURATION_AFTER', lambda: snapshot(configuration_key(binding, lock)[0]), before_config)):
+         try:
+             value = collect()
+             write_new(out / (name + '.json'), value)

@@ -1,0 +1,118 @@
+--- preparation01/launch.py
++++ cancellation_delta01/launch.py
+@@ -12,7 +12,7 @@
+ import traceback
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+-SELF = ROOT / 'docs/papers211_215_sequence/qa/private_checkpoint_d01_preparation01/launch.py'
++SELF = ROOT / 'docs/papers211_215_sequence/qa/private_checkpoint_d01_cancellation_delta01/launch.py'
+ ARGV = ['/usr/bin/ssh', '-V']
+ ENV5 = ('HOME', 'USER', 'LOGNAME', 'SSH_AUTH_SOCK', 'SSH_AGENT_PID')
+ FIXED_ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C', 'TZ': 'UTC'}
+@@ -141,33 +141,29 @@
+ def capture(environment, directory_fd):
+     native = {'argv': ARGV, 'cwd': str(ROOT), 'start_new_session_requested': True,
+               'pid': None, 'returncode': None, 'pipes_eof': False, 'timed_out': False,
+-              'cancelled_or_exception': False, 'signal_events': [], 'wait_events': []}
+-    stdout, stderr, proc = b'', b'', None
+-    try:
+-        proc = subprocess.Popen(ARGV, cwd=ROOT, env=environment, stdin=subprocess.DEVNULL,
+-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+-                                shell=False, close_fds=True, start_new_session=True)
+-        native['pid'] = proc.pid
+-        origin = time.monotonic()  # Budget starts at successful Popen return, not product startup.
+-        native['budget_origin_monotonic'] = origin
+-        try:
+-            save(directory_fd, 'SPAWN.json', {'pid': proc.pid, 'start_new_session_requested': True,
+-                 'budget_origin_monotonic': origin, 'native_closed': False})
+-        except BaseException as error:
+-            # A receipt-write failure must not skip this child's bounded cleanup.
+-            native['cancelled_or_exception'] = True
+-            native['spawn_receipt_error_private'] = repr(error)
+-        for phase, offset, sig in (('normal', 14, None), ('term', 17, signal.SIGTERM),
+-                                  ('kill', 19, signal.SIGKILL), ('drain', 20, None)):
++              'cancelled_or_exception': False, 'signal_events': [], 'wait_events': [],
++              'signal_claims': [], 'recovery_entered': False}
++    stdout, stderr, proc, origin = b'', b'', None, None
++    phase_index = 0
++    phases = (('normal', 14, None), ('term', 17, signal.SIGTERM),
++              ('kill', 19, signal.SIGKILL), ('drain', 20, None))
++
++    def handle_remaining():
++        nonlocal stdout, stderr, phase_index
++        while phase_index < len(phases):
++            phase, offset, sig = phases[phase_index]
+             if time.monotonic() >= origin + 20:
+                 native['timed_out'] = True
+                 break
+-            if sig is not None:
++            if sig is not None and phase not in native['signal_claims']:
++                # Claim before dispatch: an interrupted/unknown attempt is never repeated.
++                native['signal_claims'].append(phase)
+                 owned_signal(proc, sig, native['signal_events'])
+             remaining = origin + offset - time.monotonic()
+             if remaining <= 0:
+                 native['timed_out'] = True
+                 native['wait_events'].append({'phase': phase, 'result': 'NO_TIME_REMAINING'})
++                phase_index += 1
+                 continue
+             try:
+                 stdout, stderr = proc.communicate(timeout=remaining)
+@@ -175,6 +171,7 @@
+                 if time.monotonic() > origin + offset:
+                     native['timed_out'] = True
+                 native['wait_events'].append({'phase': phase, 'result': 'COMMUNICATE_COMPLETE'})
++                phase_index = len(phases)
+                 break
+             except subprocess.TimeoutExpired as error:
+                 native['timed_out'] = True
+@@ -183,19 +180,42 @@
+                 if error.stderr is not None:
+                     stderr = error.stderr
+                 native['wait_events'].append({'phase': phase, 'result': 'TIMEOUT'})
+-            except BaseException as error:
+-                native['cancelled_or_exception'] = True
+-                native['wait_events'].append({'phase': phase, 'result': 'EXCEPTION',
+-                    'error_type': type(error).__name__, 'error_private': str(error)})
++            phase_index += 1
++        native['phase_cursor_after'] = phase_index
+         native['returncode'] = proc.poll()
+         native['elapsed_after_spawn_seconds'] = time.monotonic() - origin
+         if native['elapsed_after_spawn_seconds'] > 20:
+             native['timed_out'] = True
+-    except BaseException as error:
++
++    try:
++        proc = subprocess.Popen(ARGV, cwd=ROOT, env=environment, stdin=subprocess.DEVNULL,
++                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
++                                shell=False, close_fds=True, start_new_session=True)
++        native['pid'] = proc.pid
++        origin = time.monotonic()  # Budget starts at successful Popen return, not product startup.
++        native['budget_origin_monotonic'] = origin
++        try:
++            save(directory_fd, 'SPAWN.json', {'pid': proc.pid, 'start_new_session_requested': True,
++                 'budget_origin_monotonic': origin, 'native_closed': False})
++        except BaseException as error:
++            native['cancelled_or_exception'] = True
++            native['spawn_receipt_error_private'] = repr(error)
++        handle_remaining()
++    except BaseException:
+         native['cancelled_or_exception'] = True
+         native['exception_private'] = traceback.format_exc()
+-        if proc is not None:
+-            native['returncode'] = proc.poll()
++        if proc is not None and origin is not None:
++            native['recovery_entered'] = True
++            native['phase_cursor_at_recovery'] = phase_index
++            try:
++                # Same child, origin, cursor, signal claims and cumulative byte buffers.
++                handle_remaining()
++            except BaseException:
++                # A second failure during recovery is retained, never treated as closure.
++                native['recovery_exception_private'] = traceback.format_exc()
++                native['phase_cursor_unclosed'] = phase_index
++        elif proc is not None:
++            native['returncode'] = proc.poll()  # No claim of atomic Popen/origin acquisition.
+     finally:
+         if proc is not None:
+             for stream in (proc.stdout, proc.stderr):

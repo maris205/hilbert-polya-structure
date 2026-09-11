@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node -e 'const fs=require(\"fs\"),a=require(\"assert/strict\"),c=require(\"crypto\"),p=require(\"path\");const root=\"/root/autodl-tmp/symbolic_dynamics\",own=root+\"/docs/papers211_215_sequence/qa/control_before_p212_discovery_accepted\";const map=JSON.parse(fs.readFileSync(own+\"/MAPPING.json\"));for(const k of map.mapping){const b=fs.readFileSync(k.physical_copy);a.equal(b.length,k.bytes);a.equal(c.createHash(\"sha256\").update(b).digest(\"hex\"),k.sha256);}const files=[root+\"/docs/papers211_215_sequence/PIPELINE_STATE.md\",root+\"/SYMBOLIC_DYNAMICS_STATE.md\"];const pins={};for(const f of files){const b=fs.readFileSync(f),s=b.toString();a.ok(s.includes(\"P211_ROUND2_EXECUTED_RECEPTION_PENDING_P212_DISCOVERY_ACCEPTED_INITIAL_BINDING_PREPARING\"));for(const fragment of [\"p212_runtime_discovery_root_reception01/RECEPTION.md\",\"control_before_p212_discovery_accepted/MAPPING.json\",\"p211_round2_binding_root01/PACKAGING_RESULT.json\"]){const match=[...s.matchAll(/\\]\\(([^)]+)\\)/g)].find(m=>m[1].endsWith(fragment));a.ok(match);a.ok(fs.existsSync(p.resolve(p.dirname(f),match[1])));}pins[f]={bytes:b.length,sha256:c.createHash(\"sha256\").update(b).digest(\"hex\")};}console.log(JSON.stringify({status:\"PASS_CHANGED_INDEX_SCOPE_NEW_LINKS_AND_PHYSICAL_OLD_CONTROLS\",current_index_pins:pins,paper_completion_claimed:false}));'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 1800
+  },
+  "result": {
+    "chunk_id": "cec460",
+    "wall_time_seconds": 0.00000513,
+    "exit_code": 0,
+    "original_token_count": 116,
+    "output": "{\"status\":\"PASS_CHANGED_INDEX_SCOPE_NEW_LINKS_AND_PHYSICAL_OLD_CONTROLS\",\"current_index_pins\":{\"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/PIPELINE_STATE.md\":{\"bytes\":39590,\"sha256\":\"8c00a71e6e7339b1612e6ea4dc720efd445215493569ad91f3f7ff34cce40f98\"},\"/root/autodl-tmp/symbolic_dynamics/SYMBOLIC_DYNAMICS_STATE.md\":{\"bytes\":55695,\"sha256\":\"3bfb92f6d88ac2cab119b858d1842b2ad7128ecf6ffb92004d89aec30a0b92dc\"}},\"paper_completion_claimed\":false}\n"
+  }
+}

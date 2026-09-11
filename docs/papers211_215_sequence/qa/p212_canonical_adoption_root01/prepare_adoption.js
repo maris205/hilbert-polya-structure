@@ -1,0 +1,35 @@
+'use strict';
+// Root preparation only: exact documentary/runtime precheck and one new
+// binding. Does not invoke the adoption helper or any scientific producer.
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),a=require('assert').strict,cp=require('child_process');
+const guard=require('./guard_runtime.js');
+const ROOT='/root/autodl-tmp/symbolic_dynamics',QA=ROOT+'/docs/papers211_215_sequence/qa',GATE=QA+'/p212_canonical_adoption_root01';
+const PREP=QA+'/p212_canonical_adoption_preparation01',AUD=QA+'/p212_runtime_discovery_independent01',DISC=QA+'/p212_runtime_discovery01',REC=GATE+'/source_reception02',PAPER=ROOT+'/papers/212-closed-pointer-orbits';
+const ENV={PATH:'/usr/bin:/bin',LANG:'C.UTF-8',LC_ALL:'C.UTF-8',TZ:'UTC'},inputs={};let checks=0;
+const ok=(v,l)=>{checks++;a(v,l)},eq=(x,y,l)=>{checks++;a.deepEqual(x,y,l)};
+const identity=b=>({bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')});
+function read(p,k){ok(path.isAbsolute(p)&&path.normalize(p)===p,'literal input');const ls=fs.lstatSync(p);ok(fs.statSync(p).isFile(),'regular bytes');const raw=fs.readFileSync(p),key={...identity(raw),resolved:fs.realpathSync(p),symlink:ls.isSymbolicLink()?fs.readlinkSync(p):null};if(k)eq(key,k,'entire original key');if(inputs[p])eq(key,inputs[p],'unchanged repeated input');inputs[p]=key;return {raw,key};}
+const json=p=>JSON.parse(read(p).raw);
+function absent(p){try{fs.lstatSync(p);throw Error('lexists '+p);}catch(e){eq(e.code,'ENOENT');}}
+function write(n,v){const raw=Buffer.isBuffer(v)?v:Buffer.from(JSON.stringify(v,null,2)+'\n');fs.writeFileSync(GATE+'/'+n,raw,{flag:'wx',mode:0o600});}
+function flatSeal(base,count){const seal=read(base+'/SHA256SUMS').raw.toString();ok(seal.endsWith('\n'));const names=[];for(const line of seal.trimEnd().split('\n')){const m=/^([a-f0-9]{64})  ([^/]+)$/.exec(line);ok(m&&m[2]!=='SHA256SUMS'&&!names.includes(m[2]));names.push(m[2]);eq(read(base+'/'+m[2]).key.sha256,m[1]);}eq(names.length,count);eq(fs.readdirSync(base).sort(),[...names,'SHA256SUMS'].sort());}
+eq(process.cwd(),ROOT);eq({...process.env},ENV);for(const p of ['BINDING.json','INPUTS_AT_BINDING.json','BINDING_RESULT.json','RUNTIME_AT_BINDING.json','capture01','adoption01','never_created_adoption_cache'].map(n=>GATE+'/'+n).concat(PAPER+'/CANONICAL.json',PAPER+'/canonical.stdout.json'))absent(p);
+flatSeal(PREP,15);flatSeal(REC,17);flatSeal(AUD,9);
+const rec=json(REC+'/RESULT.json');eq(rec.status,'PASS_ROOT_P212_CANONICAL_ADOPTION_SOURCE_RECEPTION');eq(rec.checks,16218);eq(JSON.parse(json(REC+'/ROOT_NATIVE.json').result.output),rec);eq(json(REC+'/ROOT_NATIVE.json').result.exit_code,0);
+for(const[p,k]of Object.entries(json(REC+'/INPUTS_AFTER.json')))read(p,k);
+for(const n of ['AUTHORITY.md','guard_runtime.js','adoption_capture.js','prepare_adoption.js','SOURCE_CLOSING_NATIVE.json','SOURCE_SEAL_NATIVE.json'])read(GATE+'/'+n);
+const pre={argv:['/usr/bin/node',AUD+'/receive_discovery.js'],cwd:ROOT,environment:ENV,stdin:'DEVNULL',timeout_seconds:60,started_epoch:Date.now()/1000};write('PRECHECK_ATTEMPT.json',pre);
+const r=cp.spawnSync(pre.argv[0],pre.argv.slice(1),{cwd:ROOT,env:ENV,stdio:['ignore','pipe','pipe'],timeout:60000,maxBuffer:8*1024*1024});const stdout=r.stdout||Buffer.alloc(0),stderr=r.stderr||Buffer.alloc(0);write('PRECHECK.stdout.raw',stdout);write('PRECHECK.stderr.raw',stderr);write('PRECHECK_NATIVE.json',{...pre,ended_epoch:Date.now()/1000,exit_code:r.status,signal:r.signal,error:r.error?{code:r.error.code,message:r.error.message}:null,stdout:identity(stdout),stderr:identity(stderr)});ok(!r.error&&r.signal===null&&r.status===0&&stderr.length===0,'actual whole received discovery checker passed');
+const original=json(AUD+'/CHECKS_NATIVE.json').records[0];eq(original.result.exit_code,0);eq(stdout,Buffer.from(original.result.output),'complete original metadata stdout unchanged');const passed=JSON.parse(stdout);eq(passed.checks,109613);eq(passed.input_files,228);eq(passed.state_paths,336);for(const[p,k]of Object.entries(passed.input_pins))read(p,k);
+const lockPath=DISC+'/RUNTIME_LOCK.json',lock=json(lockPath);eq(identity(read(lockPath).raw),{bytes:146698,sha256:'29665bed1c5c177366a706fa3bdbfe19e22478ac6d6d936e8c51f3c140bcee8b'});
+const runtime=guard(lock,read);write('RUNTIME_AT_BINDING.json',runtime);read(GATE+'/RUNTIME_AT_BINDING.json');
+for(const n of ['PRECHECK_ATTEMPT.json','PRECHECK_NATIVE.json','PRECHECK.stdout.raw','PRECHECK.stderr.raw'])read(GATE+'/'+n);
+const disabled=json(PREP+'/ADOPTION.disabled.json'),binding=structuredClone(disabled);eq(disabled.approved,false);
+const inv=json(PREP+'/WORKSPACE_INPUTS.json');for(const[d,t]of Object.entries(inv.trees))for(const[n,k]of Object.entries(t.files))read(d+'/'+n,k);for(const[p,k]of Object.entries(inv.files))read(p,k);
+for(const p of Object.keys(inputs))read(p);write('INPUTS_AT_BINDING.json',inputs);
+binding.approved=true;binding.root_source_reception={path:REC+'/RECEPTION.md',...inputs[REC+'/RECEPTION.md']};binding.authority_record={path:GATE+'/AUTHORITY.md',...inputs[GATE+'/AUTHORITY.md']};binding.reviewed=Object.fromEntries(Object.keys(disabled.reviewed).map(k=>[k,true]));
+binding.pending_obligations=['One separately invoked digest-bound root capture of the fixed helper, then complete actual raw/adoption/runtime/native reception','No automatic retry/overwrite/cleanup on any partial failure','Canonical accepted adoption must precede a separate strict-pair authority; no producer or pair authorized here'];
+binding.root_capture={controller:{path:GATE+'/adoption_capture.js',key:inputs[GATE+'/adoption_capture.js']},guard:{path:GATE+'/guard_runtime.js',key:inputs[GATE+'/guard_runtime.js']},input_key:{path:GATE+'/INPUTS_AT_BINDING.json',identity:identity(fs.readFileSync(GATE+'/INPUTS_AT_BINDING.json'))},runtime_lock:{path:lockPath,identity:identity(read(lockPath).raw)},timeout_seconds:120,argv_without_binding_digest_and_size:['/usr/bin/python3.10','-I','-S','-B','-X','pycache_prefix='+GATE+'/never_created_adoption_cache',PREP+'/adopt_canonical.py','--adopt-once',GATE+'/BINDING.json']};
+const reverse=structuredClone(binding);for(const k of ['approved','root_source_reception','authority_record','reviewed','pending_obligations'])reverse[k]=structuredClone(disabled[k]);delete reverse.root_capture;eq(reverse,disabled,'whole exact reverse delta');
+for(const p of [GATE+'/capture01',GATE+'/adoption01',GATE+'/never_created_adoption_cache',PAPER+'/CANONICAL.json',PAPER+'/canonical.stdout.json'])absent(p);
+write('BINDING.json',binding);const result={status:'ROOT_P212_EXCLUSIVE_ADOPTION_BINDING_READY_NOT_EXECUTED',checks,input_byte_keys:Object.keys(inputs).length,runtime_guard_checks:runtime.checks,original_discovery_checks:109613,original_discovery_input_files:228,original_discovery_state_paths:336,complete_discovery_stdout:identity(stdout),binding:{path:GATE+'/BINDING.json',...identity(fs.readFileSync(GATE+'/BINDING.json'))},canonical_absent:true,alias_absent:true,helper_executions:0,producer_invocations:0,pair_executions:0};write('BINDING_RESULT.json',result);process.stdout.write(JSON.stringify(result)+'\n');

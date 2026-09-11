@@ -1,0 +1,351 @@
+                     Terminal states and one-step fibres of
+                        receiver-limited cyclic transfer
+
+
+
+                                                Abstract
+         We consider labelled nonnegative integer states on a cycle, with simultaneous current
+     min(ai , ai+1 ) from site i to site i + 1. The current is limited by the receiver’s mass, not
+     its vacancy. Every orbit reaches a fixed point: after subtraction of the invariant minimum,
+     each original positive run deposits its mass at its original right endpoint. The sharp worst
+     fixation time on states of total mass N is zero for cycles of length at most two or N = 0, is
+     ⌈log2 N ⌉ for length three and N ≥ 1, and is N − 1 for longer cycles and N ≥ 1. We also give
+     every target’s one-step sources through a disjoint comparison-word parametrization. Each
+     word reduces to forced dyadic recursions and independent integer intervals. This yields an
+     exact product for fixed-target fibres and proves that the largest one-step fibre has growth
+     Θn (N ⌊n/3⌋ ) at each fixed cycle length n ≥ 3. All statements are proved deductively; a
+     separately declared finite verification protocol is not used to extrapolate the conclusions.
+
+
+1    The rule and the questions
+For integers n ≥ 1 and N ≥ 0, let
+                                                        n−1
+                                         (                             )
+                                                        X
+                                Xn,N =     a ∈ Zn≥0 :         ai = N       .
+                                                        i=0
+
+Site labels and cyclic orientation are fixed, and every index is read modulo n. Put
+
+                    qi (a) = min(ai , ai+1 ),     F (a)i = ai − qi (a) + qi−1 (a).                   (1)
+
+All currents use the old state. Since 0 ≤ qi (a) ≤ ai , every updated coordinate is nonnegative;
+summation telescopes, so F maps Xn,N to itself. There is no scheduler, hidden history or
+quotient by rotation. The rule is an abstract finite deterministic system; no chemical realization
+is asserted.
+    Two questions organize the note. Where does each initial state end, and how many labelled
+sources produce a prescribed target in one step? The first answer uses permanent zero separators
+after subtraction of the minimum. The second uses the unique weak-ascent/strict-descent word
+of a source. The temporal description includes a sharp worst clock (Theorem 3); the source
+parametrization includes every target, not only fixed targets (Theorem 4). Their combination
+gives an exact fixed-target product and the largest-fibre exponent (Theorem 6).
+
+Relation to conservative rules. Conservation by local currents is background structure.
+For finite-alphabet one-dimensional cellular automata, Boccara and Fukś [1] give a local char-
+acterization of number conservation. That characterization is not a terminal-state or all-target
+
+                                                   1
+inverse formula for (1); its finite-alphabet setting also differs from the present family over all
+masses N .
+    Receiver mass must be distinguished from receiver vacancy. In the ultradiscrete Burgers
+rule studied by Nishinari and Takahashi [3], the corresponding current has the form
+
+                                      min(M, ai , L − ai+1 ),
+
+with a capacity L and an optional current bound M ; the version without the current bound
+retains L−ai+1 . Equation (1) instead uses ai+1 , with no fixed site-capacity parameter. Fukuda,
+Segawa and Watanabe [2] derive related discrete and ultradiscrete Burgers variants through
+correlated random walks; the examined preprint formulation likewise uses a vacancy term and
+an additional evolving variable. These literal comparisons do not establish nonconjugacy under
+arbitrary encodings, or priority for the current.
+    Permanent-zero arguments, ordered piecewise-linear chambers, dyadic integrality tests and
+interval products are elementary tools here. The claims concern their fully evaluated conse-
+quences for (1), with scope and exclusions stated in Section 5.
+
+
+2    Terminal states and sharp fixation time
+For a state a, write m = mini ai and r = a − m1. A positive run of r is a maximal cyclic
+interval of positive coordinates. Unless r = 0, its zero coordinates separate these runs. The
+right endpoint of a run is its last positive site in the chosen orientation.
+
+Lemma 1. The minimum is invariant under F . A zero coordinate remains zero, and
+
+                             F (a + c1) = F (a) + c1       (c ∈ Z≥0 ).
+
+Proof. Adding c to every coordinate adds c to every current, giving the displayed identity. If
+ai = 0, then qi−1 = qi = 0, so F (a)i = 0. The residual r is nonnegative and has a zero, which
+persists. Therefore mini F (r)i = 0, and translation gives mini F (a)i = m.
+
+Proposition 2. Every orbit fixes. Its terminal residual has, at each original run’s original
+right endpoint, the total mass of that run, and is zero elsewhere. The terminal state is obtained
+by adding m back. In particular the fixed states, and also all recurrent states, are precisely
+
+                            (ai − m)(ai+1 − m) = 0         for every i.                       (2)
+
+Proof. Work with r. Original zero boundaries persist and carry no current, so each original run
+interval keeps its total mass M . If both ri−1 and ri are positive, then
+
+                                   F (r)i ≥ min(ri−1 , ri ) > 0.
+
+A positive site can therefore disappear only at the first site of its current run. With its pre-
+decessor zero, it disappears exactly when its mass is at most the next site’s mass. Thus a run
+cannot split internally, and can lose at most one positive site per update. It cannot acquire a
+site across an existing zero.
+    Let e be the original right endpoint, initially of mass b > 0. It never disappears: its next
+site remains zero, and hence
+                                   F (r)e = re + min(re−1 , re ).
+
+                                                2
+While its run has at least two sites, this increases re by at least one. Since re ≤ M , there are at
+most M − b nonfixed rounds in that run. The run must reduce to the single mass M at e, which
+is fixed. Original runs are separated throughout, so the global fixation time is the maximum of
+their fixation times.
+     If (2) holds, all residual currents vanish. Conversely a residual run of length at least two
+makes its endpoint increase, so the state is not fixed. Uniform states correspond to r = 0.
+Every orbit has just been shown to fix; hence a recurrent state must itself be fixed.
+
+    Define τ (a) to be the least t ≥ 0 such that F t (a) is fixed, and put H(n, N ) = maxa∈Xn,N τ (a).
+Theorem 3. For the whole labelled carrier,
+                                   
+                                   0,
+                                                       n ≤ 2 or N = 0,
+                       H(n, N ) = ⌈log2 N ⌉,            n = 3, N ≥ 1,                              (3)
+                                   
+                                     N − 1,             n ≥ 4, N ≥ 1.
+                                   
+
+Proof. For n = 1 the only current cancels; for n = 2 the two currents are equal. Thus F is the
+identity in both cases. The case N = 0 is immediate. For n ≥ 3, Proposition 2 bounds every
+nontrivial run’s clock by M − b ≤ N − 1.
+    For n = 3, a nontrivial residual run has length two. Write its masses as (A, B), followed by
+zero, with A, B > 0 and M = A + B. Its update is
+                                                                   
+                            (A, B) 7−→ (A − B)+ , B + min(A, B) .
+
+Induction gives, including all times after saturation,
+
+                            At = (M − 2t B)+ ,        Bt = min(2t B, M ).                          (4)
+
+Indeed Bt+1 = min(2Bt , M ) and At+1 = M −Bt+1 . The exact clock is the least t with 2t B ≥ M ,
+at most ⌈log2 N ⌉. For N ≥ 2, the state (N − 1, 1, 0) attains this bound. For N = 1, every state
+is fixed and the stated value is zero.
+     For n ≥ 4 and N ≥ 3, use (N − 2, 1, 1, 0, . . . , 0). At times 0 ≤ t ≤ N − 2, its first three
+coordinates are
+                                       (N − 2 − t, 1, 1 + t).
+While the first coordinate is positive, the middle coordinate receives and sends one, and the
+last receives one. At time N − 2 the state has the pair (1, N − 1) at its last two occupied
+positions; one further update gives the single mass N . Thus the clock is N − 1. For N = 2, use
+(1, 1, 0, . . . , 0), whose clock is one. For N = 1, all states are fixed. These witnesses attain every
+remaining branch of (3).
+
+
+3    Every one-step source
+For n ≤ 2, the identity rule gives one source for each target. Assume n ≥ 3 and fix y ∈ Xn,N .
+A source a has the unique comparison word
+
+                       si = 1 ⇐⇒ ai ≤ ai+1 ;          si = 0 ⇐⇒ ai > ai+1 .                        (5)
+
+Equality belongs only to 1. The all-zero word is impossible on a cycle. The all-one word forces
+a uniform source, contributing one source if y is uniform and none otherwise.
+
+                                                  3
+    For a mixed word, a valley v has sv−1 = 0, sv = 1. Let p be the next peak, where sp−1 =
+1, sp = 0, and w the next valley. Unwrap the indices along v, . . . , p, . . . , w, and put r = p−v ≥ 1,
+d = w − p ≥ 1. Apply the construction to every such block once around the labelled cycle. This
+convention does not quotient by rotation and is independent of the valley used to start reading.
+    Substitution in (1) gives all four local equations:
+
+                                     si−1 si     F (a)i
+                                       0  1        ai
+                                       1  1       ai−1       .                                      (6)
+                                       0  0    2ai − ai+1
+                                       1  0 ai + ai−1 − ai+1
+
+For example, the 0, 0 case has incoming current ai and outgoing current ai+1 . Ties satisfy the
+table with convention (5).
+
+Valleys and strict descent interiors. First set Av = yv at every valley. In each zero-run,
+work backwards:
+                               yj + Aj+1
+                         Aj =            ,   j = w − 1, w − 2, . . . , p + 1.                 (7)
+                                   2
+Reject the word if any forced value is nonintegral or negative, or if Aj ≤ Aj+1 . When d = 1,
+there is no interior to force and Ap+1 = Aw is already assigned. These tests enforce every strict
+descent edge except the one leaving the peak.
+
+A one-edge ascent. If r = 1, force
+
+                           Ap = yp − Av + Ap+1 ,         Av ≤ Ap > Ap+1 .                           (8)
+
+Failure of either comparison rejects the word. The comparisons also ensure nonnegativity. This
+block leaves no choice.
+
+A longer ascent. For r ≥ 2, require
+
+                             yv+1 = yv ,      yv+1 ≤ yv+2 ≤ · · · ≤ yp−1 ,                          (9)
+
+and assign Aj = yj+1 for v ≤ j ≤ p − 2. The equality makes the valley assignment consistent.
+For r = 2, the order chain has one term and is vacuous; the displayed equality still applies. The
+remaining coordinates are the prepeak and peak. Define
+                                                                         
+                                                               Sp
+                  Sp = yp + Ap+1 , Lp = yp−1 , Up = min             , yp − 1 .                (10)
+                                                                2
+
+The expression yp − 1 subtracts the integer one; it is not yp−1 . Choose any integer tp ∈ [Lp , Up ]
+and put
+                                 ap−1 = tp ,     ap = Sp − tp .                               (11)
+The last two weak ascent comparisons give Lp ≤ tp and 2tp ≤ Sp . Strict descent from the peak
+gives Sp − tp > Ap+1 , equivalently tp ≤ yp − 1. Thus (10) gives exactly all the comparisons at
+these coordinates, including the permitted tie tp = ap . All coordinates are nonnegative, since
+Lp ≥ 0 and ap > Ap+1 ≥ 0.
+
+                                                   4
+    Let Ws (y) = 0 if any forced test fails. Otherwise set
+                                          Y
+                            Ws (y) =             max(0, Up − Lp + 1),                         (12)
+                                     one-runs of s
+                                         r≥2
+
+with empty product one. An empty interval makes the weight zero.
+Theorem 4. For every target y ∈ Xn,N with n ≥ 3,
+                                                             X
+                           |F −1 (y)| = 1{y uniform} +                   Ws (y).              (13)
+                                                           s∈{0,1}n
+                                                         s̸=0n , s̸=1n
+
+Each positive summand supplies all its sources explicitly through (7)–(11). Within a word the
+interval choices are independent; between words the source sets are disjoint.
+Proof. For necessity, take an actual source and its unique word (5). The constant cases were
+handled above. In a mixed word, the valley line of (6) forces Av = yv . The descent-interior
+line forces (7), with all tests satisfied by the actual source. A one-edge ascent forces (8). For a
+longer ascent, each ascent-interior line forces the shifted target assignments and (9). The peak
+line forces the sum ap−1 + ap = Sp . The actual comparisons then force precisely the interval
+(10). Thus every source provides an admitted word and one integer from each of its intervals.
+    For sufficiency, take an admitted word and independent integers from its nonempty intervals.
+Valleys, descent interiors, ascent interiors, prepeaks and peaks cover the cycle. Their coordinate
+roles are disjoint, except for the explicitly consistent valley assignment in a longer ascent. The
+case r = 1 uses its valley directly and has no free prepeak; d = 1 uses the next valley directly
+and has no descent interior. Thus every coordinate is assigned, including blocks crossing index
+zero.
+    The tests give exactly weak ascent on the 1-edges and strict descent on the 0-edges, with
+all entries nonnegative. The resulting vector therefore has precisely the specified word, not
+merely a word compatible with some   P ties.PEvery line of (6) has target value yi , so F (a) = y.
+Conservation in (1) then implies i ai = i yi = N : no additional mass condition is missing.
+Hence the vector belongs to Xn,N .
+    Different interval choices differ at a prepeak coordinate. Different words cannot describe
+the same source because (5) is unique. These facts prove the bijection, independence and
+multiplicities in (13).
+
+    There are at most 2n − 2 mixed words and O(n) arithmetic operations per word. Conse-
+quently (13) evaluates the fibre cardinality using O(n2n ) arithmetic operations; this is not a
+bit-cost bound independent of N , nor the cost of printing every source. No search over mass
+compositions or unbounded currents remains inside a weight. In particular a target is in the
+image exactly when (13) is positive; no linear-time image test is asserted.
+
+
+4    Fixed-target fibres and largest-fibre degree
+Let y be a nonuniform fixed target. Subtract m = mini yi . By Proposition 2, the positive
+residual coordinates are isolated spikes. Write their masses as pe at spike sites e, and let de ≥ 1
+be the number of consecutive zeros immediately preceding e, back to the previous spike. For a
+sole spike, de = n − 1.
+
+                                                     5
+Proposition 5. A uniform target has exactly one source. For a nonuniform fixed target,
+                                          Y
+                           |F −1 (y)| =        (⌊pe /2⌋ + 1) .                         (14)
+                                            {e: de ≥2}
+
+Proof. Any source has the same minimum m by Lemma 1, so work with residuals. If y is
+uniform, a source with minimum m and total mass nm must be the uniform vector.
+     For a nonuniform target, consider a positive source run. In one step, it can lose only its
+first site and at most one site, by the proof of Proposition 2. Since the output has only isolated
+positive sites, the run must have length one or two. Its right endpoint remains positive and
+must be one of the target spikes. Conversely every target spike must arise in this way: a zero
+source site remains zero, and a nonempty source run has a positive output at its endpoint.
+     A two-site run ending at e must have masses (h, pe − h) at e − 1, e. Its head disappears
+exactly when 0 < h ≤ pe − h. Allowing h = 0 includes the one-site run. When de = 1, the
+proposed head at e − 1 is preceded by the previous target spike. That previous spike is positive
+in the source, because a source zero cannot produce a positive target. Thus a positive head
+there could not disappear, so only h = 0 is possible. When de ≥ 2, there is an available zero
+before the proposed head, and exactly
+
+                                         0 ≤ h ≤ ⌊pe /2⌋
+
+is allowed. Heads at different spikes do not overlap and remain separated: a nonzero head is
+allowed only in a gap of at least two zeros. The choices are independent and exhaust all source
+runs, proving (14). The empty product equals one.
+
+   Let Mn (N ) = maxy∈Xn,N |F −1 (y)|.
+Theorem 6. Fix n ≥ 3 and put k = ⌊n/3⌋. Then
+
+                           Mn (N ) ≤ (2n − 1)(N + 1)k         (N ≥ 0),                       (15)
+
+and                                                 k
+                                                N
+                                Mn (N ) ≥                 (N ≥ 2k).                          (16)
+                                                2k
+In particular Mn (N ) = Θn (N k ) as N → ∞. For n ≤ 2 one has Mn (N ) = 1.
+Proof. Each interval factor in (12) belongs to a one-run of at least two edges, followed by a
+nonempty zero-run. These disjoint runs use at least three edges per factor. There can therefore
+be at most k factors in a mixed word. In a positive-weight word, every permitted interval value
+is a coordinate of a source in Xn,N , by Theorem 4, so its interval has at most N + 1 integers.
+Including the possible uniform source,
+
+                     |F −1 (y)| ≤ 1 + (2n − 2)(N + 1)k ≤ (2n − 1)(N + 1)k ,
+
+proving (15).
+    Choose k sites with at least two zeros between consecutive sites cyclically; this is possible
+because 3k ≤ n. For N ≥ 2k, put q = ⌊N/(2k)⌋, assign mass 2q to each chosen site, and add
+the remaining N − 2kq to one of them. The resulting target has minimum zero and k positive
+isolated spikes. By Proposition 5, its fibre has at least (q + 1)k ≥ (N/(2k))k sources. This
+proves (16). The two bounds give the stated exponent; the identity rule handles n ≤ 2.
+
+                                                     6
+   For instance, (0, 0, 2q, 0, 0, 2q) on six sites has exactly (q + 1)2 sources, for every integer
+q ≥ 0 (including the uniform zero target). This is a deductive family, not a claim of a numerical
+asymptotic test. Theorem 6 determines the exponent, not the exact finite-N maximum or all
+maximizing targets.
+
+
+5    Finite verification and limits
+The proofs above apply to all declared parameters. A paper-local, standalone author verifier
+is specified separately for the complete box 1 ≤ n ≤ 6, 0 ≤ N ≤ 4: 30 carriers containing
+461 labelled states. It compares direct forward-graph predecessor sets with independently im-
+plemented comparison-word source sets. It also checks terminal states, minimum preservation,
+exact finite-carrier height, the two-site clock, fixed-target products and the stated finite in-
+stances of the bounds. Word-level output records forced-test rejection reasons and admitted
+intervals, including the possibility of two free intervals at n = 6.
+    The declared author verification has been executed on exactly this finite box. Its accepted
+initial output supplies the paper canonical. Two separate author replays reproduce that com-
+plete output byte-for-byte under unchanged accepted source, parameter, canonical and relevant
+runtime inputs. These are bounded author checks, not either independent manuscript review.
+Earlier candidate and gate checks remain historical evidence, not a converted paper canoni-
+cal. Neither this finite enumeration nor its replay proves an all-parameter statement or the
+asymptotic theorem.
+    The temporal and inverse arguments serve different purposes. The original endpoint argu-
+ment does not decide which comparison words can produce a target. The one-step atlas alone
+does not establish repeated absorption or the sharp fixation time. Their relationship does not
+make either a claim of global originality.
+    Several questions remain outside this note: a closed pointwise clock for n ≥ 4; exact values
+of Mn (N ) and all maximizers at every finite parameter; all-time fibres and a full basin census;
+and a linear-time image criterion. No arbitrary-encoding nonconjugacy result is asserted.
+
+
+References
+[1] Nino Boccara and Henryk Fukś. Number-conserving cellular automaton rules. Fundamenta
+    Informaticae, 52(1–3):1–13, 2002.
+
+[2] Akiko Fukuda, Etsuo Segawa, and Sennosuke Watanabe. Generalized discrete and ultradis-
+    crete Burgers equations derived through the correlated random walk. Journal of Difference
+    Equations and Applications, 29(1):84–101, 2023.
+
+[3] Katsuhiro Nishinari and Daisuke Takahashi. Analytical properties of ultradiscrete Burgers
+    equation and rule-184 cellular automaton. Journal of Physics A: Mathematical and General,
+    31(24):5439–5450, 1998.
+
+
+
+
+                                                7
+

@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/node - <<'NODE'\nconst fs=require('fs'),c=require('crypto'),a=require('assert').strict;const root='/root/autodl-tmp/symbolic_dynamics',q=root+'/docs/papers211_215_sequence/qa';const maps=[q+'/p211_round2_root_reception01/RECHECK_INPUTS_AFTER.json',q+'/p211_round2_physical_independent01/run05/CHECKS.stdout.raw',q+'/p212_canonical_adoption_root01/ADOPTION_CLOSING_INPUTS.json'].map(p=>JSON.parse(fs.readFileSync(p)));const originals=['docs/papers211_215_sequence/PIPELINE_STATE.md','SYMBOLIC_DYNAMICS_STATE.md'].map(p=>{const n=root+'/'+p,b=fs.readFileSync(n);a(!fs.lstatSync(n).isSymbolicLink()&&fs.realpathSync(n)===n);for(const m of maps)a(!Object.hasOwn(m.READ_INPUTS||m,n));return {path:n,bytes:b.length,sha256:c.createHash('sha256').update(b).digest('hex'),resolved:n,symlink:null};});process.stdout.write(JSON.stringify({status:'PASS_ACTUAL_PRE_REFRESH_CENTRAL_PINS_AND_NO_ACTIVE_KEY_DEPENDENCY',originals}));\nNODE",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 3000
+  },
+  "result": {
+    "chunk_id": "6215dc",
+    "wall_time_seconds": 0.00000669,
+    "exit_code": 0,
+    "original_token_count": 159,
+    "output": "{\"status\":\"PASS_ACTUAL_PRE_REFRESH_CENTRAL_PINS_AND_NO_ACTIVE_KEY_DEPENDENCY\",\"originals\":[{\"path\":\"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/PIPELINE_STATE.md\",\"bytes\":42679,\"sha256\":\"53be3a6edfa23f31a6ef82eae1badefad370f5d6a0d8f5a71750856985ac235b\",\"resolved\":\"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/PIPELINE_STATE.md\",\"symlink\":null},{\"path\":\"/root/autodl-tmp/symbolic_dynamics/SYMBOLIC_DYNAMICS_STATE.md\",\"bytes\":56951,\"sha256\":\"6b95388165c1db20e48f2c8e625f7c24c5c10c23cd3bad52b933db1b2875f5ec\",\"resolved\":\"/root/autodl-tmp/symbolic_dynamics/SYMBOLIC_DYNAMICS_STATE.md\",\"symlink\":null}]}"
+  }
+}

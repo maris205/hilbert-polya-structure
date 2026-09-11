@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node <<'NODE'\nconst fs=require('node:fs'),c=require('node:crypto'),a=require('node:assert/strict');const q='docs/papers211_215_sequence/qa/',p=q+'p213_initial_build_binding02/',old=fs.readFileSync(q+'p213_initial_build_preparation01/BUILD_REQUEST.sh','utf8'),body=fs.readFileSync(p+'BUILD_REQUEST.sh','utf8');a.equal(body,old.replace(\"p213_initial_build_binding01'\",\"p213_initial_build_binding02'\").replace(\"p213_initial_build_run01'\",\"p213_initial_build_run02'\"));const sha=b=>c.createHash('sha256').update(b).digest('hex');const manifest=fs.readFileSync(p+'RUNTIME_INPUTS.sha256','utf8');const lines=manifest.trimEnd().split('\\n');a.equal(lines.length,223);for(const l of lines){const m=/^([a-f0-9]{64})  (\\/[^\\n]+)$/.exec(l);a.ok(m);a.equal(sha(fs.readFileSync(m[2])),m[1]);}try{fs.lstatSync(q+'p213_initial_build_run02');throw Error('exists');}catch(e){a.equal(e.code,'ENOENT');}const st=fs.statfsSync('.',{bigint:true});a.ok(st.bsize*st.bavail>536870912n);console.log(JSON.stringify({status:'PASS_CONFIRMATION_BUILD_EXACT_TWO_PATH_DELTA_AND_223_CURRENT_INPUTS',script_sha256:sha(Buffer.from(body)),manifest_sha256:sha(Buffer.from(manifest)),available_bytes:(st.bsize*st.bavail).toString()},null,2));\nNODE",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2000
+  },
+  "result": {
+    "chunk_id": "8a87ce",
+    "wall_time_seconds": 0.00000346,
+    "exit_code": 0,
+    "original_token_count": 75,
+    "output": "{\n  \"status\": \"PASS_CONFIRMATION_BUILD_EXACT_TWO_PATH_DELTA_AND_223_CURRENT_INPUTS\",\n  \"script_sha256\": \"de6e52469695e1e326100660c5bd988ddc387e5dd5c50cc9e88264d6b8339b9d\",\n  \"manifest_sha256\": \"35e6d5ac4cb0fb3933dc2d4ceb201d5afbf11315bdbcdcf74308a184c1586530\",\n  \"available_bytes\": \"15121661952\"\n}\n"
+  }
+}

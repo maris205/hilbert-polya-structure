@@ -1,0 +1,99 @@
+\section{Every labelled-target predecessor}\label{sec:inverse}
+
+The inverse problem fixes the whole target function, including its
+endpoint labels. Its solution is not a test involving an unknown source
+map: the following construction lists all sources directly from the
+target.
+
+For a nonnegative integer $d$, define the finite Laurent polynomial
+\begin{equation}\label{eq:gap_poly}
+ P_d(u)=\sum_{\substack{a,b\ge0\\a+b\le d}}
+             \binom{d}{a+b}u^{b-a}.
+\end{equation}
+The notation $[u^j]Q(u)$ denotes the coefficient of $u^j$ in a Laurent
+polynomial $Q$.
+
+\begin{theorem}\label{thm:inverse}
+A target $g=f_{Z,W}$ failing~\eqref{eq:image} has no predecessor.
+Otherwise put $z_0=0$ and
+\[
+ D_i=\{z_{i-1}+1,\ldots,w_i-1\},\qquad
+ d_i=|D_i|=w_i-z_{i-1}-1\quad(1\le i\le k).
+\]
+Every predecessor is obtained uniquely as follows.
+\begin{enumerate}
+\item Start with $X=Z$ and $A=W$.
+\item In each $D_i$, select disjoint sets of extra $X$-sites and extra
+      $A$-sites such that every selected $X$-site precedes every selected
+      $A$-site. Sites not selected belong to neither set. Add no other
+      sites outside these free gaps.
+\item Retain the choices with $\delta=|A|-|X|\in\{0,1\}$. Set
+      $Y=A$ if $\delta=0$ and $Y=A\setminus\{n\}$ if $\delta=1$.
+      The reconstructed source is $f_{Y,X}$.
+\end{enumerate}
+In particular,
+\begin{equation}\label{eq:fibre}
+ |T^{-1}(g)|=\bigl([u^0]+[u^1]\bigr)
+                    \prod_{i=1}^{k}P_{d_i}(u).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The zero-fibre assertion is Lemma~\ref{lem:product}. Suppose the image
+condition holds and $T(f_{Y,X})=g$, with $A=Y\cup\{n\}$.
+The product calculation forces $z_i\in X$ and $w_i\in A$.
+For every strict pair $w_i<z_i$, it also forces
+\begin{equation}\label{eq:forbidden}
+ X\cap[w_i,z_i)=\varnothing,\qquad
+ A\cap(w_i,z_i]=\varnothing.
+\end{equation}
+The first condition is necessary for $e_X(w_i)=z_i$. For the second,
+an extra $a\in A$ with $w_i<a\le z_i$ would also have ceiling
+$z_i$, contradicting that $w_i$ is the final domain endpoint of that
+output block. These prohibitions, the forced endpoints and the $D_i$
+partition all sites of $[n]$.
+
+A free site cannot belong to both supports, because the identity
+$X\cap A=W\cap Z$ would give a further target anchor. In $D_i$,
+no selected $A$-site may precede a selected $X$-site. Indeed, if
+$a<x$ with $a\in A$, $x\in X$ and both in $D_i$, then
+\[
+ z_{i-1}<a\le e_X(a)\le x<w_i\le z_i.
+\]
+The extra value $e_X(a)$ lies strictly between two consecutive target
+values, a contradiction. Thus the ordered-colour condition is necessary.
+
+It is also sufficient. Make any choices in the stated free gaps and
+include the forced endpoints. Every selected $A$-site in
+$(z_{i-1},w_i]$ lies after all extra $X$-sites in that gap and has
+ceiling exactly $z_i$ in $X$. Its last such site is $w_i$.
+The product $e_X\circ e_A$ therefore has precisely the prescribed
+values $z_i$ and kernel endpoints $w_i$, and equals $g$.
+
+It remains to impose the source-rank condition. The forced sets $Z,W$
+have the same size, even when they meet at an anchor. If $a_i,b_i$
+extra sites of the two respective colours are chosen in $D_i$, then
+\[
+ |A|-|X|=\sum_{i=1}^{k}(b_i-a_i).
+\]
+We now use the published completed-support reconstruction
+\cite[Section 5.1, after Lemma 5.12]{stein2025order}: the allowed
+differences are zero and one, recovering $Y=A$ and
+$Y=A\setminus\{n\}$, respectively. This support-rank fact is not a
+new part of the inverse theorem. In the one branch, $|A|=|X|+1\ge2$,
+so removing $n$ does not produce an empty image. Each retained pair
+gives exactly one source, and the necessity argument recovers its unique
+gap description.
+
+For fixed $a_i,b_i$, choose $a_i+b_i$ positions of $D_i$; their first
+$a_i$ positions must have colour $X$ and their last $b_i$ colour $A$.
+There are exactly $\binom{d_i}{a_i+b_i}$ choices. The Laurent weight
+records their contribution $b_i-a_i$ to the rank difference. Independent
+gap choices multiply, and selecting the zero and one coefficients gives
+\eqref{eq:fibre}. This count and the full decoder use no temporal theorem.
+\end{proof}
+
+Empty gaps cause no exception: $P_0(u)=1$ and contribute no extra
+sites. At $n=1$, the sole target has $d_1=0$, so the formula gives its
+single predecessor. Formula~\eqref{eq:fibre} is a finite target-specific
+evaluation; no maximization over targets is asserted.

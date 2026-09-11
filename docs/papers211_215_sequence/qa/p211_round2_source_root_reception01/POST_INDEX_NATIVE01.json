@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "/usr/bin/python3.10 -I -S -B - <<'R2_LINK_POST'\nfrom pathlib import Path\nfrom hashlib import sha256\nimport json,re\nfrom urllib.parse import unquote\nr=Path('/root/autodl-tmp/symbolic_dynamics');h=r/'docs/papers211_215_sequence/qa/p211_round2_source_root_reception01';x=json.loads((h/'RESULT.json').read_bytes());count=0\nfor n,v in x['inputs_before'].items():\n p=Path(n);b=p.read_bytes();s=p.lstat();assert len(b)==v['bytes'] and sha256(b).hexdigest()==v['sha256'];assert all(getattr(s,k)==t for k,t in v['stat'].items())\nfor p in (r/'SYMBOLIC_DYNAMICS_STATE.md',r/'docs/papers211_215_sequence/PIPELINE_STATE.md',h/'RECEPTION.md'):\n for href in re.findall(r'!?\\[[^\\]\\n]*\\]\\(([^)\\n]+)\\)',p.read_text()):\n  if re.match(r'^[A-Za-z][A-Za-z0-9+.-]*:',href) or href.startswith('#'):continue\n  assert (p.parent/unquote(href.strip('<>').split('#',1)[0])).resolve().exists(),(p,href);count+=1\nc=r/'docs/papers211_215_sequence/qa/control_before_round2_source_accepted';a=json.loads((c/'NATIVE01.json').read_bytes());b=json.loads((c/'RESULT.json').read_bytes());assert a['result']['exit_code']==0 and json.loads(a['result']['output'])==b\nfor m in b['mapping']:\n d=Path(m['physical_original']).read_bytes();assert {'bytes':len(d),'sha256':sha256(d).hexdigest()}==m['pin']\nprint(json.dumps({'status':'PASS_R2_SOURCE_INDEX_LINKS_AND_UNCHANGED199_KEY','links':count,'rich_paths':199,'control_originals':2,'new_science':0},sort_keys=True))\nR2_LINK_POST",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2000,
+    "yield_time_ms": 1000
+  },
+  "result": {
+    "chunk_id": "c2f734",
+    "wall_time_seconds": 0.226754119,
+    "exit_code": 0,
+    "original_token_count": 35,
+    "output": "{\"control_originals\": 2, \"links\": 167, \"new_science\": 0, \"rich_paths\": 199, \"status\": \"PASS_R2_SOURCE_INDEX_LINKS_AND_UNCHANGED199_KEY\"}\n"
+  }
+}

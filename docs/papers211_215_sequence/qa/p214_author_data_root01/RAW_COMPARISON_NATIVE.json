@@ -1,0 +1,14 @@
+{
+  "arguments": {
+    "cmd": "node <<'JS'\nconst fs=require('fs'),c=require('crypto');const h=b=>c.createHash('sha256').update(b).digest('hex'),a=fs.readFileSync('docs/papers211_215_sequence/qa/p214_author_data_root01/stdout.raw'),b=fs.readFileSync('docs/papers211_215_sequence/qa/p214_author_data_audit01/DATA.stdout.raw');if(!a.equals(b))throw Error('raw');for(const p of ['docs/papers211_215_sequence/qa/p214_author_data_root01/stderr.raw','docs/papers211_215_sequence/qa/p214_author_data_audit01/DATA.stderr.raw'])if(fs.readFileSync(p).length)throw Error(p);const report=JSON.parse(a),actual=fs.readFileSync('docs/papers211_215_sequence/qa/p214_author_runs/initial01/stdout.raw');let pos=0;const counts={};for(const e of report.complete_record_ledger){const end=actual.indexOf(10,pos)+1;if(end<=pos)throw Error('newline');const line=actual.subarray(pos,end),r=JSON.parse(line);if(e.line!==Object.values(counts).reduce((s,n)=>s+n,0)+1||e.kind!==r.kind||line.length!==e.bytes||h(line)!==e.sha256||!e.exact_payload_schema_and_wire)throw Error('ledger');if(JSON.stringify(e.named_checks)!==JSON.stringify(Object.keys(r.checks||{}).sort()))throw Error('checks');counts[e.kind]=(counts[e.kind]||0)+1;pos=end;}if(pos!==actual.length)throw Error('leftover');let keybytes=0;for(const k of report.complete_input_keys){const raw=fs.readFileSync(k.path);if(raw.length!==k.bytes||h(raw)!==k.sha256)throw Error(k.path);const s=fs.statSync(k.path,{bigint:true});for(const n of ['dev','ino','mode','size','mtimeNs','ctimeNs'])if(String(s[n])!==k.metadata[n])throw Error(k.path+n);keybytes+=raw.length;}console.log(JSON.stringify({complete_report_raw_equal:true,report_bytes:a.length,sha256:h(a),ledger_records:report.complete_record_ledger.length,entire_scientific_bytes:pos,record_counts:counts,full_current_input_keys:report.complete_input_keys.length,total_key_bytes:keybytes,semantics_from_actual_root_fullchecker:true},null,2));\nJS",
+    "login": false,
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "471980",
+    "wall_time_seconds": 0.078192648,
+    "exit_code": 0,
+    "original_token_count": 139,
+    "output": "{\n  \"complete_report_raw_equal\": true,\n  \"report_bytes\": 7635312,\n  \"sha256\": \"a10d0d5d973d51525fd6a057ef11704375fb330c3a62d68271cd0b4c077abaf8\",\n  \"ledger_records\": 10646,\n  \"entire_scientific_bytes\": 10419112,\n  \"record_counts\": {\n    \"run_start\": 1,\n    \"field\": 3,\n    \"carrier\": 9,\n    \"adapter\": 9,\n    \"state\": 5271,\n    \"target\": 5271,\n    \"depth_row\": 45,\n    \"fibre_row\": 27,\n    \"carrier_complete\": 9,\n    \"run_complete\": 1\n  },\n  \"full_current_input_keys\": 63,\n  \"total_key_bytes\": 10784044,\n  \"semantics_from_actual_root_fullchecker\": true\n}\n"
+  }
+}

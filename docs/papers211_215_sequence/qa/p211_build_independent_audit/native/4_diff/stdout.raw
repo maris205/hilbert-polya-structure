@@ -1,0 +1,58 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/history/diagnostic01_source/static_checks.py	2026-09-08 17:50:31.663556413 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/static_checks.py	2026-09-08 18:01:03.326071417 +0800
+@@ -17,9 +17,16 @@
+         tree = ast.parse((HERE / name).read_bytes(), filename=str(HERE / name))
+         forbidden = [n for n in ast.walk(tree) if isinstance(n, ast.Call) and
+                      isinstance(n.func, ast.Attribute) and n.func.attr in
+-                     ('unlink', 'rmdir', 'rmtree', 'replace', 'rename')]
++                     ('unlink', 'rmdir', 'rmtree', 'rename')]
+         assert not forbidden, name + ': destructive/overwrite call'
+-        checks.append({'check': 'AST_NO_DELETE_OR_REPLACE', 'file': name, 'passed': True})
++        # str.replace is used for cwd templates and command labels; it is not
++        # a filesystem overwrite. The fully read source has no Path/os.replace.
++        overwrite = [n for n in ast.walk(tree) if isinstance(n, ast.Call) and
++                     isinstance(n.func, ast.Attribute) and n.func.attr == 'replace' and
++                     isinstance(n.func.value, ast.Name) and n.func.value.id == 'os']
++        assert not overwrite, name + ': os.replace'
++        checks.append({'check': 'AST_NO_DELETE_RENAME_OR_OS_REPLACE', 'file': name, 'passed': True,
++                       'limit': 'Not a dataflow proof; root must read all source.'})
+     assert len(scope['ENV8']) == 8 and 'HOME' not in scope['ENV8']
+     assert scope['source_graph']()['bibliography_style'] == 'amsplain'
+     assert [x[0] for x in scope['FOUR_COMMANDS']] == ['pass1', 'bibtex', 'pass2', 'pass3']
+@@ -49,6 +56,36 @@
+             rejected += 1
+     assert rejected == 4
+     checks.append({'check': 'FLS_UNKNOWN_OR_UNGENERATED_REFUSALS', 'passed': True, 'cases': rejected})
++    future = Path('/nonexistent_p211_static_binding')
++    relative_path = future / 'inner/source_only/texmf'
++    binding = {'output': str(future), 'cwd_relative_configuration':
++               {str(relative_path): scope['entry'](relative_path)}}
++    lock = {'cwd_relative_absence_roles': {'TEXMFHOME':
++            {'relative': 'texmf', 'required_state': 'ABSENT'}},
++            'selector_specs': {}, 'entries': {}}
++    specs, expected = scope['configuration_key'](binding, lock)
++    assert set(specs) == {str(relative_path)} and expected[str(relative_path)]['present'] is False
++    binding['cwd_relative_configuration'] = {}
++    try:
++        scope['configuration_key'](binding, lock)
++    except RuntimeError:
++        checks.append({'check': 'CWD_RELATIVE_ABSENCE_REQUIRES_EXACT_ROOT_BINDING', 'passed': True})
++    else:
++        raise AssertionError('Missing relative configuration role accepted')
++    try:
++        scope['binding_inputs'](HERE / 'BINDING.pending.json')
++    except RuntimeError as error:
++        assert 'PENDING_ROOT_BINDING' in str(error)
++        checks.append({'check': 'PENDING_BINDING_REFUSES_BEFORE_OUTPUT_OR_CHILD', 'passed': True})
++    else:
++        raise AssertionError('Pending binding accepted')
++    assert scope['incomplete_native'](HERE / 'diagnostic_capture04') == []
++    core_tree = ast.parse((HERE / 'build_core.py').read_bytes())
++    seal_node = next(n for n in core_tree.body if isinstance(n, ast.FunctionDef) and n.name == 'seal')
++    assert any(isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and
++               n.func.id == 'incomplete_native' for n in ast.walk(seal_node))
++    checks.append({'check': 'SETTLED_ARCHIVE_AND_INCOMPLETE_ATTEMPT_SEAL_GUARD', 'passed': True,
++                   'limit': 'Archive/data and AST check; not a live kill/timeout stress test.'})
+     print(json.dumps({'status': 'STATIC_ONLY_NO_BUILD', 'checks': checks,
+                       'native_children': 0, 'tex_compilations': 0,
+                       'scientific_executions': 0, 'acceptance': False}, sort_keys=True))

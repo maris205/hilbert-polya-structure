@@ -1,0 +1,17 @@
+{
+  "arguments": {
+    "cmd": "node -e 'const fs=require(\"node:fs\"),cp=require(\"node:child_process\"),c=require(\"node:crypto\"); const d=\"docs/papers211_215_sequence/qa/p214_author_data_audit01\"; const out=fs.openSync(d+\"/DATA.stdout.raw\",\"wx\",0o600),err=fs.openSync(d+\"/DATA.stderr.raw\",\"wx\",0o600); let r; try{r=cp.spawnSync(\"node\",[d+\"/audit.js\"],{cwd:\"/root/autodl-tmp/symbolic_dynamics\",stdio:[\"ignore\",out,err]});fs.fsyncSync(out);fs.fsyncSync(err);}finally{fs.closeSync(out);fs.closeSync(err);} const key=p=>{const b=fs.readFileSync(p);return {path:p,bytes:b.length,sha256:c.createHash(\"sha256\").update(b).digest(\"hex\")};}; process.stdout.write(JSON.stringify({command:[\"node\",d+\"/audit.js\"],cwd:\"/root/autodl-tmp/symbolic_dynamics\",exit:{status:r.status,signal:r.signal,error:r.error?{code:r.error.code||null,message:r.error.message}:null,pid:r.pid},stdout:key(d+\"/DATA.stdout.raw\"),stderr:key(d+\"/DATA.stderr.raw\")})+\"\\n\");if(r.status!==0||r.signal||r.error)process.exitCode=1;'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "login": false,
+    "tty": false,
+    "max_output_tokens": 4000,
+    "yield_time_ms": 10000
+  },
+  "result": {
+    "chunk_id": "e54379",
+    "wall_time_seconds": 2.732987706,
+    "exit_code": 0,
+    "original_token_count": 139,
+    "output": "{\"command\":[\"node\",\"docs/papers211_215_sequence/qa/p214_author_data_audit01/audit.js\"],\"cwd\":\"/root/autodl-tmp/symbolic_dynamics\",\"exit\":{\"status\":0,\"signal\":null,\"error\":null,\"pid\":139947},\"stdout\":{\"path\":\"docs/papers211_215_sequence/qa/p214_author_data_audit01/DATA.stdout.raw\",\"bytes\":7635312,\"sha256\":\"a10d0d5d973d51525fd6a057ef11704375fb330c3a62d68271cd0b4c077abaf8\"},\"stderr\":{\"path\":\"docs/papers211_215_sequence/qa/p214_author_data_audit01/DATA.stderr.raw\",\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}}\n"
+  }
+}

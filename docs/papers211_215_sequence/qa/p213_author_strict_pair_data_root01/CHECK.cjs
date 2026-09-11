@@ -1,0 +1,20 @@
+'use strict';
+// Fixed documentary reception only; no producer, host observation or prior census.
+const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const Q='docs/papers211_215_sequence/qa/',O=Q+'p213_author_strict_pair_data_root01/',A=Q+'p213_author_strict_pair_data_audit01/';
+const read=p=>fs.readFileSync(p),json=p=>JSON.parse(read(p)),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+const replay=json(O+'REPLAY_NATIVE.json').records;
+assert.equal(replay.length,3);
+const expected=['CHECK.cjs','NEGATIVE.cjs','CLOSE.cjs --sealed'];
+replay.forEach((n,i)=>{assert.equal(n.request.cmd,'node '+A+expected[i]);assert.equal(n.result.exit_code,0);assert.equal(n.result.session_id,undefined);JSON.parse(n.result.output);});
+const main=json(A+'CHECK_NATIVE.json'),negative=json(A+'NEGATIVE_NATIVE.json');
+assert.ok(Buffer.from(replay[0].result.output).equals(Buffer.from(main.result.output)));
+assert.ok(Buffer.from(replay[1].result.output).equals(Buffer.from(negative.result.output)));
+const seal=read(A+'SHA256SUMS');assert.equal(sha(seal),'faabe2b5d784a27e0943a38729af0315b9e9fec32a686a292479dc43cfa219de');
+const lines=seal.toString('ascii').trimEnd().split('\n');assert.equal(lines.length,14);
+const names=lines.map(l=>{const m=/^([a-f0-9]{64})  ([A-Za-z0-9_.-]+)$/.exec(l);assert.ok(m);assert.notEqual(m[2],'SHA256SUMS');assert.equal(sha(read(A+m[2])),m[1]);return m[2];});
+assert.deepEqual(fs.readdirSync(A).sort(),[...names,'SHA256SUMS'].sort());
+const close=JSON.parse(replay[2].result.output);assert.equal(close.status,'PASS_PAIR_DATA_FINAL_NONSELF_CLOSURE');assert.equal(close.whole_old_current_keys,332);
+const a=JSON.parse(replay[0].result.output),n=JSON.parse(replay[1].result.output);
+assert.equal(a.pair.scalarPairs,36739);assert.equal(a.pair.differentScalars,965);assert.equal(n.negative_cases,29);
+process.stdout.write(JSON.stringify({status:'PASS_ROOT_EXACT_NEW_STRICT_PAIR_DATA_RECEPTION',independent_payloads:14,root_replays:replay.map(x=>x.result.chunk_id),full_raw_stdout_comparisons:2,documentary_checks:a.documentary_checks,pair_checks:a.pair.checks,control_checks:a.pair.controls.map(x=>x.checks),negative_cases:n.negative_cases,independent_seal:sha(seal),science_execution:false,host_queries:false,manuscript_review:false},null,2)+'\n');

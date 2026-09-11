@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "/usr/bin/python3.10 -I -S -B - <<'SOURCE_POST'\nfrom hashlib import sha256\nimport json,re\nfrom pathlib import Path\nroot=Path('/root/autodl-tmp/symbolic_dynamics'); q=root/'docs/papers211_215_sequence/qa/p211_round2_source_root_reception01'\nr=json.loads((q/'RESULT.json').read_bytes()); raw=(q/'RESULT.json').read_bytes()\nassert r['status']=='P211_ROUND2_SOURCE_AND_INDEPENDENT_AUDIT_RECEIVED_NOT_OPERATIONAL_AUTHORITY' and r['checks']==len(r['check_labels'])==6426\nassert r['inputs_before']==r['inputs_after'] and len(r['inputs_before'])==199\nfor name,v in r['inputs_before'].items():\n p=Path(name);b=p.read_bytes();s=p.lstat();assert {'bytes':len(b),'sha256':sha256(b).hexdigest()}=={k:v[k] for k in ('bytes','sha256')};assert all(getattr(s,k)==x for k,x in v['stat'].items())\nfor c in r['native_commands']:\n label=c['label'];a=json.loads((q/('COMMAND_'+label+'_ATTEMPT.json')).read_bytes());n=json.loads((q/('COMMAND_'+label+'_NATIVE.json')).read_bytes());assert n==c and a=={k:c[k] for k in ('argv','cwd','environment','stdin','timeout_seconds')};assert c['exit_code']==0\n for kind in ('stdout','stderr'):\n  b=(q/('COMMAND_'+label+'_'+kind+'.raw')).read_bytes();assert {'bytes':len(b),'sha256':sha256(b).hexdigest()}==c[kind]\n  if kind=='stderr':assert b==b''\nold=json.loads((root/'docs/papers211_215_sequence/qa/p211_round2_source_audit01/NATIVE_CHECKS.json').read_bytes())['records'][-1]['result']['output'].encode();assert (q/'COMMAND_03_stdout.raw').read_bytes()==old\nassert r['reused_full_output']=={'bytes':len(old),'sha256':sha256(old).hexdigest()}\nouter=json.loads((q/'NATIVE01_TRUNCATED.json').read_bytes());assert outer['result']['exit_code']==0 and outer['result']['output'].startswith('Warning: truncated output')\nsummary={'status':'PASS_COMPLETE_SAVED_DOCUMENTARY_RESULT_AND_FOUR_RAW_NATIVE_COMMANDS','result_pin':{'bytes':len(raw),'sha256':sha256(raw).hexdigest()},'full_rich_originals':199,'original_root_checks':6426,'reused_independent_checks':924,'reused_full_stdout_bytes':len(old),'new_operations':'documentary reads only','outer_tool_truncation_preserved':True,'submitted_source_executions':0}\nprint(json.dumps(summary,sort_keys=True))\nSOURCE_POST",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2500,
+    "yield_time_ms": 1000
+  },
+  "result": {
+    "chunk_id": "07236b",
+    "wall_time_seconds": 0.233000997,
+    "exit_code": 0,
+    "original_token_count": 110,
+    "output": "{\"full_rich_originals\": 199, \"new_operations\": \"documentary reads only\", \"original_root_checks\": 6426, \"outer_tool_truncation_preserved\": true, \"result_pin\": {\"bytes\": 746772, \"sha256\": \"3fa7babe14886c540c5d41b8e92f8ee86c7e4c6908a288a9f05ddb06b9fcbde9\"}, \"reused_full_stdout_bytes\": 200602, \"reused_independent_checks\": 924, \"status\": \"PASS_COMPLETE_SAVED_DOCUMENTARY_RESULT_AND_FOUR_RAW_NATIVE_COMMANDS\", \"submitted_source_executions\": 0}\n"
+  }
+}

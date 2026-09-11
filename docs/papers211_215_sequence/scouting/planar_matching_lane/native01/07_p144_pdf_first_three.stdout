@@ -1,0 +1,184 @@
+  LEFTMOST REASSOCIATION OF DYCK COMPONENTS: EXACT TRANSIENT
+               LAYERS AND TERMINAL DEPTH FIBRES
+
+                                                       ANONYMOUS
+
+
+        Abstract. Let a nonempty Dyck path have primitive factorisation P = C1 · · · Ck , with C1 = U AD. We
+        iterate the deterministic rule that fixes P when k = 1 and otherwise replaces its first two components
+        by U AC2 D. The complete orbit is explicit: for 0 ≤ t ≤ k − 1, after t updates the first component has
+        absorbed C2 , . . . , Ct+1 , and the endpoint is fixed thereafter. Consequently the entry time is exactly k − 1,
+        all recurrent paths are fixed and primitive, and the unique path of maximum depth n − 1 in semilength
+        n is (U D)n . The number of paths at depth k − 1 is
+                                                           k      2n − k
+                                                                          .
+                                                         2n − k     n
+        We also resolve every terminal basin by depth. If a fixed target is U QD and the interior Q has r primitive
+        factors, then it has exactly one basin state at each depth 0, . . . , r. Hence its depth-fibre polynomial is
+        1 + u + · · · + ur , and the unique largest terminal fibre has size n. First-return decomposition, Catalan and
+        ballot enumeration, ground-level comb/Tamari covers, deterministic leftmost-rotation precedents, and
+        the ordered-tree graft/lift representation are treated as background inputs. The residual is only the exact
+        temporal/target-fibre conjunction for this literal selector. No priority follows, and external circulation
+        remains on hold.
+
+
+
+
+                                                    1. Introduction
+    A local cover relation does not by itself determine a dynamical system: one must also specify which
+available cover is chosen at each state. This note fixes a particularly rigid selector on Dyck paths. At
+every nonfixed state, we perform the reassociation at the leftmost return to ground level. The selected
+down-step crosses the next primitive Dyck component, and no other part of the path changes.
+    The atomic reassociation belongs to the Tamari setting. Associativity orders and their lattice property
+go back to Huang and Tamari [3]; path formulations of Tamari-type covers also appear in the m-Tamari
+literature [1]. Primitive decomposition of Dyck words and enumeration by the number of primitive com-
+ponents are likewise established topics [6], while Catalan and ballot enumeration are standard background
+[7]. We assign all of these ingredients zero contribution credit.
+    Two closer rotation precedents further narrow the boundary. Pallo studies a uniquely selected leftmost
+left-rotation on binary trees and the resulting rooted directed tree, rank, and distance [5, pp. 802–803].
+That deterministic map is not the map below: after adjoining a loop at its terminal root it has one fixed
+tree, whereas our map has Catn−1 fixed paths, more than one for n ≥ 3. Thus it is neither equal nor
+conjugate, by mirror or reversal, to our map. Separately, Chapoton identifies the comb-order covers on
+Dyck paths as exactly the Tamari covers whose moved subpath lies at height zero [2, §1.2, p. 438], tracing
+the comb order to Pallo’s right-arm rotations [4]. Every nonfixed update below is one of those ground-
+level covers, chosen at the leftmost ground return. The idea of a deterministic leftmost scheduler and the
+ground-level cover correspondence both receive zero contribution credit.
+    The purpose here is narrower: to record, for this particular selector, the exact conjunction of its full
+temporal law with its target-indexed inverse fibres. None of the scheduler, its individual covers, its tree
+model, or its component census is claimed separately. The argument has four parts.
+(1) We give a closed formula for every iterate. It turns the number of primitive factors into the pointwise
+     clock τ (P ) = κ(P ) − 1 and identifies (U D)n as the unique depth-n − 1 path.
+                                                                        k  2n−k
+                                                                                
+(2) We derive the complete temporal census: depth k − 1 contains 2n−k        n    states.
+(3) For every fixed target and every feasible depth, we construct one basin state and prove that no second
+     state exists at that depth.
+(4) We derive the depth-fibre polynomial and classify the unique target of largest fibre.
+The closed iterate in lemma 3.1 is the common mechanism: it proves the clock and leaves only a suffix cut
+to invert an endpoint. No figure is needed because that formula exposes the whole state change.
+
+  2020 Mathematics Subject Classification. 05A05, 05A15, 06A07, 37P05.
+  Key words and phrases. Dyck path, primitive component, Tamari cover, finite dynamics, transient depth, terminal fibre.
+
+
+
+                                                               1
+2                                                         ANONYMOUS
+
+
+  This package is owner-thin. The source boundary in section 7 is a conservative credit assignment,
+not a priority or originality decision. The record is maintained for internal theorem evaluation under
+hold_external.
+
+                                    2. Dyck factors and the literal map
+   A Dyck path of semilength n is a word in U, D with n occurrences of each letter such that every prefix
+contains at least as many U ’s as D’s. Let Dn denote the set of such paths. A nonempty Dyck path is
+primitive if its only return to height zero occurs after its final step. Cutting at all positive returns gives a
+unique factorisation
+(1)                                                    P = C1 C2 · · · Ck
+into primitive Dyck paths. We write κ(P ) = k.
+    Every primitive first factor has a unique first-return form C1 = U AD with A a possibly empty Dyck
+path. Define
+                                             (
+                                               P,                    k = 1,
+(2)                                Φn (P ) =
+                                               U AC2 D C3 · · · Ck , k ≥ 2.
+We suppress the subscript n when the semilength is fixed. The word AC2 is a Dyck path, so U AC2 D is
+primitive. Thus (2) lies in Dn and is well defined.
+   There is a standard ordered-tree form of the same rule. Under the contour bijection between Dyck
+paths and rooted ordered plane trees [7, Theorem 1.5.1], the primitive factors C1 , . . . , Ck encode the
+ordered subtrees rooted at the k children of the tree root. Write these subtrees as T1 , . . . , Tk . For k ≥ 2,
+(2) is precisely
+(3)                                 (T1 , T2 , T3 , . . . , Tk ) 7−→ (T1 ◁ T2 , T3 , . . . , Tk ),
+where T1 ◁ T2 appends T2 as the rightmost child of the root of T1 . Thus the factor clock below is just root
+degree minus one. This contour conjugacy and graft description are representation-level background, not
+residual claims.
+   Let τ (P ) be the least t ≥ 0 for which Φt (P ) is fixed, and put
+                                                      E(P ) = Φτ (P ) (P ).
+A path is recurrent when it lies on a directed cycle of Φn . For a fixed target T , define its depth-fibre
+polynomial
+                                                    X
+(4)                                    BT (u) =           uτ (P ) .
+                                                              P : E(P )=T
+                                                         1  2m
+                                                              
+      The complete claim package follows. We use Catm = m+1  m .
+
+Theorem 2.1 (Clock, layers, and terminal depth fibres). For every n ≥ 1, the map Φn has the following
+properties.
+   (i) Every nonfixed update reduces κ by exactly one. The recurrent paths are exactly the fixed paths, these
+       are exactly the primitive paths, and there are Catn−1 of them.
+  (ii) If P has k primitive factors, then
+(5)                                                      τ (P ) = k − 1.
+        The maximum entry time is n − 1, attained uniquely by (U D)n .
+  (iii) For 1 ≤ k ≤ n, the number of paths at depth k − 1 is
+                                                                            
+                                                               k      2n − k
+(6)                           {P ∈ Dn : τ (P ) = k − 1} =                     .
+                                                             2n − k     n
+  (iv) Let T = U QD be fixed, and factor its interior as Q = Q1 · · · Qr into primitive paths. For every
+       0 ≤ d ≤ r, the unique basin state of T at depth d is
+                                                         
+(7)                                Pd = U Q1 · · · Qr−d D Qr−d+1 · · · Qr ,
+        with the empty-prefix and empty-suffix conventions. Consequently
+(8)                                             BT (u) = 1 + u + · · · + ur .
+        The unique terminal fibre of maximum size is the fibre over
+(9)                                                Tnmax = U (U D)n−1 D,
+        and it contains n states.
+                                       LEFTMOST DYCK REASSOCIATION                                             3
+
+
+                                       3. The factor-count clock
+  The first primitive component absorbs exactly one following component per round. The next lemma
+makes that statement precise at every time.
+Lemma 3.1 (Closed orbit). Let P = C1 · · · Ck , where C1 = U AD. For every 0 ≤ t ≤ k − 1,
+(10)                                Φt (P ) = U A C2 · · · Ct+1 D Ct+2 · · · Ck .
+When t = 0, the block C2 · · · Ct+1 is empty; when t = k − 1, the suffix Ct+2 · · · Ck is empty.
+Proof. At t = 0, (10) reads U ADC2 · · · Ck = P . Suppose the formula holds for some t < k − 1. The word
+                                                U A C2 · · · Ct+1 D
+is primitive: after its initial U , the Dyck word AC2 · · · Ct+1 stays at or above height one, and the displayed
+D is its first return to height zero. Hence the primitive factorisation of the right-hand side of (10) consists
+of that first word, followed by Ct+2 , . . . , Ck . Applying (2) moves the closing D across Ct+2 and gives
+                                      U A C2 · · · Ct+1 Ct+2 D Ct+3 · · · Ck ,
+which is (10) at time t + 1. Induction proves the claim.                                                      □
+Corollary 3.2 (Recurrent set and pointwise clock). The statements in theorem 2.1(i)–(ii) hold.
+Proof. For t < k − 1, the factorisation displayed in the proof of lemma 3.1 has one first component and
+k − t − 1 untouched components, for a total of k − t primitive factors. Thus each nonfixed step decreases
+κ by one. At t = k − 1, the formula is the single primitive path
+(11)                                        E(P ) = U AC2 · · · Ck D.
+It is fixed, so τ (P ) = k − 1.
+   If k = 1, the definition fixes P . If k > 1, the strict decrease of κ prevents P from lying on a cycle.
+Fixed and recurrent paths are therefore exactly the primitive paths. Deleting the first U and last D is a
+bijection from primitive paths in Dn to Dn−1 , giving Catn−1 fixed paths.
+   Every primitive factor has semilength at least one, so k ≤ n. Equality holds only when all k factors
+have semilength one, and the only such factor is U D. In view of (5), the depth is at most n − 1, with
+equality exactly at (U D)n .                                                                           □
+   The proof gives more than a global bound: the component statistic is the exact amount of time remaining
+at every state. In particular, no transient can merge with another transient of a different factor count before
+their depths agree.
+
+                                     4. Complete temporal layers
+   The clock reduces temporal enumeration to a component census. We include the coefficient calculation
+to fix the boundary case and normalisation, while treating the enumerative machinery as background.
+   Let                                            X
+                                         C(z) =       Catm z m
+                                                       m≥0
+be the Catalan series, which satisfies C(z) = 1 + zC(z)2 . A primitive path is U AD with A an arbitrary
+Dyck path, so the semilength generating function for one primitive component is
+(12)                                             R(z) = zC(z).
+Proposition 4.1 (Ballot layer formula). For 1 ≤ k ≤ n, the number of paths in Dn with exactly k primitive
+factors is the right-hand side of (6).
+Proof. A path with k primitive factors is an ordered sequence of k primitive paths. By (12), its number is
+(13)                                       [z n ]R(z)k = [z n−k ]C(z)k .
+Put m = n − k and W = C − 1. Then W = z(1 + W )2 . If m = 0, the coefficient in (13) is 1, which agrees
+with k(2n − k)−1 2n−k
+                   n   = 1 because n = k.
+   For m ≥ 1, Lagrange inversion gives
+                                [z m ]C(z)k = [z m ](1 + W )k
+                                               1
+                                            = [wm−1 ]k(1 + w)k−1 (1 + w)2m
+                                              m              
+                                               k 2m + k − 1
+                                            =
+                                              m        m−1
+

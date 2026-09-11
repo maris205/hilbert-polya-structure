@@ -1,0 +1,58 @@
+{
+  "schema": "flat_document_checks_v1",
+  "author": "round211_rational_scout",
+  "date_utc": "2026-09-08",
+  "scope": "Document and source-pin validation only. These checks are not a scientific execution, an independent review, novelty acceptance, or protected-source nonaccess certification. The initial discovery-access failure is preserved in NATIVE_READS.json and REPORT.md.",
+  "records": [
+    {
+      "cmd": "sha256sum -c docs/papers211_215_sequence/scouting/finite_path_local_memory_desk/INPUTS.sha256",
+      "result": {
+        "chunk_id": "a37e59",
+        "wall_time_seconds": 0.00000307,
+        "exit_code": 0,
+        "original_token_count": 103,
+        "output": "docs/papers162_166_sequence/scouting/replacement_posets_languages/SCOUT.md: OK\ndocs/papers162_166_sequence/scouting/replacement_posets_languages/verify_scout.py: OK\ndocs/papers197_201_sequence/scouting/word_poset_lane/COLLISION_FIREWALL.md: OK\ndocs/papers204_208_sequence/scouting/finite_systems_sixteenth/INTAKE.md: OK\ndocs/papers204_208_sequence/scouting/finite_systems_twenty_first/SOURCE_AND_HISTORY.md: OK\n"
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[4]{result}{output});' docs/papers211_215_sequence/scouting/finite_path_local_memory_desk/NATIVE_READS.json) <(sed -n '1,170p' docs/papers162_166_sequence/scouting/replacement_posets_languages/SCOUT.md)",
+      "result": {
+        "chunk_id": "8bdefd",
+        "wall_time_seconds": 0.0000025,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[8]{result}{output});' docs/papers211_215_sequence/scouting/finite_path_local_memory_desk/NATIVE_READS.json) <(sed -n '730,758p' docs/papers162_166_sequence/scouting/replacement_posets_languages/verify_scout.py)",
+      "result": {
+        "chunk_id": "acc333",
+        "wall_time_seconds": 0.00000156,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "cmd": "perl -MJSON::PP -0777 -e 'my $n=decode_json(do { local $/; open my $f,\"<\",$ARGV[0] or die $!; <$f> }); my $s=decode_json(do { local $/; open my $f,\"<\",$ARGV[1] or die $!; <$f> }); die \"native count\" unless @{$n->{records}}==13; die \"source count\" unless @{$s->{records}}==4; die \"scope disclosure lost\" unless $n->{records}[0]{result}{output}=~/kip_candidate_gate/; die \"truncation lost\" unless $n->{records}[1]{result}{output}=~/truncated/; my @bad=grep { $_->{result}{exit_code}!=0 } @{$n->{records}}; die \"native failure count\" unless @bad==4; my $q=0; for my $r (@{$s->{records}}) { die \"source type\" if ref $r->{result}; $q+=scalar @{$r->{request}{search_query}//[]}; } die \"query count\" unless $q==6; print \"JSON PASS: 13 native records, 4 preserved nonzero exits, access-scope and truncation retained; 4 web returns, 6 queries\\n\";' docs/papers211_215_sequence/scouting/finite_path_local_memory_desk/NATIVE_READS.json docs/papers211_215_sequence/scouting/finite_path_local_memory_desk/SOURCES_NATIVE.json",
+      "result": {
+        "chunk_id": "4f71c1",
+        "wall_time_seconds": 0.00000312,
+        "exit_code": 0,
+        "original_token_count": 30,
+        "output": "JSON PASS: 13 native records, 4 preserved nonzero exits, access-scope and truncation retained; 4 web returns, 6 queries\n"
+      }
+    },
+    {
+      "cmd": "perl -MFile::Basename=dirname -MFile::Spec -e 'my %u; for my $f (@ARGV) { open my $h,\"<\",$f or die $!; local $/; my $s=<$h>; while ($s=~/\\]\\(([^)]+)\\)/g) { my $p=$1; next if $p=~m{^https?://}; next if $p eq \"CHECKS_NATIVE.json\"; my $t=File::Spec->catfile(dirname($f),$p); die \"missing $t\" unless -f $t; $u{$t}=1; } } print \"Existing local links PASS: \",scalar(keys %u),\" unique; future CHECKS_NATIVE.json explicitly excluded\\n\";' docs/papers211_215_sequence/scouting/finite_path_local_memory_desk/REPORT.md docs/papers211_215_sequence/scouting/finite_path_local_memory_desk/PROOF_PACKAGE.md",
+      "result": {
+        "chunk_id": "ede412",
+        "wall_time_seconds": 6.7e-7,
+        "exit_code": 0,
+        "original_token_count": 21,
+        "output": "Existing local links PASS: 7 unique; future CHECKS_NATIVE.json explicitly excluded\n"
+      }
+    }
+  ]
+}

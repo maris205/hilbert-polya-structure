@@ -1,0 +1,82 @@
+{
+  "schema": "p212_semantic_preparation_documentary_checks_v1",
+  "status": "SOURCE_ONLY_NOT_EXECUTED_NOT_TESTED",
+  "scope": "Textual/metadata checks only; no syntax validation, submitted-code import, receiver run, fixture, scientific producer, saved-output read or canonical access.",
+  "observed_orchestration_failure": {
+    "kind": "observed_orchestration_parse_failure_not_receiver_execution",
+    "message": "SyntaxError: missing ) after argument list",
+    "scope": "A tool-wrapper String.raw template contained Markdown backticks; it failed to parse before apply_patch was called. No file edit, receiver parse, receiver run or scientific action occurred."
+  },
+  "records": [
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "wc -lc docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01/receive_saved_output.js docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01/PLAN.md papers/212-closed-pointer-orbits/OUTPUT_SCHEMA.md papers/212-closed-pointer-orbits/verify.py",
+        "max_output_tokens": 1200
+      },
+      "result": {
+        "chunk_id": "a1904f",
+        "wall_time_seconds": 0.00000177,
+        "exit_code": 0,
+        "original_token_count": 87,
+        "output": "   838  46319 docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01/receive_saved_output.js\n   137   8845 docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01/PLAN.md\n   406  24746 papers/212-closed-pointer-orbits/OUTPUT_SCHEMA.md\n   865  40430 papers/212-closed-pointer-orbits/verify.py\n  2246 120340 total\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "sed -n '740,930p' docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01/receive_saved_output.js",
+        "max_output_tokens": 6500
+      },
+      "result": {
+        "chunk_id": "61a0a3",
+        "wall_time_seconds": 0.00000637,
+        "exit_code": 0,
+        "original_token_count": 1488,
+        "output": "  const total = sum(carriers.map(c => c.state_count));\n  ledger.check('total_carrier_states', 'all_carriers', total, 4356);\n  const received = ledger.finish();\n  deep(out.summary, {carrier_sizes: [1, 2, 3, 4], state_count: total,\n    orbit_counts: carriers.map(c => c.orbit_count), predicate_count: received.position,\n    failure_ids: received.failures, passed: received.failures.length === 0}, 'summary');\n  need(received.failures.length === 0, 'all reconstructed finite author predicates must hold for adoption');\n  return {carriers: carriers.map(c => ({n: c.n, states: c.state_count, groups: c.groups.length,\n    orbits: c.orbit_count, periods: c.period_set})), predicate_count: received.position,\n    predicate_census: received.census, total_states: total};\n}\n\nfunction statKey(s) {\n  need(typeof s.mtimeNs === 'bigint' && typeof s.ctimeNs === 'bigint',\n    'runtime supplies exact nanosecond BigInt file timestamps');\n  return {device: String(s.dev), inode: String(s.ino), mode: String(s.mode),\n    size_bytes: String(s.size), link_count: String(s.nlink),\n    mtime_ns: String(s.mtimeNs), ctime_ns: String(s.ctimeNs)};\n}\nconst digest = bytes => crypto.createHash('sha256').update(bytes).digest('hex');\nfunction readStable(name, label) {\n  need(typeof name === 'string' && path.isAbsolute(name) && path.resolve(name) === name,\n    label + ': explicit normalized absolute path');\n  const initial = fs.lstatSync(name, {bigint: true});\n  need(initial.isFile() && !initial.isSymbolicLink(), label + ': regular nonsymlink file');\n  const fd = fs.openSync(name, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW);\n  let raw, before;\n  try {\n    const opened = fs.fstatSync(fd, {bigint: true});\n    need(opened.isFile(), label + ': opened regular file');\n    before = statKey(opened); deep(statKey(initial), before, label + ': lstat/fstat identity');\n    raw = fs.readFileSync(fd);\n    deep(statKey(fs.fstatSync(fd, {bigint: true})), before, label + ': unchanged opened file');\n  } finally { fs.closeSync(fd); }\n  const after = fs.lstatSync(name, {bigint: true});\n  need(after.isFile() && !after.isSymbolicLink(), label + ': path remains regular');\n  deep(statKey(after), before, label + ': path remains same file');\n  need(String(raw.length) === before.size_bytes, label + ': complete file length');\n  return {raw, key: {path: name, bytes: raw.length, sha256: digest(raw), ...before}};\n}\nfunction pinned(spec, label) {\n  shape(spec, ['path', 'bytes', 'sha256'], label + ': pin');\n  need(Number.isSafeInteger(spec.bytes) && spec.bytes > 0, label + ': positive integer bytes');\n  need(typeof spec.sha256 === 'string' && /^[0-9a-f]{64}$/.test(spec.sha256), label + ': lowercase SHA-256');\n  const read = readStable(spec.path, label);\n  need(read.raw.length === spec.bytes && read.key.sha256 === spec.sha256, label + ': exact pinned raw bytes');\n  return read;\n}\nfunction main() {\n  need(process.argv.length === 4 && process.argv[2] === '--binding',\n    'exact interface: node receive_saved_output.js --binding ABSOLUTE_BINDING_JSON');\n  const bindingRead = readStable(process.argv[3], 'binding');\n  const binding = parseStrict(bindingRead.raw, 'binding');\n  shape(binding, ['schema', 'approved', 'role', 'saved_stdout', 'parameters', 'receiver'], 'binding');\n  deep(binding.schema, 'p212-saved-output-semantic-binding-v1', 'binding/schema');\n  deep(binding.approved, true, 'binding/approved');\n  deep(binding.role, 'author', 'binding/role');\n  shape(binding.receiver, ['path', 'bytes', 'sha256'], 'binding/receiver');\n  need(binding.receiver.path === path.resolve(__filename), 'binding pins this exact receiver path');\n  const receiverRead = pinned(binding.receiver, 'receiver');\n  const parameterRead = pinned(binding.parameters, 'parameters');\n  need(parameterRead.key.sha256 === PARAMETER_SHA256 && parameterRead.raw.length === 609,\n    'unchanged exact source-accepted parameter bytes');\n  deep(parseStrict(parameterRead.raw, 'parameters'), PARAMETERS, 'fixed parameter contract');\n  const outputRead = pinned(binding.saved_stdout, 'saved_stdout');\n  need(new Set([bindingRead.key.path, receiverRead.key.path, parameterRead.key.path, outputRead.key.path]).size === 4,\n    'four distinct explicit input paths');\n  const out = parseStrict(outputRead.raw, 'saved_stdout', true);\n  const semantics = receiveSemantics(out);\n  const before = [bindingRead, receiverRead, parameterRead, outputRead];\n  const after = before.map((old, i) => {\n    const current = readStable(old.key.path, 'post_input_' + i);\n    need(old.raw.equals(current.raw), 'full before/after raw equality for input ' + i);\n    deep(current.key, old.key, 'full before/after rich key for input ' + i);\n    return current.key;\n  });\n  // A receipt is emitted only after all fields, all comparisons, all pins,\n  // and both complete raw input reads have actually succeeded.\n  const receipt = {\n    schema: 'p212-saved-output-semantic-receipt-v1',\n    status: 'COMPLETE_SAVED_OUTPUT_SEMANTICS_CHECKED',\n    role: 'author_side_receiver_not_independent_review',\n    binding_sha256: bindingRead.key.sha256,\n    source_parameter_sha256: PARAMETER_SHA256,\n    saved_stdout_sha256: outputRead.key.sha256, saved_stdout_bytes: outputRead.raw.length,\n    receiver_sha256: receiverRead.key.sha256,\n    semantic_checks: checks, semantics,\n    inputs_before: before.map(r => r.key), inputs_after: after,\n    scientific_producer_invocations: 0, submitted_code_imports: 0,\n    canonical_accesses: 0, filesystem_writes: 0,\n    scope: 'All twelve output fields, complete labelled catalogues/states/arrows/matrices/orbits/anchors/classes/groups, exact BigInt rational series, all 46 named predicate values and evaluation order, census and coverage; finite saved-output reception only.'\n  };\n  process.stdout.write(canon(receipt) + '\\n');\n}\ntry { main(); }\ncatch (error) {\n  process.stderr.write('P212 saved-output semantic receiver failure: ' + error.name + ': ' + error.message + '\\n');\n  process.exitCode = 1;\n}\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "rg -n 'require\\(|readFile|lstat|openSync|fstat|process\\.|write|eval|spawn|exec|import|CANONICAL|canonical' docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01/receive_saved_output.js",
+        "max_output_tokens": 3000
+      },
+      "result": {
+        "chunk_id": "ec2899",
+        "wall_time_seconds": 0.00000591,
+        "exit_code": 0,
+        "original_token_count": 492,
+        "output": "4: * SOURCE_ONLY preparation; not parsed as JavaScript, imported or executed.\n10: * No submitted-code import, process spawning, network, environment read,\n11: * canonical access, filesystem write, or producer invocation exists here.\n13:const fs = require('node:fs');\n14:const crypto = require('node:crypto');\n15:const path = require('node:path');\n94:  throw new Error('noncontract value reached canonical serializer');\n171:    const match = /^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?/.exec(text.slice(i));\n676:    need(pure.length === entries.length, scope + ': full canonical pure-group correspondence');\n701:    control_provenance: 'Deductive rational expansions in the admitted MATHEMATICAL_AUDIT.md; not prior executed results.'};\n763:  const initial = fs.lstatSync(name, {bigint: true});\n765:  const fd = fs.openSync(name, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW);\n768:    const opened = fs.fstatSync(fd, {bigint: true});\n770:    before = statKey(opened); deep(statKey(initial), before, label + ': lstat/fstat identity');\n771:    raw = fs.readFileSync(fd);\n772:    deep(statKey(fs.fstatSync(fd, {bigint: true})), before, label + ': unchanged opened file');\n774:  const after = fs.lstatSync(name, {bigint: true});\n789:  need(process.argv.length === 4 && process.argv[2] === '--binding',\n791:  const bindingRead = readStable(process.argv[3], 'binding');\n828:    scientific_producer_invocations: 0, submitted_code_imports: 0,\n829:    canonical_accesses: 0, filesystem_writes: 0,\n830:    scope: 'All twelve output fields, complete labelled catalogues/states/arrows/matrices/orbits/anchors/classes/groups, exact BigInt rational series, all 46 named predicate values and evaluation order, census and coverage; finite saved-output reception only.'\n832:  process.stdout.write(canon(receipt) + '\\n');\n836:  process.stderr.write('P212 saved-output semantic receiver failure: ' + error.name + ': ' + error.message + '\\n');\n837:  process.exitCode = 1;\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "sha256sum --check --strict docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01/INPUT_PINS.sha256",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "2bfec7",
+        "wall_time_seconds": 0.00000567,
+        "exit_code": 0,
+        "original_token_count": 115,
+        "output": "papers/212-closed-pointer-orbits/OUTPUT_SCHEMA.md: OK\npapers/212-closed-pointer-orbits/PARAMETERS.json: OK\npapers/212-closed-pointer-orbits/verify.py: OK\ndocs/papers211_215_sequence/qa/p211_a_root_reception/inspect_saved_output.py: OK\ndocs/papers211_215_sequence/P212_THEOREM_CONTRACT.md: OK\ndocs/papers211_215_sequence/qa/p212_author_source_reception/RECEPTION.md: OK\n.agents/skills/symbolic-dynamics-research/SKILL.md: OK\ndocs/research_state/WORKFLOW.md: OK\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "perl -MJSON::PP -e '\nuse strict; use warnings;\nsub body { my ($p)=@_; open my $fh,\"<:raw\",$p or die \"$p: $!\"; local $/; my $t=<$fh>; close $fh; return $t; }\nmy $base=\"docs/papers211_215_sequence/qa/p212_saved_output_semantic_preparation01\";\nmy $js=body(\"$base/receive_saved_output.js\");\nmy $py=body(\"papers/212-closed-pointer-orbits/verify.py\");\nmy ($jd)=$js =~ /const NAMES = \\[(.*?)\\];\\s*const EXCLUDED/s;\nmy ($pd)=$py =~ /PREDICATES = \\((.*?)\\)\\s*EXCLUDED_CLAIMS/s;\ndie \"declaration regions\" unless defined($jd) && defined($pd);\nmy @jn=$jd =~ /\\x27([a-z_]+)\\x27/g; my @pn=$pd =~ /\"([a-z_]+)\"/g;\ndie \"ordered declared predicate equality\" unless @jn==46 && join(\",\",@jn) eq join(\",\",@pn);\nmy %calls=map {$_=>1} ($js =~ /ledger\\.check\\(\\x27([a-z_]+)\\x27/g);\ndie \"all check call names\" unless keys(%calls)==46 && join(\",\",sort keys %calls) eq join(\",\",sort @pn);\nmy @imports=$js =~ /require\\(\\x27([^\\x27]+)\\x27\\)/g;\ndie \"exact three imports\" unless join(\",\",@imports) eq \"node:fs,node:crypto,node:path\";\nmy $reads=decode_json(body(\"$base/NATIVE_READS.json\"));\ndie \"native read count\" unless @{$reads->{records}}==15;\nmy $params=decode_json(body(\"papers/212-closed-pointer-orbits/PARAMETERS.json\"));\ndie \"parameter keys\" unless keys(%$params)==14;\ndie \"plan local link\" unless -f \"$base/receive_saved_output.js\";\nprint \"SOURCE_ONLY lexical record: exact 46 ordered names and 46 literal check-call names match source\\n\";\nprint \"SOURCE_ONLY lexical record: imports node:fs,node:crypto,node:path only\\n\";\nprint \"Metadata: 15 native read records parsed; 14 parameter fields; plan link resolves\\n\";\nprint \"No JavaScript/Python syntax parser, import, receiver, fixture or scientific producer executed\\n\";\n'",
+        "max_output_tokens": 1700
+      },
+      "result": {
+        "chunk_id": "c44ac1",
+        "wall_time_seconds": 0.00000305,
+        "exit_code": 0,
+        "original_token_count": 86,
+        "output": "SOURCE_ONLY lexical record: exact 46 ordered names and 46 literal check-call names match source\nSOURCE_ONLY lexical record: imports node:fs,node:crypto,node:path only\nMetadata: 15 native read records parsed; 14 parameter fields; plan link resolves\nNo JavaScript/Python syntax parser, import, receiver, fixture or scientific producer executed\n"
+      }
+    }
+  ]
+}

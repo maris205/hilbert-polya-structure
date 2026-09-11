@@ -1,0 +1,46 @@
+{
+  "input_and_predecessor_manifest_checks": [
+    {
+      "request": {
+        "cmd": "sha256sum -c docs/papers211_215_sequence/qa/p211_round1_adapter02/INPUTS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "ff834b",
+        "wall_time_seconds": 0.00000529,
+        "exit_code": 0,
+        "original_token_count": 328,
+        "output": ".agents/skills/symbolic-dynamics-research/SKILL.md: OK\ndocs/papers211_215_sequence/qa/p211_round0_execution01/EXTERNAL_REFERENCES.json: OK\ndocs/papers211_215_sequence/qa/p211_round0_execution01/READ_INPUTS.json: OK\ndocs/papers211_215_sequence/qa/p211_round0_execution01/SOURCE_INPUTS_AFTER.json: OK\ndocs/papers211_215_sequence/qa/p211_round0_execution01/freeze.py: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING_PENDING.json: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/PLAN.md: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/SHA256SUMS: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/static_check.py: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter02/BINDING.schema.json: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter02/BINDING_PENDING.json: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter02/freeze.py: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter02/static_check.py: OK\ndocs/papers211_215_sequence/qa/p211_round1_binding_root/ENTRY_PREFLIGHT_FAILED01_NATIVE.json: OK\ndocs/papers211_215_sequence/qa/p211_round1_preparation/ROLE_SELECTION_DRAFT.json: OK\ndocs/research_state/WORKFLOW.md: OK\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum -c SHA256SUMS",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round1_adapter01",
+        "max_output_tokens": 4500
+      },
+      "result": {
+        "chunk_id": "7c4d38",
+        "wall_time_seconds": 0.00000507,
+        "exit_code": 0,
+        "original_token_count": 117,
+        "output": "BINDING.schema.json: OK\nBINDING_PENDING.json: OK\nDERIVATION.diff: OK\nDERIVATION_NATIVE.json: OK\nDRAFT_ORIGINAL_MAPPING.json: OK\nINPUTS.sha256: OK\nNATIVE_PREPARATION_RECORDS.json: OK\nNATIVE_STATIC_CHECKS.json: OK\nPLAN.md: OK\nPRESEAL_CHECK_NATIVE.json: OK\ndraft_before_host_scope/BINDING.schema.json: OK\ndraft_before_host_scope/BINDING_PENDING.json: OK\ndraft_before_host_scope/freeze.py: OK\ndraft_before_host_scope/static_check.py: OK\nfreeze.py: OK\nstatic_check.py: OK\n"
+      }
+    }
+  ],
+  "preseal": {
+    "request": {
+      "cmd": "node - <<'JS'\nconst fs=require('fs'),path=require('path'),crypto=require('crypto');const root='/root/autodl-tmp/symbolic_dynamics',d=path.join(root,'docs/papers211_215_sequence/qa/p211_round1_adapter02');const expected=['BINDING.schema.json','BINDING_PENDING.json','DERIVATION.diff','DERIVATION_NATIVE.json','INDEPENDENT_STATIC_RECEPTION.json','INPUTS.sha256','NATIVE_PREPARATION_READS.json','NATIVE_STATIC_CHECKS.json','PLAN.md','freeze.py','static_check.py'].sort();let checks=0;const need=(b,s)=>{checks++;if(!b)throw Error(s);};const digest=b=>crypto.createHash('sha256').update(b).digest('hex');const files=fs.readdirSync(d).sort();need(JSON.stringify(files)===JSON.stringify(expected),'exact preseal payload membership');const pins={};for(const n of files){const p=path.join(d,n),s=fs.lstatSync(p);need(s.isFile()&&!s.isSymbolicLink()&&fs.realpathSync(p)===p,'ordinary preparation file '+n);const b=fs.readFileSync(p);pins[n]={bytes:b.length,sha256:digest(b)};}const raw=fs.readFileSync(path.join(d,'INPUTS.sha256'),'utf8'),lines=raw.trimEnd().split('\\n'),inputPins={};need(lines.length===18,'exact 18 input rows');for(const line of lines){const m=line.match(/^([a-f0-9]{64})  ([^\\r\\n]+)$/);need(!!m,'input line syntax');need(!inputPins[m[2]],'unique input path');need(m[2].startsWith('docs/')||m[2]==='.agents/skills/symbolic-dynamics-research/SKILL.md','bounded input prefix');const p=path.join(root,m[2]);need(fs.realpathSync(p)===p&&fs.lstatSync(p).isFile(),'ordinary selected input');const b=fs.readFileSync(p);need(digest(b)===m[1],'unchanged selected input '+m[2]);inputPins[m[2]]={bytes:b.length,sha256:m[1]};}const native=JSON.parse(fs.readFileSync(path.join(d,'NATIVE_STATIC_CHECKS.json')));need(native.length===1&&native[0].result.exit_code===0,'one actual successful static run');const result=JSON.parse(native[0].result.output);need(result.checks===202&&result.recorder_executions===0&&result.scientific_executions===0&&result.observed_external_directories===0,'static-only result scope');need(Object.keys(result.inputs).length===14,'14 actual static input keys');for(const[n,p]of Object.entries(result.inputs))need(JSON.stringify(p)===JSON.stringify(inputPins[n]),'every static input matches final 18-row key '+n);const ds=JSON.parse(fs.readFileSync(path.join(d,'DERIVATION_NATIVE.json')));need(ds.length===3&&ds.every(r=>r.result.exit_code===1&&r.request.cmd.startsWith('diff -u ')),'three actual native diffs');need(fs.readFileSync(path.join(d,'DERIVATION.diff'),'utf8')===ds.map(r=>r.result.output).join(''),'complete raw diff equals all actual stdout bytes');const ind=JSON.parse(fs.readFileSync(path.join(d,'INDEPENDENT_STATIC_RECEPTION.json')));for(const[n,h]of Object.entries(ind.reviewed_pins))need(pins[n].sha256===h,'independent final review pin '+n);need(ind.binding_or_execution_acceptance===false&&ind.manuscript_review===false,'independent static scope');const pending=JSON.parse(fs.readFileSync(path.join(d,'BINDING_PENDING.json')));need(pending.schema==='p211_round1_binding_v2'&&pending.enabled===false&&pending.external_trees===null,'still-disabled unbound pending template');const plan=fs.readFileSync(path.join(d,'PLAN.md'),'utf8');for(const m of plan.matchAll(/\\[[^\\]\\n]*\\]\\(([^)\\n]+)\\)/g)){const target=path.resolve(d,m[1]);need(target.startsWith(root+'/')&&fs.existsSync(target),'plan link exists '+m[1]);}need(!fs.existsSync(path.join(root,'papers/211-kernel-image-projection-feedback/frozen_round1')),'physical Round1 still absent');need(!fs.existsSync(path.join(root,'docs/papers211_215_sequence/qa/p211_round1_execution01')),'execution01 still absent');console.log(JSON.stringify({status:'OWN_PREPARATION_PRESEAL_STATIC_METADATA_CONSISTENT_NOT_ROOT_RECEPTION',checks,payloads:files.length,payload_bytes:Object.values(pins).reduce((a,p)=>a+p.bytes,0),input_rows:18,static_input_rows:14,static_checks:202,recorder_executions:0,pins},null,2));\nJS",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 5500
+    },
+    "result": {
+      "chunk_id": "61bb75",
+      "wall_time_seconds": 0.000006049,
+      "exit_code": 0,
+      "original_token_count": 453,
+      "output": "{\n  \"status\": \"OWN_PREPARATION_PRESEAL_STATIC_METADATA_CONSISTENT_NOT_ROOT_RECEPTION\",\n  \"checks\": 140,\n  \"payloads\": 11,\n  \"payload_bytes\": 237347,\n  \"input_rows\": 18,\n  \"static_input_rows\": 14,\n  \"static_checks\": 202,\n  \"recorder_executions\": 0,\n  \"pins\": {\n    \"BINDING.schema.json\": {\n      \"bytes\": 23984,\n      \"sha256\": \"ceb305ffd8bb5a03016e2d74cf230b7242c7b19aac9d0aea58b9b6f7ccfc05ce\"\n    },\n    \"BINDING_PENDING.json\": {\n      \"bytes\": 1729,\n      \"sha256\": \"ce0a333a55068e358945db9eb3b6c125bb7b5b218430d3744fdc14b971b6e0d7\"\n    },\n    \"DERIVATION.diff\": {\n      \"bytes\": 11654,\n      \"sha256\": \"92e93d5046575f7df05a074da0e96df6d6b32761a7e6db4cbbe70cfb20912224\"\n    },\n    \"DERIVATION_NATIVE.json\": {\n      \"bytes\": 13472,\n      \"sha256\": \"ebfbbfab4c0a14a41e7d438dd0e3cb85b4d085e4314ab5a1f5fd32f78aff6eac\"\n    },\n    \"INDEPENDENT_STATIC_RECEPTION.json\": {\n      \"bytes\": 2746,\n      \"sha256\": \"6a7e950ee82029dd2c1f20ad30d25eeb31790995e267b96644c0dfb1ac5942d4\"\n    },\n    \"INPUTS.sha256\": {\n      \"bytes\": 2425,\n      \"sha256\": \"1821f588428db485413acd266c93f4bd05ce9e5e46977ece1a715b3a3fab1a48\"\n    },\n    \"NATIVE_PREPARATION_READS.json\": {\n      \"bytes\": 100108,\n      \"sha256\": \"7cacf6124d7eb62f9dea935a4028163c7aefaf29b5555b2946687ffeac9545ec\"\n    },\n    \"NATIVE_STATIC_CHECKS.json\": {\n      \"bytes\": 16431,\n      \"sha256\": \"ccca744fcf9745fc4a7b85bffc2e49a87ecb30ad60bf3533558243fd08a482b8\"\n    },\n    \"PLAN.md\": {\n      \"bytes\": 7421,\n      \"sha256\": \"6be26c45339fd87a7abb316da27fe35f9553652b62f95e1e4b78f1aeef2f6dfb\"\n    },\n    \"freeze.py\": {\n      \"bytes\": 37756,\n      \"sha256\": \"0b43b429aa7381d138e81d5c849b0c9925c5f94107f044c94419150c3b059b1a\"\n    },\n    \"static_check.py\": {\n      \"bytes\": 19621,\n      \"sha256\": \"29fa5c09c602163a027abf23a9ffd4974751ed66aeecd610412d23655115982b\"\n    }\n  }\n}\n"
+    }
+  }
+}

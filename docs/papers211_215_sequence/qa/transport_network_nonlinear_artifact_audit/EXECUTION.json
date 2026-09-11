@@ -1,0 +1,51 @@
+{
+  "schema": "transport-network-nonlinear-native-audit-execution-v1",
+  "capture_request": {
+    "cmd": "/usr/bin/python3.10 -I -S -B -c 'import base64,hashlib,json,pathlib,subprocess,time\nroot=\"/root/autodl-tmp/symbolic_dynamics\"\nargv=[\"/usr/bin/python3.10\",\"-I\",\"-S\",\"-B\",root+\"/docs/papers211_215_sequence/qa/transport_network_nonlinear_artifact_audit/audit.py\"]\nenv={\"LANG\":\"C\",\"LC_ALL\":\"C\",\"PATH\":\"/usr/bin:/bin\",\"TZ\":\"UTC\"}\ndef encoded(raw):\n text=raw.decode(\"utf-8\")\n assert text.encode(\"utf-8\")==raw\n return {\"encoding\":\"utf-8\",\"text\":text,\"bytes\":len(raw),\"sha256\":hashlib.sha256(raw).hexdigest()}\nstart=time.time_ns()\nproc=subprocess.run(argv,cwd=root,env=env,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=60,check=False)\nrecord={\"schema\":\"actual-native-audit-execution-v1\",\"argv\":argv,\"cwd\":root,\"environment\":env,\"started_unix_ns\":start,\"finished_unix_ns\":time.time_ns(),\"returncode\":proc.returncode,\"stdout\":encoded(proc.stdout),\"stderr\":encoded(proc.stderr),\"capture_kind\":\"Actual subprocess PIPE bytes encoded with strict round-trip UTF-8; no stream normalization\"}\nprint(json.dumps(record,ensure_ascii=False,indent=2))\n'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "yield_time_ms": 1000,
+    "max_output_tokens": 65000
+  },
+  "capture_tool_metadata": {
+    "chunk_id": "ce5ae3",
+    "wall_time_seconds": 0.247246317,
+    "exit_code": 0,
+    "original_token_count": 35860
+  },
+  "native_execution": {
+    "schema": "actual-native-audit-execution-v1",
+    "argv": [
+      "/usr/bin/python3.10",
+      "-I",
+      "-S",
+      "-B",
+      "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/transport_network_nonlinear_artifact_audit/audit.py"
+    ],
+    "cwd": "/root/autodl-tmp/symbolic_dynamics",
+    "environment": {
+      "LANG": "C",
+      "LC_ALL": "C",
+      "PATH": "/usr/bin:/bin",
+      "TZ": "UTC"
+    },
+    "started_unix_ns": 1788872419142297600,
+    "finished_unix_ns": 1788872419504829400,
+    "returncode": 0,
+    "stdout": {
+      "encoding": "utf-8",
+      "path": "AUDIT_RESULT.json",
+      "bytes": 135044,
+      "sha256": "1f6ee7fe6b916ba82e82f331a2d531ed9611db36fd37670f9f2fa4459f5bd4b9"
+    },
+    "stderr": {
+      "encoding": "utf-8",
+      "text": "",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "capture_kind": "Actual subprocess PIPE bytes encoded with strict round-trip UTF-8; no stream normalization"
+  },
+  "result_file_note": "AUDIT_RESULT.json is the exact successful auditor stdout byte stream, not a reserialized summary. The native inner subprocess stdout/stderr are separately retained as lossless base64 records within that file.",
+  "input_key_sha256": "67ca0e4dd8e11727cf5c5781e5561f566735d8a65ab5b1aa09af10ba2cf80d12",
+  "preserved_initial_attempt": "failed_setup01/EXECUTION.json"
+}

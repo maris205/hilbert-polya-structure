@@ -1,0 +1,67 @@
+# Independent checkpoint03 Git-phase consultation
+
+2026-09-09 UTC. Verdict: NO_BLOCKING_FINDING_NARROW_SOURCE_SCOPE_OPERATIONAL_GATES_REMAIN.
+
+This is the requested independent source-only consultation on finite Git phase separation, selected-path isolation, the prior-root-receipt chain, and partial remote outcomes. No Critical, Major or Minor code finding is established in that scope. Five informational boundaries below remain material conditions on later root reception. This is not full source acceptance, runtime/startup acceptance, input capture, a successful phase, private synchronization, or manuscript/scientific review.
+
+## Independence and exact input
+
+Consultant: /root/round211_fresh_residual_scout. The executor's SOURCE_ORIGIN identifies /root/round211_finite_matching_scout as its author. I contributed neither checkpoint03 executor nor its bindings/protocol. I previously authored P212 execution-scope prose/source-amendment materials and scouting proofs; those payloads are excluded from any independent correctness claim here. The main reviewer /root/round211_functional_surgery_residual owns the broader old/new delta, startup and metadata audit.
+
+Reviewed executor: private_checkpoint_executor_preparation03/checkpoint.py, 774 lines, 45,584 bytes, SHA256 4851f2c1c39335c1d0f0de270c2d3ae9637a96991425a7cd1891e32da6f9b0d5. The complete new file was read in native numbered slices. The initially displayed 521–774 result was truncated; the separate 580–710 slice supplies the overlap, and the ending through line 774 is present. I read the complete SOURCE_CONTRACT, SOURCE_ORIGIN, DELTA_SCOPE, READ_SCOPE, HANDOFF, four disabled bindings, COMMAND_RUNTIME_PROTOCOL, chosen-scope root RECEPTION, old02 HANDOFF and old02 root RECEPTION. Old checkpoint02 source was read only at its phase functions, lines 549–712, plus a literal function/command-location search. This consultation does not claim the complete old source or complete 83-KB old/new diff was independently read.
+
+CHOSEN_SCOPE is an accepted fixed input, not a newly received 8,207-row proof. Its original root receipt and whole-file hash were read/checked; I did not individually reopen all 8,207 selected payloads, inspect every row of its 6,162,898-byte plan, or follow embedded host-origin paths. Its fixed hash is 76e633c45920f46fc6c1d3e840d9d82fd7025946b31a397356c1d771b1ba5c92. Sixteen focused documentary input hashes are in INPUT_PINS.sha256. Those hashes are not a new runtime metadata key.
+
+## Finite phase and path argument
+
+1. The source has exactly capture, stage, commit and push choices (lines 41 and 758–771). Each invocation chooses one phase and a NEW fixed root-owned binding path, whose complete expected hash is supplied from the enclosing request, not from the binding itself (511–544). Four author examples remain disabled. There is no prepare-mode or automatic-successor branch.
+
+2. The selected boundary is the older accepted 43-closed checkpoint: 8,207 files, 386,716,363 bytes, 8,204 additions, two modifications, one unchanged file and no deletions. The source directly consumes its exact plan and its pinned 178 core plus four bridge membership groups (26–33, 151–223); a group prefix cannot select an extra path. The two logical central files map explicitly to physical control_before_residual46_accepted01/STATE.before.md and PIPELINE.before.md (46–49), with no fallback to live indexes or the older 34-boundary snapshot. The source's historical wording about excluding 46-closed controls does not imply 46 is the current research count; the root's current 48-closed work and current P212 remain outside this checkpoint selection.
+
+3. Capture creates a unique owned run and isolated empty index parent, then freezes only the selected payload (599–609, 644–664). Before, frozen and after bytes and relevant identities must agree. Capture performs no Git mutation. Successor source must be that actual run's physically frozen executed_source.py, with matching source and RUN pins (611–632). There is no default-index substitution or overwrite of an existing/failed isolated index.
+
+4. Stage's four mutations are read-tree BASE, selected hash-object --no-filters --stdin-paths, exact NUL-framed update-index --index-info, and write-tree (666–682). Its calls explicitly pass the owned index. Selected index/tree queries use at most 512 exact names per batch. The complete diff-tree request is unfiltered: its parsed set must equal all 8,206 expected changed paths, each exact A/M tuple, with deletion, rename and nonselected names refused (439–493). Independently calculated frozen Git blob OIDs and lengths must match native outputs. GIT_INDEX_FILE specifies an alternate index; when absent Git normally uses its default index. This is why the literal index arguments matter, not merely the variable's existence. [Official Git environment reference](https://git-scm.com/docs/git#Documentation/git.txt-GITINDEXFILE)
+
+5. Commit permits one commit-tree with the exact prior tree, exactly BASE as parent, command-local identity and fixed narrow message. Main must still be BASE; complete returned commit bytes, independent commit OID, four headers and message are checked (683–690, 707, 741–756). An unreferenced commit object is not synchronization.
+
+6. Push rechecks the accepted chain, tree, parent, frozen index, protected roles and actual remote BASE, then issues one explicit ordinary push of the actual commit to refs/heads/main. There is no plus refspec, force, delete, retry, pull, merge, reset or cleanup command (691–708). It next checks actual remote COMMIT, compare-and-swap updates bare main from BASE, and repeats repository/tree/parent checks. Git's ordinary branch update restrictions differ from force; the source does not request force. [Official git-push reference](https://git-scm.com/docs/git-push) The three-argument update-ref form checks the old OID before replacing the ref. [Official git-update-ref reference](https://git-scm.com/docs/git-update-ref)
+
+7. The original mirror has only three exact read-only command tuples (381–385). Destination commands use the fixed accepted bare repository, fixed explicit remote URL and command-local settings. Fresh root-received protected-role and inherited-environment keys remain necessary; this is not a hermetic Git/SSH/ELF/configuration closure proof.
+
+## Nonself root-product and prior-phase chain
+
+Native completion does not self-seal a phase. RESULT has NATIVE_PHASE_COMPLETE_ROOT_PRODUCT_PENDING, phase_seal null and automatic_next_phase false (726–734). Under SOURCE_CONTRACT, root must attach the actual outer request, initial return, every actual yield/session/poll/final return and any exception/unknown, then independently receive the actual originals before creating ROOT_RECEPTION and the complete nonself manifest. A returned Boolean or producer summary is not the actual tool envelope.
+
+For each successor, complete_manifest pins the preceding manifest's whole bytes, compares its regular-file membership and hashes each listed file. previous then pins the exact preceding ROOT_RECEPTION path/bytes, checks its exact schema against actual RESULT, scope/source/run/RUN pin and prior seal, reads the original preceding binding, and recursively verifies the earlier chain (496–509, 546–572). The root receipt is itself included by the nonself manifest census. The receipt does not include its own manifest hash. This avoids treating a single most-recent native RESULT as sufficient evidence.
+
+No capture/run/phase path, future receipt, source acceptance or runtime acceptance has been created or enabled by this consultation. The following boundaries limit the source argument.
+
+## Informational boundaries, not fabricated code repairs
+
+### GPC-I1 — External acceptance and startup are not self-certified
+
+ref_input verifies referenced full bytes and physical QA location but treats source/runtime receipt text as externally chosen data (144–149, 534–539). Their substantive acceptance must come from root's actual independent reception. Python imports occur at lines 7–20 before internal flags/binding checks. The fixed external /usr/bin/python3 -I -S -B invocation and resolved interpreter/protected-role key must therefore be received before launch; later internal checks do not attest earlier startup. Prior phase ROOT_RECEPTION true fields encode a root decision, not a producer's authority to invent that decision.
+
+### GPC-I2 — Earliest failures are covered by the outer product, not universally by FAILURE.json
+
+The phase try starts only at line 636. Binding, source, inventory, prior-chain and run/index setup failures occur earlier. Capture prints its real run at line 600, but a failure between that print and phase-directory creation can leave a partial run without a phase FAILURE.json. Even error-record writing can itself fail. Thus the statement is not “every failure yields a complete phase FAILURE.json.” Root must receive actual outer exception/status/stream originals and retain partial data. During native command processing, ATTEMPT/input/raw files are created before spawn, actual exit and pipe EOF are distinct, and success requires exit zero, EOF, no timeout and no exception (307–368). Missing EOF, timeout or a tool exception is not success. Bounded still-owned-group handling is not exhaustive process-tree closure.
+
+### GPC-I3 — Normal push may have a real partial external outcome
+
+The remote may already have accepted COMMIT before local CAS, later verification or root-product reception fails (698–708). FAILURE explicitly records possible_partial_git_or_remote_state and no rollback/retry (735–738). A failed wrapper or absent root acceptance does not imply that the remote remained BASE. Read the actual command originals to distinguish confirmed, failed and unknown state; do not manufacture rollback or retry. This is anticipated by the contract, not a new authorization to mutate anything.
+
+### GPC-I4 — The 50-second bound is per native communicate, not a full phase bound
+
+blob uses stream.read() without a byte-count argument (109–128), then compares the result against expected keys later. Plan-row expected lengths and the 400,000,000-byte total do not cap allocation before this read. A stale oversized local file can consume resources before refusal. The 50-second timeout belongs to process.communicate (326), not Python startup, local reads, membership walks, copy loops or the overall phase. No global deadline, resource reservation or strict adversarial-file read limit is proved or claimed. This is a real operational boundary, but not an established violation of the accepted native-command-only timeout contract.
+
+### GPC-I5 — Complete regular product capture is not all-node hostile-filesystem closure
+
+complete_manifest's census includes entries for which p.is_file() is true and separately rejects any symlink (504–508). It does not enumerate FIFO/socket/device entries as regular manifest members, automatically reject all nonregular entries, or perform a second closing directory census. The frozen-root extra-file census has the corresponding is_file boundary; declared group walks separately refuse nonregular selected entries.
+
+SOURCE_CONTRACT explicitly refuses nonregular selected payload files, while phase products require root's finite exclusive attachment and complete original reception. In that defined model I find no established missing selected regular file or phase-chain bypass. The operational reading must remain a finite, exclusively owned regular product capture whose exclusivity persists through successor checks. Do not promote this to automatic rejection of every filesystem-node type or immunity to adversarial concurrent directory mutation. If automatic rejection of any nonregular phase attachment is intended as an additional requirement, the current source does not implement it and would need a separately received source delta. No such stronger requirement is silently assumed here.
+
+## Evidence, scope and handoff
+
+NATIVE_READS records actual local source/read/hash requests, including an early failed guessed-path search and the original truncated output plus its completing read. It is a finite documentary log, not an executor run. PRIMARY_REQUESTS records the actual three official Git documentation requests and precise narrow uses; it is not a full webpage archive or a host Git-version check. No executor/helper was executed or imported, no AST/syntax/refusal test or process simulation was run, and no Git/SSH command, repository probe, host-role inspection, capture, stage, commit, push, scientific producer or build was performed.
+
+Only this new git_phase_consult01 directory was written, through apply_patch. All existing source, disabled bindings, selected evidence, central indexes and sealed packets remain untouched. Root and the main reviewer must receive this exact packet and integrate its limited findings without substituting it for their broader audit. HOLD_OPERATIONAL and HOLD_EXTERNAL remain.

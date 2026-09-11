@@ -1,0 +1,36 @@
+{
+  "schema": "flat_preparation_checks_v1",
+  "scope": "Actual read-only preparation metadata/pin/link checks; not execution readiness, physical-copy evidence, manuscript review or a scientific run.",
+  "records": [
+    {
+      "cmd": "sha256sum -c docs/papers211_215_sequence/qa/p211_round1_preparation/INPUTS.sha256",
+      "result": {
+        "chunk_id": "09d8d6",
+        "wall_time_seconds": 0.00000312,
+        "exit_code": 0,
+        "original_token_count": 157,
+        "output": ".agents/skills/symbolic-dynamics-research/SKILL.md: OK\ndocs/research_state/WORKFLOW.md: OK\ndocs/papers211_215_sequence/P211_REVIEW_CONTRACT.md: OK\ndocs/papers204_208_sequence/ARTIFACT_CONTRACT.md: OK\ndocs/papers197_201_sequence/HOSTILE_REVIEW_PROTOCOL.md: OK\ndocs/papers211_215_sequence/qa/p211_round0_execution01/freeze.py: OK\ndocs/papers211_215_sequence/qa/p211_round0_preparation/PLAN.md: OK\ndocs/papers211_215_sequence/qa/p211_round0_root_reception/RECEPTION.md: OK\ndocs/papers211_215_sequence/qa/p211_round0_execution01/SOURCE_INPUTS_AFTER.json: OK\ndocs/papers211_215_sequence/qa/p211_round0_execution01/RESULT.json: OK\n"
+      }
+    },
+    {
+      "cmd": "perl -MJSON::PP -0777 -e 'sub j { my($p)=@_; open my $f,\"<\",$p or die $!; local $/; return decode_json(<$f>); } my $d=j($ARGV[0]); my $b=j($ARGV[1]); my $n=j($ARGV[2]); die \"status\" unless $d->{status} eq \"PLAN_ONLY_NOT_EXECUTABLE_NOT_BOUND\"; die \"enabled\" if $d->{binding}{enabled}; for(qw(scientific_executions freeze_executions physical_copies canonical_adoptions)){die $_ unless $d->{$_}==0;} my %p; for(@{$d->{author_role}{payloads}}){die \"duplicate\" if exists $p{$_->{relative_name}}; $p{$_->{relative_name}}=$_->{pin};} die \"author count\" unless keys(%p)==32 && keys(%$b)==32; my $c=JSON::PP->new->canonical; die \"author baseline\" unless $c->encode(\\%p) eq $c->encode($b); my $a=$d->{review_a_role}; for(qw(manifest manifest_payload_count all_file_count exact_members accepted_delta same_a_acceptance root_reception initial_execution_and_full_output_acceptance canonical_adoption strict_pair_and_native_comparisons complete_external_dependencies embedded_historical_origin_mappings)){die \"premature $_\" if defined $a->{$_};} die \"roles\" unless @{$a->{required_payload_names}}==10 && $a->{destination_prefix} eq \"review_a\"; die \"read records\" unless @{$n->{records}}==12; die \"absence failure erased\" unless $n->{records}[10]{result}{exit_code}==2; print \"Draft PASS: exact 32 metadata rows, 10 required A roles, all A evidence/binding deferred; 12 native read records retain exit 2\\n\";' docs/papers211_215_sequence/qa/p211_round1_preparation/ROLE_SELECTION_DRAFT.json docs/papers211_215_sequence/qa/p211_round0_execution01/SOURCE_INPUTS_AFTER.json docs/papers211_215_sequence/qa/p211_round1_preparation/NATIVE_READS.json",
+      "result": {
+        "chunk_id": "cf98b6",
+        "wall_time_seconds": 0.00000555,
+        "exit_code": 0,
+        "original_token_count": 32,
+        "output": "Draft PASS: exact 32 metadata rows, 10 required A roles, all A evidence/binding deferred; 12 native read records retain exit 2\n"
+      }
+    },
+    {
+      "cmd": "perl -MFile::Basename=dirname -MFile::Spec -0777 -e 'my $f=$ARGV[0]; open my $h,\"<\",$f or die $!; my $s=<$h>; my %u; while($s=~/\\]\\(([^)]+)\\)/g){my $p=$1; next if $p eq \"CHECKS_NATIVE.json\"; die \"unexpected URL\" if $p=~m{^[a-z]+:}; my $t=File::Spec->catfile(dirname($f),$p); die \"missing $t\" unless -f $t; $u{$t}=1;} print \"Existing local links PASS: \",scalar(keys %u),\" unique; future CHECKS_NATIVE.json explicitly excluded\\n\";' docs/papers211_215_sequence/qa/p211_round1_preparation/PLAN.md",
+      "result": {
+        "chunk_id": "d7c8fa",
+        "wall_time_seconds": 0.00000504,
+        "exit_code": 0,
+        "original_token_count": 21,
+        "output": "Existing local links PASS: 10 unique; future CHECKS_NATIVE.json explicitly excluded\n"
+      }
+    }
+  ]
+}

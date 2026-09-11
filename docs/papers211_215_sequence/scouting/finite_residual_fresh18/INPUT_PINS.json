@@ -1,0 +1,336 @@
+{
+  "baseline": {
+    "request": {
+      "cmd": "node <<'NODE'\n\nconst fs=require('fs'),path=require('path'),crypto=require('crypto');\nconst root='/root/autodl-tmp/symbolic_dynamics';\nconst fields=['dev','ino','mode','nlink','uid','gid','rdev','size','mtimeNs','ctimeNs'];\nconst meta=s=>Object.fromEntries(fields.map(k=>[k,String(s[k])]));\nlet checks=0;function ensure(x,m){checks++;if(!x)throw Error(m);}\nfunction key(p){const full=path.resolve(root,p),before=fs.lstatSync(full,{bigint:true});ensure(before.isFile()&&!before.isSymbolicLink(),'regular input '+p);const fd=fs.openSync(full,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);try{const a=fs.fstatSync(fd,{bigint:true});const data=fs.readFileSync(fd);const b=fs.fstatSync(fd,{bigint:true}),after=fs.lstatSync(full,{bigint:true});ensure(BigInt(data.length)===a.size,'EOF '+p);ensure(JSON.stringify(meta(before))===JSON.stringify(meta(a))&&JSON.stringify(meta(a))===JSON.stringify(meta(b))&&JSON.stringify(meta(b))===JSON.stringify(meta(after)),'stable metadata '+p);return {path:p,resolved_path:full,sha256:crypto.createHash('sha256').update(data).digest('hex'),metadata:meta(a)};}finally{fs.closeSync(fd);}}\n\nconst selected=[{\"archive_index\":0,\"path\":\".agents/skills/symbolic-dynamics-research/SKILL.md\",\"from\":1,\"to\":3000,\"role\":\"required skill/workflow\"},{\"archive_index\":1,\"path\":\"docs/research_state/WORKFLOW.md\",\"from\":1,\"to\":3000,\"role\":\"required skill/workflow\"},{\"archive_index\":2,\"path\":\"/root/autodl-tmp/.codex/skills/idea-creator/SKILL.md\",\"from\":1,\"to\":3000,\"role\":\"required skill/workflow\"},{\"archive_index\":3,\"path\":\"/root/autodl-tmp/.codex/skills/research-lit/SKILL.md\",\"from\":1,\"to\":3000,\"role\":\"required skill/workflow\"},{\"archive_index\":6,\"path\":\"docs/papers211_215_sequence/PROBLEM_ANCHOR.md\",\"from\":1,\"to\":3000,\"role\":\"current anchor\"},{\"archive_index\":7,\"path\":\"docs/papers197_201_sequence/PROBLEM_ANCHOR.md\",\"from\":1,\"to\":3000,\"role\":\"prior admission criteria\"},{\"archive_index\":9,\"path\":\"docs/papers204_208_sequence/ARTIFACT_CONTRACT.md\",\"from\":1,\"to\":3000,\"role\":\"inherited artifact contract\"},{\"archive_index\":13,\"path\":\"docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md\",\"from\":1,\"to\":3000,\"role\":\"ordered interaction source boundary\"},{\"archive_index\":17,\"path\":\"docs/papers142_146_sequence/scouting/algebraic/SCOUT.md\",\"from\":1,\"to\":130,\"role\":\"old numerical semigroup map\"},{\"archive_index\":18,\"path\":\"docs/papers122_126_sequence/scouting/root/SCOUT.md\",\"from\":20,\"to\":44,\"role\":\"old numerical blowup entry\"},{\"archive_index\":19,\"path\":\"docs/papers122_126_sequence/scouting/replacement/SCOUT.md\",\"from\":20,\"to\":43,\"role\":\"exact old Moore definition\"},{\"archive_index\":20,\"path\":\"docs/papers204_208_sequence/scouting/finite_systems_eighteenth/PROOF_AND_ADAPTERS.md\",\"from\":1,\"to\":128,\"role\":\"old Moore and Brzozowski proof\"},{\"archive_index\":21,\"path\":\"docs/papers211_215_sequence/scouting/word_automata_residual04/SOURCE_SUBTRACTION.md\",\"from\":1,\"to\":105,\"role\":\"current automata subtraction\"},{\"archive_index\":22,\"path\":\"docs/papers211_215_sequence/scouting/fresh_residual_algebra_order01/SOURCES_AND_SUBTRACTION.md\",\"from\":1,\"to\":160,\"role\":\"nearby self-distributive subtraction\"},{\"archive_index\":23,\"path\":\"/root/autodl-tmp/.codex/skills/proof-writer/SKILL.md\",\"from\":1,\"to\":3000,\"role\":\"proof-writer skill\"}];\nconsole.log(JSON.stringify({scope:'POST_READ_BASELINE_NOT_RETROACTIVE_BRACKET',inputs:selected.map(x=>({...x,...key(x.path)})),checks},null,2));\nNODE",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 14000
+    },
+    "native": {
+      "chunk_id": "46b64b",
+      "wall_time_seconds": 0.00000382,
+      "exit_code": 0,
+      "original_token_count": 2602,
+      "output": "{\n  \"scope\": \"POST_READ_BASELINE_NOT_RETROACTIVE_BRACKET\",\n  \"inputs\": [\n    {\n      \"archive_index\": 0,\n      \"path\": \".agents/skills/symbolic-dynamics-research/SKILL.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"required skill/workflow\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/.agents/skills/symbolic-dynamics-research/SKILL.md\",\n      \"sha256\": \"1af30c2095702a0cc722e87389c8d515a4d668b22e85af25edb2fce02c10d22d\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"2192861121\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"1596\",\n        \"mtimeNs\": \"1788602655408692589\",\n        \"ctimeNs\": \"1788602655408692589\"\n      }\n    },\n    {\n      \"archive_index\": 1,\n      \"path\": \"docs/research_state/WORKFLOW.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"required skill/workflow\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md\",\n      \"sha256\": \"dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"8618944055\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"6861\",\n        \"mtimeNs\": \"1788602655408692589\",\n        \"ctimeNs\": \"1788602655408692589\"\n      }\n    },\n    {\n      \"archive_index\": 2,\n      \"path\": \"/root/autodl-tmp/.codex/skills/idea-creator/SKILL.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"required skill/workflow\",\n      \"resolved_path\": \"/root/autodl-tmp/.codex/skills/idea-creator/SKILL.md\",\n      \"sha256\": \"6e013d446a042951a16b8b141c10faf556852a100029f5e9e483d72800b9b69e\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"8607530365\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"10944\",\n        \"mtimeNs\": \"1778895573000000000\",\n        \"ctimeNs\": \"1787558799292046904\"\n      }\n    },\n    {\n      \"archive_index\": 3,\n      \"path\": \"/root/autodl-tmp/.codex/skills/research-lit/SKILL.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"required skill/workflow\",\n      \"resolved_path\": \"/root/autodl-tmp/.codex/skills/research-lit/SKILL.md\",\n      \"sha256\": \"63a2d6459b14e5f25496bf28fc45020c5ff537261aa7b2ffa66ced72b1f895d7\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"23635071\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"9846\",\n        \"mtimeNs\": \"1778895573000000000\",\n        \"ctimeNs\": \"1787558799292046904\"\n      }\n    },\n    {\n      \"archive_index\": 6,\n      \"path\": \"docs/papers211_215_sequence/PROBLEM_ANCHOR.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"current anchor\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/PROBLEM_ANCHOR.md\",\n      \"sha256\": \"8d85811edd394b41802e71ada676d77ae9d8d9211251b9df4998cb15718f665b\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"1385360691\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"3168\",\n        \"mtimeNs\": \"1788842594649047869\",\n        \"ctimeNs\": \"1788842594649047869\"\n      }\n    },\n    {\n      \"archive_index\": 7,\n      \"path\": \"docs/papers197_201_sequence/PROBLEM_ANCHOR.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"prior admission criteria\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers197_201_sequence/PROBLEM_ANCHOR.md\",\n      \"sha256\": \"4c02a736cb9ebca544b05ca94a9bf621b244780f95a4f5651a0a62600003f91e\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"1388454978\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"2463\",\n        \"mtimeNs\": \"1788544666661959882\",\n        \"ctimeNs\": \"1788544666661959882\"\n      }\n    },\n    {\n      \"archive_index\": 9,\n      \"path\": \"docs/papers204_208_sequence/ARTIFACT_CONTRACT.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"inherited artifact contract\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/ARTIFACT_CONTRACT.md\",\n      \"sha256\": \"de1e46fe57ef42199232fa1ec1a18a25c0188fcb34aa02fb721ad2d576f52b73\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"10764227833\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"4142\",\n        \"mtimeNs\": \"1788610972720341438\",\n        \"ctimeNs\": \"1788610972720341438\"\n      }\n    },\n    {\n      \"archive_index\": 13,\n      \"path\": \"docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"ordered interaction source boundary\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md\",\n      \"sha256\": \"be24e60d7d83bc0ed01817d25827728c8909410ec7d56a3f5724db58b56e3fa9\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"39113390\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"8342\",\n        \"mtimeNs\": \"1788869738799501912\",\n        \"ctimeNs\": \"1788869738799501912\"\n      }\n    },\n    {\n      \"archive_index\": 17,\n      \"path\": \"docs/papers142_146_sequence/scouting/algebraic/SCOUT.md\",\n      \"from\": 1,\n      \"to\": 130,\n      \"role\": \"old numerical semigroup map\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers142_146_sequence/scouting/algebraic/SCOUT.md\",\n      \"sha256\": \"37d04614cb7d5c546bd83b6fefc575e2b13bf119d673840f7c367a51f3ebbc9f\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"8616198992\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"19727\",\n        \"mtimeNs\": \"1788247030420031200\",\n        \"ctimeNs\": \"1788247030420031200\"\n      }\n    },\n    {\n      \"archive_index\": 18,\n      \"path\": \"docs/papers122_126_sequence/scouting/root/SCOUT.md\",\n      \"from\": 20,\n      \"to\": 44,\n      \"role\": \"old numerical blowup entry\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers122_126_sequence/scouting/root/SCOUT.md\",\n      \"sha256\": \"9dcd0ed005c5dd6ef63ebba62ccfe35535345d28f24a6267f114c0febf7f2d24\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"6482488823\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"6573\",\n        \"mtimeNs\": \"1788093305871543852\",\n        \"ctimeNs\": \"1788093305871543852\"\n      }\n    },\n    {\n      \"archive_index\": 19,\n      \"path\": \"docs/papers122_126_sequence/scouting/replacement/SCOUT.md\",\n      \"from\": 20,\n      \"to\": 43,\n      \"role\": \"exact old Moore definition\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers122_126_sequence/scouting/replacement/SCOUT.md\",\n      \"sha256\": \"05a4c55e321c5ece0a3e08a23656ad032b585547417a835a69120a42e5908739\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"7197684667\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"14177\",\n        \"mtimeNs\": \"1788096547893605434\",\n        \"ctimeNs\": \"1788096547893605434\"\n      }\n    },\n    {\n      \"archive_index\": 20,\n      \"path\": \"docs/papers204_208_sequence/scouting/finite_systems_eighteenth/PROOF_AND_ADAPTERS.md\",\n      \"from\": 1,\n      \"to\": 128,\n      \"role\": \"old Moore and Brzozowski proof\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_eighteenth/PROOF_AND_ADAPTERS.md\",\n      \"sha256\": \"756d3577c614726450d97ef24e1a2d747322ae1511d4fe9522f37d6193199c9a\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"12908373786\",\n        \"mode\": \"33060\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"15234\",\n        \"mtimeNs\": \"1788696378143180532\",\n        \"ctimeNs\": \"1788696429995971452\"\n      }\n    },\n    {\n      \"archive_index\": 21,\n      \"path\": \"docs/papers211_215_sequence/scouting/word_automata_residual04/SOURCE_SUBTRACTION.md\",\n      \"from\": 1,\n      \"to\": 105,\n      \"role\": \"current automata subtraction\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/word_automata_residual04/SOURCE_SUBTRACTION.md\",\n      \"sha256\": \"69f09773e57422a0aa127be920842a9a954995278b0ae2e9e9ce476b7e788a85\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"2282568884\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"7061\",\n        \"mtimeNs\": \"1788954077130585077\",\n        \"ctimeNs\": \"1788954077130585077\"\n      }\n    },\n    {\n      \"archive_index\": 22,\n      \"path\": \"docs/papers211_215_sequence/scouting/fresh_residual_algebra_order01/SOURCES_AND_SUBTRACTION.md\",\n      \"from\": 1,\n      \"to\": 160,\n      \"role\": \"nearby self-distributive subtraction\",\n      \"resolved_path\": \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/fresh_residual_algebra_order01/SOURCES_AND_SUBTRACTION.md\",\n      \"sha256\": \"78fc621aa01bb2237476ce898972e97aef5d8804c5cf17163dbf2b1e4e8d9f5b\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"8619041321\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"5970\",\n        \"mtimeNs\": \"1788946189740054361\",\n        \"ctimeNs\": \"1788946189740054361\"\n      }\n    },\n    {\n      \"archive_index\": 23,\n      \"path\": \"/root/autodl-tmp/.codex/skills/proof-writer/SKILL.md\",\n      \"from\": 1,\n      \"to\": 3000,\n      \"role\": \"proof-writer skill\",\n      \"resolved_path\": \"/root/autodl-tmp/.codex/skills/proof-writer/SKILL.md\",\n      \"sha256\": \"6d7b3094711f609814680ded62e19b8dd61801511a7d98b96c033894c939babe\",\n      \"metadata\": {\n        \"dev\": \"2304\",\n        \"ino\": \"2170677041\",\n        \"mode\": \"33188\",\n        \"nlink\": \"1\",\n        \"uid\": \"0\",\n        \"gid\": \"0\",\n        \"rdev\": \"0\",\n        \"size\": \"7594\",\n        \"mtimeNs\": \"1778895573000000000\",\n        \"ctimeNs\": \"1787558799292046904\"\n      }\n    }\n  ],\n  \"checks\": 45\n}\n"
+    }
+  },
+  "scope": "POST_READ_BASELINE_NOT_RETROACTIVE_BRACKET",
+  "inputs": [
+    {
+      "archive_index": 0,
+      "path": ".agents/skills/symbolic-dynamics-research/SKILL.md",
+      "from": 1,
+      "to": 3000,
+      "role": "required skill/workflow",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/.agents/skills/symbolic-dynamics-research/SKILL.md",
+      "sha256": "1af30c2095702a0cc722e87389c8d515a4d668b22e85af25edb2fce02c10d22d",
+      "metadata": {
+        "dev": "2304",
+        "ino": "2192861121",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "1596",
+        "mtimeNs": "1788602655408692589",
+        "ctimeNs": "1788602655408692589"
+      }
+    },
+    {
+      "archive_index": 1,
+      "path": "docs/research_state/WORKFLOW.md",
+      "from": 1,
+      "to": 3000,
+      "role": "required skill/workflow",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/research_state/WORKFLOW.md",
+      "sha256": "dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324",
+      "metadata": {
+        "dev": "2304",
+        "ino": "8618944055",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "6861",
+        "mtimeNs": "1788602655408692589",
+        "ctimeNs": "1788602655408692589"
+      }
+    },
+    {
+      "archive_index": 2,
+      "path": "/root/autodl-tmp/.codex/skills/idea-creator/SKILL.md",
+      "from": 1,
+      "to": 3000,
+      "role": "required skill/workflow",
+      "resolved_path": "/root/autodl-tmp/.codex/skills/idea-creator/SKILL.md",
+      "sha256": "6e013d446a042951a16b8b141c10faf556852a100029f5e9e483d72800b9b69e",
+      "metadata": {
+        "dev": "2304",
+        "ino": "8607530365",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "10944",
+        "mtimeNs": "1778895573000000000",
+        "ctimeNs": "1787558799292046904"
+      }
+    },
+    {
+      "archive_index": 3,
+      "path": "/root/autodl-tmp/.codex/skills/research-lit/SKILL.md",
+      "from": 1,
+      "to": 3000,
+      "role": "required skill/workflow",
+      "resolved_path": "/root/autodl-tmp/.codex/skills/research-lit/SKILL.md",
+      "sha256": "63a2d6459b14e5f25496bf28fc45020c5ff537261aa7b2ffa66ced72b1f895d7",
+      "metadata": {
+        "dev": "2304",
+        "ino": "23635071",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "9846",
+        "mtimeNs": "1778895573000000000",
+        "ctimeNs": "1787558799292046904"
+      }
+    },
+    {
+      "archive_index": 6,
+      "path": "docs/papers211_215_sequence/PROBLEM_ANCHOR.md",
+      "from": 1,
+      "to": 3000,
+      "role": "current anchor",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/PROBLEM_ANCHOR.md",
+      "sha256": "8d85811edd394b41802e71ada676d77ae9d8d9211251b9df4998cb15718f665b",
+      "metadata": {
+        "dev": "2304",
+        "ino": "1385360691",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "3168",
+        "mtimeNs": "1788842594649047869",
+        "ctimeNs": "1788842594649047869"
+      }
+    },
+    {
+      "archive_index": 7,
+      "path": "docs/papers197_201_sequence/PROBLEM_ANCHOR.md",
+      "from": 1,
+      "to": 3000,
+      "role": "prior admission criteria",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers197_201_sequence/PROBLEM_ANCHOR.md",
+      "sha256": "4c02a736cb9ebca544b05ca94a9bf621b244780f95a4f5651a0a62600003f91e",
+      "metadata": {
+        "dev": "2304",
+        "ino": "1388454978",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "2463",
+        "mtimeNs": "1788544666661959882",
+        "ctimeNs": "1788544666661959882"
+      }
+    },
+    {
+      "archive_index": 9,
+      "path": "docs/papers204_208_sequence/ARTIFACT_CONTRACT.md",
+      "from": 1,
+      "to": 3000,
+      "role": "inherited artifact contract",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/ARTIFACT_CONTRACT.md",
+      "sha256": "de1e46fe57ef42199232fa1ec1a18a25c0188fcb34aa02fb721ad2d576f52b73",
+      "metadata": {
+        "dev": "2304",
+        "ino": "10764227833",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "4142",
+        "mtimeNs": "1788610972720341438",
+        "ctimeNs": "1788610972720341438"
+      }
+    },
+    {
+      "archive_index": 13,
+      "path": "docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md",
+      "from": 1,
+      "to": 3000,
+      "role": "ordered interaction source boundary",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md",
+      "sha256": "be24e60d7d83bc0ed01817d25827728c8909410ec7d56a3f5724db58b56e3fa9",
+      "metadata": {
+        "dev": "2304",
+        "ino": "39113390",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "8342",
+        "mtimeNs": "1788869738799501912",
+        "ctimeNs": "1788869738799501912"
+      }
+    },
+    {
+      "archive_index": 17,
+      "path": "docs/papers142_146_sequence/scouting/algebraic/SCOUT.md",
+      "from": 1,
+      "to": 130,
+      "role": "old numerical semigroup map",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers142_146_sequence/scouting/algebraic/SCOUT.md",
+      "sha256": "37d04614cb7d5c546bd83b6fefc575e2b13bf119d673840f7c367a51f3ebbc9f",
+      "metadata": {
+        "dev": "2304",
+        "ino": "8616198992",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "19727",
+        "mtimeNs": "1788247030420031200",
+        "ctimeNs": "1788247030420031200"
+      }
+    },
+    {
+      "archive_index": 18,
+      "path": "docs/papers122_126_sequence/scouting/root/SCOUT.md",
+      "from": 20,
+      "to": 44,
+      "role": "old numerical blowup entry",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers122_126_sequence/scouting/root/SCOUT.md",
+      "sha256": "9dcd0ed005c5dd6ef63ebba62ccfe35535345d28f24a6267f114c0febf7f2d24",
+      "metadata": {
+        "dev": "2304",
+        "ino": "6482488823",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "6573",
+        "mtimeNs": "1788093305871543852",
+        "ctimeNs": "1788093305871543852"
+      }
+    },
+    {
+      "archive_index": 19,
+      "path": "docs/papers122_126_sequence/scouting/replacement/SCOUT.md",
+      "from": 20,
+      "to": 43,
+      "role": "exact old Moore definition",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers122_126_sequence/scouting/replacement/SCOUT.md",
+      "sha256": "05a4c55e321c5ece0a3e08a23656ad032b585547417a835a69120a42e5908739",
+      "metadata": {
+        "dev": "2304",
+        "ino": "7197684667",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "14177",
+        "mtimeNs": "1788096547893605434",
+        "ctimeNs": "1788096547893605434"
+      }
+    },
+    {
+      "archive_index": 20,
+      "path": "docs/papers204_208_sequence/scouting/finite_systems_eighteenth/PROOF_AND_ADAPTERS.md",
+      "from": 1,
+      "to": 128,
+      "role": "old Moore and Brzozowski proof",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/scouting/finite_systems_eighteenth/PROOF_AND_ADAPTERS.md",
+      "sha256": "756d3577c614726450d97ef24e1a2d747322ae1511d4fe9522f37d6193199c9a",
+      "metadata": {
+        "dev": "2304",
+        "ino": "12908373786",
+        "mode": "33060",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "15234",
+        "mtimeNs": "1788696378143180532",
+        "ctimeNs": "1788696429995971452"
+      }
+    },
+    {
+      "archive_index": 21,
+      "path": "docs/papers211_215_sequence/scouting/word_automata_residual04/SOURCE_SUBTRACTION.md",
+      "from": 1,
+      "to": 105,
+      "role": "current automata subtraction",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/word_automata_residual04/SOURCE_SUBTRACTION.md",
+      "sha256": "69f09773e57422a0aa127be920842a9a954995278b0ae2e9e9ce476b7e788a85",
+      "metadata": {
+        "dev": "2304",
+        "ino": "2282568884",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "7061",
+        "mtimeNs": "1788954077130585077",
+        "ctimeNs": "1788954077130585077"
+      }
+    },
+    {
+      "archive_index": 22,
+      "path": "docs/papers211_215_sequence/scouting/fresh_residual_algebra_order01/SOURCES_AND_SUBTRACTION.md",
+      "from": 1,
+      "to": 160,
+      "role": "nearby self-distributive subtraction",
+      "resolved_path": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/fresh_residual_algebra_order01/SOURCES_AND_SUBTRACTION.md",
+      "sha256": "78fc621aa01bb2237476ce898972e97aef5d8804c5cf17163dbf2b1e4e8d9f5b",
+      "metadata": {
+        "dev": "2304",
+        "ino": "8619041321",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "5970",
+        "mtimeNs": "1788946189740054361",
+        "ctimeNs": "1788946189740054361"
+      }
+    },
+    {
+      "archive_index": 23,
+      "path": "/root/autodl-tmp/.codex/skills/proof-writer/SKILL.md",
+      "from": 1,
+      "to": 3000,
+      "role": "proof-writer skill",
+      "resolved_path": "/root/autodl-tmp/.codex/skills/proof-writer/SKILL.md",
+      "sha256": "6d7b3094711f609814680ded62e19b8dd61801511a7d98b96c033894c939babe",
+      "metadata": {
+        "dev": "2304",
+        "ino": "2170677041",
+        "mode": "33188",
+        "nlink": "1",
+        "uid": "0",
+        "gid": "0",
+        "rdev": "0",
+        "size": "7594",
+        "mtimeNs": "1778895573000000000",
+        "ctimeNs": "1787558799292046904"
+      }
+    }
+  ],
+  "checks": 45
+}
+

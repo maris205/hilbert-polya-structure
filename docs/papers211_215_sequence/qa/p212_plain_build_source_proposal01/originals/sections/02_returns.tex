@@ -1,0 +1,91 @@
+\section{Exact returns and observable decorations}
+Fix a labelled core $K$ and all complementary pointers. A degree-two chain
+is forced: on arrival at an internal vertex, its old stored arrow becomes
+the next extra arrow and the incoming edge is stored in reverse. Induction
+traverses the chain and reverses it. At a branch the same rule chooses the
+old stored arrow and stores the reversed incoming edge. The outdegree
+conditions leave no additional internal choices. A rooted cycle has one
+observable orientation for length $1$ or $2$, and two for larger lengths:
+on a double edge, exchanging the two edges does not change any destination.
+
+\begin{theorem}\label{thm:table}
+For every fixed labelled core and fixed complementary map, all periods and
+the number of distinct $R$-orbits are given in Table~\ref{tab:periods}.
+\end{theorem}
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}p{0.45\linewidth}ll@{}}
+\toprule
+Core and degeneration & Exact period & Orbits\\
+\midrule
+Figure-eight, $a=b=1$ & $1$ & $1$\\
+Figure-eight, $a,b\le2$, not both $1$ & $a+b$ & $1$\\
+Figure-eight, $\max(a,b)\ge3$ & $2(a+b)$ & $1+\ind_{a,b\ge3}$\\
+Barbell, $a,b\le2$ & $a+b+2c$ & $1$\\
+Barbell, $\max(a,b)\ge3$ & $2(a+b+2c)$ & $1+\ind_{a,b\ge3}$\\
+Theta, $a=b=c=1$ & $2$ & $1$\\
+Any other theta & $2(a+b+c)$ & $1$ if two paths direct; $2$ otherwise\\
+\bottomrule
+\end{tabular}
+\caption{All lengths are positive. Parallel edges have no state identities.
+In the last row, ``two paths direct'' means at least two.}
+\label{tab:periods}
+\end{table}
+\begin{proof}
+\emph{Figure-eight.}
+Let $A$ be the common branch. Apart from the double loop, choose a prescribed
+cycle $C_1$ using its labels (the other is $C_2$). At an anchor with $u=A$
+and the extra arrow starting $C_1$, the stored arrow at $A$ starts $C_2$.
+The forced traversals are $C_1,C_2,C_1^{-1},C_2^{-1}$. After
+$h=a+b$ steps, the anchor is restored with both cycle orientations reversed.
+If both reversals are invisible, the state returns at $h$. No earlier
+return is possible: branch departures alternate between the two cycles,
+whose first destinations differ unless both are loops. The double loop
+has a single, fixed state.
+
+If a cycle has length at least three, choose an internal vertex $z$ on it.
+In the full $2h$ block, $u=z$ occurs twice, with distinct next neighbours.
+One prescribed ordered pair $(u=z,v=\text{chosen neighbour})$ occurs only
+once, so the minimal period is $2h$. This also rules out a shorter period
+at any other phase. At the prescribed-cycle anchor, states are exactly
+pairs of observable cycle orientations; the return acts by joint reversal.
+There are two classes exactly when both cycles have two orientations,
+and one otherwise. A state on an internal chain reaches a branch and
+then this anchor, proving exhaustion rather than inferring orbit counts
+from a state total.
+
+\emph{Barbell.}
+Choose the branch $A$ by label and let $B$ be the other. Anchor at the
+extra bridge departure from $A$ toward $B$. The bridge is directed toward
+$B$, and the stored outgoing arrow at each branch lies on its own cycle;
+the two cycle orientations are the only choices. The forced block is
+bridge, $B$-cycle, reverse bridge, $A$-cycle. It has length
+$h=a+b+2c$, restores the bridge anchor and reverses both cycles.
+That ordered departure from $A$ occurs only at block boundaries: its
+bridge neighbour differs from any neighbour on the $A$-cycle, also for
+loops and double edges. Thus the exact period is $h$ if both cycle
+reversals are invisible, and $2h$ otherwise. Joint reversal gives the
+same decoration count as above. From a cycle one reaches its branch
+and then the bridge; from the bridge one reaches a cycle and subsequently
+the chosen anchor. This covers every state.
+
+\emph{Theta.}
+Temporarily distinguish the three chains only for the proof. At an active
+branch their roles are outgoing extra, outgoing stored, and incoming,
+say $(i,j,k)$. Traversing $i$ gives roles $(k,i,j)$ at the opposite
+branch: $i$ reverses and the old outgoing chain there was $k$. Six
+traversals use $i,k,j,i,k,j$, once in each direction per chain, and restore
+the state after $2(a+b+c)$ steps. If a chain has an internal vertex $z$,
+one prescribed ordered departure from $z$ occurs exactly once in that
+block, proving minimality even when the other two chains are direct.
+If all chains are direct, their temporary identities must be forgotten:
+$f(A)=B,f(B)=A$ throughout, and just two register states alternate.
+
+At a fixed branch, every two traversals rotate the role triple. Three
+distinguishable chains give exactly two cyclic orders. Only direct chains
+can be identical, since every other chain has its own nonempty labelled
+internal set. Two or three direct chains merge the two orders into one
+multiset order. The oriented roles determine an anchor state, and forced
+chain traversal brings every state to a branch. These order classes
+are therefore precisely the orbits.
+\end{proof}

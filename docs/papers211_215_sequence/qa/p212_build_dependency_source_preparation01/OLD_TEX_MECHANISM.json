@@ -1,0 +1,34 @@
+{
+  "scope": "DIAGNOSTIC_ONLY_NO_TEX_NO_SCIENCE",
+  "notes": "Actual product-tool request/returned envelopes, preserved without constructing synthetic native stdout/stderr. Separate raw child streams are in each diagnostic_captureNN command directory.",
+  "graph_reads": {
+    "package_rg": {
+      "request": {
+        "cmd": "rg -n '\\\\(RequirePackage|LoadClass|InputIfFileExists|input|DeclareFontFamily|DeclareSymbolFont)' /usr/share/texlive/texmf-dist/tex/latex/amscls/amsart.cls && rg -n '^(ENTRY|READ|EXECUTE|ITERATE|SORT)' /usr/share/texlive/texmf-dist/bibtex/bst/amscls/amsplain.bst",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 2200
+      },
+      "returned": {
+        "chunk_id": "cd1c6d",
+        "wall_time_seconds": 0.00000485,
+        "exit_code": 0,
+        "original_token_count": 108,
+        "output": "354:  \\def\\@tempa{\\RequirePackage{amstex}\\relax}%\n359:    \\def\\@tempa{\\RequirePackage{amsmath}\\relax}%\n395:      \\RequirePackage{amsfonts}[1995/01/01]\\relax\n1911:\\InputIfFileExists{amsart.cfg}{}{%\n76:ENTRY\n996:READ\n1139:ITERATE {presort}\n1141:SORT\n1185:EXECUTE {initialize.longest.label}\n1187:ITERATE {longest.label.pass}\n1219:EXECUTE {begin.bib}\n1221:EXECUTE {init.state.consts}\n1223:ITERATE {call.type$}\n1230:EXECUTE {end.bib}\n"
+      }
+    },
+    "amsart_context": {
+      "request": {
+        "cmd": "sed -n '340,404p' /usr/share/texlive/texmf-dist/tex/latex/amscls/amsart.cls && sed -n '1906,1918p' /usr/share/texlive/texmf-dist/tex/latex/amscls/amsart.cls",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 3000
+      },
+      "returned": {
+        "chunk_id": "672fa3",
+        "wall_time_seconds": 0.051671868,
+        "exit_code": 0,
+        "original_token_count": 622,
+        "output": "  \\if@nobreak\\ifvmode\\nobreak\\fi\\fi}\n\\def\\ps@myheadings{\\ps@headings \\let\\@mkboth\\@gobbletwo}\n\\newskip\\normaltopskip\n\\normaltopskip=10pt \\relax\n\\let\\sectionmark\\@gobble\n\\let\\subsectionmark\\@gobble\n\\let\\subsubsectionmark\\@gobble\n\\let\\paragraphmark\\@gobble\n\n\\DeclareOption{makeidx}{}\n\\ExecuteOptions{leqno,centertags,letterpaper,portrait,%\n  10pt,twoside,onecolumn,final}\n\\ProcessOptions\\relax\n\\if@compatibility\n  \\def\\@tempa{\\RequirePackage{amstex}\\relax}%\n\\else\n  \\@ifclasswith{\\@classname}{nomath}{%\n    \\let\\@tempa\\relax\n  }{%\n    \\def\\@tempa{\\RequirePackage{amsmath}\\relax}%\n  }%\n\\fi\n\\@tempa % load amstex.sty or amsmath.sty\n\\@ifundefined{numberwithin}{%\n  \\newcommand{\\numberwithin}[3][\\arabic]{%\n    \\@ifundefined{c@#2}{\\@nocounterr{#2}}{%\n      \\@ifundefined{c@#3}{\\@nocnterr{#3}}{%\n        \\@addtoreset{#2}{#3}%\n        \\@xp\\xdef\\csname the#2\\endcsname{%\n          \\@xp\\@nx\\csname the#3\\endcsname .\\@nx#1{#2}}}}%\n  }\n  \\csname newtoks\\endcsname\\@emptytoks\n}{}\n\\if@compatibility\n\\else\n  \\@ifclasswith{\\@classname}{noamsfonts}{%\n    % amsfonts package is not wanted\n  }{%\n    % amsfonts package IS wanted; test whether a recent enough version\n    % seems to be installed\n    \\begingroup \\fontencoding{U}\\fontfamily{msa}\\try@load@fontshape\\endgroup\n    \\global\\@xp\\let\\csname U+msa\\endcsname\\relax % reset\n    \\@ifundefined{U/msa/m/n}{%\n      \\ClassError{\\@classname}{%\n  Package `amsfonts' not installed, or version too old?\\MessageBreak\n  Unable to get font info for the `msam' fonts in the expected form%\n      }{%\n  The amsfonts package will not be loaded, to avoid probable\\MessageBreak\n  incompatibility problems. You can (a) use the `noamsfonts'\n      documentclass\\MessageBreak\n  option next time, or (b) check that the amsfonts package is\n      installed\\MessageBreak\n  correctly, and is not too old to be compatible.%\n      }%\n    }{%\n      \\RequirePackage{amsfonts}[1995/01/01]\\relax\n    }%\n  }\n\\fi % end yesamsfonts branch\n\\let\\cleardouble@page\\cleardoublepage\n\\AtBeginDocument{%\n  \\ifx\\cleardouble@page\\cleardoublepage\n    \\def\\cleardoublepage{\\clearpage{\\pagestyle{empty}\\cleardouble@page}}\n  \\fi\n}\n  \\advance\\topmargin -\\headheight \\advance\\topmargin -\\headsep\n  \\divide\\topmargin\\tw@\n  \\ifdim\\topmargin<.5truein \\topmargin.5truein \\fi\n  \\advance\\topmargin -1truein\\relax\n}\n\\InputIfFileExists{amsart.cfg}{}{%\n  \\calclayout % initialize\n  \\pagenumbering{arabic}%\n  \\pagestyle{headings}%\n  \\thispagestyle{plain}%\n}\n\\if@compatibility \\else\\endinput\\fi\n\\def\\tiny{\\Tiny}\n"
+      }
+    }
+  }
+}

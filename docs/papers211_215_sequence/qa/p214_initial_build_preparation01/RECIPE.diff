@@ -1,0 +1,280 @@
+--- P212_A/BUILD_REQUEST.proposed.sh.txt
++++ P214_INITIAL/BUILD_REQUEST.proposed.sh.txt
+@@ -1,163 +1,163 @@
+ #!/bin/bash
+-# PROPOSED SOURCE ONLY. Never run before root receives the A strict pair,
+-# documentary delta, exact request and finite runtime/trust binding.
++# PROPOSED SOURCE ONLY. Never run before root receives the author strict pair,
++# current source, exact request and fresh finite runtime/trust binding.
+ # Not a grant, observer, scientific verifier, reviewer or terminal build.
+ set -euo pipefail
+ umask 077
+ if [[ "${1-}" != "--execute-under-separate-root-grant" || "$#" != 1 ]]; then
+-  printf '%s\n' 'P212_BUILD_NOT_AUTHORIZED_BY_THIS_SOURCE' >&2
++  printf '%s\n' 'P214_BUILD_NOT_AUTHORIZED_BY_THIS_SOURCE' >&2
+   exit 78
+ fi
+-P212_PREP='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_a_build_preparation01'
+-P212_SRC='/root/autodl-tmp/symbolic_dynamics/papers/212-closed-pointer-orbits'
+-P212_BIND='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_a_build_binding01'
+-P212_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p212_a/build01'
+-P212_COLD="$P212_OUT/source_only"
+-P212_PINFILE="$P212_PREP/PROPOSED_SOURCE_ONLY.sha256"
++P214_PREP='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p214_initial_build_preparation01'
++P214_SRC='/root/autodl-tmp/symbolic_dynamics/papers/214-nilpotent-bilinear-clock'
++P214_BIND='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p214_initial_build_binding01'
++P214_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p214_initial_build_run01'
++P214_COLD="$P214_OUT/source_only"
++P214_PINFILE="$P214_PREP/PROPOSED_SOURCE_ONLY.sha256"
+ # These paths are proposals, not observed or created by preparation.
+ # Root pins the whole exact manifest and source/request in its later grant.
+-[[ -f "$P212_BIND/RUNTIME_INPUTS.sha256" && ! -L "$P212_BIND/RUNTIME_INPUTS.sha256" ]]
+-[[ -f "$P212_PINFILE" && ! -L "$P212_PINFILE" ]]
++[[ -f "$P214_BIND/RUNTIME_INPUTS.sha256" && ! -L "$P214_BIND/RUNTIME_INPUTS.sha256" ]]
++[[ -f "$P214_PINFILE" && ! -L "$P214_PINFILE" ]]
+ # Exclusive new tree only. Existing/failed tree is never cleaned or resumed.
+-mkdir -- "$P212_OUT"
+-mkdir -- "$P212_OUT/raw" "$P212_OUT/pass_artifacts" "$P212_OUT/pages" "$P212_COLD"
+-mkdir -- "$P212_COLD/sections"
++mkdir -- "$P214_OUT"
++mkdir -- "$P214_OUT/raw" "$P214_OUT/pass_artifacts" "$P214_OUT/pages" "$P214_COLD"
++mkdir -- "$P214_COLD/sections"
+ exec 3>&1 4>&2
+ set -C
+-exec > "$P212_OUT/controller.stdout.raw" 2> "$P212_OUT/controller.stderr.raw"
+-p212_finish() {
+-  local p212_rc=$?
++exec > "$P214_OUT/controller.stdout.raw" 2> "$P214_OUT/controller.stderr.raw"
++p214_finish() {
++  local p214_rc=$?
+   trap - EXIT
+-  printf '%s\n' "$p212_rc" > "$P212_OUT/controller.exit"
+-  printf 'P212_A_BUILD_SUPERVISOR_EXIT=%s\n' "$p212_rc" >&3
+-  exit "$p212_rc"
++  printf '%s\n' "$p214_rc" > "$P214_OUT/controller.exit"
++  printf 'P214_INITIAL_BUILD_SUPERVISOR_EXIT=%s\n' "$p214_rc" >&3
++  exit "$p214_rc"
+ }
+-trap p212_finish EXIT
+-P212_SOURCES=(main.tex math_commands.tex references.bib sections/01_setup.tex sections/02_returns.tex sections/03_period_set.tex sections/04_census.tex sections/05_scope.tex)
+-P212_PRODUCTS=(main.aux main.bbl main.blg main.log main.fls main.out main.toc main.pdf)
+-cp --no-clobber -- "$P212_PINFILE" "$P212_OUT/SOURCE_EXPECTED.sha256"
+-cp --no-clobber -- "$P212_BIND/RUNTIME_INPUTS.sha256" "$P212_OUT/RUNTIME_EXPECTED.sha256"
+-sha256sum -- "$P212_PREP/BUILD_REQUEST.proposed.sh.txt" "$P212_PREP/NATIVE_REQUEST.proposed.json" "$P212_BIND/RUNTIME_INPUTS.sha256" > "$P212_OUT/REQUEST_AND_BINDING.sha256"
++trap p214_finish EXIT
++P214_SOURCES=(main.tex math_commands.tex references.bib sections/0_abstract.tex sections/1_setup.tex sections/2_clock.tex sections/3_fibres.tex sections/4_controls.tex sections/5_scope.tex)
++P214_PRODUCTS=(main.aux main.bbl main.blg main.log main.fls main.out main.toc main.pdf)
++cp --no-clobber -- "$P214_PINFILE" "$P214_OUT/SOURCE_EXPECTED.sha256"
++cp --no-clobber -- "$P214_BIND/RUNTIME_INPUTS.sha256" "$P214_OUT/RUNTIME_EXPECTED.sha256"
++sha256sum -- "$P214_PREP/BUILD_REQUEST.proposed.sh.txt" "$P214_PREP/NATIVE_REQUEST.proposed.json" "$P214_BIND/RUNTIME_INPUTS.sha256" > "$P214_OUT/REQUEST_AND_BINDING.sha256"
+ # Fixed selected runtime paths come from root's separately received manifest.
+ # No which/help/version/proc query, recursive discovery, package installation,
+ # dynamic FLS-path following or P211 observer is hidden in this script.
+-sha256sum -c --strict "$P212_OUT/RUNTIME_EXPECTED.sha256" > "$P212_OUT/runtime.before.stdout" 2> "$P212_OUT/runtime.before.stderr"
+-(cd "$P212_SRC" && sha256sum -c --strict "$P212_OUT/SOURCE_EXPECTED.sha256") > "$P212_OUT/live_source.before.stdout" 2> "$P212_OUT/live_source.before.stderr"
+-for p212_name in "${P212_SOURCES[@]}"; do
+-  [[ -f "$P212_SRC/$p212_name" && ! -L "$P212_SRC/$p212_name" ]]
+-  cp --no-clobber -- "$P212_SRC/$p212_name" "$P212_COLD/$p212_name"
+-  cmp -- "$P212_SRC/$p212_name" "$P212_COLD/$p212_name"
++sha256sum -c --strict "$P214_OUT/RUNTIME_EXPECTED.sha256" > "$P214_OUT/runtime.before.stdout" 2> "$P214_OUT/runtime.before.stderr"
++(cd "$P214_SRC" && sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256") > "$P214_OUT/live_source.before.stdout" 2> "$P214_OUT/live_source.before.stderr"
++for p214_name in "${P214_SOURCES[@]}"; do
++  [[ -f "$P214_SRC/$p214_name" && ! -L "$P214_SRC/$p214_name" ]]
++  cp --no-clobber -- "$P214_SRC/$p214_name" "$P214_COLD/$p214_name"
++  cmp -- "$P214_SRC/$p214_name" "$P214_COLD/$p214_name"
+ done
+-cd "$P212_COLD"
+-sha256sum -c --strict "$P212_OUT/SOURCE_EXPECTED.sha256" > "$P212_OUT/cold_source.initial.stdout" 2> "$P212_OUT/cold_source.initial.stderr"
++cd "$P214_COLD"
++sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256" > "$P214_OUT/cold_source.initial.stdout" 2> "$P214_OUT/cold_source.initial.stderr"
+ # Prospective fixed fresh-cwd evidence; not observed by source preparation.
+-P212_PHYSICAL_CWD=$(pwd -P)
++P214_PHYSICAL_CWD=$(pwd -P)
+ shopt -s dotglob nullglob
+-P212_COLD_MEMBERS=(*)
+-P212_SECTION_MEMBERS=(sections/*)
++P214_COLD_MEMBERS=(*)
++P214_SECTION_MEMBERS=(sections/*)
+ shopt -u dotglob nullglob
+ {
+   printf '%s\n' 'commands=Bash pwd -P; dotglob/nullglob fixed (*) and (sections/*); exact membership/type/absence tests'
+-  printf 'expected_cwd=%q\nactual_physical_cwd=%q\n' "$P212_COLD" "$P212_PHYSICAL_CWD"
+-  printf 'cold_member_count=%s\n' "${#P212_COLD_MEMBERS[@]}"
+-  for p212_name in "${P212_COLD_MEMBERS[@]}"; do printf 'cold_member=%q\n' "$p212_name"; done
+-  printf 'section_member_count=%s\n' "${#P212_SECTION_MEMBERS[@]}"
+-  for p212_name in "${P212_SECTION_MEMBERS[@]}"; do printf 'section_member=%q\n' "$p212_name"; done
+-  for p212_name in texmf .texlive2021; do
+-    if [[ -e "$p212_name" || -L "$p212_name" ]]; then
+-      printf 'relative_tree=%q PRESENT_OR_LINK\n' "$p212_name"
++  printf 'expected_cwd=%q\nactual_physical_cwd=%q\n' "$P214_COLD" "$P214_PHYSICAL_CWD"
++  printf 'cold_member_count=%s\n' "${#P214_COLD_MEMBERS[@]}"
++  for p214_name in "${P214_COLD_MEMBERS[@]}"; do printf 'cold_member=%q\n' "$p214_name"; done
++  printf 'section_member_count=%s\n' "${#P214_SECTION_MEMBERS[@]}"
++  for p214_name in "${P214_SECTION_MEMBERS[@]}"; do printf 'section_member=%q\n' "$p214_name"; done
++  for p214_name in texmf .texlive2021; do
++    if [[ -e "$p214_name" || -L "$p214_name" ]]; then
++      printf 'relative_tree=%q PRESENT_OR_LINK\n' "$p214_name"
+     else
+-      printf 'relative_tree=%q ABSENT\n' "$p212_name"
++      printf 'relative_tree=%q ABSENT\n' "$p214_name"
+     fi
+   done
+-} > "$P212_OUT/COLD_CWD.actual.txt"
+-[[ "$P212_PHYSICAL_CWD" == "$P212_COLD" ]]
+-[[ "${#P212_COLD_MEMBERS[@]}" == 4 && "${#P212_SECTION_MEMBERS[@]}" == 5 ]]
+-for p212_name in "${P212_COLD_MEMBERS[@]}"; do
+-  case "$p212_name" in
+-    main.tex|math_commands.tex|references.bib) [[ -f "$p212_name" && ! -L "$p212_name" ]] ;;
++} > "$P214_OUT/COLD_CWD.actual.txt"
++[[ "$P214_PHYSICAL_CWD" == "$P214_COLD" ]]
++[[ "${#P214_COLD_MEMBERS[@]}" == 4 && "${#P214_SECTION_MEMBERS[@]}" == 6 ]]
++for p214_name in "${P214_COLD_MEMBERS[@]}"; do
++  case "$p214_name" in
++    main.tex|math_commands.tex|references.bib) [[ -f "$p214_name" && ! -L "$p214_name" ]] ;;
+     sections) [[ -d sections && ! -L sections ]] ;;
+     *) exit 94 ;;
+   esac
+ done
+-for p212_name in "${P212_SECTION_MEMBERS[@]}"; do
+-  case "$p212_name" in
+-    sections/01_setup.tex|sections/02_returns.tex|sections/03_period_set.tex|sections/04_census.tex|sections/05_scope.tex)
+-      [[ -f "$p212_name" && ! -L "$p212_name" ]] ;;
++for p214_name in "${P214_SECTION_MEMBERS[@]}"; do
++  case "$p214_name" in
++    sections/0_abstract.tex|sections/1_setup.tex|sections/2_clock.tex|sections/3_fibres.tex|sections/4_controls.tex|sections/5_scope.tex)
++      [[ -f "$p214_name" && ! -L "$p214_name" ]] ;;
+     *) exit 94 ;;
+   esac
+ done
+ [[ ! -e texmf && ! -L texmf && ! -e .texlive2021 && ! -L .texlive2021 ]]
+-printf '%s\n' 'EXACT_TWO_DIRECTORY_MEMBERSHIP_TYPES_AND_RELATIVE_TREE_ABSENCE_CHECKS_PASSED' >> "$P212_OUT/COLD_CWD.actual.txt"
+-for p212_name in "${P212_PRODUCTS[@]}"; do
+-  [[ ! -e "$p212_name" && ! -L "$p212_name" ]]
++printf '%s\n' 'EXACT_TWO_DIRECTORY_MEMBERSHIP_TYPES_AND_RELATIVE_TREE_ABSENCE_CHECKS_PASSED' >> "$P214_OUT/COLD_CWD.actual.txt"
++for p214_name in "${P214_PRODUCTS[@]}"; do
++  [[ ! -e "$p214_name" && ! -L "$p214_name" ]]
+ done
+-p212_snapshot() {
+-  local p212_dest="$P212_OUT/pass_artifacts/$1"
+-  mkdir -- "$p212_dest"
+-  for p212_name in "${P212_PRODUCTS[@]}"; do
+-    if [[ -f "$p212_name" && ! -L "$p212_name" ]]; then
+-      cp --no-clobber -- "$p212_name" "$p212_dest/$p212_name"
+-      sha256sum -- "$p212_name" >> "$p212_dest/PRESENT.sha256"
+-    elif [[ -e "$p212_name" || -L "$p212_name" ]]; then
+-      printf 'UNEXPECTED_PRODUCT_TYPE %s\n' "$p212_name" >> "$p212_dest/TYPE_FAILURE.txt"
++p214_snapshot() {
++  local p214_dest="$P214_OUT/pass_artifacts/$1"
++  mkdir -- "$p214_dest"
++  for p214_name in "${P214_PRODUCTS[@]}"; do
++    if [[ -f "$p214_name" && ! -L "$p214_name" ]]; then
++      cp --no-clobber -- "$p214_name" "$p214_dest/$p214_name"
++      sha256sum -- "$p214_name" >> "$p214_dest/PRESENT.sha256"
++    elif [[ -e "$p214_name" || -L "$p214_name" ]]; then
++      printf 'UNEXPECTED_PRODUCT_TYPE %s\n' "$p214_name" >> "$p214_dest/TYPE_FAILURE.txt"
+       return 93
+     else
+-      printf '%s\n' "$p212_name" >> "$p212_dest/ABSENT.txt"
++      printf '%s\n' "$p214_name" >> "$p214_dest/ABSENT.txt"
+     fi
+   done
+ }
+-P212_STEP_STATUS=0
+-p212_run() {
+-  local p212_label=$1 p212_seconds=$2
++P214_STEP_STATUS=0
++p214_run() {
++  local p214_label=$1 p214_seconds=$2
+   shift 2
+-  printf 'cwd=%s\n' "$P212_COLD" > "$P212_OUT/raw/$p212_label.request.txt"
+-  printf 'supervisor_argv=' >> "$P212_OUT/raw/$p212_label.request.txt"
+-  printf '%q ' /usr/bin/timeout --signal=TERM --kill-after=10s "${p212_seconds}s" "$@" >> "$P212_OUT/raw/$p212_label.request.txt"
+-  printf '\n' >> "$P212_OUT/raw/$p212_label.request.txt"
++  printf 'cwd=%s\n' "$P214_COLD" > "$P214_OUT/raw/$p214_label.request.txt"
++  printf 'supervisor_argv=' >> "$P214_OUT/raw/$p214_label.request.txt"
++  printf '%q ' /usr/bin/timeout --signal=TERM --kill-after=10s "${p214_seconds}s" "$@" >> "$P214_OUT/raw/$p214_label.request.txt"
++  printf '\n' >> "$P214_OUT/raw/$p214_label.request.txt"
+   set +e
+-  /usr/bin/timeout --signal=TERM --kill-after=10s "${p212_seconds}s" "$@" < /dev/null > "$P212_OUT/raw/$p212_label.stdout.raw" 2> "$P212_OUT/raw/$p212_label.stderr.raw"
+-  P212_STEP_STATUS=$?
++  /usr/bin/timeout --signal=TERM --kill-after=10s "${p214_seconds}s" "$@" < /dev/null > "$P214_OUT/raw/$p214_label.stdout.raw" 2> "$P214_OUT/raw/$p214_label.stderr.raw"
++  P214_STEP_STATUS=$?
+   set -e
+-  printf '%s\n' "$P212_STEP_STATUS" > "$P212_OUT/raw/$p212_label.supervisor_exit"
++  printf '%s\n' "$P214_STEP_STATUS" > "$P214_OUT/raw/$p214_label.supervisor_exit"
+   # A timeout/launch failure is not assigned an invented native TeX exit.
+ }
+-p212_build_pass() {
+-  local p212_label=$1
++p214_build_pass() {
++  local p214_label=$1
+   shift
+-  p212_snapshot "$p212_label.before"
+-  p212_run "$p212_label" 600 "$@"
+-  p212_snapshot "$p212_label.after"
+-  sha256sum -c --strict "$P212_OUT/SOURCE_EXPECTED.sha256" > "$P212_OUT/raw/$p212_label.sources.stdout" 2> "$P212_OUT/raw/$p212_label.sources.stderr"
+-  if [[ "$P212_STEP_STATUS" != 0 ]]; then exit "$P212_STEP_STATUS"; fi
++  p214_snapshot "$p214_label.before"
++  p214_run "$p214_label" 600 "$@"
++  p214_snapshot "$p214_label.after"
++  sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256" > "$P214_OUT/raw/$p214_label.sources.stdout" 2> "$P214_OUT/raw/$p214_label.sources.stderr"
++  if [[ "$P214_STEP_STATUS" != 0 ]]; then exit "$P214_STEP_STATUS"; fi
+ }
+-P212_TEX=(/usr/bin/pdflatex -no-shell-escape -interaction=nonstopmode -halt-on-error -file-line-error -recorder main.tex)
+-p212_build_pass pass1 "${P212_TEX[@]}"
+-p212_build_pass bibtex /usr/bin/bibtex main
+-p212_build_pass pass2 "${P212_TEX[@]}"
+-p212_build_pass pass3 "${P212_TEX[@]}"
++P214_TEX=(/usr/bin/pdflatex -no-shell-escape -interaction=nonstopmode -halt-on-error -file-line-error -recorder main.tex)
++p214_build_pass pass1 "${P214_TEX[@]}"
++p214_build_pass bibtex /usr/bin/bibtex main
++p214_build_pass pass2 "${P214_TEX[@]}"
++p214_build_pass pass3 "${P214_TEX[@]}"
+ [[ -s main.pdf ]]
+-p212_run pdfinfo 180 /usr/bin/pdfinfo main.pdf
+-[[ "$P212_STEP_STATUS" == 0 ]] || exit "$P212_STEP_STATUS"
+-p212_run pdffonts 180 /usr/bin/pdffonts main.pdf
+-[[ "$P212_STEP_STATUS" == 0 ]] || exit "$P212_STEP_STATUS"
+-p212_run pdftotext 180 /usr/bin/pdftotext -layout main.pdf -
+-[[ "$P212_STEP_STATUS" == 0 ]] || exit "$P212_STEP_STATUS"
+-p212_run final_diagnostics 180 /usr/bin/awk '/Warning|undefined|Overfull|Underfull|Missing character|Rerun|Label.s. may have changed|Error|error|^!/ {print FILENAME ":" FNR ":" $0}' main.log main.blg
+-[[ "$P212_STEP_STATUS" == 0 ]] || exit "$P212_STEP_STATUS"
+-P212_PAGES=$(/usr/bin/awk '/^Pages:[[:space:]]/ {print $2}' "$P212_OUT/raw/pdfinfo.stdout.raw")
+-[[ "$P212_PAGES" =~ ^[1-9][0-9]*$ ]]
+-printf '%s\n' "$P212_PAGES" > "$P212_OUT/PAGE_COUNT.txt"
+-for ((p212_page=1; p212_page<=P212_PAGES; p212_page++)); do
+-  printf -v p212_label 'page-%04d' "$p212_page"
+-  p212_run "$p212_label" 180 /usr/bin/pdftoppm -f "$p212_page" -l "$p212_page" -singlefile -png -r 150 main.pdf "$P212_OUT/pages/$p212_label"
+-  [[ "$P212_STEP_STATUS" == 0 ]] || exit "$P212_STEP_STATUS"
+-  [[ -s "$P212_OUT/pages/$p212_label.png" ]]
+-  sha256sum -- "$P212_OUT/pages/$p212_label.png" >> "$P212_OUT/PAGES.sha256"
++p214_run pdfinfo 180 /usr/bin/pdfinfo main.pdf
++[[ "$P214_STEP_STATUS" == 0 ]] || exit "$P214_STEP_STATUS"
++p214_run pdffonts 180 /usr/bin/pdffonts main.pdf
++[[ "$P214_STEP_STATUS" == 0 ]] || exit "$P214_STEP_STATUS"
++p214_run pdftotext 180 /usr/bin/pdftotext -layout main.pdf -
++[[ "$P214_STEP_STATUS" == 0 ]] || exit "$P214_STEP_STATUS"
++p214_run final_diagnostics 180 /usr/bin/awk '/Warning|undefined|Overfull|Underfull|Missing character|Rerun|Label.s. may have changed|Error|error|^!/ {print FILENAME ":" FNR ":" $0}' main.log main.blg
++[[ "$P214_STEP_STATUS" == 0 ]] || exit "$P214_STEP_STATUS"
++P214_PAGES=$(/usr/bin/awk '/^Pages:[[:space:]]/ {print $2}' "$P214_OUT/raw/pdfinfo.stdout.raw")
++[[ "$P214_PAGES" =~ ^[1-9][0-9]*$ ]]
++printf '%s\n' "$P214_PAGES" > "$P214_OUT/PAGE_COUNT.txt"
++for ((p214_page=1; p214_page<=P214_PAGES; p214_page++)); do
++  printf -v p214_label 'page-%04d' "$p214_page"
++  p214_run "$p214_label" 180 /usr/bin/pdftoppm -f "$p214_page" -l "$p214_page" -singlefile -png -r 150 main.pdf "$P214_OUT/pages/$p214_label"
++  [[ "$P214_STEP_STATUS" == 0 ]] || exit "$P214_STEP_STATUS"
++  [[ -s "$P214_OUT/pages/$p214_label.png" ]]
++  sha256sum -- "$P214_OUT/pages/$p214_label.png" >> "$P214_OUT/PAGES.sha256"
+ done
+-sha256sum -c --strict "$P212_OUT/RUNTIME_EXPECTED.sha256" > "$P212_OUT/runtime.after.stdout" 2> "$P212_OUT/runtime.after.stderr"
+-(cd "$P212_SRC" && sha256sum -c --strict "$P212_OUT/SOURCE_EXPECTED.sha256") > "$P212_OUT/live_source.after.stdout" 2> "$P212_OUT/live_source.after.stderr"
+-sha256sum -c --strict "$P212_OUT/SOURCE_EXPECTED.sha256" > "$P212_OUT/cold_source.final.stdout" 2> "$P212_OUT/cold_source.final.stderr"
+-sha256sum -- main.pdf main.log main.fls main.aux main.bbl main.blg > "$P212_OUT/FINAL_PRODUCTS.sha256"
+-printf '%s\n' 'CAPTURED_PENDING_FULL_LOG_FLS_CONFIG_PDF_AND_ACTUAL_ALL_PAGE_RECEPTION' > "$P212_OUT/STATUS.txt"
+-# No PDF adoption, final Review A PASS, Round1 or package seal is produced here.
++sha256sum -c --strict "$P214_OUT/RUNTIME_EXPECTED.sha256" > "$P214_OUT/runtime.after.stdout" 2> "$P214_OUT/runtime.after.stderr"
++(cd "$P214_SRC" && sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256") > "$P214_OUT/live_source.after.stdout" 2> "$P214_OUT/live_source.after.stderr"
++sha256sum -c --strict "$P214_OUT/SOURCE_EXPECTED.sha256" > "$P214_OUT/cold_source.final.stdout" 2> "$P214_OUT/cold_source.final.stderr"
++sha256sum -- main.pdf main.log main.fls main.aux main.bbl main.blg > "$P214_OUT/FINAL_PRODUCTS.sha256"
++printf '%s\n' 'CAPTURED_PENDING_FULL_LOG_FLS_CONFIG_PDF_AND_ACTUAL_ALL_PAGE_RECEPTION' > "$P214_OUT/STATUS.txt"
++# No PDF adoption, initial artifact acceptance, Round0 or package seal is produced here.

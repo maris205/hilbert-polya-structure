@@ -1,0 +1,14 @@
+{
+  "arguments": {
+    "cmd": "node <<'P212_A_COMPARE'\nconst fs=require('node:fs'),c=require('node:crypto');const b='docs/papers211_215_sequence/reviews/p212_a/initial_data01/';const stdout=fs.readFileSync(b+'A.stdout.raw'),stderr=fs.readFileSync(b+'A.stderr.raw');const root=JSON.parse(fs.readFileSync('docs/papers211_215_sequence/qa/p212_a_source_root01/DATA_ROOT_NATIVE.json','utf8'));if(root.result.exit_code!==0||!stdout.equals(Buffer.from(root.result.output,'utf8'))||stderr.length!==0)throw Error('DATA full output comparison failed');console.log(JSON.stringify({status:'A_ROOT_FULL_OUTPUT_BYTES_EQUAL',stdout_bytes:stdout.length,stderr_bytes:stderr.length,stdout_sha256:c.createHash('sha256').update(stdout).digest('hex'),root_chunk:root.result.chunk_id,output:stdout.toString()},null,2));\nP212_A_COMPARE",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 3000
+  },
+  "result": {
+    "chunk_id": "5915e4",
+    "wall_time_seconds": 0.000003749,
+    "exit_code": 0,
+    "original_token_count": 234,
+    "output": "{\n  \"status\": \"A_ROOT_FULL_OUTPUT_BYTES_EQUAL\",\n  \"stdout_bytes\": 646,\n  \"stderr_bytes\": 0,\n  \"stdout_sha256\": \"422a2f2cd46be65aca96c6ce1dd5863a01f14940ae6042f831a9bcc4868c40d2\",\n  \"root_chunk\": \"6b32cc\",\n  \"output\": \"{\\\"schema\\\":\\\"P212_A_SAVED_DATA_RECEPTION_V1\\\",\\\"status\\\":\\\"COMPLETE_SAVED_DATA_SEMANTIC_PASS\\\",\\\"input\\\":{\\\"path\\\":\\\"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_a_runs/initial02/stdout.raw\\\",\\\"sha256\\\":\\\"24d6054e4a29411948becfa256d2182301b3f73d3ef78df1cad9088ed8b9922b\\\",\\\"bytes\\\":3004047},\\\"assertions\\\":81243,\\\"ledger_rows\\\":34683,\\\"check_classes\\\":29,\\\"carriers\\\":[{\\\"n\\\":1,\\\"states\\\":1,\\\"orbits\\\":1,\\\"groups\\\":1},{\\\"n\\\":2,\\\"states\\\":16,\\\"orbits\\\":8,\\\"groups\\\":8},{\\\"n\\\":3,\\\"states\\\":243,\\\"orbits\\\":81,\\\"groups\\\":81},{\\\"n\\\":4,\\\"states\\\":4096,\\\"orbits\\\":1036,\\\"groups\\\":1030}],\\\"source_producer_executed\\\":false,\\\"canonical_adoption\\\":false,\\\"all_parameter_proof_from_data\\\":false}\\n\"\n}\n"
+  }
+}

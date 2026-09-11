@@ -1,0 +1,175 @@
+{
+  "format": "actual-tool-request-return-v1",
+  "records": [
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "sha256sum -c docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02/INPUT_PINS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "cb775e",
+        "wall_time_seconds": 0.00001574,
+        "exit_code": 0,
+        "original_token_count": 187,
+        "output": ".agents/skills/symbolic-dynamics-research/SKILL.md: OK\ndocs/research_state/WORKFLOW.md: OK\ndocs/papers211_215_sequence/PROBLEM_ANCHOR.md: OK\npapers/182-cyclic-subspace-lattice-comparator/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/bounded_lattice_profile_fresh_desk/REPORT.md: OK\ndocs/papers211_215_sequence/scouting/set_code_lane/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/finite_graph_rewiring_desk01/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/incidence_rewiring_lane/PROOF_PACKAGE.md: OK\npapers/retired/160-binary-projective-steiner-triangle-collapse/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/discrete_geometry_gap_desk/REPORT.md: OK\nsha256sum: WARNING: 1 line is improperly formatted\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "perl -MJSON::PP -MFile::Basename=dirname -e 'for my $f (@ARGV) { open my $h, \"<:raw\", $f or die \"$f: $!\"; local $/; my $s=<$h>; if ($f =~ /\\.json$/) { my $o=decode_json($s); die \"wrong format\" unless $o->{format} eq \"actual-tool-request-return-v1\"; my $want=$f =~ /BROWSER/ ? 11 : 10; die \"wrong record count\" unless @{$o->{records}} == $want; for my $r (@{$o->{records}}) { die \"missing operation/request/result\" unless exists $r->{operation} && exists $r->{request} && exists $r->{result}; } print \"$f: JSON records=$want OK\\n\"; } else { my $n=0; while ($s =~ /\\]\\(([^)\\s]+)\\)/g) { my $p=$1; next if $p =~ m{^https?://} || $p =~ /^#/; $p =~ s/#.*$//; die \"missing link $p in $f\" unless -f dirname($f).\"/$p\"; ++$n; } print \"$f: local links=$n OK\\n\"; } }' NATIVE_READS.json BROWSER_READS.json REPORT.md PROOF_PACKAGE.md SOURCE_READS.md",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "60cb5b",
+        "wall_time_seconds": 0.009523179,
+        "exit_code": 0,
+        "original_token_count": 44,
+        "output": "NATIVE_READS.json: JSON records=10 OK\nBROWSER_READS.json: JSON records=11 OK\nREPORT.md: local links=9 OK\nPROOF_PACKAGE.md: local links=0 OK\nSOURCE_READS.md: local links=0 OK\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "wc -l -c REPORT.md PROOF_PACKAGE.md SOURCE_READS.md INPUT_PINS.sha256 NATIVE_READS.json BROWSER_READS.json",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "6d80f3",
+        "wall_time_seconds": 0.05157709,
+        "exit_code": 0,
+        "original_token_count": 51,
+        "output": "    99   6046 REPORT.md\n   182   7816 PROOF_PACKAGE.md\n   103   6101 SOURCE_READS.md\n    11   1318 INPUT_PINS.sha256\n   156  75331 NATIVE_READS.json\n   194 189329 BROWSER_READS.json\n   745 285941 total\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "sha256sum --strict -c docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02/INPUT_PINS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "eec37a",
+        "wall_time_seconds": 0.00000526,
+        "exit_code": 0,
+        "original_token_count": 175,
+        "output": ".agents/skills/symbolic-dynamics-research/SKILL.md: OK\ndocs/research_state/WORKFLOW.md: OK\ndocs/papers211_215_sequence/PROBLEM_ANCHOR.md: OK\npapers/182-cyclic-subspace-lattice-comparator/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/bounded_lattice_profile_fresh_desk/REPORT.md: OK\ndocs/papers211_215_sequence/scouting/set_code_lane/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/finite_graph_rewiring_desk01/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/incidence_rewiring_lane/PROOF_PACKAGE.md: OK\npapers/retired/160-binary-projective-steiner-triangle-collapse/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/discrete_geometry_gap_desk/REPORT.md: OK\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "cmp <(perl -MJSON::PP -e 'local $/; my $o=decode_json(<>); print $o->{records}[3]{result}{output};' docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02/NATIVE_READS.json) <(cat papers/182-cyclic-subspace-lattice-comparator/PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/bounded_lattice_profile_fresh_desk/REPORT.md docs/papers211_215_sequence/scouting/set_code_lane/PROOF_PACKAGE.md)",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "shell": "/bin/bash",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "b85c99",
+        "wall_time_seconds": 0.00000516,
+        "exit_code": 0,
+        "original_token_count": 13,
+        "output": "Wide character in print at -e line 1, <> chunk 1.\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "cmp <(perl -MJSON::PP -e 'local $/; my $o=decode_json(<>); print $o->{records}[4]{result}{output};' docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02/NATIVE_READS.json) <(cat docs/papers211_215_sequence/scouting/finite_graph_rewiring_desk01/PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/incidence_rewiring_lane/PROOF_PACKAGE.md papers/retired/160-binary-projective-steiner-triangle-collapse/PROOF_PACKAGE.md)",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "shell": "/bin/bash",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "4fa4ca",
+        "wall_time_seconds": 0.00000367,
+        "exit_code": 0,
+        "original_token_count": 13,
+        "output": "Wide character in print at -e line 1, <> chunk 1.\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "cmp <(perl -MJSON::PP -e 'local $/; my $o=decode_json(<>); print $o->{records}[9]{result}{output};' NATIVE_READS.json) INPUT_PINS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02",
+        "shell": "/bin/bash",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "092177",
+        "wall_time_seconds": 0.00000265,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "cmp <(perl -MJSON::PP -MEncode=encode -e 'local $/; my $o=decode_json(<>); print encode(\"UTF-8\", $o->{records}[3]{result}{output});' docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02/NATIVE_READS.json) <(cat papers/182-cyclic-subspace-lattice-comparator/PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/bounded_lattice_profile_fresh_desk/REPORT.md docs/papers211_215_sequence/scouting/set_code_lane/PROOF_PACKAGE.md)",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "shell": "/bin/bash",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "efea90",
+        "wall_time_seconds": 0.0000025,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "cmp <(perl -MJSON::PP -MEncode=encode -e 'local $/; my $o=decode_json(<>); print encode(\"UTF-8\", $o->{records}[4]{result}{output});' docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02/NATIVE_READS.json) <(cat docs/papers211_215_sequence/scouting/finite_graph_rewiring_desk01/PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/incidence_rewiring_lane/PROOF_PACKAGE.md papers/retired/160-binary-projective-steiner-triangle-collapse/PROOF_PACKAGE.md)",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "shell": "/bin/bash",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "9653a8",
+        "wall_time_seconds": 0.00000382,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "perl -MJSON::PP -e 'opendir my $d, \".\" or die $!; my @files=sort grep { -f $_ } readdir $d; open my $m, \"<\", \"MANIFEST.sha256\" or die $!; my @pins; while (<$m>) { chomp; /^([0-9a-f]{64})  ([A-Za-z_.]+)$/ or die \"bad manifest row\"; push @pins, $2; } my @want=sort (@pins,\"MANIFEST.sha256\"); die \"manifest coverage differs\" unless join(\"\\n\",@files) eq join(\"\\n\",@want); die \"payload count differs\" unless @pins == 7; print \"nonself manifest: seven payload files, exact coverage OK\\n\"; open my $j, \"<:raw\", \"CHECKS_NATIVE.json\" or die $!; local $/; my $o=decode_json(<$j>); die \"checks count differs\" unless @{$o->{records}} == 9; for my $r (@{$o->{records}}) { die \"nonzero check exit\" unless $r->{result}{exit_code} == 0; } print \"CHECKS_NATIVE.json: nine actual checks, all exit 0; earlier warnings explicitly retained\\n\";'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02",
+        "max_output_tokens": 3000
+      },
+      "result": {
+        "chunk_id": "4cd188",
+        "wall_time_seconds": 0.00000305,
+        "exit_code": 25,
+        "original_token_count": 11,
+        "output": "bad manifest row at -e line 1, <$m> line 4.\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "perl -MJSON::PP -e 'opendir my $d, \".\" or die $!; my @files=sort grep { -f $_ } readdir $d; open my $m, \"<\", \"MANIFEST.sha256\" or die $!; my @pins; while (<$m>) { chomp; /^([0-9a-f]{64})  ([A-Za-z0-9_.]+)$/ or die \"bad manifest row\"; push @pins, $2; } my @want=sort (@pins,\"MANIFEST.sha256\"); die \"manifest coverage differs\" unless join(\"\\n\",@files) eq join(\"\\n\",@want); die \"payload count differs\" unless @pins == 7; print \"nonself manifest: seven payload filenames, exact coverage OK; content hashes require reseal\\n\"; open my $j, \"<:raw\", \"CHECKS_NATIVE.json\" or die $!; local $/; my $o=decode_json(<$j>); die \"checks count differs\" unless @{$o->{records}} == 10; my $failed=grep { $_->{result}{exit_code} != 0 } @{$o->{records}}; die \"unexpected failure count\" unless $failed == 1; print \"CHECKS_NATIVE.json: ten actual checks; nine exit 0 and one preserved checker-regex failure\\n\";'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02",
+        "max_output_tokens": 3000
+      },
+      "result": {
+        "chunk_id": "5f35e3",
+        "wall_time_seconds": 0.051185625,
+        "exit_code": 0,
+        "original_token_count": 46,
+        "output": "nonself manifest: seven payload filenames, exact coverage OK; content hashes require reseal\nCHECKS_NATIVE.json: ten actual checks; nine exit 0 and one preserved checker-regex failure\n"
+      }
+    }
+  ]
+}

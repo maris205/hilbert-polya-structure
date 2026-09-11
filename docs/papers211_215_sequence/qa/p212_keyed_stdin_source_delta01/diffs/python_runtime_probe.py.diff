@@ -1,0 +1,31 @@
+--- docs/papers211_215_sequence/qa/p212_trusted_product_source_delta01/python_runtime_probe.py	2026-09-09 19:38:14.340966977 +0800
++++ docs/papers211_215_sequence/qa/p212_keyed_stdin_source_delta01/python_runtime_probe.py	2026-09-09 22:54:45.418531295 +0800
+@@ -17,7 +17,8 @@
+ 
+ ROOT = '/root/autodl-tmp/symbolic_dynamics'
+ QA = ROOT + '/docs/papers211_215_sequence/qa'
+-SELF = QA + '/p212_trusted_product_source_delta01/python_runtime_probe.py'
++SELF = QA + '/p212_keyed_stdin_source_delta01/python_runtime_probe.py'
++STDIN_FILE = QA + '/p212_keyed_stdin_input01/empty.stdin'
+ ENV8 = {'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC',
+         'SOURCE_DATE_EPOCH':'1788825600','FORCE_SOURCE_DATE':'1','openin_any':'p','openout_any':'p'}
+ PROVENANCE = {'schema':'p212-trusted-product-boundary-v1',
+@@ -91,7 +92,7 @@
+     paths = a['statx_validation_paths']
+     need(type(paths) is list and paths == sorted(set(paths))
+          and all(type(p) is str and p.startswith('/') and os.path.normpath(p) == p for p in paths)
+-         and all(p in paths for p in (SELF,'/dev/null','/')), 'finite explicit validation metadata targets')
++         and all(p in paths for p in (SELF,STDIN_FILE,'/')), 'finite explicit validation metadata targets')
+     for p in paths:
+         data = (ctypes.c_ubyte * 256)()
+         need(libc.statx(-100,os.fsencode(p),0x800|0x100,0xFFF,data) == 0, 'actual statx call succeeds')
+@@ -106,6 +107,9 @@
+         numbers = (os.makedev(u32(136),u32(140)),u64(32),struct.unpack_from('<H',raw,28)[0],
+                    u32(16),u32(20),u32(24),os.makedev(u32(128),u32(132)),u64(40),u32(4),u64(48),
+                    ns(64),ns(112),ns(96),ns(80))
++        if p == STDIN_FILE:
++            need(stat.S_ISREG(numbers[2]) and numbers[7] == 0,
++                 'independently keyed stdin sample remains an empty regular file')
+         rows.append({'path':p,'lstat_fields':dict(zip(STATS,map(str,numbers))),
+                      'mask':u32(0),'raw_statx_hex':raw.hex()})
+     previous,actual = ctypes.c_int(),ctypes.c_int()

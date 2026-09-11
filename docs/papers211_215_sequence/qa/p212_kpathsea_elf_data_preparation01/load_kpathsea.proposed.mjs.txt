@@ -1,0 +1,42 @@
+// SOURCE ONLY. Fixed accepted workspace DATA adapter; no decoder import/call.
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const BASE='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/';
+const INPUTS=[
+ ['p212_three_terminal_root01/DATA_RECEPTION.md',1493,'e18c6f01d9bd9c5609b42eeb752aedf875eb21ec0f9f0a1b739b80931ce0648b'],
+ ['p212_three_terminal_root01/DATA_REPLAY_NATIVE.json',36989,'16217fe4ca8a54cf1c574e4d2f767a1bd2f29309db26eb395753410e20f99a91'],
+ ['p212_three_terminal_raw01/stdout.json',1085372,'ee5aafab738dcc42684c1c7f4406632b46ceff48be5f8cc56a2b8b2c35f0bd7f'],
+ ['p212_elf_cache_data_root01/RECEPTION.md',2159,'15b5611fc962e7ccd59fe00c9d801cc9ee53ce1ce632eba5ffbd32cb5ae9ce3e'],
+ ['p212_elf_cache_data_root01/DECODE_NATIVE.json',169099,'64b247c0a6c5667774ed894607620961dfaf311617d2c17d66913b773106faad']
+];
+const F='dev ino mode nlink uid gid rdev size mtimeNs ctimeNs'.split(' '),V=['lstat_before','fstat_before','fstat_after','lstat_after'];
+const need=(x,s)=>{if(!x)throw Error(s);},sha=b=>createHash('sha256').update(b).digest('hex'),pin=b=>({bytes:b.length,sha256:sha(b)});
+const stable=x=>JSON.stringify(x,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
+const same=(a,b,s)=>need(stable(a)===stable(b),s),stat=s=>Object.fromEntries(F.map(k=>{need(typeof s[k]==='bigint','BIGINT_STAT');return[k,String(s[k])];}));
+export function loadKpathseaData(){
+ const records=[],raw=[];
+ try{
+  for(const [relative,bytes,digest]of INPUTS){
+   const path=BASE+relative,k={path,lstat_before:null,fstat_before:null,fstat_after:null,lstat_after:null,reads:[],bytes_read:0,eof:false,close_succeeded:false,content:null};records.push(k);let fd=null;const chunks=[];
+   try{const a=fs.lstatSync(path,{bigint:true});k.lstat_before=stat(a);need(a.isFile()&&!a.isSymbolicLink()&&a.size===BigInt(bytes),'EXACT_FIXED_REGULAR_SIZE');
+    fd=fs.openSync(path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);k.fstat_before=stat(fs.fstatSync(fd,{bigint:true}));same(k.fstat_before,k.lstat_before,'SAME_FD_BEFORE');const block=Buffer.alloc(65536);
+    for(;;){const requested=Math.min(block.length,bytes-k.bytes_read+1),returned=fs.readSync(fd,block,0,requested,null);k.reads.push({requested,returned});need(Number.isSafeInteger(returned)&&returned>=0&&returned<=requested,'ACTUAL_READ_COUNT');if(returned===0){k.eof=true;break;}chunks.push(Buffer.from(block.subarray(0,returned)));k.bytes_read+=returned;need(k.bytes_read<=bytes,'ONE_OVERFLOW_BYTE_RETAINED');}
+    k.fstat_after=stat(fs.fstatSync(fd,{bigint:true}));k.lstat_after=stat(fs.lstatSync(path,{bigint:true}));for(const v of V)same(k[v],k.lstat_before,'ALL_FOUR_KEYS');need(k.bytes_read===bytes,'WHOLE_SIZE_TO_ZERO_EOF');
+   }catch(e){k.error={name:e.name,code:e.code??null,message:e.message};throw e;}
+   finally{if(fd!==null){try{fs.closeSync(fd);k.close_succeeded=true;}catch(e){k.close_error={name:e.name,code:e.code??null,message:e.message};}}const b=Buffer.concat(chunks);k.content=pin(b);k.partial_hex=b.toString('hex');}
+   need(k.close_succeeded&&!k.close_error,'COMPLETE_CLOSE');same(k.content,{bytes,sha256:digest},'FIXED_ACCEPTED_WHOLE_PIN');raw.push(Buffer.concat(chunks));delete k.partial_hex;
+  }
+  const parse=b=>{const s=b.toString('utf8');need(Buffer.from(s,'utf8').equals(b),'UTF8_REVERSIBLE');return JSON.parse(s);};
+  const replay=parse(raw[1]);need(replay.chunk_id==='2c1bc2'&&replay.exit_code===0&&!Object.hasOwn(replay,'session_id'),'ACCEPTED_ROOT_DATA_REPLAY');const accepted=JSON.parse(replay.output);
+  need(accepted.status==='ACCEPT_THREE_REGULAR_CANDIDATE_BODY_DATA_ONLY'&&accepted.findings.open===0&&accepted.failure===null,'ACCEPTED_REGULAR_DATA_SCOPE');same(accepted.stdout,records[2].content,'ACCEPTED_STDOUT_PIN');
+  const historical=accepted.current_documents.filter(x=>x.path===records[2].path);need(historical.length===1,'EXACT_RAW_KEY_ORIGIN');for(const v of ['begin','fd_before','fd_after','end'])same(historical[0][v],records[2].lstat_before,'ALL_ACCEPTED_RAW_KEY_FIELDS');
+  const capture=parse(raw[2]);need(Buffer.from(JSON.stringify(capture)+'\n','utf8').equals(raw[2]),'ENTIRE_ACCEPTED_JSON_ENCODING');need(capture.schema==='p212-three-leaf-captured-result-v1'&&capture.reader_called===true&&capture.reader_returned===true&&capture.entry_failure===null,'EXACT_ACCEPTED_CAPTURE');
+  const rows=capture.reader_result.rows;need(Array.isArray(rows)&&rows.length===3,'EXACT_THREE_ACCEPTED_ROWS');const row=rows[2],r=row.regular,a=accepted.observations[2];
+  need(row.id==='KPATHSEA_LEAF'&&row.path==='/usr/lib/x86_64-linux-gnu/libkpathsea.so.6.3.4'&&row.role==='needed_regular_candidate'&&row.kind==='regular'&&row.link===null&&row.complete===true&&row.error===null,'EXACT_KPATHSEA_ROW');
+  need(r.eof===true&&r.close_succeeded===true&&r.close_error===null&&r.bytes_read===97064&&typeof r.raw_hex==='string'&&r.raw_hex.length===194128&&/^(?:[0-9a-f]{2})*$/.test(r.raw_hex),'COMPLETE_KPATHSEA_HEX');const body=Buffer.from(r.raw_hex,'hex');same(pin(body),{bytes:97064,sha256:'8077fa6889e0a1bedd742adb649182f4167b5a79c57630c1f5dc5a89e8301fe6'},'ACCEPTED_KPATHSEA_BODY_PIN');same(r.content,pin(body),'ROW_BODY_PIN');same(a.body,pin(body),'AUDIT_BODY_PIN');
+  same({id:row.id,path:row.path,role:row.role},{id:a.id,path:a.origin_lexical_candidate,role:a.role},'AUDIT_ROW_IDENTITY');for(const [v,key]of [['lstat_before',row.lstat_before],['fstat_before',r.fstat_before],['fstat_after',r.fstat_after],['lstat_after',row.lstat_after]])same(key,a[v],'ENTIRE_ACCEPTED_BODY_KEY');same(r.reads,a.reads,'ENTIRE_ACCEPTED_READ_SEQUENCE');
+  const old=parse(raw[4]);need(old.result.chunk_id==='11ea24'&&old.result.exit_code===0&&!Object.hasOwn(old.result,'session_id'),'ACCEPTED_PRIOR_DECODE');const priorRaw=Buffer.from(old.result.output,'utf8');same(pin(priorRaw),{bytes:150872,sha256:'0906b783c684c8c101ebca7c614789625b02e601892eaa9db602b5f89c51bc15'},'WHOLE_PRIOR_DECODE_OUTPUT');
+  const {raw_hex,...regularKey}=r;
+  return {status:'ACCEPTED_KPATHSEA_BUFFER_ADAPTED_NO_ELF_INTERPRETATION',body,priorRaw,authentication:{fixed_input_keys:records,body_pin:pin(body),row_pointer:'/reader_result/rows/2',complete_row_without_body_hex:{...row,regular:regularKey},root_body_reception:{path:records[0].path,pin:records[0].content},prior_result_pin:pin(priorRaw),prior_reception:{path:records[3].path,pin:records[3].content},receipt_reuse_not_a_fresh_producer_audit:true},operation_permission:false,installed_closure:false};
+ }catch(e){return {status:'HOLD_FIXED_DATA_ADAPTER_FAILURE',reason:e.message,fixed_input_keys:records,operation_permission:false,installed_closure:false};}
+}

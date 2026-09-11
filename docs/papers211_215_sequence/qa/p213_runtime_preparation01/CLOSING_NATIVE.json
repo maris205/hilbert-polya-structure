@@ -1,0 +1,70 @@
+{
+  "scope": "DOCUMENTARY_CLOSURE_BEFORE_NONSELF_SEAL_NOT_RUNTIME",
+  "records": [
+    {
+      "request": {
+        "cmd": "sha256sum --strict -c docs/papers211_215_sequence/qa/p213_runtime_preparation01/INPUTS.sha256",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "a8efa0",
+        "wall_time_seconds": 0.00000522,
+        "exit_code": 0,
+        "original_token_count": 72,
+        "output": "papers/213-receiver-limited-cyclic-transfer/RUNTIME_PLAN.md: OK\npapers/213-receiver-limited-cyclic-transfer/SCIENTIFIC_DEPENDENCIES.md: OK\npapers/213-receiver-limited-cyclic-transfer/VERIFICATION_PARAMETERS.json: OK\npapers/213-receiver-limited-cyclic-transfer/SOURCE_MANIFEST.sha256: OK\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "wc -l -c docs/papers211_215_sequence/qa/p213_runtime_preparation01/DESIGN.md docs/papers211_215_sequence/qa/p213_runtime_preparation01/READ_SCOPE.md docs/papers211_215_sequence/qa/p213_runtime_preparation01/HANDOFF.md docs/papers211_215_sequence/qa/p213_runtime_preparation01/INPUTS.sha256 docs/papers211_215_sequence/qa/p213_runtime_preparation01/READS_NATIVE.json docs/papers211_215_sequence/qa/p213_runtime_preparation01/PRIMARY_NATIVE.json",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "24907b",
+        "wall_time_seconds": 0.00000536,
+        "exit_code": 0,
+        "original_token_count": 132,
+        "output": "  235 14497 docs/papers211_215_sequence/qa/p213_runtime_preparation01/DESIGN.md\n   41  2507 docs/papers211_215_sequence/qa/p213_runtime_preparation01/READ_SCOPE.md\n   30  1774 docs/papers211_215_sequence/qa/p213_runtime_preparation01/HANDOFF.md\n    4   535 docs/papers211_215_sequence/qa/p213_runtime_preparation01/INPUTS.sha256\n   83 15581 docs/papers211_215_sequence/qa/p213_runtime_preparation01/READS_NATIVE.json\n   39 30892 docs/papers211_215_sequence/qa/p213_runtime_preparation01/PRIMARY_NATIVE.json\n  432 65786 total\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sed -n '110,157p' docs/papers211_215_sequence/qa/p213_runtime_preparation01/DESIGN.md",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "de1635",
+        "wall_time_seconds": 0.00000514,
+        "exit_code": 0,
+        "original_token_count": 779,
+        "output": "## Finite observation frontier and file keys\n\nBefore any probe, root must receive a finite observation binding with exact\napproved paths/roles, supported module/loader classes and numeric bounds\nfor module count, maps bytes, regular-file count, bytes per file and total\nbytes. None is presently resolved; this is a design prerequisite, not an\ninvitation to broad discovery. Proposed regular-file roles are limited to:\n\n- The selected interpreter, observer source and explicitly approved lexical\n  symlink targets for those paths.\n- Ordinary-file module origins actually in the early snapshot; matching\n  source/cache roles; and separately the same roles for declared helpers.\n- Regular file-backed paths from the early maps and, separately, additions\n  from helper/closing maps. Include all approved file-backed mappings, not\n  only executable ones. Check map device/inode against the opened file key.\n- Explicitly approved startup search candidates needed for the chosen\n  CPython path arrangement, such as its zip-path candidate and exact cache\n  candidates. These are finite named roles, not directory walks. Any cfg\n  role would need to be individually approved; no configuration crawl or\n  claim of exhaustive loader/config closure is made.\n\nA snapshot supplies a role/path observation, not permission to open any\narbitrary named path. Unknown path, symlink target, loader, malformed map,\ndeleted mapping, non-regular file, unsupported encoding or bound exhaustion\nis preserved and causes HOLD before a new out-of-allowlist content read.\nThis limit governs the observer's explicit path/metadata/hash reads; it is\nnot a sandbox around the already-trusted interpreter/helper import internals.\nA later mismatch does not prove an earlier internal import was prevented.\nAny late file dependency lacking an already complete approved key is HOLD;\nthere is no recursive discover/import/hash loop to force closure.\nNo recursive scanning, filesystem ancestor key, /dev/null content read,\nother-process /proc access, ldd command, subprocess or network operation is\npart of the observer. Ordinary directory traversal remains trusted.\n\nClassify builtin and frozen origins by actual recorded spec/loader mechanism.\nA frozen module can have a nominal __file__; its text file cannot be called\nthe executed source merely because that string exists. Any such nominal\nrole remains explicit and distinct. Unknown mechanisms are not guessed.\nThe import system's [module-spec and cache semantics](https://docs.python.org/3/reference/import.html)\nalso mean a source/cache existence record is not a trace proving which one\nsupplied the executed code. Existing ordinary source and eligible cache\nfiles must both be fully keyed within the approved finite roles.\n\nFor each approved necessary regular file, open one bounded read-only fd,\nverify its regular-file type, save fstat before reading, hash every byte up\nto the accepted bound through EOF, and save fstat again on that same fd.\nRequire equal full keys, exact byte count equal to size, and agreement with\nthe path/lstat or map identity at the observation points. If it changes,\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sed -n '1,120p' docs/papers211_215_sequence/qa/p213_runtime_preparation01/READ_SCOPE.md",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "29b823",
+        "wall_time_seconds": 0.00000475,
+        "exit_code": 0,
+        "original_token_count": 627,
+        "output": "# Scope and authorship\n\nOwner: /root/round211_functional_surgery_residual/fresh08_shift_source.\nTasking root: /root. Physical parent remains assigned to P212; it did not\ncoauthor this P213 design. No new independent reviewer is claimed.\n\nThe four P213 documentary inputs were read completely as text: RUNTIME_PLAN,\nSCIENTIFIC_DEPENDENCIES, VERIFICATION_PARAMETERS and SOURCE_MANIFEST.sha256.\nThe decisive rereads and their actual native returns are in READS_NATIVE.json;\nall four total 221 lines / 11,751 bytes. INPUTS.sha256 pins those four files\nonly, with workspace-root-relative paths. The three documentary leaf hashes\nmatch their entries in the read source manifest. That is not verification\nof the manifest's 29 payloads, the science source or an independently accepted\nsource/parameter gate. verify.py's listed digest is a declaration from that\nmanifest, not a fresh hash/read of the verifier by this agent.\n\nInstruction/context reads: the complete project SKILL.md and WORKFLOW.md,\ncurrent STATE/PIPELINE entry sections and a scoped P213 path/line discovery.\nOne early 220-line STATE response was truncated; its relevant current head\nwas then read with a smaller range. No complete read of all historical state\nparagraphs is claimed. A case-specific path search found no results before\nthe actual numbered paper path was located. These are documentary discovery\nevents, not scientific or runtime observations.\n\nPrimary semantic sources were accessed using the public documentation tool,\nnot downloaded/executed as programs. PRIMARY_NATIVE.json preserves one actual\nseven-page request/return containing the cited relevant excerpts; earlier\nreads supplied complementary -B/-S, cache and proc-race context. No claim\nthat tool-rendered excerpts are full physical upstream-source archives.\nThe current Python documentation identifies 3.14.7; the fixed CPython source\nexample is v3.11.13. Neither identifies this machine's interpreter.\n\nPreparation authoring is now a runtime-design contribution. This author\nmust not independently accept its own future observer/runtime evidence.\nNo P213 mathematics, manuscript, verifier or proof contribution was made\nin this task, and no P213 source/manuscript review is represented.\n\nAll local mutations belong solely to qa/p213_runtime_preparation01.\nNo old manuscript, state/index, source seal, review or failure artifact was\nedited. Root integrates later milestones. D01 and D01 cancellation-audit\npackets remain frozen and unrelated to this design's acceptance.\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sed -n '1,120p' docs/papers211_215_sequence/qa/p213_runtime_preparation01/HANDOFF.md",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "d8e3b9",
+        "wall_time_seconds": 0.000005051,
+        "exit_code": 0,
+        "original_token_count": 444,
+        "output": "# P213 runtime design handoff\n\nResult: DESIGN_COMPLETE_ONLY. Root agreed the direction and requested the\nminimal design be sealed; independent root reception is still required.\nNo observer/launcher/controller source was written and no runtime operation\nwas performed or enabled.\n\nRead DESIGN.md for the actual proposed contract. Its core is one independent\nprobe with pre-helper immutable startup module facts/raw maps, separately\nlabelled helper/closing observations, exact future launch binding, finite\nallowlisted regular-file SHA-256/ten-field keys and actual optional absences.\nThe observation is under ordinary trusted bootstrap; it is not an ELF/NSS\nor continuous-immutability attestation. -B/cache and frozen-file limitations\nremain explicit. No automatic retry or self-audited runtime PASS is allowed.\n\nThe next owner action is source/parameter acceptance and root reception of\nthis design, then separate commissioning of a small observer and concrete\nfinite binding. Actual paths/host identities/allowlists/bounds remain\nunresolved here. Observer source acceptance, probe authorization and\nindependent runtime reception must precede any separately authorized initial\nscientific run. Canonical adoption and strict author pair remain separate.\n\nINPUTS.sha256 is workspace-root-relative. SHA256SUMS is directory-relative,\nnonself and covers every other file in this preparation directory.\nREADS_NATIVE and PRIMARY_NATIVE are actual documentary returns, not a probe\nreceipt. CLOSING_NATIVE records documentary closure before the nonself seal;\nthe final seal check is returned to root as its actual native result.\n\nNo scientific claim, manuscript review, runtime result, build, Git/SSH action,\nold-packet mutation or batch milestone is implied. HOLD_EXTERNAL persists.\n"
+      }
+    }
+  ]
+}

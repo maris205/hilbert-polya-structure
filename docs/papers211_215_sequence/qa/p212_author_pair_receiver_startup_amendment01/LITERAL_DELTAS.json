@@ -1,0 +1,29 @@
+{
+  "status": "SOURCE_ONLY_ROOT_SELECTED_STARTUP_AMENDMENT",
+  "source": "docs/papers211_215_sequence/qa/p212_author_pair_receiver_preparation01/inspect_production.py",
+  "source_pin": {
+    "bytes": 30176,
+    "sha256": "29b445892d42c9952d361298a11cffdb666701a549ebe7db79446d9c925a4e87"
+  },
+  "target": "inspect_production.py",
+  "ordered_replacements": [
+    {
+      "label": "Root-selected startup role and bounded receiver-entry absence",
+      "before": "need(binding_path == QA/'p212_author_pair_binding01/BINDING.json' and capture_path == binding_path.parent/'PRODUCTION_TOOL_INVOCATION.json', 'exact pair original binding/capture roles')\n",
+      "after": "need(binding_path == QA/'p212_author_pair_binding01/BINDING.json' and capture_path == binding_path.parent/'PRODUCTION_TOOL_INVOCATION.json', 'exact pair original binding/capture roles')\nroot_startup_cache = binding_path.parent/'never_created_root_capture_cache'\nroot_startup_contract = binding_path.parent/'ROOT_STARTUP_CONTRACT.md'\nneed(sum(row['path'] == str(root_startup_contract) for row in binding['provenance_inputs']) == 1, 'unique provenance-bound root startup contract')\n# This is a receiver-time observation, not the separately required root pre-production observation.\nneed(not os.path.lexists(root_startup_cache), 'root-selected startup prefix absent at receiver entry')\n"
+    },
+    {
+      "label": "Exact additional root controller interpreter startup vector",
+      "before": "root_launch=['/usr/bin/env','-i']+[k+'='+v for k,v in ENV.items()]+['/usr/bin/python3.10','-I','-S','-B',binding['root_capture']['controller']['path'],str(binding_path),sys.argv[2]]",
+      "after": "root_launch=['/usr/bin/env','-i']+[k+'='+v for k,v in ENV.items()]+['/usr/bin/python3.10','-I','-S','-B','-X','pycache_prefix='+str(root_startup_cache),binding['root_capture']['controller']['path'],str(binding_path),sys.argv[2]]"
+    },
+    {
+      "label": "Bounded receiver-close absence",
+      "before": "input_key={p:rich(p) for p in list(READS)}\n",
+      "after": "need(not os.path.lexists(root_startup_cache), 'root-selected startup prefix absent at receiver close; not continuous startup tracing')\ninput_key={p:rich(p) for p in list(READS)}\n"
+    }
+  ],
+  "controller_changed": false,
+  "supplement_changed": false,
+  "operational_execution_authorized": false
+}

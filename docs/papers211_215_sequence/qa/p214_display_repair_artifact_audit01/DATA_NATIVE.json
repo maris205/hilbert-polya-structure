@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "node -e 'const fs=require(\"node:fs\"),crypto=require(\"node:crypto\"),cp=require(\"node:child_process\");const W=\"/root/autodl-tmp/symbolic_dynamics\",D=\"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p214_display_repair_artifact_audit01\",checker=\"docs/papers211_215_sequence/qa/p214_display_repair_artifact_audit01/ARTIFACT_DATA_CHECK.cjs\";const sha=b=>crypto.createHash(\"sha256\").update(b).digest(\"hex\");if(sha(fs.readFileSync(W+\"/\"+checker))!==\"8201009c119343665336cf4d93234b964893991396d8c451f4c2d8941aa6448c\")throw Error(\"fixed checker hash changed\");const out=fs.openSync(D+\"/stdout.raw\",\"wx\"),err=fs.openSync(D+\"/stderr.raw\",\"wx\");const r=cp.spawnSync(\"node\",[checker],{cwd:W,stdio:[\"ignore\",out,err]});fs.closeSync(out);fs.closeSync(err);const b=fs.readFileSync(D+\"/stdout.raw\"),e=fs.readFileSync(D+\"/stderr.raw\");process.stdout.write(JSON.stringify({checker,child_pid:r.pid,child_status:r.status,child_signal:r.signal,error:r.error?String(r.error):null,stdout:{bytes:b.length,sha256:sha(b)},stderr:{bytes:e.length,sha256:sha(e)}})+\"\\n\");process.exitCode=r.status===null?2:r.status;'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2000,
+    "yield_time_ms": 10000
+  },
+  "result": {
+    "chunk_id": "f37a30",
+    "wall_time_seconds": 0.01112887,
+    "exit_code": 0,
+    "original_token_count": 94,
+    "output": "{\"checker\":\"docs/papers211_215_sequence/qa/p214_display_repair_artifact_audit01/ARTIFACT_DATA_CHECK.cjs\",\"child_pid\":148073,\"child_status\":0,\"child_signal\":null,\"error\":null,\"stdout\":{\"bytes\":952992,\"sha256\":\"60118126fcf15cdb2abba2721d27c58455b7467f35e97e953c4b10863fb335eb\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}}\n"
+  }
+}

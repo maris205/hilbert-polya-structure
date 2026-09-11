@@ -1,0 +1,38 @@
+--- docs/papers211_215_sequence/qa/p212_a_build_preparation01/BUILD_REQUEST.proposed.sh.txt	2026-09-11 14:56:58.982181018 +0800
++++ docs/papers211_215_sequence/qa/p212_b_build_preparation01/BUILD_REQUEST.proposed.sh.txt	2026-09-11 16:31:59.060842982 +0800
+@@ -1,5 +1,5 @@
+ #!/bin/bash
+-# PROPOSED SOURCE ONLY. Never run before root receives the A strict pair,
++# PROPOSED SOURCE ONLY. Never run before root receives the B strict pair,
+ # documentary delta, exact request and finite runtime/trust binding.
+ # Not a grant, observer, scientific verifier, reviewer or terminal build.
+ set -euo pipefail
+@@ -8,10 +8,10 @@
+   printf '%s\n' 'P212_BUILD_NOT_AUTHORIZED_BY_THIS_SOURCE' >&2
+   exit 78
+ fi
+-P212_PREP='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_a_build_preparation01'
++P212_PREP='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_b_build_preparation01'
+ P212_SRC='/root/autodl-tmp/symbolic_dynamics/papers/212-closed-pointer-orbits'
+-P212_BIND='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_a_build_binding01'
+-P212_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p212_a/build01'
++P212_BIND='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_b_build_binding01'
++P212_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p212_b/build01'
+ P212_COLD="$P212_OUT/source_only"
+ P212_PINFILE="$P212_PREP/PROPOSED_SOURCE_ONLY.sha256"
+ # These paths are proposals, not observed or created by preparation.
+@@ -29,7 +29,7 @@
+   local p212_rc=$?
+   trap - EXIT
+   printf '%s\n' "$p212_rc" > "$P212_OUT/controller.exit"
+-  printf 'P212_A_BUILD_SUPERVISOR_EXIT=%s\n' "$p212_rc" >&3
++  printf 'P212_B_BUILD_SUPERVISOR_EXIT=%s\n' "$p212_rc" >&3
+   exit "$p212_rc"
+ }
+ trap p212_finish EXIT
+@@ -160,4 +160,4 @@
+ sha256sum -c --strict "$P212_OUT/SOURCE_EXPECTED.sha256" > "$P212_OUT/cold_source.final.stdout" 2> "$P212_OUT/cold_source.final.stderr"
+ sha256sum -- main.pdf main.log main.fls main.aux main.bbl main.blg > "$P212_OUT/FINAL_PRODUCTS.sha256"
+ printf '%s\n' 'CAPTURED_PENDING_FULL_LOG_FLS_CONFIG_PDF_AND_ACTUAL_ALL_PAGE_RECEPTION' > "$P212_OUT/STATUS.txt"
+-# No PDF adoption, final Review A PASS, Round1 or package seal is produced here.
++# No PDF adoption, final Review B PASS, Round2 or package seal is produced here.

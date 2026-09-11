@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "/usr/bin/node -e 'const fs=require(\"fs\"),h=require(\"crypto\"),p=\"docs/papers211_215_sequence/qa/p211_terminal_pair_pages_root01/\";const pairs=JSON.parse(fs.readFileSync(p+\"RAW_COMPARISON_NATIVE.json\"));if(pairs.length!==6||pairs.some(r=>r.result.exit_code!==0||r.result.output!==\"\"||r.result.session_id!==undefined))throw Error(\"cmpactual\");let count=0;for(let b of [1,2]){let d=\"papers/211-kernel-image-projection-feedback/qa_final/cold_build_\"+b+\"/inner/\",m=JSON.parse(fs.readFileSync(d+\"RESULT.json\")).measurements;for(let [f,v]of [[d+\"source_only/main.pdf\",m.pdf],...m.renders.map(r=>[r.image,r.pin])]){let raw=fs.readFileSync(f);if(raw.length!==v.bytes||h.createHash(\"sha256\").update(raw).digest(\"hex\")!==v.sha256)throw Error(f);count++}}for(let i=1;i<=5;i++){let r=JSON.parse(fs.readFileSync(p+\"PAGE\"+i+\"_VIEW_NATIVE.json\"));let raw=Buffer.from(r.result.image_url.split(\",\")[1],\"base64\");if(!raw.equals(fs.readFileSync(r.request.path)))throw Error(\"viewbytes\")}const failed=JSON.parse(fs.readFileSync(p+\"VIEW_BINDING_NATIVE.json\")),passed=JSON.parse(fs.readFileSync(p+\"VIEW_BINDING_NATIVE02.json\"));if(failed.result.exit_code!==1||passed.result.exit_code!==0)throw Error(\"preservedcheckeroutcomes\");console.log(JSON.stringify({status:\"PASS_ACTUAL_PAIR_AND_VIEW_PACKET_CLOSURE\",raw_native_comparisons:6,current_pdf_render_pins:count,whole_actual_view_returns:5,failed_auxiliary_check_preserved:true,new_views_in_this_check:0,cold_artifact_acceptance:false}));'",
+    "login": false,
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "f961cd",
+    "wall_time_seconds": 0.000006343,
+    "exit_code": 0,
+    "original_token_count": 61,
+    "output": "{\"status\":\"PASS_ACTUAL_PAIR_AND_VIEW_PACKET_CLOSURE\",\"raw_native_comparisons\":6,\"current_pdf_render_pins\":12,\"whole_actual_view_returns\":5,\"failed_auxiliary_check_preserved\":true,\"new_views_in_this_check\":0,\"cold_artifact_acceptance\":false}\n"
+  }
+}

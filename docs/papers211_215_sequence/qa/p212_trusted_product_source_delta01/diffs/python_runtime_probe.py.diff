@@ -1,0 +1,73 @@
+--- docs/papers211_215_sequence/qa/p212_dependency_query_outer_preparation01/python_runtime_probe.py	2026-09-09 18:04:32.971392530 +0800
++++ docs/papers211_215_sequence/qa/p212_trusted_product_source_delta01/python_runtime_probe.py	2026-09-09 19:38:14.340966977 +0800
+@@ -1,6 +1,7 @@
+-"""SOURCE ONLY: independent runtime enumeration/ABI probe; no driver import.
+-Missing external runtime-only authorization refuses. It is NOT an operational
+-startup receipt and never creates a contract/lookup/body binding.
++"""SOURCE ONLY: runtime enumeration/ABI under an explicit trusted-product model.
++Missing separate source, finite bootstrap-key and trust-boundary receipts
++refuses. This is NOT a product-startup attestation or operational permission;
++it never imports the driver or creates a contract/lookup/body binding.
+ """
+ import ctypes
+ from hashlib import sha256
+@@ -16,9 +17,13 @@
+ 
+ ROOT = '/root/autodl-tmp/symbolic_dynamics'
+ QA = ROOT + '/docs/papers211_215_sequence/qa'
+-SELF = QA + '/p212_dependency_query_outer_preparation01/python_runtime_probe.py'
++SELF = QA + '/p212_trusted_product_source_delta01/python_runtime_probe.py'
+ ENV8 = {'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC',
+         'SOURCE_DATE_EPOCH':'1788825600','FORCE_SOURCE_DATE':'1','openin_any':'p','openout_any':'p'}
++PROVENANCE = {'schema':'p212-trusted-product-boundary-v1',
++              'assumption':'ordinary_product_observer_bash_env_bootstrap',
++              'product_startup_attested':False,
++              'claim':'finite_received_keys_and_discrete_downstream_observations'}
+ STATS = ('dev','ino','mode','nlink','uid','gid','rdev','size','blksize','blocks',
+          'atimeNs','mtimeNs','ctimeNs','birthtimeNs')
+ 
+@@ -31,11 +36,18 @@
+     a = json.loads(sys.argv[1])
+     need(json.dumps(a,ensure_ascii=False,indent=2,allow_nan=False)+'\n' == sys.argv[1],
+          'complete canonical runtime authorization; no duplicate or hidden fields')
+-    need(set(a) == {'enabled','status','receipts','statx_validation_paths'}, 'exact runtime-only keys')
+-    need(a['enabled'] is True and a['status'] == 'ROOT_BOUND_RUNTIME_DISCOVERY_ONLY', 'runtime-only authority')
+-    need(isinstance(a['receipts'],list) and len(a['receipts']) == 2, 'source and bootstrap receipts')
++    need(set(a) == {'schema','enabled','status','provenance','receipts','statx_validation_paths'},
++         'exact trusted-product runtime-only keys')
++    need(a['schema'] == 'p212-trusted-product-runtime-probe-authorization-v1', 'distinct probe schema')
++    need(a['enabled'] is True and a['status'] == 'ROOT_BOUND_TRUSTED_PRODUCT_RUNTIME_DISCOVERY_ONLY',
++         'separate runtime-only authority')
++    need(a['provenance'] == PROVENANCE and a['provenance']['product_startup_attested'] is False,
++         'fixed conditional model with literal false; no product-startup attestation')
++    roles = ('source','bootstrap_key','trusted_product_boundary')
++    need(type(a['receipts']) is dict and set(a['receipts']) == set(roles), 'three distinct receipt roles')
+     receipt_originals = []
+-    for ref in a['receipts']:
++    for role in roles:
++        ref = a['receipts'][role]
+         need(set(ref) == {'path','pin'} and ref['path'].startswith(QA+'/')
+              and os.path.realpath(ref['path']) == ref['path'], 'physical finite receipt path')
+         need(set(ref['pin']) == {'bytes','sha256'} and type(ref['pin']['bytes']) is int
+@@ -59,9 +71,11 @@
+                  == (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns),
+                  'same receipt handle stable')
+             need({'bytes':len(raw),'sha256':sha256(raw).hexdigest()} == ref['pin'], 'complete external receipt pin')
+-            receipt_originals.append({'reference':ref,'raw_hex':raw.hex()})
++            receipt_originals.append({'role':role,'reference':ref,'raw_hex':raw.hex()})
+         finally:
+             os.close(fd)
++    need(len({r['reference']['path'] for r in receipt_originals}) == len(roles),
++         'source, independent finite bootstrap key and trust decision use separate receipts')
+     need(dict(os.environ) == ENV8 and os.getcwd() == ROOT, 'received ENV8 and cwd')
+     need(sys.flags.isolated == 1 and sys.flags.no_site == 1 and sys.flags.dont_write_bytecode == 1
+          and sys.flags.optimize == 0, 'runtime probe isolated no-site no-bytecode')
+@@ -110,7 +124,7 @@
+                if getattr(m,'__file__',None)}
+     need(not any(p.endswith(('.pyc','.pyo')) for p in modules.values()), 'no loaded bytecode')
+     print(json.dumps({'status':'RUNTIME_ENUMERATION_ONLY_ROOT_FULL_KEY_AND_ABI_COMPARISON_PENDING',
+-        'source':SELF,'receipts':receipt_originals,'statx':rows,
++        'source':SELF,'provenance':PROVENANCE,'receipts':receipt_originals,'statx':rows,
+         'subreaper':{'previous':previous.value,'actual':actual.value,'wait':empty_wait},
+         'module_paths':modules,'proc_maps_hex':maps.hex(),'version':sys.version,
+         'executable':os.path.realpath(sys.executable),'flags':repr(sys.flags),'sys_path':sys.path,

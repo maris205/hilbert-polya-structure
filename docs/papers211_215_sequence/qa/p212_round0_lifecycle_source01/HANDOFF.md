@@ -1,0 +1,11 @@
+# P212 lifecycle documentary proposal — SOURCE ONLY
+
+Owned scope: three prospective lifecycle files only. originals/ preserves the complete current README.md, CLAIMS_EVIDENCE.md and NARRATIVE_REPORT.md; proposed/ contains their exact replacements. LIFECYCLE.diff is complete. Markdown links in proposed files are relative to their intended live paper directory, not this staging directory.
+
+The proposal corrects obsolete absence/unexecuted statements using the actual accepted author-pair receipt and the initial build/native/page-view originals. It retains historical source-preparation records as historical, distinguishes 72,476 named scientific checks from 12,375,789 earlier primitive semantic checks, and states that unchanged-key semantics were reused, not freshly reconstructed. Finite n=1…4 evidence does not prove the all-parameter claims or cover first-size 5/6/5 families.
+
+The recorded initial build is launch 799607, actual session 9370, continuation d1e0bb, exit 0; six pages, 191,504-byte PDF, root actual all-page view with no visual correction needed. Full artifact acceptance is pending at preparation. There is deliberately no Round0, PDF adoption, manuscript-review, terminal-build or completion claim. Root may review/apply only after artifact acceptance; if the current lifecycle state changes first, receive the affected exact documentary delta rather than pretending this proposal already reflects it.
+
+Contribution disclosure: /root/p212_eight_file_data_receiver_source prepared build-source/policy and presentation deltas and this lifecycle proposal, not mathematical proofs or verifier content in these tasks. It is not an independent reviewer of its own build-source/lifecycle work; no manuscript reviewer assignment is claimed.
+
+No live file, math/TeX input, verifier, parameter, canonical, central index, frozen snapshot, accepted receipt or Git state changed. No scientific or TeX execution, source import or generic observer was performed. EVIDENCE_AND_SCIENCE_PINS.sha256 records fixed workspace originals and current scientific bytes; hashing canonical is not a fresh scientific/semantic replay. The exact before/after diff and preserved originals are the primary change evidence. HOLD_EXTERNAL remains.

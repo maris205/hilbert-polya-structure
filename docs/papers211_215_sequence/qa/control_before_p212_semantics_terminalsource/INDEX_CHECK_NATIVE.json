@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/node -e 'const f=require(\"node:fs\"),p=require(\"node:path\"),c=require(\"node:crypto\"),r=\"/root/autodl-tmp/symbolic_dynamics/\",d=r+\"docs/papers211_215_sequence/qa/control_before_p212_semantics_terminalsource/\",pin=b=>({bytes:b.length,sha256:c.createHash(\"sha256\").update(b).digest(\"hex\")});const m=JSON.parse(f.readFileSync(d+\"MAPPING.json\"));for(const row of m.mapping){const b=f.readFileSync(row.physical_copy);if(b.length!==row.bytes||pin(b).sha256!==row.sha256)throw Error(\"old byte drift\");}const current=[];for(const name of [\"docs/papers211_215_sequence/PIPELINE_STATE.md\",\"SYMBOLIC_DYNAMICS_STATE.md\"]){const b=f.readFileSync(r+name),s=b.toString();for(const target of [\"qa/p212_saved_output_root_reception01/RECEPTION.md\",\"qa/p211_terminal_binding_source_root01/RECEPTION.md\",\"qa/p211_terminal_binding_root01/ASSEMBLY_RECEPTION.md\"]){const expected=name.startsWith(\"docs/\")?target:\"docs/papers211_215_sequence/\"+target;if(!s.includes(\"](\"+expected+\")\")||!f.statSync(p.resolve(p.dirname(r+name),expected)).isFile())throw Error(\"milestone link\");}if(!s.includes(\"P212_INITIAL_SEMANTICS_ACCEPTED_CANONICAL_PENDING_P211_ROUND2_RECHECK_PASS_ORIGINAL_RECEPTION_PENDING\"))throw Error(\"current status\");current.push({path:name,...pin(b)});}process.stdout.write(JSON.stringify({status:\"PASS_CURRENT_MILESTONE_LINKS_AND_OLD_CONTROL_BYTES\",old_copies:2,retained:2,complete:0,open_seats:3,closed:43,current})+\"\\n\");' ",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "login": false,
+    "max_output_tokens": 1800
+  },
+  "result": {
+    "chunk_id": "8cf2e1",
+    "wall_time_seconds": 0.000003789,
+    "exit_code": 0,
+    "original_token_count": 105,
+    "output": "{\"status\":\"PASS_CURRENT_MILESTONE_LINKS_AND_OLD_CONTROL_BYTES\",\"old_copies\":2,\"retained\":2,\"complete\":0,\"open_seats\":3,\"closed\":43,\"current\":[{\"path\":\"docs/papers211_215_sequence/PIPELINE_STATE.md\",\"bytes\":42679,\"sha256\":\"53be3a6edfa23f31a6ef82eae1badefad370f5d6a0d8f5a71750856985ac235b\"},{\"path\":\"SYMBOLIC_DYNAMICS_STATE.md\",\"bytes\":56951,\"sha256\":\"6b95388165c1db20e48f2c8e625f7c24c5c10c23cd3bad52b933db1b2875f5ec\"}]}\n"
+  }
+}

@@ -1,0 +1,270 @@
+216-            absent.append(ptext)
+217-    return {'events': events, 'ordinary_files': ordinary, 'absent_cache_probes': absent,
+218-            'volatile_proc_reads': volatile, 'own_attempt_io': outputs,
+219-            'nonordinary_devices': devices,
+220-            'scope': 'Post-hook Python opens and discrete file-backed maps/modules; not OS/startup/escaped-descendant tracing.'}
+221-
+222-
+223-def exact_json(data):
+224:    def pairs(items):
+225-        result = {}
+226-        for key, val in items:
+227-            core.need(key not in result, ('duplicate_JSON_key', key))
+228-            result[key] = val
+229-        return result
+230-    def bad_constant(value):
+231-        raise ValueError('nonfinite JSON constant: ' + value)
+232:    result = json.loads(data, object_pairs_hook=pairs, parse_constant=bad_constant, parse_float=bad_constant)
+233-    core.need(isinstance(result, dict), 'one_JSON_object')
+234-    encoded = (json.dumps(result, sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False) + '\n').encode()
+235-    core.need(data == encoded, 'entire_deterministic_compact_sorted_JSON_plus_LF')
+236-    return result
+237-
+238-
+239-def check_schema(data, schema):
+240-    row = exact_json(data)
+241-    core.need(set(row) == set(schema['top_keys']), 'exact_role_top_keys')
+242-    core.need(bool(schema['equalities']), 'nonempty_root_reviewed_schema_checks')
+243-    for check in schema['equalities']:
+244-        value = row
+245-        for key in check['path']:
+246-            value = value[key]
+247-        core.need(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False) ==
+248-                  json.dumps(check['value'], sort_keys=True, separators=(',', ':'), allow_nan=False),
+249-                  ('role_schema_equality_type_sensitive', check['path']))
+250-    for check in schema.get('lengths', []):
+251-        value = row
+252-        for key in check['path']:
+253-            value = value[key]
+254-        core.need(len(value) == check['value'], ('role_schema_length', check['path']))
+255-    return row
+256-
+257-
+258:def load_binding(path, digest, attempt):
+259-    path = Path(path)
+260-    core.pin(path, digest)
+261-    binding = core.read_json(path)
+262-    core.need(binding['format'] == 'p212-runtime-binding-v1' and binding['approved'] is True,
+263-              'ROOT_APPROVED_BINDING_REQUIRED_NO_SCIENCE')
+264:    core.need(binding['mode'] in ('initial', 'pair') and binding['role'] == 'author',
+265-              'explicit_single_role_and_mode')
+266-    core.need(binding['attempt'] == str(attempt) and attempt.is_absolute() and
+267-              attempt.parent.resolve(strict=True) == attempt.parent, 'exact_new_physical_attempt_parent')
+268-    parent = ROOT / 'docs/papers211_215_sequence/qa/root_replays'
+269-    core.need(binding['purpose'] == 'P212_AUTHOR_MANUSCRIPT' and attempt.parent == parent,
+270-              'root_only_author_attempt_scope')
+271-    core.need(binding['reviewed_static_source_import_closure'] is True and
+272-              binding['reviewed_schema_and_parameters'] is True and
+273-              binding['reviewed_compile_exec_interface'] is True and
+274-              binding['complete_semantic_reception_is_separate'] is True, 'root_source_review_gate')
+275-    core.need(binding['schema']['top_keys'] == TOP_KEYS, 'exact_received_P212_top_key_role')
+276-    core.need(binding['declared_imports'] == ROLE_IMPORTS and binding['local_helper_imports'] == [],
+277-              'current_adapter_supports_only_reviewed_standalone_interface_HOLD_other_imports')
+278-    core.need(set(binding['adapter_sources']) == {str(p) for p in SOURCE_FILES}, 'exact_adapter_sources')
+279-    for p, pin in binding['adapter_sources'].items():
+280-        core.pin(p, pin)
+281-    core.need(all(type(binding['timeouts'][key]) is int and binding['timeouts'][key] > 0
+282:                  for key in ('science', 'native', 'envelope')), 'frozen_positive_deadlines')
+283-    core.need(binding['success_stderr'] == 'empty', 'declared_empty_science_stderr')
+284-    names = [row['name'] for row in binding['capsule_files']]
+285-    core.need(len(names) == len(set(names)) and set(names) == {binding['entry'], binding['parameters']},
+286-              'exact_two_file_standalone_capsule')
+287-    core.need(all(Path(n).name == n and n not in ('', '.', '..') and
+288-                  not n.endswith(('.pyc', '.pyo')) for n in names), 'safe_source_only_capsule_names')
+289-    core.need(binding['entry'] == 'verify.py' and binding['parameters'] == 'PARAMETERS.json' and
+290-              binding['argv_template'] == ['$ENTRY', '--parameters', '$PARAMETERS'] and
+291-              binding['parameter_locator'] == 'explicit_absolute_argv',
+292-              'exact_P212_two_file_absolute_parameter_interface')
+293-    core.need(names == ['verify.py', 'PARAMETERS.json'], 'exact_ordered_P212_capsule_roles')
+294-    for row in binding['capsule_files']:
+295-        core.need(row['path'] == str(PAPER / row['name']) and
+296-                  {key: row[key] for key in ('sha256', 'bytes')} == SCIENCE_INTERFACE[row['name']],
+297-                  ('exact_received_P212_source_interface', row['name']))
+298-    core.need(not core.lexists(PAPER / 'canonical.stdout.json'), 'historical_prospective_name_stays_absent')
+299-    canonical = binding['canonical']
+300-    core.need(canonical['path'] == str(PAPER / 'CANONICAL.json'), 'formal_root_fixed_canonical_role')
+301-    if binding['mode'] == 'initial':
+302-        core.need(canonical['sha256'] is None and canonical['bytes'] is None and not core.lexists(canonical['path']),
+303-                  'INITIAL_requires_absent_unadopted_canonical_target')
+304-    else:
+305-        core.pin(canonical['path'], canonical)
+306-    core.need(bool(binding['provenance_inputs']), 'nonempty_root_reception_and_authority_provenance')
+307-    return binding
+--
+316-              binding['scope'] == 'IMPORT_ONLY_NO_SCIENTIFIC_SOURCE_READ' and
+317-              binding['reviewed_all_preparation_sources'] is True, 'SEPARATE_ROOT_DISCOVERY_APPROVAL_REQUIRED')
+318-    core.need(binding['declared_imports'] == ROLE_IMPORTS, 'exact_discovery_import_declaration')
+319-    core.need(set(binding['source_inputs']) == {str(p) for p in PREPARATION_SOURCES},
+320-              'exact_three_preparation_source_inputs')
+321-    for p, pin in binding['source_inputs'].items():
+322-        core.pin(p, pin)
+323-    core.need(type(binding['native_timeout_seconds']) is int and binding['native_timeout_seconds'] > 0,
+324:              'finite_positive_integer_discovery_deadline')
+325-    out = Path(binding['output'])
+326-    core.need(out.is_absolute() and out.parent == ROOT / 'docs/papers211_215_sequence/qa' and
+327-              out.name.startswith('p212_runtime_discovery') and
+328-              out.parent.resolve(strict=True) == out.parent, 'exact_external_discovery_output_role')
+329-    core.need(bool(binding['provenance_inputs']), 'documented_root_discovery_authority')
+330-    for row in binding['provenance_inputs']:
+331-        core.need(Path(row['path']).suffix in ('.md', '.json', '.sha256'),
+332-                  'discovery_documentary_provenance_only')
+333-        core.need(not Path(row['path']).is_relative_to(PAPER), 'no_paper_file_read_during_discovery')
+334-        core.pin(row['path'], row)
+335-    return binding
+336-
+337-
+338-def frozen_inputs(binding, binding_path):
+339-    lock_path = Path(binding['runtime_lock']['path'])
+340-    core.pin(lock_path, binding['runtime_lock'])
+341-    lock = core.read_json(lock_path)
+342-    core.need(lock['format'] == 'p212-bounded-runtime-lock-v1' and lock['declared_imports'] == ROLE_IMPORTS,
+343-              'matching_prepared_import_closure')
+344-    config = configuration()
+345-    core.need(config == lock['configuration'], 'entire_pre_frozen_config_and_membership')
+346-    core.need(loader_search_scope(config) == lock['loader_search_directory_states'],
+347-              'entire_pre_frozen_loader_search_directory_states')
+348-    expected = dict(lock['files'])
+349-    expected.update(binding['adapter_sources'])
+350-    expected[str(binding_path)] = core.rich(binding_path)
+351-    expected[str(lock_path)] = core.rich(lock_path)
+352-    for row in binding['capsule_files'] + binding.get('provenance_inputs', []):
+353-        expected[row['path']] = row
+354:    if binding['mode'] == 'pair':
+355-        expected[binding['canonical']['path']] = binding['canonical']
+356-    known = {}
+357-    for p, pin in sorted(expected.items()):
+358-        core.pin(p, pin)
+359-        actual = core.rich(p)
+360-        if 'resolved' in pin:
+361-            core.need(actual == {k: pin[k] for k in actual}, ('entire_runtime_rich_pin', p))
+362-        known[p] = actual
+363-        known[actual['resolved']] = core.rich(actual['resolved'])
+364-    return known, lock, config
+365-
+366-
+367-def full_input_recapture(known):
+368-    return {p: core.rich(p) for p in known}
+369-
+370-
+371-def stage_path(attempt, stage):
+372-    core.need(stage in ('outer', 'launcher', 'recorder', 'child01', 'child02'), 'exact_stage')
+373-    return attempt / stage
+374-
+375-
+376-def worker_argv(stage, binding_path, digest, attempt):
+377-    return [str(PYTHON), '-I', '-S', '-B', '-X',
+378-            'pycache_prefix=' + str(attempt / ('never_created_' + stage + '_cache')),
+379-            str(Path(__file__).resolve()), stage, str(binding_path), digest, str(attempt)]
+--
+433-        before = sample()
+434-        covered_sample(before, known, cache, cwd, {str(p) for p in SOURCE_FILES})
+435-        core.write_json(out / 'RUNTIME_BEFORE.json', before)
+436-        events, active = hook_events(attempt, scientific=stage.startswith('child'))
+437-        try:
+438-            if stage in ('outer', 'launcher'):
+439-                child_stage = 'launcher' if stage == 'outer' else 'recorder'
+440-                core.command('01_' + child_stage, worker_argv(child_stage, binding_path, digest, attempt),
+441:                             timeout=binding['timeouts']['envelope'], cwd=ROOT,
+442-                             require_success=False, stderr_policy='retain')
+443-                row = core.COMMANDS[-1]
+444-                try:
+445-                    closure = closed_stage(attempt, child_stage, row['exit_code'])
+446-                except BaseException:
+447-                    unknown_descendants = True
+448-                    raise
+449-                core.need(row['exit_code'] == 0 and row['streams_complete'] and
+450-                          not row['process_group_settlement']['signals'] and closure['status'] == 'PASS',
+451:                          'successful_closed_native_envelope')
+452-                output_info = {'child_stage': child_stage, 'native_receipt': row, 'closed_child': closure}
+453-            elif stage == 'recorder':
+454-                capsule.mkdir()
+455-                copies = []
+456-                for number, row in enumerate(binding['capsule_files']):
+457-                    p = capsule / row['name']
+458-                    core.write_bytes(p, Path(row['path']).read_bytes())
+459-                    core.pin(p, row)
+460-                    known[str(p)] = core.rich(p)
+461-                    copies.append({'original': row['path'], 'copy': str(p), **core.value(p)})
+462-                    core.command('00_copy_' + str(number), ['/usr/bin/cmp', '--', row['path'], str(p)],
+463-                                 timeout=binding['timeouts']['native'], cwd=ROOT)
+464-                core.need({p.name for p in capsule.iterdir()} == {r['name'] for r in binding['capsule_files']},
+465-                          'exact_source_only_capsule_inventory')
+466-                core.write_json(out / 'SOURCE_COPIES.json', copies)
+467-                core.write_json(out / 'CAPSULE_ADDED_INPUTS.json', {r['copy']: known[r['copy']] for r in copies})
+468-                core.write_json(out / 'INPUTS_BEFORE_SCIENCE.json', known)
+469-                ldd_check('01_ldd_before', lock, known, binding, ROOT)
+470-                streams = []
+471-                for number in ('01',) if binding['mode'] == 'initial' else ('01', '02'):
+472-                    label = '03_verify_' + number
+473-                    raw = core.command(label, worker_argv('child' + number, binding_path, digest, attempt),
+474-                                       timeout=binding['timeouts']['science'], cwd=capsule, require_success=False)
+475-                    row = core.COMMANDS[-1]
+476-                    try:
+--
+478-                    except BaseException:
+479-                        unknown_descendants = True
+480-                        raise
+481-                    core.need(row['exit_code'] == 0 and row['streams_complete'] and row['stderr']['bytes'] == 0 and
+482-                              not row['process_group_settlement']['signals'] and closure['status'] == 'PASS',
+483-                              'successful_scientific_native_command')
+484-                    check_schema(raw, binding['schema'])
+485-                    streams.append(out / 'commands' / label / 'stdout.raw')
+486:                if binding['mode'] == 'pair':
+487-                    for number, p in enumerate(streams, 1):
+488-                        core.command('04_canonical_' + str(number), ['/usr/bin/cmp', '--', str(p), binding['canonical']['path']],
+489-                                     timeout=binding['timeouts']['native'], cwd=ROOT)
+490:                    core.command('05_pair', ['/usr/bin/cmp', '--', str(streams[0]), str(streams[1])],
+491-                                 timeout=binding['timeouts']['native'], cwd=ROOT)
+492-                ldd_check('06_ldd_after', lock, known, binding, ROOT)
+493:                expected = ['00_copy_0', '00_copy_1', '01_ldd_before', '03_verify_01']
+494:                if binding['mode'] == 'pair':
+495:                    expected += ['03_verify_02', '04_canonical_1', '04_canonical_2', '05_pair']
+496-                expected += ['06_ldd_after']
+497-                core.need([r['label'] for r in core.COMMANDS] == expected, 'exact_declared_command_census')
+498-                output_info = {'mode': binding['mode'], 'raw_stdout': [{'path': str(p), **core.value(p)} for p in streams],
+499:                               'canonical_policy': 'initial stdout requires separate root acceptance/publication; pair never adopts or replaces canonical',
+500:                               'actual_raw_comparisons': 3 if binding['mode'] == 'pair' else 0}
+501-            else:
+502-                replacements = {'$ENTRY': str(capsule / binding['entry']), '$PARAMETERS': str(capsule / binding['parameters'])}
+503-                sys.argv = [replacements.get(token, token) for token in binding['argv_template']]
+504-                scientific_argv = list(sys.argv)
+505-                source = capsule / binding['entry']
+506-                try:
+507-                    exec(compile(source.read_bytes(), str(source), 'exec'),
+508-                         {'__name__': '__main__', '__file__': str(source)})
+509-                    outcome = 'RETURNED'
+510-                except SystemExit as exc:
+511-                    if exc.code not in (None, 0):
+512-                        raise
+513-                    outcome = 'SYSTEM_EXIT_ZERO'
+514-                core.need(sys.argv == scientific_argv, 'scientific_argv_not_mutated')
+515-                output_info = {'scientific_argv': scientific_argv, 'parameter_locator': binding['parameter_locator'],
+516-                               'scientific_outcome': outcome, 'source': core.rich(source), 'cwd': str(cwd)}
+517-        finally:
+518-            active[0] = False
+519-            core.write_json(out / 'OPEN_EVENTS_RAW.json', events)
+520-            observed = covered_opens(events, known, cache, attempt, stage.startswith('child'),
+521-                                     {str(capsule / r['name']) for r in binding['capsule_files']})
+522-            core.write_json(out / 'OPEN_OBSERVATIONS.json', observed)
+523-    except BaseException as exc:
+524-        errors.append({'type': type(exc).__name__, 'error': repr(exc), 'traceback': traceback.format_exc()})
+525-        if stage.startswith('child'):
+--
+577-    for name in ROLE_IMPORTS:
+578-        __import__(name)
+579-    config = configuration()
+580-    row = sample()
+581-    print(json.dumps({'status': 'IMPORT_ONLY_NO_SCIENTIFIC_SOURCE_READ', 'layer': tag,
+582-                      'declared_imports': ROLE_IMPORTS, 'configuration': config, 'sample': row}, sort_keys=True))
+583-
+584-
+585:def main():
+586-    if len(sys.argv) == 7 and sys.argv[1] == 'probe':
+587-        probe(sys.argv[2], Path(sys.argv[3]), Path(sys.argv[4]), Path(sys.argv[5]), sys.argv[6])
+588-        return 0
+589-    core.need(len(sys.argv) == 5, 'stage BINDING EXPECTED_BINDING_SHA256 ABSOLUTE_ATTEMPT')
+590-    return run_stage(sys.argv[1], Path(sys.argv[2]), sys.argv[3], Path(sys.argv[4]))
+591-
+592-
+593-if __name__ == '__main__':
+594-    raise SystemExit(main())

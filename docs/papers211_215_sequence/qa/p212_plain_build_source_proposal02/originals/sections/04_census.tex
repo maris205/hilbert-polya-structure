@@ -1,0 +1,94 @@
+\section{A rational labelled orbit census}
+Let $c_{s,p}$ be the number of orbits on all cores with a fixed $s$-element
+label set and exact period $p$, divided by $s!$, and let
+$C(t,q)=\sum_{s,p}c_{s,p}t^sq^p$. Thus $t$ is an exponential-generating
+variable for labels and $q$ marks the actual period, not an upper bound.
+Write $\fall{n}{s}=n!/(n-s)!$.
+
+\begin{theorem}\label{thm:census}
+Set $x=tq^2$, $Q=x/(1-x)$ and $D=(1-x)^{-2}-(1+x)^2$. Then
+\begin{align}
+ C_8(t,q)&=tq+t^2q^3+\tfrac12t^3q^4+\tfrac14tq^4D,\label{eq:c8}\\
+ C_B(t,q)&=\frac{t^2q^4(1+tq)^2}{2(1-tq^2)}
+          +\frac{t^2q^8D}{4(1-tq^4)},\label{eq:cb}\\
+ C_\Theta(t,q)&=\tfrac12t^2q^2+
+       \tfrac12t^2q^6\left(Q+Q^2+\tfrac13Q^3\right),\label{eq:ct}\\
+ C(t,q)&=C_8(t,q)+C_B(t,q)+C_\Theta(t,q).
+\end{align}
+The number $o(n,p)$ of full-carrier orbits of exact period $p$ is
+\begin{equation}\label{eq:full}
+ o(n,p)=\sum_{s=1}^n\fall{n}{s}\,n^{n-s}[t^sq^p]C(t,q).
+\end{equation}
+Moreover
+\begin{equation}\label{eq:cscalar}
+ C(t,1)=\frac{t-t^2+t^4/2-t^5/12}{(1-t)^3},\qquad
+ c_1=1,\ c_2=2,\ c_s=\frac{5s^2+s+24}{24}\quad(s\ge3),
+\end{equation}
+where $c_s=[t^s]C(t,1)$. Consequently the total orbit count is the
+explicit sum $\sum_{s=1}^n\fall{n}{s}n^{n-s}c_s$.
+\end{theorem}
+\begin{proof}
+An ordered list of $\ell$ internal labels contributes $t^\ell$ to a
+labelled EGF. A rooted undirected cycle of length $a$ contributes
+$u_at^{a-1}$, where $u_1=u_2=1$ and $u_a=1/2$ for $a\ge3$:
+reversal acts freely on lists with at least two distinct labels, but not
+on empty or singleton lists. Multiplying by the orbit-decoration number
+in Theorem~\ref{thm:table} gives
+\begin{equation}\label{eq:weight}
+ u_au_b(1+\ind_{a,b\ge3})=
+ \begin{cases}1,&a,b\le2,\\1/2,&\max(a,b)\ge3.\end{cases}
+\end{equation}
+
+For a figure-eight, the shared root contributes $t$ and the unordered
+cycle pair divides by $2$, freely except for two loops. Add that exception
+as $tq$. The other short pairs give $t^2q^3+t^3q^4/2$. All remaining
+ordered length pairs contribute
+$\tfrac14\sum_{\max(a,b)\ge3}t^{a+b-1}q^{2(a+b)}
+=tq^4D/4$, proving~\eqref{eq:c8}.
+For a barbell, distinct branch labels make endpoint interchange free,
+again giving $1/2$; its bridge has $c-1$ ordered internal labels.
+The short pairs contribute
+$\tfrac12\sum_{a,b\le2,c\ge1}t^{a+b+c-1}q^{a+b+2c}$,
+the first term of~\eqref{eq:cb}. The other pairs have coefficient $1/4$
+by~\eqref{eq:weight} and period $2a+2b+4c$; summing their geometric
+series gives the second term.
+
+For a theta, choose an unordered pair of distinct branch labels, of
+weight $t^2/2$. Relative to either fixed ordering of those labels, a
+nondirect path is a nonempty ordered list of internal labels, with
+weight $Q$. Three direct paths contribute period weight $q^2$.
+If there are $k=1,2,3$ nondirect paths, their unordered collection has
+weight $Q^k/k!$, and the decoration multipliers are $1,2,2$.
+The common remaining period weight is $q^6$. This yields
+$Q+Q^2+Q^3/3$ in~\eqref{eq:ct}, including indistinguishable direct paths.
+
+For~\eqref{eq:full}, first choose the core label set $S$, then a core
+orbit decoration, and independently any map $g:V\setminus S\to V$.
+Such a map either follows trees into $S$ or lies in inactive functional
+components. Adding it therefore creates no new active two-core and
+does not alter any core update. Conversely, leaf pruning a full state
+recovers $S$ uniquely and recovers all values of $g$, which are frozen
+by Lemma~\ref{lem:core}. Thus this is a bijection on orbits, with
+$\binom ns s! n^{n-s}$ extensions per EGF coefficient, proving the formula.
+
+For completeness, at $q=1$ put
+$U=1+t+t^2/[2(1-t)]$, $W=t^2/[2(1-t)]$ and $Q=t/(1-t)$.
+The same cycle weights give
+\[
+ C_8=\tfrac t2(U^2+W^2+1),\qquad
+ C_B=\frac{t^2(U^2+W^2)}{2(1-t)},\qquad
+ C_\Theta=\tfrac{t^2}2(1+Q+Q^2+Q^3/3).
+\]
+Their sum simplifies to~\eqref{eq:cscalar}. Using
+$[t^j](1-t)^{-3}=\binom{j+2}{2}$, with a negative index contributing
+zero, gives the displayed coefficients, including $s=1,2$ separately.
+\end{proof}
+
+The coefficients $c_s$ need not be integers: they are normalized labelled
+counts. Period alone loses census information; on five fixed labels,
+figure-eights $(1,5)$ and $(3,3)$ both have period $12$ but respectively
+one and two orbit decorations. As a consistency identity, not a third
+contribution,
+$[q\partial_q C(t,q)]_{q=1}=t(1+2t)/(1-t)^4$; after the same complement
+extension the period-weighted counts sum to $|X_n|=n^{n+2}$.
+The standard fixed-iterate count is $\sum_{p\mid k}p\,o(n,p)$.

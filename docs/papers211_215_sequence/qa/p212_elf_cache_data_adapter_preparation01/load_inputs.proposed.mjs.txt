@@ -1,0 +1,72 @@
+// SOURCE ONLY. Export-only fixed DATA adapter; no decoder/observer import.
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const BASE='/root/autodl-tmp/symbolic_dynamics/';
+const Q='docs/papers211_215_sequence/qa/',O=Q+'p212_eight_file_data_context_root01/',R=Q+'p212_minimal_contract01_file_observation_raw01/';
+const PINS=[
+ ['CONTEXT.bound.json','b8dcf95d14b61f36a2a2bfc29f6c881476917e6701ee336d3f633809aec3fd2a'],
+ ['DATA_RECEPTION.md','8ce665e8c28f31656b1fda5eb7a8a2cfa864beb2b83c2a35a55f10ea8081ddcc'],
+ ['RECEIVE_DATA.mjs','c04449fc7acb27251e2ad6fe54af9e53b9a4ee12f76a9dc91fc585aa15d3b11c'],
+ ['RECEIVE_NATIVE.json','4c5703bcfaa1e5314271d0a82562a29dbbfbef5770731b15e9bc1c31e95c91d0'],
+ ['RECEPTION.md','b2c12e6884596662187853885382aa0a7774c30309cffa4dc95cb39d4815710e'],
+ ['RESULT.json','18899f8bb75ddd45cd2e02aecebdc34aa61a6884ccb82e91dd27a06e247ff07a'],
+ ['VALIDATE_NATIVE.json','d66bb6d4e5b1bd95e6fb550a40f6b4e1ce50fe0b24e0989105a837e853388ec7']
+];
+const FIXED=[...PINS.map(([n])=>O+n),O+'SHA256SUMS',R+'stdout.canonical.json',R+'stderr.raw'];
+const IDS=['BASH','ENV','KPSEWHICH','LOADER_CANDIDATE','LIBC_CANDIDATE','TINFO_CANDIDATE','LOADER_CACHE','SYSTEM_PRELOAD'];
+const PATHS=['/bin/bash','/usr/bin/env','/usr/bin/kpsewhich','/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2','/usr/lib/x86_64-linux-gnu/libc.so.6','/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3','/etc/ld.so.cache','/etc/ld.so.preload'];
+const ROLES=['executable','executable','executable','loader','loader','loader','configuration','configuration'];
+const F='dev ino mode nlink uid gid rdev size mtimeNs ctimeNs'.split(' '),SF=['lstat_before','fstat_before','fstat_after','lstat_after'];
+const need=(b,s)=>{if(!b)throw Error(s);};
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const pin=b=>({bytes:b.length,sha256:sha(b)});
+const stable=x=>JSON.stringify(x,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
+const same=(a,b,s)=>need(stable(a)===stable(b),s);
+const stat=s=>Object.fromEntries(F.map(k=>[k,s[k].toString()]));
+/** Ordinary Node/fs/crypto/parser/bootstrap and trusted ancestors are explicit.
+ * Only ten compiled local original documents can be opened. Returned paths
+ * and JSON pointers remain DATA. No disk outputs or decoder invocation. */
+export function loadDecoderInputs(){
+ const originals=new Map(),keys=new Map(),reads=[];const buffers=[];
+ function read(path){need(FIXED.includes(path),'FIXED_DOCUMENT_ONLY');if(originals.has(path))return originals.get(path);
+  const k={path:BASE+path,lstat_before:null,fstat_before:null,fstat_after:null,lstat_after:null,bytes_read:0,eof:false,close_succeeded:false,content:null};keys.set(path,k);
+  let fd=null;const chunks=[],list=[];reads.push({path:BASE+path,reads:list});
+  try{const s=fs.lstatSync(BASE+path,{bigint:true});k.lstat_before=stat(s);need(s.isFile()&&!s.isSymbolicLink()&&s.size>=0n&&s.size<=16777216n,'PHYSICAL_BOUNDED_FIXED_INPUT');
+   fd=fs.openSync(BASE+path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);k.fstat_before=stat(fs.fstatSync(fd,{bigint:true}));same(k.fstat_before,k.lstat_before,'SAME_FD_BEFORE');
+   const block=Buffer.alloc(65536);for(;;){const n=fs.readSync(fd,block,0,65536,null);list.push({requested:65536,returned:n});need(Number.isSafeInteger(n)&&n>=0&&n<=65536,'ACTUAL_READ_COUNT');if(n===0){k.eof=true;break;}chunks.push(Buffer.from(block.subarray(0,n)));k.bytes_read+=n;need(k.bytes_read<=16777216,'WHOLE_READ_BOUND');}
+   k.fstat_after=stat(fs.fstatSync(fd,{bigint:true}));k.lstat_after=stat(fs.lstatSync(BASE+path,{bigint:true}));for(const f of SF)same(k[f],k.lstat_before,'ALL_FOUR_CURRENT_STATS');need(BigInt(k.bytes_read)===s.size,'COMPLETE_EOF_SIZE');const b=Buffer.concat(chunks);k.content=pin(b);fs.closeSync(fd);fd=null;k.close_succeeded=true;originals.set(path,b);return b;
+  }catch(e){k.error={name:e.name,code:e.code??null,message:e.message};k.partial_hex=Buffer.concat(chunks).toString('hex');throw e;}
+  finally{if(fd!==null){try{fs.closeSync(fd);k.close_succeeded=true;}catch(e){k.close_error={name:e.name,code:e.code??null,message:e.message};}}}
+ }
+ try{
+  FIXED.forEach(read);for(const [name,digest]of PINS)need(sha(read(O+name))===digest,'ACCEPTED_ROOT_BODY_PIN '+name);
+  need(read(O+'SHA256SUMS').equals(Buffer.from(PINS.map(([n,h])=>h+'  '+n+'\n').join(''))),'WHOLE_SEVEN_PAYLOAD_ROOT_SEAL');
+  const json=p=>{const b=read(p),s=b.toString('utf8');need(Buffer.from(s,'utf8').equals(b),'JSON_UTF8_REVERSIBLE');return JSON.parse(s);};
+  const result=json(O+'RESULT.json'),native=json(O+'RECEIVE_NATIVE.json'),context=json(O+'CONTEXT.bound.json');
+  need(native.result.chunk_id==='347758'&&native.result.exit_code===0&&!Object.hasOwn(native.result,'session_id'),'ACTUAL_FINAL_DATA_INVOCATION');
+  same(native.request,{cmd:'node docs/papers211_215_sequence/qa/p212_eight_file_data_context_root01/RECEIVE_DATA.mjs',workdir:BASE.slice(0,-1),login:false,tty:false,max_output_tokens:6000},'EXACT_RECEIVED_NATIVE_REQUEST');
+  need(Buffer.from(native.result.output,'utf8').equals(read(O+'RESULT.json')),'ENTIRE_NATIVE_STDOUT_RAW_RESULT');
+  need(result.status==='RECEIVED_EIGHT_FILE_DATA_ONLY'&&result.reason===null&&result.whole_envelope_processed===true&&result.operation_permission===false&&result.installed_closure===false,'ACCEPTED_DATA_SCOPE');
+  const stdout=read(R+'stdout.canonical.json'),stderr=read(R+'stderr.raw');same(pin(stdout),{bytes:8407343,sha256:'ecfe71cf8c7665d4e896791ec84f547a4a4ccee80d94ca5bfb6a6a8576f12feb'},'ACCEPTED_WHOLE_ENVELOPE');need(stderr.length===0,'ACCEPTED_EMPTY_STDERR');
+  same(pin(stdout),result.stdout_pin,'RESULT_STDOUT');same(pin(stderr),result.stderr_pin,'RESULT_STDERR');same(pin(read(O+'CONTEXT.bound.json')),result.context_pin,'RESULT_CONTEXT');
+  const ref=name=>({path:BASE+O+name,pin:pin(read(O+name))});same(context.root_original_projection_reception,ref('RECEPTION.md'),'EXACT_ROOT_CONTEXT_REFERENCE');same(result.root_receipt_pin,pin(read(O+'RECEPTION.md')),'RESULT_ROOT_RECEIPT');
+  same(context.stdout.closed_key,keys.get(R+'stdout.canonical.json'),'FULL_ACCEPTED_VS_CURRENT_STDOUT_KEY');same(context.stderr.closed_key,keys.get(R+'stderr.raw'),'FULL_ACCEPTED_VS_CURRENT_STDERR_KEY');
+  // Exact accepted RAW pin reuses V2's complete canonical/grammar reception.
+  // This parse extracts JSON/hex only: no ELF/cache field is inspected.
+  const envelope=json(R+'stdout.canonical.json'),rows=envelope.reader_result.rows;
+  need(envelope.status==='OBSERVED_ROOT_RECEPTION_PENDING'&&envelope.reader_called===true&&envelope.reader_returned===true&&Array.isArray(rows)&&rows.length===8,'EXACT_RECEIVED_EIGHT_ROWS');
+  same({rows:result.counts.rows,present:result.counts.present,absent:result.counts.absent,failed:result.counts.failed,accepted_bytes:result.counts.accepted_bytes,retained_read_bytes:result.counts.retained_read_bytes},{rows:8,present:7,absent:1,failed:0,accepted_bytes:4195947,retained_read_bytes:4195947},'EXACT_ACCEPTED_CENSUS');
+  need(Array.isArray(result.counts.body_pins)&&result.counts.body_pins.length===8,'ALL_RECEIVED_BODY_PINS');let total=0;const items=[],bindings=[];
+  for(let i=0;i<8;i++){const r=rows[i];need(r.id===IDS[i]&&r.path===PATHS[i]&&r.role===ROLES[i],'EXACT_ROW_ID_PATH_ROLE');need(typeof r.raw_hex==='string'&&r.raw_hex.length<=(i<6?33554432:2097152)&&/^(?:[0-9a-f]{2})*$/.test(r.raw_hex),'EXACT_BOUNDED_BODY_HEX');const b=Buffer.from(r.raw_hex,'hex'),p=pin(b);same({id:r.id,...p},result.counts.body_pins[i],'ENTIRE_FRESH_BODY_PIN');
+   const {raw_hex,...fullKey}=r;bindings.push({id:r.id,row_pointer:'/reader_result/rows/'+i,whole_envelope_reference:{path:BASE+R+'stdout.canonical.json',pin:pin(stdout)},root_full_key_reference:ref('DATA_RECEPTION.md'),complete_row_without_redundant_hex:fullKey,body_pin:p});
+   if(i===7){same(r,{id:'SYSTEM_PRELOAD',path:'/etc/ld.so.preload',role:'configuration',state:'absent',lstat_before:null,fd:null,fstat_before:null,fstat_after:null,lstat_after:null,bytes_read:0,eof:false,content:null,raw_hex:'',close_succeeded:null,error:{operation:'lstat',code:'ENOENT'},close_error:null},'EXACT_OPTIONAL_ABSENCE_RECORD');continue;}
+   need(r.state==='present'&&r.eof===true&&r.close_succeeded===true&&r.error===null&&r.close_error===null&&Number.isSafeInteger(r.fd)&&r.fd>=0,'COMPLETE_PRESENT_ROW');
+   for(const f of SF){same(Object.keys(r[f]).sort(),[...F].sort(),'TEN_FULL_FIELDS');for(const v of Object.values(r[f]))need(typeof v==='string'&&/^-?(0|[1-9][0-9]*)$/.test(v)&&v!=='-0','EXACT_STAT_DECIMAL');same(r[f],r.lstat_before,'FULL_ROW_SAME_KEY');}
+   need((BigInt(r.lstat_before.mode)&0o170000n)===0o100000n&&BigInt(r.lstat_before.size)===BigInt(b.length)&&r.bytes_read===b.length,'REGULAR_COMPLETE_BODY_SIZE');same(r.content,p,'ROW_COMPLETE_CONTENT_PIN');total+=b.length;buffers.push(b);items.push({id:r.id,path:r.path,role:r.role,pin:p,received_key_reference:ref('DATA_RECEPTION.md')});
+  }
+  need(total===4195947&&buffers.length===7,'SEVEN_BODY_TOTAL');
+  const manifest={schema:'p212-seven-authenticated-body-inputs-v1',root_body_reception:ref('DATA_RECEPTION.md'),items,system_preload_absence:ref('DATA_RECEPTION.md')};
+  const manifestRaw=Buffer.from(JSON.stringify(manifest,null,2)+'\n');
+  return {status:'SEVEN_ACCEPTED_BUFFERS_ADAPTED_NO_INTERPRETATION',buffers,manifestRaw,manifestPin:pin(manifestRaw),authentication:{fixed_input_keys:[...keys.values()],read_counts:reads,body_key_bindings:bindings,accepted_native_reference:ref('RECEIVE_NATIVE.json'),accepted_result_reference:ref('RESULT.json'),accepted_context_reference:ref('CONTEXT.bound.json'),raw_body_semantics_interpreted:false,manifest_pin_is_outside_manifest:true},operation_permission:false,installed_closure:false};
+ }catch(e){return {status:'HOLD_ADAPTER_FAILURE_NO_INTERPRETATION',reason:e.message,retained_fixed_inputs:originals,partial_buffers:buffers,fixed_input_keys:[...keys.values()],read_counts:reads,operation_permission:false,installed_closure:false};}
+}

@@ -1,0 +1,29 @@
+{
+  "failure": "Initial application accidentally wrote a literal leading plus on the new stream paragraph. The failed actual central file is physically preserved as FAILED_STREAM_PLUS.md; only that exact extra character was removed. The declared edit specification was not broadened. The initial failure remains UPDATE_CHECK_NATIVE.json.",
+  "preservation": {
+    "request": {
+      "cmd": "cp -n SYMBOLIC_DYNAMICS_STATE.md docs/papers211_215_sequence/qa/control_before_p212_minimal_s0_source_received01/FAILED_STREAM_PLUS.md",
+      "max_output_tokens": 1000
+    },
+    "actual_return": {
+      "chunk_id": "d12198",
+      "wall_time_seconds": 0.00000555,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "successful_check": {
+    "request": {
+      "cmd": "node -e 'const fs=require(\"node:fs\"),c=require(\"node:crypto\"),p=require(\"node:path\");const d=\"docs/papers211_215_sequence/qa/control_before_p212_minimal_s0_source_received01\",m=JSON.parse(fs.readFileSync(d+\"/MAPPING.json\")),s=JSON.parse(fs.readFileSync(d+\"/EDIT_SPEC.json\"));let checks=0;const need=(v,x)=>{checks++;if(!v)throw Error(x);};const hash=b=>c.createHash(\"sha256\").update(b).digest(\"hex\");const out=[];for(let i=0;i<m.history.length;i++){const h=m.history[i],b=fs.readFileSync(h.snapshot);need(b.length===h.bytes&&hash(b)===h.sha256,\"physical old pin\");let t=b.toString();need(Buffer.from(t).equals(b),\"whole old UTF8 raw roundtrip\");t=i===0?t.replace(s.old_status,s.new_status).replace(s.batch_anchor,s.batch_insert+s.batch_anchor):t.replace(s.old_stream_date,s.new_stream_date).replace(s.stream_anchor,s.stream_anchor+s.stream_insert);const a=fs.readFileSync(h.source);need(a.equals(Buffer.from(t)),\"ENTIRE raw declared transforms only \"+h.source);let links=0;const part=i===0?s.batch_insert:s.stream_insert;for(const x of part.matchAll(/\\]\\(([^)]+)\\)/g)){if(/^https:\\/\\//.test(x[1]))continue;const f=p.normalize(p.join(p.dirname(h.source),x[1]));need(fs.lstatSync(f).isFile(),\"new link regular \"+f);links++;}out.push({path:h.source,bytes:a.length,sha256:hash(a),new_links:links});}const r=\"docs/papers211_215_sequence/qa/p212_minimal_contract01_source_root01/\";need(hash(fs.readFileSync(r+\"RECEPTION.md\"))===\"663fcfdaf3d0541acb3199f2bc31f0e55050f75b74480c025df97abbf78ac1f7\",\"root reception unchanged\");need(hash(fs.readFileSync(r+\"SHA256SUMS\"))===\"e2a1d505ebcaf7685a0e1f89cfe5f971514adb588265aefe0dab4bf3610a1c12\",\"root seal unchanged\");console.log(JSON.stringify({status:\"PASS_TWO_PHYSICAL_ORIGINALS_AND_EXACT_RAW_DECLARED_CENTRAL_EDITS\",checks,current:out},null,2));'",
+      "max_output_tokens": 8000
+    },
+    "actual_return": {
+      "chunk_id": "ad2a76",
+      "wall_time_seconds": 0.000003829,
+      "exit_code": 0,
+      "original_token_count": 127,
+      "output": "{\n  \"status\": \"PASS_TWO_PHYSICAL_ORIGINALS_AND_EXACT_RAW_DECLARED_CENTRAL_EDITS\",\n  \"checks\": 13,\n  \"current\": [\n    {\n      \"path\": \"docs/papers211_215_sequence/PIPELINE_STATE.md\",\n      \"bytes\": 137705,\n      \"sha256\": \"2524638747f5dae6eb92f671bde89498528b9322316d3c574faed98062b5d93b\",\n      \"new_links\": 2\n    },\n    {\n      \"path\": \"SYMBOLIC_DYNAMICS_STATE.md\",\n      \"bytes\": 116536,\n      \"sha256\": \"e4f9331da876967e5812868e67b97210150d975e16a302368872854f4e1f99ef\",\n      \"new_links\": 3\n    }\n  ]\n}\n"
+    }
+  }
+}

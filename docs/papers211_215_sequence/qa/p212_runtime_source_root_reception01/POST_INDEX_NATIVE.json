@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node - <<'JS'\nconst fs=require('fs'),p=require('path'),c=require('crypto');const root='/root/autodl-tmp/symbolic_dynamics',qa=root+'/docs/papers211_215_sequence/qa';const sha=b=>c.createHash('sha256').update(b).digest('hex');let entries=0,links=0;for(const n of ['p212_runtime_source_root_reception01/PREPARATION_RESULT.json','p212_runtime_source_root_reception01/AUDIT_RESULT.json','orientation_root_reception01/RESULT.json']){const j=JSON.parse(fs.readFileSync(qa+'/'+n));for(const [s,k]of Object.entries(j.input_key)){const b=fs.readFileSync(s);if(sha(b)!==k.sha256||b.length!==(k.bytes??k.size)||fs.realpathSync(s)!==k.resolved)throw Error('input delta '+s);entries++;}}for(const r of JSON.parse(fs.readFileSync(qa+'/control_before_p212_runtime_source_accepted/MAPPING.json'))){const b=fs.readFileSync(root+'/'+r.physical_original);if(b.length!==r.pin.bytes||sha(b)!==r.pin.sha256)throw Error('old control');}for(const file of [root+'/SYMBOLIC_DYNAMICS_STATE.md',root+'/docs/papers211_215_sequence/PIPELINE_STATE.md',qa+'/p212_runtime_source_root_reception01/RECEPTION.md',qa+'/orientation_root_reception01/RECEPTION.md',qa+'/p211_round2_binding_root01/HOST_PRECHECK_SCOPE.md']){for(const m of fs.readFileSync(file,'utf8').matchAll(/\\]\\(([^)]+)\\)/g)){if(/^[A-Za-z][A-Za-z0-9+.-]*:/.test(m[1])||m[1].startsWith('#'))continue;const target=p.resolve(p.dirname(file),decodeURIComponent(m[1].split('#')[0]));if(!fs.existsSync(target))throw Error('link '+target);links++;}}console.log(JSON.stringify({status:'PASS_POST_INDEX_ORIGINAL_KEYS_AND_CONTROLS_AND_LINKS',input_entries:entries,local_links:links,old_controls:2,science:0,git:0}));\nJS",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2000
+  },
+  "result": {
+    "chunk_id": "ecded5",
+    "wall_time_seconds": 0.00000656,
+    "exit_code": 0,
+    "original_token_count": 36,
+    "output": "{\"status\":\"PASS_POST_INDEX_ORIGINAL_KEYS_AND_CONTROLS_AND_LINKS\",\"input_entries\":141,\"local_links\":187,\"old_controls\":2,\"science\":0,\"git\":0}\n"
+  }
+}

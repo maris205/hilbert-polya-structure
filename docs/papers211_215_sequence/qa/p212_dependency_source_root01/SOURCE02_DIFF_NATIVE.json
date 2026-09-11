@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "diff -u docs/papers211_215_sequence/qa/p212_dependency_source_root01/receive_source.js docs/papers211_215_sequence/qa/p212_dependency_source_root01/receive_source02.js",
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "e39523",
+    "wall_time_seconds": 0.00000687,
+    "exit_code": 1,
+    "original_token_count": 375,
+    "output": "--- docs/papers211_215_sequence/qa/p212_dependency_source_root01/receive_source.js\t2026-09-09 17:28:31.358806531 +0800\n+++ docs/papers211_215_sequence/qa/p212_dependency_source_root01/receive_source02.js\t2026-09-09 17:29:53.967906750 +0800\n@@ -69,7 +69,7 @@\n   need(r&&r.request&&r.result,'actual native object '+label);need(typeof r.request.cmd==='string','exact native request');\n   need(typeof r.result.chunk_id==='string','actual chunk');eq(r.result.exit_code,exit,'native exit '+label);\n   need(!r.result.session_id,'completed native '+label);need(typeof r.result.output==='string','full actual output');\n-  need(!/Warning: truncated output|tokens truncated|Process exited with code.*Final output:/m.test(r.result.output),'no truncation marker '+label);\n+  need(!r.result.output.startsWith('Warning: truncated output'),'no outer truncation header '+label);\n   nativeBindings.push({label,chunk_id:r.result.chunk_id,exit_code:exit,output:pin(Buffer.from(r.result.output))});return Buffer.from(r.result.output);\n }\n function sedRecord(r,label){\n@@ -81,7 +81,7 @@\n   return{path:p,lo,hi:Math.min(hi,lines.length),file_lines:lines.length,output:r.result.output};\n }\n \n-read(HERE+'PLAN.md');read(HERE+'receive_source.js');\n+read(HERE+'PLAN.md');read(HERE+'receive_source.js');read(HERE+'receive_source02.js');\n for(const [base,count,hash]of [\n   [P,15,'4dcf15a60e6e94d6001f0f0503ae8151317b470d1d6030519c1200d9473e1d5d'],\n   [A,12,'c3527ff4c6e3002bb5c923fe3936b2a5826e776342a985dd1f8e85e9c0918a0c'],\n"
+  }
+}

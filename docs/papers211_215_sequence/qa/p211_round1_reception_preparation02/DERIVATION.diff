@@ -1,0 +1,191 @@
+--- docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/receive_round1.py	2026-09-08 22:17:32.435661701 +0800
++++ docs/papers211_215_sequence/qa/p211_round1_reception_preparation02/receive_round1.py	2026-09-08 22:40:26.176302173 +0800
+@@ -1,8 +1,8 @@
+ #!/usr/bin/python3.10
+-"""Prepared read-only Round1 documentary receiver; never import submitted code.
++"""Forward-only receiver02 for exact adapter02; source preparation only.
+ 
+-Conceptual reuse: accepted audit_round0.py (see PLAN.md). New exact Round1
+-schema; stdout only. Does not adjudicate A or the separate root host recheck.
++Derived from sealed receiver01 (see PLAN.md and DERIVATION.diff). Stdout only;
++no submitted-code import, science, A adjudication or complete-host acceptance.
+ """
+ import argparse
+ import ast
+@@ -19,19 +19,37 @@
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT/'docs/papers211_215_sequence/qa'
+ EXEC = QA/'p211_round1_execution01'
+-PREP = QA/'p211_round1_adapter01'
++PREP = QA/'p211_round1_adapter02'
+ ROLE = QA/'p211_round1_preparation'
+ PAPER = ROOT/'papers/211-kernel-image-projection-feedback'
+ R0, R1 = PAPER/'frozen_round0', PAPER/'frozen_round1'
+ A = ROOT/'docs/papers211_215_sequence/reviews/p211_a'
+ ENV = {'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC'}
+ TOOLS = {'/usr/bin/cp','/usr/bin/cmp','/usr/bin/sha256sum','/usr/bin/python3.10'}
+-SOURCE_HASH = '50c32a6fa4c703275cb55535bc56507ba5bdbb909fb57ed31ffc6d3ff9566ab2'
+-SCHEMA_HASH = 'b7d4527f9433f9a9b78327eed6b94b04de9262e1c6e21d3eef7eb1f157d641dc'
++SOURCE_HASH = '0b43b429aa7381d138e81d5c849b0c9925c5f94107f044c94419150c3b059b1a'
++SCHEMA_HASH = 'ceb305ffd8bb5a03016e2d74cf230b7242c7b19aac9d0aea58b9b6f7ccfc05ce'
+ LEDGER_HASH = '3a0257d637b721607339dc623aa2890bb24f86ed003e8dc1d0e40194cedfde5f'
+ R0_MANIFEST = {'bytes':2799,'sha256':'459459486a82c8f787d04e5e7fcb81e6c01b3abef320d1e82ea4cbb30ea8a8bd'}
+ NAMES = '''AUTHOR_EXECUTION_RECEIPT.md CANONICAL.json CANONICAL_SCHEMA.md CLAIMS_EVIDENCE.md HANDOFF.md INITIAL_BUILD_RECEIPT.md NARRATIVE_REPORT.md PAPER_PLAN.md PARAMETER_SPECIFICATION.md PREPARATION_PLAN.md PROOF_PACKAGE.md README.md SOURCE_AUDIT.md SOURCE_INPUT_PINS.json SOURCE_PIN_COLLECTION_TOOL_RETURN.json SOURCE_PREPARATION_MANIFEST.json STATIC_CHECK_TOOL_RETURN.json main.pdf main.tex math_commands.tex parameters.json references.bib sections/0_abstract.tex sections/1_introduction.tex sections/2_image.tex sections/3_clock.tex sections/4_inverse.tex sections/5_scope.tex sources/bibliographic_metadata_web.json sources/stein_definition_web.json sources/stein_support_web.json verify.py'''.split()
+ TOP = set('''freeze.py BINDING.json ROOT_INVOCATION_ATTEMPT.json PROCESS_CONTEXT.json EXECUTED_FREEZE_SOURCE.py BINDING_PIN.json EXTERNAL_INPUTS_BEFORE.json HOST_REUSE_BOUNDARY.json NATIVE_TOOLS_BEFORE.json SOURCE_INPUTS_BEFORE.json SOURCE_TREES_BEFORE.json EXTERNAL_TREES_BEFORE.json SOURCE_SELECTION.json DECLARED_PIN_LIST_BASES.json DECLARED_JSON_PIN_BASES.json INHERITED_ROUND0_RESOLUTIONS.json MARKDOWN_LINK_MAP.json SOURCE_INPUTS_AFTER.json SOURCE_TREES_AFTER.json EXTERNAL_INPUTS_AFTER.json EXTERNAL_TREES_AFTER.json NATIVE_TOOLS_AFTER.json FROZEN_ORIGIN_MAP.json FROZEN_TREE.json EXTERNAL_REFERENCES.json READ_INPUTS_BEFORE.json READ_INPUTS_AFTER.json NATIVE_COMMANDS.json RESULT.json ROOT_INVOCATION_NATIVE.json root.stdout.raw root.stderr.raw SHA256SUMS'''.split())
++EXTERNAL_EMPTY_DIRECTORIES = {
++    'docs/papers211_215_sequence/qa/root_replays/p211_a_initial_01': (
++        'child01/commands',
++    ),
++    'docs/papers211_215_sequence/qa/root_replays/p211_a_pair_01': (
++        'child01/commands',
++        'child02/commands',
++    ),
++    'docs/papers211_215_sequence/qa/p211_runtime_preparation': (
++        'discovery01/empty_probe_capsule',
++        'discovery02/empty_probe_capsule',
++        'tests01/existing_cache',
++        'tests02/existing_cache',
++        'tests02/fixture_initial/child01/commands',
++        'tests02/fixture_pair/child01/commands',
++        'tests02/fixture_pair/child02/commands',
++    ),
++}
+ reads, trees = {}, {}
+ checks = 0
+ 
+@@ -105,8 +123,22 @@
+     return raw
+ 
+ 
+-def inventory(base, names, prune=(), remember=True):
++def inventory(base, names, prune=(), remember=True, *, empty_directories=()):
+     ordinary(base,True)
++    need(type(empty_directories) in (list,tuple),'explicit empty-directory sequence')
++    empties = tuple(relative(n) for n in empty_directories)
++    need(len(empties)==len(set(empties)),'unique declared empty directories')
++    need(not empties or (not prune and empties==EXTERNAL_EMPTY_DIRECTORIES.get(str(base.relative_to(ROOT)),())),
++         ('only exact per-root external empty-directory allowance, never a prune',str(base)))
++    directories = {'.'}
++    for name in names:
++        directories.update(str(p) for p in PurePosixPath(relative(name)).parents)
++    empty_parents = {'.'}
++    for name in empties:
++        empty_parents.update(str(p) for p in PurePosixPath(name).parents)
++    need(not set(empties)&(set(names)|directories|empty_parents),
++         'declared empties are not payloads, payload ancestors or nested empty ancestors')
++    directories.update(empty_parents|set(empties))
+     rows = {'.':{'kind':'directory','stat':metadata(base.lstat())}}
+     omitted = {}
+     def walk(directory):
+@@ -119,20 +151,20 @@
+             elif stat.S_ISDIR(s.st_mode):
+                 ordinary(p,True)
+                 rows[name] = {'kind':'directory','stat':metadata(s)}
++                if name in empties:
++                    need(not any(p.iterdir()),('declared ordinary directory actually empty',str(p)))
+                 walk(p)
+             else:
+                 ordinary(p)
+                 rows[name] = {'kind':'file','stat':metadata(s)}
+     walk(base)
+-    directories = {'.'}
+-    for name in names:
+-        directories.update(str(p) for p in PurePosixPath(relative(name)).parents)
++    need(all(rows.get(n,{}).get('kind')=='directory' for n in empties),'every declared empty directory is inventoried')
+     need({n for n,r in rows.items() if r['kind']=='file'} == set(names) and
+          {n for n,r in rows.items() if r['kind']=='directory'} == directories and
+          set(omitted) == set(prune),('exact complete tree',str(base)))
+-    result = {'entries':rows,'pruned_exact_subtrees':omitted}
++    result = {'entries':rows,'pruned_exact_subtrees':omitted,'declared_empty_directories':list(empties)}
+     if remember:
+-        key = (str(base),tuple(sorted(names)),tuple(sorted(prune)))
++        key = (str(base),tuple(sorted(names)),tuple(sorted(prune)),empties)
+         need(key not in trees or trees[key] == result,('tree drift',str(base)))
+         trees[key] = result
+     return result
+@@ -152,11 +184,11 @@
+     return rows
+ 
+ 
+-def seal(base, expected=None):
++def seal(base, expected=None, *, empty_directories=()):
+     rows = sums(read(base/'SHA256SUMS'))
+     if expected is not None:
+         need(rows == {n:v['sha256'] for n,v in expected.items()},('bound manifest',str(base)))
+-    inventory(base,set(rows)|{'SHA256SUMS'})
++    inventory(base,set(rows)|{'SHA256SUMS'},empty_directories=empty_directories)
+     for name,digest in rows.items():
+         need(pin(read(base/name))['sha256'] == digest,('manifest full payload hash',str(base/name)))
+     return rows
+@@ -173,6 +205,14 @@
+         return False
+     if 'enum' in schema and value not in schema['enum']:
+         return False
++    if 'not' in schema and schema_ok(value,schema['not'],whole):
++        return False
++    if 'allOf' in schema and not all(schema_ok(value,s,whole) for s in schema['allOf']):
++        return False
++    if 'if' in schema:
++        branch = 'then' if schema_ok(value,schema['if'],whole) else 'else'
++        if branch in schema and not schema_ok(value,schema[branch],whole):
++            return False
+     for keyword,exact in [('anyOf',False),('oneOf',True)]:
+         if keyword in schema:
+             count = sum(schema_ok(value,s,whole) for s in schema[keyword])
+@@ -216,6 +256,9 @@
+     need(binding['execution_source_pin'] == source_pin and obj(EXEC/'BINDING_PIN.json') == binding_pin,'binding/source pin cross-bind')
+     selected = next(n.value for n in ast.parse(code).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='NAMES' for t in n.targets))
+     need(isinstance(selected,ast.Call) and isinstance(selected.func,ast.Attribute) and selected.func.attr=='split' and not selected.args and not selected.keywords and ast.literal_eval(selected.func.value).split()==NAMES,'literal independent author32 AST; never import')
++    declared = next(n.value for n in ast.parse(code).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='EXTERNAL_EMPTY_DIRECTORIES' for t in n.targets))
++    need(ast.literal_eval(declared)==EXTERNAL_EMPTY_DIRECTORIES and len(EXTERNAL_EMPTY_DIRECTORIES)==3 and sum(map(len,EXTERNAL_EMPTY_DIRECTORIES.values()))==10,
++         'exact three-root ten-directory independent literal allowlist, AST only')
+     result = obj(EXEC/'RESULT.json')
+     ledger_path = QA/'p211_round0_execution01/SOURCE_INPUTS_AFTER.json'
+     ledger_raw = read(ledger_path)
+@@ -275,6 +318,9 @@
+     live = inventory(PAPER,NAMES,('frozen_round0','frozen_round1'))
+     need(ta['author_live']==live,'live exact postcopy tree and two literal prunes')
+     lb,la = tb['author_live'],ta['author_live']
++    need(set(lb)==set(la)=={'entries','pruned_exact_subtrees','declared_empty_directories'} and
++         lb['declared_empty_directories']==la['declared_empty_directories']==[],
++         'strict live before/after inventory schema; no external empty allowance')
+     need(set(lb['pruned_exact_subtrees'])=={'frozen_round0'} and lb['pruned_exact_subtrees']['frozen_round0']==la['pruned_exact_subtrees']['frozen_round0'],'precopy sole exact Round0 prune unchanged')
+     need(la['pruned_exact_subtrees']['frozen_round1']==frozen_tree['entries']['.'],'postcopy Round1 prune fully accounted')
+     need({n:v for n,v in lb['entries'].items() if n!='.'}=={n:v for n,v in la['entries'].items() if n!='.'},'all author descendants rich unchanged')
+@@ -303,13 +349,19 @@
+     need(binding['acceptance_references']['round0_root_reception']=={'path':str((QA/'p211_round0_root_reception/RECEPTION.md').relative_to(ROOT)),'pin':{'bytes':external[str((QA/'p211_round0_root_reception/RECEPTION.md').relative_to(ROOT))]['pin']['bytes'],'sha256':'aaf5f7dfcacc3b9efa20edbf08bbce49d996418b33722b3bfb399110bcf4f3bd'}},'accepted Round0 reception identity')
+     et = {}
+     for spec in binding['external_trees']:
++        need(set(spec)=={'root','files','empty_directories','manifest','accepted_scope_reference'},'exact v2 external tree fields')
+         base = workspace(spec['root'])
++        empties = spec['empty_directories']
++        need(type(empties) is list and empties==list(EXTERNAL_EMPTY_DIRECTORIES.get(spec['root'],())),
++             'exact ordered per-root empties; mandatory [] for every other external root')
+         need(str(base) not in et,'distinct external tree')
+         evidence(spec['accepted_scope_reference'])
+         need({str((base/relative(n)).relative_to(ROOT)) for n in spec['files']} <= set(external),'entire declared external tree consumed')
+-        et[str(base)] = inventory(base,spec['files'])
++        et[str(base)] = inventory(base,spec['files'],empty_directories=empties)
+         if spec['manifest'] is not None:
+-            seal(base)
++            seal(base,empty_directories=empties)
++    need({str(workspace(n)) for n in EXTERNAL_EMPTY_DIRECTORIES} <= set(et),
++         'all three accepted external roots with their ten literal empty directories received')
+     need({str(PREP),str(ROLE),str(QA/'p211_round0_execution01')} <= set(et),'mandatory complete preparation/Round0 trees')
+     need(obj(EXEC/'EXTERNAL_TREES_BEFORE.json')==et==obj(EXEC/'EXTERNAL_TREES_AFTER.json'),'all rich external tree keys before/after/current')
+     inherited = {}
+@@ -457,10 +509,10 @@
+     after = {p:fresh(Path(p))[1] for p in sorted(before)}
+     need(before==after,'all receiver full rich read keys unchanged at completion')
+     tree_records = []
+-    for (base,names,prune),value in list(trees.items()):
+-        need(inventory(Path(base),names,prune,False)==value,('entire receiver-observed rich tree final closure',base))
+-        tree_records.append({'root':base,'files':list(names),'prune':list(prune),'inventory':value})
+-    return {'schema':'p211_round1_documentary_receiver_v1','status':'PASS_PHYSICAL_DOCUMENTARY_SCOPE_HOST_ACCEPTANCE_EXTERNAL_ROOT','checks':checks,'payloads':83,'round1_files':84,'native_child_records':119,'native_child_raw_streams':238,'native_root_records':1,'external_files':len(external),'recorder_read_paths':len(ra),'receiver_read_paths':len(before),'execution_files':len(TOP|command_files),'root_postcopy_host_evidence':{'path':args.root_host_evidence,'pin':pin(host_raw),'interpretation':'FULL_BYTES_CONSUMED_ONLY; exact complete host/settings semantics and original native provenance require root reception'},'recorder_dereferences_complete_host_key':False,'receiver_dereferences_799_host_referents':False,'submitted_programs_executed':0,'scientific_executions':0,'builds':0,'page_views':0,'manuscript_reviews':0,'paper_complete':False,'external':'HOLD_EXTERNAL','READ_INPUTS_BEFORE':before,'READ_INPUTS_AFTER':after,'RICH_INVENTORIES':tree_records}
++    for (base,names,prune,empties),value in list(trees.items()):
++        need(inventory(Path(base),names,prune,False,empty_directories=empties)==value,('entire receiver-observed rich tree final closure',base))
++        tree_records.append({'root':base,'files':list(names),'prune':list(prune),'declared_empty_directories':list(empties),'inventory':value})
++    return {'schema':'p211_round1_documentary_receiver_v2','status':'PASS_PHYSICAL_DOCUMENTARY_SCOPE_HOST_ACCEPTANCE_EXTERNAL_ROOT','checks':checks,'payloads':83,'round1_files':84,'native_child_records':119,'native_child_raw_streams':238,'native_root_records':1,'declared_external_empty_directories':10,'external_files':len(external),'recorder_read_paths':len(ra),'receiver_read_paths':len(before),'execution_files':len(TOP|command_files),'root_postcopy_host_evidence':{'path':args.root_host_evidence,'pin':pin(host_raw),'interpretation':'FULL_BYTES_CONSUMED_ONLY; exact complete host/settings semantics and original native provenance require root reception'},'recorder_dereferences_complete_host_key':False,'receiver_dereferences_799_host_referents':False,'submitted_programs_executed':0,'scientific_executions':0,'builds':0,'page_views':0,'manuscript_reviews':0,'paper_complete':False,'external':'HOLD_EXTERNAL','READ_INPUTS_BEFORE':before,'READ_INPUTS_AFTER':after,'RICH_INVENTORIES':tree_records}
+ 
+ 
+ if __name__ == '__main__':

@@ -1,0 +1,48 @@
+{
+  "schema": "p211_round1_receiver02_static_preparation_native_v1",
+  "scope": "AST/source/schema/diff/hash checks only; no module import, function execution, fixtures or future artifact acceptance.",
+  "records": [
+    {
+      "request": {
+        "cmd": "/usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json; from pathlib import Path; root=Path.cwd(); old=root/\"docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/receive_round1.py\"; new=root/\"docs/papers211_215_sequence/qa/p211_round1_reception_preparation02/receive_round1.py\"; producer=root/\"docs/papers211_215_sequence/qa/p211_round1_adapter02/freeze.py\"; schema_path=producer.with_name(\"BINDING.schema.json\"); oldraw,newraw,prod=old.read_bytes(),new.read_bytes(),producer.read_bytes(); ot,nt,pt=map(ast.parse,(oldraw,newraw,prod)); collect=lambda t:{x.id:n.value for n in t.body if isinstance(n,ast.Assign) for x in n.targets if isinstance(x,ast.Name)}; oa,na,pa=map(collect,(ot,nt,pt)); ev=lambda x:ast.literal_eval(x); empties=ev(na[\"EXTERNAL_EMPTY_DIRECTORIES\"]); assert empties==ev(pa[\"EXTERNAL_EMPTY_DIRECTORIES\"]) and len(empties)==3 and sum(map(len,empties.values()))==10; assert hashlib.sha256(prod).hexdigest()==ev(na[\"SOURCE_HASH\"]); schema_raw=schema_path.read_bytes(); assert hashlib.sha256(schema_raw).hexdigest()==ev(na[\"SCHEMA_HASH\"]); schema=json.loads(schema_raw); item=schema[\"properties\"][\"external_trees\"][\"items\"]; assert set(item[\"required\"])==set(item[\"properties\"])=={\"root\",\"files\",\"empty_directories\",\"manifest\",\"accepted_scope_reference\"}; cond=item[\"allOf\"]; assert len(cond)==4; literal={c[\"if\"][\"properties\"][\"root\"][\"const\"]:tuple(c[\"then\"][\"properties\"][\"empty_directories\"][\"const\"]) for c in cond[:3]}; assert literal==empties; assert cond[3][\"if\"][\"properties\"][\"root\"][\"not\"][\"enum\"]==list(empties) and cond[3][\"then\"][\"properties\"][\"empty_directories\"][\"const\"]==[]; assert schema[\"properties\"][\"schema\"][\"const\"]==\"p211_round1_binding_v2\"; funcs=lambda t:{n.name:ast.dump(n,include_attributes=False) for n in t.body if isinstance(n,ast.FunctionDef)}; of,nf=map(funcs,(ot,nt)); assert set(of)==set(nf); changed=sorted(n for n in of if of[n]!=nf[n]); assert changed==[\"audit\",\"inventory\",\"schema_ok\",\"seal\"]; assert ast.dump(oa[\"NAMES\"],include_attributes=False)==ast.dump(na[\"NAMES\"],include_attributes=False); assert ast.dump(oa[\"TOP\"],include_attributes=False)==ast.dump(na[\"TOP\"],include_attributes=False); original,actual=oldraw.decode(),newraw.decode(); start=\"    specs =\"; end=\"    tree_records =\"; assert original[original.index(start):original.index(end)]==actual[actual.index(start):actual.index(end)]; imports=[n.module if isinstance(n,ast.ImportFrom) else a.name for n in ast.walk(nt) if isinstance(n,(ast.Import,ast.ImportFrom)) for a in (n.names if isinstance(n,ast.Import) else [None])]; assert set(imports)<={\"argparse\",\"ast\",\"hashlib\",\"json\",\"os\",\"pathlib\",\"re\",\"stat\",\"sys\",\"traceback\",\"urllib.parse\"}; calls={n.func.attr if isinstance(n.func,ast.Attribute) else n.func.id if isinstance(n.func,ast.Name) else \"indirect\" for n in ast.walk(nt) if isinstance(n,ast.Call)}; banned=calls&{\"write_bytes\",\"write_text\",\"open\",\"mkdir\",\"unlink\",\"rename\",\"replace\",\"rmdir\",\"system\",\"popen\",\"run\",\"Popen\",\"exec\",\"eval\",\"compile\",\"import_module\",\"load_module\"}; assert not banned; sf=next(n for n in nt.body if isinstance(n,ast.FunctionDef) and n.name==\"schema_ok\"); strings={n.value for n in ast.walk(sf) if isinstance(n,ast.Constant) and isinstance(n.value,str)}; assert {\"allOf\",\"if\",\"then\",\"not\"}<=strings; print(json.dumps({\"status\":\"PASS_AST_SOURCE_SCHEMA_DELTA_ONLY_NOT_INVOKED\",\"source\":{\"bytes\":len(newraw),\"sha256\":hashlib.sha256(newraw).hexdigest(),\"lines\":len(newraw.splitlines())},\"base_receiver_sha256\":hashlib.sha256(oldraw).hexdigest(),\"producer_sha256\":hashlib.sha256(prod).hexdigest(),\"binding_schema_sha256\":hashlib.sha256(schema_raw).hexdigest(),\"changed_functions\":changed,\"literal_external_empty_roots\":3,\"literal_empty_directories\":10,\"new_conditional_keywords_present\":sorted({\"allOf\",\"if\",\"then\",\"not\"}),\"native119_and_outer_contract_source_segment_unchanged\":True,\"top509_and_source83_frozen84_scope_unchanged\":True,\"banned_calls\":sorted(banned),\"receiver_or_recorder_invocations\":0,\"future_binding_or_output_reads\":0},sort_keys=True))'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "3b3651",
+        "wall_time_seconds": 0.00000505,
+        "exit_code": 0,
+        "original_token_count": 217,
+        "output": "{\"banned_calls\": [], \"base_receiver_sha256\": \"5f143d846324464fd21cbfa0337f6206e1c55913e4930b77d38543cd6065ede8\", \"binding_schema_sha256\": \"ceb305ffd8bb5a03016e2d74cf230b7242c7b19aac9d0aea58b9b6f7ccfc05ce\", \"changed_functions\": [\"audit\", \"inventory\", \"schema_ok\", \"seal\"], \"future_binding_or_output_reads\": 0, \"literal_empty_directories\": 10, \"literal_external_empty_roots\": 3, \"native119_and_outer_contract_source_segment_unchanged\": true, \"new_conditional_keywords_present\": [\"allOf\", \"if\", \"not\", \"then\"], \"producer_sha256\": \"0b43b429aa7381d138e81d5c849b0c9925c5f94107f044c94419150c3b059b1a\", \"receiver_or_recorder_invocations\": 0, \"source\": {\"bytes\": 37766, \"lines\": 529, \"sha256\": \"21d16d2560eeb68420a3c37c9a3fda98dcbcb0ea1043dc80cd36a81e24fef06e\"}, \"status\": \"PASS_AST_SOURCE_SCHEMA_DELTA_ONLY_NOT_INVOKED\", \"top509_and_source83_frozen84_scope_unchanged\": true}\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum -c SHA256SUMS",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round1_adapter02",
+        "max_output_tokens": 2500
+      },
+      "result": {
+        "chunk_id": "edf8bf",
+        "wall_time_seconds": 0.000005259,
+        "exit_code": 0,
+        "original_token_count": 72,
+        "output": "BINDING.schema.json: OK\nBINDING_PENDING.json: OK\nDERIVATION.diff: OK\nDERIVATION_NATIVE.json: OK\nINDEPENDENT_STATIC_RECEPTION.json: OK\nINPUTS.sha256: OK\nNATIVE_PREPARATION_READS.json: OK\nNATIVE_STATIC_CHECKS.json: OK\nPLAN.md: OK\nPRESEAL_NATIVE.json: OK\nfreeze.py: OK\nstatic_check.py: OK\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/receive_round1.py docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/PLAN.md docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/SHA256SUMS docs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py docs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json docs/papers211_215_sequence/qa/p211_round1_adapter01/SHA256SUMS docs/papers211_215_sequence/qa/p211_round1_adapter02/freeze.py docs/papers211_215_sequence/qa/p211_round1_adapter02/BINDING.schema.json docs/papers211_215_sequence/qa/p211_round1_adapter02/PLAN.md docs/papers211_215_sequence/qa/p211_round1_adapter02/DERIVATION.diff docs/papers211_215_sequence/qa/p211_round1_adapter02/INDEPENDENT_STATIC_RECEPTION.json docs/papers211_215_sequence/qa/p211_round1_adapter02/SHA256SUMS docs/papers211_215_sequence/qa/p211_round1_binding_root/invoke.py docs/papers211_215_sequence/qa/p211_round1_binding_root/ENTRY_PREFLIGHT_FAILED01_NATIVE.json",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "46fdfa",
+        "wall_time_seconds": 0.000004769,
+        "exit_code": 0,
+        "original_token_count": 485,
+        "output": "5f143d846324464fd21cbfa0337f6206e1c55913e4930b77d38543cd6065ede8  docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/receive_round1.py\na3086a105e9a1c5374e35747eafae126bc92222270ef275b271942fcdcf8a3d9  docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/PLAN.md\n407d435af6a6779078dbccd1d3ec1a0c9f54f372cdeccd3a0858817de58085c3  docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/SHA256SUMS\n50c32a6fa4c703275cb55535bc56507ba5bdbb909fb57ed31ffc6d3ff9566ab2  docs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py\nb7d4527f9433f9a9b78327eed6b94b04de9262e1c6e21d3eef7eb1f157d641dc  docs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json\na8b177ff6c92c630b82868d2ac537cbd49f6461b7e1f50b31f328bab09495fb8  docs/papers211_215_sequence/qa/p211_round1_adapter01/SHA256SUMS\n0b43b429aa7381d138e81d5c849b0c9925c5f94107f044c94419150c3b059b1a  docs/papers211_215_sequence/qa/p211_round1_adapter02/freeze.py\nceb305ffd8bb5a03016e2d74cf230b7242c7b19aac9d0aea58b9b6f7ccfc05ce  docs/papers211_215_sequence/qa/p211_round1_adapter02/BINDING.schema.json\n6be26c45339fd87a7abb316da27fe35f9553652b62f95e1e4b78f1aeef2f6dfb  docs/papers211_215_sequence/qa/p211_round1_adapter02/PLAN.md\n92e93d5046575f7df05a074da0e96df6d6b32761a7e6db4cbbe70cfb20912224  docs/papers211_215_sequence/qa/p211_round1_adapter02/DERIVATION.diff\n6a7e950ee82029dd2c1f20ad30d25eeb31790995e267b96644c0dfb1ac5942d4  docs/papers211_215_sequence/qa/p211_round1_adapter02/INDEPENDENT_STATIC_RECEPTION.json\nca0a44dd201954c0e426b47036bc87e1a1e9b60dd7117428c8bfb86f03fc0f32  docs/papers211_215_sequence/qa/p211_round1_adapter02/SHA256SUMS\n5e3f14338bdf7b2c62f67e7f2ff6906c39f7d5b8dd398582de9fa2c043d44dd4  docs/papers211_215_sequence/qa/p211_round1_binding_root/invoke.py\nfc09863dc261e90834f03134d2ac953f2d0807af623d29749b4ed6e18e14f575  docs/papers211_215_sequence/qa/p211_round1_binding_root/ENTRY_PREFLIGHT_FAILED01_NATIVE.json\n"
+      }
+    }
+  ]
+}

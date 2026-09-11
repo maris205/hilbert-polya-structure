@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P215 complete author wire v1; SOURCE ONLY",
+  "oneOf": [
+    {"$ref": "#/$defs/result"},
+    {"$ref": "#/$defs/argument_failure"},
+    {"$ref": "#/$defs/runtime_failure"}
+  ],
+  "$defs": {
+    "integer": {"type": "integer"},
+    "natural": {"type": "integer", "minimum": 0},
+    "word": {"type": "array", "items": {"$ref": "#/$defs/natural"}},
+    "integers": {"type": "array", "items": {"$ref": "#/$defs/integer"}},
+    "words": {"type": "array", "items": {"$ref": "#/$defs/word"}},
+    "comparison": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "actual", "expected", "pass"],
+      "properties": {"name": {"type": "string", "pattern": "^[a-z_]+$"},
+        "actual": {}, "expected": {}, "pass": {"type": "boolean"}}
+    },
+    "comparisons": {"type": "array", "items": {"$ref": "#/$defs/comparison"}},
+    "subtraction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["i", "prefix_count", "upper", "lower", "binomial", "product"],
+      "properties": {"i": {"$ref": "#/$defs/natural"},
+        "prefix_count": {"$ref": "#/$defs/integer"},
+        "upper": {"$ref": "#/$defs/natural"}, "lower": {"$ref": "#/$defs/natural"},
+        "binomial": {"$ref": "#/$defs/natural"}, "product": {"$ref": "#/$defs/integer"}}
+    },
+    "term": {
+      "type": "object", "additionalProperties": false,
+      "required": ["m", "base_upper", "base_lower", "base", "subtractions", "value"],
+      "properties": {"m": {"$ref": "#/$defs/natural"},
+        "base_upper": {"$ref": "#/$defs/natural"}, "base_lower": {"$ref": "#/$defs/natural"},
+        "base": {"$ref": "#/$defs/natural"}, "value": {"$ref": "#/$defs/integer"},
+        "subtractions": {"type": "array", "items": {"$ref": "#/$defs/subtraction"}}}
+    },
+    "formula": {
+      "type": "object", "additionalProperties": false,
+      "required": ["zeros", "b", "B", "c", "A", "recurrence_terms", "height_sequences", "constructed_sources", "count"],
+      "properties": {"zeros": {"$ref": "#/$defs/word"}, "b": {"$ref": "#/$defs/word"},
+        "B": {"$ref": "#/$defs/word"}, "c": {"$ref": "#/$defs/word"},
+        "A": {"$ref": "#/$defs/integers"}, "count": {"$ref": "#/$defs/integer"},
+        "recurrence_terms": {"type": "array", "items": {"$ref": "#/$defs/term"}},
+        "height_sequences": {"$ref": "#/$defs/words"},
+        "constructed_sources": {"$ref": "#/$defs/words"}}
+    },
+    "state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["x", "Fx", "orbit", "repeat_index", "period", "cycle", "clock", "differences", "nonzero_signs", "runs", "output_differences", "output_nonzero_signs", "output_runs", "alternating_nonzero", "maximal_predicate", "comparisons"],
+      "properties": {"x": {"$ref": "#/$defs/word"}, "Fx": {"$ref": "#/$defs/word"},
+        "orbit": {"$ref": "#/$defs/words"}, "cycle": {"$ref": "#/$defs/words"},
+        "repeat_index": {"$ref": "#/$defs/natural"}, "period": {"type": "integer", "minimum": 1},
+        "clock": {"$ref": "#/$defs/natural"}, "differences": {"$ref": "#/$defs/integers"},
+        "nonzero_signs": {"$ref": "#/$defs/integers"}, "runs": {"$ref": "#/$defs/integers"},
+        "output_differences": {"$ref": "#/$defs/integers"},
+        "output_nonzero_signs": {"$ref": "#/$defs/integers"}, "output_runs": {"$ref": "#/$defs/integers"},
+        "alternating_nonzero": {"type": "boolean"}, "maximal_predicate": {"type": "boolean"},
+        "comparisons": {"$ref": "#/$defs/comparisons", "minItems": 5, "maxItems": 5}}
+    },
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["y", "actual_predecessors", "actual_count", "image_predicate", "formula", "comparisons"],
+      "properties": {"y": {"$ref": "#/$defs/word"}, "actual_predecessors": {"$ref": "#/$defs/words"},
+        "actual_count": {"$ref": "#/$defs/natural"}, "image_predicate": {"type": "boolean"},
+        "formula": {"$ref": "#/$defs/formula"},
+        "comparisons": {"$ref": "#/$defs/comparisons", "minItems": 6, "maxItems": 6}}
+    },
+    "box": {
+      "type": "object", "additionalProperties": false,
+      "required": ["n", "q", "carrier_size", "states", "targets", "recurrent_states", "height", "deepest_states", "expected_deepest_states", "image", "expected_image", "maximum_fibre", "maximum_fibre_targets", "clock_census", "fibre_census", "comparisons"],
+      "properties": {"n": {"type": "integer", "minimum": 0, "maximum": 5},
+        "q": {"type": "integer", "minimum": 0, "maximum": 3},
+        "carrier_size": {"type": "integer", "minimum": 1},
+        "states": {"type": "array", "items": {"$ref": "#/$defs/state"}},
+        "targets": {"type": "array", "items": {"$ref": "#/$defs/target"}},
+        "recurrent_states": {"$ref": "#/$defs/words"}, "height": {"$ref": "#/$defs/natural"},
+        "deepest_states": {"$ref": "#/$defs/words"}, "expected_deepest_states": {"$ref": "#/$defs/words"},
+        "image": {"$ref": "#/$defs/words"}, "expected_image": {"$ref": "#/$defs/words"},
+        "maximum_fibre": {"$ref": "#/$defs/natural"}, "maximum_fibre_targets": {"$ref": "#/$defs/words"},
+        "clock_census": {"$ref": "#/$defs/word"}, "fibre_census": {"$ref": "#/$defs/word"},
+        "comparisons": {"$ref": "#/$defs/comparisons", "minItems": 11, "maxItems": 11}}
+    },
+    "parameters": {
+      "type": "object", "additionalProperties": false, "required": ["n", "q"],
+      "properties": {"n": {"const": [0, 1, 2, 3, 4, 5]}, "q": {"const": [0, 1, 2, 3]}}
+    },
+    "result": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "schema_version", "parameters", "boxes", "comparisons", "checks", "failures", "pass"],
+      "properties": {"kind": {"const": "p215_author_verification"}, "schema_version": {"const": 1},
+        "parameters": {"$ref": "#/$defs/parameters"},
+        "boxes": {"type": "array", "minItems": 24, "maxItems": 24, "items": {"$ref": "#/$defs/box"}},
+        "comparisons": {"$ref": "#/$defs/comparisons", "minItems": 2, "maxItems": 2},
+        "checks": {"$ref": "#/$defs/natural"}, "failures": {"$ref": "#/$defs/natural"}, "pass": {"type": "boolean"}}
+    },
+    "argument_failure": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "reason"],
+      "properties": {"kind": {"const": "failure"}, "reason": {"const": "arguments_forbidden"}}
+    },
+    "runtime_failure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "reason", "context", "completed_boxes", "checks", "failures"],
+      "properties": {"kind": {"const": "failure"}, "reason": {"const": "runtime_exception"},
+        "context": {"type": "object", "additionalProperties": false, "required": ["n", "q"],
+          "properties": {"n": {"type": ["integer", "null"]}, "q": {"type": ["integer", "null"]}}},
+        "completed_boxes": {"type": "array", "items": {"$ref": "#/$defs/box"}},
+        "checks": {"$ref": "#/$defs/natural"}, "failures": {"$ref": "#/$defs/natural"}}
+    }
+  }
+}

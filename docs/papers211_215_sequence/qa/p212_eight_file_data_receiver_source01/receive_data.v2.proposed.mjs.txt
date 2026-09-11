@@ -1,0 +1,201 @@
+// SOURCE-ONLY PROPOSAL. Not imported, syntax-tested or run in preparation.
+// New pure DATA consumer; NOT the disabled operational receive.mjs.
+import {createHash} from 'node:crypto';
+const QA='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/';
+const PRE=QA+'p212_minimal_contract01_file_observation_preparation01/';
+const ENABLED=QA+'p212_minimal_contract01_file_observation_enabled01/';
+const BIND=QA+'p212_minimal_contract01_file_observation_binding01/FILE_REQUEST.json';
+const RAW=QA+'p212_minimal_contract01_file_observation_raw01/';
+const F='dev ino mode nlink uid gid rdev size mtimeNs ctimeNs'.split(' ');
+const SF='lstat_before fstat_before fstat_after lstat_after'.split(' ');
+const SOURCES=[
+  ['reader',PRE+'file_keys.proposed.mjs.txt',ENABLED+'file_keys.mjs',13660,'957111a4a680f61cc94e89eb220b8c7c10d779e04eabd4734948690ef11b41f8'],
+  ['entry',PRE+'collect_files.proposed.mjs.txt',ENABLED+'collect_files.mjs',13540,'bd9baeb57f2387860a400f4b27e8acf9897da3843482cf856378f9807a2b2b87']
+];
+const ENTRIES=[['BASH','/bin/bash','executable'],['ENV','/usr/bin/env','executable'],
+ ['KPSEWHICH','/usr/bin/kpsewhich','executable'],
+ ['LOADER_CANDIDATE','/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2','loader'],
+ ['LIBC_CANDIDATE','/usr/lib/x86_64-linux-gnu/libc.so.6','loader'],
+ ['TINFO_CANDIDATE','/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3','loader'],
+ ['LOADER_CACHE','/etc/ld.so.cache','configuration'],['SYSTEM_PRELOAD','/etc/ld.so.preload','configuration']
+].map(([id,path,role],i)=>({id,path,role,optional:i>=6,max_bytes:i>=6?1048576:16777216,capture_hex:true,expected:null}));
+const CAPTURE="# Prospective eight-file key-tool capture BYTES ONLY; no current grant.\n# A separately received fresh owned 0700 destination must already exist.\numask 077\nset -o noclobber\nexec 3>'"+RAW+"stdout.canonical.json' || exit 78\nexec 4>'"+RAW+"stderr.raw' || exit 78\nexec node '"+ENABLED+"collect_files.mjs' 1>&3 2>&4 3>&- 4>&-\n";
+const need=(b,s)=>{if(!b)throw Error(s);};
+const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+const keys=(x,n)=>need(object(x)&&JSON.stringify(Object.keys(x).sort())===JSON.stringify([...n].sort()),'exact keys: '+n.join(','));
+const uint=x=>Number.isSafeInteger(x)&&x>=0&&!Object.is(x,-0);
+const pin=b=>({bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});
+const same=(a,b)=>need(canon(a).equals(canon(b)),'complete DATA equality');
+function canon(v){
+ let nodes=0;const active=new Set();
+ const str=s=>'"'+s.replace(/[^\x20-\x21\x23-\x5b\x5d-\x7e]/g,c=>'\\u'+c.charCodeAt(0).toString(16).padStart(4,'0'))+'"';
+ function go(x,d){
+  need(++nodes<=8192&&d<=32,'finite value bound');
+  if(x===null)return 'null';if(typeof x==='string')return str(x);
+  if(typeof x==='boolean')return String(x);
+  if(typeof x==='number'){need(Number.isSafeInteger(x)&&!Object.is(x,-0),'safe integer');return String(x);}
+  need(object(x)||Array.isArray(x),'JSON DATA');need(!active.has(x),'cycle');active.add(x);
+  const names=Object.keys(x);for(const k of names)need(Object.hasOwn(Object.getOwnPropertyDescriptor(x,k),'value'),'no accessor');
+  let s;if(Array.isArray(x)){
+   need(names.length===x.length&&x.length<=8192,'dense array');
+   for(let i=0;i<x.length;i++)need(Object.hasOwn(x,String(i)),'no hole');
+   s='['+x.map(y=>go(y,d+1)).join(',')+']';
+  }else{need([null,Object.prototype].includes(Object.getPrototypeOf(x)),'plain object');
+   s='{'+names.sort().map(k=>str(k)+':'+go(x[k],d+1)).join(',')+'}';}
+  active.delete(x);return s;
+ }return Buffer.from(go(v,0)+'\n','ascii');
+}
+function decode(b,max,canonical=false){
+ need(Buffer.isBuffer(b)&&b.length<=max,'whole bounded buffer');
+ const s=b.toString('utf8');need(Buffer.from(s,'utf8').equals(b),'UTF8 reversible');
+ const x=JSON.parse(s); // ordinary trusted parser, no reviver or executable input
+ if(canonical){need(b.every(c=>c<128),'ASCII envelope');need(canon(x).equals(b),'canonical whole RAW equality');}
+ return x;
+}
+function hex(s,max){need(typeof s==='string'&&s.length<=2*max&&/^(?:[0-9a-f]{2})*$/.test(s),'bounded lower hex');return Buffer.from(s,'hex');}
+function content(p,b){keys(p,['bytes','sha256']);same(p,pin(b));}
+function stat(s){keys(s,F);for(const k of F)need(typeof s[k]==='string'&&/^-?(0|[1-9][0-9]*)$/.test(s[k])&&s[k]!=='-0','decimal stat');}
+function regular(s){stat(s);need(BigInt(s.size)>=0n&&(BigInt(s.mode)&0o170000n)===0o100000n,'regular key');}
+function err(e,kind='normal'){
+ keys(e,kind==='row'?['operation','name','code','message']:kind==='close'?['name','message']:['name','code','message']);
+ need(typeof e.name==='string'&&typeof e.message==='string','error strings');
+ if(kind!=='close')need(e.code===null||typeof e.code==='string','error code');
+ if(kind==='row')need(e.operation==='finite_file_key','row operation');
+}
+// Full independently received closed-document key, not a hash-only assertion.
+function whole(k,b,path){
+ keys(k,['path',...SF,'bytes_read','eof','close_succeeded','content']);need(k.path===path,'literal document destination');
+ for(const f of SF)regular(k[f]);for(const f of SF)same(k[f],k.lstat_before);
+ need(k.eof===true&&k.close_succeeded===true&&k.bytes_read===b.length&&BigInt(k.lstat_before.size)===BigInt(b.length),'whole closed EOF');content(k.content,b);
+}
+function ref(r){keys(r,['path','pin']);need(typeof r.path==='string'&&r.path.startsWith(QA)&&!r.path.split('/').some(s=>s==='.'||s==='..')&&!r.path.includes('\\'),'QA reference DATA');keys(r.pin,['bytes','sha256']);need(uint(r.pin.bytes)&&r.pin.bytes>0&&typeof r.pin.sha256==='string'&&/^[0-9a-f]{64}$/.test(r.pin.sha256),'reference pin');}
+function bound(r,grant){
+ keys(r,['schema','enabled','status','purpose','entries','total_byte_limit','permission_receipt','settlement_receipt']);
+ same(r,{schema:'p212-s0-ten-field-file-request-v1',enabled:true,status:'ROOT_BOUND_FINITE_FILES_ONLY',purpose:'source_gate',entries:ENTRIES,total_byte_limit:102760448,permission_receipt:grant,settlement_receipt:null});ref(grant);
+}
+function input(r,expected,requireComplete){
+ need(object(r),'request_input object');
+ if(Object.keys(r).length===0){need(!requireComplete,'missing request input');return null;}
+ const base=['path','byte_limit','bytes_read','eof','complete','close_succeeded','raw_hex','content'];
+ need(object(r)&&base.every(k=>Object.hasOwn(r,k))&&Object.keys(r).every(k=>[...base,...SF,'error','close_error'].includes(k)),'all request_input fields');
+ need(r.path===BIND&&r.byte_limit===65536&&uint(r.bytes_read)&&typeof r.eof==='boolean'&&typeof r.complete==='boolean'&&[null,true,false].includes(r.close_succeeded),'request input scalars');
+ const b=hex(r.raw_hex,65537);need(b.length===r.bytes_read,'request bytes');content(r.content,b);
+ for(const f of SF)if(Object.hasOwn(r,f))stat(r[f]);
+ if(Object.hasOwn(r,'error'))err(r.error);if(Object.hasOwn(r,'close_error'))err(r.close_error);
+ if(requireComplete||r.complete){need(r.complete&&r.eof&&r.close_succeeded===true&&b.length<=65536&&!Object.hasOwn(r,'error')&&!Object.hasOwn(r,'close_error'),'request complete flags');
+  for(const f of SF){regular(r[f]);same(r[f],r.lstat_before);}need(BigInt(b.length)===BigInt(r.lstat_before.size),'request size');
+ }
+ // A failed partial request must be a literal prefix of the externally keyed binding.
+ need(b.equals(expected.subarray(0,b.length)),'captured binding prefix RAW');
+ if(r.complete)need(b.equals(expected),'complete captured binding RAW');return pin(b);
+}
+function reader(r,request){
+ keys(r,['schema','status','request','rows','accepted_bytes','failure','actual_ancestor_scan','native_statx_attestation','process_or_startup_observation','source_acceptance','operation_permission']);
+ need(r.schema==='p212-s0-ten-field-files-v1','reader schema');same(r.request,request);
+ for(const k of ['actual_ancestor_scan','native_statx_attestation','process_or_startup_observation','source_acceptance','operation_permission'])need(r[k]===false,'reader nonclaim');
+ need(Array.isArray(r.rows)&&r.rows.length>=1&&r.rows.length<=8&&uint(r.accepted_bytes),'finite reader rows');
+ let accepted=0,total=0,present=0,absent=0,failed=0;const body_pins=[];
+ for(let i=0;i<r.rows.length;i++){
+  const a=r.rows[i],e=ENTRIES[i];keys(a,['id','path','role','state',...SF,'fd','bytes_read','eof','content','raw_hex','close_succeeded','error','close_error']);
+  need(a.id===e.id&&a.path===e.path&&a.role===e.role,'exact ordered candidate');
+  need([null,'present','absent'].includes(a.state)&&uint(a.bytes_read)&&typeof a.eof==='boolean'&&[null,true,false].includes(a.close_succeeded)&&(a.fd===null||uint(a.fd)),'row scalars');
+  const b=hex(a.raw_hex,e.max_bytes+1);body_pins.push({id:e.id,...pin(b)});need(b.length===a.bytes_read,'row read body');total+=b.length;need(total<=102760449,'one global sentinel');
+  for(const f of SF)if(a[f]!==null)stat(a[f]);if(a.content!==null)content(a.content,b);
+  if(a.state==='absent'){
+   need(e.optional,'optional only ENOENT');same(a.error,{operation:'lstat',code:'ENOENT'});
+   need(SF.every(f=>a[f]===null)&&a.fd===null&&a.bytes_read===0&&a.eof===false&&a.content===null&&a.close_succeeded===null&&a.close_error===null,'absence no invented key');absent++;
+  }else{
+   if(a.error!==null)err(a.error,'row');if(a.close_error!==null)err(a.close_error,'close');
+   need(a.close_succeeded===false?(a.close_error!==null):(a.close_error===null),'close error coherence');
+   if(a.fd===null)need(a.close_succeeded===null&&a.fstat_before===null&&a.fstat_after===null&&a.bytes_read===0&&!a.eof&&a.content===null,'unopened row');
+   else need(a.state==='present'&&a.lstat_before!==null&&a.close_succeeded!==null,'opened row');
+   if(a.state===null)need(a.lstat_before===null&&a.error!==null,'failed initial lstat');
+   if(a.state==='present')need(a.lstat_before!==null,'present stat');
+   if(a.error===null&&a.close_error===null){
+    need(a.state==='present'&&a.fd!==null&&a.eof&&a.close_succeeded===true&&b.length<=e.max_bytes,'successful present row');
+    for(const f of SF){regular(a[f]);same(a[f],a.lstat_before);}content(a.content,b);need(BigInt(a.lstat_before.size)===BigInt(b.length),'present complete size');present++;
+   }else{failed++;need(i===r.rows.length-1,'stop at first failure');
+    same(r.failure,{id:e.id,path:e.path,error:a.close_error??a.error});}
+  }
+  if(!failed)accepted+=a.bytes_read;
+ }
+ need(r.accepted_bytes===accepted&&accepted<=102760448,'accepted count excludes failed row');
+ if(failed){need(r.status==='FAILED_PARTIAL_PRESERVED'&&failed===1,'reader failure status');}
+ else need(r.rows.length===8&&r.failure===null&&r.status==='OBSERVED_ROOT_RECEPTION_PENDING','complete eight results');
+ return {rows:r.rows.length,present,absent,failed,accepted_bytes:accepted,retained_read_bytes:total,body_pins};
+}
+// native frames are external root-received DATA projections, pinned in full by
+// the authenticated evidence buffer. originals retain complete request/return
+// bytes; this function never claims a projection authenticates its own origin.
+function native(n){
+ keys(n,['frames','originals','final_exit_code','settled','continuations','initial_session_id']);
+ need(n.settled===true&&Array.isArray(n.frames)&&n.frames.length>0&&n.frames.length<=1024&&Array.isArray(n.originals)&&n.originals.length===n.frames.length,'complete native ledger');
+ need(n.continuations===n.frames.length-1,'continuation census');
+ let session=null;
+ for(let i=0;i<n.frames.length;i++){
+  const f=n.frames[i];keys(f,['request','result']);keys(f.request,['tool','arguments']);
+  const o=n.originals[i];keys(o,['request_hex','request_pin','result_hex','result_pin']);
+  content(o.request_pin,hex(o.request_hex,8388608));content(o.result_pin,hex(o.result_hex,8388608));
+  if(i===0)same(f.request,{tool:'exec_command',arguments:{cmd:CAPTURE,workdir:'/root/autodl-tmp/symbolic_dynamics',shell:'/bin/bash',login:false,tty:false,yield_time_ms:1000,max_output_tokens:4000}});
+  else same(f.request,{tool:'write_stdin',arguments:{session_id:session,chars:'',yield_time_ms:10000,max_output_tokens:4000}});
+  const z=f.result;need(object(z)&&Object.keys(z).every(k=>['chunk_id','exit_code','original_token_count','output','session_id','wall_time_seconds'].includes(k)),'native return fields');
+  need(typeof z.output==='string'&&typeof z.wall_time_seconds==='number'&&Number.isFinite(z.wall_time_seconds)&&z.wall_time_seconds>=0,'actual native return');
+  need(z.output==='','no native control output success');
+  if(Object.hasOwn(z,'chunk_id'))need(typeof z.chunk_id==='string','native chunk');
+  if(Object.hasOwn(z,'original_token_count'))need(uint(z.original_token_count),'native token count');
+  if(i<n.frames.length-1){need(!Object.hasOwn(z,'exit_code')&&uint(z.session_id),'running actual session');if(session===null)session=z.session_id;else need(z.session_id===session,'same actual session');}
+  else need(!Object.hasOwn(z,'session_id')&&Number.isInteger(z.exit_code)&&z.exit_code===n.final_exit_code,'actual final no handle');
+ }
+ need(n.initial_session_id===session,'exact initial handle or null');return n.final_exit_code;
+}
+/** Caller supplies Buffers only. trustedEvidencePin is a separately authenticated
+ * root DATA receipt's pin, never obtained from evidenceRaw itself or the envelope.
+ * The entire evidence (including original/projection binding) must first have
+ * independent root reception. This is ordinary trust, NOT runtime attestation.
+ */
+export function receiveData(stdout,stderr,evidenceRaw,trustedEvidencePin){
+ const retained={stdout,stderr,evidence_raw:evidenceRaw};
+ try{
+  need(Buffer.isBuffer(stdout)&&Buffer.isBuffer(stderr)&&Buffer.isBuffer(evidenceRaw),'only received byte buffers');
+  need(stdout.length<=268435456&&stderr.length<=8388608,'DATA intake caps; oversize preserved outside grammar');
+  content(trustedEvidencePin,evidenceRaw);
+  const p=decode(evidenceRaw,16777216); // Native timing numbers need not be integers.
+  keys(p,['schema','root_original_projection_reception','sources','binding','grant','stdout','stderr','native']);
+  need(p.schema==='p212-eight-file-authenticated-data-context-v1','context schema');ref(p.root_original_projection_reception);
+  need(Array.isArray(p.sources)&&p.sources.length===2,'exact source roles');
+  for(let i=0;i<2;i++){
+   const s=p.sources[i],[role,source,destination,bytes,sha256]=SOURCES[i];
+   keys(s,['role','source','destination','raw_hex','source_key','destination_key']);need(s.role===role&&s.source===source&&s.destination===destination,'finite source provenance');
+   const b=hex(s.raw_hex,bytes);content({bytes,sha256},b);whole(s.source_key,b,source);whole(s.destination_key,b,destination);
+  }
+  keys(p.binding,['role','source','destination','raw_hex','before_key','after_key']);need(p.binding.role==='binding'&&p.binding.source===BIND&&p.binding.destination===BIND,'binding DATA role');
+  const binding=hex(p.binding.raw_hex,65536);whole(p.binding.before_key,binding,BIND);whole(p.binding.after_key,binding,BIND);same(p.binding.before_key,p.binding.after_key);
+  keys(p.grant,['reference','raw_hex','key','consumed_before_submission','remaining_uses','fresh_distinct_from_two_consumed_grants']);ref(p.grant.reference);
+  const grant=hex(p.grant.raw_hex,1048576);content(p.grant.reference.pin,grant);whole(p.grant.key,grant,p.grant.reference.path);
+  need(p.grant.consumed_before_submission===true&&p.grant.remaining_uses===0&&p.grant.fresh_distinct_from_two_consumed_grants===true,'externally received consumed fresh grant');
+  const request=decode(binding,65536);bound(request,p.grant.reference);
+  for(const [name,b,path] of [['stdout',stdout,RAW+'stdout.canonical.json'],['stderr',stderr,RAW+'stderr.raw']]){
+   const x=p[name];keys(x,['role','source','destination','closed_key']);need(x.role===name&&x.source===path&&x.destination===path,'literal closed raw roles');whole(x.closed_key,b,path);
+   need(x.closed_key.lstat_before.nlink==='1','single link capture');
+  }
+  need(p.stdout.closed_key.lstat_before.dev!==p.stderr.closed_key.lstat_before.dev||p.stdout.closed_key.lstat_before.ino!==p.stderr.closed_key.lstat_before.ino,'distinct raw files');
+  const exit=native(p.native),e=decode(stdout,268435456,true);
+  keys(e,['schema','status','request_input','reader_called','reader_returned','reader_result','entry_failure','source_acceptance','operation_permission','installed_closure','directory_observation','elf_interpretation','tool_vectors_invoked']);
+  need(e.schema==='p212-eight-file-captured-result-v1'&&typeof e.reader_called==='boolean'&&typeof e.reader_returned==='boolean','envelope schema');
+  for(const k of ['source_acceptance','operation_permission','installed_closure','directory_observation','elf_interpretation','tool_vectors_invoked'])need(e[k]===false,'envelope nonclaim');
+  need(!e.reader_returned||e.reader_called,'returned implies called');need(e.reader_returned===(e.reader_result!==null),'returned result exact');
+  const request_input_pin=input(e.request_input,binding,e.reader_returned);
+  if(e.request_input.complete)for(const f of SF)same(e.request_input[f],p.binding.before_key[f]);
+  let counts=null;if(e.reader_returned)counts=reader(e.reader_result,request);
+  if(e.status==='FAILED_ENTRY_OR_UNRETURNED_READER'){
+   keys(e.entry_failure,['phase','error']);need(['output_descriptor_validation','bound_request_load','exact_eight_file_request_validation','single_finite_file_reader_call','serialize_complete_returned_result'].includes(e.entry_failure.phase),'failure phase');err(e.entry_failure.error);need(exit===79,'entry failure native');
+  }else{
+   need(e.reader_called&&e.reader_returned&&e.entry_failure===null&&e.status===e.reader_result.status,'normal complete return');
+   // Native 79 may preserve a complete envelope but signals later entry/close failure.
+   need(exit===(e.status==='OBSERVED_ROOT_RECEPTION_PENDING'?0:78)||exit===79,'native status mapping');
+  }
+  const ok=exit===0&&stderr.length===0&&e.status==='OBSERVED_ROOT_RECEPTION_PENDING';
+  return {status:ok?'RECEIVED_EIGHT_FILE_DATA_ONLY':'RECEIVED_FAILURE_DATA_HOLD',counts,request_input_pin,envelope:e,evidence:p,retained,
+   stdout_pin:pin(stdout),stderr_pin:pin(stderr),operation_permission:false,installed_closure:false,external_status:'HOLD_EXTERNAL'};
+ }catch(error){return {status:'HOLD_UNACCEPTED_RAW_PRESERVED',reason:String(error.message),retained,operation_permission:false,installed_closure:false,external_status:'HOLD_EXTERNAL'};}
+}

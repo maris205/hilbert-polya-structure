@@ -1,0 +1,36 @@
+"use strict";
+// Root original-data/audit intake; source-observed host paths never become I/O operands.
+const fs=require("fs"),crypto=require("crypto"),assert=require("assert/strict");
+const A="docs/papers211_215_sequence/qa/p213_minimal_observer_probe_audit01/",R="docs/papers211_215_sequence/qa/p213_minimal_observer_probe_reception_root01/";
+const io=require("../p213_minimal_observer_probe_audit01/DOCUMENTARY_IO.cjs");
+const an=["ACCEPTANCE.json","BASELINE_NATIVE.json","CHECKER_DELTA01.md","CHECK_DOCUMENTARY.cjs","CHECK_DOCUMENTARY_DELTA01.cjs","CHECK_NEGATIVE.cjs","CHECK_RUNTIME.cjs","CLOSE.cjs","CLOSING_NATIVE.json","CONTINUED_READS_NATIVE.json","DOCUMENTARY_DELTA01_NATIVE.json","DOCUMENTARY_IO.cjs","DOCUMENTARY_NATIVE.json","FINAL_READS_NATIVE.json","FINDINGS.json","HANDOFF.md","INSPECT_DATA.cjs","KEY_INPUTS.cjs","LOSSLESS_JSON.cjs","NEGATIVE_NATIVE.json","PLAN.md","READS_NATIVE.json","READ_SCOPE.md","REPORT.md","RUNTIME_DATA_CHECK.cjs","RUNTIME_NATIVE.json","STRUCTURE_NATIVE.json"];
+const rn=["CHECK_ROOT.cjs","ROOT_READS_NATIVE.json","ROOT_REPLAYS_NATIVE.json"];
+const paths=[...io.documents,...io.rawFiles,...[...an,"SHA256SUMS"].map(n=>A+n),...rn.map(n=>R+n)],allow=new Set(paths),keys=new Map(),bodies=new Map(),pairs=[];
+let checks=0;const eq=(x,y,m)=>{checks++;assert.deepStrictEqual(x,y,m)},ok=(x,m)=>{checks++;assert(x,m)},sha=b=>crypto.createHash("sha256").update(b).digest("hex");
+function physical(path){ok(allow.has(path),"explicit finite documentary/raw operand");const s=fs.lstatSync(path,{bigint:true});ok(s.isFile()&&s.nlink===1n&&s.size<=16000000n,"bounded regular one-link input");const fd=fs.openSync(path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);let b;try{eq(io.md(fs.fstatSync(fd,{bigint:true})),io.md(s));b=fs.readFileSync(fd);eq(io.md(fs.fstatSync(fd,{bigint:true})),io.md(s))}finally{fs.closeSync(fd)}eq(io.md(fs.lstatSync(path,{bigint:true})),io.md(s));eq(BigInt(b.length),s.size);return{raw:b,key:{path,bytes:b.length,sha256:sha(b),metadata:io.md(s)}}}
+for(const p of paths){const x=physical(p);bodies.set(p,x.raw);keys.set(p,x.key)}
+const raw=p=>{ok(allow.has(p));return bodies.get(p)},json=p=>JSON.parse(raw(p)),native=e=>e.native||e.result;
+function settled(v){eq(v.exit_code,0);ok(!v.session_id&&typeof v.output==="string");ok(!v.output.startsWith("Warning: truncated output"))}
+function pair(label,a,b){eq(a,b,label);pairs.push({label,bytes:b.length,sha256:sha(b)})}
+eq(fs.readdirSync(A).sort(),[...an,"SHA256SUMS"].sort(),"complete independent27payload28file inventory");
+eq(sha(raw(A+"SHA256SUMS")),"8e0e4bae4c145b2a6deea8d1b3ae40075a2931ba5d01691fe1d56268e32024db");
+pair("exact independent nonself manifest",raw(A+"SHA256SUMS"),Buffer.from(an.map(n=>sha(raw(A+n))+"  "+n+"\n").join("")));
+const baseline=native(json(A+"BASELINE_NATIVE.json"));settled(baseline);const base=JSON.parse(baseline.output);eq(base.keys.length,51);
+function compareFull(k,hasLeaf=true){const now=keys.get(k.path);ok(now);eq(k,{path:now.path,sha256:now.sha256,bytes:now.bytes,metadata:now.metadata,fd_before:now.metadata,fd_after:now.metadata,path_end:now.metadata,full_eof:true,...(hasLeaf?{leaf_links:[]}:{})},"all exact13 metadata/fd/path/fullbytekey fields")}
+for(const k of base.keys)compareFull(k);
+const closeNative=native(json(A+"CLOSING_NATIVE.json"));settled(closeNative);eq(closeNative.chunk_id,"244426");const close=JSON.parse(closeNative.output);eq([close.checks,close.inputKeys,close.ownPreclosePayloads],[220,51,26]);for(const k of close.ownKeys)compareFull(k,false);
+eq(io.captureDirectory(),base.capture_before,"authorized raw directory thirteen-field key unchanged");
+const roles=["runtime","documentary","negative","close"],files=["RUNTIME_NATIVE.json","DOCUMENTARY_DELTA01_NATIVE.json","NEGATIVE_NATIVE.json","CLOSING_NATIVE.json"],programs=["CHECK_RUNTIME.cjs","CHECK_DOCUMENTARY_DELTA01.cjs","CHECK_NEGATIVE.cjs","CLOSE.cjs"],chunks=["c13f78","bf8b7f","377d39","244426"],replays=json(R+"ROOT_REPLAYS_NATIVE.json").records;
+eq(replays.map(x=>x.role),roles);
+for(let i=0;i<4;i++){const old=native(json(A+files[i])),r=replays[i];settled(old);settled(r.result);eq(old.chunk_id,chunks[i]);eq(r.request.cmd,"node "+A+programs[i]);pair("actual root "+roles[i]+" replay equals complete original stdout",Buffer.from(r.result.output),Buffer.from(old.output))}
+const runtime=JSON.parse(native(json(A+"RUNTIME_NATIVE.json")).output),documentary=JSON.parse(native(json(A+"DOCUMENTARY_DELTA01_NATIVE.json")).output),negative=JSON.parse(native(json(A+"NEGATIVE_NATIVE.json")).output);
+eq([runtime.result.checks,runtime.result.moduleRows,runtime.result.statFields,runtime.result.mapRows,runtime.result.completeFiles,runtime.result.absentFiles,runtime.result.sourceComparisons],[21411,214,3430,163,68,1,50]);
+eq(runtime.result.totalFileReadBytes,"15202293");eq([runtime.parser.integers,runtime.parser.unsafeIntegers,runtime.parser.objects],[4591,696,934]);
+for(const k of [runtime.raw_key,runtime.stderr_key,runtime.source_key,runtime.binding_key])compareFull(k);
+eq([documentary.checks,documentary.wholeInputKeys,documentary.oldKeyComparisons],[533,51,45]);eq([negative.negativeControls,negative.parserPositiveControls],[27,3]);ok(negative.controls.every(v=>v.rejected===true));
+for(const rec of json(R+"ROOT_READS_NATIVE.json").records){const {request,result}=rec;if(request.cmd.startsWith("cat ")){settled(result);const pp=request.cmd.slice(4).split(" ");ok(pp.every(p=>allow.has(p)));pair("complete root documentary read "+result.chunk_id,Buffer.from(result.output),Buffer.concat(pp.map(raw)))}else{eq(result.exit_code,1);eq(request.cmd,"diff -u "+A+"CHECK_DOCUMENTARY.cjs "+A+"CHECK_DOCUMENTARY_DELTA01.cjs");const original=json(A+"CONTINUED_READS_NATIVE.json").records.find(r=>native(r).chunk_id==="a95c4e");ok(original);eq(native(original).exit_code,1);pair("complete three-hunk actual documentary source diff",Buffer.from(result.output),Buffer.from(native(original).output))}}
+const f=json(A+"FINDINGS.json"),acc=json(A+"ACCEPTANCE.json");eq(f.blocking_findings,[]);eq(f.retained_issues.map(v=>v.id),["P213-RAW-PRECISION","RECIPIENT-MANIFEST-ORDER-01"]);eq(acc.verdict,"ACCEPT_ONE_RECORDED_P213_PROBE_DATA_UNDER_EXPLICIT_TRUST_LIMITS");eq(acc.root_reception_pending,true);
+for(const flag of ["authority_granted_here","observer_retry_or_target_recrawl","future_process_key","science_or_build_authority","P212_birthtime_statx_ABI_closure","manuscript_review_or_completion","batch_count_change"])eq(acc[flag],false);
+const failed=native(json(A+"DOCUMENTARY_NATIVE.json"));eq(failed.exit_code,1);eq(failed.chunk_id,"15e888");ok(failed.output.includes("manifest sorted names"));
+for(const[p,k]of keys){const x=physical(p);eq(x.key,k,"all closing full keys");eq(x.raw,bodies.get(p),"all closing full raw bytes")}
+process.stdout.write(JSON.stringify({scope:"ROOT_RECEPTION_OF_ONE_ORIGINAL_P213_PROBE_DATA_AND_INDEPENDENT_AUDIT",checks,input_keys:51,independent_payloads:27,independent_files:28,document_keys:keys.size,keys:[...keys.values()],raw_pairs:pairs.length,raw_bytes:pairs.reduce((n,p)=>n+p.bytes,0),pairs,observed_runtime_targets_recrawled:false,observer_retried:false,source_reading_reused_from_accepted_root:true,strict_provenance_or_future_process_authority:false},null,2)+"\n");

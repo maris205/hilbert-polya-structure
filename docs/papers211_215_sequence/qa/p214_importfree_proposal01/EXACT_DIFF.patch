@@ -1,0 +1,156 @@
+--- a/verify.py
++++ b/verify.py
+@@ -6,7 +6,6 @@
+ It must not be run until a separate source reception and runtime grant exist.
+ """
+ 
+-import json
+ import sys
+ 
+ 
+@@ -16,6 +15,59 @@
+ PARAMETERS = tuple((q, m) for q in Q_VALUES for m in M_VALUES)
+ 
+ 
++def wire_string(value):
++    """ASCII JSON string spelling; includes DEL and lone surrogates."""
++    escapes = {34: '\\"', 92: '\\\\', 8: '\\b', 12: '\\f',
++               10: '\\n', 13: '\\r', 9: '\\t'}
++    pieces = ['"']
++    for character in value:
++        code = ord(character)
++        if code in escapes:
++            pieces.append(escapes[code])
++        elif 0x20 <= code <= 0x7e:
++            pieces.append(character)
++        elif code <= 0xffff:
++            pieces.append("\\u" + format(code, "04x"))
++        else:
++            offset = code - 0x10000
++            pieces.append("\\u" + format(0xd800 + (offset >> 10), "04x")
++                          + "\\u" + format(0xdc00 + (offset & 0x3ff), "04x"))
++    pieces.append('"')
++    return "".join(pieces)
++
++
++def wire(value, active=None):
++    """Compact sorted-key JSON on P214's exact builtin-only value domain."""
++    if value is None:
++        return "null"
++    if value is True:
++        return "true"
++    if value is False:
++        return "false"
++    kind = type(value)
++    if kind is int:
++        return str(value)
++    if kind is str:
++        return wire_string(value)
++    if kind not in (list, tuple, dict):
++        raise TypeError("P214 JSON value is outside the proved source domain")
++    if active is None:
++        active = set()
++    marker = id(value)
++    if marker in active:
++        raise ValueError("Circular reference detected")
++    active.add(marker)
++    try:
++        if kind is dict:
++            if any(type(key) is not str for key in value):
++                raise TypeError("P214 JSON object keys must be exact strings")
++            return "{" + ",".join(wire_string(key) + ":" + wire(value[key], active)
++                                  for key in sorted(value)) + "}"
++        return "[" + ",".join(wire(item, active) for item in value) + "]"
++    finally:
++        active.remove(marker)
++
++
+ class VerificationMismatch(Exception):
+     def __init__(self, scope, name, actual, expected):
+         self.detail = {"scope": scope, "check": name,
+@@ -38,8 +90,7 @@
+     def emit(self, kind, **payload):
+         record = {"schema_version": SCHEMA_VERSION, "kind": kind}
+         record.update(payload)
+-        sys.stdout.write(json.dumps(record, ensure_ascii=True, sort_keys=True,
+-                                    separators=(",", ":"), allow_nan=False))
++        sys.stdout.write(wire(record))
+         sys.stdout.write("\n")
+         self.record_counts[kind] = self.record_counts.get(kind, 0) + 1
+ 
+--- a/OUTPUT_PLAN.md
++++ b/OUTPUT_PLAN.md
+@@ -24,14 +24,15 @@
+ 
+ ## Dependencies and I/O boundary
+ 
+-The source is standalone Python 3.8-or-later code, using only explicit
+-`import json` and `import sys`, plus Python builtins. It imports no local
+-project module, third-party package, optional accelerator, or data file.
+-`json` and its runtime-selected dependencies, the Python executable,
+-standard-library implementation, startup/import machinery and any enabled
+-native JSON accelerator remain ordinary runtime dependencies. Their actual
+-resolved inventory has not been discovered, pinned, or accepted here.
+-Naming two imports is not a claim that only two runtime files are involved.
++The source is standalone Python 3.8-or-later code with the sole explicit
++`import sys`, plus Python builtins. Its local `wire`/`wire_string` helpers
++encode the proved P214 value domain without importing json or another codec.
++It imports no local project module, third-party package, optional accelerator,
++or data file. sys retains the existing argv/stdout/exit behavior unchanged.
++The interpreter, startup machinery, sys implementation, stdout configuration
++and other selected runtime dependencies still require separate binding.
++Removing the json dependency is not a claim that the current runtime or
++any prior 19-role dependency key has already been accepted for this source.
+ 
+ The program does not call open, inspect cwd, read stdin, query environment
+ variables, load PARAMETERS.json/schema, create directories, start subprocesses,
+@@ -134,8 +135,10 @@
+ The expected counts are 1 run_start, 3 field, 9 carrier, 9 adapter, 5271 state,
+ 5271 target, 45 depth_row, 27 fibre_row, 9 carrier_complete, 1 run_complete:
+ 10646 records. These are unobserved protocol expectations. Every successful
+-record is serialized with Python json using sorted keys, compact separators,
+-ASCII escaping, disallowed NaN/Infinity and one newline. All numeric scientific
++record is serialized by the local builtin-only encoder using sorted string
++keys, compact separators, exact ensure_ascii spelling and one newline. The
++proved value domain has no floats or NaN/Infinity; outside-domain values are
++rejected rather than assigned a new scientific encoding. All numeric scientific
+ values are integers; no floats, timestamps, PIDs, paths, host names or hash
+ summaries enter the successful stream. Lists follow the declared order.
+ 
+--- a/verification/SOURCE_STATUS.md
++++ b/verification/SOURCE_STATUS.md
+@@ -19,8 +19,10 @@
+ and runtime authorization remain separate gates. No PASS or numerical result
+ is claimed by the files' existence.
+ 
+-The implementation uses explicit json/sys imports and Python builtins; it has
+-no third-party or local-module dependency and reads no external input files.
++The implementation uses the sole explicit sys import and Python builtins;
++local wire/wire_string helpers replace the json dependency on the proved
++output domain. The existing argv/stdout/exit control is unchanged. It has no
++third-party or local-module dependency and reads no external input files.
+ Actual interpreter/import/startup dependencies remain undiscovered and must
+ be bound under a separately accepted ordinary-runtime policy. Full details,
+ failure behavior and the prospective complete-output role are in
+--- a/sections/0_abstract.tex
++++ b/sections/0_abstract.tex
+@@ -7,7 +7,8 @@
+ coordinatewise linear-clock argument does not suffice. After separating the
+ two parity chains, the other register gives the sharp deadline even in the
+ cancellation case. Consequently zero is the unique recurrent state, the
+-maximum depth is $2m-2$, and exactly $q^h$ states have depth at most $h$.
++maximum depth is $2m-2$, and exactly $q^h$ states have depth at most $h$
++for $0\leq h\leq2m-2$.
+ We also evaluate every one-step fibre by an elementary ideal calculation.
+ This inverse mechanism is multiplication under separate input and output
+ translations, not a new inversion method. The clock and depth distribution
+--- a/sections/2_clock.tex
++++ b/sections/2_clock.tex
+@@ -77,7 +77,7 @@
+ \begin{corollary}[Depth census]
+ \label{cor:depth}
+ For every integer $0\leq h\leq2m-2$, exactly $q^h$ states have depth at
+-most $h$. Depth zero has one state, and each depth $h\geq1$ has
++most $h$. Depth zero has one state, and each depth $1\leq h\leq2m-2$ has
+ $(q-1)q^{h-1}$ states.
+ \end{corollary}

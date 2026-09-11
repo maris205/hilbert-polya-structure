@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "node -e 'const fs=require(\"fs\"),c=require(\"crypto\"),d=\"docs/papers211_215_sequence/qa/private_checkpoint03_runtime_source_root01/\";const h=b=>c.createHash(\"sha256\").update(b).digest(\"hex\");const raw=fs.readFileSync(d+\"RESULT02.json\"),r=JSON.parse(raw),n=JSON.parse(fs.readFileSync(d+\"CHECK_NATIVE.json\"));if(!raw.equals(Buffer.from(n.result.output))||n.result.exit_code!==0)throw Error(\"raw native\");for(const k of r.keys){const b=fs.readFileSync(k.path),s=fs.lstatSync(k.path,{bigint:true});if(b.length!==k.bytes||h(b)!==k.sha256)throw Error(\"key \"+k.path);for(const f of Object.keys(k.metadata))if(String(s[f])!==k.metadata[f])throw Error(\"metadata \"+k.path+\" \"+f);}const reads=JSON.parse(fs.readFileSync(d+\"ROOT_READS_NATIVE.json\"));const code=fs.readFileSync(\"docs/papers211_215_sequence/qa/private_checkpoint03_runtime_preparation01/observe.py\",\"utf8\");if(!reads.records.some(x=>(x.actual.result||x.actual).output===code))throw Error(\"final full source native missing\");console.log(JSON.stringify({status:\"ROOT_SOURCE_CLOSING_PASS_NOT_OPERATION\",unchanged_whole_keys:r.keys.length,raw_result_native_equal:true,actual_final_full_source_read:true,selected_root_native_returns:reads.records.length,source_sha256:h(Buffer.from(code)),observer_invocations:0}));'",
+    "max_output_tokens": 1500
+  },
+  "result": {
+    "chunk_id": "d02b1f",
+    "wall_time_seconds": 0.000003401,
+    "exit_code": 0,
+    "original_token_count": 72,
+    "output": "{\"status\":\"ROOT_SOURCE_CLOSING_PASS_NOT_OPERATION\",\"unchanged_whole_keys\":34,\"raw_result_native_equal\":true,\"actual_final_full_source_read\":true,\"selected_root_native_returns\":8,\"source_sha256\":\"6e9acbfa3461b67f337d3eb013506b5840e7e11fc54670a50e992a39de6fe036\",\"observer_invocations\":0}\n"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "verdict": "HOLD_V1_SOURCE",
+  "critical": 0,
+  "major": 1,
+  "minor": 1,
+  "open": 2,
+  "findings": [
+    {
+      "id": "ELF-S1",
+      "severity": "Major",
+      "status": "OPEN",
+      "location": "decode.proposed.mjs.txt elf() dynamic table setup",
+      "problem": "PT_DYNAMIC bytes are read at p_offset without requiring p_vaddr to translate uniquely to that same file-backed PT_LOAD span or filesz<=memsz. An inconsistent/unbacked table can be labelled structurally_decoded and contribute names unrelated to the memory dynamic table.",
+      "required_delta": "Before interpreting tags, reject filesz>memsz and require fileAt(d.vaddr,d.filesz,d.span)===d.offset.",
+      "evidence": "Static source deduction; no synthetic or actual body execution. glibc2.35 dl-load.c PT_DYNAMIC records p_vaddr and p_memsz; rtld.c main PT_DYNAMIC uses mapped p_vaddr."
+    },
+    {
+      "id": "CACHE-S2",
+      "severity": "Minor",
+      "status": "OPEN",
+      "location": "decode.proposed.mjs.txt cache() same-name filter",
+      "problem": "An unmatched cache name is continued before hwcap extension/index validation. An unmatched extension-marked row with no section or an invalid index is skipped, contrary to the contract's all-row malformed-structure checking claim.",
+      "required_delta": "Validate every row's extension presence/index/string before emission filter, preserving candidate-only output.",
+      "evidence": "Static control-flow witness; no actual cache or synthetic case was parsed."
+    }
+  ],
+  "operation_permission": false,
+  "installed_closure": false,
+  "external_status": "HOLD_EXTERNAL"
+}

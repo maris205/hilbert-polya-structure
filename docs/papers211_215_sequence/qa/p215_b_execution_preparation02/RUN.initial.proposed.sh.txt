@@ -1,0 +1,68 @@
+#!/bin/bash
+# SOURCE-ONLY PROPOSAL. Requires root reception, runtime binding and a separate one-use grant.
+set -euo pipefail
+[[ "$#" == 1 && "$1" == "--execute-under-separate-root-grant" ]] || exit 78
+umask 077
+cd /root/autodl-tmp/symbolic_dynamics
+P215_B_PREP=docs/papers211_215_sequence/qa/p215_b_execution_preparation02
+P215_B_SOURCE=docs/papers211_215_sequence/reviews/p215_b/verify.cjs
+P215_B_PINS=docs/papers211_215_sequence/reviews/p215_b/INPUT_PINS.sha256
+P215_B_PACKAGE=docs/papers211_215_sequence/reviews/p215_b/SHA256SUMS
+P215_B_OUT=docs/papers211_215_sequence/qa/p215_b_initial_run01
+[[ -f "$P215_B_SOURCE" && ! -L "$P215_B_SOURCE" ]]
+[[ -f "$P215_B_PINS" && ! -L "$P215_B_PINS" ]]
+[[ -f "$P215_B_PACKAGE" && ! -L "$P215_B_PACKAGE" ]]
+[[ ! -e "$P215_B_OUT" && ! -L "$P215_B_OUT" ]]
+/usr/bin/sha256sum -c --strict "$P215_B_PREP/INPUTS.sha256"
+/usr/bin/sha256sum -c --strict "$P215_B_PREP/RUNTIME_BINARIES.sha256"
+(cd "$P215_B_PREP" && /usr/bin/sha256sum -c --strict SHA256SUMS)
+/usr/bin/sha256sum -c --strict "$P215_B_PINS"
+(cd docs/papers211_215_sequence/reviews/p215_b && /usr/bin/sha256sum -c --strict SHA256SUMS)
+/usr/bin/mkdir -m 700 -- "$P215_B_OUT"
+set -C
+exec 3>&1 4>&2
+exec > "$P215_B_OUT/controller.stdout.raw" 2> "$P215_B_OUT/controller.stderr.raw"
+p215_b_finish() {
+  p215_b_controller_status=$?
+  trap - EXIT
+  printf '%s\n' "$p215_b_controller_status" > "$P215_B_OUT/controller.exit"
+  printf 'P215_B_CAPTURE_EXIT=%s\n' "$p215_b_controller_status" >&3
+  exit "$p215_b_controller_status"
+}
+trap p215_b_finish EXIT
+/usr/bin/sha256sum -c --strict "$P215_B_PREP/INPUTS.sha256" > "$P215_B_OUT/preparation.before.stdout" 2> "$P215_B_OUT/preparation.before.stderr"
+/usr/bin/sha256sum -c --strict "$P215_B_PREP/RUNTIME_BINARIES.sha256" > "$P215_B_OUT/runtime.before.stdout" 2> "$P215_B_OUT/runtime.before.stderr"
+(cd "$P215_B_PREP" && /usr/bin/sha256sum -c --strict SHA256SUMS) > "$P215_B_OUT/preparation_package.before.stdout" 2> "$P215_B_OUT/preparation_package.before.stderr"
+/usr/bin/sha256sum -c --strict "$P215_B_PINS" > "$P215_B_OUT/inputs.before.stdout" 2> "$P215_B_OUT/inputs.before.stderr"
+(cd docs/papers211_215_sequence/reviews/p215_b && /usr/bin/sha256sum -c --strict SHA256SUMS) > "$P215_B_OUT/package.before.stdout" 2> "$P215_B_OUT/package.before.stderr"
+set +e
+/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C TZ=UTC \
+  /usr/bin/node "$P215_B_SOURCE" < /dev/null 3>&- 4>&- \
+  > "$P215_B_OUT/stdout.raw" 2> "$P215_B_OUT/stderr.raw"
+P215_B_NODE_STATUS=$?
+set -e
+printf '%s\n' "$P215_B_NODE_STATUS" > "$P215_B_OUT/node.exit"
+/usr/bin/sha256sum -c --strict "$P215_B_PREP/INPUTS.sha256" > "$P215_B_OUT/preparation.after.stdout" 2> "$P215_B_OUT/preparation.after.stderr"
+/usr/bin/sha256sum -c --strict "$P215_B_PREP/RUNTIME_BINARIES.sha256" > "$P215_B_OUT/runtime.after.stdout" 2> "$P215_B_OUT/runtime.after.stderr"
+(cd "$P215_B_PREP" && /usr/bin/sha256sum -c --strict SHA256SUMS) > "$P215_B_OUT/preparation_package.after.stdout" 2> "$P215_B_OUT/preparation_package.after.stderr"
+/usr/bin/sha256sum -c --strict "$P215_B_PINS" > "$P215_B_OUT/inputs.after.stdout" 2> "$P215_B_OUT/inputs.after.stderr"
+(cd docs/papers211_215_sequence/reviews/p215_b && /usr/bin/sha256sum -c --strict SHA256SUMS) \
+  > "$P215_B_OUT/package.after.stdout" 2> "$P215_B_OUT/package.after.stderr"
+/usr/bin/cmp -s "$P215_B_OUT/preparation.before.stdout" "$P215_B_OUT/preparation.after.stdout"
+/usr/bin/cmp -s "$P215_B_OUT/preparation.before.stderr" "$P215_B_OUT/preparation.after.stderr"
+/usr/bin/cmp -s "$P215_B_OUT/runtime.before.stdout" "$P215_B_OUT/runtime.after.stdout"
+/usr/bin/cmp -s "$P215_B_OUT/runtime.before.stderr" "$P215_B_OUT/runtime.after.stderr"
+/usr/bin/cmp -s "$P215_B_OUT/preparation_package.before.stdout" "$P215_B_OUT/preparation_package.after.stdout"
+/usr/bin/cmp -s "$P215_B_OUT/preparation_package.before.stderr" "$P215_B_OUT/preparation_package.after.stderr"
+/usr/bin/cmp -s "$P215_B_OUT/inputs.before.stdout" "$P215_B_OUT/inputs.after.stdout"
+/usr/bin/cmp -s "$P215_B_OUT/inputs.before.stderr" "$P215_B_OUT/inputs.after.stderr"
+/usr/bin/cmp -s "$P215_B_OUT/package.before.stdout" "$P215_B_OUT/package.after.stdout"
+/usr/bin/cmp -s "$P215_B_OUT/package.before.stderr" "$P215_B_OUT/package.after.stderr"
+/usr/bin/sha256sum -- "$P215_B_OUT/stdout.raw" "$P215_B_OUT/stderr.raw" \
+  "$P215_B_OUT/node.exit" > "$P215_B_OUT/OUTPUTS.sha256"
+[[ "$P215_B_NODE_STATUS" == 0 ]] || exit "$P215_B_NODE_STATUS"
+[[ -s "$P215_B_OUT/stdout.raw" ]]
+[[ ! -s "$P215_B_OUT/stderr.raw" ]]
+[[ "$(/usr/bin/grep -c '^' "$P215_B_OUT/stdout.raw")" == 34 ]]
+/usr/bin/tail -n 1 -- "$P215_B_OUT/stdout.raw" | /usr/bin/grep -qx 'PASS'
+printf '%s\n' 'P215_B_INITIAL_CAPTURE_COMPLETE_PENDING_DATA_RECEPTION'

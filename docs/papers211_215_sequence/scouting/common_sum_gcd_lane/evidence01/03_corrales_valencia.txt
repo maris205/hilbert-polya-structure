@@ -1,0 +1,15569 @@
+Arithmetical structures on graphs
+// Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+    // Pre-apply spinout-banner dismissal here, before the banner paints, so it
+    // never flashes in only to be hidden later by the deferred arxiv-header.js.
+    // Key matches arxiv-header.js: "arxiv-banner-dismissed:" + data-banner-name.
+    if (localStorage.getItem('arxiv-banner-dismissed:spinout-nonprofit')) {
+      document.documentElement.setAttribute("data-banner-dismissed", "");
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+/* Banner pre-dismissal (set above before paint -> no flash-then-hide) and
+     reading-mode chrome hiding. */
+  html[data-banner-dismissed] .ds-announcement { display: none; }
+  html[data-reading-mode="enabled"] .ds-announcement,
+  html[data-reading-mode="enabled"] .ds-site-footer { display: none; }
+  /* Keep the announcement text dark on the Open-Blue band in both colour themes
+     (otherwise it inherits the paper's warm-wash text in dark mode and washes out). */
+  .ds-announcement-text { color: var(--arxiv-ink, #1c1a17); }
+Report GitHub Issue
+×
+Title:
+Content selection saved. Describe the issue below:
+Description:
+Submit without GitHub
+Submit in GitHub
+arXiv is now an independent nonprofit!
+Learn more
+×
+Back to arXiv
+Why HTML?
+Report Issue
+Back to Abstract
+Download PDF
+Abstract.
+1
+Introduction
+2
+M
+M
+-matrices
+3
+arithmetical graphs and almost non-singular
+M
+M
+-matrices
+4
+arithmetical structures on the graph obtained by merging and splitting vertices
+5
+arithmetical structures on the clique–star transform of a graph
+6
+Applications: arithmetical structures on paths and cycles
+6.1
+arithmetical structures on a path
+6.2
+arithmetical structures on the cycle
+6.3
+arithmetical structures on the subdivision of a graph
+References
+License: arXiv.org perpetual non-exclusive license
+arXiv:1604.02502v3 [math.CO] 13 Jun 2017
+Arithmetical structures on graphs
+Thanks:
+The second author was partially supported by SNI
+Hugo Corrales
+Email address, H.  Corrales :
+hhcorrales@gmail.com
+and
+Carlos E. Valencia
+Email address, C.  Valencia :
+cvalencia@math.cinvestav.edu.mx, cvalencia75@gmail.com
+Address:
+Departamento de
+Matemáticas
+Centro de Investigación y de Estudios Avanzados del IPN
+Apartado Postal 14–740
+07000 Mexico City, D.F.
+Abstract.
+Arithmetical structures on a graph were introduced by Lorenzini in
+[
+9
+]
+as some intersection matrices that arise in the study
+of degenerating curves in algebraic geometry.
+In this article we study these arithmetical structures, in particular we are interested in the arithmetical structures on complete graphs, paths, and cycles.
+We begin by looking at the arithmetical structures on a multidigraph from the general perspective of
+M
+M
+-matrices.
+As an application, we recover the result of Lorenzini about the finiteness of the number of arithmetical structures on a graph.
+We give a description on the arithmetical structures on the graph obtained
+by merging and splitting a vertex of a graph in terms of its arithmetical structures.
+On the other hand, we give a description of the arithmetical structures on the clique–star transform of a graph,
+which generalizes the subdivision of a graph.
+As an application of this result we obtain an explicit description of all the arithmetical structures on the paths and cycles
+and we show that the number of the arithmetical structures on a path is a Catalan number.
+Key words and phrases:
+arithmetical structures,
+M
+M
+-matrices, edge subdivision, path, cycle, Catalan number, splitting vertices, merging vertices, delta-wye transformation, clique–star transformation.
+2010 Mathematics Subject Classification
+Primary 11D72, 15B48; Secondary 05C50, 05C76, 11D45, 11B83, 05E99, 11D68, 11C20.
+1.
+Introduction
+Given a loopless multidigraph
+G
+=
+(
+V
+,
+E
+)
+G=(V,E)
+, its
+generalized Laplacian matrix
+is given by
+L
+​
+(
+G
+,
+X
+G
+)
+u
+,
+v
+=
+{
+−
+m
+u
+,
+v
+if
+​
+u
+≠
+v
+,
+x
+u
+if
+​
+u
+=
+v
+,
+L(G,X_{G})_{u,v}=\begin{cases}-m_{u,v}&\textrm{if }u\neq v,\\
+x_{u}&\textrm{if }u=v,\end{cases}
+where
+m
+u
+,
+v
+m_{u,v}
+is the number of arcs between
+u
+u
+and
+v
+v
+and
+X
+G
+=
+{
+x
+v
+|
+v
+∈
+V
+}
+X_{G}=\{x_{v}|v\in V\}
+is a finite set of variables indexed by the vertices of
+G
+G
+.
+This generalized Laplacian matrix was introduced in
+[
+4
+]
+and is very similar to the corresponding concept introduced by Godsil and Royle in
+[
+7
+, Section 13.9]
+.
+For any
+𝐝
+∈
+ℤ
+V
+{\bf d}\in\mathbb{Z}^{V}
+, let
+L
+⁡
+(
+G
+,
+𝐝
+)
+L(G,{\bf d})
+be the integral matrix that results by making
+x
+u
+=
+𝐝
+u
+x_{u}={\bf d}_{u}
+on
+L
+⁡
+(
+G
+,
+X
+G
+)
+L(G,X_{G})
+,
+which is called the Laplacian matrix of
+G
+G
+and
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+.
+Clearly, the
+adjacency matrix
+of
+G
+G
+is equal to
+−
+L
+⁡
+(
+G
+,
+𝟎
+)
+-L(G,{\bf 0})
+and their
+Laplacian matrix
+is equal to
+L
+⁡
+(
+G
+,
+𝐝𝐞𝐠
+G
+)
+L(G,{\bf deg}_{G})
+, where
+𝐝𝐞𝐠
+G
+{\bf deg}_{G}
+is the out degree vector of
+G
+G
+.
+The Laplacian matrix of a graph is very important in spectral graph theory and in general in algebraic graph theory,
+see for instance
+[
+7
+]
+and the references therein.
+The Laplacian matrices with which we work here essentially correspond to integral matrices with non-positive entries off the diagonal.
+Some combinatorial properties of a multidigraph
+G
+G
+are coded in its Laplacian matrix.
+For instance,
+G
+G
+is said to be
+strongly connected
+if for any two vertices
+u
+,
+v
+∈
+V
+u,v\in V
+there exists a directed path from
+u
+u
+to
+v
+v
+.
+It is well known that
+G
+G
+is strongly connected if and only if
+L
+⁡
+(
+G
+,
+𝐝𝐞𝐠
+G
+)
+L(G,{\bf deg}_{G})
+is an irreducible matrix, see for instance
+[
+7
+]
+.
+Recall that a square matrix
+A
+A
+is called reducible if there exists a permutation matrix
+P
+P
+such that
+P
+​
+A
+​
+P
+t
+=
+(
+A
+1
+∗
+0
+A
+2
+)
+PAP^{t}=\left(\begin{array}[]{cc}A_{1}&*\\
+0&A_{2}\end{array}\right)
+for some square matrices
+A
+1
+A_{1}
+and
+A
+2
+A_{2}
+.
+Moreover, is not difficult to check that
+G
+G
+is strongly connected if and only if
+L
+⁡
+(
+G
+,
+𝐝
+)
+L(G,{\bf d})
+is an irreducible matrix for any vector
+𝐝
+{\bf d}
+in
+ℤ
+V
+\mathbb{Z}^{V}
+.
+Now, we define the main object of this article.
+An
+arithmetical graph
+is a triplet
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+given by a multidigraph
+G
+G
+and a pair of vectors
+(
+𝐝
+,
+𝐫
+)
+∈
+ℕ
++
+V
+×
+ℕ
++
+V
+({\bf d},{\bf r})\in\mathbb{N}_{+}^{V}\times\mathbb{N}_{+}^{V}
+such that
+gcd
+⁡
+(
+𝐫
+v
+|
+v
+∈
+V
+⁡
+(
+G
+)
+)
+=
+1
+\mathrm{gcd}({\bf r}_{v}\,|\,v\in V(G))=1
+and
+L
+⁡
+(
+G
+,
+𝐝
+)
+​
+𝐫
+t
+=
+𝟎
+t
+.
+L(G,{\bf d}){\bf r}^{t}={\bf 0}^{t}.
+Note that we impose the condition that all the entries of
+𝐝
+{\bf d}
+and
+𝐫
+{\bf r}
+are positive. Given an arithmetical graph
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+, we say that the pair
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is an
+arithmetical structure
+on
+G
+G
+.
+This concept was introduced by Lorenzini in
+[
+9
+]
+as some intersection matrices that arise in
+the study of degenerating curves in algebraic geometry, see for instance
+[
+10
+]
+for a geometric point of view.
+Any simple graph
+H
+H
+has an arithmetical structure, given by
+(
+𝐝
+,
+𝐫
+)
+=
+(
+𝐝𝐞𝐠
+𝐇
+,
+𝟏
+)
+({\bf d},{\bf r})=(\bf{deg}_{H},{\bf 1})
+,
+which we call the Laplacian arithmetical structure on
+H
+H
+.
+For the rest of this article, unless otherwise specified, it will be understood that a graph is a multidigraph.
+One of the main results given in
+[
+9
+]
+is that the number of arithmetical structures on a simple connected graph is finite.
+Theorem
+(Lemma 1.6
+[
+9
+]
+)
+.
+There exist only finitely many arithmetical structures on any connected simple graph.
+Since the number of arithmetical structures on a graph is finite, is natural to ask about its possible descriptions.
+Consider
+𝒜
+⁡
+(
+G
+)
+=
+{
+(
+𝐝
+,
+𝐫
+)
+∈
+ℕ
++
+V
+⁡
+(
+G
+)
+×
+ℕ
++
+V
+⁡
+(
+G
+)
+|
+(
+𝐝
+,
+𝐫
+)
+​
+be an arithmetical structure on
+​
+G
+}
+.
+\mathcal{A}(G)=\{({\bf d},{\bf r})\in\mathbb{N}_{+}^{V(G)}\times\mathbb{N}_{+}^{V(G)}\,|\,({\bf d},{\bf r})\textrm{ be an arithmetical structure on }G\}.
+Given
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+G
+)
+({\bf d},{\bf r})\in\mathcal{A}(G)
+, let
+K
+⁡
+(
+G
+,
+𝐝
+,
+𝐫
+)
+=
+ker
+⁡
+(
+𝐫
+t
+)
+/
+Im
+​
+L
+​
+(
+G
+,
+𝐝
+)
+t
+K(G,{\bf d},{\bf r})=\mathrm{ker}({\bf r}^{t})/\mathrm{Im}\,L(G,{\bf d})^{t}
+be the critical group of
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+, which generalizes the concept of critical group of
+G
+G
+introduced in
+[
+1
+]
+.
+In a similar way as for the critical group of
+G
+G
+(the cokernel of
+L
+⁡
+(
+G
+)
+L(G)
+), this definition of critical group
+is closely related to the critical ideals (the determinantal ideals associated to the generalized Laplacian matrix) of
+G
+G
+,
+see
+[
+4
+]
+for a precise definition of critical ideals.
+Even more, by
+[
+4
+, Propositions
+3.6
+3.6
+and
+3.7
+3.7
+]
+, we can recover the critical group of
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+as an evaluation of the critical ideals of
+G
+G
+.
+Additionally, in general, given an integer matrix
+M
+M
+, its critical group
+K
+⁡
+(
+M
+)
+K(M)
+is defined as the torsion part of its cokernel.
+The main objective of this paper is to study the arithmetical structures on a multidigraph. Firstly, in Section
+2
+, we connect the Laplacian matrix obtained from an arithmetical structure of a graph with
+M
+M
+-matrices.
+The subject of
+M
+M
+-matrices is of considerable interest in mathematics with applications to numerical analysis,
+probability, economics, operations research, etc., see
+[
+2
+]
+and the references therein.
+More precisely, we introduce a new class of
+M
+M
+-matrices, called the almost non-singular
+M
+M
+-matrices
+(
+all its proper principal minors are positive and its determinant is non-negative
+), and we prove that any
+Laplacian matrix obtained from an arithmetical structure belongs to this class.
+After that, given a non-negative integral
+n
+×
+n
+n\times n
+matrix
+B
+B
+and
+α
+≥
+0
+\alpha\geq 0
+, we introduce the set
+𝒜
+α
+​
+(
+B
+)
+=
+{
+𝐝
+∈
+ℕ
++
+n
+|
+A
+=
+diag
+⁡
+(
+𝐝
+)
+−
+B
+​
+is an
+​
+M
+​
+-matrix and
+​
+det
+​
+(
+A
+)
+=
+α
+}
+\mathcal{A}_{\alpha}(B)=\{{\bf d}\in\mathbb{N}_{+}^{n}\,|\,A=\rm{diag}({\bf d})-B\text{ is an }M\text{-matrix and }\rm{det}(A)=\alpha\}
+which is a generalization of the set of arithmetical structures on a graph.
+The main result of Section
+2
+proves that
+𝒜
+α
+​
+(
+B
+)
+\mathcal{A}_{\alpha}(B)
+is finite for any
+α
+>
+0
+\alpha>0
+.
+Theorem
+2.5
+If
+B
+B
+is a non-negative integral matrix, then
+𝒜
+α
+​
+(
+B
+)
+\mathcal{A}_{\alpha}(B)
+is finite for any
+α
+>
+0
+\alpha>0
+.
+In Section
+3
+we present the relation between
+M
+M
+-matrices and arithmetical graphs.
+We give some basic properties of the Laplacian matrix associated to an arithmetical graph
+and we characterize when a
+Z
+Z
+-matrix (a matrix with all its off-diagonal entries non-positive) is an irreducible almost non-singular
+M
+M
+-matrix.
+Theorem
+3.2
+Let
+M
+M
+be a
+Z
+Z
+-matrix.
+If there exists
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+such that
+M
+​
+𝐫
+t
+=
+𝟎
+t
+M{\bf r}^{t}={\bf 0}^{t}
+, then
+M
+M
+is an
+M
+M
+-matrix.
+Moreover,
+M
+M
+is an almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+if and only if
+M
+M
+is irreducible and there exists
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+such that
+M
+​
+𝐫
+t
+=
+𝟎
+t
+M{\bf r}^{t}={\bf 0}^{t}
+.
+Using this result we generalize the finiteness result of Lorenzini.
+Theorem
+3.7
+If
+M
+M
+is a non-negative matrix with all the diagonal entries equal to zero, then
+𝒜
+⁡
+(
+M
+)
+≠
+∅
+\mathcal{A}(M)\neq\emptyset
+.
+Furthermore,
+𝒜
+⁡
+(
+M
+)
+\mathcal{A}(M)
+is finite if and only if
+M
+M
+is irreducible.
+We finish this section by given some arithmetical structures on the cone of a graph.
+In Section
+4
+we present a way to construct arithmetical structures for the graphs obtained by merging and splitting vertices.
+Given a graph
+G
+G
+and vertices
+u
+u
+and
+u
+′
+u^{\prime}
+, let
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+m(G,u,u^{\prime})
+be the graph obtained by merging the vertices
+u
+u
+and
+u
+′
+u^{\prime}
+into a new vertex
+w
+w
+.
+Theorem
+4.1
+If
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+is an arithmetical graph such that
+𝐫
+u
+=
+𝐫
+u
+′
+{\bf r}_{u}={\bf r}_{u^{\prime}}
+for some
+u
+,
+u
+′
+∈
+V
+⁡
+(
+G
+)
+u,u^{\prime}\in V(G)
+, then
+m
+⁡
+(
+𝐝
+,
+𝐫
+)
+=
+(
+m
+⁡
+(
+𝐝
+)
+,
+m
+⁡
+(
+𝐫
+)
+)
+m({\bf d},{\bf r})=(m({\bf d}),m({\bf r}))
+is an arithmetical structure of
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+m(G,u,u^{\prime})
+, where
+m
+​
+(
+𝐝
+)
+v
+=
+{
+𝐝
+u
++
+𝐝
+u
+′
+if
+​
+v
+=
+w
+,
+𝐝
+v
+otherwise
+m({\bf d})_{v}=\begin{cases}{\bf d}_{u}+{\bf d}_{u^{\prime}}&\text{ if }v=w,\\
+{\bf d}_{v}&\text{ otherwise}\end{cases}
+and
+m
+⁡
+(
+𝐫
+)
+∈
+ℕ
+V
+⁡
+(
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+)
+m({\bf r})\in\mathbb{N}^{V(m(G,u,u^{\prime}))}
+is given by
+m
+​
+(
+𝐫
+)
+v
+=
+𝐫
+v
+m({\bf r})_{v}={\bf r}_{v}
+for all
+v
+∈
+V
+⁡
+(
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+)
+v\in V(m(G,u,u^{\prime}))
+and
+w
+w
+is the vertex obtained by merging the vertices
+u
+u
+and
+u
+′
+u^{\prime}
+.
+Given a graph
+G
+G
+, a vertex
+u
+u
+of
+G
+G
+, and
+A
+⊊
+N
+G
+​
+(
+u
+)
+A\subsetneq N_{G}(u)
+, let
+s
+⁡
+(
+G
+,
+u
+,
+A
+)
+s(G,u,A)
+be the graph obtained by splitting the vertex
+u
+u
+into two vertices
+w
+w
+and
+w
+′
+w^{\prime}
+with neighborhoods
+A
+A
+and
+N
+G
+​
+(
+u
+)
+−
+A
+N_{G}(u)-A
+.
+Theorem
+4.2
+If
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+is an arithmetical graph such that
+𝐫
+u
+|
+∑
+a
+∈
+A
+𝐫
+a
+​
+for some
+​
+A
+⊊
+N
+G
+​
+(
+u
+)
+​
+and
+​
+u
+∈
+V
+⁡
+(
+G
+)
+,
+{\bf r}_{u}\big|\sum_{a\in A}{\bf r}_{a}\text{ for some }A\subsetneq N_{G}(u)\text{ and }u\in V(G),
+then
+s
+⁡
+(
+𝐝
+,
+𝐫
+)
+=
+(
+s
+⁡
+(
+𝐝
+)
+,
+s
+⁡
+(
+𝐫
+)
+)
+s({\bf d},{\bf r})=(s({\bf d}),s({\bf r}))
+is an arithmetical structure of
+s
+⁡
+(
+G
+,
+u
+,
+A
+)
+s(G,u,A)
+, where
+s
+​
+(
+𝐝
+)
+v
+=
+{
+∑
+a
+∈
+A
+𝐫
+a
+𝐫
+u
+if
+​
+v
+=
+w
+,
+∑
+a
+∈
+N
+G
+​
+(
+u
+)
+−
+A
+𝐫
+a
+𝐫
+u
+if
+​
+v
+=
+w
+′
+,
+𝐝
+v
+otherwise
+s({\bf d})_{v}=\begin{cases}\frac{\sum_{a\in A}{\bf r}_{a}}{{\bf r}_{u}}&\text{ if }v=w,\\
+\frac{\sum_{a\in N_{G}(u)-A}{\bf r}_{a}}{{\bf r}_{u}}&\text{ if }v=w^{\prime},\\
+{\bf d}_{v}&\text{ otherwise}\end{cases}
+and
+𝐫
+∈
+ℕ
+V
+⁡
+(
+s
+⁡
+(
+G
+,
+u
+,
+A
+)
+)
+{\bf r}\in\mathbb{N}^{V(s(G,u,A))}
+is given by
+s
+​
+(
+𝐫
+)
+v
+=
+{
+𝐫
+u
+if
+​
+v
+=
+w
+,
+w
+′
+,
+𝐫
+v
+otherwise.
+s({\bf r})_{v}=\begin{cases}{\bf r}_{u}&\text{ if }v=w,w^{\prime},\\
+{\bf r}_{v}&\text{ otherwise.}\end{cases}
+In Section
+5
+the arithmetical structures on the clique–star transform of a graph are studied.
+The clique–star transform
+c
+​
+s
+​
+(
+G
+,
+C
+)
+cs(G,C)
+of
+G
+G
+takes a clique of
+G
+G
+and replace it by a star with a new vertex as center.
+The clique–star transformation generalizes the subdivision of an edge, adding pendant edges and the
+Δ
+−
+Y
+\Delta-Y
+transformation on graphs.
+We establish a relation between the arithmetical structures on
+G
+G
+and
+c
+​
+s
+​
+(
+G
+,
+C
+)
+cs(G,C)
+.
+Theorem
+5.1
+Let
+G
+G
+be a graph,
+C
+C
+be a clique of
+G
+G
+,
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+an arithmetical structure of
+G
+G
+, and
+G
+~
+=
+c
+​
+s
+​
+(
+G
+,
+C
+)
+\tilde{G}=cs(G,C)
+.
+If
+v
+v
+is an arbitrary vertex of
+G
+G
+and
+𝒜
+′
+​
+(
+G
+~
+)
+\mathcal{A}^{\prime}(\tilde{G})
+is the set of arithmetical structures
+(
+𝐝
+′
+,
+𝐫
+′
+)
+({\bf d}^{\prime},{\bf r}^{\prime})
+of
+G
+~
+\tilde{G}
+with
+𝐝
+v
+′
+=
+1
+{\bf d}^{\prime}_{v}=1
+, then
+𝒜
+′
+​
+(
+G
+~
+)
+=
+{
+(
+𝐝
+~
+,
+𝐫
+~
+)
+|
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+G
+)
+}
+,
+\mathcal{A}^{\prime}(\tilde{G})=\{(\tilde{{\bf d}},\tilde{{\bf r}})\,|\,({\bf d},{\bf r})\in\mathcal{A}(G)\},
+where
+𝐝
+~
+u
+=
+c
+​
+s
+​
+(
+𝐝
+,
+C
+)
+u
+=
+{
+𝐝
+u
+if
+​
+u
+∉
+C
+,
+𝐝
+u
++
+1
+if
+​
+u
+∈
+C
+,
+1
+if
+​
+u
+=
+v
+,
+and
+𝐫
+~
+u
+=
+c
+​
+s
+​
+(
+𝐫
+,
+C
+)
+u
+=
+{
+𝐫
+u
+if
+​
+u
+∈
+V
+∑
+u
+∈
+C
+𝐫
+u
+if
+​
+u
+=
+v
+.
+\begin{array}[]{ccc}\tilde{{\bf d}}_{u}=cs({\bf d},C)_{u}=\begin{cases}{\bf d}_{u}&\textrm{ if }u\not\in C,\\
+{\bf d}_{u}+1&\textrm{ if }u\in C,\\
+1&\textrm{ if }u=v,\end{cases}&\quad\textrm{and}&\tilde{{\bf r}}_{u}=cs({\bf r},C)_{u}=\begin{cases}{\bf r}_{u}&\textrm{ if }u\in V\\
+\\
+\displaystyle{\sum_{u\in C}{\bf r}_{u}}&\textrm{ if }u=v.\end{cases}\end{array}
+Moreover, it can be proved that the critical group associated to any arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of
+G
+G
+and the critical group associated to the arithmetical structure obtained from
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+by applying a clique–star transformation are isomorphic.
+Finally, in Section
+6
+we apply the result obtained in Section
+5
+to give explicit descriptions of the arithmetical structures on paths and cycles.
+Theorem
+6.1
+If
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is an arithmetical structure of
+P
+n
+P_{n}
+for
+n
+≥
+3
+n\geq 3
+and
+𝐝
+≠
+(
+1
+,
+2
+,
+…
+,
+2
+,
+1
+)
+{\bf d}\neq(1,2,\ldots,2,1)
+,
+then there exists a non-terminal vertex
+v
+v
+of
+P
+n
+P_{n}
+such that
+𝐝
+v
+=
+1
+​
+and
+​
+𝐝
+u
+>
+1
+​
+for all
+​
+u
+∈
+N
+P
+n
+​
+(
+v
+)
+.
+{\bf d}_{v}=1\text{ and }{\bf d}_{u}>1\text{ for all }u\in N_{P_{n}}(v).
+Moreover, any arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of
+P
+n
+P_{n}
+different from the Laplacian one
+can be obtained from an arithmetical structure of
+P
+n
+−
+1
+P_{n-1}
+by subdividing an edge.
+The number of arithmetical structure of
+P
+n
+P_{n}
+can be calculated.
+Theorem
+6.4
+The number of arithmetical structures on the path
+P
+n
++
+1
+P_{n+1}
+is equal to the Catalan number
+C
+n
+=
+1
+n
++
+1
+​
+(
+2
+​
+n
+n
+)
+.
+C_{n}=\frac{1}{n+1}\binom{2n}{n}.
+Theorem
+6.5
+If
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is an arithmetical structure of
+C
+n
+C_{n}
+for
+n
+≥
+4
+n\geq 4
+and
+𝐝
+≠
+2
+⋅
+𝟏
+{\bf d}\neq 2\cdot{\bf 1}
+,
+then there exists a vertex
+v
+v
+of
+C
+n
+C_{n}
+such that
+𝐝
+v
+=
+1
+​
+and
+​
+𝐝
+u
+>
+1
+​
+for all
+​
+u
+∈
+N
+C
+n
+​
+(
+v
+)
+.
+{\bf d}_{v}=1\text{ and }{\bf d}_{u}>1\text{ for all }u\in N_{C_{n}}(v).
+Moreover, any arithmetical structure of
+C
+n
+C_{n}
+different from
+(
+𝟐
+,
+𝟏
+)
+({\bf 2},{\bf 1})
+can be obtained from an arithmetical structure of
+C
+n
+−
+1
+C_{n-1}
+by subdividing an edge.
+We conclude by posing a conjecture about the number of the arithmetical structures on a graph.
+Conjecture
+6.10
+If
+G
+G
+is a simple connected graph with
+n
+n
+vertices, then
+|
+𝒜
+⁡
+(
+P
+n
+)
+|
+≤
+|
+𝒜
+⁡
+(
+G
+)
+|
+≤
+|
+𝒜
+⁡
+(
+K
+n
+)
+|
+.
+|\mathcal{A}(P_{n})|\leq|\mathcal{A}(G)|\leq|\mathcal{A}(K_{n})|.
+Throughout this paper we use the following partial order over
+ℝ
+V
+\mathbb{R}^{V}
+.
+If
+𝐝
+,
+𝐞
+∈
+ℝ
+V
+\mathbf{d},\mathbf{e}\in\mathbb{R}^{V}
+, then we say that
+𝐝
+≤
+𝐞
+\mathbf{d}\leq\mathbf{e}
+if and only if
+𝐝
+v
+≤
+𝐞
+v
+​
+∀
+v
+∈
+V
+\mathbf{d}_{v}\leq\mathbf{e}_{v}\ \forall\,v\in V
+.
+It is well known that
+≤
+\leq
+is a well partial order over
+ℕ
++
+V
+\mathbb{N}_{+}^{V}
+, which means that every
+infinite sequence of elements on
+ℕ
++
+V
+\mathbb{N}_{+}^{V}
+contains an increasing pair.
+An important equivalent property, know as Dickson’s Lemma (see
+[
+6
+]
+), is that for any
+S
+⊆
+ℕ
++
+V
+S\subseteq\mathbb{N}_{+}^{V}
+the set
+min
+​
+(
+S
+)
+=
+{
+𝐱
+∈
+S
+|
+𝐲
+≰
+𝐱
+​
+∀
+𝐲
+∈
+S
+}
+\textrm{min}(S)=\left\{\mathbf{x}\in S\,\big|\,\mathbf{y}\not\leq\mathbf{x}\ \forall\,\mathbf{y}\in S\right\}
+is finite.
+For
+𝐝
+,
+𝐞
+∈
+ℕ
++
+V
+\mathbf{d},\mathbf{e}\in\mathbb{N}_{+}^{V}
+we say that
+𝐝
+<
+𝐞
+\mathbf{d}<\mathbf{e}
+if and only if
+𝐝
+≤
+𝐞
+\mathbf{d}\leq\mathbf{e}
+and
+𝐝
+≠
+𝐞
+\mathbf{d}\neq\mathbf{e}
+.
+Is important to note that
+𝐝
+<
+𝐞
+\mathbf{d}<\mathbf{e}
+does not mean that
+𝐝
+v
+<
+𝐞
+v
+\mathbf{d}_{v}<\mathbf{e}_{v}
+for all
+v
+∈
+V
+v\in V
+.
+2.
+M
+M
+-matrices
+In this section we recall the classical concept of an
+M
+M
+-matrix and we introduce a new class of
+M
+M
+-matrices
+whose proper principal minors are positive and its determinant is non-negative, which will be called the almost non-singular
+M
+M
+-matrices. After that we prove that
+𝒜
+α
+​
+(
+M
+)
+=
+{
+𝐝
+∈
+ℕ
++
+n
+|
+A
+=
+diag
+⁡
+(
+𝐝
+)
+−
+M
+​
+is an
+​
+M
+​
+-matrix and
+​
+det
+​
+(
+A
+)
+=
+α
+}
+\mathcal{A}_{\alpha}(M)=\{{\bf d}\in\mathbb{N}_{+}^{n}\,|\,A=\rm{diag}({\bf d})-M\text{ is an }M\text{-matrix and }\rm{det}(A)=\alpha\}
+is finite for all
+α
+>
+0
+\alpha>0
+and any non-negative integral
+n
+×
+n
+n\times n
+matrix
+M
+M
+with all the diagonal entries equal to zero, see Theorem
+2.5
+.
+In the following,
+matrix
+always means
+square matrix
+.
+Recall that a real matrix is called non-negative if all its entries are non-negative real numbers.
+A real matrix
+A
+=
+(
+a
+i
+,
+j
+)
+∈
+ℝ
+n
+×
+n
+A=(a_{i,j})\in\mathbb{R}^{n\times n}
+is called a
+Z
+Z
+-matrix if
+a
+i
+,
+j
+≤
+0
+a_{i,j}\leq 0
+for all
+i
+≠
+j
+i\neq j
+.
+The spectral radius
+ρ
+⁡
+(
+M
+)
+\rho(M)
+of a matrix
+M
+M
+is defined by
+ρ
+⁡
+(
+M
+)
+=
+max
+⁡
+{
+|
+λ
+|
+|
+λ
+∈
+σ
+⁡
+(
+M
+)
+}
+,
+\rho(M)=\rm{max}\{|\lambda||\lambda\in\sigma(M)\},
+where
+σ
+⁡
+(
+M
+)
+\sigma(M)
+is the spectrum of
+M
+M
+, that is, the set of complex eigenvalues of
+M
+M
+.
+Definition 2.1
+.
+A
+Z
+Z
+-matrix
+A
+A
+such that
+A
+=
+α
+​
+I
+−
+M
+,
+A=\alpha I-M,
+for some non-negative matrix
+M
+M
+with
+α
+≥
+ρ
+⁡
+(
+M
+)
+\alpha\geq\rho(M)
+is called an
+M
+M
+-matrix.
+The study of
+M
+M
+-matrices can be divided into two major parts:
+non-singular
+M
+M
+-matrices (see
+[
+2
+, Section 6.2]
+) and singular
+M
+M
+-matrices (see
+[
+2
+, Section 6.4]
+).
+A
+Z
+Z
+-matrix is an
+M
+M
+-matrix if and only if all its principal minors are non-negative,
+and is a non-singular
+M
+M
+-matrix if and only if all its principal minors are positive, see
+[
+2
+, Chapter 6]
+.
+M
+M
+-matrices are very important in a broad range of mathematical disciplines.
+The book
+[
+2
+]
+by Berman and Plemmons study non-singular and singular
+M
+M
+-matrices.
+Recently,
+M
+M
+-matrices have been studied in the context of chip-firing games, see
+[
+8
+]
+and the references contained there.
+In this paper we restrict our attention to the following subclass of singular
+M
+M
+-matrices.
+Definition 2.2
+.
+A real matrix
+A
+=
+(
+a
+i
+,
+j
+)
+A=(a_{i,j})
+is called an
+almost non-singular
+M
+M
+-matrix
+if
+A
+A
+is a
+Z
+Z
+-matrix, all its proper principal minors are positive and its determinant is non-negative.
+This definition is motivated by the fact that the Laplacian matrix of a connected arithmetical
+graph is an almost non-singular matrix, see Corollary
+3.6
+.
+A crucial fact about an arithmetical graph is that its asscociated Laplacian matrix is singular of maximal rank.
+In this sense, the class of almost non-singular
+M
+M
+-matrices is in between the class of singular
+M
+M
+-matrices and the non-singular
+M
+M
+-matrices.
+For example, a singular irreducible
+M
+M
+-matrix is an almost non-singular
+M
+M
+-matrix, see
+[
+2
+, Theorem 6.4.16, page 156]
+.
+The class of
+M
+M
+-matrices admit many equivalent definitions, in fact
+[
+2
+]
+lists more than
+80
+80
+ways to characterize
+M
+M
+-matrices as monotone operators on
+ℝ
++
+n
+\mathbb{R}_{+}^{n}
+.
+The class of almost non-singular
+M
+M
+-matrices admit the following characterization, which will play a central role in the sequel.
+Theorem 2.3
+.
+If
+M
+M
+is a real
+Z
+Z
+-matrix, then the following conditions are equivalent:
+(1)
+M
+M
+is an almost non-singular
+M
+M
+-matrix.
+(2)
+M
++
+D
+M+D
+is a non-singular
+M
+M
+-matrix for any diagonal matrix
+D
+⪈
+0
+D\gneq 0
+.
+(3)
+det
+(
+M
+)
+≥
+0
+\det(M)\geq 0
+and
+det
+​
+(
+M
++
+D
+)
+⪈
+det
+​
+(
+M
++
+D
+′
+)
+⪈
+0
+\textrm{det}(M+D)\gneq\textrm{det}(M+D^{\prime})\gneq 0
+for all diagonal matrices
+D
+⪈
+D
+′
+⪈
+0
+D\gneq D^{\prime}\gneq 0
+.
+Proof.
+(1)
+⇒
+\Rightarrow
+(2)
+Given
+1
+≤
+s
+≤
+n
+1\leq s\leq n
+, let
+E
+s
+=
+(
+e
+i
+​
+j
+)
+E_{s}=(e_{ij})
+be the matrix with
+e
+i
+​
+j
+e_{ij}
+equal to
+1
+1
+for
+i
+,
+j
+=
+s
+i,j=s
+and
+0
+0
+otherwise.
+First, we will prove that
+M
+′
+=
+M
++
+d
+⋅
+E
+s
+M^{\prime}=M+d\cdot E_{s}
+is a non-singular
+M
+M
+-matrix for any
+d
+>
+0
+d>0
+.
+That is, we need to prove that all the principal minors of
+M
+′
+M^{\prime}
+are positive.
+Let
+∅
+≠
+I
+⊆
+[
+n
+]
+\emptyset\neq I\subseteq[n]
+.
+If
+s
+∉
+I
+s\not\in I
+, then
+M
+′
+​
+[
+I
+;
+I
+]
+=
+M
+⁡
+[
+I
+;
+I
+]
+>
+0
+M^{\prime}[I;I]=M[I;I]>0
+.
+The last inequality is because
+M
+M
+is an almost non-singular
+M
+M
+-matrix and
+I
+≠
+[
+n
+]
+I\neq[n]
+.
+On the other hand, if
+s
+∈
+I
+s\in I
+, then
+det
+(
+M
+′
+​
+[
+I
+;
+I
+]
+)
+=
+det
+(
+M
+⁡
+[
+I
+;
+I
+]
+)
++
+d
+⋅
+det
+(
+M
+⁡
+[
+I
+∖
+s
+;
+I
+∖
+s
+]
+)
+​
+>
+(
+I
+∖
+s
+≠
+[
+n
+]
+,
+d
+>
+0
+)
+​
+det
+(
+M
+⁡
+[
+I
+;
+I
+]
+)
+≥
+0
+.
+\det(M^{\prime}[I;I])=\det(M[I;I])+d\cdot\det(M[I\setminus s;I\setminus s])\overset{(I\setminus s\neq[n],\,d>0)}{>}\det(M[I;I])\geq 0.
+Finally, since any diagonal matrix
+D
+D
+is equal to
+∑
+i
+=
+1
+n
+d
+i
+⋅
+E
+i
+\sum_{i=1}^{n}d_{i}\cdot E_{i}
+for some
+d
+i
+∈
+ℝ
++
+d_{i}\in\mathbb{R}_{+}
+,
+then the result follows by using the previous case several times.
+(2)
+⇒
+\Rightarrow
+(3)
+We first prove that
+det
+(
+M
+)
+≥
+0
+\det(M)\geq 0
+.
+If we take
+D
+m
+=
+(
+1
+/
+m
+)
+​
+I
+n
+D_{m}=(1/m)I_{n}
+(
+m
+∈
+ℕ
++
+m\in\mathbb{N}_{+}
+), then
+det
+(
+M
++
+D
+m
+)
+>
+0
+\det(M+D_{m})>0
+and so
+lim
+m
+→
+∞
+det
+(
+M
++
+D
+m
+)
+≥
+0
+\lim_{m\rightarrow\infty}\det(M+D_{m})\geq 0
+.
+Since
+lim
+m
+→
+∞
+D
+m
+=
+0
+\lim_{m\rightarrow\infty}D_{m}=0
+and the determinant is a continuous function with respect to the Hilbert–Schmidt norm,
+det
+(
+M
+)
+≥
+0
+\det(M)\geq 0
+.
+Now, let
+D
+⪈
+D
+′
+⪈
+0
+D\gneq D^{\prime}\gneq 0
+be diagonal matrices.
+By hypothesis,
+M
++
+D
+′
+M+D^{\prime}
+is a non-singular
+M
+M
+-matrix and in particular an almost non-singular
+M
+M
+-matrix.
+Following the arguments and notation used to prove (1)
+⇒
+\Rightarrow
+(2) we get that
+M
++
+D
+′
++
+E
+s
+M+D^{\prime}+E_{s}
+is an almost non-singular
+M
+M
+-matrix for any
+1
+≤
+s
+≤
+n
+1\leq s\leq n
+and
+det
+(
+M
++
+D
+′
++
+E
+s
+)
+>
+det
+(
+M
++
+D
+′
+)
+\det(M+D^{\prime}+E_{s})>\det(M+D^{\prime})
+.
+In a similar way, it is not difficult to prove that
+det
+(
+M
++
+D
+′
++
+F
+)
+>
+det
+(
+M
++
+D
+′
+)
+\det(M+D^{\prime}+F)>\det(M+D^{\prime})
+for any diagonal matrix
+F
+>
+0
+F>0
+.
+Now, clearly the result follows by taking
+F
+=
+D
+−
+D
+′
+F=D-D^{\prime}
+.
+On the other hand, let
+F
+=
+D
+−
+D
+′
+⪈
+0
+F=D-D^{\prime}\gneq 0
+, let
+f
+i
+​
+i
+f_{ii}
+be the first non-zero diagonal entry of
+F
+F
+, let
+C
+′
+=
+M
++
+D
+′
+C^{\prime}=M+D^{\prime}
+, and let
+C
+=
+C
+′
++
+F
+C=C^{\prime}+F
+.
+Then, since
+C
+′
+C^{\prime}
+is a non-singular
+M
+M
+-matrix and
+f
+i
+​
+i
+>
+0
+f_{ii}>0
+,
+det
+(
+C
+)
+=
+det
+(
+C
+′
+)
++
+f
+i
+​
+i
+⋅
+det
+(
+C
+⁡
+[
+[
+n
+]
+∖
+i
+,
+[
+n
+]
+∖
+i
+]
+)
+>
+det
+(
+C
+′
+)
+\det(C)=\det(C^{\prime})+f_{ii}\cdot\det(C\big[[n]\setminus i,[n]\setminus i\big])>\det(C^{\prime})
+.
+(3)
+⇒
+\Rightarrow
+(1)
+Let
+f
+:
+ℝ
+n
+→
+ℝ
+f:\mathbb{R}^{n}\rightarrow\mathbb{R}
+be given by
+f
+⁡
+(
+x
+1
+,
+…
+,
+x
+n
+)
+=
+det
+(
+M
++
+diag
+​
+(
+x
+1
+,
+…
+,
+x
+n
+)
+)
+f(x_{1},\ldots,x_{n})=\det(M+\textrm{diag}(x_{1},\ldots,x_{n}))
+.
+By hypothesis
+f
+f
+is a non-negative and increasing function on
+(
+ℝ
++
+∪
+{
+0
+}
+)
+n
+(\mathbb{R}_{+}\cup\{0\})^{n}
+.
+Also it is not difficult to see that
+f
+⁡
+(
+x
+1
+,
+…
+,
+x
+n
+)
+=
+∑
+I
+⊆
+[
+n
+]
+det
+(
+M
+⁡
+[
+I
+;
+I
+]
+)
+​
+x
+I
+c
+,
+f(x_{1},\ldots,x_{n})=\sum_{I\subseteq[n]}\det(M[I;I])x_{I^{c}},
+where
+x
+J
+=
+∏
+j
+∈
+J
+x
+j
+x_{J}=\prod_{j\in J}x_{j}
+for all
+J
+⊆
+[
+n
+]
+J\subseteq[n]
+.
+First we prove that
+M
+M
+is an
+M
+M
+-matrix.
+By
+[
+2
+, Theorem 6.4.6]
+, we only need to prove that
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+≥
+0
+\det(M[J;J])\geq 0
+for each
+J
+⊆
+[
+n
+]
+J\subseteq[n]
+.
+Let
+J
+⊆
+[
+n
+]
+J\subseteq[n]
+.
+If
+J
+=
+[
+n
+]
+J=[n]
+, then
+M
+⁡
+[
+J
+;
+J
+]
+=
+M
+M[J;J]=M
+and thus
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+=
+f
+⁡
+(
+0
+,
+…
+,
+0
+)
+≥
+0
+\det(M[J;J])=f(0,\ldots,0)\geq 0
+.
+If
+J
+=
+[
+n
+]
+∖
+j
+J=[n]\setminus j
+for some
+j
+∈
+[
+n
+]
+j\in[n]
+, then
+M
+⁡
+[
+J
+;
+J
+]
+=
+∂
+f
+/
+∂
+x
+j
+​
+(
+0
+,
+…
+,
+0
+)
+>
+0
+M[J;J]=\partial f/\partial x_{j}(0,\ldots,0)>0
+since
+∂
+f
+/
+∂
+x
+j
+\partial f/\partial x_{j}
+is positive on
+(
+ℝ
++
+∪
+{
+0
+}
+)
+n
+(\mathbb{R}_{+}\cup\{0\})^{n}
+.
+If
+J
+⊊
+[
+n
+]
+∖
+j
+J\subsetneq[n]\setminus j
+for some
+j
+∈
+[
+n
+]
+j\in[n]
+, then let
+a
+i
+=
+x
+a_{i}=x
+for
+i
+∉
+J
+i\not\in J
+and
+a
+i
+=
+0
+a_{i}=0
+for
+i
+∈
+J
+i\in J
+.
+Thus, if
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+<
+0
+\det(M[J;J])<0
+, then the leading coefficient of
+∂
+f
+/
+∂
+x
+⁡
+(
+a
+1
+,
+…
+,
+a
+n
+)
+\partial f/\partial x(a_{1},\ldots,a_{n})
+will be
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+\det(M[J;J])
+,
+which is a contradiction since
+∂
+f
+/
+∂
+x
+i
+\partial f/\partial x_{i}
+is positive on
+(
+ℝ
++
+∪
+{
+0
+}
+)
+n
+(\mathbb{R}_{+}\cup\{0\})^{n}
+.
+Thus,
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+≥
+0
+\det(M[J;J])\geq 0
+.
+Since we already proved that
+det
+(
+M
+)
+≥
+0
+\det(M)\geq 0
+and that
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+>
+0
+\det(M[J;J])>0
+if
+J
+⊆
+[
+n
+]
+J\subseteq[n]
+with
+|
+J
+|
+=
+n
+−
+1
+|J|=n-1
+, then,
+in order to prove (1), we need to show that
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+>
+0
+\det(M[J;J])>0
+for each
+J
+⊆
+[
+n
+]
+J\subseteq[n]
+with
+|
+J
+|
+<
+n
+−
+1
+|J|<n-1
+.
+Let
+J
+⊆
+[
+n
+]
+J\subseteq[n]
+with
+|
+J
+|
+<
+n
+−
+1
+|J|<n-1
+.
+Since
+|
+J
+|
+<
+n
+−
+1
+|J|<n-1
+, there exists
+j
+∈
+[
+n
+]
+j\in[n]
+such that
+J
+⊊
+[
+n
+]
+∖
+j
+J\subsetneq[n]\setminus j
+.
+Let
+I
+=
+[
+n
+]
+∖
+j
+I=[n]\setminus j
+.
+Since
+M
+M
+is an
+M
+M
+-matrix, it follows that
+M
+⁡
+[
+I
+;
+I
+]
+M[I;I]
+is also an
+M
+M
+-matrix.
+But
+det
+(
+M
+⁡
+[
+I
+;
+I
+]
+)
+>
+0
+\det(M[I;I])>0
+since
+|
+I
+|
+=
+n
+−
+1
+|I|=n-1
+.
+This means that
+M
+M
+is a non-singular
+M
+M
+-matrix.
+By
+[
+2
+, Theorem 6.2.3]
+all the principal minors of
+M
+⁡
+[
+I
+;
+I
+]
+M[I;I]
+are positive.
+In particular,
+det
+(
+M
+⁡
+[
+J
+;
+J
+]
+)
+>
+0
+\det(M[J;J])>0
+.
+∎
+Using any algebraic software package, such as
+Sage, Macaulay, Maple
+or
+Mathematica
+, it is not difficult to check when a matrix is an
+M
+M
+-matrix.
+Remark 2.4
+.
+Let
+M
+M
+be a real
+Z
+Z
+-matrix and
+f
+M
+​
+(
+𝐱
+)
+=
+det
+(
+M
++
+diag
+​
+(
+x
+1
+,
+…
+,
+x
+n
+)
+)
+∈
+ℝ
+⁡
+[
+x
+1
+,
+…
+,
+x
+n
+]
+.
+f_{M}({\bf x})=\det(M+\textrm{diag}(x_{1},\ldots,x_{n}))\in\mathbb{R}[x_{1},\ldots,x_{n}].
+Then
+M
+M
+is an
+M
+M
+-matrix (non-singular
+M
+M
+- matrix) if and only if the coefficients of the polynomial
+f
+M
+f_{M}
+are non-negative (positive).
+In a similar way,
+M
+M
+is an almost non-singular
+M
+M
+-matrix if and only if all the coefficients,
+except maybe the constant term, of the polynomial
+f
+M
+f_{M}
+, are positive.
+For example, if
+M
+=
+(
+1
+−
+1
+0
+0
+1
+−
+1
+−
+1
+−
+1
+2
+)
+,
+M=\left(\begin{array}[]{ccc}1&-1&0\\
+0&1&-1\\
+-1&-1&2\end{array}\right),
+then
+f
+M
+​
+(
+𝐱
+)
+=
+x
+1
+​
+x
+2
+​
+x
+3
++
+2
+​
+x
+1
+​
+x
+2
++
+x
+1
+​
+x
+3
++
+x
+2
+​
+x
+3
++
+x
+1
++
+2
+​
+x
+2
++
+x
+3
+f_{M}({\bf x})=x_{1}x_{2}x_{3}+2x_{1}x_{2}+x_{1}x_{3}+x_{2}x_{3}+x_{1}+2x_{2}+x_{3}
+.
+Thus,
+M
+M
+is an almost non-singular matrix
+M
+M
+-matrix, but not a non-singular
+M
+M
+-matrix.
+In this article we are primarily interested in
+M
+M
+-matrices with integral entries.
+Some ideals associated to integral matrices
+(called matrix ideals, which includes Laplacian ideals and lattice ideals as toppling ideals) of several families of matrices like
+Pure Binomial (PB), Critical Binomial (CB), Generalized Critical Binomial (GCB)
+and its variants where all the entries of the matrix are positive (PPB, PCB and GPCB) are studied in
+[
+12
+]
+.
+In our context, PB, PPB, GPCB and PCB matrices correspond to
+Z
+Z
+-matrices, adjacency matrices, Laplacian matrices associated to arithmetical structures
+and Laplacian matrices associated to the Laplacian arithmetical structure of the complete graph, respectively.
+Moreover, irreducible GCB matrices are almost non-singular
+M
+M
+-matrices with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+, see Theorem
+3.2
+.
+Given
+α
+≥
+0
+\alpha\geq 0
+and a non-negative integral
+n
+×
+n
+n\times n
+matrix
+M
+M
+with all the diagonal entries equal to zero, let
+𝒜
+≥
+α
+​
+(
+M
+)
+=
+{
+𝐝
+∈
+ℕ
++
+n
+|
+A
+=
+diag
+⁡
+(
+𝐝
+)
+−
+M
+​
+is an
+​
+M
+​
+-matrix and
+​
+det
+​
+(
+A
+)
+≥
+α
+}
+.
+\mathcal{A}_{\geq\alpha}(M)=\{{\bf d}\in\mathbb{N}_{+}^{n}\,|\,A=\rm{diag}({\bf d})-M\text{ is an }M\text{-matrix and }\rm{det}(A)\geq\alpha\}.
+Also, let
+𝒜
+α
+​
+(
+M
+)
+=
+{
+𝐝
+∈
+𝒜
+≥
+α
+​
+(
+M
+)
+|
+det
+⁡
+(
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+=
+α
+}
+\mathcal{A}_{\alpha}(M)=\{{\bf d}\in\mathcal{A}_{\geq\alpha}(M)\,|\,\rm{det}(\rm{diag}({\bf d})-M)=\alpha\}
+.
+This set is closely related to the set of arithmetical structures on a graph.
+More precisely, it is related to the case when
+M
+M
+is equal to the adjacency matrix of
+G
+G
+and
+α
+=
+0
+\alpha=0
+.
+However, in order to recover the main properties of the arithmetical structures on a graph
+we need to add some extra conditions in order to get the right definition, see Definition
+3.1
+.
+If
+M
+M
+is an almost non-singular
+M
+M
+-matrix, then by Theorem
+2.3
+we have that
+𝒜
+≥
+α
+​
+(
+M
+)
+=
+min
+​
+𝒜
+≥
+α
+​
+(
+M
+)
++
+(
+ℕ
++
+∪
+{
+0
+}
+)
+n
+,
+\mathcal{A}_{\geq\alpha}(M)=\textrm{min}\,\mathcal{A}_{\geq\alpha}(M)+(\mathbb{N}_{+}\cup\{0\})^{n},
+where
+min
+𝒜
+≥
+α
+(
+M
+)
+=
+{
+𝐝
+∈
+𝒜
+≥
+α
+(
+M
+)
+|
+if
+𝐝
+′
+≤
+𝐝
+for some
+𝐝
+′
+∈
+𝒜
+≥
+α
+(
+M
+)
+,
+then
+𝐝
+′
+=
+𝐝
+}
+\textrm{min}\,\mathcal{A}_{\geq\alpha}(M)=\{{\bf d}\in\mathcal{A}_{\geq\alpha}(M)\,|\,\text{ if }{\bf d}^{\prime}\leq{\bf d}\text{ for some }{\bf d}^{\prime}\in\mathcal{A}_{\geq\alpha}(M),\text{ then }{\bf d}^{\prime}={\bf d}\}
+.
+That is,
+𝒜
+≥
+α
+​
+(
+M
+)
+\mathcal{A}_{\geq\alpha}(M)
+is a monoid and infinite.
+However, as the following theorem shows, the set
+𝒜
+α
+​
+(
+M
+)
+\mathcal{A}_{\alpha}(M)
+is finite when
+M
+M
+is a non-negative integral matrix and
+α
+>
+0
+\alpha>0
+.
+Theorem 2.5
+.
+If
+M
+M
+is a non-negative integral matrix, then
+𝒜
+α
+​
+(
+M
+)
+\mathcal{A}_{\alpha}(M)
+is finite for any
+α
+>
+0
+\alpha>0
+.
+Proof.
+We claim that
+𝒜
+α
+​
+(
+M
+)
+⊆
+min
+​
+𝒜
+≥
+α
+​
+(
+M
+)
+\mathcal{A}_{\alpha}(M)\subseteq\textrm{min}\,\mathcal{A}_{\geq\alpha}(M)
+.
+We prove this by contradiction.
+Let
+𝐝
+∈
+𝒜
+α
+​
+(
+M
+)
+\mathbf{d}\in\mathcal{A}_{\alpha}(M)
+and assume that
+𝐝
+∉
+min
+​
+𝒜
+≥
+α
+​
+(
+M
+)
+\mathbf{d}\not\in\textrm{min}\,\mathcal{A}_{\geq\alpha}(M)
+.
+This means that there exists an
+𝐞
+∈
+𝒜
+≥
+α
+​
+(
+M
+)
+\mathbf{e}\in\mathcal{A}_{\geq\alpha}(M)
+such that
+𝐞
+⪇
+𝐝
+\mathbf{e}\lneq\mathbf{d}
+.
+Since
+det
+​
+(
+diag
+⁡
+(
+𝐞
+)
+−
+M
+)
+≥
+α
+>
+0
+\textrm{det}(\rm{diag}(\mathbf{e})-M)\geq\alpha>0
+,
+diag
+⁡
+(
+𝐞
+)
+−
+M
+\rm{diag}(\mathbf{e})-M
+is a non-singular
+M
+M
+-matrix.
+By Theorem
+2.3
+,
+det
+​
+(
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+>
+det
+​
+(
+diag
+⁡
+(
+𝐞
+)
+−
+M
+)
+≥
+α
+\textrm{det}(\rm{diag}(\mathbf{d})-M)>\textrm{det}(\rm{diag}(\mathbf{e})-M)\geq\alpha
+,
+which is a contradiction since
+det
+​
+(
+diag
+​
+(
+𝐝
+)
+−
+M
+)
+=
+α
+\textrm{det}(\rm{diag}(\mathbf{d})-M)=\alpha
+.
+Finally, since
+𝒜
+≥
+α
+​
+(
+M
+)
+⊆
+ℕ
++
+n
+\mathcal{A}_{\geq\alpha}(M)\subseteq\mathbb{N}_{+}^{n}
+, by Dickson’s lemma
+min
+​
+𝒜
+≥
+α
+​
+(
+M
+)
+\textrm{min}\,\mathcal{A}_{\geq\alpha}(M)
+is finite and thus
+𝒜
+α
+​
+(
+M
+)
+\mathcal{A}_{\alpha}(M)
+is also finite.
+∎
+The inclusion
+𝒜
+α
+​
+(
+M
+)
+⊆
+min
+​
+𝒜
+≥
+α
+​
+(
+M
+)
+\mathcal{A}_{\alpha}(M)\subseteq\textrm{min}\,\mathcal{A}_{\geq\alpha}(M)
+in general is not an equality.
+Example 2.6
+.
+If
+M
+=
+(
+0
+1
+1
+1
+0
+1
+0
+1
+0
+)
+,
+M=\left(\begin{array}[]{ccc}0&1&1\\
+1&0&1\\
+0&1&0\end{array}\right),
+then
+𝒜
+6
+​
+(
+M
+)
+=
+{
+(
+3
+,
+2
+,
+2
+)
+t
+,
+(
+2
+,
+2
+,
+3
+)
+t
+}
+\mathcal{A}_{6}(M)=\{(3,2,2)^{t},(2,2,3)^{t}\}
+and
+min
+​
+𝒜
+≥
+6
+​
+(
+M
+)
+=
+{
+(
+3
+,
+2
+,
+2
+)
+t
+,
+(
+2
+,
+3
+,
+2
+)
+t
+,
+(
+2
+,
+2
+,
+3
+)
+t
+}
+\mathrm{min}\,\mathcal{A}_{\geq 6}(M)=\{(3,2,2)^{t},(2,3,2)^{t},(2,2,3)^{t}\}
+.
+The special case of
+𝒜
+α
+​
+(
+M
+)
+\mathcal{A}_{\alpha}(M)
+when
+α
+\alpha
+is equal to zero is more difficult to treat.
+For instance, if
+M
+M
+is reducible, then
+𝒜
+0
+​
+(
+M
+)
+\mathcal{A}_{0}(M)
+can be infinite, as the next example shows.
+In the next section we deal with this special case, see Theorem
+3.7
+.
+Example 2.7
+.
+Let
+M
+=
+(
+0
+0
+1
+0
+1
+0
+1
+1
+1
+0
+0
+0
+1
+1
+1
+0
+)
+.
+M=\left(\begin{array}[]{cccc}0&0&1&0\\
+1&0&1&1\\
+1&0&0&0\\
+1&1&1&0\end{array}\right).
+It is not difficult to check that
+{
+(
+1
+,
+x
+,
+1
+,
+y
+)
+t
+|
+x
+,
+y
+∈
+ℕ
++
+}
+⊊
+𝒜
+0
+(
+M
+)
+\left\{(1,x,1,y)^{t}|x,y\in\mathbb{N}_{+}\right\}\subsetneq\mathcal{A}_{0}(M)
+.
+That is,
+𝒜
+0
+​
+(
+M
+)
+\mathcal{A}_{0}(M)
+is infinite.
+On the other hand, since
+(
+0
+0
+0
+1
+0
+1
+0
+0
+0
+0
+1
+0
+1
+0
+0
+0
+)
+​
+(
+0
+0
+1
+0
+1
+0
+1
+1
+1
+0
+0
+0
+1
+1
+1
+0
+)
+​
+(
+0
+0
+0
+1
+0
+1
+0
+0
+0
+0
+1
+0
+1
+0
+0
+0
+)
+t
+=
+(
+0
+1
+1
+1
+1
+0
+1
+1
+0
+0
+0
+1
+0
+0
+1
+0
+)
+,
+\left(\begin{array}[]{cccc}0&0&0&1\\
+0&1&0&0\\
+0&0&1&0\\
+1&0&0&0\end{array}\right)\left(\begin{array}[]{cccc}0&0&1&0\\
+1&0&1&1\\
+1&0&0&0\\
+1&1&1&0\end{array}\right)\left(\begin{array}[]{cccc}0&0&0&1\\
+0&1&0&0\\
+0&0&1&0\\
+1&0&0&0\end{array}\right)^{t}=\left(\begin{array}[]{cccc}0&1&1&1\\
+1&0&1&1\\
+0&0&0&1\\
+0&0&1&0\end{array}\right),
+then
+M
+M
+is reducible.
+3.
+arithmetical graphs and almost non-singular
+M
+M
+-matrices
+In this section we show that the concept of an almost non-singular
+M
+M
+-matrix generalizes the concept of an arithmetical graph.
+We begin by giving the definition of an arithmetical graph. A key result is the characterization of when an irreducible
+Z
+Z
+-matrix is an almost non-singular
+M
+M
+-matrix.
+More precisely, an irreducible matrix
+M
+M
+is an almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+if and only if there exist
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+such that
+M
+​
+𝐫
+t
+=
+0
+M{\bf r}^{t}=0
+(see Theorem
+3.2
+).
+Using this result, we obtain that
+𝒜
+⁡
+(
+M
+)
+\mathcal{A}(M)
+is finite if and only if
+M
+M
+is irreducible.
+This allows characterizing the multidigraphs that have a finite number of arithmetical structures, see Corollary
+3.8
+.
+Given a graph
+G
+=
+(
+V
+,
+E
+)
+G=(V,E)
+, a pair
+(
+𝐝
+,
+𝐫
+)
+∈
+ℕ
++
+V
+×
+ℕ
++
+V
+({\bf d},{\bf r})\in\mathbb{N}_{+}^{V}\times\mathbb{N}_{+}^{V}
+such that
+gcd
+​
+(
+𝐫
+v
+|
+v
+∈
+V
+)
+=
+1
+\textrm{gcd}({\bf r}_{v}\,|\,v\in V)=1
+and
+L
+⁡
+(
+G
+,
+𝐝
+)
+​
+𝐫
+t
+=
+𝟎
+t
+,
+L(G,{\bf d}){\bf r}^{t}={\bf 0}^{t},
+where
+L
+⁡
+(
+G
+,
+𝐝
+)
+=
+diag
+⁡
+(
+𝐝
+)
+−
+A
+⁡
+(
+G
+)
+L(G,{\bf d})=\mathrm{diag}({\bf d})-A(G)
+, is called an
+arithmetical structure
+of
+G
+G
+.
+Note that we require that all the entries of
+𝐝
+{\bf d}
+and
+𝐫
+{\bf r}
+are necessarily positive integers.
+The matrix
+L
+⁡
+(
+G
+,
+𝐝
+)
+L(G,{\bf d})
+is the Laplacian matrix of the arithmetical graph
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+.
+We say that the triple
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+is an
+arithmetical graph
+.
+Any graph
+G
+G
+has a Laplacian arithmetical structure, given by
+(
+𝐝
+,
+𝐫
+)
+=
+(
+𝐝𝐞𝐠
+𝐆
+,
+𝟏
+)
+({\bf d},{\bf r})=(\bf{deg}_{G},{\bf 1})
+.
+We can generalizes the concept of arithmetical graph to any integer irreducible
+n
+×
+n
+n\times n
+matrix
+M
+M
+such that there exists
+𝐫
+∈
+ℕ
++
+n
+{\bf r}\in\mathbb{N}_{+}^{n}
+with
+M
+​
+𝐫
+t
+=
+𝟎
+t
+M{\bf r}^{t}={\bf 0}^{t}
+.
+Definition 3.1
+.
+Given a non-negative integer
+n
+×
+n
+n\times n
+matrix
+M
+M
+with all the diagonal entries equal to zero, let
+𝒜
+⁡
+(
+M
+)
+=
+{
+(
+𝐝
+,
+𝐫
+)
+∈
+ℕ
++
+n
+×
+ℕ
++
+n
+|
+[
+diag
+⁡
+(
+𝐝
+)
+−
+M
+]
+​
+𝐫
+t
+=
+𝟎
+t
+​
+and
+​
+g
+​
+c
+​
+d
+​
+(
+𝐫
+v
+|
+v
+∈
+V
+)
+=
+1
+}
+.
+\mathcal{A}(M)=\{({\bf d},{\bf r})\in\mathbb{N}_{+}^{n}\times\mathbb{N}_{+}^{n}\,|\,[\mathrm{diag}({\bf d})-M]{\bf r}^{t}={\bf 0}^{t}\text{ and }gcd({\bf r}_{v}\,|\,v\in V)=1\}.
+In a similar way, let
+𝒟
+⁡
+(
+M
+)
+=
+{
+𝐝
+|
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+M
+)
+}
+​
+and
+​
+ℛ
+​
+(
+M
+)
+=
+{
+𝐫
+|
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+M
+)
+}
+\mathcal{D}(M)=\{{\bf d}\,|\,({\bf d},{\bf r})\in\mathcal{A}(M)\}\textrm{ and }\mathcal{R}(M)=\{{\bf r}\,|\,({\bf d},{\bf r})\in\mathcal{A}(M)\}
+.
+Clearly
+𝒜
+⁡
+(
+G
+)
+=
+𝒜
+⁡
+(
+A
+⁡
+(
+G
+)
+)
+\mathcal{A}(G)=\mathcal{A}(A(G))
+.
+If
+M
+M
+is an integer non-negative matrix with diagonal entries not necessarily equal to zero, then
+𝒜
+⁡
+(
+M
+)
+=
+𝒜
+⁡
+(
+M
+−
+diag
+​
+(
+M
+)
+)
++
+diag
+​
+(
+M
+)
+\mathcal{A}(M)=\mathcal{A}\left(M-\textrm{diag}(M)\right)+\textrm{diag}(M)
+,
+therefore it is plausible to assume, without loss of generality, that
+M
+M
+is a non-negative matrix with zero diagonal.
+Theorem 3.2
+.
+Let
+M
+M
+be a
+Z
+Z
+-matrix.
+If there exists
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+such that
+M
+​
+𝐫
+t
+=
+𝟎
+t
+M{\bf r}^{t}={\bf 0}^{t}
+, then
+M
+M
+is an
+M
+M
+-matrix.
+Moreover,
+M
+M
+is an almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+if and only if
+M
+M
+is irreducible and there exists
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+such that
+M
+​
+𝐫
+t
+=
+𝟎
+t
+M{\bf r}^{t}={\bf 0}^{t}
+.
+Proof.
+Let
+M
+′
+=
+M
+​
+diag
+​
+(
+𝐫
+)
+M^{\prime}=M\mathrm{diag}({\bf r})
+.
+It suffices to show that
+M
+′
+M^{\prime}
+is an
+M
+M
+-matrix.
+Since
+M
+′
+​
+𝟏
+=
+0
+M^{\prime}{\bf 1}=0
+, then we can assume without loss of generality that
+𝐫
+=
+1
+{\bf r}=1
+.
+Now, let
+S
+=
+M
+⁡
+[
+I
+,
+I
+]
+S=M[I,I]
+with
+I
+⊂
+[
+n
+]
+I\subset[n]
+.
+For simplicity we can assume without loss of generality that
+I
+=
+[
+s
+]
+I=[s]
+.
+By the Gershgorin circle theorem, we have that each real eigenvalue of
+S
+S
+is contained in
+⋃
+i
+=
+1
+s
+[
+m
+i
+,
+i
+−
+t
+i
+,
+m
+i
+,
+i
++
+t
+i
+]
+\bigcup_{i=1}^{s}[m_{i,i}-t_{i},m_{i,i}+t_{i}]
+where
+t
+i
+=
+∑
+j
+∈
+[
+s
+]
+∖
+i
+|
+m
+i
+,
+j
+|
+t_{i}=\sum_{j\in[s]\setminus i}|m_{i,j}|
+.
+Since
+M
+​
+𝟏
+=
+𝟎
+M{\bf 1}={\bf 0}
+and
+m
+i
+,
+j
+≤
+0
+m_{i,j}\leq 0
+for all
+i
+≠
+j
+i\neq j
+, then
+t
+i
+=
+∑
+j
+∈
+[
+s
+]
+∖
+i
+−
+m
+i
+,
+j
+=
+m
+i
+,
+i
++
+∑
+j
+=
+s
++
+1
+n
+m
+i
+,
+j
+≤
+m
+i
+,
+i
+>
+0
+.
+t_{i}=\sum_{j\in[s]\setminus i}-m_{i,j}=m_{i,i}+\sum_{j=s+1}^{n}m_{i,j}\leq m_{i,i}>0.
+This means that all the real eigenvalues of
+S
+S
+are non-negative.
+Moreover, since
+det
+(
+S
+)
+\det(S)
+is the product of the real eigenvalues of
+S
+S
+and the norms of the non-conjugate complex ones,
+det
+(
+S
+)
+\det(S)
+is non-negative.
+That is, if
+M
+M
+is a
+Z
+Z
+-matrix, and such that there exists
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+such that
+M
+​
+𝐫
+t
+=
+0
+M{\bf r}^{t}=0
+,
+then
+M
+M
+is an
+M
+M
+-matrix, see
+[
+2
+, Theorem
+6.4.6
+​
+(
+A
+1
+)
+6.4.6\,(A_{1})
+, page 149]
+.
+(
+⇐
+)
+(\Leftarrow)
+For this part, it only remains to prove that
+det
+(
+S
+)
+>
+0
+\det(S)>0
+.
+Assume that
+det
+(
+S
+)
+=
+0
+\det(S)=0
+.
+Then there exists a non-zero
+𝐭
+∈
+ℤ
+m
+{\bf t}\in\mathbb{Z}^{m}
+such that
+S
+​
+𝐭
+=
+𝟎
+S{\bf t}={\bf 0}
+.
+Let
+|
+𝐭
+i
+|
+|{\bf t}_{i}|
+be the maximum among
+|
+𝐭
+1
+|
+,
+…
+,
+|
+𝐭
+s
+|
+|{\bf t}_{1}|,\ldots,|{\bf t}_{s}|
+.
+Since
+𝐭
+{\bf t}
+is non-zero,
+|
+𝐭
+i
+|
+>
+0
+|{\bf t}_{i}|>0
+.
+Taking
+𝐭
+′
+=
+1
+𝐭
+i
+​
+𝐭
+{\bf t}^{\prime}=\frac{1}{{\bf t}_{i}}{\bf t}
+, we can assume that
+𝐭
+i
+=
+1
+{\bf t}_{i}=1
+and that
+𝐭
+j
+≤
+1
+{\bf t}_{j}\leq 1
+for each
+j
+=
+1
+,
+…
+,
+s
+j=1,\ldots,s
+.
+Then,
+m
+i
+,
+1
+​
+𝐭
+1
++
+⋯
++
+m
+i
+,
+s
+​
+𝐭
+s
+=
+0
+m_{i,1}{\bf t}_{1}+\cdots+m_{i,s}{\bf t}_{s}=0
+, and since
+𝐭
+i
+=
+1
+{\bf t}_{i}=1
+, we get
+m
+i
+,
+i
+=
+−
+m
+i
+,
+1
+​
+𝐭
+1
+−
+⋯
+−
+m
+i
+,
+i
+−
+1
+​
+𝐭
+i
+−
+1
+−
+m
+i
+,
+i
++
+1
+​
+𝐭
+i
++
+1
+−
+⋯
+−
+m
+i
+,
+s
+​
+𝐭
+s
+.
+m_{i,i}=-m_{i,1}{\bf t}_{1}-\cdots-m_{i,i-1}{\bf t}_{i-1}-m_{i,i+1}{\bf t}_{i+1}-\cdots-m_{i,s}{\bf t}_{s}.
+But, since
+M
+​
+𝟏
+=
+𝟎
+M{\bf 1}={\bf 0}
+, we know that
+m
+i
+,
+i
+=
+−
+m
+i
+,
+1
+−
+⋯
+−
+m
+i
+,
+i
+−
+1
+−
+m
+i
+,
+i
++
+1
+−
+⋯
+−
+m
+i
+,
+n
+m_{i,i}=-m_{i,1}-\cdots-m_{i,i-1}-m_{i,i+1}-\cdots-m_{i,n}
+, and so
+m
+i
+,
+s
++
+1
++
+⋯
++
+m
+i
+,
+n
+=
+(
+𝐭
+1
+−
+1
+)
+​
+m
+i
+,
+1
++
+⋯
++
+(
+𝐭
+i
+−
+1
+−
+1
+)
+​
+m
+i
+,
+i
+−
+1
++
+(
+𝐭
+i
++
+1
+−
+1
+)
+​
+m
+i
+,
+i
++
+1
++
+⋯
++
+(
+𝐭
+s
+−
+1
+)
+​
+m
+i
+,
+s
+.
+m_{i,s+1}+\cdots+m_{i,n}=({\bf t}_{1}-1)m_{i,1}+\cdots+({\bf t}_{i-1}-1)m_{i,i-1}+({\bf t}_{i+1}-1)m_{i,i+1}+\cdots+({\bf t}_{s}-1)m_{i,s}.
+Since
+(
+𝐭
+j
+−
+1
+)
+≤
+0
+({\bf t}_{j}-1)\leq 0
+for each
+j
+=
+1
+,
+…
+,
+s
+j=1,\ldots,s
+and
+m
+i
+,
+j
+≤
+0
+m_{i,j}\leq 0
+for all
+j
+≠
+i
+j\neq i
+,
+in the above expression the right hand side is non-negative and the left hand side is non-positive.
+Thus,
+m
+i
+,
+j
+=
+0
+m_{i,j}=0
+for all
+j
+≠
+i
+j\neq i
+, which is a contradiction to the assumption that
+M
+M
+is irreducible.
+Note that this part there follows
+[
+2
+, Theorem 6.4.16, page 156]
+.
+(
+⇒
+)
+(\Rightarrow)
+First, since
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+, clearly there exists
+0
+≠
+𝐫
+∈
+ℝ
+0\neq{\bf r}\in\mathbb{R}
+such that
+M
+​
+𝐫
+t
+=
+0
+M{\bf r}^{t}=0
+.
+But we need to prove that there exists an
+𝐫
+{\bf r}
+with all its entries positive.
+Let assume that this is not true.
+Since the properties of being a
+Z
+Z
+-matrix, of being an almost non-singular
+M
+M
+-matrix,
+and haing
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+, are invariant under similarity via a permutation matrix (
+M
+′
+=
+P
+​
+M
+​
+P
+t
+M^{\prime}=PMP^{t}
+with
+P
+P
+a permutation matrix),
+we can assume without loss of generality that the first
+0
+<
+s
+<
+n
+0<s<n
+entries of
+𝐫
+{\bf r}
+are less than or equal to zero.
+Note that if
+s
+=
+n
+s=n
+, then
+𝐫
+<
+𝟎
+\bf{r}<0
+and
+M
+​
+(
+−
+𝐫
+)
+t
+=
+0
+M(-{\bf r})^{t}=0
+with
+−
+𝐫
+>
+0
+-{\bf r}>0
+.
+Let
+N
+=
+M
+⁡
+[
+[
+s
+]
+,
+[
+n
+]
+]
+N=M[[s],[n]]
+and decompose
+N
+N
+as
+[
+S
+,
+T
+]
+[S,T]
+where
+S
+=
+M
+⁡
+[
+[
+s
+]
+,
+[
+s
+]
+]
+S=M[[s],[s]]
+, that is,
+N
+N
+is the matrix obtained from the first
+s
+s
+rows of
+M
+M
+and
+S
+S
+is formed by the first
+s
+s
+rows and columns of
+M
+M
+.
+Also, let
+𝐫
+=
+(
+𝐫
+𝟏
+,
+𝐫
+2
+)
+{\bf r}=({\bf r_{1}},{\bf r}_{2})
+where
+𝐫
+1
+{\bf r}_{1}
+is the vector with the first
+s
+s
+entries of
+𝐫
+{\bf r}
+.
+Since
+M
+​
+𝐫
+t
+=
+0
+M{\bf r}^{t}=0
+, then
+N
+​
+𝐫
+=
+0
+N{\bf r}=0
+, that is,
+S
+​
+𝐫
+1
+=
+−
+T
+​
+𝐫
+2
+S{\bf r}_{1}=-T{\bf r}_{2}
+.
+Now, since
+M
+M
+is a
+Z
+Z
+-matrix,
+−
+T
+​
+𝐫
+2
+≥
+0
+-T{\bf r}_{2}\geq 0
+.
+Moreover, since
+M
+M
+is an almost non-singular
+M
+M
+-matrix,
+S
+S
+is a non-singular
+M
+M
+-matrix and by
+[
+2
+, Theorem 6.2.3 (
+N
+39
+N_{39}
+)]
+and the fact that
+𝐫
+1
+≤
+0
+{\bf r}_{1}\leq 0
+,
+𝐫
+1
+=
+0
+{\bf r}_{1}=0
+.
+Therefore
+T
+​
+𝐫
+2
+=
+0
+T{\bf r}_{2}=0
+and since
+𝐫
+≠
+0
+{\bf r}\neq 0
+, then
+T
+=
+0
+T=0
+.
+That is,
+M
+M
+is reducible.
+Now, let
+R
+=
+M
+⁡
+[
+I
+,
+I
+]
+R=M[I,I]
+where
+∅
+≠
+I
+=
+[
+s
++
+1
+,
+…
+,
+n
+]
+\emptyset\neq I=[s+1,\ldots,n]
+, that is,
+S
+S
+and
+R
+R
+are principal blocks of
+M
+M
+.
+Since
+T
+=
+0
+T=0
+,
+det
+⁡
+(
+M
+)
+=
+det
+⁡
+(
+S
+)
+​
+det
+​
+(
+R
+)
+=
+0
+\mathrm{det}(M)=\mathrm{det}(S)\mathrm{det}(R)=0
+; this is a contradiction to the fact that
+M
+M
+is an almost non-singular
+M
+M
+-matrix.
+∎
+A consequence of Theorem
+3.2
+is that
+{
+𝐝
+|
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+M
+)
+}
+⊆
+𝒜
+0
+​
+(
+M
+)
+\{{\bf d}\,|\,({\bf d},{\bf r})\in\mathcal{A}(M)\}\subseteq\mathcal{A}_{0}(M)
+.
+Note that in Theorem
+3.2
+the
+𝐫
+{\bf r}
+can always be chosen as a positive integer with
+gcd
+⁡
+{
+𝐫
+′
+v
+|
+v
+∈
+V
+}
+=
+1
+\gcd\{{\bf r^{\prime}}_{v}|v\in V\}=1
+.
+Here
+𝐫
+{\bf r}
+plays a very important role and has an algebraic meaning.
+More precisely, the existence of
+𝐫
+{\bf r}
+means geometrically that all the rows of
+M
+M
+live in a hyperplane and
+algebraically means that some of the ideals associated with
+M
+M
+are graded or homogeneous, see for instance
+[
+12
+]
+.
+Moreover, some of its associated ideals, such as its matrix ideal, are graded.
+The fact that an ideal is homogeneous is very important in commutative algebra.
+In some sense we can think that almost non-singular irreducible
+M
+M
+-matrices with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+are the graded
+M
+M
+-matrices.
+An immediate consequence of Theorem
+3.2
+is that the Laplacian matrix of a strongly connected
+arithmetical graph is an irreducible almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+L
+⁡
+(
+G
+,
+𝐝
+)
+)
+=
+0
+\mathrm{det}(L(G,{\bf d}))=0
+, see Theorem
+3.6
+.
+Theorem
+3.2
+can be compared with
+[
+12
+, Theorems 6.4, 7.5 and 7.6]
+.
+Another immediate consequence of Theorem
+3.2
+is the following result (see
+[
+12
+, Theorems 6.4 and 7.5]
+):
+Corollary 3.3
+.
+If
+M
+M
+is an irreducible
+Z
+Z
+-matrix, then there exists
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+such that
+M
+​
+𝐫
+t
+=
+0
+M{\bf r}^{t}=0
+if and only if there exists
+𝐬
+>
+𝟎
+{\bf s}>{\bf 0}
+such that
+M
+t
+​
+𝐬
+t
+=
+0
+M^{t}{\bf s}^{t}=0
+.
+Proof.
+This follows from the fact that
+M
+M
+is an irreducible almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+if and only if
+M
+t
+M^{t}
+is an irreducible almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+M
+t
+)
+=
+0
+\mathrm{det}(M^{t})=0
+.
+∎
+Now we will present a way to compute the adjoint matrix of
+M
+M
+as a function of
+𝐫
+{\bf r}
+and
+𝐬
+{\bf s}
+.
+Proposition 3.4
+.
+Let
+M
+M
+be a
+Z
+Z
+-matrix.
+Then
+M
+M
+is an almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+if and only if
+𝐫
+>
+𝟎
+{\bf r}>{\bf 0}
+and
+Adj
+⁡
+(
+M
+)
+=
+|
+K
+⁡
+(
+M
+)
+|
+​
+𝐫
+t
+​
+𝐬
+>
+𝟎
+,
+\mathrm{Adj}(M)=|K(M)|{\bf r}^{t}{\bf s}>{\bf 0},
+where
+ker
+ℚ
+⁡
+(
+M
+)
+=
+⟨
+𝐫
+⟩
+\ker_{\mathbb{Q}}(M)=\langle{\bf r}\rangle
+and
+ker
+ℚ
+⁡
+(
+M
+t
+)
+=
+⟨
+𝐬
+⟩
+\ker_{\mathbb{Q}}(M^{t})=\langle{\bf s}\rangle
+.
+Proof.
+(
+⇒
+)
+(\Rightarrow)
+This follows from Theorem
+3.2
+,
+[
+11
+, Proposition 2.1]
+and the fact that all the proper principal minors of
+M
+M
+are positive.
+(
+⇐
+)
+(\Leftarrow)
+Assume that
+M
+M
+is reducible, that is, there exists a permutation matrix such that
+P
+​
+M
+​
+P
+t
+=
+(
+M
+1
+∗
+0
+M
+2
+)
+.
+PMP^{t}=\left(\begin{array}[]{cc}M_{1}&*\\
+0&M_{2}\end{array}\right).
+Since
+M
+​
+𝐫
+=
+𝟎
+M{\bf r}={\bf 0}
+, then
+det
+⁡
+(
+M
+2
+)
+=
+0
+\mathrm{det}(M_{2})=0
+and therefore the adjoint of
+M
+M
+has at least one entry equal to zero, a contradiction.
+Thus the result follows from Theorem
+3.2
+.
+∎
+Another possible characterization of an almost non-singular
+M
+M
+-matrix is that its
+principal submatrices of maximal size (
+M
+i
+,
+i
+=
+M
+⁡
+[
+i
+c
+,
+i
+c
+]
+M_{i,i}=M[i^{c},i^{c}]
+) are non-singular
+M
+M
+-matrices.
+The converse of this is contained in the following result.
+Proposition 3.5
+.
+If
+M
+M
+is a non-singular
+M
+M
+-matrix, then there exists an irreducible almost non-singular
+M
+M
+-matrix
+M
+′
+M^{\prime}
+with
+det
+⁡
+(
+M
+′
+)
+=
+0
+\mathrm{det}(M^{\prime})=0
+such that
+M
+1
+,
+1
+′
+=
+M
+M^{\prime}_{1,1}=M
+.
+Proof.
+Since
+M
+M
+is a non-singular
+M
+M
+-matrix, there exists a real vector
+𝐫
+>
+0
+{\bf r}>0
+such that
+M
+​
+𝐫
+>
+0
+M{\bf r}>0
+, see for instance
+[
+2
+, page 136 (
+I
+27
+I_{27}
+)]
+.
+Moreover, since
+M
+M
+is integral, we can asume that
+𝐫
+{\bf r}
+is integral.
+Now, let
+𝐚
+=
+M
+​
+𝐫
+>
+0
+{\bf a}=M{\bf r}>0
+,
+𝐫
+′
+=
+(
+1
+,
+𝐫
+)
+{\bf r}^{\prime}=(1,{\bf r})
+and
+M
+′
+=
+(
+𝐫
+​
+M
+t
+​
+𝐫
+t
+−
+𝐚
+t
+−
+𝐚
+M
+)
+.
+M^{\prime}=\left(\begin{array}[]{cc}{\bf r}M^{t}{\bf r}^{t}&-{\bf a}^{t}\\
+-{\bf a}&M\\
+\end{array}\right).
+It is not difficult to check that
+M
+′
+​
+𝐫
+′
+=
+0
+M^{\prime}{\bf r}^{\prime}=0
+.
+Since the underlying graph of
+M
+′
+M^{\prime}
+is the cone of the underlying graph of
+M
+M
+,
+M
+′
+M^{\prime}
+is irreducible and the result follows by Theorem
+3.2
+.
+∎
+That is, any non-singular
+M
+M
+-matrix can be extended to an almost non-singular irreducible
+M
+M
+-matrix with
+det
+⁡
+(
+M
+)
+=
+0
+\mathrm{det}(M)=0
+.
+Corollary 3.6
+.
+If
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+is a strongly connected arithmetical graph, then
+L
+⁡
+(
+G
+,
+𝐝
+)
+L(G,{\bf d})
+is an almost non-singular
+M
+M
+-matrix with
+det
+⁡
+(
+L
+⁡
+(
+G
+,
+𝐝
+)
+)
+=
+0
+\mathrm{det}(L(G,{\bf d}))=0
+.
+Proof.
+Let
+M
+=
+L
+⁡
+(
+G
+,
+𝐝
+)
+=
+Diag
+​
+(
+d
+)
+−
+A
+​
+(
+G
+)
+M=L(G,{\bf d})=\textrm{Diag}(d)-\textrm{A}(G)
+.
+Since
+G
+G
+is a strongly connected graph if and only if
+M
+M
+is irreducible, then the result follows by applying Theorem
+3.2
+.
+∎
+If
+G
+G
+is a multidigraph, its adjacency matrix
+A
+⁡
+(
+G
+)
+A(G)
+is always a non-negative matrix with zeros on the diagonal.
+On the other hand, if
+M
+M
+is a non negative matrix with zeros on the diagonal, then there exists a unique multidigraph
+G
+M
+G_{M}
+such that
+M
+=
+A
+⁡
+(
+G
+M
+)
+M=A(G_{M})
+.
+The graph
+G
+M
+G_{M}
+is called the underlying multidigraph of
+M
+M
+.
+The next theorem uses this correspondence to establish necessary and sufficient conditions
+on a non-negative matrix
+M
+M
+so that
+𝒜
+⁡
+(
+M
+)
+\mathcal{A}(M)
+is finite.
+Theorem 3.7
+.
+If
+M
+M
+is a non-negative matrix with all diagonal entries equal to zero, then
+𝒜
+⁡
+(
+M
+)
+≠
+∅
+\mathcal{A}(M)\neq\emptyset
+.
+Furthermore,
+𝒜
+⁡
+(
+M
+)
+\mathcal{A}(M)
+is finite if and only if
+M
+M
+is irreducible.
+Proof.
+Let
+G
+M
+G_{M}
+be such that
+A
+⁡
+(
+G
+M
+)
+=
+M
+A(G_{M})=M
+.
+Note that
+G
+M
+G_{M}
+is similar to the underlying graph of
+M
+M
+, in some sense
+G
+M
+G_{M}
+is a weighted version of the underlying graph of
+M
+M
+.
+Moreover
+G
+M
+G_{M}
+is strongly connected if and only if the underlying graph of
+M
+M
+is strongly connected.
+By Corollary
+3.6
+we only need to prove that
+G
+M
+G_{M}
+has at least one arithmetical structure.
+To see this, let
+𝐝
+∈
+ℕ
++
+V
+⁡
+(
+G
+M
+)
+{\bf d}\in\mathbb{N}_{+}^{V(G_{M})}
+be the vector defined in each
+v
+∈
+V
+⁡
+(
+G
+M
+)
+v\in V(G_{M})
+as
+𝐝
+v
+=
+{
+1
+if
+​
+∑
+w
+∈
+V
+⁡
+(
+G
+M
+)
+M
+v
+,
+w
+=
+0
+,
+∑
+w
+∈
+V
+⁡
+(
+G
+M
+)
+M
+v
+,
+w
+otherwise
+.
+{\bf d}_{v}=\begin{cases}1&\textrm{if }\displaystyle{\sum_{w\in V(G_{M})}M_{v,w}}=0,\\
+\ \\
+\displaystyle{\sum_{w\in V(G_{M})}M_{v,w}}&\textrm{otherwise}.\end{cases}
+It is not difficult to see that
+(
+G
+M
+,
+𝐝
+,
+𝟏
+)
+(G_{M},{\bf d},{\bf 1})
+is an arithmetical graph, which is called the Laplacian arithmetical graph of
+M
+M
+.
+Now we prove the second statement of the theorem.
+(
+⇒
+\Rightarrow
+) We proceed by contradiction.
+Assuming that
+M
+M
+is reducible, without loss of generality we can suppose that
+M
+=
+(
+A
+C
+0
+B
+)
+M=\left(\begin{array}[]{cc}A&C\\
+0&B\end{array}\right)
+where
+A
+A
+and
+B
+B
+are square matrices of size
+r
+×
+r
+r\times r
+and
+s
+×
+s
+s\times s
+respectively and
+A
+A
+is irreducible.
+First, if
+C
+=
+0
+C=0
+, then
+𝒜
+(
+M
+)
+=
+{
+(
+u
+𝐫
+,
+v
+𝐬
+)
+|
+A
+𝐫
+t
+=
+𝟎
+t
+,
+(
+𝐫
+1
+,
+…
+,
+𝐫
+r
+)
+=
+1
+,
+B
+𝐬
+t
+=
+𝟎
+t
+,
+(
+𝐬
+1
+,
+…
+,
+𝐬
+s
+)
+=
+1
+,
+(
+u
+,
+v
+)
+=
+1
+}
+\mathcal{A}(M)=\{(u{\bf r},v{\bf s})\,|\,A{\bf r}^{t}={\bf 0}^{t},({\bf r}_{1},\ldots,{\bf r}_{r})=1,B{\bf s}^{t}={\bf 0}^{t},({\bf s}_{1},\ldots,{\bf s}_{s})=1,(u,v)=1\}
+is infinite.
+Now, assume that
+C
+≠
+0
+C\neq 0
+and let
+𝐝
+∈
+𝒜
+≥
+1
+​
+(
+A
+)
+{\bf d}\in\mathcal{A}_{\geq 1}(A)
+and
+L
+=
+diag
+⁡
+(
+𝐝
+)
+−
+A
+L=\mathrm{diag}({\bf d})-A
+.
+If
+(
+diag
+⁡
+(
+𝐞
+)
+−
+B
+)
+​
+𝐬
+=
+𝟎
+(\mathrm{diag}({\bf e})-B){\bf s}={\bf 0}
+for some
+(
+𝐞
+,
+𝐬
+)
+∈
+ℕ
++
+s
+({\bf e},{\bf s})\in\mathbb{N}_{+}^{s}
+with
+(
+𝐬
+1
+,
+…
+,
+𝐬
+s
+)
+=
+1
+({\bf s}_{1},\ldots,{\bf s}_{s})=1
+, then
+(
+diag
+⁡
+(
+𝐝
+,
+𝐞
+)
+−
+M
+)
+​
+(
+−
+v
+​
+L
+−
+1
+​
+C
+​
+𝐬
+,
+v
+​
+𝐬
+)
+t
+=
+𝟎
+​
+for all
+​
+𝐝
+∈
+𝒜
+≥
+1
+​
+(
+A
+)
+​
+and
+​
+v
+∈
+ℕ
++
+.
+(\mathrm{diag}({\bf d},{\bf e})-M)(-vL^{-1}C{\bf s},v{\bf s})^{t}={\bf 0}\text{ for all }{\bf d}\in\mathcal{A}_{\geq 1}(A)\text{ and }v\in\mathbb{N}_{+}.
+Since
+𝐝
+∈
+𝒜
+≥
+1
+​
+(
+A
+)
+{\bf d}\in\mathcal{A}_{\geq 1}(A)
+,
+L
+L
+is an irreducible non-singular
+M
+M
+-matrix.
+By
+[
+2
+, Theorem 6.2.7, page 141]
+,
+L
+−
+1
+>
+0
+L^{-1}>0
+.
+Moreover, since
+C
+≤
+0
+C\leq 0
+, then
+−
+L
+−
+1
+​
+C
+​
+𝐫
+>
+0
+-L^{-1}C{\bf r}>0
+.
+On the other hand, since
+L
+L
+is an integer, there exists
+v
+∈
+ℕ
++
+v\in\mathbb{N}_{+}
+such that
+−
+v
+​
+L
+−
+1
+​
+C
+​
+𝐫
+=
+−
+v
+​
+1
+det
+⁡
+(
+det
+⁡
+(
+L
+)
+)
+​
+Adj
+​
+(
+L
+)
+​
+C
+​
+𝐫
+-vL^{-1}C{\bf r}=-v\frac{1}{\mathrm{det}(\mathrm{det}(L))}\mathrm{Adj}(L)C{\bf r}
+is a vector of integers.
+Moreover, for all
+𝐝
+∈
+𝒜
+≥
+1
+​
+(
+A
+)
+{\bf d}\in\mathcal{A}_{\geq 1}(A)
+, there exists
+v
+∈
+ℕ
++
+v\in\mathbb{N}_{+}
+such that
+the entries of
+1
+u
+​
+(
+−
+v
+​
+L
+−
+1
+​
+C
+​
+𝐬
+,
+v
+​
+𝐬
+)
+\frac{1}{u}(-vL^{-1}C{\bf s},v{\bf s})
+have greatest common divisor equal to one.
+Finally, the result follows from the fact that
+𝒜
+≥
+1
+​
+(
+A
+)
+\mathcal{A}_{\geq 1}(A)
+is infinite.
+(
+⇐
+\Leftarrow
+) We claim that
+{
+𝐝
+|
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+M
+)
+}
+⊆
+min
+​
+(
+𝒜
+≥
+0
+​
+(
+M
+)
+)
+\{{\bf d}\,|\,({\bf d},{\bf r})\in\mathcal{A}(M)\}\subseteq\textrm{min}\left(\mathcal{A}_{\geq 0}(M)\right)
+.
+Let
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+M
+)
+({\bf d},{\bf r})\in\mathcal{A}(M)
+and suppose that there exists
+𝐞
+∈
+𝒜
+≥
+0
+​
+(
+M
+)
+\mathbf{e}\in\mathcal{A}_{\geq 0}(M)
+such that
+𝐞
+<
+𝐝
+\mathbf{e}<\mathbf{d}
+.
+If
+det
+​
+(
+diag
+​
+(
+𝐞
+)
+−
+M
+)
+>
+0
+\textrm{det}\big(\textrm{diag}({\bf e})-M\big)>0
+, we proceed as in the proof of Theorem
+2.5
+.
+Otherwise, since
+M
+M
+is irreducible,
+diag
+​
+(
+𝐞
+)
+−
+M
+\textrm{diag}(\mathbf{e})-M
+is a singular and irreducible
+M
+M
+-matrix.
+Now, by
+[
+2
+, Theorem 6.4.16, page 156]
+,
+diag
+​
+(
+𝐞
+)
+−
+M
+\textrm{diag}(\mathbf{e})-M
+is an almost non-singular
+M
+M
+-matrix.
+Thus by Theorem
+2.3
+,
+det
+​
+(
+diag
+​
+(
+𝐝
+)
+−
+M
+)
+>
+det
+​
+(
+diag
+​
+(
+𝐞
+)
+−
+M
+)
+=
+0
+\textrm{det}\big(\textrm{diag}(\mathbf{d})-M\big)>\textrm{det}\big(\textrm{diag}(\mathbf{e})-M\big)=0
+;
+which is a contradiction to the fact that
+𝐝
+∈
+𝒜
+⁡
+(
+M
+)
+\mathbf{d}\in\mathcal{A}(M)
+.
+Thus,
+𝒜
+⁡
+(
+M
+)
+⊆
+min
+​
+(
+𝒜
+≥
+0
+​
+(
+M
+)
+)
+\mathcal{A}(M)\subseteq\textrm{min}\left(\mathcal{A}_{\geq 0}(M)\right)
+and the result follows immediately from Dickson’s lemma.
+∎
+Directly from Theorem
+3.7
+we get the following corollary.
+Corollary 3.8
+.
+If
+G
+G
+is a multidigraph, then
+𝒜
+⁡
+(
+G
+)
+\mathcal{A}(G)
+is finite if and only if
+G
+G
+is strongly connected.
+Proof.
+Since
+L
+⁡
+(
+G
+,
+𝐝
+)
+L(G,{\bf d})
+is an almost non-singular
+M
+M
+-matrix for each
+𝐝
+∈
+𝒟
+⁡
+(
+G
+)
+{\bf d}\in\mathcal{D}(G)
+,
+it follows that
+𝒟
+⁡
+(
+G
+)
+⊆
+𝒜
+⁡
+(
+G
+)
+\mathcal{D}(G)\subseteq\mathcal{A}\big(G\big)
+.
+The result follows from Theorem
+3.7
+and the fact that
+L
+⁡
+(
+G
+,
+𝟎
+)
+L(G,{\bf 0})
+is irreducible if and only if
+G
+G
+is strongly connected.
+∎
+Remark 3.9
+.
+In
+[
+9
+, Proposition 1.1 and Corollary 1.3]
+are given the following basic properties of Laplacian matrices for connected simple graphs.
+Let
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+be an arithmetical structure of a connected multigraph
+G
+=
+(
+V
+,
+E
+)
+G=(V,E)
+and
+M
+⁡
+(
+u
+,
+v
+)
+M(u,v)
+be the
+|
+V
+|
+−
+1
+|V|-1
+th minor of
+M
+M
+obtained by deleting the
+u
+u
+th row and the
+v
+v
+th column.
+If
+M
+=
+L
+⁡
+(
+G
+,
+𝐝
+)
+M=L(G,{\bf d})
+, then
+(i)
+M
+M
+has rank
+|
+V
+|
+−
+1
+|V|-1
+and
+ker
+ℚ
+⁡
+(
+M
+)
+=
+⟨
+𝐫
+⟩
+\ker_{\mathbb{Q}}(M)=\langle{\bf r}\rangle
+.
+(ii)
+There exists a positive integer
+m
+m
+such that
+adj
+⁡
+(
+M
+)
+=
+m
+​
+𝐫
+t
+​
+𝐫
+\mathrm{adj}(M)=m{\bf r}^{t}{\bf r}
+.
+Furthermore,
+m
+=
+det
+(
+M
+⁡
+(
+u
+,
+v
+)
+)
+​
+(
+𝐫
+u
+​
+𝐫
+v
+)
+−
+1
+m=\det(M(u,v))({\bf r}_{u}{\bf r}_{v})^{-1}
+.
+(iii)
+The cokernel of
+M
+M
+is a finitely generated abelian group of the form
+ℤ
+⊕
+Φ
+⁡
+(
+G
+)
+\mathbb{Z}\oplus\Phi(G)
+where
+Φ
+⁡
+(
+G
+)
+\Phi(G)
+is a finite group of order
+m
+m
+.
+Note that the condition
+ker
+ℚ
+⁡
+(
+M
+)
+=
+⟨
+𝐫
+⟩
+\ker_{\mathbb{Q}}(M)=\langle{\bf r}\rangle
+implies that
+gcd
+⁡
+(
+𝐫
+v
+|
+v
+∈
+V
+)
+=
+1
+\gcd({\bf r}_{v}|v\in V)=1
+.
+Example 3.10
+.
+Let
+G
+G
+be the multidigraph illustrated in Figure
+1
+.
+Then
+G
+G
+is not strongly connected since there is no directed path from the vertex
+1
+1
+to the vertex
+4
+4
+.
+Thus,
+𝒟
+⁡
+(
+G
+)
+\mathcal{D}(G)
+has to be infinite.
+In fact,
+L
+⁡
+(
+G
+,
+𝟎
+)
+L(G,{\bf 0})
+is the matrix of Example
+2.7
+.
+v
+1
+v_{1}
+v
+2
+v_{2}
+v
+3
+v_{3}
+v
+4
+v_{4}
+Figure 1
+.
+A not strongly connected multidigraph.
+Remark 3.11
+.
+Clearly
+𝒟
+​
+(
+G
+)
+⊆
+𝒜
+0
+​
+(
+G
+)
+\mathcal{D}(G)\subseteq\mathcal{A}_{0}\big(G\big)
+, however we do not always have equality.
+For instance, if
+P
+5
+P_{5}
+with vertices
+v
+1
+,
+…
+,
+v
+5
+v_{1},\ldots,v_{5}
+, then
+(
+1
+−
+1
+0
+0
+0
+−
+1
+1
+−
+1
+0
+0
+0
+−
+1
+d
+−
+1
+0
+0
+0
+−
+1
+1
+−
+1
+0
+0
+0
+−
+1
+1
+)
+​
+(
+1
+1
+0
+−
+1
+−
+1
+)
+=
+𝟎
+.
+\left(\begin{array}[]{ccccc}1&-1&0&0&0\\
+-1&1&-1&0&0\\
+0&-1&d&-1&0\\
+0&0&-1&1&-1\\
+0&0&0&-1&1\end{array}\right)\left(\begin{array}[]{c}1\\
+1\\
+0\\
+-1\\
+-1\end{array}\right)={\bf 0}.
+Therefore
+det
+⁡
+(
+diag
+⁡
+(
+1
+,
+1
+,
+d
+,
+1
+,
+1
+)
+−
+A
+⁡
+(
+P
+5
+)
+)
+=
+0
+\mathrm{det}(\mathrm{diag}(1,1,d,1,1)-A(P_{5}))=0
+for all
+d
+∈
+ℕ
++
+d\in\mathbb{N}_{+}
+and
+𝒟
+⁡
+(
+G
+)
+⊊
+𝒜
+0
+​
+(
+G
+)
+\mathcal{D}(G)\subsetneq\mathcal{A}_{0}\big(G\big)
+.
+To finish this section we present some arithmetical structures on the cone of a graph.
+This procedure represents the first example of how to construct arithmetical structures.
+Given a graph
+G
+G
+, let
+c
+⁡
+(
+G
+)
+c(G)
+be the cone of
+G
+G
+, that is, the graph obtained from
+G
+G
+by adding a new vertex
+v
+c
+v_{c}
+and all the edges between
+v
+c
+v_{c}
+and the vertices of
+G
+G
+.
+Proposition 3.12
+.
+Let
+G
+G
+be a t-regular graph with
+n
+n
+vertices.
+If
+f
+f
+is a divisor of
+n
+n
+, then (
+d
+,
+r
+) given by
+𝐝
+u
+=
+(
+n
+f
+,
+t
++
+f
+,
+…
+,
+t
++
+f
+)
+​
+and
+​
+𝐫
+u
+=
+(
+f
+,
+1
+,
+…
+,
+1
+)
+{\bf d}_{u}=(\frac{n}{f},t+f,\ldots,t+f)\text{ and }{\bf r}_{u}=(f,1,\ldots,1)
+is an arithmetical structure of
+c
+⁡
+(
+G
+)
+c(G)
+.
+Proof.
+This follows because
+𝐝
+∈
+ℕ
++
+n
+{\bf d}\in\mathbb{N}_{+}^{n}
+,
+𝐫
+∈
+ℕ
++
+n
+{\bf r}\in\mathbb{N}_{+}^{n}
+and
+(
+n
+f
+−
+𝟏
+n
+−
+𝟏
+n
+t
+L
+⁡
+(
+G
+,
+(
+f
++
+t
+)
+​
+𝟏
+n
+)
+)
+​
+(
+f
+𝟏
+n
+)
+=
+𝟎
+\left(\begin{array}[]{cc}\frac{n}{f}&-{\bf 1}_{n}\\
+-{\bf 1}_{n}^{t}&L(G,(f+t){\bf 1}_{n})\\
+\end{array}\right)\left(\begin{array}[]{c}f\\
+{\bf 1}_{n}\\
+\end{array}\right)={\bf 0}
+.
+∎
+Example 3.13
+.
+Let
+G
+G
+be the cycle with four vertices.
+Then it is not difficult to see that with
+n
+=
+4
+n=4
+and
+d
+=
+2
+d=2
+we have
+(
+2
+−
+1
+−
+1
+−
+1
+−
+1
+−
+1
+4
+−
+1
+0
+−
+1
+−
+1
+−
+1
+4
+−
+1
+0
+−
+1
+0
+−
+1
+4
+−
+1
+−
+1
+−
+1
+0
+−
+1
+4
+)
+​
+(
+2
+1
+1
+1
+1
+)
+=
+𝟎
+.
+\left(\begin{array}[]{ccccc}2&-1&-1&-1&-1\\
+-1&4&-1&0&-1\\
+-1&-1&4&-1&0\\
+-1&0&-1&4&-1\\
+-1&-1&0&-1&4\end{array}\right)\left(\begin{array}[]{c}2\\
+1\\
+1\\
+1\\
+1\end{array}\right)={\bf 0}.
+The next proposition gives us another type of arithmetical structure of the cone of a graph,
+these arithmetical structures are more difficult to find.
+Proposition 3.14
+.
+Let
+G
+G
+be a graph with
+n
+n
+vertices and
+(
+𝐝
+,
+𝐫
+)
+∈
+ℕ
++
+n
+×
+ℕ
++
+n
+({\bf d},{\bf r})\in\mathbb{N}_{+}^{n}\times\mathbb{N}_{+}^{n}
+such that
+L
+⁡
+(
+G
+,
+𝐝
+)
+​
+𝐫
+=
+a
+​
+𝟏
+L(G,{\bf d}){\bf r}=a{\bf 1}
+and
+a
+|
+∑
+i
+=
+1
+n
+𝐫
+i
+=
+|
+𝐫
+|
+a\big|\sum_{i=1}^{n}{\bf r}_{i}=|{\bf r}|
+.
+If
+g
+=
+gcd
+⁡
+(
+a
+,
+𝐫
+1
+,
+…
+,
+𝐫
+n
+)
+g=\mathrm{gcd}(a,{\bf r}_{1},\ldots,{\bf r}_{n})
+, then
+(
+𝐝
+~
+,
+𝐫
+~
+)
+(\tilde{{\bf d}},\tilde{{\bf r}})
+given by
+𝐝
+~
+u
+=
+(
+∑
+i
+=
+1
+n
+𝐫
+i
+a
+,
+𝐝
+1
+,
+…
+,
+𝐝
+n
+)
+​
+and
+​
+𝐫
+~
+u
+=
+(
+a
+g
+,
+𝐫
+1
+g
+,
+…
+,
+𝐫
+n
+g
+)
+\tilde{{\bf d}}_{u}=(\frac{\sum_{i=1}^{n}{\bf r}_{i}}{a},{\bf d}_{1},\ldots,{\bf d}_{n})\text{ and }\tilde{{\bf r}}_{u}=(\frac{a}{g},\frac{{\bf r}_{1}}{g},\ldots,\frac{{\bf r}_{n}}{g})
+is an arithmetical structure of
+c
+⁡
+(
+G
+)
+c(G)
+.
+Proof.
+This follows because
+𝐝
+~
+∈
+ℕ
++
+n
+\tilde{{\bf d}}\in\mathbb{N}_{+}^{n}
+,
+𝐫
+~
+∈
+ℕ
++
+n
+\tilde{{\bf r}}\in\mathbb{N}_{+}^{n}
+and
+(
+|
+𝐫
+|
+a
+−
+𝟏
+n
+−
+𝟏
+n
+t
+L
+⁡
+(
+G
+,
+𝐝
+)
+)
+​
+(
+a
+g
+𝐫
+𝐭
+g
+)
+=
+𝟎
+\left(\begin{array}[]{cc}\frac{|{\bf r}|}{a}&-{\bf 1}_{n}\\
+-{\bf 1}_{n}^{t}&L(G,{\bf d})\\
+\end{array}\right)\left(\begin{array}[]{c}\frac{a}{g}\\
+\\
+\frac{{\bf{\bf r}^{t}}}{g}\\
+\end{array}\right)={\bf 0}
+.
+∎
+4.
+arithmetical structures on the graph obtained by merging and splitting vertices
+In this section we present a way to construct arithmetical structures for graphs obtained by merging and splitting vertices.
+More precisely, we prove that if an arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of a graph
+G
+G
+satisfies
+𝐫
+u
+=
+𝐫
+v
+{\bf r}_{u}={\bf r}_{v}
+for some vertices
+u
+u
+and
+v
+v
+,
+then we can construct an arithmetical structure of the graph obtained by merging the vertices
+u
+u
+and
+v
+v
+.
+In a similar way, given an arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of a graph
+G
+G
+and a vertex
+u
+u
+of
+G
+G
+that
+satisfies
+𝐫
+u
+|
+∑
+a
+∈
+A
+𝐫
+a
+{\bf r}_{u}|\sum_{a\in A}{\bf r}_{a}
+for some
+A
+⊊
+N
+G
+​
+(
+u
+)
+A\subsetneq N_{G}(u)
+, we can construct an
+arithmetical structure of the graph obtained by splitting the vertex
+u
+u
+.
+Given a multidigraph
+G
+G
+, an arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of
+G
+G
+, and
+u
+,
+u
+′
+∈
+V
+⁡
+(
+G
+)
+u,u^{\prime}\in V(G)
+such that
+𝐫
+u
+=
+𝐫
+u
+′
+{\bf r}_{u}={\bf r}_{u^{\prime}}
+,
+let
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+m(G,u,u^{\prime})
+be the graph obtained from
+G
+G
+by merging the vertices
+u
+u
+and
+u
+′
+u^{\prime}
+into a new vertex
+w
+w
+.
+Also, let
+m
+​
+(
+𝐝
+)
+v
+=
+{
+𝐝
+u
++
+𝐝
+u
+′
+if
+​
+v
+=
+w
+,
+𝐝
+v
+otherwise
+m({\bf d})_{v}=\begin{cases}{\bf d}_{u}+{\bf d}_{u^{\prime}}&\text{ if }v=w,\\
+{\bf d}_{v}&\text{ otherwise}\end{cases}
+and
+m
+⁡
+(
+𝐫
+)
+∈
+ℕ
+V
+⁡
+(
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+)
+m({\bf r})\in\mathbb{N}^{V(m(G,u,u^{\prime}))}
+be given by
+m
+​
+(
+𝐫
+)
+v
+=
+𝐫
+v
+m({\bf r})_{v}={\bf r}_{v}
+for all
+v
+∈
+V
+⁡
+(
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+)
+v\in V(m(G,u,u^{\prime}))
+.
+Theorem 4.1
+.
+If
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+is an arithmetical graph such that
+𝐫
+u
+=
+𝐫
+u
+′
+{\bf r}_{u}={\bf r}_{u^{\prime}}
+for some
+u
+,
+u
+′
+∈
+V
+⁡
+(
+G
+)
+u,u^{\prime}\in V(G)
+, then
+m
+⁡
+(
+𝐝
+,
+𝐫
+)
+=
+(
+m
+⁡
+(
+𝐝
+)
+,
+m
+⁡
+(
+𝐫
+)
+)
+m({\bf d},{\bf r})=(m({\bf d}),m({\bf r}))
+is an arithmetical structure of
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+m(G,u,u^{\prime})
+.
+Proof.
+Since
+𝐝
+u
+​
+𝐫
+u
+=
+∑
+v
+∈
+N
+G
+​
+(
+u
+)
+𝐫
+v
+{\bf d}_{u}{\bf r}_{u}=\sum_{v\in N_{G}(u)}{\bf r}_{v}
+and
+𝐝
+u
+′
+​
+𝐫
+u
+′
+=
+∑
+v
+∈
+N
+G
+​
+(
+u
+′
+)
+𝐫
+v
+{\bf d}_{u^{\prime}}{\bf r}_{u^{\prime}}=\sum_{v\in N_{G}(u^{\prime})}{\bf r}_{v}
+,
+m
+​
+(
+𝐝
+)
+w
+​
+𝐫
+w
+=
+𝐝
+u
+​
+𝐫
+u
++
+𝐝
+u
+′
+​
+𝐫
+u
+′
+=
+∑
+v
+∈
+N
+G
+​
+(
+u
+)
+𝐫
+v
++
+∑
+v
+∈
+N
+G
+​
+(
+u
+′
+)
+𝐫
+v
+=
+∑
+v
+∈
+N
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+​
+(
+w
+)
+m
+​
+(
+𝐫
+)
+v
+m({\bf d})_{w}{\bf r}_{w}={\bf d}_{u}{\bf r}_{u}+{\bf d}_{u^{\prime}}{\bf r}_{u^{\prime}}=\sum_{v\in N_{G}(u)}{\bf r}_{v}+\sum_{v\in N_{G}(u^{\prime})}{\bf r}_{v}=\sum_{v\in N_{m(G,u,u^{\prime})}(w)}m({\bf r})_{v}
+and therefore
+L
+⁡
+(
+m
+⁡
+(
+G
+,
+u
+,
+u
+′
+)
+,
+m
+⁡
+(
+𝐝
+)
+)
+​
+m
+​
+(
+𝐫
+)
+t
+=
+(
+𝐝
+u
++
+𝐝
+u
+′
+−
+1
+⋯
+0
+−
+1
+⋮
+L
+⁡
+(
+G
+−
+{
+u
+,
+u
+′
+}
+,
+𝐝
+|
+V
+⁡
+(
+G
+)
+−
+{
+u
+,
+u
+′
+}
+)
+0
+)
+​
+(
+𝐫
+u
+𝐫
+|
+V
+⁡
+(
+G
+)
+−
+{
+u
+,
+u
+′
+}
+)
+=
+𝟎
+.
+L(m(G,u,u^{\prime}),m({\bf d}))m({\bf r})^{t}=\left(\begin{array}[]{cccc}{\bf d}_{u}+{\bf d}_{u^{\prime}}&-1&\cdots&0\\
+-1&&&\\
+\vdots&&L(G-\{u,u^{\prime}\},{\bf d}|_{V(G)-\{u,u^{\prime}\}})&\\
+0&&&\end{array}\right)\left(\begin{array}[]{c}{\bf r}_{u}\\
+\\
+{\bf r}|_{V(G)-\{u,u^{\prime}\}}\end{array}\right)={\bf 0}.\vskip-19.91692pt
+∎
+Before presenting the next result, we need to introduce some notation.
+Given a multidigraph
+G
+G
+, an arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of
+G
+G
+, and
+u
+∈
+V
+⁡
+(
+G
+)
+u\in V(G)
+such that
+𝐫
+u
+|
+∑
+a
+∈
+A
+𝐫
+a
+​
+for some
+​
+A
+⊊
+N
+G
+​
+(
+u
+)
+,
+{\bf r}_{u}|\sum_{a\in A}{\bf r}_{a}\text{ for some }A\subsetneq N_{G}(u),
+let
+s
+⁡
+(
+G
+,
+u
+)
+s(G,u)
+be the graph obtained by splitting the vertex
+v
+v
+into two vertices
+w
+w
+and
+w
+′
+w^{\prime}
+with
+N
+s
+⁡
+(
+G
+,
+u
+)
+​
+(
+w
+)
+=
+A
+N_{s(G,u)}(w)=A
+and
+N
+s
+⁡
+(
+G
+,
+u
+)
+​
+(
+w
+′
+)
+=
+N
+G
+​
+(
+u
+)
+−
+A
+N_{s(G,u)}(w^{\prime})=N_{G}(u)-A
+.
+Also, let
+s
+​
+(
+𝐝
+)
+v
+=
+{
+∑
+a
+∈
+A
+𝐫
+a
+𝐫
+u
+if
+​
+v
+=
+w
+,
+∑
+a
+∈
+N
+G
+​
+(
+u
+)
+−
+A
+𝐫
+a
+𝐫
+u
+if
+​
+v
+=
+w
+′
+,
+𝐝
+v
+otherwise
+,
+and
+s
+​
+(
+𝐫
+)
+v
+=
+{
+𝐫
+u
+if
+​
+v
+=
+w
+,
+w
+′
+,
+𝐫
+v
+otherwise.
+\begin{array}[]{ccc}s({\bf d})_{v}=\begin{cases}\frac{\sum_{a\in A}{\bf r}_{a}}{{\bf r}_{u}}&\text{ if }v=w,\\
+\frac{\sum_{a\in N_{G}(u)-A}{\bf r}_{a}}{{\bf r}_{u}}&\text{ if }v=w^{\prime},\\
+{\bf d}_{v}&\text{ otherwise},\end{cases}&\quad\textrm{and}&s({\bf r})_{v}=\begin{cases}{\bf r}_{u}&\text{ if }v=w,w^{\prime},\\
+{\bf r}_{v}&\text{ otherwise.}\end{cases}\end{array}
+The next theorem is in some sense a converse of Theorem
+4.1
+.
+Theorem 4.2
+.
+If
+(
+G
+,
+𝐝
+,
+𝐫
+)
+(G,{\bf d},{\bf r})
+is an arithmetical graph such that
+𝐫
+u
+|
+∑
+a
+∈
+A
+𝐫
+a
+​
+for some
+​
+A
+⊊
+N
+G
+​
+(
+u
+)
+​
+and
+​
+u
+∈
+V
+⁡
+(
+G
+)
+,
+{\bf r}_{u}|\sum_{a\in A}{\bf r}_{a}\text{ for some }A\subsetneq N_{G}(u)\text{ and }u\in V(G),
+then
+s
+⁡
+(
+𝐝
+,
+𝐫
+)
+=
+(
+s
+⁡
+(
+𝐝
+)
+,
+s
+⁡
+(
+𝐫
+)
+)
+s({\bf d},{\bf r})=(s({\bf d}),s({\bf r}))
+is an arithmetical structure of
+s
+⁡
+(
+G
+,
+u
+)
+s(G,u)
+.
+Proof.
+This follows directly from
+L
+⁡
+(
+s
+⁡
+(
+G
+,
+u
+)
+,
+s
+⁡
+(
+𝐝
+)
+)
+​
+s
+​
+(
+𝐫
+)
+t
+=
+(
+𝐝
+w
+−
+1
+⋯
+0
+−
+1
+⋮
+⋮
+L
+⁡
+(
+G
+−
+{
+u
+}
+,
+𝐝
+|
+V
+⁡
+(
+G
+)
+−
+{
+u
+}
+)
+−
+1
+0
+⋯
+−
+1
+𝐝
+w
+′
+)
+​
+(
+𝐫
+u
+𝐫
+|
+V
+⁡
+(
+G
+)
+−
+{
+u
+}
+𝐫
+u
+)
+=
+𝟎
+.
+L(s(G,u),s({\bf d}))s({\bf r})^{t}=\left(\begin{array}[]{ccccc}{\bf d}_{w}&-1&\cdots&&0\\
+-1&&&&\vdots\\
+\vdots&&L(G-\{u\},{\bf d}|_{V(G)-\{u\}})&&-1\\
+0&&\cdots&-1&{\bf d}_{w^{\prime}}\end{array}\right)\left(\begin{array}[]{c}{\bf r}_{u}\\
+{\bf r}|_{V(G)-\{u\}}\\
+{\bf r}_{u}\end{array}\right)={\bf 0}.\vskip-17.07164pt
+∎
+5.
+arithmetical structures on the clique–star transform of a graph
+In this section we study the arithmetical structures on the clique–star transform of a graph.
+Given a graph
+G
+G
+and a clique
+C
+C
+(a set of pairwise adjacent vertices) of
+G
+G
+,
+the clique–star transform of G, denoted by
+c
+​
+s
+​
+(
+G
+,
+C
+)
+cs(G,C)
+,
+is the graph obtained from
+G
+G
+by deleting all the edges between the vertices in
+C
+C
+and adding a new vertex
+v
+v
+with all the edges between
+v
+v
+and the vertices in
+C
+C
+, see Figure
+2
+.
+The clique–star transformation generalizes the subdivision of an edge, adding of pendant edges, and the
+Δ
+−
+Y
+\Delta-Y
+transformation on graphs.
+We establish a relationship between the arithmetical structures on
+G
+G
+and
+c
+​
+s
+​
+(
+G
+,
+C
+)
+cs(G,C)
+and prove that the critical groups of
+G
+G
+and
+c
+​
+s
+​
+(
+G
+,
+C
+)
+cs(G,C)
+are isomorphic.
+Using this relation we can describe completely the arithmetical structures on the paths and cycles,
+see Sections
+6.1
+and
+6.2
+.
+G
+G
+K
+4
+K_{4}
+⟹
+\Longrightarrow
+c
+​
+s
+​
+(
+G
+,
+K
+4
+)
+cs(G,K_{4})
+v
+v
+Figure 2.
+A graph
+G
+G
+with a clique with four vertices and their clique–star transform
+c
+​
+s
+​
+(
+G
+,
+K
+4
+)
+cs(G,K_{4})
+The next theorem gives us the relation between the arithmetical structures on
+G
+G
+and
+c
+​
+s
+​
+(
+G
+,
+C
+)
+cs(G,C)
+.
+Before establishing the theorem we will fix some notation.
+Given
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+G
+)
+({\bf d},{\bf r})\in\mathcal{A}(G)
+, let
+𝐝
+~
+u
+=
+c
+​
+s
+​
+(
+𝐝
+,
+C
+)
+u
+=
+{
+𝐝
+u
+if
+​
+u
+∉
+C
+,
+𝐝
+u
++
+1
+if
+​
+u
+∈
+C
+,
+1
+if
+​
+u
+=
+v
+,
+and
+𝐫
+~
+u
+=
+c
+​
+s
+​
+(
+𝐫
+,
+C
+)
+u
+=
+{
+𝐫
+u
+if
+​
+u
+∈
+V
+∑
+u
+∈
+C
+𝐫
+u
+if
+​
+u
+=
+v
+,
+\begin{array}[]{ccc}\tilde{{\bf d}}_{u}=cs({\bf d},C)_{u}=\begin{cases}{\bf d}_{u}&\textrm{ if }u\not\in C,\\
+{\bf d}_{u}+1&\textrm{ if }u\in C,\\
+1&\textrm{ if }u=v,\end{cases}&\quad\textrm{and}&\tilde{{\bf r}}_{u}=cs({\bf r},C)_{u}=\begin{cases}{\bf r}_{u}&\textrm{ if }u\in V\\
+\\
+\displaystyle{\sum_{u\in C}{\bf r}_{u}}&\textrm{ if }u=v,\end{cases}\end{array}
+where
+V
+V
+is the set of vertices of
+G
+G
+.
+Theorem 5.1
+.
+Let
+G
+G
+be a graph,
+C
+C
+a clique of
+G
+G
+, and
+G
+~
+=
+c
+​
+s
+​
+(
+G
+,
+C
+)
+\tilde{G}=cs(G,C)
+.
+If
+𝒜
+′
+​
+(
+G
+~
+)
+\mathcal{A}^{\prime}(\tilde{G})
+is the set of arithmetical structures
+(
+𝐝
+′
+,
+𝐫
+′
+)
+({\bf d}^{\prime},{\bf r}^{\prime})
+of
+G
+~
+\tilde{G}
+with
+𝐝
+v
+′
+=
+1
+{\bf d}^{\prime}_{v}=1
+, then
+𝒜
+′
+​
+(
+G
+~
+)
+=
+{
+(
+𝐝
+~
+,
+𝐫
+~
+)
+|
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+G
+)
+}
+.
+\mathcal{A}^{\prime}(\tilde{G})=\{(\tilde{{\bf d}},\tilde{{\bf r}})\,|\,({\bf d},{\bf r})\in\mathcal{A}(G)\}.
+Proof.
+Let
+V
+V
+be the set of vertices of
+G
+G
+, and let
+T
+C
+T_{C}
+be the trivial graph with vertex set equal to
+C
+C
+. Put
+|
+V
+|
+=
+n
+|V|=n
+and
+|
+C
+|
+=
+c
+|C|=c
+.
+By the definitions of
+𝐝
+~
+\tilde{{\bf d}}
+and
+𝐫
+~
+\tilde{{\bf r}}
+,
+L
+⁡
+(
+G
+~
+,
+𝐝
+~
+)
+​
+𝐫
+~
+t
+=
+(
+1
+−
+𝟏
+c
+𝟎
+n
+−
+c
+−
+𝟏
+c
+t
+L
+⁡
+(
+T
+C
+,
+𝐝
+~
+|
+C
+)
+∗
+𝟎
+n
+−
+c
+t
+∗
+L
+⁡
+(
+G
+⁡
+[
+V
+−
+C
+]
+,
+𝐝
+~
+|
+V
+−
+C
+)
+)
+​
+𝐫
+~
+t
+=
+0
+L(\tilde{G},\tilde{{\bf d}})\tilde{{\bf r}}^{t}=\left(\begin{array}[]{ccc}1&-{\bf 1}_{c}&{\bf 0}_{n-c}\\
+-{\bf 1}_{c}^{t}&L(T_{C},\tilde{\bf{d}}|_{C})&*\\
+{\bf 0}_{n-c}^{t}&*&L(G[V-C],\tilde{\bf{d}}|_{V-C})\end{array}\right)\tilde{{\bf r}}^{t}=0
+if and only if
+𝐫
+~
+v
+=
+∑
+u
+∈
+C
+𝐫
+~
+u
+\tilde{{\bf r}}_{v}=\sum_{u\in C}\tilde{{\bf r}}_{u}
+,
+−
+𝐫
+~
+v
++
+𝐫
+~
+u
+​
+𝐝
+~
+u
++
+∑
+w
+∈
+V
+−
+C
+L
+​
+(
+G
+,
+𝐝
+~
+)
+u
+,
+w
+​
+𝐫
+~
+w
+=
+0
+​
+for all
+​
+u
+∈
+C
+​
+and
+​
+∑
+w
+∈
+V
+L
+​
+(
+G
+,
+𝐝
+~
+)
+u
+,
+w
+​
+𝐫
+~
+w
+=
+0
+​
+for all
+​
+u
+∈
+V
+−
+C
+-\tilde{{\bf r}}_{v}+\tilde{{\bf r}}_{u}\tilde{{\bf d}}_{u}+\sum_{w\in V-C}L(G,\tilde{\bf{d}})_{u,w}\tilde{{\bf r}}_{w}=0\text{ for all }u\in C\text{ and }\sum_{w\in V}L(G,\tilde{\bf{d}})_{u,w}\tilde{{\bf r}}_{w}=0\text{ for all }u\in V-C
+if and only if
+𝐫
+u
+​
+𝐝
+u
+−
+∑
+w
+∈
+C
+−
+u
+𝐫
+w
++
+∑
+w
+∈
+V
+−
+C
+L
+​
+(
+G
+,
+𝐝
+)
+u
+,
+w
+​
+𝐫
+w
+=
+0
+​
+for all
+​
+u
+∈
+C
+​
+and
+​
+∑
+w
+∈
+V
+L
+​
+(
+G
+,
+𝐝
+)
+u
+,
+w
+​
+𝐫
+w
+=
+0
+​
+for all
+​
+u
+∈
+V
+−
+C
+{\bf r}_{u}{\bf d}_{u}-\sum_{w\in C-u}{\bf r}_{w}+\sum_{w\in V-C}L(G,{\bf d})_{u,w}{\bf r}_{w}=0\text{ for all }u\in C\text{ and }\sum_{w\in V}L(G,{\bf d})_{u,w}{\bf r}_{w}=0\text{ for all }u\in V-C
+if and only if
+L
+⁡
+(
+G
+,
+𝐝
+)
+​
+𝐫
+t
+=
+0
+L(G,{\bf d}){\bf r}^{t}=0
+.
+∎
+Lorenzini in
+[
+9
+, page 485]
+introduced a similar operation, called the blowup, of an arithmetical structure of a graph.
+The blowup generalizes the clique–star transformation of a graph.
+However, the blowup does not always have a meaning in the context of graphs.
+Here we present a slightly more general variant of Lorenzini’s construction.
+Given a non-negative integral
+n
+×
+n
+n\times n
+matrix
+M
+M
+with all its diagonal entries equal to zero,
+𝐩
+=
+{
+p
+1
+​
+…
+,
+p
+n
+}
+∈
+ℕ
+n
+{\bf p}=\{p_{1}\ldots,p_{n}\}\in\mathbb{N}^{n}
+and
+𝐪
+=
+{
+q
+1
+​
+…
+,
+q
+n
+}
+∈
+ℕ
+n
+{\bf q}=\{q_{1}\ldots,q_{n}\}\in\mathbb{N}^{n}
+with
+g
+=
+gcd
+⁡
+(
+p
+1
+​
+…
+,
+p
+n
+,
+q
+1
+​
+…
+,
+q
+n
+)
+g=\mathrm{gcd}(p_{1}\ldots,p_{n},q_{1}\ldots,q_{n})
+, let
+M
+~
+=
+b
+𝐩
+,
+𝐪
+​
+(
+M
+)
+=
+(
+1
+−
+𝐪
+−
+𝐩
+[
+𝐩
+t
+​
+𝐪
+]
+g
++
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+,
+\tilde{M}=b_{{\bf p},{\bf q}}(M)=\left(\begin{array}[]{cc}1&-{\bf q}\\
+-{\bf p}&\frac{[{\bf p}^{t}{\bf q}]}{g}+\mathrm{diag}({\bf d})-M\end{array}\right),
+where
+[
+𝐩
+t
+​
+𝐪
+]
+=
+𝐩
+t
+​
+𝐪
+−
+diag
+⁡
+(
+p
+1
+​
+q
+1
+,
+…
+,
+p
+n
+​
+q
+n
+)
+[{\bf p}^{t}{\bf q}]={\bf p}^{t}{\bf q}-\mathrm{diag}(p_{1}q_{1},\ldots,p_{n}q_{n})
+.
+For simplicity we enumerate the rows and columns of
+b
+𝐩
+,
+𝐪
+​
+(
+M
+)
+b_{{\bf p},{\bf q}}(M)
+from
+0
+0
+to
+n
+n
+instead of from
+1
+1
+to
+n
++
+1
+n+1
+.
+Also, given an arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of
+M
+M
+, let
+𝐝
+~
+i
+=
+b
+𝐩
+,
+𝐪
+​
+(
+𝐝
+)
+i
+=
+{
+g
+if
+​
+i
+=
+0
+,
+𝐝
+i
++
+p
+i
+​
+q
+i
+otherwise,
+and
+𝐫
+~
+i
+=
+b
+𝐩
+,
+𝐪
+​
+(
+𝐫
+)
+i
+=
+{
+∑
+j
+=
+1
+n
+𝐫
+j
+​
+𝐪
+j
+g
+if
+​
+i
+=
+0
+,
+𝐫
+i
+otherwise.
+\begin{array}[]{ccc}\tilde{{\bf d}}_{i}=b_{{\bf p},{\bf q}}({\bf d})_{i}=\begin{cases}g&\textrm{ if }i=0,\\
+{\bf d}_{i}+p_{i}q_{i}&\textrm{ otherwise,}\end{cases}&\quad\textrm{and}&\tilde{{\bf r}}_{i}=b_{{\bf p},{\bf q}}({\bf r})_{i}=\begin{cases}\displaystyle{\sum_{j=1}^{n}\frac{{\bf r}_{j}{\bf q}_{j}}{g}}&\textrm{ if }i=0,\\
+{\bf r}_{i}&\textrm{ otherwise.}\end{cases}\end{array}
+Theorem 5.2
+.
+Let
+M
+M
+be a non-negative integral
+n
+×
+n
+n\times n
+matrix with all diagonal entries equal to zero,
+𝐩
+=
+{
+p
+1
+​
+…
+,
+p
+n
+}
+∈
+ℕ
+n
+{\bf p}=\{p_{1}\ldots,p_{n}\}\in\mathbb{N}^{n}
+and
+𝐪
+=
+{
+q
+1
+​
+…
+,
+q
+n
+}
+∈
+ℕ
+n
+{\bf q}=\{q_{1}\ldots,q_{n}\}\in\mathbb{N}^{n}
+with
+g
+=
+gcd
+⁡
+(
+p
+1
+​
+…
+,
+p
+n
+,
+q
+1
+​
+…
+,
+q
+n
+)
+g=\mathrm{gcd}(p_{1}\ldots,p_{n},q_{1}\ldots,q_{n})
+.
+If
+g
+≠
+0
+g\neq 0
+,
+𝐩
+,
+𝐪
+≠
+𝟎
+{\bf p},{\bf q}\neq{\bf 0}
+and
+𝒜
+′
+​
+(
+M
+~
+)
+\mathcal{A}^{\prime}(\tilde{M})
+is the set of arithmetical structures
+(
+𝐝
+′
+,
+𝐫
+′
+)
+({\bf d}^{\prime},{\bf r}^{\prime})
+of
+M
+~
+\tilde{M}
+with
+𝐝
+v
+′
+=
+g
+{\bf d}^{\prime}_{v}=g
+, then
+𝒜
+′
+​
+(
+M
+~
+)
+=
+{
+(
+𝐝
+~
+,
+𝐫
+~
+)
+|
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+M
+)
+}
+.
+\mathcal{A}^{\prime}(\tilde{M})=\{(\tilde{{\bf d}},\tilde{{\bf r}})\,|\,({\bf d},{\bf r})\in\mathcal{A}(M)\}.
+Proof.
+This follows by using similar arguments to those given in the proof Theorem
+5.1
+.
+Note that
+(
+1
+−
+𝐪
+−
+𝐩
+𝐩
+t
+​
+𝐪
+g
++
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+.
+\left(\begin{array}[]{cc}1&-{\bf q}\\
+-{\bf p}&\frac{{\bf p}^{t}{\bf q}}{g}+\mathrm{diag}({\bf d})-M\end{array}\right).
+Since
+g
+​
+𝐫
+~
+0
+=
+∑
+i
+=
+1
+n
+𝐫
+i
+​
+𝐪
+i
+=
+𝐪𝐫
+t
+g\tilde{{\bf r}}_{0}=\sum_{i=1}^{n}{\bf r}_{i}{\bf q}_{i}={\bf q}{\bf r}^{t}
+and
+𝐩
+​
+𝐫
+~
+0
+=
+(
+∑
+j
+=
+1
+n
+𝐩
+1
+​
+𝐪
+j
+​
+𝐫
+j
+g
+,
+…
+,
+∑
+j
+=
+1
+n
+𝐩
+n
+​
+𝐪
+j
+​
+𝐫
+j
+g
+)
+=
+𝐩
+t
+​
+𝐪
+g
+​
+𝐫
+t
+{\bf p}\tilde{{\bf r}}_{0}=(\sum_{j=1}^{n}\frac{{\bf p}_{1}{\bf q}_{j}{\bf r}_{j}}{g},\ldots,\sum_{j=1}^{n}\frac{{\bf p}_{n}{\bf q}_{j}{\bf r}_{j}}{g})=\frac{{\bf p}^{t}{\bf q}}{g}{\bf r}^{t}
+for all
+1
+≤
+i
+≤
+n
+1\leq i\leq n
+, we have
+(
+diag
+⁡
+(
+𝐝
+~
+)
+−
+M
+~
+)
+​
+𝐫
+~
+t
+=
+0
+(\mathrm{diag}(\tilde{{\bf d}})-\tilde{M})\tilde{{\bf r}}^{t}=0
+if and only if
+(
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+​
+𝐫
+t
+=
+0
+(\mathrm{diag}({\bf d})-M){\bf r}^{t}=0
+.
+∎
+Note that we recover Theorem
+5.1
+from Theorem
+5.2
+by putting
+𝐩
+{\bf p}
+and
+𝐪
+{\bf q}
+equal to the characteristic vector of the clique
+C
+C
+.
+Theorem 5.3
+.
+Let
+M
+M
+be a non-negative integral
+n
+×
+n
+n\times n
+matrix with all diagonal entries equal to zero,
+𝐩
+=
+{
+p
+1
+​
+…
+,
+p
+n
+}
+∈
+ℕ
+n
+{\bf p}=\{p_{1}\ldots,p_{n}\}\in\mathbb{N}^{n}
+and
+𝐪
+=
+{
+q
+1
+​
+…
+,
+q
+n
+}
+∈
+ℕ
+n
+{\bf q}=\{q_{1}\ldots,q_{n}\}\in\mathbb{N}^{n}
+with
+g
+=
+gcd
+⁡
+(
+p
+1
+​
+…
+,
+p
+n
+,
+q
+1
+​
+…
+,
+q
+n
+)
+g=\mathrm{gcd}(p_{1}\ldots,p_{n},q_{1}\ldots,q_{n})
+.
+If
+g
+=
+1
+g=1
+,
+𝐩
+,
+𝐪
+≠
+𝟎
+{\bf p},{\bf q}\neq{\bf 0}
+and
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+M
+)
+({\bf d},{\bf r})\in\mathcal{A}(M)
+, then
+K
+⁡
+(
+M
+~
+,
+𝐝
+~
+,
+𝐫
+~
+)
+≅
+K
+⁡
+(
+M
+,
+𝐝
+,
+𝐫
+)
+.
+K(\tilde{M},\tilde{{\bf d}},\tilde{{\bf r}})\cong K(M,{\bf d},{\bf r}).
+Proof.
+This follows since
+diag
+⁡
+(
+𝐝
+~
+)
+−
+M
+~
+\mathrm{diag}(\tilde{{\bf d}})-\tilde{M}
+is integrally equivalent to
+(
+1
+𝟎
+𝟎
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+\left(\begin{array}[]{cc}1&{\bf 0}\\
+{\bf 0}&\mathrm{diag}({\bf d})-M\end{array}\right)
+.
+More precisely,
+(
+1
+𝟎
+𝐩
+I
+n
+)
+​
+(
+1
+−
+𝐪
+−
+𝐩
+𝐩
+t
+​
+𝐪
+g
++
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+​
+(
+1
+𝐪
+𝟎
+I
+n
+)
+=
+(
+1
+𝟎
+𝟎
+diag
+⁡
+(
+𝐝
+)
+−
+M
+)
+.
+\left(\begin{array}[]{cc}1&{\bf 0}\\
+{\bf p}&I_{n}\end{array}\right)\left(\begin{array}[]{cc}1&-{\bf q}\\
+-{\bf p}&\frac{{\bf p}^{t}{\bf q}}{g}+\mathrm{diag}({\bf d})-M\end{array}\right)\left(\begin{array}[]{cc}1&{\bf q}\\
+{\bf 0}&I_{n}\end{array}\right)=\left(\begin{array}[]{cc}1&{\bf 0}\\
+{\bf 0}&\mathrm{diag}({\bf d})-M\end{array}\right).\vskip-14.22636pt
+∎
+The applications of Theorem
+5.1
+are very wide.
+For instance, if we apply Theorem
+5.1
+to the complete graph
+K
+n
+K_{n}
+with
+C
+=
+V
+⁡
+(
+K
+n
+)
+C=V(K_{n})
+for
+n
+≥
+2
+n\geq 2
+,
+we obtain that
+c
+​
+s
+​
+(
+K
+n
+,
+C
+)
+cs(K_{n},C)
+is the star
+S
+n
+S_{n}
+with
+n
+n
+leaves.
+If
+v
+v
+is the center of
+S
+n
+S_{n}
+and we label the leaves of
+S
+n
+S_{n}
+from
+1
+1
+to
+n
+n
+, then by
+[
+14
+]
+𝒜
+′
+(
+S
+n
+)
+=
+{
+(
+𝐝
+,
+𝐫
+)
+∈
+ℕ
+n
++
+1
+×
+ℕ
+n
++
+1
+|
+𝐝
+v
+=
+1
+=
+∑
+i
+=
+1
+n
+1
+𝐝
+i
+,
+𝐫
+v
+=
+c
+and
+𝐫
+i
+=
+c
+𝐝
+i
+}
+,
+\mathcal{A}^{\prime}(S_{n})=\{({\bf d},{\bf r})\in\mathbb{N}^{n+1}\times\mathbb{N}^{n+1}\,|\,{\bf d}_{v}=1=\sum_{i=1}^{n}\frac{1}{{\bf d}_{i}},{\bf r}_{v}=c\text{ and }{\bf r}_{i}=\frac{c}{{\bf d}_{i}}\},
+where
+c
+=
+lcm
+⁡
+(
+𝐝
+1
+,
+…
+,
+𝐝
+n
+)
+c=\mathrm{lcm}({\bf d}_{1},\ldots,{\bf d}_{n})
+.
+For a complete description of the arithmetical structures on a star, see
+[
+5
+, Corollary 3.1]
+.
+In a similar way, let
+K
+2
+,
+n
+K_{2,n}
+be the complete bipartite graph with bipartition
+V
+1
+=
+{
+v
+1
+,
+v
+2
+}
+V_{1}=\{v_{1},v_{2}\}
+and
+V
+2
+=
+{
+u
+1
+,
+…
+,
+u
+n
+}
+V_{2}=\{u_{1},\ldots,u_{n}\}
+of size
+2
+2
+and
+n
+n
+respectively.
+Applying Theorem
+5.1
+to the complete graph
+K
+n
++
+1
+K_{n+1}
+with vertex set
+{
+v
+2
+,
+u
+1
+,
+…
+,
+u
+n
+}
+\{v_{2},u_{1},\ldots,u_{n}\}
+and
+C
+=
+{
+u
+1
+,
+…
+,
+u
+n
+}
+C=\{u_{1},\ldots,u_{n}\}
+, we get
+𝒜
+′
+(
+K
+2
+,
+n
+)
+=
+{
+(
+𝐝
+,
+𝐫
+)
+∈
+ℕ
+n
++
+2
+×
+ℕ
+n
++
+2
+|
+\displaystyle\mathcal{A}^{\prime}(K_{2,n})=\big\{({\bf d},{\bf r})\in\mathbb{N}^{n+2}\times\mathbb{N}^{n+2}\,|\!\!\!
+𝐝
+v
+1
+=
+1
+,
+(
+1
++
+1
+𝐝
+v
+2
+)
+​
+(
+∑
+i
+=
+1
+n
+1
+𝐝
+u
+i
+)
+=
+1
+,
+\displaystyle\!\!\!\!\!\!{\bf d}_{v_{1}}=1,(1+\frac{1}{{\bf d}_{v_{2}}})\left(\sum_{i=1}^{n}\frac{1}{{\bf d}_{u_{i}}}\right)=1,
+𝐫
+v
+1
+=
+c
+(
+∑
+i
+=
+1
+n
+1
+𝐝
+u
+i
+)
+,
+𝐫
+v
+2
+=
+c
+𝐝
+v
+2
++
+1
+and
+𝐫
+u
+i
+=
+c
+𝐝
+i
+}
+,
+\displaystyle\!\!\!\!\!{\bf r}_{v_{1}}=c\left(\sum_{i=1}^{n}\frac{1}{{\bf d}_{u_{i}}}\right),\,{\bf r}_{v_{2}}=\frac{c}{{\bf d}_{v_{2}}+1}\text{ and }{\bf r}_{u_{i}}=\frac{c}{{\bf d}_{i}}\big\},
+where
+c
+=
+lcm
+⁡
+(
+𝐝
+1
+,
+…
+,
+𝐝
+n
+)
+c=\mathrm{lcm}({\bf d}_{1},\ldots,{\bf d}_{n})
+.
+Note that
+(
+1
++
+1
+𝐝
+v
+2
+)
+​
+(
+∑
+i
+=
+1
+n
+1
+𝐝
+u
+i
+)
+=
+1
+(1+\frac{1}{{\bf d}_{v_{2}}})\left(\sum_{i=1}^{n}\frac{1}{{\bf d}_{u_{i}}}\right)=1
+if and only if
+1
+𝐝
+v
+2
++
+1
++
+∑
+i
+=
+1
+n
+1
+𝐝
+u
+i
+=
+1
+\frac{1}{{\bf d}_{v_{2}}+1}+\sum_{i=1}^{n}\frac{1}{{\bf d}_{u_{i}}}=1
+.
+For a complete description of the arithmetical structures on a complete bipartite graph see
+[
+14
+, Corollary 3.1]
+.
+Example 5.4
+.
+Taking
+n
+=
+3
+n=3
+we have that
+𝐝
+=
+(
+1
+,
+2
+,
+3
+,
+4
+,
+12
+)
+{\bf d}=(1,2,3,4,12)
+and
+𝐫
+=
+(
+8
+,
+4
+,
+4
+,
+3
+,
+1
+)
+{\bf r}=(8,4,4,3,1)
+.
+L
+⁡
+(
+K
+2
+,
+n
+,
+𝐝
+)
+​
+𝐫
+=
+(
+1
+0
+−
+1
+−
+1
+−
+1
+0
+2
+−
+1
+−
+1
+−
+1
+−
+1
+−
+1
+3
+0
+0
+−
+1
+−
+1
+0
+4
+0
+−
+1
+−
+1
+0
+0
+12
+)
+​
+(
+8
+4
+4
+3
+1
+)
+=
+𝟎
+.
+L(K_{2,n},{\bf d}){\bf r}=\left(\begin{array}[]{ccccc}1&0&-1&-1&-1\\
+0&2&-1&-1&-1\\
+-1&-1&3&0&0\\
+-1&-1&0&4&0\\
+-1&-1&0&0&12\end{array}\right)\left(\begin{array}[]{c}8\\
+4\\
+4\\
+3\\
+1\end{array}\right)={\bf 0}.
+In a general sense we have two special cases of the clique–star transformation, the subdivision of an edge and adding a pendant edge.
+These cases will play a very important role in Sections
+6.1
+and
+6.2
+.
+In the following we will present explicit forms of Theorem
+5.1
+in the cases of adding a pendant edge and the subdivision of an edge.
+Corollary 5.5
+.
+Given a graph
+G
+G
+and
+v
+v
+one of its vertices, let
+G
+~
+\tilde{G}
+be the graph resulting from adding the edge
+v
+​
+v
+′
+vv^{\prime}
+.
+If
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is an arithmetical structure of
+G
+G
+, then
+𝐝
+~
+u
+=
+{
+1
+if
+​
+u
+=
+v
+′
+,
+𝐝
+u
++
+1
+if
+​
+u
+=
+v
+,
+𝐝
+u
+otherwise
+.
+and
+𝐫
+~
+u
+=
+{
+𝐫
+v
+if
+​
+u
+=
+v
+′
+𝐫
+u
+otherwise
+\begin{array}[]{ccc}\tilde{{\bf d}}_{u}=\begin{cases}1&\textrm{ if }u=v^{\prime},\\
+{\bf d}_{u}+1&\textrm{ if }u=v,\\
+{\bf d}_{u}&\textrm{ otherwise}.\end{cases}&\quad\textrm{and}&\tilde{{\bf r}}_{u}=\begin{cases}{\bf r}_{v}&\textrm{ if }u=v^{\prime}\\
+\\
+{\bf r}_{u}&\textrm{ otherwise}\end{cases}\end{array}
+is an arithmetical structure of
+G
+~
+\tilde{G}
+.
+Proof.
+This follows from Theorem
+5.1
+with
+C
+=
+{
+v
+}
+C=\{v\}
+.
+∎
+Corollary 5.6
+.
+Given a graph
+G
+G
+and
+e
+=
+u
+1
+​
+u
+2
+e=u_{1}u_{2}
+one of its edges, let
+G
+~
+\tilde{G}
+be the graph obtained by subdividing the edge
+e
+e
+, see Figure
+3
+.
+If
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is an arithmetical structure of
+G
+G
+, then
+𝐝
+~
+u
+=
+{
+1
+if
+​
+u
+=
+v
+,
+𝐝
+u
++
+1
+if
+​
+u
+=
+u
+1
+,
+u
+2
+,
+𝐝
+u
+otherwise
+,
+and
+𝐫
+~
+u
+=
+{
+∑
+u
+∈
+e
+𝐫
+u
+if
+​
+u
+=
+v
+,
+𝐫
+u
+otherwise
+,
+\begin{array}[]{ccc}\tilde{{\bf d}}_{u}=\begin{cases}1&\textrm{ if }u=v,\\
+{\bf d}_{u}+1&\textrm{ if }u=u_{1},u_{2},\\
+{\bf d}_{u}&\textrm{ otherwise},\end{cases}&\quad\textrm{and}&\tilde{{\bf r}}_{u}=\begin{cases}\displaystyle{\sum_{u\in e}{\bf r}_{u}}&\textrm{ if }u=v,\\
+\\
+{\bf r}_{u}&\textrm{ otherwise},\end{cases}\end{array}
+is an arithmetical structure of
+G
+~
+\tilde{G}
+.
+Proof.
+This follows from Theorem
+5.1
+with
+C
+=
+{
+u
+1
+,
+u
+2
+}
+C=\{u_{1},u_{2}\}
+.
+∎
+The arithmetical structure
+(
+𝐝
+~
+,
+𝐫
+~
+)
+(\tilde{{\bf d}},\tilde{{\bf r}})
+of
+G
+~
+\tilde{G}
+is called the edge subdivision of
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+.
+Figure
+3
+illustrates the graph obtained by the subdivision of an edge.
+d
+1
+d_{1}
+d
+2
+d_{2}
+⟹
+\Longrightarrow
+G
+G
+e
+e
+d
+1
++
+1
+d_{1}\!\!+\!\!1
+d
+2
++
+1
+d_{2}\!\!+\!\!1
+1
+1
+G
+~
+\tilde{G}
+Figure 3.
+A graph
+G
+G
+with an edge
+e
+e
+and the graph
+G
+~
+\tilde{G}
+obtained by the subdivision of
+e
+e
+.
+It is not difficult to see that
+P
+n
+P_{n}
+can be obtained from
+P
+n
+−
+1
+P_{n-1}
+by the subdivision of an edge or by adding a pendant edge.
+Thus, it immediately results that at least a part of the arithmetical structures on
+P
+n
+P_{n}
+can be obtained from the arithmetical structures on
+P
+n
+−
+1
+P_{n-1}
+.
+Moreover, it can be proved that all the the arithmetical structures on
+P
+n
+P_{n}
+can be obtained in this way, see Section
+6.1
+.
+The non-trivial part is to prove that the whole of
+𝒟
+⁡
+(
+P
+n
+)
+\mathcal{D}(P_{n})
+can be obtained from
+𝒟
+⁡
+(
+P
+n
+−
+1
+)
+\mathcal{D}(P_{n-1})
+.
+Before doing this we illustrate Corollaries
+5.5
+and
+5.6
+with some examples.
+Example 5.7
+.
+It is easy to prove that
+𝒟
+⁡
+(
+P
+2
+)
+=
+{
+(
+1
+,
+1
+)
+t
+}
+\mathcal{D}(P_{2})=\{(1,1)^{t}\}
+.
+Thus, applying Corollary
+5.5
+to
+P
+2
+P_{2}
+we get that
+(
+1
+,
+2
+,
+1
+)
+t
+∈
+𝒟
+⁡
+(
+P
+3
+)
+(1,2,1)^{t}\in\mathcal{D}(P_{3})
+(because
+P
+2
+v
+′
+=
+P
+3
+{P_{2}}^{\prime}_{v}=P_{3}
+for any
+v
+∈
+V
+⁡
+(
+P
+2
+)
+v\in V(P_{2})
+).
+Also, if we apply Corollary
+5.6
+to the unique edge of
+P
+2
+P_{2}
+, we obtain
+(
+2
+,
+1
+,
+2
+)
+t
+∈
+𝒟
+⁡
+(
+P
+3
+)
+(2,1,2)^{t}\in\mathcal{D}(P_{3})
+(because
+P
+2
+e
+′
+=
+P
+3
+{P_{2}}^{\prime}_{e}=P_{3}
+).
+Since
+det
+​
+(
+L
+⁡
+(
+P
+3
+,
+𝐝
+)
+)
+=
+d
+1
+​
+d
+2
+​
+d
+3
+−
+d
+1
+−
+d
+3
+\textrm{det}(L(P_{3},{\bf d}))=d_{1}d_{2}d_{3}-d_{1}-d_{3}
+, it is not difficult to prove that indeed
+𝒟
+⁡
+(
+P
+3
+)
+=
+{
+(
+1
+,
+2
+,
+1
+)
+t
+,
+(
+2
+,
+1
+,
+2
+)
+t
+}
+\mathcal{D}(P_{3})=\{(1,2,1)^{t},(2,1,2)^{t}\}
+.
+By the same procedure it can be found that
+{
+(
+1
+,
+2
+,
+2
+,
+1
+)
+t
+,
+(
+1
+,
+3
+,
+1
+,
+2
+)
+t
+,
+(
+2
+,
+1
+,
+3
+,
+1
+)
+t
+,
+(
+3
+,
+1
+,
+2
+,
+2
+)
+t
+,
+(
+2
+,
+2
+,
+1
+,
+3
+)
+t
+}
+⊆
+𝒟
+⁡
+(
+P
+4
+)
+\{(1,2,2,1)^{t},(1,3,1,2)^{t},(2,1,3,1)^{t},(3,1,2,2)^{t},(2,2,1,3)^{t}\}\subseteq\mathcal{D}(P_{4})
+But in this case it is much more difficult to prove that these are all the arithmetical structures on
+P
+4
+P_{4}
+.
+Example 5.8
+.
+Since
+C
+4
+C_{4}
+is the subdivision of
+C
+3
+C_{3}
+by any edge, we can apply Corollary
+5.6
+to get arithmetical structures on
+C
+4
+C_{4}
+.
+Fix the natural labeling on
+C
+4
+C_{4}
+, since
+(
+(
+1
+,
+2
+,
+5
+)
+,
+(
+3
+,
+2
+,
+1
+)
+)
+\left((1,2,5),(3,2,1)\right)
+is an arithmetical structure of
+C
+3
+C_{3}
+we get that
+(
+(
+1
+,
+2
+,
+2
+,
+6
+)
+,
+(
+4
+,
+3
+,
+2
+,
+1
+)
+)
+,
+(
+(
+2
+,
+1
+,
+3
+,
+5
+)
+,
+(
+3
+,
+5
+,
+2
+,
+1
+)
+)
+,
+(
+(
+1
+,
+3
+,
+1
+,
+6
+)
+,
+(
+3
+,
+2
+,
+3
+,
+1
+)
+)
+\left((1,2,2,6),(4,3,2,1)\right),\left((2,1,3,5),(3,5,2,1)\right),\left((1,3,1,6),(3,2,3,1)\right)
+are arithmetical structures on
+C
+4
+C_{4}
+.
+In fact, for any
+n
+≥
+4
+n\geq 4
+,
+C
+n
+C_{n}
+is a subdivision of
+C
+n
+−
+1
+C_{n-1}
+.
+This fact allows us to obtain arithmetical structures on
+C
+n
+C_{n}
+by subsequent applications of Corollary
+5.6
+to the arithmetical structures on
+C
+3
+=
+K
+3
+C_{3}=K_{3}
+.
+Moreover, we will prove in Section
+6.2
+that if
+n
+≥
+4
+n\geq 4
+, any arithmetical structure of
+C
+n
+C_{n}
+different
+from
+(
+𝐝
+,
+𝐫
+)
+=
+(
+2
+⋅
+𝟏
+,
+𝟏
+)
+({\bf d},{\bf r})=\left(2\cdot{\bf 1},{\bf 1}\right)
+can be obtained in this way, see Theorem
+6.5
+.
+6.
+Applications: arithmetical structures on paths and cycles
+In this section we give a recursive description of the arithmetical structures on a path and cycle,
+see Theorems
+6.1
+and
+6.5
+.
+From these descriptions we get algorithmic descriptions of the arithmetical structures on
+paths and cycles, see Algorithm
+1
+and Corollaries
+6.3
+and
+6.6
+.
+The recursive descriptions have the advantage of being very short,
+but the disadvantage that producing the arithmetical structures on a path when it has many vertices is hard.
+An advantage of the algorithmic approach is that is easy to implement
+and allows constructing arithmetical structures with prescribed entries equal to
+1
+1
+on the
+𝐝
+{\bf d}
+.
+At the end of the section we study the arithmetical structures on the subdivision
+of the complete graph that can be obtained using Algorithm
+1
+.
+6.1.
+arithmetical structures on a path
+We begin by given a recursive way to find all the arithmetical structures on the path with
+n
+n
+vertices.
+Theorem 6.1
+.
+If
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is an arithmetical structure of
+P
+n
+P_{n}
+for
+n
+≥
+3
+n\geq 3
+and
+𝐝
+≠
+(
+1
+,
+2
+,
+…
+,
+2
+,
+1
+)
+{\bf d}\neq(1,2,\ldots,2,1)
+,
+then there exists a non-terminal vertex
+v
+v
+of
+P
+n
+P_{n}
+such that
+𝐝
+v
+=
+1
+​
+and
+​
+𝐝
+u
+>
+1
+​
+for all
+​
+u
+∈
+N
+P
+n
+​
+(
+v
+)
+.
+{\bf d}_{v}=1\text{ and }{\bf d}_{u}>1\text{ for all }u\in N_{P_{n}}(v).
+Moreover, any arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+of
+P
+n
+P_{n}
+different from the Laplacian
+can be obtained from an arithmetical structure of
+P
+n
+−
+1
+P_{n-1}
+by subdividing an edge.
+Proof.
+Let
+P
+n
+=
+v
+1
+v
+2
+⋯
+v
+n
+P_{n}=v_{1}v_{2}\cdots v_{n}
+.
+Since
+(
+𝐝
+c
+,
+𝐫
+c
+)
+=
+(
+(
+1
+,
+2
+,
+…
+,
+2
+,
+1
+)
+,
+𝟏
+)
+∈
+𝒜
+⁡
+(
+P
+n
+)
+({\bf d}_{c},{\bf r}_{c})=((1,2,\ldots,2,1),{\bf 1})\in\mathcal{A}(P_{n})
+and
+𝐝
+>
+0
+{\bf d}>0
+,
+Theorem
+2.3
+implies that there exists
+1
+<
+i
+<
+n
+1<i<n
+such that
+𝐝
+v
+i
+=
+1
+{\bf d}_{v_{i}}=1
+.
+Since
+L
+⁡
+(
+P
+n
+,
+𝐝
+)
+​
+𝐫
+t
+=
+𝟎
+t
+L(P_{n},{\bf d}){\bf r}^{t}={\bf 0}^{t}
+,
+𝐫
+v
+i
+=
+𝐫
+v
+i
+−
+1
++
+𝐫
+v
+i
++
+1
+{\bf r}_{v_{i}}={\bf r}_{v_{i-1}}+{\bf r}_{v_{i+1}}
+.
+Assume that
+3
+≤
+i
+≤
+n
+−
+2
+3\leq i\leq n-2
+.
+If
+𝐝
+v
+i
+−
+1
+=
+1
+{\bf d}_{v_{i-1}}=1
+, then
+𝐫
+v
+i
+−
+1
+=
+𝐫
+v
+i
+−
+2
++
+𝐫
+v
+i
+{\bf r}_{v_{i-1}}={\bf r}_{v_{i-2}}+{\bf r}_{v_{i}}
+and therefore
+𝐫
+v
+i
+−
+2
++
+𝐫
+i
++
+1
+=
+0
+{\bf r}_{v_{i-2}}+{\bf r}_{i+1}=0
+; which is a contradiction to the fact that
+𝐫
+>
+0
+{\bf r}>0
+.
+In a similar way it can be proved that
+𝐝
+v
+i
++
+1
+>
+1
+{\bf d}_{v_{i+1}}>1
+.
+Now, if
+i
+=
+2
+i=2
+, then
+𝐫
+1
+=
+𝐫
+2
+{\bf r}_{1}={\bf r}_{2}
+and therefore
+𝐫
+3
+=
+0
+{\bf r}_{3}=0
+; a contradiction.
+The case
+i
+=
+n
+−
+1
+i=n-1
+is similar.
+Now, let
+(
+𝐝
+′
+,
+𝐫
+′
+)
+∈
+ℕ
++
+V
+⁡
+(
+P
+n
+)
+−
+v
+i
+×
+ℕ
++
+V
+⁡
+(
+P
+n
+)
+−
+v
+i
+({\bf d}^{\prime},{\bf r}^{\prime})\in\mathbb{N}_{+}^{V(P_{n})-v_{i}}\times\mathbb{N}_{+}^{V(P_{n})-v_{i}}
+be given by
+𝐫
+′
+=
+𝐫
+|
+V
+⁡
+(
+P
+n
+)
+−
+v
+i
+{\bf r}^{\prime}={\bf r}|_{V(P_{n})-v_{i}}
+𝐝
+u
+′
+=
+{
+𝐝
+u
+−
+1
+if
+​
+u
+=
+v
+i
+−
+1
+,
+v
+i
++
+1
+,
+𝐝
+u
+otherwise
+.
+{\bf d}^{\prime}_{u}=\begin{cases}{\bf d}_{u}-1&\textrm{ if }u=v_{i-1},v_{i+1},\\
+{\bf d}_{u}&\textrm{ otherwise}.\end{cases}
+Since
+L
+⁡
+(
+P
+n
+,
+𝐝
+)
+​
+𝐫
+t
+=
+𝟎
+t
+L(P_{n},{\bf d}){\bf r}^{t}={\bf 0}^{t}
+, then
+𝐫
+v
+i
+=
+𝐫
+v
+i
+−
+1
++
+𝐫
+v
+i
++
+1
+{\bf r}_{v_{i}}={\bf r}_{v_{i-1}}+{\bf r}_{v_{i+1}}
+,
+𝐫
+v
+i
+−
+1
+​
+𝐝
+v
+i
+−
+1
+=
+𝐫
+v
+i
+−
+2
++
+𝐫
+v
+i
+{\bf r}_{v_{i-1}}{\bf d}_{v_{i-1}}={\bf r}_{v_{i-2}}+{\bf r}_{v_{i}}
+,
+𝐫
+v
+i
++
+1
+​
+𝐝
+v
+i
++
+1
+=
+𝐫
+v
+i
++
+𝐫
+v
+i
++
+2
+{\bf r}_{v_{i+1}}{\bf d}_{v_{i+1}}={\bf r}_{v_{i}}+{\bf r}_{v_{i+2}}
+.
+Then
+𝐫
+v
+i
+−
+1
+′
+​
+𝐝
+v
+i
+−
+1
+′
+\displaystyle{\bf r}^{\prime}_{v_{i-1}}{\bf d}^{\prime}_{v_{i-1}}
+=
+\displaystyle=
+𝐫
+v
+i
+−
+1
+​
+(
+𝐝
+v
+i
+−
+1
+−
+1
+)
+=
+𝐫
+v
+i
+−
+2
++
+𝐫
+v
+i
++
+1
+=
+𝐫
+v
+i
+−
+2
+′
++
+𝐫
+v
+i
++
+1
+′
+,
+\displaystyle{\bf r}_{v_{i-1}}({\bf d}_{v_{i-1}}-1)={\bf r}_{v_{i-2}}+{\bf r}_{v_{i+1}}={\bf r}^{\prime}_{v_{i-2}}+{\bf r}^{\prime}_{v_{i+1}},
+𝐫
+v
+i
++
+1
+′
+​
+𝐝
+v
+i
++
+1
+′
+\displaystyle{\bf r}^{\prime}_{v_{i+1}}{\bf d}^{\prime}_{v_{i+1}}
+=
+\displaystyle=
+𝐫
+v
+i
++
+1
+​
+(
+𝐝
+v
+i
++
+1
+−
+1
+)
+=
+𝐫
+v
+i
+−
+1
++
+𝐫
+v
+i
++
+2
+=
+𝐫
+v
+i
+−
+1
+′
++
+𝐫
+v
+i
++
+2
+′
+.
+\displaystyle{\bf r}_{v_{i+1}}({\bf d}_{v_{i+1}}-1)={\bf r}_{v_{i-1}}+{\bf r}_{v_{i+2}}={\bf r}^{\prime}_{v_{i-1}}+{\bf r}^{\prime}_{v_{i+2}}.
+Furthermore, since
+𝐝
+′
+,
+𝐫
+′
+>
+𝟎
+{\bf d}^{\prime},{\bf r}^{\prime}>{\bf 0}
+,
+(
+𝐝
+′
+,
+𝐫
+′
+)
+({\bf d}^{\prime},{\bf r}^{\prime})
+is an arithmetical structure of
+P
+n
+−
+1
+P_{n-1}
+.
+Finally, the result follows by applying Corollary
+5.6
+.
+The cases
+i
+=
+2
+,
+n
+−
+1
+i=2,n-1
+are similar.
+∎
+Note that the Laplacian arithmetical structure of
+P
+n
+P_{n}
+can be obtained from the Laplacian arithmetical structure of
+P
+2
+P_{2}
+by adding pendant vertices.
+As we mentioned before, in practice, Theorem
+6.1
+does not give a good way for constructing arithmetical structures on
+P
+n
+P_{n}
+when
+n
+n
+is large.
+With this in mind, in the following we present an algorithm that produces the arithmetical
+𝐫
+{\bf r}
+-structures (that is the
+𝐫
+{\bf r}
+vector of an arithmetical structure
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+) on
+P
+n
+P_{n}
+.
+Moreover, we present this algorithm in a very general way, which allow us to apply it in order to construct arithmetical structures on any subdivision of a graph.
+It is important to note that in the special case of
+P
+n
+P_{n}
+and
+C
+n
+C_{n}
+, it is possible to give a direct formula for the output of this algorithm.
+However, we prefer the algorithmic approach because, at least from our point of view, it seems more natural and more general.
+Before presenting the algorithm, let us introduce some notation.
+In the following,
+V
+=
+V
+⁡
+(
+G
+)
+V=V(G)
+and
+e
+v
+e_{v}
+will denote the vector in
+ℕ
++
+V
+\mathbb{N}_{+}^{V}
+given by
+(
+e
+v
+)
+u
+=
+δ
+v
+,
+u
+(e_{v})_{u}=\delta_{v,u}
+for each
+v
+∈
+V
+v\in V
+.
+Given
+U
+⊆
+V
+U\subseteq V
+with
+m
+m
+vertices, an
+order
+on
+U
+U
+is a bijective function
+θ
+:
+U
+→
+[
+m
+]
+\theta:U\rightarrow[m]
+.
+Note that
+θ
+\theta
+can be described by the vector
+(
+θ
+−
+1
+​
+(
+1
+)
+,
+…
+,
+θ
+−
+1
+​
+(
+m
+)
+)
+(\theta^{-1}(1),\ldots,\theta^{-1}(m))
+.
+Given
+u
+,
+v
+∈
+V
+u,v\in V
+, let
+P
+u
+,
+v
+P_{u,v}
+be the set of disjoint paths between
+u
+u
+and
+v
+v
+.
+Also, given
+𝐫
+∈
+ℕ
+V
+{\bf r}\in\mathbb{N}^{V}
+and
+u
+∈
+V
+u\in V
+, let
+W
+u
+​
+(
+𝐫
+)
+=
+{
+w
+∈
+V
+|
+∃
+P
+∈
+P
+u
+,
+w
+​
+such that
+​
+𝐫
+w
+≠
+0
+​
+and
+​
+𝐫
+v
+=
+0
+​
+for all
+​
+v
+​
+internal vertex of
+​
+P
+}
+.
+W_{u}({\bf r})=\{w\in V\,|\,\exists\,P\in P_{u,w}\text{ such that }{\bf r}_{w}\neq 0\text{ and }{\bf r}_{v}=0\text{ for all }v\text{ internal vertex of }P\}.
+Note that
+W
+u
+​
+(
+𝐫
+)
+W_{u}({\bf r})
+can be a multiset.
+In the special case when
+G
+G
+is a path or a cycle, the description of
+W
+u
+​
+(
+𝐫
+)
+W_{u}({\bf r})
+can be simplified.
+Finally, given a vector
+𝐫
+∈
+ℕ
+V
+{\bf r}\in\mathbb{N}^{V}
+, let
+supp
+⁡
+(
+𝐫
+)
+=
+{
+v
+∈
+V
+|
+𝐫
+v
+≠
+0
+}
+.
+\mathrm{supp}({\bf r})=\{v\in V\,|\,{\bf r}_{v}\neq 0\}.
+The algorithm will receive three inputs: a finite graph
+G
+G
+, a vector
+𝐫
+0
+∈
+ℕ
+V
+⁡
+(
+G
+)
+{\bf r}_{0}\in\mathbb{N}^{V(G)}
+with
+supp
+⁡
+(
+𝐫
+0
+)
+=
+V
+⁡
+(
+G
+)
+−
+U
+\mathrm{supp}({\bf r}_{0})=V(G)-U
+,
+and an order
+θ
+\theta
+on
+U
+U
+.
+Algorithm 1.
+Input:
+A graph
+G
+G
+, a vector
+𝐫
+0
+∈
+ℕ
+V
+⁡
+(
+G
+)
+{\bf r}_{0}\in\mathbb{N}^{V(G)}
+with
+supp
+⁡
+(
+𝐫
+0
+)
+=
+V
+−
+U
+\mathrm{supp}({\bf r}_{0})=V-U
+,
+and an order
+θ
+\theta
+on
+U
+U
+.
+Output:
+A vector
+𝐫
+=
+𝐫
+⁡
+(
+G
+,
+𝐫
+0
+,
+θ
+)
+∈
+ℕ
++
+V
+{\bf r}={\bf r}(G,{\bf r}_{0},\theta)\in\mathbb{N}_{+}^{V}
+.
+Algorithm:
+Set
+i
+=
+1
+i=1
+and
+𝐫
+=
+𝐫
+0
+{\bf r}={\bf r}_{0}
+.
+While
+i
+≤
+|
+U
+|
+i\leq|U|
+, set
+u
+=
+θ
+−
+1
+​
+(
+i
+)
+u=\theta^{-1}(i)
+,
+i
+=
+i
++
+1
+i=i+1
+, and
+𝐫
+=
+𝐫
++
+∑
+w
+∈
+W
+u
+​
+(
+𝐫
+)
+𝐫
+w
+​
+e
+u
+{\bf r}=\displaystyle{{\bf r}+\sum_{w\in W_{u}({\bf r})}{\bf r}_{w}}\ e_{u}
+.
+Return
+𝐫
+=
+𝐫
+⁡
+(
+G
+,
+𝐫
+0
+,
+θ
+)
+{\bf r}={\bf r}(G,{\bf r}_{0},\theta)
+.
+Note that
+W
+u
+​
+(
+𝐫
+)
+W_{u}({\bf r})
+is not always well defined. However, it is well defined for the cases in which we are interested in this section.
+Now we present an example to illustrate the algorithm.
+For simplicity, we often label the vertices of
+G
+G
+with the set
+{
+1
+,
+…
+,
+n
+}
+\{1,\ldots,n\}
+.
+Example 6.2
+.
+Let
+P
+5
+P_{5}
+be the path with vertices labeled by
+1
+,
+2
+,
+3
+,
+4
+,
+5
+1,2,3,4,5
+,
+𝐫
+0
+=
+(
+1
+,
+0
+,
+0
+,
+0
+,
+1
+)
+{\bf r}_{0}=(1,0,0,0,1)
+and
+θ
+=
+(
+3
+,
+2
+,
+1
+)
+\theta=(3,2,1)
+.
+1
+1
+0
+0
+0
+0
+0
+0
+1
+1
+1
+1
+0
+0
+0
+0
+2
+2
+1
+1
+1
+1
+0
+0
+3
+3
+2
+2
+1
+1
+(
+a
+)
+(a)
+𝐫
+0
+{\bf r}_{0}
+.
+(
+b
+)
+(b)
+Iteration
+1
+1
+.
+(
+c
+)
+(c)
+Iteration
+2
+2
+.
+1
+1
+4
+4
+3
+3
+2
+2
+1
+1
+(
+d
+)
+(d)
+Iteration
+3
+3
+.
+Figure 4
+.
+The iterations of Algorithm
+1
+.
+Since
+|
+supp
+⁡
+(
+𝐫
+0
+)
+|
+=
+2
+|\mathrm{supp}({\bf r}_{0})|=2
+, we will have three iterations.
+In iteration
+1
+we get
+W
+u
+​
+(
+𝐫
+)
+=
+{
+1
+,
+5
+}
+W_{u}({\bf r})=\{1,5\}
+and
+𝐫
+=
+(
+1
+,
+0
+,
+0
+,
+2
+,
+1
+)
+{\bf r}=(1,0,0,2,1)
+, see Figure
+4
+(b). In iteration
+2
+we get
+W
+=
+{
+1
+,
+4
+}
+W=\{1,4\}
+and
+𝐫
+=
+(
+1
+,
+0
+,
+3
+,
+2
+,
+1
+)
+{\bf r}=(1,0,3,2,1)
+, see Figure
+4
+(c).
+In iteration
+3
+we get
+W
+=
+{
+1
+,
+3
+}
+W=\{1,3\}
+and
+𝐫
+=
+(
+1
+,
+4
+,
+3
+,
+2
+,
+1
+)
+{\bf r}=(1,4,3,2,1)
+, see Figure
+4
+(d).
+Thus,
+𝐫
+⁡
+(
+P
+5
+,
+𝐫
+0
+,
+θ
+)
+=
+(
+1
+,
+4
+,
+3
+,
+2
+,
+1
+)
+.
+{\bf r}(P_{5},{\bf r}_{0},\theta)=(1,4,3,2,1).
+Also, if we perform the algorithm with
+𝐫
+0
+=
+(
+1
+,
+0
+,
+1
+,
+0
+,
+1
+)
+{\bf r}_{0}=(1,0,1,0,1)
+and
+θ
+=
+(
+1
+,
+2
+)
+\theta=(1,2)
+, then we get
+𝐫
+⁡
+(
+P
+5
+,
+𝐫
+0
+,
+θ
+)
+=
+(
+1
+,
+2
+,
+1
+,
+2
+,
+1
+)
+.
+{\bf r}(P_{5},{\bf r}_{0},\theta)=(1,2,1,2,1).
+We are mainly interested in describing the arithmetical structures on a path and on a cycle, in which cases we can give a complete description.
+Given
+U
+⊆
+V
+⁡
+(
+G
+)
+U\subseteq V(G)
+, let
+χ
+U
+\chi_{U}
+be the characteristic vector of
+U
+U
+, that is,
+(
+χ
+U
+)
+u
+=
+1
+(\chi_{U})_{u}=1
+when
+u
+∈
+U
+u\in U
+and
+(
+χ
+U
+)
+u
+=
+0
+(\chi_{U})_{u}=0
+when
+u
+∉
+U
+u\notin U
+.
+Corollary 6.3
+.
+If
+P
+n
+P_{n}
+is a path with
+n
+≥
+2
+n\geq 2
+vertices
+v
+1
+,
+…
+,
+v
+n
+v_{1},\ldots,v_{n}
+and
+𝐫
+⁡
+(
+U
+,
+θ
+)
+=
+𝐫
+⁡
+(
+P
+n
+,
+χ
+U
+,
+θ
+)
+{\bf r}(U,\theta)={\bf r}(P_{n},\chi_{U},\theta)
+, then
+ℛ
+⁡
+(
+P
+n
+)
+=
+{
+𝐫
+⁡
+(
+U
+,
+θ
+)
+|
+{
+v
+1
+,
+v
+n
+}
+⊆
+U
+⊆
+V
+⁡
+(
+P
+n
+)
+​
+and
+​
+θ
+​
+is an order on
+​
+V
+​
+(
+P
+n
+)
+−
+U
+}
+.
+\mathcal{R}(P_{n})=\big\{{\bf r}(U,\theta)\,\big|\,\{v_{1},v_{n}\}\subseteq U\subseteq V(P_{n})\textrm{ and }\theta\text{ is an order on }V(P_{n})-U\big\}.
+Proof.
+We will use induction on
+n
+n
+.
+If
+n
+=
+2
+n=2
+, then it is not difficult to see that
+ℛ
+⁡
+(
+P
+2
+)
+=
+{
+(
+1
+,
+1
+)
+}
+=
+{
+𝐫
+⁡
+(
+V
+⁡
+(
+P
+2
+)
+,
+∅
+)
+}
+.
+\mathcal{R}(P_{2})=\{(1,1)\}=\{{\bf r}(V(P_{2}),\emptyset)\}.
+(
+⊇
+)
+(\supseteq)
+Let
+{
+v
+1
+,
+v
+n
+}
+⊆
+U
+⊆
+V
+⁡
+(
+P
+n
+)
+\{v_{1},v_{n}\}\subseteq U\subseteq V(P_{n})
+and
+θ
+\theta
+an order on
+V
+⁡
+(
+P
+n
+)
+−
+U
+V(P_{n})-U
+.
+If
+U
+=
+V
+⁡
+(
+P
+n
+)
+U=V(P_{n})
+, then
+𝐫
+⁡
+(
+U
+,
+θ
+)
+{\bf r}(U,\theta)
+is the Laplacian arithmetical structure of
+P
+n
+P_{n}
+.
+In the other case, let
+U
+′
+=
+U
+U^{\prime}=U
+and
+θ
+′
+=
+θ
+|
+V
+⁡
+(
+P
+n
+)
+−
+U
+−
+v
+\theta^{\prime}=\theta|_{V(P_{n})-U-v}
+where
+v
+=
+θ
+−
+1
+​
+(
+n
+−
+|
+U
+|
+)
+v=\theta^{-1}(n-|U|)
+.
+By the induction hypothesis,
+𝐫
+⁡
+(
+U
+′
+,
+θ
+′
+)
+∈
+ℛ
+⁡
+(
+P
+n
+−
+1
+)
+{\bf r}(U^{\prime},\theta^{\prime})\in\mathcal{R}(P_{n-1})
+.
+Finally, by Corollary
+5.6
+and Algorithm
+1
+, we get that
+𝐫
+⁡
+(
+U
+,
+θ
+)
+∈
+ℛ
+⁡
+(
+P
+n
+)
+{\bf r}(U,\theta)\in\mathcal{R}(P_{n})
+.
+(
+⊆
+)
+(\subseteq)
+Let
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+P
+n
+)
+({\bf d},{\bf r})\in\mathcal{A}(P_{n})
+.
+First, if
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is the Laplacian arithmetical structure of
+P
+n
+P_{n}
+, then
+𝐫
+=
+𝐫
+⁡
+(
+V
+⁡
+(
+P
+n
+)
+,
+∅
+)
+{\bf r}={\bf r}(V(P_{n}),\emptyset)
+.
+In the other case, by Theorem
+6.1
+there exists
+(
+𝐝
+′
+,
+𝐫
+′
+)
+∈
+ℛ
+⁡
+(
+P
+n
+−
+1
+)
+({\bf d}^{\prime},{\bf r}^{\prime})\in\mathcal{R}(P_{n-1})
+such that
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+can be obtained from
+(
+𝐝
+′
+,
+𝐫
+′
+)
+({\bf d}^{\prime},{\bf r}^{\prime})
+by subdividing and edge
+e
+e
+.
+Let
+v
+v
+the vertex of
+P
+n
+P_{n}
+obtained by subdividing
+e
+e
+.
+By the induction hypothesis,
+𝐫
+′
+=
+𝐫
+⁡
+(
+U
+′
+,
+θ
+′
+)
+{\bf r}^{\prime}={\bf r}(U^{\prime},\theta^{\prime})
+for some
+{
+v
+1
+,
+v
+n
+}
+⊆
+U
+′
+⊆
+V
+⁡
+(
+P
+n
+−
+1
+)
+\{v_{1},v_{n}\}\subseteq U^{\prime}\subseteq V(P_{n-1})
+and
+θ
+\theta
+an order on
+V
+⁡
+(
+P
+n
+−
+1
+)
+−
+U
+′
+V(P_{n-1})-U^{\prime}
+.
+Let
+U
+=
+U
+′
+U=U^{\prime}
+and
+θ
+⁡
+(
+u
+)
+=
+{
+n
+−
+|
+U
+′
+|
+if
+​
+u
+=
+v
+,
+θ
+′
+​
+(
+u
+)
+otherwise.
+\theta(u)=\begin{cases}n-|U^{\prime}|&\text{ if }u=v,\\
+\theta^{\prime}(u)&\text{ otherwise.}\end{cases}
+Finally, by Algorithm
+1
+and Corollary
+5.6
+,
+𝐫
+=
+𝐫
+⁡
+(
+U
+,
+θ
+)
+{\bf r}={\bf r}(U,\theta)
+and the result follows.
+∎
+During the CMO-BIRS Workshop “Sandpile Groups” in November 2015, the authors were informed that the
+number of arithmetical structures on the path is a Catalan number.
+Theorem 6.4
+(
+[
+3
+]
+)
+.
+The number of arithmetical structures on the path
+P
+n
++
+1
+P_{n+1}
+is equal to the Catalan number
+C
+n
+=
+1
+n
++
+1
+​
+(
+2
+​
+n
+n
+)
+.
+C_{n}=\frac{1}{n+1}\binom{2n}{n}.
+Proof.
+This follows directly from
+[
+13
+, Problem 93, page 34]
+and the description of the
+𝐫
+{\bf r}
+vector of the arithmetical structures on the path
+obtained from the second part of Proposition
+6.1
+.
+Note that any sequence obtained in
+[
+13
+, Problem 93]
+begins and ends with a
+1
+1
+.
+Therefore, in this case, the operations, appending a
+1
+1
+at the end of a sequence and inserting between two consecutive terms their sum, commute.
+∎
+6.2.
+arithmetical structures on the cycle
+We begin by giving a recursive description of the arithmetical structures on a cycle.
+Theorem 6.5
+.
+Let
+C
+n
+C_{n}
+be a cycle with
+n
+≥
+4
+n\geq 4
+vertices and
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+be an arithmetical structure of
+C
+n
+C_{n}
+.
+If
+𝐝
+≠
+2
+⋅
+𝟏
+{\bf d}\neq 2\cdot{\bf 1}
+, then there exists a vertex
+v
+v
+of
+C
+n
+C_{n}
+such that
+𝐝
+v
+=
+1
+​
+and
+​
+𝐝
+u
+>
+1
+​
+for all
+​
+u
+∈
+N
+C
+n
+​
+(
+v
+)
+.
+{\bf d}_{v}=1\text{ and }{\bf d}_{u}>1\text{ for all }u\in N_{C_{n}}(v).
+Moreover, any arithmetical structure of
+C
+n
+C_{n}
+different from
+(
+𝟐
+,
+𝟏
+)
+({\bf 2},{\bf 1})
+can be obtained from an arithmetical structure of
+C
+n
+−
+1
+C_{n-1}
+by subdividing one of its edges.
+Proof.
+Although the arguments we will give are very similar to those given in the proof of Theorem
+6.1
+, we write down the arguments for the sake of completeness.
+Let
+C
+n
+=
+v
+1
+v
+2
+⋯
+v
+n
+C_{n}=v_{1}v_{2}\cdots v_{n}
+.
+Since
+(
+2
+⋅
+𝟏
+,
+𝟏
+)
+(2\cdot{\bf 1},{\bf 1})
+is an arithmetical structure of
+C
+n
+C_{n}
+, by Theorem
+2.3
+,
+𝐝
+≱
+2
+⋅
+𝟏
+{\bf d}\not\geq 2\cdot{\bf 1}
+.
+Thus, there must exists a vertex
+i
+i
+such that
+𝐝
+v
+i
+=
+1
+{\bf d}_{v_{i}}=1
+.
+Since
+n
+≥
+4
+n\geq 4
+, let
+w
+w
+be the vertex adjacent to
+v
+i
+−
+1
+v_{i-1}
+different from
+v
+i
+v_{i}
+.
+If
+𝐝
+v
+i
+−
+1
+=
+1
+{\bf d}_{v_{i-1}}=1
+, then using
+L
+⁡
+(
+C
+n
+,
+𝐝
+)
+​
+𝐫
+t
+=
+𝟎
+t
+L(C_{n},{\bf d}){\bf r}^{t}={\bf 0}^{t}
+we get that
+−
+𝐫
+v
+i
+−
+1
++
+𝐫
+v
+i
+−
+𝐫
+v
+i
++
+1
+=
+0
+and
+−
+𝐫
+w
++
+𝐫
+v
+i
+−
+1
+−
+𝐫
+v
+i
+=
+0
+.
+-{\bf r}_{v_{i-1}}+{\bf r}_{v_{i}}-{\bf r}_{v_{i+1}}=0\qquad\textrm{and}\qquad-{\bf r}_{w}+{\bf r}_{v_{i-1}}-{\bf r}_{v_{i}}=0.
+Thus
+−
+𝐫
+v
+i
++
+1
+−
+𝐫
+w
+=
+0
+-{\bf r}_{v_{i+1}}-{\bf r}_{w}=0
+.
+This is a contradiction to the fact that
+𝐫
+>
+0
+{\bf r}>0
+.
+Similar arguments work for
+𝐝
+v
+i
++
+1
+{\bf d}_{v_{i+1}}
+.
+Now, let
+(
+𝐝
+′
+,
+𝐫
+′
+)
+∈
+ℕ
++
+V
+⁡
+(
+C
+n
+)
+−
+v
+i
+×
+ℕ
++
+V
+⁡
+(
+C
+n
+)
+−
+v
+i
+({\bf d}^{\prime},{\bf r}^{\prime})\in\mathbb{N}_{+}^{V(C_{n})-v_{i}}\times\mathbb{N}_{+}^{V(C_{n})-v_{i}}
+be given by
+𝐫
+′
+=
+𝐫
+|
+V
+⁡
+(
+C
+n
+)
+−
+v
+i
+{\bf r}^{\prime}={\bf r}|_{V(C_{n})-v_{i}}
+𝐝
+u
+′
+=
+{
+𝐝
+u
+−
+1
+if
+​
+u
+=
+v
+i
+−
+1
+,
+v
+i
++
+1
+,
+𝐝
+u
+otherwise
+.
+{\bf d}^{\prime}_{u}=\begin{cases}{\bf d}_{u}-1&\textrm{ if }u=v_{i-1},v_{i+1},\\
+{\bf d}_{u}&\textrm{ otherwise}.\end{cases}
+Since
+L
+⁡
+(
+C
+n
+,
+𝐝
+)
+​
+𝐫
+t
+=
+𝟎
+t
+L(C_{n},{\bf d}){\bf r}^{t}={\bf 0}^{t}
+, then
+𝐫
+v
+i
+=
+𝐫
+v
+i
+−
+1
++
+𝐫
+v
+i
++
+1
+{\bf r}_{v_{i}}={\bf r}_{v_{i-1}}+{\bf r}_{v_{i+1}}
+,
+𝐫
+v
+i
+−
+1
+​
+𝐝
+v
+i
+−
+1
+=
+𝐫
+v
+i
+−
+2
++
+𝐫
+v
+i
+{\bf r}_{v_{i-1}}{\bf d}_{v_{i-1}}={\bf r}_{v_{i-2}}+{\bf r}_{v_{i}}
+,
+𝐫
+v
+i
++
+1
+​
+𝐝
+v
+i
++
+1
+=
+𝐫
+v
+i
++
+𝐫
+v
+i
++
+2
+{\bf r}_{v_{i+1}}{\bf d}_{v_{i+1}}={\bf r}_{v_{i}}+{\bf r}_{v_{i+2}}
+and therefore
+𝐫
+v
+i
+−
+1
+′
+​
+𝐝
+v
+i
+−
+1
+′
+\displaystyle{\bf r}^{\prime}_{v_{i-1}}{\bf d}^{\prime}_{v_{i-1}}
+=
+\displaystyle=
+𝐫
+v
+i
+−
+1
+​
+(
+𝐝
+v
+i
+−
+1
+−
+1
+)
+=
+𝐫
+v
+i
+−
+2
++
+𝐫
+v
+i
++
+1
+=
+𝐫
+v
+i
+−
+2
+′
++
+𝐫
+v
+i
++
+1
+′
+,
+\displaystyle{\bf r}_{v_{i-1}}({\bf d}_{v_{i-1}}-1)={\bf r}_{v_{i-2}}+{\bf r}_{v_{i+1}}={\bf r}^{\prime}_{v_{i-2}}+{\bf r}^{\prime}_{v_{i+1}},
+𝐫
+v
+i
++
+1
+′
+​
+𝐝
+v
+i
++
+1
+′
+\displaystyle{\bf r}^{\prime}_{v_{i+1}}{\bf d}^{\prime}_{v_{i+1}}
+=
+\displaystyle=
+𝐫
+v
+i
++
+1
+​
+(
+𝐝
+v
+i
++
+1
+−
+1
+)
+=
+𝐫
+v
+i
+−
+1
++
+𝐫
+v
+i
++
+2
+=
+𝐫
+v
+i
+−
+1
+′
++
+𝐫
+v
+i
++
+2
+′
+.
+\displaystyle{\bf r}_{v_{i+1}}({\bf d}_{v_{i+1}}-1)={\bf r}_{v_{i-1}}+{\bf r}_{v_{i+2}}={\bf r}^{\prime}_{v_{i-1}}+{\bf r}^{\prime}_{v_{i+2}}.
+Furthermore, since
+𝐝
+′
+,
+𝐫
+′
+>
+𝟎
+{\bf d}^{\prime},{\bf r}^{\prime}>{\bf 0}
+,
+(
+𝐝
+′
+,
+𝐫
+′
+)
+({\bf d}^{\prime},{\bf r}^{\prime})
+is an arithmetical structure of
+C
+n
+−
+1
+C_{n-1}
+.
+Note that the indices on the
+v
+v
+’s are taken modulo
+n
+n
+.
+Finally, the result follows by applying Corollary
+5.6
+.
+∎
+Let
+C
+2
+C_{2}
+be the multigraph with two vertices
+v
+1
+v_{1}
+and
+v
+2
+v_{2}
+and two edges between
+v
+1
+v_{1}
+and
+v
+2
+v_{2}
+,
+that is, a cycle with two vertices.
+It is not difficult to see that
+C
+2
+C_{2}
+has three arithmetical structures, namely
+a
+1
+=
+(
+(
+2
+,
+2
+)
+,
+(
+1
+,
+1
+)
+)
+a_{1}=((2,2),(1,1))
+(the Laplacian),
+a
+2
+=
+(
+(
+4
+,
+1
+)
+,
+(
+1
+,
+2
+)
+)
+a_{2}=((4,1),(1,2))
+and
+a
+3
+=
+(
+(
+1
+,
+4
+)
+,
+(
+2
+,
+1
+)
+)
+a_{3}=((1,4),(2,1))
+.
+In a similar way,
+C
+3
+C_{3}
+has essentially three arithmetical structures,
+namely
+b
+1
+=
+(
+(
+2
+,
+2
+,
+2
+)
+,
+(
+1
+,
+1
+,
+1
+)
+)
+b_{1}=((2,2,2),(1,1,1))
+(the Laplacian),
+b
+2
+=
+(
+(
+1
+,
+3
+,
+3
+)
+,
+(
+2
+,
+1
+,
+1
+)
+)
+b_{2}=((1,3,3),(2,1,1))
+and
+b
+3
+=
+(
+(
+1
+,
+2
+,
+5
+)
+,
+(
+3
+,
+2
+,
+1
+)
+)
+b_{3}=((1,2,5),(3,2,1))
+.
+Actually
+C
+3
+C_{3}
+has ten arithmetical structures, but the others are permutations of these three.
+Also, it is not difficult to see that
+b
+2
+b_{2}
+can be obtained from
+a
+1
+a_{1}
+and
+b
+3
+b_{3}
+can be obtained from
+a
+2
+a_{2}
+by subdividing one of the edges of
+C
+2
+C_{2}
+.
+In this way, Theorem
+6.5
+can be extended to say that any arithmetical structure of
+C
+n
+C_{n}
+with
+n
+≥
+3
+n\geq 3
+can be obtained by the subdivision of the edges from either the Laplacian arithmetical structures on
+C
+s
+C_{s}
+for some
+2
+≤
+s
+≤
+n
+−
+1
+2\leq s\leq n-1
+or
+a
+2
+a_{2}
+.
+The next corollary gives a description of
+ℛ
+⁡
+(
+C
+n
+)
+\mathcal{R}(C_{n})
+in this sense.
+Corollary 6.6
+.
+If
+C
+n
+C_{n}
+is a cycle with
+n
+≥
+2
+n\geq 2
+vertices
+v
+1
+,
+…
+,
+v
+n
+v_{1},\ldots,v_{n}
+and
+𝐫
+⁡
+(
+U
+,
+θ
+)
+=
+𝐫
+⁡
+(
+C
+n
+,
+χ
+U
+,
+θ
+)
+{\bf r}(U,\theta)={\bf r}(C_{n},\chi_{U},\theta)
+, then
+ℛ
+⁡
+(
+C
+n
+)
+=
+{
+𝐫
+⁡
+(
+U
+,
+θ
+)
+|
+∅
+≠
+U
+⊆
+V
+⁡
+(
+C
+n
+)
+​
+and
+​
+θ
+​
+is an order on
+​
+V
+​
+(
+C
+n
+)
+−
+U
+}
+.
+\mathcal{R}(C_{n})=\big\{{\bf r}(U,\theta)\,\big|\,\emptyset\neq U\subseteq V(C_{n})\textrm{ and }\theta\text{ is an order on }V(C_{n})-U\big\}.
+Proof.
+This follows by using similar arguments to those given for Corollary
+6.3
+.
+∎
+Example 6.7
+.
+Let
+C
+3
+C_{3}
+be the cycle with vertices labeled by
+1
+,
+2
+,
+3
+1,2,3
+,
+𝐫
+0
+=
+(
+1
+,
+0
+,
+0
+)
+{\bf r}_{0}=(1,0,0)
+and
+θ
+=
+(
+1
+,
+2
+)
+\theta=(1,2)
+.
+1
+1
+0
+0
+0
+0
+1
+1
+2
+2
+0
+0
+1
+1
+2
+2
+3
+3
+(
+a
+)
+(a)
+𝐫
+0
+{\bf r}_{0}
+.
+(
+b
+)
+(b)
+Iteration
+1
+1
+.
+(
+c
+)
+(c)
+Iteration
+2
+2
+.
+Figure 5
+.
+The iterations of Algorithm
+1
+on
+C
+3
+C_{3}
+with
+𝐫
+0
+=
+(
+1
+,
+0
+,
+0
+)
+{\bf r}_{0}=(1,0,0)
+.
+In iteration
+1
+we get
+W
+u
+​
+(
+𝐫
+)
+=
+{
+1
+,
+1
+}
+W_{u}({\bf r})=\{1,1\}
+and
+𝐫
+=
+(
+1
+,
+2
+,
+0
+)
+{\bf r}=(1,2,0)
+, see Figure
+5
+(b).
+In iteration
+2
+we get
+W
+=
+{
+1
+,
+2
+}
+W=\{1,2\}
+and
+𝐫
+=
+(
+1
+,
+2
+,
+3
+)
+{\bf r}=(1,2,3)
+, see Figure
+5
+(c).
+Thus,
+𝐫
+⁡
+(
+C
+3
+,
+𝐫
+0
+,
+θ
+)
+=
+(
+1
+,
+2
+,
+3
+)
+{\bf r}(C_{3},{\bf r}_{0},\theta)=(1,2,3)
+.
+Another way to see the arithmetical structures on
+C
+n
+C_{n}
+is as the arithmetical structures
+obtained from
+P
+n
++
+1
+P_{n+1}
+by merging the terminal vertices of
+P
+n
++
+1
+P_{n+1}
+.
+More precisely, let
+P
+n
++
+1
+=
+u
+1
+u
+2
+⋯
+v
+n
++
+1
+P_{n+1}=u_{1}u_{2}\cdots v_{n+1}
+and
+C
+n
+=
+v
+1
+v
+2
+⋯
+v
+n
+C_{n}=v_{1}v_{2}\cdots v_{n}
+.
+If
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+P
+n
++
+1
+)
+({\bf d},{\bf r})\in\mathcal{A}(P_{n+1})
+, then by Corollary
+6.6
+,
+𝐫
+u
+1
+=
+𝐫
+u
+n
++
+1
+=
+1
+{\bf r}_{u_{1}}={\bf r}_{u_{n+1}}=1
+.
+Making a proper identification of the vertices of
+P
+n
++
+1
+P_{n+1}
+and
+C
+n
+C_{n}
+, Theorem
+4.1
+implies that for any
+1
+≤
+k
+≤
+n
+1\leq k\leq n
+there exists a bijection between
+𝒜
+⁡
+(
+P
+n
++
+1
+)
+\mathcal{A}(P_{n+1})
+and the arithmetical structures on
+C
+n
+C_{n}
+with
+𝐫
+v
+k
+=
+1
+{\bf r}_{v_{k}}=1
+.
+Note that this bijection can also be obtained in the following way:
+let
+f
+k
+:
+V
+⁡
+(
+P
+n
++
+1
+)
+→
+V
+⁡
+(
+C
+n
+)
+f_{k}:V(P_{n+1})\rightarrow V(C_{n})
+be given by
+f
+k
+​
+(
+u
+i
+)
+=
+v
+n
+−
+k
++
+i
++
+1
+​
+(
+mod
+​
+n
+)
+f_{k}(u_{i})=v_{n-k+i+1\,(\textrm{mod }n)}
+and
+f
+k
+​
+(
+u
+n
++
+1
+)
+=
+v
+k
+f_{k}(u_{n+1})=v_{k}
+.
+Let
+f
+~
+k
+\tilde{f}_{k}
+be the map between
+𝒜
+⁡
+(
+P
+n
++
+1
+)
+\mathcal{A}(P_{n+1})
+and
+𝒜
+k
+​
+(
+C
+n
+)
+=
+{
+(
+𝐝
+,
+𝐫
+)
+∈
+𝒜
+⁡
+(
+C
+n
+)
+|
+𝐫
+v
+k
+=
+1
+}
+\mathcal{A}_{k}(C_{n})=\{({\bf d},{\bf r})\in\mathcal{A}(C_{n})\,|\,{\bf r}_{v_{k}}=1\}
+induced by
+f
+k
+f_{k}
+on the right sides of Corollaries
+6.3
+and
+6.6
+.
+That is,
+f
+~
+k
+​
+(
+𝐫
+⁡
+(
+P
+n
++
+1
+,
+U
+,
+θ
+)
+)
+=
+𝐫
+⁡
+(
+C
+n
+,
+f
+⁡
+(
+U
+)
+,
+θ
+∘
+f
+−
+1
+)
+.
+\tilde{f}_{k}({\bf r}(P_{n+1},U,\theta))={\bf r}(C_{n},f(U),\theta\circ f^{-1}).
+Using this correspondence, we get that
+2
+n
++
+1
+​
+(
+2
+​
+n
+−
+1
+n
+−
+1
+)
+=
+C
+n
+≤
+|
+𝒜
+⁡
+(
+C
+n
+)
+|
+≤
+n
+​
+C
+n
+=
+2
+​
+n
+n
++
+1
+​
+(
+2
+​
+n
+−
+1
+n
+−
+1
+)
+.
+\frac{2}{n+1}\binom{2n-1}{n-1}=C_{n}\leq|\mathcal{A}(C_{n})|\leq nC_{n}=\frac{2n}{n+1}\binom{2n-1}{n-1}.
+In a similar way, using Theorem
+4.2
+we have a correspondence between
+𝒜
+⁡
+(
+C
+n
+)
+\mathcal{A}(C_{n})
+and
+𝒜
+⁡
+(
+P
+n
++
+1
+)
+\mathcal{A}(P_{n+1})
+.
+This correspondence can also be obtained with a mapping between the vertices of
+C
+n
+C_{n}
+and
+P
+n
++
+1
+P_{n+1}
+.
+During the BIRS-CMO workshop “Sandpile groups” the authors were informed that the number of
+arithmetical structures on a cycle with
+n
+n
+vertices is equal to
+(
+2
+​
+n
+−
+1
+n
+−
+1
+)
+\binom{2n-1}{n-1}
+, see
+[
+3
+]
+.
+6.3.
+arithmetical structures on the subdivision of a graph
+Given an arithmetical structure of a graph
+G
+G
+, Algorithm
+1
+produces arithmetical structures on any subdivision of
+G
+G
+.
+More precisely, let
+s
+⁡
+(
+G
+)
+s(G)
+the graph obtained from
+G
+G
+by subdividing several edges several times and
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+an arithmetical structure of a graph
+G
+G
+.
+Taking
+s
+⁡
+(
+G
+)
+s(G)
+,
+θ
+\theta
+an order in
+V
+⁡
+(
+s
+⁡
+(
+G
+)
+)
+−
+V
+⁡
+(
+G
+)
+V(s(G))-V(G)
+, and
+(
+𝐫
+0
+)
+u
+=
+{
+𝐫
+u
+if
+​
+u
+∈
+V
+⁡
+(
+G
+)
+,
+0
+otherwise
+,
+({\bf r}_{0})_{u}=\begin{cases}{\bf r}_{u}&\text{ if }u\in V(G),\\
+0&\text{otherwise},\end{cases}
+as the input of Algorithm
+1
+, we can generate some of the arithmetical structures on
+s
+⁡
+(
+G
+)
+s(G)
+.
+For instance, consider the complete graph
+K
+4
+K_{4}
+with four vertices and
+s
+⁡
+(
+K
+4
+)
+s(K_{4})
+the graph obtained from
+K
+4
+K_{4}
+by subdividing the edge
+v
+3
+​
+v
+4
+v_{3}v_{4}
+.
+It is not difficult to check that
+K
+4
+K_{4}
+has
+191
+191
+arithmetical structures divided into
+12
+12
+classes.
+One of them is given by
+𝐝
+=
+(
+1
+,
+2
+,
+9
+,
+14
+)
+{\bf d}=(1,2,9,14)
+and
+𝐫
+=
+(
+15
+,
+10
+,
+3
+,
+2
+)
+{\bf r}=(15,10,3,2)
+.
+Using Algorithm
+1
+with
+𝐫
+0
+=
+(
+15
+,
+10
+,
+3
+,
+2
+,
+0
+)
+{\bf r}_{0}=(15,10,3,2,0)
+we get that
+𝐝
+=
+(
+1
+,
+2
+,
+10
+,
+15
+,
+1
+)
+​
+and
+​
+𝐫
+=
+(
+15
+,
+10
+,
+3
+,
+2
+,
+5
+)
+{\bf d}=(1,2,10,15,1)\text{ and }{\bf r}=(15,10,3,2,5)
+is an arithmetical structure of
+s
+⁡
+(
+K
+4
+)
+s(K_{4})
+.
+In a similar way with
+𝐫
+0
+=
+(
+2
+,
+3
+,
+3
+,
+5
+,
+0
+)
+{\bf r}_{0}=(2,3,3,5,0)
+we get that
+𝐝
+=
+(
+2
+,
+3
+,
+4
+,
+6
+,
+1
+)
+{\bf d}=(2,3,4,6,1)
+and
+𝐫
+=
+(
+4
+,
+3
+,
+3
+,
+2
+,
+5
+)
+{\bf r}=(4,3,3,2,5)
+is an arithmetical structure of
+s
+⁡
+(
+K
+4
+)
+s(K_{4})
+.
+Moreover, if we subdivide twice the edge
+v
+3
+,
+v
+4
+v_{3},v_{4}
+, we can get more arithmetical structures, for instance with
+𝐫
+0
+=
+(
+15
+,
+10
+,
+3
+,
+2
+,
+0
+)
+{\bf r}_{0}=(15,10,3,2,0)
+we get two new arithmetical structures
+𝐝
+=
+(
+1
+,
+2
+,
+10
+,
+16
+,
+2
+,
+1
+)
+,
+𝐫
+=
+(
+15
+,
+10
+,
+3
+,
+2
+,
+7
+)
+​
+and
+​
+𝐝
+=
+(
+1
+,
+2
+,
+11
+,
+15
+,
+1
+,
+2
+)
+,
+𝐫
+=
+(
+15
+,
+10
+,
+3
+,
+2
+,
+8
+,
+5
+)
+.
+{\bf d}=(1,2,10,16,2,1),{\bf r}=(15,10,3,2,7)\text{ and }{\bf d}=(1,2,11,15,1,2),{\bf r}=(15,10,3,2,8,5).
+Also, beginning with
+𝐫
+0
+=
+(
+1
+,
+1
+,
+1
+,
+1
+,
+1
+,
+0
+)
+{\bf r}_{0}=(1,1,1,1,1,0)
+we get the arithmetical structure
+𝐝
+=
+(
+3
+,
+3
+,
+3
+,
+4
+,
+3
+,
+1
+)
+,
+𝐫
+=
+(
+1
+,
+1
+,
+1
+,
+1
+,
+1
+,
+2
+)
+{\bf d}=(3,3,3,4,3,1),{\bf r}=(1,1,1,1,1,2)
+.
+This procedure can be done in general and therefore we can get a lower bound for the arithmetical structures on any subdivision of a graph.
+Proposition 6.8
+.
+Let
+G
+G
+be a graph and let
+s
+⁡
+(
+G
+)
+s(G)
+be the graph obtained from
+G
+G
+by subdividing
+n
+e
+n_{e}
+the edge
+e
+e
+of
+G
+G
+.
+Then
+|
+𝒜
+⁡
+(
+s
+⁡
+(
+G
+)
+)
+|
+≥
+(
+|
+𝒜
+⁡
+(
+G
+)
+|
+−
+1
+)
+⋅
+∏
+e
+∈
+E
+⁡
+(
+G
+)
+C
+n
+e
++
+∏
+e
+∈
+E
+⁡
+(
+G
+)
+C
+n
+e
++
+1
+.
+|\mathcal{A}(s(G))|\geq(|\mathcal{A}(G)|-1)\cdot\prod_{e\in E(G)}C_{n_{e}}+\prod_{e\in E(G)}C_{n_{e}+1}.
+Proof.
+The first term follows by Algorithm
+1
+using
+𝟏
+≠
+𝐫
+0
+∈
+ℛ
+⁡
+(
+G
+)
+{\bf 1}\neq{\bf r}_{0}\in\mathcal{R}(G)
+because there are
+C
+n
+e
+C_{n_{e}}
+orders in each of the paths obtained by subdividing
+n
+e
+n_{e}
+times the edge
+e
+e
+.
+The second term follows by Algorithm
+1
+using as
+𝐫
+0
+{\bf r}_{0}
+the
+𝐫
+{\bf r}
+of the Laplacian arithmetical structure of the graph obtained
+by subdividing
+n
+e
+′
+n^{\prime}_{e}
+the edge
+e
+e
+of
+G
+G
+for all
+n
+e
+′
+≤
+n
+e
+n^{\prime}_{e}\leq n_{e}
+and
+e
+∈
+E
+⁡
+(
+G
+)
+e\in E(G)
+and Theorem
+6.4
+.
+∎
+Unlike paths and cycles which are subdivisions of
+K
+2
+K_{2}
+and
+K
+3
+K_{3}
+respectively,
+in general we can not get all the arithmetical structures on a subdivision of a graph
+G
+G
+using Algorithm
+1
+.
+The next example shows this for the subdivision of
+K
+4
+K_{4}
+.
+Example 6.9
+.
+Consider the graph
+s
+⁡
+(
+K
+4
+)
+s(K_{4})
+obtained by subdividing the edge
+v
+3
+​
+v
+4
+v_{3}v_{4}
+of the complete graph with four vertices
+K
+4
+K_{4}
+.
+(
+4
+−
+1
+−
+1
+−
+1
+0
+−
+1
+4
+−
+1
+−
+1
+0
+−
+1
+−
+1
+2
+0
+−
+1
+−
+1
+−
+1
+0
+2
+−
+1
+0
+0
+−
+1
+−
+1
+3
+)
+​
+(
+2
+2
+3
+3
+2
+)
+=
+𝟎
+\left(\begin{array}[]{ccccc}4&-1&-1&-1&0\\
+-1&4&-1&-1&0\\
+-1&-1&2&0&-1\\
+-1&-1&0&2&-1\\
+0&0&-1&-1&3\end{array}\right)\left(\begin{array}[]{c}2\\
+2\\
+3\\
+3\\
+2\end{array}\right)={\bf 0}
+If
+𝐝
+=
+(
+4
+,
+4
+,
+2
+,
+2
+,
+3
+)
+{\bf d}=(4,4,2,2,3)
+and
+𝐫
+=
+(
+2
+,
+2
+,
+3
+,
+3
+,
+2
+)
+{\bf r}=(2,2,3,3,2)
+, then
+(
+𝐝
+,
+𝐫
+)
+({\bf d},{\bf r})
+is an arithmetical structure of
+s
+⁡
+(
+K
+4
+)
+s(K_{4})
+which can not be obtained by using Corollary
+5.6
+or Algorithm
+1
+.
+We end with posing a conjecture about the number of arithmetical structures on a graph.
+Conjecture 6.10
+.
+If
+H
+H
+is a simple connected graph with
+n
+n
+vertices, then
+|
+𝒜
+⁡
+(
+P
+n
+)
+|
+≤
+|
+𝒜
+⁡
+(
+H
+)
+|
+≤
+|
+𝒜
+⁡
+(
+K
+n
+)
+|
+.
+|\mathcal{A}(P_{n})|\leq|\mathcal{A}(H)|\leq|\mathcal{A}(K_{n})|.
+The inequality on the right comes from a private communication with Lionel Levine, who asked us whether the complete graph is the connected graph with the largest number of arithmetical structures.
+Acknowledgments
+Some of the results contained in this article were presented at the 2015 CMO-BIRS Workshop 15w5119 on sandpile groups.
+The authors would like to thank the CMO-BIRS Institute for their support and hospitality, and all the people involved in the workshop for creating a vibrant research community.
+In particular, the authors would like to thank Benjamin Braun, Scott Corry, Art Duval, Luis Garcia, Darren Glass, Nathan Kaplan,
+Lionel Levine, Jeremy Martin, Criel Merino, and Gregg Musiker for their helpful comments.
+The authors would like to thank the anonymous referee for his helpful comments.
+References
+[1]
+Biggs, N.L., Algebraic potential theory on graphs.
+Bull. London Math. Soc
+. 29 (1997) 641–682.
+[2]
+Berman A., and Plemmons R.,
+Non Negative Matrices in the Mathematical Sciences
+, Revised reprint of the 1979 original.
+Classics in Applied Mathematics 9, Society for Industrial and Applied Mathematics, Philadelphia, PA, 1994.
+[3]
+Braun, B., Corry, S., Duval, A., Glass, D., Levine, L., Martin, J., and Musiker, G., private communication.
+[4]
+Corrales, H., and Valencia, C.E. On the critical ideals of graphs.
+Linear Algebra Appl
+. 439(12) (2013), 3870–3892
+[5]
+Corrales, H., and Valencia, C.E., arithmeticalal structures of graphs II: Graphs with connectivity one, manuscript.
+[6]
+Dickson, L.E., Finiteness of the odd perfect and primitive abundant numbers with
+n
+n
+distinct prime factors,
+Am. J. Math
+. 35 (1913), 413Ð422.
+[7]
+Godsil, C.D., and Royle, G.F.,
+Algebraic Graph Theory
+, Springer-Verlag, Berlin, 2001.
+[8]
+Guzman, J., and Klivans C., Chip-firing and energy minimization on
+M
+M
+-matrices,
+J. Combin. Theory Ser. A
+132 (2015) 14–31.
+[9]
+Lorenzini, D.J., arithmeticalal graphs,
+Math. Ann
+. 285(3) (1989), 481–-501.
+[10]
+Lorenzini, D.J., Groups of components of Néron models of Jacobians,
+Compositio Mathematica
+73
+(1990), 145–160.
+[11]
+Lorenzini, D.J., Smith normal form and Laplacians,
+J. Combin. Theory B
+98 (2008), 1271–1300.
+[12]
+O’Carroll, L., Planas-Vilanova F., and Villarreal, R.H., Degree and algebraic properties of lattice and matrix ideals,
+SIAM J. Discrete Math
+. 28(1) (2014), 394–427.
+[13]
+Stanley, R.P.,
+Catalan Numbers
+, Cambridge University Press, 2015.
+[14]
+Valencia, C.E., arithmeticalal structures of graphs III: Graphs with twins, manuscript.
+Experimental support, please
+view the build logs
+for errors. Generated by
+L
+A
+T
+E
+xml
+.
+Instructions for reporting errors
+We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:
+Click the "Report Issue"
+(
+)
+button, located in the page header.
+Tip:
+You can select the relevant text first, to include it in your report.
+Our team has already identified
+the following issues
+. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.
+Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a
+list of packages that need conversion
+, and welcome
+developer contributions
+.
+We gratefully acknowledge support from
+        our
+major funders
+,
+member institutions
+,
+,
+        and all contributors.
+About
+·
+Help
+·
+Contact
+·
+Subscribe
+·
+Copyright
+·
+Privacy
+·
+Accessibility
+·
+Operational Status
+(opens in new tab)
+Major funding support from

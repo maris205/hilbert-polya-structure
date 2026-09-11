@@ -1,0 +1,106 @@
+\section{Terminal states and sharp fixation time}\label{sec:temporal}
+For a state $a$, write $m=\min_i a_i$ and $r=a-m\one$.
+A positive run of $r$ is a maximal cyclic interval of positive coordinates.
+Unless $r=0$, its zero coordinates separate these runs. The right endpoint
+of a run is its last positive site in the chosen orientation.
+
+\begin{lemma}\label{lem:minimum}
+The minimum is invariant under $F$. A zero coordinate remains zero, and
+\[
+ F(a+c\one)=F(a)+c\one\qquad(c\in\Zge).
+\]
+\end{lemma}
+\begin{proof}
+Adding $c$ to every coordinate adds $c$ to every current, giving the
+displayed identity. If $a_i=0$, then $q_{i-1}=q_i=0$, so $F(a)_i=0$.
+The residual $r$ is nonnegative and has a zero, which persists. Therefore
+$\min_i F(r)_i=0$, and translation gives $\min_i F(a)_i=m$.
+\end{proof}
+
+\begin{proposition}\label{prop:terminal}
+Every orbit fixes. Its terminal residual has, at each original run's
+original right endpoint, the total mass of that run, and is zero elsewhere.
+The terminal state is obtained by adding $m$ back. In particular the
+fixed states, and also all recurrent states, are precisely
+\begin{equation}\label{eq:fixed}
+ (a_i-m)(a_{i+1}-m)=0\qquad\text{for every }i.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Work with $r$. Original zero boundaries persist and carry no current, so
+each original run interval keeps its total mass $M$. If both $r_{i-1}$
+and $r_i$ are positive, then
+\[
+ F(r)_i\ge\min(r_{i-1},r_i)>0.
+\]
+A positive site can therefore disappear only at the first site of its
+current run. With its predecessor zero, it disappears exactly when its
+mass is at most the next site's mass. Thus a run cannot split internally,
+and can lose at most one positive site per update. It cannot acquire a
+site across an existing zero.
+
+Let $e$ be the original right endpoint, initially of mass $b>0$.
+It never disappears: its next site remains zero, and hence
+\[
+ F(r)_e=r_e+\min(r_{e-1},r_e).
+\]
+While its run has at least two sites, this increases $r_e$ by at least
+one. Since $r_e\le M$, there are at most $M-b$ nonfixed rounds in that
+run. The run must reduce to the single mass $M$ at $e$, which is fixed.
+Original runs are separated throughout, so the global fixation time is
+the maximum of their fixation times.
+
+If \eqref{eq:fixed} holds, all residual currents vanish. Conversely a
+residual run of length at least two makes its endpoint increase, so the
+state is not fixed. Uniform states correspond to $r=0$. Every orbit has
+just been shown to fix; hence a recurrent state must itself be fixed.
+\end{proof}
+
+Define $\tau(a)$ to be the least $t\ge0$ such that $F^t(a)$ is fixed, and
+put $H(n,N)=\max_{a\in X_{n,N}}\tau(a)$.
+
+\begin{theorem}\label{thm:clock}
+For the whole labelled carrier,
+\begin{equation}\label{eq:height}
+ H(n,N)=
+ \begin{cases}
+ 0,&n\le2\text{ or }N=0,\\
+ \lceil\log_2 N\rceil,&n=3,\ N\ge1,\\
+ N-1,&n\ge4,\ N\ge1.
+ \end{cases}
+\end{equation}
+\end{theorem}
+\begin{proof}
+For $n=1$ the only current cancels; for $n=2$ the two currents are equal.
+Thus $F$ is the identity in both cases. The case $N=0$ is immediate.
+For $n\ge3$, Proposition~\ref{prop:terminal} bounds every nontrivial run's
+clock by $M-b\le N-1$.
+
+For $n=3$, a nontrivial residual run has length two. Write its masses
+as $(A,B)$, followed by zero, with $A,B>0$ and $M=A+B$. Its update is
+\[
+ (A,B)\longmapsto\bigl((A-B)_+,\,B+\min(A,B)\bigr).
+\]
+Induction gives, including all times after saturation,
+\begin{equation}\label{eq:two-site}
+ A_t=(M-2^tB)_+,\qquad B_t=\min(2^tB,M).
+\end{equation}
+Indeed $B_{t+1}=\min(2B_t,M)$ and $A_{t+1}=M-B_{t+1}$.
+The exact clock is the least $t$ with $2^tB\ge M$, at most
+$\lceil\log_2N\rceil$. For $N\ge2$, the state $(N-1,1,0)$ attains this
+bound. For $N=1$, every state is fixed and the stated value is zero.
+
+For $n\ge4$ and $N\ge3$, use $(N-2,1,1,0,\ldots,0)$. At times
+$0\le t\le N-2$, its first three coordinates are
+\[
+ (N-2-t,\,1,\,1+t).
+\]
+While the first coordinate is positive, the middle coordinate receives
+and sends one, and the last receives one. At time $N-2$ the state has
+the pair $(1,N-1)$ at its last two occupied positions; one further update
+gives the single mass $N$. Thus the clock is $N-1$.
+For $N=2$, use $(1,1,0,\ldots,0)$, whose clock is one.
+For $N=1$, all states are fixed. These witnesses attain every remaining
+branch of \eqref{eq:height}.
+\end{proof}
+

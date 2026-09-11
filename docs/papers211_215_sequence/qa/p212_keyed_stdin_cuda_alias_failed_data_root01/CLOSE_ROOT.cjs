@@ -1,0 +1,21 @@
+'use strict';
+const fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const R='docs/papers211_215_sequence/qa/p212_keyed_stdin_cuda_alias_failed_data_root01/',A='docs/papers211_215_sequence/qa/p212_keyed_stdin_cuda_alias_failed_observation_audit01/',C='/root/symbolic-dynamics-p212-cuda-alias-observation-20260910-01';
+const names=['CHECK_NATIVE.json','CHECK_RESULT.json','CHECK_ROOT.cjs','CLOSE_ROOT.cjs','READ_SCOPE.json','RECEPTION.md','ROOT_READS_NATIVE.json','ROOT_REPLAY_NATIVE.json','ROOT_REPLAY_RESULT.json'];
+const result=JSON.parse(fs.readFileSync(R+'CHECK_RESULT.json','utf8'));
+const fields=['dev','ino','mode','nlink','uid','gid','rdev','size','blksize','blocks','atimeNs','mtimeNs','ctimeNs','birthtimeNs'];
+const allowed=new Set([...result.keys.map(k=>k.path),...names.map(n=>R+n)]),keys=new Map(),bodies=new Map();let checks=0;
+const eq=(a,b,m)=>{checks++;assert.deepStrictEqual(a,b,m);},ok=(v,m)=>{checks++;assert(v,m);};
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex'),md=s=>Object.fromEntries(fields.map(n=>[n,String(s[n])])),stable=m=>Object.fromEntries(fields.filter(n=>n!=='atimeNs').map(n=>[n,m[n]]));
+function read(p){ok(allowed.has(p));const a=fs.lstatSync(p,{bigint:true});ok(a.isFile()&&a.nlink===1n&&a.uid===0n&&a.size<=134217728n);if(p.startsWith(C+'/'))eq(a.mode&4095n,384n);const fd=fs.openSync(p,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);let b,s,e;try{s=md(fs.fstatSync(fd,{bigint:true}));eq(stable(s),stable(md(a)));b=fs.readFileSync(fd);e=md(fs.fstatSync(fd,{bigint:true}));eq(stable(e),stable(s));}finally{fs.closeSync(fd);}const z=md(fs.lstatSync(p,{bigint:true}));eq(stable(z),stable(e));eq(BigInt(b.length),a.size);return{b,key:{path:p,bytes:b.length,sha256:sha(b),fields:md(a),fd_before:s,fd_end:e,path_end:z,full_eof:true,leaf_links:1}};}
+const d0=md(fs.lstatSync(C,{bigint:true}));eq([d0.mode,d0.uid,d0.gid],['16832','0','0']);eq(fs.readdirSync(C).sort(),['stderr.raw','stdout.raw']);
+for(const p of allowed){const x=read(p);keys.set(p,x.key);bodies.set(p,x.b);}
+for(const k of result.keys){const n=keys.get(k.path);eq([n.path,n.bytes,n.sha256,n.full_eof,n.leaf_links],[k.path,k.bytes,k.sha256,k.full_eof,k.leaf_links]);for(const r of['fields','fd_before','fd_end','path_end']){eq(Object.keys(k[r]),fields);eq(stable(n.fields),stable(k[r]));}}
+for(const r of['path_before','fd_before','fd_end','path_end'])eq(stable(d0),stable(result.capture[r]));
+const native=JSON.parse(bodies.get(R+'CHECK_NATIVE.json'));eq(native.result.exit_code,0);eq(native.result.chunk_id,'7ae9c9');eq(Buffer.from(native.result.output),bodies.get(R+'CHECK_RESULT.json'));
+eq([result.checks,result.document_keys,result.old_complete_key_occurrences,result.raw_pairs,result.raw_paired_bytes],[12095,64,154,22,802347]);
+eq([result.root_data_replay.whole_stdout_raw_equal,result.root_data_replay.atime_differences.length,result.root_data_replay.complete_trace_equal],[false,14,true]);eq([result.runtime_accepted,result.source_or_manuscript_acceptance,result.operational_authorization,result.grants_consumed,result.HOLD_EXTERNAL],[false,false,false,true,true]);
+const seal=bodies.get(A+'SHA256SUMS'),entries=seal.toString('ascii').trimEnd().split('\n').map(l=>{const m=/^([a-f0-9]{64})  ([A-Za-z0-9_.-]+)$/.exec(l);ok(m);return{sha:m[1],name:m[2]};});eq(entries.length,20);eq(fs.readdirSync(A).sort(),['SHA256SUMS',...entries.map(x=>x.name)].sort());for(const e of entries)eq(keys.get(A+e.name).sha256,e.sha);
+for(const[p,k]of keys){const x=read(p);eq([x.key.bytes,x.key.sha256],[k.bytes,k.sha256]);eq(stable(x.key.fields),stable(k.fields));eq(x.b,bodies.get(p));}
+const dz=md(fs.lstatSync(C,{bigint:true}));eq(stable(d0),stable(dz));eq(fs.readdirSync(C).sort(),['stderr.raw','stdout.raw']);
+process.stdout.write(JSON.stringify({schema:'P212_FAILED_RAW_ROOT_CLOSURE_V1',checks,document_keys:keys.size,previous_root_keys:result.keys.length,preclosing_payloads:names.map(name=>({name,...keys.get(R+name)})),keys:[...keys.values()],capture:{path:C,before:d0,after:dz,members:['stderr.raw','stdout.raw']},runtime_accepted:false,operational_authorization:false,both_once_grants_consumed:true,HOLD_EXTERNAL:true},null,2)+'\n');

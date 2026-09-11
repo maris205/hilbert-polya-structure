@@ -1,0 +1,18 @@
+{
+  "arguments": {
+    "cmd": "node -e 'const fs=require(\"node:fs\"),cp=require(\"node:child_process\"),crypto=require(\"node:crypto\"); const d=\"docs/papers211_215_sequence/qa/p215_author_data_audit01\"; const command=[\"node\",d+\"/audit.js\"],cwd=\"/root/autodl-tmp/symbolic_dynamics\"; const out=fs.openSync(d+\"/DATA.stdout.raw\",\"wx\",0o600),err=fs.openSync(d+\"/DATA.stderr.raw\",\"wx\",0o600); let r; try { r=cp.spawnSync(command[0],command.slice(1),{cwd,stdio:[\"ignore\",out,err]}); fs.fsyncSync(out); fs.fsyncSync(err); } finally { fs.closeSync(out); fs.closeSync(err); } const exit={status:r.status,signal:r.signal,error:r.error?{code:r.error.code||null,message:r.error.message}:null,pid:r.pid}; const fd=fs.openSync(d+\"/DATA_EXIT.json\",\"wx\",0o600); try {fs.writeFileSync(fd,JSON.stringify({command,cwd,exit},null,2)+\"\\n\");fs.fsyncSync(fd);}finally{fs.closeSync(fd);} const key=p=>{const b=fs.readFileSync(p);return {path:p,bytes:b.length,sha256:crypto.createHash(\"sha256\").update(b).digest(\"hex\")};}; process.stdout.write(JSON.stringify({command,cwd,exit,stdout:key(d+\"/DATA.stdout.raw\"),stderr:key(d+\"/DATA.stderr.raw\"),exit_record:key(d+\"/DATA_EXIT.json\")})+\"\\n\"); if(r.status!==0||r.signal||r.error)process.exitCode=1;'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "shell": "/bin/bash",
+    "login": false,
+    "tty": false,
+    "max_output_tokens": 3000,
+    "yield_time_ms": 1000
+  },
+  "result": {
+    "chunk_id": "ec8031",
+    "wall_time_seconds": 1.00145828,
+    "session_id": 88586,
+    "original_token_count": 0,
+    "output": ""
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "cmd": "# SOURCE-READY PROPOSAL ONLY: root acceptance and a fresh grant are required.\nset -euo pipefail\numask 077\nP213_A_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_a_strict_pair_run01'\nP213_A_KEYS='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_a_execution_preparation01/EXTERNAL_KEYS.cjs'\nP213_A_VERIFY='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p213_a/verify.py'\ncd -- /root/autodl-tmp/symbolic_dynamics\n/usr/bin/mkdir -m 700 -- \"$P213_A_OUT\"\nset -C\nexec 3>&1 4>&2\nexec > \"$P213_A_OUT/controller.stdout\" 2> \"$P213_A_OUT/controller.stderr\"\np213_a_finish() {\n  local p213_a_rc=$?\n  trap - EXIT\n  printf '%s\\n' \"$p213_a_rc\" > \"$P213_A_OUT/controller.exit\"\n  printf 'P213_A_CAPTURE_EXIT=%s\\n' \"$p213_a_rc\" >&3\n  exit \"$p213_a_rc\"\n}\ntrap p213_a_finish EXIT\n/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node \"$P213_A_KEYS\" inputs < /dev/null > \"$P213_A_OUT/keys.before.json\" 2> \"$P213_A_OUT/keys.before.stderr\"\nset +e\n/usr/bin/env -i LANG=C LC_ALL=C /usr/bin/python3.10 -I -S -B \"$P213_A_VERIFY\" < /dev/null 3>&- 4>&- > \"$P213_A_OUT/stdout.bin\" 2> \"$P213_A_OUT/stderr.bin\"\nP213_A_PYTHON_STATUS=$?\nset -e\nprintf '%s\\n' \"$P213_A_PYTHON_STATUS\" > \"$P213_A_OUT/python.exit\"\n/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node \"$P213_A_KEYS\" inputs < /dev/null > \"$P213_A_OUT/keys.after.json\" 2> \"$P213_A_OUT/keys.after.stderr\"\n/usr/bin/cmp -- \"$P213_A_OUT/keys.before.json\" \"$P213_A_OUT/keys.after.json\" > \"$P213_A_OUT/input-key-cmp.stdout\" 2> \"$P213_A_OUT/input-key-cmp.stderr\"\n/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node \"$P213_A_KEYS\" outputs strict01 < /dev/null > \"$P213_A_OUT/raw.keys.json\" 2> \"$P213_A_OUT/raw.keys.stderr\"\n[[ \"$P213_A_PYTHON_STATUS\" == 0 ]] || exit \"$P213_A_PYTHON_STATUS\"\n[[ -s \"$P213_A_OUT/stdout.bin\" ]]\n[[ ! -s \"$P213_A_OUT/stderr.bin\" ]]\n",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "shell": "/bin/bash",
+    "login": false,
+    "tty": false,
+    "yield_time_ms": 1000,
+    "max_output_tokens": 4096
+  },
+  "result": {
+    "chunk_id": "7d4d66",
+    "wall_time_seconds": 1.001407516,
+    "session_id": 41276,
+    "original_token_count": 0,
+    "output": ""
+  }
+}

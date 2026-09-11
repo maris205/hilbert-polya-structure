@@ -1,0 +1,16 @@
+{
+  "arguments": {
+    "cmd": "node -e \"const fs=require('node:fs'),cp=require('node:child_process'),c=require('node:crypto');const d='docs/papers211_215_sequence/qa/p214_initial_artifact_audit01',p=d+'/ARTIFACT_DATA_CHECK.cjs';if(c.createHash('sha256').update(fs.readFileSync(p)).digest('hex')!=='510da893509d05e4f93d9474c41a02c945c2f59f34f63c5eaafd7be74d544aea')throw Error('root-received checker changed');const out=fs.openSync(d+'/stdout.raw','wx'),err=fs.openSync(d+'/stderr.raw','wx');let r;try{r=cp.spawnSync('node',[p],{cwd:'/root/autodl-tmp/symbolic_dynamics',stdio:['ignore',out,err]});}finally{fs.closeSync(out);fs.closeSync(err);}process.stdout.write(JSON.stringify({checker_argv:['node',p],cwd:'/root/autodl-tmp/symbolic_dynamics',pid:r.pid,status:r.status,signal:r.signal,error:r.error?String(r.error):null,stdout_path:d+'/stdout.raw',stderr_path:d+'/stderr.raw'})+'\\\\n');process.exitCode=Number.isInteger(r.status)?r.status:70;\"",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "login": false,
+    "max_output_tokens": 2000,
+    "yield_time_ms": 1000
+  },
+  "result": {
+    "chunk_id": "af35a8",
+    "wall_time_seconds": 0.00000636,
+    "exit_code": 1,
+    "original_token_count": 96,
+    "output": "{\"checker_argv\":[\"node\",\"docs/papers211_215_sequence/qa/p214_initial_artifact_audit01/ARTIFACT_DATA_CHECK.cjs\"],\"cwd\":\"/root/autodl-tmp/symbolic_dynamics\",\"pid\":144183,\"status\":1,\"signal\":null,\"error\":null,\"stdout_path\":\"docs/papers211_215_sequence/qa/p214_initial_artifact_audit01/stdout.raw\",\"stderr_path\":\"docs/papers211_215_sequence/qa/p214_initial_artifact_audit01/stderr.raw\"}\n"
+  }
+}

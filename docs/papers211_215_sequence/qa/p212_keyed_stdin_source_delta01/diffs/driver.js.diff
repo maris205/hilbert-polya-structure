@@ -1,0 +1,203 @@
+--- docs/papers211_215_sequence/qa/p212_execution_scope_source_amendment01/driver.js	2026-09-09 18:03:17.199543837 +0800
++++ docs/papers211_215_sequence/qa/p212_keyed_stdin_source_delta01/driver.js	2026-09-09 23:17:27.935684737 +0800
+@@ -11,7 +11,10 @@
+ const assert = require('node:assert/strict');
+ const ROOT = '/root/autodl-tmp/symbolic_dynamics';
+ const QA = ROOT + '/docs/papers211_215_sequence/qa';
+-const SELF = QA + '/p212_execution_scope_source_amendment01/driver.js';
++const SELF = QA + '/p212_keyed_stdin_source_delta01/driver.js';
++const STDIN_FILE = QA + '/p212_keyed_stdin_input01/empty.stdin';
++const EMPTY_CONTENT = {bytes:0,sha256:'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'};
++const STDIN_POLICY = {path:STDIN_FILE,role:'stdin',kind:'file',content:EMPTY_CONTENT,handoff_offset:0};
+ const QUERY_ROOT = QA + '/p212_build_dependency_query01';
+ const QUERY_CWD = QUERY_ROOT + '/query_cwd';
+ const BINDING_ROOT = QA + '/p212_build_dependency_binding01';
+@@ -26,8 +29,8 @@
+     "sha256": "2087003781dccd2bf4096031b903f0d2f9c5dfb833ae13407fd71af54dda10df"
+   },
+   "CAPTURE_CONTRACT.json": {
+-    "path": "docs/papers211_215_sequence/qa/p212_execution_scope_source_amendment01/companions/CAPTURE_CONTRACT.json",
+-    "sha256": "6f6b122d844b778bdf5ed4a0a7ddb1ddd583136cbc77306a8f7f4f62abb1483b"
++    "path": "docs/papers211_215_sequence/qa/p212_keyed_stdin_source_delta01/companions/CAPTURE_CONTRACT.json",
++    "sha256": "911059948ebb8861c040e556563c120ed4d62a6f37cb76baa9bdc3ce6e01d084"
+   },
+   "SELECTOR_OBLIGATIONS.json": {
+     "path": "docs/papers211_215_sequence/qa/p212_execution_scope_source_amendment01/companions/SELECTOR_OBLIGATIONS.json",
+@@ -230,7 +233,7 @@
+   'query_inputs','body_requests','future_closure','forbidden'];
+ const POLICY = {timeout_ms:120000,max_native_stream_bytes:16777216,
+   automatic_retry:false,automatic_intervention:false,
+-  argv_not_shell:true,raw_streams_separate:true,stdin:'/dev/null',
++  argv_not_shell:true,raw_streams_separate:true,stdin:STDIN_POLICY,
+   owned_scope:'DETACHED_PROCESS_GROUP_SAMPLED_ONLY',
+   broader_session_and_product_reception:'REQUIRED_SEPARATE_ROOT_RECEIPT',
+   no_handle:'UNKNOWN_UNCLOSED_NO_FINAL_RAW_HASH_OR_SEAL',
+@@ -306,7 +309,8 @@
+ function descriptorShape(d) {
+   keys(d,INPUT_KEYS,'input');
+   absolute(d.path);
+-  need(['source','runtime','configuration','ancestor','cwd','receipt','query_result','body','device'].includes(d.role),'input role');
++  need(['source','runtime','configuration','ancestor','cwd','receipt','query_result','body','device','stdin'].includes(d.role),'input role');
++  need((d.role==='stdin')===(d.path===STDIN_FILE),'stdin role has one fixed physical input path');
+   need(['file','directory','symlink','absent','character'].includes(d.kind),'input kind');
+   need(['stable','identity'].includes(d.comparison),'comparison');
+   if(d.comparison === 'identity') need(d.kind === 'directory' && d.role === 'ancestor','identity only for ancestor directories');
+@@ -357,7 +361,7 @@
+ }
+ function fileForPurpose(p, purpose) {
+   // Descriptor-only guard: this function never opens or reads file bytes.
+-  need(['source','runtime','configuration','receipt','query_result','body'].includes(purpose),
++  need(['source','runtime','configuration','receipt','query_result','body','stdin'].includes(purpose),
+     'explicit byte-read purpose');
+   const d=inputByPath.get(p);
+   need(d&&d.role===purpose&&['file','symlink'].includes(d.kind),
+@@ -373,6 +377,7 @@
+     // cannot turn a null-content body descriptor into receipt/source bytes.
+     pinShape(d.content); pinShape(referent.content);
+   }
++  if(purpose==='stdin') stdinDescriptor(d);
+   return d;
+ }
+ function requireBodyRead(d) {
+@@ -388,6 +393,13 @@
+     if(d.content!==null) same(d.content,expected,'explicit required pin '+p);
+   }
+   const requiredPin=expected??d.content; pinShape(requiredPin);
++  if(purpose==='stdin') {
++    const opened=openStdin(null);
++    try {
++      same(opened.observation.content,requiredPin,'required complete stdin pin');
++      return Buffer.alloc(0);
++    } finally { fs.closeSync(opened.fd); }
++  }
+   const resolution=resolveBound(p);
+   need(purpose==='body'||resolution.chain.every(row=>inputByPath.get(row.path).role!=='body'),
+     'non-body read cannot cross a body-role alias/ancestor '+p);
+@@ -558,8 +570,8 @@
+   need(!inputByPath.has(b.phase_output),'own output is not an immutable absent key');
+   need(b.inputs.every(d=>!d.path.startsWith(b.phase_output+'/')),'no preexisting output members');
+   for(const p of ['/',SELF,b.controller.executable_spelling,b.controller.executable_resolved,
+-    '/dev/null',QUERY_CWD,QUERY_ROOT]) need(inputByPath.has(p),'mandatory input role '+p);
+-  same(inputByPath.get('/dev/null').kind,'character','bound null character device');
++    STDIN_FILE,QUERY_CWD,QUERY_ROOT]) need(inputByPath.has(p),'mandatory input role '+p);
++  stdinDescriptor(inputByPath.get(STDIN_FILE));
+   same(inputByPath.get(QUERY_CWD).kind,'directory','actual query cwd');
+   same(inputByPath.get(QUERY_CWD).members,[],'query cwd must be observed empty');
+   const executable=b.phase==='bodies'?'/usr/bin/cmp':'/usr/bin/kpsewhich';
+@@ -598,6 +610,68 @@
+       census_scope:'UNKNOWN',sampled_at:new Date().toISOString()};
+   }
+ }
++function stdinDescriptor(d) {
++  need(d&&d.path===STDIN_FILE&&d.role==='stdin'&&d.kind==='file'&&
++    d.comparison==='stable'&&d.resolved===STDIN_FILE&&
++    d.symlink_target===null&&d.members===null,'one physical keyed regular stdin descriptor');
++  same(d.content,EMPTY_CONTENT,'stdin complete zero-byte content is independently bound');
++  for(const name of ['lstat','stat']) {
++    statShape(d[name]);
++    need((BigInt(d[name].mode)&0o170000n)===0o100000n&&d[name].size==='0',
++      'stdin metadata is regular and exactly zero bytes');
++  }
++  assertMetadata(d.lstat,d.stat,'stable','physical stdin lstat/stat agree');
++  return d;
++}
++function openStdin(label) {
++  // A fresh open-file description is private until this function returns.
++  // Offset zero is source-derived from fresh open plus the only read returning
++  // zero; no lseek/fdinfo observation or null-device equivalence is claimed.
++  const observation={path:STDIN_FILE,role:'stdin',kind:'file',fd:null,
++    open_flags:'O_RDONLY|O_NOFOLLOW|O_NONBLOCK',alias_chain:null,
++    before:null,after:null,read_requested_bytes:1,read_return_bytes:null,
++    raw_hex:null,content:null,source_initial_offset:0,source_handoff_offset:null,
++    actual_offset_query:null,
++    offset_basis:'SOURCE_DERIVED_FRESH_OPEN_AND_ONLY_ZERO_RETURN_CURRENT_POSITION_READ',
++    native_mask_basis:'SEPARATE_RECEIVED_NATIVE_0xFFF_KEY_NOT_NODE_FIELD_NAME_INFERENCE'};
++  let fd=null;
++  try {
++    const d=fileForPurpose(STDIN_FILE,'stdin');
++    const resolution=resolveBound(STDIN_FILE);
++    need(resolution.chain.every(row=>inputByPath.get(row.path).role!=='body'),
++      'stdin read cannot cross a body-role alias/ancestor');
++    same(resolution.resolved,STDIN_FILE,'stdin exact physical resolution');
++    need(resolution.chain.every(row=>row.symlink_target===null),'stdin physical ancestors, no hidden alias');
++    observation.alias_chain=resolution.chain;
++    fd=fs.openSync(STDIN_FILE,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);
++    observation.fd=fd;
++    const before=fs.fstatSync(fd,{bigint:true});
++    observation.before=stats(before);
++    need(before.isFile()&&before.size===0n,'opened stdin fd is an empty regular file');
++    assertMetadata(observation.before,d.stat,'stable','expected stdin key before any byte read');
++    const buffer=Buffer.alloc(1);
++    const count=fs.readSync(fd,buffer,0,1,null);
++    observation.read_return_bytes=count;
++    observation.raw_hex=buffer.subarray(0,count).toString('hex');
++    need(count===0,'stdin grew or yielded data; retain at most one failure sentinel byte');
++    const after=fs.fstatSync(fd,{bigint:true});
++    observation.after=stats(after);
++    need(after.isFile()&&after.size===0n,'stdin remains an empty regular same handle');
++    assertMetadata(observation.after,observation.before,'stable','stdin same handle after whole zero-byte read');
++    observation.content=pin(buffer.subarray(0,count));
++    same(observation.content,EMPTY_CONTENT,'actual entire empty stdin content');
++    observation.source_handoff_offset=0;
++    return {fd,observation};
++  } catch(error) {
++    let close_error=null;
++    if(fd!==null) {try {fs.closeSync(fd);} catch(closing) {close_error=String(closing);}}
++    const failure={observation,error:{name:error.name,message:error.message},close_error,
++      child_started_by_this_open:false,stdin_handoff:false,final_success:false};
++    if(out) record((label===null?'':label+'/')+'STDIN_FAILURE.json',failure);
++    else process.stderr.write('HOLD_STDIN: '+JSON.stringify(failure)+'\n');
++    throw error;
++  }
++}
+ async function nativeCapture(label,argv,allowed) {
+   // No shell, PATH search, retry, kill, installation or generator helper.
+   need(/^[A-Za-z0-9_]+$/.test(label),'native label');
+@@ -607,17 +681,13 @@
+   record(label+'/INPUTS_BEFORE.json',before);
+   record(label+'/CONFIGURATION_BEFORE.json',{environment:process.env,cwd:process.cwd(),
+     execPath:process.execPath,execArgv:process.execArgv,umask:process.umask(),
+-    child_environment:ENV8,child_cwd:QUERY_CWD,stdin:'/dev/null'});
++    child_environment:ENV8,child_cwd:QUERY_CWD,stdin:STDIN_POLICY});
++  const stdinInput=openStdin(label), stdinFd=stdinInput.fd;
+   const outFd=openOutput(label+'/stdout.raw'), errFd=openOutput(label+'/stderr.raw');
+   const eventFd=openOutput(label+'/EVENTS.jsonl');
+-  const nullResolution=resolveBound('/dev/null');
+-  const nullFd=fs.openSync(nullResolution.resolved,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
+-  const nullHandle=fs.fstatSync(nullFd,{bigint:true});
+-  need(nullHandle.isCharacterDevice(),'actual stdin read handle is character device');
+-  assertMetadata(stats(nullHandle),inputByPath.get('/dev/null').stat,'stable','null read handle');
+   const attempt={schema:'p212-native-attempt-v1',label,argv,cwd:QUERY_CWD,environment:ENV8,
+     deadline_unix_ms:Date.now()+POLICY.timeout_ms,timeout_ms:POLICY.timeout_ms,
+-    stdin:{lexical:'/dev/null',resolved:nullResolution.resolved,handle:stats(nullHandle)},
++    stdin:stdinInput.observation,
+     detached_process_group_requested:true,pre_spawn_input_key:pin(Buffer.from(JSON.stringify(before,null,2)+'\n')),
+     expected_native_exits:allowed,automatic_retry:false,automatic_intervention:false,
+     wrapper_native_product_originals:'MUST_BE_RETAINED_BY_SEPARATE_PRESTARTED_ENTRY'};
+@@ -637,7 +707,7 @@
+     },POLICY.timeout_ms);
+     try {
+       child=childProcess.spawn(argv[0],argv.slice(1),{
+-        cwd:QUERY_CWD,env:ENV8,stdio:[nullFd,outFd,errFd],detached:true,shell:false
++        cwd:QUERY_CWD,env:ENV8,stdio:[stdinFd,outFd,errFd],detached:true,shell:false
+       });
+       child.once('spawn',()=>{
+         pid=child.pid; event('SPAWN',{pid,requested_process_group_id:pid,
+@@ -659,7 +729,7 @@
+     }
+   });
+   // Close only controller-owned descriptors, never kill or clean the native child.
+-  for(const fd of [nullFd,outFd,errFd,eventFd]) fs.closeSync(fd);
++  for(const fd of [stdinFd,outFd,errFd,eventFd]) fs.closeSync(fd);
+   const group=pid===null?null:groupSample(pid);
+   const closed=settled&&closeObserved&&pid!==null&&nativeExit!==null&&
+     spawnError===null&&group!==null&&group.exists===false;
+@@ -683,7 +753,7 @@
+   record(label+'/INPUTS_AFTER.json',after);
+   record(label+'/CONFIGURATION_AFTER.json',{environment:process.env,cwd:process.cwd(),
+     execPath:process.execPath,execArgv:process.execArgv,umask:process.umask(),
+-    child_environment:ENV8,child_cwd:QUERY_CWD,stdin:'/dev/null'});
++    child_environment:ENV8,child_cwd:QUERY_CWD,stdin:STDIN_POLICY});
+   same(stableKey(after),stableKey(before),'native declared comparable full-key projection '+label);
+   const result={schema:'p212-native-group-capture-v1',label,argv,
+     pid,native_exit:nativeExit,close_observed:true,group_sample:group,

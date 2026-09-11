@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "diff -u docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_root01/initial_source_from_saved_reads.py docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/run01/executed_checker.py",
+    "login": false,
+    "max_output_tokens": 6000
+  },
+  "result": {
+    "chunk_id": "26a793",
+    "wall_time_seconds": 0.000005249,
+    "exit_code": 1,
+    "original_token_count": 515,
+    "output": "--- docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_root01/initial_source_from_saved_reads.py\t2026-09-09 15:28:14.951042012 +0800\n+++ docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/run01/executed_checker.py\t2026-09-09 15:08:22.613023183 +0800\n@@ -131,12 +131,15 @@\n                        parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x)))\n     def typed(item, field=''):\n         if isinstance(item, dict):\n+            if field in {'stat','lstat'}:\n+                demand(all(type(v) is int for v in item.values()),\n+                       'precise_json_integers', 'every rich '+field+' metadata field')\n             for key, child in item.items():\n                 typed(child, key)\n         elif isinstance(item, list):\n             for child in item:\n                 typed(child)\n-        elif field in {'bytes','ctime_ns','mtime_ns','device','gid','inode','mode','nlink',\n+        elif field in {'bytes','ctime_ns','mtime_ns','device','gid','inode','nlink',\n                        'size','uid','pid','session','native_exit_code','timeout_seconds',\n                        'build_number','major','minor'}:\n             demand(type(item) is int, 'precise_json_integers', field)\n@@ -158,13 +161,14 @@\n     \"\"\"Archived host/metadata consistency, physical reads only for scoped local files.\"\"\"\n     p = Path(path)\n     if str(p) in ARCHIVE:\n-        ARCHIVED_ONLY_REFERENTS.add(str(p))\n         row = ARCHIVE[str(p)]\n         # For exact allowed workspace file roles also verify live artifact bytes.\n         if p in EXPLICIT_LOCAL or any(p.is_relative_to(base) for base in LOCAL_TREES):\n             if row.get('kind') == 'file':\n                 demand(pin(p) == {k:row[k] for k in ('bytes','sha256')},\n                        'local_artifact_current', str(p))\n+        else:\n+            ARCHIVED_ONLY_REFERENTS.add(str(p))\n         return row\n     authorized_local(p)\n     demand(p.is_file(), 'local_artifact_current', str(p))\n@@ -922,4 +926,3 @@\n \n if __name__=='__main__':\n     raise SystemExit(main())\n-\n"
+  }
+}

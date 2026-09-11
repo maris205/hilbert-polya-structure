@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node <<'NODE'\nconst fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');\nconst A='docs/papers211_215_sequence/qa/p212_eight_file_data_receiver_source_audit01/',read=p=>fs.readFileSync(p),sha=b=>crypto.createHash('sha256').update(b).digest('hex');\nconst seal=read(A+'SHA256SUMS');assert.equal(sha(seal),'326f39a959ae9684d5f3ac956b7a604866f53066e11933f85fd19322cfceb720');\nconst lines=seal.toString().trimEnd().split('\\n');assert.equal(lines.length,8);const names=lines.map(l=>{const m=/^([a-f0-9]{64})  ([A-Za-z0-9_.-]+)$/.exec(l);assert.ok(m);assert.equal(sha(read(A+m[2])),m[1]);return m[2];});assert.deepEqual(fs.readdirSync(A).sort(),[...names,'SHA256SUMS'].sort());\nconst input=JSON.parse(read(A+'INPUT_V2.json'));for(const p of input.files){const b=read(p.path);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);}\nconst n=JSON.parse(read(A+'READ_V2_NATIVE.json'));console.log(JSON.stringify({status:'PASS_CURRENT_SOURCE_PINS_AND_FULL_INDEPENDENT_SEAL',payloads:8,source_inputs:input.files.length,records:n.actual_records.map(x=>({chunk:x.result.chunk_id,exit:x.result.exit_code,output_chars:x.result.output.length,top_fields:Object.keys(x)}))},null,2));\nNODE",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2000
+  },
+  "result": {
+    "chunk_id": "9ace46",
+    "wall_time_seconds": 0.00000462,
+    "exit_code": 0,
+    "original_token_count": 116,
+    "output": "{\n  \"status\": \"PASS_CURRENT_SOURCE_PINS_AND_FULL_INDEPENDENT_SEAL\",\n  \"payloads\": 8,\n  \"source_inputs\": 10,\n  \"records\": [\n    {\n      \"chunk\": \"12d2dc\",\n      \"exit\": 1,\n      \"output_chars\": 22796,\n      \"top_fields\": [\n        \"tool\",\n        \"request\",\n        \"result\"\n      ]\n    },\n    {\n      \"chunk\": \"7c5a9d\",\n      \"exit\": 0,\n      \"output_chars\": 106777,\n      \"top_fields\": [\n        \"tool\",\n        \"request\",\n        \"result\"\n      ]\n    }\n  ]\n}\n"
+  }
+}

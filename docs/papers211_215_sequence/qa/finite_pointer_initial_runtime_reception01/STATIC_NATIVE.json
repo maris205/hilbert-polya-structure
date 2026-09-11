@@ -1,0 +1,44 @@
+{
+  "syntax": {
+    "request": {
+      "cmd": "/usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json; from pathlib import Path; p=Path(\"docs/papers211_215_sequence/qa/finite_pointer_initial_runtime_reception01/inspect_initial.py\"); raw=p.read_bytes(); t=ast.parse(raw); forbidden=[]\nfor n in ast.walk(t):\n if isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in {\"exec\",\"eval\",\"compile\",\"__import__\"}: forbidden.append(n.func.id)\n if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr in {\"write_bytes\",\"write_text\",\"mkdir\",\"unlink\",\"rename\",\"replace\",\"system\",\"Popen\",\"run\",\"execv\",\"execve\",\"kill\",\"killpg\"}: forbidden.append(n.func.attr)\nassert forbidden==[]; opens=[n for n in ast.walk(t) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr==\"open\"]; assert len(opens)==1 and len(opens[0].args)==1 and isinstance(opens[0].args[0],ast.Constant) and opens[0].args[0].value==\"rb\"; print(json.dumps({\"status\":\"PASS_SOURCE_ONLY_AST_NO_CHECKER_EXECUTION\",\"lines\":len(raw.splitlines()),\"bytes\":len(raw),\"sha256\":hashlib.sha256(raw).hexdigest(),\"forbidden_calls\":forbidden,\"read_only_open_calls\":len(opens),\"checker_invocations\":0,\"producer_invocations\":0,\"scientific_stdout_nonhash_body_reads\":0},sort_keys=True))'",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 2000
+    },
+    "result": {
+      "chunk_id": "ec83bb",
+      "wall_time_seconds": 0.00000292,
+      "exit_code": 0,
+      "original_token_count": 78,
+      "output": "{\"bytes\": 38572, \"checker_invocations\": 0, \"forbidden_calls\": [], \"lines\": 581, \"producer_invocations\": 0, \"read_only_open_calls\": 1, \"scientific_stdout_nonhash_body_reads\": 0, \"sha256\": \"daf7b06a20252979c96cca9f13793ae0d3230cd65e30f5124ffff1a379c44bdc\", \"status\": \"PASS_SOURCE_ONLY_AST_NO_CHECKER_EXECUTION\"}\n"
+    }
+  },
+  "literal_derivative": {
+    "request": {
+      "cmd": "/usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json; from pathlib import Path; q=Path(\"docs/papers211_215_sequence/qa\"); p=q/\"finite_pointer_initial_runtime_reception01/inspect_initial.py\"; a=ast.parse(p.read_bytes()); old=ast.parse((q/\"p211_runtime_preparation/p211_runtime.py\").read_bytes()); literal=lambda t,n:next(ast.literal_eval(x.value) for x in t.body if isinstance(x,ast.Assign) and any(isinstance(v,ast.Name) and v.id==n for v in x.targets)); assert literal(a,\"CONFIG_PATHS\")==literal(old,\"CONFIG_PATHS\") and literal(a,\"MEMBER_DIRS\")==literal(old,\"MEMBER_DIRS\"); assert literal(a,\"STAGES\")==(\"outer\",\"launcher\",\"recorder\",\"child01\"); names={n.name:n.lineno for n in a.body if isinstance(n,ast.FunctionDef)}; required={\"rich\",\"raw\",\"configuration\",\"loader_scope\",\"inventory\",\"manifest\",\"worker\",\"aliases\",\"check_sample\",\"check_opens\",\"check_native\",\"audit\"}; assert required<=set(names); raw=p.read_bytes(); print(json.dumps({\"status\":\"PASS_STATIC_LITERAL_DERIVATIVE_SOURCE_ONLY\",\"configuration_path_constants_equal\":True,\"membership_constants_equal\":True,\"literal_stages\":literal(a,\"STAGES\"),\"functions\":names,\"source\":{\"bytes\":len(raw),\"lines\":len(raw.splitlines()),\"sha256\":hashlib.sha256(raw).hexdigest()},\"checker_invocations\":0,\"scientific_stdout_nonhash_body_reads\":0,\"producer_invocations\":0},sort_keys=True))'",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 3500
+    },
+    "result": {
+      "chunk_id": "1b6f50",
+      "wall_time_seconds": 0.00000575,
+      "exit_code": 0,
+      "original_token_count": 192,
+      "output": "{\"checker_invocations\": 0, \"configuration_path_constants_equal\": true, \"functions\": {\"aliases\": 252, \"audit\": 401, \"basic\": 92, \"check_native\": 358, \"check_opens\": 311, \"check_sample\": 262, \"configuration\": 169, \"doc\": 152, \"epoch\": 245, \"identity\": 88, \"inventory\": 200, \"json_value\": 147, \"loader_scope\": 184, \"manifest\": 220, \"need\": 81, \"pin\": 119, \"raw\": 128, \"rich\": 96, \"state\": 156, \"unique\": 139, \"worker\": 238}, \"literal_stages\": [\"outer\", \"launcher\", \"recorder\", \"child01\"], \"membership_constants_equal\": true, \"producer_invocations\": 0, \"scientific_stdout_nonhash_body_reads\": 0, \"source\": {\"bytes\": 38572, \"lines\": 581, \"sha256\": \"daf7b06a20252979c96cca9f13793ae0d3230cd65e30f5124ffff1a379c44bdc\"}, \"status\": \"PASS_STATIC_LITERAL_DERIVATIVE_SOURCE_ONLY\"}\n"
+    }
+  },
+  "imports": {
+    "request": {
+      "cmd": "/usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json; from pathlib import Path; p=Path(\"docs/papers211_215_sequence/qa/finite_pointer_initial_runtime_reception01/inspect_initial.py\"); data=p.read_bytes(); tree=ast.parse(data); imports=[]\nfor node in ast.walk(tree):\n if isinstance(node,ast.Import): imports.extend(alias.name for alias in node.names)\n if isinstance(node,ast.ImportFrom):\n  assert node.level==0; imports.append(node.module)\nexpected={\"datetime\",\"hashlib\",\"json\",\"math\",\"os\",\"pathlib\",\"re\",\"stat\",\"sys\",\"traceback\"}; assert set(imports)==expected,imports; assert hashlib.sha256(data).hexdigest()==\"daf7b06a20252979c96cca9f13793ae0d3230cd65e30f5124ffff1a379c44bdc\"; print(json.dumps({\"status\":\"PASS_SOURCE_ONLY_IMPORT_ALLOWLIST\",\"imports\":imports,\"source_sha256\":hashlib.sha256(data).hexdigest(),\"checker_invocations\":0,\"producer_invocations\":0,\"scientific_stdout_body_reads\":0},sort_keys=True))'",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 2500
+    },
+    "result": {
+      "chunk_id": "7c881e",
+      "wall_time_seconds": 0.00000539,
+      "exit_code": 0,
+      "original_token_count": 81,
+      "output": "{\"checker_invocations\": 0, \"imports\": [\"datetime\", \"hashlib\", \"json\", \"math\", \"os\", \"pathlib\", \"re\", \"stat\", \"sys\", \"traceback\"], \"producer_invocations\": 0, \"scientific_stdout_body_reads\": 0, \"source_sha256\": \"daf7b06a20252979c96cca9f13793ae0d3230cd65e30f5124ffff1a379c44bdc\", \"status\": \"PASS_SOURCE_ONLY_IMPORT_ALLOWLIST\"}\n"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "p211_round1_receiver_static_preparation_native_v1",
+  "scope": "AST/source-only and metadata hash checks. Receiver, producer and future artifacts never invoked/read; no runtime correctness claim.",
+  "records": [
+    {
+      "request": {
+        "cmd": "/usr/bin/python3.10 -I -S -B -c 'import ast,json,hashlib; from pathlib import Path; base=Path(\"docs/papers211_215_sequence/qa/p211_round1_reception_preparation01\"); source=base/\"receive_round1.py\"; raw=source.read_bytes(); t=ast.parse(raw); assignments={x.id:n.value for n in t.body if isinstance(n,ast.Assign) for x in n.targets if isinstance(x,ast.Name)}; top=ast.literal_eval(assignments[\"TOP\"].args[0].func.value).split(); names=ast.literal_eval(assignments[\"NAMES\"].func.value).split(); imports=[n.module if isinstance(n,ast.ImportFrom) else a.name for n in ast.walk(t) if isinstance(n,(ast.Import,ast.ImportFrom)) for a in (n.names if isinstance(n,ast.Import) else [None])]; calls=[n.func.attr if isinstance(n.func,ast.Attribute) else n.func.id if isinstance(n.func,ast.Name) else \"indirect\" for n in ast.walk(t) if isinstance(n,ast.Call)]; forbidden=set(calls)&{\"write_bytes\",\"write_text\",\"open\",\"mkdir\",\"unlink\",\"rename\",\"replace\",\"rmdir\",\"system\",\"popen\",\"run\",\"Popen\",\"exec\",\"eval\",\"compile\",\"import_module\",\"load_module\"}; assert not forbidden,forbidden; assert set(imports)<={\"argparse\",\"ast\",\"hashlib\",\"json\",\"os\",\"pathlib\",\"re\",\"stat\",\"sys\",\"traceback\",\"urllib.parse\"}; assert len(top)==len(set(top))==33; assert len(names)==len(set(names))==32; recorder=Path(\"docs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py\").read_bytes(); schema=Path(\"docs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json\").read_bytes(); assert hashlib.sha256(recorder).hexdigest()==ast.literal_eval(assignments[\"SOURCE_HASH\"]); assert hashlib.sha256(schema).hexdigest()==ast.literal_eval(assignments[\"SCHEMA_HASH\"]); plan=(base/\"PLAN.md\").read_bytes(); print(json.dumps({\"status\":\"PASS_AST_AND_SEALED_SCHEMA_PINS_STATIC_ONLY_NOT_INVOKED\",\"source\":{\"bytes\":len(raw),\"sha256\":hashlib.sha256(raw).hexdigest(),\"lines\":len(raw.splitlines())},\"plan\":{\"bytes\":len(plan),\"sha256\":hashlib.sha256(plan).hexdigest()},\"imports\":imports,\"forbidden_calls\":sorted(forbidden),\"top_level_files\":len(top),\"expected_command_records\":119,\"expected_execution_files\":len(top)+119*4,\"author_names\":len(names),\"submitted_code_imported\":False,\"submitted_code_invoked\":False,\"future_binding_or_output_read\":False},sort_keys=True))'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "715daa",
+        "wall_time_seconds": 0.0000034,
+        "exit_code": 0,
+        "original_token_count": 163,
+        "output": "{\"author_names\": 32, \"expected_command_records\": 119, \"expected_execution_files\": 509, \"forbidden_calls\": [], \"future_binding_or_output_read\": false, \"imports\": [\"argparse\", \"ast\", \"hashlib\", \"json\", \"os\", \"pathlib\", \"re\", \"stat\", \"sys\", \"traceback\", \"urllib.parse\"], \"plan\": {\"bytes\": 10508, \"sha256\": \"a3086a105e9a1c5374e35747eafae126bc92222270ef275b271942fcdcf8a3d9\"}, \"source\": {\"bytes\": 34175, \"lines\": 477, \"sha256\": \"5f143d846324464fd21cbfa0337f6206e1c55913e4930b77d38543cd6065ede8\"}, \"status\": \"PASS_AST_AND_SEALED_SCHEMA_PINS_STATIC_ONLY_NOT_INVOKED\", \"submitted_code_imported\": false, \"submitted_code_invoked\": false, \"top_level_files\": 33}\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum docs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py docs/papers211_215_sequence/qa/p211_round1_adapter01/PLAN.md docs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json docs/papers211_215_sequence/qa/p211_round1_adapter01/SHA256SUMS docs/papers211_215_sequence/qa/p211_round0_root_reception/audit_round0.py docs/papers211_215_sequence/qa/p211_round0_root_reception/RECEPTION.md docs/papers211_215_sequence/qa/p211_round0_root_reception/REUSE_SCOPE.md docs/papers211_215_sequence/qa/p211_round1_preparation/PLAN.md docs/papers211_215_sequence/qa/p211_round1_preparation/ROLE_SELECTION_DRAFT.json docs/papers211_215_sequence/qa/p211_round1_plan_audit/NOTE.md",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "66831f",
+        "wall_time_seconds": 0.00000313,
+        "exit_code": 0,
+        "original_token_count": 337,
+        "output": "50c32a6fa4c703275cb55535bc56507ba5bdbb909fb57ed31ffc6d3ff9566ab2  docs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py\n0e5c15e715749f3c3f8ae5bf7aae624e09e7140d6ca78ddb03e60f582003e5e7  docs/papers211_215_sequence/qa/p211_round1_adapter01/PLAN.md\nb7d4527f9433f9a9b78327eed6b94b04de9262e1c6e21d3eef7eb1f157d641dc  docs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json\na8b177ff6c92c630b82868d2ac537cbd49f6461b7e1f50b31f328bab09495fb8  docs/papers211_215_sequence/qa/p211_round1_adapter01/SHA256SUMS\ne52e1b56ec0213a2a522579e8636c265683bb427814e904e2fe8f1aae22ad92e  docs/papers211_215_sequence/qa/p211_round0_root_reception/audit_round0.py\naaf5f7dfcacc3b9efa20edbf08bbce49d996418b33722b3bfb399110bcf4f3bd  docs/papers211_215_sequence/qa/p211_round0_root_reception/RECEPTION.md\n4c9f217734097f1ee325ed1c719535d56374057632d75a1c8eb605ee8e191654  docs/papers211_215_sequence/qa/p211_round0_root_reception/REUSE_SCOPE.md\n8fadbf5f3e7f7aa966203549b4a9b88291b90002c22aea05e05d52ac3ec15858  docs/papers211_215_sequence/qa/p211_round1_preparation/PLAN.md\n956172c7c4bc845da0bcf341712b3055502bd67e288f518b6127d4e46eacfd7d  docs/papers211_215_sequence/qa/p211_round1_preparation/ROLE_SELECTION_DRAFT.json\n06fe2f64b1f04678b09b38d0932e932e3f4d0690c338b85174a8c64dc1ee1e7f  docs/papers211_215_sequence/qa/p211_round1_plan_audit/NOTE.md\n"
+      }
+    }
+  ]
+}

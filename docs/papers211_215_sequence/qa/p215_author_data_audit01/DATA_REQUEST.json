@@ -1,0 +1,15 @@
+{
+  "authority": "docs/papers211_215_sequence/qa/p215_author_data_root01/SOURCE_RECEPTION.md",
+  "scope": "one independent archived DATA invocation; no retry",
+  "source_sha256": "21eff2acbeec30c37e340cfbe5329d518166ce9a57874a873b8e735f051af052",
+  "source_seal_sha256": "b784591ab5da7809b16c185aadc8511e66ae1d04c8b52c92bac72c24d2cfa15d",
+  "arguments": {
+    "cmd": "node -e 'const fs=require(\"node:fs\"),cp=require(\"node:child_process\"),crypto=require(\"node:crypto\"); const d=\"docs/papers211_215_sequence/qa/p215_author_data_audit01\"; const command=[\"node\",d+\"/audit.js\"],cwd=\"/root/autodl-tmp/symbolic_dynamics\"; const out=fs.openSync(d+\"/DATA.stdout.raw\",\"wx\",0o600),err=fs.openSync(d+\"/DATA.stderr.raw\",\"wx\",0o600); let r; try { r=cp.spawnSync(command[0],command.slice(1),{cwd,stdio:[\"ignore\",out,err]}); fs.fsyncSync(out); fs.fsyncSync(err); } finally { fs.closeSync(out); fs.closeSync(err); } const exit={status:r.status,signal:r.signal,error:r.error?{code:r.error.code||null,message:r.error.message}:null,pid:r.pid}; const fd=fs.openSync(d+\"/DATA_EXIT.json\",\"wx\",0o600); try {fs.writeFileSync(fd,JSON.stringify({command,cwd,exit},null,2)+\"\\n\");fs.fsyncSync(fd);}finally{fs.closeSync(fd);} const key=p=>{const b=fs.readFileSync(p);return {path:p,bytes:b.length,sha256:crypto.createHash(\"sha256\").update(b).digest(\"hex\")};}; process.stdout.write(JSON.stringify({command,cwd,exit,stdout:key(d+\"/DATA.stdout.raw\"),stderr:key(d+\"/DATA.stderr.raw\"),exit_record:key(d+\"/DATA_EXIT.json\")})+\"\\n\"); if(r.status!==0||r.signal||r.error)process.exitCode=1;'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "shell": "/bin/bash",
+    "login": false,
+    "tty": false,
+    "max_output_tokens": 3000,
+    "yield_time_ms": 1000
+  }
+}

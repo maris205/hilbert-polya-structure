@@ -1,0 +1,32 @@
+
+// APPEND-ONLY SOURCE PROPOSAL to the exact accepted V2 module, not executed.
+// Reuses its unchanged view()/elf() functions; never calls the old bundle entry.
+export function decodeAcceptedKpathsea(body,priorRaw){
+ const result={schema:'p212-kpathsea-literal-data-supplement-v1',status:'HOLD_INPUT_OR_BOUNDARY_FAILURE',image:null,holds:[],prior_holds_retained:[],named_states:[],init_fini_entries:18,installed_closure:false,operation_permission:false,external_status:'HOLD_EXTERNAL'};
+ try{
+  need(Buffer.isBuffer(body)&&Buffer.isBuffer(priorRaw),'EXACT_BUFFER_INTERFACE');
+  pinned({bytes:97064,sha256:'8077fa6889e0a1bedd742adb649182f4167b5a79c57630c1f5dc5a89e8301fe6'},body);
+  pinned({bytes:150872,sha256:'0906b783c684c8c101ebca7c614789625b02e601892eaa9db602b5f89c51bc15'},priorRaw);
+  const text=priorRaw.toString('utf8');need(Buffer.from(text,'utf8').equals(priorRaw),'PRIOR_UTF8');const prior=JSON.parse(text).result;
+  need(prior.schema==='p212-elf-cache-literal-data-v1'&&prior.status==='LITERAL_DATA_TABLE_WITH_EXPLICIT_HOLDS'&&prior.images.length===6&&prior.named_states.length===15&&prior.init_fini_entries===18&&prior.holds.length===32,'EXACT_ACCEPTED_PRIOR_CENSUS');
+  need(prior.images.every(x=>x.structurally_decoded===true)&&prior.cache.complete_same_name_scan===true,'ACCEPTED_PRIOR_TABLE_SCOPE');
+  result.prior_result_pin=pin(priorRaw);result.prior_image_pins=prior.images.map(x=>({id:x.id,path:x.path,body_pin:x.body_pin}));result.prior_holds_retained=prior.holds;
+  result.named_states=prior.named_states.slice();const named=new Set(result.named_states.map(x=>x.literal));need(named.size===15,'PRIOR_UNIQUE_NAMES');
+  const oldNeeded=new Set(prior.finitely_named_dependencies),state={needed:new Set(oldNeeded),initCount:18,
+   hold:(code,where)=>result.holds.push({code,where}),
+   name:(role,literal,where)=>{if(!named.has(literal)){need(named.size<96,'HOLD_96_NAMED_STATE_CEILING',where);named.add(literal);result.named_states.push({role,literal,origin:where});}},
+   init:where=>{need(state.initCount<64,'HOLD_64_INIT_FINI_CEILING',where);state.initCount++;result.init_fini_entries=state.initCount;}};
+  const bodyPin=pin(body),images=new Set([...prior.images.map(x=>x.body_pin.sha256+':'+x.body_pin.bytes),bodyPin.sha256+':'+bodyPin.bytes]);need(images.size<=32,'HOLD_32_IMAGE_CEILING');result.combined_known_image_count=images.size;
+  const rootReference={path:'/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_three_terminal_root01/DATA_RECEPTION.md',pin:{bytes:1493,sha256:'e18c6f01d9bd9c5609b42eeb752aedf875eb21ec0f9f0a1b739b80931ce0648b'}};
+  // New accepted terminal spellings count as names; no /lib=/usr/lib inference.
+  state.name('accepted-terminal-body','/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2',{receipt:rootReference,body_pin:{bytes:240936,sha256:'8c7e2990d2847ca210d6f716d4b9aa62997c2fd2acfcda587c1ec398ed364618'}});
+  const id='KPATHSEA_LEAF',path='/usr/lib/x86_64-linux-gnu/libkpathsea.so.6.3.4';state.name('received-body',path,{id,body_pin:bodyPin,receipt:rootReference});
+  const v=view(id,body),out={id,path,body_pin:bodyPin,structurally_decoded:false,selected_image:false};result.image=out;
+  try{elf(v,out,state);}catch(e){out.failure={code:e.message,where:e.where??null};state.hold(e.message,e.where??{id,body_pin:bodyPin});}
+  result.finitely_named_dependencies=[...state.needed];result.new_finitely_named_dependencies=[...state.needed].filter(x=>!oldNeeded.has(x));
+  for(const literal of result.new_finitely_named_dependencies)state.hold('HOLD_NEW_NAME_REQUIRES_SEPARATE_RECEIVED_CACHE_ROW_SELECTION',{id,body_pin:bodyPin,literal});
+  result.added_init_fini_entries=state.initCount-18;result.combined_known_named_state_count=named.size;result.prior_cache_redecoded=false;result.old_images_redecoded=false;result.source_or_initializer_roles_resolved=false;
+  result.status='LITERAL_KPATHSEA_SUPPLEMENT_WITH_EXPLICIT_HOLDS';
+ }catch(e){result.failure={code:e.message,where:e.where??null};}
+ return result;
+}

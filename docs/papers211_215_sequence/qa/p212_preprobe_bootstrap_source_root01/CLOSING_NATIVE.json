@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node <<'NODE'\nconst fs=require('fs'),c=require('crypto'),p=require('path');const b='docs/papers211_215_sequence/qa/p212_preprobe_bootstrap_source_root01/';let checks=0;const need=(v,m)=>{checks++;if(!v)throw Error(m);},h=x=>c.createHash('sha256').update(x).digest('hex');const j=JSON.parse(JSON.parse(fs.readFileSync(b+'CHECK_NATIVE.json')).result.output);\nfor(const k of j.keys){const x=fs.readFileSync(k.path),s=fs.lstatSync(k.path,{bigint:true});need(s.isFile()&&!s.isSymbolicLink(),'regular');need(x.length===k.bytes&&h(x)===k.sha256,'whole unchanged');for(const[f,v]of Object.entries(k.metadata))need(String(s[f])===v,'all endpoint metadata');}\nconst r=fs.readFileSync(b+'RECEPTION.md','utf8');for(const m of r.matchAll(/\\]\\(([^)]+)\\)/g))if(!m[1].startsWith('https://'))need(fs.lstatSync(p.resolve(b,m[1])).isFile(),'current receiptlink');\nneed(r.includes('CLOSED_FOR_EXACT_CORRECTED_SOURCE'),'exact enum');const rb=fs.readFileSync(b+'RECEPTION.md');\nprocess.stdout.write(JSON.stringify({status:'PASS_P212_PREPROBE_SOURCE_ROOT_CLOSING',checks,unchanged_complete_keys:j.keys.length,reception:{bytes:rb.length,sha256:h(rb)},preclosing_payloads:fs.readdirSync(b).sort(),observer_probe_git_ssh_science_build_actions:0},null,2)+'\\n');\nNODE",
+    "max_output_tokens": 4000
+  },
+  "result": {
+    "chunk_id": "b9e1a0",
+    "wall_time_seconds": 0.00000627,
+    "exit_code": 0,
+    "original_token_count": 209,
+    "output": "{\n  \"status\": \"PASS_P212_PREPROBE_SOURCE_ROOT_CLOSING\",\n  \"checks\": 965,\n  \"unchanged_complete_keys\": 80,\n  \"reception\": {\n    \"bytes\": 9607,\n    \"sha256\": \"9733bc7da7c5ecb65d3bf3b6ae193fbaf4c575c4deb4fc57ad02d05b195f6daf\"\n  },\n  \"preclosing_payloads\": [\n    \"ACTUAL_DIFF_NATIVE.json\",\n    \"ACTUAL_LABELED_DIFF_NATIVE.json\",\n    \"CHECK_NATIVE.json\",\n    \"DIFF_DIAGNOSTIC_NATIVE.json\",\n    \"FINDING_ACTUAL_READ_NATIVE.json\",\n    \"FIRST_FAILED_NATIVE.json\",\n    \"PRIMARY_REOPEN_NATIVE.json\",\n    \"RECEPTION.md\",\n    \"ROOT_SELECTED_READS_NATIVE.json\",\n    \"ROSTER_NAVIGATION_NATIVE.json\",\n    \"SECOND_FAILED_NATIVE.json\",\n    \"THIRD_DOCUMENTARY_COMMAND_NATIVE.json\",\n    \"THIRD_FAILED_NATIVE.json\",\n    \"receive.cjs\",\n    \"receive02.cjs\",\n    \"receive03.cjs\",\n    \"receive04.cjs\"\n  ],\n  \"observer_probe_git_ssh_science_build_actions\": 0\n}\n"
+  }
+}
+

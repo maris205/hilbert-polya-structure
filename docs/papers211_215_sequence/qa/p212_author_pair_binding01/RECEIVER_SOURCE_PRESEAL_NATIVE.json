@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node - <<'NODE'\nconst fs=require('fs'),path=require('path'),c=require('crypto'),a=require('assert/strict');const D='docs/papers211_215_sequence/qa/p212_pair_receiver_source_root01/',P='/root/autodl-tmp/symbolic_dynamics/';const hash=b=>c.createHash('sha256').update(b).digest('hex');const r=JSON.parse(fs.readFileSync(D+'RESULT.json')),n=JSON.parse(fs.readFileSync(D+'ROOT_NATIVE01.json'));a.equal(n.result.exit_code,0);const v=JSON.parse(n.result.output);a.deepEqual(v,{...r,native_projection:'complete in RESULT.json'});let bytes=0;for(const[p,k]of Object.entries(JSON.parse(fs.readFileSync(D+'INPUTS.json')))){const b=fs.readFileSync(p);a.equal(b.length,k.bytes);a.equal(hash(b),k.sha256);a.equal(fs.realpathSync(p),k.resolved);a(!fs.lstatSync(p).isSymbolicLink());}for(const m of fs.readFileSync(D+'RECEPTION.md','utf8').matchAll(/\\[[^\\]]*\\]\\(([^)]+)\\)/g))a(fs.existsSync(path.resolve(D,m[1])));const rows=[];for(const name of fs.readdirSync(D).sort()){const b=fs.readFileSync(D+name);bytes+=b.length;rows.push(hash(b)+'  '+name+'\\n');}console.log(JSON.stringify({status:'PASS_SOURCE_GATE_FINAL_PRESEAL',payloads:rows.length,bytes,keys:r.input_paths,manifest:rows.join('')}));\nNODE",
+    "login": false,
+    "max_output_tokens": 3000
+  },
+  "result": {
+    "chunk_id": "bf43be",
+    "wall_time_seconds": 0.00000524,
+    "exit_code": 0,
+    "original_token_count": 176,
+    "output": "{\"status\":\"PASS_SOURCE_GATE_FINAL_PRESEAL\",\"payloads\":7,\"bytes\":271943,\"keys\":486,\"manifest\":\"5e7fad933be3e74cb2e7dc830a4515b2c035ad09ffde03f06a3483180472552b  AMENDMENT_METADATA_REUSE_NATIVE.json\\n8765e15747b2e551ee488497626612ae1d5b47c2e277c97be1837ea858cb005f  BASE_METADATA_REUSE_NATIVE.json\\n78e03c0510f637b4734e705f5d4607d08aaae6216647e030f3af9633032af596  INPUTS.json\\nb1f6c11bea4060e13c2f1dd80307652af3e09c79ac2dc7165fbce8aea78eef68  RECEPTION.md\\nb3626785a48141f5c8e08881e8532f3d2aa79d34f20c5b10ff80a5b125cc3aeb  RESULT.json\\n316c5aa2f585dd79a15ac3e11079d8bbcb033f4d1fbdc22aba303952860c7a10  ROOT_NATIVE01.json\\ndee8a59f72c4f5f62702e0893c4cbf99df655e114d2b9d41ad413e0e25c8d503  receive.js\\n\"}\n"
+  }
+}

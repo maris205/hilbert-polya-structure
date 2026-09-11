@@ -1,0 +1,51 @@
+Refinement-Based Verification for Possibly-Cyclic Lists⋆
+
+                   Alexey Loginov1⋆⋆ , Thomas Reps2 , and Mooly Sagiv3
+                    1
+                   IBM T.J. Watson Research Center; alexey@us.ibm.com
+               2
+                 Comp. Sci. Dept., University of Wisconsin; reps@cs.wisc.edu
+             3
+               School of Comp. Sci., Tel-Aviv University; msagiv@post.tau.ac.il
+
+
+
+       Abstract. In earlier work, we presented an abstraction-refinement mechanism
+       that was successful in verifying automatically the partial correctness of in-situ
+       list reversal when applied to an acyclic linked list [10]. This paper reports on the
+       automatic verification of the total correctness (partial correctness and termina-
+       tion) of the same list-reversal algorithm, when applied to a possibly-cyclic linked
+       list. A key contribution that made this result possible is an extension of the finite-
+       differencing technique [14] to enable the maintenance of reachability information
+       for a restricted class of possibly-cyclic data structures, which includes possibly-
+       cyclic linked lists.
+
+
+1 Introduction
+Reinhard Wilhelm has long been associated with the Dagstuhl Seminars on Computer
+Science. In March of 2003, the Dagstuhl Seminar “Reasoning about Shape” was ded-
+icated to one of the subjects that benefited from important contributions on the part of
+Reinhard Wilhelm. During that seminar, Richard Bornat posed an interesting challenge
+problem to the authors. The challenge concerns the application of the in-situ list rever-
+sal procedure Reverse to a panhandle list, i.e., a linked list that contains a cycle but
+in which at least the head of the list is not part of the cycle. (The lists shown in Fig. 1
+are examples of panhandle lists.) Richard Bornat challenged us to use our techniques to
+demonstrate that, when applied to a panhandle list, Reverse produces a list in which
+the orientation of the successor edges in the panhandle (the acyclic part of the list) is
+as it was in the input list, while the orientation of the successor edges on the cycle is
+reversed.
+    In [10], we presented an abstraction-refinement mechanism for use in static analy-
+ses based on 3-valued logic [17], where the semantics of statements and the query of
+interest are expressed using logical formulas. Our abstraction-refinement mechanism
+introduces additional instrumentation relations (defined via logical formulas over core
+relations, which capture the basic properties of memory configurations). Instrumenta-
+tion relations record auxiliary information in a logical structure, thus providing a mech-
+anism to fine-tune an abstraction: an instrumentation relation captures a property that
+an individual memory cell may or may not possess. In general, the introduction of addi-
+tional instrumentation relations refines an abstraction into one that is prepared to track
+⋆
+   Supported by ONR (N00014-01-1-{0708,0796}) and NSF (CCR-9986308                              and
+   CCF-{0524051,0540955}).
+⋆⋆
+   The work was performed while Loginov was at the University of Wisconsin.
+

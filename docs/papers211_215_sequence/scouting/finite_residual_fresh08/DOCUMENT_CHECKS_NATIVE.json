@@ -1,0 +1,48 @@
+{
+  "purpose": "Document-only checks; no scientific code or runtime/host probe.",
+  "attempts": [
+    {
+      "request": {
+        "cmd": "jq -e 'type == \"object\" or type == \"array\"' INPUT_PINS_NATIVE.json INSTRUCTION_RETURNS.json LOCAL_NATIVE_RETURNS.json PRIMARY_RETURNS.json",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_residual_fresh08",
+        "max_output_tokens": 1500
+      },
+      "result": {
+        "chunk_id": "294b02",
+        "wall_time_seconds": 0.050442173,
+        "exit_code": 127,
+        "original_token_count": 11,
+        "output": "/bin/bash: line 1: jq: command not found\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "node -e 'const fs=require(\"node:fs\"); for (const p of process.argv.slice(1)) { const b=fs.readFileSync(p); const v=JSON.parse(b.toString(\"utf8\")); if (v===null || typeof v!==\"object\") throw new Error(\"unexpected root: \"+p); process.stdout.write(p+\" JSON_OK bytes=\"+b.length+\"\\n\"); }' INPUT_PINS_NATIVE.json INSTRUCTION_RETURNS.json LOCAL_NATIVE_RETURNS.json PRIMARY_RETURNS.json",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_residual_fresh08",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "98585d",
+        "wall_time_seconds": 0.051561589,
+        "exit_code": 0,
+        "original_token_count": 44,
+        "output": "INPUT_PINS_NATIVE.json JSON_OK bytes=665\nINSTRUCTION_RETURNS.json JSON_OK bytes=97471\nLOCAL_NATIVE_RETURNS.json JSON_OK bytes=202054\nPRIMARY_RETURNS.json JSON_OK bytes=90011\n"
+      }
+    }
+  ],
+  "proof_reread": {
+    "request": {
+      "cmd": "sed -n '1,190p' docs/papers211_215_sequence/scouting/finite_residual_fresh08/LYNESS_PROOF_AND_SUBTRACTION.md",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 6500
+    },
+    "result": {
+      "chunk_id": "d72ace",
+      "wall_time_seconds": 0.00000338,
+      "exit_code": 0,
+      "original_token_count": 1570,
+      "output": "# Lyness entrance: subtraction proof, not a nomination\n\n2026-09-09 UTC. Author: /root/round211_functional_surgery_residual.\nOWNER_AMBER / HOLD_EXTERNAL. No new pilot, candidate ID, or admission.\n\n## Claim\n\nThe five-period, nonzero-rescaling entrance to the zero-totalized Lyness\nfamily is exactly conjugate to the already retained P150 map. Its all-target\ninverse calculation is the same elementary scalar equation already proved\nin P150. An elliptic-curve extension cannot be substituted for a proof about\nthe whole zero-totalized affine plane.\n\n## Status\n\nPROVABLE AS STATED, with the explicit parameter and carrier scope below.\nA new all-parameter temporal theorem for the remaining parameter values is\nNOT CURRENTLY JUSTIFIED in this desk. This is a missing result here, not a\nclaim that such a result is impossible or absent from the literature.\n\n## Assumptions and notation\n\nLet $q$ be an odd prime power, let $a\\in\\mathbb F_q^\\times$ and\n$b\\in\\mathbb F_q$, and put $\\iota(0)=0$ and $\\iota(x)=x^{-1}$ for $x\\ne0$.\nUse the parameter scaffold\n$$T_{a,b}(x,y)=(y,(ay+b)\\iota(x)),\\qquad (x,y)\\in\\mathbb F_q^2.$$\nIt is used to subtract the old entrance; no specific residual value of\n$b/a^2\\ne1$ is nominated or instantiated in a scientific test.\nWrite $L=T_{1,1}$ and $S_a(x,y)=(ax,ay)$.\n\n## Proof strategy and dependency map\n\nDirect substitution proves the scaling identity and the inverse law.\nP150's actual manuscript supplies the already-proved full affine temporal\natlas for $L$. The source's elliptic-curve translation is used only to\nidentify a different carrier; no algebraic-geometric theorem is imported\nas an all-affine result.\n\n1. Scaling uses only $a\\ne0$ and the definition of $\\iota$.\n2. The inverse formula uses one forced coordinate and scalar inversion.\n3. P150 collision uses the scaling identity at $b=a^2$.\n4. The domain obstruction uses the non-singleton fibre from step 2.\n\n## Proof\n\n**Step 1: the whole-carrier adapter.**\nFor every $x\\in\\mathbb F_q$,\n$\\iota(ax)=a^{-1}\\iota(x)$: this follows from multiplicative inversion\nwhen $x\\ne0$, and both sides are zero when $x=0$. Therefore\n$$\nT_{a,b}S_a(x,y)\n=(ay,(a^2y+b)a^{-1}\\iota(x))\n=S_aT_{1,b/a^2}(x,y).\n$$\nThe map $S_a$ is bijective with inverse $S_{a^{-1}}$, so this is a\nconjugacy on the entire affine plane, not only on the rational open locus.\n\n**Step 2: every-target fibres.**\nIf $T_{a,b}(x,y)=(u,v)$, then $y=u$ and\n$$(au+b)\\iota(x)=v.$$\nAt $u=-b/a$, all $q$ possible $x$ work if $v=0$ and none work if $v\\ne0$.\nAt $u\\ne-b/a$, the coefficient $au+b$ is nonzero. If $v=0$, the only\nsolution is $x=0$. If $v\\ne0$, the only solution is\n$x=(au+b)/v$, which is nonzero. Consequently\n$$\n|T_{a,b}^{-1}(u,v)|=\n\\begin{cases}\nq,&(u,v)=(-b/a,0),\\\\\n0,&u=-b/a,\\ v\\ne0,\\\\\n1,&u\\ne-b/a.\n\\end{cases}\n$$\nThe image size is $q(q-1)+1$. The maximum fibre is uniquely $q$.\nThis is the same case split as P150's inverse equation; moving the\nexceptional first coordinate is not an independent inverse mechanism.\n\n**Step 3: exact subtraction at the five-period parameter.**\nIf $b=a^2$, step 1 gives $T_{a,a^2}S_a=S_aL$. All pointwise entry times,\nleast periods, component incidence, and fibre sizes are transported by this\nbijection. P150 already gives the disjoint all-plane partition into a\nrecurrent generic locus, the recurrent coordinate axes, and three\nexceptional layers of exact depths $1,2,3$. Its manuscript also proves the\ncycle census and the complete exceptional in-tree. Thus nonzero rescaling\ndoes not yield a new temporal or inverse theorem.\n\n**Step 4: why the elliptic statement does not close the affine problem.**\nOn a finite group $G$, a translation $P\\mapsto P+Q$ is bijective with\ninverse $P\\mapsto P-Q$. If $d$ is the order of $Q$, cancellation shows that\n$P+tQ=P$ exactly when $tQ=0$, so every point has period $d$ and there are\n$|G|/d$ cycles. This elementary conclusion applies when the source provides\na genuine smooth projective elliptic-curve group and the Lyness extension\nis the stated translation. It does not give the affine boundary\nconvention. In fact step 2 proves that $T_{a,b}$ has a fibre of size $q>1$,\nso it is not a permutation of $\\mathbb F_q^2$. Its fibres cannot be replaced\nby the singleton fibres of a translation. No claim is made that all\nremaining $b$ are conjugate to P150.\n\n## Original proof read boundary\n\nActually read P150 main.tex lines 1–435, including the definition, partition\nproof, five iterates, exceptional arrows, exact tails, cycle proofs and\nevery-target inverse proof through the complete exceptional component.\nLater controls/declarations, verifier and canonical output were not audited\nor replayed. Also read the old algebraic replacement SCOUT.md lines 1–135,\nas provenance for the existing ZTL literal, not as a substitute for proof.\n\nThe two after-reading pins are in INPUT_PINS_NATIVE.json. They are\nafter-reading observations, not a claimed before/after bracket.\n\n## Primary source and scope\n\nHone, *Efficient ECM factorization in parallel with the Lyness map*,\narXiv:2002.03811, actual PDF text pp. 1–4 through the beginning of the\nprojective-computation discussion, was returned and read. Equations (2),\n(4), (15), and (19) distinguish the rational formula, nonzero rescaling,\ncurve translation, and exceptional base points. This source is background;\nthe all-affine adapter above is proved directly.\n[Author preprint](https://arxiv.org/pdf/2002.03811).\n\nThe accompanying *ECM factorization with QRT maps* record was read only at\nmetadata/abstract level, not as another proof input.\n[Author record](https://arxiv.org/abs/2001.09076).\nAdditional search snippets, including 2026 cluster-deformation material,\nare navigation only. Six bounded name/formula/singularity/recent queries\ndo not establish exhaustive coverage or source absence.\n\n## Corrections, exclusions and open risks\n\nThe hypothesis $a\\ne0$ is essential to this adapter; the $a=0$ family is not\nanother entrance in this task. The proof is not a universal conjugacy for\nall $b$. Generic rational periodicity is not asserted across zero\ndenominators. No new all-carrier recurrent classification for\n$b/a^2\\ne1$ was proved. Reopening that direction would require a separately\nspecified residual contract and actual source subtraction; no experiment\nis justified by this desk alone.\n\n"
+    }
+  }
+}
+

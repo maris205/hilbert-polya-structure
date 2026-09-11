@@ -1,0 +1,50 @@
+{
+  "schema": "P213_PARAMETERS_V1",
+  "status": "DECLARED_SOURCE_ONLY_NOT_EXECUTED",
+  "carrier": {
+    "n_min": 1,
+    "n_max": 6,
+    "mass_min": 0,
+    "mass_max": 4,
+    "cyclic": true,
+    "labelled": true,
+    "rotation_quotient": false,
+    "all_nonnegative_integer_compositions": true,
+    "expected_carriers": 30,
+    "expected_states": 461
+  },
+  "literal": {
+    "current": "min(a_i,a_(i+1))",
+    "update": "a_i-current_i+current_(i-1)",
+    "simultaneous_old_state": true
+  },
+  "traversal": {
+    "carriers": "n ascending, then mass ascending",
+    "states": "lexicographic weak compositions",
+    "mixed_words": "integer mask 1 through 2^n-2; bit i is edge i",
+    "ties": "weak ascent bit 1 only",
+    "blocks": "valley index ascending; unwrapped valley-peak-next-valley"
+  },
+  "code_constants": {
+    "N_MIN": 1,
+    "N_MAX": 6,
+    "MASS_MIN": 0,
+    "MASS_MAX": 4,
+    "EXPECTED_CARRIERS": 30,
+    "EXPECTED_STATES": 461
+  },
+  "floating_point": false,
+  "randomness": false,
+  "imports": [],
+  "runtime_parameter_reads": [],
+  "command_line_parameters": [],
+  "source_graph_methods": [
+    "literal old-state currents and full-carrier forward graph",
+    "per-start direct trajectory with repeat rejection",
+    "comparison-word dyadic/interval atlas; no forward call inside word_sources",
+    "complete per-word and all-target source-set equality"
+  ],
+  "old_artifact_imports": [],
+  "expected_outcomes_not_precomputed": true
+}
+

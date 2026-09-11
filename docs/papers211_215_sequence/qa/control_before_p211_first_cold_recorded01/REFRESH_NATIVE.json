@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "/usr/bin/node -e 'const fs=require(\"fs\"),h=require(\"crypto\"),q=\"docs/papers211_215_sequence/qa/\",base=q+\"p211_terminal_enable_root01/build_1/\";let c=0;for(let phase of [\"refresh\",\"enable\",\"capture\"]){let k=JSON.parse(fs.readFileSync(base+phase+\"_reception01/INPUTS.json\"));for(let [p,v]of Object.entries(k)){let b=fs.readFileSync(p);if(b.length!==v.bytes||h.createHash(\"sha256\").update(b).digest(\"hex\")!==v.sha256)throw Error(p);c++}}for(let f of [\"docs/papers211_215_sequence/PIPELINE_STATE.md\",\"SYMBOLIC_DYNAMICS_STATE.md\"]){let t=fs.readFileSync(f,\"utf8\");for(let n of [\"p211_terminal_enable_root01/build_1/CAPTURE_RECEPTION.md\",\"control_before_p211_first_cold_recorded01/MAPPING.json\"])if(!t.includes(n)||!fs.existsSync(q+n))throw Error(\"new link\")}console.log(JSON.stringify({status:\"PASS_DOCUMENTARY_FIRST_COLD_INDEX_REFRESH\",unchanged_record_input_rows:c,live:Object.fromEntries([\"docs/papers211_215_sequence/PIPELINE_STATE.md\",\"SYMBOLIC_DYNAMICS_STATE.md\"].map(f=>{let b=fs.readFileSync(f);return[f,{bytes:b.length,sha256:h.createHash(\"sha256\").update(b).digest(\"hex\")}]})),new_science:0,new_builds:0,new_views:0}));'",
+    "login": false,
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "ae28b2",
+    "wall_time_seconds": 0.00000632,
+    "exit_code": 0,
+    "original_token_count": 101,
+    "output": "{\"status\":\"PASS_DOCUMENTARY_FIRST_COLD_INDEX_REFRESH\",\"unchanged_record_input_rows\":483,\"live\":{\"docs/papers211_215_sequence/PIPELINE_STATE.md\":{\"bytes\":52492,\"sha256\":\"573ba0e9d2cb185b5874912731ef00bf8ec062c5414793a85156b91ad8785d56\"},\"SYMBOLIC_DYNAMICS_STATE.md\":{\"bytes\":62449,\"sha256\":\"153e8f0c6e66b9437c999c9cb092d8591fa7b881903a33f3ebe876f60e893629\"}},\"new_science\":0,\"new_builds\":0,\"new_views\":0}\n"
+  }
+}

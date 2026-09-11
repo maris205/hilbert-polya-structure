@@ -1,0 +1,94 @@
+\section{The exact clock}
+\label{sec:clock}
+
+The recurrence representation isolates the only multiplier at which
+leading-term cancellation matters.
+
+\begin{lemma}
+\label{lem:recurrence}
+Set $x_0=x$, $x_1=y$ and
+\begin{equation}
+ x_{n+2}=x_n(t+x_{n+1})\quad(n\geq0).
+ \label{eq:recurrence}
+\end{equation}
+Then $F^n(x,y)=(x_n,x_{n+1})$. Every $x_n$ belongs to $I$, and
+$x_n\in t^2R$ for $n\geq2$. Thus $v(t+x_n)=1$ for $n\geq2$.
+\end{lemma}
+
+\begin{proof}
+The iterate identity follows by induction from~\eqref{eq:map}.
+If two consecutive terms belong to $I$, both factors on the right of
+\eqref{eq:recurrence} belong to $I$, so their product belongs to $t^2R
+\subseteq I$. Starting with $x,y\in I$ proves both inclusions. The last
+claim follows from the coefficient of $t$ in $t+x_n$.
+\end{proof}
+
+\begin{theorem}[Pointwise clock]
+\label{thm:clock}
+For every $(x,y)\in I^2$, formula~\eqref{eq:preview} holds. Zero is the
+unique recurrent state. The maximum depth is $2m-2$, attained exactly at
+the states with $v(y)=1$.
+\end{theorem}
+
+\begin{proof}
+Write $a=v(x)$ and $b=v(y)$. First suppose $b\geq2$. The initial
+multiplier $t+y$ and every later multiplier in~\eqref{eq:recurrence}
+have valuation one. Induction therefore gives, for $k\geq0$,
+\begin{equation}
+ v(x_{2k})=\min\{m,a+k\},\qquad
+ v(x_{2k+1})=\min\{m,b+k\}.
+ \label{eq:exactchains}
+\end{equation}
+If $a<m$, the last nonzero even-indexed term has index $2(m-a-1)$;
+if $b<m$, the last nonzero odd-indexed term has index $2(m-b-1)+1$.
+The first zero state occurs one index after the last nonzero term, giving
+the maximum in~\eqref{eq:preview}. If $a=m$, the even chain is absent and
+its displayed contribution is $-1$, which cannot dominate the nonnegative
+odd-chain contribution. If $b=m$, the odd chain is absent and contributes
+zero. In particular $a=b=m$ gives depth zero.
+
+Now suppose $b=1$. Cancellation in $t+y$ can only accelerate the even
+chain. Lemma~\ref{lem:recurrence} and~\eqref{eq:ideals} imply
+\begin{equation}
+ v(x_{2k})\geq\min\{m,a+k\}\quad(k\geq1),\qquad
+ v(x_{2k+1})=\min\{m,1+k\}\quad(k\geq0).
+ \label{eq:cancellationchains}
+\end{equation}
+For the second equality, the first update of the odd chain uses $t+x_2$;
+all such adjacent even terms lie in $t^2R$. Hence $x_{2m-3}\ne0$ but
+$x_{2m-2}=x_{2m-1}=0$, proving $\tau=2m-2$. Since $a\geq1$, this is
+exactly~\eqref{eq:preview}. The argument includes $m=2$.
+
+Every state reaches the fixed state zero, so no other state is recurrent.
+When $b\geq2$, both contributions to~\eqref{eq:preview} are at most
+$2m-3$; when $b=1$, the depth is $2m-2$. This proves sharpness and its
+equality condition.
+\end{proof}
+
+For example, $(t,-t)$ has $x_2=0$, whereas for $k\geq1$ its iterates are
+\begin{equation}
+ F^{2k}(t,-t)=(0,-t^{k+1}),\qquad
+ F^{2k+1}(t,-t)=(-t^{k+1},0).
+ \label{eq:example}
+\end{equation}
+Powers are taken modulo $t^m$. The first zero state is still $2m-2$;
+an exact valuation increment for both chains would have been false.
+
+\begin{corollary}[Depth census]
+\label{cor:depth}
+For every integer $0\leq h\leq2m-2$, exactly $q^h$ states have depth at
+most $h$. Depth zero has one state, and each depth $1\leq h\leq2m-2$ has
+$(q-1)q^{h-1}$ states.
+\end{corollary}
+
+\begin{proof}
+The two inequalities in~\eqref{eq:preview} give
+\[
+ \tau(x,y)\leq h\quad\Longleftrightarrow\quad
+ v(x)\geq m-\lceil h/2\rceil,\quad
+ v(y)\geq m-\lfloor h/2\rfloor.
+\]
+Both thresholds lie between $1$ and $m$. Formula~\eqref{eq:ideals}
+therefore gives $q^{\lceil h/2\rceil}q^{\lfloor h/2\rfloor}=q^h$
+states. Subtract the count at $h-1$ for the exact positive-depth count.
+\end{proof}

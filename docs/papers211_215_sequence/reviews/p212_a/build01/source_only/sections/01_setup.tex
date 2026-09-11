@@ -1,0 +1,75 @@
+\section{The closed carrier and its active core}
+For $n\ge1$ put $V=[n]$ and $X_n=V^2\times V^V$. On the full labelled
+carrier, with ordered registers, define
+\begin{equation}\label{eq:update}
+ R(u,v,f)=(v,f(v),f[v:=u]).
+\end{equation}
+Every expression on the right uses the old state. We allow $u=v$, loops and
+arbitrary total maps $f$; there is no nil value, stopping rule or hidden edge
+identity. We determine two kinds of information: every exact period, and
+the orbit decorations needed for the labelled census. They share a return-map
+analysis, but a scalar period does not determine the decorations.
+
+The kernel is established in-place list reversal, as in Manna and
+Waldinger~\cite{manna1987}. Loginov, Reps and Sagiv~\cite{loginov2007}
+analyze a NULL-initialized, NULL-stopped version on possibly cyclic lists,
+including restored handles. Berdine et al.\ explicitly use the decreasing
+quantity $2i+j+k$ in their panhandle example~\cite[Example~8]{berdine2006}.
+Thus neither reversal nor doubled-handle timing is claimed as new.
+
+Rotor routing also has a complete established orbit theory. On a fixed finite
+strongly connected directed multigraph, with prescribed cyclic orders, let
+$T_G(v)$ count inward spanning arborescences and $M=\gcd_v T_G(v)$.
+Pham's theorem gives $M$ recurrent rotor orbits, each of size
+$\sum_v d^+(v)T_G(v)/M$~\cite[Theorem~1]{pham2015}; the size is independent
+of the chosen cyclic orders. The Eulerian tour case is also treated in
+Holroyd et al.\ \cite[Lemma~4.9]{holroyd2008}.
+These are not our contribution. A barbell with cycle lengths $3,3$ and bridge
+length $1$ has pointer period $16$ below, whereas its bidirected Eulerian
+rotor graph has $14$ arcs and recurrent period $14$. This excludes only a
+time-preserving identification on that same core, not factors, suspensions,
+enlarged states or arbitrary rotor encodings.
+
+Some elementary facts fix the setting. The inverse is
+\begin{equation}\label{eq:inverse}
+ R^{-1}(a,b,g)=(g(a),a,g[a:=b]).
+\end{equation}
+Substitution proves both identities, including coincident registers. Hence
+every state is periodic. A fixed state has $u=v=f(v)$; the other pointers
+are arbitrary, giving $n^n$ fixed states. These facts receive no separate
+contribution claim.
+
+Associate to $(u,v,f)$ the undirected multigraph $G$ with the stored edges
+$\{x,f(x)\}$ for all $x$, and one extra edge $\{u,v\}$. Edges have
+multiplicity but no identities; a loop contributes two to degree. Represent
+the extra edge by $u\to v$ and the other edges by their stored arrows.
+Equation~\eqref{eq:update} exchanges the stored and extra roles of two
+edges and reverses the traversed extra arrow, so $G$ is invariant.
+
+\begin{lemma}\label{lem:core}
+The component containing the registers has a connected two-core $K$ with
+$s$ vertices, $s+1$ edges and minimum degree two. Both registers stay in
+$K$. Every pointer outside $K$ is frozen. The core is a figure-eight with
+cycle lengths $a,b$, a barbell with cycle lengths $a,b$ and bridge length
+$c$, or a theta with path lengths $a,b,c$, all lengths positive.
+Their sizes are respectively $a+b-1,a+b+c-1,a+b+c-1$.
+\end{lemma}
+\begin{proof}
+Each functional component has equally many edges and vertices. Adding the
+register edge either augments one such component or joins two; in both
+cases the active component has one excess edge. The active vertex $u$ has
+two outgoing arrows, and every other vertex has one. A degree-one vertex
+is therefore not $u$, and its single edge is its stored arrow directed
+toward the remaining graph. Removing it removes no remaining vertex's
+outgoing arrow. Induction through leaf pruning leaves $u$, the extra edge,
+and hence $v$ in the two-core; all removed arrows point inward. Invariance
+of $G$ makes those arrows, and all inactive components, frozen for all time.
+
+The core retains excess one, so $\sum_{x\in K}(\deg x-2)=2$.
+There is one degree-four vertex or two degree-three vertices, all others
+having degree two. Following chains between branch incidences gives two
+closed chains in the first case; in the second it gives either three
+joining chains, or one joining chain and a closed chain at each end.
+These are exactly the asserted three shapes, with loops and length-two
+cycles included.
+\end{proof}

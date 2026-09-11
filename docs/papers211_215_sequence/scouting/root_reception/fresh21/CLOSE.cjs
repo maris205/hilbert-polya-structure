@@ -1,0 +1,20 @@
+'use strict';
+// Fixed documentary receipt closing, not source execution or host observation.
+const fs=require('node:fs');
+const make=require('../../../qa/p213_initial_science_enabled_root01/READ_FIXED.cjs');
+const R='docs/papers211_215_sequence/scouting/root_reception/fresh21/';
+const base=['INPUT_SPEC.json','ROOT_READS_NATIVE.json','ROOT_AUDIT_READS_NATIVE.json','ROOT_WEB_RETURNS.json','ROOT_REPLAY_NATIVE.json','CREATION_NATIVE.json','CHECK_ROOT.cjs','CHECK_NATIVE.json','RECEPTION.md','CLOSE.cjs'];
+const spec=JSON.parse(fs.readFileSync(R+'INPUT_SPEC.json','utf8'));
+const allowed=new Set([...spec.external.map(x=>x.path),...spec.independentNames.map(n=>spec.independentBase+n),...base.map(n=>R+n),spec.readerPath,spec.templatePath]);
+const r=make(allowed);for(const p of allowed)r.read(p);
+const archive=JSON.parse(r.read(R+'CHECK_NATIVE.json')),a=JSON.parse(archive.result.output);
+r.need(archive.result.exit_code===0&&archive.result.chunk_id==='620ea8'&&archive.request.cmd==='node '+R+'CHECK_ROOT.cjs','ACTUAL_ROOT_COMMAND_EXIT');
+r.need(a.status==='PASS_FRESH21_ROOT_FIXED_DOCUMENT_RECEIPT_ONLY'&&a.checks===4761&&a.keys.length===58&&a.raw_pair_count===27,'EXACT_ROOT_RECEIPT_CENSUS');
+for(const old of a.keys)r.need(r.equal(old,r.keys.get(old.path)),'WHOLE_PRIOR_ROOT_KEY '+old.path);
+r.need(r.sha(r.read(spec.readerPath))===spec.readerSha&&r.sha(r.read(spec.templatePath))===spec.templateSha,'CURRENT_REUSED_DOCUMENTARY_SOURCE_PINS');
+r.need(r.equal(fs.readdirSync(R).sort(),[...base].sort()),'EXACT_TEN_PRECLOSING_PAYLOADS');
+const ownPins=base.map(n=>({path:n,bytes:r.read(R+n).length,sha256:r.sha(r.read(R+n))}));
+const body=r.read(R+'RECEPTION.md').toString('utf8');
+r.need(body.includes('60 to 61')&&body.includes('Retained3 / complete1 / open2')&&body.includes('zero reserves')&&body.includes('HOLD_EXTERNAL'),'BOUNDED_NEGATIVE_SCOPE');
+r.need(body.includes('four full ten-field')&&body.includes('Four partial comparisons')&&body.includes('Unarchived reported final-seal'),'EXACT_EVIDENCE_LIMITS_PRESERVED');
+process.stdout.write(JSON.stringify({status:'PASS_FRESH21_ROOT_CLOSURE_ONLY',scientific_execution:false,checks:r.checks,keys:[...r.keys.values()],read_bytes:r.total,whole_old_keys_received:a.keys.length,own_preclosing_payloads:ownPins},null,2)+'\n');

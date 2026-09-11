@@ -1,0 +1,50 @@
+// SOURCE ONLY. No CLI/automatic call. Exact enabled delta + fresh grant later.
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+const F='dev ino mode nlink uid gid rdev size mtimeNs ctimeNs'.split(' ');
+const ENTRIES=[
+ {id:'OS_RELEASE',path:'/usr/lib/os-release',role:'distributor_identity_regular_candidate',optional:false,max_regular_bytes:65536,max_link_bytes:0}
+];
+const TEMPLATE={schema:'p212-three-lexical-leaves-request-v1',enabled:false,status:'HOLD_SOURCE_ONLY_THREE_LEAVES',purpose:'source_gate',entries:ENTRIES,total_regular_byte_limit:65536,total_link_byte_limit:0,permission_receipt:null};
+const need=(v,m)=>{if(!v)throw Error(m);};
+const stable=x=>JSON.stringify(x,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
+const same=(a,b,m)=>need(stable(a)===stable(b),m);
+const fields=s=>Object.fromEntries(F.map(k=>{need(typeof s[k]==='bigint','ACTUAL_BIGINT_STAT');return[k,s[k].toString()];}));
+const pin=b=>({bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});
+const errorData=e=>({name:String(e?.name??'Error'),code:typeof e?.code==='string'?e.code:null,message:String(e?.message??e)});
+function reference(r){need(r!==null&&typeof r==='object'&&!Array.isArray(r),'ACTUAL_EXTERNAL_GRANT_REFERENCE');same(Object.keys(r).sort(),['path','pin'],'REFERENCE_FIELDS');need(typeof r.path==='string'&&r.path.startsWith('/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/'),'REFERENCE_PATH_DATA');need(r.pin!==null&&typeof r.pin==='object'&&!Array.isArray(r.pin),'REFERENCE_PIN_OBJECT');same(Object.keys(r.pin).sort(),['bytes','sha256'],'REFERENCE_PIN_FIELDS');need(Number.isSafeInteger(r.pin.bytes)&&r.pin.bytes>0&&typeof r.pin.sha256==='string'&&/^[0-9a-f]{64}$/.test(r.pin.sha256),'REFERENCE_PIN');}
+export function collectThreeLeaves(request){
+ const SOURCE_ENABLED=false;
+ need(SOURCE_ENABLED,'HOLD_SOURCE_ONLY_NO_THREE_LEAF_OBSERVATION');
+ need(request!==null&&typeof request==='object'&&!Array.isArray(request),'REQUEST_JSON_OBJECT');
+ need(request.enabled===true&&request.status==='ROOT_BOUND_THREE_LEXICAL_LEAVES_ONLY','SEPARATE_BOUND_REQUEST');
+ same({...request,enabled:false,status:TEMPLATE.status,permission_receipt:null},TEMPLATE,'ENTIRE_EXACT_THREE_LEAF_REQUEST');reference(request.permission_receipt);
+ // Entire request validated BEFORE any candidate-path operation. A reference
+ // never authenticates itself; actual outside source/binding/grant pins required.
+ const rows=[];let acceptedRegular=0,acceptedLink=0,failure=null;
+ for(const entry of ENTRIES){
+  const row={id:entry.id,path:entry.path,role:entry.role,kind:null,lstat_before:null,lstat_after:null,regular:null,link:null,complete:false,error:null};rows.push(row);let fd=null;const chunks=[];
+  try{
+   const before=fs.lstatSync(entry.path,{bigint:true});row.lstat_before=fields(before);
+   if(before.isSymbolicLink()){
+    row.kind='symlink';need(false,'REGULAR_ONLY_LINK_STOP_NO_READLINK');
+   }else{
+    row.kind=before.isFile()?'regular':'unsupported';need(before.isFile(),'UNSUPPORTED_LEAF_KIND_NO_FOLLOW');
+    const r={fd:null,fstat_before:null,fstat_after:null,reads:[],bytes_read:0,eof:false,close_succeeded:null,raw_hex:'',content:null,close_error:null};row.regular=r;
+    need(before.size>=0n&&before.size<=BigInt(entry.max_regular_bytes)&&before.size<=BigInt(TEMPLATE.total_regular_byte_limit-acceptedRegular),'REGULAR_DECLARED_BOUND');
+    fd=fs.openSync(entry.path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);r.fd=fd;const first=fs.fstatSync(fd,{bigint:true});r.fstat_before=fields(first);need(first.isFile(),'OPENED_REGULAR_ONLY');same(r.fstat_before,row.lstat_before,'ALL_TEN_SAME_FD_BEFORE_BYTES');
+    const block=Buffer.alloc(65536);for(;;){const remaining=Math.min(entry.max_regular_bytes-r.bytes_read,TEMPLATE.total_regular_byte_limit-acceptedRegular-r.bytes_read);need(remaining>=0,'REGULAR_REMAINING_BOUND');const requested=Math.min(block.length,remaining+1),count=fs.readSync(fd,block,0,requested,null);r.reads.push({requested,returned:count});need(Number.isSafeInteger(count)&&count>=0&&count<=requested,'ACTUAL_READ_COUNT');if(count===0){r.eof=true;break;}chunks.push(Buffer.from(block.subarray(0,count)));r.bytes_read+=count;need(count<=remaining,'REGULAR_ONE_OVERFLOW_SENTINEL_PRESERVED');}
+    r.fstat_after=fields(fs.fstatSync(fd,{bigint:true}));row.lstat_after=fields(fs.lstatSync(entry.path,{bigint:true}));same(r.fstat_before,r.fstat_after,'FULL_FD_AFTER');same(row.lstat_before,row.lstat_after,'FULL_LEAF_AFTER');need(BigInt(r.bytes_read)===first.size,'COMPLETE_REGULAR_SIZE_TO_ZERO_EOF');
+   }
+  }catch(error){row.error=errorData(error);}
+  finally{
+   if(fd!==null){try{fs.closeSync(fd);row.regular.close_succeeded=true;}catch(error){row.regular.close_succeeded=false;row.regular.close_error=errorData(error);}}
+   if(row.regular!==null){const b=Buffer.concat(chunks);row.regular.raw_hex=b.toString('hex');row.regular.content=pin(b);}
+  }
+  if(row.error!==null||row.regular?.close_error!=null){failure={id:row.id,path:row.path,error:row.error,close_error:row.regular?.close_error??null};break;}
+  row.complete=row.kind==='symlink'?row.link.point_complete:row.regular.eof&&row.regular.close_succeeded===true;
+  if(!row.complete){failure={id:row.id,path:row.path,error:{name:'Error',code:null,message:'INCOMPLETE_LEAF'},close_error:null};break;}
+  if(row.kind==='symlink')acceptedLink+=row.link.content.bytes;else acceptedRegular+=row.regular.bytes_read;
+ }
+ return {schema:'p212-three-lexical-leaves-v1',status:failure?'FAILED_PARTIAL_PRESERVED':'THREE_LEXICAL_LEAVES_ROOT_RECEPTION_PENDING',request,rows,accepted_regular_bytes:acceptedRegular,accepted_link_bytes:acceptedLink,failure,referents_followed:false,terminal_selection:null,actual_ancestor_scan:false,source_acceptance:false,operation_permission:false,installed_closure:false};
+}

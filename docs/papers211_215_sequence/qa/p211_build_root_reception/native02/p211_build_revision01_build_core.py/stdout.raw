@@ -1,0 +1,38 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/build_core.py	2026-09-08 18:01:03.322071443 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_revision01/build_core.py	2026-09-08 18:22:40.394649070 +0800
+@@ -17,7 +17,8 @@
+ import traceback
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+-PREP = ROOT / 'docs/papers211_215_sequence/qa/p211_build_preparation'
++BASELINE_PREP = ROOT / 'docs/papers211_215_sequence/qa/p211_build_preparation'
++PREP = ROOT / 'docs/papers211_215_sequence/qa/p211_build_revision01'
+ PAPER = ROOT / 'papers/211-kernel-image-projection-feedback'
+ PYTHON = Path('/usr/bin/python3.10')
+ ENV8 = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8',
+@@ -209,7 +210,10 @@
+            'attempted_epoch': time.time(), 'expected_exit_codes': list(expected)}
+     write_new(work / 'ATTEMPT.json', row)
+     proc, error, reason, native_exit = None, None, 'NOT_SPAWNED', None
+-    settled, members, interventions = True, [], []
++    # BLD-I1: before Popen returns an actual handle, native writer outcome
++    # is unknown. Neither a constructor exception nor missing pid proves
++    # that no writer exists. Only the owned-session wait below may settle.
++    settled, members, interventions = False, [], []
+     try:
+         direct = {str(p): entry(p) for p in [Path(argv[0]), Path('/dev/null'), *map(Path, inputs)]}
+         require(direct['/dev/null'].get('kind') == 'character_device' and
+@@ -255,7 +259,12 @@
+         except BaseException:
+             settled = False
+             error = (error or '') + traceback.format_exc()
+-    row.update(native_exit_code=native_exit, wrapper_reason=reason, error=error,
++    if proc is None:
++        reason = 'NO_NATIVE_HANDLE_UNKNOWN_LAUNCH'
++    row.update(native_handle_received=proc is not None,
++               launch_outcome=('KNOWN_NATIVE_HANDLE' if proc is not None else
++                               'UNKNOWN_NO_NATIVE_HANDLE'),
++               native_exit_code=native_exit, wrapper_reason=reason, error=error,
+                ended_epoch=time.time(), session_members_at_settlement=members,
+                owned_session_interventions=interventions, streams_settled=settled)
+     if not settled:

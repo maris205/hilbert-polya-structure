@@ -1,0 +1,56 @@
+'use strict';
+// Ordinary-trusted documentary intake only. Never evaluate scientific source.
+const fs = require('fs'), crypto = require('crypto');
+const ROOT = '/root/autodl-tmp/symbolic_dynamics/';
+const BASE = 'docs/papers211_215_sequence/qa/';
+const OWN = 'docs/papers211_215_sequence/scouting/root_reception/fresh08/';
+const PAPER = 'papers/213-receiver-limited-cyclic-transfer/';
+const AUDIT = BASE+'p213_source_parameter_audit01/';
+const TITLE = BASE+'p213_source_parameter_title_delta01/';
+const ERRATUM = BASE+'p213_source_title_erratum01/';
+const FIELDS = ['dev','ino','mode','nlink','uid','gid','rdev','size','mtimeNs','ctimeNs'];
+const items = new Map();
+let checks = 0;
+function need(ok,label) { checks++; if (!ok) throw Error(label); }
+const same = (a,b) => JSON.stringify(a)===JSON.stringify(b);
+const hash = b => crypto.createHash('sha256').update(b).digest('hex');
+const meta = st => FIELDS.map(k=>st[k].toString());
+function safe(p) {
+  need(/^(docs|papers)\/[A-Za-z0-9_.\/-]+$/.test(p)&&!p.split('/').some(x=>!x||x==='.'||x==='..'),'workspace spelling');
+  const bits=p.split('/');
+  for(let i=1;i<bits.length;i++) need(fs.lstatSync(ROOT+bits.slice(0,i).join('/')).isDirectory(),'physical parent');
+}
+function read(p) {
+  safe(p); const st=fs.lstatSync(ROOT+p,{bigint:true});
+  need(st.isFile()&&st.size<=8388608n,'bounded regular document');
+  const fd=fs.openSync(ROOT+p,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);
+  let body;
+  try {
+    need(same(meta(st),meta(fs.fstatSync(fd,{bigint:true}))),'opened descriptor');
+    const parts=[];let size=0;
+    for(;;){const b=Buffer.alloc(Math.min(65536,8388608-size+1)),n=fs.readSync(fd,b,0,b.length,null);if(!n)break;size+=n;need(size<=8388608,'bounded whole read');parts.push(b.subarray(0,n));}
+    body=Buffer.concat(parts);need(same(meta(st),meta(fs.fstatSync(fd,{bigint:true}))),'descriptor endpoint');
+  } finally { fs.closeSync(fd); }
+  need(same(meta(st),meta(fs.lstatSync(ROOT+p,{bigint:true}))),'path endpoint');
+  need(BigInt(body.length)===st.size,'exact byte count');safe(p);
+  return {body,key:{path:p,bytes:body.length,sha256:hash(body),metadata:meta(st)}};
+}
+function get(p) {if(!items.has(p))items.set(p,read(p));return items.get(p);}
+const json = p => JSON.parse(get(p).body);
+function inventory(dir,sections=false) {
+  safe(dir.slice(0,-1));need(fs.lstatSync(ROOT+dir).isDirectory(),'physical packet');
+  const out=[];
+  for(const name of fs.readdirSync(ROOT+dir).sort()){
+    const p=dir+name,st=fs.lstatSync(ROOT+p);
+    if(st.isDirectory()){need(sections&&name==='sections','only selected section directory');out.push(...inventory(p+'/'));}
+    else {need(st.isFile(),'regular inventory entry');out.push(p);}
+  }
+  return out.sort();
+}
+
+const r=json(OWN+'RECEIVE_NATIVE.json').response;need(r.exit_code===0,'actual receiver succeeded');const received=JSON.parse(r.output);need(received.checks===1206&&received.keys.length===24,'exact received scope');
+for(const key of received.keys)need(same(read(key.path).key,key),'unchanged received complete key');
+const names=inventory(OWN);need(names.length===6&&!names.some(p=>p.endsWith('/CLOSING_NATIVE.json')||p.endsWith('/SHA256SUMS')),'six preclosing files');names.forEach(get);
+const path=require('path');const links=[...get(OWN+'RECEPTION.md').body.toString().matchAll(/\]\(([^)]+)\)/g)].map(x=>x[1]);need(links.length===2,'two controlling originals');for(const link of links)need(get(path.posix.normalize(OWN+link)).key.bytes>0,'original link exists');
+for(const[p,x]of items)need(same(read(p).key,x.key),'closing full endpoint');need(same(inventory(OWN),names),'unchanged root inventory');
+console.log(JSON.stringify({status:'FRESH08_ROOT_CLOSING_PASS',checks,old_complete_keys_unchanged:24,preclosing_payloads:6,links:2,scientific_source_or_runtime_executed:false,keys:[...items.values()].map(x=>x.key).sort((a,b)=>a.path.localeCompare(b.path))}));

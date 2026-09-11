@@ -1,0 +1,6 @@
+'use strict';
+const fs=require('fs'),path=require('path'),crypto=require('crypto');
+const root='/root/autodl-tmp/symbolic_dynamics',base='docs/papers211_215_sequence/qa/control_before_residual46_accepted01';
+const h=b=>crypto.createHash('sha256').update(b).digest('hex');
+const rows=[];for(const [original,copy,expected] of [['SYMBOLIC_DYNAMICS_STATE.md','STATE.before.md','97a02532fe1c015fee817f0d9494e1deb22c3e1b3caa8dad263d77e583ae3786'],['docs/papers211_215_sequence/PIPELINE_STATE.md','PIPELINE.before.md','04abd6ea82962031e660fca9372cded0014da59ab23207eadbe382a88ad92d37']]){const a=path.join(root,original),c=path.join(root,base,copy),b=fs.readFileSync(a);if(h(b)!==expected)throw Error('unexpected current control '+original);const s=fs.statSync(a,{bigint:true});fs.copyFileSync(a,c,fs.constants.COPYFILE_EXCL);if(!b.equals(fs.readFileSync(c)))throw Error('copy bytes');rows.push({original,copy:base+'/'+copy,bytes:b.length,sha256:h(b),old_stat:Object.fromEntries(['dev','ino','mode','nlink','uid','gid','size','mtimeNs','ctimeNs','birthtimeNs'].map(f=>[f,s[f].toString()]))});}
+const mapping={scope:'Exact physical pre-46 originals, source-accepted P212/complete P211/43-closed timing; not current after next edit.',rows};fs.writeFileSync(path.join(root,base,'MAPPING.json'),JSON.stringify(mapping,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(mapping,null,2));

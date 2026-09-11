@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "diff -u docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/run03/executed_checker.py docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/inspect_cold1.py",
+    "max_output_tokens": 4500
+  },
+  "result": {
+    "chunk_id": "ef1bb4",
+    "wall_time_seconds": 0.00000557,
+    "exit_code": 1,
+    "original_token_count": 535,
+    "output": "--- docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/run03/executed_checker.py\t2026-09-09 15:09:33.068278710 +0800\n+++ docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/inspect_cold1.py\t2026-09-09 15:10:11.729868457 +0800\n@@ -837,7 +837,12 @@\n            'diagnostic_reconstruction', 'actual final absence categories')\n     demand(corrected['underfull']==diagnostics['underfull'] and len(corrected['underfull'])==2,\n            'diagnostic_reconstruction', 'two underfull entries')\n-    missed=[line for line in corrected['warnings'] if line not in diagnostics['warnings']]\n+    actual_warnings=[line for line in corrected['warnings'] if re.match(\n+        r'^(?:pdfTeX|LaTeX|Package [^:]+|Class [^:]+)\\s+warning\\b',line,re.I)]\n+    warning_metadata=[line for line in corrected['warnings'] if line not in actual_warnings]\n+    demand(warning_metadata==['Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)'],\n+           'diagnostic_reconstruction', 'separate complete warning literal package metadata')\n+    missed=[line for line in actual_warnings if line not in diagnostics['warnings']]\n     demand(len(missed)==1 and missed[0].startswith('pdfTeX warning (font expansion):'),\n            'diagnostic_reconstruction', 'exact current lower-case warning finding')\n     FINDINGS.append({'id':'P211-COLD1-IO-D1','status':'OPEN_PENDING_ROOT_DIAGNOSTIC_DISPOSITION',\n@@ -846,6 +851,8 @@\n         'glyph_loss_or_benignness_inferred':False,\n         'required_action':'Root supplemental diagnostic census and explicit disposition; no submitted edits authorized.'})\n     DETAILS['corrected_final_diagnostics']=corrected\n+    DETAILS['final_warning_classification']={'literal_matches':corrected['warnings'],\n+        'actual_emissions':actual_warnings,'package_metadata_only':warning_metadata}\n     demand(measured['visual_review']=='NOT_VIEWED' and measured['venue_page_limit'] is None and\n            measured['size_threshold_100KB']=='NOT_AN_ACCEPTANCE_RULE', 'measurement_scope', 'no invented acceptance threshold/view')\n     expected_images={'page-%04d.png'%n for n in range(1,6)}\n"
+  },
+  "reason": "Preserved all literal warning matches while distinguishing package metadata from engine warning emission. Read entire explicit delta to fully read base; root finding remains open."
+}
+

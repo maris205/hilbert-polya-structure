@@ -1,0 +1,104 @@
+{
+  "kind": "actual_documentary_check_requests_and_results",
+  "limits": "No scientific execution or independent review. These checks precede the final nonself seal; they cannot attest their own final bytes. Root should repeat sha256sum -c SHA256SUMS from this directory.",
+  "records": [
+    {
+      "id": "original_pins",
+      "request": {
+        "cmd": "sha256sum -c docs/papers211_215_sequence/scouting/finite_particle_residual_scout01/INPUTS.sha256",
+        "max_output_tokens": 3000
+      },
+      "result": {
+        "chunk_id": "9cf5e8",
+        "wall_time_seconds": 0.00000445,
+        "exit_code": 0,
+        "original_token_count": 147,
+        "output": "papers/90-rule184-particle-periodic-zeta/main.tex: OK\npapers/169-successor-transfer-set-partitions/main.tex: OK\ndocs/papers211_215_sequence/scouting/transport_lane/INTAKE.md: OK\ndocs/papers211_215_sequence/scouting/transport_lane/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/transport_lane/HANDOFF.md: OK\ndocs/papers211_215_sequence/scouting/circular_interval_transport_desk/HANDOFF.md: OK\ndocs/papers211_215_sequence/scouting/circular_interval_transport_desk/OLD_AND_SOURCE_BOUNDARIES.md: OK\ndocs/papers211_215_sequence/scouting/transport_lane/SOURCE_AND_COLLISION.md: OK\n"
+      }
+    },
+    {
+      "id": "read03_byte_compare",
+      "request": {
+        "cmd": "set -o pipefail\nnode -e 'const d=JSON.parse(require(\"fs\").readFileSync(process.argv[1],\"utf8\")); process.stdout.write(d.records.find(x=>x.id===\"particle_old_read03\").result.output)' docs/papers211_215_sequence/scouting/finite_particle_residual_scout01/NATIVE_READS.json | cmp - <(sed -n '1,185p' papers/90-rule184-particle-periodic-zeta/main.tex)",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "aad94a",
+        "wall_time_seconds": 0.00000388,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "id": "read04_byte_compare",
+      "request": {
+        "cmd": "set -o pipefail\nnode -e 'const d=JSON.parse(require(\"fs\").readFileSync(process.argv[1],\"utf8\")); process.stdout.write(d.records.find(x=>x.id===\"particle_old_read04\").result.output)' docs/papers211_215_sequence/scouting/finite_particle_residual_scout01/NATIVE_READS.json | cmp - <(sed -n '1,250p' papers/169-successor-transfer-set-partitions/main.tex)",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "03fade",
+        "wall_time_seconds": 0.000007449,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "id": "read05_byte_compare",
+      "request": {
+        "cmd": "set -o pipefail\nnode -e 'const d=JSON.parse(require(\"fs\").readFileSync(process.argv[1],\"utf8\")); process.stdout.write(d.records.find(x=>x.id===\"particle_old_read05\").result.output)' docs/papers211_215_sequence/scouting/finite_particle_residual_scout01/NATIVE_READS.json | cmp - <(cat docs/papers211_215_sequence/scouting/transport_lane/INTAKE.md docs/papers211_215_sequence/scouting/transport_lane/PROOF_PACKAGE.md)",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "47c871",
+        "wall_time_seconds": 7.5e-7,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "id": "read01_byte_compare",
+      "request": {
+        "cmd": "set -o pipefail\nnode -e 'const d=JSON.parse(require(\"fs\").readFileSync(process.argv[1],\"utf8\")); process.stdout.write(d.records.find(x=>x.id===\"particle_old_read01\").result.output)' docs/papers211_215_sequence/scouting/finite_particle_residual_scout01/NATIVE_READS.json | cmp - <(cat docs/papers211_215_sequence/scouting/transport_lane/HANDOFF.md docs/papers211_215_sequence/scouting/circular_interval_transport_desk/HANDOFF.md)",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "555771",
+        "wall_time_seconds": 0.00000481,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "id": "read02_byte_compare",
+      "request": {
+        "cmd": "set -o pipefail\nnode -e 'const d=JSON.parse(require(\"fs\").readFileSync(process.argv[1],\"utf8\")); process.stdout.write(d.records.find(x=>x.id===\"particle_old_read02\").result.output)' docs/papers211_215_sequence/scouting/finite_particle_residual_scout01/NATIVE_READS.json | cmp - <(cat docs/papers211_215_sequence/scouting/circular_interval_transport_desk/OLD_AND_SOURCE_BOUNDARIES.md docs/papers211_215_sequence/scouting/transport_lane/SOURCE_AND_COLLISION.md)",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "c987ca",
+        "wall_time_seconds": 0.0000027,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "id": "json_record_check",
+      "request": {
+        "cmd": "node -e 'const f=require(\"fs\"),p=process.argv[1],r=JSON.parse(f.readFileSync(p+\"/NATIVE_READS.json\",\"utf8\")),s=JSON.parse(f.readFileSync(p+\"/SOURCE_ACCESS.json\",\"utf8\")); if(r.records.length!==9||s.records.length!==11) process.exit(2); for(const x of r.records) if(x.result.exit_code!==0) process.exit(3); for(const n of f.readdirSync(p)) if(!f.lstatSync(p+\"/\"+n).isFile()) process.exit(4); console.log(JSON.stringify({native_local_records:r.records.length,browser_request_records:s.records.length,all_stored_shell_exits_zero:true,current_payloads_are_regular_files:true}));' docs/papers211_215_sequence/scouting/finite_particle_residual_scout01",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "2880fa",
+        "wall_time_seconds": 0.00000229,
+        "exit_code": 0,
+        "original_token_count": 34,
+        "output": "{\"native_local_records\":9,\"browser_request_records\":11,\"all_stored_shell_exits_zero\":true,\"current_payloads_are_regular_files\":true}\n"
+      }
+    }
+  ]
+}

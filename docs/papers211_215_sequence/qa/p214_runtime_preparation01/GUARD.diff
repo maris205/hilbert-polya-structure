@@ -1,0 +1,110 @@
+--- docs/papers211_215_sequence/qa/p212_a_execution_preparation01/guard.js	2026-09-11 14:49:26.581689795 +0800
++++ docs/papers211_215_sequence/qa/p214_runtime_preparation01/guard.js	2026-09-11 15:26:21.013902849 +0800
+@@ -5,22 +5,23 @@
+ const child = require('node:child_process');
+ 
+ const WORKSPACE = '/root/autodl-tmp/symbolic_dynamics';
+-const PREP = 'docs/papers211_215_sequence/qa/p212_a_execution_preparation01';
+-const ROOT = 'docs/papers211_215_sequence/qa/p212_a_source_root01';
+-const REVIEW = 'docs/papers211_215_sequence/reviews/p212_a';
+-const RUNS = 'docs/papers211_215_sequence/qa/p212_a_runs';
+-const SCIENCE = WORKSPACE + '/' + REVIEW + '/verify.py';
++const PREP = 'docs/papers211_215_sequence/qa/p214_runtime_preparation01';
++const ROOT = 'docs/papers211_215_sequence/qa/p214_runtime_root01';
++const SOURCE_ROOT = 'docs/papers211_215_sequence/qa/p214_source_root01';
++const PAPER = 'papers/214-nilpotent-bilinear-clock';
++const RUNS = 'docs/papers211_215_sequence/qa/p214_author_runs';
++const SCIENCE = WORKSPACE + '/' + PAPER + '/verify.py';
+ const INTERPRETER = '/usr/bin/python3.10';
+ const SCIENCE_ARGS = ['-I', '-S', '-B', SCIENCE];
+ const SCIENCE_ENV = {LANG: 'C', LC_ALL: 'C'};
+ const TIMEOUT_MS = 600000;
+ const KEYS = ['dev', 'ino', 'mode', 'size', 'mtimeNs', 'ctimeNs'];
+-const FIXED = [
+-  [ROOT + '/RUNTIME_INPUTS.json', 'fd64f171325548a01dc076ceda92685aad6577485334e7622d7a84ee4bc9e22b'],
+-  [ROOT + '/ORDINARY_RUNTIME_POLICY.md', 'b35af6b5bf9f94bd2f35b0e2f1ad4e97253909a5a46040bb693a60844c3e8739'],
+-  [ROOT + '/SOURCE_RECEPTION.md', '74e3d189d317b4f6315e5ce4b526f6af8aa5b3335b3d5986669f4c53f8825786'],
+-  [REVIEW + '/SOURCE_INPUTS.sha256', '939a1889b21ab797b2e95c27266d0e4739e52189d1ffff7c6bfae1ead67d417f'],
+-  [REVIEW + '/INPUT_PINS.sha256', '98c0eb45f277415ab2213130914c8dd7f5bd43c793ef09d90e4e9dae66bc1a27']
++const SOURCE_MANIFEST_SHA256 = '53cfc418a617f73659db2c6206ad5647fe571c7f73d8720698d4a7255151f06f';
++const BASELINE_RUNTIME = 'docs/papers211_215_sequence/qa/p212_a_source_root01/RUNTIME_INPUTS.json';
++const STATIC_FIXED = [
++  [PREP + '/SOURCE_INPUTS.sha256', SOURCE_MANIFEST_SHA256],
++  [PREP + '/BASELINE_INPUTS.sha256', '924001c0705cc27bec8753b69305df9b2fd03da526f8006b2720b07612c42746'],
++  [BASELINE_RUNTIME, 'fd64f171325548a01dc076ceda92685aad6577485334e7622d7a84ee4bc9e22b']
+ ];
+ 
+ function need(ok, why) { if (!ok) throw new Error(why); }
+@@ -93,12 +94,25 @@
+   const command = {executable: INTERPRETER, args: SCIENCE_ARGS,
+                    cwd: WORKSPACE, env: SCIENCE_ENV, stdin: '/dev/null',
+                    timeout_ms: TIMEOUT_MS};
+-  need(grant.schema === 'P212_A_ONE_RUN_GRANT_V1' && grant.authority === 'root' &&
++  need(grant.schema === 'P214_AUTHOR_ONE_RUN_GRANT_V1' && grant.authority === 'root' &&
+        grant.action === 'execute_once' && grant.run_id === runId &&
+        grant.run_directory === run && grant.guard_sha256 === selfKey.sha256 &&
+        grant.preparation_manifest_sha256 === prepKey.sha256 &&
+-       grant.source_manifest_sha256 === FIXED[3][1] &&
++       grant.source_manifest_sha256 === SOURCE_MANIFEST_SHA256 &&
++       grant.source_reception_sha256 === '580d6531617ee0ebb5aee511477ca8cda1a5ab896b83bb3d6d0f17897b372f7f' &&
++       grant.adopted_source_manifest_sha256 === '1b9e81528623d20a433b7d180c4b9785319ea39df3ce19c1829be0333e7c9444' &&
+        same(grant.command, command), 'grant does not bind this exact submission');
++  // Current source originals and future runtime records have independent grant hashes.
++  const ROOT_BINDINGS = [
++    [ROOT + '/RUNTIME_INPUTS.json', grant.runtime_manifest_sha256],
++    [ROOT + '/ORDINARY_RUNTIME_POLICY.md', grant.runtime_policy_sha256],
++    [ROOT + '/GUARD_SOURCE_RECEPTION.md', grant.guard_source_reception_sha256],
++    [SOURCE_ROOT + '/SOURCE_RECEPTION.md', grant.source_reception_sha256],
++    [SOURCE_ROOT + '/ADOPTED_SOURCE_INPUTS.sha256', grant.adopted_source_manifest_sha256]
++  ];
++  need(ROOT_BINDINGS.every(row => typeof row[1] === 'string' && /^[0-9a-f]{64}$/.test(row[1])),
++       'missing exact root document hashes');
++  const FIXED = [...ROOT_BINDINGS, ...STATIC_FIXED];
+   writeNew(run, 'REQUEST.json', {grant_path: grantPath, grant_key: grantKey,
+            grant, command, run_id: runId, run_directory: run,
+            guard_key: selfKey, preparation_manifest_key: prepKey});
+@@ -113,13 +127,23 @@
+   add(grantPath, grantKey.sha256);
+   // Check fixed policy/manifests before reading any manifest-controlled paths.
+   for (const [path, hash] of expected) need(regular(path).sha256 === hash, 'fixed pin: ' + path);
+-  pinLines(REVIEW + '/SOURCE_INPUTS.sha256', 16).forEach(row => add(...row));
+-  pinLines(REVIEW + '/INPUT_PINS.sha256', 25).forEach(row => add(...row));
+-  pinLines(PREP + '/PREPARATION_INPUTS.sha256', 3).forEach(row => add(...row));
++  pinLines(PREP + '/SOURCE_INPUTS.sha256', 5).forEach(row => add(...row));
++  pinLines(SOURCE_ROOT + '/ADOPTED_SOURCE_INPUTS.sha256', 28).forEach(row => add(...row));
++  pinLines(PREP + '/BASELINE_INPUTS.sha256', 8).forEach(row => add(...row));
++  pinLines(PREP + '/PREPARATION_INPUTS.sha256', 6).forEach(row => add(...row));
+   const runtime = JSON.parse(fs.readFileSync(absolute(ROOT + '/RUNTIME_INPUTS.json'), 'utf8'));
+   need(runtime.roles.length === 19 && runtime.roles.filter(r => r.kind === 'regular-file').length === 18,
+        'runtime role census');
+   need(new Set(runtime.roles.map(r => r.path)).size === 19, 'duplicate runtime role');
++  const baseline = JSON.parse(fs.readFileSync(absolute(BASELINE_RUNTIME), 'utf8'));
++  function runtimeContent(role) {
++    need(role.kind === 'regular-file' || role.kind === 'required-absence', 'unknown runtime role');
++    return role.kind === 'required-absence' ?
++      {path: role.path, kind: role.kind, errno: role.errno} :
++      {path: role.path, kind: role.kind, bytes: role.bytes, sha256: role.sha256};
++  }
++  need(same(runtime.roles.map(runtimeContent), baseline.roles.map(runtimeContent)),
++       'selected runtime content differs from the fixed nineteen-role candidate');
+   const contentInputs = [...expected].sort((a, b) => a[0].localeCompare(b[0], 'en'));
+   function snapshot() {
+     const rows = [], errors = [], baselineChanges = [];
+@@ -141,7 +165,7 @@
+           baselineChanges.push({path: role.path, historical: role.metadata, current: row.metadata});
+       } catch (error) { errors.push(error.message); }
+     }
+-    return {schema: 'P212_A_KEYS_V1', keys: rows, errors,
++    return {schema: 'P214_AUTHOR_KEYS_V1', keys: rows, errors,
+             runtime_baseline_metadata_changes: baselineChanges};
+   }
+   const pre = snapshot();
+@@ -170,7 +194,7 @@
+   need(same(pre, post), 'selected pre/post metadata or content changed');
+   const stdout = regular(run + '/stdout.raw'), stderr = regular(run + '/stderr.raw');
+   const completed = result.status === 0 && !result.signal && !result.error;
+-  writeNew(run, 'RECEIPT.json', {schema: 'P212_A_CAPTURE_V1', run_id: runId,
++  writeNew(run, 'RECEIPT.json', {schema: 'P214_AUTHOR_CAPTURE_V1', run_id: runId,
+        ordinary_runtime_only: true, pre_post_equal: true, exit,
+        stdout, stderr, execution_completed_zero: completed,
+        semantic_reception: 'NOT_PERFORMED', canonical_adoption: 'NOT_AUTHORIZED'});

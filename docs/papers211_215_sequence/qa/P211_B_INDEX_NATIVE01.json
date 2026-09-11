@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "/usr/bin/python3.10 -I -S -B -c 'from pathlib import Path; import hashlib,json,re; r=Path.cwd(); q=r/\"docs/papers211_215_sequence/qa\"; key=json.loads((q/\"p211_b_binding_closure/INPUTS.json\").read_bytes()); checks=0\nfor p,w in key.items():\n d=Path(p).read_bytes(); assert {\"bytes\":len(d),\"sha256\":hashlib.sha256(d).hexdigest()}==w,p; checks+=1\nfor n in (\"P211_B_RUNTIME_RECEPTION.md\",):\n p=q/n; body=p.read_text();\n for target in re.findall(r\"\\]\\(([^)]+)\\)\",body):\n  assert (p.parent/target).exists(),target; checks+=1\nfor p in (r/\"SYMBOLIC_DYNAMICS_STATE.md\",r/\"docs/papers211_215_sequence/PIPELINE_STATE.md\"):\n assert \"P211_B_RUNTIME_ACCEPTED_FINAL_REVIEW_ACTIVE / ONE_RETAINED / FOUR_OPEN_SEATS\" in p.read_text(); checks+=1\nm=json.loads((q/\"control_before_b_runtime/MAPPING.json\").read_bytes())\nfor row in m:\n d=Path(row[\"physical_original\"]).read_bytes(); assert {\"bytes\":len(d),\"sha256\":hashlib.sha256(d).hexdigest()}==row[\"pin\"]; checks+=1\nprint(json.dumps({\"status\":\"PASS_B_INDEX_LINKS_AND_COMPLETE_UNCHANGED_ACCEPTED_KEY\",\"checks\":checks,\"accepted_read_paths\":len(key),\"new_scientific_executions\":0},sort_keys=True))'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 3000
+  },
+  "result": {
+    "chunk_id": "0ac7c9",
+    "wall_time_seconds": 0.00000586,
+    "exit_code": 0,
+    "original_token_count": 36,
+    "output": "{\"accepted_read_paths\": 512, \"checks\": 530, \"new_scientific_executions\": 0, \"status\": \"PASS_B_INDEX_LINKS_AND_COMPLETE_UNCHANGED_ACCEPTED_KEY\"}\n"
+  }
+}

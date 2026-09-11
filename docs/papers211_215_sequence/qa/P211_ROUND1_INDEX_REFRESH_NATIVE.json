@@ -1,0 +1,29 @@
+{
+  "index_check": {
+    "request": {
+      "cmd": "/usr/bin/python3.10 -I -S -B -c 'import hashlib,json,re; from pathlib import Path; R=Path.cwd(); Q=R/\"docs/papers211_215_sequence/qa\"; old=json.loads((Q/\"control_before_round1_accepted/MAPPING.json\").read_bytes()); check=lambda b:{\"bytes\":len(b),\"sha256\":hashlib.sha256(b).hexdigest()}; accepted=json.loads((Q/\"p211_round1_root_reception/ORIGINALS_RESULT.json\").read_bytes())[\"inputs\"]; count=0\nfor p,v in accepted.items():\n assert check(Path(p).read_bytes())==v,p\n count+=1\nfor row in old:\n assert check((R/row[\"physical_original\"]).read_bytes())==row[\"pin\"]\n assert check((R/row[\"logical_path\"]).read_bytes())!=row[\"pin\"]\nfiles=[R/\"docs/papers211_215_sequence/PIPELINE_STATE.md\",R/\"SYMBOLIC_DYNAMICS_STATE.md\"]\nfor f in files:\n assert \"P211_ROUND1_ACCEPTED_B_ACTIVE\" in f.read_text()\n for href in re.findall(r\"!?\\[[^\\]\\n]*\\]\\(([^)\\n]+)\\)\",f.read_text()):\n  if re.match(r\"[A-Za-z][A-Za-z0-9+.-]*:\",href) or href.startswith(\"#\"):continue\n  assert (f.parent/href.split(\"#\",1)[0]).resolve().exists(),href\nprint(json.dumps({\"status\":\"PASS_CURRENT_INDEX_LINKS_AND_UNCHANGED_FULL_ACCEPTED_KEYS\",\"accepted_keys_checked\":count,\"physical_historical_controls\":2,\"new_indexes\":{str(f):check(f.read_bytes()) for f in files},\"science\":0,\"builds\":0,\"views\":0},sort_keys=True))'",
+      "max_output_tokens": 3000
+    },
+    "result": {
+      "chunk_id": "b0b861",
+      "wall_time_seconds": 0.024729445,
+      "exit_code": 0,
+      "original_token_count": 134,
+      "output": "{\"accepted_keys_checked\": 2833, \"builds\": 0, \"new_indexes\": {\"/root/autodl-tmp/symbolic_dynamics/SYMBOLIC_DYNAMICS_STATE.md\": {\"bytes\": 44876, \"sha256\": \"5524f046b66eb021cd4120824a5b82b14ceb8857e50a6fdea2fbbd9b2ddd4872\"}, \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/PIPELINE_STATE.md\": {\"bytes\": 24986, \"sha256\": \"ece1542134bc7669cdc1387cfe03310341abbc681b2bb7e9bbd879c18037c3fc\"}}, \"physical_historical_controls\": 2, \"science\": 0, \"status\": \"PASS_CURRENT_INDEX_LINKS_AND_UNCHANGED_FULL_ACCEPTED_KEYS\", \"views\": 0}\n"
+    }
+  },
+  "root_manifest_check": {
+    "request": {
+      "cmd": "/usr/bin/sha256sum -c SHA256SUMS",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round1_root_reception",
+      "max_output_tokens": 3000
+    },
+    "result": {
+      "chunk_id": "809bd1",
+      "wall_time_seconds": 0.050902382,
+      "exit_code": 0,
+      "original_token_count": 117,
+      "output": "COMPARE_ATTEMPT.json: OK\nCOMPARE_NATIVE.json: OK\nFINAL_DOCUMENTARY_CHECK.json: OK\nORIGINALS_NATIVE.json: OK\nORIGINALS_RESULT.json: OK\nOUTER_RECEPTION_NATIVE01.json: OK\nRECEPTION.md: OK\nRECHECK_ATTEMPT.json: OK\nRECHECK_NATIVE.json: OK\nRECHECK_RESULT.json: OK\nRECHECK_TOOL_NATIVE.json: OK\ncompare.stderr.raw: OK\ncompare.stdout.raw: OK\nfinalize.py: OK\ninspect_outer.py: OK\ninspect_reception.py: OK\nrecheck.stderr.raw: OK\nrecheck.stdout.raw: OK\nrecheck_receiver.py: OK\n"
+    }
+  }
+}

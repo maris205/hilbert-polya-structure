@@ -1,0 +1,63 @@
+\section{An exact sign-run clock}\label{sec:clock}
+
+\begin{lemma}[one sign run per update]\label{lem:run}
+For $x\ne\zero$, one has $R(Fx)=R(x)-1$.
+\end{lemma}
+\begin{proof}
+Put $y=Fx$, extend $M_0(x)=0$, and set $y_0=0$. The maximum recurrence
+$M_i(x)=\max(M_{i-1}(x),x_i)$ gives
+\begin{equation}\label{eq:reflection}
+ y_i=\max\{y_{i-1}-d_i,0\},\qquad d_i=x_i-x_{i-1}.
+\end{equation}
+When $d_i=0$, the output does not change, so deleting those input
+differences does not affect the output sign analysis. A negative input
+difference makes $y$ strictly increase. A positive input difference makes
+$y$ decrease strictly if its previous value is positive, or stay zero if
+that value is zero.
+
+In the first positive input run, the output starts at zero and stays
+zero. Each negative input run then gives a nonempty positive output run.
+Every later positive input run follows a negative run, so it starts with
+positive output and gives at least one strict decrease. It continues
+decreasing until zero, if zero is reached, and then remains zero for the
+rest of that run. Its nonzero output differences therefore form exactly
+one negative run.
+
+These output runs cannot merge: between two positive output runs there
+is the nonempty negative run supplied by the intervening positive input
+run, and between two negative output runs there is a nonempty positive
+one. Input plateaus add only output plateaus. Thus the compressed sign
+word loses its first $+$, and each remaining sign is reversed. Its length
+decreases by exactly one.
+\end{proof}
+
+\begin{theorem}[pointwise depth and sharp height]\label{thm:clock}
+Zero is the unique recurrent state of $F$, and
+\begin{equation}\label{eq:clock}
+ h(x)=R(x)\qquad(x\in\X_{n,q}).
+\end{equation}
+If $n,q>0$, the maximum depth is $n$. A word has depth $n$ if and only
+if all $n$ differences of $(0,x_1,\ldots,x_n)$ are nonzero and their
+signs alternate. If $n=0$ or $q=0$, the maximum depth is zero.
+\end{theorem}
+\begin{proof}
+The equality $R(x)=0$ forces every difference from initial zero to vanish,
+so it detects exactly the zero word. Lemma~\ref{lem:run} therefore makes
+each orbit reach zero after exactly $R(x)$ updates. Zero is fixed; since
+every orbit reaches it, there is no other recurrent state.
+
+There are $n$ initial differences, so $R(x)\le n$. Equality holds exactly
+when none is zero and none is compressed with a neighbouring difference,
+which is the stated alternating-sign condition. The word
+$(q,0,q,0,\ldots)$ satisfies that condition for $q>0$. The cases
+$n=0$ and $q=0$ have singleton carriers.
+\end{proof}
+
+For a concrete identity independent of any computation,
+\[
+ (2,0,1)\longmapsto(0,2,1)\longmapsto(0,0,1)
+       \longmapsto(0,0,0).
+\]
+The three signs of its initial-zero differences are $+,-,+$.
+Saturation can flatten part of a later positive input run, but the proof
+shows why it cannot erase that whole run's contribution to the clock.

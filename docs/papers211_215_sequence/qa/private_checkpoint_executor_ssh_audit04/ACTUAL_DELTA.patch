@@ -1,0 +1,52 @@
+--- accepted-checkpoint03/checkpoint.py
++++ ssh-delta04/checkpoint.py
+@@ -21,7 +21,7 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT / 'docs/papers211_215_sequence/qa'
+-PREP = QA / 'private_checkpoint_executor_preparation03'
++PREP = QA / 'private_checkpoint_executor_ssh_delta04'
+ SELF = PREP / 'checkpoint.py'
+ SCOPE_PATH = QA / 'private_checkpoint03_scope_root01/CHOSEN_SCOPE.json'
+ SCOPE_PIN = {'bytes': 6162898, 'sha256': '76e633c45920f46fc6c1d3e840d9d82fd7025946b31a397356c1d771b1ba5c92'}
+@@ -270,8 +270,38 @@
+     env.update(PATH='/usr/bin:/bin', LANG='C', LC_ALL='C', TZ='UTC', GIT_OPTIONAL_LOCKS='0',
+         GIT_TERMINAL_PROMPT='0', GIT_CONFIG_NOSYSTEM='1', GIT_CONFIG_GLOBAL='/dev/null',
+         GIT_NO_REPLACE_OBJECTS='1',
+-        GIT_SSH_COMMAND='/usr/bin/ssh -o BatchMode=yes -o StrictHostKeyChecking=yes '
+-                        '-o ConnectTimeout=20 -o ConnectionAttempts=1')
++        GIT_SSH_COMMAND='/usr/bin/ssh -F none -a -x -T '
++                        '-o BatchMode=yes '
++                        '-o StrictHostKeyChecking=yes '
++                        '-o ConnectTimeout=20 '
++                        '-o ConnectionAttempts=1 '
++                        '-o UpdateHostKeys=no '
++                        '-o CheckHostIP=no '
++                        '-o VerifyHostKeyDNS=no '
++                        '-o KnownHostsCommand=none '
++                        '-o AddKeysToAgent=no '
++                        '-o ControlMaster=no '
++                        '-o ControlPath=none '
++                        '-o ControlPersist=no '
++                        '-o ClearAllForwardings=yes '
++                        '-o Tunnel=no '
++                        '-o ProxyCommand=none '
++                        '-o ProxyJump=none '
++                        '-o PermitLocalCommand=no '
++                        '-o LocalCommand=none '
++                        '-o RemoteCommand=none '
++                        '-o CanonicalizeHostname=no '
++                        '-o ForkAfterAuthentication=no '
++                        '-o EscapeChar=none '
++                        '-o PKCS11Provider=none '
++                        '-o SecurityKeyProvider=none '
++                        '-o PreferredAuthentications=publickey '
++                        '-o PubkeyAuthentication=yes '
++                        '-o GSSAPIAuthentication=no '
++                        '-o GSSAPIDelegateCredentials=no '
++                        '-o HostbasedAuthentication=no '
++                        '-o PasswordAuthentication=no '
++                        '-o KbdInteractiveAuthentication=no')
+     if index is not None:
+         env['GIT_INDEX_FILE'] = str(index)
+     if identity:

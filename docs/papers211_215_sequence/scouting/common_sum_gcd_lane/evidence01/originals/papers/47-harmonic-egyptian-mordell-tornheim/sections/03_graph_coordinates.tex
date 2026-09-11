@@ -1,0 +1,159 @@
+\section{The harmonic graph and two exact edge coordinates}
+\label{sec:graph-coordinates}
+
+Let $\mathcal G$ be the undirected graph with vertex set $\N$ and with an
+edge, including a possible loop, whenever $m+n\mid mn$.  We distinguish an
+\emph{ordered edge} $(m,n)$ from the underlying undirected edge.  The
+one-sided edge shift is
+\[
+  \Sigma_{\mathcal G}
+  =\{(x_j)_{j\geq0}\in\N^{\N_0}:x_j+x_{j+1}\mid x_jx_{j+1}
+      \text{ for every }j\}.
+\]
+Time advances once per edge.  Thus a based closed word of length $r$ is
+$(v_0,\ldots,v_{r-1},v_r)$ with $v_r=v_0$ and $r$ legal edges; its least
+temporal period is a property of this word, not of an arithmetic coordinate
+on one edge.  Later, $z$ marks this one-edge clock.
+
+For every $s\in\C$ define the formal coefficient array
+\begin{equation}
+ e_s(m,n)=\one_{\{m+n\mid mn\}}
+ \exp\!(-\frac{s}{2}(\log m+\log n)).
+ \label{eq:coefficient-array}
+\end{equation}
+When the array induces a bounded operator on $\ellspace$, we denote that
+operator by $E_s$.  Let $P_N$ be the orthogonal projection onto
+$\operatorname{span}\{e_1,\ldots,e_N\}$ and put $Q_N=I-P_N$.
+
+The complete analytic statement is collected here so that every later
+formula can point back to a legal domain.
+
+\begin{theorem}[Phase diagram and first two traces]
+\label{thm:main}
+Let $s=\sigma+i\tau$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item The array \eqref{eq:coefficient-array} defines a bounded operator,
+  and that operator is compact, if and only if $\sigma>0$.
+  \item In the bounded domain, $E_s\in\Schatten{2}$ if and only if
+  $\sigma>1/2$, and $E_s\in\Schatten{1}$ if and only if $\sigma>1$.
+  \item For $\sigma>1$,
+  $\Tr(E_s)=2^{-s}\zeta(s)$.
+  For $\sigma>1/2$,
+  \[
+    \Tr(E_s^2)=\zeta(2s)P(s)
+      =\frac{\zeta(2s)}{\zeta(4s)}\zMT(s,s;2s).
+  \]
+  Every displayed series is absolutely convergent in the stated domain.
+\end{enumerate}
+All three endpoint inequalities are strict.
+\end{theorem}
+
+\subsection{The coprime--scale coordinate}
+
+The global coordinate is the source of every Dirichlet-series factor in
+\cref{thm:main}.
+
+\begin{proposition}[Unique ordered-edge coordinate]
+\label{prop:coprime-coordinate}
+The map
+\begin{equation}
+ (t,a,b)\longmapsto
+ (t a(a+b),\,t b(a+b))
+ \label{eq:coprime-map}
+\end{equation}
+is a bijection from $t\in\N$ and coprime ordered pairs $(a,b)\in\N^2$ to
+the ordered edges of $\mathcal G$.  The harmonic quotient is $k=tab$.
+\end{proposition}
+
+\begin{proof}
+Given an edge, let $g=(m,n)$ and write $m=ga$, $n=gb$ with $(a,b)=1$.
+The divisibility condition becomes $a+b\mid gab$.  Since
+$(a+b,ab)=1$, it is equivalent to $a+b\mid g$; writing $g=t(a+b)$ gives
+\eqref{eq:coprime-map}.  The gcd recovers $g$, then $a,b$, and finally $t$,
+so the representation is unique.  Conversely, substitution in
+\eqref{eq:harmonic-relation} gives
+\[
+  \frac1{t a(a+b)}+\frac1{t b(a+b)}=\frac1{tab},
+\]
+which proves legality and the formula for $k$.
+\end{proof}
+
+The pair $(a,b)$ is primitive only in the gcd-one sense.  It contains no
+information about whether an edge belongs to a closed word of least period
+$r$.
+
+\subsection{The divisor-row coordinate}
+
+The second coordinate keeps $m$ fixed and has no coprimality condition.
+
+\begin{proposition}[Exact row coordinate]
+\label{prop:divisor-row}
+For fixed $m$, the map
+\begin{equation}
+ d\longmapsto n=\frac{m^2}{d}-m
+ \label{eq:divisor-map}
+\end{equation}
+is a bijection from divisors $d\mid m^2$ with $d<m$ onto the neighbors of
+$m$.  If $k=mn/(m+n)$, then $d=m-k$.
+\end{proposition}
+
+\begin{proof}
+For an edge, $k=mn/(m+n)$ is a positive integer and
+\[
+ d=m-k=\frac{m^2}{m+n}.
+\]
+Hence $d\mid m^2$, $d<m$, and solving for $n$ gives
+\eqref{eq:divisor-map}.  Conversely, a divisor $d<m$ makes the right-hand
+side of \eqref{eq:divisor-map} a positive integer and gives
+$m+n=m^2/d$ and $mn/(m+n)=m-d\in\N$.  Both constructions recover $d$,
+so they are inverse.
+\end{proof}
+
+The loops are now visible in either coordinate.  Setting $m=n$ in the edge
+condition gives $2m\mid m^2$, so a loop occurs exactly at $m=2t$.
+Equivalently, it has $(a,b)=(1,1)$ in
+\cref{prop:coprime-coordinate}.
+
+\FigureTwoCoordinates
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\linewidth}{@{}lYY@{}}
+\toprule
+Object & Definition & Type / role \\
+\midrule
+vertex & $m\in\N$ & graph state \\
+harmonic quotient & $k=mn/(m+n)$ & integer attached to one edge \\
+edge coordinate & $(t,a,b)$ with $(a,b)=1$ & unique global edge data \\
+row coordinate & $d\mid m^2$, $d<m$ & unique data after fixing $m$ \\
+closed word & $(v_0,\ldots,v_r)$, $v_r=v_0$ & temporal object of length $r$ \\
+marker & $z$ & one factor per traversed edge \\
+\bottomrule
+\end{tabularx}
+\caption{Typed objects.  In particular, neither $k$ nor the gcd-one pair
+$(a,b)$ is a temporal primitive orbit.}
+\label{tab:typed-objects}
+\end{table}
+
+\subsection{The complex phase firewall}
+
+Let $U_\tau e_n=n^{-i\tau/2}e_n$.  This is a diagonal unitary.  Entrywise,
+and first on every finite compression,
+\begin{equation}
+ e_s=U_\tau e_\sigma U_\tau.
+ \label{eq:left-right-factorization}
+\end{equation}
+Once boundedness has been proved for $\sigma>0$, equality passes to the
+operators:
+\begin{equation}
+ E_s=U_\tau E_\sigma U_\tau.
+ \label{eq:operator-left-right}
+\end{equation}
+Left and right multiplication by unitaries preserves singular values,
+operator norm, compactness, Schatten membership, and Schatten norms.
+Equation \eqref{eq:operator-left-right} is \emph{not} unitary conjugacy:
+the right factor is $U_\tau$, not $U_\tau^*$.  It therefore transfers none
+of the spectrum, powers, traces, positivity, or determinants.  All trace
+and determinant identities below are proved directly for the complex
+matrix in their stated ideal domains.

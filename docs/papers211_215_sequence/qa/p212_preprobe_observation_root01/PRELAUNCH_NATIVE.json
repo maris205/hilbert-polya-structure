@@ -1,0 +1,29 @@
+{
+  "creation": {
+    "request": {
+      "cmd": "mkdir -m 700 /root/symbolic-dynamics-p212-preprobe-observation-20260909-01",
+      "max_output_tokens": 1000
+    },
+    "result": {
+      "chunk_id": "372f3a",
+      "wall_time_seconds": 0.00000519,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "check": {
+    "request": {
+      "cmd": "node <<'NODE'\nconst fs=require('fs'),h=require('crypto'),b='docs/papers211_215_sequence/qa/p212_preprobe_observation_root01/',c='/root/symbolic-dynamics-p212-preprobe-observation-20260909-01';const g=JSON.parse(fs.readFileSync(b+'AUTHORIZATION.json'));for(const k of ['source_receipt','trust_receipt','frontier']){const x=fs.readFileSync(g[k].path);if(x.length!==g[k].pin.bytes||h.createHash('sha256').update(x).digest('hex')!==g[k].pin.sha256)throw Error('controlpin');}const s=fs.lstatSync(c);if(!s.isDirectory()||s.isSymbolicLink()||(s.mode&511)!==448||s.uid!==0||fs.readdirSync(c).length!==0)throw Error('exclusiveprivatecapture');const py=fs.readFileSync('/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_preprobe_bootstrap_read_order_delta01/observe.py');if(h.createHash('sha256').update(py).digest('hex')!=='68789ec6ecb134c714bd5b3d552ab4ff1d3433b8f416b78eddcd0b1046bac4e1')throw Error('corrected source');process.stdout.write(JSON.stringify({status:'PASS_ROOT_SINGLE_OBSERVATION_PRELAUNCH',controls:3,source_bytes:py.length,capture_directory:c,mode:'0700',owner:0,empty:true,observer_executed:false})+'\\n');\nNODE",
+      "max_output_tokens": 1500
+    },
+    "result": {
+      "chunk_id": "c2b5b1",
+      "wall_time_seconds": 0.000005999,
+      "exit_code": 0,
+      "original_token_count": 59,
+      "output": "{\"status\":\"PASS_ROOT_SINGLE_OBSERVATION_PRELAUNCH\",\"controls\":3,\"source_bytes\":21323,\"capture_directory\":\"/root/symbolic-dynamics-p212-preprobe-observation-20260909-01\",\"mode\":\"0700\",\"owner\":0,\"empty\":true,\"observer_executed\":false}\n"
+    }
+  }
+}
+

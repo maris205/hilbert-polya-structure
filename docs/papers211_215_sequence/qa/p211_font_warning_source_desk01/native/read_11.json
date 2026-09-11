@@ -1,0 +1,13 @@
+{
+  "args": {
+    "cmd": "sed -n '407,432p' docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/io_lane/sources/build_p211.py",
+    "max_output_tokens": 7000
+  },
+  "result": {
+    "chunk_id": "021484",
+    "wall_time_seconds": 0.0000068,
+    "exit_code": 0,
+    "original_token_count": 412,
+    "output": "        require(row['successful'], 'pdffonts failed')\n        fonts = [line.split()[-5:] for line in raw.decode().splitlines()[2:] if line.strip()]\n        require(fonts and all(len(v) == 5 and v[0] == 'yes' for v in fonts),\n                'Unembedded/unknown PDF font: bounded renderer dependency premise failed')\n        text_path = out / 'main.txt'\n        row, raw = command('pdftotext', ['/usr/bin/pdftotext', '-layout', 'main.pdf', str(text_path)], cold, [pdf])\n        require(row['successful'], 'pdftotext failed')\n        content = text_path.read_text()\n        text_pages = content.split('\\f')\n        if text_pages and not text_pages[-1].strip():\n            text_pages.pop()\n        require(len(text_pages) == pages, 'Actual text/PDF page census disagreement')\n        log = (cold / 'main.log').read_text(errors='replace')\n        diagnostics = {key: re.findall(pattern, log, re.M) for key, pattern in {\n            'undefined': r'^.*undefined.*$', 'overfull': r'^.*Overfull.*$',\n            'underfull': r'^.*Underfull.*$', 'warnings': r'^.*Warning.*$',\n            'missing_characters': r'^.*Missing character.*$',\n            'rerun': r'^.*(?:Rerun to|Please .*rerun|Label\\(s\\) may have changed).*$'}.items()}\n        markers = [marker for marker in ('[VERIFY]', '??', '[?]') if marker in content]\n        blg_findings = re.findall(r'(?im)^.*(?:Warning--|I couldn.t open|error message).*$',\n                                  (cold / 'main.blg').read_text())\n        page_dir = out / 'pages'\n        page_dir.mkdir()\n        renders = []\n        for page in range(1, pages + 1):\n            prefix = page_dir / ('page-%04d' % page)\n"
+  }
+}

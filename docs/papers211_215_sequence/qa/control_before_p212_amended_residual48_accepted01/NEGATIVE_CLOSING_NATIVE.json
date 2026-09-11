@@ -1,0 +1,29 @@
+{
+  "preseal": {
+    "request": {
+      "cmd": "node - <<'NODE'\nconst fs=require('fs'),crypto=require('crypto'),path=require('path');const p='docs/papers211_215_sequence/scouting/root_reception/arithmetic_automata02';const digest=b=>crypto.createHash('sha256').update(b).digest('hex');let c=0;const need=(x,m)=>{c++;if(!x)throw Error(m)};const rb=fs.readFileSync(p+'/RESULT.json'),r=JSON.parse(rb),n=JSON.parse(fs.readFileSync(p+'/RUN_NATIVE.json'));need(n.result.exit_code===0&&Buffer.from(n.result.output).equals(rb),'whole actual return');for(const k of r.after){const raw=fs.readFileSync(k.path);need(raw.length===k.bytes&&digest(raw)===k.sha256,'whole key '+k.path);for(const method of ['stat','lstat']){const s=fs[method+'Sync'](k.path,{bigint:true});for(const [f,v] of Object.entries(k[method]))if(f!=='atimeNs')need(s[f].toString()===v,'unchanged '+f);}}const files=fs.readdirSync(p).sort();need(files.length===6&&!files.includes('SHA256SUMS'),'exact six payloads');let bytes=0;for(const f of files){const b=fs.readFileSync(p+'/'+f);bytes+=b.length;process.stdout.write(digest(b)+'  '+f+'\\n');}process.stdout.write(JSON.stringify({status:'PASS_FINAL_DOCUMENTARY_KEYS',checks:c,payloads:files.length,payload_bytes:bytes})+'\\n');\nNODE",
+      "max_output_tokens": 3000
+    },
+    "result": {
+      "chunk_id": "da4b8e",
+      "wall_time_seconds": 0.0000038,
+      "exit_code": 0,
+      "original_token_count": 145,
+      "output": "09dc01ebe2a1dcb5059061c8aea9e61750815da440404cc0b4369812a57d8015  PRIMARY_READS.json\n841a5f0f7ec634d174067c8790565e03080425cba354778d6ab7a1d14f22e58f  RECEPTION.md\nfd8ccc3ac78a786edc6b7da347ae8bd29d5c87cdc985a1ddd1bc72723f1005a5  RESULT.json\n12536bdbf4d2fecded223b38946b680eedae256cdd8151737783cc4f4420acb4  ROOT_LOCAL_READS.json\n6795625c395d09770a025c357b63be0d0f260f55ea986863a11ddaf7f404cf04  RUN_NATIVE.json\nf1cfaad926ce028f20787e1ab1a9061344d1d3c0fb0673e0c5d66e44661961b4  receive.js\n{\"status\":\"PASS_FINAL_DOCUMENTARY_KEYS\",\"checks\":623,\"payloads\":6,\"payload_bytes\":398223}\n"
+    }
+  },
+  "sealcheck": {
+    "request": {
+      "cmd": "sha256sum -c SHA256SUMS",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/root_reception/arithmetic_automata02",
+      "max_output_tokens": 2000
+    },
+    "result": {
+      "chunk_id": "16e0e8",
+      "wall_time_seconds": 0.0000063,
+      "exit_code": 0,
+      "original_token_count": 30,
+      "output": "PRIMARY_READS.json: OK\nRECEPTION.md: OK\nRESULT.json: OK\nROOT_LOCAL_READS.json: OK\nRUN_NATIVE.json: OK\nreceive.js: OK\n"
+    }
+  }
+}

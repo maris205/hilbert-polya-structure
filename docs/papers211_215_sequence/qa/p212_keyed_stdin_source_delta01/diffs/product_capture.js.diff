@@ -1,0 +1,23 @@
+--- docs/papers211_215_sequence/qa/p212_trusted_product_source_delta01/product_capture.js	2026-09-09 19:33:57.850051492 +0800
++++ docs/papers211_215_sequence/qa/p212_keyed_stdin_source_delta01/product_capture.js	2026-09-09 22:54:45.418531295 +0800
+@@ -7,7 +7,8 @@
+   'use strict';
+   const ROOT='/root/autodl-tmp/symbolic_dynamics';
+   const QA=ROOT+'/docs/papers211_215_sequence/qa';
+-  const SOURCE=QA+'/p212_trusted_product_source_delta01/outer_contract.py';
++  const SOURCE=QA+'/p212_keyed_stdin_source_delta01/outer_contract.py';
++  const STDIN_FILE=QA+'/p212_keyed_stdin_input01/empty.stdin';
+   const BINDING=QA+'/p212_build_dependency_outer_binding01/contract01/BINDING.json';
+   const CACHE=QA+'/p212_build_dependency_outer_binding01/contract01/never_created_cache';
+   const environment={PATH:'/usr/bin:/bin',LANG:'C.UTF-8',LC_ALL:'C.UTF-8',TZ:'UTC',
+@@ -35,7 +36,9 @@
+   const argv=['/usr/bin/env','-i',...Object.entries(environment).map(([k,v])=>k+'='+v),
+     '/usr/bin/python3.10','-I','-S','-B','-X','pycache_prefix='+CACHE,SOURCE,BINDING,descriptorRaw];
+   const quote=s=>"'"+s.replaceAll("'","'\\''")+"'";
+-  const request={cmd:'exec '+argv.map(quote).join(' '),workdir:ROOT,shell:'/bin/bash',
++  // This explicit bootstrap redirection is ordinary trusted shell behavior;
++  // the later supervisor/native-child fd guards remain separate observations.
++  const request={cmd:'exec '+argv.map(quote).join(' ')+' < '+quote(STDIN_FILE),workdir:ROOT,shell:'/bin/bash',
+     login:false,tty:false,yield_time_ms:1000,max_output_tokens:4000};
+   const frames=[],started=Date.now();
+   let activeSession=null,closed=false,failure=null;

@@ -1,0 +1,39 @@
+# P187--P191 combinatorial kill ledger
+
+Gate rule: a survivor needs at least two genuinely independent theorem axes,
+must not be a literal/conjugate/internal-proof collision through P186, and must
+have no direct owner in the bounded search.  Finite anomalies alone do not
+survive.  Denominator: 21; survivors: 1; killed: 20.
+
+| ID | Decision | Auditable reason |
+|---|---|---|
+| C01_ACTR | KILL | It is a product of coordinate rotations inside canonically anchored cycles.  The pilot sees a bijection, singleton fibres, no transients, and periods inherited immediately from cycle lengths.  The inverse axis is empty, while anchored rotation is too close in proof content to the pointed-necklace/rotation surface around P176. |
+| C02_MCP | KILL | The `1,2,4` recurrent spectrum and tail at most two are interesting but fragmented.  A general cycle-length clock and a target-root atlas would be needed; neither emerged in the box.  The proof engine is ordinary powering/root extraction, already dense around P91/P102/P154, with the minimum label only selecting the exponent. |
+| C03_IPF | KILL | Fixed count `2^(n-1)` and observed maximum tail `2n-5` for `n>=3` are sharp-looking, but the update is a parallel local sorting swap.  No independent target-fibre law appeared (fibre sizes already have eight values at `n=7`), and the owner surface for peak/descent sorting operators is predictably dense.  We do not force a paper from the clock alone. |
+| C04_PME | KILL (central collision) | The mathematical clock and fibre product close, but the sufficient state is exactly the equality-block-size multiset and its update is equal-cardinality coagulation.  Central history identifies this as the permanent EQC kill already owner-blocked by the mutually-describing-multiset/integer-partition surface.  Renaming it as a positional word map creates no residual mechanism. |
+| C05_RLF | KILL | The image sizes `2^(n-1)` merely encode adjacent cut sets, and the dynamics factor through the run composition.  Both forward and inverse arguments transfer to adjacent-run consolidation (P147); the large fibres add arithmetic, not a second mechanism. |
+| C06_IHC | KILL | Image 21 and maximum tail two at `n=6` show severe collapse but no progressive parameter spine.  Interval-overlap realization is a static inverse problem, while the orbit statement is only a shallow closure.  One mechanism, no second theorem axis. |
+| C07_PBD | KILL | The image is only seven states at `n=6`; its prospective clock is a direct prefix first-occurrence statistic.  It lies inside the occupied prefix-diversity mechanism of P185, replacing letters by bigrams without changing the temporal proof engine. |
+| C08_PBMP | KILL (central collision) | After forgetting cyclic order in every cycle, P105 cycle-minimum pruning sends each orbit block to its minimum singleton plus the remaining labels.  This is exactly C08, with the same blockwise minimum-peeling clock.  The set-partition factor and its fibres do not earn a new system. |
+| C09_CSM | KILL | `F^t(pi)=meet_{j=0}^t rho^j(pi)` is clean, but the clock and image are consequences of that same semilattice fold.  It is the order-dual/proof transfer of P110 cyclic-shift join, so no inverse formula can rescue it internally. |
+| C10_MRC | KILL | Periods jump from 2 to 6 to 12 and the observed tails `0,0,3,3,5,8,8,9` have no stable all-parameter spine.  The update may merit future experimentation, but current recurrence and fibres are irregular and no two exact axes exist. |
+| C11_XCM | KILL | The map is an idempotent retraction: every tail is zero or one.  The only work is static recognition/enumeration of crossing-component-closed partitions, already adjacent to crossing-component geometry (P130). |
+| C12_RPE | KILL | Repeated squaring gives the exact logarithmic height clock, but this is one transparent relational-power axis.  No every-target strict-poset square-root formula emerged; generic relation powers/root counts are owner-dense and internally unsurprising. |
+| C13_CSR | KILL | The closed iterate and cyclic-run clock are mathematically correct but are two faces of the same shifted-intersection fold, not independent axes.  It also sits on the generic translation-intersection/semilattice surface occupied by P158/P162. |
+| C14_EVA | KILL | The divisor/first-occurrence fibre formula and termination bound pass finite checks, but maximum tails are irregular and short.  More importantly, its sufficient statistic is the same equal-size merger quotient used by the stronger C04_PME, only on unlabeled composition parts; it receives no separation credit. |
+| C15_EHS | KILL (strong signal, internal transfer) | The 2-adic clock and all-time tiling fibres are complete independent signals.  Nevertheless, synchronously splitting a selected class of parts into equal halves is a literal specialization/proof transfer of P126 balanced composition refinement.  It is killed rather than promoted on easy theorem strength. |
+| C16_MGBF | KILL (direct update-engine owner) | The leftmost-tied Cartesian split-tree clock and every-target compatibility-matching fibre formula are both complete and were checked on all set partitions through `n=9`.  However, Abbey--Diepenbrock--Langville--Meyer--Race--Zhou's PDGP explicitly sorts projected points and splits at the largest adjacent gap.  Our one-dimensional block rule is that published local operation, synchronously replayed across blocks.  The matching theorem does not erase the literal update-owner risk, so the candidate is killed rather than papered. |
+| C17_TRR | KILL (strong signal, internal silhouette) | The formula `F^t(lambda)=(lambda_1+sum_{i>=2}min(t,lambda_i),(lambda_i-t)_{lambda_i>t})`, clock `lambda_2`, strict extremizers, and every-target linear fibre are complete through `N=25`.  Yet the Ferrers-layer-to-reservoir transfer, unique one-row absorber, and `floor(N/2)` extremal clock reproduce the occupied P113 partition-dynamics silhouette. |
+| C18_MLI | KILL | Original down-heights do give the exact all-time layer deletion and the height clock, but that is a single generic peeling axis.  No every-target inverse law appeared; the mechanism is also adjacent to the occupied odd-vertex/leaf/minimum-pruning family around P114/P159. |
+| C19_ISE | KILL | Severe collapse (`195` image states from `6^6` words) and eventual fixation are empirical but shallow.  The update factors through equality-class intervals, and neither an all-size clock nor a target inverse theorem emerged.  It is a weaker static interval statistic, not a two-axis dynamical line. |
+| C20_DRA | KILL | The complete `S_8` box already has recurrent periods `1,2,4,6`, maximum tails `0,0,2,3,5,13,15,17`, and 35 positive fibre sizes.  There is no stable all-parameter spine or credible inverse classification; ranking a displacement statistic alone does not justify forcing a paper. |
+| C21_PDCF | **SOLE SURVIVOR / OWNER_AMBER / HOLD_EXTERNAL** | Cut sets only decrease, giving fixed states exactly when every nonfinal part divides its ending prefix, maximum tail `max(0,N-3)`, and for `N>=4` the unique deepest state `(1,2,1^(N-3))`.  Independently, a target-local no-skip path DP counts every one-step fibre, decides the image, and conserves all `2^(N-1)` sources.  Exhaustive checks cover all compositions through `N=15`.  The bounded owner search found the standard cut-set encoding and nearby divisibility-restricted compositions, but no source for this literal self-map; non-hit is not novelty. |
+
+## Frozen outcome
+
+- Survivor: `C21_PDCF` only.
+- Reserve: none.  In particular, `C10_MRC` is killed for this batch rather
+  than kept as a vague reserve.
+- The survivor remains `OWNER_AMBER/HOLD_EXTERNAL` pending a substantially
+  broader expert search and editorial ownership review.
+- No candidate is described as novel, new, first, or externally cleared.

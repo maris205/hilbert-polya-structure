@@ -1,0 +1,4866 @@
+On Arithmetical Structures on Complete Graphs
+// Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+    // Pre-apply spinout-banner dismissal here, before the banner paints, so it
+    // never flashes in only to be hidden later by the deferred arxiv-header.js.
+    // Key matches arxiv-header.js: "arxiv-banner-dismissed:" + data-banner-name.
+    if (localStorage.getItem('arxiv-banner-dismissed:spinout-nonprofit')) {
+      document.documentElement.setAttribute("data-banner-dismissed", "");
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+/* Banner pre-dismissal (set above before paint -> no flash-then-hide) and
+     reading-mode chrome hiding. */
+  html[data-banner-dismissed] .ds-announcement { display: none; }
+  html[data-reading-mode="enabled"] .ds-announcement,
+  html[data-reading-mode="enabled"] .ds-site-footer { display: none; }
+  /* Keep the announcement text dark on the Open-Blue band in both colour themes
+     (otherwise it inherits the paper's warm-wash text in dark mode and washes out). */
+  .ds-announcement-text { color: var(--arxiv-ink, #1c1a17); }
+Report GitHub Issue
+×
+Title:
+Content selection saved. Describe the issue below:
+Description:
+Submit without GitHub
+Submit in GitHub
+arXiv is now an independent nonprofit!
+Learn more
+×
+Back to arXiv
+Why HTML?
+Report Issue
+Back to Abstract
+Download PDF
+Abstract.
+1
+Introduction
+2
+Construction
+3
+Obstruction
+4
+Prime
+r
+1
+r_{1}
+References
+License: arXiv.org perpetual non-exclusive license
+arXiv:1909.02022v3 [math.NT] 22 Jan 2024
+On Arithmetical Structures on Complete Graphs
+Zachary Harris
+Z. Harris
+Department of Mathematics, Niagara University, Niagara University, NY 14109, USA
+Email address:
+zharris.edu@gmail.com
+and
+Joel Louwsma
+J. Louwsma
+Department of Mathematics, Niagara University, Niagara University, NY 14109, USA
+Email address:
+jlouwsma@niagara.edu
+Abstract.
+An arithmetical structure on the complete graph
+K
+n
+K_{n}
+with
+n
+n
+vertices is given by a collection of
+n
+n
+positive integers with no common factor each of which divides their sum. We show that, for all positive integers
+c
+c
+less than a certain bound depending on
+n
+n
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with largest value
+c
+c
+. We also show that, if each prime factor of
+c
+c
+is greater than
+(
+n
++
+1
+)
+2
+/
+4
+(n+1)^{2}/4
+, there is no arithmetical structure on
+K
+n
+K_{n}
+with largest value
+c
+c
+. We apply these results to study which prime numbers can occur as the largest value of an arithmetical structure on
+K
+n
+K_{n}
+.
+1.
+Introduction
+How can one have a collection of positive integers, with no common factor, each of which divides their sum? For example,
+105
+105
+,
+70
+70
+,
+15
+15
+,
+14
+14
+, and
+6
+6
+sum to
+210
+210
+, which is divisible by each of these numbers. Introducing notation, we seek positive integers
+r
+1
+,
+r
+2
+,
+…
+,
+r
+n
+r_{1},r_{2},\dotsc,r_{n}
+with no common factor such that
+(1)
+r
+j
+|
+∑
+i
+=
+1
+n
+r
+i
+for all
+j
+.
+r_{j}\,\,\Big|\,\sum_{i=1}^{n}r_{i}\quad\text{for all~$j$.}
+It is well known that finding such
+r
+i
+r_{i}
+is equivalent to finding positive integer solutions of the Diophantine equation
+(2)
+1
+x
+1
++
+1
+x
+2
++
+⋯
++
+1
+x
+n
+=
+1
+.
+\frac{1}{x_{1}}+\frac{1}{x_{2}}+\dotsb+\frac{1}{x_{n}}=1.
+Indeed, given
+r
+1
+,
+r
+2
+,
+…
+,
+r
+n
+r_{1},r_{2},\dotsc,r_{n}
+satisfying (
+1
+), dividing both sides of the equation
+r
+1
++
+r
+2
++
+⋯
++
+r
+n
+=
+∑
+i
+=
+1
+n
+r
+i
+r_{1}+r_{2}+\dotsb+r_{n}=\sum_{i=1}^{n}r_{i}
+by
+∑
+i
+=
+1
+n
+r
+i
+\sum_{i=1}^{n}r_{i}
+gives a solution to (
+2
+), and, given a solution of (
+2
+), the numbers
+lcm
+⁡
+(
+x
+1
+,
+x
+2
+,
+…
+,
+x
+n
+)
+/
+x
+i
+\lcm(x_{1},x_{2},\dotsc,x_{n})/x_{i}
+satisfy (
+1
+) and have no common factor.
+Our interest in this question stems from an interest in arithmetical structures. An
+arithmetical structure
+on a finite, connected graph is an assignment of positive integers to the vertices such that:
+(a)
+At each vertex, the integer there is a divisor of the sum of the integers at adjacent vertices (counted with multiplicity if the graph is not simple).
+(b)
+The integers used have no nontrivial common factor.
+Arithmetical structures were introduced by Lorenzini
+[
+14
+]
+to study intersections of degenerating curves in algebraic geometry. The usual definition, easily seen to be equivalent to the one given here, is formulated in terms of matrices. From that perspective, an arithmetical structure may be regarded as a generalization of the
+Laplacian matrix
+, which encodes many important properties of a graph. Notions in this direction that have received a significant amount of attention include the sandpile group and the chip-firing game; for details, see
+[
+8
+,
+12
+,
+10
+]
+.
+On the
+complete graph
+K
+n
+K_{n}
+with
+n
+n
+vertices, positive integers
+r
+1
+,
+r
+2
+,
+…
+,
+r
+n
+r_{1},r_{2},\dotsc,r_{n}
+with no common factor give an arithmetical structure if and only if
+r
+j
+|
+∑
+i
+=
+1
+i
+≠
+j
+n
+r
+i
+for all
+j
+;
+r_{j}\,\,\Big|\,\sum_{\begin{subarray}{c}i=1\\
+i\neq j\end{subarray}}^{n}r_{i}\quad\text{for all~$j$};
+it is immediate that this condition is equivalent to (
+1
+). Therefore, in this language, the opening question of this paper seeks arithmetical structures on complete graphs.
+Lorenzini
+[
+14
+, Lemma 1.6]
+shows that there are finitely many arithmetical structures on any finite, connected graph, but his result does not give a bound on the number of structures. Several recent papers
+[
+3
+,
+2
+,
+11
+]
+count arithmetical structures on various families of graphs, including path graphs, cycle graphs, bidents, and certain path graphs with doubled edges. However, counting arithmetical structures on complete graphs is a difficult problem. The number of arithmetical structures on
+K
+n
+K_{n}
+for
+n
+≤
+8
+n\leq 8
+is given in
+[
+15
+]
+. For general
+n
+n
+, bounds have been obtained by several authors
+[
+9
+,
+16
+,
+4
+,
+13
+]
+working from the perspective of the Diophantine equation (
+2
+). Other papers such as
+[
+5
+,
+6
+,
+1
+]
+determine, for specific
+n
+n
+, the number of solutions of (
+2
+) satisfying certain additional conditions on the
+x
+i
+x_{i}
+.
+It is conjectured in
+[
+7
+, Conjecture 6.10]
+that, for any connected, simple graph
+G
+G
+with
+n
+n
+vertices, the number of arithmetical structures on
+G
+G
+is at most the number of arithmetical structures on
+K
+n
+K_{n}
+. To approach this conjecture, one would like a better understanding of the types of arithmetical structures that occur on complete graphs. In this direction, this paper studies which positive integers can occur as the largest value of an arithmetical structure on
+K
+n
+K_{n}
+. Clearly the
+r
+i
+r_{i}
+of an arithmetical structure can be permuted; in the following we make the assumption
+r
+1
+≥
+r
+2
+≥
+⋯
+≥
+r
+n
+r_{1}\geq r_{2}\geq\dotsb\geq r_{n}
+. We construct arithmetical structures to show that
+r
+1
+r_{1}
+can take certain values and give obstructions to show that it cannot take other values.
+Our primary construction theorem (Theorem
+1
+) shows that
+r
+1
+r_{1}
+can take any value up to a certain bound depending on
+n
+n
+. More specifically,
+r
+1
+r_{1}
+can be any positive integer less than or equal to
+max
+k
+∈
+ℤ
+>
+0
+⁡
+(
+2
+k
+​
+n
+−
+(
+k
++
+2
+k
+−
+2
+)
+​
+2
+k
+−
+1
+)
+\max_{k\in\mathbb{Z}_{>0}}(2^{k}n-(k+2^{k}-2)2^{k}-1)
+. This bound improves somewhat if we restrict attention to prime numbers;
+r
+1
+r_{1}
+can be any prime number less than or equal to
+max
+k
+∈
+ℤ
+>
+0
+⁡
+(
+2
+k
+​
+n
+−
+(
+k
++
+2
+k
+−
+3
+)
+​
+2
+k
+−
+3
+)
+\max_{k\in\mathbb{Z}_{>0}}(2^{k}n-(k+2^{k}-3)2^{k}-3)
+.
+We also prove an obstruction theorem (Theorem
+7
+) that shows
+r
+1
+r_{1}
+cannot take any value all of whose prime factors are greater than
+(
+n
++
+1
+)
+2
+/
+4
+(n+1)^{2}/4
+. Restricting attention to prime numbers, this bound improves to show that
+r
+1
+r_{1}
+cannot be any prime number greater than
+n
+2
+/
+4
++
+1
+n^{2}/4+1
+(Theorem
+8
+).
+The final section focuses on the possible prime values
+r
+1
+r_{1}
+can take. We explicitly check prime numbers in the gap between the bound of Theorem
+1
+and the bound of Theorem
+8
+, showing that
+r
+1
+r_{1}
+can take some of these values but not others. In particular, we observe that there can be prime numbers
+p
+1
+p_{1}
+and
+p
+2
+p_{2}
+with
+p
+1
+<
+p
+2
+p_{1}<p_{2}
+such that there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+2
+r_{1}=p_{2}
+but no arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+1
+r_{1}=p_{1}
+.
+2.
+Construction
+In this section, we show how to construct arithmetical structures on complete graphs with certain values of
+r
+1
+r_{1}
+. Our main construction theorem is the following.
+Theorem 1
+.
+(a)
+For any positive integer
+c
+≤
+max
+k
+∈
+ℤ
+>
+0
+⁡
+(
+2
+k
+​
+n
+−
+(
+k
++
+2
+k
+−
+2
+)
+​
+2
+k
+−
+1
+)
+c\leq\max_{k\in\mathbb{Z}_{>0}}(2^{k}n-(k+2^{k}-2)2^{k}-1)
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+c
+r_{1}=c
+.
+(b)
+For any prime number
+p
+≤
+max
+k
+∈
+ℤ
+>
+0
+⁡
+(
+2
+k
+​
+n
+−
+(
+k
++
+2
+k
+−
+3
+)
+​
+2
+k
+−
+3
+)
+p\leq\max_{k\in\mathbb{Z}_{>0}}(2^{k}n-(k+2^{k}-3)2^{k}-3)
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+r_{1}=p
+.
+We establish Propositions
+2
+,
+4
+, and
+5
+on the way to proving Theorem
+1
+.
+Proposition 2
+.
+For any positive integer
+c
+≤
+n
+−
+1
+c\leq n-1
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+c
+r_{1}=c
+.
+Proof.
+Let
+r
+i
+=
+{
+c
+for
+​
+i
+∈
+{
+1
+,
+2
+,
+…
+,
+n
+−
+c
+}
+,
+1
+for
+​
+i
+∈
+{
+n
+−
+c
++
+1
+,
+n
+−
+c
++
+2
+,
+…
+,
+n
+}
+.
+r_{i}=\begin{cases}c&\text{for }i\in\{1,2,\dotsc,n-c\},\\
+1&\text{for }i\in\{n-c+1,n-c+2,\dotsc,n\}.\end{cases}
+Then
+∑
+i
+=
+1
+n
+r
+i
+=
+c
+⁡
+(
+n
+−
+c
+)
++
+c
+=
+c
+⁡
+(
+n
+−
+c
++
+1
+)
+.
+\sum_{i=1}^{n}r_{i}=c(n-c)+c=c(n-c+1).
+Since this is divisible by both
+c
+c
+and
+1
+1
+, we have thus produced an arithmetical structure on
+K
+n
+K_{n}
+.
+∎
+Before turning to Propositions
+4
+and
+5
+, we establish the following lemma.
+Lemma 3
+.
+(a)
+Let
+k
+∈
+ℤ
+≥
+0
+k\in\mathbb{Z}_{\geq 0}
+and
+ℓ
+∈
+ℤ
+>
+0
+\ell\in\mathbb{Z}_{>0}
+with
+k
+≤
+ℓ
+k\leq\ell
+. Every integer
+c
+c
+satisfying
+ℓ
+≤
+c
+≤
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+1
+\ell\leq c\leq(\ell-k+1)2^{k}-1
+can be expressed as
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+\sum_{j=1}^{\ell}2^{k_{j}}
+for some
+k
+j
+∈
+{
+0
+,
+1
+,
+…
+,
+k
+}
+k_{j}\in\{0,1,\dotsc,k\}
+, where
+k
+j
+=
+0
+k_{j}=0
+for some
+j
+∈
+{
+1
+,
+2
+,
+…
+,
+ℓ
+}
+j\in\{1,2,\dotsc,\ell\}
+.
+(b)
+Let
+k
+∈
+ℤ
+≥
+0
+k\in\mathbb{Z}_{\geq 0}
+and
+ℓ
+∈
+ℤ
+>
+0
+\ell\in\mathbb{Z}_{>0}
+with
+k
+≤
+ℓ
+k\leq\ell
+. Every odd integer
+c
+c
+satisfying
+ℓ
+≤
+c
+≤
+(
+ℓ
+−
+k
++
+2
+)
+​
+2
+k
+−
+3
+\ell\leq c\leq(\ell-k+2)2^{k}-3
+can be expressed as
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+\sum_{j=1}^{\ell}2^{k_{j}}
+for some
+k
+j
+∈
+{
+0
+,
+1
+,
+…
+,
+k
+}
+k_{j}\in\{0,1,\dotsc,k\}
+, where
+k
+j
+=
+0
+k_{j}=0
+for some
+j
+∈
+{
+1
+,
+2
+,
+…
+,
+ℓ
+}
+j\in\{1,2,\dotsc,\ell\}
+.
+Proof.
+To show (a), we proceed by induction on
+c
+c
+. In the base case,
+c
+=
+ℓ
+c=\ell
+, we can let
+k
+j
+=
+0
+k_{j}=0
+for all
+j
+j
+and have
+c
+=
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+c=\sum_{j=1}^{\ell}2^{k_{j}}
+. Now suppose
+c
+=
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+c=\sum_{j=1}^{\ell}2^{k_{j}}
+for
+c
+≤
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+2
+c\leq(\ell-k+1)2^{k}-2
+. Then
+k
+j
+=
+k
+k_{j}=k
+for at most
+ℓ
+−
+k
+\ell-k
+values of
+j
+j
+, meaning
+k
+j
+<
+k
+k_{j}<k
+for at least
+k
+k
+values of
+j
+j
+. If among these values we had each of
+0
+,
+1
+,
+…
+,
+k
+−
+1
+0,1,\dotsc,k-1
+only once, we would then have
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+=
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+1
+>
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+2
+\sum_{j=1}^{\ell}2^{k_{j}}=(\ell-k+1)2^{k}-1>(\ell-k+1)2^{k}-2
+. Therefore there is some
+b
+<
+k
+b<k
+for which
+k
+j
+1
+=
+b
+=
+k
+j
+2
+k_{j_{1}}=b=k_{j_{2}}
+for some
+j
+1
+≠
+j
+2
+j_{1}\neq j_{2}
+. Define
+k
+j
+′
+=
+{
+k
+j
++
+1
+for
+​
+j
+=
+j
+1
+,
+0
+for
+​
+j
+=
+j
+2
+,
+k
+j
+otherwise.
+k_{j}^{\prime}=\begin{cases}k_{j}+1&\text{for }j=j_{1},\\
+0&\text{for }j=j_{2},\\
+k_{j}&\text{otherwise.}\end{cases}
+Then
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+′
+=
+∑
+j
+=
+1
+ℓ
+2
+k
+j
++
+1
+=
+c
++
+1
+\sum_{j=1}^{\ell}2^{k_{j}^{\prime}}=\sum_{j=1}^{\ell}2^{k_{j}}+1=c+1
+. The result follows.
+For (b), first note that if
+c
+≤
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+1
+c\leq(\ell-k+1)2^{k}-1
+then the result follows from (a). Therefore, assume
+c
+>
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+1
+c>(\ell-k+1)2^{k}-1
+and let
+c
+′
+=
+c
+−
+(
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+1
+)
+c^{\prime}=c-((\ell-k+1)2^{k}-1)
+, noting that
+c
+′
+≤
+2
+k
+−
+2
+c^{\prime}\leq 2^{k}-2
+. Since
+c
+c
+is odd,
+c
+′
+c^{\prime}
+must be even. Therefore
+c
+′
+c^{\prime}
+can be written in the form
+∑
+j
+=
+1
+k
+−
+1
+s
+j
+​
+2
+j
+\sum_{j=1}^{k-1}s_{j}2^{j}
+, where each
+s
+j
+s_{j}
+is either
+0
+0
+or
+1
+1
+; the
+s
+j
+s_{j}
+are iteratively determined in reverse by letting
+s
+j
+=
+1
+s_{j}=1
+if
+c
+′
+−
+∑
+i
+=
+j
++
+1
+k
+−
+1
+s
+i
+​
+2
+i
+≥
+2
+j
+c^{\prime}-\sum_{i=j+1}^{k-1}s_{i}2^{i}\geq 2^{j}
+and letting
+s
+j
+=
+0
+s_{j}=0
+otherwise. Define
+k
+j
+=
+{
+0
+for
+​
+j
+=
+1
+,
+j
+−
+1
++
+s
+j
+−
+1
+for
+​
+j
+∈
+{
+2
+,
+3
+,
+…
+,
+k
+}
+,
+k
+for
+​
+j
+∈
+{
+k
++
+1
+,
+k
++
+2
+,
+…
+,
+ℓ
+}
+.
+k_{j}=\begin{cases}0&\text{for }j=1,\\
+j-1+s_{j-1}&\text{for }j\in\{2,3,\dotsc,k\},\\
+k&\text{for }j\in\{k+1,k+2,\dotsc,\ell\}.\end{cases}
+Then
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+=
+∑
+j
+=
+1
+k
+2
+j
+−
+1
++
+∑
+j
+=
+2
+k
+s
+j
+−
+1
+​
+2
+j
+−
+1
++
+∑
+j
+=
+k
++
+1
+ℓ
+2
+k
+=
+2
+k
+−
+1
++
+c
+′
++
+(
+ℓ
+−
+k
+)
+​
+2
+k
+=
+c
+.
+∎
+\sum_{j=1}^{\ell}2^{k_{j}}=\sum_{j=1}^{k}2^{j-1}+\sum_{j=2}^{k}s_{j-1}2^{j-1}+\sum_{j=k+1}^{\ell}2^{k}=2^{k}-1+c^{\prime}+(\ell-k)2^{k}=c.\qed
+We use Lemma
+3
+to prove Propositions
+4
+and
+5
+.
+Proposition 4
+.
+Fix
+n
+≥
+2
+n\geq 2
+. For any positive integer
+k
+k
+satisfying
+k
++
+2
+k
+−
+1
+≤
+n
+k+2^{k}-1\leq n
+and any positive integer
+c
+c
+satisfying
+n
+−
+2
+k
++
+1
+≤
+c
+≤
+(
+n
+−
+k
+−
+2
+k
++
+2
+)
+​
+2
+k
+−
+1
+n-2^{k}+1\leq c\leq(n-k-2^{k}+2)2^{k}-1
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+c
+r_{1}=c
+.
+Proof.
+Let
+r
+i
+=
+c
+r_{i}=c
+for all
+i
+∈
+{
+1
+,
+2
+,
+…
+,
+2
+k
+−
+1
+}
+i\in\{1,2,\dotsc,2^{k}-1\}
+. Let
+ℓ
+=
+n
+−
+2
+k
++
+1
+\ell=n-2^{k}+1
+, noting that our assumptions guarantee that
+k
+≤
+ℓ
+k\leq\ell
+and
+ℓ
+≤
+c
+≤
+(
+ℓ
+−
+k
++
+1
+)
+​
+2
+k
+−
+1
+\ell\leq c\leq(\ell-k+1)2^{k}-1
+. Lemma
+3
+(a) then shows how to write
+c
+=
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+c=\sum_{j=1}^{\ell}2^{k_{j}}
+. We use the values
+2
+k
+j
+2^{k_{j}}
+, in decreasing order, to define
+r
+i
+r_{i}
+for
+i
+∈
+{
+2
+k
+,
+2
+k
++
+1
+,
+…
+,
+n
+}
+i\in\{2^{k},2^{k}+1,\dotsc,n\}
+, noting that
+r
+n
+=
+1
+r_{n}=1
+. Then
+∑
+i
+=
+1
+n
+r
+i
+=
+(
+2
+k
+−
+1
+)
+​
+c
++
+c
+=
+2
+k
+​
+c
+.
+\sum_{i=1}^{n}r_{i}=(2^{k}-1)c+c=2^{k}c.
+Since
+2
+k
+​
+c
+2^{k}c
+is divisible by
+c
+c
+and by
+2
+k
+′
+2^{k^{\prime}}
+for all
+k
+′
+∈
+{
+0
+,
+1
+,
+…
+,
+k
+}
+k^{\prime}\in\{0,1,\dotsc,k\}
+, we have thus produced an arithmetical structure on
+K
+n
+K_{n}
+.
+∎
+Although we imposed the condition
+k
++
+2
+k
+−
+1
+≤
+n
+k+2^{k}-1\leq n
+here to ensure that
+k
+≤
+ℓ
+k\leq\ell
+in the proof, this does not restrict possible values of
+r
+1
+r_{1}
+, as we show in the proof of Theorem
+1
+. Together with Proposition
+2
+, Proposition
+4
+with
+k
+=
+1
+k=1
+allows us to construct arithmetical structures on
+K
+n
+K_{n}
+with
+r
+1
+r_{1}
+taking any value up to
+2
+​
+n
+−
+3
+2n-3
+. When
+k
+=
+2
+k=2
+, the bound is
+4
+​
+n
+−
+17
+4n-17
+; when
+k
+=
+3
+k=3
+, the bound is
+8
+​
+n
+−
+73
+8n-73
+; and when
+k
+=
+4
+k=4
+, the bound is
+16
+​
+n
+−
+289
+16n-289
+. If we restrict attention to prime
+r
+1
+r_{1}
+, these bounds can be improved slightly, as the following proposition shows.
+Proposition 5
+.
+Fix
+n
+≥
+2
+n\geq 2
+. For any positive integer
+k
+k
+satisfying
+k
++
+2
+k
+−
+1
+≤
+n
+k+2^{k}-1\leq n
+and any prime number
+p
+p
+satisfying
+n
+−
+2
+k
++
+1
+≤
+p
+≤
+(
+n
+−
+k
+−
+2
+k
++
+3
+)
+​
+2
+k
+−
+3
+n-2^{k}+1\leq p\leq(n-k-2^{k}+3)2^{k}-3
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+r_{1}=p
+.
+Proof.
+If
+p
+=
+2
+p=2
+(and
+n
+≥
+3
+n\geq 3
+), Proposition
+2
+gives an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+r_{1}=p
+. Therefore suppose
+p
+p
+is odd. Let
+r
+i
+=
+p
+r_{i}=p
+for all
+i
+∈
+{
+1
+,
+2
+,
+…
+,
+2
+k
+−
+1
+}
+i\in\{1,2,\dotsc,2^{k}-1\}
+. Let
+ℓ
+=
+n
+−
+2
+k
++
+1
+\ell=n-2^{k}+1
+, noting that our assumptions guarantee
+k
+≤
+ℓ
+k\leq\ell
+and
+ℓ
+≤
+p
+≤
+(
+ℓ
+−
+k
++
+2
+)
+​
+2
+k
+−
+3
+\ell\leq p\leq(\ell-k+2)2^{k}-3
+. Lemma
+3
+(b) then shows how to write
+p
+=
+∑
+j
+=
+1
+ℓ
+2
+k
+j
+p=\sum_{j=1}^{\ell}2^{k_{j}}
+. As in the proof of Proposition
+4
+, we use the values
+2
+k
+j
+2^{k_{j}}
+, in decreasing order, to define
+r
+i
+r_{i}
+for
+i
+∈
+{
+2
+k
+,
+2
+k
++
+1
+,
+…
+,
+n
+}
+i\in\{2^{k},2^{k}+1,\dotsc,n\}
+, noting that
+r
+n
+=
+1
+r_{n}=1
+. Then
+∑
+i
+=
+1
+n
+r
+i
+=
+(
+2
+k
+−
+1
+)
+​
+p
++
+p
+=
+2
+k
+​
+p
+,
+\sum_{i=1}^{n}r_{i}=(2^{k}-1)p+p=2^{k}p,
+which is divisible by
+p
+p
+and by
+2
+k
+′
+2^{k^{\prime}}
+for all
+k
+′
+∈
+{
+0
+,
+1
+,
+…
+,
+k
+}
+k^{\prime}\in\{0,1,\dotsc,k\}
+, so therefore we have produced an arithmetical structure on
+K
+n
+K_{n}
+.
+∎
+For example, when
+k
+=
+1
+k=1
+, Proposition
+5
+allows us to construct arithmetical structures on
+K
+n
+K_{n}
+with
+r
+1
+r_{1}
+taking prime values as large as
+2
+​
+n
+−
+3
+2n-3
+. When
+k
+=
+2
+k=2
+, the bound is
+4
+​
+n
+−
+15
+4n-15
+; when
+k
+=
+3
+k=3
+, the bound is
+8
+​
+n
+−
+67
+8n-67
+; and when
+k
+=
+4
+k=4
+, the bound is
+16
+​
+n
+−
+275
+16n-275
+.
+We are now prepared to complete the proof of Theorem
+1
+.
+Proof of Theorem
+1
+.
+The necessary constructions are given in Propositions
+2
+,
+4
+, and
+5
+. It remains only to show that, for each
+n
+n
+, values of
+k
+k
+that maximize the upper bounds in Propositions
+4
+and
+5
+satisfy
+k
++
+2
+k
+−
+1
+≤
+n
+k+2^{k}-1\leq n
+.
+The upper bound
+(
+n
+−
+k
+−
+2
+k
++
+2
+)
+​
+2
+k
+−
+1
+(n-k-2^{k}+2)2^{k}-1
+in Proposition
+4
+is linear in
+n
+n
+with slope
+2
+k
+2^{k}
+. A straightforward calculation shows that the bound with slope
+2
+k
+−
+1
+2^{k-1}
+coincides with the bound with slope
+2
+k
+2^{k}
+when
+n
+=
+k
++
+3
+⋅
+2
+k
+−
+1
+−
+1
+n=k+3\cdot 2^{k-1}-1
+and that the bound with slope
+2
+k
+2^{k}
+coincides with the bound with slope
+2
+k
++
+1
+2^{k+1}
+when
+n
+=
+k
++
+3
+⋅
+2
+k
+n=k+3\cdot 2^{k}
+. Therefore the bound with slope
+2
+k
+2^{k}
+is maximal exactly when
+n
+n
+is between
+k
++
+3
+⋅
+2
+k
+−
+1
+−
+1
+k+3\cdot 2^{k-1}-1
+and
+k
++
+3
+⋅
+2
+k
+k+3\cdot 2^{k}
+. When the bound is maximized, we therefore have that
+n
+≥
+k
++
+3
+⋅
+2
+k
+−
+1
+−
+1
+≥
+k
++
+2
+k
+−
+1
+n\geq k+3\cdot 2^{k-1}-1\geq k+2^{k}-1
+, meaning the condition of Proposition
+4
+is satisfied. This proves (a).
+The argument for (b) is very similar. The upper bound
+(
+n
+−
+k
+−
+2
+k
++
+3
+)
+​
+2
+k
+−
+3
+(n-k-2^{k}+3)2^{k}-3
+in Proposition
+5
+is maximal for
+n
+n
+between
+k
++
+3
+⋅
+2
+k
+−
+1
+−
+2
+k+3\cdot 2^{k-1}-2
+and
+k
++
+3
+⋅
+2
+k
+−
+1
+k+3\cdot 2^{k}-1
+. When the bound is maximized, we then have that
+n
+≥
+k
++
+3
+⋅
+2
+k
+−
+1
+−
+2
+≥
+k
++
+2
+k
+−
+1
+n\geq k+3\cdot 2^{k-1}-2\geq k+2^{k}-1
+, meaning the condition of Proposition
+5
+is satisfied.
+∎
+We conclude this section by giving another construction that allows us to produce some arithmetical structures with values of
+r
+1
+r_{1}
+other than those guaranteed by Theorem
+1
+.
+Proposition 6
+.
+For any positive integer
+k
+≤
+n
+−
+1
+k\leq n-1
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+k
+⁡
+(
+n
+−
+k
+)
++
+1
+r_{1}=k(n-k)+1
+.
+Proof.
+Let
+r
+i
+=
+{
+k
+⁡
+(
+n
+−
+k
+)
++
+1
+for
+​
+i
+∈
+{
+1
+,
+2
+,
+…
+,
+k
+−
+1
+}
+,
+k
+for
+​
+i
+∈
+{
+k
+,
+k
++
+1
+,
+…
+,
+n
+−
+1
+}
+,
+1
+for
+​
+i
+=
+n
+.
+r_{i}=\begin{cases}k(n-k)+1&\text{for }i\in\{1,2,\dotsc,k-1\},\\
+k&\text{for }i\in\{k,k+1,\dotsc,n-1\},\\
+1&\text{for }i=n.\end{cases}
+Then
+∑
+i
+=
+1
+n
+r
+i
+=
+(
+k
+−
+1
+)
+​
+(
+k
+⁡
+(
+n
+−
+k
+)
++
+1
+)
++
+k
+⁡
+(
+n
+−
+k
+)
++
+1
+=
+k
+⁡
+(
+k
+⁡
+(
+n
+−
+k
+)
++
+1
+)
+.
+\sum_{i=1}^{n}r_{i}=(k-1)(k(n-k)+1)+k(n-k)+1=k(k(n-k)+1).
+Since this is divisible by
+k
+⁡
+(
+n
+−
+k
+)
++
+1
+k(n-k)+1
+,
+k
+k
+, and
+1
+1
+, we have thus produced an arithmetical structure on
+K
+n
+K_{n}
+.
+∎
+For example, when
+n
+=
+13
+n=13
+, Theorem
+1
+guarantees that we can find an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+r_{1}=p
+for all prime
+p
+≤
+37
+p\leq 37
+. By taking
+k
+=
+5
+k=5
+in Proposition
+6
+, we can also produce an arithmetical structure with
+r
+1
+=
+41
+r_{1}=41
+. By taking
+k
+=
+6
+k=6
+, we can produce an arithmetical structure with
+r
+1
+=
+43
+r_{1}=43
+. The results of this section cannot be extended too much further, as we show in the following section.
+3.
+Obstruction
+We next prove obstruction results that complement our constructions in the previous section. Our first result shows that
+r
+1
+r_{1}
+cannot be a product of primes all of which are too large.
+Theorem 7
+.
+Suppose
+c
+≥
+2
+c\geq 2
+is an integer with prime factorization
+p
+1
+a
+1
+​
+p
+2
+a
+2
+​
+⋯
+​
+p
+k
+a
+k
+p_{1}^{a_{1}}p_{2}^{a_{2}}\dotsm p_{k}^{a_{k}}
+, where
+p
+1
+<
+p
+2
+<
+⋯
+<
+p
+k
+p_{1}<p_{2}<\dotsb<p_{k}
+and
+a
+i
+≥
+1
+a_{i}\geq 1
+for all
+i
+i
+. If
+p
+1
+>
+(
+n
++
+1
+)
+2
+/
+4
+p_{1}>(n+1)^{2}/4
+, then there is no arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+c
+r_{1}=c
+.
+Proof.
+Suppose we have an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+c
+r_{1}=c
+. Knowing that
+r
+1
+|
+∑
+i
+=
+1
+n
+r
+i
+r_{1}\mid\sum_{i=1}^{n}r_{i}
+, we define
+b
+=
+∑
+i
+=
+1
+n
+r
+i
+/
+r
+1
+b=\sum_{i=1}^{n}r_{i}/r_{1}
+. Then
+∑
+i
+=
+1
+n
+r
+i
+=
+b
+​
+c
+\sum_{i=1}^{n}r_{i}=bc
+, meaning that
+r
+i
+|
+b
+​
+p
+1
+a
+1
+​
+p
+2
+a
+2
+​
+⋯
+​
+p
+k
+a
+k
+r_{i}\mid bp_{1}^{a_{1}}p_{2}^{a_{2}}\dotsm p_{k}^{a_{k}}
+for all
+i
+i
+. Let
+m
+m
+be the largest value of
+i
+i
+for which
+r
+i
+=
+c
+r_{i}=c
+. For all
+i
+∈
+{
+m
++
+1
+,
+m
++
+2
+​
+…
+,
+n
+}
+i\in\{m+1,m+2\dotsc,n\}
+, we have
+r
+i
+<
+c
+r_{i}<c
+, which implies that
+r
+i
+≤
+b
+​
+p
+1
+a
+1
+−
+1
+​
+p
+2
+a
+2
+​
+⋯
+​
+p
+k
+a
+k
+r_{i}\leq bp_{1}^{a_{1}-1}p_{2}^{a_{2}}\dotsm p_{k}^{a_{k}}
+. This means
+∑
+i
+=
+m
++
+1
+n
+r
+i
+≤
+(
+n
+−
+m
+)
+​
+b
+​
+p
+1
+a
+1
+−
+1
+​
+p
+2
+a
+2
+​
+⋯
+​
+p
+k
+a
+k
+\sum_{i=m+1}^{n}r_{i}\leq(n-m)bp_{1}^{a_{1}-1}p_{2}^{a_{2}}\dotsm p_{k}^{a_{k}}
+. We also have that
+∑
+i
+=
+m
++
+1
+n
+r
+i
+=
+(
+b
+−
+m
+)
+​
+p
+1
+a
+1
+​
+p
+2
+a
+2
+​
+⋯
+​
+p
+k
+a
+k
+\sum_{i=m+1}^{n}r_{i}=(b-m)p_{1}^{a_{1}}p_{2}^{a_{2}}\dotsm p_{k}^{a_{k}}
+. Therefore
+(
+b
+−
+m
+)
+​
+p
+1
+a
+1
+​
+p
+2
+a
+2
+​
+⋯
+​
+p
+k
+a
+k
+≤
+(
+n
+−
+m
+)
+​
+b
+​
+p
+1
+a
+1
+−
+1
+​
+p
+2
+a
+2
+​
+⋯
+​
+p
+k
+a
+k
+,
+(b-m)p_{1}^{a_{1}}p_{2}^{a_{2}}\dotsm p_{k}^{a_{k}}\leq(n-m)bp_{1}^{a_{1}-1}p_{2}^{a_{2}}\dotsm p_{k}^{a_{k}},
+and hence
+(
+b
+−
+m
+)
+​
+p
+1
+≤
+(
+n
+−
+m
+)
+​
+b
+(b-m)p_{1}\leq(n-m)b
+. When
+b
+=
+m
+b=m
+, there is only one arithmetical structure on
+K
+n
+K_{n}
+, namely that with
+r
+i
+=
+1
+r_{i}=1
+for all
+i
+i
+, so the desired structure cannot arise in this case. Therefore we assume
+b
+>
+m
+b>m
+, in which case we have
+p
+1
+≤
+(
+n
+−
+m
+)
+​
+b
+b
+−
+m
+.
+p_{1}\leq\frac{(n-m)b}{b-m}.
+When
+b
+=
+m
++
+1
+b=m+1
+, this gives
+p
+1
+≤
+(
+n
+−
+b
++
+1
+)
+​
+b
+p_{1}\leq(n-b+1)b
+. It is a simple calculus exercise to show this bound is maximized when
+b
+=
+(
+n
++
+1
+)
+/
+2
+b=(n+1)/2
+. It follows that
+p
+1
+≤
+(
+n
++
+1
+)
+2
+/
+4
+p_{1}\leq(n+1)^{2}/4
+.
+When
+b
+≥
+m
++
+2
+b\geq m+2
+, we have that
+p
+1
+≤
+(
+n
+−
+m
+)
+​
+b
+b
+−
+m
+=
+n
+​
+b
+−
+m
+​
+b
++
+n
+​
+m
+−
+n
+​
+m
+b
+−
+m
+=
+n
++
+m
+⁡
+(
+n
+−
+b
+)
+b
+−
+m
+≤
+n
++
+m
+⁡
+(
+n
+−
+m
+−
+2
+)
+2
+.
+p_{1}\leq\frac{(n-m)b}{b-m}=\frac{nb-mb+nm-nm}{b-m}=n+\frac{m(n-b)}{b-m}\leq n+\frac{m(n-m-2)}{2}.
+It is a simple calculus exercise to show this bound is maximized when
+m
+=
+n
+/
+2
+−
+1
+m=n/2-1
+, so therefore
+p
+1
+≤
+n
++
+(
+n
+/
+2
+−
+1
+)
+​
+(
+n
+/
+2
+−
+1
+)
+2
+=
+n
+2
+8
++
+n
+2
++
+1
+2
+=
+(
+n
++
+1
+)
+2
+4
+−
+n
+2
+−
+1
+4
+≤
+(
+n
++
+1
+)
+2
+4
+.
+p_{1}\leq n+\frac{(n/2-1)(n/2-1)}{2}=\frac{n^{2}}{8}+\frac{n}{2}+\frac{1}{2}=\frac{(n+1)^{2}}{4}-\frac{n^{2}-1}{4}\leq\frac{(n+1)^{2}}{4}.
+The result follows.
+∎
+If we restrict attention to arithmetical structures where
+r
+1
+r_{1}
+is a prime number, then Theorem
+7
+can be improved to Theorem
+8
+. The general outline of the proof is similar, with some of the bounds improved.
+Theorem 8
+.
+If
+p
+p
+is a prime number with
+p
+>
+n
+2
+/
+4
++
+1
+p>n^{2}/4+1
+, then there is no arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+r_{1}=p
+.
+Proof.
+If
+p
+=
+2
+p=2
+, the hypothesis of the theorem is only satisfied for
+n
+=
+1
+n=1
+, and there is no arithmetical structure on
+K
+1
+K_{1}
+with
+r
+1
+=
+2
+r_{1}=2
+. Suppose we have an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+r_{1}=p
+, where
+p
+≥
+3
+p\geq 3
+. Knowing that
+r
+1
+|
+∑
+i
+=
+1
+n
+r
+i
+r_{1}\mid\sum_{i=1}^{n}r_{i}
+, we define
+b
+=
+∑
+i
+=
+1
+n
+r
+i
+/
+r
+1
+b=\sum_{i=1}^{n}r_{i}/r_{1}
+. Then
+∑
+i
+=
+1
+n
+r
+i
+=
+b
+​
+p
+\sum_{i=1}^{n}r_{i}=bp
+, meaning that
+r
+i
+|
+b
+​
+p
+r_{i}\mid bp
+for all
+i
+i
+. Let
+m
+m
+be the largest value of
+i
+i
+for which
+r
+i
+=
+p
+r_{i}=p
+. We can only have
+b
+=
+m
+b=m
+if
+r
+i
+=
+1
+r_{i}=1
+for all
+i
+i
+, but then
+r
+1
+r_{1}
+is not prime. We consider two cases: when
+b
+=
+m
++
+1
+b=m+1
+and when
+b
+≥
+m
++
+2
+b\geq m+2
+.
+Case I:
+b
+=
+m
++
+1
+b=m+1
+. For all
+i
+∈
+{
+m
++
+1
+,
+m
++
+2
+,
+…
+,
+n
+}
+i\in\{m+1,m+2,\dotsc,n\}
+, we have that
+r
+i
+|
+b
+​
+p
+r_{i}\mid bp
+and
+r
+i
+<
+p
+r_{i}<p
+, so therefore
+r
+i
+|
+b
+r_{i}\mid b
+. Whenever
+r
+i
+<
+b
+r_{i}<b
+, this means
+r
+i
+≤
+b
+/
+2
+r_{i}\leq b/2
+. If
+r
+n
+−
+1
+,
+r
+n
+<
+b
+r_{n-1},r_{n}<b
+, we would then have that
+∑
+i
+=
+m
++
+1
+n
+r
+i
+≤
+(
+n
+−
+m
+−
+1
+)
+​
+b
+\sum_{i=m+1}^{n}r_{i}\leq(n-m-1)b
+. If instead
+r
+i
+=
+b
+r_{i}=b
+for all
+i
+∈
+{
+m
++
+1
+,
+m
++
+2
+,
+…
+,
+n
+−
+1
+}
+i\in\{m+1,m+2,\dotsc,n-1\}
+, we would have that
+r
+n
+|
+r
+i
+r_{n}\mid r_{i}
+for all
+i
+∈
+{
+m
++
+1
+,
+m
++
+2
+,
+…
+,
+n
+}
+i\in\{m+1,m+2,\dotsc,n\}
+. Since
+∑
+i
+=
+m
++
+1
+n
+r
+i
+=
+(
+b
+−
+m
+)
+​
+p
+=
+p
+\sum_{i=m+1}^{n}r_{i}=(b-m)p=p
+, this would also mean
+r
+n
+|
+p
+r_{n}\mid p
+, and hence that
+r
+n
+|
+r
+i
+r_{n}\mid r_{i}
+for all
+i
+i
+. Therefore we would need to have
+r
+n
+=
+1
+r_{n}=1
+, meaning that
+∑
+i
+=
+m
++
+1
+n
+r
+i
+≤
+(
+n
+−
+m
+−
+1
+)
+​
+b
++
+1
+\sum_{i=m+1}^{n}r_{i}\leq(n-m-1)b+1
+. Regardless of the value of
+r
+n
+−
+1
+r_{n-1}
+, we thus have that
+p
+=
+∑
+i
+=
+m
++
+1
+n
+r
+i
+≤
+(
+n
+−
+m
+−
+1
+)
+​
+b
++
+1
+=
+(
+n
+−
+b
+)
+​
+b
++
+1
+=
+n
+​
+b
+−
+b
+2
++
+1
+.
+p=\sum_{i=m+1}^{n}r_{i}\leq(n-m-1)b+1=(n-b)b+1=nb-b^{2}+1.
+It is a simple calculus exercise to show that this bound is maximized when
+b
+=
+n
+/
+2
+b=n/2
+. Hence we have that
+p
+≤
+n
+2
+/
+4
++
+1
+p\leq n^{2}/4+1
+.
+Case II:
+b
+≥
+m
++
+2
+b\geq m+2
+.
+We have that
+r
+i
+≤
+b
+r_{i}\leq b
+for all
+i
+∈
+{
+m
++
+1
+,
+m
++
+2
+,
+…
+,
+n
+}
+i\in\{m+1,m+2,\dotsc,n\}
+and
+∑
+i
+=
+m
++
+1
+n
+r
+i
+=
+(
+b
+−
+m
+)
+​
+p
+\sum_{i=m+1}^{n}r_{i}=(b-m)p
+, so therefore
+(
+b
+−
+m
+)
+​
+p
+≤
+(
+n
+−
+m
+)
+​
+b
+(b-m)p\leq(n-m)b
+. As in the proof of Theorem
+7
+, this yields that
+p
+≤
+(
+n
+−
+m
+)
+​
+b
+b
+−
+m
+≤
+n
++
+m
+⁡
+(
+n
+−
+m
+−
+2
+)
+2
+,
+p\leq\frac{(n-m)b}{b-m}\leq n+\frac{m(n-m-2)}{2},
+and this bound is maximized when
+m
+=
+n
+/
+2
+−
+1
+m=n/2-1
+. Therefore
+p
+≤
+n
++
+(
+n
+/
+2
+−
+1
+)
+​
+(
+n
+/
+2
+−
+1
+)
+2
+=
+n
+2
+8
++
+n
+2
++
+1
+2
+=
+n
+2
+4
++
+1
+−
+(
+n
+−
+2
+)
+2
+8
+<
+n
+2
+4
++
+1
+.
+p\leq n+\frac{(n/2-1)(n/2-1)}{2}=\frac{n^{2}}{8}+\frac{n}{2}+\frac{1}{2}=\frac{n^{2}}{4}+1-\frac{(n-2)^{2}}{8}<\frac{n^{2}}{4}+1.
+We have thus shown that in all cases we must have
+p
+≤
+n
+2
+/
+4
++
+1
+p\leq n^{2}/4+1
+.
+∎
+For even
+n
+n
+, we can choose
+k
+=
+n
+/
+2
+k=n/2
+in Proposition
+6
+and get an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+n
+2
+/
+4
++
+1
+r_{1}=n^{2}/4+1
+. For odd
+n
+n
+, we can choose
+k
+=
+(
+n
+−
+1
+)
+/
+2
+k=(n-1)/2
+and get an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+(
+n
+2
+−
+1
+)
+/
+4
++
+1
+r_{1}=(n^{2}-1)/4+1
+. As some of these values of
+r
+1
+r_{1}
+are prime, the bound in Theorem
+8
+therefore cannot be improved.
+There are arithmetical structures for which
+r
+1
+r_{1}
+takes composite values larger than the bound given in Theorem
+8
+. For instance, the example in the opening paragraph of this paper gives an arithmetical structure on
+K
+5
+K_{5}
+with
+r
+1
+=
+105
+r_{1}=105
+.
+4.
+Prime
+r
+1
+r_{1}
+This section considers the possible prime values
+r
+1
+r_{1}
+can take in an arithmetical structure on
+K
+n
+K_{n}
+. Theorem
+1
+(b) guarantees that
+r
+1
+r_{1}
+can take any prime value up to
+2
+k
+​
+n
+−
+(
+k
++
+2
+k
+−
+3
+)
+​
+2
+k
+−
+3
+2^{k}n-(k+2^{k}-3)2^{k}-3
+for any
+k
+k
+. Theorem
+8
+says that
+r
+1
+r_{1}
+cannot take any prime value larger than
+n
+2
+/
+4
++
+1
+n^{2}/4+1
+. These bounds are not too far from each other. The function
+n
+2
+/
+4
++
+1
+n^{2}/4+1
+has linear approximations of the form
+2
+k
+​
+n
+−
+2
+2
+​
+k
++
+1
+2^{k}n-2^{2k}+1
+. When
+k
+k
+is
+1
+1
+or
+2
+2
+, this linear approximation coincides with the bound from Theorem
+1
+(b). In general, it differs from this bound by
+(
+k
+−
+3
+)
+​
+2
+k
++
+4
+(k-3)2^{k}+4
+.
+Proposition
+6
+shows that
+r
+1
+r_{1}
+can take some of the prime values in the gap between the bound of Theorem
+1
+(b) and the bound of Theorem
+8
+. We can check by hand whether it can take other prime values; to illustrate how to do this, we explain why there is no arithmetical structure on
+K
+18
+K_{18}
+with
+r
+1
+=
+79
+r_{1}=79
+. Suppose there were such a structure, and let
+b
+=
+∑
+i
+=
+1
+18
+r
+i
+/
+r
+1
+b=\sum_{i=1}^{18}r_{i}/r_{1}
+, so that
+∑
+i
+=
+1
+18
+r
+i
+=
+79
+​
+b
+\sum_{i=1}^{18}r_{i}=79b
+. Let
+m
+m
+be the largest value of
+i
+i
+for which
+r
+i
+=
+79
+r_{i}=79
+. Then
+∑
+i
+=
+m
++
+1
+18
+r
+i
+=
+79
+​
+(
+b
+−
+m
+)
+\sum_{i=m+1}^{18}r_{i}=79(b-m)
+. For all
+i
+∈
+{
+m
++
+1
+,
+m
++
+2
+,
+…
+,
+18
+}
+i\in\{m+1,m+2,\dotsc,18\}
+, we have that
+r
+i
+|
+79
+​
+b
+r_{i}\mid 79b
+and
+r
+i
+<
+79
+r_{i}<79
+. Therefore
+r
+i
+|
+b
+r_{i}\mid b
+, and hence
+r
+i
+≤
+b
+r_{i}\leq b
+. This means that
+∑
+i
+=
+m
++
+1
+18
+r
+i
+≤
+(
+18
+−
+m
+)
+​
+b
+\sum_{i=m+1}^{18}r_{i}\leq(18-m)b
+, so we must have
+79
+​
+(
+b
+−
+m
+)
+≤
+(
+18
+−
+m
+)
+​
+b
+79(b-m)\leq(18-m)b
+. If
+b
+≥
+m
++
+2
+b\geq m+2
+, we would have that
+61
+​
+b
+−
+79
+​
+m
++
+m
+​
+b
+≥
+61
+​
+(
+m
++
+2
+)
+−
+79
+​
+m
++
+m
+⁡
+(
+m
++
+2
+)
+=
+(
+m
+−
+8
+)
+2
++
+58
+>
+0
+,
+61b-79m+mb\geq 61(m+2)-79m+m(m+2)=(m-8)^{2}+58>0,
+which would imply that
+79
+​
+(
+b
+−
+m
+)
+>
+(
+18
+−
+m
+)
+​
+b
+79(b-m)>(18-m)b
+. Therefore we cannot have
+b
+≥
+m
++
+2
+b\geq m+2
+. Since
+b
+=
+m
+b=m
+is only possible if
+r
+1
+=
+1
+r_{1}=1
+, it therefore remains to consider whether we can have
+b
+=
+m
++
+1
+b=m+1
+. In this case, we would have
+∑
+i
+=
+m
++
+1
+18
+r
+i
+≤
+(
+18
+−
+m
+)
+​
+(
+m
++
+1
+)
+\sum_{i=m+1}^{18}r_{i}\leq(18-m)(m+1)
+. This bound is less than
+79
+79
+except when
+m
+m
+satisfies
+6
+≤
+m
+≤
+11
+6\leq m\leq 11
+. If
+m
+=
+6
+m=6
+, we would need to have
+12
+12
+divisors of
+7
+7
+that sum to
+79
+79
+, but this is not possible. If
+m
+=
+7
+m=7
+, we would need to have
+11
+11
+divisors of
+8
+8
+that sum to
+79
+79
+, but this is not possible. If
+m
+=
+8
+m=8
+, we would need to have
+10
+10
+divisors of
+9
+9
+that sum to
+79
+79
+, but this is not possible. If
+m
+=
+9
+m=9
+, we would need to have
+9
+9
+divisors of
+10
+10
+that sum to
+79
+79
+, but this is not possible. If
+m
+=
+10
+m=10
+, we would need to have
+8
+8
+divisors of
+11
+11
+that sum to
+79
+79
+, but this is not possible. If
+m
+=
+11
+m=11
+, we would need to have
+7
+7
+divisors of
+12
+12
+that sum to
+79
+79
+, but this is not possible. Therefore there is no arithmetical structure on
+K
+18
+K_{18}
+with
+r
+1
+=
+79
+r_{1}=79
+. A similar approach can be used to either find arithmetical structures with other prime values of
+r
+1
+r_{1}
+or to show that they do not exist. We have done this for all
+n
+≤
+27
+n\leq 27
+; the results are shown in Table
+1
+.
+n
+n
+Yes, Thm.
+1
+(b)
+No, Thm.
+8
+Yes, Prop.
+6
+Yes, other
+No, other
+3
+p
+≤
+3
+p\leq 3
+p
+>
+3.25
+p>3.25
+4
+p
+≤
+5
+p\leq 5
+p
+>
+5
+p>5
+5
+p
+≤
+7
+p\leq 7
+p
+>
+7.25
+p>7.25
+6
+p
+≤
+9
+p\leq 9
+p
+>
+10
+p>10
+7
+p
+≤
+13
+p\leq 13
+p
+>
+13.25
+p>13.25
+8
+p
+≤
+17
+p\leq 17
+p
+>
+17
+p>17
+9
+p
+≤
+21
+p\leq 21
+p
+>
+21.25
+p>21.25
+10
+p
+≤
+25
+p\leq 25
+p
+>
+26
+p>26
+11
+p
+≤
+29
+p\leq 29
+p
+>
+31.25
+p>31.25
+31
+31
+12
+p
+≤
+33
+p\leq 33
+p
+>
+37
+p>37
+37
+37
+13
+p
+≤
+37
+p\leq 37
+p
+>
+43.25
+p>43.25
+41
+,
+43
+41,43
+14
+p
+≤
+45
+p\leq 45
+p
+>
+50
+p>50
+47
+47
+15
+p
+≤
+53
+p\leq 53
+p
+>
+57.25
+p>57.25
+16
+p
+≤
+61
+p\leq 61
+p
+>
+65
+p>65
+17
+p
+≤
+69
+p\leq 69
+p
+>
+73.25
+p>73.25
+71
+,
+73
+71,73
+18
+p
+≤
+77
+p\leq 77
+p
+>
+82
+p>82
+79
+79
+19
+p
+≤
+85
+p\leq 85
+p
+>
+91.25
+p>91.25
+89
+89
+20
+p
+≤
+93
+p\leq 93
+p
+>
+101
+p>101
+97,101
+97,101
+21
+p
+≤
+101
+p\leq 101
+p
+>
+111.25
+p>111.25
+109
+109
+103,107
+103,107
+22
+p
+≤
+109
+p\leq 109
+p
+>
+122
+p>122
+113
+113
+23
+p
+≤
+117
+p\leq 117
+p
+>
+133.25
+p>133.25
+127,131
+127,131
+24
+p
+≤
+125
+p\leq 125
+p
+>
+145
+p>145
+127,131,137,139
+127,131,137,139
+25
+p
+≤
+133
+p\leq 133
+p
+>
+157.25
+p>157.25
+137,151,157
+137,151,157
+139,149
+139,149
+26
+p
+≤
+141
+p\leq 141
+p
+>
+170
+p>170
+149,151,157,163
+149,151,157,163
+167
+167
+27
+p
+≤
+149
+p\leq 149
+p
+>
+183.25
+p>183.25
+163,181
+163,181
+151,157,167,173
+151,157,167,173
+179
+179
+Table 1.
+Possible prime
+r
+1
+r_{1}
+in arithmetical structures on
+K
+n
+K_{n}
+for
+n
+≤
+27
+n\leq 27
+.
+We conclude by noting that, on
+K
+27
+K_{27}
+, there is no arithmetical structure with
+r
+1
+=
+179
+r_{1}=179
+whereas there is an arithmetical structure with
+r
+1
+=
+181
+r_{1}=181
+. This shows that there is not a cutoff function
+f
+⁡
+(
+n
+)
+f(n)
+such that, for each
+n
+n
+, there is an arithmetical structure on
+K
+n
+K_{n}
+with
+r
+1
+=
+p
+r_{1}=p
+for all primes
+p
+≤
+f
+⁡
+(
+n
+)
+p\leq f(n)
+and no such structure for any
+p
+>
+f
+⁡
+(
+n
+)
+p>f(n)
+. Therefore, while one could attempt to improve the bound of Theorem
+1
+(b), the possible prime values of
+r
+1
+r_{1}
+cannot be fully explained by a result of this form.
+Acknowledgments
+We would like to thank Nathan Kaplan for a helpful conversation and Darleen Perez-Lavin for helpful comments on a previous version of this paper. The first author was supported by a Niagara University Undergraduate Student Summer Support Grant.
+References
+[1]
+R. Arce-Nazario, F. Castro, and R. Figueroa,
+On the number of solutions
+of
+∑
+i
+=
+1
+11
+1
+x
+i
+=
+1
+\sum_{i=1}^{11}\frac{1}{x_{i}}=1
+in distinct odd natural numbers
+, J.
+Number Theory
+133
+(2013), no. 6, 2036–2046. MR 3027952
+[2]
+K. Archer, A. C. Bishop, A. Diaz-Lopez, L. D. García Puente, D. Glass, and
+J. Louwsma,
+Arithmetical structures on bidents
+, Discrete Math.
+343
+(2020), no. 7, Paper No. 111850, 23 pp. MR 4072950
+[3]
+B. Braun, H. Corrales, S. Corry, L. D. García Puente, D. Glass, N. Kaplan,
+J. L. Martin, G. Musiker, and C. E. Valencia,
+Counting arithmetical
+structures on paths and cycles
+, Discrete Math.
+341
+(2018), no. 10,
+2949–2963. MR 3843283
+[4]
+T. D. Browning and C. Elsholtz,
+The number of representations of
+rationals as a sum of unit fractions
+, Illinois J. Math.
+55
+(2011),
+no. 2, 685–696. MR 3020702
+[5]
+N. Burshtein,
+The equation
+∑
+i
+=
+1
+9
+1
+x
+i
+=
+1
+\sum^{9}_{i=1}{\frac{1}{x_{i}}}=1
+in distinct
+odd integers has only the five known solutions
+, J. Number Theory
+127
+(2007), no. 1, 136–144. MR 2351669
+[6]
+by same author,
+All the solutions of the equation
+∑
+i
+=
+1
+11
+1
+x
+i
+=
+1
+\sum^{11}_{i=1}\frac{1}{x_{i}}=1
+in distinct integers of the form
+x
+i
+∈
+3
+α
+​
+5
+β
+​
+7
+γ
+x_{i}\in 3^{\alpha}5^{\beta}7^{\gamma}
+, Discrete Math.
+308
+(2008), no. 18,
+4286–4292. MR 2427761
+[7]
+H. Corrales and C. E. Valencia,
+Arithmetical structures on graphs
+,
+Linear Algebra Appl.
+536
+(2018), 120–151. MR 3713448
+[8]
+S. Corry and D. Perkinson,
+Divisors and sandpiles: An introduction to
+chip-firing
+, American Mathematical Society, Providence, RI, 2018.
+MR 3793659
+[9]
+P. Erdős and R. L. Graham,
+Old and new problems and results in
+combinatorial number theory
+, Monographies de L’Enseignement
+Mathématique, vol. 28, Université de Genève, L’Enseignement
+Mathématique, Geneva, 1980. MR 592420
+[10]
+D. Glass and N. Kaplan,
+Chip-firing games and critical groups
+, A
+project-based guide to undergraduate research in mathematics—starting and
+sustaining accessible undergraduate research, Found. Undergrad. Res. Math.,
+Birkhäuser/Springer, Cham, 2020, pp. 107–152. MR 4291925
+[11]
+D. Glass and J. Wagner,
+Arithmetical structures on paths with a doubled
+edge
+, Integers
+20
+(2020), Paper No. A68, 18 pp. MR 4142505
+[12]
+C. J. Klivans,
+The mathematics of chip-firing
+, Discrete Mathematics and
+its Applications, CRC Press, Boca Raton, FL, 2019. MR 3889995
+[13]
+S. V. Konyagin,
+Double exponential lower bound for the number of
+representations of unity by Egyptian fractions
+, Math. Notes
+95
+(2014), no. 1-2, 277–281, Translation of Mat. Zametki
+95
+(2014),
+no. 2, 312–316. MR 3267215
+[14]
+D. J. Lorenzini,
+Arithmetical graphs
+, Math. Ann.
+285
+(1989),
+no. 3, 481–501. MR 1019714
+[15]
+OEIS Foundation Inc.,
+The On-Line Encyclopedia of Integer
+Sequences
+, 2019,
+http://oeis.org/A002967
+.
+[16]
+C. Sándor,
+On the number of solutions of the Diophantine equation
+∑
+i
+=
+1
+n
+1
+x
+i
+=
+1
+\sum^{n}_{i=1}\frac{1}{x_{i}}=1
+, Period. Math. Hungar.
+47
+(2003),
+no. 1-2, 215–219. MR 2025624
+Experimental support, please
+view the build logs
+for errors. Generated by
+L
+A
+T
+E
+xml
+.
+Instructions for reporting errors
+We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:
+Click the "Report Issue"
+(
+)
+button, located in the page header.
+Tip:
+You can select the relevant text first, to include it in your report.
+Our team has already identified
+the following issues
+. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.
+Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a
+list of packages that need conversion
+, and welcome
+developer contributions
+.
+We gratefully acknowledge support from
+        our
+major funders
+,
+member institutions
+,
+,
+        and all contributors.
+About
+·
+Help
+·
+Contact
+·
+Subscribe
+·
+Copyright
+·
+Privacy
+·
+Accessibility
+·
+Operational Status
+(opens in new tab)
+Major funding support from

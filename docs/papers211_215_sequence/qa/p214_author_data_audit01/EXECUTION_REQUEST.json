@@ -1,0 +1,14 @@
+{
+  "authority": "docs/papers211_215_sequence/qa/p214_author_data_root01/SOURCE_RECEPTION.md",
+  "scope": "one independent archived DATA invocation only",
+  "source_sha256": "ceae62e3976d835dbcbb6d10fc739bcbaf214115e05674ed61d13e7cce6cdcca",
+  "source_seal_sha256": "cfa868bd10db1edc55ff936c118ae5ac9a383d373e16ff52719ab375842d4cce",
+  "arguments": {
+    "cmd": "node -e 'const fs=require(\"node:fs\"),cp=require(\"node:child_process\"),c=require(\"node:crypto\"); const d=\"docs/papers211_215_sequence/qa/p214_author_data_audit01\"; const out=fs.openSync(d+\"/DATA.stdout.raw\",\"wx\",0o600),err=fs.openSync(d+\"/DATA.stderr.raw\",\"wx\",0o600); let r; try{r=cp.spawnSync(\"node\",[d+\"/audit.js\"],{cwd:\"/root/autodl-tmp/symbolic_dynamics\",stdio:[\"ignore\",out,err]});fs.fsyncSync(out);fs.fsyncSync(err);}finally{fs.closeSync(out);fs.closeSync(err);} const key=p=>{const b=fs.readFileSync(p);return {path:p,bytes:b.length,sha256:c.createHash(\"sha256\").update(b).digest(\"hex\")};}; process.stdout.write(JSON.stringify({command:[\"node\",d+\"/audit.js\"],cwd:\"/root/autodl-tmp/symbolic_dynamics\",exit:{status:r.status,signal:r.signal,error:r.error?{code:r.error.code||null,message:r.error.message}:null,pid:r.pid},stdout:key(d+\"/DATA.stdout.raw\"),stderr:key(d+\"/DATA.stderr.raw\")})+\"\\n\");if(r.status!==0||r.signal||r.error)process.exitCode=1;'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "login": false,
+    "tty": false,
+    "max_output_tokens": 4000,
+    "yield_time_ms": 10000
+  }
+}

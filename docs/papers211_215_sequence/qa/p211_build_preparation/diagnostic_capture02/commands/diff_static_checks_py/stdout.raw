@@ -1,0 +1,32 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/history/diagnostic01_source/static_checks.py	2026-09-08 17:50:31.663556413 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/static_checks.py	2026-09-08 17:53:36.357605200 +0800
+@@ -49,6 +49,29 @@
+             rejected += 1
+     assert rejected == 4
+     checks.append({'check': 'FLS_UNKNOWN_OR_UNGENERATED_REFUSALS', 'passed': True, 'cases': rejected})
++    future = Path('/nonexistent_p211_static_binding')
++    relative_path = future / 'inner/source_only/texmf'
++    binding = {'output': str(future), 'cwd_relative_configuration':
++               {str(relative_path): scope['entry'](relative_path)}}
++    lock = {'cwd_relative_absence_roles': {'TEXMFHOME':
++            {'relative': 'texmf', 'required_state': 'ABSENT'}},
++            'selector_specs': {}, 'entries': {}}
++    specs, expected = scope['configuration_key'](binding, lock)
++    assert set(specs) == {str(relative_path)} and expected[str(relative_path)]['present'] is False
++    binding['cwd_relative_configuration'] = {}
++    try:
++        scope['configuration_key'](binding, lock)
++    except RuntimeError:
++        checks.append({'check': 'CWD_RELATIVE_ABSENCE_REQUIRES_EXACT_ROOT_BINDING', 'passed': True})
++    else:
++        raise AssertionError('Missing relative configuration role accepted')
++    try:
++        scope['binding_inputs'](HERE / 'BINDING.pending.json')
++    except RuntimeError as error:
++        assert 'PENDING_ROOT_BINDING' in str(error)
++        checks.append({'check': 'PENDING_BINDING_REFUSES_BEFORE_OUTPUT_OR_CHILD', 'passed': True})
++    else:
++        raise AssertionError('Pending binding accepted')
+     print(json.dumps({'status': 'STATIC_ONLY_NO_BUILD', 'checks': checks,
+                       'native_children': 0, 'tex_compilations': 0,
+                       'scientific_executions': 0, 'acceptance': False}, sort_keys=True))

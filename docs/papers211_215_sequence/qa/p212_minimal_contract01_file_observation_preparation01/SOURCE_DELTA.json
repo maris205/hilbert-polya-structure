@@ -1,0 +1,116 @@
+{
+  "schema": "p212-eight-file-source-delta-v1",
+  "status": "AUTHOR_SOURCE_ONLY_PROPOSAL",
+  "operation_authorized": false,
+  "independent_review": null,
+  "root_reception": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_source_root01/RECEPTION.md",
+    "bytes": 10139,
+    "sha256": "663fcfdaf3d0541acb3199f2bc31f0e55050f75b74480c025df97abbf78ac1f7",
+    "seal": "e2a1d505ebcaf7685a0e1f89cfe5f971514adb588265aefe0dab4bf3610a1c12"
+  },
+  "original_reader": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_source_preparation01/file_keys.mjs",
+    "bytes": 13630,
+    "sha256": "448b7a0c17ddc708fd14a9adb15beef5b5eb8b5081fd7480045b00c80973b896"
+  },
+  "proposed_reader": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_file_observation_preparation01/file_keys.proposed.mjs.txt",
+    "bytes": 13660,
+    "sha256": "957111a4a680f61cc94e89eb220b8c7c10d779e04eabd4734948690ef11b41f8",
+    "lines": 189
+  },
+  "reader_edits": [
+    {
+      "old_byte_offset": 0,
+      "old_text": "// SOURCE PROPOSAL ONLY. No CLI and no automatic call. Import is not authorized.",
+      "new_text": "// PROSPECTIVE FILE-ONLY SOURCE. No CLI or automatic call; import/observation still require separate authority."
+    },
+    {
+      "old_byte_offset": 277,
+      "old_text": "  const SOURCE_ENABLED = false;",
+      "new_text": "  const SOURCE_ENABLED = true;"
+    }
+  ],
+  "unchanged_directory_suffix_starts": "// The only directory observations are the query cwd and three new capture\n",
+  "directory_guard_still_false": true,
+  "other_original_source_bytes_unchanged": true,
+  "original_file_request": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_source_preparation01/FILE_REQUEST.disabled.json",
+    "bytes": 1979,
+    "sha256": "c81d8d5e3fd5e4305c0871365832dca0256256ffd63a899686c236b0fb3df790"
+  },
+  "proposed_file_request": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_file_observation_preparation01/FILE_REQUEST.proposed.json",
+    "bytes": 1979,
+    "sha256": "c81d8d5e3fd5e4305c0871365832dca0256256ffd63a899686c236b0fb3df790",
+    "lines": 83
+  },
+  "file_request_complete_bytes_unchanged": true,
+  "complete_new_entry_source": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_file_observation_preparation01/collect_files.proposed.mjs.txt",
+    "bytes": 13540,
+    "sha256": "bd9baeb57f2387860a400f4b27e8acf9897da3843482cf856378f9807a2b2b87",
+    "lines": 304
+  },
+  "complete_new_capture_source": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_file_observation_preparation01/capture.proposed.sh.txt",
+    "bytes": 638,
+    "sha256": "11c0ac1540f30fa60cc691e7c42586918d4061d07aaca41d5b66a1329e3d30a4",
+    "lines": 7
+  },
+  "entry_source_status": "New, separately reviewable source; not inherited source acceptance or executed code.",
+  "unexecuted_entry_draft": {
+    "preserved_carrier": {
+      "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_file_observation_preparation01/DRAFT_ENTRY01.mjs.txt",
+      "bytes": 13332,
+      "sha256": "df0f338786a9c9dfcbb0abfd84724891a4998d1b05deb57a19932f3b526a2563",
+      "lines": 302
+    },
+    "current_carrier": {
+      "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_file_observation_preparation01/collect_files.proposed.mjs.txt",
+      "bytes": 13540,
+      "sha256": "bd9baeb57f2387860a400f4b27e8acf9897da3843482cf856378f9807a2b2b87",
+      "lines": 304
+    },
+    "changes": {
+      "old_finally": "  } finally {\n    record.raw_hex=Buffer.concat(chunks).toString('hex');\n    record.content={bytes:record.bytes_read,sha256:digest.digest('hex')};\n    if (fd!==null) {\n      try { fs.closeSync(fd); record.close_succeeded=true; }\n      catch(error) { record.close_succeeded=false; record.close_error=errorData(error); throw error; }\n    }\n  }",
+      "new_finally": "  } finally {\n    let closeFailure=null;\n    if (fd!==null) {\n      try { fs.closeSync(fd); record.close_succeeded=true; }\n      catch(error) { record.close_succeeded=false; record.close_error=errorData(error); closeFailure=error; }\n    }\n    record.raw_hex=Buffer.concat(chunks).toString('hex');\n    record.content={bytes:record.bytes_read,sha256:digest.digest('hex')};\n    if (closeFailure!==null) throw closeFailure;\n  }",
+      "reason": "Unexecuted author draft only: close request fd before building receipt buffers; retain primary alongside secondary failure; use legacy hasOwnProperty builtin form. No failed runtime/test occurred."
+    },
+    "exact_text_replacements": [
+      [
+        "const diagnosticOnly = (label,error) => {",
+        "const diagnosticOnly = (label,error,priorError=null) => {"
+      ],
+      [
+        "phase,label,error:errorData(error),stdout_bytes_written:output.written,",
+        "phase,label,error:errorData(error),prior_error:priorError===null?null:errorData(priorError),stdout_bytes_written:output.written,"
+      ],
+      [
+        "diagnosticOnly('failure_envelope_incomplete',secondary);",
+        "diagnosticOnly('failure_envelope_incomplete',secondary,error);"
+      ],
+      [
+        "Object.hasOwn(d,'value')",
+        "Object.prototype.hasOwnProperty.call(d,'value')"
+      ]
+    ],
+    "source_executed_or_tested": false,
+    "not_an_operational_alternative": true
+  },
+  "canonical_format": "p212-ascii-canonical-json-v1: sorted own enumerable object keys, dense array order, null/boolean/safe integer (no -0), all string UTF-16 units outside printable ASCII excluding quote/backslash encoded as lower-case backslash-u plus four hex digits, one LF. Raw hex strings are retained without decoding or interpretation.",
+  "canonical_observation_output": null,
+  "old_capture_source_unchanged": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_source_preparation01/capture.js",
+    "bytes": 8187,
+    "sha256": "c0369d9c6d0b623f59620884ef7b6252c9d99c98ff38a73168d0eba9733b8063"
+  },
+  "old_receiver_source_unchanged": {
+    "path": "docs/papers211_215_sequence/qa/p212_minimal_contract01_source_preparation01/receive.mjs",
+    "bytes": 26753,
+    "sha256": "adc0570ff23bece682812c77e69a2e8e7e9e1bcc64cba87c970e97f390202421"
+  },
+  "original_grants_and_failures": "All original source, raw failures and two consumed grants remain frozen; none is changed, reused, reopened or re-observed.",
+  "operation_or_future_path_action": false
+}

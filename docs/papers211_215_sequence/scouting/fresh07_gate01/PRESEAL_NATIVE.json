@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "node -e 'const fs = require(\"fs\"); const path = require(\"path\"); const base = \"docs/papers211_215_sequence/scouting/fresh07_gate01\"; const names = fs.readdirSync(base).sort(); let count = 0; let bytes = 0; for (const name of names) { const full = path.join(base,name); const st = fs.lstatSync(full); if (!st.isFile() || st.isSymbolicLink()) throw new Error(\"unexpected_entry:\"+name); bytes += st.size; if (name.endsWith(\".json\")) JSON.parse(fs.readFileSync(full,\"utf8\")); if (name.endsWith(\".md\")) for (const match of fs.readFileSync(full,\"utf8\").matchAll(/\\[[^\\]]*\\]\\(([^)]+)\\)/g)) { const target = match[1]; if (/^https?:\\/\\//.test(target) || target.startsWith(\"#\")) continue; if (!fs.statSync(path.join(base,target.split(\"#\")[0])).isFile()) throw new Error(\"missing_link\"); count++; } } const native=JSON.parse(fs.readFileSync(path.join(base,\"VERIFICATION_NATIVE.json\"),\"utf8\")); const raw=Buffer.from(native.result.output,\"ascii\"); if (!raw.equals(fs.readFileSync(path.join(base,\"VERIFICATION_ACTUAL.txt\")))) throw new Error(\"canonical_bytes\"); console.log(JSON.stringify({scope:\"documentary file/link/JSON/native-byte audit only\",payload_count:names.length,total_bytes:bytes,local_markdown_links:count,original_scientific_exit:native.result.exit_code,canonical_bytes:raw.length,source_execution_count_here:0}));'",
+    "max_output_tokens": 3000
+  },
+  "result": {
+    "chunk_id": "ae91bf",
+    "wall_time_seconds": 0.000023609,
+    "exit_code": 0,
+    "original_token_count": 53,
+    "output": "{\"scope\":\"documentary file/link/JSON/native-byte audit only\",\"payload_count\":14,\"total_bytes\":292226,\"local_markdown_links\":7,\"original_scientific_exit\":0,\"canonical_bytes\":29987,\"source_execution_count_here\":0}\n"
+  }
+}

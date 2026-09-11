@@ -1,0 +1,158 @@
+--- docs/papers211_215_sequence/qa/p212_a_build_artifact_audit01/ARTIFACT_DATA_CHECK.cjs	2026-09-11 15:14:48.116998242 +0800
++++ docs/papers211_215_sequence/qa/p212_b_build_artifact_audit01/ARTIFACT_DATA_CHECK.cjs	2026-09-11 16:42:18.707910008 +0800
+@@ -1,13 +1,14 @@
+ 'use strict';
+-// Independent P212 Review A build DATA receiver; exact delta from accepted initial source. Read-only; no child process,
++// P212 Review B build DATA receiver SOURCE; exact delta from accepted A receiver. Read-only; no child process,
+ // proposed-source import, host-manifest follow, repair, build or write API.
+ const fs=require('node:fs'), path=require('node:path'), crypto=require('node:crypto');
+ const W='/root/autodl-tmp/symbolic_dynamics', Q=W+'/docs/papers211_215_sequence/qa/';
+-const P=Q+'p212_a_build_preparation01', B=Q+'p212_a_build_binding01', I=Q+'p212_plain_build_source_proposal03';
++const P=Q+'p212_b_build_preparation01', B=Q+'p212_b_build_binding01', I=Q+'p212_plain_build_source_proposal03';
+ const S=W+'/papers/212-closed-pointer-orbits', H=S+'/qa_initial/plain_build01/source_only';
+-const R=W+'/docs/papers211_215_sequence/reviews/p212_a/build01', C=R+'/source_only';
++const R=W+'/docs/papers211_215_sequence/reviews/p212_b/build01', C=R+'/source_only';
+ const A=Q+'p212_a_source_root01', V=W+'/docs/papers211_215_sequence/reviews/p212_a/source_revision01';
+-const baseChecker=Q+'p212_plain_initial_artifact_audit01/ARTIFACT_DATA_CHECK.cjs';
++const T=Q+'p212_b_source_root01';
++const baseChecker=Q+'p212_a_build_artifact_audit01/ARTIFACT_DATA_CHECK.cjs';
+ const sourceNames=['main.tex','math_commands.tex','references.bib','sections/01_setup.tex','sections/02_returns.tex','sections/03_period_set.tex','sections/04_census.tex','sections/05_scope.tex'];
+ const products=['main.aux','main.bbl','main.blg','main.log','main.fls','main.out','main.toc','main.pdf'];
+ const passes=['pass1','bibtex','pass2','pass3'];
+@@ -18,7 +19,7 @@
+ function eq(a,b,m){ok(JSON.stringify(a)===JSON.stringify(b),m);}
+ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+ const bytes=new Map(), externalPins=[], rawPairs=[], findings=[];
+-const fixedExternal=[...['BUILD_REQUEST.proposed.sh.txt','NATIVE_REQUEST.proposed.json','PROPOSED_SOURCE_ONLY.sha256'].flatMap(n=>[P+'/'+n,I+'/'+n]),Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md',Q+'p212_plain_build_source_root01/RECEPTION.md',Q+'p212_plain_initial_artifact_root01/RECEPTION.md',baseChecker,...['GRANT.md','ACTUAL_NATIVE.json','CONTINUATION_NATIVE.json','RUNTIME_PREFLIGHT_NATIVE.json','BINDING_NATIVE.json','RUNTIME_INPUTS.sha256','SOURCE_RECEPTION.md'].map(n=>B+'/'+n),A+'/PAIR_RECEPTION.md',A+'/CITATION_REPAIR.md',V+'/CITATION_CLOSURE.md',...sourceNames.flatMap(n=>[H+'/'+n,S+'/'+n])];
++const fixedExternal=[...['BUILD_REQUEST.proposed.sh.txt','NATIVE_REQUEST.proposed.json','PROPOSED_SOURCE_ONLY.sha256'].flatMap(n=>[P+'/'+n,I+'/'+n]),Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md',Q+'p212_plain_build_source_root01/RECEPTION.md',Q+'p212_a_build_artifact_root01/RECEPTION.md',baseChecker,...['GRANT.md','ACTUAL_NATIVE.json','CONTINUATION_NATIVE.json','RUNTIME_PREFLIGHT_NATIVE.json','BINDING_NATIVE.json','RUNTIME_INPUTS.sha256','SOURCE_RECEPTION.md'].map(n=>B+'/'+n),T+'/PAIR_RECEPTION.md',A+'/CITATION_REPAIR.md',V+'/CITATION_CLOSURE.md',...sourceNames.flatMap(n=>[H+'/'+n,S+'/'+n])];
+ const externalAllowed=new Set(fixedExternal);
+ function readExternal(p){ok(externalAllowed.has(p),'external path allowlist '+p);if(!bytes.has(p)){const st=fs.lstatSync(p);ok(st.isFile()&&!st.isSymbolicLink(),'external regular '+p);const b=fs.readFileSync(p);bytes.set(p,b);externalPins.push({path:p,bytes:b.length,sha256:sha(b)});}return bytes.get(p);}
+ function decode(b){const t=b.toString('utf8');ok(Buffer.from(t,'utf8').equals(b),'lossless UTF-8');return t;}
+@@ -27,72 +28,73 @@
+ const manifest=t=>{const rows=ls(t).map(l=>{const m=/^([0-9a-f]{64})  ([^\r\n]+)$/.exec(l);ok(!!m,'manifest syntax');return {sha256:m[1],path:m[2]};});ok(new Set(rows.map(r=>r.path)).size===rows.length,'unique manifest names');return rows;};
+ function sameBuffers(a,b,label){ok(a.equals(b),'RAW equality '+label);rawPairs.push({label,bytes:a.length,sha256:sha(a)});}
+ // Bind accepted prior SOURCE as bytes only; never import or rerun that checker.
+-ok(sha(readExternal(baseChecker))==='f9da4c7a2f9f242b31d80df9c074d2223e907d8d3ca6148292a9bd44433b5409','accepted initial receiver source identity');
+-ok(xt(Q+'p212_plain_initial_artifact_root01/RECEPTION.md').includes('ACCEPTED_INITIAL_ARTIFACT_ONLY'),'initial snapshot acceptance, not current-live reuse');
++ok(sha(readExternal(baseChecker))==='8c85429624153bd58bfeb483f55866c3e1559a01aa05a052802c4f8efe83d015','accepted A receiver source identity');
++ok(xt(Q+'p212_a_build_artifact_root01/RECEPTION.md').includes('ACCEPTED_A_BUILD_ARTIFACT_ONLY'),'accepted A artifact baseline, not B artifact acceptance');
+ const replaceLiteral=(text,from,to,label)=>{ok(text.split(from).length===2,'one literal '+label);return text.replace(from,to);};
+ const initialRecipe=xt(I+'/BUILD_REQUEST.proposed.sh.txt');
+ ok(sha(readExternal(I+'/BUILD_REQUEST.proposed.sh.txt'))==='8d40a51735984e517c10d564019f5c598657d8b31b0d80034753999c96a867a0','accepted initial recipe identity');
+ const recipeDelta=[
+-  ['# PROPOSED SOURCE ONLY. Never run before root receives the strict pair,','# PROPOSED SOURCE ONLY. Never run before root receives the A strict pair,'],
++  ['# PROPOSED SOURCE ONLY. Never run before root receives the strict pair,','# PROPOSED SOURCE ONLY. Never run before root receives the B strict pair,'],
+   [I,P],[Q+'p212_plain_build_binding01',B],[S+'/qa_initial/plain_build01',R],
+-  ['P212_INITIAL_BUILD_SUPERVISOR_EXIT','P212_A_BUILD_SUPERVISOR_EXIT'],
+-  ['# No PDF adoption, Round0, visual PASS or package seal is produced here.','# No PDF adoption, final Review A PASS, Round1 or package seal is produced here.']
++  ['P212_INITIAL_BUILD_SUPERVISOR_EXIT','P212_B_BUILD_SUPERVISOR_EXIT'],
++  ['# No PDF adoption, Round0, visual PASS or package seal is produced here.','# No PDF adoption, final Review B PASS, Round2 or package seal is produced here.']
+ ];
+ let expectedRecipe=initialRecipe;for(const [from,to] of recipeDelta)expectedRecipe=replaceLiteral(expectedRecipe,from,to,'recipe delta');
+ ok(xt(P+'/BUILD_REQUEST.proposed.sh.txt')===expectedRecipe,'whole exact six-line recipe adaptation');
+-ok(sha(readExternal(P+'/BUILD_REQUEST.proposed.sh.txt'))==='811a7b4026a1d972072a96f25d3b7374cb926944ce820a77adc0313de78201d3','A recipe content identity');
++ok(sha(readExternal(P+'/BUILD_REQUEST.proposed.sh.txt'))==='73b189645ceea295bf5ff9fe4ca3edd95f66a44a8006ca23ad163f8ec16991af','B recipe content identity');
+ const proposal=JSON.parse(xt(P+'/NATIVE_REQUEST.proposed.json'));
+ const initialRequest=JSON.parse(xt(I+'/NATIVE_REQUEST.proposed.json'));
+ ok(sha(readExternal(I+'/NATIVE_REQUEST.proposed.json'))==='023381134cb65b8e7a602365156988587a5159fa1ea0a3cdb3e3e4bb470c7f27','accepted initial request identity');
+ const expectedRequest=JSON.parse(JSON.stringify(initialRequest));
+-expectedRequest.schema='P212_REVIEW_A_BUILD_SOURCE_ONLY_REQUEST_V1';
++expectedRequest.schema='P212_REVIEW_B_BUILD_SOURCE_ONLY_REQUEST_V1';
+ expectedRequest.proposed_native_request.arguments.cmd=replaceLiteral(expectedRequest.proposed_native_request.arguments.cmd,I,P,'native recipe path');
+-expectedRequest.source_hash_manifest='docs/papers211_215_sequence/qa/p212_a_build_preparation01/PROPOSED_SOURCE_ONLY.sha256';
+-expectedRequest.runtime_manifest.path='docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256';
+-expectedRequest.runtime_manifest.scope='PENDING_FRESH_ROOT_REVALIDATION: the accepted initial P212 223-row selected manifest is an archival candidate, not a current Review A key. The adopted staged supplement governs actual new-cwd checks within the separately granted command.';
++expectedRequest.source_hash_manifest='docs/papers211_215_sequence/qa/p212_b_build_preparation01/PROPOSED_SOURCE_ONLY.sha256';
++expectedRequest.runtime_manifest.path='docs/papers211_215_sequence/qa/p212_b_build_binding01/RUNTIME_INPUTS.sha256';
++expectedRequest.runtime_manifest.scope='PENDING_FRESH_ROOT_REVALIDATION: the accepted initial P212 223-row selected manifest is an archival candidate, not a current Review B key. The adopted staged supplement governs actual new-cwd checks within the separately granted command.';
+ expectedRequest.proposed_output_directory=R;
+-expectedRequest.acceptance='Actual A strict pair acceptance precedes build. Root receives this exact adaptation/current eight citation-repaired sources, the already adopted ordinary policy plus staged supplement, fresh selected223 resource/configuration binding and output parent, then separately grants one staged Review A build. New COLD guard precedes TeX within that command. Complete new artifacts/all-page views and reviewer acceptance remain required; no final A PASS, Round1 or terminal credit is produced.';
+-expectedRequest.supervisor_status_label='P212_A_BUILD_SUPERVISOR_EXIT';
++expectedRequest.acceptance='Actual B strict pair acceptance precedes build. Root receives this exact adaptation/current eight citation-repaired sources, the already adopted ordinary policy plus staged supplement, fresh selected223 resource/configuration binding and output parent, then separately grants one staged Review B build. New COLD guard precedes TeX within that command. Complete new artifacts/all-page views and reviewer acceptance remain required; no final B PASS, Round2 or terminal credit is produced.';
++expectedRequest.supervisor_status_label='P212_B_BUILD_SUPERVISOR_EXIT';
+ expectedRequest.runtime_candidate={path:'docs/papers211_215_sequence/qa/p212_plain_build_binding01/RUNTIME_INPUTS.sha256',entries:223,sha256:'35e6d5ac4cb0fb3933dc2d4ceb201d5afbf11315bdbcdcf74308a184c1586530',current_host_paths_checked:false};
+ expectedRequest.policy_evidence=['docs/papers211_215_sequence/qa/p212_plain_build_source_root01/RECEPTION.md','docs/papers211_215_sequence/qa/p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md'];
+ expectedRequest.citation_evidence=['docs/papers211_215_sequence/qa/p212_a_source_root01/CITATION_REPAIR.md','docs/papers211_215_sequence/reviews/p212_a/source_revision01/CITATION_CLOSURE.md'];
+-eq(proposal,expectedRequest,'whole exact A request role/path delta');
+-ok(sha(readExternal(P+'/NATIVE_REQUEST.proposed.json'))==='2c2a6b4d2b0a837cc47b9c8600a2975f8d57ce68d07b27c13390122d9172a189','A request content identity');
++eq(proposal,expectedRequest,'whole exact B request role/path delta');
++ok(sha(readExternal(P+'/NATIVE_REQUEST.proposed.json'))==='45f59e775a64c2734f6b1751e9d154a6c0ce5bd6bc8956106611923107fe8829','B request content identity');
+ const launch=JSON.parse(xt(B+'/ACTUAL_NATIVE.json')), continuation=JSON.parse(xt(B+'/CONTINUATION_NATIVE.json'));
+-eq(launch.arguments,proposal.proposed_native_request.arguments,'whole actual A native request');
+-ok(launch.result.chunk_id==='400382'&&launch.result.session_id===59457&&launch.result.output===''&&!Object.hasOwn(launch.result,'exit_code'),'actual A original launch');
+-eq(continuation.arguments,{session_id:launch.result.session_id,chars:'',yield_time_ms:10000,max_output_tokens:16000},'only real A continuation');
+-ok(continuation.result.chunk_id==='4306d2'&&continuation.result.exit_code===0&&!Object.hasOwn(continuation.result,'session_id'),'actual A sole completion received by root');
+-ok(continuation.result.output==='P212_A_BUILD_SUPERVISOR_EXIT=0\n','complete native A completion stream');
++eq(launch.arguments,proposal.proposed_native_request.arguments,'whole actual B native request');
++ok(launch.result.chunk_id==='ee7d1b'&&launch.result.session_id===98167&&launch.result.output===''&&!Object.hasOwn(launch.result,'exit_code'),'actual B original launch');
++eq(continuation.arguments,{session_id:launch.result.session_id,chars:'',yield_time_ms:1000,max_output_tokens:2000},'only real B continuation');
++ok(continuation.result.chunk_id==='30adba'&&continuation.result.exit_code===0&&!Object.hasOwn(continuation.result,'session_id'),'actual B sole completion received by root');
++ok(continuation.result.output==='P212_B_BUILD_SUPERVISOR_EXIT=0\n','complete native B completion stream');
+ const grant=xt(B+'/GRANT.md'), policy=xt(Q+'p212_plain_build_source_root01/RECEPTION.md'), aReception=xt(B+'/SOURCE_RECEPTION.md');
+-const pairReceipt=xt(A+'/PAIR_RECEPTION.md'),citationRepair=xt(A+'/CITATION_REPAIR.md'),citationClosure=xt(V+'/CITATION_CLOSURE.md');
+-ok(grant.includes('ISSUED AND CONSUMED BEFORE THE NEXT SINGLE SUBMISSION.')&&grant.includes('No second launch'),'explicit consumed A grant');
++const pairReceipt=xt(T+'/PAIR_RECEPTION.md'),citationRepair=xt(A+'/CITATION_REPAIR.md'),citationClosure=xt(V+'/CITATION_CLOSURE.md');
++ok(grant.includes('ISSUED_AND_CONSUMED_BEFORE_NEXT_SINGLE_SUBMISSION.')&&grant.includes('No retry, cleanup, resumed tree'),'explicit consumed B grant');
+ ok(policy.includes('P212-POLICY-TIME1 is therefore CLOSED')&&policy.includes('supplement has precedence'),'adopted staged policy');
+-ok(sha(readExternal(B+'/SOURCE_RECEPTION.md'))==='8397770d557bec3f9b082017d5d77ba2d6c988e6d742c2754b7036374da1c0f5'&&aReception.includes('explicitly reuses that bounded policy for this A build.'),'A source/policy acceptance');
+-ok(sha(readExternal(A+'/PAIR_RECEPTION.md'))==='ebd1134efacc15652831ef26733ae72ce0d6dac815323a7ae29017b91c1032f7'&&pairReceipt.includes('Accept the required independent-A scientific replay pair.'),'received prior A pair, not new science');
++ok(sha(readExternal(B+'/SOURCE_RECEPTION.md'))==='964a4e8081d45057e3ed10c713e30f0f5d9cfa850ffb63086c09c9e270b34ae3'&&aReception.includes('Root explicitly adopts the already accepted ordinary-tool policy and staged'),'B source/policy acceptance');
++ok(sha(readExternal(T+'/PAIR_RECEPTION.md'))==='3b3902a4790cf82321ac2c28d1b7cc989f35917f42f798facc14a27f23bae527'&&pairReceipt.includes('# P212 B actual strict pair accepted'),'received prior B pair, not new science');
+ ok(sha(readExternal(A+'/CITATION_REPAIR.md'))==='206eae16708daf0b975472d46e5ea404564c3c019698f3ced3e6396dc782a842','root exact citation repair');
+ ok(sha(readExternal(V+'/CITATION_CLOSURE.md'))==='f4b91448ba570b97423b8cab5f86eb894e7f19488e47ebf46bd5257493f57ade'&&citationClosure.includes('P212-A-M1 is CLOSED.'),'same-A exact citation closure');
+ const sourceManifest=readExternal(P+'/PROPOSED_SOURCE_ONLY.sha256');
+-ok(sha(sourceManifest)==='ac6a5776e0f42298fcd0212ac681f0881549680d05361fe8bd15546c51dcc3a1','A source manifest pin');
+-const sources=manifest(decode(sourceManifest));eq(sources.map(r=>r.path),sourceNames,'eight exact A sources');
++ok(sha(sourceManifest)==='ac6a5776e0f42298fcd0212ac681f0881549680d05361fe8bd15546c51dcc3a1','B source manifest pin');
++const sources=manifest(decode(sourceManifest));eq(sources.map(r=>r.path),sourceNames,'eight exact B sources');
+ const initialSourceManifest=readExternal(I+'/PROPOSED_SOURCE_ONLY.sha256');
+ ok(sha(initialSourceManifest)==='fe4abe8535901fbb1e6dd8c63038e0ecef03c9ea5a5d05619559d452494a8288','initial source baseline manifest pin');
+ const initialSources=manifest(decode(initialSourceManifest));eq(initialSources.map(r=>r.path),sourceNames,'eight exact initial sources');
+ const runtimeManifest=readExternal(B+'/RUNTIME_INPUTS.sha256');
+-ok(sha(runtimeManifest)==='35e6d5ac4cb0fb3933dc2d4ceb201d5afbf11315bdbcdcf74308a184c1586530','freshly received A selected manifest pin');
++ok(sha(runtimeManifest)==='35e6d5ac4cb0fb3933dc2d4ceb201d5afbf11315bdbcdcf74308a184c1586530','freshly received B selected manifest pin');
+ const runtime=manifest(decode(runtimeManifest));ok(runtime.length===223&&runtime.every(r=>path.isAbsolute(r.path)),'received finite runtime names');
+ const runtimeByName=new Map(runtime.map(r=>[r.path,r]));
+ const binding=JSON.parse(xt(B+'/BINDING_NATIVE.json'));
+-ok(binding.result.exit_code===0&&binding.result.chunk_id==='65467c','A external binding native result');
+-const boundNames=[P+'/BUILD_REQUEST.proposed.sh.txt',P+'/NATIVE_REQUEST.proposed.json',P+'/PROPOSED_SOURCE_ONLY.sha256',B+'/RUNTIME_INPUTS.sha256',Q+'p212_plain_build_source_root01/RECEPTION.md',Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md',A+'/PAIR_RECEPTION.md'];
+-const boundOutput=path.dirname(R)+'\n'+boundNames.map(p=>sha(readExternal(p))+'  '+p.slice(W.length+1)+'\n').join('');
+-ok(binding.result.output===boundOutput,'whole A parent and seven external content pins');
+-const bindingCommand=['set -e','[ ! -e docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256 ]','[ ! -L docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256 ]','cp -pn docs/papers211_215_sequence/qa/p212_plain_build_binding01/RUNTIME_INPUTS.sha256 docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256','cmp docs/papers211_215_sequence/qa/p212_plain_build_binding01/RUNTIME_INPUTS.sha256 docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256','[ -d docs/papers211_215_sequence/reviews/p212_a ]','[ ! -L docs/papers211_215_sequence/reviews/p212_a ]','[ ! -e docs/papers211_215_sequence/reviews/p212_a/build01 ]','[ ! -L docs/papers211_215_sequence/reviews/p212_a/build01 ]','realpath docs/papers211_215_sequence/reviews/p212_a','sha256sum '+boundNames.map(p=>p.slice(W.length+1)).join(' ')].join('\n');
+-eq(binding.arguments,{cmd:bindingCommand,workdir:W,login:false,max_output_tokens:2400},'whole actual A manifest copy/parent/nonlink/absence binding request');
++ok(binding.result.exit_code===0&&binding.result.chunk_id==='d06a3a','B external binding native result');
++const boundNames=[P+'/BUILD_REQUEST.proposed.sh.txt',P+'/NATIVE_REQUEST.proposed.json',P+'/PROPOSED_SOURCE_ONLY.sha256',B+'/RUNTIME_INPUTS.sha256',B+'/SOURCE_RECEPTION.md',Q+'p212_plain_build_source_root01/RECEPTION.md',Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md',T+'/PAIR_RECEPTION.md'];
++const capacityRecord='Filesystem       1B-blocks        Used   Available Use% Mounted on\n/dev/md0       53687091200 39095754752 14591336448  73% /root/autodl-tmp\n';
++const boundOutput=path.dirname(R)+'\n'+capacityRecord+boundNames.map(p=>sha(readExternal(p))+'  '+p.slice(W.length+1)+'\n').join('');
++ok(binding.result.output===boundOutput,'whole B parent capacity and eight external content pins');
++const bindingCommand=['set -e','cmp docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256 docs/papers211_215_sequence/qa/p212_b_build_binding01/RUNTIME_INPUTS.sha256','[ -d docs/papers211_215_sequence/reviews/p212_b ]','[ ! -L docs/papers211_215_sequence/reviews/p212_b ]','(cd docs/papers211_215_sequence/reviews/p212_b && pwd -P)','[ ! -e docs/papers211_215_sequence/reviews/p212_b/build01 ]','[ ! -L docs/papers211_215_sequence/reviews/p212_b/build01 ]','df -B1 docs/papers211_215_sequence/reviews/p212_b','sha256sum '+boundNames.map(p=>p.slice(W.length+1)).join(' ')].join('\n');
++eq(binding.arguments,{cmd:bindingCommand,max_output_tokens:2500},'whole actual B parent/absence/capacity binding request; cwd implicit in retained native request');
+ const prep=JSON.parse(xt(B+'/RUNTIME_PREFLIGHT_NATIVE.json'));
+ const runtimeOK=runtime.map(r=>r.path+': OK\n').join('');
+-eq(prep.arguments,{cmd:'sha256sum --check --strict docs/papers211_215_sequence/qa/p212_plain_build_binding01/RUNTIME_INPUTS.sha256',workdir:W,max_output_tokens:16000},'whole fresh A preflight request as DATA');
+-ok(prep.result.chunk_id==='a7df94'&&prep.result.exit_code===0&&prep.result.output===runtimeOK,'all received fresh A pregrant runtime OK rows and full output');
++eq(prep.arguments,{cmd:'sha256sum --check --strict docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256',workdir:W,max_output_tokens:18000},'whole fresh B preflight request as DATA');
++ok(prep.result.chunk_id==='9b1e27'&&prep.result.exit_code===0&&prep.result.output===runtimeOK,'all received fresh B pregrant runtime OK rows and full output');
+ const sourceDelta=[
+   {path:'references.bib',from:'  note = {Primary preprint; Theorem 3.8 and Corollary 4.10}\n',to:'  note = {Primary preprint; Theorem 3.8, Lemma 4.9 and Corollary 4.10}\n'},
+   {path:'sections/01_setup.tex',from:'Holroyd et al.\\ \\cite[Theorem~3.8]{holroyd2008}.\n',to:'Holroyd et al.\\ \\cite[Lemma~4.9]{holroyd2008}.\n'}
+@@ -127,9 +129,9 @@
+   ok(sha(original)===initialSources.find(r=>r.path===row.path).sha256,'accepted initial cold source pin '+row.path);
+   const delta=sourceDelta.find(r=>r.path===row.path);
+   const expectedA=delta?Buffer.from(replaceLiteral(decode(original),delta.from,delta.to,'one accepted citation source line '+row.path),'utf8'):original;
+-  ok(sha(expectedA)===row.sha256,'exact two-line delta gives current A source pin '+row.path);
++  ok(sha(expectedA)===row.sha256,'exact two-line delta gives current B source pin '+row.path);
+   sameBuffers(expectedA,live,'accepted initial source plus exact A delta == live '+row.path);
+-  sameBuffers(expectedA,cold,'accepted initial source plus exact A delta == A cold '+row.path);
++  sameBuffers(expectedA,cold,'accepted initial source plus exact A delta == B cold '+row.path);
+   want('source_only/'+row.path);
+ }
+ ok(rt('controller.exit')==='0\n'&&rt('controller.stdout.raw')===''&&rt('controller.stderr.raw')==='','full controller success streams');
+@@ -284,6 +286,6 @@
+ // claim of continuous process/descendant attestation.
+ for(const [p,b] of bytes)ok(fs.readFileSync(p).equals(b),'whole received input unchanged '+p);
+ const summary={artifact_files:inventory.length,artifact_bytes:inventory.reduce((s,r)=>s+r.bytes,0),subdirectories:directories.length-1,complete_text_files:textCaptures.length,external_inputs:externalPins.length,full_raw_pairs:rawPairs.length,runtime_selected:runtime.length,sources:sources.length,pages:pageCount,fonts:fonts.length,pdf_bytes:pdf.length,pdf_sha256:sha(pdf),fls:ordered.map(r=>({pass:r.pass,events:r.events.length,counts:r.counts})),warnings:diagnostics.filter(d=>d.role==='log').map(d=>({pass:d.pass,count:d.warning_count})),findings:findings.length,text_extraction_control_occurrences:textControls.length};
+-const report={status:findings.length?'HOLD_ARTIFACT_FINDINGS':'DATA_CHECK_COMPLETE_PENDING_INDEPENDENT_SEMANTIC_AND_ROOT_RECEPTION',scope:'One P212 Review A source build, ordinary trusted tools/configuration; no host re-read, syscall closure, science, final manuscript verdict or visual/PDF adoption',checks,summary,findings,provenance:{launch,continuation,grant,external_binding:binding,runtime_preflight:prep,adopted_policy:policy,a_source_reception:aReception,accepted_A_pair:pairReceipt,citation_repair:citationRepair,citation_closure:citationClosure},adaptation:{base_checker_sha256:sha(readExternal(baseChecker)),recipe_delta:recipeDelta,initial_source_pins:initialSources,citation_locator:citationLocator},source_pins:sources,runtime_pins_as_data_only:runtime,external_pins:externalPins,cold_cwd_record:rt('COLD_CWD.actual.txt'),commands,snapshots:snapshotData,raw_pairs:rawPairs,ordered_fls:ordered,diagnostics,bibliography:{keys:bibliographyKeys,bbl_order:bblKeys,final_bibcite:bibcite,source_citations:sourceCitations,labels:finalLabels,references,bibtex_role_limit:'Complete AUX/BLG/BBL top-level roles, not a BibTeX syscall trace'},fonts,pages:pageImages,text_extraction_controls:textControls,text_extraction_limit:'Raw math extraction can lose layout or encode delimiter glyphs as controls; full raw output retained, actual all-page viewing is separate',inventory,complete_text_captures:textCaptures};
++const report={status:findings.length?'HOLD_ARTIFACT_FINDINGS':'DATA_CHECK_COMPLETE_PENDING_INDEPENDENT_SEMANTIC_AND_ROOT_RECEPTION',scope:'One P212 Review B source build, ordinary trusted tools/configuration; no host re-read, syscall closure, science, final manuscript verdict or visual/PDF adoption',checks,summary,findings,provenance:{launch,continuation,grant,external_binding:binding,runtime_preflight:prep,adopted_policy:policy,b_source_reception:aReception,accepted_B_pair:pairReceipt,citation_repair:citationRepair,citation_closure:citationClosure},adaptation:{base_checker_sha256:sha(readExternal(baseChecker)),recipe_delta:recipeDelta,initial_source_pins:initialSources,citation_locator:citationLocator},source_pins:sources,runtime_pins_as_data_only:runtime,external_pins:externalPins,cold_cwd_record:rt('COLD_CWD.actual.txt'),commands,snapshots:snapshotData,raw_pairs:rawPairs,ordered_fls:ordered,diagnostics,bibliography:{keys:bibliographyKeys,bbl_order:bblKeys,final_bibcite:bibcite,source_citations:sourceCitations,labels:finalLabels,references,bibtex_role_limit:'Complete AUX/BLG/BBL top-level roles, not a BibTeX syscall trace'},fonts,pages:pageImages,text_extraction_controls:textControls,text_extraction_limit:'Raw math extraction can lose layout or encode delimiter glyphs as controls; full raw output retained, actual all-page viewing is separate',inventory,complete_text_captures:textCaptures};
+ process.stdout.write(JSON.stringify(report,null,2)+'\n');
+ if(findings.length)process.exitCode=1;

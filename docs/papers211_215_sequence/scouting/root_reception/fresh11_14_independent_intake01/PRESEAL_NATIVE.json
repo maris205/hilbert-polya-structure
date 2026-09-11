@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node -e 'const fs=require(\"fs\"),p=\"docs/papers211_215_sequence/scouting/root_reception/fresh11_14_independent_intake01\",a=JSON.parse(fs.readFileSync(p+\"/CHECK_NATIVE.json\")),r=JSON.parse(a.result.output),c=JSON.parse(fs.readFileSync(p+\"/CLOSING_NATIVE.json\"));if(a.result.exit_code!==0||c.result.exit_code!==0)throw Error(\"native exit\");let j=0;for(const n of fs.readdirSync(p)){if(n.endsWith(\".json\")){JSON.parse(fs.readFileSync(p+\"/\"+n));j++;}}const failed=JSON.parse(fs.readFileSync(p+\"/CHECK01_FAILED_NATIVE.json\")),tr=JSON.parse(fs.readFileSync(p+\"/CHECK02_TRUNCATED_NATIVE.json\"));if(failed.result.exit_code!==1||!tr.result.output.startsWith(\"Warning: truncated output\"))throw Error(\"lost failed evidence\");let links=0;for(const n of [\"HANDOFF.md\",\"REPORT.md\",\"SELF_FAILURES.md\",\"PLAN.md\"]){const s=fs.readFileSync(p+\"/\"+n,\"utf8\");for(const m of s.matchAll(/\\]\\(([^)]+)\\)/g)){if(!fs.statSync(p+\"/\"+m[1]).isFile())throw Error(\"link\");links++;}}console.log(JSON.stringify({status:\"PRESEAL_DOCUMENTARY_PASS\",jsonFiles:j,localLinks:links,originalRecords:r.totalRecords,originalKeys:r.totalUniqueDocumentaryKeys,originalPayloads:r.packageRows.reduce((s,x)=>s+x.payloads,0),ownFilesBeforeThisReceipt:fs.readdirSync(p).length,failedNativePreserved:true,truncatedNativePreserved:true,scienceRuns:0}));'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "db56bc",
+    "wall_time_seconds": 0.00000416,
+    "exit_code": 0,
+    "original_token_count": 60,
+    "output": "{\"status\":\"PRESEAL_DOCUMENTARY_PASS\",\"jsonFiles\":6,\"localLinks\":5,\"originalRecords\":141,\"originalKeys\":96,\"originalPayloads\":39,\"ownFilesBeforeThisReceipt\":12,\"failedNativePreserved\":true,\"truncatedNativePreserved\":true,\"scienceRuns\":0}\n"
+  }
+}

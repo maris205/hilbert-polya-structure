@@ -1,0 +1,26 @@
+{
+  "scope": "new disabled preparation artifact writes only",
+  "records": [
+    {
+      "role": "write_binding_document",
+      "result": {}
+    },
+    {
+      "role": "write_disabled_wrapper",
+      "result": {}
+    },
+    {
+      "role": "control_fail_closed_guard",
+      "patch": "*** Begin Patch\n*** Update File: docs/papers211_215_sequence/qa/p213_initial_science_preparation01/run_science.disabled.py\n@@\n     \"control_bound\",\n     \"control_short_write\",\n+    \"control_unready\",\n+    \"control_changed\",\n@@\n-try:\n-    entries = ENTRIES\n+CONTROL_READY = False\n+try:\n+    entries = ENTRIES\n@@\n     RESULT[\"outputs_begin\"] = output_points()\n     need(all(stat[\"st_size\"] == 0 for stat in RESULT[\"outputs_begin\"].values()), \"stdio_empty\")\n+    CONTROL_READY = True\n@@\n try:\n+    need(CONTROL_READY, \"control_unready\")\n+    need(same_tree(full_stat(os.fstat(3)), RESULT[\"outputs_begin\"][\"3\"]), \"control_changed\")\n     control = (canonical(RESULT) + \"\\n\").encode(\"ascii\")\n*** End Patch",
+      "result": {}
+    },
+    {
+      "role": "write_three_disabled_captures_and_request",
+      "result": {}
+    },
+    {
+      "role": "write_preparation_contract_delta_sequence",
+      "result": {}
+    }
+  ]
+}

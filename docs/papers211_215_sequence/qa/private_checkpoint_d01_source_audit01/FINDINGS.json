@@ -1,0 +1,40 @@
+{
+  "schema": "independent-d01-source-finding-census-v1",
+  "source_sha256": "b1b39b9ce36f9c7ace171229c6e69ba236e888bf2664e81eab9d557fd69468ce",
+  "verdict": "SOURCE_CHANGE_REQUIRED",
+  "census": {
+    "critical": 0,
+    "major": 1,
+    "minor": 0
+  },
+  "findings": [
+    {
+      "id": "D01-F01",
+      "severity": "major",
+      "blocking": true,
+      "status": "open",
+      "source_lines": [
+        160,
+        171,
+        194,
+        203
+      ],
+      "title": "Caught post-spawn cancellation bypasses remaining owned-child handling",
+      "preconditions": [
+        "Popen returned; proc and origin established",
+        "Direct child still running with remaining absolute budget",
+        "One KeyboardInterrupt reaches outer capture catch outside inner communicate handler"
+      ],
+      "consequence": "Failure is recorded, but only poll and pipe close occur; no remaining owned TERM/KILL/drain attempt. No false success claimed.",
+      "minimal_fix": "Route caught post-spawn failures through one finite phase-tracked owned cleanup path before pipe close, preserving original origin+14/+17/+19/+20 deadlines, accumulated data, at-most-once signals and permanent failure flags.",
+      "runtime_reproduction_performed": false,
+      "source_replacement_authored": false
+    }
+  ],
+  "authority": {
+    "D01": false,
+    "D02": false,
+    "checkpoint": false,
+    "external": false
+  }
+}

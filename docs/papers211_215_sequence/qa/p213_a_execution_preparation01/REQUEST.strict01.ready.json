@@ -1,0 +1,107 @@
+{
+  "schema": "P213_A_ORDINARY_TRUST_PROPOSED_NATIVE_LAUNCH_V1",
+  "stage": "strict01",
+  "status": "SOURCE_READY_NOT_SUBMITTED",
+  "operation_authorized": false,
+  "root_grant": null,
+  "actual_native": null,
+  "actual_session_id": null,
+  "accepted": false,
+  "proposed_native_request": {
+    "tool": "exec_command",
+    "arguments": {
+      "cmd": "# SOURCE-READY PROPOSAL ONLY: root acceptance and a fresh grant are required.\nset -euo pipefail\numask 077\nP213_A_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_a_strict_pair_run01'\nP213_A_KEYS='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_a_execution_preparation01/EXTERNAL_KEYS.cjs'\nP213_A_VERIFY='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p213_a/verify.py'\ncd -- /root/autodl-tmp/symbolic_dynamics\n/usr/bin/mkdir -m 700 -- \"$P213_A_OUT\"\nset -C\nexec 3>&1 4>&2\nexec > \"$P213_A_OUT/controller.stdout\" 2> \"$P213_A_OUT/controller.stderr\"\np213_a_finish() {\n  local p213_a_rc=$?\n  trap - EXIT\n  printf '%s\\n' \"$p213_a_rc\" > \"$P213_A_OUT/controller.exit\"\n  printf 'P213_A_CAPTURE_EXIT=%s\\n' \"$p213_a_rc\" >&3\n  exit \"$p213_a_rc\"\n}\ntrap p213_a_finish EXIT\n/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node \"$P213_A_KEYS\" inputs < /dev/null > \"$P213_A_OUT/keys.before.json\" 2> \"$P213_A_OUT/keys.before.stderr\"\nset +e\n/usr/bin/env -i LANG=C LC_ALL=C /usr/bin/python3.10 -I -S -B \"$P213_A_VERIFY\" < /dev/null 3>&- 4>&- > \"$P213_A_OUT/stdout.bin\" 2> \"$P213_A_OUT/stderr.bin\"\nP213_A_PYTHON_STATUS=$?\nset -e\nprintf '%s\\n' \"$P213_A_PYTHON_STATUS\" > \"$P213_A_OUT/python.exit\"\n/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node \"$P213_A_KEYS\" inputs < /dev/null > \"$P213_A_OUT/keys.after.json\" 2> \"$P213_A_OUT/keys.after.stderr\"\n/usr/bin/cmp -- \"$P213_A_OUT/keys.before.json\" \"$P213_A_OUT/keys.after.json\" > \"$P213_A_OUT/input-key-cmp.stdout\" 2> \"$P213_A_OUT/input-key-cmp.stderr\"\n/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node \"$P213_A_KEYS\" outputs strict01 < /dev/null > \"$P213_A_OUT/raw.keys.json\" 2> \"$P213_A_OUT/raw.keys.stderr\"\n[[ \"$P213_A_PYTHON_STATUS\" == 0 ]] || exit \"$P213_A_PYTHON_STATUS\"\n[[ -s \"$P213_A_OUT/stdout.bin\" ]]\n[[ ! -s \"$P213_A_OUT/stderr.bin\" ]]\n",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "shell": "/bin/bash",
+      "login": false,
+      "tty": false,
+      "yield_time_ms": 1000,
+      "max_output_tokens": 4096
+    }
+  },
+  "proposed_continuation": {
+    "tool": "write_stdin",
+    "arguments": {
+      "session_id": null,
+      "chars": "",
+      "yield_time_ms": 10000,
+      "max_output_tokens": 4096
+    },
+    "rule": "Only the actual session returned by this newly granted request, receiving to completion; no retry, second submission, kill or fabricated final status."
+  },
+  "source": {
+    "path": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p213_a/verify.py",
+    "bytes": 6135,
+    "sha256": "b51f91039e524f8b0213de630cd7d275bd7f9a96f901c4f1206fd266617717b8",
+    "script_arguments": [],
+    "imports": [],
+    "parameters": {
+      "n_min": 1,
+      "n_max": 6,
+      "N_min": 0,
+      "N_max": 4,
+      "carriers": 30,
+      "states": 461
+    },
+    "output_lines": 495,
+    "source_was_executed_by_preparation": false
+  },
+  "command_sha256": "b4ec7a877c2453ac715c8a4d06e6d1ed95d9d96e118f4225dbefbc12e246536a",
+  "external_key_source": {
+    "sha256": "ea89a37e57f3fed6909fd568c972d8b97537ecb07ae86febc130470f971abdac",
+    "path": "docs/papers211_215_sequence/qa/p213_a_execution_preparation01/EXTERNAL_KEYS.cjs"
+  },
+  "dependency_document": {
+    "path": "docs/papers211_215_sequence/qa/p213_a_execution_preparation01/DEPENDENCIES.proposed.json",
+    "sha256": "23cf1daad6b0873cc703ecf7e726e588ec08affb9de35910ecb59db42af11979"
+  },
+  "bootstrap_boundary": "Ordinary trusted tool control, Bash/env/mkdir/cmp/Node/fs/crypto/Python/builtins, fixed namespace ancestors and storage. External fixed keys are not own-process module/map/fd/runtime observation. Historical baseline keys are provenance only; current keys must be freshly captured before/after this invocation.",
+  "controlled_directory": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_a_strict_pair_run01",
+  "future_directory_queried": false,
+  "python_environment": {
+    "LANG": "C",
+    "LC_ALL": "C"
+  },
+  "python_flags": [
+    "-I",
+    "-S",
+    "-B"
+  ],
+  "stdin": "/dev/null; explicit new fixed redirection",
+  "output_files": [
+    "stdout.bin",
+    "stderr.bin",
+    "python.exit",
+    "keys.before.json",
+    "keys.before.stderr",
+    "keys.after.json",
+    "keys.after.stderr",
+    "input-key-cmp.stdout",
+    "input-key-cmp.stderr",
+    "raw.keys.json",
+    "raw.keys.stderr",
+    "controller.stdout",
+    "controller.stderr",
+    "controller.exit"
+  ],
+  "capture_limit_kind": "Success/reception bounds after complete direct-to-file capture, not OS-enforced stdout/time/memory/storage limits; over-bound/partial/failing originals are preserved.",
+  "capture_limits": {
+    "individual_input_bytes": 8388608,
+    "total_present_input_bytes": 16777216,
+    "stdout_success_bytes": 1048576,
+    "stderr_success_bytes": 0,
+    "failed_stream_hash_bytes": 1048576
+  },
+  "canonical": {
+    "target": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p213_a/canonical_stdout.txt",
+    "role": "Root-selected line-oriented exact raw ASCII LF stdout adapter, accepted in qa/p213_a_source_root01/RECEPTION.md; no JSON parsing, normalization or synthetic expected data.",
+    "bytes": null,
+    "sha256": null,
+    "adopted": false,
+    "source": "only complete accepted actual A initial stdout.bin; never author output or synthetic reconstruction"
+  },
+  "initial_counts_as_strict": false,
+  "strict_prerequisite": "Independent/root accepted complete initial output, exclusive raw canonical adoption and exact pin, then this stage's separate new grant. The fixed launch command does not read canonical; complete external raw comparison is required.",
+  "failure_policy": "Preserve actual failure/status and partial artifacts, HOLD; no automatic retry, directory reuse, source/box change or output normalization.",
+  "hold_external": true
+}

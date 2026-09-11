@@ -1,0 +1,302 @@
+// PROSPECTIVE ROOT KEY-TOOL ENTRY BYTES ONLY; not an operation grant.
+// This .txt carrier is never imported/executed by its author preparation.
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {collectP212S0Files} from './file_keys.mjs';
+
+const REQUEST_PATH = "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_minimal_contract01_file_observation_binding01/FILE_REQUEST.json";
+const TEMPLATE = {
+  "schema": "p212-s0-ten-field-file-request-v1",
+  "enabled": false,
+  "status": "HOLD_SOURCE_ONLY_EIGHT_CANDIDATES_NOT_A_CLOSURE",
+  "purpose": "source_gate",
+  "entries": [
+    {
+      "id": "BASH",
+      "path": "/bin/bash",
+      "role": "executable",
+      "optional": false,
+      "max_bytes": 16777216,
+      "capture_hex": true,
+      "expected": null
+    },
+    {
+      "id": "ENV",
+      "path": "/usr/bin/env",
+      "role": "executable",
+      "optional": false,
+      "max_bytes": 16777216,
+      "capture_hex": true,
+      "expected": null
+    },
+    {
+      "id": "KPSEWHICH",
+      "path": "/usr/bin/kpsewhich",
+      "role": "executable",
+      "optional": false,
+      "max_bytes": 16777216,
+      "capture_hex": true,
+      "expected": null
+    },
+    {
+      "id": "LOADER_CANDIDATE",
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "role": "loader",
+      "optional": false,
+      "max_bytes": 16777216,
+      "capture_hex": true,
+      "expected": null
+    },
+    {
+      "id": "LIBC_CANDIDATE",
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "role": "loader",
+      "optional": false,
+      "max_bytes": 16777216,
+      "capture_hex": true,
+      "expected": null
+    },
+    {
+      "id": "TINFO_CANDIDATE",
+      "path": "/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3",
+      "role": "loader",
+      "optional": false,
+      "max_bytes": 16777216,
+      "capture_hex": true,
+      "expected": null
+    },
+    {
+      "id": "LOADER_CACHE",
+      "path": "/etc/ld.so.cache",
+      "role": "configuration",
+      "optional": true,
+      "max_bytes": 1048576,
+      "capture_hex": true,
+      "expected": null
+    },
+    {
+      "id": "SYSTEM_PRELOAD",
+      "path": "/etc/ld.so.preload",
+      "role": "configuration",
+      "optional": true,
+      "max_bytes": 1048576,
+      "capture_hex": true,
+      "expected": null
+    }
+  ],
+  "total_byte_limit": 102760448,
+  "permission_receipt": null,
+  "settlement_receipt": null
+};
+
+const REQUEST_BYTE_LIMIT = 65536;
+const OUTPUT_BYTE_LIMIT = 268435456;
+const DIAGNOSTIC_BYTE_LIMIT = 8388608;
+const MAX_VALUE_NODES = 8192;
+const MAX_VALUE_DEPTH = 32;
+const FIELDS = ['dev','ino','mode','nlink','uid','gid','rdev','size','mtimeNs','ctimeNs'];
+const IDENTITY = FIELDS.slice(0,7);
+const need = (ok,label) => { if (!ok) throw new Error(label); };
+const fields = s => Object.fromEntries(FIELDS.map(k => {
+  need(typeof s[k] === 'bigint','ACTUAL_BIGINT_FILE_FIELD');
+  return [k,s[k].toString()];
+}));
+const same = (a,b) => {
+  if (typeof a !== typeof b) return false;
+  if (b === null || typeof b !== 'object') return a === b;
+  if (a === null || Array.isArray(a) !== Array.isArray(b)) return false;
+  const ak=Object.keys(a).sort(), bk=Object.keys(b).sort();
+  return ak.length===bk.length && ak.every((k,i)=>k===bk[i] && same(a[k],b[k]));
+};
+const errorData = error => ({
+  name:String(error?.name ?? 'Error'),
+  code:typeof error?.code === 'string' ? error.code : null,
+  message:String(error?.message ?? error)
+});
+
+// This is one fixed root-owned request input, not an extra host candidate.
+// Its observed content/key sits OUTSIDE that request and authenticates no grant.
+function loadBoundRequest(record) {
+  let fd=null, succeeded=false;
+  const chunks=[], digest=createHash('sha256');
+  record.path=REQUEST_PATH; record.byte_limit=REQUEST_BYTE_LIMIT;
+  record.bytes_read=0; record.eof=false; record.complete=false;
+  record.close_succeeded=null; record.raw_hex=''; record.content=null;
+  try {
+    const lexical=fs.lstatSync(REQUEST_PATH,{bigint:true});
+    record.lstat_before=fields(lexical);
+    need(lexical.isFile()&&!lexical.isSymbolicLink(),'REQUEST_PHYSICAL_REGULAR_LEAF');
+    need(lexical.size>=0n&&lexical.size<=BigInt(REQUEST_BYTE_LIMIT),'REQUEST_DECLARED_SIZE_BOUND');
+    fd=fs.openSync(REQUEST_PATH,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);
+    const first=fs.fstatSync(fd,{bigint:true}); record.fstat_before=fields(first);
+    need(first.isFile()&&same(record.fstat_before,record.lstat_before),'REQUEST_SAME_FD_BEFORE_BYTES');
+    const buffer=Buffer.alloc(65536);
+    for (;;) {
+      const remaining=REQUEST_BYTE_LIMIT-record.bytes_read;
+      need(remaining>=0,'REQUEST_REMAINING_BYTES');
+      const count=fs.readSync(fd,buffer,0,Math.min(buffer.length,remaining+1),null);
+      if (count===0) { record.eof=true; break; }
+      const chunk=Buffer.from(buffer.subarray(0,count));
+      record.bytes_read+=count; chunks.push(chunk); digest.update(chunk);
+      need(count<=remaining,'REQUEST_OVERFLOW_SENTINEL_PRESERVED');
+    }
+    record.fstat_after=fields(fs.fstatSync(fd,{bigint:true}));
+    record.lstat_after=fields(fs.lstatSync(REQUEST_PATH,{bigint:true}));
+    need(same(record.fstat_before,record.fstat_after)&&same(record.lstat_before,record.lstat_after),'REQUEST_KEY_CHANGED');
+    need(BigInt(record.bytes_read)===first.size,'REQUEST_WHOLE_EOF_SIZE');
+    succeeded=true;
+  } catch (error) {
+    record.error=errorData(error); throw error;
+  } finally {
+    record.raw_hex=Buffer.concat(chunks).toString('hex');
+    record.content={bytes:record.bytes_read,sha256:digest.digest('hex')};
+    if (fd!==null) {
+      try { fs.closeSync(fd); record.close_succeeded=true; }
+      catch(error) { record.close_succeeded=false; record.close_error=errorData(error); throw error; }
+    }
+  }
+  record.complete=succeeded&&record.close_succeeded===true;
+  need(record.complete,'REQUEST_COMPLETE_CLOSED');
+  const raw=Buffer.concat(chunks), text=raw.toString('utf8');
+  need(Buffer.from(text,'utf8').equals(raw),'REQUEST_UTF8_REVERSIBLE');
+  return JSON.parse(text);
+}
+
+// Canonical DATA encoding: sorted own object keys, original array order,
+// safe integer numbers, ASCII JSON, every non-printing/non-ASCII UTF-16 code
+// unit and quote/backslash escaped as lower-case \uXXXX, exactly one final LF.
+// No received function, getter, toJSON hook or scientific/ELF parser is run.
+function makeWriter(fd,initial,limit) {
+  const writer={fd,initial,limit,written:0,nodes:0,ancestors:new Set()};
+  writer.ascii = text => {
+    need(typeof text==='string'&&/^[\x00-\x7f]*$/.test(text),'ENCODER_ASCII_ONLY');
+    const buffer=Buffer.from(text,'ascii');
+    need(writer.written+buffer.length<=writer.limit,'OUTPUT_BYTE_BOUND_PARTIAL_PRESERVED');
+    let offset=0;
+    while(offset<buffer.length) {
+      const count=fs.writeSync(fd,buffer,offset,buffer.length-offset,null);
+      need(Number.isInteger(count)&&count>0&&count<=buffer.length-offset,'OUTPUT_POSITIVE_WRITE_PROGRESS');
+      offset+=count; writer.written+=count;
+    }
+  };
+  writer.string = value => {
+    writer.ascii('"');
+    for(let at=0;at<value.length;at+=16384) {
+      const piece=value.slice(at,at+16384).replace(/[^\x20-\x21\x23-\x5b\x5d-\x7e]/g,
+        ch=>'\\u'+ch.charCodeAt(0).toString(16).padStart(4,'0'));
+      writer.ascii(piece);
+    }
+    writer.ascii('"');
+  };
+  writer.value = (value,depth=0) => {
+    need(++writer.nodes<=MAX_VALUE_NODES&&depth<=MAX_VALUE_DEPTH,'ENCODER_FINITE_STRUCTURE');
+    if(value===null) { writer.ascii('null'); return; }
+    if(typeof value==='string') { writer.string(value); return; }
+    if(typeof value==='boolean') { writer.ascii(value?'true':'false'); return; }
+    if(typeof value==='number') {
+      need(Number.isSafeInteger(value)&&!Object.is(value,-0),'ENCODER_EXACT_INTEGER_ONLY');
+      writer.ascii(String(value)); return;
+    }
+    need(typeof value==='object'&&!writer.ancestors.has(value),'ENCODER_DATA_ONLY_NO_CYCLE');
+    writer.ancestors.add(value);
+    try {
+      if(Array.isArray(value)) {
+        need(value.length<=MAX_VALUE_NODES&&Object.keys(value).length===value.length,'ENCODER_DENSE_ARRAY');
+        writer.ascii('[');
+        for(let i=0;i<value.length;i++) {
+          const d=Object.getOwnPropertyDescriptor(value,String(i));
+          need(d&&Object.hasOwn(d,'value'),'ENCODER_NO_ARRAY_ACCESSOR');
+          if(i) writer.ascii(',');
+          writer.value(d.value,depth+1);
+        }
+        writer.ascii(']');
+      } else {
+        const proto=Object.getPrototypeOf(value);
+        need(proto===Object.prototype||proto===null,'ENCODER_PLAIN_DATA_OBJECT');
+        const names=Object.keys(value).sort();
+        need(names.length<=MAX_VALUE_NODES,'ENCODER_FINITE_MEMBERS');
+        writer.ascii('{');
+        for(let i=0;i<names.length;i++) {
+          const name=names[i], d=Object.getOwnPropertyDescriptor(value,name);
+          need(d&&Object.hasOwn(d,'value'),'ENCODER_NO_OBJECT_ACCESSOR');
+          if(i) writer.ascii(',');
+          writer.string(name); writer.ascii(':'); writer.value(d.value,depth+1);
+        }
+        writer.ascii('}');
+      }
+    } finally { writer.ancestors.delete(value); }
+  };
+  writer.document = value => { writer.value(value); writer.ascii('\n'); };
+  writer.checkPoint = () => {
+    const now=fields(fs.fstatSync(fd,{bigint:true}));
+    need(IDENTITY.every(k=>now[k]===writer.initial[k]),'OUTPUT_SAME_DESCRIPTOR_IDENTITY');
+    need(BigInt(now.size)===BigInt(writer.written),'OUTPUT_SIZE_EQUALS_ACTUAL_WRITES');
+  };
+  return writer;
+}
+
+let phase='output_descriptor_validation', readerCalled=false, readerResult=null;
+const requestInput={};
+let output=null, diagnostic=null, captureReady=false, exitCode=79;
+const diagnosticOnly = (label,error) => {
+  if(!captureReady) return;
+  try {
+    diagnostic.document({schema:'p212-eight-file-entry-diagnostic-v1',status:'FAILED_PARTIAL_PRESERVED',
+      phase,label,error:errorData(error),stdout_bytes_written:output.written,
+      reader_called:readerCalled,reader_returned:readerResult!==null,
+      complete_result_not_guaranteed:true,operation_permission:false});
+    diagnostic.checkPoint();
+  } catch (_) {
+    // Keep all partial stdout/stderr bytes; no retry, replacement or fake receipt.
+  }
+};
+try {
+  const a=fs.fstatSync(1,{bigint:true}), b=fs.fstatSync(2,{bigint:true});
+  need(a.isFile()&&b.isFile()&&a.nlink===1n&&b.nlink===1n&&a.size===0n&&b.size===0n,'FRESH_REGULAR_CAPTURE_DESCRIPTORS');
+  need(a.dev!==b.dev||a.ino!==b.ino,'DISTINCT_CAPTURE_DESCRIPTORS');
+  output=makeWriter(1,fields(a),OUTPUT_BYTE_LIMIT);
+  diagnostic=makeWriter(2,fields(b),DIAGNOSTIC_BYTE_LIMIT);
+  captureReady=true;
+  need(process.argv.length===2,'EXACT_ENTRY_NO_ARGUMENTS');
+  phase='bound_request_load';
+  const request=loadBoundRequest(requestInput);
+  phase='exact_eight_file_request_validation';
+  need(request!==null&&typeof request==='object'&&!Array.isArray(request),'BOUND_REQUEST_OBJECT');
+  need(request.enabled===true&&request.status==='ROOT_BOUND_FINITE_FILES_ONLY','SEPARATELY_BOUND_FILE_REQUEST');
+  const withoutActivation={...request,enabled:false,status:TEMPLATE.status,permission_receipt:null};
+  need(same(withoutActivation,TEMPLATE),'EXACT_EIGHT_UNCHANGED_CANDIDATES_AND_LIMITS');
+  // collectP212S0Files itself validates the actual external permission-reference
+  // shape before any candidate path. A reference is not self-authenticating.
+  phase='single_finite_file_reader_call';
+  readerCalled=true;
+  readerResult=collectP212S0Files(request);
+  need(readerResult&&readerResult.schema==='p212-s0-ten-field-files-v1'&&
+    ['OBSERVED_ROOT_RECEPTION_PENDING','FAILED_PARTIAL_PRESERVED'].includes(readerResult.status),'EXACT_READER_RETURN_SCHEMA');
+  phase='serialize_complete_returned_result';
+  output.document({schema:'p212-eight-file-captured-result-v1',status:readerResult.status,
+    request_input:requestInput,reader_called:true,reader_returned:true,
+    reader_result:readerResult,entry_failure:null,source_acceptance:false,
+    operation_permission:false,installed_closure:false,directory_observation:false,
+    elf_interpretation:false,tool_vectors_invoked:false});
+  output.checkPoint();
+  need(same(fields(fs.fstatSync(2,{bigint:true})),diagnostic.initial),'STDERR_UNCHANGED_BEFORE_RETURN');
+  exitCode=readerResult.status==='OBSERVED_ROOT_RECEPTION_PENDING'?0:78;
+} catch(error) {
+  exitCode=79;
+  if(captureReady&&output.written===0) {
+    try {
+      output.document({schema:'p212-eight-file-captured-result-v1',status:'FAILED_ENTRY_OR_UNRETURNED_READER',
+        request_input:requestInput,reader_called:readerCalled,reader_returned:readerResult!==null,
+        reader_result:readerResult,entry_failure:{phase,error:errorData(error)},
+        source_acceptance:false,operation_permission:false,installed_closure:false,
+        directory_observation:false,elf_interpretation:false,tool_vectors_invoked:false});
+      output.checkPoint();
+    } catch(secondary) { diagnosticOnly('failure_envelope_incomplete',secondary); }
+  } else { diagnosticOnly('stdout_result_incomplete',error); }
+} finally {
+  // Only a returned successful stdout close permits native zero. Stderr stays
+  // available for a close failure and is settled by ordinary native completion.
+  try { fs.closeSync(1); }
+  catch(error) { exitCode=79; diagnosticOnly('stdout_close_failure',error); }
+}
+process.exitCode=exitCode;

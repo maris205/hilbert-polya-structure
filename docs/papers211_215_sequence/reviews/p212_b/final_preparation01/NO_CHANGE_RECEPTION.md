@@ -1,0 +1,5 @@
+# Complete same-B no-change DATA reception
+
+PASS_COMPLETE_NO_CHANGE_DATA. Exact approved checker SHA256 a5d595f7448d81f50b0a42c3d8a60784d5cf9f8763c9122794086a91c609d2b0 was checked before actual5ebca8; exit0/no session. Full exclusive stdout is35290 bytes, SHA256 b32fa0205c613175abb596e730731397ba73b2f7e95b917b4ae49d14592b12e7; stderr is empty. NO_CHANGE_NATIVE.json preserves actual request/result. All1644 assertions,25 mapped full-byte pairs,8cold sources/newPDF and61stable current keys were read completely at e2c920/02c9e1/16d970. No omitted suffix or summary-only reception is claimed.
+
+Root’s separate actual2bb48b also exited0/no session under its own grant share. Its complete native wrapper was read at828b7e, and the same native observation compared both entire stdout files with cmp, exit0. Thus independent/root35290-byte outputs are truly raw-identical, not merely equal hashes. This is two DATA executions, not science/build. The accepted independent artifact/root reports were read beforehand; the comparator does not replace them. Final same-B decision and accepted empty manuscript delta are ../REPORT.md and ../DELTA.md.

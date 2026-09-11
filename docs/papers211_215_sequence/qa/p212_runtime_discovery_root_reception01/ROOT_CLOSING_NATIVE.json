@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node -e 'const fs=require(\"fs\"),a=require(\"assert/strict\"),c=require(\"crypto\");const b=\"docs/papers211_215_sequence/qa/p212_runtime_discovery_root_reception01/\";const read=n=>fs.readFileSync(b+n),j=n=>JSON.parse(read(n));const r=j(\"RESULT.json\"),n=j(\"ROOT_NATIVE01.json\");a.equal(n.result.session_id,39510);a.equal(n.polls.length,1);a.equal(n.polls[0].result.exit_code,0);const q=JSON.parse(n.result.output+n.polls[0].result.output);a.equal(q.checks,r.checks);a.equal(q.input_paths,r.input_paths);a.equal(q.independent_checks,r.independent_reuse.checks);a.deepEqual(q.whole_reused_stdout,r.independent_reuse.whole_original_stdout);a.equal(r.native.length,2);for(const v of r.native){a.deepEqual(j(v.label+\".RECEIPT.json\"),Object.fromEntries(Object.entries(v).filter(([k])=>k!==\"label\")));for(const stream of [\"stdout\",\"stderr\"]){const bytes=read(v.label+\".\"+stream+\".raw\");a.deepEqual({bytes:bytes.length,sha256:c.createHash(\"sha256\").update(bytes).digest(\"hex\")},v[stream]);}}const files=fs.readdirSync(b).sort();a.equal(files.length,13);console.log(JSON.stringify({status:\"PASS_ROOT_OUTER_COMPLETION_AND_WHOLE_RAW_RECEIPT_BINDING\",files,payloads:files.length,actual_root_checks:r.checks,actual_independent_checks:q.independent_checks}));'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "de3ba7",
+    "wall_time_seconds": 0.00000573,
+    "exit_code": 0,
+    "original_token_count": 139,
+    "output": "{\"status\":\"PASS_ROOT_OUTER_COMPLETION_AND_WHOLE_RAW_RECEIPT_BINDING\",\"files\":[\"01_reused_independent_checker.ATTEMPT.json\",\"01_reused_independent_checker.RECEIPT.json\",\"01_reused_independent_checker.stderr.raw\",\"01_reused_independent_checker.stdout.raw\",\"02_actual_raw_cmp.ATTEMPT.json\",\"02_actual_raw_cmp.RECEIPT.json\",\"02_actual_raw_cmp.stderr.raw\",\"02_actual_raw_cmp.stdout.raw\",\"RECEPTION.md\",\"RESULT.json\",\"ROOT_NATIVE01.json\",\"independent_original.stdout.raw\",\"receive.js\"],\"payloads\":13,\"actual_root_checks\":5098,\"actual_independent_checks\":109613}\n"
+  }
+}

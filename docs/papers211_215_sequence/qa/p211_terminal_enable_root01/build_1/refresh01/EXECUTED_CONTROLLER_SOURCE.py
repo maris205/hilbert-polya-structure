@@ -1,0 +1,724 @@
+#!/usr/bin/python3.10
+"""SOURCE-ONLY preparation: separately authorized terminal refresh/enable/capture.
+
+Derivation: accepted initial prepare_binding.py entry/enable mechanics, complete
+inspect_build_reuse.py semantics, and accepted build_core.py native settlement.
+No helper is imported or source evaluated. Refresh/enable never run an adapter.
+Capture launches the pinned unchanged terminal outer recorder once. This source
+preparation is neither an execution, independent review, root decision, nor view.
+"""
+import hashlib
+import json
+import locale
+import os
+from pathlib import Path
+import re
+import signal
+import stat
+import subprocess
+import sys
+import time
+import traceback
+
+ROOT=Path('/root/autodl-tmp/symbolic_dynamics')
+QA=ROOT/'docs/papers211_215_sequence/qa'
+HERE=QA/'p211_terminal_enable_preparation01'
+SELF=HERE/'terminal_control.py'
+DEST=QA/'p211_terminal_enable_root01'
+PAPER=ROOT/'papers/211-kernel-image-projection-feedback'
+ROUND2=PAPER/'frozen_round2'
+ADAPTER=QA/'p211_round2_preparation01/terminal_build'
+OLD_ADAPTER=QA/'p211_initial_build_01/outer/executed_adapter'
+OLD_BUILD=QA/'p211_initial_build_01'
+OLD_FREEZE=PAPER/'frozen_round0'
+REUSE=ROOT/'docs/papers211_215_sequence/reviews/p211_a/inspect_build_reuse.py'
+PYTHON='/usr/bin/python3.10'
+ENV4={'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC'}
+ENV8={**ENV4,'SOURCE_DATE_EPOCH':'1788825600','FORCE_SOURCE_DATE':'1','openin_any':'p','openout_any':'p'}
+C_NAMES={'terminal_control.py','INPUT_PLAN.json','HOST_SCOPE.json','PHASE_TEMPLATES.disabled.json',
+         'PLAN.md','SOURCE_DERIVATION.diff','SOURCE_DERIVATION_NATIVE.json',
+         'NATIVE_READS.json','PREPARATION_NATIVE.json','SHA256SUMS'}
+PHASES=('refresh','enable','capture')
+DECISIONS={'refresh':'AUTHORIZE_ONE_CURRENT_TERMINAL_KEY_REFRESH_ONLY',
+           'enable':'AUTHORIZE_ONE_P211_SOURCE_ONLY_TERMINAL_BUILD_AFTER_ACCEPTED_ROUND2',
+           'capture':'AUTHORIZE_ONE_ENABLED_P211_TERMINAL_BUILD_CAPTURE'}
+OLD_LOCK_PIN={'bytes':570037,'sha256':'1a879caa4d7bb68fd841e381f37d5ec3e31236ccd6c7b677dbd95492a92bbf87'}
+R2_SEAL_PIN={'bytes':2336,'sha256':'0676174ae316fde3cbb7056c48b4e098d98096a406cd019141f3d0392c5b96d5'}
+READS={}
+HOST=set()
+CHECKS=0
+ACTIVE=None
+COLD=None
+
+def need(ok,label):
+    global CHECKS
+    CHECKS+=1
+    if not ok:
+        raise AssertionError(label)
+
+def pin(raw):
+    return {'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+
+def serialized(value):
+    return (json.dumps(value,sort_keys=True,indent=2,allow_nan=False)+'\n').encode()
+
+def pairs(items):
+    result={}
+    for k,v in items:
+        need(k not in result,'duplicate JSON key')
+        result[k]=v
+    return result
+
+def parse(raw):
+    return json.loads(raw,object_pairs_hook=pairs,
+        parse_constant=lambda v: (_ for _ in ()).throw(ValueError('Nonfinite JSON: '+v)))
+
+def meta(s):
+    return {k:getattr(s,'st_'+v) for k,v in (
+        ('mode','mode'),('device','dev'),('inode','ino'),('uid','uid'),('gid','gid'),
+        ('nlink','nlink'),('size','size'),('mtime_ns','mtime_ns'),('ctime_ns','ctime_ns'))}
+
+def read(path):
+    p=Path(path)
+    need(p.is_absolute() and (p.is_relative_to(ROOT) or str(p) in HOST),'exact allowed original file alias')
+    ls,st=p.lstat(),p.stat()
+    need(stat.S_ISREG(st.st_mode),'ordinary resolved original file')
+    resolved=str(p.resolve(strict=True))
+    link=os.readlink(p) if stat.S_ISLNK(ls.st_mode) else None
+    if p.is_relative_to(ROOT):
+        need(resolved==str(p) and link is None,'ordinary physical workspace original')
+    raw=p.read_bytes()
+    value={**pin(raw),'resolved':resolved,'symlink':link,'stat':meta(st),'lstat':meta(ls)}
+    need(meta(p.stat())==value['stat'] and meta(p.lstat())==value['lstat'] and
+         str(p.resolve(strict=True))==resolved and len(raw)==st.st_size,'complete stable rich read')
+    need(str(p) not in READS or READS[str(p)]==value,('entire repeated original rich key',str(p)))
+    READS[str(p)]=value
+    return raw
+
+def obj(path):
+    return parse(read(path))
+
+def reference(ref,path=None):
+    need(isinstance(ref,dict) and set(ref)=={'path','pin'},'exact evidence reference')
+    p=Path(ref['path'])
+    v=ref['pin']
+    need(isinstance(v,dict) and set(v)=={'bytes','sha256'} and type(v['bytes']) is int and
+         v['bytes']>=0 and isinstance(v['sha256'],str) and re.fullmatch('[0-9a-f]{64}',v['sha256']),
+         'exact typed byte pin')
+    need(p.is_absolute() and p.is_relative_to(ROOT) and
+         (path is None or p==Path(path)),'literal workspace reference role')
+    need(pin(read(p))==v,('entire root reference bytes',str(p)))
+    return p
+
+def entry(path,members=False):
+    p=Path(path)
+    need(p.is_absolute() and (p.is_relative_to(ROOT) or str(p) in HOST),'exact allowed configuration spelling')
+    value={'path':str(p),'present':os.path.lexists(p),'symlink':p.is_symlink(),'resolved':str(p.resolve())}
+    if p.is_symlink():
+        value['link']=os.readlink(p)
+    if value['present']:
+        s=p.stat()
+        if stat.S_ISREG(s.st_mode):
+            value.update(kind='file',**pin(read(p)))
+        elif stat.S_ISDIR(s.st_mode):
+            value['kind']='directory'
+            if members:
+                value['members']=sorted(x.name for x in p.iterdir())
+        elif stat.S_ISCHR(s.st_mode):
+            value.update(kind='character_device',major=os.major(s.st_rdev),minor=os.minor(s.st_rdev))
+        else:
+            value.update(kind='other',mode=stat.S_IFMT(s.st_mode))
+    return value
+
+def snapshot(specs):
+    return {p:entry(p,spec.get('members',False)) for p,spec in sorted(specs.items())}
+
+def tree_names(base):
+    files,dirs,identities=set(),set(),set()
+    need(base.is_dir() and not base.is_symlink() and base.resolve()==base,'ordinary explicit package root')
+    for p in base.rglob('*'):
+        s=p.lstat()
+        need(not stat.S_ISLNK(s.st_mode),'no package symlink')
+        name=str(p.relative_to(base))
+        if stat.S_ISREG(s.st_mode):
+            need(s.st_nlink==1 and (s.st_dev,s.st_ino) not in identities,'distinct ordinary payload inode')
+            identities.add((s.st_dev,s.st_ino))
+            files.add(name)
+        else:
+            need(stat.S_ISDIR(s.st_mode),'no special package entry')
+            dirs.add(name)
+    return files,dirs
+
+def directory_set(names):
+    return {str(p) for n in names for p in Path(n).parents if str(p)!='.'}
+
+def sealed_input(base,expected_pin,count=None):
+    raw=read(base/'SHA256SUMS')
+    need(pin(raw)==expected_pin and raw.endswith(b'\n'),'whole nonself original seal pin')
+    rows={}
+    for line in raw.decode().splitlines():
+        m=re.fullmatch(r'([0-9a-f]{64})  (.+)',line)
+        need(m is not None,'complete manifest grammar')
+        digest,name=m.groups()
+        need(name not in rows and name!='SHA256SUMS' and not Path(name).is_absolute() and
+             all(x not in ('','.','..') for x in name.split('/')),'safe unique nonself payload')
+        need(pin(read(base/name))['sha256']==digest,'entire sealed original payload')
+        rows[name]=digest
+    need(raw==''.join(rows[n]+'  '+n+'\n' for n in sorted(rows)).encode(),'whole sorted seal')
+    names=set(rows)|{'SHA256SUMS'}
+    need(tree_names(base)==(names,directory_set(names)),'entire original file/directory membership')
+    need(count is None or len(rows)==count,'whole original payload count')
+    return rows
+
+def put(name,value):
+    need(ACTIVE is not None,'root-authorized exclusive phase output already created')
+    p=ACTIVE/name
+    need(p.is_relative_to(ACTIVE) and '..' not in Path(name).parts,'only owned new phase output')
+    raw=value if isinstance(value,bytes) else serialized(value)
+    with p.open('xb') as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return pin(raw)
+
+def output_read(path):
+    p=Path(path)
+    need((ACTIVE is not None and p.is_relative_to(ACTIVE)) or
+         (COLD is not None and p.is_relative_to(COLD)),'only exact newly generated output')
+    need(p.is_file() and not p.is_symlink() and p.resolve()==p,'ordinary generated payload')
+    return p.read_bytes()
+
+def future_absences(build,output_started=False):
+    out=Path(build['cold_output'])
+    need(out.parent.is_dir() and not out.parent.is_symlink() and out.parent.resolve()==out.parent,
+         'root must separately create ordinary qa_final parent after accepted Round2')
+    if output_started:
+        need(out.is_dir() and out.resolve()==out and not out.is_symlink(),'ordinary current cold output')
+    else:
+        need(not os.path.lexists(out),'literal cold role absent; no retry or existing partial build')
+    for p in (build['outer_pycache_prefix'],build['inner_pycache_prefix']):
+        need(not os.path.lexists(p),'exact unused cold cache remains absent')
+    values={p:entry(p) for p in build['cwd_relative_paths']}
+    need(len(values)==3 and all(v=={'path':p,'present':False,'symlink':False,'resolved':p}
+                              for p,v in values.items()),'all three actual future-cwd absences')
+    return values
+
+def whole_round2(binding):
+    expected=binding['round2_package']['all_file_pins']
+    need(binding['round2_package']['root']==str(ROUND2) and len(expected)==124 and
+         binding['round2_package']['payload_count']==123 and
+         binding['round2_package']['total_file_count']==124,'whole fixed Round2 roles')
+    need(tree_names(ROUND2)==(set(expected),directory_set(expected)),'entire physical Round2 tree')
+    for n,v in expected.items():
+        need(pin(read(ROUND2/n))==v,'every physical Round2 original byte stream')
+    need(read(ROUND2/'SHA256SUMS')==''.join(expected[n]['sha256']+'  '+n+'\n'
+         for n in sorted(expected) if n!='SHA256SUMS').encode(),'whole Round2 outer manifest')
+    need(all(expected[n]==binding['source_pins'][n] for n in binding['source_pins']),
+         'all nine live/frozen source bindings')
+    return expected
+
+def source_graph(sources):
+    bodies={n:read(PAPER/n).decode() for n in sources}
+    main=bodies['main.tex']
+    names=['math_commands','sections/0_abstract','sections/1_introduction','sections/2_image',
+           'sections/3_clock','sections/4_inverse','sections/5_scope']
+    need(re.findall(r'\\input\{([^}]+)\}',main)==names,'whole exact ordered source graph')
+    need('\\documentclass[11pt,a4paper]{amsart}' in main and
+         '\\bibliographystyle{amsplain}' in main and '\\bibliography{references}' in main,
+         'same class/style/database and parameters')
+    packages=[p for group in re.findall(r'\\usepackage(?:\[[^\]]*\])?\{([^}]+)\}',main) for p in group.split(',')]
+    need(packages==['fontenc','lmodern','geometry','amsmath','amssymb','mathtools',
+         'booktabs','microtype','hyperref'],'exact package order')
+    need(sorted(p.name for p in (PAPER/'sections').iterdir())==
+         sorted(Path(n).name for n in sources if n.startswith('sections/')),'exact six-section membership')
+
+def load_context(plan,number):
+    global HOST
+    need(plan['schema']=='p211-terminal-exact-enable-capture-source-plan-v1' and
+         plan['status']=='SOURCE_ONLY_NOT_RUN_NOT_ENABLED_NOT_AUTHORIZED' and
+         plan['workspace_input_count']==len(plan['workspace_input_pins'])==272,'whole prepared input-plan schema')
+    for p,v in plan['workspace_input_pins'].items():
+        need(Path(p).is_relative_to(ROOT) and pin(read(p))==v,'all272 original workspace input pins')
+    for p,t in plan['exact_input_package_trees'].items():
+        need(tree_names(Path(p))==(set(t['files']),set(t['directories'])),'all complete accepted source/gate trees')
+    refs=plan['dependency_references']
+    for r in refs.values():
+        reference(r)
+    old=obj(refs['original_lock']['path'])
+    need(refs['original_lock']['pin']==OLD_LOCK_PIN and len(old)==15,'entire accepted original15field lock')
+    initial=obj(refs['initial_binding']['path'])
+    key=obj(refs['prior_read_key']['path'])
+    configuration=obj(refs['prior_configuration_key']['path'])
+    mapping={r['logical_path']:r for r in obj(refs['historical_mapping']['path'])}
+    need(len(key)==1299 and len(configuration)==843,'all historical1299/843 keys')
+    physical,substitutions={},{}
+    for p,v in key.items():
+        target=mapping[p]['physical_original'] if p in mapping else p
+        if p in mapping:
+            need(mapping[p]['pin']==v,'whole exact historical substitution pin')
+            substitutions[p]=target
+        need(target not in physical or physical[target]==v,'no conflicting physical old read key')
+        physical[target]=v
+    need(substitutions==plan['exact_historical_substitutions'] and len(substitutions)==2,
+         'only two exact immutable historical navigation substitutions')
+    host={p for p in set(old['selector_specs'])|set(configuration)|set(physical)|
+          {v['resolved'] for v in old['entries'].values() if v.get('kind')=='file'}
+          if not Path(p).is_relative_to(ROOT)}
+    scope=obj(HERE/'HOST_SCOPE.json')
+    need(scope['entries']==len(host)==841 and scope['paths']==sorted(host),'entire prior-only841 host spelling list')
+    HOST=host
+    need(len(old['selector_specs'])==len(old['entries'])==len(old['selection_reasons'])==840 and
+         set(old['selector_specs'])==set(old['entries'])==set(old['selection_reasons']) and
+         len(old['queries'])==len(old['query_commands'])==16 and len(old['ldd_elf_inputs'])==33 and
+         old['environment']==ENV8,'entire selector/reason/query/ELF/environment scope')
+    build=plan['builds'][str(number)]
+    candidate=obj(reference(build['candidate_lock']))
+    disabled=obj(reference(build['disabled_binding']))
+    expected=json.loads(json.dumps(old))
+    expected.update(schema='p211-terminal-bounded-dependency-lock-v1',
+        status='ROOT_BOUND_EXACT_INHERITED_HOST_KEY_NEW_ADAPTER_ONLY',
+        code_observations=plan['new_adapter_pins'],
+        terminal_derivation={'original_lock':refs['original_lock'],
+            'allowed_changes':['schema','status','code_observations','terminal_derivation'],
+            'host_candidate_extension':False})
+    need(candidate==expected and len(candidate)==16,'entire exact four-field lock derivation')
+    need(disabled['enabled'] is False and disabled['cwd_relative_configuration'] is None and
+         disabled['build_number']==number and disabled['output']==build['cold_output'] and
+         disabled['environment']==ENV8 and disabled['dependency_lock']==build['candidate_lock'],
+         'whole literal disabled candidate and separate cold role')
+    need(disabled['source_pins']==plan['source_pins']==initial['source_pins']==old['source_observations'] and
+         disabled['original_adapter_pins']==plan['original_adapter_pins']==initial['adapter_pins']==old['code_observations'] and
+         disabled['adapter_pins']==plan['new_adapter_pins'],'entire source/adapter lineage')
+    for base,values in ((PAPER,plan['source_pins']),(ADAPTER,plan['new_adapter_pins']),
+                        (OLD_ADAPTER,plan['original_adapter_pins'])):
+        for n,v in values.items():
+            need(pin(read(base/n))==v,'all actual live/new/original source bytes')
+    need(len(plan['source_pins'])==9 and sum(v['bytes'] for v in plan['source_pins'].values())==20508 and
+         len(plan['new_adapter_pins'])==len(plan['original_adapter_pins'])==5,'exact9/5/5 source inventory')
+    source_graph(plan['source_pins'])
+    whole_round2(disabled)
+    r2=plan['whole_round2_original_gate_seal']
+    need(r2['pin']==R2_SEAL_PIN,'exact root-accepted final Round2 original gate')
+    sealed_input(Path(r2['path']).parent,R2_SEAL_PIN,25)
+    need(b'PASS_ROOT_PHYSICAL_ROUND2_ORIGINAL_RECEPTION' in
+         read(plan['gate_references']['whole_round2_root_reception']['path']),'actual accepted Round2 prerequisite')
+    old_native=obj(refs['historical_comparator_native']['path'])
+    old_raw=old_native['result']['output'].encode()
+    old_result=parse(old_raw)
+    need(old_native['result']['exit_code']==0 and 'session_id' not in old_native['result'] and
+         pin(old_raw)==plan['prior_comparator_whole_stdout'] and len(old_raw)==6223 and
+         sorted(old_result)==plan['prior_comparator_complete_fields'] and
+         old_result['checks']==5974 and old_result['prior_read_key_entries_checked_twice']==1299 and
+         old_result['configuration_entries_checked_twice']==843 and old_result['fresh_build'] is False and
+         old_result['scientific_execution'] is False,'whole actual comparator baseline, not a new run')
+    for name,base,count in (('build',OLD_BUILD,362),('initial_build_audit',QA/'p211_initial_build_independent_reception',18),
+                            ('freeze',OLD_FREEZE,32)):
+        sealed_input(base,old_result['manifests'][name],count)
+    return {'old':old,'candidate':candidate,'disabled':disabled,'physical_key':physical,
+            'old_configuration':configuration,'old_raw':old_raw,'old_result':old_result,'build':build}
+
+def guard(context,plan,output_started=False):
+    old=context['old']
+    selected=snapshot(old['selector_specs'])
+    need(selected==old['entries'] and len(selected)==840,'all840 entire current inherited selector entries')
+    expected=context['old_configuration']
+    old_current={p:entry(p,'members' in v) for p,v in sorted(expected.items())}
+    need(old_current==expected and len(old_current)==843,'all843 entire historical configurations')
+    for relative in ('inner/CONFIGURATION_AFTER.json','outer/CONFIGURATION_BEFORE.json','outer/CONFIGURATION_AFTER.json'):
+        need(obj(OLD_BUILD/relative)==expected,'whole saved original configuration equality')
+    for p,v in context['physical_key'].items():
+        need(pin(read(p))==v,'all1299 current original file byte keys')
+    for p,v in plan['workspace_input_pins'].items():
+        need(pin(read(p))==v,'all272 preparation originals remain unchanged')
+    whole_round2(context['disabled'])
+    future=future_absences(context['build'],output_started)
+    need(not os.path.lexists(ACTIVE/'unused_controller_cache'),'actual unused controller cache still absent')
+    return {'inherited840':selected,'historical843':old_current,
+            'current843':{**selected,**future},'cwd_relative':future}
+
+
+def runtime_sample(configuration):
+    coverage={v['resolved']:{k:v[k] for k in ('bytes','sha256')}
+              for v in configuration.values() if v.get('kind')=='file'}
+    coverage[str(SELF)]=pin(read(SELF))
+    modules={}
+    for name,module in sorted(sys.modules.items()):
+        spelling=getattr(module,'__file__',None)
+        if not spelling:
+            continue
+        p=Path(spelling)
+        need(p.is_absolute() and str(p) in set(coverage)|HOST,'prebound module spelling before metadata')
+        need(p.suffix not in ('.pyc','.pyo'),'no imported bytecode module')
+        v=pin(read(p))
+        need(coverage.get(str(p.resolve()))==v,'every current module in fixed prelock')
+        modules[name]={'path':str(p),'resolved':str(p.resolve()),**v}
+    raw=Path('/proc/self/maps').read_bytes()
+    mapped={}
+    for line in raw.decode().splitlines():
+        columns=line.split(None,5)
+        if len(columns)==6 and columns[5].startswith('/'):
+            p=Path(columns[5])
+            need(str(p) in HOST,'prebound mapped path before host metadata')
+            v=pin(read(p))
+            need(coverage.get(str(p.resolve()))==v,'all current mapped files in fixed prelock')
+            mapped[str(p)]=v
+    return {'modules':modules,'mapped_files':mapped,'maps_raw':raw.decode(),'maps_pin':pin(raw),
+            'locale_ctype':locale.setlocale(locale.LC_CTYPE),'argv':sys.orig_argv,
+            'cwd':str(Path.cwd()),'environment':dict(os.environ),'flags':str(sys.flags),
+            'sys_path':sys.path,'pycache_prefix':sys.pycache_prefix,
+            'scope':'Bounded current parent modules/maps and owned-session metadata; not OS-hermetic tracing.'}
+
+def session_members(sid):
+    members=[]
+    for name in os.listdir('/proc'):
+        if not name.isdecimal():
+            continue
+        try:
+            raw=Path('/proc',name,'stat').read_text()
+            fields=raw[raw.rfind(')')+2:].split()
+            if int(fields[3])==sid:
+                members.append({'pid':int(name),'state':fields[0],'ppid':int(fields[1]),
+                    'pgrp':int(fields[2]),'session':int(fields[3]),'starttime':int(fields[19])})
+        except (FileNotFoundError,ProcessLookupError):
+            continue
+    return sorted(members,key=lambda x:x['pid'])
+
+def native(label,argv,environment,inputs,timeout):
+    work=ACTIVE/label
+    work.mkdir(mode=0o700)
+    prefix=label+'/'
+    row={'schema':'p211-terminal-controller-native-attempt-v1','label':label,
+         'argv':argv,'cwd':str(ROOT),'environment':environment,
+         'stdin':{'path':'/dev/null','policy':'DEVNULL'},'timeout_seconds':timeout,
+         'requested_new_session':True,'attempted_epoch':time.time(),'expected_exit_codes':[0]}
+    put(prefix+'ATTEMPT.json',row)
+    proc,error,reason,native_exit=None,None,'NOT_SPAWNED',None
+    settled,members,interventions=False,[],[]
+    try:
+        direct={p:entry(p) for p in [argv[0],'/dev/null',*map(str,inputs)]}
+        need(direct['/dev/null'].get('kind')=='character_device' and
+             (direct['/dev/null']['major'],direct['/dev/null']['minor'])==(1,3),'exact native stdin device')
+        put(prefix+'INPUTS_BEFORE.json',direct)
+        with (work/'stdout.raw').open('xb') as stdout,(work/'stderr.raw').open('xb') as stderr:
+            proc=subprocess.Popen(argv,cwd=ROOT,env=environment,stdin=subprocess.DEVNULL,
+                                  stdout=stdout,stderr=stderr,start_new_session=True)
+            put(prefix+'SPAWNED.json',{'pid':proc.pid,'session':proc.pid,'spawned_epoch':time.time()})
+            native_exit=proc.wait(timeout=timeout)
+            reason='NATIVE_EXIT'
+    except subprocess.TimeoutExpired:
+        reason,error='TIMEOUT',traceback.format_exc()
+    except BaseException:
+        reason,error='SPAWN_OR_RECORDER_EXCEPTION',traceback.format_exc()
+    if proc is not None:
+        try:
+            members=session_members(proc.pid)
+            if members or proc.poll() is None:
+                for member in members:
+                    try:
+                        if member in session_members(proc.pid):
+                            os.kill(member['pid'],signal.SIGKILL)
+                            interventions.append(member)
+                    except ProcessLookupError:
+                        pass
+                try:
+                    os.killpg(proc.pid,signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                native_exit=proc.wait(timeout=10)
+                if error is None:
+                    error='Owned session remained after native wait; success prohibited.'
+            native_exit=proc.wait(timeout=10)
+            remaining=session_members(proc.pid)
+            settled=not remaining
+            row['remaining_session_members']=remaining
+        except BaseException:
+            settled=False
+            error=(error or '')+traceback.format_exc()
+    if proc is None:
+        reason='NO_NATIVE_HANDLE_UNKNOWN_LAUNCH'
+    row.update(native_handle_received=proc is not None,
+        launch_outcome='KNOWN_NATIVE_HANDLE' if proc is not None else 'UNKNOWN_NO_NATIVE_HANDLE',
+        native_exit_code=native_exit,wrapper_reason=reason,error=error,ended_epoch=time.time(),
+        session_members_at_settlement=members,owned_session_interventions=interventions,streams_settled=settled)
+    if not settled:
+        put(prefix+'UNCLOSED.json',row)
+        raise RuntimeError('UNCLOSED_NATIVE_STREAMS: no final hashes or seal')
+    row['streams']={n:pin(output_read(work/n)) for n in ('stdout.raw','stderr.raw') if (work/n).is_file()}
+    try:
+        after={p:entry(p) for p in direct}
+        put(prefix+'INPUTS_AFTER.json',after)
+        row['direct_inputs_equal']=after==direct
+    except BaseException:
+        row['direct_inputs_equal']=False
+        row['error']=(row['error'] or '')+traceback.format_exc()
+    row['successful']=row['error'] is None and native_exit==0 and row['direct_inputs_equal'] is True
+    put(prefix+'RECEIPT.json',row)
+    return row,output_read(work/'stdout.raw'),output_read(work/'stderr.raw')
+
+def reuse(context,label):
+    row,out,err=native(label,[PYTHON,'-I','-S','-B',str(REUSE)],ENV4,
+        [REUSE,QA/'p211_initial_build_independent_reception/run01/READ_INPUTS_BEFORE.json',
+         OLD_BUILD/'inner/CONFIGURATION_BEFORE.json',
+         QA/'p211_initial_build_adoption01/HISTORICAL_MAPPING.json'],180)
+    need(row['successful'] and err==b'' and out==context['old_raw'] and parse(out)==context['old_result'],
+         'actual entire6223-byte unchanged comparator result; complete1299/843 checked twice')
+    return row
+
+def pending(base):
+    return list(base.rglob('UNCLOSED.json')) or [p for p in base.rglob('ATTEMPT.json')
+                                               if not (p.parent/'RECEIPT.json').is_file()]
+
+def closed_output(base):
+    need(not pending(base),'no unsettled/incomplete native subtree before output hashes')
+    raw=output_read(base/'SHA256SUMS')
+    rows={}
+    for line in raw.decode().splitlines():
+        m=re.fullmatch(r'([0-9a-f]{64})  (.+)',line)
+        need(m is not None,'whole recorded output seal grammar')
+        digest,n=m.groups()
+        need(n not in rows and n!='SHA256SUMS' and not Path(n).is_absolute() and
+             all(x not in ('','.','..') for x in n.split('/')),'safe output seal member')
+        need(pin(output_read(base/n))['sha256']==digest,'whole generated payload hash')
+        rows[n]=digest
+    names=set(rows)|{'SHA256SUMS'}
+    need(raw==''.join(rows[n]+'  '+n+'\n' for n in sorted(rows)).encode() and
+         tree_names(base)==(names,directory_set(names)),'complete actual generated output tree/seal')
+    return {'payloads':len(rows),'files':len(names),'seal':pin(raw)}
+
+def seal_phase():
+    need(not pending(ACTIVE),'unsettled or incomplete phase cannot be sealed')
+    names,dirs=tree_names(ACTIVE)
+    need('SHA256SUMS' not in names,'never reseal a previous phase')
+    raw=''.join(pin(output_read(ACTIVE/n))['sha256']+'  '+n+'\n' for n in sorted(names)).encode()
+    value=put('SHA256SUMS',raw)
+    return {'payloads':len(names),'files':len(names)+1,'pin':value}
+
+def required_paths(plan,number,phase):
+    parent=Path(plan['builds'][str(number)]['root_parent'])
+    result={'controller_source_reception':DEST/'SOURCE_RECEPTION.md'}
+    if phase in ('enable','capture'):
+        result.update(current_key_reception=parent/'CURRENT_KEY_RECEPTION.md',
+            refresh_result=parent/'refresh01/RESULT.json',refresh_seal=parent/'refresh01/SHA256SUMS')
+    if phase=='capture':
+        result.update(enabled_binding_reception=parent/'ENABLED_BINDING_RECEPTION.md',
+            enabled_binding=parent/'enable01/BINDING.json',enable_seal=parent/'enable01/SHA256SUMS')
+    return result
+
+def grant_read(path,phase,number,plan,expected_pin=None):
+    raw=read(path)
+    if expected_pin is not None:
+        need(pin(raw)==expected_pin,'entire exact CLI/root authority byte pin')
+    fence=chr(96)*3
+    blocks=re.findall('^'+fence+r'json\n(.*?)\n'+fence+'$',raw.decode(),re.MULTILINE|re.DOTALL)
+    need(len(blocks)==1,'one explicit root authority JSON block')
+    grant=parse(blocks[0])
+    need(set(grant)=={'schema','issuer','phase','build_number','decision','controller','preparation_seal',
+        'input_plan','phase_output','cold_output','controller_environment','build_environment','cwd',
+        'required_receipts','new_science','new_page_views','terminal_acceptance','external'},
+        'whole exact root grant schema')
+    build=plan['builds'][str(number)]
+    expected={**grant,'schema':'p211-terminal-controller-root-authority-v1','issuer':'/root','phase':phase,
+        'build_number':number,'decision':DECISIONS[phase],'controller':{'path':str(SELF),'pin':pin(read(SELF))},
+        'input_plan':{'path':str(HERE/'INPUT_PLAN.json'),'pin':pin(read(HERE/'INPUT_PLAN.json'))},
+        'phase_output':build['phase_outputs'][phase],'cold_output':build['cold_output'],
+        'controller_environment':ENV4,'build_environment':ENV8,'cwd':str(ROOT),
+        'new_science':0,'new_page_views':0,'terminal_acceptance':False,'external':'OWNER_AMBER / HOLD_EXTERNAL'}
+    need(serialized(grant)==serialized(expected),'all typed literal root phase/source/output decisions')
+    reference(grant['preparation_seal'],HERE/'SHA256SUMS')
+    fixed,dynamic=plan['gate_references'],required_paths(plan,number,phase)
+    need(set(grant['required_receipts'])==set(fixed)|set(dynamic),'every separate actual root prerequisite')
+    for role,ref in fixed.items():
+        need(grant['required_receipts'][role]==ref,'entire accepted original root gate pin')
+        reference(ref)
+    for role,p in dynamic.items():
+        reference(grant['required_receipts'][role],p)
+    return grant,raw
+
+def prior_phase(grant,plan,number,phase):
+    refs=grant['required_receipts']
+    if phase=='refresh':
+        return None
+    result=obj(refs['refresh_result']['path'])
+    need(result['status']=='PASS_CURRENT_TERMINAL_KEYS_PENDING_ROOT_RECEPTION' and
+         result['phase']=='refresh' and result['build_number']==number and
+         result['new_builds']==0 and result['enabled_binding_created'] is False and
+         result['scope_counts']==plan['scope_counts'],'whole actual current-key refresh result')
+    sealed_input(Path(refs['refresh_seal']['path']).parent,refs['refresh_seal']['pin'])
+    if phase=='capture':
+        sealed_input(Path(refs['enable_seal']['path']).parent,refs['enable_seal']['pin'])
+    return result
+
+def enabled_binding(context,plan,number,enable_grant,enable_authority_pin,configuration):
+    disabled=context['disabled']
+    value=json.loads(json.dumps(disabled))
+    build=context['build']
+    enable_dir=Path(build['phase_outputs']['enable'])
+    value.update(enabled=True,status='ROOT_AUTHORIZED_ONE_P211_TERMINAL_COLD_BUILD',
+        dependency_lock={'path':str(enable_dir/'DEPENDENCY_LOCK.json'),'pin':build['candidate_lock']['pin']},
+        cwd_relative_configuration=configuration,
+        _note='Exactly one separately root-authorized terminal cold build; no science, actual view or acceptance.')
+    value['receipt_references'].update(
+        whole_round2_root_reception=plan['gate_references']['whole_round2_root_reception'],
+        fresh_terminal_source_and_binding_reception=enable_grant['required_receipts']['controller_source_reception'],
+        complete_inherited_build_key_and_settings_recheck=enable_grant['required_receipts']['current_key_reception'])
+    value['root_authorization']={'issuer':'/root','decision':DECISIONS['enable'],'build_number':number,
+        'record':{'path':build['authority_paths']['enable'],'pin':enable_authority_pin}}
+    changed={'enabled','status','dependency_lock','cwd_relative_configuration','_note','receipt_references','root_authorization'}
+    need(set(value)==set(disabled) and all(value[k]==disabled[k] for k in set(value)-changed),
+         'only seven enabled binding field roles changed; candidates immutable')
+    return value
+
+def main():
+    global ACTIVE,COLD
+    need(len(sys.argv)==6 and sys.argv[1] in PHASES and sys.argv[2] in ('1','2') and
+         re.fullmatch('[1-9][0-9]*',sys.argv[4]) and re.fullmatch('[0-9a-f]{64}',sys.argv[5]),
+         'exact phase/build/authority-path/bytes/hash arguments')
+    phase,number=sys.argv[1],int(sys.argv[2])
+    need(Path.cwd()==ROOT and Path(__file__).absolute()==SELF and dict(os.environ)==ENV4,
+         'literal original controller source/cwd/ENV4')
+    plan=obj(HERE/'INPUT_PLAN.json')
+    build=plan['builds'][str(number)]
+    phase_dir=Path(build['phase_outputs'][phase])
+    COLD=Path(build['cold_output'])
+    authority_path=Path(build['authority_paths'][phase])
+    need(Path(sys.argv[3])==authority_path and phase_dir==DEST/('build_'+str(number))/(phase+'01') and
+         COLD==PAPER/'qa_final'/('cold_build_'+str(number)),'fixed one-use paths; no arbitrary destinations')
+    need(sys.executable==PYTHON and sys.version_info[:2]==(3,10) and
+         sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode and not sys.flags.optimize and
+         sys.pycache_prefix==str(phase_dir/'unused_controller_cache') and
+         sys.path==['/usr/lib/python310.zip','/usr/lib/python3.10','/usr/lib/python3.10/lib-dynload'] and
+         not os.path.lexists(sys.pycache_prefix),'actual isolated controller runtime/cache roles')
+    need(sys.orig_argv==[PYTHON,'-I','-S','-B','-X','pycache_prefix='+sys.pycache_prefix,str(SELF),*sys.argv[1:]],
+         'whole exact current interpreter/controller argv')
+    grant,authority_raw=grant_read(authority_path,phase,number,plan,
+        {'bytes':int(sys.argv[4]),'sha256':sys.argv[5]})
+    sealed_input(HERE,grant['preparation_seal']['pin'],9)
+    need(tree_names(HERE)==(C_NAMES,set()),'entire ten-file immutable controller preparation')
+    need(phase_dir.parent.is_dir() and phase_dir.parent.resolve()==phase_dir.parent and
+         not phase_dir.parent.is_symlink() and not os.path.lexists(phase_dir),'ordinary root parent; phase unused')
+    phase_dir.mkdir(mode=0o700)
+    ACTIVE=phase_dir
+    put('EXECUTED_CONTROLLER_SOURCE.py',read(SELF))
+    put('AUTHORITY.snapshot.md',authority_raw)
+    context=load_context(plan,number)
+    earlier=prior_phase(grant,plan,number,phase)
+    before=guard(context,plan)
+    put('CONFIGURATION_BEFORE.json',before)
+    put('CONTROLLER_RUNTIME_BEFORE.json',runtime_sample(before['inherited840']))
+    if earlier is not None:
+        expected_future=obj(Path(build['phase_outputs']['refresh'])/'CONFIGURATION_AFTER.json')['cwd_relative']
+        need(expected_future==before['cwd_relative'],'all refresh and new current cwd observations agree')
+    binding=None
+    if phase=='capture':
+        enable_grant,enable_raw=grant_read(Path(build['authority_paths']['enable']),'enable',number,plan)
+        need(enable_grant['required_receipts']['current_key_reception']==grant['required_receipts']['current_key_reception'],
+             'capture uses exact build-specific accepted current-key receipt')
+        binding=enabled_binding(context,plan,number,enable_grant,pin(enable_raw),before['cwd_relative'])
+        need(obj(grant['required_receipts']['enabled_binding']['path'])==binding,'entire enabled binding reconstruction')
+        need(read(binding['dependency_lock']['path'])==read(build['candidate_lock']['path']),
+             'entire enabled lock copy byte-identical to candidate')
+        reference(binding['root_authorization']['record'])
+    prior=dict(READS)
+    put('ORIGINAL_INPUTS_BEFORE.json',prior)
+    native_records,failures=[],[]
+    actual_outer=None
+    try:
+        native_records.append(reuse(context,'reuse_before'))
+        if phase=='capture':
+            binding_path=Path(grant['required_receipts']['enabled_binding']['path'])
+            argv=[PYTHON,'-I','-S','-B','-X','pycache_prefix='+build['outer_pycache_prefix'],
+                  str(ADAPTER/'launch_build.py'),'--binding',str(binding_path),
+                  '--binding-sha256',grant['required_receipts']['enabled_binding']['pin']['sha256']]
+            row,raw,stderr=native('terminal_outer',argv,ENV8,
+                [binding_path,Path(binding['dependency_lock']['path']),*(ADAPTER/n for n in plan['new_adapter_pins'])],4500)
+            native_records.append(row)
+            need(row['successful'],'actual sole outer build failed; preserve and do not retry')
+            actual_outer=parse(raw)
+            need(actual_outer['status']=='TERMINAL_BUILD_CAPTURED_PENDING_ROOT_INSPECTION' and
+                 actual_outer['build_acceptance'] is False and actual_outer['terminal_acceptance'] is False and
+                 actual_outer['visual_review']=='NOT_VIEWED' and actual_outer['scientific_executions']==0,
+                 'actual outer result stays recorded, not accepted/viewed')
+    except BaseException:
+        failures.append(traceback.format_exc())
+    # Never hash/seal a live native tree or launch another checker after unknown settlement.
+    need(not pending(ACTIVE) and not pending(COLD),'unclosed native tree: retain partials, no after launch or seal')
+    if phase=='capture' and (ACTIVE/'terminal_outer/RECEIPT.json').is_file():
+        try:
+            native_records.append(reuse(context,'reuse_after'))
+        except BaseException:
+            failures.append(traceback.format_exc())
+    need(not pending(ACTIVE),'unclosed after-comparator: no final hashes or seal')
+    after=None
+    try:
+        after=guard(context,plan,output_started=phase=='capture' and os.path.lexists(COLD))
+        put('CONFIGURATION_AFTER.json',after)
+        need(after==before,'entire840/843/current843/cwd before/after relation')
+    except BaseException:
+        failures.append(traceback.format_exc())
+    try:
+        put('CONTROLLER_RUNTIME_AFTER.json',runtime_sample(before['inherited840']))
+    except BaseException:
+        failures.append(traceback.format_exc())
+    try:
+        for p,v in prior.items():
+            read(p)
+            need(READS[p]==v,'complete original rich input endpoints close')
+        need(READS==prior,'all original inputs pre-bound; no post-run learned dependency')
+        put('ORIGINAL_INPUTS_AFTER.json',READS)
+    except BaseException:
+        failures.append(traceback.format_exc())
+    if failures:
+        put('CLOSURE_FAILURES.json',{'failures':failures,'native_commands':native_records,'terminal_acceptance':False})
+        raise RuntimeError('Failed native/current-key/closure evidence retained; no binding, retry or acceptance.')
+    enabled_ref,cold_result=None,None
+    if phase=='enable':
+        lock_raw=read(build['candidate_lock']['path'])
+        need(put('DEPENDENCY_LOCK.json',lock_raw)==build['candidate_lock']['pin'],'separate unchanged enabled lock')
+        binding=enabled_binding(context,plan,number,grant,pin(authority_raw),after['cwd_relative'])
+        enabled_ref={'path':str(ACTIVE/'BINDING.json'),'pin':put('BINDING.json',binding)}
+    if phase=='capture':
+        cold_result=closed_output(COLD)
+        outer_saved=parse(output_read(COLD/'outer/RESULT.json'))
+        need(actual_outer=={**outer_saved,'seal':{'payloads':cold_result['payloads'],'manifest':cold_result['seal']}},
+             'entire actual outer stdout equals saved result plus actual nonself seal')
+        inner=parse(output_read(COLD/'inner/RESULT.json'))
+        need(inner['status']=='TERMINAL_BUILD_RECORDED_NOT_VIEWED_NOT_ACCEPTED' and
+             inner['build_number']==number and inner['visual_review']=='NOT_VIEWED' and
+             inner['build_acceptance'] is False and inner['terminal_acceptance'] is False and
+             inner['paper_completion'] is False and inner['scientific_executions']==0 and
+             [p['label'] for p in inner['passes']]==['pass1','bibtex','pass2','pass3'],
+             'actual four-pass terminal result; no acceptance')
+        need(parse(output_read(COLD/'inner/SOURCE_ONLY_INITIAL.json'))==plan['source_pins'],
+             'entire recorded initial cold input set is nine sources only')
+        for n,v in plan['source_pins'].items():
+            need(pin(output_read(COLD/'inner/source_only'/n))==v,'all nine final copied source bytes')
+        cold_result.update(native_commands=len(inner['native_commands']),pages=inner['measurements']['pages'],
+            pdf=inner['measurements']['pdf'],visual_review='NOT_VIEWED',acceptance=False)
+    result={'status':{'refresh':'PASS_CURRENT_TERMINAL_KEYS_PENDING_ROOT_RECEPTION',
+        'enable':'ENABLED_TERMINAL_BINDING_CREATED_NO_BUILD_PENDING_ROOT_RECEPTION',
+        'capture':'TERMINAL_BUILD_CAPTURED_PENDING_COMPLETE_ROOT_ARTIFACT_AND_PAGE_RECEPTION'}[phase],
+        'phase':phase,'build_number':number,'checks':CHECKS,'read_paths':len(READS),
+        'scope_counts':plan['scope_counts'],'source':pin(read(SELF)),'input_plan':pin(read(HERE/'INPUT_PLAN.json')),
+        'authority':pin(authority_raw),'scope_originals_before_after_equal':True,
+        'native_commands':native_records,'enabled_binding_created':phase=='enable','enabled_binding':enabled_ref,
+        'cold_output':str(COLD),'cold_build':cold_result,'new_builds':1 if phase=='capture' else 0,
+        'new_science':0,'new_page_views':0,'independent_review':False,'build_acceptance':False,
+        'terminal_acceptance':False,'paper_complete':False,'external':'OWNER_AMBER / HOLD_EXTERNAL'}
+    put('RESULT.json',result)
+    final_seal=seal_phase()
+    print(json.dumps({'status':result['status'],'phase':phase,'build_number':number,'checks':result['checks'],
+        'read_paths':result['read_paths'],'result':{'path':str(ACTIVE/'RESULT.json'),'pin':pin(serialized(result))},
+        'seal':final_seal,'new_builds':result['new_builds'],'new_science':0,'new_page_views':0,
+        'terminal_acceptance':False},sort_keys=True))
+
+if __name__=='__main__':
+    try:
+        main()
+    except BaseException:
+        failure={'status':'FAIL_PRESERVED_NO_RETRY_NO_IMPLICIT_ENABLE_OR_ACCEPTANCE','checks':CHECKS,
+                 'traceback':traceback.format_exc(),'READ_INPUTS_PARTIAL':READS,
+                 'phase_output_created':ACTIVE is not None,'terminal_acceptance':False}
+        if ACTIVE is not None:
+            put('FAILURE.json',failure)
+        print(json.dumps(failure,sort_keys=True))
+        raise SystemExit(1)

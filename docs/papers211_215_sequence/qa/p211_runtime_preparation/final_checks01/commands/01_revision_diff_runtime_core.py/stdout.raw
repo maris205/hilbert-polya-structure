@@ -1,0 +1,28 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/discovery01/source_snapshots/runtime_core.py	2026-09-08 17:27:58.836021021 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/runtime_core.py	2026-09-08 17:31:50.009619504 +0800
+@@ -231,6 +231,25 @@
+                 except BaseException as settlement_error:
+                     settlement = {'quiescent': False, 'owned_pgid': process.pid, 'settlement_failure': repr(settlement_error)}
+                 code = process.returncode
++        except BaseException as exc:
++            # An audit-hook failure/interruption before Popen returns is not
++            # evidence that no process exists. Do not invent SPAWN_FAILED or
++            # finalize streams without a native handle and settled identity.
++            failure = repr(exc)
++            if process is not None:
++                try:
++                    settlement = settle_group(process, terminate=True)
++                except BaseException as settlement_error:
++                    settlement = {'quiescent': False, 'owned_pgid': process.pid,
++                                  'settlement_failure': repr(settlement_error)}
++            UNFINALIZED_NATIVE.append(label)
++            write_json(folder / 'UNFINALIZED_NATIVE.json', {**entry, 'ended_utc': now(),
++                'status': 'NO_COMPLETED_SPAWN_OR_COMMAND_RESULT',
++                'pid': process.pid if process is not None else None,
++                'process_group_settlement': settlement, 'failure': failure,
++                'output_hashes_not_finalized': True,
++                'stdout_path': 'stdout.raw', 'stderr_path': 'stderr.raw'})
++            raise RuntimeError('unknown pre-return native outcome: preserve attempt without a stream seal') from exc
+     if process is not None and (settlement is None or not settlement['quiescent']):
+         UNFINALIZED_NATIVE.append(label)
+         write_json(folder / 'UNFINALIZED_NATIVE.json', {**entry, 'ended_utc': now(),

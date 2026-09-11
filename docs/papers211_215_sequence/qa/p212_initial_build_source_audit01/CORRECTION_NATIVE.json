@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "/usr/bin/diff -u -- docs/papers211_215_sequence/qa/p212_initial_build_source_audit01/inspect_source.js docs/papers211_215_sequence/qa/p212_initial_build_source_audit01/inspect_source02.js",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "login": false,
+    "max_output_tokens": 2000
+  },
+  "result": {
+    "chunk_id": "80908d",
+    "wall_time_seconds": 0.0000048,
+    "exit_code": 1,
+    "original_token_count": 310,
+    "output": "--- docs/papers211_215_sequence/qa/p212_initial_build_source_audit01/inspect_source.js\t2026-09-09 12:37:07.806612542 +0800\n+++ docs/papers211_215_sequence/qa/p212_initial_build_source_audit01/inspect_source02.js\t2026-09-09 12:38:36.890301173 +0800\n@@ -28,7 +28,10 @@\n function workspace(p) { need(p.startsWith(ROOT+'/'),'absolute input stays in workspace'); return p.slice(ROOT.length+1); }\n function envelope(record,label) {\n   const keys=Object.keys(record).sort();\n-  need(util.isDeepStrictEqual(keys,['request','result']) || util.isDeepStrictEqual(keys,['path','request','result']),\n+  const originalMetadataEnvelope = label==='author_complete_metadata' &&\n+    util.isDeepStrictEqual(keys,['request','result','scope']) &&\n+    record.scope==='Actual author-side workspace metadata execution, not submitted-source execution or independent review.';\n+  need(originalMetadataEnvelope || util.isDeepStrictEqual(keys,['request','result']) || util.isDeepStrictEqual(keys,['path','request','result']),\n        'complete actual outer schema '+label);\n   const r=record.result,q=record.request;\n   eq(Object.keys(r).sort(),['chunk_id','exit_code','original_token_count','output','wall_time_seconds'],'all actual native result fields '+label);\n"
+  }
+}

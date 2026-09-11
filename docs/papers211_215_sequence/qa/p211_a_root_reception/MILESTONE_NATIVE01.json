@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "/usr/bin/python3.10 -I -S -B - <<'PY'\nfrom hashlib import sha256\nimport json,re\nfrom pathlib import Path\nroot=Path('/root/autodl-tmp/symbolic_dynamics');qa=root/'docs/papers211_215_sequence/qa'\ninputs=json.loads((qa/'p211_a_binding_closure/INPUTS.json').read_bytes())\nfor spelling,pin in inputs.items():\n body=Path(spelling).read_bytes();assert {'bytes':len(body),'sha256':sha256(body).hexdigest()}==pin,spelling\nfreeze=root/'papers/211-kernel-image-projection-feedback/frozen_round0'\nfor line in (freeze/'SHA256SUMS').read_text().splitlines():\n digest,name=line.split('  ',1);a=(freeze/name).read_bytes();b=(freeze.parent/name).read_bytes();assert a==b and sha256(a).hexdigest()==digest,name\npaths=[root/'SYMBOLIC_DYNAMICS_STATE.md',root/'docs/papers211_215_sequence/PIPELINE_STATE.md',qa/'P211_A_RUNTIME_RECEPTION.md']\nlinks=[]\nfor p in paths:\n for target in re.findall(r'\\]\\(([^)]+)\\)',p.read_text()):\n  if target.startswith(('http:','https:','#')):continue\n  target=target.split('#',1)[0];q=p.parent/target;assert q.exists(),(str(p),target);links.append([str(p),target])\nfor row in json.loads((qa/'control_before_a_runtime/MAPPING.json').read_bytes()):\n body=Path(row['physical_original']).read_bytes();assert {'bytes':len(body),'sha256':sha256(body).hexdigest()}==row['pin']\nprint(json.dumps({'status':'PASS_A_RUNTIME_DOCUMENTARY_MILESTONE','prior_complete_keys_unchanged':len(inputs),'unchanged_live_frozen_payloads':32,'actual_local_links':len(links),'physical_old_controls':2,'science_or_build_execution':False},sort_keys=True))\nPY",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2500,
+    "yield_time_ms": 1000
+  },
+  "result": {
+    "chunk_id": "4143bc",
+    "wall_time_seconds": 0.051544631,
+    "exit_code": 0,
+    "original_token_count": 55,
+    "output": "{\"actual_local_links\": 126, \"physical_old_controls\": 2, \"prior_complete_keys_unchanged\": 441, \"science_or_build_execution\": false, \"status\": \"PASS_A_RUNTIME_DOCUMENTARY_MILESTONE\", \"unchanged_live_frozen_payloads\": 32}\n"
+  }
+}

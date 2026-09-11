@@ -1,0 +1,59 @@
+{
+  "schema": "p212-pair-controller-literal-delta-v1",
+  "source": "docs/papers211_215_sequence/qa/p212_author_initial_binding01/run.py",
+  "target": "docs/papers211_215_sequence/qa/p212_author_pair_controller_preparation01/run.py",
+  "ordered_unique_replacements": [
+    {
+      "before": "\"\"\"Root capture of exactly one separately bound P212 initial author run.",
+      "after": "\"\"\"Author SOURCE_ONLY proposal: root capture of one separately bound P212 pair."
+    },
+    {
+      "before": "HERE=QA/'p212_author_initial_binding01'",
+      "after": "HERE=QA/'p212_author_pair_binding01'"
+    },
+    {
+      "before": "ATTEMPT=QA/'root_replays/p212_author_initial_01'",
+      "after": "ATTEMPT=QA/'root_replays/p212_author_pair_01'"
+    },
+    {
+      "before": "need(binding['approved'] is True and binding['mode']=='initial' and binding['role']=='author','sole_approved_initial_role')",
+      "after": "need(binding['approved'] is True and binding['mode']=='pair' and binding['role']=='author','sole_approved_pair_role')"
+    },
+    {
+      "before": "need(binding['root_authority_decision']=='AUTHORIZE_ONE_P212_AUTHOR_INITIAL_NO_ADOPTION','actual_root_authority')",
+      "after": "need(binding['root_authority_decision']=='AUTHORIZE_ONE_P212_AUTHOR_STRICT_PAIR_NO_ADOPTION','actual_root_authority')"
+    },
+    {
+      "before": "need(not os.path.lexists(PAPER/'CANONICAL.json') and not os.path.lexists(PAPER/'canonical.stdout.json'),'both_canonical_roles_absent')",
+      "after": "need(binding['canonical']['path']==str(PAPER/'CANONICAL.json'),'fixed_accepted_canonical')\ncanonical=pin(PAPER/'CANONICAL.json',binding['canonical'])\nneed(not os.path.lexists(PAPER/'canonical.stdout.json'),'historical_canonical_alias_absent')"
+    },
+    {
+      "before": "core=types.ModuleType('_p212_root_initial_capture_core')",
+      "after": "core=types.ModuleType('_p212_root_pair_capture_core')"
+    },
+    {
+      "before": "paths=[str(HERE/'run.py'),str(binding_path),binding['runtime_lock']['path'],*binding['adapter_sources'],",
+      "after": "paths=[str(HERE/'run.py'),str(binding_path),binding['runtime_lock']['path'],binding['canonical']['path'],*binding['adapter_sources'],"
+    },
+    {
+      "before": "stdout=core.command('AUTHOR_INITIAL',",
+      "after": "stdout=core.command('AUTHOR_PAIR',"
+    },
+    {
+      "before": "need(outer['status']=='PASS' and outer['mode']=='initial' and outer['role']=='author','actual_outer_role')",
+      "after": "need(outer['status']=='PASS' and outer['mode']=='pair' and outer['role']=='author','actual_outer_role')\n    recorder=json.loads((ATTEMPT/'recorder/RESULT.json').read_bytes())\n    need(recorder['status']=='PASS' and recorder['mode']=='pair' and recorder['role']=='author','actual_recorder_role')\n    need([r['label'] for r in recorder['commands']]==['00_copy_0','00_copy_1','01_ldd_before','03_verify_01','03_verify_02','04_canonical_1','04_canonical_2','05_pair','06_ldd_after'],'actual_pair_command_census')\n    need(recorder['output']['actual_raw_comparisons']==3 and [r['path'] for r in recorder['output']['raw_stdout']]==[str(ATTEMPT/'recorder/commands'/n/'stdout.raw') for n in ('03_verify_01','03_verify_02')],'actual_pair_two_streams_three_comparisons')"
+    },
+    {
+      "before": "need(not os.path.lexists(PAPER/'CANONICAL.json') and not os.path.lexists(PAPER/'canonical.stdout.json'),'no_automatic_canonical_adoption')",
+      "after": "need(ordinary(PAPER/'CANONICAL.json')==canonical and not os.path.lexists(PAPER/'canonical.stdout.json'),'canonical_raw_bytes_unchanged_no_adoption')"
+    },
+    {
+      "before": "'CAPTURED_INITIAL_CANDIDATE_PENDING_COMPLETE_RECEPTION'",
+      "after": "'CAPTURED_STRICT_PAIR_PENDING_COMPLETE_RECEPTION'"
+    },
+    {
+      "before": "'semantic_reception_completed':False",
+      "after": "'complete_pair_reception_completed':False"
+    }
+  ]
+}

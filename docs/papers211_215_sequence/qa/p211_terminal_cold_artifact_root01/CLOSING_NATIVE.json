@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node - <<'NODE'\nconst fs=require('fs'),c=require('crypto'),P='docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_root01',H=b=>c.createHash('sha256').update(b).digest('hex'),st=p=>{let s=fs.statSync(p,{bigint:true});return ['dev','ino','mode','nlink','uid','gid','size','mtimeNs','ctimeNs'].map(k=>String(s[k]));},ls=p=>{let s=fs.lstatSync(p,{bigint:true});return ['dev','ino','mode','nlink','uid','gid','size','mtimeNs','ctimeNs'].map(k=>String(s[k]));};\nconst a=JSON.parse(fs.readFileSync(P+'/ORIGINAL_RECEPTION_NATIVE.json')),o=JSON.parse(a.results.map(x=>x.output).join(''));let checks=0;for(const [p,v]of Object.entries(o.inputs)){let b=fs.readFileSync(p);if(b.length!==v.bytes||H(b)!==v.sha256||JSON.stringify(st(p))!==JSON.stringify(v.stat)||JSON.stringify(ls(p))!==JSON.stringify(v.lstat))throw Error(p);checks++;}let files=fs.readdirSync(P).sort();if(files.includes('SHA256SUMS'))throw Error('already sealed');let rows=files.map(n=>{let b=fs.readFileSync(P+'/'+n);return {path:n,bytes:b.length,sha256:H(b)}});console.log(JSON.stringify({status:'UNCHANGED_FULL_RECEIVED_KEY',checks,rows}));\nNODE",
+    "login": false,
+    "max_output_tokens": 6000
+  },
+  "result": {
+    "chunk_id": "d3a37e",
+    "wall_time_seconds": 0.051088447,
+    "exit_code": 0,
+    "original_token_count": 330,
+    "output": "{\"status\":\"UNCHANGED_FULL_RECEIVED_KEY\",\"checks\":799,\"rows\":[{\"path\":\"INITIAL_SOURCE_EXTRACT_NATIVE.json\",\"bytes\":63292,\"sha256\":\"13ee9acb1e98656f77bb2e69ecfff280edf032af55e410c87cb82eb0ac811c76\"},{\"path\":\"INITIAL_TO_RUN01_DIFF_NATIVE.json\",\"bytes\":2548,\"sha256\":\"1dabefd7090ba2a57e24ce85c23cbf30d13260d065be0fbe45c31899dec80286\"},{\"path\":\"IO_CENSUS_RECHECK_NATIVE.json\",\"bytes\":378508,\"sha256\":\"fb64be49eb50ee9f8690eb525515d59573a766ff95766f87ff2db9f882d83858\"},{\"path\":\"ORIGINAL_RECEPTION_NATIVE.json\",\"bytes\":385861,\"sha256\":\"15be0baffac76fc8456a4ac587c5fa8ca007a1ead269bdce57092bbb4acb70e1\"},{\"path\":\"OUTER_SEAL_NATIVE.json\",\"bytes\":10616,\"sha256\":\"0cd6d0fe8703765d8601a4d383ad36ec12e5499feae4aab36cddfabf02e3536b\"},{\"path\":\"RECEPTION.md\",\"bytes\":4005,\"sha256\":\"bd7cc05f79652440c67428b0be897ea5d7613acf0284a26770405b980c9e45c9\"},{\"path\":\"SCOPE.md\",\"bytes\":1304,\"sha256\":\"57642241b09c13ba90a495bfa52d5dbdeb0b00c067da9f5347b0af5f6b253f67\"},{\"path\":\"initial_source_from_saved_reads.py\",\"bytes\":61724,\"sha256\":\"82e0dc2250f93801411042bb74feab5c67a13803c3cedf4db2b8c66b958a5298\"},{\"path\":\"io_and_census.js\",\"bytes\":9168,\"sha256\":\"178ba4a0586a1689b86301b0ab0d3a0c13c94abcf09e8c1727a87c22f054d564\"},{\"path\":\"receive_originals.js\",\"bytes\":11698,\"sha256\":\"a09c4165dc921939511df418fb9a0a3474cfb13cd7ded60275cd3bac5bc91245\"}]}\n"
+  }
+}

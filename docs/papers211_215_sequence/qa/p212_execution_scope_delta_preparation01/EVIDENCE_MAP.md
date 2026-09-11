@@ -1,0 +1,23 @@
+# Evidence-to-sentence map: proposed P212 section 05
+
+This is a source-only status-prose proposal, not an independent manuscript
+review, a new proof or re-execution of accepted gates. E01--E18 refer to the
+exact path/byte/hash pins in [INPUT_PINS.json](INPUT_PINS.json).
+The recorded read commands retain the original receipt text, including the
+saved semantic receipt, in [NATIVE_READS.json](NATIVE_READS.json).
+
+| Proposed text / preserved boundary | Exact accepted evidence and scope |
+|---|---|
+| “executed once initially and twice in a strict replay pair” | E04 accepts the initial author invocation; E13 is its completed native receipt (exit 0). E05--E07 accept exactly two new pair producers; E14/E15 are their distinct completed native receipts (both exit 0). These are three actual author invocations, not three semantic reconstructions or independent reviews. |
+| “each run making 72,476 named predicate checks in 46 classes over the same 4,356 states” | E05 states the per-producer census and four fixed carriers 1/2/3/4. E07 names `named_checks_per_producer=72476`, `states_per_producer=4356`. E11 receives `actual_named_predicates=72476`, `actual_states=4356`; E12 contains all 46 `semantics.predicate_census` entries with zero failures and carrier state counts 1,16,243,4096. The accepted byte-identical pair and unchanged-key reuse in E05/E07 transfer that complete saved-output evidence. The number 72,476 is not the documentary receiver-check count or the primitive semantic-check count. |
+| “All three 12,501,943-byte outputs agree byte for byte with the adopted canonical” | E13--E15 each record exactly 12,501,943 complete stdout bytes and SHA-256 `1a32be6bb36dd8b4b27b9891a42876fe235bf2555a3dd9f4e36195a6ad72676c`. E08/E09 receive exclusive canonical adoption from the initial raw stdout, with one actual raw native comparison and no producer. E16/E17 are completed exit-0 raw comparisons of pair outputs to canonical; E18 compares the pair outputs. E05/E07 explicitly receive complete raw operands, not merely digest equality. This editing task reads the accepted receipts; it does not replay these comparisons. |
+| “A separate full-output semantic reconstruction made 12,375,789 primitive checks” | E10/E11 accept the actual successful all-field saved-output reconstruction. E11 binds its 6,993-byte native stdout to SHA-256 `bc863ae3c59747462363eff90b968cbb63216eb399a38dd8cb1f6a9e5455f907`; E12 is that whole receipt, with `semantic_checks=12375789`, all twelve output fields and `scientific_producer_invocations=0`. “Separate” distinguishes semantic reception from production; it does not claim independent manuscript review. |
+| “for the identical pair its accepted evidence is reused under the unchanged dependency key, not rerun” | E05 explicitly receives the accepted semantic package, all 195 original file/resolution keys and the relevant unchanged runtime/configuration key. E07 records `semantic_evidence_reused_checks=12375789` and `new_semantic_reconstruction=false`. The proposal never adds 12,375,789 checks per replay or claims a new semantic application. |
+| “These author-side checks do not constitute independent manuscript review or completion of build and visual gates” | E04/E05/E10 distinguish author execution/semantic reception from manuscript review. E07 records `independent_review=false`, `new_builds=0`, `new_page_views=0`, `paper_complete=false`. This is a boundary on what the cited checks establish, not a claim that a future authorized build can never complete. |
+| Unchanged inherited candidate-check provenance | E01 separates the older candidate check from manuscript artifacts. E02/E03 preserve the preparation-stage source-provenance narrative. The proposal leaves the candidate count and provenance intact, then replaces only the obsolete unexecuted-verifier status. |
+| Unchanged all-n deductive scope and 5/6/5 untested families | The all-n/no-finite-experiment sentence and the full 5/6/5 paragraph in E01 are retained byte-for-byte. E05 explicitly preserves first-size 5/6/5 as deductive-only; E07 records `first_size_5_6_5_status="deductive-only unchanged"`. No theorem is extended and no box is enlarged. |
+| Unchanged exact update/full-carrier and no-priority conclusions | The final three lines of E01 are retained byte-for-byte. This proposal makes no new priority, uniqueness, alternative-encoding or Hilbert--Pólya assertion. |
+
+The existing `CLAIMS_EVIDENCE.md` and `README.md` (E02/E03) still contain
+preparation-stage status language. They are outside this edit authority and
+are not changed here; any later synchronization is a separate scoped action.

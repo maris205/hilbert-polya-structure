@@ -1,0 +1,30 @@
+#!/bin/bash
+# SOURCE ONLY; requires separate root acceptance and one freeze grant.
+set -euo pipefail
+umask 077
+[[ "$#" == 1 && "$1" == "--execute-under-separate-root-grant" ]] || exit 78
+cd /root/autodl-tmp/symbolic_dynamics
+P215_PREP=docs/papers211_215_sequence/qa/p215_round1_preparation01
+P215_BIND=docs/papers211_215_sequence/qa/p215_round1_binding01
+P215_FREEZE=papers/215-prefix-drawdown-clock/frozen_round1
+[[ -f "$P215_BIND/INPUTS.sha256" && ! -L "$P215_BIND/INPUTS.sha256" ]]
+sha256sum -c --strict "$P215_BIND/INPUTS.sha256"
+[[ ! -e "$P215_FREEZE" && ! -L "$P215_FREEZE" ]]
+mkdir -- "$P215_FREEZE"
+mkdir -- "$P215_FREEZE/sections" "$P215_FREEZE/sources" "$P215_FREEZE/verification" "$P215_FREEZE/evidence"
+while IFS=$'\t' read -r p215_source p215_dest; do
+  [[ -n "$p215_source" && -n "$p215_dest" ]]
+  [[ -f "$p215_source" && ! -L "$p215_source" ]]
+  [[ ! -e "$P215_FREEZE/$p215_dest" && ! -L "$P215_FREEZE/$p215_dest" ]]
+  cp --no-clobber -- "$p215_source" "$P215_FREEZE/$p215_dest"
+  cmp -- "$p215_source" "$P215_FREEZE/$p215_dest"
+done < "$P215_PREP/FILES.tsv"
+set -C
+(
+  cd "$P215_FREEZE"
+  while IFS=$'\t' read -r p215_source p215_dest; do sha256sum -- "$p215_dest"; done < "/root/autodl-tmp/symbolic_dynamics/$P215_PREP/FILES.tsv"
+) > "$P215_FREEZE/SHA256SUMS"
+(cd "$P215_FREEZE" && sha256sum -c --strict SHA256SUMS)
+sha256sum -c --strict "$P215_BIND/INPUTS.sha256"
+printf '%s\n' 'COPIED_AND_COMPARED_PENDING_ROOT_PHYSICAL_ROUND1_RECEPTION'
+# No cleanup, overwrite, science, TeX, review, Git or external action.

@@ -1,0 +1,33 @@
+'use strict';
+// Root receipt of a personally noncontributing request audit; data-only finite input selection.
+const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict');
+const Q='docs/papers211_215_sequence/qa/',B=Q+'p212_keyed_stdin_cuda_alias_request_preparation01/',A=Q+'p212_keyed_stdin_cuda_alias_request_audit01/',R=Q+'p212_keyed_stdin_cuda_alias_request_root01/';
+const S=Q+'p212_keyed_stdin_cuda_alias_source_delta01/',SR=Q+'p212_keyed_stdin_cuda_alias_source_root01/',SA=Q+'p212_keyed_stdin_cuda_alias_source_audit01/',TR=Q+'p212_trusted_product_boundary_root01/',O=Q+'p212_keyed_stdin_observation_root01/',F=Q+'p212_keyed_stdin_failed_observation_root01/';
+const external=[SR+'RECEPTION.md',SR+'SHA256SUMS',S+'observe.py',S+'FRONTIER.json',S+'AUTHORIZATION.disabled.json',S+'SHA256SUMS',SA+'REPORT.md',SA+'FINDINGS.json',SA+'SHA256SUMS',TR+'DECISION.json',TR+'RECEPTION.md',O+'RELOCATED_TRUST_DECISION.json',O+'REQUEST.json',F+'RECEPTION.md',F+'SHA256SUMS'];
+const bn=['ARGV.prospective.json','AUTHORIZATION.disabled.json','AUTHORIZATION.prospective.json','CHECK_DOCUMENTS.cjs','CHECK_NATIVE.json','CHECK_RESULT.json','CLOSING_NATIVE.json','CONTRACT.md','HANDOFF.md','INPUT_KEYS_NATIVE.json','PREFIX.proposed.json','PROSPECTIVE_BYTES.json','PROSPECTIVE_PINS_NATIVE.json','READBACK_NATIVE.json','REQUEST.disabled.json','REQUEST.prospective.json','TRANSFORMATION.json'];
+const an=['AUTHOR_REPLAY_NATIVE.json','CHECK_CLOSE.cjs','CHECK_NATIVE.json','CHECK_REQUEST.cjs','CHECK_RESULT.json','CLOSE_NATIVE.json','CLOSE_RESULT.json','FINDINGS.json','HANDOFF.md','INPUTS.sha256','READBACK_NATIVE.json','READS_NATIVE_01.json','READS_NATIVE_02.json','READS_NATIVE_03.json','REPORT.md','SCOPE.md'];
+const rn=['CHECK_ROOT.cjs','REPLAYS_NATIVE.json','ROOT_READS_NATIVE.json','WRAPPER_FAILURE.md'];
+const selected=[...external,...[...bn,'SHA256SUMS'].map(n=>B+n),...[...an,'SHA256SUMS'].map(n=>A+n),...rn.map(n=>R+n)],allow=new Set(selected),bodies=new Map(),keys=new Map(),pairs=[];
+const fields=['dev','ino','mode','nlink','uid','gid','size','mtimeNs','ctimeNs','birthtimeNs'];let checks=0;
+const eq=(a,b,m)=>{checks++;assert.deepStrictEqual(a,b,m)},ok=(a,m)=>{checks++;assert(a,m)},sha=b=>crypto.createHash('sha256').update(b).digest('hex'),key=s=>Object.fromEntries(fields.map(n=>[n,String(s[n])]));
+function physical(p){ok(allow.has(p),'explicit document operand');const s=fs.lstatSync(p,{bigint:true});ok(s.isFile()&&s.nlink===1n&&s.size<=5000000n,'physical bounded document');const fd=fs.openSync(p,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);let raw;try{eq(key(fs.fstatSync(fd,{bigint:true})),key(s));raw=fs.readFileSync(fd);eq(key(fs.fstatSync(fd,{bigint:true})),key(s));}finally{fs.closeSync(fd)}eq(key(fs.lstatSync(p,{bigint:true})),key(s));eq(BigInt(raw.length),s.size);return{raw,key:{path:p,bytes:raw.length,sha256:sha(raw),fields:key(s)}}}
+for(const p of selected){const x=physical(p);bodies.set(p,x.raw);keys.set(p,x.key)}
+const raw=p=>{ok(allow.has(p));return bodies.get(p)},j=p=>JSON.parse(raw(p)),pair=(label,a,b)=>{eq(a,b,label);pairs.push({label,bytes:b.length,sha256:sha(b)})};
+function native(r){eq(r.exit_code,0);ok(!r.session_id&&typeof r.output==='string');ok(!r.output.startsWith('Warning: truncated output'))}
+function seal(d,names,digest){eq(fs.readdirSync(d).sort(),[...names,'SHA256SUMS'].sort());eq(sha(raw(d+'SHA256SUMS')),digest);const lines=raw(d+'SHA256SUMS').toString('ascii');eq(lines, names.map(n=>sha(raw(d+n))+'  '+n+'\n').join(''));return{directory:d,payloads:names.length,physical_files:names.length+1,payload_bytes:names.reduce((s,n)=>s+raw(d+n).length,0),seal_sha256:digest}}
+const packets=[seal(B,bn,'c7a4349d3ff0021d52ef2d88fb8d695b09a1e108b2c4db45f104c877b311edba'),seal(A,an,'ae183124324c11e2486111fcc98de7b881d3a5db17f9d8392dc9c30019440c5e')];
+const independent=j(A+'CHECK_RESULT.json'),close=j(A+'CLOSE_RESULT.json'),author=j(B+'CHECK_RESULT.json');
+eq([independent.checks,independent.document_keys,independent.raw_comparisons,independent.raw_comparison_bytes],[1277,38,50,472543]);
+eq([close.checks,close.document_keys,close.raw_comparisons,close.raw_comparison_bytes],[857,47,10,117359]);
+eq([author.checks,author.document_keys],[347,27]);
+for(const v of [independent,close,author])for(const k of v.keys){ok(allow.has(k.path));eq(keys.get(k.path),k,'all full historical key fields')}
+const original=[j(B+'CHECK_NATIVE.json').run.response,j(A+'CHECK_NATIVE.json').record.result,j(A+'CLOSE_NATIVE.json').record.result],canons=[B+'CHECK_RESULT.json',A+'CHECK_RESULT.json',A+'CLOSE_RESULT.json'],commands=[B+'CHECK_DOCUMENTS.cjs',A+'CHECK_REQUEST.cjs',A+'CHECK_CLOSE.cjs'];
+const replay=j(R+'REPLAYS_NATIVE.json').records;eq(replay.map(v=>v.role),['author','independent','close']);
+for(let i=0;i<3;i++){native(original[i]);native(replay[i].result);eq(replay[i].request.cmd,'node '+commands[i]);pair('root replay versus original native '+i,Buffer.from(replay[i].result.output),Buffer.from(original[i].output));pair('root replay versus canonical '+i,Buffer.from(replay[i].result.output),raw(canons[i]))}
+pair('33 exact audit input pins',raw(A+'INPUTS.sha256'),Buffer.from([...external,...[...bn,'SHA256SUMS'].map(n=>B+n)].map(p=>keys.get(p).sha256+'  '+p+'\n').join('')));
+for(const r of j(R+'ROOT_READS_NATIVE.json').records){native(r.result);ok(r.request.cmd.startsWith('cat '));const paths=r.request.cmd.slice(4).split(' ');ok(paths.every(p=>allow.has(p)));pair('root full documentary read '+r.result.chunk_id,Buffer.from(r.result.output),Buffer.concat(paths.map(raw)))}
+const findings=j(A+'FINDINGS.json');eq(findings.census,{Blocker:0,Major:0,Minor:0});eq(findings.findings,[]);eq(findings.reviewer_status,'PERSONAL_NONCONTRIBUTOR_REQUEST_ONLY_REVIEW_WITH_SOURCE_AUTHOR_PARENT_DISCLOSED');eq(findings.operational_authorization,false);eq(findings.source_manuscript_or_runtime_acceptance,false);
+eq(findings.prospective,independent.prospective);
+for(const p of findings.prospective){ok(allow.has(p.source));eq({bytes:raw(p.source).length,sha256:sha(raw(p.source))},{bytes:p.bytes,sha256:p.sha256})}
+for(const[p,k]of keys){const x=physical(p);eq(x.key,k,'closing full key');eq(x.raw,bodies.get(p),'closing whole raw body')}
+process.stdout.write(JSON.stringify({scope:'ROOT_EXACT_REQUEST_ONLY_RECEPTION_WITH_LINEAGE_DISCLOSURE',checks,packets,document_keys:keys.size,keys:[...keys.values()],raw_pairs:pairs.length,raw_bytes:pairs.reduce((s,p)=>s+p.bytes,0),pairs,prospective:findings.prospective,current_census:findings.census,source_acceptance_reused:true,host_private_stdin_future_path_observation:false,operational_grant:false},null,2)+'\n');

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "node -e 'const f=require(\"node:fs\"),c=require(\"node:crypto\"),p=require(\"node:path\");const d=\"docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/\",h=b=>c.createHash(\"sha256\").update(b).digest(\"hex\"),r=JSON.parse(f.readFileSync(d+\"RESULT.json\")),n=JSON.parse(f.readFileSync(d+\"DATA_CHECK_NATIVE.json\"));let checks=0;function ok(x){checks++;if(!x)throw Error(\"CLOSING_FAILED\")}ok(f.readFileSync(d+\"RESULT.json\").equals(Buffer.from(n.result.output)));ok(n.result.exit_code===0);for(const k of r.workspace_keys){const b=f.readFileSync(k.path),s=f.lstatSync(k.path,{bigint:true});ok(b.length===k.bytes);ok(h(b)===k.sha256);for(const [a,v]of Object.entries(k.metadata))ok(String(s[a])===v)}for(const k of r.private_original_keys){const x=\"/root/symbolic-dynamics-checkpoint03-runtime-tc9tt3hi/\"+k.name,b=f.readFileSync(x),s=f.lstatSync(x,{bigint:true});ok(b.length===k.bytes&&h(b)===k.sha256);for(const [a,v]of Object.entries(k.metadata))ok(String(s[a])===v)}const report=f.readFileSync(d+\"RECEPTION.md\",\"utf8\");for(const m of report.matchAll(/\\]\\(([^)]+)\\)/g))if(!m[1].startsWith(\"https://\"))ok(f.lstatSync(p.resolve(d,m[1])).isFile());process.stdout.write(JSON.stringify({status:\"PASS_ROOT_DATA_CLOSING\",checks,workspace_keys:r.workspace_keys.length,private_originals:2,raw_stdout_equal:true})+\"\\n\")'",
+    "max_output_tokens": 1500
+  },
+  "result": {
+    "chunk_id": "00db93",
+    "wall_time_seconds": 0.00000627,
+    "exit_code": 0,
+    "original_token_count": 29,
+    "output": "{\"status\":\"PASS_ROOT_DATA_CLOSING\",\"checks\":566,\"workspace_keys\":45,\"private_originals\":2,\"raw_stdout_equal\":true}\n"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "/usr/bin/python3.10 -I -S -B -c 'import ast,hashlib,json;from pathlib import Path;p=Path(\"docs/papers211_215_sequence/qa/p211_b_root_reception/inspect_saved_output.py\");b=p.read_bytes();t=ast.parse(b);imports=[]\nfor node in ast.walk(t):\n if isinstance(node,ast.Import):imports.extend(a.name for a in node.names)\n if isinstance(node,ast.ImportFrom):\n  assert node.level==0;imports.append(node.module)\nassert set(imports)=={\"hashlib\",\"itertools\",\"json\",\"math\",\"pathlib\",\"sys\"};assert not any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in {\"exec\",\"eval\",\"compile\",\"__import__\"} for n in ast.walk(t));print(json.dumps({\"status\":\"SOURCE_ONLY_AST_PARSED_NO_SEMANTIC_EXECUTION\",\"bytes\":len(b),\"lines\":len(b.splitlines()),\"sha256\":hashlib.sha256(b).hexdigest(),\"stdlib_imports\":imports,\"producer_invocations\":0,\"receiver_invocations\":0},sort_keys=True))'",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "607972",
+    "wall_time_seconds": 0.00000583,
+    "exit_code": 0,
+    "original_token_count": 75,
+    "output": "{\"bytes\": 19187, \"lines\": 317, \"producer_invocations\": 0, \"receiver_invocations\": 0, \"sha256\": \"badab401dc3ef08873a0a9a33fc6d61b22db8bc3b56d1dba276b4f215bd2487f\", \"status\": \"SOURCE_ONLY_AST_PARSED_NO_SEMANTIC_EXECUTION\", \"stdlib_imports\": [\"hashlib\", \"itertools\", \"json\", \"math\", \"pathlib\", \"sys\"]}\n"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "finite-compression-recoding-documentary-check-v1",
+  "scope": "Actual native read-only JSON parsing, current historical hashes and archived original-range equality. No science or acceptance.",
+  "request": {
+    "cmd": "python3 - <<'PY'\nimport hashlib, json\nfrom pathlib import Path\nbase = Path('/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_compression_recoding_fresh_desk')\nrepo = Path('/root/autodl-tmp/symbolic_dynamics')\nprimary = json.loads((base / 'PRIMARY_RETURNS.json').read_text())\nold = json.loads((base / 'OLD_READ_RECORDS.json').read_text())\npins = json.loads((base / 'HISTORICAL_INPUT_PINS.json').read_text())\nassert len(primary['records']) == 8\nassert all(isinstance(r['request'], dict) and isinstance(r['returned'], str) for r in primary['records'])\nassert primary['local_fetch_lookup_failure']['returned']['exit_code'] == 2\nassert len(old['records']) == 11\nassert all(r['returned']['exit_code'] == 0 for r in old['records'])\nassert len(pins['pins']) == 5\nassert all(hashlib.sha256((repo / p['path']).read_bytes()).hexdigest() == p['sha256'] for p in pins['pins'])\nsegments = [\n    ('docs/papers132_136_sequence/replacement_scout/inversion_rank/SCOUT.md', 1, 205),\n    ('papers/139-lyndon-factor-start-feedback/main.tex', 1, 270),\n    ('papers/139-lyndon-factor-start-feedback/main.tex', 270, 440),\n    ('papers/186-rank-compression-support/main.tex', 38, 245),\n    ('papers/189-transpose-row-compression/main.tex', 40, 148),\n    ('papers/210-weakly-increasing-run-aggregation/sections/1_introduction.tex', 1, None),\n]\nfor r, (path, start, end) in zip(old['records'][:6], segments):\n    lines = (repo / path).read_text().splitlines(keepends=True)\n    assert ''.join(lines[start - 1:end]) == r['returned']['output'], r['id']\nexpected = {'PRIMARY_RETURNS.json', 'OLD_READ_RECORDS.json', 'HISTORICAL_INPUT_PINS.json', 'HANDOFF.md'}\nassert {p.name for p in base.iterdir()} == expected\nassert not any(p.is_symlink() for p in base.iterdir())\nassert all(not p['path'].startswith('papers/211-') for p in pins['pins'])\nprint(json.dumps({'status': 'PASS_DOCUMENTARY_ONLY', 'primary_native_web_records': 8, 'original_bounded_read_records': 6, 'navigation_read_records': 3, 'filename_search_records': 1, 'historical_hash_commands': 1, 'whole_original_pins_equal_now': 5, 'archived_body_ranges_equal_now': 6, 'scientific_runs': 0, 'pilots': 0, 'new_mathematical_claims': 0, 'nominated_literals': 0, 'payload_files_before_check_and_manifest': 4}, indent=2))\nPY",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 3000
+  },
+  "returned": {
+    "chunk_id": "13e194",
+    "wall_time_seconds": 0.05140592,
+    "exit_code": 0,
+    "original_token_count": 109,
+    "output": "{\n  \"status\": \"PASS_DOCUMENTARY_ONLY\",\n  \"primary_native_web_records\": 8,\n  \"original_bounded_read_records\": 6,\n  \"navigation_read_records\": 3,\n  \"filename_search_records\": 1,\n  \"historical_hash_commands\": 1,\n  \"whole_original_pins_equal_now\": 5,\n  \"archived_body_ranges_equal_now\": 6,\n  \"scientific_runs\": 0,\n  \"pilots\": 0,\n  \"new_mathematical_claims\": 0,\n  \"nominated_literals\": 0,\n  \"payload_files_before_check_and_manifest\": 4\n}\n"
+  }
+}

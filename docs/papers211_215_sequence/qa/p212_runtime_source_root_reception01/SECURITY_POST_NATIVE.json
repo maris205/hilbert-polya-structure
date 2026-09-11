@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "node - <<'JS'\nconst fs=require('fs'),c=require('crypto');const p='docs/papers211_215_sequence/qa/p212_runtime_source_root_reception01/';const j=JSON.parse(fs.readFileSync(p+'SECURITY_REDACTION_RECEIPT.json'));const sha=b=>c.createHash('sha256').update(b).digest('hex');function strip(o){if(!o||typeof o!=='object')return;for(const k of Object.keys(o))if(k==='environment')delete o[k];else strip(o[k]);}for(const m of j.mapping){const a=fs.readFileSync(m.restricted_original),b=fs.readFileSync(m.workspace);if(sha(a)!==m.original_sha256||sha(b)!==m.redacted_sha256)throw Error('digest');const x=JSON.parse(a),y=JSON.parse(b);strip(x);strip(y);if(JSON.stringify(x)!==JSON.stringify(y))throw Error('nonenv delta');if((fs.statSync(m.restricted_original).mode&0o777)!==0o600)throw Error('mode');}for(const [path,field]of [[p+'PREPARATION_RESULT.json','input_key'],['docs/papers211_215_sequence/qa/orientation_root_reception01/RESULT.json','input_key']]){const r=JSON.parse(fs.readFileSync(path));for(const [name,k]of Object.entries(r[field]))if(sha(fs.readFileSync(name))!==k.sha256)throw Error('input delta');}console.log(JSON.stringify({status:'SECURITY_REDACTION_EXACT_NONENV_AND_ALL_75_INPUT_KEYS_PASS',files:j.mapping.length,private_originals_mode:'0600',private_directory_mode:'0700',submitted_evidence_unchanged:true,no_secret_value_output:true}));\nJS",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 2200
+  },
+  "result": {
+    "chunk_id": "796d32",
+    "wall_time_seconds": 0.00000567,
+    "exit_code": 0,
+    "original_token_count": 54,
+    "output": "{\"status\":\"SECURITY_REDACTION_EXACT_NONENV_AND_ALL_75_INPUT_KEYS_PASS\",\"files\":16,\"private_originals_mode\":\"0600\",\"private_directory_mode\":\"0700\",\"submitted_evidence_unchanged\":true,\"no_secret_value_output\":true}\n"
+  }
+}

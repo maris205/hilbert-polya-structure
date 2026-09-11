@@ -1,0 +1,105 @@
+{
+  "schema": "actual-integrity-tool-return-bundle-v1",
+  "note": "Only read-only JSON structure, unchanged old-input pins, local targets and raw textual capture comparisons; no evaluation of SCRF, SPR, CPRM or any theorem formula.",
+  "records": [
+    {
+      "name": "historical_pins",
+      "cmd": "sha256sum -c docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/INPUT_PINS.sha256",
+      "result": {
+        "chunk_id": "95d88e",
+        "wall_time_seconds": 0.00000747,
+        "exit_code": 0,
+        "original_token_count": 129,
+        "output": "docs/papers211_215_sequence/scouting/arithmetic_lane/INTAKE.md: OK\ndocs/papers211_215_sequence/scouting/arithmetic_lane/SPR_PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/spr_gate/REPORT.md: OK\ndocs/papers204_208_sequence/scouting/word_local/CPRM_PROOF_BOUNDARY.md: OK\ndocs/papers211_215_sequence/scouting/arithmetic_lane/brun_issac2016.pdf: OK\ndocs/papers211_215_sequence/scouting/finite_allocation_lane/PROOF_NOTES.md: OK\ndocs/papers211_215_sequence/scouting/arithmetic_lane/SOURCE_AND_COLLISION.md: OK\n"
+      }
+    },
+    {
+      "name": "json",
+      "cmd": "set -e\nperl -MJSON::PP -e 'local $/;my $d=decode_json(<>);die \"schema/count\\n\" unless $d->{schema} eq \"actual-native-tool-return-bundle-v1\" && @{$d->{records}} == 12;print \"PASS native JSON 12 records\\n\";' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/NATIVE_READS.json\nperl -MJSON::PP -e 'local $/;my $d=decode_json(<>);die \"schema/count\\n\" unless $d->{schema} eq \"actual-web-tool-return-bundle-v1\" && @{$d->{calls}} == 2;print \"PASS web JSON 2 calls\\n\";' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/SOURCES_NATIVE.json",
+      "result": {
+        "chunk_id": "19e8f2",
+        "wall_time_seconds": 0.0000053,
+        "exit_code": 0,
+        "original_token_count": 13,
+        "output": "PASS native JSON 12 records\nPASS web JSON 2 calls\n"
+      }
+    },
+    {
+      "name": "intake_raw",
+      "cmd": "set -o pipefail\nperl -MJSON::PP -MEncode=encode_utf8 -e 'my $wanted=shift @ARGV; local $/; my $d=decode_json(<>); my @r=grep {$_->{cmd} eq $wanted} @{$d->{records}}; die \"record cardinality\\n\" unless @r == 1; binmode STDOUT; print encode_utf8($r[0]{result}{output});' 'sed -n '\\''1,120p'\\'' docs/papers211_215_sequence/scouting/arithmetic_lane/INTAKE.md' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/NATIVE_READS.json | cmp - <(sed -n '1,120p' docs/papers211_215_sequence/scouting/arithmetic_lane/INTAKE.md)",
+      "result": {
+        "chunk_id": "a4b896",
+        "wall_time_seconds": 0.00000517,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "name": "spr_proof_raw",
+      "cmd": "set -o pipefail\nperl -MJSON::PP -MEncode=encode_utf8 -e 'my $wanted=shift @ARGV; local $/; my $d=decode_json(<>); my @r=grep {$_->{cmd} eq $wanted} @{$d->{records}}; die \"record cardinality\\n\" unless @r == 1; binmode STDOUT; print encode_utf8($r[0]{result}{output});' 'sed -n '\\''1,260p'\\'' docs/papers211_215_sequence/scouting/arithmetic_lane/SPR_PROOF_PACKAGE.md' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/NATIVE_READS.json | cmp - <(sed -n '1,260p' docs/papers211_215_sequence/scouting/arithmetic_lane/SPR_PROOF_PACKAGE.md)",
+      "result": {
+        "chunk_id": "a79b3f",
+        "wall_time_seconds": 0.00000254,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "name": "spr_value_raw",
+      "cmd": "set -o pipefail\nperl -MJSON::PP -MEncode=encode_utf8 -e 'my $wanted=shift @ARGV; local $/; my $d=decode_json(<>); my @r=grep {$_->{cmd} eq $wanted} @{$d->{records}}; die \"record cardinality\\n\" unless @r == 1; binmode STDOUT; print encode_utf8($r[0]{result}{output});' 'sed -n '\\''1,250p'\\'' docs/papers211_215_sequence/scouting/spr_gate/REPORT.md' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/NATIVE_READS.json | cmp - <(sed -n '1,250p' docs/papers211_215_sequence/scouting/spr_gate/REPORT.md)",
+      "result": {
+        "chunk_id": "0b7a22",
+        "wall_time_seconds": 0.000006129,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "name": "cprm_raw",
+      "cmd": "set -o pipefail\nperl -MJSON::PP -MEncode=encode_utf8 -e 'my $wanted=shift @ARGV; local $/; my $d=decode_json(<>); my @r=grep {$_->{cmd} eq $wanted} @{$d->{records}}; die \"record cardinality\\n\" unless @r == 1; binmode STDOUT; print encode_utf8($r[0]{result}{output});' 'sed -n '\\''1,200p'\\'' docs/papers204_208_sequence/scouting/word_local/CPRM_PROOF_BOUNDARY.md' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/NATIVE_READS.json | cmp - <(sed -n '1,200p' docs/papers204_208_sequence/scouting/word_local/CPRM_PROOF_BOUNDARY.md)",
+      "result": {
+        "chunk_id": "c48654",
+        "wall_time_seconds": 0.00000396,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "name": "spr_primary_raw",
+      "cmd": "set -o pipefail\nperl -MJSON::PP -MEncode=encode_utf8 -e 'my $wanted=shift @ARGV; local $/; my $d=decode_json(<>); my @r=grep {$_->{cmd} eq $wanted} @{$d->{records}}; die \"record cardinality\\n\" unless @r == 1; binmode STDOUT; print encode_utf8($r[0]{result}{output});' 'sed -n '\\''1,200p'\\'' docs/papers211_215_sequence/scouting/arithmetic_lane/SOURCE_AND_COLLISION.md' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/NATIVE_READS.json | cmp - <(sed -n '1,200p' docs/papers211_215_sequence/scouting/arithmetic_lane/SOURCE_AND_COLLISION.md)",
+      "result": {
+        "chunk_id": "a31333",
+        "wall_time_seconds": 0.000002191,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "name": "brun_read_raw",
+      "cmd": "set -o pipefail\nperl -MJSON::PP -MEncode=encode_utf8 -e 'my $wanted=shift @ARGV; local $/; my $d=decode_json(<>); my @r=grep {$_->{cmd} eq $wanted} @{$d->{records}}; die \"record cardinality\\n\" unless @r == 1; binmode STDOUT; print encode_utf8($r[0]{result}{output});' 'pdftotext -f 1 -l 3 -layout docs/papers211_215_sequence/scouting/arithmetic_lane/brun_issac2016.pdf -' docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/NATIVE_READS.json | cmp - <(pdftotext -f 1 -l 3 -layout docs/papers211_215_sequence/scouting/arithmetic_lane/brun_issac2016.pdf -)",
+      "result": {
+        "chunk_id": "0651db",
+        "wall_time_seconds": 0.00000255,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "name": "local_links",
+      "cmd": "set -e\nfor p in docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/INTAKE.md docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/SPR_PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../spr_gate/REPORT.md docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../../../papers204_208_sequence/scouting/word_local/CPRM_PROOF_BOUNDARY.md docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../finite_allocation_lane/PROOF_NOTES.md docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/SOURCE_AND_COLLISION.md docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/brun_issac2016.pdf; do test -f \"$p\"; printf 'EXISTS %s\\n' \"$p\"; done",
+      "result": {
+        "chunk_id": "11a88e",
+        "wall_time_seconds": 0.00000502,
+        "exit_code": 0,
+        "original_token_count": 239,
+        "output": "EXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/PROOF_PACKAGE.md\nEXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/INTAKE.md\nEXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/SPR_PROOF_PACKAGE.md\nEXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../spr_gate/REPORT.md\nEXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../../../papers204_208_sequence/scouting/word_local/CPRM_PROOF_BOUNDARY.md\nEXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../finite_allocation_lane/PROOF_NOTES.md\nEXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/SOURCE_AND_COLLISION.md\nEXISTS docs/papers211_215_sequence/scouting/finite_feedback_residual_design_desk/../arithmetic_lane/brun_issac2016.pdf\n"
+      }
+    }
+  ]
+}

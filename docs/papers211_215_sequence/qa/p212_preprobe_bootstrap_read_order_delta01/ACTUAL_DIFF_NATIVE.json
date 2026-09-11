@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "diff -u --label old/observe.py --label new/observe.py docs/papers211_215_sequence/qa/p212_preprobe_bootstrap_preparation01/observe.py docs/papers211_215_sequence/qa/p212_preprobe_bootstrap_read_order_delta01/observe.py",
+    "max_output_tokens": 4000
+  },
+  "result": {
+    "chunk_id": "1e2a3b",
+    "wall_time_seconds": 0.000004099,
+    "exit_code": 1,
+    "original_token_count": 362,
+    "output": "--- old/observe.py\n+++ new/observe.py\n@@ -218,7 +218,7 @@\n                    and stat.S_ISDIR(int(x['lstat']['mode']))))\n \n \n-def whole_file(path, limit, capture):\n+def whole_file(path, limit, capture, expected):\n     global READ_BYTES, CAPTURE_BYTES\n     need(type(limit) is int and 0 <= limit <= 134217728, 'file byte ceiling')\n     fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)\n@@ -226,6 +226,7 @@\n         before = native(path, fd=fd)\n         need(before is not None and stat.S_ISREG(int(before['mode']))\n              and int(before['size']) <= limit, 'bounded regular handle only')\n+        stable(expected, before)\n         digest, chunks, size = sha256(), [], 0\n         while True:\n             remaining = min(limit - size, MAX_ALL_READ_BYTES - READ_BYTES)\n@@ -266,7 +267,7 @@\n             need(stat.S_ISCHR(kind), 'metadata-only /dev/null must be a character device')\n         if mode in ('file', 'optional_file'):\n             need(stat.S_ISREG(kind), 'file target must be regular before open')\n-            row['content'] = whole_file(before['resolved'], target['max_bytes'], target['capture_hex'])\n+            row['content'] = whole_file(before['resolved'], target['max_bytes'], target['capture_hex'], before['stat'])\n             stable(before['stat'], row['content']['before'])\n         elif mode in ('directory', 'optional_directory', 'membership'):\n             need(stat.S_ISDIR(kind), 'directory required')\n"
+  }
+}

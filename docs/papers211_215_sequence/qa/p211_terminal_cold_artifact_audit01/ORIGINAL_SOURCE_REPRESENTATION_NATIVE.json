@@ -1,0 +1,44 @@
+{
+  "records": [
+    {
+      "request": {
+        "cmd": "diff -u docs/papers211_215_sequence/qa/p211_initial_build_independent_reception/inspect_build.py docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/original_inspect_build.py",
+        "max_output_tokens": 2500
+      },
+      "result": {
+        "chunk_id": "566687",
+        "wall_time_seconds": 0.00000762,
+        "exit_code": 1,
+        "original_token_count": 86,
+        "output": "--- docs/papers211_215_sequence/qa/p211_initial_build_independent_reception/inspect_build.py\t2026-09-08 19:14:06.344442823 +0800\n+++ docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/original_inspect_build.py\t2026-09-09 15:06:18.218695297 +0800\n@@ -736,3 +736,4 @@\n \n if __name__=='__main__':\n     raise SystemExit(main())\n+\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "cmp -s docs/papers211_215_sequence/qa/p211_initial_build_independent_reception/inspect_build.py docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/io_lane/sources/original_inspect_build.py",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "993a5b",
+        "wall_time_seconds": 0.000004029,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "request": {
+        "cmd": "sed -n '1,220p' docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/io_lane/SHA256_TEXT.js",
+        "max_output_tokens": 6500
+      },
+      "result": {
+        "chunk_id": "97fdee",
+        "wall_time_seconds": 0.0000071,
+        "exit_code": 0,
+        "original_token_count": 417,
+        "output": "function sha256Text(text) {\n  const bytes=[];\n  for (const char of text) {\n    const c=char.codePointAt(0);\n    if(c<128) bytes.push(c);\n    else if(c<2048) bytes.push(192|(c>>>6),128|(c&63));\n    else if(c<65536) bytes.push(224|(c>>>12),128|((c>>>6)&63),128|(c&63));\n    else bytes.push(240|(c>>>18),128|((c>>>12)&63),128|((c>>>6)&63),128|(c&63));\n  }\n  const length=bytes.length, bits=length*8;\n  bytes.push(128);while(bytes.length%64!==56)bytes.push(0);\n  const high=Math.floor(bits/4294967296),low=bits>>>0;\n  for(let j=3;j>=0;j--)bytes.push((high>>>(8*j))&255);\n  for(let j=3;j>=0;j--)bytes.push((low>>>(8*j))&255);\n  const primes=[];for(let n=2;primes.length<64;n++)if(primes.every(p=>n%p!==0))primes.push(n);\n  const H=primes.slice(0,8).map(n=>(Math.sqrt(n)%1*4294967296)>>>0);\n  const K=primes.map(n=>(Math.cbrt(n)%1*4294967296)>>>0);\n  const rot=(v,n)=>(v>>>n)|(v<<(32-n));\n  for(let offset=0;offset<bytes.length;offset+=64){\n    const w=new Uint32Array(64);\n    for(let j=0;j<16;j++)w[j]=(bytes[offset+4*j]<<24)|(bytes[offset+4*j+1]<<16)|(bytes[offset+4*j+2]<<8)|bytes[offset+4*j+3];\n    for(let j=16;j<64;j++){const x=w[j-15],y=w[j-2];w[j]=(w[j-16]+(rot(x,7)^rot(x,18)^(x>>>3))+w[j-7]+(rot(y,17)^rot(y,19)^(y>>>10)))>>>0;}\n    let [a,b,c,d,e,f,g,h]=H;\n    for(let j=0;j<64;j++){const t1=(h+(rot(e,6)^rot(e,11)^rot(e,25))+((e&f)^(~e&g))+K[j]+w[j])>>>0;\n      const t2=((rot(a,2)^rot(a,13)^rot(a,22))+((a&b)^(a&c)^(b&c)))>>>0;\n      h=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0;\n    }\n    const block=[a,b,c,d,e,f,g,h];for(let j=0;j<8;j++)H[j]=(H[j]+block[j])>>>0;\n  }\n  return {bytes:length,sha256:H.map(v=>v.toString(16).padStart(8,\"0\")).join(\"\")};\n}\n"
+      }
+    }
+  ]
+}
+

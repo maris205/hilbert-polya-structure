@@ -1,0 +1,130 @@
+--- accepted-initial/inspect_production.py
++++ proposed-pair/inspect_production.py
+@@ -1,4 +1,4 @@
+-"""Root P212 full initial execution reception; disclosed forward adaptation of\naccepted P211 inspect_production.py. No submitted source is executed.\nAdds actual root-capture reception, full sampled fields, exact selected\nFraction opens, raw proc-map reconstruction and source-lineage pins.\n"""
++"""Author SOURCE_ONLY proposal for root P212 strict-pair execution reception; disclosed forward adaptation of\naccepted P212 initial inspect_production.py (itself P211-derived). No submitted source is executed.\nAdds actual root-capture reception, full sampled fields, exact selected\nFraction opens, raw proc-map reconstruction and source-lineage pins.\n"""
+ from hashlib import sha256
+ import json
+ import os
+@@ -11,9 +11,9 @@
+ PREP = QA/'p212_runtime_preparation01'
+ ENV = {'PATH': '/usr/bin:/bin', 'LANG': 'C.UTF-8', 'LC_ALL': 'C.UTF-8', 'TZ': 'UTC'}
+ CHECKS, READS, STATE_KEY = 0, {}, {}
+-OWN = QA/'p212_author_initial_runtime_reception01'
++OWN = QA/'p212_author_pair_runtime_reception01'
+ SOURCE = Path(__file__).resolve()
+-OLD_SOURCE = QA/'p211_runtime_root_reception/inspect_production.py'
++OLD_SOURCE = QA/'p212_author_initial_runtime_reception01/inspect_production.py'
+ 
+ 
+ def need(condition, detail):
+@@ -184,10 +184,19 @@
+ binding, capture = doc(binding_path), doc(capture_path)
+ need(SOURCE == OWN/'inspect_production.py', 'exact new documentary helper placement')
+ raw(SOURCE);raw(OLD_SOURCE)
+-need(binding_path == QA/'p212_author_initial_binding01/BINDING.json' and capture_path == binding_path.parent/'PRODUCTION_TOOL_INVOCATION.json', 'exact initial original binding/capture roles')
++need(binding_path == QA/'p212_author_pair_binding01/BINDING.json' and capture_path == binding_path.parent/'PRODUCTION_TOOL_INVOCATION.json', 'exact pair original binding/capture roles')
+ need(binding['approved'] is True and binding['purpose'] == 'P212_AUTHOR_MANUSCRIPT' and binding['role'] == 'author', 'actual approved author binding')
+ mode, attempt = binding['mode'], Path(binding['attempt'])
+-need(mode == 'initial' and attempt == QA/'root_replays/p212_author_initial_01', 'exact initial-only scope; strict pair requires separate adaptation')
++need(mode == 'pair' and attempt == QA/'root_replays/p212_author_pair_01', 'exact separately bound strict-pair scope')
++need(binding['root_authority_decision'] == 'AUTHORIZE_ONE_P212_AUTHOR_STRICT_PAIR_NO_ADOPTION', 'new pair authority, never initial reuse')
++need(binding['canonical']['path'] == str(ROOT/'papers/212-closed-pointer-orbits/CANONICAL.json'), 'fixed accepted canonical path')
++canonical_before = raw(binding['canonical']['path'])
++need(identity(canonical_before) == {'bytes':12501943,'sha256':'1a32be6bb36dd8b4b27b9891a42876fe235bf2555a3dd9f4e36195a6ad72676c'}, 'accepted actual initial canonical content')
++template = doc(PREP/'PAIR.pending.json')
++mutable_fields = {'approved','attempt','reviewed_static_source_import_closure','reviewed_schema_and_parameters','reviewed_compile_exec_interface','timeouts','canonical','runtime_lock','provenance_inputs','pending_obligations'}
++need(set(binding) == set(template) | {'root_authority_decision','root_execution_interface','root_capture'}, 'complete known pair binding fields')
++need({k:v for k,v in binding.items() if k in template and k not in mutable_fields} == {k:v for k,v in template.items() if k not in mutable_fields}, 'entire unchanged source/schema/import/parameter contract')
++need(all(binding[k] is True for k in ('reviewed_static_source_import_closure','reviewed_schema_and_parameters','reviewed_compile_exec_interface')), 'actual root source/interface gates')
+ need(all(type(n) is int and 0 < n <= 900 for n in binding['timeouts'].values()), 'finite positive integer deadlines')
+ need(binding['argv_template'] == ['$ENTRY', '--parameters', '$PARAMETERS'] and binding['parameter_locator'] == 'explicit_absolute_argv', 'actual source interface')
+ need({r['name'] for r in binding['capsule_files']} == {'verify.py', 'PARAMETERS.json'} and len(binding['capsule_files']) == 2, 'two distinct scientific files')
+@@ -297,6 +306,7 @@
+         need(native['ended_epoch'] >= native['started_epoch'], 'ordered actual native lifetime')
+         deadline = binding['timeouts']['envelope'] if stage in ('outer','launcher') else binding['timeouts']['science'] if label.startswith('03_verify_') else binding['timeouts']['native']
+         need(native['timeout_seconds'] == deadline, 'exact declared native deadline')
++        need(native['cwd'] == str(capsule if stage == 'recorder' and label.startswith('03_verify_') else ROOT), 'exact native command cwd')
+         settlement = native['process_group_settlement']
+         need(settlement['quiescent'] and not settlement['signals'] and not any(m['state'] != 'Z' for m in settlement['remaining_members']) and native['pid'] == settlement['owned_pgid'] == settlement['owned_sid'] and settlement['native_returncode'] == 0, 'actual settled native process identity')
+         for stream in ('stdout', 'stderr'):
+@@ -317,6 +327,14 @@
+     labels += ['03_verify_02', '04_canonical_1', '04_canonical_2', '05_pair']
+ labels += ['06_ldd_after']
+ need([row['label'] for row in recorder['commands']] == labels, 'exact ordered recorder native census')
++comparison_inputs = {
++    '04_canonical_1': [str(attempt/'recorder/commands/03_verify_01/stdout.raw'),binding['canonical']['path']],
++    '04_canonical_2': [str(attempt/'recorder/commands/03_verify_02/stdout.raw'),binding['canonical']['path']],
++    '05_pair': [str(attempt/'recorder/commands/03_verify_01/stdout.raw'),str(attempt/'recorder/commands/03_verify_02/stdout.raw')],
++}
++for label, operands in comparison_inputs.items():
++    comparison = doc(attempt/'recorder/commands'/label/'RECEIPT.json')
++    need(comparison['argv'] == ['/usr/bin/cmp','--'] + operands and comparison['cwd'] == str(ROOT), 'exact three real scientific raw-cmp contracts')
+ for label in ('01_ldd_before', '06_ldd_after'):
+     directory = attempt/'recorder/commands'/label
+     native = doc(directory/'RECEIPT.json')
+@@ -343,40 +361,43 @@
+ need(len(all_rows) == (77 if mode == 'initial' else 104) and native_count == (7 if mode == 'initial' else 11), 'complete physical output/native population')
+ # Receive the genuinely separate root outer capture, not a direct old P211 launch.
+ root_entry = binding_path.parent/'entry01'
++need(set(binding['root_capture']) == {'entry','timeout_seconds','environment','controller','outer_argv_without_binding_digest'}, 'complete root capture binding fields')
++need(binding['root_capture']['entry'] == str(root_entry) and binding['root_capture']['environment'] == ENV and binding['root_capture']['timeout_seconds'] == 1200 and binding['root_capture']['controller']['path'] == str(binding_path.parent/'run.py'), 'exact separately bound root controller capture')
++need(binding['root_capture']['outer_argv_without_binding_digest'] == argv('outer')[:9] + argv('outer')[10:], 'complete bound outer startup vector excluding only digest')
+ entry_rows = manifest(root_entry)
+ need(len(entry_rows)==9,'whole root nine-payload capture')
+ need(raw(root_entry/'EXECUTED_CONTROLLER.py')==raw(binding['root_capture']['controller']['path']) and raw(root_entry/'BINDING_ORIGINAL.json')==raw(binding_path),'entire actual executed controller/binding snapshots')
+ root_paths = sorted({str(binding_path),binding['runtime_lock']['path'],*binding['adapter_sources'],
+                      *[r['path'] for r in binding['capsule_files']+binding['provenance_inputs']],
+-                     binding['root_capture']['controller']['path']})
++                     binding['root_capture']['controller']['path'],binding['canonical']['path']})
+ root_known = {p:rich(p) for p in root_paths}
+ need(doc(root_entry/'INPUTS_BEFORE.json')==doc(root_entry/'INPUTS_AFTER.json')==root_known,'entire root capture pre/post source/authority key')
+ entry_result=doc(root_entry/'RESULT.json')
+-need(entry_result['status']=='CAPTURED_INITIAL_CANDIDATE_PENDING_COMPLETE_RECEPTION' and entry_result['errors']==[] and not entry_result['canonical_adopted'] and not entry_result['semantic_reception_completed'],'root capture not scientific acceptance')
+-need(len(entry_result['commands'])==1,'sole root native outer command')
+-entry_native=doc(root_entry/'commands/AUTHOR_INITIAL/RECEIPT.json')
++need(entry_result['status']=='CAPTURED_STRICT_PAIR_PENDING_COMPLETE_RECEPTION' and entry_result['errors']==[] and not entry_result['canonical_adopted'] and not entry_result['complete_pair_reception_completed'],'root capture not scientific acceptance')
++need(len(entry_result['commands'])==1 and entry_result['commands'][0]['label']=='AUTHOR_PAIR','sole root native pair outer command')
++entry_native=doc(root_entry/'commands/AUTHOR_PAIR/RECEIPT.json')
+ need({k:v for k,v in entry_result['commands'][0].items() if k!='label'}==entry_native,'entire root native/result relation')
+ launch=['/usr/bin/env','-i']+[k+'='+v for k,v in ENV.items()]+argv('outer')
+ need(entry_native['argv']==launch and entry_native['cwd']==str(ROOT) and entry_native['environment']==ENV and entry_native['timeout_seconds']==1200,'exact actual root native argv/cwd/ENV/deadline')
+-entry_attempt=doc(root_entry/'commands/AUTHOR_INITIAL/ATTEMPT.json')
++entry_attempt=doc(root_entry/'commands/AUTHOR_PAIR/ATTEMPT.json')
+ need(entry_attempt=={k:entry_native[k] for k in entry_attempt if k not in ('status','exit_code')} | {'status':'ATTEMPTED','exit_code':None},'entire root native attempt')
+ need(entry_native['exit_code']==entry_native['wrapper_exit_code']==0 and entry_native['status']=='COMPLETED' and entry_native['spawned'] and entry_native['streams_complete'] and not entry_native['timed_out'] and not entry_native['interrupted'] and entry_native['failure'] is None,'actual successful complete root native closure')
+ need(entry_native['process_group_settlement']=={'native_returncode':0,'owned_pgid':entry_native['pid'],'owned_sid':entry_native['pid'],'quiescent':True,'remaining_members':[],'signals':[]},'entire actual settled root owned group')
+ for stream in ('stdout','stderr'):
+-    pin(root_entry/'commands/AUTHOR_INITIAL'/(stream+'.raw'),entry_native[stream])
+-need(raw(root_entry/'commands/AUTHOR_INITIAL/stderr.raw')==b'','complete root native stderr empty')
+-need(doc(root_entry/'commands/AUTHOR_INITIAL/stdout.raw')=={'attempt':str(attempt),'seal':{'manifest':identity(raw(attempt/'SHA256SUMS')),'payloads':len(all_rows)},'status':'PASS'},'actual adapter outer summary with exact physical seal')
++    pin(root_entry/'commands/AUTHOR_PAIR'/(stream+'.raw'),entry_native[stream])
++need(raw(root_entry/'commands/AUTHOR_PAIR/stderr.raw')==b'','complete root native stderr empty')
++need(doc(root_entry/'commands/AUTHOR_PAIR/stdout.raw')=={'attempt':str(attempt),'seal':{'manifest':identity(raw(attempt/'SHA256SUMS')),'payloads':len(all_rows)},'status':'PASS'},'actual adapter outer summary with exact physical seal')
+ parts=[capture['result']]+[r['result'] for r in capture.get('polls',[])]
+ need(parts[-1]['exit_code']==0 and not parts[-1].get('session_id'),'actual product-boundary terminal completion')
+ need(capture['request']['workdir']==str(ROOT),'actual product cwd')
+ root_launch=['/usr/bin/env','-i']+[k+'='+v for k,v in ENV.items()]+['/usr/bin/python3.10','-I','-S','-B',binding['root_capture']['controller']['path'],str(binding_path),sys.argv[2]]
+ need(capture['request']['cmd']==' '.join(root_launch),'entire actual new root product launch')
+-if 'session_id' in capture['result']:
+-    need(capture['polls'][0]['request']['session_id']==capture['result']['session_id'] and 'exit_code' not in capture['result'],'genuine running-first/poll relation')
++for index, poll in enumerate(capture.get('polls', [])):
++    need(parts[index].get('session_id') and 'exit_code' not in parts[index] and poll['request']['session_id'] == parts[index]['session_id'], 'entire genuine running/poll session chain')
+ messages=[json.loads(line) for line in ''.join(p['output'] for p in parts).splitlines()]
+ need(messages and all(row.get('status')=='P212_OWNED_NATIVE_RUNNING' for row in messages[:-1]),'only declared native progress')
+-need(messages[-1]=={'attempt':str(attempt),'canonical_adopted':False,'entry':str(root_entry),'errors':[],'root_native_commands':1,'seal':{'manifest':identity(raw(root_entry/'SHA256SUMS')),'payloads':len(entry_rows)},'status':'CAPTURED_INITIAL_CANDIDATE_PENDING_COMPLETE_RECEPTION'},'entire actual root product/entry seal binding')
+-need(not os.path.lexists(binding['canonical']['path']) and not os.path.lexists(ROOT/'papers/212-closed-pointer-orbits/canonical.stdout.json'),'both canonical names remain absent')
++need(messages[-1]=={'attempt':str(attempt),'canonical_adopted':False,'entry':str(root_entry),'errors':[],'root_native_commands':1,'seal':{'manifest':identity(raw(root_entry/'SHA256SUMS')),'payloads':len(entry_rows)},'status':'CAPTURED_STRICT_PAIR_PENDING_COMPLETE_RECEPTION'},'entire actual root product/entry seal binding')
++need(raw(binding['canonical']['path']) == canonical_before and not os.path.lexists(ROOT/'papers/212-closed-pointer-orbits/canonical.stdout.json'),'accepted canonical unchanged and historical alias remains absent')
+ for key,row in list(STATE_KEY.items()):
+     need(state(row['path'],row['with_bytes'])==row['state'],'complete final present configuration role')
+ for p, data in READS.items():
+@@ -384,7 +405,7 @@
+ input_key={p:rich(p) for p in list(READS)}
+ with (OWN/'INPUTS_CURRENT.json').open('x') as stream:
+     json.dump({'files':input_key,'configuration_state_roles':STATE_KEY},stream,sort_keys=True,indent=2);stream.write('\n')
+-print(json.dumps({'status': 'PASS_ROOT_COMPLETE_P212_INITIAL_PRODUCTION_RECORDS_PENDING_SEMANTICS', 'mode': mode,
++print(json.dumps({'status': 'PASS_ROOT_COMPLETE_P212_PAIR_PRODUCTION_RECORDS_PENDING_SEMANTIC_REUSE', 'mode': mode,
+     'binding': {'path': str(binding_path), **rich(binding_path)}, 'attempt': str(attempt),
+     'checks': CHECKS, 'actual_read_paths': len(READS), 'complete_payloads': len(all_rows),
+     'complete_manifest': identity(raw(attempt/'SHA256SUMS')), 'stage_payloads': counts,

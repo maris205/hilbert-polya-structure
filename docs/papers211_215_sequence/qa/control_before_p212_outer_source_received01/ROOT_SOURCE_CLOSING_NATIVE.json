@@ -1,0 +1,29 @@
+{
+  "preseal": {
+    "request": {
+      "cmd": "node - <<'NODE'\nconst fs=require('fs'),crypto=require('crypto'),p='docs/papers211_215_sequence/qa/p212_dependency_query_outer_source_root01';let checks=0;const need=(x,m)=>{checks++;if(!x)throw Error(m);},h=b=>crypto.createHash('sha256').update(b).digest('hex');const raw=fs.readFileSync(p+'/RESULT.json'),x=JSON.parse(raw),n=JSON.parse(fs.readFileSync(p+'/RUN_NATIVE.json'));need(n.result.exit_code===0&&Buffer.from(n.result.output).equals(raw),'whole real native output');for(const k of x.after){const b=fs.readFileSync(k.path);need(b.length===k.bytes&&h(b)===k.sha256&&fs.realpathSync(k.path)===k.resolved,'whole current key');for(const m of ['lstat','stat']){const s=fs[m+'Sync'](k.path,{bigint:true});for(const [f,v]of Object.entries(k[m]))if(f!=='atimeNs')need(String(s[f])===v,'nonatime integer key');}}const files=fs.readdirSync(p).sort();need(files.length===7&&!files.includes('SHA256SUMS'),'exact seven payloads');let bytes=0;for(const f of files){const b=fs.readFileSync(p+'/'+f);bytes+=b.length;process.stdout.write(h(b)+'  '+f+'\\n');}process.stdout.write(JSON.stringify({status:'PASS_FULL_PRESEAL_KEYS',checks,paths:x.after.length,payloads:files.length,payload_bytes:bytes})+'\\n');\nNODE",
+      "max_output_tokens": 3500
+    },
+    "result": {
+      "chunk_id": "fd3b8b",
+      "wall_time_seconds": 0.000007229,
+      "exit_code": 0,
+      "original_token_count": 171,
+      "output": "d507cec75eb6155edd2afd486aa8eab7e17f34f25b0e658e24f0eaf44c6ae9b3  DOCUMENTARY_REPLAYS_NATIVE.json\n98fa2fd26832ee03f7fe69c044f7d302f786c01c487cda3bf2f9b584c2485bc6  READ_SCOPE.md\nb3ad160aa1ea7595fb1dc18bb90d03f9eebf9d4a259a206d658f71d57e815035  RECEPTION.md\nf591daf0fb70d1387527d38881a13a2efcc818597e2bbfa81052375941cac01c  RESULT.json\n7588b3a97e0845c3938573f2634be3f4435a6d6930f2e83f663fecb8db077d69  ROOT_PRIMARY_READS.json\nbdd8980df48845f2db0ab00120eafde0893ce705d23120f27f699c4f86aa3de7  RUN_NATIVE.json\n6b881fee52b4db8d95c331ef7af09f8334d0cdcbf088a7ed3703f301556a670d  receive.js\n{\"status\":\"PASS_FULL_PRESEAL_KEYS\",\"checks\":4754,\"paths\":176,\"payloads\":7,\"payload_bytes\":1097179}\n"
+    }
+  },
+  "sealcheck": {
+    "request": {
+      "cmd": "sha256sum -c SHA256SUMS",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p212_dependency_query_outer_source_root01",
+      "max_output_tokens": 2500
+    },
+    "result": {
+      "chunk_id": "3079ad",
+      "wall_time_seconds": 0.00000335,
+      "exit_code": 0,
+      "original_token_count": 38,
+      "output": "DOCUMENTARY_REPLAYS_NATIVE.json: OK\nREAD_SCOPE.md: OK\nRECEPTION.md: OK\nRESULT.json: OK\nROOT_PRIMARY_READS.json: OK\nRUN_NATIVE.json: OK\nreceive.js: OK\n"
+    }
+  }
+}

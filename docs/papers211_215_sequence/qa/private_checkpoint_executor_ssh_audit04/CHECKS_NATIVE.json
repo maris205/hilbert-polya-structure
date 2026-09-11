@@ -1,0 +1,113 @@
+{
+  "schema": "selected-actual-independent-documentary-checks-v1",
+  "not_exhaustive_transcript": true,
+  "checks": [
+    {
+      "request": {
+        "cmd": "pwd && rg --files -g 'SOURCE_CONTRACT*' -g 'OPTION*' -g '*DIAGNOSTIC*' -g '*INVALIDATION*' -g '*PRIMARY*' -g 'checkpoint.py' -g '*DIFF*' -g 'SHA256SUMS' -g 'ARTIFACT*' qa/private_checkpoint_executor_ssh_delta04 qa/private_checkpoint_executor_preparation03",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 10000
+      },
+      "result": {
+        "chunk_id": "b54ef2",
+        "wall_time_seconds": 0.051433413,
+        "exit_code": 2,
+        "original_token_count": 53,
+        "output": "rg: qa/private_checkpoint_executor_ssh_delta04: No such file or directory (os error 2)\nrg: qa/private_checkpoint_executor_preparation03: No such file or directory (os error 2)\n/root/autodl-tmp/symbolic_dynamics\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "diff -u --label accepted-checkpoint03/checkpoint.py --label ssh-delta04/checkpoint.py docs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/checkpoint.py docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/checkpoint.py",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "97f925",
+        "wall_time_seconds": 0.00000532,
+        "exit_code": 1,
+        "original_token_count": 671,
+        "output": "--- accepted-checkpoint03/checkpoint.py\n+++ ssh-delta04/checkpoint.py\n@@ -21,7 +21,7 @@\n \n ROOT = Path('/root/autodl-tmp/symbolic_dynamics')\n QA = ROOT / 'docs/papers211_215_sequence/qa'\n-PREP = QA / 'private_checkpoint_executor_preparation03'\n+PREP = QA / 'private_checkpoint_executor_ssh_delta04'\n SELF = PREP / 'checkpoint.py'\n SCOPE_PATH = QA / 'private_checkpoint03_scope_root01/CHOSEN_SCOPE.json'\n SCOPE_PIN = {'bytes': 6162898, 'sha256': '76e633c45920f46fc6c1d3e840d9d82fd7025946b31a397356c1d771b1ba5c92'}\n@@ -270,8 +270,38 @@\n     env.update(PATH='/usr/bin:/bin', LANG='C', LC_ALL='C', TZ='UTC', GIT_OPTIONAL_LOCKS='0',\n         GIT_TERMINAL_PROMPT='0', GIT_CONFIG_NOSYSTEM='1', GIT_CONFIG_GLOBAL='/dev/null',\n         GIT_NO_REPLACE_OBJECTS='1',\n-        GIT_SSH_COMMAND='/usr/bin/ssh -o BatchMode=yes -o StrictHostKeyChecking=yes '\n-                        '-o ConnectTimeout=20 -o ConnectionAttempts=1')\n+        GIT_SSH_COMMAND='/usr/bin/ssh -F none -a -x -T '\n+                        '-o BatchMode=yes '\n+                        '-o StrictHostKeyChecking=yes '\n+                        '-o ConnectTimeout=20 '\n+                        '-o ConnectionAttempts=1 '\n+                        '-o UpdateHostKeys=no '\n+                        '-o CheckHostIP=no '\n+                        '-o VerifyHostKeyDNS=no '\n+                        '-o KnownHostsCommand=none '\n+                        '-o AddKeysToAgent=no '\n+                        '-o ControlMaster=no '\n+                        '-o ControlPath=none '\n+                        '-o ControlPersist=no '\n+                        '-o ClearAllForwardings=yes '\n+                        '-o Tunnel=no '\n+                        '-o ProxyCommand=none '\n+                        '-o ProxyJump=none '\n+                        '-o PermitLocalCommand=no '\n+                        '-o LocalCommand=none '\n+                        '-o RemoteCommand=none '\n+                        '-o CanonicalizeHostname=no '\n+                        '-o ForkAfterAuthentication=no '\n+                        '-o EscapeChar=none '\n+                        '-o PKCS11Provider=none '\n+                        '-o SecurityKeyProvider=none '\n+                        '-o PreferredAuthentications=publickey '\n+                        '-o PubkeyAuthentication=yes '\n+                        '-o GSSAPIAuthentication=no '\n+                        '-o GSSAPIDelegateCredentials=no '\n+                        '-o HostbasedAuthentication=no '\n+                        '-o PasswordAuthentication=no '\n+                        '-o KbdInteractiveAuthentication=no')\n     if index is not None:\n         env['GIT_INDEX_FILE'] = str(index)\n     if identity:\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum -c docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/INPUT_PINS.sha256",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "cc28f1",
+        "wall_time_seconds": 0.00000335,
+        "exit_code": 0,
+        "original_token_count": 163,
+        "output": "docs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/checkpoint.py: OK\ndocs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/SOURCE_CONTRACT.md: OK\ndocs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/RECEPTION.md: OK\ndocs/papers211_215_sequence/qa/private_checkpoint03_runtime_preparation01/SSH_POLICY.md: OK\ndocs/papers211_215_sequence/qa/private_checkpoint03_runtime_policy_audit01/REPORT.md: OK\ndocs/papers211_215_sequence/qa/private_checkpoint03_runtime_policy_audit01/POLICY_ASSESSMENT.json: OK\ndocs/papers211_215_sequence/qa/private_checkpoint03_runtime_policy_audit01/SHA256SUMS: OK\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum -c SHA256SUMS",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "f6fa79",
+        "wall_time_seconds": 0.00000306,
+        "exit_code": 0,
+        "original_token_count": 92,
+        "output": "AUTHOR_CLOSING_CHECKS.json: OK\nDEPENDENCY_INVALIDATION.md: OK\nDIAGNOSTIC_PROPOSALS.disabled.json: OK\nEXACT_DELTA.patch: OK\nFINAL_DOCUMENT_RECEIPT.json: OK\nHANDOFF.md: OK\nINPUT_PINS.sha256: OK\nNATIVE_READS_AND_CHECKS.json: OK\nOPTION_POLICY.json: OK\nPLAN.md: OK\nPRIMARY_PROOF.md: OK\nPRIMARY_REQUESTS.json: OK\nREAD_SCOPE.md: OK\nSOURCE_CONTRACT.md: OK\ncheckpoint.py: OK\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "cmp docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/EXACT_DELTA.patch <(diff -u --label accepted-checkpoint03/checkpoint.py --label ssh-delta04/checkpoint.py docs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/checkpoint.py docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/checkpoint.py)",
+        "shell": "/bin/bash",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "31c433",
+        "wall_time_seconds": 0.051094372,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "request": {
+        "cmd": "find docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04 -mindepth 1 -printf '%y %p\\n'",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "ed06b5",
+        "wall_time_seconds": 0.00002271,
+        "exit_code": 0,
+        "original_token_count": 372,
+        "output": "f docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PLAN.md\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/checkpoint.py\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/SOURCE_CONTRACT.md\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PRIMARY_PROOF.md\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/DEPENDENCY_INVALIDATION.md\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/EXACT_DELTA.patch\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/OPTION_POLICY.json\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/DIAGNOSTIC_PROPOSALS.disabled.json\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PRIMARY_REQUESTS.json\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/NATIVE_READS_AND_CHECKS.json\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/INPUT_PINS.sha256\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/READ_SCOPE.md\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/HANDOFF.md\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/AUTHOR_CLOSING_CHECKS.json\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/FINAL_DOCUMENT_RECEIPT.json\nf docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/SHA256SUMS\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/RECEPTION.md docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/SHA256SUMS docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/RECEPTION.md docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/SHA256SUMS",
+        "max_output_tokens": 3000
+      },
+      "result": {
+        "chunk_id": "2e440a",
+        "wall_time_seconds": 0.050516588,
+        "exit_code": 0,
+        "original_token_count": 148,
+        "output": "5de49036c85bcb7399ddee28a12bb7ac9353a7f798ae59650a101bde53ea6550  docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/RECEPTION.md\n21c30c73d7fb396a5f9c6456a7580b1e74681c8e262ef0fef57a9401df13a608  docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/SHA256SUMS\n4c4f656bea9f238a413aed76008722340b969335b22f3730f9895690a5b6637a  docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/RECEPTION.md\n66a47fc5f52f6a02aedd7a3ce614a9f44c9d45b8be811df5781288d4c5edfaca  docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/SHA256SUMS\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/AUTHOR_CLOSING_CHECKS.json' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/DEPENDENCY_INVALIDATION.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/DIAGNOSTIC_PROPOSALS.disabled.json' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/EXACT_DELTA.patch' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/FINAL_DOCUMENT_RECEIPT.json' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/HANDOFF.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/INPUT_PINS.sha256' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/NATIVE_READS_AND_CHECKS.json' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/OPTION_POLICY.json' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PLAN.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PRIMARY_PROOF.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PRIMARY_REQUESTS.json' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/READ_SCOPE.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/SHA256SUMS' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/SOURCE_CONTRACT.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/checkpoint.py' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/checkpoint.py' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/SOURCE_CONTRACT.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/RECEPTION.md' 'docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/SHA256SUMS' 'docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/RECEPTION.md' 'docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/SHA256SUMS'",
+        "max_output_tokens": 8000
+      },
+      "result": {
+        "chunk_id": "e49c66",
+        "wall_time_seconds": 0.00000362,
+        "exit_code": 0,
+        "original_token_count": 853,
+        "output": "bf91469261afff151b8af7713c24218e3ab78b4385c05b9f06ecf9bd84b5682c  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/AUTHOR_CLOSING_CHECKS.json\nd7786e7c8816ba161aea12cd1d6f8bab060867697f3b86e17d7f133963c856c0  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/DEPENDENCY_INVALIDATION.md\n4397282bc691b0bfdf0d69078b304682ecc95b126a3f760ffd09fbd1a13b45a9  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/DIAGNOSTIC_PROPOSALS.disabled.json\nafad2e0ac1f2c5da4f22d0bccb901bd7ecea1058af6c860d11da8fe2cd7d854b  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/EXACT_DELTA.patch\n81f15d6f9f889bfbd44a9bf8a29fdced7ecc6abd7829f3b42c47891198d817a7  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/FINAL_DOCUMENT_RECEIPT.json\n0f18676dc409bd105cff94b593fb34e8ddd84361703bd1676145307d9229b076  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/HANDOFF.md\ned0c80db4dcb461cee23fb633b81a9863693ce6399a1dab0f67816605274cbbe  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/INPUT_PINS.sha256\n2a15ca7f475517853a7badc400b1a4f0aa6145257fbd1926985307dbfedd33c6  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/NATIVE_READS_AND_CHECKS.json\n32037f513897a5a0e5f0c024903f4badf2d3d4aed814d545804fcc1376a7a212  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/OPTION_POLICY.json\n7c93c6950552bd60e14fa51e2d593e47fdd06013dd39b7f79e9708a1f3147b5a  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PLAN.md\n5cfb9f463b157d42a6f109409c87526d53686ee3d6ca3626addd75636946b439  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PRIMARY_PROOF.md\n7611fbe4bd8598d027c101de9afce7274843cc2152c899d2fb5cebf3337df322  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/PRIMARY_REQUESTS.json\ndf28821bf0be577469633a1eeb288bd71e24150b7d1af6a04a57048169222af8  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/READ_SCOPE.md\n101a5445cf0aaa3429a7a7a3e3f6a390b159598359e32c3594af88dcd559b818  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/SHA256SUMS\n4d9c6bd5c6f842cea2be145832bf80bd4153ab3cfb276600332c3aa0d79d3f49  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/SOURCE_CONTRACT.md\n32900d88796c8dcc0dceda62f7d650be184d104202b2dea0ca257d356d65db48  docs/papers211_215_sequence/qa/private_checkpoint_executor_ssh_delta04/checkpoint.py\n4851f2c1c39335c1d0f0de270c2d3ae9637a96991425a7cd1891e32da6f9b0d5  docs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/checkpoint.py\nbb28d925bdd410aa3e342afae2cf8ad8b3c64265e792292a8323293bb886b30e  docs/papers211_215_sequence/qa/private_checkpoint_executor_preparation03/SOURCE_CONTRACT.md\n5de49036c85bcb7399ddee28a12bb7ac9353a7f798ae59650a101bde53ea6550  docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/RECEPTION.md\n21c30c73d7fb396a5f9c6456a7580b1e74681c8e262ef0fef57a9401df13a608  docs/papers211_215_sequence/qa/private_checkpoint_executor_source_root03/SHA256SUMS\n4c4f656bea9f238a413aed76008722340b969335b22f3730f9895690a5b6637a  docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/RECEPTION.md\n66a47fc5f52f6a02aedd7a3ce614a9f44c9d45b8be811df5781288d4c5edfaca  docs/papers211_215_sequence/qa/private_checkpoint03_runtime_root01/SHA256SUMS\n"
+      }
+    }
+  ]
+}

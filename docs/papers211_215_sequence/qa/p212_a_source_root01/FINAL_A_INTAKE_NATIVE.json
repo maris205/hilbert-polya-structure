@@ -1,0 +1,15 @@
+{
+  "arguments": {
+    "cmd": "node <<'P212_FINAL_A_INTAKE'\nconst fs=require('fs'),c=require('crypto');const Q='docs/papers211_215_sequence/',A=Q+'reviews/p212_a/',S='papers/212-closed-pointer-orbits/',F=S+'frozen_round0/';const sha=b=>c.createHash('sha256').update(b).digest('hex'),need=(v,m)=>{if(!v)throw Error(m);};let files=[];function walk(d,r=''){for(const e of fs.readdirSync(d,{withFileTypes:true})){need(!e.isSymbolicLink(),'symlink');if(e.isDirectory())walk(d+e.name+'/',r+e.name+'/');else{need(e.isFile(),'nonregular');files.push(r+e.name);}}}walk(A);const manifest=fs.readFileSync(A+'SHA256SUMS','utf8'),rows=manifest.trimEnd().split('\\n');need(rows.length===201,'201payloads');const names=[];for(const line of rows){const name=line.slice(66);need(!name.startsWith('/')&&!name.split('/').includes('..')&&sha(fs.readFileSync(A+name))===line.slice(0,64),'pin '+name);names.push(name);}need(JSON.stringify(files.sort())===JSON.stringify([...names,'SHA256SUMS'].sort()),'exactmembership');const edits={'sections/01_setup.tex':['\\\\cite[Theorem~3.8]{holroyd2008}','\\\\cite[Lemma~4.9]{holroyd2008}'],'references.bib':['Primary preprint; Theorem 3.8 and Corollary 4.10','Primary preprint; Theorem 3.8, Lemma 4.9 and Corollary 4.10']};let changed=0,unchanged=0;for(const line of fs.readFileSync(Q+'qa/p212_round0_freeze_source01/FILES.tsv','utf8').trimEnd().split('\\n')){const [live,rel]=line.split('\\t');let expected=fs.readFileSync(F+rel);if(edits[rel]){const [old,next]=edits[rel],t=expected.toString();need(t.split(old).length===2,'once');expected=Buffer.from(t.replace(old,next));changed++;}else unchanged++;need(expected.equals(fs.readFileSync(live)),'exactdelta '+rel);}need(changed===2&&unchanged===23,'delta census');const findings=JSON.parse(fs.readFileSync(A+'FINDINGS_FINAL.json'));need(Object.values(findings.current_open).every(x=>x===0)&&findings.findings.every(x=>x.status==='CLOSED'),'finalcensus');for(const p of ['SOURCE_INPUTS.sha256','INPUT_PINS.sha256'])for(const l of fs.readFileSync(A+p,'utf8').trimEnd().split('\\n'))need(sha(fs.readFileSync(l.slice(66)))===l.slice(0,64),'sourcepin');console.log(JSON.stringify({review_payloads:201,files:202,manifest_sha256:sha(Buffer.from(manifest)),changed,unchanged,current_open:findings.current_open,source_pins:16,frozen_pins:25,accepted_new_pdf_sha256:sha(fs.readFileSync(A+'build01/source_only/main.pdf')),new_science_run:false},null,2));\nP212_FINAL_A_INTAKE",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "login": false,
+    "max_output_tokens": 1800
+  },
+  "result": {
+    "chunk_id": "e65ca8",
+    "wall_time_seconds": 0.000005251,
+    "exit_code": 0,
+    "original_token_count": 103,
+    "output": "{\n  \"review_payloads\": 201,\n  \"files\": 202,\n  \"manifest_sha256\": \"0d1bccb06817e835a17ddf30fc336e955a99ad14a138e0638a66b604cd863c77\",\n  \"changed\": 2,\n  \"unchanged\": 23,\n  \"current_open\": {\n    \"Critical\": 0,\n    \"Major\": 0,\n    \"Minor\": 0\n  },\n  \"source_pins\": 16,\n  \"frozen_pins\": 25,\n  \"accepted_new_pdf_sha256\": \"096adcb6b24fd6ae1853cf8fecff4cd0acc1a6d4b9aab0e9470bdb3e66997c31\",\n  \"new_science_run\": false\n}\n"
+  }
+}

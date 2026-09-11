@@ -1,0 +1,20 @@
+--- p212_three_leaf_preparation01/three_leaves.proposed.mjs.txt
++++ p212_three_terminal_preparation01/three_terminals.proposed.mjs.txt
+@@ -6,5 +6,5 @@
+- {id:'INTERPRETER_LEAF',path:'/lib64/ld-linux-x86-64.so.2',role:'loader_alias_or_body',optional:false,max_regular_bytes:16777216,max_link_bytes:4096},
+- {id:'TINFO_LEAF',path:'/usr/lib/x86_64-linux-gnu/libtinfo.so.6',role:'needed_alias_or_body',optional:false,max_regular_bytes:16777216,max_link_bytes:4096},
+- {id:'KPATHSEA_LEAF',path:'/usr/lib/x86_64-linux-gnu/libkpathsea.so.6',role:'needed_alias_or_body',optional:false,max_regular_bytes:16777216,max_link_bytes:4096}
++ {id:'INTERPRETER_LEAF',path:'/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2',role:'loader_regular_candidate',optional:false,max_regular_bytes:16777216,max_link_bytes:0},
++ {id:'TINFO_LEAF',path:'/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3',role:'needed_regular_candidate',optional:false,max_regular_bytes:16777216,max_link_bytes:0},
++ {id:'KPATHSEA_LEAF',path:'/usr/lib/x86_64-linux-gnu/libkpathsea.so.6.3.4',role:'needed_regular_candidate',optional:false,max_regular_bytes:16777216,max_link_bytes:0}
+ ];
+-const TEMPLATE={schema:'p212-three-lexical-leaves-request-v1',enabled:false,status:'HOLD_SOURCE_ONLY_THREE_LEAVES',purpose:'source_gate',entries:ENTRIES,total_regular_byte_limit:50331648,total_link_byte_limit:12288,permission_receipt:null};
++const TEMPLATE={schema:'p212-three-lexical-leaves-request-v1',enabled:false,status:'HOLD_SOURCE_ONLY_THREE_LEAVES',purpose:'source_gate',entries:ENTRIES,total_regular_byte_limit:50331648,total_link_byte_limit:0,permission_receipt:null};
+@@ -32,6 +32,1 @@
+-    row.kind='symlink';row.link={readlink_returned:false,raw_hex:'',content:null,target_utf8:null,point_complete:false,same_fd_attested:false};
+-    need(before.size>0n&&before.size<=BigInt(entry.max_link_bytes),'LINK_DECLARED_SIZE_BOUND');
+-    const target=fs.readlinkSync(entry.path,{encoding:'buffer'});need(Buffer.isBuffer(target),'ACTUAL_LINK_BUFFER');row.link.readlink_returned=true;row.link.raw_hex=target.toString('hex');row.link.content=pin(target);
+-    const text=target.toString('utf8');if(Buffer.from(text,'utf8').equals(target))row.link.target_utf8=text;
+-    const after=fs.lstatSync(entry.path,{bigint:true});row.lstat_after=fields(after);need(after.isSymbolicLink(),'LINK_KIND_CHANGED');same(row.lstat_before,row.lstat_after,'ALL_TEN_LINK_POINT_FIELDS_UNCHANGED');
+-    need(target.length>0&&target.length<=entry.max_link_bytes&&BigInt(target.length)===before.size&&!target.includes(0),'LINK_COMPLETE_LITERAL_BYTES_SIZE');need(acceptedLink+target.length<=TEMPLATE.total_link_byte_limit,'TOTAL_LINK_BOUND');row.link.point_complete=true;
++    row.kind='symlink';need(false,'REGULAR_ONLY_LINK_STOP_NO_READLINK');

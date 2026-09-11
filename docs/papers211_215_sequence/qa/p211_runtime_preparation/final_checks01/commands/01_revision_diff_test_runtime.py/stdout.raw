@@ -1,0 +1,39 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/discovery01/source_snapshots/test_runtime.py	2026-09-08 17:27:58.872021328 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/test_runtime.py	2026-09-08 17:35:08.002268079 +0800
+@@ -66,7 +66,8 @@
+     core.OUT, core.COMMANDS, core.UNFINALIZED_NATIVE = out, [], []
+     checks, errors, source_before = [], [], None
+     try:
+-        sources = list(runtime.SOURCE_FILES) + [Path(__file__).resolve(), HERE / 'fixtures/verify_fixture.py', lock_path]
++        sources = list(runtime.SOURCE_FILES) + [Path(__file__).resolve(), HERE / 'fixtures/verify_fixture.py',
++                   HERE / 'fixtures/pre_spawn_refusal.py', HERE / 'BINDING.pending.json', lock_path]
+         source_before = {str(p): core.rich(p) for p in sources}
+         core.write_json(out / 'SOURCE_INPUTS_BEFORE.json', source_before)
+         core.write_json(out / 'TESTER_SETTINGS.json', {'argv': sys.argv, 'orig_argv': sys.orig_argv,
+@@ -129,6 +130,13 @@
+                 str(env_cache), str(core.ROOT)]
+         core.command('06_environment_refusal', argv, timeout=10, cwd=core.ROOT, require_success=False)
+         check(core.COMMANDS[-1]['exit_code'] != 0, 'actual_wrong_child_environment_refused', checks)
++        argv = [str(runtime.PYTHON), '-I', '-S', '-B', '-X',
++                'pycache_prefix=' + str(out / 'unused_pre_spawn_refusal_cache'),
++                str(HERE / 'fixtures/pre_spawn_refusal.py'), str(HERE / 'runtime_core.py'),
++                str(out / 'audit_refusal_fixture')]
++        raw = core.command('06a_pre_spawn_audit_refusal', argv, timeout=10, cwd=core.ROOT)
++        check(json.loads(raw)['no_invented_native_exit_or_stream_seal'],
++              'actual_audit_hook_refusal_preserves_ATTEMPT_unknown_outcome', checks)
+         core.write_json(out / 'parameters.fixture.json', {'fixture_only': True, 'value': 17})
+         for mode in ('initial', 'pair'):
+             binding = fixture_binding(out, lock_path, mode)
+@@ -190,7 +198,11 @@
+                     'checks': checks, 'errors': errors, 'commands': core.COMMANDS,
+                     'scientific_executions': 0, 'fixture_producer_invocations_if_complete': 3,
+                     'KIP_source_read_or_imported': False})
+-    seal = core.seal() if not core.UNFINALIZED_NATIVE else None
++    unresolved_nested = sorted(str(p) for p in out.rglob('UNCLOSED_NO_SEAL.json'))
++    if unresolved_nested:
++        core.write_json(out / 'UNRESOLVED_NESTED_ATTEMPTS.json',
++                        {'refuse_enclosing_test_seal': True, 'unclosed_markers': unresolved_nested})
++    seal = core.seal() if not core.UNFINALIZED_NATIVE and not unresolved_nested else None
+     print(json.dumps({'status': 'FAIL_PRESERVED' if errors else 'PASS_PURE_INFRASTRUCTURE_TESTS',
+                       'checks': len(checks), 'errors': errors, 'output': str(out), 'seal': seal}, sort_keys=True))
+     return 1 if errors else 0

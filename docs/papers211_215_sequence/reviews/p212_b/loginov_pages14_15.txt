@@ -1,0 +1,116 @@
+5 In-Situ List-Reversal Algorithm
+Fig. 8 shows the list-reversal algorithm that we
+analyze. The algorithm performs the reversal in
+place using three pointer variables, x, y, and t. [1] void reverse(List *x)
+The n field of list nodes is reversed on lines [7] [2] { List *y = NULL;
+                                                         [3]         while (x != NULL) {
+and [8]. During the execution of the statements
+                                                         [4]            t = y;
+on those lines, x points to the next node to be [5]                     y = x;
+processed, y points to the node whose n field is [6]                    x = x->n;
+reversed, and t points to the predecessor of that [7]                   y->n = NULL;
+node.                                                    [8]            y->n = t;
+    First, let us consider how Reverse pro- [9]                      }
+cesses an acyclic list La with head u1 , pointed [10]                x = y;
+to by x. Fig. 9 shows a logical structure S9 that [11] }
+represents a store that arises before line [7] dur-
+ing the application of Reverse to La . At this             Fig. 8. In-situ list reversal algorithm
+point the n edges of nodes u1 , . . . , u3 have been
+reversed, while the remaining edges retain their original orientation. The statements on
+lines [7] and [8] replace the n edge from u4 to u5 with an n edge from u4 to u3 . The
+traversal continues until, on the last loop iteration, t is set to point to u7 ’s predecessor
+in the input list, y is set to point to u7 , and x is set to NULL. The subsequent execution
+of lines [7] and [8] reverses the remaining n edge. The head of the reversed list is u7 ,
+pointed to by y. As in the input list, no node lies on a cycle. The last statement of the
+procedure (the assignment on line [10]) restores x as the head pointer. The transforma-
+tion described above can be stated formally using history relations as follows:
+
+                same rn,x () ∧ same cn () ∧ ∀ v1 , v2 : n(v1 , v2 ) ⇔ n0 (v2 , v1 ).          (8)
+
+
+
+           u1
+                   n   …        n
+                                    u3          u4
+                                                        n
+                                                             u5
+                                                                    n   …       n
+                                                                                       u7
+
+
+                                     t           y           x
+
+Fig. 9. Logical structure S9 that represents a store that arises prior to line [7] of Reverse when
+the algorithm is applied to an acyclic list.
+
+    Let us consider how Reverse processes a list Lc that consists of a single cycle
+without a panhandle, such as the acyclic list La discussed above, but with an additional
+n edge from u7 to u1 . The behavior of Reverse on list Lc is nearly identical to its
+behavior on list La . The outgoing n edges are reversed one at a time until, on the last
+iteration, t is set to point to u7 , y is set to point to u1 , and x is set to NULL. The
+subsequent execution of lines [7] and [8] reverses the remaining n edge from u7 to u1 .
+The head of the reversed list remains u1 , pointed to by y. Every list node still lies on a
+cycle. The last statement of the procedure (the assignment on line [10]) restores x as the
+head pointer. The transformation of lists such as Lc also obeys the property specified in
+Formula (8).
+                                                      n
+
+
+        u1
+              n   … n     u5
+                                n   … n      u6       u7
+                                                           n
+                                                               u8
+                                                                    n   … n      u9
+
+
+                                              t       y        x                            (a)
+
+                                                                         n
+
+        u1
+              n   … n     u2
+                                n
+                                    u3       u4
+                                                  n   … n      u5
+                                                                    n   … n      u9
+
+
+                           x         y        t                                             (b)
+
+Fig. 10. Logical structures that represent stores that arise prior to line [7] of Reverse when
+the algorithm is applied to a panhandle list. (a) Logical structure that represents a store that
+arises while Reverse processes nodes that lie on the cycle, i.e., after processing nodes that lie
+in the panhandle once. (b) Logical structure that represents a store that arises while Reverse
+processes nodes that lie on the panhandle for the second time, i.e., after processing nodes that lie
+on the cycle.
+
+     Now, we discuss how Reverse processes a panhandle list Lp . Initially, the proce-
+dure advances the three pointer variables, x, y, and t, down the panhandle, reversing
+the n edges out of y. After the panhandle is processed, the algorithm proceeds with
+the processing of the cycle. Fig. 10(a) shows a logical structure that represents a store
+that arises prior to line [7] while Reverse processes nodes that lie on the cycle. Until
+Reverse completes the processing of the cycle, the steps are identical to the steps
+taken during the processing of lists La and Lc . Note that the orientation of the n edges
+in the panhandle is reversed when the loop body is executed with x pointing to u5 (while
+reversing the backedge at the end of processing the cycle). As a result, the algorithm
+proceeds along the reversed n edges down the panhandle, reestablishing the original
+orientation of those edges. Fig. 10(b) shows a logical structure that represents a store
+that arises prior to line [7] while Reverse processes panhandle nodes for the second
+time. Instead of reversing every n edge in the list, as it does for lists La and Lc ,9 the al-
+gorithm reverses the direction of every n edge on the cycle but reestablishes the original
+direction of the n edges in the panhandle. The cyclicity property of all nodes remains
+as it was on input. The head of the output list remains u1 , pointed to by y. The last
+statement of the procedure (the assignment on line [10]) restores x as the head pointer.
+The transformation described above can be stated formally using history relations as
+follows:
+                                 same rn,x () ∧ same cn () ∧
+               ∀ v1 , v2 : (cn0 (v1 ) ∧ cn0 (v2 )) ∧ (n(v1 , v2 ) ⇔ n0 (v2 , v1 ))         (9)
+                        ∨ ¬(cn0 (v1 ) ∧ cn0 (v2 )) ∧ (n(v1 , v2 ) ⇔ n0 (v1 , v2 )).
+Note that while the behavior of Reverse on lists consisting of a cycle without a pan-
+handle can be described by Formula (8), as we mentioned above, it can also be described
+by Formula (9). (The case described by formula ¬(cn0 (v1 ) ∧ cn0 (v2 )) never arises.)
+ 9
+     Reversing every n edge of a panhandle list is not possible because it requires the shared node
+     (u5 in Fig. 10) to have two outgoing n edges.
+

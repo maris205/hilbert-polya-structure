@@ -1,0 +1,36 @@
+{
+  "schema": "p212-eight-file-receiver-source-findings-v1",
+  "source_verdict": "HOLD_V1_TWO_MINOR_GRAMMAR_FINDINGS",
+  "critical": 0,
+  "major": 0,
+  "minor": 2,
+  "open": 2,
+  "source_execution": false,
+  "findings": [
+    {
+      "id": "DATA-S1",
+      "severity": "Minor",
+      "status": "OPEN_V1",
+      "location": "receive_data.proposed.mjs.txt:71 / ref()",
+      "problem": "RegExp.test coerces nonstrings; root_original_projection_reception.pin.sha256 may be a one-element 64-hex string array and pass ref(). Grant pins get later whole content equality, but this receipt reference does not.",
+      "manual_witness": "sha256: [a 64-character lowercase hexadecimal string]",
+      "required_delta": "Require typeof r.pin.sha256 === 'string' before regex.",
+      "scope": "Malformed inert reference DATA acceptance, not external-authentication or operation bypass."
+    },
+    {
+      "id": "DATA-S2",
+      "severity": "Minor",
+      "status": "OPEN_V1",
+      "location": "receive_data.proposed.mjs.txt:77–89 / input()",
+      "problem": "Object.keys emptiness precedes object validation, allowing [] or empty string as the failure's empty request_input. Truthiness-only optional error/close_error validation skips false/0/empty string, including complete-input acceptance.",
+      "manual_witness": "An entry-failure request_input: [] passes empty branch; a complete input with error:false or close_error:0 skips err() and the complete no-error truthiness checks.",
+      "required_delta": "Require object(r) before empty-key handling; validate each optional error field by own-property presence; require error/close_error absence for complete successful input.",
+      "scope": "Malformed DATA grammar acceptance; input records and raw are still retained and no grant follows."
+    }
+  ],
+  "limitations": [
+    "Manual source reasoning only; no proposed-code import/execution/syntax/AST/test.",
+    "Native original/projection matching and entire context-pin authentication remain explicitly independent root responsibilities.",
+    "All original V1 files remain immutable; same-reviewer V2 delta pending root routing."
+  ]
+}

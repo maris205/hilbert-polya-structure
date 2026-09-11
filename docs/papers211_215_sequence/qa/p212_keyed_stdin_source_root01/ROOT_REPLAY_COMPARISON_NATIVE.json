@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "node <<'P212_REPLAY_BYTES_ONLY'\nconst fs=require('node:fs'),crypto=require('node:crypto'),assert=require('node:assert/strict');\nconst p='docs/papers211_215_sequence/qa/',record=JSON.parse(fs.readFileSync(p+'p212_keyed_stdin_source_root01/ROOT_LIMITED_DOCUMENTARY_REPLAY_NATIVE.json'));\nconst actual=Buffer.from(record.return.output,'utf8'),archived=fs.readFileSync(p+'p212_keyed_stdin_source_audit01/DOCUMENTARY_RESULT.json');\nassert.equal(record.return.exit_code,0);assert(actual.equals(archived));\nprocess.stdout.write(JSON.stringify({scope:'actual root documentary stdout compared as raw bytes to archived limited-audit result; not science or independent noncontributor acceptance',equal:true,bytes:actual.length,sha256:crypto.createHash('sha256').update(actual).digest('hex')},null,2)+'\\n');\nP212_REPLAY_BYTES_ONLY",
+    "max_output_tokens": 1200
+  },
+  "return": {
+    "chunk_id": "93fa0b",
+    "wall_time_seconds": 0.00000646,
+    "exit_code": 0,
+    "original_token_count": 69,
+    "output": "{\n  \"scope\": \"actual root documentary stdout compared as raw bytes to archived limited-audit result; not science or independent noncontributor acceptance\",\n  \"equal\": true,\n  \"bytes\": 166438,\n  \"sha256\": \"8a388bcc36b715a20b12d7136ad25f300efd4369b67c5fe898a9794e19c3133a\"\n}\n"
+  }
+}

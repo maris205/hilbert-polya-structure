@@ -1,0 +1,61 @@
+{
+  "scope": "P213_MINIMAL_OBSERVER_AND_CAPTURE_SOURCE_ONLY",
+  "verdict": "HOLD_SOURCE_TWO_OPEN_FINDINGS_BINDING_UNRESOLVED",
+  "reviewer": "/root/round211_finite_matching_scout",
+  "source_sha256": "97198b16d87c504a2574a773133f8a4574d01f1751d810146b1237bb6359e65b",
+  "capture_sha256": "1591b239781196ef8e31db64f17cfe51d3c707d1297f6756f0d072acb8aec1d2",
+  "source_packet_seal": "5517fa99464c02c5d21170a133b0f5a6d540f18ca549dd6296503f2fc0d29d55",
+  "finding_census": {
+    "Critical": 0,
+    "Major": 2,
+    "Minor": 0,
+    "open": 2,
+    "closed": 0
+  },
+  "findings": [
+    {
+      "id": "P213-MOS-F01",
+      "severity": "Major",
+      "status": "OPEN",
+      "title": "Following proc-exe metadata access precedes target validation",
+      "location": "observe.py:335-345, especially 338-342",
+      "obligations": [
+        4,
+        5
+      ],
+      "evidence": "process_points preserves os.readlink('/proc/self/exe'), then calls following os.stat('/proc/self/exe') before checking cwd or equality of the observed executable target to BINDING['interpreter']['final']. It is called at beginning, after keys and closing.",
+      "consequence": "The source's explicit unexpected-symlink-target-before-further-access promise is not implemented at this proc endpoint. Prior map allowlisting rejects some unexpected targets but is not a per-link equality guard or an authorization to follow any target before its role is checked. This is a source-order defect, not evidence that an out-of-scope read occurred; the frozen source is disabled.",
+      "required_resolution": "In a separately commissioned new-only source, preserve readlink evidence and reject unapproved target/cwd observations before following executable metadata. Retain later complete-key comparisons and point-check/race limits. Do not change the frozen source, broaden the frontier or claim a sandbox.",
+      "runtime_test_performed": false
+    },
+    {
+      "id": "P213-MOS-F02",
+      "severity": "Major",
+      "status": "OPEN",
+      "title": "Generic RuntimeError arguments are incorrectly treated as owned internal codes",
+      "location": "observe.py:109-113 and uses in prehelper/helper-import/file/outer handlers",
+      "obligations": [
+        2,
+        6
+      ],
+      "evidence": "failure(exc) exports exc.args[0] whenever type(exc) is RuntimeError. That equality proves the class, not that need() or an observer-owned finite failure site created the exception. A RuntimeError supplied by a helper or supported runtime operation follows the same branch.",
+      "consequence": "The stated no-arbitrary-exception-text rule is not supported. For an externally originated RuntimeError carrying a message, its first argument becomes emitted 'code'; no actual private value or live failure was observed. Empty args also are not safely indexed, but no independent liveness/guaranteed-receipt claim is added to this finding.",
+      "required_resolution": "A new-only source must distinguish observer-owned bounded codes from generic runtime exceptions, emit only reviewed finite internal codes/appropriate non-sensitive class-errno labels, and not forward arbitrary args based only on RuntimeError type. Preserve failure state and complete captured evidence without adding imports/discovery or a receipt guarantee.",
+      "runtime_test_performed": false
+    }
+  ],
+  "scope_limits": [
+    "Intentional BINDING=None and unconditional capture exit are not defects and remain unchanged.",
+    "Full expected launch and phase-specific module rows are not supplied by the accepted design or archive-name authority; no exact binding is accepted.",
+    "Seven design obligations are assessed as source mechanisms and future binding/reception duties, not seven completed runtime tests.",
+    "An archive supplies historical documentary candidates, not current keys, absences, exact P213 startup rows or launch identity.",
+    "Any allowlist-based collection redesign requires a separate new-only source/design delta and exact independent review.",
+    "Not a manuscript A/B review or scientific/source-parameter reopening."
+  ],
+  "source_accepted": false,
+  "exact_binding_accepted": false,
+  "probe_authorized": false,
+  "runtime_accepted": false,
+  "scientific_operation": false,
+  "external_status": "HOLD_EXTERNAL"
+}

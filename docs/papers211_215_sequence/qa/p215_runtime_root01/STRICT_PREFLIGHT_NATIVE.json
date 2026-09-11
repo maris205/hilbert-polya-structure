@@ -1,0 +1,13 @@
+{
+  "arguments": {
+    "cmd": "node -e '\nconst fs=require(\"fs\"),a=require(\"assert\"),c=require(\"crypto\");\nconst q=\"docs/papers211_215_sequence/qa/p215_runtime_root01/\";\nconst r=JSON.parse(fs.readFileSync(q+\"RUNTIME_INPUTS.json\"));\nfor(const k of r.roles){if(k.kind===\"required-absence\"){let absent=false;try{fs.lstatSync(k.path);}catch(e){a.equal(e.code,\"ENOENT\");absent=true;}a(absent);}else{const b=fs.readFileSync(k.path);a.equal(b.length,k.bytes);a.equal(c.createHash(\"sha256\").update(b).digest(\"hex\"),k.sha256);const st=fs.statSync(k.path,{bigint:true});for(const [f,v]of Object.entries(k.metadata))a.equal(String(st[f]),v);}}\nconsole.log(JSON.stringify({complete_current_runtime_roles:r.roles.length,content_and_all_metadata_unchanged:true}));\n'",
+    "max_output_tokens": 1000
+  },
+  "result": {
+    "chunk_id": "c42c6b",
+    "wall_time_seconds": 0.00000514,
+    "exit_code": 0,
+    "original_token_count": 20,
+    "output": "{\"complete_current_runtime_roles\":19,\"content_and_all_metadata_unchanged\":true}\n"
+  }
+}

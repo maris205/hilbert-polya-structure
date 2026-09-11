@@ -1,0 +1,31 @@
+--- docs/papers211_215_sequence/qa/p212_author_pair_receiver_preparation01/inspect_production.py	2026-09-09 12:50:43.831672446 +0800
++++ docs/papers211_215_sequence/qa/p212_author_pair_receiver_startup_amendment01/inspect_production.py	2026-09-09 13:03:40.329520240 +0800
+@@ -185,6 +185,11 @@
+ need(SOURCE == OWN/'inspect_production.py', 'exact new documentary helper placement')
+ raw(SOURCE);raw(OLD_SOURCE)
+ need(binding_path == QA/'p212_author_pair_binding01/BINDING.json' and capture_path == binding_path.parent/'PRODUCTION_TOOL_INVOCATION.json', 'exact pair original binding/capture roles')
++root_startup_cache = binding_path.parent/'never_created_root_capture_cache'
++root_startup_contract = binding_path.parent/'ROOT_STARTUP_CONTRACT.md'
++need(sum(row['path'] == str(root_startup_contract) for row in binding['provenance_inputs']) == 1, 'unique provenance-bound root startup contract')
++# This is a receiver-time observation, not the separately required root pre-production observation.
++need(not os.path.lexists(root_startup_cache), 'root-selected startup prefix absent at receiver entry')
+ need(binding['approved'] is True and binding['purpose'] == 'P212_AUTHOR_MANUSCRIPT' and binding['role'] == 'author', 'actual approved author binding')
+ mode, attempt = binding['mode'], Path(binding['attempt'])
+ need(mode == 'pair' and attempt == QA/'root_replays/p212_author_pair_01', 'exact separately bound strict-pair scope')
+@@ -390,7 +395,7 @@
+ parts=[capture['result']]+[r['result'] for r in capture.get('polls',[])]
+ need(parts[-1]['exit_code']==0 and not parts[-1].get('session_id'),'actual product-boundary terminal completion')
+ need(capture['request']['workdir']==str(ROOT),'actual product cwd')
+-root_launch=['/usr/bin/env','-i']+[k+'='+v for k,v in ENV.items()]+['/usr/bin/python3.10','-I','-S','-B',binding['root_capture']['controller']['path'],str(binding_path),sys.argv[2]]
++root_launch=['/usr/bin/env','-i']+[k+'='+v for k,v in ENV.items()]+['/usr/bin/python3.10','-I','-S','-B','-X','pycache_prefix='+str(root_startup_cache),binding['root_capture']['controller']['path'],str(binding_path),sys.argv[2]]
+ need(capture['request']['cmd']==' '.join(root_launch),'entire actual new root product launch')
+ for index, poll in enumerate(capture.get('polls', [])):
+     need(parts[index].get('session_id') and 'exit_code' not in parts[index] and poll['request']['session_id'] == parts[index]['session_id'], 'entire genuine running/poll session chain')
+@@ -402,6 +407,7 @@
+     need(state(row['path'],row['with_bytes'])==row['state'],'complete final present configuration role')
+ for p, data in READS.items():
+     need(Path(p).read_bytes() == data, ('entire final read-set unchanged', p))
++need(not os.path.lexists(root_startup_cache), 'root-selected startup prefix absent at receiver close; not continuous startup tracing')
+ input_key={p:rich(p) for p in list(READS)}
+ with (OWN/'INPUTS_CURRENT.json').open('x') as stream:
+     json.dump({'files':input_key,'configuration_state_roles':STATE_KEY},stream,sort_keys=True,indent=2);stream.write('\n')

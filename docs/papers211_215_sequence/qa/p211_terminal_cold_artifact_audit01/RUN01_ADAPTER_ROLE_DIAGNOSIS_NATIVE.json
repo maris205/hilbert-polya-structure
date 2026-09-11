@@ -1,0 +1,32 @@
+{
+  "records": [
+    {
+      "request": {
+        "cmd": "sed -n '1,47p' papers/211-kernel-image-projection-feedback/qa_final/cold_build_1/outer/executed_adapter/build_p211.py",
+        "max_output_tokens": 3500
+      },
+      "result": {
+        "chunk_id": "01dc06",
+        "wall_time_seconds": 0.000006099,
+        "exit_code": 0,
+        "original_token_count": 579,
+        "output": "#!/usr/bin/env python3\n\"\"\"One separately root-bound P211 terminal source-only build.\n\nThe two literal cold output roles use this same fully inspected fresh source.\nNeither a successful native build nor a render is a view or terminal acceptance.\nNo cleanup, installation, source repair, retries or scientific execution.\n\"\"\"\nimport argparse\nimport json\nimport os\nfrom pathlib import Path\nimport re\nimport sys\nimport traceback\n\nHERE = Path(__file__).resolve().parent\nexec(compile((HERE / 'build_core.py').read_bytes(), str(HERE / 'build_core.py'), 'exec'))\nCODE_NAMES = ('build_core.py', 'prepare_build.py', 'build_p211.py',\n              'launch_build.py', 'static_checks.py')\n\n\ndef configuration_key(binding, lock):\n    \"\"\"Bind unset-HOME relative TeX roots to the actual future cold cwd.\"\"\"\n    cold = Path(binding['output']) / 'inner/source_only'\n    roles = lock['cwd_relative_absence_roles']\n    expected_paths = set()\n    for role, record in roles.items():\n        relative = Path(record['relative'])\n        require(relative.parts and not relative.is_absolute() and '..' not in relative.parts and\n                record['required_state'] == 'ABSENT', 'Unsupported relative configuration role')\n        expected_paths.add(str(cold / relative))\n    bound = binding['cwd_relative_configuration']\n    require(set(bound) == expected_paths, 'Root must bind every future cwd-relative configuration spelling')\n    for path, expected in bound.items():\n        require(expected == entry(path) and expected['present'] is False and\n                expected['symlink'] is False and expected['resolved'] == path,\n                'Future source-only user search root must be pinned physically absent')\n    require(not (set(bound) & set(lock['selector_specs'])), 'Conflicting configuration roles')\n    specs = {**lock['selector_specs'], **{p: {'members': False} for p in bound}}\n    expected = {**lock['entries'], **bound}\n    return specs, expected\n\n\nORIGINAL_ADAPTER = ROOT / 'docs/papers211_215_sequence/qa/p211_initial_build_01/outer/executed_adapter'\nORIGINAL_LOCK = ROOT / 'docs/papers211_215_sequence/qa/p211_initial_build_binding01/ROOT_DERIVED_SOURCE_LOCK.json'\nORIGINAL_LOCK_PIN = {'bytes': 570037, 'sha256': '1a879caa4d7bb68fd841e381f37d5ec3e31236ccd6c7b677dbd95492a92bbf87'}\nTERMINAL_RECEIPT_ROLES = frozenset((\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "rg -n 'p211_build_revision01|p211_initial_build_01|terminal_build|root_read|BINDING|DEPENDENCY_LOCK' papers/211-kernel-image-projection-feedback/qa_final/cold_build_1/inner/ORIGINALS_BEFORE.json",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "a7a171",
+        "wall_time_seconds": 0.00000582,
+        "exit_code": 0,
+        "original_token_count": 435,
+        "output": "6:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_initial_build_01/outer/executed_adapter/build_core.py\": {\n10:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_initial_build_01/outer/executed_adapter/build_p211.py\": {\n14:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_initial_build_01/outer/executed_adapter/launch_build.py\": {\n18:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_initial_build_01/outer/executed_adapter/prepare_build.py\": {\n22:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_initial_build_01/outer/executed_adapter/static_checks.py\": {\n26:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_initial_build_binding01/BINDING.json\": {\n42:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_preparation01/terminal_build/build_core.py\": {\n46:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_preparation01/terminal_build/build_p211.py\": {\n50:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_preparation01/terminal_build/launch_build.py\": {\n54:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_preparation01/terminal_build/prepare_build.py\": {\n58:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_preparation01/terminal_build/static_checks.py\": {\n74:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_terminal_enable_root01/build_1/enable01/BINDING.json\": {\n78:  \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_terminal_enable_root01/build_1/enable01/DEPENDENCY_LOCK.json\": {\n"
+      }
+    }
+  ],
+  "scope": "Own auditor expected old-adapter path role diagnosis, no original edits."
+}
+

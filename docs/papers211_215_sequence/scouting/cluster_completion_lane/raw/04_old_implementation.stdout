@@ -1,0 +1,37 @@
+            recovered = ((3 * a * b - c) % p, a, b)
+            check(recovered == s, f"MRK p={p}: inverse failed")
+        record("MRK", f"p={p}", g)
+
+
+# ---------------------------------------------------------------------------
+# CLU: zero-totalized rank-two cluster/QRT map.
+# (x,y) -> (y,(1+y^2)inv0(x)).
+
+
+def verify_clu() -> None:
+    for p in (3, 5, 7, 11, 13, 17, 19, 23, 29, 31):
+        states = [(x, y) for x in range(p) for y in range(p)]
+
+        def step(s, p=p):
+            x, y = s
+            return y, (1 + y * y) * inv0(x, p) % p
+
+        g = graph_profile(states, step, f"CLU p={p}")
+        if p % 4 == 3:
+            check(g["image"] == p * p and g["max_fibre"] == 1,
+                  f"CLU p={p}: expected nonsingular permutation")
+            check(g["recurrent"] == p * p and g["max_tail"] == 0,
+                  f"CLU p={p}: unexpected tails")
+        for x, y in states:
+            z = step((x, y))[1]
+            if x and y and z:
+                k = (x * x + y * y + 1) * inv0(x * y % p, p) % p
+                check(z == (k * y - x) % p,
+                      f"CLU p={p}: linear recurrence reduction failed")
+                y2, z2 = step((y, z))
+                if y2 and z2:
+                    k2 = (y2 * y2 + z2 * z2 + 1) * inv0(y2 * z2 % p, p) % p
+                    check(k2 == k, f"CLU p={p}: invariant failed")
+        record("CLU", f"p={p}", g)
+
+

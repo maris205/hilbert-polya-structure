@@ -1,0 +1,259 @@
+{
+  "schema": "p211-r2-independent-own-corrections-native-v1",
+  "scope": "Actual complete native source differences and outer capture returns for all five independent documentary attempts. No submitted source or prior failed artifact was edited.",
+  "source_diffs": [
+    {
+      "request": {
+        "cmd": "/usr/bin/diff -u -- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical.py docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical02.py",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "7cfbca",
+        "wall_time_seconds": 0.00000403,
+        "exit_code": 1,
+        "original_token_count": 407,
+        "output": "--- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical.py\t2026-09-09 11:08:17.155718695 +0800\n+++ docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical02.py\t2026-09-09 11:12:18.421295988 +0800\n@@ -83,8 +83,13 @@\n         p = Path(spelling)\n         need(p.is_absolute() and str(p)==spelling,('absolute recorded file',spelling))\n         if not p.is_relative_to(ROOT):\n-            need(not any(p.is_relative_to(Path(b)) for b in ('/root','/proc','/sys','/dev')),\n-                 ('no private/ambient/special host file collection',spelling))\n+            accepted_instruction_files={\n+                '/root/autodl-tmp/.codex/skills/paper-compile/SKILL.md',\n+                '/root/autodl-tmp/.codex/skills/proof-writer/SKILL.md',\n+                '/root/autodl-tmp/.codex/skills/research-review/SKILL.md'}\n+            need(spelling in accepted_instruction_files or\n+                 not any(p.is_relative_to(Path(b)) for b in ('/root','/proc','/sys','/dev')),\n+                 ('no private/ambient/special host file collection; only three accepted instruction-file exceptions',spelling))\n             HOST_FILES.add(spelling)\n \n \n@@ -345,7 +350,7 @@\n def audit():\n     need(Path.cwd()==ROOT,'actual literal document-audit cwd')\n     read(Path(__file__).absolute())\n-    read(HERE/'capture_once.py')\n+    read(HERE/'capture02.py')\n     read(HERE/'PLAN.md')\n     need(pin(read(OLD_RECEIVER))['sha256']=='21d16d2560eeb68420a3c37c9a3fda98dcbcb0ea1043dc80cd36a81e24fef06e','exact disclosed accepted receiver lineage')\n     source=pinned(PREP/'freeze.py',SOURCE_PIN)\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "/usr/bin/diff -u -- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical02.py docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical03.py",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "2814c3",
+        "wall_time_seconds": 0.00000385,
+        "exit_code": 1,
+        "original_token_count": 391,
+        "output": "--- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical02.py\t2026-09-09 11:12:18.421295988 +0800\n+++ docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical03.py\t2026-09-09 11:14:15.238996505 +0800\n@@ -350,7 +350,7 @@\n def audit():\n     need(Path.cwd()==ROOT,'actual literal document-audit cwd')\n     read(Path(__file__).absolute())\n-    read(HERE/'capture02.py')\n+    read(HERE/'capture03.py')\n     read(HERE/'PLAN.md')\n     need(pin(read(OLD_RECEIVER))['sha256']=='21d16d2560eeb68420a3c37c9a3fda98dcbcb0ea1043dc80cd36a81e24fef06e','exact disclosed accepted receiver lineage')\n     source=pinned(PREP/'freeze.py',SOURCE_PIN)\n@@ -426,7 +426,10 @@\n     good=read(CONTROL/'assemble_capture.js')\n     old=b'assert.deepStrictEqual(process.env,ENV)'\n     new=b'assert.deepStrictEqual({...process.env},ENV)'\n-    need(bad.count(old)==1 and bad.replace(old,new)==good,'exact one-comparison controller correction only')\n+    evidence_reads=b\"read(HERE+'ASSEMBLY_CAPTURE_CORRECTION01.md');read(HERE+'FAILED_ASSEMBLY_NATIVE01.json');read(HERE+'FAILED_ASSEMBLE_CAPTURE01.js');\\\\n\"\n+    need(good.count(evidence_reads)==1 and bad.count(old)==1 and\n+         bad.replace(old,new)==good.replace(evidence_reads,b''),\n+         'exact ENV4 comparison correction plus three explicit retained-evidence reads; no other source delta')\n     read(CONTROL/'ASSEMBLY_CAPTURE_CORRECTION01.md')\n     read(CONTROL/'FAILED_ASSEMBLY_SOURCE_COPY01.json')\n     # Accepted source reception is an input; validate its actual raw evidence,\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "/usr/bin/diff -u -- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical03.py docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical04.py",
+        "max_output_tokens": 2500
+      },
+      "result": {
+        "chunk_id": "be269b",
+        "wall_time_seconds": 0.00000648,
+        "exit_code": 1,
+        "original_token_count": 358,
+        "output": "--- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical03.py\t2026-09-09 11:14:15.238996505 +0800\n+++ docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical04.py\t2026-09-09 11:15:19.861895501 +0800\n@@ -350,7 +350,7 @@\n def audit():\n     need(Path.cwd()==ROOT,'actual literal document-audit cwd')\n     read(Path(__file__).absolute())\n-    read(HERE/'capture03.py')\n+    read(HERE/'capture04.py')\n     read(HERE/'PLAN.md')\n     need(pin(read(OLD_RECEIVER))['sha256']=='21d16d2560eeb68420a3c37c9a3fda98dcbcb0ea1043dc80cd36a81e24fef06e','exact disclosed accepted receiver lineage')\n     source=pinned(PREP/'freeze.py',SOURCE_PIN)\n@@ -426,7 +426,7 @@\n     good=read(CONTROL/'assemble_capture.js')\n     old=b'assert.deepStrictEqual(process.env,ENV)'\n     new=b'assert.deepStrictEqual({...process.env},ENV)'\n-    evidence_reads=b\"read(HERE+'ASSEMBLY_CAPTURE_CORRECTION01.md');read(HERE+'FAILED_ASSEMBLY_NATIVE01.json');read(HERE+'FAILED_ASSEMBLE_CAPTURE01.js');\\\\n\"\n+    evidence_reads=b\"read(HERE+'ASSEMBLY_CAPTURE_CORRECTION01.md');read(HERE+'FAILED_ASSEMBLY_NATIVE01.json');read(HERE+'FAILED_ASSEMBLE_CAPTURE01.js');\"+bytes([10])\n     need(good.count(evidence_reads)==1 and bad.count(old)==1 and\n          bad.replace(old,new)==good.replace(evidence_reads,b''),\n          'exact ENV4 comparison correction plus three explicit retained-evidence reads; no other source delta')\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "/usr/bin/diff -u -- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical04.py docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical05.py",
+        "max_output_tokens": 4000
+      },
+      "result": {
+        "chunk_id": "643430",
+        "wall_time_seconds": 0.050894244,
+        "exit_code": 1,
+        "original_token_count": 622,
+        "output": "--- docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical04.py\t2026-09-09 11:15:19.861895501 +0800\n+++ docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical05.py\t2026-09-09 11:17:34.275923304 +0800\n@@ -350,7 +350,7 @@\n def audit():\n     need(Path.cwd()==ROOT,'actual literal document-audit cwd')\n     read(Path(__file__).absolute())\n-    read(HERE/'capture04.py')\n+    read(HERE/'capture05.py')\n     read(HERE/'PLAN.md')\n     need(pin(read(OLD_RECEIVER))['sha256']=='21d16d2560eeb68420a3c37c9a3fda98dcbcb0ea1043dc80cd36a81e24fef06e','exact disclosed accepted receiver lineage')\n     source=pinned(PREP/'freeze.py',SOURCE_PIN)\n@@ -452,7 +452,22 @@\n     need(all(source_rows[i]['ended_utc']<=source_rows[i+1]['started_utc'] for i in range(3)),'actual source-reception command chronology')\n     need(read(base/'INDEPENDENT_ORIGINAL_STDOUT.raw')==read(base/'commands/03_disclosed_unchanged_metadata_reuse/stdout.raw'),\n          'archived prior independent stdout and root explicit reuse whole raw equality only')\n-    outer_native(base/'ROOT_NATIVE01.json',accepted)\n+    source_outer=obj(base/'ROOT_NATIVE01.json')\n+    need(set(source_outer)=={'request','response','polls'} and\n+         source_outer['request']['cmd']=='env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/node docs/papers211_215_sequence/qa/p211_round2_binding_root01/source_reception01/receive.js',\n+         'exact accepted source-reception response-layout envelope only')\n+    initial=source_outer['response']\n+    need(initial.get('session_id')==1457 and initial['output']=='' and 'exit_code' not in initial and len(source_outer['polls'])==1,\n+         'actual source-reception first yield')\n+    poll=source_outer['polls'][0]\n+    final=poll['response']\n+    need(set(poll)=={'request','response'} and poll['request']['session_id']==1457 and poll['request']['chars']=='' and\n+         final['exit_code']==0 and 'session_id' not in final,'actual source-reception final completion')\n+    projection={k:v for k,v in accepted.items() if k!='audit_native_records'}\n+    projection['commands']=[{k:r[k] for k in ('label','status','stdout','stderr')} for r in accepted['commands']]\n+    need(json.loads(initial['output']+final['output'])==projection,\n+         'entire actual source-reception compact output matches exact source-declared projection, not full saved result')\n+    read(base/'receive.js')\n \n \n def original_path(spelling,base=''):\n"
+      }
+    }
+  ],
+  "root_actual_capture_correction": {
+    "request": {
+      "cmd": "/usr/bin/diff -u -- docs/papers211_215_sequence/qa/p211_round2_binding_root01/FAILED_ASSEMBLE_CAPTURE01.js docs/papers211_215_sequence/qa/p211_round2_binding_root01/assemble_capture.js",
+      "max_output_tokens": 2500
+    },
+    "result": {
+      "chunk_id": "b6f771",
+      "wall_time_seconds": 0.00000612,
+      "exit_code": 1,
+      "original_token_count": 476,
+      "output": "--- docs/papers211_215_sequence/qa/p211_round2_binding_root01/FAILED_ASSEMBLE_CAPTURE01.js\t2026-09-09 10:26:59.940942977 +0800\n+++ docs/papers211_215_sequence/qa/p211_round2_binding_root01/assemble_capture.js\t2026-09-09 10:27:14.400956326 +0800\n@@ -9,11 +9,12 @@\n function read(p,k){const s=fs.lstatSync(p);assert(s.isFile()&&!s.isSymbolicLink()&&fs.realpathSync(p)===p);const b=fs.readFileSync(p),v=pin(b);if(k)assert.deepStrictEqual(v,{bytes:k.bytes,sha256:k.sha256});if(inputs[p])assert.deepStrictEqual(v,inputs[p]);inputs[p]=v;return b;}\n function write(n,b){fs.writeFileSync(OUT+n,b,{flag:'wx',mode:0o600});}\n function jsonWrite(n,o){write(n,JSON.stringify(o,null,2)+'\\n');}\n-assert.equal(process.cwd(),ROOT);assert.deepStrictEqual(process.env,ENV);\n+assert.equal(process.cwd(),ROOT);assert.deepStrictEqual({...process.env},ENV);\n assert(!fs.existsSync(OUT)&&!fs.existsSync(DRAFT));\n for(const p of [QA+'p211_round2_execution01',ROOT+'/papers/211-kernel-image-projection-feedback/frozen_round2',ROOT+'/papers/211-kernel-image-projection-feedback/qa_final'])assert(!fs.existsSync(p));\n const sourceKey=JSON.parse(read(HERE+'source_reception01/INPUTS.json'));\n read(HERE+'source_reception01/RECEPTION.md');read(HERE+'ASSEMBLY_AUTHORITY.md');read(__filename);\n+read(HERE+'ASSEMBLY_CAPTURE_CORRECTION01.md');read(HERE+'FAILED_ASSEMBLY_NATIVE01.json');read(HERE+'FAILED_ASSEMBLE_CAPTURE01.js');\n for(const [base,sealHash]of [[PREP,'8c640abe8708bac71416cc062cc94728b34a4b3daa5100030863f456605a67b9'],[QA+'p211_round2_binding_source_audit01/','6828243c2dd72d8966eda3fb9a0ba6b561af052d3e65a42f8101a438c142dbfe']]){\n   const raw=read(base+'SHA256SUMS',sourceKey[base+'SHA256SUMS']);assert.equal(pin(raw).sha256,sealHash);\n   for(const line of raw.toString().trimEnd().split('\\n')){const m=/^([0-9a-f]{64})  (.+)$/.exec(line);assert(m);assert.equal(pin(read(base+m[2],sourceKey[base+m[2]])).sha256,m[1]);}\n"
+    }
+  },
+  "attempts": [
+    {
+      "request": {
+        "cmd": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B docs/papers211_215_sequence/qa/p211_round2_physical_independent01/capture_once.py",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 3500,
+        "yield_time_ms": 1000
+      },
+      "result": {
+        "chunk_id": "1205ab",
+        "wall_time_seconds": 0.018012598,
+        "exit_code": 1,
+        "original_token_count": 303,
+        "output": "{\"checks\": null, \"native\": {\"argv\": [\"/usr/bin/python3.10\", \"-I\", \"-S\", \"-B\", \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical.py\"], \"capture_source_pin\": {\"bytes\": 3290, \"sha256\": \"fd9ca5b46673a6669717da7e8931fe938c5a5af21692cbfca070614ce44f10a5\"}, \"cwd\": \"/root/autodl-tmp/symbolic_dynamics\", \"ended_epoch\": 1788923450.6943138, \"environment\": {\"LANG\": \"C.UTF-8\", \"LC_ALL\": \"C.UTF-8\", \"PATH\": \"/usr/bin:/bin\", \"TZ\": \"UTC\"}, \"exception\": null, \"native_exit_code\": 1, \"scope\": \"only independently owned read-only documentary receiver; no submitted program execution\", \"source_pin\": {\"bytes\": 75561, \"sha256\": \"91b2b1bd62d37247f64fbd490f7f7de5441ce4ab1dfa202d11967ddcbb19de0f\"}, \"started_epoch\": 1788923450.5607464, \"stderr\": {\"bytes\": 0, \"path\": \"CHECKS.stderr.raw\", \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdin\": \"subprocess.DEVNULL\", \"stdout\": {\"bytes\": 11345, \"path\": \"CHECKS.stdout.raw\", \"sha256\": \"f0b4f1fd7675e896682a7ab29db72602601c3b14b5e4a19f955d2f6525e1b0b3\"}, \"stream_capture_status\": \"captured\", \"timeout_seconds\": 180}, \"read_paths\": null, \"status\": \"FAIL_DOCUMENTARY_ATTEMPT_PRESERVED\"}\n"
+      },
+      "polls": []
+    },
+    {
+      "request": {
+        "cmd": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B docs/papers211_215_sequence/qa/p211_round2_physical_independent01/capture02.py",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 3500,
+        "yield_time_ms": 1000
+      },
+      "result": {
+        "chunk_id": "c0a58d",
+        "wall_time_seconds": 1.004126822,
+        "session_id": 9706,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "polls": [
+        {
+          "request": {
+            "session_id": 9706,
+            "chars": "",
+            "max_output_tokens": 3500,
+            "yield_time_ms": 1000
+          },
+          "result": {
+            "chunk_id": "49d72d",
+            "wall_time_seconds": 0.00000321,
+            "exit_code": 1,
+            "original_token_count": 304,
+            "output": "{\"checks\": null, \"native\": {\"argv\": [\"/usr/bin/python3.10\", \"-I\", \"-S\", \"-B\", \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical02.py\"], \"capture_source_pin\": {\"bytes\": 3353, \"sha256\": \"9d3bb162a204c976c6aa4306c8c742a3bb96712385de76d831d26c62487a73ba\"}, \"cwd\": \"/root/autodl-tmp/symbolic_dynamics\", \"ended_epoch\": 1788923567.527633, \"environment\": {\"LANG\": \"C.UTF-8\", \"LC_ALL\": \"C.UTF-8\", \"PATH\": \"/usr/bin:/bin\", \"TZ\": \"UTC\"}, \"exception\": null, \"native_exit_code\": 1, \"scope\": \"only independently owned read-only documentary receiver; no submitted program execution\", \"source_pin\": {\"bytes\": 75927, \"sha256\": \"d66966ea02511133b7378537965c04878279e51009b62a0a13e0cd3600616a3a\"}, \"started_epoch\": 1788923561.2899733, \"stderr\": {\"bytes\": 0, \"path\": \"CHECKS.stderr.raw\", \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdin\": \"subprocess.DEVNULL\", \"stdout\": {\"bytes\": 2804336, \"path\": \"CHECKS.stdout.raw\", \"sha256\": \"3ed41b6d2d62547931bcbafa9a22436d227eeacf3468534f4ef3a587af892f44\"}, \"stream_capture_status\": \"captured\", \"timeout_seconds\": 180}, \"read_paths\": null, \"status\": \"FAIL_DOCUMENTARY_ATTEMPT_PRESERVED\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "cmd": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B docs/papers211_215_sequence/qa/p211_round2_physical_independent01/capture03.py",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 3500,
+        "yield_time_ms": 1000
+      },
+      "result": {
+        "chunk_id": "42a88c",
+        "wall_time_seconds": 1.001314814,
+        "session_id": 37500,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "polls": [
+        {
+          "request": {
+            "session_id": 37500,
+            "chars": "",
+            "max_output_tokens": 3500,
+            "yield_time_ms": 1000
+          },
+          "result": {
+            "chunk_id": "239235",
+            "wall_time_seconds": 0.00000294,
+            "exit_code": 1,
+            "original_token_count": 304,
+            "output": "{\"checks\": null, \"native\": {\"argv\": [\"/usr/bin/python3.10\", \"-I\", \"-S\", \"-B\", \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical03.py\"], \"capture_source_pin\": {\"bytes\": 3353, \"sha256\": \"4f9fe33e8f2d5b71881b0ff69b7d68afe8cf731a456230f23426f32bb7056a2d\"}, \"cwd\": \"/root/autodl-tmp/symbolic_dynamics\", \"ended_epoch\": 1788923673.1288874, \"environment\": {\"LANG\": \"C.UTF-8\", \"LC_ALL\": \"C.UTF-8\", \"PATH\": \"/usr/bin:/bin\", \"TZ\": \"UTC\"}, \"exception\": null, \"native_exit_code\": 1, \"scope\": \"only independently owned read-only documentary receiver; no submitted program execution\", \"source_pin\": {\"bytes\": 76217, \"sha256\": \"9c74cd9a4a0d90e88fcd0013c84f3f40fb631ebc806cf6f254e4fcbc31816df8\"}, \"started_epoch\": 1788923666.9000328, \"stderr\": {\"bytes\": 0, \"path\": \"CHECKS.stderr.raw\", \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdin\": \"subprocess.DEVNULL\", \"stdout\": {\"bytes\": 2804344, \"path\": \"CHECKS.stdout.raw\", \"sha256\": \"3174ec4326c925b668e23c7fd03868527b4602a6161a38a8034fc5d584ad8678\"}, \"stream_capture_status\": \"captured\", \"timeout_seconds\": 180}, \"read_paths\": null, \"status\": \"FAIL_DOCUMENTARY_ATTEMPT_PRESERVED\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "cmd": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B docs/papers211_215_sequence/qa/p211_round2_physical_independent01/capture04.py",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 3500,
+        "yield_time_ms": 1000
+      },
+      "result": {
+        "chunk_id": "8061bc",
+        "wall_time_seconds": 1.000678076,
+        "session_id": 16746,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "polls": [
+        {
+          "request": {
+            "session_id": 16746,
+            "chars": "",
+            "max_output_tokens": 3500,
+            "yield_time_ms": 1000
+          },
+          "result": {
+            "chunk_id": "5f84bf",
+            "wall_time_seconds": 0.00000318,
+            "exit_code": 1,
+            "original_token_count": 304,
+            "output": "{\"checks\": null, \"native\": {\"argv\": [\"/usr/bin/python3.10\", \"-I\", \"-S\", \"-B\", \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical04.py\"], \"capture_source_pin\": {\"bytes\": 3353, \"sha256\": \"4f5bd0fa04bebfcb32366413f37772b6a2bbc8f44795e295418197ff38ef865b\"}, \"cwd\": \"/root/autodl-tmp/symbolic_dynamics\", \"ended_epoch\": 1788923735.4202397, \"environment\": {\"LANG\": \"C.UTF-8\", \"LC_ALL\": \"C.UTF-8\", \"PATH\": \"/usr/bin:/bin\", \"TZ\": \"UTC\"}, \"exception\": null, \"native_exit_code\": 1, \"scope\": \"only independently owned read-only documentary receiver; no submitted program execution\", \"source_pin\": {\"bytes\": 76226, \"sha256\": \"5beaabd4a8b1d9eeb8dc435244e89442fd26f18887e4f72b633f3a6c1f0b6397\"}, \"started_epoch\": 1788923729.1764796, \"stderr\": {\"bytes\": 0, \"path\": \"CHECKS.stderr.raw\", \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdin\": \"subprocess.DEVNULL\", \"stdout\": {\"bytes\": 2804638, \"path\": \"CHECKS.stdout.raw\", \"sha256\": \"4d5e33f05707094ae89b6b05aa00488b59331e831fd28ae4c6bbe52af16207ec\"}, \"stream_capture_status\": \"captured\", \"timeout_seconds\": 180}, \"read_paths\": null, \"status\": \"FAIL_DOCUMENTARY_ATTEMPT_PRESERVED\"}\n"
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "cmd": "env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B docs/papers211_215_sequence/qa/p211_round2_physical_independent01/capture05.py",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 3500,
+        "yield_time_ms": 1000
+      },
+      "result": {
+        "chunk_id": "d15db5",
+        "wall_time_seconds": 1.000689829,
+        "session_id": 23027,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "polls": [
+        {
+          "request": {
+            "session_id": 23027,
+            "chars": "",
+            "max_output_tokens": 3500,
+            "yield_time_ms": 1000
+          },
+          "result": {
+            "chunk_id": "11832b",
+            "wall_time_seconds": 5.000746131,
+            "session_id": 23027,
+            "original_token_count": 0,
+            "output": ""
+          }
+        },
+        {
+          "request": {
+            "session_id": 23027,
+            "chars": "",
+            "max_output_tokens": 3500,
+            "yield_time_ms": 1000
+          },
+          "result": {
+            "chunk_id": "414341",
+            "wall_time_seconds": 0.0000032,
+            "exit_code": 0,
+            "original_token_count": 312,
+            "output": "{\"checks\": 488474, \"native\": {\"argv\": [\"/usr/bin/python3.10\", \"-I\", \"-S\", \"-B\", \"/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_round2_physical_independent01/receive_physical05.py\"], \"capture_source_pin\": {\"bytes\": 3353, \"sha256\": \"2e2e5064241bb4a8b624de8c3c111c349689624b105af072da8b733922db09ef\"}, \"cwd\": \"/root/autodl-tmp/symbolic_dynamics\", \"ended_epoch\": 1788923874.199467, \"environment\": {\"LANG\": \"C.UTF-8\", \"LC_ALL\": \"C.UTF-8\", \"PATH\": \"/usr/bin:/bin\", \"TZ\": \"UTC\"}, \"exception\": null, \"native_exit_code\": 0, \"scope\": \"only independently owned read-only documentary receiver; no submitted program execution\", \"source_pin\": {\"bytes\": 77479, \"sha256\": \"ad8bd8890f9d5415d2a0499485415cb42858eca9c48b04cdecaf7b9c4c0c0e9d\"}, \"started_epoch\": 1788923855.4697604, \"stderr\": {\"bytes\": 0, \"path\": \"CHECKS.stderr.raw\", \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, \"stdin\": \"subprocess.DEVNULL\", \"stdout\": {\"bytes\": 3430632, \"path\": \"CHECKS.stdout.raw\", \"sha256\": \"ff715a36ffd80ada101e64bf39085606155d7ea3c87beefe80555910fee84fdc\"}, \"stream_capture_status\": \"captured\", \"timeout_seconds\": 180}, \"read_paths\": 4821, \"status\": \"PASS_PHYSICAL_ROUND2_DOCUMENTARY_RECEPTION_PENDING_ROOT_DECISION\"}\n"
+          }
+        }
+      ]
+    }
+  ],
+  "cause_summary": [
+    {
+      "attempt": 1,
+      "checks": 372,
+      "cause": "The independent receiver incorrectly blocked all outside-workspace /root files, including three exact accepted public SKILL.md inputs. The next source adds only those three literal old-key paths; original hashes remain required."
+    },
+    {
+      "attempt": 2,
+      "checks": 159491,
+      "cause": "The independent receiver assumed the failed/current root capture differed only in the environment comparison. Actual source also added three reads of retained failure evidence; the complete real diff remains."
+    },
+    {
+      "attempt": 3,
+      "checks": 159491,
+      "cause": "The receiver's new exact evidence-read literal mistakenly represented a literal backslash-n rather than a line feed. This is an independent-checker coding error, not a submitted data defect."
+    },
+    {
+      "attempt": 4,
+      "checks": 159617,
+      "cause": "The independent generic new outer parser was wrongly applied to the accepted older source-reception response-layout envelope and compact source-declared projection. A separately exact local schema/projection adapter was added for that one source envelope."
+    },
+    {
+      "attempt": 5,
+      "checks": 488474,
+      "cause": "PASS; no submitted source, recorder, science or build was executed by this documentary reader."
+    }
+  ]
+}

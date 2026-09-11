@@ -1,0 +1,15 @@
+{
+  "request": {
+    "cmd": "diff -u docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/run02/executed_checker.py docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/inspect_cold1.py",
+    "max_output_tokens": 2500
+  },
+  "result": {
+    "chunk_id": "13a059",
+    "wall_time_seconds": 0.000007989,
+    "exit_code": 1,
+    "original_token_count": 194,
+    "output": "--- docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/run02/executed_checker.py\t2026-09-09 15:09:08.177900724 +0800\n+++ docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/inspect_cold1.py\t2026-09-09 15:09:30.996411567 +0800\n@@ -131,7 +131,7 @@\n                        parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x)))\n     def typed(item, field=''):\n         if isinstance(item, dict):\n-            if field in {'stat','lstat'}:\n+            if field in {'stat','lstat'} and {'ctime_ns','mtime_ns','inode','mode'} <= set(item):\n                 demand(all(type(v) is int for v in item.values()),\n                        'precise_json_integers', 'every rich '+field+' metadata field')\n             for key, child in item.items():\n"
+  },
+  "reason": "Own recursive rich-stat type checker must recognize metadata shape, not confuse imported module named stat with a stat structure. Preserve run02 failed audit unchanged. Exact integer scalar checks remain active; only the rich object shape predicate changes."
+}
+

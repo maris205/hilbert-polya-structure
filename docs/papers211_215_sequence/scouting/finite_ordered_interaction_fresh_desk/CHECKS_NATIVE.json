@@ -1,0 +1,105 @@
+{
+  "scope": "Read-only artifact checks only. Two initial raw rg comparisons failed and remain failed. Their later sorted-line comparisons do not claim raw replay equality. Prose read-back calls are not duplicated here.",
+  "records": [
+    {
+      "cmd": "sha256sum -c docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/INPUTS.sha256",
+      "result": {
+        "chunk_id": "d10d2f",
+        "wall_time_seconds": 0.00000216,
+        "exit_code": 0,
+        "original_token_count": 117,
+        "output": "docs/papers147_151_sequence/scouting/combinatorial/SCOUT.md: OK\ndocs/papers162_166_sequence/scouting/replacement_matchings_incidence/SCOUT.md: OK\ndocs/papers204_208_sequence/scouting/graph_relation/SCOUT_REPORT.md: OK\ndocs/papers204_208_sequence/scouting/discrete_geometry_seventh/INTAKE.md: OK\ndocs/papers204_208_sequence/scouting/combinatorial/SOURCE_AND_COLLISION_NOTES.md: OK\ndocs/papers197_201_sequence/scouting/graph_matching_lane/BREADTH_AND_KILL_LEDGER.md: OK\n"
+      }
+    },
+    {
+      "cmd": "perl -MJSON::PP -0777 -e 'my $n=decode_json(do { local $/; open my $f,\"<\",$ARGV[0] or die $!; <$f> }); my $s=decode_json(do { local $/; open my $f,\"<\",$ARGV[1] or die $!; <$f> }); die \"native count\" unless @{$n->{records}}==6; die \"web count\" unless @{$s->{records}}==9; for my $r (@{$n->{records}}) { die \"native status\" unless $r->{result}{exit_code}==0; } my $q=0; my $err=0; for my $r (@{$s->{records}}) { die \"not string\" if ref $r->{result}; $q+=scalar @{$r->{request}{search_query}//[]}; $err+=()=$r->{result}=~/Internal Error/g; } die \"query count\" unless $q==11; print \"JSON structure PASS: 6 native returns, 9 web returns, $q queries, $err Internal Error strings\\n\";' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/NATIVE_READS.json docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/SOURCES_NATIVE.json",
+      "result": {
+        "chunk_id": "8fd4ae",
+        "wall_time_seconds": 0.00000356,
+        "exit_code": 0,
+        "original_token_count": 23,
+        "output": "JSON structure PASS: 6 native returns, 9 web returns, 11 queries, 2 Internal Error strings\n"
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[0]{result}{output});' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/NATIVE_READS.json) <(sed -n '1,235p' docs/papers162_166_sequence/scouting/replacement_matchings_incidence/SCOUT.md)",
+      "result": {
+        "chunk_id": "90ba00",
+        "wall_time_seconds": 0.00000537,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[1]{result}{output});' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/NATIVE_READS.json) <(rg -n -C 5 -i 'uncross|crossing|matching|particle' docs/papers204_208_sequence/scouting/graph_relation/SCOUT_REPORT.md docs/papers204_208_sequence/scouting/discrete_geometry_seventh/INTAKE.md docs/papers204_208_sequence/scouting/combinatorial/SOURCE_AND_COLLISION_NOTES.md)",
+      "result": {
+        "chunk_id": "fc7fd1",
+        "wall_time_seconds": 0.00001104,
+        "exit_code": 1,
+        "original_token_count": 13,
+        "output": "/dev/fd/63 /dev/fd/62 differ: byte 5166, line 23\n"
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[2]{result}{output});' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/NATIVE_READS.json) <(rg -n -i -C 3 'M01|uncross|closest|blocking|partner|stable matching' docs/papers147_151_sequence/scouting/combinatorial/SCOUT.md docs/papers162_166_sequence/scouting/replacement_matchings_incidence/SCOUT.md docs/papers197_201_sequence/scouting/graph_matching_lane/BREADTH_AND_KILL_LEDGER.md)",
+      "result": {
+        "chunk_id": "b9145a",
+        "wall_time_seconds": 0.0000025,
+        "exit_code": 1,
+        "original_token_count": 12,
+        "output": "/dev/fd/63 /dev/fd/62 differ: byte 13, line 1\n"
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[3]{result}{output});' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/NATIVE_READS.json) <(sed -n '60,175p' docs/papers147_151_sequence/scouting/combinatorial/SCOUT.md)",
+      "result": {
+        "chunk_id": "5484ed",
+        "wall_time_seconds": 0.000004371,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "cmd": "perl -MFile::Basename=dirname -MFile::Spec -e 'my %u; for my $f (@ARGV) { open my $h,\"<\",$f or die $!; local $/; my $s=<$h>; while ($s=~/\\]\\(([^)]+)\\)/g) { my $p=$1; next if $p=~m{^https?://}; $p=~s/#.*$//; next if $p eq \"CHECKS_NATIVE.json\"; my $t=File::Spec->catfile(dirname($f),$p); die \"missing $t\" unless -f $t; $u{$t}=1; } } print \"Existing local link targets PASS: \",scalar(keys %u),\" unique; future CHECKS_NATIVE.json explicitly excluded\\n\";' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/PROOF_PACKAGE.md",
+      "result": {
+        "chunk_id": "653092",
+        "wall_time_seconds": 0.00000206,
+        "exit_code": 0,
+        "original_token_count": 23,
+        "output": "Existing local link targets PASS: 7 unique; future CHECKS_NATIVE.json explicitly excluded\n"
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[1]{result}{output});' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/NATIVE_READS.json | LC_ALL=C sort) <(rg -n -C 5 -i 'uncross|crossing|matching|particle' docs/papers204_208_sequence/scouting/graph_relation/SCOUT_REPORT.md docs/papers204_208_sequence/scouting/discrete_geometry_seventh/INTAKE.md docs/papers204_208_sequence/scouting/combinatorial/SOURCE_AND_COLLISION_NOTES.md | LC_ALL=C sort)",
+      "result": {
+        "chunk_id": "3c2b75",
+        "wall_time_seconds": 0.000002249,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "cmd": "cmp <(perl -MJSON::PP -MEncode -0777 -e 'my $d=decode_json(<>); print encode(\"UTF-8\",$d->{records}[2]{result}{output});' docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/NATIVE_READS.json | LC_ALL=C sort) <(rg -n -i -C 3 'M01|uncross|closest|blocking|partner|stable matching' docs/papers147_151_sequence/scouting/combinatorial/SCOUT.md docs/papers162_166_sequence/scouting/replacement_matchings_incidence/SCOUT.md docs/papers197_201_sequence/scouting/graph_matching_lane/BREADTH_AND_KILL_LEDGER.md | LC_ALL=C sort)",
+      "result": {
+        "chunk_id": "0f95a0",
+        "wall_time_seconds": 0.000003071,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "cmd": "wc -l docs/papers162_166_sequence/scouting/replacement_matchings_incidence/SCOUT.md docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md",
+      "result": {
+        "chunk_id": "8f0919",
+        "wall_time_seconds": 0.00000477,
+        "exit_code": 0,
+        "original_token_count": 72,
+        "output": "  223 docs/papers162_166_sequence/scouting/replacement_matchings_incidence/SCOUT.md\n  268 docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/PROOF_PACKAGE.md\n  137 docs/papers211_215_sequence/scouting/finite_ordered_interaction_fresh_desk/REPORT.md\n  628 total\n"
+      }
+    }
+  ]
+}

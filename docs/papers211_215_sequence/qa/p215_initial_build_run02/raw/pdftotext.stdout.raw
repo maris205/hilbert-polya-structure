@@ -1,0 +1,254 @@
+Exact Clocks and Inverse Fibres for Iterated Prefix
+                   Drawdown
+                                    Anonymous
+
+
+                                      Abstract
+          For a bounded nonnegative integer word, replace each coordinate
+      by its running prefix maximum minus its current value, and iterate
+      the entire word. We prove that the exact time to reach zero is the
+      number of sign runs in its successive differences after an initial zero is
+      adjoined and zero differences are discarded. The key identity removes
+      the first positive sign run and reverses each remaining sign, including
+      when the drawdown saturates at zero. Hence zero is uniquely recur-
+      rent, and the sharp height on length-n words over {0, . . . , q} is n for
+      n, q > 0. Independently, every predecessor of a target is reconstructed
+      from nondecreasing record heights at its zero positions. This gives an
+      explicit binomial  recurrence for every fibre and a unique largest fibre of
+      size q+n
+                
+              n   . The drawdown   statistic and the resulting classical barrier-
+      counting problem are background, not new general methods; the scope
+      is this autonomous clock and its inverse reconstruction.
+
+
+1    The map and the contribution boundary
+Let n, q be nonnegative integers and let Xn,q = {0, . . . , q}n . Coordinates are
+labelled and ordered. For n > 0, define
+
+          F (x)i = Mi (x) − xi ,        Mi (x) = max xj       (1 ≤ i ≤ n).          (1)
+                                                  1≤j≤i
+
+The empty word is fixed. Since 0 ≤ F (x)i ≤ q, this is a finite autonomous
+self-map. No sorting, wraparound, external input or additional normaliza-
+tion is performed between updates.
+    The one-step statistic is classical drawdown: Goldberg and Mahmoud [1]
+define the drawdown path as the running maximum minus the current path
+value. Restricting that operation to finite integer words does not make
+the statistic new. Our question is what happens when its whole output
+is repeatedly fed back into the same operation. Stochastic first-passage or
+
+                                          1
+risk statements about one drawdown path do not, by themselves, give this
+autonomous iteration clock.
+     For x ∈ Xn,q adjoin x0 = 0 and form di = xi − xi−1 . Delete zero
+differences and compress every consecutive run of equal signs to one sign.
+Write R(x) for the resulting number of signs. Thus R(x) = 0 exactly when
+x = 0, and every nonempty sign word starts with +. A state is recurrent
+if it lies on a directed cycle; its depth h(x) is the first time it reaches a
+recurrent state.
+     The main result identifies h(x) = R(x), not merely the triangular bound
+h(x) ≤ n. For example, every nonzero nondecreasing word reaches zero in
+one step, while an alternating word (q, 0, q, 0, . . .) takes n steps when q > 0.
+The inverse problem uses different data: a target’s zero positions identify its
+possible record heights. Those heights form nondecreasing integer sequences
+with barriers, a classical enumeration problem studied by Pemantle and
+Wilf [2]. We give a direct evaluated recurrence for completeness, without
+claiming a new barrier-enumeration method. The contribution is limited to
+the exact clock and the full record-height reconstruction for (1).
+
+
+2    An exact sign-run clock
+Lemma 2.1 (one sign run per update). For x ̸= 0, one has R(F x) =
+R(x) − 1.
+
+Proof. Put y = F x, extend M0 (x) = 0, and set y0 = 0. The maximum
+recurrence Mi (x) = max(Mi−1 (x), xi ) gives
+
+                 yi = max{yi−1 − di , 0},      di = xi − xi−1 .              (2)
+
+When di = 0, the output does not change, so deleting those input differences
+does not affect the output sign analysis. A negative input difference makes
+y strictly increase. A positive input difference makes y decrease strictly if
+its previous value is positive, or stay zero if that value is zero.
+    In the first positive input run, the output starts at zero and stays zero.
+Each negative input run then gives a nonempty positive output run. Every
+later positive input run follows a negative run, so it starts with positive
+output and gives at least one strict decrease. It continues decreasing until
+zero, if zero is reached, and then remains zero for the rest of that run. Its
+nonzero output differences therefore form exactly one negative run.
+    These output runs cannot merge: between two positive output runs there
+is the nonempty negative run supplied by the intervening positive input run,
+
+
+                                       2
+and between two negative output runs there is a nonempty positive one.
+Input plateaus add only output plateaus. Thus the compressed sign word
+loses its first +, and each remaining sign is reversed. Its length decreases by
+exactly one.
+
+Theorem 2.2 (pointwise depth and sharp height). Zero is the unique re-
+current state of F , and
+
+                          h(x) = R(x)                (x ∈ Xn,q ).               (3)
+
+If n, q > 0, the maximum depth is n. A word has depth n if and only if all n
+differences of (0, x1 , . . . , xn ) are nonzero and their signs alternate. If n = 0
+or q = 0, the maximum depth is zero.
+
+Proof. The equality R(x) = 0 forces every difference from initial zero to
+vanish, so it detects exactly the zero word. Lemma 2.1 therefore makes each
+orbit reach zero after exactly R(x) updates. Zero is fixed; since every orbit
+reaches it, there is no other recurrent state.
+    There are n initial differences, so R(x) ≤ n. Equality holds exactly when
+none is zero and none is compressed with a neighbouring difference, which is
+the stated alternating-sign condition. The word (q, 0, q, 0, . . .) satisfies that
+condition for q > 0. The cases n = 0 and q = 0 have singleton carriers.
+
+    For a concrete identity independent of any computation,
+
+                 (2, 0, 1) 7−→ (0, 2, 1) 7−→ (0, 0, 1) 7−→ (0, 0, 0).
+
+The three signs of its initial-zero differences are +, −, +. Saturation can
+flatten part of a later positive input run, but the proof shows why it cannot
+erase that whole run’s contribution to the clock.
+
+
+3    Every inverse fibre
+For n > 0, a target y can have predecessors only if y1 = 0. Assume this
+condition and list its zero positions as
+
+                     1 = z1 < · · · < zk ,            zk+1 = n + 1.
+
+For 1 ≤ j ≤ k, define
+
+                      bj =     max        yi ,       Bj = max br .              (4)
+                             zj ≤i<zj+1                     1≤r≤j
+
+
+
+                                                 3
+Theorem 3.1 (record-height inverse). The predecessors of y are in bijection
+with the integer sequences
+
+                    0 ≤ L1 ≤ · · · ≤ Lk ≤ q,               Lj ≥ Bj .        (5)
+
+The source corresponding to such a sequence is
+
+                         xi = Lj − yi             (zj ≤ i < zj+1 ).         (6)
+
+Every target with y1 = 0 has a predecessor.
+
+Proof. Suppose F x = y. A strict increase of the running maximum requires
+xi = Mi (x) and therefore yi = 0. The running maximum is consequently
+constant on each displayed block; call its value Lj . These values are non-
+decreasing and at most q. Nonnegativity of each source coordinate forces
+Lj ≥ bj , and (6) is necessary. For a nondecreasing sequence, the conditions
+Lj ≥ bj are equivalent to Lj ≥ Bj .
+    Conversely, construct x by (6) from admissible heights. All entries lie
+between zero and q. At zj the source value is Lj , while all earlier entries are
+at most Lj . The other entries of the block are less than Lj because their
+target entries are positive. Hence the actual running maximum throughout
+that block is Lj , proving F x = y. The source’s running maxima recover the
+heights, which proves uniqueness. Finally, Lj = q for all j is admissible.
+
+   To evaluate the fibre, put
+
+                          ci = q − Bk+1−i           (1 ≤ i ≤ k).            (7)
+
+These are nonnegative and nondecreasing. Reversing and complementing
+the heights, ai = q − Lk+1−i , gives precisely the sequences 0 ≤ a1 ≤ · · · ≤ ak
+with ai ≤ ci . This is the classical upper-barrier problem. The following
+evaluation is included with its first-violation proof so that no enumeration
+oracle is needed. We use uv = 0 for integers v > u ≥ 0.
+
+Theorem 3.2 (evaluated fibre recurrence). Set A0 = 1 and, for 1 ≤ m ≤ k,
+compute
+                          m−1                         
+                  cm + m        X         cm − ci + m − i
+          Am =               −     Ai−1                    .         (8)
+                     m                       m−i+1
+                                        i=1
+
+Then |F −1 (y)| = Ak .
+
+
+
+
+                                              4
+Proof. There are cmm+m nondecreasing length-m sequences between zero
+                              
+
+and cm . An invalid one has a unique first index i at which ai > ci , and
+i < m. Its prefix of length i − 1 is one of the Ai−1 valid prefixes. Its
+remaining m − i + 1 entries form an arbitrary nondecreasing sequence in
+{ci + 1, . . . , cm }, counted by the binomial coefficient in the summand.
+    For i > 1, the prefix is bounded above by ci−1 ≤ ci ; for i = 1 it is empty.
+Thus every such prefix and suffix concatenate nondecreasingly and have first
+violation exactly i. Subtracting these disjoint invalid classes proves (8) by
+induction on m. Theorem 3.1 then identifies Ak with the desired fibre.
+
+Corollary 3.3 (image and unique maximum fibre). For n > 0, the image
+is {y ∈ Xn,q : y1 = 0} and has             n−1 . If n, q > 0, the unique largest
+                         q+n
+                             size (q + 1)
+fibre is at 0, with size n . If n = 0 or q = 0, the unique fibre has size
+one.
+
+Proof. The image statement follows from Theorem 3.1. At zero there are n
+zero positions and all barriers vanish. Its predecessors    are all nondecreasing
+height sequences in {0, . . . , q}, giving q+n
+                                               
+                                            n    choices. A nonzero  image target
+                                                   q+k
+                                                       
+has k < n zero positions, so it has    at most k predecessors. For q > 0
+this is strictly smaller than q+n  n , since increasing k by one multiplies that
+quantity by (q + k + 1)/(k + 1) > 1. Targets outside the image have no
+predecessors. The remaining cases have singleton carriers.
+
+
+4    Scope and finite-verification protocol
+The temporal proof concerns repeated full-vector feedback on a finite or-
+dered word. It does not assert a new drawdown statistic, a stochastic
+stopping-time theorem, or an extension to arbitrary posets. The inverse
+reconstruction identifies the exact barriers for each target; the subsequent
+static enumeration and multiset counting are established primitives. No all-
+time inverse formula or global priority claim is made. The bounded source
+and collision checks supporting this scope cannot exclude every possible
+prior encoding or factor.
+    All statements above have deductive proofs. The accompanying author
+verifier source specifies the fixed boxes 0 ≤ n ≤ 5, 0 ≤ P
+                                                         q ≤ 3.PThese are 24
+parameter cases and a total of 1798 states by summing 5n=0 3q=0 (q + 1)n .
+The accepted finite DATA contains all 24 cases and all 1798 states. Empty-
+word and zero-alphabet cases remain separate boxes. The comparison walks
+literal orbits until a state repeats, without using the sign-run clock as a
+stopping condition. Complete transition-derived predecessor buckets are
+
+
+                                       5
+compared with the record-height reconstruction and the recurrence. Every
+state and target, including empty fibres and singleton boundaries, is retained
+in the deterministic output.
+    The complete initial DATA, actual canonical copy and two strict author
+replays have been accepted. They agree byte for byte and cover 24 boxes,
+1798 states, 1798 targets and 20044 producer comparisons with zero finite
+failures. These finite checks test implementation and pressure the proofs;
+they do not establish the all-parameter conclusions.
+
+
+References
+[1] Lisa R. Goldberg and Ola Mahmoud. Drawdown: from practice to theory
+    and back again. Mathematics and Financial Economics, 11(3):275–297,
+    2017.
+
+[2] Robin Pemantle and Herbert S. Wilf. Counting nondecreasing integer
+    sequences that lie below a barrier. The Electronic Journal of Combina-
+    torics, 16(1):R60, 2009.
+
+
+
+
+                                      6
+

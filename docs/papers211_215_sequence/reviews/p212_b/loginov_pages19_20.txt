@@ -1,0 +1,101 @@
+fine new instrumentation relations. Note that subformulas of acycSame(v1 , v2 ), i.e.,
+¬(cn0 (v1 ) ∧ cn0 (v2 )) ∧(n(v1 , v2 ) ⇔ n0 (v1 , v2 )) were not introduced. This is because
+refinement was triggered by imprecise evaluation on a structure that had a single con-
+crete individual in the panhandle. However, relation rev 3 is capable of maintaining the
+key property of nodes in the panhandle with enough precision, so that another refine-
+ment iteration is not required. Column 3 of Tab. 5 gives the definitions of the new
+instrumentation relations after all occurrences of the defining formulas of new instru-
+mentation relations in the query and in the definitions of other instrumentation relations
+have been replaced with the use of the corresponding new instrumentation-relation sym-
+bols. Again, only the query and new relations’ definitions are changed.
+
+
+ Relation        Imprecise Subformula                                  Defining formula
+                  same rn,x () ∧ same cn () ∧
+ rev 1 ()                                                            same rn,x () ∧ same cn () ∧ rev 2 ()
+                  ∀ v1 , v2 : cycRev (v1 , v2 ) ∨ acycSame(v1 , v2 )
+ rev 2 ()         ∀ v1 , v2 : cycRev (v1 , v2 ) ∨ acycSame(v1 , v2 ) ∀ v1 : rev 3 (v1 )
+ rev 3 (v1 )      ∀ v2 : cycRev (v1 , v2 ) ∨ acycSame(v1 , v2 )      ∀ v2 : rev 4 (v1 , v2 )
+ rev 4 (v1 , v2 ) cycRev (v1 , v2 ) ∨ acycSame(v1 , v2 )             rev 5 (v1 , v2 ) ∨ acycSame(v1 , v2 )
+ rev 5 (v1 , v2 ) cycRev (v1 , v2 )                                  (cn0 (v1 ) ∧ cn0 (v2 )) ∧ rev 6 (v2 , v1 )
+ rev 6 (v1 , v2 ) n(v1 , v2 ) ⇔ n0 (v2 , v1 )                        rev 7 (v1 , v2 ) ∧ rev 8 (v2 , v1 )
+ rev 7 (v1 , v2 ) n(v1 , v2 ) ⇒ n0 (v2 , v1 )                        n(v1 , v2 ) ⇒ n0 (v2 , v1 )
+                   0
+ rev 8 (v2 , v1 ) n (v2 , v1 ) ⇒ n(v1 , v2 )                         n0 (v2 , v1 ) ⇒ n(v1 , v2 )
+Table 5. Instrumentation relations created by subformula-based refinement when the ap-
+plication of Reverse is checked against the query expressed in Formula (9) on an
+input abstraction of either type Panhandle or Cyclic. For compactness, we refer to
+formula (cn0 (v1 ) ∧ cn0 (v2 )) ∧(n(v1 , v2 ) ⇔ n0 (v2 , v1 )) as cycRev (v1 , v2 ) and to formula
+¬(cn0 (v1 ) ∧ cn0 (v2 )) ∧(n(v1 , v2 ) ⇔ n0 (v1 , v2 )) as acycSame(v1 , v2 ).
+
+
+
+    After the introduction of the new instrumentation relations (Tab. 4 or 5, depend-
+ing on the query being verified), the abstract interpretation of the DSC is performed
+using an extended vocabulary that contains the new instrumentation-relation symbols.
+The subsequent abstract interpretation of Reverse succeeds: in all of the structures
+collected at the exit, rev1 () = 1.
+
+
+Establishing that Reverse Terminates We can establish that Reverse terminates
+using a few unary core relations and a simple progress monitor. We introduce a collec-
+tion of unary core state relations, state 0 (v), state 1 (v), and state 2 (v).10 Every time the
+reversal of the n pointer of the list node pointed to by y is completed (after line [8] of
+Fig. 8), the node’s state is changed to the next state. (The state relations carry no seman-
+tics with respect to the pointer values of nodes; they simply record the “visit counts” for
+each node.) For each state relation s, we create a copy of s, which is used to save the
+values of relation s at the start of the currently-processed loop iteration (after line [3]
+of Fig. 8). We give the new relations the superscript lh to indicate that they hold the
+10
+     The state relations are not added to the set of abstraction relations, A.
+loop-head values. The first abstract operation of each iteration of the loop takes a snap-
+shot of the current states of nodes: state lh
+                                           i (v) ← state i (v), for each i ∈ [0..2] and each
+assignment of v to an individual in the abstract structure being processed. Additionally,
+it asserts that x does not point to a list node in state 2 at the head of the loop (at that
+point, x points to the node whose n edge is about to be reversed). The last operation of
+every loop iteration performs a progress test by asserting the following formula:
+                ∃ v : state lh                           lh
+                                                                            
+                             0 (v) ∧ state 1 (v) ∨ state 1 (v) ∧ state 2 (v)
+                         ∀ v1 6= v : i∈[0..2] state lh
+                      V              V                                       
+                                                      i (v1 ) ⇔ state i (v1 )
+
+The assertion ensures that one node’s state makes forward progress (the first line of
+the assertion) and that no other node changes state (the second line of the assertion).
+Together with the assertion that x does not point to a list node in state 2 at the start of
+the loop, the above progress monitor establishes that each list node is visited at most
+twice, thus establishing that the algorithm terminates.
+
+
+7 Performance
+The tables shown in Fig. 12 give execution times that were collected on a 3GHz Linux
+PC. The rows indicate the type of data structures assumed as input, and the columns
+indicate the query to be verified. In each case, one round of abstraction refinement
+was required to obtain the definite answer 1 to the query. In other words, two rounds
+of analysis were performed for both the DSC and Reverse: the first analysis round
+of the DSC and Reverse used the initial abstraction (the core relations of Tab. 1,
+core relation roc n , the instrumentation relations of Tab. 3, and the history relations
+of §4), while the second round used the final abstraction, which additionally included
+the relations of Tab. 4 or 5, depending on the query. For a given abstraction, the cost
+of the DSC analysis is nearly identical for all input types because the general DSC
+of Fig. 11(b) constructs an abstraction of all input types, from which structures that
+represent the chosen input type are selected at the end using Formula (10), (11), or (12).
+To gain a better understanding of the cost of verifying Reverse proper, the tables also
+include the execution times for the last analysis round (using the final abstraction) of
+Reverse, excluding the analysis time for the DSC.
+    The tables of Fig. 12 show that the use of tree-shaped-sfe n maintenance in place
+of acyclic-sfe n maintenance for maintaining the relation sfp n results in a reduction of
+the total analysis time by a factor in the range of 2.8-4.8. The highest-cost analyses are
+those that include type Panhandle as input. Using tree-shaped-sfe n maintenance, the
+last iteration of the analysis of Reverse with the input abstraction of type Panhan-
+dle/Cyclic takes approximately 2.5 minutes (the total execution time is approximately
+4.5 minutes). The last iteration of the analysis of Reverse when the input abstraction
+is of any other type takes under 13 seconds. The majority of the total analysis cost in
+those cases is due to the use of the general DSC, which could be specialized to produce
+input abstractions of type Acyclic or Cyclic more efficiently (e.g., using the DSC shown
+in Fig. 11(a)).
+    The two tables of Fig. 12 share many qualitative characteristics. Below we draw
+some conclusions from Fig. 12(b), but all of the conclusions can be drawn from Fig. 12(a)
+

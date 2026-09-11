@@ -1,0 +1,24 @@
+--- docs/papers211_215_sequence/qa/finite_pointer_initial_runtime_reception02/inspect_initial.py	2026-09-08 23:55:32.016652823 +0800
++++ docs/papers211_215_sequence/qa/finite_pointer_initial_runtime_reception03/inspect_initial.py	2026-09-09 00:08:18.882992317 +0800
+@@ -20,7 +20,7 @@
+ 
+ ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+ QA = ROOT/'docs/papers211_215_sequence/qa'
+-HERE = QA/'finite_pointer_initial_runtime_reception02'
++HERE = QA/'finite_pointer_initial_runtime_reception03'
+ BDIR = QA/'finite_pointer_initial_binding01'
+ BPATH = BDIR/'BINDING.json'
+ BINDING_SHA = '7575bf8027327615dbe3a938b4fb50de6f8b7b241668346435369d99874e01ac'
+@@ -341,7 +341,11 @@
+             need(name in allowed and resolved in allowed, ('ordinary input in correct narrow scope',stage,name))
+             if scientific and p.is_relative_to(ROOT):
+                 need(name in copies and resolved==name, 'child exact two capsule paths only')
+-            ordinary[resolved] = basic(pin(p,allowed[resolved]))
++            actual = pin(p,allowed[name])
++            target = pin(resolved,allowed[resolved])
++            need(actual['resolved']==resolved and basic(actual)==basic(target),
++                 'ordinary original and resolved identities share exact content')
++            ordinary[resolved] = basic(target)
+         else:
+             need(p.is_relative_to(cache) and not os.path.lexists(p) and not os.path.lexists(cache), 'unique absent cache probe only')
+             absent.append(name)

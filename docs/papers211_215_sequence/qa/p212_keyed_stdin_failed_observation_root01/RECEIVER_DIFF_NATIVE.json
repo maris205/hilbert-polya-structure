@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "diff -u docs/papers211_215_sequence/qa/p212_keyed_stdin_failed_observation_root01/CHECK_RECEPTION.cjs docs/papers211_215_sequence/qa/p212_keyed_stdin_failed_observation_root01/CHECK_RECEPTION_delta01.cjs",
+    "max_output_tokens": 4000
+  },
+  "return": {
+    "chunk_id": "981a83",
+    "wall_time_seconds": 0.00000657,
+    "exit_code": 1,
+    "original_token_count": 389,
+    "output": "--- docs/papers211_215_sequence/qa/p212_keyed_stdin_failed_observation_root01/CHECK_RECEPTION.cjs\t2026-09-10 20:53:54.999898177 +0800\n+++ docs/papers211_215_sequence/qa/p212_keyed_stdin_failed_observation_root01/CHECK_RECEPTION_delta01.cjs\t2026-09-10 20:55:28.448145064 +0800\n@@ -21,7 +21,7 @@\n  ...['observe.py','FRONTIER.json'].map(n=>QA+'p212_keyed_stdin_source_delta01/'+n),\n  ...['RECEPTION.md','DECISION.json'].map(n=>QA+'p212_trusted_product_boundary_root01/'+n),\n  ...['AGENTS.md','.agents/skills/symbolic-dynamics-research/SKILL.md','docs/research_state/WORKFLOW.md'].map(n=>ROOT+n),\n- ...['ROOT_READS_NATIVE.json','ROOT_REPLAY_NATIVE.json','ROOT_OTHER_NATIVE.json','CHECK_RECEPTION.cjs'].map(n=>D+n),\n+ ...['ROOT_READS_NATIVE.json','ROOT_REPLAY_NATIVE.json','ROOT_OTHER_NATIVE.json','CHECK_RECEPTION.cjs','CHECK_RECEPTION_delta01.cjs','FIRST_RECEIVER_FAILURE_NATIVE.json'].map(n=>D+n),\n  PRIVATE+'/stdout.raw',PRIVATE+'/stderr.raw'\n ]);\n const bodies=new Map(),keys=new Map();\n@@ -89,7 +89,7 @@\n }\n let ownBytes=0;\n for(const r of json(D+'ROOT_READS_NATIVE.json')){\n- eq(r.return.exit_code,0);ok(!/truncated output|tokens truncated/.test(r.return.output));\n+ eq(r.return.exit_code,0);ok(!/^Warning: truncated output/.test(r.return.output),'tool truncation header, not a substring in source');\n  const m=/^sed -n '(\\d+),(\\d+)p' (docs\\/[A-Za-z0-9_./-]+)$/.exec(r.request.cmd);ok(m!==null);\n  const p=ROOT+m[3],expected=slice(p,Number(m[1]),Number(m[2]),false);\n  eq(Buffer.from(r.return.output),expected,'root entire exact source/prose slice');\n"
+  }
+}

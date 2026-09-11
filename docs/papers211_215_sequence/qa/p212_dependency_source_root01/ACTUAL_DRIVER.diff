@@ -1,0 +1,193 @@
+--- docs/papers211_215_sequence/qa/p212_dependency_query_driver_preparation01/driver.js	2026-09-09 16:30:44.879218359 +0800
++++ docs/papers211_215_sequence/qa/p212_dependency_query_driver_revision02/driver.js	2026-09-09 16:59:30.722543896 +0800
+@@ -1,6 +1,7 @@
+ 'use strict';
+ // SOURCE ONLY. This file has NOT been executed, imported, checked as AST, or tested.
+-// Fresh implementation, not a transplant of an old builder/discovery controller.
++// Revision02: minimal guard-order delta from the immutable preparation01 source.
++// The original source, independent findings and exact derivation remain preserved.
+ // Default entry reads only its disabled companion, then refuses. An enabled
+ // external binding, received source and a PRE-startup native entry are separate gates.
+ const fs = require('node:fs');
+@@ -10,7 +11,7 @@
+ const assert = require('node:assert/strict');
+ const ROOT = '/root/autodl-tmp/symbolic_dynamics';
+ const QA = ROOT + '/docs/papers211_215_sequence/qa';
+-const SELF = QA + '/p212_dependency_query_driver_preparation01/driver.js';
++const SELF = QA + '/p212_dependency_query_driver_revision02/driver.js';
+ const QUERY_ROOT = QA + '/p212_build_dependency_query01';
+ const QUERY_CWD = QUERY_ROOT + '/query_cwd';
+ const BINDING_ROOT = QA + '/p212_build_dependency_binding01';
+@@ -236,6 +237,7 @@
+   escaped_writer_scope:'UNKNOWN_NOT_CONTINUOUS_OR_OS_HERMETIC'};
+ const phases = ['contract','lookup','bodies'];
+ let binding, inputByPath, out, ownedUnsettled = false;
++let approvedBodyPaths = null, approvedBodyRequests = null;
+ const createdFiles = [], createdDirs = [], bodyObservations = new Map();
+ function need(value, message) { assert.ok(value, message); }
+ function same(a, b, message) { assert.deepEqual(a, b, message); }
+@@ -353,13 +355,42 @@
+   }
+   return {resolved:done,chain};
+ }
+-function readPinned(p, expected) {
+-  const d = inputByPath.get(p);
+-  const receivedBody=d&&d.role==='body'&&binding.phase==='bodies'&&expected;
+-  need(d && (d.content !== null || receivedBody),'file must belong to full bound input key: '+p);
+-  if(expected&&d.content!==null) same(d.content,expected,'explicit required pin '+p);
++function fileForPurpose(p, purpose) {
++  // Descriptor-only guard: this function never opens or reads file bytes.
++  need(['source','runtime','configuration','receipt','query_result','body'].includes(purpose),
++    'explicit byte-read purpose');
++  const d=inputByPath.get(p);
++  need(d&&d.role===purpose&&['file','symlink'].includes(d.kind),
++    'lexical file/alias has the exact read purpose '+p);
++  const referent=inputByPath.get(d.resolved);
++  need(referent&&referent.kind==='file'&&referent.role===purpose,
++    'separate regular referent has the exact read purpose '+p);
++  same(referent.resolved,referent.path,'canonical regular referent '+p);
++  same(d.stat,referent.stat,'lexical and resolved file metadata '+p);
++  same(d.content,referent.content,'lexical and resolved content channel '+p);
++  if(purpose!=='body') {
++    // Non-body channels require their own full pin; an expected argument
++    // cannot turn a null-content body descriptor into receipt/source bytes.
++    pinShape(d.content); pinShape(referent.content);
++  }
++  return d;
++}
++function requireBodyRead(d) {
++  need(binding.phase==='bodies'&&approvedBodyPaths!==null&&
++    approvedBodyPaths.has(d.path)&&approvedBodyPaths.has(d.resolved),
++    'whole returned set must be accepted before any body open '+d.path);
++}
++function readPinned(p, purpose, expected) {
++  const d=fileForPurpose(p,purpose);
++  if(purpose==='body') requireBodyRead(d);
++  if(expected!==undefined) {
++    pinShape(expected);
++    if(d.content!==null) same(d.content,expected,'explicit required pin '+p);
++  }
+   const requiredPin=expected??d.content; pinShape(requiredPin);
+   const resolution=resolveBound(p);
++  need(purpose==='body'||resolution.chain.every(row=>inputByPath.get(row.path).role!=='body'),
++    'non-body read cannot cross a body-role alias/ancestor '+p);
+   same(resolution.resolved,d.resolved,'resolved input '+p);
+   const fd=fs.openSync(resolution.resolved,
+     fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);
+@@ -398,7 +429,7 @@
+     assertMetadata(stats(lst),d.lstat,d.comparison,'lstat key '+d.path);
+     assertMetadata(stats(st),d.stat,d.comparison,'stat key '+d.path);
+     let content=null, members=null;
+-    if(d.content !== null) content=pin(readPinned(d.path,d.content));
++    if(d.content !== null) content=pin(readPinned(d.path,d.role,d.content));
+     if(d.members !== null) {
+       members=fs.readdirSync(d.path).sort(); same(members,d.members,'finite membership '+d.path);
+     }
+@@ -418,7 +449,7 @@
+   keys(ref,['path','pin'],'receipt ref'); absolute(ref.path); pinShape(ref.pin);
+   need(ref.path.startsWith(ROOT+'/'),'receipt is workspace original');
+ }
+-function receiveRef(ref) { referenceShape(ref); readPinned(ref.path,ref.pin); }
++function receiveRef(ref, purpose) { referenceShape(ref); readPinned(ref.path,purpose,ref.pin); }
+ function expectedCommands() {
+   const result=[
+     {label:'contract_help',phase:'CONTRACT_ONLY',argv:['/usr/bin/kpsewhich','--help'],expected_exit_codes:[0],result:null},
+@@ -441,7 +472,7 @@
+   const objects={};
+   for(const [name,fixed] of Object.entries(OLD_COMPANIONS)) {
+     const absolutePath=ROOT+'/'+fixed.path;
+-    const bytes=readPinned(absolutePath);
++    const bytes=readPinned(absolutePath,'source');
+     same(sha(bytes),fixed.sha256,'immutable WHOLE companion, every field and byte '+name);
+     objects[name]=canonical(bytes);
+   }
+@@ -546,6 +577,8 @@
+       if(d.content!==null) same(d.content,resolved.content,'alias content agrees with target');
+     }
+   }
++  for(const p of [b.controller.executable_spelling,b.controller.executable_resolved,executable])
++    fileForPurpose(p,'runtime');
+ }
+ function openOutput(rel) {
+   const fd=fs.openSync(out+'/'+rel,fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL,0o600);
+@@ -686,14 +719,15 @@
+     native_exit:capture.result.native_exit.code,consumption_claim:false};
+ }
+ function validateQueryInputs() {
++  need(approvedBodyPaths===null&&approvedBodyRequests===null,'body channel starts closed');
+   const commands=expectedCommands().slice(2,40), requests=[];
+   same(binding.query_inputs.map(x=>x.label),commands.map(x=>x.label),'all 38 result contexts in order');
+   for(let i=0;i<commands.length;i++) {
+     const q=binding.query_inputs[i], c=commands[i];
+     keys(q,['label','stdout','stderr','result'],'query input');
+     for(const k of ['stdout','stderr','result']) referenceShape(q[k]);
+-    const stdout=readPinned(q.stdout.path,q.stdout.pin),stderr=readPinned(q.stderr.path,q.stderr.pin);
+-    const result=canonical(readPinned(q.result.path,q.result.pin));
++    const stdout=readPinned(q.stdout.path,'query_result',q.stdout.pin),stderr=readPinned(q.stderr.path,'query_result',q.stderr.pin);
++    const result=canonical(readPinned(q.result.path,'query_result',q.result.pin));
+     // Query reception supplies the complete historical-native validation; these
+     // checks additionally bind every body authorization to the exact raw bytes.
+     keys(result,['schema','label','argv','pid','native_exit','close_observed',
+@@ -744,22 +778,28 @@
+       'lexical_path','max_bytes'],'complete body authorization');
+     const {max_bytes,...identity}=b; same(identity,requests[i],'body authority must match exact ordered raw line');
+     need(Number.isSafeInteger(max_bytes)&&max_bytes>0,'separately bound finite body byte limit');
+-    const d=inputByPath.get(b.lexical_path);
+-    need(d&&d.role==='body'&&['file','symlink'].includes(d.kind),'approved finite body descriptor');
+-    const referent=inputByPath.get(d.resolved);
+-    need(referent&&referent.kind==='file'&&referent.role==='body',
+-      'body target must be a separately bound regular-file role before any open');
++    const d=fileForPurpose(b.lexical_path,'body');
++    const resolution=resolveBound(d.path);
++    same(resolution.resolved,d.resolved,'every approved body alias chain before byte permission');
+     need(BigInt(d.stat.size)<=BigInt(max_bytes),'whole body must fit finite declared limit');
+     allowedBodyPaths.add(d.path); allowedBodyPaths.add(d.resolved);
+   }
+-  for(const d of binding.inputs) if(d.role==='body')
++  for(const d of binding.inputs) if(d.role==='body') {
+     need(allowedBodyPaths.has(d.path),'body role cannot authorize an unreturned extra path');
++    fileForPurpose(d.path,'body');
++  }
++  // Sole permission transition, after every ordered result and body descriptor.
++  approvedBodyRequests=binding.body_requests.map(request=>({...request}));
++  approvedBodyPaths=allowedBodyPaths;
+   return requests;
+ }
+ async function captureBody(request,index) {
++  const d=fileForPurpose(request.lexical_path,'body');
++  requireBodyRead(d);
++  same(request,approvedBodyRequests[index],'exact accepted ordered body request');
+   const label='body_'+String(index).padStart(4,'0');
+   mkdir(label);
+-  const d=inputByPath.get(request.lexical_path), resolution=resolveBound(d.path);
++  const resolution=resolveBound(d.path);
+   same(resolution.resolved,d.resolved,'approved body resolution');
+   record(label+'/ATTEMPT.json',{schema:'p212-body-copy-attempt-v1',request,
+     exact_bound_descriptor:d,alias_chain:resolution.chain,
+@@ -859,13 +899,13 @@
+   same(process.cwd(),ROOT,'observed controller cwd');
+   same({...process.env},ENV8,'no inherited environment additions');
+   same(process.umask(),0o077,'umask already bound before startup');
+-  readPinned(SELF,binding.driver_pin);
+-  for(const ref of Object.values(binding.receipts)) if(ref!==null) receiveRef(ref);
+-  receiveRef(binding.controller.outer_entry_source); receiveRef(binding.controller.outer_request_record);
++  readPinned(SELF,'source',binding.driver_pin);
++  for(const ref of Object.values(binding.receipts)) if(ref!==null) receiveRef(ref,'receipt');
++  receiveRef(binding.controller.outer_entry_source,'source'); receiveRef(binding.controller.outer_request_record,'receipt');
+   const frontier=oldCompanions();
+   // Keep the full fixed source graph. No manuscript execution/prose repair occurs.
+   for(const [name,k] of Object.entries(frontier.profile.source_pins))
+-    readPinned(ROOT+'/'+frontier.profile.paper_root+'/'+name,k);
++    readPinned(ROOT+'/'+frontier.profile.paper_root+'/'+name,'source',k);
+   // Validate the ENTIRE separately approved returned path set before snapshot()
+   // can read any pre-pinned body bytes in this phase.
+   if(binding.phase==='bodies') validateQueryInputs();
+@@ -890,7 +930,7 @@
+     const bodyAfter=[];
+     for(const [bodyPath,bodyPin] of bodyObservations)
+       bodyAfter.push({path:bodyPath,first_complete_read:bodyPin,
+-        final_complete_read:pin(readPinned(bodyPath,bodyPin))});
++        final_complete_read:pin(readPinned(bodyPath,'body',bodyPin))});
+     record('BODY_READS_AND_FINAL_KEYS.json',{
+       scope:'FIRST_BODY_BYTES_WERE_UNKNOWN_AT_BINDING_NOT_PRESTARTUP_CONTENT_PINS',
+       ordered_copies:completed,final_keys:bodyAfter,

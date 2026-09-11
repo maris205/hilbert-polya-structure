@@ -1,0 +1,31 @@
+# SOURCE-READY PROPOSAL ONLY: root acceptance and a fresh grant are required.
+set -euo pipefail
+umask 077
+P213_A_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_a_strict_pair_run01'
+P213_A_KEYS='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_a_execution_preparation01/EXTERNAL_KEYS.cjs'
+P213_A_VERIFY='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/reviews/p213_a/verify.py'
+cd -- /root/autodl-tmp/symbolic_dynamics
+/usr/bin/mkdir -m 700 -- "$P213_A_OUT"
+set -C
+exec 3>&1 4>&2
+exec > "$P213_A_OUT/controller.stdout" 2> "$P213_A_OUT/controller.stderr"
+p213_a_finish() {
+  local p213_a_rc=$?
+  trap - EXIT
+  printf '%s\n' "$p213_a_rc" > "$P213_A_OUT/controller.exit"
+  printf 'P213_A_CAPTURE_EXIT=%s\n' "$p213_a_rc" >&3
+  exit "$p213_a_rc"
+}
+trap p213_a_finish EXIT
+/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node "$P213_A_KEYS" inputs < /dev/null > "$P213_A_OUT/keys.before.json" 2> "$P213_A_OUT/keys.before.stderr"
+set +e
+/usr/bin/env -i LANG=C LC_ALL=C /usr/bin/python3.10 -I -S -B "$P213_A_VERIFY" < /dev/null 3>&- 4>&- > "$P213_A_OUT/stdout.bin" 2> "$P213_A_OUT/stderr.bin"
+P213_A_PYTHON_STATUS=$?
+set -e
+printf '%s\n' "$P213_A_PYTHON_STATUS" > "$P213_A_OUT/python.exit"
+/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node "$P213_A_KEYS" inputs < /dev/null > "$P213_A_OUT/keys.after.json" 2> "$P213_A_OUT/keys.after.stderr"
+/usr/bin/cmp -- "$P213_A_OUT/keys.before.json" "$P213_A_OUT/keys.after.json" > "$P213_A_OUT/input-key-cmp.stdout" 2> "$P213_A_OUT/input-key-cmp.stderr"
+/usr/bin/env -i PATH=/usr/bin:/bin LANG=C LC_ALL=C /usr/bin/node "$P213_A_KEYS" outputs strict01 < /dev/null > "$P213_A_OUT/raw.keys.json" 2> "$P213_A_OUT/raw.keys.stderr"
+[[ "$P213_A_PYTHON_STATUS" == 0 ]] || exit "$P213_A_PYTHON_STATUS"
+[[ -s "$P213_A_OUT/stdout.bin" ]]
+[[ ! -s "$P213_A_OUT/stderr.bin" ]]

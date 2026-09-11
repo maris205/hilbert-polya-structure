@@ -1,0 +1,18 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/history/diagnostic01_source/build_core.py	2026-09-08 17:50:31.659556459 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/build_core.py	2026-09-08 18:01:03.322071443 +0800
+@@ -273,8 +273,15 @@
+     return row, ((work / 'stdout.raw').read_bytes() if (work / 'stdout.raw').exists() else b'')
+ 
+ 
++def incomplete_native(root):
++    """An interrupted inner recorder cannot be mistaken for a closed child."""
++    return [str(p.parent) for p in sorted(root.rglob('ATTEMPT.json'))
++            if not (p.parent / 'RECEIPT.json').is_file()]
++
++
+ def seal(root):
+     require(not list(root.rglob('UNCLOSED.json')), 'Unsettled subtree prevents seal')
++    require(not incomplete_native(root), 'Incomplete native attempts prevent seal')
+     files = sorted(p for p in root.rglob('*') if p.is_file())
+     require(not any(p.is_symlink() for p in root.rglob('*')), 'Symlink in output package')
+     require(not (root / 'SHA256SUMS').exists(), 'Never reseal an existing attempt')

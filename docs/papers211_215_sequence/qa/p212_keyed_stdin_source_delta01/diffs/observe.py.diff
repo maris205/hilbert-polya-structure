@@ -1,0 +1,40 @@
+--- docs/papers211_215_sequence/qa/p212_preprobe_bootstrap_read_order_delta01/observe.py	2026-09-09 21:21:26.556389533 +0800
++++ docs/papers211_215_sequence/qa/p212_keyed_stdin_source_delta01/observe.py	2026-09-09 22:54:45.418531295 +0800
+@@ -14,10 +14,12 @@
+ 
+ ROOT = '/root/autodl-tmp/symbolic_dynamics'
+ QA = ROOT + '/docs/papers211_215_sequence/qa'
+-HERE = QA + '/p212_preprobe_bootstrap_preparation01'
++HERE = QA + '/p212_keyed_stdin_source_delta01'
+ FRONTIER = HERE + '/FRONTIER.json'
+-SOURCE_RECEIPT = QA + '/p212_preprobe_bootstrap_source_root01/RECEPTION.md'
++SOURCE_RECEIPT = QA + '/p212_keyed_stdin_source_root01/RECEPTION.md'
+ TRUST_RECEIPT = QA + '/p212_trusted_product_boundary_root01/RECEPTION.md'
++STDIN_FILE = QA + '/p212_keyed_stdin_input01/empty.stdin'
++EMPTY_CONTENT = {'bytes': 0, 'sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}
+ PROVENANCE = {
+     'schema': 'p212-trusted-product-boundary-v1',
+     'assumption': 'ordinary_product_observer_bash_env_bootstrap',
+@@ -263,12 +265,20 @@
+     else:
+         need(mode != 'absent', 'required absence is present: ' + path)
+         kind = int(before['stat']['mode'])
+-        if path == '/dev/null':
+-            need(stat.S_ISCHR(kind), 'metadata-only /dev/null must be a character device')
++        if path == STDIN_FILE:
++            need(mode == 'file' and target['max_bytes'] == 0 and target['capture_hex'] is True,
++                 'stdin is the complete zero-byte regular-file channel')
++            need(before['resolved'] == path and all(item['link'] is None for item in before['chain']),
++                 'stdin requires an explicitly observed physical component chain')
++            need(stat.S_ISREG(kind) and before['stat']['size'] == '0',
++                 'stdin is a physical empty regular file, never a device')
+         if mode in ('file', 'optional_file'):
+             need(stat.S_ISREG(kind), 'file target must be regular before open')
+             row['content'] = whole_file(before['resolved'], target['max_bytes'], target['capture_hex'], before['stat'])
+             stable(before['stat'], row['content']['before'])
++            if path == STDIN_FILE:
++                need({k: row['content'][k] for k in ('bytes', 'sha256')} == EMPTY_CONTENT
++                     and row['content']['raw_hex'] == '', 'complete actual empty stdin content')
+         elif mode in ('directory', 'optional_directory', 'membership'):
+             need(stat.S_ISDIR(kind), 'directory required')
+             if mode == 'membership':

@@ -1,0 +1,170 @@
+{
+  "schema": "p212-dependency-query-driver-independent-source-audit-findings-v1",
+  "status": "SOURCE_REVISION_REQUIRED_HOLD_OPERATIONAL",
+  "scope": "Nonauthor infrastructure source audit of exactly driver preparation01; not a mathematical/manuscript review, executed test, enabled-binding receipt or root operational gate.",
+  "target_manifest_sha256": "bbb6bed92196fcb2876db00dc83f0aad41f630f3d738f292f2047e91222d7917",
+  "driver": {
+    "path": "docs/papers211_215_sequence/qa/p212_dependency_query_driver_preparation01/driver.js",
+    "lines": 938,
+    "bytes": 49231,
+    "sha256": "fc61b463fbb8cb6c09887f12a85152e9e345c242ec0c3693621f396c42066381"
+  },
+  "census": {
+    "critical": 0,
+    "major_open": 1,
+    "minor_coverage_observations": 1,
+    "other_current_operational_defects": 0,
+    "executed_incidents": 0
+  },
+  "findings": [
+    {
+      "id": "DQD-S1",
+      "severity": "Major",
+      "status": "OPEN_SOURCE_REVISION_REQUIRED",
+      "title": "Body-role reads can occur before the complete returned-path authorization gate",
+      "evidence": [
+        {
+          "path": "driver.js",
+          "lines": [
+            304,
+            329
+          ],
+          "fact": "Input shape permits body-role files with unknown content in the bodies phase; aliases have separately bound referents."
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            356,
+            381
+          ],
+          "fact": "readPinned permits body + bodies phase + expected pin with content:null, then opens and reads the referent."
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            417,
+            421
+          ],
+          "fact": "A receipt ref constrains lexical workspace path and pin shape but not byte-read purpose, descriptor role or resolved role."
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            538,
+            547
+          ],
+          "fact": "Only bodies phase is required for body roles; alias target roles may also be body."
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            862,
+            871
+          ],
+          "fact": "SELF, all receipts, outer refs, old companions and fixed profile are read before validateQueryInputs."
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            688,
+            756
+          ],
+          "fact": "Query stdout/stderr/result refs are read at 695-696; complete body list and extra-body rejection follow only at 739-756."
+        },
+        {
+          "path": "STAGED_CAPTURE_AND_CLOSURE.md",
+          "lines": [
+            188,
+            194
+          ],
+          "fact": "The stated invariant is that the entire returned-path set is checked before any body bytes can be read."
+        }
+      ],
+      "symbolic_witness": [
+        "No actual binding, file, symlink or input mutation is created. All letters below denote hypothetical descriptor roles in a future bodies binding.",
+        "Let q be a receipt-ref lexical path below ROOT, a symlink to regular file h. Bind all finite ancestors/aliases and matching q/h stat fields. Tag both q and h as body, with content:null; let the receipt ref have a syntactically valid complete expected pin. Neither q nor h belongs to the eventual returned-body set.",
+        "descriptorShape and validateBinding accept these role/kind/content combinations. referenceShape allows the workspace lexical q without checking whether q or its referent belongs to the body channel.",
+        "main reaches receiveRef(q) before validateQueryInputs. readPinned(q,expected) authorizes the special body path, opens h and reads its bytes before the later complete returned-set rejection.",
+        "The bootstrap reads inside validateQueryInputs have the same issue: its three q refs lack a non-body purpose check before reading. An invalid later pin or missing returned role can only reject after that read."
+      ],
+      "impact": "A malformed binding that should be refused before any unapproved body-byte access can cause an early body read. This is a present source invariant defect, not an observed host incident, and is separate from the correctly disclosed missing outer runtime/session implementation.",
+      "required_revision": [
+        "Before any possible byte read, bind the callee purpose and validate receipt/source/runtime/query-result roles, file-or-alias kinds, resolved referent roles and required complete prebound content.",
+        "Keep those bootstrap documentary/native-result channels disjoint from the unknown-body channel; a lexical workspace path alone is insufficient.",
+        "Make body-byte permission false until every ordered returned-body authorization and every body descriptor/alias role has passed; do not let a supplied expected pin bypass that state.",
+        "Preserve preparation01 and issue a new-only source revision and exact reviewed delta. No repair is applied by this auditor."
+      ],
+      "execution_or_mutation_test": false,
+      "independent_consultation": "context_contract/REPORT.md DCC-F1 independently reaches the same source witness."
+    }
+  ],
+  "observations": [
+    {
+      "id": "DQD-O1",
+      "severity": "Minor",
+      "status": "DISCLOSED_NONBLOCKING_OUTER_BINDING_COVERAGE_BOUNDARY",
+      "current_operational_defect": false,
+      "title": "Selected binding-file byte stability belongs to a separate nonself outer key, not the inner mandatory input list",
+      "evidence": [
+        {
+          "path": "driver.js",
+          "lines": [
+            529,
+            530
+          ]
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            847,
+            855
+          ]
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            878,
+            878
+          ]
+        },
+        {
+          "path": "driver.js",
+          "lines": [
+            914,
+            915
+          ]
+        },
+        {
+          "path": "STAGED_CAPTURE_AND_CLOSURE.md",
+          "lines": [
+            170,
+            179
+          ]
+        }
+      ],
+      "deduction": "The initial selected binding file is decoded once. filename is not mandatory in binding.inputs, and BINDING_RECEIVED records the initial parsed content. The inner final snapshot therefore does not by itself establish current binding-file byte/identity stability. The staged contract explicitly leaves an outer key and pre-startup receipt to a separate implementation.",
+      "required_interpretation": "The future outer source must explicitly bind initial selected binding bytes and identity and their required before/after agreement. Do not request a circular full self-hash inside BINDING.json. This does not independently block the disabled preparation beyond DQD-S1, and no accepted binding is alleged deficient.",
+      "consultation": "Preserves the independently recorded DCC-O1 as a coverage observation, not a second guard defect."
+    }
+  ],
+  "intended_pending_not_defects": [
+    "Complete outer original product request/yield/poll/final envelopes, native product handle and broader owned-session/intervention/member reception require a separately received implementation before startup.",
+    "Node/bootstrap/runtime/tool/configuration/aliases require an outer pre-startup key; this inner driver correctly says its post-start checks cannot attest that gate.",
+    "Installed help/version option, format and no-generation semantics must be separately received before the 51 lookup proposals; flags or nonempty help are not semantic acceptance.",
+    "Configuration/article/kernel/NFSS/metric/VF/map/font/native/render and actual build-cwd/lock frontiers remain open and source-derived. No old840 closure or new lock is claimed.",
+    "Finite fstat/alias/cmp/group observations do not prove continuous no-race, escaped-writer or OS-hermetic closure."
+  ],
+  "authority": {
+    "source_pass": false,
+    "root_reception": false,
+    "query": false,
+    "host_body_read": false,
+    "driver_execution": false,
+    "syntax_AST_import_test": false,
+    "build": false,
+    "science": false,
+    "manuscript_review": false,
+    "visual_review": false,
+    "external": "HOLD_EXTERNAL"
+  }
+}

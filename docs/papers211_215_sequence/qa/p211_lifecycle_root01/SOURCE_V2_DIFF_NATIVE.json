@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "diff -u docs/papers211_215_sequence/qa/p211_lifecycle_root01/audit_lifecycle.js docs/papers211_215_sequence/qa/p211_lifecycle_root01/audit_lifecycle_v2.js",
+    "max_output_tokens": 5000
+  },
+  "result": {
+    "chunk_id": "79edb8",
+    "wall_time_seconds": 0.00000542,
+    "exit_code": 1,
+    "original_token_count": 510,
+    "output": "--- docs/papers211_215_sequence/qa/p211_lifecycle_root01/audit_lifecycle.js\t2026-09-09 17:00:42.907190297 +0800\n+++ docs/papers211_215_sequence/qa/p211_lifecycle_root01/audit_lifecycle_v2.js\t2026-09-09 17:03:04.238796773 +0800\n@@ -112,7 +112,18 @@\n  equal(d.current_findings.map(x=>x.id),['P211-COLD1-IO-D1','P211-COLD2-DIAGNOSTIC-CENSUS'],'exact two resolved findings');\n  for(const x of d.current_findings)equal(x.status,'RESOLVED_BY_ADDITIVE_COMPLETE_CENSUS_AND_ROOT_DISPOSITION','additive finding resolution');\n  equal(d.stat_fields,FIELDS,'exact full rich-key statistic schema');equal(Object.keys(d.inputs).length,1452,'entire accepted semantic/documentary key');\n- for(const [p,k]of Object.entries(d.inputs))checkKey(p,k);\n+ const historicalBase=QA+'/control_before_p211_terminal_artifacts_accepted01';\n+ const historical=obj(historicalBase+'/MAPPING.json');manifest(historicalBase);\n+ equal(historical.stat_fields,FIELDS,'accepted old central full-stat schema');\n+ const central=[ROOT+'/SYMBOLIC_DYNAMICS_STATE.md',BATCH+'/PIPELINE_STATE.md'];\n+ equal(Object.keys(historical.original_keys).sort(),central.slice().sort(),'only two explicit original navigation roles');\n+ for(const [p,k]of Object.entries(d.inputs)){\n+  if(!central.includes(p)){checkKey(p,k);continue;}\n+  equal(historical.original_keys[p],k,'entire exact old navigation key, including original integer stats');\n+  const copy=historical.copies.filter(x=>x.source===p);equal(copy.length,1,'unique accepted physical historical copy');\n+  equal(copy[0].result.exit_code,0,'actual original physical copy');equal(copy[0].comparison.result.exit_code,0,'actual original raw comparison');\n+  equal(key(read(copy[0].archive)),{bytes:k.bytes,sha256:k.sha256},'entire archived original navigation bytes');\n+ }\n  for(const p of ['p211_terminal_cold_artifact_root01','p211_terminal_cold_artifact_root02','p211_font_warning_root01','p211_terminal_pair_pages_root01'])manifest(QA+'/'+p);\n  const cold=[1,2].map(i=>PAPER+'/qa_final/cold_build_'+i),phases=[];\n  for(let i=1;i<=2;i++){\n"
+  }
+}

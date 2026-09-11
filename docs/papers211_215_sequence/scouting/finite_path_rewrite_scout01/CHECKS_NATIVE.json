@@ -1,0 +1,89 @@
+{
+  "scope": "documentary checks only; three absent-jq failures preserved; successful isolated stdlib JSON fallback is not a scientific run",
+  "records": [
+    {
+      "request": {
+        "cmd": "sha256sum -c docs/papers211_215_sequence/scouting/finite_path_rewrite_scout01/INPUTS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 5000
+      },
+      "result": {
+        "chunk_id": "85753d",
+        "wall_time_seconds": 0.00000478,
+        "exit_code": 0,
+        "original_token_count": 311,
+        "output": "papers/144-leftmost-dyck-reassociation/main.tex: OK\npapers/144-leftmost-dyck-reassociation/main.pdf: OK\npapers/148-even-level-plane-tree-contraction/main.tex: OK\npapers/148-even-level-plane-tree-contraction/main.pdf: OK\ndocs/papers157_161_sequence/scouting/combinatorial/SCOUT.md: OK\ndocs/papers162_166_sequence/scouting/replacement_posets_languages/SCOUT.md: OK\ndocs/papers177_181_sequence/scouting/combinatorial_lane/SCOUT_AND_KILL_LEDGER.md: OK\ndocs/papers197_201_sequence/scouting/graph_matching_lane/BREADTH_AND_KILL_LEDGER.md: OK\ndocs/papers204_208_sequence/scouting/word_local/SCOUT_REPORT.md: OK\ndocs/papers204_208_sequence/scouting/combinatorial_second/SCOUT_REPORT.md: OK\ndocs/papers211_215_sequence/scouting/tree_order_lane/HANDOFF.md: OK\ndocs/papers211_215_sequence/scouting/tree_order_lane/SOURCE_AND_COLLISION.md: OK\ndocs/papers211_215_sequence/scouting/finite_word_tree_new_desk/HANDOFF.md: OK\ndocs/papers211_215_sequence/scouting/finite_rewriting_residual_lane/HANDOFF.md: OK\ndocs/papers211_215_sequence/scouting/finite_path_local_memory_desk/REPORT.md: OK\ndocs/papers211_215_sequence/scouting/finite_network_rewrite_desk/FINAL_HANDOFF.md: OK\ndocs/papers211_215_sequence/scouting/finite_resource_rewriting_desk02/REPORT.md: OK\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "jq -e '.records | length == 33' NATIVE_READS.json",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_path_rewrite_scout01",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "d7c21f",
+        "wall_time_seconds": 0.00000519,
+        "exit_code": 127,
+        "original_token_count": 11,
+        "output": "/bin/bash: line 1: jq: command not found\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "jq -e '.records | length == 5' WEB_RETURNS.json",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_path_rewrite_scout01",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "c4ff95",
+        "wall_time_seconds": 0.00000629,
+        "exit_code": 127,
+        "original_token_count": 11,
+        "output": "/bin/bash: line 1: jq: command not found\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "jq '.records | to_entries | map({index: .key, command: (.value.cmd // .value.request.cmd), chunk_id: .value.result.chunk_id, exit_code: .value.result.exit_code})' NATIVE_READS.json",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_path_rewrite_scout01",
+        "max_output_tokens": 6000
+      },
+      "result": {
+        "chunk_id": "0e665e",
+        "wall_time_seconds": 0.000004569,
+        "exit_code": 127,
+        "original_token_count": 11,
+        "output": "/bin/bash: line 1: jq: command not found\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "rg --files .",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_path_rewrite_scout01",
+        "max_output_tokens": 1000
+      },
+      "result": {
+        "chunk_id": "4cf123",
+        "wall_time_seconds": 0.00000626,
+        "exit_code": 0,
+        "original_token_count": 17,
+        "output": "./INPUTS.sha256\n./WEB_RETURNS.json\n./NATIVE_READS.json\n./REPORT.md\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "/usr/bin/python3.10 -I -S -B -c 'import json; from pathlib import Path; a=json.loads(Path(\"NATIVE_READS.json\").read_text()); b=json.loads(Path(\"WEB_RETURNS.json\").read_text()); assert len(a[\"records\"])==33; assert len(b[\"records\"])==5; assert all(\"chunk_id\" in r[\"result\"] and \"exit_code\" in r[\"result\"] for r in a[\"records\"]); print(json.dumps({\"native_records\":len(a[\"records\"]),\"web_calls\":len(b[\"records\"]),\"native_nonzero\":[{\"index\":i,\"exit_code\":r[\"result\"][\"exit_code\"],\"chunk_id\":r[\"result\"][\"chunk_id\"]} for i,r in enumerate(a[\"records\"]) if r[\"result\"][\"exit_code\"]],\"files_before_check_receipt\":sorted(p.name for p in Path(\".\").iterdir())},sort_keys=True))'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/scouting/finite_path_rewrite_scout01",
+        "max_output_tokens": 3000
+      },
+      "result": {
+        "chunk_id": "04fcd9",
+        "wall_time_seconds": 0.00000562,
+        "exit_code": 0,
+        "original_token_count": 67,
+        "output": "{\"files_before_check_receipt\": [\"INPUTS.sha256\", \"NATIVE_READS.json\", \"REPORT.md\", \"WEB_RETURNS.json\"], \"native_nonzero\": [{\"chunk_id\": \"d30da9\", \"exit_code\": 1, \"index\": 6}, {\"chunk_id\": \"29da6d\", \"exit_code\": 2, \"index\": 23}], \"native_records\": 33, \"web_calls\": 5}\n"
+      }
+    }
+  ]
+}

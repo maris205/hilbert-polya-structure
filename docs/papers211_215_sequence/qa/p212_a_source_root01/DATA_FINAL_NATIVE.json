@@ -1,0 +1,13 @@
+{
+  "arguments": {
+    "cmd": "node <<'P212_A_DATA_FINAL'\nconst fs=require('node:fs');const b='docs/papers211_215_sequence/reviews/p212_a/initial_data01/';const a=JSON.parse(fs.readFileSync(b+'A_PRE_NATIVE.json')),z=JSON.parse(fs.readFileSync(b+'A_POST_NATIVE.json'));if(a.result.exit_code!==0||z.result.exit_code!==0||!Buffer.from(a.result.output).equals(Buffer.from(z.result.output)))throw Error('keys');const root=JSON.parse(fs.readFileSync('docs/papers211_215_sequence/qa/p212_a_source_root01/DATA_ROOT_NATIVE.json'));const raw=fs.readFileSync(b+'A.stdout.raw');if(root.result.exit_code!==0||!raw.equals(Buffer.from(root.result.output))||fs.readFileSync(b+'A.stderr.raw').length)throw Error('output');const expected=fs.readFileSync(b+'SHA256SUMS','utf8').trimEnd().split('\\n').map(s=>s.slice(66));if(expected.some(s=>!s.startsWith(b)))throw Error('manifest prefix');const actual=fs.readdirSync(b).map(s=>b+s).sort();const wanted=expected.concat([b+'SHA256SUMS']).sort();if(JSON.stringify(actual)!==JSON.stringify(wanted))throw Error('members');for(const p of actual)if(!fs.lstatSync(p).isFile())throw Error('type');console.log(JSON.stringify({status:'ROOT_COMPLETE_DATA_REPORT_AND_BYTES_RECEIVED',pre_post_keys:JSON.parse(a.result.output).length,whole_output_bytes:raw.length,package_payloads:expected.length,package_files:actual.length,manifest_basis:'workspace-relative',canonical_adopted:false},null,2));\nP212_A_DATA_FINAL",
+    "max_output_tokens": 1300
+  },
+  "result": {
+    "chunk_id": "004d76",
+    "wall_time_seconds": 0.00000562,
+    "exit_code": 0,
+    "original_token_count": 59,
+    "output": "{\n  \"status\": \"ROOT_COMPLETE_DATA_REPORT_AND_BYTES_RECEIVED\",\n  \"pre_post_keys\": 5,\n  \"whole_output_bytes\": 646,\n  \"package_payloads\": 11,\n  \"package_files\": 12,\n  \"manifest_basis\": \"workspace-relative\",\n  \"canonical_adopted\": false\n}\n"
+  }
+}

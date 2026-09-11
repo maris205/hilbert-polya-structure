@@ -1,0 +1,163 @@
+#!/bin/bash
+# PROPOSED SOURCE ONLY. Never run before root receives full DATA/author pair,
+# current source, exact request and fresh finite runtime/trust binding.
+# Not a grant, observer, scientific verifier, reviewer or terminal build.
+set -euo pipefail
+umask 077
+if [[ "${1-}" != "--execute-under-separate-root-grant" || "$#" != 1 ]]; then
+  printf '%s\n' 'P215_BUILD_NOT_AUTHORIZED_BY_THIS_SOURCE' >&2
+  exit 78
+fi
+P215_PREP='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p215_initial_build_current01'
+P215_SRC='/root/autodl-tmp/symbolic_dynamics/papers/215-prefix-drawdown-clock'
+P215_BIND='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p215_initial_build_binding01'
+P215_OUT='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p215_initial_build_run01'
+P215_COLD="$P215_OUT/source_only"
+P215_PINFILE="$P215_PREP/SOURCE_ONLY.sha256"
+# These paths are proposals, not observed or created by preparation.
+# Root pins the whole exact manifest and source/request in its later grant.
+[[ -f "$P215_BIND/RUNTIME_INPUTS.sha256" && ! -L "$P215_BIND/RUNTIME_INPUTS.sha256" ]]
+[[ -f "$P215_PINFILE" && ! -L "$P215_PINFILE" ]]
+# Exclusive new tree only. Existing/failed tree is never cleaned or resumed.
+mkdir -- "$P215_OUT"
+mkdir -- "$P215_OUT/raw" "$P215_OUT/pass_artifacts" "$P215_OUT/pages" "$P215_COLD"
+mkdir -- "$P215_COLD/sections"
+exec 3>&1 4>&2
+set -C
+exec > "$P215_OUT/controller.stdout.raw" 2> "$P215_OUT/controller.stderr.raw"
+p215_finish() {
+  local p215_rc=$?
+  trap - EXIT
+  printf '%s\n' "$p215_rc" > "$P215_OUT/controller.exit"
+  printf 'P215_INITIAL_BUILD_SUPERVISOR_EXIT=%s\n' "$p215_rc" >&3
+  exit "$p215_rc"
+}
+trap p215_finish EXIT
+P215_SOURCES=(main.tex math_commands.tex references.bib sections/0_abstract.tex sections/1_setup.tex sections/2_clock.tex sections/3_inverse.tex sections/4_scope.tex)
+P215_PRODUCTS=(main.aux main.bbl main.blg main.log main.fls main.out main.toc main.pdf)
+cp --no-clobber -- "$P215_PINFILE" "$P215_OUT/SOURCE_EXPECTED.sha256"
+cp --no-clobber -- "$P215_BIND/RUNTIME_INPUTS.sha256" "$P215_OUT/RUNTIME_EXPECTED.sha256"
+sha256sum -- "$P215_PREP/BUILD_REQUEST.current.sh" "$P215_PREP/NATIVE_REQUEST.current.json" "$P215_BIND/RUNTIME_INPUTS.sha256" > "$P215_OUT/REQUEST_AND_BINDING.sha256"
+# Fixed selected runtime paths come from root's separately received manifest.
+# No which/help/version/proc query, recursive discovery, package installation,
+# dynamic FLS-path following or P211 observer is hidden in this script.
+sha256sum -c --strict "$P215_OUT/RUNTIME_EXPECTED.sha256" > "$P215_OUT/runtime.before.stdout" 2> "$P215_OUT/runtime.before.stderr"
+(cd "$P215_SRC" && sha256sum -c --strict "$P215_OUT/SOURCE_EXPECTED.sha256") > "$P215_OUT/live_source.before.stdout" 2> "$P215_OUT/live_source.before.stderr"
+for p215_name in "${P215_SOURCES[@]}"; do
+  [[ -f "$P215_SRC/$p215_name" && ! -L "$P215_SRC/$p215_name" ]]
+  cp --no-clobber -- "$P215_SRC/$p215_name" "$P215_COLD/$p215_name"
+  cmp -- "$P215_SRC/$p215_name" "$P215_COLD/$p215_name"
+done
+cd "$P215_COLD"
+sha256sum -c --strict "$P215_OUT/SOURCE_EXPECTED.sha256" > "$P215_OUT/cold_source.initial.stdout" 2> "$P215_OUT/cold_source.initial.stderr"
+# Prospective fixed fresh-cwd evidence; not observed by source preparation.
+P215_PHYSICAL_CWD=$(pwd -P)
+shopt -s dotglob nullglob
+P215_COLD_MEMBERS=(*)
+P215_SECTION_MEMBERS=(sections/*)
+shopt -u dotglob nullglob
+{
+  printf '%s\n' 'commands=Bash pwd -P; dotglob/nullglob fixed (*) and (sections/*); exact membership/type/absence tests'
+  printf 'expected_cwd=%q\nactual_physical_cwd=%q\n' "$P215_COLD" "$P215_PHYSICAL_CWD"
+  printf 'cold_member_count=%s\n' "${#P215_COLD_MEMBERS[@]}"
+  for p215_name in "${P215_COLD_MEMBERS[@]}"; do printf 'cold_member=%q\n' "$p215_name"; done
+  printf 'section_member_count=%s\n' "${#P215_SECTION_MEMBERS[@]}"
+  for p215_name in "${P215_SECTION_MEMBERS[@]}"; do printf 'section_member=%q\n' "$p215_name"; done
+  for p215_name in texmf .texlive2021; do
+    if [[ -e "$p215_name" || -L "$p215_name" ]]; then
+      printf 'relative_tree=%q PRESENT_OR_LINK\n' "$p215_name"
+    else
+      printf 'relative_tree=%q ABSENT\n' "$p215_name"
+    fi
+  done
+} > "$P215_OUT/COLD_CWD.actual.txt"
+[[ "$P215_PHYSICAL_CWD" == "$P215_COLD" ]]
+[[ "${#P215_COLD_MEMBERS[@]}" == 4 && "${#P215_SECTION_MEMBERS[@]}" == 5 ]]
+for p215_name in "${P215_COLD_MEMBERS[@]}"; do
+  case "$p215_name" in
+    main.tex|math_commands.tex|references.bib) [[ -f "$p215_name" && ! -L "$p215_name" ]] ;;
+    sections) [[ -d sections && ! -L sections ]] ;;
+    *) exit 94 ;;
+  esac
+done
+for p215_name in "${P215_SECTION_MEMBERS[@]}"; do
+  case "$p215_name" in
+    sections/0_abstract.tex|sections/1_setup.tex|sections/2_clock.tex|sections/3_inverse.tex|sections/4_scope.tex)
+      [[ -f "$p215_name" && ! -L "$p215_name" ]] ;;
+    *) exit 94 ;;
+  esac
+done
+[[ ! -e texmf && ! -L texmf && ! -e .texlive2021 && ! -L .texlive2021 ]]
+printf '%s\n' 'EXACT_TWO_DIRECTORY_MEMBERSHIP_TYPES_AND_RELATIVE_TREE_ABSENCE_CHECKS_PASSED' >> "$P215_OUT/COLD_CWD.actual.txt"
+for p215_name in "${P215_PRODUCTS[@]}"; do
+  [[ ! -e "$p215_name" && ! -L "$p215_name" ]]
+done
+p215_snapshot() {
+  local p215_dest="$P215_OUT/pass_artifacts/$1"
+  mkdir -- "$p215_dest"
+  for p215_name in "${P215_PRODUCTS[@]}"; do
+    if [[ -f "$p215_name" && ! -L "$p215_name" ]]; then
+      cp --no-clobber -- "$p215_name" "$p215_dest/$p215_name"
+      sha256sum -- "$p215_name" >> "$p215_dest/PRESENT.sha256"
+    elif [[ -e "$p215_name" || -L "$p215_name" ]]; then
+      printf 'UNEXPECTED_PRODUCT_TYPE %s\n' "$p215_name" >> "$p215_dest/TYPE_FAILURE.txt"
+      return 93
+    else
+      printf '%s\n' "$p215_name" >> "$p215_dest/ABSENT.txt"
+    fi
+  done
+}
+P215_STEP_STATUS=0
+p215_run() {
+  local p215_label=$1 p215_seconds=$2
+  shift 2
+  printf 'cwd=%s\n' "$P215_COLD" > "$P215_OUT/raw/$p215_label.request.txt"
+  printf 'supervisor_argv=' >> "$P215_OUT/raw/$p215_label.request.txt"
+  printf '%q ' /usr/bin/timeout --signal=TERM --kill-after=10s "${p215_seconds}s" "$@" >> "$P215_OUT/raw/$p215_label.request.txt"
+  printf '\n' >> "$P215_OUT/raw/$p215_label.request.txt"
+  set +e
+  /usr/bin/timeout --signal=TERM --kill-after=10s "${p215_seconds}s" "$@" < /dev/null > "$P215_OUT/raw/$p215_label.stdout.raw" 2> "$P215_OUT/raw/$p215_label.stderr.raw"
+  P215_STEP_STATUS=$?
+  set -e
+  printf '%s\n' "$P215_STEP_STATUS" > "$P215_OUT/raw/$p215_label.supervisor_exit"
+  # A timeout/launch failure is not assigned an invented native TeX exit.
+}
+p215_build_pass() {
+  local p215_label=$1
+  shift
+  p215_snapshot "$p215_label.before"
+  p215_run "$p215_label" 600 "$@"
+  p215_snapshot "$p215_label.after"
+  sha256sum -c --strict "$P215_OUT/SOURCE_EXPECTED.sha256" > "$P215_OUT/raw/$p215_label.sources.stdout" 2> "$P215_OUT/raw/$p215_label.sources.stderr"
+  if [[ "$P215_STEP_STATUS" != 0 ]]; then exit "$P215_STEP_STATUS"; fi
+}
+P215_TEX=(/usr/bin/pdflatex -no-shell-escape -interaction=nonstopmode -halt-on-error -file-line-error -recorder main.tex)
+p215_build_pass pass1 "${P215_TEX[@]}"
+p215_build_pass bibtex /usr/bin/bibtex main
+p215_build_pass pass2 "${P215_TEX[@]}"
+p215_build_pass pass3 "${P215_TEX[@]}"
+[[ -s main.pdf ]]
+p215_run pdfinfo 180 /usr/bin/pdfinfo main.pdf
+[[ "$P215_STEP_STATUS" == 0 ]] || exit "$P215_STEP_STATUS"
+p215_run pdffonts 180 /usr/bin/pdffonts main.pdf
+[[ "$P215_STEP_STATUS" == 0 ]] || exit "$P215_STEP_STATUS"
+p215_run pdftotext 180 /usr/bin/pdftotext -layout main.pdf -
+[[ "$P215_STEP_STATUS" == 0 ]] || exit "$P215_STEP_STATUS"
+p215_run final_diagnostics 180 /usr/bin/awk '/Warning|undefined|Overfull|Underfull|Missing character|Rerun|Label.s. may have changed|Error|error|^!/ {print FILENAME ":" FNR ":" $0}' main.log main.blg
+[[ "$P215_STEP_STATUS" == 0 ]] || exit "$P215_STEP_STATUS"
+P215_PAGES=$(/usr/bin/awk '/^Pages:[[:space:]]/ {print $2}' "$P215_OUT/raw/pdfinfo.stdout.raw")
+[[ "$P215_PAGES" =~ ^[1-9][0-9]*$ ]]
+printf '%s\n' "$P215_PAGES" > "$P215_OUT/PAGE_COUNT.txt"
+for ((p215_page=1; p215_page<=P215_PAGES; p215_page++)); do
+  printf -v p215_label 'page-%04d' "$p215_page"
+  p215_run "$p215_label" 180 /usr/bin/pdftoppm -f "$p215_page" -l "$p215_page" -singlefile -png -r 150 main.pdf "$P215_OUT/pages/$p215_label"
+  [[ "$P215_STEP_STATUS" == 0 ]] || exit "$P215_STEP_STATUS"
+  [[ -s "$P215_OUT/pages/$p215_label.png" ]]
+  sha256sum -- "$P215_OUT/pages/$p215_label.png" >> "$P215_OUT/PAGES.sha256"
+done
+sha256sum -c --strict "$P215_OUT/RUNTIME_EXPECTED.sha256" > "$P215_OUT/runtime.after.stdout" 2> "$P215_OUT/runtime.after.stderr"
+(cd "$P215_SRC" && sha256sum -c --strict "$P215_OUT/SOURCE_EXPECTED.sha256") > "$P215_OUT/live_source.after.stdout" 2> "$P215_OUT/live_source.after.stderr"
+sha256sum -c --strict "$P215_OUT/SOURCE_EXPECTED.sha256" > "$P215_OUT/cold_source.final.stdout" 2> "$P215_OUT/cold_source.final.stderr"
+sha256sum -- main.pdf main.log main.fls main.aux main.bbl main.blg > "$P215_OUT/FINAL_PRODUCTS.sha256"
+printf '%s\n' 'CAPTURED_PENDING_FULL_LOG_FLS_CONFIG_PDF_AND_ACTUAL_ALL_PAGE_RECEPTION' > "$P215_OUT/STATUS.txt"
+# No PDF adoption, initial artifact acceptance, Round0 or package seal is produced here.

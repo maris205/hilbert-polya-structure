@@ -1,0 +1,120 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/discovery01/source_snapshots/p211_runtime.py	2026-09-08 17:27:58.848021124 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/p211_runtime.py	2026-09-08 17:31:50.009619504 +0800
+@@ -31,6 +31,7 @@
+ SOURCE_FILES = (Path(__file__).resolve(), CORE_PATH)
+ ROLE_IMPORTS = ['itertools', 'json', 'math', 'sys']
+ CONFIG_PATHS = (
++    '/dev/null',
+     '/etc/ld.so.cache', '/etc/ld.so.conf', '/etc/ld.so.preload',
+     '/etc/localtime', '/etc/locale.conf', '/etc/default/locale',
+     '/etc/nsswitch.conf', '/etc/passwd', '/etc/group',
+@@ -60,8 +61,13 @@
+     p = Path(path)
+     row = {'lexists': core.lexists(p), 'exists': p.exists(),
+            'is_file': p.is_file(), 'is_dir': p.is_dir(),
++           'is_character_device': p.is_char_device(),
+            'resolved': str(p.resolve()),
+            'symlink': os.readlink(p) if p.is_symlink() else None}
++    if p.is_char_device():
++        info = p.stat()
++        row['character_device'] = {'major': os.major(info.st_rdev), 'minor': os.minor(info.st_rdev),
++                                   'mode': info.st_mode}
+     if with_bytes and p.is_file():
+         row.update(core.value(p))
+     return row
+@@ -82,6 +88,9 @@
+                 paths.update(str(q) for q in p.iterdir() if q.is_file())
+         members[directory] = row
+     config = {p: state(p) for p in sorted(paths)}
++    core.need(config['/dev/null']['is_character_device'] and
++              config['/dev/null']['character_device']['major'] == 1 and
++              config['/dev/null']['character_device']['minor'] == 3, 'declared_DEVNULL_character_device')
+     core.need(not config['/etc/ld.so.preload']['lexists'] and
+               not config['/usr/lib/python310.zip']['lexists'], 'no_preload_or_system_zip')
+     core.need(all(not row['lexists'] for p, row in config.items()
+@@ -93,6 +102,24 @@
+             'scope': 'Listed configuration and direct directory membership only; no host/library/stdlib recursion.'}
+ 
+ 
++def loader_search_scope(config):
++    lines = [s.strip() for s in Path('/etc/ld.so.conf').read_text().splitlines()
++             if s.strip() and not s.lstrip().startswith('#')]
++    core.need(lines == ['include /etc/ld.so.conf.d/*.conf'], 'reviewed_single_loader_include')
++    result = {}
++    for ptext in config['paths']:
++        p = Path(ptext)
++        if p.parent == Path('/etc/ld.so.conf.d') and p.is_file():
++            for line in p.read_text().splitlines():
++                clean = line.split('#', 1)[0].strip()
++                if not clean:
++                    continue
++                core.need(clean.startswith('/') and not any(c in clean for c in '*?[]\t '),
++                          ('unreviewed_loader_configuration_directive_HOLD', ptext, clean))
++                result[clean] = state(clean, False)
++    return result
++
++
+ def settings(cache, cwd):
+     core.need(Path(sys.executable).resolve() == PYTHON and sys.version_info[:2] == (3, 10),
+               'system_python_3_10')
+@@ -144,7 +171,8 @@
+         flags = args[2] if isinstance(args[2], int) else 0
+         writing = bool(flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND))
+         events.append({'path': str(p), 'mode': args[1], 'flags': args[2], 'writing': writing})
+-        if writing and (scientific or not p.is_relative_to(attempt)):
++        allowed_devnull = not scientific and p == Path('/dev/null') and p.is_char_device()
++        if writing and not allowed_devnull and (scientific or not p.is_relative_to(attempt)):
+             raise RuntimeError('unapproved ordinary file write: ' + str(p))
+         if p.suffix in ('.pyc', '.pyo') and core.lexists(p):
+             raise RuntimeError('inherited bytecode read: ' + str(p))
+@@ -153,11 +181,14 @@
+ 
+ 
+ def covered_opens(events, known, cache, attempt, scientific, capsule_files):
+-    ordinary, absent, volatile, outputs = {}, [], [], []
++    ordinary, absent, volatile, outputs, devices = {}, [], [], [], {}
+     core.need(all('forbidden_process_event' not in row for row in events), 'no_scientific_process_events')
+     for ptext in sorted({row['path'] for row in events}):
+         p = Path(ptext)
+-        if ptext.startswith('/proc/'):
++        if p == Path('/dev/null') and not scientific:
++            core.need(p.is_char_device(), 'DEVNULL_still_character_device')
++            devices[ptext] = state(p, False)
++        elif ptext.startswith('/proc/'):
+             core.need(not scientific, ('scientific_volatile_read', ptext))
+             volatile.append(ptext)
+         elif not scientific and p.is_relative_to(attempt):
+@@ -175,6 +206,7 @@
+             absent.append(ptext)
+     return {'events': events, 'ordinary_files': ordinary, 'absent_cache_probes': absent,
+             'volatile_proc_reads': volatile, 'own_attempt_io': outputs,
++            'nonordinary_devices': devices,
+             'scope': 'Post-hook Python opens and discrete file-backed maps/modules; not OS/startup/escaped-descendant tracing.'}
+ 
+ 
+@@ -264,6 +296,8 @@
+               'matching_prepared_import_closure')
+     config = configuration()
+     core.need(config == lock['configuration'], 'entire_pre_frozen_config_and_membership')
++    core.need(loader_search_scope(config) == lock['loader_search_directory_states'],
++              'entire_pre_frozen_loader_search_directory_states')
+     expected = dict(lock['files'])
+     expected.update(binding['adapter_sources'])
+     expected[str(binding_path)] = core.rich(binding_path)
+@@ -435,6 +469,7 @@
+                                'scientific_outcome': outcome, 'source': core.rich(source), 'cwd': str(cwd)}
+         finally:
+             active[0] = False
++            core.write_json(out / 'OPEN_EVENTS_RAW.json', events)
+             observed = covered_opens(events, known, cache, attempt, stage.startswith('child'),
+                                      {str(capsule / r['name']) for r in binding['capsule_files']})
+             core.write_json(out / 'OPEN_OBSERVATIONS.json', observed)
+@@ -452,6 +487,8 @@
+                 after_config = configuration()
+                 core.write_json(out / 'CONFIGURATION_AFTER.json', after_config)
+                 core.need(after_config == config, 'entire_configuration_membership_unchanged')
++                core.need(loader_search_scope(after_config) == lock['loader_search_directory_states'],
++                          'entire_loader_search_directory_states_unchanged')
+                 after = sample()
+                 core.write_json(out / 'RUNTIME_AFTER.json', after)
+                 covered_sample(after, known, cache, cwd, {str(p) for p in SOURCE_FILES})

@@ -1,0 +1,15 @@
+# B final source/proof record preparation
+
+SOURCE_AND_PROOF.md and SOURCE_FETCH_PROVENANCE.md in the parent review directory remain the full actual independent mathematical/source records. Their historical SOURCE_REVIEW_READY and unexecuted flags describe that time and are not edited into retrospective success. The final report must name their later scoped receptions explicitly.
+
+Root source reception qa/p212_b_source_root01/SOURCE_RECEPTION.md received the original 440-line verifier, full proof/interface/source records, 32 input pins and original twelve payloads. It then separately received all 481 final verifier lines and the exact additive builtin proposal. Only verify.py, OUTPUT_PLAN.md and OUTPUT_SCHEMA.md changed: json/math removal, equivalent supported-domain serialization/factorial helpers and matching interface documentation. No graph, anchor, series, parameter or predicate change occurred. This equivalence is a source argument, not an unperformed original/amended execution comparison.
+
+The old source package is physically preserved at qa/p212_b_builtin_proposal01/original_source12 with its original seal. Current verify.py SHA256 is 3129ed2e32862addc39f90ceb00a9a3862ba0b11a3037da1549ff8d358f2395d. The current twelve-payload adopted manifest is qa/p212_b_source_root01/ADOPTED_SOURCE_INPUTS.sha256, SHA256 9087ab5414709fd5ad822737faf3320a81355c30cb7f2ab2ca65ed8c84f2b3cd. The review-root SHA256SUMS remains the historical seal and must not be presented as that current key or rewritten. The separate saved-DATA receiver's four-payload SOURCE seal and DATA_SHA256SUMS also remain unchanged.
+
+The accepted ordinary-runtime policy is an explicit narrower replacement for stronger earlier loader/process wording, not proof of dynamic dependency closure. itertools and sys remain imports; no unsupported builtin-status inference is made. Scientific grant commands use the selected interpreter with -I -S -B, fixed locale-only environment and complete selected pre/post keys. The saved-DATA receptor checks runtime declarations without reopening host paths; root's actual runtime preflight is a different operation.
+
+The deductive audit handles invariant reduction, exhaustive core types, every return/decoration degeneration, attained periods, sharp witnesses, labelled extension and rational coefficients. Its primary literature deductions and bounded P167/P209 comparisons stand unchanged. No external-provider interaction or extra reviewer is credited. The research skill's evidence-first gates are used; the external-service research-review default is not invoked in place of this explicitly assigned process-separated reviewer. Complete artifact reception and final same-B delta acceptance remain pending.
+## Final-role closure
+
+The full independent B artifact and root receptions were received at e2c920/de346c. Actual no-change DATA5ebca8 passed all1644 checks and the same reviewer accepted DELTA.md. REPORT.md and FINDINGS_FINAL.json now issue final Review B; all earlier pending statements above identify historical source-stage obligations, not current open findings. The original SOURCE_AND_PROOF.md remains unchanged.
+

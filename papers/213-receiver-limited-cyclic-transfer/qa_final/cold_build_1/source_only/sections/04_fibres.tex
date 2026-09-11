@@ -1,0 +1,89 @@
+\section{Fixed-target fibres and largest-fibre degree}\label{sec:fibres}
+Let $y$ be a nonuniform fixed target. Subtract $m=\min_i y_i$.
+By Proposition~\ref{prop:terminal}, the positive residual coordinates are
+isolated spikes. Write their masses as $p_e$ at spike sites $e$, and
+let $d_e\ge1$ be the number of consecutive zeros immediately preceding
+$e$, back to the previous spike. For a sole spike, $d_e=n-1$.
+
+\begin{proposition}\label{prop:fixed-fibre}
+A uniform target has exactly one source. For a nonuniform fixed target,
+\begin{equation}\label{eq:fixed-fibre}
+ |F^{-1}(y)|=
+ \prod_{\{e:\ d_e\ge2\}}\left(\left\lfloor p_e/2\right\rfloor+1\right).
+\end{equation}
+\end{proposition}
+\begin{proof}
+Any source has the same minimum $m$ by Lemma~\ref{lem:minimum}, so work
+with residuals. If $y$ is uniform, a source with minimum $m$ and total
+mass $nm$ must be the uniform vector.
+
+For a nonuniform target, consider a positive source run. In one step,
+it can lose only its first site and at most one site, by the proof of
+Proposition~\ref{prop:terminal}. Since the output has only isolated
+positive sites, the run must have length one or two. Its right endpoint
+remains positive and must be one of the target spikes. Conversely every
+target spike must arise in this way: a zero source site remains zero,
+and a nonempty source run has a positive output at its endpoint.
+
+A two-site run ending at $e$ must have masses
+$(h,p_e-h)$ at $e-1,e$. Its head disappears exactly when
+$0<h\le p_e-h$. Allowing $h=0$ includes the one-site run.
+When $d_e=1$, the proposed head at $e-1$ is preceded by the previous
+target spike. That previous spike is positive in the source, because
+a source zero cannot produce a positive target. Thus a positive head
+there could not disappear, so only $h=0$ is possible.
+When $d_e\ge2$, there is an available zero before the proposed head,
+and exactly
+\[
+ 0\le h\le\lfloor p_e/2\rfloor
+\]
+is allowed. Heads at different spikes do not overlap and remain separated:
+a nonzero head is allowed only in a gap of at least two zeros.
+The choices are independent and exhaust all source runs, proving
+\eqref{eq:fixed-fibre}. The empty product equals one.
+\end{proof}
+
+Let $M_n(N)=\max_{y\in X_{n,N}}|F^{-1}(y)|$.
+\begin{theorem}\label{thm:growth}
+Fix $n\ge3$ and put $k=\lfloor n/3\rfloor$. Then
+\begin{equation}\label{eq:upper}
+ M_n(N)\le (2^n-1)(N+1)^k\qquad(N\ge0),
+\end{equation}
+and
+\begin{equation}\label{eq:lower}
+ M_n(N)\ge \left(\frac{N}{2k}\right)^k\qquad(N\ge2k).
+\end{equation}
+In particular $M_n(N)=\Theta_n(N^k)$ as $N\to\infty$.
+For $n\le2$ one has $M_n(N)=1$.
+\end{theorem}
+\begin{proof}
+Each interval factor in \eqref{eq:weight} belongs to a one-run of at
+least two edges, followed by a nonempty zero-run. These disjoint runs
+use at least three edges per factor. There can therefore be at most
+$k$ factors in a mixed word. In a positive-weight word, every permitted
+interval value is a coordinate of a source in $X_{n,N}$, by
+Theorem~\ref{thm:atlas}, so its interval has at most $N+1$ integers.
+Including the possible uniform source,
+\[
+ |F^{-1}(y)|\le 1+(2^n-2)(N+1)^k
+              \le(2^n-1)(N+1)^k,
+\]
+proving \eqref{eq:upper}.
+
+Choose $k$ sites with at least two zeros between consecutive sites
+cyclically; this is possible because $3k\le n$. For $N\ge2k$, put
+$q=\lfloor N/(2k)\rfloor$, assign mass $2q$ to each chosen site,
+and add the remaining $N-2kq$ to one of them. The resulting target
+has minimum zero and $k$ positive isolated spikes. By
+Proposition~\ref{prop:fixed-fibre}, its fibre has at least
+$(q+1)^k\ge(N/(2k))^k$ sources. This proves \eqref{eq:lower}.
+The two bounds give the stated exponent; the identity rule handles
+$n\le2$.
+\end{proof}
+
+For instance, $(0,0,2q,0,0,2q)$ on six sites has exactly $(q+1)^2$
+sources, for every integer $q\ge0$ (including the uniform zero target).
+This is a deductive family, not a claim of a numerical asymptotic test.
+Theorem~\ref{thm:growth} determines the exponent, not the exact finite-$N$
+maximum or all maximizing targets.
+

@@ -1,0 +1,105 @@
+{
+  "schema": "source_desk_artifact_checks_v1",
+  "scope": "Read-only artifact checks only. Not scientific execution, independent mathematical review, canonical comparison or paper acceptance.",
+  "prior_capture_failure_disclosure": {
+    "kind": "author_observed_wrapper_failure_not_raw_native_tool_return",
+    "operation": "functions.exec",
+    "request_source": "The attempted parallel local-source read / three-query browser call used load('metric_records') without a missing-store guard.",
+    "result": {
+      "status": "orchestrator_error",
+      "message": "TypeError: Cannot read properties of undefined (reading 'push')",
+      "scope": "The local read returned internally before envelope insertion failed; no inner result was exposed. The parallel browser return was not received. No scientific operation or file edit was in this failed cell."
+    }
+  },
+  "records": [
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "sha256sum --check --strict docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/INPUT_PINS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4500
+      },
+      "result": {
+        "chunk_id": "df75b6",
+        "wall_time_seconds": 0.00000225,
+        "exit_code": 0,
+        "original_token_count": 132,
+        "output": ".agents/skills/symbolic-dynamics-research/SKILL.md: OK\ndocs/research_state/WORKFLOW.md: OK\ndocs/papers211_215_sequence/PROBLEM_ANCHOR.md: OK\ndocs/papers162_166_sequence/scouting/geometry_group/SCOUT.md: OK\ndocs/papers162_166_sequence/scouting/open_fresh_p166_round6/SCOUT.md: OK\ndocs/papers211_215_sequence/scouting/incidence_rewiring_lane/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/set_code_lane/PROOF_PACKAGE.md: OK\ndocs/papers211_215_sequence/scouting/finite_incidence_geometry_residual_scout02/REPORT.md: OK\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "perl -MJSON::PP -MEncode -MCwd=abs_path -MFile::Basename=dirname -e '\nuse strict; use warnings;\nmy $base=\"docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01\";\nmy %seen; my $total=0;\nfor my $name (\"NATIVE_READS.json\",\"BROWSER_READS.json\") {\n open my $fh,\"<:raw\",\"$base/$name\" or die \"$name: $!\";\n local $/; my $bytes=<$fh>; close $fh;\n my $obj=decode_json($bytes);\n die \"missing records\" unless ref($obj->{records}) eq \"ARRAY\";\n my $n=@{$obj->{records}}; die \"record count $name\" unless $n==11;\n for my $r (@{$obj->{records}}) {\n  die \"duplicate index\" if $seen{$r->{capture_index}}++;\n  die \"missing request/result\" unless exists $r->{request} && exists $r->{result};\n  die \"browser return shape\" if $name eq \"BROWSER_READS.json\" && ref($r->{result});\n  die \"local return shape\" if $name eq \"NATIVE_READS.json\" && ref($r->{result}) ne \"HASH\";\n }\n $total+=$n; print \"$name: parsed $n actual captured records\\n\";\n}\ndie \"capture union\" unless $total==22 && keys(%seen)==22;\nfor my $i (0..21) { die \"missing index $i\" unless exists $seen{$i}; }\nmy $links=0;\nfor my $name (\"REPORT.md\",\"PROOF_PACKAGE.md\",\"SOURCE_READS.md\") {\n open my $fh,\"<:raw\",\"$base/$name\" or die \"$name: $!\";\n local $/; my $t=decode(\"UTF-8\",scalar(<$fh>),FB_CROAK); close $fh;\n while ($t =~ /\\]\\(([^)]+)\\)/g) {\n  my $p=$1; next if $p =~ m{^https?://} || $p =~ /^#/;\n  $p =~ s/#.*$//; die \"missing local link $name: $p\" unless -f \"$base/$p\";\n  $links++;\n }\n}\nprint \"capture-index union: 22 unique consecutive records\\n\";\nprint \"local Markdown file links: $links resolved\\n\";\n'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4500
+      },
+      "result": {
+        "chunk_id": "22b5c2",
+        "wall_time_seconds": 0.00000546,
+        "exit_code": 255,
+        "original_token_count": 32,
+        "output": "Bareword \"FB_CROAK\" not allowed while \"strict subs\" in use at -e line 24.\nExecution of -e aborted due to compilation errors.\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "wc -lc docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/REPORT.md docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/PROOF_PACKAGE.md docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/SOURCE_READS.md docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/NATIVE_READS.json docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/BROWSER_READS.json docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/INPUT_PINS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4500
+      },
+      "result": {
+        "chunk_id": "ecee15",
+        "wall_time_seconds": 0.000003051,
+        "exit_code": 0,
+        "original_token_count": 162,
+        "output": "    82   5397 docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/REPORT.md\n   162   8147 docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/PROOF_PACKAGE.md\n   124   7559 docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/SOURCE_READS.md\n   181  50177 docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/NATIVE_READS.json\n   219 275704 docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/BROWSER_READS.json\n     8   1023 docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/INPUT_PINS.sha256\n   776 348007 total\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "perl -MJSON::PP -MEncode -MCwd=abs_path -MFile::Basename=dirname -e '\nuse strict; use warnings;\nmy $base=\"docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01\";\nmy %seen; my $total=0;\nfor my $name (\"NATIVE_READS.json\",\"BROWSER_READS.json\") {\n open my $fh,\"<:raw\",\"$base/$name\" or die \"$name: $!\";\n local $/; my $bytes=<$fh>; close $fh;\n my $obj=decode_json($bytes);\n die \"missing records\" unless ref($obj->{records}) eq \"ARRAY\";\n my $n=@{$obj->{records}}; die \"record count $name\" unless $n==11;\n for my $r (@{$obj->{records}}) {\n  die \"duplicate index\" if $seen{$r->{capture_index}}++;\n  die \"missing request/result\" unless exists $r->{request} && exists $r->{result};\n  die \"browser return shape\" if $name eq \"BROWSER_READS.json\" && ref($r->{result});\n  die \"local return shape\" if $name eq \"NATIVE_READS.json\" && ref($r->{result}) ne \"HASH\";\n }\n $total+=$n; print \"$name: parsed $n actual captured records\\n\";\n}\ndie \"capture union\" unless $total==22 && keys(%seen)==22;\nfor my $i (0..21) { die \"missing index $i\" unless exists $seen{$i}; }\nmy $links=0;\nfor my $name (\"REPORT.md\",\"PROOF_PACKAGE.md\",\"SOURCE_READS.md\") {\n open my $fh,\"<:raw\",\"$base/$name\" or die \"$name: $!\";\n local $/; my $t=decode(\"UTF-8\",scalar(<$fh>),Encode::FB_CROAK()); close $fh;\n while ($t =~ /\\]\\(([^)]+)\\)/g) {\n  my $p=$1; next if $p =~ m{^https?://} || $p =~ /^#/;\n  $p =~ s/#.*$//; die \"missing local link $name: $p\" unless -f \"$base/$p\";\n  $links++;\n }\n}\nprint \"capture-index union: 22 unique consecutive records\\n\";\nprint \"local Markdown file links: $links resolved\\n\";\n'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4500
+      },
+      "result": {
+        "chunk_id": "ff375e",
+        "wall_time_seconds": 0.050296366,
+        "exit_code": 0,
+        "original_token_count": 49,
+        "output": "NATIVE_READS.json: parsed 11 actual captured records\nBROWSER_READS.json: parsed 11 actual captured records\ncapture-index union: 22 unique consecutive records\nlocal Markdown file links: 7 resolved\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "sed -n '81,99p' docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01/PROOF_PACKAGE.md",
+        "max_output_tokens": 1800
+      },
+      "result": {
+        "chunk_id": "7238bc",
+        "wall_time_seconds": 0.0000054,
+        "exit_code": 0,
+        "original_token_count": 237,
+        "output": "tests is at most two, so $u,v$ are mutually maximally distant.\n\nStep 2. If $uv$ is an edge, the maximality of $u$ from $v$ is equivalent to\n$N_G(u)\\subseteq N_G[v]$. Mutual maximality gives both corresponding\ninclusions, and, since $u,v$ are adjacent, these are equivalent to\n$N_G[u]=N_G[v]$. Conversely that equality makes both tests hold.\n\nStep 3. True-twin equality partitions vertices into classes, and each\nnon-singleton class is a clique of $G$. Therefore\n$$E(F(G))=E(\\overline G)\\ \\cup\\\n\\{uv:u\\ne v,\\ N_G[u]=N_G[v]\\}.$$\nIn particular, if $G$ is true-twin-free, $F(G)=\\overline G$. This is the\nfull-label form of the primary source's Proposition 14; deleting its isolated\nvertices gives that source's boundary-only version. It is not asserted that\nall diameter-two inputs have diameter-two or connected outputs.\n\n### 3. Exact inverse collision on labelled odd cycles\n\nStep 1. Since $s$ is invertible, positions $i+js$ give cyclic order in\n"
+      }
+    },
+    {
+      "operation": "exec_command",
+      "request": {
+        "cmd": "perl -MJSON::PP -MEncode -MCwd=abs_path -MFile::Basename=dirname -e '\nuse strict; use warnings;\nmy $base=\"docs/papers211_215_sequence/scouting/finite_metric_reconstruction_scout01\";\nmy %seen; my $total=0;\nfor my $name (\"NATIVE_READS.json\",\"BROWSER_READS.json\") {\n open my $fh,\"<:raw\",\"$base/$name\" or die \"$name: $!\";\n local $/; my $bytes=<$fh>; close $fh;\n my $obj=decode_json($bytes);\n die \"missing records\" unless ref($obj->{records}) eq \"ARRAY\";\n my $n=@{$obj->{records}}; die \"record count $name\" unless $n==11;\n for my $r (@{$obj->{records}}) {\n  die \"duplicate index\" if $seen{$r->{capture_index}}++;\n  die \"missing request/result\" unless exists $r->{request} && exists $r->{result};\n  die \"browser return shape\" if $name eq \"BROWSER_READS.json\" && ref($r->{result});\n  die \"local return shape\" if $name eq \"NATIVE_READS.json\" && ref($r->{result}) ne \"HASH\";\n }\n $total+=$n; print \"$name: parsed $n actual captured records\\n\";\n}\ndie \"capture union\" unless $total==22 && keys(%seen)==22;\nfor my $i (0..21) { die \"missing index $i\" unless exists $seen{$i}; }\nmy $links=0;\nfor my $name (\"REPORT.md\",\"PROOF_PACKAGE.md\",\"SOURCE_READS.md\") {\n open my $fh,\"<:raw\",\"$base/$name\" or die \"$name: $!\";\n local $/; my $t=decode(\"UTF-8\",scalar(<$fh>),Encode::FB_CROAK()); close $fh;\n while ($t =~ /\\]\\(([^)]+)\\)/g) {\n  my $p=$1; next if $p =~ m{^https?://} || $p =~ /^#/;\n  $p =~ s/#.*$//; die \"missing local link $name: $p\" unless -f \"$base/$p\";\n  $links++;\n }\n}\nprint \"capture-index union: 22 unique consecutive records\\n\";\nprint \"local Markdown file links: $links resolved\\n\";\n'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4500
+      },
+      "result": {
+        "chunk_id": "9199ec",
+        "wall_time_seconds": 0.05309207,
+        "exit_code": 0,
+        "original_token_count": 49,
+        "output": "NATIVE_READS.json: parsed 11 actual captured records\nBROWSER_READS.json: parsed 11 actual captured records\ncapture-index union: 22 unique consecutive records\nlocal Markdown file links: 7 resolved\n"
+      }
+    }
+  ]
+}

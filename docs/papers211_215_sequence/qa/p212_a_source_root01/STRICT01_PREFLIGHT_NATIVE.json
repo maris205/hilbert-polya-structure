@@ -1,0 +1,14 @@
+{
+  "arguments": {
+    "cmd": "node <<'P212_A_STRICT_PREFLIGHT'\nconst fs=require('node:fs'),crypto=require('node:crypto');const run='strict01',base='docs/papers211_215_sequence/';const sha=b=>crypto.createHash('sha256').update(b).digest('hex');const fields=['dev','ino','mode','size','mtimeNs','ctimeNs'];const md=s=>Object.fromEntries(fields.map(k=>[k,String(s[k])]));const keys=JSON.parse(fs.readFileSync(base+'qa/p212_a_runs/initial02/PRE.json')).keys;for(const k of keys){if(k.kind==='required-absence'){let ok=false;try{fs.lstatSync(k.path);}catch(e){if(e.code==='ENOENT')ok=true;else throw e;}if(!ok)throw Error(k.path);}else{const s0=fs.statSync(k.path,{bigint:true}),b=fs.readFileSync(k.path),s1=fs.statSync(k.path,{bigint:true});if(!s0.isFile()||JSON.stringify(md(s0))!==JSON.stringify(md(s1))||JSON.stringify(md(s1))!==JSON.stringify(k.metadata)||b.length!==k.bytes||sha(b)!==k.sha256)throw Error(k.path);}}\nconst p=base+'reviews/p212_a/CANONICAL.json',before=fs.statSync(p,{bigint:true}),raw=fs.readFileSync(p),after=fs.statSync(p,{bigint:true});if(!before.isFile()||JSON.stringify(md(before))!==JSON.stringify(md(after))||raw.length!==3004047||sha(raw)!=='24d6054e4a29411948becfa256d2182301b3f73d3ef78df1cad9088ed8b9922b'||!raw.equals(fs.readFileSync(base+'qa/p212_a_runs/initial02/stdout.raw')))throw Error('canonical');for(const p of [base+'qa/p212_a_runs/'+run,base+'qa/p212_a_source_root01/GRANT.'+run+'.json']){try{fs.lstatSync(p);throw Error('exists '+p);}catch(e){if(e.code!=='ENOENT')throw e;}}\nconsole.log(JSON.stringify({status:'STRICT_FRESH_PREFLIGHT_PASS',run_id:run,all_current_keys:keys.length,canonical:{path:p,bytes:raw.length,sha256:sha(raw),metadata:md(after)},new_run_and_grant_absent:true,science_submitted:false},null,2));\nP212_A_STRICT_PREFLIGHT",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 1600
+  },
+  "result": {
+    "chunk_id": "d5be3a",
+    "wall_time_seconds": 0.00000489,
+    "exit_code": 0,
+    "original_token_count": 141,
+    "output": "{\n  \"status\": \"STRICT_FRESH_PREFLIGHT_PASS\",\n  \"run_id\": \"strict01\",\n  \"all_current_keys\": 69,\n  \"canonical\": {\n    \"path\": \"docs/papers211_215_sequence/reviews/p212_a/CANONICAL.json\",\n    \"bytes\": 3004047,\n    \"sha256\": \"24d6054e4a29411948becfa256d2182301b3f73d3ef78df1cad9088ed8b9922b\",\n    \"metadata\": {\n      \"dev\": \"2304\",\n      \"ino\": \"12945455186\",\n      \"mode\": \"33152\",\n      \"size\": \"3004047\",\n      \"mtimeNs\": \"1789109629392358611\",\n      \"ctimeNs\": \"1789110248897328108\"\n    }\n  },\n  \"new_run_and_grant_absent\": true,\n  \"science_submitted\": false\n}\n"
+  }
+}

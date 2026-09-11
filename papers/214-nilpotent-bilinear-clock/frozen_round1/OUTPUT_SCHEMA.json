@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P214 author complete JSONL: one schema instance per line",
+  "description": "Prospective output grammar only. No execution or canonical output exists in this source handoff. Ordering, multiplicity and cross-record arithmetic are specified in OUTPUT_SCHEMA.md and OUTPUT_PLAN.md.",
+  "oneOf": [
+    {"$ref": "#/$defs/run_start"}, {"$ref": "#/$defs/field"},
+    {"$ref": "#/$defs/carrier"}, {"$ref": "#/$defs/adapter"},
+    {"$ref": "#/$defs/state"}, {"$ref": "#/$defs/target"},
+    {"$ref": "#/$defs/depth_row"}, {"$ref": "#/$defs/fibre_row"},
+    {"$ref": "#/$defs/carrier_complete"}, {"$ref": "#/$defs/run_complete"},
+    {"$ref": "#/$defs/verification_failure"}, {"$ref": "#/$defs/runtime_error"}
+  ],
+  "$defs": {
+    "nat": {"type": "integer", "minimum": 0},
+    "positive": {"type": "integer", "minimum": 1},
+    "q": {"enum": [2, 3, 4]},
+    "m": {"enum": [2, 3, 4]},
+    "nat_array": {"type": "array", "items": {"$ref": "#/$defs/nat"}},
+    "nullable_nat": {"anyOf": [{"$ref": "#/$defs/nat"}, {"type": "null"}]},
+    "nat_matrix": {"type": "array", "items": {"$ref": "#/$defs/nat_array"}},
+    "parameters": {"const": [[2, 2], [2, 3], [2, 4], [3, 2], [3, 3], [3, 4], [4, 2], [4, 3], [4, 4]]},
+    "checks": {"type": "object", "minProperties": 1, "additionalProperties": {"const": true}},
+    "counts": {"type": "object", "additionalProperties": {"$ref": "#/$defs/nat"}},
+    "header": {
+      "type": "object", "required": ["schema_version", "kind"],
+      "properties": {"schema_version": {"const": "p214-author-jsonl-v1"}, "kind": {"type": "string"}}
+    },
+    "case_header": {
+      "allOf": [{"$ref": "#/$defs/header"}],
+      "required": ["q", "m"],
+      "properties": {"q": {"$ref": "#/$defs/q"}, "m": {"$ref": "#/$defs/m"}}
+    },
+    "orbit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state_ids", "cycle_start_index", "cycle_state_ids", "period", "first_zero_index"],
+      "properties": {
+        "state_ids": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/nat"}},
+        "cycle_start_index": {"$ref": "#/$defs/nat"},
+        "cycle_state_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/nat"}},
+        "period": {"$ref": "#/$defs/positive"},
+        "first_zero_index": {"$ref": "#/$defs/nullable_nat"}
+      }
+    },
+    "ring_element": {
+      "type": "object", "additionalProperties": false,
+      "required": ["code", "coefficients", "valuation"],
+      "properties": {"code": {"$ref": "#/$defs/nat"}, "coefficients": {"$ref": "#/$defs/nat_array"}, "valuation": {"$ref": "#/$defs/nat"}}
+    },
+    "adapter_witness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state_id", "Q_state_id", "P_inverse_state_id"],
+      "properties": {"state_id": {"const": 0}, "Q_state_id": {"$ref": "#/$defs/nat"}, "P_inverse_state_id": {"$ref": "#/$defs/nat"}}
+    },
+    "unequal_witness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["small_target_state_id", "large_target_state_id", "small_predecessor_state_ids", "large_predecessor_state_ids", "small_fibre_size", "large_fibre_size"],
+      "properties": {
+        "small_target_state_id": {"$ref": "#/$defs/nat"}, "large_target_state_id": {"$ref": "#/$defs/nat"},
+        "small_predecessor_state_ids": {"$ref": "#/$defs/nat_array"}, "large_predecessor_state_ids": {"$ref": "#/$defs/nat_array"},
+        "small_fibre_size": {"$ref": "#/$defs/positive"}, "large_fibre_size": {"$ref": "#/$defs/positive"}
+      }
+    },
+    "nonlinear_witness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state_id", "F_state_id", "L_state_id"],
+      "properties": {"state_id": {"$ref": "#/$defs/nat"}, "F_state_id": {"$ref": "#/$defs/nat"}, "L_state_id": {"$ref": "#/$defs/nat"}}
+    },
+    "cancellation_witness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["state_id", "orbit", "expected_state_ids"],
+      "properties": {"state_id": {"$ref": "#/$defs/nat"}, "orbit": {"$ref": "#/$defs/orbit"}, "expected_state_ids": {"$ref": "#/$defs/nat_array"}}
+    },
+    "run_start": {
+      "allOf": [{"$ref": "#/$defs/header"}], "unevaluatedProperties": false,
+      "required": ["parameters", "q_values", "m_values", "program_role", "mathematical_scope", "configuration_policy"],
+      "properties": {
+        "kind": {"const": "run_start"}, "parameters": {"$ref": "#/$defs/parameters"},
+        "q_values": {"const": [2, 3, 4]}, "m_values": {"const": [2, 3, 4]},
+        "program_role": {"const": "author_verifier"}, "mathematical_scope": {"const": "fixed_finite_box_only"},
+        "configuration_policy": {"const": "embedded_constants_no_external_reads"}
+      }
+    },
+    "field": {
+      "allOf": [{"$ref": "#/$defs/header"}], "unevaluatedProperties": false,
+      "required": ["q", "characteristic", "element_labels", "modulus_binary", "addition_table", "multiplication_table", "additive_inverses", "multiplicative_inverses", "checks"],
+      "properties": {
+        "kind": {"const": "field"}, "q": {"$ref": "#/$defs/q"}, "characteristic": {"enum": [2, 3]},
+        "element_labels": {"type": "array", "items": {"type": "string"}}, "modulus_binary": {"enum": [7, null]},
+        "addition_table": {"$ref": "#/$defs/nat_matrix"}, "multiplication_table": {"$ref": "#/$defs/nat_matrix"},
+        "additive_inverses": {"$ref": "#/$defs/nat_array"},
+        "multiplicative_inverses": {"type": "array", "items": {"$ref": "#/$defs/nullable_nat"}},
+        "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "carrier": {
+      "allOf": [{"$ref": "#/$defs/case_header"}], "unevaluatedProperties": false,
+      "required": ["ring_size", "ideal_size", "state_count", "t_code", "negative_t_code", "ideal_codes", "ring_elements", "checks"],
+      "properties": {
+        "kind": {"const": "carrier"}, "ring_size": {"$ref": "#/$defs/positive"}, "ideal_size": {"$ref": "#/$defs/positive"},
+        "state_count": {"$ref": "#/$defs/positive"}, "t_code": {"$ref": "#/$defs/positive"}, "negative_t_code": {"$ref": "#/$defs/positive"},
+        "ideal_codes": {"$ref": "#/$defs/nat_array"}, "ring_elements": {"type": "array", "items": {"$ref": "#/$defs/ring_element"}},
+        "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "adapter": {
+      "allOf": [{"$ref": "#/$defs/case_header"}], "unevaluatedProperties": false,
+      "required": ["P", "P_inverse", "Q", "Q_inverse", "M_transitions", "nonconjugacy_warning_witness", "checks"],
+      "properties": {
+        "kind": {"const": "adapter"}, "P": {"$ref": "#/$defs/nat_array"}, "P_inverse": {"$ref": "#/$defs/nat_array"},
+        "Q": {"$ref": "#/$defs/nat_array"}, "Q_inverse": {"$ref": "#/$defs/nat_array"}, "M_transitions": {"$ref": "#/$defs/nat_array"},
+        "nonconjugacy_warning_witness": {"$ref": "#/$defs/adapter_witness"}, "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "state": {
+      "allOf": [{"$ref": "#/$defs/case_header"}], "unevaluatedProperties": false,
+      "required": ["state_id", "x_code", "y_code", "x_valuation", "y_valuation", "successor_state_id", "linear_successor_state_id", "orbit", "linear_orbit", "actual_depth", "expected_depth", "scalar_path_codes", "P_state_id", "M_P_state_id", "Q_M_P_state_id", "checks"],
+      "properties": {
+        "kind": {"const": "state"}, "state_id": {"$ref": "#/$defs/nat"}, "x_code": {"$ref": "#/$defs/nat"}, "y_code": {"$ref": "#/$defs/nat"},
+        "x_valuation": {"$ref": "#/$defs/positive"}, "y_valuation": {"$ref": "#/$defs/positive"},
+        "successor_state_id": {"$ref": "#/$defs/nat"}, "linear_successor_state_id": {"$ref": "#/$defs/nat"},
+        "orbit": {"$ref": "#/$defs/orbit"}, "linear_orbit": {"$ref": "#/$defs/orbit"},
+        "actual_depth": {"$ref": "#/$defs/nat"}, "expected_depth": {"$ref": "#/$defs/nat"}, "scalar_path_codes": {"$ref": "#/$defs/nat_array"},
+        "P_state_id": {"$ref": "#/$defs/nat"}, "M_P_state_id": {"$ref": "#/$defs/nat"}, "Q_M_P_state_id": {"$ref": "#/$defs/nat"},
+        "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "target": {
+      "allOf": [{"$ref": "#/$defs/case_header"}], "unevaluatedProperties": false,
+      "required": ["target_state_id", "u_code", "w_code", "multiplier_code", "multiplier_valuation", "d", "feasible", "predecessor_state_ids", "actual_fibre_size", "expected_fibre_size", "kernel_codes", "unit_code", "inverse_unit_code", "shifted_w_code", "representative_x_code", "coset_predecessor_state_ids", "M_target_state_id", "M_predecessor_state_ids", "transported_predecessor_state_ids", "checks"],
+      "properties": {
+        "kind": {"const": "target"}, "target_state_id": {"$ref": "#/$defs/nat"}, "u_code": {"$ref": "#/$defs/nat"}, "w_code": {"$ref": "#/$defs/nat"},
+        "multiplier_code": {"$ref": "#/$defs/nat"}, "multiplier_valuation": {"$ref": "#/$defs/positive"}, "d": {"$ref": "#/$defs/positive"},
+        "feasible": {"type": "boolean"}, "predecessor_state_ids": {"$ref": "#/$defs/nat_array"}, "actual_fibre_size": {"$ref": "#/$defs/nat"},
+        "expected_fibre_size": {"$ref": "#/$defs/nat"}, "kernel_codes": {"$ref": "#/$defs/nat_array"},
+        "unit_code": {"$ref": "#/$defs/nullable_nat"}, "inverse_unit_code": {"$ref": "#/$defs/nullable_nat"},
+        "shifted_w_code": {"$ref": "#/$defs/nullable_nat"}, "representative_x_code": {"$ref": "#/$defs/nullable_nat"},
+        "coset_predecessor_state_ids": {"$ref": "#/$defs/nat_array"}, "M_target_state_id": {"$ref": "#/$defs/nat"},
+        "M_predecessor_state_ids": {"$ref": "#/$defs/nat_array"}, "transported_predecessor_state_ids": {"$ref": "#/$defs/nat_array"},
+        "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "depth_row": {
+      "allOf": [{"$ref": "#/$defs/case_header"}], "unevaluatedProperties": false,
+      "required": ["h", "threshold_x", "threshold_y", "exact_state_ids", "cumulative_state_ids", "rectangle_state_ids", "linear_exact_state_ids", "linear_cumulative_state_ids", "actual_exact_count", "expected_exact_count", "actual_cumulative_count", "expected_cumulative_count", "checks"],
+      "properties": {
+        "kind": {"const": "depth_row"}, "h": {"$ref": "#/$defs/nat"}, "threshold_x": {"$ref": "#/$defs/positive"}, "threshold_y": {"$ref": "#/$defs/positive"},
+        "exact_state_ids": {"$ref": "#/$defs/nat_array"}, "cumulative_state_ids": {"$ref": "#/$defs/nat_array"}, "rectangle_state_ids": {"$ref": "#/$defs/nat_array"},
+        "linear_exact_state_ids": {"$ref": "#/$defs/nat_array"}, "linear_cumulative_state_ids": {"$ref": "#/$defs/nat_array"},
+        "actual_exact_count": {"$ref": "#/$defs/nat"}, "expected_exact_count": {"$ref": "#/$defs/nat"},
+        "actual_cumulative_count": {"$ref": "#/$defs/nat"}, "expected_cumulative_count": {"$ref": "#/$defs/nat"}, "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "fibre_row": {
+      "allOf": [{"$ref": "#/$defs/case_header"}], "unevaluatedProperties": false,
+      "required": ["d", "fibre_size", "target_state_ids", "expected_target_state_ids", "actual_count", "expected_count", "checks"],
+      "properties": {
+        "kind": {"const": "fibre_row"}, "d": {"$ref": "#/$defs/nat"}, "fibre_size": {"$ref": "#/$defs/nat"},
+        "target_state_ids": {"$ref": "#/$defs/nat_array"}, "expected_target_state_ids": {"$ref": "#/$defs/nat_array"},
+        "actual_count": {"$ref": "#/$defs/nat"}, "expected_count": {"$ref": "#/$defs/nat"}, "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "carrier_complete": {
+      "allOf": [{"$ref": "#/$defs/case_header"}], "unevaluatedProperties": false,
+      "required": ["state_count", "target_count", "recurrent_state_ids", "fixed_state_ids", "linear_recurrent_state_ids", "maximum_depth", "maximum_depth_state_ids", "expected_maximum_depth_state_ids", "maximum_fibre_size", "maximum_fibre_target_state_ids", "saturated_target_state_ids", "image_target_state_ids", "actual_image_size", "expected_image_size", "empty_fibre_count", "unequal_positive_fibre_witness", "nonlinear_literal_witness", "cancellation_witness", "checks"],
+      "properties": {
+        "kind": {"const": "carrier_complete"}, "state_count": {"$ref": "#/$defs/positive"}, "target_count": {"$ref": "#/$defs/positive"},
+        "recurrent_state_ids": {"$ref": "#/$defs/nat_array"}, "fixed_state_ids": {"$ref": "#/$defs/nat_array"}, "linear_recurrent_state_ids": {"$ref": "#/$defs/nat_array"},
+        "maximum_depth": {"$ref": "#/$defs/nat"}, "maximum_depth_state_ids": {"$ref": "#/$defs/nat_array"}, "expected_maximum_depth_state_ids": {"$ref": "#/$defs/nat_array"},
+        "maximum_fibre_size": {"$ref": "#/$defs/positive"}, "maximum_fibre_target_state_ids": {"$ref": "#/$defs/nat_array"},
+        "saturated_target_state_ids": {"$ref": "#/$defs/nat_array"}, "image_target_state_ids": {"$ref": "#/$defs/nat_array"},
+        "actual_image_size": {"$ref": "#/$defs/nat"}, "expected_image_size": {"$ref": "#/$defs/nat"}, "empty_fibre_count": {"$ref": "#/$defs/nat"},
+        "unequal_positive_fibre_witness": {"anyOf": [{"$ref": "#/$defs/unequal_witness"}, {"type": "null"}]},
+        "nonlinear_literal_witness": {"anyOf": [{"$ref": "#/$defs/nonlinear_witness"}, {"type": "null"}]},
+        "cancellation_witness": {"$ref": "#/$defs/cancellation_witness"}, "checks": {"$ref": "#/$defs/checks"}
+      }
+    },
+    "run_complete": {
+      "allOf": [{"$ref": "#/$defs/header"}], "unevaluatedProperties": false,
+      "required": ["status", "parameters", "state_count", "target_count", "carrier_count", "check_count", "check_counts", "preceding_record_counts", "checks", "limitation"],
+      "properties": {
+        "kind": {"const": "run_complete"}, "status": {"const": "FINITE_BOX_CHECKS_PASSED"}, "parameters": {"$ref": "#/$defs/parameters"},
+        "state_count": {"const": 5271}, "target_count": {"const": 5271}, "carrier_count": {"const": 9}, "check_count": {"$ref": "#/$defs/positive"},
+        "check_counts": {"$ref": "#/$defs/counts"}, "preceding_record_counts": {"$ref": "#/$defs/counts"}, "checks": {"$ref": "#/$defs/checks"},
+        "limitation": {"const": "finite checks do not prove all-parameter theorems or establish novelty"}
+      }
+    },
+    "verification_failure": {
+      "allOf": [{"$ref": "#/$defs/header"}], "unevaluatedProperties": false,
+      "required": ["status", "detail", "attempted_check_count", "preceding_record_counts"],
+      "properties": {
+        "kind": {"const": "verification_failure"}, "status": {"const": "FAIL"},
+        "detail": {"type": "object", "additionalProperties": false, "required": ["scope", "check", "actual", "expected"],
+                   "properties": {"scope": {"type": "object"}, "check": {"type": "string"}, "actual": {}, "expected": {}}},
+        "attempted_check_count": {"$ref": "#/$defs/nat"}, "preceding_record_counts": {"$ref": "#/$defs/counts"}
+      }
+    },
+    "runtime_error": {
+      "allOf": [{"$ref": "#/$defs/header"}], "unevaluatedProperties": false,
+      "required": ["status", "error_type", "message", "attempted_check_count", "preceding_record_counts"],
+      "properties": {
+        "kind": {"const": "runtime_error"}, "status": {"const": "ERROR"}, "error_type": {"type": "string"}, "message": {"type": "string"},
+        "attempted_check_count": {"$ref": "#/$defs/nat"}, "preceding_record_counts": {"$ref": "#/$defs/counts"}
+      }
+    }
+  }
+}

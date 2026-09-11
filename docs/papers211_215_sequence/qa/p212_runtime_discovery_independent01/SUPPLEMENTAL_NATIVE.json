@@ -1,0 +1,120 @@
+{
+  "format": "p212-supplemental-native-provenance-v1",
+  "scope": "Supplemental documentary provenance only. No new independent verdict, source change, lock extension, or scientific authority.",
+  "evidence_origin": "The four request/result objects below reproduce the already-returned command records identified by their actual chunk_id. No command was rerun to create this document. This lane originally created no filesystem receipt files; this document is the subsequently authorized transcription.",
+  "static_scope": "The inactive _pydecimal fallback is not a defect in the observed C branch. These records do not establish coverage of every future Fraction/Decimal method and do not authorize science.",
+  "records": [
+    {
+      "request": {
+        "cmd": "readelf -Ws /usr/bin/python3.10 | rg 'PyInit_(math|itertools|_abc|_operator|_locale|_sre|_contextvars)|_PySys_InitCore'",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "2483ab",
+        "wall_time_seconds": 0.00000593,
+        "exit_code": 0,
+        "original_token_count": 110,
+        "output": "  1198: 000000000027a2b0    16 FUNC    GLOBAL DEFAULT   16 PyInit_itertools\n  1740: 0000000000297bb0    16 FUNC    GLOBAL DEFAULT   16 PyInit_math\n  1895: 000000000027b570    16 FUNC    GLOBAL DEFAULT   16 PyInit__sre\n  2053: 000000000027a650    16 FUNC    GLOBAL DEFAULT   16 PyInit__operator\n  2083: 000000000029d070    16 FUNC    GLOBAL DEFAULT   16 PyInit__locale\n  2140: 000000000026d560    16 FUNC    GLOBAL DEFAULT   16 PyInit__abc\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "readelf -d /usr/lib/python3.10/lib-dynload/_decimal.cpython-310-x86_64-linux-gnu.so",
+        "max_output_tokens": 3000
+      },
+      "result": {
+        "chunk_id": "0c6e8b",
+        "wall_time_seconds": 0.00000508,
+        "exit_code": 0,
+        "original_token_count": 345,
+        "output": "\nDynamic section at offset 0x28d28 contains 25 entries:\n  Tag        Type                         Name/Value\n 0x0000000000000001 (NEEDED)             Shared library: [libmpdec.so.3]\n 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]\n 0x000000000000000c (INIT)               0x8000\n 0x000000000000000d (FINI)               0x1c0c4\n 0x0000000000000019 (INIT_ARRAY)         0x29d18\n 0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)\n 0x000000000000001a (FINI_ARRAY)         0x29d20\n 0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)\n 0x000000006ffffef5 (GNU_HASH)           0x2f0\n 0x0000000000000005 (STRTAB)             0x1800\n 0x0000000000000006 (SYMTAB)             0x318\n 0x000000000000000a (STRSZ)              3464 (bytes)\n 0x000000000000000b (SYMENT)             24 (bytes)\n 0x0000000000000003 (PLTGOT)             0x2a000\n 0x0000000000000002 (PLTRELSZ)           4464 (bytes)\n 0x0000000000000014 (PLTREL)             RELA\n 0x0000000000000017 (JMPREL)             0x6388\n 0x0000000000000007 (RELA)               0x2788\n 0x0000000000000008 (RELASZ)             15360 (bytes)\n 0x0000000000000009 (RELAENT)            24 (bytes)\n 0x000000006ffffffe (VERNEED)            0x2748\n 0x000000006fffffff (VERNEEDNUM)         1\n 0x000000006ffffff0 (VERSYM)             0x2588\n 0x000000006ffffff9 (RELACOUNT)          600\n 0x0000000000000000 (NULL)               0x0\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "strings -t x /usr/lib/python3.10/lib-dynload/_decimal.cpython-310-x86_64-linux-gnu.so | rg 'numbers$|collections$|collections.abc$|_pydecimal$|contextvar|locale'",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "845d04",
+        "wall_time_seconds": 0.00000305,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "  1d027 numbers\n  1d048 collections\n  1d086 collections.abc\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "objdump -d /usr/lib/python3.10/lib-dynload/_decimal.cpython-310-x86_64-linux-gnu.so | rg -B 6 -A 4 'call.*PyImport_ImportModule'",
+        "max_output_tokens": 2500
+      },
+      "result": {
+        "chunk_id": "37536e",
+        "wall_time_seconds": 0.0000059,
+        "exit_code": 0,
+        "original_token_count": 543,
+        "output": "   160ab:\te8 d0 2b ff ff       \tcall   8c80 <PyDict_SetItemString@plt>\n   160b0:\t85 c0                \ttest   %eax,%eax\n   160b2:\t0f 88 c4 39 ff ff    \tjs     9a7c <mpd_del@plt+0x2ec>\n   160b8:\t48 83 6d 00 01       \tsubq   $0x1,0x0(%rbp)\n   160bd:\t0f 84 ac 39 ff ff    \tje     9a6f <mpd_del@plt+0x2df>\n   160c3:\t48 8d 3d 5d 6f 00 00 \tlea    0x6f5d(%rip),%rdi        # 1d027 <PyInit__decimal@@Base+0x7137>\n   160ca:\te8 31 32 ff ff       \tcall   9300 <PyImport_ImportModule@plt>\n   160cf:\t49 89 c4             \tmov    %rax,%r12\n   160d2:\t48 85 c0             \ttest   %rax,%rax\n   160d5:\t0f 84 c5 36 ff ff    \tje     97a0 <mpd_del@plt+0x10>\n   160db:\t48 8d 35 4d 6f 00 00 \tlea    0x6f4d(%rip),%rsi        # 1d02f <PyInit__decimal@@Base+0x713f>\n--\n   1613d:\t0f 84 0b 39 ff ff    \tje     9a4e <mpd_del@plt+0x2be>\n   16143:\t49 83 2c 24 01       \tsubq   $0x1,(%r12)\n   16148:\t0f 84 e6 38 ff ff    \tje     9a34 <mpd_del@plt+0x2a4>\n   1614e:\t48 83 6d 00 01       \tsubq   $0x1,0x0(%rbp)\n   16153:\t0f 84 ce 38 ff ff    \tje     9a27 <mpd_del@plt+0x297>\n   16159:\t48 8d 3d e8 6e 00 00 \tlea    0x6ee8(%rip),%rdi        # 1d048 <PyInit__decimal@@Base+0x7158>\n   16160:\te8 9b 31 ff ff       \tcall   9300 <PyImport_ImportModule@plt>\n   16165:\t49 89 c4             \tmov    %rax,%r12\n   16168:\t48 85 c0             \ttest   %rax,%rax\n   1616b:\t0f 84 2f 36 ff ff    \tje     97a0 <mpd_del@plt+0x10>\n   16171:\t48 89 c7             \tmov    %rax,%rdi\n--\n   161d2:\te8 a9 2a ff ff       \tcall   8c80 <PyDict_SetItemString@plt>\n   161d7:\t85 c0                \ttest   %eax,%eax\n   161d9:\t0f 88 15 37 ff ff    \tjs     98f4 <mpd_del@plt+0x164>\n   161df:\t48 83 6d 00 01       \tsubq   $0x1,0x0(%rbp)\n   161e4:\t0f 84 16 38 ff ff    \tje     9a00 <mpd_del@plt+0x270>\n   161ea:\t48 8d 3d 95 6e 00 00 \tlea    0x6e95(%rip),%rdi        # 1d086 <PyInit__decimal@@Base+0x7196>\n   161f1:\te8 0a 31 ff ff       \tcall   9300 <PyImport_ImportModule@plt>\n   161f6:\t48 89 c5             \tmov    %rax,%rbp\n   161f9:\t48 85 c0             \ttest   %rax,%rax\n   161fc:\t0f 84 0b 38 ff ff    \tje     9a0d <mpd_del@plt+0x27d>\n   16202:\t48 8d 35 8d 6e 00 00 \tlea    0x6e8d(%rip),%rsi        # 1d096 <PyInit__decimal@@Base+0x71a6>\n"
+      }
+    }
+  ],
+  "checked_pin_provenance": "Sizes below come from the already-read child sample/runtime lock; SHA values were independently matched by the already-completed sha256sum commands returned as chunks 25a56c and 9a396f. This table is not a fresh stat/hash run.",
+  "relevant_checked_pins": [
+    {
+      "path": "/usr/bin/python3.10",
+      "bytes": 5937704,
+      "sha256": "d6bca2b84e73c7775a0dd5e6a76899cfe4ee62863d7c8f88513811d1fda23f49"
+    },
+    {
+      "path": "/usr/lib/python3.10/lib-dynload/_decimal.cpython-310-x86_64-linux-gnu.so",
+      "bytes": 180632,
+      "sha256": "1ff77b9bf39b1c9d62758fc0179c29fb47fa5f242dfb4bc980c96d0e1cd22ecc"
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libmpdec.so.2.5.1",
+      "bytes": 187200,
+      "sha256": "77cc3397f963b6d882d3c49ad30091b79db6de48abfd05d434b0953dbc3916b1"
+    },
+    {
+      "path": "/usr/lib/python3.10/decimal.py",
+      "bytes": 320,
+      "sha256": "000c00bad31d126b054c6ec7f3e02b27c0f9a4d579f987d3c4f879cee1bacb81"
+    },
+    {
+      "path": "/usr/lib/python3.10/fractions.py",
+      "bytes": 28242,
+      "sha256": "c98b837e35c0ed2dd71d1d3551490553e5490ce954233f48e63e756c5f15938e"
+    },
+    {
+      "path": "/usr/lib/python3.10/numbers.py",
+      "bytes": 10348,
+      "sha256": "6d70991643a109e9c99e94d6ea2734a995fa8e89114a70ea09737413fa9ae292"
+    },
+    {
+      "path": "/usr/lib/python3.10/collections/__init__.py",
+      "bytes": 51398,
+      "sha256": "5d7b9d899fb1407a614cb2ade46b6d2400ba797634e9fed7d770fc4b7e372760"
+    },
+    {
+      "path": "/usr/lib/python3.10/collections/abc.py",
+      "bytes": 119,
+      "sha256": "9cb4208f99128a0489b6c8e6c61637617dd7d4250c59e065491957eda084dd10"
+    },
+    {
+      "path": "/usr/lib/python3.10/_collections_abc.py",
+      "bytes": 32284,
+      "sha256": "48560945f0f48a364ceff93de6e4cd2e2779b5effce505e70258506be4c67dba"
+    },
+    {
+      "path": "/usr/lib/python3.10/abc.py",
+      "bytes": 6522,
+      "sha256": "c702f783a7e81f9c37a1d22095c05360b11916d144d2730ff735c36f879523c5"
+    }
+  ],
+  "provenance_limitations": [
+    "The returned output is the tool's captured stream, not a separately recorded stdout/stderr pair.",
+    "This supplemental lane did not independently pin the inspection utilities readelf, objdump, strings, or rg.",
+    "Earlier broad-display truncations are not represented as complete evidence; the four focused returned records reproduced here were complete.",
+    "No submitted Python/import/scientific execution, ambient-environment capture, new diagnostic, new input inspection, or Git action was performed to create this document.",
+    "The controlling main reception and direct supplemental checks remain separate; this document supplies neither a new verdict nor scientific authority."
+  ]
+}

@@ -1,0 +1,36 @@
+# Prospective enabled capture bytes; this document grants no operation.
+# Exact derivative/request reception and a separate run grant remain required.
+P213_CAPTURE_ENV='/usr/bin/env'
+P213_CAPTURE_MKDIR='/usr/bin/mkdir'
+P213_CAPTURE_PYTHON='/usr/bin/python3.10'
+P213_CAPTURE_WRAPPER='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_initial_science_enabled01/run_science.py'
+P213_CAPTURE_CWD='/root/autodl-tmp/symbolic_dynamics'
+P213_CAPTURE_DIRECTORY='/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p213_author_strict_pair_run02'
+for P213_CAPTURE_VALUE in "$P213_CAPTURE_ENV" "$P213_CAPTURE_MKDIR" \
+    "$P213_CAPTURE_PYTHON" "$P213_CAPTURE_WRAPPER" \
+    "$P213_CAPTURE_CWD" "$P213_CAPTURE_DIRECTORY"; do
+    case "$P213_CAPTURE_VALUE" in
+        /*) ;;
+        *) printf '%s\n' 'P213_CAPTURE_PATH_UNRESOLVED' >&2; exit 78 ;;
+    esac
+done
+umask 077
+set -o noclobber
+cd -- "$P213_CAPTURE_CWD" || exit 78
+# One exclusive, nonrecursive allocation; preserve any failed partial artifacts.
+"$P213_CAPTURE_MKDIR" -m 700 -- "$P213_CAPTURE_DIRECTORY" || exit 78
+P213_CAPTURE_STDOUT="$P213_CAPTURE_DIRECTORY/stdout.bin"
+P213_CAPTURE_STDERR="$P213_CAPTURE_DIRECTORY/stderr.bin"
+P213_CAPTURE_CONTROL="$P213_CAPTURE_DIRECTORY/runtime_control.bin"
+exec 3>"$P213_CAPTURE_STDOUT" || exit 78
+exec 4>"$P213_CAPTURE_STDERR" || exit 78
+exec 5>"$P213_CAPTURE_CONTROL" || exit 78
+# Ordering matters: child FD 1 <- parent 3, FD 2 <- parent 4, FD 3 <- parent 5.
+"$P213_CAPTURE_ENV" -i LANG=C LC_ALL=C "$P213_CAPTURE_PYTHON" \
+    -I -S -B "$P213_CAPTURE_WRAPPER" 1>&3 2>&4 3>&5 4>&- 5>&-
+P213_CAPTURE_STATUS=$?
+exec 3>&-
+exec 4>&-
+exec 5>&-
+printf 'P213_SCIENCE_NATIVE_EXIT=%s\n' "$P213_CAPTURE_STATUS"
+exit "$P213_CAPTURE_STATUS"

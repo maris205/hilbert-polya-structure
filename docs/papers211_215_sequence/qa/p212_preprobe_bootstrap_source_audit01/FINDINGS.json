@@ -1,0 +1,35 @@
+{
+  "schema": "p212-preprobe-bootstrap-source-audit-v1",
+  "status": "REVISION_REQUIRED_SOURCE_ONLY",
+  "reviewer_authored_new_observer": false,
+  "prior_related_authorship_disclosed": true,
+  "source_sha256": "59f7e5060f338a224442ea3e38efffa9c4685e28ab52bf87750d25fb87dc57f5",
+  "open_source_findings": 1,
+  "findings": [
+    {
+      "id": "PSA-F1",
+      "status": "OPEN",
+      "severity": "BLOCKING_SOURCE_ORDER",
+      "source_lines": [
+        221,
+        224,
+        226,
+        233,
+        269,
+        270
+      ],
+      "title": "Expected resolved key is checked only after whole-file body consumption",
+      "deductive_witness": "resolve A; open bounded regular B; fd native B; read B; caller rejects A versus B only after whole_file returns",
+      "required_delta": "whole_file accepts expected; stable(expected,before) immediately after native(fd), before any os.read; caller passes before.stat; retain after and caller checks",
+      "executed_counterexample": false
+    }
+  ],
+  "informational_limits": [
+    "Directory membership is path-bracketed/two-pass names, not same-fd; the current contract does not promise the latter.",
+    "O_NOFOLLOW is terminal-component only; discrete observations are not namespace-race exclusion.",
+    "The ordinary trusted observer bootstrap is an explicit accepted assumption, not recursive self-attestation."
+  ],
+  "runtime_executed": false,
+  "author_probe_authorized": false,
+  "closure_certified": false
+}

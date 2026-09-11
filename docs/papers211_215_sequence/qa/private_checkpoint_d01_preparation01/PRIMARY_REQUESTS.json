@@ -1,0 +1,70 @@
+{
+  "schema": "private-d01-primary-document-consult-v1",
+  "status": "DOCUMENTATION_ONLY_NOT_INSTALLED_IMPLEMENTATION_PROVENANCE",
+  "requests": [
+    {
+      "request": {
+        "open": [
+          {
+            "ref_id": "https://docs.python.org/3.10/library/subprocess.html#subprocess.Popen.communicate"
+          },
+          {
+            "ref_id": "https://docs.python.org/3.10/library/os.html#os.killpg"
+          }
+        ],
+        "response_length": "short"
+      },
+      "actual_return_reference": "turn10604view0 and turn10604view1",
+      "received": true
+    },
+    {
+      "request": {
+        "find": [
+          {
+            "ref_id": "turn10604view0",
+            "pattern": "Retrying communication"
+          },
+          {
+            "ref_id": "turn10604view0",
+            "pattern": "buffered in memory"
+          },
+          {
+            "ref_id": "turn10604view0",
+            "pattern": "start_new_session is true"
+          },
+          {
+            "ref_id": "turn10604view1",
+            "pattern": "Send the signal sig to the process group pg"
+          }
+        ],
+        "response_length": "long"
+      },
+      "actual_return_reference": "turn10606view0 through turn10606view3",
+      "received": true
+    }
+  ],
+  "bounded_paraphrase": [
+    {
+      "url": "https://docs.python.org/3.10/library/subprocess.html#subprocess.Popen.communicate",
+      "scope": "Published Python 3.10 documentation",
+      "points": [
+        "Binary pipes yield bytes. A timeout on Popen.communicate does not itself kill the child; continuing communication after TimeoutExpired preserves captured output.",
+        "start_new_session requests child setsid before executable startup. Data is buffered in memory, so this method is unsuitable for arbitrary large or unlimited output.",
+        "The source uses explicitly bounded further communication, not the manual example of unbounded final communicate."
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3.10/library/os.html#os.killpg",
+      "scope": "Published Python 3.10 documentation",
+      "points": [
+        "killpg sends a signal to the specified process group. The launcher adds its own unreaped-direct-child and observed pgid/sid restriction; the manual does not prove that restriction or hostile-race freedom."
+      ]
+    }
+  ],
+  "not_claimed": [
+    "installed Python source correspondence",
+    "executed launcher",
+    "installed OpenSSH version",
+    "all startup side effects absent"
+  ]
+}

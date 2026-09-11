@@ -1,0 +1,609 @@
+#!/usr/bin/python3.10
+"""Scoped physical P211 Round1 recorder. Source-ready; root binding required.
+
+Derived from accepted p211_round0_execution01/freeze.py. This is not a
+scientific verifier, review adjudicator, launcher or generic archiver.
+"""
+from hashlib import sha256
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import stat
+import subprocess
+import sys
+import time
+import traceback
+from urllib.parse import unquote
+
+ROOT = Path('/root/autodl-tmp/symbolic_dynamics')
+QA = ROOT/'docs/papers211_215_sequence/qa'
+HERE = Path(__file__).absolute().parent
+PAPER = ROOT/'papers/211-kernel-image-projection-feedback'
+ROUND0 = PAPER/'frozen_round0'
+FROZEN = PAPER/'frozen_round1'
+A_ROOT = ROOT/'docs/papers211_215_sequence/reviews/p211_a'
+PREPARATION = QA/'p211_round1_adapter01'
+ROLE_PREPARATION = QA/'p211_round1_preparation'
+EXECUTION = QA/'p211_round1_execution01'
+BASE_SOURCE = QA/'p211_round0_execution01/freeze.py'
+LEDGER = QA/'p211_round0_execution01/SOURCE_INPUTS_AFTER.json'
+BASE_SOURCE_SHA256 = 'ae72c4e9298fd18850a0bb1511c8d4905b4a00591877c84bfdd13abbdaaced47'
+LEDGER_SHA256 = '3a0257d637b721607339dc623aa2890bb24f86ed003e8dc1d0e40194cedfde5f'
+ROUND0_READ_SHA256 = 'cc80175837802c01265eacaf58c623c3a52effa7f8adab6b992b7e6fecced5a8'
+ROUND0_EXTERNAL_SHA256 = 'd4ec07df5b9f57831f1a01ada7486f9fee8b736b424344081bbb6cd9592263d3'
+ROUND0_MANIFEST = {'bytes':2799,'sha256':'459459486a82c8f787d04e5e7fcb81e6c01b3abef320d1e82ea4cbb30ea8a8bd'}
+A_REVIEWER = '/root/round211_rational_scout/relation_primary_sources/lyndon_primary_check'
+ENV = {'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','LC_ALL':'C.UTF-8','TZ':'UTC'}
+NAMES = '''AUTHOR_EXECUTION_RECEIPT.md CANONICAL.json CANONICAL_SCHEMA.md CLAIMS_EVIDENCE.md HANDOFF.md INITIAL_BUILD_RECEIPT.md NARRATIVE_REPORT.md PAPER_PLAN.md PARAMETER_SPECIFICATION.md PREPARATION_PLAN.md PROOF_PACKAGE.md README.md SOURCE_AUDIT.md SOURCE_INPUT_PINS.json SOURCE_PIN_COLLECTION_TOOL_RETURN.json SOURCE_PREPARATION_MANIFEST.json STATIC_CHECK_TOOL_RETURN.json main.pdf main.tex math_commands.tex parameters.json references.bib sections/0_abstract.tex sections/1_introduction.tex sections/2_image.tex sections/3_clock.tex sections/4_inverse.tex sections/5_scope.tex sources/bibliographic_metadata_web.json sources/stein_definition_web.json sources/stein_support_web.json verify.py'''.split()
+REQUIRED_A = {'REPORT.md','verify.py','parameters.json','CANONICAL.json','REPLAY_LOG.md','SOURCE_AND_PROOF.md','BUILD_REPORT.md','INPUT_PINS.sha256','FINDINGS.json','DELTA.md'}
+ACCEPTANCE_ROLES = {'round0_root_reception','round0_complete_execution_read_key','a_final_report','a_final_findings','root_exact_response','same_a_accepted_delta','a_same_reviewer_acceptance','root_whole_a_reception','a_initial_output_reception','a_exclusive_canonical_adoption','a_strict_pair_and_three_native_comparisons','a_complete_runtime_dependency_key','a_schema_and_parameter_explanation','accepted_build_complete_key','actual_all_page_view_reception','author_delta_before_key','author_delta_after_key'}
+TOOLS = ('/usr/bin/cp','/usr/bin/cmp','/usr/bin/sha256sum','/usr/bin/python3.10')
+reads, external, commands = {}, {}, []
+checks, record_failure = 0, False
+
+
+def need(value, label):
+    global checks
+    checks += 1
+    if not value:
+        raise AssertionError(label)
+
+
+def pin(raw):
+    return {'bytes':len(raw),'sha256':sha256(raw).hexdigest()}
+
+
+def metadata(s):
+    return {'mode':s.st_mode,'device':s.st_dev,'inode':s.st_ino,
+            'uid':s.st_uid,'gid':s.st_gid,'nlink':s.st_nlink,'size':s.st_size,
+            'mtime_ns':s.st_mtime_ns,'ctime_ns':s.st_ctime_ns}
+
+
+def ordinary(p, directory=False):
+    p = Path(p)
+    s = p.lstat()
+    need(p.is_absolute() and p.resolve() == p and
+         (stat.S_ISDIR(s.st_mode) if directory else stat.S_ISREG(s.st_mode)),
+         ('ordinary physical path, including parents',str(p)))
+    return s
+
+
+def fresh_read(p):
+    p = Path(p)
+    before = metadata(ordinary(p))
+    raw = p.read_bytes()
+    after = metadata(ordinary(p))
+    need(before == after and before['size'] == len(raw),('read metadata drift',str(p)))
+    return raw, {**pin(raw),'stat':after}
+
+
+def read(p):
+    raw, value = fresh_read(p)
+    key = str(p)
+    need(key not in reads or reads[key] == value,('read drift',key))
+    reads[key] = value
+    return raw
+
+
+def obj(p):
+    return json.loads(read(p))
+
+
+def put(name, value):
+    p = HERE/name
+    need(p.parent == HERE or p.is_relative_to(HERE/'commands'),('owned output',str(p)))
+    raw = value if isinstance(value,bytes) else (json.dumps(value,sort_keys=True,indent=2)+'\n').encode()
+    with p.open('xb') as stream:
+        stream.write(raw)
+
+
+def rel(name):
+    need(isinstance(name,str) and name and '\\' not in name and
+         not any(c in name for c in '\x00\r\n\t') and
+         not PurePosixPath(name).is_absolute() and
+         PurePosixPath(name).as_posix() == name and
+         all(p not in ('','..','.') for p in name.split('/')),('normalized relative path',name))
+    return name
+
+
+def workspace(name):
+    return ROOT/rel(name)
+
+
+def valid_pin(value):
+    need(isinstance(value,dict) and set(value) == {'bytes','sha256'} and
+         type(value['bytes']) is int and value['bytes'] >= 0 and
+         isinstance(value['sha256'],str) and re.fullmatch('[0-9a-f]{64}',value['sha256']),
+         ('exact byte pin',value))
+    return value
+
+
+def pinned(path, value):
+    raw = read(path)
+    need(pin(raw) == valid_pin(value),('bound pin',str(path)))
+    return raw
+
+
+def parent_names(names):
+    result = {'.'}
+    for name in names:
+        for p in PurePosixPath(rel(name)).parents:
+            result.add(str(p))
+    return result
+
+
+def inventory(base, names, prune=()):
+    """Exact directory/ordinary-file tree; only caller's literal prune paths."""
+    ordinary(base, directory=True)
+    expected_dirs = parent_names(names)
+    rows = {'.':{'kind':'directory','stat':metadata(base.lstat())}}
+    omitted = {}
+    def walk(directory):
+        for p in sorted(directory.iterdir()):
+            s = p.lstat()
+            name = str(p.relative_to(base))
+            rel(name)
+            if p in prune:
+                ordinary(p,directory=True)
+                omitted[name] = {'kind':'directory','stat':metadata(s)}
+                continue
+            need(p.resolve() == p and not stat.S_ISLNK(s.st_mode),('no tree symlink',str(p)))
+            if stat.S_ISDIR(s.st_mode):
+                rows[name] = {'kind':'directory','stat':metadata(s)}
+                walk(p)
+            else:
+                need(stat.S_ISREG(s.st_mode),('no special tree entry',str(p)))
+                rows[name] = {'kind':'file','stat':metadata(s)}
+    walk(base)
+    need({n for n,v in rows.items() if v['kind'] == 'file'} == set(names),('exact file membership',str(base)))
+    need({n for n,v in rows.items() if v['kind'] == 'directory'} == expected_dirs,('exact directory membership; no unexplained empty directory',str(base)))
+    need(set(omitted) == {str(p.relative_to(base)) for p in prune},('exact literal pruning',str(base)))
+    return {'entries':rows,'pruned_exact_subtrees':omitted}
+
+
+def parse_sums(raw, nonself=True):
+    need(raw.endswith(b'\n'), 'manifest final newline')
+    rows = {}
+    for line in raw.decode('utf-8').splitlines():
+        m = re.fullmatch(r'([0-9a-f]{64})  (.+)',line)
+        need(m is not None,('manifest syntax',line))
+        digest,name = m.groups()
+        rel(name)
+        need(name not in rows and (not nonself or name != 'SHA256SUMS'),('unique/nonself manifest path',name))
+        rows[name] = digest
+    need(rows, 'nonempty exact manifest')
+    return rows
+
+
+def command(label, argv, cwd=ROOT, empty=True):
+    need(re.fullmatch('[a-z0-9_]+',label),('native label',label))
+    directory = HERE/'commands'/label
+    directory.mkdir(parents=True,exist_ok=False)
+    request = {'argv':argv,'cwd':str(cwd),'environment':ENV,
+               'stdin':'subprocess.DEVNULL','timeout_seconds':60,
+               'started_epoch':time.time(),'executable_key':reads[argv[0]]}
+    put(directory/'ATTEMPT.json',request)
+    native_exit, exception, stream_state = None, None, 'captured'
+    try:
+        actual = subprocess.run(argv,cwd=cwd,env=ENV,stdin=subprocess.DEVNULL,
+                                capture_output=True,timeout=60)
+        stdout,stderr,native_exit = actual.stdout,actual.stderr,actual.returncode
+    except subprocess.TimeoutExpired as exc:
+        stdout,stderr = exc.stdout or b'',exc.stderr or b''
+        exception = {'type':type(exc).__name__,'message':str(exc)}
+        stream_state = 'captured_partial_at_timeout; no exit code invented'
+    except OSError as exc:
+        stdout,stderr = b'',b''
+        exception = {'type':type(exc).__name__,'message':str(exc)}
+        stream_state = 'not_launched; streams unavailable'
+    put(directory/'stdout.raw',stdout)
+    put(directory/'stderr.raw',stderr)
+    receipt = {**request,'native_exit_code':native_exit,'exception':exception,
+               'stream_capture_status':stream_state,'ended_epoch':time.time(),
+               'stdout':pin(stdout),'stderr':pin(stderr),
+               'record_directory':str(directory.relative_to(HERE))}
+    put(directory/'NATIVE.json',receipt)
+    commands.append(receipt)
+    need(exception is None and native_exit == 0 and stderr == b'' and
+         (not empty or stdout == b''),('native',label))
+    return stdout
+
+
+def consume(path, value, roles, logical_paths):
+    key = rel(path)
+    need(isinstance(roles,list) and roles and all(isinstance(v,str) and v for v in roles),'declared external roles')
+    need(isinstance(logical_paths,list) and all(rel(v) for v in logical_paths),'declared external logical paths')
+    need(key not in external,('no duplicate external physical row',key))
+    pinned(workspace(key),value)
+    external[key] = {'physical_path':key,'pin':value,'roles':roles,'logical_paths':logical_paths}
+
+
+def evidence_ref(row):
+    need(isinstance(row,dict) and set(row) == {'path','pin'},('exact evidence reference',row))
+    key = rel(row['path'])
+    need(key in external and external[key]['pin'] == valid_pin(row['pin']),('consumed acceptance/origin evidence',key))
+    return workspace(key)
+
+
+def verify_external_trees(specs):
+    result = {}
+    for spec in specs:
+        base = workspace(spec['root'])
+        need(str(base) not in result,('distinct explicit external tree',str(base)))
+        names = spec['files']
+        need(isinstance(names,list) and len(names) == len(set(names)),('explicit external tree files',str(base)))
+        for name in names:
+            key = str((base/rel(name)).relative_to(ROOT))
+            need(key in external,('entire external tree was consumed',key))
+        result[str(base)] = inventory(base,names)
+        if spec['manifest'] is not None:
+            manifest_name = rel(spec['manifest'])
+            sums = parse_sums(read(base/manifest_name))
+            need(set(sums) == set(names)-{manifest_name},('complete accepted external nonself seal',str(base)))
+            for name,digest in sums.items():
+                need(external[str((base/name).relative_to(ROOT))]['pin']['sha256'] == digest,('external sealed digest',name))
+        evidence_ref(spec['accepted_scope_reference'])
+    return result
+
+
+def inherited_round0_keys(binding):
+    """Consume the actual accepted old keys through exact root version maps."""
+    records = {}
+    for filename,digest,field,is_external in [
+        ('READ_INPUTS.json',ROUND0_READ_SHA256,'round0_read_resolutions',False),
+        ('EXTERNAL_REFERENCES.json',ROUND0_EXTERNAL_SHA256,'round0_external_resolutions',True)]:
+        path = QA/'p211_round0_execution01'/filename
+        raw = read(path)
+        need(pin(raw)['sha256'] == digest and str(path.relative_to(ROOT)) in external,
+             ('accepted immutable Round0 metadata key',filename))
+        old = json.loads(raw)
+        resolution = binding[field]
+        need(set(resolution) == set(old),('entire inherited key resolved, no omission',filename))
+        mapped = {}
+        for logical,row in old.items():
+            value = row['pin'] if is_external else row
+            physical = rel(resolution[logical])
+            need(physical in external and external[physical]['pin'] == value,
+                 ('exact inherited historical/current bytes',filename,logical,physical))
+            mapped[logical] = {'physical_path':physical,'pin':value}
+        records[filename] = mapped
+    return records
+
+
+def file_key(base, names):
+    for name in sorted(names):
+        read(base/name)
+    return {name:reads[str(base/name)] for name in sorted(names)}
+
+
+def check_pin_bases(specs, source_map, before, external_key):
+    """No rebasing. Each bound SHA list resolves at its declared original base."""
+    records = []
+    seen = set()
+    for spec in specs:
+        document = rel(spec['document'])
+        need(document in source_map and document not in seen,('distinct copied pin-list document',document))
+        seen.add(document)
+        evidence_ref(spec['accepted_origin_reference'])
+        base = ROOT if spec['base'] == '' else workspace(spec['base'])
+        sums = parse_sums(read(source_map[document]['source']),nonself=False)
+        resolutions = spec['resolutions']
+        need(set(resolutions) == set(sums),('complete explicit pin-list resolution set',document))
+        for name,digest in sums.items():
+            logical = base/rel(name)
+            need(logical.is_relative_to(ROOT),('pin base remains in workspace',document,name))
+            target = rel(resolutions[name])
+            need(target in external_key and external_key[target]['sha256'] == digest,
+                 ('historical/current pin target must be fully consumed and equal',document,name,target))
+        records.append(spec)
+        if document == 'review_a/INPUT_PINS.sha256':
+            need(spec['base'] == '', 'A input pins retain workspace-root base')
+            for name,value in before.items():
+                logical = str((ROUND0/name).relative_to(ROOT))
+                need(sums.get(logical) == value['sha256'] and resolutions[logical] == logical,
+                     ('A reviewed every exact physical Round0 input',name))
+    required = {name for name in source_map if name.endswith('.sha256')}
+    need(seen == required and 'review_a/INPUT_PINS.sha256' in seen,
+         'all copied .sha256 input lists have explicit unchanged bases')
+    return records
+
+
+def resolve_links(specs, source_map, external_key):
+    """Accepted recorder's bounded inline-link syntax, with explicit origins."""
+    need(set(specs) == {n for n in source_map if n.endswith('.md')},'exact original-location map for every copied Markdown')
+    records = []
+    for name in sorted(specs):
+        spec = specs[name]
+        original = workspace(spec['original_document'])
+        if source_map[name]['role'] == 'author':
+            need(original == PAPER/name,('author original base is live paper, not Round0',name))
+        else:
+            evidence_ref(spec['accepted_origin_reference'])
+        body = read(source_map[name]['source']).decode('utf-8')
+        need(re.search(r'(?m)^\s{0,3}\[[^\]\n]+\]:',body) is None and
+             re.search(r'\[[^\]\n]*\]\[[^\]\n]*\]',body) is None,
+             ('unsupported reference-link syntax requires exact revised adapter',name))
+        actual = []
+        for match in re.finditer(r'!?\[[^\]\n]*\]\(([^)\n]+)\)',body):
+            href = match.group(1).strip().strip('<>')
+            if re.match(r'^[A-Za-z][A-Za-z0-9+.-]*:',href) or href.startswith('#'):
+                continue
+            target = unquote(href.split('#',1)[0])
+            need(target and '\\' not in target and not any(c in target for c in '\x00\r\n\t'),('bounded local href',name,href))
+            logical = Path(os.path.abspath(original.parent/target))
+            need(logical.is_relative_to(ROOT),('local link remains in workspace',name,href))
+            actual.append((href,str(logical.relative_to(ROOT))))
+        selected = spec['local_links']
+        need(actual == [(row['href'],row['logical_target']) for row in selected],
+             ('complete ordered inline-local-link binding',name))
+        for row in selected:
+            logical = workspace(row['logical_target'])
+            if logical.is_relative_to(PAPER) and str(logical.relative_to(PAPER)) in NAMES:
+                destination = str(logical.relative_to(PAPER))
+            elif logical.is_relative_to(A_ROOT) and 'review_a/'+str(logical.relative_to(A_ROOT)) in source_map:
+                destination = 'review_a/'+str(logical.relative_to(A_ROOT))
+            else:
+                destination = None
+            if destination is not None:
+                need(row['kind'] == 'copied' and row['target'] == destination,('exact selected link role',name,row))
+                target_pin = source_map[destination]['pin']
+            else:
+                need(row['kind'] in ('external_file','external_directory'),('explicit historical/external link role',name,row))
+                physical = workspace(row['target'])
+                if row['kind'] == 'external_file':
+                    need(row['target'] in external_key,('consumed mapped external target',name,row))
+                    target_pin = {k:external_key[row['target']][k] for k in ('bytes','sha256')}
+                else:
+                    files = row['directory_files']
+                    inventory(physical,files)
+                    need(all(str((physical/rel(n)).relative_to(ROOT)) in external_key for n in files),
+                         ('full bounded external directory target',name,row))
+                    target_pin = None
+                evidence_ref(row['accepted_resolution_reference'])
+            records.append({'destination_document':name,'original_document':spec['original_document'],
+                            **row,'resolved_target_pin':target_pin})
+    return records
+
+
+def main():
+    global record_failure
+    need(Path.cwd() == ROOT and HERE == EXECUTION and Path(__file__).absolute() == HERE/'freeze.py',
+         'root must place exact source in the literal new execution directory')
+    need(sys.argv[1:] == ['--binding',str(HERE/'BINDING.json')], 'literal binding argv')
+    need(set(p.name for p in HERE.iterdir()) == {'freeze.py','BINDING.json','ROOT_INVOCATION_ATTEMPT.json'},
+         'exclusive attempt starts with exactly three root-owned ordinary files')
+    for name in ('freeze.py','BINDING.json','ROOT_INVOCATION_ATTEMPT.json'):
+        ordinary(HERE/name)
+    binding = obj(HERE/'BINDING.json')
+    need(binding['schema'] == 'p211_round1_binding_v1' and binding['enabled'] is True,
+         'pending template is not executable')
+    need(binding['execution_directory'] == str(EXECUTION.relative_to(ROOT)) and
+         binding['root_authorization']['issuer'] == '/root' and
+         binding['root_authorization']['decision'] == 'AUTHORIZE_PHYSICAL_P211_ROUND1_FROM_ACCEPTED_FINAL_A',
+         'literal root authorization after accepted final A')
+    record_failure = True
+    need(dict(os.environ) == ENV and sys.executable == '/usr/bin/python3.10' and
+         sys.flags.isolated == 1 and sys.flags.no_site == 1 and sys.flags.dont_write_bytecode == 1,
+         'actual root process uses the exact isolated interpreter and environment')
+    put('PROCESS_CONTEXT.json',{'argv':sys.argv,'cwd':str(Path.cwd()),
+        'environment':dict(os.environ),'executable':sys.executable,
+        'sys_flags':str(sys.flags),'observed_epoch':time.time()})
+    put('EXECUTED_FREEZE_SOURCE.py',read(HERE/'freeze.py'))
+    put('BINDING_PIN.json',pin(read(HERE/'BINDING.json')))
+    need(not os.path.lexists(FROZEN) and not os.path.lexists(PAPER/'frozen_round2'),
+         'new Round1 destination wholly absent; no existing or dangling target')
+    need(len(NAMES) == len(set(NAMES)) == 32,'accepted literal author32')
+    need(pin(read(BASE_SOURCE))['sha256'] == BASE_SOURCE_SHA256 and
+         pin(read(LEDGER))['sha256'] == LEDGER_SHA256,'accepted derivation and author ledger')
+    expected = obj(LEDGER)
+    need(set(expected) == set(NAMES),'exact accepted baseline names')
+    for value in expected.values():
+        valid_pin(value)
+    draft = obj(ROLE_PREPARATION/'ROLE_SELECTION_DRAFT.json')
+    need({row['relative_name']:row['pin'] for row in draft['author_role']['payloads']} == expected,
+         'sealed role draft agrees with exact accepted author32')
+    need(binding['author_delta_before'] == expected == binding['author_delta_after'],
+         'same accepted delta before/after author key; no changed or extra author payload')
+    for row in binding['external_inputs']:
+        consume(row['physical_path'],row['pin'],row['roles'],row['logical_paths'])
+    external_before = {n:reads[str(workspace(n))] for n in sorted(external)}
+    put('EXTERNAL_INPUTS_BEFORE.json',external_before)
+    need(set(binding['acceptance_references']) == ACCEPTANCE_ROLES, 'all exact final acceptance roles bound')
+    for ref in binding['acceptance_references'].values():
+        evidence_ref(ref)
+    evidence_ref(binding['root_authorization']['record'])
+    host = binding['host_reuse_boundary']
+    need(host['mode'] == 'ROOT_SEPARATE_COMPLETE_HOST_KEY_AND_SETTINGS_RECHECK' and
+         host['postcopy_root_recheck_required'] is True and
+         host['recorder_rehashes_complete_host_key'] is False,
+         'workspace prerequisites are not a claim to validate every host key referent')
+    for field in ('complete_host_key_reference','accepted_runtime_settings_reference','precopy_recheck_reference'):
+        evidence_ref(host[field])
+    put('HOST_REUSE_BOUNDARY.json',host)
+    need(binding['a_acceptance'] == {'reviewer':A_REVIEWER,'current_open_findings':0,
+         'same_reviewer_accepted_exact_delta':True,'root_received_whole_originals':True,
+         'accepted_final_manifest_pin':binding['a_package']['manifest_pin']},
+         'literal root-supplied final A acceptance; not an inferred review verdict')
+    for field,base in [('preparation_manifest',PREPARATION),('role_preparation_manifest',ROLE_PREPARATION)]:
+        ref = binding[field]
+        need(evidence_ref(ref) == base/'SHA256SUMS',('exact preparation seal role',field))
+    need(pinned(HERE/'freeze.py',binding['execution_source_pin']) == read(PREPARATION/'freeze.py'),
+         'full exact prepared/executed source equality')
+    invocation = obj(HERE/'ROOT_INVOCATION_ATTEMPT.json')
+    need(invocation['argv'] == ['/usr/bin/python3.10','-I','-S','-B',str(HERE/'freeze.py'),'--binding',str(HERE/'BINDING.json')] and
+         invocation['cwd'] == str(ROOT) and invocation['environment'] == ENV and
+         invocation['stdin'] == 'subprocess.DEVNULL' and
+         invocation['source_pin'] == binding['execution_source_pin'] and
+         invocation['binding_pin'] == pin(read(HERE/'BINDING.json')),
+         'root pre-invocation request binds literal argv/cwd/env/source/binding; actual return still pending')
+    need(set(binding['native_tool_pins']) == set(TOOLS),'exact native tool selection')
+    for path,value in binding['native_tool_pins'].items():
+        pinned(Path(path),value)
+    tools_before = {p:reads[p] for p in TOOLS}
+    put('NATIVE_TOOLS_BEFORE.json',tools_before)
+    external_trees_before = verify_external_trees(binding['external_trees'])
+    need({str(PREPARATION),str(ROLE_PREPARATION),str(QA/'p211_round0_execution01')} <= set(external_trees_before),
+         'complete two preparation trees and unchanged accepted Round0 execution tree explicitly bound')
+    inherited = inherited_round0_keys(binding)
+    a = binding['a_package']
+    need(a['root'] == str(A_ROOT.relative_to(ROOT)),'literal final A source root')
+    members = a['payloads']
+    need(isinstance(members,dict) and REQUIRED_A <= set(members) and 'SHA256SUMS' not in members,
+         'all final A payloads, including the minimum ten roles')
+    for name,value in members.items():
+        rel(name); valid_pin(value)
+    a_sums = parse_sums(pinned(A_ROOT/'SHA256SUMS',a['manifest_pin']))
+    need(a_sums == {name:value['sha256'] for name,value in members.items()}, 'exact final A manifest membership and hashes')
+    need(a['payload_count'] == len(members) and a['all_file_count'] == len(members)+1,'bound final A counts')
+    a_all = {**members,'SHA256SUMS':a['manifest_pin']}
+    for role,name in [('a_final_report','REPORT.md'),('a_final_findings','FINDINGS.json'),('same_a_accepted_delta','DELTA.md')]:
+        need(binding['acceptance_references'][role] == {'path':str((A_ROOT/name).relative_to(ROOT)),'pin':members[name]},
+             ('acceptance role tied to exact copied final A artifact',role))
+    need(binding['acceptance_references']['round0_root_reception']['path'] ==
+         str((QA/'p211_round0_root_reception/RECEPTION.md').relative_to(ROOT)) and
+         binding['acceptance_references']['round0_root_reception']['pin']['sha256'] ==
+         'aaf5f7dfcacc3b9efa20edbf08bbce49d996418b33722b3bfb399110bcf4f3bd',
+         'accepted root Round0 reception, not historical pending RESULT')
+    r0_all = {**expected,'SHA256SUMS':ROUND0_MANIFEST}
+    source_trees_before = {'author_live':inventory(PAPER,NAMES,(ROUND0,)),
+                           'author_round0':inventory(ROUND0,r0_all),
+                           'review_a':inventory(A_ROOT,a_all)}
+    source_before = {'author_live':file_key(PAPER,NAMES),
+                     'author_round0':file_key(ROUND0,r0_all),
+                     'review_a':file_key(A_ROOT,a_all)}
+    for role,values in [('author_live',expected),('author_round0',r0_all),('review_a',a_all)]:
+        need({n:{k:v[k] for k in ('bytes','sha256')} for n,v in source_before[role].items()} == values,
+             ('entire source key equals accepted binding',role))
+    r0_sums = parse_sums(read(ROUND0/'SHA256SUMS'))
+    need(r0_sums == {n:v['sha256'] for n,v in expected.items()},'entire historical Round0 seal unchanged')
+    source_map = {n:{'role':'author','source':ROUND0/n,'original_document':PAPER/n,'pin':expected[n]} for n in NAMES}
+    source_map.update({'review_a/'+n:{'role':'review_a','source':A_ROOT/n,'original_document':A_ROOT/n,'pin':a_all[n]} for n in a_all})
+    need(len(source_map) == len(a_all)+32 and not (set(NAMES) & {'review_a','SHA256SUMS'}),'disjoint author/A/outer roles')
+    for spec in binding['external_inputs']:
+        need(not workspace(spec['physical_path']).is_relative_to(HERE) and
+             not workspace(spec['physical_path']).is_relative_to(FROZEN), 'no output/self-referential external prerequisite')
+    for name,value in r0_all.items():
+        key = str((ROUND0/name).relative_to(ROOT))
+        need(key in external and external[key]['pin'] == value,('all historical Round0 inputs explicitly consumed externally',name))
+    pin_bases = check_pin_bases(binding['pin_list_bases'],source_map,r0_all,external_before)
+    links = resolve_links(binding['document_origins'],source_map,external_before)
+    for name,spec in binding['document_origins'].items():
+        source_map[name]['original_document'] = workspace(spec['original_document'])
+    json_bases = binding['json_pin_bases']
+    need({'SOURCE_INPUT_PINS.json','SOURCE_PREPARATION_MANIFEST.json'} <= set(json_bases),
+         'known author JSON pin records retain explicit original schema/base metadata')
+    for name,spec in json_bases.items():
+        need(name in source_map and name.endswith('.json'),('copied JSON pin metadata',name))
+        need(spec['base'] == '' or rel(spec['base']),'unchanged declared JSON base')
+        evidence_ref(spec['accepted_origin_and_schema_reference'])
+        need(isinstance(spec['scope_note'],str) and spec['scope_note'],'explicit JSON interpretation scope; no generic reparsing')
+    put('SOURCE_INPUTS_BEFORE.json',source_before)
+    put('SOURCE_TREES_BEFORE.json',source_trees_before)
+    put('EXTERNAL_TREES_BEFORE.json',external_trees_before)
+    put('SOURCE_SELECTION.json',{n:{**v,'source':str(v['source'].relative_to(ROOT)),
+        'original_document':str(v['original_document'].relative_to(ROOT)),
+        'destination':str((FROZEN/n).relative_to(ROOT))} for n,v in sorted(source_map.items())})
+    put('DECLARED_PIN_LIST_BASES.json',pin_bases)
+    put('DECLARED_JSON_PIN_BASES.json',json_bases)
+    put('INHERITED_ROUND0_RESOLUTIONS.json',inherited)
+    put('MARKDOWN_LINK_MAP.json',links)
+    for index,name in enumerate(sorted(NAMES),1):
+        command('live_round0_compare_%03d'%index,['/usr/bin/cmp','--',str(PAPER/name),str(ROUND0/name)])
+        need(read(PAPER/name) == read(ROUND0/name),('full live/Round0 bytes',name))
+    FROZEN.mkdir()
+    (FROZEN/'review_a').mkdir()
+    command('copy_author32',['/usr/bin/cp','-p','--parents','--',*sorted(NAMES),str(FROZEN)],cwd=ROUND0)
+    command('copy_complete_final_a',['/usr/bin/cp','-p','--parents','--',*sorted(a_all),str(FROZEN/'review_a')],cwd=A_ROOT)
+    origins, destination_inodes = [], set()
+    for index,(name,row) in enumerate(sorted(source_map.items()),1):
+        source,destination = row['source'],FROZEN/name
+        ss,ds = ordinary(source),ordinary(destination)
+        source_inode,destination_inode = (ss.st_dev,ss.st_ino),(ds.st_dev,ds.st_ino)
+        need(source_inode != destination_inode and destination_inode not in destination_inodes and ds.st_nlink == 1,
+             ('physical separate non-hardlinked copy',name))
+        destination_inodes.add(destination_inode)
+        command('copy_compare_%05d'%index,['/usr/bin/cmp','--',str(source),str(destination)])
+        need(read(source) == read(destination) and pin(read(destination)) == row['pin'],('full copied bytes',name))
+        origins.append({'relative_name':name,'role':row['role'],'original_path':str(source.relative_to(ROOT)),
+                        'frozen_path':str(destination.relative_to(ROOT)),'pin':row['pin'],
+                        'source_key':reads[str(source)],'frozen_key':reads[str(destination)]})
+    manifest = ''.join(source_map[n]['pin']['sha256']+'  '+n+'\n' for n in sorted(source_map)).encode()
+    with (FROZEN/'SHA256SUMS').open('xb') as stream:
+        stream.write(manifest)
+    need(read(FROZEN/'SHA256SUMS') == manifest and
+         parse_sums(manifest) == {n:source_map[n]['pin']['sha256'] for n in sorted(source_map)},
+         'full exact outer manifest bytes and nonself paths')
+    destination_tree = inventory(FROZEN,set(source_map)|{'SHA256SUMS'})
+    outer = command('verify_outer_manifest',['/usr/bin/sha256sum','-c','SHA256SUMS'],cwd=FROZEN,empty=False)
+    need(outer == ''.join(n+': OK\n' for n in sorted(source_map)).encode(),'every outer native hash line')
+    inner = command('verify_inner_a_manifest',['/usr/bin/sha256sum','-c','SHA256SUMS'],cwd=FROZEN/'review_a',empty=False)
+    need(inner == ''.join(n+': OK\n' for n in a_sums).encode(),'every inner native hash line in unchanged original order/base')
+    need(read(FROZEN/'review_a/SHA256SUMS') == read(A_ROOT/'SHA256SUMS'),'inner manifest copied unchanged, never recomputed')
+    source_after = {'author_live':file_key(PAPER,NAMES),'author_round0':file_key(ROUND0,r0_all),'review_a':file_key(A_ROOT,a_all)}
+    need(source_after == source_before,'full rich source file before/after keys unchanged')
+    source_trees_after = {'author_live':inventory(PAPER,NAMES,(ROUND0,FROZEN)),
+                          'author_round0':inventory(ROUND0,r0_all),'review_a':inventory(A_ROOT,a_all)}
+    for role in ('author_round0','review_a'):
+        need(source_trees_after[role] == source_trees_before[role],('complete source directory key unchanged',role))
+    live_before,live_after = source_trees_before['author_live']['entries'],source_trees_after['author_live']['entries']
+    need({n:v for n,v in live_before.items() if n != '.'} == {n:v for n,v in live_after.items() if n != '.'},
+         'all live author descendant file/directory keys unchanged')
+    allowed_root_changes = {'size','mtime_ns','ctime_ns','nlink'}
+    need({k:v for k,v in live_before['.']['stat'].items() if k not in allowed_root_changes} ==
+         {k:v for k,v in live_after['.']['stat'].items() if k not in allowed_root_changes},
+         'only declared parent-directory metadata may change when adding exact Round1')
+    external_after = {n:fresh_read(workspace(n))[1] for n in sorted(external)}
+    need(external_after == external_before,'full rich consumed external before/after keys unchanged')
+    external_trees_after = verify_external_trees(binding['external_trees'])
+    need(external_trees_after == external_trees_before,'complete explicit external trees unchanged')
+    tools_after = {p:fresh_read(Path(p))[1] for p in TOOLS}
+    need(tools_after == tools_before,'native executable full rich keys unchanged')
+    read_before = dict(reads)
+    read_after = {p:fresh_read(Path(p))[1] for p in sorted(read_before)}
+    need(read_after == read_before,'every actually read file full rich final closure')
+    need(inventory(FROZEN,set(source_map)|{'SHA256SUMS'}) == destination_tree,
+         'complete frozen directory and file metadata unchanged through final closure')
+    put('SOURCE_INPUTS_AFTER.json',source_after)
+    put('SOURCE_TREES_AFTER.json',source_trees_after)
+    put('EXTERNAL_INPUTS_AFTER.json',external_after)
+    put('EXTERNAL_TREES_AFTER.json',external_trees_after)
+    put('NATIVE_TOOLS_AFTER.json',tools_after)
+    put('FROZEN_ORIGIN_MAP.json',origins)
+    put('FROZEN_TREE.json',destination_tree)
+    put('EXTERNAL_REFERENCES.json',external)
+    put('READ_INPUTS_BEFORE.json',read_before)
+    put('READ_INPUTS_AFTER.json',read_after)
+    put('NATIVE_COMMANDS.json',commands)
+    result = {'status':'PHYSICAL_P211_ROUND1_CREATED_PENDING_ROOT_RECEPTION',
+              'author_payloads':32,'a_manifest_payloads':len(members),'a_copied_files':len(a_all),
+              'payloads':len(source_map),'files_with_manifest':len(source_map)+1,
+              'b_complete_round1_input_count':len(source_map)+1,'manifest':pin(manifest),
+              'payload_bytes':sum(v['pin']['bytes'] for v in source_map.values()),
+              'checks':checks,'read_paths':len(reads),'native_commands':len(commands),
+              'external_files':len(external),'mapped_local_links':len(links),
+              'allowed_live_parent_directory_metadata_changes':sorted(allowed_root_changes),
+              'scientific_executions':0,'builds':0,'new_page_views':0,'reviews':0,
+              'paper_complete':False,'execution_package_seal':'PENDING_ACTUAL_ROOT_INVOCATION_RETURN',
+              'complete_host_key_rehashed_by_recorder':False,
+              'complete_host_key_and_settings_postcopy_recheck':'PENDING_SEPARATE_ROOT_RECEPTION',
+              'external':'HOLD_EXTERNAL'}
+    put('RESULT.json',result)
+    print(json.dumps(result,sort_keys=True))
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except BaseException as exc:
+        failure = {'status':'FAILED_PRESERVE_ATTEMPT_AND_ANY_PARTIAL_ROUND1',
+                   'exception_type':type(exc).__name__,'message':str(exc),
+                   'checks':checks,'native_commands':len(commands),'ended_epoch':time.time()}
+        if record_failure:
+            for name,value in [('FAILURE.json',failure),('READ_INPUTS_PARTIAL.json',reads),
+                               ('EXTERNAL_REFERENCES_PARTIAL.json',external),('NATIVE_COMMANDS.json',commands)]:
+                if not os.path.lexists(HERE/name):
+                    put(name,value)
+        print(json.dumps(failure,sort_keys=True))
+        traceback.print_exc()
+        raise SystemExit(1)

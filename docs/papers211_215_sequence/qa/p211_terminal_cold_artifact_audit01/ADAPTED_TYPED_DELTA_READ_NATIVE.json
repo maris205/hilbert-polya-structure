@@ -1,0 +1,15 @@
+{
+  "reason": "Pre-execution type check narrowed mode to rich stat/lstat metadata; BibTeX role mode is correctly text. No checker run yet.",
+  "request": {
+    "cmd": "sed -n '125,185p' docs/papers211_215_sequence/qa/p211_terminal_cold_artifact_audit01/inspect_cold1.py",
+    "max_output_tokens": 4000
+  },
+  "result": {
+    "chunk_id": "fa8aa0",
+    "wall_time_seconds": 0.000006489,
+    "exit_code": 0,
+    "original_token_count": 628,
+    "output": "    return value\n\n\ndef obj(path):\n    # CPython parses arbitrary-sized integers exactly; never round-trips via JS.\n    value = json.loads(read(path), object_pairs_hook=reject_duplicate_pairs,\n                       parse_constant=lambda x: (_ for _ in ()).throw(ValueError(x)))\n    def typed(item, field=''):\n        if isinstance(item, dict):\n            if field in {'stat','lstat'}:\n                demand(all(type(v) is int for v in item.values()),\n                       'precise_json_integers', 'every rich '+field+' metadata field')\n            for key, child in item.items():\n                typed(child, key)\n        elif isinstance(item, list):\n            for child in item:\n                typed(child)\n        elif field in {'bytes','ctime_ns','mtime_ns','device','gid','inode','nlink',\n                       'size','uid','pid','session','native_exit_code','timeout_seconds',\n                       'build_number','major','minor'}:\n            demand(type(item) is int, 'precise_json_integers', field)\n    typed(value)\n    return value\n\ndef put(name, value):\n    p = OUTPUT / name\n    demand(p.parent == OUTPUT and p.resolve() == p, 'output_scope', str(p))\n    raw = value if isinstance(value, bytes) else (json.dumps(value, sort_keys=True, indent=2) + '\\n').encode()\n    with p.open('xb') as stream:\n        stream.write(raw)\n        stream.flush()\n        os.fsync(stream.fileno())\n    return raw_pin(raw)\n\n\ndef current_entry(path, members=False):\n    \"\"\"Archived host/metadata consistency, physical reads only for scoped local files.\"\"\"\n    p = Path(path)\n    if str(p) in ARCHIVE:\n        row = ARCHIVE[str(p)]\n        # For exact allowed workspace file roles also verify live artifact bytes.\n        if p in EXPLICIT_LOCAL or any(p.is_relative_to(base) for base in LOCAL_TREES):\n            if row.get('kind') == 'file':\n                demand(pin(p) == {k:row[k] for k in ('bytes','sha256')},\n                       'local_artifact_current', str(p))\n        else:\n            ARCHIVED_ONLY_REFERENTS.add(str(p))\n        return row\n    authorized_local(p)\n    demand(p.is_file(), 'local_artifact_current', str(p))\n    return {'path':str(p),'present':True,'symlink':False,'resolved':str(p),'kind':'file',**pin(p)}\n\n\ndef archived_resolve(path):\n    \"\"\"Lexical/archived resolution; never stat/resolve a host spelling.\"\"\"\n    p = Path(path)\n    if p.is_relative_to(ROOT):\n        return p\n    demand(str(p) in ARCHIVE, 'archived_resolution', str(p))\n    return Path(ARCHIVE[str(p)]['resolved'])\n\n"
+  }
+}
+

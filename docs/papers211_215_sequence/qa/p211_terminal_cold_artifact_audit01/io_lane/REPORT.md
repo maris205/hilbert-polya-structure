@@ -1,0 +1,70 @@
+# P211 terminal cold-build 1: independent ordered-I/O lane
+
+Outcome: **no current mismatch in the complete ordered-I/O reconstruction; one current Minor diagnostic-census issue remains for supplemental/root disposition.** This is infrastructure evidence auditing, not manuscript review, visual review, two-build comparison, operational authority, terminal PASS, or paper completion. All originals remain unchanged.
+
+## Concrete current finding
+
+The exact final log contains:
+
+> pdfTeX warning (font expansion): font should be expanded before its first use
+
+It occurs at pass 3 log line 608 (25,362 bytes; SHA-256 23cd58bfffd50cd3d9d9a3d441ff1da30e1e7f55c00df697740a2e4a8508dc0a) and pass 2 line 624 (26,096 bytes; d67af1d6530912713852c11275ffc9273c385617b42bba88e7a9a12c84fec3dc). The final MEASURED_NOT_VIEWED.json warning array is empty because actual executed build_p211.py:422 uses case-sensitive “Warning”. Original initial auditor inspect_build.py:601,641 repeats that mechanism; it is source evidence, not a new execution or a claim about the old build's complete log.
+
+P211-COLD1-IO-D1 is Minor / OPEN_PENDING_ROOT_DIAGNOSTIC_DISPOSITION. A complete independent supplementary census is now in [ALL_LOG_DIAGNOSTIC_CENSUS.json](ALL_LOG_DIAGNOSTIC_CENSUS.json): all 18 selected .log, .blg, and pass/BibTeX stdout files, complete actual pins, every case-insensitive matching line and ±2-line context. It separates loader/Info literal matches from emitted diagnostics. For example, the final log has two literal “warning” matches, but one is package metadata (“Providing info/warning/error messages”), not a second warning.
+
+Do not label the final log warning-free. Keep the sealed log, source and measurement object unchanged; root may add an immutable supplemental diagnostic disposition. No repair or rebuild is requested or authorized by this lane. Neither harmlessness nor glyph loss is inferred from this warning; actual all-page viewing and root adjudication remain separate.
+
+The final log has zero undefined-reference/citation lines, zero actual TeX “Missing character” diagnostics, zero overfull boxes, zero actual rerun requests, and two underfull boxes (badness 1325 at source lines 65–65; badness 10000 in bibliography lines 16–19). It also contains two “Package microtype Info: Character '029' is missing” contexts (actual spelling uses a backtick), each explicitly followed by ignored **protrusion settings**. These Info contexts are not silently equated with an emitted missing-glyph diagnostic or a correctness guarantee.
+
+## Full ordered reconstruction
+
+[RECONSTRUCTION_RESULT.json](RECONSTRUCTION_RESULT.json) records 5,132 documentary checks with zero predicate mismatches. [ORDERED_IO_RECONSTRUCTION.json](ORDERED_IO_RECONSTRUCTION.json) contains the complete independently reconstructed event objects, including every duplicate, spelling, ordinal, role, pin field and explicit limitation. The actual submitted source was read, not imported or executed.
+
+| TeX pass | All events (including one PWD) | Source reads | External-prelocked reads | Prior-pass generated reads | Earlier-output/same-pass reads | Declared outputs |
+|---|---:|---:|---:|---:|---:|---:|
+| pass1 | 780 | 50 | 722 | 0 | 3 | 4 |
+| pass2 | 801 | 50 | 726 | 17 | 3 | 4 |
+| pass3 | 801 | 50 | 726 | 17 | 3 | 4 |
+
+Total: 2,382 FLS events. External spellings/resolved endpoints are 130/129 for pass1 and 134/133 for pass2/pass3. These are reconstructed from archived configuration data, not current host queries or proofs of OS-level tracing.
+
+Each pass reads the same eight TeX sources (50 repeated events); the ninth copied source is the BibTeX database. All nine initial source pins match the actual copied files and saved source before/after/copy-after maps. The initial eight generated roles are all absent. All four before/after snapshot pairs have exact permitted membership and actual non-PDF archived hashes, and every next-before object equals its previous-after object.
+
+The four declared FLS outputs are main.log, main.aux, main.out, and main.pdf. FLS does not declare its own recorder file as an OUTPUT; the complete saved recorder is nevertheless archived and pinned. Pass1 OUTPUT order is log (7), aux (547), out (676), PDF (677); pass2/pass3 order is log (7), aux (550), PDF (687), out (690).
+
+The exact same-pass reads are pass1 lines 757–759 and pass2/pass3 lines 776–778: main.aux, then two ./main.out records. Their read-time bytes remain NOT_OBSERVED_BY_FLS. Even equal starting/ending pins cannot fill that gap. Pass2/pass3 prior-pass generated reads comprise three aux records, ten out records, and four bbl records; all 17 occur before the relevant local OUTPUT, if one exists.
+
+## BibTeX and pass chain
+
+The four actual pass roles are pass1 → bibtex → pass2 → pass3. BibTeX has no new FLS; its before/after FLS bytes are the unchanged pass1 recorder and are not counted as a second native trace.
+
+The complete BibTeX role object reconstructs three inputs: the 3,177-byte same-stage generated aux (b4a820c5e24cbef2659f34e9a339cb6f8a48c2f93964d8c03560beb356843554), the 1,100-byte copied references.bib, and the explicitly named prelocked /usr/share/texlive/texmf-dist/bibtex/bst/amscls/amsplain.bst (25,798 bytes; 7616509a3014c7ae5f9d6c0b18518ba79f7f76bd30f448c777c77b4cce3a2731). That host path was **not opened** by this auditor. Its association is checked against the archived configuration and actual saved direct-input records.
+
+The actual before aux contains exactly amsplain / references, with no nested auxiliary input; the BLG independently names main.aux, amsplain.bst, and references.bib. Four citation occurrences cover three unique database keys, and all three generated bbl entries match them. There are no BLG warning/error findings. Only bbl (1,081 bytes) and blg (883 bytes) become new; all six other generated roles remain unchanged across BibTeX.
+
+The three logged/stdout PDF sizes are 261,527 → 300,941 → 301,007 bytes, each five pages. Intermediate PDF bodies were not archived, so this lane verifies their recorded snapshot pins and actual log/native size tuples, **not** unavailable intermediate PDF bytes. Every actual final non-PDF body equals its pass3 archived copy, and the final PDF pin matches its snapshot, measurement record and measured-tool direct inputs.
+
+## Measurement and native limits
+
+Final PDF: 301,007 bytes, SHA-256 532b8c462e907878c3d75829b2c4ff86de7d59c137efa91b61ebc80717a077dc; actual PDF-1.5 header, five A4 pages (595.276 × 841.89 pt), empty Author metadata, unencrypted. Full saved text has five pages, its References heading on page 5, and none of the specified [VERIFY]/??/[?] markers.
+
+The saved font table has 21 font objects, all Type 1 with embedded/subset/Unicode flags “yes”. This is a table measurement, not 21 distinct font families and not glyph correctness. All five saved PNGs have the expected signatures/IHDR and 869 × 1228 dimensions; their full file hashes match saved render rows. PNGs were not decoded or viewed, and no PDF tool or renderer was run.
+
+All 12 selected native operations (four passes, three PDF measurement commands, five per-page render commands) have their complete seven-file evidence read, settled exit 0 receipts, exact embedded receipt associations, complete stdout/stderr pins, empty stderr and unchanged direct-input pairs. The three TeX passes have 11 direct inputs each, BibTeX 13, and each PDF measurement/render command 3. The BibTeX aux is bound to its own stage, never substituted by the later 3,407-byte final aux. Selected native intervals are ordered and each recorded session is settled without interventions. These are saved-native checks, not new native build operations. Parent owns the full all-command/runtime/settings/authority reception.
+
+## Native evidence and retained failures
+
+165 complete text files were received (2,523,669 UTF-8 bytes), with all transported bodies independently rehashed in memory and matched to new native sha256sum/wc results. Including the final PDF and five PNGs, [INPUT_PINS.json](INPUT_PINS.json) binds 171 original files / 4,101,382 bytes. The two complete native hash/size listings before and after reconstruction match exactly. Three actual native cmp -s calls exit 0 for the dedicated full executed builder/core and original auditor source snapshots.
+
+Every subsequent bounded native read request/result object is preserved under native/; full code snapshots are under sources/. Complete large JSON bodies were obtained by 27 ordered 1,500-line-bounded reads and validated against actual whole-file byte counts/hashes. Source and reconstruction JavaScript are records of this lane's own in-memory data computations; no submitted script, Python, TeX, scientific verifier, host lookup or build was executed.
+
+Three failures and one truncation are retained, not relabelled successes:
+
+- READ_FAILURE01 records the actual initial “code-mode host closed its stdout” failure of an overlarge parallel workspace-cat request. Individual original envelopes were not returned, and earlier volatile read envelopes were lost. They are not recreated. Early state/navigation/source reads therefore do not have complete original native envelopes in this lane; later full source/evidence reads are distinct new events.
+- An actual 60,000-token role-object cat result was truncated and is retained in its native record. Complete bounded rereads replace no historical object and supply the independently hashed full body.
+- READ_FAILURE02 records an own in-memory strict-eval binding error before any reads in that invocation; the explicit lexical-binding correction resumed ordinary documentary reads. It is not a submitted-code failure or build retry.
+- READ_FAILURE03 records an own Markdown-template construction error before any native command or file write in that invocation. The report was subsequently constructed safely.
+
+These documentary limitations do not erase the complete new 165-file read set or close the current diagnostic finding. No mutable build2, original packet, index, manuscript, Git, or external action was touched. The selected project workflow supplied the infrastructure/visual/manuscript phase separation; it does not authorize any additional action.
+
+Final lane manifest is directory-relative, complete and nonself. Parent must receive the actual packet and adjudicate its current finding. OWNER_AMBER / HOLD_EXTERNAL remains in force.

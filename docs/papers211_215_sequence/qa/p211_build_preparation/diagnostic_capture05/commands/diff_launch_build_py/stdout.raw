@@ -1,0 +1,47 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/history/diagnostic01_source/launch_build.py	2026-09-08 17:50:31.663556413 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/launch_build.py	2026-09-08 18:01:03.326071417 +0800
+@@ -58,13 +58,15 @@
+         require(command['successful'], 'Inner native builder did not complete successfully')
+     except BaseException:
+         failures.append(traceback.format_exc())
+-    if list(out.rglob('UNCLOSED.json')):
+-        write_new(outer / 'UNCLOSED.json', {'status': 'UNCLOSED_NO_SEAL', 'failures': failures})
++    pending = incomplete_native(out)
++    if list(out.rglob('UNCLOSED.json')) or pending:
++        write_new(outer / 'UNCLOSED.json', {'status': 'UNCLOSED_NO_SEAL', 'failures': failures,
++                                          'pending_native_attempts': pending})
+         return 1
+     for name, collect, expected in (
+         ('SOURCES_AFTER', physical_sources, binding['source_pins']),
+         ('ORIGINALS_AFTER', lambda: {p: pin(p) for p in originals}, originals),
+-        ('CONFIGURATION_AFTER', lambda: snapshot(lock['selector_specs']), before_configuration)):
++        ('CONFIGURATION_AFTER', lambda: snapshot(configuration_key(binding, lock)[0]), before_configuration)):
+         try:
+             observed = collect()
+             write_new(outer / (name + '.json'), observed)
+@@ -105,6 +107,11 @@
+     require(dict(os.environ) == ENV8 and sys.flags.isolated and sys.flags.no_site and
+             sys.dont_write_bytecode and not sys.flags.optimize, 'Exact diagnostic ENV8/Python flags')
+     capture.mkdir()
++    executed = capture / 'executed_adapter'
++    executed.mkdir()
++    for name in CODE_NAMES:
++        write_new(executed / name, (PREP / name).read_bytes())
++        require(pin(executed / name) == pin(PREP / name), 'Diagnostic physical source snapshot')
+     source_before = physical_sources()
+     code_before = {name: pin(PREP / name) for name in CODE_NAMES}
+     write_new(capture / 'ENTERED.json', {'mode': 'DIAGNOSTIC_ONLY_NOT_A_BUILD',
+@@ -113,6 +120,13 @@
+     write_new(capture / 'CODE_BEFORE.json', code_before)
+     failures, calls = [], []
+     try:
++        for name in CODE_NAMES:
++            historical = PREP / 'history/diagnostic01_source' / name
++            row, raw = run_native(capture, 'diff_' + name.replace('.', '_'),
++                                  ['/usr/bin/diff', '-u', str(historical), str(PREP / name)], ROOT,
++                                  [historical, PREP / name], expected=(0, 1))
++            calls.append(row)
++            require(row['successful'], 'Recorded diagnostic-source delta failed')
+         for label, script, arguments in (
+             ('static', 'static_checks.py', []),
+             ('discovery', 'prepare_build.py', ['--output', str(discovery)])):

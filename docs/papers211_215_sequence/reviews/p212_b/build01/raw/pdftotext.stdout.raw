@@ -1,0 +1,298 @@
+    Exact Periods and Labelled Orbit Counts for Closed Pointer
+                             Reversal
+                                              Anonymous
+
+
+                                                 Abstract
+          The familiar pointer-reversal assignment becomes a finite permutation when both reg-
+     isters and every stored pointer range over the same finite label set, with no sentinel or
+     stopping rule. We classify its orbits on the full carrier. The active augmented-edge two-core
+     is a figure-eight, barbell or theta, while all complementary pointers remain fixed. Explicit
+     branch return states give seven exact-period cases, including loops and indistinguishable
+     parallel edges. On n ≥ 2 labels the attained periods are precisely {1, . . . , 2n} ∪ {2n + 2, 2n +
+     4, . . . , 4n − 4}. Observable orientation and order decorations then give an explicit rational
+     bivariate core generating function and a labelled orbit census after arbitrary frozen comple-
+     ments are attached. We distinguish these closed-carrier results from the established reversal
+     kernel, initialized-list analyses and fixed-digraph rotor theorems.
+
+
+1    The closed carrier and its active core
+For n ≥ 1 put V = [n] and Xn = V 2 × V V . On the full labelled carrier, with ordered registers,
+define
+                             R(u, v, f ) = (v, f (v), f [v := u]).                           (1)
+Every expression on the right uses the old state. We allow u = v, loops and arbitrary total
+maps f ; there is no nil value, stopping rule or hidden edge identity. We determine two kinds
+of information: every exact period, and the orbit decorations needed for the labelled census.
+They share a return-map analysis, but a scalar period does not determine the decorations.
+    The kernel is established in-place list reversal, as in Manna and Waldinger [4]. Loginov,
+Reps and Sagiv [3] analyze a NULL-initialized, NULL-stopped version on possibly cyclic lists,
+including restored handles. Berdine et al. explicitly use the decreasing quantity 2i + j + k in
+their panhandle example [1, Example 8]. Thus neither reversal nor doubled-handle timing is
+claimed as new.
+    Rotor routing also has a complete established orbit theory. On a fixed finite strongly
+connected directed multigraph, with prescribed cyclic orders, let TG (v) count inward spanning
+arborescences
+     P +       and M = gcdv TG (v). Pham’s theorem gives M recurrent rotor orbits, each of
+size    v d (v)TG (v)/M [5, Theorem 1]; the size is independent of the chosen cyclic orders.
+The Eulerian tour case is also treated in Holroyd et al. [2, Lemma 4.9]. These are not our
+contribution. A barbell with cycle lengths 3, 3 and bridge length 1 has pointer period 16 below,
+whereas its bidirected Eulerian rotor graph has 14 arcs and recurrent period 14. This excludes
+only a time-preserving identification on that same core, not factors, suspensions, enlarged states
+or arbitrary rotor encodings.
+    Some elementary facts fix the setting. The inverse is
+                                  R−1 (a, b, g) = (g(a), a, g[a := b]).                                   (2)
+
+                                                     1
+Substitution proves both identities, including coincident registers. Hence every state is periodic.
+A fixed state has u = v = f (v); the other pointers are arbitrary, giving nn fixed states. These
+facts receive no separate contribution claim.
+    Associate to (u, v, f ) the undirected multigraph G with the stored edges {x, f (x)} for all
+x, and one extra edge {u, v}. Edges have multiplicity but no identities; a loop contributes two
+to degree. Represent the extra edge by u → v and the other edges by their stored arrows.
+Equation (1) exchanges the stored and extra roles of two edges and reverses the traversed extra
+arrow, so G is invariant.
+
+Lemma 1. The component containing the registers has a connected two-core K with s vertices,
+s + 1 edges and minimum degree two. Both registers stay in K. Every pointer outside K
+is frozen. The core is a figure-eight with cycle lengths a, b, a barbell with cycle lengths a, b
+and bridge length c, or a theta with path lengths a, b, c, all lengths positive. Their sizes are
+respectively a + b − 1, a + b + c − 1, a + b + c − 1.
+
+Proof. Each functional component has equally many edges and vertices. Adding the register
+edge either augments one such component or joins two; in both cases the active component has
+one excess edge. The active vertex u has two outgoing arrows, and every other vertex has one.
+A degree-one vertex is therefore not u, and its single edge is its stored arrow directed toward
+the remaining graph. Removing it removes no remaining vertex’s outgoing arrow. Induction
+through leaf pruning leaves u, the extra edge, and hence v in the two-core; all removed arrows
+point inward. Invariance of G makes those arrows, and all inactive components, frozen for all
+time.                               P
+    The core retains excess one, so x∈K (deg x − 2) = 2. There is one degree-four vertex or two
+degree-three vertices, all others having degree two. Following chains between branch incidences
+gives two closed chains in the first case; in the second it gives either three joining chains, or
+one joining chain and a closed chain at each end. These are exactly the asserted three shapes,
+with loops and length-two cycles included.
+
+
+2    Exact returns and observable decorations
+Fix a labelled core K and all complementary pointers. A degree-two chain is forced: on arrival
+at an internal vertex, its old stored arrow becomes the next extra arrow and the incoming edge
+is stored in reverse. Induction traverses the chain and reverses it. At a branch the same rule
+chooses the old stored arrow and stores the reversed incoming edge. The outdegree conditions
+leave no additional internal choices. A rooted cycle has one observable orientation for length 1
+or 2, and two for larger lengths: on a double edge, exchanging the two edges does not change
+any destination.
+
+Theorem 2. For every fixed labelled core and fixed complementary map, all periods and the
+number of distinct R-orbits are given in Table 1.
+
+Proof. Figure-eight. Let A be the common branch. Apart from the double loop, choose a
+prescribed cycle C1 using its labels (the other is C2 ). At an anchor with u = A and the extra
+arrow starting C1 , the stored arrow at A starts C2 . The forced traversals are C1 , C2 , C1−1 , C2−1 .
+After h = a + b steps, the anchor is restored with both cycle orientations reversed. If both
+reversals are invisible, the state returns at h. No earlier return is possible: branch departures
+
+
+                                                  2
+ Core and degeneration                         Exact period                Orbits
+ Figure-eight, a = b = 1                       1                           1
+ Figure-eight, a, b ≤ 2, not both 1            a+b                         1
+ Figure-eight, max(a, b) ≥ 3                   2(a + b)                    1 + 1a,b≥3
+ Barbell, a, b ≤ 2                             a + b + 2c                  1
+ Barbell, max(a, b) ≥ 3                        2(a + b + 2c)               1 + 1a,b≥3
+ Theta, a = b = c = 1                          2                           1
+ Any other theta                               2(a + b + c)                1 if two paths direct; 2
+                                                                           otherwise
+
+Table 1: All lengths are positive. Parallel edges have no state identities. In the last row, “two
+paths direct” means at least two.
+
+
+alternate between the two cycles, whose first destinations differ unless both are loops. The
+double loop has a single, fixed state.
+    If a cycle has length at least three, choose an internal vertex z on it. In the full 2h block,
+u = z occurs twice, with distinct next neighbours. One prescribed ordered pair (u = z, v =
+chosen neighbour) occurs only once, so the minimal period is 2h. This also rules out a shorter
+period at any other phase. At the prescribed-cycle anchor, states are exactly pairs of observable
+cycle orientations; the return acts by joint reversal. There are two classes exactly when both
+cycles have two orientations, and one otherwise. A state on an internal chain reaches a branch
+and then this anchor, proving exhaustion rather than inferring orbit counts from a state total.
+    Barbell. Choose the branch A by label and let B be the other. Anchor at the extra bridge
+departure from A toward B. The bridge is directed toward B, and the stored outgoing arrow
+at each branch lies on its own cycle; the two cycle orientations are the only choices. The forced
+block is bridge, B-cycle, reverse bridge, A-cycle. It has length h = a + b + 2c, restores the
+bridge anchor and reverses both cycles. That ordered departure from A occurs only at block
+boundaries: its bridge neighbour differs from any neighbour on the A-cycle, also for loops and
+double edges. Thus the exact period is h if both cycle reversals are invisible, and 2h otherwise.
+Joint reversal gives the same decoration count as above. From a cycle one reaches its branch
+and then the bridge; from the bridge one reaches a cycle and subsequently the chosen anchor.
+This covers every state.
+    Theta. Temporarily distinguish the three chains only for the proof. At an active branch their
+roles are outgoing extra, outgoing stored, and incoming, say (i, j, k). Traversing i gives roles
+(k, i, j) at the opposite branch: i reverses and the old outgoing chain there was k. Six traversals
+use i, k, j, i, k, j, once in each direction per chain, and restore the state after 2(a + b + c) steps.
+If a chain has an internal vertex z, one prescribed ordered departure from z occurs exactly once
+in that block, proving minimality even when the other two chains are direct. If all chains are
+direct, their temporary identities must be forgotten: f (A) = B, f (B) = A throughout, and just
+two register states alternate.
+    At a fixed branch, every two traversals rotate the role triple. Three distinguishable chains
+give exactly two cyclic orders. Only direct chains can be identical, since every other chain has
+its own nonempty labelled internal set. Two or three direct chains merge the two orders into
+one multiset order. The oriented roles determine an anchor state, and forced chain traversal
+brings every state to a branch. These order classes are therefore precisely the orbits.
+
+
+
+
+                                                  3
+3    The complete period set
+Corollary 3. At n = 1 the sole state is fixed. For n ≥ 2 the attained periods are
+
+                            {1, . . . , 2n} ∪ {2n + 2, 2n + 4, . . . , 4n − 4},                 (3)
+
+where a reversed range is empty. The maximum is 4n − 4.
+
+Proof. Write s ≤ n for core size. Odd periods beyond 1 come from short-cycle rows: the short
+figure-eight gives 3, and a short barbell has p = 2s + 2 − (a + b) ≤ 2s, with odd value 2s − 1. A
+nonshort figure-eight or nontrivial theta has even period 2s + 2 ≤ 4n − 4 for s ≥ 3. A nonshort
+barbell has a + b ≥ 4 and p = 4s + 4 − 2(a + b) ≤ 4s − 4. The n = 2 cases follow directly from
+the table.
+    Periods 1, 2, 3 arise from a double loop, triple-direct theta, and figure-eight (1, 2). For
+2 ≤ k ≤ n, a barbell (a, b, c) = (1, 1, k − 1) has s = k and period 2k. For 2 ≤ k ≤ n − 1,
+the barbell (1, 2, k − 1) has s = k + 1 and period 2k + 1. These give all values through 2n. A
+theta (1, 1, s − 1), 3 ≤ s ≤ n, realizes half-periods 4, . . . , n + 1. For each 6 ≤ k ≤ 2n − 2, put
+c = max(1, k − n − 1) and r = k − 2c. Then r ≥ 4 and s = r + c − 1 ≤ n: if k ≤ n + 2, s = k − 2;
+otherwise s = n and r = 2n + 2 − k ≥ 4. The barbell (1, r − 1, c) realizes period 2k. Together
+these cover every remaining even value; the small values of n are included by the stated empty
+ranges. Pad any smaller core by inactive fixed loops. For sharpness use the two-loop barbell at
+n = 2, theta (1, 1, 2) at n = 3, and barbell (1, 3, n − 3) for n ≥ 4.
+
+
+4    A rational labelled orbit census
+Let cs,p be the number of orbits onPall cores with a fixed s-element label set and exact period
+p, divided by s!, and let C(t, q) = s,p cs,p ts q p . Thus t is an exponential-generating variable
+for labels and q marks the actual period, not an upper bound. Write (n)s = n!/(n − s)!.
+
+Theorem 4. Set x = tq 2 , Q = x/(1 − x) and D = (1 − x)−2 − (1 + x)2 . Then
+
+                              C8 (t, q) = tq + t2 q 3 + 12 t3 q 4 + 14 tq 4 D,                  (4)
+                                          t2 q 4 (1 + tq)2        t2 q 8 D
+                             CB (t, q) =                2
+                                                              +              ,                  (5)
+                                            2(1 − tq )          4(1 − tq 4 )
+                             CΘ (t, q) = 12 t2 q 2 + 21 t2 q 6 Q + Q2 + 13 Q3 ,
+                                                                               
+                                                                                                (6)
+                               C(t, q) = C8 (t, q) + CB (t, q) + CΘ (t, q).                     (7)
+
+The number o(n, p) of full-carrier orbits of exact period p is
+                                               n
+                                               X
+                                  o(n, p) =          (n)s nn−s [ts q p ]C(t, q).                (8)
+                                               s=1
+
+Moreover
+                   t − t2 + t4 /2 − t5 /12                          5s2 + s + 24
+       C(t, 1) =                           ,         c1 = 1, c2 = 2, cs =         (s ≥ 3),      (9)
+                          (1 − t)3                                        24
+
+where cs = [ts ]C(t, 1). Consequently the total orbit count is the explicit sum ns=1 (n)s nn−s cs .
+                                                                                P
+
+
+                                                         4
+Proof. An ordered list of ℓ internal labels contributes tℓ to a labelled EGF. A rooted undirected
+cycle of length a contributes ua ta−1 , where u1 = u2 = 1 and ua = 1/2 for a ≥ 3: reversal acts
+freely on lists with at least two distinct labels, but not on empty or singleton lists. Multiplying
+by the orbit-decoration number in Theorem 2 gives
+                                                   (
+                                                    1,    a, b ≤ 2,
+                             ua ub (1 + 1a,b≥3 ) =                                             (10)
+                                                    1/2, max(a, b) ≥ 3.
+
+      For a figure-eight, the shared root contributes t and the unordered cycle pair divides
+by 2, freely except for two loops. Add that exception as tq. P              The other short pairs give
+                                                                          1
+ 2   3      3 4
+t q + t q /2. All remaining ordered length pairs contribute 4 max(a,b)≥3 ta+b−1 q 2(a+b) =
+tq 4 D/4, proving (4). For a barbell, distinct branch labels make endpoint interchange free,
+again     giving 1/2; its bridge has c − 1 ordered internal labels. The short pairs contribute
+1P                 a+b+c−1 q a+b+2c , the first term of (5). The other pairs have coefficient 1/4 by (10)
+2      a,b≤2,c≥1 t
+and period 2a + 2b + 4c; summing their geometric series gives the second term.
+      For a theta, choose an unordered pair of distinct branch labels, of weight t2 /2. Relative
+to either fixed ordering of those labels, a nondirect path is a nonempty ordered list of internal
+labels, with weight Q. Three direct paths contribute period weight q 2 . If there are k = 1, 2, 3
+nondirect paths, their unordered collection has weight Qk /k!, and the decoration multipliers are
+1, 2, 2. The common remaining period weight is q 6 . This yields Q + Q2 + Q3 /3 in (6), including
+indistinguishable direct paths.
+      For (8), first choose the core label set S, then a core orbit decoration, and independently
+any map g : V \ S → V . Such a map either follows trees into S or lies in inactive functional
+components. Adding it therefore creates no new active two-core and does not alter any core
+update. Conversely, leaf pruning a full state recovers S uniquely and recovers    n−s all values of g,
+                                                                                n
+which are frozen by Lemma 1. Thus this is a bijection on orbits, with s s!n                extensions per
+EGF coefficient, proving the formula.
+      For completeness, at q = 1 put U = 1 + t + t2 /[2(1 − t)], W = t2 /[2(1 − t)] and Q = t/(1 − t).
+The same cycle weights give
+
+                                            t2 (U 2 + W 2 )             2
+      C8 = 2t (U 2 + W 2 + 1),       CB =                   ,    CΘ = t2 (1 + Q + Q2 + Q3 /3).
+                                                2(1 − t)
+
+Their sum simplifies to (9). Using [tj ](1 − t)−3 = j+2
+                                                            
+                                                          2 , with a negative index contributing
+zero, gives the displayed coefficients, including s = 1, 2 separately.
+
+    The coefficients cs need not be integers: they are normalized labelled counts. Period alone
+loses census information; on five fixed labels, figure-eights (1, 5) and (3, 3) both have period
+12 but respectively one and two orbit decorations. As a consistency identity, not a third
+contribution, [q∂q C(t, q)]q=1 = t(1 + 2t)/(1 − t)4 ; after the same complementP   extension the
+period-weighted counts sum to |Xn | = nn+2 . The standard fixed-iterate count is p|k p o(n, p).
+
+
+5    Evidence scope and limitations
+The arguments above apply to every n and require no finite experiment. An inherited candidate
+check covered all 4,356 states for n = 1, 2, 3, 4; it is separate from this manuscript’s verification
+artifacts. The paper-local verifier has since been executed once initially and twice in a strict
+
+
+                                                    5
+replay pair, each run making 72,476 named predicate checks in 46 classes over the same 4,356
+states. All three 12,501,943-byte outputs agree byte for byte with the adopted canonical. A
+separate full-output semantic reconstruction made 12,375,789 primitive checks; for the identical
+pair its accepted evidence is reused under the unchanged dependency key, not rerun. These
+author-side checks do not constitute independent manuscript review or completion of build and
+visual gates. Two-long-cycle figure-eights first occur at core size 5, two-long-cycle barbells at
+6, and theta cores with three nondirect paths at 5; these families are deductively covered, not
+experimentally exercised here. The conclusions concern exactly (1) on its full carrier. They
+neither establish global priority nor exclude alternative encodings into other finite dynamical
+systems.
+
+
+References
+[1] Josh Berdine, Byron Cook, Dino Distefano, and Peter O’Hearn. Automatic termination
+    proofs for programs with shape-shifting heaps. In Computer Aided Verification (CAV),
+    2006. Primary author prepublication version; Example 8.
+
+[2] Alexander E. Holroyd, Lionel Levine, Karola Mészáros, Yuval Peres, James Propp, and
+    David B. Wilson. Chip-firing and rotor-routing on directed graphs. arXiv:0801.3306, 2008.
+    Primary preprint; Theorem 3.8, Lemma 4.9 and Corollary 4.10.
+
+[3] Alexey Loginov, Thomas Reps, and Mooly Sagiv. Refinement-based verification for possibly-
+    cyclic lists. In Program Analysis and Compilation, Theory and Practice, volume 4444 of
+    Lecture Notes in Computer Science. Springer, 2007. Primary author version; Figure 8 and
+    Section 5.
+
+[4] Zohar Manna and Richard Waldinger. The deductive synthesis of imperative LISP programs.
+    In Proceedings of the Sixth National Conference on Artificial Intelligence (AAAI-87), 1987.
+    Primary proceedings version; reversal programs on printed page 159.
+
+[5] Trung Van Pham. Orbits of rotor-router operation and stationary distribution of random
+    walks on directed graphs. arXiv:1403.5875v8, 2015. Version of 30 June 2015; Theorem 1.
+
+
+
+
+                                               6
+

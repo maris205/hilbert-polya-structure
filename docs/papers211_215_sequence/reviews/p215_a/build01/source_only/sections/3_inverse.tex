@@ -1,0 +1,93 @@
+\section{Every inverse fibre}\label{sec:inverse}
+
+For $n>0$, a target $y$ can have predecessors only if $y_1=0$.
+Assume this condition and list its zero positions as
+\[
+ 1=z_1<\cdots<z_k,\qquad z_{k+1}=n+1.
+\]
+For $1\le j\le k$, define
+\begin{equation}\label{eq:barriers}
+ b_j=\max_{z_j\le i<z_{j+1}}y_i,
+ \qquad B_j=\max_{1\le r\le j}b_r.
+\end{equation}
+
+\begin{theorem}[record-height inverse]\label{thm:inverse}
+The predecessors of $y$ are in bijection with the integer sequences
+\begin{equation}\label{eq:heights}
+ 0\le L_1\le\cdots\le L_k\le q,\qquad L_j\ge B_j.
+\end{equation}
+The source corresponding to such a sequence is
+\begin{equation}\label{eq:reconstruct}
+ x_i=L_j-y_i\qquad(z_j\le i<z_{j+1}).
+\end{equation}
+Every target with $y_1=0$ has a predecessor.
+\end{theorem}
+\begin{proof}
+Suppose $Fx=y$. A strict increase of the running maximum requires
+$x_i=M_i(x)$ and therefore $y_i=0$. The running maximum is consequently
+constant on each displayed block; call its value $L_j$. These values are
+nondecreasing and at most $q$. Nonnegativity of each source coordinate
+forces $L_j\ge b_j$, and~\eqref{eq:reconstruct} is necessary. For a
+nondecreasing sequence, the conditions $L_j\ge b_j$ are equivalent to
+$L_j\ge B_j$.
+
+Conversely, construct $x$ by~\eqref{eq:reconstruct} from admissible
+heights. All entries lie between zero and $q$. At $z_j$ the source value
+is $L_j$, while all earlier entries are at most $L_j$. The other entries
+of the block are less than $L_j$ because their target entries are
+positive. Hence the actual running maximum throughout that block is
+$L_j$, proving $Fx=y$. The source's running maxima recover the heights,
+which proves uniqueness. Finally, $L_j=q$ for all $j$ is admissible.
+\end{proof}
+
+To evaluate the fibre, put
+\begin{equation}\label{eq:upper}
+ c_i=q-B_{k+1-i}\quad(1\le i\le k).
+\end{equation}
+These are nonnegative and nondecreasing. Reversing and complementing the
+heights, $a_i=q-L_{k+1-i}$, gives precisely the sequences
+$0\le a_1\le\cdots\le a_k$ with $a_i\le c_i$.
+This is the classical upper-barrier problem. The following evaluation is
+included with its first-violation proof so that no enumeration oracle is
+needed. We use $\binom{u}{v}=0$ for integers $v>u\ge0$.
+
+\begin{theorem}[evaluated fibre recurrence]\label{thm:count}
+Set $A_0=1$ and, for $1\le m\le k$, compute
+\begin{equation}\label{eq:count}
+ A_m=\binom{c_m+m}{m}
+       -\sum_{i=1}^{m-1}A_{i-1}
+                   \binom{c_m-c_i+m-i}{m-i+1}.
+\end{equation}
+Then $|F^{-1}(y)|=A_k$.
+\end{theorem}
+\begin{proof}
+There are $\binom{c_m+m}{m}$ nondecreasing length-$m$ sequences between
+zero and $c_m$. An invalid one has a unique first index $i$ at which
+$a_i>c_i$, and $i<m$. Its prefix of length $i-1$ is one of the
+$A_{i-1}$ valid prefixes. Its remaining $m-i+1$ entries form an arbitrary
+nondecreasing sequence in $\{c_i+1,\ldots,c_m\}$, counted by the
+binomial coefficient in the summand.
+
+For $i>1$, the prefix is bounded above by $c_{i-1}\le c_i$; for $i=1$
+it is empty. Thus every such prefix and suffix concatenate
+nondecreasingly and have first violation exactly $i$. Subtracting these
+disjoint invalid classes proves~\eqref{eq:count} by induction on $m$.
+Theorem~\ref{thm:inverse} then identifies $A_k$ with the desired fibre.
+\end{proof}
+
+\begin{corollary}[image and unique maximum fibre]\label{cor:extreme}
+For $n>0$, the image is $\{y\in\X_{n,q}:y_1=0\}$ and has size
+$(q+1)^{n-1}$. If $n,q>0$, the unique largest fibre is at $\zero$,
+with size $\binom{q+n}{n}$. If $n=0$ or $q=0$, the unique fibre has
+size one.
+\end{corollary}
+\begin{proof}
+The image statement follows from Theorem~\ref{thm:inverse}. At zero
+there are $n$ zero positions and all barriers vanish. Its predecessors
+are all nondecreasing height sequences in $\{0,\ldots,q\}$, giving
+$\binom{q+n}{n}$ choices. A nonzero image target has $k<n$ zero
+positions, so it has at most $\binom{q+k}{k}$ predecessors. For $q>0$
+this is strictly smaller than $\binom{q+n}{n}$, since increasing $k$ by
+one multiplies that quantity by $(q+k+1)/(k+1)>1$. Targets outside the
+image have no predecessors. The remaining cases have singleton carriers.
+\end{proof}

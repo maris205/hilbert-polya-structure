@@ -1,0 +1,161 @@
+{
+  "schema": "p212-pair-record-receiver-source-deltas-v1",
+  "python": {
+    "source": "docs/papers211_215_sequence/qa/p212_author_initial_runtime_reception01/inspect_production.py",
+    "target": "inspect_production.py",
+    "ordered_replacements": [
+      {
+        "before": "\"\"\"Root P212 full initial execution reception;",
+        "after": "\"\"\"Author SOURCE_ONLY proposal for root P212 strict-pair execution reception;"
+      },
+      {
+        "before": "OWN = QA/'p212_author_initial_runtime_reception01'",
+        "after": "OWN = QA/'p212_author_pair_runtime_reception01'"
+      },
+      {
+        "before": "OLD_SOURCE = QA/'p211_runtime_root_reception/inspect_production.py'",
+        "after": "OLD_SOURCE = QA/'p212_author_initial_runtime_reception01/inspect_production.py'"
+      },
+      {
+        "before": "need(binding_path == QA/'p212_author_initial_binding01/BINDING.json' and capture_path == binding_path.parent/'PRODUCTION_TOOL_INVOCATION.json', 'exact initial original binding/capture roles')",
+        "after": "need(binding_path == QA/'p212_author_pair_binding01/BINDING.json' and capture_path == binding_path.parent/'PRODUCTION_TOOL_INVOCATION.json', 'exact pair original binding/capture roles')"
+      },
+      {
+        "before": "need(mode == 'initial' and attempt == QA/'root_replays/p212_author_initial_01', 'exact initial-only scope; strict pair requires separate adaptation')",
+        "after": "need(mode == 'pair' and attempt == QA/'root_replays/p212_author_pair_01', 'exact separately bound strict-pair scope')\nneed(binding['root_authority_decision'] == 'AUTHORIZE_ONE_P212_AUTHOR_STRICT_PAIR_NO_ADOPTION', 'new pair authority, never initial reuse')\nneed(binding['canonical']['path'] == str(ROOT/'papers/212-closed-pointer-orbits/CANONICAL.json'), 'fixed accepted canonical path')\ncanonical_before = raw(binding['canonical']['path'])\nneed(identity(canonical_before) == {'bytes':12501943,'sha256':'1a32be6bb36dd8b4b27b9891a42876fe235bf2555a3dd9f4e36195a6ad72676c'}, 'accepted actual initial canonical content')\ntemplate = doc(PREP/'PAIR.pending.json')\nmutable_fields = {'approved','attempt','reviewed_static_source_import_closure','reviewed_schema_and_parameters','reviewed_compile_exec_interface','timeouts','canonical','runtime_lock','provenance_inputs','pending_obligations'}\nneed(set(binding) == set(template) | {'root_authority_decision','root_execution_interface','root_capture'}, 'complete known pair binding fields')\nneed({k:v for k,v in binding.items() if k in template and k not in mutable_fields} == {k:v for k,v in template.items() if k not in mutable_fields}, 'entire unchanged source/schema/import/parameter contract')\nneed(all(binding[k] is True for k in ('reviewed_static_source_import_closure','reviewed_schema_and_parameters','reviewed_compile_exec_interface')), 'actual root source/interface gates')"
+      },
+      {
+        "before": "need(native['timeout_seconds'] == deadline, 'exact declared native deadline')",
+        "after": "need(native['timeout_seconds'] == deadline, 'exact declared native deadline')\n        need(native['cwd'] == str(capsule if stage == 'recorder' and label.startswith('03_verify_') else ROOT), 'exact native command cwd')"
+      },
+      {
+        "before": "need([row['label'] for row in recorder['commands']] == labels, 'exact ordered recorder native census')",
+        "after": "need([row['label'] for row in recorder['commands']] == labels, 'exact ordered recorder native census')\ncomparison_inputs = {\n    '04_canonical_1': [str(attempt/'recorder/commands/03_verify_01/stdout.raw'),binding['canonical']['path']],\n    '04_canonical_2': [str(attempt/'recorder/commands/03_verify_02/stdout.raw'),binding['canonical']['path']],\n    '05_pair': [str(attempt/'recorder/commands/03_verify_01/stdout.raw'),str(attempt/'recorder/commands/03_verify_02/stdout.raw')],\n}\nfor label, operands in comparison_inputs.items():\n    comparison = doc(attempt/'recorder/commands'/label/'RECEIPT.json')\n    need(comparison['argv'] == ['/usr/bin/cmp','--'] + operands and comparison['cwd'] == str(ROOT), 'exact three real scientific raw-cmp contracts')"
+      },
+      {
+        "before": "binding['root_capture']['controller']['path']})",
+        "after": "binding['root_capture']['controller']['path'],binding['canonical']['path']})"
+      },
+      {
+        "before": "'CAPTURED_INITIAL_CANDIDATE_PENDING_COMPLETE_RECEPTION'",
+        "after": "'CAPTURED_STRICT_PAIR_PENDING_COMPLETE_RECEPTION'",
+        "count": 2
+      },
+      {
+        "before": "not entry_result['semantic_reception_completed']",
+        "after": "not entry_result['complete_pair_reception_completed']"
+      },
+      {
+        "before": "need(len(entry_result['commands'])==1,'sole root native outer command')",
+        "after": "need(len(entry_result['commands'])==1 and entry_result['commands'][0]['label']=='AUTHOR_PAIR','sole root native pair outer command')"
+      },
+      {
+        "before": "commands/AUTHOR_INITIAL",
+        "after": "commands/AUTHOR_PAIR",
+        "count": 5
+      },
+      {
+        "before": "if 'session_id' in capture['result']:\n    need(capture['polls'][0]['request']['session_id']==capture['result']['session_id'] and 'exit_code' not in capture['result'],'genuine running-first/poll relation')",
+        "after": "for index, poll in enumerate(capture.get('polls', [])):\n    need(parts[index].get('session_id') and 'exit_code' not in parts[index] and poll['request']['session_id'] == parts[index]['session_id'], 'entire genuine running/poll session chain')"
+      },
+      {
+        "before": "need(not os.path.lexists(binding['canonical']['path']) and not os.path.lexists(ROOT/'papers/212-closed-pointer-orbits/canonical.stdout.json'),'both canonical names remain absent')",
+        "after": "need(raw(binding['canonical']['path']) == canonical_before and not os.path.lexists(ROOT/'papers/212-closed-pointer-orbits/canonical.stdout.json'),'accepted canonical unchanged and historical alias remains absent')"
+      },
+      {
+        "before": "'PASS_ROOT_COMPLETE_P212_INITIAL_PRODUCTION_RECORDS_PENDING_SEMANTICS'",
+        "after": "'PASS_ROOT_COMPLETE_P212_PAIR_PRODUCTION_RECORDS_PENDING_SEMANTIC_REUSE'"
+      },
+      {
+        "before": "accepted P211 inspect_production.py. No submitted source is executed.",
+        "after": "accepted P212 initial inspect_production.py (itself P211-derived). No submitted source is executed."
+      },
+      {
+        "before": "root_entry = binding_path.parent/'entry01'\nentry_rows = manifest(root_entry)",
+        "after": "root_entry = binding_path.parent/'entry01'\nneed(set(binding['root_capture']) == {'entry','timeout_seconds','environment','controller','outer_argv_without_binding_digest'}, 'complete root capture binding fields')\nneed(binding['root_capture']['entry'] == str(root_entry) and binding['root_capture']['environment'] == ENV and binding['root_capture']['timeout_seconds'] == 1200 and binding['root_capture']['controller']['path'] == str(binding_path.parent/'run.py'), 'exact separately bound root controller capture')\nneed(binding['root_capture']['outer_argv_without_binding_digest'] == argv('outer')[:9] + argv('outer')[10:], 'complete bound outer startup vector excluding only digest')\nentry_rows = manifest(root_entry)"
+      }
+    ]
+  },
+  "javascript": {
+    "source": "docs/papers211_215_sequence/qa/p212_author_initial_runtime_reception01/supplement.js",
+    "target": "supplement.js",
+    "ordered_replacements": [
+      {
+        "before": "// Root documentary complement to the already successful full runtime receiver.",
+        "after": "// Author SOURCE_ONLY proposal: pair documentary complement, never a future PASS."
+      },
+      {
+        "before": "const OWN=QA+'p212_author_initial_runtime_reception01',B=QA+'p212_author_initial_binding01';",
+        "after": "const OWN=QA+'p212_author_pair_runtime_reception01',B=QA+'p212_author_pair_binding01';"
+      },
+      {
+        "before": "const RUN=QA+'root_replays/p212_author_initial_01'",
+        "after": "const RUN=QA+'root_replays/p212_author_pair_01'"
+      },
+      {
+        "before": "'PASS_ROOT_COMPLETE_P212_INITIAL_PRODUCTION_RECORDS_PENDING_SEMANTICS'",
+        "after": "'PASS_ROOT_COMPLETE_P212_PAIR_PRODUCTION_RECORDS_PENDING_SEMANTIC_REUSE'"
+      },
+      {
+        "before": "same(r.checks,699504,'full original gate not this supplement');",
+        "after": "need(Number.isSafeInteger(r.checks)&&r.checks>0,'actual full receiver check count, not a guessed future count');\nsame(r.mode,'pair','separate pair mode');same(r.actual_author_invocations_received,2,'two actual producer records');same(r.actual_raw_comparisons_received,3,'three actual scientific cmp records');same(r.native_commands,11,'eleven actual adapter commands');\nsame(Object.keys(r).sort(),['status','mode','binding','attempt','checks','actual_read_paths','complete_payloads','complete_manifest','stage_payloads','native_commands','actual_author_invocations_received','actual_raw_comparisons_received','raw_stdout','root_scientific_producer_invocations_in_this_audit','scope'].sort(),'whole main receiver result field census');"
+      },
+      {
+        "before": "same(Object.keys(previous.files).length,250,'whole prior byte key');",
+        "after": "same(Object.keys(previous.files).length,r.actual_read_paths,'whole actual prior byte key, count from its complete result');"
+      },
+      {
+        "before": "commands/AUTHOR_INITIAL",
+        "after": "commands/AUTHOR_PAIR"
+      },
+      {
+        "before": "child01:obj(RUN+'/recorder/commands/03_verify_01/RECEIPT.json')};",
+        "after": "child01:obj(RUN+'/recorder/commands/03_verify_01/RECEIPT.json'),\n  child02:obj(RUN+'/recorder/commands/03_verify_02/RECEIPT.json')};"
+      },
+      {
+        "before": "const expectedCounts={outer:14,launcher:14,recorder:35,child01:10};",
+        "after": "const expectedCounts={outer:14,launcher:14,recorder:51,child01:10,child02:10};\nsame(r.stage_payloads,expectedCounts,'source-derived pair artifact counts, not prewritten observed results');"
+      },
+      {
+        "before": "same(Object.keys(n).filter(k=>k!=='label').sort(),nativeKeys.slice().sort(),'entire native field census');",
+        "after": "same(Object.keys(n).filter(k=>k!=='label').sort(),nativeKeys.slice().sort(),'entire native field census');\n  const g=n.process_group_settlement;\n  same(Object.keys(g).sort(),['owned_pgid','owned_sid','signals','remaining_members','quiescent','native_returncode'].sort(),'entire owned-group settlement fields');\n  same(g.quiescent,true,'settled group');same(g.signals,[],'no settlement signal in success');same(g.native_returncode,0,'actual group native zero');same(g.owned_pgid,n.pid,'owned pgid');same(g.owned_sid,n.pid,'owned sid');\n  for(const m of g.remaining_members){same(Object.keys(m).sort(),['pid','state','ppid','pgid','sid','start_ticks'].sort(),'whole retained member fields');same(m.state,'Z','only retained zombie allowed');same(m.pgid,n.pid,'member owned group');same(m.sid,n.pid,'member owned session');for(const k of ['pid','ppid','pgid','sid','start_ticks'])need(Number.isSafeInteger(m[k])&&m[k]>=0,'typed retained member identity');}"
+      },
+      {
+        "before": "for(const stage of ['outer','launcher','recorder','child01'])",
+        "after": "for(const stage of ['outer','launcher','recorder','child01','child02'])"
+      },
+      {
+        "before": "same(s.output,{actual_raw_comparisons:0,canonical_policy:'initial stdout requires separate root acceptance/publication; pair never adopts or replaces canonical',mode:'initial',raw_stdout:r.raw_stdout},'whole initial output policy');",
+        "after": "same(s.output,{actual_raw_comparisons:3,canonical_policy:'initial stdout requires separate root acceptance/publication; pair never adopts or replaces canonical',mode:'pair',raw_stdout:r.raw_stdout},'whole pair output policy');"
+      },
+      {
+        "before": "same(nativeCount,8,'seven runtime native plus separate root native');",
+        "after": "same(nativeCount,12,'eleven runtime native plus separate root native');\nconst entryResult=obj(B+'/entry01/RESULT.json');\nsame(Object.keys(entryResult).sort(),['status','errors','commands','attempt','canonical_adopted','complete_pair_reception_completed','scope'].sort(),'whole separate root capture result fields');\nsame(entryResult.scope,'Root outer native capture only, not scientific-output acceptance or another producer invocation.','root capture not full acceptance');\nsame(entryResult.complete_pair_reception_completed,false,'actual root capture leaves full reception pending');\nsame(entryResult.commands[0].label,'AUTHOR_PAIR','separate actual root pair label');"
+      },
+      {
+        "before": "const prepNative=obj(B+'/BINDING_NATIVE01.json'),parts=[prepNative.result,...prepNative.polls.map(x=>x.result)];\nsame(parts.at(-1).exit_code,0,'actual binding preparer completed');\nsame(prepNative.polls[0].request.session_id,parts[0].session_id,'actual preparer yielded session');\nsame(JSON.parse(parts.map(x=>x.output).join('')),obj(B+'/RESULT.json'),'whole actual preparer tool output versus saved result');",
+        "after": "function received(p){\n  const native=obj(p),parts=[native.result];\n  for(const poll of native.polls||[]){need(parts.at(-1).session_id&&!Object.hasOwn(parts.at(-1),'exit_code'),'actual intermediate running state');same(poll.request.session_id,parts.at(-1).session_id,'complete actual native session chain');parts.push(poll.result);}\n  same(parts.at(-1).exit_code,0,'actual complete native zero');need(!parts.at(-1).session_id,'no active final native session');\n  return {native,value:JSON.parse(parts.map(x=>x.output).join(''))};\n}\nconst prepReceived=received(B+'/BINDING_NATIVE01.json'),prepNative=prepReceived.native,prepResult=obj(B+'/RESULT.json');\nsame(prepReceived.value,prepResult,'whole actual preparer tool output versus saved result');"
+      },
+      {
+        "before": "docs/papers211_215_sequence/qa/p212_author_initial_binding01/prepare_binding.js",
+        "after": "docs/papers211_215_sequence/qa/p212_author_pair_binding01/prepare_binding.js"
+      },
+      {
+        "before": "same(Object.keys(currentPrep).length,265,'whole binding input key');",
+        "after": "need(Number.isSafeInteger(prepResult.input_paths)&&prepResult.input_paths>0,'actual positive binding input count');\nsame(Object.keys(currentPrep).length,prepResult.input_paths,'whole actual binding input key');"
+      },
+      {
+        "before": "const t=obj(OWN+'/ROOT_NATIVE02.json'),tparts=[t.result,...(t.polls||[]).map(x=>x.result)];\nsame(tparts.at(-1).exit_code,0,'actual full receiver tool completed');\nsame(JSON.parse(tparts.map(x=>x.output).join('')),r,'whole actual full receiver output');",
+        "after": "const fullReceived=received(OWN+'/ROOT_NATIVE01.json'),t=fullReceived.native;\nsame(fullReceived.value,r,'whole actual full receiver output');\nsame(t.request.workdir,ROOT,'actual receiver product cwd');\nsame(t.request.cmd,'/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B '+OWN+'/inspect_production.py '+B+'/BINDING.json '+r.binding.sha256+' '+B+'/PRODUCTION_TOOL_INVOCATION.json','exact full receiver product/source binding');"
+      },
+      {
+        "before": "'PASS_ROOT_P212_INITIAL_RECORD_SUPPLEMENT_PENDING_SEMANTICS'",
+        "after": "'PASS_ROOT_P212_PAIR_RECORD_SUPPLEMENT_PENDING_SEMANTIC_REUSE'"
+      },
+      {
+        "before": "native_commands:8,",
+        "after": "native_commands:12,"
+      }
+    ]
+  }
+}

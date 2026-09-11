@@ -1,0 +1,13 @@
+{
+  "request": {
+    "cmd": "node -e 'const fs=require(\"fs\"),c=require(\"crypto\"),d=\"docs/papers211_215_sequence/qa/p212_trusted_product_source_root01/\";const hash=b=>c.createHash(\"sha256\").update(b).digest(\"hex\");let checks=0;const need=(x,m)=>{checks++;if(!x)throw Error(m);};const raw=fs.readFileSync(d+\"RESULT.json\"),r=JSON.parse(raw),n=JSON.parse(fs.readFileSync(d+\"RUN_NATIVE.json\"));need(n.result.exit_code===0&&raw.equals(Buffer.from(n.result.output)),\"raw native\");for(const k of r.keys){const a=fs.lstatSync(k.path,{bigint:true}),b=fs.readFileSync(k.path),z=fs.lstatSync(k.path,{bigint:true});need(b.length===k.bytes&&hash(b)===k.sha256,\"whole key\");for(const f of Object.keys(k.metadata))need(String(a[f])===k.metadata[f]&&a[f]===z[f],\"full endpoint metadata\");}const lists=[\"docs/papers211_215_sequence/qa/p212_trusted_product_source_delta01/\",\"docs/papers211_215_sequence/qa/p212_trusted_product_source_audit01/\"];for(const q of lists)for(const line of fs.readFileSync(q+\"SHA256SUMS\",\"utf8\").trimEnd().split(\"\\n\")){const m=/^([0-9a-f]{64})  (.+)$/.exec(line);need(m&&hash(fs.readFileSync(q+m[2]))===m[1],\"entire package at closing\");}console.log(JSON.stringify({status:\"ROOT_SOURCE_CLOSING_PASS_NOT_RUNTIME\",checks,complete_keys_rechecked:r.keys.length,raw_result_native_equal:true,author_payloads:33,audit_payloads:18,p212_runtime_or_query:false}));'",
+    "max_output_tokens": 2000
+  },
+  "result": {
+    "chunk_id": "284c6e",
+    "wall_time_seconds": 0.00000495,
+    "exit_code": 0,
+    "original_token_count": 49,
+    "output": "{\"status\":\"ROOT_SOURCE_CLOSING_PASS_NOT_RUNTIME\",\"checks\":1240,\"complete_keys_rechecked\":108,\"raw_result_native_equal\":true,\"author_payloads\":33,\"audit_payloads\":18,\"p212_runtime_or_query\":false}\n"
+  }
+}

@@ -1,0 +1,127 @@
+--- original_source12/verify.py	2026-09-11 15:54:15.988866039 +0800
++++ verify.proposed.py.txt	2026-09-11 16:03:19.872089286 +0800
+@@ -6,8 +6,6 @@
+ recurrences. No author/A import, canonical input, or inherited pilot.
+ """
+ import itertools
+-import json
+-import math
+ import sys
+ 
+ ROWS = ('figure_eight_double_loop', 'figure_eight_short_nontrivial',
+@@ -18,8 +16,51 @@
+ CHECKS = []
+ 
+ 
++def wire(value):
++    """Canonical compact JSON for the finite supported value-tree domain."""
++    kind = type(value)
++    if kind is bool:
++        return 'true' if value else 'false'
++    if kind is int:
++        return str(value)
++    if kind is str:
++        escaped = {'"': '\\"', '\\': '\\\\', '\b': '\\b', '\t': '\\t',
++                   '\n': '\\n', '\f': '\\f', '\r': '\\r'}
++        parts = ['"']
++        for char in value:
++            code = ord(char)
++            if code > 127:
++                raise ValueError('wire requires ASCII strings')
++            if char in escaped:
++                parts.append(escaped[char])
++            elif code < 32 or code == 127:
++                parts.append('\\u%04x' % code)
++            else:
++                parts.append(char)
++        parts.append('"')
++        return ''.join(parts)
++    if kind is list or kind is tuple:
++        return '[' + ','.join(wire(item) for item in value) + ']'
++    if kind is dict:
++        if any(type(key) is not str for key in value):
++            raise TypeError('wire requires string dictionary keys')
++        return '{' + ','.join(wire(key) + ':' + wire(value[key])
++                              for key in sorted(value)) + '}'
++    raise TypeError('unsupported wire value type')
++
++
++def factorial(value):
++    """Integer factorial on exact nonnegative integers."""
++    if type(value) is not int or value < 0:
++        raise ValueError('factorial requires a nonnegative integer')
++    result = 1
++    for factor in range(2, value + 1):
++        result *= factor
++    return result
++
++
+ def check(name, scope, observed, expected):
+-    ok = json.dumps(observed, sort_keys=True) == json.dumps(expected, sort_keys=True)
++    ok = wire(observed) == wire(expected)
+     CHECKS.append(dict(id=len(CHECKS), name=name, scope=scope,
+                        observed=observed, expected=expected, passed=ok))
+ 
+@@ -344,7 +385,7 @@
+     contributions = []
+     expected_poly24 = {}
+     for s in range(1,n+1):
+-        multiplier = math.factorial(n)//math.factorial(n-s)*n**(n-s)
++        multiplier = factorial(n)//factorial(n-s)*n**(n-s)
+         terms = {}
+         for family in FAMILIES:
+             for (size,p),c in pieces[family].items():
+@@ -354,7 +395,7 @@
+         contributions.append(dict(s=s,multiplier=multiplier,terms24=poly(terms)))
+     check('full_census',str(n),poly({p:24*c for p,c in observed_poly.items()}),poly(expected_poly24))
+     for family in FAMILIES:
+-        expected_family = {p:c*math.factorial(n) for (s,p),c in pieces[family].items() if s==n}
++        expected_family = {p:c*factorial(n) for (s,p),c in pieces[family].items() if s==n}
+         check('pure_family_series',f'{n}/{family}',poly({p:24*c for p,c in pure[family].items()}),poly(expected_family))
+     period_set = [1] if n==1 else sorted(set(range(1,2*n+1)) | set(range(2*n+2,4*n-3,2)))
+     check('attained_period_set',str(n),sorted(observed_poly),period_set)
+@@ -428,7 +469,7 @@
+             predicates=len(CHECKS),failure_ids=failures,passed=not failures),
+         exclusions=['finite evidence is not an all-n proof','first-size 5/6/5 families are unexecuted',
+                     'no external review or global novelty certificate','no build or lifecycle completion'])
+-    sys.stdout.write(json.dumps(result,sort_keys=True,separators=(',',':'),ensure_ascii=True,allow_nan=False)+'\n')
++    sys.stdout.write(wire(result)+'\n')
+     return 1 if failures else 0
+ 
+ 
+--- original_source12/OUTPUT_PLAN.md	2026-09-11 15:56:25.529675096 +0800
++++ OUTPUT_PLAN.proposed.md	2026-09-11 16:04:05.936346599 +0800
+@@ -12,9 +12,13 @@
+ Root must separately bind the actual interpreter, flags, ordered argv, cwd,
+ stdin policy, cleared/declared environment, startup/import/configuration and
+ native extension/loader closure, timeout and owned-process handling, and
+-controller/recorder/capture paths. The only direct imports are itertools,
+-json, math and sys; this list does not itself establish their runtime closure.
+-No scientific execution, import, compilation or AST parse has occurred here.
++controller/recorder/capture paths. The only proposed direct imports are
++itertools and sys. This documentary source statement does not establish whether
++itertools is builtin on the later bound interpreter or prove any runtime closure.
++JSON output/comparisons use the source-local deterministic supported-type wire
++encoder, and factorial uses exact integer multiplication. Their domain and
++source-level equivalence proof are in the additive p212_b_builtin_proposal01
++package. No scientific execution, import, compilation or AST parse has occurred.
+ 
+ The observed side applies the inverse by base-n digit replacement and obtains
+ the full permutation components by disjoint-set union. An actual backward
+--- original_source12/OUTPUT_SCHEMA.md	2026-09-11 15:56:25.529675096 +0800
++++ OUTPUT_SCHEMA.proposed.md	2026-09-11 16:04:05.948346666 +0800
+@@ -5,6 +5,14 @@
+ completed construction. No floats, nulls, paths, hashes or timestamps occur.
+ Integers, Booleans, strings, objects and arrays are distinct types.
+ Internal tuples become JSON arrays. Zero-based labels are 0..n-1.
++The source-local wire encoder supports finite acyclic trees of exact bool,
++int, ASCII str, list, tuple and dict objects; dictionary keys must be exact
++ASCII strings. It rejects other types rather than silently coercing them.
++Strings escape quotation marks, backslashes and control characters; DEL is
++encoded as a lowercase four-digit Unicode escape. Lists and tuples share the
++same array encoding, while Boolean and integer tokens stay distinct. Dictionary
++keys are sorted. This dependency-only change leaves every field and wire byte
++on the declared generated domain unchanged; it is not a new output schema.
+ 
+ `State` is `[u,v,f(0),...,f(n-1)]`. Its ID is the base-n little-endian
+ integer sum of coordinate i times n^i. The n=1 sole state has ID zero.

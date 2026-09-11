@@ -1,0 +1,111 @@
+// SOURCE ONLY: not imported, tested, or applied to captured bodies.
+// Pure bytes -> literal DATA. No fs/process, address invocation or path following.
+import {createHash} from 'node:crypto';
+const IDS=['BASH','ENV','KPSEWHICH','LOADER_CANDIDATE','LIBC_CANDIDATE','TINFO_CANDIDATE','LOADER_CACHE'];
+const PATHS=['/bin/bash','/usr/bin/env','/usr/bin/kpsewhich','/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2','/usr/lib/x86_64-linux-gnu/libc.so.6','/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3','/etc/ld.so.cache'];
+const ROLES=['executable','executable','executable','loader','loader','loader','configuration'];
+const TAGS=new Map([[0,'NULL'],[1,'NEEDED'],[5,'STRTAB'],[10,'STRSZ'],[12,'INIT'],[13,'FINI'],[14,'SONAME'],[15,'RPATH'],[25,'INIT_ARRAY'],[26,'FINI_ARRAY'],[27,'INIT_ARRAYSZ'],[28,'FINI_ARRAYSZ'],[29,'RUNPATH'],[30,'FLAGS'],[32,'PREINIT_ARRAY'],[33,'PREINIT_ARRAYSZ'],[0x6ffffefa,'CONFIG'],[0x6ffffefb,'DEPAUDIT'],[0x6ffffefc,'AUDIT'],[0x6ffffffb,'FLAGS_1'],[0x7ffffffd,'AUXILIARY'],[0x7fffffff,'FILTER']]);
+const STRING_TAGS=new Set([1,14,15,29,0x6ffffefa,0x6ffffefb,0x6ffffefc,0x7ffffffd,0x7fffffff]);
+// These are recorded descriptors, not claimed relocation/symbol/version decoding.
+const DESCRIPTOR_TAGS=new Set([2,3,4,6,7,8,9,11,16,17,18,19,20,21,22,23,24,34,35,36,37,0x6ffffef5,0x6ffffff0,0x6ffffff9,0x6ffffffa,0x6ffffffc,0x6ffffffd,0x6ffffffe,0x6fffffff]);
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const pin=b=>({bytes:b.length,sha256:sha(b)});
+const uint=n=>Number.isSafeInteger(n)&&n>=0&&!Object.is(n,-0);
+const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+const need=(b,code,where=null)=>{if(!b){const e=new Error(code);e.where=where;throw e;}};
+const keys=(x,n)=>need(object(x)&&JSON.stringify(Object.keys(x).sort())===JSON.stringify([...n].sort()),'INPUT_EXACT_FIELDS');
+function pinned(p,b){keys(p,['bytes','sha256']);need(uint(p.bytes)&&typeof p.sha256==='string'&&/^[0-9a-f]{64}$/.test(p.sha256)&&p.bytes===b.length&&p.sha256===sha(b),'BODY_PIN_MISMATCH');}
+function reference(r){keys(r,['path','pin']);need(typeof r.path==='string'&&r.path.startsWith('/root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/'),'EXTERNAL_RECEIPT_DATA');keys(r.pin,['bytes','sha256']);need(uint(r.pin.bytes)&&r.pin.bytes>0&&typeof r.pin.sha256==='string'&&/^[0-9a-f]{64}$/.test(r.pin.sha256),'EXTERNAL_RECEIPT_PIN');}
+function view(id,b){
+ const body_pin=pin(b);
+ const range=(o,n)=>{need(uint(o)&&uint(n)&&o<=b.length&&n<=b.length-o,'HOLD_OUT_OF_BODY_SPAN',{id,offset:o,bytes:n,body_pin});return b.subarray(o,o+n);};
+ const span=(o,n)=>({id,body_pin,offset:o,bytes:n,sha256:sha(range(o,n))});
+ const U=(o,n,le=true)=>{const z=range(o,n);let v=0n;for(let i=0;i<n;i++)v=(v<<8n)|BigInt(z[le?n-1-i:i]);return v;};
+ const N=(o,n,le=true)=>{const v=U(o,n,le);need(v<=BigInt(Number.MAX_SAFE_INTEGER),'HOLD_INTEGER_ADDRESS_NOT_SAFE',span(o,n));return Number(v);};
+ const str=(o,end)=>{range(o,0);need(uint(end)&&end<=b.length&&o<end,'HOLD_STRING_EXTENT',{id,offset:o,end});const z=b.indexOf(0,o);need(z>=o&&z<end,'HOLD_UNTERMINATED_STRING',{id,offset:o,end,body_pin});const raw=range(o,z-o);need(raw.every(c=>c>=32&&c<=126),'HOLD_NON_ASCII_NAME',span(o,z-o+1));return {literal:raw.toString('ascii'),span:span(o,z-o+1)};};
+ return {id,b,body_pin,range,span,U,N,str};
+}
+function elf(v,out,state){
+ const {b,range,span,U,N,str}=v;range(0,16);
+ out.identification={span:span(0,16),magic:b.subarray(0,4).toString('hex'),class:b[4],byte_order:b[5],version:b[6],osabi:b[7],abi_version:b[8]};
+ need(b.subarray(0,4).equals(Buffer.from([127,69,76,70])),'HOLD_NOT_ELF',span(0,4));
+ need(b[4]===2&&b[5]===1,'HOLD_UNSUPPORTED_ELF_CLASS_OR_ENDIAN',span(4,2));range(0,64);
+ out.header={span:span(0,64),type:N(16,2),machine:N(18,2),version:N(20,4),entry:U(24,8).toString(),phoff:N(32,8),shoff:U(40,8).toString(),flags:N(48,4),ehsize:N(52,2),phentsize:N(54,2),phnum:N(56,2),shentsize:N(58,2),shnum:N(60,2),shstrndx:N(62,2)};
+ const h=out.header;need(b[6]===1&&h.version===1&&h.machine===62&&[2,3].includes(h.type)&&[0,3].includes(b[7])&&b[8]===0,'HOLD_UNSUPPORTED_ELF_ABI',h.span);if(h.flags!==0)state.hold('HOLD_ELF_HEADER_FLAGS',span(48,4));
+ need(h.ehsize===64&&h.phentsize===56&&h.phnum>0&&h.phnum!==65535,'HOLD_UNSUPPORTED_PHDR_OR_EXTENDED_COUNT',h.span);range(h.phoff,h.phnum*56);
+ out.program_headers=[];const load=[],dynamic=[],interp=[];
+ for(let i=0;i<h.phnum;i++){
+  const o=h.phoff+56*i,p={index:i,span:span(o,56),type:N(o,4),flags:N(o+4,4),offset:N(o+8,8),vaddr:U(o+16,8).toString(),paddr:U(o+24,8).toString(),filesz:N(o+32,8),memsz:U(o+40,8).toString(),align:U(o+48,8).toString()};out.program_headers.push(p);range(p.offset,p.filesz);
+  if(p.type===1){need(BigInt(p.filesz)<=BigInt(p.memsz),'HOLD_LOAD_FILESIZE_GT_MEMORY',p.span);const a=BigInt(p.align);need(a<=1n||((a&(a-1n))===0n&&BigInt(p.offset)%a===BigInt(p.vaddr)%a),'HOLD_LOAD_ALIGNMENT',p.span);load.push(p);}
+  else if(p.type===2)dynamic.push(p);else if(p.type===3)interp.push(p);
+  else if(![0,4,6,7,0x6474e550,0x6474e551,0x6474e552,0x6474e553].includes(p.type))state.hold('HOLD_UNCLASSIFIED_PROGRAM_HEADER',p.span);
+ }
+ function fileAt(addr,size,origin){const a=BigInt(addr),n=BigInt(size);need(a>=0n&&n>=0n,'HOLD_NEGATIVE_ADDRESS',origin);const matches=load.filter(p=>a>=BigInt(p.vaddr)&&a+n<=BigInt(p.vaddr)+BigInt(p.filesz));need(matches.length===1,'HOLD_UNBACKED_OR_AMBIGUOUS_VADDR',origin);const x=BigInt(matches[0].offset)+a-BigInt(matches[0].vaddr);need(x<=BigInt(Number.MAX_SAFE_INTEGER),'HOLD_OFFSET_OVERFLOW',origin);range(Number(x),size);return Number(x);}
+ need(interp.length<=1&&dynamic.length<=1,'HOLD_MULTIPLE_INTERP_OR_DYNAMIC',h.span);out.interpreter=null;
+ if(interp.length){const p=interp[0],s=str(p.offset,p.offset+p.filesz);need(s.span.bytes===p.filesz&&s.literal.startsWith('/'),'HOLD_INTERP_NOT_EXACT_ABSOLUTE_CSTRING',p.span);out.interpreter={descriptor:p.span,...s,selected_image:null};state.name('interpreter',s.literal,s.span);state.hold('HOLD_INTERP_LITERAL_ALIAS_AND_SELECTED_BODY',s.span);}
+ out.dynamic=[];out.strings=[];out.initialization=[];out.dynamic_extent=null;
+ if(!dynamic.length){out.structurally_decoded=true;return;}
+ const d=dynamic[0];need(d.filesz>0&&d.filesz%16===0,'HOLD_DYNAMIC_TABLE_EXTENT',d.span);need(BigInt(d.filesz)<=BigInt(d.memsz),'HOLD_DYNAMIC_FILESIZE_GT_MEMORY',d.span);need(fileAt(d.vaddr,d.filesz,d.span)===d.offset,'HOLD_DYNAMIC_FILE_VADDR_MAPPING_MISMATCH',d.span);out.dynamic_extent=span(d.offset,d.filesz);let terminal=null;
+ for(let o=d.offset;o<d.offset+d.filesz;o+=16){const rawTag=U(o,8),t=rawTag>=1n<<63n?rawTag-(1n<<64n):rawTag;need(t>=0n&&t<=BigInt(Number.MAX_SAFE_INTEGER),'HOLD_UNSUPPORTED_DYNAMIC_TAG',span(o,16));const tag=Number(t),row={tag,name:TAGS.get(tag)??'DESCRIPTOR_'+tag,value:U(o+8,8).toString(),span:span(o,16)};out.dynamic.push(row);if(tag===0){terminal=o+16;break;}}
+ need(terminal!==null,'HOLD_NO_DT_NULL',out.dynamic_extent);need(range(terminal,d.offset+d.filesz-terminal).every(c=>c===0),'HOLD_NONZERO_HIDDEN_DYNAMIC_TAIL',span(terminal,d.offset+d.filesz-terminal));out.dynamic_tail=span(terminal,d.offset+d.filesz-terminal);
+ const tagRows=t=>out.dynamic.filter(x=>x.tag===t);const one=t=>{const a=tagRows(t);need(a.length<=1,'HOLD_DUPLICATE_SINGLETON_TAG',a[1]?.span??out.dynamic_extent);return a[0]??null;};
+ for(const row of out.dynamic)if(row.tag!==1)one(row.tag);
+ const st=one(5),sz=one(10);need((st===null)===(sz===null),'HOLD_STRTAB_SIZE_PAIR',out.dynamic_extent);
+ let strings=null;if(st){const n=BigInt(sz.value);need(n>0n&&n<=BigInt(b.length),'HOLD_STRSZ_BOUND',sz.span);const o=fileAt(st.value,Number(n),st.span);strings={offset:o,bytes:Number(n),span:span(o,Number(n))};}out.string_table=strings;
+ for(const row of out.dynamic){
+  if(STRING_TAGS.has(row.tag)){need(strings!==null&&BigInt(row.value)<BigInt(strings.bytes),'HOLD_STRING_INDEX',row.span);const s=str(strings.offset+Number(row.value),strings.offset+strings.bytes);out.strings.push({tag:row.tag,name:row.name,descriptor:row.span,...s});
+   const parts=[15,29,0x6ffffefb,0x6ffffefc].includes(row.tag)?s.literal.split(':'):[s.literal];for(const part of parts)state.name(row.name,part,s.span);
+   if([1,0x6ffffefb,0x6ffffefc,0x7ffffffd,0x7fffffff].includes(row.tag))for(const part of parts){if(!part.includes('/')&&!part.includes('$')&&part!=='')state.needed.add(part);else state.hold('HOLD_LITERAL_LOAD_NAME_EXPANSION_OR_DIRECT_PATH',s.span);}
+   if([15,29,0x6ffffefa,0x6ffffefb,0x6ffffefc,0x7ffffffd,0x7fffffff].includes(row.tag))state.hold('HOLD_'+row.name+'_LOADER_RULE_AND_FINITE_ALTERNATIVES',s.span);
+  }else if(!TAGS.has(row.tag)&&!DESCRIPTOR_TAGS.has(row.tag))state.hold('HOLD_UNCLASSIFIED_DYNAMIC_TAG_'+row.tag,row.span);
+  if([30,0x6ffffffb].includes(row.tag)&&row.value!=='0')state.hold('HOLD_'+row.name+'_MATCHED_LOADER_FLAG_RULES',row.span);
+ }
+ for(const t of [12,13]){const row=one(t);if(row){state.init(row.span);out.initialization.push({kind:row.name,descriptor:row.span,unrelocated_value:row.value,resolved_code_role:null});state.hold('HOLD_'+row.name+'_MATCHED_SOURCE_ROLE',row.span);}}
+ for(const [t,z] of [[25,27],[26,28],[32,33]]){const a=one(t),n=one(z);need((a===null)===(n===null),'HOLD_INIT_FINI_ARRAY_PAIR',a?.span??n?.span??out.dynamic_extent);if(!a)continue;const size=BigInt(n.value);need(size%8n===0n&&size<=BigInt(b.length),'HOLD_INIT_FINI_ARRAY_SIZE',n.span);const count=Number(size/8n);need(state.initCount+count<=64,'HOLD_64_INIT_FINI_CEILING',n.span);const off=count?fileAt(a.value,Number(size),a.span):null;const table={kind:a.name,descriptor:a.span,size_descriptor:n.span,table_span:off===null?null:span(off,Number(size)),entries:[]};out.initialization.push(table);
+  for(let i=0;i<count;i++){const q=span(off+8*i,8);state.init(q);table.entries.push({index:i,span:q,unrelocated_value:U(off+8*i,8).toString(),resolved_code_role:null});}
+  if(count)state.hold('HOLD_'+a.name+'_SLOT_RELOCATION_AND_MATCHED_SOURCE_ROLES',table.table_span);
+ }
+ out.structurally_decoded=true;
+}
+function cache(v,out,state){
+ const {b,range,span,U,N,str}=v;range(0,20);out.header_prefix=span(0,20);
+ need(b.subarray(0,20).equals(Buffer.from('glibc-ld.so.cache1.1','ascii')),'HOLD_UNSUPPORTED_CACHE_LEGACY_OR_FORMAT',out.header_prefix);range(0,48);
+ const endian=b[28]&3;need(endian===2||endian===3,'HOLD_CACHE_ENDIAN_UNDECLARED_OR_INVALID',span(28,1));const le=endian===2;
+ const n=N(20,4,le),len=N(24,4,le),ext=N(32,4,le),start=48+24*n,end=start+len;range(48,24*n);range(start,len);
+ out.header={span:span(0,48),format:'glibc-new-1.1',byte_order:le?'little':'big',nlibs:n,string_bytes:len,extension_offset:ext};out.extensions=[];let hw=null;
+ if(ext){need(ext%4===0&&ext>=end,'HOLD_CACHE_EXTENSION_PLACEMENT',span(32,4));range(ext,8);need(N(ext,4,le)===Number(BigInt.asUintN(32,-358342284n)),'HOLD_CACHE_EXTENSION_MAGIC',span(ext,4));const count=N(ext+4,4,le);range(ext+8,count*16);const seen=new Set();
+  for(let i=0;i<count;i++){const q=ext+8+16*i,t=N(q,4,le),flags=N(q+4,4,le),o=N(q+8,4,le),size=N(q+12,4,le);range(o,size);need(!seen.has(t),'HOLD_DUPLICATE_CACHE_EXTENSION',span(q,16));seen.add(t);const x={tag:t,flags,descriptor:span(q,16),body_span:span(o,size)};out.extensions.push(x);
+   if(t===1){need(flags===0&&size>0&&size%4===0&&o%4===0,'HOLD_HWCAPS_EXTENSION_LAYOUT',x.descriptor);hw={offset:o,bytes:size};for(let j=0;j<size;j+=4){const s=N(o+j,4,le);need(s>=start&&s<end,'HOLD_HWCAPS_STRING_INDEX',span(o+j,4));str(s,end);}}
+   else if(t!==0||flags!==0)state.hold('HOLD_UNCLASSIFIED_CACHE_EXTENSION',x.descriptor);
+  }
+ }
+ out.rows=[];out.scanned_rows=0;
+ for(let i=0;i<n;i++){const q=48+24*i,k=N(q+4,4,le),p=N(q+8,4,le);need(k>=start&&k<end&&p>=start&&p<end,'HOLD_CACHE_STRING_INDEX',span(q,24));const name=str(k,end),path=str(p,end);out.scanned_rows++;
+  const cap=U(q+16,8,le),high=cap>>32n,isExt=(high&~1023n)===1073741824n,row={index:i,span:span(q,24),name,path,flags_unsigned:N(q,4,le),osversion:N(q+12,4,le),hwcap:cap.toString(),hwcaps:null,selection:'UNFILTERED_SAME_NAME_CACHE_CANDIDATE_NOT_SELECTED'};
+  if(isExt){need(hw!==null,'HOLD_MISSING_HWCAPS_EXTENSION',row.span);const index=Number(cap&0xffffffffn);need(index<hw.bytes/4,'HOLD_HWCAPS_INDEX',row.span);const off=hw.offset+4*index,s=N(off,4,le);row.hwcaps={index,index_span:span(off,4),isa_level_bits:Number(high&1023n),...str(s,end)};}
+  if(!state.needed.has(name.literal))continue;state.name('cache-candidate',path.literal,path.span);
+  out.rows.push(row);if(cap!==0n||row.osversion!==0)state.hold('HOLD_CACHE_HWCAP_OS_SELECTOR_FACTS',row.span);
+ }
+ out.complete_same_name_scan=true;out.eligible_set_proved=false;out.selected_images=false;
+ state.hold('HOLD_MATCHED_LOADER_CACHE_RULE_DEFAULT_PATHS_AND_SELECTOR_ALTERNATIVES',out.header.span);
+}
+/** buffers is an exact seven-Buffer array. manifestRaw is separately root-
+ * authenticated DATA; trustedManifestPin comes OUTSIDE it. No full-key or
+ * source-to-binary reception is manufactured by this pure interpretation. */
+export function decodeCapturedBodies(buffers,manifestRaw,trustedManifestPin){
+ const result={schema:'p212-elf-cache-literal-data-v1',status:'HOLD_SOURCE_GATED_DATA_ONLY',images:[],cache:null,holds:[],named_states:[],init_fini_entries:0,installed_closure:false,operation_permission:false,external_status:'HOLD_EXTERNAL'};
+ const named=new Set(),state={needed:new Set(),initCount:0,hold:(code,where)=>result.holds.push({code,where}),
+  name:(role,literal,where)=>{if(!named.has(literal)){need(named.size<96,'HOLD_96_NAMED_STATE_CEILING',where);named.add(literal);result.named_states.push({role,literal,origin:where});}},
+  init:where=>{need(state.initCount<64,'HOLD_64_INIT_FINI_CEILING',where);state.initCount++;result.init_fini_entries=state.initCount;}};
+ try{
+  need(Buffer.isBuffer(manifestRaw)&&manifestRaw.length<=1048576&&Array.isArray(buffers)&&buffers.length===7&&Object.keys(buffers).length===7&&buffers.every(Buffer.isBuffer),'EXACT_SEVEN_BODY_INTERFACE');pinned(trustedManifestPin,manifestRaw);
+  const text=manifestRaw.toString('utf8');need(Buffer.from(text,'utf8').equals(manifestRaw),'MANIFEST_UTF8');const m=JSON.parse(text);keys(m,['schema','root_body_reception','items','system_preload_absence']);need(m.schema==='p212-seven-authenticated-body-inputs-v1','MANIFEST_SCHEMA');reference(m.root_body_reception);reference(m.system_preload_absence);need(Array.isArray(m.items)&&m.items.length===7,'EXACT_MANIFEST_ITEMS');
+  for(let i=0;i<7;i++){const a=m.items[i];keys(a,['id','path','role','pin','received_key_reference']);need(a.id===IDS[i]&&a.path===PATHS[i]&&a.role===ROLES[i]&&buffers[i].length<=(i===6?1048576:16777216),'EXACT_BODY_ROLE_BOUND');reference(a.received_key_reference);pinned(a.pin,buffers[i]);state.name('received-body',a.path,{body_pin:a.pin,id:a.id});}
+  state.name('received-optional-absence','/etc/ld.so.preload',{receipt:m.system_preload_absence});result.input_manifest_pin=pin(manifestRaw);result.root_body_reception=m.root_body_reception;
+  need(new Set(m.items.slice(0,6).map(x=>x.pin.sha256+':'+x.pin.bytes)).size<=32,'HOLD_32_IMAGE_CEILING');
+  for(let i=0;i<6;i++){const v=view(IDS[i],buffers[i]),out={id:IDS[i],path:PATHS[i],body_pin:v.body_pin,structurally_decoded:false,selected_image:false};result.images.push(out);try{elf(v,out,state);}catch(e){out.failure={code:e.message,where:e.where??null};state.hold(e.message,e.where??{id:IDS[i],body_pin:v.body_pin});}}
+  result.finitely_named_dependencies=[...state.needed];const v=view(IDS[6],buffers[6]);result.cache={id:IDS[6],body_pin:v.body_pin,complete_same_name_scan:false};try{cache(v,result.cache,state);}catch(e){result.cache.failure={code:e.message,where:e.where??null};state.hold(e.message,e.where??{id:IDS[6],body_pin:v.body_pin});}
+  result.status='LITERAL_DATA_TABLE_WITH_EXPLICIT_HOLDS';
+ }catch(e){result.failure={code:e.message,where:e.where??null};result.status='HOLD_INPUT_OR_BOUNDARY_FAILURE';}
+ return result;
+}

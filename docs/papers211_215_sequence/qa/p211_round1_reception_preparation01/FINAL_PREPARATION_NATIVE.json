@@ -1,0 +1,34 @@
+{
+  "schema": "p211_round1_receiver_final_preparation_native_v1",
+  "scope": "Actual read-only preparation file/read-envelope/input-pin checks only; not invocation or future artifact reception.",
+  "records": [
+    {
+      "request": {
+        "cmd": "/usr/bin/python3.10 -I -S -B -c 'import hashlib,json,re,stat; from pathlib import Path; root=Path.cwd(); b=root/\"docs/papers211_215_sequence/qa/p211_round1_reception_preparation01\"; expected={\"receive_round1.py\",\"PLAN.md\",\"INPUTS.sha256\",\"NATIVE_READS.json\",\"STATIC_PREPARATION_NATIVE.json\"}; assert {p.name for p in b.iterdir()}==expected; pins={}; checks=0; rows=(b/\"INPUTS.sha256\").read_text().splitlines(); assert len(rows)==10; seen=set();\nfor row in rows:\n h,n=row.split(\"  \",1); p=root/n; assert n not in seen and p.resolve()==p and stat.S_ISREG(p.lstat().st_mode); seen.add(n); assert hashlib.sha256(p.read_bytes()).hexdigest()==h; checks+=1\nr=json.loads((b/\"NATIVE_READS.json\").read_bytes())[\"records\"]\nfor indices,name in [([3,4,5],\"docs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py\"),([6,7,8],\"docs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json\"),([9,10],\"docs/papers211_215_sequence/qa/p211_round0_root_reception/audit_round0.py\"),([12],\"docs/papers211_215_sequence/qa/p211_round1_preparation/ROLE_SELECTION_DRAFT.json\")]:\n assert \"\".join(r[i][\"result\"][\"output\"] for i in indices).encode()==(root/name).read_bytes(); assert all(r[i][\"result\"][\"exit_code\"]==0 for i in indices); checks+=1\nlinks=[]\nfor href in re.findall(r\"\\[[^\\]\\n]+\\]\\(([^)]+)\\)\",(b/\"PLAN.md\").read_text()):\n p=(b/href).resolve(); assert p.is_file(),href; links.append(href); checks+=1\nfor name in sorted(expected):\n p=b/name; raw=p.read_bytes(); assert p.resolve()==p and stat.S_ISREG(p.lstat().st_mode); pins[name]={\"bytes\":len(raw),\"sha256\":hashlib.sha256(raw).hexdigest()}\ns=json.loads((b/\"STATIC_PREPARATION_NATIVE.json\").read_bytes())[\"records\"]; result=json.loads(s[0][\"result\"][\"output\"]); assert s[0][\"result\"][\"exit_code\"]==0 and s[1][\"result\"][\"exit_code\"]==0; assert pins[\"receive_round1.py\"]=={k:result[\"source\"][k] for k in (\"bytes\",\"sha256\")} and pins[\"PLAN.md\"]==result[\"plan\"]; checks+=1; print(json.dumps({\"status\":\"PASS_PREPARATION_FILES_AND_ARCHIVED_READS_ONLY\",\"checks\":checks,\"input_pins\":10,\"exact_preseal_files\":pins,\"whole_archived_source_schema_checker_draft_comparisons\":4,\"plan_links\":len(links),\"native_selected_read_records\":len(r),\"receiver_or_recorder_invocations\":0,\"future_binding_or_output_reads\":0},sort_keys=True))'",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 4500
+      },
+      "result": {
+        "chunk_id": "a46e01",
+        "wall_time_seconds": 0.000005331,
+        "exit_code": 0,
+        "original_token_count": 223,
+        "output": "{\"checks\": 28, \"exact_preseal_files\": {\"INPUTS.sha256\": {\"bytes\": 1345, \"sha256\": \"989a910de8279f9dcd61c2ec6d8015eca866dc126f4ea6b232b3246399a6fb8c\"}, \"NATIVE_READS.json\": {\"bytes\": 143021, \"sha256\": \"efb362d4a7a1d9a9bf2c75f4bf0b37fd48b19c5042661586bc5c0f45a09b56b7\"}, \"PLAN.md\": {\"bytes\": 10508, \"sha256\": \"a3086a105e9a1c5374e35747eafae126bc92222270ef275b271942fcdcf8a3d9\"}, \"STATIC_PREPARATION_NATIVE.json\": {\"bytes\": 5991, \"sha256\": \"10aa6003f90b4221406cf94a86ea692fa7fc205e67b9c78c3845ba2d1d4b8caa\"}, \"receive_round1.py\": {\"bytes\": 34175, \"sha256\": \"5f143d846324464fd21cbfa0337f6206e1c55913e4930b77d38543cd6065ede8\"}}, \"future_binding_or_output_reads\": 0, \"input_pins\": 10, \"native_selected_read_records\": 13, \"plan_links\": 13, \"receiver_or_recorder_invocations\": 0, \"status\": \"PASS_PREPARATION_FILES_AND_ARCHIVED_READS_ONLY\", \"whole_archived_source_schema_checker_draft_comparisons\": 4}\n"
+      }
+    },
+    {
+      "request": {
+        "cmd": "sha256sum -c docs/papers211_215_sequence/qa/p211_round1_reception_preparation01/INPUTS.sha256",
+        "workdir": "/root/autodl-tmp/symbolic_dynamics",
+        "max_output_tokens": 2000
+      },
+      "result": {
+        "chunk_id": "5fffaa",
+        "wall_time_seconds": 0.00000296,
+        "exit_code": 0,
+        "original_token_count": 182,
+        "output": "docs/papers211_215_sequence/qa/p211_round1_adapter01/freeze.py: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/PLAN.md: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/BINDING.schema.json: OK\ndocs/papers211_215_sequence/qa/p211_round1_adapter01/SHA256SUMS: OK\ndocs/papers211_215_sequence/qa/p211_round0_root_reception/audit_round0.py: OK\ndocs/papers211_215_sequence/qa/p211_round0_root_reception/RECEPTION.md: OK\ndocs/papers211_215_sequence/qa/p211_round0_root_reception/REUSE_SCOPE.md: OK\ndocs/papers211_215_sequence/qa/p211_round1_preparation/PLAN.md: OK\ndocs/papers211_215_sequence/qa/p211_round1_preparation/ROLE_SELECTION_DRAFT.json: OK\ndocs/papers211_215_sequence/qa/p211_round1_plan_audit/NOTE.md: OK\n"
+      }
+    }
+  ]
+}

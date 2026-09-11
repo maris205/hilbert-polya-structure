@@ -1,0 +1,35 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/discovery01/source_snapshots/prepare_runtime.py	2026-09-08 17:27:58.860021225 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_runtime_preparation/prepare_runtime.py	2026-09-08 17:35:08.002268079 +0800
+@@ -16,7 +16,8 @@
+ core = runtime.core
+ OLD_B = core.ROOT / 'docs/papers204_208_sequence/qa/p210_b_strict_preparation/run_pair.py'
+ OLD_OUTER = core.ROOT / 'docs/papers204_208_sequence/qa/p209_author_root_preparation/root_launch_pair.py'
+-SOURCES = [HERE / name for name in ('runtime_core.py', 'p211_runtime.py', 'prepare_runtime.py', 'test_runtime.py')]
++SOURCES = [HERE / name for name in ('runtime_core.py', 'p211_runtime.py', 'prepare_runtime.py', 'test_runtime.py',
++                                   'fixtures/verify_fixture.py', 'fixtures/pre_spawn_refusal.py')]
+ 
+ 
+ def static_checks():
+@@ -41,21 +42,7 @@
+ 
+ 
+ def loader_configuration_scope(configuration):
+-    root = Path('/etc/ld.so.conf')
+-    lines = [s.strip() for s in root.read_text().splitlines() if s.strip() and not s.lstrip().startswith('#')]
+-    core.need(lines == ['include /etc/ld.so.conf.d/*.conf'], 'reviewed_single_ld_configuration_include')
+-    result = {}
+-    for ptext in configuration['paths']:
+-        p = Path(ptext)
+-        if p.parent == Path('/etc/ld.so.conf.d') and p.is_file():
+-            for line in p.read_text().splitlines():
+-                clean = line.split('#', 1)[0].strip()
+-                if not clean:
+-                    continue
+-                core.need(clean.startswith('/') and not any(c in clean for c in '*?[]\t '),
+-                          ('unreviewed_loader_configuration_directive_HOLD', ptext, clean))
+-                result[clean] = runtime.state(clean, False)
+-    return result
++    return runtime.loader_search_scope(configuration)
+ 
+ 
+ def main():

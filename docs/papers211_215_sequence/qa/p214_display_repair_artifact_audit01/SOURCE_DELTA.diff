@@ -1,0 +1,226 @@
+--- ACCEPTED_P214_INITIAL/ARTIFACT_DATA_CHECK.cjs
++++ P214_DISPLAY_REPAIR/ARTIFACT_DATA_CHECK.cjs
+@@ -1,13 +1,14 @@
+ 'use strict';
+-// Independent P214 initial-build artifact DATA receiver; exact delta from accepted P212 A.
+-// Read-only; no producer import, host-manifest follow, child, repair, build or write API.
++// Independent P214 display-repair artifact DATA receiver; accepted initial receiver delta.
++// Read-only ordinary workspace DATA: no producer import, host follow, child, build or write.
+ const fs=require('node:fs'), path=require('node:path'), crypto=require('node:crypto');
+ const W='/root/autodl-tmp/symbolic_dynamics', Q=W+'/docs/papers211_215_sequence/qa/';
+-const P=Q+'p214_initial_build_preparation01', B=Q+'p214_initial_build_binding01', I=Q+'p212_a_build_preparation01';
+-const S=W+'/papers/214-nilpotent-bilinear-clock', R=Q+'p214_initial_build_run01', C=R+'/source_only';
+-const A=Q+'p214_runtime_root01', Z=Q+'p214_source_root01';
+-const INPUT_PINS=Q+'p214_initial_artifact_audit01/INPUT_PINS.sha256';
+-const baseChecker=Q+'p212_a_build_artifact_audit01/ARTIFACT_DATA_CHECK.cjs';
++const P=Q+'p214_display_repair_preparation01', B=Q+'p214_display_repair_binding01', I=Q+'p214_initial_build_preparation01';
++const S=W+'/papers/214-nilpotent-bilinear-clock', R=Q+'p214_display_repair_run01', C=R+'/source_only';
++const A=Q+'p214_runtime_root01', Z=Q+'p214_source_root01', H=Q+'p214_initial_build_run01';
++const INITIAL_AUDIT=Q+'p214_initial_artifact_audit01', SOURCE_AUDIT=Q+'p214_display_repair_source_audit01';
++const INITIAL_RECEIPT=Q+'p214_initial_artifact_root01/RECEPTION.md', INPUT_PINS=Q+'p214_display_repair_artifact_audit01/INPUT_PINS.sha256';
++const baseChecker=INITIAL_AUDIT+'/ARTIFACT_DATA_CHECK.cjs';
+ const sourceNames=['main.tex','math_commands.tex','references.bib','sections/0_abstract.tex','sections/1_setup.tex','sections/2_clock.tex','sections/3_fibres.tex','sections/4_controls.tex','sections/5_scope.tex'];
+ const products=['main.aux','main.bbl','main.blg','main.log','main.fls','main.out','main.toc','main.pdf'];
+ const passes=['pass1','bibtex','pass2','pass3'];
+@@ -18,9 +19,8 @@
+ function eq(a,b,m){ok(JSON.stringify(a)===JSON.stringify(b),m);}
+ const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+ const bytes=new Map(), externalPins=[], rawPairs=[], findings=[];
+-const fixedExternal=[...['BUILD_REQUEST.proposed.sh.txt','NATIVE_REQUEST.proposed.json','PROPOSED_SOURCE_ONLY.sha256'].map(n=>P+'/'+n),...['BUILD_REQUEST.proposed.sh.txt','NATIVE_REQUEST.proposed.json'].map(n=>I+'/'+n),Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md',Q+'p212_plain_build_source_root01/RECEPTION.md',Q+'p212_plain_build_source_proposal03/CONTRACT.md',Q+'p212_a_build_artifact_root01/RECEPTION.md',baseChecker,...['GRANT.md','ACTUAL_NATIVE.json','CONTINUATION_NATIVE.json','RUNTIME_PREFLIGHT_NATIVE.json','BINDING_NATIVE.json','RUNTIME_INPUTS.sha256','SOURCE_RECEPTION.md'].map(n=>B+'/'+n),A+'/PAIR_RECEPTION.md',Z+'/SOURCE_RECEPTION.md',Z+'/ADOPTED_SOURCE_INPUTS.sha256',...sourceNames.map(n=>S+'/'+n)];
+-const externalAllowed=new Set(fixedExternal);
+-externalAllowed.add(INPUT_PINS);
++const fixedExternal=[...['BUILD_REQUEST.proposed.sh.txt','NATIVE_REQUEST.proposed.json','PROPOSED_SOURCE_ONLY.sha256','BEFORE_SOURCE_ONLY.sha256','SOURCE.diff','PLAN.md'].map(n=>P+'/'+n),...['BUILD_REQUEST.proposed.sh.txt','NATIVE_REQUEST.proposed.json','PROPOSED_SOURCE_ONLY.sha256'].map(n=>I+'/'+n),Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md',Q+'p212_plain_build_source_root01/RECEPTION.md',Q+'p212_plain_build_source_proposal03/CONTRACT.md',INITIAL_RECEIPT,baseChecker,...['stdout.raw','stderr.raw','SHA256SUMS','SOURCE_SHA256SUMS'].map(n=>INITIAL_AUDIT+'/'+n),...['GRANT.md','ACTUAL_NATIVE.json','CONTINUATION_NATIVE.json','RUNTIME_PREFLIGHT_NATIVE.json','BINDING_NATIVE.json','RUNTIME_INPUTS.sha256','SOURCE_RECEPTION.md','ADOPTED_SOURCE_INPUTS.sha256'].map(n=>B+'/'+n),A+'/PAIR_RECEPTION.md',Q+'p214_author_data_root01/RECEPTION.md',Z+'/SOURCE_RECEPTION.md',Z+'/ADOPTED_SOURCE_INPUTS.sha256',...['REPORT.md','INPUT_PINS.sha256','SHA256SUMS'].map(n=>SOURCE_AUDIT+'/'+n),...['originals','proposed'].flatMap(d=>['sections/2_clock.tex','sections/5_scope.tex'].map(n=>P+'/'+d+'/'+n)),...sourceNames.map(n=>S+'/'+n)];
++const externalAllowed=new Set(fixedExternal);externalAllowed.add(INPUT_PINS);
+ function readExternal(p){ok(externalAllowed.has(p),'external path allowlist '+p);if(!bytes.has(p)){const st=fs.lstatSync(p);ok(st.isFile()&&!st.isSymbolicLink(),'external regular '+p);const b=fs.readFileSync(p);bytes.set(p,b);externalPins.push({path:p,bytes:b.length,sha256:sha(b)});}return bytes.get(p);}
+ function decode(b){const t=b.toString('utf8');ok(Buffer.from(t,'utf8').equals(b),'lossless UTF-8');return t;}
+ const xt=p=>decode(readExternal(p));
+@@ -30,84 +30,76 @@
+ const pinnedDocuments=manifest(xt(INPUT_PINS));
+ eq(pinnedDocuments.map(r=>r.path),fixedExternal.map(p=>p.slice(W.length+1)).sort(),'exact complete documentary input pin set');
+ for(const row of pinnedDocuments)ok(sha(readExternal(W+'/'+row.path))===row.sha256,'whole pinned document '+row.path);
+-// The accepted old checker is read as bytes only, never imported or rerun.
+-ok(sha(readExternal(baseChecker))==='8c85429624153bd58bfeb483f55866c3e1559a01aa05a052802c4f8efe83d015','accepted P212 A receiver source identity');
+-ok(sha(readExternal(Q+'p212_a_build_artifact_root01/RECEPTION.md'))==='b32e54e33a5330c2cdbb3b0332d913a6054ab5cbc7a40f58fb5038b752662bdf'&&xt(Q+'p212_a_build_artifact_root01/RECEPTION.md').includes('ACCEPTED_A_BUILD_ARTIFACT_ONLY'),'accepted baseline scope, not P214 output reuse');
++ok(sha(readExternal(baseChecker))==='510da893509d05e4f93d9474c41a02c945c2f59f34f63c5eaafd7be74d544aea','accepted initial checker bytes, never imported or rerun');
++const initialReceipt=xt(INITIAL_RECEIPT);
++ok(sha(readExternal(INITIAL_RECEIPT))==='5332df9872384be622f3a7bbf42227eb69af447ba2731b6fed4cef3750e4414c'&&initialReceipt.includes('HOLD retained'),'complete accepted historical HOLD reception');
++ok(sha(readExternal(INITIAL_AUDIT+'/SHA256SUMS'))==='744b527953ea9e3f4ed8d8349f030b670ee44dd3c4d349d56bfa47d951bbea61'&&sha(readExternal(INITIAL_AUDIT+'/SOURCE_SHA256SUMS'))==='2d7c023ee6ed4fada0ba32af46034ab8aa9b672c0f55dc6f9518580a150a2792','both historical seals unchanged');
++const initialRaw=readExternal(INITIAL_AUDIT+'/stdout.raw');
++ok(initialRaw.length===905048&&sha(initialRaw)==='ede7ca45a53a0292df8c56f6e43bc12b19813dfb3338be336266c22045716f81'&&readExternal(INITIAL_AUDIT+'/stderr.raw').length===0,'whole historical initial report/empty stderr retained');
++const initialData=JSON.parse(decode(initialRaw));
++ok(initialData.status==='HOLD_ARTIFACT_FINDINGS'&&initialData.checks===3281&&initialData.findings.length===6,'historical complete HOLD, not waived');
++eq(initialData.findings.map(f=>{ok(f.severity==='Major'&&f.raw.includes('paragraph at lines 90--94'),'original generic finding retained');return /^Overfull \\hbox \(([0-9.]+)pt/.exec(f.raw)[1];}),['16.91365','16.91365','19.01251','19.01251','19.01251','19.01251'],'all six old occurrences, one paragraph cause');
+ const replaceLiteral=(text,from,to,label)=>{ok(text.split(from).length===2,'one literal '+label);return text.replace(from,to);};
+-const baseRecipe=xt(I+'/BUILD_REQUEST.proposed.sh.txt');
+-ok(sha(readExternal(I+'/BUILD_REQUEST.proposed.sh.txt'))==='811a7b4026a1d972072a96f25d3b7374cb926944ce820a77adc0313de78201d3','accepted base recipe identity');
+-const recipePathDelta=[
+-  [I,P],[W+'/papers/212-closed-pointer-orbits',S],
+-  [Q+'p212_a_build_binding01',B],[W+'/docs/papers211_215_sequence/reviews/p212_a/build01',R]
++const recipePathDelta=[[I,P],[Q+'p214_initial_build_binding01',B],[H,R]];
++const recipeDelta=[['# current source, exact request and fresh finite runtime/trust binding.','# adopted display/status delta, exact request and fresh runtime/trust binding.'],['P214_INITIAL_BUILD_SUPERVISOR_EXIT','P214_DISPLAY_REPAIR_BUILD_SUPERVISOR_EXIT']];
++let expectedRecipe=xt(I+'/BUILD_REQUEST.proposed.sh.txt');
++ok(sha(readExternal(I+'/BUILD_REQUEST.proposed.sh.txt'))==='f81626f9bc257b6be0aa53e5790da29b020fafd92a0a21cfe84072df2b68aa7d','accepted initial recipe identity');
++for(const [from,to]of [...recipePathDelta,...recipeDelta])expectedRecipe=replaceLiteral(expectedRecipe,from,to,'exact repair recipe delta');
++ok(xt(P+'/BUILD_REQUEST.proposed.sh.txt')===expectedRecipe&&sha(readExternal(P+'/BUILD_REQUEST.proposed.sh.txt'))==='10e4c1e1b5ca79ea768ab0209596f038c397fba2a3072a2c6a673b22ffd4663e','whole five-location recipe adaptation; all other bytes unchanged');
++const proposal=JSON.parse(xt(P+'/NATIVE_REQUEST.proposed.json')),baseRequest=JSON.parse(xt(I+'/NATIVE_REQUEST.proposed.json'));
++ok(sha(readExternal(I+'/NATIVE_REQUEST.proposed.json'))==='0fb2cfc07ca7dea77306d9c5f64ddf9a4ccb143ad37a963667462f1a1b74a64e'&&sha(readExternal(P+'/NATIVE_REQUEST.proposed.json'))==='f12dde9ccea25db44d430c7cd53600447e4837bda0ee691f3ce56948fefc6fd7','whole root-read initial and repair requests');
++const expectedNative=JSON.parse(JSON.stringify(baseRequest.proposed_native_request));expectedNative.arguments.cmd=replaceLiteral(expectedNative.arguments.cmd,I,P,'native recipe path');
++eq(proposal.proposed_native_request,expectedNative,'whole native vector unchanged except exact recipe path');eq(proposal.environment,baseRequest.environment,'all thirteen variables');eq(proposal.build_sequence,baseRequest.build_sequence,'four unchanged passes');eq(proposal.source_list,sourceNames,'nine source roles');eq(proposal.proposed_cwd_check.expected_counts,{root:4,sections:6,source_files:9},'unchanged staged membership');eq(proposal.bibliography_keys,bibliographyKeys,'two bibliography roles');
++ok(proposal.schema==='P214_DISPLAY_REPAIR_BUILD_SOURCE_ONLY_REQUEST_V1'&&!proposal.operation_authorized&&proposal.root_grant===null,'proposal itself is not a grant');ok(proposal.source_root===S&&proposal.proposed_output_directory===R&&proposal.supervisor_status_label==='P214_DISPLAY_REPAIR_BUILD_SUPERVISOR_EXIT','new exact build role');
++const launch=JSON.parse(xt(B+'/ACTUAL_NATIVE.json')),continuation=JSON.parse(xt(B+'/CONTINUATION_NATIVE.json'));
++eq(launch.arguments,proposal.proposed_native_request.arguments,'whole actual repair native request');ok(launch.result.chunk_id==='3a4987'&&launch.result.session_id===1244&&launch.result.output===''&&!Object.hasOwn(launch.result,'exit_code'),'actual repair launch');
++eq(continuation.arguments,{session_id:1244,chars:'',yield_time_ms:1000,max_output_tokens:2000},'sole actual continuation');ok(continuation.result.chunk_id==='cf150d'&&continuation.result.exit_code===0&&!Object.hasOwn(continuation.result,'session_id')&&continuation.result.output==='P214_DISPLAY_REPAIR_BUILD_SUPERVISOR_EXIT=0\n','actual complete repair native exit/stream');
++const grant=xt(B+'/GRANT.md'),policy=xt(Q+'p212_plain_build_source_root01/RECEPTION.md'),sourceReception=xt(B+'/SOURCE_RECEPTION.md'),supplement=xt(Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md'),contract=xt(Q+'p212_plain_build_source_proposal03/CONTRACT.md');
++const pairReceipt=xt(A+'/PAIR_RECEPTION.md'),authorDataReceipt=xt(Q+'p214_author_data_root01/RECEPTION.md'),adoptedReception=xt(Z+'/SOURCE_RECEPTION.md'),sourceAudit=xt(SOURCE_AUDIT+'/REPORT.md');
++ok(grant.includes('ISSUED_AND_CONSUMED_BEFORE_NEXT_SINGLE_SUBMISSION.')&&grant.includes('No retry, cleanup'),'new consumed grant and no retry');ok(policy.includes('P212-POLICY-TIME1 is therefore CLOSED')&&policy.includes('supplement has precedence'),'retained adopted ordinary/staged policy');
++ok(sha(readExternal(Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md'))==='055b06bc5e47ffa1fd6459101e473c86808fbfe44a2d56f186012efb9fa2f1b3','unchanged staged supplement');ok(sha(readExternal(B+'/SOURCE_RECEPTION.md'))==='0424f17f6c4f9690cfb3fd4bf18254549d39523c557748e495489e427b021bb4'&&sourceReception.includes('Only sections/2_clock.tex and sections/5_scope.tex were then replaced'),'actual exact source adoption and policy receipt');
++ok(sha(readExternal(SOURCE_AUDIT+'/REPORT.md'))==='8ef2f2e13e584587b3d78b21203b8a0d902666025d6f37a18fabce5d77c71094'&&sourceAudit.includes('SOURCE_ACCEPTABLE'),'independent repair source audit, not layout closure');
++ok(sha(readExternal(A+'/PAIR_RECEPTION.md'))==='0bc99d9ec61ae8fe36151fd081654c53e2a077038b66c41244a0a3d76ba8cfc3'&&pairReceipt.includes('ACCEPT_AUTHOR_STRICT_PAIR_UNCHANGED_SEMANTICS_REUSE'),'accepted actual author pair, not new science');ok(sha(readExternal(Q+'p214_author_data_root01/RECEPTION.md'))==='196201ccf7cac6ef000922f52e5491ec5454a4c0cb9771930a7699b2a7ef5dce','accepted full finite DATA evidence for new statement');
++const sourceManifest=readExternal(P+'/PROPOSED_SOURCE_ONLY.sha256'),beforeManifest=readExternal(P+'/BEFORE_SOURCE_ONLY.sha256');
++ok(sha(sourceManifest)==='3e92cd23388e8e26b7b75d2ecc290aedf7d3c96168cbdd54c73c0d685b95fb05'&&sha(beforeManifest)==='7844ffa35be54db6b98ba131882bae2d6059ec11fb6609fbbf92d428dc1d596e','distinct before/repair placement pins');
++sameBuffers(beforeManifest,readExternal(I+'/PROPOSED_SOURCE_ONLY.sha256'),'unchanged historical initial placement key');
++const sources=manifest(decode(sourceManifest)),beforeSources=manifest(decode(beforeManifest));eq(sources.map(r=>r.path),sourceNames,'nine new source roles');eq(beforeSources,initialData.source_pins,'historical source key matches accepted HOLD report');
++const adoptedSources=manifest(xt(B+'/ADOPTED_SOURCE_INPUTS.sha256')),oldAdoptedSources=manifest(xt(Z+'/ADOPTED_SOURCE_INPUTS.sha256'));
++eq(adoptedSources.map(x=>x.path),oldAdoptedSources.map(x=>x.path),'same complete 28 documentary roles');ok(adoptedSources.length===28,'28 adopted roles');eq(adoptedSources.filter((x,i)=>x.sha256!==oldAdoptedSources[i].sha256).map(x=>x.path),['sections/2_clock.tex','sections/5_scope.tex'].map(n=>S.slice(W.length+1)+'/'+n),'only two of28 adopted document pins change');
++for(const row of sources)ok(adoptedSources.some(r=>r.path===S.slice(W.length+1)+'/'+row.path&&r.sha256===row.sha256),'each actual adopted build role '+row.path);
++const sourceDelta=[
++  {path:'sections/2_clock.tex',from:'therefore gives $q^{\\lceil h/2\\rceil}q^{\\lfloor h/2\\rfloor}=q^h$\n',to:'therefore gives\n\\[\n q^{\\lceil h/2\\rceil}q^{\\lfloor h/2\\rfloor}=q^h\n\\]\n'},
++  {path:'sections/5_scope.tex',from:'The accompanying author-verifier source is restricted to\n$q\\in\\{2,3,4\\}$ and $m\\in\\{2,3,4\\}$. It is designed to enumerate every\n',to:'The accompanying author verifier was run for\n$q\\in\\{2,3,4\\}$ and $m\\in\\{2,3,4\\}$. It exhaustively checked every\n'},
++  {path:'sections/5_scope.tex',from:'predecessor set of every target, before checking the displayed formulas.\n',to:'predecessor set of every target against the displayed formulas.\n'},
++  {path:'sections/5_scope.tex',from:'At this source-draft stage, no execution or computational result is claimed.\n',to:'The nine carriers contain 5,271 states, and the complete output contains\n10,646 records. Two further strict runs reproduced the canonical output\nbyte for byte. These finite checks do not establish the all-parameter\nstatements.\n'}
+ ];
+-let expectedRecipe=baseRecipe;
+-for(const [from,to] of recipePathDelta)expectedRecipe=replaceLiteral(expectedRecipe,from,to,'recipe path');
+-expectedRecipe=expectedRecipe.replaceAll('P212','P214').replaceAll('p212','p214');
+-const recipeDelta=[
+-  ['# PROPOSED SOURCE ONLY. Never run before root receives the A strict pair,','# PROPOSED SOURCE ONLY. Never run before root receives the author strict pair,'],
+-  ['# documentary delta, exact request and finite runtime/trust binding.','# current source, exact request and fresh finite runtime/trust binding.'],
+-  ['P214_A_BUILD_SUPERVISOR_EXIT','P214_INITIAL_BUILD_SUPERVISOR_EXIT'],
+-  ['P214_SOURCES=(main.tex math_commands.tex references.bib sections/01_setup.tex sections/02_returns.tex sections/03_period_set.tex sections/04_census.tex sections/05_scope.tex)','P214_SOURCES=('+sourceNames.join(' ')+')'],
+-  ['SECTION_MEMBERS[@]}" == 5','SECTION_MEMBERS[@]}" == 6'],
+-  ['sections/01_setup.tex|sections/02_returns.tex|sections/03_period_set.tex|sections/04_census.tex|sections/05_scope.tex',sourceNames.filter(n=>n.startsWith('sections/')).join('|')],
+-  ['# No PDF adoption, final Review A PASS, Round1 or package seal is produced here.','# No PDF adoption, initial artifact acceptance, Round0 or package seal is produced here.']
+-];
+-for(const [from,to] of recipeDelta)expectedRecipe=replaceLiteral(expectedRecipe,from,to,'recipe role/source delta');
+-ok(xt(P+'/BUILD_REQUEST.proposed.sh.txt')===expectedRecipe,'whole exact recipe adaptation; other body unchanged');
+-ok(sha(readExternal(P+'/BUILD_REQUEST.proposed.sh.txt'))==='f81626f9bc257b6be0aa53e5790da29b020fafd92a0a21cfe84072df2b68aa7d','accepted P214 recipe content identity');
+-const proposal=JSON.parse(xt(P+'/NATIVE_REQUEST.proposed.json')), baseRequest=JSON.parse(xt(I+'/NATIVE_REQUEST.proposed.json'));
+-ok(sha(readExternal(I+'/NATIVE_REQUEST.proposed.json'))==='2c2a6b4d2b0a837cc47b9c8600a2975f8d57ce68d07b27c13390122d9172a189','accepted base request identity');
+-ok(sha(readExternal(P+'/NATIVE_REQUEST.proposed.json'))==='0fb2cfc07ca7dea77306d9c5f64ddf9a4ccb143ad37a963667462f1a1b74a64e','whole root-read P214 request bytes');
+-const expectedNative=JSON.parse(JSON.stringify(baseRequest.proposed_native_request));
+-expectedNative.arguments.cmd=replaceLiteral(expectedNative.arguments.cmd,I,P,'native recipe path');
+-eq(proposal.proposed_native_request,expectedNative,'entire native vector unchanged except exact recipe path');
+-eq(proposal.environment,baseRequest.environment,'all thirteen fixed environment variables');
+-eq(proposal.build_sequence,baseRequest.build_sequence,'unchanged four-pass sequence');
+-eq(proposal.source_list,sourceNames,'exact nine proposed sources');
+-eq(proposal.proposed_cwd_check.expected_counts,{root:4,sections:6,source_files:9},'four-root six-section source staging');
+-eq(proposal.bibliography_keys,bibliographyKeys,'exact P214 two bibliography roles');
+-ok(proposal.schema==='P214_INITIAL_BUILD_SOURCE_ONLY_REQUEST_V1'&&!proposal.operation_authorized&&proposal.root_grant===null,'source request is not a grant');
+-ok(proposal.source_root===S&&proposal.proposed_output_directory===R&&proposal.supervisor_status_label==='P214_INITIAL_BUILD_SUPERVISOR_EXIT','P214 source/output/native roles');
+-const launch=JSON.parse(xt(B+'/ACTUAL_NATIVE.json')), continuation=JSON.parse(xt(B+'/CONTINUATION_NATIVE.json'));
+-eq(launch.arguments,proposal.proposed_native_request.arguments,'whole actual P214 native request');
+-ok(launch.result.chunk_id==='b39b7b'&&launch.result.session_id===95222&&launch.result.output===''&&!Object.hasOwn(launch.result,'exit_code'),'actual original launch');
+-eq(continuation.arguments,{session_id:95222,chars:'',yield_time_ms:1000,max_output_tokens:2000},'only actual continuation; waiting controls recorded not invented');
+-ok(continuation.result.chunk_id==='0f0b87'&&continuation.result.exit_code===0&&!Object.hasOwn(continuation.result,'session_id'),'actual sole completion received by root');
+-ok(continuation.result.output==='P214_INITIAL_BUILD_SUPERVISOR_EXIT=0\n','whole native completion stream');
+-const grant=xt(B+'/GRANT.md'),policy=xt(Q+'p212_plain_build_source_root01/RECEPTION.md'),sourceReception=xt(B+'/SOURCE_RECEPTION.md');
+-const supplement=xt(Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md'),contract=xt(Q+'p212_plain_build_source_proposal03/CONTRACT.md');
+-const pairReceipt=xt(A+'/PAIR_RECEPTION.md'),adoptedReception=xt(Z+'/SOURCE_RECEPTION.md');
+-ok(grant.includes('ISSUED_AND_CONSUMED_BEFORE_NEXT_SINGLE_SUBMISSION.')&&grant.includes('No retry, cleanup'),'explicit consumed initial grant and no retry');
+-ok(policy.includes('P212-POLICY-TIME1 is therefore CLOSED')&&policy.includes('supplement has precedence'),'adopted staged policy');
+-ok(sha(readExternal(Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md'))==='055b06bc5e47ffa1fd6459101e473c86808fbfe44a2d56f186012efb9fa2f1b3','unchanged staged supplement');
+-ok(sha(readExternal(B+'/SOURCE_RECEPTION.md'))==='419de630121109e1a2d8badd18c13d132951bf852112af4d4794268953cf4f1b'&&sourceReception.includes('Root explicitly adopts the already accepted ordinary-tool policy and staged'),'P214 explicit source/policy adoption');
+-ok(sha(readExternal(A+'/PAIR_RECEPTION.md'))==='0bc99d9ec61ae8fe36151fd081654c53e2a077038b66c41244a0a3d76ba8cfc3'&&pairReceipt.includes('ACCEPT_AUTHOR_STRICT_PAIR_UNCHANGED_SEMANTICS_REUSE'),'actual author pair acceptance, not new science');
+-ok(sha(readExternal(Z+'/SOURCE_RECEPTION.md'))==='580d6531617ee0ebb5aee511477ca8cda1a5ab896b83bb3d6d0f17897b372f7f'&&adoptedReception.includes('ACCEPT_SOURCE_ONLY'),'accepted paper-source provenance');
+-const sourceManifest=readExternal(P+'/PROPOSED_SOURCE_ONLY.sha256');
+-ok(sha(sourceManifest)==='7844ffa35be54db6b98ba131882bae2d6059ec11fb6609fbbf92d428dc1d596e','P214 initial nine-source manifest pin');
+-const sources=manifest(decode(sourceManifest));eq(sources.map(r=>r.path),sourceNames,'nine exact current source roles');
+-const adoptedManifest=readExternal(Z+'/ADOPTED_SOURCE_INPUTS.sha256');
+-ok(sha(adoptedManifest)==='1b9e81528623d20a433b7d180c4b9785319ea39df3ce19c1829be0333e7c9444','adopted paper-source manifest identity');
+-const adoptedSources=manifest(decode(adoptedManifest));ok(adoptedSources.length===28,'complete adopted documentary key as data');
+-for(const row of sources)ok(adoptedSources.some(r=>r.path===S.slice(W.length+1)+'/'+row.path&&r.sha256===row.sha256),'each selected build role is actually adopted '+row.path);
+-const runtimeManifest=readExternal(B+'/RUNTIME_INPUTS.sha256');
+-ok(sha(runtimeManifest)==='35e6d5ac4cb0fb3933dc2d4ceb201d5afbf11315bdbcdcf74308a184c1586530','fresh selected manifest pin');
+-const runtime=manifest(decode(runtimeManifest));ok(runtime.length===223&&runtime.every(r=>path.isAbsolute(r.path)),'finite selected runtime names as archival DATA only');
+-const runtimeByName=new Map(runtime.map(r=>[r.path,r]));
+-const binding=JSON.parse(xt(B+'/BINDING_NATIVE.json'));
+-ok(binding.result.exit_code===0&&binding.result.chunk_id==='c86afe','actual external binding native result');
++eq(sources.filter((x,i)=>x.sha256!==beforeSources[i].sha256).map(x=>x.path),[...new Set(sourceDelta.map(x=>x.path))],'exact two changed placement roles');
++const runtimeManifest=readExternal(B+'/RUNTIME_INPUTS.sha256');ok(sha(runtimeManifest)==='35e6d5ac4cb0fb3933dc2d4ceb201d5afbf11315bdbcdcf74308a184c1586530','new freshly bound selected manifest');
++const runtime=manifest(decode(runtimeManifest));ok(runtime.length===223&&runtime.every(r=>path.isAbsolute(r.path)),'finite runtime strings as archival DATA only');const runtimeByName=new Map(runtime.map(r=>[r.path,r]));
++const binding=JSON.parse(xt(B+'/BINDING_NATIVE.json'));ok(binding.result.exit_code===0&&binding.result.chunk_id==='7365b2','actual repair pregrant binding');
+ const boundNames=[P+'/BUILD_REQUEST.proposed.sh.txt',P+'/NATIVE_REQUEST.proposed.json',P+'/PROPOSED_SOURCE_ONLY.sha256',B+'/RUNTIME_INPUTS.sha256',B+'/SOURCE_RECEPTION.md',Q+'p212_plain_build_source_root01/RECEPTION.md',Q+'p212_plain_build_source_audit01/STAGED_POLICY_SUPPLEMENT.md',A+'/PAIR_RECEPTION.md'];
+-const diskObservation='Filesystem       1B-blocks        Used   Available Use% Mounted on\n/dev/md0       53687091200 38973558784 14713532416  73% /root/autodl-tmp\n';
+-const boundOutput=path.dirname(R)+'\n'+diskObservation+boundNames.map(p=>sha(readExternal(p))+'  '+p.slice(W.length+1)+'\n').join('');
+-ok(binding.result.output===boundOutput,'whole physical-parent/capacity/eight-pin archival binding output');
+-const bindingCommand=['set -e','cmp docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256 docs/papers211_215_sequence/qa/p214_initial_build_binding01/RUNTIME_INPUTS.sha256','[ -d docs/papers211_215_sequence/qa ]','[ ! -L docs/papers211_215_sequence/qa ]','(cd docs/papers211_215_sequence/qa && pwd -P)','[ ! -e docs/papers211_215_sequence/qa/p214_initial_build_run01 ]','[ ! -L docs/papers211_215_sequence/qa/p214_initial_build_run01 ]','df -B1 docs/papers211_215_sequence/qa','sha256sum '+boundNames.map(p=>p.slice(W.length+1)).join(' ')].join('\n');
+-eq(binding.arguments,{cmd:bindingCommand,login:false,max_output_tokens:2500},'whole actual copy-comparison/parent/absence/capacity request as archived DATA');
+-const prep=JSON.parse(xt(B+'/RUNTIME_PREFLIGHT_NATIVE.json'));
+-const runtimeOK=runtime.map(r=>r.path+': OK\n').join('');
+-eq(prep.arguments,{cmd:'sha256sum -c --strict docs/papers211_215_sequence/qa/p212_a_build_binding01/RUNTIME_INPUTS.sha256',login:false,max_output_tokens:15000},'whole fresh preflight request as DATA');
+-ok(prep.result.chunk_id==='900070'&&prep.result.exit_code===0&&prep.result.output===runtimeOK,'all 223 received fresh pregrant OK rows and whole output');
++const diskObservation='Filesystem       1B-blocks        Used   Available Use% Mounted on\n/dev/md0       53687091200 39033626624 14653464576  73% /root/autodl-tmp\n';
++ok(binding.result.output===path.dirname(R)+'\n'+diskObservation+boundNames.map(p=>sha(readExternal(p))+'  '+p.slice(W.length+1)+'\n').join(''),'whole archived parent/capacity/eight-pin output');
++const bindingCommand=['set -e','cmp docs/papers211_215_sequence/qa/p214_initial_build_binding01/RUNTIME_INPUTS.sha256 docs/papers211_215_sequence/qa/p214_display_repair_binding01/RUNTIME_INPUTS.sha256','[ -d docs/papers211_215_sequence/qa ]','[ ! -L docs/papers211_215_sequence/qa ]','(cd docs/papers211_215_sequence/qa && pwd -P)','[ ! -e docs/papers211_215_sequence/qa/p214_display_repair_run01 ]','[ ! -L docs/papers211_215_sequence/qa/p214_display_repair_run01 ]','df -B1 docs/papers211_215_sequence/qa','sha256sum '+boundNames.map(p=>p.slice(W.length+1)).join(' ')].join('\n');
++eq(binding.arguments,{cmd:bindingCommand,max_output_tokens:2000},'whole actual binding request, no invented defaults');
++const prep=JSON.parse(xt(B+'/RUNTIME_PREFLIGHT_NATIVE.json')),runtimeOK=runtime.map(r=>r.path+': OK\n').join('');
++eq(prep.arguments,{cmd:'sha256sum --check --strict docs/papers211_215_sequence/qa/p214_initial_build_binding01/RUNTIME_INPUTS.sha256',workdir:W,max_output_tokens:18000},'whole actual fresh preflight request as DATA');ok(prep.result.chunk_id==='5d2c9a'&&prep.result.exit_code===0&&prep.result.output===runtimeOK,'all223fresh pregrant received rows and whole output');
++// Confirm the fixed initial artifact archive is unchanged; never reopen its live-source pins.
++const archivedRows=initialData.inventory,archivedNames=new Set(archivedRows.map(x=>x.path)),archivePins=[],archiveDirectories=[],archiveSeen=[];
++ok(archivedRows.length===161&&archivedNames.size===161,'complete accepted initial archive membership');
++for(const row of archivedRows)ok(!path.isAbsolute(row.path)&&row.path.split('/').every(n=>n!==''&&n!=='.'&&n!=='..'),'bounded initial archive member');
++function archiveWalk(d,rel=''){
++  const st=fs.lstatSync(d);ok(st.isDirectory()&&!st.isSymbolicLink(),'ordinary initial archive directory');archiveDirectories.push(rel);
++  for(const e of fs.readdirSync(d,{withFileTypes:true}).sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0)){
++    const n=rel+e.name,p=d+'/'+e.name;ok(!e.isSymbolicLink(),'no initial archive symlink');
++    if(e.isDirectory())archiveWalk(p,n+'/');else{ok(e.isFile()&&archivedNames.has(n),'known ordinary initial archive artifact');const b=fs.readFileSync(p),row=archivedRows.find(x=>x.path===n);ok(b.length===row.bytes&&sha(b)===row.sha256,'whole unchanged initial artifact '+n);bytes.set(p,b);archivePins.push({path:n,bytes:b.length,sha256:sha(b)});archiveSeen.push(n);}
++  }
++}
++archiveWalk(H);eq(archiveSeen.slice().sort(),[...archivedNames].sort(),'exact unchanged initial files');
++eq(archiveDirectories.slice().sort(),['','pages/','raw/','source_only/','source_only/sections/','pass_artifacts/',...snapshots.map(s=>'pass_artifacts/'+s+'/')].sort(),'exact unchanged initial directories');
++const archivedBody=n=>{ok(archivedNames.has(n),'known initial archived body');return bytes.get(H+'/'+n);};
+ 
+-// The only enumerated tree is the completed, fixed workspace output.
++// The second enumerated tree is only the fixed completed repair output.
+ const inventory=[], directories=[];
+ function walk(d,rel=''){
+   const st=fs.lstatSync(d);ok(st.isDirectory()&&!st.isSymbolicLink(),'ordinary output directory '+rel);directories.push(rel);
+@@ -132,9 +124,11 @@
+ const capturedBinding=[P+'/BUILD_REQUEST.proposed.sh.txt',P+'/NATIVE_REQUEST.proposed.json',B+'/RUNTIME_INPUTS.sha256'].map(p=>sha(readExternal(p))+'  '+p+'\n').join('');
+ ok(rt('REQUEST_AND_BINDING.sha256')===capturedBinding,'whole inner binding names/hashes');
+ for(const row of sources){
+-  const live=readExternal(S+'/'+row.path),cold=rb('source_only/'+row.path);
+-  ok(sha(live)===row.sha256,'whole live accepted initial source pin '+row.path);
+-  sameBuffers(live,cold,'accepted live initial source == complete cold copy '+row.path);
++  const old=archivedBody('source_only/'+row.path),live=readExternal(S+'/'+row.path),cold=rb('source_only/'+row.path);
++  ok(sha(old)===beforeSources.find(x=>x.path===row.path).sha256,'whole original cold source pin '+row.path);
++  const edits=sourceDelta.filter(x=>x.path===row.path);let expectedSource=old;
++  if(edits.length){sameBuffers(old,readExternal(P+'/originals/'+row.path),'physical repair original == initial cold '+row.path);let text=decode(old);for(const e of edits)text=replaceLiteral(text,e.from,e.to,'received source edit '+row.path);expectedSource=Buffer.from(text,'utf8');sameBuffers(expectedSource,readExternal(P+'/proposed/'+row.path),'exact edit == complete received proposal '+row.path);}
++  ok(sha(expectedSource)===row.sha256,'exact repair source content pin '+row.path);sameBuffers(expectedSource,live,'old cold plus exact repair == live '+row.path);sameBuffers(expectedSource,cold,'old cold plus exact repair == new cold '+row.path);
+   want('source_only/'+row.path);
+ }
+ ok(rt('controller.exit')==='0\n'&&rt('controller.stdout.raw')===''&&rt('controller.stderr.raw')==='','full controller success streams');
+@@ -268,6 +262,15 @@
+ const referencesAt=pdfText.lastIndexOf('References');ok(referencesAt>=0,'actual PDF references section');
+ const bodyText=pdfText.slice(0,referencesAt).replace(/\s+/g,' '),referencesText=pdfText.slice(referencesAt).replace(/\s+/g,' ');
+ ok(bodyText.includes('A cancellation-safe clock for nilpotent bilinear dynamics')&&bodyText.includes('Anonymous Authors'),'P214 title and anonymous author in extracted body');
++// Compare complete factual sentence spans only with declared typography folding.
++const statementFold=s=>s.replace(/-\n[ \t]*(?=[a-z])/g,'').replace(/\s+/g,' ').replace(/([A-Za-z])-(?=[A-Za-z])/g,'$1');
++const statementText=statementFold(pdfText.slice(0,referencesAt));
++const statementAnchors=['The accompanying author verifier was run for','It exhaustively checked every state, its literal transition and orbit-derived depth, and the full predecessor set of every target against the displayed formulas.','The nine carriers contain 5,271 states, and the complete output contains 10,646 records.','Two further strict runs reproduced the canonical output byte for byte.','These finite checks do not establish the all-parameter statements.'];
++const statementMatches=statementAnchors.map(text=>({text,offset:statementText.indexOf(statementFold(text))}));
++for(const match of statementMatches)if(match.offset<0)findings.push({severity:'Major',reason:'updated factual statement absent from actual full PDF text',expected:match.text});
++if(statementText.includes(statementFold('At this source-draft stage, no execution or computational result is claimed.')))findings.push({severity:'Major',reason:'obsolete source-stage execution statement remains in actual PDF text'});
++const currentOverfull=diagnostics.flatMap(d=>d.records.filter(x=>/^Overfull /.test(x.raw)).map(x=>({file:d.file,...x})));
++const repairReception={source_delta:sourceDelta,statement_matches:statementMatches,statement_scope:'Only factual-text tests join line-ending word hyphens, fold whitespace and remove intra-letter ASCII hyphens from both anchors and extracted text; full raw text retained, not RAW equality or visual closure',new_overfull_occurrences:currentOverfull,log_only_overfull_closure:currentOverfull.length===0,actual_all_page_visual_reception:'REQUIRED_SEPARATELY; no view or final artifact PASS supplied by this checker'};
+ const bblAnchors={
+   Bors2017:['Alexander Bors','On the dynamics of endomorphisms of finite groups','Applicable Algebra in Engineering, Communication and Computing','28(3):205--214, 2017'],
+   ElAbdalaouiEtAl2016:['El Houcein El Abdalaoui','Sylvain Bonnot','Ali Messaoudi','Olivier Sester','On the Fibonacci complex dynamical systems','Discrete and Continuous Dynamical Systems','36(5):2449--2471, 2016']
+@@ -290,6 +293,6 @@
+ // claim of continuous process/descendant attestation.
+ for(const [p,b] of bytes)ok(fs.readFileSync(p).equals(b),'whole received input unchanged '+p);
+ const summary={artifact_files:inventory.length,artifact_bytes:inventory.reduce((s,r)=>s+r.bytes,0),subdirectories:directories.length-1,complete_text_files:textCaptures.length,external_inputs:externalPins.length,full_raw_pairs:rawPairs.length,runtime_selected:runtime.length,sources:sources.length,pages:pageCount,fonts:fonts.length,pdf_bytes:pdf.length,pdf_sha256:sha(pdf),fls:ordered.map(r=>({pass:r.pass,events:r.events.length,counts:r.counts})),warnings:diagnostics.filter(d=>d.role==='log').map(d=>({pass:d.pass,count:d.warning_count})),findings:findings.length,text_extraction_control_occurrences:textControls.length};
+-const report={status:findings.length?'HOLD_ARTIFACT_FINDINGS':'DATA_CHECK_COMPLETE_PENDING_INDEPENDENT_SEMANTIC_AND_ROOT_RECEPTION',scope:'One P214 initial source build, ordinary trusted tools/configuration; no host re-read, syscall closure, science, final manuscript verdict or visual/PDF adoption',checks,summary,findings,provenance:{launch,continuation,grant,external_binding:binding,runtime_preflight:prep,adopted_policy:policy,staged_supplement:supplement,archived_contract:contract,p214_source_reception:sourceReception,accepted_author_pair:pairReceipt,paper_source_reception:adoptedReception},adaptation:{base_checker_sha256:sha(readExternal(baseChecker)),recipe_path_delta:recipePathDelta,identifier_delta:'P212/p212 to P214/p214 throughout reviewed recipe',recipe_role_source_delta:recipeDelta,adopted_paper_source_pins:adoptedSources,bibliography_items:bibliographyItems},source_pins:sources,runtime_pins_as_data_only:runtime,external_pins:externalPins,cold_cwd_record:rt('COLD_CWD.actual.txt'),commands,snapshots:snapshotData,raw_pairs:rawPairs,ordered_fls:ordered,diagnostics,bibliography:{keys:bibliographyKeys,bbl_order:bblKeys,final_bibcite:bibcite,source_citations:sourceCitations,labels:finalLabels,references,bibtex_role_limit:'Complete AUX/BLG/BBL top-level roles, not a BibTeX syscall trace'},fonts,pages:pageImages,text_extraction_controls:textControls,text_extraction_limit:'Raw math extraction can lose layout or encode delimiter glyphs as controls; full raw output retained, actual all-page viewing is separate',inventory,complete_text_captures:textCaptures};
++const report={status:findings.length?'HOLD_ARTIFACT_FINDINGS':'DATA_CHECK_COMPLETE_PENDING_INDEPENDENT_SEMANTIC_AND_ROOT_RECEPTION',scope:'One P214 display-repair source build plus immutable initial HOLD archive; ordinary trusted tools/configuration; no host re-read, syscall closure, science, manuscript verdict or visual/PDF adoption',checks,summary,findings,provenance:{launch,continuation,grant,external_binding:binding,runtime_preflight:prep,adopted_policy:policy,staged_supplement:supplement,archived_contract:contract,p214_source_reception:sourceReception,accepted_author_pair:pairReceipt,paper_source_reception:adoptedReception,accepted_author_data:authorDataReceipt,independent_repair_source_audit:sourceAudit},adaptation:{base_checker_sha256:sha(readExternal(baseChecker)),recipe_path_delta:recipePathDelta,identifier_delta:'No P214 scientific identifier change; only exact build paths and supervisor role',recipe_role_source_delta:recipeDelta,adopted_paper_source_pins:adoptedSources,bibliography_items:bibliographyItems,repair_reception:repairReception},historical_initial:{receipt:initialReceipt,status:initialData.status,checks:initialData.checks,report_sha256:sha(initialRaw),summary:initialData.summary,findings:initialData.findings,unchanged_artifact_pins:archivePins,scope:'All161initialartifacts/oldreport/seals preserved; the six old occurrences remain historical and are not silently reclassified or erased'},source_pins:sources,runtime_pins_as_data_only:runtime,external_pins:externalPins,cold_cwd_record:rt('COLD_CWD.actual.txt'),commands,snapshots:snapshotData,raw_pairs:rawPairs,ordered_fls:ordered,diagnostics,bibliography:{keys:bibliographyKeys,bbl_order:bblKeys,final_bibcite:bibcite,source_citations:sourceCitations,labels:finalLabels,references,bibtex_role_limit:'Complete AUX/BLG/BBL top-level roles, not a BibTeX syscall trace'},fonts,pages:pageImages,text_extraction_controls:textControls,text_extraction_limit:'Raw math extraction can lose layout or encode delimiter glyphs as controls; full raw output retained, actual all-page viewing is separate',inventory,complete_text_captures:textCaptures};
+ process.stdout.write(JSON.stringify(report,null,2)+'\n');
+ if(findings.length)process.exitCode=1;

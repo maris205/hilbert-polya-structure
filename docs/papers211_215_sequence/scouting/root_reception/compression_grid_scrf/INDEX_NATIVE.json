@@ -1,0 +1,14 @@
+{
+  "request": {
+    "cmd": "python3 - <<'PY'\nfrom pathlib import Path\nimport json,re,hashlib\nr=Path('/root/autodl-tmp/symbolic_dynamics');s=r/'docs/papers211_215_sequence/scouting';n=0\nfor p in [s/'root_reception/COMPRESSION_GRID_SCRF_RECEPTION.md',r/'SYMBOLIC_DYNAMICS_STATE.md',r/'docs/papers211_215_sequence/PIPELINE_STATE.md']:\n for h in re.findall(r'\\]\\(([^\\n)]+)\\)',p.read_text()):\n  if '://' in h or h.startswith('#'):continue\n  assert (p.parent/h.split('#')[0]).exists(),(p,h);n+=1\np=r/'papers/211-kernel-image-projection-feedback'\nfor name,pin in json.loads((r/'docs/papers211_215_sequence/qa/p211_round0_execution01/SOURCE_INPUTS_BEFORE.json').read_text()).items():\n b=(p/name).read_bytes();assert len(b)==pin['bytes'] and hashlib.sha256(b).hexdigest()==pin['sha256'],name\nprint(json.dumps({'status':'PASS_NEGATIVE_DESK_INDEX_DELTA','local_links':n,'unchanged_P211_scientific_documentary_payloads':32,'closed_literal_attempts':40,'retained':1,'completed':0,'open_seats':4,'new_science':0}))\nPY",
+    "workdir": "/root/autodl-tmp/symbolic_dynamics",
+    "max_output_tokens": 1500
+  },
+  "result": {
+    "chunk_id": "dc9f8a",
+    "wall_time_seconds": 0.00000575,
+    "exit_code": 0,
+    "original_token_count": 54,
+    "output": "{\"status\": \"PASS_NEGATIVE_DESK_INDEX_DELTA\", \"local_links\": 120, \"unchanged_P211_scientific_documentary_payloads\": 32, \"closed_literal_attempts\": 40, \"retained\": 1, \"completed\": 0, \"open_seats\": 4, \"new_science\": 0}\n"
+  }
+}

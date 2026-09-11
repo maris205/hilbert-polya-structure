@@ -1,0 +1,112 @@
+'use strict';
+// Author SOURCE_ONLY proposal: pair documentary complement, never a future PASS.
+// Reads archived native outputs and exact prior keys; executes no submitted code.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),a=require('node:assert/strict');
+const ROOT='/root/autodl-tmp/symbolic_dynamics',QA=ROOT+'/docs/papers211_215_sequence/qa/';
+const OWN=QA+'p212_author_pair_runtime_reception01',B=QA+'p212_author_pair_binding01';
+const RUN=QA+'root_replays/p212_author_pair_01',D=QA+'p212_runtime_discovery01';
+let checks=0;const inputs={};
+function same(x,y,s){checks++;a.deepStrictEqual(x,y,s);}
+function need(x,s){checks++;a.ok(x,s);}
+const val=b=>({bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')});
+function read(p,k){
+  need(path.posix.normalize(p)===p&&p.startsWith('/'),'literal absolute input');
+  const l=fs.lstatSync(p);need(fs.statSync(p).isFile(),'regular byte input');
+  const b=fs.readFileSync(p),v={...val(b),resolved:fs.realpathSync(p),symlink:l.isSymbolicLink()?fs.readlinkSync(p):null};
+  if(inputs[p])same(v,inputs[p],'stable entire key');
+  if(k)for(const f of ['sha256','bytes','resolved','symlink'])if(Object.hasOwn(k,f))same(v[f],k[f],'supplied full pin '+f);
+  inputs[p]=v;return b;
+}
+const obj=p=>JSON.parse(read(p));
+const binding=obj(B+'/BINDING.json'),r=obj(OWN+'/RESULT.json');
+same(r.status,'PASS_ROOT_COMPLETE_P212_PAIR_PRODUCTION_RECORDS_PENDING_SEMANTIC_REUSE','prior successful receipt');
+need(Number.isSafeInteger(r.checks)&&r.checks>0,'actual full receiver check count, not a guessed future count');
+same(r.mode,'pair','separate pair mode');same(r.actual_author_invocations_received,2,'two actual producer records');same(r.actual_raw_comparisons_received,3,'three actual scientific cmp records');same(r.native_commands,11,'eleven actual adapter commands');
+same(Object.keys(r).sort(),['status','mode','binding','attempt','checks','actual_read_paths','complete_payloads','complete_manifest','stage_payloads','native_commands','actual_author_invocations_received','actual_raw_comparisons_received','raw_stdout','root_scientific_producer_invocations_in_this_audit','scope'].sort(),'whole main receiver result field census');
+read(binding.root_capture.controller.path,binding.root_capture.controller);
+const previous=obj(OWN+'/INPUTS_CURRENT.json');
+for(const[p,k]of Object.entries(previous.files))read(p,k);
+same(Object.keys(previous.files).length,r.actual_read_paths,'whole actual prior byte key, count from its complete result');
+const parents={outer:obj(B+'/entry01/commands/AUTHOR_PAIR/RECEIPT.json'),
+  launcher:obj(RUN+'/outer/commands/01_launcher/RECEIPT.json'),
+  recorder:obj(RUN+'/launcher/commands/01_recorder/RECEIPT.json'),
+  child01:obj(RUN+'/recorder/commands/03_verify_01/RECEIPT.json'),
+  child02:obj(RUN+'/recorder/commands/03_verify_02/RECEIPT.json')};
+const expectedCounts={outer:14,launcher:14,recorder:51,child01:10,child02:10};
+same(r.stage_payloads,expectedCounts,'source-derived pair artifact counts, not prewritten observed results');
+const nativeKeys=['argv','cwd','ended_epoch','ended_utc','environment','exit_code','failure','interrupted','new_owned_session_requested','pid','process_group_settlement','spawned','started_epoch','started_utc','status','stderr','stdin','stdout','stream_scope','streams_complete','timed_out','timeout_seconds','wrapper_exit_code'];
+let nativeCount=0;
+function nativeTime(n){
+  same(Object.keys(n).filter(k=>k!=='label').sort(),nativeKeys.slice().sort(),'entire native field census');
+  const g=n.process_group_settlement;
+  same(Object.keys(g).sort(),['owned_pgid','owned_sid','signals','remaining_members','quiescent','native_returncode'].sort(),'entire owned-group settlement fields');
+  same(g.quiescent,true,'settled group');same(g.signals,[],'no settlement signal in success');same(g.native_returncode,0,'actual group native zero');same(g.owned_pgid,n.pid,'owned pgid');same(g.owned_sid,n.pid,'owned sid');
+  for(const m of g.remaining_members){same(Object.keys(m).sort(),['pid','state','ppid','pgid','sid','start_ticks'].sort(),'whole retained member fields');same(m.state,'Z','only retained zombie allowed');same(m.pgid,n.pid,'member owned group');same(m.sid,n.pid,'member owned session');for(const k of ['pid','ppid','pgid','sid','start_ticks'])need(Number.isSafeInteger(m[k])&&m[k]>=0,'typed retained member identity');}
+  for(const f of ['started','ended']){
+    need(Number.isFinite(n[f+'_epoch'])&&/Z$|\+00:00$/.test(n[f+'_utc']),'finite UTC actual clock');
+    need(Math.abs(Date.parse(n[f+'_utc'])/1000-n[f+'_epoch'])<0.01,'separately sampled UTC/epoch within 10ms');
+  }
+  need(n.started_epoch<=n.ended_epoch,'native clock ordered');
+  need(n.ended_epoch-n.started_epoch<n.timeout_seconds,'observed native lifetime within declared limit');
+  same(n.stream_scope,'Every emitted native byte retained in exclusive files; hashes finalized only after owned-group quiescence. A timeout/interruption remains an unsuccessful partial computation.','exact known stream limitation');
+  nativeCount++;
+}
+nativeTime(parents.outer);
+for(const stage of ['outer','launcher','recorder','child01','child02']){
+  const p=RUN+'/'+stage,s=obj(p+'/RESULT.json'),entered=obj(p+'/ENTERED.json'),parent=parents[stage];
+  same(Object.keys(s).sort(),['commands','errors','mode','output','role','scope','stage','status','unfinalized_native','unknown_descendant_closure','wrapper_return'].sort(),'whole stage result fields');
+  same(s.scope,'Bounded infrastructure execution evidence, not a proof, review or hermetic runtime trace.','explicit runtime scope');
+  same(Object.keys(entered).sort(),['argv','cache','cwd','environment','orig_argv','stage','started_utc','status'].sort(),'whole entry fields');
+  same(entered.stage,stage,'entry stage');same(entered.status,'ENTERED_NOT_NATIVE_PRESPAWN','not a prespawn claim');
+  same(entered.cache,RUN+'/never_created_'+stage+'_cache','actual entry cache role');
+  const start=Date.parse(entered.started_utc)/1000;
+  need(parent.started_epoch<=start&&start<=parent.ended_epoch,'stage entry enclosed in real parent lifetime');
+  let priorEnd=start;
+  for(const n of s.commands){
+    nativeTime(n);need(priorEnd<=n.started_epoch,'native commands sequential after stage entry');
+    need(n.ended_epoch<=parent.ended_epoch,'entire child native lifetime enclosed');priorEnd=n.ended_epoch;
+  }
+  if(stage==='outer'||stage==='launcher'){
+    const child=stage==='outer'?'launcher':'recorder',m=RUN+'/'+child+'/SHA256SUMS';read(m);
+    same(s.output,{child_stage:child,native_receipt:s.commands[0],closed_child:{manifest:inputs[m],payloads:expectedCounts[child],status:'PASS'}},'entire propagated child closure and native receipt');
+    same(read(p+'/commands/'+s.commands[0].label+'/stdout.raw').length,0,'successful inner envelope stdout empty');
+  }else if(stage==='recorder'){
+    same(s.output,{actual_raw_comparisons:3,canonical_policy:'initial stdout requires separate root acceptance/publication; pair never adopts or replaces canonical',mode:'pair',raw_stdout:r.raw_stdout},'whole pair output policy');
+    const copies=binding.capsule_files.map(k=>({original:k.path,copy:p+'/capsule/'+k.name,bytes:k.bytes,sha256:k.sha256}));
+    same(obj(p+'/SOURCE_COPIES.json'),copies,'whole original/copy table');
+    copies.forEach((k,i)=>same(s.commands[i].argv,['/usr/bin/cmp','--',k.original,k.copy],'actual ordered copy command vector'));
+  }else{
+    const src=RUN+'/recorder/capsule/verify.py';read(src);
+    same(s.output,{scientific_argv:[src,'--parameters',RUN+'/recorder/capsule/PARAMETERS.json'],parameter_locator:'explicit_absolute_argv',scientific_outcome:'SYSTEM_EXIT_ZERO',source:inputs[src],cwd:RUN+'/recorder/capsule'},'whole scientific execution interface/outcome');
+  }
+}
+same(nativeCount,12,'eleven runtime native plus separate root native');
+const entryResult=obj(B+'/entry01/RESULT.json');
+same(Object.keys(entryResult).sort(),['status','errors','commands','attempt','canonical_adopted','complete_pair_reception_completed','scope'].sort(),'whole separate root capture result fields');
+same(entryResult.scope,'Root outer native capture only, not scientific-output acceptance or another producer invocation.','root capture not full acceptance');
+same(entryResult.complete_pair_reception_completed,false,'actual root capture leaves full reception pending');
+same(entryResult.commands[0].label,'AUTHOR_PAIR','separate actual root pair label');
+const normalize=p=>read(p).toString().replace(/\(0x[0-9a-f]+\)/g,'(ADDRESS)');
+const discovered=normalize(D+'/commands/03_ldd_before/stdout.raw');
+same(normalize(D+'/commands/04_ldd_after/stdout.raw'),discovered,'entire discovery target-ordered linkage text modulo addresses');
+for(const name of ['01_ldd_before','06_ldd_after'])same(normalize(RUN+'/recorder/commands/'+name+'/stdout.raw'),discovered,'whole per-target actual linkage, not aggregate-only membership');
+function received(p){
+  const native=obj(p),parts=[native.result];
+  for(const poll of native.polls||[]){need(parts.at(-1).session_id&&!Object.hasOwn(parts.at(-1),'exit_code'),'actual intermediate running state');same(poll.request.session_id,parts.at(-1).session_id,'complete actual native session chain');parts.push(poll.result);}
+  same(parts.at(-1).exit_code,0,'actual complete native zero');need(!parts.at(-1).session_id,'no active final native session');
+  return {native,value:JSON.parse(parts.map(x=>x.output).join(''))};
+}
+const prepReceived=received(B+'/BINDING_NATIVE01.json'),prepNative=prepReceived.native,prepResult=obj(B+'/RESULT.json');
+same(prepReceived.value,prepResult,'whole actual preparer tool output versus saved result');
+same(prepNative.request.cmd,'/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/node docs/papers211_215_sequence/qa/p212_author_pair_binding01/prepare_binding.js','exact actual documentary preparation command');
+const currentPrep=obj(B+'/INPUTS_AT_BINDING.json');for(const[p,k]of Object.entries(currentPrep))read(p,k);
+need(Number.isSafeInteger(prepResult.input_paths)&&prepResult.input_paths>0,'actual positive binding input count');
+same(Object.keys(currentPrep).length,prepResult.input_paths,'whole actual binding input key');
+const fullReceived=received(OWN+'/ROOT_NATIVE01.json'),t=fullReceived.native;
+same(fullReceived.value,r,'whole actual full receiver output');
+same(t.request.workdir,ROOT,'actual receiver product cwd');
+same(t.request.cmd,'/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B '+OWN+'/inspect_production.py '+B+'/BINDING.json '+r.binding.sha256+' '+B+'/PRODUCTION_TOOL_INVOCATION.json','exact full receiver product/source binding');
+read(OWN+'/supplement.js');
+for(const p of Object.keys(inputs))read(p,inputs[p]);
+fs.writeFileSync(OWN+'/SUPPLEMENT_INPUTS.json',JSON.stringify(inputs,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({status:'PASS_ROOT_P212_PAIR_RECORD_SUPPLEMENT_PENDING_SEMANTIC_REUSE',checks,input_paths:Object.keys(inputs).length,native_commands:12,scientific_executions:0,ldd_equality:'entire target-ordered text after replacing only hexadecimal runtime load addresses; not raw-byte equality',input_key:val(fs.readFileSync(OWN+'/SUPPLEMENT_INPUTS.json'))}));

@@ -1,0 +1,77 @@
+{
+  "schema": "four-desk-actual-native-execution-lossless-split-v1",
+  "scope": "Actual single read-only documentary invocation. The complete actual output string is stored once in the separately sealed output file, not summarized or numerically reserialized. No archived command is evaluated.",
+  "actual_execution": {
+    "request": {
+      "cmd": "/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC /usr/bin/python3.10 -I -S -B /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/four_desk_documentary_audit01/receive_four_desks.py",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 40000
+    },
+    "result_without_output": {
+      "chunk_id": "3b9f14",
+      "wall_time_seconds": 0.00000335,
+      "exit_code": 0,
+      "original_token_count": 36191
+    },
+    "result_output_verbatim": {
+      "file": "RECEPTION_RESULT.json",
+      "utf8_bytes": 144763,
+      "sha256": "92488a43ba99e28c39d3a5157dee9387da710bf3bf43d105f37751865a779fc0",
+      "encoding": "UTF-8 of the exact actual tool-return output string, terminal LF preserved",
+      "separate_raw_stdout_stderr": false
+    }
+  },
+  "exact_saved_output_roundtrip": {
+    "request": {
+      "cmd": "sed -n '1,1p' docs/papers211_215_sequence/qa/four_desk_documentary_audit01/RECEPTION_RESULT.json",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 40000
+    },
+    "result_without_output": {
+      "chunk_id": "9e426a",
+      "wall_time_seconds": 0.00000518,
+      "exit_code": 0,
+      "original_token_count": 36191
+    },
+    "result_output_verbatim": {
+      "file": "RECEPTION_RESULT.json",
+      "utf8_bytes": 144763,
+      "sha256": "92488a43ba99e28c39d3a5157dee9387da710bf3bf43d105f37751865a779fc0",
+      "encoding": "UTF-8 of the exact actual tool-return output string, terminal LF preserved",
+      "separate_raw_stdout_stderr": false
+    },
+    "actual_orchestration_comparison": "Read result.output === original invocation result.output",
+    "exact_string_match": true
+  },
+  "actual_saved_result_pin_check": {
+    "request": {
+      "cmd": "python -I -S -B -c 'import pathlib,hashlib,json; p=pathlib.Path(\"docs/papers211_215_sequence/qa/four_desk_documentary_audit01/RECEPTION_RESULT.json\"); b=p.read_bytes(); x=json.loads(b); print(json.dumps({\"bytes\":len(b),\"sha256\":hashlib.sha256(b).hexdigest(),\"input_paths\":x[\"input_paths\"],\"checks\":x[\"checks\"],\"desk_bytes\":sum(d[\"total_bytes\"] for d in x[\"desks\"].values()),\"before_after_equal\":x[\"INPUTS_BEFORE\"]==x[\"INPUTS_AFTER\"]},sort_keys=True))'",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 2000
+    },
+    "result": {
+      "chunk_id": "25d280",
+      "wall_time_seconds": 0.00000523,
+      "exit_code": 0,
+      "original_token_count": 46,
+      "output": "{\"before_after_equal\": true, \"bytes\": 144763, \"checks\": 2985, \"desk_bytes\": 597622, \"input_paths\": 72, \"sha256\": \"92488a43ba99e28c39d3a5157dee9387da710bf3bf43d105f37751865a779fc0\"}\n"
+    }
+  },
+  "reconstruction_rule": "For either split result, read result_output_verbatim.file as UTF-8 and add it as the output field to result_without_output. This recovers every field of the actual returned native result; no missing historical output is reconstructed.",
+  "source_and_input_key": "The exact 72 complete rich before/after input records, including the new receiver and NATIVE_READS.json, are in the verbatim result.",
+  "authority": "Root final reception; no count/index/admission/scientific conclusion is adopted.",
+  "final_package_validation": {
+    "request": {
+      "cmd": "python -I -S -B -c 'import hashlib,json,pathlib,re,stat\nroot=pathlib.Path(\"/root/autodl-tmp/symbolic_dynamics\")\nbase=root/\"docs/papers211_215_sequence/qa/four_desk_documentary_audit01\"\nchecks=0\ndef check(x,msg):\n global checks\n checks+=1\n if not x: raise AssertionError(msg)\ndef sha(b): return hashlib.sha256(b).hexdigest()\ndef pairs(items):\n d={}\n for k,v in items:\n  check(k not in d,\"duplicate JSON key\")\n  d[k]=v\n return d\ndef load(p): return json.loads(p.read_bytes(),object_pairs_hook=pairs)\nnames={\"receive_four_desks.py\",\"NATIVE_READS.json\",\"RECEPTION_RESULT.json\",\"INPUT_PINS.sha256\",\"RECEPTION.md\",\"NATIVE_EXECUTION.json\"}\ncheck({p.name for p in base.iterdir()}==names,\"exact six preseal payloads\")\ncheck(all(p.is_file() and not p.is_symlink() for p in base.iterdir()),\"regular payloads\")\nr=load(base/\"RECEPTION_RESULT.json\")\nn=load(base/\"NATIVE_EXECUTION.json\")\nreads=load(base/\"NATIVE_READS.json\")\nraw=(base/\"RECEPTION_RESULT.json\").read_bytes()\ncheck(r[\"checks\"]==2985 and r[\"input_paths\"]==72,\"actual recorded count\")\ncheck(r[\"INPUTS_BEFORE\"]==r[\"INPUTS_AFTER\"],\"full saved rich equality\")\npinrows={}\nfor line in (base/\"INPUT_PINS.sha256\").read_text().splitlines():\n h,p=line.split(\"  \",1)\n check(re.fullmatch(\"[a-f0-9]{64}\",h) is not None and p not in pinrows,\"exact unique owned pin\")\n pinrows[p]=h\ncheck(set(pinrows)==set(r[\"INPUTS_BEFORE\"]),\"72 exact pin paths\")\nfor name,saved in r[\"INPUTS_BEFORE\"].items():\n p=pathlib.Path(name); b=p.read_bytes(); s=p.lstat()\n current={\"bytes\":len(b),\"sha256\":sha(b),\"resolved\":str(p.resolve()),\"symlink\":str(p.readlink()) if p.is_symlink() else None,\"mode\":s.st_mode,\"device\":s.st_dev,\"inode\":s.st_ino,\"mtime_ns\":s.st_mtime_ns,\"ctime_ns\":s.st_ctime_ns}\n check(current==saved,\"complete rich key remains unchanged \"+name)\n check(pinrows[name]==saved[\"sha256\"],\"owned pin matches exact input \"+name)\ncheck(len(r[\"complete_archived_native_entries\"])==62,\"native record census\")\ncheck(len(r[\"actual_native_source_byte_bindings\"])==34,\"source slice census\")\ncheck(len(r[\"desks\"][\"finite_permutation_gap_desk01\"][\"indexed_returned_rows\"])==4,\"returned row census\")\ncheck(sum(d[\"total_files\"] for d in r[\"desks\"].values())==34 and sum(d[\"total_bytes\"] for d in r[\"desks\"].values())==597622,\"four original census\")\ncheck(r[\"reported_closed_attempt_deltas\"]==[0,0,1,1] and r[\"count_or_admission_adoption\"] is False,\"no adopted count\")\ncheck(r[\"scientific_imports_or_executions\"]==r[\"archived_commands_evaluated\"]==r[\"new_web_requests\"]==r[\"new_literal_orbit_calculations\"]==0,\"scope counts\")\nfor key in [\"actual_execution\",\"exact_saved_output_roundtrip\"]:\n item=n[key]\n check(item[\"result_without_output\"][\"exit_code\"]==0,\"split native actual zero\")\n binding=item[\"result_output_verbatim\"]\n check(binding[\"file\"]==\"RECEPTION_RESULT.json\" and binding[\"utf8_bytes\"]==len(raw) and binding[\"sha256\"]==sha(raw),\"exact lossless split output bytes\")\n check(binding[\"separate_raw_stdout_stderr\"] is False,\"not fabricated raw streams\")\ncheck(n[\"actual_execution\"][\"result_without_output\"][\"chunk_id\"]==\"3b9f14\",\"actual audit native id\")\ncheck(n[\"exact_saved_output_roundtrip\"][\"result_without_output\"][\"chunk_id\"]==\"9e426a\" and n[\"exact_saved_output_roundtrip\"][\"exact_string_match\"] is True,\"actual exact roundtrip id\")\ncheck(n[\"actual_execution\"][\"request\"][\"cmd\"].endswith(\"/receive_four_desks.py\"),\"actual read-only receiver command\")\ncheck(reads[\"records\"][0][\"result\"][\"chunk_id\"]==\"4b7177\" and reads[\"records\"][1][\"result\"][\"chunk_id\"]==\"45401a\",\"actual selected ZR read ids\")\nreport=(base/\"RECEPTION.md\").read_text()\nfor phrase in [\"2,985 documentary checks / 72 complete\",\"34 original files / 597,622 bytes\",\"0 / 0 / 1 / 1\",\"count remains 41\",\"HOLD_EXTERNAL\",\"six payloads\"]:\n check(phrase in report,\"report boundary \"+phrase)\nlinks=[]\nfor target in re.findall(r\"\\]\\(([^)]+)\\)\",report):\n if target.startswith((\"https://\",\"http://\")): continue\n check((base/target.split(\"#\",1)[0]).is_file(),\"local report link \"+target)\n links.append(target)\nstable={p.name:{\"bytes\":len(p.read_bytes()),\"sha256\":sha(p.read_bytes())} for p in sorted(base.iterdir()) if p.name!=\"NATIVE_EXECUTION.json\"}\nprint(json.dumps({\"status\":\"PASS_FINAL_DOCUMENTS_AND_RICH_KEYS_PRESEAL\",\"checks\":checks,\"unchanged_full_rich_inputs\":72,\"complete_original_package_files\":34,\"complete_original_package_bytes\":597622,\"actual_native_output_bytes\":len(raw),\"actual_native_output_sha256\":sha(raw),\"links\":links,\"stable_five_payload_pins\":stable,\"scope\":\"NATIVE_EXECUTION.json excluded from these stable pins because this exact result is to be inserted before the six-payload nonself seal. No archived or scientific command executed.\"},sort_keys=True,separators=(\",\",\":\")))\n'",
+      "workdir": "/root/autodl-tmp/symbolic_dynamics",
+      "max_output_tokens": 5000
+    },
+    "result": {
+      "chunk_id": "c779db",
+      "wall_time_seconds": 0.00000544,
+      "exit_code": 0,
+      "original_token_count": 363,
+      "output": "{\"actual_native_output_bytes\":144763,\"actual_native_output_sha256\":\"92488a43ba99e28c39d3a5157dee9387da710bf3bf43d105f37751865a779fc0\",\"checks\":3217,\"complete_original_package_bytes\":597622,\"complete_original_package_files\":34,\"links\":[\"../../scouting/finite_permutation_gap_desk01/HANDOFF.md\",\"../../scouting/finite_nonlinear_residual_desk01/HANDOFF.md\",\"../../scouting/finite_graph_rewiring_desk01/HANDOFF.md\",\"../../scouting/finite_resource_rewriting_desk02/REPORT.md\",\"receive_four_desks.py\",\"NATIVE_READS.json\",\"RECEPTION_RESULT.json\",\"INPUT_PINS.sha256\",\"NATIVE_EXECUTION.json\"],\"scope\":\"NATIVE_EXECUTION.json excluded from these stable pins because this exact result is to be inserted before the six-payload nonself seal. No archived or scientific command executed.\",\"stable_five_payload_pins\":{\"INPUT_PINS.sha256\":{\"bytes\":13125,\"sha256\":\"bcfb8e9cb80384850c4e806ad146b32dc37a6af970cbc2037701b68cd4fc458d\"},\"NATIVE_READS.json\":{\"bytes\":5266,\"sha256\":\"76d75dda9ee07dbf827ddf8dff2494bd692458452aa7513f2b1cafa0b6b47d27\"},\"RECEPTION.md\":{\"bytes\":11037,\"sha256\":\"513840a123a723f2b5ff974fd159a39ee7d39c2af48467a33c23f7cc719aa654\"},\"RECEPTION_RESULT.json\":{\"bytes\":144763,\"sha256\":\"92488a43ba99e28c39d3a5157dee9387da710bf3bf43d105f37751865a779fc0\"},\"receive_four_desks.py\":{\"bytes\":36998,\"sha256\":\"44463996dfb723b83dad6755f44ccce410cfe3b6d36e7409b8a24983eb083e5c\"}},\"status\":\"PASS_FINAL_DOCUMENTS_AND_RICH_KEYS_PRESEAL\",\"unchanged_full_rich_inputs\":72}\n"
+    }
+  }
+}

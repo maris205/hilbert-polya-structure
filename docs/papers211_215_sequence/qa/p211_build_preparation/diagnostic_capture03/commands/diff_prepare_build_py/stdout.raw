@@ -1,0 +1,82 @@
+--- /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/history/diagnostic01_source/prepare_build.py	2026-09-08 17:50:31.659556459 +0800
++++ /root/autodl-tmp/symbolic_dynamics/docs/papers211_215_sequence/qa/p211_build_preparation/prepare_build.py	2026-09-08 17:52:18.714377666 +0800
+@@ -72,7 +72,7 @@
+     write_new(out / 'SOURCE_GRAPH.json', source_graph())
+     write_new(out / 'HISTORICAL_INPUTS.json',
+               {str(p): pin(p) for p in (PRIOR_KEY, ACCEPTANCE, OLD_BUILDER)})
+-    specs, reasons, calls, query_results, missing = {}, {}, [], {}, []
++    specs, reasons, calls, query_results, relative_roots = {}, {}, [], {}, {}
+ 
+     def select(path, reason, members=False):
+         p = Path(path)
+@@ -98,6 +98,16 @@
+         require(row['successful'], 'Diagnostic command failed: ' + label)
+         return raw
+ 
++    def relative_absence(role, raw):
++        relative = Path(raw)
++        require(relative.parts and not relative.is_absolute() and '..' not in relative.parts and
++                not any(c in raw for c in '${}'), 'Unexpanded/escaping cwd-relative TeX root')
++        actual = out / relative
++        require(not os.path.lexists(actual), 'Diagnostic user TeX root exists')
++        relative_roots[role] = {'raw': raw, 'relative': relative.as_posix(),
++                                'required_state': 'ABSENT',
++                                'diagnostic_cwd': str(out), 'diagnostic_entry': entry(actual)}
++
+     def lookup(label, names, required=()):
+         names = sorted(set(names))
+         raw = command(label, ['/usr/bin/kpsewhich', '--all', *names], (0, 1)).decode()
+@@ -143,19 +153,25 @@
+                          'openin_any', 'openout_any'):
+             raw = command('var_' + variable,
+                           ['/usr/bin/kpsewhich', '-var-value=' + variable], (0, 1)).decode().strip()
+-            query_results['var_' + variable] = raw
++            query_results['var_' + variable] = raw.replace(str(out), '{COMMAND_CWD}')
+             if variable in ('TEXMFHOME', 'TEXMFCONFIG', 'TEXMFVAR'):
+-                require(raw and Path(raw).is_absolute(), 'Ambiguous user TeX root')
+-                select(raw, 'user TeX search root required absent')
+-                require(not os.path.lexists(raw), 'User TeX root exists: ' + raw)
++                require(raw, 'Empty user TeX root')
++                if Path(raw).is_absolute():
++                    select(raw, 'user TeX search root required absent')
++                    require(not os.path.lexists(raw), 'User TeX root exists: ' + raw)
++                else:
++                    relative_absence(variable, raw)
+         expanded = command('expanded_TEXMF', ['/usr/bin/kpsewhich', '-expand-path=$TEXMF']).decode().strip()
+-        query_results['expanded_TEXMF'] = expanded
+-        for item in expanded.split(':'):
++        query_results['expanded_TEXMF'] = expanded.replace(str(out), '{COMMAND_CWD}')
++        for number, item in enumerate(expanded.split(':')):
+             if item:
+                 p = Path(item.removeprefix('!!'))
+-                require(p.is_absolute(), 'Ambiguous expanded TeX search root')
+-                select(p, 'expanded search-root presence, not recursive contents')
+-                select(p / 'ls-R', 'search-root filename database')
++                if p.is_absolute() and not p.is_relative_to(out):
++                    select(p, 'expanded search-root presence, not recursive contents')
++                    select(p / 'ls-R', 'search-root filename database')
++                else:
++                    rel = p.relative_to(out) if p.is_absolute() else p
++                    relative_absence('expanded_TEXMF_' + str(number), rel.as_posix())
+         found = lookup('explicit_graph_seeds', (*SEEDS, *BASE_TFMS),
+                        ('amsart.cls', 'amsplain.bst', 'pdftex.map', 'pdflatex.fmt'))
+         # Parse only named/previously consumed FD files; each yielded metric
+@@ -215,6 +231,7 @@
+                 'environment': ENV8, 'selector_specs': specs, 'entries': records,
+                 'selection_reasons': {k: sorted(v) for k, v in sorted(reasons.items())},
+                 'queries': query_results, 'ldd_elf_inputs': elf,
++                'cwd_relative_absence_roles': relative_roots,
+                 'source_observations': sources_before, 'code_observations': codes_before,
+                 'historical_inputs': {str(p): pin(p) for p in (PRIOR_KEY, ACCEPTANCE, OLD_BUILDER)},
+                 'scope': 'Explicit candidates, immediate named configuration memberships, actual parent imports/maps, native link-time ldd and future exact per-pass FLS. No recursive host inventory; no OS-hermetic, child-map, transient-dlopen or non-FLS trace claim.',
+@@ -229,6 +246,10 @@
+         status = 'DIAGNOSTIC_CANDIDATE_WRITTEN_NO_BUILD_NO_ACCEPTANCE'
+     except BaseException:
+         error = traceback.format_exc()
++        write_new(out / 'PARTIAL_SELECTOR.json', {'specs': specs,
++                  'reasons': {k: sorted(v) for k, v in reasons.items()},
++                  'queries': query_results, 'cwd_relative_absence_roles': relative_roots,
++                  'status': 'PARTIAL_DIAGNOSTIC_NOT_A_PRELOCK'})
+     write_new(out / 'SOURCES_AFTER.json', physical_sources())
+     write_new(out / 'CODE_AFTER.json', {name: pin(PREP / name) for name in CODE_NAMES})
+     result = {'status': status, 'error': error, 'native_commands': calls,

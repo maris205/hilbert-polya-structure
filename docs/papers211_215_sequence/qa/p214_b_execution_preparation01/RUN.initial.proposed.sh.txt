@@ -1,0 +1,45 @@
+#!/bin/bash
+# SOURCE-ONLY PROPOSAL. Requires root source acceptance, runtime binding and a separate one-use grant.
+set -euo pipefail
+[[ "$#" == 1 && "$1" == "--execute-under-separate-root-grant" ]] || exit 78
+umask 077
+cd /root/autodl-tmp/symbolic_dynamics
+P214_B_SOURCE=docs/papers211_215_sequence/reviews/p214_b/verify.py
+P214_B_PINS=docs/papers211_215_sequence/reviews/p214_b/INPUT_PINS.sha256
+P214_B_PACKAGE=docs/papers211_215_sequence/reviews/p214_b/SHA256SUMS
+P214_B_OUT=docs/papers211_215_sequence/qa/p214_b_initial_run01
+[[ -f "$P214_B_SOURCE" && ! -L "$P214_B_SOURCE" ]]
+[[ -f "$P214_B_PINS" && ! -L "$P214_B_PINS" ]]
+[[ -f "$P214_B_PACKAGE" && ! -L "$P214_B_PACKAGE" ]]
+[[ ! -e "$P214_B_OUT" && ! -L "$P214_B_OUT" ]]
+sha256sum -c --strict "$P214_B_PINS"
+(cd docs/papers211_215_sequence/reviews/p214_b && sha256sum -c --strict SHA256SUMS)
+mkdir -m 700 -- "$P214_B_OUT"
+set -C
+exec 3>&1 4>&2
+exec > "$P214_B_OUT/controller.stdout.raw" 2> "$P214_B_OUT/controller.stderr.raw"
+p214_b_finish() {
+  p214_b_controller_status=$?
+  trap - EXIT
+  printf '%s\n' "$p214_b_controller_status" > "$P214_B_OUT/controller.exit"
+  printf 'P214_B_CAPTURE_EXIT=%s\n' "$p214_b_controller_status" >&3
+  exit "$p214_b_controller_status"
+}
+trap p214_b_finish EXIT
+set +e
+/usr/bin/env -i PATH=/usr/bin:/bin LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC \
+  /usr/bin/python3.10 -I -S -B "$P214_B_SOURCE" < /dev/null 3>&- 4>&- \
+  > "$P214_B_OUT/stdout.raw" 2> "$P214_B_OUT/stderr.raw"
+P214_B_PYTHON_STATUS=$?
+set -e
+printf '%s\n' "$P214_B_PYTHON_STATUS" > "$P214_B_OUT/python.exit"
+sha256sum -c --strict "$P214_B_PINS" > "$P214_B_OUT/inputs.after.stdout" 2> "$P214_B_OUT/inputs.after.stderr"
+(cd docs/papers211_215_sequence/reviews/p214_b && sha256sum -c --strict SHA256SUMS) \
+  > "$P214_B_OUT/package.after.stdout" 2> "$P214_B_OUT/package.after.stderr"
+sha256sum -- "$P214_B_OUT/stdout.raw" "$P214_B_OUT/stderr.raw" \
+  "$P214_B_OUT/python.exit" > "$P214_B_OUT/OUTPUTS.sha256"
+[[ "$P214_B_PYTHON_STATUS" == 0 ]] || exit "$P214_B_PYTHON_STATUS"
+[[ -s "$P214_B_OUT/stdout.raw" ]]
+[[ ! -s "$P214_B_OUT/stderr.raw" ]]
+tail -n 1 -- "$P214_B_OUT/stdout.raw" | grep -q '^PASS|carriers=9|states=5271|state_records=5271|target_records=5271|checks=[0-9][0-9]*$'
+printf '%s\n' 'P214_B_INITIAL_CAPTURE_COMPLETE_PENDING_DATA_RECEPTION'
