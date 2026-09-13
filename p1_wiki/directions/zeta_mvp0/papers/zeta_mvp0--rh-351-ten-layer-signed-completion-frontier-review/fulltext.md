@@ -1,0 +1,190 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "zeta_mvp0"
+logical_paper_id: "zeta_mvp0--rh-351-ten-layer-signed-completion-frontier-review"
+canonical_tex: "zeta_mvp0/papers/RH-351-ten-layer-signed-completion-frontier-review/main.tex"
+canonical_pdf: "zeta_mvp0/papers/RH-351-ten-layer-signed-completion-frontier-review/main.pdf"
+source_sha256: "91514f720c23fa25e8a63b71cbd412a9abaa2543aea5aa2c363c079b91763272"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# Ten Layers of Signed Completion: Growing-Depth Coefficient-Ledger Underdetermination at the Physical First Alias
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../zeta_mvp0/papers/RH-351-ten-layer-signed-completion-frontier-review>)
+- [规范 TeX](<../../../../../zeta_mvp0/papers/RH-351-ten-layer-signed-completion-frontier-review/main.tex>)
+- [关联 PDF](<../../../../../zeta_mvp0/papers/RH-351-ten-layer-signed-completion-frontier-review/main.pdf>)
+- [支撑 Markdown](<../../../../../zeta_mvp0/papers/RH-351-ten-layer-signed-completion-frontier-review/README.md>)
+- [BibTeX](<../../../../../zeta_mvp0/papers/RH-351-ten-layer-signed-completion-frontier-review/references.bib>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  We audit RH-342--RH-350 and close the batch with a growing-depth information-class theorem. On the physical clock, RH-348 and RH-350 give the exact selected lower-even direct coefficients $$p_{k,j}=Y_{k,j}+\mathcal P_{k,j}-S_{k,j},
+   \qquad m_{k,j}=k-j,
+   \qquad 2\le j\le J_k,$$ where $J_k\to\infty$ and $J_k=o(k)$. RH-350 proves uniform normalized laws for the deterministic demand $S$ and parity packet $\mathcal P$, an exact weighted minimax law, and a conditional exponentially divergent subprefix theorem under an unproved aggregate estimate for the actual signed remainder $Y$.
+
+  The new theorem fixes the proved $\mathcal P/S$ arrays and considers only their abstract signed coefficient-ledger completions. The affine identity is surjective: every prescribed residual array $r$ is obtained from $Y=S-\mathcal P+r$. In particular, $Y^{\rm close}=S-\mathcal P$ gives zero selected residual, while $Y^{\rm far}=0$ gives the RH-350 minimax residual. Their normalized budgets obey the exact exchange $$\mathcal Y_k(Y^{\rm close})=\mathcal L_k(Y^{\rm far}),
+   \qquad
+   \mathcal Y_k(Y^{\rm far})=\mathcal L_k(Y^{\rm close})=0,$$ and $\mathcal L_k(Y^{\rm far})$ has a positive limiting lower bound. Thus the current deterministic/scalar information does not determine the actual selected physical residual. The two completions are not noisy operators, Markov kernels, raw trace partitions, or determinant realizations.
+
+  The actual moving-order $Y$ theorem, head transport, critical and first-lower compensation, odd and upper-alias control, and the full $E_{\rm off}$ aggregate remain open. RH-241's moving noisy all-order envelope remains distinct from the later deterministic anchor and envelope. RH-288 and Gates A--E are inactive. No Riemann-hypothesis conclusion follows.
+author:
+- Bin Wang
+bibliography:
+- references.bib
+date: August 2026
+title: |
+  Ten Layers of Signed Completion:\
+  Growing-Depth Coefficient-Ledger Underdetermination at the Physical First Alias
+```
+
+## Markdown 正文
+
+# Typed ancestry and the growing window
+
+RH-241 left an all-order deterministic target frontier together with a moving cloud-extracted noisy envelope and coefficient bridge [@WangTraceFrontier2026]. Later work closes only the deterministic target side. RH-263 proves the deterministic numerator coefficient anchor at every order, RH-267 proves $$\label{eq:det-envelope}
+ |a_n|<48q_*^n\qquad(n\ge2),$$ and RH-268 proves $a_n/q_*^n\to1$ and the sharp deterministic radius [@WangParityAnchor2026; @WangUnifiedEnvelope2026; @WangSharpRadius2026]. None of these statements proves the moving noisy uniform envelope, the no-over-extraction bridge, or a moving noisy coefficient theorem. In particular, RH-350's lower-even triangular uniformity is not the RH-241 moving noisy all-order envelope.
+
+Freeze the physical natural clock and Hardy target $$\label{eq:clock}
+ k=\frac{\log(1/\sigma)}{2\log\lambda}+O(1),
+ \qquad
+ \eta_k=k-\frac{\log(1/\sigma)}{2\log\lambda},
+ \qquad
+ H_m=mR^{-2m},
+ \qquad R=\frac75.$$ Take an integer triangular window $$\label{eq:window}
+ m_{k,j}=k-j,
+ \qquad 2\le j\le J_k,
+ \qquad J_k\longrightarrow\infty,
+ \qquad J_k=o(k).$$ The $o(k)$ restriction is part of the theorem type: it keeps the window in the RH-348 lower-even ladder and permits the RH-350 uniform estimates.
+
+Let $C_M>0$, $\beta=1/(r_H\sqrt\lambda)$, and $$\label{eq:x}
+ x=(\beta R)^2>1,
+ \qquad
+ x\lambda=\left(\frac{R}{r_H}\right)^2
+ =\left(\frac{28}{17}\right)^2>2.$$ With $a_k=C_*C_M\lambda^{\eta_k-2}$, bounded physical phase makes $a_k$ bounded and positive. RH-350 proves, uniformly on [\[eq:window\]](#eq:window){reference-type="eqref" reference="eq:window"}, $$\begin{aligned}
+ \sup_j\left|
+ \frac{C_MS_{k,j}}{2H_{m_{k,j}}x^{m_{k,j}}}-1
+ \right|&\longrightarrow0,
+ \label{eq:S-uniform}\\
+ \sup_j\left|
+ \frac{C_M\mathcal P_{k,j}}{2H_{m_{k,j}}x^{m_{k,j}}}
+ -a_k\lambda^{2-j}
+ \right|&\longrightarrow0.
+ \label{eq:P-uniform}\end{aligned}$$ These are deterministic/scalar packet laws. They contain no estimate for the actual signed remainder.
+
+# Ten source-locked layers
+
+The nine source papers are [@WangRankLock2026; @WangEqualInvariant2026; @WangCriticalOrbit2026; @WangCriticalPhase2026; @WangLowerOrbit2026; @WangLowerBalance2026; @WangLowerLadder2026; @WangTwoSidebands2026; @WangGrowingSidebands2026]. Their data types and boundaries are retained literally.
+
+  paper    strict result                                                                                                                        boundary retained here
+  -------- ------------------------------------------------------------------------------------------------------------------------------------ ------------------------------------------------------------------------------------------------
+  paper    strict result                                                                                                                        boundary retained here
+  RH-342   Exact head/counterloop rank lock, shifted-moment recovery under a rank cap, and a hidden $4k$-shell information-class obstruction.   No actual head-rank identification, root transport, or $D_{4k}$ theorem.
+  RH-343   Equal rank, squared mass, cap, and fixed-order data admit finite normal spectra with zero or divergent moving prefix budgets.        The models are not noisy operators and do not decide actual head transport.
+  RH-344   Complete physical critical boundary-orbit extraction and the exact double-alias-sized compensation demand.                           The orbit-free rest and head defect are not estimated; no signed critical verdict follows.
+  RH-345   Conditional physical critical divergence off the scalar balance phase and scalar information-class underdetermination at balance.    The actual $Y_k=o(H_k)$ hypothesis is not proved.
+  RH-346   Complete physical first-lower boundary-orbit extraction, including the radial sideband and its lower relative scale.                 The actual combined remainder remains uncontrolled.
+  RH-347   Conditional physical first-lower divergence off balance and scalar underdetermination at balance.                                    The scalar completions are not physical transfer operators and do not decide $E_{\rm off}$.
+  RH-348   Exact punctured lower-even orbit ladder, its geometric divergence, and the necessary aggregate signed-supply law.                    No theorem estimates the actual signed supply; odd and upper-alias orders remain open.
+  RH-349   Fixed two-sideband phase incompatibility and exact relative and physically weighted minimax laws.                                    Both actual remainder hypotheses are unproved; no unconditional prefix statement is made.
+  RH-350   Growing-depth uniform $S/\mathcal P$ laws, exact minimax families, and a conditional selected-subprefix obstruction.                 The aggregate actual $Y$ hypothesis is unproved; the result is not full $E_{\rm off}$ control.
+  RH-351   Affine completion surjectivity and opposite growing-depth signed coefficient-ledger completions.                                     Information-class theorem only; no pair of physical noisy realizations is constructed.
+
+The batch contains ten strict scoped conclusions and zero discharged actual signed-remainder obligations. Exact physical decompositions occur in RH-344, RH-346, and RH-348. The normal-spectral and scalar examples retain their declared information-class type, while the RH-349--RH-350 physical conclusions remain conditional on their named actual remainder hypotheses.
+
+# The exact selected coefficient and RH-350 input
+
+For each coordinate in [\[eq:window\]](#eq:window){reference-type="eqref" reference="eq:window"}, RH-348 gives the direct coefficient identity $$\label{eq:direct}
+ \boxed{
+ p_{k,j}=Y_{k,j}+\mathcal P_{k,j}-S_{k,j},}
+ \qquad
+ Y_{k,j}=\mathcal T_{k,m_{k,j}}^{\rm rest}
+ -d_{\sigma,k,2m_{k,j}}.$$ The term $Y$ is signed and actual. It combines the orbit-free physical rest with the defect between the noisy head and the counterloop. It is not a free parameter of the physical problem.
+
+Define the selected direct and remainder budgets $$\begin{aligned}
+ \mathcal L_k(Y)&=\frac1{x^{k-2}}
+ \sum_{j=2}^{J_k}
+ \frac{|Y_{k,j}+\mathcal P_{k,j}-S_{k,j}|}{2H_{m_{k,j}}},
+ \label{eq:L}\\
+ \mathcal Y_k(Y)&=\frac1{x^{k-2}}
+ \sum_{j=2}^{J_k}
+ \frac{|Y_{k,j}|}{2H_{m_{k,j}}}.
+ \label{eq:Yagg}\end{aligned}$$ Since $H_m=mR^{-2m}$, the unnormalized sum in [\[eq:L\]](#eq:L){reference-type="eqref" reference="eq:L"} is exactly the selected lower-even contribution with prefix weight $R^{2m}/(2m)$.
+
+Put $$\label{eq:F}
+ F_N(a)=\sum_{r=0}^{N}x^{-r}|a\lambda^{-r}-1|.$$ RH-350 proves that $a=1$ is its unique minimizer and $$\begin{aligned}
+ A_N:=\inf_{a>0}F_N(a)
+ &=\frac{1-x^{-N}}{x-1}
+ -\frac{1-(x\lambda)^{-N}}{x\lambda-1},
+ \label{eq:AN}\\
+ A_N&\nearrow A_\infty
+ =\frac1{x-1}-\frac1{x\lambda-1}>0.
+ \label{eq:Ainf}\end{aligned}$$ Its conditional physical theorem says $$\label{eq:RH350}
+ \mathcal Y_k(Y^{\rm actual})\longrightarrow0
+ \quad\Longrightarrow\quad
+ \mathcal L_k(Y^{\rm actual})
+ =\frac{F_{J_k-2}(a_k)}{C_M}+o(1),$$ and hence $\liminf\mathcal L_k(Y^{\rm actual})\ge A_\infty/C_M$. The antecedent in [\[eq:RH350\]](#eq:RH350){reference-type="eqref" reference="eq:RH350"} is not proved in the repository.
+
+# Growing-depth signed-completion underdetermination
+
+Fix the source-locked arrays $S_{k,j}$ and $\mathcal P_{k,j}$ satisfying [\[eq:S-uniform\]](#eq:S-uniform){reference-type="eqref" reference="eq:S-uniform"}--[\[eq:P-uniform\]](#eq:P-uniform){reference-type="eqref" reference="eq:P-uniform"}. The selected coefficient-ledger information class consists of formal signed arrays $Y_{k,j}$ on [\[eq:window\]](#eq:window){reference-type="eqref" reference="eq:window"}, with $p_{k,j}$ defined by [\[eq:direct\]](#eq:direct){reference-type="eqref" reference="eq:direct"}. No Markov kernel, transfer operator, raw trace partition, determinant, or cross-order physical realizability condition is added.
+
+For every formal residual array $r_{k,j}$ on the selected window, the unique coefficient-ledger completion $$\label{eq:affine}
+ Y^{[r]}_{k,j}=S_{k,j}-\mathcal P_{k,j}+r_{k,j}$$ satisfies $p^{[r]}_{k,j}=r_{k,j}$ exactly.
+
+Substitution of [\[eq:affine\]](#eq:affine){reference-type="eqref" reference="eq:affine"} into [\[eq:direct\]](#eq:direct){reference-type="eqref" reference="eq:direct"} gives $p^{[r]}=(S-\mathcal P+r)+\mathcal P-S=r$ coordinatewise. Conversely, [\[eq:direct\]](#eq:direct){reference-type="eqref" reference="eq:direct"} can be solved uniquely for $Y$ once $p=r$ is prescribed.
+
+The proposition is deliberately algebraic. It identifies precisely what the proved $S/\mathcal P$ information cannot constrain before a theorem for the actual $Y$ is supplied.
+
+Within the selected coefficient-ledger information class, define $$\begin{aligned}
+ Y^{\rm close}_{k,j}&=S_{k,j}-\mathcal P_{k,j},
+ &p^{\rm close}_{k,j}&=0,
+ \label{eq:close}\\
+ Y^{\rm far}_{k,j}&=0,
+ &p^{\rm far}_{k,j}&=\mathcal P_{k,j}-S_{k,j}.
+ \label{eq:far}\end{aligned}$$ Then the normalized budgets obey the exact exchange $$\label{eq:exchange}
+ \boxed{
+ \mathcal Y_k(Y^{\rm close})=\mathcal L_k(Y^{\rm far}),
+ \qquad
+ \mathcal Y_k(Y^{\rm far})=\mathcal L_k(Y^{\rm close})=0.}$$ Moreover, with $N_k=J_k-2$, $$\label{eq:far-law}
+ \boxed{
+ \mathcal L_k(Y^{\rm far})
+ =\frac{F_{N_k}(a_k)}{C_M}+o(1),}$$ and $$\label{eq:far-liminf}
+ \boxed{
+ \liminf_{k\to\infty}\mathcal L_k(Y^{\rm far})
+ \ge\frac1{C_M}
+ \left(\frac1{x-1}-\frac1{x\lambda-1}\right)>0.}$$ Consequently the unnormalized selected sum in the far ledger diverges at least on the exponential scale $x^{k-2}$, whereas the close ledger vanishes identically on the selected window.
+
+Equations [\[eq:close\]](#eq:close){reference-type="eqref" reference="eq:close"}--[\[eq:far\]](#eq:far){reference-type="eqref" reference="eq:far"} are the cases $r=0$ and $r=\mathcal P-S$ of affine surjectivity. The identities $|Y^{\rm close}|=|S-\mathcal P|=|p^{\rm far}|$ and $Y^{\rm far}=p^{\rm close}=0$ hold coordinatewise. Multiplication by the same positive weights in [\[eq:L\]](#eq:L){reference-type="eqref" reference="eq:L"}--[\[eq:Yagg\]](#eq:Yagg){reference-type="eqref" reference="eq:Yagg"} and summation prove [\[eq:exchange\]](#eq:exchange){reference-type="eqref" reference="eq:exchange"}.
+
+For the far ledger, [\[eq:S-uniform\]](#eq:S-uniform){reference-type="eqref" reference="eq:S-uniform"}--[\[eq:P-uniform\]](#eq:P-uniform){reference-type="eqref" reference="eq:P-uniform"} give, uniformly in $j$, $$\frac{|\mathcal P_{k,j}-S_{k,j}|}
+ {2H_{m_{k,j}}x^{m_{k,j}}}
+ =\frac{|a_k\lambda^{2-j}-1|}{C_M}+o(1).$$ Since $x^{m_{k,j}}/x^{k-2}=x^{2-j}$ and $\sum_{j=2}^{\infty}x^{2-j}<\infty$, summing the uniform error gives $o(1)$. Reindexing by $r=j-2$ proves [\[eq:far-law\]](#eq:far-law){reference-type="eqref" reference="eq:far-law"} directly for the formal ledger. Equations [\[eq:AN\]](#eq:AN){reference-type="eqref" reference="eq:AN"}--[\[eq:Ainf\]](#eq:Ainf){reference-type="eqref" reference="eq:Ainf"} then give [\[eq:far-liminf\]](#eq:far-liminf){reference-type="eqref" reference="eq:far-liminf"}. Since $x>1$, multiplication by $x^{k-2}$ yields the unnormalized divergence. The close statement is exact from [\[eq:close\]](#eq:close){reference-type="eqref" reference="eq:close"}.
+
+The proved $S/\mathcal P$ arrays, their growing-window uniform laws, and their exact minimax formulas determine neither vanishing nor nonvanishing of the actual selected lower-even residual. Any physical verdict requires an additional moving-order theorem that restricts the actual $Y_{k,j}$.
+
+The two formal ledgers satisfy the same fixed $S/\mathcal P$ premises and have opposite selected outcomes. Therefore neither outcome is a logical consequence of those premises alone. The close ledger does not contradict RH-350: by [\[eq:exchange\]](#eq:exchange){reference-type="eqref" reference="eq:exchange"}, its $Y$ budget equals the positive far residual budget and hence fails the small-$Y$ hypothesis.
+
+The theorem constructs no physical noisy object. In the physical problem, $Y=\mathcal T^{\rm rest}-d$ is fixed by one noisy dynamics and must satisfy any cross-order identities that such a realization imposes. Those constraints are exactly what the current repository does not estimate. The theorem is a coefficient-information insufficiency result, not a physical existence or nonexistence theorem.
+
+# Frontier, archive, and claim boundary
+
+The unique repository-backed coordinate after this review is
+
+`actual_growing_lower_even_signed_remainder_open`.
+
+The narrowest positive reopening input is an actual moving-order theorem for $Y_{k,j}$ on [\[eq:window\]](#eq:window){reference-type="eqref" reference="eq:window"}. Proving $\mathcal Y_k(Y^{\rm actual})\to0$ would activate the RH-350 physical obstruction. Proving weighted closeness of $Y^{\rm actual}$ to $S-\mathcal P$ would close only the selected lower-even window. Neither result would by itself estimate the critical order, the first lower sideband, odd orders, upper-alias orders, the head budget $D_{4k}$, or the complete $E_{\rm off}$ aggregate. A direct physical annular theorem remains an independent possible route.
+
+The executable review records ten scoped conclusions, zero discharged actual signed-remainder obligations, three exact finite algebra witnesses, and twenty-two false forbidden claims. Finite rows reproduce affine identities and budget exchange only. RH-342--RH-350 contain fifteen publication files each and RH-351 contains nineteen, so the batch manifest contains $9\cdot15+19=154$ publication files. After individual and batch archive metadata, the ten controlled paper trees contain 176 files.
+
+The nine upstream result ledgers contain forty-five false Gate values; this review adds five more. All fifty Gate A--E values remain false. RH-288 is inactive because its physical prefix leaf is absent. This paper constructs no Hilbert--Polya operator, identifies no Riemann zero, proves no von Mangoldt prime-power trace, proves no completed-zeta divisor equality, and does not prove the Riemann Hypothesis.

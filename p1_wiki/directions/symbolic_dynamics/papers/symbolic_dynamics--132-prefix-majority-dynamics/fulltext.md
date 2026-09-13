@@ -1,0 +1,98 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "symbolic_dynamics"
+logical_paper_id: "symbolic_dynamics--132-prefix-majority-dynamics"
+canonical_tex: "symbolic_dynamics/papers/132-prefix-majority-dynamics/main.tex"
+canonical_pdf: "symbolic_dynamics/papers/132-prefix-majority-dynamics/main.pdf"
+source_sha256: "a26bee914dd2909c825a7c1d3e2a012c09b2def816b14db85ab27c40b60bddaf"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# Synchronous Prefix-Majority Dynamics: Logarithmic Stabilization and Exact Fibres
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../symbolic_dynamics/papers/132-prefix-majority-dynamics>)
+- [规范 TeX](<../../../../../symbolic_dynamics/papers/132-prefix-majority-dynamics/main.tex>)
+- [关联 PDF](<../../../../../symbolic_dynamics/papers/132-prefix-majority-dynamics/main.pdf>)
+- [支撑 Markdown](<../../../../../symbolic_dynamics/papers/132-prefix-majority-dynamics/README.md>)
+- [BibTeX](<../../../../../symbolic_dynamics/papers/132-prefix-majority-dynamics/references.bib>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  For a binary word $w=w_1\cdots w_n$, let the $i$th letter of $P_n(w)$ report whether the first $i$ letters of $w$ contain at least as many ones as zeros. We determine the recurrent set and sharp global stabilization time of this simultaneous triangular threshold map, and give an exact target-wise atlas of its one-step fibres. Its fixed words form two explicit alternating--constant families, every orbit stabilizes, and the maximum transient is exactly $\lceil\log_2 n\rceil$. We also give every one-step fibre as a product of Catalan excursion and meander numbers, deduce that the image has size $F_{n+2}$, and prove that the unique largest fibre for $n\ge2$ is the all-one target, of size $\binom n{\lfloor n/2\rfloor}$. Lattice-path factorizations, persistence enumeration, and general majority-network language are treated as background. The literature search is bounded; no novelty, priority, or external-release claim is made.
+author:
+- Anonymous
+bibliography:
+- references.bib
+title: |
+  Synchronous Prefix-Majority Dynamics:\
+  Logarithmic Stabilization and Exact Fibres
+```
+
+## Markdown 正文
+
+# The map and the subtraction boundary
+
+Write $\{0,1\}^n$ for the binary words of length $n$. Define $$P_n(w)_i=\mathbf 1\!\left\{\sum_{j=1}^i w_j\ge \frac i2\right\},
+ \qquad 1\le i\le n.                                  \label{eq:update}$$ Equivalently, put $x_i=2w_i-1$ and $S_i=x_1+\cdots+x_i$; then $P_n(w)_i=\mathbf1\{S_i\ge0\}$. Thus $P_n$ records, synchronously, the weak sign of every prefix sum. The dependence is triangular but the input word is replaced at every iteration.
+
+Husfeldt and Rauhe study dynamic partial-sum queries asking whether the first $i$ bits have sum at least $\lceil i/2\rceil$ [@HusfeldtRauhe2003]. This is exactly the coordinate predicate in [\[eq:update\]](#eq:update){reference-type="eqref" reference="eq:update"}; consequently the predicate and its batched one-step evaluation receive zero originality credit here. Their data-structure problem does not replace the word by the full answer vector and feed that vector back into the same operator. Excursion decompositions and terminal meanders are classical lattice-path tools; Wallner gives a broad treatment of the signed-walk architecture used below [@Wallner2016]. Persistence and sign changes of partial sums are likewise established subjects [@SparreAndersen1954; @ErdosHunt1953]. Majority automata networks form a much wider dynamical class [@GolesEtAl2016]. We assign no contribution credit to Catalan or ballot enumeration, reflection arguments, Fibonacci languages, or generic majority terminology. Our residual object is only the literal nested-prefix map obtained by repeated full-vector feedback, its fixed language, its sharp iteration clock, and its target-wise inverse atlas. A bounded formula-and-owner search found no exact repeated-map match; that non-hit is neither novelty nor priority evidence.
+
+# Fixed words and the sharp clock
+
+For $r\ge0$ let $(01)^r$ denote $r$ copies of $01$.
+
+[\[thm:fixed\]]{#thm:fixed label="thm:fixed"} The fixed words are exactly $$(01)^r0^{n-2r}\quad(0\le r\le\lfloor n/2\rfloor),
+ \qquad
+ (01)^r1^{n-2r}\quad(0\le r\le\lfloor(n-1)/2\rfloor). \label{eq:fixed}$$ The two displayed families are disjoint, so $|\operatorname{Fix}(P_n)|=n+1$.
+
+Suppose the balance immediately before the next letter is $h$. At $h\ge1$ a zero would leave a nonnegative balance and hence disagree with its reported majority, so a fixed word must continue with ones forever. At $h\le-2$ the dual argument forces zeros forever. At $h=0$ and $h=-1$, either next letter is locally consistent; the only way not to enter a constant tail is the transition $0\xrightarrow{0}-1\xrightarrow{1}0$. Starting at balance zero therefore gives precisely [\[eq:fixed\]](#eq:fixed){reference-type="eqref" reference="eq:fixed"}. The stated ranges make the two families disjoint and their sizes sum to $n+1$.
+
+Prefix compatibility means that if a prefix of $w$ is fixed, the same prefix is preserved by $P_n$. This elementary observation amplifies quantitatively.
+
+[\[lem:amplifier\]]{#lem:amplifier label="lem:amplifier"} Let a nonfixed word have a longest fixed prefix. It has the form $(01)^r b^\ell$ with $\ell\ge1$; if $b=0$, then $\ell\ge2$. Under one application of $P_n$, while the word remains nonfixed, the same alternating core is followed by a constant tail of length at least $$2\ell\quad\text{if }b=1,
+ \qquad 2\ell-1\quad\text{if }b=0.                     \label{eq:amplify}$$
+
+A maximal fixed prefix cannot end at balance zero, because either following letter would also agree with [\[eq:update\]](#eq:update){reference-type="eqref" reference="eq:update"}. It therefore has the stated alternating--constant form. A single terminal zero leaves balance $-1$, at which again either following letter agrees, proving $\ell\ge2$ on the zero branch.
+
+On the one branch the balance after the prefix is $\ell$. Even if all following input letters are zero, the next $\ell$ reported signs are weakly positive, extending the one-tail to length $2\ell$. On the zero branch the balance is $-\ell$; even an all-one continuation stays negative for the next $\ell-1$ positions, extending the zero-tail to $2\ell-1$. A locked one or two consecutive zeros cannot restart the alternating core, so the same core persists at later iterations.
+
+[\[thm:clock\]]{#thm:clock label="thm:clock"} Every orbit of $P_n$ reaches a fixed word, and $$\max_{w\in\{0,1\}^n}\operatorname{depth}(w)=\lceil\log_2 n\rceil.   \label{eq:clock}$$ Here depth is the least time at which an orbit first becomes fixed.
+
+If $\ell_t$ is the constant-tail length in [\[lem:amplifier\]](#lem:amplifier){reference-type="ref" reference="lem:amplifier"}, then on the one branch $\ell_t\ge2^t\ell_0$, while on the zero branch $\ell_t-1\ge2^t(\ell_0-1)$. Therefore $2^t\ge n$ forces the fixed prefix to fill the word. This proves the upper bound.
+
+For sharpness set $W_a=1^a0^{n-a}$. Prefix balances give the exact identity $$P_n(W_a)=W_{\min(2a,n)}.                               \label{eq:witness}$$ Starting from $W_1$ takes exactly $\lceil\log_2n\rceil$ doublings to reach $1^n$. The formula includes $n=1$, where the depth is zero.
+
+In particular all recurrent points are fixed and the finite dynamical zeta function is $(1-z)^{-(n+1)}$.
+
+# Every fibre
+
+Put $$C_m=\frac1{m+1}\binom{2m}{m},\qquad
+ M_m=\binom m{\lfloor m/2\rfloor}.$$ Thus $C_m$ counts Dyck excursions of semilength $m$ and $M_m$ counts nonnegative simple-walk meanders of length $m$.
+
+[\[thm:fibres\]]{#thm:fibres label="thm:fibres"} Let a target $y$ have sign runs $b_1^{\ell_1}\cdots b_s^{\ell_s}$, with adjacent $b_j$ distinct. If $s=1$, then $$|P_n^{-1}(1^n)|=M_n,\qquad |P_n^{-1}(0^n)|=M_{n-1}.   \label{eq:constant}$$ If $s\ge2$, the fibre is empty unless $\ell_1$ is even for $b_1=1$ and odd for $b_1=0$, and every interior $\ell_2,\ldots,\ell_{s-1}$ is odd. When these conditions hold, $$|P_n^{-1}(y)|=A(b_1,\ell_1)
+ \prod_{j=2}^{s-1} C_{(\ell_j-1)/2}\,M_{\ell_s-1},     \label{eq:fibre}$$ where $A(1,\ell)=C_{\ell/2}$ and $A(0,\ell)=C_{(\ell-1)/2}$.
+
+At a change from reported one to zero, the underlying walk crosses from zero to minus one; at the reverse change it crosses from minus one to zero. Cut the walk at these forced edges. A first positive run is a nonnegative excursion and hence has even length. A first negative run has odd length after reflecting about the edge between $-1$ and $0$. Every interior run is a crossing step together with a Dyck excursion and consequently has odd length. The last crossing is followed by an unconstrained nonnegative meander of length $\ell_s-1$. These independent pieces give [\[eq:fibre\]](#eq:fibre){reference-type="eqref" reference="eq:fibre"}; concatenation is the inverse bijection. With no crossing, the walk is a meander, except that an all-zero target has a forced first down-step, giving [\[eq:constant\]](#eq:constant){reference-type="eqref" reference="eq:constant"}.
+
+[\[cor:image\]]{#cor:image label="cor:image"} With $F_1=F_2=1$, $$|\operatorname{im}P_n|=F_{n+2}.                                    \label{eq:image}$$ For $n\ge2$, $$\max_y|P_n^{-1}(y)|=\binom n{\lfloor n/2\rfloor},    \label{eq:maximum}$$ and $1^n$ is the unique maximizing target. For $n=1$ both targets tie.
+
+The parity conditions in [\[thm:fibres\]](#thm:fibres){reference-type="ref" reference="thm:fibres"} form a regular run language. If $L=z/(1-z)$, $O=z/(1-z^2)$ and $E=z^2/(1-z^2)$ mark an arbitrary nonempty, odd, and positive even run, respectively, then its ordinary generating function is $$2L+\frac{(E+O)L}{1-O}=\frac{2z+z^2}{1-z-z^2},$$ which proves [\[eq:image\]](#eq:image){reference-type="eqref" reference="eq:image"}.
+
+For strict extremality, map the partial-sum walk $S$ of a source in a fixed fibre to $R_i=|S_i|$. This is a nonnegative meander, and the target signs recover $S$ from $R$, so the map is injective. A nonconstant target forces $R$ to revisit zero at a positive time; hence the all-up meander is missing and the injection is strict. The all-one fibre is all $M_n$ meanders, whereas the all-zero fibre has size $M_{n-1}<M_n$ for $n\ge2$. This proves [\[eq:maximum\]](#eq:maximum){reference-type="eqref" reference="eq:maximum"} and uniqueness.
+
+# Exact control and limitations
+
+The paper-local verifier exhausts every binary word through length $16$, covering $131{,}070$ states and the same number of codomain targets. It independently checks closure, complete functional graphs, [\[eq:fixed\]](#eq:fixed){reference-type="eqref" reference="eq:fixed"}, [\[eq:clock\]](#eq:clock){reference-type="eqref" reference="eq:clock"}, every instance of [\[eq:fibre\]](#eq:fibre){reference-type="eqref" reference="eq:fibre"}, [\[eq:image\]](#eq:image){reference-type="eqref" reference="eq:image"}, and the strict maximum [\[eq:maximum\]](#eq:maximum){reference-type="eqref" reference="eq:maximum"}; ten larger sharp witnesses are also checked through length $511$. The frozen run makes $524{,}452$ exact integer assertions. These computations are counterexample searches, not proofs of the all-$n$ statements.
+
+The weak-majority convention at balance zero, binary alphabet, and nested initial prefixes are essential. Strict thresholds, sliding windows, weighted letters, or asynchronous updates are different systems. Literature screening was bounded and can establish a hit but not an absence. Novelty, priority, authorship, posting, submission, specialist contact, and every external-release action remain on hold.

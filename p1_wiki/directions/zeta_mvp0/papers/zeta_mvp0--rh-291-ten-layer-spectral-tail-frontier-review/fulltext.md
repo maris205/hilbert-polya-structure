@@ -1,0 +1,73 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "zeta_mvp0"
+logical_paper_id: "zeta_mvp0--rh-291-ten-layer-spectral-tail-frontier-review"
+canonical_tex: "zeta_mvp0/papers/RH-291-ten-layer-spectral-tail-frontier-review/main.tex"
+canonical_pdf: "zeta_mvp0/papers/RH-291-ten-layer-spectral-tail-frontier-review/main.pdf"
+source_sha256: "07f4f93d8fd25dd4c736fcf89c6da58985e6fcf1b5d042c8d2bd5efdb7359ed2"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# Ten Layers from Hilbert--Schmidt Mass to a Projection-Free Spectral Tail
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../zeta_mvp0/papers/RH-291-ten-layer-spectral-tail-frontier-review>)
+- [规范 TeX](<../../../../../zeta_mvp0/papers/RH-291-ten-layer-spectral-tail-frontier-review/main.tex>)
+- [关联 PDF](<../../../../../zeta_mvp0/papers/RH-291-ten-layer-spectral-tail-frontier-review/main.pdf>)
+- [支撑 Markdown](<../../../../../zeta_mvp0/papers/RH-291-ten-layer-spectral-tail-frontier-review/README.md>)
+- [BibTeX](<../../../../../zeta_mvp0/papers/RH-291-ten-layer-spectral-tail-frontier-review/references.bib>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  RH-282--RH-291 reopen the noisy determinant route by replacing a poorly-conditioned physical Riesz quotient with a normal diagonal realization of the exact projection-free spectral factor. A modulus-complete noisy head and the sharp small-noise Hilbert--Schmidt mass law instantiate the RH-279 variable-rank tail on the radius-$7/5$ target disk. The logarithmic block clock is sharp for the available mass information, the head is minimal once its cutoff is fixed, and the moving high-order tail factor of the complementary $\det_2$ product converges to one with every fixed derivative. Separately, the correct monodromy comparison uses the finite radius $\beta_k$; this improves every archived cloud row but does not turn seven floating endpoints into an asymptotic theorem. A synchronized growing trace prefix exists, while a hidden-shell counterexample proves that unweighted prefix agreement cannot identify a divisor. The spectral and graded branches each satisfy four of five obligations, but the direct weighted complement-to-anchor bridge is absent. Gates A--E remain open.
+author:
+- Bin Wang
+date: July 2026
+title: 'Ten Layers from Hilbert--Schmidt Mass to a Projection-Free Spectral Tail'
+```
+
+## Markdown 正文
+
+# The reopened tail
+
+Let $(\mu_j(\sigma))$ be the algebraic bulk spectrum of $A_\sigma=K_\sigma/0.85$ after the two peripheral roots are removed. RH-276 gives $$\sum_j|\mu_j(\sigma)|^2\le\|A_\sigma\|_2^2\le\sigma^{-1}$$ for sufficiently small noise. RH-282 selects every root with $|\mu_j|>1/2$ and realizes the rest as a normal diagonal operator $C_\sigma$. At $R=7/5$ and $m_\sigma=\lceil4\log(1/\sigma)\rceil$, $$\limsup\|C_\sigma^{m_\sigma}\|_1^{1/m_\sigma}R
+ \le\frac7{10}e^{1/4}=0.898817\ldots<1.$$ This is the first archived instantiation of the RH-279 tail conditions.
+
+RH-283 proves that the critical block slope for mass exponent $\alpha$, cutoff $q$, and radius $R$ is $$a_{\rm crit}=\frac{\alpha}{\log(1/(qR))}.$$ Equality gives logarithmic decay, and a diagonal saturation family proves failure below it. RH-284 makes the head canonical relative to $q$: it is the unique smallest spectral multiset leaving complement radius at most $q$. RH-285 upgrades the trace tail to every fixed derivative of the logarithmic canonical product.
+
+# The corrected bridge target
+
+The exact RH-17 shell has Hardy-scaled radius $$\beta_k=\beta\exp\left[-\frac{\log C_M}{2k}+o(k^{-1})\right],
+ \qquad \beta=(0.85\sqrt\lambda)^{-1}.$$ RH-286 proves $$2(k-1)|\beta_k-\beta|\to\beta|\log C_M|,
+ \qquad
+ 2|\beta_k^n-\beta^n|=O(k^{-1})$$ for fixed $n$. Root-$\ell^1$ centering at the limiting radius therefore contains an accumulated radial term that fixed moments do not. Re-centering the seven RH-15 clouds at $\beta_k$ reduces the total root-error range from $0.6424$--$1.2481$ to $0.2841$--$0.8992$. These values remain floating diagnostics.
+
+RH-287 synchronizes fixed-order noisy trace convergence with the finite shell to obtain a diverging prefix. RH-288 shows that determinant gluing requires the stronger weighted prefix budget $$P_\sigma(R)=\sum_{2\le n<m_\sigma}
+ \frac{|\tau_{\sigma,n}-a_n|R^n}{n}\longrightarrow0,$$ where $\tau_{\sigma,n}$ is the modulus-complement trace. If $c_{\sigma,n}=h_{\sigma,n}+\tau_{\sigma,n}$ is the total noisy trace and $s_{k_\sigma,n}$ is the counterloop moment, then $$\tau_{\sigma,n}-a_n
+ =(c_{\sigma,n}-s_{k_\sigma,n}-a_n)
+  -(h_{\sigma,n}-s_{k_\sigma,n}).$$ Thus a sufficient route must control both parenthesized errors with weights on the same logarithmic clock. RH-287 controls only the first one unweighted on an unspecified growing clock. RH-289 explains the gap: a complete root-of-unity shell can be invisible to any prescribed finite prefix while adding the exact divisor $1-(\gamma z)^L$ just beyond it.
+
+# Typed frontier
+
+  branch                          head   bridge   tail   target   boundary   score
+  ------------------------------ ------ -------- ------ -------- ---------- -------
+  noisy modulus spectrum           1       0       1       1         1         4
+  graded monodromy counterloop     1       1       0       1         1         4
+
+The coordinatewise maximum is the all-ones vector, but RH-290 proves that this merge is ill typed until the direct weighted complement-to-anchor prefix, or both terms in its typed decomposition, are available. Both complete counts are zero.
+
+The remaining determinant leaf is a direct weighted prefix theorem from the actual modulus-complement traces to the deterministic numerator anchor. A sufficient two-estimate realization consists of a weighted total-noisy-trace bridge to counterloop plus anchor and weighted modulus-head transport to the finite-radius counterloop, both on the RH-282 logarithmic clock. The spectral complement and target tails no longer need replacement.
+
+RH-285 supplies the noisy high-order tail, and the deterministic envelope batch supplies the target tail. RH-288 then reduces uniform determinant gluing exactly to the direct complement-to-anchor prefix budget and gives the displayed two-error decomposition. RH-286 identifies the correct finite-radius target for the counterloop term.
+
+The normal spectral realization is an exact determinant-factor device, not a well-conditioned physical Riesz compression. No Gate A--E status changes. Nothing in this batch constructs a Hilbert--Polya operator, identifies Riemann zeros, proves a von Mangoldt trace formula, a completed-zeta divisor identity, or RH.

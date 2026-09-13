@@ -1,0 +1,85 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "henon_dynamics"
+logical_paper_id: "henon_dynamics--henon-finite-markov-entropy-fluctuation-route-a"
+canonical_tex: "henon_dynamics/henon_finite_markov_entropy_fluctuation_route_a/paper/main.tex"
+canonical_pdf: "henon_dynamics/henon_finite_markov_entropy_fluctuation_route_a/paper/main.pdf"
+source_sha256: "4a8cb5fe2ee018e2d1f90565aec7f26de5a45169ab17ffbcfa78af4409d4f3f8"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# Finite Markov Networks: Matrix Trees, Entropy Production, and Exact Fluctuation Symmetry
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../henon_dynamics/henon_finite_markov_entropy_fluctuation_route_a>)
+- [规范 TeX](<../../../../../henon_dynamics/henon_finite_markov_entropy_fluctuation_route_a/paper/main.tex>)
+- [关联 PDF](<../../../../../henon_dynamics/henon_finite_markov_entropy_fluctuation_route_a/paper/main.pdf>)
+- [支撑 Markdown](<../../../../../henon_dynamics/henon_finite_markov_entropy_fluctuation_route_a/README.md>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  For every finite irreducible continuous-time Markov chain with bidirected support, we give a convention-complete proof joining the matrix-tree stationary law, positivity and exact equality criteria for entropy production, a finite-time stationary path-reversal theorem, and transpose symmetry of the entire tilted characteristic polynomial. Total and medium entropy are kept distinct. Rate-function symmetry is stated only under explicit large-deviation and Legendre hypotheses. Exact rational ledgers guard all orientation and sign conventions; they do not replace the analytic proof.
+author:
+- 'HCS-C361 theorem package'
+date: 4 September 2026
+title: |
+  Finite Markov Networks: Matrix Trees, Entropy Production,\
+  and Exact Fluctuation Symmetry
+```
+
+## Markdown 正文
+
+# Frozen chain and theorem
+
+Let $S=\{0,\ldots,d-1\}$ be finite. For $i\ne j$, assume $q_{ij}>0$ iff $q_{ji}>0$, and that the undirected support is connected. There are no recorded self-jumps. On column functions, $$(Lf)(i)=\sum_{j\ne i}q_{ij}(f(j)-f(i)),\qquad
+ L_{ij}=q_{ij},\quad L_{ii}=-r_i,\qquad r_i=\sum_{j\ne i}q_{ij}.$$ Let $T\to i$ denote a directed spanning tree whose edges point toward root $i$, and set $\tau_i=\sum_{T\to i}\prod_{(u\to v)\in T}q_{uv}$.
+
+[\[thm:main\]]{#thm:main label="thm:main"} The unique stationary row law is $\pi_i=\tau_i/\sum_k\tau_k$. With $$a_{ij}=\pi_iq_{ij},\quad J_{ij}=a_{ij}-a_{ji},\quad
+ F_{ij}=\log(a_{ij}/a_{ji}),$$ the entropy-production rate satisfies $$\sigma=\sum_{i<j}(a_{ij}-a_{ji})\log\frac{a_{ij}}{a_{ji}}\ge0.$$ Moreover, $\sigma=0$, detailed balance, and zero affinity $\sum_{(i,j)\in C}\log(q_{ij}/q_{ji})=0$ on every oriented cycle $C$ are equivalent.
+
+Start in $\pi$. For a path with state skeleton $i_0,\ldots,i_m$, define $$\Sigma_T=\log\frac{\pi_{i_0}\prod_{\ell=1}^m q_{i_{\ell-1}i_\ell}}
+ {\pi_{i_m}\prod_{\ell=1}^m q_{i_\ell i_{\ell-1}}}.$$ If $\Theta$ reverses time, define the reversed pushforward law $\mathbb P_\pi^R=\mathbb P_\pi\circ\Theta^{-1}=\mathbb P_\pi\circ\Theta$. Then $$\frac{d\mathbb P_\pi}{d\mathbb P_\pi^R}=e^{\Sigma_T},\qquad
+ \mathbb Ee^{-\Sigma_T}=1,\qquad
+ \mathbb Ee^{-\lambda\Sigma_T}=\mathbb Ee^{-(1-\lambda)\Sigma_T}.$$ More precisely, its law $\mu_T$ obeys $\mu_T(B)=\int_{-B}e^{-s}\mu_T(ds)$, where $-B=\{-s:s\in B\}$; a point-probability formula is intended only at atoms. The exponential identity holds for every real $\lambda$.
+
+For medium entropy $W_T=\sum\log(q_{ij}/q_{ji})$, the tilted matrix is $$(L_\lambda)_{ij}=q_{ij}^{1-\lambda}q_{ji}^{\lambda}\quad(i\ne j),
+ \qquad (L_\lambda)_{ii}=-r_i.$$ It satisfies $L_\lambda^{\mathsf T}=L_{1-\lambda}$ and hence, for all $z\in\mathbb C$, $$\det(zI-L_\lambda)=\det(zI-L_{1-\lambda}).$$ For every real $\lambda$, the SCGF $\psi(\lambda)=\lim_{T\to\infty}T^{-1}\log\mathbb E_\pi e^{-\lambda W_T}$ exists, equals the Perron eigenvalue of $L_\lambda$, is finite and real analytic, and has the same symmetry. If, additionally, $W_T/T$ obeys a full LDP whose rate equals the Legendre--Fenchel transform $I(a)=\sup_\lambda\{-\lambda a-\psi(\lambda)\}$, then $I(a)-I(-a)=-a$.
+
+# Proof
+
+For $M=-L^{\mathsf T}$, principal-cofactor expansion cancels selections containing directed cycles and leaves precisely the in-arborescence products. Thus $L^{\mathsf T}\tau=0$. Connectivity gives $\tau_i>0$ for every root; irreducibility makes the nullspace one-dimensional, proving the stationary formula.
+
+The inequality $(x-y)\log(x/y)\ge0$ for $x,y>0$ proves nonnegativity edge by edge, with equality exactly when $a_{ij}=a_{ji}$. Detailed balance telescopes around every cycle. Conversely, assume all cycle products are one. Fix $o$ and define along any support path $$h_i=\prod_{o=i_0\to\cdots\to i_m=i}\frac{q_{i_{\ell-1}i_\ell}}{q_{i_\ell i_{\ell-1}}}.$$ The value is path-independent: concatenate two paths, erase backtracks, and split at repeated vertices into simple cycles. Therefore $h_j/h_i=q_{ij}/q_{ji}$ on every edge. Normalized $h$ satisfies detailed balance and stationarity, so it equals $\pi$.
+
+For fixed jump skeleton and holding intervals $s_0,\ldots,s_m$, the path density equals $$\pi_{i_0}\exp\!\left(-\sum_{\ell=0}^m r_{i_\ell}s_\ell\right)
+ \prod_{\ell=1}^m q_{i_{\ell-1}i_\ell}.$$ Reversal only reorders the holding exponential and reverses each jump. Bidirectionality therefore gives the stated Radon--Nikodym derivative against $\mathbb P_\pi^R$, including zero-jump paths, and $\Sigma_T\circ\Theta=-\Sigma_T$. Change of variables yields $\mathbb E[g(\Sigma_T)]=\mathbb E[e^{-\Sigma_T}g(-\Sigma_T)]$; indicators and exponentials give every finite-time identity.
+
+Feynman--Kac multiplication of a jump $i\to j$ by $e^{-\lambda\log(q_{ij}/q_{ji})}$ gives the displayed tilt, whose transpose identity is entrywise. Transposition preserves the full characteristic polynomial. After a scalar shift, Perron--Frobenius supplies a simple real dominant eigenvalue and finite-dimensional Feynman--Kac identifies it with $\psi$. Since the tilted entries depend analytically on real $\lambda$ and this eigenvalue is simple, the local branches join to make $\psi$ real analytic on $\mathbb R$. Finally, $|\Sigma_T-W_T|\le 2\max_i|\log\pi_i|$, so total and medium entropy have the same SCGF. Substitution $\mu=1-\lambda$ in the explicitly assumed Legendre formula proves the rate symmetry; no rate-function conclusion is drawn without that full-LDP identification.
+
+\>0
+
+# Sharp boundaries and a minimal nonequilibrium cycle
+
+For one state, the empty tree has weight one and all entropy is zero. Every irreducible two-state chain is reversible because stationarity forces $\pi_0q_{01}=\pi_1q_{10}$; indeed $\Sigma_T=0$ pathwise. A nonzero affinity first occurs with three states. Give every clockwise edge rate $2$ and every reverse edge rate $1$. Then $\pi_i=1/3$, the clockwise affinity is $3\log2$, each oriented stationary current is $1/3$, and $\sigma=\log2$.
+
+Reducibility destroys the unique positive global law and positive rooted-tree weights for every root; the theorem applies after selecting a closed irreducible class. A one-way edge can make the reversed path measure singular and the affinity infinite, so it is not a zero-rate substitution into this theorem. Phantom self-transitions are excluded; diagonals encode holding.
+
+\>1
+
+# Exact receipts, sources, and scope firewall
+
+Four frozen rational panels have sizes two through five. The canonical artifact enumerates 700 directed trees, all canonical simple cycles and unordered edges, 24 tilted characteristic polynomials, 2,244 path skeletons, and five boundary rows. The producer uses tree enumeration and permutation expansion; the independent checker uses Laplacian cofactors and Faddeev--LeVerrier. SymPy is a third lane. Repaired-hash attacks target schemas, coordinates, rows, evaluation semantics, and strict parsers. These are regression receipts, not a finite proof of Theorem [\[thm:main\]](#thm:main){reference-type="ref" reference="thm:main"}.
+
+Schnakenberg's network theory (Rev. Mod. Phys. 48 (1976), DOI [10.1103/RevModPhys.48.571](https://doi.org/10.1103/RevModPhys.48.571)) supplies the graph-thermodynamic lineage. Lebowitz and Spohn (J. Stat. Phys. 95 (1999), DOI [10.1023/A:1004589714161](https://doi.org/10.1023/A:1004589714161)) supply the stochastic-action and fluctuation-theorem lineage. We claim no priority and rederive every statement under the frozen convention.
+
+The tilted determinant is only a finite Markov-network characteristic polynomial. It is not a target Euler factor, target functional equation, arithmetic primitive-orbit zeta, root number, divisor, or Hilbert--Pólya operator. All Route-A gates fail; Route B is not invoked. Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.

@@ -1,0 +1,109 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "zeta_mvp0"
+logical_paper_id: "zeta_mvp0--rh-115-composite-directional-support-gate"
+canonical_tex: "zeta_mvp0/papers/RH-115-composite-directional-support-gate/main.tex"
+canonical_pdf: "zeta_mvp0/papers/RH-115-composite-directional-support-gate/main.pdf"
+source_sha256: "2ad1672beeebbe642ae5104d2494f8a4cd2e48c7bb579dc2a64e15f931601efe"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# A Composite Directional Support Gate Monotone Certificate Fusion with an Outward-Admission Filter
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../zeta_mvp0/papers/RH-115-composite-directional-support-gate>)
+- [规范 TeX](<../../../../../zeta_mvp0/papers/RH-115-composite-directional-support-gate/main.tex>)
+- [关联 PDF](<../../../../../zeta_mvp0/papers/RH-115-composite-directional-support-gate/main.pdf>)
+- [支撑 Markdown](<../../../../../zeta_mvp0/papers/RH-115-composite-directional-support-gate/README.md>)
+- [BibTeX](<../../../../../zeta_mvp0/papers/RH-115-composite-directional-support-gate/references.bib>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  We combine four independently derived lower certificates for the relative fourth singular mode $q_4=s_4/s_1$: direct Weyl, spectral four-volume with a capacity upper, tail-energy trace volume, and the positive-tail directional packet block. The identity $q_4=\nu_4/\Lambda_{23}$ makes the composition exact, and taking the maximum preserves validity. The 360-record audit has zero admitted dominance failures. At threshold $10^{-8}$, the packet-block route raises full-chain coverage from $113$ to $114$ of $120$ updates. An exact-directional diagnostic suggests $115$, but is excluded because one weak record lacks an outward guard between two binary64 Gram assembly paths. The paper therefore adds both a positive composite gain and a precise numerical admission rule.
+author:
+- Prime Dynamics Theory Program
+bibliography:
+- references.bib
+date: July 2026
+title: |
+  A Composite Directional Support Gate\
+  Monotone Certificate Fusion with an Outward-Admission Filter
+```
+
+## Markdown 正文
+
+# Factorization of fourth-mode support
+
+For nonzero $K$, let $$q_j=\frac{s_j(K)}{s_1(K)},\qquad
+ \nu_4=q_2q_3q_4,\qquad
+ \Lambda_{23}=q_2q_3.$$ Then $$\label{eq:identity}
+ q_4=\frac{\nu_4}{\Lambda_{23}}.$$ RH-110 enclosed $\Lambda_{23}$ from recent singular values. RH-111 produced a trace-based lower for $\nu_4$, while RH-114 produced a PSD directional lower. These estimates can be fused only after making their inequality directions and operator instance explicit.
+
+[\[thm:factor\]]{#thm:factor label="thm:factor"} Suppose $0\leq V^-\leq\nu_4(K)$ and $\Lambda_{23}(K)\leq L^+<\infty$. Then $$q_4(K)\geq V^-/L^+.$$
+
+Use [\[eq:identity\]](#eq:identity){reference-type="eqref" reference="eq:identity"} and divide the numerator lower by the denominator upper. All quantities are nonnegative.
+
+# Monotone composite gate
+
+Let $D^-$ be a direct lower for $q_4$. Let $V_i^-$ be any family of valid normalized four-volume lowers sharing one capacity upper $L^+$. Define $$\label{eq:composite}
+ B_{\rm comp}=\max\left\{D^-,\frac{V_1^-}{L^+},\ldots,
+ \frac{V_m^-}{L^+}\right\}.$$
+
+[\[thm:composite\]]{#thm:composite label="thm:composite"} $B_{\rm comp}\leq q_4(K)$. Hence $B_{\rm comp}\geq\tau$ is a rigorous support certificate at threshold $\tau$.
+
+The direct term is valid by assumption. Every factorized term is valid by Theorem [\[thm:factor\]](#thm:factor){reference-type="ref" reference="thm:factor"}; the maximum of lower bounds remains a lower bound.
+
+The admitted RH-115 family consists of $$D^-_{\rm Weyl},\quad
+ V^-_{\rm spectral}/L^+,\quad
+ V^-_{\rm trace}/L^+,\quad
+ V^-_{\rm PSD}/L^+.$$ The last term uses RH-114's positive-tail packet-block Gramian. No averaging or model selection is performed: the gate only takes a maximum.
+
+[\[prop:optimal\]]{#prop:optimal label="prop:optimal"} If the only known relations among nonnegative scalars are $B_i\leq q_4$, then $\max_iB_i$ is the largest universal lower bound that can be inferred from their reported values.
+
+The maximum is valid by Theorem [\[thm:composite\]](#thm:composite){reference-type="ref" reference="thm:composite"}. Sharpness follows by choosing an admissible scalar instance with $q_4=\max_iB_i$; all stated inequalities remain true, so any larger claimed lower fails on that instance.
+
+Thus an arithmetic average would be weaker, while adding positive correction terms would require a proved dependence between candidates. The composite gate is not intended to guess such dependence. It is the strongest fusion available from the one-sided ledger alone.
+
+# Outward-admissibility filter
+
+The algebra above is exact only when all inequalities enclose the same operator $K$. Numerical values computed by different assembly paths are not automatically composable.
+
+[\[prop:filter\]]{#prop:filter label="prop:filter"} A candidate may enter [\[eq:composite\]](#eq:composite){reference-type="eqref" reference="eq:composite"} only if its source operator is the same enclosed $K$, or if a validated perturbation radius transports its bound to $K$. Agreement to displayed floating-point digits is not a substitute for such an enclosure.
+
+This is standard interval logic [@Moore1966]: a point approximation has no inequality direction. In the present chain, RH-110 and RH-114 assemble mathematically equivalent memory Gramians in different binary64 orders. The ambient matrices agree at ordinary precision, but the fourth cross mode is a near-cancellation quantity. One physical record at $\sigma=0.02$ therefore produces an exact-directional ratio diagnostic exceeding the RH-110 actual ratio by about $6.93\times10^{-7}$. It appears three times because the same update is labelled by three thresholds. Proposition [\[prop:filter\]](#prop:filter){reference-type="ref" reference="prop:filter"} excludes this diagnostic until a cross-assembly outward radius is supplied.
+
+The PSD packet-block term does not exhibit this mismatch: after composition it lies below the RH-110 actual ratio on every record.
+
+The filter also clarifies the role of capacity. A volume lower and a capacity upper may be computed by different algorithms, but they must enclose the same $K$. If their operator representatives differ by a validated radius, Weyl transport can first enlarge $L^+$ and reduce $V^-$. Without that radius, division can amplify a tiny fourth-volume discrepancy, precisely as observed in the excluded record.
+
+# Five-scale composite audit
+
+We join the archived RH-110, RH-111, and RH-114 records by scale, side, threshold, and time. Every admitted candidate is compared with the archived actual $q_4$. The audit has five scales, two channels, and 360 labelled records, of which 234 are on the fine chain.
+
+  threshold     direct   trace   PSD block   composite   exact diagnostic
+  ----------- -------- ------- ----------- ----------- ------------------
+  $10^{-8}$        113     113         114         114                115
+  $10^{-6}$        109     105         109         109                109
+  $10^{-4}$         98      95          98          98                 98
+
+  : Full-chain support counts out of 120. The last column is not admitted into the rigorous composite.
+
+There are zero admitted dominance failures and three diagnostic failures, the latter being the threshold-labelled copies described above. The maximum admitted improvement over direct Weyl is $1.55091\times10^{-6}$ in $q_4$. All 78 fine updates per threshold are already certified; the minimum fine composite margin is $6.36133\times10^{-4}$.
+
+![Left: full support counts. Right: admitted gain over direct Weyl and the excluded exact-directional excess.](<../../../../../zeta_mvp0/papers/RH-115-composite-directional-support-gate/figures/composite_directional_support_gate.pdf>){width="\\textwidth"}
+
+# Consequence and boundary
+
+The positive conclusion is modest but real: the PSD directional block adds one rigorously certified coarse record. The negative conclusion is equally useful: exact-looking values from separately rounded near-cancellation chains cannot be mixed without an outward transport bound. RH-116 will avoid this interface by optimizing memory depth inside one assembly path.
+
+This paper proves no all-level capacity or directional-tail law, no uniform Stage A, no Hilbert--Polya operator, no zeta-zero identification, and no Riemann Hypothesis result.

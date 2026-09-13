@@ -1,0 +1,734 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "symplectic_map"
+logical_paper_id: "symplectic_map--27-positive-newton-translation-reciprocity"
+canonical_tex: "symplectic_map/papers/27-positive-newton-translation-reciprocity/paper/main.tex"
+canonical_pdf: "symplectic_map/papers/27-positive-newton-translation-reciprocity/build/final-20260905-r0/main.pdf"
+source_sha256: "d60ec6611683cafdf822b4cb493040258dc1dd29502363d493f52c3e2deeed3e"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# Diagonal-Translation Rigidity and Literal Phase Reciprocity in Positive Newton-Fan Hamiltonian Shears
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../symplectic_map/papers/27-positive-newton-translation-reciprocity>)
+- [规范 TeX](<../../../../../symplectic_map/papers/27-positive-newton-translation-reciprocity/paper/main.tex>)
+- [关联 PDF](<../../../../../symplectic_map/papers/27-positive-newton-translation-reciprocity/build/final-20260905-r0/main.pdf>)
+- [支撑 Markdown](<../../../../../symplectic_map/papers/27-positive-newton-translation-reciprocity/PAPER_PLAN.md>)
+- [BibTeX](<../../../../../symplectic_map/papers/27-positive-newton-translation-reciprocity/paper/references.bib>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  Let the coefficient field have characteristic zero, let $r\geq3$, and let the two separated polynomial Hamiltonians have finite nonempty collected supports in $\mathbb Z_{\geq2}^{\,r}$, with nonzero coefficients. We study weighted leading degrees on branches equipped with complete strict source, reflected, target, and transformed-pair certificates. On one such arrow, a grouped face-Hessian argument, the Jacobian criterion, and associated-graded injectivity turn the formal action $$(u,w)\longmapsto(B_\beta A_\alpha u,A_\alpha u),
+   \qquad A_\alpha=\mathbf{1}\alpha^{\mathsf{T}}-I,\quad
+   B_\beta=\mathbf{1}\beta^{\mathsf{T}}-I,$$ into the actual leading-degree action. Every certified step translates $u$ in the all-ones direction. On an infinite certified strict branch, the number of discrete ordered-selector-pair changes is at most $d_V+d_W-2$; equality has an exact activity, sampling, and non-simultaneity characterization, and the stationary tail has a closed affine formula with the original global seed. Nonempty strict homogeneous integer arrow domains have full observable spans, forcing reflected finite-word reciprocity to use literal reversed labels and complete edgewise certificates. Finally, for one fixed state and one fixed finite row family, an explicit $\ell_\infty$ half-margin radius preserves one forward step and one reflected inverse step. Six complete integer-pair certificates and exact failure witnesses delimit the hypotheses. These are certified weighted-degree statements, not global dynamical-degree, classification, or multi-edge robustness results.
+author:
+- Anonymous
+bibliography:
+- references.bib
+title: 'Diagonal-Translation Rigidity and Literal Phase Reciprocity in Positive Newton-Fan Hamiltonian Shears'
+```
+
+## Markdown 正文
+
+# Introduction
+
+Consider the separated Hamiltonian shears $$S_V(q,p)=(q,p+\nabla V(q)),\qquad
+ T_W(q,p)=(q+\nabla W(p),p),\qquad F=T_W\circ S_V ,$$ where $q,p\in K^r$. Each factor is triangular, yet the leading weighted degrees of an iterate need not be governed by one scalar degree. A support row selected at the $V$-phase changes the weights seen by the $W$-phase; an old coordinate block can compete with a fresh gradient; and the inverse reads the two phases in the opposite order. Thus even a short orbit carries a typed selector word coupled to a vector-valued degree state.
+
+This article isolates a positive-support regime in which the coupling is rigid. Positivity of all support coordinates is important, but it does not itself choose a support row, exclude cancellation, or certify the next edge. We therefore attach a finite list of strict linear inequalities to each arrow. The list distinguishes source selectors and carries, reflected inverse selectors and carries, target selectors and carries, and the transformed membership rows needed by the target. A branch is followed precisely as long as every required row remains strict.
+
+Three proof bottlenecks must then be separated. The first is survival. Formal multiplication by $\mathbf{1}\alpha^{\mathsf{T}}-I$ records candidate degrees, but candidate degrees become actual degrees only after ruling out cancellation inside a substituted face gradient and between a fresh block and the carried old block. We handle the two questions separately using a grouped Hessian determinant, characteristic-zero Jacobian independence, injective substitution in an associated graded ring, and strict carries.
+
+The second bottleneck is counting. Once survival is known, the two-phase update translates the incoming $q$-degree vector along a diagonal ray. Selectors are therefore controlled by upper envelopes of affine lines indexed by support totals. The relevant discrete statistic is the number of update indices at which the ordered pair of selected totals changes. It is not the sum of the two component-change counts: a simultaneous $V$- and $W$-change occurs at one update and is counted once. Keeping this distinction yields both the sharp upper bound and its exact equality conditions.
+
+The third bottleneck is reversal. Coordinate reversal gives elementary matrix identities for literal reversed labels, but those identities do not put the labels in the opposite support, make them unique selectors, or supply carries and target certificates. Moreover, a nonempty strict homogeneous integer domain is much more rigid than a small collection of test seeds: scaling and coordinate perturbations force its observable span to be all of $\mathbb R^r$. Consequently the matrix identities force literal labels, and finite-word reciprocity is an edgewise certified statement rather than a global reversor assertion.
+
+The main result has five parts. First, complete typed arrow certificates and positive face survival give the actual phase map. Second, every certified step is an all-ones translation and every infinite certified strict branch has finite selector-pair transience. Third, equality in the pair-change bound is characterized by unique within-total representatives, sampled strict activity intervals, and disjoint component switch sets; the stationary tail is solved without resetting the global origin. Fourth, strict homogeneous integer domains force full spans and literal finite-word reflected reciprocity. Fifth, a fixed finite row family at a fixed state admits an explicit half-margin radius for one forward and one reflected inverse step. A complete asymmetric three-dimensional dossier then verifies all source, reflected, target, and transformed rows on six integer pairs.
+
+Every conclusion is conditional on its printed certificates. A finite word can stop at a tie, a failed carry, an empty integer domain, an unavailable reflected label, or a missing target row. The result does not classify arbitrary supports, realize prescribed equality patterns, infer a target domain from a local margin, perturb support or row data, or establish a global symmetry. It also makes no positive-characteristic or two-dimensional extension claim.
+
+Section 2 positions the result among adjacent methods. Section 3 defines the four row families, arrow domains, seed realizations, and the five-clause theorem. Section 4 proves coefficient-uniform leading-form survival. Section 5 derives translation, envelope ordering, the exact pair count, equality criterion, and global-origin tail. Section 6 proves full spans and literal finite-word reciprocity. Section 7 establishes the one-step radius and gives the complete six-pair dossier. Section 8 gathers the exact boundary witnesses and conclusions.
+
+# Collision positioning
+
+Polynomial automorphisms and reversibility provide one adjacent language. Plane polynomial reversors motivate phase-order and symmetry terminology [@gomez_meiss_2004], while forward and backward filtrations give a broad escape framework [@shafikov_wolf_2003]. Structural results on polynomial symplectomorphisms provide ambient context [@janeczko_jelonek_2008]; higher-dimensional polynomial and birational degree examples [@deserti_2018] and general inverse-degree estimates [@cheng_wang_yu_1994] show why forward and inverse degree questions are subtle. None of these contextual results supplies the positive-support typed-arrow theorem proved below, and we do not infer a map-level reversor.
+
+A second group concerns monomial, Newton, and tropical mechanisms. Monomial maps exhibit linear recurrences and entropy phenomena [@hasselblatt_propp_2007], matrix-induced monomial maps sharpen this contrast [@bedford_kim_2008], and polytope methods connect Newton data with dynamical degrees [@favre_wulcan_2012]. Newton-polyhedron and tropical techniques provide further nearby geometric language [@el_hilany_2024; @grigoriev_containment; @nisse_2026]. Finite-window orbit graphs and functoriality offer another contrast [@takenawa_2026]. Here the upper envelopes arise from additive gradient shears along one certified diagonal ray; no monomial recurrence, tropical containment algorithm, or automatic orbit-graph closure is deduced.
+
+The third group consists of Hamiltonian, symplectic, triangular, and dynamical-degree settings. Symplectic birational recurrences [@fordy_hone_2011], polynomial Hamiltonian flows [@koch_lomeli_2014], and nonlinear position--momentum shear approximations [@berger_turaev_2025] explain why separated shears form a useful test class. Affine-triangular dynamical-degree results [@blanc_van_santen_2022], spectral viewpoints [@dang_favre_2021], degree monotonicity in a different map class [@bianchi_dinh_rakhimov_2024], current dimension-four triangular results [@shao_sun_2025], and relative or twisted dynamical degrees [@abboud_xie_2026] supply comparison classes, not proof ingredients for our certified conjunction.
+
+These sources position terminology and neighboring mechanisms. The theorem-critical arguments in Sections 3--7 are direct. Our bounded screen covered publicly indexed first-party sources through 2026-08-29 UTC and found no paper matching the stated conjunction of hypotheses and conclusions. This bounded observation is neither a priority statement nor an exhaustiveness claim.
+
+# Typed cells and main theorem
+
+## Phase data and source rows
+
+Let $K$ have characteristic zero and $r\geq3$. Let $$E_V,E_W\subset\mathbb Z_{\geq2}^{\,r}$$ be finite nonempty collected supports, and write $$V(q)=\sum_{\alpha\in E_V}c_\alpha q^\alpha,\qquad
+ W(p)=\sum_{\beta\in E_W}d_\beta p^\beta,
+ \qquad c_\alpha,d_\beta\in K^\times .$$ For positive weight vectors, write $$h_V(u)=\max_{\alpha\in E_V}\alpha\cdot u,\qquad
+ h_W(v)=\max_{\beta\in E_W}\beta\cdot v.
+\tag{3.1}$$ Thus the weighted degree of $q^\gamma$ is $\gamma\cdot u$, and similarly for the $p$-block. Incoming leading tuples are assumed to occupy disjoint algebraically independent blocks. For a label pair $e=(\alpha,\beta)$, set $$A_\alpha=\mathbf{1}\alpha^{\mathsf{T}}-I,\qquad
+ B_\beta=\mathbf{1}\beta^{\mathsf{T}}-I,\qquad
+ C_{\alpha,\beta}=B_\beta A_\alpha .$$ For a degree state $z=(u,w)\in\mathbb R^{2r}$, the formal phase data are $$v=A_\alpha u,\qquad u'=C_{\alpha,\beta}u,\qquad
+ \Phi_e(u,w)=(u',v).
+\tag{3.2}$$ All inequalities below are strict, and vector inequalities are componentwise.
+
+The complete forward source family for $e$ is $$\begin{array}{rll}
+\mathrm{(S0)}&u_i>0,\quad w_i>0,&1\leq i\leq r,\\
+\mathrm{(SV)}&(\alpha-\gamma)\cdot u>0,
+ &\gamma\in E_V\setminus\{\alpha\},\\
+\mathrm{(SC_V)}&(A_\alpha u-w)_i>0,&1\leq i\leq r,\\
+\mathrm{(SW)}&(\beta-\eta)\cdot A_\alpha u>0,
+ &\eta\in E_W\setminus\{\beta\},\\
+\mathrm{(SC_W)}&(C_{\alpha,\beta}u-u)_i>0,
+ &1\leq i\leq r .
+\end{array}
+\tag{3.3}$$ Thus selector uniqueness and carries are hypotheses. They imply $$A_\alpha u>w>0,\qquad C_{\alpha,\beta}u>u>0,
+\tag{3.4}$$ so the transformed pair in (3.2) is positive.
+
+Let $R$ reverse the coordinates and set $$R_{\mathrm{state}}(u,w)=(Rw,Ru),\qquad
+ \bar\alpha=R\alpha,\qquad\bar\beta=R\beta .$$ Literal support availability, $$\bar\alpha\in E_W,\qquad \bar\beta\in E_V,
+\tag{3.5}$$ is discrete data, not a consequence of the following inequalities. The reflected inverse family, in $W$-first and $V$-second order, is $$\begin{array}{rll}
+\mathrm{(RSW)}&(\bar\alpha-\eta)\cdot Ru>0,
+ &\eta\in E_W\setminus\{\bar\alpha\},\\
+\mathrm{(RC_W)}&(B_{\bar\alpha}Ru-Rw)_i>0,
+ &1\leq i\leq r,\\
+\mathrm{(RSV)}&(\bar\beta-\gamma)\cdot B_{\bar\alpha}Ru>0,
+ &\gamma\in E_V\setminus\{\bar\beta\},\\
+\mathrm{(RC_V)}&
+ (A_{\bar\beta}B_{\bar\alpha}Ru-Ru)_i>0,
+ &1\leq i\leq r .
+\end{array}
+\tag{3.6}$$ For literal labels, $$B_{R\alpha}R=RA_\alpha,\qquad A_{R\beta}R=RB_\beta,
+\tag{3.7}$$ so the reflected carries in (3.6) are respectively $R(A_\alpha u-w)$ and $R(C_{\alpha,\beta}u-u)$. We still print them because they type the inverse phases. The reflected selector comparisons against competing rows remain independent hypotheses.
+
+Any additional homogeneous pair conditions are enumerated as a finite list $$D_{e,k}(u,w)=d^u_{e,k}\cdot u+d^w_{e,k}\cdot w>0,
+ \qquad 1\leq k\leq m_e.
+\tag{3.8}$$ The list is permitted to be empty. Define $\mathcal S_e^+$ by (3.3), (3.5)--(3.6), and (3.8), and put $$\mathcal S_e^{\mathbb Z}
+ =\mathcal S_e^+\cap(\mathbb Z_{>0}^{r})^2.
+\tag{3.9}$$ This is a source cell; it does not conceal a choice of target.
+
+## Target-dependent arrow domains
+
+Let the declared target be $f=(a,b)\in E_V\times E_W$, and write $$z'=(u',w')=\Phi_e(z)
+ =(C_{\alpha,\beta}u,A_\alpha u).$$ The forward target family is $$\begin{array}{rll}
+\mathrm{(TV)}&(a-\gamma)\cdot u'>0,
+ &\gamma\in E_V\setminus\{a\},\\
+\mathrm{(TC_V)}&(A_a u'-w')_i>0,&1\leq i\leq r,\\
+\mathrm{(TW)}&(b-\eta)\cdot A_a u'>0,
+ &\eta\in E_W\setminus\{b\},\\
+\mathrm{(TC_W)}&(B_bA_a u'-u')_i>0,&1\leq i\leq r .
+\end{array}
+\tag{3.10}$$ After substitution these are the explicit linear forms $$\begin{array}{l}
+(a-\gamma)\cdot C_{\alpha,\beta}u>0,\\
+(A_aC_{\alpha,\beta}u-A_\alpha u)_i>0,\\
+(b-\eta)\cdot A_aC_{\alpha,\beta}u>0,\\
+(B_bA_aC_{\alpha,\beta}u-C_{\alpha,\beta}u)_i>0.
+\end{array}
+\tag{3.11}$$ The reflected target family requires $Ra\in E_W$, $Rb\in E_V$, and $$\begin{array}{rll}
+(Ra-\eta)\cdot Ru'>0,&\eta\in E_W\setminus\{Ra\},\\
+(B_{Ra}Ru'-Rw')_i>0,&1\leq i\leq r,\\
+(Rb-\gamma)\cdot B_{Ra}Ru'>0,
+ &\gamma\in E_V\setminus\{Rb\},\\
+(A_{Rb}B_{Ra}Ru'-Ru')_i>0,&1\leq i\leq r .
+\end{array}
+\tag{3.12}$$ Finally, transformed membership consists of positivity of $u',w'$ and $$D_{f,k}(C_{\alpha,\beta}u,A_\alpha u)>0,
+ \qquad 1\leq k\leq m_f.
+\tag{3.13}$$
+
+The domain $\mathcal C_{e\to f}^+$ is the subset of $\mathcal S_e^+$ satisfying (3.10), (3.12), and (3.13). Its integer part is $$\mathcal C_{e\to f}^{\mathbb Z}
+ =\mathcal C_{e\to f}^{+}\cap(\mathbb Z_{>0}^{r})^2 .$$ Different targets of one selector pair have different arrow domains.
+
+A state-labelled arrow $e\to f$ is certified at $z$ when $z\in\mathcal C_{e\to f}^+$, the incoming leading tuples occupy the required disjoint algebraically independent blocks, and the phase is followed with $z'=\Phi_e(z)$. A certified branch is a sequence $$(e_n\to e_{n+1},z_n)_{n\in I},\qquad
+ z_n\in\mathcal C_{e_n\to e_{n+1}}^+,\qquad
+ z_{n+1}=\Phi_{e_n}(z_n),$$ for a finite index interval $I$, or for all $n\geq0$. Every invoked source, reflected, target, transformed, and additional row is strict at its prescribed phase. An infinite certified strict branch has these properties at every index. A finite branch may stop at a tie, failed carry, empty integer domain, unavailable literal reflected label, or missing certificate; no conclusion is continued past that stop.
+
+[\[lem:target-inclusion\]]{#lem:target-inclusion label="lem:target-inclusion"} For every declared typed arrow, $$\Phi_e(\mathcal C_{e\to f}^+)\subseteq\mathcal S_f^+.
+\tag{3.14}$$
+
+Fix $z\in\mathcal C_{e\to f}^+$. Equation (3.4) makes $z'=\Phi_e(z)$ positive. The four groups in (3.10) are exactly the forward source selector and carry groups (3.3) for $f$. Equation (3.12) is exactly the reflected source family (3.6) for $f$, and (3.13) supplies every additional $D_f$-row. Hence all defining inequalities of $\mathcal S_f^+$ hold at $z'$. Notice that source margins alone would supply none of the target selectors.
+
+## Integer seeds and the theorem
+
+[\[lem:seed-realization\]]{#lem:seed-realization label="lem:seed-realization"} Every positive integer pair $(u,w)\in(\mathbb Z_{>0}^r)^2$ is realized by disjoint algebraically independent incoming leading tuples.
+
+Use independent variables $X_1,\ldots,X_r,Y_1,\ldots,Y_r$ and set $$Q_i=X_i^{u_i},\qquad P_i=Y_i^{w_i}.$$ The homomorphism from the polynomial ring in abstract variables $T_i,S_i$ that sends $T_i\mapsto Q_i$ and $S_i\mapsto P_i$ is injective: distinct monomials map to distinct exponent vectors $$(u_1a_1,\ldots,u_ra_r,w_1b_1,\ldots,w_rb_r).$$ Positivity makes the exponent map injective. Thus the leading forms are algebraically independent and have exactly the requested degrees.
+
+[\[thm:main\]]{#thm:main label="thm:main"} Under the setup above, the following separately quantified statements hold.
+
+1.  *Typed survival.* On one certified arrow $e\to f$, the grouped face-Hessian, Jacobian, associated-graded, and fresh/old separation arguments make (3.2) the actual leading-degree action, and Lemma [\[lem:target-inclusion\]](#lem:target-inclusion){reference-type="ref" reference="lem:target-inclusion"} advances the typed state.
+
+2.  *Translation and transience.* Every certified two-phase step satisfies $$u'=u+\delta_{\alpha,\beta}(u)\mathbf{1},\qquad
+     \delta_{\alpha,\beta}(u)>0.$$ For integer seeds the increment is at least one. On an infinite certified strict branch, the ordered selector-pair change count is at most $d_V+d_W-2$, where $d_V,d_W$ count the distinct totals in the two supports.
+
+3.  *Equality and tail.* On an existing infinite certified strict branch, equality in that bound holds precisely under the four availability, sampling, and non-simultaneity conditions in Theorem [\[thm:equality\]](#thm:equality){reference-type="ref" reference="thm:equality"}. Once the actual pair is stationary, the affine tail has the closed global-origin form in Proposition [\[prop:tail\]](#prop:tail){reference-type="ref" reference="prop:tail"}.
+
+4.  *Literal word reciprocity.* For a finite typed word whose strict homogeneous arrow domains contain integer seeds, phase-resolved reflected-inverse reciprocity for every seed and prefix is equivalent to literal reflected-label availability, unique selection, and all reflected source, carry, target, and transformed membership certificates at every edge.
+
+5.  *One-step radius.* At one fixed normalized state, with support, labels, exponent rows, comparison sets, arrow, and projection domains fixed in advance, the radius in Theorem [\[thm:radius\]](#thm:radius){reference-type="ref" reference="thm:radius"} preserves one forward step and one reflected inverse step.
+
+The hypotheses and conclusions in this theorem are deliberately separated. Support membership, selector rows, carry rows, target rows, transformed rows, integer nonemptiness, and incoming algebraic independence are inputs. Transformed positivity follows from the carries; actual leading action follows from Section 4; target membership follows from the complete arrow certificate; translation follows from the actual phase map. None of these derived statements is silently promoted to a hypothesis for a broader domain.
+
+# Positive-face survival
+
+## Symplectic phase order
+
+The canonical background fixes the phase order. The Jacobians are $$DS_V=\begin{pmatrix}I&0\\ \operatorname{Hess}V&I\end{pmatrix},\qquad
+ DT_W=\begin{pmatrix}I&\operatorname{Hess}W\\0&I\end{pmatrix}.$$ Their off-diagonal blocks are symmetric, so direct multiplication with the standard symplectic matrix shows that both shears, and hence $F$, are symplectic. Their inverses are $$S_V^{-1}(q,p)=(q,p-\nabla V(q)),\qquad
+ T_W^{-1}(q,p)=(q-\nabla W(p),p),$$ and therefore $$F^{-1}=S_V^{-1}\circ T_W^{-1}.
+\tag{4.1}$$ The inverse acts through the $W$-gradient first and the $V$-gradient second. Its minus signs are nonzero scalars and do not change a surviving leading degree.
+
+## The grouped face Hessian
+
+Let $E_0$ be a nonempty exposed face of either support and write $$P_{E_0}(X)=\sum_{\xi\in E_0}c_\xi X^\xi,\qquad
+ h_{ij}(\xi)=\xi_i(\xi_j-\delta_{ij}).$$ Expansion by determinant rows gives $$\det\operatorname{Hess}P_{E_0}
+=\sum_{(\xi^{(1)},\ldots,\xi^{(r)})\in E_0^r}
+ \left(\prod_{i=1}^r c_{\xi^{(i)}}\right)
+ D(\xi^{(1)},\ldots,\xi^{(r)})
+ X^{\sum_i\xi^{(i)}-2\mathbf{1}},
+\tag{4.2}$$ where $$D(\xi^{(1)},\ldots,\xi^{(r)})
+ =\det[h_{ij}(\xi^{(i)})]_{i,j=1}^r.$$
+
+[\[lem:hessian\]]{#lem:hessian label="lem:hessian"} For every nonempty exposed face $E_0$ and every nonzero coefficient choice in the stated class, $$\det\operatorname{Hess}P_{E_0}\neq0.$$
+
+Choose a real linear functional $\omega$ with a unique minimizer $\xi_0$ on the finite set $E_0$. The secondary weight of a summand in (4.2) is $$\sum_i\omega\cdot\xi^{(i)}-2\omega\cdot\mathbf{1}.$$ It is uniquely minimized by the repeated tuple $(\xi_0,\ldots,\xi_0)$. Consequently no different row tuple can cancel the monomial $X^{r\xi_0-2\mathbf{1}}$. The repeated row matrix factors as $$[h_{ij}(\xi_0)]
+ =\operatorname{diag}(\xi_0)(\mathbf{1}\xi_0^{\mathsf{T}}-I),$$ and the determinant lemma gives $$D(\xi_0,\ldots,\xi_0)
+ =(-1)^r(1-|\xi_0|)\prod_i\xi_{0i}.
+\tag{4.3}$$ The isolated coefficient is $$c_{\xi_0}^{\,r}(-1)^r(1-|\xi_0|)\prod_i\xi_{0i},
+\tag{4.4}$$ which is nonzero in characteristic zero because $c_{\xi_0}\neq0$ and every $\xi_{0i}\geq2$.
+
+The auxiliary functional isolates one determinant monomial. It does not choose a vertex on the original exposed face. A tie on the primary support face remains a selector tie.
+
+## Jacobian independence and graded substitution
+
+We include the short algebraic steps because the coefficient-uniform survival claim depends on them.
+
+[\[lem:jacobian\]]{#lem:jacobian label="lem:jacobian"} If $G_1,\ldots,G_r\in K[X_1,\ldots,X_r]$ have nonzero Jacobian determinant, then they are algebraically independent over $K$.
+
+Suppose a nonzero relation $H(G_1,\ldots,G_r)=0$ has least total degree. Differentiation yields $$J_G^{\mathsf{T}}
+ \bigl(H_{Y_1}(G),\ldots,H_{Y_r}(G)\bigr)^{\mathsf{T}}=0.$$ Over the fraction field the Jacobian matrix is invertible, so every $H_{Y_i}(G)$ vanishes. Minimality says that a nonzero derivative of smaller degree cannot vanish at $G$. Hence all derivatives of $H$ are zero polynomials. In characteristic zero, $H$ is constant, a contradiction.
+
+Applying Lemma [\[lem:jacobian\]](#lem:jacobian){reference-type="ref" reference="lem:jacobian"} to $G=\nabla P_{E_0}$ and using Lemma [\[lem:hessian\]](#lem:hessian){reference-type="ref" reference="lem:hessian"} shows that every positive face-gradient tuple is algebraically independent. The criterion itself is classical; its role here is the typed transfer through successive shear phases.
+
+[\[lem:graded\]]{#lem:graded label="lem:graded"} Let $\mathcal A$ be a filtered $K$-algebra, and suppose $Z_i=\operatorname{in}(Q_i)\in\operatorname{gr}\mathcal A$ are algebraically independent. Then $$K[X_1,\ldots,X_r]\longrightarrow\operatorname{gr}\mathcal A,
+ \qquad X_i\longmapsto Z_i,
+\tag{4.5}$$ is injective. If $H_1,\ldots,H_r$ are algebraically independent, then so are $H_1(Z),\ldots,H_r(Z)$.
+
+The first assertion is the definition of algebraic independence. If $F(H_1(Z),\ldots,H_r(Z))=0$, injectivity of (4.5) gives $F(H_1(X),\ldots,H_r(X))=0$, and independence of the $H_i$ forces $F=0$.
+
+For a face exposed by the incoming weight $u$, every monomial of $\partial_iP_{E_0}$ has weight $h_{E_0}(u)-u_i$. Thus all candidate top terms of the substituted polynomial have the same degree, and their top part is $(\partial_iP_{E_0})(Z)$. Lemma [\[lem:graded\]](#lem:graded){reference-type="ref" reference="lem:graded"} makes that top part nonzero and keeps the tuple independent. In particular, a selected $V$-face has exact fresh degree $$A_\alpha u=(\alpha\cdot u)\mathbf{1}-u,$$ and the analogous $W$-face has exact fresh degree $B_\beta v$.
+
+## Fresh/old separation and phase induction
+
+[\[lem:fresh-old\]]{#lem:fresh-old label="lem:fresh-old"} If filtered elements $F_i,O_i$ satisfy $\deg F_i>\deg O_i$, then $$\deg(F_i\pm O_i)=\deg F_i,\qquad
+ \operatorname{in}(F_i\pm O_i)=\operatorname{in}(F_i).
+\tag{4.6}$$
+
+The element $O_i$ has no component in the top graded degree of $F_i$, so it cannot cancel the initial form of $F_i$.
+
+Internal cancellation in a fresh substituted gradient is excluded by Lemmas [\[lem:hessian\]](#lem:hessian){reference-type="ref" reference="lem:hessian"}--[\[lem:graded\]](#lem:graded){reference-type="ref" reference="lem:graded"}. Cancellation between that fresh tuple and the carried old tuple is excluded separately by $\mathrm{(SC_V)}$ or $\mathrm{(SC_W)}$. A carry cannot replace the Jacobian argument, and the Jacobian argument cannot replace a carry.
+
+[\[prop:survival\]]{#prop:survival label="prop:survival"} At the start of a certified half-step, suppose the active incoming tuple has algebraically independent leading components, the selected exposed face is in the positive-support class, and the fresh carry is strict. Then the selected gradient has its predicted componentwise degree and an independent leading tuple; adding or subtracting the old block preserves that tuple; and the outgoing active tuple satisfies the same hypotheses at the next certified half-step.
+
+The grouped determinant and Jacobian argument make the selected face-gradient an algebraically independent polynomial tuple. Lemma [\[lem:graded\]](#lem:graded){reference-type="ref" reference="lem:graded"} transfers it through the incoming initial forms and gives the exact componentwise degree. Lemma [\[lem:fresh-old\]](#lem:fresh-old){reference-type="ref" reference="lem:fresh-old"} uses the strict carry to preserve it after addition or subtraction of the old block. This proves one half-step and supplies the induction hypothesis for the next. Iteration proves every finite certified prefix. For the inverse, use (4.1), the reflected rows (3.6), and the $W$-first, $V$-second order; multiplication by $-1$ changes neither degree nor independence. An infinite-branch assertion means that every finite prefix passes this induction, not that a limiting argument is used.
+
+Combining Proposition [\[prop:survival\]](#prop:survival){reference-type="ref" reference="prop:survival"} with the two source carries gives the actual map $$(u,w)\longmapsto
+ (B_\beta A_\alpha u,A_\alpha u).
+\tag{4.7}$$ Combining it with the target and transformed rows advances the branch by Lemma [\[lem:target-inclusion\]](#lem:target-inclusion){reference-type="ref" reference="lem:target-inclusion"}.
+
+## Three different failure mechanisms
+
+The hypotheses rule out three logically distinct defects. First, with $r=3$ and $P=X_1^2X_2^2$, the third derivative component and the third Hessian row and column vanish. This is internal fresh-gradient failure caused by a zero support coordinate.
+
+Second, take $$\alpha=(1,2,2),\qquad \gamma=(2,1,2),\qquad u=(1,1,1).$$ The two scores equal $5$, so unique selection fails even though the singleton determinant witnesses are nonzero. Separately, $A_\alpha u=(4,4,4)$, and $w=(4,1,1)$ makes the first carry $(0,3,3)$. The tie and the old-block competition are different failures; the example does not say that every unit coordinate fails.
+
+Third, in characteristic $p$, $$P=(X_1X_2X_3)^p$$ has positive exponent coordinates but zero gradient. Characteristic zero is therefore substantive. These examples delimit the theorem and are not extension results.
+
+# Translation, envelopes, equality, and tail
+
+## The diagonal update
+
+On a certified edge, put $$s=\alpha\cdot u=h_V(u),\qquad
+ v=A_\alpha u=s\mathbf{1}-u.$$ For the selected $\beta$, $$\begin{aligned}
+u'&=B_\beta v
+   =(\beta\cdot v)\mathbf{1}-v\\
+  &=u+\bigl((|\beta|-1)\alpha-\beta\bigr)\cdot u\,\mathbf{1}.
+\end{aligned}
+\tag{5.1}$$ Define $$\delta_{\alpha,\beta}(u)
+ =\bigl((|\beta|-1)\alpha-\beta\bigr)\cdot u.
+\tag{5.2}$$ The second carry is exactly $\delta_{\alpha,\beta}(u)>0$. On integer seeds it is an integer at least one. Thus every infinite certified strict branch has $$u_n=u_0+t_n\mathbf{1},\qquad 0=t_0<t_1<t_2<\cdots .
+\tag{5.3}$$ This is an actual degree identity by Section 4, not merely a matrix calculation.
+
+## Within-total representatives and strict activity
+
+Let $$T_V=\{|\alpha|:\alpha\in E_V\},\qquad
+ T_W=\{|\beta|:\beta\in E_W\},
+ \qquad d_V=|T_V|,\quad d_W=|T_W|.$$ For $s\in T_V$, define $$M_s=\max_{\substack{\alpha\in E_V\\|\alpha|=s}}
+       \alpha\cdot u_0
+\tag{5.4}$$ and freeze a maximizing row $\alpha_s$. For $s\in T_W$, define $$N_s=-\min_{\substack{\beta\in E_W\\|\beta|=s}}
+       \beta\cdot u_0
+\tag{5.5}$$ and freeze a minimizing row $\beta_s$. Let $S_V$ consist of totals whose optimizer in (5.4) is unique, and let $S_W$ consist of totals whose optimizer in (5.5) is unique. Write $$q_V=|S_V|,\qquad q_W=|S_W|.
+\tag{5.6}$$ If two $V$-rows have equal total, their score difference on $u_0+t\mathbf{1}$ is constant. For equal-total $W$-rows the corresponding difference on the $W$-input is also constant. A within-total tie therefore persists, while a unique representative cannot switch within its class.
+
+Along $u(t)=u_0+t\mathbf{1}$, $$h_V(u(t))=\max_{s\in T_V}(M_s+st),
+\qquad
+ g(t)=h_V(u(t))-t
+     =\max_{s\in T_V}(M_s+(s-1)t).
+\tag{5.7}$$ Every slope $s-1$ is positive. If a line of slope $s-1$ is active at $t_1<t_2$, then $$g(t_2)\geq g(t_1)+(s-1)(t_2-t_1)>g(t_1),$$ so $g$ is strictly increasing. Moreover, $$v(t)=h_V(u(t))\mathbf{1}-u(t)=g(t)\mathbf{1}-u_0,
+\tag{5.8}$$ and hence $$h_W(v(t))=\max_{s\in T_W}(s\,g(t)+N_s).
+\tag{5.9}$$
+
+For $s\in S_V$ and $s\in S_W$, respectively, define the strict activity intervals $$I_s^V=
+ \{t\geq0:M_s+st>M_a+at\ \text{for every }a\in T_V\setminus\{s\}\},
+\tag{5.10}$$ $$I_s^W=
+ \{g\geq g(0):sg+N_s>ag+N_a\
+      \text{for every }a\in T_W\setminus\{s\}\}.
+\tag{5.11}$$ Each is a relatively open interval and may be empty. A line touching the upper envelope at a tie but nowhere strictly has an empty activity interval and is not visited by a strict branch.
+
+[\[lem:ordered-slopes\]]{#lem:ordered-slopes label="lem:ordered-slopes"} For an upper envelope of affine lines with distinct slopes, suppose one line is uniquely active at $x$, another at $y>x$, and their slopes are $a,b$. Then $a<b$.
+
+The difference of the later line and the earlier line is negative at $x$ and positive at $y$. Its slope $b-a$ is therefore positive.
+
+It follows that the strictly active $V$-totals increase whenever they change, and the same holds for $W$-totals in the increasing variable $g$. A discrete update can jump across one or several activity intervals, but it cannot return across a crossed wall. Landing exactly on a wall is excluded by strict certification; no generic-time assumption is needed.
+
+## Discrete pair count and equality
+
+At branch samples define $$s_V(n)=|\alpha_n|,\qquad s_W(n)=|\beta_n|,\qquad g_n=g(t_n),$$ and the component switch sets $$I_V=\{n\geq0:s_V(n+1)\neq s_V(n)\},\qquad
+ I_W=\{n\geq0:s_W(n+1)\neq s_W(n)\}.
+\tag{5.12}$$ By Lemma [\[lem:ordered-slopes\]](#lem:ordered-slopes){reference-type="ref" reference="lem:ordered-slopes"}, $$|I_V|\leq q_V-1,\qquad |I_W|\leq q_W-1.
+\tag{5.13}$$ The discrete ordered-pair statistic is $$\begin{aligned}
+ N_{\mathrm{pair}}
+ &=\#\{n\geq0:
+ (s_V(n+1),s_W(n+1))\neq(s_V(n),s_W(n))\}\\
+ &=|I_V\cup I_W|.
+\end{aligned}
+\tag{5.14}$$ Consequently $$N_{\mathrm{pair}}
+ \leq |I_V|+|I_W|
+ \leq(q_V-1)+(q_W-1)
+ \leq d_V+d_W-2.
+\tag{5.15}$$ A simultaneous $V$- and $W$-switch lies in $I_V\cap I_W$ and counts once in (5.14).
+
+[\[thm:equality\]]{#thm:equality label="thm:equality"} On an existing infinite certified strict branch, $$N_{\mathrm{pair}}=d_V+d_W-2$$ if and only if all four conditions hold:
+
+1.  $q_V=d_V$ and $q_W=d_W$;
+
+2.  every $V$-total class has a nonempty interval $I_s^V$ containing a sample $t_n$;
+
+3.  every $W$-total class has a nonempty interval $I_s^W$ containing a sample $g_n$; and
+
+4.  $I_V\cap I_W=\varnothing$.
+
+Suppose equality holds. Every inequality in (5.15) is then an equality. The final inequality forces $q_V=d_V$ and $q_W=d_W$. Equality in (5.13) forces each monotone selector sequence to make the maximum possible number of strict increases; a monotone sequence on $q_S$ ordered classes can do so precisely by visiting every class. At a strict sample, visiting a class means that the corresponding sample lies in its nonempty strict activity interval. Finally, $$|I_V\cup I_W|=|I_V|+|I_W|$$ is equivalent to disjointness of the two switch sets.
+
+Conversely, conditions (ii)--(iii) make the two ordered selector sequences visit all $q_V$ and $q_W$ classes, so they make $q_V-1$ and $q_W-1$ component changes. Condition (iv) makes their update indices distinct, and condition (i) replaces the available-class counts by $d_V,d_W$. Substitution in (5.14) gives equality.
+
+The theorem characterizes equality on a branch that already exists. It does not construct a branch with a prescribed switch pattern.
+
+## Closed stationary tail
+
+After the final pair change, equal-total invariance fixes the actual labels $(\alpha,\beta)$. Let $N$ be the first stationary index and put $$c=(|\beta|-1)\alpha-\beta,\qquad
+ \lambda=1+c\cdot\mathbf{1}=(|\alpha|-1)(|\beta|-1),\qquad
+ \mu=c\cdot u_0.
+\tag{5.16}$$ Since every support total is at least $2r$, one has $\lambda=(|\alpha|-1)(|\beta|-1)>1$.
+
+[\[prop:tail\]]{#prop:tail label="prop:tail"} For every $n\geq N$, $$t_{n+1}=\lambda t_n+\mu
+\tag{5.17}$$ and $$t_n=\lambda^{\,n-N}t_N+
+ \mu\frac{\lambda^{\,n-N}-1}{\lambda-1},
+ \qquad u_n=u_0+t_n\mathbf{1}.
+\tag{5.18}$$
+
+From (5.2)--(5.3), $$\delta_{\alpha,\beta}(u_n)
+ =c\cdot(u_0+t_n\mathbf{1})
+ =\mu+(\lambda-1)t_n.$$ Adding this increment to $t_n$ gives (5.17), and summing the affine recurrence gives (5.18). The vector $u_0$ is the original global seed, not a seed reset at $N$.
+
+If the pair is stationary from $n=0$, then $$t_n=\mu\frac{\lambda^n-1}{\lambda-1}.$$ Nothing here implies a minimal scalar recurrence, a Perron algebraic degree, entropy, or a higher dynamical-degree formula.
+
+# Full spans and literal reciprocity
+
+For a typed arrow $e=(\alpha,\beta)\to f$, define $$U_e=\operatorname{span}_{\mathbb R}
+ \{u:(u,w)\in\mathcal C_{e\to f}^{\mathbb Z}\},$$ $$V_e=\operatorname{span}_{\mathbb R}
+ \{A_\alpha u:(u,w)\in\mathcal C_{e\to f}^{\mathbb Z}\}.$$
+
+[\[lem:full-span\]]{#lem:full-span label="lem:full-span"} Let $$\mathcal C=\{z:h_jz>0,\ 1\leq j\leq N_0\}$$ be defined by finitely many strict homogeneous linear inequalities and contain a positive integer point $z_0=(u_0,w_0)$. Then the $u$-projections of its positive integer points span $\mathbb R^r$.
+
+For $1\leq k\leq r$, let $E_k=(e_k,0)$, and define $$m=\min_jh_jz_0>0,\qquad M=\max_{j,k}|h_jE_k|.$$ Choose an integer $L>M/m$. Homogeneity makes $Lz_0$ a strict positive integer point. Moreover, $$h_j(Lz_0+E_k)\geq Lm-M>0$$ for every $j,k$, and positivity of coordinates is preserved. Thus both $Lz_0$ and $Lz_0+E_k$ lie in $\mathcal C$. The difference of their $u$-projections is $e_k$, so every coordinate vector lies in the span.
+
+Every arrow domain in Section 3 is a finite strict homogeneous linear domain. If it contains an integer seed, Lemma [\[lem:full-span\]](#lem:full-span){reference-type="ref" reference="lem:full-span"} gives $$U_e=\mathbb R^r.
+\tag{6.1}$$ Furthermore, $$\det A_\alpha=(-1)^r(1-|\alpha|)\neq0,
+\tag{6.2}$$ so $$V_e=A_\alpha U_e=\mathbb R^r.
+\tag{6.3}$$ There is therefore no lower-dimensional positive alternative under these hypotheses.
+
+The assignments $\xi\mapsto A_\xi$ and $\xi\mapsto B_\xi$ are injective. Indeed, equality of two such matrices gives $\mathbf{1}(\xi-\xi')^{\mathsf{T}}=0$, hence $\xi=\xi'$. Combining this observation with full spans makes the reflected labels literal.
+
+[\[thm:reciprocity\]]{#thm:reciprocity label="thm:reciprocity"} Let $e_k=(\alpha_k,\beta_k)$, $0\leq k<n$, be a finite typed word whose strict homogeneous arrow domains contain integer seeds. Phase-resolved reflected-inverse reciprocity for every seed and every prefix holds if and only if, at every edge,
+
+1.  $R\alpha_k\in E_W$ and is the unique reflected $W$-selector;
+
+2.  $R\beta_k\in E_V$ and is the unique reflected $V$-selector; and
+
+3.  every reflected source, carry, target, and transformed membership row is strict.
+
+Assume (i)--(iii). If $$v_k=A_{\alpha_k}u_k,\qquad
+ u_{k+1}=B_{\beta_k}v_k,$$ then the literal identities (3.7) give $$B_{R\alpha_k}Ru_k=Rv_k,\qquad
+ A_{R\beta_k}Rv_k=Ru_{k+1}.
+\tag{6.4}$$ The reflected carries are reversals of the forward carries. The reflected target and transformed membership rows advance the typed inverse state to the next edge. Induction in the $W$-first, $V$-second inverse order therefore proves reciprocity at every phase and prefix.
+
+Conversely, phase-resolved equality for all integer seeds gives the first linear identity in (6.4) on $U_{e_k}$ and the second on $V_{e_k}$. Equations (6.1)--(6.3) upgrade them to full matrix identities. Injectivity of the label-to-matrix maps forces the labels $R\alpha_k$ and $R\beta_k$. Equality at the next prefix also requires the corresponding reflected target and transformed rows, while phase realization requires the unique selector and carry rows. Thus (i)--(iii) are necessary.
+
+Formal identities alone do not establish support availability or any of the inequalities. The next example shows the failure at the first phase. Take $$\begin{aligned}
+a_1&=(8,2,2),&a_2&=(2,5,6),&\gamma&=(2,8,2),\\
+b_1&=(2,2,8)=Ra_1,&b_2&=(6,5,2)=Ra_2,
+\end{aligned}
+\tag{6.5}$$ and $$E_V=\{a_1,a_2,\gamma\},\qquad E_W=\{b_1,b_2\}.
+\tag{6.6}$$ At $u=(1,10,1)$, $w=\mathbf{1}$, $$(a_1\cdot u,a_2\cdot u,\gamma\cdot u)=(30,58,84),
+ \qquad A_\gamma u=(83,74,83).$$ But $R\gamma=\gamma\notin E_W$, the available reflected scores are $(b_1\cdot Ru,b_2\cdot Ru)=(30,58)$, and $$B_2Ru=(57,48,57)\neq(83,74,83)=RA_\gamma u.
+\tag{6.7}$$ The relevant carries are positive. The mismatch at $n=1$ is therefore caused by the missing literal reflected label, not by a tie or carry failure.
+
+# One-step radius and complete fixture
+
+## Fixed rows and an explicit half-margin radius
+
+Fix a certified state $z=(u,w)$, normalized by $\|z\|_1=1$. Fix in advance the support, labels, exponent rows, arrow $e\to f$, permitted competitor/lower/new row sets, and projection domains. Define $$P_u=(I\ \ 0),\qquad P_w=(0\ \ I),\qquad
+ F_e=\begin{pmatrix}C_{\alpha,\beta}&0\\A_\alpha&0\end{pmatrix}.
+\tag{7.1}$$ The four fixed projection domains are $$P_uz=u,\qquad A_\alpha P_uz=A_\alpha u,\qquad
+ RP_uz=Ru,\qquad RA_\alpha P_uz=RA_\alpha u.
+\tag{7.2}$$
+
+The finite forward family $J_+$ contains:
+
+1.  coordinate positivity of $u,w$;
+
+2.  every fixed source $D_{e,k}(u,w)$-row;
+
+3.  every selected-minus-competitor row at $u$;
+
+4.  every coordinate of $A_\alpha u-w$;
+
+5.  every selected-minus-competitor row at $A_\alpha u$;
+
+6.  every coordinate of $C_{\alpha,\beta}u-u$;
+
+7.  every target selector and carry row in (3.11);
+
+8.  every transformed $D_f$-row; and
+
+9.  every fixed selected-minus-lower/new row on the first two projections in (7.2).
+
+The reflected family $J_-$ contains the four groups in (3.6), their target versions after $F_ez$, every fixed additional source or transformed row prescribed by the reflected certificate, and every fixed selected-minus-lower/new row on the final two projections in (7.2). After composing with the displayed projection and transition matrices, write each row as $$\ell_j(z)=a_j\cdot z>0.$$ Set $$m_+=\min_{j\in J_+}\ell_j(z),\qquad
+ L_+=\max_{j\in J_+}\|a_j\|_1,$$ $$m_-=\min_{j\in J_-}\ell_j(z),\qquad
+ L_-=\max_{j\in J_-}\|a_j\|_1.
+\tag{7.3}$$
+
+[\[thm:radius\]]{#thm:radius label="thm:radius"} The explicit radius $$\rho_e(z)=
+ \frac{\min\{m_+,m_-\}}
+      {2\max\{1,L_+,L_-\}}
+\tag{7.4}$$ has the following property. If $\|\Delta z\|_\infty<\rho_e(z)$, then $z+\Delta z$ retains more than half of every fixed forward and reflected margin. If the perturbation is required to remain in the normalized section, impose additionally $\mathbf{1}_{2r}^{\mathsf{T}}\Delta z=0$.
+
+For every fixed row, $$|a_j\cdot\Delta z|
+ \leq\|a_j\|_1\|\Delta z\|_\infty
+ <\frac12\min\{m_+,m_-\}
+ \leq\frac12\ell_j(z).$$ Hence $\ell_j(z+\Delta z)>\ell_j(z)/2>0$, separately for $J_+$ and $J_-$.
+
+No numerical value is attached to (7.4) before the finite row family and state are specified. The support, labels, exponent rows, row sets, and projection domains do not vary. The conclusion ends after one forward edge and one reflected inverse step.
+
+Every row can matter. In the support configuration (6.5)--(6.6), delete just $$(a_1-\gamma)\cdot u=(6,-6,0)\cdot u>0$$ and take $u=(2,2,1)$, $w=\mathbf{1}$. The other three source rows have values $2,14,20$, the two carries are $$A_1u-w=(19,19,20),\qquad C_{21}u-u=240\mathbf{1},$$ and the four target rows are $238,238,2892,2898$. Nevertheless $$a_1\cdot u=\gamma\cdot u=22>a_2\cdot u=20.$$ Removing the one row destroys unique selection while every retained row is strict. Dividing the state by $8$ gives the normalized version.
+
+## Matrices and complete row lists
+
+Continue with the exact supports in (6.5)--(6.6). The typed edge labels are $$e_1=(a_1,b_2),\qquad e_2=(a_2,b_2).$$ The five phase matrices are $$A_1=\begin{pmatrix}7&2&2\\8&1&2\\8&2&1\end{pmatrix},\quad
+ A_2=\begin{pmatrix}1&5&6\\2&4&6\\2&5&5\end{pmatrix},\quad
+ A_\gamma=\begin{pmatrix}1&8&2\\2&7&2\\2&8&1\end{pmatrix},
+\tag{7.5}$$ $$B_1=\begin{pmatrix}1&2&8\\2&1&8\\2&2&7\end{pmatrix},\qquad
+ B_2=\begin{pmatrix}5&5&2\\6&4&2\\6&5&1\end{pmatrix}.
+\tag{7.6}$$ Direct multiplication gives $$C_{21}=B_2A_1=I+\mathbf{1}(90,19,22),\qquad
+ C_{22}=B_2A_2=I+\mathbf{1}(18,55,70).
+\tag{7.7}$$
+
+The four source score rows for the two cells are $$K_1=\begin{pmatrix}
+6&-3&-4\\6&-6&0\\4&-1&8\\4&5&2
+\end{pmatrix},\qquad
+ K_2=\begin{pmatrix}
+-6&3&4\\0&-3&4\\-2&2&12\\-2&8&6
+\end{pmatrix}.
+\tag{7.8}$$ They record the two $V$-gaps, the forward $W$-gap, and the additional reflected $V$-gap. The target rows are $$T_{21}=K_2C_{21}
+ =\begin{pmatrix}
+84&22&26\\90&16&26\\1078&230&276\\1078&236&270
+\end{pmatrix},
+\tag{7.9}$$ $$T_{22}=K_2C_{22}
+ =\begin{pmatrix}
+12&58&74\\18&52&74\\214&662&852\\214&668&846
+\end{pmatrix}.
+\tag{7.10}$$ The source second-carry rows are $$\delta_1=(90,19,22),\qquad \delta_2=(18,55,70).
+\tag{7.11}$$ The target first-carry rows and second-carry rows are $$\kappa_{21}=(1074,231,268),\qquad
+ \kappa_{22}=(216,660,840),
+\tag{7.12}$$ $$\tau_{21}=(12888,2772,3216),\qquad
+ \tau_{22}=(2592,7920,10080).
+\tag{7.13}$$ Equations (7.8)--(7.13) enumerate every non-coordinate row for $e_1\to e_2$ and $e_2\to e_2$. Reflected rows follow from literal identities, with their phase order still checked explicitly below.
+
+## Six full integer pairs
+
+All six states use the explicit canonical completion $w=\mathbf{1}$. This choice is valid without a search because every coordinate of $A_i u$ is larger than one for the listed positive seeds. The next table gives the full states and forward data; the following table gives all source, reflected, and carry checks.
+
+\@p0.07p0.42p0.42@
+
+\
+ID & State and support scores & Fresh and transformed vectors\
+ID & State and support scores & Fresh and transformed vectors\
+P1 & $\begin{aligned}
+e&=e_1,\\
+(u;w)&=(2,1,1;1,1,1),\\
+(a_1u,a_2u,\gamma u)&=(20,15,14)
+\end{aligned}$ & $\begin{aligned}
+v=A_1u&=(18,19,19),\\
+(b_1v,b_2v)&=(226,241),\\
+u'=C_{21}u&=(223,222,222)
+\end{aligned}$\
+P2 & $\begin{aligned}
+e&=e_1,\\
+(u;w)&=(2,1,2;1,1,1),\\
+(a_1u,a_2u,\gamma u)&=(22,21,16)
+\end{aligned}$ & $\begin{aligned}
+v=A_1u&=(20,21,20),\\
+(b_1v,b_2v)&=(242,265),\\
+u'=C_{21}u&=(245,244,245)
+\end{aligned}$\
+P3 & $\begin{aligned}
+e&=e_1,\\
+(u;w)&=(3,1,1;1,1,1),\\
+(a_1u,a_2u,\gamma u)&=(28,17,16)
+\end{aligned}$ & $\begin{aligned}
+v=A_1u&=(25,27,27),\\
+(b_1v,b_2v)&=(320,339),\\
+u'=C_{21}u&=(314,312,312)
+\end{aligned}$\
+Q1 & $\begin{aligned}
+e&=e_2,\\
+(u;w)&=(1,1,1;1,1,1),\\
+(a_1u,a_2u,\gamma u)&=(12,13,12)
+\end{aligned}$ & $\begin{aligned}
+v=A_2u&=(12,12,12),\\
+(b_1v,b_2v)&=(144,156),\\
+u'=C_{22}u&=(144,144,144)
+\end{aligned}$\
+Q2 & $\begin{aligned}
+e&=e_2,\\
+(u;w)&=(1,1,2;1,1,1),\\
+(a_1u,a_2u,\gamma u)&=(14,19,14)
+\end{aligned}$ & $\begin{aligned}
+v=A_2u&=(18,18,17),\\
+(b_1v,b_2v)&=(208,232),\\
+u'=C_{22}u&=(214,214,215)
+\end{aligned}$\
+Q3 & $\begin{aligned}
+e&=e_2,\\
+(u;w)&=(1,2,2;1,1,1),\\
+(a_1u,a_2u,\gamma u)&=(16,24,22)
+\end{aligned}$ & $\begin{aligned}
+v=A_2u&=(23,22,22),\\
+(b_1v,b_2v)&=(266,292),\\
+u'=C_{22}u&=(269,270,270)
+\end{aligned}$\
+
+For the reflected columns below, set $$W^-=(b_1\cdot Ru,b_2\cdot Ru),\qquad
+ V^-=(a_1\cdot Rv,a_2\cdot Rv,\gamma\cdot Rv).$$
+
+\@p0.07p0.42p0.42@
+
+\
+ID & Source and forward carries & Reflected source data\
+ID & Source and forward carries & Reflected source data\
+P1 & $\begin{aligned}
+K_1u&=(5,6,15,15),\\
+v-w&=(17,18,18),\\
+u'-u&=221\mathbf{1}
+\end{aligned}$ & $\begin{aligned}
+W^-&=(20,15),\\
+V^-&=(226,241,226),\\
+R(v-w)&=(18,18,17)
+\end{aligned}$\
+P2 & $\begin{aligned}
+K_1u&=(1,6,23,17),\\
+v-w&=(19,20,19),\\
+u'-u&=243\mathbf{1}
+\end{aligned}$ & $\begin{aligned}
+W^-&=(22,21),\\
+V^-&=(242,265,248),\\
+R(v-w)&=(19,20,19)
+\end{aligned}$\
+P3 & $\begin{aligned}
+K_1u&=(11,12,19,19),\\
+v-w&=(24,26,26),\\
+u'-u&=311\mathbf{1}
+\end{aligned}$ & $\begin{aligned}
+W^-&=(28,17),\\
+V^-&=(320,339,320),\\
+R(v-w)&=(26,26,24)
+\end{aligned}$\
+Q1 & $\begin{aligned}
+K_2u&=(1,1,12,12),\\
+v-w&=(11,11,11),\\
+u'-u&=143\mathbf{1}
+\end{aligned}$ & $\begin{aligned}
+W^-&=(12,13),\\
+V^-&=(144,156,144),\\
+R(v-w)&=(11,11,11)
+\end{aligned}$\
+Q2 & $\begin{aligned}
+K_2u&=(5,5,24,18),\\
+v-w&=(17,17,16),\\
+u'-u&=213\mathbf{1}
+\end{aligned}$ & $\begin{aligned}
+W^-&=(14,19),\\
+V^-&=(208,232,214),\\
+R(v-w)&=(16,17,17)
+\end{aligned}$\
+Q3 & $\begin{aligned}
+K_2u&=(8,2,26,26),\\
+v-w&=(22,21,21),\\
+u'-u&=268\mathbf{1}
+\end{aligned}$ & $\begin{aligned}
+W^-&=(16,24),\\
+V^-&=(266,292,266),\\
+R(v-w)&=(21,21,22)
+\end{aligned}$\
+
+Every tuple in Tables [\[tab:forward-fixture\]](#tab:forward-fixture){reference-type="ref" reference="tab:forward-fixture"}--[\[tab:source-fixture\]](#tab:source-fixture){reference-type="ref" reference="tab:source-fixture"} is strict in the appropriate phase. The reflected second carry is $R(u'-u)=u'-u$, because it is a scalar multiple of $\mathbf{1}$.
+
+## Target and reflected-target checks
+
+Let $v'=A_2u'$. The entries of $T_{2i}u$ are, in order, the two target $V$-gaps, the target $W$-gap, and the additional reflected target $V$-gap. The next table prints the remaining forward and reflected target data and both target carries.
+
+\@p0.07p0.42p0.42@
+
+\
+ID & Target rows, scores, and fresh vector & Reflected target scores and carries\
+ID & Target rows, scores, and fresh vector & Reflected target scores and carries\
+P1 & $\begin{aligned}
+T_{21}u&=(216,222,2662,2662),\\
+(a_1u',a_2u',&\gamma u')\\
+ &=(2672,2888,2666),\\
+v'&=(2665,2666,2666)
+\end{aligned}$ & $\begin{aligned}
+(b_1v',b_2v')&=(31990,34652),\\
+(a_1Rv',a_2Rv',&\gamma Rv')\\
+ &=(31990,34652,31990),\\
+v'-v&=2647\mathbf{1},\\
+C_{22}u'-u'&=31764\mathbf{1}
+\end{aligned}$\
+P2 & $\begin{aligned}
+T_{21}u&=(242,248,2938,2932),\\
+(a_1u',a_2u',&\gamma u')\\
+ &=(2938,3180,2932),\\
+v'&=(2935,2936,2935)
+\end{aligned}$ & $\begin{aligned}
+(b_1v',b_2v')&=(35222,38160),\\
+(a_1Rv',a_2Rv',&\gamma Rv')\\
+ &=(35222,38160,35228),\\
+v'-v&=2915\mathbf{1},\\
+C_{22}u'-u'&=34980\mathbf{1}
+\end{aligned}$\
+P3 & $\begin{aligned}
+T_{21}u&=(300,312,3740,3740),\\
+(a_1u',a_2u',&\gamma u')\\
+ &=(3760,4060,3748),\\
+v'&=(3746,3748,3748)
+\end{aligned}$ & $\begin{aligned}
+(b_1v',b_2v')&=(44972,48712),\\
+(a_1Rv',a_2Rv',&\gamma Rv')\\
+ &=(44972,48712,44972),\\
+v'-v&=3721\mathbf{1},\\
+C_{22}u'-u'&=44652\mathbf{1}
+\end{aligned}$\
+Q1 & $\begin{aligned}
+T_{22}u&=(144,144,1728,1728),\\
+(a_1u',a_2u',&\gamma u')\\
+ &=(1728,1872,1728),\\
+v'&=(1728,1728,1728)
+\end{aligned}$ & $\begin{aligned}
+(b_1v',b_2v')&=(20736,22464),\\
+(a_1Rv',a_2Rv',&\gamma Rv')\\
+ &=(20736,22464,20736),\\
+v'-v&=1716\mathbf{1},\\
+C_{22}u'-u'&=20592\mathbf{1}
+\end{aligned}$\
+Q2 & $\begin{aligned}
+T_{22}u&=(218,218,2580,2574),\\
+(a_1u',a_2u',&\gamma u')\\
+ &=(2570,2788,2570),\\
+v'&=(2574,2574,2573)
+\end{aligned}$ & $\begin{aligned}
+(b_1v',b_2v')&=(30880,33460),\\
+(a_1Rv',a_2Rv',&\gamma Rv')\\
+ &=(30880,33460,30886),\\
+v'-v&=2556\mathbf{1},\\
+C_{22}u'-u'&=30672\mathbf{1}
+\end{aligned}$\
+Q3 & $\begin{aligned}
+T_{22}u&=(276,270,3242,3242),\\
+(a_1u',a_2u',&\gamma u')\\
+ &=(3232,3508,3238),\\
+v'&=(3239,3238,3238)
+\end{aligned}$ & $\begin{aligned}
+(b_1v',b_2v')&=(38858,42100),\\
+(a_1Rv',a_2Rv',&\gamma Rv')\\
+ &=(38858,42100,38858),\\
+v'-v&=3216\mathbf{1},\\
+C_{22}u'-u'&=38592\mathbf{1}
+\end{aligned}$\
+
+The reflected target first-phase scores $(b_1\cdot Ru',b_2\cdot Ru')$ equal $(a_1\cdot u',a_2\cdot u')$, and reflected target carries are reversals of the displayed scalar vectors. Hence the literal typed path is $$e_1\longrightarrow e_2\longrightarrow e_2$$ with strict forward and reflected source and target data at each printed state.
+
+Finally, the two seed families have matrices $$U_1=\begin{pmatrix}2&1&1\\2&1&2\\3&1&1\end{pmatrix},
+ \qquad \det U_1=1,$$ $$U_2=\begin{pmatrix}1&1&1\\1&1&2\\1&2&2\end{pmatrix},
+ \qquad \det U_2=-1.
+\tag{7.14}$$ Separately, $$\det A_1=11,\qquad \det A_2=12.
+\tag{7.15}$$ Thus the seed determinants $1,-1$ verify the concrete $u$-spans, while the phase-matrix determinants $11,12$ verify their images. The six-pair dossier illustrates the universal arguments; no theorem above uses it as a premise.
+
+# Boundaries and conclusion
+
+The exact failures are collected in Table [1](#tab:boundaries){reference-type="ref" reference="tab:boundaries"}. Several occur outside the headline support class, while others show why one row of a certificate cannot be omitted.
+
+::: {#tab:boundaries}
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Failed input                            Exact witness                                                                                                                          Consequence
+  --------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------
+  Failed input                            Exact witness                                                                                                                          Consequence
+
+  Characteristic zero                     In characteristic $p$, $P=(X_1X_2X_3)^p$ has zero gradient; in particular, characteristic $2$ gives $V=q_1^2q_2^2q_3^2$.               Formal weights do not establish fresh survival.
+
+  Positive coordinates                    In three variables $P=X_1^2X_2^2$ has $\partial_3P=0$ and singular Hessian.                                                            The grouped positive-face conclusion is unavailable.
+
+  Coordinate lower bound and strictness   For $\alpha=(1,2,2)$, $\gamma=(2,1,2)$, $u=\mathbf{1}$, the scores tie; with $w=(4,1,1)$, the first carry has a zero coordinate.       Selector uniqueness and fresh/old separation fail independently.
+
+  Complete row family                     Delete $(a_1-\gamma)\cdot u>0$ and use $(u,w)=((2,2,1),\mathbf{1})$. All retained rows are strict but $a_1\cdot u=\gamma\cdot u=22$.   A positive radius for the reduced list does not protect the omitted selector comparison.
+
+  First carry                             At $u=(2,1,1)$, $w=(18,1,1)$, $A_1u-w=(0,18,18)$.                                                                                      The old block can remain visible; the certified phase stops.
+
+  Literal reflected label                 For (6.5)--(6.6) at $u=(1,10,1)$, $(57,48,57)\neq(83,74,83)$ in (6.7).                                                                 Reflected reciprocity fails at its first phase.
+
+  Positive-support cancellation control   With $L=q_1+q_2+q_3$, $V=L^3$, and $W=(p_1-p_2)^3$, equal fresh terms cancel in $p_1'-p_2'=p_1-p_2$.                                   Zero and unit support coordinates permit actual fresh-term cancellation.
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  : Hypothesis boundaries and exact consequences.
+:::
+
+These witnesses do not support conclusions outside the theorem. In particular, we make no assertion for arbitrary supports, zero or unit support coordinates, positive characteristic, or dimension $r=2$. We do not construct an unconditional selector algorithm or normal-fan automaton, and the equality criterion does not realize prescribed selector patterns.
+
+Coordinate reversal in Section 6 is not global support closure, a map-level reversor, a conjugacy, or a classification. Strict homogeneous integer domains force full spans and literal labels; no lower-dimensional or nonliteral reciprocity alternative is asserted. A local margin does not imply target-domain inclusion. The radius theorem fixes supports, exponents, labels, row sets, and projection domains and does not provide multi-edge, all-iterate, or global robustness.
+
+The affine tail is a certified weighted-degree formula. It gives no entropy, higher dynamical degree, Perron algebraic degree, or minimal scalar recurrence conclusion. The fixture arithmetic is illustrative, not universal evidence. Nothing in the article depends on empirical data, computer algebra, code, numerical scanning, or hardware experiments, and the literature discussion makes no priority or exhaustive-coverage claim.
+
+Reproducibility here is symbolic. Every universal implication is proved before the fixture is used, every fixture row is printed, and the six states can be checked by integer matrix multiplication. The boundary examples identify the exact hypothesis that fails rather than extrapolating past it.
+
+The resulting picture is narrow but complete. Positive collected supports and complete strict certificates make the two shear phases actual, translate the degree state along one diagonal ray, and reduce selector transience to two ordered envelopes. Full integer spans then force literal reflected labels, while fixed finite rows give a quantitative one-step neighborhood. Larger typed fan systems and perturbations of the row data would require new hypotheses and proofs; they are directions beyond the present result.

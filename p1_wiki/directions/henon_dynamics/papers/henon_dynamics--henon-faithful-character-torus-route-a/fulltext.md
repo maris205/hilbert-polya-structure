@@ -1,0 +1,97 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "henon_dynamics"
+logical_paper_id: "henon_dynamics--henon-faithful-character-torus-route-a"
+canonical_tex: "henon_dynamics/henon_faithful_character_torus_route_a/paper/main.tex"
+canonical_pdf: "henon_dynamics/henon_faithful_character_torus_route_a/paper/main.pdf"
+source_sha256: "14389b9dee189cedd74d185c24660d5002bb095b1747f853b7fbf2c6f69f06e5"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# Faithful Character-Torus Recovery for a Scaled Graph-Directed Hénon Hardy Owner
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../henon_dynamics/henon_faithful_character_torus_route_a>)
+- [规范 TeX](<../../../../../henon_dynamics/henon_faithful_character_torus_route_a/paper/main.tex>)
+- [关联 PDF](<../../../../../henon_dynamics/henon_faithful_character_torus_route_a/paper/main.pdf>)
+- [支撑 Markdown](<../../../../../henon_dynamics/henon_faithful_character_torus_route_a/README.md>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  We replace a single finite character of graph-directed affine Hénon branch translations by their labelled character torus. On a uniformly separated scaled family, the same trace-class Hardy operator has an all-order trace law, Fredholm lattice product, and primitive-cycle expansion. Its first three normalized logarithmic jets recover every branch-labelled integer translation exactly. A Gaussian-rational faithful character distinguishes two models that alias under every fifth-root phase. Recovery is exact only in this frozen labelled family; it is neither a stability theorem nor arbitrary geometric or target recovery.
+author:
+- 'Route-A structural certificate C134'
+title: |
+  Faithful Character-Torus Recovery for a Scaled\
+  Graph-Directed Hénon Hardy Owner
+```
+
+## Markdown 正文
+
+# Scaled separated family
+
+Fix $$A=\begin{pmatrix}3/16&-1/32\\1/4&0\end{pmatrix},\quad
+B=\begin{pmatrix}1&1&0\\1&0&1\\1&0&0\end{pmatrix},\quad
+c=(1/2,1/3,1/5).$$ For an integer $k\geq1$, let $t=(t_0,t_1,t_2)$ be any branch permutation of $(-2k,0,2k)$ and set $\phi_j(z)=Az+(t_j,0)$ on three copies of $H^2(\mathbb D_{3k}^2)$. The coordinate image radii are $21k/32$ and $3k/4$. The first-coordinate interior margin is $11k/32$, and adjacent images have gap $11k/16$. Thus every branch is compactly contained and the three images are pairwise disjoint, uniformly after scaling.
+
+The dilation $S_k(z)=kz$ conjugates the underlying affine family to the $k=1$ geometry after dividing translations by $k$. In particular, all interior and separation constants above are scale-free ratios; only the integer character exponents retain the value of $k$. This separates the geometric uniformity assertion from the later recovery assertion.
+
+Every admissible cyclic word has one affine fixed point. Strong separation makes its itinerary unique, so primitive admissible necklaces biject with primitive geometric cycles at all periods. The exact replay prefix is
+
+  period                  1   2   3    4    5    6    7     8
+  --------------------- --- --- --- ---- ---- ---- ---- -----
+  rooted closed words     1   3   7   11   21   39   71   131
+  primitive cycles        1   1   2    2    4    5   10    15
+
+# One global character-family owner
+
+For a labelled $u\in U(1)$ put $$W_{t,u}=B\operatorname{diag}(c_ju^{t_j}),\qquad
+(\mathcal L_{t,u}f)_i(z)=\sum_jB_{ij}c_ju^{t_j}f_j(\phi_j(z)).$$ Compact interior restriction and the total-degree multiplicity $m+1$ give a summable trace-class majorant, uniformly in $u$. More explicitly, every image lies in the concentric bidisc with restriction ratio at most $\rho=85/96<1$; the degree-$m$ contribution has multiplicity $m+1$, and $\sum_{m\geq0}(m+1)\rho^m<\infty$. The finite graph matrix and unit-modulus phases do not affect summability. Since the eigenvalues of $A$ are $1/8,1/16$, translations lower polynomial degree, and triangularity yields, for every $n\geq1$, $$\operatorname{Tr}\mathcal L_{t,u}^n=
+\frac{\operatorname{Tr}W_{t,u}^n}
+{(1-8^{-n})(1-16^{-n})}. \tag{1}$$ Consequently the entire Fredholm determinant has the normally convergent lattice product $$D_{t,u}(z)=\det(I-z\mathcal L_{t,u})=
+\prod_{r,s\geq0}\det(I-z8^{-r}16^{-s}W_{t,u}), \tag{2}$$ and grouping rooted words by primitive root gives $$\log D_{t,u}(z)=-\sum_{[\gamma]}\sum_{m\geq1}
+\frac{(c_\gamma u^{M_\gamma}z^{\ell_\gamma})^m}
+{m\det(I-A^{m\ell_\gamma})}.$$ These are all-period identities; period eight is only finite replay.
+
+# Three logarithmic jets recover translations
+
+Work first in $\mathbb Q[X,X^{-1}]$. Direct expansion gives $$\det(I-zW_{t,X})=1-\tfrac12X^{t_0}z
+-\tfrac16X^{t_0+t_1}z^2-\tfrac1{30}X^{t_0+t_1+t_2}z^3. \tag{3}$$ Define the normalized log jets $$P_n=-n(1-8^{-n})(1-16^{-n})[z^n]\log D_{t,X}.$$ Equation (1) gives $P_n=\operatorname{Tr}(W_{t,X}^n)$. Newton identities then recover $$E_1=P_1,\quad E_2=\frac{P_1^2-P_2}{2},\quad
+E_3=\frac{P_1^3-3P_1P_2+2P_3}{6},$$ and (3) gives $$2E_1=X^{t_0},\qquad -6E_2=X^{t_0+t_1},\qquad
+30E_3=X^{t_0+t_1+t_2}.$$ If the three exponents are $S_0,S_{01},S_{012}$, then $$t_0=S_0,\qquad t_1=S_{01}-S_0,\qquad
+t_2=S_{012}-S_{01}.$$ Thus three labelled universal log jets determine the complete integer triple. This is the general three-state algebraic statement: no zero-sum relation was used in the decoding formula. In the present permutation family $t_0+t_1+t_2=0$, so the third monomial equals one and acts as an exact consistency certificate; the displayed three-jet theorem is retained because it also covers arbitrary labelled integer triples whenever the same operator and interior hypotheses remain valid.
+
+# Exact alias and faithful control
+
+The anchor $q=(3+4i)/5$ lies on $U(1)$. Its quadratic trace is $6/5$, so it has minimal polynomial $T^2-(6/5)T+1$ over $\mathbb Q$. This polynomial is not monic integral, so $q$ is not an algebraic integer and hence cannot be a root of unity; $m\mapsto q^m$ is faithful on $\mathbb Z$. More generally, evaluation $X^a\mapsto u^a$ is injective on Laurent monomials whenever the labelled character $u$ is known and faithful. Thus the three monomials above retain unique exponents after exact evaluation. Compare the labelled triples $(-2,0,2)$ and $(-12,0,12)$. They are componentwise congruent modulo five, so every $\mathbb Z/5$-twisted trace and determinant agrees. At $q$, however, the linear coefficients of (3) are $-q^{-2}/2$ and $-q^{-12}/2$, which differ. The Laurent exponents recover both triples, and the same injectivity holds under exact evaluation at any known faithful character.
+
+The two controls separate quotient failure from recovery success:
+
+  receipt                        $(-2,0,2)$ versus $(-12,0,12)$        conclusion
+  ----------------------------- -------------------------------- -----------------------
+  all fifth-root characters                identical              finite-quotient alias
+  universal Laurent character          distinct exponents           exact separation
+  faithful $q=(3+4i)/5$               $q^{-2}\ne q^{-12}$           exact separation
+
+#### Progress over C129.
+
+C129 detected only translation residues modulo five. C134 removes that finite kernel while preserving its all-period cycles, global function space, and Fredholm owner. The gain is exact branch-labelled lattice recovery in the frozen scaled family, not complete geometric recovery.
+
+# Boundary and validation
+
+The character coordinate must remain labelled. The precise sign relation is $$D_{-t,u}(z)=D_{t,u^{-1}}(z),$$ because both sides have the same phase-weight matrix in the translation-blind trace formula. This is parameter inversion, never a reciprocal determinant. Torsion-only samples retain finite kernels. Moreover, powers of an infinite-order point on the circle can approach one arbitrarily closely, so exact injectivity alone supplies neither a uniform separation bound nor a finite-precision inversion algorithm. Varying the graph, weights, linear part, branch labels, or noninteger geometry lies outside the theorem.
+
+The exact receipt contains 284 rooted words, 40 primitive cycles, and all 12 permutation recoveries for $k=1,6$. A standard-library checker independent of the producer passes 71 assertions; an independent SymPy reconstruction passes 64 checks; byte replay and all 48 hostile cases (47 repaired-hash plus one stale-hash case) pass.
+
+The strict tuple is $(\texttt{A1\_WEAK},\texttt{A2\_FAIL},
+\texttt{A3\_FAIL},\texttt{A4\_FORMAL\_HINT})$, overall `ROUTE_A_EXPLORATORY`. The character family is a formal phase lift, not a natural unitary, Hamiltonian, or metaplectic quantization. We claim no target divisor, prime-like correspondence, arithmetic/local data, Euler factors, root numbers, automorphy, Hilbert--Pólya operator, or Riemann-zero relation. Route B is unauthorized; the literal firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`.

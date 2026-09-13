@@ -1,0 +1,90 @@
+---
+p1_kind: "derived-fulltext-reading-copy"
+route: "henon_dynamics"
+logical_paper_id: "henon_dynamics--henon-pulse-coupled-integrate-fire-sync-route-a"
+canonical_tex: "henon_dynamics/henon_pulse_coupled_integrate_fire_sync_route_a/paper/main.tex"
+canonical_pdf: "henon_dynamics/henon_pulse_coupled_integrate_fire_sync_route_a/paper/main.pdf"
+source_sha256: "b9472b3d7bdc0bfb3ac1357af545786ccc55dd14ec76eac5e5b176909d48bdbb"
+render_method: "pandoc --from=latex --to=markdown+tex_math_dollars"
+render_status: "generated-from-latex"
+---
+
+# Exact Event Maps and Cluster Coarsening in Pulse-Coupled Integrate-and-Fire Networks
+
+[← 返回论文卡](index.md)
+## 阅读副本说明
+
+此文件是为检索和导航生成的 Markdown 副本。原始 TeX/PDF、结果、代码、审计与冻结收据仍是唯一的 source of truth。
+转换不重新验证数学、引文、构建或路线状态，也不会提升任何 Hilbert–Pólya、零点或 RH 主张。
+
+## 原始入口
+
+- [原始 package](<../../../../../henon_dynamics/henon_pulse_coupled_integrate_fire_sync_route_a>)
+- [规范 TeX](<../../../../../henon_dynamics/henon_pulse_coupled_integrate_fire_sync_route_a/paper/main.tex>)
+- [关联 PDF](<../../../../../henon_dynamics/henon_pulse_coupled_integrate_fire_sync_route_a/paper/main.pdf>)
+- [支撑 Markdown](<../../../../../henon_dynamics/henon_pulse_coupled_integrate_fire_sync_route_a/README.md>)
+
+## 转换器读取的文档元数据
+
+```yaml
+abstract: |
+  We give a finite exact event certificate for an all-to-all excitatory network of identical integrate-and-fire oscillators. The strictly concave rise $U_a(\phi)=(1-e^{-a\phi})/(1-e^{-a})$ becomes rational event arithmetic in $u=e^{-a\phi}$ when $r=e^{-a}$ is rational. Free flight is a common rescaling, a pulse subtracts $(1-r)\epsilon$ with threshold clipping, and same-time avalanche closure is explicit. We prove equality-partition coarsening and the absorbing synchronized primitive event cycle $[N]$. The receipt contains 441 finite probes for $N\leq8$, an independent checker, symbolic checks, replay, and hostile mutations. Mirollo--Strogatz synchrony is cited separately; no exhaustive continuous-state census or target spectral claim is made. The strict Route-A verdict is `ROUTE_A_REJECTED`.
+author:
+- HCS Research Program
+date: 30 August 2026(revision 2)
+title: 'Exact Event Maps and Cluster Coarsening in Pulse-Coupled Integrate-and-Fire Networks'
+```
+
+## Markdown 正文
+
+suppressoptionalinfo 611
+
+# Model and event coordinates
+
+Let $N\ge2$ phases satisfy $\dot\phi_i=1$ on $[0,1)$. With $r=e^{-a}\in(0,1)$, define $$U_a(\phi)=\frac{1-e^{-a\phi}}{1-r},\qquad u_i=e^{-a\phi_i}.
+ \tag{1}$$ Threshold $U_a=1$ is $u=r$, and reset is $U_a=0$, $u=1$. A firing oscillator sends an excitatory increment $\epsilon\in(0,1)$ to every nonfiring oscillator in the $U$-coordinate. Pulses are closed at the same time: a newly thresholded oscillator fires and sends one further pulse.
+
+For a post-avalanche state $u\in[r,1]^N$, free flight to the next event is $$\widehat u_i=\frac{r}{\min_j u_j}u_i. \tag{2}$$ The threshold set is $F_0=\{i:\widehat u_i=r\}$. If $F_k$ is one simultaneous recruitment wave, every nonfiring coordinate is updated by $$u_j\leftarrow u_j-(1-r)\epsilon\,|F_k|,\qquad
+ F_{k+1}=\{j\notin F_0\cup\cdots\cup F_k:u_j\le r\}, \tag{3}$$ then all indices in the finite closure $F=\bigcup_kF_k$ reset to one.
+
+During free flow $u_i(t)=u_i(0)e^{-at}$; solving $e^{-at}\min_i u_i=r$ gives (2). Since $U_a^{-1}(y)=\log(1-(1-r)y)/\log r$, adding $\epsilon$ in $y$ subtracts $(1-r)\epsilon$ in $u$, with clipping at $r$. Applying all pulses in a wave simultaneously yields (3). Each wave adds at least one new index, so the closure terminates in at most $N$ waves.
+
+If $r,\epsilon$, and the event state are rational, every event state is rational. Moreover, if two labelled coordinates are equal before an event, they are equal after it; equivalently every old equality block is contained in a unique new equality block.
+
+All operations in (2)--(3) are rational comparisons and additions/multiplications. Common scaling preserves equality. A nonfiring equality block receives the same subtraction in every wave; if it reaches threshold, the whole block is recruited and reset together. Thus no old block can split, even though different blocks may merge during an avalanche.
+
+# Synchronized cycle and finite certificate
+
+At $u=(1,\ldots,1)$, (2) gives $u=(r,\ldots,r)$; all $N$ indices fire, and reset returns to $(1,\ldots,1)$. The event word is the one-letter word $[N]$, hence primitive of period one. This is a source-local event cycle, not an arithmetic primitive orbit.
+
+The exact ledger uses $r\in\{1/2,2/3,3/4\}$, $\epsilon\in\{1/5,1/4,1/3\}$, $N=2,\ldots,8$, seven deterministic rational seeds, and twelve event steps: $441$ rows. It retains 63 all-equal synchronized rows and records every recruitment wave, old-block containment receipt, and cycle label. It intentionally does not enumerate all continuous parameter cells or all initial states.
+
+    $r$    $\epsilon$   $N$   seed           event word            cycle
+  ------- ------------ ----- ------ ----------------------------- -------
+   $1/2$     $1/5$       2     0                \[2\]                1
+   $2/3$     $1/4$       4     0                \[4\]                1
+   $3/4$     $1/3$       8     0                \[8\]                1
+   $1/2$     $1/5$       2     1     \[1,1,1,1,1,1,1,1,1,1,1,1\]    --
+
+  : Representative exact event rows. The event word lists firing cardinalities; recruitment waves are serialized separately in the receipt.
+
+\>0
+
+# Literature boundary and audit receipt
+
+Mirollo and Strogatz establish almost-everywhere synchrony for identical integrate-and-fire oscillators with a strictly concave rise and all-to-all excitatory pulses [@mirollo1990]. Bottani studies globally coupled synchronization beyond concavity/convexity restrictions [@bottani1996]. We preserve the hypotheses and the almost-everywhere qualifier; the finite receipt is independent evidence, not a reproof or a complete continuous-state cell census. Simultaneous ties, $\epsilon=0$, $r\to1^-$, $r\to0^+$, directed coupling, and inhibitory pulses are explicit boundaries.
+
+The independent checker passes 4,438 assertions, SymPy passes 330 identities, byte replay matches two fresh producer runs, and 41 repaired/stale-hash mutations are rejected. Every old equality block is checked by explicit containment, not merely by a block-count comparison.
+
+\>1
+
+# Route-A and scope boundary
+
+There is no intrinsic rational-prime carrier (A0\_FAIL), no target determinant or zero-matching protocol (A2\_FAIL), and no target continuation or functional equation (A3\_FAIL). A scalar event map supplies only a formal lift hint (A4\_FORMAL\_HINT). Thus $$(\mathtt{A0\_FAIL},\mathtt{A1\_PASS\_ANALYTIC},\mathtt{A2\_FAIL},
+ \mathtt{A3\_FAIL},\mathtt{A4\_FORMAL\_HINT})$$ and `ROUTE_A_REJECTED`; Route B is disabled. Event words are not Euler factors, target zeros, root numbers, or a target determinant.
+
+9 R. E. Mirollo and S. H. Strogatz, "Synchronization of Pulse-Coupled Biological Oscillators," *SIAM Journal on Applied Mathematics* 50 (1990), 1645--1662, DOI: [10.1137/0150098](https://doi.org/10.1137/0150098). S. Bottani, "Synchronization of integrate and fire oscillators with global coupling," *Physical Review E* 54 (1996), 2334--2340, DOI: [10.1103/PhysRevE.54.2334](https://doi.org/10.1103/PhysRevE.54.2334).
+
+# Declarations {#declarations .unnumbered}
+
+**Scope.** `NO_BAD_EULER_OR_ROOT_NUMBER`; no arithmetic, target-zero, Euler-factor, root-data, automorphy, or Hilbert--Pólya claim is made. **Data and code.** The exact receipt, independent checker, replay, and mutation audit are included. **AI-use disclosure.** Generative tools assisted drafting and code generation; formulas and metadata are checked by the deterministic artifact chain.
