@@ -167,5 +167,7 @@ its source handoff at
 [PRIME_DYNAMICS_RH_HANDOFF.md](PRIME_DYNAMICS_RH_HANDOFF.md), and provenance,
 reproduction, and claim-boundary records in
 [`rh_import_metadata/`](rh_import_metadata/).  It is archival, has not been
+The former standalone `zeta_mvp1` RH-386--RH-398 overview is now merged into
+[the corpus navigation](readme.md).
 independently revalidated here, is not a `zeta_mvp0` paper, and does not alter
 the dashboard or global claim ledger.
