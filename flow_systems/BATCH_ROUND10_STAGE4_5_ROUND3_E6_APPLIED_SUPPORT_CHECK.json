@@ -1,0 +1,224 @@
+{
+  "schema_version": "round10-stage4.5-round3-e6-applied-support-check/1.0",
+  "status": "PASS_EXACT_APPLICATION_AND_CONTINUOUS_SUPPORT_CHECKS",
+  "scope": "Byte-level application, manifest generation, and current continuous-bundle support only; separate changed-content semantic review is not folded into this mechanical result.",
+  "actual_outputs": {
+    "recorded_at_utc": "2026-09-06T09:47:26.782Z",
+    "rows": [
+      {
+        "paper_id": "P31",
+        "new_draft": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.tex",
+          "bytes": 67357,
+          "sha256": "4bc1a960b5527a5d389b5c70e29fa0dc7b3199b93a808dd3f347616dd686d1a3"
+        },
+        "new_manifest": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.block-manifest.json",
+          "bytes": 18649,
+          "sha256": "ef0dfb83ba86ad610834719d130a1c26a8ba8e4c35850880174005074a1a3492"
+        },
+        "new_bundle": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_evidence_bundle_round6.json",
+          "bytes": 9822,
+          "sha256": "0aa33f5f770c5960432c13a74a2a2412a1d9b10e0120f51bc914dadc2cae61b9"
+        },
+        "apply_report": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.tex.apply-report.json",
+          "bytes": 1663,
+          "sha256": "e6b680ae88eee2e9d4ffffb35a02344d3b0da784a3eaf93c72d1696c3412e962"
+        },
+        "authorization": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round3_e6_restoration_integrity_authorization.json",
+          "bytes": 794,
+          "sha256": "faecfc3c5163ec6d05f7f096dd63f09a8776d1f95462a4f2362cf5ea4c625142"
+        },
+        "author_input": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round3_e6_restoration_author_input.json",
+          "bytes": 787,
+          "sha256": "8494d48c330a97a0d7d2f9e74142348a6ad45199cb3b915300b48acbf7e8a33a"
+        },
+        "cumulative_rounds": 6,
+        "cumulative_operations": 57,
+        "old_rounds": 5,
+        "fresh_global_E6_finding_path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round3_e6_restoration_round6_claim_strength_drift_findings.json",
+        "fresh_global_E6_finding_created": false
+      },
+      {
+        "paper_id": "P32",
+        "new_draft": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.tex",
+          "bytes": 80560,
+          "sha256": "9d14338f01d94278dc0ee6c864b3657b81a3c0c2dc4a344cd4f9677604c9c19f"
+        },
+        "new_manifest": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.block-manifest.json",
+          "bytes": 22474,
+          "sha256": "a426af82f7903c006ea8219b083135a8f163f2176c334de19fb0527876c3e6c6"
+        },
+        "new_bundle": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_evidence_bundle_round6.json",
+          "bytes": 9809,
+          "sha256": "9aba07a2286e36b2783aef22d1b7b5858cbc8f08da530e32e9cca8112132fb37"
+        },
+        "apply_report": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.tex.apply-report.json",
+          "bytes": 1685,
+          "sha256": "8e837a2a37769572ab6c6ec9953f0f818a2f7ec3386fd532a2e956875041498d"
+        },
+        "authorization": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_5_round3_e6_restoration_integrity_authorization.json",
+          "bytes": 794,
+          "sha256": "6504fa4867701fb59b8129cfca42bd7179fe1b4a2b54cae4eebb1ceafb6f2005"
+        },
+        "author_input": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_5_round3_e6_restoration_author_input.json",
+          "bytes": 787,
+          "sha256": "938db97454b90e9135ff740002a7d591a9e8f2f50c3f7ad4df0d10654a9a842c"
+        },
+        "cumulative_rounds": 6,
+        "cumulative_operations": 57,
+        "old_rounds": 5,
+        "fresh_global_E6_finding_path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_5_round3_e6_restoration_round6_claim_strength_drift_findings.json",
+        "fresh_global_E6_finding_created": false
+      }
+    ]
+  },
+  "independent_raw_splice": {
+    "command": "node <<'NODE'\nconst fs=require('fs'),path=require('path'),c=require('crypto');const started=new Date().toISOString(),sha=b=>c.createHash('sha256').update(b).digest('hex'),read=p=>JSON.parse(fs.readFileSync(p));const obs=p=>{const st=fs.lstatSync(p);if(!st.isFile()||st.isSymbolicLink())throw Error('unsafe file');const b=fs.readFileSync(p);return{path:p,bytes:b.length,sha256:sha(b)}};const eq=(a,b,m)=>{if(JSON.stringify(a)!==JSON.stringify(b))throw Error(m)};function blocks(raw){const s=raw.toString('utf8'),ms=[...s.matchAll(/^<!--block:(B[0-9]{4,})-->\\n/gm)];return ms.map((m,i)=>({id:m[1],start:m.index+m[0].length,end:i+1<ms.length?ms[i+1].index:s.length,body:s.slice(m.index+m[0].length,i+1<ms.length?ms[i+1].index:s.length)}))}const request=read('BATCH_ROUND10_STAGE4_5_ROUND3_E6_EXACT_RESTORATION_REQUEST.json'),expect=[{\"paper_id\":\"P31\",\"path\":\"papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.block-manifest.json\",\"expected_bytes\":18649,\"expected_sha256\":\"ef0dfb83ba86ad610834719d130a1c26a8ba8e4c35850880174005074a1a3492\",\"anchorizer_would_change_draft\":false},{\"paper_id\":\"P32\",\"path\":\"papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.block-manifest.json\",\"expected_bytes\":22474,\"expected_sha256\":\"a426af82f7903c006ea8219b083135a8f163f2176c334de19fb0527876c3e6c6\",\"anchorizer_would_change_draft\":false}];const rows=[];for(const p of request.patches){const root=path.dirname(path.dirname(p.current_draft.path)),n=root+'/notes',pre=fs.readFileSync(p.current_draft.path),post=fs.readFileSync(p.intended_next_draft_path),q=read(p.patch.path),op=q.ops[0],a=blocks(pre),b=blocks(post),target=a.find(x=>x.id===op.block_id);eq(sha(pre),p.current_draft.sha256,'pre binding');eq(obs(p.patch.path),p.patch,'patch binding');eq(target.body.trim(),p.old_text,'old exact');const idx=target.body.indexOf(p.old_text),newbody=target.body.slice(0,idx)+op.new_text+target.body.slice(idx+p.old_text.length),pretext=pre.toString('utf8'),rebuilt=Buffer.from(pretext.slice(0,target.start)+newbody+pretext.slice(target.end));if(!rebuilt.equals(post))throw Error('independent exact splice mismatch');eq(b.map(x=>x.id),a.map(x=>x.id),'all block ids');eq(a.filter((x,i)=>x.body!==b[i].body).map(x=>x.id),[op.block_id],'onechangedblock');const report=obs(p.intended_next_draft_path+'.apply-report.json'),r=read(report.path),auth=obs(n+'/stage4_5_round3_e6_restoration_integrity_authorization.json'),manifest=obs(n+'/stage4_prime_revision_round6.block-manifest.json'),expected=expect.find(x=>x.paper_id===p.paper_id);eq(manifest.bytes,expected.expected_bytes,'manifestbytes');eq(manifest.sha256,expected.expected_sha256,'manifestsha');eq(r.patch_digest,p.patch.sha256,'reportpatch');eq(r.base_draft_hash,sha(pre).slice(0,12),'reportbase');eq(r.output_draft_hash,sha(post).slice(0,12),'reportpost');eq(r.authorization_witness.integrity_authorization_sha256,auth.sha256,'reportauth');eq(r.ops_applied.map(x=>x.block_id),[op.block_id],'reportops');eq(r.counters.blocks_total,a.length,'total');eq(r.counters.blocks_preserved_byte_identical,a.length-1,'preserved');eq(r.structural_flags.any,false,'structural');const prior=read(p.current_bundle.path);eq(obs(p.current_bundle.path),p.current_bundle,'priorbundle');eq(prior.final_draft.sha256,p.current_draft.sha256,'priorend');const ref=x=>({path:path.relative(root,x.path),sha256:x.sha256}),next=structuredClone(prior),draft=obs(p.intended_next_draft_path);next.rounds.push({kind:'integrity_correction',revision_round:6,pre_round_draft:ref(p.current_draft),pre_round_block_manifest:ref(p.current_manifest),issue_list:ref(p.issue_list),integrity_authorization:ref(auth),revision_patch:ref(p.patch),apply_report:ref(report),post_round_draft:ref(draft)});next.final_draft=ref(draft);eq(next.rounds.slice(0,-1),prior.rounds,'prior rounds preserved');eq(next.chain_start,prior.chain_start,'chain start preserved');const bundlePath=n+'/stage4_prime_revision_evidence_bundle_round6.json';if(fs.existsSync(bundlePath))throw Error('bundle exists');rows.push({paper_id:p.paper_id,current_input:p.current_draft,new_draft:draft,apply_report:report,authorization:auth,new_manifest:manifest,prior_bundle:p.current_bundle,new_bundle_path:bundlePath,bundle_content:next,checks:{independent_exact_splice:true,blocks_total:a.length,changed_blocks:[op.block_id],unchanged_blocks:a.length-1,old_rounds_preserved:prior.rounds.length,official_manifest_bytes_match:true,P32_B0121_unchanged:p.paper_id==='P32'?a.find(x=>x.id==='B0121').body===b.find(x=>x.id==='B0121').body:null},new_text:b.find(x=>x.id===op.block_id).body.trim()})}process.stdout.write(JSON.stringify({status:'PASS_ACTUAL_APPLIED_BYTES_AND_NEW_MANIFESTS_BUNDLE_EXTENSION_PREPARED',started_at_utc:started,completed_at_utc:new Date().toISOString(),rows}));\nNODE",
+    "exit_code": 0,
+    "started_at_utc": "2026-09-06T09:42:38.851Z",
+    "completed_at_utc": "2026-09-06T09:42:38.859Z",
+    "results": [
+      {
+        "paper_id": "P31",
+        "current_input": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round5.tex",
+          "bytes": 67359,
+          "sha256": "1d9463eea8aebdb305842f7de6eb2ad2577b7e2ac8cc563a180a91275780d797"
+        },
+        "new_draft": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.tex",
+          "bytes": 67357,
+          "sha256": "4bc1a960b5527a5d389b5c70e29fa0dc7b3199b93a808dd3f347616dd686d1a3"
+        },
+        "apply_report": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.tex.apply-report.json",
+          "bytes": 1663,
+          "sha256": "e6b680ae88eee2e9d4ffffb35a02344d3b0da784a3eaf93c72d1696c3412e962"
+        },
+        "authorization": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round3_e6_restoration_integrity_authorization.json",
+          "bytes": 794,
+          "sha256": "faecfc3c5163ec6d05f7f096dd63f09a8776d1f95462a4f2362cf5ea4c625142"
+        },
+        "new_manifest": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.block-manifest.json",
+          "bytes": 18649,
+          "sha256": "ef0dfb83ba86ad610834719d130a1c26a8ba8e4c35850880174005074a1a3492"
+        },
+        "prior_bundle": {
+          "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_evidence_bundle_round5.json",
+          "bytes": 8386,
+          "sha256": "1d16d1d1b8f75fb9e72ca9614b11703297970c2d7cf0074cdf5601269392e5d8"
+        },
+        "new_bundle_path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_evidence_bundle_round6.json",
+        "checks": {
+          "independent_exact_splice": true,
+          "blocks_total": 113,
+          "changed_blocks": [
+            "B0108"
+          ],
+          "unchanged_blocks": 112,
+          "old_rounds_preserved": 5,
+          "official_manifest_bytes_match": true,
+          "P32_B0121_unchanged": null
+        }
+      },
+      {
+        "paper_id": "P32",
+        "current_input": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round5.tex",
+          "bytes": 80481,
+          "sha256": "9bae93de2df2f68fdc0bdd2731a9b13a12033d88a5d40ef7873ec86a53cb1e09"
+        },
+        "new_draft": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.tex",
+          "bytes": 80560,
+          "sha256": "9d14338f01d94278dc0ee6c864b3657b81a3c0c2dc4a344cd4f9677604c9c19f"
+        },
+        "apply_report": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.tex.apply-report.json",
+          "bytes": 1685,
+          "sha256": "8e837a2a37769572ab6c6ec9953f0f818a2f7ec3386fd532a2e956875041498d"
+        },
+        "authorization": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_5_round3_e6_restoration_integrity_authorization.json",
+          "bytes": 794,
+          "sha256": "6504fa4867701fb59b8129cfca42bd7179fe1b4a2b54cae4eebb1ceafb6f2005"
+        },
+        "new_manifest": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.block-manifest.json",
+          "bytes": 22474,
+          "sha256": "a426af82f7903c006ea8219b083135a8f163f2176c334de19fb0527876c3e6c6"
+        },
+        "prior_bundle": {
+          "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_evidence_bundle_round5.json",
+          "bytes": 8386,
+          "sha256": "1af6c2406079826902da548319f111eb278e3a705a9d911df162af94ef7cf359"
+        },
+        "new_bundle_path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_evidence_bundle_round6.json",
+        "checks": {
+          "independent_exact_splice": true,
+          "blocks_total": 139,
+          "changed_blocks": [
+            "B0128"
+          ],
+          "unchanged_blocks": 138,
+          "old_rounds_preserved": 5,
+          "official_manifest_bytes_match": true,
+          "P32_B0121_unchanged": true
+        }
+      }
+    ]
+  },
+  "official_manifest_generation": {
+    "command": "python3 -B - <<'PY'\nimport json,sys,hashlib\nfrom pathlib import Path\nars=Path('/root/autodl-tmp/.codex/plugins/cache/ars-codex/ars-codex/0.1.28/skills/academic-research-suite/ars');sys.path.insert(0,str(ars))\nfrom scripts.ars_anchorize_draft import anchorize_text,build_manifest\nfrom scripts._block_parser import parse_document\nr=json.loads(Path('BATCH_ROUND10_STAGE4_5_ROUND3_E6_EXACT_RESTORATION_REQUEST.json').read_bytes());rows=[]\nfor p in r['patches']:\n    draft=Path(p['intended_next_draft_path']);raw=draft.read_bytes();text=raw.decode('utf8')\n    if anchorize_text(text)!=text:raise RuntimeError('STOP: anchorizer would alter applied draft')\n    value=build_manifest(raw,parse_document(text));payload=(json.dumps(value,ensure_ascii=False,indent=2)+'\\n').encode('utf8')\n    target=draft.with_suffix('.block-manifest.json')\n    if target.exists():raise RuntimeError('STOP: manifest output exists')\n    rows.append({'paper_id':p['paper_id'],'path':str(target),'content':value,'expected_bytes':len(payload),'expected_sha256':hashlib.sha256(payload).hexdigest(),'anchorizer_would_change_draft':False})\nprint(json.dumps({'status':'OFFICIAL_PURE_MANIFESTS_PREPARED_NO_DRAFT_WRITE','rows':rows}))\nPY",
+    "exit_code": 0,
+    "status": "OFFICIAL_PURE_MANIFESTS_PREPARED_NO_DRAFT_WRITE",
+    "outputs": [
+      {
+        "paper_id": "P31",
+        "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round6.block-manifest.json",
+        "expected_bytes": 18649,
+        "expected_sha256": "ef0dfb83ba86ad610834719d130a1c26a8ba8e4c35850880174005074a1a3492",
+        "anchorizer_would_change_draft": false
+      },
+      {
+        "paper_id": "P32",
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round6.block-manifest.json",
+        "expected_bytes": 22474,
+        "expected_sha256": "a426af82f7903c006ea8219b083135a8f163f2176c334de19fb0527876c3e6c6",
+        "anchorizer_would_change_draft": false
+      }
+    ],
+    "materialization": "Official pure functions generated the exact manifest objects; apply_patch wrote only the two new manifest files. No anchorizer CLI rewrote a locked input or the applied drafts."
+  },
+  "output_binding_and_chain_count_command": {
+    "command": "node <<'NODE'\nconst fs=require('fs'),path=require('path'),c=require('crypto');const sha=b=>c.createHash('sha256').update(b).digest('hex'),obs=p=>{const b=fs.readFileSync(p);return{path:p,bytes:b.length,sha256:sha(b)}},read=p=>JSON.parse(fs.readFileSync(p));const q=read('BATCH_ROUND10_STAGE4_5_ROUND3_E6_EXACT_RESTORATION_REQUEST.json');const rows=q.patches.map(p=>{const n=path.dirname(p.current_draft.path),root=path.dirname(n),bundlePath=n+'/stage4_prime_revision_evidence_bundle_round6.json',b=read(bundlePath);let operations=0;for(const round of b.rounds){if(round.revision_patch)operations+=read(root+'/'+round.revision_patch.path).ops.length}return{paper_id:p.paper_id,new_draft:obs(p.intended_next_draft_path),new_manifest:obs(n+'/stage4_prime_revision_round6.block-manifest.json'),new_bundle:obs(bundlePath),apply_report:obs(p.intended_next_draft_path+'.apply-report.json'),authorization:obs(n+'/stage4_5_round3_e6_restoration_integrity_authorization.json'),author_input:obs(n+'/stage4_5_round3_e6_restoration_author_input.json'),cumulative_rounds:b.rounds.length,cumulative_operations:operations,old_rounds:5,fresh_global_E6_finding_path:n+'/stage4_5_round3_e6_restoration_round6_claim_strength_drift_findings.json',fresh_global_E6_finding_created:fs.existsSync(n+'/stage4_5_round3_e6_restoration_round6_claim_strength_drift_findings.json')}});process.stdout.write(JSON.stringify({recorded_at_utc:new Date().toISOString(),rows}));\nNODE",
+    "exit_code": 0
+  },
+  "official_bundle_execution": "BATCH_ROUND10_STAGE4_5_ROUND3_E6_OFFICIAL_BUNDLE_EXECUTION.json",
+  "token_advisory": "BATCH_ROUND10_STAGE4_5_ROUND3_E6_TOKEN_CONSERVATION.json",
+  "E6_scope_clarification": {
+    "authority": "ars/academic-pipeline/references/claim_verification_protocol.md, E6 multiple-round consumption and complete ordered finding-set rules",
+    "protocol_sha256": "f26d4e0b876f323db5fccc1bbc3120189e69282e45ec6b6cc0cee1e3b1e7a537",
+    "user_scope": "Apply two exact patches and perform required application/chain checks plus bounded changed-content integrity/E6 re-verification; no new full Stage4.5 final-check or full-chain semantic audit was requested.",
+    "planned_fresh_global_finding_paths_not_emitted": [
+      "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round3_e6_restoration_round6_claim_strength_drift_findings.json",
+      "papers/32-homology-cover-renormalization-uniformity/notes/stage4_5_round3_e6_restoration_round6_claim_strength_drift_findings.json"
+    ],
+    "reason": "The authorization record listed possible fresh_E6_findings output handles before the scope distinction was settled. A completed formal finding set bound to the whole six-round bundle cannot honestly be populated from a one-block R6-only review. These two files are therefore not emitted; the root preserves the original planning record and records this scope clarification instead of creating misleading empty global findings.",
+    "actual_semantic_output": "Two custom bounded changed-content review records, each binding the exact R5/R6 draft, approved patch, author authority, and six-round bundle, with explicit one-op coverage. These do not replace historical E6 findings, release restore_required, or assert complete detection.",
+    "full_integrity_and_E6_gate_released": false
+  }
+}

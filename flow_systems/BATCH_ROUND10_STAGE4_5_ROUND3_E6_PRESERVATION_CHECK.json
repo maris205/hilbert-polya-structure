@@ -1,0 +1,159 @@
+{
+  "schema_version": "round10-stage4.5-round3-e6-preservation-check/1.0",
+  "command": "node <<'NODE'\nconst fs=require('fs'),crypto=require('crypto');const started=new Date().toISOString(),sha=b=>crypto.createHash('sha256').update(b).digest('hex'),read=p=>JSON.parse(fs.readFileSync(p));const obs=p=>{const s=fs.lstatSync(p);if(!s.isFile()||s.isSymbolicLink())throw Error('unsafe '+p);const b=fs.readFileSync(p);return{path:p,bytes:b.length,sha256:sha(b)}};const eq=(a,b,label)=>{if(JSON.stringify(a)!==JSON.stringify(b))throw Error(label)};const lockPath='BATCH_ROUND10_STAGE4_5_ROUND3_INPUT_LOCK.json',evidencePath='BATCH_ROUND10_STAGE4_5_ROUND3_FINAL_EVIDENCE_MANIFEST.json',correctionPath='BATCH_ROUND10_STAGE4_5_ROUND3_CORRECTION_FINAL_EVIDENCE_MANIFEST.json';const anchors=[[lockPath,'0c7755b343990af1d37049838f81e0483323584c96eab58cddf6e14bc572e229'],[evidencePath,'bfdf0100c4b0d6b942800d7606b8f9f7ec0e6e8af19d677808f20385a39fa9d3'],[correctionPath,'1eeacf8dee8b46eeadd1262e07ae56e234a20568e9ded7b7ca182615e1132894']].map(([p,h])=>{const a=obs(p);eq(a.sha256,h,'baseline anchor '+p);return a});const lock=read(lockPath),all=new Set();const populations=[[lockPath,lock.observed_workspace_bindings,375],[evidencePath,read(evidencePath).files,299],[correctionPath,read(correctionPath).files,74]].map(([name,rows,count])=>{eq(rows.length,count,'rowcount');for(const r of rows){const a=obs(r.path);eq(a.bytes,r.bytes,'size '+r.path);eq(a.sha256,r.sha256,'hash '+r.path);all.add(r.path)}return{source:name,files:rows.length,total_bytes:rows.reduce((n,r)=>n+r.bytes,0),mismatches:[]}});function walk(p){return fs.readdirSync(p).sort().flatMap(n=>{const q=p+'/'+n,s=fs.lstatSync(q);if(s.isSymbolicLink())throw Error('symlink '+q);return s.isDirectory()?walk(q):[obs(q)]})}const science=lock.papers.flatMap(p=>p.protected_science_trees.map(t=>{const rows=walk(t.path).sort((a,b)=>a.path.localeCompare(b.path)),exp=t.files.slice().sort((a,b)=>a.path.localeCompare(b.path));eq(rows.map(x=>x.path),exp.map(x=>x.path),'tree paths '+t.path);for(let i=0;i<rows.length;i++){eq(rows[i].bytes,exp[i].bytes,'tree bytes');eq(rows[i].sha256,exp[i].sha256,'tree sha')}eq(sha(Buffer.from(rows.map(x=>x.sha256+'  '+x.path+'\\n').join(''))),t.sha256,'tree digest');return{path:t.path,files:rows.length,sha256:t.sha256,unchanged:true}}));const evidence=[];for(const slug of ['29-bianchi-ideal-owner-refinement','30-three-disk-nonconstant-roof-determinant']){const ep='papers/'+slug+'/notes/stage4_5_round3_e6_existing_restoration_evidence.json',e=read(ep);let bindings=0;function visit(x){if(!x||typeof x!=='object')return;if(typeof x.path==='string'&&typeof x.sha256==='string'&&typeof x.bytes==='number'){const a=obs(x.path);eq(a.bytes,x.bytes,'evidence size');eq(a.sha256,x.sha256,'evidence digest');bindings++}for(const v of Object.values(x))visit(v)}visit(e);for(const item of e.items){const b=item.current_block,raw=fs.readFileSync(b.draft.path).subarray(b.raw_body_utf8_span_start_end_exclusive.start,b.raw_body_utf8_span_start_end_exclusive.end);eq(raw.toString('utf8'),b.raw_body_text,'raw body');eq(sha(raw),b.raw_body_sha256,'rawsha');eq(raw.toString('utf8').trim(),b.full_text,'text');eq(sha(Buffer.from(b.full_text)),b.full_text_sha256,'textsha');}evidence.push({path:ep,recursive_file_bindings_checked:bindings,current_blocks_checked:e.items.length,status:'MATCH'})}process.stdout.write(JSON.stringify({status:'PASS_PROTECTED_INPUTS_AND_EXISTING_RESTORATION_EVIDENCE_READ_ONLY',started_at_utc:started,completed_at_utc:new Date().toISOString(),anchors,populations,unique_protected_paths:all.size,science_trees:science,existing_restoration_evidence:evidence,known_P30_nested_reader_mismatch:'Retained descriptor /entries/7 remains historical and is not repaired or counted as a new preservation mismatch; its containing file and actual target remain bound by the original lock.',files_written:0,scientific_execution:false,new_integrity_verdict:false}));\nNODE",
+  "exit_code": 0,
+  "result": {
+    "status": "PASS_PROTECTED_INPUTS_AND_EXISTING_RESTORATION_EVIDENCE_READ_ONLY",
+    "started_at_utc": "2026-09-06T09:09:59.465Z",
+    "completed_at_utc": "2026-09-06T09:09:59.544Z",
+    "anchors": [
+      {
+        "path": "BATCH_ROUND10_STAGE4_5_ROUND3_INPUT_LOCK.json",
+        "bytes": 311405,
+        "sha256": "0c7755b343990af1d37049838f81e0483323584c96eab58cddf6e14bc572e229"
+      },
+      {
+        "path": "BATCH_ROUND10_STAGE4_5_ROUND3_FINAL_EVIDENCE_MANIFEST.json",
+        "bytes": 69712,
+        "sha256": "bfdf0100c4b0d6b942800d7606b8f9f7ec0e6e8af19d677808f20385a39fa9d3"
+      },
+      {
+        "path": "BATCH_ROUND10_STAGE4_5_ROUND3_CORRECTION_FINAL_EVIDENCE_MANIFEST.json",
+        "bytes": 17212,
+        "sha256": "1eeacf8dee8b46eeadd1262e07ae56e234a20568e9ded7b7ca182615e1132894"
+      }
+    ],
+    "populations": [
+      {
+        "source": "BATCH_ROUND10_STAGE4_5_ROUND3_INPUT_LOCK.json",
+        "files": 375,
+        "total_bytes": 11684416,
+        "mismatches": []
+      },
+      {
+        "source": "BATCH_ROUND10_STAGE4_5_ROUND3_FINAL_EVIDENCE_MANIFEST.json",
+        "files": 299,
+        "total_bytes": 35149975,
+        "mismatches": []
+      },
+      {
+        "source": "BATCH_ROUND10_STAGE4_5_ROUND3_CORRECTION_FINAL_EVIDENCE_MANIFEST.json",
+        "files": 74,
+        "total_bytes": 1217806,
+        "mismatches": []
+      }
+    ],
+    "unique_protected_paths": 745,
+    "science_trees": [
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/code",
+        "files": 1,
+        "sha256": "7c1d65b10a8e80ff879a73755420374a1a81cb82bd23827e2601c75a99db8a91",
+        "unchanged": true
+      },
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/experiments",
+        "files": 1,
+        "sha256": "95f5851634d1e7094c2bd115d4dfc32e1ff3b93c08fa43a0828e7b5c9246d283",
+        "unchanged": true
+      },
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/results",
+        "files": 1,
+        "sha256": "5599d2b11dcf69b7e9a695903dbaff083f6fbd07215af581bc1794ae59e08db9",
+        "unchanged": true
+      },
+      {
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/code",
+        "files": 1,
+        "sha256": "6f785b6cf52f7b72bb04df9781fbdd60bd9cbc5ba81b74d18e3a07e402f1902f",
+        "unchanged": true
+      },
+      {
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/experiments",
+        "files": 1,
+        "sha256": "359aa70585a3cd85ed4bd9648273ace158801f740745d6715bb9bed00604f28c",
+        "unchanged": true
+      },
+      {
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/results",
+        "files": 1,
+        "sha256": "d2c4ce0f0d0c3c3bac36cfa2a720cf946026bdd0adfff9ed1b87d2eca838da44",
+        "unchanged": true
+      },
+      {
+        "path": "papers/31-level11-conjugacy-owner-ledger/code",
+        "files": 1,
+        "sha256": "2fd0744c594a172afae8d222087f2c606dbc2aee06740ba34a7f3a1952e51720",
+        "unchanged": true
+      },
+      {
+        "path": "papers/31-level11-conjugacy-owner-ledger/experiments",
+        "files": 1,
+        "sha256": "cd3dcbc2a80308252117463843d5867095fe009c69278d1581f51bb63052b8b0",
+        "unchanged": true
+      },
+      {
+        "path": "papers/31-level11-conjugacy-owner-ledger/results",
+        "files": 1,
+        "sha256": "396730faee39b623cb5a2839168ce5d17c8c0c296c086c48020d3286042b5452",
+        "unchanged": true
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/code",
+        "files": 1,
+        "sha256": "c945658934fd0c6461f4a90baf661db599f0b89cd3a6f3952789330b51231d6e",
+        "unchanged": true
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/experiments",
+        "files": 1,
+        "sha256": "c4d74d97917cb7a7ff6b26848bae949f4fc892c18e0185953472a126681f30c8",
+        "unchanged": true
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/results",
+        "files": 1,
+        "sha256": "620dbb96082827ab9076d32e0b51a0b2c85921d938ae1d32f84ab3c7bfa0dd97",
+        "unchanged": true
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/code",
+        "files": 1,
+        "sha256": "63a40f84b0ad93fee0d58d47a8fd17ad1f676ce31faff563a4d2121024440cbc",
+        "unchanged": true
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/experiments",
+        "files": 1,
+        "sha256": "db996f2d8c0a5d2e4e4179cfd9a869afa0cf7cf70be108dce5b0f14085b2b8e8",
+        "unchanged": true
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/results",
+        "files": 1,
+        "sha256": "b39de5591b38de2ff1962ea04c5abacdd182ffd958270769a83c80fa66baf704",
+        "unchanged": true
+      }
+    ],
+    "existing_restoration_evidence": [
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_5_round3_e6_existing_restoration_evidence.json",
+        "recursive_file_bindings_checked": 26,
+        "current_blocks_checked": 1,
+        "status": "MATCH"
+      },
+      {
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_5_round3_e6_existing_restoration_evidence.json",
+        "recursive_file_bindings_checked": 43,
+        "current_blocks_checked": 2,
+        "status": "MATCH"
+      }
+    ],
+    "known_P30_nested_reader_mismatch": "Retained descriptor /entries/7 remains historical and is not repaired or counted as a new preservation mismatch; its containing file and actual target remain bound by the original lock.",
+    "files_written": 0,
+    "scientific_execution": false,
+    "new_integrity_verdict": false
+  },
+  "later_writes_boundary": "After this observation only append-only new E6 root records and their manifest are produced; no listed protected input is targeted. The check is a timestamped observation, not a claim about arbitrary future filesystem state."
+}

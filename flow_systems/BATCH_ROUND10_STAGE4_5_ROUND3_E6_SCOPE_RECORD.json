@@ -1,0 +1,386 @@
+{
+  "schema_version": "round10-stage4.5-round3-e6-scope/1.0",
+  "status": "CONSERVATIVE_RESTORATION_SELECTED_EXACT_NEW_PATCH_APPLICATION_NOT_YET_AUTHORIZED",
+  "source_message_asserted_timestamp_utc": "2026-09-06T08:54:01.367152Z",
+  "source_message_count": 1,
+  "event_representation": "Five separate regular run-local files each contain the same single observed compound session user message, encoded UTF-8 with one added terminal LF. Finding-scoped event IDs are mapping aliases for that one message, not five independently supplied messages or five independent attestations. Raw copies and transient inputs remain outside the repository. Runtime byte bindings do not authenticate source, actor identity, intent, or facts.",
+  "event_bindings": [
+    {
+      "paper_id": "P29",
+      "finding_id": "ADV-E6-1",
+      "event_id": "ASSERTED-EVENT-R10-S45R3-E6-P29-ADV-E6-1-20260906",
+      "raw_session_event_sha256": "77af33520e034935ab043ada1deade7e011be3257a8bec57b385668a671b5e8b",
+      "bytes": 671,
+      "action": "restore",
+      "interpretation": "Retain already-narrowed current text and record its lineage; no repeated replacement and no retroauthorization of stronger history."
+    },
+    {
+      "paper_id": "P30",
+      "finding_id": "ADV-E6-1",
+      "event_id": "ASSERTED-EVENT-R10-S45R3-E6-P30-ADV-E6-1-20260906",
+      "raw_session_event_sha256": "77af33520e034935ab043ada1deade7e011be3257a8bec57b385668a671b5e8b",
+      "bytes": 671,
+      "action": "restore",
+      "interpretation": "Retain already-narrowed current text and record its lineage; no repeated replacement and no retroauthorization of stronger history."
+    },
+    {
+      "paper_id": "P30",
+      "finding_id": "ADV-E6-2",
+      "event_id": "ASSERTED-EVENT-R10-S45R3-E6-P30-ADV-E6-2-20260906",
+      "raw_session_event_sha256": "77af33520e034935ab043ada1deade7e011be3257a8bec57b385668a671b5e8b",
+      "bytes": 671,
+      "action": "restore",
+      "interpretation": "Retain already-narrowed current text and record its lineage; no repeated replacement and no retroauthorization of stronger history."
+    },
+    {
+      "paper_id": "P31",
+      "finding_id": "ADV-E6-1",
+      "event_id": "ASSERTED-EVENT-R10-S45R3-E6-P31-ADV-E6-1-20260906",
+      "raw_session_event_sha256": "77af33520e034935ab043ada1deade7e011be3257a8bec57b385668a671b5e8b",
+      "bytes": 671,
+      "action": "restore",
+      "interpretation": "Prepare the previously displayed disclaimer restoration as a new current-draft-bound exact patch; application requires the exact-patch checkpoint."
+    },
+    {
+      "paper_id": "P32",
+      "finding_id": "ADV-E6-1",
+      "event_id": "ASSERTED-EVENT-R10-S45R3-E6-P32-ADV-E6-1-20260906",
+      "raw_session_event_sha256": "77af33520e034935ab043ada1deade7e011be3257a8bec57b385668a671b5e8b",
+      "bytes": 671,
+      "action": "restore",
+      "interpretation": "Prepare the previously displayed disclaimer restoration as a new current-draft-bound exact patch; application requires the exact-patch checkpoint."
+    }
+  ],
+  "authorization_limits": {
+    "author_facts_confirmed": false,
+    "author_identity_authenticated": false,
+    "author_pending_count": 16,
+    "all_paper_integrity_pass": false,
+    "old_findings_removed": false,
+    "ordinary_patches_reapplied": false,
+    "canonical_promotion": false,
+    "publication": false,
+    "permanent_deletion": false,
+    "new_scientific_execution": false,
+    "new_full_integrity_audit_started": false,
+    "exact_patch_application_authorized": false
+  },
+  "preflight": {
+    "command": "node <<'NODE'\nconst fs=require('fs'),crypto=require('crypto'),path=require('path');const sha=b=>crypto.createHash('sha256').update(b).digest('hex');const obs=p=>{const b=fs.readFileSync(p);return {path:p,bytes:b.length,sha256:sha(b)}};const read=p=>JSON.parse(fs.readFileSync(p));const report='BATCH_ROUND10_STAGE4_5_ROUND3_CORRECTION_COMPLETION_REPORT.json';if(obs(report).sha256!=='4368bc4cb9fd380f8941386ffbba52c8da8681eaebb807dc9c88920c6ceaa786')throw Error('completion report changed');const rows=read(report).papers.map(p=>{for(const r of [p.new_draft,p.new_block_manifest,p.new_bundle]){const a=obs(r.path);if(a.sha256!==r.sha256||a.bytes!==r.bytes)throw Error('binding mismatch '+r.path)}const n=path.dirname(p.new_draft.path),old=p.paper_id==='P29'?5:p.paper_id==='P33'?3:4;const f=obs(n+'/stage4_5_round3_claim_strength_drift_findings.json'),fj=read(f.path),d=obs(n+'/stage4_prime_revision_round'+old+'.tex'),b=obs(n+'/stage4_prime_revision_evidence_bundle_round'+old+'.json');if(fj.final_draft_sha256!==d.sha256||fj.revision_evidence_bundle_sha256!==b.sha256)throw Error('old E6 binding mismatch');const output=n+'/stage4_5_round3_e6_author_disposition.json';if(fs.existsSync(output))throw Error('sidecar output exists '+output);return {paper_id:p.paper_id,note_dir:n,current_draft:p.new_draft,current_manifest:p.new_block_manifest,current_bundle:p.new_bundle,findings:f,finding_rows:fj.findings,historical_draft:d,historical_bundle:b,output,author_pending_ids:p.author_pending_no_write_ids}});const ars='/root/autodl-tmp/.codex/plugins/cache/ars-codex/ars-codex/0.1.28/skills/academic-research-suite/ars';process.stdout.write(JSON.stringify({recorded_at_utc:new Date().toISOString(),status:'PASS_EXACT_CURRENT_AND_HISTORICAL_BINDINGS',completion_report:obs(report),rows,runtime:obs(ars+'/scripts/claim_strength_drift_disposition.py'),schemas:['claim_strength_drift_findings.schema.json','claim_strength_drift_disposition_input.schema.json','claim_strength_drift_disposition.schema.json'].map(n=>obs(ars+'/shared/contracts/revision/'+n))}));\nNODE",
+    "exit_code": 0,
+    "result": {
+      "recorded_at_utc": "2026-09-06T09:02:53.567Z",
+      "status": "PASS_EXACT_CURRENT_AND_HISTORICAL_BINDINGS",
+      "completion_report": {
+        "path": "BATCH_ROUND10_STAGE4_5_ROUND3_CORRECTION_COMPLETION_REPORT.json",
+        "bytes": 77577,
+        "sha256": "4368bc4cb9fd380f8941386ffbba52c8da8681eaebb807dc9c88920c6ceaa786"
+      },
+      "rows": [
+        {
+          "paper_id": "P29",
+          "note_dir": "papers/29-bianchi-ideal-owner-refinement/notes",
+          "current_draft": {
+            "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_prime_revision_round6.tex",
+            "bytes": 63745,
+            "sha256": "1a00b33770a6533884591ffeefaf402c63331b0c30f0e4c34695bf4ef08bb96b"
+          },
+          "current_manifest": {
+            "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_prime_revision_round6.block-manifest.json",
+            "bytes": 20175,
+            "sha256": "173a4423408005554af54ceb31cea129bc36ef0951e5c2f224576c958583360e"
+          },
+          "current_bundle": {
+            "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_prime_revision_evidence_bundle_round6.json",
+            "bytes": 9812,
+            "sha256": "dbb55225c1c747da93caf616e2b96e85933aab021a2876fb7e3965878f01832a"
+          },
+          "findings": {
+            "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_5_round3_claim_strength_drift_findings.json",
+            "bytes": 1090,
+            "sha256": "0aa921764249dfc2474056b2adaa3405ec21b144a39de638d9de1fa3a4b4ae4d"
+          },
+          "finding_rows": [
+            {
+              "finding_id": "ADV-E6-1",
+              "finding_type": "STRENGTH-DRIFTED",
+              "revision_round": 1,
+              "block_id": "B0049",
+              "claim_location": "Historical Round1 operation26; later explicitly narrowed in Round2 operation2 and Round4 operation5; not persistent in current R5.",
+              "prior_rung": "Procedurally separated reviews",
+              "current_rung": "Independently assessed",
+              "dropped_qualifier": "procedurally",
+              "roadmap_item_ids": [
+                "REV-EIC-2"
+              ],
+              "direction": "up"
+            }
+          ],
+          "historical_draft": {
+            "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_prime_revision_round5.tex",
+            "bytes": 63707,
+            "sha256": "4f43bdbdfcfc3e1a784e1d1641b39cf3c818faa2ef8f5ac8ce613deab4d1726a"
+          },
+          "historical_bundle": {
+            "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_prime_revision_evidence_bundle_round5.json",
+            "bytes": 8401,
+            "sha256": "94836a79e5675cb7d506168c3260212975e899ec0594b5a88187c5f7dde30aa9"
+          },
+          "output": "papers/29-bianchi-ideal-owner-refinement/notes/stage4_5_round3_e6_author_disposition.json",
+          "author_pending_ids": [
+            "IL-SERIOUS-1",
+            "IL-SERIOUS-3",
+            "IL-SERIOUS-4"
+          ]
+        },
+        {
+          "paper_id": "P30",
+          "note_dir": "papers/30-three-disk-nonconstant-roof-determinant/notes",
+          "current_draft": {
+            "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_round5.tex",
+            "bytes": 73306,
+            "sha256": "21092904a33dd9e044d01cb2b0b55ff49bc5d24f0840161a2b30ded9afe407e3"
+          },
+          "current_manifest": {
+            "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_round5.block-manifest.json",
+            "bytes": 22136,
+            "sha256": "2f2c5eab3e3157bf13551b477bae8149435b643fc09e297c9d0b150366b77707"
+          },
+          "current_bundle": {
+            "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_evidence_bundle_round5.json",
+            "bytes": 8386,
+            "sha256": "dff0b3faf904f489185f0003edcefb8007c92633daaea9a3d93ddc10deeba692"
+          },
+          "findings": {
+            "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_5_round3_claim_strength_drift_findings.json",
+            "bytes": 1680,
+            "sha256": "5fd67ec12c90ce86fb9ada82b79dbfcbca5ea8e1378559fb55b07ec1efedc685"
+          },
+          "finding_rows": [
+            {
+              "finding_id": "ADV-E6-1",
+              "finding_type": "STRENGTH-DRIFTED",
+              "revision_round": 1,
+              "block_id": "B0061",
+              "claim_location": "Historical Round1 operation5; explicitly narrowed in Round2 operation3; not persistent in current R4.",
+              "prior_rung": "Procedurally separated Phase5 roles",
+              "current_rung": "Independently assessed",
+              "dropped_qualifier": "procedurally",
+              "roadmap_item_ids": [
+                "REV-EIC-W4"
+              ],
+              "direction": "up"
+            },
+            {
+              "finding_id": "ADV-E6-2",
+              "finding_type": "STRENGTH-DRIFTED",
+              "revision_round": 1,
+              "block_id": "B0103",
+              "claim_location": "Historical Round1 operation17; expressly narrowed in Round2 operation12 to label-equivariance; not persistent in current R4.",
+              "prior_rung": "Control agreement insufficient to establish geometry or placement properties",
+              "current_rung": "Categorical multiset-preserving placement-breaking lawful shuffle property",
+              "dropped_qualifier": null,
+              "roadmap_item_ids": [
+                "REV-R1-W2-R3-W2"
+              ],
+              "direction": "up"
+            }
+          ],
+          "historical_draft": {
+            "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_round4.tex",
+            "bytes": 72154,
+            "sha256": "9a38c81279303ac81a20914d7a2be70056b6c7b568eef2640ebe3665d54399de"
+          },
+          "historical_bundle": {
+            "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_evidence_bundle_round4.json",
+            "bytes": 6975,
+            "sha256": "513e22980ba47c5e5db4671662e38df6c505e2ce3c28183792d75079e9d6c356"
+          },
+          "output": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_5_round3_e6_author_disposition.json",
+          "author_pending_ids": [
+            "IL-SERIOUS-4",
+            "IL-SERIOUS-5",
+            "IL-SERIOUS-6",
+            "IL-SERIOUS-7",
+            "IL-SERIOUS-9"
+          ]
+        },
+        {
+          "paper_id": "P31",
+          "note_dir": "papers/31-level11-conjugacy-owner-ledger/notes",
+          "current_draft": {
+            "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round5.tex",
+            "bytes": 67359,
+            "sha256": "1d9463eea8aebdb305842f7de6eb2ad2577b7e2ac8cc563a180a91275780d797"
+          },
+          "current_manifest": {
+            "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round5.block-manifest.json",
+            "bytes": 18649,
+            "sha256": "7406260760cf3698c8e596ebb64611a87c6f37534fee073d41f44070416f6269"
+          },
+          "current_bundle": {
+            "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_evidence_bundle_round5.json",
+            "bytes": 8386,
+            "sha256": "1d16d1d1b8f75fb9e72ca9614b11703297970c2d7cf0074cdf5601269392e5d8"
+          },
+          "findings": {
+            "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round3_claim_strength_drift_findings.json",
+            "bytes": 1192,
+            "sha256": "b7df2f39181f04a3fdc4d85ad7b6c3d6daf88840951e9465292866494396972d"
+          },
+          "finding_rows": [
+            {
+              "finding_id": "ADV-E6-1",
+              "finding_type": "STRENGTH-DRIFTED",
+              "revision_round": 3,
+              "block_id": "B0108",
+              "claim_location": "Round3 operation13; current Round4 B0108 retains any→every weakening; this is a disclaimer-scope change, not evidence that personal reading occurred.",
+              "prior_rung": "No implication of personal verification of any claim",
+              "current_rung": "No implication only of verification of every claim",
+              "dropped_qualifier": "any claim (replaced by every claim)",
+              "roadmap_item_ids": [
+                "REV-P31-S45R1-I03"
+              ],
+              "direction": "up"
+            }
+          ],
+          "historical_draft": {
+            "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round4.tex",
+            "bytes": 67084,
+            "sha256": "ba7d12ec9bf2766c37fcdb9504f49ba08392ac078c21897587e3ba57fdc85750"
+          },
+          "historical_bundle": {
+            "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_evidence_bundle_round4.json",
+            "bytes": 6975,
+            "sha256": "c3f68b32434079ef6ce6d91441b6caf9a184e903ba1896913f55119848eb81bc"
+          },
+          "output": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round3_e6_author_disposition.json",
+          "author_pending_ids": [
+            "IL-SERIOUS-4",
+            "IL-SERIOUS-5"
+          ]
+        },
+        {
+          "paper_id": "P32",
+          "note_dir": "papers/32-homology-cover-renormalization-uniformity/notes",
+          "current_draft": {
+            "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round5.tex",
+            "bytes": 80481,
+            "sha256": "9bae93de2df2f68fdc0bdd2731a9b13a12033d88a5d40ef7873ec86a53cb1e09"
+          },
+          "current_manifest": {
+            "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round5.block-manifest.json",
+            "bytes": 22474,
+            "sha256": "ee8d04dbd1940ad5bd6027e3275161c51bb45aa295464f342270d6f62720e135"
+          },
+          "current_bundle": {
+            "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_evidence_bundle_round5.json",
+            "bytes": 8386,
+            "sha256": "1af6c2406079826902da548319f111eb278e3a705a9d911df162af94ef7cf359"
+          },
+          "findings": {
+            "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_5_round3_claim_strength_drift_findings.json",
+            "bytes": 1315,
+            "sha256": "cbd38c26dae9a8357079ef471d23294ab7e25ac4b90618c5a9e5e6c09c96dffc"
+          },
+          "finding_rows": [
+            {
+              "finding_id": "ADV-E6-1",
+              "finding_type": "STRENGTH-DRIFTED",
+              "revision_round": 3,
+              "block_id": "B0128",
+              "claim_location": "Round3 operation14; current R4 retains the deletion, with protective exact-passage disclaimer elsewhere in B0121. Rungs describe the operation, not the final manuscript as a whole.",
+              "prior_rung": "Approval disclaims both personal full-text reading and any exact-passage claim verification.",
+              "current_rung": "Approval disclaimer narrowed to full-text reading; exact-passage disclaimer deleted.",
+              "dropped_qualifier": "or verified any claim at the exact source-passage level",
+              "roadmap_item_ids": [
+                "REV-P32-S45R1-I04"
+              ],
+              "direction": "up"
+            }
+          ],
+          "historical_draft": {
+            "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_round4.tex",
+            "bytes": 79625,
+            "sha256": "af56c1c68fd514faace8ef546ac38976255b753d662ddfb3e8aad0fbfc1e5073"
+          },
+          "historical_bundle": {
+            "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_revision_evidence_bundle_round4.json",
+            "bytes": 6975,
+            "sha256": "26cc1273931fc0a848f10120ffefe8c1e1f3e30a967c3f8495c513cadf928178"
+          },
+          "output": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_5_round3_e6_author_disposition.json",
+          "author_pending_ids": [
+            "IL-SERIOUS-1",
+            "IL-SERIOUS-2"
+          ]
+        },
+        {
+          "paper_id": "P33",
+          "note_dir": "papers/33-bolza-control-matched-census/notes",
+          "current_draft": {
+            "path": "papers/33-bolza-control-matched-census/notes/stage4_prime_revision_round4.tex",
+            "bytes": 88503,
+            "sha256": "c820198fc2c56481434b7b8ca83fbbb8926352ff8b33c484645c5609acdd656d"
+          },
+          "current_manifest": {
+            "path": "papers/33-bolza-control-matched-census/notes/stage4_prime_revision_round4.block-manifest.json",
+            "bytes": 21824,
+            "sha256": "6e9f6303cd6ad829a8cfdc688e4e6bc416fe60e856fe10c97ba81d9b543e2fa6"
+          },
+          "current_bundle": {
+            "path": "papers/33-bolza-control-matched-census/notes/stage4_prime_revision_evidence_bundle_round4.json",
+            "bytes": 6776,
+            "sha256": "2a2b4888a290575f070b6f194baa8433b86aaa2d310e6ad9f3104017796044f4"
+          },
+          "findings": {
+            "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round3_claim_strength_drift_findings.json",
+            "bytes": 563,
+            "sha256": "48340e0b0b208c967313032731ac269536b78c3b06f3cca41641ff85182682df"
+          },
+          "finding_rows": [],
+          "historical_draft": {
+            "path": "papers/33-bolza-control-matched-census/notes/stage4_prime_revision_round3.tex",
+            "bytes": 88079,
+            "sha256": "aa3783e6a24f830918ccb88b8dc5ebb28d9c15a94d87ffdb907cf5da9e049d6d"
+          },
+          "historical_bundle": {
+            "path": "papers/33-bolza-control-matched-census/notes/stage4_prime_revision_evidence_bundle_round3.json",
+            "bytes": 5365,
+            "sha256": "5028b5781679527c7dd8446dd059ac2152e61a96ee5dfe8fb0a52621399e4ef6"
+          },
+          "output": "papers/33-bolza-control-matched-census/notes/stage4_5_round3_e6_author_disposition.json",
+          "author_pending_ids": [
+            "IL-SERIOUS-2",
+            "IL-SERIOUS-3",
+            "IL-SERIOUS-4",
+            "IL-SERIOUS-5"
+          ]
+        }
+      ],
+      "runtime": {
+        "path": "/root/autodl-tmp/.codex/plugins/cache/ars-codex/ars-codex/0.1.28/skills/academic-research-suite/ars/scripts/claim_strength_drift_disposition.py",
+        "bytes": 25785,
+        "sha256": "eb331f8af3943cac7a3efa06d62278cda30fde6a280340ac2477db2b54918c51"
+      },
+      "schemas": [
+        {
+          "path": "/root/autodl-tmp/.codex/plugins/cache/ars-codex/ars-codex/0.1.28/skills/academic-research-suite/ars/shared/contracts/revision/claim_strength_drift_findings.schema.json",
+          "bytes": 4290,
+          "sha256": "c0c58f2c39544929ef52c3c2d3046b50c92c290896ac26e1c891ddea08fdaf98"
+        },
+        {
+          "path": "/root/autodl-tmp/.codex/plugins/cache/ars-codex/ars-codex/0.1.28/skills/academic-research-suite/ars/shared/contracts/revision/claim_strength_drift_disposition_input.schema.json",
+          "bytes": 3161,
+          "sha256": "2640c07a2de36efa349832e4ddd1f21c816d02998d109e9fd81eb878926aacae"
+        },
+        {
+          "path": "/root/autodl-tmp/.codex/plugins/cache/ars-codex/ars-codex/0.1.28/skills/academic-research-suite/ars/shared/contracts/revision/claim_strength_drift_disposition.schema.json",
+          "bytes": 3697,
+          "sha256": "389e33ee310613acedf4f464b3ec5966bb31079d227b097e56f82085667f6233"
+        }
+      ]
+    }
+  },
+  "next_action": "Build and replay four formal historical-finding disposition sidecars; preserve restore_required. Prepare two one-block exact patches and stop for their byte-bound application confirmation."
+}

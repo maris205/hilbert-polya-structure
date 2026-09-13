@@ -1,0 +1,21 @@
+{
+  "command": "ruby -rjson -rnet/http -rdigest -e 'pdir=ARGV[0];m=JSON.parse(File.read(pdir+\"/notes/stage4_prime_reader_artifact_manifest_round2.json\"));rows=[];m[\"entries\"].select{|e|e[\"access_state\"]==\"PRESENT_AT_PINNED_COMMIT_EXACT_BYTES\"}.each{|e|url=e[\"commit_pinned_url\"].sub(\"https://github.com/\",\"https://raw.githubusercontent.com/\").sub(\"/blob/\",\"/\");r=Net::HTTP.get_response(URI(url));actual=Digest::SHA256.hexdigest(r.body);row={path:e[\"path\"],url:url,http_status:r.code.to_i,expected_sha256:e[\"sha256\"],actual_sha256:actual,expected_bytes:e[\"bytes\"],actual_bytes:r.body.bytesize,match:r.code==\"200\"&&actual==e[\"sha256\"]&&r.body.bytesize==e[\"bytes\"]};rows<<row;break unless row[:match]};puts JSON.pretty_generate({checked:rows.size,rows:rows})' papers/32-homology-cover-renormalization-uniformity",
+  "initial_tool_result": {
+    "chunk_id": "a50a38",
+    "wall_time_seconds": 10.001033402,
+    "session_id": 90940,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "completed_observation_at_utc": "2026-09-05 11:48:15 UTC",
+  "final_process_exit_code": 1,
+  "final_tool_chunk_id": "2329c1",
+  "transport_error": "SSL_connect returned=1 errno=0 peeraddr=(null) state=error: unexpected eof while reading (OpenSSL::SSL::SSLError)",
+  "http_status": null,
+  "response_body_held": false,
+  "remote_hash_comparison_completed": false,
+  "current_remote_disposition": "UNVERIFIABLE_ACCESS",
+  "scope": "Supplementary public-source retrieval. No official validator, patch replay, manuscript build or scientific execution was attempted by this command.",
+  "retry_performed": false,
+  "historical_manifest_left_unchanged": true
+}

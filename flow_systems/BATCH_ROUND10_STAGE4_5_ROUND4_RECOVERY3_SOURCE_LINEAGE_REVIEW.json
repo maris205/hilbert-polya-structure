@@ -1,0 +1,188 @@
+{
+  "schema_version": "round10-stage4.5-round4-recovery3-source-lineage-review/1.0",
+  "paper_id": "P31",
+  "status": "RECORDED_PRIOR_READ_ONLY_EXTRACTION_RELATIONS_MATCH",
+  "authority": "Root delegated authorization to create only BATCH_ROUND10_STAGE4_5_ROUND4_RECOVERY3_SOURCE_LINEAGE_REVIEW.json after the completed read-only review; no permission to rerun checks or mutate existing artifacts.",
+  "scope": "Faithful persistence of the already completed independent implementation of local extraction and byte-binding comparisons for seven selected sources and 28 immutable-registry claims. This record is not an official validation, source-authentication certificate, scientific assessment, or stage-release receipt.",
+  "prior_execution": {
+    "command": "node <<'NODE'\nconst fs = require('fs');\nconst crypto = require('crypto');\nconst base = 'papers/31-level11-conjugacy-owner-ledger/notes/';\nconst mapPath = base + 'stage4_5_round4_recovery3_source_map.json';\nconst provPath = base + 'stage4_5_round4_recovery3_source_provenance.json';\nconst seen = new Map();\nlet checks = 0;\nfunction check(ok, where) { checks++; if (!ok) throw Error(where); }\nfunction sha(x) { return crypto.createHash('sha256').update(x).digest('hex'); }\nfunction raw(path) { if (!seen.has(path)) { const st=fs.lstatSync(path); check(st.isFile() && !st.isSymbolicLink(), 'regular-file '+path); seen.set(path,fs.readFileSync(path)); } return seen.get(path); }\nfunction read(path) { return JSON.parse(raw(path).toString('utf8')); }\nfunction at(value, pointer) { check(pointer.startsWith('/'),'pointer '+pointer); for(const part of pointer.slice(1).split('/')) value=value[part.replaceAll('~1','/').replaceAll('~0','~')]; return value; }\nfunction desc(d) { const b=raw(d.path); check(b.length===d.bytes && sha(b)===d.sha256,'descriptor '+d.path); }\nfunction exactSpan(body, phrase, expected, where) { const i=body.indexOf(phrase); check(i>=0,'missing excerpt '+where); const start=Buffer.byteLength(body.slice(0,i),'utf8'); const end=start+Buffer.byteLength(phrase,'utf8'); check(start===expected.start_byte && end===expected.end_byte,'span '+where); check(Buffer.from(body,'utf8').subarray(start,end).equals(Buffer.from(phrase,'utf8')),'byte replay '+where); }\nfunction extract(s) { return s.replace(/<[^>]*>/g,'').replaceAll('&nbsp;',' ').replaceAll('&amp;','&').replaceAll('&lt;','<').replaceAll('&gt;','>').replace(/&#x([0-9a-f]+);/gi,(_,d)=>String.fromCodePoint(parseInt(d,16))).replace(/&#([0-9]+);/g,(_,d)=>String.fromCodePoint(parseInt(d,10))).replace(/\\s+/g,' ').trim(); }\ncheck(sha(raw(mapPath))==='d8690b17810f3283ccab1d0f0fbc7a7de2af668aa49d7527680fc4bbc806573e','new map supplied digest');\ncheck(sha(raw(provPath))==='25f69225aab1d4cd38482732fb5ca0bd6e7ad8f741e54ad3eea2f99e22ec0e9b','new provenance supplied digest');\nconst map=read(mapPath), p=read(provPath);\ndesc(p.source_map);\nfor(const d of Object.values(p.input_bindings)) desc(d);\nfor(const d of p.separate_web_carriers) desc(d);\nconst lock=read(p.input_bindings.lock.path), registry=read(p.input_bindings.registry.path);\nconst expected=['P31-S05','P31-S06','P31-S08','P31-S09','P31-S16','P31-S17','P31-S19'];\ncheck(JSON.stringify(Object.keys(map))===JSON.stringify(expected),'ordered source map refs');\ncheck(JSON.stringify(p.sources.map(s=>s.ref_slug))===JSON.stringify(expected),'ordered provenance refs');\nlet claims=0, supplementary=0;\nconst results=[];\nfor(const s of p.sources) {\n  desc(s.carrier);\n  const locked=at(lock,s.carrier.input_lock_pointer);\n  check(locked.path===s.carrier.path && locked.bytes===s.carrier.bytes && locked.sha256===s.carrier.sha256,'locked carrier '+s.ref_slug);\n  const carrier=read(s.carrier.path), original=at(carrier,s.raw_field);\n  check(typeof original==='string','raw string '+s.ref_slug);\n  check(s.raw_field===s.raw_field_binding.json_pointer,'raw pointer '+s.ref_slug);\n  check(Buffer.byteLength(original,'utf8')===s.raw_field_binding.utf8_bytes && sha(original)===s.raw_field_binding.sha256,'raw field binding '+s.ref_slug);\n  let held;\n  if(s.ref_slug==='P31-S19') { check(s.transformation_profile==='identity_on_historical_support_excerpt','S19 identity profile'); held=original; check(s.carrier.path===p.input_bindings.historical_finalization.path,'S19 actual carrier'); }\n  else { check(s.transformation_profile==='crossref_abstract_text_extraction_v1','abstract profile '+s.ref_slug); const refPointer=s.raw_field.slice(0,s.raw_field.indexOf('/query_attempts/')); check(at(carrier,refPointer).ref_slug===s.ref_slug,'actual reference id '+s.ref_slug); held=extract(original); }\n  check(held===map[s.ref_slug] && held===at(map,s.source_map_pointer),'held source replay '+s.ref_slug);\n  check(sha(held)===s.source_body_sha256 && sha(held)===s.source_content_sha256 && Buffer.byteLength(held,'utf8')===s.held_content_bytes,'held content hashes '+s.ref_slug);\n  const fr=s.historical_finalization_record; desc(fr.carrier); const finalization=read(fr.carrier.path), record=at(finalization,fr.row_pointer);\n  check(record.source_id===s.ref_slug,'record source id '+s.ref_slug);\n  check(s.exact_locator===s.old_writer_locator && s.exact_locator===at(finalization,fr.locator_pointer),'old locator replay '+s.ref_slug);\n  check(s.excerpt===record.support_excerpt && s.excerpt===at(finalization,fr.excerpt_pointer),'historical excerpt '+s.ref_slug);\n  check(sha(s.excerpt)===s.excerpt_sha256 && s.excerpt_sha256===record.support_excerpt_sha256,'excerpt hashes '+s.ref_slug);\n  check(s.excerpt.trim().split(/\\s+/u).length===s.excerpt_word_count && s.excerpt_word_count<=25 && Array.from(s.excerpt).length===s.excerpt_codepoints && s.excerpt_codepoints<=1000 && s.excerpt_literal_match===true,'excerpt budget '+s.ref_slug);\n  exactSpan(held,s.excerpt,s.excerpt_span_in_held_source,s.ref_slug);\n  for(const [field,pointerKey] of [['registered_role','registered_role_pointer'],['hypothesis_or_scope','scope_pointer'],['transfer_boundary_preserved','excluded_transfer_pointer']]) check(fr[field]===at(finalization,fr[pointerKey]),'local record field '+s.ref_slug+' '+field);\n  check(s.claim_bindings.length===4 && JSON.stringify(s.claim_ids)===JSON.stringify(s.claim_bindings.map(c=>c.claim_id)),'four ordered claim ids '+s.ref_slug);\n  for(const [i,b] of s.claim_bindings.entries()) {\n    const claim=at(registry,b.registry_pointer);\n    check(claim.claim_id===b.claim_id && sha(claim.claim_text)===b.claim_text_sha256,'claim identity '+b.claim_id);\n    check(claim.draft_span.start_byte===b.draft_span.start_byte && claim.draft_span.end_byte===b.draft_span.end_byte,'claim span '+b.claim_id);\n    check(claim.ref_slugs.length===1 && claim.ref_slugs[0]===s.ref_slug && claim.writer_anchors.length===1 && claim.writer_anchors[0]===s.exact_locator && at(registry,b.writer_anchor_pointer)===s.exact_locator && b.claim_group_position===i+1,'claim locator '+b.claim_id);\n    claims++;\n  }\n  const old=s.preserved_recovery1_binding; desc(old.provenance_carrier); desc(old.source_map_carrier);\n  const oldBody=at(read(old.source_map_carrier.path),old.source_map_pointer), oldProv=at(read(old.provenance_carrier.path),old.provenance_pointer);\n  check(oldProv.ref_slug===s.ref_slug && oldProv.exact_locator===old.exact_locator && oldProv.source_body_sha256===old.source_body_sha256,'prior provenance '+s.ref_slug);\n  check(sha(oldBody)===old.source_body_sha256 && Buffer.byteLength(oldBody,'utf8')===old.held_content_bytes,'prior held body '+s.ref_slug);\n  const request=s.historical_request_observation; desc(request.carrier); const requestRaw=at(read(request.carrier.path),request.json_pointer);\n  for(const k of ['requested_at','http_status','response_bytes','response_sha256']) check(request[k]===requestRaw[k],'request metadata '+s.ref_slug+' '+k);\n  check(request.source_url===requestRaw.request_url,'request URL '+s.ref_slug);\n  const web=s.separate_web_corroboration;\n  if(web.available) {\n    supplementary++; desc(web.carrier); const result=at(read(web.carrier.path),web.result_pointer);\n    check(Buffer.byteLength(result,'utf8')===web.result_utf8_bytes && sha(result)===web.result_sha256,'web result '+s.ref_slug);\n    const candidates=result.split(/-{20,}\\n/).filter(t=>t.split('\\n')[0].includes(web.source_url)); check(candidates.length===1,'unique web segment '+s.ref_slug);\n    const segment=candidates[0]; check(segment.split('\\n')[0]===web.named_segment_heading,'segment heading '+s.ref_slug);\n    check(Buffer.byteLength(segment,'utf8')===web.raw_segment_utf8_bytes && sha(segment)===web.raw_segment_sha256,'raw segment '+s.ref_slug);\n    exactSpan(result,segment,web.named_segment_span_in_result,'web segment '+s.ref_slug);\n    const body=segment.replace(/\\s+/g,' ').trim().replaceAll('\\\\Gamma','Γ');\n    check(body===oldBody && sha(body)===web.transformed_content_sha256 && Buffer.byteLength(body,'utf8')===web.transformed_content_bytes && web.replays_recovery1_held_text_exactly===true,'web recipe replay '+s.ref_slug);\n    check(web.excerpt===s.excerpt && sha(web.excerpt)===web.excerpt_sha256 && web.excerpt_literal_match===true && web.selected_as_recovery3_source===false && web.page_authentication_performed===false,'web caveat '+s.ref_slug);\n    exactSpan(body,web.excerpt,web.excerpt_span_in_separate_held_text,'web excerpt '+s.ref_slug);\n  } else check(s.ref_slug==='P31-S09' && web.same_raw_carrier===true && web.same_held_source_sha256===s.source_body_sha256 && held===oldBody,'S09 same source not independent web');\n  results.push({ref_slug:s.ref_slug,held_bytes:Buffer.byteLength(held,'utf8'),excerpt_words:s.excerpt_word_count,selected_recipe_replayed:true,supplementary_web_replayed:web.available,claim_bindings:4});\n}\ncheck(claims===28 && supplementary===6,'exact populations');\nconst s19=p.sources.find(s=>s.ref_slug==='P31-S19');\ncheck(s19.held_content_bytes===75 && s19.pdf_limitations.full_pdf_bytes_held_for_this_repair===false && s19.pdf_limitations.pdf_structural_preflight_performed===false && s19.pdf_limitations.pdf_page_anchor_authenticated===false && s19.pdf_limitations.prefix_used_as_source===false && s19.pdf_limitations.selected_source_artifact_sha256===s19.carrier.sha256 && s19.pdf_limitations.selected_source_content_sha256===s19.source_body_sha256 && s19.pdf_limitations.historical_pdf_response_sha256===s19.historical_request_observation.response_sha256,'S19 tier caveats');\nconsole.log(JSON.stringify({status:'READ_ONLY_EXTRACTION_RELATIONS_MATCH',not_official_validator:true,checks,unique_files_read:seen.size,old_inputs_read:seen.size-2,claims_checked:claims,selected_sources:results,separate_web_segments_replayed:supplementary,files_written:false,network_calls:0,official_builder_or_validator_runs:0},null,2));\nNODE",
+    "working_directory": "/root/autodl-tmp/flow_systems",
+    "execution_started_at_utc": null,
+    "execution_completed_at_utc": null,
+    "timestamp_limitation": "No absolute execution timestamp was captured in this tool result; it is not inferred from later root activity or from this persistence action.",
+    "tool_result": {
+      "chunk_id": "1b5cbc",
+      "wall_time_seconds": 0.00000488,
+      "exit_code": 0,
+      "original_token_count": 439,
+      "output": "{\n  \"status\": \"READ_ONLY_EXTRACTION_RELATIONS_MATCH\",\n  \"not_official_validator\": true,\n  \"checks\": 570,\n  \"unique_files_read\": 13,\n  \"old_inputs_read\": 11,\n  \"claims_checked\": 28,\n  \"selected_sources\": [\n    {\n      \"ref_slug\": \"P31-S05\",\n      \"held_bytes\": 277,\n      \"excerpt_words\": 19,\n      \"selected_recipe_replayed\": true,\n      \"supplementary_web_replayed\": true,\n      \"claim_bindings\": 4\n    },\n    {\n      \"ref_slug\": \"P31-S06\",\n      \"held_bytes\": 200,\n      \"excerpt_words\": 17,\n      \"selected_recipe_replayed\": true,\n      \"supplementary_web_replayed\": true,\n      \"claim_bindings\": 4\n    },\n    {\n      \"ref_slug\": \"P31-S08\",\n      \"held_bytes\": 600,\n      \"excerpt_words\": 17,\n      \"selected_recipe_replayed\": true,\n      \"supplementary_web_replayed\": true,\n      \"claim_bindings\": 4\n    },\n    {\n      \"ref_slug\": \"P31-S09\",\n      \"held_bytes\": 523,\n      \"excerpt_words\": 5,\n      \"selected_recipe_replayed\": true,\n      \"supplementary_web_replayed\": false,\n      \"claim_bindings\": 4\n    },\n    {\n      \"ref_slug\": \"P31-S16\",\n      \"held_bytes\": 729,\n      \"excerpt_words\": 20,\n      \"selected_recipe_replayed\": true,\n      \"supplementary_web_replayed\": true,\n      \"claim_bindings\": 4\n    },\n    {\n      \"ref_slug\": \"P31-S17\",\n      \"held_bytes\": 625,\n      \"excerpt_words\": 14,\n      \"selected_recipe_replayed\": true,\n      \"supplementary_web_replayed\": true,\n      \"claim_bindings\": 4\n    },\n    {\n      \"ref_slug\": \"P31-S19\",\n      \"held_bytes\": 75,\n      \"excerpt_words\": 11,\n      \"selected_recipe_replayed\": true,\n      \"supplementary_web_replayed\": true,\n      \"claim_bindings\": 4\n    }\n  ],\n  \"separate_web_segments_replayed\": 6,\n  \"files_written\": false,\n  \"network_calls\": 0,\n  \"official_builder_or_validator_runs\": 0\n}\n"
+    },
+    "enclosing_tool_wall_time_seconds": 0.6,
+    "output_field_meaning": "The exact stdout string returned as exec_command.output, including its final LF.",
+    "check_count_interpretation": "570 counts executions of the command's mechanical check function. It is not 570 independent observations, scientific tests, source-authentication checks, or units of scientific evidence.",
+    "supplementary_scope_timing": "The completed command also replayed six previously retained supplementary browser segments. Root's later instruction to limit further checking to the seven selected sources arrived after that command completed. No additional check or repeat followed that instruction."
+  },
+  "reviewed_new_inputs": [
+    {
+      "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round4_recovery3_source_map.json",
+      "bytes": 3162,
+      "sha256": "d8690b17810f3283ccab1d0f0fbc7a7de2af668aa49d7527680fc4bbc806573e"
+    },
+    {
+      "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round4_recovery3_source_provenance.json",
+      "bytes": 109306,
+      "sha256": "25f69225aab1d4cd38482732fb5ca0bd6e7ad8f741e54ad3eea2f99e22ec0e9b"
+    }
+  ],
+  "selected_source_layers": [
+    {
+      "ref_slug": "P31-S05",
+      "claim_ids": [
+        "P31-R4R1-B0021-014",
+        "P31-R4R1-B0021-015",
+        "P31-R4R1-B0021-016",
+        "P31-R4R1-B0021-017"
+      ],
+      "held_utf8_bytes": 277,
+      "excerpt_words": 19,
+      "layer": "Actual historical publisher-deposited Crossref abstract, extracted from its retained JSON string by the declared markup/entity/whitespace recipe; abstract-only, not full-text or theorem verification."
+    },
+    {
+      "ref_slug": "P31-S06",
+      "claim_ids": [
+        "P31-R4R1-B0021-018",
+        "P31-R4R1-B0021-019",
+        "P31-R4R1-B0021-020",
+        "P31-R4R1-B0021-021"
+      ],
+      "held_utf8_bytes": 200,
+      "excerpt_words": 17,
+      "layer": "Actual historical publisher-deposited Crossref abstract with disclosed text extraction; no Gamma_0(11) conjugacy-completeness or finite-certificate inference."
+    },
+    {
+      "ref_slug": "P31-S08",
+      "claim_ids": [
+        "P31-R4R1-B0025-005",
+        "P31-R4R1-B0025-006",
+        "P31-R4R1-B0025-007",
+        "P31-R4R1-B0025-008"
+      ],
+      "held_utf8_bytes": 600,
+      "excerpt_words": 17,
+      "layer": "Actual historical publisher-deposited Crossref abstract with disclosed text extraction; no subgroup-constrained conjugacy completeness follows."
+    },
+    {
+      "ref_slug": "P31-S09",
+      "claim_ids": [
+        "P31-R4R1-B0025-009",
+        "P31-R4R1-B0025-010",
+        "P31-R4R1-B0025-011",
+        "P31-R4R1-B0025-012"
+      ],
+      "held_utf8_bytes": 523,
+      "excerpt_words": 5,
+      "layer": "Same input-locked Crossref abstract as Recovery1, not an independent webpage source. Flattened MathML text and TeX annotations remain duplicated; only the unchanged five-word prose phrase is relied upon, not reconstructed mathematics."
+    },
+    {
+      "ref_slug": "P31-S16",
+      "claim_ids": [
+        "P31-R4R1-B0029-005",
+        "P31-R4R1-B0029-006",
+        "P31-R4R1-B0029-007",
+        "P31-R4R1-B0029-008"
+      ],
+      "held_utf8_bytes": 729,
+      "excerpt_words": 20,
+      "layer": "Actual historical publisher-deposited Crossref abstract with disclosed text extraction; no full-theorem, primitive-owner policy, or project certificate-byte validation."
+    },
+    {
+      "ref_slug": "P31-S17",
+      "claim_ids": [
+        "P31-R4R1-B0029-009",
+        "P31-R4R1-B0029-010",
+        "P31-R4R1-B0029-011",
+        "P31-R4R1-B0029-012"
+      ],
+      "held_utf8_bytes": 625,
+      "excerpt_words": 14,
+      "layer": "Actual historical publisher-deposited Crossref abstract with disclosed text extraction; no frozen-presentation, oriented-encoding, or certificate-translation result is inferred."
+    },
+    {
+      "ref_slug": "P31-S19",
+      "claim_ids": [
+        "P31-R4R1-B0029-016",
+        "P31-R4R1-B0029-017",
+        "P31-R4R1-B0029-018",
+        "P31-R4R1-B0029-019"
+      ],
+      "held_utf8_bytes": 75,
+      "excerpt_words": 11,
+      "layer": "Only the exact historical finalization JSON string /rows/17/support_excerpt is selected. The carrier hash is the JSON artifact hash, not the historical PDF response hash. No full PDF, local PDF structural preflight, decoded page replay, or physical-page/printed-page mapping is available or claimed. Retained browser text with printed 182 separately corroborates the words only."
+    }
+  ],
+  "direct_per_item_review": {
+    "reviewer_kind": "Codex model-mediated close reading plus separately identified read-only field comparisons; not a human review attestation.",
+    "human_review_attestation": false,
+    "independent_scientific_evidence_claimed": false,
+    "conclusion": "No current-input mismatch or blocking code issue was identified within this bounded pre-build review. All 28 affected claim texts correspond to the named historical record fields and the expressly limited context/use/boundary assertions. This is not a scientific PASS or independent authentication of the writer locators.",
+    "items_per_source": [
+      {
+        "claim_group_position": 1,
+        "classification": "historical_record_locator_declaration",
+        "conclusion": "The immutable claim's locator wording is present in the named historical finalization record and matches registry writer_anchors. This checks what the record says, not external page/section truth."
+      },
+      {
+        "claim_group_position": 2,
+        "classification": "bounded_context_limitation",
+        "conclusion": "The claim explicitly limits the retained excerpt to bounded context and excludes proof of the registered role in full. The selected short text is real retained text at the stated evidence layer; no broader support was inferred."
+      },
+      {
+        "claim_group_position": 3,
+        "classification": "project_use_restriction",
+        "conclusion": "The named registered_role agrees with the manuscript-use restriction. A project restriction is not established as a mathematical theorem by the external excerpt."
+      },
+      {
+        "claim_group_position": 4,
+        "classification": "project_scope_and_transfer_boundary",
+        "conclusion": "The named hypothesis_or_scope and transfer_boundary_preserved agree with the stated scope and excluded transfer. LaTeX underscore escaping was recognized as manuscript presentation, not source-text normalization."
+      }
+    ],
+    "matched_claims": 28,
+    "source_groups": 7,
+    "builder_review": {
+      "path": "papers/31-level11-conjugacy-owner-ledger/notes/stage4_5_round4_recovery3_build_affected_evidence.py",
+      "executed_by_this_reviewer": false,
+      "reviewed_behavior": "Only the 28 previous non-none-anchor rows enter official build calls. Each uses the immutable registry anchor and a provenance/finalization correspondence. The script emits replacement descriptors with original position/id/hash, preserves prior claim objects and verdicts in replacements, and does not output or rebuild the 375 none-anchor rows.",
+      "root_owned_integration": "The root consumer must integrate the 28 replacements into the original 403-row order and preserve all 375 unaffected row objects; this reviewer did not perform that integration.",
+      "trust_boundary": "The builder checks the carrier descriptor and excerpt membership but does not independently derive source_map from raw carrier fields or prove semantic support. The separate completed extraction command supplies the bounded lineage comparison. Prefix-based detail branches were checked against current claim/record values, not treated as a general semantic verifier.",
+      "s19_boundary": "The label/detail disclose historical fragment-only evidence and the absence of authenticated PDF page mapping. Retaining the old locator is a statement of historical wording, not an assertion of independently verified page provenance."
+    }
+  },
+  "scientific_and_workflow_limits": {
+    "original_source_authentication_proved": false,
+    "external_locator_truth_proved": false,
+    "semantic_extraction_completeness_proved": false,
+    "mathematical_validity_proved": false,
+    "underlying_execution_proved": false,
+    "human_source_reading_inferred": false,
+    "publication_or_external_sharing_authority_inferred": false,
+    "author_facts_attested": false,
+    "e6_disposition_created": false,
+    "phase_e_verdict_changed": false,
+    "route_verdict_changed": false,
+    "official_validator_run_by_reviewer": false,
+    "official_builder_run_by_reviewer": false,
+    "stage5_or_stage6_authorized": false,
+    "sharing_scope": "session_only",
+    "rights_basis": "not_assessed",
+    "comparison_scope": "Raw artifact identity, declared string extraction, exact retained content, hash/span/locator bindings and stated evidence limits are separate from source identity, passage support, mathematical validity, and reproducibility."
+  },
+  "persistence_action": {
+    "original_command_rerun": false,
+    "new_network_call": false,
+    "additional_scientific_or_binding_check": false,
+    "authorized_new_file_only": "BATCH_ROUND10_STAGE4_5_ROUND4_RECOVERY3_SOURCE_LINEAGE_REVIEW.json",
+    "existing_files_modified": false,
+    "note": "This file records already completed observations. Only its requested handoff hash is to be read after creation; no prior command or check is replayed."
+  }
+}

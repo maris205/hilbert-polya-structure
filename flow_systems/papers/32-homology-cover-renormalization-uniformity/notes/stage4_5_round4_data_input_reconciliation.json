@@ -1,0 +1,859 @@
+{
+  "schema_version": "round10-stage4.5-round4-data-reconciliation/1.0",
+  "paper_id": "P32",
+  "command": "node - <<'JS'\nconst fs=require('fs'),crypto=require('crypto');const p='papers/32-homology-cover-renormalization-uniformity/',n=p+'notes/',sha=b=>crypto.createHash('sha256').update(b).digest('hex'),read=f=>JSON.parse(fs.readFileSync(n+f)),desc=f=>{const b=fs.readFileSync(n+f);return{path:n+f,bytes:b.length,sha256:sha(b)}};\nconst sf=read('stage4_prime_source_finalization_round3.json'),mx=read('stage4_prime_claim_passage_matrix_round4.json'),old=read('stage4_prime_claim_passage_matrix_round3.json'),led=read('stage4_prime_literature_screening_ledger_round2.json'),raw=read('stage4_prime_literature_replay_round2.raw.json'),man=read('stage4_prime_reader_artifact_manifest_round2.json'),draft=fs.readFileSync(n+'stage4_prime_revision_round6.tex','utf8');\nconst counts=rows=>rows.reduce((a,r)=>(a[r.decision]=(a[r.decision]||0)+1,a),{});\nconst named=['stage4_prime_reader_artifact_manifest_round2.json','stage4_prime_claim_passage_matrix_round3.json','stage4_prime_claim_passage_matrix_round4.json','stage4_prime_source_finalization_round3.json','stage4_prime_source_finalization_round3_validation.json','stage4_prime_literature_replay_round2.raw.json','stage4_prime_literature_screening_ledger_round2.json','stage4_prime_conditional_scalar_lemma_audit_round2.json','stage4_prime_formal_definition_audit_round2.json','stage4_prime_analytic_registry_audit_round2.json','stage4_prime_closest_work_comparison_matrix_round2.json'];\nconst corpus=fs.readFileSync(n+'stage1_phase2_source_inventory.tsv','utf8').trim().split('\\n');\nconsole.log(JSON.stringify({source_count:sf.rows.length,exact:sf.rows.filter(x=>x.support_excerpt!==null).length,excerpt_hashes:sf.rows.filter(x=>x.support_excerpt!==null).map(r=>({source_id:r.source_id,match:sha(Buffer.from(r.support_excerpt))===r.support_excerpt_sha256})),current_matrix:mx.summary,historical_matrix:old.summary,matrix_join:mx.rows.map((r,i)=>({context_id:r.context_id,source_id:r.source_id,identity_match:sf.rows[i].context_id===r.context_id&&sf.rows[i].source_id===r.source_id,source_excerpt_digest_match:r.support_excerpt_sha256===sf.rows[i].support_excerpt_sha256})),replay:{ledger_rows:led.rows.length,raw_rows:raw.rows.length,decisions:counts(led.rows),unique_queries:new Set(led.rows.map(r=>r.query_id)).size,rank1:led.rows.filter(r=>r.result_rank===1).length,rank2:led.rows.filter(r=>r.result_rank===2).length,http200:led.rows.filter(r=>r.http_status===200).length,declared_method:led.method,all_decision_rows:led.rows.map(r=>({id:r.manifestation_id,q:r.query_id,rank:r.result_rank,decision:r.decision,matched:r.matched_source_id,duplicate:r.duplicate_of,reason:r.decision_reason}))},inventory_lines:corpus.length,reader:{entry_count:man.entries.length,reported_section6:man.section6_claimed_current_count,reported_exact:man.section6_exact_at_pinned_commit_count,reported_local:man.local_stage4_prime_sidecar_count,pinned_record:man.pinned_commit_verification,scope:'Recorded verification event only; no network invoked'},manuscript_assets:{figures:(draft.match(/\\\\begin\\{figure\\}/g)||[]).length,standalone_tables:(draft.match(/\\\\begin\\{tabular\\}/g)||[]).length,captions:(draft.match(/\\\\caption/g)||[]).length},named_descriptors:named.map(desc)}));\nJS",
+  "started_at": "2026-09-06 12:13:02 UTC",
+  "completed_at": "2026-09-06 12:13:03 UTC",
+  "exit_code": 0,
+  "tool_chunk_id": "c3ee08",
+  "result": {
+    "source_count": 30,
+    "exact": 18,
+    "excerpt_hashes": [
+      {
+        "source_id": "P32-S02",
+        "match": true
+      },
+      {
+        "source_id": "P32-S03",
+        "match": true
+      },
+      {
+        "source_id": "P32-S04",
+        "match": true
+      },
+      {
+        "source_id": "P32-S06",
+        "match": true
+      },
+      {
+        "source_id": "P32-S07",
+        "match": true
+      },
+      {
+        "source_id": "P32-S11",
+        "match": true
+      },
+      {
+        "source_id": "P32-S12",
+        "match": true
+      },
+      {
+        "source_id": "P32-S15",
+        "match": true
+      },
+      {
+        "source_id": "P32-S16",
+        "match": true
+      },
+      {
+        "source_id": "P32-S17",
+        "match": true
+      },
+      {
+        "source_id": "P32-S18",
+        "match": true
+      },
+      {
+        "source_id": "P32-S19",
+        "match": true
+      },
+      {
+        "source_id": "P32-S21",
+        "match": true
+      },
+      {
+        "source_id": "P32-S22",
+        "match": true
+      },
+      {
+        "source_id": "P32-S23",
+        "match": true
+      },
+      {
+        "source_id": "P32-S24",
+        "match": true
+      },
+      {
+        "source_id": "P32-S25",
+        "match": true
+      },
+      {
+        "source_id": "P32-S26",
+        "match": true
+      }
+    ],
+    "current_matrix": {
+      "registered_contexts": 30,
+      "current_manuscript_context_bindings": 30,
+      "inherited_source_rows": 26,
+      "inherited_exact_locator_rows": 18,
+      "inherited_explicit_bounded_unavailability_rows": 8,
+      "cw_metadata_only_unverifiable_rows": 4,
+      "passage_bounded_total": 18,
+      "metadata_only_total": 12,
+      "positive_cw_passage_support": 0,
+      "historical_cw_locator_strings_retained_without_support": 4,
+      "unchanged_inherited_locator_excerpt_bindings": 26,
+      "manuscript_patch_applied_as_recorded": true,
+      "new_source_finalizations": 0,
+      "new_passage_verifications": 0,
+      "new_scientific_executions": 0,
+      "official_validator_executed_by_this_derivation": false,
+      "independent_patch_replay_executed_by_this_derivation": false,
+      "fresh_stage4_5_round3_audit_completed": false
+    },
+    "historical_matrix": {
+      "exact_locators_finalized": 18,
+      "explicit_bounded_unavailability": 8,
+      "manuscript_patch_applied": false,
+      "passage_bounded_total": 22,
+      "prior_bounded_scopes_retained": 4,
+      "registered_contexts": 30
+    },
+    "matrix_join": [
+      {
+        "context_id": "P32-CTX-001",
+        "source_id": "P32-CW01",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-002",
+        "source_id": "P32-CW02",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-003",
+        "source_id": "P32-CW03",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-004",
+        "source_id": "P32-CW04",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-005",
+        "source_id": "P32-S01",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-006",
+        "source_id": "P32-S02",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-007",
+        "source_id": "P32-S03",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-008",
+        "source_id": "P32-S04",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-009",
+        "source_id": "P32-S05",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-010",
+        "source_id": "P32-S06",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-011",
+        "source_id": "P32-S07",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-012",
+        "source_id": "P32-S08",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-013",
+        "source_id": "P32-S09",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-014",
+        "source_id": "P32-S10",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-015",
+        "source_id": "P32-S11",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-016",
+        "source_id": "P32-S12",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-017",
+        "source_id": "P32-S13",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-018",
+        "source_id": "P32-S14",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-019",
+        "source_id": "P32-S15",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-020",
+        "source_id": "P32-S16",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-021",
+        "source_id": "P32-S17",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-022",
+        "source_id": "P32-S18",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-023",
+        "source_id": "P32-S19",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-024",
+        "source_id": "P32-S20",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-025",
+        "source_id": "P32-S21",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-026",
+        "source_id": "P32-S22",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-027",
+        "source_id": "P32-S23",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-028",
+        "source_id": "P32-S24",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-029",
+        "source_id": "P32-S25",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      },
+      {
+        "context_id": "P32-CTX-030",
+        "source_id": "P32-S26",
+        "identity_match": true,
+        "source_excerpt_digest_match": true
+      }
+    ],
+    "replay": {
+      "ledger_rows": 51,
+      "raw_rows": 51,
+      "decisions": {
+        "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE": 31,
+        "RETAIN_EXISTING_INVENTORY_RECORD": 19,
+        "REMOVE_DUPLICATE_MANIFESTATION": 1
+      },
+      "unique_queries": 26,
+      "rank1": 26,
+      "rank2": 25,
+      "http200": 51,
+      "declared_method": {
+        "retrieval_bound": "two Crossref-ranked metadata manifestations per exact frozen query for Q01--Q25 and one for Q26; deterministic total 51",
+        "dedup_rule": "case-insensitive DOI equality, then normalized title plus year",
+        "screening_rule": "match against the frozen 26-row admitted inventory by DOI, then normalized title",
+        "decision_vocabulary": [
+          "REMOVE_DUPLICATE_MANIFESTATION",
+          "RETAIN_EXISTING_INVENTORY_RECORD",
+          "RETRIEVAL_UNAVAILABLE",
+          "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE"
+        ],
+        "historical_reconstruction_boundary": "Original-session result and row-decision records are absent.  These 51 dated replay manifestations are new observations and are not backfilled or relabeled as the historical 51 captured records."
+      },
+      "all_decision_rows": [
+        {
+          "id": "M001",
+          "q": "Q01",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M002",
+          "q": "Q01",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M003",
+          "q": "Q02",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M004",
+          "q": "Q02",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M005",
+          "q": "Q03",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S01",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M006",
+          "q": "Q03",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M007",
+          "q": "Q04",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S02",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M008",
+          "q": "Q04",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M009",
+          "q": "Q05",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S03",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M010",
+          "q": "Q05",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M011",
+          "q": "Q06",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S04",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M012",
+          "q": "Q06",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M013",
+          "q": "Q07",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S05",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M014",
+          "q": "Q07",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M015",
+          "q": "Q08",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M016",
+          "q": "Q08",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M017",
+          "q": "Q09",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S07",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M018",
+          "q": "Q09",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M019",
+          "q": "Q10",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S08",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M020",
+          "q": "Q10",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M021",
+          "q": "Q11",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S09",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M022",
+          "q": "Q11",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M023",
+          "q": "Q12",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S10",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M024",
+          "q": "Q12",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M025",
+          "q": "Q13",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S11",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M026",
+          "q": "Q13",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M027",
+          "q": "Q14",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M028",
+          "q": "Q14",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M029",
+          "q": "Q15",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M030",
+          "q": "Q15",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M031",
+          "q": "Q16",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S14",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M032",
+          "q": "Q16",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M033",
+          "q": "Q17",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S16",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M034",
+          "q": "Q17",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M035",
+          "q": "Q18",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S17",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M036",
+          "q": "Q18",
+          "rank": 2,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S18",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M037",
+          "q": "Q19",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M038",
+          "q": "Q19",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M039",
+          "q": "Q20",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S19",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M040",
+          "q": "Q20",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M041",
+          "q": "Q21",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S21",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M042",
+          "q": "Q21",
+          "rank": 2,
+          "decision": "REMOVE_DUPLICATE_MANIFESTATION",
+          "matched": null,
+          "duplicate": "M026",
+          "reason": "Same current-replay identity as M026; DOI first, normalized title fallback."
+        },
+        {
+          "id": "M043",
+          "q": "Q22",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S22",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M044",
+          "q": "Q22",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M045",
+          "q": "Q23",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S23",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M046",
+          "q": "Q23",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M047",
+          "q": "Q24",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M048",
+          "q": "Q24",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M049",
+          "q": "Q25",
+          "rank": 1,
+          "decision": "RETAIN_EXISTING_INVENTORY_RECORD",
+          "matched": "P32-S25",
+          "duplicate": null,
+          "reason": "Unique current manifestation matches the frozen admitted inventory by DOI or normalized title."
+        },
+        {
+          "id": "M050",
+          "q": "Q25",
+          "rank": 2,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        },
+        {
+          "id": "M051",
+          "q": "Q26",
+          "rank": 1,
+          "decision": "SCREEN_OUT_OUTSIDE_FROZEN_SCOPE",
+          "matched": null,
+          "duplicate": null,
+          "reason": "Unique top-ranked metadata manifestation does not match the frozen admitted inventory and is not adopted by this bounded replay."
+        }
+      ]
+    },
+    "inventory_lines": 27,
+    "reader": {
+      "entry_count": 25,
+      "reported_section6": 11,
+      "reported_exact": 11,
+      "reported_local": 14,
+      "pinned_record": {
+        "verified_at_utc": "2026-09-04T00:30:00Z",
+        "method": "Fetched each of the 11 claimed Section-6 files from raw.githubusercontent.com at the exact commit and compared SHA-256 and byte content with the local file.",
+        "http_and_hash_outcome": "11/11 FETCHED; 11/11 EXACT_SHA256_MATCH"
+      },
+      "scope": "Recorded verification event only; no network invoked"
+    },
+    "manuscript_assets": {
+      "figures": 0,
+      "standalone_tables": 3,
+      "captions": 0
+    },
+    "named_descriptors": [
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_reader_artifact_manifest_round2.json",
+        "bytes": 17968,
+        "sha256": "16f08bccd16d70e2d4403b0f4a2e59d1e54e7e0e09a5987a229bf519ca00b3ef"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_claim_passage_matrix_round3.json",
+        "bytes": 22105,
+        "sha256": "18259fa9200782715192325dd882c9d6b32bd7f7f2e335e1bf54c8c39d10ea9a"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_claim_passage_matrix_round4.json",
+        "bytes": 79967,
+        "sha256": "f1e03f705df0917071e89f12c8d91d0ea4f769ed6a6fe783e6c4ba5842344208"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_source_finalization_round3.json",
+        "bytes": 55358,
+        "sha256": "545da2f55c9e8e2318273d81100821978aaec0e4ab799207ed0fc02ac4dc5c26"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_source_finalization_round3_validation.json",
+        "bytes": 1344,
+        "sha256": "d05ff4ae861989ec8052371b668e6286bdafcacec0c652603303584d789f4a5e"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_literature_replay_round2.raw.json",
+        "bytes": 57036,
+        "sha256": "e9f37743af4076e3e97765026f851df69131b953a9924f914232fbea3aca431e"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_literature_screening_ledger_round2.json",
+        "bytes": 44203,
+        "sha256": "f8ab68dd24deb133cfeecbcda7d47ef4b94036691cbe0ff70c0fa183806602c1"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_conditional_scalar_lemma_audit_round2.json",
+        "bytes": 1866,
+        "sha256": "41759b42a0a4b329be15541a4cdb9a4f3cf4fdb30b80ecaea402d03551e5a9c1"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_formal_definition_audit_round2.json",
+        "bytes": 5788,
+        "sha256": "843e2119d1bddf4e63a73e58e1e13bee8520eb30cf45b608076b85967682a125"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_analytic_registry_audit_round2.json",
+        "bytes": 4468,
+        "sha256": "8dea4c48f10b8649dae90a1b86c05e2ca2dd67d6c526cc04a48d3214f6b9ddd0"
+      },
+      {
+        "path": "papers/32-homology-cover-renormalization-uniformity/notes/stage4_prime_closest_work_comparison_matrix_round2.json",
+        "bytes": 4707,
+        "sha256": "5ab85f5cc3e5d39cede06b163cf18945b1b4178b9f7d8182a9973b55074601e4"
+      }
+    ]
+  },
+  "scope": "Read-only documentary recount, not scientific execution or fresh remote retrieval."
+}

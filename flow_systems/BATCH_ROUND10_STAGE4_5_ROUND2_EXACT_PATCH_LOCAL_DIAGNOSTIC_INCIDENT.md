@@ -1,0 +1,7 @@
+# Local post-apply diagnostic interface error
+
+On 2026-09-05 UTC the official ARS apply returned successfully for P29 and wrote the authorized successor plus its format-1.3 apply report. The root's subsequent additional comparison attempted `Block.raw_text`, an attribute the parser does not expose, and raised `AttributeError` before that comparison ran. This was an error in the root's ad hoc read-only diagnostic, not a rejection by the official authorization builder, patch validator, apply gate, isolated build, or independent replay. No scientific result was produced or modified. The enclosing command stopped before applying P30--P33.
+
+The root read the actual parser interface and used its documented character spans to compare the existing P29 outputs without rewriting them. All 95 untouched marked blocks were byte-identical, all 20 changed normalized texts exactly matched the author-approved `new_text`, and the original draft retained its approved SHA. Successor SHA: `8d6294051fe03de2c433e5d7115bcc0b73e8ac66504b17542a3700ef1762be10`.
+
+The recovery is limited to the diagnostic accessor. P29 will not be applied again, its output is not deleted or overwritten, and no approved patch, issue list, official tool or authority input changes. The original authority still governs the four unapplied patches. Any actual official-validator, independent-replay, build, scope or scientific failure remains a stop condition.

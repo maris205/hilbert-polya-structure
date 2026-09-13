@@ -1,0 +1,338 @@
+{
+  "schema_version": "p33-round4-recovery1-handoff/1.0",
+  "command": "node - <<'NODE'\nconst fs=require('fs'),crypto=require('crypto');const base='papers/33-bolza-control-matched-census/notes/';const r=JSON.parse(fs.readFileSync(base+'stage4_5_round4_integrity_report.json'));const reg=JSON.parse(fs.readFileSync(base+'stage4_5_round4_claim_registry.json'));const rows=JSON.parse(fs.readFileSync(base+'stage4_5_round4_evidence_rows.json'));const expect=reg.claims.flatMap(c=>(c.ref_slugs.length?c.ref_slugs:[null]).map(s=>JSON.stringify([c.claim_id,s,'none',''])));const actual=r.phases.E_claims.evidence_rows.map(x=>JSON.stringify([x.claim.claim_id,x.source.ref_slug,x.anchor.kind,x.anchor.value_decoded]));const same=JSON.stringify(rows)===JSON.stringify(r.phases.E_claims.evidence_rows);const recovery=JSON.parse(fs.readFileSync('BATCH_ROUND10_STAGE4_5_ROUND4_RECOVERY1_RESUMPTION_RECEIPT.json'));const preserved=recovery.preservation.new_artifact_inventory.filter(x=>x.path.startsWith('papers/33-'));let mismatches=[];for(const x of preserved){const b=fs.readFileSync(x.path);const h=crypto.createHash('sha256').update(b).digest('hex');if(h!==x.sha256||b.length!==x.bytes)mismatches.push(x.path)};const names=fs.readdirSync(base).filter(n=>n.startsWith('stage4_5_round4_'));const files=names.map(n=>{const p=base+n,b=fs.readFileSync(p);return {path:p,bytes:b.length,sha256:crypto.createHash('sha256').update(b).digest('hex')}});console.log(JSON.stringify({check_kind:'Read-only handoff assembly consistency and recovery preservation; not a repeat of official schema/coverage/EV validation.',same_ordered_rows:same,exact_ordered_selected_tuples:JSON.stringify(expect)===JSON.stringify(actual),rows:rows.length,distinct_claims:new Set(rows.map(x=>x.claim.claim_id)).size,verified_distinct:new Set(rows.filter(x=>x.verdict==='VERIFIED').map(x=>x.claim.claim_id)).size,preserved_files_checked:preserved.length,preserved_mismatches:mismatches,files},null,2));\nNODE",
+  "execution": {
+    "chunk_id": "6dd364",
+    "wall_time_seconds": 0.00000317,
+    "exit_code": 0,
+    "original_token_count": 3469,
+    "output": "{\n  \"check_kind\": \"Read-only handoff assembly consistency and recovery preservation; not a repeat of official schema/coverage/EV validation.\",\n  \"same_ordered_rows\": true,\n  \"exact_ordered_selected_tuples\": true,\n  \"rows\": 464,\n  \"distinct_claims\": 459,\n  \"verified_distinct\": 452,\n  \"preserved_files_checked\": 197,\n  \"preserved_mismatches\": [],\n  \"files\": [\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_A_review.json\",\n      \"bytes\": 14239,\n      \"sha256\": \"dd9aada7abde732edf33d8ab42c48582bef0526a1a4a56d0bc17956238179b63\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_B_review.json\",\n      \"bytes\": 24928,\n      \"sha256\": \"67a5a76189b4173dd4ea6830bb099086b40293f33a0490a79eab8e681c201d83\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_CB_input_reconciliation.json\",\n      \"bytes\": 162951,\n      \"sha256\": \"d80ad9481a43ab7e88f0a603091d38c61dab7734290427f242fae6463345b78b\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_C_review.json\",\n      \"bytes\": 3524,\n      \"sha256\": \"1f917aa9e59286a34918d24e0b2fde50564e118af7dc32a52ee465a7398616b8\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_D2_review.json\",\n      \"bytes\": 1966,\n      \"sha256\": \"520daec69348c9a6863f1acc1b805060c6a0b80aa4e8638140a5c00517349955\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_D_screen.json\",\n      \"bytes\": 64847,\n      \"sha256\": \"30a97e134c26557128882845bcc5799a24ee6d41934db923da3bcd5cd4b0640e\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_D_search_plan.json\",\n      \"bytes\": 17919,\n      \"sha256\": \"67870e1295372d2599c457c3f0d643f4d5f8124186533d5571c886b45e485c04\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_E6_operation_audit.json\",\n      \"bytes\": 91858,\n      \"sha256\": \"c732be405b3e1548d6c8b31f71ef7826a6029d985a5bca3d769bf83e1a572030\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_E_semantic_review.json\",\n      \"bytes\": 215304,\n      \"sha256\": \"9f18cb5f91f7f2dfc4a1d227b7a97bb15f640e9f398a810105c3b22853003015\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_claim_registry.json\",\n      \"bytes\": 235653,\n      \"sha256\": \"438643043ade31fcb7f5433ba0d2000e163e88807bf7c1b13bbc6c5c31bf1d2b\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_claim_registry_coverage.json\",\n      \"bytes\": 38465,\n      \"sha256\": \"a1f9a02039abf5e78457fe2a237ece517bc864f7a2470008e5d07d556fca6717\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_claim_strength_drift_findings.json\",\n      \"bytes\": 533,\n      \"sha256\": \"5ec39c247c15f598376d719e5030caa4749aa3d0fd6dc28ea1579d80a1ddbda1\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_compliance_report.json\",\n      \"bytes\": 2450,\n      \"sha256\": \"889c6c1ce983b82fd40fd8d3542b192092f84e18175dd18a75fe56a0c452b4f5\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_current_extraction.json\",\n      \"bytes\": 756050,\n      \"sha256\": \"9f4c21017072a93b1fc7948ee37f07457ba2de2d387a38580c526d1e03d7b0ff\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_evidence_row_templates.json\",\n      \"bytes\": 432961,\n      \"sha256\": \"c9fbab1b614a49933c6aed330e2c45455ea19863893036dde4045f1323680096\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_evidence_rows.json\",\n      \"bytes\": 719249,\n      \"sha256\": \"9d2dc3bcfe1203ecb6aca57f26906d919059d639925013e1d735ad113492bf03\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_evidence_source_map.json\",\n      \"bytes\": 3,\n      \"sha256\": \"ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_failure_mode_audit.json\",\n      \"bytes\": 3591,\n      \"sha256\": \"653230312ebd278435f1a2b10da09df05652ee6caee349867dcc19793d8fa708\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_final_integrity_report.md\",\n      \"bytes\": 4146,\n      \"sha256\": \"d2cc60ba2d2b3c31f251667b08f16292d23f6a35da2f5ba03bf83d9d733d38ac\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_integrity_report.json\",\n      \"bytes\": 853770,\n      \"sha256\": \"8a79c2dd19114691b7e59da923fedee1e420adbb96e052d01119b13112e76e26\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_official_bundle_validation.json\",\n      \"bytes\": 981,\n      \"sha256\": \"f4653c38f321928e48e0ef8321ecf77b1565e5526213550a7af44de7b0d42afa\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_recovery1_D_completion.json\",\n      \"bytes\": 1703,\n      \"sha256\": \"646acbb5d8efa8548360be2b460a13a9f2e81f089be408736a049af8da83aa0c\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_recovery1_D_future_work_raw.json\",\n      \"bytes\": 38196,\n      \"sha256\": \"74a83c9093eafd407c218857cb94e365728d431607d943855a0cd0fb5e95d347\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_recovery1_official_execution_receipt.json\",\n      \"bytes\": 48880,\n      \"sha256\": \"e2ff9f61b36cb63e2ac860a348e96dfbba56d53ba139cdcfba9dc56c5ad892dd\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_supplementary_comparison.json\",\n      \"bytes\": 4587,\n      \"sha256\": \"051ba42339f93f50d73f5db006ffbca01ee91e2fa13bef66b21b3a8607720637\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A01.json\",\n      \"bytes\": 28558,\n      \"sha256\": \"61a268e227e9b6968bbcce870bf131e661a83ae3e8ee380d151716ff65064038\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A02.json\",\n      \"bytes\": 28933,\n      \"sha256\": \"9188ec25ed2b8272807ba6ae362316dbcfafecfc1ae298ba21c09b71240ac492\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A03.json\",\n      \"bytes\": 31260,\n      \"sha256\": \"83f2fd50aa3f079abde54273cecc3dc39b13734b312c8f8299c5973a3f52f077\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A04.json\",\n      \"bytes\": 30951,\n      \"sha256\": \"193e4a99beeaa0f499731fce3e72c65920a134a290ac3c2ad507e6231d2854a9\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A05.json\",\n      \"bytes\": 31340,\n      \"sha256\": \"f8338c106ec6301acb2bc294abd5867ffc17b17e4c1d5d8cafceb7709d3ee305\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A06.json\",\n      \"bytes\": 29454,\n      \"sha256\": \"d6914349b3b249a6173040723ecffdf88e052eda8fad578444198757a3e356ec\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A07_primary.json\",\n      \"bytes\": 27329,\n      \"sha256\": \"8400eca9c21d24336ca26b51da479e13304ecb6131324bca1fd2401a5b36b61f\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A08_primary.json\",\n      \"bytes\": 28328,\n      \"sha256\": \"f6c66a8c84f427c6855f886a8009ab173dae8770e9d642ad5938b55446d3c2f9\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A09_primary.json\",\n      \"bytes\": 8007,\n      \"sha256\": \"66754086af19ca0bb9b9bdac582d86624fd7de08fb0413a8c63e1d56de2e551f\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A10_primary.json\",\n      \"bytes\": 27415,\n      \"sha256\": \"f524187d59af0787f4363b4a0f391351291bb22fad229691fa67d07176077976\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A11_primary.json\",\n      \"bytes\": 27263,\n      \"sha256\": \"81fa51254bd32825132becaee289c9afdbe021341e5961459eae71210b721ba4\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A12_S02.json\",\n      \"bytes\": 26314,\n      \"sha256\": \"e08c8b289aae7c0141e7018f41d0a9b8b9e455e4587f999e17470faf8cf79ca5\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_C_remote.json\",\n      \"bytes\": 9937,\n      \"sha256\": \"4836e401d75d846a0e161d8c92dedc321c08bc62274a4835cbf68f1882d94109\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D01.json\",\n      \"bytes\": 35757,\n      \"sha256\": \"18324eb0e852d5f29fb3cd6e07ad4555851ba1cdd677741b5b4dbf331f6cfbe8\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D02.json\",\n      \"bytes\": 40094,\n      \"sha256\": \"e2d228e21ccac68441f21e9337e3f70b95b9a2168394e42abae0458c84ef2131\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D03.json\",\n      \"bytes\": 37602,\n      \"sha256\": \"4831a09eacbedaaa54f05b994c21b9cb60413f753da2b35e6d29cd372972ac14\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D04.json\",\n      \"bytes\": 33097,\n      \"sha256\": \"b66d85f159aacb1db8dc36366cfbf60bc8a345c40c75eeb0ed6fdbd70b5918f1\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D05.json\",\n      \"bytes\": 40986,\n      \"sha256\": \"1eff6050a073c3c20517273078eb4ab91cba62d617fc53aeb83b535ca9b4fb18\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D06.json\",\n      \"bytes\": 35023,\n      \"sha256\": \"37f44cbd7f341dfaf13b5d714dddab49c7b808270ce4036be7394a6aac2ab177\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D07.json\",\n      \"bytes\": 33086,\n      \"sha256\": \"197f1d09034211f444c193afaa85faf6e58412b250d44dbc593985c5932765eb\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D08.json\",\n      \"bytes\": 32113,\n      \"sha256\": \"5aab7e3bc9957054ef38364f5fdd5cc2294cbc049617a3eed9a177f9db251ae1\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D09.json\",\n      \"bytes\": 39146,\n      \"sha256\": \"58480a03652b30df169dbbe3cea7457273f17114b7085080abcc1346f1da7333\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D10.json\",\n      \"bytes\": 38748,\n      \"sha256\": \"6588afe1caa51473154f208bab46eb8744ad691d618f913e999c0424d487bdfb\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D11.json\",\n      \"bytes\": 36117,\n      \"sha256\": \"92d1d73a8c60c2fae26b4297830be6410c8f9c3a152c83325494b0c0c052d767\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D12.json\",\n      \"bytes\": 39896,\n      \"sha256\": \"d5d431e5a2486611ee6388f5cb563cc67911148127cf2b851fbc0ed46a08865d\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D13.json\",\n      \"bytes\": 40012,\n      \"sha256\": \"7854c07bbf1014df50122591613a783594b230889f7c0023a3616d9124bdc763\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D14.json\",\n      \"bytes\": 40374,\n      \"sha256\": \"da51a625ffeb58f348966b2107b58be06f4efbea55ec0800efc752e41f561961\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D15.json\",\n      \"bytes\": 40760,\n      \"sha256\": \"dfe2cbcb47933eb957f4f972c8ced98a725e86f72f35241716febc489cc74e60\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D16.json\",\n      \"bytes\": 37394,\n      \"sha256\": \"6e666a63bc1afaaa4bcce0457018db58f673a1b64d3f1f4209da428e38e0fdb0\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D17.json\",\n      \"bytes\": 35093,\n      \"sha256\": \"5b77ac40e59dfd0d816a295d560c4a122c1955b430c1c977856babd0552137d8\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D18.json\",\n      \"bytes\": 37756,\n      \"sha256\": \"9a5a29640e7ee98714eccb6b05ed0f7e84bb28401bc7a48c23f97349c8305803\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D19.json\",\n      \"bytes\": 37179,\n      \"sha256\": \"a3f08e53d7a368cd9982da02365f45b0b3c1210660375369e480013700c34e7d\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D20.json\",\n      \"bytes\": 41139,\n      \"sha256\": \"8ab14a52babbd6267d0595e6d304bfba851ca7b64edd15b56c2e1286d7f7eeea\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D21.json\",\n      \"bytes\": 38164,\n      \"sha256\": \"772cf06dc0b6b7fc99de54f5d67d0cba6b53bcd0e9d5c57fbe93e4c19951f86e\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D22.json\",\n      \"bytes\": 35400,\n      \"sha256\": \"6f09701150a71fda5bda487ed1db1e8238c0a40846839fc5d06eb5749d4c1741\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D2_A_final.json\",\n      \"bytes\": 29158,\n      \"sha256\": \"a30c9298afab67a59cd4b720a7c579d2e5ee742519a4b475c04598ca3c78273a\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D2_final_read.json\",\n      \"bytes\": 30219,\n      \"sha256\": \"6eadffc8378f745602b14af541f92b3ac56ccb9bebfe4b75e890c84b362deba2\"\n    },\n    {\n      \"path\": \"papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D2_primary.json\",\n      \"bytes\": 36461,\n      \"sha256\": \"1b9871801be295b6e64bfec62aa38d7e7c3d2ad1d835221079d18690235bfe97\"\n    }\n  ]\n}\n"
+  },
+  "check": {
+    "check_kind": "Read-only handoff assembly consistency and recovery preservation; not a repeat of official schema/coverage/EV validation.",
+    "same_ordered_rows": true,
+    "exact_ordered_selected_tuples": true,
+    "rows": 464,
+    "distinct_claims": 459,
+    "verified_distinct": 452,
+    "preserved_files_checked": 197,
+    "preserved_mismatches": [],
+    "files": [
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_A_review.json",
+        "bytes": 14239,
+        "sha256": "dd9aada7abde732edf33d8ab42c48582bef0526a1a4a56d0bc17956238179b63"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_B_review.json",
+        "bytes": 24928,
+        "sha256": "67a5a76189b4173dd4ea6830bb099086b40293f33a0490a79eab8e681c201d83"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_CB_input_reconciliation.json",
+        "bytes": 162951,
+        "sha256": "d80ad9481a43ab7e88f0a603091d38c61dab7734290427f242fae6463345b78b"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_C_review.json",
+        "bytes": 3524,
+        "sha256": "1f917aa9e59286a34918d24e0b2fde50564e118af7dc32a52ee465a7398616b8"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_D2_review.json",
+        "bytes": 1966,
+        "sha256": "520daec69348c9a6863f1acc1b805060c6a0b80aa4e8638140a5c00517349955"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_D_screen.json",
+        "bytes": 64847,
+        "sha256": "30a97e134c26557128882845bcc5799a24ee6d41934db923da3bcd5cd4b0640e"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_D_search_plan.json",
+        "bytes": 17919,
+        "sha256": "67870e1295372d2599c457c3f0d643f4d5f8124186533d5571c886b45e485c04"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_E6_operation_audit.json",
+        "bytes": 91858,
+        "sha256": "c732be405b3e1548d6c8b31f71ef7826a6029d985a5bca3d769bf83e1a572030"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_E_semantic_review.json",
+        "bytes": 215304,
+        "sha256": "9f18cb5f91f7f2dfc4a1d227b7a97bb15f640e9f398a810105c3b22853003015"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_claim_registry.json",
+        "bytes": 235653,
+        "sha256": "438643043ade31fcb7f5433ba0d2000e163e88807bf7c1b13bbc6c5c31bf1d2b"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_claim_registry_coverage.json",
+        "bytes": 38465,
+        "sha256": "a1f9a02039abf5e78457fe2a237ece517bc864f7a2470008e5d07d556fca6717"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_claim_strength_drift_findings.json",
+        "bytes": 533,
+        "sha256": "5ec39c247c15f598376d719e5030caa4749aa3d0fd6dc28ea1579d80a1ddbda1"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_compliance_report.json",
+        "bytes": 2450,
+        "sha256": "889c6c1ce983b82fd40fd8d3542b192092f84e18175dd18a75fe56a0c452b4f5"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_current_extraction.json",
+        "bytes": 756050,
+        "sha256": "9f4c21017072a93b1fc7948ee37f07457ba2de2d387a38580c526d1e03d7b0ff"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_evidence_row_templates.json",
+        "bytes": 432961,
+        "sha256": "c9fbab1b614a49933c6aed330e2c45455ea19863893036dde4045f1323680096"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_evidence_rows.json",
+        "bytes": 719249,
+        "sha256": "9d2dc3bcfe1203ecb6aca57f26906d919059d639925013e1d735ad113492bf03"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_evidence_source_map.json",
+        "bytes": 3,
+        "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_failure_mode_audit.json",
+        "bytes": 3591,
+        "sha256": "653230312ebd278435f1a2b10da09df05652ee6caee349867dcc19793d8fa708"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_final_integrity_report.md",
+        "bytes": 4146,
+        "sha256": "d2cc60ba2d2b3c31f251667b08f16292d23f6a35da2f5ba03bf83d9d733d38ac"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_integrity_report.json",
+        "bytes": 853770,
+        "sha256": "8a79c2dd19114691b7e59da923fedee1e420adbb96e052d01119b13112e76e26"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_official_bundle_validation.json",
+        "bytes": 981,
+        "sha256": "f4653c38f321928e48e0ef8321ecf77b1565e5526213550a7af44de7b0d42afa"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_recovery1_D_completion.json",
+        "bytes": 1703,
+        "sha256": "646acbb5d8efa8548360be2b460a13a9f2e81f089be408736a049af8da83aa0c"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_recovery1_D_future_work_raw.json",
+        "bytes": 38196,
+        "sha256": "74a83c9093eafd407c218857cb94e365728d431607d943855a0cd0fb5e95d347"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_recovery1_official_execution_receipt.json",
+        "bytes": 48880,
+        "sha256": "e2ff9f61b36cb63e2ac860a348e96dfbba56d53ba139cdcfba9dc56c5ad892dd"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_supplementary_comparison.json",
+        "bytes": 4587,
+        "sha256": "051ba42339f93f50d73f5db006ffbca01ee91e2fa13bef66b21b3a8607720637"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A01.json",
+        "bytes": 28558,
+        "sha256": "61a268e227e9b6968bbcce870bf131e661a83ae3e8ee380d151716ff65064038"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A02.json",
+        "bytes": 28933,
+        "sha256": "9188ec25ed2b8272807ba6ae362316dbcfafecfc1ae298ba21c09b71240ac492"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A03.json",
+        "bytes": 31260,
+        "sha256": "83f2fd50aa3f079abde54273cecc3dc39b13734b312c8f8299c5973a3f52f077"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A04.json",
+        "bytes": 30951,
+        "sha256": "193e4a99beeaa0f499731fce3e72c65920a134a290ac3c2ad507e6231d2854a9"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A05.json",
+        "bytes": 31340,
+        "sha256": "f8338c106ec6301acb2bc294abd5867ffc17b17e4c1d5d8cafceb7709d3ee305"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A06.json",
+        "bytes": 29454,
+        "sha256": "d6914349b3b249a6173040723ecffdf88e052eda8fad578444198757a3e356ec"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A07_primary.json",
+        "bytes": 27329,
+        "sha256": "8400eca9c21d24336ca26b51da479e13304ecb6131324bca1fd2401a5b36b61f"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A08_primary.json",
+        "bytes": 28328,
+        "sha256": "f6c66a8c84f427c6855f886a8009ab173dae8770e9d642ad5938b55446d3c2f9"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A09_primary.json",
+        "bytes": 8007,
+        "sha256": "66754086af19ca0bb9b9bdac582d86624fd7de08fb0413a8c63e1d56de2e551f"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A10_primary.json",
+        "bytes": 27415,
+        "sha256": "f524187d59af0787f4363b4a0f391351291bb22fad229691fa67d07176077976"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A11_primary.json",
+        "bytes": 27263,
+        "sha256": "81fa51254bd32825132becaee289c9afdbe021341e5961459eae71210b721ba4"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_A12_S02.json",
+        "bytes": 26314,
+        "sha256": "e08c8b289aae7c0141e7018f41d0a9b8b9e455e4587f999e17470faf8cf79ca5"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_C_remote.json",
+        "bytes": 9937,
+        "sha256": "4836e401d75d846a0e161d8c92dedc321c08bc62274a4835cbf68f1882d94109"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D01.json",
+        "bytes": 35757,
+        "sha256": "18324eb0e852d5f29fb3cd6e07ad4555851ba1cdd677741b5b4dbf331f6cfbe8"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D02.json",
+        "bytes": 40094,
+        "sha256": "e2d228e21ccac68441f21e9337e3f70b95b9a2168394e42abae0458c84ef2131"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D03.json",
+        "bytes": 37602,
+        "sha256": "4831a09eacbedaaa54f05b994c21b9cb60413f753da2b35e6d29cd372972ac14"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D04.json",
+        "bytes": 33097,
+        "sha256": "b66d85f159aacb1db8dc36366cfbf60bc8a345c40c75eeb0ed6fdbd70b5918f1"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D05.json",
+        "bytes": 40986,
+        "sha256": "1eff6050a073c3c20517273078eb4ab91cba62d617fc53aeb83b535ca9b4fb18"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D06.json",
+        "bytes": 35023,
+        "sha256": "37f44cbd7f341dfaf13b5d714dddab49c7b808270ce4036be7394a6aac2ab177"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D07.json",
+        "bytes": 33086,
+        "sha256": "197f1d09034211f444c193afaa85faf6e58412b250d44dbc593985c5932765eb"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D08.json",
+        "bytes": 32113,
+        "sha256": "5aab7e3bc9957054ef38364f5fdd5cc2294cbc049617a3eed9a177f9db251ae1"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D09.json",
+        "bytes": 39146,
+        "sha256": "58480a03652b30df169dbbe3cea7457273f17114b7085080abcc1346f1da7333"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D10.json",
+        "bytes": 38748,
+        "sha256": "6588afe1caa51473154f208bab46eb8744ad691d618f913e999c0424d487bdfb"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D11.json",
+        "bytes": 36117,
+        "sha256": "92d1d73a8c60c2fae26b4297830be6410c8f9c3a152c83325494b0c0c052d767"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D12.json",
+        "bytes": 39896,
+        "sha256": "d5d431e5a2486611ee6388f5cb563cc67911148127cf2b851fbc0ed46a08865d"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D13.json",
+        "bytes": 40012,
+        "sha256": "7854c07bbf1014df50122591613a783594b230889f7c0023a3616d9124bdc763"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D14.json",
+        "bytes": 40374,
+        "sha256": "da51a625ffeb58f348966b2107b58be06f4efbea55ec0800efc752e41f561961"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D15.json",
+        "bytes": 40760,
+        "sha256": "dfe2cbcb47933eb957f4f972c8ced98a725e86f72f35241716febc489cc74e60"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D16.json",
+        "bytes": 37394,
+        "sha256": "6e666a63bc1afaaa4bcce0457018db58f673a1b64d3f1f4209da428e38e0fdb0"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D17.json",
+        "bytes": 35093,
+        "sha256": "5b77ac40e59dfd0d816a295d560c4a122c1955b430c1c977856babd0552137d8"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D18.json",
+        "bytes": 37756,
+        "sha256": "9a5a29640e7ee98714eccb6b05ed0f7e84bb28401bc7a48c23f97349c8305803"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D19.json",
+        "bytes": 37179,
+        "sha256": "a3f08e53d7a368cd9982da02365f45b0b3c1210660375369e480013700c34e7d"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D20.json",
+        "bytes": 41139,
+        "sha256": "8ab14a52babbd6267d0595e6d304bfba851ca7b64edd15b56c2e1286d7f7eeea"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D21.json",
+        "bytes": 38164,
+        "sha256": "772cf06dc0b6b7fc99de54f5d67d0cba6b53bcd0e9d5c57fbe93e4c19951f86e"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D22.json",
+        "bytes": 35400,
+        "sha256": "6f09701150a71fda5bda487ed1db1e8238c0a40846839fc5d06eb5749d4c1741"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D2_A_final.json",
+        "bytes": 29158,
+        "sha256": "a30c9298afab67a59cd4b720a7c579d2e5ee742519a4b475c04598ca3c78273a"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D2_final_read.json",
+        "bytes": 30219,
+        "sha256": "6eadffc8378f745602b14af541f92b3ac56ccb9bebfe4b75e890c84b362deba2"
+      },
+      {
+        "path": "papers/33-bolza-control-matched-census/notes/stage4_5_round4_web_D2_primary.json",
+        "bytes": 36461,
+        "sha256": "1b9871801be295b6e64bfec62aa38d7e7c3d2ad1d835221079d18690235bfe97"
+      }
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "schema": "round10-stage4.5-component-stop-receipt/1.0",
+  "paper_id": "P30",
+  "status": "STOPPED_ARTIFACT_DESCRIPTOR_MISMATCH_AUDIT_INCOMPLETE",
+  "receipt_recorded_at_utc": "2026-09-05 09:36:27 UTC",
+  "check_observed_at_utc": null,
+  "check_timestamp_limitation": "The original diagnostic did not capture a wall-clock time. Receipt time is obtained after the stop and is not represented as the check time.",
+  "trigger": "Author-approved stop condition: any artifact/hash/target mismatch. Parent explicitly confirmed the stop and prohibited continuation, retry, repair, and validators.",
+  "write_scope": "New notes-side stop and unfinished-work records only. No manuscript, bibliography, frozen input, science tree, route, Git, build, or official validator mutation.",
+  "authoritative_current_input_lock": {
+    "path": "BATCH_ROUND10_STAGE4_5_ROUND3_INPUT_LOCK.json",
+    "sha256": "0c7755b343990af1d37049838f81e0483323584c96eab58cddf6e14bc572e229",
+    "qualification": "Previously read and P30 69 distinct path/hash/byte bindings checked before this nested reader-manifest mismatch; not rechecked after stop."
+  },
+  "current_draft": {
+    "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_round4.tex",
+    "sha256": "9a38c81279303ac81a20914d7a2be70056b6c7b568eef2640ebe3665d54399de",
+    "bytes": 72154
+  },
+  "reader_manifest": {
+    "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_reader_artifact_manifest_round2.json",
+    "sha256": "9fd3373b636e1f74eded47992dcda9230ae34493b1f289c331f2fe0286570bc5",
+    "bytes": null,
+    "byte_limitation": "Not printed in the diagnostic; no new check made after stop.",
+    "manuscript_uses": [
+      "B0098",
+      "B0123"
+    ]
+  },
+  "failed_descriptor": {
+    "json_pointer": "/entries/7",
+    "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_claim_passage_matrix_round2.json",
+    "claimed_sha256": null,
+    "claimed_bytes": null,
+    "observed_sha256": null,
+    "observed_bytes": null,
+    "check_boolean": false,
+    "limitation": "The command output retained only combined byte/hash Boolean checks. Missing descriptor and observed values are not guessed and were not re-read after the stop.",
+    "prior_current_input_lock_binding": {
+      "sha256": "f2e24dcba6b31a5d4cbd72981d194b844ade544dec883a1f84100336a4831816",
+      "bytes": 23869,
+      "qualification": "Independent earlier frozen-input binding, not the same-command observed value."
+    }
+  },
+  "diagnostic": {
+    "command": "ruby -rjson -rcsv -rdigest -e 'base=ARGV[0]; inv=CSV.read(base+\"/notes/stage1_phase2_source_inventory.tsv\",headers:true,col_sep:\"\\t\").map(&:to_h); raw=JSON.parse(File.read(base+\"/notes/stage4_prime_literature_replay_round2.raw.json\")); led=JSON.parse(File.read(base+\"/notes/stage4_prime_literature_screening_ledger_round2.json\")); doc=File.read(base+\"/notes/stage1_phase2_annotated_bibliography.md\"); qs=doc.scan(/```text\\n(.*?)```/m).flat_map{|m|m[0].lines.map(&:strip).reject(&:empty?)}; norm=->(s){s.to_s.downcase.gsub(/[^\\p{Alnum}]+/,\"\")}; bad=[]; raw[\"rows\"].zip(led[\"rows\"]).each{|r,l| c=r[\"crossref\"][\"top_record\"]; hits=inv.select{|v|v[\"doi\"].to_s.downcase==c[\"doi\"].to_s.downcase||norm.call(v[\"title\"])==norm.call(c[\"title\"])}; expected=hits.empty? ? \"SCREEN_OUT_OUTSIDE_FROZEN_SCOPE\" : \"RETAIN_EXISTING_INVENTORY_RECORD\"; bad<<r[\"query_id\"] if expected!=l[\"decision\"]||r[\"query\"]!=l[\"exact_frozen_query\"]||r[\"query\"]!=qs[r[\"query_id\"][1..].to_i-1]||c[\"doi\"]!=l[\"candidate_doi\"]}; man=JSON.parse(File.read(base+\"/notes/stage4_prime_reader_artifact_manifest_round2.json\")); ck=man[\"entries\"].map{|e|p=base+\"/\"+e[\"path\"]; {path:p,ok:File.size(p)==e[\"bytes\"]&&Digest::SHA256.file(p).hexdigest==e[\"sha256\"]}}; puts JSON.pretty_generate({inventory:inv.size,peer_reviewed:inv.count{|v|v[\"peer_reviewed\"]==\"yes\"},query_count:qs.size,raw_rows:raw[\"rows\"].size,ledger_rows:led[\"rows\"].size,retained:led[\"rows\"].count{|v|v[\"decision\"].start_with?(\"RETAIN\")},screened:led[\"rows\"].count{|v|v[\"decision\"].start_with?(\"SCREEN\")},row_comparison_mismatches:bad,reader_manifest:ck,raw_sha:Digest::SHA256.file(base+\"/notes/stage4_prime_literature_replay_round2.raw.json\").hexdigest})' papers/30-three-disk-nonconstant-roof-determinant",
+    "cwd": "/root/autodl-tmp/flow_systems",
+    "exit_code": 0,
+    "tool_chunk_id": "9e8d09",
+    "tool_wall_time_seconds": 0.00000462,
+    "passed_entries": 10,
+    "total_entries": 11,
+    "entries": [
+      {
+        "index": 0,
+        "json_pointer": "/entries/0",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage1_phase2_annotated_bibliography.md",
+        "ok": true
+      },
+      {
+        "index": 1,
+        "json_pointer": "/entries/1",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage1_phase2_source_inventory.tsv",
+        "ok": true
+      },
+      {
+        "index": 2,
+        "json_pointer": "/entries/2",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage1_phase2_source_verification.tsv",
+        "ok": true
+      },
+      {
+        "index": 3,
+        "json_pointer": "/entries/3",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage1_phase3_literature_matrix.tsv",
+        "ok": true
+      },
+      {
+        "index": 4,
+        "json_pointer": "/entries/4",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_literature_replay_round2.raw.json",
+        "ok": true
+      },
+      {
+        "index": 5,
+        "json_pointer": "/entries/5",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_literature_screening_ledger_round2.json",
+        "ok": true
+      },
+      {
+        "index": 6,
+        "json_pointer": "/entries/6",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_literature_screening_ledger_round2.tsv",
+        "ok": true
+      },
+      {
+        "index": 7,
+        "json_pointer": "/entries/7",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_claim_passage_matrix_round2.json",
+        "ok": false
+      },
+      {
+        "index": 8,
+        "json_pointer": "/entries/8",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_claim_passage_matrix_round2.tsv",
+        "ok": true
+      },
+      {
+        "index": 9,
+        "json_pointer": "/entries/9",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_correction_source_verification_round2.json",
+        "ok": true
+      },
+      {
+        "index": 10,
+        "json_pointer": "/entries/10",
+        "path": "papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_references_round2.bib",
+        "ok": true
+      }
+    ],
+    "other_printed_results": {
+      "inventory": 26,
+      "peer_reviewed": 24,
+      "query_count": 54,
+      "raw_rows": 54,
+      "ledger_rows": 54,
+      "retained": 31,
+      "screened": 23,
+      "row_comparison_mismatches": [],
+      "raw_sha": "ff929458680b99c4d75ec29093fa22968df0c808ef90e73573a710d48aa9e017"
+    }
+  },
+  "actions_after_mismatch": [
+    "Immediately notified parent and paused.",
+    "Parent confirmed the author-approved stop condition.",
+    "Recorded missing diagnostic fields as not captured, without inventing timestamps or rerunning.",
+    "Preserved this new notes-side receipt and unfinished-work record only."
+  ],
+  "post_stop_verification_calls": 0,
+  "post_stop_retry_calls": 0,
+  "post_stop_repair_calls": 0,
+  "official_validators_run_by_this_component": [],
+  "semantic_findings_before_stop": [
+    {
+      "id": "P30-CANDIDATE-STATUS-01",
+      "blocks": [
+        "B0118",
+        "B0090"
+      ],
+      "finding": "B0118 says all gates are NOT_STARTED although B0090 and B0118's earlier clause distinguish Gate 6 as NOT_ACTIVATED. The blanket sentence was introduced in Round 1 and survived later authorized target scopes.",
+      "qualification": "Component observation, not finalized integrity verdict."
+    },
+    {
+      "id": "P30-CANDIDATE-SCOPE-02",
+      "blocks": [
+        "B0051",
+        "B0107"
+      ],
+      "finding": "Whole-corpus negative statements about dedicated project roundoff/geometry/common-norm/conditioning support exceed what 18 bounded locators and eight explicit-unavailability records can establish. A local not-established reading would be narrower.",
+      "qualification": "Component evidence-sufficiency concern, not a claim that such a theorem exists."
+    },
+    {
+      "id": "P30-CANDIDATE-TERMINOLOGY-03",
+      "blocks": [
+        "B0043",
+        "B0099",
+        "B0109"
+      ],
+      "finding": "Generic shuffled-roof terminology survives after the exact Round-2 cyclic symmetry-control definition. This may warrant terminology clarification but was not finalized as an error.",
+      "qualification": "Unresolved interpretation."
+    }
+  ],
+  "independence": {
+    "fresh_source_checks": true,
+    "writer_independent": false,
+    "reason": "This component agent previously prepared the Round-4 correction and derived-material work; same-family correlated-error risk must be disclosed."
+  },
+  "official_integrity_verdict": null,
+  "full_audit_complete": false,
+  "stage5_eligible": false
+}
+

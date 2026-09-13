@@ -1,0 +1,260 @@
+{
+  "command": "node - <<'NODE'\nconst fs=require('fs'),crypto=require('crypto');const p='papers/29-bianchi-ideal-owner-refinement/';const sha=x=>crypto.createHash('sha256').update(x).digest('hex');const t=fs.readFileSync(p+'notes/stage4_prime_revision_round6.tex','utf8');const sf=JSON.parse(fs.readFileSync(p+'notes/stage4_prime_source_finalization_round3.json'));const matrix=JSON.parse(fs.readFileSync(p+'notes/stage4_prime_claim_passage_matrix_round3.json'));const passport=JSON.parse(fs.readFileSync(p+'notes/stage4_5_round2_material_passport.json'));const manifests=['notes/stage1_phase3_claim_intent_manifest.json','notes/stage1_phase4_claim_intent_manifest.json','notes/stage1_phase6_claim_intent_manifest.json','notes/stage2_claim_intent_manifest.json'].map(path=>({path:p+path,value:JSON.parse(fs.readFileSync(p+path))}));const rows=sf.rows.map((s,i)=>{const m=matrix.rows.find(r=>r.source_id===s.source_id&&r.context_id===s.context_id);return {source_id:s.source_id,context_id:s.context_id,status:s.finalization_status,excerpt_utf8_hash_matches:s.support_excerpt?sha(s.support_excerpt)===s.support_excerpt_sha256:null,matrix_excerpt_hash_matches:m.support_excerpt_sha256===s.support_excerpt_sha256,context_id_matches:!!m,block_id_matches:m.base_block_id===s.block_id};});const claims=JSON.parse(fs.readFileSync(p+'notes/stage4_5_round4_claim_registry.json')).claims;console.log(JSON.stringify({observed_at_utc:new Date().toISOString(),draft_sha256:sha(t),source_contexts:sf.rows.length,distinct_sources:new Set(sf.rows.map(x=>x.source_id)).size,exact:sf.rows.filter(x=>x.support_excerpt).length,metadata_only:sf.rows.filter(x=>!x.support_excerpt).length,rows,figure_environments:[...t.matchAll(/\\\\begin\\{figure\\*?\\}/g)].length,table_environments:[...t.matchAll(/\\\\begin\\{(?:table\\*?|tabular|tabularx|longtable)\\}/g)].length,caption_macros:[...t.matchAll(/\\\\caption\\b/g)].length,registry_claims:claims.length,quantitative_registered:claims.filter(c=>c.claim_kinds.includes('quantitative')).length,intake_declaration:passport.experiment_intake_declaration,experiment_provenance_count:passport.experiment_provenance.length,manifest_experiment_signals:manifests.map(({path,value})=>({path,claim_count:value.claims.length,empirical_claims:value.claims.filter(c=>c.intended_evidence_kind==='empirical').map(c=>({claim_id:c.claim_id,intended_evidence_kind:c.intended_evidence_kind,planned_experiment_ids_present:Object.hasOwn(c,'planned_experiment_ids'),planned_experiment_ids:c.planned_experiment_ids,claim_text:c.claim_text||c.description||c.claim}))}))}));\nNODE",
+  "exit_code": 0,
+  "result": {
+    "observed_at_utc": "2026-09-06T11:54:39.236Z",
+    "draft_sha256": "1a00b33770a6533884591ffeefaf402c63331b0c30f0e4c34695bf4ef08bb96b",
+    "source_contexts": 22,
+    "distinct_sources": 22,
+    "exact": 13,
+    "metadata_only": 9,
+    "rows": [
+      {
+        "source_id": "P29-S01",
+        "context_id": "P29-CTX-001",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S02",
+        "context_id": "P29-CTX-002",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S03",
+        "context_id": "P29-CTX-003",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S08",
+        "context_id": "P29-CTX-004",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S04",
+        "context_id": "P29-CTX-005",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S05",
+        "context_id": "P29-CTX-006",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S06",
+        "context_id": "P29-CTX-007",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S07",
+        "context_id": "P29-CTX-008",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S09",
+        "context_id": "P29-CTX-009",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S17",
+        "context_id": "P29-CTX-010",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S18",
+        "context_id": "P29-CTX-011",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S10",
+        "context_id": "P29-CTX-012",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S11",
+        "context_id": "P29-CTX-013",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S15",
+        "context_id": "P29-CTX-014",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S16",
+        "context_id": "P29-CTX-015",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S12",
+        "context_id": "P29-CTX-016",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S13",
+        "context_id": "P29-CTX-017",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S14",
+        "context_id": "P29-CTX-018",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S19",
+        "context_id": "P29-CTX-019",
+        "status": "EXPLICIT_BOUNDED_UNAVAILABILITY_METADATA_ONLY",
+        "excerpt_utf8_hash_matches": null,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S20",
+        "context_id": "P29-CTX-020",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S21",
+        "context_id": "P29-CTX-021",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      },
+      {
+        "source_id": "P29-S22",
+        "context_id": "P29-CTX-022",
+        "status": "EXACT_LOCATOR_FINALIZED",
+        "excerpt_utf8_hash_matches": true,
+        "matrix_excerpt_hash_matches": true,
+        "context_id_matches": true,
+        "block_id_matches": true
+      }
+    ],
+    "figure_environments": 0,
+    "table_environments": 0,
+    "caption_macros": 0,
+    "registry_claims": 375,
+    "quantitative_registered": 116,
+    "intake_declaration": {
+      "declared_at": "2026-09-02T16:05:50Z",
+      "declared_by": "scholar",
+      "status": "no_experiments_declared"
+    },
+    "experiment_provenance_count": 0,
+    "manifest_experiment_signals": [
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage1_phase3_claim_intent_manifest.json",
+        "claim_count": 5,
+        "empirical_claims": []
+      },
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage1_phase4_claim_intent_manifest.json",
+        "claim_count": 8,
+        "empirical_claims": []
+      },
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage1_phase6_claim_intent_manifest.json",
+        "claim_count": 8,
+        "empirical_claims": [
+          {
+            "claim_id": "P29-P6-C007",
+            "intended_evidence_kind": "empirical",
+            "planned_experiment_ids_present": false,
+            "claim_text": "Source identity and reference closure do not provide passage-level theorem verification because all frozen citation locators are absent and correction, retraction, and source-COI checks remain bounded or unrun."
+          }
+        ]
+      },
+      {
+        "path": "papers/29-bianchi-ideal-owner-refinement/notes/stage2_claim_intent_manifest.json",
+        "claim_count": 8,
+        "empirical_claims": [
+          {
+            "claim_id": "C-007",
+            "intended_evidence_kind": "empirical",
+            "planned_experiment_ids_present": false,
+            "claim_text": "Source identity and reference closure do not provide passage-level theorem verification because all frozen citation locators are absent and correction, retraction, and source-COI checks remain bounded or unrun."
+          }
+        ]
+      }
+    ]
+  },
+  "scope": "Read-only document/source hash, count and declaration reconciliation. Not scientific validation or a formal source-applicability proof."
+}
