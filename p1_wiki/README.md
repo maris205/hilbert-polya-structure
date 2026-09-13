@@ -4,6 +4,14 @@
 
 > **先读边界。** 这里的页面是源绑定的导览与派生阅读副本，不是新的数学证明、Route 评估或研究授权。任何关于 RH、零点识别、素数迹公式、全局行列式或自伴算子的声称，都必须回到相应方向的原始来源、台账和正式评估。
 
+## 整体路线图
+
+![Hilbert--Pólya 动力学研究整体路线图：Route A（A0--A4）与 Route B（B1--B5）。](rh_roadmap0.png)
+
+这张图是本知识库的总体导航图：Route A 从算术相关性、轨道和动力学 zeta 层逐步走向可提升性；Route B 则把候选对象推进到算子定义、自伴性、谱型、素数幂迹与完成的 \(\Xi\)/行列式恒等式。图中的完整性边界也与本库的既有原则一致：只有 B1--B5 全部闭合，才构成完整的 Hilbert--Pólya realization。
+
+它用于定位探索方向与证据义务，不覆盖任何方向原始材料中的 source lock、当前状态、停止条件或 claim boundary，也不表示任一 Gate 已闭合。实际进展请先读[状态与 claim 词汇](01-status-and-claim-vocabulary.md)，再进入相应方向的 `conclusions.md` 和 `roadmap.md`。
+
 ## 六条顶层研究线
 
 | 时段 / Session | 方向 | 核心张力 | 从哪里开始 |
