@@ -25,6 +25,10 @@
 
 Flow Systems 内部另有一组受统一冻结计划组织的五种连续时间形式；它们属于 Session 5，而不是第七条顶层路线。见[专题：P24--P28 五种计划形式](collections/flow-p24-p28-five-planned-forms.md)。
 
+## 阶段性工作论文
+
+[《AI-Guided Exploration of Arithmetic Dynamical Systems》](phase1_ai_guided_exploration/README.md)以本页路线图为证据义务图，整理第一阶段的人机协作探索、局部结果、负对照与下一阶段的候选准入条件。它是固定材料窗口上的内部工作论文，不是 RH 证明、Route 评估替代品或外部同行评审结论。
+
 ## 推荐的 agent 阅读顺序
 
 1. [Agent 起始页](00-agent-start.md)：先确定任务是导航、阅读、复现审计还是另需授权的研究动作。
