@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"purpose": {"const": "SAFE_RUNTIME_PROBE"}}, "required": ["purpose"]},
+      "then": {
+        "properties": {
+          "claim_sha256": {"type": "null"},
+          "engine_sha256": {"type": "null"},
+          "fixture_sha256": {"type": "null"}
+        }
+      },
+      "else": {
+        "properties": {
+          "claim_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "engine_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "fixture_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+        }
+      }
+    }
+  ],
+  "properties": {
+    "candidate_id": {"const": "henon_primitive_cycle_cover_v1"},
+    "claim_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "definitions_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "engine_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "fixture_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "nonce": {"pattern": "^[0-9a-f]{32}$", "type": "string"},
+    "purpose": {"enum": ["SAFE_RUNTIME_PROBE", "REGISTERED_R100"]},
+    "runner_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "schema": {"const": "P13_TRACK_CAPABILITY_V1"},
+    "track": {"enum": ["Q", "R"]}
+  },
+  "required": [
+    "candidate_id",
+    "claim_sha256",
+    "definitions_sha256",
+    "engine_sha256",
+    "fixture_sha256",
+    "nonce",
+    "purpose",
+    "runner_sha256",
+    "schema",
+    "track"
+  ],
+  "title": "Paper 13 track capability types",
+  "type": "object"
+}

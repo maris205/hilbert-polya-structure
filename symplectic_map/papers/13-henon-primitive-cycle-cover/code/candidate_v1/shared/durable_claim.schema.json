@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "acceptance_ledger_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "candidate_id": {"const": "henon_primitive_cycle_cover_v1"},
+    "candidate_version": {"const": 1},
+    "claim_state": {"const": "STARTED"},
+    "code_manifest_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "code_tree_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "definitions_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "deployment_review_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "registered_audit_count": {"const": 1},
+    "registered_candidate_id_count": {"const": 1},
+    "rerun_budget_after_start": {"const": 0},
+    "run_id": {"const": "R100"},
+    "schema": {"const": "P13_DURABLE_ONE_SHOT_CLAIM_V1"},
+    "source_lock_sha256": {"const": "11d51aae93f4230a06046de7c3c8331a7e00169b69295d335435f470f9ff9469"},
+    "source_review_sha256": {"const": "83b380d5fa1d5e2161281052ea69b447f6c26831f0cf0d818eced8affecd6c8e"},
+    "track_bindings": {
+      "additionalProperties": false,
+      "properties": {
+        "Q": {"$ref": "#/$defs/track_binding"},
+        "R": {"$ref": "#/$defs/track_binding"}
+      },
+      "required": ["Q", "R"],
+      "type": "object"
+    }
+  },
+  "required": [
+    "acceptance_ledger_sha256",
+    "candidate_id",
+    "candidate_version",
+    "claim_state",
+    "code_manifest_sha256",
+    "code_tree_sha256",
+    "definitions_sha256",
+    "deployment_review_sha256",
+    "registered_audit_count",
+    "registered_candidate_id_count",
+    "rerun_budget_after_start",
+    "run_id",
+    "schema",
+    "source_lock_sha256",
+    "source_review_sha256",
+    "track_bindings"
+  ],
+  "title": "Paper 13 durable one-shot claim types",
+  "type": "object",
+  "$defs": {
+    "track_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "engine_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "fixture_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+        "runner_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+      },
+      "required": ["engine_sha256", "fixture_sha256", "runner_sha256"],
+      "type": "object"
+    }
+  }
+}

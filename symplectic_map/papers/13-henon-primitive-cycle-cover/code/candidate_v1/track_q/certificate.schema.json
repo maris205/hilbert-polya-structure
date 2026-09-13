@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "polynomial": {
+      "items": {"$ref": "#/$defs/polynomial_term"},
+      "type": "array"
+    },
+    "polynomial_term": {
+      "additionalProperties": false,
+      "properties": {
+        "coefficient": {"$ref": "#/$defs/rational"},
+        "exponents_acz0z1": {
+          "items": {"minimum": 0, "type": "integer"},
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array"
+        }
+      },
+      "required": ["coefficient", "exponents_acz0z1"],
+      "type": "object"
+    },
+    "rational": {
+      "additionalProperties": false,
+      "properties": {
+        "denominator": {"minimum": 1, "type": "integer"},
+        "numerator": {"type": "integer"}
+      },
+      "required": ["denominator", "numerator"],
+      "type": "object"
+    },
+    "replacement_rejection": {
+      "additionalProperties": false,
+      "properties": {
+        "disposition": {"const": "REJECTED_CATEGORY_SUBSTITUTION"},
+        "replacement": {"minLength": 1, "type": "string"}
+      },
+      "required": ["disposition", "replacement"],
+      "type": "object"
+    },
+    "scope_rejection": {
+      "additionalProperties": false,
+      "properties": {
+        "assertion": {"minLength": 1, "type": "string"},
+        "disposition": {"const": "REJECTED_SCOPE_ERROR"}
+      },
+      "required": ["assertion", "disposition"],
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {"const": "henon_primitive_cycle_cover_v1"},
+    "certificate_kind": {"const": "BOUNDED_EXACT_CONSISTENCY_RECORD"},
+    "controls": {
+      "additionalProperties": false,
+      "properties": {
+        "N1": {
+          "additionalProperties": false,
+          "properties": {
+            "dynatomic_at_point": {"$ref": "#/$defs/rational"},
+            "first_iterate_at_point": {"$ref": "#/$defs/rational"},
+            "multiplier": {"$ref": "#/$defs/rational"},
+            "unsafe_inference": {"const": "REJECTED_FORMAL_TO_ACTUAL"}
+          },
+          "required": ["dynatomic_at_point", "first_iterate_at_point", "multiplier", "unsafe_inference"],
+          "type": "object"
+        },
+        "N2": {
+          "additionalProperties": false,
+          "properties": {
+            "generic_discriminant": {"$ref": "#/$defs/polynomial"},
+            "generic_separable": {"type": "boolean"},
+            "special_basis_exponents": {"items": {"minimum": 0, "type": "integer"}, "minItems": 1, "type": "array", "uniqueItems": true},
+            "special_generator_nonzero": {"type": "boolean"},
+            "special_nilpotent_square": {"items": {"$ref": "#/$defs/rational"}, "type": "array"},
+            "unsafe_inference": {"const": "REJECTED_GENERIC_TO_ALL_FIBERS"}
+          },
+          "required": ["generic_discriminant", "generic_separable", "special_basis_exponents", "special_generator_nonzero", "special_nilpotent_square", "unsafe_inference"],
+          "type": "object"
+        },
+        "N3": {
+          "additionalProperties": false,
+          "properties": {
+            "finite_module_generator_exponents": {"items": {"minimum": 0, "type": "integer"}, "minItems": 1, "type": "array", "uniqueItems": true},
+            "fraction_exponent_identity": {"items": {"minimum": 0, "type": "integer"}, "maxItems": 3, "minItems": 3, "type": "array"},
+            "normalizer_exponent_in_subring_semigroup": {"type": "boolean"},
+            "unsafe_inference": {"const": "REJECTED_BIRATIONAL_TO_NORMAL_EQUALITY"}
+          },
+          "required": ["finite_module_generator_exponents", "fraction_exponent_identity", "normalizer_exponent_in_subring_semigroup", "unsafe_inference"],
+          "type": "object"
+        },
+        "N4": {
+          "additionalProperties": false,
+          "properties": {
+            "characteristic_polynomial_rho": {"items": {"$ref": "#/$defs/polynomial"}, "maxItems": 2, "minItems": 2, "type": "array"},
+            "characteristic_polynomial_tau": {"items": {"$ref": "#/$defs/polynomial"}, "maxItems": 2, "minItems": 2, "type": "array"},
+            "cycle_product": {"$ref": "#/$defs/polynomial"},
+            "cycle_sum": {"$ref": "#/$defs/polynomial"},
+            "degree_one_boundary": {"type": "boolean"},
+            "derivative_trace": {"$ref": "#/$defs/polynomial"},
+            "nontrivial_monodromy_evidence": {"type": "boolean"},
+            "nu": {"minimum": 0, "type": "integer"},
+            "rank": {"minimum": 0, "type": "integer"},
+            "reduction_probe": {"$ref": "#/$defs/polynomial"},
+            "reduction_step_count": {"minimum": 0, "type": "integer"},
+            "reynolds_z0": {"$ref": "#/$defs/polynomial"},
+            "standard_cycle_exponents": {
+              "items": {
+                "items": {"minimum": 0, "type": "integer"},
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "required": ["characteristic_polynomial_rho", "characteristic_polynomial_tau", "cycle_product", "cycle_sum", "degree_one_boundary", "derivative_trace", "nontrivial_monodromy_evidence", "nu", "rank", "reduction_probe", "reduction_step_count", "reynolds_z0", "standard_cycle_exponents"],
+          "type": "object"
+        },
+        "N5": {"items": {"$ref": "#/$defs/scope_rejection"}, "maxItems": 2, "minItems": 2, "type": "array"},
+        "N6": {"items": {"$ref": "#/$defs/scope_rejection"}, "maxItems": 2, "minItems": 2, "type": "array"},
+        "N7": {
+          "additionalProperties": false,
+          "properties": {
+            "disposition": {"const": "REJECTED_DIRECTION"},
+            "proposed": {"const": "global_to_special"}
+          },
+          "required": ["disposition", "proposed"],
+          "type": "object"
+        },
+        "N8": {"items": {"$ref": "#/$defs/replacement_rejection"}, "maxItems": 2, "minItems": 2, "type": "array"}
+      },
+      "required": ["N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8"],
+      "type": "object"
+    },
+    "route": {"const": "CYCLIC_QUOTIENT_REDUCTION"},
+    "schema": {"const": "P13_Q_EXACT_CERTIFICATE_V1"},
+    "track": {"const": "Q"}
+  },
+  "required": ["candidate_id", "certificate_kind", "controls", "route", "schema", "track"],
+  "title": "Paper 13 private Track-Q certificate",
+  "type": "object"
+}

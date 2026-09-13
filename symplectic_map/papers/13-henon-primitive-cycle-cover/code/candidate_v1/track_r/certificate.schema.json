@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "polynomial": {"items": {"$ref": "#/$defs/polynomial_term"}, "type": "array"},
+    "polynomial_term": {
+      "additionalProperties": false,
+      "properties": {
+        "coefficient": {"$ref": "#/$defs/rational"},
+        "exponents_acxy": {"items": {"minimum": 0, "type": "integer"}, "maxItems": 4, "minItems": 4, "type": "array"}
+      },
+      "required": ["coefficient", "exponents_acxy"],
+      "type": "object"
+    },
+    "rational": {
+      "items": false,
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {"type": "integer"},
+        {"minimum": 1, "type": "integer"}
+      ],
+      "type": "array"
+    },
+    "scope_rejection": {
+      "additionalProperties": false,
+      "properties": {"disposition": {"const": "REJECTED_SCOPE_ERROR"}, "statement": {"minLength": 1, "type": "string"}},
+      "required": ["disposition", "statement"],
+      "type": "object"
+    },
+    "category_rejection": {
+      "additionalProperties": false,
+      "properties": {"disposition": {"const": "REJECTED_CATEGORY_SUBSTITUTION"}, "kind": {"minLength": 1, "type": "string"}},
+      "required": ["disposition", "kind"],
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "candidate": {"const": "henon_primitive_cycle_cover_v1"},
+    "certificate_class": {"const": "BOUNDED_EXACT_CONSISTENCY_RECORD"},
+    "records": {
+      "additionalProperties": false,
+      "properties": {
+        "N1": {
+          "additionalProperties": false,
+          "properties": {
+            "formal_dynatomic_value": {"$ref": "#/$defs/rational"},
+            "map_value": {"$ref": "#/$defs/rational"},
+            "point_multiplier": {"$ref": "#/$defs/rational"},
+            "unsafe_step": {"const": "REJECTED_FORMAL_TO_ACTUAL"}
+          },
+          "required": ["formal_dynatomic_value", "map_value", "point_multiplier", "unsafe_step"],
+          "type": "object"
+        },
+        "N2": {
+          "additionalProperties": false,
+          "properties": {
+            "fitting_matrix": {"items": {"items": {"$ref": "#/$defs/rational"}, "maxItems": 2, "minItems": 2, "type": "array"}, "maxItems": 2, "minItems": 2, "type": "array"},
+            "fitting_square": {"items": {"items": {"$ref": "#/$defs/rational"}, "maxItems": 2, "minItems": 2, "type": "array"}, "maxItems": 2, "minItems": 2, "type": "array"},
+            "generic_discriminant": {"$ref": "#/$defs/polynomial"},
+            "unsafe_step": {"const": "REJECTED_GENERIC_TO_ALL_FIBERS"}
+          },
+          "required": ["fitting_matrix", "fitting_square", "generic_discriminant", "unsafe_step"],
+          "type": "object"
+        },
+        "N3": {
+          "additionalProperties": false,
+          "properties": {
+            "finite_module_exponents": {"items": {"minimum": 0, "type": "integer"}, "minItems": 1, "type": "array", "uniqueItems": true},
+            "fraction_exponent_identity": {"items": {"minimum": 0, "type": "integer"}, "maxItems": 3, "minItems": 3, "type": "array"},
+            "fraction_power": {"minimum": 0, "type": "integer"},
+            "normalizer_in_semigroup": {"type": "boolean"},
+            "presentation_t_power": {"minimum": 0, "type": "integer"},
+            "unsafe_step": {"const": "REJECTED_BIRATIONAL_TO_NORMAL_EQUALITY"}
+          },
+          "required": ["finite_module_exponents", "fraction_exponent_identity", "fraction_power", "normalizer_in_semigroup", "presentation_t_power", "unsafe_step"],
+          "type": "object"
+        },
+        "N4": {
+          "additionalProperties": false,
+          "properties": {
+            "characteristic_rho": {"items": {"$ref": "#/$defs/polynomial"}, "maxItems": 2, "minItems": 2, "type": "array"},
+            "characteristic_tau": {"items": {"$ref": "#/$defs/polynomial"}, "maxItems": 2, "minItems": 2, "type": "array"},
+            "cycle_product": {"$ref": "#/$defs/polynomial"},
+            "cycle_sum": {"$ref": "#/$defs/polynomial"},
+            "degree_one_boundary": {"type": "boolean"},
+            "difference_product": {"$ref": "#/$defs/polynomial"},
+            "fitting_rho_pivot_count": {"minimum": 0, "type": "integer"},
+            "fitting_tau_pivot_count": {"minimum": 0, "type": "integer"},
+            "nontrivial_monodromy_evidence": {"type": "boolean"},
+            "nu": {"minimum": 0, "type": "integer"},
+            "primitive_factor": {"$ref": "#/$defs/polynomial"},
+            "rank": {"minimum": 0, "type": "integer"},
+            "return_trace": {"$ref": "#/$defs/polynomial"},
+            "sylvester_pivot_count": {"minimum": 0, "type": "integer"}
+          },
+          "required": ["characteristic_rho", "characteristic_tau", "cycle_product", "cycle_sum", "degree_one_boundary", "difference_product", "fitting_rho_pivot_count", "fitting_tau_pivot_count", "nontrivial_monodromy_evidence", "nu", "primitive_factor", "rank", "return_trace", "sylvester_pivot_count"],
+          "type": "object"
+        },
+        "N5": {"items": {"$ref": "#/$defs/scope_rejection"}, "maxItems": 2, "minItems": 2, "type": "array"},
+        "N6": {"items": {"$ref": "#/$defs/scope_rejection"}, "maxItems": 2, "minItems": 2, "type": "array"},
+        "N7": {
+          "additionalProperties": false,
+          "properties": {"disposition": {"const": "REJECTED_DIRECTION"}, "proposed": {"const": "G_global -> subgroup_of -> G_special"}},
+          "required": ["disposition", "proposed"],
+          "type": "object"
+        },
+        "N8": {"items": {"$ref": "#/$defs/category_rejection"}, "maxItems": 2, "minItems": 2, "type": "array"}
+      },
+      "required": ["N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8"],
+      "type": "object"
+    },
+    "route": {"const": "SYLVESTER_FITTING_EXTERIOR"},
+    "schema": {"const": "P13_R_EXACT_CERTIFICATE_V1"},
+    "track": {"const": "R"}
+  },
+  "required": ["candidate", "certificate_class", "records", "route", "schema", "track"],
+  "title": "Paper 13 private Track-R certificate",
+  "type": "object"
+}

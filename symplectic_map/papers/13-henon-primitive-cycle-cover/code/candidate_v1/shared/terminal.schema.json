@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "oneOf": [
+        {"properties": {"execution_stage_path": {"type": "null"}, "execution_stage_sha256": {"type": "null"}}},
+        {"properties": {"execution_stage_path": {"const": "runtime/candidate_v1/official/execution_started.json"}, "execution_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}}}
+      ]
+    },
+    {
+      "oneOf": [
+        {"properties": {"q_stage_path": {"type": "null"}, "q_stage_sha256": {"type": "null"}}},
+        {"properties": {"q_stage_path": {"const": "runtime/candidate_v1/staging/track_q/envelope.json"}, "q_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}}}
+      ]
+    },
+    {
+      "oneOf": [
+        {"properties": {"r_stage_path": {"type": "null"}, "r_stage_sha256": {"type": "null"}}},
+        {"properties": {"r_stage_path": {"const": "runtime/candidate_v1/staging/track_r/envelope.json"}, "r_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}}}
+      ]
+    },
+    {
+      "oneOf": [
+        {"properties": {"result_path": {"type": "null"}, "result_sha256": {"type": "null"}}},
+        {"properties": {"result_path": {"const": "runtime/candidate_v1/official/raw_result.json"}, "result_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}}}
+      ]
+    },
+    {
+      "oneOf": [
+        {"properties": {"result_manifest_path": {"type": "null"}, "result_manifest_sha256": {"type": "null"}}},
+        {"properties": {"result_manifest_path": {"const": "runtime/candidate_v1/official/result_manifest.json"}, "result_manifest_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}}}
+      ]
+    },
+    {
+      "if": {"properties": {"state": {"const": "REGISTERED_AUDIT_TERMINAL_FAIL"}}, "required": ["state"]},
+      "then": {"properties": {"failure_code": {"minLength": 1, "type": "string"}}}
+    },
+    {
+      "if": {"properties": {"state": {"const": "REGISTERED_AUDIT_SEALED"}}, "required": ["state"]},
+      "then": {
+        "properties": {
+          "child_diagnostic": {"type": "null"},
+          "execution_stage_path": {"const": "runtime/candidate_v1/official/execution_started.json"},
+          "execution_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "failure_code": {"type": "null"},
+          "q_stage_path": {"const": "runtime/candidate_v1/staging/track_q/envelope.json"},
+          "q_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "r_stage_path": {"const": "runtime/candidate_v1/staging/track_r/envelope.json"},
+          "r_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "result_path": {"const": "runtime/candidate_v1/official/raw_result.json"},
+          "result_manifest_path": {"const": "runtime/candidate_v1/official/result_manifest.json"},
+          "result_manifest_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+          "result_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+        }
+      }
+    }
+  ],
+  "properties": {
+    "acceptance_ledger_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "candidate_id": {"const": "henon_primitive_cycle_cover_v1"},
+    "candidate_version": {"const": 1},
+    "child_diagnostic": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {"properties": {"timed_out": {"const": true}}, "required": ["timed_out"]},
+              "then": {"properties": {"returncode": {"type": "null"}}},
+              "else": {"properties": {"returncode": {"type": "integer"}}}
+            }
+          ],
+          "properties": {
+            "returncode": {"type": ["integer", "null"]},
+            "schema": {"const": "P13_BOUNDED_CHILD_DIAGNOSTIC_V1"},
+            "stderr": {
+              "additionalProperties": false,
+              "properties": {
+                "byte_count": {"minimum": 0, "type": "integer"},
+                "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+                "text": {"maxLength": 4096, "type": "string"},
+                "truncated": {"type": "boolean"}
+              },
+              "required": ["byte_count", "sha256", "text", "truncated"],
+              "type": "object"
+            },
+            "stdout": {
+              "additionalProperties": false,
+              "properties": {
+                "byte_count": {"minimum": 0, "type": "integer"},
+                "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+                "text": {"maxLength": 4096, "type": "string"},
+                "truncated": {"type": "boolean"}
+              },
+              "required": ["byte_count", "sha256", "text", "truncated"],
+              "type": "object"
+            },
+            "timed_out": {"type": "boolean"}
+          },
+          "required": ["returncode", "schema", "stderr", "stdout", "timed_out"],
+          "type": "object"
+        }
+      ]
+    },
+    "claim_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "code_manifest_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "code_tree_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "definitions_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "deployment_review_sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+    "execution_stage_path": {"oneOf": [{"type": "null"}, {"const": "runtime/candidate_v1/official/execution_started.json"}]},
+    "execution_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "failure_code": {"type": ["string", "null"]},
+    "registered_audit_count": {"const": 1},
+    "q_stage_path": {"oneOf": [{"type": "null"}, {"const": "runtime/candidate_v1/staging/track_q/envelope.json"}]},
+    "q_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "r_stage_path": {"oneOf": [{"type": "null"}, {"const": "runtime/candidate_v1/staging/track_r/envelope.json"}]},
+    "r_stage_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "result_path": {"oneOf": [{"type": "null"}, {"const": "runtime/candidate_v1/official/raw_result.json"}]},
+    "result_manifest_path": {"oneOf": [{"type": "null"}, {"const": "runtime/candidate_v1/official/result_manifest.json"}]},
+    "result_manifest_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "result_sha256": {"pattern": "^[0-9a-f]{64}$", "type": ["string", "null"]},
+    "rerun_permitted": {"const": false},
+    "run_id": {"const": "R100"},
+    "schema": {"const": "P13_ONE_SHOT_TERMINAL_V1"},
+    "source_lock_sha256": {"const": "11d51aae93f4230a06046de7c3c8331a7e00169b69295d335435f470f9ff9469"},
+    "source_review_sha256": {"const": "83b380d5fa1d5e2161281052ea69b447f6c26831f0cf0d818eced8affecd6c8e"},
+    "state": {"enum": ["REGISTERED_AUDIT_TERMINAL_FAIL", "REGISTERED_AUDIT_SEALED"]}
+  },
+  "required": [
+    "acceptance_ledger_sha256",
+    "candidate_id",
+    "candidate_version",
+    "child_diagnostic",
+    "claim_sha256",
+    "code_manifest_sha256",
+    "code_tree_sha256",
+    "definitions_sha256",
+    "deployment_review_sha256",
+    "execution_stage_path",
+    "execution_stage_sha256",
+    "failure_code",
+    "registered_audit_count",
+    "q_stage_path",
+    "q_stage_sha256",
+    "r_stage_path",
+    "r_stage_sha256",
+    "result_path",
+    "result_manifest_path",
+    "result_manifest_sha256",
+    "result_sha256",
+    "rerun_permitted",
+    "run_id",
+    "schema",
+    "source_lock_sha256",
+    "source_review_sha256",
+    "state"
+  ],
+  "title": "Paper 13 one-shot terminal types",
+  "type": "object"
+}

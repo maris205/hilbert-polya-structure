@@ -1,0 +1,1213 @@
+\documentclass[11pt]{article}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=-1
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,tabularx}
+\usepackage{enumitem}
+\usepackage[hidelinks,pdfauthor={},pdftitle={Sharp Torus-Coset Decay for Sparse Shift-Like Recurrences: Constant Anchors and the Exact Zero-Constant Boundary},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}]{hyperref}
+
+\setlength{\parindent}{1.4em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\setlist{nosep}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Gm}{\mathbb{G}_{m}}
+\newcommand{\Om}{\Omega}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Gam}{\Gamma}
+\newcommand{\divh}{\mathrm{div}}
+\newcommand{\tor}{\mathrm{tor}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Span}{\operatorname{span}}
+
+\title{Sharp Torus-Coset Decay for Sparse Shift-Like Recurrences:\\
+Constant Anchors and the Exact Zero-Constant Boundary}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We determine how many multiplicative torus directions can survive a finite window of a sparse shift-like recurrence. For a type-$\nu$ map in dimension $k$, when the defining polynomial has a nonzero constant term and at least two actual nonconstant monomials, every connected torus translate contained in the $m$-step survivor variety has dimension at most $k-m$ for $0\leq m\leq k$. We construct saturated subtori attaining equality at every window and compatible rank-one examples with an infinite $(k-1)$-step arithmetic survivor set. At the next step, the arithmetic survivor set is finite for every finite-rank multiplicative subgroup over any characteristic-zero field, including groups with arbitrary torsion. We then delete the constant term and classify the planar boundary. Linear support retains a one-dimensional coset in every window. Among nonlinear supports, a positive-dimensional two-step coset occurs only for $P(X)=\beta X+\delta X^d$ on $a=-\beta^2$; there the coset is explicit and unique, and it cannot survive a third step. Every other nonlinear support closes after two steps. The proof combines character-basis cancellation, an integral pivot argument, and an exhaustive local pairing calculus. The arithmetic conclusions follow from a qualitative torus-intersection theorem after an internal division-hull and field-embedding reduction. They provide no effective cardinality or enumeration.
+\end{abstract}
+
+\section{Introduction and anchor-loss question}
+\label{sec:introduction}
+
+A finite segment of a polynomial recurrence can impose much more multiplicative rigidity than any one of its equations suggests.  The natural geometric object is not a single orbit but the locus of all scalar strings satisfying a prescribed number of successive recurrence equations inside an algebraic torus.  A translate of a subtorus contained in that locus records a family in which some multiplicative parameters remain free throughout the window.  The basic question is therefore quantitative: how many independent torus parameters survive after $m$ transitions?
+
+We answer this question for the type-$\nu$ shift-like recurrence
+\begin{equation}
+x_{n+k}=P(x_{n+k-\nu})+a x_n,
+\label{eq:intro-recurrence}
+\end{equation}
+where $k\geq2$, $1\leq\nu\leq k-1$, and $a\neq0$.  When $P$ has a nonzero constant term and at least two actual nonconstant monomials, every connected torus translate in the $m$-transition survivor variety has dimension at most $k-m$ for $0\leq m\leq k$.  The loss of one direction per equation is sharp at every window: under an explicit coefficient condition, a saturated subtorus of dimension $k-m$ lies in the survivor variety.  At $m=k-1$ this construction can meet a rank-one multiplicative group infinitely, whereas at $m=k$ a qualitative theorem on intersections with division groups makes every finite-rank arithmetic survivor set finite.
+
+The source of the exact deficit is a fixed character supplied by the constant term.  On restricting one recurrence equation to a torus translate, each coordinate becomes a scalar times a character.  If the middle character were nontrivial, the constant and at least two distinct powers would give three distinct group-algebra characters, while the lag and output contribute only two further terms.  Some nonzero term would remain unpaired.  Once the middle character is forced to be trivial, the equation supplies two integral lattice relations.  We prove that the resulting $2m$ relations are independent, including when middle coordinates have already moved into the future part of the window.
+
+This mechanism poses a precise boundary question: what survives if the constant character is removed?  In the planar zero-constant recurrence, a local equation has two endpoints and the power terms of its middle coordinate.  Linear support retains a one-dimensional coset in every finite window.  For nonlinear support, two endpoint terms can pair with two distinct powers only in two orientations.  Composing those orientations leaves one word, forces support $\{1,d\}$, and then forces the coefficient relation $a=-\beta^2$.  The resulting two-step coset is explicit and unique, but a third recurrence closes it.  Thus the second theorem is the exact failure analysis of the first theorem's anchoring step, rather than an independent classification attached to it.
+
+Our contributions are the following.
+\begin{enumerate}[label=(\roman*)]
+\item We prove the sharp all-window dimension bound $\dim H\leq k-m$ for anchored type-$\nu$ recurrences, with no arithmetic genericity and no condition involving $\gcd(k,\nu)$.
+\item We construct saturated equality subtori at every window and compatible rank-one examples showing that the arithmetic threshold between $k-1$ and $k$ transitions cannot be lowered uniformly.
+\item We classify the planar zero-anchor phase: the sole nonlinear two-step resonance is $\{1,d\}$ on $a=-\beta^2$, its positive-dimensional coset is unique, and every nonlinear support has no positive-dimensional coset after three transitions.
+\end{enumerate}
+
+Shift-like polynomial maps originate in the complex-dynamical study of higher-dimensional polynomial automorphisms; the standard family and type convention appear in \cite{BedfordPambuccian1998}, with further complex-dynamical developments in \cite{Bera2018,BeraVerma2013}.  Those works concern analytic and dynamical structure rather than finite-rank survivor windows.  The group-algebra fact that distinct characters are linearly independent is also standard.  Our contribution is not that fact in isolation, but the recurrence-specific integral relation law and the exhaustive anchor-loss classification built from it.  The literature comparison used here is bounded and does not support a global priority or exhaustive-search claim.
+
+Section~\ref{sec:setup} fixes the scalar indexing, survivor varieties, and the qualitative arithmetic bridge.  Section~\ref{sec:characters} develops the character lemmas.  Sections~\ref{sec:anchored} and \ref{sec:equality} prove and sharpen the anchored theorem.  Sections~\ref{sec:local} and \ref{sec:phase} classify the zero-anchor boundary.  Section~\ref{sec:boundaries} records the exact assumption and comparison boundaries before concluding.
+
+\section{Shift-like recurrences, survivor varieties, and the Laurent bridge}
+\label{sec:setup}
+
+\subsection{Map, scalar orientation, and windows}
+
+Let $\Om$ be an algebraically closed field of characteristic zero.  Fix
+\[
+k\geq2,\qquad 1\leq\nu\leq k-1,\qquad a\in\Om^*.
+\]
+For $P\in\Om[X]$, define the type-$\nu$ shift-like map
+\begin{equation}
+S(z_1,\ldots,z_k)
+ =\bigl(z_2,\ldots,z_k,P(z_{k-\nu+1})+az_1\bigr).
+\label{eq:map}
+\end{equation}
+It is a polynomial automorphism.  If $w=S(z)$, then
+\[
+z_1=a^{-1}\bigl(w_k-P(w_{k-\nu})\bigr),
+\qquad z_i=w_{i-1}\quad(2\leq i\leq k).
+\]
+The location $k-\nu+1$ in the one-based state coordinates becomes $n+k-\nu$ in zero-based scalar coordinates.  Namely, if the time-$n$ state is
+\[
+S^n(x_0,\ldots,x_{k-1})=(x_n,\ldots,x_{n+k-1}),
+\]
+then the last coordinate of the next state gives
+\begin{equation}
+x_{n+k}=P(x_{n+k-\nu})+a x_n.
+\label{eq:recurrence}
+\end{equation}
+This orientation will remain fixed throughout the article.
+
+\begin{definition}[Survivor variety]
+For $m\geq0$, let $V_m\subset\Gm^{k+m}$, with coordinates
+$x_0,\ldots,x_{k+m-1}$, be cut out by
+\begin{equation}
+x_{n+k}=P(x_{n+k-\nu})+a x_n,
+\qquad 0\leq n<m.
+\label{eq:Vm}
+\end{equation}
+We set $V_0=\Gm^k$.
+\end{definition}
+
+The equations in \eqref{eq:Vm} are Laurent-polynomial equations on the ambient torus, so $V_m$ is closed there.  They also give a useful scheme-level sanity check.  Start with
+\[
+A_0=\Om[x_0^{\pm1},\ldots,x_{k-1}^{\pm1}].
+\]
+At stage $n$, all coordinates appearing on the right side of the $n$th recurrence have already been expressed in the preceding ring.  Write that expression as $g_n=P(x_{n+k-\nu})+ax_n$.  Eliminating the monic variable $x_{n+k}$ and retaining its invertibility replaces the current domain $A_n$ by the localization
+\[
+A_{n+1}=A_n[g_n^{-1}].
+\]
+Induction identifies the coordinate ring of $V_m$ with an iterated localization of $A_0$.  It is therefore a domain, and $V_m$ is integral.  No later character argument relies on a set-theoretic replacement of the defining scheme.
+
+Here is the ring induction in full.  After the first $n$ equations have
+been imposed, let
+\[
+R_n=\Om[x_0^{\pm1},\ldots,x_{k+n-1}^{\pm1}]
+ /(x_{k+j}-P(x_{k+j-\nu})-a x_j:0\leq j<n).
+\]
+The inductive isomorphism identifies $R_n$ with $A_n$ and sends every
+coordinate already created to its recursively determined Laurent function.
+Adjoining the next invertible coordinate and its equation gives
+\[
+ R_{n+1}\simeq
+ A_n[y,y^{-1}]/(y-g_n).
+\]
+Evaluation at $y=g_n$ defines a homomorphism from this quotient to
+$A_n[g_n^{-1}]$.  In the other direction, the image of $y^{-1}$ is an
+inverse for $g_n$, so the universal property of localization supplies the
+inverse homomorphism.  Thus
+\[
+A_n[y,y^{-1}]/(y-g_n)\simeq A_n[g_n^{-1}]
+\]
+as rings, not merely on closed points.  The function $g_n$ is nonzero: it
+is the next scalar-coordinate function obtained from an iterate of the
+polynomial automorphism \eqref{eq:map}, and an automorphism cannot pull a
+nonzero coordinate function back to zero.  Localization therefore preserves
+the domain property at every step.  This also proves inductively that no
+embedded or extra irreducible component is hidden by the recurrence
+notation.
+
+The order of elimination matters only for clarity, not for the resulting
+variety.  At the $n$th stage, the index $n+k-\nu$ is strictly smaller than
+$n+k$ because $\nu\geq1$.  It is therefore either an initial coordinate or
+one of the future coordinates eliminated at an earlier stage.  The
+recurrence is monic in the new coordinate $x_{n+k}$, so it introduces no
+algebraic choice and no extra component.  Requiring $x_{n+k}\neq0$ in the
+ambient torus is exactly the localization at $g_n$.  This induction also
+shows that the projection from $V_m$ to the initial-coordinate torus is an
+open immersion onto the locus where all successive recurrence expressions
+are nonzero.  We shall not use that stronger description, but it explains
+why the scalar string is determined without multiplicity.
+
+All geometric containment statements are understood after extension to
+$\Om$.  Extending the ground field preserves the equations, the torus
+structure, and the dimension of a contained coset.  Conversely, the
+arithmetic point set in \eqref{eq:projection} is formed over the stated field
+$K$.  Keeping these two ground fields separate prevents the later complex
+embedding argument from being mistaken for an assumption on the original
+field.
+
+Now let $K$ be any characteristic-zero field over which the coefficients are defined, and let $\Gam\leq K^*$ have finite rank.  We use
+\begin{equation}
+T_m(S,\Gam)=\{z\in\Gam^k:S^j(z)\in\Gam^k
+ \text{ for every }0\leq j\leq m\}.
+\label{eq:Tm}
+\end{equation}
+Thus $m$ counts transitions and equations; the retained states occur at times $0,1,\ldots,m$.  Each initial tuple determines its future scalar coordinates uniquely through \eqref{eq:recurrence}.  Projection to the first $k$ coordinates consequently gives a bijection
+\begin{equation}
+V_m\cap\Gam^{k+m}\longrightarrow T_m(S,\Gam).
+\label{eq:projection}
+\end{equation}
+Dimension statements below concern torus translates contained in the geometric variety $V_m$.  They are not dimension statements about the arithmetic set $T_m$.
+
+The windows are nested on arithmetic points:
+\[
+T_{m+1}(S,\Gam)\subseteq T_m(S,\Gam).
+\]
+There is also a compatible truncation map $V_{m+1}\to V_m$, but the
+geometric varieties need not be subgroups and their dimensions alone do not
+control the size of their intersections with $\Gam^{k+m}$.  The bridge from
+geometry to arithmetic will instead use the structure of finite-rank
+intersections with torus subvarieties.
+
+\subsection{The qualitative torus-intersection input}
+
+We use one external proof theorem, in a qualitative form due to Laurent \cite{Laurent1984}.  If $X$ is a closed subvariety of a complex algebraic torus and $\Lambda$ is a finitely generated subgroup, write
+\[
+\Lambda^{\divh}=\{g:g^N\in\Lambda\text{ for some }N\geq1\}.
+\]
+Laurent's theorem implies that $X\cap\Lambda^{\divh}$ is a finite union of intersections with torus cosets contained in $X$.  We need only the following immediate consequence.
+
+The cosets in this statement are geometric cosets in the ambient algebraic
+torus.  Their occurrence is not inferred from an abstract decomposition of
+the arithmetic group.  This distinction is why our task is to exclude
+positive-dimensional cosets from $V_k$, $V_2^0$, or $V_3^0$ before applying
+the theorem.  Laurent's result does not supply any of the recurrence-specific
+character relations proved in later sections.
+
+\begin{corollary}[Qualitative coset consequence]
+\label{cor:laurent}
+If $X$ contains no positive-dimensional torus coset, then
+$X\cap\Lambda^{\divh}$ is finite.
+\end{corollary}
+
+\begin{proof}
+Every torus coset supplied by the theorem and contained in $X$ is then zero-dimensional.  Such a coset is a point, so a finite union of its intersections with $\Lambda^{\divh}$ is finite.
+\end{proof}
+
+\subsection{Finite rank, arbitrary torsion, and arbitrary fields}
+
+The complex theorem applies to division groups of finitely generated groups.  Our arithmetic statements concern arbitrary finite-rank subgroups, which need not be finitely generated and may have unbounded or infinite torsion.  The next two lemmas provide the required bridge rather than silently strengthening the imported theorem.
+
+\begin{lemma}[Division-hull reduction]
+\label{lem:division-hull}
+Let $\Gam$ be an abelian multiplicative group such that
+$\rank(\Gam/\Gam_{\tor})=r<\infty$.  There is a finitely generated subgroup
+$\Gam_0\leq\Gam$ for which $\Gam\subseteq\Gam_0^{\divh}$.
+\end{lemma}
+
+\begin{proof}
+Choose $\gamma_1,\ldots,\gamma_r$ whose classes form a $\Q$-basis of
+$\Gam\otimes_{\Z}\Q$, and put
+$\Gam_0=\langle\gamma_1,\ldots,\gamma_r\rangle$.  For
+$\gamma\in\Gam$, clearing denominators in the rational relation for its class gives integers $N>0$ and $n_i$ such that
+\[
+\tau=\gamma^N\prod_{i=1}^r\gamma_i^{-n_i}
+\]
+is torsion.  The individual element $\tau$ has some finite order $M$.  Raising the displayed relation to the $M$th power gives
+$\gamma^{NM}\in\Gam_0$, and hence $\gamma\in\Gam_0^{\divh}$.
+
+The exponent $M$ is allowed to depend on $\gamma$.  Thus the argument assumes neither bounded torsion nor finite generation of $\Gam$.  It includes arbitrary infinite torsion: every root of unity has finite order and already belongs to the division hull of the identity.
+\end{proof}
+
+\begin{lemma}[Characteristic-zero transfer]
+\label{lem:field-transfer}
+Let $X\subset\Gm^N$ be defined over a characteristic-zero field $K$, and let
+$\Gam\leq K^*$ have finite rank.  If $X$ contains no positive-dimensional torus coset after extension to an algebraic closure, then
+$X\cap\Gam^N$ is finite.
+\end{lemma}
+
+\begin{proof}
+Choose $\Gam_0$ as in Lemma~\ref{lem:division-hull}.  Let $L$ be the subfield generated over $\Q$ by the finitely many coefficients defining $X$ and the finitely many generators of $\Gam_0$.  The field $L$ is finitely generated over $\Q$ and embeds in $\C$.  Every $\gamma\in\Gam$ is algebraic over $L$, because a positive power of $\gamma$ belongs to $\Gam_0$.  Extend the chosen embedding of $L$ to an algebraic closure containing the relevant elements.  We do not assert that the whole field $K$ embeds in $\C$.
+
+Under the extended embedding, every point of $X\cap\Gam^N$ lies in the division hull of the finitely generated group $\Gam_0^N$.  The absence of a positive-dimensional torus coset is preserved by the field embedding.  Corollary~\ref{cor:laurent} makes the embedded intersection finite, and injectivity transfers finiteness back.  The same reasoning applies in every Cartesian power needed below.
+\end{proof}
+
+Lemmas~\ref{lem:division-hull} and \ref{lem:field-transfer} retain the distinction between finite rank and finite generation.  They also explain why arbitrary torsion, including all roots of unity when present, is within the theorem's scope.
+
+Two details of this reduction are useful later.  First, the power that places
+one element of $\Gam$ in $\Gam_0$ need not work for any other element.
+Uniform torsion control is neither asserted nor needed.  Second, a point of
+$X\cap\Gam^N$ has finitely many coordinates, each algebraic over $L$ by its
+power relation.  All coordinates therefore lie in one finite algebraic
+extension of $L$ for that point, inside the fixed algebraic closure to which
+the embedding has been extended.  The complex intersection theorem controls
+all such points at once because they all lie in
+$(\Gam_0^N)^{\divh}$.  This is an elementwise division-hull argument, not an
+attempt to embed an arbitrary large characteristic-zero field in $\C$.
+
+For clarity, the field transfer may be read coordinatewise.  The subgroup
+$\Gam_0^N$ is finitely generated by the finitely many vectors that place one
+generator of $\Gam_0$ in one coordinate and $1$ in the others.  If
+$g=(g_1,\ldots,g_N)\in\Gam^N$, then for each $i$ some positive power of
+$g_i$ lies in $\Gam_0$; taking the product of those finitely many exponents
+shows that one common positive power of $g$ lies in $\Gam_0^N$.  Hence
+$g\in(\Gam_0^N)^{\divh}$.  This common exponent is attached to the point and
+is not required to be uniform over the intersection.
+
+Likewise, only the algebraic extension generated by elements of $\Gam$ is
+embedded.  Once $L\hookrightarrow\C$ is fixed, the embedding-extension
+property for algebraic field extensions places the algebraic field
+$L(\Gam)$ inside an algebraic closure of the image of $L$ in $\C$.  The
+defining coefficients of $X$ already lie in $L$, so evaluation commutes with
+this injection.  A positive-dimensional coset in the resulting complex
+base change would remain such after passage to a common algebraically closed
+overfield, contradicting the geometric hypothesis.  We may therefore apply
+Corollary~\ref{cor:laurent} to the single complex variety and the single
+division group $(\Gam_0^N)^{\divh}$.  Injectivity then returns distinct
+complex points to distinct original points.  Neither a bound on torsion
+orders nor an embedding of all of $K$ has entered.
+
+\section{Characters on recurrence cosets}
+\label{sec:characters}
+
+The geometric arguments take place on a translate $\xi H$ of a connected subtorus of an ambient torus.  We record the character facts in a form that applies to both the anchored and zero-anchor recurrences.
+
+\subsection{Restriction to a group algebra}
+
+Let $M=X^*(H)$ be the character lattice of $H$.  Because $H$ is connected, $M$ is a free abelian group.  If $x_i$ is an ambient coordinate, then its restriction to $\xi H$ has the form
+\begin{equation}
+x_i|_{\xi H}=\xi_i\chi_i,
+\qquad \xi_i\in\Om^*,\quad \chi_i\in M.
+\label{eq:coordinate-restriction}
+\end{equation}
+Here and below the same symbol $\chi_i$ denotes both a character and its basis monomial in the group algebra $\Om[M]$.
+
+The scalar $\xi_i$ records the chosen translate and is always nonzero because
+the ambient space is a torus.  The character $\chi_i$ records variation along
+$H$.  A coordinate is constant on the coset precisely when $\chi_i=1$.
+This separation lets us treat character coincidences and scalar
+cancellations in the correct order: first collect all summands carrying the
+same character, then inspect the scalar coefficient of each collected block.
+In particular, two distinct monomials of $P$ may cancel after the middle
+character has become trivial; that possibility is the reason for the exact
+$P(\xi)$ split in both parts of the article.
+
+\begin{lemma}[Singleton rule]
+\label{lem:singleton}
+Suppose
+\[
+\sum_{i=1}^r c_i\chi_i=0\qquad\text{in }\Om[M],
+\]
+where every $c_i$ is nonzero.  After equal characters are collected, every coefficient is zero.  In particular, a character occurring in exactly one nonzero summand is impossible.
+\end{lemma}
+
+\begin{proof}
+The coordinate ring of $H$ is the group algebra $\Om[M]$.  Its character monomials form an $\Om$-basis, so their coefficients in any identity vanish separately.
+\end{proof}
+
+\begin{lemma}[Distinct powers]
+\label{lem:distinct-powers}
+If $\chi\in M$ is nontrivial and $0<e_1<\cdots<e_s$, then
+$1,\chi^{e_1},\ldots,\chi^{e_s}$ are pairwise distinct.
+\end{lemma}
+
+\begin{proof}
+An equality $\chi^u=\chi^v$ gives $(u-v)\chi=0$ in additive notation for $M$.  Torsion-freeness forces $u=v$.  The same argument shows that a positive power of a nontrivial character is nontrivial.
+\end{proof}
+
+The singleton rule and torsion-freeness are standard character theory.  The work below lies in identifying exactly which recurrence-specific relations they force and proving that those relations remain independent across a full window.
+
+The lemma does not say that every term in a restricted recurrence must be
+paired with exactly one other term.  Several summands may share a character,
+and their coefficients may add to zero.  What it does say is decisive: after
+all such aggregation, no block with a single nonzero coefficient can remain.
+Our anchored proof produces a singleton among at least three distinct
+constant-or-power characters.  Our zero-anchor proof instead enumerates all
+partitions of four terms that avoid a singleton.  Stating the rule at the
+aggregated level prevents coefficient cancellation from being silently
+discarded.
+
+\subsection{Ambient generation and connected components}
+
+For an embedded connected subtorus $H\leq\Gm^N$, restriction gives a surjection
+\begin{equation}
+\varphi:\Z^N=X^*(\Gm^N)\longrightarrow X^*(H),
+\qquad \varepsilon_i\longmapsto\chi_i.
+\label{eq:ambient-map}
+\end{equation}
+Thus all ambient coordinate characters generate $X^*(H)$, and
+\begin{equation}
+\dim H=\rank X^*(H)=\rank\operatorname{im}\varphi.
+\label{eq:dimension-rank}
+\end{equation}
+This generation statement is indispensable: showing that a selected list of coordinate characters vanishes would not control dimension unless the future coordinates were also accounted for.
+
+One can also see surjectivity in \eqref{eq:ambient-map} directly.  The
+inclusion $H\hookrightarrow\Gm^N$ is a closed immersion of diagonalizable
+groups.  On character groups it becomes a quotient of the free ambient
+lattice by the saturated lattice of monomial relations defining $H$.
+Consequently, the rank of any explicitly constructed subgroup of
+$\ker\varphi$ subtracts from the ambient rank.  The proof of
+Theorem~\ref{thm:anchored} will construct a rank-$2m$ subgroup of this kernel
+over $\Z$, so no saturation or rational-rank ambiguity can weaken the
+dimension estimate.
+
+The connected hypothesis loses no dimension information for a possibly disconnected algebraic subgroup.  If $D$ is such a subgroup and $\xi D\subset X$, then $D$ is a finite union of translates of its identity component $D^0$.  Each corresponding translate of $D^0$ is contained in $X$, and
+\begin{equation}
+\dim D=\dim D^0.
+\label{eq:component-dimension}
+\end{equation}
+We therefore carry out every lattice argument on a connected torus and pass to components only after the argument is complete.
+
+This order separates two kinds of torsion that should not be confused.
+$X^*(H)$ is torsion-free because $H$ is connected, which permits deductions
+such as $(d^2-1)u=0\Rightarrow u=0$.  The arithmetic group $\Gam$, on the
+other hand, may contain arbitrary torsion.  Its torsion is handled by
+Lemma~\ref{lem:division-hull} and is never inserted into the geometric
+character lattice.
+
+\subsection{The restricted recurrence identity}
+
+Consider $\xi H\subset V_m$ and use \eqref{eq:coordinate-restriction}.  The $n$th recurrence restricts to
+\begin{equation}
+\xi_{n+k}\chi_{n+k}
+-a\xi_n\chi_n
+-P\bigl(\xi_{n+k-\nu}\chi_{n+k-\nu}\bigr)=0
+\qquad\text{in }\Om[M].
+\label{eq:restricted-recurrence}
+\end{equation}
+The signs and indices in this identity will be used without alteration.  In the anchored case the polynomial expansion contains the trivial character and at least two distinct power characters.  In the zero-anchor case, the trivial character disappears and the remaining terms must be classified by their possible partitions.  This is the common point from which the two parts diverge.
+
+The ambient coordinate characters in \eqref{eq:restricted-recurrence} include
+future coordinates.  We shall never assume in advance that they are generated
+by the initial coordinates through the recurrence.  Instead, the anchored
+equations themselves will first yield the copy relations
+$\chi_{n+k}=\chi_n$, after which future middle indices can safely be reduced
+to initial residues.  In the planar zero-anchor case, adjacent local labels
+play the analogous role: the output character of one equation is the middle
+character of the next, and the compatibility of those two descriptions is
+what closes almost every branch.
+
+\section{Sharp anchored torus-coset decay}
+\label{sec:anchored}
+
+Throughout this section, write the polynomial in collected form
+\begin{equation}
+P(X)=c+\sum_{j=1}^s b_jX^{e_j},
+\qquad 0<e_1<\cdots<e_s,
+\label{eq:anchored-P}
+\end{equation}
+where $a,c,b_1,\ldots,b_s$ are nonzero and $s\geq2$.  The word ``actual'' means that equal exponents have already been combined and every resulting zero coefficient has been deleted.
+
+\begin{theorem}[Anchored torus-coset dimension decay]
+\label{thm:anchored}
+For every $0\leq m\leq k$, let $H$ be a connected embedded subtorus of
+$\Gm^{k+m}$.  If $\xi H\subseteq V_m$, then
+\begin{equation}
+\dim H\leq k-m.
+\label{eq:dimension-bound}
+\end{equation}
+If $D$ is a possibly disconnected algebraic subgroup and
+$\xi D\subseteq V_m$, every component of $D$ is a translate of $D^0$, and hence the same bound holds for $\dim D$.
+\end{theorem}
+
+\subsection{Two relations from one equation}
+
+\begin{proof}
+Fix $\xi H\subseteq V_m$, put $M=X^*(H)$, and write every restricted coordinate as in \eqref{eq:coordinate-restriction}.  For $0\leq n<m$, abbreviate
+\[
+t=k+n-\nu.
+\]
+Expanding \eqref{eq:restricted-recurrence} by \eqref{eq:anchored-P} gives
+\begin{equation}
+\xi_{n+k}\chi_{n+k}-a\xi_n\chi_n-c
+-\sum_{j=1}^s b_j\xi_t^{e_j}\chi_t^{e_j}=0.
+\label{eq:anchored-identity}
+\end{equation}
+
+Suppose first that $\chi_t$ is nontrivial.  Lemma~\ref{lem:distinct-powers} says that
+\[
+1,\chi_t^{e_1},\ldots,\chi_t^{e_s}
+\]
+are $s+1\geq3$ distinct characters, all occurring with nonzero coefficients in \eqref{eq:anchored-identity}.  The lag character $\chi_n$ and output character $\chi_{n+k}$ can match at most two of them.  At least one constant-or-power character remains a nonzero singleton, contradicting Lemma~\ref{lem:singleton}.  Hence every equation forces
+\begin{equation}
+\chi_{k+n-\nu}=1.
+\label{eq:middle-trivial}
+\end{equation}
+This conclusion uses both the nonzero constant and the two distinct nonconstant powers; an informal count that ignores collected coefficients would not suffice.
+
+To make the counting step explicit, the endpoint characters are allowed to
+coincide with one another, with the trivial character, or with power
+characters.  None of these coincidences can cover more than two members of
+the set
+$\{1,\chi_t^{e_1},\ldots,\chi_t^{e_s}\}$ because there are only two endpoint
+summands.  If the endpoints coincide with each other, they cover at most one
+member and the contradiction is stronger.  Every coefficient attached to a
+constant-or-power character is nonzero before aggregation: $c\neq0$ and
+$b_j\xi_t^{e_j}\neq0$.  Thus the uncovered member really is a nonzero
+singleton.  This argument is uniform in the numerical values of the
+coefficients and does not invoke a generic choice.
+
+After \eqref{eq:middle-trivial}, all polynomial terms in the restricted equation aggregate to a scalar:
+\begin{equation}
+\xi_{n+k}\chi_{n+k}-a\xi_n\chi_n-P(\xi_t)=0.
+\label{eq:aggregated}
+\end{equation}
+There are exactly two scalar branches.  If $P(\xi_t)\neq0$, the trivial character occurs with nonzero coefficient.  If the endpoint characters were distinct, one would be a singleton; if they were equal and nontrivial, the trivial character would be a singleton.  Therefore
+\begin{equation}
+\chi_n=\chi_{n+k}=1
+\qquad\text{when }P(\xi_t)\neq0.
+\label{eq:nonroot-branch}
+\end{equation}
+If $P(\xi_t)=0$, equation \eqref{eq:aggregated} has two nonzero terms.  They must have the same character and cancel scalarly, giving
+\begin{equation}
+\chi_{n+k}=\chi_n,
+\qquad \xi_{n+k}=a\xi_n.
+\label{eq:root-branch}
+\end{equation}
+The zero branch is not a genericity exception: it retains the endpoint-copy relation needed below.  In both branches we obtain
+\begin{equation}
+\chi_{k+n-\nu}=1,
+\qquad \chi_{k+n}=\chi_n.
+\label{eq:two-character-relations}
+\end{equation}
+
+These two branches exhaust coefficient cancellation after the middle
+character is trivial.  Indeed, all polynomial summands then carry the same
+trivial character, and their total coefficient is exactly
+$-P(\xi_t)$.  There is no finer partition to consider.  When this total is
+nonzero, both endpoint characters are killed; when it is zero, the two
+endpoint terms cancel each other and give the character and scalar copies in
+\eqref{eq:root-branch}.  In the stronger nonroot branch the relation
+$\chi_{n+k}=\chi_n$ still holds because both sides are trivial.
+
+\subsection{Integral independence}
+
+Let $\varepsilon_0,\ldots,\varepsilon_{k+m-1}$ be the standard basis of the ambient character lattice, and let $\varphi$ be the surjection in \eqref{eq:ambient-map}.  For $0\leq n<m$, define
+\begin{equation}
+A_n=\varepsilon_{k+n-\nu},
+\qquad B_n=\varepsilon_{k+n}-\varepsilon_n.
+\label{eq:AnBn}
+\end{equation}
+Relations \eqref{eq:two-character-relations} place all $A_n$ and $B_n$ in $\ker\varphi$.  Table~\ref{tab:pivots} records the supports used in the independence proof; the argument following the table proves each entry.
+
+The use of the full ambient lattice is deliberate.  A middle pivot
+$A_n$ may itself be a future coordinate, and a copy relation $B_n$ always
+links an initial coordinate to a future one.  Counting only relations among
+the initial variables before proving how future characters reduce would
+invite circular reasoning.  In $\Z^{k+m}$, by contrast, every relation has
+the literal support shown in Table~\ref{tab:pivots}, so independence can be
+checked coordinate by coordinate.
+
+\begin{table}[t]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Relation & Support & Distinguished coordinate & Consequence \\
+\midrule
+$A_n$ & $\{k+n-\nu\}$ & distinct pivot in $I$ & kills one middle character \\
+$B_n$ & $\{n,k+n\}$ & an endpoint outside $I$ & copies output to lag \\
+$0<m<k$ & $|I|=m$ & pair separation $k$ & all $2m$ relations independent \\
+$m=0$ & empty families & no pivot needed & rank bound is $\dim H\leq k$ \\
+$m=k$ & $\operatorname{span}(I)=k-1$ & no pair lies in $I$ & rank bound is $\dim H\leq0$ \\
+\bottomrule
+\end{tabularx}
+\caption{The relation/pivot audit.  Here $I=[k-\nu,k+m-1-\nu]$.  The prose proof uses an outside endpoint of each $B_n$ before using the distinct $A_n$ pivots.}
+\label{tab:pivots}
+\end{table}
+
+The $A_n$ have distinct pivot coordinates in the integer interval
+\begin{equation}
+I=[k-\nu,k+m-1-\nu].
+\label{eq:pivot-interval}
+\end{equation}
+When $m>0$, this interval has $m$ entries and span $m-1\leq k-1$;
+when $m=0$, both relation families are empty.  The support pairs
+\begin{equation}
+\{n,k+n\},\qquad 0\leq n<m,
+\label{eq:endpoint-pairs}
+\end{equation}
+of the $B_n$ are pairwise disjoint.  Their low endpoints lie below $m\leq k$, their high endpoints are at least $k$, and distinct values of $n$ give distinct coordinates.  Moreover, no pair can lie wholly in $I$: the two endpoints differ by $k$, while the span of $I$ is at most $k-1$.
+
+Consider an integral dependence
+\begin{equation}
+\sum_{n=0}^{m-1}u_nA_n+\sum_{n=0}^{m-1}v_nB_n=0.
+\label{eq:integral-dependence}
+\end{equation}
+For each $B_n$, choose one endpoint outside $I$.  That coordinate occurs in no $A_j$ and, because the pairs are disjoint, in no other $B_j$.  Its coefficient in \eqref{eq:integral-dependence} is $v_n$ or $-v_n$, so $v_n=0$.  After every $B_n$ is removed, the distinct pivots force every $u_n=0$.  Thus the $2m$ relations are independent over $\Z$, not merely over $\Q$.
+
+The endpoint choice in this argument is simultaneous.  Indeed, write
+$J_n=\{n,k+n\}$.  The sets $J_n$ are mutually disjoint, and each $J_n$
+meets the consecutive interval $I$ in at most one point.  Choose
+$j_n\in J_n\setminus I$.  In the matrix whose rows are
+$A_0,\ldots,A_{m-1},B_0,\ldots,B_{m-1}$, the column $j_n$ has a single
+nonzero entry among all $B$ rows and has zero entries among all $A$ rows.
+Reading the $j_n$ columns of any integral dependence therefore erases the
+$B$ coefficients one at a time, without division and without a choice of
+field.  What remains is a diagonal collection of unit entries in the
+distinct $A$-pivot columns.  This is the promised integral calculation of
+all $2m$ relations; tensoring with $\Q$ is unnecessary.
+
+It is also worth spelling out why these are relations in the correct
+lattice.  The embedding $H\hookrightarrow\Gm^{k+m}$ induces the surjection
+\[
+\varphi:\Z^{k+m}=X^*(\Gm^{k+m})\longrightarrow X^*(H)=M.
+\]
+The image of $\varepsilon_i$ is precisely the restricted coordinate
+character $\chi_i$.  Thus \eqref{eq:two-character-relations} says literally
+that $\varphi(A_n)=\varphi(B_n)=0$.  Since the coordinate characters generate
+$M$, there is no further unrecorded character-lattice quotient between the
+ambient calculation and $\dim H$.  The kernel has rank at least $2m$, so
+rank additivity for free abelian groups gives the displayed bound.
+
+The ambient lattice has rank $k+m$.  Since $\varphi$ is surjective and its kernel contains these $2m$ independent vectors,
+\[
+\rank X^*(H)=\rank\operatorname{im}\varphi
+ \leq k+m-2m=k-m.
+\]
+This proves \eqref{eq:dimension-bound}.  At $m=0$ the relation set is empty and the statement is tautological.  At $m=k$, the pivot interval has span exactly $k-1$, so the same outside-endpoint proof still applies and forces $H$ to be zero-dimensional.
+
+Notice that the proof establishes a lower bound on the integral kernel rank,
+not an equality.  In the nonroot branch an equation kills both endpoints and
+can contribute more relations than $A_n$ and $B_n$.  Additional coincidences
+between different equations may also shrink the torus further.  The theorem
+uses only the universally present $2m$-relation subsystem, which is why its
+upper bound is uniform over all scalar branches.  Equality requires a
+separate construction in Section~\ref{sec:equality}; it is not inferred from
+the rank calculation alone.
+
+\subsection{Future characters and the translated residue set}
+
+The rank proof already accounts for every ambient coordinate, but the relations also expose which initial characters are killed.  From $B_n\in\ker\varphi$ we have
+\begin{equation}
+\chi_{k+n}=\chi_n,
+\qquad 0\leq n<m.
+\label{eq:future-copy}
+\end{equation}
+Thus every future coordinate character is first reduced to an initial coordinate character.  If $n<\nu$, the middle coordinate $k+n-\nu$ is already initial.  If $n\geq\nu$, it is a future coordinate, and \eqref{eq:future-copy} reduces it to the initial coordinate $n-\nu$.  Consequently, \eqref{eq:middle-trivial} kills exactly the initial residues
+\begin{equation}
+R_m=\{n-\nu\bmod k:0\leq n<m\}.
+\label{eq:Rm}
+\end{equation}
+Translation modulo $k$ is injective on the interval $0\leq n<m\leq k$, so $R_m$ has exactly $m$ elements.  It is a translate of consecutive residues, not the iterated orbit $\{-j\nu\bmod k\}$.  Hence no hypothesis, case distinction, or conclusion involving $\gcd(k,\nu)$ occurs.
+
+The distinction can be checked directly at the wrap point.  For
+$0\leq n<\nu$, the killed representative is $k+n-\nu$; these are the last
+$\nu$ initial positions, beginning at $k-\nu$.  For
+$\nu\leq n<m$, the killed representative is $n-\nu$; these are the first
+$m-\nu$ positions when that range is nonempty.  The two pieces are disjoint
+and together form the translation of $0,\ldots,m-1$ by $-\nu$.  Multiplying
+the step number by $\nu$ never occurs, so rotation cycles and their gcd are
+irrelevant.
+
+One may now recover the same dimension bound from initial characters as a
+consistency check.  Equation \eqref{eq:future-copy} shows that the initial
+characters generate $M$, and \eqref{eq:Rm} kills $m$ distinct members of
+that generating list.  At most $k-m$ initial generators remain.  This
+argument depends on the future-copy step already proved, whereas the
+integral pivot proof did not.  Their agreement verifies both the lattice rank
+and the index bookkeeping.
+
+More explicitly, every ambient character is generated by the initial
+ones after imposing the copy relations: for $i<k$ there is nothing to show,
+while for $i=k+n$ with $0\leq n<m$,
+$\chi_i=\chi_n$ by \eqref{eq:future-copy}.  The middle relation for step
+$n$ then kills $\chi_{k+n-\nu}$ directly when $n<\nu$, and kills
+$\chi_{n-\nu}$ after one such future-to-initial reduction when
+$n\geq\nu$.  No recursive chain of length depending on $n$ is being
+suppressed.  The $m$ killed residues are distinct because their step indices
+differ by less than $k$.  Consequently the surviving list has exactly
+$k-m$ positions, although some of its characters may coincide or be
+trivial; those further relations can only decrease the rank.  This is the
+ambient-generation reason that the inequality remains valid in every
+root/nonroot scalar pattern.
+
+Finally, if $\xi D\subseteq V_m$ for a disconnected algebraic subgroup $D$, each component is a translate of $D^0$ contained in $V_m$.  The connected argument applies to every such translate, and \eqref{eq:component-dimension} gives $\dim D=\dim D^0\leq k-m$.  This completes the proof of Theorem~\ref{thm:anchored}.
+\end{proof}
+
+\section{Equality subtori and sharp arithmetic clock}
+\label{sec:equality}
+
+The upper bound is attained at every permitted window.  The construction also separates geometric sharpness from arithmetic sharpness: first we identify a saturated subtorus, and then we choose coefficients and a finite-rank group for which that subtorus contains infinitely many survivor strings.
+
+\begin{proposition}[Saturated equality family]
+\label{prop:equality}
+Assume $a=1$ and $P(1)=0$.  For $0\leq m\leq k$, let $R_m$ be the set in \eqref{eq:Rm}.  Define $H_m\subset\Gm^{k+m}$ by
+\begin{equation}
+x_r=1\quad(r\in R_m),
+\qquad x_{k+n}=x_n\quad(0\leq n<m),
+\label{eq:Hm-definition}
+\end{equation}
+leaving the initial coordinates outside $R_m$ free.  Then
+\[
+H_m\subseteq V_m,\qquad
+H_m\simeq\Gm^{k-m},\qquad
+\dim H_m=k-m.
+\]
+Its relation lattice is saturated, so $H_m$ is connected.
+\end{proposition}
+
+\begin{proof}
+Fix an equation index $0\leq n<m$.  If $n<\nu$, then $k+n-\nu$ is the initial representative of the residue $n-\nu$ and belongs to $R_m$.  Hence $x_{k+n-\nu}=1$.  If $n\geq\nu$, the middle coordinate is future, and \eqref{eq:Hm-definition} gives
+\[
+x_{k+n-\nu}=x_{n-\nu}=1,
+\]
+because $n-\nu\in R_m$.  In either case, the $n$th recurrence on $H_m$ becomes
+\[
+x_{k+n}=x_n=P(1)+x_n.
+\]
+Thus every defining equation of $V_m$ holds.
+
+This verification also covers the extreme windows.  At $m=0$ there are no
+equations and no fixed residues, so $H_0=\Gm^k$.  At $m=k$, every initial
+residue lies in $R_k$, every initial coordinate is fixed to $1$, and all
+future coordinates copy it; the resulting subgroup is the one point of
+dimension zero predicted by Theorem~\ref{thm:anchored}.  For intermediate
+$m$, each newly imposed recurrence adds one new fixed initial residue and
+one copied future coordinate.
+
+Projection to the $k-m$ initial coordinates outside $R_m$ is an explicit inverse to the monomial parametrization of $H_m$.  On character lattices, fixed coordinates map to zero, each copied future coordinate maps to its initial basis character, and the free initial coordinates form a basis of the quotient.  The quotient is therefore the free lattice $\Z^{k-m}$.  Equivalently, the defining relation lattice is a direct summand of the ambient lattice and hence saturated.  The associated subgroup is connected and isomorphic to $\Gm^{k-m}$.
+
+More concretely, order the free initial indices as
+$j_1,\ldots,j_{k-m}$.  Map the ambient basis vector
+$\varepsilon_{j_\ell}$ to the $\ell$th basis vector of $\Z^{k-m}$, map a
+fixed initial coordinate to zero, and map
+$\varepsilon_{k+n}$ to the image of $\varepsilon_n$.  This map is
+surjective and its kernel is exactly the lattice generated by the relations
+in \eqref{eq:Hm-definition}.  The inclusion sending the $\ell$th quotient
+basis vector back to $\varepsilon_{j_\ell}$ splits the quotient.  Hence the
+kernel is a direct summand over $\Z$, which is the promised saturation rather
+than merely a parametrized-image argument.
+\end{proof}
+
+The conditions $a=1$ and $P(1)=0$ give a sufficient equality family.  We do not assert that they are necessary, nor do we classify all equality cosets or all maximal cosets in $V_m$.
+
+\begin{corollary}[Terminal finiteness]
+\label{cor:terminal-finite}
+Let the anchored polynomial satisfy \eqref{eq:anchored-P}, let the map be defined over an arbitrary characteristic-zero field $K$, and let $\Gam\leq K^*$ have finite rank with arbitrary torsion.  Then $T_k(S,\Gam)$ is finite.  Moreover, $T_m(S,\Gam)$ is finite for every $m\geq k$.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:anchored} at $m=k$ excludes every positive-dimensional torus coset from $V_k$.  Lemma~\ref{lem:field-transfer} makes $V_k\cap\Gam^{2k}$ finite, and the projection bijection \eqref{eq:projection} identifies this intersection with $T_k(S,\Gam)$.  For $m\geq k$, survival through time $m$ implies survival through time $k$, so $T_m(S,\Gam)\subseteq T_k(S,\Gam)$.
+\end{proof}
+
+The conclusion is qualitative.  It supplies no effective bound for the number of survivor states and no procedure for listing them.
+
+The order of this deduction is important.  Theorem~\ref{thm:anchored} first
+proves that $V_k$ has no positive-dimensional geometric coset over the
+algebraic closure.  Only then do Lemma~\ref{lem:field-transfer} and Laurent's
+theorem enter.  No arithmetic finiteness statement is used to justify the
+geometric rank bound.
+
+\begin{proposition}[Sharp rank-one clock]
+\label{prop:sharp-clock}
+For every $k\geq2$, every $1\leq\nu\leq k-1$, and every prescribed actual support size $s\geq2$, there are coefficients over $\Q$ and a rank-one group for which $T_{k-1}$ is infinite.
+\end{proposition}
+
+\begin{proof}
+Choose any distinct positive exponents $e_1<\cdots<e_s$ and set
+\begin{equation}
+a=1,\qquad b_1=\cdots=b_s=1,\qquad c=-s,
+\qquad \Gam=\langle2\rangle.
+\label{eq:sharp-coefficients}
+\end{equation}
+Then $P(1)=0$.  At $m=k-1$, the translated set $R_{k-1}$ contains all initial residues except
+\begin{equation}
+q=k-1-\nu.
+\label{eq:free-residue}
+\end{equation}
+Put $x_q=t$, set every other initial coordinate equal to $1$, and impose
+$x_{k+n}=x_n$ for $0\leq n<k-1$.  Proposition~\ref{prop:equality} shows that the resulting scalar string lies in $V_{k-1}$.  With $t=2^N$, every coordinate lies in $\Gam$ and distinct integers $N$ give distinct initial states.  Hence $T_{k-1}(S,\Gam)$ is infinite.
+
+For a coordinate-level check, the active middle coordinate in every one of
+the first $k-1$ equations has residue in $R_{k-1}$ and is therefore $1$.
+The polynomial contribution is $P(1)=0$, while $a=1$, so the recurrence
+reads $x_{k+n}=x_n$ exactly as imposed.  The free coordinate $q$ is never an
+active middle residue during this window, though it may appear as a lag or a
+copied output; those appearances preserve its value $t$.  Hence every entry
+of the scalar string is either $1$ or $t$, and all belong to
+$\langle2\rangle$ when $t=2^N$.
+\end{proof}
+
+Together, Corollary~\ref{cor:terminal-finite} and Proposition~\ref{prop:sharp-clock} give an exact uniform clock: $k$ transitions always suffice under the anchored hypotheses, while $k-1$ transitions need not suffice for compatible coefficients and a compatible rank-one group.  This is not a claim that every coefficient choice or every finite-rank group realizes equality.
+
+\section{Zero-anchor local partition calculus}
+\label{sec:local}
+
+We now delete the constant term and fix the planar type
+\[
+k=2,\qquad \nu=1,\qquad a\in\Om^*.
+\]
+Let
+\begin{equation}
+P(X)=\sum_{e\in E}b_eX^e,
+\label{eq:zero-P}
+\end{equation}
+where $E$ is a nonempty finite set of positive integers, every $b_e$ is nonzero, and equal powers have been collected.  Write $V_m^0\subset\Gm^{m+2}$ for the variety defined by
+\begin{equation}
+x_{n+2}=P(x_{n+1})+a x_n,
+\qquad 0\leq n<m.
+\label{eq:zero-recurrence}
+\end{equation}
+The first three equations, in the orientation used below, are
+\begin{equation}
+\begin{aligned}
+x_2&=P(x_1)+a x_0,\\
+x_3&=P(x_2)+a x_1,\\
+x_4&=P(x_3)+a x_2.
+\end{aligned}
+\label{eq:first-three}
+\end{equation}
+
+Let $\xi H\subset V_m^0$ be a connected torus translate.  We use additive notation $u_i\in M=X^*(H)$ for the coordinate characters, so $x_i=\xi_i[u_i]$ in the group algebra.  Restriction of the $n$th equation gives
+\begin{equation}
+\xi_{n+2}[u_{n+2}]-a\xi_n[u_n]
+-\sum_{e\in E}b_e\xi_{n+1}^e[e u_{n+1}]=0.
+\label{eq:zero-local-identity}
+\end{equation}
+
+\subsection{The trivial-middle split}
+
+\begin{lemma}[Nonroot and root-copy branches]
+\label{lem:A-branch}
+Suppose $u_{n+1}=0$.  If $P(\xi_{n+1})\neq0$, then
+$u_n=u_{n+2}=0$.  If $P(\xi_{n+1})=0$, then
+\begin{equation}
+u_{n+2}=u_n,
+\qquad \xi_{n+2}=a\xi_n.
+\label{eq:root-copy}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+When the middle character is trivial, all polynomial terms in \eqref{eq:zero-local-identity} aggregate to
+\[
+\xi_{n+2}[u_{n+2}]-a\xi_n[u_n]-P(\xi_{n+1})[0]=0.
+\]
+If the last coefficient is nonzero, the singleton rule forces both endpoints to be trivial, by the same three-character analysis as in \eqref{eq:aggregated}.  If it vanishes, the two remaining nonzero terms must have the same character and cancel scalarly, giving \eqref{eq:root-copy}.
+
+To see that no scalar subcase is omitted, call the endpoint characters
+$v=u_n$ and $w=u_{n+2}$.  When $P(\xi_{n+1})\neq0$, the trivial-character
+block is nonzero.  If $v$ and $w$ are distinct, at least one endpoint is a
+singleton; if $v=w\neq0$, the trivial block is a singleton.  The only
+remaining possibility is $v=w=0$, which is exactly the asserted nonroot
+conclusion.  When $P(\xi_{n+1})=0$, both surviving endpoint coefficients
+$\xi_{n+2}$ and $-a\xi_n$ are nonzero.  Linear independence of distinct
+characters first gives $v=w$ and then gives
+$\xi_{n+2}=a\xi_n$.  Thus a root can preserve an endpoint character only by
+copying it; it cannot create a new character or change its integral
+multiple.
+\end{proof}
+
+We call the combined trivial-middle relation
+\begin{equation}
+A:\quad u_{n+1}=0,\qquad u_{n+2}=u_n
+\label{eq:A-label}
+\end{equation}
+the $A$ label.  A nonzero endpoint in an $A$ label necessarily belongs to the root-copy branch.  The nonroot and root-copy scalar cases remain distinct even though the character shorthand is common.
+
+\subsection{Linear support}
+
+Suppose $E=\{1\}$ and $P(X)=\beta X$.  Choose a root $r\in\Om$ of
+\begin{equation}
+r^2=\beta r+a.
+\label{eq:linear-root}
+\end{equation}
+Since $a\neq0$, such a root is nonzero.  For every $m\geq0$, direct substitution gives
+\begin{equation}
+L_{r,m}=\{(t,rt,\ldots,r^{m+1}t):t\in\Gm\}\subseteq V_m^0,
+\label{eq:linear-coset}
+\end{equation}
+because
+$r^{n+2}t=\beta r^{n+1}t+a r^nt$.  Thus linear support can retain a one-dimensional coset in every finite window.
+
+The geometry can be arithmetically compatible.  Take
+\begin{equation}
+\beta=2,\qquad a=-1,\qquad r=1,\qquad
+\Gam=\langle2\rangle.
+\label{eq:linear-compatible}
+\end{equation}
+For $t=2^N$, the constant scalar string $(t,\ldots,t)$ belongs to every window, so $T_m$ is infinite for every $m$ for these data.  The later nonlinear finiteness statements explicitly exclude this linear class.
+
+\subsection{Nonlinear monomial support}
+
+Let $E=\{d\}$ with $d\geq2$, so $P(X)=bX^d$ for $b\neq0$.  If a middle character is trivial, then $P(\xi_{n+1})=b\xi_{n+1}^d\neq0$ and Lemma~\ref{lem:A-branch} kills both endpoint characters.  If $u_{n+1}\neq0$, the three terms in \eqref{eq:zero-local-identity} can avoid a singleton only when all three characters agree:
+\begin{equation}
+u_{n+2}=u_n=d u_{n+1}.
+\label{eq:monomial-local}
+\end{equation}
+For two consecutive equations, a nontrivial first middle character would give
+\[
+u_2=u_0=d u_1,
+\qquad u_3=u_1=d u_2,
+\]
+and hence $(d^2-1)u_1=0$.  Since $M$ is torsion-free and $d\geq2$, we get $u_1=0$, then all four coordinate characters vanish.  Ambient generation therefore shows that $V_2^0$ contains no positive-dimensional torus coset.
+
+This two-step closure does not place nonlinear monomials in a no-finite-window class.  The preceding one-step window can be infinite for compatible data.  With
+\begin{equation}
+P(X)=X^e,\qquad e\geq2,\qquad a=1,\qquad
+\Gam=\langle2\rangle,\qquad t=2^N,
+\label{eq:monomial-data}
+\end{equation}
+the correctly oriented tuple is
+\begin{equation}
+(x_0,x_1,x_2)=(t^e,t,2t^e),
+\label{eq:monomial-tuple}
+\end{equation}
+since $P(x_1)+ax_0=t^e+t^e=2t^e$.  Distinct integers $N$ give distinct
+initial pairs $(t^e,t)$, so this is an infinite subset of $T_1$.
+Interchanging the first two coordinates would not satisfy
+\eqref{eq:zero-recurrence} in general.
+
+\subsection{Supports of size at least three}
+
+Assume $|E|\geq3$.  If $u_{n+1}\neq0$, the characters $e u_{n+1}$ for $e\in E$ are pairwise distinct.  The two endpoints in \eqref{eq:zero-local-identity} can match at most two of them, leaving a nonzero singleton.  Hence every local equation forces $u_{n+1}=0$.
+
+In $V_2^0$, the first and second equations give $u_1=u_2=0$.  If the first equation is in its nonroot branch, it already kills $u_0$ and $u_2$.  If it is a root-copy, then $u_2=u_0$, and the second equation forces $u_2=0$, hence $u_0=0$.  Applying the same split to the second equation also gives $u_3=0$.  All ambient characters vanish, so no positive-dimensional coset lies in $V_2^0$.  This explicitly closes every scalar root-copy branch rather than assuming generic middle scalars.
+
+The order of this closure is important.  The first equation alone permits
+$u_0=u_2\neq0$ when its middle scalar is a root of $P$.  The second equation
+does not merely supply another copy relation: because its middle character
+is $u_2$, the distinct-power singleton argument first forces $u_2=0$.
+Only after that conclusion do we return to the first copy and obtain
+$u_0=0$.  With $u_2=0$, Lemma~\ref{lem:A-branch} applied to the second
+equation gives either the nonroot conclusion $u_1=u_3=0$ or the root copy
+$u_3=u_1=0$.  Hence both choices of middle scalar in both equations are
+accounted for, including the root--root combination.
+
+Every prescribed actual support size $s\geq2$ nevertheless has a compatible infinite one-step family.  Write
+$E=\{e_1<\cdots<e_s\}$ and choose
+\begin{equation}
+b_{e_1}=\cdots=b_{e_{s-1}}=1,\qquad b_{e_s}=-(s-1),
+\qquad a=1.
+\label{eq:multisupport-coefficients}
+\end{equation}
+All coefficients are nonzero in characteristic zero and $P(1)=0$.  With
+$\Gam=\langle2\rangle$ and $t=2^N$, the tuple
+\begin{equation}
+(x_0,x_1,x_2)=(t,1,t)
+\label{eq:multisupport-tuple}
+\end{equation}
+satisfies the first recurrence.  This family is separate from the two-step resonance classified below.
+
+\subsection{Binomial support and the exhaustive local labels}
+
+Let
+\begin{equation}
+E=\{p,q\},\qquad 1\leq p<q,
+\qquad P(X)=b_pX^p+b_qX^q.
+\label{eq:binomial-P}
+\end{equation}
+For one local equation put $u=u_{n+1}$.  If $u=0$, Lemma~\ref{lem:A-branch} gives label $A$ and its exact scalar split.  Suppose $u\neq0$.  The middle characters $pu$ and $qu$ are distinct.  A partition of the four terms in \eqref{eq:zero-local-identity} with no singleton must pair each endpoint with one of the two power characters.  Pairing the two endpoints together would leave both distinct powers as singletons, so it cannot produce another case.  There are exactly two endpoint-to-power orientations, called $B$ and $C$ in Table~\ref{tab:ABC}.
+
+\begin{table}[t]
+\centering
+\small
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\textwidth}{@{}c X X@{}}
+\toprule
+Label & Character relations & Scalar equations \\
+\midrule
+$A$ & $u_{n+1}=0$, $u_{n+2}=u_n$ & If $P(\xi_{n+1})=0$, then $\xi_{n+2}=a\xi_n$; otherwise both endpoints are trivial. \\
+$B$ & $u_n=pu$, $u_{n+2}=qu$ & $a\xi_n=-b_p\xi_{n+1}^{p}$, $\xi_{n+2}=b_q\xi_{n+1}^{q}$ \\
+$C$ & $u_n=qu$, $u_{n+2}=pu$ & $a\xi_n=-b_q\xi_{n+1}^{q}$, $\xi_{n+2}=b_p\xi_{n+1}^{p}$ \\
+\bottomrule
+\end{tabularx}
+\caption{The exhaustive local $A/B/C$ labels.  The two nontrivial rows are the two possible endpoint-to-power pairings, with scalar signs inherited from \eqref{eq:zero-local-identity}.}
+\label{tab:ABC}
+\end{table}
+
+For completeness, the scalar signs in the table follow by collecting coefficients within each equal-character block.  In label $B$, the lag term pairs with the $p$th power, so
+$-a\xi_n-b_p\xi_{n+1}^p=0$, while the output pairs with the $q$th power, so
+$\xi_{n+2}-b_q\xi_{n+1}^q=0$.  Label $C$ reverses the two powers and gives the other two displayed equations.  Thus Table~\ref{tab:ABC} records every local possibility and fixes the orientation used in the adjacent-word calculation.
+
+\section{Exact zero-constant phase and third-step closure}
+\label{sec:phase}
+
+We now compose the local labels.  The calculation both locates the only nonlinear two-step resonance and proves that no nonlinear support retains a positive-dimensional coset through a third transition.
+
+\begin{theorem}[Exact zero-constant planar phase]
+\label{thm:zero-phase}
+Assume the planar zero-constant setup \eqref{eq:zero-P}--\eqref{eq:zero-recurrence}.
+\begin{enumerate}[label=(\alph*)]
+\item If $E=\{1\}$ and $P(X)=\beta X$, then the one-dimensional coset $L_{r,m}$ in \eqref{eq:linear-coset} lies in $V_m^0$ for every $m\geq0$ and every nonzero root $r$ of $r^2=\beta r+a$.
+\item If $E=\{d\}$ with $d\geq2$, if $E=\{p,q\}$ with $2\leq p<q$, or if $|E|\geq3$, then $V_2^0$ contains no positive-dimensional connected torus coset.
+\item Suppose $E=\{1,d\}$, $d\geq2$, and
+$P(X)=\beta X+\delta X^d$.  The variety $V_2^0$ contains a positive-dimensional connected torus coset if and only if
+\begin{equation}
+a=-\beta^2.
+\label{eq:resonance}
+\end{equation}
+On this locus the unique such coset is
+\begin{equation}
+C_d=\left\{\left(
+\frac{\delta}{\beta^2}t^d,\ t,\ \beta t,\
+\delta\beta^dt^d\right):t\in\Gm\right\}.
+\label{eq:Cd}
+\end{equation}
+For every coefficient choice in every nonlinear support, including the locus \eqref{eq:resonance}, $V_3^0$ contains no positive-dimensional torus coset.
+\end{enumerate}
+\end{theorem}
+
+Parts (a) and the monomial and large-support cases of part (b) were proved in Section~\ref{sec:local}.  It remains to compose the exhaustive binomial labels and then close the unique surviving word.
+
+\subsection{All adjacent words}
+
+First consider a word containing $A$.  For $AA$, the first label gives
+$u_1=0$ and $u_2=u_0$, while the second gives $u_2=0$ and $u_3=u_1$; all four characters vanish.  For $AB$ or $AC$, the first label gives $u_1=0$, whereas the second nontrivial label requires its lag $u_1$ to be a positive multiple of its nonzero middle $u_2$, a contradiction.  For $BA$ or $CA$, the first label has nonzero output $u_2$, whereas the second label requires its middle $u_2$ to vanish.  These five words therefore carry no nonzero character solution, including when the first $A$ arose from a scalar root-copy.
+
+This five-word elimination already includes the scalar branches of $A$.
+In $AA$, if the first $A$ is a root-copy, the second label's condition
+$u_2=0$ kills the copied character $u_0$; if it is a nonroot, that character
+was already zero.  The second $A$ similarly makes $u_3=0$ whether its middle
+scalar is a root or not.  In $AB$ and $AC$, the second label is defined only
+with $u_2\neq0$, and its lag relation is respectively
+$u_1=p u_2$ or $u_1=q u_2$; torsion-freeness contradicts $u_1=0$.  In
+$BA$ and $CA$, the first output is respectively $q u_1$ or $p u_1$, hence
+nonzero, while the second $A$ requires that same character $u_2$ to be
+zero.  No choice among the scalar equations in Table~\ref{tab:ABC} can
+overcome a character contradiction.
+
+For two nontrivial labels, assume $u_1\neq0$ and compare the output relation of the first label with the lag relation of the second.  The four possibilities are
+\begin{align}
+BB:&\quad u_1=p u_2=pq\,u_1, 
+\label{eq:BB}\\
+BC:&\quad u_1=q u_2=q^2u_1,
+\label{eq:BC}\\
+CB:&\quad u_1=p u_2=p^2u_1,
+\label{eq:CB}\\
+CC:&\quad u_1=q u_2=pq\,u_1.
+\label{eq:CC}
+\end{align}
+Torsion-freeness of $M$ turns these into integer equalities.  Because $1\leq p<q$, the requirements $pq=1$ and $q^2=1$ are impossible.  The word $CB$ can survive only when $p^2=1$, hence only when $p=1$.  Table~\ref{tab:words} records these nine words and, in the surviving row, the complete third-step closure that will be proved below.
+
+For reference, the four displayed equations come directly from the two
+oriented rows of Table~\ref{tab:ABC}.  At the first position, $B$ means
+\[
+(u_0,u_2)=(p u_1,q u_1),
+\]
+whereas $C$ means $(u_0,u_2)=(q u_1,p u_1)$.  At the second position, $B$
+means $(u_1,u_3)=(p u_2,q u_2)$, whereas $C$ means
+$(u_1,u_3)=(q u_2,p u_2)$.  Substitution gives $pq$, $q^2$, $p^2$, and
+$pq$ in the order $BB,BC,CB,CC$.  Since $u_1\neq0$ in a nontrivial label,
+an equality $N u_1=u_1$ forces $N=1$ in the torsion-free lattice $M$.
+Thus scalar cancellation is consulted only for $CB$ with $p=1$; the other
+eight words have already failed the complete character partition.
+
+\begin{table}[t]
+\centering
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}l X X@{}}
+\toprule
+Word & Character condition & Outcome and possible continuation \\
+\midrule
+$AA$ & $u_1=u_2=0$, $u_2=u_0$, $u_3=u_1$ & all four characters vanish \\
+$AB$ & $u_1=0$ but $u_1$ is a positive multiple of $u_2\neq0$ & contradiction \\
+$AC$ & $u_1=0$ but $u_1$ is a positive multiple of $u_2\neq0$ & contradiction \\
+$BA$ & first output has $u_2\neq0$, second middle has $u_2=0$ & contradiction \\
+$CA$ & first output has $u_2\neq0$, second middle has $u_2=0$ & contradiction \\
+$BB$ & $u_1=pq\,u_1$ & requires $pq=1$, impossible \\
+$BC$ & $u_1=q^2u_1$ & requires $q^2=1$, impossible \\
+$CB$ & $u_1=p^2u_1$ & only $p=1$; then third $A$ is impossible, third $B$ gives $(d-1)u=0$, and third $C$ gives $(d^2-1)u=0$ \\
+$CC$ & $u_1=pq\,u_1$ & requires $pq=1$, impossible \\
+\bottomrule
+\end{tabularx}
+\caption{The adjacent-word and third-step closure matrix.  All nine two-label words occur; only $CB$ with $p=1$ reaches the third-equation test.}
+\label{tab:words}
+\end{table}
+
+The word calculation proves part (b) for every binomial whose lower exponent is at least two.  It also proves that a positive-dimensional binomial coset in $V_2^0$ must have support $\{1,d\}$ and local word $CB$.
+
+\subsection{Scalar compatibility and the resonant coset}
+
+Put $p=1$, $q=d\geq2$, and write
+\begin{equation}
+P(X)=\beta X+\delta X^d.
+\label{eq:resonant-P}
+\end{equation}
+For the surviving word, let $u=u_1\neq0$.  The first $C$ relation and the second $B$ relation force the character vector
+\begin{equation}
+(u_0,u_1,u_2,u_3)=(du,u,u,du).
+\label{eq:CB-vector}
+\end{equation}
+The scalar equations from the first, $C$-labelled recurrence are
+\begin{equation}
+a\xi_0=-\delta\xi_1^d,
+\qquad \xi_2=\beta\xi_1.
+\label{eq:first-C-scalars}
+\end{equation}
+Those from the second, $B$-labelled recurrence are
+\begin{equation}
+a\xi_1=-\beta\xi_2,
+\qquad \xi_3=\delta\xi_2^d.
+\label{eq:second-B-scalars}
+\end{equation}
+These four equations can also be recovered directly from the group-algebra
+blocks, which checks both signs and orientation.  In the first recurrence,
+the $C$ character relation pairs the lag character $u_0=d u_1$ with the
+degree-$d$ middle character.  Their two coefficients are
+$-a\xi_0$ and $-\delta\xi_1^d$, so their sum is zero precisely when the
+first equation of \eqref{eq:first-C-scalars} holds.  The same $C$ relation
+pairs the output character $u_2=u_1$ with the linear middle character;
+their coefficients $\xi_2$ and $-\beta\xi_1$ give the second equation.
+For the next recurrence, label $B$ pairs the lag $u_1=u_2$ with the linear
+middle character.  The coefficient block
+$-a\xi_1-\beta\xi_2$ gives the first equation of
+\eqref{eq:second-B-scalars}.  Its output character $u_3=d u_2$ pairs with
+the nonlinear middle character, giving
+$\xi_3-\delta\xi_2^d=0$.  Every coefficient divided out below is nonzero:
+$a,\beta,\delta$ are actual coefficients and each $\xi_i$ is a torus
+coordinate.
+
+This block computation also explains why the character screen precedes the
+scalar screen.  For eight of the nine words a nonzero character would be a
+singleton or would satisfy an impossible integral multiple relation, so no
+scalar equality can make that word valid.  For the sole surviving word,
+the four blocks above are all the blocks in the two restricted equations.
+Their compatibility is therefore necessary, while direct substitution in
+the recurrence proves sufficiency.
+Substitution of $\xi_2=\beta\xi_1$ into the first equation of \eqref{eq:second-B-scalars}, with $\xi_1\neq0$, yields exactly
+$a=-\beta^2$.  On this locus, the remaining scalars are forced:
+\begin{equation}
+\xi_0=\frac{\delta}{\beta^2}\xi_1^d,
+\qquad \xi_2=\beta\xi_1,
+\qquad \xi_3=\delta\beta^d\xi_1^d.
+\label{eq:forced-scalars}
+\end{equation}
+Thus every positive-dimensional connected coset in $V_2^0$ is contained in $C_d$.
+
+Conversely, $C_d$ satisfies both recurrence equations directly.  For its first equation,
+\[
+\beta t+\delta t^d-\beta^2
+  \left(\frac{\delta}{\beta^2}t^d\right)=\beta t.
+\]
+For its second equation,
+\[
+\beta(\beta t)+\delta(\beta t)^d-\beta^2t
+=\delta\beta^dt^d.
+\]
+Hence $C_d\subseteq V_2^0$ when \eqref{eq:resonance} holds.
+
+It remains to justify uniqueness as a geometric subset, rather than only uniqueness of the displayed equations.  Vector \eqref{eq:CB-vector} shows that every ambient coordinate character lies in the cyclic subgroup generated by $u=u_1$.  Conversely, $u$ is itself an ambient coordinate character.  Since ambient characters generate $X^*(H)$, a positive-dimensional $H$ has a cyclic character lattice and therefore dimension one.  A nonzero character on a one-dimensional torus is surjective over the algebraically closed field $\Om$.  The coordinate $x_1=\xi_1u$ consequently ranges through all of $\Gm$, and formulas \eqref{eq:forced-scalars} make the coset equal to all of $C_d$.  Off \eqref{eq:resonance}, the sole possible nonzero word fails its scalar compatibility.  This proves the two-step claims and uniqueness in part (c).
+
+\subsection{The third equation closes every nonlinear support}
+
+On the resonant word $CB$, the first four characters are
+$(du,u,u,du)$ with $u\neq0$.  A third local label uses middle character $u_3=du$ and lag character $u_2=u$.  Label $A$ is impossible because it requires its middle character to vanish.  Label $B$ requires the lag to equal the first power of the middle, so $u=du$ and $(d-1)u=0$.  Label $C$ requires the lag to equal $d$ times the middle, so $u=d^2u$ and $(d^2-1)u=0$.  Torsion-freeness and $d\geq2$ rule out all three possibilities, exactly as recorded in Table~\ref{tab:words}.
+
+This third equation also accounts for the fifth ambient character $u_4$.
+If it had a valid local partition, Table~\ref{tab:ABC} would assign that
+partition one of $A,B,C$.  The contradiction for $A$ uses the known middle
+$u_3=du\neq0$; the contradictions for $B$ and $C$ use the known lag
+$u_2=u$ before any value of the output $u_4$ is chosen.  Thus no fifth
+character can complete the resonant four-character vector to a character
+solution of the third restricted equation.  This is stronger than checking
+that the displayed scalar parametrization fails one selected continuation:
+the local partition list is exhaustive.
+
+For every other nonlinear support, the first two equations already force $u_0,u_1,u_2,u_3$ to vanish.  In the third recurrence the lag and middle characters are then trivial.  If the output character $u_4$ were nontrivial, its output term would be a nonzero singleton in the group algebra.  Hence $u_4=0$ as well.  Ambient generation excludes a positive-dimensional coset in $V_3^0$.  The same observation handles the all-trivial first-four-character branch on the resonant support.  This completes the proof of Theorem~\ref{thm:zero-phase}.
+
+Indeed, after $u_2=u_3=0$, every polynomial term in the third equation has
+trivial character, as does the lag term.  Their scalar coefficients may
+aggregate to zero or not, but the output coefficient $\xi_4$ is nonzero
+because the coset lies in the ambient torus.  Therefore a nontrivial $u_4$
+would occur in a block by itself.  The singleton lemma forces $u_4=0$
+without a genericity assumption on $\xi_3$.  Since
+$u_0,\ldots,u_4$ are the images of all standard ambient characters for
+$V_3^0\subset\Gm^5$, their simultaneous vanishing makes $X^*(H)$ trivial.
+
+\subsection{Arithmetic phase and sharp examples}
+
+\begin{corollary}[Qualitative nonlinear windows]
+\label{cor:zero-arithmetic}
+Let the planar zero-constant map be defined over a characteristic-zero field $K$, and let $\Gam\leq K^*$ have finite rank with arbitrary torsion.
+\begin{enumerate}[label=(\roman*)]
+\item For every nonlinear support other than a resonant $\{1,d\}$ support, $T_2(S,\Gam)$ is finite.
+\item On the resonant $\{1,d\}$ locus, $T_3(S,\Gam)$ is finite.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:field-transfer} to the no-positive-dimensional-coset conclusions for $V_2^0$ and $V_3^0$ in Theorem~\ref{thm:zero-phase}, and then use the projection bijection \eqref{eq:projection} with $k=2$.
+\end{proof}
+
+Linear support is excluded from Corollary~\ref{cor:zero-arithmetic}; the compatible family \eqref{eq:linear-compatible} can make every $T_m$ infinite.  On the nonlinear resonance, existence of $C_d$ is geometric and does not imply that $T_2(S,\Gam)$ is infinite for every fixed $\Gam$.  Arithmetic compatibility must be checked separately.  For example, take
+\begin{equation}
+\beta=\delta=1,\qquad a=-1,\qquad \Gam=\langle2\rangle.
+\label{eq:resonant-data}
+\end{equation}
+For $t=2^N$, the strings
+\begin{equation}
+(x_0,x_1,x_2,x_3)=(t^d,t,t,t^d)
+\label{eq:resonant-tuple}
+\end{equation}
+lie in $C_d\cap\Gam^4$ and give infinitely many points of $T_2$.  This example proves sharpness for the specified group, not a universal intersection claim.
+
+\section{Assumption boundaries, contextual separation, and conclusion}
+\label{sec:boundaries}
+
+The two theorems form an exact phase only within their stated assumptions.  We collect those boundaries here so that arithmetic corollaries and neighboring dynamical questions are not conflated with the proved geometry.
+
+\subsection{Assumption audit}
+
+Characteristic zero enters the arithmetic conclusion through the finitely generated field embedding used in Lemma~\ref{lem:field-transfer}.  We make no theorem in positive characteristic.  The condition $a\neq0$ makes \eqref{eq:map} an automorphism and preserves two nonzero endpoint terms; the case $a=0$ is outside both classifications.  The support is a finite collected set of positive polynomial exponents.  Negative Laurent exponents, rational maps with poles, and arbitrary polynomial automorphisms require different geometric arguments and are not covered.
+
+Actual collected support refers to the displayed coordinate expression after equal powers are combined.  We do not assert that this support is invariant under affine conjugacy.  The anchored bound is stated only for $0\leq m\leq k$.  Finiteness at later windows follows from the inclusion $T_m\subseteq T_k$, not from extending the expression $k-m$ to a negative dimension.  The equality subtori prove attainment but do not classify all equality cosets, all maximal cosets, or all coefficient loci on which equality can occur.
+
+The arithmetic conclusions remain qualitative.  Laurent's theorem supplies no effective cardinality, exceptional-locus algorithm, height estimate, or enumeration for these survivor sets.  We also derive no periodic-point classification.  The bounded comparison with existing work is not a global or exhaustive claim, does not establish a first-result assertion, and says nothing about unpublished work.
+
+\subsection{Nearby questions and the predecessor boundary}
+
+The present finite-window problem varies the initial state and requires all coordinates in a whole recurrence segment to lie in a multiplicative group.  This differs from asking when one fixed orbit meets a subgroup, as in the semiabelian setting studied by Bell and Ghioca \cite{BellGhioca2024}.  It also differs from cyclotomic rigidity questions for affine dynamics \cite{JiXieZhang2026} and from multiplicative dependence or integrality along semigroup orbits \cite{MelloYasufuku2026}.  Linear multiple-reachability problems can also use torus-subvariety methods \cite{KarimovKelmendiOuaknineWorrell2024}, but their systems, targets, and algorithmic questions are distinct from the nonlinear recurrence geometry here.  These sources provide context only; none is a proof dependency for the dimension law, equality family, local partition calculus, resonance, or third-step closure.
+
+An earlier companion treatment established stronger explicit bounds for the planar nonzero-constant problem and subsumed its own support-one precursor. The present article neither reproduces nor improves those planar estimates; its contribution is the all-dimensional torus-coset decay profile and the exact zero-constant boundary.
+
+The comparison removes the planar anchored specialization from the claimed contribution.  In particular, the present results do not improve any explicit cardinality estimate for that specialization, and the earlier treatment is neither imported as a black box nor included in the bibliography.
+
+\subsection{Conclusion}
+
+A nonzero constant term fixes a trivial character in every restricted recurrence.  With two actual nonconstant powers, that character forces the middle coordinate to be trivial and leaves an endpoint-copy relation.  Across $m$ equations, the middle pivots and disjoint endpoint pairs form $2m$ independent integral relations, producing the sharp deficit $\dim H\leq k-m$.  Saturated equality subtori show that every step of this deficit is real, and the qualitative torus-intersection theorem converts the terminal geometric statement into finite-rank arithmetic finiteness.
+
+Deleting the constant removes exactly the term responsible for the singleton deficit.  In the plane, the remaining four-term identity has two nontrivial endpoint-to-power orientations.  Their complete transition calculus leaves only the $C$-then-$B$ word on support $\{1,d\}$, and its scalar equations force $a=-\beta^2$ and the coset $C_d$.  A third equation admits no continuation.  The anchored law and the zero-anchor phase are therefore two sides of one character-deficit mechanism, with the proved conclusions ending at qualitative finiteness and the exact stated assumptions.
+
+\clearpage
+\begingroup
+\small
+\bibliographystyle{plain}
+\bibliography{references}
+\endgroup
+
+\end{document}

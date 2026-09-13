@@ -1,0 +1,256 @@
+\section{Exact dimensions of the filtered obstruction space}
+\label{sec:hilbert-series}
+
+The obstruction quotient
+\[
+  \cH=A/(\sigma-1)A,\qquad
+  \cH_D=\im(V_D\longrightarrow\cH),\qquad \cH_{-1}=0
+\]
+is a filtered vector space.  We do not assert that $(\sigma-1)A$
+is an ideal, and no quotient-ring structure is used below.  Its
+associated-graded Hilbert series is
+\begin{equation}
+  \Hilb_{\gr\cH}(t)
+    =\sum_{D\ge0}\dim_K(\cH_D/\cH_{D-1})t^D.
+  \label{eq:filtered-hilbert-definition}
+\end{equation}
+We will count the domain on which both a polynomial and its pullback
+stay below the degree bound.  Theorem~\ref{thm:bounded-primitive}
+then identifies its image with all coboundaries of bounded degree.
+
+\subsection{Strictness and the phase re-encoding}
+
+Set
+\[
+  W_D=V_D\cap\sigma^{-1}V_D
+     =\{f\in V_D:\sigma f\in V_D\},\qquad E_D=\dim_K W_D.
+\]
+The degree formula and basis permutation imply
+\begin{equation}
+  E_D=\#\{M_e\in\cB:
+       \max(\mu(M_e),\mu(\sigma M_e))\le D\}.
+  \label{eq:two-degree-count}
+\end{equation}
+Indeed, neither the expansion of $f$ nor the shifted expansion of
+$\sigma f$ allows cancellation between distinct highest monomials.
+Membership in the two degree subspaces can thus be checked word by word.
+Moreover,
+\begin{equation}
+  (\sigma-1)W_D=V_D\cap(\sigma-1)A.
+  \label{eq:strict-filtered-image}
+\end{equation}
+One inclusion follows from the definition of $W_D$.  For the reverse
+inclusion, a coboundary $g\in V_D$ has a primitive $f\in V_D$ by
+Theorem~\ref{thm:bounded-primitive}, and $\sigma f=f+g\in V_D$,
+so this primitive belongs to $W_D$.  The kernel on $W_D$ is $K$.
+Rank--nullity therefore gives the cumulative dimension identity
+\begin{equation}
+  \dim_K\cH_D=\binom{D+2}{2}-E_D+1.
+  \label{eq:filtered-dimension}
+\end{equation}
+The final $1$ accounts for the constant kernel, including at $D=0$.
+
+To evaluate \eqref{eq:two-degree-count}, write
+\[
+  \alpha=A(e),\qquad B(e)=\delta Q+R,
+  \qquad Q\ge0,\quad0\le R<\delta.
+\]
+The low $k$ negative digits determine $R$.  Write them as
+$\varepsilon_j=e_{-j}$, $1\le j\le k$, so
+$0\le\varepsilon_j<d_{k-j}$.  Define
+\begin{equation}
+  R=\sum_{j=1}^k\varepsilon_j
+          \prod_{h=1}^{j-1}d_{k-h},\qquad
+  \rho(R)=\sum_{j=1}^k\varepsilon_j
+          \prod_{h=0}^{k-j-1}d_h,
+  \label{eq:rho-reencoding}
+\end{equation}
+with each empty product equal to one.  The first expression is the
+negative-ray mixed-radix expansion in bases
+$d_{k-1},\ldots,d_0$.  Under shift-$k$ its digit at index $-j$
+moves to index $k-j$, whose positive weight is
+$\prod_{h=0}^{k-j-1}d_h$.  The second expression is exactly the
+ordinary positive-ray encoding of the shifted block.
+
+Both encodings biject the same admissible digit set with
+$\{0,\ldots,\delta-1\}$, so $\rho$ is a permutation of that set.
+It converts the negative block to the positive block, in that direction;
+when the phase bases are unequal it need not be an involution.
+The remaining positive digits acquire a factor $\delta$ in their
+weights under the shift.  The negative digits below this block lose
+a factor $\delta$ and contribute $Q$.  Consequently the unique word
+corresponding to $(\alpha,Q,R)$ satisfies
+\begin{equation}
+  \mu(M_e)=\alpha+\delta Q+R,\qquad
+  \mu(\sigma M_e)=\delta\alpha+Q+\rho(R).
+  \label{eq:two-macro-degrees}
+\end{equation}
+Conversely, every $\alpha,Q\ge0$ and $0\le R<\delta$ corresponds
+to a unique word, by Lemma~\ref{lem:degree-basis} and Euclidean
+division of $B(e)$ by $\delta$.
+
+\subsection{The exact series}
+
+Put
+\begin{equation}
+  C_\rho(t)=\sum_{R=0}^{\delta-1}t^{\max(R,\rho(R))}.
+  \label{eq:phase-count-polynomial}
+\end{equation}
+This finite polynomial contains the phase dependence in the answer.
+
+\begin{theorem}[Filtered Hilbert series]
+\label{thm:hilbert}
+For the composition \eqref{eq:henon-composition} in its given
+coordinates, the ordinary-degree filtered obstruction space has series
+\begin{equation}
+  \boxed{
+  \Hilb_{\gr\cH}(t)
+    =1+\frac{1}{(1-t)^2}
+      -\frac{C_\rho(t)+2t^\delta/(1-t)}{1-t^{\delta+1}}.}
+  \label{eq:general-hilbert-series}
+\end{equation}
+It depends only on the ordered phase degrees and the specified initial
+coordinates, and is independent of the nonzero leading coefficients
+and all lower coefficients of the phase polynomials.
+\end{theorem}
+
+\begin{proof}
+Define the exact-weight generating function
+\[
+  E(t)=\sum_{M_e\in\cB}
+      t^{\max(\mu(M_e),\mu(\sigma M_e))}.
+\]
+Each coefficient is finite, since the words counted at exponent $D$
+belong to the finite basis of $V_D$.  Fix $R$ in
+\eqref{eq:two-macro-degrees} and partition the pairs $(\alpha,Q)$
+into three disjoint regions.
+
+If $\alpha=Q$, the maximum of the two degrees is
+\[
+  (\delta+1)Q+\max(R,\rho(R)).
+\]
+Summing over $Q\ge0$ gives
+$t^{\max(R,\rho(R))}/(1-t^{\delta+1})$.
+If $\alpha=Q+s$ with $s\ge1$, subtraction of the two degrees gives
+\[
+  \mu(\sigma M_e)-\mu(M_e)
+     =(\delta-1)s+\rho(R)-R\ge0.
+\]
+The inequality follows from $0\le R,\rho(R)\le\delta-1$;
+it allows equality on the boundary.  The maximum is thus
+$(\delta+1)Q+\delta s+\rho(R)$, and the contribution from this
+region is
+\[
+  \frac{1}{1-t^{\delta+1}}\,
+  \frac{t^\delta}{1-t^\delta}\,t^{\rho(R)}.
+\]
+In the third region $Q=\alpha+s$, $s\ge1$, the degree difference
+in the opposite direction is
+\[
+  \mu(M_e)-\mu(\sigma M_e)
+     =(\delta-1)s+R-\rho(R)\ge0.
+\]
+The maximum is $(\delta+1)\alpha+\delta s+R$ and its summed
+contribution is
+$t^\delta t^R/((1-t^{\delta+1})(1-t^\delta))$.
+Even when two degrees are equal, these three regions count each
+pair only once, since the partition is by $\alpha$ and $Q$.
+
+For this fixed $R$ their sum is
+\[
+  \frac{1}{1-t^{\delta+1}}
+  \left[
+    t^{\max(R,\rho(R))}
+    +\frac{t^\delta}{1-t^\delta}
+         \bigl(t^R+t^{\rho(R)}\bigr)
+  \right].
+\]
+Since $\rho$ is a permutation,
+$\sum_Rt^{\rho(R)}=\sum_Rt^R=(1-t^\delta)/(1-t)$.
+Summing the last display over all $R$ yields
+\begin{equation}
+  E(t)=\frac{C_\rho(t)+2t^\delta/(1-t)}{1-t^{\delta+1}}.
+  \label{eq:exact-two-degree-series}
+\end{equation}
+
+The distinction between exact and cumulative counts now matters.
+Equation~\eqref{eq:two-degree-count} implies
+$\sum_{D\ge0}E_Dt^D=E(t)/(1-t)$.
+Using \eqref{eq:filtered-dimension} and
+$\sum_{D\ge0}\binom{D+2}{2}t^D=(1-t)^{-3}$, we obtain
+\[
+  \sum_{D\ge0}\dim_K\cH_D\,t^D
+    =\frac{1}{(1-t)^3}-\frac{E(t)}{1-t}+
+      \frac{1}{1-t}.
+\]
+Multiplication by $1-t$ takes the successive differences of the
+cumulative dimensions, with $\cH_{-1}=0$.  Substituting
+\eqref{eq:exact-two-degree-series} gives
+\eqref{eq:general-hilbert-series}.  In particular its constant
+coefficient is $1$, as required by the nonzero class of $1$.
+Every quantity in this computation is determined by the phase degrees;
+the filtration lemma already verified that arbitrary allowed
+coefficients of the $p_i$ do not change those counts.
+\end{proof}
+
+\begin{corollary}[Scalar specialization]
+\label{cor:scalar-hilbert}
+If $k=1$ and $d=\deg p$, then
+\begin{equation}
+  \Hilb_{\gr\cH}(t)
+    =1+\frac{t-t^d}{(1-t)^2(1-t^{d+1})}
+    =1+\frac{t\sum_{j=0}^{d-2}t^j}
+                  {(1-t)(1-t^{d+1})},
+  \label{eq:scalar-hilbert-series}
+\end{equation}
+and the cumulative dimensions satisfy
+\begin{equation}
+  \dim_K\cH_D=\frac{d-1}{2(d+1)}D^2+O_d(D).
+  \label{eq:scalar-cumulative-growth}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+There is only one low negative digit, so $\rho$ is the identity and
+$C_\rho(t)=1+t+\cdots+t^{d-1}$.  Substitution into
+\eqref{eq:general-hilbert-series} and cancellation give
+\eqref{eq:scalar-hilbert-series}.  Dividing that series by $1-t$
+gives the cumulative generating function.  At $t=1$ its leading
+term is
+\[
+  \frac{d-1}{d+1}\,(1-t)^{-3}.
+\]
+After subtracting this term, the pole at $1$ has order at most two.
+The other poles, at nontrivial $(d+1)$st roots of unity, are at most
+simple.  A partial-fraction expansion therefore gives an $O_d(D)$
+remainder in the coefficient of $t^D$: an order-two pole at $1$
+has coefficients of order $D$, and a simple root-of-unity pole has
+bounded coefficients.  The leading term contributes
+$\frac{d-1}{d+1}\binom{D+2}{2}$, which proves
+\eqref{eq:scalar-cumulative-growth}.
+\end{proof}
+
+\begin{example}[Equal macro degree, different filtered series]
+\label{ex:same-degree}
+For the phase word $(d_0,d_1)=(2,2)$, the degree product is
+$\delta=4$ and the permutation sends $0,1,2,3$ to $0,2,1,3$.
+Thus $C_\rho(t)=1+2t^2+t^3$.
+For a single degree-four phase, $\rho$ is the identity and
+$C_\rho(t)=1+t+t^2+t^3$.  Their Hilbert series differ by
+\begin{equation}
+  \Hilb_{(2,2)}(t)-\Hilb_{(4)}(t)
+      =\frac{t-t^2}{1-t^5}.
+  \label{eq:equal-degree-comparison}
+\end{equation}
+For instance, the degree-one associated-graded dimensions are $2$
+and $1$, respectively.  These maps have the same ordinary macro
+degree four, but their chosen-coordinate filtered obstruction spaces
+are distinct.
+\end{example}
+
+The filtration in this section is the ordinary total-degree filtration
+in the original pair $x,y$.  An arbitrary polynomial change of
+coordinates need not preserve it.  The formulas therefore describe
+coordinate-filtered vector-space information; they neither assert a
+general polynomial-conjugacy invariant nor claim to recover the full
+ordered phase word from the series.

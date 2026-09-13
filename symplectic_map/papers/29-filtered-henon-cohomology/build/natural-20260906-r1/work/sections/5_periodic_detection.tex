@@ -1,0 +1,166 @@
+\section{Detection on one complete periodic scheme}
+\label{sec:periodic-detection}
+
+The orbit obstructions of Theorem~\ref{thm:orbit-obstructions} are indexed by
+words on the integer line.  The periodic algebra replaces that line by a
+circle.  A sufficiently long circle retains both the word and its macro
+phase, so the finite orbit sum recovers every obstruction separately.
+
+For a nonconstant standard word $M_e=\prod_i X_i^{e_i}$, put
+\[
+ E(M_e)=\{i\in\Z:e_i>0\},\qquad
+ \diam(M_e)=\max E(M_e)-\min E(M_e).
+\]
+In particular, a word supported at one index has diameter zero, regardless
+of that index.  For the unique standard-word expansion
+$g=c_0+\sum_{M_e\ne1}c_eM_e$, define
+\[
+ L(g)=\max\bigl(\{\diam(M_e):c_e\ne0,\ M_e\ne1\}\cup\{0\}\bigr).
+\]
+This is a maximum of individual word diameters, not the diameter of the
+union of their supports.  Widely separated translates of one word therefore
+do not enlarge $L(g)$.
+
+Fix a macro period $n\ge1$ and write $N=kn\ge3$.  We use the algebra
+$A_N$, its standard basis $\cB_N$, the wrapping homomorphism
+$W_N:A\to A_N$, and the cyclic shift $\sigma_N$ of
+Proposition~\ref{prop:periodic-algebra}.  Thus
+$W_N\sigma=\sigma_NW_N$ and $\sigma_N^n=1$.  The relation
+$k\mid N$ makes the exponents allowed at an index unchanged by wrapping.
+It will also preserve the phase of a word when the circle is cut open.
+
+\begin{lemma}[No aliasing of short words]\label{lem:no-alias}
+Let $L\ge0$ be an integer and suppose that $N=kn\ge3$ and $N>2L$.
+For every nonconstant standard word $M$ with $\diam(M)\le L$,
+$W_NM$ is a nonconstant element of $\cB_N$, and its
+$\sigma_N$-orbit has exactly $n$ elements.  If two such words $M,M'$
+have wrapped images in the same $\sigma_N$-orbit, then $M$ and $M'$
+belong to the same $\sigma$-orbit on the integer line.
+\end{lemma}
+
+\begin{proof}
+Write the occupied indices of $M$ as
+$a_1<\cdots<a_s$ and set $\ell=a_s-a_1\le L$.
+Since $\ell<N$, these indices remain distinct modulo $N$.
+Wrapping therefore neither adds exponents at a common index nor requires
+a reduction: the resulting monomial is already in $\cB_N$.
+
+Suppose first that $s\ge2$.  In their cyclic order, the distances between
+successive occupied indices are
+\[
+ a_2-a_1,\ldots,a_s-a_{s-1},\quad N+a_1-a_s.
+\]
+Every internal distance is at most $L$, whereas the last distance is
+$N-\ell>L$.  Hence the wrapped word has a unique gap longer than $L$.
+These are distances between occupied indices, not counts of unoccupied
+positions.  If $s=1$, there is just one cyclic gap, of length $N$, with
+the occupied index as both endpoints; it has the same uniqueness property.
+
+Cut the cyclic support across its unique long gap and list the occupied
+indices in the complementary order, retaining their exponents.  This
+recovers the integer word up to simultaneous translation by a multiple
+of $N$.  In particular, if $W_NM'=\sigma_N^jW_NM$, the translated word
+on the right has the same distinguished gap as the word on the left.
+Their lifts must satisfy
+\[
+ M'=\text{the translate of }M\text{ by }jk+qN
+     =\sigma^{j+qn}M
+ \qquad\text{for some }q\in\Z.
+\]
+The second equality uses $N=kn$; without it, recovery of an integer word
+would not by itself recover its macro phase.
+
+Finally, suppose $\sigma_N^jW_NM=W_NM$ for $0<j<n$.
+The cyclic translation by $jk$ must preserve the unique long gap and,
+in particular, its endpoint immediately before the occupied arc.
+Thus $jk\equiv0\pmod N$.  As $N=kn$, this implies $n\mid j$, a
+contradiction.  The stabilizer is trivial, so the orbit has length $n$.
+\end{proof}
+
+The sum to be tested is
+\[
+ S_ng=\sum_{j=0}^{n-1}\sigma^jg.
+\]
+Its image under $W_N$ is an element of the complete fixed-point scheme
+ring.  We do not take a scalar trace of multiplication by this element.
+
+\begin{theorem}[One-period scheme test]\label{thm:periodic-test}
+Let $g\in A=K[x,y]$, and suppose that $N=kn\ge3$ and $N>2L(g)$.
+Then the following conditions are equivalent:
+\begin{enumerate}
+ \item The normal-form constant coefficient of $g$ is zero, and the
+       sum of its coefficients on each nonconstant $\sigma$-orbit
+       of standard words is zero.
+ \item There is an $f\in K[x,y]$ such that $g=\sigma f-f$.
+ \item There is an $f\in K(x,y)$ such that $g=\sigma f-f$.
+ \item $W_N(S_ng)=0$ in $A_N=K[\Fix(F^n)]$.
+\end{enumerate}
+If $\deg g\le D$ and these conditions hold, the polynomial primitive
+can be chosen with $\deg f\le D$ and is unique modulo $K$.
+\end{theorem}
+
+\begin{proof}
+The first two conditions are equivalent by
+Theorem~\ref{thm:orbit-obstructions};
+Corollary~\ref{cor:rational-reduction} gives the equivalence with the
+third.  The degree bound and uniqueness are
+Theorem~\ref{thm:bounded-primitive}.  It remains to compare the orbit
+coefficients with the periodic sum.
+
+Let $O$ range over the finitely many nonconstant $\sigma$-orbits that
+occur in $g$.  Choose a representative $M_O$ that occurs in $g$, and write
+\[
+ g=c_0+\sum_O\sum_{r\in\Z}c_{O,r}\sigma^rM_O,
+ \qquad c_O=\sum_{r\in\Z}c_{O,r},
+\]
+where all sums of coefficients are finite.  Each $M_O$ has diameter at
+most $L(g)$.  On the finite algebra, a full cyclic sum is unchanged if
+its starting point is shifted.  Consequently
+\[
+ W_N(S_ng)
+ =nc_0+\sum_Oc_O\mathcal N_O,
+ \qquad
+ \mathcal N_O=\sum_{j=0}^{n-1}\sigma_N^jW_NM_O.
+\]
+Lemma~\ref{lem:no-alias} shows that each $\mathcal N_O$ is a sum of
+$n$ distinct nonconstant elements of $\cB_N$.  For distinct infinite
+orbits $O$, these finite supports are disjoint.  They are also disjoint
+from the constant basis word.  Linear independence of $\cB_N$ now
+implies that $W_N(S_ng)=0$ if and only if every $c_O$ vanishes and
+$nc_0=0$.  Since $K$ has characteristic zero, the last equality is
+equivalent to $c_0=0$.  This proves that the fourth condition implies
+the first.
+
+For the converse, a polynomial coboundary telescopes:
+\[
+ S_n(\sigma f-f)=\sigma^nf-f.
+\]
+Its wrapped image is zero because $\sigma_N^n=1$.
+This implication does not require the diameter bound.
+\end{proof}
+
+\begin{remark}[Scheme equality and geometric values]\label{rem:scheme-values}
+The fourth condition in Theorem~\ref{thm:periodic-test} is exactly the
+ideal membership
+\[
+ S_ng\in J_N=(X_N-X_0,\ X_{N-1}-X_{-1})\subset K[x,y].
+\]
+Vanishing at all geometric points of $\Fix(F^n)$, understood over an
+algebraic closure of $K$, only gives membership in $\sqrt{J_N}$.
+If $A_N$ is reduced, these conditions agree: in characteristic zero a
+finite reduced $K$-algebra remains reduced after extension to an
+algebraic closure, where it is a product of fields.  No reducedness
+hypothesis was used above, so the scheme condition cannot be replaced
+without qualification by geometric values, still less by values at
+$K$-rational points alone.
+
+For a small example of the distinction, take
+$H_p(x,y)=(p(x)-y,x)$ with $p(x)=x^2+2x$.  Its fixed-point ideal is
+\[
+ (p(x)-y-x,\ x-y)=(x^2,\ x-y),
+\]
+and its coordinate ring is $K[x]/(x^2)$.  The class of $x$ vanishes at
+the only geometric point but is not zero in this ring.  This is a
+period-one example explaining the role of nilpotents; it is not a
+counterexample at any of the sufficiently long periods in the theorem.
+\end{remark}

@@ -1,0 +1,435 @@
+\section{The actual spectral Jacobian}
+\label{spec:section}
+
+Fix a field $k$, units $s,t$ with $s$ of exact order $r$, and
+$K=k(c)$, where $c$ is transcendental.  In this section put
+$T=t^r$, $\varepsilon=(-1)^{r+1}$, and $n=2r$.
+Let $X/K$ be the generic fiber of the original pencil in
+Theorem~\ref{geom:pencil}.  We will identify its Jacobian, including
+the torsor structure when $X(K)$ has no chosen point.  General
+spectral-line-bundle and cyclic-Picard constructions provide the
+background \cite{Beauville1990,InoueVanhaeckeYamazaki2015}.
+We give the rank-two construction and its inverse here, since the
+identity of the original state curve is essential.
+
+\subsection{A finite critical algebra before the spectral construction}
+
+Consider the projective cubic family $W\to\mathbb A^1_c$ with affine
+equation
+\begin{equation}
+F(u,v,c)=v^2+cuv-\varepsilon Tv-u^3+Tu^2=0,
+\qquad O_W=[0:1:0].
+\label{spec:weierstrass}
+\end{equation}
+Its role at this point is purely algebraic; no identity with the
+original state curve is assumed.
+
+\begin{lemma}\label{spec:finite-critical}
+The family $W$ is projective and flat, its total space is
+geometrically regular, and each finite geometric fiber is integral
+and reduced.  Its relative critical scheme is finite, with coordinate
+algebra
+\begin{equation}
+\begin{gathered}
+\Gamma(Z_W,\mathcal O_{Z_W})
+ =k[z]/\bigl((T-z^2)^2-\varepsilon Tz\bigr),\\
+c=\varepsilon-z-z^3/T.
+\end{gathered}
+\label{spec:critical-algebra}
+\end{equation}
+In particular $W_K$ is geometrically smooth of genus one.
+\end{lemma}
+
+\begin{proof}
+The homogeneous equation is
+$v^2w+cuvw-\varepsilon Tvw^2-u^3+Tu^2w=0$.
+At infinity it has only $O_W$, where the derivative with respect to
+$w$ is $1$.  Thus $O_W$ is relatively smooth at every value of $c$.
+Every positive-degree component of a projective plane curve meets
+the line at infinity.  For these cubics all such intersections would
+have to occur at $O_W$.  Two components, or a repeated component,
+would make that point nonsmooth.  Hence each geometric fiber has
+one component of multiplicity one.  A plane hypersurface has no
+embedded components, so the fiber is integral and reduced.  The
+cubic Hilbert polynomial is constant, giving flatness, and the
+projective equation gives properness.  Each fiber has arithmetic
+genus one.
+
+The relative derivatives and the derivative in the base direction are
+\begin{equation}
+F_u=cv-3u^2+2Tu,\qquad
+F_v=2v+cu-\varepsilon T,\qquad F_c=uv.
+\label{spec:derivatives}
+\end{equation}
+A singular point of a fiber cannot have $u=0$: its possible values
+of $v$ are $0,\varepsilon T$, and $F_v$ is respectively
+$-\varepsilon T,\varepsilon T$.  If $v=0$, the remaining possibility
+is $u=T$, where $F_u=-T^2\ne0$.  Thus every fiber singularity has
+$uv\ne0$, and $F_c\ne0$ there.  The total space is smooth at those
+points by the absolute Jacobian criterion; it is smooth at all
+remaining points because it is relatively smooth there.  These
+arguments also apply after an algebraic closure of $k$.
+
+The relative differential presentation on the affine chart is
+\[
+\Omega^1_{W/\mathbb A^1}
+=(\mathcal O_W\,du\oplus\mathcal O_W\,dv)/(F_u\,du+F_v\,dv).
+\]
+The critical scheme is therefore given by $(F_u,F_v)$, and it has
+no point at infinity.  The preceding calculation places its entire
+support in $uv\ne0$.  This contains the scheme itself, including
+nilpotents: the closed complement would otherwise be a nonempty
+finite-type scheme and would have a geometric closed point.
+Eliminate $c$ by $c=(\varepsilon T-2v)/u$.  Substitution into $F=0$
+and $uF_u=0$ gives
+\[
+v^2=u^2(T-u),\qquad \varepsilon Tv=u^3.
+\]
+Indeed the first substituted equation is $-v^2-u^3+Tu^2=0$;
+the second, after using it, reduces to $\varepsilon Tv-u^3=0$.
+Writing $z=v/u$ now gives
+\[
+u=T-z^2,\qquad v=z(T-z^2),\qquad
+(T-z^2)^2=\varepsilon Tz.
+\]
+Conversely, in the quotient by the displayed quartic, $z$ is a
+unit because its constant term is $T^2$.  The equality
+$(T-z^2)^2=\varepsilon Tz$ makes $T-z^2$, and then $v$, units.
+The preceding formulas therefore define the inverse map and satisfy
+$F=F_u=F_v=0$.  They also give
+\[
+c=T/z-3z=\varepsilon-z-z^3/T,
+\]
+where the last equality is the quartic relation divided by $Tz$.
+This proves \eqref{spec:critical-algebra} scheme-theoretically.
+The quartic is monic, so the algebra is finite-dimensional even when
+its roots repeat.  Consequently its generic fiber over $k[c]$ is
+empty.  The same calculation over an algebraic closure proves that
+$W_K$ is geometrically smooth; its integral cubic fibers have
+arithmetic genus one.  No step divided by two or three.
+\end{proof}
+
+\subsection{The two spectral charts and their four endpoints}
+
+Define $E/K$ by gluing the two monic quadratic charts
+\begin{equation}
+\begin{aligned}
+\Phi(Z,\lambda)&=\lambda^2-(T+cZ+Z^2)\lambda+\varepsilon Z^3=0,\\
+\mu^2-(1+cV+TV^2)\mu+\varepsilon V&=0,
+\qquad V=Z^{-1},\quad\mu=\lambda Z^{-2}.
+\end{aligned}
+\label{spec:quotient-charts}
+\end{equation}
+On $Z\lambda\ne0$ the substitutions
+\begin{equation}
+u=\frac{\varepsilon TZ}{\lambda},\quad
+v=\frac{\varepsilon T^2}{\lambda},\qquad
+Z=\frac{Tu}{v},\quad \lambda=\frac{\varepsilon T^2}{v}
+\label{spec:birational-change}
+\end{equation}
+are mutually inverse, since
+\[
+\frac{v^3}{T^3}\Phi(Tu/v,\varepsilon T^2/v)=-\varepsilon F(u,v,c).
+\]
+They identify the locus $Z\ne0,\infty$ with an open subset of the
+smooth $W_K$: here the spectral equation forces $\lambda\ne0$.
+The two points over $Z=0$ have $\lambda=0,T$, with quadratic
+derivatives $-T,T$.  The two points over $V=0$ have $\mu=0,1$,
+with derivatives $-1,1$.  Thus every endpoint is smooth in every
+characteristic.  This proves smoothness of the whole $E$, without
+a characteristic-dependent discriminant argument.
+
+For the original spectral variable $z$ define $C/K$ by
+\begin{equation}
+\begin{aligned}
+\lambda^2-(T+cz^r+z^{2r})\lambda+\varepsilon z^{3r}&=0,\\
+\mu^2-(1+cv^r+Tv^{2r})\mu+\varepsilon v^r&=0,
+\qquad v=z^{-1},\quad\mu=\lambda z^{-2r}.
+\end{aligned}
+\label{spec:original-charts}
+\end{equation}
+Write $P_0,P_T$ for $(z,\lambda)=(0,0),(0,T)$, and $Q_2,Q_1$ for
+the points at $v=0$ with $\mu=1,0$.  The same derivatives show that
+$z$ or $v$ is a local parameter at each of these four points.
+Away from them, $C$ is the pullback of $E$ by $Z=z^r$, a finite
+\'{e}tale map on the punctured line because $rz^{r-1}$ is a unit.
+Consequently $C$ is geometrically smooth as well.
+
+The two-chart descriptions give finite flat degree-two maps to their
+respective projective lines.  The bases $1,\lambda$ and $1,\mu$
+have the transition prescribed in the equations, so
+\begin{equation}
+(\tau_C)_*\mathcal O_C=\mathcal O\oplus\mathcal O(-2r),
+\qquad
+(\tau_E)_*\mathcal O_E=\mathcal O\oplus\mathcal O(-2).
+\label{spec:finite-pushdown}
+\end{equation}
+These curves are projective and have $h^0(\mathcal O)=1$ after
+algebraic closure.  Smoothness and geometric connectedness imply
+geometric integrality, and their Euler characteristics yield
+$g(C)=2r-1$ and $g(E)=1$.  In particular, the genus of $C$ is not
+the genus of the original state curve $X$.
+
+Let $G=\langle\sigma\rangle$, with
+$\sigma(z,\lambda)=(sz,\lambda)$.  On either monic quadratic chart
+every element is uniquely a sum of a polynomial and a polynomial
+times $\lambda$, or times $\mu$ at infinity.  Taking invariants
+retains exactly the powers of $z^r$ or $v^r$.  Thus the quotient is
+the specified $\pi:C\to E$, $Z=z^r$, not merely a curve with the
+same function field.  All four endpoints are fixed by the full
+group; their parameter maps are $z\mapsto z^r$ or $v\mapsto v^r$.
+For $r=1$ the quotient is the identity.  Finally,
+\eqref{spec:birational-change} extends uniquely to a smooth
+projective-curve isomorphism $E\simeq W_K$.  At
+$O=(Z,\lambda)=(0,0)$ the orders of $Z,\lambda$ are $1,3$, so
+$u,v$ have pole orders $2,3$; hence $O$ maps to $O_W$.  We use
+$O$ as the origin on $E$.
+
+\begin{theorem}\label{spec:jacobian}
+The original generic curve $X/K$ is an $E$-torsor over $K$, and
+$\operatorname{Jac}(X)\simeq E$ over that same field.  More precisely,
+the actual matrix $M_{r,s}$ defines a morphism
+\[
+\alpha:X\longrightarrow\operatorname{Pic}^{2r}(C)
+\]
+which identifies $X$ with a geometric translate of
+$\pi^*\operatorname{Pic}^0(E)$.  The pullback
+$\pi^*:\operatorname{Pic}^0(E)\to\operatorname{Pic}^0(C)$ is a
+closed immersion with trivial scheme-theoretic kernel.
+No rational point on $X$ is assumed.
+\end{theorem}
+
+\begin{proof}
+We separate the construction of the actual map from the group
+calculation which identifies its image.
+
+\emph{The actual spectral module in families.}
+On the nonempty torus open $X^\circ\subset X$, put
+$M(z)=A(s^{r-1}z)\cdots A(z)$ in the fixed gauge of
+\eqref{main:matrix}.  The original trace and determinant give
+\[
+\det(\lambda I-M(z))
+=\lambda^2-(T+cz^r+z^{2r})\lambda+\varepsilon z^{3r}.
+\]
+Let the generator $\lambda$ of the spectral algebra act by $M(z)$
+on $\mathcal O_{\mathbb P^1_z\times X^\circ}^{\oplus2}$.
+Cayley--Hamilton verifies its defining relation; at infinity use
+$v^nM(v^{-1})$.  The finite-map equivalence between sheaves and
+modules defines a sheaf $\mathcal L$ on $C\times X^\circ$ with
+\begin{equation}
+(\tau_C)_*\mathcal L=\mathcal O^{\oplus2}.
+\label{spec:module-pushdown}
+\end{equation}
+It is a line bundle.  To check this also in the parameter direction,
+suppose that at a geometric parameter value and a finite $z=a$ the
+matrix were scalar, $M(a)=bI$.  At $(a,b)$ the adjugate of
+$\lambda I-M(z)$ is zero, so both partial derivatives of its
+determinant vanish.  This would be a singular point of the already
+smooth $C$.  At infinity the matrix is
+$P=\operatorname{diag}(1,0)$, also nonscalar.  A nonscalar
+two-by-two matrix over a field has a cyclic vector: some vector $e$
+makes $e,M(a)e$ a basis.  The same determinant remains a unit in a
+neighborhood in the family.  Mapping the spectral-algebra basis
+$1,\lambda$ to $e,M(z)e$ there exhibits the module as free of
+rank one over that algebra.  These neighborhoods prove the claimed
+line-bundle property of $\mathcal L$.
+
+For every fiber $L$ of this family,
+$\chi(L)=\chi(\mathcal O^{\oplus2}_{\mathbb P^1})=2$.
+Since $g(C)=n-1$, Riemann--Roch gives $\deg L=n$.  The family
+therefore defines $\alpha$ on $X^\circ$.  Properness of the Picard
+component and the DVR valuative criterion extend it uniquely over
+every omitted point of the smooth projective curve $X$.
+
+\emph{Recovery of the constant-conjugacy class.}
+For a line bundle with pushdown \eqref{spec:module-pushdown},
+multiplication by the spectral coordinate is a map
+\[
+\lambda:(\tau_C)_*L\longrightarrow(\tau_C)_*L(n).
+\]
+A trivialization of the pushdown recovers a matrix polynomial of
+degree at most $n$.  Two trivializations differ by a constant
+$\operatorname{GL}_2$ matrix, not a rational $z$-dependent gauge.
+Conversely a line-bundle isomorphism pushes down to such a constant
+matrix intertwining the $\lambda$ actions.  This recovery works
+in families on the open locus where
+$H^0(C,L(-1))=H^1(C,L(-1))=0$.  There the pushdown is trivial,
+$H^0(C,L)$ has rank two, and its evaluation map identifies
+$H^0(C,L)\otimes\mathcal O_{\mathbb P^1}$ with the pushdown.
+These conditions hold on our image, because its twist pushes down
+to $\mathcal O(-1)^{\oplus2}$.  The rational point $P_0\in C(K)$
+allows rigidification of the Picard functor, so a universal line
+bundle and this family recovery are available on the relevant
+Picard open set.  This is the particular spectral-correspondence
+argument needed here; it has not used a characteristic-zero
+version of a general moduli theorem.
+
+\emph{A rational inverse to the original states.}
+Write $M_j=[z^j]M$.  The original matrix gives the three identities
+\begin{equation}
+M_n=P,\qquad (M_{n-1})_{12}=1,\qquad
+M_0=t^{r-1}A_0.
+\label{spec:endpoint-coefficients}
+\end{equation}
+For the first, the highest coefficients multiply to
+$s^{2\sum_{i=0}^{r-1}i}P^r=P$.
+For the second, a term of total degree $2r-1$ contains one $A_1$
+and otherwise $P$'s.  Its $(1,2)$ entry is zero unless $A_1$ is
+the rightmost factor, since a $P$ on its right kills the second
+column.  The remaining term has scalar multiplier
+$s^{2\sum_{i=1}^{r-1}i}=1$ and $(A_1)_{12}=1$.
+Finally $\operatorname{tr}A_0=t$, $\det A_0=0$, so
+$A_0^2=tA_0$ and $M_0=A_0^r=t^{r-1}A_0$.
+These proofs include $r=1$ with empty products interpreted as one.
+Since $(A_0)_{12}=-x$ and $(A_0)_{22}=x(y-1)$, recovery is
+\begin{equation}
+x=-\frac{(M_0)_{12}}{t^{r-1}(M_{n-1})_{12}},\qquad
+y=1+\frac{(M_0)_{22}}{t^{r-1}x}.
+\label{spec:state-inverse}
+\end{equation}
+The denominators are nonzero on $X^\circ$.  A constant conjugacy
+preserving $M_n=P$ is diagonal; it scales the two $(1,2)$ entries
+together and preserves the $(2,2)$ entry.  Thus these formulas are
+independent of the remaining gauge.
+
+They are rational functions on the Picard image, not just an
+algorithm on geometric points.  Indeed on $H^0(C,L)$ the leading
+coefficient $P$ splits the rank-two bundle into
+$\operatorname{im}P\oplus\ker P$.
+The maps $PM_0(1-P)$ and $PM_{n-1}(1-P)$ between its two line
+bundles have scalar ratio $-t^{r-1}x$, and
+$\operatorname{tr}((1-P)M_0)=t^{r-1}x(y-1)$.
+These are precisely the family-invariant ratios in
+\eqref{spec:state-inverse}.  As $x,y$ generate $K(X)$, they prove
+\begin{equation}
+K(\alpha(X))\xrightarrow{\alpha^*}K(X)
+\quad\text{is an isomorphism}.
+\label{spec:function-field-inverse}
+\end{equation}
+In particular $\alpha$ is nonconstant and birational onto its image,
+with total degree one.  This excludes a hidden purely inseparable
+degree, which geometric generic injectivity alone would not exclude.
+
+\emph{The fixed Picard difference.}
+Cyclically rotating the original product gives
+$M(sz)A(z)=A(z)M(z)$, since $s^r=1$.
+Hence $A(z)$ induces a rational homomorphism
+$a_L:L\dashrightarrow\sigma^*L$.
+It is invertible away from $z=0,\infty$, because $\det A=z^3$.
+Its full cyclic composite is multiplication by the spectral
+coordinate:
+\begin{equation}
+(\sigma^{r-1})^*a_L\circ\cdots\circ\sigma^*a_L\circ a_L
+=M(z)|_L=\lambda.
+\label{spec:cyclic-composite}
+\end{equation}
+Thus this map is not itself an ordinary $G$-linearization of $L$.
+The two spectral charts give
+\[
+\operatorname{div}_C(\lambda)=3rP_0-2rQ_2-rQ_1.
+\]
+At $P_0$, the other root is a unit tending to $T$, and the product
+of roots is $\varepsilon z^{3r}$, giving order $3r$; at $P_T$ the
+root is a unit.  At $Q_2$ the coordinate $\mu$ tends to $1$, giving
+pole order $2r$ for $\lambda$; at $Q_1$, $\mu$ has order $r$,
+giving pole order $r$.  The divisor of $a_L$ is supported at these
+four fixed points.  Taking orders in \eqref{spec:cyclic-composite}
+therefore gives the integer divisor identity
+\begin{equation}
+\operatorname{div}(a_L)=D_A:=3P_0-2Q_2-Q_1,
+\qquad \sigma^*L\otimes L^{-1}\simeq\mathcal O_C(D_A).
+\label{spec:fixed-difference}
+\end{equation}
+This is independent of the state.  By the extension of $\alpha$
+and separation of the Picard functor it holds for every point of
+$X$, not just $X^\circ$.  Consequently, for any geometric base
+point $P_*$, all differences
+$\alpha(P)\otimes\alpha(P_*)^{-1}$ lie in
+\[
+B_C=\ker(\sigma^*-1:\operatorname{Pic}^0(C)\to
+                              \operatorname{Pic}^0(C)).
+\]
+
+\emph{The invariant component and the absence of a kernel.}
+Write $J_E=\operatorname{Pic}^0(E)$ and $J_C=\operatorname{Pic}^0(C)$.
+The norm gives $\operatorname{Nm}_{\pi}\pi^*=[r]$.  Thus the kernel
+of $\pi^*:J_E\to J_C$ is a subgroup scheme of the finite \'{e}tale
+group $J_E[r]$, since $r$ is invertible.  It suffices to exclude
+nontrivial geometric points.  Over an algebraic closure of $K$,
+suppose $N\in J_E$ has trivial pullback.  The pullback carries its
+natural $G$-action.  In a trivialization, this action differs from
+function pullback by constants, since the global units on the
+projective integral curve $C$ are constant.  On the fiber at the
+full-group fixed point $P_0$, the natural action is the identity.
+Those constants must all be one.  The resulting nowhere-zero
+section is $G$-invariant, and the quotient and projection formula
+give
+\[
+H^0(C,\pi^*N)^G=H^0(E,N).
+\]
+It descends to a nowhere-zero section of $N$: a zero would pull
+back to a zero.  Thus $N$ is trivial.  The whole scheme-theoretic
+kernel is trivial, and the proper group homomorphism $\pi^*$ is a
+closed immersion.  Let $H_C=\pi^*J_E$.
+
+The inclusion $H_C\subset B_C$ has dimension one.  Finite-map
+cohomology and the averaging projector $r^{-1}\sum_{g\in G}g$
+give
+\[
+\operatorname{Lie}(B_C)=H^1(C,\mathcal O_C)^G
+                       =H^1(E,\mathcal O_E),
+\qquad \dim\operatorname{Lie}(B_C)=1.
+\]
+Averaging is an exact direct-summand projector, so taking these
+invariants commutes with cohomology.  The local dimension of $B_C$
+at the identity is at least one because it contains $H_C$, while
+its tangent dimension is one.  Its local ring is therefore regular;
+translation gives smoothness of its identity component.
+The closed connected subgroup $H_C$ of the same dimension is
+that component:
+\begin{equation}
+B_C^0=H_C\simeq J_E.
+\label{spec:invariant-component}
+\end{equation}
+For $r=1$ the reasoning reduces to $C=E$ and $B_C=J_C$.
+
+\emph{The full coset and descent over the original field.}
+After choosing $P_*$ geometrically, the difference morphism from
+$X$ has connected image containing the identity, so it lies in
+$B_C^0=H_C$.  It is nonconstant by
+\eqref{spec:function-field-inverse}.  Its projective image is
+therefore the whole one-dimensional group $H_C$.
+Hence $\alpha(X)$ is a complete geometric translate of $H_C$.
+It is smooth, and \eqref{spec:function-field-inverse} makes the
+map birational to it.  A birational morphism between smooth
+projective curves is an isomorphism, proving the asserted image
+description without a residual isogeny.
+
+All the original surfaces, matrices, two spectral charts, and
+morphisms are defined over $K=k(c)$.  If $k$ is not algebraically
+closed, their geometric prerequisites are checked after the
+faithfully flat field extension $k(c)\subset\bar k(c)$ by the same
+equations and Theorem~\ref{geom:pencil}.  No separability of this
+constant-field extension is required.  Smoothness, geometric
+integrality, and the genus calculations descend; thus the module
+construction and the rational inverse were indeed over $K$.
+Let $Y=\alpha(X)$ with its $K$-structure.  The $K$-defined action
+of $J_E$ on $\operatorname{Pic}^n(C)$ by tensoring with $\pi^*N$
+preserves $Y$, as can be checked after faithful flat geometric
+extension where it is a coset.  The action map
+\[
+J_E\times Y\longrightarrow Y\times Y,
+\qquad(N,L)\longmapsto(L,L\otimes\pi^*N)
+\]
+is an isomorphism after that extension, hence is an isomorphism
+over $K$.  The closed immersion $\alpha:X\to Y$ is likewise an
+isomorphism over $K$.  This gives $X$ its $J_E$-torsor structure,
+and the rational origin $O\in E(K)$ identifies $E$ with $J_E$.
+The torsor group of a genus-one curve is its Jacobian: with a
+geometric base point the identification is
+$P\mapsto\mathcal O_X(P-P_*)$, and changing the base point changes
+only a translation, not this group identification.  It therefore
+descends to $K$, giving $\operatorname{Jac}(X)\simeq E$.
+The argument does not descend a geometric choice of $P_*$ and does
+not assert that the torsor is trivial over $K$.
+\end{proof}

@@ -1,0 +1,3926 @@
+# Paper 27 E001 supervisor host runtime plan recovery V5
+
+Status: AUTHOR-STOP CANDIDATE ONLY; NO EXECUTION AUTHORITY
+
+## 1. Authority and effect boundary
+
+This document is the sole Runner V5 author artifact opened by authoritative event E0368. The opening ledger terminal is:
+
+BATCH07_P27_PROBE_RECOVERY_E001_HOST_V15_RUNNER_V4_SUPERVISOR_PREBIND_FAIL_AND_RUNNER_V5_AUTHOR_OPEN_NO_EXECUTION
+
+E0368 authorizes only construction of this exact plan file. It does not authorize importing, tokenizing, parsing as a programming language, compiling, evaluating, launching, testing, validating, probing, building, retrying, consuming a reservation, creating evidence, changing a manifest, or changing any other file. The two embedded programs and the embedded transcript validator are inert ASCII source text in this artifact.
+
+The intended future operation is one no-build, one-shot Host V15 probe. This plan is not that operation. Every launcher, issuer, environment, kernel, filesystem, timing, external-owner, and reconciliation premise below must be independently established after author stop. Failure to establish any premise is a closed, no-execution result.
+
+Author-stop is not a claim that the source is executable. No source in this file was imported, tokenized, language-parsed, compiled, evaluated, executed, launched, or microtested during authorship.
+
+## 2. Frozen normative carriers
+
+A future prebind review must authenticate all of these as held carriers, not as path names:
+
+- E0366 snapshot: 2303269 bytes, 23672 LF, SHA256 0ea4f324c5175ec196b8118e551a429a6207cd57bacfdaa9903a109046daab92, with its exact unique terminal bound in both programs.
+- Host Probe Recovery V15: 228310 bytes, 4622 LF, SHA256 a27eb1bb5540c18b57094ee26724be75a0c431b3c523385fe1271fb02378b845, final-LF ASCII, and its exact unique V15 author-stop terminal.
+- Normative Host Probe V8 digest: 72079707809f54fb35591f5e1ab8ef0d22671c72c37ea234de699e5f9e8002cf.
+- Frozen Runner V4 historical input: 248620 bytes, 3422 LF, SHA256 a11d80da1d5cffa2ac973cfe13d39340c587c87bbddaaa4d3d46640350e5ef83.
+- Frozen actor source below: 132060 bytes, 1570 LF, SHA256 42eccaefe6b9ed0737be8d3e78194418e5eac0c5ac208f000b32d31a34308c6d.
+- Frozen watchdog source below: 178117 bytes, 2059 LF, SHA256 6088a8d92a06786a330e4b3e22487fb4170f726cb5f06d047c96c096c8b46823.
+- Frozen embedded validator inside the actor source: 10195 bytes, 102 LF, SHA256 7414e09dcdd09463f900a24dc19af9d3ecc9528c44895541fba7739fd7af9a89.
+- Dedicated Python image: /root/miniconda3/bin/python3.12, exact certificate identity and SHA256 9a3d9e94d2be60d9a2a91d08f62292a152e28175fb4ee1d871aa5850fbb7a101.
+
+Every anonymous input carrier is required to be a root-owned regular file with nlink zero, O_RDWR access, exact WRITE/GROW/SHRINK/SEAL seals, exact size, and exact SHA256. Each side reads its own held carriers and recomputes identities. Actor assertions are not evidence for the watchdog.
+
+## 3. Six unresolved external gates
+
+All six gates remain unresolved by this author artifact. Their certificate PASS fields and nonzero gate identifiers are future issuer facts, not author claims:
+
+1. CLONE3_CPYTHON: the exact CPython image and host must have a separately reviewed clone3/CLONE_INTO_CGROUP/CLONE_PIDFD construction premise.
+2. DELETED_CGROUP_FD: held descriptors, cgroup.kill behavior, empty observation, and removal behavior after namespace unlink must have a separately reviewed kernel premise.
+3. SEALED_SNAPSHOT_CONSTRUCTION: the exact E0366 snapshot must be constructed and sealed by an authorized procedure without evidence-root contact.
+4. EXTERNAL_SURVIVAL: the external owner, endpoint, pidfd/starttime identity, SCM_RIGHTS transfer, and durable takeover protocol must be established before entry.
+5. OUTER_RECONCILER: an independent durable reconciliation service must exist for uncertain terminal sends and actor loss.
+6. ISSUER_CRYPTOGRAPHY: issuer key control, Ed25519 verification, serial allocation, expiry, reservation, signature, receipt, and replay prevention must be established.
+
+Until all six are independently evidenced, current, mutually consistent, and formally accepted, this plan is non-executable. A literal PASS value in a hypothetical packet cannot substitute for the external evidence.
+
+## 4. One-shot input and descriptor contract
+
+The future outer launcher must begin from a clean absolute cwd, a fixed umask, the exact ENV map in both sources, no inherited signals or timers, no tracing/profile/audit hook, no concurrent mutator, no ambient authority, no writable workspace reachability, and no reachable build/evidence/root. It must use an empty stdin, independently drained stdout and stderr, an external pidfd, a prebound SOCK_SEQPACKET owner channel, and no shell.
+
+Actor inherited descriptors are exactly:
+
+- 0 empty read-only stdin; 1 stdout; 2 stderr.
+- 100 sealed actor source.
+- 101 sealed E0366 snapshot.
+- 102 sealed Host V15.
+- 103 sealed complete V5 plan.
+- 104 sealed certificate.
+- 105 sealed final issuer envelope.
+- 106 sealed watchdog source.
+- 107 sealed reservation.
+- 108 prebound external-owner control.
+- 109 prebound external-owner pidfd.
+- 110 sealed external-owner manifest.
+
+Watchdog inherited descriptors are exactly:
+
+- 0 an EOF stdin; 1 and 2 closed.
+- 3 actor control SOCK_SEQPACKET; 4 actor pidfd.
+- 5 attempt base; 6 cgroup base.
+- 7 certificate; 8 final envelope; 9 E0366 snapshot; 10 V5 plan; 11 actor source; 12 Host V15; 13 reservation.
+- 14 external-owner control; 15 external-owner pidfd; 16 external-owner manifest.
+- 100 sealed watchdog source.
+
+Any extra descriptor, wrong access mode, wrong owner/type/nlink/seal, wrong size/hash, nonempty stdin, wrong cwd, wrong environment, or carrier mismatch is a pre-action closed failure. Mutation-capable bases are individually owned and either closed or explicitly transferred; parent exceptions after fork retain and exactly reap or durably transfer watchdog ownership.
+
+## 5. Acyclic issuer construction
+
+The issuer construction is deliberately one-way and has no whole-hash fixed point.
+
+1. Build the canonical detached envelope-context preimage from the 15 ENVELOPE_CONTEXT_KEYS. It excludes certificate bytes, certificate digest, all signatures, all signature-preimage hashes, the issuer receipt, final-envelope digest, reservation bytes, and session AUTH. Domain-frame and length-frame it with P27E001_V5_DETACHED_ENVELOPE_CONTEXT followed by NUL; its SHA256 is ISSUER_CONTEXT_SHA256 in the certificate.
+2. Construct the certificate once. It contains no later-object hash, signature, receipt, self-hash, final-envelope digest, reservation digest, or AUTH. Domain-frame and length-frame its exact raw bytes with P27E001_V5_CERTIFICATE_DIGEST followed by NUL to obtain CERTIFICATE_DIGEST_SHA256.
+3. Form the final-envelope TBS prefix from the detached context plus ENVELOPE_CONTEXT_SHA256, CERTIFICATE_DIGEST_SHA256, and SIGNATURE_ALGORITHM. The direct Ed25519 signature preimage is the P27E001_V5_ISSUER_SIGNATURE_PREIMAGE NUL domain followed by canonical length-framed certificate raw bytes and envelope TBS bytes.
+4. Append SIGNATURE_PREIMAGE_SHA256, SIGNATURE_ALGORITHM, and SIGNATURE_HEX. Compute the issuer receipt from the P27E001_V5_ISSUER_RECEIPT NUL domain and the exact context digest, certificate digest, signature-preimage digest, algorithm, and signature. Append ISSUER_RECEIPT_SHA256 and compute FINAL_ENVELOPE_DIGEST_SHA256 with the P27E001_V5_FINAL_ENVELOPE NUL domain.
+5. Construct the ordered 10-field reservation TBS from issuer identity/key/serial, certificate digest, final-envelope digest, validity interval, reserved=1, consumed=0, and Ed25519. Sign only its domain-framed exact TBS. Append its signature-preimage hash and signature, then compute and append RESERVATION_DIGEST_SHA256 with the reservation-receipt domain.
+6. Compute session AUTH only after all three immutable carriers exist, using P27E001_V5_SESSION_AUTH NUL and canonical length-framed certificate, final-envelope, and reservation bytes.
+
+A later consumed/released state is a new monotone chained receipt. No carrier above is mutated. Both programs recompute every domain, exclusion, cross-carrier digest, signature-preimage digest, signature, receipt, time field, plan/source/V15/snapshot binding, and reservation relation from independently held bytes.
+
+## 6. Entry identity and dependency closure
+
+Both programs bind boot ID, platform identity, architecture, kernel release, exact mountinfo identities, filesystem types, base dev/ino/mode/nlink/uid/gid, safe-bind noexec and writable-descendant count, cgroup v2 magic and topology, controllers/subtree_control/type, runtime root, no-external-mutator premise, and access modes.
+
+The watchdog independently holds and checks plan, both sources, V15, snapshot, certificate, envelope, reservation, manifest, attempt base, cgroup base, external owner, and its own image. It does not trust actor hashes. Python is accepted only when the executable identity equals the dedicated PYTHON_IMAGE dependency entry. LIBC identity includes path, dev, ino, mode, nlink, uid, gid, size, hash, and confstr relation. All singleton dependencies, gates, credentials, and graph edges are cardinality-checked.
+
+The actor and watchdog bind pidfd fdinfo PID to the same PID, bind stable /proc stat field 22 starttime by repeated observation, bind stopped state from /proc status, and bind exact cgroup membership. PID alone is never an identity and cannot authorize action after reuse.
+
+## 7. Clock and deadline discipline
+
+The certificate binds realtime and monotonic clocks with at most 1000000 ns drift and a 360000000000 ns lifetime. Every certified boundary performs pre/post clock, expiry, actor-state, control-state, and relevant containment checks. CLOCK_DRIFT, CERTIFICATE_EXPIRED, DEADLINE_EXPIRED, CONTROL_LOST, SEND_EFFECT_UNKNOWN, and PIDFD_ACTOR_LOST remain distinct causal faults.
+
+All caps are cumulative absolute phase deadlines derived from one origin. No retry, helper restart, borrowing, or deadline restart is permitted. Every effect uses the minimum inherited bound while preserving the precomputed remaining tail.
+
+Normal release uses one origin and fixed absolute offsets: durable release record by origin+800000000 ns and reply by origin+900000000 ns inside the 1000000000 ns launch cap.
+
+At first failure the watchdog freezes one immutable overall deadline at origin+5210000000 ns and an earlier cleanup-effect deadline at origin+2600000000 ns. The remaining 2610000000 ns is reserved for the 100000000 ns recovery record and the complete 2510000000 ns terminal chain. No cleanup effect or retained/late-empty record begins after its cap.
+
+The terminal chain has one common absolute deadline and these 13 cumulative phase ceilings, in order: candidate record 100 ms, notice 100 ms, terminal-seen record 100 ms, report record 1000 ms, PASS commit 100 ms, PASS margin 10 ms, ACK 500 ms, actor ACK receipt 100 ms, ACK-receipt record 100 ms, reconciliation record 100 ms, owner-closure record 100 ms, closure packet 100 ms, watchdog exit 100 ms. Total: 2510 ms. The host-complete-to-ACK bound is independently enforced at no more than 500 ms where applicable.
+
+Refusal has one 80 ms origin and four nonrestartable 20 ms phases: refusal record, refusal ACK, actor receipt, and durable closure.
+
+## 8. Control language and state machine
+
+There is one control-envelope language, one frozen 40-row transition table, and no broad or wildcard state map. Each packet has exactly one final LF, printable ASCII only, a size cap, canonical field order, no duplicate/reserved extension, and an authenticated digest. Common fields bind protocol version, session AUTH, direction, transaction sequence, transition ID, sender state, required receiver state, current ordinal, current probe, effect state, and the exact phase deadline.
+
+Ancillary data is closed before any malformed result is reported. Wrong rights count/type, truncation, control bytes, sequence, sender, receiver state, slot, probe, effect, deadline, or packet digest is CONTROL_MALFORMED before action. CONTROL_LOST is only channel state. SEND_EFFECT_UNKNOWN is only send state. PIDFD_ACTOR_LOST is only actor state and can be established only from fd 4 readiness. POLLIN is drained before HUP/ERR classification. Control loss never proves actor loss and never satisfies owner-release predicates.
+
+## 9. Refusal and consumption edge
+
+Before every BEGIN send, the actor irreversibly records BEGIN_SEND_EFFECT_UNKNOWN. Before every ARMED send, the watchdog irreversibly records ARM_SEND_EFFECT_UNKNOWN and armed_possible. Any unproved send outcome remains effect-unknown.
+
+There are exactly two no-consume cross-map rows:
+
+- BEGIN_NOT_ENTERED plus ARM_NOT_OBSERVED maps only to ARM_NOT_ENTERED.
+- BEGIN_SENT plus ARMED_CONFIRMED maps only to REFUSAL_CLOSED_NO_CONSUME.
+
+For the post-arm row, the watchdog first closes every mutation-capable attempt base, freezes commit_count=0, intent_count=0, and attempt_state=ABSENT_KNOWN, and irreversibly enters REFUSAL_CLOSED_NO_CONSUME before sending its ACK. An unknown refusal-ACK send effect remains unconsumed, owned, and reconcilable. It can never enter ambiguous_consumption or consume_attempt. The actor accepts only the single row bound to exact request SHA256 and sequence, sends a no-replay receipt, and waits for durable owner closure.
+
+All other BEGIN/ARM/control loss combinations become CONSUME_EDGE_UNKNOWN. One actor-derived consumption deadline is carried unchanged through BEGIN, ARM, COMMIT, mkdir, open, verify, publish, fsync, intent, and ACK. No helper restart or replay is allowed.
+
+## 10. Attempt and recovered-stage publication
+
+Attempt publication is verify-before-publish. A local descriptor progresses LOCAL_UNVERIFIED to LOCAL_VERIFIED to PUBLISHED only after fstat, named-entry, base identity, owner, mode, nlink, access, collision, and durability checks. A collision namespace retains no mutation-capable base; it can report only through a separately certified independent base/control and, if ownership cannot close, the exact external transfer protocol.
+
+Recovered-stage handling keeps the stage descriptor, named-entry descriptor, base descriptor, identities, and all four leaf descriptors local until all named-entry/base/access checks and all four exact leaf size/LF/SHA identities pass. Only then can the immutable stage capability be published. Any failure closes locals and reports ABSENT_KNOWN or UNKNOWN as justified; it never reports retained=1.
+
+The runtime root and safe bind are checked independently at every relevant boundary. No source path is read after sealing. No build step exists.
+
+## 11. Containment, release, and probe topology
+
+The watchdog owns cgroup and payload lifetime. cgroup descriptors for type, controllers, subtree_control, events, kill, and root are immediately registered in exhaustive cleanup scopes. Containment is not considered bound until exact identity, access, cgroup topology, singleton population, pidfd/starttime, stopped state, and actor/control acknowledgements agree.
+
+The suite is exactly 15 slots in this order:
+
+P00, P01D, P01C, P02, P03, P04, P05, P06, P07, P08, P09, P10, P11, P12, P13
+
+P00 reconstructs its synthetic transcript bytes exactly before checking SHA256. P01D yields exactly 13 fields and P01C receives the exact relation, including index 9. P05 uses pidfd plus stable starttime and rejects PID reuse. Topology claims are limited to complete transcript observations and do not claim unobserved global process ancestry.
+
+For each slot, stream rights and pidfd rights enter exhaustive local owner scopes immediately and transfer individually only at commit. Release requires the durable release record, exact packet binding, cgroup membership, stopped observation, pidfd/starttime relation, and boundary checks before and after SIGCONT. The release record and reply use the one carried origin; release cannot be retried.
+
+## 12. Transcript and result discipline
+
+stdout and stderr are independently nonblocking-drained until exact EOF while the watchdog monitors actor pidfd, payload pidfd, control, cgroup events, and absolute deadlines. stdout is capped at 3145728 bytes; overflow is terminal. stderr must be empty and at EOF. No wait status, transcript, or topology result is accepted from a partial stream.
+
+The transcript validator has three disjoint stages:
+
+1. Byte language: exact ASCII/control-byte, LF, size, and terminal framing.
+2. Structural grammar: exact line and field cardinality, canonical decimal/hex forms, slot order, packet boundaries, and complete consumption.
+3. Semantics: exact probe relations, P00 reconstruction, P01D to P01C relation, P05 identity, candidate claims, and cross-slot constraints.
+
+The RESULT protocol is complete and framed: exact RESULT notice, bounded frame sequence, exact final frame cardinality and digest, RESULT_END, and independent watchdog reconstruction. SCM_RIGHTS packets bind the exact packet digest, rights manifest, local fstat/access facts, pidfd PID/starttime, cgroup facts, and current slot/deadline. Every local descriptor is closed on every reject path.
+
+## 13. Durable records and report union
+
+Every durable record is created O_EXCL, written completely, fsynced, closed, reopened without following symlinks, byte-verified, and directory-fsynced within its phase deadline. durable_once carries partial state, digest, typed causal fault, and effect state. Each chain member has RECORD_SEQ and PREDECESSOR_SHA256.
+
+The chain covers intent, release, validated result, ACK-commit intent, COMMITTED, COMMITTED_SEEN, terminal candidate, terminal seen, report, PASS when eligible, ACK receipt/no-replay, reconciliation, and OWNER_CLOSURE. Success and failure use the same monotone terminal-seen through owner-closure discipline. Volatile OWNER_CLOSED is sent only after durable closure.
+
+The 34-field final report is a discriminated union. OUTCOME_KIND determines exact applicability of attempt, stage, containment, empty, removal, kill, stop-probe, reap, ACK, reconciliation, closure, failure-origin, cleanup deadline, terminal deadline, and disposition fields. NOT_APPLICABLE is distinct from empty or absent. It enforces:
+
+0 <= COMMITTED_COUNT <= REAPED_COUNT <= STOPPED_COUNT <= ENTERED_COUNT <= 15
+
+STOP_ORDINAL and STOP_PROBE have one exact relation to the suite. Absent containment is not empty. A no-payload path may use ABSENT_KNOWN only with the corresponding zero counts and no-release facts. Candidate claims must match literal RESULT/transcript fields and the complete B-held record chain.
+
+PASS is eligible only after the exact success report and durable PASS record within the pass margin. PASS or ACK send-effect unknown is sticky and cannot be downgraded to a conflicting ABORT. A missing ACK never authorizes replay; it requires durable reconciliation and owner closure.
+
+## 14. Cleanup, kill, and terminal ownership
+
+All resource acquisitions occur inside immediate typed owner stacks. On possible payload release, the first failure consumes the sole safe kill authority even when an instantaneous population observation is empty. The kill ticket, cgroup.kill call, return, and postcheck all fit within one inherited cleanup cap with resampled clocks. There is at most one kill ticket and one kill call; no retry exists.
+
+The watchdog runs one terminal_owner_loop. It continuously polls actor pidfd, actor control, containment, and pending terminal packets; drains POLLIN before HUP; and retains every owner descriptor through success, failure, send uncertainty, control loss, and actor loss. No generic finally releases owner descriptors.
+
+The loop exits only through one of these exact predicates:
+
+- complete durable terminal-seen, report, PASS if applicable, ACK, actor receipt, no-replay reconciliation, OWNER_CLOSURE, closure packet, safe containment, and watchdog exit handshake;
+- pidfd-proved actor loss plus durable outcome, safe containment, durable no-replay ACK-receipt/reconciliation/OWNER_CLOSURE chain; or
+- the frozen external transfer protocol below.
+
+Post-deadline observation is outside certified effects. It cannot create a record, issue kill, accept PASS, infer empty, or release ownership. It can terminate only through a real prebound external transfer.
+
+## 15. External owner transfer
+
+External transfer is not a Boolean escape hatch. Before entry, the certificate binds an independently alive owner PID, stable starttime, uid/gid, pidfd, SOCK_SEQPACKET endpoint, manifest size/hash, maximum packet, rights types, signature policy, and monotone receipt service.
+
+A transfer offer binds AUTH, sequence, predecessor, reason, current terminal subject, chain head, outcome durability, actor/control/send states, attempt/collision/base-closed/commit/intent facts, exact rights count, and a manifest of each fstat/access identity. SCM_RIGHTS may include only the enumerated attempt, attempt-base, stage, cgroup, stream, events, kill, outer-pidfd, cgroup-base, and actor-control capabilities. Each local right remains owned until exact ACCEPTED.
+
+Acceptance must bind the offer SHA256, exact sequence and predecessor, durable receipt SHA256, issuer signature, no-replay flag, receiver PID/starttime, receiver liveness, and independent carrier identity. Only then may rights transfer individually and local ownership close. An unknown offer/acceptance effect remains owned and cannot release resources.
+
+Collision uses the same exact transfer machinery or a separately durable independent receipt; there is no dead collision grammar. Refusal uses a dedicated durable issuer receipt and closure chain. Actor-loss also produces durable no-replay reconciliation and OWNER_CLOSURE. There is no replay after any uncertain effect.
+
+## 16. Outer launcher obligations
+
+The embedded sources cannot establish their own initial authority. A future outer launcher must, before any source interpretation:
+
+- obtain explicit ledger authority naming this exact final V5 identity;
+- verify author-stop, both separated formal reviews, all six gates, issuer key/serial/expiry, and one-shot reservation freshness;
+- construct every sealed carrier without path substitution and authenticate every fd;
+- establish clean argv, env, cwd, umask, signal, timer, FD, namespace, mount, cgroup, and no-mutator state;
+- start a new process group/session or stronger containment that covers all descendants;
+- retain pidfds/cgroup kill and external-owner capabilities, independently drain both output streams, and use one absolute watchdog deadline;
+- distinguish pre-send, send-effect-unknown, consumed, terminal, reconciled, and owner-closed states;
+- never kill only the top process, truncate output, infer timeout from missing text, retry after uncertain effect, or touch any build/evidence/root.
+
+These are outer-launcher obligations, not intrinsic V15 guarantees. Intrinsic V15 guarantees are limited to the exact behavior proved from its frozen source and complete transcript under its stated inputs. Containment, carrier creation, issuer authority, clean entry, durable records, deadlines, drainage, descendant cleanup, reconciliation, and no replay are supplied by this Runner protocol and its future launcher.
+
+## 17. Review separation and manifest eligibility
+
+After this author stop, one fresh supervisor-prebind review must first check exact bytes, line counts, hashes, delimiters, source/prose agreement, certificate constructibility, unresolved gates, and the no-execution boundary. Its prospective ledger outcomes are:
+
+- pass/open: BATCH07_P27_PROBE_RECOVERY_E001_HOST_V15_RUNNER_V5_SUPERVISOR_PREBIND_PASS_AND_DUAL_FORMAL_REVIEW_OPEN_NO_EXECUTION
+- fail/closed: BATCH07_P27_PROBE_RECOVERY_E001_HOST_V15_RUNNER_V5_SUPERVISOR_PREBIND_FAIL_NO_EXECUTION
+
+Only a prebind pass may open two separated formal scopes, performed by fresh reviewers not involved in V5 authorship or prebind:
+
+- Source/certificate/parser formal scope: extraction and seals; one-way issuer construction; certificate/envelope/reservation/AUTH; fd and ancillary grammar; P00/P01D/P01C/P05; RESULT; complete transcript; report/candidate/source/prose census.
+- Lifecycle/containment/durability formal scope: fork ownership; control/actor/send orthogonality; refusal; carried consumption/release horizons; cgroup and pidfd/starttime; cleanup and one-kill lane; all absolute schedules; terminal owner loop; reconciliation; external transfer; no replay.
+
+The two reports must be separately sealed and cannot substitute for each other. The prospective combined ledger outcomes are:
+
+- pass/closed: BATCH07_P27_PROBE_RECOVERY_E001_HOST_V15_RUNNER_V5_DUAL_FORMAL_REVIEW_PASS_NO_EXECUTION
+- fail/closed: BATCH07_P27_PROBE_RECOVERY_E001_HOST_V15_RUNNER_V5_DUAL_FORMAL_REVIEW_FAIL_NO_EXECUTION
+
+Even a dual pass grants no execution. Manifest eligibility remains false until the exact final V5 identity, prebind pass, both formal passes, all six current gate receipts, issuer materials, external owner, outer reconciler, and a later explicit immutable ledger event independently grant manifest binding and execution. No event in this file can self-authorize that transition.
+
+## 18. Embedded source boundaries
+
+The next outer span is the frozen actor source. It contains the frozen validator as an inner raw span. The later outer span is the frozen watchdog source. Exact boundary lines and source census are recorded after both spans. The bytes between boundaries are inert raw text.
+P27 RUNNER V5 ACTOR SOURCE BEGIN C5A91E34
+import array
+import ctypes
+import errno
+import fcntl
+import hashlib
+import os
+import resource
+import select
+import signal
+import socket
+import stat
+import struct
+import sys
+import time
+
+TAG=b"P27E001V15"
+PYTHON=b"/root/miniconda3/bin/python3"
+PYIMAGE=b"/root/miniconda3/bin/python3.12"
+RUNTIME_ROOT=b"/var/lib/p27-e001-host-v15/runtime-root"
+ATTEMPT_BASE=b"/var/lib/p27-e001-host-v15/attempts"
+STAGE_BASE=b"/tmp/p27-e001-host-v15"
+CGROUP_BASE=b"/sys/fs/cgroup/p27-e001-host-v15"
+ENV={b"LANG":b"C",b"LC_ALL":b"C",b"PATH":b"/usr/bin:/bin",b"PYTHONDONTWRITEBYTECODE":b"1",b"PYTHONHASHSEED":b"0",b"PYTHONIOENCODING":b"UTF-8:strict",b"PYTHONNOUSERSITE":b"1",b"PYTHONSAFEPATH":b"1",b"PYTHONUTF8":b"1",b"TZ":b"UTC"}
+SUITE=(b"P00",b"P01D",b"P01C",b"P02",b"P03",b"P04",b"P05",b"P06",b"P07",b"P08",b"P09",b"P10",b"P11",b"P12",b"P13")
+SOURCE_NAMES=(b"keeper.py",b"launcher.py",b"marker.py",b"child.py")
+SOURCE_META=((87151,1840,b"cfa1d88b312b7f4425778018be39cf7628568c9ddb39c697ff12b8b0f1c8be1a"),(4216,128,b"e3bf14ddde012be70a0ec40ac9373c055d2fd79d3ea30aa5e64450174f057716"),(4218,128,b"e9d5eb3544dfddd7251279294e113f053165c2d446dd4517fbcdc6927a8618d5"),(75094,1479,b"b06ceed041004279e9df73cc9cc3c2d73ec07d8f71a9345f451a32e93b7a955d"),(19746,452,b"1d20310b965ff9df9351cbc3ca07aebb15e8cbacf74a8058782c085fde0780bf"))
+SNAPSHOT_EXPECT=(2303269,23672,b"0ea4f324c5175ec196b8118e551a429a6207cd57bacfdaa9903a109046daab92")
+SNAPSHOT_TERMINAL=b"BATCH07_P27_PROBE_RECOVERY_E001_HOST_V15_RUNNER_V2_SUPERVISOR_PREBIND_FAIL_AND_RUNNER_V3_AUTHOR_OPEN_NO_EXECUTION"
+SNAPSHOT_TERMINAL_HEX=SNAPSHOT_TERMINAL.hex().encode("ascii")
+WHOLE_V15=(2431,5916064615,0o100644,1,0,0,228310,4622,b"a27eb1bb5540c18b57094ee26724be75a0c431b3c523385fe1271fb02378b845")
+V15_TERMINAL=b"BATCH07_P27_E001_SUPERVISOR_HOST_PROBE_RECOVERY_V15_AUTHOR_STOP"
+V8_SHA=b"72079707809f54fb35591f5e1ab8ef0d22671c72c37ea234de699e5f9e8002cf"
+PY_SHA=b"9a3d9e94d2be60d9a2a91d08f62292a152e28175fb4ee1d871aa5850fbb7a101"
+CONTEXT_DOMAIN=b"P27E001_V5_DETACHED_ENVELOPE_CONTEXT\x00"
+CERTIFICATE_DOMAIN=b"P27E001_V5_CERTIFICATE_DIGEST\x00"
+SIGNATURE_DOMAIN=b"P27E001_V5_ISSUER_SIGNATURE_PREIMAGE\x00"
+RECEIPT_DOMAIN=b"P27E001_V5_ISSUER_RECEIPT\x00"
+RESERVATION_TBS_DOMAIN=b"P27E001_V5_RESERVATION_TBS\x00"
+RESERVATION_SIGNATURE_DOMAIN=b"P27E001_V5_RESERVATION_SIGNATURE\x00"
+RESERVATION_RECEIPT_DOMAIN=b"P27E001_V5_RESERVATION_RECEIPT\x00"
+FINAL_ENVELOPE_DOMAIN=b"P27E001_V5_FINAL_ENVELOPE\x00"
+AUTH_DOMAIN=b"P27E001_V5_SESSION_AUTH\x00"
+EMPTY_SHA=b"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+OP_NS=15000000000
+LAUNCH_NS=1000000000
+RELEASE_RECORD_OFFSET_NS=800000000
+RELEASE_REPLY_OFFSET_NS=900000000
+POST_NS=1664800000
+HOST_NS=17664800000
+TOTAL_NS=18164800000
+CLEANUP_NS=2000000000
+SIGCONT_NS=5000000
+PRECONSUME_NS=10000000000
+CONSUMPTION_NS=100000000
+ATTEMPT_DIRFD_NS=100000000
+STAGE_NS=10000000000
+REPORT_NS=1000000000
+RECORD_NS=100000000
+CANDIDATE_RECORD_NS=100000000
+NOTICE_NS=100000000
+SEEN_RECORD_NS=100000000
+REPORT_RECORD_NS=1000000000
+PASS_COMMIT_NS=100000000
+PASS_MARGIN_NS=10000000
+ACK_NS=500000000
+A_RECEIPT_NS=100000000
+ACK_RECEIPT_RECORD_NS=100000000
+RECONCILIATION_RECORD_NS=100000000
+OWNER_CLOSURE_RECORD_NS=100000000
+CLOSURE_PACKET_NS=100000000
+B_EXIT_NS=100000000
+FINAL_TOTAL_NS=2510000000
+KILL_TICKET_NS=100000000
+RECOVERY_RECORD_NS=100000000
+CLEANUP_EFFECT_NS=2600000000
+FAILURE_TAIL_NS=2610000000
+FAILURE_TOTAL_NS=5210000000
+REFUSAL_RECORD_NS=20000000
+REFUSAL_ACK_NS=20000000
+REFUSAL_RECEIPT_NS=20000000
+REFUSAL_CLOSURE_NS=20000000
+REFUSAL_TOTAL_NS=80000000
+REFUSAL_PHASE_SPEC=((b"REFUSAL_RECORD",REFUSAL_RECORD_NS),(b"REFUSAL_ACK",REFUSAL_ACK_NS),(b"REFUSAL_RECEIPT",REFUSAL_RECEIPT_NS),(b"REFUSAL_CLOSURE",REFUSAL_CLOSURE_NS))
+ACTOR_DISABLE_NS=500000000
+TERMINAL_PHASE_SPEC=((b"CANDIDATE_RECORD",CANDIDATE_RECORD_NS),(b"NOTICE",NOTICE_NS),(b"TERMINAL_SEEN_RECORD",SEEN_RECORD_NS),(b"REPORT_RECORD",REPORT_RECORD_NS),(b"PASS_COMMIT",PASS_COMMIT_NS),(b"PASS_MARGIN",PASS_MARGIN_NS),(b"ACK",ACK_NS),(b"A_RECEIPT",A_RECEIPT_NS),(b"ACK_RECEIPT_RECORD",ACK_RECEIPT_RECORD_NS),(b"RECONCILIATION_RECORD",RECONCILIATION_RECORD_NS),(b"OWNER_CLOSURE_RECORD",OWNER_CLOSURE_RECORD_NS),(b"CLOSURE_PACKET",CLOSURE_PACKET_NS),(b"B_EXIT",B_EXIT_NS))
+TERMINAL_BIND_KEYS=tuple(b"bound_"+name.lower()+b"_deadline_ns" for name,cap in TERMINAL_PHASE_SPEC)
+CERT_LIFE_NS=360000000000
+ENTRY_REMAIN_NS=295482000000
+CONSUME_REMAIN_NS=285482000000
+PRE_STAGE_REMAIN_NS=285382000000
+POST_STAGE_REMAIN_NS=275382000000
+POST_CONTAIN_REMAIN_NS=274882000000
+STREAM_CAP=3145728
+MAX_FILE=16777216
+MAX_U63=(1<<63)-1
+UINT_MAX=(1<<32)-1
+MAX_RIGHTS=4
+EXACT_SEALS=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL
+O_DIR=os.O_RDONLY|os.O_DIRECTORY|os.O_CLOEXEC|os.O_NOFOLLOW
+LIBC=ctypes.CDLL(None,use_errno=True)
+LIBC.syscall.restype=ctypes.c_long
+SYS_CLONE3=435
+CLONE_PIDFD=0x00001000
+CLONE_INTO_CGROUP=0x200000000
+CGROUP2_MAGIC=0x63677270
+PREFLIGHT=True
+STAGE_PRESENT=False
+CONTROL_SEND_SEQ=0
+CONTROL_RECV_SEQ=0
+CONTROL_SEND_STATE=b"IDLE"
+B_CHILD_PID=-1
+B_CONTROL=None
+
+FAULT_ORDER=(b"INPUT_AUTH",b"ENTRY_CONTEXT",b"CERTIFICATE_INVALID",b"PRECONSUMPTION_DEADLINE",b"CONSUME_EDGE_UNKNOWN",b"ATTEMPT_COLLISION",b"ATTEMPT_NAMESPACE_UNKNOWN",b"ATTEMPT_DIRFD_UNKNOWN",b"ATTEMPT_BASE_DURABILITY_UNKNOWN",b"INTENT_DURABILITY_UNKNOWN",b"CERTIFICATE_EXPIRED",b"CLOCK_DRIFT",b"DEADLINE_EXPIRED",b"CONTROL_MALFORMED",b"CONTROL_TIMEOUT",b"CONTROL_TRUNCATION",b"CONTROL_LOST",b"SEND_EFFECT_UNKNOWN",b"PIDFD_ACTOR_LOST",b"FD_TRANSFER",b"STAGING_FAULT",b"STAGING_DEADLINE",b"CONTAINMENT_FAULT",b"STOP_WAIT_UNKNOWN",b"PIDFD_BINDING",b"LAUNCH_DEADLINE",b"RELEASE_RECORD_DURABILITY_UNKNOWN",b"RELEASE_EFFECT_UNKNOWN",b"SYSCALL_EFFECT_UNKNOWN",b"WATCHDOG_DEADLINE",b"KILL_TICKET_DURABILITY_UNKNOWN",b"KILL_EFFECT_UNKNOWN",b"CAPTURE_IO",b"CAPTURE_OVERFLOW",b"STDERR_NONEMPTY",b"DIRECT_WAIT_UNKNOWN",b"OUTER_STATUS",b"TRANSCRIPT_LANGUAGE",b"TRANSCRIPT_STRUCTURE",b"TRANSCRIPT_SEMANTICS",b"VALIDATED_DURABILITY_UNKNOWN",b"ACK_DURABILITY_UNKNOWN",b"CONTAINMENT_OBSERVATION_UNKNOWN",b"CONTAINMENT_NOT_EMPTY",b"RECOVERY_DURABILITY_UNKNOWN",b"RETAINED_DURABILITY_UNKNOWN",b"REPORT_CANDIDATE_DURABILITY_UNKNOWN",b"TERMINAL_SEEN_DURABILITY_UNKNOWN",b"REPORT_DURABILITY_UNKNOWN",b"ACK_EFFECT_UNKNOWN",b"RECONCILIATION_UNKNOWN",b"OWNER_CLOSURE_DURABILITY_UNKNOWN",b"TRANSFER_PROTOCOL_UNKNOWN",b"EXTERNAL_SURVIVAL_TRANSFER_REQUIRED",b"INTERNAL_INVARIANT")
+
+class Refuse(Exception):
+ pass
+
+class ConsumedFail(Exception):
+ pass
+
+class ConsumedIndeterminate(Exception):
+ pass
+
+class CertificateExpired(ConsumedIndeterminate):
+ pass
+
+class FaultSet(ConsumedIndeterminate):
+ def __init__(self,faults):
+  self.faults=set(faults)
+  super().__init__("fault-set")
+
+class RemoteAbort(FaultSet):
+ pass
+
+class ControlLost(FaultSet):
+ def __init__(self,label):
+  super().__init__({b"CONTROL_LOST"})
+
+class SendEffectUnknown(FaultSet):
+ def __init__(self,label):
+  super().__init__({b"SEND_EFFECT_UNKNOWN"})
+
+def need(value,kind=None):
+ if not value:
+  selected=(Refuse if PREFLIGHT else ConsumedFail) if kind is None else kind
+  raise selected("closed")
+
+def udec(raw,low=0,high=MAX_U63):
+ need(type(raw)is bytes and raw and raw.isdigit() and (len(raw)==1 or raw[0]!=48))
+ value=int(raw);need(low<=value<=high and str(value).encode()==raw)
+ return value
+
+def sdec(raw,low=-MAX_U63,high=MAX_U63):
+ need(type(raw)is bytes and raw)
+ if raw.startswith(b"-"):need(len(raw)>1 and raw[1:].isdigit() and raw[1]!=48)
+ else:need(raw.isdigit() and (len(raw)==1 or raw[0]!=48))
+ value=int(raw);need(low<=value<=high and str(value).encode()==raw)
+ return value
+
+def h64(raw):
+ need(type(raw)is bytes and len(raw)==64 and all(x in b"0123456789abcdef" for x in raw))
+ return raw
+
+def even_hex(raw,cap=MAX_FILE):
+ need(type(raw)is bytes and len(raw)%2==0 and len(raw)<=2*cap)
+ need(all(x in b"0123456789abcdef" for x in raw))
+ result=bytes.fromhex(raw.decode("ascii"))
+ need(result.hex().encode()==raw)
+ return result
+
+def octal(raw):
+ need(raw and all(x in b"01234567" for x in raw))
+ value=int(raw,8);need(format(value,"o").encode()==raw)
+ return value
+
+def ascii_file(raw,cap=MAX_FILE):
+ need(type(raw)is bytes and 0<len(raw)<=cap and raw.endswith(b"\n"))
+ need(all(x==10 or 32<=x<=126 for x in raw))
+ return raw
+
+def sha(raw):
+ return hashlib.sha256(raw).hexdigest().encode("ascii")
+
+def read_all(number,cap=MAX_FILE):
+ os.lseek(number,0,os.SEEK_SET);parts=[];total=0
+ while True:
+  chunk=os.read(number,min(1048576,cap-total+1))
+  if not chunk:break
+  total+=len(chunk);need(total<=cap);parts.append(chunk)
+ return b"".join(parts)
+
+def write_all(number,raw,kind=ConsumedIndeterminate):
+ offset=0
+ while offset<len(raw):
+  try:count=os.write(number,raw[offset:])
+  except InterruptedError:continue
+  need(count>0,kind);offset+=count
+
+def fd_tuple(number,body):
+ held=os.fstat(number)
+ return (held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid,held.st_size,body.count(b"\n"),sha(body))
+
+def exact_whole(number,expected,terminal):
+ raw=read_all(number,expected[6]);need(fd_tuple(number,raw)==expected,Refuse)
+ lines=raw[:-1].split(b"\n");need(lines and lines[-1]==terminal and lines.count(terminal)==1,Refuse)
+ return raw
+
+def exact_snapshot(number):
+ seals(number);fd_access(number,os.O_RDWR)
+ raw=read_all(number,SNAPSHOT_EXPECT[0]);held=os.fstat(number)
+ need(stat.S_ISREG(held.st_mode) and held.st_nlink==0 and held.st_uid==held.st_gid==0,Refuse)
+ need((held.st_size,raw.count(b"\n"),sha(raw))==SNAPSHOT_EXPECT and raw.endswith(b"\n"),Refuse)
+ lines=raw[:-1].split(b"\n")
+ need(lines and lines[-1]==SNAPSHOT_TERMINAL and lines.count(SNAPSHOT_TERMINAL)==1,Refuse)
+ return raw
+
+def seals(number):
+ need(fcntl.fcntl(number,fcntl.F_GET_SEALS)==EXACT_SEALS,Refuse)
+
+def sealed_carrier(number,cap):
+ seals(number);fd_access(number,os.O_RDWR);held=os.fstat(number)
+ need(stat.S_ISREG(held.st_mode) and held.st_nlink==0 and held.st_uid==held.st_gid==0,Refuse)
+ raw=read_all(number,cap);need(held.st_size==len(raw) and len(raw)<=cap,Refuse)
+ return raw
+
+def extract_one(raw,begin,end):
+ lead=begin+b"\n";tail=end+b"\n"
+ need(raw.count(lead)==1 and raw.count(tail)==1)
+ start=raw.index(lead)+len(lead);stop=raw.index(tail,start)
+ return raw[start:stop]
+
+def meta(raw):
+ return (len(raw),raw.count(b"\n"),sha(raw))
+
+def open_dir(path):
+ need(type(path)is bytes and path.startswith(b"/") and b"\x00" not in path)
+ current=following=-1
+ try:
+  current=os.open(b"/",O_DIR)
+  for part in path.split(b"/")[1:]:
+   need(part not in (b"",b".",b".."))
+   following=os.open(part,O_DIR,dir_fd=current);os.close(current);current=following;following=-1
+  held=os.fstat(current)
+  need(stat.S_ISDIR(held.st_mode) and held.st_uid==held.st_gid==0 and held.st_mode&0o022==0)
+  result=current;current=-1;return result
+ finally:close_numbers(tuple(x for x in (following,current) if x>=0))
+
+def open_under(rootfd,path):
+ need(path.startswith(b"/") and b"\x00" not in path)
+ parts=path.split(b"/")[1:];need(parts and all(x not in (b"",b".",b"..") for x in parts))
+ current=following=-1
+ try:
+  current=os.dup(rootfd)
+  for part in parts[:-1]:
+   following=os.open(part,O_DIR,dir_fd=current);os.close(current);current=following;following=-1
+  return os.open(parts[-1],os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=current)
+ finally:close_numbers(tuple(x for x in (following,current) if x>=0))
+
+def mount_id(number):
+ info=-1
+ try:
+  info=os.open(b"/proc/self/fdinfo/"+str(number).encode(),os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=read_all(info,4096)
+ finally:close_numbers(tuple(x for x in (info,) if x>=0))
+ values=[x[7:] for x in raw.splitlines() if x.startswith(b"mnt_id:\t")]
+ need(len(values)==1);return udec(values[0],1)
+
+def mount_line(number):
+ wanted=mount_id(number);info=-1
+ try:
+  info=os.open(b"/proc/self/mountinfo",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(info,1048576),1048576)
+ finally:close_numbers(tuple(x for x in (info,) if x>=0))
+ matches=[]
+ for line in raw.splitlines():
+  parts=line.split(b" ")
+  if parts and parts[0]==str(wanted).encode():matches.append(line+b"\n")
+ need(len(matches)==1);return wanted,matches[0]
+
+class StatFS(ctypes.Structure):
+ _fields_=(("f_type",ctypes.c_long),("f_bsize",ctypes.c_long),("rest",ctypes.c_byte*240))
+
+def statfs_magic(number):
+ cell=StatFS();need(LIBC.fstatfs(number,ctypes.byref(cell))==0)
+ return cell.f_type&0xffffffff
+
+def absent(directory,name,kind=ConsumedFail):
+ try:os.stat(name,dir_fd=directory,follow_symlinks=False)
+ except FileNotFoundError:return
+ raise kind("present")
+
+def durable_leaf(directory,name,raw,deadline,kind=ConsumedIndeterminate):
+ number=-1
+ try:
+  progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS),kind)
+  number=os.open(name,os.O_RDWR|os.O_CREAT|os.O_EXCL|os.O_CLOEXEC|os.O_NOFOLLOW,0o400,dir_fd=directory)
+  progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS),kind);write_all(number,raw,kind);progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS),kind)
+  os.fsync(number);progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS),kind);held=os.fstat(number)
+  need(stat.S_ISREG(held.st_mode) and stat.S_IMODE(held.st_mode)==0o400 and held.st_uid==held.st_gid==0 and held.st_nlink==1 and held.st_size==len(raw),kind)
+  need(read_all(number,len(raw))==raw,kind);progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS),kind)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+ os.fsync(directory);progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS),kind)
+
+def stage_leaf(directory,name,raw,identity,deadline):
+ number=-1
+ try:
+  durable_leaf(directory,name,raw,deadline)
+  number=os.open(name,os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=directory)
+  progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS));held=os.fstat(number);again=read_all(number,identity[0])
+  need(stat.S_ISREG(held.st_mode) and stat.S_IMODE(held.st_mode)==0o400 and held.st_nlink==1 and held.st_uid==held.st_gid==0)
+  need(meta(again)==identity);progress(CERT,deadline,horizon_needed(deadline,POST_STAGE_REMAIN_NS))
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+
+def memfd(raw,label):
+ number=-1
+ try:
+  number=os.memfd_create(label,os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+  write_all(number,raw);os.lseek(number,0,os.SEEK_SET)
+  fcntl.fcntl(number,fcntl.F_ADD_SEALS,EXACT_SEALS);seals(number)
+  need(read_all(number,len(raw))==raw);os.lseek(number,0,os.SEEK_SET)
+  result=number;number=-1;return result
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+
+def close_range(first,last):
+ need(0<=first<=last<=UINT_MAX)
+ need(LIBC.close_range(ctypes.c_uint(first),ctypes.c_uint(last),ctypes.c_uint(0))==0)
+
+def parse_fixed(raw,header,keys,end):
+ ascii_file(raw);lines=raw[:-1].split(b"\n")
+ need(len(lines)==len(keys)+2 and lines[0]==header and lines[-1]==end)
+ result={}
+ for key,line in zip(keys,lines[1:-1]):
+  parts=line.split(b"=",1);need(len(parts)==2 and parts[0]==key and key not in result)
+  result[key]=parts[1]
+ return result
+
+ENVELOPE_CONTEXT_KEYS=(b"ISSUER_ID",b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"E0366_SNAPSHOT_BYTES",b"E0366_SNAPSHOT_LF",b"E0366_SNAPSHOT_SHA256",b"E0366_SNAPSHOT_TERMINAL_HEX",b"V15_SHA256",b"NOT_BEFORE_REALTIME_NS",b"NOT_AFTER_REALTIME_NS",b"ONE_SHOT_RESERVED_BY_ISSUER",b"ONE_SHOT_CONSUMED_BY_ISSUER")
+ENVELOPE_KEYS=ENVELOPE_CONTEXT_KEYS+(b"ENVELOPE_CONTEXT_SHA256",b"CERTIFICATE_DIGEST_SHA256",b"SIGNATURE_PREIMAGE_SHA256",b"SIGNATURE_ALGORITHM",b"SIGNATURE_HEX",b"ISSUER_RECEIPT_SHA256")
+RESERVATION_TBS_KEYS=(b"ISSUER_ID",b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"CERTIFICATE_DIGEST_SHA256",b"FINAL_ENVELOPE_DIGEST_SHA256",b"NOT_BEFORE_REALTIME_NS",b"NOT_AFTER_REALTIME_NS",b"ONE_SHOT_RESERVED_BY_ISSUER",b"ONE_SHOT_CONSUMED_BY_ISSUER",b"SIGNATURE_ALGORITHM")
+RESERVATION_KEYS=RESERVATION_TBS_KEYS+(b"SIGNATURE_PREIMAGE_SHA256",b"SIGNATURE_HEX",b"RESERVATION_DIGEST_SHA256")
+
+CERT_KEYS=(b"ISSUER_ID",b"ISSUER_CONTEXT_SHA256",b"BOOT_ID_SHA256",b"PLATFORM_ID_SHA256",b"ARCH",b"KERNEL_RELEASE_HEX",b"NOT_BEFORE_REALTIME_NS",b"ABSOLUTE_EXPIRY_REALTIME_NS",b"ABSOLUTE_LIFETIME_NS",b"REALTIME_BIND_NS",b"MONOTONIC_BIND_NS",b"REALTIME_MONOTONIC_MAX_DRIFT_NS",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"E0366_SNAPSHOT_BYTES",b"E0366_SNAPSHOT_LF",b"E0366_SNAPSHOT_SHA256",b"E0366_SNAPSHOT_TERMINAL_HEX",b"HISTORICAL_SNAPSHOT_SEALED",b"V15_SHA256",b"V8_SHA256",b"ACTOR_ENTRY_CAPS",b"ACTOR_ENTRY_NNP",b"ACTOR_ENTRY_SECUREBITS",b"PAYLOAD_FINAL_CAPS",b"PAYLOAD_FINAL_NNP",b"PAYLOAD_FINAL_SECUREBITS",b"ATTEMPT_BASE_DEV",b"ATTEMPT_BASE_INO",b"ATTEMPT_BASE_MODE",b"ATTEMPT_BASE_NLINK",b"ATTEMPT_BASE_UID",b"ATTEMPT_BASE_GID",b"ATTEMPT_BASE_MOUNT_ID",b"ATTEMPT_BASE_MOUNTINFO_SHA256",b"ATTEMPT_BASE_FSTYPE_HEX",b"CGROUP2_FS_MAGIC",b"CGROUP2_MOUNT_ID",b"CGROUP2_MOUNTINFO_SHA256",b"CGROUP_BASE_DEV",b"CGROUP_BASE_INO",b"CGROUP_BASE_MODE",b"CGROUP_BASE_NLINK",b"CGROUP_BASE_UID",b"CGROUP_BASE_GID",b"CGROUP_BASE_TYPE_HEX",b"CGROUP_BASE_CONTROLLERS_HEX",b"CGROUP_BASE_SUBTREE_CONTROL_HEX",b"CGROUP_NO_EXTERNAL_MUTATOR",b"CGROUP_CHILD_MODE",b"CGROUP_CHILD_UID",b"CGROUP_CHILD_GID",b"CGROUP_CHILD_TYPE_HEX",b"CGROUP_CHILD_CONTROLLERS_HEX",b"CGROUP_CHILD_SUBTREE_CONTROL_HEX",b"RUNTIME_ROOT_DEV",b"RUNTIME_ROOT_INO",b"RUNTIME_ROOT_MODE",b"RUNTIME_ROOT_NLINK",b"RUNTIME_ROOT_UID",b"RUNTIME_ROOT_GID",b"RUNTIME_ROOT_MOUNT_ID",b"RUNTIME_ROOT_MOUNTINFO_SHA256",b"RUNTIME_ROOT_FSTYPE_HEX",b"SAFE_BIND_DEV",b"SAFE_BIND_INO",b"SAFE_BIND_MODE",b"SAFE_BIND_NLINK",b"SAFE_BIND_UID",b"SAFE_BIND_GID",b"SAFE_BIND_MOUNT_ID",b"SAFE_BIND_MOUNTINFO_SHA256",b"SAFE_BIND_FSTYPE_HEX",b"SAFE_BIND_NOEXEC",b"SAFE_BIND_WRITABLE_DESCENDANT_COUNT",b"KEEPER_BYTES",b"KEEPER_LF",b"KEEPER_SHA256",b"LAUNCHER_BYTES",b"LAUNCHER_LF",b"LAUNCHER_SHA256",b"MARKER_BYTES",b"MARKER_LF",b"MARKER_SHA256",b"CHILD_BYTES",b"CHILD_LF",b"CHILD_SHA256",b"PYTHON_IMAGE_SHA256",b"PYTHON_IMAGE_BYTES",b"PYTHON_IMAGE_DEV",b"PYTHON_IMAGE_INO",b"PYTHON_IMAGE_MODE",b"PYTHON_IMAGE_NLINK",b"PYTHON_IMAGE_UID",b"PYTHON_IMAGE_GID",b"LIBC_PATH_HEX",b"LIBC_DEV",b"LIBC_INO",b"LIBC_MODE",b"LIBC_NLINK",b"LIBC_UID",b"LIBC_GID",b"LIBC_BYTES",b"LIBC_SHA256",b"LIBC_CONFSTR_HEX",b"VALID_SIGNAL_COUNT",b"DEFAULT_SIGNAL_COUNT",b"DEFAULTS_SHA256",b"PRECONSUMPTION_CAP_NS",b"CONSUMPTION_PROGRESS_NS",b"ATTEMPT_DIRFD_PROGRESS_NS",b"STAGING_CAP_NS",b"RELEASE_PROGRESS_NS",b"RELEASE_RECORD_ABSOLUTE_OFFSET_NS",b"RELEASE_REPLY_ABSOLUTE_OFFSET_NS",b"SIGCONT_CALL_RETURN_NS",b"DURABLE_RECORD_PROGRESS_NS",b"WATCHDOG_ARM_PROGRESS_NS",b"WATCHDOG_ACK_PROGRESS_NS",b"WATCHDOG_SURVIVES_CONSUME_TO_REPORT",b"WATCHDOG_SURVIVES_KILL_TO_EMPTY",b"CGROUP_KILL_WRITE_RETURN_NS",b"CGROUP_KILL_TO_EMPTY_NS",b"FINAL_REPORT_PROGRESS_NS",b"FINAL_PASS_COMMIT_PROGRESS_NS",b"FINAL_PASS_MARGIN_NS",b"TERMINAL_HANDSHAKE_PROGRESS_NS",b"A_RECEIPT_PROGRESS_NS",b"B_CLOSURE_PROGRESS_NS",b"TERMINAL_CANDIDATE_RECORD_NS",b"TERMINAL_NOTICE_PROGRESS_NS",b"TERMINAL_SEEN_RECORD_NS",b"TERMINAL_ACK_RECEIPT_RECORD_NS",b"TERMINAL_RECONCILIATION_RECORD_NS",b"TERMINAL_OWNER_CLOSURE_RECORD_NS",b"TERMINAL_CLOSURE_PACKET_NS",b"TERMINAL_B_EXIT_NS",b"FAILURE_OVERALL_PROGRESS_NS",b"FAILURE_CLEANUP_EFFECT_PROGRESS_NS",b"FAILURE_TAIL_RESERVE_NS",b"REFUSAL_RECORD_PROGRESS_NS",b"REFUSAL_ACK_PROGRESS_NS",b"REFUSAL_RECEIPT_PROGRESS_NS",b"REFUSAL_CLOSURE_PROGRESS_NS",b"FINAL_TERMINAL_TOTAL_NS",b"ENTRY_MIN_REMAINING_NS",b"CONSUMPTION_MIN_REMAINING_NS",b"PRE_STAGE_MIN_REMAINING_NS",b"POST_STAGE_MIN_REMAINING_NS",b"POST_CONTAIN_MIN_REMAINING_NS",b"ACTOR_RELEASE_DISABLE_PROGRESS_NS",b"EXTERNAL_OWNER_PID",b"EXTERNAL_OWNER_STARTTIME",b"EXTERNAL_OWNER_UID",b"EXTERNAL_OWNER_GID",b"EXTERNAL_TRANSFER_MANIFEST_BYTES",b"EXTERNAL_TRANSFER_MANIFEST_SHA256",b"NO_ASYNC_TRANSFER",b"NO_SIGNAL_DELIVERY",b"NO_TIMER_DELIVERY",b"NO_TRACE_PROFILE_AUDIT_HOOK",b"NO_CONCURRENT_MUTATOR",b"DEPENDENCY_CLOSURE_COMPLETE",b"RUNTIME_ROOT_WORKSPACE_ABSENT",b"BUILD_EVIDENCE_ROOT_UNREACHABLE",b"CLOSE_RANGE_COMPLETE",b"FSYNC_DURABILITY_PREMISE",b"CLONE3_CPYTHON_GATE_ID",b"CLONE3_CPYTHON_GATE_PASS",b"DELETED_CGROUP_FD_GATE_ID",b"DELETED_CGROUP_FD_GATE_PASS",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_ID",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_PASS",b"EXTERNAL_SURVIVAL_GATE_ID",b"EXTERNAL_SURVIVAL_GATE_PASS",b"OUTER_RECONCILER_GATE_ID",b"OUTER_RECONCILER_GATE_PASS",b"ISSUER_CRYPTOGRAPHY_GATE_ID",b"ISSUER_CRYPTOGRAPHY_GATE_PASS",b"DEP_COUNT")
+
+def canonical_envelope_context(values):
+ body=b"P27E001_ISSUER_CONTEXT_V5\n"
+ for key in ENVELOPE_CONTEXT_KEYS:body+=key+b"="+values[key]+b"\n"
+ return CONTEXT_DOMAIN+body+b"CONTEXT_END=1\n"
+
+def envelope_tbs(values,certificate_digest):
+ body=b"P27E001_ISSUER_ENVELOPE_TBS_V5\n"
+ for key in ENVELOPE_CONTEXT_KEYS:body+=key+b"="+values[key]+b"\n"
+ body+=b"ENVELOPE_CONTEXT_SHA256="+values[b"ENVELOPE_CONTEXT_SHA256"]+b"\nCERTIFICATE_DIGEST_SHA256="+certificate_digest+b"\nSIGNATURE_ALGORITHM="+values[b"SIGNATURE_ALGORITHM"]+b"\nENVELOPE_TBS_END=1\n"
+ return body
+
+def issuer_signature_preimage(cert_raw,env_tbs):
+ return SIGNATURE_DOMAIN+length_frame(b"CERTIFICATE_RAW",cert_raw)+length_frame(b"ENVELOPE_TBS",env_tbs)+b"SIGNATURE_PREIMAGE_END=1\n"
+
+def issuer_receipt_preimage(context_digest,certificate_digest,signature_digest,algorithm,signature):
+ return (RECEIPT_DOMAIN+b"ENVELOPE_CONTEXT_SHA256="+context_digest+b"\nCERTIFICATE_DIGEST_SHA256="+certificate_digest+b"\nSIGNATURE_PREIMAGE_SHA256="+signature_digest+b"\nSIGNATURE_ALGORITHM="+algorithm+b"\nSIGNATURE_HEX="+signature+b"\nISSUER_RECEIPT_END=1\n")
+
+def parse_envelope(raw):
+ values=parse_fixed(raw,b"P27E001_ISSUER_ENVELOPE_V5",ENVELOPE_KEYS,b"ENVELOPE_END=1")
+ exact={b"ISSUER_ID":b"P27_HOST_PREMISE_ISSUER_V5",b"E0366_SNAPSHOT_BYTES":str(SNAPSHOT_EXPECT[0]).encode(),b"E0366_SNAPSHOT_LF":str(SNAPSHOT_EXPECT[1]).encode(),b"E0366_SNAPSHOT_SHA256":SNAPSHOT_EXPECT[2],b"E0366_SNAPSHOT_TERMINAL_HEX":SNAPSHOT_TERMINAL_HEX,b"V15_SHA256":WHOLE_V15[8],b"ONE_SHOT_RESERVED_BY_ISSUER":b"1",b"ONE_SHOT_CONSUMED_BY_ISSUER":b"0",b"SIGNATURE_ALGORITHM":b"ED25519_EXTERNAL_GATE_V5"}
+ for key,value in exact.items():need(values[key]==value,Refuse)
+ for key in (b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"ENVELOPE_CONTEXT_SHA256",b"CERTIFICATE_DIGEST_SHA256",b"SIGNATURE_PREIMAGE_SHA256",b"ISSUER_RECEIPT_SHA256"):h64(values[key])
+ sig=values[b"SIGNATURE_HEX"];need(len(sig)==128 and all(x in b"0123456789abcdef" for x in sig),Refuse)
+ before=udec(values[b"NOT_BEFORE_REALTIME_NS"]);after=udec(values[b"NOT_AFTER_REALTIME_NS"]);need(before<after,Refuse)
+ context_digest=sha(canonical_envelope_context(values));need(values[b"ENVELOPE_CONTEXT_SHA256"]==context_digest,Refuse)
+ return values
+
+def verify_issuer_order(values,cert_raw,cert_values):
+ context=canonical_envelope_context(values);context_digest=sha(context);certificate_digest=sha(CERTIFICATE_DOMAIN+cert_raw)
+ need(cert_values[b"ISSUER_CONTEXT_SHA256"]==context_digest,Refuse)
+ need(values[b"ENVELOPE_CONTEXT_SHA256"]==context_digest and values[b"CERTIFICATE_DIGEST_SHA256"]==certificate_digest,Refuse)
+ for key in (b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256"):need(values[key]==cert_values[key],Refuse)
+ need(values[b"NOT_BEFORE_REALTIME_NS"]==cert_values[b"NOT_BEFORE_REALTIME_NS"] and values[b"NOT_AFTER_REALTIME_NS"]==cert_values[b"ABSOLUTE_EXPIRY_REALTIME_NS"],Refuse)
+ tbs=envelope_tbs(values,certificate_digest);signature_preimage=issuer_signature_preimage(cert_raw,tbs);signature_digest=sha(signature_preimage)
+ receipt_preimage=issuer_receipt_preimage(context_digest,certificate_digest,signature_digest,values[b"SIGNATURE_ALGORITHM"],values[b"SIGNATURE_HEX"]);receipt_digest=sha(receipt_preimage)
+ need(values[b"SIGNATURE_PREIMAGE_SHA256"]==signature_digest and values[b"ISSUER_RECEIPT_SHA256"]==receipt_digest,Refuse)
+ need(cert_values[b"ISSUER_CRYPTOGRAPHY_GATE_PASS"]==b"1" and cert_values[b"ISSUER_CRYPTOGRAPHY_GATE_ID"]!=b"0"*64,Refuse)
+ return context_digest,certificate_digest,receipt_digest
+
+def length_frame(label,raw):
+ return label+b"="+str(len(raw)).encode()+b"\n"+raw
+
+def reservation_tbs(values):
+ body=b"P27E001_ISSUER_RESERVATION_TBS_V5\n"
+ for key in RESERVATION_TBS_KEYS:body+=key+b"="+values[key]+b"\n"
+ return RESERVATION_TBS_DOMAIN+body+b"RESERVATION_TBS_END=1\n"
+
+def reservation_signature_preimage(tbs):
+ return RESERVATION_SIGNATURE_DOMAIN+length_frame(b"RESERVATION_TBS",tbs)+b"RESERVATION_SIGNATURE_PREIMAGE_END=1\n"
+
+def reservation_receipt_preimage(tbs,signature_digest,algorithm,signature):
+ return RESERVATION_RECEIPT_DOMAIN+length_frame(b"RESERVATION_TBS",tbs)+b"SIGNATURE_PREIMAGE_SHA256="+signature_digest+b"\nSIGNATURE_ALGORITHM="+algorithm+b"\nSIGNATURE_HEX="+signature+b"\nRESERVATION_RECEIPT_END=1\n"
+
+def parse_reservation(raw):
+ values=parse_fixed(raw,b"P27E001_ISSUER_RESERVATION_V5",RESERVATION_KEYS,b"RESERVATION_END=1")
+ need(values[b"ISSUER_ID"]==b"P27_HOST_PREMISE_ISSUER_V5" and values[b"ONE_SHOT_RESERVED_BY_ISSUER"]==b"1" and values[b"ONE_SHOT_CONSUMED_BY_ISSUER"]==b"0",Refuse)
+ need(values[b"SIGNATURE_ALGORITHM"]==b"ED25519_EXTERNAL_GATE_V5",Refuse)
+ for key in (b"AUTHORIZATION_SERIAL",b"CERTIFICATE_DIGEST_SHA256",b"FINAL_ENVELOPE_DIGEST_SHA256",b"SIGNATURE_PREIMAGE_SHA256",b"RESERVATION_DIGEST_SHA256"):h64(values[key])
+ sig=values[b"SIGNATURE_HEX"];need(len(sig)==128 and all(x in b"0123456789abcdef" for x in sig),Refuse)
+ before=udec(values[b"NOT_BEFORE_REALTIME_NS"]);after=udec(values[b"NOT_AFTER_REALTIME_NS"]);need(before<after,Refuse)
+ return values
+
+def verify_reservation_order(values,cert_raw,envelope_raw,envelope_values):
+ cert_digest=sha(CERTIFICATE_DOMAIN+cert_raw);envelope_digest=sha(FINAL_ENVELOPE_DOMAIN+envelope_raw)
+ tbs=reservation_tbs(values);signature_preimage=reservation_signature_preimage(tbs);signature_digest=sha(signature_preimage)
+ receipt_preimage=reservation_receipt_preimage(tbs,signature_digest,values[b"SIGNATURE_ALGORITHM"],values[b"SIGNATURE_HEX"]);receipt_digest=sha(receipt_preimage)
+ need(values[b"CERTIFICATE_DIGEST_SHA256"]==cert_digest and values[b"FINAL_ENVELOPE_DIGEST_SHA256"]==envelope_digest,Refuse)
+ need(values[b"SIGNATURE_PREIMAGE_SHA256"]==signature_digest and values[b"RESERVATION_DIGEST_SHA256"]==receipt_digest,Refuse)
+ for key in (b"ISSUER_ID",b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"NOT_BEFORE_REALTIME_NS",b"NOT_AFTER_REALTIME_NS",b"ONE_SHOT_RESERVED_BY_ISSUER",b"ONE_SHOT_CONSUMED_BY_ISSUER"):need(values[key]==envelope_values[key],Refuse)
+ return receipt_digest
+
+def session_auth(cert_raw,envelope_raw,reservation_raw):
+ return sha(AUTH_DOMAIN+length_frame(b"CERTIFICATE",cert_raw)+length_frame(b"ENVELOPE",envelope_raw)+length_frame(b"RESERVATION",reservation_raw))
+
+def parse_cert(raw):
+ ascii_file(raw);lines=raw[:-1].split(b"\n")
+ need(lines and lines[0]==b"P27E001_PREMISE_CERTIFICATE_V5" and lines[-1]==b"CERTIFICATE_END=1",Refuse)
+ fixed=lines[1:1+len(CERT_KEYS)];need(len(fixed)==len(CERT_KEYS),Refuse);values={}
+ for key,line in zip(CERT_KEYS,fixed):
+  parts=line.split(b"=",1);need(len(parts)==2 and parts[0]==key and key not in values,Refuse);values[key]=parts[1]
+ count=udec(values[b"DEP_COUNT"],1,256);dep_lines=lines[1+len(CERT_KEYS):-1];need(len(dep_lines)==count,Refuse)
+ roles={b"PYTHON_LINK",b"PYTHON_IMAGE",b"ENV_EXEC",b"BASH_EXEC",b"DYNAMIC_LOADER",b"LIBC",b"PYTHON_STDLIB",b"PYTHON_EXTENSION",b"NSS_DEPENDENCY",b"RUNTIME_DEPENDENCY"}
+ deps=[]
+ for index,line in enumerate(dep_lines):
+  prefix=b"DEP[%04d]="%index;need(line.startswith(prefix),Refuse);fields=line[len(prefix):].split(b",")
+  need(len(fields)==10 and fields[0] in roles,Refuse);path=even_hex(fields[1]);need(path.startswith(b"/") and b"\x00" not in path,Refuse)
+  ident=(udec(fields[2],1),udec(fields[3],1),octal(fields[4]),udec(fields[5],1),udec(fields[6]),udec(fields[7]),udec(fields[8]),h64(fields[9]))
+  deps.append((fields[0],path,ident))
+ need(len(set((x[0],x[1]) for x in deps))==len(deps),Refuse)
+ for role in (b"PYTHON_LINK",b"PYTHON_IMAGE",b"ENV_EXEC",b"BASH_EXEC",b"DYNAMIC_LOADER",b"LIBC"):need(sum(x[0]==role for x in deps)==1,Refuse)
+ exact={b"ISSUER_ID":b"P27_HOST_PREMISE_ISSUER_V5",b"ARCH":b"x86_64",b"ABSOLUTE_LIFETIME_NS":b"360000000000",b"REALTIME_MONOTONIC_MAX_DRIFT_NS":b"1000000",b"E0366_SNAPSHOT_BYTES":b"2303269",b"E0366_SNAPSHOT_LF":b"23672",b"E0366_SNAPSHOT_SHA256":SNAPSHOT_EXPECT[2],b"E0366_SNAPSHOT_TERMINAL_HEX":SNAPSHOT_TERMINAL_HEX,b"HISTORICAL_SNAPSHOT_SEALED":b"1",b"V15_SHA256":WHOLE_V15[8],b"V8_SHA256":V8_SHA,b"ACTOR_ENTRY_CAPS":b"00000000000401c0",b"ACTOR_ENTRY_NNP":b"0",b"ACTOR_ENTRY_SECUREBITS":b"12",b"PAYLOAD_FINAL_CAPS":b"0000000000000000",b"PAYLOAD_FINAL_NNP":b"1",b"PAYLOAD_FINAL_SECUREBITS":b"15",b"ATTEMPT_BASE_MODE":b"40700",b"ATTEMPT_BASE_UID":b"0",b"ATTEMPT_BASE_GID":b"0",b"CGROUP2_FS_MAGIC":b"63677270",b"CGROUP_BASE_UID":b"0",b"CGROUP_BASE_GID":b"0",b"CGROUP_NO_EXTERNAL_MUTATOR":b"1",b"CGROUP_CHILD_MODE":b"40700",b"CGROUP_CHILD_UID":b"0",b"CGROUP_CHILD_GID":b"0",b"CGROUP_CHILD_TYPE_HEX":b"646f6d61696e0a",b"RUNTIME_ROOT_UID":b"0",b"RUNTIME_ROOT_GID":b"0",b"SAFE_BIND_MODE":b"40700",b"SAFE_BIND_UID":b"0",b"SAFE_BIND_GID":b"0",b"SAFE_BIND_NOEXEC":b"1",b"SAFE_BIND_WRITABLE_DESCENDANT_COUNT":b"1",b"KEEPER_BYTES":b"4216",b"KEEPER_LF":b"128",b"KEEPER_SHA256":b"e3bf14ddde012be70a0ec40ac9373c055d2fd79d3ea30aa5e64450174f057716",b"LAUNCHER_BYTES":b"4218",b"LAUNCHER_LF":b"128",b"LAUNCHER_SHA256":b"e9d5eb3544dfddd7251279294e113f053165c2d446dd4517fbcdc6927a8618d5",b"MARKER_BYTES":b"75094",b"MARKER_LF":b"1479",b"MARKER_SHA256":b"b06ceed041004279e9df73cc9cc3c2d73ec07d8f71a9345f451a32e93b7a955d",b"CHILD_BYTES":b"19746",b"CHILD_LF":b"452",b"CHILD_SHA256":b"1d20310b965ff9df9351cbc3ca07aebb15e8cbacf74a8058782c085fde0780bf",b"PYTHON_IMAGE_SHA256":PY_SHA,b"PYTHON_IMAGE_BYTES":b"30626264",b"PYTHON_IMAGE_UID":b"0",b"PYTHON_IMAGE_GID":b"0",b"LIBC_UID":b"0",b"LIBC_GID":b"0",b"PRECONSUMPTION_CAP_NS":b"10000000000",b"CONSUMPTION_PROGRESS_NS":b"100000000",b"ATTEMPT_DIRFD_PROGRESS_NS":b"100000000",b"STAGING_CAP_NS":b"10000000000",b"RELEASE_PROGRESS_NS":b"1000000000",b"RELEASE_RECORD_ABSOLUTE_OFFSET_NS":b"800000000",b"RELEASE_REPLY_ABSOLUTE_OFFSET_NS":b"900000000",b"SIGCONT_CALL_RETURN_NS":b"5000000",b"DURABLE_RECORD_PROGRESS_NS":b"100000000",b"WATCHDOG_ARM_PROGRESS_NS":b"1000000000",b"WATCHDOG_ACK_PROGRESS_NS":b"500000000",b"WATCHDOG_SURVIVES_CONSUME_TO_REPORT":b"1",b"WATCHDOG_SURVIVES_KILL_TO_EMPTY":b"1",b"CGROUP_KILL_WRITE_RETURN_NS":b"5000000",b"CGROUP_KILL_TO_EMPTY_NS":b"2000000000",b"FINAL_REPORT_PROGRESS_NS":b"1000000000",b"FINAL_PASS_COMMIT_PROGRESS_NS":b"100000000",b"FINAL_PASS_MARGIN_NS":b"10000000",b"TERMINAL_HANDSHAKE_PROGRESS_NS":b"500000000",b"A_RECEIPT_PROGRESS_NS":b"100000000",b"B_CLOSURE_PROGRESS_NS":b"500000000",b"TERMINAL_CANDIDATE_RECORD_NS":b"100000000",b"TERMINAL_NOTICE_PROGRESS_NS":b"100000000",b"TERMINAL_SEEN_RECORD_NS":b"100000000",b"TERMINAL_ACK_RECEIPT_RECORD_NS":b"100000000",b"TERMINAL_RECONCILIATION_RECORD_NS":b"100000000",b"TERMINAL_OWNER_CLOSURE_RECORD_NS":b"100000000",b"TERMINAL_CLOSURE_PACKET_NS":b"100000000",b"TERMINAL_B_EXIT_NS":b"100000000",b"FAILURE_OVERALL_PROGRESS_NS":b"5210000000",b"FAILURE_CLEANUP_EFFECT_PROGRESS_NS":b"2600000000",b"FAILURE_TAIL_RESERVE_NS":b"2610000000",b"REFUSAL_RECORD_PROGRESS_NS":b"20000000",b"REFUSAL_ACK_PROGRESS_NS":b"20000000",b"REFUSAL_RECEIPT_PROGRESS_NS":b"20000000",b"REFUSAL_CLOSURE_PROGRESS_NS":b"20000000",b"FINAL_TERMINAL_TOTAL_NS":b"2510000000",b"ENTRY_MIN_REMAINING_NS":b"295482000000",b"CONSUMPTION_MIN_REMAINING_NS":b"285482000000",b"PRE_STAGE_MIN_REMAINING_NS":b"285382000000",b"POST_STAGE_MIN_REMAINING_NS":b"275382000000",b"POST_CONTAIN_MIN_REMAINING_NS":b"274882000000",b"ACTOR_RELEASE_DISABLE_PROGRESS_NS":b"500000000",b"EXTERNAL_OWNER_UID":b"0",b"EXTERNAL_OWNER_GID":b"0",b"CLONE3_CPYTHON_GATE_PASS":b"1",b"DELETED_CGROUP_FD_GATE_PASS":b"1",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_PASS":b"1",b"EXTERNAL_SURVIVAL_GATE_PASS":b"1",b"OUTER_RECONCILER_GATE_PASS":b"1",b"ISSUER_CRYPTOGRAPHY_GATE_PASS":b"1"}
+ for key,value in exact.items():need(values[key]==value,Refuse)
+ for key in (b"ISSUER_CONTEXT_SHA256",b"BOOT_ID_SHA256",b"PLATFORM_ID_SHA256",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"ATTEMPT_BASE_MOUNTINFO_SHA256",b"CGROUP2_MOUNTINFO_SHA256",b"RUNTIME_ROOT_MOUNTINFO_SHA256",b"SAFE_BIND_MOUNTINFO_SHA256",b"KEEPER_SHA256",b"LAUNCHER_SHA256",b"MARKER_SHA256",b"CHILD_SHA256",b"LIBC_SHA256",b"DEFAULTS_SHA256",b"EXTERNAL_TRANSFER_MANIFEST_SHA256",b"CLONE3_CPYTHON_GATE_ID",b"DELETED_CGROUP_FD_GATE_ID",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_ID",b"EXTERNAL_SURVIVAL_GATE_ID",b"OUTER_RECONCILER_GATE_ID",b"ISSUER_CRYPTOGRAPHY_GATE_ID"):h64(values[key])
+ need(values[b"CLONE3_CPYTHON_GATE_ID"]!=b"0"*64 and values[b"DELETED_CGROUP_FD_GATE_ID"]!=b"0"*64 and values[b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_ID"]!=b"0"*64 and values[b"EXTERNAL_SURVIVAL_GATE_ID"]!=b"0"*64 and values[b"OUTER_RECONCILER_GATE_ID"]!=b"0"*64 and values[b"ISSUER_CRYPTOGRAPHY_GATE_ID"]!=b"0"*64,Refuse)
+ for key in (b"NO_ASYNC_TRANSFER",b"NO_SIGNAL_DELIVERY",b"NO_TIMER_DELIVERY",b"NO_TRACE_PROFILE_AUDIT_HOOK",b"NO_CONCURRENT_MUTATOR",b"DEPENDENCY_CLOSURE_COMPLETE",b"RUNTIME_ROOT_WORKSPACE_ABSENT",b"BUILD_EVIDENCE_ROOT_UNREACHABLE",b"CLOSE_RANGE_COMPLETE",b"FSYNC_DURABILITY_PREMISE"):need(values[key]==b"1",Refuse)
+ for key in (b"KERNEL_RELEASE_HEX",b"E0366_SNAPSHOT_TERMINAL_HEX",b"ATTEMPT_BASE_FSTYPE_HEX",b"CGROUP_BASE_TYPE_HEX",b"CGROUP_BASE_CONTROLLERS_HEX",b"CGROUP_BASE_SUBTREE_CONTROL_HEX",b"CGROUP_CHILD_TYPE_HEX",b"CGROUP_CHILD_CONTROLLERS_HEX",b"CGROUP_CHILD_SUBTREE_CONTROL_HEX",b"RUNTIME_ROOT_FSTYPE_HEX",b"SAFE_BIND_FSTYPE_HEX",b"LIBC_PATH_HEX",b"LIBC_CONFSTR_HEX"):even_hex(values[key])
+ for key in (b"ATTEMPT_BASE_MODE",b"CGROUP_BASE_MODE",b"CGROUP_CHILD_MODE",b"RUNTIME_ROOT_MODE",b"SAFE_BIND_MODE",b"PYTHON_IMAGE_MODE",b"LIBC_MODE"):octal(values[key])
+ for key in (b"NOT_BEFORE_REALTIME_NS",b"ABSOLUTE_EXPIRY_REALTIME_NS",b"REALTIME_BIND_NS",b"MONOTONIC_BIND_NS",b"ATTEMPT_BASE_DEV",b"ATTEMPT_BASE_INO",b"ATTEMPT_BASE_NLINK",b"ATTEMPT_BASE_MOUNT_ID",b"CGROUP2_MOUNT_ID",b"CGROUP_BASE_DEV",b"CGROUP_BASE_INO",b"CGROUP_BASE_NLINK",b"RUNTIME_ROOT_DEV",b"RUNTIME_ROOT_INO",b"RUNTIME_ROOT_NLINK",b"RUNTIME_ROOT_MOUNT_ID",b"SAFE_BIND_DEV",b"SAFE_BIND_INO",b"SAFE_BIND_NLINK",b"SAFE_BIND_MOUNT_ID",b"KEEPER_BYTES",b"KEEPER_LF",b"LAUNCHER_BYTES",b"LAUNCHER_LF",b"MARKER_BYTES",b"MARKER_LF",b"CHILD_BYTES",b"CHILD_LF",b"PYTHON_IMAGE_DEV",b"PYTHON_IMAGE_INO",b"PYTHON_IMAGE_NLINK",b"PYTHON_IMAGE_UID",b"PYTHON_IMAGE_GID",b"LIBC_DEV",b"LIBC_INO",b"LIBC_NLINK",b"LIBC_BYTES",b"VALID_SIGNAL_COUNT",b"DEFAULT_SIGNAL_COUNT",b"EXTERNAL_OWNER_PID",b"EXTERNAL_OWNER_STARTTIME",b"EXTERNAL_OWNER_UID",b"EXTERNAL_OWNER_GID",b"EXTERNAL_TRANSFER_MANIFEST_BYTES"):udec(values[key])
+ by_role={role:next(x for x in deps if x[0]==role) for role in (b"PYTHON_LINK",b"PYTHON_IMAGE",b"ENV_EXEC",b"BASH_EXEC",b"DYNAMIC_LOADER",b"LIBC")}
+ need(by_role[b"PYTHON_LINK"][1]==PYTHON and by_role[b"PYTHON_IMAGE"][1]==PYIMAGE and by_role[b"ENV_EXEC"][1]==b"/usr/bin/env" and by_role[b"BASH_EXEC"][1]==b"/usr/bin/bash",Refuse)
+ libc=(udec(values[b"LIBC_DEV"],1),udec(values[b"LIBC_INO"],1),octal(values[b"LIBC_MODE"]),udec(values[b"LIBC_NLINK"],1),0,0,udec(values[b"LIBC_BYTES"],1),values[b"LIBC_SHA256"])
+ python_image=(udec(values[b"PYTHON_IMAGE_DEV"],1),udec(values[b"PYTHON_IMAGE_INO"],1),octal(values[b"PYTHON_IMAGE_MODE"]),udec(values[b"PYTHON_IMAGE_NLINK"],1),udec(values[b"PYTHON_IMAGE_UID"]),udec(values[b"PYTHON_IMAGE_GID"]),udec(values[b"PYTHON_IMAGE_BYTES"],1),values[b"PYTHON_IMAGE_SHA256"])
+ need(by_role[b"PYTHON_IMAGE"][1]==PYIMAGE and by_role[b"PYTHON_IMAGE"][2]==python_image,Refuse)
+ need(by_role[b"LIBC"][1]==even_hex(values[b"LIBC_PATH_HEX"]) and by_role[b"LIBC"][2]==libc,Refuse)
+ return values,tuple(deps)
+
+def time_fault(kind,fault,label):
+ if kind is Refuse:raise Refuse(label)
+ raise FaultSet({fault})
+
+def checkpoint(cert,needed,kind=ConsumedIndeterminate,deadline=None):
+ m0=time.monotonic_ns();real=time.time_ns();m1=time.monotonic_ns()
+ before=udec(cert[b"NOT_BEFORE_REALTIME_NS"]);expiry=udec(cert[b"ABSOLUTE_EXPIRY_REALTIME_NS"])
+ if not (before<=real<expiry and expiry-real>=needed):
+  if kind is Refuse:raise Refuse("certificate-life")
+  raise CertificateExpired("certificate-life")
+ base_r=udec(cert[b"REALTIME_BIND_NS"]);base_m=udec(cert[b"MONOTONIC_BIND_NS"])
+ if not base_m<=m0<=m1:time_fault(kind,b"CLOCK_DRIFT","monotonic-binding")
+ drift=udec(cert[b"REALTIME_MONOTONIC_MAX_DRIFT_NS"]);low=base_r+(m0-base_m);high=base_r+(m1-base_m)
+ if not low-drift<=real<=high+drift:time_fault(kind,b"CLOCK_DRIFT","realtime-monotonic-drift")
+ if deadline is not None and m1>deadline:time_fault(kind,b"DEADLINE_EXPIRED","absolute-deadline")
+ return real,m1
+
+def cert_live(cert,needed,kind=ConsumedIndeterminate):
+ return checkpoint(cert,needed,kind)
+
+def verify_platform(cert):
+ boot=-1
+ try:
+  boot=os.open(b"/proc/sys/kernel/random/boot_id",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);boot_raw=read_all(boot,128)
+ finally:close_numbers(tuple(x for x in (boot,) if x>=0))
+ need(boot_raw.endswith(b"\n") and sha(boot_raw)==cert[b"BOOT_ID_SHA256"],Refuse)
+ u=os.uname();parts=(u.sysname,u.release,u.version,u.machine)
+ encoded=tuple(x.encode("ascii","strict") for x in parts)
+ raw=b"SYSNAME="+encoded[0]+b"\nRELEASE="+encoded[1]+b"\nVERSION="+encoded[2]+b"\nMACHINE="+encoded[3]+b"\n"
+ need(encoded[3]==b"x86_64" and encoded[1].hex().encode()==cert[b"KERNEL_RELEASE_HEX"] and sha(raw)==cert[b"PLATFORM_ID_SHA256"],Refuse)
+
+def verify_dependency(rootfd,entry):
+ role,path,identity=entry;parts=path.split(b"/")[1:];need(parts and all(x not in (b"",b".",b"..") for x in parts),Refuse)
+ current=number=following=-1
+ try:
+  current=os.dup(rootfd)
+  for part in parts[:-1]:
+   following=os.open(part,O_DIR,dir_fd=current);os.close(current);current=following;following=-1
+  if role==b"PYTHON_LINK":
+   held=os.stat(parts[-1],dir_fd=current,follow_symlinks=False);need(stat.S_ISLNK(held.st_mode),Refuse)
+   target=os.readlink(parts[-1],dir_fd=current);size=len(target);digest=sha(target)
+  else:
+   number=os.open(parts[-1],os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=current)
+   held=os.fstat(number);body=read_all(number,identity[6]);size=len(body);digest=sha(body)
+  need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid,size,digest)==identity,Refuse)
+ finally:close_numbers(tuple(x for x in (number,following,current) if x>=0))
+
+def verify_mount(number,cert,prefix,want_magic=None):
+ held=os.fstat(number);mode=octal(cert[prefix+b"_MODE"])
+ need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)==(udec(cert[prefix+b"_DEV"],1),udec(cert[prefix+b"_INO"],1),mode,udec(cert[prefix+b"_NLINK"],1),udec(cert[prefix+b"_UID"]),udec(cert[prefix+b"_GID"])),Refuse)
+ mid,line=mount_line(number);need(mid==udec(cert[prefix+b"_MOUNT_ID"],1) and sha(line)==cert[prefix+b"_MOUNTINFO_SHA256"],Refuse)
+ if want_magic is not None:need(statfs_magic(number)==want_magic,Refuse)
+ return line
+
+def v15_sources(raw):
+ result=[]
+ for label,expected in zip((b"OUTER",b"KEEPER",b"LAUNCHER",b"MARKER",b"CHILD"),SOURCE_META):
+  begin=(b"UNIFIED "+label+b" V15 SOURCE BEGIN") if label!=b"CHILD" else b"NESTED CHILD V15 SOURCE BEGIN"
+  end=(b"UNIFIED "+label+b" V15 SOURCE END") if label!=b"CHILD" else b"NESTED CHILD V15 SOURCE END"
+  span=extract_one(raw,begin,end);need(meta(span)==expected,Refuse);result.append(span)
+ need(extract_one(result[3],b"CHILD_SOURCE=b'''\\",b"'''")==result[4],Refuse)
+ return tuple(result)
+
+def clock_binding(cert,kind=ConsumedIndeterminate):
+ checkpoint(cert,0,kind)
+
+def progress(cert,deadline,needed=0,kind=ConsumedIndeterminate):
+ if time.monotonic_ns()>deadline:time_fault(kind,b"DEADLINE_EXPIRED","absolute-deadline")
+ return checkpoint(cert,needed,kind,deadline)
+
+
+def horizon_needed(deadline,tail):
+ return tail+max(0,deadline-time.monotonic_ns())
+
+def exact_schedule(origin,overall,spec,kind=ConsumedIndeterminate):
+ need(type(origin)is int and type(overall)is int and origin>0 and overall==origin+sum(cap for name,cap in spec),kind)
+ cursor=origin;result={}
+ for name,cap in spec:
+  need(name not in result and cap>0,kind);cursor+=cap;result[name]=cursor
+ need(cursor==overall,kind);return result
+
+def schedule_raw(schedule,spec):
+ need(tuple(schedule)==tuple(name for name,cap in spec))
+ return b";".join(name+b"="+str(schedule[name]).encode() for name,cap in spec)
+
+def schedule_hex(schedule,spec):
+ return schedule_raw(schedule,spec).hex().encode("ascii")
+
+def check_schedule_hex(raw,origin,overall,spec,kind=ConsumedIndeterminate):
+ need(type(raw)is bytes and raw and len(raw)%2==0 and all(x in b"0123456789abcdef" for x in raw),kind)
+ expected=exact_schedule(origin,overall,spec,kind)
+ need(bytes.fromhex(raw.decode("ascii"))==schedule_raw(expected,spec),kind);return expected
+
+def phase_boundary(cert,schedule,spec,name,overall,kind=ConsumedIndeterminate):
+ need(name in schedule and schedule==exact_schedule(overall-sum(cap for key,cap in spec),overall,spec,kind),kind)
+ deadline=schedule[name];reserve_after=overall-deadline;now=time.monotonic_ns()
+ need(now<=deadline,kind);checkpoint(cert,reserve_after,kind,deadline)
+ need(time.monotonic_ns()<=deadline,kind);return deadline
+
+def certificate_mono_expiry(cert):
+ return udec(cert[b"MONOTONIC_BIND_NS"],1)+udec(cert[b"ABSOLUTE_EXPIRY_REALTIME_NS"])-udec(cert[b"REALTIME_BIND_NS"])-udec(cert[b"REALTIME_MONOTONIC_MAX_DRIFT_NS"])
+
+def cap_status():
+ number=-1
+ try:
+  number=os.open(b"/proc/self/status",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(number,65536),65536)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+ keys=(b"CapInh",b"CapPrm",b"CapEff",b"CapBnd",b"CapAmb",b"NoNewPrivs")
+ values={}
+ for line in raw.splitlines():
+  for key in keys:
+   prefix=key+b":"
+   if line.startswith(prefix):
+    need(key not in values);values[key]=line[len(prefix):].strip()
+ need(set(values)==set(keys))
+ return values
+
+def securebits():
+ result=LIBC.prctl(27,0,0,0,0);need(result>=0)
+ return result
+
+def verify_creds(final):
+ values=cap_status();zero=b"0000000000000000"
+ need(os.getresuid()==(0,0,0) and os.getresgid()==(0,0,0) and os.getgroups()==[])
+ if final:
+  need(all(values[x]==zero for x in (b"CapInh",b"CapPrm",b"CapEff",b"CapBnd",b"CapAmb")))
+  need(values[b"NoNewPrivs"]==b"1" and securebits()==15)
+ else:
+  need(values[b"CapInh"]==zero and values[b"CapAmb"]==zero)
+  need(all(values[x]==b"00000000000401c0" for x in (b"CapPrm",b"CapEff",b"CapBnd")))
+  need(values[b"NoNewPrivs"]==b"0" and securebits()==12,Refuse)
+
+def normalize_limits():
+ inf=resource.RLIM_INFINITY
+ fixed=((resource.RLIMIT_AS,(inf,inf)),(resource.RLIMIT_CORE,(0,0)),(resource.RLIMIT_CPU,(inf,inf)),(resource.RLIMIT_DATA,(inf,inf)),(resource.RLIMIT_FSIZE,(inf,inf)),(resource.RLIMIT_MEMLOCK,(8388608,8388608)),(resource.RLIMIT_MSGQUEUE,(819200,819200)),(resource.RLIMIT_NICE,(0,0)),(resource.RLIMIT_NOFILE,(1048576,1048576)),(resource.RLIMIT_NPROC,(1048576,1048576)),(resource.RLIMIT_RSS,(inf,inf)),(resource.RLIMIT_RTPRIO,(0,0)),(resource.RLIMIT_RTTIME,(inf,inf)),(resource.RLIMIT_SIGPENDING,(515199,515199)),(resource.RLIMIT_STACK,(8388608,inf)))
+ for key,value in fixed:resource.setrlimit(key,value)
+ for key,value in fixed:need(resource.getrlimit(key)==value)
+
+def normalize_signals():
+ for which in (signal.ITIMER_REAL,signal.ITIMER_VIRTUAL,signal.ITIMER_PROF):signal.setitimer(which,0.0,0.0)
+ valid=signal.valid_signals();catchable=tuple(sorted(int(x) for x in valid if int(x) not in (int(signal.SIGKILL),int(signal.SIGSTOP))))
+ signal.pthread_sigmask(signal.SIG_SETMASK,set())
+ for number in catchable:signal.signal(number,signal.SIG_DFL)
+ need(signal.sigpending()==set())
+
+class CapHeader(ctypes.Structure):
+ _fields_=(("version",ctypes.c_uint32),("pid",ctypes.c_int))
+
+class CapData(ctypes.Structure):
+ _fields_=(("effective",ctypes.c_uint32),("permitted",ctypes.c_uint32),("inheritable",ctypes.c_uint32))
+
+class CloneArgs(ctypes.Structure):
+ _fields_=(("flags",ctypes.c_uint64),("pidfd",ctypes.c_uint64),("child_tid",ctypes.c_uint64),("parent_tid",ctypes.c_uint64),("exit_signal",ctypes.c_uint64),("stack",ctypes.c_uint64),("stack_size",ctypes.c_uint64),("tls",ctypes.c_uint64),("set_tid",ctypes.c_uint64),("set_tid_size",ctypes.c_uint64),("cgroup",ctypes.c_uint64))
+
+def final_drop():
+ need(LIBC.prctl(28,15,0,0,0)==0)
+ for bit in range(64):
+  result=LIBC.prctl(24,bit,0,0,0)
+  if result!=0:need(ctypes.get_errno()==errno.EINVAL)
+ header=CapHeader(0x20080522,0);data=(CapData*2)()
+ need(LIBC.capset(ctypes.byref(header),ctypes.byref(data))==0)
+ need(LIBC.prctl(47,4,0,0,0)==0 and LIBC.prctl(38,1,0,0,0)==0)
+
+def child_context(cwd_name,safe_dev,safe_ino):
+ root=-1;os.chroot(RUNTIME_ROOT)
+ try:
+  root=os.open(b"/",O_DIR)
+  tmp=os.open(b"tmp",O_DIR,dir_fd=root);base=os.open(b"p27-e001-host-v15",O_DIR,dir_fd=tmp)
+  cwd=os.dup(base) if cwd_name is None else os.open(cwd_name,O_DIR,dir_fd=base)
+  held=os.fstat(cwd);need((held.st_dev,held.st_ino,held.st_uid,held.st_gid,stat.S_IMODE(held.st_mode))==(safe_dev,safe_ino,0,0,0o700))
+  os.fchdir(cwd)
+ finally:
+  for number in (locals().get("cwd",-1),locals().get("base",-1),locals().get("tmp",-1),root):
+   if number>=0:
+    try:os.close(number)
+    except OSError:pass
+ os.setgroups([]);os.setresgid(0,0,0);os.setresuid(0,0,0);os.umask(0o077)
+ normalize_limits();normalize_signals();final_drop();verify_creds(True)
+
+def fd_access(number,mode):
+ need(fcntl.fcntl(number,fcntl.F_GETFL)&os.O_ACCMODE==mode)
+
+def scrub_exact(expected):
+ seen=set()
+ for item in os.listdir(b"/proc/self/fd"):
+  if item.isdigit():
+   number=int(item)
+   try:os.fstat(number)
+   except OSError as error:
+    need(error.errno==errno.EBADF);continue
+   seen.add(number)
+ need(seen==expected)
+
+def preserved_map(mapping):
+ parked=[];number=-1;targets={target for source,target in mapping}
+ try:
+  for source,target in mapping:
+   number=fcntl.fcntl(source,fcntl.F_DUPFD_CLOEXEC,200)
+   need(number>=200 and number not in targets and number not in [x[0] for x in parked])
+   parked.append((number,target));number=-1
+  for held,target in parked:os.dup2(held,target,inheritable=True)
+ finally:
+  close_numbers(tuple(x for x in (number,) if x>=0))
+  for held,target in parked:
+   try:os.close(held)
+   except OSError:pass
+
+# P27 RUNNER V5 EMBEDDED VALIDATOR BEGIN D5B40A72
+COMMON=(b"marker_image_dev",b"marker_image_ino",b"marker_image_sha256",b"probe_start_ns",b"probe_finish_ns",b"probe_elapsed_ns",b"probe_bound_ns",b"primary_failure",b"cleanup_failure",b"result")
+PREFIX={b"P00":(b"source_item_bytes",b"source_item_accounted_bytes",b"broker_spawned",b"broker_payload_hex"),b"P01D":(b"python_image_dev",b"python_image_ino",b"python_image_bytes",b"python_image_sha256",b"libc_confstr_hex",b"libc_path_hex",b"libc_bytes",b"libc_sha256",b"backend_surface",b"spawn_premise_satisfied"),b"P01C":(b"libc_path_hex",b"libc_sha256",b"libc_confstr_hex",b"child_pids",b"child_statuses",b"child_raw_hex",b"spawn_premise_satisfied"),b"P02":(b"fds",b"environment_count",b"cwd_hex",b"flags"),b"P03":(b"soft_before",b"hard_before",b"soft_test",b"opened_fds",b"emfile"),b"P04":(b"valid_signal_count",b"default_signal_count",b"defaults_sha256",b"mask_empty"),b"P05":(b"wnohang_zero",b"eintr",b"echild",b"child_pids",b"raw_statuses",b"term_signal",b"broker_payload_hex"),b"P06":(b"monotonic",b"observed_min_delta_ns",b"start_ns",b"end_ns",b"deadline_checked"),b"P07":(b"empty_eagain",b"eof_before_last_writer",b"eof_after_last_writer"),b"P08":(b"child_pids",b"raw_statuses",b"same_session_group",b"post_pid_esrch",b"broker_payload_hex"),b"P09":(b"child_pids",b"raw_statuses",b"signal",b"reap_start_ns",b"reap_end_ns",b"reaped"),b"P10":(b"sample_count",b"pids",b"statuses",b"pid_duplicates",b"group_is_single_owned_launcher_group",b"reuse_proof"),b"P11":(b"open_result",b"atime_unchanged",b"cleanup_unlinked",b"cleanup_identity_observed",b"atomic_unlink_proof",b"scope_single_inode"),b"P12":(b"child_pids",b"raw_statuses",b"environment_count",b"underscore_absent",b"real_payload_invoked",b"broker_payload_hex"),b"P13":(b"file_fsync_returned",b"hardlink_noreplace_returned",b"inode_preserved",b"dir_fsync_returned",b"post_unlink_absent",b"cleanup_unlinked",b"durability_proof",b"rename_atomicity_proof")}
+
+def csv_values(raw,signed=False,count=None):
+ parts=raw.split(b",");need(parts and (count is None or len(parts)==count))
+ return tuple(sdec(x) if signed else udec(x,1) for x in parts)
+
+def child_observation(raw,mode,pid,source_sha,cwd_hex,phase):
+ need(raw.endswith(b"\n") and raw.count(b"\n")==1)
+ fields=raw[:-1].split(b"|");need(len(fields)==11 and fields[0]==TAG and fields[1]==b"child=observation")
+ need(fields[2]==b"mode="+mode and fields[3]==b"pid="+str(pid).encode())
+ need(fields[4].startswith(b"sid=") and udec(fields[4][4:],1)>0)
+ need(fields[5].startswith(b"pgid=") and udec(fields[5][5:],1)>0)
+ need(tuple(fields[6:])==(b"image_sha="+PY_SHA,b"source_sha="+source_sha,b"cwd_hex="+cwd_hex,b"phase="+phase,b"result=PASS"))
+
+def payload_item(raw,prefix):
+ lead=prefix+b":";need(raw.startswith(lead));return even_hex(raw[len(lead):])
+
+def parse_outer(line,probe,terminal):
+ fields=line.split(b"|")
+ if terminal:need(len(fields)==8 and fields[0]==TAG and fields[1]==b"outer=terminal" and fields[2]==b"probe="+probe and fields[3]==b"all_reaped=1" and fields[5]==b"frame_complete=1" and fields[6]==b"fatal=0" and fields[7]==b"result=PASS")
+ else:need(len(fields)==8 and fields[0]==TAG and fields[1]==b"outer=candidate" and fields[2]==b"probe="+probe and fields[3]==b"slots=4" and fields[4]==b"all_reaped=1" and fields[6]==b"fatal=0" and fields[7]==b"result=PASS")
+ role_field=fields[4] if terminal else fields[5];need(role_field.startswith(b"role_statuses="))
+ roles=role_field[14:].split(b",");need(len(roles)==4);result={}
+ for expected,item in zip((b"launcher",b"keeper",b"marker",b"child"),roles):
+  pieces=item.split(b":",1);need(len(pieces)==2 and pieces[0]==expected);result[expected]=sdec(pieces[1])
+ return result
+
+def validate_probe(rows,probe,ctx):
+ if probe==b"P00":
+  need(rows[b"source_item_bytes"]==b"251414" and rows[b"source_item_accounted_bytes"]==b"251415")
+  child=ctx[b"child_source"];need((len(child),child.count(b"\n"),sha(child))==SOURCE_META[4])
+  padding=251414-len(child)-2;need(padding>=0)
+  synthetic=child+b"\n#"+b"x"*padding
+  need(len(synthetic)==251414 and synthetic[:len(child)]==child and synthetic[len(child):len(child)+2]==b"\n#");synthetic_sha=sha(synthetic)
+  spawned=udec(rows[b"broker_spawned"],0,1);items=even_hex(rows[b"broker_payload_hex"]).split(b";")
+  if spawned==0:
+   need(len(items)==1 and items[0]==b"source_bytes=251414,returned=0,e2big=1,sha="+synthetic_sha)
+  else:
+   need(len(items)==2 and items[1]==b"source_bytes=251414,returned=1,e2big=0,sha="+synthetic_sha)
+   observation=payload_item(items[0],b"INFO");fields=observation.split(b"|");need(len(fields)==11 and fields[3].startswith(b"pid="))
+   child_observation(observation,b"INFO",udec(fields[3][4:],1),synthetic_sha,ctx[b"cwd_hex"],b"terminal")
+ elif probe==b"P01D":
+  need(udec(rows[b"python_image_dev"],1)==ctx[b"python_dev"] and udec(rows[b"python_image_ino"],1)==ctx[b"python_ino"])
+  need(rows[b"python_image_bytes"]==b"30626264" and rows[b"python_image_sha256"]==PY_SHA)
+  need(rows[b"libc_path_hex"]==ctx[b"libc_path_hex"] and rows[b"libc_confstr_hex"]==ctx[b"libc_confstr_hex"])
+  need(udec(rows[b"libc_bytes"],1)==ctx[b"libc_bytes"] and rows[b"libc_sha256"]==ctx[b"libc_sha"])
+  need(rows[b"backend_surface"]==b"posix-posix_spawn" and rows[b"spawn_premise_satisfied"]==b"0")
+ elif probe==b"P01C":
+  prior=ctx[b"p01d"];need(rows[b"libc_path_hex"]==prior[b"libc_path_hex"] and rows[b"libc_sha256"]==prior[b"libc_sha256"] and rows[b"libc_confstr_hex"]==prior[b"libc_confstr_hex"] and rows[b"spawn_premise_satisfied"]==b"1")
+  pids=csv_values(rows[b"child_pids"],False,1);need(csv_values(rows[b"child_statuses"],True,1)==(0,))
+  child_observation(payload_item(even_hex(rows[b"child_raw_hex"]),b"INFO"),b"INFO",pids[0],SOURCE_META[4][2],ctx[b"cwd_hex"],b"terminal")
+ elif probe==b"P02":need(tuple(rows[x] for x in PREFIX[probe])==(b"0,1,2,5,6",b"10",ctx[b"cwd_hex"],b"isolated:1,ignore_environment:1,no_site:1,no_user_site:1,dont_write_bytecode:1,safe_path:1,utf8_mode:1,hash_randomization:1"))
+ elif probe==b"P03":need(tuple(rows[x] for x in PREFIX[probe])==(b"4096",b"1048576",b"64",b"59",b"1"))
+ elif probe==b"P04":need(udec(rows[b"valid_signal_count"])==ctx[b"valid_signals"] and udec(rows[b"default_signal_count"])==ctx[b"default_signals"] and rows[b"defaults_sha256"]==ctx[b"defaults_sha"] and rows[b"mask_empty"]==b"1")
+ elif probe==b"P05":
+  need(rows[b"wnohang_zero"]==rows[b"eintr"]==rows[b"echild"]==b"1" and rows[b"term_signal"]==b"15")
+  pids=csv_values(rows[b"child_pids"],False,2);statuses=csv_values(rows[b"raw_statuses"],True,2);need(statuses==(23<<8,15))
+  parts=payload_item(even_hex(rows[b"broker_payload_hex"]),b"P05").splitlines(True);need(len(parts)==2)
+  child_observation(parts[0],b"EXIT23",pids[0],SOURCE_META[4][2],ctx[b"cwd_hex"],b"ready")
+  child_observation(parts[1],b"TERM",pids[1],SOURCE_META[4][2],ctx[b"cwd_hex"],b"ready")
+ elif probe==b"P06":need(rows[b"monotonic"]==b"1" and udec(rows[b"observed_min_delta_ns"],1)>0 and udec(rows[b"start_ns"])<=udec(rows[b"end_ns"]) and rows[b"deadline_checked"]==b"1")
+ elif probe==b"P07":need(tuple(rows[x] for x in PREFIX[probe])==(b"1",b"0",b"1"))
+ elif probe==b"P08":
+  pids=csv_values(rows[b"child_pids"],False,1);need(csv_values(rows[b"raw_statuses"],True,1)==(0,) and rows[b"same_session_group"]==rows[b"post_pid_esrch"]==b"1")
+  child_observation(payload_item(even_hex(rows[b"broker_payload_hex"]),b"P08"),b"BLOCK0",pids[0],SOURCE_META[4][2],ctx[b"cwd_hex"],b"ready")
+ elif probe==b"P09":
+  csv_values(rows[b"child_pids"],False,1);need(csv_values(rows[b"raw_statuses"],True,1)==(9,) and rows[b"signal"]==b"9" and rows[b"reaped"]==b"1")
+  start=udec(rows[b"reap_start_ns"]);finish=udec(rows[b"reap_end_ns"]);need(start<=finish and finish-start<=100000000)
+ elif probe==b"P10":
+  pids=csv_values(rows[b"pids"],False,16);need(rows[b"sample_count"]==b"16" and csv_values(rows[b"statuses"],True,16)==(0,)*16)
+  need(udec(rows[b"pid_duplicates"])==16-len(set(pids)) and rows[b"group_is_single_owned_launcher_group"]==b"1" and rows[b"reuse_proof"]==b"0")
+ elif probe==b"P11":need(tuple(rows[x] for x in PREFIX[probe])==(b"OK",b"1",b"1",b"1",b"0",b"1"))
+ elif probe==b"P12":
+  pids=csv_values(rows[b"child_pids"],False,1);need(csv_values(rows[b"raw_statuses"],True,1)==(0,) and rows[b"environment_count"]==b"10" and rows[b"underscore_absent"]==b"1" and rows[b"real_payload_invoked"]==b"0")
+  child_observation(payload_item(even_hex(rows[b"broker_payload_hex"]),b"CHAIN"),b"CHAIN",pids[0],SOURCE_META[4][2],ctx[b"cwd_hex"],b"terminal")
+ elif probe==b"P13":need(tuple(rows[x] for x in PREFIX[probe])==(b"1",b"1",b"1",b"1",b"1",b"1",b"0",b"0"))
+ else:need(False)
+
+def transcript_structure(raw,probe):
+ ascii_file(raw,STREAM_CAP);lines=raw[:-1].split(b"\n")
+ need(lines and all(lines) and lines[0]==TAG+b"|marker=report|schema=15|probe="+probe)
+ keys=PREFIX[probe]+COMMON;need(len(lines)==len(keys)+4);rows={}
+ for key,line in zip(keys,lines[1:1+len(keys)]):
+  prefix=TAG+b"|probe="+probe+b"|"+key+b"=";need(line.startswith(prefix) and key not in rows)
+  value=line[len(prefix):];need(value and b"|" not in value and b"=" not in value);rows[key]=value
+ need(lines[1+len(keys)]==TAG+b"|probe="+probe+b"|result=PASS")
+ candidate=parse_outer(lines[2+len(keys)],probe,False);terminal=parse_outer(lines[3+len(keys)],probe,True)
+ need(candidate==terminal);return rows,candidate
+
+def transcript_semantics(rows,candidate,probe,ctx):
+ need(candidate[b"launcher"]==15 and candidate[b"keeper"]==15 and candidate[b"marker"]==0)
+ start=udec(rows[b"probe_start_ns"]);finish=udec(rows[b"probe_finish_ns"]);elapsed=udec(rows[b"probe_elapsed_ns"])
+ need(start<=finish and finish-start==elapsed and elapsed<=OP_NS and rows[b"probe_bound_ns"]==b"15000000000")
+ need(rows[b"primary_failure"]==b"none" and rows[b"cleanup_failure"]==b"none" and rows[b"result"]==b"PASS")
+ need(udec(rows[b"marker_image_dev"],1)==ctx[b"python_dev"] and udec(rows[b"marker_image_ino"],1)==ctx[b"python_ino"] and rows[b"marker_image_sha256"]==PY_SHA)
+ validate_probe(rows,probe,ctx);expected=-1
+ if probe==b"P00":expected=-1 if rows[b"broker_spawned"]==b"0" else 0
+ elif probe in (b"P01C",b"P08",b"P10",b"P12"):expected=0
+ elif probe==b"P05":expected=15
+ elif probe==b"P09":expected=9
+ need(candidate[b"child"]==expected);return rows
+# P27 RUNNER V5 EMBEDDED VALIDATOR END D5B40A72
+
+CONTROL_SPEC={
+ b"V5_ABORT":(b"ABORTING",b"ABORT_RECONCILER",b"ABORT_NOTICE",b"control_deadline_ns"),
+ b"V5_READY":(b"READY",b"WAIT_READY",b"NO_EFFECT",b"ready_deadline_ns"),
+ b"V5_REFUSE_PREBEGIN":(b"REFUSE_PREBEGIN",b"WAIT_BEGIN",b"NO_CONSUME_REFUSAL",b"consume_deadline_ns"),
+ b"V5_REFUSE_POSTARM":(b"REFUSE_POSTARM",b"WAIT_COMMIT",b"NO_CONSUME_REFUSAL",b"consume_deadline_ns"),
+ b"V5_REFUSE_ACK":(b"REFUSAL_CLOSED_NO_CONSUME",b"WAIT_REFUSAL_ACK",b"REFUSAL_ACK_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_REFUSE_ACK_RECEIPT":(b"REFUSAL_ACK_RECEIVED",b"WAIT_REFUSAL_RECEIPT",b"NO_REPLAY_RECEIPT",b"consume_deadline_ns"),
+ b"V5_REFUSAL_CLOSED":(b"REFUSAL_DURABLY_CLOSED",b"WAIT_REFUSAL_CLOSED",b"OWNER_CLOSURE",b"consume_deadline_ns"),
+ b"V5_CONSUME_BEGIN":(b"CONSUME_BEGIN",b"WAIT_BEGIN",b"BEGIN_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_CONSUME_ARMED":(b"CONSUME_ARMED",b"WAIT_ARM",b"ARM_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_CONSUME_COMMIT":(b"CONSUME_COMMIT",b"WAIT_COMMIT",b"COMMIT_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_CONSUMED_DURABLE":(b"CONSUMED_DURABLE",b"WAIT_CONSUMED",b"INTENT_DURABLE",b"consume_deadline_ns"),
+ b"V5_STAGE_DURABLE":(b"STAGE_DURABLE",b"WAIT_STAGE",b"FD_TRANSFER",b"stage_deadline_ns"),
+ b"V5_STAGE_ACK":(b"STAGE_BOUND",b"WAIT_STAGE_ACK",b"STAGE_VERIFIED",b"stage_deadline_ns"),
+ b"V5_CONTAINMENT":(b"CONTAINMENT_CANDIDATE",b"WAIT_CONTAINMENT",b"FD_TRANSFER",b"contain_deadline_ns"),
+ b"V5_CONTAINMENT_ACK":(b"CONTAINMENT_BOUND",b"WAIT_CONTAINMENT_ACK",b"CONTAINMENT_VERIFIED",b"contain_deadline_ns"),
+ b"V5_STREAM_ARM":(b"STREAM_ARM",b"WAIT_STREAM_ARM",b"FD_TRANSFER",b"launch_deadline_ns"),
+ b"V5_STREAMS_ARMED":(b"STREAMS_ARMED",b"WAIT_STREAMS_ARMED",b"FD_VERIFIED",b"launch_deadline_ns"),
+ b"V5_PIDFD_ARM":(b"PIDFD_ARM",b"WAIT_PIDFD_ARM",b"FD_TRANSFER",b"launch_deadline_ns"),
+ b"V5_PIDFD_ARMED":(b"PIDFD_ARMED",b"WAIT_PIDFD_ARMED",b"PIDFD_VERIFIED",b"launch_deadline_ns"),
+ b"V5_RELEASE_CANDIDATE":(b"RELEASE_CANDIDATE",b"WAIT_RELEASE",b"RELEASE_AUTHORIZATION",b"launch_deadline_ns"),
+ b"V5_RELEASE_DURABLE":(b"RELEASE_DURABLE",b"WAIT_RELEASE_DURABLE",b"RELEASE_RECORD_DURABLE",b"launch_deadline_ns"),
+ b"V5_RESULT":(b"RESULT",b"WAIT_RESULT",b"RESULT_NOTICE",b"result_deadline_ns"),
+ b"V5_RESULT_FRAME":(b"RESULT_FRAME",b"WAIT_RESULT_FRAME",b"RESULT_FRAME",b"result_deadline_ns"),
+ b"V5_RESULT_END":(b"RESULT_END",b"WAIT_RESULT_END",b"RESULT_COMPLETE",b"result_deadline_ns"),
+ b"V5_VALIDATED_CANDIDATE":(b"VALIDATED_CANDIDATE",b"WAIT_VALIDATED",b"VALIDATION_NOTICE",b"ack_deadline_ns"),
+ b"V5_VALIDATED_DURABLE":(b"VALIDATED_DURABLE",b"WAIT_VALIDATED_DURABLE",b"VALIDATED_RECORD_DURABLE",b"ack_deadline_ns"),
+ b"V5_ACK_COMMIT_INTENT":(b"ACK_COMMIT_INTENT",b"WAIT_ACK_INTENT",b"ACK_COMMIT",b"ack_deadline_ns"),
+ b"V5_COMMITTED":(b"COMMITTED",b"WAIT_COMMITTED",b"ACK_RECORD_DURABLE",b"ack_deadline_ns"),
+ b"V5_COMMITTED_SEEN":(b"COMMITTED_SEEN",b"WAIT_COMMITTED_SEEN",b"ACK_RECEIPT",b"ack_deadline_ns"),
+ b"V5_EMPTY_FINAL_QUERY":(b"EMPTY_FINAL_QUERY",b"WAIT_EMPTY_QUERY",b"REMOVE_QUERY",b"remove_deadline_ns"),
+ b"V5_EMPTY_FINAL_CONFIRMED":(b"EMPTY_FINAL_CONFIRMED",b"WAIT_EMPTY_CONFIRMED",b"EMPTY_OBSERVED",b"remove_deadline_ns"),
+ b"V5_CGROUP_REMOVED":(b"CGROUP_REMOVED",b"WAIT_REMOVED",b"REMOVE_EFFECT",b"remove_deadline_ns"),
+ b"V5_REMOVE_ACK":(b"REMOVE_ACK",b"WAIT_REMOVE_ACK",b"REMOVAL_VERIFIED",b"remove_deadline_ns"),
+ b"V5_FINALIZE_CANDIDATE":(b"FINALIZE_CANDIDATE",b"WAIT_FINALIZE",b"FINALIZE_NOTICE",b"candidate_deadline_ns"),
+ b"V5_TERMINAL_CANDIDATE_DURABLE":(b"TERMINAL_CANDIDATE_DURABLE",b"WAIT_TERMINAL_CANDIDATE",b"CANDIDATE_DURABLE",b"candidate_deadline_ns"),
+ b"V5_TERMINAL_FAILURE_DURABLE":(b"TERMINAL_FAILURE_DURABLE",b"WAIT_TERMINAL_FAILURE",b"FAILURE_REPORT_DURABLE",b"candidate_deadline_ns"),
+ b"V5_TERMINAL_SEEN":(b"TERMINAL_SEEN",b"WAIT_TERMINAL_SEEN",b"TERMINAL_SEEN",b"seen_deadline_ns"),
+ b"V5_TERMINAL_ACK":(b"TERMINAL_ACK",b"WAIT_TERMINAL_ACK",b"ACK_SEND_EFFECT_UNKNOWN",b"ack_deadline_ns"),
+ b"V5_TERMINAL_ACK_RECEIPT":(b"ACK_RECEIVED_NO_REPLAY",b"WAIT_ACK_RECEIPT",b"NO_REPLAY_RECEIPT",b"receipt_deadline_ns"),
+ b"V5_TERMINAL_CLOSED":(b"OWNER_CLOSED",b"WAIT_OWNER_CLOSED",b"OWNER_CLOSURE",b"closure_deadline_ns")
+}
+CONTROL_DEADLINE_KEYS=(b"ready_deadline_ns",b"control_deadline_ns",b"consume_deadline_ns",b"stage_deadline_ns",b"contain_deadline_ns",b"launch_deadline_ns",b"result_deadline_ns",b"ack_deadline_ns",b"remove_deadline_ns",b"candidate_deadline_ns",b"seen_deadline_ns",b"pass_deadline_ns",b"margin_deadline_ns",b"receipt_deadline_ns",b"closure_deadline_ns",b"transfer_deadline_ns",b"terminal_deadline_ns")
+CONTROL_RESERVED={b"state",b"expected_state",b"ordinal",b"probe",b"auth_id",b"sender",b"effect_state"}|set(CONTROL_DEADLINE_KEYS)
+
+def packet(kind,pairs):
+ global CONTROL_SEND_SEQ
+ need(kind in CONTROL_SPEC and b"|" not in kind and b"\n" not in kind)
+ provided={}
+ for key,value in pairs:
+  need(key and value and b"|" not in key+value and b"\n" not in key+value and b"=" not in key+value and key not in provided)
+  provided[key]=value
+ spec_state,spec_receiver,spec_effect,deadline_key=CONTROL_SPEC[kind]
+ state=provided.pop(b"state",spec_state);receiver=provided.pop(b"expected_state",spec_receiver);effect=provided.pop(b"effect_state",spec_effect)
+ need((state,receiver,effect)==(spec_state,spec_receiver,spec_effect) and state!=b"*" and receiver!=b"*" and effect!=b"*")
+ ordinal=provided.pop(b"ordinal");probe=provided.pop(b"probe")
+ if b"auth_id" in provided:need(provided.pop(b"auth_id")==AUTH_ID)
+ if b"sender" in provided:need(provided.pop(b"sender")==b"A")
+ need(deadline_key in provided);deadline=provided.pop(deadline_key);udec(deadline,1)
+ need(not any(key in CONTROL_RESERVED for key in provided))
+ CONTROL_SEND_SEQ+=1
+ body=(kind+b"|protocol_version=5|session_id="+AUTH_ID+b"|message_seq="+str(CONTROL_SEND_SEQ).encode()+b"|message_sender="+b"A"+b"|sender_state="+state+b"|expected_receiver_state="+receiver+b"|slot_ordinal="+ordinal+b"|slot_probe="+probe+b"|effect_state="+effect+b"|deadline_name="+deadline_key+b"|absolute_deadline_ns="+deadline)
+ for key,value in pairs:
+  if key not in CONTROL_RESERVED:body+=b"|"+key+b"="+value
+ return body+b"\n"
+
+def parse_packet(raw,kind,keys):
+ global CONTROL_RECV_SEQ
+ need(type(raw)is bytes and raw.endswith(b"\n") and raw.count(b"\n")==1 and all(x==10 or 32<=x<=126 for x in raw))
+ common_keys=(b"protocol_version",b"session_id",b"message_seq",b"message_sender",b"sender_state",b"expected_receiver_state",b"slot_ordinal",b"slot_probe",b"effect_state",b"deadline_name",b"absolute_deadline_ns")
+ physical=tuple(key for key in keys if key not in CONTROL_RESERVED)
+ fields=raw[:-1].split(b"|");need(fields[0]==kind and len(fields)==1+len(common_keys)+len(physical))
+ common={}
+ for key,item in zip(common_keys,fields[1:1+len(common_keys)]):
+  parts=item.split(b"=",1);need(len(parts)==2 and parts[0]==key and parts[1] and key not in common);common[key]=parts[1]
+ result={}
+ for key,item in zip(physical,fields[1+len(common_keys):]):
+  parts=item.split(b"=",1);need(len(parts)==2 and parts[0]==key and parts[1] and key not in result and key not in common);result[key]=parts[1]
+ spec_state,spec_receiver,spec_effect,deadline_key=CONTROL_SPEC[kind]
+ need(common[b"protocol_version"]==b"5" and common[b"session_id"]==AUTH_ID and common[b"message_sender"]==b"B")
+ need((common[b"sender_state"],common[b"expected_receiver_state"],common[b"effect_state"])==(spec_state,spec_receiver,spec_effect))
+ need(common[b"deadline_name"]==deadline_key);deadline=udec(common[b"absolute_deadline_ns"],1)
+ sequence=udec(common[b"message_seq"],1);need(sequence==CONTROL_RECV_SEQ+1);CONTROL_RECV_SEQ=sequence
+ result.update({b"state":common[b"sender_state"],b"expected_state":common[b"expected_receiver_state"],b"ordinal":common[b"slot_ordinal"],b"probe":common[b"slot_probe"],b"auth_id":common[b"session_id"],b"sender":common[b"message_sender"],b"effect_state":common[b"effect_state"],deadline_key:str(deadline).encode(),b"message_seq":str(sequence).encode(),b"packet_sha256":sha(raw)})
+ return result
+
+def fault_csv(faults):
+ ordered=tuple(x for x in FAULT_ORDER if x in faults)
+ need(len(ordered)==len(faults))
+ return b"NONE" if not ordered else b",".join(ordered)
+
+def parse_fault_csv(raw,allow_none):
+ if raw==b"NONE":
+  need(allow_none);return set()
+ parts=raw.split(b",");need(parts and all(x in FAULT_ORDER for x in parts))
+ need(len(parts)==len(set(parts)) and tuple(x for x in FAULT_ORDER if x in set(parts))==tuple(parts))
+ return set(parts)
+
+def parse_abort(raw,want_sender):
+ keys=(b"state",b"ordinal",b"probe",b"effect_state",b"causal_state",b"causal_effect",b"stage_present",b"release_disabled",b"terminal_deadline_ns",b"fault_set",b"control_deadline_ns")
+ values=parse_packet(raw,b"V5_ABORT",keys)
+ need(values[b"sender"]==want_sender and values[b"state"]==b"ABORTING" and values[b"expected_state"]==b"ABORT_RECONCILER" and values[b"effect_state"]==b"ABORT_NOTICE")
+ causal_effects=(b"PREBEGIN",b"BEGIN_SEND_EFFECT_UNKNOWN",b"ARM_SEND_EFFECT_UNKNOWN",b"COMMIT_SEND_EFFECT_UNKNOWN",b"CONSUMED",b"PASS_COMMITTED",b"ACK_SEND_EFFECT_UNKNOWN",b"OWNER_CLOSED")
+ need(values[b"causal_state"] and values[b"causal_effect"] in causal_effects and values[b"ordinal"] and values[b"probe"])
+ need(values[b"stage_present"] in (b"0",b"1") and values[b"release_disabled"] in (b"0",b"1"))
+ if want_sender==b"A":need(values[b"release_disabled"]==b"1")
+ if want_sender==b"B" and values[b"causal_state"]==b"CLEANUP_RELEASE_DISABLE":need(values[b"release_disabled"]==b"0")
+ deadline=udec(values[b"terminal_deadline_ns"])
+ if values[b"causal_effect"] in (b"PASS_COMMITTED",b"ACK_SEND_EFFECT_UNKNOWN",b"OWNER_CLOSED"):need(deadline>0)
+ faults=parse_fault_csv(values[b"fault_set"],False);return values,faults
+
+def close_numbers(numbers):
+ for number in numbers:
+  try:os.close(number)
+  except OSError:pass
+
+def wait_sendable(control,deadline):
+ poller=select.poll();poller.register(control.fileno(),select.POLLOUT|select.POLLHUP|select.POLLERR)
+ while True:
+  checkpoint(CERT,0,ConsumedIndeterminate,deadline);remaining=deadline-time.monotonic_ns()
+  if remaining<=0:raise FaultSet({b"CONTROL_TIMEOUT"})
+  try:events=poller.poll(max(1,min(50,(remaining+999999)//1000000)))
+  except InterruptedError:continue
+  mask=0
+  for number,event in events:
+   if number==control.fileno():mask|=event
+  if mask&select.POLLOUT:return
+  if mask&(select.POLLHUP|select.POLLERR):raise ControlLost("control-hup")
+
+def send_plain(control,raw,deadline):
+ global CONTROL_SEND_STATE
+ while True:
+  wait_sendable(control,deadline);CONTROL_SEND_STATE=b"SEND_EFFECT_UNKNOWN"
+  try:count=control.send(raw)
+  except BlockingIOError:continue
+  except BaseException as error:raise SendEffectUnknown("send") from error
+  if count!=len(raw):raise SendEffectUnknown("short-send")
+  checkpoint(CERT,0,ConsumedIndeterminate,deadline)
+  if time.monotonic_ns()>deadline:raise SendEffectUnknown("post-send-deadline")
+  CONTROL_SEND_STATE=b"SENT";return
+
+def send_rights(control,raw,numbers,deadline):
+ global CONTROL_SEND_STATE
+ cells=array.array("i",numbers)
+ while True:
+  wait_sendable(control,deadline);CONTROL_SEND_STATE=b"SEND_EFFECT_UNKNOWN"
+  try:count=control.sendmsg([raw],[(socket.SOL_SOCKET,socket.SCM_RIGHTS,cells.tobytes())])
+  except BlockingIOError:continue
+  except BaseException as error:raise FaultSet({b"FD_TRANSFER",b"SEND_EFFECT_UNKNOWN"}) from error
+  if count!=len(raw):raise FaultSet({b"FD_TRANSFER",b"SEND_EFFECT_UNKNOWN"})
+  checkpoint(CERT,0,ConsumedIndeterminate,deadline)
+  if time.monotonic_ns()>deadline:raise FaultSet({b"FD_TRANSFER",b"SEND_EFFECT_UNKNOWN"})
+  CONTROL_SEND_STATE=b"SENT";return
+
+def recv_control(control,deadline,cap=65536):
+ checkpoint(CERT,0,ConsumedIndeterminate,deadline)
+ poller=select.poll();poller.register(control.fileno(),select.POLLIN|select.POLLHUP|select.POLLERR)
+ while True:
+  checkpoint(CERT,0,ConsumedIndeterminate,deadline);remaining=deadline-time.monotonic_ns()
+  if remaining<=0:raise FaultSet({b"CONTROL_TIMEOUT"})
+  try:events=poller.poll(max(1,min(50,(remaining+999999)//1000000)))
+  except InterruptedError:continue
+  mask=0
+  for number,event in events:
+   if number==control.fileno():mask|=event
+  if mask&select.POLLIN:
+   installed=[];bad=False
+   try:
+    raw,ancillary,flags,address=control.recvmsg(cap,socket.CMSG_SPACE(MAX_RIGHTS*array.array("i").itemsize))
+    for level,kind,data in ancillary:
+     if level==socket.SOL_SOCKET and kind==socket.SCM_RIGHTS:
+      cells=array.array("i");whole=len(data)-(len(data)%cells.itemsize)
+      if whole:cells.frombytes(data[:whole]);installed.extend(cells)
+      if whole!=len(data):bad=True
+     else:bad=True
+    checkpoint(CERT,0,ConsumedIndeterminate,deadline)
+    if time.monotonic_ns()>deadline:raise FaultSet({b"CONTROL_TIMEOUT"})
+    if flags&(socket.MSG_TRUNC|socket.MSG_CTRUNC):raise FaultSet({b"CONTROL_TRUNCATION"})
+    if bad or installed or ancillary:raise FaultSet({b"FD_TRANSFER"})
+    if address is not None or not raw:raise FaultSet({b"CONTROL_MALFORMED"})
+    if raw.startswith(b"V5_ABORT|"):
+     values,faults=parse_abort(raw,b"B");error=RemoteAbort(faults);error.values=values;raise error
+    return raw
+   except BlockingIOError:
+    close_numbers(installed);continue
+   except BaseException:
+    close_numbers(installed);raise
+  if mask&(select.POLLHUP|select.POLLERR):raise ControlLost("control-hup")
+
+def wait_exact(control,deadline,expected):
+ raw=recv_control(control,deadline)
+ if raw!=expected:raise FaultSet({b"CONTROL_MALFORMED"})
+
+def pidfd_pid(number):
+ link=os.readlink(b"/proc/self/fd/"+str(number).encode());need(link==b"anon_inode:[pidfd]",Refuse);info=-1
+ try:
+  info=os.open(b"/proc/self/fdinfo/"+str(number).encode(),os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(info,4096),4096)
+ finally:close_numbers(tuple(x for x in (info,) if x>=0))
+ values=[x[5:] for x in raw.splitlines() if x.startswith(b"Pid:\t")];need(len(values)==1,Refuse);return udec(values[0],1)
+
+def proc_starttime(pid,kind=Refuse):
+ number=-1
+ try:
+  number=os.open(b"/proc/"+str(pid).encode()+b"/stat",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(number,4096),4096)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+ cut=raw.rfind(b") ");need(cut>0,kind);fields=raw[cut+2:].strip().split();need(len(fields)>=20,kind)
+ return udec(fields[19],1)
+
+EXTERNAL_MANIFEST_KEYS=(b"VERSION",b"SESSION_AUTH_POLICY",b"OWNER_PID",b"OWNER_STARTTIME",b"OWNER_UID",b"OWNER_GID",b"ENDPOINT_TYPE",b"PIDFD_REQUIRED",b"MAX_PACKET_BYTES",b"RIGHTS_TYPES",b"REFUSAL_RECEIPT_PROTOCOL",b"TRANSFER_PROTOCOL",b"NO_REPLAY")
+
+def parse_external_manifest(raw,cert):
+ values=parse_fixed(raw,b"P27E001_EXTERNAL_OWNER_MANIFEST_V5",EXTERNAL_MANIFEST_KEYS,b"MANIFEST_END=1")
+ exact={b"VERSION":b"5",b"SESSION_AUTH_POLICY":b"AUTH_V5_LENGTH_FRAMED",b"OWNER_PID":cert[b"EXTERNAL_OWNER_PID"],b"OWNER_STARTTIME":cert[b"EXTERNAL_OWNER_STARTTIME"],b"OWNER_UID":cert[b"EXTERNAL_OWNER_UID"],b"OWNER_GID":cert[b"EXTERNAL_OWNER_GID"],b"ENDPOINT_TYPE":b"SOCK_SEQPACKET",b"PIDFD_REQUIRED":b"1",b"MAX_PACKET_BYTES":b"65536",b"RIGHTS_TYPES":b"ATTEMPT_DIRFD,STAGE_DIRFD,CGROUP_DIRFD,OUT_FD,ERR_FD,EVENTS_FD,KILL_FD,OUTER_PIDFD,CGROUP_BASE_DIRFD,ACTOR_CONTROL_FD",b"REFUSAL_RECEIPT_PROTOCOL":b"MONOTONE_O_EXCL_ISSUER_V5",b"TRANSFER_PROTOCOL":b"OFFER_ACCEPTED_DURABLE_V5",b"NO_REPLAY":b"1"}
+ for key,value in exact.items():need(values[key]==value,Refuse)
+ return values
+
+def verify_external_inputs(cert):
+ pid=udec(cert[b"EXTERNAL_OWNER_PID"],2);start=udec(cert[b"EXTERNAL_OWNER_STARTTIME"],1)
+ fd_access(108,os.O_RDWR);fd_access(109,os.O_RDWR);need(pidfd_pid(109)==pid,Refuse)
+ watcher=select.poll();watcher.register(109,select.POLLIN|select.POLLHUP|select.POLLERR);need(watcher.poll(0)==[],Refuse)
+ duplicate=socket.fromfd(108,socket.AF_UNIX,socket.SOCK_SEQPACKET)
+ try:
+  need(duplicate.getsockopt(socket.SOL_SOCKET,socket.SO_TYPE)==socket.SOCK_SEQPACKET,Refuse)
+  need(fcntl.fcntl(108,fcntl.F_GETFL)&os.O_NONBLOCK,Refuse)
+  peer=struct.unpack("3i",duplicate.getsockopt(socket.SOL_SOCKET,socket.SO_PEERCRED,12))
+  need(peer==(pid,udec(cert[b"EXTERNAL_OWNER_UID"]),udec(cert[b"EXTERNAL_OWNER_GID"])),Refuse)
+ finally:duplicate.close()
+ need(proc_starttime(pid)==start and pidfd_pid(109)==pid and proc_starttime(pid)==start and watcher.poll(0)==[],Refuse)
+
+def cgroup_populated(number):
+ os.lseek(number,0,os.SEEK_SET);raw=os.read(number,4096)
+ matches=[line for line in raw.splitlines() if line.startswith(b"populated ")]
+ need(len(matches)==1 and matches[0] in (b"populated 0",b"populated 1"),ConsumedIndeterminate)
+ return matches[0]==b"populated 1"
+
+def cgroup_empty(cgfd):
+ number=-1
+ try:
+  number=os.open(b"cgroup.events",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgfd);return not cgroup_populated(number)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+
+def exact_child_cgroup(cgfd,pid):
+ number=-1
+ try:
+  number=os.open(b"cgroup.procs",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgfd);need(read_all(number,64)==str(pid).encode()+b"\n",ConsumedIndeterminate)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+
+def wait_status(pid,flags,deadline,unknown_fault):
+ while True:
+  checkpoint(CERT,0,ConsumedIndeterminate,deadline)
+  if time.monotonic_ns()>deadline:raise FaultSet({unknown_fault})
+  try:waited,raw=os.waitpid(pid,flags|os.WNOHANG)
+  except InterruptedError:
+   checkpoint(CERT,0,ConsumedIndeterminate,deadline);continue
+  except BaseException as error:raise FaultSet({unknown_fault}) from error
+  checkpoint(CERT,0,ConsumedIndeterminate,deadline)
+  if time.monotonic_ns()>deadline:raise FaultSet({unknown_fault})
+  if waited not in (0,pid):raise FaultSet({unknown_fault})
+  if waited==pid:return raw
+  try:select.poll().poll(1)
+  except InterruptedError:pass
+
+def source_argv(probe,safe,p01c):
+ app=[b"/proc/self/fd/100",probe,AUTH_ID,b"15000000000",b"5000000",b"2000000",b"20000000",b"100000000",b"100000000",b"500000000",b"NO_ASYNC_TRANSFER_THROUGH_FIXED_FD_PROCESS_WAIT_AND_CLOSE_COMMIT_V15",b"OWNER_SURVIVAL_PROGRESS_SINGLE_FRAME_V15",b"ROOT_OWNED_0700_STABLE_NONCE_NO_CONCURRENT_MUTATOR_V15",str(safe.st_dev).encode(),str(safe.st_ino).encode()]
+ for identity in SOURCE_META:app.append(str(identity[0]).encode()+b","+str(identity[1]).encode()+b","+identity[2])
+ app.extend(p01c);need(len(app)==20 or (probe==b"P01C" and len(app)==33))
+ return [PYTHON,b"-I",b"-S",b"-B",b"-P",b"-X",b"utf8"]+app
+
+def derive_p01c(prior,cert):
+ need(prior is not None)
+ path=even_hex(prior[b"libc_path_hex"]);conf_bytes=even_hex(prior[b"libc_confstr_hex"])
+ conf_text=conf_bytes.decode("ascii","strict");need(conf_text.encode("ascii","strict")==conf_bytes and conf_bytes.hex().encode()==prior[b"libc_confstr_hex"])
+ need(prior[b"libc_path_hex"]==cert[b"LIBC_PATH_HEX"] and prior[b"libc_confstr_hex"]==cert[b"LIBC_CONFSTR_HEX"] and prior[b"libc_sha256"]==cert[b"LIBC_SHA256"])
+ rootfd=number=py=-1
+ try:
+  rootfd=open_dir(RUNTIME_ROOT);number=open_under(rootfd,path);held=os.fstat(number);raw=read_all(number,held.st_size);os.close(number);number=-1
+  py=open_under(rootfd,PYIMAGE);pyheld=os.fstat(py);pyraw=read_all(py,30626264);os.close(py);py=-1
+ finally:close_numbers(tuple(x for x in (number,py,rootfd) if x>=0))
+ observed=(held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid,held.st_size,sha(raw))
+ certified=(udec(cert[b"LIBC_DEV"],1),udec(cert[b"LIBC_INO"],1),octal(cert[b"LIBC_MODE"]),udec(cert[b"LIBC_NLINK"],1),udec(cert[b"LIBC_UID"]),udec(cert[b"LIBC_GID"]),udec(cert[b"LIBC_BYTES"],1),cert[b"LIBC_SHA256"])
+ need(observed==certified and held.st_size==udec(prior[b"libc_bytes"]) and sha(raw)==prior[b"libc_sha256"])
+ py_observed=(pyheld.st_dev,pyheld.st_ino,pyheld.st_mode,pyheld.st_nlink,pyheld.st_uid,pyheld.st_gid,len(pyraw),sha(pyraw))
+ py_certified=(udec(cert[b"PYTHON_IMAGE_DEV"],1),udec(cert[b"PYTHON_IMAGE_INO"],1),octal(cert[b"PYTHON_IMAGE_MODE"]),udec(cert[b"PYTHON_IMAGE_NLINK"],1),udec(cert[b"PYTHON_IMAGE_UID"]),udec(cert[b"PYTHON_IMAGE_GID"]),udec(cert[b"PYTHON_IMAGE_BYTES"],1),cert[b"PYTHON_IMAGE_SHA256"])
+ need(py_observed==py_certified and str(pyheld.st_dev).encode()==prior[b"python_image_dev"] and str(pyheld.st_ino).encode()==prior[b"python_image_ino"])
+ result=(prior[b"libc_path_hex"],str(held.st_dev).encode(),str(held.st_ino).encode(),format(held.st_mode,"o").encode(),str(held.st_nlink).encode(),str(held.st_uid).encode(),str(held.st_gid).encode(),str(held.st_size).encode(),prior[b"libc_sha256"],prior[b"libc_confstr_hex"],prior[b"python_image_dev"],prior[b"python_image_ino"],prior[b"python_image_sha256"])
+ need(len(result)==13 and result[9]==prior[b"libc_confstr_hex"] and result[5]==cert[b"LIBC_UID"] and result[6]==cert[b"LIBC_GID"]);return result
+
+def launch_b(cert,base_stats):
+ global B_CHILD_PID,B_CONTROL
+ empty_r=empty_w=actor_pidfd=-1;left=right=None;pid=-1
+ try:
+  empty_r,empty_w=os.pipe2(os.O_CLOEXEC);os.close(empty_w);empty_w=-1
+  left,right=socket.socketpair(socket.AF_UNIX,socket.SOCK_SEQPACKET|socket.SOCK_CLOEXEC|socket.SOCK_NONBLOCK)
+  actor_pid=os.getpid();actor_starttime=proc_starttime(actor_pid);actor_pidfd=os.pidfd_open(actor_pid,0);need(pidfd_pid(actor_pidfd)==actor_pid and proc_starttime(actor_pid)==actor_starttime,Refuse);pid=os.fork()
+  if pid>0:
+   B_CHILD_PID=pid;B_CONTROL=left;left=None
+  if pid==0:
+   try:
+    left.close();left=None
+    mapping=((empty_r,0),(right.fileno(),3),(actor_pidfd,4),(base_stats[b"attempt_fd"],5),(base_stats[b"cgroup_fd"],6),(104,7),(105,8),(101,9),(103,10),(100,11),(102,12),(107,13),(108,14),(109,15),(110,16),(106,100))
+    preserved_map(mapping);os.close(1);os.close(2)
+    close_range(17,99);close_range(101,UINT_MAX)
+    child_context(None,base_stats[b"safe"].st_dev,base_stats[b"safe"].st_ino);scrub_exact({0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,100})
+    argv=(PYTHON,b"-I",b"-S",b"-B",b"-P",b"-X",b"utf8",b"/proc/self/fd/100",b"RECOVER_V5",AUTH_ID,str(actor_pid).encode(),str(actor_starttime).encode(),cert[b"PLAN_SHA256"],cert[b"RECOVERY_SHA256"],str(base_stats[b"safe"].st_dev).encode(),str(base_stats[b"safe"].st_ino).encode())
+    os.execve(PYTHON,argv,ENV)
+   except BaseException:os._exit(97)
+  right.close();right=None;os.close(empty_r);empty_r=-1;os.close(actor_pidfd);actor_pidfd=-1
+  result=B_CONTROL;need(B_CHILD_PID==pid and result is not None,Refuse);return pid,result
+ finally:
+  close_numbers(tuple(x for x in (empty_r,empty_w,actor_pidfd) if x>=0))
+  for endpoint in (left,right):
+   if endpoint is not None:
+    try:endpoint.close()
+    except BaseException:pass
+
+def launch_outer(outer_fd,in_r,out_w,err_w,safe,argv,cgfd):
+ pidfd_cell=ctypes.c_int(-1);args=CloneArgs();args.flags=CLONE_PIDFD|CLONE_INTO_CGROUP
+ args.pidfd=ctypes.addressof(pidfd_cell);args.exit_signal=int(signal.SIGCHLD);args.cgroup=cgfd
+ pid=LIBC.syscall(SYS_CLONE3,ctypes.byref(args),ctypes.sizeof(args))
+ if pid<0:raise ConsumedIndeterminate("clone-return")
+ if pid==0:
+  try:
+   os.kill(os.getpid(),signal.SIGSTOP)
+   preserved_map(((in_r,0),(out_w,1),(err_w,2),(outer_fd,100)))
+   close_range(3,99);close_range(101,UINT_MAX)
+   child_context(AUTH_ID,safe.st_dev,safe.st_ino);scrub_exact({0,1,2,100})
+   os.execve(PYTHON,tuple(argv),ENV)
+  except BaseException:os._exit(98)
+ need(pid>=2 and pidfd_cell.value>=0,ConsumedIndeterminate)
+ return pid,pidfd_cell.value
+
+def recv_result(control,deadline,ordinal,probe,pid):
+ raw=recv_control(control,deadline)
+ keys=(b"ordinal",b"probe",b"outer_pid",b"pidfd_bound",b"pidfd_exit_ready_observed",b"stdout_len",b"stdout_sha256",b"stdout_eof",b"stdout_frames",b"stderr_len",b"stderr_sha256",b"stderr_eof",b"stderr_frames",b"cgroup_empty",b"fault_set",b"capture_done_ns")
+ values=parse_packet(raw,b"V5_RESULT",keys)
+ need(udec(values[b"ordinal"],0,14)==ordinal and values[b"probe"]==probe and udec(values[b"outer_pid"],2)==pid)
+ out_need=udec(values[b"stdout_len"],0,STREAM_CAP);err_need=udec(values[b"stderr_len"],0,STREAM_CAP)
+ out_frames=udec(values[b"stdout_frames"],0,49);err_frames=udec(values[b"stderr_frames"],0,49)
+ need(out_frames==(out_need+64999)//65000 and err_frames==(err_need+64999)//65000)
+ h64(values[b"stdout_sha256"]);h64(values[b"stderr_sha256"]);parse_fault_csv(values[b"fault_set"],True)
+ out=bytearray();err=bytearray()
+ for stream,total,target in ((b"STDOUT",out_frames,out),(b"STDERR",err_frames,err)):
+  for index in range(total):
+   frame=recv_control(control,deadline,65536)
+   cut=frame.find(b"\n");need(cut>0)
+   header=frame[:cut+1];payload=frame[cut+1:]
+   fields=parse_packet(header,b"V5_RESULT_FRAME",(b"ordinal",b"probe",b"stream",b"index",b"bytes",b"sha256"))
+   need(udec(fields[b"ordinal"],0,14)==ordinal and fields[b"probe"]==probe and fields[b"stream"]==stream)
+   need(udec(fields[b"index"])==index and udec(fields[b"bytes"],1,65000)==len(payload) and sha(payload)==fields[b"sha256"])
+   target.extend(payload)
+ end=parse_packet(recv_control(control,deadline),b"V5_RESULT_END",(b"state",b"ordinal",b"probe"))
+ need(end[b"state"]==b"RESULT_END" and udec(end[b"ordinal"],0,14)==ordinal and end[b"probe"]==probe)
+ need(len(out)==out_need and len(err)==err_need and sha(out)==values[b"stdout_sha256"] and sha(err)==values[b"stderr_sha256"])
+ return values,bytes(out),bytes(err)
+
+def transcript_language(raw):
+ if not (type(raw)is bytes and 0<len(raw)<=STREAM_CAP and raw.endswith(b"\n")):raise FaultSet({b"TRANSCRIPT_LANGUAGE"})
+ if not all(x==10 or 32<=x<=126 for x in raw):raise FaultSet({b"TRANSCRIPT_LANGUAGE"})
+ lines=raw[:-1].split(b"\n")
+ if not lines or not all(lines):raise FaultSet({b"TRANSCRIPT_LANGUAGE"})
+
+PHASE_FAULT={b"STAGE":b"STAGING_FAULT",b"CONTAIN":b"CONTAINMENT_FAULT",b"STREAM_ARM":b"FD_TRANSFER",b"CLONE":b"RELEASE_EFFECT_UNKNOWN",b"STOP":b"STOP_WAIT_UNKNOWN",b"PIDFD_ARM":b"PIDFD_BINDING",b"RELEASE_RECORD":b"RELEASE_RECORD_DURABILITY_UNKNOWN",b"SIGCONT":b"RELEASE_EFFECT_UNKNOWN",b"WAIT":b"DIRECT_WAIT_UNKNOWN",b"RESULT":b"CAPTURE_IO",b"LANGUAGE":b"TRANSCRIPT_LANGUAGE",b"STRUCTURE":b"TRANSCRIPT_STRUCTURE",b"SEMANTICS":b"TRANSCRIPT_SEMANTICS",b"RECEIPT":b"ACK_DURABILITY_UNKNOWN",b"REMOVE":b"CONTAINMENT_NOT_EMPTY",b"FINAL":b"REPORT_DURABILITY_UNKNOWN"}
+
+def error_faults(error,phase):
+ if isinstance(error,FaultSet):return set(error.faults)
+ if isinstance(error,CertificateExpired):return {b"CERTIFICATE_EXPIRED"}
+ if isinstance(error,(ConsumedFail,ConsumedIndeterminate)) and phase in PHASE_FAULT:return {PHASE_FAULT[phase]}
+ return {b"INTERNAL_INVARIANT"}
+
+def send_abort(control,state,ordinal,probe,faults,deadline,terminal_deadline=0):
+ effect=b"PREBEGIN" if PREFLIGHT else b"CONSUMED"
+ raw=packet(b"V5_ABORT",((b"sender",b"A"),(b"state",b"ABORTING"),(b"expected_state",b"ABORT_RECONCILER"),(b"ordinal",b"NONE" if ordinal is None else str(ordinal).encode()),(b"probe",probe),(b"effect_state",b"ABORT_NOTICE"),(b"causal_state",state),(b"causal_effect",effect),(b"stage_present",b"1" if STAGE_PRESENT else b"0"),(b"release_disabled",b"1"),(b"terminal_deadline_ns",str(terminal_deadline).encode()),(b"fault_set",fault_csv(faults)),(b"control_deadline_ns",str(deadline).encode())))
+ send_plain(control,raw,deadline)
+
+def run_probe(control,ordinal,probe,cgfd,safefd,safe,outer_source,ctx,p01c,cert):
+ phase=b"STREAM_ARM";release_origin=time.monotonic_ns();launch_deadline=release_origin+LAUNCH_NS
+ in_r=in_w=out_r=out_w=err_r=err_w=outer_fd=events=kill=pidfd=-1;pid=-1;outer_starttime=0;direct_wait_entered=False
+ try:
+  checkpoint(cert,horizon_needed(release_origin+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ConsumedIndeterminate,launch_deadline)
+  in_r,in_w=os.pipe2(os.O_CLOEXEC);os.close(in_w);in_w=-1;need(os.read(in_r,1)==b"")
+  out_r,out_w=os.pipe2(os.O_CLOEXEC|os.O_NONBLOCK);err_r,err_w=os.pipe2(os.O_CLOEXEC|os.O_NONBLOCK)
+  need(os.fstat(out_r).st_ino!=os.fstat(err_r).st_ino);outer_fd=memfd(outer_source,"p27-v15-outer-v5")
+  events=os.open(b"cgroup.events",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgfd)
+  kill=os.open(b"cgroup.kill",os.O_WRONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgfd)
+  stream=packet(b"V5_STREAM_ARM",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"release_origin_ns",str(release_origin).encode()),(b"launch_deadline_ns",str(launch_deadline).encode()),(b"stdout_dev",str(os.fstat(out_r).st_dev).encode()),(b"stdout_ino",str(os.fstat(out_r).st_ino).encode()),(b"stderr_dev",str(os.fstat(err_r).st_dev).encode()),(b"stderr_ino",str(os.fstat(err_r).st_ino).encode()),(b"events_dev",str(os.fstat(events).st_dev).encode()),(b"events_ino",str(os.fstat(events).st_ino).encode()),(b"kill_dev",str(os.fstat(kill).st_dev).encode()),(b"kill_ino",str(os.fstat(kill).st_ino).encode())))
+  send_rights(control,stream,(out_r,err_r,events,kill),launch_deadline)
+  close_numbers((out_r,err_r,events,kill));out_r=err_r=events=kill=-1
+  armed=parse_packet(recv_control(control,launch_deadline),b"V5_STREAMS_ARMED",(b"ordinal",b"probe"))
+  need(udec(armed[b"ordinal"],0,14)==ordinal and armed[b"probe"]==probe);progress(cert,launch_deadline,horizon_needed(release_origin+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS))
+  phase=b"CLONE";argv=source_argv(probe,safe,p01c);pid,pidfd=launch_outer(outer_fd,in_r,out_w,err_w,safe,argv,cgfd)
+  outer_starttime=proc_starttime(pid);need(pidfd_pid(pidfd)==pid and proc_starttime(pid)==outer_starttime,ConsumedIndeterminate)
+  close_numbers((in_r,out_w,err_w,outer_fd));in_r=out_w=err_w=outer_fd=-1
+  phase=b"STOP";stopped=wait_status(pid,os.WUNTRACED,launch_deadline,b"STOP_WAIT_UNKNOWN")
+  need(os.WIFSTOPPED(stopped) and os.WSTOPSIG(stopped)==signal.SIGSTOP and pidfd_pid(pidfd)==pid and proc_starttime(pid)==outer_starttime,ConsumedIndeterminate)
+  exact_child_cgroup(cgfd,pid);need(not cgroup_empty(cgfd),ConsumedIndeterminate)
+  phase=b"PIDFD_ARM";arm=packet(b"V5_PIDFD_ARM",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"outer_pid",str(pid).encode()),(b"outer_starttime",str(outer_starttime).encode()),(b"stopped_raw_status",str(stopped).encode()),(b"cgroup_member",b"1"),(b"pidfd_bound",b"1"),(b"launch_deadline_ns",str(launch_deadline).encode())))
+  send_rights(control,arm,(pidfd,),launch_deadline);os.close(pidfd);pidfd=-1
+  armed=parse_packet(recv_control(control,launch_deadline),b"V5_PIDFD_ARMED",(b"ordinal",b"probe",b"pidfd_bound",b"outer_pid",b"outer_starttime"))
+  need(udec(armed[b"ordinal"],0,14)==ordinal and armed[b"probe"]==probe and armed[b"pidfd_bound"]==b"1" and udec(armed[b"outer_pid"],2)==pid and udec(armed[b"outer_starttime"],1)==outer_starttime)
+  outer_pid=pid;cg=os.fstat(cgfd)
+  phase=b"RELEASE_RECORD";release_record_deadline=release_origin+RELEASE_RECORD_OFFSET_NS;release_reply_deadline=release_origin+RELEASE_REPLY_OFFSET_NS
+  need(release_record_deadline<release_reply_deadline<launch_deadline,ConsumedIndeterminate)
+  release=packet(b"V5_RELEASE_CANDIDATE",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"outer_pid",str(pid).encode()),(b"outer_starttime",str(outer_starttime).encode()),(b"pidfd_bound",b"1"),(b"stopped_raw_status",str(stopped).encode()),(b"cgroup_member",b"1"),(b"cgroup_dev",str(cg.st_dev).encode()),(b"cgroup_ino",str(cg.st_ino).encode()),(b"cgroup_mode",format(cg.st_mode,"o").encode()),(b"cgroup_nlink",str(cg.st_nlink).encode()),(b"cgroup_uid",str(cg.st_uid).encode()),(b"cgroup_gid",str(cg.st_gid).encode()),(b"argv_sha256",sha(b"\x00".join(argv))),(b"env_sha256",sha(b"\x00".join(x+b"="+ENV[x] for x in sorted(ENV)))),(b"release_origin_ns",str(release_origin).encode()),(b"launch_overall_deadline_ns",str(launch_deadline).encode()),(b"release_record_deadline_ns",str(release_record_deadline).encode()),(b"release_reply_deadline_ns",str(release_reply_deadline).encode()),(b"launch_deadline_ns",str(release_record_deadline).encode())))
+  send_plain(control,release,release_record_deadline)
+  released=parse_packet(recv_control(control,release_reply_deadline),b"V5_RELEASE_DURABLE",(b"ordinal",b"probe",b"release_sha256",b"launch_overall_deadline_ns",b"release_record_deadline_ns",b"release_reply_deadline_ns"))
+  need(udec(released[b"ordinal"],0,14)==ordinal and released[b"probe"]==probe and udec(released[b"launch_overall_deadline_ns"])==launch_deadline and udec(released[b"release_record_deadline_ns"])==release_record_deadline and udec(released[b"release_reply_deadline_ns"])==release_reply_deadline);release_sha=h64(released[b"release_sha256"])
+  phase=b"SIGCONT";checkpoint(cert,horizon_needed(release_origin+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ConsumedIndeterminate,launch_deadline)
+  call_entry=time.monotonic_ns();need(call_entry+SIGCONT_NS<=launch_deadline,ConsumedIndeterminate)
+  os.kill(pid,signal.SIGCONT);release_return=time.monotonic_ns()
+  need(release_return<=call_entry+SIGCONT_NS and release_return<=launch_deadline,ConsumedIndeterminate)
+  checkpoint(cert,horizon_needed(release_origin+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ConsumedIndeterminate,launch_deadline)
+  phase=b"WAIT";direct_wait_entered=True
+  raw=wait_status(pid,0,release_origin+HOST_NS,b"DIRECT_WAIT_UNKNOWN");pid=-1;direct_done=time.monotonic_ns()
+  phase=b"RESULT";values,stdout,stderr=recv_result(control,release_origin+HOST_NS,ordinal,probe,outer_pid)
+  done=udec(values[b"capture_done_ns"]);host_complete=max(direct_done,done);ack_deadline=min(release_origin+TOTAL_NS,host_complete+ACK_NS)
+  need(time.monotonic_ns()<=ack_deadline and ack_deadline-host_complete<=ACK_NS,ConsumedIndeterminate)
+  faults=parse_fault_csv(values[b"fault_set"],True)
+  if values[b"pidfd_bound"]!=b"1" or values[b"pidfd_exit_ready_observed"]!=b"1":faults.add(b"PIDFD_BINDING")
+  if values[b"stdout_eof"]!=b"1" or values[b"stderr_eof"]!=b"1":faults.add(b"CAPTURE_IO")
+  if values[b"cgroup_empty"]!=b"1":faults.add(b"CONTAINMENT_NOT_EMPTY")
+  if stderr:faults.add(b"STDERR_NONEMPTY")
+  if raw!=0:faults.add(b"OUTER_STATUS")
+  if host_complete>release_origin+HOST_NS:faults.add(b"WATCHDOG_DEADLINE")
+  if faults:raise FaultSet(faults)
+  try:
+   if not cgroup_empty(cgfd):raise FaultSet({b"CONTAINMENT_NOT_EMPTY"})
+  except FaultSet:raise
+  except BaseException as error:raise FaultSet({b"CONTAINMENT_OBSERVATION_UNKNOWN"}) from error
+  phase=b"LANGUAGE";transcript_language(stdout)
+  phase=b"STRUCTURE"
+  try:rows,outer_claims=transcript_structure(stdout,probe)
+  except BaseException as error:raise FaultSet({b"TRANSCRIPT_STRUCTURE"}) from error
+  phase=b"SEMANTICS"
+  try:rows=transcript_semantics(rows,outer_claims,probe,ctx)
+  except FaultSet:raise
+  except BaseException as error:raise FaultSet({b"TRANSCRIPT_SEMANTICS"}) from error
+  phase=b"RECEIPT";candidate=packet(b"V5_VALIDATED_CANDIDATE",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"release_record_sha256",release_sha),(b"release_origin_ns",str(release_origin).encode()),(b"release_return_ns",str(release_return).encode()),(b"host_complete_ns",str(host_complete).encode()),(b"capture_done_ns",str(done).encode()),(b"direct_wait_state",b"COMPLETE"),(b"outer_raw_status",str(raw).encode()),(b"pidfd_bound",b"1"),(b"pidfd_exit_ready_observed",b"1"),(b"stdout_len",str(len(stdout)).encode()),(b"stdout_sha256",sha(stdout)),(b"stdout_eof",b"1"),(b"stdout_overflow",b"0"),(b"stderr_len",str(len(stderr)).encode()),(b"stderr_sha256",EMPTY_SHA),(b"stderr_eof",b"1"),(b"stderr_overflow",b"0"),(b"cgroup_empty",b"1"),(b"parser_language",b"ACCEPTED"),(b"parser_structure",b"ACCEPTED"),(b"parser_semantics",b"ACCEPTED"),(b"candidate",b"ACCEPTED"),(b"terminal",b"ACCEPTED"),(b"certificate_expiry_realtime_ns",cert[b"ABSOLUTE_EXPIRY_REALTIME_NS"]),(b"ack_deadline_ns",str(ack_deadline).encode())))
+  send_plain(control,candidate,ack_deadline)
+  validated=parse_packet(recv_control(control,ack_deadline),b"V5_VALIDATED_DURABLE",(b"ordinal",b"probe",b"validated_sha256"))
+  need(udec(validated[b"ordinal"],0,14)==ordinal and validated[b"probe"]==probe);validated_sha=h64(validated[b"validated_sha256"])
+  checkpoint(cert,horizon_needed(ack_deadline,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ConsumedIndeterminate,ack_deadline)
+  actor_ack=time.monotonic_ns();need(actor_ack-host_complete<=ACK_NS,ConsumedIndeterminate)
+  intent=packet(b"V5_ACK_COMMIT_INTENT",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"validated_sha256",validated_sha),(b"host_complete_ns",str(host_complete).encode()),(b"ack_deadline_ns",str(ack_deadline).encode()),(b"actor_ack_intent_ns",str(actor_ack).encode())))
+  send_plain(control,intent,ack_deadline)
+  committed=parse_packet(recv_control(control,ack_deadline),b"V5_COMMITTED",(b"ordinal",b"probe",b"ack_sha256"))
+  need(udec(committed[b"ordinal"],0,14)==ordinal and committed[b"probe"]==probe);ack_sha=h64(committed[b"ack_sha256"])
+  checkpoint(cert,horizon_needed(ack_deadline,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ConsumedIndeterminate,ack_deadline)
+  seen=packet(b"V5_COMMITTED_SEEN",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"ack_sha256",ack_sha),(b"host_complete_ns",str(host_complete).encode()),(b"ack_deadline_ns",str(ack_deadline).encode())))
+  send_plain(control,seen,ack_deadline);need(time.monotonic_ns()-host_complete<=ACK_NS,ConsumedIndeterminate);return rows,ack_sha
+ except BaseException as error:
+  faults=error_faults(error,phase)
+  try:send_abort(control,phase,ordinal,probe,faults,min(release_origin+TOTAL_NS,time.monotonic_ns()+ACK_NS))
+  except BaseException as send_error:faults.update(error_faults(send_error,phase))
+  if pid>=0 and not direct_wait_entered:
+   direct_wait_entered=True
+   try:wait_status(pid,0,release_origin+TOTAL_NS,b"DIRECT_WAIT_UNKNOWN");pid=-1
+   except FaultSet as wait_error:faults.update(wait_error.faults)
+  raised=FaultSet(faults);setattr(raised,"p27_abort_sent",True);setattr(raised,"p27_phase",phase);raise raised
+ finally:
+  close_numbers(tuple(number for number in (in_r,in_w,out_r,out_w,err_r,err_w,outer_fd,events,kill,pidfd) if number>=0))
+
+def mount_semantics(line,fstype,required,forbidden):
+ pieces=line[:-1].split(b" - ");need(len(pieces)==2)
+ left=pieces[0].split(b" ");right=pieces[1].split(b" ");need(len(left)>=6 and len(right)>=3 and right[0]==fstype)
+ options=set(left[5].split(b","))|set(right[2].split(b","))
+ need(required<=options and not (forbidden&options),Refuse)
+
+def mount_graph(cert):
+ number=-1
+ try:
+  number=os.open(b"/proc/self/mountinfo",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(number,1048576),1048576)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+ rows={}
+ for line in raw.splitlines():
+  left,right=line.split(b" - ",1);fields=left.split(b" ");need(len(fields)>=6,Refuse)
+  mid=udec(fields[0],1);parent=udec(fields[1],1);options=set(fields[5].split(b","))
+  need(mid not in rows,Refuse);rows[mid]=(parent,options)
+ runtime=udec(cert[b"RUNTIME_ROOT_MOUNT_ID"],1);safe=udec(cert[b"SAFE_BIND_MOUNT_ID"],1)
+ need(runtime in rows and safe in rows and runtime!=safe,Refuse)
+ def descends(mid,ancestor):
+  seen=set()
+  while mid in rows and mid not in seen:
+   if mid==ancestor:return True
+   seen.add(mid);mid=rows[mid][0]
+  return False
+ writable=[mid for mid,(parent,options) in rows.items() if mid!=runtime and descends(mid,runtime) and b"rw" in options]
+ need(writable==[safe] and cert[b"SAFE_BIND_WRITABLE_DESCENDANT_COUNT"]==b"1",Refuse)
+
+def base_identity(number,cert,prefix):
+ held=os.fstat(number)
+ expected=(udec(cert[prefix+b"_DEV"],1),udec(cert[prefix+b"_INO"],1),octal(cert[prefix+b"_MODE"]),udec(cert[prefix+b"_NLINK"],1),udec(cert[prefix+b"_UID"]),udec(cert[prefix+b"_GID"]))
+ need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)==expected,Refuse)
+ return held
+
+def signal_snapshot(cert):
+ need(all(signal.getitimer(which)==(0.0,0.0) for which in (signal.ITIMER_REAL,signal.ITIMER_VIRTUAL,signal.ITIMER_PROF)),Refuse)
+ previous=signal.pthread_sigmask(signal.SIG_BLOCK,set());need(previous==set(),Refuse)
+ valid=tuple(sorted(int(x) for x in signal.valid_signals()))
+ catchable=tuple(x for x in valid if x not in (int(signal.SIGKILL),int(signal.SIGSTOP)))
+ defaults=[]
+ for number in catchable:
+  need(signal.getsignal(number)==signal.SIG_DFL,Refuse);defaults.append(str(number).encode()+b":DFL\n")
+ need(len(valid)==udec(cert[b"VALID_SIGNAL_COUNT"]) and len(defaults)==udec(cert[b"DEFAULT_SIGNAL_COUNT"]),Refuse)
+ need(sha(b"".join(defaults))==cert[b"DEFAULTS_SHA256"],Refuse)
+
+def b_send(control,raw,deadline):
+ send_plain(control,raw,deadline)
+
+def request_refusal(control,begin_state,arm_state,reason,inherited_deadline):
+ if (begin_state,arm_state)==(b"BEGIN_NOT_ENTERED",b"ARM_NOT_OBSERVED"):
+  kind=b"V5_REFUSE_PREBEGIN";cross_state=b"ARM_NOT_ENTERED";origin=time.monotonic_ns();overall=origin+REFUSAL_TOTAL_NS
+ elif (begin_state,arm_state)==(b"BEGIN_SENT",b"ARMED_CONFIRMED"):
+  kind=b"V5_REFUSE_POSTARM";cross_state=b"REFUSAL_CLOSED_NO_CONSUME";overall=inherited_deadline;origin=overall-REFUSAL_TOTAL_NS
+ else:raise ConsumedIndeterminate("refusal-cross-map")
+ need(time.monotonic_ns()<=origin+REFUSAL_RECORD_NS and overall<=inherited_deadline,ConsumedIndeterminate)
+ schedule=exact_schedule(origin,overall,REFUSAL_PHASE_SPEC);request_deadline=schedule[b"REFUSAL_RECORD"]
+ raw=packet(kind,((b"state",b"REFUSE_PREBEGIN" if kind==b"V5_REFUSE_PREBEGIN" else b"REFUSE_POSTARM"),(b"expected_state",b"WAIT_BEGIN" if kind==b"V5_REFUSE_PREBEGIN" else b"WAIT_COMMIT"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"auth_id",AUTH_ID),(b"a_begin_state",begin_state),(b"a_arm_state",arm_state),(b"cross_map_state",cross_state),(b"reason",reason),(b"refusal_origin_ns",str(origin).encode()),(b"refusal_deadline_ns",str(overall).encode()),(b"refusal_schedule_hex",schedule_hex(schedule,REFUSAL_PHASE_SPEC)),(b"consume_deadline_ns",str(request_deadline).encode())))
+ request_send_state=b"REFUSAL_REQUEST_EFFECT_UNKNOWN"
+ try:send_plain(control,raw,request_deadline);request_send_state=b"REFUSAL_REQUEST_SENT"
+ except SendEffectUnknown:request_send_state=b"REFUSAL_REQUEST_EFFECT_UNKNOWN"
+ ack_deadline=schedule[b"REFUSAL_ACK"]
+ ack_raw=recv_control(control,ack_deadline)
+ ack=parse_packet(ack_raw,b"V5_REFUSE_ACK",(b"state",b"ordinal",b"probe",b"auth_id",b"a_begin_state",b"a_arm_state",b"cross_map_state",b"request_packet_sha256",b"request_message_seq",b"commit_count",b"attempt_state",b"intent_count",b"disposition",b"refusal_origin_ns",b"refusal_deadline_ns",b"refusal_schedule_hex",b"consume_deadline_ns"))
+ need(ack[b"state"]==b"REFUSAL_CLOSED_NO_CONSUME" and ack[b"expected_state"]==b"WAIT_REFUSAL_ACK" and ack[b"effect_state"]==b"REFUSAL_ACK_SEND_EFFECT_UNKNOWN",ConsumedIndeterminate)
+ need(ack[b"ordinal"]==ack[b"probe"]==b"NONE" and ack[b"auth_id"]==AUTH_ID and ack[b"a_begin_state"]==begin_state and ack[b"a_arm_state"]==arm_state,ConsumedIndeterminate)
+ need(ack[b"cross_map_state"]==cross_state and ack[b"request_packet_sha256"]==sha(raw) and ack[b"request_message_seq"]==str(CONTROL_SEND_SEQ).encode(),ConsumedIndeterminate)
+ need(ack[b"commit_count"]==b"0" and ack[b"attempt_state"]==b"ABSENT_KNOWN" and ack[b"intent_count"]==b"0" and ack[b"disposition"]==b"UNCONSUMED",ConsumedIndeterminate)
+ need(udec(ack[b"refusal_origin_ns"])==origin and udec(ack[b"refusal_deadline_ns"])==overall and ack[b"refusal_schedule_hex"]==schedule_hex(schedule,REFUSAL_PHASE_SPEC),ConsumedIndeterminate)
+ receipt_deadline=schedule[b"REFUSAL_RECEIPT"]
+ receipt=packet(b"V5_REFUSE_ACK_RECEIPT",((b"state",b"REFUSAL_ACK_RECEIVED"),(b"expected_state",b"WAIT_REFUSAL_RECEIPT"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"ack_packet_sha256",sha(ack_raw)),(b"ack_message_seq",ack[b"message_seq"]),(b"request_packet_sha256",sha(raw)),(b"cross_map_state",cross_state),(b"no_replay",b"1"),(b"refusal_deadline_ns",str(overall).encode()),(b"refusal_schedule_hex",schedule_hex(schedule,REFUSAL_PHASE_SPEC)),(b"consume_deadline_ns",str(receipt_deadline).encode())))
+ receipt_send_state=b"REFUSAL_RECEIPT_EFFECT_UNKNOWN"
+ try:send_plain(control,receipt,receipt_deadline);receipt_send_state=b"REFUSAL_RECEIPT_SENT"
+ except SendEffectUnknown:receipt_send_state=b"REFUSAL_RECEIPT_EFFECT_UNKNOWN"
+ closure_deadline=schedule[b"REFUSAL_CLOSURE"];closed_raw=recv_control(control,closure_deadline)
+ closed=parse_packet(closed_raw,b"V5_REFUSAL_CLOSED",(b"state",b"ordinal",b"probe",b"ack_packet_sha256",b"receipt_packet_sha256",b"cross_map_state",b"issuer_closure_sha256",b"issuer_record_seq",b"issuer_predecessor_sha256",b"no_replay",b"refusal_deadline_ns",b"refusal_schedule_hex",b"consume_deadline_ns"))
+ need(closed[b"state"]==b"REFUSAL_DURABLY_CLOSED" and closed[b"expected_state"]==b"WAIT_REFUSAL_CLOSED" and closed[b"effect_state"]==b"OWNER_CLOSURE",ConsumedIndeterminate)
+ need(closed[b"ordinal"]==closed[b"probe"]==b"NONE" and closed[b"ack_packet_sha256"]==sha(ack_raw) and closed[b"receipt_packet_sha256"]==sha(receipt),ConsumedIndeterminate)
+ need(closed[b"cross_map_state"]==cross_state and h64(closed[b"issuer_closure_sha256"])!=b"0"*64 and udec(closed[b"issuer_record_seq"],1)>=1 and h64(closed[b"issuer_predecessor_sha256"])!=b"0"*64,ConsumedIndeterminate)
+ need(closed[b"no_replay"]==b"1" and udec(closed[b"refusal_deadline_ns"])==overall and closed[b"refusal_schedule_hex"]==schedule_hex(schedule,REFUSAL_PHASE_SPEC),ConsumedIndeterminate)
+ return {b"request_raw":raw,b"ack_raw":ack_raw,b"receipt_raw":receipt,b"closed_raw":closed_raw,b"cross_state":cross_state,b"request_send_state":request_send_state,b"receipt_send_state":receipt_send_state,b"overall":overall}
+
+def failure_recv(control,deadline):
+ while True:
+  try:return recv_control(control,deadline)
+  except RemoteAbort as error:
+   values=error.values;need(values[b"sender"]==b"B" and values[b"causal_state"]==b"CLEANUP_RELEASE_DISABLE")
+   remote_deadline=udec(values[b"terminal_deadline_ns"],1);need(time.monotonic_ns()<=remote_deadline<=deadline)
+   send_abort(control,b"CLEANUP_RELEASE_DISABLED",None,values[b"probe"],set(error.faults),remote_deadline,remote_deadline)
+
+def await_failure_terminal(control,outer_deadline):
+ notice_raw=failure_recv(control,outer_deadline)
+ values=parse_packet(notice_raw,b"V5_TERMINAL_FAILURE_DURABLE",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"chain_head_sha256",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"candidate_deadline_ns",b"disposition"))
+ subject=h64(values[b"subject_sha256"]);origin=udec(values[b"terminal_origin_ns"],1);deadline=udec(values[b"terminal_deadline_ns"],1)
+ need(values[b"state"]==b"TERMINAL_FAILURE_DURABLE" and values[b"expected_state"]==b"WAIT_TERMINAL_FAILURE" and values[b"effect_state"]==b"FAILURE_REPORT_DURABLE")
+ need(values[b"ordinal"]==values[b"probe"]==b"NONE" and values[b"kind"]==b"FAILURE_CANDIDATE" and values[b"disposition"] in (b"CONSUMED_FAIL",b"CONSUMED_INDETERMINATE"))
+ need(time.monotonic_ns()<=deadline<=outer_deadline and deadline==origin+FINAL_TOTAL_NS);schedule=check_schedule_hex(values[b"terminal_schedule_hex"],origin,deadline,TERMINAL_PHASE_SPEC)
+ need(udec(values[b"candidate_deadline_ns"])==schedule[b"NOTICE"])
+ seen_deadline=schedule[b"TERMINAL_SEEN_RECORD"]
+ seen=packet(b"V5_TERMINAL_SEEN",((b"state",b"TERMINAL_SEEN"),(b"expected_state",b"WAIT_TERMINAL_SEEN"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"kind",b"FAILURE_CANDIDATE"),(b"subject_sha256",subject),(b"notice_packet_sha256",sha(notice_raw)),(b"terminal_origin_ns",str(origin).encode()),(b"terminal_deadline_ns",str(deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"seen_deadline_ns",str(seen_deadline).encode())))
+ send_plain(control,seen,seen_deadline)
+ ack_deadline=schedule[b"ACK"];ack_raw=failure_recv(control,ack_deadline)
+ ack=parse_packet(ack_raw,b"V5_TERMINAL_ACK",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"terminal_seen_sha256",b"report_sha256",b"pass_sha256",b"reconciliation_token",b"ack_state",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"ack_deadline_ns"))
+ need(ack[b"state"]==b"TERMINAL_ACK" and ack[b"expected_state"]==b"WAIT_TERMINAL_ACK" and ack[b"ordinal"]==ack[b"probe"]==b"NONE" and ack[b"kind"]==b"FAILURE_CANDIDATE" and ack[b"subject_sha256"]==subject)
+ report_sha=h64(ack[b"report_sha256"]);need(ack[b"pass_sha256"]==ack[b"reconciliation_token"]==b"NONE" and ack[b"ack_state"]==b"FAILURE_DURABLE")
+ need(udec(ack[b"terminal_origin_ns"])==origin and udec(ack[b"terminal_deadline_ns"])==deadline and ack[b"terminal_schedule_hex"]==schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+ receipt_deadline=schedule[b"A_RECEIPT"];receipt_ns=time.monotonic_ns()
+ receipt=packet(b"V5_TERMINAL_ACK_RECEIPT",((b"state",b"ACK_RECEIVED_NO_REPLAY"),(b"expected_state",b"WAIT_ACK_RECEIPT"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"kind",b"FAILURE_CANDIDATE"),(b"subject_sha256",subject),(b"ack_packet_sha256",sha(ack_raw)),(b"report_sha256",report_sha),(b"pass_sha256",b"NONE"),(b"reconciliation_token",b"NONE"),(b"actor_receipt_ns",str(receipt_ns).encode()),(b"terminal_origin_ns",str(origin).encode()),(b"terminal_deadline_ns",str(deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"receipt_deadline_ns",str(receipt_deadline).encode())))
+ send_plain(control,receipt,receipt_deadline)
+ closure_deadline=schedule[b"CLOSURE_PACKET"];closed=parse_packet(failure_recv(control,closure_deadline),b"V5_TERMINAL_CLOSED",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"report_sha256",b"pass_sha256",b"ack_receipt_sha256",b"reconciliation_sha256",b"closure_sha256",b"owner",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"closure_deadline_ns"))
+ need(closed[b"state"]==b"OWNER_CLOSED" and closed[b"expected_state"]==b"WAIT_OWNER_CLOSED" and closed[b"ordinal"]==closed[b"probe"]==b"NONE" and closed[b"kind"]==b"FAILURE_CANDIDATE")
+ need(closed[b"subject_sha256"]==subject and closed[b"report_sha256"]==report_sha and closed[b"pass_sha256"]==b"NONE" and closed[b"owner"]==b"B")
+ for key in (b"ack_receipt_sha256",b"reconciliation_sha256",b"closure_sha256"):need(h64(closed[key])!=b"0"*64)
+ need(udec(closed[b"terminal_origin_ns"])==origin and udec(closed[b"terminal_deadline_ns"])==deadline and closed[b"terminal_schedule_hex"]==schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+ return values[b"disposition"],deadline
+
+def main():
+ global AUTH_ID,PREFLIGHT,CERT,STAGE_PRESENT,B_CHILD_PID,B_CONTROL
+ entry_mono=time.monotonic_ns();state=b"INPUT";consumed=False;commit_edge=False
+ begin_effect_possible=False;begin_state=b"BEGIN_NOT_ENTERED";arm_state=b"ARM_NOT_OBSERVED";refusal_acked=False
+ pass_may_be_committed=False;pass_authoritative=False;receipt_effect_unknown=False;terminal_deadline=0;failure_terminal_deadline=0
+ bpid=-1;control=None;runtime=attempt_base=stage_base=cgroup_base=safefd=cgfd=-1
+ need(type(sys.argv)is list and len(sys.argv)==3 and sys.argv[0]=="/proc/self/fd/100" and sys.argv[1]=="RUN_V5",Refuse)
+ supplied=h64(sys.argv[2].encode("ascii"))
+ need(os.environb==ENV and os.read(0,1)==b"" and sys.gettrace() is None and sys.getprofile() is None,Refuse)
+ verify_creds(False);need(os.umask(0o077)==0o077,Refuse)
+ fd0=os.fstat(0);fd1=os.fstat(1);fd2=os.fstat(2)
+ need(stat.S_ISFIFO(fd0.st_mode) and stat.S_ISFIFO(fd1.st_mode) and stat.S_ISFIFO(fd2.st_mode),Refuse)
+ fd_access(0,os.O_RDONLY);fd_access(1,os.O_WRONLY);fd_access(2,os.O_WRONLY)
+ need((fd1.st_dev,fd1.st_ino)!=(fd2.st_dev,fd2.st_ino),Refuse)
+ close_range(3,99);close_range(111,UINT_MAX);scrub_exact({0,1,2,100,101,102,103,104,105,106,107,108,109,110})
+ fd_access(102,os.O_RDONLY)
+ actor_raw=sealed_carrier(100,MAX_FILE);snapshot=exact_snapshot(101)
+ v15=exact_whole(102,WHOLE_V15,V15_TERMINAL);plan=sealed_carrier(103,MAX_FILE)
+ cert_raw=sealed_carrier(104,MAX_FILE);envelope_raw=sealed_carrier(105,MAX_FILE);b_raw=sealed_carrier(106,MAX_FILE);reservation_raw=sealed_carrier(107,MAX_FILE);transfer_manifest_raw=sealed_carrier(110,MAX_FILE)
+ state=b"CERT";envelope=parse_envelope(envelope_raw);CERT,deps=parse_cert(cert_raw);reservation=parse_reservation(reservation_raw)
+ context_digest,certificate_digest,receipt_digest=verify_issuer_order(envelope,cert_raw,CERT);reservation_digest=verify_reservation_order(reservation,cert_raw,envelope_raw,envelope)
+ AUTH_ID=session_auth(cert_raw,envelope_raw,reservation_raw);need(AUTH_ID==supplied,Refuse)
+ need(envelope[b"PLAN_SHA256"]==CERT[b"PLAN_SHA256"] and envelope[b"RUNNER_SHA256"]==CERT[b"RUNNER_SHA256"] and envelope[b"RECOVERY_SHA256"]==CERT[b"RECOVERY_SHA256"],Refuse)
+ need((len(transfer_manifest_raw),sha(transfer_manifest_raw))==(udec(CERT[b"EXTERNAL_TRANSFER_MANIFEST_BYTES"],1),CERT[b"EXTERNAL_TRANSFER_MANIFEST_SHA256"]),Refuse)
+ parse_external_manifest(transfer_manifest_raw,CERT);verify_external_inputs(CERT)
+ need(reservation[b"NOT_BEFORE_REALTIME_NS"]==envelope[b"NOT_BEFORE_REALTIME_NS"] and reservation[b"NOT_AFTER_REALTIME_NS"]==envelope[b"NOT_AFTER_REALTIME_NS"],Refuse)
+ need(sha(plan)==CERT[b"PLAN_SHA256"] and sha(actor_raw)==CERT[b"RUNNER_SHA256"] and sha(b_raw)==CERT[b"RECOVERY_SHA256"],Refuse)
+ need(envelope[b"E0366_SNAPSHOT_SHA256"]==CERT[b"E0366_SNAPSHOT_SHA256"]==sha(snapshot),Refuse)
+ need(envelope[b"E0366_SNAPSHOT_BYTES"]==CERT[b"E0366_SNAPSHOT_BYTES"]==b"2303269" and envelope[b"E0366_SNAPSHOT_LF"]==CERT[b"E0366_SNAPSHOT_LF"]==b"23672",Refuse)
+ need(envelope[b"E0366_SNAPSHOT_TERMINAL_HEX"]==CERT[b"E0366_SNAPSHOT_TERMINAL_HEX"]==SNAPSHOT_TERMINAL_HEX,Refuse)
+ not_before=udec(CERT[b"NOT_BEFORE_REALTIME_NS"]);expiry=udec(CERT[b"ABSOLUTE_EXPIRY_REALTIME_NS"])
+ need(expiry-not_before==CERT_LIFE_NS and udec(envelope[b"NOT_BEFORE_REALTIME_NS"])<=not_before<expiry<=udec(envelope[b"NOT_AFTER_REALTIME_NS"]),Refuse)
+ checkpoint(CERT,horizon_needed(entry_mono+PRECONSUME_NS,CONSUME_REMAIN_NS),Refuse,entry_mono+PRECONSUME_NS);verify_platform(CERT);signal_snapshot(CERT)
+ ab=b"P27 RUNNER V5 ACTOR SOURCE "+b"BEGIN C5A91E34";ae=b"P27 RUNNER V5 ACTOR SOURCE "+b"END C5A91E34"
+ bb=b"P27 RUNNER V5 WATCHDOG SOURCE "+b"BEGIN F5C2189D";be=b"P27 RUNNER V5 WATCHDOG SOURCE "+b"END F5C2189D"
+ need(extract_one(plan,ab,ae)==actor_raw and extract_one(plan,bb,be)==b_raw,Refuse)
+ sources=v15_sources(v15)
+ state=b"ENTRY"
+ try:
+  runtime=open_dir(RUNTIME_ROOT);attempt_base=open_dir(ATTEMPT_BASE);stage_base=open_dir(STAGE_BASE);cgroup_base=open_dir(CGROUP_BASE)
+  runtime_stat=base_identity(runtime,CERT,b"RUNTIME_ROOT");runtime_mid,runtime_line=mount_line(runtime)
+  need(runtime_mid==udec(CERT[b"RUNTIME_ROOT_MOUNT_ID"],1) and sha(runtime_line)==CERT[b"RUNTIME_ROOT_MOUNTINFO_SHA256"],Refuse)
+  mount_semantics(runtime_line,even_hex(CERT[b"RUNTIME_ROOT_FSTYPE_HEX"]),{b"ro",b"nosuid",b"nodev"},{b"rw"})
+  for entry in deps:verify_dependency(runtime,entry)
+  attempt_stat=base_identity(attempt_base,CERT,b"ATTEMPT_BASE");attempt_mid,attempt_line=mount_line(attempt_base)
+  need(attempt_mid==udec(CERT[b"ATTEMPT_BASE_MOUNT_ID"],1) and sha(attempt_line)==CERT[b"ATTEMPT_BASE_MOUNTINFO_SHA256"],Refuse)
+  mount_semantics(attempt_line,even_hex(CERT[b"ATTEMPT_BASE_FSTYPE_HEX"]),{b"rw",b"nosuid",b"nodev"},{b"ro"})
+  stage_stat=base_identity(stage_base,CERT,b"SAFE_BIND");stage_mid,stage_line=mount_line(stage_base)
+  need(stage_mid==udec(CERT[b"SAFE_BIND_MOUNT_ID"],1) and sha(stage_line)==CERT[b"SAFE_BIND_MOUNTINFO_SHA256"],Refuse)
+  mount_semantics(stage_line,even_hex(CERT[b"SAFE_BIND_FSTYPE_HEX"]),{b"rw",b"nosuid",b"nodev",b"noexec"},{b"ro"})
+  cgroup_stat=base_identity(cgroup_base,CERT,b"CGROUP_BASE");cg_mid,cg_line=mount_line(cgroup_base)
+  need(statfs_magic(cgroup_base)==CGROUP2_MAGIC and cg_mid==udec(CERT[b"CGROUP2_MOUNT_ID"],1) and sha(cg_line)==CERT[b"CGROUP2_MOUNTINFO_SHA256"],Refuse)
+  mount_semantics(cg_line,b"cgroup2",{b"rw"},{b"ro"})
+  base_type=base_controllers=base_subtree=-1
+  try:
+   base_type=os.open(b"cgroup.type",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgroup_base)
+   base_controllers=os.open(b"cgroup.controllers",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgroup_base)
+   base_subtree=os.open(b"cgroup.subtree_control",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgroup_base)
+   need(read_all(base_type,128).hex().encode()==CERT[b"CGROUP_BASE_TYPE_HEX"],Refuse)
+   need(read_all(base_controllers,4096).hex().encode()==CERT[b"CGROUP_BASE_CONTROLLERS_HEX"],Refuse)
+   need(read_all(base_subtree,4096).hex().encode()==CERT[b"CGROUP_BASE_SUBTREE_CONTROL_HEX"],Refuse)
+  finally:close_numbers((base_type,base_controllers,base_subtree))
+  need(runtime_mid!=stage_mid,Refuse);mount_graph(CERT)
+  absent(attempt_base,AUTH_ID,Refuse);absent(stage_base,AUTH_ID,Refuse);absent(cgroup_base,AUTH_ID,Refuse)
+  need(time.monotonic_ns()-entry_mono<=PRECONSUME_NS,Refuse)
+  bases={b"attempt_fd":attempt_base,b"cgroup_fd":cgroup_base,b"safe":stage_stat}
+  state=b"B_BOOT";bpid,control=launch_b(CERT,bases);need(B_CHILD_PID==bpid and B_CONTROL is control and fcntl.fcntl(control.fileno(),fcntl.F_GETFL)&os.O_NONBLOCK,Refuse)
+  os.close(attempt_base);attempt_base=-1
+  ready_deadline=entry_mono+PRECONSUME_NS
+  ready=parse_packet(recv_control(control,ready_deadline),b"V5_READY",(b"state",b"ordinal",b"probe"))
+  need(ready[b"state"]==b"READY" and ready[b"ordinal"]==ready[b"probe"]==b"NONE",Refuse)
+  checkpoint(CERT,CONSUME_REMAIN_NS,Refuse,ready_deadline)
+  consume_origin=time.monotonic_ns();consume_deadline=consume_origin+CONSUMPTION_NS
+  checkpoint(CERT,CONSUME_REMAIN_NS,Refuse,consume_deadline)
+  state=b"BEGIN_SEND_EFFECT_UNKNOWN";begin_state=b"BEGIN_SEND_EFFECT_UNKNOWN";begin_effect_possible=True
+  begin=packet(b"V5_CONSUME_BEGIN",((b"state",b"CONSUME_BEGIN"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"auth_id",AUTH_ID),(b"a_begin_state",begin_state),(b"a_arm_state",arm_state),(b"consume_origin_ns",str(consume_origin).encode()),(b"consume_deadline_ns",str(consume_deadline).encode())))
+  b_send(control,begin,consume_deadline);begin_state=b"BEGIN_SENT";state=b"BEGIN_SENT"
+  arm_state=b"ARM_RECEIVE_EFFECT_UNKNOWN";state=b"ARM_RECEIVE_EFFECT_UNKNOWN"
+  armed=parse_packet(recv_control(control,consume_deadline),b"V5_CONSUME_ARMED",(b"state",b"ordinal",b"probe",b"auth_id",b"a_begin_state",b"b_arm_state",b"consume_origin_ns",b"consume_deadline_ns"))
+  need(armed[b"state"]==b"CONSUME_ARMED" and armed[b"ordinal"]==armed[b"probe"]==b"NONE" and armed[b"auth_id"]==AUTH_ID)
+  need(armed[b"a_begin_state"]==b"BEGIN_SEND_EFFECT_UNKNOWN" and armed[b"b_arm_state"]==b"ARM_SEND_EFFECT_UNKNOWN")
+  need(udec(armed[b"consume_origin_ns"])==consume_origin and udec(armed[b"consume_deadline_ns"])==consume_deadline)
+  arm_state=b"ARMED_CONFIRMED";state=b"ARMED_CONFIRMED"
+  commit_edge=True;consumed=True;PREFLIGHT=False;state=b"COMMIT_SEND_EFFECT_UNKNOWN"
+  commit=packet(b"V5_CONSUME_COMMIT",((b"state",b"CONSUME_COMMIT"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"auth_id",AUTH_ID),(b"a_begin_state",begin_state),(b"a_arm_state",arm_state),(b"a_commit_state",b"COMMIT_SEND_EFFECT_UNKNOWN"),(b"consume_origin_ns",str(consume_origin).encode()),(b"consume_deadline_ns",str(consume_deadline).encode())))
+  b_send(control,commit,consume_deadline);state=b"COMMIT_SENT"
+  consumed_msg=parse_packet(recv_control(control,consume_deadline),b"V5_CONSUMED_DURABLE",(b"state",b"ordinal",b"probe",b"auth_id",b"intent_sha256",b"consume_origin_ns",b"consume_deadline_ns",b"attempt_fd_state"))
+  need(consumed_msg[b"state"]==b"CONSUMED_DURABLE" and consumed_msg[b"ordinal"]==consumed_msg[b"probe"]==b"NONE" and consumed_msg[b"auth_id"]==AUTH_ID)
+  need(udec(consumed_msg[b"consume_origin_ns"])==consume_origin and udec(consumed_msg[b"consume_deadline_ns"])==consume_deadline and consumed_msg[b"attempt_fd_state"]==b"PUBLISHED")
+  chain_sha=h64(consumed_msg[b"intent_sha256"]);checkpoint(CERT,PRE_STAGE_REMAIN_NS,ConsumedIndeterminate,consume_deadline)
+  state=b"STAGE";stage_origin=time.monotonic_ns();stage_deadline=stage_origin+STAGE_NS
+  checkpoint(CERT,PRE_STAGE_REMAIN_NS,ConsumedIndeterminate,stage_deadline)
+  os.mkdir(AUTH_ID,0o700,dir_fd=stage_base);progress(CERT,stage_deadline,horizon_needed(stage_deadline,POST_STAGE_REMAIN_NS));os.fsync(stage_base);progress(CERT,stage_deadline,horizon_needed(stage_deadline,POST_STAGE_REMAIN_NS))
+  safefd=os.open(AUTH_ID,O_DIR,dir_fd=stage_base);progress(CERT,stage_deadline,horizon_needed(stage_deadline,POST_STAGE_REMAIN_NS));safe=os.fstat(safefd)
+  need((safe.st_uid,safe.st_gid,stat.S_IMODE(safe.st_mode),safe.st_nlink)==(0,0,0o700,2),ConsumedIndeterminate)
+  named=os.stat(AUTH_ID,dir_fd=stage_base,follow_symlinks=False)
+  need((named.st_dev,named.st_ino,named.st_mode,named.st_nlink,named.st_uid,named.st_gid)==(safe.st_dev,safe.st_ino,safe.st_mode,safe.st_nlink,safe.st_uid,safe.st_gid),ConsumedIndeterminate)
+  for name in (b"target",b"a",b"b"):absent(safefd,name)
+  for name,body,identity in zip(SOURCE_NAMES,sources[1:],SOURCE_META[1:]):stage_leaf(safefd,name,body,identity,stage_deadline)
+  os.fsync(safefd);progress(CERT,stage_deadline,POST_STAGE_REMAIN_NS)
+  STAGE_PRESENT=True
+  staged=packet(b"V5_STAGE_DURABLE",((b"state",b"STAGE_DURABLE"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"stage_origin_ns",str(stage_origin).encode()),(b"stage_deadline_ns",str(stage_deadline).encode()),(b"stage_return_ns",str(time.monotonic_ns()).encode()),(b"safe_dev",str(safe.st_dev).encode()),(b"safe_ino",str(safe.st_ino).encode()),(b"safe_mode",format(safe.st_mode,"o").encode()),(b"safe_nlink",str(safe.st_nlink).encode()),(b"safe_uid",str(safe.st_uid).encode()),(b"safe_gid",str(safe.st_gid).encode()),(b"keeper_sha256",CERT[b"KEEPER_SHA256"]),(b"launcher_sha256",CERT[b"LAUNCHER_SHA256"]),(b"marker_sha256",CERT[b"MARKER_SHA256"]),(b"child_sha256",CERT[b"CHILD_SHA256"])))
+  send_rights(control,staged,(safefd,),stage_deadline)
+  stage_ack=parse_packet(recv_control(control,stage_deadline),b"V5_STAGE_ACK",(b"state",b"ordinal",b"probe",b"stage_deadline_ns",b"safe_dev",b"safe_ino"))
+  need(stage_ack[b"state"]==b"STAGE_BOUND" and stage_ack[b"ordinal"]==stage_ack[b"probe"]==b"NONE")
+  need(udec(stage_ack[b"stage_deadline_ns"])==stage_deadline and (udec(stage_ack[b"safe_dev"]),udec(stage_ack[b"safe_ino"]))==(safe.st_dev,safe.st_ino))
+  progress(CERT,stage_deadline,POST_STAGE_REMAIN_NS)
+  state=b"CONTAIN";contain_origin=time.monotonic_ns();contain_deadline=contain_origin+ACK_NS
+  os.mkdir(AUTH_ID,0o700,dir_fd=cgroup_base);progress(CERT,contain_deadline,horizon_needed(contain_deadline,POST_CONTAIN_REMAIN_NS))
+  cgfd=os.open(AUTH_ID,O_DIR,dir_fd=cgroup_base);progress(CERT,contain_deadline,horizon_needed(contain_deadline,POST_CONTAIN_REMAIN_NS));cgchild=os.fstat(cgfd)
+  need((format(cgchild.st_mode,"o").encode(),cgchild.st_uid,cgchild.st_gid,cgchild.st_nlink)==(CERT[b"CGROUP_CHILD_MODE"],0,0,2),ConsumedIndeterminate)
+  need(cgroup_empty(cgfd),ConsumedIndeterminate)
+  ctype=controllers=subtree=-1
+  try:
+   ctype=os.open(b"cgroup.type",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgfd)
+   controllers=os.open(b"cgroup.controllers",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgfd)
+   subtree=os.open(b"cgroup.subtree_control",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=cgfd)
+   type_raw=read_all(ctype,128);controllers_raw=read_all(controllers,4096);subtree_raw=read_all(subtree,4096)
+   need(type_raw.hex().encode()==CERT[b"CGROUP_CHILD_TYPE_HEX"],ConsumedIndeterminate)
+   need(controllers_raw.hex().encode()==CERT[b"CGROUP_CHILD_CONTROLLERS_HEX"],ConsumedIndeterminate)
+   need(subtree_raw.hex().encode()==CERT[b"CGROUP_CHILD_SUBTREE_CONTROL_HEX"],ConsumedIndeterminate)
+  finally:close_numbers(tuple(x for x in (ctype,controllers,subtree) if x>=0))
+  cgbase=os.fstat(cgroup_base);cg_mid,cg_line=mount_line(cgfd)
+  containment=packet(b"V5_CONTAINMENT",((b"state",b"CONTAINMENT_CANDIDATE"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"contain_origin_ns",str(contain_origin).encode()),(b"contain_deadline_ns",str(contain_deadline).encode()),(b"dev",str(cgchild.st_dev).encode()),(b"ino",str(cgchild.st_ino).encode()),(b"mode",format(cgchild.st_mode,"o").encode()),(b"nlink",str(cgchild.st_nlink).encode()),(b"uid",str(cgchild.st_uid).encode()),(b"gid",str(cgchild.st_gid).encode()),(b"base_dev",str(cgbase.st_dev).encode()),(b"base_ino",str(cgbase.st_ino).encode()),(b"mount_id",str(cg_mid).encode()),(b"mountinfo_sha256",sha(cg_line)),(b"type_hex",type_raw.hex().encode()),(b"controllers_hex",controllers_raw.hex().encode()),(b"subtree_control_hex",subtree_raw.hex().encode())))
+  send_rights(control,containment,(cgfd,),contain_deadline)
+  contain_ack=parse_packet(recv_control(control,contain_deadline),b"V5_CONTAINMENT_ACK",(b"state",b"ordinal",b"probe",b"contain_deadline_ns",b"dev",b"ino"))
+  need(contain_ack[b"state"]==b"CONTAINMENT_BOUND" and contain_ack[b"ordinal"]==contain_ack[b"probe"]==b"NONE")
+  need(udec(contain_ack[b"contain_deadline_ns"])==contain_deadline and (udec(contain_ack[b"dev"]),udec(contain_ack[b"ino"]))==(cgchild.st_dev,cgchild.st_ino))
+  progress(CERT,contain_deadline,POST_CONTAIN_REMAIN_NS)
+  safe_path=STAGE_BASE+b"/"+AUTH_ID
+  ctx={b"cwd_hex":safe_path.hex().encode(),b"python_dev":udec(CERT[b"PYTHON_IMAGE_DEV"],1),b"python_ino":udec(CERT[b"PYTHON_IMAGE_INO"],1),b"libc_path_hex":CERT[b"LIBC_PATH_HEX"],b"libc_confstr_hex":CERT[b"LIBC_CONFSTR_HEX"],b"libc_bytes":udec(CERT[b"LIBC_BYTES"],1),b"libc_sha":CERT[b"LIBC_SHA256"],b"valid_signals":udec(CERT[b"VALID_SIGNAL_COUNT"]),b"default_signals":udec(CERT[b"DEFAULT_SIGNAL_COUNT"]),b"defaults_sha":CERT[b"DEFAULTS_SHA256"],b"child_source":sources[4]}
+  prior=None
+  for ordinal,probe in enumerate(SUITE):
+   checkpoint(CERT,(15-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS)
+   p01c=derive_p01c(prior,CERT) if probe==b"P01C" else ()
+   rows,chain_sha=run_probe(control,ordinal,probe,cgfd,safefd,safe,sources[0],ctx,p01c,CERT)
+   if probe==b"P01D":prior=rows;ctx[b"p01d"]=rows
+  state=b"REMOVE";remove_origin=time.monotonic_ns();remove_deadline=remove_origin+REPORT_NS
+  checkpoint(CERT,REPORT_NS+FINAL_TOTAL_NS,ConsumedIndeterminate,remove_deadline);need(cgroup_empty(cgfd),ConsumedIndeterminate)
+  query=packet(b"V5_EMPTY_FINAL_QUERY",((b"state",b"EMPTY_FINAL_QUERY"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"chain_head_sha256",chain_sha),(b"remove_origin_ns",str(remove_origin).encode()),(b"remove_deadline_ns",str(remove_deadline).encode())))
+  b_send(control,query,remove_deadline)
+  confirmed=parse_packet(recv_control(control,remove_deadline),b"V5_EMPTY_FINAL_CONFIRMED",(b"state",b"ordinal",b"probe",b"chain_head_sha256",b"remove_deadline_ns"))
+  need(confirmed[b"state"]==b"EMPTY_FINAL_CONFIRMED" and confirmed[b"ordinal"]==confirmed[b"probe"]==b"NONE" and confirmed[b"chain_head_sha256"]==chain_sha and udec(confirmed[b"remove_deadline_ns"])==remove_deadline)
+  os.close(cgfd);cgfd=-1;os.rmdir(AUTH_ID,dir_fd=cgroup_base)
+  try:os.stat(AUTH_ID,dir_fd=cgroup_base,follow_symlinks=False);need(False,ConsumedIndeterminate)
+  except FileNotFoundError:pass
+  progress(CERT,remove_deadline,FINAL_TOTAL_NS)
+  removed=packet(b"V5_CGROUP_REMOVED",((b"state",b"CGROUP_REMOVED"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"chain_head_sha256",chain_sha),(b"remove_deadline_ns",str(remove_deadline).encode())))
+  b_send(control,removed,remove_deadline)
+  removed_ack=parse_packet(recv_control(control,remove_deadline),b"V5_REMOVE_ACK",(b"state",b"ordinal",b"probe",b"chain_head_sha256",b"remove_deadline_ns"))
+  need(removed_ack[b"state"]==b"REMOVE_ACK" and removed_ack[b"ordinal"]==removed_ack[b"probe"]==b"NONE" and removed_ack[b"chain_head_sha256"]==chain_sha and udec(removed_ack[b"remove_deadline_ns"])==remove_deadline)
+  state=b"FINAL";terminal_origin=time.monotonic_ns();terminal_deadline=terminal_origin+FINAL_TOTAL_NS;schedule=exact_schedule(terminal_origin,terminal_deadline,TERMINAL_PHASE_SPEC)
+  checkpoint(CERT,FINAL_TOTAL_NS,ConsumedIndeterminate,schedule[b"CANDIDATE_RECORD"])
+  finalize=packet(b"V5_FINALIZE_CANDIDATE",((b"state",b"FINALIZE_CANDIDATE"),(b"expected_state",b"WAIT_FINALIZE"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"chain_head_sha256",chain_sha),(b"terminal_origin_ns",str(terminal_origin).encode()),(b"terminal_deadline_ns",str(terminal_deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"candidate_deadline_ns",str(schedule[b"CANDIDATE_RECORD"]).encode())))
+  b_send(control,finalize,schedule[b"CANDIDATE_RECORD"])
+  notice_deadline=schedule[b"NOTICE"];notice_raw=recv_control(control,notice_deadline)
+  candidate=parse_packet(notice_raw,b"V5_TERMINAL_CANDIDATE_DURABLE",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"chain_head_sha256",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"candidate_deadline_ns"))
+  candidate_sha=h64(candidate[b"subject_sha256"])
+  need(candidate[b"state"]==b"TERMINAL_CANDIDATE_DURABLE" and candidate[b"expected_state"]==b"WAIT_TERMINAL_CANDIDATE" and candidate[b"kind"]==b"SUCCESS_CANDIDATE" and candidate[b"ordinal"]==candidate[b"probe"]==b"NONE")
+  need(udec(candidate[b"terminal_origin_ns"])==terminal_origin and udec(candidate[b"terminal_deadline_ns"])==terminal_deadline and candidate[b"terminal_schedule_hex"]==schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+  seen_deadline=schedule[b"TERMINAL_SEEN_RECORD"]
+  seen=packet(b"V5_TERMINAL_SEEN",((b"state",b"TERMINAL_SEEN"),(b"expected_state",b"WAIT_TERMINAL_SEEN"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"kind",b"SUCCESS_CANDIDATE"),(b"subject_sha256",candidate_sha),(b"notice_packet_sha256",sha(notice_raw)),(b"terminal_origin_ns",str(terminal_origin).encode()),(b"terminal_deadline_ns",str(terminal_deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"seen_deadline_ns",str(seen_deadline).encode())))
+  pass_may_be_committed=True;state=b"TERMINAL_SEEN_SEND_EFFECT_UNKNOWN";b_send(control,seen,seen_deadline);state=b"TERMINAL_SEEN_SENT"
+  ack_deadline=schedule[b"ACK"];ack_raw=recv_control(control,ack_deadline)
+  terminal=parse_packet(ack_raw,b"V5_TERMINAL_ACK",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"terminal_seen_sha256",b"report_sha256",b"pass_sha256",b"reconciliation_token",b"ack_state",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"ack_deadline_ns"))
+  need(terminal[b"state"]==b"TERMINAL_ACK" and terminal[b"expected_state"]==b"WAIT_TERMINAL_ACK" and terminal[b"ordinal"]==terminal[b"probe"]==b"NONE" and terminal[b"kind"]==b"SUCCESS_CANDIDATE")
+  need(terminal[b"subject_sha256"]==candidate_sha and terminal[b"ack_state"]==b"PASS_COMMITTED_NO_DOWNGRADE")
+  need(udec(terminal[b"terminal_origin_ns"])==terminal_origin and udec(terminal[b"terminal_deadline_ns"])==terminal_deadline and terminal[b"terminal_schedule_hex"]==schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+  terminal_seen_sha=h64(terminal[b"terminal_seen_sha256"]);report_sha=h64(terminal[b"report_sha256"]);pass_sha=h64(terminal[b"pass_sha256"]);reconciliation_token=h64(terminal[b"reconciliation_token"])
+  pass_authoritative=True;receipt_deadline=schedule[b"A_RECEIPT"];receipt_ns=time.monotonic_ns()
+  receipt=packet(b"V5_TERMINAL_ACK_RECEIPT",((b"state",b"ACK_RECEIVED_NO_REPLAY"),(b"expected_state",b"WAIT_ACK_RECEIPT"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"kind",b"SUCCESS_CANDIDATE"),(b"subject_sha256",candidate_sha),(b"ack_packet_sha256",sha(ack_raw)),(b"report_sha256",report_sha),(b"pass_sha256",pass_sha),(b"reconciliation_token",reconciliation_token),(b"actor_receipt_ns",str(receipt_ns).encode()),(b"terminal_origin_ns",str(terminal_origin).encode()),(b"terminal_deadline_ns",str(terminal_deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"receipt_deadline_ns",str(receipt_deadline).encode())))
+  receipt_effect_unknown=True;state=b"ACK_RECEIPT_SEND_EFFECT_UNKNOWN";b_send(control,receipt,receipt_deadline);receipt_effect_unknown=False;state=b"ACK_RECEIPT_SENT"
+  closure_deadline=schedule[b"CLOSURE_PACKET"];closed=parse_packet(recv_control(control,closure_deadline),b"V5_TERMINAL_CLOSED",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"report_sha256",b"pass_sha256",b"ack_receipt_sha256",b"reconciliation_sha256",b"closure_sha256",b"owner",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"closure_deadline_ns"))
+  need(closed[b"state"]==b"OWNER_CLOSED" and closed[b"expected_state"]==b"WAIT_OWNER_CLOSED" and closed[b"ordinal"]==closed[b"probe"]==b"NONE" and closed[b"kind"]==b"SUCCESS_CANDIDATE")
+  need(closed[b"subject_sha256"]==candidate_sha and closed[b"report_sha256"]==report_sha and closed[b"pass_sha256"]==pass_sha and closed[b"owner"]==b"B")
+  for key in (b"ack_receipt_sha256",b"reconciliation_sha256",b"closure_sha256"):need(h64(closed[key])!=b"0"*64)
+  need(udec(closed[b"terminal_origin_ns"])==terminal_origin and udec(closed[b"terminal_deadline_ns"])==terminal_deadline and closed[b"terminal_schedule_hex"]==schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+  control.close();control=None
+  braw=wait_status(bpid,0,schedule[b"B_EXIT"],b"PIDFD_ACTOR_LOST");bpid=-1;B_CHILD_PID=-1;B_CONTROL=None
+  need(os.WIFEXITED(braw) and os.WEXITSTATUS(braw)==0,ConsumedIndeterminate)
+  result=(b"P27E001_RUNNER_V5|AUTH_ID="+AUTH_ID+b"|entered=15|committed=15|candidate_sha256="+candidate_sha+b"|terminal_seen_sha256="+terminal_seen_sha+b"|report_sha256="+report_sha+b"|pass_sha256="+pass_sha+b"|ack_receipt_sha256="+closed[b"ack_receipt_sha256"]+b"|reconciliation_sha256="+closed[b"reconciliation_sha256"]+b"|owner_closure_sha256="+closed[b"closure_sha256"]+b"|owner_closed=1|retry_allowed=0\n")
+  write_all(1,result)
+ except BaseException as error:
+  if control is None and B_CONTROL is not None:control=B_CONTROL;bpid=B_CHILD_PID
+  phase=getattr(error,"p27_phase",state);faults=error_faults(error,phase);disposition=None;clean_refusal=False
+  if not begin_effect_possible:
+   if control is None:clean_refusal=True
+   else:
+    try:
+     deadline=locals().get("ready_deadline",entry_mono+PRECONSUME_NS)
+     clean_refusal=request_refusal(control,b"BEGIN_NOT_ENTERED",b"ARM_NOT_OBSERVED",b"PREBEGIN_CLOSED",deadline)
+    except BaseException:clean_refusal=False
+  elif not commit_edge:
+   try:
+    refusal_acked=request_refusal(control,begin_state,arm_state,b"BEGIN_OR_ARM_CLOSED",consume_deadline);clean_refusal=refusal_acked
+   except BaseException:clean_refusal=False
+  elif pass_may_be_committed or pass_authoritative:
+   disposition=None
+  else:
+   if control is not None:
+    try:
+     if not getattr(error,"p27_abort_sent",False):
+      abort_deadline=terminal_deadline if terminal_deadline and time.monotonic_ns()<=terminal_deadline else time.monotonic_ns()+ACK_NS
+      send_abort(control,phase,locals().get("ordinal",None),locals().get("probe",b"NONE"),faults,abort_deadline,terminal_deadline)
+     outer_deadline=terminal_deadline if terminal_deadline else certificate_mono_expiry(CERT)
+     disposition,failure_terminal_deadline=await_failure_terminal(control,outer_deadline)
+    except BaseException:disposition=None
+  if control is not None:
+   try:control.close()
+   except BaseException:pass
+   control=None
+  if bpid>=0 and (clean_refusal or disposition is not None):
+   shutdown_deadline=failure_terminal_deadline if disposition is not None else locals().get("consume_deadline",locals().get("ready_deadline",entry_mono+PRECONSUME_NS))
+   try:
+    shutdown_raw=wait_status(bpid,0,shutdown_deadline,b"PIDFD_ACTOR_LOST");bpid=-1;B_CHILD_PID=-1;B_CONTROL=None
+    if not (os.WIFEXITED(shutdown_raw) and os.WEXITSTATUS(shutdown_raw)==0):clean_refusal=False;disposition=None
+   except BaseException:
+    clean_refusal=False;disposition=None
+  if clean_refusal and (refusal_acked or not begin_effect_possible):raise Refuse("exact-refusal-ack") from error
+  if disposition==b"CONSUMED_FAIL":raise ConsumedFail("reported-fail") from error
+  raise ConsumedIndeterminate("consumed-or-effect-unknown-no-replay") from error
+ finally:
+  close_numbers(tuple(number for number in (cgfd,safefd,runtime,attempt_base,stage_base,cgroup_base) if number>=0))
+
+try:
+ main()
+except Refuse:
+ raise SystemExit(80)
+except ConsumedFail:
+ raise SystemExit(81)
+except ConsumedIndeterminate:
+ raise SystemExit(82)
+except BaseException:
+ raise SystemExit(83)
+raise SystemExit(0)
+P27 RUNNER V5 ACTOR SOURCE END C5A91E34
+
+P27 RUNNER V5 WATCHDOG SOURCE BEGIN F5C2189D
+import array
+import ctypes
+import errno
+import fcntl
+import hashlib
+import os
+import resource
+import select
+import signal
+import socket
+import stat
+import struct
+import sys
+import time
+
+PROBES=(b"P00",b"P01D",b"P01C",b"P02",b"P03",b"P04",b"P05",b"P06",b"P07",b"P08",b"P09",b"P10",b"P11",b"P12",b"P13")
+FAULT_ORDER=(b"INPUT_AUTH",b"ENTRY_CONTEXT",b"CERTIFICATE_INVALID",b"PRECONSUMPTION_DEADLINE",b"CONSUME_EDGE_UNKNOWN",b"ATTEMPT_COLLISION",b"ATTEMPT_NAMESPACE_UNKNOWN",b"ATTEMPT_DIRFD_UNKNOWN",b"ATTEMPT_BASE_DURABILITY_UNKNOWN",b"INTENT_DURABILITY_UNKNOWN",b"CERTIFICATE_EXPIRED",b"CLOCK_DRIFT",b"DEADLINE_EXPIRED",b"CONTROL_MALFORMED",b"CONTROL_TIMEOUT",b"CONTROL_TRUNCATION",b"CONTROL_LOST",b"SEND_EFFECT_UNKNOWN",b"PIDFD_ACTOR_LOST",b"FD_TRANSFER",b"STAGING_FAULT",b"STAGING_DEADLINE",b"CONTAINMENT_FAULT",b"STOP_WAIT_UNKNOWN",b"PIDFD_BINDING",b"LAUNCH_DEADLINE",b"RELEASE_RECORD_DURABILITY_UNKNOWN",b"RELEASE_EFFECT_UNKNOWN",b"SYSCALL_EFFECT_UNKNOWN",b"WATCHDOG_DEADLINE",b"KILL_TICKET_DURABILITY_UNKNOWN",b"KILL_EFFECT_UNKNOWN",b"CAPTURE_IO",b"CAPTURE_OVERFLOW",b"STDERR_NONEMPTY",b"DIRECT_WAIT_UNKNOWN",b"OUTER_STATUS",b"TRANSCRIPT_LANGUAGE",b"TRANSCRIPT_STRUCTURE",b"TRANSCRIPT_SEMANTICS",b"VALIDATED_DURABILITY_UNKNOWN",b"ACK_DURABILITY_UNKNOWN",b"CONTAINMENT_OBSERVATION_UNKNOWN",b"CONTAINMENT_NOT_EMPTY",b"RECOVERY_DURABILITY_UNKNOWN",b"RETAINED_DURABILITY_UNKNOWN",b"REPORT_CANDIDATE_DURABILITY_UNKNOWN",b"TERMINAL_SEEN_DURABILITY_UNKNOWN",b"REPORT_DURABILITY_UNKNOWN",b"ACK_EFFECT_UNKNOWN",b"RECONCILIATION_UNKNOWN",b"OWNER_CLOSURE_DURABILITY_UNKNOWN",b"TRANSFER_PROTOCOL_UNKNOWN",b"EXTERNAL_SURVIVAL_TRANSFER_REQUIRED",b"INTERNAL_INVARIANT")
+KNOWN_FAIL={b"CAPTURE_OVERFLOW",b"STDERR_NONEMPTY",b"OUTER_STATUS",b"TRANSCRIPT_LANGUAGE",b"TRANSCRIPT_STRUCTURE",b"TRANSCRIPT_SEMANTICS"}
+INDETERMINATE=set(FAULT_ORDER)-KNOWN_FAIL
+ENV={b"LANG":b"C",b"LC_ALL":b"C",b"PATH":b"/usr/bin:/bin",b"PYTHONDONTWRITEBYTECODE":b"1",b"PYTHONHASHSEED":b"0",b"PYTHONIOENCODING":b"UTF-8:strict",b"PYTHONNOUSERSITE":b"1",b"PYTHONSAFEPATH":b"1",b"PYTHONUTF8":b"1",b"TZ":b"UTC"}
+PYTHON=b"/root/miniconda3/bin/python3"
+PYIMAGE=b"/root/miniconda3/bin/python3.12"
+SNAPSHOT_EXPECT=(2303269,23672,b"0ea4f324c5175ec196b8118e551a429a6207cd57bacfdaa9903a109046daab92")
+SNAPSHOT_TERMINAL=b"BATCH07_P27_PROBE_RECOVERY_E001_HOST_V15_RUNNER_V2_SUPERVISOR_PREBIND_FAIL_AND_RUNNER_V3_AUTHOR_OPEN_NO_EXECUTION"
+SNAPSHOT_TERMINAL_HEX=SNAPSHOT_TERMINAL.hex().encode("ascii")
+V15_SHA=b"a27eb1bb5540c18b57094ee26724be75a0c431b3c523385fe1271fb02378b845"
+V15_BYTES=228310
+V15_LF=4622
+V15_TERMINAL=b"BATCH07_P27_E001_SUPERVISOR_HOST_PROBE_RECOVERY_V15_AUTHOR_STOP"
+V8_SHA=b"72079707809f54fb35591f5e1ab8ef0d22671c72c37ea234de699e5f9e8002cf"
+PY_SHA=b"9a3d9e94d2be60d9a2a91d08f62292a152e28175fb4ee1d871aa5850fbb7a101"
+CONTEXT_DOMAIN=b"P27E001_V5_DETACHED_ENVELOPE_CONTEXT\x00"
+CERTIFICATE_DOMAIN=b"P27E001_V5_CERTIFICATE_DIGEST\x00"
+SIGNATURE_DOMAIN=b"P27E001_V5_ISSUER_SIGNATURE_PREIMAGE\x00"
+RECEIPT_DOMAIN=b"P27E001_V5_ISSUER_RECEIPT\x00"
+RESERVATION_TBS_DOMAIN=b"P27E001_V5_RESERVATION_TBS\x00"
+RESERVATION_SIGNATURE_DOMAIN=b"P27E001_V5_RESERVATION_SIGNATURE\x00"
+RESERVATION_RECEIPT_DOMAIN=b"P27E001_V5_RESERVATION_RECEIPT\x00"
+FINAL_ENVELOPE_DOMAIN=b"P27E001_V5_FINAL_ENVELOPE\x00"
+AUTH_DOMAIN=b"P27E001_V5_SESSION_AUTH\x00"
+EXACT_SEALS=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL
+MAX_U63=(1<<63)-1
+MAX_FILE=16777216
+STREAM_CAP=3145728
+TOTAL_NS=18164800000
+HOST_NS=17664800000
+CLEANUP_NS=2000000000
+REPORT_NS=1000000000
+RECORD_NS=100000000
+CONSUMPTION_NS=100000000
+CANDIDATE_RECORD_NS=100000000
+NOTICE_NS=100000000
+SEEN_RECORD_NS=100000000
+REPORT_RECORD_NS=1000000000
+PASS_COMMIT_NS=100000000
+PASS_MARGIN_NS=10000000
+ACK_NS=500000000
+A_RECEIPT_NS=100000000
+ACK_RECEIPT_RECORD_NS=100000000
+RECONCILIATION_RECORD_NS=100000000
+OWNER_CLOSURE_RECORD_NS=100000000
+CLOSURE_PACKET_NS=100000000
+B_EXIT_NS=100000000
+FINAL_TOTAL_NS=2510000000
+KILL_TICKET_NS=100000000
+RECOVERY_RECORD_NS=100000000
+CLEANUP_EFFECT_NS=2600000000
+FAILURE_TAIL_NS=2610000000
+FAILURE_TOTAL_NS=5210000000
+REFUSAL_RECORD_NS=20000000
+REFUSAL_ACK_NS=20000000
+REFUSAL_RECEIPT_NS=20000000
+REFUSAL_CLOSURE_NS=20000000
+REFUSAL_TOTAL_NS=80000000
+REFUSAL_PHASE_SPEC=((b"REFUSAL_RECORD",REFUSAL_RECORD_NS),(b"REFUSAL_ACK",REFUSAL_ACK_NS),(b"REFUSAL_RECEIPT",REFUSAL_RECEIPT_NS),(b"REFUSAL_CLOSURE",REFUSAL_CLOSURE_NS))
+ACTOR_DISABLE_NS=500000000
+TERMINAL_PHASE_SPEC=((b"CANDIDATE_RECORD",CANDIDATE_RECORD_NS),(b"NOTICE",NOTICE_NS),(b"TERMINAL_SEEN_RECORD",SEEN_RECORD_NS),(b"REPORT_RECORD",REPORT_RECORD_NS),(b"PASS_COMMIT",PASS_COMMIT_NS),(b"PASS_MARGIN",PASS_MARGIN_NS),(b"ACK",ACK_NS),(b"A_RECEIPT",A_RECEIPT_NS),(b"ACK_RECEIPT_RECORD",ACK_RECEIPT_RECORD_NS),(b"RECONCILIATION_RECORD",RECONCILIATION_RECORD_NS),(b"OWNER_CLOSURE_RECORD",OWNER_CLOSURE_RECORD_NS),(b"CLOSURE_PACKET",CLOSURE_PACKET_NS),(b"B_EXIT",B_EXIT_NS))
+TERMINAL_BIND_KEYS=tuple(b"bound_"+name.lower()+b"_deadline_ns" for name,cap in TERMINAL_PHASE_SPEC)
+STAGE_NS=10000000000
+CERT_LIFE_NS=360000000000
+ENTRY_REMAIN_NS=295482000000
+CONSUME_REMAIN_NS=285482000000
+PRE_STAGE_REMAIN_NS=285382000000
+POST_STAGE_REMAIN_NS=275382000000
+POST_CONTAIN_REMAIN_NS=274882000000
+KILL_RETURN_NS=5000000
+MAX_RIGHTS=4
+UINT_MAX=(1<<32)-1
+DURABLE_VERIFIED=b"DURABLE_VERIFIED"
+O_DIR=os.O_RDONLY|os.O_DIRECTORY|os.O_CLOEXEC|os.O_NOFOLLOW
+AUTH=b""
+CERT={}
+DEPS=()
+CONTROL_SEND_SEQ=0
+CONTROL_RECV_SEQ=0
+CONTROL_SEND_STATE=b"IDLE"
+EXTERNAL_SEND_SEQ=0
+EXTERNAL_RECV_SEQ=0
+RESERVATION_DIGEST=b""
+ACTOR_PID=0
+ACTOR_STARTTIME=0
+ENVELOPE_CONTEXT_KEYS=(b"ISSUER_ID",b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"E0366_SNAPSHOT_BYTES",b"E0366_SNAPSHOT_LF",b"E0366_SNAPSHOT_SHA256",b"E0366_SNAPSHOT_TERMINAL_HEX",b"V15_SHA256",b"NOT_BEFORE_REALTIME_NS",b"NOT_AFTER_REALTIME_NS",b"ONE_SHOT_RESERVED_BY_ISSUER",b"ONE_SHOT_CONSUMED_BY_ISSUER")
+ENVELOPE_KEYS=ENVELOPE_CONTEXT_KEYS+(b"ENVELOPE_CONTEXT_SHA256",b"CERTIFICATE_DIGEST_SHA256",b"SIGNATURE_PREIMAGE_SHA256",b"SIGNATURE_ALGORITHM",b"SIGNATURE_HEX",b"ISSUER_RECEIPT_SHA256")
+RESERVATION_TBS_KEYS=(b"ISSUER_ID",b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"CERTIFICATE_DIGEST_SHA256",b"FINAL_ENVELOPE_DIGEST_SHA256",b"NOT_BEFORE_REALTIME_NS",b"NOT_AFTER_REALTIME_NS",b"ONE_SHOT_RESERVED_BY_ISSUER",b"ONE_SHOT_CONSUMED_BY_ISSUER",b"SIGNATURE_ALGORITHM")
+RESERVATION_KEYS=RESERVATION_TBS_KEYS+(b"SIGNATURE_PREIMAGE_SHA256",b"SIGNATURE_HEX",b"RESERVATION_DIGEST_SHA256")
+CERT_KEYS=(b"ISSUER_ID",b"ISSUER_CONTEXT_SHA256",b"BOOT_ID_SHA256",b"PLATFORM_ID_SHA256",b"ARCH",b"KERNEL_RELEASE_HEX",b"NOT_BEFORE_REALTIME_NS",b"ABSOLUTE_EXPIRY_REALTIME_NS",b"ABSOLUTE_LIFETIME_NS",b"REALTIME_BIND_NS",b"MONOTONIC_BIND_NS",b"REALTIME_MONOTONIC_MAX_DRIFT_NS",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"E0366_SNAPSHOT_BYTES",b"E0366_SNAPSHOT_LF",b"E0366_SNAPSHOT_SHA256",b"E0366_SNAPSHOT_TERMINAL_HEX",b"HISTORICAL_SNAPSHOT_SEALED",b"V15_SHA256",b"V8_SHA256",b"ACTOR_ENTRY_CAPS",b"ACTOR_ENTRY_NNP",b"ACTOR_ENTRY_SECUREBITS",b"PAYLOAD_FINAL_CAPS",b"PAYLOAD_FINAL_NNP",b"PAYLOAD_FINAL_SECUREBITS",b"ATTEMPT_BASE_DEV",b"ATTEMPT_BASE_INO",b"ATTEMPT_BASE_MODE",b"ATTEMPT_BASE_NLINK",b"ATTEMPT_BASE_UID",b"ATTEMPT_BASE_GID",b"ATTEMPT_BASE_MOUNT_ID",b"ATTEMPT_BASE_MOUNTINFO_SHA256",b"ATTEMPT_BASE_FSTYPE_HEX",b"CGROUP2_FS_MAGIC",b"CGROUP2_MOUNT_ID",b"CGROUP2_MOUNTINFO_SHA256",b"CGROUP_BASE_DEV",b"CGROUP_BASE_INO",b"CGROUP_BASE_MODE",b"CGROUP_BASE_NLINK",b"CGROUP_BASE_UID",b"CGROUP_BASE_GID",b"CGROUP_BASE_TYPE_HEX",b"CGROUP_BASE_CONTROLLERS_HEX",b"CGROUP_BASE_SUBTREE_CONTROL_HEX",b"CGROUP_NO_EXTERNAL_MUTATOR",b"CGROUP_CHILD_MODE",b"CGROUP_CHILD_UID",b"CGROUP_CHILD_GID",b"CGROUP_CHILD_TYPE_HEX",b"CGROUP_CHILD_CONTROLLERS_HEX",b"CGROUP_CHILD_SUBTREE_CONTROL_HEX",b"RUNTIME_ROOT_DEV",b"RUNTIME_ROOT_INO",b"RUNTIME_ROOT_MODE",b"RUNTIME_ROOT_NLINK",b"RUNTIME_ROOT_UID",b"RUNTIME_ROOT_GID",b"RUNTIME_ROOT_MOUNT_ID",b"RUNTIME_ROOT_MOUNTINFO_SHA256",b"RUNTIME_ROOT_FSTYPE_HEX",b"SAFE_BIND_DEV",b"SAFE_BIND_INO",b"SAFE_BIND_MODE",b"SAFE_BIND_NLINK",b"SAFE_BIND_UID",b"SAFE_BIND_GID",b"SAFE_BIND_MOUNT_ID",b"SAFE_BIND_MOUNTINFO_SHA256",b"SAFE_BIND_FSTYPE_HEX",b"SAFE_BIND_NOEXEC",b"SAFE_BIND_WRITABLE_DESCENDANT_COUNT",b"KEEPER_BYTES",b"KEEPER_LF",b"KEEPER_SHA256",b"LAUNCHER_BYTES",b"LAUNCHER_LF",b"LAUNCHER_SHA256",b"MARKER_BYTES",b"MARKER_LF",b"MARKER_SHA256",b"CHILD_BYTES",b"CHILD_LF",b"CHILD_SHA256",b"PYTHON_IMAGE_SHA256",b"PYTHON_IMAGE_BYTES",b"PYTHON_IMAGE_DEV",b"PYTHON_IMAGE_INO",b"PYTHON_IMAGE_MODE",b"PYTHON_IMAGE_NLINK",b"PYTHON_IMAGE_UID",b"PYTHON_IMAGE_GID",b"LIBC_PATH_HEX",b"LIBC_DEV",b"LIBC_INO",b"LIBC_MODE",b"LIBC_NLINK",b"LIBC_UID",b"LIBC_GID",b"LIBC_BYTES",b"LIBC_SHA256",b"LIBC_CONFSTR_HEX",b"VALID_SIGNAL_COUNT",b"DEFAULT_SIGNAL_COUNT",b"DEFAULTS_SHA256",b"PRECONSUMPTION_CAP_NS",b"CONSUMPTION_PROGRESS_NS",b"ATTEMPT_DIRFD_PROGRESS_NS",b"STAGING_CAP_NS",b"RELEASE_PROGRESS_NS",b"RELEASE_RECORD_ABSOLUTE_OFFSET_NS",b"RELEASE_REPLY_ABSOLUTE_OFFSET_NS",b"SIGCONT_CALL_RETURN_NS",b"DURABLE_RECORD_PROGRESS_NS",b"WATCHDOG_ARM_PROGRESS_NS",b"WATCHDOG_ACK_PROGRESS_NS",b"WATCHDOG_SURVIVES_CONSUME_TO_REPORT",b"WATCHDOG_SURVIVES_KILL_TO_EMPTY",b"CGROUP_KILL_WRITE_RETURN_NS",b"CGROUP_KILL_TO_EMPTY_NS",b"FINAL_REPORT_PROGRESS_NS",b"FINAL_PASS_COMMIT_PROGRESS_NS",b"FINAL_PASS_MARGIN_NS",b"TERMINAL_HANDSHAKE_PROGRESS_NS",b"A_RECEIPT_PROGRESS_NS",b"B_CLOSURE_PROGRESS_NS",b"TERMINAL_CANDIDATE_RECORD_NS",b"TERMINAL_NOTICE_PROGRESS_NS",b"TERMINAL_SEEN_RECORD_NS",b"TERMINAL_ACK_RECEIPT_RECORD_NS",b"TERMINAL_RECONCILIATION_RECORD_NS",b"TERMINAL_OWNER_CLOSURE_RECORD_NS",b"TERMINAL_CLOSURE_PACKET_NS",b"TERMINAL_B_EXIT_NS",b"FAILURE_OVERALL_PROGRESS_NS",b"FAILURE_CLEANUP_EFFECT_PROGRESS_NS",b"FAILURE_TAIL_RESERVE_NS",b"REFUSAL_RECORD_PROGRESS_NS",b"REFUSAL_ACK_PROGRESS_NS",b"REFUSAL_RECEIPT_PROGRESS_NS",b"REFUSAL_CLOSURE_PROGRESS_NS",b"FINAL_TERMINAL_TOTAL_NS",b"ENTRY_MIN_REMAINING_NS",b"CONSUMPTION_MIN_REMAINING_NS",b"PRE_STAGE_MIN_REMAINING_NS",b"POST_STAGE_MIN_REMAINING_NS",b"POST_CONTAIN_MIN_REMAINING_NS",b"ACTOR_RELEASE_DISABLE_PROGRESS_NS",b"EXTERNAL_OWNER_PID",b"EXTERNAL_OWNER_STARTTIME",b"EXTERNAL_OWNER_UID",b"EXTERNAL_OWNER_GID",b"EXTERNAL_TRANSFER_MANIFEST_BYTES",b"EXTERNAL_TRANSFER_MANIFEST_SHA256",b"NO_ASYNC_TRANSFER",b"NO_SIGNAL_DELIVERY",b"NO_TIMER_DELIVERY",b"NO_TRACE_PROFILE_AUDIT_HOOK",b"NO_CONCURRENT_MUTATOR",b"DEPENDENCY_CLOSURE_COMPLETE",b"RUNTIME_ROOT_WORKSPACE_ABSENT",b"BUILD_EVIDENCE_ROOT_UNREACHABLE",b"CLOSE_RANGE_COMPLETE",b"FSYNC_DURABILITY_PREMISE",b"CLONE3_CPYTHON_GATE_ID",b"CLONE3_CPYTHON_GATE_PASS",b"DELETED_CGROUP_FD_GATE_ID",b"DELETED_CGROUP_FD_GATE_PASS",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_ID",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_PASS",b"EXTERNAL_SURVIVAL_GATE_ID",b"EXTERNAL_SURVIVAL_GATE_PASS",b"OUTER_RECONCILER_GATE_ID",b"OUTER_RECONCILER_GATE_PASS",b"ISSUER_CRYPTOGRAPHY_GATE_ID",b"ISSUER_CRYPTOGRAPHY_GATE_PASS",b"DEP_COUNT")
+
+class StaticReject(Exception):
+ pass
+
+class CertificateExpired(StaticReject):
+ pass
+
+class FaultSet(StaticReject):
+ def __init__(self,faults):
+  self.faults=set(faults)
+  super().__init__("fault-set")
+
+class RemoteAbort(FaultSet):
+ pass
+
+class ControlLost(FaultSet):
+ def __init__(self,label):
+  super().__init__({b"CONTROL_LOST"})
+
+class SendEffectUnknown(FaultSet):
+ def __init__(self,label):
+  super().__init__({b"SEND_EFFECT_UNKNOWN"})
+
+class PidfdActorLost(FaultSet):
+ def __init__(self,label):
+  super().__init__({b"PIDFD_ACTOR_LOST"})
+
+def need(value):
+ if not value:raise StaticReject("static-reject")
+
+def udec(raw,low=0,high=MAX_U63):
+ need(type(raw)is bytes and raw and raw.isdigit() and (len(raw)==1 or raw[0]!=48))
+ value=int(raw);need(low<=value<=high and str(value).encode()==raw);return value
+
+def h64(raw):
+ need(type(raw)is bytes and len(raw)==64 and all(x in b"0123456789abcdef" for x in raw));return raw
+
+def even_hex(raw,cap=MAX_FILE):
+ need(type(raw)is bytes and len(raw)%2==0 and len(raw)<=2*cap)
+ need(all(x in b"0123456789abcdef" for x in raw))
+ result=bytes.fromhex(raw.decode("ascii"));need(result.hex().encode()==raw);return result
+
+def octal(raw):
+ need(raw and all(x in b"01234567" for x in raw));value=int(raw,8);need(format(value,"o").encode()==raw);return value
+
+def sha(raw):
+ return hashlib.sha256(raw).hexdigest().encode("ascii")
+
+def read_all(number,cap=16777216):
+ os.lseek(number,0,os.SEEK_SET);parts=[];total=0
+ while True:
+  chunk=os.read(number,min(1048576,cap-total+1))
+  if not chunk:break
+  total+=len(chunk);need(total<=cap);parts.append(chunk)
+ return b"".join(parts)
+
+def exact_text(raw,size,lf,digest,terminal):
+ ascii_file(raw,size);need((len(raw),raw.count(b"\n"),sha(raw))==(size,lf,digest))
+ lines=raw[:-1].split(b"\n");need(lines and lines[-1]==terminal and lines.count(terminal)==1);return raw
+
+def extract_one(raw,begin,end):
+ lead=begin+b"\n";tail=end+b"\n";need(raw.count(lead)==1 and raw.count(tail)==1)
+ start=raw.index(lead)+len(lead);stop=raw.index(tail,start);return raw[start:stop]
+
+def ascii_file(raw,cap=16777216):
+ need(type(raw)is bytes and 0<len(raw)<=cap and raw.endswith(b"\n"))
+ need(all(x==10 or 32<=x<=126 for x in raw));return raw
+
+def seals(number):
+ need(fcntl.fcntl(number,fcntl.F_GET_SEALS)==EXACT_SEALS)
+
+def fd_access(number,mode):
+ need(fcntl.fcntl(number,fcntl.F_GETFL)&os.O_ACCMODE==mode)
+
+def sealed_carrier(number,cap):
+ seals(number);fd_access(number,os.O_RDWR);held=os.fstat(number)
+ need(stat.S_ISREG(held.st_mode) and held.st_nlink==0 and held.st_uid==held.st_gid==0)
+ raw=read_all(number,cap);need(held.st_size==len(raw) and len(raw)<=cap)
+ return raw
+
+
+CONTROL_SPEC={
+ b"V5_ABORT":(b"ABORTING",b"ABORT_RECONCILER",b"ABORT_NOTICE",b"control_deadline_ns"),
+ b"V5_READY":(b"READY",b"WAIT_READY",b"NO_EFFECT",b"ready_deadline_ns"),
+ b"V5_REFUSE_PREBEGIN":(b"REFUSE_PREBEGIN",b"WAIT_BEGIN",b"NO_CONSUME_REFUSAL",b"consume_deadline_ns"),
+ b"V5_REFUSE_POSTARM":(b"REFUSE_POSTARM",b"WAIT_COMMIT",b"NO_CONSUME_REFUSAL",b"consume_deadline_ns"),
+ b"V5_REFUSE_ACK":(b"REFUSAL_CLOSED_NO_CONSUME",b"WAIT_REFUSAL_ACK",b"REFUSAL_ACK_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_REFUSE_ACK_RECEIPT":(b"REFUSAL_ACK_RECEIVED",b"WAIT_REFUSAL_RECEIPT",b"NO_REPLAY_RECEIPT",b"consume_deadline_ns"),
+ b"V5_REFUSAL_CLOSED":(b"REFUSAL_DURABLY_CLOSED",b"WAIT_REFUSAL_CLOSED",b"OWNER_CLOSURE",b"consume_deadline_ns"),
+ b"V5_CONSUME_BEGIN":(b"CONSUME_BEGIN",b"WAIT_BEGIN",b"BEGIN_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_CONSUME_ARMED":(b"CONSUME_ARMED",b"WAIT_ARM",b"ARM_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_CONSUME_COMMIT":(b"CONSUME_COMMIT",b"WAIT_COMMIT",b"COMMIT_SEND_EFFECT_UNKNOWN",b"consume_deadline_ns"),
+ b"V5_CONSUMED_DURABLE":(b"CONSUMED_DURABLE",b"WAIT_CONSUMED",b"INTENT_DURABLE",b"consume_deadline_ns"),
+ b"V5_STAGE_DURABLE":(b"STAGE_DURABLE",b"WAIT_STAGE",b"FD_TRANSFER",b"stage_deadline_ns"),
+ b"V5_STAGE_ACK":(b"STAGE_BOUND",b"WAIT_STAGE_ACK",b"STAGE_VERIFIED",b"stage_deadline_ns"),
+ b"V5_CONTAINMENT":(b"CONTAINMENT_CANDIDATE",b"WAIT_CONTAINMENT",b"FD_TRANSFER",b"contain_deadline_ns"),
+ b"V5_CONTAINMENT_ACK":(b"CONTAINMENT_BOUND",b"WAIT_CONTAINMENT_ACK",b"CONTAINMENT_VERIFIED",b"contain_deadline_ns"),
+ b"V5_STREAM_ARM":(b"STREAM_ARM",b"WAIT_STREAM_ARM",b"FD_TRANSFER",b"launch_deadline_ns"),
+ b"V5_STREAMS_ARMED":(b"STREAMS_ARMED",b"WAIT_STREAMS_ARMED",b"FD_VERIFIED",b"launch_deadline_ns"),
+ b"V5_PIDFD_ARM":(b"PIDFD_ARM",b"WAIT_PIDFD_ARM",b"FD_TRANSFER",b"launch_deadline_ns"),
+ b"V5_PIDFD_ARMED":(b"PIDFD_ARMED",b"WAIT_PIDFD_ARMED",b"PIDFD_VERIFIED",b"launch_deadline_ns"),
+ b"V5_RELEASE_CANDIDATE":(b"RELEASE_CANDIDATE",b"WAIT_RELEASE",b"RELEASE_AUTHORIZATION",b"launch_deadline_ns"),
+ b"V5_RELEASE_DURABLE":(b"RELEASE_DURABLE",b"WAIT_RELEASE_DURABLE",b"RELEASE_RECORD_DURABLE",b"launch_deadline_ns"),
+ b"V5_RESULT":(b"RESULT",b"WAIT_RESULT",b"RESULT_NOTICE",b"result_deadline_ns"),
+ b"V5_RESULT_FRAME":(b"RESULT_FRAME",b"WAIT_RESULT_FRAME",b"RESULT_FRAME",b"result_deadline_ns"),
+ b"V5_RESULT_END":(b"RESULT_END",b"WAIT_RESULT_END",b"RESULT_COMPLETE",b"result_deadline_ns"),
+ b"V5_VALIDATED_CANDIDATE":(b"VALIDATED_CANDIDATE",b"WAIT_VALIDATED",b"VALIDATION_NOTICE",b"ack_deadline_ns"),
+ b"V5_VALIDATED_DURABLE":(b"VALIDATED_DURABLE",b"WAIT_VALIDATED_DURABLE",b"VALIDATED_RECORD_DURABLE",b"ack_deadline_ns"),
+ b"V5_ACK_COMMIT_INTENT":(b"ACK_COMMIT_INTENT",b"WAIT_ACK_INTENT",b"ACK_COMMIT",b"ack_deadline_ns"),
+ b"V5_COMMITTED":(b"COMMITTED",b"WAIT_COMMITTED",b"ACK_RECORD_DURABLE",b"ack_deadline_ns"),
+ b"V5_COMMITTED_SEEN":(b"COMMITTED_SEEN",b"WAIT_COMMITTED_SEEN",b"ACK_RECEIPT",b"ack_deadline_ns"),
+ b"V5_EMPTY_FINAL_QUERY":(b"EMPTY_FINAL_QUERY",b"WAIT_EMPTY_QUERY",b"REMOVE_QUERY",b"remove_deadline_ns"),
+ b"V5_EMPTY_FINAL_CONFIRMED":(b"EMPTY_FINAL_CONFIRMED",b"WAIT_EMPTY_CONFIRMED",b"EMPTY_OBSERVED",b"remove_deadline_ns"),
+ b"V5_CGROUP_REMOVED":(b"CGROUP_REMOVED",b"WAIT_REMOVED",b"REMOVE_EFFECT",b"remove_deadline_ns"),
+ b"V5_REMOVE_ACK":(b"REMOVE_ACK",b"WAIT_REMOVE_ACK",b"REMOVAL_VERIFIED",b"remove_deadline_ns"),
+ b"V5_FINALIZE_CANDIDATE":(b"FINALIZE_CANDIDATE",b"WAIT_FINALIZE",b"FINALIZE_NOTICE",b"candidate_deadline_ns"),
+ b"V5_TERMINAL_CANDIDATE_DURABLE":(b"TERMINAL_CANDIDATE_DURABLE",b"WAIT_TERMINAL_CANDIDATE",b"CANDIDATE_DURABLE",b"candidate_deadline_ns"),
+ b"V5_TERMINAL_FAILURE_DURABLE":(b"TERMINAL_FAILURE_DURABLE",b"WAIT_TERMINAL_FAILURE",b"FAILURE_REPORT_DURABLE",b"candidate_deadline_ns"),
+ b"V5_TERMINAL_SEEN":(b"TERMINAL_SEEN",b"WAIT_TERMINAL_SEEN",b"TERMINAL_SEEN",b"seen_deadline_ns"),
+ b"V5_TERMINAL_ACK":(b"TERMINAL_ACK",b"WAIT_TERMINAL_ACK",b"ACK_SEND_EFFECT_UNKNOWN",b"ack_deadline_ns"),
+ b"V5_TERMINAL_ACK_RECEIPT":(b"ACK_RECEIVED_NO_REPLAY",b"WAIT_ACK_RECEIPT",b"NO_REPLAY_RECEIPT",b"receipt_deadline_ns"),
+ b"V5_TERMINAL_CLOSED":(b"OWNER_CLOSED",b"WAIT_OWNER_CLOSED",b"OWNER_CLOSURE",b"closure_deadline_ns")
+}
+CONTROL_DEADLINE_KEYS=(b"ready_deadline_ns",b"control_deadline_ns",b"consume_deadline_ns",b"stage_deadline_ns",b"contain_deadline_ns",b"launch_deadline_ns",b"result_deadline_ns",b"ack_deadline_ns",b"remove_deadline_ns",b"candidate_deadline_ns",b"seen_deadline_ns",b"pass_deadline_ns",b"margin_deadline_ns",b"receipt_deadline_ns",b"closure_deadline_ns",b"transfer_deadline_ns",b"terminal_deadline_ns")
+CONTROL_RESERVED={b"state",b"expected_state",b"ordinal",b"probe",b"auth_id",b"sender",b"effect_state"}|set(CONTROL_DEADLINE_KEYS)
+
+def packet(kind,pairs):
+ global CONTROL_SEND_SEQ
+ need(kind in CONTROL_SPEC and b"|" not in kind and b"\n" not in kind)
+ provided={}
+ for key,value in pairs:
+  need(key and value and b"|" not in key+value and b"\n" not in key+value and b"=" not in key+value and key not in provided)
+  provided[key]=value
+ spec_state,spec_receiver,spec_effect,deadline_key=CONTROL_SPEC[kind]
+ state=provided.pop(b"state",spec_state);receiver=provided.pop(b"expected_state",spec_receiver);effect=provided.pop(b"effect_state",spec_effect)
+ need((state,receiver,effect)==(spec_state,spec_receiver,spec_effect) and state!=b"*" and receiver!=b"*" and effect!=b"*")
+ ordinal=provided.pop(b"ordinal");probe=provided.pop(b"probe")
+ if b"auth_id" in provided:need(provided.pop(b"auth_id")==AUTH)
+ if b"sender" in provided:need(provided.pop(b"sender")==b"B")
+ need(deadline_key in provided);deadline=provided.pop(deadline_key);udec(deadline,1)
+ need(not any(key in CONTROL_RESERVED for key in provided))
+ CONTROL_SEND_SEQ+=1
+ body=(kind+b"|protocol_version=5|session_id="+AUTH+b"|message_seq="+str(CONTROL_SEND_SEQ).encode()+b"|message_sender="+b"B"+b"|sender_state="+state+b"|expected_receiver_state="+receiver+b"|slot_ordinal="+ordinal+b"|slot_probe="+probe+b"|effect_state="+effect+b"|deadline_name="+deadline_key+b"|absolute_deadline_ns="+deadline)
+ for key,value in pairs:
+  if key not in CONTROL_RESERVED:body+=b"|"+key+b"="+value
+ return body+b"\n"
+
+def parse_packet(raw,kind,keys):
+ global CONTROL_RECV_SEQ
+ need(type(raw)is bytes and raw.endswith(b"\n") and raw.count(b"\n")==1 and all(x==10 or 32<=x<=126 for x in raw))
+ common_keys=(b"protocol_version",b"session_id",b"message_seq",b"message_sender",b"sender_state",b"expected_receiver_state",b"slot_ordinal",b"slot_probe",b"effect_state",b"deadline_name",b"absolute_deadline_ns")
+ physical=tuple(key for key in keys if key not in CONTROL_RESERVED)
+ fields=raw[:-1].split(b"|");need(fields[0]==kind and len(fields)==1+len(common_keys)+len(physical))
+ common={}
+ for key,item in zip(common_keys,fields[1:1+len(common_keys)]):
+  parts=item.split(b"=",1);need(len(parts)==2 and parts[0]==key and parts[1] and key not in common);common[key]=parts[1]
+ result={}
+ for key,item in zip(physical,fields[1+len(common_keys):]):
+  parts=item.split(b"=",1);need(len(parts)==2 and parts[0]==key and parts[1] and key not in result and key not in common);result[key]=parts[1]
+ spec_state,spec_receiver,spec_effect,deadline_key=CONTROL_SPEC[kind]
+ need(common[b"protocol_version"]==b"5" and common[b"session_id"]==AUTH and common[b"message_sender"]==b"A")
+ need((common[b"sender_state"],common[b"expected_receiver_state"],common[b"effect_state"])==(spec_state,spec_receiver,spec_effect))
+ need(common[b"deadline_name"]==deadline_key);deadline=udec(common[b"absolute_deadline_ns"],1)
+ sequence=udec(common[b"message_seq"],1);need(sequence==CONTROL_RECV_SEQ+1);CONTROL_RECV_SEQ=sequence
+ result.update({b"state":common[b"sender_state"],b"expected_state":common[b"expected_receiver_state"],b"ordinal":common[b"slot_ordinal"],b"probe":common[b"slot_probe"],b"auth_id":common[b"session_id"],b"sender":common[b"message_sender"],b"effect_state":common[b"effect_state"],deadline_key:str(deadline).encode(),b"message_seq":str(sequence).encode(),b"packet_sha256":sha(raw)})
+ return result
+
+def parse_fixed(raw,header,keys,end):
+ ascii_file(raw);lines=raw[:-1].split(b"\n")
+ need(len(lines)==len(keys)+2 and lines[0]==header and lines[-1]==end);result={}
+ for key,line in zip(keys,lines[1:-1]):
+  parts=line.split(b"=",1);need(len(parts)==2 and parts[0]==key and key not in result);result[key]=parts[1]
+ return result
+
+def fault_csv(faults):
+ ordered=tuple(x for x in FAULT_ORDER if x in faults);need(len(ordered)==len(faults))
+ return b"NONE" if not ordered else b",".join(ordered)
+
+def parse_fault_csv(raw,allow_none):
+ if raw==b"NONE":need(allow_none);return set()
+ parts=raw.split(b",");need(parts and all(x in FAULT_ORDER for x in parts))
+ need(len(parts)==len(set(parts)) and tuple(x for x in FAULT_ORDER if x in set(parts))==tuple(parts))
+ return set(parts)
+
+def parse_abort(raw,want_sender=b"A")
+ keys=(b"state",b"ordinal",b"probe",b"effect_state",b"causal_state",b"causal_effect",b"stage_present",b"release_disabled",b"terminal_deadline_ns",b"fault_set",b"control_deadline_ns")
+ values=parse_packet(raw,b"V5_ABORT",keys)
+ need(values[b"sender"]==want_sender and values[b"state"]==b"ABORTING" and values[b"expected_state"]==b"ABORT_RECONCILER" and values[b"effect_state"]==b"ABORT_NOTICE")
+ causal_effects=(b"PREBEGIN",b"BEGIN_SEND_EFFECT_UNKNOWN",b"ARM_SEND_EFFECT_UNKNOWN",b"COMMIT_SEND_EFFECT_UNKNOWN",b"CONSUMED",b"PASS_COMMITTED",b"ACK_SEND_EFFECT_UNKNOWN",b"OWNER_CLOSED")
+ need(values[b"causal_state"] and values[b"causal_effect"] in causal_effects and values[b"ordinal"] and values[b"probe"])
+ need(values[b"stage_present"] in (b"0",b"1") and values[b"release_disabled"] in (b"0",b"1"))
+ if want_sender==b"A":need(values[b"release_disabled"]==b"1")
+ if want_sender==b"B" and values[b"causal_state"]==b"CLEANUP_RELEASE_DISABLE":need(values[b"release_disabled"]==b"0")
+ deadline=udec(values[b"terminal_deadline_ns"])
+ if values[b"causal_effect"] in (b"PASS_COMMITTED",b"ACK_SEND_EFFECT_UNKNOWN",b"OWNER_CLOSED"):need(deadline>0)
+ faults=parse_fault_csv(values[b"fault_set"],False);return values,faults
+
+def canonical_envelope_context(values):
+ body=b"P27E001_ISSUER_CONTEXT_V5\n"
+ for key in ENVELOPE_CONTEXT_KEYS:body+=key+b"="+values[key]+b"\n"
+ return CONTEXT_DOMAIN+body+b"CONTEXT_END=1\n"
+
+def envelope_tbs(values,certificate_digest):
+ body=b"P27E001_ISSUER_ENVELOPE_TBS_V5\n"
+ for key in ENVELOPE_CONTEXT_KEYS:body+=key+b"="+values[key]+b"\n"
+ body+=b"ENVELOPE_CONTEXT_SHA256="+values[b"ENVELOPE_CONTEXT_SHA256"]+b"\nCERTIFICATE_DIGEST_SHA256="+certificate_digest+b"\nSIGNATURE_ALGORITHM="+values[b"SIGNATURE_ALGORITHM"]+b"\nENVELOPE_TBS_END=1\n"
+ return body
+
+def issuer_signature_preimage(cert_raw,env_tbs):
+ return SIGNATURE_DOMAIN+length_frame(b"CERTIFICATE_RAW",cert_raw)+length_frame(b"ENVELOPE_TBS",env_tbs)+b"SIGNATURE_PREIMAGE_END=1\n"
+
+def issuer_receipt_preimage(context_digest,certificate_digest,signature_digest,algorithm,signature):
+ return (RECEIPT_DOMAIN+b"ENVELOPE_CONTEXT_SHA256="+context_digest+b"\nCERTIFICATE_DIGEST_SHA256="+certificate_digest+b"\nSIGNATURE_PREIMAGE_SHA256="+signature_digest+b"\nSIGNATURE_ALGORITHM="+algorithm+b"\nSIGNATURE_HEX="+signature+b"\nISSUER_RECEIPT_END=1\n")
+
+def envelope(raw):
+ values=parse_fixed(raw,b"P27E001_ISSUER_ENVELOPE_V5",ENVELOPE_KEYS,b"ENVELOPE_END=1")
+ exact={b"ISSUER_ID":b"P27_HOST_PREMISE_ISSUER_V5",b"E0366_SNAPSHOT_BYTES":str(SNAPSHOT_EXPECT[0]).encode(),b"E0366_SNAPSHOT_LF":str(SNAPSHOT_EXPECT[1]).encode(),b"E0366_SNAPSHOT_SHA256":SNAPSHOT_EXPECT[2],b"E0366_SNAPSHOT_TERMINAL_HEX":SNAPSHOT_TERMINAL_HEX,b"V15_SHA256":V15_SHA,b"ONE_SHOT_RESERVED_BY_ISSUER":b"1",b"ONE_SHOT_CONSUMED_BY_ISSUER":b"0",b"SIGNATURE_ALGORITHM":b"ED25519_EXTERNAL_GATE_V5"}
+ for key,value in exact.items():need(values[key]==value)
+ for key in (b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"ENVELOPE_CONTEXT_SHA256",b"CERTIFICATE_DIGEST_SHA256",b"SIGNATURE_PREIMAGE_SHA256",b"ISSUER_RECEIPT_SHA256"):h64(values[key])
+ sig=values[b"SIGNATURE_HEX"];need(len(sig)==128 and all(x in b"0123456789abcdef" for x in sig))
+ before=udec(values[b"NOT_BEFORE_REALTIME_NS"]);after=udec(values[b"NOT_AFTER_REALTIME_NS"]);need(before<after)
+ need(values[b"ENVELOPE_CONTEXT_SHA256"]==sha(canonical_envelope_context(values)))
+ return values
+
+def verify_issuer_order(values,cert_raw,cert_values):
+ context=canonical_envelope_context(values);context_digest=sha(context);certificate_digest=sha(CERTIFICATE_DOMAIN+cert_raw)
+ need(cert_values[b"ISSUER_CONTEXT_SHA256"]==context_digest)
+ need(values[b"ENVELOPE_CONTEXT_SHA256"]==context_digest and values[b"CERTIFICATE_DIGEST_SHA256"]==certificate_digest)
+ for key in (b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256"):need(values[key]==cert_values[key])
+ need(values[b"NOT_BEFORE_REALTIME_NS"]==cert_values[b"NOT_BEFORE_REALTIME_NS"] and values[b"NOT_AFTER_REALTIME_NS"]==cert_values[b"ABSOLUTE_EXPIRY_REALTIME_NS"])
+ tbs=envelope_tbs(values,certificate_digest);signature_preimage=issuer_signature_preimage(cert_raw,tbs);signature_digest=sha(signature_preimage)
+ receipt_preimage=issuer_receipt_preimage(context_digest,certificate_digest,signature_digest,values[b"SIGNATURE_ALGORITHM"],values[b"SIGNATURE_HEX"]);receipt_digest=sha(receipt_preimage)
+ need(values[b"SIGNATURE_PREIMAGE_SHA256"]==signature_digest and values[b"ISSUER_RECEIPT_SHA256"]==receipt_digest)
+ need(cert_values[b"ISSUER_CRYPTOGRAPHY_GATE_PASS"]==b"1" and cert_values[b"ISSUER_CRYPTOGRAPHY_GATE_ID"]!=b"0"*64)
+ return context_digest,certificate_digest,receipt_digest
+
+def length_frame(label,raw):
+ return label+b"="+str(len(raw)).encode()+b"\n"+raw
+
+def reservation_tbs(values):
+ body=b"P27E001_ISSUER_RESERVATION_TBS_V5\n"
+ for key in RESERVATION_TBS_KEYS:body+=key+b"="+values[key]+b"\n"
+ return RESERVATION_TBS_DOMAIN+body+b"RESERVATION_TBS_END=1\n"
+
+def reservation_signature_preimage(tbs):
+ return RESERVATION_SIGNATURE_DOMAIN+length_frame(b"RESERVATION_TBS",tbs)+b"RESERVATION_SIGNATURE_PREIMAGE_END=1\n"
+
+def reservation_receipt_preimage(tbs,signature_digest,algorithm,signature):
+ return RESERVATION_RECEIPT_DOMAIN+length_frame(b"RESERVATION_TBS",tbs)+b"SIGNATURE_PREIMAGE_SHA256="+signature_digest+b"\nSIGNATURE_ALGORITHM="+algorithm+b"\nSIGNATURE_HEX="+signature+b"\nRESERVATION_RECEIPT_END=1\n"
+
+def parse_reservation(raw):
+ values=parse_fixed(raw,b"P27E001_ISSUER_RESERVATION_V5",RESERVATION_KEYS,b"RESERVATION_END=1")
+ need(values[b"ISSUER_ID"]==b"P27_HOST_PREMISE_ISSUER_V5" and values[b"ONE_SHOT_RESERVED_BY_ISSUER"]==b"1" and values[b"ONE_SHOT_CONSUMED_BY_ISSUER"]==b"0")
+ need(values[b"SIGNATURE_ALGORITHM"]==b"ED25519_EXTERNAL_GATE_V5")
+ for key in (b"AUTHORIZATION_SERIAL",b"CERTIFICATE_DIGEST_SHA256",b"FINAL_ENVELOPE_DIGEST_SHA256",b"SIGNATURE_PREIMAGE_SHA256",b"RESERVATION_DIGEST_SHA256"):h64(values[key])
+ sig=values[b"SIGNATURE_HEX"];need(len(sig)==128 and all(x in b"0123456789abcdef" for x in sig))
+ before=udec(values[b"NOT_BEFORE_REALTIME_NS"]);after=udec(values[b"NOT_AFTER_REALTIME_NS"]);need(before<after)
+ return values
+
+def verify_reservation_order(values,cert_raw,envelope_raw,envelope_values):
+ cert_digest=sha(CERTIFICATE_DOMAIN+cert_raw);envelope_digest=sha(FINAL_ENVELOPE_DOMAIN+envelope_raw)
+ tbs=reservation_tbs(values);signature_preimage=reservation_signature_preimage(tbs);signature_digest=sha(signature_preimage)
+ receipt_preimage=reservation_receipt_preimage(tbs,signature_digest,values[b"SIGNATURE_ALGORITHM"],values[b"SIGNATURE_HEX"]);receipt_digest=sha(receipt_preimage)
+ need(values[b"CERTIFICATE_DIGEST_SHA256"]==cert_digest and values[b"FINAL_ENVELOPE_DIGEST_SHA256"]==envelope_digest)
+ need(values[b"SIGNATURE_PREIMAGE_SHA256"]==signature_digest and values[b"RESERVATION_DIGEST_SHA256"]==receipt_digest)
+ for key in (b"ISSUER_ID",b"ISSUER_KEY_ID",b"AUTHORIZATION_SERIAL",b"NOT_BEFORE_REALTIME_NS",b"NOT_AFTER_REALTIME_NS",b"ONE_SHOT_RESERVED_BY_ISSUER",b"ONE_SHOT_CONSUMED_BY_ISSUER"):need(values[key]==envelope_values[key])
+ return receipt_digest
+
+def session_auth(cert_raw,envelope_raw,reservation_raw):
+ return sha(AUTH_DOMAIN+length_frame(b"CERTIFICATE",cert_raw)+length_frame(b"ENVELOPE",envelope_raw)+length_frame(b"RESERVATION",reservation_raw))
+
+def contract(raw):
+ ascii_file(raw);lines=raw[:-1].split(b"\n")
+ need(lines and lines[0]==b"P27E001_PREMISE_CERTIFICATE_V5" and lines[-1]==b"CERTIFICATE_END=1")
+ fixed=lines[1:1+len(CERT_KEYS)];need(len(fixed)==len(CERT_KEYS));values={}
+ for key,line in zip(CERT_KEYS,fixed):
+  parts=line.split(b"=",1);need(len(parts)==2 and parts[0]==key and key not in values);values[key]=parts[1]
+ count=udec(values[b"DEP_COUNT"],1,256);dep_lines=lines[1+len(CERT_KEYS):-1];need(len(dep_lines)==count)
+ roles={b"PYTHON_LINK",b"PYTHON_IMAGE",b"ENV_EXEC",b"BASH_EXEC",b"DYNAMIC_LOADER",b"LIBC",b"PYTHON_STDLIB",b"PYTHON_EXTENSION",b"NSS_DEPENDENCY",b"RUNTIME_DEPENDENCY"}
+ deps=[]
+ for index,line in enumerate(dep_lines):
+  prefix=b"DEP[%04d]="%index;need(line.startswith(prefix));fields=line[len(prefix):].split(b",")
+  need(len(fields)==10 and fields[0] in roles);path=even_hex(fields[1]);need(path.startswith(b"/") and b"\x00" not in path)
+  ident=(udec(fields[2],1),udec(fields[3],1),octal(fields[4]),udec(fields[5],1),udec(fields[6]),udec(fields[7]),udec(fields[8]),h64(fields[9]))
+  deps.append((fields[0],path,ident))
+ need(len(set((x[0],x[1]) for x in deps))==len(deps))
+ for role in (b"PYTHON_LINK",b"PYTHON_IMAGE",b"ENV_EXEC",b"BASH_EXEC",b"DYNAMIC_LOADER",b"LIBC"):need(sum(x[0]==role for x in deps)==1)
+ exact={b"ISSUER_ID":b"P27_HOST_PREMISE_ISSUER_V5",b"ARCH":b"x86_64",b"ABSOLUTE_LIFETIME_NS":b"360000000000",b"REALTIME_MONOTONIC_MAX_DRIFT_NS":b"1000000",b"E0366_SNAPSHOT_BYTES":b"2303269",b"E0366_SNAPSHOT_LF":b"23672",b"E0366_SNAPSHOT_SHA256":SNAPSHOT_EXPECT[2],b"E0366_SNAPSHOT_TERMINAL_HEX":SNAPSHOT_TERMINAL_HEX,b"HISTORICAL_SNAPSHOT_SEALED":b"1",b"V15_SHA256":V15_SHA,b"V8_SHA256":V8_SHA,b"ACTOR_ENTRY_CAPS":b"00000000000401c0",b"ACTOR_ENTRY_NNP":b"0",b"ACTOR_ENTRY_SECUREBITS":b"12",b"PAYLOAD_FINAL_CAPS":b"0000000000000000",b"PAYLOAD_FINAL_NNP":b"1",b"PAYLOAD_FINAL_SECUREBITS":b"15",b"ATTEMPT_BASE_MODE":b"40700",b"ATTEMPT_BASE_UID":b"0",b"ATTEMPT_BASE_GID":b"0",b"CGROUP2_FS_MAGIC":b"63677270",b"CGROUP_BASE_UID":b"0",b"CGROUP_BASE_GID":b"0",b"CGROUP_NO_EXTERNAL_MUTATOR":b"1",b"CGROUP_CHILD_MODE":b"40700",b"CGROUP_CHILD_UID":b"0",b"CGROUP_CHILD_GID":b"0",b"CGROUP_CHILD_TYPE_HEX":b"646f6d61696e0a",b"RUNTIME_ROOT_UID":b"0",b"RUNTIME_ROOT_GID":b"0",b"SAFE_BIND_MODE":b"40700",b"SAFE_BIND_UID":b"0",b"SAFE_BIND_GID":b"0",b"SAFE_BIND_NOEXEC":b"1",b"SAFE_BIND_WRITABLE_DESCENDANT_COUNT":b"1",b"KEEPER_BYTES":b"4216",b"KEEPER_LF":b"128",b"KEEPER_SHA256":b"e3bf14ddde012be70a0ec40ac9373c055d2fd79d3ea30aa5e64450174f057716",b"LAUNCHER_BYTES":b"4218",b"LAUNCHER_LF":b"128",b"LAUNCHER_SHA256":b"e9d5eb3544dfddd7251279294e113f053165c2d446dd4517fbcdc6927a8618d5",b"MARKER_BYTES":b"75094",b"MARKER_LF":b"1479",b"MARKER_SHA256":b"b06ceed041004279e9df73cc9cc3c2d73ec07d8f71a9345f451a32e93b7a955d",b"CHILD_BYTES":b"19746",b"CHILD_LF":b"452",b"CHILD_SHA256":b"1d20310b965ff9df9351cbc3ca07aebb15e8cbacf74a8058782c085fde0780bf",b"PYTHON_IMAGE_SHA256":PY_SHA,b"PYTHON_IMAGE_BYTES":b"30626264",b"PYTHON_IMAGE_UID":b"0",b"PYTHON_IMAGE_GID":b"0",b"LIBC_UID":b"0",b"LIBC_GID":b"0",b"PRECONSUMPTION_CAP_NS":b"10000000000",b"CONSUMPTION_PROGRESS_NS":b"100000000",b"ATTEMPT_DIRFD_PROGRESS_NS":b"100000000",b"STAGING_CAP_NS":b"10000000000",b"RELEASE_PROGRESS_NS":b"1000000000",b"RELEASE_RECORD_ABSOLUTE_OFFSET_NS":b"800000000",b"RELEASE_REPLY_ABSOLUTE_OFFSET_NS":b"900000000",b"SIGCONT_CALL_RETURN_NS":b"5000000",b"DURABLE_RECORD_PROGRESS_NS":b"100000000",b"WATCHDOG_ARM_PROGRESS_NS":b"1000000000",b"WATCHDOG_ACK_PROGRESS_NS":b"500000000",b"WATCHDOG_SURVIVES_CONSUME_TO_REPORT":b"1",b"WATCHDOG_SURVIVES_KILL_TO_EMPTY":b"1",b"CGROUP_KILL_WRITE_RETURN_NS":b"5000000",b"CGROUP_KILL_TO_EMPTY_NS":b"2000000000",b"FINAL_REPORT_PROGRESS_NS":b"1000000000",b"FINAL_PASS_COMMIT_PROGRESS_NS":b"100000000",b"FINAL_PASS_MARGIN_NS":b"10000000",b"TERMINAL_HANDSHAKE_PROGRESS_NS":b"500000000",b"A_RECEIPT_PROGRESS_NS":b"100000000",b"B_CLOSURE_PROGRESS_NS":b"500000000",b"TERMINAL_CANDIDATE_RECORD_NS":b"100000000",b"TERMINAL_NOTICE_PROGRESS_NS":b"100000000",b"TERMINAL_SEEN_RECORD_NS":b"100000000",b"TERMINAL_ACK_RECEIPT_RECORD_NS":b"100000000",b"TERMINAL_RECONCILIATION_RECORD_NS":b"100000000",b"TERMINAL_OWNER_CLOSURE_RECORD_NS":b"100000000",b"TERMINAL_CLOSURE_PACKET_NS":b"100000000",b"TERMINAL_B_EXIT_NS":b"100000000",b"FAILURE_OVERALL_PROGRESS_NS":b"5210000000",b"FAILURE_CLEANUP_EFFECT_PROGRESS_NS":b"2600000000",b"FAILURE_TAIL_RESERVE_NS":b"2610000000",b"REFUSAL_RECORD_PROGRESS_NS":b"20000000",b"REFUSAL_ACK_PROGRESS_NS":b"20000000",b"REFUSAL_RECEIPT_PROGRESS_NS":b"20000000",b"REFUSAL_CLOSURE_PROGRESS_NS":b"20000000",b"FINAL_TERMINAL_TOTAL_NS":b"2510000000",b"ENTRY_MIN_REMAINING_NS":b"295482000000",b"CONSUMPTION_MIN_REMAINING_NS":b"285482000000",b"PRE_STAGE_MIN_REMAINING_NS":b"285382000000",b"POST_STAGE_MIN_REMAINING_NS":b"275382000000",b"POST_CONTAIN_MIN_REMAINING_NS":b"274882000000",b"ACTOR_RELEASE_DISABLE_PROGRESS_NS":b"500000000",b"EXTERNAL_OWNER_UID":b"0",b"EXTERNAL_OWNER_GID":b"0",b"CLONE3_CPYTHON_GATE_PASS":b"1",b"DELETED_CGROUP_FD_GATE_PASS":b"1",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_PASS":b"1",b"EXTERNAL_SURVIVAL_GATE_PASS":b"1",b"OUTER_RECONCILER_GATE_PASS":b"1",b"ISSUER_CRYPTOGRAPHY_GATE_PASS":b"1"}
+ for key,value in exact.items():need(values[key]==value)
+ for key in (b"ISSUER_CONTEXT_SHA256",b"BOOT_ID_SHA256",b"PLATFORM_ID_SHA256",b"PLAN_SHA256",b"RUNNER_SHA256",b"RECOVERY_SHA256",b"ATTEMPT_BASE_MOUNTINFO_SHA256",b"CGROUP2_MOUNTINFO_SHA256",b"RUNTIME_ROOT_MOUNTINFO_SHA256",b"SAFE_BIND_MOUNTINFO_SHA256",b"KEEPER_SHA256",b"LAUNCHER_SHA256",b"MARKER_SHA256",b"CHILD_SHA256",b"LIBC_SHA256",b"DEFAULTS_SHA256",b"EXTERNAL_TRANSFER_MANIFEST_SHA256",b"CLONE3_CPYTHON_GATE_ID",b"DELETED_CGROUP_FD_GATE_ID",b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_ID",b"EXTERNAL_SURVIVAL_GATE_ID",b"OUTER_RECONCILER_GATE_ID",b"ISSUER_CRYPTOGRAPHY_GATE_ID"):h64(values[key])
+ need(values[b"CLONE3_CPYTHON_GATE_ID"]!=b"0"*64 and values[b"DELETED_CGROUP_FD_GATE_ID"]!=b"0"*64 and values[b"SEALED_SNAPSHOT_CONSTRUCTION_GATE_ID"]!=b"0"*64 and values[b"EXTERNAL_SURVIVAL_GATE_ID"]!=b"0"*64 and values[b"OUTER_RECONCILER_GATE_ID"]!=b"0"*64 and values[b"ISSUER_CRYPTOGRAPHY_GATE_ID"]!=b"0"*64)
+ for key in (b"NO_ASYNC_TRANSFER",b"NO_SIGNAL_DELIVERY",b"NO_TIMER_DELIVERY",b"NO_TRACE_PROFILE_AUDIT_HOOK",b"NO_CONCURRENT_MUTATOR",b"DEPENDENCY_CLOSURE_COMPLETE",b"RUNTIME_ROOT_WORKSPACE_ABSENT",b"BUILD_EVIDENCE_ROOT_UNREACHABLE",b"CLOSE_RANGE_COMPLETE",b"FSYNC_DURABILITY_PREMISE"):need(values[key]==b"1")
+ for key in (b"KERNEL_RELEASE_HEX",b"E0366_SNAPSHOT_TERMINAL_HEX",b"ATTEMPT_BASE_FSTYPE_HEX",b"CGROUP_BASE_TYPE_HEX",b"CGROUP_BASE_CONTROLLERS_HEX",b"CGROUP_BASE_SUBTREE_CONTROL_HEX",b"CGROUP_CHILD_TYPE_HEX",b"CGROUP_CHILD_CONTROLLERS_HEX",b"CGROUP_CHILD_SUBTREE_CONTROL_HEX",b"RUNTIME_ROOT_FSTYPE_HEX",b"SAFE_BIND_FSTYPE_HEX",b"LIBC_PATH_HEX",b"LIBC_CONFSTR_HEX"):even_hex(values[key])
+ for key in (b"ATTEMPT_BASE_MODE",b"CGROUP_BASE_MODE",b"CGROUP_CHILD_MODE",b"RUNTIME_ROOT_MODE",b"SAFE_BIND_MODE",b"PYTHON_IMAGE_MODE",b"LIBC_MODE"):octal(values[key])
+ for key in (b"NOT_BEFORE_REALTIME_NS",b"ABSOLUTE_EXPIRY_REALTIME_NS",b"REALTIME_BIND_NS",b"MONOTONIC_BIND_NS",b"ATTEMPT_BASE_DEV",b"ATTEMPT_BASE_INO",b"ATTEMPT_BASE_NLINK",b"ATTEMPT_BASE_MOUNT_ID",b"CGROUP2_MOUNT_ID",b"CGROUP_BASE_DEV",b"CGROUP_BASE_INO",b"CGROUP_BASE_NLINK",b"RUNTIME_ROOT_DEV",b"RUNTIME_ROOT_INO",b"RUNTIME_ROOT_NLINK",b"RUNTIME_ROOT_MOUNT_ID",b"SAFE_BIND_DEV",b"SAFE_BIND_INO",b"SAFE_BIND_NLINK",b"SAFE_BIND_MOUNT_ID",b"KEEPER_BYTES",b"KEEPER_LF",b"LAUNCHER_BYTES",b"LAUNCHER_LF",b"MARKER_BYTES",b"MARKER_LF",b"CHILD_BYTES",b"CHILD_LF",b"PYTHON_IMAGE_DEV",b"PYTHON_IMAGE_INO",b"PYTHON_IMAGE_NLINK",b"PYTHON_IMAGE_UID",b"PYTHON_IMAGE_GID",b"LIBC_DEV",b"LIBC_INO",b"LIBC_NLINK",b"LIBC_BYTES",b"VALID_SIGNAL_COUNT",b"DEFAULT_SIGNAL_COUNT",b"EXTERNAL_OWNER_PID",b"EXTERNAL_OWNER_STARTTIME",b"EXTERNAL_OWNER_UID",b"EXTERNAL_OWNER_GID",b"EXTERNAL_TRANSFER_MANIFEST_BYTES"):udec(values[key])
+ by_role={role:next(x for x in deps if x[0]==role) for role in (b"PYTHON_LINK",b"PYTHON_IMAGE",b"ENV_EXEC",b"BASH_EXEC",b"DYNAMIC_LOADER",b"LIBC")}
+ need(by_role[b"PYTHON_LINK"][1]==PYTHON and by_role[b"PYTHON_IMAGE"][1]==PYIMAGE and by_role[b"ENV_EXEC"][1]==b"/usr/bin/env" and by_role[b"BASH_EXEC"][1]==b"/usr/bin/bash")
+ libc=(udec(values[b"LIBC_DEV"],1),udec(values[b"LIBC_INO"],1),octal(values[b"LIBC_MODE"]),udec(values[b"LIBC_NLINK"],1),0,0,udec(values[b"LIBC_BYTES"],1),values[b"LIBC_SHA256"])
+ python_image=(udec(values[b"PYTHON_IMAGE_DEV"],1),udec(values[b"PYTHON_IMAGE_INO"],1),octal(values[b"PYTHON_IMAGE_MODE"]),udec(values[b"PYTHON_IMAGE_NLINK"],1),udec(values[b"PYTHON_IMAGE_UID"]),udec(values[b"PYTHON_IMAGE_GID"]),udec(values[b"PYTHON_IMAGE_BYTES"],1),values[b"PYTHON_IMAGE_SHA256"])
+ need(by_role[b"PYTHON_IMAGE"][1]==PYIMAGE and by_role[b"PYTHON_IMAGE"][2]==python_image)
+ need(by_role[b"LIBC"][1]==even_hex(values[b"LIBC_PATH_HEX"]) and by_role[b"LIBC"][2]==libc)
+ return values,tuple(deps)
+
+def checkpoint(cert,needed=0,deadline=None):
+ m0=time.monotonic_ns();real=time.time_ns();m1=time.monotonic_ns()
+ before=udec(cert[b"NOT_BEFORE_REALTIME_NS"]);expiry=udec(cert[b"ABSOLUTE_EXPIRY_REALTIME_NS"])
+ if not (before<=real<expiry and expiry-real>=needed):raise CertificateExpired("certificate-life")
+ base_r=udec(cert[b"REALTIME_BIND_NS"]);base_m=udec(cert[b"MONOTONIC_BIND_NS"])
+ if not base_m<=m0<=m1:raise FaultSet({b"CLOCK_DRIFT"})
+ drift=udec(cert[b"REALTIME_MONOTONIC_MAX_DRIFT_NS"]);low=base_r+(m0-base_m);high=base_r+(m1-base_m)
+ if not low-drift<=real<=high+drift:raise FaultSet({b"CLOCK_DRIFT"})
+ if deadline is not None and m1>deadline:raise FaultSet({b"DEADLINE_EXPIRED"})
+ return real,m1
+
+
+def horizon_needed(deadline,tail):
+ return tail+max(0,deadline-time.monotonic_ns())
+
+def exact_schedule(origin,overall,spec):
+ need(type(origin)is int and type(overall)is int and origin>0 and overall==origin+sum(cap for name,cap in spec))
+ cursor=origin;result={}
+ for name,cap in spec:
+  need(name not in result and cap>0);cursor+=cap;result[name]=cursor
+ need(cursor==overall);return result
+
+def schedule_raw(schedule,spec):
+ need(tuple(schedule)==tuple(name for name,cap in spec))
+ return b";".join(name+b"="+str(schedule[name]).encode() for name,cap in spec)
+
+def schedule_hex(schedule,spec):
+ return schedule_raw(schedule,spec).hex().encode("ascii")
+
+def check_schedule_hex(raw,origin,overall,spec):
+ need(type(raw)is bytes and raw and len(raw)%2==0 and all(x in b"0123456789abcdef" for x in raw))
+ expected=exact_schedule(origin,overall,spec)
+ need(bytes.fromhex(raw.decode("ascii"))==schedule_raw(expected,spec));return expected
+
+def phase_boundary(context,schedule,spec,name,overall,require_live=True):
+ origin=overall-sum(cap for key,cap in spec);need(name in schedule and schedule==exact_schedule(origin,overall,spec))
+ names=tuple(key for key,cap in spec);index=names.index(name);start=origin if index==0 else schedule[names[index-1]];deadline=schedule[name];reserve_after=overall-deadline
+ while time.monotonic_ns()<start:
+  owner_poll(context.get(b"actor_control"),context,start)
+  if require_live and context.get(b"actor_state")==b"PIDFD_ACTOR_LOST":raise PidfdActorLost("phase-start")
+  if require_live and context.get(b"control_state")==b"CONTROL_LOST":raise ControlLost("phase-start")
+ need(start<=time.monotonic_ns()<=deadline);record_boundary(context,deadline,require_live,reserve_after)
+ need(time.monotonic_ns()<=deadline);return deadline
+
+def certificate_mono_expiry(cert):
+ return udec(cert[b"MONOTONIC_BIND_NS"],1)+udec(cert[b"ABSOLUTE_EXPIRY_REALTIME_NS"])-udec(cert[b"REALTIME_BIND_NS"])-udec(cert[b"REALTIME_MONOTONIC_MAX_DRIFT_NS"])
+
+def cert_live(cert,needed=0):
+ return checkpoint(cert,needed)
+
+def cap_status():
+ number=-1
+ try:
+  number=os.open(b"/proc/self/status",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(number,65536),65536)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+ values={}
+ for line in raw.splitlines():
+  for key in (b"CapInh",b"CapPrm",b"CapEff",b"CapBnd",b"CapAmb",b"NoNewPrivs"):
+   if line.startswith(key+b":"):need(key not in values);values[key]=line.split(b":",1)[1].strip()
+ need(set(values)=={b"CapInh",b"CapPrm",b"CapEff",b"CapBnd",b"CapAmb",b"NoNewPrivs"});return values
+
+def limit_vector():
+ inf=resource.RLIM_INFINITY
+ return ((resource.RLIMIT_AS,(inf,inf)),(resource.RLIMIT_CORE,(0,0)),(resource.RLIMIT_CPU,(inf,inf)),(resource.RLIMIT_DATA,(inf,inf)),(resource.RLIMIT_FSIZE,(inf,inf)),(resource.RLIMIT_MEMLOCK,(8388608,8388608)),(resource.RLIMIT_MSGQUEUE,(819200,819200)),(resource.RLIMIT_NICE,(0,0)),(resource.RLIMIT_NOFILE,(1048576,1048576)),(resource.RLIMIT_NPROC,(1048576,1048576)),(resource.RLIMIT_RSS,(inf,inf)),(resource.RLIMIT_RTPRIO,(0,0)),(resource.RLIMIT_RTTIME,(inf,inf)),(resource.RLIMIT_SIGPENDING,(515199,515199)),(resource.RLIMIT_STACK,(8388608,inf)))
+
+def final_context(safe_dev,safe_ino):
+ values=cap_status();zero=b"0000000000000000"
+ need(os.getresuid()==(0,0,0) and os.getresgid()==(0,0,0) and os.getgroups()==[])
+ need(all(values[x]==zero for x in (b"CapInh",b"CapPrm",b"CapEff",b"CapBnd",b"CapAmb")) and values[b"NoNewPrivs"]==b"1")
+ libc=ctypes.CDLL(None,use_errno=True);need(libc.prctl(27,0,0,0,0)==15)
+ held=os.stat(b".",follow_symlinks=False);need((held.st_dev,held.st_ino,held.st_uid,held.st_gid,stat.S_IMODE(held.st_mode))==(safe_dev,safe_ino,0,0,0o700))
+ need(os.umask(0o077)==0o077 and all(signal.getitimer(x)==(0.0,0.0) for x in (signal.ITIMER_REAL,signal.ITIMER_VIRTUAL,signal.ITIMER_PROF)))
+ need(signal.pthread_sigmask(signal.SIG_BLOCK,set())==set() and all(signal.getsignal(x)==signal.SIG_DFL for x in signal.valid_signals() if x not in (signal.SIGKILL,signal.SIGSTOP)))
+ for key,value in limit_vector():need(resource.getrlimit(key)==value)
+ need(sys.gettrace() is None and sys.getprofile() is None and os.environb==ENV)
+
+def scrub_exact(expected):
+ seen=set()
+ for item in os.listdir(b"/proc/self/fd"):
+  if item.isdigit():
+   number=int(item)
+   try:os.fstat(number)
+   except OSError as error:need(error.errno==errno.EBADF);continue
+   seen.add(number)
+ need(seen==expected)
+
+def pidfd_pid(number):
+ link=os.readlink(b"/proc/self/fd/"+str(number).encode());need(link==b"anon_inode:[pidfd]");info=-1
+ try:
+  info=os.open(b"/proc/self/fdinfo/"+str(number).encode(),os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(info,4096),4096)
+ finally:close_numbers(tuple(x for x in (info,) if x>=0))
+ values=[x[5:] for x in raw.splitlines() if x.startswith(b"Pid:\t")];need(len(values)==1)
+ return udec(values[0],1)
+
+def proc_starttime(pid):
+ number=-1
+ try:
+  number=os.open(b"/proc/"+str(pid).encode()+b"/stat",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(number,4096),4096)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+ cut=raw.rfind(b") ");need(cut>0);fields=raw[cut+2:].strip().split();need(len(fields)>=20);return udec(fields[19],1)
+
+def closed(number):
+ try:os.fstat(number)
+ except OSError as error:need(error.errno==errno.EBADF);return
+ need(False)
+
+def whole_snapshot():
+ seals(9);fd_access(9,os.O_RDWR);raw=read_all(9,SNAPSHOT_EXPECT[0]);held=os.fstat(9)
+ need(stat.S_ISREG(held.st_mode) and held.st_nlink==0 and held.st_uid==held.st_gid==0)
+ need((held.st_size,raw.count(b"\n"),sha(raw))==SNAPSHOT_EXPECT and raw.endswith(b"\n"))
+ lines=raw[:-1].split(b"\n");need(lines[-1]==SNAPSHOT_TERMINAL and lines.count(SNAPSHOT_TERMINAL)==1)
+ return raw
+
+class StatFS(ctypes.Structure):
+ _fields_=(("f_type",ctypes.c_long),("f_bsize",ctypes.c_long),("rest",ctypes.c_byte*240))
+
+def statfs_magic(number):
+ cell=StatFS();libc=ctypes.CDLL(None,use_errno=True);need(libc.fstatfs(number,ctypes.byref(cell))==0)
+ return cell.f_type&0xffffffff
+
+def mount_binding(number):
+ info=-1
+ try:
+  info=os.open(b"/proc/self/fdinfo/"+str(number).encode(),os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(info,4096),4096)
+ finally:close_numbers(tuple(x for x in (info,) if x>=0))
+ mids=[x[7:] for x in raw.splitlines() if x.startswith(b"mnt_id:\t")];need(len(mids)==1);mid=udec(mids[0],1);table=-1
+ try:
+  table=os.open(b"/proc/self/mountinfo",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);rows=ascii_file(read_all(table,1048576),1048576)
+ finally:close_numbers(tuple(x for x in (table,) if x>=0))
+ matches=[line+b"\n" for line in rows.splitlines() if line.split(b" ",1)[0]==str(mid).encode()]
+ need(len(matches)==1);return mid,matches[0]
+
+def verify_platform(cert):
+ boot=-1
+ try:
+  boot=os.open(b"/proc/sys/kernel/random/boot_id",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);boot_raw=read_all(boot,128)
+ finally:close_numbers(tuple(x for x in (boot,) if x>=0))
+ need(boot_raw.endswith(b"\n") and sha(boot_raw)==cert[b"BOOT_ID_SHA256"])
+ u=os.uname();encoded=tuple(x.encode("ascii","strict") for x in (u.sysname,u.release,u.version,u.machine))
+ raw=b"SYSNAME="+encoded[0]+b"\nRELEASE="+encoded[1]+b"\nVERSION="+encoded[2]+b"\nMACHINE="+encoded[3]+b"\n"
+ need(encoded[3]==b"x86_64" and encoded[1].hex().encode()==cert[b"KERNEL_RELEASE_HEX"] and sha(raw)==cert[b"PLATFORM_ID_SHA256"])
+
+def mount_semantics(line,fstype,required,forbidden):
+ pieces=line[:-1].split(b" - ");need(len(pieces)==2)
+ left=pieces[0].split(b" ");right=pieces[1].split(b" ");need(len(left)>=6 and len(right)>=3 and right[0]==fstype)
+ options=set(left[5].split(b","))|set(right[2].split(b","));need(required<=options and not (forbidden&options))
+
+def mount_graph(cert):
+ number=-1
+ try:
+  number=os.open(b"/proc/self/mountinfo",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW);raw=ascii_file(read_all(number,1048576),1048576)
+ finally:close_numbers(tuple(x for x in (number,) if x>=0))
+ rows={}
+ for line in raw.splitlines():
+  left,right=line.split(b" - ",1);fields=left.split(b" ");need(len(fields)>=6)
+  mid=udec(fields[0],1);parent=udec(fields[1],1);options=set(fields[5].split(b","));need(mid not in rows);rows[mid]=(parent,options)
+ runtime=udec(cert[b"RUNTIME_ROOT_MOUNT_ID"],1);safe=udec(cert[b"SAFE_BIND_MOUNT_ID"],1);need(runtime in rows and safe in rows and runtime!=safe)
+ def descends(mid,ancestor):
+  seen=set()
+  while mid in rows and mid not in seen:
+   if mid==ancestor:return True
+   seen.add(mid);mid=rows[mid][0]
+  return False
+ writable=[mid for mid,(parent,options) in rows.items() if mid!=runtime and descends(mid,runtime) and b"rw" in options]
+ need(writable==[safe] and cert[b"SAFE_BIND_WRITABLE_DESCENDANT_COUNT"]==b"1")
+
+def base_check(number,cert,prefix):
+ held=os.fstat(number);need(stat.S_ISDIR(held.st_mode));fd_access(number,os.O_RDONLY)
+ expected=(udec(cert[prefix+b"_DEV"],1),udec(cert[prefix+b"_INO"],1),octal(cert[prefix+b"_MODE"]),udec(cert[prefix+b"_NLINK"],1),udec(cert[prefix+b"_UID"]),udec(cert[prefix+b"_GID"]))
+ need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)==expected)
+ return held
+
+def verify_dependency(entry):
+ role,path,identity=entry;parts=path.split(b"/")[1:];need(parts and all(x not in (b"",b".",b"..") for x in parts))
+ rootfd=current=number=following=-1
+ try:
+  rootfd=os.open(b"/",O_DIR);current=os.dup(rootfd)
+  for part in parts[:-1]:
+   following=os.open(part,O_DIR,dir_fd=current);os.close(current);current=following;following=-1
+  if role==b"PYTHON_LINK":
+   held=os.stat(parts[-1],dir_fd=current,follow_symlinks=False);need(stat.S_ISLNK(held.st_mode))
+   target=os.readlink(parts[-1],dir_fd=current);size=len(target);digest=sha(target)
+  else:
+   number=os.open(parts[-1],os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=current)
+   held=os.fstat(number);body=read_all(number,identity[6]);size=len(body);digest=sha(body)
+  need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid,size,digest)==identity)
+ finally:
+  close_numbers(tuple(x for x in (number,following,current,rootfd) if x>=0))
+
+def write_all(number,raw,context,deadline,require_live,needed):
+ offset=0
+ while offset<len(raw):
+  record_boundary(context,deadline,require_live,needed)
+  try:count=os.write(number,raw[offset:])
+  except InterruptedError:
+   record_boundary(context,deadline,require_live,needed);continue
+  record_boundary(context,deadline,require_live,needed);need(count>0);offset+=count
+
+def post_deadline(deadline):
+ if time.monotonic_ns()>deadline:raise FaultSet({b"DEADLINE_EXPIRED"})
+
+def boundary_liveness(context):
+ poller=select.poll();poller.register(4,select.POLLIN|select.POLLHUP|select.POLLERR)
+ control=context.get(b"actor_control")
+ if control is not None and context.get(b"control_state")==b"CONNECTED":poller.register(control.fileno(),select.POLLIN|select.POLLHUP|select.POLLERR)
+ amask=cmask=0
+ for number,event in poller.poll(0):
+  if number==4:amask|=event
+  elif control is not None and number==control.fileno():cmask|=event
+ if amask:
+  context[b"actor_state"]=b"PIDFD_ACTOR_LOST";context[b"actor_lost"]=True;raise PidfdActorLost("certified-boundary")
+ if cmask&(select.POLLHUP|select.POLLERR) and not cmask&select.POLLIN:
+  context[b"control_state"]=b"CONTROL_LOST";raise ControlLost("certified-boundary")
+
+def record_boundary(context,deadline,require_live,needed):
+ if require_live:boundary_liveness(context)
+ post_deadline(deadline)
+ try:checkpoint(CERT,needed,deadline)
+ except CertificateExpired:
+  context[b"faults"].add(b"CERTIFICATE_EXPIRED")
+  if require_live:raise
+ except FaultSet as error:
+  context[b"faults"].update(error.faults)
+  if require_live:raise
+ except StaticReject:
+  context[b"faults"].add(b"CERTIFICATE_INVALID")
+  if require_live:raise
+ if require_live:boundary_liveness(context)
+
+def durable_once(context,name,raw,deadline,require_live=True,needed_after=0):
+ digest=sha(raw)
+ if name in context[b"durability"]:
+  if context[b"durability_digest"].get(name)!=digest:raise FaultSet({b"INTERNAL_INVARIANT"})
+  return context[b"durability"][name],digest
+ state=b"ABSENT_KNOWN";context[b"durability"][name]=state;context[b"durability_digest"][name]=digest;context[b"durability_faults"][name]=set();number=-1
+ try:
+  record_boundary(context,deadline,require_live,needed_after)
+  state=b"OPEN_EFFECT_UNKNOWN";context[b"durability"][name]=state
+  number=os.open(name,os.O_RDWR|os.O_CREAT|os.O_EXCL|os.O_CLOEXEC|os.O_NOFOLLOW,0o400,dir_fd=context[b"attempt"])
+  record_boundary(context,deadline,require_live,needed_after);state=b"FD_HELD";context[b"durability"][name]=state
+  state=b"WRITE_EFFECT_UNKNOWN";context[b"durability"][name]=state
+  write_all(number,raw,context,deadline,require_live,needed_after)
+  state=b"FILE_FSYNC_EFFECT_UNKNOWN";context[b"durability"][name]=state
+  record_boundary(context,deadline,require_live,needed_after);os.fsync(number);record_boundary(context,deadline,require_live,needed_after)
+  held=os.fstat(number);record_boundary(context,deadline,require_live,needed_after)
+  need(stat.S_ISREG(held.st_mode) and stat.S_IMODE(held.st_mode)==0o400 and held.st_uid==held.st_gid==0 and held.st_nlink==1 and held.st_size==len(raw))
+  need(read_all(number,len(raw))==raw);record_boundary(context,deadline,require_live,needed_after)
+  state=b"SAME_FD_REREAD_VERIFIED";context[b"durability"][name]=state
+  state=b"DIR_FSYNC_EFFECT_UNKNOWN";context[b"durability"][name]=state
+  record_boundary(context,deadline,require_live,needed_after);os.fsync(context[b"attempt"]);record_boundary(context,deadline,require_live,needed_after)
+  state=DURABLE_VERIFIED;context[b"durability"][name]=state
+ except CertificateExpired:
+  context[b"faults"].add(b"CERTIFICATE_EXPIRED");context[b"durability_faults"][name].add(b"CERTIFICATE_EXPIRED");context[b"durability"][name]=state
+ except FaultSet as error:
+  context[b"faults"].update(error.faults);context[b"durability_faults"][name].update(error.faults);context[b"durability"][name]=state
+ except StaticReject:
+  context[b"faults"].add(b"CERTIFICATE_INVALID");context[b"durability_faults"][name].add(b"CERTIFICATE_INVALID");context[b"durability"][name]=state
+ except BaseException:
+  context[b"faults"].add(b"INTERNAL_INVARIANT");context[b"durability_faults"][name].add(b"INTERNAL_INVARIANT");context[b"durability"][name]=state
+ finally:
+  if number>=0:
+   try:os.close(number)
+   except OSError:pass
+ return context[b"durability"][name],digest
+
+def primary(faults):
+ ordered=tuple(x for x in FAULT_ORDER if x in faults);need(faults and len(ordered)==len(faults))
+ return ordered[0]
+
+def disposition(faults):
+ need(faults)
+ return b"CONSUMED_INDETERMINATE" if any(x in INDETERMINATE for x in faults) else b"CONSUMED_FAIL"
+
+def close_numbers(numbers):
+ for number in numbers:
+  try:os.close(number)
+  except OSError:pass
+
+def next_record(context):
+ context[b"record_seq"]+=1
+ return str(context[b"record_seq"]).encode()
+
+def chained_record(context,name,tag,lines,deadline,require_live,reserve_after):
+ need(type(name)is bytes and type(tag)is bytes and type(lines)is tuple and time.monotonic_ns()<=deadline)
+ seq=next_record(context);predecessor=context[b"chain_sha"]
+ body=tag+b"\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+predecessor+b"\n"+b"".join(key+b"="+value+b"\n" for key,value in lines)+b"PHASE_DEADLINE_NS="+str(deadline).encode()+b"\nRECORD_END=1\n"
+ state,digest=durable_once(context,name,body,deadline,require_live,reserve_after)
+ if state!=DURABLE_VERIFIED:raise FaultSet({b"REPORT_DURABILITY_UNKNOWN"})
+ context[b"chain_sha"]=digest;context.setdefault(b"chain_records",[]).append((udec(seq,1),name,predecessor,digest,deadline));return body,digest
+
+
+def attempt_intent(auth,cert,cert_raw,envelope_raw,source_raw):
+ return (b"P27E001_ATTEMPT_INTENT_V5\nAUTH_ID="+auth+b"\nNONCE="+auth+b"\nRECORD_SEQ=1\nPREDECESSOR_SHA256=NONE\nISSUER_FINAL_ENVELOPE_SHA256="+sha(envelope_raw)+b"\nCERTIFICATE_SHA256="+sha(cert_raw)+b"\nPLAN_SHA256="+cert[b"PLAN_SHA256"]+b"\nRUNNER_SHA256="+cert[b"RUNNER_SHA256"]+b"\nRECOVERY_SHA256="+sha(source_raw)+b"\nE0366_SNAPSHOT_BYTES=2303269\nE0366_SNAPSHOT_LF=23672\nE0366_SNAPSHOT_SHA256="+SNAPSHOT_EXPECT[2]+b"\nE0366_SNAPSHOT_TERMINAL_HEX="+SNAPSHOT_TERMINAL_HEX+b"\nV15_SHA256="+cert[b"V15_SHA256"]+b"\nSUITE="+b",".join(PROBES)+b"\nATTEMPT_PATH_HEX="+(b"/var/lib/p27-e001-host-v15/attempts/"+auth).hex().encode()+b"\nSTAGE_PATH_HEX="+(b"/tmp/p27-e001-host-v15/"+auth).hex().encode()+b"\nCGROUP_PATH_HEX="+(b"/sys/fs/cgroup/p27-e001-host-v15/"+auth).hex().encode()+b"\nACTOR_ENTRY_CAPS=00000000000401c0\nPAYLOAD_FINAL_CAPS=0000000000000000\nABSOLUTE_EXPIRY_REALTIME_NS="+cert[b"ABSOLUTE_EXPIRY_REALTIME_NS"]+b"\nCONSUMED_OR_EFFECT_UNKNOWN=1\nRETRY_ALLOWED=0\nINTENT_END=1\n")
+
+def verify_attempt_fd(number):
+ held=os.fstat(number);fd_access(number,os.O_RDONLY);named=os.stat(AUTH,dir_fd=5,follow_symlinks=False)
+ need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)==(named.st_dev,named.st_ino,named.st_mode,named.st_nlink,named.st_uid,named.st_gid))
+ need(stat.S_ISDIR(held.st_mode) and held.st_uid==held.st_gid==0 and stat.S_IMODE(held.st_mode)==0o700 and held.st_nlink==2)
+ base_check(5,CERT,b"ATTEMPT_BASE");return held
+
+def retain_attempt_dirfd(context):
+ context[b"faults"].update((b"ATTEMPT_DIRFD_UNKNOWN",b"EXTERNAL_SURVIVAL_TRANSFER_REQUIRED"))
+ context[b"consumption_state"]=b"DIRFD_HORIZON_CLOSED_NO_REOPEN"
+ return False
+
+def consume_attempt(context,cert_raw,envelope_raw,source_raw,deadline):
+ context[b"consume_deadline"]=deadline;context[b"consumption_state"]=b"MKDIR_CALL_ENTERED"
+ try:
+  checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+  os.mkdir(AUTH,0o700,dir_fd=5)
+  post_deadline(deadline);checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+ except FileExistsError as error:
+  context[b"consumption_state"]=b"COLLISION";context[b"collision"]=True;context[b"attempt_state"]=b"COLLISION_DETECTED";context[b"faults"].add(b"ATTEMPT_COLLISION")
+  context[b"collision_identity"]=(0,0,0,0,0,0)
+  try:
+   os.close(context[b"attempt_base_fd"]);context[b"attempt_base_fd"]=-1;context[b"attempt_base_closed_on_collision"]=True;context[b"attempt_state"]=b"COLLISION_CLOSED"
+  except BaseException:
+   context[b"attempt_state"]=b"COLLISION_BASE_HELD_FOR_TRANSFER";context[b"faults"].add(b"ATTEMPT_DIRFD_UNKNOWN")
+  raise FaultSet(set(context[b"faults"])) from error
+ except CertificateExpired:
+  context[b"consumption_state"]=b"MKDIR_EFFECT_UNKNOWN";context[b"faults"].update((b"CERTIFICATE_EXPIRED",b"ATTEMPT_NAMESPACE_UNKNOWN"))
+  raise
+ except BaseException as error:
+  context[b"consumption_state"]=b"MKDIR_EFFECT_UNKNOWN";context[b"faults"].add(b"ATTEMPT_NAMESPACE_UNKNOWN")
+  raise FaultSet(set(context[b"faults"])) from error
+ context[b"consumption_state"]=b"MKDIR_RETURNED_CREATED";context[b"local_fd_state"]=b"LOCAL_UNVERIFIED";number=-1
+ try:
+  context[b"consumption_state"]=b"IMMEDIATE_DIRFD_CALL_ENTERED"
+  checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+  number=os.open(AUTH,os.O_RDONLY|os.O_DIRECTORY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=5)
+  post_deadline(deadline);checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+  verify_attempt_fd(number);context[b"local_fd_state"]=b"LOCAL_VERIFIED";checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+  context[b"attempt"]=number;number=-1;context[b"local_fd_state"]=b"PUBLISHED";context[b"attempt_state"]=b"PUBLISHED";context[b"consumption_state"]=b"DIRFD_PUBLISHED_VERIFIED"
+ except CertificateExpired:
+  context[b"consumption_state"]=b"DIRFD_EFFECT_UNKNOWN";context[b"faults"].update((b"CERTIFICATE_EXPIRED",b"ATTEMPT_DIRFD_UNKNOWN"))
+  raise
+ except BaseException as error:
+  context[b"consumption_state"]=b"DIRFD_EFFECT_UNKNOWN";context[b"faults"].add(b"ATTEMPT_DIRFD_UNKNOWN")
+  raise FaultSet(set(context[b"faults"])) from error
+ finally:
+  if number>=0:
+   try:os.close(number)
+   except OSError:pass
+ context[b"consumption_state"]=b"BASE_FSYNC_EFFECT_UNKNOWN"
+ try:
+  checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline);os.fsync(5);post_deadline(deadline);checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+ except CertificateExpired:
+  context[b"faults"].update((b"CERTIFICATE_EXPIRED",b"ATTEMPT_BASE_DURABILITY_UNKNOWN"));raise
+ except BaseException as error:
+  context[b"faults"].add(b"ATTEMPT_BASE_DURABILITY_UNKNOWN");raise FaultSet(set(context[b"faults"])) from error
+ context[b"consumption_state"]=b"BASE_DURABLE"
+ body=attempt_intent(AUTH,CERT,cert_raw,envelope_raw,source_raw)
+ state,digest=durable_once(context,b"intent.v5",body,deadline,True,PRE_STAGE_REMAIN_NS)
+ if state!=DURABLE_VERIFIED:
+  context[b"faults"].add(b"INTENT_DURABILITY_UNKNOWN");raise FaultSet(set(context[b"faults"]))
+ context[b"intent_durable"]=True;context[b"intent_count"]=1;context[b"commit_count"]=1;context[b"chain_sha"]=digest;context[b"record_seq"]=1
+ context[b"consumption_state"]=b"INTENT_DURABLE"
+ os.close(context[b"attempt_base_fd"]);context[b"attempt_base_fd"]=-1
+ return digest
+
+def release_record(context,values):
+ seq=next_record(context);predecessor=context[b"chain_sha"];origin=time.monotonic_ns();deadline=udec(values[b"release_record_deadline_ns"]);need(origin<=deadline and deadline==udec(values[b"release_origin_ns"])+RELEASE_RECORD_OFFSET_NS)
+ body=(b"P27E001_RELEASE_STATE_V5\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+predecessor+b"\nORDINAL="+values[b"ordinal"]+b"\nPROBE="+values[b"probe"]+b"\nOUTER_PID="+values[b"outer_pid"]+b"\nOUTER_STARTTIME="+values[b"outer_starttime"]+b"\nPIDFD_BOUND="+values[b"pidfd_bound"]+b"\nPIDFD_EXIT_READY_OBSERVED=0\nSTOPPED_RAW_STATUS="+values[b"stopped_raw_status"]+b"\nCGROUP_MEMBER="+values[b"cgroup_member"]+b"\nCGROUP_DEV="+values[b"cgroup_dev"]+b"\nCGROUP_INO="+values[b"cgroup_ino"]+b"\nCGROUP_MODE="+values[b"cgroup_mode"]+b"\nCGROUP_NLINK="+values[b"cgroup_nlink"]+b"\nCGROUP_UID="+values[b"cgroup_uid"]+b"\nCGROUP_GID="+values[b"cgroup_gid"]+b"\nARGV_SHA256="+values[b"argv_sha256"]+b"\nENV_SHA256="+values[b"env_sha256"]+b"\nRELEASE_ORIGIN_NS="+values[b"release_origin_ns"]+b"\nLAUNCH_OVERALL_DEADLINE_NS="+values[b"launch_overall_deadline_ns"]+b"\nRELEASE_RECORD_DEADLINE_NS="+values[b"release_record_deadline_ns"]+b"\nRELEASE_REPLY_DEADLINE_NS="+values[b"release_reply_deadline_ns"]+b"\nB_RECORD_ORIGIN_NS="+str(origin).encode()+b"\nB_RECORD_DEADLINE_NS="+str(deadline).encode()+b"\nCERTIFICATE_EXPIRY_REALTIME_NS="+CERT[b"ABSOLUTE_EXPIRY_REALTIME_NS"]+b"\nSTATE=RELEASE_AUTHORIZED\nRELEASE_END=1\n")
+ state,digest=durable_once(context,b"release-"+values[b"probe"]+b".v5",body,deadline,True,udec(values[b"launch_overall_deadline_ns"])-deadline)
+ if state!=DURABLE_VERIFIED:raise FaultSet({b"RELEASE_RECORD_DURABILITY_UNKNOWN"})
+ context[b"chain_sha"]=digest;context[b"release_sha"]=digest;return digest
+
+CANDIDATE_KEYS=(b"ordinal",b"probe",b"release_record_sha256",b"release_origin_ns",b"release_return_ns",b"host_complete_ns",b"capture_done_ns",b"direct_wait_state",b"outer_raw_status",b"pidfd_bound",b"pidfd_exit_ready_observed",b"stdout_len",b"stdout_sha256",b"stdout_eof",b"stdout_overflow",b"stderr_len",b"stderr_sha256",b"stderr_eof",b"stderr_overflow",b"cgroup_empty",b"parser_language",b"parser_structure",b"parser_semantics",b"candidate",b"terminal",b"certificate_expiry_realtime_ns")
+FINAL_REPORT_KEYS=(b"AUTH_ID",b"RECORD_SEQ",b"PREDECESSOR_SHA256",b"OUTCOME_KIND",b"SUITE",b"ENTERED_COUNT",b"COMMITTED_COUNT",b"REAPED_COUNT",b"STOPPED_COUNT",b"STOP_ORDINAL",b"STOP_PROBE",b"STAGE_STATE",b"ATTEMPT_STATE",b"CONTAINMENT_STATE",b"EMPTY_STATE",b"REMOVAL_STATE",b"PRIMARY",b"FAULT_SET",b"CHAIN_BEFORE_REPORT_SHA256",b"KILL_CALL_COUNT",b"KILL_STATE",b"KILL_TICKET_STATE",b"ACK_STATE",b"RECONCILIATION_STATE",b"OWNER_CLOSURE_STATE",b"FAILURE_ORIGIN_NS",b"CLEANUP_EFFECT_DEADLINE_NS",b"TERMINAL_ORIGIN_NS",b"TERMINAL_DEADLINE_NS",b"TERMINAL_SCHEDULE_HEX",b"CERTIFICATE_LIVE_AT_REPORT",b"RETRY_ALLOWED",b"DISPOSITION",b"PHASE_DEADLINE_NS")
+
+def forensic_body(values):
+ return (b"RELEASE_ORIGIN_NS="+values[b"release_origin_ns"]+b"\nRELEASE_RETURN_NS="+values[b"release_return_ns"]+b"\nHOST_COMPLETE_NS="+values[b"host_complete_ns"]+b"\nCAPTURE_DONE_NS="+values[b"capture_done_ns"]+b"\nDIRECT_WAIT="+values[b"direct_wait_state"]+b"\nOUTER_RAW_STATUS="+values[b"outer_raw_status"]+b"\nPIDFD_BOUND="+values[b"pidfd_bound"]+b"\nPIDFD_EXIT_READY_OBSERVED="+values[b"pidfd_exit_ready_observed"]+b"\nSTDOUT_BYTES="+values[b"stdout_len"]+b"\nSTDOUT_SHA256="+values[b"stdout_sha256"]+b"\nSTDOUT_EOF="+values[b"stdout_eof"]+b"\nSTDOUT_OVERFLOW="+values[b"stdout_overflow"]+b"\nSTDERR_BYTES="+values[b"stderr_len"]+b"\nSTDERR_SHA256="+values[b"stderr_sha256"]+b"\nSTDERR_EOF="+values[b"stderr_eof"]+b"\nSTDERR_OVERFLOW="+values[b"stderr_overflow"]+b"\nCGROUP_EMPTY="+values[b"cgroup_empty"]+b"\nPARSER_LANGUAGE="+values[b"parser_language"]+b"\nPARSER_STRUCTURE="+values[b"parser_structure"]+b"\nPARSER_SEMANTICS="+values[b"parser_semantics"]+b"\nCANDIDATE="+values[b"candidate"]+b"\nTERMINAL="+values[b"terminal"]+b"\nCERTIFICATE_EXPIRY_REALTIME_NS="+values[b"certificate_expiry_realtime_ns"]+b"\nTOPOLOGY=V15_INTERNAL_VALIDATION_REPORTED_BY_COMPLETE_TRANSCRIPT\nEXTERNAL_TOPOLOGY_RECONSTRUCTION=UNAVAILABLE\n")
+
+def validated_record(context,values,ack_deadline):
+ seq=next_record(context);origin=time.monotonic_ns();deadline=min(ack_deadline,origin+RECORD_NS);need(origin+RECORD_NS<=ack_deadline)
+ body=(b"P27E001_PROBE_STATE_V5\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+context[b"chain_sha"]+b"\nORDINAL="+values[b"ordinal"]+b"\nPROBE="+values[b"probe"]+b"\nSTATE=VALIDATED_CANDIDATE\n"+forensic_body(values)+b"B_RECORD_ORIGIN_NS="+str(origin).encode()+b"\nB_RECORD_DEADLINE_NS="+str(deadline).encode()+b"\nRECORD_END=1\n")
+ state,digest=durable_once(context,b"receipt-"+values[b"probe"]+b"-validated.v5",body,deadline,True)
+ if state!=DURABLE_VERIFIED:raise FaultSet({b"VALIDATED_DURABILITY_UNKNOWN"})
+ context[b"chain_sha"]=digest;context[b"validated_sha"]=digest;context[b"validated_values"]=dict(values);return digest
+
+def ack_intent_record(context,ordinal,probe,actor_ack,received,ack_deadline):
+ values=context[b"validated_values"];seq=next_record(context);origin=time.monotonic_ns();deadline=min(ack_deadline,origin+RECORD_NS);need(origin+RECORD_NS<=ack_deadline)
+ body=(b"P27E001_PROBE_STATE_V5\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+context[b"chain_sha"]+b"\nORDINAL="+str(ordinal).encode()+b"\nPROBE="+probe+b"\nSTATE=ACK_COMMIT_INTENT\n"+forensic_body(values)+b"ACTOR_ACK_INTENT_NS="+str(actor_ack).encode()+b"\nB_ACK_RECEIVED_NS="+str(received).encode()+b"\nB_RECORD_ORIGIN_NS="+str(origin).encode()+b"\nB_RECORD_DEADLINE_NS="+str(deadline).encode()+b"\nRECORD_END=1\n")
+ state,digest=durable_once(context,b"receipt-"+probe+b"-ack-intent.v5",body,deadline,True)
+ if state!=DURABLE_VERIFIED:raise FaultSet({b"ACK_DURABILITY_UNKNOWN"})
+ context[b"chain_sha"]=digest;return digest
+
+def committed_seen_record(context,ordinal,probe,seen_raw,ack_sha,host_complete,ack_deadline):
+ need(time.monotonic_ns()<=ack_deadline and time.monotonic_ns()-host_complete<=ACK_NS)
+ seq=next_record(context);predecessor=context[b"chain_sha"];need(predecessor==ack_sha)
+ body=(b"P27E001_PROBE_STATE_V5\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+predecessor+b"\nORDINAL="+str(ordinal).encode()+b"\nPROBE="+probe+b"\nSTATE=COMMITTED_SEEN\nACK_SHA256="+ack_sha+b"\nACTOR_SEEN_PACKET_SHA256="+sha(seen_raw)+b"\nACTOR_SEEN_MESSAGE_SEQ="+str(CONTROL_RECV_SEQ).encode()+b"\nHOST_COMPLETE_NS="+str(host_complete).encode()+b"\nACK_DEADLINE_NS="+str(ack_deadline).encode()+b"\nRECORD_END=1\n")
+ state,digest=durable_once(context,b"receipt-"+probe+b"-committed-seen.v5",body,ack_deadline,True,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS)
+ if state!=DURABLE_VERIFIED:raise FaultSet({b"ACK_DURABILITY_UNKNOWN"})
+ context[b"chain_sha"]=digest;context[b"committed_seen_sha"]=digest;return digest
+
+def populated(number):
+ os.lseek(number,0,os.SEEK_SET);raw=os.read(number,4096)
+ values=[x for x in raw.splitlines() if x.startswith(b"populated ")]
+ need(len(values)==1 and values[0] in (b"populated 0",b"populated 1"));return values[0]==b"populated 1"
+
+def observe_population(context):
+ number=context.get(b"events_fd",-1)
+ if number<0:number=context.get(b"root_events_fd",-1)
+ if number<0:return False
+ try:return populated(number)
+ except BaseException:
+  context[b"faults"].add(b"CONTAINMENT_OBSERVATION_UNKNOWN");return None
+
+def drain(number,target):
+ overflow=False;eof=False
+ while True:
+  try:chunk=os.read(number,65536)
+  except BlockingIOError:break
+  except InterruptedError:continue
+  except BaseException as error:raise FaultSet({b"CAPTURE_IO"}) from error
+  if chunk==b"":eof=True;break
+  room=STREAM_CAP-len(target)
+  if room>0:target.extend(chunk[:room])
+  if len(chunk)>room:overflow=True
+ return overflow,eof
+
+def recv_monitored(control,actor_pidfd,deadline,rights):
+ checkpoint(CERT,0,deadline)
+ poller=select.poll();poller.register(control.fileno(),select.POLLIN|select.POLLHUP|select.POLLERR);poller.register(actor_pidfd,select.POLLIN|select.POLLHUP|select.POLLERR)
+ while True:
+  checkpoint(CERT,0,deadline);remaining=deadline-time.monotonic_ns()
+  if remaining<=0:raise FaultSet({b"CONTROL_TIMEOUT"})
+  try:events=poller.poll(max(1,min(50,(remaining+999999)//1000000)))
+  except InterruptedError:continue
+  cmask=0;amask=0
+  for number,event in events:
+   if number==control.fileno():cmask|=event
+   if number==actor_pidfd:amask|=event
+  if cmask&select.POLLIN:
+   installed=[];bad=False
+   try:
+    raw,ancillary,flags,address=control.recvmsg(65536,socket.CMSG_SPACE(MAX_RIGHTS*array.array("i").itemsize))
+    for level,kind,data in ancillary:
+     if level==socket.SOL_SOCKET and kind==socket.SCM_RIGHTS:
+      cells=array.array("i");whole=len(data)-(len(data)%cells.itemsize)
+      if whole:cells.frombytes(data[:whole]);installed.extend(cells)
+      if whole!=len(data):bad=True
+     else:bad=True
+    checkpoint(CERT,0,deadline)
+    if time.monotonic_ns()>deadline:raise FaultSet({b"CONTROL_TIMEOUT"})
+    if flags&(socket.MSG_TRUNC|socket.MSG_CTRUNC):raise FaultSet({b"CONTROL_TRUNCATION"})
+    if address is not None or not raw:raise FaultSet({b"CONTROL_MALFORMED"})
+    if bad:raise FaultSet({b"FD_TRANSFER"})
+    if raw.startswith(b"V5_ABORT|"):
+     values,faults=parse_abort(raw)
+     if installed or ancillary:faults.add(b"FD_TRANSFER")
+     error=RemoteAbort(faults);error.values=values;raise error
+    if rights==0:
+     if installed or ancillary:raise FaultSet({b"FD_TRANSFER"})
+    elif len(ancillary)!=1 or len(installed)!=rights:raise FaultSet({b"FD_TRANSFER"})
+    return raw,tuple(installed)
+   except BlockingIOError:
+    close_numbers(installed);continue
+   except BaseException:
+    close_numbers(installed);raise
+  if amask:raise PidfdActorLost("pidfd-ready")
+  if cmask&(select.POLLHUP|select.POLLERR):raise ControlLost("control-hup")
+
+def wait_sendable(control,deadline):
+ poller=select.poll();poller.register(control.fileno(),select.POLLOUT|select.POLLHUP|select.POLLERR);poller.register(4,select.POLLIN|select.POLLHUP|select.POLLERR)
+ while True:
+  checkpoint(CERT,0,deadline);remaining=deadline-time.monotonic_ns()
+  if remaining<=0:raise FaultSet({b"CONTROL_TIMEOUT"})
+  try:events=poller.poll(max(1,min(50,(remaining+999999)//1000000)))
+  except InterruptedError:continue
+  cmask=amask=0
+  for number,event in events:
+   if number==control.fileno():cmask|=event
+   elif number==4:amask|=event
+  if amask:raise PidfdActorLost("pidfd-ready")
+  if cmask&select.POLLOUT:return
+  if cmask&(select.POLLHUP|select.POLLERR):raise ControlLost("control-hup")
+
+def send_exact(control,raw,deadline):
+ global CONTROL_SEND_STATE
+ while True:
+  wait_sendable(control,deadline);CONTROL_SEND_STATE=b"SEND_EFFECT_UNKNOWN"
+  try:count=control.send(raw)
+  except BlockingIOError:continue
+  except BaseException as error:raise SendEffectUnknown("send") from error
+  if count!=len(raw):raise SendEffectUnknown("short-send")
+  checkpoint(CERT,0,deadline)
+  if time.monotonic_ns()>deadline:raise SendEffectUnknown("post-send-deadline")
+  CONTROL_SEND_STATE=b"SENT";return
+
+EXTERNAL_MAX_RIGHTS=10
+EXTERNAL_SPEC={
+ b"REFUSAL_CLOSE_OFFER":(b"REFUSAL_CLOSED_NO_CONSUME",b"ISSUER_WAIT_REFUSAL",b"NO_CONSUME_DURABLE_CLOSE"),
+ b"REFUSAL_CLOSE_ACCEPTED":(b"ISSUER_REFUSAL_DURABLE",b"B_WAIT_REFUSAL_ACCEPTED",b"DURABLE_NO_REPLAY_RECEIPT"),
+ b"TRANSFER_OFFER":(b"FROZEN_EXTERNAL_TRANSFER",b"ISSUER_WAIT_TRANSFER",b"SCM_RIGHTS_TRANSFER"),
+ b"TRANSFER_ACCEPTED":(b"ISSUER_OWNERSHIP_DURABLE",b"B_WAIT_TRANSFER_ACCEPTED",b"DURABLE_OWNERSHIP_RECEIPT")
+}
+
+def external_packet(kind,state,receiver,effect,deadline,pairs):
+ global EXTERNAL_SEND_SEQ
+ need(kind in EXTERNAL_SPEC and EXTERNAL_SPEC[kind]==(state,receiver,effect))
+ values={}
+ for key,value in pairs:
+  need(key and value and key not in values and all(x not in key+value for x in (10,61,124)));values[key]=value
+ EXTERNAL_SEND_SEQ+=1
+ body=(b"P27E001_EXTERNAL_CONTROL_V5|kind="+kind+b"|protocol_version=5|session_id="+AUTH+b"|tx_sequence="+str(EXTERNAL_SEND_SEQ).encode()+b"|sender=B|sender_state="+state+b"|expected_receiver_state="+receiver+b"|effect_state="+effect+b"|absolute_deadline_ns="+str(deadline).encode())
+ for key,value in pairs:body+=b"|"+key+b"="+value
+ need(len(body)<65536);return body+b"\n"
+
+def parse_external(raw,kind,keys,expected_sequence,deadline):
+ global EXTERNAL_RECV_SEQ
+ need(type(raw)is bytes and raw.endswith(b"\n") and raw.count(b"\n")==1 and len(raw)<65536 and all(x==10 or 32<=x<=126 for x in raw))
+ common=(b"kind",b"protocol_version",b"session_id",b"tx_sequence",b"sender",b"sender_state",b"expected_receiver_state",b"effect_state",b"absolute_deadline_ns")
+ fields=raw[:-1].split(b"|");need(fields[0]==b"P27E001_EXTERNAL_CONTROL_V5" and len(fields)==1+len(common)+len(keys))
+ values={}
+ for key,item in zip(common+keys,fields[1:]):
+  parts=item.split(b"=",1);need(len(parts)==2 and parts[0]==key and parts[1] and key not in values);values[key]=parts[1]
+ need(values[b"kind"]==kind and values[b"protocol_version"]==b"5" and values[b"session_id"]==AUTH and values[b"sender"]==b"ISSUER")
+ need(values[b"sender_state"]==EXTERNAL_SPEC[kind][0] and values[b"expected_receiver_state"]==EXTERNAL_SPEC[kind][1] and values[b"effect_state"]==EXTERNAL_SPEC[kind][2])
+ sequence=udec(values[b"tx_sequence"],1);need(sequence==expected_sequence and sequence==EXTERNAL_RECV_SEQ+1);EXTERNAL_RECV_SEQ=sequence
+ need(udec(values[b"absolute_deadline_ns"],1)==deadline);return values
+
+def external_send(control,raw,deadline,rights=()):
+ need(len(rights)<=EXTERNAL_MAX_RIGHTS and len(set(rights))==len(rights) and all(type(x)is int and x>=0 for x in rights))
+ ancillary=[] if not rights else [(socket.SOL_SOCKET,socket.SCM_RIGHTS,array.array("i",rights))]
+ while True:
+  checkpoint(CERT,0,deadline);now=time.monotonic_ns();need(now<=deadline)
+  poller=select.poll();poller.register(control.fileno(),select.POLLOUT|select.POLLHUP|select.POLLERR);poller.register(15,select.POLLIN|select.POLLHUP|select.POLLERR)
+  try:events=poller.poll(max(1,min(50,(deadline-now+999999)//1000000)))
+  except InterruptedError:continue
+  cmask=omask=0
+  for number,event in events:
+   if number==control.fileno():cmask|=event
+   elif number==15:omask|=event
+  if omask:raise FaultSet({b"TRANSFER_PROTOCOL_UNKNOWN"})
+  if cmask&select.POLLOUT:
+   try:count=control.sendmsg((raw,),ancillary)
+   except BlockingIOError:continue
+   except BaseException as error:raise SendEffectUnknown("external-send") from error
+   if count!=len(raw):raise SendEffectUnknown("external-short-send")
+   checkpoint(CERT,0,deadline);need(time.monotonic_ns()<=deadline);return
+  if cmask&(select.POLLHUP|select.POLLERR):raise FaultSet({b"TRANSFER_PROTOCOL_UNKNOWN"})
+
+def external_recv(control,kind,keys,expected_sequence,deadline):
+ poller=select.poll();poller.register(control.fileno(),select.POLLIN|select.POLLHUP|select.POLLERR);poller.register(15,select.POLLIN|select.POLLHUP|select.POLLERR)
+ while True:
+  checkpoint(CERT,0,deadline);now=time.monotonic_ns();need(now<=deadline)
+  try:events=poller.poll(max(1,min(50,(deadline-now+999999)//1000000)))
+  except InterruptedError:continue
+  cmask=omask=0
+  for number,event in events:
+   if number==control.fileno():cmask|=event
+   elif number==15:omask|=event
+  if omask:raise FaultSet({b"TRANSFER_PROTOCOL_UNKNOWN"})
+  if cmask&select.POLLIN:
+   installed=[]
+   try:
+    raw,ancillary,flags,address=control.recvmsg(65536,socket.CMSG_SPACE(EXTERNAL_MAX_RIGHTS*array.array("i").itemsize))
+    for level,ctype,data in ancillary:
+     if level==socket.SOL_SOCKET and ctype==socket.SCM_RIGHTS:
+      cells=array.array("i");whole=len(data)-(len(data)%cells.itemsize)
+      if whole:cells.frombytes(data[:whole]);installed.extend(cells)
+    need(not installed and not ancillary and not flags&(socket.MSG_TRUNC|socket.MSG_CTRUNC) and address is None)
+    return parse_external(raw,kind,keys,expected_sequence,deadline)
+   finally:close_numbers(installed)
+  if cmask&(select.POLLHUP|select.POLLERR):raise FaultSet({b"TRANSFER_PROTOCOL_UNKNOWN"})
+
+def external_identity(kind,number,context):
+ held=os.fstat(number)
+ need(kind in (b"ATTEMPT_DIRFD",b"ATTEMPT_BASE_DIRFD",b"STAGE_DIRFD",b"CGROUP_DIRFD",b"OUT_FD",b"ERR_FD",b"EVENTS_FD",b"KILL_FD",b"OUTER_PIDFD",b"CGROUP_BASE_DIRFD",b"ACTOR_CONTROL_FD"))
+ access=fcntl.fcntl(number,fcntl.F_GETFL)&os.O_ACCMODE
+ if kind==b"OUTER_PIDFD":
+  pid=pidfd_pid(number);start=proc_starttime(pid)
+  return kind+b":"+str(pid).encode()+b":"+str(start).encode()+b":PIDFD:ACCESS="+str(access).encode()
+ if kind==b"ACTOR_CONTROL_FD":
+  flags=fcntl.fcntl(number,fcntl.F_GETFL);need(stat.S_ISSOCK(held.st_mode) and flags&os.O_NONBLOCK)
+  return kind+b":"+str(held.st_dev).encode()+b":"+str(held.st_ino).encode()+b":SOCK_SEQPACKET:ACCESS="+str(access).encode()+b":NONBLOCK=1"
+ return kind+b":"+str(held.st_dev).encode()+b":"+str(held.st_ino).encode()+b":"+format(held.st_mode,"o").encode()+b":"+str(held.st_nlink).encode()+b":"+str(held.st_uid).encode()+b":"+str(held.st_gid).encode()+b":ACCESS="+str(access).encode()
+
+def external_capabilities(control,context):
+ slots=((b"ATTEMPT_DIRFD",b"attempt"),(b"ATTEMPT_BASE_DIRFD",b"attempt_base_fd"),(b"STAGE_DIRFD",b"stage_fd"),(b"CGROUP_DIRFD",b"cgfd"),(b"OUT_FD",b"out_fd"),(b"ERR_FD",b"err_fd"),(b"EVENTS_FD",b"events_fd"),(b"KILL_FD",b"kill_fd"),(b"OUTER_PIDFD",b"outer_pidfd"),(b"CGROUP_BASE_DIRFD",b"cgroup_base_fd"))
+ result=[]
+ for kind,key in slots:
+  number=context.get(key,-1)
+  if number>=0:result.append((kind,key,number,external_identity(kind,number,context)))
+ if control is not None:result.append((b"ACTOR_CONTROL_FD",b"actor_control",control.fileno(),external_identity(b"ACTOR_CONTROL_FD",control.fileno(),context)))
+ need(result and len(result)<=EXTERNAL_MAX_RIGHTS);return tuple(result)
+
+def issuer_refusal_close(context,ack_raw,receipt_raw,refusal_schedule):
+ control=context[b"transfer_control"];deadline=refusal_schedule[b"REFUSAL_CLOSURE"];seq=context[b"external_record_seq"]+1;predecessor=context[b"external_chain_sha"]
+ body=((b"record_seq",str(seq).encode()),(b"predecessor_sha256",predecessor),(b"refusal_ack_sha256",sha(ack_raw)),(b"actor_receipt_sha256",sha(receipt_raw)),(b"refusal_schedule_hex",schedule_hex(refusal_schedule,REFUSAL_PHASE_SPEC)),(b"commit_count",b"0"),(b"attempt_state",b"ABSENT_KNOWN"),(b"intent_count",b"0"),(b"no_replay",b"1"))
+ offer=external_packet(b"REFUSAL_CLOSE_OFFER",b"REFUSAL_CLOSED_NO_CONSUME",b"ISSUER_WAIT_REFUSAL",b"NO_CONSUME_DURABLE_CLOSE",deadline,body)
+ context[b"external_send_state"]=b"REFUSAL_OFFER_SEND_EFFECT_UNKNOWN"
+ try:external_send(control,offer,deadline);context[b"external_send_state"]=b"REFUSAL_OFFER_SENT"
+ except SendEffectUnknown:context[b"external_send_state"]=b"REFUSAL_OFFER_EFFECT_UNKNOWN"
+ keys=(b"offer_sha256",b"record_seq",b"predecessor_sha256",b"durable_receipt_sha256",b"issuer_signature_hex",b"owner_pid",b"owner_starttime",b"no_replay")
+ values=external_recv(control,b"REFUSAL_CLOSE_ACCEPTED",keys,seq,deadline)
+ need(values[b"offer_sha256"]==sha(offer) and udec(values[b"record_seq"],1)==seq and values[b"predecessor_sha256"]==predecessor)
+ digest=h64(values[b"durable_receipt_sha256"]);signature=values[b"issuer_signature_hex"];need(len(signature)==128 and all(x in b"0123456789abcdef" for x in signature))
+ need(values[b"owner_pid"]==CERT[b"EXTERNAL_OWNER_PID"] and values[b"owner_starttime"]==CERT[b"EXTERNAL_OWNER_STARTTIME"] and values[b"no_replay"]==b"1")
+ need(pidfd_pid(15)==udec(CERT[b"EXTERNAL_OWNER_PID"],2) and proc_starttime(udec(CERT[b"EXTERNAL_OWNER_PID"],2))==udec(CERT[b"EXTERNAL_OWNER_STARTTIME"],1))
+ context[b"external_record_seq"]=seq;context[b"external_chain_sha"]=digest;context[b"refusal_closure_sha"]=digest;return digest
+
+def external_transfer(control,context,reason):
+ need((context[b"consumed"] or context.get(b"refusal_closed",False)) and not context[b"owner_released"] and reason in FAULT_ORDER)
+ deadline=certificate_mono_expiry(CERT);caps=external_capabilities(control,context);manifest=b";".join(item[3] for item in caps)
+ seq=context[b"external_record_seq"]+1;predecessor=context[b"external_chain_sha"]
+ body=((b"record_seq",str(seq).encode()),(b"predecessor_sha256",predecessor),(b"reason",reason),(b"rights_count",str(len(caps)).encode()),(b"rights_manifest_hex",manifest.hex().encode()),(b"rights_manifest_sha256",sha(manifest)),(b"actor_pid",str(ACTOR_PID).encode()),(b"actor_starttime",str(ACTOR_STARTTIME).encode()),(b"owner_pid",CERT[b"EXTERNAL_OWNER_PID"]),(b"owner_starttime",CERT[b"EXTERNAL_OWNER_STARTTIME"]),(b"terminal_phase",context.get(b"terminal_phase",b"NOT_STARTED")),(b"terminal_subject_sha256",context.get(b"terminal_subject",context.get(b"collision_transfer_claim_sha",b"0"*64))),(b"chain_head_sha256",context[b"chain_sha"]),(b"outcome_durable",b"1" if context[b"outcome_durable"] else b"0"),(b"control_state",context[b"control_state"]),(b"actor_state",context[b"actor_state"]),(b"send_state",context[b"send_state"]),(b"attempt_state",context[b"attempt_state"]),(b"collision_closed",b"1" if context[b"collision"] else b"0"),(b"attempt_base_closed",b"1" if context.get(b"attempt_base_fd",-1)<0 else b"0"),(b"commit_count",str(context[b"commit_count"]).encode()),(b"intent_count",str(context[b"intent_count"]).encode()),(b"no_replay",b"1"))
+ offer=external_packet(b"TRANSFER_OFFER",b"FROZEN_EXTERNAL_TRANSFER",b"ISSUER_WAIT_TRANSFER",b"SCM_RIGHTS_TRANSFER",deadline,body)
+ context[b"transfer_state"]=b"OFFER_SEND_EFFECT_UNKNOWN"
+ try:external_send(context[b"transfer_control"],offer,deadline,tuple(item[2] for item in caps));context[b"transfer_state"]=b"OFFER_SENT"
+ except SendEffectUnknown:context[b"transfer_state"]=b"OFFER_EFFECT_UNKNOWN"
+ keys=(b"offer_sha256",b"record_seq",b"predecessor_sha256",b"held_manifest_sha256",b"durable_receipt_sha256",b"issuer_signature_hex",b"receiver_pid",b"receiver_starttime",b"no_replay")
+ values=external_recv(context[b"transfer_control"],b"TRANSFER_ACCEPTED",keys,seq,deadline)
+ need(values[b"offer_sha256"]==sha(offer) and udec(values[b"record_seq"],1)==seq and values[b"predecessor_sha256"]==predecessor and values[b"held_manifest_sha256"]==sha(manifest))
+ digest=h64(values[b"durable_receipt_sha256"]);signature=values[b"issuer_signature_hex"];need(len(signature)==128 and all(x in b"0123456789abcdef" for x in signature))
+ need(values[b"receiver_pid"]==CERT[b"EXTERNAL_OWNER_PID"] and values[b"receiver_starttime"]==CERT[b"EXTERNAL_OWNER_STARTTIME"] and values[b"no_replay"]==b"1")
+ owner_pid=udec(CERT[b"EXTERNAL_OWNER_PID"],2);need(pidfd_pid(15)==owner_pid and proc_starttime(owner_pid)==udec(CERT[b"EXTERNAL_OWNER_STARTTIME"],1))
+ for kind,key,number,identity in caps:
+  if key==b"actor_control":
+   try:control.close()
+   except BaseException:pass
+   context[b"actor_control"]=None
+  else:
+   try:os.close(number)
+   except OSError:pass
+   context[key]=-1
+ context[b"external_record_seq"]=seq;context[b"external_chain_sha"]=digest;context[b"transfer_receipt_sha"]=digest;context[b"transfer_state"]=b"TRANSFER_ACCEPTED_DURABLE";context[b"owner_released"]=True
+ return digest
+
+def freeze_failure_deadlines(context):
+ if context.get(b"failure_origin") is None:
+  origin=time.monotonic_ns();overall=origin+FAILURE_TOTAL_NS;cleanup=origin+CLEANUP_EFFECT_NS;recovery=cleanup+RECOVERY_RECORD_NS
+  need(overall-recovery==FINAL_TOTAL_NS and cleanup==overall-FAILURE_TAIL_NS)
+  context[b"failure_origin"]=origin;context[b"failure_overall_deadline"]=overall;context[b"cleanup_effect_deadline"]=cleanup;context[b"recovery_deadline"]=recovery
+  context[b"terminal_origin"]=recovery;context[b"terminal_deadline"]=overall;context[b"terminal_schedule"]=exact_schedule(recovery,overall,TERMINAL_PHASE_SPEC)
+ else:
+  need(context[b"failure_overall_deadline"]==context[b"failure_origin"]+FAILURE_TOTAL_NS)
+ return context[b"failure_overall_deadline"]
+
+def kill_once(context,reason):
+ if context[b"kill_call_attempted"]:return
+ need(context[b"kill_authority_consumed"]);context[b"kill_call_attempted"]=True;context[b"kill_state"]=b"TICKET_COMMITTING"
+ freeze_failure_deadlines(context);ticket_deadline=context[b"failure_origin"]+ACTOR_DISABLE_NS+KILL_TICKET_NS;cleanup_deadline=context[b"cleanup_effect_deadline"]
+ if time.monotonic_ns()>ticket_deadline:
+  context[b"kill_state"]=b"DEADLINE_PRECLUDED";context[b"faults"].add(b"KILL_TICKET_DURABILITY_UNKNOWN");return
+ seq=next_record(context);predecessor=context[b"chain_sha"]
+ ticket=(b"P27E001_KILL_TICKET_V5\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+predecessor+b"\nPRIMARY="+reason+b"\nFAILURE_ORIGIN_NS="+str(context[b"failure_origin"]).encode()+b"\nCLEANUP_EFFECT_DEADLINE_NS="+str(cleanup_deadline).encode()+b"\nTICKET_DEADLINE_NS="+str(ticket_deadline).encode()+b"\nKILL_CALL_COUNT_BEFORE=0\nWRITE_BYTES_HEX=310a\nRETRY_ALLOWED=0\nTICKET_END=1\n")
+ state,digest=durable_once(context,b"kill-ticket.v5",ticket,ticket_deadline,False,cleanup_deadline-ticket_deadline)
+ context[b"kill_ticket_state"]=state
+ if state!=DURABLE_VERIFIED:
+  context[b"kill_state"]=b"TICKET_DURABILITY_UNKNOWN";context[b"faults"].add(b"KILL_TICKET_DURABILITY_UNKNOWN");return
+ context[b"chain_sha"]=digest;context[b"kill_state"]=b"CALL_RESERVED";number=context.get(b"kill_fd",-1)
+ if number<0:number=context.get(b"root_kill_fd",-1)
+ if number<0:
+  context[b"kill_state"]=b"CALL_UNAVAILABLE";context[b"faults"].add(b"KILL_EFFECT_UNKNOWN");return
+ if time.monotonic_ns()+KILL_RETURN_NS>cleanup_deadline:
+  context[b"kill_state"]=b"DEADLINE_PRECLUDED";context[b"faults"].add(b"KILL_EFFECT_UNKNOWN");return
+ context[b"kill_call_count"]=1;context[b"kill_state"]=b"CALL_ENTERED"
+ try:
+  record_boundary(context,cleanup_deadline,False,FAILURE_TAIL_NS);before=time.monotonic_ns()
+  returned=os.write(number,b"1\n");after=time.monotonic_ns()
+  record_boundary(context,cleanup_deadline,False,FAILURE_TAIL_NS)
+  need(after-before<=KILL_RETURN_NS and after<=cleanup_deadline)
+ except BaseException:
+  context[b"kill_state"]=b"RETURN_UNKNOWN";context[b"faults"].add(b"KILL_EFFECT_UNKNOWN");return
+ if returned!=2:
+  context[b"kill_state"]=b"SHORT_OR_UNKNOWN";context[b"faults"].add(b"KILL_EFFECT_UNKNOWN")
+ else:context[b"kill_state"]=b"RETURNED_2"
+ while time.monotonic_ns()<=cleanup_deadline:
+  record_boundary(context,cleanup_deadline,False,FAILURE_TAIL_NS)
+  state=observe_population(context);context[b"last_population"]=state
+  if state is False:
+   if returned==2:context[b"kill_state"]=b"RETURNED_2_EMPTY_CONFIRMED"
+   return
+  owner_poll(context.get(b"actor_control"),context,cleanup_deadline)
+ context[b"faults"].add(b"CONTAINMENT_OBSERVATION_UNKNOWN")
+ if context[b"kill_state"]==b"RETURNED_2":context[b"kill_state"]=b"RETURNED_2_POSTCHECK_UNKNOWN"
+
+def begin_cleanup(context):
+ freeze_failure_deadlines(context)
+ if context[b"cleanup_origin"] is None:context[b"cleanup_origin"]=context[b"failure_origin"];context[b"cleanup_deadline"]=context[b"cleanup_effect_deadline"]
+ state=observe_population(context);context[b"last_population"]=state
+ if context.get(b"payload_release_possible",False) and not context[b"kill_authority_consumed"]:
+  context[b"kill_authority_consumed"]=True;context[b"kill_state"]=b"AUTHORITY_RESERVED"
+ need(context[b"kill_authority_consumed"] or not context.get(b"payload_release_possible",False))
+
+def retained_record(context,stop):
+ if context[b"attempt"]<0 or context[b"collision"]:return
+ deadline=context[b"cleanup_effect_deadline"]
+ if time.monotonic_ns()>deadline:
+  context[b"retained_state"]=b"NOT_WRITTEN_CAP_EXPIRED";context[b"faults"].add(b"RETAINED_DURABILITY_UNKNOWN");return
+ seq=next_record(context);predecessor=context[b"chain_sha"]
+ body=(b"P27E001_RETAINED_STATE_V5\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+predecessor+b"\nSTOP_PROBE="+stop+b"\nPRIMARY="+primary(context[b"faults"])+b"\nFAULT_SET="+fault_csv(context[b"faults"])+b"\nFAILURE_ORIGIN_NS="+str(context[b"failure_origin"]).encode()+b"\nCLEANUP_EFFECT_DEADLINE_NS="+str(deadline).encode()+b"\nKILL_CALL_COUNT="+str(context[b"kill_call_count"]).encode()+b"\nKILL_STATE="+context[b"kill_state"]+b"\nRETRY_ALLOWED=0\nRETAINED_END=1\n")
+ state,digest=durable_once(context,b"retained.v5",body,deadline,False,FAILURE_TAIL_NS);context[b"retained_state"]=state
+ if state==DURABLE_VERIFIED:context[b"chain_sha"]=digest
+ else:context[b"faults"].add(b"RETAINED_DURABILITY_UNKNOWN")
+
+def mark_actor_pidfd_lost(context):
+ context[b"actor_state"]=b"PIDFD_ACTOR_LOST";context[b"actor_lost"]=True;context[b"release_disabled"]=True;context[b"faults"].add(b"PIDFD_ACTOR_LOST")
+
+def mark_control_lost(context):
+ context[b"control_state"]=b"CONTROL_LOST";context[b"release_disabled"]=True;context[b"faults"].add(b"CONTROL_LOST")
+
+def owner_poll(control,context,until):
+ poller=select.poll();poller.register(4,select.POLLIN|select.POLLHUP|select.POLLERR)
+ if control is not None and context[b"control_state"]!=b"CONTROL_LOST":poller.register(control.fileno(),select.POLLIN|select.POLLHUP|select.POLLERR)
+ try:events=poller.poll(max(1,min(50,max(1,(until-time.monotonic_ns()+999999)//1000000))))
+ except InterruptedError:return
+ cmask=amask=0
+ for number,event in events:
+  if number==4:amask|=event
+  elif control is not None and number==control.fileno():cmask|=event
+ if cmask&select.POLLIN:
+  try:
+   raw,fds=recv_monitored(control,4,min(until,time.monotonic_ns()+ACK_NS),0);need(fds==())
+   if raw.startswith(b"V5_ABORT|"):
+    values,faults=parse_abort(raw,b"A");context[b"faults"].update(faults);context[b"release_disabled"]=values[b"release_disabled"]==b"1";context[b"stage_present"]=values[b"stage_present"]==b"1"
+   else:context[b"faults"].add(b"CONTROL_MALFORMED")
+  except RemoteAbort as error:context[b"faults"].update(error.faults);context[b"release_disabled"]=True
+  except PidfdActorLost:mark_actor_pidfd_lost(context)
+  except ControlLost:mark_control_lost(context)
+  except FaultSet as error:context[b"faults"].update(error.faults)
+ if amask:mark_actor_pidfd_lost(context)
+ if cmask&(select.POLLHUP|select.POLLERR) and not cmask&select.POLLIN:mark_control_lost(context)
+
+def retained_until_empty(control,context,stop):
+ if time.monotonic_ns()<=context[b"cleanup_effect_deadline"]:retained_record(context,stop)
+ while time.monotonic_ns()<=context[b"cleanup_effect_deadline"]:
+  for key in (b"out_fd",b"err_fd"):
+   number=context.get(key,-1)
+   if number>=0:
+    try:drain(number,bytearray())
+    except FaultSet as error:context[b"faults"].update(error.faults)
+  owner_poll(control,context,context[b"cleanup_effect_deadline"]);state=observe_population(context);context[b"last_population"]=state
+  if state is False:return True
+ return False
+
+def direct_reap_value(context,actor_lost):
+ if context[b"direct_reaps"]==context[b"entered"] and context[b"entered"]>0:return b"COMPLETE"
+ if b"DIRECT_WAIT_UNKNOWN" in context[b"faults"]:return b"UNKNOWN"
+ if actor_lost:return b"UNAVAILABLE_ACTOR_LOST"
+ return b"UNKNOWN"
+
+def recovery_record(context,stop,actor_lost):
+ freeze_failure_deadlines(context);deadline=context[b"recovery_deadline"];need(time.monotonic_ns()<=deadline)
+ direct=direct_reap_value(context,actor_lost);population=observe_population(context);context[b"last_population"]=population
+ need(not context[b"payload_release_possible"] or population is False)
+ seq=next_record(context);predecessor=context[b"chain_sha"]
+ body=(b"P27E001_RECOVERY_STATE_V5\nAUTH_ID="+AUTH+b"\nRECORD_SEQ="+seq+b"\nPREDECESSOR_SHA256="+predecessor+b"\nSTOP_PROBE="+stop+b"\nPRIMARY="+primary(context[b"faults"])+b"\nFAULT_SET="+fault_csv(context[b"faults"])+b"\nINTENT_DURABLE="+(b"1" if context[b"intent_durable"] else b"0")+b"\nCONSUMPTION_STATE="+context[b"consumption_state"]+b"\nSTAGE_STATE="+context[b"stage_state"]+b"\nCONTAINMENT_STATE="+(b"BOUND" if context[b"containment_bound"] else b"NOT_APPLICABLE")+b"\nEMPTY_STATE="+(b"EMPTY" if population is False else b"NOT_APPLICABLE")+b"\nSTOPPED_COUNT="+str(context[b"stopped_count"]).encode()+b"\nDIRECT_REAP="+direct+b"\nSTDOUT_EOF="+(b"1" if context[b"last_out_eof"] else b"0")+b"\nSTDERR_EOF="+(b"1" if context[b"last_err_eof"] else b"0")+b"\nKILL_CALL_COUNT="+str(context[b"kill_call_count"]).encode()+b"\nKILL_STATE="+context[b"kill_state"]+b"\nKILL_TICKET_STATE="+context[b"kill_ticket_state"]+b"\nFAILURE_ORIGIN_NS="+str(context[b"failure_origin"]).encode()+b"\nCLEANUP_EFFECT_DEADLINE_NS="+str(context[b"cleanup_effect_deadline"]).encode()+b"\nRECOVERY_DEADLINE_NS="+str(deadline).encode()+b"\nTERMINAL_DEADLINE_NS="+str(context[b"terminal_deadline"]).encode()+b"\nRETRY_ALLOWED=0\nDISPOSITION="+disposition(context[b"faults"])+b"\nRECOVERY_END=1\n")
+ state,digest=durable_once(context,b"recovery.v5",body,deadline,False,FINAL_TOTAL_NS);context[b"recovery_state"]=state
+ if state==DURABLE_VERIFIED:context[b"chain_sha"]=digest;context[b"recovery_sha"]=digest
+ else:context[b"faults"].add(b"RECOVERY_DURABILITY_UNKNOWN")
+ return state,digest
+
+def parse_final_report(raw):
+ values=parse_fixed(raw,b"P27E001_FINAL_REPORT_V5",FINAL_REPORT_KEYS,b"RECORD_END=1")
+ need(values[b"AUTH_ID"]==AUTH and values[b"SUITE"]==b",".join(PROBES));udec(values[b"RECORD_SEQ"],1);h64(values[b"PREDECESSOR_SHA256"])
+ entered=udec(values[b"ENTERED_COUNT"],0,15);committed=udec(values[b"COMMITTED_COUNT"],0,15);reaped=udec(values[b"REAPED_COUNT"],0,15);stopped=udec(values[b"STOPPED_COUNT"],0,15)
+ need(0<=committed<=reaped<=stopped<=entered<=15)
+ ordinal=values[b"STOP_ORDINAL"];probe=values[b"STOP_PROBE"]
+ if ordinal==b"NONE":need(probe==b"NONE")
+ else:
+  index=udec(ordinal,0,14);need(probe==PROBES[index] and index<entered)
+ need(values[b"STAGE_STATE"] in (b"NOT_APPLICABLE",b"ABSENT_KNOWN",b"VERIFIED_PRESENT",b"UNKNOWN"))
+ need(values[b"ATTEMPT_STATE"] in (b"NOT_APPLICABLE",b"ABSENT_KNOWN",b"PUBLISHED",b"RETAINED",b"COLLISION_CLOSED",b"UNKNOWN"))
+ containment=values[b"CONTAINMENT_STATE"];empty=values[b"EMPTY_STATE"];removal=values[b"REMOVAL_STATE"]
+ need(containment in (b"NOT_APPLICABLE",b"BOUND",b"UNKNOWN") and empty in (b"NOT_APPLICABLE",b"EMPTY",b"NONEMPTY",b"UNKNOWN") and removal in (b"NOT_APPLICABLE",b"REMOVED",b"RETAINED",b"UNKNOWN"))
+ if containment==b"NOT_APPLICABLE":need(empty==removal==b"NOT_APPLICABLE" and entered==0)
+ if containment==b"BOUND" and empty==b"EMPTY":need(removal in (b"REMOVED",b"RETAINED"))
+ if empty==b"NONEMPTY":need(removal!=b"REMOVED")
+ kill_count=udec(values[b"KILL_CALL_COUNT"],0,1);kill_state=values[b"KILL_STATE"];ticket=values[b"KILL_TICKET_STATE"]
+ if kill_count==0:need(kill_state in (b"NOT_RESERVED",b"AUTHORITY_RESERVED",b"TICKET_COMMITTING",b"TICKET_DURABILITY_UNKNOWN",b"CALL_RESERVED",b"CALL_UNAVAILABLE",b"DEADLINE_PRECLUDED"))
+ else:need(kill_state in (b"CALL_ENTERED",b"RETURN_UNKNOWN",b"SHORT_OR_UNKNOWN",b"RETURNED_2",b"RETURNED_2_EMPTY_CONFIRMED",b"RETURNED_2_POSTCHECK_UNKNOWN"))
+ need(ticket in (b"ABSENT_KNOWN",DURABLE_VERIFIED,b"OPEN_EFFECT_UNKNOWN",b"FD_HELD",b"WRITE_EFFECT_UNKNOWN",b"FILE_FSYNC_EFFECT_UNKNOWN",b"SAME_FD_REREAD_VERIFIED",b"DIR_FSYNC_EFFECT_UNKNOWN"))
+ h64(values[b"CHAIN_BEFORE_REPORT_SHA256"]);need(values[b"PREDECESSOR_SHA256"]==values[b"CHAIN_BEFORE_REPORT_SHA256"]);terminal_origin=udec(values[b"TERMINAL_ORIGIN_NS"],1);terminal_deadline=udec(values[b"TERMINAL_DEADLINE_NS"],1)
+ schedule=check_schedule_hex(values[b"TERMINAL_SCHEDULE_HEX"],terminal_origin,terminal_deadline,TERMINAL_PHASE_SPEC);need(udec(values[b"PHASE_DEADLINE_NS"])==schedule[b"REPORT_RECORD"])
+ need(values[b"ACK_STATE"]==b"AWAITING_TERMINAL_ACK" and values[b"RECONCILIATION_STATE"]==b"NOT_STARTED" and values[b"OWNER_CLOSURE_STATE"]==b"NOT_STARTED" and values[b"RETRY_ALLOWED"]==b"0")
+ outcome=values[b"OUTCOME_KIND"]
+ if outcome==b"SUCCESS":
+  need(entered==committed==reaped==stopped==15 and ordinal==probe==b"NONE")
+  need(values[b"STAGE_STATE"]==b"VERIFIED_PRESENT" and values[b"ATTEMPT_STATE"]==b"PUBLISHED" and containment==b"BOUND" and empty==b"EMPTY" and removal==b"REMOVED")
+  need(values[b"PRIMARY"]==values[b"FAULT_SET"]==b"NONE" and kill_count==0 and kill_state==b"NOT_RESERVED" and ticket==b"ABSENT_KNOWN")
+  need(values[b"FAILURE_ORIGIN_NS"]==values[b"CLEANUP_EFFECT_DEADLINE_NS"]==b"0" and values[b"CERTIFICATE_LIVE_AT_REPORT"]==b"1" and values[b"DISPOSITION"]==b"PASS_PENDING_COMMIT");return values
+ need(outcome in (b"FAILURE_CONTAINED",b"FAILURE_NO_PAYLOAD"))
+ faults=parse_fault_csv(values[b"FAULT_SET"],False);need(values[b"PRIMARY"]==primary(faults) and values[b"DISPOSITION"]==disposition(faults))
+ failure_origin=udec(values[b"FAILURE_ORIGIN_NS"],1);cleanup=udec(values[b"CLEANUP_EFFECT_DEADLINE_NS"],1)
+ need(cleanup==failure_origin+CLEANUP_EFFECT_NS and terminal_deadline==failure_origin+FAILURE_TOTAL_NS and terminal_origin==cleanup+RECOVERY_RECORD_NS)
+ if outcome==b"FAILURE_CONTAINED":need(containment==b"BOUND" and empty==b"EMPTY")
+ else:need(entered==0 and containment==empty==removal==b"NOT_APPLICABLE")
+ need(values[b"CERTIFICATE_LIVE_AT_REPORT"] in (b"0",b"1"));return values
+
+def report_common(context,stop,outcome,schedule):
+ entered=context[b"entered"];committed=sum(context[b"committed"]);reaped=context[b"direct_reaps"];stopped=context[b"stopped_count"];need(0<=committed<=reaped<=stopped<=entered<=15)
+ stop_ordinal=b"NONE" if stop==b"NONE" else str(PROBES.index(stop)).encode()
+ stage=context.get(b"stage_state",b"UNKNOWN");attempt=context.get(b"attempt_state",context.get(b"local_fd_state",b"UNKNOWN"))
+ containment=b"BOUND" if context[b"containment_bound"] else b"NOT_APPLICABLE";population=context.get(b"last_population")
+ empty=b"EMPTY" if population is False else (b"NONEMPTY" if population is True else (b"NOT_APPLICABLE" if not context[b"containment_bound"] else b"UNKNOWN"))
+ removal=b"REMOVED" if context[b"removed"] else (b"NOT_APPLICABLE" if not context[b"containment_bound"] else (b"RETAINED" if empty==b"EMPTY" else b"UNKNOWN"))
+ faults=context[b"faults"];certificate_live=b"1"
+ try:checkpoint(CERT,0,schedule[b"REPORT_RECORD"])
+ except BaseException:certificate_live=b"0"
+ predecessor=context[b"chain_sha"]
+ return ((b"OUTCOME_KIND",outcome),(b"SUITE",b",".join(PROBES)),(b"ENTERED_COUNT",str(entered).encode()),(b"COMMITTED_COUNT",str(committed).encode()),(b"REAPED_COUNT",str(reaped).encode()),(b"STOPPED_COUNT",str(stopped).encode()),(b"STOP_ORDINAL",stop_ordinal),(b"STOP_PROBE",stop),(b"STAGE_STATE",stage),(b"ATTEMPT_STATE",attempt),(b"CONTAINMENT_STATE",containment),(b"EMPTY_STATE",empty),(b"REMOVAL_STATE",removal),(b"PRIMARY",b"NONE" if not faults else primary(faults)),(b"FAULT_SET",b"NONE" if not faults else fault_csv(faults)),(b"CHAIN_BEFORE_REPORT_SHA256",predecessor),(b"KILL_CALL_COUNT",str(context[b"kill_call_count"]).encode()),(b"KILL_STATE",context[b"kill_state"]),(b"KILL_TICKET_STATE",context[b"kill_ticket_state"]),(b"ACK_STATE",b"AWAITING_TERMINAL_ACK"),(b"RECONCILIATION_STATE",b"NOT_STARTED"),(b"OWNER_CLOSURE_STATE",b"NOT_STARTED"),(b"FAILURE_ORIGIN_NS",b"0" if outcome==b"SUCCESS" else str(context[b"failure_origin"]).encode()),(b"CLEANUP_EFFECT_DEADLINE_NS",b"0" if outcome==b"SUCCESS" else str(context[b"cleanup_effect_deadline"]).encode()),(b"TERMINAL_ORIGIN_NS",str(context[b"terminal_origin"]).encode()),(b"TERMINAL_DEADLINE_NS",str(context[b"terminal_deadline"]).encode()),(b"TERMINAL_SCHEDULE_HEX",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"CERTIFICATE_LIVE_AT_REPORT",certificate_live),(b"RETRY_ALLOWED",b"0"),(b"DISPOSITION",b"PASS_PENDING_COMMIT" if outcome==b"SUCCESS" else disposition(faults)))
+
+def failure_report(context,stop,schedule):
+ outcome=b"FAILURE_CONTAINED" if context[b"containment_bound"] else b"FAILURE_NO_PAYLOAD"
+ if outcome==b"FAILURE_CONTAINED":need(context[b"last_population"] is False)
+ else:need(not context[b"payload_release_possible"] and context[b"entered"]==0)
+ lines=report_common(context,stop,outcome,schedule);deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"REPORT_RECORD",context[b"terminal_deadline"],False)
+ body,digest=chained_record(context,b"report.v5",b"P27E001_FINAL_REPORT_V5",lines,deadline,False,context[b"terminal_deadline"]-deadline)
+ parse_final_report(body);context[b"report_state"]=DURABLE_VERIFIED;context[b"report_sha"]=digest;context[b"outcome_durable"]=True;return digest
+
+def terminal_candidate_record(context,mode,stop,schedule):
+ need(mode in (b"SUCCESS",b"FAILURE"));deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"CANDIDATE_RECORD",context[b"terminal_deadline"],mode==b"SUCCESS")
+ if mode==b"SUCCESS":
+  need(context[b"entered"]==sum(context[b"committed"])==context[b"direct_reaps"]==context[b"stopped_count"]==15)
+  need(context[b"stage_state"]==b"VERIFIED_PRESENT" and context[b"containment_bound"] and context[b"last_population"] is False and context[b"removed"] and not context[b"faults"])
+  claim=b"SUCCESS_ELIGIBLE_NOT_PASS";outcome=b"SUCCESS_CANDIDATE"
+ else:
+  claim=b"FAILURE_DURABLE_PENDING_SEEN";outcome=b"FAILURE_CANDIDATE"
+ predecessor=context[b"chain_sha"];lines=((b"OUTCOME_KIND",outcome),(b"CANDIDATE_CLAIM",claim),(b"STOP_PROBE",stop),(b"ENTERED_COUNT",str(context[b"entered"]).encode()),(b"COMMITTED_COUNT",str(sum(context[b"committed"])).encode()),(b"REAPED_COUNT",str(context[b"direct_reaps"]).encode()),(b"STOPPED_COUNT",str(context[b"stopped_count"]).encode()),(b"STAGE_STATE",context[b"stage_state"]),(b"CONTAINMENT_STATE",b"BOUND" if context[b"containment_bound"] else b"NOT_APPLICABLE"),(b"EMPTY_STATE",b"EMPTY" if context[b"last_population"] is False else b"NOT_APPLICABLE"),(b"REMOVAL_STATE",b"REMOVED" if context[b"removed"] else b"NOT_APPLICABLE"),(b"KILL_CALL_COUNT",str(context[b"kill_call_count"]).encode()),(b"KILL_STATE",context[b"kill_state"]),(b"CHAIN_BEFORE_CANDIDATE_SHA256",predecessor),(b"TERMINAL_ORIGIN_NS",str(context[b"terminal_origin"]).encode()),(b"TERMINAL_DEADLINE_NS",str(context[b"terminal_deadline"]).encode()),(b"TERMINAL_SCHEDULE_HEX",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"RETRY_ALLOWED",b"0"))
+ body,digest=chained_record(context,b"terminal-candidate.v5" if mode==b"SUCCESS" else b"failure-candidate.v5",b"P27E001_TERMINAL_CANDIDATE_V5",lines,deadline,mode==b"SUCCESS",context[b"terminal_deadline"]-deadline)
+ context[b"candidate_sha"]=digest;return digest
+
+def terminal_seen_record(context,mode,candidate_sha,notice_raw,seen_raw,schedule):
+ deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"TERMINAL_SEEN_RECORD",context[b"terminal_deadline"],mode==b"SUCCESS")
+ lines=((b"OUTCOME_KIND",b"SUCCESS" if mode==b"SUCCESS" else b"FAILURE"),(b"CANDIDATE_SHA256",candidate_sha),(b"NOTICE_PACKET_SHA256",sha(notice_raw)),(b"ACTOR_SEEN_PACKET_SHA256",sha(seen_raw)),(b"ACTOR_SEEN_MESSAGE_SEQ",str(CONTROL_RECV_SEQ).encode()),(b"TERMINAL_SCHEDULE_HEX",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"NO_REPLAY",b"1"))
+ body,digest=chained_record(context,b"terminal-seen.v5",b"P27E001_TERMINAL_SEEN_V5",lines,deadline,mode==b"SUCCESS",context[b"terminal_deadline"]-deadline)
+ context[b"terminal_seen_sha"]=digest;return digest
+
+def success_report_and_pass(context,schedule):
+ report_deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"REPORT_RECORD",context[b"terminal_deadline"],True)
+ lines=report_common(context,b"NONE",b"SUCCESS",schedule);body,report_sha=chained_record(context,b"report.v5",b"P27E001_FINAL_REPORT_V5",lines,report_deadline,True,context[b"terminal_deadline"]-report_deadline)
+ parse_final_report(body);context[b"report_state"]=DURABLE_VERIFIED;context[b"report_sha"]=report_sha
+ pass_deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"PASS_COMMIT",context[b"terminal_deadline"],True)
+ token=sha(b"P27E001V5_RECONCILE\x00"+AUTH+b"\x00"+report_sha+b"\x00"+context[b"terminal_seen_sha"]+b"\x00"+schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+ context[b"pass_effect_possible"]=True
+ lines=((b"OUTCOME_KIND",b"PASS"),(b"REPORT_SHA256",report_sha),(b"TERMINAL_SEEN_SHA256",context[b"terminal_seen_sha"]),(b"RECONCILIATION_TOKEN",token),(b"PASS",b"1"),(b"PASS_DEADLINE_NS",str(pass_deadline).encode()),(b"TERMINAL_SCHEDULE_HEX",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"RETRY_ALLOWED",b"0"))
+ body,pass_sha=chained_record(context,b"pass-commit.v5",b"P27E001_PASS_COMMIT_V5",lines,pass_deadline,True,context[b"terminal_deadline"]-pass_deadline)
+ context[b"pass_committed"]=True;context[b"outcome_durable"]=True;context[b"pass_sha"]=pass_sha;context[b"reconciliation_token"]=token
+ margin_deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"PASS_MARGIN",context[b"terminal_deadline"],True)
+ while time.monotonic_ns()<margin_deadline:owner_poll(context.get(b"actor_control"),context,margin_deadline)
+ need(time.monotonic_ns()<=margin_deadline);return report_sha,pass_sha,token
+
+def ack_receipt_record(context,mode,receipt_raw,schedule,actor_lost=False):
+ deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"ACK_RECEIPT_RECORD",context[b"terminal_deadline"],False)
+ state=b"PIDFD_ACTOR_LOST_NO_REPLAY" if actor_lost else b"ACTOR_ACK_RECEIPT"
+ packet_sha=b"NONE" if actor_lost else sha(receipt_raw)
+ lines=((b"OUTCOME_KIND",mode),(b"ACK_RECEIPT_STATE",state),(b"ACTOR_RECEIPT_PACKET_SHA256",packet_sha),(b"REPORT_SHA256",context[b"report_sha"]),(b"PASS_SHA256",context.get(b"pass_sha",b"NONE")),(b"RECONCILIATION_TOKEN",context.get(b"reconciliation_token",b"NONE")),(b"NO_REPLAY",b"1"),(b"TERMINAL_SCHEDULE_HEX",schedule_hex(schedule,TERMINAL_PHASE_SPEC)))
+ body,digest=chained_record(context,b"ack-receipt.v5",b"P27E001_ACK_RECEIPT_V5",lines,deadline,False,context[b"terminal_deadline"]-deadline);context[b"ack_receipt_sha"]=digest;return digest
+
+def reconciliation_record(context,mode,schedule):
+ deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"RECONCILIATION_RECORD",context[b"terminal_deadline"],False)
+ lines=((b"OUTCOME_KIND",mode),(b"ACK_RECEIPT_SHA256",context[b"ack_receipt_sha"]),(b"REPORT_SHA256",context[b"report_sha"]),(b"RECONCILIATION_TOKEN",context.get(b"reconciliation_token",b"NONE")),(b"NO_REPLAY",b"1"),(b"TERMINAL_SCHEDULE_HEX",schedule_hex(schedule,TERMINAL_PHASE_SPEC)))
+ body,digest=chained_record(context,b"reconciliation.v5",b"P27E001_RECONCILIATION_V5",lines,deadline,False,context[b"terminal_deadline"]-deadline);context[b"reconciliation_sha"]=digest;return digest
+
+def owner_closure_record(context,mode,schedule):
+ deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"OWNER_CLOSURE_RECORD",context[b"terminal_deadline"],False)
+ safe=terminal_safe(context);need(safe)
+ lines=((b"OUTCOME_KIND",mode),(b"RECONCILIATION_SHA256",context[b"reconciliation_sha"]),(b"REPORT_SHA256",context[b"report_sha"]),(b"CONTAINMENT_SAFE",b"1"),(b"CONTROL_STATE",context[b"control_state"]),(b"ACTOR_STATE",context[b"actor_state"]),(b"OWNER_STATE",b"OWNER_CLOSED_DURABLE"),(b"NO_REPLAY",b"1"),(b"TERMINAL_SCHEDULE_HEX",schedule_hex(schedule,TERMINAL_PHASE_SPEC)))
+ body,digest=chained_record(context,b"owner-closure.v5",b"P27E001_OWNER_CLOSURE_V5",lines,deadline,False,context[b"terminal_deadline"]-deadline);context[b"owner_closure_sha"]=digest;return digest
+
+def send_result(control,ordinal,probe,pid,context,stdout,stderr,out_eof,err_eof,out_over,err_over,empty,faults,done):
+ deadline=context[b"origin"]+HOST_NS;out_frames=(len(stdout)+64999)//65000;err_frames=(len(stderr)+64999)//65000
+ header=packet(b"V5_RESULT",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"outer_pid",str(pid).encode()),(b"pidfd_bound",b"1" if context[b"pidfd_bound"] else b"0"),(b"pidfd_exit_ready_observed",b"1" if context[b"pidfd_exit_ready_observed"] else b"0"),(b"stdout_len",str(len(stdout)).encode()),(b"stdout_sha256",sha(stdout)),(b"stdout_eof",b"1" if out_eof else b"0"),(b"stdout_frames",str(out_frames).encode()),(b"stderr_len",str(len(stderr)).encode()),(b"stderr_sha256",sha(stderr)),(b"stderr_eof",b"1" if err_eof else b"0"),(b"stderr_frames",str(err_frames).encode()),(b"cgroup_empty",b"1" if empty else b"0"),(b"fault_set",fault_csv(faults)),(b"capture_done_ns",str(done).encode()),(b"result_deadline_ns",str(deadline).encode())))
+ send_exact(control,header,deadline)
+ for stream,raw in ((b"STDOUT",stdout),(b"STDERR",stderr)):
+  for index,start in enumerate(range(0,len(raw),65000)):
+   payload=raw[start:start+65000]
+   frame=packet(b"V5_RESULT_FRAME",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"stream",stream),(b"index",str(index).encode()),(b"bytes",str(len(payload)).encode()),(b"sha256",sha(payload)),(b"result_deadline_ns",str(deadline).encode())))+payload
+   send_exact(control,frame,deadline)
+ end=packet(b"V5_RESULT_END",((b"state",b"RESULT_END"),(b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"result_deadline_ns",str(deadline).encode())));send_exact(control,end,deadline)
+
+def stream_arm(control,context,ordinal,probe):
+ keys=(b"ordinal",b"probe",b"release_origin_ns",b"launch_deadline_ns",b"stdout_dev",b"stdout_ino",b"stderr_dev",b"stderr_ino",b"events_dev",b"events_ino",b"kill_dev",b"kill_ino")
+ fds=();out=err=events=kill=own_events=own_kill=-1
+ try:
+  raw,fds=recv_monitored(control,4,time.monotonic_ns()+ACK_NS,4);need(len(fds)==4)
+  out,err,events,kill=fds;fds=()
+  values=parse_packet(raw,b"V5_STREAM_ARM",keys)
+  need(udec(values[b"ordinal"],0,14)==ordinal and values[b"probe"]==probe)
+  origin=udec(values[b"release_origin_ns"],1);launch=udec(values[b"launch_deadline_ns"],1);need(origin<launch==origin+1000000000)
+  post_deadline(launch);checkpoint(CERT,horizon_needed(origin+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),launch)
+  fd_access(out,os.O_RDONLY);fd_access(err,os.O_RDONLY);fd_access(events,os.O_RDONLY);fd_access(kill,os.O_WRONLY)
+  need(fcntl.fcntl(out,fcntl.F_GETFL)&os.O_NONBLOCK and fcntl.fcntl(err,fcntl.F_GETFL)&os.O_NONBLOCK)
+  outs=os.fstat(out);errs=os.fstat(err);eventss=os.fstat(events);kills=os.fstat(kill)
+  need(stat.S_ISFIFO(outs.st_mode) and stat.S_ISFIFO(errs.st_mode) and (outs.st_dev,outs.st_ino)!=(errs.st_dev,errs.st_ino))
+  need((outs.st_dev,outs.st_ino)==(udec(values[b"stdout_dev"],1),udec(values[b"stdout_ino"],1)))
+  need((errs.st_dev,errs.st_ino)==(udec(values[b"stderr_dev"],1),udec(values[b"stderr_ino"],1)))
+  need((eventss.st_dev,eventss.st_ino)==(udec(values[b"events_dev"],1),udec(values[b"events_ino"],1)))
+  need((kills.st_dev,kills.st_ino)==(udec(values[b"kill_dev"],1),udec(values[b"kill_ino"],1)))
+  own_events=os.open(b"cgroup.events",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=context[b"cgfd"])
+  own_kill=os.open(b"cgroup.kill",os.O_WRONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=context[b"cgfd"])
+  fd_access(own_events,os.O_RDONLY);fd_access(own_kill,os.O_WRONLY)
+  a=os.fstat(own_events);bb=os.fstat(own_kill)
+  need((a.st_dev,a.st_ino)==(eventss.st_dev,eventss.st_ino) and (bb.st_dev,bb.st_ino)==(kills.st_dev,kills.st_ino))
+  context.update({b"out_fd":out,b"err_fd":err,b"events_fd":events,b"kill_fd":kill,b"origin":origin,b"launch":launch,b"pidfd_bound":False,b"pidfd_exit_ready_observed":False})
+  out=err=events=kill=-1
+  reply=packet(b"V5_STREAMS_ARMED",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"launch_deadline_ns",str(launch).encode())))
+  send_exact(control,reply,launch);checkpoint(CERT,horizon_needed(origin+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),launch)
+ finally:
+  close_numbers(tuple(fds)+tuple(x for x in (out,err,events,kill,own_events,own_kill) if x>=0))
+
+def pidfd_arm(control,context,ordinal,probe):
+ fds=();number=procs=status=-1
+ try:
+  raw,fds=recv_monitored(control,4,context[b"launch"],1);need(len(fds)==1)
+  number=fds[0];fds=()
+  values=parse_packet(raw,b"V5_PIDFD_ARM",(b"ordinal",b"probe",b"outer_pid",b"outer_starttime",b"stopped_raw_status",b"cgroup_member",b"pidfd_bound"))
+  need(udec(values[b"ordinal"],0,14)==ordinal and values[b"probe"]==probe)
+  pid=udec(values[b"outer_pid"],2);starttime=udec(values[b"outer_starttime"],1);stopped=udec(values[b"stopped_raw_status"],1)
+  need(os.WIFSTOPPED(stopped) and os.WSTOPSIG(stopped)==signal.SIGSTOP and values[b"cgroup_member"]==values[b"pidfd_bound"]==b"1")
+  fd_access(number,os.O_RDWR);need(pidfd_pid(number)==pid and proc_starttime(pid)==starttime)
+  watcher=select.poll();watcher.register(number,select.POLLIN|select.POLLHUP|select.POLLERR);need(watcher.poll(0)==[])
+  procs=os.open(b"cgroup.procs",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=context[b"cgfd"])
+  status=os.open(b"/proc/"+str(pid).encode()+b"/status",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW)
+  need(read_all(procs,64)==str(pid).encode()+b"\n")
+  state=[x for x in ascii_file(read_all(status,65536),65536).splitlines() if x.startswith(b"State:\t")]
+  need(len(state)==1 and state[0].startswith(b"State:\tT") and watcher.poll(0)==[])
+  need(pidfd_pid(number)==pid and proc_starttime(pid)==starttime and read_all(procs,64)==str(pid).encode()+b"\n")
+  context[b"outer_pidfd"]=number;number=-1;context[b"outer_pid"]=pid;context[b"outer_starttime"]=starttime
+  context[b"pidfd_bound"]=True;context[b"pidfd_exit_ready_observed"]=False;context[b"stopped_count"]+=1
+  reply=packet(b"V5_PIDFD_ARMED",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"pidfd_bound",b"1"),(b"outer_pid",str(pid).encode()),(b"outer_starttime",str(starttime).encode()),(b"launch_deadline_ns",str(context[b"launch"]).encode())))
+  send_exact(control,reply,context[b"launch"]);checkpoint(CERT,horizon_needed(context[b"origin"]+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),context[b"launch"])
+ finally:
+  close_numbers(tuple(fds)+tuple(x for x in (number,procs,status) if x>=0))
+
+def release_phase(control,context,ordinal,probe):
+ raw,fds=recv_monitored(control,4,context[b"launch"],0);need(fds==())
+ keys=(b"ordinal",b"probe",b"outer_pid",b"outer_starttime",b"pidfd_bound",b"stopped_raw_status",b"cgroup_member",b"cgroup_dev",b"cgroup_ino",b"cgroup_mode",b"cgroup_nlink",b"cgroup_uid",b"cgroup_gid",b"argv_sha256",b"env_sha256",b"release_origin_ns",b"launch_overall_deadline_ns",b"release_record_deadline_ns",b"release_reply_deadline_ns",b"launch_deadline_ns")
+ values=parse_packet(raw,b"V5_RELEASE_CANDIDATE",keys)
+ need(udec(values[b"ordinal"],0,14)==ordinal and values[b"probe"]==probe and udec(values[b"outer_pid"],2)==context[b"outer_pid"] and udec(values[b"outer_starttime"],1)==context[b"outer_starttime"] and values[b"pidfd_bound"]==values[b"cgroup_member"]==b"1")
+ h64(values[b"argv_sha256"]);h64(values[b"env_sha256"]);need(udec(values[b"release_origin_ns"])==context[b"origin"] and udec(values[b"launch_overall_deadline_ns"])==context[b"launch"])
+ record_deadline=udec(values[b"release_record_deadline_ns"]);reply_deadline=udec(values[b"release_reply_deadline_ns"])
+ need(record_deadline==context[b"origin"]+RELEASE_RECORD_OFFSET_NS and reply_deadline==context[b"origin"]+RELEASE_REPLY_OFFSET_NS and udec(values[b"launch_deadline_ns"])==record_deadline and time.monotonic_ns()<=record_deadline)
+ cg=os.fstat(context[b"cgfd"]);observed=(cg.st_dev,cg.st_ino,format(cg.st_mode,"o").encode(),cg.st_nlink,cg.st_uid,cg.st_gid)
+ supplied=(udec(values[b"cgroup_dev"],1),udec(values[b"cgroup_ino"],1),values[b"cgroup_mode"],udec(values[b"cgroup_nlink"],1),udec(values[b"cgroup_uid"]),udec(values[b"cgroup_gid"]))
+ need(observed==supplied)
+ checkpoint(CERT,horizon_needed(context[b"origin"]+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),record_deadline);digest=release_record(context,values)
+ context[b"payload_release_possible"]=True;context[b"release_send_state"]=b"RELEASE_DURABLE_SEND_EFFECT_UNKNOWN"
+ reply=packet(b"V5_RELEASE_DURABLE",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"release_sha256",digest),(b"launch_overall_deadline_ns",str(context[b"launch"]).encode()),(b"release_record_deadline_ns",str(record_deadline).encode()),(b"release_reply_deadline_ns",str(reply_deadline).encode()),(b"launch_deadline_ns",str(reply_deadline).encode())))
+ send_exact(control,reply,reply_deadline);context[b"release_send_state"]=b"RELEASE_DURABLE_SENT";checkpoint(CERT,horizon_needed(context[b"origin"]+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),context[b"launch"])
+
+def monitor_probe(control,context,ordinal,probe):
+ stdout=bytearray();stderr=bytearray();out_eof=err_eof=out_over=err_over=False;faults=set();actor_lost=False
+ deadline=context[b"origin"]+HOST_NS;poller=select.poll()
+ for number in (context[b"out_fd"],context[b"err_fd"],context[b"events_fd"],context[b"outer_pidfd"],4,control.fileno()):poller.register(number,select.POLLIN|select.POLLHUP|select.POLLERR)
+ while True:
+  checkpoint(CERT,horizon_needed(context[b"origin"]+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),deadline)
+  now=time.monotonic_ns()
+  try:events=poller.poll(10)
+  except InterruptedError:events=[]
+  cmask=0;amask=0
+  for number,event in events:
+   if number==control.fileno():cmask|=event
+   if number==4:amask|=event
+  if cmask&select.POLLIN:
+   try:
+    raw,fds=recv_monitored(control,4,min(deadline,time.monotonic_ns()+ACK_NS),0)
+    faults.add(b"CONTROL_MALFORMED")
+   except RemoteAbort as error:faults.update(error.faults)
+   except PidfdActorLost:actor_lost=True;faults.add(b"PIDFD_ACTOR_LOST")
+   except FaultSet as error:faults.update(error.faults)
+  elif cmask&(select.POLLHUP|select.POLLERR):
+   context[b"control_state"]=b"CONTROL_LOST";faults.add(b"CONTROL_LOST")
+  if amask:
+   actor_lost=True;context[b"actor_state"]=b"PIDFD_ACTOR_LOST";faults.add(b"PIDFD_ACTOR_LOST")
+  for number,event in events:
+   if number==context[b"out_fd"]:
+    try:
+     overflow,eof=drain(number,stdout);out_over|=overflow;out_eof|=eof
+    except FaultSet as error:faults.update(error.faults)
+   elif number==context[b"err_fd"]:
+    try:
+     overflow,eof=drain(number,stderr);err_over|=overflow;err_eof|=eof
+    except FaultSet as error:faults.update(error.faults)
+   elif number==context[b"outer_pidfd"] and event&(select.POLLIN|select.POLLHUP|select.POLLERR):
+    context[b"pidfd_exit_ready_observed"]=True
+  if not out_eof:
+   try:
+    overflow,eof=drain(context[b"out_fd"],stdout);out_over|=overflow;out_eof|=eof
+   except FaultSet as error:faults.update(error.faults)
+  if not err_eof:
+   try:
+    overflow,eof=drain(context[b"err_fd"],stderr);err_over|=overflow;err_eof|=eof
+   except FaultSet as error:faults.update(error.faults)
+  if out_over or err_over:faults.add(b"CAPTURE_OVERFLOW")
+  if stderr:faults.add(b"STDERR_NONEMPTY")
+  empty_state=observe_population(context)
+  if empty_state is None:faults.add(b"CONTAINMENT_OBSERVATION_UNKNOWN")
+  if not faults and now>deadline:faults.add(b"WATCHDOG_DEADLINE")
+  if faults:
+   context[b"faults"].update(faults);begin_cleanup(context)
+   if empty_state is True and context[b"kill_state"]==b"NOT_RESERVED" and now<context[b"cleanup_deadline"]:kill_once(context,primary(context[b"faults"]))
+  if not faults and out_eof and err_eof and empty_state is False and context[b"pidfd_bound"] and context[b"pidfd_exit_ready_observed"]:break
+  if faults and context[b"cleanup_deadline"] is not None and now>=context[b"cleanup_deadline"]:break
+  if actor_lost and context[b"cleanup_deadline"] is not None and now>=context[b"cleanup_deadline"]:break
+ checkpoint(CERT,horizon_needed(context[b"origin"]+TOTAL_NS,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),deadline)
+ done=time.monotonic_ns();empty_state=observe_population(context);empty=empty_state is False
+ context[b"last_out_eof"]=out_eof;context[b"last_err_eof"]=err_eof
+ if not actor_lost:
+  send_result(control,ordinal,probe,context[b"outer_pid"],context,bytes(stdout),bytes(stderr),out_eof,err_eof,out_over,err_over,empty,set(context[b"faults"]),done)
+ return actor_lost,set(context[b"faults"]),empty,bytes(stdout),bytes(stderr)
+
+def close_probe(context):
+ for key in (b"out_fd",b"err_fd",b"events_fd",b"kill_fd",b"outer_pidfd"):
+  number=context.get(key,-1)
+  if number>=0:
+   try:os.close(number)
+   except OSError:pass
+  context[key]=-1
+ context[b"pidfd_bound"]=False;context[b"pidfd_exit_ready_observed"]=False
+
+def request_release_disable(control,context,stop):
+ if context[b"release_disabled"] or context[b"actor_lost"]:return
+ deadline=context[b"failure_origin"]+ACTOR_DISABLE_NS
+ if time.monotonic_ns()>deadline:context[b"faults"].add(b"DEADLINE_EXPIRED");return
+ notice=packet(b"V5_ABORT",((b"sender",b"B"),(b"state",b"ABORTING"),(b"expected_state",b"ABORT_RECONCILER"),(b"ordinal",b"NONE"),(b"probe",stop),(b"effect_state",b"ABORT_NOTICE"),(b"causal_state",b"CLEANUP_RELEASE_DISABLE"),(b"causal_effect",b"CONSUMED"),(b"stage_present",b"1" if context[b"stage_present"] else b"0"),(b"release_disabled",b"0"),(b"terminal_deadline_ns",str(context[b"cleanup_effect_deadline"]).encode()),(b"fault_set",fault_csv(context[b"faults"])),(b"control_deadline_ns",str(deadline).encode())))
+ try:
+  send_exact(control,notice,deadline)
+  raw,fds=recv_monitored(control,4,deadline,0);need(fds==())
+  values,faults=parse_abort(raw,b"A");context[b"faults"].update(faults)
+  need(values[b"release_disabled"]==b"1");context[b"release_disabled"]=True
+ except RemoteAbort as error:
+  context[b"faults"].update(error.faults);context[b"release_disabled"]=True
+ except PidfdActorLost:mark_actor_pidfd_lost(context)
+ except ControlLost:mark_control_lost(context)
+ except FaultSet as error:context[b"faults"].update(error.faults)
+ except BaseException:context[b"faults"].add(b"CONTROL_MALFORMED")
+ if not context[b"release_disabled"]:
+  context[b"faults"].add(b"EXTERNAL_SURVIVAL_TRANSFER_REQUIRED")
+
+def pass_locked(context):
+ return context[b"pass_effect_possible"] or context[b"pass_committed"]
+
+def terminal_safe(context):
+ state=observe_population(context);context[b"last_population"]=state
+ if context[b"containment_bound"]:return state is False
+ return not context[b"payload_release_possible"] and context[b"stopped_count"]==0
+
+def finish_actor_loss_chain(context,mode,schedule):
+ need(context[b"actor_state"]==b"PIDFD_ACTOR_LOST" and context[b"outcome_durable"] and terminal_safe(context))
+ ack_receipt_record(context,mode,b"",schedule,True);reconciliation_record(context,mode,schedule);owner_closure_record(context,mode,schedule)
+ context[b"terminal_phase"]=b"ACTOR_LOSS_DURABLE_NO_REPLAY_OWNER_CLOSED";context[b"owner_released"]=True
+
+def transfer_or_hold(control,context,reason):
+ context[b"terminal_phase"]=b"FROZEN_EXTERNAL_TRANSFER";context[b"faults"].add(reason)
+ while not context[b"owner_released"]:
+  try:external_transfer(control,context,reason)
+  except BaseException:
+   owner_poll(control,context,time.monotonic_ns()+50000000)
+   if context[b"actor_state"]==b"PIDFD_ACTOR_LOST" and context[b"outcome_durable"] and terminal_safe(context) and context.get(b"terminal_schedule") is not None:
+    try:finish_actor_loss_chain(context,context[b"terminal_mode"],context[b"terminal_schedule"]);return
+    except BaseException:pass
+ return
+
+def terminal_owner_loop(control,context,mode,kind,subject,disp,deadline):
+ need(mode in (b"SUCCESS",b"FAILURE") and deadline==context[b"terminal_deadline"]);schedule=context[b"terminal_schedule"]
+ need(schedule==exact_schedule(context[b"terminal_origin"],deadline,TERMINAL_PHASE_SPEC))
+ context[b"terminal_mode"]=mode;context[b"terminal_kind"]=kind;context[b"terminal_subject"]=subject
+ notice_deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"NOTICE",deadline,mode==b"SUCCESS")
+ common=((b"state",b"TERMINAL_CANDIDATE_DURABLE" if mode==b"SUCCESS" else b"TERMINAL_FAILURE_DURABLE"),(b"expected_state",b"WAIT_TERMINAL_CANDIDATE" if mode==b"SUCCESS" else b"WAIT_TERMINAL_FAILURE"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"kind",kind),(b"subject_sha256",subject),(b"chain_head_sha256",context[b"chain_sha"]),(b"terminal_origin_ns",str(context[b"terminal_origin"]).encode()),(b"terminal_deadline_ns",str(deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"candidate_deadline_ns",str(notice_deadline).encode()))
+ if mode==b"SUCCESS":notice=packet(b"V5_TERMINAL_CANDIDATE_DURABLE",common)
+ else:notice=packet(b"V5_TERMINAL_FAILURE_DURABLE",common+((b"disposition",disp),))
+ context[b"terminal_notice_raw"]=notice;context[b"terminal_phase"]=b"NOTICE_SEND_EFFECT_UNKNOWN";context[b"send_state"]=b"NOTICE_SEND_EFFECT_UNKNOWN"
+ try:send_exact(control,notice,notice_deadline);context[b"terminal_phase"]=b"WAIT_TERMINAL_SEEN";context[b"send_state"]=b"NOTICE_SENT"
+ except SendEffectUnknown:context[b"send_state"]=b"NOTICE_SEND_EFFECT_UNKNOWN";context[b"terminal_phase"]=b"WAIT_TERMINAL_SEEN"
+ while not context[b"owner_released"]:
+  now=time.monotonic_ns()
+  if context[b"actor_state"]==b"PIDFD_ACTOR_LOST":
+   if context[b"outcome_durable"] and context[b"terminal_seen_sha"]!=b"0"*64 and terminal_safe(context):
+    try:finish_actor_loss_chain(context,mode,schedule);return
+    except BaseException:transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN");return
+   transfer_or_hold(control,context,b"PIDFD_ACTOR_LOST");return
+  if now>deadline:
+   transfer_or_hold(control,context,b"EXTERNAL_SURVIVAL_TRANSFER_REQUIRED");return
+  phase=context[b"terminal_phase"]
+  phase_deadline=schedule[b"TERMINAL_SEEN_RECORD"] if phase==b"WAIT_TERMINAL_SEEN" else (schedule[b"A_RECEIPT"] if phase==b"WAIT_ACK_RECEIPT" else deadline)
+  try:
+   raw,fds=recv_monitored(control,4,phase_deadline,0);need(fds==())
+  except PidfdActorLost:
+   mark_actor_pidfd_lost(context);continue
+  except ControlLost:
+   mark_control_lost(context);transfer_or_hold(control,context,b"CONTROL_LOST");return
+  except SendEffectUnknown:
+   context[b"send_state"]=b"SEND_EFFECT_UNKNOWN";continue
+  except RemoteAbort as error:
+   context[b"faults"].update(error.faults)
+   if pass_locked(context):context[b"faults"].add(b"ACK_EFFECT_UNKNOWN")
+   transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN");return
+  except FaultSet as error:
+   context[b"faults"].update(error.faults);transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN");return
+  if phase==b"WAIT_TERMINAL_SEEN":
+   values=parse_packet(raw,b"V5_TERMINAL_SEEN",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"notice_packet_sha256",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"seen_deadline_ns"))
+   need(values[b"state"]==b"TERMINAL_SEEN" and values[b"expected_state"]==b"WAIT_TERMINAL_SEEN" and values[b"effect_state"]==b"TERMINAL_SEEN")
+   need(values[b"ordinal"]==values[b"probe"]==b"NONE" and values[b"kind"]==kind and values[b"subject_sha256"]==subject and values[b"notice_packet_sha256"]==sha(notice))
+   need(udec(values[b"terminal_origin_ns"])==context[b"terminal_origin"] and udec(values[b"terminal_deadline_ns"])==deadline and values[b"terminal_schedule_hex"]==schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+   terminal_seen_record(context,mode,subject,notice,raw,schedule)
+   if mode==b"SUCCESS":report_sha,pass_sha,token=success_report_and_pass(context,schedule);ack_state=b"PASS_COMMITTED_NO_DOWNGRADE"
+   else:report_sha=failure_report(context,context[b"stop_probe"],schedule);pass_sha=b"NONE";token=b"NONE";context[b"outcome_durable"]=True;ack_state=b"FAILURE_DURABLE"
+   ack_deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"ACK",deadline,False)
+   ack=packet(b"V5_TERMINAL_ACK",((b"state",b"TERMINAL_ACK"),(b"expected_state",b"WAIT_TERMINAL_ACK"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"kind",kind),(b"subject_sha256",subject),(b"terminal_seen_sha256",context[b"terminal_seen_sha"]),(b"report_sha256",report_sha),(b"pass_sha256",pass_sha),(b"reconciliation_token",token),(b"ack_state",ack_state),(b"terminal_origin_ns",str(context[b"terminal_origin"]).encode()),(b"terminal_deadline_ns",str(deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"ack_deadline_ns",str(ack_deadline).encode())))
+   context[b"terminal_ack_raw"]=ack;context[b"ack_state"]=b"ACK_SEND_EFFECT_UNKNOWN";context[b"send_state"]=b"ACK_SEND_EFFECT_UNKNOWN";context[b"terminal_phase"]=b"ACK_SEND_EFFECT_UNKNOWN"
+   try:send_exact(control,ack,ack_deadline);context[b"ack_state"]=b"ACK_SENT";context[b"send_state"]=b"ACK_SENT"
+   except SendEffectUnknown:context[b"ack_effect_unknown"]=True;context[b"faults"].add(b"ACK_EFFECT_UNKNOWN");context[b"send_state"]=b"ACK_SEND_EFFECT_UNKNOWN"
+   context[b"terminal_phase"]=b"WAIT_ACK_RECEIPT"
+  elif phase==b"WAIT_ACK_RECEIPT":
+   values=parse_packet(raw,b"V5_TERMINAL_ACK_RECEIPT",(b"state",b"ordinal",b"probe",b"kind",b"subject_sha256",b"ack_packet_sha256",b"report_sha256",b"pass_sha256",b"reconciliation_token",b"actor_receipt_ns",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"receipt_deadline_ns"))
+   need(values[b"state"]==b"ACK_RECEIVED_NO_REPLAY" and values[b"expected_state"]==b"WAIT_ACK_RECEIPT" and values[b"effect_state"]==b"NO_REPLAY_RECEIPT")
+   need(values[b"ordinal"]==values[b"probe"]==b"NONE" and values[b"kind"]==kind and values[b"subject_sha256"]==subject and values[b"ack_packet_sha256"]==sha(context[b"terminal_ack_raw"]))
+   need(values[b"report_sha256"]==context[b"report_sha"] and values[b"pass_sha256"]==context.get(b"pass_sha",b"NONE") and values[b"reconciliation_token"]==context.get(b"reconciliation_token",b"NONE"))
+   need(udec(values[b"actor_receipt_ns"],1)<=time.monotonic_ns() and udec(values[b"terminal_origin_ns"])==context[b"terminal_origin"] and udec(values[b"terminal_deadline_ns"])==deadline)
+   need(values[b"terminal_schedule_hex"]==schedule_hex(schedule,TERMINAL_PHASE_SPEC))
+   ack_receipt_record(context,mode,raw,schedule,False);reconciliation_record(context,mode,schedule);closure_sha=owner_closure_record(context,mode,schedule)
+   closure_deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"CLOSURE_PACKET",deadline,False)
+   closed_packet=packet(b"V5_TERMINAL_CLOSED",((b"state",b"OWNER_CLOSED"),(b"expected_state",b"WAIT_OWNER_CLOSED"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"kind",kind),(b"subject_sha256",subject),(b"report_sha256",context[b"report_sha"]),(b"pass_sha256",context.get(b"pass_sha",b"NONE")),(b"ack_receipt_sha256",context[b"ack_receipt_sha"]),(b"reconciliation_sha256",context[b"reconciliation_sha"]),(b"closure_sha256",closure_sha),(b"owner",b"B"),(b"terminal_origin_ns",str(context[b"terminal_origin"]).encode()),(b"terminal_deadline_ns",str(deadline).encode()),(b"terminal_schedule_hex",schedule_hex(schedule,TERMINAL_PHASE_SPEC)),(b"closure_deadline_ns",str(closure_deadline).encode())))
+   context[b"terminal_phase"]=b"OWNER_CLOSE_SEND_EFFECT_UNKNOWN";context[b"send_state"]=b"OWNER_CLOSE_SEND_EFFECT_UNKNOWN"
+   try:
+    send_exact(control,closed_packet,closure_deadline);context[b"terminal_phase"]=b"OWNER_CLOSED";context[b"send_state"]=b"OWNER_CLOSED_SENT"
+    exit_deadline=phase_boundary(context,schedule,TERMINAL_PHASE_SPEC,b"B_EXIT",deadline,False);need(time.monotonic_ns()<=exit_deadline and terminal_safe(context));context[b"owner_released"]=True;return
+   except SendEffectUnknown:
+    context[b"send_state"]=b"OWNER_CLOSE_SEND_EFFECT_UNKNOWN";transfer_or_hold(control,context,b"SEND_EFFECT_UNKNOWN");return
+  else:
+   context[b"faults"].add(b"CONTROL_MALFORMED");transfer_or_hold(control,context,b"CONTROL_MALFORMED");return
+
+def terminal_failure(control,context,stop,faults,actor_lost):
+ need(not pass_locked(context));context[b"faults"].update(faults);context[b"stop_probe"]=stop
+ if actor_lost:mark_actor_pidfd_lost(context)
+ if not context[b"faults"]:context[b"faults"].add(b"INTERNAL_INVARIANT")
+ freeze_failure_deadlines(context)
+ if context.get(b"attempt_base_fd",-1)>=0:
+  try:os.close(context[b"attempt_base_fd"])
+  except OSError:context[b"faults"].add(b"ATTEMPT_DIRFD_UNKNOWN")
+  else:
+   context[b"attempt_base_fd"]=-1
+   if context[b"collision"]:context[b"attempt_base_closed_on_collision"]=True;context[b"attempt_state"]=b"COLLISION_CLOSED"
+ begin_cleanup(context)
+ if context[b"payload_release_possible"] and context[b"control_state"]!=b"CONTROL_LOST":
+  try:request_release_disable(control,context,stop)
+  except PidfdActorLost:mark_actor_pidfd_lost(context)
+  except ControlLost:mark_control_lost(context)
+  except FaultSet as error:context[b"faults"].update(error.faults)
+ if context[b"payload_release_possible"]:kill_once(context,primary(context[b"faults"]))
+ begin_cleanup(context);recover_stage_presence(context,context[b"cleanup_effect_deadline"])
+ if context[b"collision"]:
+  mutation_state=b"COLLISION_CLOSED" if context[b"attempt_base_fd"]<0 and context[b"attempt_base_closed_on_collision"] else b"COLLISION_BASE_HELD_FOR_EXACT_TRANSFER"
+  context[b"attempt_state"]=mutation_state
+  context[b"collision_transfer_claim_sha"]=sha(b"P27E001_COLLISION_V5\x00"+AUTH+b"\x00"+fault_csv(context[b"faults"])+b"\x00"+str(context[b"failure_origin"]).encode()+b"\x00"+mutation_state+b"\x00"+(b"1" if context[b"attempt_base_fd"]<0 else b"0"))
+  transfer_or_hold(control,context,b"ATTEMPT_COLLISION");return disposition(context[b"faults"])
+ if context[b"attempt"]<0:
+  context[b"faults"].add(b"ATTEMPT_DIRFD_UNKNOWN");transfer_or_hold(control,context,b"ATTEMPT_DIRFD_UNKNOWN");return disposition(context[b"faults"])
+ while time.monotonic_ns()<=context[b"cleanup_effect_deadline"]:
+  owner_poll(control,context,context[b"cleanup_effect_deadline"]);state=observe_population(context);context[b"last_population"]=state
+  if not context[b"payload_release_possible"] or state is False:break
+ if context[b"payload_release_possible"] and context[b"last_population"] is not False:
+  if not retained_until_empty(control,context,stop):
+   context[b"faults"].add(b"CONTAINMENT_NOT_EMPTY");transfer_or_hold(control,context,b"EXTERNAL_SURVIVAL_TRANSFER_REQUIRED");return disposition(context[b"faults"])
+ state,digest=recovery_record(context,stop,context[b"actor_state"]==b"PIDFD_ACTOR_LOST")
+ if state!=DURABLE_VERIFIED:
+  transfer_or_hold(control,context,b"RECOVERY_DURABILITY_UNKNOWN");return disposition(context[b"faults"])
+ context[b"terminal_schedule"]=exact_schedule(context[b"terminal_origin"],context[b"terminal_deadline"],TERMINAL_PHASE_SPEC)
+ subject=terminal_candidate_record(context,b"FAILURE",stop,context[b"terminal_schedule"])
+ terminal_owner_loop(control,context,b"FAILURE",b"FAILURE_CANDIDATE",subject,disposition(context[b"faults"]),context[b"terminal_deadline"]);return disposition(context[b"faults"])
+
+def validated_exchange(control,context,ordinal,probe,stdout,stderr):
+ raw,fds=recv_monitored(control,4,context[b"origin"]+TOTAL_NS,0);need(fds==())
+ values=parse_packet(raw,b"V5_VALIDATED_CANDIDATE",CANDIDATE_KEYS)
+ need(udec(values[b"ordinal"],0,14)==ordinal and values[b"probe"]==probe)
+ need(values[b"release_record_sha256"]==context[b"release_sha"] and udec(values[b"release_origin_ns"])==context[b"origin"])
+ release_return=udec(values[b"release_return_ns"]);host_complete=udec(values[b"host_complete_ns"]);capture_done=udec(values[b"capture_done_ns"])
+ need(context[b"origin"]<release_return<=context[b"launch"] and capture_done<=host_complete<=context[b"origin"]+HOST_NS)
+ need(values[b"direct_wait_state"]==b"COMPLETE" and values[b"outer_raw_status"]==b"0")
+ need(values[b"pidfd_bound"]==values[b"pidfd_exit_ready_observed"]==b"1")
+ need(udec(values[b"stdout_len"])==len(stdout) and values[b"stdout_sha256"]==sha(stdout) and values[b"stdout_eof"]==b"1" and values[b"stdout_overflow"]==b"0")
+ need(udec(values[b"stderr_len"])==len(stderr)==0 and values[b"stderr_sha256"]==sha(stderr) and values[b"stderr_eof"]==b"1" and values[b"stderr_overflow"]==b"0")
+ need(values[b"cgroup_empty"]==b"1" and values[b"parser_language"]==values[b"parser_structure"]==values[b"parser_semantics"]==values[b"candidate"]==values[b"terminal"]==b"ACCEPTED")
+ need(values[b"certificate_expiry_realtime_ns"]==CERT[b"ABSOLUTE_EXPIRY_REALTIME_NS"])
+ h64(values[b"stdout_sha256"]);h64(values[b"stderr_sha256"])
+ ack_deadline=min(context[b"origin"]+TOTAL_NS,host_complete+ACK_NS);need(time.monotonic_ns()+2*RECORD_NS<=ack_deadline)
+ checkpoint(CERT,horizon_needed(ack_deadline,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ack_deadline);validated_sha=validated_record(context,values,ack_deadline)
+ reply=packet(b"V5_VALIDATED_DURABLE",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"validated_sha256",validated_sha),(b"ack_deadline_ns",str(ack_deadline).encode())))
+ send_exact(control,reply,ack_deadline)
+ raw,fds=recv_monitored(control,4,ack_deadline,0);need(fds==())
+ intent=parse_packet(raw,b"V5_ACK_COMMIT_INTENT",(b"ordinal",b"probe",b"validated_sha256",b"host_complete_ns",b"ack_deadline_ns",b"actor_ack_intent_ns"))
+ need(udec(intent[b"ordinal"],0,14)==ordinal and intent[b"probe"]==probe and intent[b"validated_sha256"]==validated_sha)
+ actor_ack=udec(intent[b"actor_ack_intent_ns"]);received=time.monotonic_ns();ack_deadline=udec(intent[b"ack_deadline_ns"],1)
+ need(udec(intent[b"host_complete_ns"])==host_complete and ack_deadline==min(context[b"origin"]+TOTAL_NS,host_complete+ACK_NS))
+ need(host_complete<=actor_ack<=received<=ack_deadline and actor_ack-host_complete<=ACK_NS)
+ checkpoint(CERT,horizon_needed(ack_deadline,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ack_deadline)
+ ack_sha=ack_intent_record(context,ordinal,probe,actor_ack,received,ack_deadline)
+ checkpoint(CERT,horizon_needed(ack_deadline,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ack_deadline)
+ context[b"committed"][ordinal]=True;context[b"direct_reaps"]+=1;context[b"direct_reap_state"]=b"COMPLETE"
+ committed=packet(b"V5_COMMITTED",((b"ordinal",str(ordinal).encode()),(b"probe",probe),(b"ack_sha256",ack_sha),(b"ack_deadline_ns",str(ack_deadline).encode())))
+ send_exact(control,committed,ack_deadline)
+ raw,fds=recv_monitored(control,4,ack_deadline,0);need(fds==())
+ seen=parse_packet(raw,b"V5_COMMITTED_SEEN",(b"ordinal",b"probe",b"ack_sha256",b"host_complete_ns",b"ack_deadline_ns"))
+ need(udec(seen[b"ordinal"],0,14)==ordinal and seen[b"probe"]==probe and seen[b"ack_sha256"]==ack_sha)
+ need(udec(seen[b"host_complete_ns"])==host_complete and udec(seen[b"ack_deadline_ns"])==ack_deadline and time.monotonic_ns()-host_complete<=ACK_NS)
+ committed_seen_record(context,ordinal,probe,raw,ack_sha,host_complete,ack_deadline)
+ checkpoint(CERT,horizon_needed(ack_deadline,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS),ack_deadline);return ack_sha
+
+def recover_stage_presence(context,deadline):
+ if context[b"stage_present"] and context[b"stage_state"]==b"VERIFIED_PRESENT":return
+ base=number=leaf=-1;verified_identity=None;verified=False
+ try:
+  record_boundary(context,deadline,False,FAILURE_TAIL_NS)
+  base=os.open(b".",O_DIR);base_check(base,CERT,b"SAFE_BIND");base_mid,base_line=mount_binding(base)
+  record_boundary(context,deadline,False,FAILURE_TAIL_NS)
+  need(base_mid==udec(CERT[b"SAFE_BIND_MOUNT_ID"],1) and sha(base_line)==CERT[b"SAFE_BIND_MOUNTINFO_SHA256"])
+  named=os.stat(AUTH,dir_fd=base,follow_symlinks=False);number=os.open(AUTH,O_DIR,dir_fd=base);held=os.fstat(number)
+  identity=(held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)
+  need(identity==(named.st_dev,named.st_ino,named.st_mode,named.st_nlink,named.st_uid,named.st_gid))
+  need(stat.S_ISDIR(held.st_mode) and stat.S_IMODE(held.st_mode)==0o700 and held.st_uid==held.st_gid==0 and held.st_nlink==2)
+  fd_access(number,os.O_RDONLY);record_boundary(context,deadline,False,FAILURE_TAIL_NS)
+  for absent_name in (b"target",b"a",b"b"):
+   try:os.stat(absent_name,dir_fd=number,follow_symlinks=False);need(False)
+   except FileNotFoundError:pass
+  specs=((b"keeper.py",b"KEEPER_BYTES",b"KEEPER_LF",b"KEEPER_SHA256"),(b"launcher.py",b"LAUNCHER_BYTES",b"LAUNCHER_LF",b"LAUNCHER_SHA256"),(b"marker.py",b"MARKER_BYTES",b"MARKER_LF",b"MARKER_SHA256"),(b"child.py",b"CHILD_BYTES",b"CHILD_LF",b"CHILD_SHA256"))
+  for name,bkey,lkey,hkey in specs:
+   record_boundary(context,deadline,False,FAILURE_TAIL_NS)
+   leaf=os.open(name,os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=number);body=read_all(leaf,udec(CERT[bkey],1));st=os.fstat(leaf)
+   need(stat.S_ISREG(st.st_mode) and (st.st_uid,st.st_gid,stat.S_IMODE(st.st_mode),st.st_nlink)==(0,0,0o400,1))
+   need((len(body),body.count(b"\n"),sha(body))==(udec(CERT[bkey],1),udec(CERT[lkey]),CERT[hkey]))
+   record_boundary(context,deadline,False,FAILURE_TAIL_NS);os.close(leaf);leaf=-1
+  again=os.stat(AUTH,dir_fd=base,follow_symlinks=False);need(identity==(again.st_dev,again.st_ino,again.st_mode,again.st_nlink,again.st_uid,again.st_gid))
+  record_boundary(context,deadline,False,FAILURE_TAIL_NS)
+  verified_identity=identity;verified=True
+ except FileNotFoundError:
+  context[b"stage_state"]=b"ABSENT_KNOWN"
+ except FaultSet as error:
+  context[b"stage_state"]=b"UNKNOWN";context[b"faults"].update(error.faults);context[b"faults"].add(b"STAGING_FAULT")
+ except BaseException:
+  context[b"stage_state"]=b"UNKNOWN";context[b"faults"].add(b"STAGING_FAULT")
+ finally:close_numbers(tuple(x for x in (leaf,base) if x>=0))
+ if verified:
+  context[b"stage_fd"]=number;number=-1;context[b"stage_identity"]=verified_identity;context[b"stage_present"]=True;context[b"stage_state"]=b"VERIFIED_PRESENT"
+ else:
+  close_numbers(tuple(x for x in (number,) if x>=0));context[b"stage_fd"]=-1;context[b"stage_present"]=False
+
+def stage_bind(control,context):
+ fds=();number=base=leaf=-1
+ keys=(b"state",b"ordinal",b"probe",b"stage_origin_ns",b"stage_deadline_ns",b"stage_return_ns",b"safe_dev",b"safe_ino",b"safe_mode",b"safe_nlink",b"safe_uid",b"safe_gid",b"keeper_sha256",b"launcher_sha256",b"marker_sha256",b"child_sha256")
+ try:
+  boot=time.monotonic_ns()+STAGE_NS;raw,fds=recv_monitored(control,4,boot,1);need(len(fds)==1)
+  number=fds[0];fds=()
+  values=parse_packet(raw,b"V5_STAGE_DURABLE",keys)
+  need(values[b"state"]==b"STAGE_DURABLE" and values[b"ordinal"]==values[b"probe"]==b"NONE")
+  origin=udec(values[b"stage_origin_ns"],1);deadline=udec(values[b"stage_deadline_ns"],1)
+  need(deadline==origin+STAGE_NS and udec(values[b"stage_return_ns"],origin,deadline)<=time.monotonic_ns()<=deadline)
+  checkpoint(CERT,POST_STAGE_REMAIN_NS,deadline);fd_access(number,os.O_RDONLY)
+  held=os.fstat(number);supplied=(udec(values[b"safe_dev"],1),udec(values[b"safe_ino"],1),octal(values[b"safe_mode"]),udec(values[b"safe_nlink"],1),udec(values[b"safe_uid"]),udec(values[b"safe_gid"]))
+  need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)==supplied)
+  need(stat.S_ISDIR(held.st_mode) and stat.S_IMODE(held.st_mode)==0o700 and held.st_uid==held.st_gid==0 and held.st_nlink==2)
+  base=os.open(b".",O_DIR);base_check(base,CERT,b"SAFE_BIND")
+  named=os.stat(AUTH,dir_fd=base,follow_symlinks=False)
+  need((named.st_dev,named.st_ino,named.st_mode,named.st_nlink,named.st_uid,named.st_gid)==(held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid))
+  specs=((b"keeper.py",b"KEEPER_BYTES",b"KEEPER_LF",b"KEEPER_SHA256",b"keeper_sha256"),(b"launcher.py",b"LAUNCHER_BYTES",b"LAUNCHER_LF",b"LAUNCHER_SHA256",b"launcher_sha256"),(b"marker.py",b"MARKER_BYTES",b"MARKER_LF",b"MARKER_SHA256",b"marker_sha256"),(b"child.py",b"CHILD_BYTES",b"CHILD_LF",b"CHILD_SHA256",b"child_sha256"))
+  for name,bkey,lkey,hkey,pkey in specs:
+   try:
+    leaf=os.open(name,os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=number);fd_access(leaf,os.O_RDONLY)
+    body=read_all(leaf,udec(CERT[bkey],1));st=os.fstat(leaf)
+    need(stat.S_ISREG(st.st_mode) and (st.st_uid,st.st_gid,stat.S_IMODE(st.st_mode),st.st_nlink)==(0,0,0o400,1))
+    need((len(body),body.count(b"\n"),sha(body))==(udec(CERT[bkey],1),udec(CERT[lkey]),CERT[hkey]))
+    need(values[pkey]==CERT[hkey])
+   finally:close_numbers(tuple(x for x in (leaf,) if x>=0));leaf=-1
+  again=os.stat(AUTH,dir_fd=base,follow_symlinks=False);base_check(base,CERT,b"SAFE_BIND");fd_access(number,os.O_RDONLY)
+  need((again.st_dev,again.st_ino,again.st_mode,again.st_nlink,again.st_uid,again.st_gid)==(held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid))
+  checkpoint(CERT,POST_STAGE_REMAIN_NS,deadline)
+  context[b"stage_fd"]=number;number=-1;context[b"stage_identity"]=(held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)
+  context[b"stage_present"]=True;context[b"stage_state"]=b"VERIFIED_PRESENT";context[b"stage_deadline"]=deadline
+  reply=packet(b"V5_STAGE_ACK",((b"state",b"STAGE_BOUND"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"stage_deadline_ns",str(deadline).encode()),(b"safe_dev",str(held.st_dev).encode()),(b"safe_ino",str(held.st_ino).encode())))
+  send_exact(control,reply,deadline);checkpoint(CERT,POST_STAGE_REMAIN_NS,deadline)
+ finally:
+  close_numbers(tuple(fds)+tuple(x for x in (leaf,number,base) if x>=0))
+
+def containment_bind(control,context):
+ fds=();number=root_events=root_kill=ctype=controllers=subtree=-1
+ try:
+  boot=time.monotonic_ns()+ACK_NS;raw,fds=recv_monitored(control,4,boot,1);need(len(fds)==1)
+  number=fds[0];fds=()
+  keys=(b"state",b"ordinal",b"probe",b"contain_origin_ns",b"contain_deadline_ns",b"dev",b"ino",b"mode",b"nlink",b"uid",b"gid",b"base_dev",b"base_ino",b"mount_id",b"mountinfo_sha256",b"type_hex",b"controllers_hex",b"subtree_control_hex")
+  values=parse_packet(raw,b"V5_CONTAINMENT",keys)
+  need(values[b"state"]==b"CONTAINMENT_CANDIDATE" and values[b"ordinal"]==values[b"probe"]==b"NONE" and context[b"stage_present"])
+  origin=udec(values[b"contain_origin_ns"],1);deadline=udec(values[b"contain_deadline_ns"],1);need(deadline==origin+ACK_NS and time.monotonic_ns()<=deadline)
+  checkpoint(CERT,POST_CONTAIN_REMAIN_NS,deadline);fd_access(number,os.O_RDONLY)
+  held=os.fstat(number);need(stat.S_ISDIR(held.st_mode))
+  supplied=(udec(values[b"dev"],1),udec(values[b"ino"],1),octal(values[b"mode"]),udec(values[b"nlink"],1),udec(values[b"uid"]),udec(values[b"gid"]))
+  need((held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)==supplied)
+  need(values[b"mode"]==CERT[b"CGROUP_CHILD_MODE"] and values[b"uid"]==CERT[b"CGROUP_CHILD_UID"] and values[b"gid"]==CERT[b"CGROUP_CHILD_GID"] and values[b"nlink"]==b"2")
+  base_check(6,CERT,b"CGROUP_BASE");base=os.fstat(6)
+  need((udec(values[b"base_dev"],1),udec(values[b"base_ino"],1))==(base.st_dev,base.st_ino))
+  named=os.stat(AUTH,dir_fd=6,follow_symlinks=False)
+  need((named.st_dev,named.st_ino,named.st_mode,named.st_nlink,named.st_uid,named.st_gid)==(held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid))
+  mid,line=mount_binding(number);need(mid==udec(values[b"mount_id"],1)==udec(CERT[b"CGROUP2_MOUNT_ID"],1))
+  need(sha(line)==values[b"mountinfo_sha256"]==CERT[b"CGROUP2_MOUNTINFO_SHA256"] and statfs_magic(number)==int(CERT[b"CGROUP2_FS_MAGIC"],16))
+  ctype=os.open(b"cgroup.type",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=number)
+  controllers=os.open(b"cgroup.controllers",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=number)
+  subtree=os.open(b"cgroup.subtree_control",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=number)
+  root_events=os.open(b"cgroup.events",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=number)
+  root_kill=os.open(b"cgroup.kill",os.O_WRONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=number)
+  fd_access(ctype,os.O_RDONLY);fd_access(controllers,os.O_RDONLY);fd_access(subtree,os.O_RDONLY);fd_access(root_events,os.O_RDONLY);fd_access(root_kill,os.O_WRONLY)
+  type_raw=read_all(ctype,128);controllers_raw=read_all(controllers,4096);subtree_raw=read_all(subtree,4096)
+  need(type_raw.hex().encode()==values[b"type_hex"]==CERT[b"CGROUP_CHILD_TYPE_HEX"])
+  need(controllers_raw.hex().encode()==values[b"controllers_hex"]==CERT[b"CGROUP_CHILD_CONTROLLERS_HEX"])
+  need(subtree_raw.hex().encode()==values[b"subtree_control_hex"]==CERT[b"CGROUP_CHILD_SUBTREE_CONTROL_HEX"])
+  need(not populated(root_events));checkpoint(CERT,POST_CONTAIN_REMAIN_NS,deadline)
+  context[b"cgfd"]=number;number=-1;context[b"root_events_fd"]=root_events;root_events=-1
+  context[b"root_kill_fd"]=root_kill;root_kill=-1;context[b"containment_bound"]=True;context[b"contain_deadline"]=deadline
+  context[b"cgroup_identity"]=(held.st_dev,held.st_ino,held.st_mode,held.st_nlink,held.st_uid,held.st_gid)
+  reply=packet(b"V5_CONTAINMENT_ACK",((b"state",b"CONTAINMENT_BOUND"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"contain_deadline_ns",str(deadline).encode()),(b"dev",str(held.st_dev).encode()),(b"ino",str(held.st_ino).encode())))
+  send_exact(control,reply,deadline);checkpoint(CERT,POST_CONTAIN_REMAIN_NS,deadline)
+ finally:
+  close_numbers(tuple(fds)+tuple(x for x in (number,root_events,root_kill,ctype,controllers,subtree) if x>=0))
+
+def acquire_control(actor_pid):
+ control=None
+ try:
+  control=socket.socket(fileno=3)
+  need(control.getsockopt(socket.SOL_SOCKET,socket.SO_TYPE)==socket.SOCK_SEQPACKET);fd_access(3,os.O_RDWR)
+  need(fcntl.fcntl(3,fcntl.F_GETFL)&os.O_NONBLOCK)
+  peer=struct.unpack("3i",control.getsockopt(socket.SOL_SOCKET,socket.SO_PEERCRED,12));need(peer==(actor_pid,0,0))
+  result=control;control=None;return result
+ finally:
+  if control is not None:
+   try:control.close()
+   except BaseException:pass
+
+EXTERNAL_MANIFEST_KEYS=(b"VERSION",b"SESSION_AUTH_POLICY",b"OWNER_PID",b"OWNER_STARTTIME",b"OWNER_UID",b"OWNER_GID",b"ENDPOINT_TYPE",b"PIDFD_REQUIRED",b"MAX_PACKET_BYTES",b"RIGHTS_TYPES",b"REFUSAL_RECEIPT_PROTOCOL",b"TRANSFER_PROTOCOL",b"NO_REPLAY")
+
+def parse_external_manifest(raw,cert):
+ values=parse_fixed(raw,b"P27E001_EXTERNAL_OWNER_MANIFEST_V5",EXTERNAL_MANIFEST_KEYS,b"MANIFEST_END=1")
+ exact={b"VERSION":b"5",b"SESSION_AUTH_POLICY":b"AUTH_V5_LENGTH_FRAMED",b"OWNER_PID":cert[b"EXTERNAL_OWNER_PID"],b"OWNER_STARTTIME":cert[b"EXTERNAL_OWNER_STARTTIME"],b"OWNER_UID":cert[b"EXTERNAL_OWNER_UID"],b"OWNER_GID":cert[b"EXTERNAL_OWNER_GID"],b"ENDPOINT_TYPE":b"SOCK_SEQPACKET",b"PIDFD_REQUIRED":b"1",b"MAX_PACKET_BYTES":b"65536",b"RIGHTS_TYPES":b"ATTEMPT_DIRFD,ATTEMPT_BASE_DIRFD,STAGE_DIRFD,CGROUP_DIRFD,OUT_FD,ERR_FD,EVENTS_FD,KILL_FD,OUTER_PIDFD,CGROUP_BASE_DIRFD,ACTOR_CONTROL_FD",b"REFUSAL_RECEIPT_PROTOCOL":b"MONOTONE_O_EXCL_ISSUER_V5",b"TRANSFER_PROTOCOL":b"OFFER_ACCEPTED_DURABLE_V5",b"NO_REPLAY":b"1"}
+ for key,value in exact.items():need(values[key]==value)
+ return values
+
+def acquire_external_owner():
+ pid=udec(CERT[b"EXTERNAL_OWNER_PID"],2);start=udec(CERT[b"EXTERNAL_OWNER_STARTTIME"],1)
+ fd_access(14,os.O_RDWR);fd_access(15,os.O_RDWR);need(pidfd_pid(15)==pid)
+ watcher=select.poll();watcher.register(15,select.POLLIN|select.POLLHUP|select.POLLERR);need(watcher.poll(0)==[])
+ external=socket.socket(fileno=14)
+ try:
+  need(external.getsockopt(socket.SOL_SOCKET,socket.SO_TYPE)==socket.SOCK_SEQPACKET and fcntl.fcntl(14,fcntl.F_GETFL)&os.O_NONBLOCK)
+  peer=struct.unpack("3i",external.getsockopt(socket.SOL_SOCKET,socket.SO_PEERCRED,12));need(peer==(pid,udec(CERT[b"EXTERNAL_OWNER_UID"]),udec(CERT[b"EXTERNAL_OWNER_GID"])))
+  need(proc_starttime(pid)==start and pidfd_pid(15)==pid and proc_starttime(pid)==start and watcher.poll(0)==[])
+  result=external;external=None;return result
+ finally:
+  if external is not None:external.close()
+
+def static_inputs():
+ global AUTH,CERT,DEPS,RESERVATION_DIGEST,ACTOR_PID,ACTOR_STARTTIME
+ need(type(sys.argv)is list and len(sys.argv)==9 and sys.argv[0]=="/proc/self/fd/100" and sys.argv[1]=="RECOVER_V5")
+ supplied=h64(sys.argv[2].encode("ascii"));actor_pid=udec(sys.argv[3].encode("ascii"),2);actor_starttime=udec(sys.argv[4].encode("ascii"),1)
+ plan_sha=h64(sys.argv[5].encode("ascii"));source_sha=h64(sys.argv[6].encode("ascii"))
+ safe_dev=udec(sys.argv[7].encode("ascii"),1);safe_ino=udec(sys.argv[8].encode("ascii"),1)
+ ACTOR_PID=actor_pid;ACTOR_STARTTIME=actor_starttime
+ need(os.read(0,1)==b"");fd_access(0,os.O_RDONLY);need(stat.S_ISFIFO(os.fstat(0).st_mode));closed(1);closed(2)
+ fd_access(4,os.O_RDWR);need(pidfd_pid(4)==actor_pid and proc_starttime(actor_pid)==actor_starttime)
+ actor_watcher=select.poll();actor_watcher.register(4,select.POLLIN|select.POLLHUP|select.POLLERR);need(actor_watcher.poll(0)==[] and pidfd_pid(4)==actor_pid and proc_starttime(actor_pid)==actor_starttime)
+ snapshot_raw=whole_snapshot();cert_raw=sealed_carrier(7,MAX_FILE);envelope_raw=sealed_carrier(8,MAX_FILE);plan_raw=sealed_carrier(10,MAX_FILE);actor_raw=sealed_carrier(11,MAX_FILE);v15_raw=sealed_carrier(12,MAX_FILE);reservation_raw=sealed_carrier(13,MAX_FILE);transfer_manifest_raw=sealed_carrier(16,MAX_FILE);source_raw=sealed_carrier(100,MAX_FILE)
+ CERT,DEPS=contract(cert_raw);issued=envelope(envelope_raw);reservation=parse_reservation(reservation_raw)
+ context_digest,certificate_digest,receipt_digest=verify_issuer_order(issued,cert_raw,CERT);reservation_digest=verify_reservation_order(reservation,cert_raw,envelope_raw,issued);RESERVATION_DIGEST=reservation_digest
+ exact_text(v15_raw,V15_BYTES,V15_LF,V15_SHA,V15_TERMINAL)
+ not_before=udec(CERT[b"NOT_BEFORE_REALTIME_NS"]);expiry=udec(CERT[b"ABSOLUTE_EXPIRY_REALTIME_NS"])
+ need(expiry-not_before==CERT_LIFE_NS and udec(issued[b"NOT_BEFORE_REALTIME_NS"])<=not_before<expiry<=udec(issued[b"NOT_AFTER_REALTIME_NS"]))
+ verify_platform(CERT)
+ for entry in DEPS:verify_dependency(entry)
+ AUTH=session_auth(cert_raw,envelope_raw,reservation_raw);need(AUTH==supplied)
+ need(plan_sha==sha(plan_raw)==CERT[b"PLAN_SHA256"]==issued[b"PLAN_SHA256"])
+ need(sha(actor_raw)==issued[b"RUNNER_SHA256"]==CERT[b"RUNNER_SHA256"])
+ need(source_sha==sha(source_raw)==CERT[b"RECOVERY_SHA256"]==issued[b"RECOVERY_SHA256"])
+ need(extract_one(plan_raw,b"P27 RUNNER V5 ACTOR SOURCE BEGIN C5A91E34",b"P27 RUNNER V5 ACTOR SOURCE END C5A91E34")==actor_raw)
+ need(extract_one(plan_raw,b"P27 RUNNER V5 WATCHDOG SOURCE BEGIN F5C2189D",b"P27 RUNNER V5 WATCHDOG SOURCE END F5C2189D")==source_raw)
+ need(issued[b"E0366_SNAPSHOT_SHA256"]==CERT[b"E0366_SNAPSHOT_SHA256"]==sha(snapshot_raw)==SNAPSHOT_EXPECT[2])
+ need(issued[b"E0366_SNAPSHOT_BYTES"]==CERT[b"E0366_SNAPSHOT_BYTES"]==b"2303269" and issued[b"E0366_SNAPSHOT_LF"]==CERT[b"E0366_SNAPSHOT_LF"]==b"23672")
+ need(issued[b"E0366_SNAPSHOT_TERMINAL_HEX"]==CERT[b"E0366_SNAPSHOT_TERMINAL_HEX"]==SNAPSHOT_TERMINAL_HEX)
+ need(issued[b"V15_SHA256"]==CERT[b"V15_SHA256"]==V15_SHA)
+ need((len(transfer_manifest_raw),sha(transfer_manifest_raw))==(udec(CERT[b"EXTERNAL_TRANSFER_MANIFEST_BYTES"],1),CERT[b"EXTERNAL_TRANSFER_MANIFEST_SHA256"]));parse_external_manifest(transfer_manifest_raw,CERT)
+ need(reservation[b"NOT_BEFORE_REALTIME_NS"]==issued[b"NOT_BEFORE_REALTIME_NS"] and reservation[b"NOT_AFTER_REALTIME_NS"]==issued[b"NOT_AFTER_REALTIME_NS"])
+ base_check(5,CERT,b"ATTEMPT_BASE");base_check(6,CERT,b"CGROUP_BASE")
+ rootfd=safebase=-1
+ try:
+  rootfd=os.open(b"/",O_DIR);safebase=os.open(b".",O_DIR)
+  base_check(rootfd,CERT,b"RUNTIME_ROOT");base_check(safebase,CERT,b"SAFE_BIND")
+  root_mid,root_line=mount_binding(rootfd);safe_mid,safe_line=mount_binding(safebase)
+  need(root_mid==udec(CERT[b"RUNTIME_ROOT_MOUNT_ID"],1) and sha(root_line)==CERT[b"RUNTIME_ROOT_MOUNTINFO_SHA256"])
+  need(safe_mid==udec(CERT[b"SAFE_BIND_MOUNT_ID"],1) and sha(safe_line)==CERT[b"SAFE_BIND_MOUNTINFO_SHA256"] and root_mid!=safe_mid)
+  mount_semantics(root_line,even_hex(CERT[b"RUNTIME_ROOT_FSTYPE_HEX"]),{b"ro",b"nosuid",b"nodev"},{b"rw"})
+  mount_semantics(safe_line,even_hex(CERT[b"SAFE_BIND_FSTYPE_HEX"]),{b"rw",b"nosuid",b"nodev",b"noexec"},{b"ro"})
+  mount_graph(CERT)
+ finally:close_numbers(tuple(x for x in (rootfd,safebase) if x>=0))
+ attempt_mid,attempt_line=mount_binding(5)
+ need(attempt_mid==udec(CERT[b"ATTEMPT_BASE_MOUNT_ID"],1) and sha(attempt_line)==CERT[b"ATTEMPT_BASE_MOUNTINFO_SHA256"])
+ mount_semantics(attempt_line,even_hex(CERT[b"ATTEMPT_BASE_FSTYPE_HEX"]),{b"rw",b"nosuid",b"nodev"},{b"ro"})
+ cgroup_mid,cgroup_line=mount_binding(6)
+ need(statfs_magic(6)==int(CERT[b"CGROUP2_FS_MAGIC"],16) and cgroup_mid==udec(CERT[b"CGROUP2_MOUNT_ID"],1) and sha(cgroup_line)==CERT[b"CGROUP2_MOUNTINFO_SHA256"])
+ mount_semantics(cgroup_line,b"cgroup2",{b"rw"},{b"ro"})
+ base_type=base_controllers=base_subtree=-1
+ try:
+  base_type=os.open(b"cgroup.type",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=6)
+  base_controllers=os.open(b"cgroup.controllers",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=6)
+  base_subtree=os.open(b"cgroup.subtree_control",os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW,dir_fd=6)
+  need(read_all(base_type,128).hex().encode()==CERT[b"CGROUP_BASE_TYPE_HEX"])
+  need(read_all(base_controllers,4096).hex().encode()==CERT[b"CGROUP_BASE_CONTROLLERS_HEX"])
+  need(read_all(base_subtree,4096).hex().encode()==CERT[b"CGROUP_BASE_SUBTREE_CONTROL_HEX"])
+ finally:close_numbers((base_type,base_controllers,base_subtree))
+ need((safe_dev,safe_ino)==(udec(CERT[b"SAFE_BIND_DEV"],1),udec(CERT[b"SAFE_BIND_INO"],1)))
+ final_context(safe_dev,safe_ino);scrub_exact({0,3,4,5,6,7,8,9,10,11,12,13,14,15,16,100});checkpoint(CERT,ENTRY_REMAIN_NS)
+ return acquire_control(actor_pid),acquire_external_owner(),cert_raw,envelope_raw,reservation_raw,source_raw
+
+def minimal_context():
+ return {
+  b"attempt":-1,b"attempt_base_fd":5,b"cgroup_base_fd":6,b"local_fd_state":b"ABSENT",b"attempt_base_closed_on_collision":False,
+  b"consumed":False,b"consumption_state":b"PREARMED",b"consume_origin":0,b"consume_deadline":0,b"arm_effect_possible":False,b"refusal_closed":False,
+  b"commit_count":0,b"attempt_state":b"ABSENT_KNOWN",b"intent_count":0,
+  b"intent_durable":False,b"collision":False,b"collision_identity":(0,0,0,0,0,0),
+  b"faults":set(),b"durability":{},b"durability_digest":{},b"durability_faults":{},b"record_seq":0,b"chain_sha":b"0"*64,b"chain_records":[],b"committed":[False]*15,b"entered":0,b"stopped_count":0,
+  b"direct_reaps":0,b"direct_reap_state":b"UNAVAILABLE",
+  b"stage_present":False,b"stage_state":b"ABSENT_KNOWN",b"stage_fd":-1,b"stage_identity":None,b"stage_deadline":0,
+  b"containment_bound":False,b"contain_deadline":0,b"actor_lost":False,b"release_disabled":False,
+  b"kill_call_count":0,b"kill_state":b"NOT_RESERVED",b"kill_ticket_state":b"ABSENT_KNOWN",
+  b"failure_origin":None,b"failure_overall_deadline":None,b"cleanup_effect_deadline":None,b"recovery_deadline":None,b"cleanup_origin":None,b"cleanup_deadline":None,b"terminal_schedule":None,
+  b"payload_release_possible":False,b"kill_authority_consumed":False,b"kill_call_attempted":False,b"last_population":None,b"last_out_eof":False,b"last_err_eof":False,
+  b"cgfd":-1,b"root_events_fd":-1,b"root_kill_fd":-1,b"events_fd":-1,b"kill_fd":-1,b"out_fd":-1,b"err_fd":-1,
+  b"outer_pidfd":-1,b"pidfd_bound":False,b"pidfd_exit_ready_observed":False,b"outer_pid":-1,b"outer_starttime":0,b"removed":False,
+  b"report_state":b"ABSENT_KNOWN",b"report_sha":b"0"*64,b"retained_state":b"ABSENT_KNOWN",
+  b"candidate_sha":b"0"*64,b"terminal_seen_sha":b"0"*64,b"reconciliation_token":b"0"*64,b"reconciliation_sha":b"0"*64,
+  b"terminal_origin":0,b"terminal_deadline":0,b"terminal_mode":b"NONE",b"terminal_kind":b"NONE",b"terminal_subject":b"0"*64,
+  b"terminal_phase":b"NOT_STARTED",b"ack_state":b"NOT_SENT",b"ack_effect_unknown":False,b"pass_effect_possible":False,b"pass_committed":False,
+  b"control_state":b"CONNECTED",b"actor_state":b"ALIVE_PIDFD_NOT_READY",b"send_state":b"IDLE",
+  b"transfer_control":None,b"actor_control":None,b"external_record_seq":0,b"external_chain_sha":RESERVATION_DIGEST,b"external_send_state":b"IDLE",b"transfer_state":b"NOT_OFFERED",b"transfer_receipt_sha":b"0"*64,b"refusal_closure_sha":b"0"*64,
+  b"outcome_durable":False,b"owner_released":False
+ }
+
+def ambiguous_consumption(control,context,cert_raw,envelope_raw,source_raw,error):
+ context[b"consumed"]=True;context[b"consumption_state"]=b"CONSUME_EDGE_UNKNOWN";context[b"faults"].add(b"CONSUME_EDGE_UNKNOWN")
+ if isinstance(error,RemoteAbort):
+  context[b"faults"].update(error.faults);context[b"release_disabled"]=True
+ elif isinstance(error,FaultSet):context[b"faults"].update(error.faults)
+ elif isinstance(error,PidfdActorLost):
+  context[b"faults"].add(b"PIDFD_ACTOR_LOST");context[b"actor_lost"]=True;context[b"release_disabled"]=True
+ try:consume_attempt(context,cert_raw,envelope_raw,source_raw,context[b"consume_deadline"])
+ except CertificateExpired:context[b"faults"].add(b"CERTIFICATE_EXPIRED")
+ except FaultSet as attempt_error:context[b"faults"].update(attempt_error.faults)
+ terminal_failure(control,context,b"NONE",set(context[b"faults"]),isinstance(error,PidfdActorLost))
+
+def refusal_values(raw,kind):
+ need(kind in (b"V5_REFUSE_PREBEGIN",b"V5_REFUSE_POSTARM"))
+ keys=(b"state",b"ordinal",b"probe",b"auth_id",b"a_begin_state",b"a_arm_state",b"cross_map_state",b"reason",b"refusal_origin_ns",b"refusal_deadline_ns",b"refusal_schedule_hex",b"consume_deadline_ns")
+ values=parse_packet(raw,kind,keys)
+ if kind==b"V5_REFUSE_PREBEGIN":
+  need(values[b"state"]==b"REFUSE_PREBEGIN" and values[b"expected_state"]==b"WAIT_BEGIN")
+  need((values[b"a_begin_state"],values[b"a_arm_state"],values[b"cross_map_state"])==(b"BEGIN_NOT_ENTERED",b"ARM_NOT_OBSERVED",b"ARM_NOT_ENTERED"))
+ else:
+  need(values[b"state"]==b"REFUSE_POSTARM" and values[b"expected_state"]==b"WAIT_COMMIT")
+  need((values[b"a_begin_state"],values[b"a_arm_state"],values[b"cross_map_state"])==(b"BEGIN_SENT",b"ARMED_CONFIRMED",b"REFUSAL_CLOSED_NO_CONSUME"))
+ need(values[b"ordinal"]==values[b"probe"]==b"NONE" and values[b"auth_id"]==AUTH and values[b"reason"])
+ origin=udec(values[b"refusal_origin_ns"],1);overall=udec(values[b"refusal_deadline_ns"],1)
+ schedule=check_schedule_hex(values[b"refusal_schedule_hex"],origin,overall,REFUSAL_PHASE_SPEC)
+ need(udec(values[b"consume_deadline_ns"])==schedule[b"REFUSAL_RECORD"] and time.monotonic_ns()<=schedule[b"REFUSAL_RECORD"])
+ return values,schedule
+
+def close_no_consume(context):
+ need(not context[b"consumed"] and context[b"record_seq"]==0 and not context[b"intent_durable"] and context[b"attempt"]<0)
+ if context.get(b"attempt_base_fd",5)>=0:
+  os.close(context[b"attempt_base_fd"]);context[b"attempt_base_fd"]=-1
+ if context.get(b"cgroup_base_fd",6)>=0:
+  os.close(context[b"cgroup_base_fd"]);context[b"cgroup_base_fd"]=-1
+ os.chdir(b"/");rootfd=os.open(b".",O_DIR)
+ try:base_check(rootfd,CERT,b"RUNTIME_ROOT");fd_access(rootfd,os.O_RDONLY)
+ finally:os.close(rootfd)
+ context[b"consumption_state"]=b"REFUSAL_CLOSED_NO_CONSUME";context[b"refusal_closed"]=True
+ context[b"commit_count"]=0;context[b"attempt_state"]=b"ABSENT_KNOWN";context[b"intent_count"]=0
+ need(context[b"attempt_base_fd"]<0 and context[b"commit_count"]==context[b"intent_count"]==0 and context[b"attempt_state"]==b"ABSENT_KNOWN")
+
+def refusal_session(control,context,raw,kind):
+ values,schedule=refusal_values(raw,kind);close_no_consume(context)
+ ack_deadline=schedule[b"REFUSAL_ACK"]
+ ack=packet(b"V5_REFUSE_ACK",((b"state",b"REFUSAL_CLOSED_NO_CONSUME"),(b"expected_state",b"WAIT_REFUSAL_ACK"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"auth_id",AUTH),(b"a_begin_state",values[b"a_begin_state"]),(b"a_arm_state",values[b"a_arm_state"]),(b"cross_map_state",values[b"cross_map_state"]),(b"request_packet_sha256",values[b"packet_sha256"]),(b"request_message_seq",values[b"message_seq"]),(b"commit_count",b"0"),(b"attempt_state",b"ABSENT_KNOWN"),(b"intent_count",b"0"),(b"disposition",b"UNCONSUMED"),(b"refusal_origin_ns",values[b"refusal_origin_ns"]),(b"refusal_deadline_ns",values[b"refusal_deadline_ns"]),(b"refusal_schedule_hex",values[b"refusal_schedule_hex"]),(b"consume_deadline_ns",str(ack_deadline).encode())))
+ context[b"refusal_ack_raw"]=ack;context[b"send_state"]=b"REFUSAL_ACK_SEND_EFFECT_UNKNOWN"
+ try:send_exact(control,ack,ack_deadline);context[b"send_state"]=b"REFUSAL_ACK_SENT"
+ except SendEffectUnknown:context[b"send_state"]=b"REFUSAL_ACK_SEND_EFFECT_UNKNOWN"
+ receipt_deadline=schedule[b"REFUSAL_RECEIPT"]
+ try:
+  receipt_raw,fds=recv_monitored(control,4,receipt_deadline,0);need(fds==())
+  receipt=parse_packet(receipt_raw,b"V5_REFUSE_ACK_RECEIPT",(b"state",b"ordinal",b"probe",b"ack_packet_sha256",b"ack_message_seq",b"request_packet_sha256",b"cross_map_state",b"no_replay",b"refusal_deadline_ns",b"refusal_schedule_hex",b"consume_deadline_ns"))
+  need(receipt[b"state"]==b"REFUSAL_ACK_RECEIVED" and receipt[b"expected_state"]==b"WAIT_REFUSAL_RECEIPT" and receipt[b"effect_state"]==b"NO_REPLAY_RECEIPT")
+  need(receipt[b"ordinal"]==receipt[b"probe"]==b"NONE" and receipt[b"ack_packet_sha256"]==sha(ack) and receipt[b"ack_message_seq"]==str(CONTROL_SEND_SEQ).encode())
+  need(receipt[b"request_packet_sha256"]==values[b"packet_sha256"] and receipt[b"cross_map_state"]==values[b"cross_map_state"] and receipt[b"no_replay"]==b"1")
+  need(udec(receipt[b"refusal_deadline_ns"])==schedule[b"REFUSAL_CLOSURE"] and receipt[b"refusal_schedule_hex"]==values[b"refusal_schedule_hex"])
+ except (ControlLost,PidfdActorLost,FaultSet,CertificateExpired):
+  context[b"faults"].add(b"RECONCILIATION_UNKNOWN")
+  external_transfer(control,context,b"RECONCILIATION_UNKNOWN");return
+ closure=issuer_refusal_close(context,ack,receipt_raw,schedule);closure_deadline=schedule[b"REFUSAL_CLOSURE"]
+ closed=packet(b"V5_REFUSAL_CLOSED",((b"state",b"REFUSAL_DURABLY_CLOSED"),(b"expected_state",b"WAIT_REFUSAL_CLOSED"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"ack_packet_sha256",sha(ack)),(b"receipt_packet_sha256",sha(receipt_raw)),(b"cross_map_state",values[b"cross_map_state"]),(b"issuer_closure_sha256",closure),(b"issuer_record_seq",str(context[b"external_record_seq"]).encode()),(b"issuer_predecessor_sha256",RESERVATION_DIGEST),(b"no_replay",b"1"),(b"refusal_deadline_ns",str(schedule[b"REFUSAL_CLOSURE"]).encode()),(b"refusal_schedule_hex",values[b"refusal_schedule_hex"]),(b"consume_deadline_ns",str(closure_deadline).encode())))
+ context[b"send_state"]=b"REFUSAL_CLOSURE_SEND_EFFECT_UNKNOWN"
+ try:
+  send_exact(control,closed,closure_deadline);context[b"send_state"]=b"REFUSAL_CLOSURE_SENT";context[b"owner_released"]=True
+ except SendEffectUnknown:
+  context[b"send_state"]=b"REFUSAL_CLOSURE_SEND_EFFECT_UNKNOWN";external_transfer(control,context,b"SEND_EFFECT_UNKNOWN")
+
+def main():
+ context=minimal_context();control=transfer_control=None
+ try:
+  control,transfer_control,cert_raw,envelope_raw,reservation_raw,source_raw=static_inputs();context[b"transfer_control"]=transfer_control;context[b"actor_control"]=control;context[b"external_chain_sha"]=RESERVATION_DIGEST
+  ready_deadline=time.monotonic_ns()+10000000000
+  ready=packet(b"V5_READY",((b"state",b"READY"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"ready_deadline_ns",str(ready_deadline).encode())))
+  send_exact(control,ready,ready_deadline)
+  raw,fds=recv_monitored(control,4,ready_deadline,0);need(fds==())
+  if raw.startswith(b"V5_REFUSE_PREBEGIN|"):
+   refusal_session(control,context,raw,b"V5_REFUSE_PREBEGIN");return
+  begin=parse_packet(raw,b"V5_CONSUME_BEGIN",(b"state",b"ordinal",b"probe",b"auth_id",b"a_begin_state",b"a_arm_state",b"consume_origin_ns",b"consume_deadline_ns"))
+  need(begin[b"state"]==b"CONSUME_BEGIN" and begin[b"ordinal"]==begin[b"probe"]==b"NONE" and begin[b"auth_id"]==AUTH)
+  need(begin[b"a_begin_state"]==b"BEGIN_SEND_EFFECT_UNKNOWN" and begin[b"a_arm_state"]==b"ARM_NOT_OBSERVED")
+  origin=udec(begin[b"consume_origin_ns"],1);deadline=udec(begin[b"consume_deadline_ns"],1)
+  need(deadline==origin+CONSUMPTION_NS and time.monotonic_ns()<=deadline);checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+  context[b"begin_observed"]=True;context[b"consume_origin"]=origin;context[b"consume_deadline"]=deadline
+  need(time.monotonic_ns()<=deadline-REFUSAL_TOTAL_NS)
+  context[b"consumption_state"]=b"ARM_SEND_EFFECT_UNKNOWN";context[b"arm_effect_possible"]=True;context[b"send_state"]=b"ARM_SEND_EFFECT_UNKNOWN"
+  armed=packet(b"V5_CONSUME_ARMED",((b"state",b"CONSUME_ARMED"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"auth_id",AUTH),(b"a_begin_state",b"BEGIN_SEND_EFFECT_UNKNOWN"),(b"b_arm_state",b"ARM_SEND_EFFECT_UNKNOWN"),(b"consume_origin_ns",str(origin).encode()),(b"consume_deadline_ns",str(deadline).encode())))
+  send_exact(control,armed,deadline);context[b"consumption_state"]=b"ARM_SENT";context[b"send_state"]=b"ARM_SENT"
+  try:
+   raw,fds=recv_monitored(control,4,deadline,0);need(fds==())
+   if raw.startswith(b"V5_REFUSE_POSTARM|"):
+    refusal_session(control,context,raw,b"V5_REFUSE_POSTARM");return
+   commit=parse_packet(raw,b"V5_CONSUME_COMMIT",(b"state",b"ordinal",b"probe",b"auth_id",b"a_begin_state",b"a_arm_state",b"a_commit_state",b"consume_origin_ns",b"consume_deadline_ns"))
+   need(commit[b"state"]==b"CONSUME_COMMIT" and commit[b"ordinal"]==commit[b"probe"]==b"NONE" and commit[b"auth_id"]==AUTH)
+   need(commit[b"a_begin_state"]==b"BEGIN_SENT" and commit[b"a_arm_state"]==b"ARMED_CONFIRMED" and commit[b"a_commit_state"]==b"COMMIT_SEND_EFFECT_UNKNOWN")
+   need(udec(commit[b"consume_origin_ns"])==origin and udec(commit[b"consume_deadline_ns"])==deadline)
+  except (PidfdActorLost,RemoteAbort,CertificateExpired,FaultSet) as error:
+   ambiguous_consumption(control,context,cert_raw,envelope_raw,source_raw,error);return
+  context[b"consumed"]=True;context[b"consumption_state"]=b"COMMIT_RECEIVED"
+  try:intent_sha=consume_attempt(context,cert_raw,envelope_raw,source_raw,deadline)
+  except (CertificateExpired,FaultSet) as error:
+   context[b"faults"].update(error.faults if isinstance(error,FaultSet) else {b"CERTIFICATE_EXPIRED"})
+   terminal_failure(control,context,b"NONE",set(context[b"faults"]),False);return
+  checkpoint(CERT,horizon_needed(deadline,PRE_STAGE_REMAIN_NS),deadline)
+  consumed=packet(b"V5_CONSUMED_DURABLE",((b"state",b"CONSUMED_DURABLE"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"auth_id",AUTH),(b"intent_sha256",intent_sha),(b"consume_origin_ns",str(origin).encode()),(b"consume_deadline_ns",str(deadline).encode()),(b"attempt_fd_state",context[b"local_fd_state"])))
+  send_exact(control,consumed,deadline)
+  stage_bind(control,context);containment_bind(control,context)
+  for ordinal,probe in enumerate(PROBES):
+   context[b"entered"]=ordinal+1;checkpoint(CERT,(15-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS)
+   try:
+    stream_arm(control,context,ordinal,probe);pidfd_arm(control,context,ordinal,probe);release_phase(control,context,ordinal,probe)
+    actor_lost,faults,empty,stdout,stderr=monitor_probe(control,context,ordinal,probe)
+    if actor_lost:raise PidfdActorLost("probe")
+    if faults:raise FaultSet(faults)
+    validated_exchange(control,context,ordinal,probe,stdout,stderr)
+    close_probe(context);checkpoint(CERT,(14-ordinal)*TOTAL_NS+REPORT_NS+FINAL_TOTAL_NS)
+   except RemoteAbort as error:
+    context[b"faults"].update(error.faults);terminal_failure(control,context,probe,set(context[b"faults"]),False);return
+   except PidfdActorLost:
+    context[b"faults"].add(b"PIDFD_ACTOR_LOST");terminal_failure(control,context,probe,set(context[b"faults"]),True);return
+   except CertificateExpired:
+    context[b"faults"].add(b"CERTIFICATE_EXPIRED");terminal_failure(control,context,probe,set(context[b"faults"]),False);return
+   except FaultSet as error:
+    context[b"faults"].update(error.faults);terminal_failure(control,context,probe,set(context[b"faults"]),False);return
+  preterminal_arrival_deadline=context[b"origin"]+TOTAL_NS;raw,fds=recv_monitored(control,4,preterminal_arrival_deadline,0);need(fds==())
+  query=parse_packet(raw,b"V5_EMPTY_FINAL_QUERY",(b"state",b"ordinal",b"probe",b"chain_head_sha256",b"remove_origin_ns",b"remove_deadline_ns"))
+  remove_origin=udec(query[b"remove_origin_ns"],1);remove_deadline=udec(query[b"remove_deadline_ns"],1)
+  need(query[b"state"]==b"EMPTY_FINAL_QUERY" and query[b"ordinal"]==query[b"probe"]==b"NONE" and query[b"chain_head_sha256"]==context[b"chain_sha"])
+  need(remove_deadline==remove_origin+REPORT_NS and remove_origin<=time.monotonic_ns()<=remove_deadline)
+  checkpoint(CERT,horizon_needed(remove_deadline,FINAL_TOTAL_NS),remove_deadline);need(observe_population(context) is False)
+  confirmed=packet(b"V5_EMPTY_FINAL_CONFIRMED",((b"state",b"EMPTY_FINAL_CONFIRMED"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"chain_head_sha256",context[b"chain_sha"]),(b"remove_deadline_ns",str(remove_deadline).encode())))
+  send_exact(control,confirmed,remove_deadline)
+  raw,fds=recv_monitored(control,4,remove_deadline,0);need(fds==())
+  removed=parse_packet(raw,b"V5_CGROUP_REMOVED",(b"state",b"ordinal",b"probe",b"chain_head_sha256",b"remove_deadline_ns"))
+  need(removed[b"state"]==b"CGROUP_REMOVED" and removed[b"ordinal"]==removed[b"probe"]==b"NONE" and removed[b"chain_head_sha256"]==context[b"chain_sha"] and udec(removed[b"remove_deadline_ns"])==remove_deadline)
+  try:os.stat(AUTH,dir_fd=6,follow_symlinks=False);need(False)
+  except FileNotFoundError:pass
+  context[b"removed"]=True;checkpoint(CERT,horizon_needed(remove_deadline,FINAL_TOTAL_NS),remove_deadline)
+  ack=packet(b"V5_REMOVE_ACK",((b"state",b"REMOVE_ACK"),(b"ordinal",b"NONE"),(b"probe",b"NONE"),(b"chain_head_sha256",context[b"chain_sha"]),(b"remove_deadline_ns",str(remove_deadline).encode())))
+  send_exact(control,ack,remove_deadline)
+  raw,fds=recv_monitored(control,4,remove_deadline,0);need(fds==())
+  finalize=parse_packet(raw,b"V5_FINALIZE_CANDIDATE",(b"state",b"ordinal",b"probe",b"chain_head_sha256",b"terminal_origin_ns",b"terminal_deadline_ns",b"terminal_schedule_hex",b"candidate_deadline_ns"))
+  terminal_origin=udec(finalize[b"terminal_origin_ns"],1);terminal_deadline=udec(finalize[b"terminal_deadline_ns"],1)
+  need(finalize[b"state"]==b"FINALIZE_CANDIDATE" and finalize[b"expected_state"]==b"WAIT_FINALIZE" and finalize[b"ordinal"]==finalize[b"probe"]==b"NONE" and finalize[b"chain_head_sha256"]==context[b"chain_sha"])
+  need(terminal_deadline==terminal_origin+FINAL_TOTAL_NS and terminal_origin<=time.monotonic_ns()<=terminal_deadline)
+  schedule=check_schedule_hex(finalize[b"terminal_schedule_hex"],terminal_origin,terminal_deadline,TERMINAL_PHASE_SPEC)
+  need(udec(finalize[b"candidate_deadline_ns"])==schedule[b"CANDIDATE_RECORD"])
+  context[b"terminal_origin"]=terminal_origin;context[b"terminal_deadline"]=terminal_deadline;context[b"terminal_schedule"]=schedule;context[b"last_population"]=observe_population(context)
+  checkpoint(CERT,horizon_needed(terminal_deadline,0),terminal_deadline)
+  need(context[b"entered"]==sum(context[b"committed"])==context[b"direct_reaps"]==context[b"stopped_count"]==15)
+  need(context[b"stage_state"]==b"VERIFIED_PRESENT" and context[b"containment_bound"] and context[b"removed"] and context[b"last_population"] is False and not context[b"faults"] and context[b"kill_call_count"]==0 and context[b"kill_state"]==b"NOT_RESERVED")
+  candidate_sha=terminal_candidate_record(context,b"SUCCESS",b"NONE",schedule)
+  terminal_owner_loop(control,context,b"SUCCESS",b"SUCCESS_CANDIDATE",candidate_sha,b"PASS",terminal_deadline)
+ except RemoteAbort as error:
+  context[b"faults"].update(error.faults)
+  if context[b"refusal_closed"]:
+   if not context[b"owner_released"]:transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN")
+  elif pass_locked(context):
+   context[b"faults"].add(b"ACK_EFFECT_UNKNOWN");transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN")
+  elif context[b"arm_effect_possible"] and not context[b"consumed"]:
+   ambiguous_consumption(control,context,cert_raw,envelope_raw,source_raw,error)
+  elif context[b"consumed"]:terminal_failure(control,context,b"NONE",set(context[b"faults"]),False)
+  else:raise
+ except PidfdActorLost as error:
+  mark_actor_pidfd_lost(context)
+  if context[b"refusal_closed"]:
+   if not context[b"owner_released"]:transfer_or_hold(control,context,b"PIDFD_ACTOR_LOST")
+  elif pass_locked(context):
+   context[b"faults"].add(b"ACK_EFFECT_UNKNOWN")
+   if context[b"outcome_durable"] and context.get(b"terminal_schedule") is not None and terminal_safe(context):
+    try:finish_actor_loss_chain(context,context[b"terminal_mode"],context[b"terminal_schedule"])
+    except BaseException:transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN")
+   else:transfer_or_hold(control,context,b"PIDFD_ACTOR_LOST")
+  elif context[b"arm_effect_possible"] and not context[b"consumed"]:ambiguous_consumption(control,context,cert_raw,envelope_raw,source_raw,error)
+  elif context[b"consumed"]:terminal_failure(control,context,b"NONE",set(context[b"faults"]),True)
+  else:raise
+ except CertificateExpired as error:
+  context[b"faults"].add(b"CERTIFICATE_EXPIRED")
+  if context[b"refusal_closed"]:
+   if not context[b"owner_released"]:transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN")
+  elif pass_locked(context):context[b"faults"].add(b"ACK_EFFECT_UNKNOWN");transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN")
+  elif context[b"arm_effect_possible"] and not context[b"consumed"]:ambiguous_consumption(control,context,cert_raw,envelope_raw,source_raw,error)
+  elif context[b"consumed"]:terminal_failure(control,context,b"NONE",set(context[b"faults"]),False)
+  else:raise
+ except FaultSet as error:
+  context[b"faults"].update(error.faults)
+  if context[b"refusal_closed"]:
+   if not context[b"owner_released"]:transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN")
+  elif pass_locked(context):context[b"faults"].add(b"ACK_EFFECT_UNKNOWN");transfer_or_hold(control,context,b"RECONCILIATION_UNKNOWN")
+  elif context[b"arm_effect_possible"] and not context[b"consumed"]:ambiguous_consumption(control,context,cert_raw,envelope_raw,source_raw,error)
+  elif context[b"consumed"]:terminal_failure(control,context,b"NONE",set(context[b"faults"]),False)
+  else:raise
+ except BaseException as error:
+  context[b"faults"].add(b"INTERNAL_INVARIANT")
+  typed=FaultSet({b"INTERNAL_INVARIANT"})
+  if context[b"refusal_closed"]:
+   if not context[b"owner_released"]:transfer_or_hold(control,context,b"INTERNAL_INVARIANT")
+  elif pass_locked(context):context[b"faults"].add(b"ACK_EFFECT_UNKNOWN");transfer_or_hold(control,context,b"INTERNAL_INVARIANT")
+  elif context[b"arm_effect_possible"] and not context[b"consumed"]:ambiguous_consumption(control,context,cert_raw,envelope_raw,source_raw,typed)
+  elif context[b"consumed"]:terminal_failure(control,context,b"NONE",set(context[b"faults"]),False)
+  else:raise
+ finally:
+  if (context.get(b"begin_observed",False) or context[b"consumed"] or context[b"refusal_closed"]) and not context[b"owner_released"]:
+   transfer_or_hold(control,context,b"EXTERNAL_SURVIVAL_TRANSFER_REQUIRED")
+  if context[b"owner_released"]:
+   close_probe(context)
+   close_numbers(tuple(context.get(key,-1) for key in (b"root_events_fd",b"root_kill_fd",b"cgfd",b"cgroup_base_fd",b"stage_fd",b"attempt",b"attempt_base_fd") if context.get(key,-1)>=0))
+   for endpoint in (control,transfer_control):
+    if endpoint is not None:
+     try:endpoint.close()
+     except BaseException:pass
+
+try:
+ main()
+except BaseException:
+ raise SystemExit(96)
+raise SystemExit(0)
+P27 RUNNER V5 WATCHDOG SOURCE END F5C2189D
+## 19. Exact raw-span census
+
+Outer and inner delimiter lines are unique exact full lines. Delimiter text is not repeated elsewhere in this document.
+
+- Actor begin delimiter: line 236.
+- Actor raw bytes: lines 237 through 1806 inclusive; 132060 bytes; 1570 LF; SHA256 42eccaefe6b9ed0737be8d3e78194418e5eac0c5ac208f000b32d31a34308c6d.
+- Actor end delimiter: line 1807.
+- Embedded-validator begin delimiter inside actor: line 892.
+- Embedded-validator raw bytes: lines 893 through 994 inclusive; 10195 bytes; 102 LF; SHA256 7414e09dcdd09463f900a24dc19af9d3ecc9528c44895541fba7739fd7af9a89.
+- Embedded-validator end delimiter: line 995.
+- Watchdog begin delimiter: line 1809.
+- Watchdog raw bytes: lines 1810 through 3868 inclusive; 178117 bytes; 2059 LF; SHA256 6088a8d92a06786a330e4b3e22487fb4170f726cb5f06d047c96c096c8b46823.
+- Watchdog end delimiter: line 3869.
+
+Each raw span ends with LF and contains only LF or printable ASCII bytes. The two outer spans are separated by exactly one blank line. Raw extraction excludes the delimiter lines and preserves every byte between them. A future extractor must require exactly one begin, exactly one later end, exact adjacency semantics, the identities above, and no trailing or alternate match.
+
+## 20. Frozen source and callsite closure census
+
+This census is raw textual evidence only. It is not a parse, compile, validator run, or executability claim.
+
+- Actor top-level function-definition lines: 112; duplicate definition names: 0.
+- Watchdog top-level function-definition lines: 136; duplicate definition names: 0.
+- CERT_KEYS: 181 literal keys on each side; the two literal tuples are identical.
+- Detached context fields: 15; final envelope fields: 21; reservation TBS fields: 10; final reservation fields: 13.
+- CONTROL_SPEC rows: 40 on each side; every literal row occurs once per side and the two tables are identical.
+- Suite slots: 15, with one P01D immediately followed by one P01C.
+- FAULT_ORDER entries: 55 on each side.
+- Terminal phase ceilings: 13 on each side and total exactly 2510000000 ns.
+- Candidate fields: 26.
+- Final report fields: 34.
+- packet literal name occurrences, definition included: actor 46; watchdog 45.
+- parse_packet literal name occurrences, definition included: actor 25; watchdog 19.
+- Watchdog durable_once occurrences, definition included: 10.
+- Watchdog chained_record occurrences, definition included: 9.
+- Watchdog failure_report occurrences, definition included: 2.
+- Watchdog success_report_and_pass occurrences, definition included: 2.
+- Watchdog committed_seen_record occurrences, definition included: 2.
+- Watchdog ack_receipt_record occurrences, definition included: 3.
+- Watchdog reconciliation_record occurrences, definition included: 3.
+- Watchdog owner_closure_record occurrences, definition included: 3.
+- Watchdog external_transfer occurrences, definition included: 4.
+- Watchdog kill_once occurrences, definition included: 3.
+- Watchdog consume_attempt occurrences, definition included: 3.
+- Watchdog refusal_session occurrences, definition included: 3.
+- Watchdog ambiguous_consumption occurrences, definition included: 7; refusal paths are textually disjoint and never call it after REFUSAL_CLOSED_NO_CONSUME.
+
+The frozen sources contain no Runner V4 token, no lowercase runner-v4 token, no legacy REFUSED_NOT_ARMED token, no legacy REFUSED_POST_ARM token, and no author-stop terminal for an earlier runtime-plan version. All certificate domain constants, envelope/reservation layouts, common control fields, transition rows, phase tables, suite order, source identities, snapshot identities, V15 identities, and external-manifest rights agree across the two source spans.
+
+Source/prose responsibility is exact: the sources implement only the in-process protocol after authenticated entry; Sections 3, 4, 15, 16, and 17 retain issuer, gate, launcher, external-owner, reconciliation, review, manifest, and execution authority outside the source. No literal source field turns an unresolved external premise into evidence.
+
+## 21. Author-stop boundary
+
+The complete-file byte count, LF count, SHA256, stat identity, strict byte class, final LF, delimiter uniqueness, and terminal uniqueness are reported externally after the terminal is appended. They are not embedded as a self-hash, because a whole-file self-hash would be cyclic.
+
+The final line is an author-stop marker only. It grants no manifest mutation, formal-review result, test, validator, build, evidence creation, reservation consumption, retry, probe, or execution authority.
+
+BATCH07_P27_E001_SUPERVISOR_HOST_RUNTIME_PLAN_RECOVERY_V5_AUTHOR_STOP

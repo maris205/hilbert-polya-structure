@@ -1,0 +1,236 @@
+\section{Orbit algebras and the H\'enon composition}
+\label{sec:orbit-algebras}
+
+The quadratic H\'enon algebra basis, its finite and infinite versions, and the
+wrapping description of the dynamics are due to
+\citet{Bousch1992HenonAlgebras}.  The construction below extends that
+normal-form argument to the prescribed phase degrees.  We give the reduction
+and the identifications explicitly because both the ordinary-degree filtration
+and the scheme-valued periodic test will use the actual basis, not merely a
+generating family.  The orbit-coefficient obstruction obtained from this basis
+in the next section is a linear-algebra consequence of its permutation action.
+
+Throughout, $K$ is a field of characteristic zero and
+$A=K[x,y]$.  Fix $k\ge1$ and polynomials $p_0,\ldots,p_{k-1}$ of degrees
+$d_i\ge2$, and extend the subscripts periodically to $\Z$.  Write
+\begin{equation}
+  H_i(x,y)=(p_i(x)-y,x),\qquad
+  F=H_{k-1}\circ\cdots\circ H_0,\qquad
+  \sigma=F^*,\qquad \delta=\prod_{i=0}^{k-1}d_i.
+  \label{eq:henon-composition}
+\end{equation}
+Here $F^*f=f\circ F$.  The inverse of $H_i$ is
+$(x,y)\mapsto(y,p_i(y)-x)$, so these maps and $F$ are polynomial
+automorphisms.  They preserve $\dd x\wedge\dd y$, since
+$\dd(p_i(x)-y)\wedge\dd x=\dd x\wedge\dd y$.
+No normalization of their nonzero leading coefficients is imposed.
+
+The orbit coordinates are the polynomials determined by
+\begin{equation}
+  X_0=x,\qquad X_{-1}=y,\qquad
+  p_i(X_i)=X_{i-1}+X_{i+1}\quad(i\in\Z).
+  \label{eq:orbit-recurrence}
+\end{equation}
+The recurrence defines them in both directions: solve for $X_{i+1}$
+starting at $i=0$, and for $X_{i-1}$ starting at $i=-1$.
+An exponent word is a finitely supported sequence
+$e=(e_i)_{i\in\Z}$ of integers with $0\le e_i<d_i$.
+For such a word put
+\begin{equation}
+  M_e=\prod_{i\in\Z}X_i^{e_i},\qquad
+  \cB=\{M_e:0\le e_i<d_i,\ e\text{ finitely supported}\}.
+  \label{eq:standard-orbit-monomials}
+\end{equation}
+The zero word gives $M_0=1$.
+
+\begin{theorem}[Orbit basis]
+\label{thm:orbit-basis}
+The family $\cB$ is a $K$-basis of $A$.  More precisely, the evaluation map
+$Z_i\mapsto X_i$ identifies $A$ with
+\[
+  A_\infty=
+  K[Z_i:i\in\Z]\big/
+  (p_i(Z_i)-Z_{i-1}-Z_{i+1}:i\in\Z),
+\]
+and the residue classes of the monomials $\prod_iZ_i^{e_i}$ with
+$0\le e_i<d_i$ form a basis of this quotient.
+\end{theorem}
+
+\begin{proof}
+Write $p_i(T)=a_iT^{d_i}+q_i(T)$, where $a_i\in K^*$ and
+$\deg q_i<d_i$.  In $R_\infty=K[Z_i:i\in\Z]$ consider the rules
+\begin{equation}
+  Z_i^{d_i}\longrightarrow r_i,
+  \qquad
+  r_i=a_i^{-1}\bigl(Z_{i-1}+Z_{i+1}-q_i(Z_i)\bigr).
+  \label{eq:pure-power-rewrite}
+\end{equation}
+Every polynomial in $R_\infty$ involves only finitely many variables.
+Although a rule can introduce a neighboring index that was absent from the
+input, this does not prevent termination.  Replacing a factor $Z_i^{d_i}$
+in a monomial of total degree $m$ produces only monomials of degree at most
+$m-1$.  A recursively expanded monomial therefore has a finitely branching
+reduction tree of depth at most $m$.  Arbitrary orders of polynomial
+reduction terminate as well.  If the input has degree at most $D$, list the
+numbers of its current nonzero monomial terms in degrees
+$D,D-1,\ldots,0$, in this order.  Every reduction strictly decreases this
+finite tuple in lexicographic order: one term at the degree being reduced
+is removed, and only lower degrees can receive new terms.  Cancellations
+can only decrease the tuple further.  Lexicographic descent on a fixed
+finite product of copies of $\Z_{\ge0}$ is well founded.
+
+We next prove uniqueness of reduction by induction on the degree of a
+monomial.  Irreducible monomials require no choice.  If a monomial admits
+two reductions by the same rule, the resulting polynomial is the same,
+since selecting a different copy of the identical pure-power factor
+does not change the quotient monomial.  For different rules $i\ne j$,
+their pure powers are relatively prime.  Thus a monomial $M$ divisible
+by both can be reduced, first at $i$ and then using the retained factor
+$Z_j^{d_j}$ in every expanded term, to
+\begin{equation}
+  \frac{M}{Z_i^{d_i}Z_j^{d_j}}\,r_ir_j.
+  \label{eq:common-multiple-reduction}
+\end{equation}
+Reversing the order gives the identical polynomial.  This remains true
+when the indices are adjacent and $r_i$ contains $Z_j$: the original
+$Z_j^{d_j}$ factor is still present before the second replacement.
+All monomials after the first step have degree smaller than $\deg M$,
+so the induction hypothesis makes their subsequent complete reductions
+unique.  Consequently the two first choices have the same normal form.
+
+Extend this normal form linearly and denote it by $\NF_\infty$.
+The preceding argument also handles a reduction performed in any one
+term of a polynomial.  For every monomial $M$ and every $i$ it gives
+\[
+  \NF_\infty\bigl(M(Z_i^{d_i}-r_i)\bigr)=0.
+\]
+Hence $\NF_\infty$ annihilates the relation ideal.  Conversely, a
+reduction changes a polynomial by an element of that ideal and fixes
+each irreducible monomial.  Every class is therefore spanned by the
+bounded-exponent monomials, and a linear combination of them lying in
+the ideal must be zero: applying $\NF_\infty$ leaves that combination
+unchanged.  This proves linear independence as well as spanning.
+
+It remains to identify the quotient with the specified phase space.
+The recurrence \eqref{eq:orbit-recurrence} gives a homomorphism
+\[
+  \Psi:A_\infty\longrightarrow A,\qquad [Z_i]\longmapsto X_i.
+\]
+In the reverse direction define
+\[
+  \Theta:A\longrightarrow A_\infty,\qquad
+  x\longmapsto[Z_0],\quad y\longmapsto[Z_{-1}].
+\]
+The composite $\Psi\Theta$ fixes $x$ and $y$.
+Inside $A_\infty$, solving the defining relations successively to the
+right and to the left expresses each $[Z_i]$ as
+$X_i([Z_0],[Z_{-1}])$.  Therefore $\Theta\Psi$ fixes every generator
+$[Z_i]$ and is the identity as well.  These homomorphisms are inverse,
+and the abstract basis becomes precisely \eqref{eq:standard-orbit-monomials}.
+\end{proof}
+
+For $g\in A$, its normal form means its unique finite expansion in $\cB$.
+We identify the abstract bounded-exponent monomials with their polynomial
+images from now on.  In particular, the coefficient of $M_0=1$ refers to
+this expansion and need not be the constant coefficient in the original
+variables $x,y$.
+
+\begin{proposition}[Macro shift]
+\label{prop:macro-shift}
+For every $i\in\Z$,
+\begin{equation}
+  \sigma X_i=X_{i+k}.
+  \label{eq:macro-shift}
+\end{equation}
+Thus $\sigma$ permutes $\cB$ by shift-$k$, and normal-form reduction
+commutes with this shift.
+\end{proposition}
+
+\begin{proof}
+Successive application of $H_0,\ldots,H_{k-1}$ sends $(x,y)$ to
+$(X_k,X_{k-1})$.  This proves \eqref{eq:macro-shift} for $i=0,-1$.
+Applying $\sigma$ to \eqref{eq:orbit-recurrence} shows that
+$(\sigma X_i)_{i\in\Z}$ satisfies the same recurrence as
+$(X_{i+k})_{i\in\Z}$, because $p_{i+k}=p_i$.
+The two adjacent initial values determine all other values in both
+directions, which proves the formula for every $i$.
+Since $d_{i+k}=d_i$, a shifted admissible word is still admissible.
+The shift also preserves the relations in
+\eqref{eq:pure-power-rewrite}; uniqueness of their normal forms proves
+the last assertion.
+\end{proof}
+
+The shift in this proposition is attached to the chosen composition.
+Even if some or all of the phase polynomials coincide, replacing
+shift-$k$ by shift-$1$ changes the cohomological equation for $F$.
+
+For periodic data we need a finite version of the same algebra.  Let
+$n\ge1$ and put $N=kn\ge3$.  Since $k$ divides $N$, the phase data
+are well defined on $\Z/N\Z$.  Define
+\begin{equation}
+  A_N=K[Z_i:i\bmod N]\big/
+  (p_i(Z_i)-Z_{i-1}-Z_{i+1}:i\bmod N).
+  \label{eq:finite-orbit-algebra}
+\end{equation}
+All subscripts in this presentation are cyclic.  Write
+$\sigma_N[Z_i]=[Z_{i+k}]$ for the induced automorphism.
+
+\begin{proposition}[Periodic algebra]
+\label{prop:periodic-algebra}
+For $N=kn\ge3$, the algebra $A_N$ has basis
+\begin{equation}
+  \cB_N=
+  \left\{\prod_{i=0}^{N-1}[Z_i]^{e_i}:0\le e_i<d_i\right\}
+  \quad\text{and}\quad
+  \dim_K A_N=\delta^n.
+  \label{eq:finite-basis-length}
+\end{equation}
+There is a surjective wrapping homomorphism $W_N:A\to A_N$ with
+$W_N(X_i)=[Z_{i\bmod N}]$, and
+\begin{equation}
+  \ker W_N=J_N:=(X_N-X_0,\ X_{N-1}-X_{-1}).
+  \label{eq:fixed-scheme-ideal}
+\end{equation}
+Consequently
+\begin{equation}
+  A_N\simeq A/J_N=K[\Fix(F^n)],\qquad
+  W_N\sigma=\sigma_NW_N,\qquad \sigma_N^n=1.
+  \label{eq:fixed-scheme-identification}
+\end{equation}
+These are identities for the complete fixed-point scheme; no reducedness
+assumption is needed.
+\end{proposition}
+
+\begin{proof}
+The cyclic version of \eqref{eq:pure-power-rewrite} still replaces
+each pure power by terms of strictly smaller total degree.  Its distinct
+leading pure powers remain relatively prime, and the common-multiple
+calculation \eqref{eq:common-multiple-reduction} is unchanged.
+The termination, uniqueness, and independence argument in the proof of
+Theorem~\ref{thm:orbit-basis} therefore applies to this finite set of
+variables.  It gives $\cB_N$ as a basis, with cardinality
+$\prod_{i=0}^{N-1}d_i=\delta^n$.
+
+Sending every infinite index to its residue modulo $N$ respects all
+relations and defines $W_N$.  Each finite generator is in its image,
+so it is surjective.  Both generators of $J_N$ map to zero.
+To prove that they give the entire kernel, work first in $A/J_N$.
+The sequences $(X_{i+N})$ and $(X_i)$ have the same two adjacent
+values at $i=0,-1$.  They satisfy the same recurrence since
+$p_{i+N}=p_i$.  Induction in both directions gives
+\[
+  X_{i+N}=X_i\quad\text{in }A/J_N\quad(i\in\Z).
+\]
+It follows that $[Z_{i\bmod N}]\mapsto[X_i]$ defines a homomorphism
+$A_N\to A/J_N$.  It is inverse to the homomorphism induced by
+$W_N$: one composite fixes all cyclic generators, and the other fixes
+the classes of $x,y$.  This proves \eqref{eq:fixed-scheme-ideal}.
+
+Proposition~\ref{prop:macro-shift} gives
+$F^{n*}(x,y)=(X_N,X_{N-1})$.  The equalizer of $F^n$ and the identity
+on the affine plane has exactly the ideal $J_N$, which proves the
+scheme identification, not only an identification of its point set.
+The intertwining formula follows on the generators $X_i$, and shifting
+by $nk=N$ fixes every cyclic generator.  The dimension already proved
+is thus the algebra length of this scheme, including multiplicities.
+\end{proof}

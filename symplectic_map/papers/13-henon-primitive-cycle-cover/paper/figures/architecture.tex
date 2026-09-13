@@ -1,0 +1,100 @@
+\begin{tikzpicture}[
+  >=stealth,
+  every node/.style={font=\small},
+  architecture box/.style={
+    draw=black!78,
+    fill=black!3,
+    line width=0.55pt,
+    rounded corners=1.2pt,
+    minimum height=9mm,
+    inner sep=5pt,
+    align=center
+  },
+  architecture arrow/.style={
+    ->,
+    draw=black!78,
+    line width=0.65pt
+  },
+  extraction arrow/.style={
+    ->,
+    draw=black,
+    line width=0.85pt
+  },
+  edge label/.style={
+    fill=white,
+    inner sep=1.5pt,
+    align=center,
+    font=\scriptsize
+  },
+  column label/.style={font=\small\bfseries, text=black!82},
+  row label/.style={font=\footnotesize\bfseries, text=black!68, align=left}
+]
+
+% Column and row labels carry the layout; there is no decorative in-figure title.
+\node[column label] at (4.15,6.65) {marked points};
+\node[column label] at (10.85,6.65) {cycles};
+
+\node[row label, anchor=east] at (1.25,5.25) {generic};
+\node[row label, anchor=east] at (1.25,2.90) {integral model};
+\node[row label, anchor=east] at (1.25,0.55) {scalar fiber};
+
+% Generic row: actual period is extracted only inside the generic algebra.
+\node[architecture box, minimum width=2.25cm] (generic-full) at (2.60,5.25)
+  {$B_n\otimes_A K$\\[-1pt]\scriptsize full fixed algebra};
+\node[architecture box, minimum width=1.85cm] (generic-point) at (5.75,5.25)
+  {$E_n$\\[-1pt]\scriptsize actual-period field};
+\node[architecture box, minimum width=4.15cm, minimum height=17mm]
+  (generic-cycle) at (10.85,5.25)
+  {$F=E_n^{C_n}$\\[2pt]
+   \scriptsize geometric monodromy $S_r$\\[-1pt]
+   \scriptsize on a common dense finite-\etale{} open\\[-1pt]
+   \scriptsize $r=1$: $S_1$ trivial};
+
+\draw[extraction arrow]
+  (generic-full.north) -- (2.60,6.08) --
+  node[edge label, midway] {generic clopen idempotent}
+  (5.75,6.08) -- (generic-point.north);
+\draw[architecture arrow]
+  (generic-point.east) --
+  node[edge label, midway] {$C_n$-fixed\\subring}
+  (generic-cycle.west);
+
+% Integral row.
+\node[architecture box, minimum width=2.70cm] (integral-point) at (5.75,2.90)
+  {$S=\overline{A}^{\,E_n}$};
+\node[architecture box, minimum width=2.70cm] (integral-cycle) at (10.85,2.90)
+  {$S_0=S^{C_n}$};
+
+\draw[architecture arrow]
+  (generic-point.south) --
+  node[edge label, midway, xshift=-16pt] {integral\\model}
+  (integral-point.north);
+\draw[architecture arrow]
+  (generic-cycle.south) --
+  node[edge label, midway, xshift=16pt] {integral\\model}
+  (integral-cycle.north);
+\draw[architecture arrow]
+  (integral-point.east) --
+  node[edge label, midway] {$C_n$-fixed\\subring}
+  (integral-cycle.west);
+
+% Exact scalar fibers.
+\node[architecture box, minimum width=3.35cm] (scalar-point) at (5.75,0.55)
+  {$S/aS\simeq D_n$};
+\node[architecture box, minimum width=4.05cm] (scalar-cycle) at (10.85,0.55)
+  {$S_0/aS_0\simeq D_n^{C_n}$};
+
+\draw[architecture arrow]
+  (integral-point.south) --
+  node[edge label, midway, xshift=-18pt] {modulo $(a)$}
+  (scalar-point.north);
+\draw[architecture arrow]
+  (integral-cycle.south) --
+  node[edge label, midway, xshift=18pt] {modulo $(a)$}
+  (scalar-cycle.north);
+\draw[architecture arrow]
+  (scalar-point.east) --
+  node[edge label, midway] {$C_n$-fixed\\subring}
+  (scalar-cycle.west);
+
+\end{tikzpicture}

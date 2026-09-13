@@ -1,0 +1,353 @@
+\section{Effective periods and sharp boundary phenomena}
+\label{sec:effective-periods}
+
+The support condition in Theorem~\ref{thm:periodic-test} depends on the
+normal form of the input.  The ordinary-degree filtration gives an exact
+worst-case support bound before that normal form is computed.  The bound
+depends only on the phase degrees and the chosen initial coordinates,
+not on the coefficients of the polynomials $p_i$.
+
+\subsection{The exact endpoint cost}
+
+Use the weights $w_i$ of~\eqref{eq:phase-weights}.  For an integer
+$D\ge0$, define
+\[
+ L_{\mathrm{ph}}(D)
+ =\max\bigl(\{b-a:a,b\in\Z,\ a<b,\ w_a+w_b\le D\}\cup\{0\}\bigr).
+\]
+Both tails of the weight sequence grow at least geometrically, so only
+finitely many endpoint pairs can satisfy the displayed cost constraint.
+In particular, $L_{\mathrm{ph}}(D)$ is finite and is computable from
+the phase degrees.
+
+\begin{proposition}[Exact degree-to-diameter bound]\label{prop:exact-span}
+For every $D\ge0$,
+\[
+ \max_{g\in V_D}L(g)=L_{\mathrm{ph}}(D).
+\]
+For $D\ge2$, an endpoint word $X_aX_b$ attains the maximum.
+For $D=0,1$, the maximum is zero.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:degree-basis}, every standard word $M_e$ occurring
+in an element of $V_D$ satisfies $\sum_i e_iw_i\le D$.
+If its support has at least two points, let $a<b$ be its endpoints.
+Since $e_a,e_b\ge1$,
+\[
+ w_a+w_b\le\sum_i e_iw_i\le D.
+\]
+Its diameter is therefore at most $L_{\mathrm{ph}}(D)$.
+Words with one support point have diameter zero, so the same bound
+holds for every $g\in V_D$.
+
+For $D\ge2$, the pair $(-1,0)$ is admissible because
+$w_{-1}=w_0=1$; hence the maximum is attained by an admissible pair
+$a<b$.  Since $d_a,d_b\ge2$, the word $X_aX_b$ is standard and
+has diameter $b-a$.  Lemma~\ref{lem:degree-basis} gives its exact
+ordinary degree as $w_a+w_b$, so it belongs to $V_D$ and attains
+the claimed bound.  For $D=0,1$, two occupied indices would already
+cost at least two.  Thus all possible word diameters are zero;
+the constant word suffices to attain that value.
+\end{proof}
+
+The endpoint optimization has a closed form when all phase degrees are
+equal.  The same expression is an upper bound for unequal phase degrees
+after replacing them by their minimum.
+
+\begin{proposition}[Balanced scalar formula]\label{prop:scalar-span}
+Let $d=\min_{0\le i<k}d_i$.  For $D\ge2$, put
+\[
+ h=\left\lfloor\log_d(D/2)\right\rfloor,
+ \qquad
+ L_d(D)=1+2h+\mathbf 1_{\{D\ge(d+1)d^h\}},
+\]
+and set $L_d(0)=L_d(1)=0$.  Then
+\[
+ L_{\mathrm{ph}}(D)\le L_d(D)
+ \le1+2\lfloor\log_dD\rfloor\qquad(D\ge2).
+\]
+If every $d_i$ equals $d$, then $L_{\mathrm{ph}}(D)=L_d(D)$.
+In particular, this equality holds for a single H\'enon map of degree $d$.
+\end{proposition}
+
+\begin{proof}
+The weight of index $i$ is at least
+$d^{\dist(i,\{-1,0\})}$.  Given an admissible pair $a<b$, set
+\[
+ r=\dist(a,\{-1,0\}),\qquad
+ s=\dist(b,\{-1,0\}).
+\]
+Then $b-a\le1+r+s$ and $d^r+d^s\le D$.
+For fixed $r+s$, the least value of $d^r+d^s$ occurs when the two
+exponents differ by at most one.  Indeed, if $r\ge s+2$, replacing
+$(r,s)$ by $(r-1,s+1)$ reduces the sum by
+\[
+ (d-1)(d^{r-1}-d^s)>0.
+\]
+Iteration reaches the balanced pair.
+
+The least costs for distance sums $2h$, $2h+1$, and $2h+2$ are,
+respectively,
+\[
+ 2d^h,\qquad(d+1)d^h,\qquad2d^{h+1}.
+\]
+The definition of $h$ says that the first cost is at most $D$ and
+the third is greater than $D$.  Thus the largest affordable distance
+sum is $2h$, or $2h+1$ precisely when $D\ge(d+1)d^h$.
+This gives $L_{\mathrm{ph}}(D)\le L_d(D)$.
+Each affordable exponent is at most $\lfloor\log_dD\rfloor$,
+which also gives the stated simpler upper bound.
+
+If all phase degrees are $d$, the weights are exactly
+$d^{\dist(i,\{-1,0\})}$.  Take the balanced distances on opposite
+sides of the initial interval, with endpoints $a=-1-r$ and $b=s$.
+Their diameter is $1+r+s$, and their cost is $d^r+d^s$.
+The maximizing distances above therefore give equality.
+The convention for $D=0,1$ agrees with
+Proposition~\ref{prop:exact-span}.
+\end{proof}
+
+\subsection{A degree-uniform periodic test}
+
+\begin{theorem}[Effective macro period]\label{thm:effective-period}
+For $D\ge0$, let
+\[
+ n_{\mathrm{eff}}(D)
+ =\left\lceil\frac{\max\{3,\,2L_{\mathrm{ph}}(D)+1\}}{k}\right\rceil.
+\]
+For every $n\ge n_{\mathrm{eff}}(D)$ and every $g\in V_D$,
+the four conditions of Theorem~\ref{thm:periodic-test} are equivalent
+with $N=kn$.  In particular, one test in $A_{kn_{\mathrm{eff}}(D)}$
+decides whether $g$ has a polynomial, or equivalently rational,
+primitive.  For $D\ge1$ this algebra has length
+\[
+ \dim_K A_{kn_{\mathrm{eff}}(D)}
+ =\delta^{n_{\mathrm{eff}}(D)}\le\delta^4D^4.
+\]
+\end{theorem}
+
+\begin{proof}
+The chosen period satisfies $kn\ge3$ and
+$kn\ge2L_{\mathrm{ph}}(D)+1>2L(g)$ by
+Proposition~\ref{prop:exact-span}.  Theorem~\ref{thm:periodic-test}
+therefore applies to every $g\in V_D$.
+
+For the length bound, assume $D\ge1$ and set
+$t=\lfloor\log_\delta D\rfloor$.  Write an outward distance from
+$\{-1,0\}$ as $qk+r$, where $q\ge0$ and $0\le r<k$.
+The corresponding weight contains $q$ complete phase blocks and
+is at least $\delta^q$.  Any index with weight at most $D$ thus
+has $q\le t$.  All such indices lie in
+\[
+ [-kt-k,\ kt+k-1].
+\]
+It follows that
+\[
+ L_{\mathrm{ph}}(D)\le2kt+2k-1,
+ \qquad
+ 2L_{\mathrm{ph}}(D)+1\le4kt+4k-1.
+\]
+Since $\lceil3/k\rceil\le3\le4t+4$, the definition of
+$n_{\mathrm{eff}}$ gives $n_{\mathrm{eff}}(D)\le4t+4$.
+Finally, Proposition~\ref{prop:periodic-algebra} identifies the
+length with $\delta^{n_{\mathrm{eff}}(D)}$, whence
+\[
+ \delta^{n_{\mathrm{eff}}(D)}
+ \le\delta^{4t+4}
+ =\delta^4(\delta^t)^4\le\delta^4D^4.
+\]
+The effective period itself is also defined for $D=0$; only the
+quartic estimate excludes that value.
+\end{proof}
+
+The logarithmic period and the quartic algebra length measure different
+objects.  The former counts iterates of the macro map, whereas the latter
+counts the dimension of the entire fixed-point algebra, including
+multiplicities.  Neither bound is a statement about coefficient bit
+complexity or the cost of constructing a normal form.
+
+\subsection{Sharpness of the eventual-uniform threshold}
+
+A failure at one period gives a lower bound for a threshold beyond
+which every period works.  It need not rule out a specially chosen
+shorter period.  To keep these quantifiers explicit, fix a scalar map
+$H_p$ with $\deg p=d\ge3$ and define $T_p(D)$ to be the least integer
+$T\ge3$ such that, for every integer $n\ge T$ and every $g\in V_D$,
+\[
+ W_n(S_ng)=0\quad\Longleftrightarrow\quad g\in(\sigma-1)A.
+\]
+Theorem~\ref{thm:effective-period} shows that this threshold exists.
+Here $k=1$, so the cycle length and the macro period are both $n$.
+
+\begin{theorem}[Sharp eventual-uniform degree scale]\label{thm:sharp-threshold}
+For every scalar map of degree $d\ge3$ and every integer $r\ge1$, set
+\[
+ g_r=X_{-r-1}X_r^2-X_{-r-1}^2X_r,
+ \qquad D_r=3d^r.
+\]
+Then $\deg g_r=D_r$ and $g_r\notin(\sigma-1)A$, but
+\[
+ W_{4r+2}(S_{4r+2}g_r)=0.
+\]
+Moreover,
+\[
+ L(g_r)=L_d(D_r)=2r+1,
+ \qquad T_p(D_r)=4r+3.
+\]
+Consequently the leading constant $4$ in an eventual-uniform bound
+$4\log_dD+O(1)$ cannot be replaced by a smaller constant, even for
+one fixed scalar map of degree $d\ge3$.
+\end{theorem}
+
+\begin{proof}
+Put $a=-r-1$, $b=r$, $L=b-a=2r+1$, and $m=d^r$.
+Lemma~\ref{lem:degree-basis} gives nonzero constants
+$\alpha_r,\beta_r\in K$ such that the highest homogeneous terms
+of $X_b$ and $X_a$ are $\alpha_rx^m$ and $\beta_ry^m$,
+respectively.  Hence the homogeneous part of degree $3m$ in $g_r$ is
+\[
+ \alpha_r^2\beta_r x^{2m}y^m
+ -\alpha_r\beta_r^2 x^my^{2m}.
+\]
+The two monomials are distinct and their coefficients are nonzero.
+Thus $\deg g_r=3m=D_r$.
+
+Both terms defining $g_r$ are standard, since $1,2<d$.
+Their exponent lists, read from the smaller occupied index to the
+larger one, are $(1,2)$ and $(2,1)$.  An integer translation preserves
+that order and those exponents, so the terms lie in different infinite
+word orbits.  Their orbit obstructions are $1$ and $-1$;
+Theorem~\ref{thm:orbit-obstructions} proves that $g_r$ is not a
+coboundary.  Each term has diameter $L$, giving $L(g_r)=L$.
+
+On the circle of length $n=2L=4r+2$, translation by $L$ exchanges
+the two occupied positions.  It therefore takes the wrapped first
+term of $g_r$ to the wrapped second term.  Their full cyclic sums
+are equal, which proves $W_n(S_ng_r)=0$.
+
+At $D=D_r$, we have
+\[
+ \left\lfloor\log_d(D_r/2)\right\rfloor=r,
+ \qquad D_r<(d+1)d^r,
+\]
+because $1<3/2<d$ and $3<d+1$.  These inequalities include $d=3$.
+Proposition~\ref{prop:scalar-span} yields $L_d(D_r)=2r+1$.
+Theorem~\ref{thm:effective-period} then gives
+$T_p(D_r)\le4r+3$.  The failed test at $n=4r+2$ forces the reverse
+inequality: any smaller eventual threshold would include that period
+and the input $g_r$.  Thus $T_p(D_r)=4r+3$.
+
+Finally, $\log_dD_r=r+\log_d3$.  If an eventual-uniform bound had
+the form $T_p(D)\le c\log_dD+C$ with $c<4$ and a constant $C$
+independent of $D$, evaluation at $D_r$ would give
+\[
+ 4r+3\le cr+c\log_d3+C
+\]
+for every $r$, which is impossible as $r$ tends to infinity.
+\end{proof}
+
+The same examples show why the general diameter hypothesis must be
+strict: at $n=2L(g_r)$ the scheme sum loses a nonzero obstruction.
+The sharpness statement does not exclude an isolated valid period
+below $T_p(D)$, several shorter periods used jointly, or a method
+that uses no periodic algebra.
+
+\subsection{Binary words and the macro-phase boundary}
+
+When $d=2$, the exponent $2$ is not an allowed standard digit, so
+the preceding two-word construction does not apply.  At equality
+$n=2L$, the only ambiguous cut for a binary word is an antipodal
+pair, and that pair has identical endpoint digits.
+
+\begin{proposition}[Scalar binary boundary]\label{prop:binary-boundary}
+Let $k=1$ and $d=2$.  The equivalences in
+Theorem~\ref{thm:periodic-test} remain valid whenever
+$n\ge3$ and $n\ge2L(g)$.  At the boundary $n=2L$, the cyclic sum
+of an antipodal two-point word is twice the sum over its distinct
+cyclic translates; this nonzero multiplicity does not affect detection.
+On the other hand, for every integer $L\ge2$ the polynomial
+\[
+ g_L=X_0X_L-X_0X_{L-1}
+\]
+is not a coboundary and satisfies
+$W_n(S_ng_L)=0$ at $n=2L-1\ge3$.
+\end{proposition}
+
+\begin{proof}
+Only the equality case needs an argument beyond
+Theorem~\ref{thm:periodic-test}.  Write $n=2L\ge3$ and consider
+a nonconstant standard word of diameter $\ell\le L$.
+If $\ell<L$, its external gap is greater than $L$ and is unique.
+If $\ell=L$ and at least three indices are occupied, every internal
+gap is strictly less than $L$, whereas the external gap equals $L$.
+There is again a unique largest gap, which recovers the word on
+the line and gives a cyclic orbit of length $n$ by the proof of
+Lemma~\ref{lem:no-alias}.
+
+The remaining case is exactly the word $X_aX_{a+L}$: all nonzero
+binary digits are $1$.  Its two gaps both have length $L$.
+Cutting across either gap yields two lifts related by translation
+by $L$, so they already lie in the same infinite scalar orbit.
+Thus different infinite word orbits still have disjoint finite
+orbit supports.  The only cyclic translations preserving this pair
+are $0$ and $L$ modulo $n$.  Its orbit has $n/2$ distinct words,
+each of which occurs twice in the full $n$-term sum.  All other
+words under consideration have trivial stabilizer.
+
+In the norm decomposition from the proof of
+Theorem~\ref{thm:periodic-test}, each nonconstant orbit coefficient
+is therefore multiplied either by $1$ or by $2$, on its own
+disjoint finite basis support.  The constant coefficient remains
+$nc_0$.  Characteristic zero makes all these factors nonzero,
+so the scheme sum still detects exactly the orbit obstructions.
+The other equivalent conditions and the primitive statement follow
+from the same global results as before.
+
+For the failure at $n=2L-1$, the two terms of $g_L$ have distinct
+diameters $L$ and $L-1$, and hence lie in different infinite
+translation orbits.  The orbit obstruction criterion proves that
+$g_L$ is not a coboundary.  Modulo $n$, translation by $L-1$ takes
+the support $\{0,L\}$ to
+\[
+ \{L-1,2L-1\}=\{L-1,0\}\pmod n,
+\]
+which is the support of the second term.  Their cyclic sums are
+equal and cancel.  The assumptions $L\ge2$ and $n=2L-1\ge3$
+keep this example within the finite-cycle model used here.
+\end{proof}
+
+\begin{example}[Loss of macro phase at an equal-gap cut]\label{ex:phase-alias}
+Take $k=2$ with $d_0=d_1=2$, and set $N=6$, $n=3$.  The polynomial
+\[
+ g=X_0X_3-X_3X_6
+\]
+has $L(g)=3$.  Its two standard words differ by translation by $3$.
+They cannot differ by a multiple of $2$: comparing their smallest
+occupied indices would require $2j=3$.  They therefore lie in
+different $\sigma$-orbits, and $g$ is not a coboundary for the
+macro map $F=H_1\circ H_0$.  Nevertheless,
+\[
+ W_6g=Z_0Z_3-Z_3Z_0=0,
+\]
+so $W_6(S_3g)=0$ as well.
+The two equal gaps permit a shift by $3$, which preserves a scalar
+orbit but changes the macro phase.  This example also works if
+$p_0=p_1$, because then the map under study is $H_p^2$, not $H_p$.
+Thus $k\mid N$ alone does not justify the scalar binary improvement;
+the general multiphase test retains $N>2L(g)$.
+\end{example}
+
+There is also a direct finite linear method that does not pass through
+a periodic scheme.  By Theorem~\ref{thm:bounded-primitive}, for
+$g\in V_D$ it is enough to insert
+\[
+ f=\sum_{a+b\le D}u_{a,b}x^ay^b
+\]
+into $\sigma f-f=g$ and compare polynomial coefficients.  This
+gives an exact linear system with $\binom{D+2}{2}=O(D^2)$ unknowns;
+the constant coefficient accounts for the freedom in the primitive.
+The periodic test supplies an alternative exact certificate on one
+complete scheme.  The number of unknowns in the direct method and
+the length of that scheme do not, by themselves, compare their
+running times or establish an optimal algorithm.

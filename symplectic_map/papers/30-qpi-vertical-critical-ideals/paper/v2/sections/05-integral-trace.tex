@@ -1,0 +1,244 @@
+\section{Integral trace calculus and global divided forms}
+\label{trace:section}
+
+The division defining $\alpha_{mp^a}$ must take place before reduction.
+We establish this division on the original matrix product, extend the resulting
+form to the full open surface, and compute its residue. These calculations
+also fix the trace identities used in the first-order computations below.
+Throughout this section, $d$ differentiates the two state variables and fixes
+the base ring, the unit time, and the spectral variable.
+
+\subsection{Cyclic insertion before reduction}
+
+Write $N=p^a$, $r=mN$, $s=s_a$, and $t=t_a$. On the original torus let
+\[
+ R=\mathcal O_a[x^{\pm1},y^{\pm1}],\qquad
+ \Omega=R\,dx\oplus R\,dy.
+\]
+The entries of the matrix in \eqref{main:matrix} lie in $R[z]$.
+The trace convention in \eqref{main:integral} gives
+$I_{r,s}=[z^r]\operatorname{tr}M_{r,s}(z)$.
+
+\begin{lemma}[Integral cyclic insertion]
+\label{trace:insertion}
+Set
+\[
+ Q_r(z)=\operatorname{tr}\bigl(
+ dA(z)A(s^{r-1}z)\cdots A(sz)\bigr).
+\]
+Then, as an equality in $\Omega$ before reduction,
+\begin{equation}
+ dI_{r,s}=r[z^r]Q_r(z),\qquad
+ \alpha_{r}=m[z^r]Q_r(z)\in\Omega.
+ \label{trace:integral-insertion}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Differentiate the descending product $M_{r,s}$. Its $j$th summand has
+$dA(s^jz)$ in place of $A(s^jz)$. Cyclically rotate its trace so that this
+factor is first, and put $w=s^jz$. The remaining factors, in their order,
+are $A(s^{r-1}w),\ldots,A(sw)$: indices are reduced modulo $r$, using
+$s^r=1$. No two matrix factors have been interchanged. The summand is
+therefore $Q_r(s^jz)$. Its coefficient of $z^r$ is $[z^r]Q_r(z)$,
+because $s^{jr}=1$. Summing the $r$ insertions proves the first equality.
+Since $r=mp^a$, the second equality follows in characteristic zero and
+exhibits its integral coefficients. Specializing the unit $t$ does not
+change the identity.
+\end{proof}
+
+\subsection{The rank-two recurrence and its coefficient}
+
+Let $k$ be the residue field, $\eta=\bar s$, and
+\[
+ B(z)=A(\eta^{m-1}z;\bar t)\cdots A(z;\bar t),\qquad
+ J=I_{m,\eta},\quad T=\bar t^m,\quad
+ \varepsilon=(-1)^{m+1}.
+\]
+The residue of $M_{r,s}$ is $B^N$. For a matrix over a commutative ring of
+characteristic $p$, $\operatorname{tr}(B^{p^a})=(\operatorname{tr}B)^{p^a}$.
+Indeed, the assertion holds for the two eigenvalues of the generic matrix
+over its splitting field, hence is a polynomial identity in its entries.
+Consequently $\bar I_{r,s}=J^N$. Differentiating this last equality would
+lose the information retained by Lemma~\ref{trace:insertion}.
+
+Put $A_j=A(\eta^jz;\bar t)$ and
+\[
+ C_j=A_{m-1}\cdots A_{j+1}\,dA_j\,A_{j-1}\cdots A_0,
+ \qquad dB=\sum_{j=0}^{m-1}C_j.
+\]
+Empty products are identity matrices. Reducing the integral insertion
+formula gives
+$\bar\alpha_r=m[z^{mN}]\operatorname{tr}(B^{N-1}C_0)$.
+The same cyclic rotation used above shows that the coefficient of
+$z^{mN}$ in $\operatorname{tr}(B^{N-1}C_j)$ is independent of $j$:
+the spectral rescaling contributes $\eta^{jmN}=1$. Summing the $m$
+terms, rather than cancelling the vanishing integer $N$, yields
+\begin{equation}
+ \bar\alpha_r=[z^{mN}]\operatorname{tr}(B^{N-1}dB).
+ \label{trace:reduced-insertion}
+\end{equation}
+
+Define integer polynomials by
+\begin{equation}
+ U_{-1}=0,\qquad U_0=1,\qquad
+ U_n(S,D)=S U_{n-1}(S,D)-D U_{n-2}(S,D)\quad(n\ge1).
+ \label{trace:U}
+\end{equation}
+For any rank-two matrix and any derivation of its coefficient ring,
+\begin{equation}
+ \operatorname{tr}(B^{n-1}dB)
+ =U_{n-1}(S,D)dS-U_{n-2}(S,D)dD,
+ \quad S=\operatorname{tr}B,\quad D=\det B,
+ \quad n\ge2.
+ \label{trace:rank-two}
+\end{equation}
+For $n=2$, the identity follows from
+$dD=\operatorname{tr}((S\,\mathrm{id}-B)dB)$.
+For larger $n$, Cayley--Hamilton gives
+$B^{n-1}=U_{n-2}B-DU_{n-3}\mathrm{id}$; substitution of the $n=2$
+identity and the recurrence proves \eqref{trace:rank-two}.
+This argument works over the integer coefficient ring, including repeated
+eigenvalues, and does not introduce a discriminant denominator.
+
+For the original block, setting $Z=z^m$ gives
+\[
+ S=T+JZ+Z^2,\qquad D=\varepsilon Z^3,
+ \qquad dS=Z\,dJ,\qquad dD=0.
+\]
+It follows from \eqref{trace:reduced-insertion} that
+\begin{equation}
+ \bar\alpha_r=
+ [Z^{N-1}]U_{N-1}(T+JZ+Z^2,\varepsilon Z^3)\,dJ.
+ \label{trace:coefficient}
+\end{equation}
+
+\begin{lemma}[Residue multiplier]
+\label{trace:residue}
+With $H=H_p(T,J;\varepsilon)$ and $\sigma=(p^a-1)/(p-1)$ as in the
+main statements, the coefficient in \eqref{trace:coefficient} is $H^\sigma$.
+The polynomial $H_p(T,h;\varepsilon)$ is monic of degree $p-1$ in $h$.
+\end{lemma}
+
+\begin{proof}
+The integer identity
+\[
+ U_{N-1}(u+v,uv)=\frac{u^N-v^N}{u-v}
+\]
+is an identity of polynomials; the quotient denotes the polynomial sum,
+also when $u=v$. In characteristic $p$, it is $(u-v)^{N-1}$.
+The injective map from symmetric polynomials in $S,D$ to polynomials
+in $u,v$ therefore gives
+\[
+ U_{N-1}(S,D)=
+ \begin{cases}
+ (S^2-4D)^{(N-1)/2},&p\ne2,\\
+ S^{N-1},&p=2.
+ \end{cases}
+\]
+For odd $p$, set
+\[
+ f(Z)=\bigl((T+hZ+Z^2)^2-4\varepsilon Z^3\bigr)^{(p-1)/2}.
+\]
+It has degree at most $2p-2$, and the required polynomial is
+$\prod_{i=0}^{a-1}f(Z)^{p^i}$. A term contributing to $Z^{p^a-1}$
+has indices $n_i$ with $0\le n_i\le2p-2$ and
+$\sum_i n_i p^i=p^a-1$. Reduction modulo $p$ forces $n_0=p-1$,
+the only integer in that interval congruent to $p-1$.
+Subtracting this value and dividing by $p$ repeats the argument for
+each subsequent index. Thus every $n_i=p-1$, and the coefficient is
+\[
+ \prod_{i=0}^{a-1}\bigl([Z^{p-1}]f(Z)\bigr)^{p^i}
+ =H_p(T,h;\varepsilon)^{1+p+\cdots+p^{a-1}}.
+\]
+For $p=2$, use $f(Z)=T+hZ+Z^2$ instead. The only odd index in
+$[0,2]$ is one, so the same argument gives $h^{2^a-1}$.
+Finally, in odd characteristic the term $h^{p-1}$ in $H_p$ can only
+come from $(h^2Z^2)^{(p-1)/2}$ and has coefficient one; all other
+choices have lower $h$-degree. For $p=2$, monicity follows from $H_2=h$.
+\end{proof}
+
+\subsection{Extension to the full open surface}
+
+\begin{proposition}[Regularity before reduction]
+\label{trace:regular}
+On the original open model $\mathcal U_a$, the form
+$\alpha_{mp^a}=p^{-a}dI_{mp^a,s_a}$ is regular and satisfies
+\begin{equation}
+ \bar\alpha_{mp^a}=H^\sigma dJ
+ \quad\hbox{on all of }\mathcal U_k.
+ \label{trace:global-residue}
+\end{equation}
+Both assertions include the four complete terminal affine lines.
+\end{proposition}
+
+\begin{proof}
+The eight blowups of Proposition~\ref{geom:surface} are blowups of sections
+over $\mathcal O_a$. Their two local charts are relative affine planes,
+and the last centers have unit coordinates $1,t,t,s$ on distinct
+boundary components. Thus the surface is smooth over $\mathcal O_a$,
+its special fiber is geometrically integral, and its relative cotangent
+sheaf is locally free.
+
+First regard $I_{r,s}$ as a rational section of $\mathcal O(rD)$.
+At every horizontal prime divisor it is regular by the polar-divisor
+calculation of Section~\ref{geom:section}, applied over the fraction field.
+At the unique vertical prime divisor its Laurent coefficients are integral,
+and that divisor's generic point lies in the original torus.
+On a normal Noetherian scheme a locally free module is the intersection
+of its localizations at prime divisors inside its generic fiber
+\cite[Tag 0AVB]{StacksProject2026}.
+Applying this fact to the line bundle extends $I_{r,s}$ to a regular
+section and hence to a regular function on $\mathcal U_a$.
+
+The rational one-form $p^{-a}dI_{r,s}$ is regular at horizontal prime
+divisors, since $p$ is invertible there. At the vertical generic point,
+Lemma~\ref{trace:insertion} supplies integral coefficients. The same
+intersection property, now for the locally free cotangent sheaf, extends
+it uniquely across the whole open surface. On the special fiber,
+both sides of \eqref{trace:global-residue} are regular sections of a
+locally free sheaf. They agree on the dense torus by
+Lemma~\ref{trace:residue}, so agree on the geometrically integral
+special fiber. No terminal line has been removed in this extension.
+\end{proof}
+
+For later congruences the base need not be reduced. Density of the
+underlying point set is then insufficient, so we record the actual
+algebraic restriction property of the terminal charts.
+
+\begin{lemma}[Restriction on nonreduced terminal charts]
+\label{trace:chart-injection}
+Let $B$ be any quotient of a base ring used above. On a terminal chart,
+the coordinate ring is a localization of $B[u,v]$ by the displayed
+unit factors in \eqref{geom:charts}. Localization at $u$ is injective
+on this ring and on its free module with basis $du,dv$.
+Consequently an equality of regular forms on this chart can be tested
+after inverting $u$, also over a nonreduced $B$.
+\end{lemma}
+
+\begin{proof}
+Multiplication by $u$ is injective in the polynomial ring $B[u,v]$,
+by comparison of its coefficients, regardless of nilpotents in $B$.
+It remains injective after localization by the unit factors of the chart.
+Hence the map to the localization at $u$ is injective. The same statement
+holds componentwise on the free relative cotangent module.
+These charts cover the terminal lines and meet the original torus where
+$u$ is invertible. Applying the assertion to each chart proves the claim.
+\end{proof}
+
+Taking the two coefficients of \eqref{trace:global-residue} in any local
+frame gives
+\[
+ \overline{\mathfrak c(\alpha_{mp^a})}
+ =(H^\sigma)\,\mathfrak c(dJ).
+\]
+On a smooth finite fiber, $dJ$ is a local coordinate differential by
+Theorem~\ref{geom:pencil}. The displayed ideal is then the Hasse
+divisor with its multiplicities multiplied by $\sigma$; it does not yet
+determine the unreduced critical ideal. Lemma~\ref{trace:residue} and
+the original Laurent leading term
+$J=-\bar t^m x^{-m}+O(x^{-m+1})$ also show that $H^\sigma dJ\ne0$:
+$p\nmid m$ makes the leading coefficient of $J_x$ nonzero.
+Thus the generic common uniformizer order of $dI_{mp^a}$ on the special
+surface is exactly $a\varphi(p^a)$. Pointwise orders along lifted states
+require the vertical information computed next.

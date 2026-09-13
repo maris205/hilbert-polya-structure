@@ -1,0 +1,267 @@
+\section{Global asymptotics and sharpness}\label{sec:global}
+
+\subsection{The global Fourier formula}
+
+Keep the compact energy window and original norms of Theorem~\ref{thm:main}.
+The commutation in Lemma~\ref{lem:coarea-projection} gives
+\(C_{2m+r}(f,g)=C_{2m}(f_r,g)\), where \(f_r=f\circ F_T^r\).
+Since \(F_T\) is a smooth energy-preserving automorphism and \(r=0,1\),
+the chain rule on the fixed compact window gives
+\(\|f_r\|_{C^a}\leq C_a\|f\|_{C^a}\), with no loss depending on \(m\).
+Only the original observables are differentiated; the possibly nonsmooth
+functions \((I-\Pi)f\) and \((I-\Pi)g\) enter as \(L^2\) functions.
+
+Let \(c\) initially index the circle families over the three regular energy
+intervals \(I_c\). Coarea and circlewise Parseval yield
+\begin{equation}\label{eq:global-fourier}
+ C_{2m+r}(f,g)=\sum_c\sum_{k\ne0}\int_{I_c}
+ L(h)\widehat f_{r,c,k}(h)\overline{\widehat g_{c,k}(h)}
+ e^{2\pi\ii km\sigma_c(h)}\,\dd h.
+\end{equation}
+This is an absolutely integrable Fourier representation. Indeed,
+Cauchy--Schwarz in \(k\) and Parseval give, on each circle,
+\[
+ \sum_{k\ne0}L\bigl|\widehat f_{r,c,k}
+                  \overline{\widehat g_{c,k}}\bigr|
+ \leq
+ \left(\int_{C_h^c}|f_r-\Pi f_r|^2\,\dd t\right)^{1/2}
+ \left(\int_{C_h^c}|g-\Pi g|^2\,\dd t\right)^{1/2}.
+\]
+Integrating and applying Cauchy--Schwarz in \((h,c)\) bounds the result by
+\(\|(I-\Pi)f_r\|_{L^2(\mu)}\|(I-\Pi)g\|_{L^2(\mu)}\).
+These norms are finite by properness, and the critical fibres have zero
+\(\mu\)-measure. Tonelli and Fubini therefore justify
+\eqref{eq:global-fourier}. Exchanges involving derivatives or asymptotic
+remainders require the additional summable bounds below; they do not follow
+from this first application of Fubini alone.
+
+\subsection{Uniform stationary phase on regular tubes}
+
+\begin{lemma}\label{lem:stationary-phase}
+Suppose a smooth real phase \(\sigma\) has a nondegenerate critical point
+\(h_*\). On a sufficiently small fixed interval about \(h_*\), every
+\(a\in C_c^4\) satisfies, uniformly for \(m\geq1\) and \(k\in\Z\setminus\{0\}\),
+\begin{equation}\label{glob:stationary-formula}
+ \int a(h)e^{2\pi\ii km\sigma(h)}\,\dd h
+ =\frac{a(h_*)e^{2\pi\ii km\sigma(h_*)
+       +\ii\pi\sgn(k\sigma''(h_*))/4}}
+       {\sqrt{m|k\sigma''(h_*)|}}
+ +O\bigl(\|a\|_{C^4}(m|k|)^{-3/2}\bigr).
+\end{equation}
+The implicit constant depends on the fixed phase and interval, not on the
+amplitude, \(m\), or \(k\).
+\end{lemma}
+
+\begin{proof}
+The increasing Morse coordinate
+\(y=\sgn(h-h_*)\sqrt{2|\sigma(h)-\sigma(h_*)|}\) gives
+\(\sigma(h)=\sigma(h_*)+s_*y^2/2\), where
+\(s_*=\sgn\sigma''(h_*)\), and
+\(h'(0)=|\sigma''(h_*)|^{-1/2}\).
+Set \(b(y)=a(h(y))h'(y)\), extended by zero, and use the Fourier transform
+\(\widehat b(\xi)=\int_\R b(y)e^{-2\pi\ii\xi y}\,\dd y\).
+The Gaussian identity and Fourier inversion give, for real \(v\ne0\),
+\[
+ \int_\R b(y)e^{\ii\pi vy^2}\,\dd y
+ =|v|^{-1/2}e^{\ii\pi\sgn(v)/4}
+   \int_\R\widehat b(\xi)e^{-\ii\pi\xi^2/v}\,\dd\xi.
+\]
+To justify the identity, first insert \(e^{-\delta y^2}\), \(\delta>0\).
+The absolutely convergent Gaussian calculation has Fourier kernel bounded
+in modulus by \(|v|^{-1/2}\); hence dominated convergence applies as
+\(\delta\downarrow0\), since \(\widehat b\in L^1\).
+Four integrations by parts, together with the fixed compact support, give
+\(\int_\R\xi^2|\widehat b(\xi)|\,\dd\xi\leq C\|b\|_{C^4}\).
+Thus replacing \(e^{-\ii\pi\xi^2/v}\) by \(1\) has error at most
+\(C\|b\|_{C^4}|v|^{-1}\). Take \(v=mk s_*\), use Fourier inversion at zero,
+and substitute the value of \(h'(0)\).
+\end{proof}
+
+On a fixed regular circle tube, Lemma~\ref{lem:regular-norms} and periodic
+integration by parts imply, for finite \(j,s\geq0\),
+\[
+ |\partial_h^j\widehat f_{r,c,k}(h)|
+ \leq C_{j,s}\|f\|_{C^{j+s}}|k|^{-s},\qquad k\ne0.
+\]
+For a fixed smooth energy cutoff \(\chi\), the amplitude
+\(a_k=\chi L\widehat f_{r,c,k}\overline{\widehat g_{c,k}}\)
+therefore has
+\(\|a_k\|_{C^4}\leq C\|f\|_{C^5}\|g\|_{C^5}|k|^{-2}\).
+Lemma~\ref{lem:stationary-phase} is consequently summable in all nonzero
+modes, both in its leading term and in its \(O(m^{-3/2})\) remainder.
+At every stationary circle it supplies exactly the coefficient in
+\eqref{eq:stationary-coefficient}, including its Jacobian and phase sign.
+On the remaining regular tubes \(|\sigma'|\) is bounded below. Repeated
+integration by parts with the transpose
+\(a\mapsto-\partial_h(a/\sigma')\) has zero support-boundary terms and
+bounded coefficients. The same Fourier bound with \(j=N,s=1\) gives
+an absolutely summed \(O(m^{-N})\) contribution for each fixed \(N\).
+
+\subsection{One partition of the complete surface}
+
+We now combine the estimates in a single decomposition of
+\eqref{eq:global-fourier}. First choose a smooth energy cutoff near \(h_+\)
+covering every degenerating complete circle. Proposition~\ref{prop:hyperbolic-decay}
+applies to the lower circle and both upper circles, with no deleted
+neighbourhood of the saddle. Near \(h_-\), the isolated elliptic point and
+the persistent compact circle have disjoint neighbourhoods. In a sufficiently
+narrow energy band the vanishing circles lie in the former and the persistent
+circles in the latter. Assign the same energy cutoff separately to these
+two families. The vanishing-family cutoff is constant near the centre and
+extends smoothly there; the persistent-family cutoff is smooth across
+\(h_-\). On either regular side their sum is precisely the chosen band
+cutoff.
+
+The remaining compact regular part has a finite cover by stationary and
+nonstationary circle tubes, with a smooth energy partition of unity.
+Every weight is constant on each entire circle and is inserted once in
+the amplitude. The partition is invariant under \(G_T\); separate upper
+weights need not be invariant under \(F_T\), since the latter has already
+been accounted for by \(f_r\). At \(T=3/16\) the persistent tube crosses
+\(h_-=-2\), and its stationary point is treated once by the two-sided
+formula~\eqref{glob:stationary-formula}. Splitting it at \(h_-\) would
+introduce artificial endpoints. The vanishing family at the same energy
+is the different domain treated in Proposition~\ref{prop:elliptic-endpoints}.
+For other parameters the persistent tube can be chosen nonstationary.
+
+There are no further spatial endpoints: the energy-saturated supports are
+compact by Proposition~\ref{prop:surface}, and the four terminal charts
+are regular parts of the tubes by Lemma~\ref{lem:regular-norms}.
+Take \(N=3\) for the saddle and regular nonstationary pieces. The former
+requires original \(C^5\) norms; the regular stationary estimate also uses
+\(C^5\). The elliptic remainders are controlled by \(C^{12}\) in the
+nonstationary case and \(C^{10}\) in the quadratic case, by
+\eqref{eq:elliptic-remainder-norm} and Proposition~\ref{prop:elliptic-endpoints}.
+The fixed cutoffs and \(f\mapsto f_r\) preserve these finite-order bounds.
+Thus the common original \(C^{20}\) bound in Theorem~\ref{thm:main} controls
+every term, without asserting that it controls arbitrary \(N\).
+
+Adding the summable stationary terms gives \(m^{-1/2}\mathcal A_r(m)\).
+For \(T\notin\{3/16,1\}\), the elliptic \(m^{-2}\mathcal B_r(m)\) term is
+absorbed by the \(O(m^{-3/2})\) remainder, not absent. At \(T=3/16\), the
+vanishing family contributes \(m^{-1}\mathcal D_r(m)\), separately from the
+persistent-circle stationary term. At \(T=1\), Proposition~\ref{prop:frequency}
+leaves no stationary circle, so the elliptic term is the global leading
+term, with \(O(m^{-3})\) remainder. This proves all three expansions in
+\eqref{eq:main-asymptotics}, together with the separately quantified
+hyperbolic estimate.
+
+\subsection{The original even and odd coefficients}
+
+\begin{proposition}\label{prop:parity}
+On a circle preserved by \(F_T\), including the persistent circle,
+\[
+ \widehat f_{r,c,k}(h)=e^{2\pi\ii kr\rho(h)}\widehat f_{c,k}(h),
+ \qquad A_k^{(r)}=e^{2\pi\ii kr\theta_T}A_k^{(0)}.
+\]
+On an upper two-circle tube choose \(z_0(h,\theta)\), set
+\(z_1=F_Tz_0\), and denote the Fourier coefficients of \(f\circ z_j\)
+and \(g\circ z_j\) by \(\widehat f_{j,k}\) and \(\widehat g_{j,k}\).
+After combining the two equal phases, the even amplitude is
+\[
+ L\bigl(\widehat f_{0,k}\overline{\widehat g_{0,k}}
+       +\widehat f_{1,k}\overline{\widehat g_{1,k}}\bigr),
+\]
+whereas the odd amplitude is
+\begin{equation}\label{eq:odd-upper}
+ L\bigl(\widehat f_{1,k}\overline{\widehat g_{0,k}}
+       +e^{2\pi\ii k\sigma(h)}\widehat f_{0,k}
+                                      \overline{\widehat g_{1,k}}\bigr).
+\end{equation}
+These amplitudes give the corresponding stationary coefficients on
+evaluation at the stationary energy. For every integer \(n\),
+\(C_{-n}(f,g)=\overline{C_n(g,f)}\).
+\end{proposition}
+
+\begin{proof}
+On a preserved circle, \(F_Tz(h,\theta)=z(h,\theta+\rho(h))\), so Fourier
+translation gives the first identity. Differentiating the amplitude at
+the elliptic endpoint gives the second: its constant term is zero by
+\eqref{eq:jet-amplitudes}, while \(\rho(h_--\varepsilon)\to\theta_T\).
+On the upper tube, \((F_T)_*X=X\) ensures that \(z_1\) has the same
+positive time angle and period as \(z_0\). The exact relations are
+\[
+ F_Tz_0(h,\theta)=z_1(h,\theta),\qquad
+ F_Tz_1(h,\theta)=z_0(h,\theta+\sigma(h)).
+\]
+Substitution in \eqref{eq:global-fourier} yields the two amplitudes.
+Finally the Koopman operator is unitary and commutes with \(\Pi\);
+moving its inverse between the slots of the inner product and taking
+the conjugate proves the negative-time identity.
+\end{proof}
+
+In particular, observables supported on only one upper circle family can
+have identically zero odd correlations and nonzero even correlations.
+Thus sharpness must not be formulated as a positive lower bound on both
+parity subsequences.
+
+\subsection{Sharpness for original smooth observables}
+
+\begin{proposition}\label{prop:sharpness}
+For each fixed \(T>0\), there exist real observables, and there exist
+complex observables, in \(C_c^\infty(U_T)\) attaining a strictly positive
+normalized limsup at the rate in Theorem~\ref{thm:main}. At \(T=1\), the condition
+\((A_1^{(0)},A_{-1}^{(0)})\ne(0,0)\) is open and dense in the space of
+original first-jet pairs and suffices for this conclusion.
+\end{proposition}
+
+\begin{proof}
+If \(T\ne1\), choose one stationary circle \(c\in\mathcal S_T\), a small
+regular tube about it, and a real bump \(\chi\) with \(\chi(h_c)=1\).
+Set \(f=g=\chi(h)e^{2\pi\ii\theta}\) on that tube and zero elsewhere.
+The bump vanishes near the tube boundary, so the regular trivialization
+makes these original smooth compactly supported functions, also through
+any terminal charts. If two circles share the energy, choose only one.
+At \(T=3/16\) the tube about the persistent circle stays away from the
+elliptic point. There is only the mode \(k=1\), and the even expansion is
+\[
+ C_{2m}(f,f)=\frac{L(h_c)}{\sqrt{m|\sigma''(h_c)|}}
+ e^{2\pi\ii m\sigma(h_c)-\ii\pi/4}+O(m^{-3/2}).
+\]
+Its normalized modulus tends to a positive constant. For the real part
+of \(f\), the leading term is a nonzero constant times
+\(m^{-1/2}\cos(2\pi m\sigma(h_c)-\pi/4)\).
+This cosine cannot tend to zero: otherwise
+\(e^{4\pi\ii m\sigma(h_c)}\to-\ii\), whose adjacent ratios force
+\(e^{4\pi\ii\sigma(h_c)}=1\); the sequence would then be identically one.
+Hence the real observables have positive normalized limsup as well.
+
+For \(T=1\), use the oriented Morse coordinates of
+Proposition~\ref{prop:elliptic-jets} and take
+\(f=g=\zeta((p^2+q^2)/2)(p+\ii q)\), with \(\zeta=1\) near zero and
+supported strictly inside the coordinate disc. Extension by zero is smooth
+on the original surface. The first-jet formula~\eqref{eq:jet-amplitudes} gives
+\(A_1^{(0)}=2L_0\) and \(A_{-1}^{(0)}=0\); it does not assert that all
+higher Fourier modes vanish. Consequently
+\[
+ C_{2m}(f,f)=-\frac{2L_0}{(2\pi\beta)^2m^2}
+                    e^{2\pi\ii m\sigma_c}+O(m^{-3}),
+\]
+and again the normalized modulus tends to a positive constant.
+The real choice \(\zeta p\) gives
+\(A_1^{(0)}=A_{-1}^{(0)}=L_0/2\) and a nonzero cosine leading term.
+The sequence \(\cos(2\pi m\sigma_c)\) cannot tend to zero, since
+\(\cos(2x)=2\cos^2x-1\) would make its even subsequence tend to \(-1\).
+
+Finally, \(\sigma_c=2\theta_T\in(1,4/3)\), so
+\(q_*=e^{2\pi\ii\sigma_c}\) and \(q_*^{-1}\) are distinct. Write
+\(\mathcal B_0(m)=b_+q_*^m+b_-q_*^{-m}\), where
+\(b_\pm=-A_{\pm1}^{(0)}/(2\pi\beta)^2\). A finite geometric sum gives
+\[
+ \lim_{M\to\infty}\frac1M\sum_{m=1}^M|\mathcal B_0(m)|^2
+ =|b_+|^2+|b_-|^2.
+\]
+When the two jet coefficients do not both vanish, this limit is positive,
+and hence the unaveraged normalized correlation has positive limsup.
+Their simultaneous vanishing is a proper closed real-algebraic condition
+on the finite-dimensional first-jet pair: the coefficients are
+sesquilinear expressions, and the example above shows they are not
+identically zero. A nonzero real polynomial cannot vanish on an open
+set, proving density of the complement; continuity proves openness.
+If both coefficients vanish, \eqref{eq:main-asymptotics} instead gives
+\(O(m^{-3})\). No optimal classification of higher jets is needed.
+\end{proof}
+
+The Ces\`aro mean in the last proof only tests nonvanishing of a finite
+oscillatory leading term. The correlations in the theorem, including the
+sharpness conclusions, remain unaveraged.

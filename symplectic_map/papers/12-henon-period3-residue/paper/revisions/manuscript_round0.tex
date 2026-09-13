@@ -1,0 +1,1419 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+% In this single-column note, route the frozen figure* blocks through the
+% ordinary float queue so that their [t] placement remains local.
+\makeatletter
+\renewenvironment{figure*}{\@float{figure}}{\end@float}
+\makeatother
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\setcounter{topnumber}{3}
+
+\input{math_commands}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{warning}[theorem]{Scope warning}
+
+\crefname{theorem}{theorem}{theorems}
+\crefname{proposition}{proposition}{propositions}
+\crefname{lemma}{lemma}{lemmas}
+\crefname{corollary}{corollary}{corollaries}
+\crefname{definition}{definition}{definitions}
+\crefname{remark}{remark}{remarks}
+\crefname{warning}{scope warning}{scope warnings}
+
+\title{Period-Three Trace Residues and a Minimal Separator\\
+on an Exceptional Quartic H\'enon Fiber}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let
+\(
+f_{m,a}(x,y)=(y+(x^m-a)^2,x)
+\)
+over an algebraically closed field of characteristic zero.  We study trace
+moments on its nonreduced formal periodic schemes, rather than replacing
+those schemes by their reduced supports.  The period-one multiplication
+spectrum is \(0^{\times 2m}\), the formal exact-period-two spectrum is
+\(2^{\times((2m)^2-2m)}\), and normalized conjugacy is governed by the
+coordinate \(a^{2m-1}\).  For the period-three cyclic complete intersection,
+we prove the two-term identity
+\[
+S_m(a,\eps)=C_m\eps^{3m}+D_m a^{2m-1}\eps^{2m},
+\]
+with \(C_m=0\) for odd \(m\), and derive a finite nested-binomial certificate
+for \(D_m\) from a terminating normal-form recurrence and an exact Laurent
+fiber sum.  In degree four, every normalized monic-centered map with formal
+fixed-point trace multiset \(0^4\) belongs to the complete fiber
+\(p(x)=(x^2-L)^2\).  On this fiber the pointwise formal exact-period-three
+second trace moment is
+\[
+-1296000-1572864L^3,
+\]
+the exact-period-three zero-cycle has length \(60\), and the cyclewise moment
+is \(-432000-524288L^3\).  Since \(L^3\) is precisely the normalized
+conjugacy coordinate while periods one and two are constant, period three is
+the minimal separator on this fiber.  Universal nonvanishing of \(D_m\)
+remains open.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Finite collections of periodic multipliers can determine a polynomial
+automorphism only after one understands their exceptional fibers.  In the
+normalized Jacobian-minus-one H\'enon category, Cantat and Dujardin identified
+the quartic family
+\[
+(x,y)\longmapsto \bigl(y+(x^2-\lambda^2)^2,x\bigr)
+\]
+whose period-one and period-two trace data are constant
+\citep{CantatDujardin2026}.  Thus neither the family nor its
+low-period blindness is new.  The concrete question left by this obstruction
+is whether a later period supplies an effective coordinate on the whole
+exceptional fiber.
+
+This note answers that question at period three for the complete normalized
+quartic fiber whose formal fixed-point trace multiset is \(0^4\).  Writing
+\(L=\lambda^2\), we show that the pointwise formal exact-period-three second
+trace moment equals
+\[
+-384(3375+4096L^3).
+\]
+The coefficient of \(L^3\) is nonzero, and \(L^3\) is exactly the residual
+normalized conjugacy coordinate.  Since the two lower formal trace multisets
+are constant, this gives a sharp minimal separator on that fiber.  It does
+not give a global period cutoff for all quartic H\'enon maps.
+
+The quartic identity is the endpoint of a uniform algebraic mechanism.  For
+every \(m\ge2\), three cyclic orbit equations form a monic complete
+intersection of rank \((2m)^3\).  Their Jacobian determinant is also the
+trace of the third derivative iterate.  Classical quotient-trace and global
+residue theory then converts the desired trace moment into a top normal-form
+coefficient \citep{CattaniDickensteinSturmfels1996}.  Weighted
+homogeneity and a local degeneration leave only two parameter monomials.  The
+remaining slope is evaluated by an explicit recurrence-to-Laurent-to-binomial
+argument.  The conclusion is a formula for \(D_m\), not a proof that
+\(D_m\ne0\) in every degree.
+
+Our contributions are therefore the following.
+\begin{enumerate}[leftmargin=2.2em,label=(\roman*)]
+  \item We retain the nonreduced formal periodic algebras and compute the
+  period-one and formal exact-period-two trace spectra, as well as the
+  normalized quotient coordinate \(a^{2m-1}\).
+  \item We prove the uniform period-three law
+  \(S_m=C_m\eps^{3m}+D_ma^{2m-1}\eps^{2m}\), the odd-\(m\) identity
+  \(C_m=0\), and a transparent finite certificate for \(D_m\).
+  \item We classify the complete normalized quartic fiber with formal
+  fixed-point trace multiset \(0^4\), compute its period-three affine moment
+  by two source-level derivations, and prove its scoped minimality after a
+  separate local-multiplicity argument.
+\end{enumerate}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig1_theorem_architecture.pdf}
+  \caption{Theorem architecture and evidence boundary. The formal
+  period-one and exact-period-two multiplication spectra are constant on the
+  normalized family, with nilpotent corrections retained before passing to
+  spectra. The period-three cyclic complete intersection yields the two-term
+  moment law and, on the complete normalized quartic fiber with formal
+  fixed-point trace multiset $0^4$, the exact pointwise moment
+  $-384(3375+4096L^3)$, formal exact-period-three length $60$, and minimal
+  separation by $L^3$. Every arrow into a theorem box originates in the
+  source-locked proof and independent proof reviews. The consumed registered
+  audit contributes only the dashed provenance branch: it terminally failed,
+  supplies no scientific evidence, and authorizes neither a result claim nor
+  finalization.}
+  \label{fig:theorem-architecture}
+\end{figure*}
+
+The proof has two distinctions that cannot be suppressed.  First, a trace
+element can be nonzero and nilpotent on a nonreduced scheme even when its
+formal multiplication spectrum contains only zero.  Second, vanishing of the
+fixed \emph{moment} does not determine the fixed scheme's local
+\emph{multiplicity}.  The former is handled in the finite quotient algebras;
+the latter is proved by formal transverse elimination before any
+exact-period length is subtracted.
+
+\section{Prior work and claim boundary}
+\label{sec:prior}
+
+\paragraph{Normal forms and multiplier rigidity.}
+Friedland--Milnor theory supplies the structural and conjugacy framework for
+plane polynomial automorphisms and generalized H\'enon normal forms
+\citep{FriedlandMilnor1989}.  Cantat--Dujardin place this
+framework in a modern multiplier-rigidity setting and provide the direct
+quartic period-one/two obstruction used here
+\citep{CantatDujardin2026}.  Our equivalence
+\(f_{m,a}\sim f_{m,b}\) if and only if
+\(a^{2m-1}=b^{2m-1}\) is a proved specialization within the normalized
+one-factor category, not a new general normal-form theorem.
+
+\paragraph{Residues and exact H\'enon identities.}
+Multidimensional residues, quotient-algebra traces, deformations to initial
+forms, and coefficient extraction are established tools
+\citep{CattaniDickensteinSturmfels1996}.  Exact periodic-orbit sum
+rules for H\'enon dynamics also predate this work
+\citep{CvitanovicHansenRolfVattay1998}.  Those contour and
+Fredholm-type sums use different weights from the raw finite-algebra trace
+power considered below.  The present contribution is the family-specific
+complete intersection, the two-term reduction, its coefficient certificate,
+and the quartic separator; it is not the residue formalism itself.
+
+\paragraph{Low periods and adjacent multiplier invariants.}
+Low-period equations and stability for generalized H\'enon maps have been
+studied explicitly, for example in the cubic area-preserving setting
+\citep{DullinMeiss2000}.  Small-cycle multiplier maps in
+one-dimensional polynomial moduli provide a close comparison but do not
+cover Jacobian-minus-one plane automorphisms
+\citep{Huguin2024}.  Formal dynatomic cycles and
+higher-dimensional projective multiplier invariants supply adjacent language
+and background \citep{Hutz2010,Hutz2020}.
+Index-derived fixed-point relations in projective and polynomial-automorphism
+settings are further methodological neighbors
+\citep{GuillotRamirez2019,Ueda2004}.  None of these
+sources is used as a direct proof of the identities below.
+
+\paragraph{Bounded novelty statement.}
+The literature search underlying this note located no prior explicit formula
+for the period-three moment, the all-\(m\) coefficient certificate, or the
+scoped quartic minimal-separator theorem.  This is a bounded absence
+statement, not a historical-priority proof.  The claim-safe delta is limited
+to the source-proved period-three results.  In particular, we do not claim
+discovery of the exceptional quartic family, novelty of formal cycles or
+global residues, or a first exact H\'enon period-three calculation of any
+kind.
+
+\section{Formal periodic algebras and main results}
+\label{sec:setup}
+
+Let \(\kfield\) be an algebraically closed field of characteristic zero.  For
+an integer \(m\ge2\) and \(a\in\kfield\), set
+\begin{equation}
+\pmam(x)=(x^m-a)^2,
+\qquad
+\qmam(x)=\pmam'(x)=2m x^{m-1}(x^m-a),
+\label{eq:family-polynomials}
+\end{equation}
+and
+\begin{equation}
+\fmam(x,y)=\bigl(y+\pmam(x),x\bigr).
+\label{eq:family-map}
+\end{equation}
+The Jacobian determinant of \(\fmam\) is \(-1\).
+
+\begin{definition}[Formal multiset]
+Let \(B\) be a finite-dimensional \(\kfield\)-algebra and \(h\in B\).  The
+formal multiset of values of \(h\) is the multiset of roots of
+\(\det(TI-M_h)\), counted with algebra dimension.  Here \(M_h\) is
+multiplication by \(h\).  This convention retains nilpotent scheme length
+while attaching to each support point the residue-field value of \(h\).
+\end{definition}
+
+For period two, ``formal exact period two'' means the formal period-two
+spectral zero-cycle minus the embedded formal fixed spectral zero-cycle.  For
+prime period three, we use the analogous subtraction, but we will prove
+separately that the local fixed length inside \(\Fix(f^3)\) is the expected
+one.
+
+Write
+\begin{equation}
+\vnu=2m-1,
+\qquad
+\xtop=x_0^\vnu x_1^\vnu x_2^\vnu.
+\label{eq:nu-top}
+\end{equation}
+All cyclic indices below lie in \(\ZZ/3\ZZ\).
+
+\begin{theorem}[Uniform formal period-three law]
+\label{thm:uniform}
+For the family \eqref{eq:family-map}:
+\begin{enumerate}[label=(\alph*),leftmargin=2.2em]
+  \item the formal period-one trace multiset is \(0^{\times2m}\), and the
+  formal exact-period-two trace multiset is
+  \(2^{\times((2m)^2-2m)}\);
+  \item within normalized monic-centered H\'enon moduli,
+  \[
+  f_{m,a}\sim f_{m,b}
+  \quad\Longleftrightarrow\quad
+  a^{2m-1}=b^{2m-1};
+  \]
+  \item the formal period-three \(m\)-th trace moment satisfies
+  \begin{equation}
+  S_m(a,\eps)=C_m\eps^{3m}+D_m a^{2m-1}\eps^{2m}
+  \label{eq:two-term-main}
+  \end{equation}
+  for integers \(C_m,D_m\), and \(C_m=0\) whenever \(m\) is odd;
+  \item defining
+  \begin{align}
+  H(r,k)
+  &=\sum_{\substack{u+v=k\\2u\le r,\;2v\le r}}
+    \binom{k}{u}\binom{r}{2u}\binom{r}{2v},
+  \label{eq:H-definition}\\
+  A_{m,r}
+  &=\sum_{k=\lceil m/2\rceil}^{\min(m-1,r)}
+    (-1)^{r+k}\binom{m-1}{2(m-k)-1}H(r,k),
+  \label{eq:A-definition}
+  \end{align}
+  with an empty sum equal to zero, the slope has the exact certificate
+  \begin{equation}
+  D_m=3\sum_{j=0}^{\lfloor m/2\rfloor}
+  \binom{m+1}{j}(2m)^{3m+3-2j}A_{m,m-j}.
+  \label{eq:D-certificate-main}
+  \end{equation}
+\end{enumerate}
+No assertion that \(D_m\ne0\) for all \(m\) is included.
+\end{theorem}
+
+\begin{theorem}[Complete quartic fiber and minimal separator]
+\label{thm:quartic}
+Let \(p\) be any monic-centered quartic, and set
+\(f_p(x,y)=(y+p(x),x)\).  Its formal fixed-point trace multiset is \(0^4\)
+if and only if
+\[
+p(x)=(x^2-L)^2
+\]
+for a unique \(L\in\kfield\).  On this complete normalized fiber,
+\begin{equation}
+S_2^{(3)}(L)=-1296000-1572864L^3
+=-384(3375+4096L^3).
+\label{eq:quartic-moment-main}
+\end{equation}
+Moreover,
+\[
+f_{2,L}\sim f_{2,M}
+\quad\Longleftrightarrow\quad
+L^3=M^3.
+\]
+The period-one and formal exact-period-two trace multisets are constant on
+the fiber, whereas \eqref{eq:quartic-moment-main} is affine with nonzero
+slope in \(L^3\).  Hence period three is the minimal separating period on
+this fiber.  The formal exact-period-three zero-cycle has pointwise length
+\(60\), and its cyclewise second trace moment is
+\[
+-432000-524288L^3.
+\]
+\end{theorem}
+
+\begin{warning}
+The minimality conclusion in \cref{thm:quartic} concerns only the complete
+normalized quartic fiber with formal fixed-point trace multiset \(0^4\).  It
+is neither a theorem for all quartic H\'enon maps nor a global equality for a
+degree-four period cutoff.
+\end{warning}
+
+\section{Low periods and normalized conjugacy}
+\label{sec:low-periods}
+
+Write \(p=\pmam\) and \(q=\qmam\).  A fixed point satisfies \(x=y\) and
+\(p(x)=0\), so its coordinate algebra is
+\begin{equation}
+B_1=\kfield[x]/(p)=\kfield[x]/((x^m-a)^2),
+\qquad \dim_{\kfield}B_1=2m.
+\label{eq:fixed-algebra}
+\end{equation}
+Within \(B_1\),
+\[
+q=2m x^{m-1}(x^m-a),
+\qquad q^2=0.
+\]
+Since
+\[
+D\fmam(x,y)=
+\begin{pmatrix}q(x)&1\\1&0\end{pmatrix},
+\]
+the trace element on the fixed algebra is \(q\).  Multiplication by \(q\)
+is nilpotent, hence its characteristic polynomial is \(T^{2m}\).  This gives
+the formal multiset \(0^{\times2m}\).  The statement is spectral: when
+\(a\ne0\), the class of \(q\) is generally not zero in the nonreduced
+algebra.
+
+A direct iteration gives
+\[
+f_{m,a}^2(x,y)=\bigl(x+p(y+p(x)),y+p(x)\bigr).
+\]
+The fixed equations for \(f^2\) reduce to \(p(x)=p(y)=0\), so
+\begin{equation}
+B_2=\kfield[x,y]/(p(x),p(y)),
+\qquad \dim_{\kfield}B_2=(2m)^2.
+\label{eq:period-two-algebra}
+\end{equation}
+The derivative trace is
+\[
+\Tr(Df_{m,a}^2)=2+q(x)q(y).
+\]
+Because \((q(x)q(y))^2=0\), its sole formal eigenvalue is \(2\), with
+multiplicity \((2m)^2\).  On the embedded fixed algebra the same trace is
+\(2+q^2=2\).  Subtracting the length-\(2m\) fixed spectral cycle yields
+\(2^{\times((2m)^2-2m)}\).  Nothing in this argument reduces either
+scheme, so it remains valid at \(a=0\).
+
+We next identify the normalized moduli coordinate.  For
+\(h_c(x,y)=(cx,cy)\),
+\begin{align}
+h_c^{-1}f_{m,a}h_c(x,y)
+&=\left(y+c^{-1}(c^m x^m-a)^2,x\right)\notag\\
+&=\left(y+c^{2m-1}(x^m-ac^{-m})^2,x\right).
+\label{eq:diagonal-conjugacy}
+\end{align}
+The image stays monic exactly when \(c^{2m-1}=1\), and then the new
+parameter is \(b=ac^{-m}\).  Thus conjugacy implies
+\(b^{2m-1}=a^{2m-1}\).
+
+Conversely, if \(a^{2m-1}=b^{2m-1}\) and \(a\ne0\), then
+\(\zeta=b/a\) is a \((2m-1)\)-st root of unity.  Since
+\(\gcd(m,2m-1)=1\), exponentiation by \(-m\) is an automorphism of this
+root group; choose \(c\) with \(c^{2m-1}=1\) and
+\(c^{-m}=\zeta\).  Equation \eqref{eq:diagonal-conjugacy} gives the desired
+conjugacy.  The case \(a=0\) forces \(b=0\).
+
+For necessity within the normalized category, normal-form uniqueness reduces
+a polynomial conjugacy to a simultaneous affine change
+\((x,y)\mapsto(cx+d,cy+d)\).  The coefficient of \(x^{2m-1}\) in the
+transformed degree-\(2m\) polynomial is \(2md/c\).  Centering and
+characteristic zero force \(d=0\), so the diagonal calculation exhausts the
+normalized conjugacies.
+
+\section{The cyclic complete intersection and trace residue}
+\label{sec:cyclic}
+
+Represent a length-three orbit by states \((x_i,x_{i-1})\).  Introduce the
+deformation
+\begin{equation}
+F_i=(x_i^m-a)^2+\eps(x_{i-1}-x_{i+1}),
+\qquad
+q_i=2m x_i^{m-1}(x_i^m-a).
+\label{eq:cyclic-system}
+\end{equation}
+At \(\eps=1\), the equations \(F_i=0\) are exactly the cyclic equations for
+\(\Fix(f_{m,a}^3)\).  Their Jacobian matrix is
+\[
+\left(\frac{\partial F_i}{\partial x_j}\right)
+=
+\begin{pmatrix}
+q_0&-\eps&\eps\\
+\eps&q_1&-\eps\\
+-\eps&\eps&q_2
+\end{pmatrix},
+\]
+and its determinant is
+\begin{equation}
+t_\eps=q_0q_1q_2+\eps^2(q_0+q_1+q_2).
+\label{eq:t-epsilon}
+\end{equation}
+If \(M(q)=\bigl(\begin{smallmatrix}q&1\\1&0\end{smallmatrix}\bigr)\), then
+\(Df^3=M(q_2)M(q_1)M(q_0)\).  Multiplication of these three matrices shows
+that \(\Tr(Df^3)=q_0q_1q_2+q_0+q_1+q_2=t_1\).
+
+Let
+\begin{equation}
+\cA_m=
+\kfield[a,\eps,x_0,x_1,x_2]/(F_0,F_1,F_2).
+\label{eq:cyclic-algebra}
+\end{equation}
+For any degree-compatible monomial order, the leading monomials are
+\(x_0^{2m},x_1^{2m},x_2^{2m}\).  They are pairwise coprime, so the three
+relations form a Gr\"obner basis over \(\kfield[a,\eps]\).  Consequently
+\[
+x_0^{e_0}x_1^{e_1}x_2^{e_2},
+\qquad 0\le e_i<2m,
+\]
+form a free basis of \(\cA_m\), of rank \((2m)^3\).  The leading homogeneous
+forms have no common point in \(\PP^2\), hence no intersection length is lost
+at infinity.
+
+Define
+\begin{equation}
+S_m(a,\eps)=
+\Tr_{\cA_m/\kfield[a,\eps]}\bigl(M_{t_\eps^m}\bigr).
+\label{eq:S-definition}
+\end{equation}
+The Jacobian of the complete intersection is \(t_\eps\).  The standard
+trace--residue identity, valid also for nonreduced complete intersections,
+gives
+\begin{equation}
+S_m(a,\eps)=\Res_{F_0,F_1,F_2}(t_\eps^{m+1}).
+\label{eq:trace-residue}
+\end{equation}
+For these monic leading forms, the residue is the top normal-form coefficient:
+\begin{equation}
+\Res(G)=\coeff{x_0^{2m-1}x_1^{2m-1}x_2^{2m-1}}{\NF(G)}.
+\label{eq:top-residue}
+\end{equation}
+In particular, \(S_m\in\ZZ[a,\eps]\).
+
+\section{The two-term law}
+\label{sec:two-term}
+
+Assign weights
+\[
+\wt(x_i)=1,
+\qquad
+\wt(a)=m,
+\qquad
+\wt(\eps)=2m-1=\vnu.
+\]
+Each \(F_i\) has weight \(2m\), every \(q_i\) has weight \(\vnu\), and
+\(t_\eps\) has weight \(3\vnu\).  Therefore each monomial
+\(a^r\eps^s\) in \(S_m\) satisfies
+\[
+mr+\vnu s=3m\vnu.
+\]
+Since \(\gcd(m,\vnu)=1\), the only nonnegative solutions are
+\[
+(r,s)=(0,3m),(\vnu,2m),(2\vnu,m),(3\vnu,0).
+\]
+Thus
+\begin{equation}
+S_m=c_{0,m}\eps^{3m}+c_{1,m}a^\vnu\eps^{2m}
++c_{2,m}a^{2\vnu}\eps^m+c_{3,m}a^{3\vnu}.
+\label{eq:four-term}
+\end{equation}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig2_weighted_two_term_law.pdf}
+  \caption{Weighted support and the two-term law. Weighted homogeneity
+  permits exactly four parameter monomials in $S_m(a,\varepsilon)$. The
+  separated algebra at $\varepsilon=0$ removes $a^{3(2m-1)}$, and the three
+  nonfixed degeneration patterns together with the exact diagonal branch
+  remove $a^{2(2m-1)}\varepsilon^m$. The surviving terms are
+  $C_m\varepsilon^{3m}$ and $D_ma^{2m-1}\varepsilon^{2m}$; cyclic reversal
+  additionally gives $C_m=0$ for odd $m$. For $m=2$, source-level
+  coefficient derivations give
+  $S_2^{(3)}(L)=-1296000-1572864L^3$. The diagram makes no universal
+  separation claim: $D_m\neq0$ for every $m\geq2$ remains open.}
+  \label{fig:weighted-two-term-law}
+\end{figure*}
+
+At \(\eps=0\), the algebra is the tensor product of three copies of
+\(\kfield[a,x]/((x^m-a)^2)\).  In each factor \(q_i^2=0\), whereas
+\(t_0=q_0q_1q_2\).  Because \(m\ge2\), we have \(t_0^m=0\), and hence
+\(S_m(a,0)=0\).  Therefore \(c_{3,m}=0\).
+
+It remains to remove the term of \(\eps\)-order \(m\).  Fix \(a\ne0\) and
+work over an algebraic closure of the Puiseux field in \(\eps\), normalized
+by \(v(\eps)=1\).  Flatness clusters all \((2m)^3\) solutions at triples
+\((\alpha_0,\alpha_1,\alpha_2)\) of roots of \(x^m=a\).  Put
+\(x_i=\alpha_i+\delta_i\).  Since the roots are nonzero and simple before
+squaring,
+\[
+(x_i^m-a)^2=c_i\delta_i^2+O(\delta_i^3),
+\qquad
+q_i=d_i\delta_i+O(\delta_i^2),
+\]
+with \(c_i,d_i\ne0\).  Three root patterns exhaust the possibilities.
+
+\paragraph{All roots distinct.}
+Every constant coupling \(\alpha_{i-1}-\alpha_{i+1}\) is nonzero.  Balancing
+its valuation \(1\) against \(2v(\delta_i)\) gives
+\(v(q_i)=1/2\), hence
+\begin{equation}
+v(t_\eps)\ge\frac32.
+\label{eq:valuation-distinct}
+\end{equation}
+
+\paragraph{Exactly two roots equal.}
+After cyclic relabeling take \(\alpha_0=\alpha_1\ne\alpha_2\).  The first
+two equations give \(v(q_0)=v(q_1)=1/2\).  In the third equation the coupling
+has valuation at least \(3/2\).  If \(v(\delta_2)<3/4\), its square would be
+the unique least-valuation term.  Therefore
+\begin{equation}
+v(q_2)\ge\frac34,
+\qquad
+v(t_\eps)\ge\frac74.
+\label{eq:valuation-twoequal}
+\end{equation}
+
+\paragraph{All roots equal.}
+Let \(r_0\) be the minimum valuation of a nonzero \(\delta_i\).  Coupling
+terms have valuation at least \(1+r_0\).  If \(r_0<1\), a coordinate with
+valuation \(r_0\) would contribute an uncancelled square of valuation
+\(2r_0<1+r_0\).  Hence every nontrivial branch has \(r_0\ge1\), and
+\begin{equation}
+v(t_\eps)\ge3.
+\label{eq:valuation-allequal}
+\end{equation}
+The exact diagonal fixed branch is handled separately in
+\cref{lem:fixed-moment}; its moment contribution vanishes identically.
+
+The trace of multiplication by an element of a finite algebra is the sum of
+its support values weighted by local length; nilpotent parts have trace zero.
+The three lower bounds show that every nonfixed cluster contributes to
+\(S_m\) with \(\eps\)-valuation strictly greater than \(m\): the bounds are
+\(3m/2\), \(7m/4\), and \(3m\), respectively.  Summation cannot decrease
+valuation.  In \eqref{eq:four-term}, the only surviving candidate of exact
+order \(m\) is \(c_{2,m}a^{2\vnu}\eps^m\).  Since \(a\ne0\), it follows
+that \(c_{2,m}=0\).  Setting \(C_m=c_{0,m}\) and \(D_m=c_{1,m}\) proves
+\eqref{eq:two-term-main}.
+
+Finally, the coordinate reversal \(x_i\mapsto x_{-i}\) sends the system with
+\(\eps\) to the system with \(-\eps\), while \(t_\eps\) is unchanged.
+Therefore \(S_m(a,\eps)=S_m(a,-\eps)\).  The \(D_m\)-term is always even in
+\(\eps\); if \(m\) is odd, \(3m\) is odd, forcing \(C_m=0\).
+
+\section{A transparent coefficient certificate for \texorpdfstring{\(D_m\)}{Dm}}
+\label{sec:coefficient}
+
+This section gives the full coefficient extraction.  It is an algebraic
+proof for symbolic \(m\), not an interpolation from finitely many degrees.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig3_step9_certificate_pipeline.pdf}
+  \caption{Transparent coefficient-certificate pipeline. The four-branch
+  recurrence and base cases terminate by strict total-degree decrease; the
+  Laurent coefficient makes the reduction order independent and groups
+  branch interleavings without double counting. Admissible tuples retain
+  every sign, multiplicity, Laurent exponent, and parameter degree. The local
+  identity (9.14), proved by one-variable coefficient extraction, collapses
+  each signed fiber. For $j\geq1$, a unique distinguished coordinate and an
+  incoming-transfer bijection give the guarded $H/A$ factors; $j=0$ is
+  handled by a separate exhaustive flow classification, including the
+  vanishing exceptional pattern. Assembly yields the finite formula for
+  $D_m$. Universal $D_m\neq0$ is explicitly open, and no runtime or finite
+  diagnostic is part of this proof.}
+  \label{fig:step9-certificate-pipeline}
+\end{figure*}
+
+For every integer exponent \(e_i\ge2m\), the relation \(F_i=0\) yields
+\begin{equation*}
+\begin{aligned}
+x_i^{e_i}\equiv{}&2a x_i^{e_i-m}-a^2x_i^{e_i-2m}
+-\eps x_i^{e_i-2m}x_{i-1}
++\eps x_i^{e_i-2m}x_{i+1}
+\pmod{(F_0,F_1,F_2)}.
+\end{aligned}
+\tag{R}\label{eq:recurrence-R}
+\end{equation*}
+
+For \(\be=(e_0,e_1,e_2)\in\ZZ^3\) and
+\(\alpha,\beta\in\ZZ\), define
+\begin{equation}
+\cR_m(\be;\alpha,\beta)=
+\coeff{a^\alpha\eps^\beta\xtop}
+{\NF(x_0^{e_0}x_1^{e_1}x_2^{e_2})}.
+\label{eq:R-state}
+\end{equation}
+It is zero if some \(e_i<0\), or if \(\alpha<0\) or \(\beta<0\).  On the
+standard box its complete base cases are
+\begin{equation}
+\cR_m(\be;\alpha,\beta)=
+\begin{cases}
+1,&\be=(\vnu,\vnu,\vnu),\ (\alpha,\beta)=(0,0),\\
+0,&0\le e_i<2m\text{ for all }i\text{, otherwise}.
+\end{cases}
+\label{eq:R-base}
+\end{equation}
+If \(e_i\ge2m\), \eqref{eq:recurrence-R} gives the four signed branches
+\begin{equation}
+\begin{aligned}
+\cR_m(\be;\alpha,\beta)
+={}&2\cR_m(\be-m\bdelta_i;\alpha-1,\beta)
+-\cR_m(\be-2m\bdelta_i;\alpha-2,\beta)\\
+&-\cR_m(\be-2m\bdelta_i+\bdelta_{i-1};\alpha,\beta-1)
++\cR_m(\be-2m\bdelta_i+\bdelta_{i+1};\alpha,\beta-1).
+\end{aligned}
+\label{eq:R-branches}
+\end{equation}
+The total exponent decreases by \(m,2m,2m-1,2m-1\), respectively.  Thus
+\eqref{eq:R-base}--\eqref{eq:R-branches}, under any fixed reducible-coordinate
+choice, form a terminating induction certificate.
+
+The same coefficient has the order-independent Laurent representation
+\begin{equation}
+\cR_m(\be;\alpha,\beta)=
+\coeff{a^\alpha\eps^\beta x_0^{-1}x_1^{-1}x_2^{-1}}
+{\frac{x_0^{e_0}x_1^{e_1}x_2^{e_2}}{F_0F_1F_2}},
+\label{eq:R-laurent}
+\end{equation}
+where
+\begin{equation}
+\frac1{F_i}=x_i^{-2m}\sum_{h\ge0}
+\left(
+\frac{2a x_i^m-a^2-\eps x_{i-1}+\eps x_{i+1}}{x_i^{2m}}
+\right)^h.
+\label{eq:reciprocal-expansion}
+\end{equation}
+Unique normal form proves reduction-order independence.  In the Laurent
+picture, interleavings of reductions at distinct coordinates are merely
+different orders for the same monomial; branch-count tuples, rather than
+interleavings, index the summands.
+
+Expand
+\begin{equation}
+t_\eps^{m+1}
+=\sum_{j=0}^{m+1}\binom{m+1}{j}\eps^{2j}
+(q_0q_1q_2)^{m+1-j}(q_0+q_1+q_2)^j.
+\label{eq:t-power-expansion}
+\end{equation}
+Put \(\bar q_i=x_i^{m-1}(x_i^m-a)\).  Extracting every scalar \(2m\),
+define
+\begin{equation}
+\begin{aligned}
+\cC_{m,j}:={}&
+\coeff{a^\vnu\eps^{2m-2j}\xtop}
+{\NF\!\left(
+(\bar q_0\bar q_1\bar q_2)^{m+1-j}
+(\bar q_0+\bar q_1+\bar q_2)^j
+\right)}.
+\end{aligned}
+\label{eq:C-precollapse}
+\end{equation}
+Then
+\begin{equation}
+D_m=\sum_{j=0}^{m+1}\binom{m+1}{j}
+(2m)^{3m+3-2j}\cC_{m,j}.
+\label{eq:D-precollapse}
+\end{equation}
+
+Set \(r=m-j\) for \(0\le j\le m\).  Choose
+\(\bs=(s_0,s_1,s_2)\in\NN^3\) with \(|\bs|=j\) and put
+\(N_i=r+1+s_i\).  Choosing the low term in exactly \(\ell_i\) of the
+\(N_i\) factors of
+\(\bar q_i=x_i^{2m-1}-a x_i^{m-1}\) gives
+\[
+e_i=(2m-1)N_i-m\ell_i,
+\qquad 0\le\ell_i\le N_i.
+\]
+The terminating recurrence therefore gives
+\begin{equation}
+\begin{aligned}
+\cC_{m,j}
+={}&\sum_{|\bs|=j}\binom{j}{s_0,s_1,s_2}
+\sum_{0\le\ell_i\le N_i}
+(-1)^{|\bell|}\prod_{i=0}^2\binom{N_i}{\ell_i}\\
+&\hspace{25mm}\cdot
+\cR_m\bigl(\be;\vnu-|\bell|,2r\bigr).
+\end{aligned}
+\label{eq:C-recurrence-certificate}
+\end{equation}
+For \(j=m+1\), the requested \(\eps\)-degree is negative, and
+\(\cC_{m,m+1}=0\).
+
+We now unfold \eqref{eq:reciprocal-expansion}.  At source coordinate \(i\),
+let \(A_i,B_i,U_i,V_i\) count, respectively, the four branch choices
+\[
+2a x_i^m,\qquad -a^2,\qquad -\eps x_{i-1},\qquad +\eps x_{i+1},
+\]
+and set
+\begin{equation}
+h_i=A_i+B_i+U_i+V_i,
+\qquad
+T_i=U_{i+1}+V_{i-1}.
+\label{eq:h-T}
+\end{equation}
+A tuple
+\begin{equation}
+(\bs,\bell,\bA,\bB,\bU,\bV)
+\label{eq:admissible-tuple}
+\end{equation}
+is admissible when all entries are nonnegative integers,
+\(|\bs|=j\), \(0\le\ell_i\le N_i\), and
+\begin{align}
+|\bell|+\sum_i(A_i+2B_i)&=\vnu,
+\label{eq:admissible-a}\\
+\sum_i(U_i+V_i)&=2r,
+\label{eq:admissible-epsilon}\\
+e_i+mA_i+T_i-2m(h_i+1)&=-1
+\qquad(i=0,1,2).
+\label{eq:admissible-laurent}
+\end{align}
+Its signed multiplicity is
+\begin{equation}
+\begin{aligned}
+W={}&(-1)^{|\bell|+\sum_i(B_i+U_i)}
+2^{\sum_iA_i}\binom{j}{s_0,s_1,s_2}\\
+&\cdot\prod_{i=0}^2
+\binom{N_i}{\ell_i}
+\frac{h_i!}{A_i!B_i!U_i!V_i!}.
+\end{aligned}
+\label{eq:admissible-weight}
+\end{equation}
+Every expanded Laurent choice has exactly one branch-count tuple, and every
+admissible tuple has the requested parameter degrees and three Laurent
+exponents.  Thus
+\begin{equation}
+\cC_{m,j}=\sum_{\text{admissible tuples in }\eqref{eq:admissible-tuple}}W.
+\label{eq:C-admissible-sum}
+\end{equation}
+The sum is finite by \eqref{eq:admissible-a}--\eqref{eq:admissible-epsilon},
+and the description is exhaustive without double counting.
+
+\subsection{The local signed fiber identity}
+\label{subsec:fiber-identity}
+
+We use generalized binomial coefficients
+\[
+\binom{z}{s}=\frac{z(z-1)\cdots(z-s+1)}{s!}
+\quad(s\ge1),
+\qquad
+\binom{z}{0}=1,
+\]
+and set \(\binom{z}{s}=0\) for \(s<0\).  For a nonnegative integer upper
+argument, the usual out-of-range values are zero.
+
+\begin{lemma}[Local fiber identity]
+\label{lem:local-fiber}
+For \(N,n,\alpha\in\NN\),
+\begin{equation}
+\sum_{\substack{\ell,A,B\ge0\\\ell+A+2B=\alpha}}
+(-1)^{\ell+B}2^A\binom{N}{\ell}
+\frac{(n+A+B)!}{n!A!B!}
+=(-1)^\alpha\binom{N-2n-2}{\alpha}.
+\label{eq:local-fiber}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Take the coefficient of \(z^\alpha\) in
+\begin{align*}
+(1-z)^N
+\sum_{A,B\ge0}
+\frac{(n+A+B)!}{n!A!B!}(2z)^A(-z^2)^B
+&=(1-z)^N(1-2z+z^2)^{-n-1}\\
+&=(1-z)^{N-2n-2}.
+\end{align*}
+The left coefficient is the sum in \eqref{eq:local-fiber}, and the right
+coefficient is \((-1)^\alpha\binom{N-2n-2}{\alpha}\).
+\end{proof}
+
+Fix \((\bs,\bU,\bV)\) and put
+\begin{equation}
+n_i=U_i+V_i,
+\qquad
+\lambda_i=N_i-2n_i-2,
+\qquad
+\alpha_i=\frac{(2m-1)(N_i-1)+T_i}{m}-2n_i.
+\label{eq:local-exponents}
+\end{equation}
+Because \(\sum_i(N_i-1)=m+2r\) and
+\(\sum_iT_i=\sum_i n_i=2r\),
+\begin{equation}
+\sum_i\alpha_i
+=\frac{(2m-1)(m+2r)+2r}{m}-4r
+=2m-1=\vnu.
+\label{eq:alpha-sum}
+\end{equation}
+Equation \eqref{eq:admissible-laurent} is precisely
+\(\ell_i+A_i+2B_i=\alpha_i\).  Multiplying
+\cref{lem:local-fiber} by the orientation factor
+\((-1)^{U_i}\binom{n_i}{U_i}\) turns its factorial into
+\[
+\binom{n_i}{U_i}
+\frac{(n_i+A_i+B_i)!}{n_i!A_i!B_i!}
+=\frac{h_i!}{A_i!B_i!U_i!V_i!}.
+\]
+Thus the local identity sums exactly over
+\((\ell_i,A_i,B_i)\) at fixed coupling orientations, including all signs and
+powers of two.  Define
+\begin{equation}
+\mathcal{B}(\lambda,\alpha)=
+\begin{cases}
+(-1)^\alpha\binom{\lambda}{\alpha},&\alpha\in\NN,\\
+0,&\text{otherwise}.
+\end{cases}
+\label{eq:B-local}
+\end{equation}
+
+\subsection{Distinguished coordinate and transfer flow}
+\label{subsec:transfer}
+
+The integrality condition in \eqref{eq:local-exponents} is
+\begin{equation}
+T_i\equiv N_i-1=r+s_i\pmod m.
+\label{eq:transfer-congruence}
+\end{equation}
+Write \(T_i=r+s_i+mz_i\).  Since
+\(\sum_iT_i=2r\) and \(\sum_i(r+s_i)=m+2r\),
+\begin{equation}
+z_0+z_1+z_2=-1.
+\label{eq:z-sum}
+\end{equation}
+Also \(0\le r+s_i\le m\).  Nonnegativity of \(T_i\) forces
+\(z_i\ge-1\), and \(z_i=-1\) is possible only if \(s_i=j\) and
+\(T_i=0\).
+
+Suppose first that \(j\ge1\).  Two coordinates cannot both have \(s_i=j\)
+because \(\sum_i s_i=j\).  Equation \eqref{eq:z-sum} therefore forces a
+unique distinguished coordinate \(d\) with
+\begin{equation}
+s_d=j,quad T_d=0,
+\qquad
+s_i=0,quad T_i=r\quad(i\ne d).
+\label{eq:distinguished-coordinate}
+\end{equation}
+By cyclic symmetry take \(d=0\), and write
+\[
+u=U_0,
+\qquad
+v=V_0,
+\qquad
+k=n_0=u+v.
+\]
+The incoming-transfer equations give uniquely
+\begin{equation}
+U_1=0,quad V_2=0,quad
+V_1=r-u,quad U_2=r-v,quad
+n_1=r-u,quad n_2=r-v.
+\label{eq:incoming-flow}
+\end{equation}
+Conversely, every nonnegative \((k,u,v)\) satisfying the ranges below gives
+one transfer configuration.
+
+At the distinguished coordinate,
+\[
+(\lambda_0,\alpha_0)=(m-1-2k,2m-1-2k),
+\]
+whereas
+\[
+(\lambda_1,\alpha_1)=(2u-r-1,2u),
+\qquad
+(\lambda_2,\alpha_2)=(2v-r-1,2v).
+\]
+Using
+\[
+(-1)^\alpha\binom{\alpha-M}{\alpha}=\binom{M-1}{\alpha}
+\qquad(M\ge1,\ \alpha\ge0),
+\]
+the local factors become
+\begin{equation}
+\mathcal{B}(\lambda_0,\alpha_0)
+=\binom{m-1}{2(m-k)-1},
+\quad
+\mathcal{B}(\lambda_1,\alpha_1)=\binom{r}{2u},
+\quad
+\mathcal{B}(\lambda_2,\alpha_2)=\binom{r}{2v}.
+\label{eq:three-local-factors}
+\end{equation}
+They are nonzero exactly when
+\begin{equation}
+\left\lceil\frac m2\right\rceil\le k\le m-1,
+\qquad
+2u\le r,
+\qquad
+2v\le r.
+\label{eq:guarded-ranges}
+\end{equation}
+The orientation multiplicity is \(\binom{k}{u}\), and its sign is
+\[
+(-1)^{U_0+U_1+U_2}=(-1)^{u+r-v}=(-1)^{r+k}.
+\]
+Hence the exact signed fiber over \((d,k,u,v)\) is
+\begin{equation}
+(-1)^{r+k}
+\binom{m-1}{2(m-k)-1}
+\binom{k}{u}\binom{r}{2u}\binom{r}{2v}.
+\label{eq:signed-fiber}
+\end{equation}
+The inequalities \(2u,2v\le r\) and \(u+v=k\) imply \(k\le r\).
+Summing \eqref{eq:signed-fiber} and then the three choices of \(d\) yields
+\begin{equation}
+\cC_{m,j}=3A_{m,r}
+\qquad(1\le j\le m).
+\label{eq:C-collapse-positive-j}
+\end{equation}
+When \(j>\lfloor m/2\rfloor\), one has
+\(r=m-j<\lceil m/2\rceil\), so the range is empty and
+\begin{equation}
+\cC_{m,j}=0.
+\label{eq:C-empty-range}
+\end{equation}
+
+The case \(j=0\) is not obtained by silently reusing the preceding
+classification.  Here \(r=m\), \(s_i=0\), and
+\(T_i=m(1+z_i)\).  The nonnegative incoming-transfer patterns are exactly
+the cyclic permutations of
+\begin{equation}
+(0,m,m)
+\qquad\text{and}\qquad
+(0,0,2m).
+\label{eq:jzero-patterns}
+\end{equation}
+For the first type, the unique zero coordinate plays the role of \(d\),
+giving \(3A_{m,m}\).  For the second type, take
+\(T_0=2m\), \(T_1=T_2=0\).  The flow equations force \(n_0=0\), and at
+coordinate zero
+\[
+N_0=m+1,
+\qquad
+\lambda_0=m-1,
+\qquad
+\alpha_0=2m+1.
+\]
+Therefore
+\begin{equation}
+\mathcal{B}(\lambda_0,\alpha_0)
+=-\binom{m-1}{2m+1}=0.
+\label{eq:jzero-exceptional-vanishing}
+\end{equation}
+All three rotations of this exceptional type vanish, and hence
+\(\cC_{m,0}=3A_{m,m}\).
+
+Combining \eqref{eq:D-precollapse},
+\eqref{eq:C-collapse-positive-j}--\eqref{eq:jzero-exceptional-vanishing},
+and \(\cC_{m,m+1}=0\) proves
+\begin{equation}
+D_m=3\sum_{j=0}^{\lfloor m/2\rfloor}
+\binom{m+1}{j}(2m)^{3m+3-2j}A_{m,m-j},
+\label{eq:D-certificate-proved}
+\end{equation}
+which is \eqref{eq:D-certificate-main}.  If
+\(q=\lfloor m/2\rfloor\), define
+\begin{equation}
+E_m=\sum_{j=0}^{q}\binom{m+1}{j}
+(2m)^{2(q-j)}A_{m,m-j}.
+\label{eq:E-definition}
+\end{equation}
+Then
+\begin{equation}
+D_m=3(2m)^{3m+3-2q}E_m.
+\label{eq:D-factorization}
+\end{equation}
+The derivation proves the certificate for every symbolic \(m\ge2\).  It
+does not determine whether \(E_m\), and therefore \(D_m\), is nonzero in
+every degree.
+
+\section{The complete quartic fiber and its exact moment}
+\label{sec:quartic}
+
+Let \(p\) be a monic-centered quartic and
+\(B_p=\kfield[x]/(p)\).  At each distinct root \(\alpha\) of \(p\), the
+formal fixed trace eigenvalue is \(p'(\alpha)\), repeated with local algebra
+length.  Thus the formal fixed-point trace multiset is \(0^4\) exactly when
+every root of \(p\) is multiple.  The only multiplicity partitions are
+\(4\) and \(2+2\).
+
+If \(p=(x-\alpha)^4\), centering forces \(-4\alpha=0\), so
+\(p=x^4\).  If
+\(p=(x-\alpha)^2(x-\beta)^2\), centering gives
+\(2\alpha+2\beta=0\), hence \(\beta=-\alpha\) and
+\[
+p=(x^2-\alpha^2)^2.
+\]
+Writing \(L=\alpha^2\) includes the first case as \(L=0\).  The coefficient
+of \(x^2\) is \(-2L\), so \(L\) is unique.  This proves the full-fiber
+classification in \cref{thm:quartic}.
+
+\subsection{Two source-level derivations of the quartic slope}
+\label{subsec:quartic-slope}
+
+As an internal source-level cross-check, specialize the all-\(m\) certificate:
+\[
+H(2,1)=2,
+\qquad
+A_{2,2}=-2,
+\qquad
+A_{2,1}=0,
+\]
+which gives
+\begin{equation}
+D_2=3\cdot4^9(-2)=-1572864.
+\label{eq:D2-crosscheck}
+\end{equation}
+We now derive the same slope without the all-degree collapse.
+
+Put
+\[
+P_a(x)=(x^2-a)^2,
+\qquad
+g_a(x)=x(x^2-a),
+\qquad
+L_i=x_{i-1}-x_{i+1}.
+\]
+Then \(F_i=P_a(x_i)+\eps L_i\), \(q_i=4g_a(x_i)\), and
+\[
+t_\eps=4^3g_0g_1g_2+4\eps^2(g_0+g_1+g_2).
+\]
+Consequently
+\begin{equation}
+t_\eps^3=\sum_{j=0}^3\binom{3}{j}4^{9-2j}\eps^{2j}G_j,
+\qquad
+G_j=(g_0g_1g_2)^{3-j}(g_0+g_1+g_2)^j.
+\label{eq:quartic-t-cube}
+\end{equation}
+Define
+\[
+\cL_j(a,\eps)=
+\coeff{x_0^{-1}x_1^{-1}x_2^{-1}}
+{\frac{G_j}{F_0F_1F_2}}.
+\]
+Then
+\begin{equation}
+\cC_{2,j}=\coeff{a^3\eps^{4-2j}}{\cL_j(a,\eps)},
+\qquad
+D_2=\sum_{j=0}^3\binom3j4^{9-2j}\cC_{2,j}.
+\label{eq:quartic-Cj}
+\end{equation}
+Weights show that the selected coefficient is a constant multiple of
+\(a^3\), so set \(a=1\).  With
+\(P(x)=(x^2-1)^2\) and \(g(x)=x(x^2-1)\), expand
+\begin{equation}
+\frac1{P_i+\eps L_i}
+=\sum_{h_i\ge0}(-1)^{h_i}\eps^{h_i}
+\frac{L_i^{h_i}}{P_i^{h_i+1}}.
+\label{eq:quartic-reciprocal}
+\end{equation}
+Introduce
+\[
+\rho_{n,h}(d)=
+\coeff{x^{-1}}{\frac{x^d g(x)^n}{P(x)^{h+1}}}
+\qquad(d\ge0).
+\]
+The identities
+\[
+\frac{g^3}{P}=x^3(x^2-1),
+\qquad
+\frac{g^3}{P^2}=\frac{x^3}{x^2-1},
+\qquad
+\frac{g^3}{P^3}=\frac{x^3}{(x^2-1)^3}
+\]
+give
+\begin{align*}
+\rho_{3,0}(d)&=0 &&(d\ge0),\\
+\rho_{3,1}(0)&=\rho_{3,1}(2)=1,
+&\rho_{3,1}(1)&=0,\\
+\rho_{3,2}(0)&=\rho_{3,2}(1)=0,
+&\rho_{3,2}(2)&=1.
+\end{align*}
+
+For \(j=0\), the total internal denominator order is
+\(h_0+h_1+h_2=4\).  The first vanishing forces every \(h_i\ge1\), leaving
+only the three cyclic arrangements of \((2,1,1)\).  For
+\((h_0,h_1,h_2)=(2,1,1)\), the tensor coefficient is
+\[
+(\rho_{3,2}\otimes\rho_{3,1}\otimes\rho_{3,1})(L_0^2L_1L_2).
+\]
+Since
+\[
+L_0=x_2-x_1,
+\quad L_1=x_0-x_2,
+\quad L_2=x_1-x_0,
+\]
+we have
+\(L_1L_2=-x_0^2+x_0(x_1+x_2)-x_1x_2\).  Extracting the
+\(x_0\)-coefficient leaves \(-(x_2-x_1)^2\), and the remaining two
+coefficients give \(-2\).  The other cyclic arrangements agree, and the
+total sign is \((-1)^4=1\).  Hence
+\begin{equation}
+\cC_{2,0}=-6.
+\label{eq:C20}
+\end{equation}
+
+For \(j=1\), each monomial of \(G_1\) has coordinate powers
+\(g^3,g^2,g^2\), but the total internal denominator order is only two.  A
+coordinate with \(h_i=0\) contributes either
+\(g^2/P=x^2\) or \(g^3/P=x^3(x^2-1)\), both polynomials, so no
+\(x_i^{-1}\)-term can occur.  Nonvanishing would require all three
+\(h_i\ge1\), a contradiction.  Thus \(\cC_{2,1}=0\).
+
+For \(j=2\), the internal \(\eps\)-degree is zero.  If
+\[
+\mu_n=\coeff{x^{-1}}{\frac{g(x)^n}{P(x)}},
+\]
+then \(\mu_1=1\), \(\mu_2=\mu_3=0\).  The square terms of \(G_2\) have
+type \((3,1,1)\), and its cross terms have type \((2,2,1)\); their tensor
+coefficients vanish as \(\mu_3\mu_1^2\) and \(\mu_2^2\mu_1\).  Hence
+\(\cC_{2,2}=0\).  The \(j=3\) summand already contains \(\eps^6\) and
+cannot contribute to \(\eps^4\).  Equation \eqref{eq:quartic-Cj} now gives
+\begin{equation}
+D_2=4^9(-6)=-1572864
+\label{eq:D2-direct}
+\end{equation}
+without using the all-degree binomial collapse.
+
+\subsection{A direct normal-form ledger for the constant}
+\label{subsec:quartic-constant}
+
+Set \(a=0\) and \(\eps=1\).  Then
+\[
+F_i=x_i^4+x_{i-1}-x_{i+1},
+\qquad
+t=64x_0^3x_1^3x_2^3+4(x_0^3+x_1^3+x_2^3).
+\]
+Let \(R(e_0,e_1,e_2)\) be the coefficient of
+\(x_0^3x_1^3x_2^3\) in the normal form of
+\(x_0^{e_0}x_1^{e_1}x_2^{e_2}\).  Reduction in the three coordinates gives
+\begin{equation}
+\begin{aligned}
+R(e_0,e_1,e_2)
+&=R(e_0-4,e_1+1,e_2)-R(e_0-4,e_1,e_2+1),\\
+R(e_0,e_1,e_2)
+&=-R(e_0+1,e_1-4,e_2)+R(e_0,e_1-4,e_2+1),\\
+R(e_0,e_1,e_2)
+&=R(e_0+1,e_1,e_2-4)-R(e_0,e_1+1,e_2-4).
+\end{aligned}
+\label{eq:quartic-R}
+\end{equation}
+The terminal value is \(R(3,3,3)=1\), and every other standard exponent
+triple has value zero.  The complete ledger needed for \(t^3\) is
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Exponent pattern & \(R\)-value\\
+\midrule
+\((9,9,9)\) & \(-6\)\\
+cyclic permutation of \((9,6,6)\) & \(2\)\\
+cyclic permutation of \((9,3,3)\) & \(0\)\\
+cyclic permutation of \((6,6,3)\) & \(-1\)\\
+permutation of \((9,0,0)\) & \(0\)\\
+permutation of \((6,3,0)\) & \(0\)\\
+\((3,3,3)\) & \(1\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+For example,
+\[
+R(9,6,6)=R(5,7,6)-R(5,6,7)=1-(-1)=2,
+\]
+and
+\[
+R(9,9,9)=2R(5,10,9)=2(1-4)=-6.
+\]
+The remaining rows require at most two reductions or have total degree nine
+without already being the top standard monomial.
+
+Put \(Q=64x_0^3x_1^3x_2^3\) and
+\(R_0=4(x_0^3+x_1^3+x_2^3)\).  Grouping
+\((Q+R_0)^3\) by the preceding patterns gives
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Source & Top-coefficient contribution\\
+\midrule
+\(Q^3\) & \(262144(-6)=-1572864\)\\
+\(3Q^2R_0\) & \(3\cdot49152\cdot2=294912\)\\
+square terms in \(3QR_0^2\) & \(0\)\\
+mixed terms in \(3QR_0^2\) & \(3\cdot6144(-1)=-18432\)\\
+pure and \(2+1\) terms in \(R_0^3\) & \(0\)\\
+fully mixed term in \(R_0^3\) & \(384\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Therefore
+\begin{equation}
+C_2=-1572864+294912-18432+384=-1296000.
+\label{eq:C2-direct}
+\end{equation}
+Combining \eqref{eq:D2-direct} and \eqref{eq:C2-direct} proves
+\eqref{eq:quartic-moment-main}.  Both computations are derivations inside
+the source proof: \eqref{eq:D2-crosscheck} is a specialization of the
+all-degree theorem, while \eqref{eq:D2-direct}--\eqref{eq:C2-direct} use the
+separate tensor-Laurent and normal-form routes.
+
+\section{Fixed moment, local multiplicity, and minimality}
+\label{sec:minimality}
+
+The next two lemmas have different conclusions and are used in that order.
+
+\begin{lemma}[Zero fixed moment]
+\label{lem:fixed-moment}
+On the fixed algebra \eqref{eq:fixed-algebra}, the fixed contribution to the
+formal period-three \(m\)-th trace moment is zero for every \(m\ge2\).
+\end{lemma}
+
+\begin{proof}
+All three cyclic coordinates agree on the fixed algebra, so
+\[
+t_\eps=q^3+3\eps^2q.
+\]
+Since \(q^2=0\),
+\[
+(q^3+3\eps^2q)^m=0
+\qquad(m\ge2).
+\]
+At \(\eps=1\), this is the fixed contribution to the trace of
+\((Df^3)^m\).  Hence the formal exact-period-three moment equals the raw
+\(f^3\)-fixed moment \(S_m(a,1)\) after subtracting a zero fixed moment.
+\end{proof}
+
+\begin{lemma}[Local fixed multiplicity inside \texorpdfstring{\(\Fix(f^3)\)}{Fix(f3)}]
+\label{lem:fixed-multiplicity}
+Let \(\alpha\) be a root of \(p\) of multiplicity \(r\ge2\).  The local
+length of \(\Fix(f^3)\) at the associated fixed point equals \(r\), the
+fixed-scheme length at \(\alpha\).
+\end{lemma}
+
+\begin{proof}
+Set
+\[
+\delta=x_0-\alpha,
+\qquad
+u=x_1-x_0,
+\qquad
+v=x_2-x_0.
+\]
+At \((\delta,u,v)=(0,0,0)\), the \((u,v)\)-Jacobian of \((F_1,F_2)\) is
+\[
+\begin{pmatrix}0&-1\\1&0\end{pmatrix},
+\]
+which is invertible.  Formal elimination therefore gives
+\[
+u=-p(\alpha+\delta)+O(\delta^{2r-1}),
+\qquad
+v=p(\alpha+\delta)+O(\delta^{2r-1}).
+\]
+The remaining equation is
+\begin{equation}
+F_0=p(\alpha+\delta)+v-u
+=3p(\alpha+\delta)+O(\delta^{2r-1}).
+\label{eq:local-fixed-equation}
+\end{equation}
+Because \(2r-1>r\) and the characteristic is zero, the order of
+\eqref{eq:local-fixed-equation} is exactly \(r\).  This is the local length
+of \(\Fix(f^3)\) at the fixed support.
+\end{proof}
+
+\begin{remark}
+\Cref{lem:fixed-moment} is a statement about a trace power, while
+\cref{lem:fixed-multiplicity} is a statement about scheme length.  The first
+does not imply the second.  In particular, zero fixed moment is never used as
+a shortcut for subtracting reduced fixed support.
+\end{remark}
+
+For the quartic fiber, the \(f^3\)-fixed algebra has length \(4^3=64\).
+By \cref{lem:fixed-multiplicity}, the fixed algebra contributes its full
+length \(4\), so the formal exact-period-three zero-cycle has length
+\begin{equation}
+64-4=60.
+\label{eq:exact-length-60}
+\end{equation}
+Every exact period-three orbit contains three points, and matrix trace is
+cyclically invariant along the orbit.  Only after the pointwise exact-period
+subtraction do we divide by three:
+\begin{equation}
+\frac{-1296000-1572864L^3}{3}
+=-432000-524288L^3.
+\label{eq:cyclewise-moment}
+\end{equation}
+
+The normalized conjugacy calculation from \cref{sec:low-periods}, with
+\(m=2\), gives
+\[
+f_{2,L}\sim f_{2,M}
+\quad\Longleftrightarrow\quad
+L^3=M^3.
+\]
+The coefficient of \(L^3\) in \eqref{eq:quartic-moment-main} is nonzero.
+Hence the period-three moment separates precisely the normalized conjugacy
+classes on the complete quartic fiber.  Periods one and two are constant
+there, so period three is minimal.  This proves \cref{thm:quartic}.
+
+\section{Scope, open problem, and proof provenance}
+\label{sec:scope}
+
+\subsection{The open coefficient problem}
+
+The formula \eqref{eq:D-certificate-proved} reduces all-degree period-three
+recovery to a concrete combinatorial question:
+\begin{equation}
+D_m\stackrel{?}{\ne}0
+\qquad\text{for every }m\ge2.
+\label{eq:open-nonvanishing}
+\end{equation}
+No degree-independent sign, positivity, or nonvanishing proof is known in the
+present argument.  Consequently \cref{thm:uniform} proves an affine
+two-term law and an exact slope certificate, but it does not prove that
+period three separates the family in every degree.
+
+\subsection{Nonclaims}
+
+To make the theorem boundary explicit, this note does not claim any of the
+following:
+\begin{itemize}[leftmargin=2em]
+  \item universal nonvanishing of \(D_m\), or all-degree period-three
+  separation;
+  \item a theorem for all quartic H\'enon maps, a global degree-four period
+  cutoff, a global conjugacy classification, or global multiplier rigidity;
+  \item discovery of the exceptional quartic family or of its period-one/two
+  blindness;
+  \item novelty of global residues, quotient traces, formal/dynatomic cycles,
+  or low-period H\'enon algebra;
+  \item a historical-priority conclusion from a bounded no-hit search;
+  \item an unstable- or saddle-multiplier theorem, an arithmetic height or
+  finiteness result, a prime/zero statement, or a transfer-, Fredholm-, or
+  Euler-product identity; or
+  \item an all-\(m\) inference from any finite diagnostic or development
+  calculation.
+\end{itemize}
+
+\subsection{Proof and process provenance}
+
+Every theorem claim in this note is derived from the source-locked proof
+package with SHA-256
+\begin{center}
+\small\texttt{36f2edd5a1a25960a2c656adaeb07fbd4251c61b51c9e0a0382200460b589ba9}.
+\end{center}
+That package received the independent source verdict
+\texttt{SOURCE\_LOCK\_PASS} in the review with SHA-256
+\begin{center}
+\small\texttt{5e66edcd7f33769f748c8b6bd6582aa7e05b3325329839c46bf3627945803d11}.
+\end{center}
+No theorem in this note uses registered computational evidence.
+
+The sole earlier registered audit was consumed and ended
+\texttt{REGISTERED\_AUDIT\_TERMINAL\_FAIL}; no rerun is permitted, no raw
+result exists, and no result gate passed.  Static forensic analysis attributes
+the failure with approximate confidence \(0.98\) to a deterministic Track-Q
+scalar-versus-pair endpoint defect, but the child stderr was not preserved.
+No scientific mismatch was recorded, and that absence is not evidence of
+agreement.  This disclosure is non-evidentiary and supplies no support for
+any theorem above.
+
+The historical positioning is equally bounded.  Cantat--Dujardin already
+supply the quartic family and its period-one/two blindness;
+Friedland--Milnor supply the normalized H\'enon framework; and
+multidimensional residues, quotient traces, and formal periodic cycles are
+prior methods.  The contribution claimed here is limited to the
+source-proved period-three law and coefficient certificate and the scoped
+quartic minimal-separator theorem.  The bounded literature search is not a
+proof of historical priority.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+The exceptional family \(f_{m,a}(x,y)=(y+(x^m-a)^2,x)\) is formally blind
+at periods one and two, yet its period-three trace residue has a rigid
+two-term dependence on the normalized coordinate \(a^{2m-1}\).  A complete
+Laurent fiber calculation turns the slope into the finite certificate
+\eqref{eq:D-certificate-proved}.  In degree four, the complete normalized
+fiber with formal fixed-point trace multiset \(0^4\) is
+\(p=(x^2-L)^2\), and its exact affine period-three moment recovers \(L^3\).
+The separate local-multiplicity argument shows that the exact-period scheme
+has length \(60\), so the pointwise and cyclewise normalizations are both
+controlled.
+
+The quartic theorem is complete within its stated fiber.  The uniform theorem
+ends at a sharper frontier: proving or disproving
+\(D_m\ne0\) in every degree is an explicit open combinatorial problem.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,315 @@
+\section{The ordinary-degree filtration and bounded primitives}
+\label{sec:filtered-primitives}
+
+The basis of Section~\ref{sec:orbit-algebras} also records ordinary
+polynomial degree exactly.  This is stronger than controlling the total
+number of factors in a word: an orbit coordinate far from $X_{-1},X_0$
+has large degree in $x,y$.  We first identify those degrees and show that
+different standard words cannot cancel their highest terms.
+
+Set $V_D=\{g\in A:\deg g\le D\}$ for $D\ge0$ and $V_{-1}=0$,
+with the convention $\deg0=-\infty$.  Define the phase-product weights
+\begin{equation}
+  w_0=w_{-1}=1,\qquad
+  w_i=\prod_{h=0}^{i-1}d_h\quad(i\ge1),\qquad
+  w_i=\prod_{h=i+1}^{-1}d_h\quad(i\le-2).
+  \label{eq:phase-weights}
+\end{equation}
+For an admissible exponent word $e$ put
+\begin{equation}
+  A(e)=\sum_{i\ge0}e_iw_i,\qquad
+  B(e)=\sum_{i\le-1}e_iw_i,\qquad
+  \mu(M_e)=A(e)+B(e).
+  \label{eq:word-degree}
+\end{equation}
+Both sums are finite.  The symbols $A(e),B(e)$ in this pair denote
+nonnegative integers; the ambient polynomial ring remains $A=K[x,y]$.
+
+\begin{lemma}[A filtration-adapted basis]
+\label{lem:degree-basis}
+The highest homogeneous part of $M_e$ is
+\begin{equation}
+  c_e x^{A(e)}y^{B(e)},\qquad c_e\in K^*,
+  \label{eq:word-highest-term}
+\end{equation}
+and $e\mapsto(A(e),B(e))$ is a bijection from admissible exponent
+words to $\Z_{\ge0}^2$.  In particular, for every nonzero finite
+linear combination,
+\begin{equation}
+  \deg\left(\sum_e c'_eM_e\right)
+    =\max_{c'_e\ne0}\mu(M_e).
+  \label{eq:degree-no-cancellation}
+\end{equation}
+The words of weight at most $D$ form a basis of $V_D$, and
+$\dim_K V_D=\binom{D+2}{2}$.
+\end{lemma}
+
+\begin{proof}
+For $i\ge0$, the highest homogeneous part of $X_i$ is a nonzero
+multiple of $x^{w_i}$.  At $i=0$ this is the definition, and at $i=1$
+it follows from $X_1=p_0(x)-y$, since $d_0\ge2$.
+Suppose the assertion has been proved through index $i\ge1$.
+The degree of $p_i(X_i)$ is $d_iw_i=w_{i+1}$, with a nonzero pure
+$x$-power as its highest term.  On the other hand,
+$\deg X_{i-1}=w_{i-1}<w_{i+1}$.  Subtracting $X_{i-1}$ in
+\eqref{eq:orbit-recurrence} therefore cannot remove that term.
+This proves the positive assertion by induction.
+
+For the negative direction start with $X_{-1}=y$ and
+$X_{-2}=p_{-1}(y)-x$.  If the assertion is known at $i\le-2$ and
+$i+1$, then
+\[
+  X_{i-1}=p_i(X_i)-X_{i+1},\qquad
+  d_iw_i=w_{i-1}>w_{i+1}.
+\]
+Thus the highest part of $X_{i-1}$ is a nonzero pure $y$-power of
+degree $w_{i-1}$.  This proves the negative assertion too.
+Multiplying the highest homogeneous parts now gives
+\eqref{eq:word-highest-term}, including its nonzero coefficient.
+
+On the nonnegative ray, the place values are
+$1,d_0,d_0d_1,\ldots$, and the digit at place $i$ is constrained by
+$0\le e_i<d_i$.  Repeated Euclidean division gives each integer
+$a\ge0$ a unique expansion in these place values: divide $a$ by
+$d_0$ to obtain $e_0$ as remainder, divide the quotient by $d_1$
+to obtain $e_1$, and continue.  Each nonzero quotient strictly
+decreases because every divisor is at least two, so the expansion
+is finite.  Conversely, successively taking these remainders recovers
+every digit from the expansion, proving uniqueness.  On the negative
+ray the same procedure uses the successive bases
+$d_{-1},d_{-2},\ldots$ and the place values
+$w_{-1},w_{-2},\ldots$.  The two choices are independent, proving
+the claimed bijection to pairs of nonnegative integers.
+
+For a nonzero combination in \eqref{eq:degree-no-cancellation}, let
+$m$ be the largest word weight occurring.  Words of smaller weight
+do not contribute to the homogeneous part of degree $m$.
+The words of weight $m$ contribute distinct monomials $x^{A(e)}y^{B(e)}$
+by the bijection, each with a nonzero scalar coefficient.  Their sum
+cannot vanish.  This proves the exact degree formula.  Applying it
+to the unique orbit-basis expansion of a polynomial shows that a
+polynomial belongs to $V_D$ exactly when all its occurring words
+have weight at most $D$.  Finally, the number of pairs
+$(a,b)\in\Z_{\ge0}^2$ with $a+b\le D$ is $\binom{D+2}{2}$.
+\end{proof}
+
+We now compute the additive obstructions before imposing a degree bound.
+The action of $\sigma$ on every nonconstant element of $\cB$ has an
+infinite orbit.  Indeed, if a nonzero power of shift-$k$ fixed an
+admissible nonempty word, it would fix its finite nonempty support
+under a nonzero translation of $\Z$.  Comparing the least support
+index rules this out.
+
+Choose one representative $M_O$ of each nonconstant $\sigma$-orbit
+$O$.  For $g\in A$ its unique expansion can be written as
+\begin{equation}
+  g=c_0+\sum_O\sum_{r\in\Z}c_{O,r}\,\sigma^rM_O,
+  \qquad c_O=\sum_{r\in\Z}c_{O,r}.
+  \label{eq:orbit-coefficients}
+\end{equation}
+Only finitely many coefficients in this display are nonzero.
+Changing a representative reindexes the inner sum and leaves $c_O$
+unchanged.  Here $c_0$ is the coefficient of the basis element $1$.
+
+\begin{theorem}[Complete orbit obstructions]
+\label{thm:orbit-obstructions}
+For $g\in A$, the equation $\sigma f-f=g$ has a solution $f\in A$
+if and only if $c_0=0$ and $c_O=0$ for every nonconstant orbit in
+\eqref{eq:orbit-coefficients}.  When a solution exists, one is given by
+\begin{equation}
+  f=\sum_O\sum_{r\in\Z}u_{O,r}\,\sigma^rM_O,
+  \qquad u_{O,r}=-\sum_{s\le r}c_{O,s}.
+  \label{eq:cumulative-primitive}
+\end{equation}
+All solutions differ by an element of $K$.  Thus the vector-space
+quotient $\cH=A/(\sigma-1)A$ has one basis class for the constant
+word and one for each nonconstant $\sigma$-orbit.
+\end{theorem}
+
+\begin{proof}
+Write a prospective primitive in the same basis, with coefficients
+$u_{O,r}$.  The coefficient of $\sigma^rM_O$ in $\sigma f-f$ is
+$u_{O,r-1}-u_{O,r}$.  The coefficient of $1$ is zero, and summing
+the differences over an orbit gives zero because the sequence has
+finite support.  This proves necessity.
+
+Conversely, assume the stated obstructions vanish.  For a fixed orbit,
+the cumulative sum in \eqref{eq:cumulative-primitive} is zero below
+the least index with $c_{O,r}\ne0$.  It is also zero at and above
+the greatest such index, because the total coefficient sum is zero.
+It therefore has finite support, and only finitely many orbits occur.
+The formula defines a polynomial.  Its coefficients satisfy
+$u_{O,r-1}-u_{O,r}=c_{O,r}$, so its difference is $g$.
+
+If $\sigma f=f$, then the coefficients of $f$ are constant along
+each nonconstant orbit.  An infinite orbit cannot support a nonzero
+constant coefficient sequence in a polynomial, so all these
+coefficients vanish.  Thus $\ker(\sigma-1)=K$, proving uniqueness
+modulo constants.  The obstruction map
+$g\mapsto(c_0,(c_O)_O)$ is surjective onto the direct sum of one
+copy of $K$ for each listed basis class, and the equivalence just
+proved identifies its kernel with $(\sigma-1)A$.  This proves the
+description of the quotient.
+\end{proof}
+
+The normal constant coefficient is essential.  For example, if
+$k=1$ and $p(x)=x^2+c$, then
+$\sigma x-x=x^2-y-x+c$ has ordinary constant coefficient $c$,
+whereas its orbit-basis expression is $X_1-X_0$ and has normal
+constant coefficient zero.
+
+The cumulative formula becomes degree effective because an orbit cannot
+leave and then reenter a degree sublevel set between two of its terms.
+The following argument establishes this property for arbitrary phase
+degrees, including across the two sides of the initial coordinate pair.
+
+\begin{theorem}[Bounded primitives]
+\label{thm:bounded-primitive}
+For every integer $D\ge0$,
+\begin{equation}
+  g\in V_D\cap(\sigma-1)A
+  \quad\Longrightarrow\quad
+  g=\sigma f-f\ \text{for some }f\in V_D.
+  \label{eq:bounded-primitive}
+\end{equation}
+The primitive may be taken to be \eqref{eq:cumulative-primitive}, and
+then $\sigma f\in V_D$ as well.  The degree bound is attained for
+every $D\ge1$ within the scalar subclass $k=1$.
+\end{theorem}
+
+\begin{proof}
+Fix a residue $u$ with $0\le u<k$ and set
+$a=w_u$, $b=w_{u-k}$.  Phase periodicity and
+\eqref{eq:phase-weights} give the exact macro-step sequence
+\begin{equation}
+  \bigl(w_{u+rk}\bigr)_{r\in\Z}
+  =\bigl(\ldots,\delta^2b,\delta b,b,a,
+                 \delta a,\delta^2a,\ldots\bigr),
+  \label{eq:macro-weight-sequence}
+\end{equation}
+where $r=-1$ corresponds to $b$ and $r=0$ to $a$.
+On either geometric tail, the second difference is a positive
+multiple of $(\delta-1)^2$.  At the two central entries $b$ and $a$
+the second differences are, respectively,
+\begin{equation}
+  a+(\delta-2)b,\qquad b+(\delta-2)a.
+  \label{eq:central-second-differences}
+\end{equation}
+They are positive since $a,b>0$ and $\delta\ge2$.
+Thus $r\mapsto w_{i+rk}$ is discretely convex for every index $i$;
+changing $i$ within the same residue class only translates the sequence.
+No comparison between $a$ and $b$ is required.
+
+For an admissible word, Proposition~\ref{prop:macro-shift} and
+Lemma~\ref{lem:degree-basis} give
+\[
+  h_e(r):=\deg(\sigma^rM_e)=\sum_i e_iw_{i+rk}.
+\]
+This finite nonnegative linear combination of discretely convex
+sequences is discretely convex.  In particular, its first differences
+are nondecreasing.  If $r_-<r<r_+$, comparison of the averages of
+these differences before and after $r$ gives
+\[
+  h_e(r)\le
+  \frac{r_+-r}{r_+-r_-}h_e(r_-)
+  +\frac{r-r_-}{r_+-r_-}h_e(r_+).
+\]
+Hence $\{r\in\Z:h_e(r)\le D\}$ is an integer interval.
+
+Now expand the given coboundary $g$ as in
+\eqref{eq:orbit-coefficients}.  Lemma~\ref{lem:degree-basis} says
+that every word with a nonzero coefficient has degree at most $D$.
+On an orbit that occurs, let $r_-$ and $r_+$ be the least and greatest
+indices of these coefficients.  Its zero total coefficient sum implies
+$r_-<r_+$.  The cumulative coefficients $u_{O,r}$ vanish outside
+$r_-\le r<r_+$.  The two endpoint words have degree at most $D$,
+so the interval property puts every word added by the cumulative
+formula in $V_D$.  Summing the finitely many contributions gives
+$f\in V_D$ with $\sigma f-f=g$.  Also $\sigma f=f+g\in V_D$.
+If no nonconstant orbit occurs, the zero constant obstruction forces
+$g=0$, and $f=0$ has the required bound.
+
+For attainment, let $k=1$ and $D\ge1$.  Since $\sigma y=x$,
+the polynomial $f=y^D$ has difference $g=x^D-y^D$, and both have
+degree $D$.  Every other primitive is $y^D+c$ by
+Theorem~\ref{thm:orbit-obstructions}, so its degree is also $D$.
+This proves the uniform sharpness claim within the scalar subclass;
+it does not assert attainment for every fixed multiphase composition.
+\end{proof}
+
+Before using polynomial cohomology to study rational invariants, we
+record the reduction from rational to polynomial primitives.  It uses
+affine pole divisors.  Poles at infinity are neither excluded nor needed
+for this argument.
+
+\begin{corollary}[Rational reduction]
+\label{cor:rational-reduction}
+No positive iterate of $\sigma$ has a nonconstant polynomial
+semi-invariant, even after extending $K$.  The map $F$ has no periodic
+affine curve over an algebraic closure of $K$.  If $f\in K(x,y)$
+satisfies $\sigma f-f\in A$, then $f\in A$.  Consequently
+\begin{equation}
+  K(x,y)^F=K,
+  \label{eq:rational-fixed-field}
+\end{equation}
+and polynomial and rational solvability of $\sigma f-f=g$, for
+$g\in A$, are equivalent.  For $D\ge0$, if $\deg g\le D$ and a
+rational primitive exists, every such primitive has degree at most $D$.
+\end{corollary}
+
+\begin{proof}
+Let $E/K$ be a field extension and $m\ge1$.  The basis theorem and
+its shift description hold in $E[x,y]$ with the same phase degrees.
+Every nonconstant basis word has an infinite orbit under $\sigma^m$,
+because its support is translated by the nonzero step $mk$.
+If a nonzero polynomial $P$ satisfied $\sigma^mP=\lambda P$ for
+$\lambda\in E^*$, its finite set of occurring nonconstant basis
+words would be invariant under this permutation.  Its intersection
+with any infinite orbit cannot be both nonempty and finite invariant.
+Thus $P$ must be constant.  For a nonzero constant the equation also
+forces $\lambda=1$.
+
+Over an algebraic closure, an irreducible affine plane curve has
+principal prime ideal $(P)$ for a nonconstant irreducible polynomial.
+If $F^m$ preserves the curve, its pullback preserves that ideal, so
+$(\sigma^mP)=(P)$.  The units of the polynomial ring are nonzero
+field constants, giving a forbidden relation
+$\sigma^mP=\lambda P$.  A curve with finitely many irreducible
+components cannot be periodic either: a periodic automorphism of its
+set of components fixes each component after some positive power.
+The use of pullback is consistent with this statement, since a set
+fixed by the forward iterate of an automorphism is also fixed by its
+inverse iterate.
+
+Suppose now that $g=\sigma f-f\in A$.  For an irreducible
+$P\in K[x,y]$, denote by $v_P$ the order along the corresponding
+height-one prime.  A polynomial has $v_P(g)\ge0$.
+If $v_P(f)<0$, the equality $\sigma f=f+g$ gives
+$v_P(\sigma f)=v_P(f)$: terms with different orders cannot cancel
+the term of smaller order.  Applying the same argument to
+$f=\sigma f-g$ gives the converse implication when
+$v_P(\sigma f)<0$.  Therefore the effective affine pole divisors
+are equal, with their multiplicities:
+\begin{equation}
+  \operatorname{Pole}_{\A^2}(\sigma f)
+    =\operatorname{Pole}_{\A^2}(f).
+  \label{eq:affine-pole-invariance}
+\end{equation}
+The left side is the pullback by $F$ of the right side.  If this
+finite effective divisor were nonzero, its finitely many prime
+components would be permuted.  A positive power would fix one such
+prime ideal $(P)$ and hence give $\sigma^mP=\lambda P$, contradicting
+the first part of the proof.  This reasoning works directly over $K$;
+it does not require a descent argument from its algebraic closure.
+
+Thus $f$ has no affine height-one poles.  Express it as a reduced
+fraction $a/b$ in the unique factorization domain $K[x,y]$.
+Any irreducible factor of a nonconstant denominator $b$ would have
+negative valuation, since $a$ and $b$ are relatively prime.
+There can be no such factor, and $b\in K^*$, proving $f\in A$.
+Taking $g=0$ and using $\ker(\sigma-1)=K$ yields
+\eqref{eq:rational-fixed-field}.  For general $g\in V_D$,
+Theorem~\ref{thm:bounded-primitive} supplies a primitive in $V_D$.
+Every other rational primitive is now polynomial and differs from
+it by a constant, which proves the last assertion.
+\end{proof}

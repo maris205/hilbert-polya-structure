@@ -1,5 +1,7 @@
 # Research Proposal
 
+> 原始研究背景与历史模板。当前执行遵循 [AGENTS.md](AGENTS.md)、[WORKFLOW.md](docs/WORKFLOW.md) 和 [当前批次](BATCH_07_CONTEXT.md)。下文旧署名、固定 PDF 路径与 GitHub 同步要求已被当前项目锁及本地交付范围取代；本文件不授权外部操作。
+
 ## Session 3 — Symplectic Maps: Hamiltonian Chaos, Conservative Geometry, and Dissipative Controls
 
 ---

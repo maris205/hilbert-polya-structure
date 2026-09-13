@@ -1,0 +1,163 @@
+\section{Rigidity for a univariate right-hand side}
+\label{sec:univariate-rigidity}
+
+For a single H\'enon map, the restriction that the right-hand side depend
+only on the first coordinate gives a stronger conclusion than the general
+degree bound. Throughout this section, let $K$ have characteristic zero and
+let
+\[
+ H_p(x,y)=(p(x)-y,x),\qquad
+ p(x)=a_dx^d+\cdots+a_0,\qquad a_d\ne0,\qquad d\ge2.
+\]
+Thus this is the case $k=1$, with $\sigma=H_p^*$. The classification below
+concerns this particular single-step map, not an arbitrary composition of
+the maps considered in the preceding sections.
+
+The useful factorization of $H_p$ is into the two involutions
+\[
+ \iota(x,y)=(y,x),\qquad
+ r(x,y)=(x,p(x)-y),\qquad H_p=\iota\circ r.
+\]
+The exchange involution $\iota$ also satisfies
+$\iota\circ H_p\circ\iota=H_p^{-1}$. To describe the polynomials fixed by
+$r$, set
+\[
+ Q=y^2-p(x)y.
+\]
+The change of coordinate $z=y-p(x)/2$ identifies $K[x,y]$ with $K[x,z]$,
+and $r$ acts by $z\mapsto-z$. A polynomial in $z$ is fixed by this action
+exactly when only even powers occur. Since
+$z^2=Q+p(x)^2/4$, it follows that
+\begin{equation}
+ K[x,y]^r=K[x,Q].
+ \label{eq:reflection-invariant-ring}
+\end{equation}
+
+We will use one consequence of this description for ordinary total degree.
+The highest homogeneous term of $Q$ is $-a_dx^dy$. If a nonzero polynomial
+$C\in K[x,Q]$ is written as
+\[
+ C=\sum_{j\ge0}b_j(x)Q^j,
+\]
+with finitely many nonzero $b_j$, the unique highest monomial of each nonzero
+summand is a nonzero multiple of
+$x^{\deg b_j+dj}y^j$. These monomials cannot cancel between different $j$,
+because their $y$ exponents differ. Consequently every monomial $x^iy^j$
+in the highest homogeneous part of $C$ satisfies
+\begin{equation}
+ i\ge dj.
+ \label{eq:invariant-highest-cone}
+\end{equation}
+No description of the anti-invariant polynomials is needed.
+
+\begin{theorem}[Univariate rigidity]
+\label{thm:univariate}
+Let $f\in K(x,y)$ and $R\in K[x]$. Then
+\[
+ f\circ H_p-f=R(x)
+\]
+if and only if there are $c,c_0\in K$ such that
+\begin{equation}
+ f=c(x-y)+c_0,\qquad R=c\bigl(p(x)-2x\bigr).
+ \label{eq:univariate-classification}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Corollary~\ref{cor:rational-reduction}, a rational function with
+polynomial difference is polynomial, so $f\in K[x,y]$. The same corollary
+gives $K(x,y)^{\sigma}=K$.
+
+Evaluate the given equation at $r(x,y)$. Since $H_p\circ r=\iota$ and $r$
+preserves $x$, this gives
+\[
+ f\circ\iota-f\circ r=R(x).
+\]
+Together with $f\circ H_p=f+R(x)$ and
+$\iota\circ H_p=r$, it follows that
+\[
+ (f+f\circ\iota)\circ H_p
+ =f\circ H_p+f\circ r
+ =f+f\circ\iota.
+\]
+Thus $f+f\circ\iota$ is a constant. Subtracting half that constant from
+$f$ does not change its difference. We may therefore impose
+\begin{equation}
+ f\circ\iota=-f.
+ \label{eq:exchange-antisymmetry}
+\end{equation}
+The equation evaluated at $r$ now reads
+\begin{equation}
+ f(x,y)+f(x,p(x)-y)=-R(x).
+ \label{eq:univariate-reflection-equation}
+\end{equation}
+
+Put $C=f_y$. Differentiation of
+\eqref{eq:univariate-reflection-equation} with respect to $y$ yields
+\[
+ C(x,y)-C(x,p(x)-y)=0.
+\]
+Hence $C\in K[x,Q]$ by \eqref{eq:reflection-invariant-ring}. On the other
+hand, differentiating \eqref{eq:exchange-antisymmetry} once in each variable
+gives
+\begin{equation}
+ C_x(x,y)=f_{xy}(x,y)=-f_{xy}(y,x)=-C_x(y,x).
+ \label{eq:mixed-derivative-antisymmetry}
+\end{equation}
+
+Suppose $C$ is nonconstant, and let $C_D$ denote its highest homogeneous
+part, where $D>0$. Every monomial $x^iy^j$ in $C_D$ satisfies $i\ge dj$
+by \eqref{eq:invariant-highest-cone}. In particular $i>0$: the possibility
+$i=0$ would imply $j=0$, contrary to $D>0$. Characteristic zero then ensures
+that $(C_D)_x\ne0$, and this derivative is the highest homogeneous part of
+$C_x$. For each monomial $x^ay^b$ in it, we have
+\begin{equation}
+ a+1\ge db.
+ \label{eq:derivative-cone}
+\end{equation}
+By \eqref{eq:mixed-derivative-antisymmetry}, the exchanged monomial
+$x^by^a$ also occurs with the negative coefficient. Applying
+\eqref{eq:derivative-cone} to that monomial gives $b+1\ge da$. If $a>b$,
+then $a\ge b+1$, and the latter inequality would give
+\[
+ b+1\ge da\ge2a\ge2b+2,
+\]
+which is impossible. Interchanging $a$ and $b$ excludes $b>a$. The only
+remaining possibility is $a=b$, but an exchange-anti-invariant polynomial
+has zero coefficient on each such diagonal monomial, since $2\ne0$ in
+$K$. This contradicts $(C_D)_x\ne0$.
+
+It follows that $C$ is constant. Write $f=Cy+B(x)$, which is possible
+because $f_y=C$ in characteristic zero. Equation
+\eqref{eq:exchange-antisymmetry} becomes
+\[
+ C(x+y)+B(x)+B(y)=0.
+\]
+Taking $x=y=0$ gives $B(0)=0$, and then taking $y=0$ gives $B(x)=-Cx$.
+Restoring the constant subtracted earlier and putting $c=-C$, we obtain
+$f=c(x-y)+c_0$. Finally,
+\[
+ (x-y)\circ H_p-(x-y)
+ =(p(x)-y-x)-(x-y)=p(x)-2x,
+\]
+which proves both the formula for $R$ and its converse.
+\end{proof}
+
+The theorem covers every rational primitive, with no degree truncation or
+genericity condition on the coefficients of $p$. In particular a constant
+right-hand side is solvable only when it is zero, since
+$\deg(p-2x)=d\ge2$; in that case the primitive is constant.
+
+The assumptions also delimit the statement. For the degree-one map with
+$p(x)=2x$, the function $x-y$ is invariant, so every polynomial in $x-y$
+has zero difference. In characteristic $\ell>0$, the identity
+\[
+ \sigma\bigl((x-y)^\ell\bigr)-(x-y)^\ell
+ =\bigl(p(x)-2x\bigr)^\ell
+\]
+gives primitives outside the linear form
+\eqref{eq:univariate-classification}. Finally, the reflection factorization
+used here is for the coefficient $-1$ of $y$, equivalently the displayed
+Jacobian-one H\'enon map. The theorem makes no corresponding classification
+claim for a general dissipative coefficient or for a multiphase
+composition.
