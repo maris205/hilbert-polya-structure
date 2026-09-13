@@ -10,6 +10,8 @@ This package turns the P1 knowledge base into a research-method paper. Its subje
 
 > **Scope boundary.** The figure is an obligation map, not a progress dashboard. Its arrows express the evidential continuity required of one candidate; they do not report completed transitions or transferable credit across the six research lines. See [P1 claim vocabulary](../01-status-and-claim-vocabulary.md) and [cross-stream relationships](../02-cross-stream-relationships.md).
 
+> **Separate conference-oriented edition.** A later, generic external-facing presentation is available in [conference_record_v1/](conference_record_v1/README.md) ([PDF](conference_record_v1/latex/manuscript.pdf)). It preserves the Phase-I nonclaims while adding conventional paper structure, external background references, the updated roadmap, a visual evidence landscape, and an explicit prime-symbolic lineage gate. It is not yet submitted or peer reviewed, and it does not replace this source-bound historical package.
+
 ## Package contents
 
 | File | Role |
@@ -23,6 +25,7 @@ This package turns the P1 knowledge base into a research-method paper. Its subje
 | [evidence-map.md](evidence-map.md) | Controlling project records, their permitted uses, and non-transfer boundaries. |
 | [citation-audit.md](citation-audit.md) | Local citation/link audit of this draft package. |
 | [review-notes.md](review-notes.md) | Bounded internal review notes; not a substitute for mathematical peer review. |
+| [conference_record_v1/](conference_record_v1/README.md) | Separate generic conference-oriented research record with author metadata, external bibliography, and an updated lineage-constrained candidate-engineering presentation. |
 
 ## Status and use
 

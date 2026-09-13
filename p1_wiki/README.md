@@ -29,6 +29,8 @@ Flow Systems 内部另有一组受统一冻结计划组织的五种连续时间�
 
 [《AI-Guided Exploration of Arithmetic Dynamical Systems》](phase1_ai_guided_exploration/README.md)（[正式 PDF](phase1_ai_guided_exploration/latex/manuscript.pdf)）以本页路线图为证据义务图，整理第一阶段的人机协作探索、局部结果、负对照与下一阶段的候选准入条件。它是固定材料窗口上的内部工作论文，不是 RH 证明、Route 评估替代品或外部同行评审结论。
 
+另有一份[conference-oriented Phase-I research record v1](phase1_ai_guided_exploration/conference_record_v1/README.md)（[PDF](phase1_ai_guided_exploration/conference_record_v1/latex/manuscript.pdf)）。该版本保留上述边界，但以更接近会议交流稿的形式组织：外部 AI-in-mathematics 背景文献、更新版路线图、六线证据图、主候选的 prime-symbolic lineage / preservation ledger，以及附录中的详细研究记录。它强调下一轮的“广度”仅限于可追溯到素数符号动力学起点的候选架构，而不是任意动力学形式的随机扫描；目前未投稿、未同行评审，也不替代旧版历史材料或其路线图资产。
+
 ## 推荐的 agent 阅读顺序
 
 1. [Agent 起始页](00-agent-start.md)：先确定任务是导航、阅读、复现审计还是另需授权的研究动作。
