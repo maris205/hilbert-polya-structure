@@ -1,6 +1,6 @@
 # zeta_mvp0 — a staged Hilbert--Pólya structure programme
 
-Last updated: 2026-08-12.
+Last updated: 2026-09-13 (programme claim state unchanged; archival import added).
 
 `zeta_mvp0` is the first structured Hilbert--Polya search line in this
 repository.  Its organizing rule is:
@@ -42,10 +42,14 @@ not represented as present in an ordinary clone.  Failed attempts are
 retained only when they are needed for provenance and are marked
 non-licensing.
 
-The 2026-08-12 layout migration removed the redundant `papers/` container.
-Historical machine and release records retain the absolute paths at which
-they were captured.  In particular, an older path-bound control review is
-historical evidence after the move, not authority for the relocated tree;
+The 2026-08-12 layout migration removed the redundant `papers/` container for
+the programme's native Paper 01/02 packages.  On 2026-09-13, a distinct
+`papers/` container was intentionally added for the integrated, external
+`prime_dynamics_theory` RH corpus only; it does not change the direct
+`paper_01_*` / `paper_02_*` layout or make the imported corpus a new native
+paper.  Historical machine and release records retain the absolute paths at
+which they were captured.  In particular, an older path-bound control review
+is historical evidence after the move, not authority for the relocated tree;
 the next downstream control generation requires a fresh review at the new
 paths.  Until that generation is reviewed and published, Paper 02's
 path-bound control roles remain stopped even though the paper, theorem
@@ -154,3 +158,14 @@ contract tests.  Its compact read-only release audit can run from an ordinary
 clone.  Deep A4.15 tree/raw replay additionally requires the separately
 transferred bulk archive; binaries from invalid or superseded attempts remain
 intentionally untracked.
+
+## Integrated RH corpus
+
+The source-preserving `prime_dynamics_theory` RH corpus now lives in
+[`papers/`](papers/) with its navigation entry at [readme.md](readme.md),
+its source handoff at
+[PRIME_DYNAMICS_RH_HANDOFF.md](PRIME_DYNAMICS_RH_HANDOFF.md), and provenance,
+reproduction, and claim-boundary records in
+[`rh_import_metadata/`](rh_import_metadata/).  It is archival, has not been
+independently revalidated here, is not a `zeta_mvp0` paper, and does not alter
+the dashboard or global claim ledger.
