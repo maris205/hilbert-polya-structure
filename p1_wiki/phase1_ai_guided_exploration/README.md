@@ -15,6 +15,8 @@ This package turns the P1 knowledge base into a research-method paper. Its subje
 | File | Role |
 |---|---|
 | [manuscript.md](manuscript.md) | Main English working-paper draft with an independently composed Chinese abstract. |
+| [latex/manuscript.pdf](latex/manuscript.pdf) | Formal 16-page generic working-paper PDF, produced with LuaLaTeX. |
+| [latex/README.md](latex/README.md) | Reproducible LaTeX source, build instructions, and rendering scope. |
 | [paper-configuration.md](paper-configuration.md) | Scope, title, corpus snapshot, authorship placeholders, and formatting choices. |
 | [outline.md](outline.md) | Source-bound paper architecture and evidence-to-section map. |
 | [argument-blueprint.md](argument-blueprint.md) | Central thesis, claim--evidence--reasoning chains, and counterarguments. |
@@ -28,5 +30,6 @@ This package turns the P1 knowledge base into a research-method paper. Its subje
 - **Research role:** source-bound synthesis and methodological case study, not a new Route-A or Route-B evaluation.
 - **Evidence rule:** exact mathematical statements remain controlled by the linked original TeX/PDF, claim ledgers, evaluator records, and receipts. The P1 Wiki is a navigation and provenance layer.
 - **Publication status:** internal draft only. No external submission, peer-review status, priority claim, or permission to restart a research branch is implied.
+- **Formal layout:** the companion LuaLaTeX/PDF edition is a generic theoretical working-paper layout, not a journal template or an external publication claim.
 
 The title uses *AI-Guided* in the ordinary workflow sense: AI can assist with corpus navigation, evidence indexing, contradiction checks, draft organization, and link verification; human researchers retain authority for source selection, mathematical validation, claim approval, authorship, and any external release.

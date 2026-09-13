@@ -14,7 +14,7 @@ The user supplied the title direction “AI-Guided Exploration of Arithmetic Dyn
 | **Target venue** | None; internal working paper |
 | **Body language** | English |
 | **Abstracts** | English and independently composed Simplified Chinese |
-| **Output format** | Markdown as the canonical draft; no PDF, LaTeX, or external layout is implied |
+| **Output format** | Markdown remains the canonical source-bound draft; a reproducible generic LuaLaTeX/PDF working-paper edition lives in [`latex/`](latex/README.md). Its layout does not imply journal compliance, external submission, or publication. |
 | **Citation convention** | Numbered project-record keys (for example `P1-CL`, `S5-P`) with direct local links; a provenance-oriented adaptation rather than a claim of journal-style compliance |
 | **Target length** | Approximately 6,000 English words plus appendices and source ledger |
 | **Evidence-corpus window** | `419ee36c1e310469209f7b83c096ec8aea448386`, 2026-09-13 UTC; it identifies the cited source corpus rather than the subsequently added manuscript package |

@@ -27,7 +27,7 @@ Flow Systems 内部另有一组受统一冻结计划组织的五种连续时间�
 
 ## 阶段性工作论文
 
-[《AI-Guided Exploration of Arithmetic Dynamical Systems》](phase1_ai_guided_exploration/README.md)以本页路线图为证据义务图，整理第一阶段的人机协作探索、局部结果、负对照与下一阶段的候选准入条件。它是固定材料窗口上的内部工作论文，不是 RH 证明、Route 评估替代品或外部同行评审结论。
+[《AI-Guided Exploration of Arithmetic Dynamical Systems》](phase1_ai_guided_exploration/README.md)（[正式 PDF](phase1_ai_guided_exploration/latex/manuscript.pdf)）以本页路线图为证据义务图，整理第一阶段的人机协作探索、局部结果、负对照与下一阶段的候选准入条件。它是固定材料窗口上的内部工作论文，不是 RH 证明、Route 评估替代品或外部同行评审结论。
 
 ## 推荐的 agent 阅读顺序
 
