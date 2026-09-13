@@ -6,7 +6,7 @@
 | --- | --- |
 | **Title** | *AI-Guided Exploration of Arithmetic Dynamical Systems: Constraints, Failure Modes, and Search Strategies toward Hilbert--Pólya Structures* |
 | **Paper type** | Conference-oriented theoretical/methodological research record and source-bound Phase-I synthesis |
-| **Current venue** | None; generic two-column A4 layout, not a submission template |
+| **Current venue** | None; generic single-column A4 layout, not a submission template |
 | **Language** | English |
 | **Author** | Liang Wang |
 | **Affiliation** | School of Artificial Intelligence and Automation, Huazhong University of Science and Technology, Wuhan 430070, P.R. China |
@@ -17,15 +17,38 @@
 
 ## Research question and contribution
 
-The central question is not whether Phase I proves RH.  It is how a human-directed, AI-assisted programme can make the search for arithmetic dynamical candidates broad, falsifiable, and auditable without permitting source drift or cross-object credit transfer.
+The central question is not whether Phase I proves RH.  It is how a human-governed, AI-executed programme can make the search for arithmetic dynamical candidates broad, falsifiable, and auditable without permitting source drift, autonomous scope expansion, or cross-object credit transfer.
 
 The paper's contributions are:
 
-1. An updated roadmap treated as an evidence-obligation architecture.
-2. A visual, non-additive six-direction evidence landscape.
-3. A same-object ownership invariant across arithmetic source, clock/repetition, orbit, determinant, and later operator.
-4. A **prime-symbolic lineage gate** and preservation ledger that restrict the next-round candidate portfolio to documented descendants or transformations of the project’s arithmetic-symbolic starting point.
-5. Detailed source-bound research summaries in appendices rather than unsupported main-text claims.
+1. A **human-governed, AI-executed framework** that assigns research-origin and scientific authority to the mathematician; makes the search contract explicit in a jointly drafted, human-approved `AGENTS.md`; and requires an AI evidence handoff at a stated mathematical or resource boundary.
+2. An updated roadmap treated as an evidence-obligation architecture.
+3. A visual, non-additive six-direction evidence landscape.
+4. A same-object ownership invariant across arithmetic source, clock/repetition, orbit, determinant, and later operator.
+5. A **prime-symbolic lineage gate** and preservation ledger that restrict the next-round candidate portfolio to documented descendants or transformations of the project’s arithmetic-symbolic starting point.
+6. Detailed source-bound research summaries in appendices rather than unsupported main-text claims.
+
+## Human--AI governance rule
+
+The framework distinguishes scientific authority from bounded execution:
+
+```text
+mathematician: choose prime-symbolic research origin and scientific constraints
+        -> jointly drafted, human-approved AGENTS.md
+        -> AI: breadth-first screening of permitted frozen candidate cards
+        -> stated gate / END / FORK / HOLD / token-or-compute boundary
+        -> source-bound evidence handoff to mathematician
+        -> new human authorization only when work is to continue
+```
+
+The operative `AGENTS.md` must state four items before an AI search tranche begins:
+
+1. lineage and search-space constraints, including permitted families, branches, dimensions, transformations, and arithmetic inputs;
+2. a clear multi-level decision route with direct evidence requirements and typed operational outcomes such as `GO`, `END`, `FORK`, and `HOLD`;
+3. a generally breadth-first candidate-portfolio strategy; and
+4. mathematical and operational termination conditions, including a named roadmap boundary, loss of the lineage/same-object condition, a scoped negative result, or exhaustion of the specified token/compute allocation.
+
+`GO`, `END`, `FORK`, and `HOLD` govern the authorized workflow; they are not mathematical Route-A/Route-B verdicts.  A budget stop ends an execution tranche but carries no negative mathematical conclusion.  This is a prospective framework distilled from Phase-I lessons, not a claim that every historical Phase-I session used a uniform `AGENTS.md` or AI workflow.
 
 ## Candidate-admission rule
 

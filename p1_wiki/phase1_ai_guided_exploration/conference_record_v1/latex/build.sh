@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Reproducible build for the generic conference-oriented research record.
+# Reproducible build for the generic single-column research record.
 # Requires: LuaLaTeX, BibTeX, pdfinfo.
 set -euo pipefail
 

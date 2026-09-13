@@ -2,7 +2,7 @@
 
 ## Scope
 
-This audit applies to the conference-oriented Phase-I research record in [`latex/`](latex/).  It checks whether the external references are used for the bounded background claims they support, whether the local Phase-I claims are explicitly tied to the repository record, and whether the roadmap and prime-symbolic lineage have a stated provenance.  It does **not** independently prove any local mathematical result, establish a Route-A/Route-B pass, validate an AI system's capability beyond the cited setting, or supply peer review.
+This audit applies to the conference-oriented Phase-I research record in [`latex/`](latex/).  It checks whether the external references are used for the bounded background claims they support, whether the local Phase-I claims are explicitly tied to the repository record, and whether the research-governance framework, roadmap, and prime-symbolic lineage have a stated provenance.  It does **not** independently prove any local mathematical result, establish a Route-A/Route-B pass, validate an AI system's capability beyond the cited setting, or supply peer review.
 
 ## Citation register
 
@@ -27,6 +27,7 @@ The bibliography includes the DOI or official page for every external source.  T
 | Historical Phase-I evidence corpus | Commit `419ee36c1e310469209f7b83c096ec8aea448386`, 2026-09-13 UTC | Bounded summaries in the evidence landscape and Appendix A; not a new proof audit. |
 | Six-direction navigation and claim boundaries | [`p1_wiki/`](../../README.md) and the parent [internal paper package](../README.md) | Direct the reader to controlling source records and preserve non-transfer boundaries. |
 | Prime-symbolic research genealogy | [`flow_systems/docs/prior_work/README.md`](../../../flow_systems/docs/prior_work/README.md) | Constrains candidate admission; it is not proof that the displayed lineage arrows are established mathematical implications. |
+| Human-governed, AI-executed framework | Figure 1 and the paper-configuration record in this package | Author-proposed prospective governance framework: the mathematician owns research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` constrains bounded AI execution and requires a handoff. It does not show that historical Phase-I materials used one uniform agent protocol, nor that a workflow document is mathematical evidence. |
 | Updated roadmap | [`assets/rh_roadmap.png`](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d` | Author-proposed evidence-obligation / search map; not a progress dashboard or mathematical result. |
 
 ## Session-level source map
@@ -58,6 +59,7 @@ navigation page into a replacement proof source.
 - The Flow `positive arithmetic A2 = 0/5` and `Route-B invocation = 0/5` statement is explicitly restricted to P24--P28, rather than all continuous flows.
 - The proposal for broader Round-2 search is a methodological recommendation from the record, not a theorem or empirical optimization result.
 - The lineage requirement is stated as an admission and preservation ledger: a generic map, flow, trace formula, or operator that receives primes only after construction is an external control, not a main candidate.
+- The new `GO`/`END`/`FORK`/`HOLD` labels are explicitly operational workflow dispositions in the proposed framework, not existing Route-A/Route-B verdicts or claims about the wording of every historical/current project protocol. A token/compute-budget stop is recorded as an operational boundary, not as a negative mathematical result.
 
 ## Build and rendering checks
 
@@ -70,7 +72,7 @@ cd p1_wiki/phase1_ai_guided_exploration/conference_record_v1/latex
 
 Closing checks should include a successful LuaLaTeX/BibTeX build, no undefined citation/reference warnings in `build/manuscript.log`, `pdfinfo manuscript.pdf`, a manual inspection of all rendered pages, and `git diff --check`.  Passing these checks establishes rendering and reference-resolution integrity only; it does not establish mathematical correctness or external scholarly validation.
 
-## Verification record for v1
+## Verification record for the two-column v1 baseline
 
 The following closing checks were run on 2026-09-13 UTC.
 
@@ -83,6 +85,22 @@ The following closing checks were run on 2026-09-13 UTC.
 | Page rendering | Render and inspect pages 1--8 | PASS: roadmap, evidence landscape, protocol, candidate card, appendices, and bibliography are legible; no clipped candidate-card rows remain. |
 | Wiki links | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,261 local links in 2,306 Markdown files. |
 | Asset identity | SHA-256 comparison against the Round-2 roadmap reference | PASS: both values are <code>f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d</code>. |
+| Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
+
+## Verification record for the framework and single-column revision
+
+The following closing checks were run on 2026-09-14 UTC after the new Figure 1,
+the governance-framework prose, and the single-column A4 conversion were
+applied.
+
+| Check | Command / method | Result |
+| --- | --- | --- |
+| Reproducible paper build | <code>cd latex && ./build.sh</code> | PASS: LuaLaTeX/BibTeX build completed; tracked PDF is a 13-page single-column A4 document. |
+| Citation and cross-reference resolution | Inspect <code>latex/build/manuscript.log</code> for undefined citations/references and fatal errors after the final pass | PASS: none found. |
+| Layout diagnostics | Inspect the final log for <code>Overfull</code>, <code>Float too large</code>, and unprocessed-float warnings | PASS: none found. Two non-fatal underfull line-break diagnostics remain. |
+| PDF metadata | <code>pdfinfo latex/manuscript.pdf</code> | PASS: title, author Liang Wang, subject, A4 page size, and 13-page count present. |
+| Page rendering | Render and inspect pages 2--9 and the bibliography page | PASS: Figure 1 is the human-governed framework and appears before Figure 2 (the RH roadmap); the evidence landscape, candidate-engineering protocol, role table, candidate card, appendices, and bibliography are legible with no visible clipping. |
+| Wiki links | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,261 local links in 2,306 Markdown files. |
 | Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
 
 ## Release note
