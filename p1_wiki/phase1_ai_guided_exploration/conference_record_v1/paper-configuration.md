@@ -34,7 +34,7 @@ The paper's contributions are:
 
 1. A **three-layer, human-governed, AI-executed framework**: the mathematician owns the prime-symbolic research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` fixes the search contract; and bounded AI execution ends in an evidence handoff and mathematician review before another round may begin.
 2. An updated roadmap treated as an evidence-obligation architecture.
-3. A concrete P1--P6 lineage ledger: P1--P5 are project prior-work source records governing allowed deformations/lifts, while P6 is a separate external prime-side acceptance benchmark.
+3. A concrete P1--P6 lineage ledger: P1 is the published prime-symbolic starting article, P2--P5 are project source records governing allowed deformations/lifts, and P6 is a separate external prime-side acceptance benchmark.
 4. A visual, non-additive Layer-3 portfolio overview of one early free entry plus five system-family sessions, with inventory, focal records, reusable local outputs, and named missing bridges kept distinct.
 5. A same-object ownership invariant across arithmetic source, clock/repetition, orbit, determinant, and later operator.
 6. A **prime-symbolic lineage gate** and preservation ledger that restrict the next-round candidate portfolio to documented descendants or transformations of the project’s arithmetic-symbolic starting point.
@@ -133,7 +133,7 @@ label, archive, or package count transfers a missing obligation across rows.
 - The current roadmap is an author-proposed search/evidence diagram, not proof of its arrows or a dashboard of completed gates.
 - The recommendation to search candidate architectures more broadly is a reasoned Phase-I design recommendation, not a statistically established optimum.
 - The current Wiki inventory and the historical mathematical synthesis have different source snapshots and are not combined into one empirical score.
-- P1--P5 are used as project prior-work source records; the paper does not independently establish their claims or publication status. P6 is cited as an external preprint benchmark.
+- P1 is cited directly as a published journal article; P2--P5 are used as project prior-work source records. The paper does not independently re-review the mathematical claims of P1--P5. P6 is cited as an external preprint benchmark.
 - External AI papers and current public reports provide background only. They do not establish broad autonomous mathematical competence, independently validate a reported open-problem resolution, or validate this research programme.
 
 ## Declarations to complete for a submission

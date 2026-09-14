@@ -23,6 +23,7 @@ capability beyond the cited setting, or supply peer review.
 | `RomeraParedes2024` | Evaluator-coupled program search can generate constructions in constrained settings. | Does not validate a dynamical candidate without its own mathematical evaluator. |
 | `Trinh2024` | The bounded IMO-AG-30 geometry result cited in the introduction. | Geometry benchmark only; not a general mathematical-reasoning claim. |
 | `Hubert2026` | Reinforcement-learning search for Lean-verified proofs in a specialized olympiad-level setting. | Formal verification and target domain remain bounded. |
+| `Wang2026PrimeChaos` | The bibliographic identity and published status of P1, the prime-symbolic Layer-1 starting article. | It documents research origin only; this methodology paper does not re-review P1's mathematical claims, transfer them to a new candidate, or treat it as evidence for RH. |
 | `AlpogeFurman2026` | A 2026 zeta-zero preprint, its stated critical-line proportion result, Lean 4 verification, and its limited use as the P6 arithmetic-side benchmark. | A preprint, not a proof of RH or an independently re-reviewed result in this paper. |
 | `BerryKeating1999` | Hilbert--Pólya / spectral-asymptotic motivation. | Motivation, not a candidate-specific theorem. |
 | `Connes1999` | Trace-formula and arithmetic context. | Context, not an endorsement of the present construction. |
@@ -41,7 +42,7 @@ The bibliography includes the DOI or official page for every external source.  T
 | P1 Wiki conversion inventory | Commit `afe747a194b92b9804bd69e2f57696884e47d53b`; `p1_wiki/meta/conversion-manifest.md` | Counts, derived-reading status, and conversion limits; not a statement of mathematical strength, publication status, or Route progress. |
 | Six-direction navigation and claim boundaries | [`p1_wiki/`](../../README.md) and the parent [internal paper package](../README.md) | Direct the reader to controlling source records and preserve non-transfer boundaries. |
 | Prime-symbolic research genealogy | [`flow_systems/docs/prior_work/README.md`](../../../flow_systems/docs/prior_work/README.md) | Constrains candidate admission; it is not proof that the displayed lineage arrows are established mathematical implications. |
-| Layer-1 P1--P6 ledger | [Prior Work Guide](../../../flow_systems/docs/prior_work/README.md), plus `AlpogeFurman2026` for P6 | P1--P5 are project source records; P6 is an external preprint benchmark. Their placement in the lineage figure does not independently verify P1--P5 claims or transfer P6 evidence to a descendant. |
+| Layer-1 P1--P6 ledger | Published P1 citation `Wang2026PrimeChaos`; [Prior Work Guide](../../../flow_systems/docs/prior_work/README.md) for P2--P5; and `AlpogeFurman2026` for P6 | P1 is the published prime-symbolic starting article, P2--P5 are project source records, and P6 is an external preprint benchmark. Their placement in the lineage figure does not independently re-review P1--P5 claims or transfer evidence to a descendant. |
 | Case-study synthesis protocol | Section 3.3.1 and the direction source map below | Defines the six-direction unit of analysis, separate evidence snapshots, and non-compensatory A0+A1+A2 coding rule; it does not convert the case study into a systematic review or controlled strategy comparison. |
 | Human-governed, AI-executed framework | Figure 1, the paper-configuration record, and [`assets/research_framework.png`](assets/research_framework.png), a byte-identical mirror of the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8` | Author-proposed prospective three-layer governance framework: the mathematician owns research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` constrains bounded AI execution and requires a handoff and review. It does not show that historical Phase-I materials used one uniform agent protocol, nor that a workflow document is mathematical evidence. |
 | Updated roadmap | [`assets/rh_roadmap.png`](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d` | Author-proposed evidence-obligation / search map; not a progress dashboard or mathematical result. |
@@ -87,6 +88,17 @@ navigation page into a replacement proof source.
   source-bound integrated A0+A1+A2 chain is a statement about the named record,
   not an impossibility result for a family.
 - `GO`/`HOLD`/`FORK`/`END` are explicitly unordered operational workflow dispositions in the proposed framework, not existing Route-A/Route-B verdicts or claims about the wording of every historical/current project protocol. A token/compute/time-budget stop, hard contradiction, or declared route closure records an operational boundary at its stated scope; a budget stop is not a negative mathematical result.
+
+## Published Layer-1 P1 source
+
+P1 is now cited directly through the bibliography record
+Wang2026PrimeChaos: Liang Wang, *The Emergence of Prime Distribution from
+Low-Dimensional Deterministic Chaos*, *Research in Mathematics* 13(1), article
+2684334, DOI 10.1080/27684830.2026.2684334. This direct journal citation
+supports the paper's description of P1 as the published Layer-1
+prime-symbolic starting article. It does not independently re-review P1's
+mathematical results, transfer them to P2--P6, establish a Route result, or
+supply evidence for RH.
 
 ## Build and rendering checks
 
@@ -210,6 +222,24 @@ label across tracks, or validate a mathematical candidate.
 | P1 Wiki corpus integrity | <code>python3 p1_wiki/tools/build_paper_corpus.py --check</code> from repository root | PASS: 1,126 logical records. This is a manifest/local-source check, not mathematical verification. |
 | P1 Wiki local-link integrity | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,276 local links in 2,306 Markdown files. It does not verify external URLs or heading anchors. |
 | Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
+
+## Verification record for the published P1 origin anchoring
+
+The following checks were run on 2026-09-14 UTC after the published P1 article
+was made a direct Layer-1 source. They establish publication-metadata recording,
+citation resolution, rendering, and local-navigation integrity only. They do
+not independently re-review P1's mathematics, validate a Route verdict, or
+establish RH.
+
+| Check | Command / method | Result |
+| --- | --- | --- |
+| Official publication metadata | [Taylor and Francis DOI article page](https://www.tandfonline.com/doi/full/10.1080/27684830.2026.2684334) | PASS: title, Liang Wang authorship, *Research in Mathematics* 13(1), article 2684334, DOI, and online publication date 5 June 2026 agree with the new bibliography record. |
+| Direct-citation scope | Inspect the Layer-1 prose, Figure 3 caption, Table 1 ledger, citation register, and published-P1 source note | PASS: P1 is explicitly a published journal starting article; P2--P5 remain project source records, and no P1 result is transferred to RH or a new candidate. |
+| Reproducible paper build | <code>cd latex && ./build.sh</code> | PASS: LuaLaTeX/BibTeX build completed; the tracked PDF is a 21-page single-column A4 document. |
+| Citation, reference, and bibliography diagnostics | Inspect final <code>latex/build/manuscript.log</code> and <code>latex/build/manuscript.blg</code> | PASS: no final undefined citation/reference, fatal, overfull, oversized-float, or unprocessed-float diagnostics; BibTeX reports <code>warning$ -- 0</code>. Ten non-fatal underfull line-break diagnostics remain in dense pre-existing table/text blocks. |
+| Targeted visual rendering | Render and inspect PDF pages 7 and 21 | PASS: the Figure 3 caption and Table 1 distinguish published P1 from P2--P5 source records; the added P1 citation and complete bibliography entry are visible, with no clipping or overlap. |
+| P1 Wiki integrity | <code>python3 p1_wiki/tools/build_paper_corpus.py --check</code> and <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 1,126 logical records and 19,276 local links in 2,306 Markdown files. The link checker does not verify external URLs or heading anchors. |
+| PDF identity and patch hygiene | <code>pdfinfo latex/manuscript.pdf</code>; <code>sha256sum latex/manuscript.pdf</code>; <code>git diff --check</code> | PASS: Liang Wang, A4, 21 pages, unencrypted; SHA-256 <code>5a237619f70d6b811a702e00b611001e55559e7b7e17629709289d3e87e1ed7d</code>; no whitespace errors. |
 
 ## Release note
 

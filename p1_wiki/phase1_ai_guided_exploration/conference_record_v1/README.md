@@ -99,7 +99,16 @@ Figures 3--5 use release-local, byte-identical copies of the author-supplied P1 
 The detailed Phase-I narrative is bounded to the source-corpus snapshot
 `419ee36c1e310469209f7b83c096ec8aea448386` (2026-09-13 UTC).  This package and its updated roadmap are later presentation artifacts; they do not revise historical source locks, route dispositions, or stopping conditions.
 
-The prime-symbolic search genealogy is grounded in the internal [Prior Work Guide](../../../flow_systems/docs/prior_work/README.md), which records the progression from prime/composite observables and symbolic admissibility, through non-autonomous dynamics and Logistic limitations, toward conservative Hénon/symplectic geometry and prime-side operator-geometry benchmarks.  That guide supplies a search-space provenance constraint; it does not prove that any proposed descendant already realizes prime dynamics.
+The prime-symbolic search genealogy begins with its published P1 article,
+[Wang, L. (2026), *The emergence of prime distribution from low-dimensional
+deterministic chaos*, *Research in Mathematics*, 13(1), article
+2684334](https://doi.org/10.1080/27684830.2026.2684334), and is then organized
+by the internal [Prior Work Guide](../../../flow_systems/docs/prior_work/README.md).
+The guide records the progression from prime/composite observables and symbolic
+admissibility, through non-autonomous dynamics and Logistic limitations, toward
+conservative Hénon/symplectic geometry and prime-side operator-geometry
+benchmarks. That genealogy supplies a search-space provenance constraint; it
+does not prove that any proposed descendant already realizes prime dynamics.
 
 ## Reproducible build
 
