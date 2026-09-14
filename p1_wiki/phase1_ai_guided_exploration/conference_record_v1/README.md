@@ -90,7 +90,9 @@ but it expands only through visible records.
    Obsidian-style navigation and provenance layer, not a proof source,
    automated Route evaluator, or archival guarantee.
 
-The paper's framework asset is a release-local copy at [assets/research_framework.png](assets/research_framework.png), byte-identical to the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8`.  The paper's roadmap asset is a separate release-local copy at [assets/rh_roadmap.png](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d`.  The latter is byte-identical to the Round-2 roadmap reference, while the older internal paper deliberately retains its historical roadmap asset.
+The paper's framework asset is a release-local copy at [assets/research_framework.png](assets/research_framework.png), byte-identical to the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8`. The paper's roadmap asset is a separate release-local copy at [assets/rh_roadmap.png](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d`. The latter is byte-identical to the Round-2 roadmap reference, while the older internal paper deliberately retains its historical roadmap asset.
+
+Figures 3--5 use release-local, byte-identical copies of the author-supplied P1 Wiki images: [assets/layer1.png](assets/layer1.png) from [layer1.png](../../layer1.png), SHA-256 `2077a8307c1ed45acfdaba1c34b14bf5e64c81e456d295cf1bfe09e154687578`; [assets/layer3.png](assets/layer3.png) from [layer3.png](../../layer3.png), SHA-256 `f5c7cffadf14f3e4038888ef7e7ea7913cb448a2dd9ceff44870d743a6a4bdb4`; and [assets/coo.png](assets/coo.png) from [coo.png](../../coo.png), SHA-256 `9ffbd569db5163e1e943e29ba09b91eb0029adc0a08e4f8e9f44635e9b10a842`. They are author-proposed presentation and navigation assets, not independent mathematical evidence.
 
 ## Research boundary and provenance
 
@@ -107,7 +109,7 @@ The PDF is a generic single-column A4 rendering, intentionally not a named confe
 ./build.sh
 ```
 
-The build requires LuaLaTeX, BibTeX, TeX Gyre Termes, TikZ, `needspace`,
+The build requires LuaLaTeX, BibTeX, TeX Gyre Termes, `needspace`,
 `float`, and `pdfinfo`.  It writes transient files to
 `latex/build/` and replaces the tracked `latex/manuscript.pdf`
 only after the compilation steps complete successfully.

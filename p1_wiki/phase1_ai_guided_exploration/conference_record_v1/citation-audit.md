@@ -45,6 +45,7 @@ The bibliography includes the DOI or official page for every external source.  T
 | Case-study synthesis protocol | Section 3.3.1 and the direction source map below | Defines the six-direction unit of analysis, separate evidence snapshots, and non-compensatory A0+A1+A2 coding rule; it does not convert the case study into a systematic review or controlled strategy comparison. |
 | Human-governed, AI-executed framework | Figure 1, the paper-configuration record, and [`assets/research_framework.png`](assets/research_framework.png), a byte-identical mirror of the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8` | Author-proposed prospective three-layer governance framework: the mathematician owns research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` constrains bounded AI execution and requires a handoff and review. It does not show that historical Phase-I materials used one uniform agent protocol, nor that a workflow document is mathematical evidence. |
 | Updated roadmap | [`assets/rh_roadmap.png`](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d` | Author-proposed evidence-obligation / search map; not a progress dashboard or mathematical result. |
+| Layer-1, portfolio, and candidate-engineering figures | [`assets/layer1.png`](assets/layer1.png), [`assets/layer3.png`](assets/layer3.png), and [`assets/coo.png`](assets/coo.png), byte-identical to the author-supplied P1 Wiki images `layer1.png`, `layer3.png`, and `coo.png`; SHA-256 `2077a8307c1ed45acfdaba1c34b14bf5e64c81e456d295cf1bfe09e154687578`, `f5c7cffadf14f3e4038888ef7e7ea7913cb448a2dd9ceff44870d743a6a4bdb4`, and `9ffbd569db5163e1e943e29ba09b91eb0029adc0a08e4f8e9f44635e9b10a842`, respectively | Author-proposed visual summaries of the constrained lineage, Phase-I portfolio, and prospective human--AI candidate-engineering protocol. They are presentation/navigation assets, not theorem evidence; labels, arrows, and visual prominence do not confer mathematical validity or transferable Route credit. |
 
 ## Session-level source map
 
@@ -187,6 +188,27 @@ or convert a governance declaration into mathematical evidence.
 | Targeted visual rendering | Render and inspect the new Introduction page and both bibliography pages. | PASS: the revised motivation, caveats, numerical citations, and long web-source entries are readable; no visible clipping or overlap. |
 | P1 Wiki corpus integrity | <code>python3 p1_wiki/tools/build_paper_corpus.py --check</code> from repository root. | PASS: 1,126 logical records. This is a manifest/local-source check, not mathematical verification. |
 | P1 Wiki local-link integrity | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root. | PASS: 19,267 local links in 2,306 Markdown files. It does not verify external URLs or heading anchors. |
+| Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
+
+## Verification record for the Figure 3--5 supplied-asset replacement
+
+The following checks were run on 2026-09-14 UTC after the inline TikZ
+renderings of Figures 3--5 were replaced with the author-supplied Layer-1,
+Phase-I portfolio, and candidate-engineering images. They establish asset
+identity, rendering, reference resolution, and local-navigation integrity
+only. They do not turn the images into theorem evidence, transfer a local A1
+label across tracks, or validate a mathematical candidate.
+
+| Check | Command / method | Result |
+| --- | --- | --- |
+| Asset identity | <code>sha256sum p1_wiki/{layer1,layer3,coo}.png p1_wiki/phase1_ai_guided_exploration/conference_record_v1/assets/{layer1,layer3,coo}.png</code> | PASS: each source/release-local pair is byte-identical: <code>layer1.png</code> = <code>2077a8307c1ed45acfdaba1c34b14bf5e64c81e456d295cf1bfe09e154687578</code>; <code>layer3.png</code> = <code>f5c7cffadf14f3e4038888ef7e7ea7913cb448a2dd9ceff44870d743a6a4bdb4</code>; <code>coo.png</code> = <code>9ffbd569db5163e1e943e29ba09b91eb0029adc0a08e4f8e9f44635e9b10a842</code>. |
+| Reproducible paper build | <code>cd latex && ./build.sh</code> | PASS: LuaLaTeX/BibTeX build completed; the tracked PDF is a 21-page single-column A4 document. |
+| Citation, reference, and float diagnostics | Inspect the final <code>latex/build/manuscript.log</code> for fatal errors, undefined citations/references, overfull boxes, oversized floats, and unprocessed floats | PASS: none found. Ten non-fatal underfull line-break diagnostics remain in dense table/text blocks. |
+| Bibliography processor | Inspect <code>latex/build/manuscript.blg</code> | PASS: reports <code>warning$ -- 0</code>; no BibTeX errors. |
+| PDF metadata and identity | <code>pdfinfo latex/manuscript.pdf</code>; <code>sha256sum latex/manuscript.pdf</code> | PASS: title and author Liang Wang present; A4, 21 pages, unencrypted; SHA-256 <code>334b2a63df3856b03ee9c8f2b1dff42a949da110508fe9aad9b6b1ca6f5597a4</code>. |
+| Targeted visual rendering | Render and inspect pages 7 and 10--12 | PASS: Figure 3 uses the Layer-1 research framework; Figure 4 uses the portfolio overview after its source-bound introduction; Figure 5 uses the human--AI candidate-engineering protocol. The images, captions, page breaks, and surrounding text are legible with no visible clipping or overlap. |
+| P1 Wiki corpus integrity | <code>python3 p1_wiki/tools/build_paper_corpus.py --check</code> from repository root | PASS: 1,126 logical records. This is a manifest/local-source check, not mathematical verification. |
+| P1 Wiki local-link integrity | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,276 local links in 2,306 Markdown files. It does not verify external URLs or heading anchors. |
 | Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
 
 ## Release note
