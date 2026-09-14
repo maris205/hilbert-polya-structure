@@ -41,7 +41,7 @@ The repository address used in the manuscript is <https://github.com/maris205/hi
 The argument and its nonclaims are retained, but the organization now follows a conventional single-column research-paper arc:
 
 1. A three-layer, human-governed, AI-executed framework: Layer 1 assigns the prime-symbolic research origin and scientific authority to the mathematician; Layer 2 turns those choices into a jointly drafted, human-approved `AGENTS.md` contract; and Layer 3 requires bounded AI execution, an evidence handoff, and mathematician review before another round is authorized.
-2. External motivation from carefully bounded examples of AI-assisted mathematics.
+2. External motivation from carefully bounded examples of AI-assisted mathematics, including current public reports and a governance declaration that are explicitly distinguished from independently adjudicated mathematical results.
 3. The updated RH roadmap as an evidence-obligation architecture, not a progress chart.
 4. A six-direction Phase-I evidence landscape, expressed graphically rather than as a claimed common score.
 5. A lineage-constrained candidate-engineering protocol for the next round.
@@ -54,6 +54,18 @@ The argument and its nonclaims are retained, but the organization now follows a 
 The first diagram is deliberately the three-layer research-governance framework, not the RH roadmap.  Layer 1 gives the mathematician the prime-symbolic research origin, permitted arithmetic data, and the admissible families, branches, and dimensions.  Layer 2 is the jointly prepared and human-approved `AGENTS.md` contract: search constraints, a testable multi-stage route with the unordered workflow dispositions `GO`/`HOLD`/`FORK`/`END`, a breadth-first strategy with controls and near misses, and explicit stopping conditions.  Layer 3 is the execution-and-review loop: bounded AI work, a mandatory handoff of candidate ID, lineage, evidence, controls, decision label, and resource status, followed by mathematician review.  Continuation requires a new human authorization or revised contract.  These are forward-looking operational dispositions, not Route-A/Route-B passes or a retrospective assertion that all Phase-I sessions followed the same agent protocol.
 
 The paper makes the user-specified search constraint explicit: a main candidate cannot be a generic dynamical system with primes pasted onto it later.  It must record a traceable **prime-symbolic ancestor**, the non-autonomous deformation, conservative/dimensional lift, geometric realization, or other transformation being used, and the precise arithmetic mechanism that is preserved, changed, or shown to fail.  A system without this ledger is an **external control**, not a main candidate.
+
+## Current motivation and claim boundary
+
+The Introduction now draws on OpenAI's September 2026 public
+Navier--Stokes report, Andreas Thom's Tao-hosted discussion of the reported
+non-sofic-groups result, and Tao's post presenting a declaration initially
+signed by 25 Fields Medallists. Their role is deliberately narrow: they
+motivate a human-defined, evaluator-bounded construction/search formulation
+and explicit human governance. They are not cited as independent adjudication
+of either reported result, as evidence about RH, or as a claim that all hard
+mathematics can be reduced to automated search. The source-by-source boundary
+is recorded in the [citation and claim audit](citation-audit.md).
 
 ## Extensibility and cumulative reuse
 

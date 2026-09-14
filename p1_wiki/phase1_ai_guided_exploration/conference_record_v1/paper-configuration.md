@@ -20,6 +20,16 @@
 
 The central question is not whether Phase I proves RH.  It is how a human-governed, AI-executed programme can make the search for arithmetic dynamical candidates broad, falsifiable, and auditable without permitting source drift, autonomous scope expansion, or cross-object credit transfer.
 
+The introduction uses current public reports about AI-assisted mathematics as
+motivation for a narrower methodological hypothesis: when a human researcher
+defines a mathematically meaningful construction space, explicit variants,
+discriminating tests, and a verification boundary, AI can perform a broad
+candidate search within that bounded space. This is not a claim that every hard
+mathematical problem reduces to blind search. The reported 2026 Navier--Stokes
+and non-sofic-groups events are treated as public reports, not independently
+adjudicated theorems or evidence for RH; the Tao-hosted declaration is treated
+as a governance position, not empirical evidence.
+
 The paper's contributions are:
 
 1. A **three-layer, human-governed, AI-executed framework**: the mathematician owns the prime-symbolic research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` fixes the search contract; and bounded AI execution ends in an evidence handoff and mathematician review before another round may begin.
@@ -124,7 +134,7 @@ label, archive, or package count transfers a missing obligation across rows.
 - The recommendation to search candidate architectures more broadly is a reasoned Phase-I design recommendation, not a statistically established optimum.
 - The current Wiki inventory and the historical mathematical synthesis have different source snapshots and are not combined into one empirical score.
 - P1--P5 are used as project prior-work source records; the paper does not independently establish their claims or publication status. P6 is cited as an external preprint benchmark.
-- External AI papers provide background only.  They do not establish broad autonomous mathematical competence or validate this research programme.
+- External AI papers and current public reports provide background only. They do not establish broad autonomous mathematical competence, independently validate a reported open-problem resolution, or validate this research programme.
 
 ## Declarations to complete for a submission
 

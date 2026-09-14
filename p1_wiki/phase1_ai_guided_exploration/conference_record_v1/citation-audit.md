@@ -15,7 +15,10 @@ capability beyond the cited setting, or supply peer review.
 
 | Key in `references.bib` | What it supports in the paper | Scope limit |
 | --- | --- | --- |
-| `CMI2026` | RH is listed as unsolved by the Clay Mathematics Institute on the stated access date. | An official status page; not evidence for any candidate. |
+| `CMI2026` | RH is listed as unsolved, and Navier--Stokes as active, by the Clay Mathematics Institute on the stated access date. | An official status page; it does not independently adjudicate a claimed solution or provide evidence for any candidate. |
+| `OpenAI2026NavierStokes` | A current company announcement reporting an analytical proof, Lean formalization, and a coordinated-agent workflow for an explicit Navier--Stokes formulation. | An announcement by the reporting organization, not independent peer review, CMI adjudication, or evidence about RH. |
+| `Thom2026NonSofic` | A Tao-hosted guest post describing a reported non-sofic-groups result and locating it in prior human work. | A guest post, not an independent proof audit, general capability evaluation, or a basis for reproducing its attribution critiques as verified fact. |
+| `Tao2026Misalignment` | A Tao-hosted declaration initially signed by 25 Fields Medallists, used for its stated governance concern about benchmark success, human understanding, and human agency. | A position statement, not an empirical study or evidence that the mathematical community has reached a universal consensus. |
 | `Davies2021` | AI can assist human mathematical conjecturing and investigation in selected settings. | Does not show autonomous proof of RH. |
 | `RomeraParedes2024` | Evaluator-coupled program search can generate constructions in constrained settings. | Does not validate a dynamical candidate without its own mathematical evaluator. |
 | `Trinh2024` | The bounded IMO-AG-30 geometry result cited in the introduction. | Geometry benchmark only; not a general mathematical-reasoning claim. |
@@ -67,7 +70,9 @@ navigation page into a replacement proof source.
 ## Claim discipline checked
 
 - The abstract, introduction, figure captions, discussion, and end matter state that the paper does not prove RH or a Hilbert--Pólya realization.
-- The AI background is intentionally limited to the cited task settings.  The paper does not claim that AI solved RH, solved an active Millennium Prize Problem, or replaces mathematical validation.
+- The AI background is intentionally limited to the cited task settings. The paper reports the Navier--Stokes announcement without independently adjudicating it; it does not claim that AI proved RH, that any reported open-problem resolution has passed independent scrutiny, or that AI replaces mathematical validation.
+- The construction-and-search interpretation is a methodological inference from source-described workflows and bounded prior work. It does not assert that every mathematical problem is reducible to high-throughput search or blind enumeration.
+- The Tao-hosted declaration is used as a governance position, not as an empirical result. Its role is to motivate explicit human authority over problem framing, proof acceptance, attribution, and provenance.
 - `NOT_APPLICABLE`, internal process completion, scoped negative controls, and local results are not displayed as transferable Route credit.
 - The Flow `positive arithmetic A2 = 0/5` and `Route-B invocation = 0/5` statement is explicitly restricted to P24--P28, rather than all continuous flows.
 - The proposal for broader Round-2 search is a methodological recommendation from the record, not a theorem or empirical optimization result.
@@ -161,6 +166,27 @@ external submission readiness.
 | Visual rendering | Render and inspect the title/abstract page, evidence-synthesis and portfolio pages, candidate-engineering/discussion pages, research-materials/appendix pages, and bibliography | PASS: no visible clipping, overlap, broken figure/table ordering, or reference truncation. Figure 4 follows its Section 3.3.4 introduction; the three extensibility modes and reuse hierarchy are legible. |
 | P1 Wiki corpus integrity | <code>python3 p1_wiki/tools/build_paper_corpus.py --check</code> from repository root | PASS: 1,126 logical records. This is a manifest/local-source check, not mathematical verification. |
 | P1 Wiki local-link integrity | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,266 local links in 2,306 Markdown files. It does not verify external URLs or heading anchors. |
+| Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
+
+## Verification record for the current AI-mathematics motivation revision
+
+The following checks were run on 2026-09-14 UTC after the Introduction was
+reframed around a bounded construction-and-candidate-search interpretation and
+three current public sources were added. They establish source recording,
+reference resolution, local navigation, and rendering only. They do not
+independently validate the reported Navier--Stokes or non-sofic-groups results,
+or convert a governance declaration into mathematical evidence.
+
+| Check | Command / method | Result |
+| --- | --- | --- |
+| Source and claim-boundary review | Check the official OpenAI report and the two Tao-hosted pages against the citations and this audit. | PASS: all three are recorded as public reports or a position statement, with explicit non-adjudication limits. |
+| Reproducible paper build | <code>cd latex && ./build.sh</code> | PASS: LuaLaTeX/BibTeX build completed; the tracked PDF is a 20-page single-column A4 document. |
+| Citation, reference, and float diagnostics | Inspect the final <code>latex/build/manuscript.log</code> for fatal errors, undefined citations/references, overfull boxes, oversized floats, and unprocessed floats. | PASS: none found. Eleven non-fatal underfull line-break diagnostics remain in dense pre-existing tables/figure text. |
+| Bibliography processor | Inspect <code>latex/build/manuscript.blg</code>. | PASS: 15 entries used; <code>warning$ -- 0</code>. |
+| PDF metadata and identity | <code>pdfinfo latex/manuscript.pdf</code>; <code>sha256sum latex/manuscript.pdf</code>. | PASS: title and author Liang Wang present; A4, 20 pages, unencrypted; SHA-256 <code>63054feec634bdaa5686adcfee0e3ffe4ba08549bbeeb4bb4ef497d7516265ed</code>. |
+| Targeted visual rendering | Render and inspect the new Introduction page and both bibliography pages. | PASS: the revised motivation, caveats, numerical citations, and long web-source entries are readable; no visible clipping or overlap. |
+| P1 Wiki corpus integrity | <code>python3 p1_wiki/tools/build_paper_corpus.py --check</code> from repository root. | PASS: 1,126 logical records. This is a manifest/local-source check, not mathematical verification. |
+| P1 Wiki local-link integrity | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root. | PASS: 19,267 local links in 2,306 Markdown files. It does not verify external URLs or heading anchors. |
 | Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
 
 ## Release note
