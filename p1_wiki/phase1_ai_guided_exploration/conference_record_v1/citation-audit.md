@@ -2,7 +2,14 @@
 
 ## Scope
 
-This audit applies to the conference-oriented Phase-I research record in [`latex/`](latex/).  It checks whether the external references are used for the bounded background claims they support, whether the local Phase-I claims are explicitly tied to the repository record, and whether the research-governance framework, roadmap, and prime-symbolic lineage have a stated provenance.  It does **not** independently prove any local mathematical result, establish a Route-A/Route-B pass, validate an AI system's capability beyond the cited setting, or supply peer review.
+This audit applies to the conference-oriented Phase-I methodology paper and its
+source-bound research record in the paper's LaTeX package. It checks whether the
+external references are used for the bounded background claims they support,
+whether the local Phase-I claims are explicitly tied to the repository record,
+and whether the research-governance framework, roadmap, and prime-symbolic
+lineage have a stated provenance. It does **not** independently prove any local
+mathematical result, establish a Route-A/Route-B pass, validate an AI system's
+capability beyond the cited setting, or supply peer review.
 
 ## Citation register
 
@@ -13,9 +20,12 @@ This audit applies to the conference-oriented Phase-I research record in [`latex
 | `RomeraParedes2024` | Evaluator-coupled program search can generate constructions in constrained settings. | Does not validate a dynamical candidate without its own mathematical evaluator. |
 | `Trinh2024` | The bounded IMO-AG-30 geometry result cited in the introduction. | Geometry benchmark only; not a general mathematical-reasoning claim. |
 | `Hubert2026` | Reinforcement-learning search for Lean-verified proofs in a specialized olympiad-level setting. | Formal verification and target domain remain bounded. |
+| `AlpogeFurman2026` | A 2026 zeta-zero preprint, its stated critical-line proportion result, Lean 4 verification, and its limited use as the P6 arithmetic-side benchmark. | A preprint, not a proof of RH or an independently re-reviewed result in this paper. |
 | `BerryKeating1999` | Hilbert--Pólya / spectral-asymptotic motivation. | Motivation, not a candidate-specific theorem. |
 | `Connes1999` | Trace-formula and arithmetic context. | Context, not an endorsement of the present construction. |
 | `Ruelle1976` | Standard dynamical-zeta context for expanding maps and Anosov flows. | Does not supply the required arithmetic source or quantum lift. |
+| `Sandve2013` | The narrow reproducibility guidance concerning the relation among inputs, versions, procedures, and outputs. | Does not certify this repository, its mathematics, or every included record as reproducible. |
+| `Wilkinson2016` | The FAIR-inspired aspiration toward findability and reusability of research material. | Does not establish that the P1 Wiki satisfies FAIR or functions as an archive. |
 | `PhaseIRepository` | The six-line record, local claims, stated gaps, provenance, and repository address. | A source-bound internal research record, not independent external verification. |
 
 The bibliography includes the DOI or official page for every external source.  The GitHub record is cited in the paper and is printed as `https://github.com/maris205/hilbert-polya-structure`.
@@ -25,8 +35,11 @@ The bibliography includes the DOI or official page for every external source.  T
 | Material | Local source / identifier | Permitted use in this paper |
 | --- | --- | --- |
 | Historical Phase-I evidence corpus | Commit `419ee36c1e310469209f7b83c096ec8aea448386`, 2026-09-13 UTC | Bounded summaries in the evidence landscape and Appendix A; not a new proof audit. |
+| P1 Wiki conversion inventory | Commit `afe747a194b92b9804bd69e2f57696884e47d53b`; `p1_wiki/meta/conversion-manifest.md` | Counts, derived-reading status, and conversion limits; not a statement of mathematical strength, publication status, or Route progress. |
 | Six-direction navigation and claim boundaries | [`p1_wiki/`](../../README.md) and the parent [internal paper package](../README.md) | Direct the reader to controlling source records and preserve non-transfer boundaries. |
 | Prime-symbolic research genealogy | [`flow_systems/docs/prior_work/README.md`](../../../flow_systems/docs/prior_work/README.md) | Constrains candidate admission; it is not proof that the displayed lineage arrows are established mathematical implications. |
+| Layer-1 P1--P6 ledger | [Prior Work Guide](../../../flow_systems/docs/prior_work/README.md), plus `AlpogeFurman2026` for P6 | P1--P5 are project source records; P6 is an external preprint benchmark. Their placement in the lineage figure does not independently verify P1--P5 claims or transfer P6 evidence to a descendant. |
+| Case-study synthesis protocol | Section 3.3.1 and the direction source map below | Defines the six-direction unit of analysis, separate evidence snapshots, and non-compensatory A0+A1+A2 coding rule; it does not convert the case study into a systematic review or controlled strategy comparison. |
 | Human-governed, AI-executed framework | Figure 1, the paper-configuration record, and [`assets/research_framework.png`](assets/research_framework.png), a byte-identical mirror of the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8` | Author-proposed prospective three-layer governance framework: the mathematician owns research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` constrains bounded AI execution and requires a handoff and review. It does not show that historical Phase-I materials used one uniform agent protocol, nor that a workflow document is mathematical evidence. |
 | Updated roadmap | [`assets/rh_roadmap.png`](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d` | Author-proposed evidence-obligation / search map; not a progress dashboard or mathematical result. |
 
@@ -59,6 +72,14 @@ navigation page into a replacement proof source.
 - The Flow `positive arithmetic A2 = 0/5` and `Route-B invocation = 0/5` statement is explicitly restricted to P24--P28, rather than all continuous flows.
 - The proposal for broader Round-2 search is a methodological recommendation from the record, not a theorem or empirical optimization result.
 - The lineage requirement is stated as an admission and preservation ledger: a generic map, flow, trace formula, or operator that receives primes only after construction is an external control, not a main candidate.
+- The framework distinguishes three extensions: a documented branch of a fixed
+  origin; a separately authorized new basic idea that starts a new Layer-1/2
+  record; and source-linked reuse through the Wiki. None silently inherits
+  candidate identity, mathematical evidence, or Route credit.
+- The six-direction case-study protocol distinguishes the historical
+  mathematical snapshot from the later navigation snapshot. A missing
+  source-bound integrated A0+A1+A2 chain is a statement about the named record,
+  not an impossibility result for a family.
 - `GO`/`HOLD`/`FORK`/`END` are explicitly unordered operational workflow dispositions in the proposed framework, not existing Route-A/Route-B verdicts or claims about the wording of every historical/current project protocol. A token/compute/time-budget stop, hard contradiction, or declared route closure records an operational boundary at its stated scope; a budget stop is not a negative mathematical result.
 
 ## Build and rendering checks
@@ -119,6 +140,27 @@ validate a Route verdict.
 | PDF metadata | <code>pdfinfo latex/manuscript.pdf</code> | PASS: title, author Liang Wang, subject, A4 page size, and 13-page count present. |
 | Figure order and visual rendering | Render and inspect the framework, transition, and roadmap pages | PASS: the supplied Figure 1 is readable before Figure 2; its three layers, four contract cards, evidence-handoff loop, and the surrounding explanatory prose are visible without clipping or overlap. |
 | Wiki links | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,266 local links in 2,306 Markdown files. |
+| Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
+
+## Verification record for the expanded methodology, case-study, and knowledge-resource edition
+
+The following closing checks were run on 2026-09-14 UTC after the framework was
+expanded to distinguish (i) traceable within-origin dynamical expansion,
+(ii) a mathematician-authorized new-origin restart, and (iii) cumulative
+evidence reuse through the P1 Wiki. They establish build, rendering,
+reference-resolution, and local-navigation integrity only. They do not certify
+the mathematical source records, make the Wiki an archive, or establish
+external submission readiness.
+
+| Check | Command / method | Result |
+| --- | --- | --- |
+| Reproducible paper build | <code>cd latex && ./build.sh</code> | PASS: LuaLaTeX/BibTeX build completed; the tracked PDF is a 19-page single-column A4 document. |
+| Citation, reference, and float diagnostics | Inspect <code>latex/build/manuscript.log</code> for fatal errors, undefined citations/references, overfull boxes, oversized floats, and unprocessed floats | PASS: none found. Eleven non-fatal underfull line-break diagnostics remain in dense tables/figure text; no overfull boxes were reported. |
+| Bibliography processor | Inspect <code>latex/build/manuscript.blg</code> | PASS: reports <code>warning$ -- 0</code>; no BibTeX errors. |
+| PDF metadata and identity | <code>pdfinfo latex/manuscript.pdf</code>; <code>sha256sum latex/manuscript.pdf</code> | PASS: title and author Liang Wang present; A4, 19 pages, unencrypted; SHA-256 <code>e6057f2e94978e91a3eba9596ed7e9a15437848947392524ac431152a40ea29a</code>. The PDF is not tagged. |
+| Visual rendering | Render and inspect the title/abstract page, evidence-synthesis and portfolio pages, candidate-engineering/discussion pages, research-materials/appendix pages, and bibliography | PASS: no visible clipping, overlap, broken figure/table ordering, or reference truncation. Figure 4 follows its Section 3.3.4 introduction; the three extensibility modes and reuse hierarchy are legible. |
+| P1 Wiki corpus integrity | <code>python3 p1_wiki/tools/build_paper_corpus.py --check</code> from repository root | PASS: 1,126 logical records. This is a manifest/local-source check, not mathematical verification. |
+| P1 Wiki local-link integrity | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,266 local links in 2,306 Markdown files. It does not verify external URLs or heading anchors. |
 | Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
 
 ## Release note

@@ -1,8 +1,24 @@
-# Conference-oriented Phase-I research record v1
+# Conference-oriented Phase-I methodology paper and research resource v1
 
-This is a new, external-facing presentation of the Phase-I Hilbert--Pólya / arithmetic-dynamics research record.  It is deliberately separate from the source-bound internal working-paper package in [the parent directory](../README.md): that older package preserves the historical evidence-corpus snapshot, whereas this package recasts the same bounded record as a generic, conference-oriented methodology paper.
+This is a new, external-facing methodology paper supported by the Phase-I
+Hilbert--Pólya / arithmetic-dynamics research record. It is deliberately
+separate from the source-bound internal working-paper package in [the parent
+directory](../README.md): that older package preserves the historical
+evidence-corpus snapshot, whereas this package recasts the same bounded record
+as a generic, conference-oriented methodology paper.
 
-The paper is not a proof of the Riemann Hypothesis (RH), a completed Hilbert--Pólya realization, a prime-power trace formula, a completed-Ξ determinant identity, or a spectral identification of Riemann zeros.  It is a research-record and candidate-search methodology paper.
+The paper is not a proof of the Riemann Hypothesis (RH), a completed
+Hilbert--Pólya realization, a prime-power trace formula, a completed-Ξ
+determinant identity, or a spectral identification of Riemann zeros. It is a
+candidate-search methodology paper supported by a source-bound research record.
+
+Its primary contribution is a prospective, human-governed
+candidate-engineering framework.  The six-direction Phase-I material is a
+source-bound retrospective design case from which the framework's constraints
+are distilled, not a controlled evaluation of the framework or proof that the
+historical lines used one uniform AI protocol.  The P1 Wiki is the associated
+provenance and navigation resource designed to support later assessment and
+possible reuse.
 
 ## Paper
 
@@ -30,10 +46,37 @@ The argument and its nonclaims are retained, but the organization now follows a 
 4. A six-direction Phase-I evidence landscape, expressed graphically rather than as a claimed common score.
 5. A lineage-constrained candidate-engineering protocol for the next round.
 6. Detailed direction-by-direction material and provenance in appendices.
+7. Three explicit extensibility modes: auditable expansion of a fixed
+   mathematical origin across dynamical forms; a mathematician-authorized
+   restart from a different basic idea; and cumulative reuse through a
+   navigation-and-provenance knowledge base.
 
 The first diagram is deliberately the three-layer research-governance framework, not the RH roadmap.  Layer 1 gives the mathematician the prime-symbolic research origin, permitted arithmetic data, and the admissible families, branches, and dimensions.  Layer 2 is the jointly prepared and human-approved `AGENTS.md` contract: search constraints, a testable multi-stage route with the unordered workflow dispositions `GO`/`HOLD`/`FORK`/`END`, a breadth-first strategy with controls and near misses, and explicit stopping conditions.  Layer 3 is the execution-and-review loop: bounded AI work, a mandatory handoff of candidate ID, lineage, evidence, controls, decision label, and resource status, followed by mathematician review.  Continuation requires a new human authorization or revised contract.  These are forward-looking operational dispositions, not Route-A/Route-B passes or a retrospective assertion that all Phase-I sessions followed the same agent protocol.
 
 The paper makes the user-specified search constraint explicit: a main candidate cannot be a generic dynamical system with primes pasted onto it later.  It must record a traceable **prime-symbolic ancestor**, the non-autonomous deformation, conservative/dimensional lift, geometric realization, or other transformation being used, and the precise arithmetic mechanism that is preserved, changed, or shown to fail.  A system without this ledger is an **external control**, not a main candidate.
+
+## Extensibility and cumulative reuse
+
+The framework is deliberately broader than one fixed set of dynamical systems,
+but it expands only through visible records.
+
+1. **Within the present origin.** The prime-symbolic starting point may lead to
+   non-autonomous deformations, dimensional or conservative lifts,
+   symplectic/geometric realizations, suspension flows, and quantum-dynamical
+   counterparts. Each change needs a preservation ledger and a new candidate
+   card; a generic system with post-hoc prime labels remains an external
+   control.
+2. **From a new mathematical origin.** A mathematician may introduce a new
+   basic idea on the basis of mathematical judgement, intuition, conceptual
+   reframing, or a new structural observation. This starts a new Layer-1
+   origin record and requires a new or revised human-approved, version-frozen
+   Layer-2 research contract before AI execution. It does not silently
+   inherit identity, evidence, or Route credit from this case study.
+3. **Across rounds and researchers.** The P1 Wiki preserves source lineage,
+   positive local work, positive and negative controls, scoped failures,
+   stopping conditions, and paths to canonical evidence. It is an
+   Obsidian-style navigation and provenance layer, not a proof source,
+   automated Route evaluator, or archival guarantee.
 
 The paper's framework asset is a release-local copy at [assets/research_framework.png](assets/research_framework.png), byte-identical to the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8`.  The paper's roadmap asset is a separate release-local copy at [assets/rh_roadmap.png](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d`.  The latter is byte-identical to the Round-2 roadmap reference, while the older internal paper deliberately retains its historical roadmap asset.
 
@@ -52,6 +95,9 @@ The PDF is a generic single-column A4 rendering, intentionally not a named confe
 ./build.sh
 ```
 
-The build requires LuaLaTeX, BibTeX, TeX Gyre Termes, TikZ, `needspace`, and `pdfinfo`.  It writes transient files to `latex/build/` and replaces the tracked `latex/manuscript.pdf` only after the compilation steps complete successfully.
+The build requires LuaLaTeX, BibTeX, TeX Gyre Termes, TikZ, `needspace`,
+`float`, and `pdfinfo`.  It writes transient files to
+`latex/build/` and replaces the tracked `latex/manuscript.pdf`
+only after the compilation steps complete successfully.
 
 Before an actual submission, the author should adapt the format to the chosen venue, make an anonymous version if the venue is double-blind, complete funding and competing-interest declarations, and create an immutable Git tag or release for the cited record.  This package is not submitted, peer reviewed, or assigned a publication venue.
