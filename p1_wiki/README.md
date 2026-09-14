@@ -4,6 +4,14 @@
 
 > **先读边界。** 这里的页面是源绑定的导览与派生阅读副本，不是新的数学证明、Route 评估或研究授权。任何关于 RH、零点识别、素数迹公式、全局行列式或自伴算子的声称，都必须回到相应方向的原始来源、台账和正式评估。
 
+## 人机协作研究框架（面向 Round 2）
+
+![Human--AI research framework for arithmetic dynamical search: Layer 1 mathematician-owned prime-symbolic origin; Layer 2 joint AGENTS.md contract; Layer 3 bounded AI execution, evidence handoff, and mathematician review.](research_framework.png)
+
+这张三层图先于整体数学路线图回答一个治理问题：谁定义可搜索的数学空间，AI 在什么边界内工作，以及在何处必须把证据和判断权交回数学家。Layer 1 由数学家固定 `prime symbolic dynamics` 这一研究起点、允许的算术数据和可接受的 families / branches / dimensions。Layer 2 由数学家与 AI 共同形成、并经数学家确认的 `AGENTS.md` 研究契约：搜索约束、可检验的多阶段 route map、广度优先的候选组合策略，以及明确停止条件。Layer 3 规定 AI 只能在该契约内建立 candidate card、做筛选、实验、证明尝试和审计，然后交付 candidate ID、谱系账本、直接证据、controls、决策标签、停止原因和资源状态，由数学家审阅。
+
+图中的 `GO`、`HOLD`、`FORK`、`END` 是无序的工作流处置，不是 Route-A/Route-B 数学通过。到达关口、硬矛盾、路线关闭或 token / compute / time 额度用尽，都必须产生有界的 evidence handoff；其中资源耗尽本身不构成数学否定结论。任何后续轮次都需要新的数学家授权或修订后的契约。它是由第一阶段经验提炼的前瞻性 Round-2 治理框架，不能倒推为所有历史 Phase-I session 都使用了同一套 agent protocol，也不能替代数学证据。
+
 ## 整体路线图
 
 ![Hilbert--Pólya 动力学研究整体路线图：Route A（A0--A4）与 Route B（B1--B5）。](rh_roadmap0.png)

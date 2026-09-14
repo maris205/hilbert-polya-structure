@@ -27,7 +27,7 @@ The bibliography includes the DOI or official page for every external source.  T
 | Historical Phase-I evidence corpus | Commit `419ee36c1e310469209f7b83c096ec8aea448386`, 2026-09-13 UTC | Bounded summaries in the evidence landscape and Appendix A; not a new proof audit. |
 | Six-direction navigation and claim boundaries | [`p1_wiki/`](../../README.md) and the parent [internal paper package](../README.md) | Direct the reader to controlling source records and preserve non-transfer boundaries. |
 | Prime-symbolic research genealogy | [`flow_systems/docs/prior_work/README.md`](../../../flow_systems/docs/prior_work/README.md) | Constrains candidate admission; it is not proof that the displayed lineage arrows are established mathematical implications. |
-| Human-governed, AI-executed framework | Figure 1 and the paper-configuration record in this package | Author-proposed prospective governance framework: the mathematician owns research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` constrains bounded AI execution and requires a handoff. It does not show that historical Phase-I materials used one uniform agent protocol, nor that a workflow document is mathematical evidence. |
+| Human-governed, AI-executed framework | Figure 1, the paper-configuration record, and [`assets/research_framework.png`](assets/research_framework.png), a byte-identical mirror of the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8` | Author-proposed prospective three-layer governance framework: the mathematician owns research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` constrains bounded AI execution and requires a handoff and review. It does not show that historical Phase-I materials used one uniform agent protocol, nor that a workflow document is mathematical evidence. |
 | Updated roadmap | [`assets/rh_roadmap.png`](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d` | Author-proposed evidence-obligation / search map; not a progress dashboard or mathematical result. |
 
 ## Session-level source map
@@ -59,7 +59,7 @@ navigation page into a replacement proof source.
 - The Flow `positive arithmetic A2 = 0/5` and `Route-B invocation = 0/5` statement is explicitly restricted to P24--P28, rather than all continuous flows.
 - The proposal for broader Round-2 search is a methodological recommendation from the record, not a theorem or empirical optimization result.
 - The lineage requirement is stated as an admission and preservation ledger: a generic map, flow, trace formula, or operator that receives primes only after construction is an external control, not a main candidate.
-- The new `GO`/`END`/`FORK`/`HOLD` labels are explicitly operational workflow dispositions in the proposed framework, not existing Route-A/Route-B verdicts or claims about the wording of every historical/current project protocol. A token/compute-budget stop is recorded as an operational boundary, not as a negative mathematical result.
+- `GO`/`HOLD`/`FORK`/`END` are explicitly unordered operational workflow dispositions in the proposed framework, not existing Route-A/Route-B verdicts or claims about the wording of every historical/current project protocol. A token/compute/time-budget stop, hard contradiction, or declared route closure records an operational boundary at its stated scope; a budget stop is not a negative mathematical result.
 
 ## Build and rendering checks
 
@@ -87,7 +87,7 @@ The following closing checks were run on 2026-09-13 UTC.
 | Asset identity | SHA-256 comparison against the Round-2 roadmap reference | PASS: both values are <code>f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d</code>. |
 | Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
 
-## Verification record for the framework and single-column revision
+## Verification record for the original TikZ framework and single-column revision
 
 The following closing checks were run on 2026-09-14 UTC after the new Figure 1,
 the governance-framework prose, and the single-column A4 conversion were
@@ -101,6 +101,24 @@ applied.
 | PDF metadata | <code>pdfinfo latex/manuscript.pdf</code> | PASS: title, author Liang Wang, subject, A4 page size, and 13-page count present. |
 | Page rendering | Render and inspect pages 2--9 and the bibliography page | PASS: Figure 1 is the human-governed framework and appears before Figure 2 (the RH roadmap); the evidence landscape, candidate-engineering protocol, role table, candidate card, appendices, and bibliography are legible with no visible clipping. |
 | Wiki links | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,261 local links in 2,306 Markdown files. |
+| Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
+
+## Verification record for the supplied three-layer framework replacement
+
+The following checks were run on 2026-09-14 UTC after Figure 1 was replaced
+by the author-supplied three-layer framework image and a byte-identical
+release-local mirror.  They establish asset identity, rendering, and link
+integrity only; they do not turn the framework into mathematical evidence or
+validate a Route verdict.
+
+| Check | Command / method | Result |
+| --- | --- | --- |
+| Asset identity | <code>sha256sum p1_wiki/research_framework.png p1_wiki/phase1_ai_guided_exploration/conference_record_v1/assets/research_framework.png</code> | PASS: source and release-local mirror both equal <code>da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8</code>. |
+| Reproducible paper build | <code>cd latex && ./build.sh</code> | PASS: LuaLaTeX/BibTeX build completed; the tracked PDF remains a 13-page single-column A4 document. |
+| Citation, reference, and float diagnostics | Inspect <code>latex/build/manuscript.log</code> for fatal errors, undefined citations/references, overfull boxes, oversized floats, and unprocessed floats | PASS: none found. Two non-fatal underfull line-break diagnostics remain in dense tables. |
+| PDF metadata | <code>pdfinfo latex/manuscript.pdf</code> | PASS: title, author Liang Wang, subject, A4 page size, and 13-page count present. |
+| Figure order and visual rendering | Render and inspect the framework, transition, and roadmap pages | PASS: the supplied Figure 1 is readable before Figure 2; its three layers, four contract cards, evidence-handoff loop, and the surrounding explanatory prose are visible without clipping or overlap. |
+| Wiki links | <code>python3 p1_wiki/tools/verify_wiki_links.py</code> from repository root | PASS: 19,266 local links in 2,306 Markdown files. |
 | Patch hygiene | <code>git diff --check</code> | PASS: no whitespace errors. |
 
 ## Release note

@@ -24,18 +24,18 @@ The repository address used in the manuscript is <https://github.com/maris205/hi
 
 The argument and its nonclaims are retained, but the organization now follows a conventional single-column research-paper arc:
 
-1. A human-governed, AI-executed framework: the mathematician defines the prime-symbolic research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` contract fixes the bounded search; AI returns control at an explicit gate or resource boundary.
+1. A three-layer, human-governed, AI-executed framework: Layer 1 assigns the prime-symbolic research origin and scientific authority to the mathematician; Layer 2 turns those choices into a jointly drafted, human-approved `AGENTS.md` contract; and Layer 3 requires bounded AI execution, an evidence handoff, and mathematician review before another round is authorized.
 2. External motivation from carefully bounded examples of AI-assisted mathematics.
 3. The updated RH roadmap as an evidence-obligation architecture, not a progress chart.
 4. A six-direction Phase-I evidence landscape, expressed graphically rather than as a claimed common score.
 5. A lineage-constrained candidate-engineering protocol for the next round.
 6. Detailed direction-by-direction material and provenance in appendices.
 
-The first diagram is deliberately the research-governance framework, not the RH roadmap.  It distinguishes (i) mathematician-owned choice of research origin and scientific meaning, (ii) a jointly prepared and human-approved `AGENTS.md` contract containing search constraints, typed `GO`/`END`/`FORK`/`HOLD` outcomes, breadth-first strategy, and stated termination conditions, (iii) bounded AI execution, and (iv) a mandatory evidence handoff and renewed human authorization.  These are forward-looking operational dispositions, not Route-A/Route-B passes or a retrospective assertion that all Phase-I sessions followed the same agent protocol.
+The first diagram is deliberately the three-layer research-governance framework, not the RH roadmap.  Layer 1 gives the mathematician the prime-symbolic research origin, permitted arithmetic data, and the admissible families, branches, and dimensions.  Layer 2 is the jointly prepared and human-approved `AGENTS.md` contract: search constraints, a testable multi-stage route with the unordered workflow dispositions `GO`/`HOLD`/`FORK`/`END`, a breadth-first strategy with controls and near misses, and explicit stopping conditions.  Layer 3 is the execution-and-review loop: bounded AI work, a mandatory handoff of candidate ID, lineage, evidence, controls, decision label, and resource status, followed by mathematician review.  Continuation requires a new human authorization or revised contract.  These are forward-looking operational dispositions, not Route-A/Route-B passes or a retrospective assertion that all Phase-I sessions followed the same agent protocol.
 
 The paper makes the user-specified search constraint explicit: a main candidate cannot be a generic dynamical system with primes pasted onto it later.  It must record a traceable **prime-symbolic ancestor**, the non-autonomous deformation, conservative/dimensional lift, geometric realization, or other transformation being used, and the precise arithmetic mechanism that is preserved, changed, or shown to fail.  A system without this ledger is an **external control**, not a main candidate.
 
-The paper's roadmap asset is a release-local copy at [assets/rh_roadmap.png](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d`.  It is byte-identical to the Round-2 roadmap reference, while the older internal paper deliberately retains its historical roadmap asset.
+The paper's framework asset is a release-local copy at [assets/research_framework.png](assets/research_framework.png), byte-identical to the author-supplied [P1 Wiki source image](../../research_framework.png), SHA-256 `da9e89f253991fb02db9ae11c2b13a512a4a404f720bf9abe03ff3853887f4a8`.  The paper's roadmap asset is a separate release-local copy at [assets/rh_roadmap.png](assets/rh_roadmap.png), SHA-256 `f5e70c5120474702e4f0715bce90c7a88fd5936164594e8b37a2ee0993549d1d`.  The latter is byte-identical to the Round-2 roadmap reference, while the older internal paper deliberately retains its historical roadmap asset.
 
 ## Research boundary and provenance
 
@@ -52,6 +52,6 @@ The PDF is a generic single-column A4 rendering, intentionally not a named confe
 ./build.sh
 ```
 
-The build requires LuaLaTeX, BibTeX, TeX Gyre Termes, TikZ, and `pdfinfo`.  It writes transient files to `latex/build/` and replaces the tracked `latex/manuscript.pdf` only after the compilation steps complete successfully.
+The build requires LuaLaTeX, BibTeX, TeX Gyre Termes, TikZ, `needspace`, and `pdfinfo`.  It writes transient files to `latex/build/` and replaces the tracked `latex/manuscript.pdf` only after the compilation steps complete successfully.
 
 Before an actual submission, the author should adapt the format to the chosen venue, make an anonymous version if the venue is double-blind, complete funding and competing-interest declarations, and create an immutable Git tag or release for the cited record.  This package is not submitted, peer reviewed, or assigned a publication venue.

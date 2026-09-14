@@ -21,7 +21,7 @@ The central question is not whether Phase I proves RH.  It is how a human-govern
 
 The paper's contributions are:
 
-1. A **human-governed, AI-executed framework** that assigns research-origin and scientific authority to the mathematician; makes the search contract explicit in a jointly drafted, human-approved `AGENTS.md`; and requires an AI evidence handoff at a stated mathematical or resource boundary.
+1. A **three-layer, human-governed, AI-executed framework**: the mathematician owns the prime-symbolic research origin and scientific authority; a jointly drafted, human-approved `AGENTS.md` fixes the search contract; and bounded AI execution ends in an evidence handoff and mathematician review before another round may begin.
 2. An updated roadmap treated as an evidence-obligation architecture.
 3. A visual, non-additive six-direction evidence landscape.
 4. A same-object ownership invariant across arithmetic source, clock/repetition, orbit, determinant, and later operator.
@@ -30,25 +30,34 @@ The paper's contributions are:
 
 ## Human--AI governance rule
 
-The framework distinguishes scientific authority from bounded execution:
+The framework distinguishes scientific authority from bounded execution in
+three layers:
 
 ```text
-mathematician: choose prime-symbolic research origin and scientific constraints
-        -> jointly drafted, human-approved AGENTS.md
-        -> AI: breadth-first screening of permitted frozen candidate cards
-        -> stated gate / END / FORK / HOLD / token-or-compute boundary
-        -> source-bound evidence handoff to mathematician
-        -> new human authorization only when work is to continue
+Layer 1: mathematician fixes the prime-symbolic research origin, permitted
+         arithmetic data, and admissible families / branches / dimensions
+        ↓
+Layer 2: jointly drafted, human-approved AGENTS.md research contract
+         = constraints + testable route + breadth-first strategy + stop rules
+        ↓
+Layer 3: bounded AI execution -> evidence handoff -> mathematician review
+        ↖ new human authorization or revised contract before any further round
 ```
 
 The operative `AGENTS.md` must state four items before an AI search tranche begins:
 
 1. lineage and search-space constraints, including permitted families, branches, dimensions, transformations, and arithmetic inputs;
-2. a clear multi-level decision route with direct evidence requirements and typed operational outcomes such as `GO`, `END`, `FORK`, and `HOLD`;
-3. a generally breadth-first candidate-portfolio strategy; and
-4. mathematical and operational termination conditions, including a named roadmap boundary, loss of the lineage/same-object condition, a scoped negative result, or exhaustion of the specified token/compute allocation.
+2. a clear multi-level decision route with direct evidence requirements and typed, unordered operational outcomes such as `GO`, `HOLD`, `FORK`, and `END`, with every stage testable;
+3. a generally breadth-first candidate-portfolio strategy that compares controls and near-miss objects before deepening; and
+4. mathematical and operational termination conditions, including a named roadmap boundary, hard contradiction or route closure, loss of the lineage/same-object condition, a scoped negative result, or exhaustion of the specified token/compute/time allocation.
 
-`GO`, `END`, `FORK`, and `HOLD` govern the authorized workflow; they are not mathematical Route-A/Route-B verdicts.  A budget stop ends an execution tranche but carries no negative mathematical conclusion.  This is a prospective framework distilled from Phase-I lessons, not a claim that every historical Phase-I session used a uniform `AGENTS.md` or AI workflow.
+At a stop, the AI must hand back the candidate ID, lineage ledger, direct
+evidence, controls, route disposition, exact stopping trigger, and resource
+status.  `GO`, `HOLD`, `FORK`, and `END` govern the authorized workflow; they
+are not mathematical Route-A/Route-B verdicts.  A budget stop ends an execution
+tranche but carries no negative mathematical conclusion.  This is a prospective
+framework distilled from Phase-I lessons, not a claim that every historical
+Phase-I session used a uniform `AGENTS.md` or AI workflow.
 
 ## Candidate-admission rule
 
