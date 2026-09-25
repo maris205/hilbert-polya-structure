@@ -1,0 +1,595 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\newcommand{\vertiii}[1]{{\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1 \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{A Sequential Birkhoff Theorem for\\
+       Slow Logarithmic Drift in\\
+       Non-Uniformly Expanding Unimodal Maps}
+\author{Liang Wang\thanks{School of Artificial Intelligence and
+Automation, Huazhong University of Science and Technology, Wuhan
+430074, P.R.\ China. E-mail: \texttt{wangliang.f@gmail.com}.}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove a sequential (non-autonomous) Birkhoff ergodic theorem for
+compositions of unimodal maps $f_{u_n}(x) = 1 - u_n x^2$ whose
+parameters drift slowly to a Misiurewicz value $u_c$. Working under an
+explicit uniform-inducing-scheme hypothesis---a uniform Young tower
+with uniform Lasota--Yorke constants and Keller--Liverani spectral
+stability across the relevant parameter set---we show that for every
+bounded-variation observable, the time average along the sequential
+orbit converges in mean (indeed in $L^2$, hence in probability) to the
+spatial average against the unique absolutely continuous invariant
+measure $\mu_{u_c}$ of the limiting autonomous map, whenever the drift
+tail $\sup_{k\ge n}|u_k - u_c|$ tends to zero. For the logarithmic
+schedule $|u_n - u_c| \le c\,(\log n)^{-\beta}$ we further obtain
+almost-everywhere convergence when $\beta > 1$, the threshold at which
+the second-moment estimate becomes summable along a ratio-one
+subsequence. The proof passes to the induced first-return map, where
+the dynamics is uniformly expanding, and combines a uniform spectral
+gap with a Cesàro estimate of the accumulated drift error. The result
+supplies the ergodic foundation---convergence of symbolic cylinder
+frequencies to the band-merging statistics---for non-autonomous
+symbolic models of arithmetic sequences; we delimit precisely what it
+does and does not yield for the associated density envelopes.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{Sequential dynamical systems and slow drift}
+
+Let $f_u(x) = 1 - u x^2$ be the standard unimodal family on $[-1,1]$.
+A \emph{sequential} (or non-autonomous) dynamical system is generated
+by composing different members of the family along a parameter
+schedule $(u_n)_{n\ge 1}$,
+\begin{equation}
+\label{eq:cocycle}
+  \Phi_N(x) = f_{u_N}\circ f_{u_{N-1}}\circ\cdots\circ f_{u_1}(x).
+\end{equation}
+When $u_n \equiv u$ is constant the classical Birkhoff theorem governs
+the statistics of $\Phi_N$. When $u_n$ varies, even slowly, the orbit
+no longer lives on a single attractor and Birkhoff does not apply
+directly. This paper establishes a Birkhoff-type law of large numbers
+when $u_n$ drifts to a fixed limit $u_c$ at a logarithmic rate.
+
+\subsection{Motivation}
+
+Non-autonomous unimodal schedules of exactly this type arise in recent
+symbolic-dynamical models of arithmetic sequences, where a slowly
+``aging'' parameter $u_n = u_c - c\,(\log n)^{-2}$ is tuned so that the
+symbolic $L$-frequency of the orbit matches a prescribed density
+envelope (for instance the prime density $1/\log n$). Such models
+posit, but do not prove, that ergodic averages along the drifting orbit
+converge to the autonomous limit. The present paper supplies that
+missing ergodic foundation in a self-contained form, independent of any
+number-theoretic application.
+
+\subsection{Main result}
+
+We work with a one-dimensional family $(f_u)_{u\in U}$ over a parameter
+window $U$ and a limit value $u_c$. Our results are conditional on a
+structural hypothesis---the existence of a \emph{uniform inducing
+scheme}---which isolates exactly the ergodic input the argument needs
+and which, at a Misiurewicz limit, is the content of the
+Keller--Liverani / Young-tower theory.
+
+\begin{assumption}[Uniform inducing scheme]
+\label{ass:uis}
+There is a reference domain $A$, a first-return (inducing) construction
+$F_u:A\to A$ for each $u\in U$, and a Banach space
+$(\mathcal{B}, \|\cdot\|_\mathcal{B})$ compactly embedded in $L^1(m)$,
+such that, with constants independent of $u\in U$:
+\begin{enumerate}
+\item[\textup{(U1)}] each $F_u$ is uniformly expanding with bounded
+distortion and a countable Markov partition with uniform exponential
+return-time tails (a uniform Young tower);
+\item[\textup{(U2)}] the induced transfer operators
+$\mathcal{L}_u$ satisfy a uniform Lasota--Yorke inequality on
+$\mathcal{B}$, hence a uniform spectral gap: a simple leading
+eigenvalue $1$ with density $h_u$ and a uniform contraction
+$\|\mathcal{L}_u^n\varphi - h_u\!\int\varphi\,dm\|_\mathcal{B}
+\le C\theta^n\|\varphi\|_\mathcal{B}$, $\theta<1$;
+\item[\textup{(U3)}] (Keller--Liverani stability) there are $C>0$ and
+$\gamma\in(0,1]$ with
+$\vertiii{\mathcal{L}_u - \mathcal{L}_{u_c}} \le C|u-u_c|$ in the
+Keller--Liverani operator distance, hence
+$\|h_u - h_{u_c}\|_{L^1}\le C|u-u_c|^\gamma$;
+\item[\textup{(U4)}] the induced spectral gap lifts, through the tower,
+to a uniform decay-of-correlations bound \eqref{eq:doc} for the raw
+maps $f_u$ on $\mathcal{B}$, and the raw transfer operators $P_u$
+inherit the Lipschitz stability
+$\|(P_u-P_v)g\|_{L^1}\le C|u-v|\,\|g\|_\mathcal{B}$.
+\end{enumerate}
+\end{assumption}
+
+For the drift schedule we use the monotone-free tail quantity
+\[
+  \Delta_m \;:=\; \sup_{k\ge m}|u_k - u_c|,
+\]
+which decreases to $0$ whenever $u_n\to u_c$, with no monotonicity
+assumption on $(u_n)$ itself. For the logarithmic schedule
+$|u_n-u_c|\le c(\log n)^{-\beta}$ one has $\Delta_m = O((\log m)^{-\beta})$.
+
+\begin{theorem}[Conditional sequential Birkhoff, mean form]
+\label{thm:main}
+Under Assumption~\ref{ass:uis}, suppose $u_n\to u_c$ (equivalently
+$\Delta_m\to0$) with all $u_n\in U$. Then for every
+$\varphi\in\mathcal{B}$ and every initial law $\nu$ with density in
+$\mathcal{B}$,
+\[
+  \mathbb{E}_\nu\!\left[\frac{1}{N}\sum_{n=1}^{N}
+       \varphi(\Phi_n)\right]
+  \;\xrightarrow[N\to\infty]{}\;
+  \int \varphi\,d\mu_{u_c},
+\]
+and moreover $\frac1N\sum_{n\le N}\varphi(\Phi_n)\to\int\varphi\,d\mu_{u_c}$
+in $L^2(\nu)$ (hence in probability).
+\end{theorem}
+
+\begin{corollary}[Almost-everywhere convergence for $\beta>1$]
+\label{cor:ae}
+If in addition the schedule satisfies $|u_n-u_c|\le c(\log n)^{-\beta}$
+with $\beta>1$, then for every $\varphi\in\mathcal{B}$ the convergence
+in Theorem~\ref{thm:main} holds for Lebesgue-almost-every initial
+condition.
+\end{corollary}
+
+\begin{corollary}[Misiurewicz instance]
+\label{cor:mis}
+Let $u_c$ be a Misiurewicz parameter of $f_u(x)=1-ux^2$ and let
+$U$ be a one-sided parameter set on which the Young-tower construction
+of \cite{young1992decay} is uniform. Then Assumption~\ref{ass:uis}
+holds on $U$, and Theorem~\ref{thm:main} and Corollary~\ref{cor:ae}
+apply to any schedule $u_n\to u_c$ within $U$.
+\end{corollary}
+
+\begin{remark}
+We state convergence \emph{in mean / in probability} unconditionally in
+the drift rate (Theorem~\ref{thm:main}), and almost-everywhere only for
+$\beta>1$ (Corollary~\ref{cor:ae}). The restriction $\beta>1$ is an
+honest limitation of the second-moment method used here: the variance
+decays only like $(\log N)^{-\beta}$, which is summable along a
+ratio-one subsequence precisely when $\beta>1$. Whether a.e.\
+convergence persists for $0<\beta\le1$ is left open; it would require a
+maximal inequality or martingale approximation beyond the present
+scope.
+\end{remark}
+
+The proof occupies Sections~\ref{sec:spectral}--\ref{sec:birkhoff}.
+Section~\ref{sec:induced} records, for the Misiurewicz instance, why a
+\emph{one-sided} parameter set supports the uniform inducing scheme of
+Assumption~\ref{ass:uis}; we do not claim uniformity on a full
+two-sided neighbourhood of the band-merging point.
+
+\section{The induced first-return map (Misiurewicz instance)}
+\label{sec:induced}
+
+This section verifies Assumption~\ref{ass:uis} for the quadratic family
+near a Misiurewicz parameter $u_c$, on a suitable parameter set $U$.
+We emphasise at the outset that we do \emph{not} claim uniformity on a
+full two-sided neighbourhood of $u_c$: the band-merging value is a
+bifurcation point, and the attractor topology, periodic windows, and
+critical-orbit returns are generally not stable across an open interval
+around it. Instead we take $U$ to be a parameter set---in the
+applications of interest, a one-sided sequence $u_n\uparrow u_c$ or a
+positive-measure Benedicks--Carleson-type set accumulating at
+$u_c$---on which a uniform Young tower exists. On such a set the
+inducing scheme below has $u$-uniform constants; off such a set
+Assumption~\ref{ass:uis} is simply not assumed.
+
+Let $A = \{x < 0\}$ denote the left branch and, for $x \in A$, let
+$\tau_u(x) = \min\{ n \geq 1 : f_u^n(x) \in A \}$ be the first-return
+time to $A$ under $f_u$, with induced map
+$F_u : A \to A$, $F_u(x) = f_u^{\tau_u(x)}(x)$.
+
+\begin{lemma}[Uniform inducing on a tower-supporting set]
+\label{lem:induced}
+Let $U$ be a parameter set accumulating at $u_c$ on which the family
+$(f_u)$ admits a uniform Young tower in the sense of
+\cite{young1992decay}: uniform expansion, uniform bounded distortion,
+and uniform exponential return-time tails for the first-return map to a
+fixed reference interval. Then, with constants independent of $u\in U$:
+\begin{enumerate}
+\item[\textup{(i)}] $A$ carries a countable Markov partition
+$\{A_j^u\}_{j \geq 1}$, $A_j^u = \{x \in A : \tau_u(x) = r_j\}$, on
+each piece of which $F_u$ is a $C^2$ diffeomorphism onto $A$;
+\item[\textup{(ii)}] $|F_u'| \geq \lambda > 1$ on $\bigcup_j A_j^u$;
+\item[\textup{(iii)}] $F_u$ has uniformly bounded distortion;
+\item[\textup{(iv)}] the return-time tails are uniformly exponential:
+$m(\tau_u > r) \le C\,\kappa^{r}$ for some $\kappa<1$, $C$, uniform in
+$u\in U$.
+\end{enumerate}
+In particular (U1) of Assumption~\ref{ass:uis} holds on $U$.
+\end{lemma}
+
+\begin{proof}
+At $u_c$ the critical orbit is pre-periodic and bounded away from
+$\{x=0\}$ after time one, so by Ma\~n\'e's theorem
+\cite[Thm.\ A]{mane1985hyperbolicity} there are $C,\lambda_0>1$ with
+$|(f_{u_c}^n)'(x)|\ge C\lambda_0^n$ for orbits avoiding a fixed
+neighbourhood of $0$, giving (i)--(iii) at $u_c$ exactly as in the
+autonomous theory \cite[Ch.\ III]{demelo1993one}, and an acim $\mu_{u_c}$
+with $\mathrm{BV}$ density \cite[Thm.\ 1]{misiurewicz1981absolutely}.
+The point of the hypothesis on $U$ is precisely that these estimates
+persist with $u$-uniform constants: this is the content of the
+Benedicks--Carleson / Young tower construction, which produces a
+positive-measure parameter set accumulating at $u_c$ on which the tower
+data---expansion rate, distortion constant, and tail exponent---are
+uniform \cite{young1992decay}. We invoke that construction rather than
+re-prove it, and on the resulting $U$ properties (i)--(iv) hold by
+definition of the uniform tower. We do \emph{not} assert that $U$
+contains an interval around $u_c$.
+\end{proof}
+
+\begin{remark}
+\label{rem:even-returns}
+At $u_c$ the kneading sequence $RLR^\infty$ forces every return time
+$\tau_{u_c}$ to be even, so $r_j = 2j$. For $u$ near $u_c$ the partition
+is a finite recoding of this one; the parity structure is not needed
+below, only the uniform expansion and distortion of
+Lemma~\ref{lem:induced}.
+\end{remark}
+
+\section{Spectral stability under the drift}
+\label{sec:spectral}
+
+Let $\mathcal{L}_u$ denote the Perron--Frobenius (transfer) operator of
+the induced map $F_u$ acting on $\mathrm{BV}(A)$,
+\[
+  \mathcal{L}_u \varphi(y)
+  = \sum_{x \in F_u^{-1}(y)} \frac{\varphi(x)}{|F_u'(x)|}.
+\]
+
+\begin{lemma}[Uniform spectral gap]
+\label{lem:gap}
+There are constants $C_1 > 0$, $0 < \theta < 1$, independent of
+$u \in U$, such that each $\mathcal{L}_u$ has a simple leading
+eigenvalue $1$ with strictly positive $\mathrm{BV}$ eigenfunction
+$h_u$ (the density of the induced acim $\mu_u^A$), and
+\[
+  \bigl\| \mathcal{L}_u^n \varphi - h_u \textstyle\int \varphi \,dm \bigr\|_{\mathrm{BV}}
+  \leq C_1 \theta^n \|\varphi\|_{\mathrm{BV}}
+  \qquad (n \geq 0,\ u \in U).
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:induced} each $F_u$ is a piecewise-$C^2$, uniformly
+expanding ($|F_u'| \geq \lambda > 1$) Markov map with uniformly bounded
+distortion, the constants being independent of $u \in U$. The
+Lasota--Yorke inequality \cite{lasota1973existence} then holds with
+$u$-uniform constants: there are $\rho \in (0,1)$ and $D > 0$ with
+\[
+  \operatorname{Var}(\mathcal{L}_u \varphi)
+  \leq \rho \operatorname{Var}(\varphi) + D \|\varphi\|_{L^1}
+  \qquad (u \in U).
+\]
+By the Ionescu-Tulcea--Marinescu / Hennion argument
+\cite[Ch.\ III]{baladi2000positive}, each $\mathcal{L}_u$ is
+quasi-compact on $\mathrm{BV}(A)$ with essential spectral radius
+$\leq \rho$; topological mixing of $F_u$ gives a simple leading
+eigenvalue $1$ and no other peripheral spectrum, hence a spectral gap.
+The uniformity of $\rho, D$ across $U$ makes the gap and the constants
+$C_1, \theta$ uniform.
+\end{proof}
+
+We now quantify how $\mathcal{L}_u$ moves as $u$ varies. Following
+Keller--Liverani \cite{kellerliverani1999}, equip the pair
+$(\mathrm{BV}(A), L^1(m))$ with the triple norm and measure operator
+distance by
+\[
+  \vertiii{\mathcal{L}_u - \mathcal{L}_{u_c}}
+  = \sup\{ \|(\mathcal{L}_u - \mathcal{L}_{u_c})\varphi\|_{L^1}
+           : \|\varphi\|_{\mathrm{BV}} \leq 1 \}.
+\]
+
+\begin{lemma}[Keller--Liverani stability, induced and raw]
+\label{lem:kl}
+Under Assumption~\ref{ass:uis} there are constants $C_2 > 0$ and
+$\gamma \in (0,1]$, independent of $u\in U$, such that:
+\begin{enumerate}
+\item[\textup{(a)}] (induced) $\vertiii{\mathcal{L}_u - \mathcal{L}_{u_c}}
+\leq C_2 |u - u_c|$, hence $\|h_u - h_{u_c}\|_{L^1} \leq C_2 |u - u_c|^{\gamma}$;
+\item[\textup{(b)}] (raw) the raw transfer operators $P_u$ of $f_u$
+satisfy $\|(P_u - P_{u_c})g\|_{L^1} \leq C_2 |u - u_c|\,\|g\|_{\mathcal{B}}$
+for all $g\in\mathcal{B}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{(a)} The branch derivatives $|F_u'|$ and the partition endpoints
+depend Lipschitz-continuously on $u$ on each fixed cylinder
+\cite[Ch.\ V]{demelo1993one}; comparing $\mathcal{L}_u$ and
+$\mathcal{L}_{u_c}$ on a fixed $\varphi$ in $L^1$ gives the
+operator-distance bound. The Keller--Liverani theorem
+\cite[Thm.\ 1]{kellerliverani1999}, whose hypotheses are exactly the
+uniform Lasota--Yorke bound of Lemma~\ref{lem:gap} (U2) together with
+this operator-distance estimate (U3), yields Hölder continuity of the
+leading eigenprojection, hence
+$\|h_u - h_{u_c}\|_{L^1} \leq C_2 |u-u_c|^{\gamma}$ for some
+$\gamma\in(0,1]$ determined by the gap relative to the Lasota--Yorke
+constants. We do not compute $\gamma$ analytically; the numerical fit
+of Section~\ref{sec:numerics} is consistent with $\gamma\approx\tfrac12$,
+as one would expect from the quadratic tangency at the critical point,
+but we use only $\gamma>0$ below.
+
+\emph{(b)} This is the raw-operator clause (U4) of
+Assumption~\ref{ass:uis}, which we now justify rather than merely posit.
+Write the raw evolution through the tower: for $g\in\mathcal{B}$,
+$P_u^{\,r}g$ decomposes over the return-time partition as a sum
+$\sum_j \mathbf{1}_{f_u^j(A_j^u)}\cdot(\text{branch transfer of }\mathcal{L}_u)$,
+and the difference $P_u - P_{u_c}$ acts only through the branch
+derivatives and partition endpoints, which are Lipschitz in $u$ on each
+cylinder, exactly as in (a). Summability of the contributions is
+guaranteed by the uniform exponential tails (U1)(iv). Hence
+$\|(P_u-P_{u_c})g\|_{L^1}\le C_2|u-u_c|\,\|g\|_{\mathcal{B}}$, the
+$\mathcal{B}$-norm of $g$ entering because the per-cylinder Lipschitz
+constants are weighted by $\operatorname{Var}$-type seminorms.
+\end{proof}
+
+\begin{remark}
+Clause (b) is the step the first draft of this work glossed over: the
+mean estimate of Section~\ref{sec:birkhoff} compares the \emph{raw}
+operators $P_{u_k}$, whereas the spectral gap is naturally stated for
+the \emph{induced} operators $\mathcal{L}_u$. The two are linked only
+through the tower, and the uniform exponential tails (U1)(iv) are what
+make the raw Lipschitz bound (b) follow from the induced bound (a). We
+have therefore promoted (b) to an explicit clause of
+Assumption~\ref{ass:uis} and indicated its tower derivation, rather
+than asserting it silently.
+\end{remark}
+
+\section{Drift accumulation and almost-everywhere convergence}
+\label{sec:birkhoff}
+
+We now prove Theorem~\ref{thm:main}. Throughout, $\varphi \in \mathrm{BV}[-1,1]$
+is fixed with $\int \varphi \, d\mu_{u_c} = 0$ (subtract the mean; the
+general case follows by linearity), and $\bar\varphi_N(x)
+= \frac1N\sum_{n=1}^N \varphi(\Phi_n(x))$.
+
+\subsection{Mean estimate}
+
+Let $\nu$ be any probability measure on $[-1,1]$ absolutely continuous
+with $\mathrm{BV}$ density, and write $P_u$ for the Perron--Frobenius
+operator of the \emph{raw} map $f_u$ on $\mathrm{BV}[-1,1]$. The induced
+spectral gap of Lemma~\ref{lem:gap} lifts, through the standard tower
+correspondence \cite{young1992decay}, to a decay-of-correlations bound
+for $f_u$: there are $\tilde C, \tilde\theta$, uniform in $u \in U$,
+with
+\begin{equation}
+\label{eq:doc}
+  \Bigl| \int \varphi \cdot (f_u^n)^* \psi \, dm
+        - \int \varphi \, d\mu_u \int \psi \, dm \Bigr|
+  \leq \tilde C \tilde\theta^{n} \|\varphi\|_{\mathrm{BV}} \|\psi\|_{L^1}.
+\end{equation}
+
+\begin{proposition}[Mean convergence]
+\label{prop:mean}
+There is $C_3 > 0$ such that for the sequential orbit started from the
+reference density $\nu$,
+\[
+  \Bigl| \mathbb{E}_\nu\bigl[\varphi(\Phi_n)\bigr] \Bigr|
+  \;\leq\; C_3 \tilde\theta^{\,n}
+         + C_3 \sum_{k=1}^{n} \tilde\theta^{\,n-k}\,|u_k - u_c|.
+\]
+Consequently $\mathbb{E}_\nu[\varphi(\Phi_n)] \to 0$, and
+$\mathbb{E}_\nu[\bar\varphi_N] \to 0$.
+\end{proposition}
+
+\begin{proof}
+Write $\Phi_n = f_{u_n} \circ \Phi_{n-1}$ and let $\nu_n = (\Phi_n)_*\nu$
+have density $g_n$. Then $g_n = P_{u_n} g_{n-1}$. Compare with the
+autonomous transfer at $u_c$: telescoping,
+\[
+  g_n - h_{u_c}\!\!\int g_n
+  = \bigl(P_{u_c}^{\,n} - \text{proj}\bigr) g_0
+    + \sum_{k=1}^{n} P_{u_c}^{\,n-k}\,(P_{u_k} - P_{u_c})\, g_{k-1}.
+\]
+The first term has $L^1$ norm $\leq C \tilde\theta^n$ by
+\eqref{eq:doc}. For the $k$-th summand, Lemma~\ref{lem:kl} gives
+$\|(P_{u_k} - P_{u_c})g_{k-1}\|_{L^1} \leq C_2 |u_k - u_c|$ (the
+densities $g_{k-1}$ have uniformly bounded variation, again by the
+uniform Lasota--Yorke bound), and $P_{u_c}^{n-k}$ contracts the
+zero-mean part by $\tilde\theta^{n-k}$. Pairing with $\varphi$ and
+using $\int \varphi\, d\mu_{u_c} = 0$ gives the stated bound.
+
+For the tail: split $\sum_{k\le n}\tilde\theta^{n-k}|u_k-u_c|$ at
+$k = \lfloor n/2 \rfloor$. In the low-$k$ block, $\tilde\theta^{n-k}
+\le \tilde\theta^{n/2}$ and $|u_k - u_c|$ is decreasing, so
+\[
+  \sum_{k\le n/2}\tilde\theta^{n-k}|u_k-u_c|
+  \;\le\; |u_1 - u_c|\,\tilde\theta^{n/2}\sum_{k\le n/2}\tilde\theta^{\,n/2-k}
+  \;\le\; \frac{|u_1 - u_c|}{1-\tilde\theta}\,\tilde\theta^{\,n/2}
+  \;\to\; 0.
+\]
+The high-$k$ block is
+$\sum_{n/2 < k \le n}\tilde\theta^{n-k}|u_k-u_c|
+\le \bigl(\sup_{k>n/2}|u_k-u_c|\bigr)\sum_{j\ge0}\tilde\theta^{\,j}
+\le c\,(\log(n/2))^{-\beta}/(1-\tilde\theta) \to 0$. Hence each term,
+and the Cesàro mean, vanish.
+\end{proof}
+
+\subsection{Almost-everywhere upgrade}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Proposition~\ref{prop:mean} the means $\mathbb{E}_\nu[\bar\varphi_N]
+\to 0$. To pass to almost-everywhere convergence we bound the variance.
+The same telescoping applied to the two-point function
+$\mathbb{E}_\nu[\varphi(\Phi_m)\varphi(\Phi_n)]$, $m < n$, together with
+\eqref{eq:doc}, yields
+\begin{equation}
+\label{eq:cov}
+  \bigl|\operatorname{Cov}_\nu(\varphi\circ\Phi_m,\,\varphi\circ\Phi_n)\bigr|
+  \leq C_4\,\tilde\theta^{\,n-m} + \varepsilon_m,
+\end{equation}
+where the geometric term comes from the decay of correlations over the
+$n-m$ steps after time $m$, and
+$\varepsilon_m = C_4 \sup_{k\ge m}|u_k - u_c| = O\!\bigl((\log m)^{-\beta}\bigr)$
+collects the drift contributions accumulated up to time $m$ (which
+control how far the law of $\Phi_m$ sits from $\mu_{u_c}$).
+
+Summing \eqref{eq:cov} over the $N^2$ pairs,
+\[
+  \operatorname{Var}_\nu(\bar\varphi_N)
+  = \frac{1}{N^2}\sum_{m,n=1}^{N}\operatorname{Cov}_\nu(\varphi\circ\Phi_m,\varphi\circ\Phi_n)
+  \le \frac{2}{N^2}\sum_{m=1}^{N}\sum_{j\ge 0} C_4\tilde\theta^{\,j}
+      \;+\; \frac{2}{N^2}\sum_{m=1}^{N} N\,\varepsilon_m.
+\]
+The first sum is $\le \frac{2C_4}{N(1-\tilde\theta)} = O(1/N)$. The
+second is $\frac{2}{N}\sum_{m\le N}\varepsilon_m$; since
+$\varepsilon_m = C_4\Delta_m \to 0$, its Cesàro mean
+$\frac1N\sum_{m\le N}\varepsilon_m \to 0$, with rate
+$O((\log N)^{-\beta})$ in the logarithmic case. Hence
+\begin{equation}
+\label{eq:var}
+  \operatorname{Var}_\nu(\bar\varphi_N) = O\!\Bigl(\tfrac1N\textstyle\sum_{m\le N}\Delta_m\Bigr) \to 0,
+\end{equation}
+which is $O((\log N)^{-\beta})$ under the logarithmic schedule. Together
+with $\mathbb{E}_\nu[\bar\varphi_N]\to0$ from Proposition~\ref{prop:mean},
+this gives $\bar\varphi_N\to\int\varphi\,d\mu_{u_c}$ in $L^2(\nu)$, hence
+in probability. This proves Theorem~\ref{thm:main}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:ae}]
+We upgrade the $L^2$ convergence to almost-everywhere convergence when
+$\beta>1$. By \eqref{eq:var} the logarithmic schedule gives
+$\operatorname{Var}_\nu(\bar\varphi_N) \le C_5(\log N)^{-\beta}$. Choose
+an exponent $a$ with $1/\beta < a < 1$, which is possible exactly
+because $\beta>1$, and set $N_i = \lfloor \exp(i^{\,a})\rfloor$. Then
+\[
+  \operatorname{Var}_\nu(\bar\varphi_{N_i})
+  \le C_5 (\log N_i)^{-\beta} = C_5\, i^{-a\beta},
+  \qquad a\beta>1,
+\]
+so $\sum_i \operatorname{Var}_\nu(\bar\varphi_{N_i})<\infty$. Since
+$\mathbb{E}_\nu[\bar\varphi_{N_i}]\to0$, Chebyshev and Borel--Cantelli
+give $\bar\varphi_{N_i}\to\int\varphi\,d\mu_{u_c}$ $\nu$-a.e.
+
+For the gaps, let $N_i\le N<N_{i+1}$. As $\varphi\in\mathcal{B}$ is
+bounded,
+\[
+  \bigl|\bar\varphi_N - \tfrac{N_i}{N}\bar\varphi_{N_i}\bigr|
+  \le \frac{N_{i+1}-N_i}{N_i}\,\|\varphi\|_\infty.
+\]
+Because $a<1$,
+$\log N_{i+1}-\log N_i = (i+1)^a - i^a = O(i^{a-1}) = o(1)$, so
+$N_{i+1}/N_i\to1$ and likewise $N_i/N\to1$. Hence the gap term vanishes
+and $\bar\varphi_N\to\int\varphi\,d\mu_{u_c}$ $\nu$-a.e. The two
+conditions $a\beta>1$ and $a<1$ are simultaneously satisfiable
+\emph{iff} $\beta>1$, which is the source of the restriction; for
+$0<\beta\le1$ the second-moment method gives only the $L^2$ conclusion
+of Theorem~\ref{thm:main}.
+
+Since $\nu$ was an arbitrary probability measure with density in
+$\mathcal{B}$, and these are mutually equivalent to Lebesgue on the
+attractor, the convergence holds Lebesgue-a.e.
+\end{proof}
+
+\section{Numerical verification}
+\label{sec:numerics}
+
+We verify the two analytic ingredients directly; full scripts are in
+the accompanying repository.
+
+\paragraph{Density stability (Lemma~\ref{lem:kl}).}
+Estimating $h_u$ by a $10^7$-step orbit histogram for
+$u = u_c - \Delta$, $\Delta \in \{10^{-3},\dots,5\times10^{-2}\}$,
+and comparing in $L^1$ to $h_{u_c}$, a log--log fit gives
+\[
+  \|h_u - h_{u_c}\|_{L^1} \sim |u - u_c|^{0.51},
+\]
+consistent with a Hölder modulus $\gamma\approx\tfrac12$ in
+Lemma~\ref{lem:kl} (Figure~\ref{fig:gap2}(a)). We stress that this is a
+sanity check on the density-stability input, not a verification of the
+exponent, which our proof leaves as some $\gamma\in(0,1]$.
+
+\paragraph{Sequential Birkhoff convergence (Theorem~\ref{thm:main}).}
+For $\varphi = \mathbf{1}_{\{x<0\}}$ and the schedule
+$u_n = u_c - c(\log n)^{-\beta}$, the time average
+$\bar\varphi_N$ approaches the autonomous value
+$\int\varphi\,d\mu_{u_c} \approx 0.2207$. The error decreases with $N$
+and the rate increases with $\beta$: at $c=1$, $\beta=1$, $N=2\times10^7$
+the error is $3.8\times10^{-3}$ (Figure~\ref{fig:gap2}(b)), consistent
+with the $\tfrac1N\sum_{m\le N}\Delta_m$ envelope of
+Proposition~\ref{prop:mean}. These are sanity checks on the
+\emph{mean} convergence of Theorem~\ref{thm:main}; they do not, and
+cannot, verify the almost-everywhere statement of
+Corollary~\ref{cor:ae}, which concerns a Lebesgue-full set of initial
+conditions.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig1_gap2_verification.png}
+  \caption{Numerical verification. (a) acim density $L^1$-distance vs
+    $|u-u_c|$ on log--log axes, with the Hölder-$\tfrac12$ reference;
+    (b) sequential time-average error vs $N$ for $\beta = 1,2,3$ at
+    $c=1$, showing convergence with $\beta$-dependent rate.}
+  \label{fig:gap2}
+\end{figure}
+
+\section{Concluding remarks}
+\label{sec:remarks}
+
+The schedule rate enters only through the tail
+$\Delta_m = \sup_{k\ge m}|u_k - u_c|$, so the \emph{mean} convergence of
+Theorem~\ref{thm:main} holds for every drift with $\Delta_m\to0$,
+including all logarithmic rates $\beta>0$ and all polynomial rates; the
+almost-everywhere statement (Corollary~\ref{cor:ae}) is established here
+only for $\beta>1$, the threshold at which the variance
+$O(\tfrac1N\sum_{m\le N}\Delta_m)$ becomes summable along a ratio-one
+subsequence. Closing the gap $0<\beta\le1$ for a.e.\ convergence would
+require a maximal inequality or a martingale approximation, which we do
+not pursue.
+
+\paragraph{Scope of the application.}
+The logarithmic case is highlighted because it is the one arising in
+non-autonomous symbolic models of arithmetic densities
+\cite{wang2026emergence}, where an aging parameter
+$u_n = u_c - c(\log n)^{-2}$ is tuned to a $1/\log n$ density envelope.
+It is important to delimit precisely what the present theorem supplies
+there. Theorem~\ref{thm:main} shows that the \emph{Cesàro averages} of
+bounded observables along the drifting orbit converge to the autonomous
+$u_c$-average; equivalently, the symbolic cylinder frequencies of the
+drifting orbit asymptotically inherit the band-merging statistics
+$\mu_{u_c}$. This is the ergodic foundation that the symbolic model had
+assumed rather than proved.
+
+It does \emph{not}, by itself, produce the $1/\log n$ \emph{density
+envelope} of the raw arithmetic sequence: an ordinary Birkhoff average
+converges to a constant, whereas the prime-density envelope is a
+non-stationary, time-decaying quantity. Recovering the envelope requires
+an additional non-stationary ingredient---a shrinking-target or
+weighted/thinned estimator, or an externally imposed aging mechanism---
+which lies outside the scope of this paper. We make this boundary
+explicit to avoid conflating the two statements: what is proved here is
+the convergence of stationary cylinder frequencies, not the emergence of
+a non-stationary density profile.
+
+We expect the method (inducing $+$ uniform Lasota--Yorke $+$
+Keller--Liverani $+$ second-moment subsequence argument) to extend to
+multimodal and higher-dimensional piecewise-expanding families admitting
+a uniform inducing scheme in the sense of Assumption~\ref{ass:uis}
+across the relevant parameter set.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
