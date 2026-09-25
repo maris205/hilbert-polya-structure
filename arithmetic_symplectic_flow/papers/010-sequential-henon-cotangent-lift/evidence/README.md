@@ -1,0 +1,3 @@
+# Evidence
+
+Lineage source: [docs/prior_work/README.md](../../../docs/prior_work/README.md), especially Papers 1–5. The direct checks are: \(g\) is invertible because the Hénon component \((x,y)\mapsto(1-a(q)x^2-y,x)\) has inverse \((X,Y)\mapsto(Y,1-a(q)Y^2-X)\); cotangent lifts preserve the canonical symplectic form; and \(q\circ F^n=q+n\), so no periodic base points exist. The strict A0 audit is structural: the frozen data and formulas contain no defined arithmetic observable, selection rule, or derivation, and therefore cannot distinguish validation labels. No numerical computation or prime data is used.
